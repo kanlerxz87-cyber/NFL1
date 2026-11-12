@@ -24,7 +24,6 @@ Live site: <https://kanlerxz87-cyber.github.io/NFL1/>
 
 ## How the data gets here
 
-<<<<<<< Updated upstream
 The Arena sandbox can only reach a small host allow-list, so bulk downloads and the nfl.com
 injury scrape run in GitHub Actions:
 
@@ -35,7 +34,6 @@ injury scrape run in GitHub Actions:
   3. pipeline/schema.py           probe real column names (nothing is guessed)
   4. pipeline/build_all.py        ratings, own lines, strategies, availability, props, verification
   5. commit data/model/*.json     back to the branch
-=======
 The Arena sandbox can only reach a small host allow-list, so bulk downloads run in GitHub Actions:
 
 ```
@@ -45,23 +43,18 @@ The Arena sandbox can only reach a small host allow-list, so bulk downloads run 
   3. pipeline/schema.py         probe real column names (nothing is guessed)
   4. pipeline/build_all.py      ratings, own lines, strategies, availability, props, verification
   5. commit data/model/*.json   back to the branch
->>>>>>> Stashed changes
 ```
 
 Render the site locally (after data exists):
 
 ```
-<<<<<<< Updated upstream
 python3 pipeline/gen_site.py      # writes index.html and pages/*.html
-=======
 python3 pipeline/gen_site.py     # writes index.html and pages/*.html
->>>>>>> Stashed changes
 ```
 
 Everything on the site is static HTML generated from `data/model/*.json` plus
 `pipeline/content.py` (questions, suggestions, decision records).
 
-<<<<<<< Updated upstream
 ## Files
 
 - `pipeline/` — collector, official injury scraper, schema probe, models, verification, renderer.
@@ -72,9 +65,6 @@ Everything on the site is static HTML generated from `data/model/*.json` plus
 - `data/*.csv` — independent transcriptions from a parallel session, kept and cross-checked.
 - `pages/` — generated site pages plus companion pages from that session.
 - `COORDINATION.md` — shared multi-session task board and integration log.
-
-=======
->>>>>>> Stashed changes
 ## Honesty rules used in this repository
 
 - No value is inferred, interpolated or filled in. Unknown values render as a labelled blank.
@@ -94,3 +84,44 @@ Everything on the site is static HTML generated from `data/model/*.json` plus
   labelled as such.
 
 This is a research tool, not betting advice.
+
+
+---
+
+## Session `87deb7ab-nfl1` additions (PR #14)
+
+A second, independently built dashboard generation lives under **`docs/`**. It was built on a
+branch based on the repository's initial commit while `main` had already received other
+sessions' work, so it runs **alongside** the root site rather than replacing it. See
+`docs/flagged.html` flags F-012 and F-014.
+
+Regenerate with:
+
+```bash
+python3 tools/build_docs_site.py
+```
+
+It reads `data/session-87deb7ab/*.json`, writes 13 pages into `docs/`, and **fails the build**
+if any data row lacks a source URL — tested by injecting an unregistered source id. The data
+layer is namespaced under `data/session-87deb7ab/` so it does not collide with `main`'s
+same-named `data/*.json` files; both are preserved.
+
+| Path | Contents |
+| --- | --- |
+| `docs/index.html` | Dashboard: KPIs, at-a-glance register table, Week 10 snapshot |
+| `docs/executive-summary.html` | Key details, what is blocked, next moves |
+| `docs/requirements.html` | 52 requirements from the brief |
+| `docs/questions.html` | 24 questions: answered / partial / open-blocking |
+| `docs/suggestions.html` | 16 improvements with options and decision paths |
+| `docs/strategy-lab.html` | Line pipeline, six gates, leaderboard, skill-vs-luck tests |
+| `docs/signals.html` | 18 candidate signals with blockers |
+| `docs/correlation.html` | Correlation register; every magnitude deliberately blank |
+| `docs/injury-depth.html` | Official Week 10 injury report, all 254 listed players |
+| `docs/standings.html` | Official 2026 standings, all 32 clubs |
+| `docs/data-sources.html` | Source register tiered by authority |
+| `docs/verification.html` | Checks performed and build-enforced rules |
+| `docs/flagged.html` | 14 flagged items with source links |
+
+**Cross-verification:** this session's standings and injury designations were compared against
+`data/verified/` on `main` — 32/32 clubs and 6/6 designations match exactly. The one
+difference is club abbreviation for the Rams (`LAR` here, `LA` on `main`), logged as F-013.

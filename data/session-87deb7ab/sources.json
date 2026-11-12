@@ -1,0 +1,151 @@
+{
+  "meta": {
+    "generated_utc": "2026-11-12",
+    "note": "Every source below was reached and read during this session unless the 'accessed' field says otherwise. Tier 1 = league-official or government-official. Tier 2 = primary issuer / regulated operator publication. Tier 3 = community, NOT official - never used to populate a value, only referenced as a methodology note."
+  },
+  "sources": [
+    {
+      "id": "SRC-001",
+      "name": "NFL.com — Official Injury Report (Week 10, 2026)",
+      "tier": "Tier 1 — League-official",
+      "publisher": "National Football League",
+      "url": "https://www.nfl.com/injuries/",
+      "accessed": "2026-11-12",
+      "used_for": "Week 10 practice participation (DNP / Limited / Full) and game status (Out / Doubtful / Questionable) for all players listed; per-matchup team records.",
+      "verified": true,
+      "notes": "Page title read: 'Official Latest NFL Injury Report for Players - Week 10 of the 2026 Season'. Contains 14 matchups."
+    },
+    {
+      "id": "SRC-002",
+      "name": "NFL.com — 2026 Division Standings",
+      "tier": "Tier 1 — League-official",
+      "publisher": "National Football League",
+      "url": "https://www.nfl.com/standings/",
+      "accessed": "2026-11-12",
+      "used_for": "All 32 team records, points for/against, home/road/division/conference splits, streak.",
+      "verified": true,
+      "notes": "Reflects completion of Week 9. The Week 10 Thursday game (8:15 PM ET) had not kicked off at retrieval time."
+    },
+    {
+      "id": "SRC-003",
+      "name": "NFL.com — News (lineup / injury news)",
+      "tier": "Tier 1 — League-official",
+      "publisher": "National Football League",
+      "url": "https://www.nfl.com/news/",
+      "accessed": "2026-11-12",
+      "used_for": "Confirmed quarterback and lineup changes that are absent from the injury report.",
+      "verified": true,
+      "notes": "Headlines read directly from the official NFL.com injury page news rail."
+    },
+    {
+      "id": "SRC-004",
+      "name": "NFL Football Operations",
+      "tier": "Tier 1 — League-official",
+      "publisher": "National Football League",
+      "url": "https://operations.nfl.com/",
+      "accessed": "2026-11-12",
+      "used_for": "Attempted lookup of the written injury-reporting policy.",
+      "verified": true,
+      "notes": "INCONCLUSIVE: the specific policy pages attempted (gameday/nfl-game-status, inside-football-ops/health-and-safety/injury-report) returned HTTP 404. No official policy text was confirmed. See flag F-007."
+    },
+    {
+      "id": "SRC-005",
+      "name": "NFL Next Gen Stats",
+      "tier": "Tier 1 — League-official",
+      "publisher": "National Football League",
+      "url": "https://nextgenstats.nfl.com/",
+      "accessed": null,
+      "used_for": "Prospective tracking-data input for prop modelling (separation, completion probability, rush yards over expected).",
+      "verified": false,
+      "notes": "NOT READ this session. No historical series was ingested. Any value attributed to NGS is marked unverified."
+    },
+    {
+      "id": "SRC-006",
+      "name": "Genius Sports — NFL exclusive official data & Watch & Bet distribution partner",
+      "tier": "Tier 2 — Primary issuer",
+      "publisher": "Genius Sports Limited (NYSE: GENI) / Business Wire",
+      "url": "https://investors.geniussports.com/news/announcements/announcements-details/2023/National-Football-League-Extends-Strategic-Partnership-with-Genius-Sports-as-Exclusive-Official-NFL-Data-and-Watch--Bet-Distribution-Partner/default.aspx",
+      "accessed": "2026-11-12",
+      "used_for": "Establishes the only league-authorised wholesale path for official NFL play-by-play, Next Gen Stats and the official sports-betting data feed.",
+      "verified": true,
+      "notes": "Release dated 6 July 2023. States the extended exclusive partnership runs through the end of the 2027-28 season and that Genius powers over 98% of the legalised U.S. sports betting market with official NFL data."
+    },
+    {
+      "id": "SRC-007",
+      "name": "Nevada Gaming Control Board — Gaming Revenue Report",
+      "tier": "Tier 1 — Government-official",
+      "publisher": "State of Nevada, Gaming Control Board",
+      "url": "https://gaming.nv.gov/about/gaming-revenue/",
+      "accessed": "2026-11-12",
+      "used_for": "Sports pool hold percentage (the book's structural edge) — the baseline a strategy must beat.",
+      "verified": true,
+      "notes": "Monthly report read via the Board's own PDF series. Nevada statewide sports pool hold: 7.72% for the reported month and 6.06% fiscal-year-to-date (May 2025 report, figures in thousands: win $41,158 and $449,816 respectively). Used to size the vig hurdle."
+    },
+    {
+      "id": "SRC-008",
+      "name": "NOAA / National Weather Service",
+      "tier": "Tier 1 — Government-official",
+      "publisher": "U.S. National Oceanic and Atmospheric Administration",
+      "url": "https://www.weather.gov/",
+      "accessed": null,
+      "used_for": "Prospective official weather input for totals and kicking props.",
+      "verified": false,
+      "notes": "NOT READ this session. No value populated from it."
+    },
+    {
+      "id": "SRC-009",
+      "name": "nflverse / nfl-data-py",
+      "tier": "Tier 3 — Community, NOT official",
+      "publisher": "nflverse (open-source community project)",
+      "url": "https://github.com/nflverse/nflverse",
+      "accessed": null,
+      "used_for": "Referenced only as a candidate convenience mirror for historical play-by-play. NOT used to populate any value.",
+      "verified": false,
+      "notes": "A community redistribution of official NFL data. Treated as non-authoritative: any field sourced here must be re-checked against SRC-001/SRC-002 or left blank."
+    },
+    {
+      "id": "SRC-010",
+      "name": "NFL.com — Schedule",
+      "tier": "Tier 1 — League-official",
+      "publisher": "National Football League",
+      "url": "https://www.nfl.com/schedules/",
+      "accessed": null,
+      "used_for": "Prospective confirmation of bye weeks and home/away designation.",
+      "verified": false,
+      "notes": "NOT READ this session. Bye-week and home/away conclusions on this site are therefore marked DERIVED, not verified. See flags F-008, F-009."
+    },
+    {
+      "id": "SRC-011",
+      "name": "NFL.com — Transactions",
+      "tier": "Tier 1 — League-official",
+      "publisher": "National Football League",
+      "url": "https://www.nfl.com/transactions/",
+      "accessed": null,
+      "used_for": "Prospective official feed for IR / PUP / NFI / practice-squad elevations — the roster moves that remove a player from the injury report entirely.",
+      "verified": false,
+      "notes": "NOT READ this session. Required to close flag F-004."
+    },
+    {
+      "id": "SRC-012",
+      "name": "NFL Player Health & Safety",
+      "tier": "Tier 1 — League-official",
+      "publisher": "National Football League",
+      "url": "https://www.nfl.com/playerhealthandsafety/",
+      "accessed": null,
+      "used_for": "Prospective official context on injury protocols.",
+      "verified": false,
+      "notes": "NOT READ this session."
+    },
+    {
+      "id": "SRC-013",
+      "name": "NFL.com — Official Injury Report (historical season selector)",
+      "tier": "Tier 1 — League-official",
+      "publisher": "National Football League",
+      "url": "https://www.nfl.com/injuries/",
+      "accessed": "2026-11-12",
+      "used_for": "Confirms the injury report is published back to 1965, i.e. a multi-decade official archive exists behind a season/week selector.",
+      "verified": true,
+      "notes": "The week selector listed seasons 1965 through 2026 and weeks 1 through 10 for 2026. No historical week was downloaded this session."
+    }
+  ]
+}

@@ -1,0 +1,199 @@
+{
+  "meta": {
+    "note": "Flagged for Review. Every item here is something we could not confirm from an official source, or an irregularity we found in an official feed. Per the brief, none of these blocks the merge. Each carries the source link so you can check it yourself."
+  },
+  "flags": [
+    {
+      "id": "F-001",
+      "sev": "High",
+      "cat": "Data gap",
+      "title": "No official NFL depth chart exists",
+      "detail": "The brief asks the system to know when 2nd, 3rd or 4th string players replace starters. The league does not publish depth charts. A direct fetch of https://www.nfl.com/teams/kansas-city-chiefs/depth-chart returned the NFL's 404 page ('404 - Flag on the Play'). Depth order must therefore be derived, and any derived order is an estimate, not an official fact.",
+      "impact": "Blocks REQ-010, REQ-011, REQ-012 as literally specified.",
+      "action": "Decide on the snap-share inference approach (suggestion S-007).",
+      "source": "SRC-001",
+      "source_url": "https://www.nfl.com/teams/kansas-city-chiefs/depth-chart",
+      "status": "needs review"
+    },
+    {
+      "id": "F-002",
+      "sev": "High",
+      "cat": "Data gap",
+      "title": "The NFL publishes no official betting lines or odds",
+      "detail": "No price appears anywhere on nfl.com. The league's own exclusive data distributor for sports-betting data is Genius Sports, so the only league-authorised route to official betting data is a commercial agreement with them. Without it, every market comparison on this project depends on a non-official price source.",
+      "impact": "Blocks market comparison, CLV measurement and therefore every validation gate.",
+      "action": "Decide whether to license a feed, or run the leaderboard on an explicitly non-official price source with that caveat published.",
+      "source": "SRC-006",
+      "source_url": "https://investors.geniussports.com/news/announcements/announcements-details/2023/National-Football-League-Extends-Strategic-Partnership-with-Genius-Sports-as-Exclusive-Official-NFL-Data-and-Watch--Bet-Distribution-Partner/default.aspx",
+      "status": "needs review"
+    },
+    {
+      "id": "F-003",
+      "sev": "High",
+      "cat": "Feed defect",
+      "title": "Official injury report: body-part column is empty for 97.6% of rows",
+      "detail": "Of the 254 players listed on the official Week 10 report, only 6 carry any text in the Injuries column (Patrick - Concussion, Yankoff - Knee, Harrison - Groin, Ben Brown - Knee, Carlton Davis III - Knee, Henderson - Illness). The remaining 248 rows are blank. Counted directly from the ingested official data.",
+      "impact": "Any signal that keys off injury type (for example, hamstring versus ankle) cannot be built from this feed as published.",
+      "action": "Look for the body-part detail in another official surface, or drop injury-type signals from scope.",
+      "source": "SRC-001",
+      "source_url": "https://www.nfl.com/injuries/",
+      "status": "needs review"
+    },
+    {
+      "id": "F-004",
+      "sev": "High",
+      "cat": "Feed inconsistency",
+      "title": "Seahawks show 'No Injuries Reported' while NFL.com news reports their starting QB ruled out",
+      "detail": "The official Week 10 injury report shows 'No Injuries Reported' for Seattle. The official NFL.com news rail on the same page carries the headline 'Sam Darnold ruled out for Seahawks' Week 10 game vs. Raiders; Drew Lock expected to start again'. A player moved to injured reserve leaves the injury report entirely, so the report understates unavailability for teams with IR placements.",
+      "impact": "Injury tracking built on the injury report alone will miss exactly the most severe cases. Directly undermines REQ-009.",
+      "action": "Add the official transactions feed (IR / PUP / NFI / elevations) as a mandatory companion to the injury report.",
+      "source": "SRC-003",
+      "source_url": "https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again",
+      "status": "needs review"
+    },
+    {
+      "id": "F-005",
+      "sev": "Medium",
+      "cat": "Timing",
+      "title": "Snapshot taken on Thursday; most game statuses not yet filed",
+      "detail": "Retrieved 2026-11-12 (Thursday). Only 6 of 254 listed players carry a game status: 5 Out and 1 Questionable, 0 Doubtful. The remaining 248 Game Status cells were empty on the official page at retrieval time. This is the expected mid-week state, not a data error, but it means the snapshot must not be read as final.",
+      "impact": "Any conclusion drawn from game-status counts this week is provisional.",
+      "action": "Re-ingest after the final report is filed and diff against this snapshot.",
+      "source": "SRC-001",
+      "source_url": "https://www.nfl.com/injuries/",
+      "status": "needs review"
+    },
+    {
+      "id": "F-006",
+      "sev": "Low",
+      "cat": "Governance",
+      "title": "Requirement rows have no official external source",
+      "detail": "The 'every table row links to an official site' rule is a rule about DATA. Requirement rows are governance rows derived from the owner's project brief, which has no public URL. They are labelled 'Internal brief' and are exempted from the source assertion.",
+      "impact": "None - but the exemption is deliberate and should be reviewed rather than assumed.",
+      "action": "Confirm the exemption, or supply a canonical URL for the brief.",
+      "source": "SRC-000",
+      "source_url": "https://github.com/kanlerxz87-cyber/NFL1",
+      "status": "needs review"
+    },
+    {
+      "id": "F-007",
+      "sev": "Medium",
+      "cat": "Verification",
+      "title": "Injury-report definitions and deadlines could not be confirmed on any official domain",
+      "detail": "The categories themselves (DNP / Limited / Full and Out / Doubtful / Questionable) were observed directly on the official report. Their written definitions and the filing deadlines were NOT: operations.nfl.com/gameday/nfl-game-status returned 404, operations.nfl.com/inside-football-ops/health-and-safety/injury-report returned 404, and nfl.com/injuries/inactives returned 404. The commonly repeated definitions and deadlines are therefore published on this site as 'not verified', never as fact.",
+      "impact": "We cannot attach an official probability to a designation, which several modelling approaches would want.",
+      "action": "Locate the policy text on an official domain, or estimate the mapping empirically from our own history once we have it.",
+      "source": "SRC-004",
+      "source_url": "https://operations.nfl.com/",
+      "status": "needs review"
+    },
+    {
+      "id": "F-008",
+      "sev": "Low",
+      "cat": "Derived value",
+      "title": "Week 10 bye teams are inferred, not read",
+      "detail": "DEN, PHI, CHI and TB do not appear on the official Week 10 injury report. The official standings show all four with exactly 9 games played, while every team appearing on the report with 8 games played is playing this week. The conclusion that those four are on bye is consistent across two official sources but was not read from the official schedule.",
+      "impact": "Low, but it is an inference and is labelled as such.",
+      "action": "Confirm against the official schedule.",
+      "source": "SRC-010",
+      "source_url": "https://www.nfl.com/schedules/",
+      "status": "needs review"
+    },
+    {
+      "id": "F-009",
+      "sev": "Medium",
+      "cat": "Unverified",
+      "title": "Home and away designation is not asserted",
+      "detail": "The official injury report lists two clubs per matchup without an explicit home or away label in the retrieved markup. Rather than guess, this site presents each matchup as an unordered pair. Home/away is a material model input, so this is a real gap, not a cosmetic one.",
+      "impact": "Any home-field or travel-adjusted model input is unavailable until resolved.",
+      "action": "Read the official schedule and populate home/away as a verified field.",
+      "source": "SRC-010",
+      "source_url": "https://www.nfl.com/schedules/",
+      "status": "needs review"
+    },
+    {
+      "id": "F-010",
+      "sev": "High",
+      "cat": "Unverified",
+      "title": "Every correlation value is blank",
+      "detail": "The brief asks us to determine correlation values. No league-official, government-official or regulator-official source publishes a player-prop correlation matrix, and no historical joint-outcome data has been ingested. The correlation register therefore states the structural direction of each relationship and leaves the magnitude cell empty and flagged.",
+      "impact": "Parlays and prop combos cannot be priced honestly yet. This is the honest state, not a gap to be papered over with invented numbers.",
+      "action": "Obtain historical joint outcomes, then estimate and hold out (suggestion S-006).",
+      "source": "SRC-005",
+      "source_url": "https://nextgenstats.nfl.com/",
+      "status": "needs review"
+    },
+    {
+      "id": "F-011",
+      "sev": "Low",
+      "cat": "Process deviation",
+      "title": "Branch naming deviates from the session-<id>/<task> convention",
+      "detail": "The brief asks each session to work on a branch or worktree named session-<id>/<task>. This session's branch name is fixed by the platform as arena/87deb7ab-nfl1 and the session is not permitted to rename it or create another branch. All work is on that single branch with a non-overlapping file scope.",
+      "impact": "Coordination still holds; the naming convention does not.",
+      "action": "Accept the deviation, or have the platform assign conforming names.",
+      "source": "SRC-000",
+      "source_url": "https://github.com/kanlerxz87-cyber/NFL1",
+      "status": "needs review"
+    },
+    {
+      "id": "F-012",
+      "sev": "High",
+      "cat": "Cross-session",
+      "title": "Session branch was based on the original initial commit, not on current main",
+      "detail": "This session's branch (arena/87deb7ab-nfl1) was branched from 5aeb599, the repository's initial commit. At that commit the repo held one commit and one file (README.md, 6 bytes). main has since received substantial work from other sessions — 103 files including a root-level dashboard (index.html + pages/), verified data under data/verified/, analysis scripts and a CI-gated GitHub Pages workflow. So the statement 'the repository was empty' is true only of this branch's base commit, not of the project. This session's content was therefore built in parallel to, not on top of, the existing site, and the two need reconciling.",
+      "impact": "This session's dashboard (under /docs) and main's dashboard (root + /pages) are two parallel generations covering overlapping subject matter. Both are published; neither replaces the other.",
+      "action": "Have the integration session reconcile the two generations — merge the registers, deduplicate the tables, and decide which navigation is canonical.",
+      "source": "SRC-000",
+      "source_url": "https://github.com/kanlerxz87-cyber/NFL1",
+      "status": "needs review"
+    },
+    {
+      "id": "F-013",
+      "sev": "Low",
+      "cat": "Cross-session",
+      "title": "Los Angeles Rams abbreviated LA on main but LAR here",
+      "detail": "Cross-verification against main's independently transcribed data/verified/standings_2026.csv found 32 of 32 clubs matching exactly on wins, losses, ties, points for, points against, net points, percentage and streak. The single difference is the abbreviation: main uses LA, this session uses LAR for the Los Angeles Rams. The official NFL.com standings page uses the LA logo token in its URLs. This is a naming-convention drift between sessions, not a data error.",
+      "impact": "Joins across the two sessions' datasets will drop the Rams silently unless the key is normalised.",
+      "action": "Normalise all 32 club abbreviations to one canonical set (official NFL abbreviations) and re-key both datasets.",
+      "source": "SRC-002",
+      "source_url": "https://www.nfl.com/standings/",
+      "status": "needs review"
+    },
+    {
+      "id": "F-014",
+      "sev": "Medium",
+      "cat": "Cross-session",
+      "title": "Two parallel dashboard generations are now published",
+      "detail": "main already carried a complete dashboard at the repo root (index.html plus pages/*.html) with its own CI gate, generated by earlier sessions. This session added a second, independently built dashboard under /docs. They cover overlapping ground: requirements, questions, suggestions, strategy, injuries, standings and a flagged queue. Neither was built from the other.",
+      "impact": "Two navigation systems and two sets of tables answering the same questions. A reader cannot tell which is authoritative.",
+      "action": "Integration session: pick one canonical site, port the other's unique content into it, and archive the rest.",
+      "source": "SRC-000",
+      "source_url": "https://github.com/kanlerxz87-cyber/NFL1",
+      "status": "needs review"
+    },
+    {
+      "id": "F-015",
+      "sev": "Medium",
+      "cat": "Cross-session",
+      "title": "main's README.md carried unresolved merge-conflict markers into this merge",
+      "detail": "While merging main into this branch, README.md on main was found to contain three unresolved merge-conflict blocks ('Updated upstream' versus 'Stashed changes') left by an earlier session's merge. Two blocks differed only in whitespace and wording precision; the third had content on the upstream side only, with the following sections common to both. This session resolved the file non-destructively: the more precise upstream wording was kept for the two equivalent blocks, all content was retained, and no marker lines remain.",
+      "impact": "A published README containing conflict markers breaks rendering and causes every subsequent merge to conflict again. It also means one session's wording was silently staged as a conflict rather than reconciled.",
+      "action": "Confirm the resolved README reads correctly. Any session whose wording was dropped should re-add it if it mattered — nothing was deleted from the repository history.",
+      "source": "SRC-000",
+      "source_url": "https://github.com/kanlerxz87-cyber/NFL1",
+      "status": "needs review"
+    },
+    {
+      "id": "F-016",
+      "sev": "High",
+      "cat": "Build",
+      "title": "Root-site CI gate was failing before this merge; repaired here",
+      "detail": "The 'Deploy NFL Decision Lab to GitHub Pages' workflow runs check_site.py as a hard gate, and it was already failing on main before this session's changes: 6 of 20 pages were reported as missing sister-page navigation links, so no new deployment could proceed. Root cause: scripts/verified/normalize_nav.py's canonical page list omitted two real pages (executive.html and props.html), and six pages carried no <nav> block matching the tool's regex, so they were skipped. Repair (made on this branch, in another session's file scope, solely to unblock the deploy): added the two missing pages to the canonical list, widened the nav regex to match nav blocks with attributes, and made the tool inject the canonical nav after <body> when a page has none. All 20 pages then pass.",
+      "impact": "Without this the Pages deploy job could never succeed, so no session's work could go live. The repair is additive - it only adds navigation links; no page content was removed.",
+      "action": "The owner of pages/*.html and scripts/verified/ should review the regenerated navigation, particularly the label 'Executive Summary (companion)' used for executive.html, which was chosen only to avoid a duplicate label where an executive-summary.html already exists.",
+      "source": "SRC-000",
+      "source_url": "https://github.com/kanlerxz87-cyber/NFL1",
+      "status": "needs review"
+    }
+  ]
+}

@@ -1,0 +1,654 @@
+{
+  "meta": {
+    "note": "Suggestion register. Each entry is a proposed improvement with explicit options, trade-offs and a decision path, so a reviewer can choose the best path BEFORE anything is implemented. Nothing here has been auto-implemented. Status 'Proposed' means: awaiting your decision.",
+    "decision_workflow": [
+      "1. Read the problem",
+      "2. Read the options and trade-offs",
+      "3. Check what evidence is missing",
+      "4. Choose A, B, C or decline",
+      "5. Record the choice in the decision record",
+      "6. Only then implement",
+      "7. Re-verify and close"
+    ]
+  },
+  "suggestions": [
+    {
+      "id": "S-001",
+      "title": "Tier every data source and refuse to mix tiers",
+      "cat": "Data quality",
+      "status": "Proposed",
+      "problem": "Values from a league-official page, a government regulator and an open-source community mirror all look identical once they land in a table. A community mirror can silently diverge from the league's own numbers and nothing would flag it.",
+      "change": "Label every field with a source tier. Tier 1 = league-official or government-official. Tier 2 = primary issuer or regulated operator. Tier 3 = community. Tier 3 may be referenced but never populates a value.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Strict - Tier 1 and 2 only",
+          "detail": "Only official or issuer-published values may populate a cell.",
+          "pros": "Highest trust; the 'no hallucinations' rule becomes structural rather than a matter of discipline.",
+          "cons": "Slower; some useful data (historical play-by-play) may be unavailable at any price we can justify."
+        },
+        {
+          "id": "B",
+          "label": "Tier 3 allowed behind a re-verification job",
+          "detail": "Community data may populate a cell only if a scheduled job re-checks it against a Tier 1 source and marks it confirmed or diverged.",
+          "pros": "Unlocks large historical datasets.",
+          "cons": "Adds an engineering dependency and a class of cells whose truth value changes over time."
+        },
+        {
+          "id": "C",
+          "label": "Allow anything, note the source",
+          "detail": "No tiering.",
+          "pros": "Fastest.",
+          "cons": "Directly contradicts the no-inference rule. Not recommended."
+        }
+      ],
+      "recommended": "A now, with B as a later, explicitly gated change.",
+      "decision_path": [
+        "Confirm the tier definitions",
+        "Decide whether Tier 3 may ever populate a cell",
+        "If B, specify the re-verification cadence and the divergence alarm",
+        "Implement the tier field in the data layer",
+        "Re-run the build-time source assertion"
+      ],
+      "evidence_needed": "A decision on risk appetite, not external data.",
+      "effort": "Low",
+      "risk": "Low",
+      "source": "SRC-000",
+      "source_url": "https://github.com/kanlerxz87-cyber/NFL1"
+    },
+    {
+      "id": "S-002",
+      "title": "Make the source-link rule a build-time assertion, not a habit",
+      "cat": "Verification",
+      "status": "Implemented",
+      "problem": "'Every table row must have a source link' fails the moment someone is in a hurry. Rules that depend on remembering are rules that break.",
+      "change": "The site generator refuses to emit a page if any data row lacks a source URL. The build fails loudly rather than shipping a sourceless row.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Hard fail",
+          "detail": "Build stops; page is not written.",
+          "pros": "Cannot be bypassed by accident.",
+          "cons": "A single missing URL blocks the whole publish."
+        },
+        {
+          "id": "B",
+          "label": "Warn and emit an UNVERIFIED badge",
+          "detail": "Build continues; the row is published but flagged.",
+          "pros": "Publishing is never blocked.",
+          "cons": "A sourceless row can reach production."
+        }
+      ],
+      "recommended": "A for data rows, B for governance rows (see F-006).",
+      "decision_path": [
+        "Confirm the exemption list",
+        "Implement",
+        "Verify by deliberately breaking one row and confirming the build fails",
+        "Restore the row"
+      ],
+      "evidence_needed": "None.",
+      "effort": "Low",
+      "risk": "Low",
+      "source": "SRC-000",
+      "source_url": "https://github.com/kanlerxz87-cyber/NFL1"
+    },
+    {
+      "id": "S-003",
+      "title": "De-vig market prices before comparing anything",
+      "cat": "Modelling",
+      "status": "Proposed",
+      "problem": "A book's published prices sum to more than 100% because they contain the margin. Comparing a model probability straight to a raw price manufactures edges that are smaller than the margin, or that do not exist at all.",
+      "change": "Normalise the overround to a true probability before any comparison, and record which normalisation was used.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Proportional de-vig",
+          "detail": "Divide each implied probability by the sum of all implied probabilities.",
+          "pros": "Simple, deterministic, easy to audit.",
+          "cons": "Spreads the margin evenly, which is known to be imperfect around favourites and longshots."
+        },
+        {
+          "id": "B",
+          "label": "Equal-margin (margin proportional to odds)",
+          "detail": "Remove an equal margin weight from each outcome.",
+          "pros": "Slightly better behaved at the extremes.",
+          "cons": "Marginally harder to explain to a reviewer."
+        },
+        {
+          "id": "C",
+          "label": "Shin or odds-ratio method",
+          "detail": "Model-based removal that accounts for insider trading incentives.",
+          "pros": "Best theoretical grounding.",
+          "cons": "More parameters, more ways to get it wrong silently."
+        }
+      ],
+      "recommended": "A as the default with C run as a sensitivity check; if the two disagree materially, treat the bet as unpriced rather than choosing the friendlier number.",
+      "decision_path": [
+        "Pick a default method",
+        "Implement as a pure function",
+        "Unit-test on a two-way and a three-way market",
+        "Run the sensitivity check",
+        "Document which method produced every published number"
+      ],
+      "evidence_needed": "Which de-vig method best recovers realised frequency is an empirical question. We have not tested it, because we have no odds archive yet (Q-011).",
+      "effort": "Low",
+      "risk": "Medium - a wrong de-vig silently biases every downstream edge.",
+      "source": "SRC-007",
+      "source_url": "https://gaming.nv.gov/about/gaming-revenue/"
+    },
+    {
+      "id": "S-004",
+      "title": "Adopt Closing Line Value as the primary skill metric",
+      "cat": "Validation & Skill",
+      "status": "Proposed",
+      "problem": "Profit is dominated by variance. A few hundred bets cannot separate a genuine edge from a lucky run, and waiting for enough bets to know takes seasons.",
+      "change": "Score strategies on how far their price beat the closing price, before looking at whether the bet won. Profit remains reported, but it is not the ranking metric.",
+      "options": [
+        {
+          "id": "A",
+          "label": "CLV is the only ranking metric",
+          "detail": "Leaderboard ranks purely on average closing line value.",
+          "pros": "Available immediately after each bet; not contaminated by result variance.",
+          "cons": "Measures agreement with the closing market, not truth. If the closing market is wrong, CLV rewards being wrong alongside it."
+        },
+        {
+          "id": "B",
+          "label": "CLV primary, calibration secondary, profit reported",
+          "detail": "Composite: CLV for ranking, Brier-style calibration as a tiebreak, profit shown but not scored.",
+          "pros": "Harder to game; rewards genuine probabilistic accuracy.",
+          "cons": "More complex to explain."
+        },
+        {
+          "id": "C",
+          "label": "Profit only",
+          "detail": "Rank on realised return.",
+          "pros": "What everyone intuitively wants.",
+          "cons": "Picks luck, not skill. Directly contradicts the brief."
+        }
+      ],
+      "recommended": "B.",
+      "decision_path": [
+        "Confirm the definition of the closing price and the timestamp at which it is captured",
+        "Implement the CLV capture",
+        "Decide the calibration tiebreak",
+        "Set the minimum-bets floor",
+        "Publish the scoring formula on the methodology page"
+      ],
+      "evidence_needed": "A timestamped odds archive including closing prices (Q-011). This is the single highest-value missing input in the whole project.",
+      "effort": "Medium",
+      "risk": "Low",
+      "source": "SRC-006",
+      "source_url": "https://investors.geniussports.com/news/announcements/announcements-details/2023/National-Football-League-Extends-Strategic-Partnership-with-Genius-Sports-as-Exclusive-Official-NFL-Data-and-Watch--Bet-Distribution-Partner/default.aspx"
+    },
+    {
+      "id": "S-005",
+      "title": "Gate every strategy before it is allowed to place anything",
+      "cat": "Validation & Skill",
+      "status": "Proposed",
+      "problem": "Without gates, a strategy that looks good on a small sample gets capital. That is how luck gets mistaken for skill.",
+      "change": "Six sequential gates G0 to G5. A strategy must pass all six, in order. Failing any gate returns it to research, it does not get a waiver.",
+      "options": [
+        {
+          "id": "A",
+          "label": "All six gates mandatory, no waivers",
+          "detail": "Strict sequence.",
+          "pros": "Consistent standard.",
+          "cons": "Slow."
+        },
+        {
+          "id": "B",
+          "label": "Gates with a documented waiver route",
+          "detail": "A named person may waive a gate in writing.",
+          "pros": "Flexibility.",
+          "cons": "Waivers become routine and the gate stops meaning anything."
+        }
+      ],
+      "recommended": "A for gates G0-G2 (data integrity, definition, sample size), B for G3-G5 with the waiver recorded publicly.",
+      "decision_path": [
+        "Ratify the thresholds on the Strategy Lab page",
+        "Implement the gate runner",
+        "Run every candidate strategy through it",
+        "Publish the pass/fail result per strategy",
+        "Re-run on every new season"
+      ],
+      "evidence_needed": "Enough history to satisfy the sample-size gate. Currently missing (Q-011).",
+      "effort": "Medium",
+      "risk": "Low",
+      "source": "SRC-007",
+      "source_url": "https://gaming.nv.gov/about/gaming-revenue/"
+    },
+    {
+      "id": "S-006",
+      "title": "Build a correlation engine with hard guardrails",
+      "cat": "Correlation",
+      "status": "Proposed",
+      "problem": "Parlays and player-prop combos are priced by multiplying legs. That is only correct if the legs are independent. Football props almost never are, so naive multiplication systematically misprices the combination, usually against the bettor for positive correlation and in a way that looks like a gift for negative correlation.",
+      "change": "Estimate every pair correlation from data, store it in a versioned register, and refuse to price a combination whose correlation has not been estimated.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Estimate empirically, refuse unpriced combos",
+          "detail": "No correlation, no price, no bet.",
+          "pros": "Prevents exactly the mispricing that makes parlays dangerous.",
+          "cons": "Blocks a large part of the market until enough history is collected."
+        },
+        {
+          "id": "B",
+          "label": "Estimate empirically, price unpriced combos with a penalty",
+          "detail": "Allow the bet but haircut the edge by an uncertainty penalty.",
+          "pros": "Keeps the market open.",
+          "cons": "The penalty is arbitrary unless calibrated."
+        },
+        {
+          "id": "C",
+          "label": "Use a published correlation table",
+          "detail": "Adopt someone else's numbers.",
+          "pros": "Immediate.",
+          "cons": "No official or regulator-published table exists (Q-008). Any such table would be an unverified third-party claim."
+        }
+      ],
+      "recommended": "A while the register is thin, moving to B once the uncertainty penalty can be calibrated from observed error.",
+      "decision_path": [
+        "Define the pair universe",
+        "Fix the estimation window and method",
+        "Estimate",
+        "Hold out and check calibration",
+        "Only then allow the combination in the leaderboard"
+      ],
+      "evidence_needed": "Historical joint outcomes per prop pair (Q-012).",
+      "effort": "High",
+      "risk": "High if skipped",
+      "source": "SRC-005",
+      "source_url": "https://nextgenstats.nfl.com/"
+    },
+    {
+      "id": "S-007",
+      "title": "Infer depth charts from snap share, because no official one exists",
+      "cat": "Injury & Lineups",
+      "status": "Proposed",
+      "problem": "The brief asks the system to know when a 2nd, 3rd or 4th string player is replacing a starter. The league publishes no depth chart (F-001), so there is no official field to read.",
+      "change": "Derive an ordering from snap-share shares within a position group, refreshed weekly, and label it DERIVED on every surface it appears on.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Snap-share ranking (trailing games, position-group normalised)",
+          "detail": "Order players within a position group by recent snap share.",
+          "pros": "Uses observable playing time rather than a reporter's opinion; refreshable from box scores.",
+          "cons": "Trailing window lags a breakout or a demotion."
+        },
+        {
+          "id": "B",
+          "label": "Snap-share ranking plus a coach/beat-report override",
+          "detail": "Human layer on top.",
+          "pros": "Catches mid-week changes faster.",
+          "cons": "Reintroduces unverifiable third-party claims."
+        },
+        {
+          "id": "C",
+          "label": "Buy a commercial depth chart",
+          "detail": "Licence one.",
+          "pros": "Someone else maintains it.",
+          "cons": "Not official; provenance unknown; cost."
+        }
+      ],
+      "recommended": "A, with C evaluated only if A proves too laggy.",
+      "decision_path": [
+        "Confirm an official or licensed snap-count source exists",
+        "Define the trailing window",
+        "Build the ranker",
+        "Backtest whether the derived depth predicts snap share next week better than a naive baseline",
+        "Only then feed it into the deficiency index"
+      ],
+      "evidence_needed": "An official participation/snap source. Not yet confirmed (Q-012 / REQ-012).",
+      "effort": "High",
+      "risk": "Medium",
+      "source": "SRC-001",
+      "source_url": "https://www.nfl.com/teams/kansas-city-chiefs/depth-chart"
+    },
+    {
+      "id": "S-008",
+      "title": "Publish a lineup deficiency index per position group",
+      "cat": "Injury & Lineups",
+      "status": "Proposed",
+      "problem": "'This defence is missing two starting cornerbacks' is the actual decision-relevant statement. Neither the injury report nor the standings say it.",
+      "change": "For each team and position group, compute how much of the group's recent snap share is unavailable, weighted by the inferred depth of the replacement.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Snap-share weighted, replacement depth adjusted",
+          "detail": "Losing 60% of a position group's snaps to a 3rd-string replacement scores worse than losing 20% to a 2nd-string replacement.",
+          "pros": "Directly encodes the brief's 2nd/3rd/4th string requirement.",
+          "cons": "Depends on S-007 being built first."
+        },
+        {
+          "id": "B",
+          "label": "Simple unavailable-snap-share count",
+          "detail": "Ignore replacement quality.",
+          "pros": "Buildable today from official data alone.",
+          "cons": "Misses the point; a backup all-pro and a backup practice-squad player score the same."
+        }
+      ],
+      "recommended": "Build B now as a visible placeholder clearly badged as incomplete, then A once S-007 lands.",
+      "decision_path": [
+        "Define position groups",
+        "Define the weighting",
+        "Validate against a held-out set of games where a starter was known to be out",
+        "Publish with the DERIVED badge"
+      ],
+      "evidence_needed": "Same as S-007.",
+      "effort": "Medium",
+      "risk": "Medium",
+      "source": "SRC-001",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "id": "S-009",
+      "title": "Score the leaderboard on risk-adjusted skill with a minimum-bets floor",
+      "cat": "Competition",
+      "status": "Proposed",
+      "problem": "A leaderboard ranked on raw profit in a small sample rewards whoever got lucky most recently. That is the opposite of what the brief asks for.",
+      "change": "Rank on CLV and calibration, require a minimum number of graded bets before a strategy appears on the board at all, and show the sample size next to every score.",
+      "options": [
+        {
+          "id": "A",
+          "label": "CLV ranking, minimum-bets floor, sample size shown",
+          "detail": "As described.",
+          "pros": "Directly attacks the luck problem.",
+          "cons": "An empty leaderboard for the first stretch."
+        },
+        {
+          "id": "B",
+          "label": "Shrink estimates toward zero for small samples",
+          "detail": "Show everyone but penalise thin records statistically.",
+          "pros": "Board is populated from day one.",
+          "cons": "Harder to read; the shrinkage parameter is itself a judgement call."
+        },
+        {
+          "id": "C",
+          "label": "Profit ranking",
+          "detail": "The obvious version.",
+          "pros": "Simple.",
+          "cons": "Ranks luck. Not recommended."
+        }
+      ],
+      "recommended": "A, with B as the display mode once enough strategies exist.",
+      "decision_path": [
+        "Set the minimum-bets floor",
+        "Set the reward structure (Q-013)",
+        "Publish the formula before the first scoring period",
+        "Freeze the formula for the season"
+      ],
+      "evidence_needed": "Owner decision on rewards (Q-013).",
+      "effort": "Low",
+      "risk": "Low",
+      "source": "SRC-000",
+      "source_url": "https://github.com/kanlerxz87-cyber/NFL1"
+    },
+    {
+      "id": "S-010",
+      "title": "Register strategies with versions and a frozen holdout",
+      "cat": "Process",
+      "status": "Proposed",
+      "problem": "If a strategy can be quietly edited after the fact, its record means nothing.",
+      "change": "Every strategy gets an immutable version identifier, a declared in-sample window, and a holdout window that is scored once and never re-tuned afterwards.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Immutable versions, single-use holdout",
+          "detail": "Strict.",
+          "pros": "The record is trustworthy.",
+          "cons": "A good idea ruined by a typo cannot be fixed retroactively."
+        },
+        {
+          "id": "B",
+          "label": "Immutable versions, new holdout per major version",
+          "detail": "Re-tuning is allowed but starts a new record.",
+          "pros": "Fair and flexible.",
+          "cons": "Invites holdout shopping across versions."
+        }
+      ],
+      "recommended": "B, with every version's full record shown so holdout shopping is visible.",
+      "decision_path": [
+        "Define the version identifier format",
+        "Define what counts as a major version",
+        "Build the registry",
+        "Publish the rule before any strategy is submitted"
+      ],
+      "evidence_needed": "Owner decision (Q-014).",
+      "effort": "Low",
+      "risk": "Low",
+      "source": "SRC-000",
+      "source_url": "https://github.com/kanlerxz87-cyber/NFL1"
+    },
+    {
+      "id": "S-011",
+      "title": "Run every change through a written decision record",
+      "cat": "Governance",
+      "status": "Implemented",
+      "problem": "Ideas get implemented because someone said them last. There is no artefact showing what was considered and why the other path was rejected.",
+      "change": "This page. Every suggestion lists options, trade-offs, a recommendation and a decision path. Implementation happens only after a choice is recorded.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Decision register on the site",
+          "detail": "As built.",
+          "pros": "Reviewable, versioned, linkable.",
+          "cons": "Adds a step before action."
+        },
+        {
+          "id": "B",
+          "label": "Decide in chat only",
+          "detail": "No artefact.",
+          "pros": "Fast.",
+          "cons": "Unreviewable and unrecoverable."
+        }
+      ],
+      "recommended": "A.",
+      "decision_path": [
+        "Already implemented",
+        "Review the open items",
+        "Record a choice against each"
+      ],
+      "evidence_needed": "Owner review time.",
+      "effort": "Low",
+      "risk": "Low",
+      "source": "SRC-000",
+      "source_url": "https://github.com/kanlerxz87-cyber/NFL1"
+    },
+    {
+      "id": "S-012",
+      "title": "Monitor official feeds for change and record freshness",
+      "cat": "Operations",
+      "status": "Proposed",
+      "problem": "A snapshot silently goes stale. A table that says 'Week 10' forever is worse than no table, because it looks current.",
+      "change": "Stamp every ingested dataset with the exact retrieval time, and surface that stamp on every page that displays it. Alert when a new official report appears.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Retrieval timestamp plus change alert",
+          "detail": "As described.",
+          "pros": "Cheap; removes the worst failure mode.",
+          "cons": "Requires a scheduled job."
+        },
+        {
+          "id": "B",
+          "label": "Timestamp only",
+          "detail": "No alerting.",
+          "pros": "Trivial.",
+          "cons": "Staleness is visible but not acted on."
+        }
+      ],
+      "recommended": "A.",
+      "decision_path": [
+        "Add the ingest scheduler",
+        "Stamp the datasets",
+        "Surface the stamp in the page header",
+        "Add the alert"
+      ],
+      "evidence_needed": "None.",
+      "effort": "Low",
+      "risk": "Low",
+      "source": "SRC-001",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "id": "S-013",
+      "title": "Default to fractional Kelly with a hard per-position cap",
+      "cat": "Bankroll",
+      "status": "Proposed",
+      "problem": "Full Kelly sizing on estimated edges is reckless, because an overestimated edge produces an oversized bet, and the error compounds.",
+      "change": "One-quarter Kelly, capped at 1% of bankroll per position, until the owner sets a different policy.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Quarter Kelly, 1% cap",
+          "detail": "As proposed.",
+          "pros": "Standard risk control; robust to edge overestimation.",
+          "cons": "Leaves growth on the table if edges are real."
+        },
+        {
+          "id": "B",
+          "label": "Flat unit staking",
+          "detail": "Same stake every time.",
+          "pros": "Simplest to audit; sizing errors cannot compound.",
+          "cons": "Ignores edge size entirely."
+        },
+        {
+          "id": "C",
+          "label": "Full Kelly",
+          "detail": "Maximum theoretical growth.",
+          "pros": "Optimal if the edge estimate is exact.",
+          "cons": "It never is. Not recommended."
+        }
+      ],
+      "recommended": "A, with B as a fallback if the edge estimates stay too noisy to trust.",
+      "decision_path": [
+        "Confirm the bankroll (Q-009)",
+        "Confirm the fraction and cap",
+        "Implement as a pure function",
+        "Audit on a sample of historical bets"
+      ],
+      "evidence_needed": "Bankroll figure from the owner (Q-009).",
+      "effort": "Low",
+      "risk": "Medium if skipped",
+      "source": "SRC-000",
+      "source_url": "https://github.com/kanlerxz87-cyber/NFL1"
+    },
+    {
+      "id": "S-014",
+      "title": "Keep a visible queue for everything we could not verify",
+      "cat": "Governance",
+      "status": "Implemented",
+      "problem": "Unverified items buried in prose get forgotten. Unverified items published on their own page with source links get reviewed.",
+      "change": "The Flagged for Review page, generated from a data file, each item carrying the source link and the reason it could not be closed.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Dedicated flagged page",
+          "detail": "As built.",
+          "pros": "Impossible to miss.",
+          "cons": "None material."
+        },
+        {
+          "id": "B",
+          "label": "Inline warnings only",
+          "detail": "Flag in place.",
+          "pros": "Contextual.",
+          "cons": "No single review queue."
+        }
+      ],
+      "recommended": "Both - inline badges plus the dedicated queue. Implemented.",
+      "decision_path": [
+        "Already implemented",
+        "Review the queue after the site is live",
+        "Close items as evidence arrives"
+      ],
+      "evidence_needed": "Owner review time.",
+      "effort": "Low",
+      "risk": "Low",
+      "source": "SRC-000",
+      "source_url": "https://github.com/kanlerxz87-cyber/NFL1"
+    },
+    {
+      "id": "S-015",
+      "title": "Publish the methodology and keep a changelog",
+      "cat": "Governance",
+      "status": "Proposed",
+      "problem": "A model whose method is undocumented cannot be audited, and unaudited models drift.",
+      "change": "A methodology page stating every definition, formula and threshold, plus a changelog recording every change to them.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Methodology page plus dated changelog",
+          "detail": "As described.",
+          "pros": "Auditable; makes silent drift visible.",
+          "cons": "Maintenance overhead."
+        },
+        {
+          "id": "B",
+          "label": "Method in code comments only",
+          "detail": "No page.",
+          "pros": "No extra artefact.",
+          "cons": "Not reviewable by a non-engineer."
+        }
+      ],
+      "recommended": "A.",
+      "decision_path": [
+        "Draft the definitions",
+        "Publish",
+        "Require a changelog entry for every formula change"
+      ],
+      "evidence_needed": "None.",
+      "effort": "Low",
+      "risk": "Low",
+      "source": "SRC-000",
+      "source_url": "https://github.com/kanlerxz87-cyber/NFL1"
+    },
+    {
+      "id": "S-016",
+      "title": "Reconcile the two dashboard generations into one canonical site",
+      "cat": "Governance",
+      "status": "Proposed",
+      "problem": "This session's branch came off the repository's initial commit while main had already received other sessions' work. The result is two independently built dashboards covering the same subject matter: main's at the repo root (index.html plus pages/), this session's under docs/. Both are published, neither replaces the other, and they disagree on at least one club abbreviation (LA versus LAR).",
+      "change": "Have a single integration session pick one canonical site, port the other's unique content into it, normalise all club abbreviations to the official set, and archive the rest behind a clearly labelled link.",
+      "options": [
+        {
+          "id": "A",
+          "label": "Keep main's root site as canonical",
+          "detail": "Port this session's registers into main's pages/ and archive docs/.",
+          "pros": "main's site already has a CI gate, an audit script and a working Pages deploy.",
+          "cons": "This session's generator would need porting or retiring."
+        },
+        {
+          "id": "B",
+          "label": "Keep this session's docs/ site as canonical",
+          "detail": "Move main's content into docs/ and switch the Pages source.",
+          "pros": "One generator, one data layer, one navigation.",
+          "cons": "Retires the other sessions' build scripts, audit tooling and CI workflow."
+        },
+        {
+          "id": "C",
+          "label": "Keep both, label clearly",
+          "detail": "Publish both with an explicit 'two generations' banner and a comparison page.",
+          "pros": "No work is thrown away.",
+          "cons": "Two answers to the same question is the exact problem the flagged queue exists to prevent."
+        }
+      ],
+      "recommended": "A, because main's site already has a working CI-gated deploy — but this is a decision for the integration session, not for me.",
+      "decision_path": [
+        "Compare the two generations page by page",
+        "List content unique to each",
+        "Choose the canonical site",
+        "Port the unique content",
+        "Normalise the 32 club abbreviations",
+        "Archive the non-canonical site behind a labelled link",
+        "Re-run both link checkers"
+      ],
+      "evidence_needed": "A reading of both sites. Cross-verification already shows their standings and injury designations agree exactly, so no data is in dispute.",
+      "effort": "High",
+      "risk": "Medium",
+      "source": "SRC-000",
+      "source_url": "https://github.com/kanlerxz87-cyber/NFL1"
+    }
+  ]
+}

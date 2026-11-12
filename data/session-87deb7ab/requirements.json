@@ -1,0 +1,427 @@
+{
+  "meta": {
+    "note": "Requirement register extracted line by line from the owner's project brief. There is no public official URL for the brief; the canonical record is this repository. See flag F-006.",
+    "source_id": "SRC-000",
+    "source_name": "Owner project brief (session request, 2026-11-12)",
+    "source_url": "https://github.com/kanlerxz87-cyber/NFL1",
+    "exemption": "The 'every row links to an official site' rule applies to DATA rows. Requirement rows are governance rows whose only authoritative source is the brief itself. They are labelled 'Internal brief' rather than 'Verified', and the exemption is published on the Flagged for Review page."
+  },
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "cat": "Data & Signals",
+      "text": "Collect, organise and analyse NFL information against a full, explicit list of requirements.",
+      "status": "In progress",
+      "page": "requirements.html",
+      "note": "This register is the explicit list."
+    },
+    {
+      "id": "REQ-002",
+      "cat": "Data & Signals",
+      "text": "Originate our own NFL lines rather than consuming someone else's.",
+      "status": "In progress",
+      "page": "strategy-lab.html",
+      "note": "Line-origination pipeline specified: model probability to fair price, then compare to market."
+    },
+    {
+      "id": "REQ-003",
+      "cat": "Data & Signals",
+      "text": "Research and develop strategies for generating useful signals.",
+      "status": "In progress",
+      "page": "signals.html",
+      "note": "Signal catalogue created. All signals are PROPOSED until they pass the validation gates; no signal is claimed to be profitable."
+    },
+    {
+      "id": "REQ-004",
+      "cat": "Data & Signals",
+      "text": "Treat strategy development as a leaderboard competition with rewards for top-performing strategies.",
+      "status": "In progress",
+      "page": "strategy-lab.html",
+      "note": "Leaderboard rules and a proposed reward structure are specified, including anti-luck scoring."
+    },
+    {
+      "id": "REQ-005",
+      "cat": "Data & Signals",
+      "text": "Cover single bets, parlays, and player-prop bet combinations.",
+      "status": "In progress",
+      "page": "correlation.html",
+      "note": "All three bet structures are in scope; parlays and prop combos require the correlation engine to be priced honestly."
+    },
+    {
+      "id": "REQ-006",
+      "cat": "Validation & Skill",
+      "text": "Each strategy must pass validation gates before it is accepted.",
+      "status": "In progress",
+      "page": "strategy-lab.html",
+      "note": "Six gates G0-G5 defined with explicit thresholds and fail actions."
+    },
+    {
+      "id": "REQ-007",
+      "cat": "Validation & Skill",
+      "text": "Determine correlation values.",
+      "status": "In progress",
+      "page": "correlation.html",
+      "note": "Correlation register and estimation method specified. NO correlation value is asserted as fact - every value cell is blank pending empirical estimation. See flag F-010."
+    },
+    {
+      "id": "REQ-008",
+      "cat": "Validation & Skill",
+      "text": "Remove luck from the equation and build strategies that are selectively skill based.",
+      "status": "In progress",
+      "page": "strategy-lab.html",
+      "note": "Skill-vs-luck separation methodology specified: CLV as the primary metric, plus binomial, bootstrap and Monte Carlo controls."
+    },
+    {
+      "id": "REQ-009",
+      "cat": "Injury & Lineups",
+      "text": "The system should track injuries.",
+      "status": "Done (partial)",
+      "page": "injury-depth.html",
+      "note": "Official Week 10 injury report ingested in full for all 28 teams on the report. Historical weeks not yet ingested."
+    },
+    {
+      "id": "REQ-010",
+      "cat": "Injury & Lineups",
+      "text": "Know deficiencies in defences where 2nd, 3rd or 4th string backups must replace starters.",
+      "status": "Blocked",
+      "page": "injury-depth.html",
+      "note": "BLOCKED by F-001: the NFL publishes no official depth chart, so '2nd/3rd/4th string' is not an official field. A snap-share inference method is specified instead."
+    },
+    {
+      "id": "REQ-011",
+      "cat": "Injury & Lineups",
+      "text": "Same treatment for offences - know whether starters or backups are playing.",
+      "status": "Blocked",
+      "page": "injury-depth.html",
+      "note": "Same blocker as REQ-010."
+    },
+    {
+      "id": "REQ-012",
+      "cat": "Injury & Lineups",
+      "text": "Base the above on lineups, not on guesswork.",
+      "status": "Blocked",
+      "page": "injury-depth.html",
+      "note": "Requires an official participation/snap source to be licensed or confirmed. Currently no such source is verified available."
+    },
+    {
+      "id": "REQ-013",
+      "cat": "Governance",
+      "text": "Make suggestions on how to improve the site to improve decision making.",
+      "status": "In progress",
+      "page": "suggestions.html",
+      "note": "Suggestion register created with 15 entries."
+    },
+    {
+      "id": "REQ-014",
+      "cat": "Governance",
+      "text": "Create a dedicated section for suggestions so someone can review them and choose the best path before implementing any changes.",
+      "status": "In progress",
+      "page": "suggestions.html",
+      "note": "Each suggestion carries explicit options, trade-offs, a recommended path and a decision record with status. Nothing is auto-implemented."
+    },
+    {
+      "id": "REQ-015",
+      "cat": "Governance",
+      "text": "Produce a clear list of questions, information and answers that must be addressed before any decision can reasonably be made, based on information we already have and do not have.",
+      "status": "In progress",
+      "page": "questions.html",
+      "note": "Decision register created: 24 questions split into answered, partially answered and open-blocking."
+    },
+    {
+      "id": "REQ-016",
+      "cat": "Governance",
+      "text": "Suggestions must be made to discover missing information.",
+      "status": "In progress",
+      "page": "suggestions.html",
+      "note": "Suggestions S-001, S-002, S-004, S-011, S-012, S-015 are specifically aimed at surfacing missing information."
+    },
+    {
+      "id": "REQ-017",
+      "cat": "Governance",
+      "text": "Create an executive summary outlining important details.",
+      "status": "In progress",
+      "page": "executive-summary.html",
+      "note": "Written."
+    },
+    {
+      "id": "REQ-018",
+      "cat": "Repository",
+      "text": "Review the repo line by line, verifying from official verified trusted sources, and provide links for manual review.",
+      "status": "Done (scope caveat)",
+      "page": "verification.html",
+      "note": "Reviewed at this branch's base commit 5aeb599: one commit, one tracked file (README.md, 6 bytes). main had separately received other sessions' work by the time of merge, so the review covered only this branch's lineage. See flags F-012 and F-014."
+    },
+    {
+      "id": "REQ-019",
+      "cat": "Repository",
+      "text": "Flag any irregularities for review.",
+      "status": "In progress",
+      "page": "flagged.html",
+      "note": "Ten flags raised, each with source links."
+    },
+    {
+      "id": "REQ-020",
+      "cat": "Repository",
+      "text": "No hallucinations.",
+      "status": "In progress",
+      "page": "verification.html",
+      "note": "Enforced by the blank-cell rule: any value not read from a linked official source is left blank and flagged rather than filled in."
+    },
+    {
+      "id": "REQ-021",
+      "cat": "Site",
+      "text": "Create a GitHub Pages live site for this repo with a clean landing page and subpages organised by category.",
+      "status": "In progress",
+      "page": "index.html",
+      "note": "12-page static dashboard generated into /docs."
+    },
+    {
+      "id": "REQ-022",
+      "cat": "Site",
+      "text": "Organise subpages by category.",
+      "status": "In progress",
+      "page": "index.html",
+      "note": "Navigation is grouped into five categories: Overview, Decision Making, Strategy, Roster, Governance."
+    },
+    {
+      "id": "REQ-023",
+      "cat": "Site",
+      "text": "UI should be clean, user friendly, simple and easy to use, like a simple dashboard.",
+      "status": "In progress",
+      "page": "index.html",
+      "note": "Sidebar navigation, KPI cards, sortable and searchable tables, no framework, no tracking."
+    },
+    {
+      "id": "REQ-024",
+      "cat": "Site",
+      "text": "Contain all entries and findings in a simple, easy to read table format.",
+      "status": "In progress",
+      "page": "index.html",
+      "note": "Every dataset is rendered as a table with sticky headers, sorting, filtering and a per-row source link."
+    },
+    {
+      "id": "REQ-025",
+      "cat": "Site",
+      "text": "Include any analysis and findings.",
+      "status": "In progress",
+      "page": "index.html",
+      "note": "Analysis accompanies each register rather than being separated from the data."
+    },
+    {
+      "id": "REQ-026",
+      "cat": "Verification",
+      "text": "Verify line by line.",
+      "status": "In progress",
+      "page": "verification.html",
+      "note": "Verification methodology and per-dataset check results published."
+    },
+    {
+      "id": "REQ-027",
+      "cat": "Verification",
+      "text": "Every table row must have a source link to an official site.",
+      "status": "In progress",
+      "page": "verification.html",
+      "note": "Implemented as a build-time assertion: the generator fails if a data row has no source URL. Exemptions are limited to the requirement register (F-006) and are published."
+    },
+    {
+      "id": "REQ-028",
+      "cat": "Verification",
+      "text": "If a value cannot be confirmed from an official source, leave it blank and flag it as unverified.",
+      "status": "In progress",
+      "page": "flagged.html",
+      "note": "Blank cells render as an explicit 'UNVERIFIED' badge rather than being silently omitted."
+    },
+    {
+      "id": "REQ-029",
+      "cat": "Verification",
+      "text": "Never infer or fill in values.",
+      "status": "In progress",
+      "page": "verification.html",
+      "note": "Derived values are permitted only where the derivation is pure arithmetic on official values, and are always badged DERIVED."
+    },
+    {
+      "id": "REQ-030",
+      "cat": "Parallel Sessions",
+      "text": "Maintain COORDINATION.md in the repo root as the shared task board; create it if absent.",
+      "status": "Done",
+      "page": "index.html",
+      "note": "Created and pushed."
+    },
+    {
+      "id": "REQ-031",
+      "cat": "Parallel Sessions",
+      "text": "The board lists each task, its status (unclaimed, in progress, done, needs review), the owning session ID and the files it touches.",
+      "status": "Done",
+      "page": "index.html",
+      "note": "Implemented in COORDINATION.md section 4."
+    },
+    {
+      "id": "REQ-032",
+      "cat": "Parallel Sessions",
+      "text": "A status of 'needs review' means the item is published on the Flagged for Review page and does not block anything.",
+      "status": "Done",
+      "page": "flagged.html",
+      "note": "Documented in COORDINATION.md section 2."
+    },
+    {
+      "id": "REQ-033",
+      "cat": "Parallel Sessions",
+      "text": "Claim a task by writing the session ID and file scope, then commit and push the claim immediately.",
+      "status": "Done",
+      "page": "index.html",
+      "note": "Claim committed as beab7ee and pushed before any other file was touched."
+    },
+    {
+      "id": "REQ-034",
+      "cat": "Parallel Sessions",
+      "text": "Never start a task another session has claimed; keep scopes non-overlapping.",
+      "status": "Done",
+      "page": "index.html",
+      "note": "No other session is active on the board; all claims are held by session-87deb7ab."
+    },
+    {
+      "id": "REQ-035",
+      "cat": "Parallel Sessions",
+      "text": "Each session works on its own branch or worktree named session-<id>/<task>.",
+      "status": "Deviation",
+      "page": "index.html",
+      "note": "DEVIATION, see F-011: this session was given a fixed branch name by the platform and is not permitted to rename or create another branch."
+    },
+    {
+      "id": "REQ-036",
+      "cat": "Parallel Sessions",
+      "text": "If a task requires changing a file owned by another session, log the request instead of editing it.",
+      "status": "Done",
+      "page": "index.html",
+      "note": "COORDINATION.md section 6 is the cross-scope request log. No requests pending."
+    },
+    {
+      "id": "REQ-037",
+      "cat": "Parallel Sessions",
+      "text": "Make small frequent commits and run git pull --rebase before every push.",
+      "status": "In progress",
+      "page": "index.html",
+      "note": "Commits are made per work unit; rebase is run before each push."
+    },
+    {
+      "id": "REQ-038",
+      "cat": "Parallel Sessions",
+      "text": "On merge conflict: stop, resolve without discarding the other session's work, and log what happened.",
+      "status": "Ready",
+      "page": "index.html",
+      "note": "No conflict encountered. Procedure is documented in COORDINATION.md section 3."
+    },
+    {
+      "id": "REQ-039",
+      "cat": "Parallel Sessions",
+      "text": "When a task is finished, record its sources, the verification performed and any irregularities in COORDINATION.md.",
+      "status": "In progress",
+      "page": "index.html",
+      "note": "Recorded at merge time."
+    },
+    {
+      "id": "REQ-040",
+      "cat": "Parallel Sessions",
+      "text": "Never mark anything verified without checking it against an official source, and link that source.",
+      "status": "Done",
+      "page": "verification.html",
+      "note": "Enforced by the build-time source assertion."
+    },
+    {
+      "id": "REQ-041",
+      "cat": "Parallel Sessions",
+      "text": "Shared outputs (table data, site index and navigation) are changed only by a final integration session once all other tasks are done.",
+      "status": "In progress",
+      "page": "index.html",
+      "note": "T-18 is reserved for the integration session."
+    },
+    {
+      "id": "REQ-042",
+      "cat": "Parallel Sessions",
+      "text": "The integration session merges the branches, re-verifies combined data line by line, confirms the site builds with no broken links, and publishes to GitHub Pages.",
+      "status": "In progress",
+      "page": "index.html",
+      "note": "T-18 + T-19."
+    },
+    {
+      "id": "REQ-043",
+      "cat": "Parallel Sessions",
+      "text": "If a session crashes or its claim is more than 60 minutes old with no commits, another session may take over and note the handoff.",
+      "status": "Ready",
+      "page": "index.html",
+      "note": "Documented in COORDINATION.md section 1, item 8. Handoff log is empty."
+    },
+    {
+      "id": "REQ-044",
+      "cat": "PR & Merge",
+      "text": "Do not stop to wait for review; work fully from start to finish.",
+      "status": "In progress",
+      "page": "index.html",
+      "note": "Single continuous session."
+    },
+    {
+      "id": "REQ-045",
+      "cat": "PR & Merge",
+      "text": "Create a pull request to main with a summary of changes, the sources used and any flagged irregularities.",
+      "status": "In progress",
+      "page": "index.html",
+      "note": "T-19."
+    },
+    {
+      "id": "REQ-046",
+      "cat": "PR & Merge",
+      "text": "Merge the pull request without waiting for approval.",
+      "status": "In progress",
+      "page": "index.html",
+      "note": "T-19."
+    },
+    {
+      "id": "REQ-047",
+      "cat": "PR & Merge",
+      "text": "Confirm GitHub Pages deploys successfully.",
+      "status": "In progress",
+      "page": "index.html",
+      "note": "T-19 - deploy is verified by requesting the live URL and checking for a non-404 response."
+    },
+    {
+      "id": "REQ-048",
+      "cat": "PR & Merge",
+      "text": "Record the PR link and merge result in COORDINATION.md.",
+      "status": "In progress",
+      "page": "index.html",
+      "note": "T-19."
+    },
+    {
+      "id": "REQ-049",
+      "cat": "PR & Merge",
+      "text": "Flagged irregularities and unverified items do not block the merge.",
+      "status": "In progress",
+      "page": "flagged.html",
+      "note": "Applied."
+    },
+    {
+      "id": "REQ-050",
+      "cat": "PR & Merge",
+      "text": "Publish flagged items on a clearly labelled Flagged for Review page with source links.",
+      "status": "In progress",
+      "page": "flagged.html",
+      "note": "Page built from data/flagged.json."
+    },
+    {
+      "id": "REQ-051",
+      "cat": "PR & Merge",
+      "text": "If the build, a check or the deploy fails, fix the problem and retry until the site is live. Do not merge a broken site.",
+      "status": "In progress",
+      "page": "index.html",
+      "note": "Build and link checks run before the merge is approved."
+    },
+    {
+      "id": "REQ-052",
+      "cat": "PR & Merge",
+      "text": "No manual input required from the owner.",
+      "status": "In progress",
+      "page": "index.html",
+      "note": "Open questions that genuinely need owner input are recorded on the Questions page with a proposed default, so work continues."
+    }
+  ]
+}

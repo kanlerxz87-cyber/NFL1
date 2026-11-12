@@ -28,6 +28,8 @@ CANON = [
     ("questions.html", "Questions"),
     ("flagged.html", "Flagged"),
     ("review.html", "Review"),
+    ("executive.html", "Executive Summary (companion)"),
+    ("props.html", "Player Props"),
 ]
 
 
@@ -48,14 +50,22 @@ def main() -> int:
     changed = 0
     for p in [ROOT / "index.html", *sorted((ROOT / "pages").glob("*.html"))]:
         t = p.read_text(encoding="utf-8")
-        m = re.search(r"<nav>.*?</nav>", t, flags=re.S)
-        if not m:
-            print(f"skip (no nav): {p.relative_to(ROOT)}")
-            continue
         new = build(p.name, p.name == "index.html")
-        if m.group(0) != new:
+        m = re.search(r"<nav[^>]*>.*?</nav>", t, flags=re.S)
+        if m:
+            if m.group(0) == new:
+                continue
             p.write_text(t[:m.start()] + new + t[m.end():], encoding="utf-8")
             changed += 1
+            continue
+        # No nav block at all: inject the canonical one right after <body> so the page
+        # links every sister page. Additive - no existing content is removed.
+        mb = re.search(r"<body[^>]*>", t)
+        if not mb:
+            print(f"skip (no nav, no body): {p.relative_to(ROOT)}")
+            continue
+        p.write_text(t[:mb.end()] + "\n  " + new + t[mb.end():], encoding="utf-8")
+        changed += 1
     print(f"navigation normalized on {changed} page(s)")
     return 0
 
