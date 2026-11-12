@@ -37,11 +37,55 @@ class TestIngest(unittest.TestCase):
                                  ingest.PRACTICE_LABELS[e["practice_code"]])
 
     def test_every_row_has_a_source_url(self):
+        registered = {s["url"] for s in ingest.sources()["sources"]}
         for e in ingest.injuries():
             self.assertEqual(e["source_url"], ingest.INJURY_REPORT_URL)
+            self.assertIn(e["source_url"], registered)
             self.assertTrue(e["player_url"].startswith("https://www.nfl.com/players/"))
         for r in ingest.standings():
             self.assertEqual(r["source_url"], ingest.STANDINGS_URL)
+            self.assertIn(r["source_url"], registered)
+        for r in ingest.schedule():
+            self.assertEqual(r["source_url"], ingest.WEEK10_SCHEDULE_URL)
+            self.assertEqual(r["source_urls"],
+                             [ingest.WEEK10_SCHEDULE_URL, ingest.INJURY_REPORT_URL])
+            self.assertTrue(set(r["source_urls"]) <= registered)
+        for r in ingest.byes():
+            self.assertEqual(r["source_url"], ingest.WEEK10_SCHEDULE_URL)
+            self.assertIn(r["source_url"], registered)
+        for r in ingest.team_report_status():
+            expected_sources = ([ingest.INJURY_REPORT_URL, ingest.WEEK10_SCHEDULE_URL]
+                                if r["report_status"] == "on bye (no report)"
+                                else [ingest.INJURY_REPORT_URL])
+            self.assertEqual(r["source_urls"], expected_sources)
+            self.assertEqual(r["source_url"], expected_sources[-1])
+            self.assertTrue(set(expected_sources) <= registered)
+        for r in ingest.news():
+            self.assertTrue(r["url"].startswith("https://www.nfl.com/news/"))
+            self.assertIn(r["url"], registered)
+        for r in ingest.teams_reference():
+            self.assertEqual(r["source_url"], ingest.TEAM_REF_URL)
+            self.assertIn(r["source_url"], registered)
+
+    def test_official_schedule_supplies_fixtures_and_the_bye_list(self):
+        self.assertEqual({r["team_abbr"] for r in ingest.byes()},
+                         {"CHI", "DEN", "PHI", "TB"})
+        self.assertEqual(len(ingest.schedule()), 14)
+        source = next(s for s in ingest.sources()["sources"]
+                      if s["url"] == ingest.WEEK10_SCHEDULE_URL)
+        self.assertEqual(source["tier"], "OFFICIAL")
+        uses = " ".join(source["used_for"])
+        self.assertIn("schedule_2026_week10.tsv", uses)
+        self.assertIn("bye_week10.tsv", uses)
+        injury_source = next(s for s in ingest.sources()["sources"]
+                             if s["url"] == ingest.INJURY_REPORT_URL)
+        self.assertIn("broadcast metadata", " ".join(injury_source["used_for"]))
+
+    def test_schedule_fixture_snapshot_matches_official_nfl_schedule(self):
+        c = next(x for x in verify.run()["checks"] if x["check_id"] == "V33")
+        self.assertEqual(c["result"], "PASS", c["actual"])
+        self.assertEqual(c["actual"], [])
+        self.assertEqual(c["source_url"], ingest.WEEK10_SCHEDULE_URL)
 
 
 class TestVerification(unittest.TestCase):
@@ -68,9 +112,36 @@ class TestVerification(unittest.TestCase):
         self.assertEqual(c["result"], "PASS")
         self.assertEqual(len(verify.INJURY_PAGE_RECORDS), 28)
 
-    def test_every_check_names_a_source(self):
+    def test_schedule_checks_link_to_the_official_nfl_schedule(self):
+        for check_id in ("V14", "V15", "V16", "V17", "V18", "V29", "V33"):
+            c = next(x for x in self.r["checks"] if x["check_id"] == check_id)
+            self.assertEqual(c["source_url"], ingest.WEEK10_SCHEDULE_URL)
+
+    def test_schedule_duplicate_team_check_reports_duplicate_codes(self):
+        c = next(x for x in self.r["checks"] if x["check_id"] == "V18")
+        self.assertEqual(c["expected"], [])
+        self.assertEqual(c["actual"], [])
+        self.assertEqual(c["result"], "PASS")
+
+    def test_byes_are_checked_against_the_official_schedule_snapshot(self):
+        c = next(x for x in self.r["checks"] if x["check_id"] == "V29")
+        self.assertEqual(c["result"], "PASS")
+        self.assertEqual(c["expected"], ["CHI", "DEN", "PHI", "TB"])
+        self.assertEqual(c["actual"], ["CHI", "DEN", "PHI", "TB"])
+
+    def test_provenance_check_covers_all_registered_source_rows(self):
+        c = next(x for x in self.r["checks"] if x["check_id"] == "V30")
+        self.assertEqual(c["result"], "PASS")
+        self.assertEqual(c["actual"], [])
+
+    def test_every_check_names_registered_https_sources(self):
+        registered = {s["url"] for s in ingest.sources()["sources"]}
         for c in self.r["checks"]:
-            self.assertTrue(c["source_url"].startswith("http"))
+            urls = c.get("source_urls") or [c["source_url"]]
+            self.assertTrue(urls)
+            for url in urls:
+                self.assertTrue(url.startswith("https://"))
+                self.assertIn(url, registered)
 
 
 class TestDerived(unittest.TestCase):
@@ -123,6 +194,9 @@ class TestAvailability(unittest.TestCase):
         t = {r["team_abbr"]: r for r in self.a["teams"]}
         for team in ("CHI", "DEN", "PHI", "TB"):
             self.assertEqual(t[team]["report_status"], "on bye (no report)")
+            self.assertEqual(t[team]["source_url"], ingest.WEEK10_SCHEDULE_URL)
+            self.assertEqual(t[team]["source_urls"],
+                             [ingest.INJURY_REPORT_URL, ingest.WEEK10_SCHEDULE_URL])
 
     def test_no_injuries_reported_is_distinct_from_bye(self):
         t = {r["team_abbr"]: r for r in self.a["teams"]}
