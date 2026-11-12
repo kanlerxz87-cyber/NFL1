@@ -10,6 +10,9 @@ spec = importlib.util.spec_from_file_location("bs", ROOT / "scripts/verified/bui
 bs = importlib.util.module_from_spec(spec); spec.loader.exec_module(bs)
 
 A = json.loads((ROOT / "data/verified/model/availability.json").read_text())
+if not A.get("depth_chart_probe"):
+    raise SystemExit("ERROR: depth_chart_probe is empty — the evidence table would render "
+                     "blank, which reads as 'no probes done'. Refusing to build.")
 
 
 def main() -> int:

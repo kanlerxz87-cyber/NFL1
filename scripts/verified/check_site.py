@@ -52,6 +52,25 @@ def main() -> int:
         if missing:
             problems.append(f"{p.relative_to(ROOT)}: nav missing {sorted(missing)}")
 
+        # structural integrity: a table with headers but no data rows renders as an
+        # empty shell that reads like "nothing to see" instead of a failure.
+        body = p.read_text(encoding="utf-8")
+        for m in re.finditer(r"<table\b.*?</table>", body, re.S):
+            block = m.group(0)
+            if "<thead" in block and "<tbody" in block:
+                tbody = block.split("<tbody", 1)[1]
+                if "<tr" not in tbody:
+                    snippet = re.sub(r"<[^>]+>", " ", block)
+                    snippet = " ".join(snippet.split())[:60]
+                    problems.append(
+                        f"{p.relative_to(ROOT)}: table has a header but zero data rows "
+                        f"({snippet!r})")
+            # empty rendered cells hide missing values
+            for cell in re.finditer(r"<td[^>]*>\s*</td>", block):
+                problems.append(f"{p.relative_to(ROOT)}: empty <td> in table "
+                                f"({re.sub(r'<[^>]+>', ' ', block)[:40].strip()!r})")
+                break
+
     print(f"pages checked: {len(pages)}")
     if problems:
         print("\nPROBLEMS:")

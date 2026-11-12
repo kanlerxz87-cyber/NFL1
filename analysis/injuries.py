@@ -54,6 +54,7 @@ def main() -> int:
     inj = rows("injuries_week10.csv")
     clean = rows("no_injuries_week10.csv")
     qb = rows("qb_changes_2026.csv")
+    probe = rows("depth_chart_probe.csv")
     st = rows("standings_2026.csv")
 
     per_team = {}
@@ -110,6 +111,11 @@ def main() -> int:
             "listing_source_url": r["listing_source_url"],
             "verification_level": r["verification_level"],
         } for r in qb],
+        "depth_chart_probe": [{
+            "url_probed": r["url_probed"], "http_result": r["http_result"],
+            "observed": r["observed"], "checked_at": r["checked_at"],
+            "conclusion": r["conclusion"],
+        } for r in probe],
         "totals": {
             "verified_out": sum(x["verified_out"] for x in table),
             "verified_questionable": sum(x["verified_questionable"] for x in table),
