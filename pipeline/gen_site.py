@@ -715,7 +715,7 @@ def props_page(props, dash):
 
 
 # ---------------------------------------------------------------- evidence
-def evidence_page(prov, verif, dash):
+def evidence_page(prov, verif, dash, repl=None):
     p = prov or {}
     rows = []
     for f in p.get("files", []):
@@ -779,6 +779,40 @@ def evidence_page(prov, verif, dash):
                       [[f"<strong>{esc(u['item'])}</strong>", esc(u["why"]), esc(u["handling"])]
                        for u in unver])
 
+    repl = repl or {}
+    repl_html = ""
+    if repl.get("available"):
+        rows = []
+        for c in repl.get("comparisons", []):
+            rows.append([esc(c["metric"]), num(c.get("this_pipeline"), 2),
+                         num(c.get("companion_model"), 2), num(c.get("market_baseline"), 2),
+                         esc(c.get("reading")), src(SOURCE["pbp"], "play-by-play")])
+        comp_tbl = table(["Metric (2026)", "This pipeline", "Companion model", "Market baseline",
+                          "Reading", "Source"], rows)
+        crow = []
+        for c in repl.get("correlations", []):
+            crow.append([esc(c["relationship"]),
+                         f"r = {num(c['this_pipeline'].get('r'),3)} (n={num(c['this_pipeline'].get('n'))}, {esc(c['this_pipeline'].get('window'))})",
+                         f"r = {num(c['companion'].get('r'),3)} (n={num(c['companion'].get('n'))}, {esc(c['companion'].get('window'))})",
+                         esc(c.get("reading")), src(SOURCE["schedules"], "results")])
+        corr_tbl = table(["Relationship", "This pipeline", "Companion session", "Reading", "Source"], crow)
+        conf = [[f"<strong>{esc(c['item'])}</strong>", esc(c["this_pipeline"]), esc(c["companion"]),
+                 esc(c["resolution"]), src(c.get("source") or SOURCE["schedules"], "source")]
+                for c in repl.get("conflicts", [])]
+        conf_tbl = table(["Item", "This pipeline", "Companion session", "Resolution", "Source"], conf)
+        repl_html = f"""
+<section class="panel">
+  <h2>Independent replication from parallel sessions</h2>
+  <p>A second session modelled the same 2026 season from its own verified transcriptions, without
+  the closing-line mirror used here. Comparing the two is a cheap, real check on both.</p>
+  {comp_tbl}
+  {corr_tbl}
+  <h3>Where the two builds differ</h3>
+  {conf_tbl}
+  <p class="note">Companion artifacts: {esc(", ".join(repl.get("companion_inputs", [])))}.
+  Raw comparison: <a href="../data/model/replication.json">replication.json</a>.</p>
+</section>"""
+
     method_rows = [[esc(k), esc(v)] for k, v in METHOD_NOTES]
     method_tbl = table(["Component", "Rule"], method_rows)
 
@@ -805,6 +839,8 @@ def evidence_page(prov, verif, dash):
   {unver_tbl}
 </section>
 
+{repl_html}
+
 <section class="panel">
   <h2>Companion pages preserved from parallel session 533256e1</h2>
   <p>Two sessions worked on this repository at the same time. This dashboard is the integration
@@ -816,6 +852,10 @@ def evidence_page(prov, verif, dash):
     <li><a href="standings.html">Standings transcription</a></li>
     <li><a href="executive-summary.html">Earlier executive summary</a></li>
     <li><a href="flagged.html">Earlier flag register</a></li>
+    <li><a href="analysis.html">Independent validation &amp; correlation page (session 73fdd6c4)</a></li>
+    <li><a href="data.html">Verified data page (session 73fdd6c4)</a></li>
+    <li><a href="decisions.html">Decision register (session 73fdd6c4)</a></li>
+    <li><a href="verified.html">Verified artifacts (session 73fdd6c4)</a></li>
   </ul>
 </section>
 
@@ -1180,6 +1220,7 @@ def main():
     props = load("props.json")
     verif = load("verification.json")
     prov = load("provenance.json")
+    repl = load("replication.json")
     prov["license"] = "CC-BY-4.0"
 
     write("index.html", overview(snap, dash, lines, strat, avail, props, verif))
@@ -1187,7 +1228,7 @@ def main():
     write("pages/strategies.html", strategies_page(strat, dash))
     write("pages/injuries.html", injuries_page(avail, dash))
     write("pages/props.html", props_page(props, dash))
-    write("pages/evidence.html", evidence_page(prov, verif, dash))
+    write("pages/evidence.html", evidence_page(prov, verif, dash, repl))
     write("pages/questions.html", questions_page(dash))
     write("pages/suggestions.html", suggestions_page(dash))
     write("pages/review.html", review_page(verif, strat, dash, avail))

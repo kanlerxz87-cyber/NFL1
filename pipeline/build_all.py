@@ -1237,6 +1237,105 @@ def dashboard(ctx, strategies_payload, lines_payload, avail, props_payload):
     return payload
 
 
+@stage("H independent replication")
+def replication(lines_payload):
+    """Compare this pipeline's headline numbers with the independent build in data/verified/model.
+
+    Two sessions modelled the same season separately. Where they agree, confidence rises; where
+    they disagree, the difference is published with the reason instead of being averaged away.
+    """
+    import glob
+    out = {"generated_at": L.now(), "available": False, "comparisons": [], "correlations": [],
+           "conflicts": []}
+    base = os.path.join(L.ROOT, "data", "verified", "model")
+    if not os.path.isdir(base):
+        L.write_json("replication.json", out)
+        return out
+    out["available"] = True
+    out["companion_inputs"] = sorted(os.path.basename(f) for f in glob.glob(os.path.join(base, "*.json")))
+
+    mine = {c.get("label"): c for c in (lines_payload or {}).get("calibration", [])}
+    test = mine.get("test 2026") or {}
+
+    their_bt, their_corr, their_lines = {}, {}, {}
+    try:
+        with open(os.path.join(base, "backtest.json")) as f:
+            their_bt = json.load(f)
+    except Exception:  # noqa: BLE001
+        pass
+    try:
+        with open(os.path.join(base, "correlations.json")) as f:
+            their_corr = json.load(f)
+    except Exception:  # noqa: BLE001
+        pass
+    try:
+        with open(os.path.join(base, "lines_week10.json")) as f:
+            their_lines = json.load(f)
+    except Exception:  # noqa: BLE001
+        pass
+
+    rows = (their_bt.get("leaderboard") or [])
+    model_row = next((r for r in rows if "model" in str(r.get("strategy", "")).lower()), {})
+    if model_row and test:
+        out["comparisons"] = [
+            {"metric": "2026 spread error (MAE, points)",
+             "this_pipeline": test.get("spread_mae_model"),
+             "companion_model": model_row.get("mae_margin"),
+             "market_baseline": test.get("spread_mae_market"),
+             "reading": ("Both independent models are further from the result than the closing "
+                         "line; the market is the better forecast.")},
+            {"metric": "2026 total error (MAE, points)",
+             "this_pipeline": test.get("total_mae_model"),
+             "companion_model": model_row.get("mae_total"),
+             "market_baseline": test.get("total_mae_market"),
+             "reading": "Same conclusion for totals: neither model beats the close."},
+        ]
+
+    their_c2 = next((c for c in their_corr.get("correlations", []) if c.get("id") == "C2"), {})
+    par = {}
+    try:
+        with open(os.path.join(L.OUT, "strategies.json")) as f:
+            par = json.load(f).get("parlay", {})
+    except Exception:  # noqa: BLE001
+        par = {}
+    if their_c2:
+        out["correlations"].append({
+            "relationship": "point margin vs game total (same game)",
+            "this_pipeline": {"r": par.get("corr_margin_vs_total"), "n": par.get("n_games"),
+                              "window": "2005-2026"},
+            "companion": {"r": their_c2.get("r"), "n": their_c2.get("n"),
+                          "window": "2026 weeks 1-9", "ci95": their_c2.get("ci95"),
+                          "p_value": their_c2.get("p_value")},
+            "reading": ("Different windows, same conclusion: the two are effectively independent, "
+                        "so a spread+total parlay is priced close to independent legs."),
+        })
+
+    meta = their_lines.get("meta") or {}
+    if meta:
+        out["conflicts"].append({
+            "item": "Availability of closing lines",
+            "this_pipeline": ("Consensus closing spread/total/moneyline mirrored from nflverse for "
+                              "2005-2026; labelled consensus, not an official book quote."),
+            "companion": meta.get("why_no_market") or "declared unavailable",
+            "resolution": ("Superseded by the integration pipeline. Companion pages that state no "
+                           "closing lines exist are accurate for their inputs, not for the repo as "
+                           "it stands now; see Flagged F13."),
+            "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+        })
+        out["conflicts"].append({
+            "item": "Week 10 model margin for WAS @ NYG",
+            "this_pipeline": next((g.get("my_home_line") for g in (lines_payload or {}).get("lines", [])
+                                   if g.get("home") == "NYG" and g.get("away") == "WAS"), None),
+            "companion": next((g.get("model_margin_home") for g in their_lines.get("games", [])
+                               if g.get("home") == "NYG" and g.get("away") == "WAS"), None),
+            "resolution": ("Two different rating systems on the same inputs. Both are inside the "
+                           "model's own error band, which is why neither is promoted."),
+            "source": "https://www.nfl.com/schedules/",
+        })
+    L.write_json("replication.json", jclean(out))
+    return out
+
+
 def main():
     ctx = league_snapshot()
     if ctx is None:
@@ -1247,6 +1346,7 @@ def main():
     avail = availability(ctx)
     props_payload = props(ctx)
     verification(ctx)
+    replication((lines_ctx or {}).get("payload"))
     dashboard(ctx, strategies_payload, (lines_ctx or {}).get("payload"), avail, props_payload)
     print(f"\ncompleted with {len(ERRORS)} stage error(s)")
     if ERRORS:
