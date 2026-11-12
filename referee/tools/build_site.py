@@ -245,7 +245,7 @@ def main():
          ", ".join(sorted({x for o in sess["overlaps"] for x in o["modified_by_unmerged_branches"]})), "One integration owner should merge these in sequence and re-check the pages after each merge.",
          f"{GH}/branches", "Branches on GitHub"),
         ("R-14", "Irregularity", "The coordination file is rewritten wholesale by each session",
-         "Several sessions replaced COORDINATION.md instead of appending to it, and at least four claim the final integration task. This session hit a merge conflict on that file at every sync (five times). "
+         "Several sessions replaced COORDINATION.md instead of appending to it, and at least four claim the final integration task. This session hit a merge conflict on that file at every sync (six times). "
          "It resolves them by keeping main's version unchanged and re-appending its own block.",
          "All sessions", "Give each session its own section or file so that merges do not collide.", blob("COORDINATION.md"), "COORDINATION.md on main"),
         ("R-15", "Irregularity", "Club code LAR in data/standings.csv",
@@ -556,7 +556,7 @@ def main():
     b.append("<h2>How this session handled coordination</h2>")
     b.append(table([("Event", "k w"), ("What was done", "w"), ("Record", "nw")], [
         ["First claim collided with a board another session had just merged.", "Withdrew the unpushed claim, took main's board unchanged and appended a narrower claim limited to <code>referee/</code>.", a(blob("COORDINATION.md"), "COORDINATION.md")],
-        ["Conflict on COORDINATION.md at every later sync (five in total).", "Each time: kept main's file exactly as it was and re-appended this session's block with a script. No other session's text was dropped.", a(blob("referee/tools/sync_coordination.py"), "Script")],
+        ["Conflict on COORDINATION.md at every later sync (six in total).", "Each time: kept main's file exactly as it was and re-appended this session's block with a script. No other session's text was dropped.", a(blob("referee/tools/sync_coordination.py"), "Script")],
         ["Rule says rebase before every push.", "After the branch was pushed, rebasing would have required a force-push, so main was merged in instead. Logged as a deviation.", a(blob("referee/coordination_block.md"), "Board block")],
         ["Another session's published number was wrong.", "Did not edit its files. Logged a change request in COORDINATION.md and listed it under Flagged for Review.", a(blob("COORDINATION.md"), "COORDINATION.md") + " · " + a("flagged.html#R-04", "Flag R-04")],
     ]))

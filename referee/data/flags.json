@@ -1,6 +1,6 @@
 {
  "generated_by": "referee/tools/build_site.py",
- "as_of_utc": "2026-11-12 05:02:43",
+ "as_of_utc": "2026-11-12 05:03:04",
  "flags": [
   {
    "id": "R-01",
@@ -136,7 +136,7 @@
    "id": "R-14",
    "type": "Irregularity",
    "item": "The coordination file is rewritten wholesale by each session",
-   "finding": "Several sessions replaced COORDINATION.md instead of appending to it, and at least four claim the final integration task. This session hit a merge conflict on that file at every sync (five times). It resolves them by keeping main's version unchanged and re-appending its own block.",
+   "finding": "Several sessions replaced COORDINATION.md instead of appending to it, and at least four claim the final integration task. This session hit a merge conflict on that file at every sync (six times). It resolves them by keeping main's version unchanged and re-appending its own block.",
    "owner": "All sessions",
    "suggested_action": "Give each session its own section or file so that merges do not collide.",
    "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/COORDINATION.md",
