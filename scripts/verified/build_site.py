@@ -224,8 +224,8 @@ def build_lines() -> str:
     <p>Ridge-regularised opponent-adjusted points model, fitted on verified final scores:</p>
     <pre class="muted">home points = μ + offence[home] − defence[away] + HFA
 away points = μ + offence[away] − defence[home]</pre>
-    <p>Estimated from the captured season: league mean <strong>{bt.get("hfa_points_estimate","") and ""}</strong>
-    points per team, home-field advantage <strong>{bt.get("hfa_points_estimate")} points</strong>
+    <p>Estimated from the captured season: home-field advantage
+    <strong>{bt.get("hfa_points_estimate")} points</strong>
     (ridge penalty λ = {bt.get("lambda_selected_full")}, chosen by nested cross-validation inside
     the training window only).</p>
     <p class="muted">The home-field estimate is close to zero because this season's verified

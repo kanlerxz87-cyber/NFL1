@@ -65,6 +65,14 @@ def main() -> int:
   published depth chart — hence the badge. Performance impact is <strong>not</strong> measured.</p>
   {bs.table(["Team","Change","Status as stated","Replacement as stated","Source","Verification level"], qb)}
 
+  <h2>Depth-chart probe — primary evidence for the limitation above</h2>
+  <p class="muted">Three different clubs were probed on 2026-11-12. All returned the NFL.com 404 page,
+  so this is a pattern rather than one broken link.</p>
+  {bs.table(["URL probed","Result","Observed","Checked at","Conclusion"],
+    [[f'<a href="{bs.esc(r["url_probed"])}" target="_blank" rel="noopener">{bs.esc(r["url_probed"])}</a>',
+      bs.badge("danger", r["http_result"]), bs.esc(r["observed"]), bs.esc(r["checked_at"]),
+      bs.esc(r["conclusion"])] for r in A.get("depth_chart_probe", [])])}
+
   <h2>Why the deficiency model is blocked, and what unblocks it</h2>
   <div class="card">
     <table>

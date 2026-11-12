@@ -3,10 +3,10 @@
   "generated_at": "2026-11-12",
   "sources": {
     "injury_report": "https://www.nfl.com/injuries/",
-    "depth_chart_attempt": "https://www.nfl.com/teams/washington-commanders/depth-chart (404)"
+    "depth_chart_attempt": "https://www.nfl.com/teams/washington-commanders/depth-chart / https://www.nfl.com/teams/buffalo-bills/depth-chart / https://www.nfl.com/teams/kansas-city-chiefs/depth-chart (all 404)"
   },
   "coverage_note": "Only rows where the official report states a game status are counted. Players listed with a practice status but no game status are NOT counted as out or available, because the source does not assert either.",
-  "limitation": "Depth order (starter / 2nd / 3rd / 4th string) is not published by the NFL and is therefore unknown for every team. Absence counts below are verified; replacement seniority is not.",
+  "limitation": "Depth order (starter / 2nd / 3rd / 4th string) is not published by the NFL. Probed three different club URLs on 2026-11-12 (Washington, Buffalo, Kansas City): all returned the NFL.com 404 page. Replacement seniority is therefore unknown for every team, and the absence counts are the only verified part of the deficiency picture.",
   "teams": [
     {
       "team": "New England Patriots",
@@ -514,5 +514,28 @@
     "verified_questionable": 1,
     "teams_with_clean_report": 4,
     "teams_with_verified_absence": 3
-  }
+  },
+  "depth_chart_probe": [
+    {
+      "url_probed": "https://www.nfl.com/teams/washington-commanders/depth-chart",
+      "http_result": "404 page",
+      "observed": "NFL.com 404 \"Flag on the Play\" page returned",
+      "checked_at": "2026-11-12T04:32Z",
+      "conclusion": "no depth chart published at this URL"
+    },
+    {
+      "url_probed": "https://www.nfl.com/teams/buffalo-bills/depth-chart",
+      "http_result": "404 page",
+      "observed": "NFL.com 404 \"Flag on the Play\" page returned",
+      "checked_at": "2026-11-12T04:45Z",
+      "conclusion": "no depth chart published at this URL"
+    },
+    {
+      "url_probed": "https://www.nfl.com/teams/kansas-city-chiefs/depth-chart",
+      "http_result": "404 page",
+      "observed": "NFL.com 404 \"Flag on the Play\" page returned",
+      "checked_at": "2026-11-12T04:45Z",
+      "conclusion": "no depth chart published at this URL"
+    }
+  ]
 }
