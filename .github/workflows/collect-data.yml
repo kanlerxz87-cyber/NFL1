@@ -49,6 +49,26 @@ jobs:
           else
             echo "build_all.py not present yet"
           fi
+      - name: Regenerate site HTML from refreshed data
+        # build_all.py refreshes data/model/*.json, but the published site is static HTML.
+        # Without this step the live pages keep the HTML built at the last merge while the
+        # JSON advances daily (the [skip ci] commit below does not trigger pages.yml/verify.yml).
+        # gen_site.py renders index.html + the model pages; build_site.py restores the
+        # verified-session pages/lines.html it would otherwise overwrite; build_availability.py
+        # renders availability.html; normalize_nav.py re-applies the shared navigation.
+        run: |
+          if [ -f pipeline/gen_site.py ]; then
+            python pipeline/gen_site.py
+          else
+            echo "gen_site.py not present yet"
+          fi
+          if [ -f scripts/verified/build_site.py ]; then
+            python scripts/verified/build_site.py
+            python scripts/verified/build_availability.py
+            python scripts/verified/normalize_nav.py
+          else
+            echo "verified site generators not present yet"
+          fi
       - name: Publish generator log
         if: always()
         run: |
@@ -57,10 +77,10 @@ jobs:
         run: |
           git config user.name "nfl1-data-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/model pipeline 2>/dev/null || true
+          git add data/model pipeline index.html pages 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "No data changes"
           else
-            git commit -m "data: refresh model outputs from nflverse releases [skip ci]"
+            git commit -m "data: refresh model outputs and site from nflverse releases [skip ci]"
             git push origin HEAD:${{ github.ref_name }}
           fi

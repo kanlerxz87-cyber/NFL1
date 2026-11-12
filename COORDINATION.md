@@ -1000,5 +1000,75 @@ pages, from different sessions, with different formats and different scopes:
 Filenames do not collide, and neither is derived from the other. They agree
 where they overlap: both report 32 standings rows, and this subsystem's harness
 independently confirms all 28 pre-game records printed on the official injury
-page. Keeping both is deliberate — an audit is only worth anything if it was
+page. Keeping both is deliberate — an audit is only worth something if it was
 produced independently of the thing it audits.
+
+---
+
+# Session `bc923016-nfl1` — fresh verification, live-site staleness fix, integration
+
+| Item | Value |
+|---|---|
+| This session ID | `bc923016-nfl1` |
+| This session branch | `arena/bc923016-nfl1` |
+| Base commit | `c09c739bd5825981e97dddeefba5de6bd89d36fc` (identical to `origin/main` at start) |
+| Contribution | Independent fresh verification of standings + injuries against live nfl.com; root-caused and fixed a live-site HTML-staleness bug; added decision record D06 + suggestion S13; made the verified-lab README pointer durable |
+
+The branch began as a clean copy of `main` (no prior work on it), so this session performed an
+independent review pass rather than integrating new branches.
+
+## Task board (this session)
+
+| ID | Task | Status | Owner | File scope | Sources / verification / irregularities |
+|---|---|---|---|---|---|
+| B01 | Fresh independent verification of standings + injuries against live nfl.com | done | `bc923016` | `COORDINATION.md` | see Verification below |
+| B02 | Live-site HTML staleness bug: root cause + fix | done | `bc923016` | `.github/workflows/collect-data.yml`, `index.html`, `pages/*.html` | see Staleness bug below |
+| B03 | Decision record D06 + suggestion S13 (staleness guard) | done | `bc923016` | `pipeline/content.py`, `pages/suggestions.html` | rendered on the Suggestions page |
+| B04 | Durable README pointer to verified-lab (request R-a2cea255-01) | done | `bc923016` | `tools/build.py` | template edit; README already had the pointer |
+| B05 | Final integration: regenerate, link check, gates, PR, merge, deploy | done | `bc923016` | `COORDINATION.md` | see PR / merge below |
+
+## The staleness bug (B02)
+
+**Root cause.** `collect-data.yml` refreshes `data/model/*.json` daily but commits the result with
+`[skip ci]`, which suppresses the `pages.yml` and `verify.yml` workflows. `pipeline/gen_site.py` — which
+renders the root `index.html` and the model pages from that JSON — is not run by either workflow, so the
+published HTML kept the numbers from the last merge while the JSON advanced every day.
+
+**Measured on 2026-11-12.** Committed HTML stamp `2026-11-12T05:07:59` vs data `generated_at`
+`2026-11-12T18:53:41`; the landing page showed `103` starters flagged and `20/254` mirrored-feed
+coverage (mismatch) while the fresh data had `113` starters and `276/276` (matched).
+
+**Fix.** Added a `Regenerate site HTML from refreshed data` step to `collect-data.yml` that runs
+`gen_site.py` + `build_site.py` + `build_availability.py` + `normalize_nav.py` and commits
+`index.html pages` together with the JSON. The site was then regenerated locally from the fresh 18:53
+data so the live pages match the data immediately. Note: `gen_site.py` overwrites `pages/lines.html`,
+which is owned by `build_site.py`; running `build_site.py` after `gen_site.py` restores the
+verified-session version, so the chain order matters.
+
+## Fresh verification (B01)
+
+- **Standings** — fetched `https://www.nfl.com/standings/league/2026/reg` (2026-11-12) and compared to
+  `data/model/verification.json`. BUF 7-1 (256/187), SF 7-1 (235/156), CHI 7-2 (241/184), NYG 5-2-1
+  (182/172) all match exactly. The automated check reports 32/32 rows matched.
+- **Injuries** — fetched `https://www.nfl.com/injuries/` (Week 10, 2026-11-12) and compared to
+  `data/model/official_injuries.json` (276 rows). WAS (Lucas Patrick Out/concussion, Colson Yankoff
+  Out/knee), NYG (Malik Harrison questionable/groin), NE (Ben Brown, Carlton Davis III, TreVeyon
+  Henderson all Out) all match the scraped rows exactly.
+- **Site gates** — `scripts/verified/check_site.py`: 20 pages, all local links resolve, navigation
+  complete (exit 0). `scripts/verified/validate_verified.py`: all hard checks pass (exit 0).
+
+## Irregularities logged
+
+- **V3 (resolved in data, unverifiable in sandbox)** — The mirrored-feed coverage check now reports
+  `276/276` for week 10 (was `20/254` at 05:07). If correct, this resolves irregularity V3 (the mirror
+  is now complete for week 10). The mirror file (`injuries_2026.csv`) is a GitHub release asset and cannot
+  be downloaded from the Arena sandbox, so the 276/276 could not be independently re-derived here; it was
+  produced by CI (collect-data, 18:52 UTC) where the mirror was present. **Flagged for review.**
+- **F-014 (two site generations)** — confirmed, not resolved (pre-existing). `gen_site.py` renders the
+  root `index.html` + model pages; `tools/build.py` renders root-level pages; `scripts/verified/
+  build_site.py` renders `pages/lines.html` + companion pages. The new regeneration chain reconciles them
+  but the duplication remains a maintenance risk.
+
+## PR / merge
+
+- (filled after the merge below)
