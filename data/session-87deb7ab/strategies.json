@@ -1,0 +1,476 @@
+{
+  "meta": {
+    "note": "Strategy lab specification. Everything here is a DESIGN, not a result. No strategy on this page has been backtested, because no historical odds archive has been ingested (Q-011). Any cell that would contain a measured result is blank and flagged.",
+    "status_meaning": {
+      "Proposed": "Described but never tested. No claim of profitability is made.",
+      "Specified": "Method fully defined, awaiting data.",
+      "Not started": "Identified as needed, not yet designed."
+    }
+  },
+  "pipeline": [
+    {
+      "step": "1",
+      "name": "Ingest",
+      "detail": "Pull every Tier 1 and Tier 2 input and stamp it with the exact retrieval time. Never impute a missing value.",
+      "status": "Partially implemented",
+      "note": "Week 10 injury report and 2026 standings ingested. No odds feed, no transactions feed, no schedule."
+    },
+    {
+      "step": "2",
+      "name": "Normalise",
+      "detail": "Map every input to a stable identifier (game, team, player, position group) so that a player who changes team is still the same player.",
+      "status": "Not started",
+      "note": "Blocked until an official player identifier source is confirmed."
+    },
+    {
+      "step": "3",
+      "name": "Feature",
+      "detail": "Turn normalised inputs into the signal values listed in the signal catalogue.",
+      "status": "Not started",
+      "note": "Depends on step 2 and on the depth inference (S-007)."
+    },
+    {
+      "step": "4",
+      "name": "Model",
+      "detail": "Produce a probability for each market outcome, not a pick.",
+      "status": "Not started",
+      "note": "Model class not chosen; choosing it before having data would be guesswork."
+    },
+    {
+      "step": "5",
+      "name": "Calibrate",
+      "detail": "Check that outcomes called 60% actually happen 60% of the time. Recalibrate on a held-out window.",
+      "status": "Not started",
+      "note": "Requires historical results."
+    },
+    {
+      "step": "6",
+      "name": "De-vig",
+      "detail": "Strip the book's margin from the market price before any comparison. Record which method was used.",
+      "status": "Specified",
+      "note": "See suggestion S-003. Default: proportional; sensitivity check: Shin."
+    },
+    {
+      "step": "7",
+      "name": "Price",
+      "detail": "Convert the model probability to a fair price in the market's own format. This is the 'own line' the brief asks for.",
+      "status": "Specified",
+      "note": "Fair price conversion is pure arithmetic from the model probability."
+    },
+    {
+      "step": "8",
+      "name": "Compare",
+      "detail": "Edge exists only where the de-vigged market price is worse than our fair price by more than the cost hurdle.",
+      "status": "Specified",
+      "note": "Cost hurdle anchored to Nevada sports pool hold, 6.06% fiscal-year-to-date (SRC-007)."
+    },
+    {
+      "step": "9",
+      "name": "Gate",
+      "detail": "Run gates G0 to G5 in order. Fail means return to research, not a waiver.",
+      "status": "Specified",
+      "note": "See the gates table."
+    },
+    {
+      "step": "10",
+      "name": "Size",
+      "detail": "Fractional Kelly, one quarter, capped at 1% of bankroll per position (S-013), until the owner sets otherwise.",
+      "status": "Specified",
+      "note": "Blocked on the bankroll figure (Q-009)."
+    },
+    {
+      "step": "11",
+      "name": "Log",
+      "detail": "Record the bet, the price captured at placement, the model probability and the strategy version, all at placement time.",
+      "status": "Not started",
+      "note": "This is what makes CLV measurable. Build it before the first bet, not after."
+    },
+    {
+      "step": "12",
+      "name": "Score",
+      "detail": "Capture the closing price, compute CLV, and grade against the gates - not against whether the bet won.",
+      "status": "Not started",
+      "note": "Depends on step 11 and on an odds archive."
+    }
+  ],
+  "formulas": [
+    {
+      "id": "F-A",
+      "name": "Implied probability from American odds",
+      "formula": "positive odds: p = 100 / (odds + 100)   |   negative odds: p = |odds| / (|odds| + 100)",
+      "kind": "Arithmetic identity",
+      "note": "Exact. Not an estimate."
+    },
+    {
+      "id": "F-B",
+      "name": "Proportional de-vig",
+      "formula": "p_i_true = p_i_raw / (p_1_raw + p_2_raw + ... + p_n_raw)",
+      "kind": "Chosen method",
+      "note": "One of at least four competing methods. Which best recovers realised frequency is untested here - see S-003."
+    },
+    {
+      "id": "F-C",
+      "name": "Fair American odds from a probability",
+      "formula": "p >= 0.5: odds = -100*p/(1-p)   |   p < 0.5: odds = +100*(1-p)/p",
+      "kind": "Arithmetic identity",
+      "note": "Exact."
+    },
+    {
+      "id": "F-D",
+      "name": "Closing Line Value",
+      "formula": "CLV = p_close_our_side - p_taken_our_side, using de-vigged probabilities on both sides",
+      "kind": "Metric definition",
+      "note": "Positive CLV means we took a better price than the market closed at. It does not by itself prove the bet was good."
+    },
+    {
+      "id": "F-E",
+      "name": "Fractional Kelly stake",
+      "formula": "f* = k * (b*p - q) / b, where b = decimal odds - 1, q = 1 - p, k = fraction (proposed 0.25)",
+      "kind": "Standard result",
+      "note": "Full Kelly (k=1) is deliberately rejected: it maximises growth only if p is exact, and p never is."
+    },
+    {
+      "id": "F-F",
+      "name": "Breakeven win rate at a given price",
+      "formula": "breakeven = p_implied_de_vigged ; a strategy must beat this, not 50%",
+      "kind": "Arithmetic identity",
+      "note": "The most common error in betting analysis is comparing a win rate to 50% instead of to the price-implied breakeven."
+    }
+  ],
+  "signals": [
+    {
+      "id": "SIG-001",
+      "name": "Practice-participation delta",
+      "cat": "Injury",
+      "hypothesis": "A player who deteriorates across the three practice days is more likely to be unavailable than a single day's status implies, and the market under-reacts to the trajectory rather than the level.",
+      "inputs": "Official practice participation by day (SRC-001)",
+      "status": "Proposed",
+      "gate": "All",
+      "note": "The official report shows only the current day's status on the page surface; the day-by-day history must be captured as it is filed, or it is lost.",
+      "src": "SRC-001"
+    },
+    {
+      "id": "SIG-002",
+      "name": "Offensive line continuity",
+      "cat": "Injury",
+      "hypothesis": "The count of offensive linemen not participating is more predictive of offensive output than any single named player's status.",
+      "inputs": "Official injury report, position filter (SRC-001)",
+      "status": "Proposed",
+      "gate": "All",
+      "note": "Directly testable today: the Week 10 report gives position for every listed player.",
+      "src": "SRC-001"
+    },
+    {
+      "id": "SIG-003",
+      "name": "Secondary depletion",
+      "cat": "Injury",
+      "hypothesis": "A defence missing multiple defensive backs concedes more explosive passes than the standings-based expectation implies.",
+      "inputs": "Official injury report, position filter (SRC-001); standings pass defence proxy (SRC-002)",
+      "status": "Proposed",
+      "gate": "All",
+      "note": "Blocked on the depth-inference work (S-007) for the 2nd/3rd/4th string weighting.",
+      "src": "SRC-001"
+    },
+    {
+      "id": "SIG-004",
+      "name": "Pass-rush availability",
+      "cat": "Injury",
+      "hypothesis": "Edge defender availability shifts pressure rate, which shifts the opposing quarterback's efficiency more than the spread accounts for.",
+      "inputs": "Official injury report (SRC-001)",
+      "status": "Proposed",
+      "gate": "All",
+      "note": "Same blocker as SIG-003.",
+      "src": "SRC-001"
+    },
+    {
+      "id": "SIG-005",
+      "name": "Confirmed quarterback change",
+      "cat": "Lineups",
+      "hypothesis": "A confirmed change of starting quarterback is the single largest lineup-driven repricing event, and the market moves on the announcement rather than on the underlying quality gap.",
+      "inputs": "Official NFL.com news (SRC-003) and official transactions (SRC-011)",
+      "status": "Proposed",
+      "gate": "All",
+      "note": "Demonstrably necessary: the Seahawks case (F-004) shows this information never appears in the injury report.",
+      "src": "SRC-003"
+    },
+    {
+      "id": "SIG-006",
+      "name": "Backfield depth stress",
+      "cat": "Injury",
+      "hypothesis": "When the top two running backs on a team are both limited or worse, the offence shifts pass-heavy in a way the market prices late.",
+      "inputs": "Official injury report (SRC-001)",
+      "status": "Proposed",
+      "gate": "All",
+      "note": "Requires the depth inference to know who the 'top two' are.",
+      "src": "SRC-001"
+    },
+    {
+      "id": "SIG-007",
+      "name": "Rest and bye differential",
+      "cat": "Schedule",
+      "hypothesis": "A team coming off a bye against one that is not, and teams on equal rest, differ in second-half performance.",
+      "inputs": "Official schedule (SRC-010)",
+      "status": "Proposed",
+      "gate": "All",
+      "note": "Blocked: bye weeks are currently only inferred (F-008) and the schedule has not been ingested.",
+      "src": "SRC-010"
+    },
+    {
+      "id": "SIG-008",
+      "name": "Travel and time-zone shift",
+      "cat": "Schedule",
+      "hypothesis": "West coast teams travelling east for an early kickoff underperform their own baseline.",
+      "inputs": "Official schedule (SRC-010); official stadium locations",
+      "status": "Proposed",
+      "gate": "All",
+      "note": "Blocked: home/away is not currently asserted (F-009).",
+      "src": "SRC-010"
+    },
+    {
+      "id": "SIG-009",
+      "name": "Pace and neutral-situation rate",
+      "cat": "Efficiency",
+      "hypothesis": "Teams that run plays faster than the market's implied pace generate more total plays, which lifts both team totals and volume-based player props.",
+      "inputs": "Official play-by-play (source to be confirmed)",
+      "status": "Proposed",
+      "gate": "All",
+      "note": "Blocked on a play-by-play source (Q-021).",
+      "src": "SRC-009"
+    },
+    {
+      "id": "SIG-010",
+      "name": "Red-zone efficiency regression",
+      "cat": "Efficiency",
+      "hypothesis": "Red-zone touchdown rate is noisy and mean-reverting; teams running hot convert fewer field goals, which is mispriced in team totals and kicker props.",
+      "inputs": "Official play-by-play (source to be confirmed)",
+      "status": "Proposed",
+      "gate": "All",
+      "note": "Blocked as above.",
+      "src": "SRC-009"
+    },
+    {
+      "id": "SIG-011",
+      "name": "Turnover regression",
+      "cat": "Efficiency",
+      "hypothesis": "Takeaway rate is the least repeatable team statistic in football; teams riding an extreme takeaway rate are mispriced in the spread.",
+      "inputs": "Official play-by-play (source to be confirmed)",
+      "status": "Proposed",
+      "gate": "All",
+      "note": "Blocked as above.",
+      "src": "SRC-009"
+    },
+    {
+      "id": "SIG-012",
+      "name": "Weather effect on totals and kicking",
+      "cat": "Environment",
+      "hypothesis": "Wind above a threshold and precipitation depress passing volume and kicking accuracy more than the total accounts for.",
+      "inputs": "NOAA / National Weather Service (SRC-008); official venue and surface data",
+      "status": "Proposed",
+      "gate": "All",
+      "note": "Blocked: no weather data ingested, and venue dome status is unverified.",
+      "src": "SRC-008"
+    },
+    {
+      "id": "SIG-013",
+      "name": "Divisional familiarity",
+      "cat": "Schedule",
+      "hypothesis": "Divisional games are lower scoring and more likely to be decided by a field goal than the market's generic spread implies.",
+      "inputs": "Official standings divisions (SRC-002); official schedule (SRC-010)",
+      "status": "Proposed",
+      "gate": "All",
+      "note": "Partially unblocked: divisions are verified from official standings; schedule is not.",
+      "src": "SRC-010"
+    },
+    {
+      "id": "SIG-014",
+      "name": "Lookahead and sandwich spots",
+      "cat": "Schedule",
+      "hypothesis": "A team with a high-profile game next week underperforms in the present week.",
+      "inputs": "Official schedule (SRC-010)",
+      "status": "Proposed",
+      "gate": "All",
+      "note": "Blocked on the schedule.",
+      "src": "SRC-010"
+    },
+    {
+      "id": "SIG-015",
+      "name": "Points-versus-wins divergence",
+      "cat": "Efficiency",
+      "hypothesis": "A team whose win record outruns its scoring margin is overpriced; the reverse is underpriced.",
+      "inputs": "Official standings PF and PA (SRC-002)",
+      "status": "Proposed",
+      "gate": "All",
+      "note": "Fully unblocked: PF and PA are verified official values for all 32 teams.",
+      "src": "SRC-002"
+    },
+    {
+      "id": "SIG-016",
+      "name": "Primetime overreaction",
+      "cat": "Market",
+      "hypothesis": "The public over-reacts to a primetime blowout, and the following week's line for that team is biased.",
+      "inputs": "Official results; market prices (no official source - F-002)",
+      "status": "Proposed",
+      "gate": "All",
+      "note": "Blocked on an odds feed.",
+      "src": "SRC-006"
+    },
+    {
+      "id": "SIG-017",
+      "name": "Target share versus prop line",
+      "cat": "Player props",
+      "hypothesis": "A receiver whose target share exceeds what his receiving-yard prop implies is underpriced, controlling for the game total.",
+      "inputs": "Official play-by-play (source to be confirmed); market prop lines (no official source)",
+      "status": "Proposed",
+      "gate": "All",
+      "note": "Blocked on both inputs.",
+      "src": "SRC-005"
+    },
+    {
+      "id": "SIG-018",
+      "name": "Correlated same-game combination",
+      "cat": "Player props",
+      "hypothesis": "Legitimately correlated legs are underpriced by naive multiplication, but only where the correlation has actually been estimated.",
+      "inputs": "Correlation register; market prop lines (no official source)",
+      "status": "Proposed",
+      "gate": "All",
+      "note": "Explicitly blocked until correlations are estimated - see F-010. This signal must not be used before then.",
+      "src": "SRC-005"
+    }
+  ],
+  "gates": [
+    {
+      "id": "G0",
+      "name": "Data integrity",
+      "question": "Can every input be traced to a Tier 1 or Tier 2 source, and was any missing value imputed?",
+      "threshold": "Zero imputed values. Every input carries a source id and a retrieval timestamp.",
+      "on_fail": "Return to research. Imputation is not permitted.",
+      "status": "Specified",
+      "src": "SRC-000"
+    },
+    {
+      "id": "G1",
+      "name": "Pre-registration",
+      "question": "Was the hypothesis written down before the results were looked at?",
+      "threshold": "Hypothesis, bet universe, price source and bet-timing rule all fixed and timestamped before scoring.",
+      "on_fail": "Return to research. A hypothesis formed after seeing results is a story, not a strategy.",
+      "status": "Specified",
+      "src": "SRC-000"
+    },
+    {
+      "id": "G2",
+      "name": "Sample size",
+      "question": "Is there enough data for luck to be a plausible explanation of nothing?",
+      "threshold": "PROPOSED: at least 1,000 graded bets, spanning at least 2 seasons and at least 200 distinct games.",
+      "on_fail": "Return to research. Threshold is a proposal awaiting ratification - it is a design choice, not a measured fact.",
+      "status": "Proposed",
+      "src": "SRC-000"
+    },
+    {
+      "id": "G3",
+      "name": "Economic hurdle",
+      "question": "Does the estimated edge clear the cost of doing business?",
+      "threshold": "Estimated edge after de-vig must exceed the cost hurdle. Reference hurdle: Nevada sports pool hold, 6.06% fiscal-year-to-date (SRC-007).",
+      "on_fail": "Return to research. An edge smaller than the margin is not an edge.",
+      "status": "Specified",
+      "src": "SRC-007"
+    },
+    {
+      "id": "G4",
+      "name": "Out-of-sample",
+      "question": "Does it survive data it was not built on?",
+      "threshold": "On a frozen, single-use holdout: mean CLV above zero, and realised return no worse than the negative of the cost hurdle.",
+      "on_fail": "Return to research. In-sample performance is not evidence.",
+      "status": "Specified",
+      "src": "SRC-000"
+    },
+    {
+      "id": "G5",
+      "name": "Luck separation",
+      "question": "Could a random bettor have produced this?",
+      "threshold": "Three independent checks must all pass: binomial test of the win rate against the price-implied breakeven; bootstrap 95% confidence interval on mean CLV excluding zero; Monte Carlo comparison against a random bettor placing the same number of bets at the same price distribution, p below 0.05.",
+      "on_fail": "Return to research. Failing any one of the three is failing the gate.",
+      "status": "Specified",
+      "src": "SRC-000"
+    }
+  ],
+  "leaderboard": {
+    "status": "Proposed",
+    "ranking_metric": "Mean closing line value, de-vigged (primary)",
+    "tiebreak": "Calibration error - lower is better",
+    "reported_not_scored": "Realised profit and loss, sample size, longest drawdown",
+    "rationale": "Profit is not a skill measure over any sample we can realistically obtain. CLV is observable immediately after each bet and is not contaminated by result variance. Calibration is used as a tiebreak so that a strategy cannot win by simply agreeing with the market on easy games.",
+    "minimum_bets_floor": "PROPOSED: 500 graded bets before a strategy appears on the board at all.",
+    "anti_gaming_rules": [
+      "Strategy versions are immutable once registered (S-010).",
+      "The holdout window is scored once and never re-tuned afterwards.",
+      "Every bet is logged at placement time with the price captured at that moment.",
+      "All strategies are corrected for multiple comparisons across the board, because a leaderboard of many strategies guarantees some will look good by chance.",
+      "Sequential peeking is not permitted: a strategy cannot be declared skilful the moment it crosses a threshold. Evaluation points are fixed in advance."
+    ],
+    "rewards": {
+      "status": "Awaiting owner decision (Q-013)",
+      "proposed": [
+        "Tier 1 - Top CLV, minimum bets met: promoted to live staking with the largest allocation.",
+        "Tier 2 - Positive CLV with a confidence interval excluding zero: promoted to live staking with a reduced allocation.",
+        "Tier 3 - Passes G0-G4 but not G5: stays in research, no allocation.",
+        "Fail - Any gate failed: returned to research."
+      ],
+      "note": "Rewards are deliberately tied to the gates, not to profit, so that the incentive is to find skill rather than to find variance."
+    }
+  },
+  "skill_vs_luck": {
+    "principle": "Luck is removed by measuring the decision, not the outcome. A bet can be correct and lose. The only measurable evidence of skill available before a long results sample exists is whether the bettor consistently obtained a better price than the market's final price.",
+    "methods": [
+      {
+        "id": "M-1",
+        "name": "Closing Line Value",
+        "rank": "Primary",
+        "detail": "Compare the de-vigged probability of the price taken against the de-vigged probability of the closing price. Available immediately; not contaminated by result variance.",
+        "limitation": "Rewards agreement with the closing market. If the closing market is systematically wrong, CLV will not detect it."
+      },
+      {
+        "id": "M-2",
+        "name": "Binomial test against price-implied breakeven",
+        "rank": "Secondary",
+        "detail": "Test the win rate against the breakeven implied by the prices taken, not against 50%.",
+        "limitation": "Low power at realistic sample sizes; a genuinely skilled bettor can fail this test for seasons."
+      },
+      {
+        "id": "M-3",
+        "name": "Bootstrap confidence interval on mean CLV",
+        "rank": "Secondary",
+        "detail": "Resample the bet record to get a confidence interval that makes no distributional assumption about CLV.",
+        "limitation": "A wide interval is the honest answer at small samples, and it should be published rather than hidden."
+      },
+      {
+        "id": "M-4",
+        "name": "Monte Carlo null model",
+        "rank": "Secondary",
+        "detail": "Simulate a random bettor placing the same number of bets at the same price distribution, many times, and see how often the null beats the strategy.",
+        "limitation": "Only as good as the null; a null that ignores bet selection will overstate skill."
+      },
+      {
+        "id": "M-5",
+        "name": "Calibration and log loss",
+        "rank": "Secondary",
+        "detail": "Check that outcomes predicted at p occur with frequency p. A strategy can beat the closing line and still be badly calibrated.",
+        "limitation": "Needs a large sample to distinguish."
+      },
+      {
+        "id": "M-6",
+        "name": "Multiple-comparisons correction",
+        "rank": "Mandatory",
+        "detail": "With many strategies on a leaderboard, some will show significant results by chance alone. Correct across the board.",
+        "limitation": "Reduces power; that is the correct trade."
+      },
+      {
+        "id": "M-7",
+        "name": "Sequential testing guard",
+        "rank": "Mandatory",
+        "detail": "Fix the evaluation points in advance. Declaring skill the moment a threshold is crossed invalidates the test.",
+        "limitation": "Requires patience."
+      }
+    ],
+    "what_we_cannot_yet_do": "Every method above needs a bet record, and a bet record needs an odds feed. None of them has been run. No strategy on this site has a measured result."
+  }
+}

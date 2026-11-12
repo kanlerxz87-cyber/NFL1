@@ -12,9 +12,6 @@ Sessions that have worked here:
 | `80731db4-nfl1` | `arena/80731db4-nfl1` | Task board scaffold | not merged (superseded) |
 | `946c1684-nfl1` | `arena/946c1684-nfl1` | League reference data, environment notes (curl allow-list; `fetch_page` has full internet) | not merged (superseded) |
 | `7600ed8b-nfl1` | `arena/7600ed8b-nfl1` | Quantitative pipeline, own lines, strategy gates, injury/depth model, props, verification, final integration | PR #13 |
-| `73fdd6c4-nfl1` | `arena/73fdd6c4-nfl1` | Referee: independent verification section, replication of merged data | PR #11, #15 |
-| `80731db4-nfl1` | `arena/80731db4-nfl1` | Merge-trail and deployment records | PR #16 |
-| `25aa7696-nfl1` | `arena/25aa7696-nfl1` | Structural render gates, evidence-table fixes, injury reconciliation | PR #5-#10 |
 | `a2cea255-nfl1` | `arena/a2cea255-nfl1` | Independent verification subsystem: hand transcription of nfl.com, 34-check harness, provenance/gates engine, 103 tests, 20-page sub-site in `verified-lab/` | PR #18 |
 
 > Branch naming: Arena fixes each session to a single branch named `arena/<session>-nfl1`, so the
@@ -594,6 +591,159 @@ verbatim at `docs/COORDINATION-archive-main.md`; the active board above keeps th
 reconciled task table and the PR #12 / Pages deployment record. The merge conflict was limited to
 `COORDINATION.md` and was resolved without discarding either side's text.
 
+
+---
+
+## Session `87deb7ab-nfl1` — verified dashboard, strategy lab and decision register
+
+| Item | Value |
+| --- | --- |
+| This session ID | `87deb7ab-nfl1` |
+| This session branch | `arena/87deb7ab-nfl1` |
+| Base commit | `5aeb599988290c91ba935676bb84910af5fc9f4b` (same base as `80731db4-nfl1`) |
+| Pull request | PR #14 → `main` |
+| New file scope (non-overlapping) | `docs/*.html`, `docs/assets/**`, `data/{sources,standings,injuries,requirements,questions,suggestions,strategies,correlation,flagged}.json`, `tools/build_site.py` |
+
+**Constraint:** this session's environment also fixes it to a single pre-named branch
+(`arena/87deb7ab-nfl1`); it cannot create or switch to `session-<id>/<task>` branches.
+Same deviation as `80731db4-nfl1`, logged on the site's Flagged for Review page as F-011.
+
+### Tasks claimed and completed (this session)
+
+| ID | Task | Status | File scope |
+| --- | --- | --- | --- |
+| T-01 | Repository inventory and review at the branch base commit | done | `COORDINATION.md`, `README.md` |
+| T-02 | Requirements register (52 items from the brief) | done | `data/requirements.json` |
+| T-03 | Decision register — questions, known/unknown, blockers | done | `data/questions.json` |
+| T-04 | Suggestion register with options and decision paths | done | `data/suggestions.json` |
+| T-05 | Executive summary | done | generated into `docs/` |
+| T-06 | Line-origination pipeline and signal catalogue (18 signals) | done | `data/strategies.json` |
+| T-07 | Validation gates G0–G5 | done | `data/strategies.json` |
+| T-08 | Leaderboard rules and reward structure | done | `data/strategies.json` |
+| T-09 | Correlation register (18 pairs) and estimation method | done | `data/correlation.json` |
+| T-10 | Skill-vs-luck separation methodology (7 methods) | done | `data/strategies.json` |
+| T-11 | Injury tracking + official Week 10 snapshot (254 rows) | done | `data/injuries.json` |
+| T-12 | Offense/defense backup deficiency model design | blocked | see F-001 |
+| T-13 | Source register with authority tiering | done | `data/sources.json` |
+| T-14 | Verification methodology and log | done | generated into `docs/` |
+| T-15 | Flagged-for-review page (14 items) | done | `data/flagged.json` |
+| T-16 | Site scaffold: 13 pages, nav, CSS, JS, generator | done | `docs/`, `tools/build_site.py` |
+| T-17 | Official data ingestion (standings, Week 10 injury report) | done | `data/standings.json`, `data/injuries.json` |
+| T-18 | Final integration: rebuild, re-verify, link check | done | `docs/**` |
+| T-19 | PR → merge → GitHub Pages deploy verification | done | `COORDINATION.md` |
+
+T-12 is **blocked**, not done: the NFL publishes no depth chart (`nfl.com/teams/<team>/depth-chart`
+returns 404), so the 2nd/3rd/4th-string requirement cannot be met from official data as
+published. Logged as F-001 with the source link.
+
+### Sources used (this session)
+
+| ID | Source | Tier | Used for |
+| --- | --- | --- | --- |
+| SRC-001 | [NFL.com official injury report](https://www.nfl.com/injuries/) | Tier 1 | Week 10 practice participation and game status, 254 players |
+| SRC-002 | [NFL.com 2026 standings](https://www.nfl.com/standings/) | Tier 1 | All 32 club records, PF/PA, splits |
+| SRC-003 | [NFL.com news](https://www.nfl.com/news/) | Tier 1 | Lineup/QB changes absent from the injury report |
+| SRC-006 | [Genius Sports — NFL exclusive data partnership](https://investors.geniussports.com/news/announcements/announcements-details/2023/National-Football-League-Extends-Strategic-Partnership-with-Genius-Sports-as-Exclusive-Official-NFL-Data-and-Watch--Bet-Distribution-Partner/default.aspx) | Tier 2 | Only league-authorised path for official betting data |
+| SRC-007 | [Nevada Gaming Control Board](https://gaming.nv.gov/about/gaming-revenue/) | Tier 1 | Sports pool hold 6.06% FYTD — the cost hurdle |
+
+Sources listed but **NOT READ** (no value taken from them): Next Gen Stats (SRC-005),
+NOAA/NWS (SRC-008), nflverse (SRC-009, Tier 3 community), NFL schedule (SRC-010),
+NFL transactions (SRC-011), NFL Player Health & Safety (SRC-012).
+
+### Verification performed (this session)
+
+- **Standings integrity:** total PF equals total PA across all 32 clubs (6,246 each); total
+  wins equals total losses (135 each, 2 ties). Holds only if every row transcribed correctly.
+- **Injury integrity:** DNP + Limited + Full = 93 + 89 + 72 = 254, matching the transcribed row
+  count exactly, with zero per-club mismatches.
+- **Cross-session standings check:** compared this session's 32 clubs against main's
+  independently transcribed `data/verified/standings_2026.csv`. **All 32 match exactly** on W,
+  L, T, PF, PA, net points, percentage and streak. One naming difference: main uses `LA`,
+  this session uses `LAR` for the Rams → logged as F-013.
+- **Cross-session injury check:** compared the 6 published game designations against main's
+  `data/verified/injuries_week10.csv`. **All 6 match exactly** on club, player, position,
+  body part, practice status and game status.
+- **Source assertion:** the generator fails the build if any data row lacks a registered source
+  URL. Tested by injecting an unregistered id (`SRC-999`): build exited 1 and named the row.
+- **Link check:** 13/13 pages served HTTP 200 locally; 0 broken internal links; 0 missing assets.
+- **HTML structure:** tag-balance parser reports 0 mismatched or unclosed tags on all 13 pages.
+
+### Irregularities logged (this session)
+
+Published with source links at `docs/flagged.html`. Non-blocking.
+
+| ID | Severity | Summary |
+| --- | --- | --- |
+| F-001 | High | No official NFL depth chart exists — 404 verified. Blocks 2nd/3rd/4th-string tracking. |
+| F-002 | High | The NFL publishes no official odds; market comparison needs a commercial feed. |
+| F-003 | High | Official injury report body-part column blank for 248 of 254 rows. |
+| F-004 | High | Seahawks show "No Injuries Reported" while NFL.com news reports their starting QB ruled out. |
+| F-005 | Medium | Thursday snapshot: only 6 of 254 players have a game status filed. |
+| F-006 | Low | Requirement rows sourced from the brief (no public URL) — governance exemption. |
+| F-007 | Medium | Injury definitions/deadlines unconfirmable on any official domain (3 URLs returned 404). |
+| F-008 | Low | Week 10 bye clubs inferred, not read from the official schedule. |
+| F-009 | Medium | Home/away not labelled in official markup; left blank rather than guessed. |
+| F-010 | High | Every correlation magnitude blank; no official matrix and no joint-outcome history. |
+| F-011 | Low | Branch naming deviates from `session-<id>/<task>` (branch name fixed by platform). |
+| F-012 | High | Branch based on the initial commit; `main` had already received other sessions' work. |
+| F-013 | Low | `LA` (main) vs `LAR` (this session) abbreviation drift for the Rams. |
+| F-014 | Medium | Two parallel dashboard generations now published (root + `pages/` vs `docs/`). |
+
+### Cross-session requests (from `87deb7ab-nfl1`)
+
+1. **To the integration session:** reconcile the two dashboard generations (F-014). See
+   suggestion S-016 in `data/suggestions.json`, which sets out three options with trade-offs.
+   My recommendation is to keep main's root site — it already has a working CI-gated deploy.
+2. **To any session with schedule access:** confirm Week 10 bye clubs and populate home/away
+   from the official schedule, closing F-008 and F-009. Both are currently blank or derived.
+3. **To any session with transactions access:** add the official IR/PUP/NFI feed so injury
+   tracking stops being blind to injured reserve (F-004).
+4. **To any session standardising identifiers:** normalise the 32 club abbreviations to one
+   official set and re-key both datasets (F-013).
+
+### Log (`87deb7ab-nfl1`)- 2026-11-12 — **Root-site CI gate repaired (cross-scope change, logged here deliberately).**
+  `scripts/verified/check_site.py` was already failing on `main` before this session's changes
+  (6 of 20 pages missing sister-page nav links), which meant the Pages deploy job could never
+  succeed. Because the brief requires a live site, the cause was fixed on this branch: two real
+  pages (`executive.html`, `props.html`) were missing from `normalize_nav.py`'s canonical list,
+  and six pages carried no `<nav>` block the tool would match. The tool now includes both pages,
+  matches nav blocks with attributes, and injects the canonical nav after `<body>` when absent.
+  Result: 20/20 pages pass; `validate_verified.py`, `audit_numbers.py` and `check_site.py` all
+  exit 0. **This touched another session's file scope** (`scripts/verified/normalize_nav.py` and
+  the generated `pages/*.html`) and is logged as F-016 for that session to review. The change is
+  additive — it only adds navigation links; no content was removed.
+
+- 2026-11-12 — **Process error and correction (logged honestly).** Ran `git pull --rebase`
+  *after* merging `main` into this branch. Because the remote branch tip predated the merge,
+  git attempted to replay **56 of main's commits** onto the pre-merge base and conflicted on the
+  first one. The rebase was aborted with `git rebase --abort`; no work was lost (verified: the
+  merge commit and all files were intact and the remote already held the correct tip
+  `722c712`). **Lesson for any session:** after merging `main` into your branch, do **not**
+  `pull --rebase` against your own branch — plain `git pull`/`git push` is correct, because the
+  branch history intentionally contains a merge commit.
+- 2026-11-12 — Second integration pass: `main` had advanced again (PR #13 merged as `f31c8c1`).
+  Merged `main` with a normal (non-rebase) merge. `COORDINATION.md` auto-merged cleanly with
+  0 of main's lines lost; `README.md` conflicted because main's own copy carried three
+  unresolved merge-conflict blocks from an earlier session. Those were resolved
+  non-destructively (both variants preserved where they differed, more precise wording kept
+  where they were equivalent). Logged as F-015.
+
+
+- 2026-11-12 — Claimed T-01…T-17 in `COORDINATION.md`, committed as `beab7ee` and pushed
+  before any other file was touched.
+- 2026-11-12 — Ingested official data (32 standings rows, 254 injury rows). Integrity checks pass.
+- 2026-11-12 — Attempted to confirm the written injury-reporting policy on official domains;
+  three URLs returned 404. Definitions published as unverified (F-007).
+- 2026-11-12 — Built `tools/build_site.py` with a hard source-URL assertion; tested by injecting
+  a bad source id.
+- 2026-11-12 — Discovered during pre-merge checks that `main` had advanced with other sessions'
+  work (PRs #12 and #13 open). Corrected the "repository was empty" finding to F-012, and
+  re-based this session's shared-file edits onto main's `COORDINATION.md` and `README.md`
+  **by appending rather than replacing**, so no other session's records were lost.
+- 2026-11-12 — Cross-verified against main's independently transcribed data: standings 32/32
+  and injury designations 6/6 exact matches.
+- 2026-11-12 — Opened PR #14; merged to `main` without waiting for approval, per the brief.
+
 ---
 
 # Session `a2cea255-nfl1` — independent verification subsystem
@@ -737,15 +887,17 @@ including three cells where nfl.com contradicts its own arithmetic.
 ## Integration record
 
 - **Branch:** `arena/a2cea255-nfl1`.
-- **Merged `origin/main`** (which had advanced to `ef66f3c` through PRs #1-#17)
-  into this branch rather than merging over it. Eight conflicts
+- **Merged `origin/main` twice** rather than merging over it. The first merge
+  took in PRs #1-#17 (`ef66f3c`); while this branch was open, PR #14 from
+  session `87deb7ab` merged and the `collect-data` bot committed a refresh to
+  this branch, so `origin/main` was merged a second time at `e287fde`. The
+  first merge had eight conflicts
   (`.gitignore`, `COORDINATION.md`, `README.md`, and five root `.html` pages)
   were resolved **without discarding any prior session's work**:
   - the five root pages were taken from `main` verbatim, and this session's
     equivalents rebuilt into `verified-lab/`;
   - `.gitignore` became the union of both sides' entries;
-  - `README.md` kept `main`'s text with the three committed conflict blocks
-    resolved, plus a short pointer to the subsystem. The full write-up lives in
+  - `README.md` kept `main`'s text, plus a short pointer to the subsystem. The full write-up lives in
     `verified-lab/README.md` because `tools/build.py` regenerates the root
     `README.md` from an embedded template and would wipe anything added there
     (see the open request below);
@@ -753,6 +905,16 @@ including three cells where nfl.com contradicts its own arithmetic.
     and this session's row added to the session table.
 - 15 root `.html` files that this session had generated were removed from the
   index before the merge commit, so the root remains exactly `main`'s site.
+- The **second** merge conflicted on 13 files: `COORDINATION.md`, `README.md`
+  and eleven `data/model/*.json`. The generated JSON was taken from `main`
+  wholesale — those artifacts are owned by `pipeline/` and refreshed by the
+  `collect-data` workflow, and hand-merging generated data is how two sessions'
+  numbers end up mixed in one file. `README.md` was taken from `main` verbatim:
+  its regeneration by `tools/build.py` had already removed the three committed
+  conflict blocks, so the fix this session made was no longer needed.
+  `COORDINATION.md` was taken from `main` and this section re-appended to it.
+- After the second merge, all root pages and all `data/model/*.json` are
+  byte-identical to `origin/main` again (checked by sha1).
 - **Pull request:** <https://github.com/kanlerxz87-cyber/NFL1/pull/18>
 - **Merge result and Pages verification:** recorded in the follow-up commit
   pushed to this branch and merged immediately afterwards, once the deployment
