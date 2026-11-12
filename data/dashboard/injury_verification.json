@@ -4,17 +4,506 @@
  "method": "Hand transcription of all 7 fetched chunks of the official page (data/dashboard/official_injuries_2026_w10.psv), compared field by field with data/model/official_injuries.json. Club codes AZ->ARI and LAR->LA mapped as in the pipeline.",
  "counts": {
   "official_rows": 279,
-  "scraped_rows": 279,
-  "matched_all_fields": 279,
-  "field_differences": 0,
+  "scraped_rows": 295,
+  "matched_all_fields": 242,
+  "field_differences": 37,
   "missing_from_scrape": 0,
-  "extra_in_scrape": 0,
+  "extra_in_scrape": 16,
   "clubs_on_official_page": 26,
   "clubs_in_scrape": 26
  },
  "missing_from_scrape": [],
- "extra_in_scrape": [],
- "field_differences": [],
+ "extra_in_scrape": [
+  {
+   "team": "KC",
+   "player": "Jaydn Ott"
+  },
+  {
+   "team": "ATL",
+   "player": "Kendal Daniels"
+  },
+  {
+   "team": "ATL",
+   "player": "Jawaan Taylor"
+  },
+  {
+   "team": "ATL",
+   "player": "Cameron Thomas"
+  },
+  {
+   "team": "BUF",
+   "player": "Sam Franklin Jr."
+  },
+  {
+   "team": "NYJ",
+   "player": "Jarvis Brownlee Jr."
+  },
+  {
+   "team": "MIA",
+   "player": "Jared Wayne"
+  },
+  {
+   "team": "NO",
+   "player": "Taliese Fuaga"
+  },
+  {
+   "team": "NO",
+   "player": "Quincy Riley"
+  },
+  {
+   "team": "CLE",
+   "player": "Donovan McMillon"
+  },
+  {
+   "team": "DAL",
+   "player": "Alijah Clark"
+  },
+  {
+   "team": "DAL",
+   "player": "Juanyeh Thomas"
+  },
+  {
+   "team": "CIN",
+   "player": "Jalen Davis"
+  },
+  {
+   "team": "CIN",
+   "player": "B.J. Hill"
+  },
+  {
+   "team": "CIN",
+   "player": "Andrei Iosivas"
+  },
+  {
+   "team": "CIN",
+   "player": "Brian Parker II"
+  }
+ ],
+ "field_differences": [
+  {
+   "team": "NE",
+   "player": "Cameron Latu",
+   "diffs": {
+    "practice": {
+     "official": "Did Not Participate In Practice",
+     "scraped": "Limited Participation in Practice"
+    }
+   },
+   "official_line": 33
+  },
+  {
+   "team": "NE",
+   "player": "Walter Rouse",
+   "diffs": {
+    "practice": {
+     "official": "Did Not Participate In Practice",
+     "scraped": "Limited Participation in Practice"
+    }
+   },
+   "official_line": 36
+  },
+  {
+   "team": "NE",
+   "player": "Brenden Schooler",
+   "diffs": {
+    "practice": {
+     "official": "Did Not Participate In Practice",
+     "scraped": "Limited Participation in Practice"
+    }
+   },
+   "official_line": 37
+  },
+  {
+   "team": "NE",
+   "player": "Rhamondre Stevenson",
+   "diffs": {
+    "practice": {
+     "official": "Did Not Participate In Practice",
+     "scraped": "Limited Participation in Practice"
+    }
+   },
+   "official_line": 38
+  },
+  {
+   "team": "DET",
+   "player": "Brian Branch",
+   "diffs": {
+    "practice": {
+     "official": "Limited Participation in Practice",
+     "scraped": "Full Participation in Practice"
+    }
+   },
+   "official_line": 41
+  },
+  {
+   "team": "DET",
+   "player": "Jared Goff",
+   "diffs": {
+    "practice": {
+     "official": "Limited Participation in Practice",
+     "scraped": "Full Participation in Practice"
+    }
+   },
+   "official_line": 42
+  },
+  {
+   "team": "DET",
+   "player": "Kerby Joseph",
+   "diffs": {
+    "injury": {
+     "official": null,
+     "scraped": "Knee"
+    },
+    "practice": {
+     "official": "Limited Participation in Practice",
+     "scraped": "Full Participation in Practice"
+    },
+    "game": {
+     "official": null,
+     "scraped": "Out"
+    }
+   },
+   "official_line": 43
+  },
+  {
+   "team": "DET",
+   "player": "Cade Mays",
+   "diffs": {
+    "injury": {
+     "official": null,
+     "scraped": "Ankle"
+    },
+    "game": {
+     "official": null,
+     "scraped": "Out"
+    }
+   },
+   "official_line": 44
+  },
+  {
+   "team": "DET",
+   "player": "D.J. Reed",
+   "diffs": {
+    "injury": {
+     "official": null,
+     "scraped": "Hip"
+    },
+    "game": {
+     "official": null,
+     "scraped": "Out"
+    }
+   },
+   "official_line": 45
+  },
+  {
+   "team": "ATL",
+   "player": "Divine Deablo",
+   "diffs": {
+    "practice": {
+     "official": "Limited Participation in Practice",
+     "scraped": "Did Not Participate In Practice"
+    }
+   },
+   "official_line": 62
+  },
+  {
+   "team": "ATL",
+   "player": "Gervon Dexter Sr.",
+   "diffs": {
+    "practice": {
+     "official": "Did Not Participate In Practice",
+     "scraped": "Limited Participation in Practice"
+    }
+   },
+   "official_line": 63
+  },
+  {
+   "team": "ATL",
+   "player": "James Pearce Jr.",
+   "diffs": {
+    "practice": {
+     "official": "Did Not Participate In Practice",
+     "scraped": "Limited Participation in Practice"
+    }
+   },
+   "official_line": 64
+  },
+  {
+   "team": "ATL",
+   "player": "Za'Darius Smith",
+   "diffs": {
+    "practice": {
+     "official": "Did Not Participate In Practice",
+     "scraped": "Full Participation in Practice"
+    }
+   },
+   "official_line": 65
+  },
+  {
+   "team": "ATL",
+   "player": "Josh Woods",
+   "diffs": {
+    "practice": {
+     "official": "Did Not Participate In Practice",
+     "scraped": "Limited Participation in Practice"
+    }
+   },
+   "official_line": 66
+  },
+  {
+   "team": "GB",
+   "player": "Trey Smack",
+   "diffs": {
+    "practice": {
+     "official": "Limited Participation in Practice",
+     "scraped": "Full Participation in Practice"
+    }
+   },
+   "official_line": 87
+  },
+  {
+   "team": "JAX",
+   "player": "Jakobi Meyers",
+   "diffs": {
+    "practice": {
+     "official": "Did Not Participate In Practice",
+     "scraped": "Limited Participation in Practice"
+    }
+   },
+   "official_line": 99
+  },
+  {
+   "team": "JAX",
+   "player": "Travon Walker",
+   "diffs": {
+    "practice": {
+     "official": "Did Not Participate In Practice",
+     "scraped": "Limited Participation in Practice"
+    }
+   },
+   "official_line": 102
+  },
+  {
+   "team": "TEN",
+   "player": "Tony Pollard",
+   "diffs": {
+    "practice": {
+     "official": "Full Participation in Practice",
+     "scraped": "Did Not Participate In Practice"
+    }
+   },
+   "official_line": 109
+  },
+  {
+   "team": "TEN",
+   "player": "Tyjae Spears",
+   "diffs": {
+    "practice": {
+     "official": "Did Not Participate In Practice",
+     "scraped": "Limited Participation in Practice"
+    }
+   },
+   "official_line": 111
+  },
+  {
+   "team": "TEN",
+   "player": "Kevin Winston Jr.",
+   "diffs": {
+    "practice": {
+     "official": "Full Participation in Practice",
+     "scraped": "Limited Participation in Practice"
+    }
+   },
+   "official_line": 114
+  },
+  {
+   "team": "BUF",
+   "player": "Spencer Brown",
+   "diffs": {
+    "practice": {
+     "official": "Limited Participation in Practice",
+     "scraped": "Did Not Participate In Practice"
+    }
+   },
+   "official_line": 117
+  },
+  {
+   "team": "MIA",
+   "player": "Chris Bell",
+   "diffs": {
+    "practice": {
+     "official": "Limited Participation in Practice",
+     "scraped": "Did Not Participate In Practice"
+    }
+   },
+   "official_line": 136
+  },
+  {
+   "team": "MIA",
+   "player": "Will Kacmarek",
+   "diffs": {
+    "practice": {
+     "official": "Did Not Participate In Practice",
+     "scraped": "Limited Participation in Practice"
+    }
+   },
+   "official_line": 139
+  },
+  {
+   "team": "CAR",
+   "player": "Chuba Hubbard",
+   "diffs": {
+    "practice": {
+     "official": "Did Not Participate In Practice",
+     "scraped": "Full Participation in Practice"
+    }
+   },
+   "official_line": 159
+  },
+  {
+   "team": "CAR",
+   "player": "Damien Lewis",
+   "diffs": {
+    "practice": {
+     "official": "Full Participation in Practice",
+     "scraped": "Limited Participation in Practice"
+    }
+   },
+   "official_line": 164
+  },
+  {
+   "team": "CAR",
+   "player": "Jaelan Phillips",
+   "diffs": {
+    "practice": {
+     "official": "Full Participation in Practice",
+     "scraped": "Limited Participation in Practice"
+    }
+   },
+   "official_line": 166
+  },
+  {
+   "team": "NO",
+   "player": "Noah Fant",
+   "diffs": {
+    "practice": {
+     "official": "Limited Participation in Practice",
+     "scraped": "Full Participation in Practice"
+    }
+   },
+   "official_line": 173
+  },
+  {
+   "team": "NO",
+   "player": "Alvin Kamara",
+   "diffs": {
+    "practice": {
+     "official": "Did Not Participate In Practice",
+     "scraped": "Full Participation in Practice"
+    }
+   },
+   "official_line": 174
+  },
+  {
+   "team": "NO",
+   "player": "Christen Miller",
+   "diffs": {
+    "practice": {
+     "official": "Limited Participation in Practice",
+     "scraped": "Did Not Participate In Practice"
+    }
+   },
+   "official_line": 176
+  },
+  {
+   "team": "CLE",
+   "player": "Elgton Jenkins",
+   "diffs": {
+    "practice": {
+     "official": "Did Not Participate In Practice",
+     "scraped": "Limited Participation in Practice"
+    }
+   },
+   "official_line": 198
+  },
+  {
+   "team": "LV",
+   "player": "Foley Fatukasi",
+   "diffs": {
+    "practice": {
+     "official": "Limited Participation in Practice",
+     "scraped": "Full Participation in Practice"
+    }
+   },
+   "official_line": 242
+  },
+  {
+   "team": "DAL",
+   "player": "DeMarvion Overshown",
+   "diffs": {
+    "practice": {
+     "official": "Limited Participation in Practice",
+     "scraped": "Full Participation in Practice"
+    }
+   },
+   "official_line": 267
+  },
+  {
+   "team": "PIT",
+   "player": "DeShon Elliott",
+   "diffs": {
+    "practice": {
+     "official": "Limited Participation in Practice",
+     "scraped": "Full Participation in Practice"
+    }
+   },
+   "official_line": 274
+  },
+  {
+   "team": "PIT",
+   "player": "Darnell Washington",
+   "diffs": {
+    "practice": {
+     "official": "Did Not Participate In Practice",
+     "scraped": "Full Participation in Practice"
+    }
+   },
+   "official_line": 279
+  },
+  {
+   "team": "PIT",
+   "player": "T.J. Watt",
+   "diffs": {
+    "practice": {
+     "official": "Did Not Participate In Practice",
+     "scraped": "Limited Participation in Practice"
+    }
+   },
+   "official_line": 280
+  },
+  {
+   "team": "CIN",
+   "player": "Dylan Fairchild",
+   "diffs": {
+    "practice": {
+     "official": "Limited Participation in Practice",
+     "scraped": "Full Participation in Practice"
+    }
+   },
+   "official_line": 283
+  },
+  {
+   "team": "CIN",
+   "player": "DJ Turner II",
+   "diffs": {
+    "practice": {
+     "official": "Limited Participation in Practice",
+     "scraped": "Full Participation in Practice"
+    }
+   },
+   "official_line": 284
+  }
+ ],
  "club_counts": [
   {
    "team": "ARI",
@@ -25,14 +514,14 @@
   {
    "team": "ATL",
    "official_rows": 6,
-   "scraped_rows": 6,
-   "match": true
+   "scraped_rows": 9,
+   "match": false
   },
   {
    "team": "BUF",
    "official_rows": 11,
-   "scraped_rows": 11,
-   "match": true
+   "scraped_rows": 12,
+   "match": false
   },
   {
    "team": "CAR",
@@ -43,20 +532,20 @@
   {
    "team": "CIN",
    "official_rows": 4,
-   "scraped_rows": 4,
-   "match": true
+   "scraped_rows": 8,
+   "match": false
   },
   {
    "team": "CLE",
    "official_rows": 11,
-   "scraped_rows": 11,
-   "match": true
+   "scraped_rows": 12,
+   "match": false
   },
   {
    "team": "DAL",
    "official_rows": 16,
-   "scraped_rows": 16,
-   "match": true
+   "scraped_rows": 18,
+   "match": false
   },
   {
    "team": "DET",
@@ -91,8 +580,8 @@
   {
    "team": "KC",
    "official_rows": 11,
-   "scraped_rows": 11,
-   "match": true
+   "scraped_rows": 12,
+   "match": false
   },
   {
    "team": "LA",
@@ -109,8 +598,8 @@
   {
    "team": "MIA",
    "official_rows": 10,
-   "scraped_rows": 10,
-   "match": true
+   "scraped_rows": 11,
+   "match": false
   },
   {
    "team": "MIN",
@@ -127,8 +616,8 @@
   {
    "team": "NO",
    "official_rows": 10,
-   "scraped_rows": 10,
-   "match": true
+   "scraped_rows": 12,
+   "match": false
   },
   {
    "team": "NYG",
@@ -139,8 +628,8 @@
   {
    "team": "NYJ",
    "official_rows": 7,
-   "scraped_rows": 7,
-   "match": true
+   "scraped_rows": 8,
+   "match": false
   },
   {
    "team": "PIT",
@@ -311,11 +800,6 @@
   },
   {
    "team": "NE",
-   "player": "Cameron Latu",
-   "official_line": 33
-  },
-  {
-   "team": "NE",
    "player": "Drake Maye",
    "official_line": 34
   },
@@ -326,21 +810,6 @@
   },
   {
    "team": "NE",
-   "player": "Walter Rouse",
-   "official_line": 36
-  },
-  {
-   "team": "NE",
-   "player": "Brenden Schooler",
-   "official_line": 37
-  },
-  {
-   "team": "NE",
-   "player": "Rhamondre Stevenson",
-   "official_line": 38
-  },
-  {
-   "team": "NE",
    "player": "Greg Van Roten",
    "official_line": 39
   },
@@ -348,31 +817,6 @@
    "team": "NE",
    "player": "Charles Woods",
    "official_line": 40
-  },
-  {
-   "team": "DET",
-   "player": "Brian Branch",
-   "official_line": 41
-  },
-  {
-   "team": "DET",
-   "player": "Jared Goff",
-   "official_line": 42
-  },
-  {
-   "team": "DET",
-   "player": "Kerby Joseph",
-   "official_line": 43
-  },
-  {
-   "team": "DET",
-   "player": "Cade Mays",
-   "official_line": 44
-  },
-  {
-   "team": "DET",
-   "player": "D.J. Reed",
-   "official_line": 45
   },
   {
    "team": "DET",
@@ -453,31 +897,6 @@
    "team": "ATL",
    "player": "Zachariah Branch",
    "official_line": 61
-  },
-  {
-   "team": "ATL",
-   "player": "Divine Deablo",
-   "official_line": 62
-  },
-  {
-   "team": "ATL",
-   "player": "Gervon Dexter Sr.",
-   "official_line": 63
-  },
-  {
-   "team": "ATL",
-   "player": "James Pearce Jr.",
-   "official_line": 64
-  },
-  {
-   "team": "ATL",
-   "player": "Za'Darius Smith",
-   "official_line": 65
-  },
-  {
-   "team": "ATL",
-   "player": "Josh Woods",
-   "official_line": 66
   },
   {
    "team": "MIN",
@@ -581,11 +1000,6 @@
   },
   {
    "team": "GB",
-   "player": "Trey Smack",
-   "official_line": 87
-  },
-  {
-   "team": "GB",
    "player": "Lukas Van Ness",
    "official_line": 88
   },
@@ -641,11 +1055,6 @@
   },
   {
    "team": "JAX",
-   "player": "Jakobi Meyers",
-   "official_line": 99
-  },
-  {
-   "team": "JAX",
    "player": "Chris Rodriguez Jr.",
    "official_line": 100
   },
@@ -653,11 +1062,6 @@
    "team": "JAX",
    "player": "Bhayshul Tuten",
    "official_line": 101
-  },
-  {
-   "team": "JAX",
-   "player": "Travon Walker",
-   "official_line": 102
   },
   {
    "team": "TEN",
@@ -691,18 +1095,8 @@
   },
   {
    "team": "TEN",
-   "player": "Tony Pollard",
-   "official_line": 109
-  },
-  {
-   "team": "TEN",
    "player": "Peter Skoronski",
    "official_line": 110
-  },
-  {
-   "team": "TEN",
-   "player": "Tyjae Spears",
-   "official_line": 111
   },
   {
    "team": "TEN",
@@ -715,11 +1109,6 @@
    "official_line": 113
   },
   {
-   "team": "TEN",
-   "player": "Kevin Winston Jr.",
-   "official_line": 114
-  },
-  {
    "team": "BUF",
    "player": "Alec Anderson",
    "official_line": 115
@@ -728,11 +1117,6 @@
    "team": "BUF",
    "player": "Christian Benford",
    "official_line": 116
-  },
-  {
-   "team": "BUF",
-   "player": "Spencer Brown",
-   "official_line": 117
   },
   {
    "team": "BUF",
@@ -826,11 +1210,6 @@
   },
   {
    "team": "MIA",
-   "player": "Chris Bell",
-   "official_line": 136
-  },
-  {
-   "team": "MIA",
    "player": "Aaron Brewer",
    "official_line": 137
   },
@@ -838,11 +1217,6 @@
    "team": "MIA",
    "player": "Malik Herring",
    "official_line": 138
-  },
-  {
-   "team": "MIA",
-   "player": "Will Kacmarek",
-   "official_line": 139
   },
   {
    "team": "MIA",
@@ -941,11 +1315,6 @@
   },
   {
    "team": "CAR",
-   "player": "Chuba Hubbard",
-   "official_line": 159
-  },
-  {
-   "team": "CAR",
    "player": "Lee Hunter",
    "official_line": 160
   },
@@ -966,18 +1335,8 @@
   },
   {
    "team": "CAR",
-   "player": "Damien Lewis",
-   "official_line": 164
-  },
-  {
-   "team": "CAR",
    "player": "Bobby Okereke",
    "official_line": 165
-  },
-  {
-   "team": "CAR",
-   "player": "Jaelan Phillips",
-   "official_line": 166
   },
   {
    "team": "CAR",
@@ -1011,23 +1370,8 @@
   },
   {
    "team": "NO",
-   "player": "Noah Fant",
-   "official_line": 173
-  },
-  {
-   "team": "NO",
-   "player": "Alvin Kamara",
-   "official_line": 174
-  },
-  {
-   "team": "NO",
    "player": "Erik McCoy",
    "official_line": 175
-  },
-  {
-   "team": "NO",
-   "player": "Christen Miller",
-   "official_line": 176
   },
   {
    "team": "NO",
@@ -1133,11 +1477,6 @@
    "team": "CLE",
    "player": "Tytus Howard",
    "official_line": 197
-  },
-  {
-   "team": "CLE",
-   "player": "Elgton Jenkins",
-   "official_line": 198
   },
   {
    "team": "CLE",
@@ -1356,11 +1695,6 @@
   },
   {
    "team": "LV",
-   "player": "Foley Fatukasi",
-   "official_line": 242
-  },
-  {
-   "team": "LV",
    "player": "Ian Thomas",
    "official_line": 243
   },
@@ -1481,11 +1815,6 @@
   },
   {
    "team": "DAL",
-   "player": "DeMarvion Overshown",
-   "official_line": 267
-  },
-  {
-   "team": "DAL",
    "player": "George Pickens",
    "official_line": 268
   },
@@ -1516,11 +1845,6 @@
   },
   {
    "team": "PIT",
-   "player": "DeShon Elliott",
-   "official_line": 274
-  },
-  {
-   "team": "PIT",
    "player": "Derrick Harmon",
    "official_line": 275
   },
@@ -1540,16 +1864,6 @@
    "official_line": 278
   },
   {
-   "team": "PIT",
-   "player": "Darnell Washington",
-   "official_line": 279
-  },
-  {
-   "team": "PIT",
-   "player": "T.J. Watt",
-   "official_line": 280
-  },
-  {
    "team": "CIN",
    "player": "Jonathan Allen",
    "official_line": 281
@@ -1558,16 +1872,6 @@
    "team": "CIN",
    "player": "Kyle Dugger",
    "official_line": 282
-  },
-  {
-   "team": "CIN",
-   "player": "Dylan Fairchild",
-   "official_line": 283
-  },
-  {
-   "team": "CIN",
-   "player": "DJ Turner II",
-   "official_line": 284
   }
  ],
  "official_game_status_rows": [

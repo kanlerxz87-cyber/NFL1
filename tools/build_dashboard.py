@@ -268,7 +268,7 @@ def page_index(d):
   <p><strong>What this is.</strong> A checked view of the NFL Decision Lab repository. Every value
   here is either confirmed against an official NFL page this session or left blank and flagged.
   It shows the model's own results as unverified findings, not as facts.</p>
-  <p><strong>Headline.</strong> The Week 10 schedule matches nfl.com (14 of 14). The official injury report (279 rows) is transcribed and checked against the live page. The committed injury scrape matches all 279 rows on the latest refresh (22:40Z). An earlier refresh (22:36Z) did not (RV-02, resolved on the later refresh). The depth data covers 3 of 32 clubs.
+  <p><strong>Headline.</strong> The Week 10 schedule matches nfl.com (14 of 14). The official injury report (279 rows) is transcribed and checked against the live page. The committed injury scrape is not stable: it has matched all 279 official rows on some refreshes and 242 of 279 (with 16 extra rows) on others, including the current one (RV-02). The dashboard shows official-page values. The depth data covers 3 of 32 clubs.
   No model strategy passes all gates after recomputation, and the model's own lines do not beat the market in the 2026 test window
   (unverified model output). Nothing here is ready for a betting decision.</p>
 </section>
@@ -431,7 +431,7 @@ Most rows show practice status only. The old Overview phrase "starters flagged 1
 <h2>Official report, Week 10</h2>
 {tbl}
 <h2>In the committed scrape but not on the official page ({len(inj["extra_in_scrape"])})</h2>
-<div class="callout warn"><p>Rows in <a href="{REPO_BLOB}data/model/official_injuries.json">data/model/official_injuries.json</a> that are not on the nfl.com page read on 2026-11-12. {"None on the latest refresh." if not inj["extra_in_scrape"] else "They are listed here, not in the official table above (flag RV-02)."} The 22:36Z refresh had 16 such rows (RV-02).</p></div>
+<div class="callout warn"><p>Rows in <a href="{REPO_BLOB}data/model/official_injuries.json">data/model/official_injuries.json</a> that are not on the nfl.com page read on 2026-11-12. {"None on the current refresh." if not inj["extra_in_scrape"] else "They are listed here, not in the official table above (flag RV-02)."} The current committed scrape has {len(inj["extra_in_scrape"])} such rows (RV-02).</p></div>
 {table(["Club", "Player", "Source of claim", "Status"], [td(e(x["team"])) + td(e(x["player"])) + td(link(REPO_BLOB + "data/model/official_injuries.json", "official_injuries.json (internal)")) + td('<span class="b bad">Not on official page</span>') for x in inj["extra_in_scrape"]])}
 <h2>Official news ahead of the page</h2>
 <div class="callout warn">
@@ -658,7 +658,7 @@ def page_repo(d):
         ("dashboard/", "This clean dashboard (session 6a232e79)", "tools/build_dashboard.py", "New, self-contained", "dashboard"),
         ("data/", "Committed data: model outputs, verified transcriptions, questions, flags", "pipeline/ and tools/", "Mixed sources (RV-21)", "data"),
         ("data/model/", "Pipeline outputs (lines, strategies, availability, injuries)", "pipeline/build_all.py", "Errors log stale (RV-18)", "data/model"),
-        ("pipeline/", "Collector, scraper, model builder", "-", "Scrape on latest refresh 9040190: 279 of 279 match; the 22:36Z refresh regressed (RV-02, resolved)", "pipeline"),
+        ("pipeline/", "Collector, scraper, model builder", "-", "Scrape on current main: 242 of 279 match on every field; 16 extra rows (RV-02, unstable between refreshes)", "pipeline"),
         ("analysis/", "Analysis engine from earlier session", "-", "Not reviewed line by line", "analysis"),
         ("tools/", "Generators and verifiers", "-", "Several write the same files", "tools"),
         ("scripts/", "Verification scripts and builders", "-", "Not reviewed line by line", "scripts"),
@@ -700,7 +700,7 @@ The data the model produces (lines, strategy performance, prop lines) cannot be 
 <ul>
 <li><strong>Week 10 schedule.</strong> All 14 games, days, kickoff times and networks match the nfl.com schedule page
 (<a href="{NFL_SCHED}">nfl.com/schedules/2026/REG10</a>). The four bye teams are CHI, DEN, PHI and TB.</li>
-<li><strong>Injury report.</strong> 279 official rows on <a href="{NFL_INJ}">nfl.com/injuries</a>. The committed scrape on the latest refresh (22:40Z) matches all 279 rows on every field. The 22:36Z refresh had 295 rows, 37 field differences and 16 extra rows (RV-02, resolved on the later refresh).</li>
+<li><strong>Injury report.</strong> 279 official rows on <a href="{NFL_INJ}">nfl.com/injuries</a>. The committed scrape is unstable between refreshes. The current committed scrape has 295 rows: 242 match on every field, 37 differ, and 16 are not on the page (RV-02). Earlier refreshes matched all 279.</li>
 <li><strong>Official game designations.</strong> Six rows only (Out: Lucas Patrick, Colson Yankoff, Ben Brown, Carlton Davis III, TreVeyon Henderson; Questionable: Malik Harrison).</li>
 <li><strong>Strategy gates.</strong> All 12 gate results reproduce from the committed JSON, so the model is consistent with its own rules.</li>
 <li><strong>Standings correlations.</strong> All six reproduce from the 32 standings rows.</li>
@@ -721,7 +721,7 @@ The data the model produces (lines, strategy performance, prop lines) cannot be 
 <h2>Irregularities that need a decision</h2>
 <ul>
 <li>The headline "103 starters flagged, official game status" is not supported. The committed data says {d["avail"]["counts"]["starters_impacted"]} starters are impacted, and {d["avail"]["counts"]["rows_practice_only_starters"]} of them are practice-only (RV-01).</li>
-<li>The injury scrape was wrong on the 22:36Z refresh and correct on the 22:40Z refresh (RV-02). A per-refresh gate is still needed. The dashboard shows official page values. The Overview's NE row is stale (RV-28).</li>
+<li>The injury scrape is not stable between refreshes (RV-02): the current committed scrape is wrong (295 rows). A per-refresh gate is still needed. The dashboard shows official page values. The Overview's NE row is stale (RV-28).</li>
 <li>Two generators overwrite the root index.html, and five site generations overlap (RV-17, RV-21).</li>
 <li>The Overview says "actionable" for a line the model's own validation does not support (RV-11).</li>
 </ul>

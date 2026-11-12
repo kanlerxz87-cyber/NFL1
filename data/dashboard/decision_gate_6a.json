@@ -24,8 +24,8 @@
   },
   {
    "id": "QA-03",
-   "question": "What caused the 22:36Z refresh to add 16 rows and change 37 statuses, and what stops it recurring?",
-   "known": "The 22:30Z scrape matched 279 of 279. The 22:36Z scrape did not (295 rows). The 22:40Z scrape matched 279 of 279 again. Live page re-read: 80 of 80 rows match the transcription.",
+   "question": "Why does the injury scrape change between refreshes (279 rows some runs, 295 others), and what stops a bad run being published?",
+   "known": "The injury scrape has been 279 of 279 on some refreshes (22:30Z; 22:40:41Z on 9040190) and 242 of 279 with 16 extra rows on others (22:36Z; 22:40:44Z on main 89ecd84). Live page re-read: 80 of 80 rows match the transcription.",
    "unknown": "The parser change behind the 22:36Z result, and whether any change to the parser is still needed.",
    "discovery": "Diff pipeline/scrape_injuries.py output across the three refreshes; re-run tools/verify_official_injuries.py on each.",
    "blocks": "Trusting any single refresh without the per-refresh check.",

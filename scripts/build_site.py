@@ -42,6 +42,13 @@ def srccell(url: str, label: str | None = None) -> str:
     return src(url, label)
 
 
+def srccells(urls: list[str] | str | None) -> str:
+    """Render every source that supports a row, rather than hiding secondary evidence."""
+    if isinstance(urls, str):
+        urls = [urls]
+    return " · ".join(srccell(url) for url in (urls or []) if url)
+
+
 def tier_legend() -> str:
     d = DATA["meta"]["tier_definitions"]
     rows = [[badge(k), esc(v)] for k, v in d.items()]
@@ -196,20 +203,22 @@ def p_data_schedule():
         rows.append([fmt(g["week"]), esc(g["game_date"]), esc(g["day"]), esc(g["kickoff_et"]),
                      f'<strong>{esc(g["away_abbr"])}</strong> @ <strong>{esc(g["home_abbr"])}</strong>',
                      esc(g["broadcast"]), esc(g["venue_status"]), badge("VERIFIED"),
-                     srccell(g["source_url"])])
+                     srccells(g.get("source_urls") or [g["source_url"]])])
     byes = [[fmt(b["week"]), f'<strong>{esc(b["team_abbr"])}</strong>', esc(b["status"]),
              badge("VERIFIED"), srccell(b["source_url"])] for b in DATA["schedule"]["byes"]]
     v = DATA["verification"]
-    return ("Week 10 Schedule", "Verified from the official NFL injury report page",
+    return ("Week 10 Schedule", "Fixtures and byes from the official NFL Week 10 schedule",
             '<div class="grid g3">'
             + kpi("Games", len(DATA["schedule"]["games"]), "Thursday 12 to Monday 16 November 2026")
             + kpi("Teams playing", 28, "every club except the four on bye")
             + kpi("Teams on bye", len(byes), "CHI, DEN, PHI, TB")
             + "</div>"
-            + callout("The bye list is derived from the four clubs that are absent from the "
-                      "official injury report while all 28 others appear, and is independently "
-                      "corroborated by five separate schedule sources listed in "
-                      f'<a href="verification.html">check V29</a>.', "")
+            + callout("The 14 fixtures, dates and kickoff times are transcribed from the "
+                      "official NFL Week 10 schedule and checked against the retrieved page "
+                      "snapshot (V33). The four bye clubs are transcribed from its explicit "
+                      "\'Teams on Bye\' block, not inferred from missing injury-report rows. "
+                      "Fixture rows link to the official schedule and the official injury page "
+                      "for broadcast metadata; bye rows link to the schedule.", "")
             + table(["Week", "Date", "Day", "Kickoff (ET)", "Matchup", "Broadcast",
                      "Status", "Tier", "Source"], rows,
                     ["num", "", "", "", "", "", "", "c", ""])
@@ -241,7 +250,8 @@ def p_data_injuries():
             fmt(r["game_status"]["Questionable"]), fmt(r["by_unit"]["OFF"]),
             fmt(r["by_unit"]["DEF"]), fmt(r["by_unit"]["ST"]), fmt(r["qb_entries"]),
             fmt(r["availability_pressure_unstringed"], 3),
-            badge(r["availability_pressure_tier"]), srccell(r["source_url"]),
+            badge(r["availability_pressure_tier"]),
+            srccells(r.get("source_urls") or [r["source_url"]]),
         ])
     js = """
 <input id="q" placeholder="Filter by team, player or position..." style="width:100%;max-width:420px;padding:8px 11px;border:1px solid var(--line);border-radius:8px;font-size:13.5px;margin:8px 0">
@@ -443,7 +453,7 @@ def p_availability_depth():
                      fmt(r["qb_entries"]),
                      badge("VERIFIED", "QB change") if r["qb_disruption"] else "",
                      fmt(r["availability_pressure_unstringed"], 3),
-                     srccell(r["source_url"])])
+                     srccells(r.get("source_urls") or [r["source_url"]])])
     return ("Availability & Depth", "Injuries, unit deficiencies and the depth-chart gap",
             callout(f'<strong>Depth charts are unavailable.</strong> {esc(dc["reason"])} '
                     f'<br><br>Consequence: {esc(dc["consequence"])}', "bad")
@@ -651,7 +661,8 @@ def p_verification():
             exp = "; ".join(str(x) for x in exp) if exp else "&mdash;"
         rows.append([f'<strong>{esc(c["check_id"])}</strong>', esc(c["scope"]),
                      f'<code>{esc(exp)}</code>', f'<code>{detail}</code>',
-                     badge(c["result"]), srccell(c["source_url"]), esc(c["note"])])
+                     badge(c["result"]),
+                     srccells(c.get("source_urls") or [c["source_url"]]), esc(c["note"])])
     return ("Verification Report", f'{v["total"]} automated checks &middot; {v["PASS"]} pass, '
                                    f'{v["FLAG"]} flagged, {v["FAIL"]} failed',
             '<div class="grid g4">'
