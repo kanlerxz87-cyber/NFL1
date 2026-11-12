@@ -1,0 +1,65 @@
+[
+  {
+    "id": "D-01",
+    "item": "GitHub Pages publishing source",
+    "value": "main / '/', build_type legacy, status built",
+    "how_checked": "gh api repos/kanlerxz87-cyber/NFL1/pages",
+    "src": "S25",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "D-02",
+    "item": "Live site URL",
+    "value": "https://kanlerxz87-cyber.github.io/NFL1/",
+    "how_checked": "GitHub Pages API html_url",
+    "src": "S25",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "D-03",
+    "item": "Entry file requirement",
+    "value": "index.html at the top level of the publishing source",
+    "how_checked": "GitHub Docs: Creating a GitHub Pages site",
+    "src": "S23",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "D-04",
+    "item": "Pull request number",
+    "value": "",
+    "how_checked": "Created by the integration session before merge",
+    "src": "S24",
+    "verified": false,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "D-05",
+    "item": "Pull request URL",
+    "value": "",
+    "how_checked": "Created by the integration session before merge",
+    "src": "S24",
+    "verified": false,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "D-06",
+    "item": "Merge result",
+    "value": "",
+    "how_checked": "gh pr merge with an explicit PR number",
+    "src": "S24",
+    "verified": false,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "D-07",
+    "item": "Post-merge Pages build status",
+    "value": "",
+    "how_checked": "GitHub Pages builds endpoint plus a live-site fetch",
+    "src": "S25",
+    "verified": false,
+    "retrieved": "2026-11-12"
+  }
+]

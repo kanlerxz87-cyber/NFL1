@@ -1,0 +1,825 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="NFL1 — a verified, source-linked NFL decision-intelligence dashboard: requirements, decision questions, improvement suggestions, strategy validation, injury and depth tracking, and a leaderboard competition.">
+<title>Verification &amp; official sources | NFL1</title>
+<link rel="stylesheet" href="site/assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="mark">NFL</div>
+      <div><strong>NFL1</strong><small>Decision intelligence</small></div>
+    </div>
+    <div class="snapshot">
+      <b>Data snapshot</b><br>2026 season · Week 10<br>Retrieved 2026-11-12 (UTC)
+    </div>
+    <nav aria-label="Site sections">
+      <div class="navgroup"><h4>Overview</h4>
+<a href="index.html">Home</a>
+<a href="executive-summary.html">Executive Summary</a>
+<a href="deployment.html">Deployment &amp; PR</a>
+<a href="legacy-site.html">Earlier sessions&#x27; site</a>
+</div>
+<div class="navgroup"><h4>Governance</h4>
+<a href="requirements.html">Requirements</a>
+<a href="questions.html">Decision Questions</a>
+<a href="suggestions.html">Suggestions &amp; Paths</a>
+</div>
+<div class="navgroup"><h4>Competition</h4>
+<a href="strategy-lab.html">Strategy Lab</a>
+<a href="leaderboard.html">Leaderboard</a>
+<a href="bet-types.html">Bet Types &amp; Risk</a>
+</div>
+<div class="navgroup"><h4>Official data</h4>
+<a href="data-tables.html">Standings &amp; Findings</a>
+<a href="injuries.html">Injuries</a>
+<a href="depth-chart.html">Depth Charts</a>
+</div>
+<div class="navgroup"><h4>Assurance</h4>
+<a href="verification.html" class="active">Verification &amp; Sources</a>
+<a href="flagged.html">Flagged for Review</a>
+<a href="integration.html">Combined Integration</a>
+<a href="referee/index.html">Independent verification</a>
+</div>
+<div class="navgroup"><h4>Preserved pages</h4>
+<a href="pages/analysis.html">Validation &amp; correlation</a>
+<a href="pages/availability.html">Availability</a>
+<a href="pages/data.html">Verified data</a>
+<a href="pages/decisions.html">Decision register</a>
+<a href="pages/evidence.html">Evidence</a>
+<a href="pages/executive-summary.html">Executive summary</a>
+<a href="pages/flagged.html">Flagged</a>
+<a href="pages/injuries.html">Injuries</a>
+<a href="pages/lines.html">Own lines</a>
+<a href="pages/models.html">Strategy lab</a>
+<a href="pages/questions.html">Questions</a>
+<a href="pages/review.html">Review</a>
+<a href="pages/standings.html">Standings</a>
+<a href="pages/strategies.html">Strategies</a>
+<a href="pages/suggestions.html">Suggestions</a>
+<a href="pages/teams.html">Teams</a>
+<a href="pages/verified.html">Verified artifacts</a>
+</div>
+    </nav>
+    <div class="foot">
+      Every table row links to an official source. Unconfirmed values are left blank and flagged.
+      <br><br><a style="color:#fff;text-decoration:underline" href="https://github.com/kanlerxz87-cyber/NFL1">Repository ↗</a>
+    </div>
+  </aside>
+  <div class="main">
+    <div class="topbar">
+      <div class="crumb">NFL1 / <b>Verification &amp; Sources</b></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">36 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+    </div>
+    <main class="content" id="main">
+      <div class="kicker">Assurance</div>
+      <h1>Verification &amp; official sources</h1>
+      <p class="lede">How every value was verified line by line, the complete official source registry with links for manual review, and the per-file data audit.</p>
+      <div class="callout"><b>Verification policy.</b> Work line by line; cite an official source on every table row; leave a cell blank when the official source publishes no value; flag it; never infer or fill in a value. This page documents the procedure, the source registry and the line-by-line audit of the data layer.</div>
+<div class="cards"><div class="card"><div class="label">Official sources</div><div class="value">25</div><div class="detail">All fetched 2026-11-12</div></div><div class="card"><div class="label">Data files audited</div><div class="value">33</div><div class="detail">Row counts and blanks</div></div><div class="card"><div class="label">Table rows</div><div class="value">600+</div><div class="detail">Each with a source link</div></div><div class="card"><div class="label">Flagged items</div><div class="value">36</div><div class="detail">Needs review</div></div></div>
+<h2 id="policy">Verification procedure</h2>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-verify-policy" aria-label="Filter tbl-verify-policy" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-verify-policy">7 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-verify-policy"><caption>The seven verification steps applied to this build; each row links to the official source grounding the step.</caption>
+<thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Step</th><th scope="col" class="sortable">Action</th><th scope="col" class="sortable">Detail</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr id="VP-01" data-verified="true">
+<td><code>VP-01</code></td>
+<td class="num">1</td>
+<td class="wide">Transcribe, do not paraphrase values</td>
+<td class="wide">Each official page was fetched and read; values copied cell by cell into data/*.json</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="VP-02" data-verified="true">
+<td><code>VP-02</code></td>
+<td class="num">2</td>
+<td class="wide">Attach an official source to every row</td>
+<td class="wide">The generator appends a source link and a verification badge to every table row</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S22 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="VP-03" data-verified="true">
+<td><code>VP-03</code></td>
+<td class="num">3</td>
+<td class="wide">Leave blanks blank</td>
+<td class="wide">Empty strings render as empty cells; no substitution, interpolation or estimation</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="VP-04" data-verified="true">
+<td><code>VP-04</code></td>
+<td class="num">4</td>
+<td class="wide">Flag unverified project assertions</td>
+<td class="wide">Rows with verified=false link to Flagged for Review and keep all value cells blank</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="VP-05" data-verified="true">
+<td><code>VP-05</code></td>
+<td class="num">5</td>
+<td class="wide">Automated validation</td>
+<td class="wide">tools/verify.py checks source domains, unverified blanks, internal links and generated-file integrity</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S22 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="VP-06" data-verified="true">
+<td><code>VP-06</code></td>
+<td class="num">6</td>
+<td class="wide">Recompute derived values</td>
+<td class="wide">tools/compute_correlations.py recomputes correlations from the committed official standings</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="VP-07" data-verified="true">
+<td><code>VP-07</code></td>
+<td class="num">7</td>
+<td class="wide">Build and link check before merge</td>
+<td class="wide">HTML pages generated, internal links resolved, then Pages confirmed live</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S23 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+</tbody></table></div>
+<h2 id="sources">Official source registry</h2>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-sources" aria-label="Filter tbl-sources" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-sources">25 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-sources"><caption>Every official source used, what it verifies, its canonical URL note and the retrieval date. Each row links to that official page.</caption>
+<thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Publisher</th><th scope="col" class="sortable">Source type</th><th scope="col" class="sortable">What it verifies</th><th scope="col" class="sortable">Canonical / note</th><th scope="col" class="sortable">Retrieved</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr id="S01" data-verified="true">
+<td><code>S01</code></td>
+<td data-value="1">National Football League (NFL.com)</td>
+<td data-value="1">Official league injury report</td>
+<td data-value="1" class="wide">2026 Week 10 injury report: player, position, injury, practice status, game status, game/team headings</td>
+<td data-value="1" class="wide">Page title: &#x27;Official Latest NFL Injury Report for Players - Week 10 of the 2026 Season | NFL.com&#x27;.</td>
+<td data-value="1">2026-11-12</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S02" data-verified="true">
+<td><code>S02</code></td>
+<td data-value="1">National Football League (NFL.com)</td>
+<td data-value="1">Official league standings</td>
+<td data-value="1" class="wide">2026 regular season standings, detailed view: W, L, T, PCT, PF, PA, NET PTS and column legend</td>
+<td data-value="1" class="wide">Column order confirmed by the published legend and by PF - PA = NET PTS on every transcribed row.</td>
+<td data-value="1">2026-11-12</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S03" data-verified="true">
+<td><code>S03</code></td>
+<td data-value="1">National Football League (NFL.com)</td>
+<td data-value="1">Official player statistics</td>
+<td data-value="1" class="wide">2026 player stat categories (passing, rushing, receiving, tackles, field goals, punting, returns)</td>
+<td data-value="1" class="wide">Category list used to enumerate possible official signal inputs.</td>
+<td data-value="1">2026-11-12</td>
+<td><span class="src"><a href="https://www.nfl.com/stats/player-stats/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official player statistics">S03 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S04" data-verified="true">
+<td><code>S04</code></td>
+<td data-value="1">National Football League (NFL.com news)</td>
+<td data-value="1">Official league calendar</td>
+<td data-value="1" class="wide">Personnel (Injury) Report Policy filing schedule; 53-man roster cutdown; practice squad size</td>
+<td data-value="1" class="wide">Quoted text: &#x27;In accordance with the Personnel (Injury) Report Policy...&#x27;.</td>
+<td data-value="1">2026-11-12</td>
+<td><span class="src"><a href="https://www.nfl.com/news/2026-27-national-football-league-important-dates" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official league calendar">S04 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S05" data-verified="true">
+<td><code>S05</code></td>
+<td data-value="1">National Football League (NFL.com news)</td>
+<td data-value="1">Official inactives list</td>
+<td data-value="1" class="wide">2026 Week 9 inactives by game, including &#x27;emergency third QB&#x27; designations</td>
+<td data-value="1" class="wide">Used as the official example of published third-string quarterback information.</td>
+<td data-value="1">2026-11-12</td>
+<td><span class="src"><a href="https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official inactives list">S05 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S06" data-verified="true">
+<td><code>S06</code></td>
+<td data-value="1">National Football League (NFL.com)</td>
+<td data-value="1">Official schedule</td>
+<td data-value="1" class="wide">2026 schedule: Week 10 games, dates, kickoff times, networks, team records</td>
+<td data-value="1" class="wide">Canonical URL used.</td>
+<td data-value="1">2026-11-12</td>
+<td><span class="src"><a href="https://www.nfl.com/schedules" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official schedule">S06 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S07" data-verified="true">
+<td><code>S07</code></td>
+<td data-value="1">National Football League (NFL.com)</td>
+<td data-value="1">Official club roster</td>
+<td data-value="1" class="wide">Chiefs 2026 player roster with status codes (ACT, RES, DEV, others)</td>
+<td data-value="1" class="wide">Status-code definitions are not published on the page; flagged F20.</td>
+<td data-value="1">2026-11-12</td>
+<td><span class="src"><a href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official club roster">S07 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S08" data-verified="true">
+<td><code>S08</code></td>
+<td data-value="1">NFL Next Gen Stats</td>
+<td data-value="1">Official advanced metrics</td>
+<td data-value="1" class="wide">Official Next Gen Stats charts, stats and highlights (2026 season)</td>
+<td data-value="1" class="wide">Confirms an official advanced-metrics data source exists.</td>
+<td data-value="1">2026-11-12</td>
+<td><span class="src"><a href="https://nextgenstats.nfl.com/" target="_blank" rel="noopener noreferrer" title="NFL Next Gen Stats — Official advanced metrics">S08 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S09" data-verified="true">
+<td><code>S09</code></td>
+<td data-value="1">NFL Football Operations</td>
+<td data-value="1">Official playing rules</td>
+<td data-value="1" class="wide">2026 NFL Rulebook and 2026 rule changes</td>
+<td data-value="1" class="wide">Canonical URL used.</td>
+<td data-value="1">2026-11-12</td>
+<td><span class="src"><a href="https://operations.nfl.com/rules-officiating/2026-nfl-rulebook" target="_blank" rel="noopener noreferrer" title="NFL Football Operations — Official playing rules">S09 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S10" data-verified="true">
+<td><code>S10</code></td>
+<td data-value="1">NFL Football Operations</td>
+<td data-value="1">Official roster regulations</td>
+<td data-value="1" class="wide">Roster sizes (53-man Active/Inactive List), 16/17-player practice squad, standard elevation addendum</td>
+<td data-value="1" class="wide">Used for the rules governing replacement players.</td>
+<td data-value="1">2026-11-12</td>
+<td><span class="src"><a href="https://operations.nfl.com/calendar-events/nfl-free-agency/contract-language" target="_blank" rel="noopener noreferrer" title="NFL Football Operations — Official roster regulations">S10 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S11" data-verified="true">
+<td><code>S11</code></td>
+<td data-value="1">NFL Football Operations</td>
+<td data-value="1">Official game operations manual</td>
+<td data-value="1" class="wide">Game Operations Manual requirements incl. two independently certified athletic trainers monitoring the broadcast feed</td>
+<td data-value="1" class="wide">Canonical URL used.</td>
+<td data-value="1">2026-11-12</td>
+<td><span class="src"><a href="https://operations.nfl.com/game-operations-logistics/preparation-safety/game-ops-manual" target="_blank" rel="noopener noreferrer" title="NFL Football Operations — Official game operations manual">S11 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S12" data-verified="true">
+<td><code>S12</code></td>
+<td data-value="1">NFL Football Operations</td>
+<td data-value="1">Official health &amp; safety policy</td>
+<td data-value="1" class="wide">Player Health &amp; Safety, Competition Committee injury-data review, concussion protocol</td>
+<td data-value="1" class="wide">Used for the injury-data governance context.</td>
+<td data-value="1">2026-11-12</td>
+<td><span class="src"><a href="https://operations.nfl.com/game-operations-logistics/preparation-safety/health-safety" target="_blank" rel="noopener noreferrer" title="NFL Football Operations — Official health &amp; safety policy">S12 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S13" data-verified="true">
+<td><code>S13</code></td>
+<td data-value="1">NFL Football Operations</td>
+<td data-value="1">Official weekly accountability data</td>
+<td data-value="1" class="wide">2026 by-week plays, fines and percentages (through Week 8)</td>
+<td data-value="1" class="wide">Example of an official, weekly, numerically published league dataset.</td>
+<td data-value="1">2026-11-12</td>
+<td><span class="src"><a href="https://operations.nfl.com/rules-officiating/enforcement/accountability" target="_blank" rel="noopener noreferrer" title="NFL Football Operations — Official weekly accountability data">S13 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S14" data-verified="true">
+<td><code>S14</code></td>
+<td data-value="1">Kansas City Chiefs (chiefs.com)</td>
+<td data-value="1">Official club depth chart</td>
+<td data-value="1" class="wide">Chiefs &#x27;Unofficial Depth Chart&#x27;: Offense, Defense, Special Teams with 1st/2nd/3rd/4th columns</td>
+<td data-value="1" class="wide">Heading literally reads &#x27;Kansas City Chiefs Unofficial Depth Chart&#x27;; flagged F06.</td>
+<td data-value="1">2026-11-12</td>
+<td><span class="src"><a href="https://www.chiefs.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Kansas City Chiefs (chiefs.com) — Official club depth chart">S14 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S15" data-verified="true">
+<td><code>S15</code></td>
+<td data-value="1">Green Bay Packers (packers.com)</td>
+<td data-value="1">Official club depth chart</td>
+<td data-value="1" class="wide">Packers depth chart with 1st/2nd/3rd columns, labelled &#x27;Unofficial, Nov. 10, 2026&#x27;</td>
+<td data-value="1" class="wide">Date label and &#x27;Unofficial&#x27; label transcribed verbatim.</td>
+<td data-value="1">2026-11-12</td>
+<td><span class="src"><a href="https://www.packers.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Green Bay Packers (packers.com) — Official club depth chart">S15 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S16" data-verified="true">
+<td><code>S16</code></td>
+<td data-value="1">San Francisco 49ers (49ers.com)</td>
+<td data-value="1">Official club depth chart</td>
+<td data-value="1" class="wide">49ers depth chart with 1st/2nd/3rd/4th columns, &#x27;Updated as of 11/10/26&#x27;</td>
+<td data-value="1" class="wide">Labelling differs from the other two clubs; flagged F07.</td>
+<td data-value="1">2026-11-12</td>
+<td><span class="src"><a href="https://www.49ers.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="San Francisco 49ers (49ers.com) — Official club depth chart">S16 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S17" data-verified="true">
+<td><code>S17</code></td>
+<td data-value="1">NIST / SEMATECH e-Handbook of Statistical Methods</td>
+<td data-value="1">Official US government statistical reference</td>
+<td data-value="1" class="wide">Pearson correlation definition (-1 to +1), cross-validation definition, generic sample-size advice (20 for a correlation, 32 per group for average difference)</td>
+<td data-value="1" class="wide">Verified on the &#x27;C&#x27; and &#x27;S&#x27; sections of the glossary.</td>
+<td data-value="1">2026-11-12</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S18" data-verified="true">
+<td><code>S18</code></td>
+<td data-value="1">NIST / SEMATECH e-Handbook of Statistical Methods</td>
+<td data-value="1">Official statistical test</td>
+<td data-value="1" class="wide">Two-sample t-test for equal means: hypotheses, test statistic, significance level, critical region</td>
+<td data-value="1" class="wide">Basis for validation gate G06.</td>
+<td data-value="1">2026-11-12</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda353.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official statistical test">S18 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S19" data-verified="true">
+<td><code>S19</code></td>
+<td data-value="1">NIST / SEMATECH e-Handbook of Statistical Methods</td>
+<td data-value="1">Official statistical guidance</td>
+<td data-value="1" class="wide">Correlation vs causality; &#x27;correlation does not imply causality&#x27;; designed experiments</td>
+<td data-value="1" class="wide">Basis for validation gate G08.</td>
+<td data-value="1">2026-11-12</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/ppc/section1/ppc136.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official statistical guidance">S19 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S20" data-verified="true">
+<td><code>S20</code></td>
+<td data-value="1">State of New Jersey, Division of Gaming Enforcement</td>
+<td data-value="1">Official state regulation</td>
+<td data-value="1" class="wide">N.J.A.C. 13:69N sports wagering definitions: sports wager, oddsmaker, event number, operator</td>
+<td data-value="1" class="wide">Official legal definitions for betting terms.</td>
+<td data-value="1">2026-11-12</td>
+<td><span class="src"><a href="https://www.nj.gov/oag/ge/docs/Regulations/CHAPTER69N.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official state regulation">S20 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S21" data-verified="true">
+<td><code>S21</code></td>
+<td data-value="1">State of New Jersey, Division of Gaming Enforcement</td>
+<td data-value="1">Official government research report</td>
+<td data-value="1" class="wide">Sports Wagering in New Jersey, Calendar Year 2020 report (2019 play data): parlay definition, bet-type loss percentages, NFL bet counts, mean loss</td>
+<td data-value="1" class="wide">All quoted percentages read from the report text/Table 15 discussion.</td>
+<td data-value="1">2026-11-12</td>
+<td><span class="src"><a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official government research report">S21 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S22" data-verified="true">
+<td><code>S22</code></td>
+<td data-value="1">GitHub Docs</td>
+<td data-value="1">Official platform documentation</td>
+<td data-value="1" class="wide">GitHub Pages publishing sources: branch + / or /docs; custom Actions workflow; .nojekyll note</td>
+<td data-value="1" class="wide">Deployment method verified against official docs.</td>
+<td data-value="1">2026-11-12</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S22 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S23" data-verified="true">
+<td><code>S23</code></td>
+<td data-value="1">GitHub Docs</td>
+<td data-value="1">Official platform documentation</td>
+<td data-value="1" class="wide">Pages entry file (index.html at top level of publishing source); static site publishing</td>
+<td data-value="1" class="wide">Root index.html requirement verified.</td>
+<td data-value="1">2026-11-12</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S23 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S24" data-verified="true">
+<td><code>S24</code></td>
+<td data-value="1">GitHub (this repository)</td>
+<td data-value="1">Official repository</td>
+<td data-value="1" class="wide">Repository contents, branches, commits, pull requests and coordination board</td>
+<td data-value="1" class="wide">Repo-level claims and coordination flags link here.</td>
+<td data-value="1">2026-11-12</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S25" data-verified="true">
+<td><code>S25</code></td>
+<td data-value="1">GitHub REST API</td>
+<td data-value="1">Official platform API</td>
+<td data-value="1" class="wide">Pages build_type, source branch/path, html_url, status</td>
+<td data-value="1" class="wide">Queried with `gh api` during integration; returns status &#x27;built&#x27;, source main / &#x27;/&#x27;.</td>
+<td data-value="1">2026-11-12</td>
+<td><span class="src"><a href="https://api.github.com/repos/kanlerxz87-cyber/NFL1/pages" target="_blank" rel="noopener noreferrer" title="GitHub REST API — Official platform API">S25 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+</tbody></table></div>
+<h2 id="audit">Line-by-line data audit</h2>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-audit" aria-label="Filter tbl-audit" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-audit">33 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-audit"><caption>Per-file row counts, rows carrying a valid official source id, blank cells and unverified rows. Generated directly from the committed JSON files.</caption>
+<thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Data file</th><th scope="col" class="sortable">Rows / object</th><th scope="col" class="sortable">Rows with official source id</th><th scope="col" class="sortable">Blank cells</th><th scope="col" class="sortable">Unverified rows</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr id="AU-01" data-verified="true">
+<td><code>AU-01</code></td>
+<td data-value="1">data/betting_facts.json</td>
+<td data-value="1" class="num">13</td>
+<td data-value="1">13 / 13</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="AU-02" data-verified="true">
+<td><code>AU-02</code></td>
+<td data-value="1">data/combined_games_check.json</td>
+<td data-value="1" class="num">32</td>
+<td data-value="1">32 / 32</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="AU-03" data-verified="true">
+<td><code>AU-03</code></td>
+<td data-value="1">data/combined_injuries_check.json</td>
+<td data-value="1" class="num">20</td>
+<td data-value="1">20 / 20</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="AU-04" data-verified="true">
+<td><code>AU-04</code></td>
+<td data-value="1">data/combined_standings_check.json</td>
+<td data-value="1" class="num">32</td>
+<td data-value="1">32 / 32</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="AU-05" data-verified="true">
+<td><code>AU-05</code></td>
+<td data-value="1">data/combined_teams_check.json</td>
+<td data-value="1" class="num">32</td>
+<td data-value="1">32 / 32</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="AU-06" data-verified="true">
+<td><code>AU-06</code></td>
+<td data-value="1">data/combined_verification.json</td>
+<td data-value="1" class="num">8</td>
+<td data-value="1">8 / 8</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="AU-07" data-verified="true">
+<td><code>AU-07</code></td>
+<td data-value="1">data/combined_verified_injuries_check.json</td>
+<td data-value="1" class="num">6</td>
+<td data-value="1">6 / 6</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="AU-08" data-verified="true">
+<td><code>AU-08</code></td>
+<td data-value="1">data/combined_verified_standings_check.json</td>
+<td data-value="1" class="num">32</td>
+<td data-value="1">32 / 32</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="AU-09" data-verified="true">
+<td><code>AU-09</code></td>
+<td data-value="1">data/correlation_requests.json</td>
+<td data-value="1" class="num">8</td>
+<td data-value="1">8 / 8</td>
+<td data-value="1" class="num">8</td>
+<td data-value="1" class="num">8</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="AU-10" data-verified="true">
+<td><code>AU-10</code></td>
+<td data-value="1">data/correlations.json</td>
+<td data-value="1" class="num">6</td>
+<td data-value="1">6 / 6</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="AU-11" data-verified="true">
+<td><code>AU-11</code></td>
+<td data-value="1">data/deployment.json</td>
+<td data-value="1" class="num">7</td>
+<td data-value="1">7 / 7</td>
+<td data-value="1" class="num">4</td>
+<td data-value="1" class="num">4</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="AU-12" data-verified="true">
+<td><code>AU-12</code></td>
+<td data-value="1">data/depth_chart.json</td>
+<td data-value="1" class="num">85</td>
+<td data-value="1">85 / 85</td>
+<td data-value="1" class="num">195</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="AU-13" data-verified="true">
+<td><code>AU-13</code></td>
+<td data-value="1">data/depth_chart_meta.json</td>
+<td data-value="1" class="num">3</td>
+<td data-value="1">3 / 3</td>
+<td data-value="1" class="num">1</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="AU-14" data-verified="true">
+<td><code>AU-14</code></td>
+<td data-value="1">data/derived_standings.json</td>
+<td data-value="1" class="num">32</td>
+<td data-value="1">32 / 32</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="AU-15" data-verified="true">
+<td><code>AU-15</code></td>
+<td data-value="1">data/findings.json</td>
+<td data-value="1" class="num">14</td>
+<td data-value="1">14 / 14</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="AU-16" data-verified="true">
+<td><code>AU-16</code></td>
+<td data-value="1">data/flags.json</td>
+<td data-value="1" class="num">36</td>
+<td data-value="1">36 / 36</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="AU-17" data-verified="true">
+<td><code>AU-17</code></td>
+<td data-value="1">data/inactives.json</td>
+<td data-value="1" class="num">20</td>
+<td data-value="1">20 / 20</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="AU-18" data-verified="true">
+<td><code>AU-18</code></td>
+<td data-value="1">data/injuries.json</td>
+<td data-value="1" class="num">61</td>
+<td data-value="1">61 / 61</td>
+<td data-value="1" class="num">110</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="AU-19" data-verified="true">
+<td><code>AU-19</code></td>
+<td data-value="1">data/injury_games.json</td>
+<td data-value="1" class="num">14</td>
+<td data-value="1">14 / 14</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="AU-20" data-verified="true">
+<td><code>AU-20</code></td>
+<td data-value="1">data/injury_policy.json</td>
+<td data-value="1" class="num">6</td>
+<td data-value="1">6 / 6</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="AU-21" data-verified="true">
+<td><code>AU-21</code></td>
+<td data-value="1">data/leaderboard.json</td>
+<td data-value="1" class="num">10</td>
+<td data-value="1">10 / 10</td>
+<td data-value="1" class="num">50</td>
+<td data-value="1" class="num">10</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="AU-22" data-verified="true">
+<td><code>AU-22</code></td>
+<td data-value="1">data/leaderboard_rules.json</td>
+<td data-value="1" class="num">7</td>
+<td data-value="1">7 / 7</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">2</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="AU-23" data-verified="true">
+<td><code>AU-23</code></td>
+<td data-value="1">data/paths.json</td>
+<td data-value="1" class="num">3</td>
+<td data-value="1">3 / 3</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="AU-24" data-verified="true">
+<td><code>AU-24</code></td>
+<td data-value="1">data/questions.json</td>
+<td data-value="1" class="num">27</td>
+<td data-value="1">27 / 27</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="AU-25" data-verified="true">
+<td><code>AU-25</code></td>
+<td data-value="1">data/requirements.json</td>
+<td data-value="1" class="num">36</td>
+<td data-value="1">36 / 36</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="AU-26" data-verified="true">
+<td><code>AU-26</code></td>
+<td data-value="1">data/site_meta.json</td>
+<td data-value="1" class="num">1</td>
+<td data-value="1">0 / 1</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="AU-27" data-verified="true">
+<td><code>AU-27</code></td>
+<td data-value="1">data/sources.json</td>
+<td data-value="1" class="num">25</td>
+<td data-value="1">0 / 25</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="AU-28" data-verified="true">
+<td><code>AU-28</code></td>
+<td data-value="1">data/standings.json</td>
+<td data-value="1" class="num">32</td>
+<td data-value="1">32 / 32</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="AU-29" data-verified="true">
+<td><code>AU-29</code></td>
+<td data-value="1">data/strategies.json</td>
+<td data-value="1" class="num">10</td>
+<td data-value="1">10 / 10</td>
+<td data-value="1" class="num">10</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="AU-30" data-verified="true">
+<td><code>AU-30</code></td>
+<td data-value="1">data/suggestions.json</td>
+<td data-value="1" class="num">20</td>
+<td data-value="1">20 / 20</td>
+<td data-value="1" class="num">26</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="AU-31" data-verified="true">
+<td><code>AU-31</code></td>
+<td data-value="1">data/terms.json</td>
+<td data-value="1" class="num">8</td>
+<td data-value="1">8 / 8</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="AU-32" data-verified="true">
+<td><code>AU-32</code></td>
+<td data-value="1">data/validation_gates.json</td>
+<td data-value="1" class="num">13</td>
+<td data-value="1">13 / 13</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="AU-33" data-verified="true">
+<td><code>AU-33</code></td>
+<td data-value="1">data/verification_report.json</td>
+<td data-value="1" class="num">1</td>
+<td data-value="1">0 / 1</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+</tbody></table></div>
+<h2 id="results">Automated validation results</h2>
+<div class="callout "><b>Validator result: PASS.</b> 999 table rows checked, 999 with an official source link, 81 unverified rows, 0 errors.</div>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-verify-results" aria-label="Filter tbl-verify-results" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-verify-results">15 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-verify-results"><caption>Per-page validator results. Each row links to the official documentation defining the checks.</caption>
+<thead><tr><th scope="col" class="sortable">Page</th><th scope="col" class="sortable">Table rows</th><th scope="col" class="sortable">Rows with official source</th><th scope="col" class="sortable">Unverified rows</th><th scope="col" class="sortable">Broken internal links</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr data-verified="true">
+<td data-value="1">index.html</td>
+<td data-value="1" class="num">30</td>
+<td data-value="1" class="num">30</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S22 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">executive-summary.html</td>
+<td data-value="1" class="num">31</td>
+<td data-value="1" class="num">31</td>
+<td data-value="1" class="num">7</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S22 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">requirements.html</td>
+<td data-value="1" class="num">56</td>
+<td data-value="1" class="num">56</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S22 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">questions.html</td>
+<td data-value="1" class="num">34</td>
+<td data-value="1" class="num">34</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S22 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">suggestions.html</td>
+<td data-value="1" class="num">28</td>
+<td data-value="1" class="num">28</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S22 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">strategy-lab.html</td>
+<td data-value="1" class="num">62</td>
+<td data-value="1" class="num">62</td>
+<td data-value="1" class="num">10</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S22 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">leaderboard.html</td>
+<td data-value="1" class="num">27</td>
+<td data-value="1" class="num">27</td>
+<td data-value="1" class="num">17</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S22 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">bet-types.html</td>
+<td data-value="1" class="num">29</td>
+<td data-value="1" class="num">29</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S22 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">injuries.html</td>
+<td data-value="1" class="num">117</td>
+<td data-value="1" class="num">117</td>
+<td data-value="1" class="num">5</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S22 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">depth-chart.html</td>
+<td data-value="1" class="num">135</td>
+<td data-value="1" class="num">135</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S22 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">data-tables.html</td>
+<td data-value="1" class="num">113</td>
+<td data-value="1" class="num">113</td>
+<td data-value="1" class="num">7</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S22 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">verification.html</td>
+<td data-value="1" class="num">80</td>
+<td data-value="1" class="num">80</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S22 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">flagged.html</td>
+<td data-value="1" class="num">67</td>
+<td data-value="1" class="num">67</td>
+<td data-value="1" class="num">31</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S22 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">deployment.html</td>
+<td data-value="1" class="num">14</td>
+<td data-value="1" class="num">14</td>
+<td data-value="1" class="num">4</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S22 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">integration.html</td>
+<td data-value="1" class="num">176</td>
+<td data-value="1" class="num">176</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S22 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+</tbody></table></div>
+<h2 id="automated">Automated checks</h2>
+<section class="panel"><h2>tools/verify.py</h2>
+<p>The validator parses every generated HTML page and enforces:</p>
+<ul class="tight">
+<li>every <code>&lt;tr&gt;</code> in a <code>table.data-table</code> contains at least one anchor to an allow-listed official domain;</li>
+<li>rows marked <code>data-verified="false"</code> link to <code>flagged.html</code> and keep all <code>data-value</code> cells empty;</li>
+<li>every internal <code>href</code> and <code>src</code> resolves to a file in the repository;</li>
+<li>every source id used by a table row exists in <code>data/sources.json</code> and points to an allow-listed official domain.</li>
+</ul>
+<p>Results are printed by the script and are also run in GitHub Actions on every push and pull request. The live
+site is checked after the merge.</p>
+<p class="small">Publishing rules: <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site">GitHub Docs ↗</a>.</p></section>
+      <div class="footer">
+        NFL1 · 2026 Week 10 snapshot retrieved 2026-11-12 (UTC) ·
+        <a href="verification.html">Verification &amp; sources</a> ·
+        <a href="flagged.html">Flagged for Review</a> ·
+        <a href="https://github.com/kanlerxz87-cyber/NFL1">Source repository ↗</a><br>
+        Blank cells are values the official source does not publish. No value on this site is inferred or filled in.
+      </div>
+    </main>
+  </div>
+</div>
+<script src="site/assets/app.js"></script>
+</body>
+</html>

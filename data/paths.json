@@ -1,0 +1,32 @@
+[
+  {
+    "id": "P-A",
+    "name": "Path A — Data first",
+    "summary": "Close the open data questions (odds source, depth charts for all clubs, game-level panel, inactives deadline), then build signals.",
+    "pros": "Every downstream decision rests on verified, point-in-time official data; validation gates become meaningful.",
+    "cons": "Slower to produce a visible leaderboard; requires repeated official snapshots.",
+    "blocks": "Q05, Q06, Q09, Q10, Q11, Q12, F08, F09, F10",
+    "src": "S02",
+    "verified": true
+  },
+  {
+    "id": "P-B",
+    "name": "Path B — Strategy first",
+    "summary": "Prototype the 10 candidate strategies and the leaderboard immediately, with all performance values blank until gates pass.",
+    "pros": "Fastest visible competition framework and reviewer feedback loop.",
+    "cons": "Risk of optimising on incomplete data; every strategy stays NOT PASSED until the missing official data arrives.",
+    "blocks": "Q11, Q12, Q13, F09, F10, F11",
+    "src": "S19",
+    "verified": true
+  },
+  {
+    "id": "P-C",
+    "name": "Path C — Review only / hold",
+    "summary": "Implement nothing beyond documentation and the review gate until a reviewer explicitly chooses a path.",
+    "pros": "Zero implementation risk; maximum review control.",
+    "cons": "No progress on own lines, signals or leaderboard operation.",
+    "blocks": "Q27, F16, F22",
+    "src": "S24",
+    "verified": true
+  }
+]

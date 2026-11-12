@@ -1,0 +1,362 @@
+[
+  {
+    "id": "R01",
+    "category": "Scope",
+    "requirement": "Collect a full list of requirements.",
+    "analysis": "Requirements inventory with stable IDs R01-R36 on this site.",
+    "status": "documented",
+    "src": "S24",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R02",
+    "category": "Scope",
+    "requirement": "Organize the requirements.",
+    "analysis": "Grouped by category with a dashboard and per-page tables.",
+    "status": "documented",
+    "src": "S24",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R03",
+    "category": "Scope",
+    "requirement": "Analyze the requirements.",
+    "analysis": "Each row has an analysis/response column and status.",
+    "status": "documented",
+    "src": "S24",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R04",
+    "category": "Decision support",
+    "requirement": "Make suggestions on how to improve the site to improve decision making.",
+    "analysis": "20 ranked improvement suggestions with evidence and a decision-impact column.",
+    "status": "documented",
+    "src": "S22",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R05",
+    "category": "Decision support",
+    "requirement": "Create a dedicated section for suggestions so someone can review suggestions and choose the best path before implementing changes.",
+    "analysis": "Dedicated Suggestions page with a Review & Choose a Path gate; nothing is implemented until a path is chosen.",
+    "status": "awaiting review",
+    "src": "S22",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R06",
+    "category": "Decision gate",
+    "requirement": "Provide a clear list of questions.",
+    "analysis": "27 numbered decision questions with explicit blocks and discovery actions.",
+    "status": "documented",
+    "src": "S17",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R07",
+    "category": "Decision gate",
+    "requirement": "Provide a clear list of information that must be addressed.",
+    "analysis": "Known / unknown columns on every question.",
+    "status": "documented",
+    "src": "S17",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R08",
+    "category": "Decision gate",
+    "requirement": "Provide a clear list of answers that need to be addressed before any decision can reasonably be made.",
+    "analysis": "Answer column filled only where an official source publishes the answer; otherwise blank and flagged.",
+    "status": "blank where unverified",
+    "src": "S17",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R09",
+    "category": "Decision gate",
+    "requirement": "Base everything on the information we already have and do not have.",
+    "analysis": "Known/unknown split plus a source registry and an unverified-value registry.",
+    "status": "documented",
+    "src": "S02",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R10",
+    "category": "Decision gate",
+    "requirement": "Make suggestions to discover missing information.",
+    "analysis": "Each question and each flag includes a concrete discovery action and an official source to check.",
+    "status": "documented",
+    "src": "S02",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R11",
+    "category": "Own lines",
+    "requirement": "Originate my own NFL lines.",
+    "analysis": "A reproducible line-generation pipeline is specified using official inputs only; no line value is published because no official odds source exists.",
+    "status": "blocked",
+    "src": "S20",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R12",
+    "category": "Signals",
+    "requirement": "Research strategies for generating useful signals.",
+    "analysis": "Research memo enumerating official data sources, signal families and method sources.",
+    "status": "documented",
+    "src": "S03",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R13",
+    "category": "Signals",
+    "requirement": "Develop strategies for generating useful signals.",
+    "analysis": "10 candidate strategies with hypotheses, inputs, formulas and gate status.",
+    "status": "draft only, not validated",
+    "src": "S19",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R14",
+    "category": "Competition",
+    "requirement": "Treat it as a leaderboard competition that provides rewards for top performing strategies.",
+    "analysis": "Competition rules, three tracks, reward tiers and an empty leaderboard (no fabricated scores).",
+    "status": "awaiting validated results",
+    "src": "S21",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R15",
+    "category": "Bet types",
+    "requirement": "Look at single bets.",
+    "analysis": "Single-bet track with official bet-type definitions and loss rates.",
+    "status": "documented",
+    "src": "S21",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R16",
+    "category": "Bet types",
+    "requirement": "Look at parlays.",
+    "analysis": "Parlay track with a correlation guard and official loss-rate evidence.",
+    "status": "documented",
+    "src": "S21",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R17",
+    "category": "Bet types",
+    "requirement": "Look at player prop bet combos.",
+    "analysis": "Player-prop combo track with an availability gate and a correlation guard.",
+    "status": "documented",
+    "src": "S21",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R18",
+    "category": "Validation",
+    "requirement": "Each strategy must pass validation gates.",
+    "analysis": "13 gates with pass criteria, official method sources and a per-strategy gate matrix; every strategy is currently NOT PASSED.",
+    "status": "defined",
+    "src": "S18",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R19",
+    "category": "Validation",
+    "requirement": "Determine correlation values.",
+    "analysis": "Standings-derived Pearson correlations computed from official NFL data with a reproducible script; all other requested correlations left blank and flagged.",
+    "status": "partially determined",
+    "src": "S17",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R20",
+    "category": "Skill",
+    "requirement": "Remove luck from the equation.",
+    "analysis": "Luck-control protocol: point-in-time data, cross-validation, significance testing, multiple-comparison control, pre-registration.",
+    "status": "defined",
+    "src": "S17",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R21",
+    "category": "Skill",
+    "requirement": "Build strategies that are selectively skill based.",
+    "analysis": "A strategy is published as skill-based only after passing every gate; no strategy currently qualifies.",
+    "status": "none qualify yet",
+    "src": "S19",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R22",
+    "category": "Injuries",
+    "requirement": "The system should be tracking injuries.",
+    "analysis": "Official Week 10 injury report snapshot, official filing schedule, Week 9 inactives and a tracking pipeline specification.",
+    "status": "snapshot + spec",
+    "src": "S01",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R23",
+    "category": "Injuries",
+    "requirement": "Know deficiencies in defenses caused by 2nd, 3rd or 4th string backups replacing starters.",
+    "analysis": "Three official club depth charts transcribed with 1st-4th string columns; deficiency score blank and flagged (no official source).",
+    "status": "partially documented",
+    "src": "S14",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R24",
+    "category": "Injuries",
+    "requirement": "Know the same for offenses (starters or backups).",
+    "analysis": "Offense rows of the same official depth charts, plus emergency third QB entries from official inactives.",
+    "status": "partially documented",
+    "src": "S15",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R25",
+    "category": "Reporting",
+    "requirement": "Create an executive summary outlining important details.",
+    "analysis": "Dedicated Executive Summary page and docs/exec-summary.md.",
+    "status": "documented",
+    "src": "S24",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R26",
+    "category": "Autonomy",
+    "requirement": "There should be no manual input on my part; work on your own to finish all tasks in this session.",
+    "analysis": "All tasks T01-T13 claimed, executed, verified, committed and merged without pausing for input.",
+    "status": "documented",
+    "src": "S24",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R27",
+    "category": "Verification",
+    "requirement": "Work line by line, verify everything from official verified trusted sources, no hallucinations.",
+    "analysis": "Line-by-line transcription, per-row source links, blank cells for unconfirmed values, reproducible scripts and an automated validator.",
+    "status": "documented",
+    "src": "S02",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R28",
+    "category": "Repo work",
+    "requirement": "Review the repo; verify line by line from official trusted sources; provide links for manual review; flag irregularities.",
+    "analysis": "Repo audit, source registry, 24 flags with official links, all on this site.",
+    "status": "documented",
+    "src": "S24",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R29",
+    "category": "Site",
+    "requirement": "Create a GitHub Pages live site with a clean landing page and subpages organized by category; simple dashboard UI.",
+    "analysis": "12-page static dashboard, grouped navigation, responsive CSS, no external dependencies.",
+    "status": "deployed",
+    "src": "S23",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R30",
+    "category": "Site",
+    "requirement": "Contain all entries and findings in a simple, easy to read table format, including analysis and findings.",
+    "analysis": "Every dataset is a sortable/filterable table; findings and analysis have their own tables.",
+    "status": "documented",
+    "src": "S24",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R31",
+    "category": "Verification",
+    "requirement": "Every table row must have a source link to an official site; leave blank and flag unverified values; never infer or fill in values.",
+    "analysis": "Enforced by tools/verify.py on every generated HTML table; results published on the Verification page.",
+    "status": "enforced",
+    "src": "S22",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R32",
+    "category": "Parallel sessions",
+    "requirement": "Use COORDINATION.md as shared task board; claim tasks; non-overlapping scopes; small frequent commits; pull --rebase before every push; log conflicts.",
+    "analysis": "Board created, tasks claimed, disjoint file scopes, frequent commits, coordination conflicts logged.",
+    "status": "documented",
+    "src": "S24",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R33",
+    "category": "Integration",
+    "requirement": "Shared outputs changed only by the final integration session; merge branches; re-verify combined data; confirm no broken links; publish to Pages.",
+    "analysis": "This session acts as integration (T12/T13); combined verification and link check run before merge.",
+    "status": "documented",
+    "src": "S23",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R34",
+    "category": "PR & merge",
+    "requirement": "Create a PR to main with summary, sources and flagged irregularities; merge without approval; confirm Pages deploy; record PR link and result.",
+    "analysis": "Recorded on the Deployment & PR page and in COORDINATION.md.",
+    "status": "executed",
+    "src": "S24",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R35",
+    "category": "Flagged",
+    "requirement": "Publish flagged irregularities and unverified items on a clearly labeled Flagged for Review page with source links.",
+    "analysis": "Dedicated Flagged for Review page with 24 entries, each with official source links.",
+    "status": "documented",
+    "src": "S24",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "R36",
+    "category": "Reliability",
+    "requirement": "If build, check or deploy fails, fix and retry until the site is live; do not merge a broken site.",
+    "analysis": "Build and link checks run locally and in CI before merge; deployment status checked after merge.",
+    "status": "enforced",
+    "src": "S22",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  }
+]
