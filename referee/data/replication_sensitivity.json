@@ -1,0 +1,197 @@
+{
+ "generated_by": "referee/analysis/replicate_sensitivity.py",
+ "status": "UNVERIFIED INPUT - no official source exists for betting lines or prices",
+ "price_test": {
+  "note": "Bets graded only where games.csv has a closing price for the side bet (mostly 2006 onward).",
+  "rows": [
+   {
+    "strategy": "S04 Divisional underdog +6.5 or more",
+    "graded_bets_with_a_price": 676,
+    "wins": 344,
+    "win_pct": 50.89,
+    "roi_at_assumed_minus_110_pct": -2.85,
+    "roi_at_actual_price_pct": -2.09,
+    "difference_pct_points": 0.76,
+    "median_price": -108.0
+   },
+   {
+    "strategy": "S05 Underdog on short rest (<=4 days)",
+    "graded_bets_with_a_price": 272,
+    "wins": 126,
+    "win_pct": 46.32,
+    "roi_at_assumed_minus_110_pct": -11.56,
+    "roi_at_actual_price_pct": -9.94,
+    "difference_pct_points": 1.62,
+    "median_price": -106.0
+   },
+   {
+    "strategy": "S06 Fade divisional road favourite of 6.5+",
+    "graded_bets_with_a_price": 194,
+    "wins": 98,
+    "win_pct": 50.52,
+    "roi_at_assumed_minus_110_pct": -3.56,
+    "roi_at_actual_price_pct": -3.22,
+    "difference_pct_points": 0.34,
+    "median_price": -109.0
+   },
+   {
+    "strategy": "S07 Home team with 3+ rest-day edge",
+    "graded_bets_with_a_price": 483,
+    "wins": 240,
+    "win_pct": 49.69,
+    "roi_at_assumed_minus_110_pct": -5.14,
+    "roi_at_actual_price_pct": -3.24,
+    "difference_pct_points": 1.9,
+    "median_price": -106.0
+   },
+   {
+    "strategy": "S08 Home team facing opponent off a bye",
+    "graded_bets_with_a_price": 324,
+    "wins": 150,
+    "win_pct": 46.3,
+    "roi_at_assumed_minus_110_pct": -11.62,
+    "roi_at_actual_price_pct": -9.71,
+    "difference_pct_points": 1.91,
+    "median_price": -105.0
+   },
+   {
+    "strategy": "S09 Home favourite of 10 or more",
+    "graded_bets_with_a_price": 526,
+    "wins": 259,
+    "win_pct": 49.24,
+    "roi_at_assumed_minus_110_pct": -6.0,
+    "roi_at_actual_price_pct": -3.06,
+    "difference_pct_points": 2.94,
+    "median_price": -103.0
+   },
+   {
+    "strategy": "S10 Over when closing total is 41 or lower",
+    "graded_bets_with_a_price": 1251,
+    "wins": 660,
+    "win_pct": 52.76,
+    "roi_at_assumed_minus_110_pct": 0.72,
+    "roi_at_actual_price_pct": 2.52,
+    "difference_pct_points": 1.8,
+    "median_price": -106.0
+   },
+   {
+    "strategy": "S11 Under in divisional games with total 47+",
+    "graded_bets_with_a_price": 525,
+    "wins": 287,
+    "win_pct": 54.67,
+    "roi_at_assumed_minus_110_pct": 4.36,
+    "roi_at_actual_price_pct": 6.68,
+    "difference_pct_points": 2.31,
+    "median_price": -106.0
+   }
+  ]
+ },
+ "line_source_test": {
+  "games_in_both_files": 3237,
+  "seasons": [
+   2006,
+   2007,
+   2008,
+   2009,
+   2010,
+   2011,
+   2012,
+   2013,
+   2014,
+   2015,
+   2016,
+   2017,
+   2018
+  ],
+  "rows": [
+   {
+    "strategy": "S04 Divisional underdog +6.5 or more",
+    "record_games_csv": "222-211-10",
+    "win_pct_games_csv": 51.27,
+    "record_closing_lines_csv": "229-222-8",
+    "win_pct_closing_lines_csv": 50.78,
+    "win_pct_change_points": -0.49,
+    "bets_only_in_games_csv": 2,
+    "bets_only_in_closing_lines_csv": 18,
+    "same_bet_different_result": 4
+   },
+   {
+    "strategy": "S05 Underdog on short rest (<=4 days)",
+    "record_games_csv": "59-91-4",
+    "win_pct_games_csv": 39.33,
+    "record_closing_lines_csv": "58-90-5",
+    "win_pct_closing_lines_csv": 39.19,
+    "win_pct_change_points": -0.14,
+    "bets_only_in_games_csv": 1,
+    "bets_only_in_closing_lines_csv": 0,
+    "same_bet_different_result": 1
+   },
+   {
+    "strategy": "S06 Fade divisional road favourite of 6.5+",
+    "record_games_csv": "56-50-1",
+    "win_pct_games_csv": 52.83,
+    "record_closing_lines_csv": "59-53-1",
+    "win_pct_closing_lines_csv": 52.68,
+    "win_pct_change_points": -0.15,
+    "bets_only_in_games_csv": 1,
+    "bets_only_in_closing_lines_csv": 7,
+    "same_bet_different_result": 2
+   },
+   {
+    "strategy": "S07 Home team with 3+ rest-day edge",
+    "record_games_csv": "138-140-7",
+    "win_pct_games_csv": 49.64,
+    "record_closing_lines_csv": "137-139-9",
+    "win_pct_closing_lines_csv": 49.64,
+    "win_pct_change_points": -0.0,
+    "bets_only_in_games_csv": 0,
+    "bets_only_in_closing_lines_csv": 0,
+    "same_bet_different_result": 4
+   },
+   {
+    "strategy": "S08 Home team facing opponent off a bye",
+    "record_games_csv": "88-119-5",
+    "win_pct_games_csv": 42.51,
+    "record_closing_lines_csv": "87-119-6",
+    "win_pct_closing_lines_csv": 42.23,
+    "win_pct_change_points": -0.28,
+    "bets_only_in_games_csv": 0,
+    "bets_only_in_closing_lines_csv": 0,
+    "same_bet_different_result": 1
+   },
+   {
+    "strategy": "S09 Home favourite of 10 or more",
+    "record_games_csv": "164-187-10",
+    "win_pct_games_csv": 46.72,
+    "record_closing_lines_csv": "161-182-8",
+    "win_pct_closing_lines_csv": 46.94,
+    "win_pct_change_points": 0.22,
+    "bets_only_in_games_csv": 16,
+    "bets_only_in_closing_lines_csv": 6,
+    "same_bet_different_result": 1
+   },
+   {
+    "strategy": "S10 Over when closing total is 41 or lower",
+    "record_games_csv": "500-440-23",
+    "win_pct_games_csv": 53.19,
+    "record_closing_lines_csv": "478-421-23",
+    "win_pct_closing_lines_csv": 53.17,
+    "win_pct_change_points": -0.02,
+    "bets_only_in_games_csv": 51,
+    "bets_only_in_closing_lines_csv": 10,
+    "same_bet_different_result": 8
+   },
+   {
+    "strategy": "S11 Under in divisional games with total 47+",
+    "record_games_csv": "162-134-3",
+    "win_pct_games_csv": 54.73,
+    "record_closing_lines_csv": "172-138-3",
+    "win_pct_closing_lines_csv": 55.48,
+    "win_pct_change_points": 0.75,
+    "bets_only_in_games_csv": 6,
+    "bets_only_in_closing_lines_csv": 20,
+    "same_bet_different_result": 2
+   }
+  ]
+ }
+}

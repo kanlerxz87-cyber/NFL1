@@ -1,0 +1,797 @@
+{
+ "generated_by": "referee/analysis/replicate_main_data.py",
+ "tables": [
+  {
+   "file": "data/standings.csv",
+   "owner": "533256e1",
+   "blob": "ef28885fffcfb471cd82e5d9ced869a6a066b831",
+   "what": "2026 league standings snapshot (W, L, T, PCT, PF, PA, NET)",
+   "official_source": "https://www.nfl.com/standings/league/2026/REG",
+   "rows": [
+    {
+     "key": "Buffalo Bills",
+     "published": "7-1-0, PF 256, PA 187, net 69, pct 0.875",
+     "official": "7-1-0, PF 256, PA 187, net 69",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+     "key": "San Francisco 49ers",
+     "published": "7-1-0, PF 235, PA 156, net 79, pct 0.875",
+     "official": "7-1-0, PF 235, PA 156, net 79",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+     "key": "Chicago Bears",
+     "published": "7-2-0, PF 241, PA 184, net 57, pct 0.778",
+     "official": "7-2-0, PF 241, PA 184, net 57",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+     "key": "Denver Broncos",
+     "published": "7-2-0, PF 198, PA 186, net 12, pct 0.778",
+     "official": "7-2-0, PF 198, PA 186, net 12",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+     "key": "Cincinnati Bengals",
+     "published": "6-2-0, PF 240, PA 175, net 65, pct 0.750",
+     "official": "6-2-0, PF 240, PA 175, net 65",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+     "key": "Detroit Lions",
+     "published": "6-2-0, PF 222, PA 189, net 33, pct 0.750",
+     "official": "6-2-0, PF 222, PA 189, net 33",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+     "key": "Jacksonville Jaguars",
+     "published": "6-2-0, PF 229, PA 121, net 108, pct 0.750",
+     "official": "6-2-0, PF 229, PA 121, net 108",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+     "key": "Kansas City Chiefs",
+     "published": "6-2-0, PF 202, PA 143, net 59, pct 0.750",
+     "official": "6-2-0, PF 202, PA 143, net 59",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+     "key": "Minnesota Vikings",
+     "published": "6-2-0, PF 146, PA 116, net 30, pct 0.750",
+     "official": "6-2-0, PF 146, PA 116, net 30",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+     "key": "Pittsburgh Steelers",
+     "published": "6-2-0, PF 180, PA 144, net 36, pct 0.750",
+     "official": "6-2-0, PF 180, PA 144, net 36",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+     "key": "New York Giants",
+     "published": "5-2-1, PF 182, PA 172, net 10, pct 0.688",
+     "official": "5-2-1, PF 182, PA 172, net 10",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+     "key": "Green Bay Packers",
+     "published": "6-3-0, PF 216, PA 191, net 25, pct 0.667",
+     "official": "6-3-0, PF 216, PA 191, net 25",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+     "key": "Cleveland Browns",
+     "published": "5-4-0, PF 161, PA 196, net -35, pct 0.556",
+     "official": "5-4-0, PF 161, PA 196, net -35",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+     "key": "Los Angeles Rams",
+     "published": "5-4-0, PF 214, PA 181, net 33, pct 0.556",
+     "official": "5-4-0, PF 214, PA 181, net 33",
+     "result": "match",
+     "issues": [],
+     "note": "abbreviation LAR is not the nfl.com club code (LA); values unaffected",
+     "source": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+     "key": "New England Patriots",
+     "published": "5-4-0, PF 211, PA 207, net 4, pct 0.556",
+     "official": "5-4-0, PF 211, PA 207, net 4",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+     "key": "Seattle Seahawks",
+     "published": "5-4-0, PF 202, PA 162, net 40, pct 0.556",
+     "official": "5-4-0, PF 202, PA 162, net 40",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+     "key": "Baltimore Ravens",
+     "published": "4-5-0, PF 189, PA 236, net -47, pct 0.444",
+     "official": "4-5-0, PF 189, PA 236, net -47",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+     "key": "Dallas Cowboys",
+     "published": "4-5-0, PF 246, PA 236, net 10, pct 0.444",
+     "official": "4-5-0, PF 246, PA 236, net 10",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+     "key": "Las Vegas Raiders",
+     "published": "4-5-0, PF 238, PA 268, net -30, pct 0.444",
+     "official": "4-5-0, PF 238, PA 268, net -30",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+     "key": "Carolina Panthers",
+     "published": "3-5-0, PF 199, PA 219, net -20, pct 0.375",
+     "official": "3-5-0, PF 199, PA 219, net -20",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+     "key": "Houston Texans",
+     "published": "3-5-0, PF 209, PA 192, net 17, pct 0.375",
+     "official": "3-5-0, PF 209, PA 192, net 17",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+     "key": "New Orleans Saints",
+     "published": "3-5-0, PF 185, PA 216, net -31, pct 0.375",
+     "official": "3-5-0, PF 185, PA 216, net -31",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+     "key": "Arizona Cardinals",
+     "published": "3-6-0, PF 178, PA 255, net -77, pct 0.333",
+     "official": "3-6-0, PF 178, PA 255, net -77",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+     "key": "Atlanta Falcons",
+     "published": "3-6-0, PF 188, PA 223, net -35, pct 0.333",
+     "official": "3-6-0, PF 188, PA 223, net -35",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+     "key": "Tampa Bay Buccaneers",
+     "published": "3-6-0, PF 202, PA 178, net 24, pct 0.333",
+     "official": "3-6-0, PF 202, PA 178, net 24",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+     "key": "Washington Commanders",
+     "published": "2-5-1, PF 172, PA 202, net -30, pct 0.313",
+     "official": "2-5-1, PF 172, PA 202, net -30",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+     "key": "Indianapolis Colts",
+     "published": "2-7-0, PF 184, PA 249, net -65, pct 0.222",
+     "official": "2-7-0, PF 184, PA 249, net -65",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+     "key": "New York Jets",
+     "published": "2-7-0, PF 182, PA 223, net -41, pct 0.222",
+     "official": "2-7-0, PF 182, PA 223, net -41",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+     "key": "Philadelphia Eagles",
+     "published": "2-7-0, PF 148, PA 221, net -73, pct 0.222",
+     "official": "2-7-0, PF 148, PA 221, net -73",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+     "key": "Miami Dolphins",
+     "published": "1-7-0, PF 126, PA 200, net -74, pct 0.125",
+     "official": "1-7-0, PF 126, PA 200, net -74",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+     "key": "Tennessee Titans",
+     "published": "1-7-0, PF 144, PA 199, net -55, pct 0.125",
+     "official": "1-7-0, PF 144, PA 199, net -55",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+     "key": "Los Angeles Chargers",
+     "published": "0-8-0, PF 121, PA 219, net -98, pct 0.000",
+     "official": "0-8-0, PF 121, PA 219, net -98",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/standings/league/2026/REG"
+    }
+   ],
+   "rows_checked": 32,
+   "rows_matching": 32,
+   "missing_official_teams": []
+  },
+  {
+   "file": "data/teams.csv",
+   "owner": "533256e1",
+   "blob": "9e66794a8aa289e8a4a09e6b4cd8831efa256071",
+   "what": "32 teams with conference and division",
+   "official_source": "https://www.nfl.com/standings/division/2026/REG",
+   "rows": [
+    {
+     "key": "Arizona Cardinals",
+     "published": "NFC / NFC West",
+     "official": "NFC / grouped with LA, SEA, SF",
+     "result": "match",
+     "issues": [],
+     "note": "Conference and four-team grouping confirmed. The division name itself (East/North/South/West) is not in the fetched page text, so the label is not confirmed by this check.",
+     "source": "https://www.nfl.com/standings/division/2026/REG"
+    },
+    {
+     "key": "Atlanta Falcons",
+     "published": "NFC / NFC South",
+     "official": "NFC / grouped with CAR, NO, TB",
+     "result": "match",
+     "issues": [],
+     "note": "Conference and four-team grouping confirmed. The division name itself (East/North/South/West) is not in the fetched page text, so the label is not confirmed by this check.",
+     "source": "https://www.nfl.com/standings/division/2026/REG"
+    },
+    {
+     "key": "Baltimore Ravens",
+     "published": "AFC / AFC North",
+     "official": "AFC / grouped with CIN, CLE, PIT",
+     "result": "match",
+     "issues": [],
+     "note": "Conference and four-team grouping confirmed. The division name itself (East/North/South/West) is not in the fetched page text, so the label is not confirmed by this check.",
+     "source": "https://www.nfl.com/standings/division/2026/REG"
+    },
+    {
+     "key": "Buffalo Bills",
+     "published": "AFC / AFC East",
+     "official": "AFC / grouped with MIA, NE, NYJ",
+     "result": "match",
+     "issues": [],
+     "note": "Conference and four-team grouping confirmed. The division name itself (East/North/South/West) is not in the fetched page text, so the label is not confirmed by this check.",
+     "source": "https://www.nfl.com/standings/division/2026/REG"
+    },
+    {
+     "key": "Carolina Panthers",
+     "published": "NFC / NFC South",
+     "official": "NFC / grouped with ATL, NO, TB",
+     "result": "match",
+     "issues": [],
+     "note": "Conference and four-team grouping confirmed. The division name itself (East/North/South/West) is not in the fetched page text, so the label is not confirmed by this check.",
+     "source": "https://www.nfl.com/standings/division/2026/REG"
+    },
+    {
+     "key": "Chicago Bears",
+     "published": "NFC / NFC North",
+     "official": "NFC / grouped with DET, GB, MIN",
+     "result": "match",
+     "issues": [],
+     "note": "Conference and four-team grouping confirmed. The division name itself (East/North/South/West) is not in the fetched page text, so the label is not confirmed by this check.",
+     "source": "https://www.nfl.com/standings/division/2026/REG"
+    },
+    {
+     "key": "Cincinnati Bengals",
+     "published": "AFC / AFC North",
+     "official": "AFC / grouped with BAL, CLE, PIT",
+     "result": "match",
+     "issues": [],
+     "note": "Conference and four-team grouping confirmed. The division name itself (East/North/South/West) is not in the fetched page text, so the label is not confirmed by this check.",
+     "source": "https://www.nfl.com/standings/division/2026/REG"
+    },
+    {
+     "key": "Cleveland Browns",
+     "published": "AFC / AFC North",
+     "official": "AFC / grouped with BAL, CIN, PIT",
+     "result": "match",
+     "issues": [],
+     "note": "Conference and four-team grouping confirmed. The division name itself (East/North/South/West) is not in the fetched page text, so the label is not confirmed by this check.",
+     "source": "https://www.nfl.com/standings/division/2026/REG"
+    },
+    {
+     "key": "Dallas Cowboys",
+     "published": "NFC / NFC East",
+     "official": "NFC / grouped with NYG, PHI, WAS",
+     "result": "match",
+     "issues": [],
+     "note": "Conference and four-team grouping confirmed. The division name itself (East/North/South/West) is not in the fetched page text, so the label is not confirmed by this check.",
+     "source": "https://www.nfl.com/standings/division/2026/REG"
+    },
+    {
+     "key": "Denver Broncos",
+     "published": "AFC / AFC West",
+     "official": "AFC / grouped with KC, LAC, LV",
+     "result": "match",
+     "issues": [],
+     "note": "Conference and four-team grouping confirmed. The division name itself (East/North/South/West) is not in the fetched page text, so the label is not confirmed by this check.",
+     "source": "https://www.nfl.com/standings/division/2026/REG"
+    },
+    {
+     "key": "Detroit Lions",
+     "published": "NFC / NFC North",
+     "official": "NFC / grouped with CHI, GB, MIN",
+     "result": "match",
+     "issues": [],
+     "note": "Conference and four-team grouping confirmed. The division name itself (East/North/South/West) is not in the fetched page text, so the label is not confirmed by this check.",
+     "source": "https://www.nfl.com/standings/division/2026/REG"
+    },
+    {
+     "key": "Green Bay Packers",
+     "published": "NFC / NFC North",
+     "official": "NFC / grouped with CHI, DET, MIN",
+     "result": "match",
+     "issues": [],
+     "note": "Conference and four-team grouping confirmed. The division name itself (East/North/South/West) is not in the fetched page text, so the label is not confirmed by this check.",
+     "source": "https://www.nfl.com/standings/division/2026/REG"
+    },
+    {
+     "key": "Houston Texans",
+     "published": "AFC / AFC South",
+     "official": "AFC / grouped with IND, JAX, TEN",
+     "result": "match",
+     "issues": [],
+     "note": "Conference and four-team grouping confirmed. The division name itself (East/North/South/West) is not in the fetched page text, so the label is not confirmed by this check.",
+     "source": "https://www.nfl.com/standings/division/2026/REG"
+    },
+    {
+     "key": "Indianapolis Colts",
+     "published": "AFC / AFC South",
+     "official": "AFC / grouped with HOU, JAX, TEN",
+     "result": "match",
+     "issues": [],
+     "note": "Conference and four-team grouping confirmed. The division name itself (East/North/South/West) is not in the fetched page text, so the label is not confirmed by this check.",
+     "source": "https://www.nfl.com/standings/division/2026/REG"
+    },
+    {
+     "key": "Jacksonville Jaguars",
+     "published": "AFC / AFC South",
+     "official": "AFC / grouped with HOU, IND, TEN",
+     "result": "match",
+     "issues": [],
+     "note": "Conference and four-team grouping confirmed. The division name itself (East/North/South/West) is not in the fetched page text, so the label is not confirmed by this check.",
+     "source": "https://www.nfl.com/standings/division/2026/REG"
+    },
+    {
+     "key": "Kansas City Chiefs",
+     "published": "AFC / AFC West",
+     "official": "AFC / grouped with DEN, LAC, LV",
+     "result": "match",
+     "issues": [],
+     "note": "Conference and four-team grouping confirmed. The division name itself (East/North/South/West) is not in the fetched page text, so the label is not confirmed by this check.",
+     "source": "https://www.nfl.com/standings/division/2026/REG"
+    },
+    {
+     "key": "Las Vegas Raiders",
+     "published": "AFC / AFC West",
+     "official": "AFC / grouped with DEN, KC, LAC",
+     "result": "match",
+     "issues": [],
+     "note": "Conference and four-team grouping confirmed. The division name itself (East/North/South/West) is not in the fetched page text, so the label is not confirmed by this check.",
+     "source": "https://www.nfl.com/standings/division/2026/REG"
+    },
+    {
+     "key": "Los Angeles Chargers",
+     "published": "AFC / AFC West",
+     "official": "AFC / grouped with DEN, KC, LV",
+     "result": "match",
+     "issues": [],
+     "note": "Conference and four-team grouping confirmed. The division name itself (East/North/South/West) is not in the fetched page text, so the label is not confirmed by this check.",
+     "source": "https://www.nfl.com/standings/division/2026/REG"
+    },
+    {
+     "key": "Los Angeles Rams",
+     "published": "NFC / NFC West",
+     "official": "NFC / grouped with ARI, SEA, SF",
+     "result": "match",
+     "issues": [],
+     "note": "Conference and four-team grouping confirmed. The division name itself (East/North/South/West) is not in the fetched page text, so the label is not confirmed by this check.",
+     "source": "https://www.nfl.com/standings/division/2026/REG"
+    },
+    {
+     "key": "Miami Dolphins",
+     "published": "AFC / AFC East",
+     "official": "AFC / grouped with BUF, NE, NYJ",
+     "result": "match",
+     "issues": [],
+     "note": "Conference and four-team grouping confirmed. The division name itself (East/North/South/West) is not in the fetched page text, so the label is not confirmed by this check.",
+     "source": "https://www.nfl.com/standings/division/2026/REG"
+    },
+    {
+     "key": "Minnesota Vikings",
+     "published": "NFC / NFC North",
+     "official": "NFC / grouped with CHI, DET, GB",
+     "result": "match",
+     "issues": [],
+     "note": "Conference and four-team grouping confirmed. The division name itself (East/North/South/West) is not in the fetched page text, so the label is not confirmed by this check.",
+     "source": "https://www.nfl.com/standings/division/2026/REG"
+    },
+    {
+     "key": "New England Patriots",
+     "published": "AFC / AFC East",
+     "official": "AFC / grouped with BUF, MIA, NYJ",
+     "result": "match",
+     "issues": [],
+     "note": "Conference and four-team grouping confirmed. The division name itself (East/North/South/West) is not in the fetched page text, so the label is not confirmed by this check.",
+     "source": "https://www.nfl.com/standings/division/2026/REG"
+    },
+    {
+     "key": "New Orleans Saints",
+     "published": "NFC / NFC South",
+     "official": "NFC / grouped with ATL, CAR, TB",
+     "result": "match",
+     "issues": [],
+     "note": "Conference and four-team grouping confirmed. The division name itself (East/North/South/West) is not in the fetched page text, so the label is not confirmed by this check.",
+     "source": "https://www.nfl.com/standings/division/2026/REG"
+    },
+    {
+     "key": "New York Giants",
+     "published": "NFC / NFC East",
+     "official": "NFC / grouped with DAL, PHI, WAS",
+     "result": "match",
+     "issues": [],
+     "note": "Conference and four-team grouping confirmed. The division name itself (East/North/South/West) is not in the fetched page text, so the label is not confirmed by this check.",
+     "source": "https://www.nfl.com/standings/division/2026/REG"
+    },
+    {
+     "key": "New York Jets",
+     "published": "AFC / AFC East",
+     "official": "AFC / grouped with BUF, MIA, NE",
+     "result": "match",
+     "issues": [],
+     "note": "Conference and four-team grouping confirmed. The division name itself (East/North/South/West) is not in the fetched page text, so the label is not confirmed by this check.",
+     "source": "https://www.nfl.com/standings/division/2026/REG"
+    },
+    {
+     "key": "Philadelphia Eagles",
+     "published": "NFC / NFC East",
+     "official": "NFC / grouped with DAL, NYG, WAS",
+     "result": "match",
+     "issues": [],
+     "note": "Conference and four-team grouping confirmed. The division name itself (East/North/South/West) is not in the fetched page text, so the label is not confirmed by this check.",
+     "source": "https://www.nfl.com/standings/division/2026/REG"
+    },
+    {
+     "key": "Pittsburgh Steelers",
+     "published": "AFC / AFC North",
+     "official": "AFC / grouped with BAL, CIN, CLE",
+     "result": "match",
+     "issues": [],
+     "note": "Conference and four-team grouping confirmed. The division name itself (East/North/South/West) is not in the fetched page text, so the label is not confirmed by this check.",
+     "source": "https://www.nfl.com/standings/division/2026/REG"
+    },
+    {
+     "key": "San Francisco 49ers",
+     "published": "NFC / NFC West",
+     "official": "NFC / grouped with ARI, LA, SEA",
+     "result": "match",
+     "issues": [],
+     "note": "Conference and four-team grouping confirmed. The division name itself (East/North/South/West) is not in the fetched page text, so the label is not confirmed by this check.",
+     "source": "https://www.nfl.com/standings/division/2026/REG"
+    },
+    {
+     "key": "Seattle Seahawks",
+     "published": "NFC / NFC West",
+     "official": "NFC / grouped with ARI, LA, SF",
+     "result": "match",
+     "issues": [],
+     "note": "Conference and four-team grouping confirmed. The division name itself (East/North/South/West) is not in the fetched page text, so the label is not confirmed by this check.",
+     "source": "https://www.nfl.com/standings/division/2026/REG"
+    },
+    {
+     "key": "Tampa Bay Buccaneers",
+     "published": "NFC / NFC South",
+     "official": "NFC / grouped with ATL, CAR, NO",
+     "result": "match",
+     "issues": [],
+     "note": "Conference and four-team grouping confirmed. The division name itself (East/North/South/West) is not in the fetched page text, so the label is not confirmed by this check.",
+     "source": "https://www.nfl.com/standings/division/2026/REG"
+    },
+    {
+     "key": "Tennessee Titans",
+     "published": "AFC / AFC South",
+     "official": "AFC / grouped with HOU, IND, JAX",
+     "result": "match",
+     "issues": [],
+     "note": "Conference and four-team grouping confirmed. The division name itself (East/North/South/West) is not in the fetched page text, so the label is not confirmed by this check.",
+     "source": "https://www.nfl.com/standings/division/2026/REG"
+    },
+    {
+     "key": "Washington Commanders",
+     "published": "NFC / NFC East",
+     "official": "NFC / grouped with DAL, NYG, PHI",
+     "result": "match",
+     "issues": [],
+     "note": "Conference and four-team grouping confirmed. The division name itself (East/North/South/West) is not in the fetched page text, so the label is not confirmed by this check.",
+     "source": "https://www.nfl.com/standings/division/2026/REG"
+    }
+   ],
+   "rows_checked": 32,
+   "rows_matching": 32,
+   "missing_official_teams": []
+  },
+  {
+   "file": "data/injuries.csv",
+   "owner": "533256e1",
+   "blob": "1f39a362849218dc6cd5610fbf4d0aa7910274d7",
+   "what": "2026 Week 10 injury report rows, Commanders at Giants only",
+   "official_source": "https://www.nfl.com/injuries/",
+   "rows": [
+    {
+     "key": "Washington Commanders - John Bates",
+     "published": "TE | (blank) | Full Participation in Practice | (blank)",
+     "official": "TE | (blank) | Full Participation in Practice | (blank)",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/injuries/"
+    },
+    {
+     "key": "Washington Commanders - Treylon Burks",
+     "published": "WR | (blank) | Did Not Participate In Practice | (blank)",
+     "official": "WR | (blank) | Did Not Participate In Practice | (blank)",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/injuries/"
+    },
+    {
+     "key": "Washington Commanders - Jayden Daniels",
+     "published": "QB | (blank) | Full Participation in Practice | (blank)",
+     "official": "QB | (blank) | Full Participation in Practice | (blank)",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/injuries/"
+    },
+    {
+     "key": "Washington Commanders - Matt Gulbin",
+     "published": "C | (blank) | Full Participation in Practice | (blank)",
+     "official": "C | (blank) | Full Participation in Practice | (blank)",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/injuries/"
+    },
+    {
+     "key": "Washington Commanders - Chig Okonkwo",
+     "published": "TE | (blank) | Full Participation in Practice | (blank)",
+     "official": "TE | (blank) | Full Participation in Practice | (blank)",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/injuries/"
+    },
+    {
+     "key": "Washington Commanders - Lucas Patrick",
+     "published": "C | Concussion | Did Not Participate In Practice | Out",
+     "official": "C | Concussion | Did Not Participate In Practice | Out",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/injuries/"
+    },
+    {
+     "key": "Washington Commanders - Amik Robertson",
+     "published": "CB | (blank) | Limited Participation in Practice | (blank)",
+     "official": "CB | (blank) | Limited Participation in Practice | (blank)",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/injuries/"
+    },
+    {
+     "key": "Washington Commanders - Shy Tuttle",
+     "published": "DT | (blank) | Full Participation in Practice | (blank)",
+     "official": "DT | (blank) | Full Participation in Practice | (blank)",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/injuries/"
+    },
+    {
+     "key": "Washington Commanders - Colson Yankoff",
+     "published": "TE | Knee | Did Not Participate In Practice | Out",
+     "official": "TE | Knee | Did Not Participate In Practice | Out",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/injuries/"
+    },
+    {
+     "key": "New York Giants - Abdul Carter",
+     "published": "LB | (blank) | Full Participation in Practice | (blank)",
+     "official": "LB | (blank) | Full Participation in Practice | (blank)",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/injuries/"
+    },
+    {
+     "key": "New York Giants - Jermaine Eluemunor",
+     "published": "T | (blank) | Full Participation in Practice | (blank)",
+     "official": "T | (blank) | Full Participation in Practice | (blank)",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/injuries/"
+    },
+    {
+     "key": "New York Giants - Malik Harrison",
+     "published": "LB | Groin | Limited Participation in Practice | Questionable",
+     "official": "LB | Groin | Limited Participation in Practice | Questionable",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/injuries/"
+    },
+    {
+     "key": "New York Giants - Colton Hood",
+     "published": "CB | (blank) | Full Participation in Practice | (blank)",
+     "official": "CB | (blank) | Full Participation in Practice | (blank)",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/injuries/"
+    },
+    {
+     "key": "New York Giants - Theo Johnson",
+     "published": "TE | (blank) | Full Participation in Practice | (blank)",
+     "official": "TE | (blank) | Full Participation in Practice | (blank)",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/injuries/"
+    },
+    {
+     "key": "New York Giants - Charlie Jones",
+     "published": "WR | (blank) | Full Participation in Practice | (blank)",
+     "official": "WR | (blank) | Full Participation in Practice | (blank)",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/injuries/"
+    },
+    {
+     "key": "New York Giants - J.J. McCarthy",
+     "published": "QB | (blank) | Full Participation in Practice | (blank)",
+     "official": "QB | (blank) | Full Participation in Practice | (blank)",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/injuries/"
+    },
+    {
+     "key": "New York Giants - Darnell Mooney",
+     "published": "WR | (blank) | Full Participation in Practice | (blank)",
+     "official": "WR | (blank) | Full Participation in Practice | (blank)",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/injuries/"
+    },
+    {
+     "key": "New York Giants - Malik Nabers",
+     "published": "WR | (blank) | Full Participation in Practice | (blank)",
+     "official": "WR | (blank) | Full Participation in Practice | (blank)",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/injuries/"
+    },
+    {
+     "key": "New York Giants - Cam Skattebo",
+     "published": "RB | (blank) | Full Participation in Practice | (blank)",
+     "official": "RB | (blank) | Full Participation in Practice | (blank)",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/injuries/"
+    },
+    {
+     "key": "New York Giants - Andrew Thomas",
+     "published": "T | (blank) | Full Participation in Practice | (blank)",
+     "official": "T | (blank) | Full Participation in Practice | (blank)",
+     "result": "match",
+     "issues": [],
+     "note": "",
+     "source": "https://www.nfl.com/injuries/"
+    }
+   ],
+   "rows_checked": 20,
+   "rows_matching": 20,
+   "missing_official_teams": []
+  }
+ ]
+}
