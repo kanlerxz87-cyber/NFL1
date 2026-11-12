@@ -785,6 +785,20 @@ def evidence_page(prov, verif, dash):
 </section>
 
 <section class="panel">
+  <h2>Companion pages preserved from parallel session 533256e1</h2>
+  <p>Two sessions worked on this repository at the same time. This dashboard is the integration
+  build; the pages below were produced independently and are kept for review, together with their
+  transcriptions in <code>data/teams.csv</code>, <code>data/standings.csv</code> and
+  <code>data/injuries.csv</code>. Those rows are cross-checked in the tables above.</p>
+  <ul class="tight">
+    <li><a href="teams.html">Club directory transcription</a></li>
+    <li><a href="standings.html">Standings transcription</a></li>
+    <li><a href="executive-summary.html">Earlier executive summary</a></li>
+    <li><a href="flagged.html">Earlier flag register</a></li>
+  </ul>
+</section>
+
+<section class="panel">
   <h2>Method rules</h2>
   {method_tbl}
 </section>
