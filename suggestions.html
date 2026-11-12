@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="NFL1 — a verified, source-linked NFL decision-intelligence dashboard: requirements, decision questions, improvement suggestions, strategy validation, injury and depth tracking, and a leaderboard competition.">
+<title>Suggestions &amp; choose a path | NFL1</title>
+<link rel="stylesheet" href="site/assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="mark">NFL</div>
+      <div><strong>NFL1</strong><small>Decision intelligence</small></div>
+    </div>
+    <div class="snapshot">
+      <b>Data snapshot</b><br>2026 season · Week 10<br>Retrieved 2026-11-12 (UTC)
+    </div>
+    <nav aria-label="Site sections">
+      <div class="navgroup"><h4>Overview</h4>
+<a href="index.html">Home</a>
+<a href="executive-summary.html">Executive Summary</a>
+<a href="deployment.html">Deployment &amp; PR</a>
+</div>
+<div class="navgroup"><h4>Governance</h4>
+<a href="requirements.html">Requirements</a>
+<a href="questions.html">Decision Questions</a>
+<a href="suggestions.html" class="active">Suggestions &amp; Paths</a>
+</div>
+<div class="navgroup"><h4>Competition</h4>
+<a href="strategy-lab.html">Strategy Lab</a>
+<a href="leaderboard.html">Leaderboard</a>
+<a href="bet-types.html">Bet Types &amp; Risk</a>
+</div>
+<div class="navgroup"><h4>Official data</h4>
+<a href="data-tables.html">Standings &amp; Findings</a>
+<a href="injuries.html">Injuries</a>
+<a href="depth-chart.html">Depth Charts</a>
+</div>
+<div class="navgroup"><h4>Assurance</h4>
+<a href="verification.html">Verification &amp; Sources</a>
+<a href="flagged.html">Flagged for Review</a>
+</div>
+    </nav>
+    <div class="foot">
+      Every table row links to an official source. Unconfirmed values are left blank and flagged.
+      <br><br><a style="color:#fff;text-decoration:underline" href="https://github.com/kanlerxz87-cyber/NFL1">Repository ↗</a>
+    </div>
+  </aside>
+  <div class="main">
+    <div class="topbar">
+      <div class="crumb">NFL1 / <b>Suggestions &amp; Paths</b></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">24 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+    </div>
+    <main class="content" id="main">
+      <div class="kicker">Governance</div>
+      <h1>Suggestions &amp; choose a path</h1>
+      <p class="lede">Suggestions for improving decision making, published for review, with a dedicated gate for choosing the best path before any implementation.</p>
+      <div class="callout warn"><b>Awaiting review — nothing implemented.</b> These suggestions are published so a reviewer can compare them and choose the best path <em>before</em> any change is implemented. Effort and risk cells are blank because no official source can confirm them.</div>
+<section class="panel decision" id="choose"><h2>Review &amp; Choose a Path</h2><p>Select one path. The selection is stored only in this browser (localStorage) and can be filed as a GitHub issue to create a durable decision record. <b>No agent implementation occurs until a reviewer confirms the choice.</b></p><div class="choices">
+<label class="choice"><input type="radio" name="chosen-path" value="P-A" data-label="Path A — Data first"><strong>Path A — Data first</strong><p>Close the open data questions (odds source, depth charts for all clubs, game-level panel, inactives deadline), then build signals.</p></label>
+<label class="choice"><input type="radio" name="chosen-path" value="P-B" data-label="Path B — Strategy first"><strong>Path B — Strategy first</strong><p>Prototype the 10 candidate strategies and the leaderboard immediately, with all performance values blank until gates pass.</p></label>
+<label class="choice"><input type="radio" name="chosen-path" value="P-C" data-label="Path C — Review only / hold"><strong>Path C — Review only / hold</strong><p>Implement nothing beyond documentation and the review gate until a reviewer explicitly chooses a path.</p></label>
+</div><div class="actions"><a class="btn" id="path-issue" href="#">Open a prefilled decision-record issue ↗</a><span class="small">Requires a path to be selected first.</span></div><p class="outcome" id="path-outcome">No path has been chosen. Nothing on this site is implemented until a reviewer chooses.</p><p class="small"><b>Advisory recommendation (not a decision):</b> Path A — Data first. The official state report shows parlays losing far more often than straight bets, and NIST guidance requires out-of-sample data before a performance claim; building signals before the missing official data exists would make the validation gates meaningless.</p></section>
+<h2 id="paths">Path comparison</h2>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-paths" aria-label="Filter tbl-paths" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-paths">3 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-paths"><caption>Three implementation paths with advantages, disadvantages and the questions/flags each one leaves open.</caption>
+<thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Path</th><th scope="col" class="sortable">Summary</th><th scope="col" class="sortable">Advantages</th><th scope="col" class="sortable">Disadvantages</th><th scope="col" class="sortable">Still blocked by</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr id="P-A" data-verified="true">
+<td><code>P-A</code></td>
+<td data-value="1">Path A — Data first</td>
+<td data-value="1" class="wide">Close the open data questions (odds source, depth charts for all clubs, game-level panel, inactives deadline), then build signals.</td>
+<td data-value="1" class="wide">Every downstream decision rests on verified, point-in-time official data; validation gates become meaningful.</td>
+<td data-value="1" class="wide">Slower to produce a visible leaderboard; requires repeated official snapshots.</td>
+<td data-value="1" class="wide">Q05, Q06, Q09, Q10, Q11, Q12, F08, F09, F10</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="P-B" data-verified="true">
+<td><code>P-B</code></td>
+<td data-value="1">Path B — Strategy first</td>
+<td data-value="1" class="wide">Prototype the 10 candidate strategies and the leaderboard immediately, with all performance values blank until gates pass.</td>
+<td data-value="1" class="wide">Fastest visible competition framework and reviewer feedback loop.</td>
+<td data-value="1" class="wide">Risk of optimising on incomplete data; every strategy stays NOT PASSED until the missing official data arrives.</td>
+<td data-value="1" class="wide">Q11, Q12, Q13, F09, F10, F11</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/ppc/section1/ppc136.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official statistical guidance">S19 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="P-C" data-verified="true">
+<td><code>P-C</code></td>
+<td data-value="1">Path C — Review only / hold</td>
+<td data-value="1" class="wide">Implement nothing beyond documentation and the review gate until a reviewer explicitly chooses a path.</td>
+<td data-value="1" class="wide">Zero implementation risk; maximum review control.</td>
+<td data-value="1" class="wide">No progress on own lines, signals or leaderboard operation.</td>
+<td data-value="1" class="wide">Q27, F16, F22</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+</tbody></table></div>
+<h2 id="suggestions">Improvement suggestions</h2>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-suggestions" aria-label="Filter tbl-suggestions" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-suggestions">20 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-suggestions"><caption>20 suggestions to improve decision making on this site. Effort is blank and flagged; every row links to an official source.</caption>
+<thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Area</th><th scope="col" class="sortable">Suggestion</th><th scope="col" class="sortable">How it improves decision making</th><th scope="col" class="sortable">Effort / risk estimate</th><th scope="col" class="sortable">Suggested disposition</th><th scope="col" class="sortable">Official evidence</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr id="S01" data-verified="true">
+<td><code>S01</code></td>
+<td>Provenance</td>
+<td class="wide">Add a source link and retrieval date to every table row</td>
+<td class="wide">Makes any decision auditable line by line</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">Adopt</span></td>
+<td class="wide">No guessing about where a value came from</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S02" data-verified="true">
+<td><code>S02</code></td>
+<td>Provenance</td>
+<td class="wide">Keep blank cells blank and flag them instead of substituting estimates</td>
+<td class="wide">Prevents fabricated values entering a decision</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">Adopt</span></td>
+<td class="wide">The brief explicitly forbids inference</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S03" data-verified="true">
+<td><code>S03</code></td>
+<td>Decision readiness</td>
+<td class="wide">Add a decision-readiness panel that counts open questions and flagged values</td>
+<td class="wide">Shows at a glance whether a decision is defensible</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">Adopt</span></td>
+<td class="blank wide"></td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S04" data-verified="true">
+<td><code>S04</code></td>
+<td>Freshness</td>
+<td class="wide">Show an as-of timestamp and the next official filing deadline on every data page</td>
+<td class="wide">Prevents stale injury data being used in a decision</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">Adopt</span></td>
+<td class="wide">Official filing schedule is published</td>
+<td><span class="src"><a href="https://www.nfl.com/news/2026-27-national-football-league-important-dates" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official league calendar">S04 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S05" data-verified="true">
+<td><code>S05</code></td>
+<td>CI</td>
+<td class="wide">Run the row-source validator and internal link checker on every push</td>
+<td class="wide">A broken link or unsourced row is caught before publishing</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">Adopt</span></td>
+<td class="wide">GitHub Docs describes publishing from a branch</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S22 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S06" data-verified="true">
+<td><code>S06</code></td>
+<td>Availability</td>
+<td class="wide">Add an injury x depth-chart join that shows which string would take the snaps</td>
+<td class="wide">Directly addresses the 2nd/3rd/4th-string deficiency requirement</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">Pilot</span></td>
+<td class="wide">Requires both official sources</td>
+<td><span class="src"><a href="https://www.chiefs.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Kansas City Chiefs (chiefs.com) — Official club depth chart">S14 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S07" data-verified="true">
+<td><code>S07</code></td>
+<td>Availability</td>
+<td class="wide">Add a conflict detector for &#x27;No Injuries Reported&#x27; vs official news headlines</td>
+<td class="wide">Removes contradictory inputs before they reach a model</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">Adopt</span></td>
+<td class="wide">An actual conflict is already visible</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S08" data-verified="true">
+<td><code>S08</code></td>
+<td>Availability</td>
+<td class="wide">Add the official weekly inactives list as the availability authority</td>
+<td class="wide">Inactives are closer to game time than practice reports</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">Pilot</span></td>
+<td class="wide">Official Week 9 list is published</td>
+<td><span class="src"><a href="https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official inactives list">S05 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S09" data-verified="true">
+<td><code>S09</code></td>
+<td>Signals</td>
+<td class="wide">Add a correlation matrix view with method, n and confidence information</td>
+<td class="wide">Makes &#x27;determine correlation values&#x27; reviewable</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">Pilot</span></td>
+<td class="wide">NIST defines the coefficient</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S10" data-verified="true">
+<td><code>S10</code></td>
+<td>Signals</td>
+<td class="wide">Add a validation-gate pass/fail badge to every strategy</td>
+<td class="wide">Prevents unvalidated strategies from being used</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">Adopt</span></td>
+<td class="wide">NIST defines the test structure</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda353.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official statistical test">S18 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S11" data-verified="true">
+<td><code>S11</code></td>
+<td>Signals</td>
+<td class="wide">Add a pre-registration hash field for each strategy</td>
+<td class="wide">Frees the evaluation from post-hoc tuning</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">Adopt</span></td>
+<td class="wide">Cross-validation requires unseen data</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S12" data-verified="true">
+<td><code>S12</code></td>
+<td>Signals</td>
+<td class="wide">Add a frozen out-of-sample evaluation window on the leaderboard</td>
+<td class="wide">Separates in-sample fit from genuine predictive skill</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">Adopt</span></td>
+<td class="blank wide"></td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S13" data-verified="true">
+<td><code>S13</code></td>
+<td>Parlays</td>
+<td class="wide">Add a leg-correlation guard before any parlay or prop combo is eligible</td>
+<td class="wide">Correlated legs change parlay risk materially</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">Pilot</span></td>
+<td class="wide">Correlation is not causality</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/ppc/section1/ppc136.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official statistical guidance">S19 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S14" data-verified="true">
+<td><code>S14</code></td>
+<td>Risk</td>
+<td class="wide">Add a bet-type risk panel using official loss percentages</td>
+<td class="wide">Gives reviewers a common risk baseline</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">Adopt</span></td>
+<td class="wide">Official state report publishes loss rates</td>
+<td><span class="src"><a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official government research report">S21 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S15" data-verified="true">
+<td><code>S15</code></td>
+<td>Data access</td>
+<td class="wide">Add JSON/CSV downloads for every table</td>
+<td class="wide">Allows independent line-by-line review outside the browser</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">Adopt</span></td>
+<td class="blank wide"></td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S16" data-verified="true">
+<td><code>S16</code></td>
+<td>Navigation</td>
+<td class="wide">Group pages by category with a persistent dashboard sidebar</td>
+<td class="wide">Reduces time to find the evidence behind a decision</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">Adopt</span></td>
+<td class="wide">GitHub Docs describes the site structure</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S23 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S17" data-verified="true">
+<td><code>S17</code></td>
+<td>Review workflow</td>
+<td class="wide">Add an explicit decision log recording the chosen path and reviewer</td>
+<td class="wide">Makes the &#x27;choose before implementing&#x27; gate enforceable</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">Adopt</span></td>
+<td class="blank wide"></td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S18" data-verified="true">
+<td><code>S18</code></td>
+<td>Review workflow</td>
+<td class="wide">Add triage fields (owner, due date, disposition) to Flagged for Review</td>
+<td class="wide">Turns flags into resolvable work items</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">Pilot</span></td>
+<td class="blank wide"></td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S19" data-verified="true">
+<td><code>S19</code></td>
+<td>Glossary</td>
+<td class="wide">Add a verbatim glossary of official designations and bet types</td>
+<td class="wide">Prevents inconsistent interpretation of official labels</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">Adopt</span></td>
+<td class="wide">Definitions are published officially</td>
+<td><span class="src"><a href="https://www.nj.gov/oag/ge/docs/Regulations/CHAPTER69N.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official state regulation">S20 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S20" data-verified="true">
+<td><code>S20</code></td>
+<td>Accessibility</td>
+<td class="wide">Add table sorting/filtering and responsive table wrappers</td>
+<td class="wide">Makes large verified tables readable on any screen</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">Adopt</span></td>
+<td class="blank wide"></td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S23 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+</tbody></table></div>
+<h2 id="matrix">Decision matrix</h2>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-matrix" aria-label="Filter tbl-matrix" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-matrix">5 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-matrix"><caption>Comparison of Path A (data first), Path B (strategy first) and Path C (review only).</caption>
+<thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Criterion</th><th scope="col" class="sortable">Path A</th><th scope="col" class="sortable">Path B</th><th scope="col" class="sortable">Path C</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr id="DM-01" data-verified="true">
+<td><code>DM-01</code></td>
+<td data-value="1">Verification completeness</td>
+<td data-value="1">Highest</td>
+<td data-value="1">Medium</td>
+<td data-value="1">Highest (no new claims)</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="DM-02" data-verified="true">
+<td><code>DM-02</code></td>
+<td data-value="1">Speed to a working leaderboard</td>
+<td data-value="1">Slow</td>
+<td data-value="1">Fast</td>
+<td data-value="1">None</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda353.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official statistical test">S18 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="DM-03" data-verified="true">
+<td><code>DM-03</code></td>
+<td data-value="1">Risk of building on incomplete official data</td>
+<td data-value="1">Low</td>
+<td data-value="1">Higher</td>
+<td data-value="1">Lowest</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/ppc/section1/ppc136.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official statistical guidance">S19 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="DM-04" data-verified="true">
+<td><code>DM-04</code></td>
+<td data-value="1">Uses official bet-type loss evidence</td>
+<td data-value="1">Yes</td>
+<td data-value="1">Yes</td>
+<td data-value="1">Yes</td>
+<td><span class="src"><a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official government research report">S21 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="DM-05" data-verified="true">
+<td><code>DM-05</code></td>
+<td data-value="1">Requires a reviewer decision first</td>
+<td data-value="1">Yes</td>
+<td data-value="1">Yes</td>
+<td data-value="1">Yes</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+</tbody></table></div>
+<section class="panel"><h2>Review workflow</h2>
+<ol class="tight">
+<li>Read the <a href="questions.html">decision questions</a> and the <a href="flagged.html">flagged items</a>.</li>
+<li>Compare the 20 suggestions and the three paths above.</li>
+<li>Select a path in the Review &amp; Choose a Path box; file the prefilled issue to make the decision durable.</li>
+<li>Close the blocking questions, then — and only then — authorise implementation of individual suggestions.</li>
+</ol>
+<p class="small">The issue link points to the official repository issue tracker; it does not send data anywhere else.</p></section>
+      <div class="footer">
+        NFL1 · 2026 Week 10 snapshot retrieved 2026-11-12 (UTC) ·
+        <a href="verification.html">Verification &amp; sources</a> ·
+        <a href="flagged.html">Flagged for Review</a> ·
+        <a href="https://github.com/kanlerxz87-cyber/NFL1">Source repository ↗</a><br>
+        Blank cells are values the official source does not publish. No value on this site is inferred or filled in.
+      </div>
+    </main>
+  </div>
+</div>
+<script src="site/assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="NFL1 — a verified, source-linked NFL decision-intelligence dashboard: requirements, decision questions, improvement suggestions, strategy validation, injury and depth tracking, and a leaderboard competition.">
+<title>Strategy lab | NFL1</title>
+<link rel="stylesheet" href="site/assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="mark">NFL</div>
+      <div><strong>NFL1</strong><small>Decision intelligence</small></div>
+    </div>
+    <div class="snapshot">
+      <b>Data snapshot</b><br>2026 season · Week 10<br>Retrieved 2026-11-12 (UTC)
+    </div>
+    <nav aria-label="Site sections">
+      <div class="navgroup"><h4>Overview</h4>
+<a href="index.html">Home</a>
+<a href="executive-summary.html">Executive Summary</a>
+<a href="deployment.html">Deployment &amp; PR</a>
+</div>
+<div class="navgroup"><h4>Governance</h4>
+<a href="requirements.html">Requirements</a>
+<a href="questions.html">Decision Questions</a>
+<a href="suggestions.html">Suggestions &amp; Paths</a>
+</div>
+<div class="navgroup"><h4>Competition</h4>
+<a href="strategy-lab.html" class="active">Strategy Lab</a>
+<a href="leaderboard.html">Leaderboard</a>
+<a href="bet-types.html">Bet Types &amp; Risk</a>
+</div>
+<div class="navgroup"><h4>Official data</h4>
+<a href="data-tables.html">Standings &amp; Findings</a>
+<a href="injuries.html">Injuries</a>
+<a href="depth-chart.html">Depth Charts</a>
+</div>
+<div class="navgroup"><h4>Assurance</h4>
+<a href="verification.html">Verification &amp; Sources</a>
+<a href="flagged.html">Flagged for Review</a>
+</div>
+    </nav>
+    <div class="foot">
+      Every table row links to an official source. Unconfirmed values are left blank and flagged.
+      <br><br><a style="color:#fff;text-decoration:underline" href="https://github.com/kanlerxz87-cyber/NFL1">Repository ↗</a>
+    </div>
+  </aside>
+  <div class="main">
+    <div class="topbar">
+      <div class="crumb">NFL1 / <b>Strategy Lab</b></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">24 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+    </div>
+    <main class="content" id="main">
+      <div class="kicker">Competition</div>
+      <h1>Strategy lab</h1>
+      <p class="lede">Own NFL lines, official-input signal research, candidate strategies, validation gates, correlation values, and a protocol for separating skill from luck.</p>
+      <div class="callout flag"><b>No strategy has passed validation.</b> Hypotheses, formulas and gate assignments below are research designs, not performance claims. All score, threshold, coefficient and correlation cells that lack an official source are blank and flagged.</div>
+<div class="toc"><a href="#lines">Own lines</a><a href="#research">Research</a><a href="#strategies">Strategies</a><a href="#gates">Validation gates</a><a href="#corr">Correlation values</a><a href="#luck">Skill vs luck</a></div>
+<h2 id="lines">Originating our own NFL lines</h2>
+<div class="panel"><p>A line is "our own" only if every input is an official value we collected at a known timestamp and every transformation is reproducible from the committed data. The pipeline below is fully specified; numeric coefficients, thresholds and benchmark lines are blank because no official source publishes them. In particular, no official NFL odds feed was found, so step 6 can produce no number yet.</p></div>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-line-steps" aria-label="Filter tbl-line-steps" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-line-steps">8 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-line-steps"><caption>Reproducible own-line pipeline. Blank rows are unverified and link to Flagged for Review.</caption>
+<thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Step</th><th scope="col" class="sortable">Action</th><th scope="col" class="sortable">Official inputs / method</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr id="OL-01" data-verified="true">
+<td><code>OL-01</code></td>
+<td class="num">1</td>
+<td class="wide">Snapshot official inputs at a fixed timestamp</td>
+<td class="wide">Standings PF/PA/W/L/T, schedule, injury report, club depth charts, player stats, Next Gen Stats</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="OL-02" data-verified="true">
+<td><code>OL-02</code></td>
+<td class="num">2</td>
+<td class="wide">Normalise totals to per-game values</td>
+<td class="wide">PF / (W+L+T), PA / (W+L+T), NET PTS / (W+L+T) — reproducible in tools/compute_correlations.py</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="OL-03" data-verified="true">
+<td><code>OL-03</code></td>
+<td class="num">3</td>
+<td class="wide">Estimate team strength from published values only</td>
+<td class="wide">strength = f(net points per game, points for, points against); all coefficients blank until validated</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/ppc/section1/ppc136.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official statistical guidance">S19 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="OL-04" data-verified="true">
+<td><code>OL-04</code></td>
+<td class="num">4</td>
+<td class="wide">Apply an availability adjustment</td>
+<td class="wide">Join official injury designations and official club depth rank; effect size blank until out-of-sample validation</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="OL-05" data-verified="true">
+<td><code>OL-05</code></td>
+<td class="num">5</td>
+<td class="wide">Originate the own line</td>
+<td class="wide">own spread / own total = symbolic function of the two teams&#x27; strength and availability; no numeric line published</td>
+<td><span class="src"><a href="https://www.nj.gov/oag/ge/docs/Regulations/CHAPTER69N.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official state regulation">S20 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="OL-06" data-verified="false">
+<td><code>OL-06</code></td>
+<td class="num">6</td>
+<td class="wide">Benchmark</td>
+<td class="wide">Compare the own line with a reference market line — reference line blank, no official odds source found</td>
+<td><span class="src"><a href="https://www.nj.gov/oag/ge/docs/Regulations/CHAPTER69N.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official state regulation">S20 ↗</a></span></td><td><a class="badge flag" href="flagged.html">UNVERIFIED</a></td>
+</tr>
+<tr id="OL-07" data-verified="false">
+<td><code>OL-07</code></td>
+<td class="num">7</td>
+<td class="wide">Generate a signal only above a frozen threshold</td>
+<td class="wide">signal = own line minus reference line; threshold blank until pre-registered</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><a class="badge flag" href="flagged.html">UNVERIFIED</a></td>
+</tr>
+<tr id="OL-08" data-verified="true">
+<td><code>OL-08</code></td>
+<td class="num">8</td>
+<td class="wide">Validate before publication</td>
+<td class="wide">G01–G13 must all pass; no strategy currently passes</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda353.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official statistical test">S18 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+</tbody></table></div>
+<h2 id="research">Research: official signal inputs</h2>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-research-sources" aria-label="Filter tbl-research-sources" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-research-sources">10 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-research-sources"><caption>Official league and club data surfaces considered as signal inputs; each row links to that official page.</caption>
+<thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Source</th><th scope="col" class="sortable">Publisher</th><th scope="col" class="sortable">Kind</th><th scope="col" class="sortable">What it can provide</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr id="RS-01" data-verified="true">
+<td><code>RS-01</code></td>
+<td data-value="1">S01</td>
+<td data-value="1">National Football League (NFL.com)</td>
+<td data-value="1">Official league injury report</td>
+<td data-value="1" class="wide">2026 Week 10 injury report: player, position, injury, practice status, game status, game/team headings</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="RS-02" data-verified="true">
+<td><code>RS-02</code></td>
+<td data-value="1">S02</td>
+<td data-value="1">National Football League (NFL.com)</td>
+<td data-value="1">Official league standings</td>
+<td data-value="1" class="wide">2026 regular season standings, detailed view: W, L, T, PCT, PF, PA, NET PTS and column legend</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="RS-03" data-verified="true">
+<td><code>RS-03</code></td>
+<td data-value="1">S03</td>
+<td data-value="1">National Football League (NFL.com)</td>
+<td data-value="1">Official player statistics</td>
+<td data-value="1" class="wide">2026 player stat categories (passing, rushing, receiving, tackles, field goals, punting, returns)</td>
+<td><span class="src"><a href="https://www.nfl.com/stats/player-stats/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official player statistics">S03 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="RS-05" data-verified="true">
+<td><code>RS-05</code></td>
+<td data-value="1">S05</td>
+<td data-value="1">National Football League (NFL.com news)</td>
+<td data-value="1">Official inactives list</td>
+<td data-value="1" class="wide">2026 Week 9 inactives by game, including &#x27;emergency third QB&#x27; designations</td>
+<td><span class="src"><a href="https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official inactives list">S05 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="RS-06" data-verified="true">
+<td><code>RS-06</code></td>
+<td data-value="1">S06</td>
+<td data-value="1">National Football League (NFL.com)</td>
+<td data-value="1">Official schedule</td>
+<td data-value="1" class="wide">2026 schedule: Week 10 games, dates, kickoff times, networks, team records</td>
+<td><span class="src"><a href="https://www.nfl.com/schedules" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official schedule">S06 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="RS-08" data-verified="true">
+<td><code>RS-08</code></td>
+<td data-value="1">S08</td>
+<td data-value="1">NFL Next Gen Stats</td>
+<td data-value="1">Official advanced metrics</td>
+<td data-value="1" class="wide">Official Next Gen Stats charts, stats and highlights (2026 season)</td>
+<td><span class="src"><a href="https://nextgenstats.nfl.com/" target="_blank" rel="noopener noreferrer" title="NFL Next Gen Stats — Official advanced metrics">S08 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="RS-13" data-verified="true">
+<td><code>RS-13</code></td>
+<td data-value="1">S13</td>
+<td data-value="1">NFL Football Operations</td>
+<td data-value="1">Official weekly accountability data</td>
+<td data-value="1" class="wide">2026 by-week plays, fines and percentages (through Week 8)</td>
+<td><span class="src"><a href="https://operations.nfl.com/rules-officiating/enforcement/accountability" target="_blank" rel="noopener noreferrer" title="NFL Football Operations — Official weekly accountability data">S13 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="RS-14" data-verified="true">
+<td><code>RS-14</code></td>
+<td data-value="1">S14</td>
+<td data-value="1">Kansas City Chiefs (chiefs.com)</td>
+<td data-value="1">Official club depth chart</td>
+<td data-value="1" class="wide">Chiefs &#x27;Unofficial Depth Chart&#x27;: Offense, Defense, Special Teams with 1st/2nd/3rd/4th columns</td>
+<td><span class="src"><a href="https://www.chiefs.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Kansas City Chiefs (chiefs.com) — Official club depth chart">S14 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="RS-15" data-verified="true">
+<td><code>RS-15</code></td>
+<td data-value="1">S15</td>
+<td data-value="1">Green Bay Packers (packers.com)</td>
+<td data-value="1">Official club depth chart</td>
+<td data-value="1" class="wide">Packers depth chart with 1st/2nd/3rd columns, labelled &#x27;Unofficial, Nov. 10, 2026&#x27;</td>
+<td><span class="src"><a href="https://www.packers.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Green Bay Packers (packers.com) — Official club depth chart">S15 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="RS-16" data-verified="true">
+<td><code>RS-16</code></td>
+<td data-value="1">S16</td>
+<td data-value="1">San Francisco 49ers (49ers.com)</td>
+<td data-value="1">Official club depth chart</td>
+<td data-value="1" class="wide">49ers depth chart with 1st/2nd/3rd/4th columns, &#x27;Updated as of 11/10/26&#x27;</td>
+<td><span class="src"><a href="https://www.49ers.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="San Francisco 49ers (49ers.com) — Official club depth chart">S16 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+</tbody></table></div>
+<h2 id="strategies">Candidate strategies</h2>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-strategies" aria-label="Filter tbl-strategies" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-strategies">10 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-strategies"><caption>10 candidate strategies across single bets, parlays and player prop combos. Performance value is blank for every strategy.</caption>
+<thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Strategy</th><th scope="col" class="sortable">Track</th><th scope="col" class="sortable">Hypothesis</th><th scope="col" class="sortable">Official inputs</th><th scope="col" class="sortable">Formula (symbolic; coefficients blank)</th><th scope="col" class="sortable">Gates required</th><th scope="col" class="sortable">Performance value</th><th scope="col" class="sortable">Gate status</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr id="ST-01" data-verified="true">
+<td><code>ST-01</code></td>
+<td>Net-points strength differential</td>
+<td>Single bet</td>
+<td class="wide">Teams with a higher net points per game cover a derived point spread more often</td>
+<td class="wide">Official standings PF, PA, W, L, T; official schedule</td>
+<td class="wide">spread_own = f(NPG_home - NPG_away); f is symbolic, coefficient blank</td>
+<td>G01,G02,G03,G04,G05,G06,G07,G12</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">NOT PASSED</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="ST-02" data-verified="true">
+<td><code>ST-02</code></td>
+<td>Points-allowed total</td>
+<td>Single bet</td>
+<td class="wide">Points-allowed per game informs a derived game total</td>
+<td class="wide">Official standings PA, games played; official schedule</td>
+<td class="wide">total_own = f(PA_pg_home + PA_pg_away); coefficients blank</td>
+<td>G01,G02,G03,G04,G05,G06,G07,G12</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">NOT PASSED</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="ST-03" data-verified="true">
+<td><code>ST-03</code></td>
+<td>Defensive backup-depth deficiency</td>
+<td>Single bet</td>
+<td class="wide">When a defense starts a 2nd/3rd/4th-string CB, S or EDGE, points allowed rises</td>
+<td class="wide">Official club depth charts; official injury report; official inactives</td>
+<td class="wide">delta_rank = depth_rank(starter) - depth_rank(actual); effect size blank</td>
+<td>G01,G02,G03,G05,G06,G08,G09,G12</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">NOT PASSED</span></td>
+<td><span class="src"><a href="https://www.chiefs.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Kansas City Chiefs (chiefs.com) — Official club depth chart">S14 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="ST-04" data-verified="true">
+<td><code>ST-04</code></td>
+<td>Offensive backup-depth deficiency</td>
+<td>Single bet</td>
+<td class="wide">When an offense starts a backup QB or skill player, points scored falls</td>
+<td class="wide">Official club depth charts (QB, WR, RB, TE); official inactives (emergency third QB)</td>
+<td class="wide">delta_rank = depth_rank(starter) - depth_rank(actual); effect size blank</td>
+<td>G01,G02,G03,G05,G06,G08,G09,G12</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">NOT PASSED</span></td>
+<td><span class="src"><a href="https://www.packers.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Green Bay Packers (packers.com) — Official club depth chart">S15 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="ST-05" data-verified="true">
+<td><code>ST-05</code></td>
+<td>Practice-status trend</td>
+<td>Single bet</td>
+<td class="wide">A DNP -&gt; Limited -&gt; Full trend predicts availability and performance</td>
+<td class="wide">Official injury report practice status across the three official filing days</td>
+<td class="wide">trend = ordinal(Full) - ordinal(first report); coefficient blank</td>
+<td>G01,G02,G04,G05,G06,G12</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">NOT PASSED</span></td>
+<td><span class="src"><a href="https://www.nfl.com/news/2026-27-national-football-league-important-dates" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official league calendar">S04 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="ST-06" data-verified="true">
+<td><code>ST-06</code></td>
+<td>Designation-gated availability</td>
+<td>Single bet</td>
+<td class="wide">An official Out/Doubtful/Questionable designation changes the expected lineup</td>
+<td class="wide">Official injury report game status; official inactives</td>
+<td class="wide">indicator = 1 if designation published; effect size blank</td>
+<td>G01,G02,G05,G06,G12</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">NOT PASSED</span></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="ST-07" data-verified="true">
+<td><code>ST-07</code></td>
+<td>Two-leg parlay with correlation guard</td>
+<td>Parlay</td>
+<td class="wide">Two independently validated single-bet signals can be combined</td>
+<td class="wide">Official standings, injury report, depth charts; NIST correlation method</td>
+<td class="wide">P(parlay) = P(A) x P(B) only if corr(A,B) is measured; corr blank</td>
+<td>G01,G02,G05,G06,G09,G10,G12</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">NOT PASSED</span></td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="ST-08" data-verified="true">
+<td><code>ST-08</code></td>
+<td>Same-game player-prop combo</td>
+<td>Player prop combo</td>
+<td class="wide">QB and receiver props in one game are jointly predictable from official player stats</td>
+<td class="wide">Official player stats categories; official injury report; official depth charts</td>
+<td class="wide">joint model requires corr(prop_A, prop_B); corr blank</td>
+<td>G01,G02,G04,G05,G06,G09,G12</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">NOT PASSED</span></td>
+<td><span class="src"><a href="https://www.nfl.com/stats/player-stats/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official player statistics">S03 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="ST-09" data-verified="true">
+<td><code>ST-09</code></td>
+<td>Prop availability gate</td>
+<td>Player prop combo</td>
+<td class="wide">Props must be suppressed for officially Out / IR / inactive players</td>
+<td class="wide">Official injury report game status; official inactives</td>
+<td class="wide">rule = block if status in published Out/IR/inactive set</td>
+<td>G01,G02,G12</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">NOT PASSED</span></td>
+<td><span class="src"><a href="https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official inactives list">S05 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="ST-10" data-verified="true">
+<td><code>ST-10</code></td>
+<td>Backup-exposure index</td>
+<td>All tracks</td>
+<td class="wide">A composite of published depth rank and injury designations ranks teams by exposure</td>
+<td class="wide">Official depth charts; official injury report; official inactives</td>
+<td class="wide">index = weighted sum; weights blank until validated</td>
+<td>G01,G02,G03,G04,G05,G06,G08,G09,G12</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">NOT PASSED</span></td>
+<td><span class="src"><a href="https://www.chiefs.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Kansas City Chiefs (chiefs.com) — Official club depth chart">S14 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+</tbody></table></div>
+<h2 id="gates">Validation gates — every strategy must pass</h2>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-gates" aria-label="Filter tbl-gates" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-gates">13 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-gates"><caption>13 gates. A strategy may be published as skill-based only after passing all of them; thresholds that no official source defines are blank.</caption>
+<thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Gate</th><th scope="col" class="sortable">Pass criterion</th><th scope="col" class="sortable">Numeric threshold</th><th scope="col" class="sortable">Status</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr id="G01" data-verified="true">
+<td><code>G01</code></td>
+<td data-value="1">Provenance</td>
+<td data-value="1" class="wide">Every input value has an official source link and retrieval timestamp</td>
+<td data-value="1" class="num"> </td>
+<td><span class="badge neutral">Defined</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="G02" data-verified="true">
+<td><code>G02</code></td>
+<td data-value="1">Point-in-time</td>
+<td data-value="1" class="wide">Only data published before the decision timestamp is used; official filing times are respected</td>
+<td data-value="1" class="num"> </td>
+<td><span class="badge neutral">Defined</span></td>
+<td><span class="src"><a href="https://www.nfl.com/news/2026-27-national-football-league-important-dates" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official league calendar">S04 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="G03" data-verified="true">
+<td><code>G03</code></td>
+<td data-value="1">Pre-registration</td>
+<td data-value="1" class="wide">Strategy formula, thresholds and evaluation window are frozen before scoring</td>
+<td data-value="1" class="num"> </td>
+<td><span class="badge neutral">Defined</span></td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="G04" data-verified="true">
+<td><code>G04</code></td>
+<td data-value="1">Minimum sample</td>
+<td data-value="1" class="wide">NIST generic advice: 20 observations for a correlation, 32 per group for an average difference, 50 for a standard deviation</td>
+<td data-value="1" class="num">20 / 32 / 50 (generic, not NFL-specific)</td>
+<td><span class="badge neutral">Defined</span></td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="G05" data-verified="true">
+<td><code>G05</code></td>
+<td data-value="1">Out-of-sample</td>
+<td data-value="1" class="wide">Model is fit on one partition and assessed on data not used to build it</td>
+<td data-value="1" class="num"> </td>
+<td><span class="badge neutral">Defined</span></td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="G06" data-verified="true">
+<td><code>G06</code></td>
+<td data-value="1">Significance</td>
+<td data-value="1" class="wide">Two-sample t-test for equal means with pre-registered alpha and critical region</td>
+<td data-value="1" class="num">alpha blank (no official value)</td>
+<td><span class="badge neutral">Defined</span></td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda353.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official statistical test">S18 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="G07" data-verified="true">
+<td><code>G07</code></td>
+<td data-value="1">Multiple comparisons</td>
+<td data-value="1" class="wide">Every tested strategy is logged so the number of tests is known before scoring</td>
+<td data-value="1" class="num">correction threshold blank</td>
+<td><span class="badge neutral">Defined</span></td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda353.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official statistical test">S18 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="G08" data-verified="true">
+<td><code>G08</code></td>
+<td data-value="1">Correlation is not causality</td>
+<td data-value="1" class="wide">No strategy is described as causal without designed-experiment evidence</td>
+<td data-value="1" class="num"> </td>
+<td><span class="badge neutral">Defined</span></td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/ppc/section1/ppc136.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official statistical guidance">S19 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="G09" data-verified="true">
+<td><code>G09</code></td>
+<td data-value="1">Parlay/prop correlation guard</td>
+<td data-value="1" class="wide">Leg correlations must be measured before combining legs</td>
+<td data-value="1" class="num">corr blank</td>
+<td><span class="badge neutral">Defined</span></td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="G10" data-verified="true">
+<td><code>G10</code></td>
+<td data-value="1">Stability</td>
+<td data-value="1" class="wide">Signal must persist across consecutive seasons/weeks</td>
+<td data-value="1" class="num">window blank</td>
+<td><span class="badge neutral">Defined</span></td>
+<td><span class="src"><a href="https://operations.nfl.com/rules-officiating/enforcement/accountability" target="_blank" rel="noopener noreferrer" title="NFL Football Operations — Official weekly accountability data">S13 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="G11" data-verified="true">
+<td><code>G11</code></td>
+<td data-value="1">Skill over luck</td>
+<td data-value="1" class="wide">Performance must exceed a pre-registered skill threshold after all other gates pass</td>
+<td data-value="1" class="num">threshold blank</td>
+<td><span class="badge neutral">Defined</span></td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="G12" data-verified="true">
+<td><code>G12</code></td>
+<td data-value="1">Reproducibility</td>
+<td data-value="1" class="wide">A script and data snapshot reproduce every published number</td>
+<td data-value="1" class="num"> </td>
+<td><span class="badge neutral">Defined</span></td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="G13" data-verified="true">
+<td><code>G13</code></td>
+<td data-value="1">Deploy integrity</td>
+<td data-value="1" class="wide">Every table row has an official source link; no broken internal links; Pages build succeeds</td>
+<td data-value="1" class="num"> </td>
+<td><span class="badge neutral">Defined</span></td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S23 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+</tbody></table></div>
+<h2 id="corr">Correlation values</h2>
+<div class="panel"><p><b>Computed:</b> the following Pearson correlation coefficients were recalculated by <code>tools/compute_correlations.py</code> from the 32 official standings rows in <code>data/standings.json</code>. The coefficient definition and the sample-size guidance come from the NIST/SEMATECH e-Handbook. NIST also states that correlation does not imply causality, so these numbers describe association only.</p></div>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-correlations" aria-label="Filter tbl-correlations" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-correlations">6 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-correlations"><caption>Pearson r computed from official 2026 standings; n = 32 for every row. Method and data source are linked per row.</caption>
+<thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Pair</th><th scope="col" class="sortable">x</th><th scope="col" class="sortable">y</th><th scope="col" class="sortable">n</th><th scope="col" class="sortable">Pearson r</th><th scope="col" class="sortable">Method</th><th scope="col" class="sortable">Caveat</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr id="C-01" data-verified="true">
+<td><code>C-01</code></td>
+<td data-value="1">Points For (PF) vs Wins (W)</td>
+<td data-value="1">pf</td>
+<td data-value="1">w</td>
+<td data-value="1" class="num">32</td>
+<td data-value="1" class="num">0.6676</td>
+<td data-value="1">Pearson correlation coefficient</td>
+<td data-value="1" class="wide">Correlation does not imply causality (NIST, S19).</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a> <a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com)">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span> <span class="badge brand">COMPUTED</span></td>
+</tr>
+<tr id="C-02" data-verified="true">
+<td><code>C-02</code></td>
+<td data-value="1">Points Against (PA) vs Losses (L)</td>
+<td data-value="1">pa</td>
+<td data-value="1">l</td>
+<td data-value="1" class="num">32</td>
+<td data-value="1" class="num">0.6812</td>
+<td data-value="1">Pearson correlation coefficient</td>
+<td data-value="1" class="wide">Correlation does not imply causality (NIST, S19).</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a> <a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com)">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span> <span class="badge brand">COMPUTED</span></td>
+</tr>
+<tr id="C-03" data-verified="true">
+<td><code>C-03</code></td>
+<td data-value="1">Net Points (NET) vs Winning Percentage (PCT)</td>
+<td data-value="1">net</td>
+<td data-value="1">pct</td>
+<td data-value="1" class="num">32</td>
+<td data-value="1" class="num">0.869</td>
+<td data-value="1">Pearson correlation coefficient</td>
+<td data-value="1" class="wide">Correlation does not imply causality (NIST, S19).</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a> <a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com)">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span> <span class="badge brand">COMPUTED</span></td>
+</tr>
+<tr id="C-04" data-verified="true">
+<td><code>C-04</code></td>
+<td data-value="1">Points For (PF) vs Points Against (PA)</td>
+<td data-value="1">pf</td>
+<td data-value="1">pa</td>
+<td data-value="1" class="num">32</td>
+<td data-value="1" class="num">-0.0816</td>
+<td data-value="1">Pearson correlation coefficient</td>
+<td data-value="1" class="wide">Correlation does not imply causality (NIST, S19).</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a> <a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com)">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span> <span class="badge brand">COMPUTED</span></td>
+</tr>
+<tr id="C-05" data-verified="true">
+<td><code>C-05</code></td>
+<td data-value="1">Net Points per Game vs Winning Percentage (PCT)</td>
+<td data-value="1">net_pg</td>
+<td data-value="1">pct</td>
+<td data-value="1" class="num">32</td>
+<td data-value="1" class="num">0.8758</td>
+<td data-value="1">Pearson correlation coefficient</td>
+<td data-value="1" class="wide">Correlation does not imply causality (NIST, S19).</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a> <a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com)">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span> <span class="badge brand">COMPUTED</span></td>
+</tr>
+<tr id="C-06" data-verified="true">
+<td><code>C-06</code></td>
+<td data-value="1">Games Played vs Net Points (NET)</td>
+<td data-value="1">games</td>
+<td data-value="1">net</td>
+<td data-value="1" class="num">32</td>
+<td data-value="1" class="num">-0.2408</td>
+<td data-value="1">Pearson correlation coefficient</td>
+<td data-value="1" class="wide">Correlation does not imply causality (NIST, S19).</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a> <a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com)">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span> <span class="badge brand">COMPUTED</span></td>
+</tr>
+</tbody></table></div>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-corr-requests" aria-label="Filter tbl-corr-requests" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-corr-requests">8 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-corr-requests"><caption>Correlation values requested by the brief that cannot be confirmed from an official source. The value column is blank and flagged.</caption>
+<thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Requested pair</th><th scope="col" class="sortable">Required official inputs</th><th scope="col" class="sortable">Why the value is blank</th><th scope="col" class="sortable">r value</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr id="CR-01" data-verified="false">
+<td><code>CR-01</code></td>
+<td class="wide">Injury designation count vs points allowed</td>
+<td class="wide">Game-level injury snapshot + official game results</td>
+<td class="wide">A timestamped panel dataset is not published by an official source</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F10">UNVERIFIED</a></td>
+</tr>
+<tr id="CR-02" data-verified="false">
+<td><code>CR-02</code></td>
+<td class="wide">Backup depth rank vs points allowed</td>
+<td class="wide">Depth chart snapshots + official game results</td>
+<td class="wide">Depth rank is not published league-wide</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F08">UNVERIFIED</a></td>
+</tr>
+<tr id="CR-03" data-verified="false">
+<td><code>CR-03</code></td>
+<td class="wide">Backup depth rank vs points scored</td>
+<td class="wide">Depth chart snapshots + official game results</td>
+<td class="wide">Same as CR-02, offense side</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F08">UNVERIFIED</a></td>
+</tr>
+<tr id="CR-04" data-verified="false">
+<td><code>CR-04</code></td>
+<td class="wide">QB passing yards vs WR receiving yards (same game)</td>
+<td class="wide">Official player stats + official game pages</td>
+<td class="wide">No official leg-level correlation dataset</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F10">UNVERIFIED</a></td>
+</tr>
+<tr id="CR-05" data-verified="false">
+<td><code>CR-05</code></td>
+<td class="wide">Two parlay legs (same game)</td>
+<td class="wide">Official play-by-play data</td>
+<td class="wide">No official leg-level correlation dataset</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F10">UNVERIFIED</a></td>
+</tr>
+<tr id="CR-06" data-verified="false">
+<td><code>CR-06</code></td>
+<td class="wide">Practice-status trend vs game-day inactive</td>
+<td class="wide">Official practice reports + official inactives</td>
+<td class="wide">Joined historical series not available from an official page</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F10">UNVERIFIED</a></td>
+</tr>
+<tr id="CR-07" data-verified="false">
+<td><code>CR-07</code></td>
+<td class="wide">Own line error vs realized margin</td>
+<td class="wide">Official game results</td>
+<td class="wide">No official odds source to define the benchmark</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F09">UNVERIFIED</a></td>
+</tr>
+<tr id="CR-08" data-verified="true">
+<td><code>CR-08</code></td>
+<td class="wide">Net points per game vs win percentage</td>
+<td class="wide">Official standings (available)</td>
+<td class="wide">Computed from official standings — see C-05 in the computed correlations table.</td>
+<td data-value="1" class="num">0.8758</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+</tbody></table></div>
+<h2 id="luck">Removing luck: selectively skill-based strategies</h2>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-luck" aria-label="Filter tbl-luck" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-luck">7 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-luck"><caption>Luck-control protocol. Skill is asserted only after all gates pass; the numeric skill threshold is blank and flagged.</caption>
+<thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Control</th><th scope="col" class="sortable">Mechanism</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr id="LK-01" data-verified="true">
+<td><code>LK-01</code></td>
+<td>Point-in-time inputs</td>
+<td class="wide">Use only information published before the decision timestamp; respect the official injury-report filing times</td>
+<td><span class="src"><a href="https://www.nfl.com/news/2026-27-national-football-league-important-dates" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official league calendar">S04 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="LK-02" data-verified="true">
+<td><code>LK-02</code></td>
+<td>Cross-validation</td>
+<td class="wide">Fit on one partition, assess on data not used to build the model</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="LK-03" data-verified="true">
+<td><code>LK-03</code></td>
+<td>Significance test</td>
+<td class="wide">Two-sample t-test for equal means with a pre-registered alpha and critical region</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda353.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official statistical test">S18 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="LK-04" data-verified="true">
+<td><code>LK-04</code></td>
+<td>Pre-registration</td>
+<td class="wide">Freeze formula, thresholds and window before scoring; log every tested variant</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="LK-05" data-verified="true">
+<td><code>LK-05</code></td>
+<td>Correlation control</td>
+<td class="wide">Measure leg correlations; reject correlated parlay legs; never equate correlation with causality</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/ppc/section1/ppc136.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official statistical guidance">S19 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="LK-06" data-verified="true">
+<td><code>LK-06</code></td>
+<td>Minimum sample</td>
+<td class="wide">NIST generic advice: 20 for a correlation, 32 per group for an average difference, 50 for a standard deviation</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="LK-07" data-verified="false">
+<td><code>LK-07</code></td>
+<td>Skill threshold</td>
+<td class="wide">Numeric threshold blank and flagged until pre-registered; no strategy is labelled skill-based yet</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><a class="badge flag" href="flagged.html">UNVERIFIED</a></td>
+</tr>
+</tbody></table></div>
+      <div class="footer">
+        NFL1 · 2026 Week 10 snapshot retrieved 2026-11-12 (UTC) ·
+        <a href="verification.html">Verification &amp; sources</a> ·
+        <a href="flagged.html">Flagged for Review</a> ·
+        <a href="https://github.com/kanlerxz87-cyber/NFL1">Source repository ↗</a><br>
+        Blank cells are values the official source does not publish. No value on this site is inferred or filled in.
+      </div>
+    </main>
+  </div>
+</div>
+<script src="site/assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="NFL1 — a verified, source-linked NFL decision-intelligence dashboard: requirements, decision questions, improvement suggestions, strategy validation, injury and depth tracking, and a leaderboard competition.">
+<title>Bet types &amp; risk | NFL1</title>
+<link rel="stylesheet" href="site/assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="mark">NFL</div>
+      <div><strong>NFL1</strong><small>Decision intelligence</small></div>
+    </div>
+    <div class="snapshot">
+      <b>Data snapshot</b><br>2026 season · Week 10<br>Retrieved 2026-11-12 (UTC)
+    </div>
+    <nav aria-label="Site sections">
+      <div class="navgroup"><h4>Overview</h4>
+<a href="index.html">Home</a>
+<a href="executive-summary.html">Executive Summary</a>
+<a href="deployment.html">Deployment &amp; PR</a>
+</div>
+<div class="navgroup"><h4>Governance</h4>
+<a href="requirements.html">Requirements</a>
+<a href="questions.html">Decision Questions</a>
+<a href="suggestions.html">Suggestions &amp; Paths</a>
+</div>
+<div class="navgroup"><h4>Competition</h4>
+<a href="strategy-lab.html">Strategy Lab</a>
+<a href="leaderboard.html">Leaderboard</a>
+<a href="bet-types.html" class="active">Bet Types &amp; Risk</a>
+</div>
+<div class="navgroup"><h4>Official data</h4>
+<a href="data-tables.html">Standings &amp; Findings</a>
+<a href="injuries.html">Injuries</a>
+<a href="depth-chart.html">Depth Charts</a>
+</div>
+<div class="navgroup"><h4>Assurance</h4>
+<a href="verification.html">Verification &amp; Sources</a>
+<a href="flagged.html">Flagged for Review</a>
+</div>
+    </nav>
+    <div class="foot">
+      Every table row links to an official source. Unconfirmed values are left blank and flagged.
+      <br><br><a style="color:#fff;text-decoration:underline" href="https://github.com/kanlerxz87-cyber/NFL1">Repository ↗</a>
+    </div>
+  </aside>
+  <div class="main">
+    <div class="topbar">
+      <div class="crumb">NFL1 / <b>Bet Types &amp; Risk</b></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">24 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+    </div>
+    <main class="content" id="main">
+      <div class="kicker">Competition</div>
+      <h1>Bet types &amp; risk</h1>
+      <p class="lede">Official definitions and risk data for single bets, parlays and player prop bet combos, plus the correlation guard each track requires.</p>
+      <div class="toc"><a href="#tracks">Tracks</a><a href="#definitions">Official definitions</a><a href="#risk">Official risk data</a><a href="#strategies">Strategy map</a></div>
+<h2 id="tracks">Single bet, parlay and player prop combo</h2>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-tracks" aria-label="Filter tbl-tracks" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-tracks">4 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-tracks"><caption>The three tracks required by the brief, with official definitions, official loss data and correlation requirements. Blank cells are not published by the official source.</caption>
+<thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Track</th><th scope="col" class="sortable">Official definition</th><th scope="col" class="sortable">Official loss data</th><th scope="col" class="sortable">Correlation requirement</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr id="BT-01" data-verified="true">
+<td><code>BT-01</code></td>
+<td data-value="1">Single bet</td>
+<td data-value="1" class="wide">One wager on one market; official report classifies moneyline, point spread and total as straight bets</td>
+<td data-value="1" class="wide">51% point spread, 52% moneyline whole, 53% total whole (NJ 2019)</td>
+<td data-value="1" class="wide">Not applicable to a single leg</td>
+<td><span class="src"><a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official government research report">S21 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="BT-02" data-verified="true">
+<td><code>BT-02</code></td>
+<td data-value="1">Parlay</td>
+<td data-value="1" class="wide">Two or more legs combined into one bet; all legs must win</td>
+<td data-value="1" class="wide">86% not in-game, 81% in-game (NJ 2019)</td>
+<td data-value="1" class="wide">Leg correlation must be measured (gate G09)</td>
+<td><span class="src"><a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official government research report">S21 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="BT-03" data-verified="true">
+<td><code>BT-03</code></td>
+<td data-value="1">Player prop combo</td>
+<td data-value="1" class="wide">Two or more player-prop legs; the official report lists &#x27;Prop&#x27; as a distinct bet type</td>
+<td data-value="1" class="blank wide"></td>
+<td data-value="1" class="wide">Leg correlation and player availability both required (G09, ST-09)</td>
+<td><span class="src"><a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official government research report">S21 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="BT-04" data-verified="true">
+<td><code>BT-04</code></td>
+<td data-value="1">All bet types</td>
+<td data-value="1" class="wide">More than 70% of all sports bets in the official 2019 sample resulted in a loss</td>
+<td data-value="1" class="wide">Average bet lost about $31</td>
+<td data-value="1" class="blank wide"></td>
+<td><span class="src"><a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official government research report">S21 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+</tbody></table></div>
+<h2 id="definitions">Verbatim official definitions</h2>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-terms" aria-label="Filter tbl-terms" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-terms">8 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-terms"><caption>Terms quoted from official league, regulator and NIST sources. No paraphrased definition is presented as a quote.</caption>
+<thead><tr><th scope="col" class="sortable">Term</th><th scope="col" class="sortable">Official definition / classification</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr data-verified="true">
+<td data-value="1">Sports wager</td>
+<td data-value="1" class="wide">&quot;Sports wager&quot; means a wager placed on an authorized sporting event.</td>
+<td><span class="src"><a href="https://www.nj.gov/oag/ge/docs/Regulations/CHAPTER69N.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official state regulation">S20 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">Oddsmaker</td>
+<td data-value="1" class="wide">&quot;Oddsmaker&quot; means a person licensed as a casino key employee or a casino service industry enterprise responsible for the final approval of all odds established on any wager.</td>
+<td><span class="src"><a href="https://www.nj.gov/oag/ge/docs/Regulations/CHAPTER69N.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official state regulation">S20 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">Event number</td>
+<td data-value="1" class="wide">&quot;Event number&quot; means a set of alpha and/or numeric characters that correspond to specific odds for a sports event.</td>
+<td><span class="src"><a href="https://www.nj.gov/oag/ge/docs/Regulations/CHAPTER69N.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official state regulation">S20 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">Parlay</td>
+<td data-value="1" class="wide">&quot;Parlays combine a number of bets on events, called &#x27;legs.&#x27; Bettors place bets on two or more legs, which are then combined into a single parlay bet. Players must win all legs to win a parlay.&quot;</td>
+<td><span class="src"><a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official government research report">S21 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">Straight bet</td>
+<td data-value="1" class="wide">The report classifies &#x27;straight bets&#x27; as moneyline, point spread, and total (over/under), either whole-game or partial.</td>
+<td><span class="src"><a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official government research report">S21 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">Prop bet</td>
+<td data-value="1" class="wide">The report lists &#x27;Prop&#x27; as a distinct bet type in its bet-type and loss-percentage tables.</td>
+<td><span class="src"><a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official government research report">S21 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">Cross-validation</td>
+<td data-value="1" class="wide">&quot;A family of methods based on the idea that the most unbiased test of the predictive error is by applying it to data that was not used in the building of the initial predictive model.&quot;</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">Pearson correlation coefficient</td>
+<td data-value="1" class="wide">&quot;Correlation is a measure of the strength of the (usually linear) relationship between two variables ... ranges from -1 to 1.&quot;</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+</tbody></table></div>
+<h2 id="risk">Official bet-type risk data</h2>
+<div class="callout warn">These figures come from an official State of New Jersey report describing <b>2019 New Jersey wagers across all sports</b>. They establish structural risk differences between bet types; they are not current NFL-only strategy results (flagged F21).</div>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-betting" aria-label="Filter tbl-betting" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-betting">13 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-betting"><caption>Official bet-type statistics. Each row links to the government report.</caption>
+<thead><tr><th scope="col" class="sortable">Measure</th><th scope="col" class="sortable">Value</th><th scope="col" class="sortable">Unit</th><th scope="col" class="sortable">Scope</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr data-verified="true">
+<td data-value="1" class="wide">Parlay (not in-game) bets lost</td>
+<td data-value="1" class="num">86</td>
+<td data-value="1">percent of bets</td>
+<td data-value="1" class="wide">2019 New Jersey sports wagers</td>
+<td><span class="src"><a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official government research report">S21 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1" class="wide">Parlay (in-game) bets lost</td>
+<td data-value="1" class="num">81</td>
+<td data-value="1">percent of bets</td>
+<td data-value="1" class="wide">2019 New Jersey sports wagers</td>
+<td><span class="src"><a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official government research report">S21 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1" class="wide">Futures bets lost</td>
+<td data-value="1" class="num">80</td>
+<td data-value="1">percent of bets</td>
+<td data-value="1" class="wide">2019 New Jersey sports wagers</td>
+<td><span class="src"><a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official government research report">S21 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1" class="wide">Total (partial) bets lost</td>
+<td data-value="1" class="num">50</td>
+<td data-value="1">percent of bets</td>
+<td data-value="1" class="wide">2019 New Jersey sports wagers</td>
+<td><span class="src"><a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official government research report">S21 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1" class="wide">Point spread (partial and whole) bets lost</td>
+<td data-value="1" class="num">51</td>
+<td data-value="1">percent of bets</td>
+<td data-value="1" class="wide">2019 New Jersey sports wagers</td>
+<td><span class="src"><a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official government research report">S21 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1" class="wide">Moneyline (whole) bets lost</td>
+<td data-value="1" class="num">52</td>
+<td data-value="1">percent of bets</td>
+<td data-value="1" class="wide">2019 New Jersey sports wagers</td>
+<td><span class="src"><a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official government research report">S21 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1" class="wide">Total (whole) bets lost</td>
+<td data-value="1" class="num">53</td>
+<td data-value="1">percent of bets</td>
+<td data-value="1" class="wide">2019 New Jersey sports wagers</td>
+<td><span class="src"><a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official government research report">S21 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1" class="wide">All sports bets that resulted in a loss</td>
+<td data-value="1" class="num">more than 70</td>
+<td data-value="1">percent of bets</td>
+<td data-value="1" class="wide">2019 New Jersey sports wagers</td>
+<td><span class="src"><a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official government research report">S21 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1" class="wide">Average amount lost across all bets</td>
+<td data-value="1" class="num">about 31</td>
+<td data-value="1">US dollars</td>
+<td data-value="1" class="wide">2019 New Jersey sports wagers</td>
+<td><span class="src"><a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official government research report">S21 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1" class="wide">NFL / pro football bets</td>
+<td data-value="1" class="num">4,964,198</td>
+<td data-value="1">bets</td>
+<td data-value="1" class="wide">2019 New Jersey sports wagers (Table 12)</td>
+<td><span class="src"><a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official government research report">S21 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1" class="wide">NFL / pro football share of single-leg bets</td>
+<td data-value="1" class="num">20.8</td>
+<td data-value="1">percent</td>
+<td data-value="1" class="wide">2019 New Jersey sports wagers (Table 12)</td>
+<td><span class="src"><a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official government research report">S21 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1" class="wide">Parlays with at least one NFL leg</td>
+<td data-value="1" class="num">20</td>
+<td data-value="1">percent of parlays</td>
+<td data-value="1" class="wide">2019 New Jersey sports wagers</td>
+<td><span class="src"><a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official government research report">S21 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1" class="wide">Operating online/mobile sports wagering in New Jersey since</td>
+<td data-value="1" class="num">2018</td>
+<td data-value="1">year</td>
+<td data-value="1" class="wide">NJ DGE regulation and report</td>
+<td><span class="src"><a href="https://www.nj.gov/oag/ge/docs/Regulations/CHAPTER69N.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official state regulation">S20 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+</tbody></table></div>
+<h2 id="strategies">Strategy-to-track map</h2>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-track-strategies" aria-label="Filter tbl-track-strategies" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-track-strategies">4 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-track-strategies"><caption>Which candidate strategies belong to each track and which gates dominate.</caption>
+<thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Track</th><th scope="col" class="sortable">Strategy IDs</th><th scope="col" class="sortable">Gate focus</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr id="TS-01" data-verified="true">
+<td><code>TS-01</code></td>
+<td data-value="1">Single bet</td>
+<td data-value="1">ST-01, ST-02, ST-03, ST-04, ST-05, ST-06</td>
+<td data-value="1" class="wide">G01–G08, G12</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="TS-02" data-verified="true">
+<td><code>TS-02</code></td>
+<td data-value="1">Parlay</td>
+<td data-value="1">ST-07</td>
+<td data-value="1" class="wide">G09 leg-correlation guard, G10 stability</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/ppc/section1/ppc136.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official statistical guidance">S19 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="TS-03" data-verified="true">
+<td><code>TS-03</code></td>
+<td data-value="1">Player prop combo</td>
+<td data-value="1">ST-08, ST-09</td>
+<td data-value="1" class="wide">G09 correlation guard, player availability gate</td>
+<td><span class="src"><a href="https://www.nfl.com/stats/player-stats/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official player statistics">S03 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="TS-04" data-verified="true">
+<td><code>TS-04</code></td>
+<td data-value="1">All tracks</td>
+<td data-value="1">ST-10</td>
+<td data-value="1" class="wide">All 13 gates</td>
+<td><span class="src"><a href="https://www.chiefs.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Kansas City Chiefs (chiefs.com) — Official club depth chart">S14 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+</tbody></table></div>
+<section class="panel"><h2>Design consequence</h2>
+<p>Official data shows parlays (not in-game) losing 86% of the time in the 2019 New Jersey sample, versus 51–53%
+for several straight-bet types. Combined with the NIST requirement to measure rather than assume relationships
+between variables, this is why parlay and player-prop-combo strategies carry an additional leg-correlation gate
+(G09) and why no parlay strategy is eligible for the leaderboard yet.</p>
+<p class="small">Sources: <a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf">NJ DGE report ↗</a>,
+<a href="https://www.itl.nist.gov/div898/handbook/ppc/section1/ppc136.htm">NIST correlation vs causality ↗</a>.</p></section>
+      <div class="footer">
+        NFL1 · 2026 Week 10 snapshot retrieved 2026-11-12 (UTC) ·
+        <a href="verification.html">Verification &amp; sources</a> ·
+        <a href="flagged.html">Flagged for Review</a> ·
+        <a href="https://github.com/kanlerxz87-cyber/NFL1">Source repository ↗</a><br>
+        Blank cells are values the official source does not publish. No value on this site is inferred or filled in.
+      </div>
+    </main>
+  </div>
+</div>
+<script src="site/assets/app.js"></script>
+</body>
+</html>

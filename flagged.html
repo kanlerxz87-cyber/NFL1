@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="NFL1 — a verified, source-linked NFL decision-intelligence dashboard: requirements, decision questions, improvement suggestions, strategy validation, injury and depth tracking, and a leaderboard competition.">
+<title>Flagged for Review | NFL1</title>
+<link rel="stylesheet" href="site/assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="mark">NFL</div>
+      <div><strong>NFL1</strong><small>Decision intelligence</small></div>
+    </div>
+    <div class="snapshot">
+      <b>Data snapshot</b><br>2026 season · Week 10<br>Retrieved 2026-11-12 (UTC)
+    </div>
+    <nav aria-label="Site sections">
+      <div class="navgroup"><h4>Overview</h4>
+<a href="index.html">Home</a>
+<a href="executive-summary.html">Executive Summary</a>
+<a href="deployment.html">Deployment &amp; PR</a>
+</div>
+<div class="navgroup"><h4>Governance</h4>
+<a href="requirements.html">Requirements</a>
+<a href="questions.html">Decision Questions</a>
+<a href="suggestions.html">Suggestions &amp; Paths</a>
+</div>
+<div class="navgroup"><h4>Competition</h4>
+<a href="strategy-lab.html">Strategy Lab</a>
+<a href="leaderboard.html">Leaderboard</a>
+<a href="bet-types.html">Bet Types &amp; Risk</a>
+</div>
+<div class="navgroup"><h4>Official data</h4>
+<a href="data-tables.html">Standings &amp; Findings</a>
+<a href="injuries.html">Injuries</a>
+<a href="depth-chart.html">Depth Charts</a>
+</div>
+<div class="navgroup"><h4>Assurance</h4>
+<a href="verification.html">Verification &amp; Sources</a>
+<a href="flagged.html" class="active">Flagged for Review</a>
+</div>
+    </nav>
+    <div class="foot">
+      Every table row links to an official source. Unconfirmed values are left blank and flagged.
+      <br><br><a style="color:#fff;text-decoration:underline" href="https://github.com/kanlerxz87-cyber/NFL1">Repository ↗</a>
+    </div>
+  </aside>
+  <div class="main">
+    <div class="topbar">
+      <div class="crumb">NFL1 / <b>Flagged for Review</b></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">24 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+    </div>
+    <main class="content" id="main">
+      <div class="kicker">Assurance</div>
+      <h1>Flagged for Review</h1>
+      <p class="lede">Clearly labelled irregularities, official-page conflicts, unverified values and coordination issues — each with an official source link for manual review, none blocking the merge.</p>
+      <div class="callout flag"><b>Flagged for Review.</b> These irregularities and unverified items do not block the merge or the live site. Each has an official source link for manual review and a suggested action. A status of <em>needs review</em> means exactly this: published here, not blocking.</div>
+<div class="cards"><div class="card"><div class="label">Flagged items</div><div class="value">24</div><div class="detail">All with source links</div></div><div class="card"><div class="label">Official-page irregularities</div><div class="value">7</div><div class="detail">F02–F08</div></div><div class="card"><div class="label">Missing official data</div><div class="value">5</div><div class="detail">F09–F11, F14, F15</div></div><div class="card"><div class="label">Coordination / build</div><div class="value">5</div><div class="detail">F16, F17, F22–F24</div></div></div>
+<h2 id="all">All flagged irregularities</h2>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-flags" aria-label="Filter tbl-flags" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-flags">24 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-flags"><caption>Every flag with category, description, impact, status, official source link and suggested action for the reviewer.</caption>
+<thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Category</th><th scope="col" class="sortable">Irregularity / unverified item</th><th scope="col" class="sortable">Impact on decisions</th><th scope="col" class="sortable">Status</th><th scope="col" class="sortable">Suggested action</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr id="F01" data-verified="true">
+<td><code>F01</code></td>
+<td data-value="1">Repo</td>
+<td data-value="1" class="wide">The repository contained only README.md at the start; no code, data, workflows or site existed.</td>
+<td data-value="1" class="wide">No prior implementation to review; all site content is new.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Confirm the repo audit line by line.</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F02" data-verified="true">
+<td><code>F02</code></td>
+<td data-value="1">Official page</td>
+<td data-value="1" class="wide">The 2026 standings page heading renders the literal text &#x27;$year$ NFL $displayname$ Standings&#x27;.</td>
+<td data-value="1" class="wide">Possible partially rendered official page; re-check before relying on the heading.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Re-fetch and compare division/conference standings views.</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F03" data-verified="true">
+<td><code>F03</code></td>
+<td data-value="1">Official page</td>
+<td data-value="1" class="wide">On the Week 10 injury report most rows publish neither an injury description nor a game status.</td>
+<td data-value="1" class="wide">Availability signals cannot use those blank fields.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Use the final Game Status Report and official inactives instead.</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F04" data-verified="true">
+<td><code>F04</code></td>
+<td data-value="1">Official page conflict</td>
+<td data-value="1" class="wide">The injury page lists &#x27;Seahawks: No Injuries Reported&#x27; while an NFL.com news headline on the same page says Sam Darnold was ruled out for Week 10.</td>
+<td data-value="1" class="wide">Two official surfaces disagree on availability.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Pre-register which official surface is authoritative.</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F05" data-verified="true">
+<td><code>F05</code></td>
+<td data-value="1">Official page conflict</td>
+<td data-value="1" class="wide">The injury report lists Puka Nacua as DNP with blank injury and game status, while an NFL.com news headline on the same page says he is likely to be placed on IR.</td>
+<td data-value="1" class="wide">Injury severity is under-reported in the tabular report.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Join news and inactives to the tabular report.</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F06" data-verified="true">
+<td><code>F06</code></td>
+<td data-value="1">Data authority</td>
+<td data-value="1" class="wide">Chiefs and Packers depth charts are labelled &#x27;Unofficial&#x27; by the clubs themselves.</td>
+<td data-value="1" class="wide">2nd/3rd/4th-string assignments are not league-certified.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Ask for a league-published depth chart or use official inactives.</td>
+<td><span class="src"><a href="https://www.chiefs.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Kansas City Chiefs (chiefs.com) — Official club depth chart">S14 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F07" data-verified="true">
+<td><code>F07</code></td>
+<td data-value="1">Data authority</td>
+<td data-value="1" class="wide">The 49ers chart says &#x27;Updated as of 11/10/26&#x27; but is not labelled &#x27;Unofficial&#x27;; the Chiefs chart has no as-of date.</td>
+<td data-value="1" class="wide">Inconsistent provenance metadata across clubs.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Record an as-of label for every snapshot.</td>
+<td><span class="src"><a href="https://www.49ers.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="San Francisco 49ers (49ers.com) — Official club depth chart">S16 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F08" data-verified="true">
+<td><code>F08</code></td>
+<td data-value="1">Missing data</td>
+<td data-value="1" class="wide">The league injury report publishes no depth-rank column, and only 3 of 32 clubs&#x27; depth charts were transcribed.</td>
+<td data-value="1" class="wide">Backup-deficiency signals cannot be computed league-wide.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Collect all 32 official club depth-chart URLs and snapshot weekly.</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F09" data-verified="true">
+<td><code>F09</code></td>
+<td data-value="1">Missing data</td>
+<td data-value="1" class="wide">No official source reviewed publishes NFL betting odds or lines.</td>
+<td data-value="1" class="wide">Own lines cannot be benchmarked against a verified market line.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Request an official odds feed or define a results-only benchmark.</td>
+<td><span class="src"><a href="https://www.nj.gov/oag/ge/docs/Regulations/CHAPTER69N.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official state regulation">S20 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F10" data-verified="true">
+<td><code>F10</code></td>
+<td data-value="1">Missing data</td>
+<td data-value="1" class="wide">No official source publishes leg-level or injury-vs-performance correlation coefficients.</td>
+<td data-value="1" class="wide">Requested correlation values remain blank except standings-derived ones.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Build a game-level panel from official game pages and weekly snapshots.</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/ppc/section1/ppc136.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official statistical guidance">S19 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F11" data-verified="true">
+<td><code>F11</code></td>
+<td data-value="1">Missing data</td>
+<td data-value="1" class="wide">No official source reviewed publishes vig or house edge by bet type.</td>
+<td data-value="1" class="wide">Break-even thresholds cannot be set.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Obtain operator-level odds/hold data from an official regulator dataset.</td>
+<td><span class="src"><a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official government research report">S21 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F12" data-verified="true">
+<td><code>F12</code></td>
+<td data-value="1">Project choice</td>
+<td data-value="1" class="wide">Leaderboard reward values and the ranking formula are not published by any official source.</td>
+<td data-value="1" class="wide">Reward and score cells are intentionally blank.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Pre-register non-monetary rewards and a scoring formula before scoring.</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F13" data-verified="true">
+<td><code>F13</code></td>
+<td data-value="1">Project choice</td>
+<td data-value="1" class="wide">Effort and risk estimates for suggestions cannot be confirmed by an official source.</td>
+<td data-value="1" class="wide">Effort cells are intentionally blank.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Record estimates only after a reviewer assigns them.</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S22 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F14" data-verified="true">
+<td><code>F14</code></td>
+<td data-value="1">Missing policy text</td>
+<td data-value="1" class="wide">An official page stating the exact game-day inactives deadline was not located in the pages reviewed.</td>
+<td data-value="1" class="wide">Look-ahead bias boundary is not fully specified.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Locate the deadline in the official Game Operations Manual / rulebook.</td>
+<td><span class="src"><a href="https://operations.nfl.com/game-operations-logistics/preparation-safety/game-ops-manual" target="_blank" rel="noopener noreferrer" title="NFL Football Operations — Official game operations manual">S11 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F15" data-verified="true">
+<td><code>F15</code></td>
+<td data-value="1">Missing policy text</td>
+<td data-value="1" class="wide">No official NFL gambling-policy document was located on the operations.nfl.com pages reviewed.</td>
+<td data-value="1" class="wide">Compliance constraints for a betting leaderboard are not fully documented.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Request or locate the league&#x27;s official gambling policy.</td>
+<td><span class="src"><a href="https://operations.nfl.com/game-operations-logistics/preparation-safety/game-ops-manual" target="_blank" rel="noopener noreferrer" title="NFL Football Operations — Official game operations manual">S11 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F16" data-verified="true">
+<td><code>F16</code></td>
+<td data-value="1">Coordination</td>
+<td data-value="1" class="wide">Session arena-533256e1 claimed &#x27;all&#x27; tasks and overlapping scopes including index.html, data/*.csv and docs/*.md.</td>
+<td data-value="1" class="wide">Risk of duplicate work and conflicting shared outputs.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Keep disjoint scopes; integration reconciles shared files.</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F17" data-verified="true">
+<td><code>F17</code></td>
+<td data-value="1">Deviation</td>
+<td data-value="1" class="wide">This environment pins the session to one branch, so session-&lt;id&gt;/&lt;task&gt; branches cannot be created.</td>
+<td data-value="1" class="wide">The brief&#x27;s branch convention cannot be followed here.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Note the deviation; a later session with branch freedom can restructure.</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F18" data-verified="true">
+<td><code>F18</code></td>
+<td data-value="1">Link hygiene</td>
+<td data-value="1" class="wide">Guessed URLs redirected: /the-rules/nfl-rulebook, /inside-football-ops/nfl-operations/integrity-of-the-game, /schedules/2026/REG10.</td>
+<td data-value="1" class="wide">Using non-canonical links would produce stale citations.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Canonical URLs are used in the source registry.</td>
+<td><span class="src"><a href="https://operations.nfl.com/rules-officiating/2026-nfl-rulebook" target="_blank" rel="noopener noreferrer" title="NFL Football Operations — Official playing rules">S09 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F19" data-verified="true">
+<td><code>F19</code></td>
+<td data-value="1">Data comparability</td>
+<td data-value="1" class="wide">2026 standings show clubs with 8 or 9 games played at the snapshot date.</td>
+<td data-value="1" class="wide">Raw PF/PA totals are not directly comparable across clubs.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Use per-game values in any derived metric; method is shown.</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F20" data-verified="true">
+<td><code>F20</code></td>
+<td data-value="1">Undefined codes</td>
+<td data-value="1" class="wide">The official roster page shows status codes (ACT, RES, DEV, TRC, CUT) without publishing their definitions on that page.</td>
+<td data-value="1" class="wide">Roster status cannot be interpreted from that page alone.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Locate official status-code definitions before using them.</td>
+<td><span class="src"><a href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official club roster">S07 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F21" data-verified="true">
+<td><code>F21</code></td>
+<td data-value="1">Applicability</td>
+<td data-value="1" class="wide">The official NJ report describes 2019 New Jersey bettors across all sports, not current NFL-only bettors.</td>
+<td data-value="1" class="wide">Loss percentages are evidence of structure, not of current NFL strategy performance.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Obtain current, NFL-specific official data before calibration.</td>
+<td><span class="src"><a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official government research report">S21 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F22" data-verified="true">
+<td><code>F22</code></td>
+<td data-value="1">Coordination</td>
+<td data-value="1" class="wide">Two different COORDINATION.md boards exist on two active branches.</td>
+<td data-value="1" class="wide">Task status is not globally consistent.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Integration session must reconcile the boards without discarding either.</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F23" data-verified="true">
+<td><code>F23</code></td>
+<td data-value="1">Deployment</td>
+<td data-value="1" class="wide">Pages uses a legacy branch build from main / &#x27;/&#x27;; Jekyll processing must be disabled for plain HTML.</td>
+<td data-value="1" class="wide">An unrecognised build step could alter generated pages.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">A .nojekyll file is committed; build status is checked after merge.</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S22 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F24" data-verified="true">
+<td><code>F24</code></td>
+<td data-value="1">Interpretation</td>
+<td data-value="1" class="wide">The rule &#x27;every table row must have a source link to an official site&#x27; is applied to analysis rows by linking the official source that grounds the row&#x27;s domain; project-only assertions are additionally flagged.</td>
+<td data-value="1" class="wide">Ensures the rule is enforced without fabricating official support for internal states.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Confirm the interpretation on review.</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+</tbody></table></div>
+<h2 id="unverified">Registry of blank/unverified values</h2>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-unverified" aria-label="Filter tbl-unverified" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-unverified">31 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-unverified"><caption>Every value intentionally left blank. Value cells are empty; each row links to an official source and to this review page.</caption>
+<thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Blank value</th><th scope="col" class="sortable">Value</th><th scope="col" class="sortable">Why it is blank</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr id="CR-01" data-verified="false">
+<td><code>CR-01</code></td>
+<td class="wide">Correlation: Injury designation count vs points allowed</td>
+<td data-value="1" class="blank num"></td>
+<td class="wide">A timestamped panel dataset is not published by an official source</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F10">UNVERIFIED</a></td>
+</tr>
+<tr id="CR-02" data-verified="false">
+<td><code>CR-02</code></td>
+<td class="wide">Correlation: Backup depth rank vs points allowed</td>
+<td data-value="1" class="blank num"></td>
+<td class="wide">Depth rank is not published league-wide</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F08">UNVERIFIED</a></td>
+</tr>
+<tr id="CR-03" data-verified="false">
+<td><code>CR-03</code></td>
+<td class="wide">Correlation: Backup depth rank vs points scored</td>
+<td data-value="1" class="blank num"></td>
+<td class="wide">Same as CR-02, offense side</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F08">UNVERIFIED</a></td>
+</tr>
+<tr id="CR-04" data-verified="false">
+<td><code>CR-04</code></td>
+<td class="wide">Correlation: QB passing yards vs WR receiving yards (same game)</td>
+<td data-value="1" class="blank num"></td>
+<td class="wide">No official leg-level correlation dataset</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F10">UNVERIFIED</a></td>
+</tr>
+<tr id="CR-05" data-verified="false">
+<td><code>CR-05</code></td>
+<td class="wide">Correlation: Two parlay legs (same game)</td>
+<td data-value="1" class="blank num"></td>
+<td class="wide">No official leg-level correlation dataset</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F10">UNVERIFIED</a></td>
+</tr>
+<tr id="CR-06" data-verified="false">
+<td><code>CR-06</code></td>
+<td class="wide">Correlation: Practice-status trend vs game-day inactive</td>
+<td data-value="1" class="blank num"></td>
+<td class="wide">Joined historical series not available from an official page</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F10">UNVERIFIED</a></td>
+</tr>
+<tr id="CR-07" data-verified="false">
+<td><code>CR-07</code></td>
+<td class="wide">Correlation: Own line error vs realized margin</td>
+<td data-value="1" class="blank num"></td>
+<td class="wide">No official odds source to define the benchmark</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F09">UNVERIFIED</a></td>
+</tr>
+<tr id="LR-ST-01" data-verified="false">
+<td><code>LR-ST-01</code></td>
+<td class="wide">Leaderboard score/rank: Net-points strength differential</td>
+<td data-value="1" class="blank num"></td>
+<td class="wide">No strategy has passed validation gates G01–G13</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F12">UNVERIFIED</a></td>
+</tr>
+<tr id="LR-ST-02" data-verified="false">
+<td><code>LR-ST-02</code></td>
+<td class="wide">Leaderboard score/rank: Points-allowed total</td>
+<td data-value="1" class="blank num"></td>
+<td class="wide">No strategy has passed validation gates G01–G13</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F12">UNVERIFIED</a></td>
+</tr>
+<tr id="LR-ST-03" data-verified="false">
+<td><code>LR-ST-03</code></td>
+<td class="wide">Leaderboard score/rank: Defensive backup-depth deficiency</td>
+<td data-value="1" class="blank num"></td>
+<td class="wide">No strategy has passed validation gates G01–G13</td>
+<td><span class="src"><a href="https://www.chiefs.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Kansas City Chiefs (chiefs.com) — Official club depth chart">S14 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F12">UNVERIFIED</a></td>
+</tr>
+<tr id="LR-ST-04" data-verified="false">
+<td><code>LR-ST-04</code></td>
+<td class="wide">Leaderboard score/rank: Offensive backup-depth deficiency</td>
+<td data-value="1" class="blank num"></td>
+<td class="wide">No strategy has passed validation gates G01–G13</td>
+<td><span class="src"><a href="https://www.packers.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Green Bay Packers (packers.com) — Official club depth chart">S15 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F12">UNVERIFIED</a></td>
+</tr>
+<tr id="LR-ST-05" data-verified="false">
+<td><code>LR-ST-05</code></td>
+<td class="wide">Leaderboard score/rank: Practice-status trend</td>
+<td data-value="1" class="blank num"></td>
+<td class="wide">No strategy has passed validation gates G01–G13</td>
+<td><span class="src"><a href="https://www.nfl.com/news/2026-27-national-football-league-important-dates" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official league calendar">S04 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F12">UNVERIFIED</a></td>
+</tr>
+<tr id="LR-ST-06" data-verified="false">
+<td><code>LR-ST-06</code></td>
+<td class="wide">Leaderboard score/rank: Designation-gated availability</td>
+<td data-value="1" class="blank num"></td>
+<td class="wide">No strategy has passed validation gates G01–G13</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F12">UNVERIFIED</a></td>
+</tr>
+<tr id="LR-ST-07" data-verified="false">
+<td><code>LR-ST-07</code></td>
+<td class="wide">Leaderboard score/rank: Two-leg parlay with correlation guard</td>
+<td data-value="1" class="blank num"></td>
+<td class="wide">No strategy has passed validation gates G01–G13</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F12">UNVERIFIED</a></td>
+</tr>
+<tr id="LR-ST-08" data-verified="false">
+<td><code>LR-ST-08</code></td>
+<td class="wide">Leaderboard score/rank: Same-game player-prop combo</td>
+<td data-value="1" class="blank num"></td>
+<td class="wide">No strategy has passed validation gates G01–G13</td>
+<td><span class="src"><a href="https://www.nfl.com/stats/player-stats/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official player statistics">S03 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F12">UNVERIFIED</a></td>
+</tr>
+<tr id="LR-ST-09" data-verified="false">
+<td><code>LR-ST-09</code></td>
+<td class="wide">Leaderboard score/rank: Prop availability gate</td>
+<td data-value="1" class="blank num"></td>
+<td class="wide">No strategy has passed validation gates G01–G13</td>
+<td><span class="src"><a href="https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official inactives list">S05 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F12">UNVERIFIED</a></td>
+</tr>
+<tr id="LR-ST-10" data-verified="false">
+<td><code>LR-ST-10</code></td>
+<td class="wide">Leaderboard score/rank: Backup-exposure index</td>
+<td data-value="1" class="blank num"></td>
+<td class="wide">No strategy has passed validation gates G01–G13</td>
+<td><span class="src"><a href="https://www.chiefs.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Kansas City Chiefs (chiefs.com) — Official club depth chart">S14 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F12">UNVERIFIED</a></td>
+</tr>
+<tr id="RV-RW-01" data-verified="false">
+<td><code>RV-RW-01</code></td>
+<td class="wide">Reward value: Verified Signal</td>
+<td data-value="1" class="blank num"></td>
+<td class="wide">No official source defines a reward value</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda353.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official statistical test">S18 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F12">UNVERIFIED</a></td>
+</tr>
+<tr id="RV-RW-02" data-verified="false">
+<td><code>RV-RW-02</code></td>
+<td class="wide">Reward value: Top Single Bet</td>
+<td data-value="1" class="blank num"></td>
+<td class="wide">No official source defines a reward value</td>
+<td><span class="src"><a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official government research report">S21 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F12">UNVERIFIED</a></td>
+</tr>
+<tr id="RV-RW-03" data-verified="false">
+<td><code>RV-RW-03</code></td>
+<td class="wide">Reward value: Top Parlay</td>
+<td data-value="1" class="blank num"></td>
+<td class="wide">No official source defines a reward value</td>
+<td><span class="src"><a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official government research report">S21 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F12">UNVERIFIED</a></td>
+</tr>
+<tr id="RV-RW-04" data-verified="false">
+<td><code>RV-RW-04</code></td>
+<td class="wide">Reward value: Top Player Prop Combo</td>
+<td data-value="1" class="blank num"></td>
+<td class="wide">No official source defines a reward value</td>
+<td><span class="src"><a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official government research report">S21 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F12">UNVERIFIED</a></td>
+</tr>
+<tr id="UV-OL-06" data-verified="false">
+<td><code>UV-OL-06</code></td>
+<td class="wide">Own-line step: Benchmark</td>
+<td data-value="1" class="blank num"></td>
+<td class="wide">No official odds/benchmark source; threshold not pre-registered</td>
+<td><span class="src"><a href="https://www.nj.gov/oag/ge/docs/Regulations/CHAPTER69N.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official state regulation">S20 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F09">UNVERIFIED</a></td>
+</tr>
+<tr id="UV-OL-07" data-verified="false">
+<td><code>UV-OL-07</code></td>
+<td class="wide">Own-line step: Generate a signal only above a frozen threshold</td>
+<td data-value="1" class="blank num"></td>
+<td class="wide">No official odds/benchmark source; threshold not pre-registered</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F09">UNVERIFIED</a></td>
+</tr>
+<tr id="UV-TR-05" data-verified="false">
+<td><code>UV-TR-05</code></td>
+<td class="wide">Tracking score: Score</td>
+<td data-value="1" class="blank num"></td>
+<td class="wide">No official deficiency-score dataset</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/ppc/section1/ppc136.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official statistical guidance">S19 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F10">UNVERIFIED</a></td>
+</tr>
+<tr id="UV-SUG" data-verified="false">
+<td><code>UV-SUG</code></td>
+<td class="wide">Effort / risk estimate for each of the 20 suggestions</td>
+<td data-value="1" class="blank num"></td>
+<td class="wide">No official source can confirm an effort estimate</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S22 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F13">UNVERIFIED</a></td>
+</tr>
+<tr id="UV-STRAT" data-verified="false">
+<td><code>UV-STRAT</code></td>
+<td class="wide">Performance value for each of the 10 candidate strategies</td>
+<td data-value="1" class="blank num"></td>
+<td class="wide">No strategy has passed validation gates G01-G13</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda353.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official statistical test">S18 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F10">UNVERIFIED</a></td>
+</tr>
+<tr id="UV-PROP" data-verified="false">
+<td><code>UV-PROP</code></td>
+<td class="wide">NFL-only player-prop loss rate</td>
+<td data-value="1" class="blank num"></td>
+<td class="wide">The official state report is 2019 data across all sports</td>
+<td><span class="src"><a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official government research report">S21 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F21">UNVERIFIED</a></td>
+</tr>
+<tr id="UV-D-04" data-verified="false">
+<td><code>UV-D-04</code></td>
+<td class="wide">Deployment: Pull request number</td>
+<td data-value="1" class="blank num"></td>
+<td class="wide">Filled by the integration session after the PR, merge and deploy</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F16">UNVERIFIED</a></td>
+</tr>
+<tr id="UV-D-05" data-verified="false">
+<td><code>UV-D-05</code></td>
+<td class="wide">Deployment: Pull request URL</td>
+<td data-value="1" class="blank num"></td>
+<td class="wide">Filled by the integration session after the PR, merge and deploy</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F16">UNVERIFIED</a></td>
+</tr>
+<tr id="UV-D-06" data-verified="false">
+<td><code>UV-D-06</code></td>
+<td class="wide">Deployment: Merge result</td>
+<td data-value="1" class="blank num"></td>
+<td class="wide">Filled by the integration session after the PR, merge and deploy</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F16">UNVERIFIED</a></td>
+</tr>
+<tr id="UV-D-07" data-verified="false">
+<td><code>UV-D-07</code></td>
+<td class="wide">Deployment: Post-merge Pages build status</td>
+<td data-value="1" class="blank num"></td>
+<td class="wide">Filled by the integration session after the PR, merge and deploy</td>
+<td><span class="src"><a href="https://api.github.com/repos/kanlerxz87-cyber/NFL1/pages" target="_blank" rel="noopener noreferrer" title="GitHub REST API — Official platform API">S25 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F16">UNVERIFIED</a></td>
+</tr>
+</tbody></table></div>
+<section class="panel"><h2>Review instructions</h2>
+<ol class="tight">
+<li>Open the official source link in any row and confirm the description against the page.</li>
+<li>For missing data (F08–F11, F14, F15), use the discovery action on the <a href="questions.html">Decision Questions</a> page.</li>
+<li>For official-page conflicts (F02–F07), decide which official surface is authoritative and record that decision.</li>
+<li>For coordination flags (F16, F17, F22), reconcile the two COORDINATION.md boards in the integration session.</li>
+<li>Flagged items do not block the site or the merge; they are published so review can happen after the site is live.</li>
+</ol></section>
+      <div class="footer">
+        NFL1 · 2026 Week 10 snapshot retrieved 2026-11-12 (UTC) ·
+        <a href="verification.html">Verification &amp; sources</a> ·
+        <a href="flagged.html">Flagged for Review</a> ·
+        <a href="https://github.com/kanlerxz87-cyber/NFL1">Source repository ↗</a><br>
+        Blank cells are values the official source does not publish. No value on this site is inferred or filled in.
+      </div>
+    </main>
+  </div>
+</div>
+<script src="site/assets/app.js"></script>
+</body>
+</html>

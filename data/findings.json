@@ -1,0 +1,128 @@
+[
+  {
+    "id": "FD-01",
+    "statement": "The repository started with exactly one tracked file (README.md, one line '# NFL1')",
+    "where": "Repo audit",
+    "status": "Verified",
+    "src": "S24",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "FD-02",
+    "statement": "The official 2026 standings contain all 32 clubs with PF, PA and NET PTS, and PF - PA = NET PTS on every row",
+    "where": "Standings table",
+    "status": "Verified",
+    "src": "S02",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "FD-03",
+    "statement": "Only 6 of the transcribed Week 10 injury rows publish an injury description or a game status",
+    "where": "Injuries table",
+    "status": "Verified",
+    "src": "S01",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "FD-04",
+    "statement": "Official club depth charts publish 1st through 4th string for offense and defense",
+    "where": "Depth Charts table",
+    "status": "Verified",
+    "src": "S14",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "FD-05",
+    "statement": "Two of the three club depth charts are explicitly labelled 'Unofficial'",
+    "where": "Depth Charts metadata",
+    "status": "Verified",
+    "src": "S15",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "FD-06",
+    "statement": "NFL.com publishes a Week 9 inactives list with 'emergency third QB' designations",
+    "where": "Inactives table",
+    "status": "Verified",
+    "src": "S05",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "FD-07",
+    "statement": "The 2026-27 important dates article publishes the Personnel (Injury) Report Policy filing schedule",
+    "where": "Injury policy table",
+    "status": "Verified",
+    "src": "S04",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "FD-08",
+    "statement": "Official state data shows parlay bets lost far more often than straight bets",
+    "where": "Bet-type risk table",
+    "status": "Verified",
+    "src": "S21",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "FD-09",
+    "statement": "NIST publishes the definitions needed for correlation, cross-validation and significance testing",
+    "where": "Terms and gates tables",
+    "status": "Verified",
+    "src": "S17",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "FD-10",
+    "statement": "Pearson correlations computed from official standings are reproducible from the committed data",
+    "where": "Correlations table",
+    "status": "Computed",
+    "src": "S02",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "FD-11",
+    "statement": "No official source reviewed publishes NFL betting lines, leg correlations or vig",
+    "where": "Bet-type and correlation tables",
+    "status": "Unverified",
+    "src": "S20",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "FD-12",
+    "statement": "GitHub Pages for this repo is configured to publish main / '/' (legacy build)",
+    "where": "Deployment page",
+    "status": "Verified",
+    "src": "S25",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "FD-13",
+    "statement": "A second session branch is active with overlapping task claims",
+    "where": "Coordination log",
+    "status": "Verified",
+    "src": "S24",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "FD-14",
+    "statement": "No strategy has passed the validation gates, therefore no leaderboard rank or score is published",
+    "where": "Leaderboard table",
+    "status": "Verified",
+    "src": "S18",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  }
+]

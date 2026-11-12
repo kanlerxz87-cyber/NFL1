@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="NFL1 — a verified, source-linked NFL decision-intelligence dashboard: requirements, decision questions, improvement suggestions, strategy validation, injury and depth tracking, and a leaderboard competition.">
+<title>Deployment &amp; pull request | NFL1</title>
+<link rel="stylesheet" href="site/assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="mark">NFL</div>
+      <div><strong>NFL1</strong><small>Decision intelligence</small></div>
+    </div>
+    <div class="snapshot">
+      <b>Data snapshot</b><br>2026 season · Week 10<br>Retrieved 2026-11-12 (UTC)
+    </div>
+    <nav aria-label="Site sections">
+      <div class="navgroup"><h4>Overview</h4>
+<a href="index.html">Home</a>
+<a href="executive-summary.html">Executive Summary</a>
+<a href="deployment.html" class="active">Deployment &amp; PR</a>
+</div>
+<div class="navgroup"><h4>Governance</h4>
+<a href="requirements.html">Requirements</a>
+<a href="questions.html">Decision Questions</a>
+<a href="suggestions.html">Suggestions &amp; Paths</a>
+</div>
+<div class="navgroup"><h4>Competition</h4>
+<a href="strategy-lab.html">Strategy Lab</a>
+<a href="leaderboard.html">Leaderboard</a>
+<a href="bet-types.html">Bet Types &amp; Risk</a>
+</div>
+<div class="navgroup"><h4>Official data</h4>
+<a href="data-tables.html">Standings &amp; Findings</a>
+<a href="injuries.html">Injuries</a>
+<a href="depth-chart.html">Depth Charts</a>
+</div>
+<div class="navgroup"><h4>Assurance</h4>
+<a href="verification.html">Verification &amp; Sources</a>
+<a href="flagged.html">Flagged for Review</a>
+</div>
+    </nav>
+    <div class="foot">
+      Every table row links to an official source. Unconfirmed values are left blank and flagged.
+      <br><br><a style="color:#fff;text-decoration:underline" href="https://github.com/kanlerxz87-cyber/NFL1">Repository ↗</a>
+    </div>
+  </aside>
+  <div class="main">
+    <div class="topbar">
+      <div class="crumb">NFL1 / <b>Deployment &amp; PR</b></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">24 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+    </div>
+    <main class="content" id="main">
+      <div class="kicker">Overview</div>
+      <h1>Deployment &amp; pull request</h1>
+      <p class="lede">GitHub Pages configuration, the verification pipeline, and the recorded pull request, merge and deployment result.</p>
+      <div class="callout"><b>Deployment and PR record.</b> Blank values are filled by the integration session after the pull request is created, the merge succeeds and GitHub Pages reports a successful build. Until then they remain blank and flagged — no deployment claim is made without evidence.</div>
+<h2 id="record">Deployment record</h2>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-deployment" aria-label="Filter tbl-deployment" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-deployment">7 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-deployment"><caption>Pages configuration, entry-file requirement, PR number, PR URL, merge result and post-merge build status.</caption>
+<thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Item</th><th scope="col" class="sortable">Value</th><th scope="col" class="sortable">How it was checked</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr id="D-01" data-verified="true">
+<td><code>D-01</code></td>
+<td class="wide">GitHub Pages publishing source</td>
+<td data-value="1" class="wide">main / &#x27;/&#x27;, build_type legacy, status built</td>
+<td class="wide">gh api repos/kanlerxz87-cyber/NFL1/pages</td>
+<td><span class="src"><a href="https://api.github.com/repos/kanlerxz87-cyber/NFL1/pages" target="_blank" rel="noopener noreferrer" title="GitHub REST API — Official platform API">S25 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="D-02" data-verified="true">
+<td><code>D-02</code></td>
+<td class="wide">Live site URL</td>
+<td data-value="1" class="wide">https://kanlerxz87-cyber.github.io/NFL1/</td>
+<td class="wide">GitHub Pages API html_url</td>
+<td><span class="src"><a href="https://api.github.com/repos/kanlerxz87-cyber/NFL1/pages" target="_blank" rel="noopener noreferrer" title="GitHub REST API — Official platform API">S25 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="D-03" data-verified="true">
+<td><code>D-03</code></td>
+<td class="wide">Entry file requirement</td>
+<td data-value="1" class="wide">index.html at the top level of the publishing source</td>
+<td class="wide">GitHub Docs: Creating a GitHub Pages site</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S23 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="D-04" data-verified="false">
+<td><code>D-04</code></td>
+<td class="wide">Pull request number</td>
+<td data-value="1" class="blank wide"></td>
+<td class="wide">Created by the integration session before merge</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><a class="badge flag" href="flagged.html">UNVERIFIED</a></td>
+</tr>
+<tr id="D-05" data-verified="false">
+<td><code>D-05</code></td>
+<td class="wide">Pull request URL</td>
+<td data-value="1" class="blank wide"></td>
+<td class="wide">Created by the integration session before merge</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><a class="badge flag" href="flagged.html">UNVERIFIED</a></td>
+</tr>
+<tr id="D-06" data-verified="false">
+<td><code>D-06</code></td>
+<td class="wide">Merge result</td>
+<td data-value="1" class="blank wide"></td>
+<td class="wide">gh pr merge with an explicit PR number</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><a class="badge flag" href="flagged.html">UNVERIFIED</a></td>
+</tr>
+<tr id="D-07" data-verified="false">
+<td><code>D-07</code></td>
+<td class="wide">Post-merge Pages build status</td>
+<td data-value="1" class="blank wide"></td>
+<td class="wide">GitHub Pages builds endpoint plus a live-site fetch</td>
+<td><span class="src"><a href="https://api.github.com/repos/kanlerxz87-cyber/NFL1/pages" target="_blank" rel="noopener noreferrer" title="GitHub REST API — Official platform API">S25 ↗</a></span></td><td><a class="badge flag" href="flagged.html">UNVERIFIED</a></td>
+</tr>
+</tbody></table></div>
+<h2 id="config">Publishing configuration</h2>
+<div class="panel"><p>Official GitHub documentation states that a Pages site published from a branch uses the root (<code>/</code>) or <code>/docs</code> folder of that branch and that <code>index.html</code> must be the entry file at the top level of the publishing source. This repository is configured for <code>main / /</code>. A <code>.nojekyll</code> file is committed so the plain generated HTML is published unchanged, and a GitHub Actions workflow runs the validator on every push and pull request.</p></div>
+<h2 id="checks">Checks performed before merge</h2>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-checks" aria-label="Filter tbl-checks" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-checks">7 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-checks"><caption>Every check in the integration pipeline, with the official method or repository source.</caption>
+<thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Check / command</th><th scope="col" class="sortable">Purpose / result</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr id="CH-01" data-verified="true">
+<td><code>CH-01</code></td>
+<td data-value="1">python3 tools/seed_data.py</td>
+<td data-value="1" class="wide">Regenerates the JSON data layer from transcribed official values</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="CH-02" data-verified="true">
+<td><code>CH-02</code></td>
+<td data-value="1">python3 tools/compute_correlations.py</td>
+<td data-value="1" class="wide">Recomputes Pearson r from official standings</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="CH-03" data-verified="true">
+<td><code>CH-03</code></td>
+<td data-value="1">python3 tools/build.py</td>
+<td data-value="1" class="wide">Generates all HTML pages and markdown documents</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S23 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="CH-04" data-verified="true">
+<td><code>CH-04</code></td>
+<td data-value="1">python3 tools/verify.py</td>
+<td data-value="1" class="wide">Checks source links, unverified blanks and internal links</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S22 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="CH-05" data-verified="true">
+<td><code>CH-05</code></td>
+<td data-value="1">gh api repos/kanlerxz87-cyber/NFL1/pages</td>
+<td data-value="1" class="wide">Reads Pages build_type, source and status</td>
+<td><span class="src"><a href="https://api.github.com/repos/kanlerxz87-cyber/NFL1/pages" target="_blank" rel="noopener noreferrer" title="GitHub REST API — Official platform API">S25 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="CH-06" data-verified="true">
+<td><code>CH-06</code></td>
+<td data-value="1">gh pr merge &lt;number&gt; --merge</td>
+<td data-value="1" class="wide">Merge result recorded in COORDINATION.md after success</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="CH-07" data-verified="true">
+<td><code>CH-07</code></td>
+<td data-value="1">Post-merge Pages build + live fetch</td>
+<td data-value="1" class="wide">Confirms the site is live before closing the session</td>
+<td><span class="src"><a href="https://api.github.com/repos/kanlerxz87-cyber/NFL1/pages" target="_blank" rel="noopener noreferrer" title="GitHub REST API — Official platform API">S25 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+</tbody></table></div>
+      <div class="footer">
+        NFL1 · 2026 Week 10 snapshot retrieved 2026-11-12 (UTC) ·
+        <a href="verification.html">Verification &amp; sources</a> ·
+        <a href="flagged.html">Flagged for Review</a> ·
+        <a href="https://github.com/kanlerxz87-cyber/NFL1">Source repository ↗</a><br>
+        Blank cells are values the official source does not publish. No value on this site is inferred or filled in.
+      </div>
+    </main>
+  </div>
+</div>
+<script src="site/assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+[
+  {
+    "id": "LB-01",
+    "rule": "Three tracks: Single bet, Parlay, Player prop combo",
+    "detail": "Track definitions follow the official bet-type terminology.",
+    "src": "S21",
+    "verified": true
+  },
+  {
+    "id": "LB-02",
+    "rule": "Eligibility",
+    "detail": "A strategy appears on the ranked leaderboard only after passing G01-G13.",
+    "src": "S18",
+    "verified": true
+  },
+  {
+    "id": "LB-03",
+    "rule": "Scoring",
+    "detail": "Out-of-sample score; numeric formula and weights are blank and flagged until pre-registered.",
+    "src": "S17",
+    "verified": false
+  },
+  {
+    "id": "LB-04",
+    "rule": "Freeze",
+    "detail": "Evaluation windows and pre-registration hashes are frozen before scoring.",
+    "src": "S17",
+    "verified": true
+  },
+  {
+    "id": "LB-05",
+    "rule": "Rewards",
+    "detail": "Non-monetary badges: Verified Signal, Top Single Bet, Top Parlay, Top Player Prop Combo. Reward values are blank and flagged.",
+    "src": "S24",
+    "verified": false
+  },
+  {
+    "id": "LB-06",
+    "rule": "Risk posture",
+    "detail": "Parlay strategies carry a stricter gate because official state data shows higher loss rates for parlays.",
+    "src": "S21",
+    "verified": true
+  },
+  {
+    "id": "LB-07",
+    "rule": "Publication",
+    "detail": "Ranks, scores and sample sizes are published only when verified; otherwise the cells are blank.",
+    "src": "S02",
+    "verified": true
+  }
+]

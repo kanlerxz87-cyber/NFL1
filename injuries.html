@@ -1,0 +1,1118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="NFL1 — a verified, source-linked NFL decision-intelligence dashboard: requirements, decision questions, improvement suggestions, strategy validation, injury and depth tracking, and a leaderboard competition.">
+<title>Injuries &amp; availability tracking | NFL1</title>
+<link rel="stylesheet" href="site/assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="mark">NFL</div>
+      <div><strong>NFL1</strong><small>Decision intelligence</small></div>
+    </div>
+    <div class="snapshot">
+      <b>Data snapshot</b><br>2026 season · Week 10<br>Retrieved 2026-11-12 (UTC)
+    </div>
+    <nav aria-label="Site sections">
+      <div class="navgroup"><h4>Overview</h4>
+<a href="index.html">Home</a>
+<a href="executive-summary.html">Executive Summary</a>
+<a href="deployment.html">Deployment &amp; PR</a>
+</div>
+<div class="navgroup"><h4>Governance</h4>
+<a href="requirements.html">Requirements</a>
+<a href="questions.html">Decision Questions</a>
+<a href="suggestions.html">Suggestions &amp; Paths</a>
+</div>
+<div class="navgroup"><h4>Competition</h4>
+<a href="strategy-lab.html">Strategy Lab</a>
+<a href="leaderboard.html">Leaderboard</a>
+<a href="bet-types.html">Bet Types &amp; Risk</a>
+</div>
+<div class="navgroup"><h4>Official data</h4>
+<a href="data-tables.html">Standings &amp; Findings</a>
+<a href="injuries.html" class="active">Injuries</a>
+<a href="depth-chart.html">Depth Charts</a>
+</div>
+<div class="navgroup"><h4>Assurance</h4>
+<a href="verification.html">Verification &amp; Sources</a>
+<a href="flagged.html">Flagged for Review</a>
+</div>
+    </nav>
+    <div class="foot">
+      Every table row links to an official source. Unconfirmed values are left blank and flagged.
+      <br><br><a style="color:#fff;text-decoration:underline" href="https://github.com/kanlerxz87-cyber/NFL1">Repository ↗</a>
+    </div>
+  </aside>
+  <div class="main">
+    <div class="topbar">
+      <div class="crumb">NFL1 / <b>Injuries</b></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">24 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+    </div>
+    <main class="content" id="main">
+      <div class="kicker">Official data</div>
+      <h1>Injuries &amp; availability tracking</h1>
+      <p class="lede">Official Week 10 injury report, the published filing policy, official inactives and third-quarterback evidence, and a tracking design for 2nd/3rd/4th-string offensive and defensive deficiencies.</p>
+      <div class="callout warn"><b>Snapshot, not a live feed.</b> This page transcribes the official NFL.com Week 10 2026 injury report as retrieved on 2026-11-12 (UTC). Blank injury and game-status cells are blank on the official page; they are not filled in here. See <a href="flagged.html">Flagged for Review</a> for the resulting irregularities.</div>
+<div class="cards"><div class="card"><div class="label">Transcribed injury rows</div><div class="value">61</div><div class="detail">Official Week 10 report</div></div><div class="card"><div class="label">Published designations</div><div class="value">6</div><div class="detail">Non-blank injury or game status</div></div><div class="card"><div class="label">Week 10 games</div><div class="value">14</div><div class="detail">Official report headings</div></div><div class="card"><div class="label">Official inactives rows</div><div class="value">20</div><div class="detail">Week 9, includes third QBs</div></div></div>
+<div class="toc"><a href="#snapshot">Injury snapshot</a><a href="#designations">Published designations</a><a href="#games">Games</a><a href="#policy">Filing policy</a><a href="#inactives">Inactives</a><a href="#pipeline">Tracking pipeline</a><a href="#gaps">What cannot be computed</a></div>
+<h2 id="snapshot">Week 10 official injury report — transcribed rows</h2>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-injuries" aria-label="Filter tbl-injuries" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-injuries">61 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-injuries"><caption>Transcribed rows for the Thursday game and the first Sunday games. Empty cells mean the official source published no value. The complete official report is linked in every row.</caption>
+<thead><tr><th scope="col" class="sortable">Club</th><th scope="col" class="sortable">Player</th><th scope="col" class="sortable">Pos</th><th scope="col" class="sortable">Injury</th><th scope="col" class="sortable">Practice status</th><th scope="col" class="sortable">Game status</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr data-verified="true">
+<td data-value="1">WAS</td>
+<td data-value="1">John Bates</td>
+<td data-value="1">TE</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Full Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">WAS</td>
+<td data-value="1">Treylon Burks</td>
+<td data-value="1">WR</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Did Not Participate In Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">WAS</td>
+<td data-value="1">Jayden Daniels</td>
+<td data-value="1">QB</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Full Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">WAS</td>
+<td data-value="1">Matt Gulbin</td>
+<td data-value="1">C</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Full Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">WAS</td>
+<td data-value="1">Chig Okonkwo</td>
+<td data-value="1">TE</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Full Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">WAS</td>
+<td data-value="1">Lucas Patrick</td>
+<td data-value="1">C</td>
+<td data-value="1">Concussion</td>
+<td data-value="1" class="wide">Did Not Participate In Practice</td>
+<td data-value="1">Out</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">WAS</td>
+<td data-value="1">Amik Robertson</td>
+<td data-value="1">CB</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Limited Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">WAS</td>
+<td data-value="1">Shy Tuttle</td>
+<td data-value="1">DT</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Full Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">WAS</td>
+<td data-value="1">Colson Yankoff</td>
+<td data-value="1">TE</td>
+<td data-value="1">Knee</td>
+<td data-value="1" class="wide">Did Not Participate In Practice</td>
+<td data-value="1">Out</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NYG</td>
+<td data-value="1">Abdul Carter</td>
+<td data-value="1">LB</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Full Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NYG</td>
+<td data-value="1">Jermaine Eluemunor</td>
+<td data-value="1">T</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Full Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NYG</td>
+<td data-value="1">Malik Harrison</td>
+<td data-value="1">LB</td>
+<td data-value="1">Groin</td>
+<td data-value="1" class="wide">Limited Participation in Practice</td>
+<td data-value="1">Questionable</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NYG</td>
+<td data-value="1">Colton Hood</td>
+<td data-value="1">CB</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Full Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NYG</td>
+<td data-value="1">Theo Johnson</td>
+<td data-value="1">TE</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Full Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NYG</td>
+<td data-value="1">Charlie Jones</td>
+<td data-value="1">WR</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Full Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NYG</td>
+<td data-value="1">J.J. McCarthy</td>
+<td data-value="1">QB</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Full Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NYG</td>
+<td data-value="1">Darnell Mooney</td>
+<td data-value="1">WR</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Full Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NYG</td>
+<td data-value="1">Malik Nabers</td>
+<td data-value="1">WR</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Full Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NYG</td>
+<td data-value="1">Cam Skattebo</td>
+<td data-value="1">RB</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Full Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NYG</td>
+<td data-value="1">Andrew Thomas</td>
+<td data-value="1">T</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Full Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NE</td>
+<td data-value="1">Ben Brown</td>
+<td data-value="1">C</td>
+<td data-value="1">Knee</td>
+<td data-value="1" class="wide">Did Not Participate In Practice</td>
+<td data-value="1">Out</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NE</td>
+<td data-value="1">A.J. Brown</td>
+<td data-value="1">WR</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Limited Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NE</td>
+<td data-value="1">Kevin Byard</td>
+<td data-value="1">S</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Limited Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NE</td>
+<td data-value="1">Carlton Davis III</td>
+<td data-value="1">CB</td>
+<td data-value="1">Knee</td>
+<td data-value="1" class="wide">Did Not Participate In Practice</td>
+<td data-value="1">Out</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NE</td>
+<td data-value="1">Reggie Gilliam</td>
+<td data-value="1">FB</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Limited Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NE</td>
+<td data-value="1">TreVeyon Henderson</td>
+<td data-value="1">RB</td>
+<td data-value="1">Illness</td>
+<td data-value="1" class="wide">Did Not Participate In Practice</td>
+<td data-value="1">Out</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NE</td>
+<td data-value="1">Hunter Henry</td>
+<td data-value="1">TE</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Limited Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NE</td>
+<td data-value="1">Cameron Latu</td>
+<td data-value="1">TE</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Did Not Participate In Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NE</td>
+<td data-value="1">Drake Maye</td>
+<td data-value="1">QB</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Full Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NE</td>
+<td data-value="1">Morgan Moses</td>
+<td data-value="1">T</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Limited Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NE</td>
+<td data-value="1">Walter Rouse</td>
+<td data-value="1">T</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Did Not Participate In Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NE</td>
+<td data-value="1">Brenden Schooler</td>
+<td data-value="1">S</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Did Not Participate In Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NE</td>
+<td data-value="1">Rhamondre Stevenson</td>
+<td data-value="1">RB</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Did Not Participate In Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NE</td>
+<td data-value="1">Greg Van Roten</td>
+<td data-value="1">G</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Limited Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NE</td>
+<td data-value="1">Charles Woods</td>
+<td data-value="1">CB</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Limited Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">DET</td>
+<td data-value="1">Brian Branch</td>
+<td data-value="1">S</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Limited Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">DET</td>
+<td data-value="1">Jared Goff</td>
+<td data-value="1">QB</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Limited Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">DET</td>
+<td data-value="1">Kerby Joseph</td>
+<td data-value="1">S</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Limited Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">DET</td>
+<td data-value="1">Cade Mays</td>
+<td data-value="1">C</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Did Not Participate In Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">DET</td>
+<td data-value="1">D.J. Reed</td>
+<td data-value="1">CB</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Did Not Participate In Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">DET</td>
+<td data-value="1">Jacob Saylors</td>
+<td data-value="1">RB</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Full Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">DET</td>
+<td data-value="1">Amon-Ra St. Brown</td>
+<td data-value="1">WR</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Limited Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">DET</td>
+<td data-value="1">Sione Vaki</td>
+<td data-value="1">RB</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Did Not Participate In Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">DET</td>
+<td data-value="1">DJ Wonnum</td>
+<td data-value="1">DE</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Full Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">KC</td>
+<td data-value="1">Jeffrey Bassa</td>
+<td data-value="1">LB</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Full Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">KC</td>
+<td data-value="1">Mansoor Delane</td>
+<td data-value="1">CB</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Full Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">KC</td>
+<td data-value="1">Justin Fields</td>
+<td data-value="1">QB</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Full Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">KC</td>
+<td data-value="1">Jaden Hicks</td>
+<td data-value="1">S</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Full Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">KC</td>
+<td data-value="1">Travis Kelce</td>
+<td data-value="1">TE</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Full Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">KC</td>
+<td data-value="1">Patrick Mahomes</td>
+<td data-value="1">QB</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Full Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">KC</td>
+<td data-value="1">Jaylon Moore</td>
+<td data-value="1">T</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Did Not Participate In Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">KC</td>
+<td data-value="1">Omarr Norman-Lott</td>
+<td data-value="1">DT</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Limited Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">KC</td>
+<td data-value="1">Rashee Rice</td>
+<td data-value="1">WR</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Full Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">KC</td>
+<td data-value="1">Peter Woods</td>
+<td data-value="1">DT</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Did Not Participate In Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">KC</td>
+<td data-value="1">Xavier Worthy</td>
+<td data-value="1">WR</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Full Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">ATL</td>
+<td data-value="1">Zachariah Branch</td>
+<td data-value="1">WR</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Did Not Participate In Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">ATL</td>
+<td data-value="1">Divine Deablo</td>
+<td data-value="1">LB</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Limited Participation in Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">ATL</td>
+<td data-value="1">Gervon Dexter Sr.</td>
+<td data-value="1">DT</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Did Not Participate In Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">ATL</td>
+<td data-value="1">James Pearce Jr.</td>
+<td data-value="1">DE</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Did Not Participate In Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">ATL</td>
+<td data-value="1">Za&#x27;Darius Smith</td>
+<td data-value="1">DE</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Did Not Participate In Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">ATL</td>
+<td data-value="1">Josh Woods</td>
+<td data-value="1">LB</td>
+<td data-value="1" class="blank"></td>
+<td data-value="1" class="wide">Did Not Participate In Practice</td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+</tbody></table></div>
+<h2 id="designations">Rows with a published designation</h2>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-designations" aria-label="Filter tbl-designations" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-designations">6 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-designations"><caption>Only these transcribed rows publish an injury description or a game status. All other rows leave those fields blank on the official page.</caption>
+<thead><tr><th scope="col" class="sortable">Club</th><th scope="col" class="sortable">Player</th><th scope="col" class="sortable">Pos</th><th scope="col" class="sortable">Injury</th><th scope="col" class="sortable">Practice status</th><th scope="col" class="sortable">Game status</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr data-verified="true">
+<td data-value="1">WAS</td>
+<td data-value="1">Lucas Patrick</td>
+<td data-value="1">C</td>
+<td data-value="1">Concussion</td>
+<td data-value="1" class="wide">Did Not Participate In Practice</td>
+<td data-value="1">Out</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">WAS</td>
+<td data-value="1">Colson Yankoff</td>
+<td data-value="1">TE</td>
+<td data-value="1">Knee</td>
+<td data-value="1" class="wide">Did Not Participate In Practice</td>
+<td data-value="1">Out</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NYG</td>
+<td data-value="1">Malik Harrison</td>
+<td data-value="1">LB</td>
+<td data-value="1">Groin</td>
+<td data-value="1" class="wide">Limited Participation in Practice</td>
+<td data-value="1">Questionable</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NE</td>
+<td data-value="1">Ben Brown</td>
+<td data-value="1">C</td>
+<td data-value="1">Knee</td>
+<td data-value="1" class="wide">Did Not Participate In Practice</td>
+<td data-value="1">Out</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NE</td>
+<td data-value="1">Carlton Davis III</td>
+<td data-value="1">CB</td>
+<td data-value="1">Knee</td>
+<td data-value="1" class="wide">Did Not Participate In Practice</td>
+<td data-value="1">Out</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NE</td>
+<td data-value="1">TreVeyon Henderson</td>
+<td data-value="1">RB</td>
+<td data-value="1">Illness</td>
+<td data-value="1" class="wide">Did Not Participate In Practice</td>
+<td data-value="1">Out</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+</tbody></table></div>
+<h2 id="games">Week 10 games on the official injury page</h2>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-injury-games" aria-label="Filter tbl-injury-games" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-injury-games">14 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-injury-games"><caption>Game headings, kickoff times and networks as published on the official Week 10 injury report.</caption>
+<thead><tr><th scope="col" class="sortable">Day</th><th scope="col" class="sortable">Kickoff</th><th scope="col" class="sortable">Network</th><th scope="col" class="sortable">Away</th><th scope="col" class="sortable">Home</th><th scope="col" class="sortable">Report state</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr data-verified="true">
+<td data-value="1">THURSDAY, NOVEMBER 12TH</td>
+<td data-value="1">8:15 PM EST</td>
+<td data-value="1">Prime Video</td>
+<td data-value="1">WAS</td>
+<td data-value="1">NYG</td>
+<td data-value="1" class="wide">injury tables published for both clubs</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">SUNDAY, NOVEMBER 15TH</td>
+<td data-value="1">9:30 AM EST</td>
+<td data-value="1">FOX, FOX DEPORTES</td>
+<td data-value="1">NE</td>
+<td data-value="1">DET</td>
+<td data-value="1" class="wide">injury tables published for both clubs</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">SUNDAY, NOVEMBER 15TH</td>
+<td data-value="1">1:00 PM EST</td>
+<td data-value="1">CBS</td>
+<td data-value="1">KC</td>
+<td data-value="1">ATL</td>
+<td data-value="1" class="wide">injury tables published for both clubs</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">SUNDAY, NOVEMBER 15TH</td>
+<td data-value="1">1:00 PM EST</td>
+<td data-value="1">FOX</td>
+<td data-value="1">MIN</td>
+<td data-value="1">GB</td>
+<td data-value="1" class="wide">injury tables published for both clubs</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">SUNDAY, NOVEMBER 15TH</td>
+<td data-value="1">1:00 PM EST</td>
+<td data-value="1">FOX</td>
+<td data-value="1">JAX</td>
+<td data-value="1">TEN</td>
+<td data-value="1" class="wide">injury tables published for both clubs</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">SUNDAY, NOVEMBER 15TH</td>
+<td data-value="1">1:00 PM EST</td>
+<td data-value="1">CBS</td>
+<td data-value="1">BUF</td>
+<td data-value="1">NYJ</td>
+<td data-value="1" class="wide">injury tables published for both clubs</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">SUNDAY, NOVEMBER 15TH</td>
+<td data-value="1">1:00 PM EST</td>
+<td data-value="1">CBS</td>
+<td data-value="1">MIA</td>
+<td data-value="1">IND</td>
+<td data-value="1" class="wide">injury tables published for both clubs</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">SUNDAY, NOVEMBER 15TH</td>
+<td data-value="1">1:00 PM EST</td>
+<td data-value="1">FOX</td>
+<td data-value="1">CAR</td>
+<td data-value="1">NO</td>
+<td data-value="1" class="wide">injury tables published for both clubs</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">SUNDAY, NOVEMBER 15TH</td>
+<td data-value="1">1:00 PM EST</td>
+<td data-value="1">FOX</td>
+<td data-value="1">HOU</td>
+<td data-value="1">CLE</td>
+<td data-value="1" class="wide">injury tables published for both clubs</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">SUNDAY, NOVEMBER 15TH</td>
+<td data-value="1">4:05 PM EST</td>
+<td data-value="1">CBS</td>
+<td data-value="1">LA</td>
+<td data-value="1">AZ</td>
+<td data-value="1" class="wide">injury tables published for both clubs</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">SUNDAY, NOVEMBER 15TH</td>
+<td data-value="1">4:05 PM EST</td>
+<td data-value="1">CBS</td>
+<td data-value="1">SEA</td>
+<td data-value="1">LV</td>
+<td data-value="1" class="wide">Seahawks: &#x27;No Injuries Reported&#x27;; Raiders table published</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">SUNDAY, NOVEMBER 15TH</td>
+<td data-value="1">4:25 PM EST</td>
+<td data-value="1">FOX</td>
+<td data-value="1">SF</td>
+<td data-value="1">DAL</td>
+<td data-value="1" class="wide">injury tables published for both clubs</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">SUNDAY, NOVEMBER 15TH</td>
+<td data-value="1">8:20 PM EST</td>
+<td data-value="1">NBC, UNIVERSO</td>
+<td data-value="1">PIT</td>
+<td data-value="1">CIN</td>
+<td data-value="1" class="wide">Bengals: &#x27;No Injuries Reported&#x27;; Steelers table published</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">MONDAY, NOVEMBER 16TH</td>
+<td data-value="1">8:15 PM EST</td>
+<td data-value="1">ESPN, ABC, ESPN2, ESPN DEPORTES</td>
+<td data-value="1">LAC</td>
+<td data-value="1">BAL</td>
+<td data-value="1" class="wide">&#x27;No Injuries Reported&#x27; for both clubs</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+</tbody></table></div>
+<h2 id="policy">Official injury-report filing schedule</h2>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-policy" aria-label="Filter tbl-policy" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-policy">6 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-policy"><caption>The 2026-27 NFL important dates article quotes the Personnel (Injury) Report Policy; rows reproduce the published schedule.</caption>
+<thead><tr><th scope="col" class="sortable">Game day</th><th scope="col" class="sortable">Practice Report days</th><th scope="col" class="sortable">Game Status Report day</th><th scope="col" class="sortable">Note</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr data-verified="true">
+<td data-value="1">Sunday game</td>
+<td data-value="1" class="wide">Wednesday, Thursday and Friday</td>
+<td data-value="1">Friday</td>
+<td data-value="1" class="wide">Practice Report / Game Status Report due 4:00 p.m. New York time</td>
+<td><span class="src"><a href="https://www.nfl.com/news/2026-27-national-football-league-important-dates" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official league calendar">S04 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">Monday game</td>
+<td data-value="1" class="wide">Thursday, Friday and Saturday</td>
+<td data-value="1">Saturday</td>
+<td data-value="1" class="wide">Practice Report / Game Status Report due 4:00 p.m. New York time</td>
+<td><span class="src"><a href="https://www.nfl.com/news/2026-27-national-football-league-important-dates" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official league calendar">S04 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">Wednesday game</td>
+<td data-value="1" class="wide">Sunday, Monday and Tuesday</td>
+<td data-value="1">Tuesday</td>
+<td data-value="1" class="wide">Practice Report / Game Status Report due 4:00 p.m. New York time</td>
+<td><span class="src"><a href="https://www.nfl.com/news/2026-27-national-football-league-important-dates" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official league calendar">S04 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">Thursday game</td>
+<td data-value="1" class="wide">Monday, Tuesday and Wednesday</td>
+<td data-value="1">Wednesday</td>
+<td data-value="1" class="wide">Practice Report / Game Status Report due 4:00 p.m. New York time</td>
+<td><span class="src"><a href="https://www.nfl.com/news/2026-27-national-football-league-important-dates" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official league calendar">S04 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">Friday game</td>
+<td data-value="1" class="wide">Tuesday, Wednesday and Thursday</td>
+<td data-value="1">Thursday</td>
+<td data-value="1" class="wide">Practice Report / Game Status Report due 4:00 p.m. New York time</td>
+<td><span class="src"><a href="https://www.nfl.com/news/2026-27-national-football-league-important-dates" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official league calendar">S04 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">Saturday game</td>
+<td data-value="1" class="wide">Tuesday, Wednesday and Thursday</td>
+<td data-value="1">Thursday</td>
+<td data-value="1" class="wide">Practice Report / Game Status Report due 4:00 p.m. New York time</td>
+<td><span class="src"><a href="https://www.nfl.com/news/2026-27-national-football-league-important-dates" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official league calendar">S04 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+</tbody></table></div>
+<h2 id="inactives">Official Week 9 inactives (backup / third-QB evidence)</h2>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-inactives" aria-label="Filter tbl-inactives" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-inactives">20 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-inactives"><caption>Selected rows from the official Week 9 inactives article, including 'emergency third QB' designations. These are official examples of third-string information.</caption>
+<thead><tr><th scope="col" class="sortable">Club</th><th scope="col" class="sortable">Pos</th><th scope="col" class="sortable">Player / designation</th><th scope="col" class="sortable">Game</th><th scope="col" class="sortable">Week</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr data-verified="true">
+<td data-value="1">ATL</td>
+<td data-value="1">QB</td>
+<td data-value="1" class="wide">Andy Dalton (emergency third QB)</td>
+<td data-value="1">CIN at ATL</td>
+<td data-value="1">Week 9 2026</td>
+<td><span class="src"><a href="https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official inactives list">S05 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">DEN</td>
+<td data-value="1">QB</td>
+<td data-value="1" class="wide">Sam Ehlinger (emergency third QB)</td>
+<td data-value="1">DEN at CAR</td>
+<td data-value="1">Week 9 2026</td>
+<td><span class="src"><a href="https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official inactives list">S05 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">CAR</td>
+<td data-value="1">QB</td>
+<td data-value="1" class="wide">Haynes King (emergency third QB)</td>
+<td data-value="1">DEN at CAR</td>
+<td data-value="1">Week 9 2026</td>
+<td><span class="src"><a href="https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official inactives list">S05 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">IND</td>
+<td data-value="1">QB</td>
+<td data-value="1" class="wide">Riley Leonard (emergency third QB)</td>
+<td data-value="1">DAL at IND</td>
+<td data-value="1">Week 9 2026</td>
+<td><span class="src"><a href="https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official inactives list">S05 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">KC</td>
+<td data-value="1">QB</td>
+<td data-value="1" class="wide">Garrett Nussmeier</td>
+<td data-value="1">NYJ at KC</td>
+<td data-value="1">Week 9 2026</td>
+<td><span class="src"><a href="https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official inactives list">S05 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">CLE</td>
+<td data-value="1">QB</td>
+<td data-value="1" class="wide">Deshaun Watson</td>
+<td data-value="1">CLE at NO</td>
+<td data-value="1">Week 9 2026</td>
+<td><span class="src"><a href="https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official inactives list">S05 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">CLE</td>
+<td data-value="1">QB</td>
+<td data-value="1" class="wide">Taylen Green (emergency third QB)</td>
+<td data-value="1">CLE at NO</td>
+<td data-value="1">Week 9 2026</td>
+<td><span class="src"><a href="https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official inactives list">S05 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NO</td>
+<td data-value="1">QB</td>
+<td data-value="1" class="wide">Zach Wilson (emergency third QB)</td>
+<td data-value="1">CLE at NO</td>
+<td data-value="1">Week 9 2026</td>
+<td><span class="src"><a href="https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official inactives list">S05 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NYG</td>
+<td data-value="1">RB</td>
+<td data-value="1" class="wide">Cam Skattebo</td>
+<td data-value="1">NYG at PHI</td>
+<td data-value="1">Week 9 2026</td>
+<td><span class="src"><a href="https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official inactives list">S05 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">PHI</td>
+<td data-value="1">WR</td>
+<td data-value="1" class="wide">Devonta Smith</td>
+<td data-value="1">NYG at PHI</td>
+<td data-value="1">Week 9 2026</td>
+<td><span class="src"><a href="https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official inactives list">S05 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">LA</td>
+<td data-value="1">QB</td>
+<td data-value="1" class="wide">Ty Simpson (emergency third QB)</td>
+<td data-value="1">LA at WAS</td>
+<td data-value="1">Week 9 2026</td>
+<td><span class="src"><a href="https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official inactives list">S05 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">LA</td>
+<td data-value="1">CB</td>
+<td data-value="1" class="wide">Trent McDuffie</td>
+<td data-value="1">LA at WAS</td>
+<td data-value="1">Week 9 2026</td>
+<td><span class="src"><a href="https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official inactives list">S05 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">WAS</td>
+<td data-value="1">QB</td>
+<td data-value="1" class="wide">Athan Kaliakmanis (emergency third QB)</td>
+<td data-value="1">LA at WAS</td>
+<td data-value="1">Week 9 2026</td>
+<td><span class="src"><a href="https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official inactives list">S05 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">WAS</td>
+<td data-value="1">WR</td>
+<td data-value="1" class="wide">Treylon Burks</td>
+<td data-value="1">LA at WAS</td>
+<td data-value="1">Week 9 2026</td>
+<td><span class="src"><a href="https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official inactives list">S05 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">HOU</td>
+<td data-value="1">RB</td>
+<td data-value="1" class="wide">David Montgomery</td>
+<td data-value="1">HOU at LAC</td>
+<td data-value="1">Week 9 2026</td>
+<td><span class="src"><a href="https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official inactives list">S05 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">DET</td>
+<td data-value="1">CB</td>
+<td data-value="1" class="wide">D.J. Reed</td>
+<td data-value="1">DET at MIA</td>
+<td data-value="1">Week 9 2026</td>
+<td><span class="src"><a href="https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official inactives list">S05 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NYJ</td>
+<td data-value="1">WR</td>
+<td data-value="1" class="wide">Garrett Wilson</td>
+<td data-value="1">NYJ at KC</td>
+<td data-value="1">Week 9 2026</td>
+<td><span class="src"><a href="https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official inactives list">S05 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">DAL</td>
+<td data-value="1">WR</td>
+<td data-value="1" class="wide">George Pickens</td>
+<td data-value="1">DAL at IND</td>
+<td data-value="1">Week 9 2026</td>
+<td><span class="src"><a href="https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official inactives list">S05 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">DAL</td>
+<td data-value="1">CB</td>
+<td data-value="1" class="wide">Joey Porter Jr.</td>
+<td data-value="1">DAL at IND</td>
+<td data-value="1">Week 9 2026</td>
+<td><span class="src"><a href="https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official inactives list">S05 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">CIN</td>
+<td data-value="1">S</td>
+<td data-value="1" class="wide">Kyle Dugger</td>
+<td data-value="1">CIN at ATL</td>
+<td data-value="1">Week 9 2026</td>
+<td><span class="src"><a href="https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official inactives list">S05 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+</tbody></table></div>
+<h2 id="pipeline">Tracking pipeline for injuries and deficiencies</h2>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-tracking" aria-label="Filter tbl-tracking" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-tracking">6 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-tracking"><caption>How the system should track injuries and 2nd/3rd/4th-string replacements on offense and defense. The scoring stage is blank and flagged.</caption>
+<thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Stage</th><th scope="col" class="sortable">Detail</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr id="TR-01" data-verified="true">
+<td><code>TR-01</code></td>
+<td>Ingest</td>
+<td class="wide">Weekly official injury report (practice status + game status) at the published filing boundary</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="TR-02" data-verified="true">
+<td><code>TR-02</code></td>
+<td>Join</td>
+<td class="wide">Join each player to the official club depth chart by club, position and player name</td>
+<td><span class="src"><a href="https://www.chiefs.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Kansas City Chiefs (chiefs.com) — Official club depth chart">S14 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="TR-03" data-verified="true">
+<td><code>TR-03</code></td>
+<td>Resolve</td>
+<td class="wide">Use the official inactives list to determine who actually dressed</td>
+<td><span class="src"><a href="https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official inactives list">S05 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="TR-04" data-verified="true">
+<td><code>TR-04</code></td>
+<td>Classify</td>
+<td class="wide">Label the replacement as 2nd / 3rd / 4th string using the published depth columns</td>
+<td><span class="src"><a href="https://www.49ers.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="San Francisco 49ers (49ers.com) — Official club depth chart">S16 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="TR-05" data-verified="false">
+<td><code>TR-05</code></td>
+<td>Score</td>
+<td class="wide">Compute a backup-exposure or deficiency index</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/ppc/section1/ppc136.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official statistical guidance">S19 ↗</a></span></td><td><a class="badge flag" href="flagged.html">UNVERIFIED</a></td>
+</tr>
+<tr id="TR-06" data-verified="true">
+<td><code>TR-06</code></td>
+<td>Validate</td>
+<td class="wide">Require every validation gate before the score may feed a strategy</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda353.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official statistical test">S18 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+</tbody></table></div>
+<h2 id="gaps">What cannot be computed from official sources today</h2>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-injury-gaps" aria-label="Filter tbl-injury-gaps" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-injury-gaps">4 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-injury-gaps"><caption>Blank values are left blank and flagged rather than estimated.</caption>
+<thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Missing capability</th><th scope="col" class="sortable">Why it is missing</th><th scope="col" class="sortable">Value</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr id="IG-01" data-verified="false">
+<td><code>IG-01</code></td>
+<td class="wide">League-wide official depth rank</td>
+<td class="wide">The official injury report publishes no depth-rank column; only 3 club depth charts were found</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F08">UNVERIFIED</a></td>
+</tr>
+<tr id="IG-02" data-verified="false">
+<td><code>IG-02</code></td>
+<td class="wide">Defensive deficiency score</td>
+<td class="wide">Requires a validated effect size linking backup depth to points allowed</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/ppc/section1/ppc136.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official statistical guidance">S19 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F10">UNVERIFIED</a></td>
+</tr>
+<tr id="IG-03" data-verified="false">
+<td><code>IG-03</code></td>
+<td class="wide">Offensive deficiency score</td>
+<td class="wide">Requires a validated effect size linking backup depth to points scored</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/ppc/section1/ppc136.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official statistical guidance">S19 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F10">UNVERIFIED</a></td>
+</tr>
+<tr id="IG-04" data-verified="false">
+<td><code>IG-04</code></td>
+<td class="wide">Starter vs backup snap counts</td>
+<td class="wide">No official snap-count dataset was reviewed</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="src"><a href="https://www.nfl.com/stats/player-stats/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official player statistics">S03 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F08">UNVERIFIED</a></td>
+</tr>
+</tbody></table></div>
+<section class="panel"><h2>Cross-check with depth charts</h2>
+<p>The <a href="depth-chart.html">Depth Charts page</a> transcribes the 1st, 2nd, 3rd and 4th string for offense
+and defense from official club sites. Combining those columns with the official injury designations and the
+official inactives list is the intended way to detect a 2nd/3rd/4th-string replacement. Because two clubs label
+their charts "Unofficial" and the league does not publish depth rank, no deficiency value is computed yet.</p></section>
+      <div class="footer">
+        NFL1 · 2026 Week 10 snapshot retrieved 2026-11-12 (UTC) ·
+        <a href="verification.html">Verification &amp; sources</a> ·
+        <a href="flagged.html">Flagged for Review</a> ·
+        <a href="https://github.com/kanlerxz87-cyber/NFL1">Source repository ↗</a><br>
+        Blank cells are values the official source does not publish. No value on this site is inferred or filled in.
+      </div>
+    </main>
+  </div>
+</div>
+<script src="site/assets/app.js"></script>
+</body>
+</html>
