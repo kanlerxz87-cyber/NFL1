@@ -195,3 +195,23 @@ than dressed up with a citation that would not support them.
   at the same time.
 - Verification for PR #6: `validate_verified.py`, `audit_numbers.py`, `check_site.py` (18 pages),
   and `check_external_links.py --offline` all pass; the new structural gate was negative-tested.
+- **PR #6** https://github.com/kanlerxz87-cyber/NFL1/pull/6 — merged 2026-11-12T04:50:28Z, Pages success.
+  Fixed the silent empty depth-chart evidence table and added the empty-table / empty-cell gates.
+- **PR #7** https://github.com/kanlerxz87-cyber/NFL1/pull/7 — merged 2026-11-12T04:51:47Z, Pages success.
+  Corrected the evidence page's stale "no dataset" claim; F16 closed as resolved.
+- **PR #8** https://github.com/kanlerxz87-cyber/NFL1/pull/8 — merged 2026-11-12T04:53:13Z, Pages success.
+  Fixed literal `**` markup on that page and added a gate against stray markdown emphasis.
+
+All four merges deployed successfully and the affected pages were re-fetched from the live
+site afterwards. Three of the four defects (#6, #7, #8) were found **by reading the deployed
+page, not by the test suite** — the suite was green while they shipped. Each one is now covered
+by a gate so it cannot recur silently:
+
+| Defect that shipped | Why the gates missed it | Gate added |
+|---|---|---|
+| Depth-chart evidence table rendered with headers and zero rows | data existed but was never loaded; nothing checked row counts | `check_site.py` fails on a table with a header and no rows |
+| Empty `<td>` cells in the leaderboard | HTML was structurally valid | `check_site.py` fails on empty `<td>` |
+| Literal `**bold**` visible as text | valid HTML, no broken links | `check_site.py` fails on markdown emphasis in prose |
+
+Lesson for the next integration session: a green pipeline does not mean the page reads
+correctly. Fetch the deployed URL and read it as a user would before declaring done.
