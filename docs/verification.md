@@ -29,6 +29,7 @@ Every table row on the site links to an official source. Values that no official
 | S23 | GitHub Docs | Official platform documentation | Pages entry file (index.html at top level of publishing source); static site publishing | Root index.html requirement verified. | 2026-11-12 | [S23](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site) | yes |
 | S24 | GitHub (this repository) | Official repository | Repository contents, branches, commits, pull requests and coordination board | Repo-level claims and coordination flags link here. | 2026-11-12 | [S24](https://github.com/kanlerxz87-cyber/NFL1) | yes |
 | S25 | GitHub REST API | Official platform API | Pages build_type, source branch/path, html_url, status | Queried with `gh api` during integration; returns status 'built', source main / '/'. | 2026-11-12 | [S25](https://api.github.com/repos/kanlerxz87-cyber/NFL1/pages) | yes |
+| S26 | National Football League (NFL.com) | official league standings page | Official 2026 division groupings (AFC/NFC x East/North/South/West) used to verify the C5 division-game flag |  | 2026-11-12 | [S26](https://www.nfl.com/standings/division/2026/REG) | yes |
 
 ## Procedure
 

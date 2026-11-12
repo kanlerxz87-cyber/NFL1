@@ -208,6 +208,20 @@ QUESTIONS = [
         "blocks": "Nothing - process gap.",
         "status": "Proposed",
     },
+    {
+        "id": "Q21",
+        "question": "Which published site generation is authoritative when the others disagree?",
+        "why": "Four live generations (root dashboard, root section pages, docs/, sub-sites) already "
+               "disagreed on the published injury count until a human regenerated them.",
+        "have": "Flag F37-F39 record the drift; pages/sections.html now links every generation; "
+                "suggestions S13-S15 propose the fixes.",
+        "missing": "A reviewer decision on one authoritative generation and who regenerates it after "
+                   "each data refresh.",
+        "discovery": "Read flags F37-F39, choose a path on the Suggestions page, record the decision "
+                     "in a decision record.",
+        "blocks": "Any claim that the site is internally consistent across generations.",
+        "status": "Open - blocked on reviewer decision",
+    },
 ]
 
 # ---------------------------------------------------------------- suggestions
@@ -380,6 +394,37 @@ SUGGESTIONS = [
         "evidence": "collect-data.yml 'Re-render the published pages from the refreshed data' step (session 3d5c5e2d); index.html stamp equals dashboard.json generated_at.",
         "recommend": "Adopt. The regeneration step is implemented; the staleness guard is the remaining piece.",
         "status": "Implemented (regeneration) - guard proposed",
+    },
+    {
+        "id": "S14",
+        "title": "Verify the pages that are published, not a regenerated substitute",
+        "problem": "The verify workflow rebuilds index.html from a different template than the published "
+                   "one and audits the rebuild, so a defect unique to the live landing page could pass "
+                   "the gate (flag F38).",
+        "change": "Run the row-source and link checks against the committed HTML, or make one generator "
+                  "own index.html so CI and Pages cannot disagree.",
+        "impact": "High - CI would fail on what a reader actually sees.",
+        "effort": "",
+        "risk": "",
+        "depends": "Choice of authoritative generation (Q21).",
+        "evidence": "Diffing a local CI run against the committed tree shows two different index.html files.",
+        "recommend": "Review with S13; both follow from the same decision.",
+        "status": "Proposed - decision required",
+    },
+    {
+        "id": "S15",
+        "title": "Run the independent referee replication as a CI gate",
+        "problem": "The C5 division-game error (52 games counted where official groupings give 42) was "
+                   "found by a manual cross-session review, not by a gate.",
+        "change": "Add the referee's replication checks to CI so any published number that an "
+                  "independent recomputation contradicts fails the build.",
+        "impact": "High - turns cross-session review from a manual favour into an automatic gate.",
+        "effort": "",
+        "risk": "",
+        "depends": "None - additive workflow step.",
+        "evidence": "referee replication computed -0.1048 where the site published -0.1297 (flag F36, now fixed).",
+        "recommend": "Adopt; it is the cheapest way to keep every future number honest.",
+        "status": "Proposed - decision required",
     },
     {
         "id": "SA-01",

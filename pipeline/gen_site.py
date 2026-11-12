@@ -19,6 +19,7 @@ DATA = os.path.join(ROOT, "data", "model")
 
 NAV = [
     ("index.html", "Overview"),
+    ("pages/sections.html", "All Sections"),
     ("pages/lines.html", "My Lines"),
     ("pages/strategies.html", "Strategy Lab"),
     ("pages/injuries.html", "Injuries & Depth"),
@@ -32,6 +33,7 @@ NAV = [
 
 SOURCE = {
     "standings": "https://www.nfl.com/standings/league/2026/reg",
+    "divisions": "https://www.nfl.com/standings/division/2026/REG",
     "injuries": "https://www.nfl.com/injuries/",
     "schedule": "https://www.nfl.com/schedules/",
     "stats": "https://www.nfl.com/stats/player-stats/",
@@ -323,7 +325,7 @@ def overview(snap, dash, lines, strat, avail, props, verif):
 </section>
 
 <section class="panel">
-  <div class="panel-head"><h2>What we know, what we don't</h2><a href="pages/questions.html">20 questions that gate decisions →</a></div>
+  <div class="panel-head"><h2>What we know, what we don't</h2><a href="pages/questions.html">{len(QUESTIONS)} questions that gate decisions →</a></div>
   <div class="grid-3">
     <div class="stat"><h4>Answered</h4><p>{sum(1 for q in QUESTIONS if q['status'].lower().startswith(('answered', 'partially')))} of {len(QUESTIONS)} questions have a verified answer or partial answer.</p></div>
     <div class="stat"><h4>Blocked</h4><p>{sum(1 for q in QUESTIONS if 'blocked' in q['status'].lower())} questions cannot be answered with today's sources, mostly pricing and legality.</p></div>
@@ -951,7 +953,7 @@ def questions_page(dash):
 """
     return page("pages/questions.html", "Questions & Information Gaps",
                 body,
-                "Twenty questions, what we know, what we are missing, and how to find it.",
+                f"{len(QUESTIONS)} questions, what we know, what we are missing, and how to find it.",
                 dash.get("generated_at"))
 
 
@@ -1089,6 +1091,12 @@ def review_page(verif, strat, dash, avail=None):
          src(SOURCE["injuries"], "NFL injuries"), badge("needs review")],
         ["F20", "CI checks", "Some CI workflows regenerate pages and then check the regenerated copies, so the committed bytes are not what is checked. tools/check_committed_site.py checks the committed files.",
          src(SOURCE["repo"] + "/blob/main/.github/workflows/pages.yml", "pages workflow"), badge("needs review")],
+        ["F23", "site navigation", "The landing page linked only to pages/*: the root section pages and the referee/ and verified-lab/ sub-sites had no inbound link. Fixed by adding a categorized All Sections index (pages/sections.html) to the navigation.",
+         src(SOURCE["repo"], "repository"), badge("resolved")],
+        ["F24", "correlation C5", "The division-game flag compared only the division word, counting 10 AFC West vs NFC West games as division games (52 instead of 42; r=-0.1297 instead of -0.1048). Fixed: the flag now keys on conference + division, verified against the official division standings; audit_numbers.py gates it.",
+         src(SOURCE["divisions"], "NFL division standings"), badge("resolved")],
+        ["F25", "CI coverage", "Data-bot commits carry [skip ci], so the verification workflows never run on them: refreshed data reaches main ungated until the next human push. Their F20 covers regenerate-then-check; this row is the [skip ci] angle: bot pushes run no verify at all. Needs a reviewer decision (suggestions S13 and root S24).",
+         src(SOURCE["repo"], "repository"), badge("needs review")],
     ])
 
     tbl = table(["ID", "Area", "What is flagged", "Source", "State"], flags,
@@ -1298,6 +1306,122 @@ def executive_page(snap, dash, lines, strat, avail, verif, prov):
                 dash.get("generated_at"))
 
 
+def sections_page(dash):
+    """Categorized index of every published section (flag F37 / suggestion S21).
+
+    A crawl of index.html and pages/*.html on 2026-11-12 found no inbound link to
+    the fifteen root section pages or to the referee/ and verified-lab/ sub-sites,
+    so a reader could only reach them by typing URLs. This page fixes that without
+    disturbing the flat header navigation the other generators share.
+    """
+    def link(href, label):
+        # this page lives in pages/, so root targets need ../ and sister pages do not
+        if href.startswith("pages/"):
+            target = href[len("pages/"):]
+        else:
+            target = "../" + href
+        return f'<a href="{esc(target)}">{esc(label)}</a>'
+
+    rows = [
+        ["Dashboard", link("index.html", "Overview"),
+         "Season state, this week's own lines, leaderboard top, availability pressure, verification summary"],
+        ["Dashboard", link("pages/sections.html", "All Sections"),
+         "This page: every published section, grouped by category"],
+        ["Lines & model", link("pages/lines.html", "My Lines"),
+         "Own spread, total and win probability with error bands, ratings, out-of-sample accuracy"],
+        ["Lines & model", link("pages/analysis.html", "Validation & Correlation"),
+         "Forward test, luck removal, measured correlation values (including C5)"],
+        ["Lines & model", link("pages/verified.html", "Verified Artifacts"),
+         "Every artifact generated from verified inputs, with its guarding check"],
+        ["Competition", link("pages/strategies.html", "Strategy Lab"),
+         "Leaderboard, gate matrix, parlay maths, reward rules"],
+        ["Competition", link("leaderboard.html", "Leaderboard competition"),
+         "Competition rules, reward tiers, ranked board (root register)"],
+        ["Competition", link("strategy-lab.html", "Strategy lab (research register)"),
+         "Own-line pipeline, signal research, candidate strategies, validation gates"],
+        ["Competition", link("bet-types.html", "Bet types & risk"),
+         "Single bets, parlays, player prop combos, official loss data"],
+        ["Competition", link("pages/props.html", "Player Props"),
+         "Shrunk usage projections with intervals; market columns deliberately blank"],
+        ["Official data", link("pages/injuries.html", "Injuries & Depth"),
+         "Official game status joined to depth-chart rank, next man up, attrition index"],
+        ["Official data", link("pages/availability.html", "Availability & Deficiencies"),
+         "Starter availability, backup exposure, clubs without a published report"],
+        ["Official data", link("injuries.html", "Injuries (register)"),
+         "Official injury report rows, filing policy, inactives, tracking design"],
+        ["Official data", link("depth-chart.html", "Depth charts & backup exposure"),
+         "1st to 4th string for offense and defense where official charts publish them"],
+        ["Official data", link("pages/standings.html", "Standings"),
+         "Official 2026 standings, all 32 clubs"],
+        ["Official data", link("pages/teams.html", "Teams"),
+         "Club directory with official links"],
+        ["Official data", link("pages/data.html", "Verified Data"),
+         "Official-source dataset, refreshed and re-checked automatically"],
+        ["Official data", link("data-tables.html", "Standings, data & findings"),
+         "Derived metrics, correlation register, official bet facts, findings"],
+        ["Governance", link("requirements.html", "Requirements inventory"),
+         "Every requirement from the brief, decomposed with per-row official links"],
+        ["Governance", link("pages/executive.html", "Executive Summary"),
+         "What was built, what the evidence says, what is unresolved, decisions requested"],
+        ["Governance", link("pages/executive-summary.html", "Executive Summary (companion)"),
+         "Companion summary produced by the earlier dashboard generation"],
+        ["Governance", link("executive-summary.html", "Executive summary (root register)"),
+         "Root section page: verified facts, gaps, posture"],
+        ["Governance", link("pages/questions.html", "Questions & Information Gaps"),
+         "Decision-gating questions: known, unknown, discovery, what each one blocks"],
+        ["Governance", link("questions.html", "Decision questions (root register)"),
+         "Root register of questions, answers and discovery actions"],
+        ["Governance", link("pages/suggestions.html", "Suggestions & Paths"),
+         "Improvement suggestions, decision records, review process"],
+        ["Governance", link("suggestions.html", "Suggestions & choose a path"),
+         "Root register with the Review and Choose a Path gate"],
+        ["Governance", link("pages/decisions.html", "Decision Register"),
+         "Questions, missing information, and options to choose between"],
+        ["Assurance", link("pages/review.html", "Flagged for Review"),
+         "Every irregularity, unverified value and blocked decision, with the settling source"],
+        ["Assurance", link("pages/flagged.html", "Flagged (register)"),
+         "Flag register from the companion dashboard generation"],
+        ["Assurance", link("flagged.html", "Flagged for Review (root register)"),
+         "Full root flag register (F01 to F39) with official source links"],
+        ["Assurance", link("verification.html", "Verification & sources"),
+         "Verification policy, official source registry, line-by-line audit"],
+        ["Assurance", link("pages/evidence.html", "Evidence & Verification"),
+         "Provenance (URL and sha256 per file) and checks against nfl.com"],
+        ["Assurance", link("integration.html", "Combined integration verification"),
+         "Line-by-line re-verification of every merged session's data"],
+        ["Assurance", link("deployment.html", "Deployment & pull request"),
+         "Pages configuration, pull request, merge and deploy record"],
+        ["Independent sub-sites", link("referee/index.html", "Referee"),
+         "Independent official-source audit and replication of published numbers"],
+        ["Independent sub-sites", link("verified-lab/index.html", "Verified Lab"),
+         "Hand transcription of nfl.com with a 34-check harness and 103 tests"],
+        ["Independent sub-sites", link("dashboard/index.html", "Dashboard (session 6a232e79)"),
+         "Live re-verified dashboard: depth charts, injuries, lines, questions, flagged, sources"],
+        ["Independent sub-sites", link("lab/index.html", "Decision lab (session 1505ac8e)"),
+         "Consolidated decision lab: live-verified data, own lines, ten-gate strategy lab, depth charts"],
+        ["Companion register", link("docs/index.html", "Register (session 87deb7ab)"),
+         "Independently built requirements, questions, suggestions and strategy registers"],
+        ["Historical", link("legacy-site.html", "Earlier dashboard"),
+         "The first integrated dashboard, preserved verbatim"],
+    ]
+    body = f"""
+<section class="panel">
+  <h2>All published sections</h2>
+  <p>Every page and sub-site this repository publishes, grouped by category, so any
+  finding can be reached in one click from the landing navigation. Six generations
+  are published side by side (root dashboard, root section pages, docs/, dashboard/,
+  lab/, plus the referee and verified-lab sub-sites); nothing is hidden or merged
+  silently. Which one is authoritative is open question Q21 on the Questions page.</p>
+  {table(["Category", "Section", "What it contains"], rows,
+         note=f"{len(rows)} sections. Every link resolves locally; flags F37 to F39 record why "
+              f"this page was added and what still needs a reviewer decision.")}
+</section>
+"""
+    return page("pages/sections.html", "All Sections", body,
+                "Every published page and sub-site, grouped by category.",
+                dash.get("generated_at"))
+
+
 def main():
     snap = load("snapshot.json")
     dash = load("dashboard.json")
@@ -1311,6 +1435,7 @@ def main():
     prov["license"] = "CC-BY-4.0"
 
     write("index.html", overview(snap, dash, lines, strat, avail, props, verif))
+    write("pages/sections.html", sections_page(dash))
     write("pages/lines.html", lines_page(snap, lines, dash))
     write("pages/strategies.html", strategies_page(strat, dash))
     write("pages/injuries.html", injuries_page(avail, dash))
