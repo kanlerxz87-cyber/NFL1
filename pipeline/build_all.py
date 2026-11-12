@@ -89,7 +89,12 @@ def league_snapshot():
         w=("win", "sum"), l=("loss", "sum"), t=("tie", "sum"),
         pf=("pf", "sum"), pa=("pa", "sum")).reset_index()
     st["gp"] = st["w"] + st["l"] + st["t"]
-    st["pct"] = ((st["w"] + 0.5 * st["t"]) / st["gp"]).round(3)
+    # Winning percentage rounded to 3 decimals with ROUND-HALF-UP, matching the convention
+    # published on nfl.com (e.g. WAS 2-5-1 shows 0.313, not Python banker's-rounding 0.312).
+    # Integer arithmetic so the result never depends on float representation:
+    # pct = (1000*w + 500*t)/gp, rounded half-up = (2*num + gp) // (2*gp) / 1000.
+    num = 1000 * st["w"] + 500 * st["t"]
+    st["pct"] = (2 * num + st["gp"]) // (2 * st["gp"]) / 1000.0
     st["diff"] = (st["pf"] - st["pa"]).astype(int)
     st = st.sort_values(["pct", "diff"], ascending=False)
 

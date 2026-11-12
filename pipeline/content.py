@@ -368,6 +368,32 @@ SUGGESTIONS = [
         "recommend": "Adopt before the next kickoff.",
         "status": "Proposed - queued",
     },
+    {
+        "id": "SA-01",
+        "title": "Guard shared output paths across the four site generators",
+        "problem": "pipeline/gen_site.py, scripts/verified/build_site.py and tools/build.py all write shared paths (index.html, pages/lines.html, README.md). This audit had to restore the canonical index.html and README.md after a routine tools/build.py run regenerated them from a different generation.",
+        "change": "Split tools/build.py's output paths (or add an output-path ownership guard) so no generator can silently overwrite another generation's page.",
+        "impact": "High - removes a whole class of silent-site regressions.",
+        "effort": "Low",
+        "risk": "Low",
+        "depends": "None",
+        "evidence": "docs/audit-b6e68100.md §3 (structural observation).",
+        "recommend": "Adopt - small change, prevents a recurring hazard.",
+        "status": "Proposed - queued (audit)",
+    },
+    {
+        "id": "SA-02",
+        "title": "Add a pre-slate injury-report refresh before kickoffs",
+        "problem": "The official injury page drifts within hours: between the 18:53 and 22:30 UTC scrapes on 2026-11-12 the Week-10 report changed four IND statuses and added three rows league-wide. A morning snapshot can be stale by kickoff.",
+        "change": "Add one scheduled run of pipeline/scrape_injuries.py + build_all.py shortly before the first Sunday kick-off (e.g. 16:30 UTC) alongside the existing 11:17 daily refresh.",
+        "impact": "High - keeps game-day availability reads aligned with the official report.",
+        "effort": "Low (one cron line in collect-data.yml)",
+        "risk": "Low - the scraper already records its source and falls back cleanly.",
+        "depends": "collect-data workflow (present)",
+        "evidence": "docs/audit-b6e68100.md §A-F04; flag A-F04; official source https://www.nfl.com/injuries/.",
+        "recommend": "Adopt before the next Sunday slate.",
+        "status": "Proposed - queued (audit)",
+    },
 ]
 
 # ---------------------------------------------------------------- decision records
