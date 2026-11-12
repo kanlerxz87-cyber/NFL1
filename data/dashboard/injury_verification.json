@@ -1,0 +1,1664 @@
+{
+ "checked_on": "2026-11-12",
+ "official_source": "https://www.nfl.com/injuries/",
+ "method": "Hand transcription of all 7 fetched chunks of the official page (data/dashboard/official_injuries_2026_w10.psv), compared field by field with data/model/official_injuries.json. Club codes AZ->ARI and LAR->LA mapped as in the pipeline.",
+ "counts": {
+  "official_rows": 279,
+  "scraped_rows": 276,
+  "matched_all_fields": 272,
+  "field_differences": 4,
+  "missing_from_scrape": 3,
+  "extra_in_scrape": 0,
+  "clubs_on_official_page": 26,
+  "clubs_in_scrape": 26
+ },
+ "missing_from_scrape": [
+  {
+   "team": "JAX",
+   "player": "BJ Green II",
+   "position": "DE",
+   "practice": "Full Participation in Practice",
+   "game": null,
+   "official_line": 96
+  },
+  {
+   "team": "IND",
+   "player": "CJ Allen",
+   "position": "LB",
+   "practice": "Full Participation in Practice",
+   "game": null,
+   "official_line": 144
+  },
+  {
+   "team": "IND",
+   "player": "Grover Stewart",
+   "position": "DT",
+   "practice": "Did Not Participate In Practice",
+   "game": null,
+   "official_line": 150
+  }
+ ],
+ "extra_in_scrape": [],
+ "field_differences": [
+  {
+   "team": "IND",
+   "player": "A.J. Haulcy",
+   "diffs": {
+    "practice": {
+     "official": "Full Participation in Practice",
+     "scraped": "Did Not Participate In Practice"
+    }
+   },
+   "official_line": 147
+  },
+  {
+   "team": "IND",
+   "player": "Jonathan Taylor",
+   "diffs": {
+    "practice": {
+     "official": "Full Participation in Practice",
+     "scraped": "Limited Participation in Practice"
+    }
+   },
+   "official_line": 151
+  },
+  {
+   "team": "IND",
+   "player": "Jerry Tillery",
+   "diffs": {
+    "practice": {
+     "official": "Did Not Participate In Practice",
+     "scraped": "Limited Participation in Practice"
+    }
+   },
+   "official_line": 152
+  },
+  {
+   "team": "IND",
+   "player": "Charvarius Ward",
+   "diffs": {
+    "practice": {
+     "official": "Full Participation in Practice",
+     "scraped": "Did Not Participate In Practice"
+    }
+   },
+   "official_line": 155
+  }
+ ],
+ "club_counts": [
+  {
+   "team": "ARI",
+   "official_rows": 14,
+   "scraped_rows": 14,
+   "match": true
+  },
+  {
+   "team": "ATL",
+   "official_rows": 6,
+   "scraped_rows": 6,
+   "match": true
+  },
+  {
+   "team": "BUF",
+   "official_rows": 11,
+   "scraped_rows": 11,
+   "match": true
+  },
+  {
+   "team": "CAR",
+   "official_rows": 12,
+   "scraped_rows": 12,
+   "match": true
+  },
+  {
+   "team": "CIN",
+   "official_rows": 4,
+   "scraped_rows": 4,
+   "match": true
+  },
+  {
+   "team": "CLE",
+   "official_rows": 11,
+   "scraped_rows": 11,
+   "match": true
+  },
+  {
+   "team": "DAL",
+   "official_rows": 16,
+   "scraped_rows": 16,
+   "match": true
+  },
+  {
+   "team": "DET",
+   "official_rows": 9,
+   "scraped_rows": 9,
+   "match": true
+  },
+  {
+   "team": "GB",
+   "official_rows": 16,
+   "scraped_rows": 16,
+   "match": true
+  },
+  {
+   "team": "HOU",
+   "official_rows": 13,
+   "scraped_rows": 13,
+   "match": true
+  },
+  {
+   "team": "IND",
+   "official_rows": 13,
+   "scraped_rows": 11,
+   "match": false
+  },
+  {
+   "team": "JAX",
+   "official_rows": 11,
+   "scraped_rows": 10,
+   "match": false
+  },
+  {
+   "team": "KC",
+   "official_rows": 11,
+   "scraped_rows": 11,
+   "match": true
+  },
+  {
+   "team": "LA",
+   "official_rows": 10,
+   "scraped_rows": 10,
+   "match": true
+  },
+  {
+   "team": "LV",
+   "official_rows": 4,
+   "scraped_rows": 4,
+   "match": true
+  },
+  {
+   "team": "MIA",
+   "official_rows": 10,
+   "scraped_rows": 10,
+   "match": true
+  },
+  {
+   "team": "MIN",
+   "official_rows": 9,
+   "scraped_rows": 9,
+   "match": true
+  },
+  {
+   "team": "NE",
+   "official_rows": 15,
+   "scraped_rows": 15,
+   "match": true
+  },
+  {
+   "team": "NO",
+   "official_rows": 10,
+   "scraped_rows": 10,
+   "match": true
+  },
+  {
+   "team": "NYG",
+   "official_rows": 11,
+   "scraped_rows": 11,
+   "match": true
+  },
+  {
+   "team": "NYJ",
+   "official_rows": 7,
+   "scraped_rows": 7,
+   "match": true
+  },
+  {
+   "team": "PIT",
+   "official_rows": 8,
+   "scraped_rows": 8,
+   "match": true
+  },
+  {
+   "team": "SEA",
+   "official_rows": 15,
+   "scraped_rows": 15,
+   "match": true
+  },
+  {
+   "team": "SF",
+   "official_rows": 12,
+   "scraped_rows": 12,
+   "match": true
+  },
+  {
+   "team": "TEN",
+   "official_rows": 12,
+   "scraped_rows": 12,
+   "match": true
+  },
+  {
+   "team": "WAS",
+   "official_rows": 9,
+   "scraped_rows": 9,
+   "match": true
+  }
+ ],
+ "matched_rows": [
+  {
+   "team": "WAS",
+   "player": "John Bates",
+   "official_line": 6
+  },
+  {
+   "team": "WAS",
+   "player": "Treylon Burks",
+   "official_line": 7
+  },
+  {
+   "team": "WAS",
+   "player": "Jayden Daniels",
+   "official_line": 8
+  },
+  {
+   "team": "WAS",
+   "player": "Matt Gulbin",
+   "official_line": 9
+  },
+  {
+   "team": "WAS",
+   "player": "Chig Okonkwo",
+   "official_line": 10
+  },
+  {
+   "team": "WAS",
+   "player": "Lucas Patrick",
+   "official_line": 11
+  },
+  {
+   "team": "WAS",
+   "player": "Amik Robertson",
+   "official_line": 12
+  },
+  {
+   "team": "WAS",
+   "player": "Shy Tuttle",
+   "official_line": 13
+  },
+  {
+   "team": "WAS",
+   "player": "Colson Yankoff",
+   "official_line": 14
+  },
+  {
+   "team": "NYG",
+   "player": "Abdul Carter",
+   "official_line": 15
+  },
+  {
+   "team": "NYG",
+   "player": "Jermaine Eluemunor",
+   "official_line": 16
+  },
+  {
+   "team": "NYG",
+   "player": "Malik Harrison",
+   "official_line": 17
+  },
+  {
+   "team": "NYG",
+   "player": "Colton Hood",
+   "official_line": 18
+  },
+  {
+   "team": "NYG",
+   "player": "Theo Johnson",
+   "official_line": 19
+  },
+  {
+   "team": "NYG",
+   "player": "Charlie Jones",
+   "official_line": 20
+  },
+  {
+   "team": "NYG",
+   "player": "J.J. McCarthy",
+   "official_line": 21
+  },
+  {
+   "team": "NYG",
+   "player": "Darnell Mooney",
+   "official_line": 22
+  },
+  {
+   "team": "NYG",
+   "player": "Malik Nabers",
+   "official_line": 23
+  },
+  {
+   "team": "NYG",
+   "player": "Cam Skattebo",
+   "official_line": 24
+  },
+  {
+   "team": "NYG",
+   "player": "Andrew Thomas",
+   "official_line": 25
+  },
+  {
+   "team": "NE",
+   "player": "Ben Brown",
+   "official_line": 26
+  },
+  {
+   "team": "NE",
+   "player": "A.J. Brown",
+   "official_line": 27
+  },
+  {
+   "team": "NE",
+   "player": "Kevin Byard",
+   "official_line": 28
+  },
+  {
+   "team": "NE",
+   "player": "Carlton Davis III",
+   "official_line": 29
+  },
+  {
+   "team": "NE",
+   "player": "Reggie Gilliam",
+   "official_line": 30
+  },
+  {
+   "team": "NE",
+   "player": "TreVeyon Henderson",
+   "official_line": 31
+  },
+  {
+   "team": "NE",
+   "player": "Hunter Henry",
+   "official_line": 32
+  },
+  {
+   "team": "NE",
+   "player": "Cameron Latu",
+   "official_line": 33
+  },
+  {
+   "team": "NE",
+   "player": "Drake Maye",
+   "official_line": 34
+  },
+  {
+   "team": "NE",
+   "player": "Morgan Moses",
+   "official_line": 35
+  },
+  {
+   "team": "NE",
+   "player": "Walter Rouse",
+   "official_line": 36
+  },
+  {
+   "team": "NE",
+   "player": "Brenden Schooler",
+   "official_line": 37
+  },
+  {
+   "team": "NE",
+   "player": "Rhamondre Stevenson",
+   "official_line": 38
+  },
+  {
+   "team": "NE",
+   "player": "Greg Van Roten",
+   "official_line": 39
+  },
+  {
+   "team": "NE",
+   "player": "Charles Woods",
+   "official_line": 40
+  },
+  {
+   "team": "DET",
+   "player": "Brian Branch",
+   "official_line": 41
+  },
+  {
+   "team": "DET",
+   "player": "Jared Goff",
+   "official_line": 42
+  },
+  {
+   "team": "DET",
+   "player": "Kerby Joseph",
+   "official_line": 43
+  },
+  {
+   "team": "DET",
+   "player": "Cade Mays",
+   "official_line": 44
+  },
+  {
+   "team": "DET",
+   "player": "D.J. Reed",
+   "official_line": 45
+  },
+  {
+   "team": "DET",
+   "player": "Jacob Saylors",
+   "official_line": 46
+  },
+  {
+   "team": "DET",
+   "player": "Amon-Ra St. Brown",
+   "official_line": 47
+  },
+  {
+   "team": "DET",
+   "player": "Sione Vaki",
+   "official_line": 48
+  },
+  {
+   "team": "DET",
+   "player": "DJ Wonnum",
+   "official_line": 49
+  },
+  {
+   "team": "KC",
+   "player": "Jeffrey Bassa",
+   "official_line": 50
+  },
+  {
+   "team": "KC",
+   "player": "Mansoor Delane",
+   "official_line": 51
+  },
+  {
+   "team": "KC",
+   "player": "Justin Fields",
+   "official_line": 52
+  },
+  {
+   "team": "KC",
+   "player": "Jaden Hicks",
+   "official_line": 53
+  },
+  {
+   "team": "KC",
+   "player": "Travis Kelce",
+   "official_line": 54
+  },
+  {
+   "team": "KC",
+   "player": "Patrick Mahomes",
+   "official_line": 55
+  },
+  {
+   "team": "KC",
+   "player": "Jaylon Moore",
+   "official_line": 56
+  },
+  {
+   "team": "KC",
+   "player": "Omarr Norman-Lott",
+   "official_line": 57
+  },
+  {
+   "team": "KC",
+   "player": "Rashee Rice",
+   "official_line": 58
+  },
+  {
+   "team": "KC",
+   "player": "Peter Woods",
+   "official_line": 59
+  },
+  {
+   "team": "KC",
+   "player": "Xavier Worthy",
+   "official_line": 60
+  },
+  {
+   "team": "ATL",
+   "player": "Zachariah Branch",
+   "official_line": 61
+  },
+  {
+   "team": "ATL",
+   "player": "Divine Deablo",
+   "official_line": 62
+  },
+  {
+   "team": "ATL",
+   "player": "Gervon Dexter Sr.",
+   "official_line": 63
+  },
+  {
+   "team": "ATL",
+   "player": "James Pearce Jr.",
+   "official_line": 64
+  },
+  {
+   "team": "ATL",
+   "player": "Za'Darius Smith",
+   "official_line": 65
+  },
+  {
+   "team": "ATL",
+   "player": "Josh Woods",
+   "official_line": 66
+  },
+  {
+   "team": "MIN",
+   "player": "Blake Cashman",
+   "official_line": 67
+  },
+  {
+   "team": "MIN",
+   "player": "T.J. Hockenson",
+   "official_line": 68
+  },
+  {
+   "team": "MIN",
+   "player": "Tyrion Ingram-Dawkins",
+   "official_line": 69
+  },
+  {
+   "team": "MIN",
+   "player": "Theo Jackson",
+   "official_line": 70
+  },
+  {
+   "team": "MIN",
+   "player": "Jauan Jennings",
+   "official_line": 71
+  },
+  {
+   "team": "MIN",
+   "player": "Kyler Murray",
+   "official_line": 72
+  },
+  {
+   "team": "MIN",
+   "player": "Kyle Van Noy",
+   "official_line": 73
+  },
+  {
+   "team": "MIN",
+   "player": "Jay Ward",
+   "official_line": 74
+  },
+  {
+   "team": "MIN",
+   "player": "Carson Wentz",
+   "official_line": 75
+  },
+  {
+   "team": "GB",
+   "player": "Aaron Banks",
+   "official_line": 76
+  },
+  {
+   "team": "GB",
+   "player": "Chris Brooks",
+   "official_line": 77
+  },
+  {
+   "team": "GB",
+   "player": "Javon Bullard",
+   "official_line": 78
+  },
+  {
+   "team": "GB",
+   "player": "Zaire Franklin",
+   "official_line": 79
+  },
+  {
+   "team": "GB",
+   "player": "Travis Glover",
+   "official_line": 80
+  },
+  {
+   "team": "GB",
+   "player": "Ty'Ron Hopper",
+   "official_line": 81
+  },
+  {
+   "team": "GB",
+   "player": "Josh Jacobs",
+   "official_line": 82
+  },
+  {
+   "team": "GB",
+   "player": "Bo Melton",
+   "official_line": 83
+  },
+  {
+   "team": "GB",
+   "player": "Skyy Moore",
+   "official_line": 84
+  },
+  {
+   "team": "GB",
+   "player": "Micah Parsons",
+   "official_line": 85
+  },
+  {
+   "team": "GB",
+   "player": "Sean Rhyan",
+   "official_line": 86
+  },
+  {
+   "team": "GB",
+   "player": "Trey Smack",
+   "official_line": 87
+  },
+  {
+   "team": "GB",
+   "player": "Lukas Van Ness",
+   "official_line": 88
+  },
+  {
+   "team": "GB",
+   "player": "Josh Whyle",
+   "official_line": 89
+  },
+  {
+   "team": "GB",
+   "player": "Savion Williams",
+   "official_line": 90
+  },
+  {
+   "team": "GB",
+   "player": "Kevin Zeitler",
+   "official_line": 91
+  },
+  {
+   "team": "JAX",
+   "player": "Jessie Bates",
+   "official_line": 92
+  },
+  {
+   "team": "JAX",
+   "player": "Ezra Cleveland",
+   "official_line": 93
+  },
+  {
+   "team": "JAX",
+   "player": "Branson Combs",
+   "official_line": 94
+  },
+  {
+   "team": "JAX",
+   "player": "Jordan Davis",
+   "official_line": 95
+  },
+  {
+   "team": "JAX",
+   "player": "Robert Hainsey",
+   "official_line": 97
+  },
+  {
+   "team": "JAX",
+   "player": "Antonio Johnson",
+   "official_line": 98
+  },
+  {
+   "team": "JAX",
+   "player": "Jakobi Meyers",
+   "official_line": 99
+  },
+  {
+   "team": "JAX",
+   "player": "Chris Rodriguez Jr.",
+   "official_line": 100
+  },
+  {
+   "team": "JAX",
+   "player": "Bhayshul Tuten",
+   "official_line": 101
+  },
+  {
+   "team": "JAX",
+   "player": "Travon Walker",
+   "official_line": 102
+  },
+  {
+   "team": "TEN",
+   "player": "Cody Barton",
+   "official_line": 103
+  },
+  {
+   "team": "TEN",
+   "player": "John Franklin-Myers",
+   "official_line": 104
+  },
+  {
+   "team": "TEN",
+   "player": "Marcus Harris",
+   "official_line": 105
+  },
+  {
+   "team": "TEN",
+   "player": "Anthony Hill Jr.",
+   "official_line": 106
+  },
+  {
+   "team": "TEN",
+   "player": "Jaylon Jones",
+   "official_line": 107
+  },
+  {
+   "team": "TEN",
+   "player": "JC Latham",
+   "official_line": 108
+  },
+  {
+   "team": "TEN",
+   "player": "Tony Pollard",
+   "official_line": 109
+  },
+  {
+   "team": "TEN",
+   "player": "Peter Skoronski",
+   "official_line": 110
+  },
+  {
+   "team": "TEN",
+   "player": "Tyjae Spears",
+   "official_line": 111
+  },
+  {
+   "team": "TEN",
+   "player": "Carnell Tate",
+   "official_line": 112
+  },
+  {
+   "team": "TEN",
+   "player": "Tommy Townsend",
+   "official_line": 113
+  },
+  {
+   "team": "TEN",
+   "player": "Kevin Winston Jr.",
+   "official_line": 114
+  },
+  {
+   "team": "BUF",
+   "player": "Alec Anderson",
+   "official_line": 115
+  },
+  {
+   "team": "BUF",
+   "player": "Christian Benford",
+   "official_line": 116
+  },
+  {
+   "team": "BUF",
+   "player": "Spencer Brown",
+   "official_line": 117
+  },
+  {
+   "team": "BUF",
+   "player": "Dion Dawkins",
+   "official_line": 118
+  },
+  {
+   "team": "BUF",
+   "player": "Greg Gaines",
+   "official_line": 119
+  },
+  {
+   "team": "BUF",
+   "player": "Jordan Hancock",
+   "official_line": 120
+  },
+  {
+   "team": "BUF",
+   "player": "Dalton Kincaid",
+   "official_line": 121
+  },
+  {
+   "team": "BUF",
+   "player": "Connor McGovern",
+   "official_line": 122
+  },
+  {
+   "team": "BUF",
+   "player": "Ar'maj Reed-Adams",
+   "official_line": 123
+  },
+  {
+   "team": "BUF",
+   "player": "T.J. Sanders",
+   "official_line": 124
+  },
+  {
+   "team": "BUF",
+   "player": "Tyrell Shavers",
+   "official_line": 125
+  },
+  {
+   "team": "NYJ",
+   "player": "Omar Cooper Jr.",
+   "official_line": 126
+  },
+  {
+   "team": "NYJ",
+   "player": "Joseph Ossai",
+   "official_line": 127
+  },
+  {
+   "team": "NYJ",
+   "player": "VJ Payne",
+   "official_line": 128
+  },
+  {
+   "team": "NYJ",
+   "player": "Harrison Phillips",
+   "official_line": 129
+  },
+  {
+   "team": "NYJ",
+   "player": "Trevin Wallace",
+   "official_line": 130
+  },
+  {
+   "team": "NYJ",
+   "player": "Garrett Wilson",
+   "official_line": 131
+  },
+  {
+   "team": "NYJ",
+   "player": "Nahshon Wright",
+   "official_line": 132
+  },
+  {
+   "team": "MIA",
+   "player": "Tucker Addington",
+   "official_line": 133
+  },
+  {
+   "team": "MIA",
+   "player": "Kaytron Allen",
+   "official_line": 134
+  },
+  {
+   "team": "MIA",
+   "player": "Darrell Baker Jr.",
+   "official_line": 135
+  },
+  {
+   "team": "MIA",
+   "player": "Chris Bell",
+   "official_line": 136
+  },
+  {
+   "team": "MIA",
+   "player": "Aaron Brewer",
+   "official_line": 137
+  },
+  {
+   "team": "MIA",
+   "player": "Malik Herring",
+   "official_line": 138
+  },
+  {
+   "team": "MIA",
+   "player": "Will Kacmarek",
+   "official_line": 139
+  },
+  {
+   "team": "MIA",
+   "player": "Michael Taaffe",
+   "official_line": 140
+  },
+  {
+   "team": "MIA",
+   "player": "Dante Trader Jr.",
+   "official_line": 141
+  },
+  {
+   "team": "MIA",
+   "player": "Jaylen Wright",
+   "official_line": 142
+  },
+  {
+   "team": "IND",
+   "player": "Mo Alie-Cox",
+   "official_line": 143
+  },
+  {
+   "team": "IND",
+   "player": "Jaylon Carlies",
+   "official_line": 145
+  },
+  {
+   "team": "IND",
+   "player": "Akeem Davis-Gaither",
+   "official_line": 146
+  },
+  {
+   "team": "IND",
+   "player": "Arden Key",
+   "official_line": 148
+  },
+  {
+   "team": "IND",
+   "player": "Luke Rhodes",
+   "official_line": 149
+  },
+  {
+   "team": "IND",
+   "player": "Jalen Travis",
+   "official_line": 153
+  },
+  {
+   "team": "IND",
+   "player": "Justin Walley",
+   "official_line": 154
+  },
+  {
+   "team": "CAR",
+   "player": "Jonathon Brooks",
+   "official_line": 156
+  },
+  {
+   "team": "CAR",
+   "player": "Brady Christensen",
+   "official_line": 157
+  },
+  {
+   "team": "CAR",
+   "player": "Trevor Etienne",
+   "official_line": 158
+  },
+  {
+   "team": "CAR",
+   "player": "Chuba Hubbard",
+   "official_line": 159
+  },
+  {
+   "team": "CAR",
+   "player": "Lee Hunter",
+   "official_line": 160
+  },
+  {
+   "team": "CAR",
+   "player": "Mike Jackson",
+   "official_line": 161
+  },
+  {
+   "team": "CAR",
+   "player": "Will Lee III",
+   "official_line": 162
+  },
+  {
+   "team": "CAR",
+   "player": "Xavier Legette",
+   "official_line": 163
+  },
+  {
+   "team": "CAR",
+   "player": "Damien Lewis",
+   "official_line": 164
+  },
+  {
+   "team": "CAR",
+   "player": "Bobby Okereke",
+   "official_line": 165
+  },
+  {
+   "team": "CAR",
+   "player": "Jaelan Phillips",
+   "official_line": 166
+  },
+  {
+   "team": "CAR",
+   "player": "Torricelli Simpkins III",
+   "official_line": 167
+  },
+  {
+   "team": "NO",
+   "player": "Kelvin Banks Jr.",
+   "official_line": 168
+  },
+  {
+   "team": "NO",
+   "player": "CJ Donaldson",
+   "official_line": 169
+  },
+  {
+   "team": "NO",
+   "player": "David Edwards",
+   "official_line": 170
+  },
+  {
+   "team": "NO",
+   "player": "Martin Emerson",
+   "official_line": 171
+  },
+  {
+   "team": "NO",
+   "player": "Travis Etienne",
+   "official_line": 172
+  },
+  {
+   "team": "NO",
+   "player": "Noah Fant",
+   "official_line": 173
+  },
+  {
+   "team": "NO",
+   "player": "Alvin Kamara",
+   "official_line": 174
+  },
+  {
+   "team": "NO",
+   "player": "Erik McCoy",
+   "official_line": 175
+  },
+  {
+   "team": "NO",
+   "player": "Christen Miller",
+   "official_line": 176
+  },
+  {
+   "team": "NO",
+   "player": "Asim Richards",
+   "official_line": 177
+  },
+  {
+   "team": "HOU",
+   "player": "Azeez Al-Shaair",
+   "official_line": 178
+  },
+  {
+   "team": "HOU",
+   "player": "Reed Blankenship",
+   "official_line": 179
+  },
+  {
+   "team": "HOU",
+   "player": "Tank Dell",
+   "official_line": 180
+  },
+  {
+   "team": "HOU",
+   "player": "Blake Fisher",
+   "official_line": 181
+  },
+  {
+   "team": "HOU",
+   "player": "Marvin Harrison Jr.",
+   "official_line": 182
+  },
+  {
+   "team": "HOU",
+   "player": "Jacob Hummel",
+   "official_line": 183
+  },
+  {
+   "team": "HOU",
+   "player": "Brevin Jordan",
+   "official_line": 184
+  },
+  {
+   "team": "HOU",
+   "player": "Woody Marks",
+   "official_line": 185
+  },
+  {
+   "team": "HOU",
+   "player": "David Montgomery",
+   "official_line": 186
+  },
+  {
+   "team": "HOU",
+   "player": "Keylan Rutledge",
+   "official_line": 187
+  },
+  {
+   "team": "HOU",
+   "player": "Jaylin Smith",
+   "official_line": 188
+  },
+  {
+   "team": "HOU",
+   "player": "Wyatt Teller",
+   "official_line": 189
+  },
+  {
+   "team": "HOU",
+   "player": "Tommy Togiai",
+   "official_line": 190
+  },
+  {
+   "team": "CLE",
+   "player": "Austin Barber",
+   "official_line": 191
+  },
+  {
+   "team": "CLE",
+   "player": "Denzel Boston",
+   "official_line": 192
+  },
+  {
+   "team": "CLE",
+   "player": "Michael Burton",
+   "official_line": 193
+  },
+  {
+   "team": "CLE",
+   "player": "Maliek Collins",
+   "official_line": 194
+  },
+  {
+   "team": "CLE",
+   "player": "Harold Fannin Jr.",
+   "official_line": 195
+  },
+  {
+   "team": "CLE",
+   "player": "Ronnie Hickman Jr.",
+   "official_line": 196
+  },
+  {
+   "team": "CLE",
+   "player": "Tytus Howard",
+   "official_line": 197
+  },
+  {
+   "team": "CLE",
+   "player": "Elgton Jenkins",
+   "official_line": 198
+  },
+  {
+   "team": "CLE",
+   "player": "Carson Schwesinger",
+   "official_line": 199
+  },
+  {
+   "team": "CLE",
+   "player": "Denzel Ward",
+   "official_line": 200
+  },
+  {
+   "team": "CLE",
+   "player": "Quincy Williams",
+   "official_line": 201
+  },
+  {
+   "team": "LA",
+   "player": "Davis Allen",
+   "official_line": 202
+  },
+  {
+   "team": "LA",
+   "player": "Steve Avila",
+   "official_line": 203
+  },
+  {
+   "team": "LA",
+   "player": "Joe Cardona",
+   "official_line": 204
+  },
+  {
+   "team": "LA",
+   "player": "Kam Curl",
+   "official_line": 205
+  },
+  {
+   "team": "LA",
+   "player": "Terrance Ferguson",
+   "official_line": 206
+  },
+  {
+   "team": "LA",
+   "player": "Myles Garrett",
+   "official_line": 207
+  },
+  {
+   "team": "LA",
+   "player": "Trent McDuffie",
+   "official_line": 208
+  },
+  {
+   "team": "LA",
+   "player": "Puka Nacua",
+   "official_line": 209
+  },
+  {
+   "team": "LA",
+   "player": "Colby Parkinson",
+   "official_line": 210
+  },
+  {
+   "team": "LA",
+   "player": "Matthew Stafford",
+   "official_line": 211
+  },
+  {
+   "team": "ARI",
+   "player": "Budda Baker",
+   "official_line": 212
+  },
+  {
+   "team": "ARI",
+   "player": "Zachary Carter",
+   "official_line": 213
+  },
+  {
+   "team": "ARI",
+   "player": "Hjalte Froholdt",
+   "official_line": 214
+  },
+  {
+   "team": "ARI",
+   "player": "Jon Gaines II",
+   "official_line": 215
+  },
+  {
+   "team": "ARI",
+   "player": "Bam Knight",
+   "official_line": 216
+  },
+  {
+   "team": "ARI",
+   "player": "Hunter Long",
+   "official_line": 217
+  },
+  {
+   "team": "ARI",
+   "player": "Roy Lopez",
+   "official_line": 218
+  },
+  {
+   "team": "ARI",
+   "player": "Max Melton",
+   "official_line": 219
+  },
+  {
+   "team": "ARI",
+   "player": "Isaac Seumalo",
+   "official_line": 220
+  },
+  {
+   "team": "ARI",
+   "player": "Dante Stills",
+   "official_line": 221
+  },
+  {
+   "team": "ARI",
+   "player": "Josh Sweat",
+   "official_line": 222
+  },
+  {
+   "team": "ARI",
+   "player": "Jayden Williams",
+   "official_line": 223
+  },
+  {
+   "team": "ARI",
+   "player": "Mack Wilson",
+   "official_line": 224
+  },
+  {
+   "team": "ARI",
+   "player": "Andrew Wingard",
+   "official_line": 225
+  },
+  {
+   "team": "SEA",
+   "player": "AJ Barner",
+   "official_line": 226
+  },
+  {
+   "team": "SEA",
+   "player": "Anthony Bradford",
+   "official_line": 227
+  },
+  {
+   "team": "SEA",
+   "player": "Charles Cross",
+   "official_line": 228
+  },
+  {
+   "team": "SEA",
+   "player": "Sam Darnold",
+   "official_line": 229
+  },
+  {
+   "team": "SEA",
+   "player": "Derick Hall",
+   "official_line": 230
+  },
+  {
+   "team": "SEA",
+   "player": "Drew Lock",
+   "official_line": 231
+  },
+  {
+   "team": "SEA",
+   "player": "Quenton Nelson",
+   "official_line": 232
+  },
+  {
+   "team": "SEA",
+   "player": "Uchenna Nwosu",
+   "official_line": 233
+  },
+  {
+   "team": "SEA",
+   "player": "Patrick O'Connell",
+   "official_line": 234
+  },
+  {
+   "team": "SEA",
+   "player": "Connor O'Toole",
+   "official_line": 235
+  },
+  {
+   "team": "SEA",
+   "player": "Brandon Pili",
+   "official_line": 236
+  },
+  {
+   "team": "SEA",
+   "player": "Jarran Reed",
+   "official_line": 237
+  },
+  {
+   "team": "SEA",
+   "player": "Rashid Shaheed",
+   "official_line": 238
+  },
+  {
+   "team": "SEA",
+   "player": "Jaxon Smith-Njigba",
+   "official_line": 239
+  },
+  {
+   "team": "SEA",
+   "player": "Leonard Williams",
+   "official_line": 240
+  },
+  {
+   "team": "LV",
+   "player": "Thomas Booker",
+   "official_line": 241
+  },
+  {
+   "team": "LV",
+   "player": "Foley Fatukasi",
+   "official_line": 242
+  },
+  {
+   "team": "LV",
+   "player": "Ian Thomas",
+   "official_line": 243
+  },
+  {
+   "team": "LV",
+   "player": "Trey Zuhn III",
+   "official_line": 244
+  },
+  {
+   "team": "SF",
+   "player": "Mike Evans",
+   "official_line": 245
+  },
+  {
+   "team": "SF",
+   "player": "Renardo Green",
+   "official_line": 246
+  },
+  {
+   "team": "SF",
+   "player": "Dre Greenlaw",
+   "official_line": 247
+  },
+  {
+   "team": "SF",
+   "player": "Nate Hobbs",
+   "official_line": 248
+  },
+  {
+   "team": "SF",
+   "player": "Deommodore Lenoir",
+   "official_line": 249
+  },
+  {
+   "team": "SF",
+   "player": "Christian McCaffrey",
+   "official_line": 250
+  },
+  {
+   "team": "SF",
+   "player": "Siran Neal",
+   "official_line": 251
+  },
+  {
+   "team": "SF",
+   "player": "Demarcus Robinson",
+   "official_line": 252
+  },
+  {
+   "team": "SF",
+   "player": "Deebo Samuel Sr.",
+   "official_line": 253
+  },
+  {
+   "team": "SF",
+   "player": "Upton Stout",
+   "official_line": 254
+  },
+  {
+   "team": "SF",
+   "player": "C.J. West",
+   "official_line": 255
+  },
+  {
+   "team": "SF",
+   "player": "Trent Williams",
+   "official_line": 256
+  },
+  {
+   "team": "DAL",
+   "player": "Jonathan Bullard",
+   "official_line": 257
+  },
+  {
+   "team": "DAL",
+   "player": "Donovan Ezeiruaku",
+   "official_line": 258
+  },
+  {
+   "team": "DAL",
+   "player": "Jake Ferguson",
+   "official_line": 259
+  },
+  {
+   "team": "DAL",
+   "player": "Tyler Goodson",
+   "official_line": 260
+  },
+  {
+   "team": "DAL",
+   "player": "Malik Hooker",
+   "official_line": 261
+  },
+  {
+   "team": "DAL",
+   "player": "Marist Liufau",
+   "official_line": 262
+  },
+  {
+   "team": "DAL",
+   "player": "P.J. Locke",
+   "official_line": 263
+  },
+  {
+   "team": "DAL",
+   "player": "Von Miller",
+   "official_line": 264
+  },
+  {
+   "team": "DAL",
+   "player": "Jonathan Mingo",
+   "official_line": 265
+  },
+  {
+   "team": "DAL",
+   "player": "Devin Moore",
+   "official_line": 266
+  },
+  {
+   "team": "DAL",
+   "player": "DeMarvion Overshown",
+   "official_line": 267
+  },
+  {
+   "team": "DAL",
+   "player": "George Pickens",
+   "official_line": 268
+  },
+  {
+   "team": "DAL",
+   "player": "Joey Porter Jr.",
+   "official_line": 269
+  },
+  {
+   "team": "DAL",
+   "player": "Luke Schoonmaker",
+   "official_line": 270
+  },
+  {
+   "team": "DAL",
+   "player": "Brevyn Spann-Ford",
+   "official_line": 271
+  },
+  {
+   "team": "DAL",
+   "player": "KaVontae Turpin",
+   "official_line": 272
+  },
+  {
+   "team": "PIT",
+   "player": "Brandin Echols",
+   "official_line": 273
+  },
+  {
+   "team": "PIT",
+   "player": "DeShon Elliott",
+   "official_line": 274
+  },
+  {
+   "team": "PIT",
+   "player": "Derrick Harmon",
+   "official_line": 275
+  },
+  {
+   "team": "PIT",
+   "player": "Cameron Heyward",
+   "official_line": 276
+  },
+  {
+   "team": "PIT",
+   "player": "Ben Skowronek",
+   "official_line": 277
+  },
+  {
+   "team": "PIT",
+   "player": "Doneiko Slaughter",
+   "official_line": 278
+  },
+  {
+   "team": "PIT",
+   "player": "Darnell Washington",
+   "official_line": 279
+  },
+  {
+   "team": "PIT",
+   "player": "T.J. Watt",
+   "official_line": 280
+  },
+  {
+   "team": "CIN",
+   "player": "Jonathan Allen",
+   "official_line": 281
+  },
+  {
+   "team": "CIN",
+   "player": "Kyle Dugger",
+   "official_line": 282
+  },
+  {
+   "team": "CIN",
+   "player": "Dylan Fairchild",
+   "official_line": 283
+  },
+  {
+   "team": "CIN",
+   "player": "DJ Turner II",
+   "official_line": 284
+  }
+ ],
+ "official_game_status_rows": [
+  {
+   "team": "WAS",
+   "player": "Lucas Patrick",
+   "position": "C",
+   "injury": "Concussion",
+   "practice": "Did Not Participate In Practice",
+   "game": "Out",
+   "official_line": 11
+  },
+  {
+   "team": "WAS",
+   "player": "Colson Yankoff",
+   "position": "TE",
+   "injury": "Knee",
+   "practice": "Did Not Participate In Practice",
+   "game": "Out",
+   "official_line": 14
+  },
+  {
+   "team": "NYG",
+   "player": "Malik Harrison",
+   "position": "LB",
+   "injury": "Groin",
+   "practice": "Limited Participation in Practice",
+   "game": "Questionable",
+   "official_line": 17
+  },
+  {
+   "team": "NE",
+   "player": "Ben Brown",
+   "position": "C",
+   "injury": "Knee",
+   "practice": "Did Not Participate In Practice",
+   "game": "Out",
+   "official_line": 26
+  },
+  {
+   "team": "NE",
+   "player": "Carlton Davis III",
+   "position": "CB",
+   "injury": "Knee",
+   "practice": "Did Not Participate In Practice",
+   "game": "Out",
+   "official_line": 29
+  },
+  {
+   "team": "NE",
+   "player": "TreVeyon Henderson",
+   "position": "RB",
+   "injury": "Illness",
+   "practice": "Did Not Participate In Practice",
+   "game": "Out",
+   "official_line": 31
+  }
+ ]
+}
