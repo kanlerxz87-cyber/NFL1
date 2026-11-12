@@ -5,6 +5,12 @@ name: Collect NFL data and rebuild model outputs
 # release-assets.githubusercontent.com, which is reachable from Actions.
 on:
   workflow_dispatch:
+  push:
+    # A branch-scoped push trigger is used instead of workflow_dispatch because
+    # workflow_dispatch cannot resolve a workflow that only exists on a non-default
+    # branch. Bot commits carry [skip ci] so this never loops.
+    branches: ["arena/**", main]
+    paths: ["pipeline/**", ".github/workflows/collect-data.yml"]
   schedule:
     - cron: "17 11 * * *"   # daily refresh, 11:17 UTC
 permissions:
