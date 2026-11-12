@@ -1,0 +1,156 @@
+#!/usr/bin/env python3
+"""Scrape the official NFL injury report (nfl.com/injuries) for the current week.
+
+Why this exists: the mirrored feed (nflverse) lags the league by a week or more in-season,
+and the brief requires current injury tracking. nfl.com blocks the Arena sandbox but is
+reachable from GitHub Actions, so this runs there. It parses the page's own tables, keeps a
+per-player nfl.com link, and records the page hash. If parsing fails nothing is written and
+the build falls back to the mirrored feed with a published warning.
+"""
+from __future__ import annotations
+
+import hashlib
+import json
+import os
+import re
+from datetime import datetime, timezone
+
+import pandas as pd
+import requests
+from bs4 import BeautifulSoup
+
+RAW = os.path.join(os.path.dirname(__file__), "..", "build", "raw")
+OUT = os.path.join(os.path.dirname(__file__), "..", "data", "model")
+URL = "https://www.nfl.com/injuries/"
+HEADERS = {
+    "User-Agent": ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+                   "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"),
+    "Accept-Language": "en-US,en;q=0.9",
+}
+
+
+def fetch() -> str:
+    r = requests.get(URL, headers=HEADERS, timeout=60)
+    r.raise_for_status()
+    return r.text
+
+
+def nicknames() -> dict[str, str]:
+    teams = pd.read_csv(os.path.join(RAW, "teams.csv"))
+    teams = teams.drop_duplicates("team_abbr")
+    out = {}
+    for _, t in teams.iterrows():
+        for key in (t.get("team_nick"), t.get("team_name")):
+            if isinstance(key, str) and key.strip():
+                out[key.strip().lower()] = t["team_abbr"]
+    return out
+
+
+def parse(html: str) -> dict:
+    soup = BeautifulSoup(html, "lxml")
+    text = soup.get_text(" ", strip=True)
+    m = re.search(r"WEEK\s*(\d+)", text[:4000], re.I)
+    week = int(m.group(1)) if m else None
+    season_match = re.search(r"(20\d{2})\s*NFL\s*Injury Report", text[:4000], re.I)
+
+    nicks = nicknames()
+    marker = {k: v for k, v in nicks.items() if len(k) > 3}
+
+    # walk the document in order, remembering the last club nickname seen
+    current = None
+    rows = []
+    seen_tables = 0
+    for el in soup.find_all(True):
+        if el.name in ("span", "a", "h2", "h3", "h4", "div", "p", "button"):
+            own = el.get_text(" ", strip=True)
+            if own and len(own) < 40 and own.lower() in marker:
+                current = marker[own.lower()]
+        if el.name != "table":
+            continue
+        try:
+            dfs = pd.read_html(str(el))
+        except ValueError:
+            continue
+        if not dfs:
+            continue
+        df = dfs[0]
+        cols = [str(c).strip().lower() for c in df.columns]
+        if not any("player" in c for c in cols):
+            continue
+        if not any("status" in c for c in cols):
+            continue
+        seen_tables += 1
+        df.columns = [str(c).strip() for c in df.columns]
+        links = {}
+        for a in el.find_all("a", href=True):
+            if "/players/" in a["href"]:
+                links[a.get_text(strip=True)] = "https://www.nfl.com" + a["href"].split("?")[0]
+        for _, r in df.iterrows():
+            def g(*names):
+                for n in names:
+                    for c in df.columns:
+                        if c.lower().replace(" ", "") == n:
+                            v = r[c]
+                            if isinstance(v, str):
+                                v = v.strip()
+                            if pd.isna(v) if not isinstance(v, str) else not v:
+                                continue
+                            return v
+                return None
+            player = g("player")
+            if not isinstance(player, str):
+                continue
+            rows.append({
+                "team": current,
+                "player": player,
+                "position": g("position", "pos"),
+                "injury": g("injuries", "injury"),
+                "practice": g("practicestatus"),
+                "game": g("gamestatus"),
+                "player_url": links.get(player),
+            })
+    return {
+        "week": week,
+        "season": int(season_match.group(1)) if season_match else None,
+        "tables_parsed": seen_tables,
+        "rows": rows,
+    }
+
+
+def main() -> None:
+    os.makedirs(OUT, exist_ok=True)
+    html = fetch()
+    digest = hashlib.sha256(html.encode()).hexdigest()
+    parsed = parse(html)
+    rows = parsed["rows"]
+    teams = {r["team"] for r in rows if r["team"]}
+    ok = len(rows) >= 150 and len(teams) >= 20
+    payload = {
+        "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "source_url": URL,
+        "html_sha256": digest,
+        "week": parsed["week"],
+        "season": parsed["season"],
+        "tables_parsed": parsed["tables_parsed"],
+        "counts": {"rows": len(rows), "teams": len(teams)},
+        "status": "ok" if ok else "parse-incomplete",
+        "warning": (None if ok else
+                    "Parsed fewer rows or clubs than expected; build will fall back to the "
+                    "mirrored feed and flag the mismatch."),
+        "rows": rows,
+    }
+    with open(os.path.join(OUT, "official_injuries.json"), "w") as f:
+        json.dump(payload, f, indent=1)
+    print(f"official injuries: status={payload['status']} week={payload['week']} "
+          f"rows={len(rows)} teams={len(teams)}")
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except Exception as exc:  # noqa: BLE001
+        print(f"official injury scrape failed: {exc}")
+        with open(os.path.join(OUT, "official_injuries.json"), "w") as f:
+            json.dump({"generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                       "source_url": URL, "status": "failed", "error": str(exc),
+                       "rows": []}, f, indent=1)

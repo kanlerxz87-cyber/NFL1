@@ -16,6 +16,7 @@ from __future__ import annotations
 import json
 import math
 import os
+import re
 import traceback
 from datetime import datetime, timezone
 
@@ -271,8 +272,10 @@ def ratings_and_lines(ctx):
                 "test_mae_hybrid": round(float(np.abs(pred - t["margin"]).mean()), 3),
                 "test_mae_market_only": round(float(np.abs(
                     t["spread_line"] - t["margin"]).mean()), 3),
-                "interpretation": ("weight_model near 0 means the EPA model carries no "
-                                   "incremental information beyond the closing line."),
+                "interpretation": ("A model weight at or below zero means the model's "
+                                   "disagreement with the market was wrong on average in the "
+                                   "test window; a positive weight with a lower test MAE means "
+                                   "genuine incremental information."),
             }
 
     # Measured proof of the line-sign convention we grade against.
@@ -345,7 +348,7 @@ def ratings_and_lines(ctx):
         if r_cur else [],
     }
     L.write_json("lines.json", jclean(payload))
-    return dict(payload=payload, te=te_p, ratings=ratings, teams=teams)
+    return dict(payload=payload, te=te_p, va=va_p, ratings=ratings, teams=teams)
 
 
 # ---------------------------------------------------------------- C. strategies
@@ -444,21 +447,26 @@ def strategies(ctx):
                         if underdog(g, s) and (g[f"{s}_rest"] if not pd.isna(g[f"{s}_rest"]) else 99) <= 4), None))
     ats("S06 Fade divisional road favourite of 6.5+",
         lambda g: "home" if (g["div_game"] == 1 and g["spread_line"] <= -6.5) else None)
-    ats("S11 Home team with 3+ rest-day edge",
+    ats("S07 Home team with 3+ rest-day edge",
         lambda g: "home" if (not pd.isna(g["home_rest"]) and not pd.isna(g["away_rest"])
                              and g["home_rest"] - g["away_rest"] >= 3) else None)
-    ats("S12 Home team facing opponent off a bye",
+    ats("S08 Home team facing opponent off a bye",
         lambda g: "home" if (not pd.isna(g["away_rest"]) and g["away_rest"] >= 13) else None)
-    ats("S13 Home favourite of 10 or more",
+    ats("S09 Home favourite of 10 or more",
         lambda g: "home" if g["spread_line"] >= 10 else None)
-    tot("S08 Over when closing total is 41 or lower",
+    tot("S10 Over when closing total is 41 or lower",
         lambda g: "over" if g["total_line"] <= 41 else None)
-    tot("S14 Under in divisional games with total 47+",
+    tot("S11 Under in divisional games with total 47+",
         lambda g: "under" if (g["div_game"] == 1 and g["total_line"] >= 47) else None)
 
     # Model-driven strategies (2024-2026 only, walk-forward ratings)
-    if te is not None and len(te):
-        d = te.dropna(subset=["spread_line", "total_line"])
+    model_pool = None
+    frames = [f for f in (ctx.get("va"), te) if f is not None and len(f)]
+    if frames:
+        model_pool = pd.concat(frames, ignore_index=True).dropna(
+            subset=["spread_line", "total_line"])
+    if model_pool is not None and len(model_pool):
+        d = model_pool
         for thr in (2.0, 3.0):
             rows = []
             for _, g in d.iterrows():
@@ -473,7 +481,7 @@ def strategies(ctx):
                              "side": side,
                              "line": side_line(g, side),
                              "result": res, "market": g["spread_line"]})
-            add(f"S01 Own-line vs close, edge >= {thr}", rows)
+            add(f"S0{1 if thr == 2.0 else 2} Own-line vs close, edge >= {thr}", rows)
         rows = []
         for _, g in d.iterrows():
             edge = g["pred_total"] - g["total_line"]
@@ -506,7 +514,7 @@ def strategies(ctx):
                                  "line": side_line(g, s),
                                  "result": res, "market": g["spread_line"]})
                     break
-        add("S15 Start the team whose QB is ruled Out/Doubtful", rows)
+        add("S12 Start the team whose QB is ruled Out/Doubtful", rows)
     except Exception as exc:  # noqa: BLE001
         print(f"backup-qb strategy skipped: {exc}")
 
@@ -571,7 +579,8 @@ def strategies(ctx):
             "max_drawdown_units": s.get("max_drawdown_units"),
             "by_season": s.get("by_season"), "holdout_roi": s.get("holdout_roi"),
             "max_abs_corr": corr_max, "gates": gates,
-            "window": f"{lo_season}-2026" if "S0" in name or "S1" in name else "per definition",
+            "window": ("2025-2026 walk-forward" if ("Own-" in name or "ruled Out" in name)
+                       else f"{lo_season}-2026"),
         })
     leaderboard.sort(key=lambda r: (-(r["score_lower_ci_roi_pct"] or -999),
                                     -(r["n_graded"] or 0)))
@@ -649,135 +658,178 @@ STATUS_WEIGHT = {"Out": 1.0, "Doubtful": 0.7, "Questionable": 0.25}
 
 @stage("D injury and depth attrition")
 def availability(ctx):
-    inj = L.load("injuries_2026.csv")
+    """Join current availability to the depth chart: who is out, who replaces him, how ready he is.
+
+    Primary source is the official injury report scraped from nfl.com by pipeline/scrape_injuries.py.
+    If that scrape is unavailable the mirrored feed (nflverse) is used and the substitution is
+    published as a warning, never silently.
+    """
     dc = L.load("depth_charts_2026.parquet")
     snaps = L.load("snap_counts_2026.parquet")
     roster = L.load("roster_weekly_2026.parquet")
-
-    # The feed can contain a partially reported next week, so pick the latest week that is
-    # actually complete for the current game week, and report which week was used.
     target = int(ctx["snapshot"]["last_completed_week"]) + 1
-    by_week = inj.groupby("week").size()
-    week = target if by_week.get(target, 0) >= 100 else int(by_week.idxmax())
-    inj_w = inj[inj["week"] == week].copy()
+
+    official = {}
+    try:
+        with open(os.path.join(L.OUT, "official_injuries.json")) as f:
+            official = json.load(f)
+    except Exception:  # noqa: BLE001
+        official = {}
+
+    use_official = bool(official.get("status") == "ok" and official.get("week") == target
+                        and len(official.get("rows", [])) >= 150)
+    recs = []
+    if use_official:
+        week = int(official["week"])
+        for r in official["rows"]:
+            if not r.get("team"):
+                continue
+            recs.append({"team": r["team"], "player": r["player"], "position": r.get("position"),
+                         "injury": r.get("injury"), "practice": r.get("practice"),
+                         "game": r.get("game"), "gsis_id": None,
+                         "source": r.get("player_url") or official["source_url"]})
+        source_label = "official nfl.com injury report (scraped)"
+        source_url = official["source_url"]
+        source_note = None
+    else:
+        inj = L.load("injuries_2026.csv")
+        by_week = inj.groupby("week").size()
+        week = target if by_week.get(target, 0) >= 150 else int(by_week.idxmax())
+        inj_w = inj[inj["week"] == week]
+        for _, r in inj_w.iterrows():
+            recs.append({"team": r["team"], "player": r["full_name"], "position": r["position"],
+                         "injury": None if pd.isna(r["report_primary_injury"])
+                         else r["report_primary_injury"],
+                         "practice": None if pd.isna(r["practice_status"]) else r["practice_status"],
+                         "game": None if pd.isna(r["report_status"]) else r["report_status"],
+                         "gsis_id": r["gsis_id"], "source": "https://www.nfl.com/injuries/"})
+        source_label = f"mirrored feed, latest complete week ({week})"
+        source_url = "https://www.nfl.com/injuries/"
+        source_note = ("The official current-week report could not be scraped, so this table uses "
+                       "the most complete week available in the mirrored feed. Treat statuses as "
+                       "stale and check the official page before acting.")
+
+    def norm(x):
+        x = re.sub(r"[^a-z ]", "", str(x).lower())
+        return re.sub(r"\s+", " ", x).strip()
+
     dt = dc["dt"].max()
     dc_latest = dc[dc["dt"] == dt].copy()
-
-    snap_team = snaps.groupby(["team", "player"]).agg(
-        off=("offense_snaps", "sum"), dfn=("defense_snaps", "sum")).reset_index()
-
     dc_latest["pos_rank"] = pd.to_numeric(dc_latest["pos_rank"], errors="coerce")
     dc_latest["pos_slot"] = pd.to_numeric(dc_latest["pos_slot"], errors="coerce")
 
-    # roster status for experience + IR flags
     rw = roster[roster["week"] == roster["week"].max()].drop_duplicates("gsis_id")
     exp = rw.set_index("gsis_id")["years_exp"].to_dict()
     rstatus = rw.set_index("gsis_id")["status"].to_dict()
 
-    # depth lookup: (team, gsis_id) -> best (lowest) rank across position groups
-    depth_by_player = {}
+    depth_by_player, pool, by_name = {}, {}, {}
     for _, r in dc_latest.iterrows():
         gid = r.get("gsis_id")
         if not isinstance(gid, str) or pd.isna(r["pos_rank"]):
             continue
-        key = (r["team"], gid)
-        cur = depth_by_player.get(key)
-        if cur is None or r["pos_rank"] < cur["pos_rank"]:
-            depth_by_player[key] = {
-                "pos_abb": r["pos_abb"], "pos_name": r["pos_name"], "pos_grp": r["pos_grp"],
+        info = {"pos_abb": r["pos_abb"], "pos_name": r["pos_name"], "pos_grp": r["pos_grp"],
                 "pos_slot": None if pd.isna(r["pos_slot"]) else int(r["pos_slot"]),
-                "pos_rank": int(r["pos_rank"]), "player_name": r["player_name"],
-            }
-    # replacement pool per (team, pos_slot)
-    pool = {}
-    for (team, gid), d in depth_by_player.items():
-        pool.setdefault((team, d["pos_slot"], d["pos_abb"]), []).append({"gsis_id": gid, **d})
+                "pos_rank": int(r["pos_rank"]), "player_name": r["player_name"]}
+        key = (r["team"], gid)
+        if key not in depth_by_player or info["pos_rank"] < depth_by_player[key]["pos_rank"]:
+            depth_by_player[key] = info
+        pool.setdefault((r["team"], info["pos_slot"], info["pos_abb"]), []).append({"gsis_id": gid, **info})
+        by_name.setdefault((r["team"], norm(r["player_name"])), info)
     for k in pool:
         pool[k].sort(key=lambda x: x["pos_rank"])
 
-    rows, team_agg = [], {}
-    for _, r in inj_w.iterrows():
-        status = r["report_status"]
-        if status not in STATUS_WEIGHT:
+    snap_team = snaps.groupby(["team", "player"]).agg(
+        off=("offense_snaps", "sum"), dfn=("defense_snaps", "sum")).reset_index()
+
+    rows, team_agg, unmatched = [], {}, 0
+    for rec in recs:
+        if rec["game"] not in STATUS_WEIGHT:
             continue
-        key = (r["team"], r["gsis_id"])
-        d = depth_by_player.get(key)
-        if not d:
+        d = depth_by_player.get((rec["team"], rec["gsis_id"])) if rec["gsis_id"] else None
+        if d is None:
+            d = by_name.get((rec["team"], norm(rec["player"])))
+        if d is None:
+            unmatched += 1
             continue
-        starter = d["pos_rank"] == 1
-        if not starter:
+        if d["pos_rank"] != 1:
             continue
-        repl = next((p for p in pool.get((r["team"], d["pos_slot"], d["pos_abb"]), [])
+        repl = next((p for p in pool.get((rec["team"], d["pos_slot"], d["pos_abb"]), [])
                      if p["pos_rank"] == 2), None)
-        pos = (r["position"] or "").upper()
+        pos = (rec["position"] or "").upper()
         w = POS_WEIGHTS.get(pos, 0.03)
-        contrib = w * STATUS_WEIGHT[status]
+        contrib = w * STATUS_WEIGHT[rec["game"]]
         snaps_total = 0
         if repl:
-            s = snap_team[(snap_team["team"] == r["team"]) &
-                          (snap_team["player"] == repl["player_name"])]
-            snaps_total = int(s[["off", "dfn"]].to_numpy().sum()) if len(s) else 0
-        team_agg[r["team"]] = team_agg.get(r["team"], 0) + contrib
+            srow = snap_team[(snap_team["team"] == rec["team"]) &
+                             (snap_team["player"] == repl["player_name"])]
+            snaps_total = int(srow[["off", "dfn"]].to_numpy().sum()) if len(srow) else 0
+        team_agg[rec["team"]] = team_agg.get(rec["team"], 0) + contrib
         rows.append({
-            "team": r["team"], "player": r["full_name"], "position": r["position"],
+            "team": rec["team"], "player": rec["player"], "position": rec["position"],
             "depth_rank": d["pos_rank"], "depth_slot": d["pos_name"],
-            "injury": r["report_primary_injury"], "game_status": status,
-            "practice_status": r["practice_status"],
-            "years_exp": exp.get(r["gsis_id"]),
-            "roster_status": rstatus.get(r["gsis_id"]),
+            "injury": rec["injury"], "game_status": rec["game"],
+            "practice_status": rec["practice"],
+            "years_exp": exp.get(rec["gsis_id"]),
+            "roster_status": rstatus.get(rec["gsis_id"]),
             "replacement": repl["player_name"] if repl else None,
             "replacement_years_exp": exp.get(repl["gsis_id"]) if repl else None,
             "replacement_snaps_2026": snaps_total if repl else None,
             "position_weight": w, "attrition_points": round(contrib, 4),
-            "source": "https://www.nfl.com/injuries/",
+            "source": rec["source"],
             "depth_source": "https://www.nfl.com/teams/",
         })
 
     rows.sort(key=lambda x: -x["attrition_points"])
     max_agg = max(team_agg.values()) if team_agg else 1.0
-    team_table = []
     meta = L.load("teams.csv").drop_duplicates("team_abbr").set_index("team_abbr")
-    for team, val in sorted(team_agg.items(), key=lambda kv: -kv[1]):
-        team_rows = [x for x in rows if x["team"] == team]
+    all_teams = sorted(set(ctx["snapshot"]["standings"][i]["team"]
+                           for i in range(len(ctx["snapshot"]["standings"]))))
+    team_table = []
+    for team in sorted(all_teams, key=lambda t: -team_agg.get(t, 0.0)):
+        trows = [x for x in rows if x["team"] == team]
+        val = team_agg.get(team, 0.0)
         team_table.append({
             "team": team,
             "name": meta.loc[team, "team_name"] if team in meta.index else None,
-            "starters_out": sum(1 for x in team_rows if x["game_status"] == "Out"),
-            "starters_doubtful": sum(1 for x in team_rows if x["game_status"] == "Doubtful"),
-            "starters_questionable": sum(1 for x in team_rows if x["game_status"] == "Questionable"),
+            "starters_out": sum(1 for x in trows if x["game_status"] == "Out"),
+            "starters_doubtful": sum(1 for x in trows if x["game_status"] == "Doubtful"),
+            "starters_questionable": sum(1 for x in trows if x["game_status"] == "Questionable"),
             "attrition_points": round(val, 3),
             "attrition_index_0_100": round(100 * val / max_agg, 1) if max_agg else 0.0,
             "backup_experience_avg": (
-                round(float(np.mean([x["replacement_years_exp"] for x in team_rows
+                round(float(np.mean([x["replacement_years_exp"] for x in trows
                                      if x["replacement_years_exp"] is not None])), 1)
-                if any(x["replacement_years_exp"] is not None for x in team_rows) else None),
+                if any(x["replacement_years_exp"] is not None for x in trows) else None),
             "backup_snaps_avg": (
-                round(float(np.mean([x["replacement_snaps_2026"] for x in team_rows
+                round(float(np.mean([x["replacement_snaps_2026"] for x in trows
                                      if x["replacement_snaps_2026"] is not None])), 0)
-                if any(x["replacement_snaps_2026"] is not None for x in team_rows) else None),
-            "source": "https://www.nfl.com/injuries/",
+                if any(x["replacement_snaps_2026"] is not None for x in trows) else None),
+            "source": source_url,
         })
 
     payload = {
         "generated_at": L.now(),
         "week": week,
+        "source": {"label": source_label, "url": source_url, "warning": source_note,
+                   "official_counts": official.get("counts") if official else None,
+                   "official_status": official.get("status") if official else None},
         "depth_chart_timestamp": str(dt),
         "counts": {
-            "injury_rows_this_week": int(len(inj_w)),
+            "injury_records": int(len(recs)),
             "starters_impacted": int(len(rows)),
             "teams_with_starter_out": int(sum(1 for t in team_table if t["starters_out"] > 0)),
-            "players_matched_to_depth_chart": int(len(rows)),
+            "records_not_matched_to_depth_chart": int(unmatched),
         },
         "method": {
-            "depth_rank": "NFL.com depth charts as mirrored by nflverse (pos_rank 1 = starter).",
+            "depth_rank": "Depth chart mirrored weekly (pos_rank 1 = listed starter).",
             "attrition_formula": ("sum over unavailable starters of position_weight x status_weight; "
                                   "status weights Out=1.0, Doubtful=0.7, Questionable=0.25. Index is "
                                   "rescaled 0-100 against the worst team this week."),
             "position_weights": POS_WEIGHTS,
             "limits": [
-                "Injury status is the official game-status column; it does not prove who starts.",
-                "Depth charts are a weekly snapshot, not a snap-count projection.",
-                "Practice-squad elevations and game-day inactive lists are not modelled separately.",
+                "Game status is the official designation, not proof of who starts or plays.",
+                "Depth charts are a weekly snapshot; practice-squad elevations are not modelled.",
+                "Listed players who were not matched to a depth-chart row are counted, not guessed.",
                 "The attrition index is a modelling assumption, not an official NFL metric.",
             ],
         },
@@ -868,16 +920,17 @@ def props(ctx):
 # ---------------------------------------------------------------- G. verification
 @stage("G verification against official pages")
 def verification(ctx):
-    """Line-by-line comparison of our computed rows against hand-transcribed nfl.com rows.
+    """Three-way check of the numbers this site publishes.
 
-    The fixtures in data/verified/ were copied from nfl.com on 2026-11-12 by the agent and
-    are the only human-entered data in the project. Anything that does not match is listed
-    as an irregularity instead of being quietly reconciled.
+    A: computed standings vs hand-transcribed nfl.com standings.
+    B: scraped official injury report vs the hand-transcribed sample (proves the scraper).
+    C: mirrored feed vs the scraped official report (proves the mirror's completeness).
+    Anything that fails is published on Flagged for Review with the source link.
     """
     out = {"generated_at": L.now(), "checks": [], "irregularities": []}
     root = L.ROOT
 
-    # --- 1. standings
+    # A. standings
     path = os.path.join(root, "data", "verified", "official_standings_2026.json")
     if os.path.exists(path):
         off = json.load(open(path))
@@ -893,8 +946,7 @@ def verification(ctx):
             fields = {"w": c["w"], "l": c["l"], "t": c["t"], "pf": c["pf"], "pa": c["pa"]}
             diffs = {k: {"nfl": o[k], "computed": fields[k]}
                      for k in fields if int(o[k]) != int(fields[k])}
-            rows.append({"team": o["team"], "matched": not diffs,
-                         "nfl": fields if not diffs else {k: o[k] for k in fields},
+            rows.append({"team": o["team"], "matched": not diffs, "nfl": {k: o[k] for k in fields},
                          "computed": fields, "diffs": diffs or None})
             if diffs:
                 mism.append({"team": o["team"], "diffs": diffs})
@@ -903,74 +955,116 @@ def verification(ctx):
             "source": off["source_url"],
             "rows_checked": len(off["rows"]),
             "rows_matched": sum(1 for r in rows if r["matched"]),
-            "mismatches": len(mism),
-            "detail": rows,
-        })
+            "mismatches": len(mism), "detail": rows})
         if mism:
             out["irregularities"].append(
                 {"id": "V1", "area": "standings",
                  "issue": f"{len(mism)} of {len(off['rows'])} team records differ from nfl.com",
                  "examples": mism[:10], "source": off["source_url"]})
 
-    # --- 2. injury report sample
+    # B. scraped official report vs hand sample
+    official = {}
+    try:
+        official = json.load(open(os.path.join(L.OUT, "official_injuries.json")))
+    except Exception:  # noqa: BLE001
+        official = {}
     path = os.path.join(root, "data", "verified", "official_injuries_2026_w10_sample.json")
-    if os.path.exists(path):
+    if os.path.exists(path) and official.get("status") == "ok":
         off = json.load(open(path))
-        inj = L.load("injuries_2026.csv")
-        wk = int(inj["week"].max())
-        inj_w = inj[inj["week"] == wk]
-        rows, mism, missing = [], [], []
+        rows, mism = [], []
         for o in off["rows"]:
-            match = inj_w[(inj_w["team"] == o["team"]) & (inj_w["full_name"] == o["player"])]
-            if match.empty:
-                rows.append({**o, "feed": "row not present", "matched": False})
-                missing.append({**o, "reason": "not present in mirrored feed"})
+            cands = [r for r in official["rows"]
+                     if r.get("team") == o["team"] and r.get("player") == o["player"]]
+            if not cands:
+                rows.append({**o, "matched": False, "detail": "row absent from scrape"})
+                mism.append({"team": o["team"], "player": o["player"], "detail": "absent"})
                 continue
-            m = match.iloc[0]
-            got = {
-                "position": m["position"],
-                "injury": None if pd.isna(m["report_primary_injury"]) else m["report_primary_injury"],
-                "practice": None if pd.isna(m["practice_status"]) else m["practice_status"],
-                "game": None if pd.isna(m["report_status"]) else m["report_status"],
-            }
-            diffs = {k: {"nfl": o[k], "feed": got[k]}
-                     for k in ("position", "injury", "practice", "game")
-                     if (o[k] or None) != (got[k] or None)}
-            rows.append({**o, "feed": got, "matched": not diffs, "diffs": diffs or None})
+            got = cands[0]
+            diffs = {}
+            for k, key in (("position", "position"), ("injury", "injury"),
+                           ("practice", "practice"), ("game", "game")):
+                a = (o.get(k) or None)
+                b = (got.get(key) or None)
+                if isinstance(a, str):
+                    a = a.strip()
+                if isinstance(b, str):
+                    b = b.strip()
+                if a != b:
+                    diffs[k] = {"nfl_fixture": a, "scraped": b}
+            rows.append({**o, "matched": not diffs, "scraped": got, "diffs": diffs or None})
             if diffs:
                 mism.append({"team": o["team"], "player": o["player"], "diffs": diffs})
         out["checks"].append({
-            "name": f"2026 week {wk} injury report sample (4 clubs)",
-            "source": off["source_url"],
+            "name": "Scraped official injury report vs hand-transcribed sample",
+            "source": official["source_url"],
             "rows_checked": len(off["rows"]),
             "rows_matched": sum(1 for r in rows if r["matched"]),
-            "mismatches": len(mism),
-            "detail": rows,
-        })
-        if mism or missing:
+            "mismatches": len(mism), "detail": rows})
+        if mism:
             out["irregularities"].append(
-                {"id": "V2", "area": "injury feed",
-                 "issue": (f"{len(mism)} field mismatches and {len(missing)} missing rows in the "
-                           "sampled clubs"),
-                 "examples": (mism + missing)[:10], "source": off["source_url"]})
+                {"id": "V2", "area": "injury scrape",
+                 "issue": f"{len(mism)} of {len(off['rows'])} sampled rows differ from the scrape",
+                 "examples": mism[:8], "source": official["source_url"]})
 
-    # --- 3. things this project cannot verify from an official league source
+    # C. mirrored feed vs scraped official report
+    if official.get("status") == "ok" and official.get("week"):
+        try:
+            inj = L.load("injuries_2026.csv")
+            wk = int(official["week"])
+            feed = inj[inj["week"] == wk]
+            off_index = {(r.get("team"), (r.get("player") or "").strip()): r
+                         for r in official["rows"]}
+            feed_index = {(r["team"], r["full_name"]): r for _, r in feed.iterrows()}
+            matched = 0
+            status_mismatch = 0
+            for k, r in off_index.items():
+                f = feed_index.get(k)
+                if f is None:
+                    continue
+                matched += 1
+                fa = None if pd.isna(f["report_status"]) else f["report_status"]
+                if fa != (r.get("game") or None):
+                    status_mismatch += 1
+            out["checks"].append({
+                "name": f"Mirrored feed coverage vs official report, week {wk}",
+                "source": official["source_url"],
+                "rows_checked": len(off_index),
+                "rows_matched": matched,
+                "mismatches": len(off_index) - matched,
+                "detail": [{
+                    "team": "coverage summary", "player": "official rows present in feed",
+                    "position": f"{matched}/{len(off_index)}",
+                    "matched": matched == len(off_index),
+                    "feed": {"game": f"{status_mismatch} game-status disagreements"},
+                }],
+            })
+            if matched < len(off_index):
+                out["irregularities"].append(
+                    {"id": "V3", "area": "mirrored injury feed",
+                     "issue": (f"The mirrored feed has {matched} of {len(off_index)} official "
+                               f"week {wk} rows ({status_mismatch} status disagreements)."),
+                     "examples": [], "source": official["source_url"]})
+        except Exception as exc:  # noqa: BLE001
+            print(f"coverage check skipped: {exc}")
+
     out["unverifiable"] = [
         {"item": "Closing spread/total/moneylines",
-         "why": ("The NFL does not publish betting lines; nflverse mirrors consensus closing "
-                 "lines. No official league source exists, and no second book-level source was "
-                 "reachable from the build environment."),
-         "handling": "Used for backtests only; labelled as consensus closing lines."},
-        {"item": "Player prop prices/lines",
-         "why": "No official source; no licensed odds feed connected.",
-         "handling": "Own prop lines published as model-only, market columns left blank."},
-        {"item": "Depth chart order",
-         "why": ("nfl.com publishes depth charts per club; the mirrored copy is a weekly snapshot "
-                 "and does not guarantee who starts or plays."),
-         "handling": "Starter label used only as a modelling assumption, flagged."},
-        {"item": "Week 10 kickoff times",
-         "why": "Not fetched line-by-line from the schedule page in this run.",
-         "handling": "Fixture table shows date only; time marked unverified."},
+         "why": ("The NFL does not publish betting lines; the mirror carries consensus closing "
+                 "numbers. No league source and no second book-level source is reachable from "
+                 "the build environment."),
+         "handling": "Used for backtests and labelled as consensus closing lines, never as a book quote."},
+        {"item": "Player prop prices",
+         "why": "No official source and no licensed feed connected.",
+         "handling": "Own prop lines published model-only; market columns left blank."},
+        {"item": "Who starts",
+         "why": "Depth charts are weekly snapshots; game-day inactives are not ingested yet.",
+         "handling": "Starter = depth rank 1, stated as an assumption and flagged."},
+        {"item": "Kickoff times for unplayed games",
+         "why": "Not read line-by-line from the schedule page in this run.",
+         "handling": "Fixtures show the date; time is left unverified."},
+        {"item": "Weather for unplayed games",
+         "why": "Temperature and wind are empty before kickoff.",
+         "handling": "Totals ignore forecast weather; flagged."},
     ]
     L.write_json("verification.json", jclean(out))
     return out
