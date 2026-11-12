@@ -49,17 +49,16 @@ def nicknames() -> dict[str, str]:
 def parse(html: str) -> dict:
     soup = BeautifulSoup(html, "lxml")
     text = soup.get_text(" ", strip=True)
-    m = re.search(r"WEEK\s*(\d+)", text[:4000], re.I)
+    m = re.search(r"WEEK\s*(\d+)", text[:6000], re.I)
     week = int(m.group(1)) if m else None
-    season_match = re.search(r"(20\d{2})\s*NFL\s*Injury Report", text[:4000], re.I)
+    season_match = re.search(r"(20\d{2})\s*NFL\s*Injury Report", text[:6000], re.I)
 
     nicks = nicknames()
     marker = {k: v for k, v in nicks.items() if len(k) > 3}
 
-    # walk the document in order, remembering the last club nickname seen
     current = None
     rows = []
-    seen_tables = 0
+    tables = 0
     for el in soup.find_all(True):
         if el.name in ("span", "a", "h2", "h3", "h4", "div", "p", "button"):
             own = el.get_text(" ", strip=True)
@@ -67,52 +66,48 @@ def parse(html: str) -> dict:
                 current = marker[own.lower()]
         if el.name != "table":
             continue
-        try:
-            dfs = pd.read_html(str(el))
-        except ValueError:
+        trs = el.find_all("tr")
+        if not trs:
             continue
-        if not dfs:
+        header = [c.get_text(" ", strip=True).lower() for c in trs[0].find_all(["th", "td"])]
+        if not any("player" in h for h in header) or not any("status" in h for h in header):
             continue
-        df = dfs[0]
-        cols = [str(c).strip().lower() for c in df.columns]
-        if not any("player" in c for c in cols):
-            continue
-        if not any("status" in c for c in cols):
-            continue
-        seen_tables += 1
-        df.columns = [str(c).strip() for c in df.columns]
-        links = {}
-        for a in el.find_all("a", href=True):
-            if "/players/" in a["href"]:
-                links[a.get_text(strip=True)] = "https://www.nfl.com" + a["href"].split("?")[0]
-        for _, r in df.iterrows():
-            def g(*names):
-                for n in names:
-                    for c in df.columns:
-                        if c.lower().replace(" ", "") == n:
-                            v = r[c]
-                            if isinstance(v, str):
-                                v = v.strip()
-                            if pd.isna(v) if not isinstance(v, str) else not v:
-                                continue
-                            return v
-                return None
-            player = g("player")
-            if not isinstance(player, str):
+        tables += 1
+
+        def col(name):
+            for i, h in enumerate(header):
+                if h.replace(" ", "") == name:
+                    return i
+            return None
+
+        i_player, i_pos = col("player"), col("position")
+        i_injury, i_practice, i_game = col("injuries"), col("practicestatus"), col("gamestatus")
+        for tr in trs[1:]:
+            cells = [c.get_text(" ", strip=True) for c in tr.find_all(["td", "th"])]
+            if i_player is None or len(cells) <= i_player:
                 continue
+            player = cells[i_player]
+            if not player:
+                continue
+            link = None
+            a = tr.find("a", href=True)
+            if a and "/players/" in a["href"]:
+                link = "https://www.nfl.com" + a["href"].split("?")[0]
+            def pick(i):
+                return cells[i] if i is not None and i < len(cells) and cells[i] else None
             rows.append({
                 "team": current,
                 "player": player,
-                "position": g("position", "pos"),
-                "injury": g("injuries", "injury"),
-                "practice": g("practicestatus"),
-                "game": g("gamestatus"),
-                "player_url": links.get(player),
+                "position": pick(i_pos),
+                "injury": pick(i_injury),
+                "practice": pick(i_practice),
+                "game": pick(i_game),
+                "player_url": link,
             })
     return {
         "week": week,
         "season": int(season_match.group(1)) if season_match else None,
-        "tables_parsed": seen_tables,
+        "tables_parsed": tables,
         "rows": rows,
     }
 

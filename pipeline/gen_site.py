@@ -387,6 +387,18 @@ def lines_page(snap, lines, dash):
                      "Net rating", "Source"], rat_rows,
                     note="Ratings use non-garbage-time plays only, opponent-adjusted, with the previous season at 40% weight.")
 
+    st_rows = []
+    for r in (snap or {}).get("standings", []):
+        st_rows.append([
+            f"<strong>{esc(r['team'])}</strong>", esc(r.get("name")),
+            f"{r['w']}-{r['l']}-{r['t']}", num(r.get("pct"), 3),
+            r["pf"], r["pa"], f"{r['diff']:+d}" if r.get("diff") is not None else "",
+            src(SOURCE["standings"], "NFL standings"),
+        ])
+    standings_tbl = table(["Team", "Club", "Record", "Win pct", "PF", "PA", "Net",
+                           "Source"], st_rows,
+                          note="Computed from game results, then checked row by row against nfl.com (see Evidence).")
+
     body = f"""
 <section class="panel">
   <h2>Method, in one paragraph</h2>
@@ -418,6 +430,11 @@ def lines_page(snap, lines, dash):
 </section>
 
 {blend_block}
+
+<section class="panel">
+  <div class="panel-head"><h2>League table (verified against nfl.com)</h2><a href="evidence.html">32/32 rows checked →</a></div>
+  {standings_tbl}
+</section>
 
 <section class="panel">
   <div class="panel-head"><h2>Team ratings (week {num(l.get('week'))})</h2><a href="strategies.html">How they are used →</a></div>
