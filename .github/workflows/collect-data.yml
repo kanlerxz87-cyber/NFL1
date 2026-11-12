@@ -52,18 +52,24 @@ jobs:
       - name: Report injury source actually used (including fallback)
         if: always()
         run: python pipeline/report_ingestion.py
+      # Session 3d5c5e2d-nfl1: re-render the published pages from the data just built. Before this
+      # step, a data refresh changed data/model/*.json but never the pages that show it.
+      - name: Re-render the published pages from the refreshed data
+        run: python pipeline/gen_site.py
+      - name: Check the committed-site rules would pass on the rendered pages
+        run: python tools/check_committed_site.py
       - name: Publish generator log
         if: always()
         run: |
           ls -la data/model/ || true
-      - name: Commit refreshed data
+      - name: Commit refreshed data and pages
         run: |
           git config user.name "nfl1-data-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/model pipeline 2>/dev/null || true
+          git add data/model pipeline index.html pages 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "No data changes"
           else
-            git commit -m "data: refresh model outputs from nflverse releases [skip ci]"
+            git commit -m "data: refresh model outputs and re-render pages from nflverse releases [skip ci]"
             git push origin HEAD:${{ github.ref_name }}
           fi
