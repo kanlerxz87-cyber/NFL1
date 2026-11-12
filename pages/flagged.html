@@ -10,11 +10,17 @@
 <header>
   <div class="brand">NFL1 — NFL Analytics Dashboard</div>
   <nav>
-    <a href="../index.html">Dashboard</a>
+    <a href="../index.html">Overview</a>
     <a href="executive-summary.html">Executive Summary</a>
     <a href="teams.html">Teams</a>
     <a href="standings.html">Standings</a>
     <a href="injuries.html">Injuries</a>
+    <a href="availability.html">Availability</a>
+    <a href="data.html">Verified Data</a>
+    <a href="lines.html">Own Lines</a>
+    <a href="analysis.html">Validation & Correlation</a>
+    <a href="decisions.html">Decision Register</a>
+    <a href="verified.html">Verified Artifacts</a>
     <a href="evidence.html">Evidence</a>
     <a href="models.html">Strategy Lab</a>
     <a href="strategies.html">Strategies</a>
@@ -37,8 +43,19 @@
       <tr><td>F3</td><td>Player stats not yet captured.</td><td>No stats table in repo.</td><td><a href="https://www.nfl.com/stats/" target="_blank">nfl.com/stats</a></td><td><span class="badge warn">Missing</span></td></tr>
       <tr><td>F4</td><td>Depth chart / starter vs backup not captured.</td><td>Needed for deficiency tracking.</td><td><a href="https://www.nfl.com/teams/" target="_blank">nfl.com/teams</a></td><td><span class="badge warn">Missing</span></td></tr>
       <tr><td>F5</td><td>Standings snapshot is point-in-time (2026-11-12).</td><td>Will change weekly.</td><td><a href="https://www.nfl.com/standings/league/2026/reg" target="_blank">nfl.com standings</a></td><td><span class="badge ok">Verified (dated)</span></td></tr>
-      <tr><td>F6</td><td>Standings show Chargers 0-8 and some unusual records.</td><td>Possible synthetic/simulated 2026 season data on nfl.com; verify before betting use.</td><td><a href="https://www.nfl.com/standings/league/2026/reg" target="_blank">nfl.com standings</a></td><td><span class="badge danger">Irregularity</span></td></tr>
+      <tr><td>F6</td><td>Standings include an unusual record (Chargers 0-8).</td><td>Value is exactly as published by the official standings page; no evidence of anything irregular was found. Retained as a neutral note to reconcile against the game schedule before use. The earlier "possibly synthetic" speculation was unsupported and has been removed.</td><td><a href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">nfl.com standings</a> · <a href="https://www.nfl.com/schedules/2026/by-week/week-1" target="_blank" rel="noopener">nfl.com schedule</a></td><td><span class="badge ok">Verified (unusual)</span></td></tr>
+      <tr><td>F15</td><td>Reference row links are not field-matched on older pages.</td><td>On some pre-existing rows the "source" cell is a general entry point (e.g. a stats landing page) rather than the specific page for that value. Reported by the independent review; data rows added by this session carry the exact URL.</td><td><a href="https://www.nfl.com/stats/" target="_blank" rel="noopener">nfl.com/stats</a> · <a href="review.html">review register</a></td><td><span class="badge warn">Needs review</span></td></tr>
+      <tr><td>F16</td><td>Two older pages still describe the site as having no imported data.</td><td>Stale wording left by an earlier session; the verified tables now exist. Not silently rewritten here because those pages belong to another session's scope.</td><td><a href="evidence.html">Evidence</a> · <a href="review.html">Review</a> · <a href="data.html">Verified Data</a></td><td><span class="badge warn">Stale wording</span></td></tr>
+      <tr><td>F17</td><td>Strategy gating thresholds are provisional.</td><td>"100+ bets" and a nominal p &lt; 0.05 are design choices, not validated requirements. This session's own gate uses a paired bootstrap plus Holm correction and still reports failures explicitly.</td><td><a href="strategies.html">Strategies</a> · <a href="analysis.html">Validation</a></td><td><span class="badge warn">Provisional</span></td></tr>
     </tbody>
+      <tr><td>F7</td><td>No market/closing-line price data exists in the repository or was reachable.</td><td>Edge, ROI, against-the-spread accuracy and realised P/L are therefore unmeasurable — every such cell is blank.</td><td>Needs a licensed, timestamped odds source. Reference (schedule only, not odds): <a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">nfl.com week 10</a></td><td><span class="badge danger">Blocking</span></td></tr>
+      <tr><td>F8</td><td>Own-line model failed its validation gate.</td><td>Forward test: margin MAE 10.93 vs 10.62 for home-field-only; 95% CI on the difference [-0.23, +0.86]; P(model better) 13.3%.</td><td><a href="lines.html">Own Lines</a> · <a href="analysis.html">Validation</a></td><td><span class="badge danger">Published as failing</span></td></tr>
+      <tr><td>F9</td><td>Depth order / 2nd-3rd-4th string is unknown for all 32 teams.</td><td>The NFL publishes no depth charts; <a href="https://www.nfl.com/teams/washington-commanders/depth-chart" target="_blank" rel="noopener">depth-chart URL returns 404</a> (checked 2026-11-12). Replacement seniority is left blank, not guessed.</td><td><a href="https://www.nfl.com/teams/" target="_blank" rel="noopener">nfl.com/teams</a></td><td><span class="badge warn">Unverified</span></td></tr>
+      <tr><td>F10</td><td>Week 10 injury capture is partial by design.</td><td>Only 6 players carry an official <em>game</em> status; players listed with practice status only are not asserted available or out. Four teams explicitly report no injuries.</td><td><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com/injuries</a></td><td><span class="badge warn">Partial scope</span></td></tr>
+      <tr><td>F11</td><td>Quarterback changes are verified only at headline level.</td><td>NFL.com headlines state the changes (Miami, Seattle, Arizona, Cleveland, Baltimore) but no official depth chart confirms ordering; performance impact is unmeasured.</td><td><a href="https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start" target="_blank" rel="noopener">Miami example</a> · <a href="availability.html">Availability</a></td><td><span class="badge warn">Headline-level</span></td></tr>
+      <tr><td>F12</td><td>Player-prop and prop-combo lines are not built.</td><td>No row-level official player usage or yardage data was obtainable; estimating distributions would fabricate inputs.</td><td><a href="https://www.nfl.com/stats/" target="_blank" rel="noopener">nfl.com/stats</a> (entry point only)</td><td><span class="badge danger">Blocked</span></td></tr>
+      <tr><td>F13</td><td>Home-field advantage is not supported by this season's verified data.</td><td>Home teams won 49.6% of decided games (95% CI 41.2%–58.1%, n=135) and the fitted HFA is slightly negative. A normal home edge should not be assumed.</td><td><a href="analysis.html">Validation &amp; Correlation</a></td><td><span class="badge warn">Sample-limited</span></td></tr>
+      <tr><td>F14</td><td>Bulk data ingestion is blocked in the build environment.</td><td>Outbound HTTP from the sandbox reaches only github.com; release-assets.githubusercontent.com fails at TLS. Official pages were read through the agent page-fetch channel, so no automated refresh exists yet.</td><td><a href="data.html">Verified Data</a> (method note)</td><td><span class="badge warn">Environment limit</span></td></tr>
   </table>
   </div>
 </main>

@@ -11,11 +11,17 @@
 <header class="top">
   <a class="brand" href="index.html">NFL <span>Decision Lab</span></a>
   <nav>
-    <a class="active" href="index.html">Overview</a>
+    <a href="index.html" class="active">Overview</a>
     <a href="pages/executive-summary.html">Executive Summary</a>
     <a href="pages/teams.html">Teams</a>
     <a href="pages/standings.html">Standings</a>
     <a href="pages/injuries.html">Injuries</a>
+    <a href="pages/availability.html">Availability</a>
+    <a href="pages/data.html">Verified Data</a>
+    <a href="pages/lines.html">Own Lines</a>
+    <a href="pages/analysis.html">Validation & Correlation</a>
+    <a href="pages/decisions.html">Decision Register</a>
+    <a href="pages/verified.html">Verified Artifacts</a>
     <a href="pages/evidence.html">Evidence</a>
     <a href="pages/models.html">Strategy Lab</a>
     <a href="pages/strategies.html">Strategies</a>
@@ -67,6 +73,25 @@
 
   <section class="section">
     <div class="section-head">
+      <div><p class="eyebrow">VERIFICATION UPGRADE · 2026-11-12</p><h2>Full season captured and reconciled</h2></div>
+      <a href="pages/data.html">Verified data →</a>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Result</th><th>Detail</th><th>Why it matters</th><th>Where</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge ok">136/136 games</span></td><td>Every completed 2026 game (weeks 1–9) captured from official NFL week pages.</td><td>All 32 teams' W-L-T, points for and points against reproduce the official standings exactly, so no score is missing or mistyped.</td><td><a href="pages/data.html">Verified Data</a></td></tr>
+          <tr><td><span class="badge warn">Model fails gate</span></td><td>Own lines were generated for all 14 Week 10 games, then forward-tested.</td><td>Margin error 10.93 vs 10.62 for a home-field-only baseline; 13.3% chance the model is better. Published, not recommended.</td><td><a href="pages/lines.html">Own Lines</a></td></tr>
+          <tr><td><span class="badge warn">Luck not excluded</span></td><td>Best strategy hits 60.7% straight up, but Holm-adjusted p = 0.063 and Brier skill is negative.</td><td>Winner-picking accuracy is not the same as beating a price; no market price data exists to test the latter.</td><td><a href="pages/analysis.html">Validation</a></td></tr>
+          <tr><td><span class="badge ok">Correlations measured</span></td><td>Opponent quality ↔ points scored r = +0.386; margin ↔ total r = -0.161; home win rate 49.6%.</td><td>Gives real numbers to size parlays with, instead of assuming legs are independent.</td><td><a href="pages/analysis.html">Correlation</a></td></tr>
+          <tr><td><span class="badge warn">Depth order blocked</span></td><td>Official NFL depth charts are not published (depth-chart URL returns 404).</td><td>Injury statuses are verified, but "2nd/3rd-string" replacement chains cannot be sourced, so they stay blank.</td><td><a href="pages/availability.html">Availability</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
       <div><p class="eyebrow">DECISION CHECKLIST</p><h2>Before any wager or model claim</h2></div>
       <a href="pages/evidence.html">Full evidence register →</a>
     </div>
@@ -74,10 +99,10 @@
       <table>
         <thead><tr><th>Question to resolve</th><th>Evidence required</th><th>Current state</th><th>Official source</th></tr></thead>
         <tbody>
-          <tr><td>What exact market, book, line and timestamp are being evaluated?</td><td>Market-level quote history including price, limits if available, and capture time</td><td><span class="tag warn">Missing</span></td><td><a href="https://operations.nfl.com/gameday/nfl-schedule/">NFL schedule</a></td></tr>
-          <tr><td>Are injuries and likely replacements confirmed?</td><td>Dated official injury report plus roster/depth chart evidence; role and snap context</td><td><span class="tag warn">Partial</span></td><td><a href="https://www.nfl.com/injuries/">NFL injury reports</a></td></tr>
-          <tr><td>Does signal beat the market after vig, out of sample?</td><td>Locked, time-stamped predictions; closing comparison and realized settled returns</td><td><span class="tag warn">Not tested</span></td><td><a href="https://operations.nfl.com/gameday/">NFL Football Operations</a></td></tr>
-          <tr><td>Is the apparent edge robust rather than luck?</td><td>Sample size, uncertainty intervals, multiple-testing adjustment, regime checks</td><td><span class="tag warn">Unknown</span></td><td><a href="pages/models.html">Validation protocol</a></td></tr>
+          <tr><td>What exact market, book, line and timestamp are being evaluated?</td><td>Market-level quote history including price, limits if available, and capture time</td><td><span class="badge warn">Missing</span></td><td><a href="https://www.nfl.com/schedules/">NFL schedule</a></td></tr>
+          <tr><td>Are injuries and likely replacements confirmed?</td><td>Dated official injury report plus roster/depth chart evidence; role and snap context</td><td><span class="badge warn">Partial</span></td><td><a href="https://www.nfl.com/injuries/">NFL injury reports</a></td></tr>
+          <tr><td>Does signal beat the market after vig, out of sample?</td><td>Locked, time-stamped predictions; closing comparison and realized settled returns</td><td><span class="badge warn">Not tested</span></td><td><a href="https://www.nfl.com/schedules/">NFL Football Operations</a></td></tr>
+          <tr><td>Is the apparent edge robust rather than luck?</td><td>Sample size, uncertainty intervals, multiple-testing adjustment, regime checks</td><td><span class="badge warn">Unknown</span></td><td><a href="pages/models.html">Validation protocol</a></td></tr>
         </tbody>
       </table>
     </div>
