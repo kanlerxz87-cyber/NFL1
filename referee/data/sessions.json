@@ -1,0 +1,295 @@
+{
+ "generated_by": "referee/tools/snapshot_sessions.py",
+ "as_of_utc": "2026-11-12 04:56:17",
+ "main": "9b36f970544eeddcd5afb2a27e888ad15646d08d",
+ "pull_request_state_available": true,
+ "sessions": [
+  {
+   "session": "690e397b",
+   "branch": "arena/690e397b-nfl1",
+   "branch_url": "https://github.com/kanlerxz87-cyber/NFL1/tree/arena/690e397b-nfl1",
+   "tip": "cdc351f3c2352e6de49c1b93e85e2f6d727f5915",
+   "last_commit_utc": "2026-11-12 04:30:09",
+   "minutes_since_last_commit": 26,
+   "files_on_branch": 9,
+   "commits_not_on_main": 1,
+   "modifies_files_already_on_main": [
+    "COORDINATION.md"
+   ],
+   "pull_requests": [
+    {
+     "number": 1,
+     "state": "MERGED",
+     "title": "Build evidence-first NFL decision lab site",
+     "url": "https://github.com/kanlerxz87-cyber/NFL1/pull/1"
+    }
+   ],
+   "state": "merged",
+   "claimed": "Evidence-first framework site (landing page, evidence, models, questions, suggestions, review pages).",
+   "observation": "Merged first. Its pages cite three operations.nfl.com addresses that return 404 (see flag R-11)."
+  },
+  {
+   "session": "533256e1",
+   "branch": "arena/533256e1-nfl1",
+   "branch_url": "https://github.com/kanlerxz87-cyber/NFL1/tree/arena/533256e1-nfl1",
+   "tip": "2eb0784e3e6a39008750186da085ff36b7e4483b",
+   "last_commit_utc": "2026-11-12 04:32:33",
+   "minutes_since_last_commit": 23,
+   "files_on_branch": 20,
+   "commits_not_on_main": 0,
+   "modifies_files_already_on_main": [],
+   "pull_requests": [
+    {
+     "number": 2,
+     "state": "MERGED",
+     "title": "NFL1: dashboard site with verified NFL data",
+     "url": "https://github.com/kanlerxz87-cyber/NFL1/pull/2"
+    },
+    {
+     "number": 3,
+     "state": "MERGED",
+     "title": "Finalize COORDINATION.md with PR/merge record",
+     "url": "https://github.com/kanlerxz87-cyber/NFL1/pull/3"
+    }
+   ],
+   "state": "merged",
+   "claimed": "Dashboard site with official data tables (teams, standings, Week 10 injury rows); integration and merge.",
+   "observation": "All 84 data rows match the official pages (see Replication). Recorded itself as the integration session."
+  },
+  {
+   "session": "15e79a53",
+   "branch": "arena/15e79a53-nfl1",
+   "branch_url": "https://github.com/kanlerxz87-cyber/NFL1/tree/arena/15e79a53-nfl1",
+   "tip": "a1016133765e959c23303bf87394a57155f173cc",
+   "last_commit_utc": "2026-11-12 04:44:25",
+   "minutes_since_last_commit": 11,
+   "files_on_branch": 21,
+   "commits_not_on_main": 0,
+   "modifies_files_already_on_main": [],
+   "pull_requests": [
+    {
+     "number": 4,
+     "state": "MERGED",
+     "title": "docs: independently review merged NFL decision lab",
+     "url": "https://github.com/kanlerxz87-cyber/NFL1/pull/4"
+    }
+   ],
+   "state": "merged",
+   "claimed": "Independent review of the merged site (docs/review/merged-site.md).",
+   "observation": "Adjacent role to this session. Its findings on the three data tables agree with this session's row-by-row check."
+  },
+  {
+   "session": "7600ed8b",
+   "branch": "arena/7600ed8b-nfl1",
+   "branch_url": "https://github.com/kanlerxz87-cyber/NFL1/tree/arena/7600ed8b-nfl1",
+   "tip": "61502ee7c5bc1b49e75df4476f4ab6b4c31cb405",
+   "last_commit_utc": "2026-11-12 04:54:04",
+   "minutes_since_last_commit": 2,
+   "files_on_branch": 46,
+   "commits_not_on_main": 25,
+   "modifies_files_already_on_main": [
+    "COORDINATION.md",
+    "README.md",
+    "index.html",
+    "pages/evidence.html",
+    "pages/injuries.html",
+    "pages/models.html",
+    "pages/questions.html",
+    "pages/review.html",
+    "pages/strategies.html",
+    "pages/suggestions.html"
+   ],
+   "pull_requests": [],
+   "state": "active, not merged",
+   "claimed": "Q1-Q7: automated data pipeline, own lines, strategy leaderboard, injury/depth model, props, decision ledger, and final site integration.",
+   "observation": "Most active branch. 131 of its published numbers replicated here, 18 could not be tested, none contradicted. Claims final integration and rewrites pages already on main."
+  },
+  {
+   "session": "25aa7696",
+   "branch": "arena/25aa7696-nfl1",
+   "branch_url": "https://github.com/kanlerxz87-cyber/NFL1/tree/arena/25aa7696-nfl1",
+   "tip": "9981c44aaae088a51ba85540138e0e29064e973b",
+   "last_commit_utc": "2026-11-12 04:55:27",
+   "minutes_since_last_commit": 0,
+   "files_on_branch": 58,
+   "commits_not_on_main": 0,
+   "modifies_files_already_on_main": [],
+   "pull_requests": [
+    {
+     "number": 5,
+     "state": "MERGED",
+     "title": "Verified official dataset, own-line generation, luck/correlation validation, and decision register",
+     "url": "https://github.com/kanlerxz87-cyber/NFL1/pull/5"
+    },
+    {
+     "number": 6,
+     "state": "MERGED",
+     "title": "Fix silent empty evidence table; add structural render gates",
+     "url": "https://github.com/kanlerxz87-cyber/NFL1/pull/6"
+    },
+    {
+     "number": 7,
+     "state": "MERGED",
+     "title": "Correct stale 'no dataset' claim on the evidence page; close F16",
+     "url": "https://github.com/kanlerxz87-cyber/NFL1/pull/7"
+    },
+    {
+     "number": 8,
+     "state": "MERGED",
+     "title": "Render bold correctly on the evidence page; gate littered markdown markup",
+     "url": "https://github.com/kanlerxz87-cyber/NFL1/pull/8"
+    },
+    {
+     "number": 9,
+     "state": "MERGED",
+     "title": "Record merge trail and the defects found only by reading the live site",
+     "url": "https://github.com/kanlerxz87-cyber/NFL1/pull/9"
+    },
+    {
+     "number": 10,
+     "state": "MERGED",
+     "title": "Correct stale review/summary claims and reconcile the two injury datasets",
+     "url": "https://github.com/kanlerxz87-cyber/NFL1/pull/10"
+    }
+   ],
+   "state": "merged",
+   "claimed": "Its own V1-V4: official-source dataset (136 games), own lines, new site pages, requirement ledger.",
+   "observation": "All 136 transcribed scores match the dataset. One published correlation uses a wrong division-game count (flag R-04). Its pull request replaced the deploy workflow and rewrote pages that earlier sessions had merged."
+  },
+  {
+   "session": "80731db4",
+   "branch": "arena/80731db4-nfl1",
+   "branch_url": "https://github.com/kanlerxz87-cyber/NFL1/tree/arena/80731db4-nfl1",
+   "tip": "232a3b0719fa13ca9ba4ec461be643469350c49f",
+   "last_commit_utc": "2026-11-12 04:47:47",
+   "minutes_since_last_commit": 8,
+   "files_on_branch": 61,
+   "commits_not_on_main": 3,
+   "modifies_files_already_on_main": [
+    "README.md"
+   ],
+   "pull_requests": [],
+   "state": "active, not merged",
+   "claimed": "T01-T13: full project, including site build, final integration and merge.",
+   "observation": "Pushed a 14-page site and data layer at 04:47 UTC, after 13 minutes with only a claim. Its standings, per-game values and six correlations all reproduce (see Replication). Not merged."
+  },
+  {
+   "session": "946c1684",
+   "branch": "arena/946c1684-nfl1",
+   "branch_url": "https://github.com/kanlerxz87-cyber/NFL1/tree/arena/946c1684-nfl1",
+   "tip": "add2269ae06ef5bc5c817de6f1c554addb21d24c",
+   "last_commit_utc": "2026-11-12 04:29:32",
+   "minutes_since_last_commit": 26,
+   "files_on_branch": 2,
+   "commits_not_on_main": 1,
+   "modifies_files_already_on_main": [],
+   "pull_requests": [],
+   "state": "claim only",
+   "claimed": "T0-T14: full project. Board marks T0-T13 as done.",
+   "observation": "The board says done, but none of the files it lists (data/, scripts/, src/) are on the pushed branch."
+  },
+  {
+   "session": "87deb7ab",
+   "branch": "arena/87deb7ab-nfl1",
+   "branch_url": "https://github.com/kanlerxz87-cyber/NFL1/tree/arena/87deb7ab-nfl1",
+   "tip": "beab7ee9e30952c10a1ba298568827f4a39f5bba",
+   "last_commit_utc": "2026-11-12 04:36:41",
+   "minutes_since_last_commit": 19,
+   "files_on_branch": 2,
+   "commits_not_on_main": 1,
+   "modifies_files_already_on_main": [],
+   "pull_requests": [],
+   "state": "claim only",
+   "claimed": "T-01 to T-17: full project. Board marks T-01 and T-17 (data/standings.json, data/injuries.json) as done.",
+   "observation": "Only the coordination board has been pushed. The files listed as done are not on the pushed branch."
+  },
+  {
+   "session": "73fdd6c4",
+   "branch": "arena/73fdd6c4-nfl1",
+   "branch_url": "https://github.com/kanlerxz87-cyber/NFL1/tree/arena/73fdd6c4-nfl1",
+   "tip": "88153827757b0693cfc1de8045d4c0d59165cf9c",
+   "last_commit_utc": "2026-11-12 04:48:50",
+   "minutes_since_last_commit": 7,
+   "files_on_branch": 91,
+   "commits_not_on_main": 13,
+   "modifies_files_already_on_main": [],
+   "pull_requests": [],
+   "state": "this session",
+   "claimed": "V1-V5: independent verification, in referee/ only.",
+   "observation": "This session. Edits nothing outside referee/ except its own block in COORDINATION.md."
+  }
+ ],
+ "overlaps": [
+  {
+   "file": "COORDINATION.md",
+   "modified_by_unmerged_branches": [
+    "7600ed8b"
+   ],
+   "file_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/COORDINATION.md"
+  },
+  {
+   "file": "README.md",
+   "modified_by_unmerged_branches": [
+    "7600ed8b",
+    "80731db4"
+   ],
+   "file_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/README.md"
+  },
+  {
+   "file": "index.html",
+   "modified_by_unmerged_branches": [
+    "7600ed8b"
+   ],
+   "file_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/index.html"
+  },
+  {
+   "file": "pages/evidence.html",
+   "modified_by_unmerged_branches": [
+    "7600ed8b"
+   ],
+   "file_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pages/evidence.html"
+  },
+  {
+   "file": "pages/injuries.html",
+   "modified_by_unmerged_branches": [
+    "7600ed8b"
+   ],
+   "file_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pages/injuries.html"
+  },
+  {
+   "file": "pages/models.html",
+   "modified_by_unmerged_branches": [
+    "7600ed8b"
+   ],
+   "file_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pages/models.html"
+  },
+  {
+   "file": "pages/questions.html",
+   "modified_by_unmerged_branches": [
+    "7600ed8b"
+   ],
+   "file_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pages/questions.html"
+  },
+  {
+   "file": "pages/review.html",
+   "modified_by_unmerged_branches": [
+    "7600ed8b"
+   ],
+   "file_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pages/review.html"
+  },
+  {
+   "file": "pages/strategies.html",
+   "modified_by_unmerged_branches": [
+    "7600ed8b"
+   ],
+   "file_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pages/strategies.html"
+  },
+  {
+   "file": "pages/suggestions.html",
+   "modified_by_unmerged_branches": [
+    "7600ed8b"
+   ],
+   "file_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pages/suggestions.html"
+  }
+ ]
+}
