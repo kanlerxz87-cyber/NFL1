@@ -11,28 +11,7 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="top">
   <a class="brand" href="index.html"><span class="mark">NFL</span><span class="brand-text">Decision Lab</span></a>
-  <nav>
-    <a href="index.html" class="active">Overview</a>
-    <a href="pages/executive-summary.html">Executive Summary</a>
-    <a href="pages/teams.html">Teams</a>
-    <a href="pages/standings.html">Standings</a>
-    <a href="pages/injuries.html">Injuries</a>
-    <a href="pages/availability.html">Availability</a>
-    <a href="pages/data.html">Verified Data</a>
-    <a href="pages/lines.html">Own Lines</a>
-    <a href="pages/analysis.html">Validation & Correlation</a>
-    <a href="pages/decisions.html">Decision Register</a>
-    <a href="pages/verified.html">Verified Artifacts</a>
-    <a href="pages/evidence.html">Evidence</a>
-    <a href="pages/models.html">Strategy Lab</a>
-    <a href="pages/strategies.html">Strategies</a>
-    <a href="pages/suggestions.html">Suggestions</a>
-    <a href="pages/questions.html">Questions</a>
-    <a href="pages/flagged.html">Flagged</a>
-    <a href="pages/review.html">Review</a>
-    <a href="pages/executive.html">Executive Summary (companion)</a>
-    <a href="pages/props.html">Player Props</a>
-  </nav>
+  <nav aria-label="Main"><a href="index.html" class="active">Overview</a><a href="web/dashboard.html">Decision Dashboard</a><a href="pages/lines.html">My Lines</a><a href="pages/strategies.html">Strategy Lab</a><a href="pages/injuries.html">Injuries &amp; Depth</a><a href="pages/props.html">Props</a><a href="pages/questions.html">Questions</a><a href="pages/suggestions.html">Suggestions</a><a href="pages/evidence.html">Evidence</a><a href="pages/review.html">Flagged for Review</a><a href="pages/executive.html">Executive Summary</a></nav>
 </header>
 <main id="main">
   <section class="page-head">
@@ -49,7 +28,8 @@
     prices them against the consensus closing line, and refuses to promote a strategy that
     cannot clear eight validation gates. Every table row carries a link to the page it came from.</p>
     <div class="hero-actions">
-      <a class="btn" href="pages/lines.html">See this week's own lines</a>
+      <a class="btn" href="web/dashboard.html">Open the decision dashboard</a>
+      <a class="btn ghost" href="pages/lines.html">See this week's own lines</a>
       <a class="btn ghost" href="pages/executive.html">Read the executive summary</a>
     </div>
   </div>
@@ -64,6 +44,25 @@
 </section>
 
 <section class="kpis"><article class="kpi"><span class="kpi-label">Season</span><strong class="kpi-value">2026</strong><span class="kpi-sub">week 9 complete</span></article><article class="kpi"><span class="kpi-label">Games analysed</span><strong class="kpi-value">136</strong><span class="kpi-sub">2026 regular season</span></article><article class="kpi"><span class="kpi-label">Source files pinned</span><strong class="kpi-value">12</strong><span class="kpi-sub">URL + sha256</span></article><article class="kpi"><span class="kpi-label">Own lines this week</span><strong class="kpi-value">14</strong><span class="kpi-sub">week 10</span></article><article class="kpi"><span class="kpi-label">Strategies tested</span><strong class="kpi-value">12</strong><span class="kpi-sub">0 passed all 8 gates</span></article><article class="kpi"><span class="kpi-label">Starters flagged</span><strong class="kpi-value">113</strong><span class="kpi-sub">official game status</span></article><article class="kpi"><span class="kpi-label">Prop lines built</span><strong class="kpi-value">343</strong><span class="kpi-sub">model-only, no market price</span></article></section>
+
+<section class="panel">
+  <div class="panel-head">
+    <h2>Start here: what can be decided, and what cannot</h2>
+    <a href="web/dashboard.html">Open the decision dashboard →</a>
+  </div>
+  <p class="note">The decision dashboard separates the open items into decisions that need only a
+  choice, questions blocked on information that no connected source publishes, and
+  contradictions between an official page and this repository — each with the official link.
+  It also states plainly why the own lines are not presented as edges: out of sample the model
+  is 9.98 points of error against the closing line's 9.485, and a fitted blend puts a negative
+  weight on the model.</p>
+  <div class="hero-actions">
+    <a class="btn" href="web/dashboard.html">Where the project stands</a>
+    <a class="btn ghost" href="web/decisions.html">Decisions &amp; missing information</a>
+    <a class="btn ghost" href="web/suggestions.html">Review suggestions and pick a path</a>
+    <a class="btn ghost" href="web/flag-register.html">Flagged for Review</a>
+  </div>
+</section>
 
 <section class="panel">
   <div class="panel-head">

@@ -1,0 +1,51 @@
+name: Verify decision dashboard
+
+# Quality gate for the decision dashboard in web/ and for the whole repository's claim that
+# its numbers trace back to an official page. It does not deploy: Pages publishes from main /
+# via the legacy branch build, so there is exactly one deploy path.
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Rebuild the official fixtures from the transcription
+        run: python3 tools/evidence_from_official.py
+
+      - name: Verify every repo dataset, cell by cell, against the official pages
+        run: python3 tools/verify_official.py
+
+      - name: Recompute the decision-room verdicts
+        run: python3 tools/build_decision_room.py
+
+      - name: Render the decision dashboard
+        run: python3 tools/build_dashboard.py
+
+      - name: Independently recompute every figure on the dashboard
+        run: python3 tools/verify_dashboard.py
+
+      - name: Fail if any page is stale relative to the data it shows
+        run: python3 tools/check_freshness.py
+
+      - name: Fail if two generators claim the same output file
+        run: python3 tools/check_generators.py
+
+      - name: Confirm the committed pages match a clean rebuild
+        run: |
+          if ! git diff --quiet --exit-code; then
+            echo "::error::Generated pages or data changed during the build. Commit the output of:"
+            git --no-pager diff --stat
+            exit 1
+          fi
+          echo "Committed output is reproducible from a clean build."
