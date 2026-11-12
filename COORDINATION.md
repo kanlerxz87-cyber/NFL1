@@ -1751,12 +1751,12 @@ Status values: `unclaimed` | `in progress` | `done` | `needs review`.
 | ID | Task | Status | Owner | File scope | Evidence |
 | --- | --- | --- | --- | --- | --- |
 | U01 | Read the board, claim tasks, push claim first | done | `08e0ce01` | `COORDINATION.md` | this section |
-| U02 | Line-by-line repo + live-site review; irregularity report with source links | in progress | `08e0ce01` | `docs/review/session-08e0ce01.md` | pending |
-| U03 | Fix the duplicated/botched block in `README.md` and the README-clobber risk in `tools/build.py` (closes request `R-a2cea255-01`) | claimed | `08e0ce01` | `README.md`, `tools/build.py` (`write_readme()` only) | pending |
-| U04 | Investigate F36: division-game count in `analysis/correlations.py` (referee computes -0.1048 over 42 division games, repo publishes -0.1297 over 52) — fix only if the claim reproduces against official groupings | claimed | `08e0ce01` | `analysis/correlations.py`, regenerated outputs it owns | pending |
-| U05 | Investigate `R-a2cea255-03`: do the three disputed official standings cells (WAS `non_conf`, IND `div`, PHI `div`) touch `data/verified/standings_2026.csv` or the model outputs? Report only — no other session's data is edited | claimed | `08e0ce01` | report in `docs/review/session-08e0ce01.md` | pending |
-| U06 | Publish this session's findings on the Flagged for Review page and add review-path suggestions | claimed | `08e0ce01` | `data/flags.json`, `data/suggestions.json` (append-only), regenerate the root pages those files render | pending |
-| U07 | Final integration: run every gate, rebuild, link check, PR → `main`, merge, confirm GitHub Pages deploy, record the result here | claimed | `08e0ce01` | `COORDINATION.md` (+ PR) | pending |
+| U02 | Line-by-line repo + live-site review; irregularity report with source links | done | `08e0ce01` | `docs/review/session-08e0ce01.md` | findings F-A…F-I with official links and gate results |
+| U03 | Fix the duplicated/botched block in `README.md` and the README-clobber risk in `tools/build.py` (closes request `R-a2cea255-01`) | done | `08e0ce01` | `README.md`, `tools/build.py` (`write_readme()` only) | repaired README; regeneration tested byte-identical |
+| U04 | Investigate F36: division-game count in `analysis/correlations.py` (referee computes -0.1048 over 42 division games, repo publishes -0.1297 over 52) — fix only if the claim reproduces against official groupings | done | `08e0ce01` | `analysis/correlations.py`, regenerated outputs it owns | both numbers reproduced; nfl.com groupings match 8/8; audit gate added (47 checks); merged with main's equivalent A1 fix |
+| U05 | Investigate `R-a2cea255-03`: do the three disputed official standings cells (WAS `non_conf`, IND `div`, PHI `div`) touch `data/verified/standings_2026.csv` or the model outputs? Report only — no other session's data is edited | done | `08e0ce01` | report in `docs/review/session-08e0ce01.md` | answered: cells absent from every main-pipeline input; `src/nfl` excludes them via `DISPUTED_CELLS` |
+| U06 | Publish this session's findings on the Flagged for Review page and add review-path suggestions | done | `08e0ce01` | `data/flags.json`, `data/suggestions.json` (append-only), regenerate the root pages those files render | F37–F40, S21–S25, Q28 (+ pipeline F23–F25, S14–S15, Q21) live; 44 flagged items on `flagged.html` |
+| U07 | Final integration: run every gate, rebuild, link check, PR → `main`, merge, confirm GitHub Pages deploy, record the result here | done | `08e0ce01` | `COORDINATION.md` (+ PR) | PR #41 merged 2026-11-12T23:30:20Z (`59eb21d0`); record below |
 
 **Takeover note (60-minute rule):** requests `R-a2cea255-01`, `R-a2cea255-02`, `R-a2cea255-03`
 and flag `F36` are logged against sessions whose branches have had no commits for hours and
@@ -1770,3 +1770,16 @@ it is evaluated under U07 and applied only if it can be added without weakening 
 layer, which is what U06 edits.
 
 _This claim is committed and pushed before any other file is touched, per the brief._
+
+## Integration record (U07) — 2026-11-12
+
+| Item | Value |
+| --- | --- |
+| Pull request | [#41](https://github.com/kanlerxz87-cyber/NFL1/pull/41) — *Integration: line-by-line review, F36 fix + audit gate, All Sections index, fresh data (F37-F40)* |
+| Merge | `gh pr merge 41 --merge`; merged 2026-11-12T23:30:20Z; merge commit `59eb21d0` |
+| Checks on `main` after merge | `Verify NFL1 site` success · `Verify NFL Decision Lab site build` success · `pages build and deployment` success (run 43329410900) |
+| Live verification (read as a user) | landing `index.html` stamp `23:31` with the All Sections nav entry; `pages/sections.html` live with all 40 sections across six generations; `flagged.html` live with 44 source-linked flagged items |
+| Final gates on the merged tree | validate_verified PASS · audit_numbers 47/47 · check_site 21 pages · tools/check_committed_site PASS · tools/verify 1,013 rows all source-linked · verify_combined 1,198 links 0 broken · referee check_site PASS · 117 unit tests OK |
+| Merges from `origin/main` | two (PRs #21–#39, then the s9cb refresh); every conflict resolved keeping both sides — COORDINATION.md, `data/suggestions.json` (27 ids), `pipeline/content.py` (main's implemented S13 + SA-01/02 plus this session's S14/S15/Q21), `pipeline/gen_site.py` (main's signal labels F15–F22 plus this session's sections page and F23–F25), `tools/build.py` (this session's `write_readme`, subsuming main's template addition), `analysis/correlations.py` (main's A1 fix kept, this session's audit gate kept) |
+| Open items left for reviewers | F38 + S14 (CI audits a regenerated index substitute) · F40 + S13/S24 (`[skip ci]` data pushes run no verify) · Q28/Q21 (authoritative generation) · S22 (four flag registers) · S25 / `R-a2cea255-02` (referee replication as a CI gate) |
+| Note for session `9cb71eb8` | `Collect s9cb research extract` failed once ("Commit the extract") on this branch's push `fd8133e` — their workflow, not a site gate; PR #41 checks were green. Logged here, their file not edited. |

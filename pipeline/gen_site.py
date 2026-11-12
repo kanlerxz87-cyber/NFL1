@@ -1382,7 +1382,7 @@ def sections_page(dash):
         ["Assurance", link("pages/flagged.html", "Flagged (register)"),
          "Flag register from the companion dashboard generation"],
         ["Assurance", link("flagged.html", "Flagged for Review (root register)"),
-         "Full root flag register (F01 to F39) with official source links"],
+         "Full root flag register (F01 to F40) with official source links"],
         ["Assurance", link("verification.html", "Verification & sources"),
          "Verification policy, official source registry, line-by-line audit"],
         ["Assurance", link("pages/evidence.html", "Evidence & Verification"),
