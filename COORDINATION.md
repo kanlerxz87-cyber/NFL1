@@ -1025,3 +1025,31 @@ where they overlap: both report 32 standings rows, and this subsystem's harness
 independently confirms all 28 pre-game records printed on the official injury
 page. Keeping both is deliberate — an audit is only worth anything if it was
 produced independently of the thing it audits.
+
+## Session `5cf5434e-nfl1` — independent re-verification, PR, merge and Pages confirmation (2026-11-12)
+
+Session branch: `arena/5cf5434e-nfl1`, branched from `c09c739` (= `main` = `origin/main`). Build environment may reach only GitHub hosts plus pages fetched through the retrieval tool, so no bulk data refresh is run in this session; every check below re-reads committed files and official pages directly.
+
+**Claimed task:** T14 — independent line-by-line re-verification of published tables against official sources, then a PR from `arena/5cf5434e-nfl1` to `main`, merge without waiting, GitHub Pages deployment confirmation, and PR/merge record in this file. File scope: `COORDINATION.md` only. All data, model outputs and pages are read-only in this session; no value is changed, inferred or filled in.
+
+**Official sources checked (retrieved 2026-11-12):**
+- https://www.nfl.com/standings/league/2026/reg — all 32 club rows (W-L-T, PF/PA, net, streak, home/road/division/conference splits) match `data/verified/standings_2026.csv` exactly, including NYG 5-2-1 (182/172), LA Rams 5-4-0 (214/181) and LAC 0-8-0 (121/219). Official club abbreviations confirmed: Rams = `LA`, Cardinals = `AZ`.
+- https://www.nfl.com/injuries/ — Week 10 report. Game headings and kickoffs match the published Week 10 lines table: WAS @ NYG Thu Nov 12 8:15 PM; NE @ DET Sun Nov 15 9:30 AM (Munich); KC @ ATL, HOU @ CLE, MIN @ GB, MIA @ IND Sun Nov 15 1:00 PM. Blank injury-description and game-status cells are widespread on the official page — confirmed as blank, not inferred.
+- https://www.nfl.com/schedules/2026/REG10 — Week 10 matchups, dates and kickoffs confirmed as above.
+- https://api.github.com/repos/kanlerxz87-cyber/NFL1/pages — Pages status `built`, source `main / /`, live at https://kanlerxz87-cyber.github.io/NFL1/ ; latest Pages build is commit `c09c739` (this session's base), status `built` with no error.
+
+**Verification result:** `python3 tools/verify.py` → PASS: 965 table rows checked, 965 with an official source link, 73 labelled unverified/blank (never inferred or substituted), 0 broken internal links, all 16 generated pages and 11 research documents present. Live site read as a user: https://kanlerxz87-cyber.github.io/NFL1/ returns the Overview dashboard with source-linked tables, the Flagged for Review page and the Review (choose-a-path) section.
+
+**Irregularities confirmed this session (all already published on Flagged for Review, status needs review, non-blocking):**
+- **F02** — The nfl.com standings page shell renders the literal text `$year$ NFL $displayname$ Standings`; a page-template defect on the official side, not a data error.
+- **F29** — `data/teams.csv` / `data/standings.csv` use `LAR` for the Los Angeles Rams; the official standings and club pages publish `LA`. Values kept as published; consumers must map LA↔LAR.
+- **F03** — Most official injury-report rows publish neither an injury description nor a game status; the site renders those cells blank and flags them.
+
+**PR / merge (session `5cf5434e-nfl1`):**
+- Pull request: [#22](https://github.com/kanlerxz87-cyber/NFL1/pull/22) — `arena/5cf5434e-nfl1` → `main`, "Session 5cf5434e-nfl1: independent re-verification and integration record".
+- Merge result: MERGED via `gh pr merge 22 --merge` at 2026-11-12T22:26:01Z, merge commit `8de9917f09ae5c8f433fbd2300df89ee67d66867`, `mergeable_state: clean`.
+- Checks on the merged commit: `verify` success, `build` success, `deploy` success, `report-build-status` success (one superseded `build` run cancelled).
+- GitHub Pages: `gh api repos/kanlerxz87-cyber/NFL1/pages/builds/latest` → status `built`, commit `8de9917`, no error; source `main / /`, https enforced.
+- Live site re-read as a user: https://kanlerxz87-cyber.github.io/NFL1/ returns the Overview dashboard (source-linked own-lines, strategy-leaderboard, availability and verification tables); https://kanlerxz87-cyber.github.io/NFL1/pages/flagged.html returns the clearly labelled Flagged for Review page with every irregularity and its official source link. Flagged irregularities (F02, F03, F29 among them) did not block the merge and remain published for review.
+- Sources used for this record: GitHub REST API (pulls/22, commits/8de9917 check-runs, Pages builds latest) and the live Pages URL above.
+
