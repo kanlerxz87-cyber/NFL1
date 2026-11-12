@@ -18,7 +18,7 @@
     <p class="eyebrow">Evidence-first dashboard</p>
     <h1>My Lines</h1>
     <p class="standfirst">Opponent-adjusted EPA ratings converted into a spread, a total and a win probability — then scored against the closing line.</p>
-    <p class="timestamp">Data built 2026-11-12T04:36:04+00:00 · every value links to its source</p>
+    <p class="timestamp">Data built 2026-11-12T04:57:28+00:00 · every value links to its source</p>
   </section>
   
 <section class="panel">
@@ -58,7 +58,7 @@
   <strong>-0.328</strong>. Test MAE: hybrid
   <strong>9.54</strong> vs market-only
   <strong>9.48</strong> over 136 games.</p>
-  <p class="note">weight_model near 0 means the EPA model carries no incremental information beyond the closing line. Weight on the model near zero means the
+  <p class="note">A model weight at or below zero means the model&#x27;s disagreement with the market was wrong on average in the test window; a positive weight with a lower test MAE means genuine incremental information. Weight on the model near zero means the
   EPA signal is already in the price; a positive weight with lower MAE is genuine incremental
   information. <a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">closing-line source</a></p>
 </section>

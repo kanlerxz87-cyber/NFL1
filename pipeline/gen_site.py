@@ -950,7 +950,7 @@ def suggestions_page(dash):
 
 
 # ---------------------------------------------------------------- review
-def review_page(verif, strat, dash):
+def review_page(verif, strat, dash, avail=None):
     flags = []
     for irr in (verif or {}).get("irregularities", []):
         flags.append([esc(irr["id"]), esc(irr["area"]), esc(irr["issue"]),
@@ -959,6 +959,22 @@ def review_page(verif, strat, dash):
     for u in (verif or {}).get("unverifiable", []):
         flags.append(["FLAG", esc(u["item"]), esc(u["why"]), src(SOURCE["ops"], "reference"),
                       badge("unverified")])
+
+    av = avail or {}
+    missing_clubs = av.get("clubs_without_report") or []
+    if missing_clubs:
+        flags.append(["F11", "injury report coverage",
+                      f"No report was published for {esc(', '.join(missing_clubs))} when the page was "
+                      f"scraped, so those clubs show zero rows rather than zero injuries.",
+                      src(av.get("source", {}).get("url") or SOURCE["injuries"], "NFL injuries"),
+                      badge("needs review")])
+    if (av.get("counts") or {}).get("rows_practice_only_starters"):
+        flags.append(["F12", "practice-only signal",
+                      f"{av['counts']['rows_practice_only_starters']} starters have practice participation "
+                      f"but no game designation yet; their weight in the attrition index is an assumption "
+                      f"(DNP 0.5, limited 0.2), not a league rule.",
+                      src(av.get("source", {}).get("url") or SOURCE["injuries"], "NFL injuries"),
+                      badge("needs review")])
 
     lb = (strat or {}).get("leaderboard", [])
     failed = [r for r in lb if r["status"] != "PASS"]
@@ -1027,8 +1043,13 @@ def executive_page(snap, dash, lines, strat, avail, verif, prov):
     sign = (lines or {}).get("sign_convention_check") or {}
     par = (strat or {}).get("parlay", {})
     checks = (verif or {}).get("checks", [])
-    matched = sum(c["rows_matched"] for c in checks)
-    checked = sum(c["rows_checked"] for c in checks)
+    graded = [c for c in checks if "coverage" not in c["name"].lower()]
+    matched = sum(c["rows_matched"] for c in graded)
+    checked = sum(c["rows_checked"] for c in graded)
+    coverage = next((c for c in checks if "coverage" in c["name"].lower()), None)
+    avail_src = (avail or {}).get("source", {})
+    avail_counts = (avail or {}).get("counts", {})
+    missing_clubs = (avail or {}).get("clubs_without_report") or []
     passing = [r for r in lb if r["status"] == "PASS"]
     best = lb[0] if lb else {}
     n_files = counts.get("source_files_pinned", 0)
@@ -1056,9 +1077,16 @@ def executive_page(snap, dash, lines, strat, avail, verif, prov):
 
   <h3>What was verified</h3>
   <ul class="tight">
-    <li>{matched} of {checked} hand-read rows on nfl.com matched the mirrored feed exactly
-    ({", ".join(esc(c["name"]) for c in checks)}).</li>
+    <li>{matched} of {checked} verification rows matched the source they were checked against
+    ({"; ".join(esc(c["name"]) for c in graded)}).</li>
     <li>{n_files} source files pinned with download URL, byte count, sha256 and fetch time.</li>
+    <li>The current week's official injury report is scraped directly from nfl.com:
+    {num(avail_counts.get('injury_records'))} rows across the clubs that had submitted a report,
+    matched to the weekly depth chart. {len(missing_clubs)} clubs had no report at scrape time
+    ({esc(", ".join(missing_clubs)) if missing_clubs else "none"}).</li>
+    <li>The mirrored feed is incomplete in-season: {num((coverage or {}).get('rows_matched'))} of
+    {num((coverage or {}).get('rows_checked'))} official week 10 rows were present in it, which is
+    exactly why the official page is scraped directly.</li>
     <li>The closing-line sign convention was proved from data: correlation
     {num(sign.get('corr_market_line_vs_home_margin'), 3)} with the home margin over
     {num(sign.get('n_games'))} games.</li>
@@ -1069,8 +1097,9 @@ def executive_page(snap, dash, lines, strat, avail, verif, prov):
   <ul class="tight">
     <li><strong>Our lines are not yet better than the market.</strong> Out-of-sample spread MAE
     {num(test.get('spread_mae_model'), 2)} points versus {num(test.get('spread_mae_market'), 2)}
-    for the closing line; the paired difference interval does not cross zero. The totals model is
-    similarly behind ({num(test.get('total_mae_model'), 2)} vs {num(test.get('total_mae_market'), 2)}).</li>
+    for the closing line, and the paired difference interval excludes zero — the market is
+    significantly closer. The totals model is similarly behind
+    ({num(test.get('total_mae_model'), 2)} vs {num(test.get('total_mae_market'), 2)}).</li>
     <li><strong>The model's incremental information is measurable, not assumed.</strong> Blend test:
     market weight {num(blend.get('weight_market'), 3)}, model weight
     {num(blend.get('weight_model'), 3)}, test MAE {num(blend.get('test_mae_hybrid'), 2)} vs
@@ -1161,7 +1190,7 @@ def main():
     write("pages/evidence.html", evidence_page(prov, verif, dash))
     write("pages/questions.html", questions_page(dash))
     write("pages/suggestions.html", suggestions_page(dash))
-    write("pages/review.html", review_page(verif, strat, dash))
+    write("pages/review.html", review_page(verif, strat, dash, avail))
     write("pages/executive.html", executive_page(snap, dash, lines, strat, avail, verif, prov))
     # keep old URLs working
     for old in ("models", "teams", "standings", "injuries_old"):
