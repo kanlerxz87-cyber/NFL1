@@ -1,0 +1,91 @@
+{
+  "retrieved_at_utc": "2026-11-12T04:30:00Z",
+  "retrieved_by": "arena session arena/a2cea255-nfl1 (agent fetch_page tool)",
+  "sources": [
+    {
+      "id": "nfl_injuries_w10_2026",
+      "publisher": "National Football League (official league website)",
+      "url": "https://www.nfl.com/injuries/",
+      "page_title_as_retrieved": "Official Latest NFL Injury Report for Players - Week 10 of the 2026 Season | NFL.com",
+      "tier": "OFFICIAL",
+      "used_for": ["injury_report_2026_week10.tsv", "schedule_2026_week10.tsv", "nfl_news_2026_week10.tsv", "team_report_status_week10.tsv"]
+    },
+    {
+      "id": "nfl_standings_2026",
+      "publisher": "National Football League (official league website)",
+      "url": "https://www.nfl.com/standings/",
+      "page_title_as_retrieved": "2026 NFL Division Standings",
+      "tier": "OFFICIAL",
+      "used_for": ["standings_2026_reg.tsv"]
+    },
+    {
+      "id": "nfl_standings_division_2026_reg",
+      "publisher": "National Football League (official league website)",
+      "url": "https://www.nfl.com/standings/division/2026/REG",
+      "tier": "OFFICIAL",
+      "used_for": ["standings_2026_reg.tsv (canonical parameterised URL for the same view)"]
+    },
+    {
+      "id": "nfl_tiebreak",
+      "publisher": "National Football League (official league website)",
+      "url": "http://www.nfl.com/standings/tiebreakingprocedures",
+      "tier": "OFFICIAL",
+      "used_for": ["tie-break procedure reference"]
+    },
+    {
+      "id": "nfl_news_watson_beck",
+      "publisher": "National Football League (official league website)",
+      "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-wednesday-nov-11",
+      "tier": "OFFICIAL",
+      "used_for": ["verified starting-QB changes"]
+    },
+    {
+      "id": "nfl_news_willis_ir",
+      "publisher": "National Football League (official league website)",
+      "url": "https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start",
+      "tier": "OFFICIAL",
+      "used_for": ["verified starting-QB changes"]
+    },
+    {
+      "id": "nfl_news_darnold_lock",
+      "publisher": "National Football League (official league website)",
+      "url": "https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again",
+      "tier": "OFFICIAL",
+      "used_for": ["verified starting-QB changes"]
+    },
+    {
+      "id": "nfl_news_nacua_ir",
+      "publisher": "National Football League (official league website)",
+      "url": "https://www.nfl.com/news/rams-wr-puka-nacua-likely-to-be-placed-on-injured-reserve-with-turf-toe-sprained-mcl-and-pcl",
+      "tier": "OFFICIAL",
+      "used_for": ["verified skill-position absence"]
+    },
+    {
+      "id": "nfl_news_jacobs_surgery",
+      "publisher": "National Football League (official league website)",
+      "url": "https://www.nfl.com/news/packers-rb-josh-jacobs-to-undergo-surgery-on-finger-this-week",
+      "tier": "OFFICIAL",
+      "used_for": ["verified skill-position absence"]
+    },
+    {
+      "id": "sportradar_nfl_official_depth_charts",
+      "publisher": "Sportradar - official NFL data partner",
+      "url": "https://developer.sportradar.com/football/reference/nfl-weekly-depth-charts",
+      "tier": "OFFICIAL_PARTNER_CREDENTIAL_GATED",
+      "used_for": ["identification of the sanctioned weekly depth-chart feed (NOT retrieved - requires API key)"]
+    },
+    {
+      "id": "nflverse_teams_colors_logos",
+      "publisher": "nflverse (community-maintained open data project)",
+      "url": "https://github.com/nflverse/nflverse-pbp/blob/master/teams_colors_logos.csv",
+      "tier": "COMMUNITY_MIRROR",
+      "used_for": ["team abbreviation / conference / division / colour reference only - NOT used for any on-field value"]
+    }
+  ],
+  "sources_attempted_but_unreachable_from_build_environment": [
+    {"url": "https://site.api.espn.com/", "reason": "host not in the sandbox network allowlist (HTTP 000)"},
+    {"url": "https://github.com/nflverse/nflverse-data/releases", "reason": "release assets redirect to release-assets.githubusercontent.com, which is not in the sandbox network allowlist (HTTP 302 -> blocked)"},
+    {"url": "https://www.pro-football-reference.com/years/2026/games.htm", "reason": "reachable but 14 chunks of mostly navigation; full-season game log not obtainable within budget"},
+    {"url": "any sportsbook odds feed", "reason": "no licensed odds/market-data provider is reachable or credentialed from this environment"}
+  ]
+}

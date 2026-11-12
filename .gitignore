@@ -1,0 +1,12 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Bulk / regenerable data (never commit large downloads)
+data/raw/bulk/
+*.parquet
+
+# OS / editor
+.DS_Store

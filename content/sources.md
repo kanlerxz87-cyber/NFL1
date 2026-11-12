@@ -1,0 +1,1 @@
+Every dataset on this site resolves to one of the sources registered here. The register also records the sources that were attempted and could not be reached, with the technical reason, so the boundary of what is known is explicit rather than implied.

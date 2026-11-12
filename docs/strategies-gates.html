@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Validation Gates · NFL1</title>
+<meta name="description" content="Validation Gates - NFL1 verified-data analysis dashboard.">
+<style>
+:root{
+  --bg:#f6f7f9; --panel:#ffffff; --ink:#14181f; --muted:#5b6673;
+  --line:#e2e6eb; --line2:#eef1f4; --accent:#1b5fd9; --accent-soft:#eaf1fd;
+  --ok:#0f7b47; --ok-bg:#e7f6ed; --warn:#8a5a00; --warn-bg:#fdf3dc;
+  --bad:#a32020; --bad-bg:#fdeaea; --info:#1b5fd9; --info-bg:#eaf1fd;
+  --na:#5b6673; --na-bg:#eef1f4;
+  --radius:10px; --shadow:0 1px 2px rgba(16,24,40,.06),0 1px 3px rgba(16,24,40,.04);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+code{background:var(--line2);padding:.1em .35em;border-radius:4px;font-size:.88em}
+pre{background:#0f1419;color:#e6edf3;padding:14px 16px;border-radius:var(--radius);
+  overflow:auto;font-size:12.5px;line-height:1.5}
+pre code{background:none;padding:0;color:inherit}
+.wrap{display:grid;grid-template-columns:238px minmax(0,1fr);gap:26px;
+  max-width:1420px;margin:0 auto;padding:22px 22px 60px}
+header.top{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:12px;align-items:baseline;
+  justify-content:space-between;padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:6px}
+header.top h1{font-size:19px;margin:0;letter-spacing:-.2px}
+header.top .sub{color:var(--muted);font-size:13px}
+nav.side{position:sticky;top:22px;align-self:start;max-height:calc(100vh - 44px);overflow:auto}
+nav.side .grp{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);
+  margin:16px 0 6px;font-weight:700}
+nav.side a{display:block;padding:5px 9px;border-radius:7px;color:var(--ink);font-size:13.5px}
+nav.side a:hover{background:var(--line2);text-decoration:none}
+nav.side a.on{background:var(--accent-soft);color:var(--accent);font-weight:650}
+main{min-width:0}
+h2.pg{font-size:24px;margin:4px 0 4px;letter-spacing:-.4px}
+p.lead{color:var(--muted);margin:0 0 20px;max-width:82ch}
+section{margin:26px 0}
+h3{font-size:16.5px;margin:26px 0 8px;letter-spacing:-.2px}
+h4{font-size:14px;margin:18px 0 6px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  padding:16px 18px;box-shadow:var(--shadow);margin:12px 0}
+.grid{display:grid;gap:12px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  padding:13px 15px;box-shadow:var(--shadow)}
+.kpi .k{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:700}
+.kpi .v{font-size:26px;font-weight:700;letter-spacing:-.8px;margin:3px 0 1px;font-variant-numeric:tabular-nums}
+.kpi .n{font-size:12px;color:var(--muted);line-height:1.4}
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);
+  background:var(--panel);box-shadow:var(--shadow);margin:10px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+th,td{padding:7px 10px;text-align:left;border-bottom:1px solid var(--line2);vertical-align:top}
+thead th{position:sticky;top:0;background:#fafbfc;border-bottom:1px solid var(--line);
+  font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);
+  font-weight:700;white-space:nowrap;z-index:1}
+tbody tr:hover{background:#fbfcfd}
+tbody tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right}
+td.c,th.c{text-align:center}
+.badge{display:inline-block;padding:1.5px 7px;border-radius:999px;font-size:10.5px;
+  font-weight:700;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;
+  border:1px solid transparent}
+.b-VERIFIED,.b-PASS,.b-APPROVED,.b-ACTIVE{background:var(--ok-bg);color:var(--ok);border-color:#bfe6cd}
+.b-DERIVED,.b-INFO,.b-RUN{background:var(--info-bg);color:var(--info);border-color:#c5d9f8}
+.b-MODELED,.b-FLAG,.b-PROVISIONAL,.b-PARTIAL{background:var(--warn-bg);color:var(--warn);border-color:#f0dcae}
+.b-UNAVAILABLE,.b-FAIL,.b-REJECTED,.b-BLOCKED,.b-NOT_STAKEABLE,.b-NOT_RUN{background:var(--na-bg);color:var(--na);border-color:#dfe4ea}
+.b-MECHANICAL,.b-REDUNDANT{background:var(--na-bg);color:var(--na);border-color:#dfe4ea}
+.b-CANDIDATE{background:var(--info-bg);color:var(--info);border-color:#c5d9f8}
+.pill{display:inline-block;padding:1px 8px;border-radius:999px;font-size:11px;
+  background:var(--line2);color:var(--muted);white-space:nowrap}
+.blank{color:#98a2ae;font-style:italic}
+.src{font-size:11.5px;white-space:nowrap}
+.note{font-size:12.5px;color:var(--muted);margin:6px 0 0;max-width:96ch}
+.callout{border-left:3px solid var(--accent);background:var(--accent-soft);
+  padding:11px 14px;border-radius:0 8px 8px 0;margin:12px 0;font-size:13.5px}
+.callout.warn{border-left-color:#d9a400;background:var(--warn-bg)}
+.callout.bad{border-left-color:var(--bad);background:var(--bad-bg)}
+.callout.ok{border-left-color:var(--ok);background:var(--ok-bg)}
+.callout p:first-child{margin-top:0}.callout p:last-child{margin-bottom:0}
+footer{grid-column:1/-1;margin-top:34px;padding-top:14px;border-top:1px solid var(--line);
+  color:var(--muted);font-size:12px;display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:space-between}
+.md table{margin:10px 0}
+.md ul,.md ol{padding-left:22px;margin:8px 0}
+.md li{margin:3px 0}
+.md h2{font-size:19px;margin:26px 0 6px;letter-spacing:-.3px}
+.md h3{font-size:15.5px}
+.md blockquote{border-left:3px solid var(--line);margin:10px 0;padding:2px 0 2px 14px;color:var(--muted)}
+.toc{columns:2;column-gap:26px;font-size:13px}
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr;padding:14px 14px 40px}
+  nav.side{position:static;max-height:none;order:2;border-top:1px solid var(--line);padding-top:10px}
+  main{order:1}
+  .toc{columns:1}
+}
+@media print{nav.side,header.top .sub{display:none}.wrap{display:block}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+<h1>NFL1 <span style="color:var(--muted);font-weight:500">/ Validation Gates</span></h1>
+<div class="sub">Nine gates between a strategy and a stake</div>
+</header>
+<nav class="side"><div class="grp">Overview</div><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive Summary</a><a href="open-questions.html">Open Questions</a><a href="suggestions.html">Suggestions Board</a><a href="flagged.html">Flagged for Review</a><div class="grp">Verified Data</div><a href="data-standings.html">Standings 2026</a><a href="data-schedule.html">Week 10 Schedule</a><a href="data-injuries.html">Injury Report</a><a href="data-news.html">Official News Feed</a><div class="grp">Analysis</div><a href="analysis-ratings.html">Team Ratings</a><a href="analysis-luck.html">Luck Table</a><a href="analysis-correlation.html">Correlations</a><a href="availability-depth.html">Availability &amp; Depth</a><div class="grp">Line Origination</div><a href="lines-week10.html">Week 10 Board</a><a href="methodology.html">Methodology</a><div class="grp">Strategies</div><a href="strategies-leaderboard.html">Leaderboard</a><a href="strategies-catalogue.html">Strategy Catalogue</a><a href="strategies-gates.html" class="on">Validation Gates</a><div class="grp">Integrity</div><a href="verification.html">Verification Report</a><a href="sources.html">Source Register</a><div class="grp">Repository</div><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/COORDINATION.md" target="_blank" rel="noopener noreferrer">Coordination board ↗</a></nav>
+<main>
+<div class="callout ">A gate whose evidence does not exist returns <strong>BLOCKED</strong>, and BLOCKED is fatal - it is never treated as a pass. That is what makes the current leaderboard empty rather than optimistically populated.</div><div class="scroll"><table class=""><thead><tr><th class="">Gate</th><th class="">Name</th><th class="">Requirement</th></tr></thead><tbody><tr><td class=""><strong>G1</strong></td><td class="">Data provenance</td><td class="">Every input tier is VERIFIED or DERIVED from an official source. A MODELED input may not drive a stake without explicit human sign-off recorded on the Suggestions page.</td></tr><tr><td class=""><strong>G2</strong></td><td class="">Sample size</td><td class="">at least 150 settled wagers for market type &#x27;parlay&#x27;</td></tr><tr><td class=""><strong>G3</strong></td><td class="">No lookahead / information timing</td><td class="">Every feature must be timestamped strictly before kickoff and the walk-forward split must be documented. Injury data must be the version available at the time of the bet, not the final Friday report.</td></tr><tr><td class=""><strong>G4</strong></td><td class="">Out-of-sample measurement</td><td class="">OOS no-vig ROI measured on held-out games, and degradation vs in-sample &lt;= 40%</td></tr><tr><td class=""><strong>G5</strong></td><td class="">Luck removed</td><td class="">t-statistic on no-vig ROI &gt;= 3.0, the 95% bootstrap CI excludes zero, and the permutation placebo p &lt;= 0.05</td></tr><tr><td class=""><strong>G6</strong></td><td class="">Vig-adjusted edge</td><td class="">Edge must survive at POSTED prices, not only at de-vigged fair prices. Beating the fair price while losing to the vig is not an edge.</td></tr><tr><td class=""><strong>G7</strong></td><td class="">Stability / no single-source dependence</td><td class="">sign of edge retained in &gt;= 70% of leave-one-out folds and no fold contributes more than 35% of total profit</td></tr><tr><td class=""><strong>G8</strong></td><td class="">Correlation control (multi-leg bets)</td><td class="">for parlays and prop combos, every leg pair&#x27;s correlation must be MEASURED and priced. Independent-product pricing is forbidden when |rho| &gt; 0.15.</td></tr><tr><td class=""><strong>G9</strong></td><td class="">Execution / capacity</td><td class="">average closing-line value &gt;= 0.2 points and posted limits must absorb the model stake</td></tr></tbody></table></div><h3>Thresholds</h3><div class="scroll"><table class=""><thead><tr><th class="">Parameter</th><th class="">Value</th></tr></thead><tbody><tr><td class="">Minimum settled wagers</td><td class="">{&quot;single&quot;: 300, &quot;parlay&quot;: 150, &quot;player_prop&quot;: 200, &quot;prop_combo&quot;: 150, &quot;total&quot;: 300}</td></tr><tr><td class="">Minimum t-statistic on no-vig ROI</td><td class="">3.0</td></tr><tr><td class="">Minimum mean closing-line value</td><td class="">+0.20 points</td></tr><tr><td class="">Maximum share of profit from one fold</td><td class="">35%</td></tr><tr><td class="">Minimum fold sign stability</td><td class="">70%</td></tr><tr><td class="">Correlation pricing threshold</td><td class="">|rho| &gt; 0.15 forbids independent-product pricing</td></tr><tr><td class="">Maximum out-of-sample degradation</td><td class="">40%</td></tr></tbody></table></div><h3>Current status of every strategy</h3><div class="scroll"><table class=""><thead><tr><th class="">Strategy</th><th class="c">Verdict</th><th class="">Blocking gates</th></tr></thead><tbody><tr><td class=""><strong>S1</strong> Pythagorean regression (fade the lucky)</td><td class="c"><span class="badge b-NOT_STAKEABLE">NOT_STAKEABLE</span></td><td class=""><span class="badge b-PASS">G1</span> <span class="badge b-BLOCKED">G2</span> <span class="badge b-BLOCKED">G3</span> <span class="badge b-BLOCKED">G4</span> <span class="badge b-BLOCKED">G5</span> <span class="badge b-BLOCKED">G6</span> <span class="badge b-BLOCKED">G7</span> <span class="badge b-PASS">G8</span> <span class="badge b-BLOCKED">G9</span></td></tr><tr><td class=""><strong>S2</strong> Confirmed QB disruption</td><td class="c"><span class="badge b-NOT_STAKEABLE">NOT_STAKEABLE</span></td><td class=""><span class="badge b-PASS">G1</span> <span class="badge b-BLOCKED">G2</span> <span class="badge b-BLOCKED">G3</span> <span class="badge b-BLOCKED">G4</span> <span class="badge b-BLOCKED">G5</span> <span class="badge b-BLOCKED">G6</span> <span class="badge b-BLOCKED">G7</span> <span class="badge b-PASS">G8</span> <span class="badge b-BLOCKED">G9</span></td></tr><tr><td class=""><strong>S3</strong> Defensive absence cluster</td><td class="c"><span class="badge b-NOT_STAKEABLE">NOT_STAKEABLE</span></td><td class=""><span class="badge b-BLOCKED">G1</span> <span class="badge b-BLOCKED">G2</span> <span class="badge b-BLOCKED">G3</span> <span class="badge b-BLOCKED">G4</span> <span class="badge b-BLOCKED">G5</span> <span class="badge b-BLOCKED">G6</span> <span class="badge b-BLOCKED">G7</span> <span class="badge b-PASS">G8</span> <span class="badge b-BLOCKED">G9</span></td></tr><tr><td class=""><strong>S4</strong> Streak fade (public-bias contrarian)</td><td class="c"><span class="badge b-NOT_STAKEABLE">NOT_STAKEABLE</span></td><td class=""><span class="badge b-PASS">G1</span> <span class="badge b-BLOCKED">G2</span> <span class="badge b-BLOCKED">G3</span> <span class="badge b-BLOCKED">G4</span> <span class="badge b-BLOCKED">G5</span> <span class="badge b-BLOCKED">G6</span> <span class="badge b-BLOCKED">G7</span> <span class="badge b-PASS">G8</span> <span class="badge b-BLOCKED">G9</span></td></tr><tr><td class=""><strong>S5</strong> Home-advantage mispricing</td><td class="c"><span class="badge b-NOT_STAKEABLE">NOT_STAKEABLE</span></td><td class=""><span class="badge b-PASS">G1</span> <span class="badge b-BLOCKED">G2</span> <span class="badge b-BLOCKED">G3</span> <span class="badge b-BLOCKED">G4</span> <span class="badge b-BLOCKED">G5</span> <span class="badge b-BLOCKED">G6</span> <span class="badge b-BLOCKED">G7</span> <span class="badge b-PASS">G8</span> <span class="badge b-BLOCKED">G9</span></td></tr><tr><td class=""><strong>S6</strong> Divisional rematch under</td><td class="c"><span class="badge b-NOT_STAKEABLE">NOT_STAKEABLE</span></td><td class=""><span class="badge b-PASS">G1</span> <span class="badge b-BLOCKED">G2</span> <span class="badge b-BLOCKED">G3</span> <span class="badge b-BLOCKED">G4</span> <span class="badge b-BLOCKED">G5</span> <span class="badge b-BLOCKED">G6</span> <span class="badge b-BLOCKED">G7</span> <span class="badge b-PASS">G8</span> <span class="badge b-BLOCKED">G9</span></td></tr><tr><td class=""><strong>P1</strong> Same-game script: favourite + under</td><td class="c"><span class="badge b-NOT_STAKEABLE">NOT_STAKEABLE</span></td><td class=""><span class="badge b-PASS">G1</span> <span class="badge b-BLOCKED">G2</span> <span class="badge b-BLOCKED">G3</span> <span class="badge b-BLOCKED">G4</span> <span class="badge b-BLOCKED">G5</span> <span class="badge b-BLOCKED">G6</span> <span class="badge b-BLOCKED">G7</span> <span class="badge b-BLOCKED">G8</span> <span class="badge b-BLOCKED">G9</span></td></tr><tr><td class=""><strong>P2</strong> QB-change stack</td><td class="c"><span class="badge b-NOT_STAKEABLE">NOT_STAKEABLE</span></td><td class=""><span class="badge b-PASS">G1</span> <span class="badge b-BLOCKED">G2</span> <span class="badge b-BLOCKED">G3</span> <span class="badge b-BLOCKED">G4</span> <span class="badge b-BLOCKED">G5</span> <span class="badge b-BLOCKED">G6</span> <span class="badge b-BLOCKED">G7</span> <span class="badge b-BLOCKED">G8</span> <span class="badge b-BLOCKED">G9</span></td></tr><tr><td class=""><strong>P3</strong> Low-correlation diversifier</td><td class="c"><span class="badge b-NOT_STAKEABLE">NOT_STAKEABLE</span></td><td class=""><span class="badge b-PASS">G1</span> <span class="badge b-BLOCKED">G2</span> <span class="badge b-BLOCKED">G3</span> <span class="badge b-BLOCKED">G4</span> <span class="badge b-BLOCKED">G5</span> <span class="badge b-BLOCKED">G6</span> <span class="badge b-BLOCKED">G7</span> <span class="badge b-BLOCKED">G8</span> <span class="badge b-BLOCKED">G9</span></td></tr><tr><td class=""><strong>X1</strong> Opportunity transfer</td><td class="c"><span class="badge b-NOT_STAKEABLE">NOT_STAKEABLE</span></td><td class=""><span class="badge b-BLOCKED">G1</span> <span class="badge b-BLOCKED">G2</span> <span class="badge b-BLOCKED">G3</span> <span class="badge b-BLOCKED">G4</span> <span class="badge b-BLOCKED">G5</span> <span class="badge b-BLOCKED">G6</span> <span class="badge b-BLOCKED">G7</span> <span class="badge b-BLOCKED">G8</span> <span class="badge b-BLOCKED">G9</span></td></tr><tr><td class=""><strong>X2</strong> Pass-volume stack vs missing cornerback</td><td class="c"><span class="badge b-NOT_STAKEABLE">NOT_STAKEABLE</span></td><td class=""><span class="badge b-BLOCKED">G1</span> <span class="badge b-BLOCKED">G2</span> <span class="badge b-BLOCKED">G3</span> <span class="badge b-BLOCKED">G4</span> <span class="badge b-BLOCKED">G5</span> <span class="badge b-BLOCKED">G6</span> <span class="badge b-BLOCKED">G7</span> <span class="badge b-BLOCKED">G8</span> <span class="badge b-BLOCKED">G9</span></td></tr><tr><td class=""><strong>X3</strong> Rush-attempt transfer</td><td class="c"><span class="badge b-NOT_STAKEABLE">NOT_STAKEABLE</span></td><td class=""><span class="badge b-BLOCKED">G1</span> <span class="badge b-BLOCKED">G2</span> <span class="badge b-BLOCKED">G3</span> <span class="badge b-BLOCKED">G4</span> <span class="badge b-BLOCKED">G5</span> <span class="badge b-BLOCKED">G6</span> <span class="badge b-BLOCKED">G7</span> <span class="badge b-BLOCKED">G8</span> <span class="badge b-BLOCKED">G9</span></td></tr><tr><td class=""><strong>X4</strong> Negative-correlation guard</td><td class="c"><span class="badge b-NOT_STAKEABLE">NOT_STAKEABLE</span></td><td class=""><span class="badge b-PASS">G1</span> <span class="badge b-BLOCKED">G2</span> <span class="badge b-BLOCKED">G3</span> <span class="badge b-BLOCKED">G4</span> <span class="badge b-BLOCKED">G5</span> <span class="badge b-BLOCKED">G6</span> <span class="badge b-BLOCKED">G7</span> <span class="badge b-BLOCKED">G8</span> <span class="badge b-BLOCKED">G9</span></td></tr></tbody></table></div><div class="callout ok">The gate engine is exercised in the test suite against a deliberately well-formed hypothetical strategy, so it is demonstrably capable of returning APPROVED. It also rejects a strategy with lookahead, one whose edge is within noise, and one whose profit comes from a single fold. A gate that can only ever say no would be worthless as evidence.</div>
+</main>
+<footer>
+<span>Generated by <code>scripts/build_site.py</code> from <code>data/processed/site_data.json</code>. Retrieved 2026-11-12T04:30:00Z.</span>
+<span>Every published value carries a provenance tier. Blank cells are deliberate.</span>
+</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,1 @@
+The harness below runs automatically over the transcribed data. A FAIL would mean the transcription or the harness is wrong and must be fixed; a FLAG means the official source contradicts itself, in which case the value is published verbatim, excluded from every computation, and listed on the Flagged for Review page.
