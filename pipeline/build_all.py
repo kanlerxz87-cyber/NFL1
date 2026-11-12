@@ -1047,6 +1047,97 @@ def verification(ctx):
         except Exception as exc:  # noqa: BLE001
             print(f"coverage check skipped: {exc}")
 
+    # D. cross-check against the companion transcription committed by session 533256e1
+    cross_path = os.path.join(root, "data", "standings.csv")
+    if os.path.exists(cross_path):
+        try:
+            cross = pd.read_csv(cross_path)
+            snap = json.load(open(os.path.join(L.OUT, "snapshot.json")))
+            comp = {r["team"]: r for r in snap["standings"]}
+            rows, mism = [], []
+            for _, c in cross.iterrows():
+                abbr = str(c.get("abbr") or c.get("abbreviation") or "").strip()
+                mine = comp.get(abbr)
+                if mine is None:
+                    mism.append({"team": abbr, "detail": "not in computed standings"})
+                    continue
+                fields = {"w": int(c["w"]), "l": int(c["l"]), "t": int(c["t"]),
+                          "pf": int(c["pf"]), "pa": int(c["pa"])}
+                diffs = {k: {"companion": v, "computed": mine[k]}
+                         for k, v in fields.items() if int(v) != int(mine[k])}
+                rows.append({"team": abbr, "matched": not diffs, "computed": mine, "nfl": fields,
+                             "diffs": diffs or None})
+                if diffs:
+                    mism.append({"team": abbr, "diffs": diffs})
+            out["checks"].append({
+                "name": "Computed standings vs companion transcription (data/standings.csv)",
+                "source": "https://www.nfl.com/standings/league/2026/reg",
+                "rows_checked": int(len(cross)),
+                "rows_matched": sum(1 for r in rows if r["matched"]),
+                "mismatches": len(mism), "detail": rows})
+            if mism:
+                out["irregularities"].append({
+                    "id": "V4", "area": "standings cross-check",
+                    "issue": f"{len(mism)} rows differ between computed standings and the companion CSV",
+                    "examples": mism[:8],
+                    "source": "https://www.nfl.com/standings/league/2026/reg"})
+        except Exception as exc:  # noqa: BLE001
+            print(f"companion standings check skipped: {exc}")
+
+    # E. cross-check the scraped injury report against the companion injury CSV
+    cross_inj = os.path.join(root, "data", "injuries.csv")
+    if os.path.exists(cross_inj) and official.get("status") == "ok":
+        try:
+            comp = pd.read_csv(cross_inj)
+            tmap = {}
+            tp = os.path.join(root, "data", "teams.csv")
+            if os.path.exists(tp):
+                tt = pd.read_csv(tp)
+                tmap = {str(r["team"]).strip(): str(r["abbreviation"]).strip()
+                        for _, r in tt.iterrows()}
+            scraped = {(r.get("team"), (r.get("player") or "").strip()): r
+                       for r in official["rows"]}
+            rows, mism = [], []
+            for _, c in comp.iterrows():
+                abbr = tmap.get(str(c["team"]).strip(), str(c["team"]).strip())
+                key = (abbr, str(c["player"]).strip())
+                got = scraped.get(key)
+                if got is None:
+                    rows.append({"team": abbr, "player": c["player"], "matched": False,
+                                 "detail": "row absent from scrape"})
+                    mism.append({"team": abbr, "player": c["player"], "detail": "absent"})
+                    continue
+                diffs = {}
+                for k, key2 in (("injury", "injury"), ("practice", "practice"),
+                                ("game", "game"), ("position", "position")):
+                    a = c.get(k)
+                    a = None if (a is None or (isinstance(a, float) and pd.isna(a))) else str(a).strip()
+                    b = got.get(key2)
+                    b = None if (b is None or (isinstance(b, float) and pd.isna(b))) else str(b).strip()
+                    if (a or None) != (b or None):
+                        diffs[k] = {"companion": a, "scraped": b}
+                rows.append({"team": abbr, "player": c["player"],
+                             "position": c.get("position"),
+                             "injury": c.get("injury") if not pd.isna(c.get("injury")) else None,
+                             "practice": c.get("practice_status"),
+                             "game": c.get("game_status") if not pd.isna(c.get("game_status")) else None,
+                             "matched": not diffs, "feed": got, "diffs": diffs or None})
+                if diffs:
+                    mism.append({"team": abbr, "player": c["player"], "diffs": diffs})
+            out["checks"].append({
+                "name": "Scraped official report vs companion injury CSV (data/injuries.csv)",
+                "source": "https://www.nfl.com/injuries/",
+                "rows_checked": int(len(comp)),
+                "rows_matched": sum(1 for r in rows if r["matched"]),
+                "mismatches": len(mism), "detail": rows})
+            if mism:
+                out["irregularities"].append({
+                    "id": "V5", "area": "injury cross-check",
+                    "issue": f"{len(mism)} of {len(comp)} companion injury rows disagree with the scrape",
+                    "examples": mism[:8], "source": "https://www.nfl.com/injuries/"})
+        except Exception as exc:  # noqa: BLE001
+            print(f"companion injury check skipped: {exc}")
+
     out["unverifiable"] = [
         {"item": "Closing spread/total/moneylines",
          "why": ("The NFL does not publish betting lines; the mirror carries consensus closing "
