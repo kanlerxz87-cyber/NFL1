@@ -23,7 +23,7 @@ The data the model produces (lines, strategy performance, prop lines) cannot be 
 <ul>
 <li><strong>Week 10 schedule.</strong> All 14 games, days, kickoff times and networks match the nfl.com schedule page
 (<a href="https://www.nfl.com/schedules/2026/REG10">nfl.com/schedules/2026/REG10</a>). The four bye teams are CHI, DEN, PHI and TB.</li>
-<li><strong>Injury report.</strong> 279 official rows on <a href="https://www.nfl.com/injuries/">nfl.com/injuries</a>. The committed scrape on main (22:36Z) holds 295 rows: 242 match the official page on every field, 37 differ, and 16 are not on the page (RV-02, reopened). A scrape at 22:30Z had matched all 279.</li>
+<li><strong>Injury report.</strong> 279 official rows on <a href="https://www.nfl.com/injuries/">nfl.com/injuries</a>. The committed scrape on the latest refresh (22:40Z) matches all 279 rows on every field. The 22:36Z refresh had 295 rows, 37 field differences and 16 extra rows (RV-02, resolved on the later refresh).</li>
 <li><strong>Official game designations.</strong> Six rows only (Out: Lucas Patrick, Colson Yankoff, Ben Brown, Carlton Davis III, TreVeyon Henderson; Questionable: Malik Harrison).</li>
 <li><strong>Strategy gates.</strong> All 12 gate results reproduce from the committed JSON, so the model is consistent with its own rules.</li>
 <li><strong>Standings correlations.</strong> All six reproduce from the 32 standings rows.</li>
@@ -43,8 +43,8 @@ The data the model produces (lines, strategy performance, prop lines) cannot be 
 </ul>
 <h2>Irregularities that need a decision</h2>
 <ul>
-<li>The headline "103 starters flagged, official game status" is not supported. The committed data says 111 starters are impacted, and 108 of them are practice-only (RV-01).</li>
-<li>The committed injury scrape on main is wrong on the current refresh (RV-02). The dashboard shows the official page values, not the scrape. The Overview's NE row is stale (RV-28).</li>
+<li>The headline "103 starters flagged, official game status" is not supported. The committed data says 111 starters are impacted, and 110 of them are practice-only (RV-01).</li>
+<li>The injury scrape was wrong on the 22:36Z refresh and correct on the 22:40Z refresh (RV-02). A per-refresh gate is still needed. The dashboard shows official page values. The Overview's NE row is stale (RV-28).</li>
 <li>Two generators overwrite the root index.html, and five site generations overlap (RV-17, RV-21).</li>
 <li>The Overview says "actionable" for a line the model's own validation does not support (RV-11).</li>
 </ul>

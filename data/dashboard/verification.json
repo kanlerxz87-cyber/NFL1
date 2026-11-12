@@ -22,11 +22,11 @@
    "source": "https://www.nfl.com/injuries/",
    "method": "279 official rows transcribed (data/dashboard/official_injuries_2026_w10.psv) compared with data/model/official_injuries.json (tools/verify_official_injuries.py).",
    "rows_checked": 279,
-   "rows_matched": 242,
-   "mismatches": 53,
-   "result": "FAIL",
+   "rows_matched": 279,
+   "mismatches": 0,
+   "result": "PASS",
    "artifact": "data/dashboard/injury_verification.json",
-   "notes": "Scrape on main 8e687fb (22:36:42Z) holds 295 rows. 242 of 279 official rows match on every field; 37 differ; 0 missing; 16 extra (not on the page). The same check on main d4c1eec (22:30:33Z) passed 279/279. RV-02 reopened. Re-read of 80 rows (chunks 0-1 of the live page) matched the transcription."
+   "notes": "Latest refresh (9040190, 22:40:41Z): 279 of 279 official rows match on every field; 0 missing; 0 extra. The 22:36Z refresh had 16 extra rows and 37 field differences (RV-02, resolved on the later refresh). Re-read of 80 rows on the live page matched the transcription."
   },
   {
    "id": "V6-03",
@@ -81,12 +81,12 @@
    "name": "Model's own verification.json (as generated 2026-11-12T18:53:41Z)",
    "source": "data/model/verification.json",
    "method": "Read in full (5 checks, 5 unverifiable items). Each check reported beside this session's result.",
-   "rows_checked": 295,
+   "rows_checked": 279,
    "rows_matched": 276,
-   "mismatches": 19,
+   "mismatches": 3,
    "result": "CONFLICT",
    "artifact": "data/dashboard/review.json (RV-29)",
-   "notes": "Its mirror-feed check uses the 295-row scrape as the official list and reports 276 matched, 19 mismatches. On d4c1eec the same check reported 276 of 279 present. The Overview shows 20/254. None of the three reproduces the others (RV-29)."
+   "notes": "Its mirror check uses the scrape as the official list and reports 276 of 279 present (presence only). The Overview shows 20/254 with a mismatch. Neither reproduces the other (RV-29)."
   },
   {
    "id": "V6-08",
@@ -98,7 +98,7 @@
    "mismatches": 1,
    "result": "FAIL",
    "artifact": "data/dashboard/review.json (RV-28)",
-   "notes": "Official NE Out: 3 (Brown, Davis III, Henderson), confirmed on the live page. Overview: Out 2, practice-only 6, index 100.0. availability.json on main: starters_out 1, practice-only 7, index 42.9. Brown and Henderson are not in the 111-player starter list (RV-28)."
+   "notes": "Official NE Out: 3 (Brown, Davis III, Henderson), confirmed on the live page. Overview: Out 2, practice-only 6, index 100.0. availability.json: starters_out 1, practice-only 7, index 53.6. Brown and Henderson are not in the 111-player starter list (RV-28)."
   }
  ],
  "unverified_not_checked_here": [
@@ -124,10 +124,10 @@
   }
  ],
  "summary": {
-  "PASS": 4,
-  "FAIL": 3,
+  "PASS": 5,
+  "FAIL": 2,
   "CONFLICT": 1,
   "total": 8
  },
- "main_basis": "origin/main 8e687fb (scrape 22:36:42Z). Earlier d4c1eec basis (22:30:33Z) recorded for comparison in the notes."
+ "main_basis": "Latest refresh 9040190 (scrape 22:40:41Z; model verification 22:40:54Z). The 22:30Z (d4c1eec) and 22:36Z (8e687fb) results are recorded in the notes."
 }

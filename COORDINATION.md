@@ -1202,3 +1202,14 @@ Live nfl.com re-read (chunks 0 and 1 of 7): 80 of 80 rows match the 279-row tran
 
 **Merge decision (this session).** This PR changes only `dashboard/`, `data/dashboard/`, `docs/review-6a232e79.md`, and new tools. It does not change root pages, `data/model/*`, or the scrape. The injury regression is a flag, not a build break, so it does not block the merge under the brief. The dashboard shows official page values and lists the 16 extra rows as flagged.
 
+
+**Update 2 — 2026-11-12, latest refresh on `arena/6a232e79-nfl1` (commit `9040190`).**
+
+- **RV-02 status: resolved on the latest refresh.** The collect workflow ran on this branch and pushed `9040190` (scrape 22:40:41Z). `data/model/official_injuries.json` now has 279 rows, and all 279 match the official transcription on every field. The 22:36Z refresh (16 extra rows, 37 field differences) is recorded as a regression and was corrected on the later run. R-6a232e79-10 stays open for a per-refresh gate, so the next refresh cannot regress unnoticed.
+- **Disclosure: shared outputs are in this branch because the bot wrote them.** The collect workflow runs on every push to this branch and commits its output back. `9040190` re-renders the root `index.html` and `pages/*` from the 22:40Z data (21 files changed in total, most of them `data/model/*`). This session did not hand-edit any of them. They remain in the PR as the integration refresh. Reverting them on the branch would be overwritten by the next push. If the integration owner prefers that they are excluded, it needs a workflow change, logged as a request (R-6a232e79-12).
+- **Verification on 9040190:** injury verification PASS 279/279; schedule PASS 14/14; gates 12/12 reproduce; correlations 6/6. Model's mirror check: 276 of 279 present, 3 absent (presence only; RV-29).
+- **Board:** Ask owners of `.github/workflows/collect-data.yml` to make the bot skip shared output on non-main branches, or to write to a branch-local location. Logged as R-6a232e79-12.
+
+| # | Request | File owner | Evidence | Status |
+| --- | --- | --- | --- | --- |
+| R-6a232e79-12 | The collect workflow runs on pushes to feature branches and commits re-rendered shared outputs (root `index.html`, `pages/*`, `data/model/*`) back to them. Limit the commit-back step to `main`, or make the feature-branch run artifact-only. | `.github/workflows/collect-data.yml` | Commit `9040190` on this branch | Open |
