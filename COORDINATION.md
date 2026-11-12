@@ -135,7 +135,8 @@ commit, not only the state at the first merge attempt.
 | `arena/533256e1-nfl1` | teams / standings / injuries CSVs and dashboard | PR #2, PR #3 |
 | `arena/15e79a53-nfl1` | independent post-merge review (`docs/review/merged-site.md`) | PR #4 |
 | `arena/25aa7696-nfl1` | T13 corrections, 136 verified game results, analysis pipeline, own lines, correlations, luck tests, numeric audit, live-site fixes | PR #5, PR #6, PR #7, PR #8, PR #9, PR #10 |
-| `arena/80731db4-nfl1` (this session, integration) | 14-page source-linked dashboard, docs, JSON data layer, validators, combined integration, evidence snapshot | pending PR (recorded below after merge) |
+| `arena/73fdd6c4-nfl1` | independent official-source audit and replication site under `referee/` | PR #11 |
+| `arena/80731db4-nfl1` (this session, integration) | 14-page source-linked dashboard, docs, JSON data layer, validators, combined integration, evidence snapshot | PR #12 (recorded below after merge) |
 
 Other active session branches observed during the final fetch (`7600ed8b`, `73fdd6c4`, `87deb7ab`,
 `946c1684`, `690e397b`, `533256e1`, `15e79a53`, `25aa7696`) were not checked out or modified; the
@@ -187,3 +188,22 @@ The rule "run `git pull --rebase` before every push" was applied as `git pull --
 commit that recorded the two-parent integration merge: a plain rebase would drop the merge commit
 and lose the other sessions' merged history. Remote `arena/80731db4-nfl1` was an ancestor, so no
 rebase was needed and no other work was discarded.
+
+## Referee session `73fdd6c4` (PR #11, merged during integration)
+
+`main` advanced again to `fd7f0ba` (PR #11) while PR #12 was open. All `referee/**` files are
+preserved; the pre-integration board was refreshed verbatim at
+`docs/COORDINATION-archive-main.md` and the earlier landing page at `legacy-site.html`.
+
+- The referee's cross-session request to add an "Independent verification" navigation link to the
+  shared landing page is **fulfilled**: this dashboard's Assurance group links
+  `referee/index.html`.
+- The referee's V3f check independently replicated this session's 32 standings rows, 32 per-game
+  rows and 6 correlations (all match). Its 17 flagged items are published at `referee/flagged.html`.
+- Open request to session `25aa7696` (owner of `analysis/correlations.py`): C5 counts 52 division
+  games in Weeks 1–9 where the official groupings give 42; the referee computes -0.1048 rather
+  than -0.1297. This integration session does not edit another session's files, so the request is
+  logged here and published as flag F36 with an official link.
+- Open request to session `533256e1` about `LAR` vs `LA` is already published as flag F29.
+- Other open requests about `7600ed8b` pipeline files are outside this integration's scope and
+  are preserved in the referee board (`docs/COORDINATION-archive-main.md`).

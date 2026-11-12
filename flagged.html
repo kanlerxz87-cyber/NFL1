@@ -44,6 +44,7 @@
 <a href="verification.html">Verification &amp; Sources</a>
 <a href="flagged.html" class="active">Flagged for Review</a>
 <a href="integration.html">Combined Integration</a>
+<a href="referee/index.html">Independent verification</a>
 </div>
 <div class="navgroup"><h4>Preserved pages</h4>
 <a href="pages/analysis.html">Validation &amp; correlation</a>
@@ -73,17 +74,17 @@
   <div class="main">
     <div class="topbar">
       <div class="crumb">NFL1 / <b>Flagged for Review</b></div>
-      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">35 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">36 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
     </div>
     <main class="content" id="main">
       <div class="kicker">Assurance</div>
       <h1>Flagged for Review</h1>
       <p class="lede">Clearly labelled irregularities, official-page conflicts, unverified values and coordination issues — each with an official source link for manual review, none blocking the merge.</p>
       <div class="callout flag"><b>Flagged for Review.</b> These irregularities and unverified items do not block the merge or the live site. Each has an official source link for manual review and a suggested action. A status of <em>needs review</em> means exactly this: published here, not blocking.</div>
-<div class="cards"><div class="card"><div class="label">Flagged items</div><div class="value">35</div><div class="detail">All with source links</div></div><div class="card"><div class="label">Official-page irregularities</div><div class="value">7</div><div class="detail">F02–F08</div></div><div class="card"><div class="label">Missing official data</div><div class="value">5</div><div class="detail">F09–F11, F14, F15</div></div><div class="card"><div class="label">Combined-site review</div><div class="value">11</div><div class="detail">F25–F28</div></div></div>
+<div class="cards"><div class="card"><div class="label">Flagged items</div><div class="value">36</div><div class="detail">All with source links</div></div><div class="card"><div class="label">Official-page irregularities</div><div class="value">7</div><div class="detail">F02–F08</div></div><div class="card"><div class="label">Missing official data</div><div class="value">5</div><div class="detail">F09–F11, F14, F15</div></div><div class="card"><div class="label">Combined-site review</div><div class="value">12</div><div class="detail">F25–F28</div></div></div>
 <h2 id="all">All flagged irregularities</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-flags" aria-label="Filter tbl-flags" placeholder="Filter rows…">
-<span class="count" data-count-for="tbl-flags">35 rows shown</span></div>
+<span class="count" data-count-for="tbl-flags">36 rows shown</span></div>
 <div class="tablewrap"><table class="data-table" id="tbl-flags"><caption>Every flag with category, description, impact, status, official source link and suggested action for the reviewer.</caption>
 <thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Category</th><th scope="col" class="sortable">Irregularity / unverified item</th><th scope="col" class="sortable">Impact on decisions</th><th scope="col" class="sortable">Status</th><th scope="col" class="sortable">Suggested action</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
 <tr id="F01" data-verified="true">
@@ -400,6 +401,15 @@
 <td><span class="badge neutral">needs review</span></td>
 <td data-value="1" class="wide">This integration fetches the deployed URL and reads the landing page as a user before declaring done; the earlier sessions added gates to check_site.py for all three defect classes.</td>
 <td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S23 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F36" data-verified="true">
+<td><code>F36</code></td>
+<td data-value="1">Open referee correction request</td>
+<td data-value="1" class="wide">The independent referee session (PR #11) reports that `pages/analysis.html` and `data/verified/model/correlations.json` count 52 division games in Weeks 1-9 where official groupings give 42; it computes a corrected correlation of -0.1048 rather than -0.1297.</td>
+<td data-value="1" class="wide">A published correlation might be affected; this integration session does not edit another session&#x27;s files or recompute their model.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Logged here and in COORDINATION.md as a request to session `25aa7696`; the original artifacts remain published with their own sources.</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
 </tr>
 </tbody></table></div>
 <h2 id="unverified">Registry of blank/unverified values</h2>

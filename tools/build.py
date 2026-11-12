@@ -29,7 +29,8 @@ NAV = [
     ("Governance", [("requirements.html", "Requirements"), ("questions.html", "Decision Questions"), ("suggestions.html", "Suggestions & Paths")]),
     ("Competition", [("strategy-lab.html", "Strategy Lab"), ("leaderboard.html", "Leaderboard"), ("bet-types.html", "Bet Types & Risk")]),
     ("Official data", [("data-tables.html", "Standings & Findings"), ("injuries.html", "Injuries"), ("depth-chart.html", "Depth Charts")]),
-    ("Assurance", [("verification.html", "Verification & Sources"), ("flagged.html", "Flagged for Review"), ("integration.html", "Combined Integration")]),
+    ("Assurance", [("verification.html", "Verification & Sources"), ("flagged.html", "Flagged for Review"), ("integration.html", "Combined Integration"),
+                   ("referee/index.html", "Independent verification")]),
 ]
 
 # Every page contributed by the earlier sessions stays reachable from the landing

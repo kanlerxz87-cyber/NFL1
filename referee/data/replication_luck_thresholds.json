@@ -1,0 +1,182 @@
+{
+ "generated_by": "referee/analysis/replicate_luck_thresholds.py",
+ "breakeven_win_pct": 52.38,
+ "strategies_tried": [
+  1,
+  12,
+  50,
+  200
+ ],
+ "rows": [
+  {
+   "graded_bets": 50,
+   "tried_1": {
+    "min_wins": 33,
+    "min_win_pct": 66.0
+   },
+   "tried_12": {
+    "min_wins": 36,
+    "min_win_pct": 72.0
+   },
+   "tried_50": {
+    "min_wins": 38,
+    "min_win_pct": 76.0
+   },
+   "tried_200": {
+    "min_wins": 39,
+    "min_win_pct": 78.0
+   }
+  },
+  {
+   "graded_bets": 100,
+   "tried_1": {
+    "min_wins": 62,
+    "min_win_pct": 62.0
+   },
+   "tried_12": {
+    "min_wins": 66,
+    "min_win_pct": 66.0
+   },
+   "tried_50": {
+    "min_wins": 69,
+    "min_win_pct": 69.0
+   },
+   "tried_200": {
+    "min_wins": 70,
+    "min_win_pct": 70.0
+   }
+  },
+  {
+   "graded_bets": 250,
+   "tried_1": {
+    "min_wins": 145,
+    "min_win_pct": 58.0
+   },
+   "tried_12": {
+    "min_wins": 153,
+    "min_win_pct": 61.2
+   },
+   "tried_50": {
+    "min_wins": 156,
+    "min_win_pct": 62.4
+   },
+   "tried_200": {
+    "min_wins": 159,
+    "min_win_pct": 63.6
+   }
+  },
+  {
+   "graded_bets": 500,
+   "tried_1": {
+    "min_wins": 281,
+    "min_win_pct": 56.2
+   },
+   "tried_12": {
+    "min_wins": 292,
+    "min_win_pct": 58.4
+   },
+   "tried_50": {
+    "min_wins": 297,
+    "min_win_pct": 59.4
+   },
+   "tried_200": {
+    "min_wins": 302,
+    "min_win_pct": 60.4
+   }
+  },
+  {
+   "graded_bets": 1000,
+   "tried_1": {
+    "min_wins": 551,
+    "min_win_pct": 55.1
+   },
+   "tried_12": {
+    "min_wins": 566,
+    "min_win_pct": 56.6
+   },
+   "tried_50": {
+    "min_wins": 573,
+    "min_win_pct": 57.3
+   },
+   "tried_200": {
+    "min_wins": 580,
+    "min_win_pct": 58.0
+   }
+  },
+  {
+   "graded_bets": 2500,
+   "tried_1": {
+    "min_wins": 1352,
+    "min_win_pct": 54.08
+   },
+   "tried_12": {
+    "min_wins": 1376,
+    "min_win_pct": 55.04
+   },
+   "tried_50": {
+    "min_wins": 1387,
+    "min_win_pct": 55.48
+   },
+   "tried_200": {
+    "min_wins": 1397,
+    "min_win_pct": 55.88
+   }
+  },
+  {
+   "graded_bets": 5000,
+   "tried_1": {
+    "min_wins": 2678,
+    "min_win_pct": 53.56
+   },
+   "tried_12": {
+    "min_wins": 2713,
+    "min_win_pct": 54.26
+   },
+   "tried_50": {
+    "min_wins": 2729,
+    "min_win_pct": 54.58
+   },
+   "tried_200": {
+    "min_wins": 2743,
+    "min_win_pct": 54.86
+   }
+  }
+ ],
+ "power_at_55pct": [
+  {
+   "graded_bets": 50,
+   "true_win_pct": 55.0,
+   "chance_to_clear_bar_pct": 7.7
+  },
+  {
+   "graded_bets": 100,
+   "true_win_pct": 55.0,
+   "chance_to_clear_bar_pct": 9.5
+  },
+  {
+   "graded_bets": 250,
+   "true_win_pct": 55.0,
+   "chance_to_clear_bar_pct": 18.7
+  },
+  {
+   "graded_bets": 500,
+   "true_win_pct": 55.0,
+   "chance_to_clear_bar_pct": 31.1
+  },
+  {
+   "graded_bets": 1000,
+   "true_win_pct": 55.0,
+   "chance_to_clear_bar_pct": 48.8
+  },
+  {
+   "graded_bets": 2500,
+   "true_win_pct": 55.0,
+   "chance_to_clear_bar_pct": 82.8
+  },
+  {
+   "graded_bets": 5000,
+   "true_win_pct": 55.0,
+   "chance_to_clear_bar_pct": 98.0
+  }
+ ]
+}

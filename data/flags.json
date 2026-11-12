@@ -383,5 +383,16 @@
     "action": "This integration fetches the deployed URL and reads the landing page as a user before declaring done; the earlier sessions added gates to check_site.py for all three defect classes.",
     "verified": true,
     "retrieved": "2026-11-12"
+  },
+  {
+    "id": "F36",
+    "category": "Open referee correction request",
+    "description": "The independent referee session (PR #11) reports that `pages/analysis.html` and `data/verified/model/correlations.json` count 52 division games in Weeks 1-9 where official groupings give 42; it computes a corrected correlation of -0.1048 rather than -0.1297.",
+    "impact": "A published correlation might be affected; this integration session does not edit another session's files or recompute their model.",
+    "status": "needs review",
+    "src": "S17",
+    "action": "Logged here and in COORDINATION.md as a request to session `25aa7696`; the original artifacts remain published with their own sources.",
+    "verified": true,
+    "retrieved": "2026-11-12"
   }
 ]
