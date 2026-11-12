@@ -1,0 +1,55 @@
+name: Verify NFL source provenance
+
+on:
+  push:
+    branches: ["main", "arena/**"]
+    paths:
+      - ".github/workflows/verified-source-audit.yml"
+      - "src/nfl/**"
+      - "scripts/build_site.py"
+      - "scripts/verified/check_source_audit.py"
+      - "data/verified/**"
+      - "data/reference/**"
+      - "data/processed/site_data.json"
+      - "tests/**"
+      - "verified-lab/**"
+  pull_request:
+    paths:
+      - ".github/workflows/verified-source-audit.yml"
+      - "src/nfl/**"
+      - "scripts/build_site.py"
+      - "scripts/verified/check_source_audit.py"
+      - "data/verified/**"
+      - "data/reference/**"
+      - "data/processed/site_data.json"
+      - "tests/**"
+      - "verified-lab/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nfl-source-audit-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  source-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Rebuild the deterministic source artifact and sub-site
+        run: |
+          PYTHONPATH=src python3 -m nfl.pipeline
+          PYTHONPATH=src python3 scripts/build_site.py
+      - name: Run regression and table-source tests
+        run: python3 -m unittest discover -s tests -v
+      - name: Run the independent official-source snapshot audit
+        run: PYTHONPATH=src python3 scripts/verified/check_source_audit.py
+      - name: Require generated evidence to be committed
+        run: git diff --exit-code -- data/processed/site_data.json verified-lab/
