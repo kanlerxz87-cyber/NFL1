@@ -1,15 +1,22 @@
 {
- "generated_at": "2026-11-12T04:36:04+00:00",
+ "generated_at": "2026-11-12T04:39:56+00:00",
  "week": 6,
+ "source": {
+  "label": "mirrored feed, latest complete week (6)",
+  "url": "https://www.nfl.com/injuries/",
+  "warning": "The official current-week report could not be scraped, so this table uses the most complete week available in the mirrored feed. Treat statuses as stale and check the official page before acting.",
+  "official_counts": null,
+  "official_status": "failed"
+ },
  "depth_chart_timestamp": "2026-11-11T07:02:21Z",
  "counts": {
-  "injury_rows_this_week": 376,
+  "injury_records": 376,
   "starters_impacted": 85,
   "teams_with_starter_out": 21,
-  "players_matched_to_depth_chart": 85
+  "records_not_matched_to_depth_chart": 8
  },
  "method": {
-  "depth_rank": "NFL.com depth charts as mirrored by nflverse (pos_rank 1 = starter).",
+  "depth_rank": "Depth chart mirrored weekly (pos_rank 1 = listed starter).",
   "attrition_formula": "sum over unavailable starters of position_weight x status_weight; status weights Out=1.0, Doubtful=0.7, Questionable=0.25. Index is rescaled 0-100 against the worst team this week.",
   "position_weights": {
    "QB": 0.3,
@@ -42,9 +49,9 @@
    "LS": 0.01
   },
   "limits": [
-   "Injury status is the official game-status column; it does not prove who starts.",
-   "Depth charts are a weekly snapshot, not a snap-count projection.",
-   "Practice-squad elevations and game-day inactive lists are not modelled separately.",
+   "Game status is the official designation, not proof of who starts or plays.",
+   "Depth charts are a weekly snapshot; practice-squad elevations are not modelled.",
+   "Listed players who were not matched to a depth-chart row are counted, not guessed.",
    "The attrition index is a modelling assumption, not an official NFL metric."
   ]
  },
@@ -69,8 +76,8 @@
    "starters_questionable": 1,
    "attrition_points": 0.173,
    "attrition_index_0_100": 42.6,
-   "backup_experience_avg": 4.3,
-   "backup_snaps_avg": 180.0,
+   "backup_experience_avg": 3.2,
+   "backup_snaps_avg": 217.0,
    "source": "https://www.nfl.com/injuries/"
   },
   {
@@ -105,8 +112,8 @@
    "starters_questionable": 2,
    "attrition_points": 0.115,
    "attrition_index_0_100": 28.4,
-   "backup_experience_avg": 1.0,
-   "backup_snaps_avg": 62.0,
+   "backup_experience_avg": 2.7,
+   "backup_snaps_avg": 48.0,
    "source": "https://www.nfl.com/injuries/"
   },
   {
@@ -153,8 +160,8 @@
    "starters_questionable": 1,
    "attrition_points": 0.103,
    "attrition_index_0_100": 25.3,
-   "backup_experience_avg": 7.0,
-   "backup_snaps_avg": 0.0,
+   "backup_experience_avg": 7.5,
+   "backup_snaps_avg": 31.0,
    "source": "https://www.nfl.com/injuries/"
   },
   {
@@ -213,8 +220,8 @@
    "starters_questionable": 3,
    "attrition_points": 0.087,
    "attrition_index_0_100": 21.6,
-   "backup_experience_avg": 1.7,
-   "backup_snaps_avg": 110.0,
+   "backup_experience_avg": 1.5,
+   "backup_snaps_avg": 112.0,
    "source": "https://www.nfl.com/injuries/"
   },
   {
@@ -225,8 +232,8 @@
    "starters_questionable": 4,
    "attrition_points": 0.085,
    "attrition_index_0_100": 21.0,
-   "backup_experience_avg": 2.5,
-   "backup_snaps_avg": 192.0,
+   "backup_experience_avg": 3.0,
+   "backup_snaps_avg": 163.0,
    "source": "https://www.nfl.com/injuries/"
   },
   {
@@ -297,8 +304,8 @@
    "starters_questionable": 0,
    "attrition_points": 0.05,
    "attrition_index_0_100": 12.4,
-   "backup_experience_avg": null,
-   "backup_snaps_avg": null,
+   "backup_experience_avg": 5.0,
+   "backup_snaps_avg": 0.0,
    "source": "https://www.nfl.com/injuries/"
   },
   {
@@ -383,6 +390,54 @@
    "attrition_index_0_100": 3.1,
    "backup_experience_avg": 3.0,
    "backup_snaps_avg": 73.0,
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "team": "CIN",
+   "name": "Cincinnati Bengals",
+   "starters_out": 0,
+   "starters_doubtful": 0,
+   "starters_questionable": 0,
+   "attrition_points": 0.0,
+   "attrition_index_0_100": 0.0,
+   "backup_experience_avg": null,
+   "backup_snaps_avg": null,
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "team": "DET",
+   "name": "Detroit Lions",
+   "starters_out": 0,
+   "starters_doubtful": 0,
+   "starters_questionable": 0,
+   "attrition_points": 0.0,
+   "attrition_index_0_100": 0.0,
+   "backup_experience_avg": null,
+   "backup_snaps_avg": null,
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "team": "MIA",
+   "name": "Miami Dolphins",
+   "starters_out": 0,
+   "starters_doubtful": 0,
+   "starters_questionable": 0,
+   "attrition_points": 0.0,
+   "attrition_index_0_100": 0.0,
+   "backup_experience_avg": null,
+   "backup_snaps_avg": null,
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "team": "MIN",
+   "name": "Minnesota Vikings",
+   "starters_out": 0,
+   "starters_doubtful": 0,
+   "starters_questionable": 0,
+   "attrition_points": 0.0,
+   "attrition_index_0_100": 0.0,
+   "backup_experience_avg": null,
+   "backup_snaps_avg": null,
    "source": "https://www.nfl.com/injuries/"
   }
  ],
@@ -550,9 +605,9 @@
    "practice_status": "Limited Participation in Practice",
    "years_exp": 4,
    "roster_status": "ACT",
-   "replacement": null,
-   "replacement_years_exp": null,
-   "replacement_snaps_2026": null,
+   "replacement": "Ryan Neuzil",
+   "replacement_years_exp": 5,
+   "replacement_snaps_2026": 0,
    "position_weight": 0.05,
    "attrition_points": 0.05,
    "source": "https://www.nfl.com/injuries/",
@@ -664,9 +719,9 @@
    "practice_status": "Did Not Participate In Practice",
    "years_exp": 2,
    "roster_status": "ACT",
-   "replacement": null,
-   "replacement_years_exp": null,
-   "replacement_snaps_2026": null,
+   "replacement": "Travis Burke",
+   "replacement_years_exp": 0,
+   "replacement_snaps_2026": 326,
    "position_weight": 0.05,
    "attrition_points": 0.05,
    "source": "https://www.nfl.com/injuries/",
@@ -949,9 +1004,9 @@
    "practice_status": "Did Not Participate In Practice",
    "years_exp": 3,
    "roster_status": "ACT",
-   "replacement": null,
-   "replacement_years_exp": null,
-   "replacement_snaps_2026": null,
+   "replacement": "Tremon Smith",
+   "replacement_years_exp": 8,
+   "replacement_snaps_2026": 62,
    "position_weight": 0.04,
    "attrition_points": 0.04,
    "source": "https://www.nfl.com/injuries/",
@@ -1006,9 +1061,9 @@
    "practice_status": "Limited Participation in Practice",
    "years_exp": 0,
    "roster_status": "ACT",
-   "replacement": null,
-   "replacement_years_exp": null,
-   "replacement_snaps_2026": null,
+   "replacement": "Stone Forsythe",
+   "replacement_years_exp": 5,
+   "replacement_snaps_2026": 49,
    "position_weight": 0.05,
    "attrition_points": 0.035,
    "source": "https://www.nfl.com/injuries/",
@@ -1196,9 +1251,9 @@
    "practice_status": "Limited Participation in Practice",
    "years_exp": 1,
    "roster_status": "ACT",
-   "replacement": null,
-   "replacement_years_exp": null,
-   "replacement_snaps_2026": null,
+   "replacement": "Ashtyn Davis",
+   "replacement_years_exp": 6,
+   "replacement_snaps_2026": 21,
    "position_weight": 0.06,
    "attrition_points": 0.015,
    "source": "https://www.nfl.com/injuries/",
@@ -1443,9 +1498,9 @@
    "practice_status": "Limited Participation in Practice",
    "years_exp": 1,
    "roster_status": "ACT",
-   "replacement": null,
-   "replacement_years_exp": null,
-   "replacement_snaps_2026": null,
+   "replacement": "Dylan Sampson",
+   "replacement_years_exp": 1,
+   "replacement_snaps_2026": 118,
    "position_weight": 0.05,
    "attrition_points": 0.0125,
    "source": "https://www.nfl.com/injuries/",

@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-12T04:36:02+00:00",
+ "generated_at": "2026-11-12T04:39:54+00:00",
  "sign_convention_check": {
   "corr_market_line_vs_home_margin": 0.439,
   "n_games": 5591,
@@ -14,7 +14,7 @@
   "n_test": 136,
   "test_mae_hybrid": 9.542,
   "test_mae_market_only": 9.485,
-  "interpretation": "weight_model near 0 means the EPA model carries no incremental information beyond the closing line."
+  "interpretation": "A model weight at or below zero means the model's disagreement with the market was wrong on average in the test window; a positive weight with a lower test MAE means genuine incremental information."
  },
  "method": {
   "ratings": "Two-way ridge fixed effect on non-garbage-time plays: EPA ~ offense team + defense team + home. Prior season weighted 0.4.",

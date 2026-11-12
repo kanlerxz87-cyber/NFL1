@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-12T04:36:04+00:00",
+ "generated_at": "2026-11-12T04:39:56+00:00",
  "window": {
   "start_season": 2005,
   "end_season": 2026,
@@ -9,7 +9,7 @@
  },
  "leaderboard": [
   {
-   "strategy": "S14 Under in divisional games with total 47+",
+   "strategy": "S11 Under in divisional games with total 47+",
    "status": "WATCH",
    "gates_passed": 6,
    "score_lower_ci_roi_pct": -3.85,
@@ -25,7 +25,7 @@
    ],
    "units": 22.82,
    "p_value": 0.1637,
-   "q_value": 0.993,
+   "q_value": 0.9889,
    "max_drawdown_units": -17.0,
    "by_season": {
     "2005": {
@@ -148,7 +148,7 @@
      "id": "G5",
      "name": "Significance",
      "pass": false,
-     "detail": "BH-adjusted q=0.993 (needs <0.10)."
+     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
     },
     {
      "id": "G6",
@@ -172,9 +172,9 @@
    "window": "2005-2026"
   },
   {
-   "strategy": "S08 Over when closing total is 41 or lower",
+   "strategy": "S10 Over when closing total is 41 or lower",
    "status": "FAIL",
-   "gates_passed": 4,
+   "gates_passed": 3,
    "score_lower_ci_roi_pct": -5.41,
    "n_graded": 1437,
    "wins": 750,
@@ -188,7 +188,7 @@
    ],
    "units": -5.18,
    "p_value": 0.5676,
-   "q_value": 0.993,
+   "q_value": 0.9889,
    "max_drawdown_units": -25.64,
    "by_season": {
     "2005": {
@@ -281,7 +281,7 @@
     }
    },
    "holdout_roi": -0.1109,
-   "max_abs_corr": 0.112,
+   "max_abs_corr": 1.0,
    "gates": [
     {
      "id": "G1",
@@ -311,7 +311,7 @@
      "id": "G5",
      "name": "Significance",
      "pass": false,
-     "detail": "BH-adjusted q=0.993 (needs <0.10)."
+     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
     },
     {
      "id": "G6",
@@ -328,8 +328,8 @@
     {
      "id": "G8",
      "name": "Diversification",
-     "pass": true,
-     "detail": "max |corr| with another strategy = 0.112."
+     "pass": false,
+     "detail": "max |corr| with another strategy = 1.0."
     }
    ],
    "window": "2005-2026"
@@ -351,7 +351,7 @@
    ],
    "units": -24.0,
    "p_value": 0.8323,
-   "q_value": 0.993,
+   "q_value": 0.9889,
    "max_drawdown_units": -39.09,
    "by_season": {
     "2005": {
@@ -474,7 +474,7 @@
      "id": "G5",
      "name": "Significance",
      "pass": false,
-     "detail": "BH-adjusted q=0.993 (needs <0.10)."
+     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
     },
     {
      "id": "G6",
@@ -498,7 +498,7 @@
    "window": "2005-2026"
   },
   {
-   "strategy": "S11 Home team with 3+ rest-day edge",
+   "strategy": "S07 Home team with 3+ rest-day edge",
    "status": "FAIL",
    "gates_passed": 4,
    "score_lower_ci_roi_pct": -12.67,
@@ -514,7 +514,7 @@
    ],
    "units": -22.0,
    "p_value": 0.858,
-   "q_value": 0.993,
+   "q_value": 0.9889,
    "max_drawdown_units": -39.27,
    "by_season": {
     "2005": {
@@ -637,7 +637,7 @@
      "id": "G5",
      "name": "Significance",
      "pass": false,
-     "detail": "BH-adjusted q=0.993 (needs <0.10)."
+     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
     },
     {
      "id": "G6",
@@ -661,7 +661,7 @@
    "window": "2005-2026"
   },
   {
-   "strategy": "S13 Home favourite of 10 or more",
+   "strategy": "S09 Home favourite of 10 or more",
    "status": "FAIL",
    "gates_passed": 4,
    "score_lower_ci_roi_pct": -15.19,
@@ -677,7 +677,7 @@
    ],
    "units": -41.91,
    "p_value": 0.9706,
-   "q_value": 0.993,
+   "q_value": 0.9889,
    "max_drawdown_units": -56.0,
    "by_season": {
     "2005": {
@@ -800,7 +800,7 @@
      "id": "G5",
      "name": "Significance",
      "pass": false,
-     "detail": "BH-adjusted q=0.993 (needs <0.10)."
+     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
     },
     {
      "id": "G6",
@@ -840,7 +840,7 @@
    ],
    "units": -10.36,
    "p_value": 0.7954,
-   "q_value": 0.993,
+   "q_value": 0.9889,
    "max_drawdown_units": -19.91,
    "by_season": {
     "2005": {
@@ -963,7 +963,7 @@
      "id": "G5",
      "name": "Significance",
      "pass": false,
-     "detail": "BH-adjusted q=0.993 (needs <0.10)."
+     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
     },
     {
      "id": "G6",
@@ -987,7 +987,7 @@
    "window": "2005-2026"
   },
   {
-   "strategy": "S12 Home team facing opponent off a bye",
+   "strategy": "S08 Home team facing opponent off a bye",
    "status": "FAIL",
    "gates_passed": 3,
    "score_lower_ci_roi_pct": -21.52,
@@ -1003,7 +1003,7 @@
    ],
    "units": -39.45,
    "p_value": 0.9889,
-   "q_value": 0.993,
+   "q_value": 0.9889,
    "max_drawdown_units": -46.18,
    "by_season": {
     "2005": {
@@ -1126,7 +1126,7 @@
      "id": "G5",
      "name": "Significance",
      "pass": false,
-     "detail": "BH-adjusted q=0.993 (needs <0.10)."
+     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
     },
     {
      "id": "G6",
@@ -1150,6 +1150,89 @@
    "window": "2005-2026"
   },
   {
+   "strategy": "S02 Own-line vs close, edge >= 3.0",
+   "status": "FAIL",
+   "gates_passed": 4,
+   "score_lower_ci_roi_pct": -22.6,
+   "n_graded": 148,
+   "wins": 72,
+   "losses": 76,
+   "pushes": 1,
+   "win_pct": 0.4865,
+   "roi": -0.0713,
+   "roi_ci95": [
+    -0.226,
+    0.0835
+   ],
+   "units": -10.55,
+   "p_value": 0.8393,
+   "q_value": 0.9889,
+   "max_drawdown_units": -15.36,
+   "by_season": {
+    "2025": {
+     "n": 105,
+     "roi": -0.0727
+    },
+    "2026": {
+     "n": 43,
+     "roi": -0.0677
+    }
+   },
+   "holdout_roi": -0.0702,
+   "max_abs_corr": 1.0,
+   "gates": [
+    {
+     "id": "G1",
+     "name": "Provenance",
+     "pass": true,
+     "detail": "All inputs pinned by URL + sha256 in provenance.json."
+    },
+    {
+     "id": "G2",
+     "name": "Pre-specified rule",
+     "pass": true,
+     "detail": "Round-number threshold fixed before evaluation; no parameter search."
+    },
+    {
+     "id": "G3",
+     "name": "Sample size",
+     "pass": true,
+     "detail": "n=148 graded bets (minimum 100)."
+    },
+    {
+     "id": "G4",
+     "name": "Holdout positive",
+     "pass": false,
+     "detail": "latest-window ROI=-0.0702."
+    },
+    {
+     "id": "G5",
+     "name": "Significance",
+     "pass": false,
+     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
+    },
+    {
+     "id": "G6",
+     "name": "Stability",
+     "pass": false,
+     "detail": "0/2 seasons positive."
+    },
+    {
+     "id": "G7",
+     "name": "Drawdown",
+     "pass": true,
+     "detail": "max drawdown -15.36 units."
+    },
+    {
+     "id": "G8",
+     "name": "Diversification",
+     "pass": false,
+     "detail": "max |corr| with another strategy = 1.0."
+    }
+   ],
+   "window": "2025-2026 walk-forward"
+  },
+  {
    "strategy": "S05 Underdog on short rest (<=4 days)",
    "status": "FAIL",
    "gates_passed": 4,
@@ -1166,7 +1249,7 @@
    ],
    "units": -32.55,
    "p_value": 0.9829,
-   "q_value": 0.993,
+   "q_value": 0.9889,
    "max_drawdown_units": -40.09,
    "by_season": {
     "2005": {
@@ -1289,7 +1372,7 @@
      "id": "G5",
      "name": "Significance",
      "pass": false,
-     "detail": "BH-adjusted q=0.993 (needs <0.10)."
+     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
     },
     {
      "id": "G6",
@@ -1313,9 +1396,175 @@
    "window": "2005-2026"
   },
   {
-   "strategy": "S15 Start the team whose QB is ruled Out/Doubtful",
+   "strategy": "S01 Own-line vs close, edge >= 2.0",
    "status": "FAIL",
-   "gates_passed": 4,
+   "gates_passed": 3,
+   "score_lower_ci_roi_pct": -25.26,
+   "n_graded": 212,
+   "wins": 97,
+   "losses": 115,
+   "pushes": 2,
+   "win_pct": 0.4575,
+   "roi": -0.1265,
+   "roi_ci95": [
+    -0.2526,
+    -0.0004
+   ],
+   "units": -26.82,
+   "p_value": 0.9772,
+   "q_value": 0.9889,
+   "max_drawdown_units": -27.73,
+   "by_season": {
+    "2025": {
+     "n": 140,
+     "roi": -0.1
+    },
+    "2026": {
+     "n": 72,
+     "roi": -0.178
+    }
+   },
+   "holdout_roi": -0.139,
+   "max_abs_corr": 1.0,
+   "gates": [
+    {
+     "id": "G1",
+     "name": "Provenance",
+     "pass": true,
+     "detail": "All inputs pinned by URL + sha256 in provenance.json."
+    },
+    {
+     "id": "G2",
+     "name": "Pre-specified rule",
+     "pass": true,
+     "detail": "Round-number threshold fixed before evaluation; no parameter search."
+    },
+    {
+     "id": "G3",
+     "name": "Sample size",
+     "pass": true,
+     "detail": "n=212 graded bets (minimum 100)."
+    },
+    {
+     "id": "G4",
+     "name": "Holdout positive",
+     "pass": false,
+     "detail": "latest-window ROI=-0.139."
+    },
+    {
+     "id": "G5",
+     "name": "Significance",
+     "pass": false,
+     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
+    },
+    {
+     "id": "G6",
+     "name": "Stability",
+     "pass": false,
+     "detail": "0/2 seasons positive."
+    },
+    {
+     "id": "G7",
+     "name": "Drawdown",
+     "pass": false,
+     "detail": "max drawdown -27.73 units."
+    },
+    {
+     "id": "G8",
+     "name": "Diversification",
+     "pass": false,
+     "detail": "max |corr| with another strategy = 1.0."
+    }
+   ],
+   "window": "2025-2026 walk-forward"
+  },
+  {
+   "strategy": "S03 Own-total vs close, edge >= 3",
+   "status": "FAIL",
+   "gates_passed": 3,
+   "score_lower_ci_roi_pct": -27.96,
+   "n_graded": 159,
+   "wins": 72,
+   "losses": 87,
+   "pushes": 0,
+   "win_pct": 0.4528,
+   "roi": -0.1355,
+   "roi_ci95": [
+    -0.2796,
+    0.0086
+   ],
+   "units": -21.55,
+   "p_value": 0.9693,
+   "q_value": 0.9889,
+   "max_drawdown_units": -36.27,
+   "by_season": {
+    "2025": {
+     "n": 100,
+     "roi": -0.0455
+    },
+    "2026": {
+     "n": 59,
+     "roi": -0.2881
+    }
+   },
+   "holdout_roi": -0.1668,
+   "max_abs_corr": 1.0,
+   "gates": [
+    {
+     "id": "G1",
+     "name": "Provenance",
+     "pass": true,
+     "detail": "All inputs pinned by URL + sha256 in provenance.json."
+    },
+    {
+     "id": "G2",
+     "name": "Pre-specified rule",
+     "pass": true,
+     "detail": "Round-number threshold fixed before evaluation; no parameter search."
+    },
+    {
+     "id": "G3",
+     "name": "Sample size",
+     "pass": true,
+     "detail": "n=159 graded bets (minimum 100)."
+    },
+    {
+     "id": "G4",
+     "name": "Holdout positive",
+     "pass": false,
+     "detail": "latest-window ROI=-0.1668."
+    },
+    {
+     "id": "G5",
+     "name": "Significance",
+     "pass": false,
+     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
+    },
+    {
+     "id": "G6",
+     "name": "Stability",
+     "pass": false,
+     "detail": "0/2 seasons positive."
+    },
+    {
+     "id": "G7",
+     "name": "Drawdown",
+     "pass": false,
+     "detail": "max drawdown -36.27 units."
+    },
+    {
+     "id": "G8",
+     "name": "Diversification",
+     "pass": false,
+     "detail": "max |corr| with another strategy = 1.0."
+    }
+   ],
+   "window": "2025-2026 walk-forward"
+  },
+  {
+   "strategy": "S12 Start the team whose QB is ruled Out/Doubtful",
+   "status": "FAIL",
+   "gates_passed": 3,
    "score_lower_ci_roi_pct": null,
    "n_graded": 73,
    "wins": 38,
@@ -1329,7 +1578,7 @@
    ],
    "units": -0.45,
    "p_value": 0.5693,
-   "q_value": 0.993,
+   "q_value": 0.9889,
    "max_drawdown_units": -5.73,
    "by_season": {
     "2025": {
@@ -1342,7 +1591,7 @@
     }
    },
    "holdout_roi": -0.0174,
-   "max_abs_corr": null,
+   "max_abs_corr": 0.902,
    "gates": [
     {
      "id": "G1",
@@ -1372,7 +1621,7 @@
      "id": "G5",
      "name": "Significance",
      "pass": false,
-     "detail": "BH-adjusted q=0.993 (needs <0.10)."
+     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
     },
     {
      "id": "G6",
@@ -1389,248 +1638,11 @@
     {
      "id": "G8",
      "name": "Diversification",
-     "pass": true,
-     "detail": "max |corr| with another strategy = None."
+     "pass": false,
+     "detail": "max |corr| with another strategy = 0.902."
     }
    ],
-   "window": "2005-2026"
-  },
-  {
-   "strategy": "S01 Own-line vs close, edge >= 2.0",
-   "status": "FAIL",
-   "gates_passed": 3,
-   "score_lower_ci_roi_pct": null,
-   "n_graded": 72,
-   "wins": 31,
-   "losses": 41,
-   "pushes": 2,
-   "win_pct": 0.4306,
-   "roi": -0.178,
-   "roi_ci95": [
-    -0.3902,
-    0.0341
-   ],
-   "units": -12.82,
-   "p_value": 0.9557,
-   "q_value": 0.993,
-   "max_drawdown_units": -12.82,
-   "by_season": {
-    "2026": {
-     "n": 72,
-     "roi": -0.178
-    }
-   },
-   "holdout_roi": -0.178,
-   "max_abs_corr": 1.0,
-   "gates": [
-    {
-     "id": "G1",
-     "name": "Provenance",
-     "pass": true,
-     "detail": "All inputs pinned by URL + sha256 in provenance.json."
-    },
-    {
-     "id": "G2",
-     "name": "Pre-specified rule",
-     "pass": true,
-     "detail": "Round-number threshold fixed before evaluation; no parameter search."
-    },
-    {
-     "id": "G3",
-     "name": "Sample size",
-     "pass": false,
-     "detail": "n=72 graded bets (minimum 100)."
-    },
-    {
-     "id": "G4",
-     "name": "Holdout positive",
-     "pass": false,
-     "detail": "latest-window ROI=-0.178."
-    },
-    {
-     "id": "G5",
-     "name": "Significance",
-     "pass": false,
-     "detail": "BH-adjusted q=0.993 (needs <0.10)."
-    },
-    {
-     "id": "G6",
-     "name": "Stability",
-     "pass": false,
-     "detail": "0/1 seasons positive."
-    },
-    {
-     "id": "G7",
-     "name": "Drawdown",
-     "pass": true,
-     "detail": "max drawdown -12.82 units."
-    },
-    {
-     "id": "G8",
-     "name": "Diversification",
-     "pass": false,
-     "detail": "max |corr| with another strategy = 1.0."
-    }
-   ],
-   "window": "2005-2026"
-  },
-  {
-   "strategy": "S03 Own-total vs close, edge >= 3",
-   "status": "FAIL",
-   "gates_passed": 4,
-   "score_lower_ci_roi_pct": null,
-   "n_graded": 59,
-   "wins": 22,
-   "losses": 37,
-   "pushes": 0,
-   "win_pct": 0.3729,
-   "roi": -0.2881,
-   "roi_ci95": [
-    -0.5146,
-    -0.0616
-   ],
-   "units": -17.0,
-   "p_value": 0.993,
-   "q_value": 0.993,
-   "max_drawdown_units": -19.82,
-   "by_season": {
-    "2026": {
-     "n": 59,
-     "roi": -0.2881
-    }
-   },
-   "holdout_roi": -0.2881,
-   "max_abs_corr": null,
-   "gates": [
-    {
-     "id": "G1",
-     "name": "Provenance",
-     "pass": true,
-     "detail": "All inputs pinned by URL + sha256 in provenance.json."
-    },
-    {
-     "id": "G2",
-     "name": "Pre-specified rule",
-     "pass": true,
-     "detail": "Round-number threshold fixed before evaluation; no parameter search."
-    },
-    {
-     "id": "G3",
-     "name": "Sample size",
-     "pass": false,
-     "detail": "n=59 graded bets (minimum 100)."
-    },
-    {
-     "id": "G4",
-     "name": "Holdout positive",
-     "pass": false,
-     "detail": "latest-window ROI=-0.2881."
-    },
-    {
-     "id": "G5",
-     "name": "Significance",
-     "pass": false,
-     "detail": "BH-adjusted q=0.993 (needs <0.10)."
-    },
-    {
-     "id": "G6",
-     "name": "Stability",
-     "pass": false,
-     "detail": "0/1 seasons positive."
-    },
-    {
-     "id": "G7",
-     "name": "Drawdown",
-     "pass": true,
-     "detail": "max drawdown -19.82 units."
-    },
-    {
-     "id": "G8",
-     "name": "Diversification",
-     "pass": true,
-     "detail": "max |corr| with another strategy = None."
-    }
-   ],
-   "window": "2005-2026"
-  },
-  {
-   "strategy": "S01 Own-line vs close, edge >= 3.0",
-   "status": "FAIL",
-   "gates_passed": 3,
-   "score_lower_ci_roi_pct": null,
-   "n_graded": 43,
-   "wins": 21,
-   "losses": 22,
-   "pushes": 1,
-   "win_pct": 0.4884,
-   "roi": -0.0677,
-   "roi_ci95": [
-    -0.334,
-    0.1987
-   ],
-   "units": -2.91,
-   "p_value": 0.7319,
-   "q_value": 0.993,
-   "max_drawdown_units": -4.64,
-   "by_season": {
-    "2026": {
-     "n": 43,
-     "roi": -0.0677
-    }
-   },
-   "holdout_roi": -0.0677,
-   "max_abs_corr": 1.0,
-   "gates": [
-    {
-     "id": "G1",
-     "name": "Provenance",
-     "pass": true,
-     "detail": "All inputs pinned by URL + sha256 in provenance.json."
-    },
-    {
-     "id": "G2",
-     "name": "Pre-specified rule",
-     "pass": true,
-     "detail": "Round-number threshold fixed before evaluation; no parameter search."
-    },
-    {
-     "id": "G3",
-     "name": "Sample size",
-     "pass": false,
-     "detail": "n=43 graded bets (minimum 100)."
-    },
-    {
-     "id": "G4",
-     "name": "Holdout positive",
-     "pass": false,
-     "detail": "latest-window ROI=-0.0677."
-    },
-    {
-     "id": "G5",
-     "name": "Significance",
-     "pass": false,
-     "detail": "BH-adjusted q=0.993 (needs <0.10)."
-    },
-    {
-     "id": "G6",
-     "name": "Stability",
-     "pass": false,
-     "detail": "0/1 seasons positive."
-    },
-    {
-     "id": "G7",
-     "name": "Drawdown",
-     "pass": true,
-     "detail": "max drawdown -4.64 units."
-    },
-    {
-     "id": "G8",
-     "name": "Diversification",
-     "pass": false,
-     "detail": "max |corr| with another strategy = 1.0."
-    }
-   ],
-   "window": "2005-2026"
+   "window": "2025-2026 walk-forward"
   }
  ],
  "pairwise_correlation": {
@@ -1642,81 +1654,109 @@
    "n_overlap": 207,
    "corr": 1.0
   },
-  "S04 Divisional underdog +6.5 or more | S11 Home team with 3+ rest-day edge": {
+  "S04 Divisional underdog +6.5 or more | S07 Home team with 3+ rest-day edge": {
    "n_overlap": 69,
    "corr": -0.572
   },
-  "S04 Divisional underdog +6.5 or more | S12 Home team facing opponent off a bye": {
+  "S04 Divisional underdog +6.5 or more | S08 Home team facing opponent off a bye": {
    "n_overlap": 34,
    "corr": -0.46
   },
-  "S04 Divisional underdog +6.5 or more | S13 Home favourite of 10 or more": {
+  "S04 Divisional underdog +6.5 or more | S09 Home favourite of 10 or more": {
    "n_overlap": 228,
    "corr": -1.0
   },
-  "S04 Divisional underdog +6.5 or more | S08 Over when closing total is 41 or lower": {
+  "S04 Divisional underdog +6.5 or more | S10 Over when closing total is 41 or lower": {
    "n_overlap": 182,
    "corr": 0.112
   },
-  "S04 Divisional underdog +6.5 or more | S14 Under in divisional games with total 47+": {
+  "S04 Divisional underdog +6.5 or more | S11 Under in divisional games with total 47+": {
    "n_overlap": 205,
    "corr": 0.037
   },
-  "S05 Underdog on short rest (<=4 days) | S13 Home favourite of 10 or more": {
+  "S04 Divisional underdog +6.5 or more | S01 Own-line vs close, edge >= 2.0": {
+   "n_overlap": 31,
+   "corr": 0.808
+  },
+  "S05 Underdog on short rest (<=4 days) | S09 Home favourite of 10 or more": {
    "n_overlap": 31,
    "corr": -1.0
   },
-  "S05 Underdog on short rest (<=4 days) | S08 Over when closing total is 41 or lower": {
+  "S05 Underdog on short rest (<=4 days) | S10 Over when closing total is 41 or lower": {
    "n_overlap": 64,
    "corr": -0.031
   },
-  "S05 Underdog on short rest (<=4 days) | S14 Under in divisional games with total 47+": {
+  "S05 Underdog on short rest (<=4 days) | S11 Under in divisional games with total 47+": {
    "n_overlap": 46,
    "corr": -0.081
   },
-  "S06 Fade divisional road favourite of 6.5+ | S08 Over when closing total is 41 or lower": {
+  "S06 Fade divisional road favourite of 6.5+ | S10 Over when closing total is 41 or lower": {
    "n_overlap": 42,
    "corr": -0.005
   },
-  "S06 Fade divisional road favourite of 6.5+ | S14 Under in divisional games with total 47+": {
+  "S06 Fade divisional road favourite of 6.5+ | S11 Under in divisional games with total 47+": {
    "n_overlap": 62,
    "corr": -0.066
   },
-  "S11 Home team with 3+ rest-day edge | S13 Home favourite of 10 or more": {
+  "S07 Home team with 3+ rest-day edge | S09 Home favourite of 10 or more": {
    "n_overlap": 70,
    "corr": 1.0
   },
-  "S11 Home team with 3+ rest-day edge | S08 Over when closing total is 41 or lower": {
+  "S07 Home team with 3+ rest-day edge | S10 Over when closing total is 41 or lower": {
    "n_overlap": 92,
    "corr": -0.085
   },
-  "S11 Home team with 3+ rest-day edge | S14 Under in divisional games with total 47+": {
+  "S07 Home team with 3+ rest-day edge | S11 Under in divisional games with total 47+": {
    "n_overlap": 48,
    "corr": 0.076
   },
-  "S12 Home team facing opponent off a bye | S13 Home favourite of 10 or more": {
+  "S08 Home team facing opponent off a bye | S09 Home favourite of 10 or more": {
    "n_overlap": 31,
    "corr": 1.0
   },
-  "S12 Home team facing opponent off a bye | S08 Over when closing total is 41 or lower": {
+  "S08 Home team facing opponent off a bye | S10 Over when closing total is 41 or lower": {
    "n_overlap": 87,
    "corr": -0.086
   },
-  "S12 Home team facing opponent off a bye | S14 Under in divisional games with total 47+": {
+  "S08 Home team facing opponent off a bye | S11 Under in divisional games with total 47+": {
    "n_overlap": 36,
    "corr": -0.169
   },
-  "S13 Home favourite of 10 or more | S08 Over when closing total is 41 or lower": {
+  "S09 Home favourite of 10 or more | S10 Over when closing total is 41 or lower": {
    "n_overlap": 137,
    "corr": 0.011
   },
-  "S13 Home favourite of 10 or more | S14 Under in divisional games with total 47+": {
+  "S09 Home favourite of 10 or more | S11 Under in divisional games with total 47+": {
    "n_overlap": 63,
    "corr": -0.114
   },
-  "S01 Own-line vs close, edge >= 2.0 | S01 Own-line vs close, edge >= 3.0": {
-   "n_overlap": 43,
+  "S10 Over when closing total is 41 or lower | S03 Own-total vs close, edge >= 3": {
+   "n_overlap": 53,
    "corr": 1.0
+  },
+  "S01 Own-line vs close, edge >= 2.0 | S02 Own-line vs close, edge >= 3.0": {
+   "n_overlap": 148,
+   "corr": 1.0
+  },
+  "S01 Own-line vs close, edge >= 2.0 | S03 Own-total vs close, edge >= 3": {
+   "n_overlap": 82,
+   "corr": 0.175
+  },
+  "S01 Own-line vs close, edge >= 2.0 | S12 Start the team whose QB is ruled Out/Doubtful": {
+   "n_overlap": 39,
+   "corr": 0.902
+  },
+  "S02 Own-line vs close, edge >= 3.0 | S03 Own-total vs close, edge >= 3": {
+   "n_overlap": 59,
+   "corr": 0.223
+  },
+  "S02 Own-line vs close, edge >= 3.0 | S12 Start the team whose QB is ruled Out/Doubtful": {
+   "n_overlap": 32,
+   "corr": 0.882
+  },
+  "S03 Own-total vs close, edge >= 3 | S12 Start the team whose QB is ruled Out/Doubtful": {
+   "n_overlap": 36,
+   "corr": 0.108
   }
  },
  "parlay": {
@@ -3000,7 +3040,7 @@
     "market": -7.0
    }
   ],
-  "S11 Home team with 3+ rest-day edge": [
+  "S07 Home team with 3+ rest-day edge": [
    {
     "game_id": "2025_05_TEN_ARI",
     "season": 2025,
@@ -3402,7 +3442,7 @@
     "market": 8.5
    }
   ],
-  "S12 Home team facing opponent off a bye": [
+  "S08 Home team facing opponent off a bye": [
    {
     "game_id": "2023_14_BUF_KC",
     "season": 2023,
@@ -3804,7 +3844,7 @@
     "market": -5.5
    }
   ],
-  "S13 Home favourite of 10 or more": [
+  "S09 Home favourite of 10 or more": [
    {
     "game_id": "2024_16_NO_GB",
     "season": 2024,
@@ -4206,7 +4246,7 @@
     "market": 10.0
    }
   ],
-  "S08 Over when closing total is 41 or lower": [
+  "S10 Over when closing total is 41 or lower": [
    {
     "game_id": "2025_16_NYJ_NO",
     "season": 2025,
@@ -4608,7 +4648,7 @@
     "market": 8.5
    }
   ],
-  "S14 Under in divisional games with total 47+": [
+  "S11 Under in divisional games with total 47+": [
    {
     "game_id": "2024_18_MIN_DET",
     "season": 2024,
@@ -5412,7 +5452,7 @@
     "market": -3.0
    }
   ],
-  "S01 Own-line vs close, edge >= 3.0": [
+  "S02 Own-line vs close, edge >= 3.0": [
    {
     "game_id": "2026_01_ARI_LAC",
     "season": 2026,
@@ -6216,7 +6256,7 @@
     "market": 8.5
    }
   ],
-  "S15 Start the team whose QB is ruled Out/Doubtful": [
+  "S12 Start the team whose QB is ruled Out/Doubtful": [
    {
     "game_id": "2025_14_MIA_NYJ",
     "season": 2025,
