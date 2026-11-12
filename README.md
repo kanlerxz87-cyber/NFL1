@@ -34,12 +34,22 @@ injury scrape run in GitHub Actions:
   3. pipeline/schema.py           probe real column names (nothing is guessed)
   4. pipeline/build_all.py        ratings, own lines, strategies, availability, props, verification
   5. commit data/model/*.json     back to the branch
+The Arena sandbox can only reach a small host allow-list, so bulk downloads run in GitHub Actions:
+
+```
+.github/workflows/collect-data.yml
+  1. pipeline/collect.py        download nflverse release files, pin URL + sha256
+  2. pipeline/scrape_injuries.py  scrape the official nfl.com injury report (current week)
+  3. pipeline/schema.py         probe real column names (nothing is guessed)
+  4. pipeline/build_all.py      ratings, own lines, strategies, availability, props, verification
+  5. commit data/model/*.json   back to the branch
 ```
 
 Render the site locally (after data exists):
 
 ```
 python3 pipeline/gen_site.py      # writes index.html and pages/*.html
+python3 pipeline/gen_site.py     # writes index.html and pages/*.html
 ```
 
 Everything on the site is static HTML generated from `data/model/*.json` plus
@@ -55,7 +65,6 @@ Everything on the site is static HTML generated from `data/model/*.json` plus
 - `data/*.csv` — independent transcriptions from a parallel session, kept and cross-checked.
 - `pages/` — generated site pages plus companion pages from that session.
 - `COORDINATION.md` — shared multi-session task board and integration log.
-
 ## Honesty rules used in this repository
 
 - No value is inferred, interpolated or filled in. Unknown values render as a labelled blank.

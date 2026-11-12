@@ -100,6 +100,14 @@ def table(headers, rows, cls="", note=None) -> str:
     return out
 
 
+def signal_cell(status) -> str:
+    mapping = {"actionable": ("pass", "actionable"),
+               "watch": ("warn", "watch"),
+               "no-edge": ("neutral", "no edge")}
+    cls, text = mapping.get(status or "", ("neutral", status or "unknown"))
+    return f'<span class="badge {cls}">{esc(text)}</span>'
+
+
 def kpi(label, value, sub="") -> str:
     shown = esc(value) if value is not None else "&mdash;"
     return (f'<article class="kpi"><span class="kpi-label">{esc(label)}</span>'
@@ -199,7 +207,7 @@ def overview(snap, dash, lines, strat, avail, props, verif):
             num(g.get("market_total")),
             num(g.get("edge_home_line"), 2),
             num(g.get("edge_total"), 2),
-            badge("watch" if g.get("status") == "watch" else ("pass" if g.get("status") == "actionable" else "neutral")) + f"<br><span class=\"sub\">{esc(g.get('status'))}</span>",
+            signal_cell(g.get("status")),
             src(g.get("source_games") or SOURCE["schedule"], "NFL schedule"),
         ])
     lines_tbl = table(
@@ -229,12 +237,14 @@ def overview(snap, dash, lines, strat, avail, props, verif):
         av_rows.append([
             f"<strong>{esc(t['team'])}</strong>", esc(t.get("name")),
             t["starters_out"], t["starters_doubtful"], t["starters_questionable"],
+            t.get("starters_practice_only", 0),
             num(t.get("attrition_index_0_100")), num(t.get("backup_experience_avg")),
             src(t.get("source") or SOURCE["injuries"], "NFL injuries"),
         ])
-    av_tbl = table(["Team", "Club", "Out", "Doubtful", "Questionable",
+    av_tbl = table(["Team", "Club", "Out", "Doubtful", "Questionable", "Practice-only",
                     "Attrition index", "Backup yrs exp", "Source"], av_rows,
-                   note="Attrition index is a documented model weight, not an NFL statistic.")
+                   note=("Attrition index is a documented model weight, not an NFL statistic. "
+                         "Mid-week, most clubs have published practice participation only."))
 
     v_checks = (verif or {}).get("checks", [])
     v_rows = []

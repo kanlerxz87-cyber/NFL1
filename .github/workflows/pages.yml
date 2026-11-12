@@ -1,14 +1,18 @@
-name: Deploy NFL Decision Lab to GitHub Pages
+name: Verify NFL Decision Lab site build
+# Publishing: GitHub Pages for this repository is configured as a legacy branch build from
+# `main` /, so every push to main publishes automatically (run "pages build and deployment").
+# This workflow is the quality gate: it re-runs the analysis, recomputes published numbers and
+# fails on a broken local link or an unreachable page. It deliberately does not deploy, so two
+# deployment mechanisms cannot overwrite each other.
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
 permissions:
   contents: read
-  pages: write
-  id-token: write
 concurrency:
-  group: pages
+  group: pages-verify
   cancel-in-progress: true
 jobs:
   build:
@@ -38,16 +42,7 @@ jobs:
       - name: Check external source links (reports dead URLs, never fails on unreachable hosts)
         continue-on-error: true
         run: python3 scripts/verified/check_external_links.py
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Confirm the deployment path is the branch build
+        run: |
+          echo "Pages publishes from main / via the legacy build; this job only verifies."
+          ls -la index.html pages/ | head -20
