@@ -937,8 +937,23 @@ including three cells where nfl.com contradicts its own arithmetic.
   renders all flagged items with working source links. Reading the live page is
   what caught the defect recorded immediately below, which no local gate had
   reported - the same lesson this board logged as F35.
-- **Follow-up:** <https://github.com/kanlerxz87-cyber/NFL1/pull/19> carries the
-  source-label fix and this record.
+- **Follow-up:** <https://github.com/kanlerxz87-cyber/NFL1/pull/19> carried the
+  source-label fix and this record. **MERGED** at 2026-11-12T05:29:04Z, merge
+  commit `09f14ec3f22e350712794270574c4a8250f57f3b`, `mergeable_state: clean`,
+  all three checks (`Verify NFL1 site`, `Verify NFL Decision Lab site build`,
+  `pages build and deployment`) `success` on the merged commit. The Pages build
+  for `09f14ec3` completed `built` with no error.
+- **Fix confirmed on the published page**, not just in the repository: after the
+  CDN cache cleared, <https://kanlerxz87-cyber.github.io/NFL1/verified-lab/flagged.html>
+  renders `nflverse mirror ↗`, `Sportradar (NFL's official data partner) ↗` and
+  `this repository ↗` for the links that previously all read `NFL.com ↗`. The
+  first read of that page returned the cached pre-fix copy, which is why the
+  fix was re-checked against the served HTML rather than assumed from a green
+  build.
+- **Closing the record:** this entry ships in
+  <https://github.com/kanlerxz87-cyber/NFL1/pull/20>. A merge record cannot
+  contain its own merge result, so PR #20 is the last in the chain and its
+  outcome is reported in the session log rather than in this file.
 
 ## Warning for the next session: their gates write files
 
