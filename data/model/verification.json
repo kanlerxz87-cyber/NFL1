@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-12T05:13:09+00:00",
+ "generated_at": "2026-11-12T18:53:41+00:00",
  "checks": [
   {
    "name": "2026 standings (W-L-T, points for/against)",
@@ -1466,17 +1466,17 @@
   {
    "name": "Mirrored feed coverage vs official report, week 10",
    "source": "https://www.nfl.com/injuries/",
-   "rows_checked": 254,
-   "rows_matched": 20,
-   "mismatches": 234,
+   "rows_checked": 276,
+   "rows_matched": 276,
+   "mismatches": 0,
    "detail": [
     {
      "team": "coverage summary",
      "player": "official rows present in feed",
-     "position": "20/254",
-     "matched": false,
+     "position": "276/276",
+     "matched": true,
      "feed": {
-      "game": "3 game-status disagreements"
+      "game": "0 game-status disagreements"
      }
     }
    ]
@@ -2712,15 +2712,7 @@
    ]
   }
  ],
- "irregularities": [
-  {
-   "id": "V3",
-   "area": "mirrored injury feed",
-   "issue": "The mirrored feed has 20 of 254 official week 10 rows (3 status disagreements).",
-   "examples": [],
-   "source": "https://www.nfl.com/injuries/"
-  }
- ],
+ "irregularities": [],
  "unverifiable": [
   {
    "item": "Closing spread/total/moneylines",
