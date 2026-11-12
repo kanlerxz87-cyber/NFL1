@@ -1037,7 +1037,7 @@ Read-only audit of the live site against the repository's own data, done before 
 | S2 | Signal honesty: stop labelling unvalidated gaps "actionable"; state that no strategy has passed gates | done | `3d5c5e2d` | `pipeline/build_all.py` (status names only), `pipeline/gen_site.py` (labels, note) | Status names now `gap-large-unvalidated` / `gap-unvalidated` / `small-difference`; renderer maps legacy names too. Labels state gap size only. Blend test (model weight −0.328) and 0 of 12 strategies passing are printed beside the table. Flag F15. |
 | S3 | Automate the refresh: run the renderer in the `collect-data` workflow | done | `3d5c5e2d` | `.github/workflows/collect-data.yml`, `tools/check_committed_site.py` (new) | Workflow now runs `pipeline/gen_site.py`, then `tools/check_committed_site.py`, then commits `data/model`, `pipeline`, `index.html`, `pages`. Not run in Actions until this branch is pushed (see log). Flag F20. |
 | S4 | Official-source reconciliation of availability rows against nfl.com | done (partial scope) | `3d5c5e2d` | `data/verified/live_check_2026-11-12.tsv` (new) | 61 official rows (6 full clubs: WAS, NYG, NE, DET, KC, ATL) typed from nfl.com/injuries/ on 2026-11-12 and compared by script: **61/61 MATCH**; per-club counts equal the scrape. All 6 official game designations match. Other 20 clubs' rows are not hand-reconciled. Flag F18. |
-| S5 | Brief-to-evidence coverage matrix, gaps flagged, no value inferred | done | `3d5c5e2d` | `pipeline/gen_site.py` (matrix on `executive.html`), `COORDINATION.md` | 14 requirements mapped to a page and a source; 5 implemented, 6 partial, 3 blocked (verified against the rendered page). Flags F17, F21. |
+| S5 | Brief-to-evidence coverage matrix, gaps flagged, no value inferred | done | `3d5c5e2d` | `pipeline/gen_site.py` (matrix on `executive.html`), `COORDINATION.md` | 14 requirements mapped to a page and a source; 8 implemented, 4 partial, 2 blocked (counted from the rendered page). Flags F17, F21. |
 | S6 | Integration: PR to `main`, required checks, merge, GitHub Pages deploy, PR and merge result recorded here | in progress | `3d5c5e2d` (integration) | `COORDINATION.md` | Open at time of writing; result appended to the log below. |
 
 Shared outputs (`index.html`, `pages/*`) are changed here only because this session is the sole active
@@ -1055,7 +1055,7 @@ session and every other task on the board is `done`; that is the integration con
 1. 61 official injury rows (6 clubs) typed from the nfl.com page and compared by script with `data/model/official_injuries.json` (18:53 UTC): 61/61 match on position, injury, practice status, game status.
 2. All 6 official game designations (WAS Patrick Out, WAS Yankoff Out, NYG Harrison Questionable, NE Brown Out, NE Davis III Out, NE Henderson Out) confirmed on the page.
 3. Rebuilt pages checked by `tools/check_committed_site.py`: 20 pages, 409 internal links resolve, 33 source tables, 788 rows each with an https source link, no stale stamps. Existing `scripts/verified/check_site.py` PASS; `scripts/verified/validate_verified.py` PASS.
-4. Week 10 lines re-derived from the displayed values: edge = model minus market holds on all 14 rows, using the home-margin convention in `lines.json` (`sign_convention_check`, correlation 0.439 over 5,591 games).
+4. Week 10 edge arithmetic recomputed from `lines.json` for all 14 games: edge = model margin minus market margin, within rounding (max difference 0.05). Sign convention from `sign_convention_check` (correlation 0.439 over 5,591 games).
 
 **Irregularities published on the Flagged for Review page (non-blocking):**
 - **F15** signal labels "actionable" with no gate — resolved by relabelling (renderer and pipeline).
@@ -1071,4 +1071,4 @@ session and every other task on the board is `done`; that is the integration con
 ## Session `3d5c5e2d-nfl1` — log
 
 - 2026-11-12 — Claimed S1–S6 and pushed the claim before any other edit (`dab0b26`).
-- 2026-11-12 — Found the stale publication (pages 05:07 UTC vs data 18:53 UTC) by re-rendering into a scratch copy and diffing; found the "actionable" label and the starter-only availability gap by reading the pipeline code against the data.
+- 2026-11-12 — Found the stale publication (pages 05:07 UTC vs data 18:53 UTC) by re-rendering the working tree and diffing against the committed pages; found the "actionable" label and the starter-only availability gap by reading `pipeline/build_all.py` against `data/model/availability.json`.
