@@ -145,11 +145,62 @@ def section_of(html: str, upto: int) -> str:
     return best
 
 
+HEADING = re.compile(r"^[\s>#*_]*(OFFENSE|DEFENSE|SPECIAL\s*TEAMS)\b", re.I)
+# Cells that are column headers, not players (chiefs.com uses First/Second/Third/Fourth,
+# packers.com uses Player/Player/Player).
+HEADER_WORDS = {"position", "player", "first", "second", "third", "fourth", "pos"}
+
+
+def is_header_row(cells) -> bool:
+    cleaned = [cell_text(c).strip().lower() for c in cells if cell_text(c).strip()]
+    return bool(cleaned) and all(c in HEADER_WORDS for c in cleaned)
+
+
+def tokenize(html: str):
+    """Yield ('heading', UNIT) and ('row', cells) in document order.
+
+    Handles the markdown-ish tables the club CMS server-renders and, as a fallback,
+    real <table> markup. Unit boundaries come from the page's own section headings
+    ("Offense" / "Defense" / "Special Teams"), never from guessing.
+    """
+    md_rows = [l.strip() for l in html.splitlines()
+               if l.strip().startswith("|") and l.strip().count("|") >= 3]
+    if md_rows:
+        for line in html.splitlines():
+            s = line.strip()
+            if HEADING.match(s):
+                key = re.sub(r"[^A-Z]", "", HEADING.match(s).group(1).upper())
+                yield ("heading", {"OFFENSE": "offense", "DEFENSE": "defense",
+                                   "SPECIALTEAMS": "special_teams"}[key])
+            elif s.startswith("|") and s.count("|") >= 3:
+                cells = [c.strip() for c in s.strip("|").split("|")]
+                if all(re.fullmatch(r":?-{2,}:?", c or "x") for c in cells if c):
+                    continue
+                yield ("row", cells)
+        return
+    for chunk in re.split(r"(<h[1-6][^>]*>.*?</h[1-6]>)", html, flags=re.S | re.I):
+        if chunk.startswith("<h"):
+            txt = re.sub(r"<[^>]+>", "", chunk)
+            m = re.search(r"(?i)(offense|defense|special\s*teams)", txt)
+            if m:
+                key = re.sub(r"[^A-Z]", "", m.group(1).upper())
+                yield ("heading", {"OFFENSE": "offense", "DEFENSE": "defense",
+                                   "SPECIALTEAMS": "special_teams"}[key])
+            continue
+        for tr in re.findall(r"<tr[^>]*>(.*?)</tr>", chunk, flags=re.S | re.I):
+            cells = [re.sub(r"<[^>]+>", "", c).strip()
+                     for c in re.findall(r"<t[dh][^>]*>(.*?)</t[dh]>", tr, flags=re.S | re.I)]
+            if cells:
+                yield ("row", cells)
+
+
 def parse_chart(html: str):
-    """Return list of {unit, position, players:[{rank,name}]}."""
-    rows = parse_markdown_tables(html)
+    """Return list of {unit, position, players:[{rank,name}]}.
+
+    Column order is the page's own order, so column 1 is the starter and column 4 is the
+    fourth string. Nothing is re-ordered or inferred.
+    """
     out, cur_pos, cur_unit, buf = [], None, "offense", []
-    positions = []
 
     def flush():
         nonlocal buf, cur_pos
@@ -162,21 +213,25 @@ def parse_chart(html: str):
             })
         buf = []
 
-    for cells in rows:
-        if not cells:
+    for kind, payload in tokenize(html):
+        if kind == "heading":
+            flush()
+            cur_unit, cur_pos = payload, None
+            continue
+        cells = payload
+        if not cells or is_header_row(cells):
             continue
         first = cell_text(cells[0]) if cells[0] else ""
         rest = [cell_text(c) for c in cells[1:]]
         if first:
             flush()
             cur_pos = first.upper()
-            positions.append((cur_pos, len(rest)))
             buf = rest
         else:
             # continuation row (packers style): extra depth for the same position
             buf.extend(rest)
     flush()
-    return out, positions
+    return out
 
 
 def as_of(html: str) -> str:
@@ -187,6 +242,15 @@ def as_of(html: str) -> str:
     return m.group(1) if m else ""
 
 
+def _rank_hist(clubs_out):
+    hist = {}
+    for c in clubs_out:
+        for p in c["depth"]:
+            for pl in p["players"]:
+                hist[str(pl["rank"])] = hist.get(str(pl["rank"]), 0) + 1
+    return {k: hist[k] for k in sorted(hist, key=int)}
+
+
 def main() -> int:
     started = datetime.now(timezone.utc).isoformat()
     clubs_out = []
@@ -195,6 +259,7 @@ def main() -> int:
             "abbr": abbr, "club": name, "status": "unavailable",
             "source_url": "", "http_status": None, "reason": "",
             "as_of": "", "title": "", "unofficial_label": False, "depth": [],
+            "page_confirms_depth_chart": False,
         }
         for dom in domains:
             url = f"https://www.{dom}/team/depth-chart"
@@ -213,10 +278,16 @@ def main() -> int:
                 rec.update(http_status=status, source_url=url, title=title,
                            reason=f"no depth chart at {dom} (HTTP {status})")
                 continue
-            depth, _ = parse_chart(html)
+            depth = parse_chart(html)
             if not depth:
+                if re.search(r"(?i)depth chart", title):
+                    why = ("page title confirms a depth chart exists, but its rows are "
+                           "rendered client-side and are absent from the server HTML")
+                else:
+                    why = "page fetched but no depth rows parsed"
                 rec.update(http_status=status, source_url=url, title=title,
-                           reason=f"page fetched but no depth rows parsed at {dom}")
+                           reason=f"{why} at {dom}",
+                           page_confirms_depth_chart=bool(re.search(r"(?i)depth chart", title)))
                 continue
             rec.update(status="ok", http_status=status, source_url=url,
                        title=title, reason="", depth=depth, as_of=as_of(html),
@@ -241,6 +312,11 @@ def main() -> int:
         "clubs_ok": len(ok),
         "clubs_unavailable": [c["abbr"] for c in clubs_out if c["status"] != "ok"],
         "position_rows_total": sum(len(c["depth"]) for c in clubs_out),
+        "unit_counts": {
+            u: sum(1 for c in clubs_out for p in c["depth"] if p["unit"] == u)
+            for u in ("offense", "defense", "special_teams")
+        },
+        "slots_by_depth_rank": _rank_hist(clubs_out),
         "player_slots_total": sum(len(p["players"]) for c in clubs_out for p in c["depth"]),
         "clubs": clubs_out,
     }
