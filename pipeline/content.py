@@ -369,6 +369,19 @@ SUGGESTIONS = [
         "status": "Proposed - queued",
     },
     {
+        "id": "S13",
+        "title": "Guard the live site so HTML can never be older than its data",
+        "problem": "The daily data refresh updated data/model/*.json but committed with [skip ci], so the page-rebuild workflows never ran and the published HTML kept the numbers from the last merge. Measured on 2026-11-12: HTML built 05:07 vs data 18:53; 103 vs 113 starters flagged; 20/254 vs 276/276 mirrored-feed coverage.",
+        "change": "Regenerate the site inside the refresh job itself and commit the HTML with the JSON; add a check that fails the build if any page's build stamp predates the data stamp.",
+        "impact": "High - the point of a live dashboard is that it shows current numbers.",
+        "effort": "Low - the regeneration step is added to collect-data.yml; the staleness guard is a small check.",
+        "risk": "Low if the generators stay deterministic.",
+        "depends": "Nothing - the generators already exist.",
+        "evidence": "collect-data.yml 'Re-render the published pages from the refreshed data' step (session 3d5c5e2d); index.html stamp equals dashboard.json generated_at.",
+        "recommend": "Adopt. The regeneration step is implemented; the staleness guard is the remaining piece.",
+        "status": "Implemented (regeneration) - guard proposed",
+    },
+    {
         "id": "SA-01",
         "title": "Guard shared output paths across the four site generators",
         "problem": "pipeline/gen_site.py, scripts/verified/build_site.py and tools/build.py all write shared paths (index.html, pages/lines.html, README.md). This audit had to restore the canonical index.html and README.md after a routine tools/build.py run regenerated them from a different generation.",
@@ -442,6 +455,15 @@ DECISIONS = [
         "criteria": "Worst measured drawdown across strategies; user tolerance.",
         "blocks": "Risk gate wording.",
         "status": "Recommended",
+    },
+    {
+        "id": "D06",
+        "decision": "How does the live site stay current with the daily data refresh?",
+        "options": ["Regenerate HTML inside the refresh job and commit it", "Drop [skip ci] and let pages.yml rebuild", "Regenerate only on merge"],
+        "recommend": "Regenerate inside the refresh job (collect-data.yml) and commit the HTML with the JSON.",
+        "criteria": "The live HTML build stamp must match the data generated_at; no extra CI loop.",
+        "blocks": "Whether the dashboard shows current numbers at all.",
+        "status": "Implemented",
     },
 ]
 

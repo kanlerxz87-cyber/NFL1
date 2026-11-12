@@ -1308,3 +1308,51 @@ Live nfl.com re-read (chunks 0 and 1 of 7): 80 of 80 rows match the 279-row tran
 | R-6a232e79-10 | Keep, but re-scope: add a per-refresh gate that compares the scrape with the live page. The scrape is currently the more accurate of the two. | `pipeline/scrape_injuries.py` | RV-02 | Open |
 
 Also: `data/flags.json` states that the scraper was verified row-for-row (~120 rows, 0 errors). This session could not reproduce that count (RV-31). That file is another session's and is not changed here.
+# Session `bc923016-nfl1` — fresh verification; staleness finding; editorial additions
+
+| Item | Value |
+|---|---|
+| This session ID | `bc923016-nfl1` |
+| This session branch | `arena/bc923016-nfl1` |
+| Base commit | `c09c739bd5825981e97dddeefba5de6bd89d36fc` (identical to `origin/main` at start) |
+| Contribution | Independent fresh verification of standings + injuries against live nfl.com; independently found the live-site HTML-staleness bug (already fixed on `main` by session `3d5c5e2d` via PR #23); added decision record D06 + suggestion S13; made the verified-lab README pointer durable |
+
+The branch began as a clean copy of `main` (c09c739), so this session performed an independent
+review pass. During integration, `main` had advanced through PRs #21-#25, including session
+`3d5c5e2d`'s fix to the same staleness bug this session found. The merge was resolved in favour of
+`main`'s canonical `collect-data.yml` (gen_site.py re-render + check_committed_site.py) and HTML;
+this session's redundant `collect-data.yml` change was dropped, and its unique editorial additions
+(content.py D06/S13, tools/build.py pointer, this record) were kept. Nothing from either side was
+discarded.
+
+## Task board (this session)
+
+| ID | Task | Status | File scope | Notes |
+|---|---|---|---|---|
+| B01 | Fresh independent verification of standings + injuries against live nfl.com (2026-11-12) | done | `COORDINATION.md` | 32/32 standings, 276 injury rows spot-checked; check_site.py + validate_verified.py pass |
+| B02 | Live-site HTML staleness bug: independent root-cause | superseded | `COORDINATION.md` | Found independently; already fixed on `main` by `3d5c5e2d` (PR #23). Took `main`'s fix. |
+| B03 | Decision record D06 + suggestion S13 (staleness guard) | done | `pipeline/content.py`, `pages/suggestions.html` | D06 Implemented; S13 regeneration Implemented, guard proposed |
+| B04 | Durable README pointer to verified-lab (R-a2cea255-01) | done | `tools/build.py` | Template edit; closes the open request |
+| B05 | Final integration: merge main, resolve conflicts, link check, PR, merge, deploy | done | `COORDINATION.md` | see PR / merge below |
+
+## Fresh verification (B01)
+
+- **Standings** — fetched `https://www.nfl.com/standings/league/2026/reg` (2026-11-12). BUF 7-1
+  (256/187), SF 7-1 (235/156), CHI 7-2 (241/184), NYG 5-2-1 (182/172) match `data/model/verification.json`
+  exactly. Automated check: 32/32 rows matched.
+- **Injuries** — fetched `https://www.nfl.com/injuries/` (Week 10, 2026-11-12). WAS (Lucas Patrick
+  Out/concussion, Colson Yankoff Out/knee), NYG (Malik Harrison questionable/groin), NE (Ben Brown,
+  Carlton Davis III, TreVeyon Henderson Out) match `data/model/official_injuries.json` exactly.
+- **Site gates** — `scripts/verified/check_site.py` and `scripts/verified/validate_verified.py` pass.
+
+## Irregularities
+
+- **V3** — mirrored-feed coverage now reports 276/276 for week 10. Would resolve V3 if the mirror is
+  complete; the mirror file is a release asset not downloadable from the sandbox, so it could not be
+  independently re-derived here (produced by CI where the mirror was present). Flagged for review.
+- **F-014 / F19 / F20** — multiple site renderers (gen_site.py, build_site.py, tools/build.py) confirmed;
+  `3d5c5e2d` logged F19/F20 recommending a single renderer. Not resolved here (pre-existing).
+
+## PR / merge
+
+- (filled after merge)

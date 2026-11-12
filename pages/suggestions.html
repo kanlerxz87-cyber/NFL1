@@ -18,7 +18,7 @@
     <p class="eyebrow">Evidence-first dashboard</p>
     <h1>Suggestions &amp; Paths</h1>
     <p class="standfirst">Twelve improvements, five decision records, and a review process for choosing before implementing.</p>
-    <p class="timestamp">Data built 2026-11-12T22:49:45+00:00 · every value links to its source</p>
+    <p class="timestamp">Data built 2026-11-12T22:54:34+00:00 · every value links to its source</p>
   </section>
   
 <section class="panel">
@@ -31,7 +31,7 @@
 
 <section class="panel">
   <div class="panel-head"><h2>Decision records</h2><a href="review.html">Blocking flags →</a></div>
-  <div class="table-wrap"><table class=""><thead><tr><th>ID</th><th>Decision</th><th>Options</th><th>Recommendation</th><th>Criteria</th><th>What it blocks</th><th>Status</th></tr></thead><tbody><tr><td><strong>D01</strong></td><td>What is the default line the site publishes?</td><td>• Pure EPA model line<br>• Market line<br>• Hybrid (fitted weight)<br>• Both, labelled</td><td>Hybrid as default, pure model always visible.</td><td>Out-of-sample MAE on 2026; weight stability across seasons; transparency.</td><td>Every downstream &#x27;edge&#x27; number.</td><td><span class="badge warn">Needs sign-off</span></td></tr><tr><td><strong>D02</strong></td><td>Do we buy a licensed odds feed?</td><td>• Yes now<br>• Yes next season<br>• No - model-only publication</td><td>Yes now if budget allows; otherwise stop claiming edge and publish model-only.</td><td>Cost vs value of CLV and prop pricing; terms permitting republication.</td><td>S03, prop leaderboard, parlay scoring, CLV gate.</td><td><span class="badge warn">Open</span></td></tr><tr><td><strong>D03</strong></td><td>Does the rewards competition carry real value?</td><td>• Paper points only<br>• Non-cash prizes<br>• Cash prizes</td><td>Paper points only until legal review concludes.</td><td>Jurisdiction, terms, anti-gaming controls, tax treatment.</td><td>Rewards launch.</td><td><span class="badge neutral">Blocked - legal</span></td></tr><tr><td><strong>D04</strong></td><td>Which bet types are scored on the leaderboard?</td><td>• Singles only<br>• Singles + parlays<br>• All incl. props and combos</td><td>Singles now; add parlay and prop categories only when priced.</td><td>Data availability per type; variance comparability.</td><td>Leaderboard scope.</td><td><span class="badge warn">Recommended</span></td></tr><tr><td><strong>D05</strong></td><td>How many units may a strategy risk before review?</td><td>• Flat 1 unit, stop at -25<br>• Flat 1 unit, stop at -10<br>• Fractional Kelly</td><td>Flat 1 unit with a -25 unit review trigger (matches gate G7).</td><td>Worst measured drawdown across strategies; user tolerance.</td><td>Risk gate wording.</td><td><span class="badge warn">Recommended</span></td></tr></tbody></table></div>
+  <div class="table-wrap"><table class=""><thead><tr><th>ID</th><th>Decision</th><th>Options</th><th>Recommendation</th><th>Criteria</th><th>What it blocks</th><th>Status</th></tr></thead><tbody><tr><td><strong>D01</strong></td><td>What is the default line the site publishes?</td><td>• Pure EPA model line<br>• Market line<br>• Hybrid (fitted weight)<br>• Both, labelled</td><td>Hybrid as default, pure model always visible.</td><td>Out-of-sample MAE on 2026; weight stability across seasons; transparency.</td><td>Every downstream &#x27;edge&#x27; number.</td><td><span class="badge warn">Needs sign-off</span></td></tr><tr><td><strong>D02</strong></td><td>Do we buy a licensed odds feed?</td><td>• Yes now<br>• Yes next season<br>• No - model-only publication</td><td>Yes now if budget allows; otherwise stop claiming edge and publish model-only.</td><td>Cost vs value of CLV and prop pricing; terms permitting republication.</td><td>S03, prop leaderboard, parlay scoring, CLV gate.</td><td><span class="badge warn">Open</span></td></tr><tr><td><strong>D03</strong></td><td>Does the rewards competition carry real value?</td><td>• Paper points only<br>• Non-cash prizes<br>• Cash prizes</td><td>Paper points only until legal review concludes.</td><td>Jurisdiction, terms, anti-gaming controls, tax treatment.</td><td>Rewards launch.</td><td><span class="badge neutral">Blocked - legal</span></td></tr><tr><td><strong>D04</strong></td><td>Which bet types are scored on the leaderboard?</td><td>• Singles only<br>• Singles + parlays<br>• All incl. props and combos</td><td>Singles now; add parlay and prop categories only when priced.</td><td>Data availability per type; variance comparability.</td><td>Leaderboard scope.</td><td><span class="badge warn">Recommended</span></td></tr><tr><td><strong>D05</strong></td><td>How many units may a strategy risk before review?</td><td>• Flat 1 unit, stop at -25<br>• Flat 1 unit, stop at -10<br>• Fractional Kelly</td><td>Flat 1 unit with a -25 unit review trigger (matches gate G7).</td><td>Worst measured drawdown across strategies; user tolerance.</td><td>Risk gate wording.</td><td><span class="badge warn">Recommended</span></td></tr><tr><td><strong>D06</strong></td><td>How does the live site stay current with the daily data refresh?</td><td>• Regenerate HTML inside the refresh job and commit it<br>• Drop [skip ci] and let pages.yml rebuild<br>• Regenerate only on merge</td><td>Regenerate inside the refresh job (collect-data.yml) and commit the HTML with the JSON.</td><td>The live HTML build stamp must match the data generated_at; no extra CI loop.</td><td>Whether the dashboard shows current numbers at all.</td><td><span class="badge pass">Implemented</span></td></tr></tbody></table></div>
 </section>
 
 <section class="panel">
@@ -191,6 +191,19 @@
     <div><dt>Depends on</dt><dd>Automated refresh (present)</dd></div>
     <div><dt>Evidence it is right</dt><dd>Dated snapshot files in git.</dd></div>
     <div><dt>Recommendation</dt><dd>Adopt before the next kickoff.</dd></div>
+  </dl>
+</article>
+<article class="card">
+  <div class="card-head"><h3><span class="id">S13</span> Guard the live site so HTML can never be older than its data</h3><span class="badge neutral">Implemented (regeneration) - guard proposed</span></div>
+  <p class="problem"><strong>Problem:</strong> The daily data refresh updated data/model/*.json but committed with [skip ci], so the page-rebuild workflows never ran and the published HTML kept the numbers from the last merge. Measured on 2026-11-12: HTML built 05:07 vs data 18:53; 103 vs 113 starters flagged; 20/254 vs 276/276 mirrored-feed coverage.</p>
+  <p><strong>Change:</strong> Regenerate the site inside the refresh job itself and commit the HTML with the JSON; add a check that fails the build if any page&#x27;s build stamp predates the data stamp.</p>
+  <dl class="facts">
+    <div><dt>Impact</dt><dd>High - the point of a live dashboard is that it shows current numbers.</dd></div>
+    <div><dt>Effort</dt><dd>Low - the regeneration step is added to collect-data.yml; the staleness guard is a small check.</dd></div>
+    <div><dt>Risk</dt><dd>Low if the generators stay deterministic.</dd></div>
+    <div><dt>Depends on</dt><dd>Nothing - the generators already exist.</dd></div>
+    <div><dt>Evidence it is right</dt><dd>collect-data.yml &#x27;Re-render the published pages from the refreshed data&#x27; step (session 3d5c5e2d); index.html stamp equals dashboard.json generated_at.</dd></div>
+    <div><dt>Recommendation</dt><dd>Adopt. The regeneration step is implemented; the staleness guard is the remaining piece.</dd></div>
   </dl>
 </article>
 <article class="card">
