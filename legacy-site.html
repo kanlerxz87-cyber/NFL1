@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="NFL decision support: verified data tables, evidence register, strategy validation, and review.">
+<title>NFL Decision Lab</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="legacy-site.html">NFL <span>Decision Lab</span></a>
+  <nav>
+    <a href="legacy-site.html" class="active">Overview</a>
+    <a href="pages/executive-summary.html">Executive Summary</a>
+    <a href="pages/teams.html">Teams</a>
+    <a href="pages/standings.html">Standings</a>
+    <a href="pages/injuries.html">Injuries</a>
+    <a href="pages/availability.html">Availability</a>
+    <a href="pages/data.html">Verified Data</a>
+    <a href="pages/lines.html">Own Lines</a>
+    <a href="pages/analysis.html">Validation & Correlation</a>
+    <a href="pages/decisions.html">Decision Register</a>
+    <a href="pages/verified.html">Verified Artifacts</a>
+    <a href="pages/evidence.html">Evidence</a>
+    <a href="pages/models.html">Strategy Lab</a>
+    <a href="pages/strategies.html">Strategies</a>
+    <a href="pages/suggestions.html">Suggestions</a>
+    <a href="pages/questions.html">Questions</a>
+    <a href="pages/flagged.html">Flagged</a>
+    <a href="pages/review.html">Review</a>
+  </nav>
+</header>
+<main>
+  <section class="hero">
+    <div>
+      <p class="eyebrow">EVIDENCE-FIRST · VERSION 0.2</p>
+      <h1>Make better decisions.<br><em>Know what we don’t know.</em></h1>
+      <p class="intro">A transparent framework for building, testing, and comparing NFL betting signals. Combines verified data tables (teams, standings, injuries) with an evidence register, strategy validation gates, and a flagged-for-review register. No fabricated odds, injury statuses, stats, or performance claims.</p>
+      <a class="button" href="pages/models.html">Explore validation gates <span>↗</span></a>
+    </div>
+    <div class="hero-card">
+      <div class="pulse"></div>
+      <small>DATA READINESS</small>
+      <h2>Partial — verified snapshot</h2>
+      <p>Teams (32), 2026 standings (Week 10 snapshot), and a Week 10 injury snapshot are verified from official NFL.com. Schedule, player stats, depth charts, odds, and backtests remain uncollected and are flagged.</p>
+      <a href="pages/review.html">Why this is flagged →</a>
+    </div>
+  </section>
+
+  <section class="metrics">
+    <article><span>01</span><h3>Source integrity</h3><p>Prefer official NFL sources; record source, timestamp, market, and revisions.</p></article>
+    <article><span>02</span><h3>Test discipline</h3><p>Time-ordered out-of-sample evaluation; no leakage or cherry-picked windows.</p></article>
+    <article><span>03</span><h3>Risk awareness</h3><p>Track vig, uncertainty, drawdown, and exposure—not just win rate.</p></article>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <div><p class="eyebrow">VERIFIED DATA</p><h2>Official NFL.com snapshot (2026-11-12)</h2></div>
+      <a href="pages/standings.html">Full standings →</a>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Dataset</th><th>Rows</th><th>Source</th><th>Page</th></tr></thead>
+        <tbody>
+          <tr><td>Teams</td><td>32</td><td><a href="https://www.nfl.com/teams/">nfl.com/teams</a></td><td><a href="pages/teams.html">Teams</a></td></tr>
+          <tr><td>Standings (Week 10)</td><td>32</td><td><a href="https://www.nfl.com/standings/league/2026/reg">nfl.com standings</a></td><td><a href="pages/standings.html">Standings</a></td></tr>
+          <tr><td>Injuries (Thu game, all published rows)</td><td>20</td><td><a href="https://www.nfl.com/injuries/">nfl.com/injuries</a></td><td><a href="pages/injuries.html">Injuries</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <div><p class="eyebrow">VERIFICATION UPGRADE · 2026-11-12</p><h2>Full season captured and reconciled</h2></div>
+      <a href="pages/data.html">Verified data →</a>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Result</th><th>Detail</th><th>Why it matters</th><th>Where</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge ok">136/136 games</span></td><td>Every completed 2026 game (weeks 1–9) captured from official NFL week pages.</td><td>All 32 teams' W-L-T, points for and points against reproduce the official standings exactly, so no score is missing or mistyped.</td><td><a href="pages/data.html">Verified Data</a></td></tr>
+          <tr><td><span class="badge warn">Model fails gate</span></td><td>Own lines were generated for all 14 Week 10 games, then forward-tested.</td><td>Margin error 10.93 vs 10.62 for a home-field-only baseline; 13.3% chance the model is better. Published, not recommended.</td><td><a href="pages/lines.html">Own Lines</a></td></tr>
+          <tr><td><span class="badge warn">Luck not excluded</span></td><td>Best strategy hits 60.7% straight up, but Holm-adjusted p = 0.063 and Brier skill is negative.</td><td>Winner-picking accuracy is not the same as beating a price; no market price data exists to test the latter.</td><td><a href="pages/analysis.html">Validation</a></td></tr>
+          <tr><td><span class="badge ok">Correlations measured</span></td><td>Opponent quality ↔ points scored r = +0.386; margin ↔ total r = -0.161; home win rate 49.6%.</td><td>Gives real numbers to size parlays with, instead of assuming legs are independent.</td><td><a href="pages/analysis.html">Correlation</a></td></tr>
+          <tr><td><span class="badge warn">Depth order blocked</span></td><td>Official NFL depth charts are not published (depth-chart URL returns 404).</td><td>Injury statuses are verified, but "2nd/3rd-string" replacement chains cannot be sourced, so they stay blank.</td><td><a href="pages/availability.html">Availability</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <div><p class="eyebrow">DECISION CHECKLIST</p><h2>Before any wager or model claim</h2></div>
+      <a href="pages/evidence.html">Full evidence register →</a>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Question to resolve</th><th>Evidence required</th><th>Current state</th><th>Official source</th></tr></thead>
+        <tbody>
+          <tr><td>What exact market, book, line and timestamp are being evaluated?</td><td>Market-level quote history including price, limits if available, and capture time</td><td><span class="badge warn">Missing</span></td><td><a href="https://www.nfl.com/schedules/">NFL schedule</a></td></tr>
+          <tr><td>Are injuries and likely replacements confirmed?</td><td>Dated official injury report plus roster/depth chart evidence; role and snap context</td><td><span class="badge warn">Partial</span></td><td><a href="https://www.nfl.com/injuries/">NFL injury reports</a></td></tr>
+          <tr><td>Does signal beat the market after vig, out of sample?</td><td>Locked, time-stamped predictions; closing comparison and realized settled returns</td><td><span class="badge warn">Not tested</span></td><td><a href="https://www.nfl.com/schedules/">NFL Football Operations</a></td></tr>
+          <tr><td>Is the apparent edge robust rather than luck?</td><td>Sample size, uncertainty intervals, multiple-testing adjustment, regime checks</td><td><span class="badge warn">Unknown</span></td><td><a href="pages/models.html">Validation protocol</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Links identify official reference entry points, not proof of any current odds, injuries, player roles, or model results. See <a href="pages/review.html">Flagged for Review</a> for unresolved requirements.</p>
+  </section>
+
+  <section class="callout">
+    <p class="eyebrow">PROPOSED WORKFLOW</p>
+    <h2>Collect → Freeze → Test → Review</h2>
+    <p>First establish lawful, reliable, timestamped data access. Then preregister hypotheses, compare against an appropriate market baseline, validate on untouched future data, and only then consider a paper leaderboard.</p>
+    <a href="pages/suggestions.html">Review product suggestions →</a>
+  </section>
+</main>
+<footer><span>NFL Decision Lab</span><span>Research framework · Not betting advice · Verified data where sourced</span></footer>
+</body>
+</html>

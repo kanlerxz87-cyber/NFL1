@@ -1,0 +1,119 @@
+{
+  "n_games": 136,
+  "weeks": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "input": "data/verified/games_2026.csv",
+  "method": "Pearson r on verified official results; Fisher-z 95% CI; two-sided t test",
+  "correlations": [
+    {
+      "id": "C2",
+      "relationship": "Point margin vs total points, same game",
+      "kind": "continuous",
+      "n": 136,
+      "r": -0.1608,
+      "ci95": [
+        -0.3205,
+        0.0077
+      ],
+      "p_value": 0.061476,
+      "independent_at_5pct": true,
+      "note": "Measures whether blowouts travel with high totals. Matters for spread+total parlays."
+    },
+    {
+      "id": "C3",
+      "relationship": "Team points in consecutive games (week t vs week t+1)",
+      "kind": "continuous",
+      "n": 226,
+      "r": 0.0685,
+      "ci95": [
+        -0.0625,
+        0.1973
+      ],
+      "p_value": 0.304933,
+      "independent_at_5pct": true,
+      "note": "Persistence of a team's scoring. Autocorrelation implies form/structure, not independence."
+    },
+    {
+      "id": "C4",
+      "relationship": "Away/home points scored vs opponent's average points allowed",
+      "kind": "continuous",
+      "n": 272,
+      "r": 0.3861,
+      "ci95": [
+        0.28,
+        0.4828
+      ],
+      "p_value": 0.0,
+      "independent_at_5pct": false,
+      "note": "Opponent-quality dependence. Contaminates naive correlations that mix home and road legs."
+    },
+    {
+      "id": "C5",
+      "relationship": "Division game flag vs total points",
+      "kind": "continuous",
+      "n": 136,
+      "r": -0.1297,
+      "ci95": [
+        -0.2916,
+        0.0395
+      ],
+      "p_value": 0.132401,
+      "independent_at_5pct": true,
+      "note": "52 of 136 games were division games."
+    }
+  ],
+  "home_win": {
+    "home_wins": 67,
+    "decided_games": 135,
+    "ties": 1,
+    "rate": 0.4963,
+    "ci95": [
+      0.412,
+      0.5806
+    ],
+    "note": "Expected ~0.5 if home field did not matter. This is the base correlation between any two legs that both require a home win."
+  },
+  "parlay_math": {
+    "rows": [
+      {
+        "legs": 2,
+        "assumed_leg_prob_each": 0.5,
+        "independent_prob": 0.25,
+        "fair_odds_decimal_independent": 4.0,
+        "break_even_decimal_at_110_juice": 1.9091,
+        "note": "If any legs share a game or a team, replace the product with the joint probability; product formula overstates or understates it."
+      },
+      {
+        "legs": 3,
+        "assumed_leg_prob_each": 0.5,
+        "independent_prob": 0.125,
+        "fair_odds_decimal_independent": 8.0,
+        "break_even_decimal_at_110_juice": 1.9091,
+        "note": "If any legs share a game or a team, replace the product with the joint probability; product formula overstates or understates it."
+      },
+      {
+        "legs": 4,
+        "assumed_leg_prob_each": 0.5,
+        "independent_prob": 0.0625,
+        "fair_odds_decimal_independent": 16.0,
+        "break_even_decimal_at_110_juice": 1.9091,
+        "note": "If any legs share a game or a team, replace the product with the joint probability; product formula overstates or understates it."
+      }
+    ],
+    "warning": "With -110 on each leg a 2-leg parlay needs both legs to hit 52.4% of the time; 3 legs need 36.4%; 4 legs need 25.3%. Compounding correlation and vig is why parlay edges are harder to certify than single-bet edges."
+  },
+  "publication_rule": {
+    "minimum_sample": 25,
+    "suppressed": [],
+    "rule": "correlations below the minimum sample are published as blank/unverified"
+  }
+}

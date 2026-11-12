@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decision Register — NFL1</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<header>
+  <div class="brand">NFL1 — NFL Analytics Dashboard</div>
+  <nav>
+    <a href="../index.html">Overview</a>
+    <a href="executive-summary.html">Executive Summary</a>
+    <a href="teams.html">Teams</a>
+    <a href="standings.html">Standings</a>
+    <a href="injuries.html">Injuries</a>
+    <a href="availability.html">Availability</a>
+    <a href="data.html">Verified Data</a>
+    <a href="lines.html">Own Lines</a>
+    <a href="analysis.html">Validation & Correlation</a>
+    <a href="decisions.html" class="active">Decision Register</a>
+    <a href="verified.html">Verified Artifacts</a>
+    <a href="evidence.html">Evidence</a>
+    <a href="models.html">Strategy Lab</a>
+    <a href="strategies.html">Strategies</a>
+    <a href="suggestions.html">Suggestions</a>
+    <a href="questions.html">Questions</a>
+    <a href="flagged.html">Flagged</a>
+    <a href="review.html">Review</a>
+  </nav>
+</header>
+<main>
+  <h1>Decision Register</h1>
+  <p class="muted">Questions, missing information, and options to choose between · generated 2026-11-12 04:50 UTC</p>
+
+  <div class="card">
+    <p>This page exists so a reviewer can choose a path <em>before</em> anything is implemented.
+    Each item states the decision, the evidence available, the evidence still missing, and what
+    would have to be true to proceed. Nothing here is approved.</p>
+  </div>
+
+  <h2>Decision register</h2>
+  <div class="table-wrap"><table><thead><tr><th>ID</th><th>Decision</th><th>Evidence we have</th><th>Evidence we lack</th><th>Recommendation</th><th>Blocking</th><th>Owner</th></tr></thead><tbody>
+<tr><td>D01</td><td><strong>Use these model lines for any real decision?</strong></td><td>14 Week 10 lines built from 136 verified games, with published uncertainty bands.</td><td>Out-of-sample proof of value. The model lost to a naive baseline (MAE 10.93 vs 10.62) and failed the gate.</td><td>NO. Keep them as a transparency artifact and a baseline to beat, not as recommendations.</td><td><span class="badge danger">blocked</span></td><td>Reviewer</td></tr>
+<tr><td>D02</td><td><strong>Score the leaderboard on straight-up winners or against the spread?</strong></td><td>Straight-up winner accuracy is measurable today (base rate 49.3% home picks).</td><td>Against-the-spread accuracy: impossible without closing lines.</td><td>Defer the choice until price data exists, but pre-register the metric now so it cannot be chosen after seeing results.</td><td><span class="badge danger">blocked</span></td><td>Reviewer</td></tr>
+<tr><td>D03</td><td><strong>Promote the 60.7% directional signal to the leaderboard?</strong></td><td>60.7% straight-up accuracy, 95% CI [52.6%, 68.9%], raw p=0.0156, stable across halves (59.0% early, 63.2% late).</td><td>Significance after multiple-testing correction (Holm p=0.0626), positive Brier skill (-0.038), and any ATS evidence.</td><td>Promote to a monitored watch-list only. Do not label it a proven edge.</td><td><span class="badge ok">ready</span></td><td>Analyst</td></tr>
+<tr><td>D04</td><td><strong>Price player props or prop combos?</strong></td><td>Correlation structure measured; parlay maths published.</td><td>Row-level official player usage and yardage data.</td><td>NO for now. Blocked rather than estimated, to avoid fabricated distributions.</td><td><span class="badge danger">blocked</span></td><td>Data owner</td></tr>
+<tr><td>D05</td><td><strong>Size same-game parlays as independent legs?</strong></td><td>C2 margin vs total r=-0.161; C4 scoring vs opponent quality r=+0.386.</td><td>A joint-probability model for 3+ legs and a larger sample.</td><td>NO. Treat same-game legs as dependent and apply the correlation penalty before comparing with any payout.</td><td><span class="badge danger">blocked</span></td><td>Analyst</td></tr>
+<tr><td>D06</td><td><strong>Trust a claimed home-field advantage?</strong></td><td>Home win rate 49.6%, 95% CI [41.2%, 58.1%], fitted HFA slightly negative, n=135.</td><td>Any multi-season baseline; one partial season is not enough to establish a stable HFA.</td><td>Do not assume a positive home edge this season; re-estimate when more seasons are loaded.</td><td><span class="badge ok">ready</span></td><td>Analyst</td></tr>
+<tr><td>D07</td><td><strong>Claim we know the 2nd/3rd-string replacement chain?</strong></td><td>Official Week 10 injury statuses and four official backup-QB situations.</td><td>Official depth charts (NFL does not publish them; the URL returns 404) and participation data.</td><td>NO. Report only what the sources assert; leave depth order blank and flagged.</td><td><span class="badge danger">blocked</span></td><td>Data owner</td></tr>
+<tr><td>D08</td><td><strong>Launch paid leaderboard rewards?</strong></td><td>A working scoring framework and published validation gates.</td><td>A metric that passes validation, price data, prize terms, and legal/eligibility review.</td><td>NO. Start with a zero-money paper leaderboard and revisit after one validated season.</td><td><span class="badge danger">blocked</span></td><td>Reviewer + legal</td></tr>
+<tr><td>D09</td><td><strong>Keep publishing results that fail?</strong></td><td>Evidence that publishing failures is what makes the rest of the numbers credible.</td><td>Nothing — this is a policy choice.</td><td>YES, permanently. Every metric ships with sample size, CI and gate status.</td><td><span class="badge ok">ready</span></td><td>Reviewer</td></tr>
+</tbody></table></div>
+
+  <h2>Questions, information needed, and answers</h2>
+  <p class="muted">Every row is a question a reasonable decision would have to answer. "Answer" is
+  filled only where the verified data actually resolves it; otherwise it states precisely what is
+  missing, which is itself the useful output.</p>
+  <div class="table-wrap"><table><thead><tr><th>#</th><th>Question</th><th>Information / evidence required</th><th>Answer from verified evidence</th><th>Status</th></tr></thead><tbody>
+<tr><td>Q01</td><td>Which team is actually better, after adjusting for opponents faced?</td><td>Opponent-adjusted offence/defence estimates from a complete, verified game log.</td><td>Answerable and computed. Ridge opponent-adjusted ratings are published for all 32 teams from 136 verified games. Caveat: 8-9 games per team is a small sample, and the ratings failed the forward-test gate for predicting results, so they rank teams descriptively but are not yet decision-grade.</td><td><span class="badge warn">partial</span></td></tr>
+<tr><td>Q02</td><td>Do we have every completed 2026 result, verified?</td><td>Every final score for weeks 1-9, reconciling to the official standings.</td><td>Yes. 136 of 136 completed games (weeks 1-9) were captured from official NFL week pages. All 32 teams&#x27; game-by-game win/loss and points-for/points-against reproduce nfl.com standings exactly, so no result is missing or mistyped.</td><td><span class="badge ok">answered</span></td></tr>
+<tr><td>Q03</td><td>Is there a home-field advantage we can price?</td><td>Home win rate and home scoring margin with a confidence interval.</td><td>Measured: home teams won 49.6% of decided games (95% CI 41.2%-58.1%, n=135). The interval comfortably includes 50%, and the fitted HFA is slightly negative. Treating a home edge as known would be unjustified on this data.</td><td><span class="badge ok">answered</span></td></tr>
+<tr><td>Q04</td><td>Can we generate our own lines today?</td><td>A fitted model plus out-of-sample evidence it beats naive baselines.</td><td>Lines are generated for all 14 Week 10 games, but they fail the gate: the model&#x27;s mean absolute margin error (10.93) is worse than the home-field-only baseline (10.62), with a paired-bootstrap 95% CI on the difference of [-0.23, +0.86] and only a 13.3% probability the model is better. Published for transparency, explicitly not recommended for use.</td><td><span class="badge ok">answered</span></td></tr>
+<tr><td>Q05</td><td>What is the actual market price for each game?</td><td>Timestamped closing lines and prices from a lawful, official or licensed source.</td><td>Unknown. No official NFL odds or closing-line feed is reachable from this environment, and no price data exists in the repository. Without it, edge, ROI, and against-the-spread accuracy cannot be computed at all. This is the single largest blocker to the whole project.</td><td><span class="badge danger">unknown</span></td></tr>
+<tr><td>Q06</td><td>Which teams are missing starters right now, and how much does it matter?</td><td>Dated injury report, the depth order behind each player, and evidence of who actually replaced whom.</td><td>Partially answerable. The official Week 10 report is captured for rows that state a game status (6 rows) and 4 teams explicitly report no injuries. But official NFL depth charts are not published — nfl.com/teams/&lt;team&gt;/depth-chart returns 404 — so &#x27;2nd/3rd string&#x27; cannot be established from an official source. Replacement-chain claims stay blank.</td><td><span class="badge warn">partial</span></td></tr>
+<tr><td>Q07</td><td>Has a backup quarterback already started for a team in 2026, and what happened?</td><td>An official statement that the starter is out and a named replacement starting.</td><td>Yes for several teams, and only where NFL.com states it directly: Seahawks (Darnold ruled out, Drew Lock expected to start), Dolphins (Willis to IR, Kyle McCord in line for first start), Browns (Deshaun Watson to start), Cardinals (Carson Beck to start). These are cited on the Flagged page with links; performance impact is NOT yet measured.</td><td><span class="badge warn">partial</span></td></tr>
+<tr><td>Q08</td><td>Are two bets from the same game independent?</td><td>Measured correlations between the relevant outcomes.</td><td>No, and not safely assumed. Points scored correlate with opponent quality at r=+0.386, and margin correlates with total at r=-0.161. Any same-game parlay must be treated as dependent until a &gt;2-leg joint model exists.</td><td><span class="badge ok">answered</span></td></tr>
+<tr><td>Q09</td><td>Is the apparent signal skill or luck?</td><td>Hit rate with CI, exact binomial p, multiple-testing correction, calibration, and split-half stability.</td><td>Luck cannot be ruled out. The strongest strategy hits 60.7% straight up, but after Holm-Bonferroni correction across the four strategies tested, p=0.0626 — not significant — and its Brier skill is negative (-0.038), meaning its probabilities are worse than a coin flip.</td><td><span class="badge ok">answered</span></td></tr>
+<tr><td>Q10</td><td>Should the leaderboard pay real rewards yet?</td><td>A metric that survives validation, rules for entry, prize terms, and legal review.</td><td>No. No strategy has passed the gates, no price data exists to compute returns, and prize/eligibility/jurisdiction terms are undecided. A paper-only leaderboard is defensible now; paid rewards are not.</td><td><span class="badge danger">unknown</span></td></tr>
+<tr><td>Q11</td><td>Can player prop lines or prop combos be built?</td><td>Official per-player usage, attempts/targets, and yardage distributions.</td><td>Unknown/blocked. Row-level player statistics were not obtainable in this environment. Building prop lines from memory or assertion would violate the no-hallucination requirement, so props remain explicitly out of scope rather than estimated.</td><td><span class="badge danger">unknown</span></td></tr>
+<tr><td>Q12</td><td>Does the data keep itself current without manual entry?</td><td>An automated refresh that re-verifies on each update.</td><td>Partially. The validation gate, model, and site build are scripted and reproducible from stored data, and a GitHub Actions workflow runs the gate on every push. The fetch step itself still requires the page-fetch channel, which is an environment limitation, not a solved automation.</td><td><span class="badge warn">partial</span></td></tr>
+</tbody></table></div>
+
+  <h2>Suggestions queue — pick a path, then implement</h2>
+  <div class="table-wrap"><table><thead><tr><th>Priority</th><th>Suggestion</th><th>Why it matters</th><th>What it costs / risks</th><th>Acceptance test</th></tr></thead><tbody>
+<tr><td>P1 · Blocker</td><td><strong>Obtain a lawful, timestamped closing-line source before building anything else.</strong></td><td>Every decision the project cares about — edge, ROI, ATS accuracy, parlay value, leaderboard scoring — requires the price that was actually available. Without it we can only measure prediction accuracy, which is not the same thing as profitability.</td><td>Licensing cost and legal review; feeds may not permit redistribution, which would limit what can be published.</td><td>For each game, a stored quote with source, market, line, price and capture time, and at least one full historical season to test on.</td></tr>
+<tr><td>P1 · Blocker</td><td><strong>Fix the measurement target: decide whether the leaderboard scores straight-up winners or spread performance.</strong></td><td>They are different games. This dataset shows a ~60% straight-up hit rate that is statistically indistinguishable from luck, while spread performance cannot be computed at all yet. Scoring the wrong metric rewards the wrong strategies.</td><td>None in money; requires a written pre-registration so the metric cannot be changed after results are known.</td><td>A signed-off metric definition, the minimum sample, and the promotion threshold, all fixed before the next season&#x27;s data arrives.</td></tr>
+<tr><td>P2 · High</td><td><strong>Automate the weekly capture so the sample grows without hand entry, and re-run verification on every update.</strong></td><td>The verdict on every strategy is currently limited by sample size (136 games). Automation converts each week into fresh out-of-sample evidence instead of one static snapshot.</td><td>Engineering time; needs a permitted data channel because the current sandbox cannot reach the data host directly.</td><td>A scheduled job that fetches, stores with timestamp and URL, re-runs the gate, and fails loudly if reconciliation breaks.</td></tr>
+<tr><td>P2 · High</td><td><strong>Build the backup/attrition layer on participation snapshots, not depth charts.</strong></td><td>Official NFL depth charts are not published, so &#x27;2nd string&#x27; cannot be sourced. Who actually played — snapped counts and participation — is the defensible proxy for a starter being replaced.</td><td>Requires a row-level participation feed; no official free source was found in this environment.</td><td>For each injured starter, a dated record of the replacement and that player&#x27;s snap share, linked to a source.</td></tr>
+<tr><td>P3 · Medium</td><td><strong>Pre-register a small number of hypotheses instead of testing many strategies.</strong></td><td>Four strategies were tested here and the best result stopped being significant after correction. Testing fewer, pre-declared ideas is the cheapest way to make a real edge detectable.</td><td>Slower iteration; fewer headline numbers to show.</td><td>A written hypothesis list with direction and threshold fixed in advance, and results reported for all of them, including failures.</td></tr>
+<tr><td>P3 · Medium</td><td><strong>Publish failures prominently, exactly as this site does.</strong></td><td>The model failing its gate and the near-significant strategy are the two most decision-relevant facts produced. Hiding them would make the dashboard actively misleading.</td><td>Counter-intuitive to market; requires discipline to keep showing.</td><td>Every strategy page shows its gate status, sample size and confidence interval next to its result.</td></tr>
+<tr><td>P4 · Later</td><td><strong>Only after the above: paper leaderboard, then prizes with legal review.</strong></td><td>Rewards create pressure to overfit and to game the metric. Running paper-only first tests both the strategies and the scoring rules at zero financial risk.</td><td>Prize funding, eligibility and jurisdiction review, audit and anti-fraud controls, tax treatment.</td><td>A full paper season, locked predictions, independent audit, published rules, and a legal opinion before any money moves.</td></tr>
+</tbody></table></div>
+
+</main>
+<footer class="muted" style="max-width:1200px;margin:0 auto;padding:24px">
+  Generated from data/verified by scripts/verified/build_site.py. Blank means unverified — never inferred.
+</footer>
+</body>
+</html>

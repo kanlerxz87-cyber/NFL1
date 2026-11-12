@@ -1,0 +1,1592 @@
+{
+ "generated_by": "referee/analysis/replicate_7600ed8b.py",
+ "owner_session": "7600ed8b",
+ "ref": "origin/arena/7600ed8b-nfl1",
+ "commit": "46e5933cf793447e300dc05bae73825e038bf4fc",
+ "their_generated_at": "2026-11-12T05:02:29+00:00",
+ "files_read": [
+  "data/model/strategies.json",
+  "data/model/lines.json",
+  "data/model/errors.json"
+ ],
+ "their_error_file": {
+  "generated_at": "2026-11-12T04:51:02+00:00",
+  "errors": [
+   {
+    "stage": "D injury and depth attrition",
+    "error": "KeyError: 'home'"
+   }
+  ]
+ },
+ "counts": {
+  "replicated": 131,
+  "not replicable here": 18
+ },
+ "strategies": [
+  {
+   "strategy": "S11 Under in divisional games with total 47+",
+   "window": "2005-2026",
+   "published_status": "WATCH",
+   "published_record": "299-249-6",
+   "referee_record": "299-249-6",
+   "published_win_pct": 0.5456,
+   "referee_win_pct": 0.5456,
+   "published_roi": 0.0416,
+   "referee_roi": 0.0416,
+   "published_p": 0.1637,
+   "referee_p": 0.1637,
+   "result": "replicated",
+   "reason": ""
+  },
+  {
+   "strategy": "S10 Over when closing total is 41 or lower",
+   "window": "2005-2026",
+   "published_status": "FAIL",
+   "published_record": "750-687-28",
+   "referee_record": "750-687-28",
+   "published_win_pct": 0.5219,
+   "referee_win_pct": 0.5219,
+   "published_roi": -0.0036,
+   "referee_roi": -0.0036,
+   "published_p": 0.5676,
+   "referee_p": 0.5676,
+   "result": "replicated",
+   "reason": ""
+  },
+  {
+   "strategy": "S04 Divisional underdog +6.5 or more",
+   "window": "2005-2026",
+   "published_status": "FAIL",
+   "published_record": "374-364-20",
+   "referee_record": "374-364-20",
+   "published_win_pct": 0.5068,
+   "referee_win_pct": 0.5068,
+   "published_roi": -0.0325,
+   "referee_roi": -0.0325,
+   "published_p": 0.8323,
+   "referee_p": 0.8323,
+   "result": "replicated",
+   "reason": ""
+  },
+  {
+   "strategy": "S07 Home team with 3+ rest-day edge",
+   "window": "2005-2026",
+   "published_status": "FAIL",
+   "published_record": "253-252-14",
+   "referee_record": "253-252-14",
+   "published_win_pct": 0.501,
+   "referee_win_pct": 0.501,
+   "published_roi": -0.0436,
+   "referee_roi": -0.0436,
+   "published_p": 0.858,
+   "referee_p": 0.858,
+   "result": "replicated",
+   "reason": ""
+  },
+  {
+   "strategy": "S09 Home favourite of 10 or more",
+   "window": "2005-2026",
+   "published_status": "FAIL",
+   "published_record": "274-291-17",
+   "referee_record": "274-291-17",
+   "published_win_pct": 0.485,
+   "referee_win_pct": 0.485,
+   "published_roi": -0.0742,
+   "referee_roi": -0.0742,
+   "published_p": 0.9706,
+   "referee_p": 0.9706,
+   "result": "replicated",
+   "reason": ""
+  },
+  {
+   "strategy": "S06 Fade divisional road favourite of 6.5+",
+   "window": "2005-2026",
+   "published_status": "WATCH",
+   "published_record": "103-104-3",
+   "referee_record": "103-104-3",
+   "published_win_pct": 0.4976,
+   "referee_win_pct": 0.4976,
+   "published_roi": -0.0501,
+   "referee_roi": -0.0501,
+   "published_p": 0.7954,
+   "referee_p": 0.7954,
+   "result": "replicated",
+   "reason": ""
+  },
+  {
+   "strategy": "S08 Home team facing opponent off a bye",
+   "window": "2005-2026",
+   "published_status": "FAIL",
+   "published_record": "159-184-8",
+   "referee_record": "159-184-8",
+   "published_win_pct": 0.4636,
+   "referee_win_pct": 0.4636,
+   "published_roi": -0.115,
+   "referee_roi": -0.115,
+   "published_p": 0.9889,
+   "referee_p": 0.9889,
+   "result": "replicated",
+   "reason": ""
+  },
+  {
+   "strategy": "S02 Own-line vs close, edge >= 3.0",
+   "window": "2025-2026 walk-forward",
+   "published_status": "FAIL",
+   "published_record": "72-76-1",
+   "referee_record": null,
+   "published_win_pct": 0.4865,
+   "referee_win_pct": null,
+   "published_roi": -0.0713,
+   "referee_roi": null,
+   "published_p": 0.8393,
+   "referee_p": null,
+   "result": "not replicable here",
+   "reason": "Needs their play-by-play ratings or injury files, which this session's sandbox cannot download."
+  },
+  {
+   "strategy": "S05 Underdog on short rest (<=4 days)",
+   "window": "2005-2026",
+   "published_status": "FAIL",
+   "published_record": "127-148-7",
+   "referee_record": "127-148-7",
+   "published_win_pct": 0.4618,
+   "referee_win_pct": 0.4618,
+   "published_roi": -0.1183,
+   "referee_roi": -0.1183,
+   "published_p": 0.9829,
+   "referee_p": 0.9829,
+   "result": "replicated",
+   "reason": ""
+  },
+  {
+   "strategy": "S01 Own-line vs close, edge >= 2.0",
+   "window": "2025-2026 walk-forward",
+   "published_status": "FAIL",
+   "published_record": "97-115-2",
+   "referee_record": null,
+   "published_win_pct": 0.4575,
+   "referee_win_pct": null,
+   "published_roi": -0.1265,
+   "referee_roi": null,
+   "published_p": 0.9772,
+   "referee_p": null,
+   "result": "not replicable here",
+   "reason": "Needs their play-by-play ratings or injury files, which this session's sandbox cannot download."
+  },
+  {
+   "strategy": "S03 Own-total vs close, edge >= 3",
+   "window": "2025-2026 walk-forward",
+   "published_status": "FAIL",
+   "published_record": "72-87-0",
+   "referee_record": null,
+   "published_win_pct": 0.4528,
+   "referee_win_pct": null,
+   "published_roi": -0.1355,
+   "referee_roi": null,
+   "published_p": 0.9693,
+   "referee_p": null,
+   "result": "not replicable here",
+   "reason": "Needs their play-by-play ratings or injury files, which this session's sandbox cannot download."
+  },
+  {
+   "strategy": "S12 Start the team whose QB is ruled Out/Doubtful",
+   "window": "2025-2026 walk-forward",
+   "published_status": "FAIL",
+   "published_record": "38-35-1",
+   "referee_record": null,
+   "published_win_pct": 0.5205,
+   "referee_win_pct": null,
+   "published_roi": -0.0062,
+   "referee_roi": null,
+   "published_p": 0.5693,
+   "referee_p": null,
+   "result": "not replicable here",
+   "reason": "Needs their play-by-play ratings or injury files, which this session's sandbox cannot download."
+  }
+ ],
+ "rows": [
+  {
+   "section": "Backtest window",
+   "item": "Regular-season games with a closing spread, 2005-2026",
+   "published": 5591,
+   "referee": 5591,
+   "tolerance": 0.0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Same-game correlation",
+   "item": "Games used",
+   "published": 5591,
+   "referee": 5591,
+   "tolerance": 0.0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Same-game correlation",
+   "item": "Correlation of final margin with final total",
+   "published": 0.017,
+   "referee": 0.017,
+   "tolerance": 0.0005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Same-game correlation",
+   "item": "Phi: home team covers vs game goes over",
+   "published": 0.0088,
+   "referee": 0.0088,
+   "tolerance": 5e-05,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Line sign convention",
+   "item": "Games used",
+   "published": 5591,
+   "referee": 5591,
+   "tolerance": 0.0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Line sign convention",
+   "item": "Correlation of closing spread with home margin",
+   "published": 0.439,
+   "referee": 0.439,
+   "tolerance": 0.0005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Market error (closing line)",
+   "item": "train 2024 (weeks 2-18; their model has no rating for week 1): games",
+   "published": 256,
+   "referee": 256,
+   "tolerance": 0.0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Market error (closing line)",
+   "item": "train 2024: spread mean absolute error, points",
+   "published": 9.648,
+   "referee": 9.648,
+   "tolerance": 0.0005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Market error (closing line)",
+   "item": "train 2024: total mean absolute error, points",
+   "published": 9.723,
+   "referee": 9.723,
+   "tolerance": 0.0005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Own-line model error",
+   "item": "train 2024: spread mean absolute error of their model, points",
+   "published": 10.498,
+   "referee": null,
+   "tolerance": 0.0,
+   "status": "not replicable here",
+   "note": "Needs play-by-play data (EPA ratings). Not downloadable in this session's sandbox."
+  },
+  {
+   "section": "Own-line model error",
+   "item": "train 2024: total mean absolute error of their model, points",
+   "published": 9.765,
+   "referee": null,
+   "tolerance": 0.0,
+   "status": "not replicable here",
+   "note": "Needs play-by-play data (EPA ratings). Not downloadable in this session's sandbox."
+  },
+  {
+   "section": "Market error (closing line)",
+   "item": "validation 2025: games",
+   "published": 272,
+   "referee": 272,
+   "tolerance": 0.0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Market error (closing line)",
+   "item": "validation 2025: spread mean absolute error, points",
+   "published": 9.722,
+   "referee": 9.722,
+   "tolerance": 0.0005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Market error (closing line)",
+   "item": "validation 2025: total mean absolute error, points",
+   "published": 10.393,
+   "referee": 10.393,
+   "tolerance": 0.0005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Own-line model error",
+   "item": "validation 2025: spread mean absolute error of their model, points",
+   "published": 10.395,
+   "referee": null,
+   "tolerance": 0.0,
+   "status": "not replicable here",
+   "note": "Needs play-by-play data (EPA ratings). Not downloadable in this session's sandbox."
+  },
+  {
+   "section": "Own-line model error",
+   "item": "validation 2025: total mean absolute error of their model, points",
+   "published": 10.682,
+   "referee": null,
+   "tolerance": 0.0,
+   "status": "not replicable here",
+   "note": "Needs play-by-play data (EPA ratings). Not downloadable in this session's sandbox."
+  },
+  {
+   "section": "Market error (closing line)",
+   "item": "test 2026: games",
+   "published": 136,
+   "referee": 136,
+   "tolerance": 0.0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Market error (closing line)",
+   "item": "test 2026: spread mean absolute error, points",
+   "published": 9.485,
+   "referee": 9.485,
+   "tolerance": 0.0005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Market error (closing line)",
+   "item": "test 2026: total mean absolute error, points",
+   "published": 10.596,
+   "referee": 10.596,
+   "tolerance": 0.0005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Own-line model error",
+   "item": "test 2026: spread mean absolute error of their model, points",
+   "published": 9.984,
+   "referee": null,
+   "tolerance": 0.0,
+   "status": "not replicable here",
+   "note": "Needs play-by-play data (EPA ratings). Not downloadable in this session's sandbox."
+  },
+  {
+   "section": "Own-line model error",
+   "item": "test 2026: total mean absolute error of their model, points",
+   "published": 11.308,
+   "referee": null,
+   "tolerance": 0.0,
+   "status": "not replicable here",
+   "note": "Needs play-by-play data (EPA ratings). Not downloadable in this session's sandbox."
+  },
+  {
+   "section": "Strategy S11",
+   "item": "S11 Under in divisional games with total 47+: n_graded",
+   "published": 548,
+   "referee": 548,
+   "tolerance": 0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S11",
+   "item": "S11 Under in divisional games with total 47+: wins",
+   "published": 299,
+   "referee": 299,
+   "tolerance": 0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S11",
+   "item": "S11 Under in divisional games with total 47+: losses",
+   "published": 249,
+   "referee": 249,
+   "tolerance": 0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S11",
+   "item": "S11 Under in divisional games with total 47+: pushes",
+   "published": 6,
+   "referee": 6,
+   "tolerance": 0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S11",
+   "item": "S11 Under in divisional games with total 47+: win_pct",
+   "published": 0.5456,
+   "referee": 0.5456,
+   "tolerance": 5e-05,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S11",
+   "item": "S11 Under in divisional games with total 47+: roi",
+   "published": 0.0416,
+   "referee": 0.0416,
+   "tolerance": 5e-05,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S11",
+   "item": "S11 Under in divisional games with total 47+: units",
+   "published": 22.82,
+   "referee": 22.82,
+   "tolerance": 0.005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S11",
+   "item": "S11 Under in divisional games with total 47+: p_value",
+   "published": 0.1637,
+   "referee": 0.1637,
+   "tolerance": 0.00011,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S10",
+   "item": "S10 Over when closing total is 41 or lower: n_graded",
+   "published": 1437,
+   "referee": 1437,
+   "tolerance": 0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S10",
+   "item": "S10 Over when closing total is 41 or lower: wins",
+   "published": 750,
+   "referee": 750,
+   "tolerance": 0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S10",
+   "item": "S10 Over when closing total is 41 or lower: losses",
+   "published": 687,
+   "referee": 687,
+   "tolerance": 0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S10",
+   "item": "S10 Over when closing total is 41 or lower: pushes",
+   "published": 28,
+   "referee": 28,
+   "tolerance": 0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S10",
+   "item": "S10 Over when closing total is 41 or lower: win_pct",
+   "published": 0.5219,
+   "referee": 0.5219,
+   "tolerance": 5e-05,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S10",
+   "item": "S10 Over when closing total is 41 or lower: roi",
+   "published": -0.0036,
+   "referee": -0.0036,
+   "tolerance": 5e-05,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S10",
+   "item": "S10 Over when closing total is 41 or lower: units",
+   "published": -5.18,
+   "referee": -5.18,
+   "tolerance": 0.005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S10",
+   "item": "S10 Over when closing total is 41 or lower: p_value",
+   "published": 0.5676,
+   "referee": 0.5676,
+   "tolerance": 0.00011,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S04",
+   "item": "S04 Divisional underdog +6.5 or more: n_graded",
+   "published": 738,
+   "referee": 738,
+   "tolerance": 0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S04",
+   "item": "S04 Divisional underdog +6.5 or more: wins",
+   "published": 374,
+   "referee": 374,
+   "tolerance": 0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S04",
+   "item": "S04 Divisional underdog +6.5 or more: losses",
+   "published": 364,
+   "referee": 364,
+   "tolerance": 0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S04",
+   "item": "S04 Divisional underdog +6.5 or more: pushes",
+   "published": 20,
+   "referee": 20,
+   "tolerance": 0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S04",
+   "item": "S04 Divisional underdog +6.5 or more: win_pct",
+   "published": 0.5068,
+   "referee": 0.5068,
+   "tolerance": 5e-05,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S04",
+   "item": "S04 Divisional underdog +6.5 or more: roi",
+   "published": -0.0325,
+   "referee": -0.0325,
+   "tolerance": 5e-05,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S04",
+   "item": "S04 Divisional underdog +6.5 or more: units",
+   "published": -24.0,
+   "referee": -24.0,
+   "tolerance": 0.005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S04",
+   "item": "S04 Divisional underdog +6.5 or more: p_value",
+   "published": 0.8323,
+   "referee": 0.8323,
+   "tolerance": 0.00011,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S07",
+   "item": "S07 Home team with 3+ rest-day edge: n_graded",
+   "published": 505,
+   "referee": 505,
+   "tolerance": 0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S07",
+   "item": "S07 Home team with 3+ rest-day edge: wins",
+   "published": 253,
+   "referee": 253,
+   "tolerance": 0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S07",
+   "item": "S07 Home team with 3+ rest-day edge: losses",
+   "published": 252,
+   "referee": 252,
+   "tolerance": 0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S07",
+   "item": "S07 Home team with 3+ rest-day edge: pushes",
+   "published": 14,
+   "referee": 14,
+   "tolerance": 0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S07",
+   "item": "S07 Home team with 3+ rest-day edge: win_pct",
+   "published": 0.501,
+   "referee": 0.501,
+   "tolerance": 5e-05,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S07",
+   "item": "S07 Home team with 3+ rest-day edge: roi",
+   "published": -0.0436,
+   "referee": -0.0436,
+   "tolerance": 5e-05,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S07",
+   "item": "S07 Home team with 3+ rest-day edge: units",
+   "published": -22.0,
+   "referee": -22.0,
+   "tolerance": 0.005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S07",
+   "item": "S07 Home team with 3+ rest-day edge: p_value",
+   "published": 0.858,
+   "referee": 0.858,
+   "tolerance": 0.00011,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S09",
+   "item": "S09 Home favourite of 10 or more: n_graded",
+   "published": 565,
+   "referee": 565,
+   "tolerance": 0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S09",
+   "item": "S09 Home favourite of 10 or more: wins",
+   "published": 274,
+   "referee": 274,
+   "tolerance": 0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S09",
+   "item": "S09 Home favourite of 10 or more: losses",
+   "published": 291,
+   "referee": 291,
+   "tolerance": 0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S09",
+   "item": "S09 Home favourite of 10 or more: pushes",
+   "published": 17,
+   "referee": 17,
+   "tolerance": 0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S09",
+   "item": "S09 Home favourite of 10 or more: win_pct",
+   "published": 0.485,
+   "referee": 0.485,
+   "tolerance": 5e-05,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S09",
+   "item": "S09 Home favourite of 10 or more: roi",
+   "published": -0.0742,
+   "referee": -0.0742,
+   "tolerance": 5e-05,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S09",
+   "item": "S09 Home favourite of 10 or more: units",
+   "published": -41.91,
+   "referee": -41.91,
+   "tolerance": 0.005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S09",
+   "item": "S09 Home favourite of 10 or more: p_value",
+   "published": 0.9706,
+   "referee": 0.9706,
+   "tolerance": 0.00011,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S06",
+   "item": "S06 Fade divisional road favourite of 6.5+: n_graded",
+   "published": 207,
+   "referee": 207,
+   "tolerance": 0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S06",
+   "item": "S06 Fade divisional road favourite of 6.5+: wins",
+   "published": 103,
+   "referee": 103,
+   "tolerance": 0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S06",
+   "item": "S06 Fade divisional road favourite of 6.5+: losses",
+   "published": 104,
+   "referee": 104,
+   "tolerance": 0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S06",
+   "item": "S06 Fade divisional road favourite of 6.5+: pushes",
+   "published": 3,
+   "referee": 3,
+   "tolerance": 0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S06",
+   "item": "S06 Fade divisional road favourite of 6.5+: win_pct",
+   "published": 0.4976,
+   "referee": 0.4976,
+   "tolerance": 5e-05,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S06",
+   "item": "S06 Fade divisional road favourite of 6.5+: roi",
+   "published": -0.0501,
+   "referee": -0.0501,
+   "tolerance": 5e-05,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S06",
+   "item": "S06 Fade divisional road favourite of 6.5+: units",
+   "published": -10.36,
+   "referee": -10.36,
+   "tolerance": 0.005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S06",
+   "item": "S06 Fade divisional road favourite of 6.5+: p_value",
+   "published": 0.7954,
+   "referee": 0.7954,
+   "tolerance": 0.00011,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S08",
+   "item": "S08 Home team facing opponent off a bye: n_graded",
+   "published": 343,
+   "referee": 343,
+   "tolerance": 0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S08",
+   "item": "S08 Home team facing opponent off a bye: wins",
+   "published": 159,
+   "referee": 159,
+   "tolerance": 0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S08",
+   "item": "S08 Home team facing opponent off a bye: losses",
+   "published": 184,
+   "referee": 184,
+   "tolerance": 0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S08",
+   "item": "S08 Home team facing opponent off a bye: pushes",
+   "published": 8,
+   "referee": 8,
+   "tolerance": 0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S08",
+   "item": "S08 Home team facing opponent off a bye: win_pct",
+   "published": 0.4636,
+   "referee": 0.4636,
+   "tolerance": 5e-05,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S08",
+   "item": "S08 Home team facing opponent off a bye: roi",
+   "published": -0.115,
+   "referee": -0.115,
+   "tolerance": 5e-05,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S08",
+   "item": "S08 Home team facing opponent off a bye: units",
+   "published": -39.45,
+   "referee": -39.45,
+   "tolerance": 0.005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S08",
+   "item": "S08 Home team facing opponent off a bye: p_value",
+   "published": 0.9889,
+   "referee": 0.9889,
+   "tolerance": 0.00011,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S02",
+   "item": "S02 Own-line vs close, edge >= 3.0: record 72-76-1",
+   "published": 0.4865,
+   "referee": null,
+   "tolerance": 0.0,
+   "status": "not replicable here",
+   "note": "Needs their play-by-play ratings or injury files, which this session's sandbox cannot download."
+  },
+  {
+   "section": "Strategy S05",
+   "item": "S05 Underdog on short rest (<=4 days): n_graded",
+   "published": 275,
+   "referee": 275,
+   "tolerance": 0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S05",
+   "item": "S05 Underdog on short rest (<=4 days): wins",
+   "published": 127,
+   "referee": 127,
+   "tolerance": 0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S05",
+   "item": "S05 Underdog on short rest (<=4 days): losses",
+   "published": 148,
+   "referee": 148,
+   "tolerance": 0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S05",
+   "item": "S05 Underdog on short rest (<=4 days): pushes",
+   "published": 7,
+   "referee": 7,
+   "tolerance": 0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S05",
+   "item": "S05 Underdog on short rest (<=4 days): win_pct",
+   "published": 0.4618,
+   "referee": 0.4618,
+   "tolerance": 5e-05,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S05",
+   "item": "S05 Underdog on short rest (<=4 days): roi",
+   "published": -0.1183,
+   "referee": -0.1183,
+   "tolerance": 5e-05,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S05",
+   "item": "S05 Underdog on short rest (<=4 days): units",
+   "published": -32.55,
+   "referee": -32.55,
+   "tolerance": 0.005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S05",
+   "item": "S05 Underdog on short rest (<=4 days): p_value",
+   "published": 0.9829,
+   "referee": 0.9829,
+   "tolerance": 0.00011,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Strategy S01",
+   "item": "S01 Own-line vs close, edge >= 2.0: record 97-115-2",
+   "published": 0.4575,
+   "referee": null,
+   "tolerance": 0.0,
+   "status": "not replicable here",
+   "note": "Needs their play-by-play ratings or injury files, which this session's sandbox cannot download."
+  },
+  {
+   "section": "Strategy S03",
+   "item": "S03 Own-total vs close, edge >= 3: record 72-87-0",
+   "published": 0.4528,
+   "referee": null,
+   "tolerance": 0.0,
+   "status": "not replicable here",
+   "note": "Needs their play-by-play ratings or injury files, which this session's sandbox cannot download."
+  },
+  {
+   "section": "Strategy S12",
+   "item": "S12 Start the team whose QB is ruled Out/Doubtful: record 38-35-1",
+   "published": 0.5205,
+   "referee": null,
+   "tolerance": 0.0,
+   "status": "not replicable here",
+   "note": "Needs their play-by-play ratings or injury files, which this session's sandbox cannot download."
+  },
+  {
+   "section": "Multiple-testing correction",
+   "item": "S11: Benjamini-Hochberg q-value",
+   "published": 0.9889,
+   "referee": 0.9889,
+   "tolerance": 0.00011,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Multiple-testing correction",
+   "item": "S10: Benjamini-Hochberg q-value",
+   "published": 0.9889,
+   "referee": 0.9889,
+   "tolerance": 0.00011,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Multiple-testing correction",
+   "item": "S04: Benjamini-Hochberg q-value",
+   "published": 0.9889,
+   "referee": 0.9889,
+   "tolerance": 0.00011,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Multiple-testing correction",
+   "item": "S07: Benjamini-Hochberg q-value",
+   "published": 0.9889,
+   "referee": 0.9889,
+   "tolerance": 0.00011,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Multiple-testing correction",
+   "item": "S09: Benjamini-Hochberg q-value",
+   "published": 0.9889,
+   "referee": 0.9889,
+   "tolerance": 0.00011,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Multiple-testing correction",
+   "item": "S06: Benjamini-Hochberg q-value",
+   "published": 0.9889,
+   "referee": 0.9889,
+   "tolerance": 0.00011,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Multiple-testing correction",
+   "item": "S08: Benjamini-Hochberg q-value",
+   "published": 0.9889,
+   "referee": 0.9889,
+   "tolerance": 0.00011,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Multiple-testing correction",
+   "item": "S02: Benjamini-Hochberg q-value",
+   "published": 0.9889,
+   "referee": 0.9889,
+   "tolerance": 0.00011,
+   "status": "replicated",
+   "note": "Uses their published p-value for this strategy (not replicable here)."
+  },
+  {
+   "section": "Multiple-testing correction",
+   "item": "S05: Benjamini-Hochberg q-value",
+   "published": 0.9889,
+   "referee": 0.9889,
+   "tolerance": 0.00011,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Multiple-testing correction",
+   "item": "S01: Benjamini-Hochberg q-value",
+   "published": 0.9889,
+   "referee": 0.9889,
+   "tolerance": 0.00011,
+   "status": "replicated",
+   "note": "Uses their published p-value for this strategy (not replicable here)."
+  },
+  {
+   "section": "Multiple-testing correction",
+   "item": "S03: Benjamini-Hochberg q-value",
+   "published": 0.9889,
+   "referee": 0.9889,
+   "tolerance": 0.00011,
+   "status": "replicated",
+   "note": "Uses their published p-value for this strategy (not replicable here)."
+  },
+  {
+   "section": "Multiple-testing correction",
+   "item": "S12: Benjamini-Hochberg q-value",
+   "published": 0.9889,
+   "referee": 0.9889,
+   "tolerance": 0.00011,
+   "status": "replicated",
+   "note": "Uses their published p-value for this strategy (not replicable here)."
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S04 x S05: overlapping graded bets",
+   "published": 55,
+   "referee": 55,
+   "tolerance": 0.0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S04 x S05: correlation of returns",
+   "published": 1.0,
+   "referee": 1.0,
+   "tolerance": 0.0005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S04 x S06: overlapping graded bets",
+   "published": 207,
+   "referee": 207,
+   "tolerance": 0.0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S04 x S06: correlation of returns",
+   "published": 1.0,
+   "referee": 1.0,
+   "tolerance": 0.0005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S04 x S07: overlapping graded bets",
+   "published": 69,
+   "referee": 69,
+   "tolerance": 0.0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S04 x S07: correlation of returns",
+   "published": -0.572,
+   "referee": -0.572,
+   "tolerance": 0.0005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S04 x S08: overlapping graded bets",
+   "published": 34,
+   "referee": 34,
+   "tolerance": 0.0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S04 x S08: correlation of returns",
+   "published": -0.46,
+   "referee": -0.46,
+   "tolerance": 0.0005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S04 x S09: overlapping graded bets",
+   "published": 228,
+   "referee": 228,
+   "tolerance": 0.0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S04 x S09: correlation of returns",
+   "published": -1.0,
+   "referee": -1.0,
+   "tolerance": 0.0005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S04 x S10: overlapping graded bets",
+   "published": 182,
+   "referee": 182,
+   "tolerance": 0.0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S04 x S10: correlation of returns",
+   "published": 0.112,
+   "referee": 0.112,
+   "tolerance": 0.0005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S04 x S11: overlapping graded bets",
+   "published": 205,
+   "referee": 205,
+   "tolerance": 0.0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S04 x S11: correlation of returns",
+   "published": 0.037,
+   "referee": 0.037,
+   "tolerance": 0.0005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S04 x S01: correlation of returns",
+   "published": 0.808,
+   "referee": null,
+   "tolerance": 0.0,
+   "status": "not replicable here",
+   "note": "At least one side needs data this session cannot download."
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S05 x S09: overlapping graded bets",
+   "published": 31,
+   "referee": 31,
+   "tolerance": 0.0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S05 x S09: correlation of returns",
+   "published": -1.0,
+   "referee": -1.0,
+   "tolerance": 0.0005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S05 x S10: overlapping graded bets",
+   "published": 64,
+   "referee": 64,
+   "tolerance": 0.0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S05 x S10: correlation of returns",
+   "published": -0.031,
+   "referee": -0.031,
+   "tolerance": 0.0005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S05 x S11: overlapping graded bets",
+   "published": 46,
+   "referee": 46,
+   "tolerance": 0.0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S05 x S11: correlation of returns",
+   "published": -0.081,
+   "referee": -0.081,
+   "tolerance": 0.0005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S06 x S10: overlapping graded bets",
+   "published": 42,
+   "referee": 42,
+   "tolerance": 0.0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S06 x S10: correlation of returns",
+   "published": -0.005,
+   "referee": -0.005,
+   "tolerance": 0.0005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S06 x S11: overlapping graded bets",
+   "published": 62,
+   "referee": 62,
+   "tolerance": 0.0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S06 x S11: correlation of returns",
+   "published": -0.066,
+   "referee": -0.066,
+   "tolerance": 0.0005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S07 x S09: overlapping graded bets",
+   "published": 70,
+   "referee": 70,
+   "tolerance": 0.0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S07 x S09: correlation of returns",
+   "published": 1.0,
+   "referee": 1.0,
+   "tolerance": 0.0005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S07 x S10: overlapping graded bets",
+   "published": 92,
+   "referee": 92,
+   "tolerance": 0.0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S07 x S10: correlation of returns",
+   "published": -0.085,
+   "referee": -0.085,
+   "tolerance": 0.0005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S07 x S11: overlapping graded bets",
+   "published": 48,
+   "referee": 48,
+   "tolerance": 0.0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S07 x S11: correlation of returns",
+   "published": 0.076,
+   "referee": 0.076,
+   "tolerance": 0.0005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S08 x S09: overlapping graded bets",
+   "published": 31,
+   "referee": 31,
+   "tolerance": 0.0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S08 x S09: correlation of returns",
+   "published": 1.0,
+   "referee": 1.0,
+   "tolerance": 0.0005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S08 x S10: overlapping graded bets",
+   "published": 87,
+   "referee": 87,
+   "tolerance": 0.0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S08 x S10: correlation of returns",
+   "published": -0.086,
+   "referee": -0.086,
+   "tolerance": 0.0005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S08 x S11: overlapping graded bets",
+   "published": 36,
+   "referee": 36,
+   "tolerance": 0.0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S08 x S11: correlation of returns",
+   "published": -0.169,
+   "referee": -0.169,
+   "tolerance": 0.0005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S09 x S10: overlapping graded bets",
+   "published": 137,
+   "referee": 137,
+   "tolerance": 0.0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S09 x S10: correlation of returns",
+   "published": 0.011,
+   "referee": 0.011,
+   "tolerance": 0.0005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S09 x S11: overlapping graded bets",
+   "published": 63,
+   "referee": 63,
+   "tolerance": 0.0,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S09 x S11: correlation of returns",
+   "published": -0.114,
+   "referee": -0.114,
+   "tolerance": 0.0005,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S10 x S03: correlation of returns",
+   "published": 1.0,
+   "referee": null,
+   "tolerance": 0.0,
+   "status": "not replicable here",
+   "note": "At least one side needs data this session cannot download."
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S01 x S02: correlation of returns",
+   "published": 1.0,
+   "referee": null,
+   "tolerance": 0.0,
+   "status": "not replicable here",
+   "note": "At least one side needs data this session cannot download."
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S01 x S03: correlation of returns",
+   "published": 0.175,
+   "referee": null,
+   "tolerance": 0.0,
+   "status": "not replicable here",
+   "note": "At least one side needs data this session cannot download."
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S01 x S12: correlation of returns",
+   "published": 0.902,
+   "referee": null,
+   "tolerance": 0.0,
+   "status": "not replicable here",
+   "note": "At least one side needs data this session cannot download."
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S02 x S03: correlation of returns",
+   "published": 0.223,
+   "referee": null,
+   "tolerance": 0.0,
+   "status": "not replicable here",
+   "note": "At least one side needs data this session cannot download."
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S02 x S12: correlation of returns",
+   "published": 0.882,
+   "referee": null,
+   "tolerance": 0.0,
+   "status": "not replicable here",
+   "note": "At least one side needs data this session cannot download."
+  },
+  {
+   "section": "Correlation between strategies",
+   "item": "S03 x S12: correlation of returns",
+   "published": 0.108,
+   "referee": null,
+   "tolerance": 0.0,
+   "status": "not replicable here",
+   "note": "At least one side needs data this session cannot download."
+  }
+ ],
+ "gate_definitions": [
+  {
+   "id": "G1",
+   "rule": "Every input file pinned by URL and sha256."
+  },
+  {
+   "id": "G2",
+   "rule": "Rule fixed before evaluation; no threshold search."
+  },
+  {
+   "id": "G3",
+   "rule": "At least 100 graded bets."
+  },
+  {
+   "id": "G4",
+   "rule": "Positive ROI across the two most recent seasons."
+  },
+  {
+   "id": "G5",
+   "rule": "Benjamini-Hochberg q < 0.10 against break-even win rate."
+  },
+  {
+   "id": "G6",
+   "rule": "At least 60% of tested seasons positive."
+  },
+  {
+   "id": "G7",
+   "rule": "Max drawdown no worse than -25 units."
+  },
+  {
+   "id": "G8",
+   "rule": "|correlation| with any other strategy below 0.7."
+  }
+ ],
+ "rewards": {
+  "model": "Points are awarded for statistically defensible performance, not raw ROI: 100 x max(0, lower 95% ROI bound) + 20 x seasons positive + 10 x gates passed. Strategies failing G3 (n<100) score zero. No cash, no prizes: this is a paper competition. Legal review is required before any real reward.",
+  "statuses": {
+   "PASS": "all gates passed",
+   "WATCH": "5-7 gates passed",
+   "FAIL": "fewer than 5 gates passed"
+  }
+ }
+}

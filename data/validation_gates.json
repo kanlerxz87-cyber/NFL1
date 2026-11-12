@@ -1,0 +1,132 @@
+[
+  {
+    "id": "G01",
+    "name": "Provenance",
+    "criterion": "Every input value has an official source link and retrieval timestamp",
+    "threshold": " ",
+    "status": "Defined",
+    "src": "S02",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "G02",
+    "name": "Point-in-time",
+    "criterion": "Only data published before the decision timestamp is used; official filing times are respected",
+    "threshold": " ",
+    "status": "Defined",
+    "src": "S04",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "G03",
+    "name": "Pre-registration",
+    "criterion": "Strategy formula, thresholds and evaluation window are frozen before scoring",
+    "threshold": " ",
+    "status": "Defined",
+    "src": "S17",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "G04",
+    "name": "Minimum sample",
+    "criterion": "NIST generic advice: 20 observations for a correlation, 32 per group for an average difference, 50 for a standard deviation",
+    "threshold": "20 / 32 / 50 (generic, not NFL-specific)",
+    "status": "Defined",
+    "src": "S17",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "G05",
+    "name": "Out-of-sample",
+    "criterion": "Model is fit on one partition and assessed on data not used to build it",
+    "threshold": " ",
+    "status": "Defined",
+    "src": "S17",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "G06",
+    "name": "Significance",
+    "criterion": "Two-sample t-test for equal means with pre-registered alpha and critical region",
+    "threshold": "alpha blank (no official value)",
+    "status": "Defined",
+    "src": "S18",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "G07",
+    "name": "Multiple comparisons",
+    "criterion": "Every tested strategy is logged so the number of tests is known before scoring",
+    "threshold": "correction threshold blank",
+    "status": "Defined",
+    "src": "S18",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "G08",
+    "name": "Correlation is not causality",
+    "criterion": "No strategy is described as causal without designed-experiment evidence",
+    "threshold": " ",
+    "status": "Defined",
+    "src": "S19",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "G09",
+    "name": "Parlay/prop correlation guard",
+    "criterion": "Leg correlations must be measured before combining legs",
+    "threshold": "corr blank",
+    "status": "Defined",
+    "src": "S17",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "G10",
+    "name": "Stability",
+    "criterion": "Signal must persist across consecutive seasons/weeks",
+    "threshold": "window blank",
+    "status": "Defined",
+    "src": "S13",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "G11",
+    "name": "Skill over luck",
+    "criterion": "Performance must exceed a pre-registered skill threshold after all other gates pass",
+    "threshold": "threshold blank",
+    "status": "Defined",
+    "src": "S17",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "G12",
+    "name": "Reproducibility",
+    "criterion": "A script and data snapshot reproduce every published number",
+    "threshold": " ",
+    "status": "Defined",
+    "src": "S24",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "G13",
+    "name": "Deploy integrity",
+    "criterion": "Every table row has an official source link; no broken internal links; Pages build succeeds",
+    "threshold": " ",
+    "status": "Defined",
+    "src": "S23",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  }
+]

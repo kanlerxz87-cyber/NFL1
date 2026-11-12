@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Strategies &amp; Leaderboard — NFL1</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<header>
+  <div class="brand">NFL1 — NFL Analytics Dashboard</div>
+  <nav>
+    <a href="../index.html">Overview</a>
+    <a href="executive-summary.html">Executive Summary</a>
+    <a href="teams.html">Teams</a>
+    <a href="standings.html">Standings</a>
+    <a href="injuries.html">Injuries</a>
+    <a href="availability.html">Availability</a>
+    <a href="data.html">Verified Data</a>
+    <a href="lines.html">Own Lines</a>
+    <a href="analysis.html">Validation & Correlation</a>
+    <a href="decisions.html">Decision Register</a>
+    <a href="verified.html">Verified Artifacts</a>
+    <a href="evidence.html">Evidence</a>
+    <a href="models.html">Strategy Lab</a>
+    <a href="strategies.html" class="active">Strategies</a>
+    <a href="suggestions.html">Suggestions</a>
+    <a href="questions.html">Questions</a>
+    <a href="flagged.html">Flagged</a>
+    <a href="review.html">Review</a>
+  </nav>
+</header>
+<main>
+  <h1>Line Origination Strategies &amp; Leaderboard</h1>
+  <p class="muted">Goal: originate own NFL lines. Treat as a leaderboard competition with rewards for top-performing strategies. Covers single bets, parlays, and player prop bet combos.</p>
+
+  <div class="card">
+    <h2>Strategy Types</h2>
+    <ul>
+      <li><strong>Single bet</strong> — one game outcome (spread/total/moneyline).</li>
+      <li><strong>Parlay</strong> — multiple legs; must account for correlation between legs.</li>
+      <li><strong>Player prop combo</strong> — combination of player props; correlation-aware.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Validation Gates (required to publish a strategy)</h2>
+    <ol>
+      <li>Data source verified from official NFL.com (no inferred values).</li>
+      <li>Out-of-sample backtest on at least one prior season.</li>
+      <li>Minimum sample size (e.g., 100+ bets) before scoring.</li>
+      <li>Statistical significance test (p &lt; 0.05) vs. market baseline.</li>
+      <li>Correlation values computed for all parlay/prop-combo legs.</li>
+      <li>Luck removal: report variance, drawdown, and skill attribution.</li>
+      <li>No manual input required for execution.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2>Leaderboard (placeholder — populated as strategies are submitted)</h2>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Rank</th><th>Strategy</th><th>Type</th><th>Bets</th><th>Win Rate</th><th>ROI</th><th>Corr. Adj.</th><th>Reward</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td colspan="9" class="muted">No strategies submitted yet. Leaderboard will populate after validation gates are passed.</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Correlation &amp; Skill</h2>
+    <p>Parlays and prop combos must report correlation values between legs to avoid hidden risk. Skill is isolated by removing luck: track variance, sample size, and significance. Strategies are selectively skill-based only after passing all gates.</p>
+  </div>
+</main>
+<footer>NFL1 — strategies are research constructs; not betting advice.</footer>
+</body>
+</html>

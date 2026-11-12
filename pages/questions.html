@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Questions &amp; Answers — NFL1</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<header>
+  <div class="brand">NFL1 — NFL Analytics Dashboard</div>
+  <nav>
+    <a href="../index.html">Overview</a>
+    <a href="executive-summary.html">Executive Summary</a>
+    <a href="teams.html">Teams</a>
+    <a href="standings.html">Standings</a>
+    <a href="injuries.html">Injuries</a>
+    <a href="availability.html">Availability</a>
+    <a href="data.html">Verified Data</a>
+    <a href="lines.html">Own Lines</a>
+    <a href="analysis.html">Validation & Correlation</a>
+    <a href="decisions.html">Decision Register</a>
+    <a href="verified.html">Verified Artifacts</a>
+    <a href="evidence.html">Evidence</a>
+    <a href="models.html">Strategy Lab</a>
+    <a href="strategies.html">Strategies</a>
+    <a href="suggestions.html">Suggestions</a>
+    <a href="questions.html" class="active">Questions</a>
+    <a href="flagged.html">Flagged</a>
+    <a href="review.html">Review</a>
+  </nav>
+</header>
+<main>
+  <h1>Questions, Information &amp; Answers Needed</h1>
+  <p class="muted">Clear list of questions and information that must be addressed before decisions can be reasonably made. Missing information is flagged; suggestions to discover it are noted.</p>
+
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>ID</th><th>Question</th><th>Current Info (have)</th><th>Missing Info (need)</th><th>Suggestion to Discover</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Q1</td><td>Which teams currently have starters out due to injury?</td><td>Week 10 injury report for the Thursday game, plus 6 players league-wide with an official game status and 4 teams explicitly reporting none. Clubs with no captured report are unknown, not healthy.</td><td>Full week injury report for all games.</td><td>Pull full report from nfl.com/injuries weekly.</td><td><span class="badge warn">Open</span></td></tr>
+      <tr><td>Q2</td><td>Which defenses are using 2nd/3rd/4th-string backups?</td><td>Practice/game status for listed players.</td><td>Depth chart and starter designation.</td><td>Cross-reference injury list with team depth charts on nfl.com.</td><td><span class="badge warn">Open</span></td></tr>
+      <tr><td>Q3</td><td>What is the current 2026 schedule and matchups?</td><td>Standings only.</td><td>Full schedule with dates/times/networks.</td><td>Fetch nfl.com/schedules/2026.</td><td><span class="badge warn">Open</span></td></tr>
+      <tr><td>Q4</td><td>What are current player stats for prop bets?</td><td>None captured.</td><td>Passing/rushing/receiving stats.</td><td>Fetch nfl.com/stats.</td><td><span class="badge warn">Open</span></td></tr>
+      <tr><td>Q5</td><td>What validation gates should a strategy pass?</td><td>Defined in Strategies page.</td><td>Historical backtest data.</td><td>Build results archive from past seasons.</td><td><span class="badge warn">Open</span></td></tr>
+      <tr><td>Q6</td><td>What are correlation values between bet legs?</td><td>Not computed.</td><td>Historical joint outcomes.</td><td>Compute from game-level data.</td><td><span class="badge warn">Open</span></td></tr>
+      <tr><td>Q7</td><td>How to remove luck and isolate skill?</td><td>Concept defined.</td><td>Sample size and variance estimates.</td><td>Require minimum bet count and significance tests.</td><td><span class="badge warn">Open</span></td></tr>
+      <tr><td>Q8</td><td>Are all table values verified from official sources?</td><td>Teams, standings, injury snapshot verified.</td><td>Schedule/stats/depth charts not yet captured.</td><td>Flag unverified on Flagged page.</td><td><span class="badge ok">Partial</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+</main>
+<footer>NFL1 — questions are open until information is verified.</footer>
+</body>
+</html>

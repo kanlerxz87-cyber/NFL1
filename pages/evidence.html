@@ -1,0 +1,32 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Evidence Register · NFL Decision Lab</title><link rel="stylesheet" href="../styles.css"></head><body><header class="top"><a class="brand" href="../index.html">NFL <span>Decision Lab</span></a><nav>
+    <a href="../index.html">Overview</a>
+    <a href="executive-summary.html">Executive Summary</a>
+    <a href="teams.html">Teams</a>
+    <a href="standings.html">Standings</a>
+    <a href="injuries.html">Injuries</a>
+    <a href="availability.html">Availability</a>
+    <a href="data.html">Verified Data</a>
+    <a href="lines.html">Own Lines</a>
+    <a href="analysis.html">Validation & Correlation</a>
+    <a href="decisions.html">Decision Register</a>
+    <a href="verified.html">Verified Artifacts</a>
+    <a href="evidence.html" class="active">Evidence</a>
+    <a href="models.html">Strategy Lab</a>
+    <a href="strategies.html">Strategies</a>
+    <a href="suggestions.html">Suggestions</a>
+    <a href="questions.html">Questions</a>
+    <a href="flagged.html">Flagged</a>
+    <a href="review.html">Review</a>
+  </nav></header><main><div class="pagehead"><p class="eyebrow">OFFICIAL SOURCES · CURRENT STATUS</p><h1>Evidence register</h1><p>This repository now contains a verified official dataset: 136 completed 2026 games, 32 standings
+rows reconciled against those games, and the Week 10 injury rows that state a game status. It contains
+<strong>no odds or price feed at all</strong>. The rows below are the requirements checklist; "value in repository"
+is filled only where a verified value actually exists, and stays blank otherwise.</p></div><div class="table-wrap"><table><thead><tr><th>Information required</th><th>Verification / capture fields</th><th>Value in repository</th><th>Source</th><th>Review note</th></tr></thead><tbody>
+<tr><td>Schedule, matchup, kickoff</td><td>Game ID, season/week, date/time, source retrieval time</td><td>136 completed games (weeks 1–9), 14 Week 10 fixtures, all byes — <a href="data.html">Verified Data</a></td><td><a href="https://www.nfl.com/schedules/">NFL schedule</a></td><td>Collect per event; timezone and schedule changes matter.</td></tr>
+<tr><td>Injury report and practice participation</td><td>Player, team, position, report date, practice status, game status, source timestamp</td><td>6 players with an official game status + 4 explicit clean reports, Week 10 — <a href="data.html">Verified Data</a></td><td><a href="https://www.nfl.com/injuries/league/2026/reg10">NFL injuries</a></td><td>Statuses are time-varying. Do not treat questionable as a numerical probability.</td></tr>
+<tr><td>Roster and depth / replacement role</td><td>Active roster, position, team transaction, depth-chart publication date; snap share only with source</td><td>—</td><td><a href="https://www.nfl.com/teams/">NFL team directory</a></td><td>Injury report alone does not prove starter status or replacement quality. Depth chart source/feed and dated evidence are still needed.</td></tr>
+<tr><td>Official game outcomes and play context</td><td>Gamebook/play-by-play reference, final status, event identifiers</td><td>—</td><td><a href="https://www.nfl.com/schedules/">NFL Football Operations: Gameday</a></td><td>Define settlement rules per market; reconcile corrections and voids.</td></tr>
+<tr><td>Player / team statistics</td><td>Metric definition, game-level value, season, coverage date, official source</td><td>—</td><td><a href="https://www.nfl.com/stats/">NFL stats</a></td><td>Metric definitions and historical availability must be checked before modeling.</td></tr>
+<tr><td>Rules and market settlement interpretation</td><td>Rule version/date, market contract, push/void/OT treatment</td><td>—</td><td><a href="https://operations.nfl.com/rules-officiating/2026-nfl-rulebook">NFL rules</a></td><td>Sportsbook-specific settlement rules are not established by NFL rules.</td></tr>
+<tr><td>Odds / lines / prices (including close)</td><td>Provider, market, side, line, odds format, captured-at UTC, closing definition</td><td>—</td><td>—</td><td><span class="tag warn">Unverified</span> No official NFL odds source or feed configured. Licensing and permitted use unresolved.</td></tr>
+<tr><td>Weather, venue, conditions</td><td>Venue, timestamp, source, forecast vs actual, applicable market</td><td>—</td><td><span class="badge warn">no source selected</span> (the stats page is not a weather source)</td><td><span class="tag warn">Incomplete</span> No official weather source selected. Do not use third-party values until an approved source is documented.</td></tr>
+</tbody></table></div><p class="note">An official landing page link is not a record-level citation. Future populated rows must link the actual official report/game record and show retrieval time, season, and scope. Blank means unknown, not zero.</p></main><footer><span>NFL Decision Lab</span><span>Evidence register · No live data connected</span></footer></body></html>
