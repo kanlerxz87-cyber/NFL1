@@ -1043,6 +1043,10 @@ def review_page(verif, strat, dash, avail=None):
          src(SOURCE["schedules"], "schedules"), badge("unverified")],
         ["F10", "travel", "No travel or time-zone data, so those claimed edges are untested.",
          src(SOURCE["ops"], "reference"), badge("unverified")],
+        ["F13", "companion pages", "Companion pages from earlier sessions state that no closing lines are stored in the repository. That was true for their inputs; the integration pipeline now carries consensus closing lines and compares every line against them.",
+         src(SOURCE["schedules"], "schedules release"), badge("resolved")],
+        ["F14", "two models", "Two independently built models disagree on the week 10 WAS @ NYG margin. Both are inside their own error bands; neither is promoted.",
+         src("pages/evidence.html", "replication table"), badge("needs review")],
     ])
 
     tbl = table(["ID", "Area", "What is flagged", "Source", "State"], flags,
