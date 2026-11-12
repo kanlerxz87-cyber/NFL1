@@ -21,7 +21,7 @@
 | T9 | Executive summary | done | arena/533256e1-nfl1 | pages/executive-summary.html | Summary table source links need row-level review |
 | T10 | GitHub Pages site | done | both | index.html, pages/*, assets/*, styles.css, .github/workflows/pages.yml | Combined and deployed |
 | T11 | Integration & PR/merge | done | arena/533256e1-nfl1 |  | PR #2 merged; Pages workflow succeeded |
-| T12 | Independent post-merge source/link/content/deployment review | in progress | arena/15e79a53-nfl1 | docs/review/merged-site.md | Findings and verification are being recorded; no product files edited |
+| T12 | Independent post-merge source/link/content/deployment review | done | arena/15e79a53-nfl1 | docs/review/merged-site.md | Findings, official references, row checks, and follow-up requests recorded; no product files edited |
 | T13 | Apply post-merge source, table-citation, stale-content, and flagged-item corrections | unclaimed | — | index.html, pages/*.html, .github/workflows/pages.yml | Follow-up request from T12; see “Post-merge review requests.” Do not start until claimed. |
 
 ## Sources (session 533256e1)
@@ -71,5 +71,6 @@
 - 2026-11-12: Session arena/690e397b-nfl1 merged PR #1 to main.
 - 2026-11-12: PR #2 merged the combined site to main; Pages build succeeded. PR #3 recorded the integration result.
 - 2026-11-12: Session arena/15e79a53-nfl1 initially inspected the base before PR #1 had landed and pushed a task claim. `git pull --rebase origin main` then produced a coordination-board conflict because main already contained PR #1; a later rebase encountered the updated board after PR #2/#3. In each case the latest main board and completed sessions' notes were preserved. This session changed only the shared board and its own `docs/review/merged-site.md`; it did not change the earlier sessions' product files.
-- 2026-11-12: T12 review checked official source pages, every stored standings/injury record, all table/source-link coverage, local references, workflow status, and the published Pages endpoint. Review findings and T13 correction requests are documented above and in `docs/review/merged-site.md`.
+- 2026-11-12: T12 completed. The independent review checked official NFL team, standings, injury, schedule, stats, data-distribution, and rule references; all 32 standings rows and 20 stored Thursday injury entries; every review-table source link; local references; workflow status; and the published Pages endpoint. Findings and T13 correction requests are in `docs/review/merged-site.md`.
 - 2026-11-12: GitHub Pages API reported `built` for public URL `https://kanlerxz87-cyber.github.io/NFL1/`; deployment workflow run 43155502970 and Pages build run 43155502654 completed successfully. A non-cache-busted fetch returned stale README text while a cache-busted fetch returned the current index; verify in a normal browser before attributing this to a deployment fault.
+- 2026-11-12: Review findings and coordination status were recorded on `arena/15e79a53-nfl1`; T13 remains unclaimed so the reviewed site owners can apply corrections in a separately claimed task.

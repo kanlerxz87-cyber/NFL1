@@ -1,7 +1,7 @@
 # Independent post-merge verification
 
-**Reviewed:** 2026-11-12 (UTC)  
-**Site commit reviewed:** `ffe1b9de1d5621e6a2f469168d2c7f81b16b5a59` (PR #2 content; later `main` commit `9c5ee13590e252aa35f4a466b0252cf150a375e0` only updated the coordination record).  
+**Reviewed:** 2026-11-12 (UTC)<br>
+**Site commit reviewed:** `ffe1b9de1d5621e6a2f469168d2c7f81b16b5a59` (PR #2 content; later `main` commit `9c5ee13590e252aa35f4a466b0252cf150a375e0` only updated the coordination record).
 **Scope:** Read-only verification of the merged site, CSV snapshots, official source links, internal assets, and published Pages status. The earlier sessions own the dashboard pages and data files; this report records correction requests rather than editing their files.
 
 ## Executive finding
