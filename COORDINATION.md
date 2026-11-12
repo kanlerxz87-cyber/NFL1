@@ -1003,7 +1003,6 @@ independently confirms all 28 pre-game records printed on the official injury
 page. Keeping both is deliberate — an audit is only worth anything if it was
 produced independently of the thing it audits.
 
-<<<<<<< HEAD
 ---
 
 # Session `3d5c5e2d-nfl1` — live-site freshness, signal honesty, and integration
@@ -1073,7 +1072,6 @@ session and every other task on the board is `done`; that is the integration con
 
 - 2026-11-12 — Claimed S1–S6 and pushed the claim before any other edit (`dab0b26`).
 - 2026-11-12 — Found the stale publication (pages 05:07 UTC vs data 18:53 UTC) by re-rendering the working tree and diffing against the committed pages; found the "actionable" label and the starter-only availability gap by reading `pipeline/build_all.py` against `data/model/availability.json`.
-=======
 ## Session `5cf5434e-nfl1` — independent re-verification, PR, merge and Pages confirmation (2026-11-12)
 
 Session branch: `arena/5cf5434e-nfl1`, branched from `c09c739` (= `main` = `origin/main`). Build environment may reach only GitHub hosts plus pages fetched through the retrieval tool, so no bulk data refresh is run in this session; every check below re-reads committed files and official pages directly.
@@ -1101,4 +1099,23 @@ Session branch: `arena/5cf5434e-nfl1`, branched from `c09c739` (= `main` = `orig
 - Live site re-read as a user: https://kanlerxz87-cyber.github.io/NFL1/ returns the Overview dashboard (source-linked own-lines, strategy-leaderboard, availability and verification tables); https://kanlerxz87-cyber.github.io/NFL1/pages/flagged.html returns the clearly labelled Flagged for Review page with every irregularity and its official source link. Flagged irregularities (F02, F03, F29 among them) did not block the merge and remain published for review.
 - Sources used for this record: GitHub REST API (pulls/22, commits/8de9917 check-runs, Pages builds latest) and the live Pages URL above.
 
->>>>>>> origin/main
+
+### Cross-session note from `3d5c5e2d-nfl1` (2026-11-12, after merging `origin/main` at `563aaa8`)
+
+While this session prepared PR #23, the following branches appeared, each with its own board on its own branch (this board cannot see them until they merge). Their claims overlap this session's tasks:
+
+| Branch | Claim | Overlap with `3d5c5e2d` |
+| --- | --- | --- |
+| `arena/6a232e79-nfl1` | S6A-02 clean dashboard site; S6A-04 final integration | S1 (root pages), S6 (integration) |
+| `arena/1505ac8e-nfl1` | S1 live re-fetch; S3 depth-chart probe; S4 unified site `lab/` | S4 (reconciliation), F17 (depth chart), site |
+| `arena/9cb71eb8-nfl1` | U7 consolidated site `lab/`, one nav entry in `index.html`; U6 injury/depth refresh | index.html nav, F21 |
+| `arena/08e0ce01-nfl1` | U02 line-by-line review; U06 flags; U07 integration | F15–F21, integration |
+| `arena/b6e68100-nfl1` | A1 correlation takeover (F36); A2 post-merge audit; PR | none on site files |
+| `arena/e3148b95-nfl1` | T14 official-source audit and verification runner | S4 |
+| `arena/629e0db0-nfl1` | injury feed fallback status (PR #21, open) | F21 (injury feed) |
+
+**Proposed resolution (logged, not forced):**
+1. `3d5c5e2d` claimed first (`dab0b26`, 22:23:21 UTC); PR #23 changes the root pages and `collect-data.yml`. Merge it first, then the other sessions rebase or merge `main` and log their changes here.
+2. The root site should have **one renderer**: `pipeline/gen_site.py`, run by `collect-data.yml` after every data build. Other generators that write the same files (`scripts/verified/build_site.py`, `tools/build.py`) overwrite `index.html` and `pages/*` in CI and should be retired or pointed at the same renderer. Logged as F19 and F20.
+3. `lab/` or any second site should not duplicate the nav on `index.html`; add a single link only, and log it.
+4. Any session that changes `data/model/*.json` must re-run `tools/check_committed_site.py` before pushing.
