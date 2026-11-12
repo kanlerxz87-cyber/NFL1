@@ -1002,3 +1002,43 @@ where they overlap: both report 32 standings rows, and this subsystem's harness
 independently confirms all 28 pre-game records printed on the official injury
 page. Keeping both is deliberate — an audit is only worth anything if it was
 produced independently of the thing it audits.
+
+---
+
+# Session `3d5c5e2d-nfl1` — live-site freshness, signal honesty, and integration
+
+| Item | Value |
+| --- | --- |
+| This session ID | `3d5c5e2d-nfl1` |
+| This session branch | `arena/3d5c5e2d-nfl1` (fixed by the platform; `session-<id>/<task>` cannot be used — same deviation as earlier sessions) |
+| Base commit | `c09c739` on `main` (all PRs #1–#20 merged; no other branch ahead of `main`; no task `unclaimed` or `needs review` on the board at claim time) |
+| Pull request | to be opened from this branch to `main` at the end of the session |
+
+## Why these tasks
+
+Read-only audit of the live site against the repository's own data, done before claiming:
+
+- The published root pages (`index.html`, `pages/*.html`) say **"Data built 2026-11-12T05:07:59"**, but
+  `data/model/*.json` was regenerated at **18:53 UTC** by the `collect-data` bot. Nothing re-renders the
+  site after the bot commits, because `pipeline/gen_site.py` is run by hand only. The live homepage is stale.
+- Stale example: the live homepage shows **NE "Out" = 2**. The official nfl.com injury page (fetched
+  2026-11-12) lists **three** NE players as Out (Ben Brown, Carlton Davis III, TreVeyon Henderson), and
+  `data/model/official_injuries.json` (18:53) contains the same three rows.
+- The Week 10 "Signal" column labels a game **"actionable"** whenever |model − market| ≥ 3 points
+  (`pipeline/build_all.py` line ~316). No validation gate is applied, `data/model/strategies.json` shows
+  0 strategies passing, and `data/model/lines.json` blend test gives the model a **negative** weight
+  (−0.328), with market-only MAE 9.485 better than hybrid 9.542.
+
+## Task board (this session)
+
+| ID | Task | Status | Owner | File scope |
+| --- | --- | --- | --- | --- |
+| S1 | Live-site freshness: re-render the root site from the current `data/model/*.json` and verify the committed pages (not the regenerated copies) | in progress | `3d5c5e2d` | `index.html`, `pages/{lines,injuries,strategies,props,questions,suggestions,evidence,review,executive,models}.html`, `pipeline/gen_site.py` |
+| S2 | Signal honesty: stop labelling unvalidated gaps "actionable"; state that no strategy has passed gates | in progress | `3d5c5e2d` | `pipeline/build_all.py` (status names), `pipeline/gen_site.py` (labels), `pipeline/content.py` (flag text) |
+| S3 | Automate the refresh: run the renderer in the `collect-data` workflow so the bot's daily data commits publish a matching site | in progress | `3d5c5e2d` | `.github/workflows/collect-data.yml`, `tools/check_committed_site.py` (new) |
+| S4 | Official-source reconciliation of the availability and standings rows on the published site, with the source link and retrieval time for each checked row | in progress | `3d5c5e2d` | `data/verified/live_check_2026-11-12.tsv` (new), `pipeline/content.py` (flag text) |
+| S5 | Brief-to-evidence compliance matrix, with gaps flagged (no value inferred) | in progress | `3d5c5e2d` | `pipeline/content.py`, `COORDINATION.md` |
+| S6 | Integration: PR to `main`, required checks, merge, GitHub Pages deploy, PR and merge result recorded here | unclaimed | `3d5c5e2d` (integration) | `COORDINATION.md` |
+
+Shared outputs (`index.html`, `pages/*`) are changed here only because this session is the sole active
+session and every other task on the board is `done`; that is the integration condition in the brief.
