@@ -29,11 +29,13 @@ NOTES = {
                  "observation": "All 136 transcribed scores match the dataset. One published correlation uses a wrong division-game count (flag R-04). "
                                 "Its pull request replaced the deploy workflow and rewrote pages that earlier sessions had merged."},
     "80731db4": {"claimed": "T01-T13: full project, including site build, final integration and merge.",
-                 "observation": "Pushed a 14-page site and data layer at 04:47 UTC, after 13 minutes with only a claim. Its standings, per-game values and six correlations all reproduce (see Replication). Not merged."},
+                 "observation": "Pushed a 14-page site and data layer at 04:47 UTC, after 13 minutes with only a claim. Its standings, per-game values and six correlations all reproduce (see Replication). Its pull request is titled final integration."},
     "946c1684": {"claimed": "T0-T14: full project. Board marks T0-T13 as done.",
-                 "observation": "The board says done, but none of the files it lists (data/, scripts/, src/) are on the pushed branch."},
-    "87deb7ab": {"claimed": "T-01 to T-17: full project. Board marks T-01 and T-17 (data/standings.json, data/injuries.json) as done.",
-                 "observation": "Only the coordination board has been pushed. The files listed as done are not on the pushed branch."},
+                 "observation": "Has pushed work since the first snapshot; not reviewed by this session.",
+                 "observation_claim_only": "The board marks T0 to T13 as done, but none of the files it lists (data/, scripts/, src/) are on the pushed branch."},
+    "87deb7ab": {"claimed": "T-01 to T-17: full project (own site under docs/).",
+                 "observation": "Pushed its site and data at about 05:00 UTC after 24 minutes with only a claim. Its standings table matches NFL.com on all 32 rows and its split records reproduce (see Replication). Not merged.",
+                 "observation_claim_only": "Only the coordination board has been pushed. The files listed as done are not on the pushed branch."},
     "73fdd6c4": {"claimed": "V1-V5: independent verification, in referee/ only.",
                  "observation": "This session. Edits nothing outside referee/ except its own block in COORDINATION.md."},
 }
@@ -81,7 +83,8 @@ def main():
                          "files_on_branch": len(files), "commits_not_on_main": ahead,
                          "modifies_files_already_on_main": [m for m in modifies if not (sid == "73fdd6c4" and m == "COORDINATION.md")] if sid == "73fdd6c4" else modifies,
                          "pull_requests": [{"number": p["number"], "state": p["state"], "title": p["title"], "url": p["url"]} for p in mine],
-                         "state": state, "claimed": note["claimed"], "observation": note["observation"]})
+                         "state": state, "claimed": note["claimed"],
+                         "observation": note.get("observation_claim_only", note["observation"]) if state == "claim only" else note["observation"]})
     owners = {}
     for s in sessions:
         if s["state"] in ("merged", "this session") or s["commits_not_on_main"] == 0:

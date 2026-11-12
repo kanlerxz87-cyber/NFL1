@@ -124,6 +124,7 @@ def main():
     r76 = load("replication_7600ed8b.json")
     r25 = load("replication_25aa7696.json")
     r80 = load("replication_80731db4.json")
+    r87 = load("replication_87deb7ab.json")
     sens = load("replication_sensitivity.json")
     luck = load("replication_luck_thresholds.json")
     sess = load("sessions.json")
@@ -146,13 +147,14 @@ def main():
     # ---- counts used on several pages -----------------------------------------------------------
     main_rows = sum(t["rows_checked"] for t in rmain["tables"])
     main_match = sum(t["rows_matching"] for t in rmain["tables"])
-    data_rows = main_rows + r80["standings"]["rows_checked"]
-    data_match = main_match + r80["standings"]["rows_matching"]
+    data_rows = main_rows + r80["standings"]["rows_checked"] + r87["standings"]["rows_checked"]
+    data_match = main_match + r80["standings"]["rows_matching"] + r87["standings"]["rows_matching"]
     c25 = r25["correlation_checks"]
     c80 = r80["correlations"]["rows"]
-    rep = r76["counts"].get("replicated", 0) + sum(c["status"] == "replicated" for c in c25) + sum(c["status"] == "replicated" for c in c80) + r80["per_game"]["rows_matching"]
+    rep = r76["counts"].get("replicated", 0) + sum(c["status"] == "replicated" for c in c25) + sum(c["status"] == "replicated" for c in c80) + r80["per_game"]["rows_matching"] \
+        + r87["split_records"]["rows_replicated"]
     nrep = r76["counts"].get("NOT replicated", 0) + sum(c["status"] == "NOT replicated" for c in c25) + sum(c["status"] == "NOT replicated" for c in c80) \
-        + (r80["per_game"]["rows_checked"] - r80["per_game"]["rows_matching"])
+        + (r80["per_game"]["rows_checked"] - r80["per_game"]["rows_matching"]) + (r87["split_records"]["rows_checked"] - r87["split_records"]["rows_replicated"])
     ntest = r76["counts"].get("not replicable here", 0) + sum(c["status"] == "not replicable here" for c in c80)
     c5 = r25["c5_root_cause"]
 
@@ -181,7 +183,11 @@ def main():
     price = sens["price_test"]["rows"]
     src_rows = sens["line_source_test"]["rows"]
     ref76 = r76["commit"]
-    perfect = [r for r in r76["rows"] if r["section"] == "Correlation between strategies" and isinstance(r["published"], (int, float)) and abs(r["published"]) >= 0.999]
+    err76 = r76.get("their_error_file") or {}
+    done_claims = {"946c1684": "T0 to T13", "87deb7ab": "T-01 and T-17"}
+    perfect = [r for r in r76["rows"] if r["section"] == "Correlation between strategies" and "correlation of returns" in r["item"]
+               and isinstance(r["published"], (int, float)) and abs(r["published"]) >= 0.999]
+    perfect_rep = sum(r["status"] == "replicated" for r in perfect)
 
     flags = [
         ("R-01", "Unverified", "Betting lines, prices and totals, every season",
@@ -212,22 +218,25 @@ def main():
          "The own-line model, its error figures and four strategies (S01, S02, S03, S12) need play-by-play and injury files that this sandbox cannot download.",
          "7600ed8b", "Run the replication script where those files are reachable, for example in the branch's own workflow.", blob("data/model/lines.json", ref76), "Their lines file at the commit checked"),
         ("R-08", "Irregularity", "Strategy pairs that are the same bet",
-         f"{len(perfect)} replicated strategy pairs have a correlation of exactly 1.0 or -1.0 on the games they share (for example S04 with S06 on 207 games). "
-         "They are one bet counted under two names, or the two sides of one bet. The owner's gate G8 fails them, which is the correct outcome.",
+         f"{len(perfect)} published strategy pairs have a correlation of exactly 1.0 or -1.0 on the games they share (for example S04 with S06 on 207 games); "
+         f"{perfect_rep} of them were reproduced here and {len(perfect) - perfect_rep} could not be tested. On shared games the two strategies place the same bet, or opposite sides of it, "
+         "so those results are not independent evidence. The owner's gate G8 fails such pairs, which is the correct outcome.",
          "7600ed8b", "Merge or drop duplicates before counting how many strategies were tried.", blob("data/model/strategies.json", ref76), "Their strategies file at the commit checked"),
-        ("R-09", "Irregularity", "Stale error record",
-         "data/model/errors.json still shows a failure in the strategy stage (KeyError 'te') stamped 04:34:07 UTC, although later builds wrote a complete leaderboard. The file is not cleared on success.",
-         "7600ed8b", "Rewrite the error file on every run so an old failure is not mistaken for a current one.", blob("data/model/errors.json", ref76), "Their errors file at the commit checked"),
+        ("R-09", "Irregularity", "Build errors recorded by the pipeline itself",
+         (f"data/model/errors.json, stamped {err76.get('generated_at')}, records: " + "; ".join(f"stage '{x['stage']}' failed with {x['error']}" for x in err76["errors"]) +
+          f". The strategies file read here is stamped {r76['their_generated_at']}. Either a stage is failing now or the record is not cleared on success. An earlier snapshot (04:34 UTC) showed a different failure in the strategy stage.")
+         if err76.get("errors") else "The error file was empty at the commit checked. Earlier snapshots recorded failures in the strategy stage (04:34 UTC) and the injury stage (04:51 UTC).",
+         "7600ed8b", "Do not rely on the output of a stage listed in the error file. Rewrite the file on every run so an old failure is not mistaken for a current one.", blob("data/model/errors.json", ref76), "Their errors file at the commit checked"),
         ("R-10", "Irregularity", "Schedule link that changes meaning each week",
          "Source links of the form nfl.com/schedules/2026/REG10 redirect to the current week's schedule. Today that is Week 10, next week it will not be.",
          "7600ed8b", "Use the stable form nfl.com/schedules/2026/by-week/week-10.", "https://www.nfl.com/schedules/2026/by-week/week-10", "NFL.com Week 10 schedule (stable address)"),
         ("R-11", "Irregularity", "Three NFL Football Operations addresses return 404",
          "operations.nfl.com/the-rules/, /gameday/ and /gameday/nfl-schedule/ each returned the site's 404 page when fetched by this session. "
-         + (f"Still cited on main in: {', '.join(sorted({p for v in dead.values() for p in v}))}." if dead else "They are no longer cited on main (fixed after session 15e79a53 reported them)."),
+         + (f"Still cited on main in: {', '.join(sorted({p for v in dead.values() for p in v}))}." if dead else "They are no longer cited on main. Session 15e79a53 reported them as well."),
          "690e397b", "Replace with working official addresses." if dead else "No action needed. Kept for the record.", "https://operations.nfl.com/", "NFL Football Operations home"),
         ("R-12", "Irregularity", "Tasks marked done with no files on GitHub",
          ("; ".join(f"{s['session']}: {s['files_on_branch']} files on the branch, last commit {s['last_commit_utc'][11:]} UTC" for s in claim_only) + ". "
-          "Their boards list data, scripts and pages as done, but none of those files has been pushed.") if claim_only else "No session is in this state at the time of the snapshot.",
+          "The boards mark tasks as done (" + "; ".join(f"{s['session']}: {done_claims.get(s['session'], 'several')}" for s in claim_only) + "), but the files those tasks list are not on the pushed branch.") if claim_only else "No session is in this state at the time of the snapshot.",
          ", ".join(s["session"] for s in claim_only) or "none", "Treat these claims as open. Under the 60-minute rule they can be taken over if no commit follows.",
          claim_only[0]["branch_url"] if claim_only else GH, "Branch on GitHub"),
         ("R-13", "Irregularity", "Unmerged branches rewrite files that are already live",
@@ -312,6 +321,8 @@ def main():
         ["Strategy leaderboard of session 7600ed8b", "Records, returns, p-values, corrections, correlations", f"{r76['counts'].get('replicated', 0)} reproduced, {r76['counts'].get('not replicable here', 0)} not testable",
          UNV, a(blob("data/model/strategies.json", ref76), "Their file at the commit checked"), a("replication.html", "Replication")],
         ["Tables of session 80731db4", "Standings, per-game values, six correlations", f"{r80['standings']['rows_matching']} of {r80['standings']['rows_checked']} rows, {sum(c['status'] == 'replicated' for c in c80)} of {len(c80)} correlations",
+         OK, a(STAND.format(2026), "NFL.com standings"), a("replication.html", "Replication")],
+        ["Standings table of session 87deb7ab", "32 teams; split records rebuilt from game rows", f"{r87['standings']['rows_matching']} of {r87['standings']['rows_checked']} rows, {r87['split_records']['rows_replicated']} of {r87['split_records']['rows_checked']} split records",
          OK, a(STAND.format(2026), "NFL.com standings"), a("replication.html", "Replication")],
         ["Parallel sessions", f"{len(sess['sessions'])} branches, pull requests, overlapping edits", f"{len(sess['overlaps'])} live files touched by unmerged branches", chip("warn", "See register"), a(f"{GH}/branches", "Branches on GitHub"), a("sessions.html", "Sessions")],
     ]
@@ -474,6 +485,16 @@ def main():
     b.append(fold(f"<code>data/standings.json</code>: all {r80['standings']['rows_checked']} rows", table(
         [("Team", "k"), ("Published", "w"), ("Official", "w"), ("Status", ""), ("Official source", "nw")],
         [[e(r["key"]), e(r["published"]), e(r["official"]), status_chip(r["result"]), a(r["source"], "NFL.com standings 2026")] for r in r80["standings"]["rows"]])))
+    b.append(f"<h2>Standings table of session 87deb7ab</h2><p>Checked at commit <code>{e(r87['commit'][:10])}</code> on its branch. Wins, losses, ties, percentage, points, home and road records, conference and grouping are compared with NFL.com. "
+             "Its division, conference and non-conference records were rebuilt here from the game rows using the official groupings; the streak and last-five columns were not checked.</p>")
+    b.append(table([("Part of <code>data/standings.json</code>".replace("<code>", "").replace("</code>", ""), "k w"), ("Rows", "n"), ("Status", ""), ("Official source", "nw")], [
+        ["Record, points, home, road, conference, grouping", f"{r87['standings']['rows_matching']} / {r87['standings']['rows_checked']}", OK if r87["standings"]["rows_matching"] == r87["standings"]["rows_checked"] else chip("bad", "Mismatch"), a(STAND.format(2026), "NFL.com standings 2026")],
+        ["Division, conference and non-conference records", f"{r87['split_records']['rows_replicated']} / {r87['split_records']['rows_checked']}", chip("ok", "Replicated") if r87["split_records"]["rows_replicated"] == r87["split_records"]["rows_checked"] else NREP, a(DIVS, "NFL.com division standings 2026")],
+        ["Streak and last five games", "", chip("", "Not checked"), a(STAND.format(2026), "NFL.com standings 2026")]]))
+    b.append(fold(f"All {r87['standings']['rows_checked']} rows", table(
+        [("Team", "k"), ("Published", "w"), ("Official", "w"), ("Status", ""), ("Split records, published", "w"), ("Rebuilt", "w"), ("Status", ""), ("Official source", "nw")],
+        [[e(r["key"]), e(r["published"]), e(r["official"]), status_chip(r["result"]), e(d["published"]), e(d["referee"]), status_chip(d["status"]), a(r["source"], "NFL.com standings 2026")]
+         for r, d in zip(r87["standings"]["rows"], r87["split_records"]["rows"])])))
     page("replication.html", "Replication", "\n".join(b), as_of)
 
     # ================================================================================================
