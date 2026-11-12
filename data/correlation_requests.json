@@ -1,0 +1,90 @@
+[
+  {
+    "id": "CR-01",
+    "pair": "Injury designation count vs points allowed",
+    "required_inputs": "Game-level injury snapshot + official game results",
+    "blocker": "A timestamped panel dataset is not published by an official source",
+    "r": "",
+    "flag": "F10",
+    "src": "S17",
+    "verified": false,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "CR-02",
+    "pair": "Backup depth rank vs points allowed",
+    "required_inputs": "Depth chart snapshots + official game results",
+    "blocker": "Depth rank is not published league-wide",
+    "r": "",
+    "flag": "F08",
+    "src": "S17",
+    "verified": false,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "CR-03",
+    "pair": "Backup depth rank vs points scored",
+    "required_inputs": "Depth chart snapshots + official game results",
+    "blocker": "Same as CR-02, offense side",
+    "r": "",
+    "flag": "F08",
+    "src": "S17",
+    "verified": false,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "CR-04",
+    "pair": "QB passing yards vs WR receiving yards (same game)",
+    "required_inputs": "Official player stats + official game pages",
+    "blocker": "No official leg-level correlation dataset",
+    "r": "",
+    "flag": "F10",
+    "src": "S17",
+    "verified": false,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "CR-05",
+    "pair": "Two parlay legs (same game)",
+    "required_inputs": "Official play-by-play data",
+    "blocker": "No official leg-level correlation dataset",
+    "r": "",
+    "flag": "F10",
+    "src": "S17",
+    "verified": false,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "CR-06",
+    "pair": "Practice-status trend vs game-day inactive",
+    "required_inputs": "Official practice reports + official inactives",
+    "blocker": "Joined historical series not available from an official page",
+    "r": "",
+    "flag": "F10",
+    "src": "S17",
+    "verified": false,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "CR-07",
+    "pair": "Own line error vs realized margin",
+    "required_inputs": "Official game results",
+    "blocker": "No official odds source to define the benchmark",
+    "r": "",
+    "flag": "F09",
+    "src": "S17",
+    "verified": false,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "CR-08",
+    "pair": "Net points per game vs win percentage",
+    "required_inputs": "Official standings (available)",
+    "blocker": " ",
+    "r": "",
+    "flag": "NONE",
+    "src": "S17",
+    "verified": false,
+    "retrieved": "2026-11-12"
+  }
+]

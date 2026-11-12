@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="NFL1 — a verified, source-linked NFL decision-intelligence dashboard: requirements, decision questions, improvement suggestions, strategy validation, injury and depth tracking, and a leaderboard competition.">
+<title>Leaderboard competition | NFL1</title>
+<link rel="stylesheet" href="site/assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="mark">NFL</div>
+      <div><strong>NFL1</strong><small>Decision intelligence</small></div>
+    </div>
+    <div class="snapshot">
+      <b>Data snapshot</b><br>2026 season · Week 10<br>Retrieved 2026-11-12 (UTC)
+    </div>
+    <nav aria-label="Site sections">
+      <div class="navgroup"><h4>Overview</h4>
+<a href="index.html">Home</a>
+<a href="executive-summary.html">Executive Summary</a>
+<a href="deployment.html">Deployment &amp; PR</a>
+<a href="legacy-site.html">Earlier sessions&#x27; site</a>
+</div>
+<div class="navgroup"><h4>Governance</h4>
+<a href="requirements.html">Requirements</a>
+<a href="questions.html">Decision Questions</a>
+<a href="suggestions.html">Suggestions &amp; Paths</a>
+</div>
+<div class="navgroup"><h4>Competition</h4>
+<a href="strategy-lab.html">Strategy Lab</a>
+<a href="leaderboard.html" class="active">Leaderboard</a>
+<a href="bet-types.html">Bet Types &amp; Risk</a>
+</div>
+<div class="navgroup"><h4>Official data</h4>
+<a href="data-tables.html">Standings &amp; Findings</a>
+<a href="injuries.html">Injuries</a>
+<a href="depth-chart.html">Depth Charts</a>
+</div>
+<div class="navgroup"><h4>Assurance</h4>
+<a href="verification.html">Verification &amp; Sources</a>
+<a href="flagged.html">Flagged for Review</a>
+<a href="integration.html">Combined Integration</a>
+<a href="referee/index.html">Independent verification</a>
+</div>
+<div class="navgroup"><h4>Preserved pages</h4>
+<a href="pages/analysis.html">Validation &amp; correlation</a>
+<a href="pages/availability.html">Availability</a>
+<a href="pages/data.html">Verified data</a>
+<a href="pages/decisions.html">Decision register</a>
+<a href="pages/evidence.html">Evidence</a>
+<a href="pages/executive-summary.html">Executive summary</a>
+<a href="pages/flagged.html">Flagged</a>
+<a href="pages/injuries.html">Injuries</a>
+<a href="pages/lines.html">Own lines</a>
+<a href="pages/models.html">Strategy lab</a>
+<a href="pages/questions.html">Questions</a>
+<a href="pages/review.html">Review</a>
+<a href="pages/standings.html">Standings</a>
+<a href="pages/strategies.html">Strategies</a>
+<a href="pages/suggestions.html">Suggestions</a>
+<a href="pages/teams.html">Teams</a>
+<a href="pages/verified.html">Verified artifacts</a>
+</div>
+    </nav>
+    <div class="foot">
+      Every table row links to an official source. Unconfirmed values are left blank and flagged.
+      <br><br><a style="color:#fff;text-decoration:underline" href="https://github.com/kanlerxz87-cyber/NFL1">Repository ↗</a>
+    </div>
+  </aside>
+  <div class="main">
+    <div class="topbar">
+      <div class="crumb">NFL1 / <b>Leaderboard</b></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">36 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+    </div>
+    <main class="content" id="main">
+      <div class="kicker">Competition</div>
+      <h1>Leaderboard competition</h1>
+      <p class="lede">A rewarded, gate-validated competition across single bets, parlays and player prop combos — with every unverified result left blank.</p>
+      <div class="callout warn"><b>Competition framework only — no fabricated results.</b> Ranks, scores, sample sizes, correlation guards and reward values are blank because no strategy has passed the validation gates and no official source defines reward values.</div>
+<div class="cards"><div class="card"><div class="label">Tracks</div><div class="value">3</div><div class="detail">Single bet · Parlay · Prop combo</div></div><div class="card"><div class="label">Strategies</div><div class="value">10</div><div class="detail">All NOT PASSED</div></div><div class="card"><div class="label">Gates</div><div class="value">13</div><div class="detail">Must all pass</div></div><div class="card"><div class="label">Published ranks</div><div class="value">0</div><div class="detail">Blank until verified</div></div></div>
+<h2 id="rules">Competition rules</h2>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-lb-rules" aria-label="Filter tbl-lb-rules" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-lb-rules">7 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-lb-rules"><caption>Eligibility, scoring, freeze, rewards, risk posture and publication rules. Unverified rules keep their value cells blank.</caption>
+<thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Rule</th><th scope="col" class="sortable">Detail</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr id="LB-01" data-verified="true">
+<td><code>LB-01</code></td>
+<td>Three tracks: Single bet, Parlay, Player prop combo</td>
+<td class="wide">Track definitions follow the official bet-type terminology.</td>
+<td><span class="src"><a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official government research report">S21 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="LB-02" data-verified="true">
+<td><code>LB-02</code></td>
+<td>Eligibility</td>
+<td class="wide">A strategy appears on the ranked leaderboard only after passing G01-G13.</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda353.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official statistical test">S18 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="LB-03" data-verified="false">
+<td><code>LB-03</code></td>
+<td>Scoring</td>
+<td class="wide">Out-of-sample score; numeric formula and weights are blank and flagged until pre-registered.</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><a class="badge flag" href="flagged.html">UNVERIFIED</a></td>
+</tr>
+<tr id="LB-04" data-verified="true">
+<td><code>LB-04</code></td>
+<td>Freeze</td>
+<td class="wide">Evaluation windows and pre-registration hashes are frozen before scoring.</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="LB-05" data-verified="false">
+<td><code>LB-05</code></td>
+<td>Rewards</td>
+<td class="wide">Non-monetary badges: Verified Signal, Top Single Bet, Top Parlay, Top Player Prop Combo. Reward values are blank and flagged.</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><a class="badge flag" href="flagged.html">UNVERIFIED</a></td>
+</tr>
+<tr id="LB-06" data-verified="true">
+<td><code>LB-06</code></td>
+<td>Risk posture</td>
+<td class="wide">Parlay strategies carry a stricter gate because official state data shows higher loss rates for parlays.</td>
+<td><span class="src"><a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official government research report">S21 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="LB-07" data-verified="true">
+<td><code>LB-07</code></td>
+<td>Publication</td>
+<td class="wide">Ranks, scores and sample sizes are published only when verified; otherwise the cells are blank.</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+</tbody></table></div>
+<h2 id="board">Leaderboard</h2>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-leaderboard" aria-label="Filter tbl-leaderboard" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-leaderboard">10 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-leaderboard"><caption>Ranked board. Every performance cell is blank and flagged until a strategy passes all 13 gates.</caption>
+<thead><tr><th scope="col" class="sortable">Strategy</th><th scope="col" class="sortable">Name</th><th scope="col" class="sortable">Track</th><th scope="col" class="sortable">Rank</th><th scope="col" class="sortable">Score</th><th scope="col" class="sortable">Sample size</th><th scope="col" class="sortable">Correlation guard</th><th scope="col" class="sortable">Gates passed</th><th scope="col" class="sortable">Reward</th><th scope="col" class="sortable">Status</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr id="LB-ST-01" data-verified="false">
+<td><code>ST-01</code></td>
+<td>Net-points strength differential</td>
+<td>Single bet</td>
+<td data-value="1" class="blank num"></td>
+<td data-value="1" class="blank num"></td>
+<td data-value="1" class="blank num"></td>
+<td data-value="1" class="blank num"></td>
+<td>0 / 13</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">NOT ELIGIBLE</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F12">UNVERIFIED</a></td>
+</tr>
+<tr id="LB-ST-02" data-verified="false">
+<td><code>ST-02</code></td>
+<td>Points-allowed total</td>
+<td>Single bet</td>
+<td data-value="1" class="blank num"></td>
+<td data-value="1" class="blank num"></td>
+<td data-value="1" class="blank num"></td>
+<td data-value="1" class="blank num"></td>
+<td>0 / 13</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">NOT ELIGIBLE</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F12">UNVERIFIED</a></td>
+</tr>
+<tr id="LB-ST-03" data-verified="false">
+<td><code>ST-03</code></td>
+<td>Defensive backup-depth deficiency</td>
+<td>Single bet</td>
+<td data-value="1" class="blank num"></td>
+<td data-value="1" class="blank num"></td>
+<td data-value="1" class="blank num"></td>
+<td data-value="1" class="blank num"></td>
+<td>0 / 13</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">NOT ELIGIBLE</span></td>
+<td><span class="src"><a href="https://www.chiefs.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Kansas City Chiefs (chiefs.com) — Official club depth chart">S14 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F12">UNVERIFIED</a></td>
+</tr>
+<tr id="LB-ST-04" data-verified="false">
+<td><code>ST-04</code></td>
+<td>Offensive backup-depth deficiency</td>
+<td>Single bet</td>
+<td data-value="1" class="blank num"></td>
+<td data-value="1" class="blank num"></td>
+<td data-value="1" class="blank num"></td>
+<td data-value="1" class="blank num"></td>
+<td>0 / 13</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">NOT ELIGIBLE</span></td>
+<td><span class="src"><a href="https://www.packers.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Green Bay Packers (packers.com) — Official club depth chart">S15 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F12">UNVERIFIED</a></td>
+</tr>
+<tr id="LB-ST-05" data-verified="false">
+<td><code>ST-05</code></td>
+<td>Practice-status trend</td>
+<td>Single bet</td>
+<td data-value="1" class="blank num"></td>
+<td data-value="1" class="blank num"></td>
+<td data-value="1" class="blank num"></td>
+<td data-value="1" class="blank num"></td>
+<td>0 / 13</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">NOT ELIGIBLE</span></td>
+<td><span class="src"><a href="https://www.nfl.com/news/2026-27-national-football-league-important-dates" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official league calendar">S04 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F12">UNVERIFIED</a></td>
+</tr>
+<tr id="LB-ST-06" data-verified="false">
+<td><code>ST-06</code></td>
+<td>Designation-gated availability</td>
+<td>Single bet</td>
+<td data-value="1" class="blank num"></td>
+<td data-value="1" class="blank num"></td>
+<td data-value="1" class="blank num"></td>
+<td data-value="1" class="blank num"></td>
+<td>0 / 13</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">NOT ELIGIBLE</span></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F12">UNVERIFIED</a></td>
+</tr>
+<tr id="LB-ST-07" data-verified="false">
+<td><code>ST-07</code></td>
+<td>Two-leg parlay with correlation guard</td>
+<td>Parlay</td>
+<td data-value="1" class="blank num"></td>
+<td data-value="1" class="blank num"></td>
+<td data-value="1" class="blank num"></td>
+<td data-value="1" class="blank num"></td>
+<td>0 / 13</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">NOT ELIGIBLE</span></td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F12">UNVERIFIED</a></td>
+</tr>
+<tr id="LB-ST-08" data-verified="false">
+<td><code>ST-08</code></td>
+<td>Same-game player-prop combo</td>
+<td>Player prop combo</td>
+<td data-value="1" class="blank num"></td>
+<td data-value="1" class="blank num"></td>
+<td data-value="1" class="blank num"></td>
+<td data-value="1" class="blank num"></td>
+<td>0 / 13</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">NOT ELIGIBLE</span></td>
+<td><span class="src"><a href="https://www.nfl.com/stats/player-stats/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official player statistics">S03 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F12">UNVERIFIED</a></td>
+</tr>
+<tr id="LB-ST-09" data-verified="false">
+<td><code>ST-09</code></td>
+<td>Prop availability gate</td>
+<td>Player prop combo</td>
+<td data-value="1" class="blank num"></td>
+<td data-value="1" class="blank num"></td>
+<td data-value="1" class="blank num"></td>
+<td data-value="1" class="blank num"></td>
+<td>0 / 13</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">NOT ELIGIBLE</span></td>
+<td><span class="src"><a href="https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official inactives list">S05 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F12">UNVERIFIED</a></td>
+</tr>
+<tr id="LB-ST-10" data-verified="false">
+<td><code>ST-10</code></td>
+<td>Backup-exposure index</td>
+<td>All tracks</td>
+<td data-value="1" class="blank num"></td>
+<td data-value="1" class="blank num"></td>
+<td data-value="1" class="blank num"></td>
+<td data-value="1" class="blank num"></td>
+<td>0 / 13</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">NOT ELIGIBLE</span></td>
+<td><span class="src"><a href="https://www.chiefs.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Kansas City Chiefs (chiefs.com) — Official club depth chart">S14 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F12">UNVERIFIED</a></td>
+</tr>
+</tbody></table></div>
+<h2 id="rewards">Reward tiers</h2>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-rewards" aria-label="Filter tbl-rewards" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-rewards">4 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-rewards"><caption>Non-monetary reward tiers. Reward values are blank and flagged because no official source defines them.</caption>
+<thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Tier</th><th scope="col" class="sortable">Condition</th><th scope="col" class="sortable">Reward value</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr id="RW-01" data-verified="false">
+<td><code>RW-01</code></td>
+<td>Verified Signal</td>
+<td class="wide">All 13 gates pass for a single strategy</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda353.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official statistical test">S18 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F12">UNVERIFIED</a></td>
+</tr>
+<tr id="RW-02" data-verified="false">
+<td><code>RW-02</code></td>
+<td>Top Single Bet</td>
+<td class="wide">Highest validated out-of-sample score in the single-bet track</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="src"><a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official government research report">S21 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F12">UNVERIFIED</a></td>
+</tr>
+<tr id="RW-03" data-verified="false">
+<td><code>RW-03</code></td>
+<td>Top Parlay</td>
+<td class="wide">Highest validated score in the parlay track, correlation guard passed</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="src"><a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official government research report">S21 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F12">UNVERIFIED</a></td>
+</tr>
+<tr id="RW-04" data-verified="false">
+<td><code>RW-04</code></td>
+<td>Top Player Prop Combo</td>
+<td class="wide">Highest validated score in the player-prop combo track, availability gate passed</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="src"><a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official government research report">S21 ↗</a></span></td><td><a class="badge flag" href="flagged.html#F12">UNVERIFIED</a></td>
+</tr>
+</tbody></table></div>
+<h2 id="workflow">Competition workflow</h2>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-workflow" aria-label="Filter tbl-workflow" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-workflow">6 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-workflow"><caption>End-to-end competition workflow with an official method source per row.</caption>
+<thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Step</th><th scope="col" class="sortable">Action</th><th scope="col" class="sortable">Detail</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr id="WF-01" data-verified="true">
+<td><code>WF-01</code></td>
+<td class="num">1</td>
+<td>Pre-register</td>
+<td class="wide">Freeze formula, thresholds, window and a hash before scoring</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="WF-02" data-verified="true">
+<td><code>WF-02</code></td>
+<td class="num">2</td>
+<td>Ingest</td>
+<td class="wide">Snapshot only official, point-in-time data</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="WF-03" data-verified="true">
+<td><code>WF-03</code></td>
+<td class="num">3</td>
+<td>Gate</td>
+<td class="wide">Run G01–G13; log failures instead of tuning after the fact</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda353.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official statistical test">S18 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="WF-04" data-verified="true">
+<td><code>WF-04</code></td>
+<td class="num">4</td>
+<td>Score out-of-sample</td>
+<td class="wide">Score only on data not used to build the model</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="WF-05" data-verified="true">
+<td><code>WF-05</code></td>
+<td class="num">5</td>
+<td>Publish</td>
+<td class="wide">Publish rank, score and sample size only when verified</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="WF-06" data-verified="false">
+<td><code>WF-06</code></td>
+<td class="num">6</td>
+<td>Reward</td>
+<td class="wide">Award a non-monetary badge; reward value blank until defined</td>
+<td><span class="src"><a href="https://nj.gov/oag/ge/2024news/2020sportswagerreportrevised121523.pdf" target="_blank" rel="noopener noreferrer" title="State of New Jersey, Division of Gaming Enforcement — Official government research report">S21 ↗</a></span></td><td><a class="badge flag" href="flagged.html">UNVERIFIED</a></td>
+</tr>
+</tbody></table></div>
+      <div class="footer">
+        NFL1 · 2026 Week 10 snapshot retrieved 2026-11-12 (UTC) ·
+        <a href="verification.html">Verification &amp; sources</a> ·
+        <a href="flagged.html">Flagged for Review</a> ·
+        <a href="https://github.com/kanlerxz87-cyber/NFL1">Source repository ↗</a><br>
+        Blank cells are values the official source does not publish. No value on this site is inferred or filled in.
+      </div>
+    </main>
+  </div>
+</div>
+<script src="site/assets/app.js"></script>
+</body>
+</html>

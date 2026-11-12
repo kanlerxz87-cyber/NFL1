@@ -1,0 +1,28 @@
+name: Verify NFL1 site
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Recompute derived values
+        run: python3 tools/compute_correlations.py
+      - name: Re-verify merged session data line by line
+        run: python3 tools/verify_combined.py
+      - name: Rebuild pages from the JSON data layer
+        run: python3 tools/build.py
+      - name: Verify line by line (source links, blank values, internal links)
+        run: python3 tools/verify.py
