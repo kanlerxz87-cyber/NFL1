@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
-"""Generate the `lab/` research section of the site from data/s9cb/*.json.
+"""Generate the `research/` section of the site from data/s9cb/*.json.
 
 Nothing is hand-written into a table: every row comes from a JSON artifact produced by
 s9cb/analysis/run.py, s9cb/analysis/verify.py or s9cb/content.py. Every table carries a
 source column, and a value the source does not publish renders as a labelled blank.
 
 Run: cd s9cb && PYTHONPATH=analysis python3 site.py
+
+The directory is `research/` rather than `lab/` because session 1505ac8e-nfl1 published
+its own `lab/` while this section was being built. Their work is preserved untouched and
+linked from the footer of every page here.
 """
 from __future__ import annotations
 
@@ -17,7 +21,7 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, ".."))
 DATA = os.path.join(ROOT, "data", "s9cb")
-OUT = os.path.join(ROOT, "lab")
+OUT = os.path.join(ROOT, "research")
 
 NFL = "https://www.nfl.com/"
 SCHED = "https://www.nfl.com/schedules/"
@@ -155,6 +159,13 @@ def page(title: str, subtitle: str, group: str, body: str) -> str:
       <a href="{STAND}" target="_blank" rel="noopener">standings</a> &middot;
       <a href="{INJ}" target="_blank" rel="noopener">injuries</a> &middot;
       <a href="{STATS}" target="_blank" rel="noopener">player stats</a>.</p>
+      <p>Other site generations in this repository, all preserved:
+      <a href="../index.html">root dashboard</a> &middot;
+      <a href="../docs/index.html">docs/</a> &middot;
+      <a href="../verified-lab/index.html">verified-lab/</a> &middot;
+      <a href="../referee/index.html">referee/</a> &middot;
+      <a href="../dashboard/index.html">dashboard/</a> &middot;
+      <a href="../lab/index.html">lab/</a>.</p>
       <p>This is a research tool, not betting advice.</p>
     </footer>
   </main>
@@ -173,7 +184,7 @@ def write(fname: str, title: str, subtitle: str, group: str, body: str) -> None:
     os.makedirs(OUT, exist_ok=True)
     with open(os.path.join(OUT, fname), "w") as f:
         f.write(page(title, subtitle, group, body))
-    print(f"  lab/{fname}")
+    print(f"  research/{fname}")
 
 
 def kpi(items: list[tuple[str, str, str]]) -> str:
@@ -927,7 +938,7 @@ def main() -> None:
     inj = pd.read_csv(os.path.join(DATA, "injuries.csv"))
     INJROWS = inj[(inj["season"] == 2026) & (inj["week"] == 10)].copy()
 
-    print("generating lab/ ...")
+    print("generating research/ ...")
     page_index(L, LB, PL, CO, PR, VE, CT, GD)
     page_exec(CT, L, LB, PL, PR, VE)
     page_lines(L)

@@ -33,8 +33,8 @@ File scope claimed here is **additive and non-overlapping** with every earlier s
 | U4 | Correlation register with computed values (game-level, strategy-level, prop-level) | in progress | `9cb71eb8` | `s9cb/analysis/` | fills the blanks left by earlier sessions |
 | U5 | Luck-removal protocol (binomial, bootstrap, multiple testing, holdout) | in progress | `9cb71eb8` | `s9cb/analysis/` | |
 | U6 | Injury / depth deficiency refresh joined to official nfl.com week-10 report | in progress | `9cb71eb8` | `s9cb/analysis/` | reuses `data/model/official_injuries.json` |
-| U7 | Consolidated clean site: one landing page + subpages by category | in progress | `9cb71eb8` | `lab/` (new), one nav entry in `index.html` | additive; no earlier page is deleted |
-| U8 | Line-by-line verification of every new row against an official source; blanks stay blank | in progress | `9cb71eb8` | `s9cb/verify.py`, `lab/` | |
+| U7 | Consolidated clean site: one landing page + subpages by category | in progress | `9cb71eb8` | `research/` (new), one nav entry in `index.html` | additive; no earlier page is deleted |
+| U8 | Line-by-line verification of every new row against an official source; blanks stay blank | in progress | `9cb71eb8` | `s9cb/verify.py`, `research/` | |
 | U9 | PR → merge → confirm Pages deploy → record here | in progress | `9cb71eb8` | `COORDINATION.md` | |
 
 **Not touched by this session (owned by others):** `index.html` (only one additive nav entry at
@@ -1076,7 +1076,7 @@ conflict beyond auto-merging this file.
 | U5 | Luck-removal protocol | done | `s9cb/analysis/run.py` | Exact null from observed prices (variance d-1 per bet) plus bootstrap, BH and a power calculation |
 | U6 | Parlay and prop-combination analysis | done | `s9cb/analysis/strategies.py`, `props.py` | 66 priced two-leg combinations, none cherry-picked |
 | U7 | Injury and depth page joined to the official week-10 report | done | `s9cb/site.py` | `lab/injuries.html`; 276 rows, 26 clubs, 6 game designations |
-| U8 | Consolidated site section: one landing page plus 13 subpages by category | done | `s9cb/site.py`, `lab/` | 14 pages, 239 internal links, 0 broken |
+| U8 | Consolidated site section: one landing page plus 13 subpages by category | done | `s9cb/site.py`, `research/` | 14 pages, 239 internal links, 0 broken |
 | U9 | Line-by-line verification against official pages; PR, merge, Pages confirmation | done | `s9cb/analysis/verify.py` | see below |
 
 ## Sources used (all read directly during this session unless noted)
@@ -1148,7 +1148,7 @@ the feed uses ARI · U10 reward legality is unreviewed.
 
 New: `s9cb/collect.py`, `s9cb/content.py`, `s9cb/site.py`, `s9cb/analysis/{common,lines,
 strategies,props,run,verify}.py`, `.github/workflows/s9cb-collect.yml`, `data/s9cb/*`,
-`lab/**` (14 pages + stylesheet).
+`research/**` (14 pages + stylesheet).
 Modified: `COORDINATION.md` (this section and the session table), `index.html` (one
 navigation entry and one hero link, both additive).
 Read but never modified: `pipeline/`, `tools/`, `scripts/`, `analysis/`, `pages/`, `docs/`,
@@ -1158,7 +1158,7 @@ Read but never modified: `pipeline/`, `tools/`, `scripts/`, `analysis/`, `pages/
 
 | # | Request | Owner of the file | Why not applied here |
 |---|---|---|---|
-| R-9cb71eb8-01 | Add the `lab/` navigation entry to the template inside `tools/build.py` so it survives the next regeneration of `index.html`. | `tools/build.py` — `7600ed8b` / `25aa7696` lineage | `tools/build.py` rewrites `index.html` unconditionally, so the entry added directly to `index.html` in this merge is expected to be transient. |
+| R-9cb71eb8-01 | Add the `research/` navigation entry to the template inside `tools/build.py` so it survives the next regeneration of `index.html`. | `tools/build.py` — `7600ed8b` / `25aa7696` lineage | `tools/build.py` rewrites `index.html` unconditionally, so the entry added directly to `index.html` in this merge is expected to be transient. |
 | R-9cb71eb8-02 | Consider adding `s9cb/analysis/verify.py` as an extra CI gate alongside `scripts/verified/validate_verified.py`. | `.github/workflows/pages.yml` | It adds three checks the existing gates do not make (standings recomputation, results cross-check, injury designation check). Changing shared CI is requested, not taken. |
 | R-9cb71eb8-03 | Confirm whether the pre-2006 games the existing model trains on (`data/model/`) carry prices in the same source, or whether they were scored with an assumed -110. | `pipeline/` | This session refuses to score any game without an observed price and reports 1,902 such games; if the other pipeline scored them, the two leaderboards are not measuring the same thing. |
 
