@@ -1,0 +1,51 @@
+[
+  {
+    "priority": "P1 · Blocker",
+    "suggestion": "Obtain a lawful, timestamped closing-line source before building anything else.",
+    "why": "Every decision the project cares about — edge, ROI, ATS accuracy, parlay value, leaderboard scoring — requires the price that was actually available. Without it we can only measure prediction accuracy, which is not the same thing as profitability.",
+    "cost": "Licensing cost and legal review; feeds may not permit redistribution, which would limit what can be published.",
+    "acceptance": "For each game, a stored quote with source, market, line, price and capture time, and at least one full historical season to test on."
+  },
+  {
+    "priority": "P1 · Blocker",
+    "suggestion": "Fix the measurement target: decide whether the leaderboard scores straight-up winners or spread performance.",
+    "why": "They are different games. This dataset shows a ~60% straight-up hit rate that is statistically indistinguishable from luck, while spread performance cannot be computed at all yet. Scoring the wrong metric rewards the wrong strategies.",
+    "cost": "None in money; requires a written pre-registration so the metric cannot be changed after results are known.",
+    "acceptance": "A signed-off metric definition, the minimum sample, and the promotion threshold, all fixed before the next season's data arrives."
+  },
+  {
+    "priority": "P2 · High",
+    "suggestion": "Automate the weekly capture so the sample grows without hand entry, and re-run verification on every update.",
+    "why": "The verdict on every strategy is currently limited by sample size (136 games). Automation converts each week into fresh out-of-sample evidence instead of one static snapshot.",
+    "cost": "Engineering time; needs a permitted data channel because the current sandbox cannot reach the data host directly.",
+    "acceptance": "A scheduled job that fetches, stores with timestamp and URL, re-runs the gate, and fails loudly if reconciliation breaks."
+  },
+  {
+    "priority": "P2 · High",
+    "suggestion": "Build the backup/attrition layer on participation snapshots, not depth charts.",
+    "why": "Official NFL depth charts are not published, so '2nd string' cannot be sourced. Who actually played — snapped counts and participation — is the defensible proxy for a starter being replaced.",
+    "cost": "Requires a row-level participation feed; no official free source was found in this environment.",
+    "acceptance": "For each injured starter, a dated record of the replacement and that player's snap share, linked to a source."
+  },
+  {
+    "priority": "P3 · Medium",
+    "suggestion": "Pre-register a small number of hypotheses instead of testing many strategies.",
+    "why": "Four strategies were tested here and the best result stopped being significant after correction. Testing fewer, pre-declared ideas is the cheapest way to make a real edge detectable.",
+    "cost": "Slower iteration; fewer headline numbers to show.",
+    "acceptance": "A written hypothesis list with direction and threshold fixed in advance, and results reported for all of them, including failures."
+  },
+  {
+    "priority": "P3 · Medium",
+    "suggestion": "Publish failures prominently, exactly as this site does.",
+    "why": "The model failing its gate and the near-significant strategy are the two most decision-relevant facts produced. Hiding them would make the dashboard actively misleading.",
+    "cost": "Counter-intuitive to market; requires discipline to keep showing.",
+    "acceptance": "Every strategy page shows its gate status, sample size and confidence interval next to its result."
+  },
+  {
+    "priority": "P4 · Later",
+    "suggestion": "Only after the above: paper leaderboard, then prizes with legal review.",
+    "why": "Rewards create pressure to overfit and to game the metric. Running paper-only first tests both the strategies and the scoring rules at zero financial risk.",
+    "cost": "Prize funding, eligibility and jurisdiction review, audit and anti-fraud controls, tax treatment.",
+    "acceptance": "A full paper season, locked predictions, independent audit, published rules, and a legal opinion before any money moves."
+  }
+]

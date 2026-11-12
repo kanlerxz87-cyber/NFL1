@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Executive Summary — NFL1</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<header>
+  <div class="brand">NFL1 — NFL Analytics Dashboard</div>
+  <nav>
+    <a href="../index.html">Overview</a>
+    <a href="executive-summary.html" class="active">Executive Summary</a>
+    <a href="teams.html">Teams</a>
+    <a href="standings.html">Standings</a>
+    <a href="injuries.html">Injuries</a>
+    <a href="availability.html">Availability</a>
+    <a href="data.html">Verified Data</a>
+    <a href="lines.html">Own Lines</a>
+    <a href="analysis.html">Validation & Correlation</a>
+    <a href="decisions.html">Decision Register</a>
+    <a href="verified.html">Verified Artifacts</a>
+    <a href="evidence.html">Evidence</a>
+    <a href="models.html">Strategy Lab</a>
+    <a href="strategies.html">Strategies</a>
+    <a href="suggestions.html">Suggestions</a>
+    <a href="questions.html">Questions</a>
+    <a href="flagged.html">Flagged</a>
+    <a href="review.html">Review</a>
+  </nav>
+</header>
+<main>
+  <h1>Executive Summary</h1>
+  <p class="muted">Overview of important details derived from verified official sources (NFL.com). Snapshot date: 2026-11-12.</p>
+
+  <div class="card">
+    <h2>League Structure</h2>
+    <ul>
+      <li>32 teams, split into 2 conferences (AFC, NFC) and 8 divisions of 4 teams each. Source: <a href="https://www.nfl.com/teams/" target="_blank">nfl.com/teams</a>.</li>
+      <li>2026 regular season in progress; Week 10 injury report published. Source: <a href="https://www.nfl.com/injuries/" target="_blank">nfl.com/injuries</a>.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Top of Standings (verified snapshot)</h2>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Rank</th><th>Team</th><th>W</th><th>L</th><th>T</th><th>PCT</th><th>PF</th><th>PA</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Buffalo Bills</td><td>7</td><td>1</td><td>0</td><td>0.875</td><td>256</td><td>187</td></tr>
+        <tr><td>2</td><td>San Francisco 49ers</td><td>7</td><td>1</td><td>0</td><td>0.875</td><td>235</td><td>156</td></tr>
+        <tr><td>3</td><td>Chicago Bears</td><td>7</td><td>2</td><td>0</td><td>0.778</td><td>241</td><td>184</td></tr>
+        <tr><td>4</td><td>Denver Broncos</td><td>7</td><td>2</td><td>0</td><td>0.778</td><td>198</td><td>186</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="muted">Full table: <a href="standings.html">Standings page</a>. Source: <a href="https://www.nfl.com/standings/league/2026/reg" target="_blank">nfl.com standings</a>.</p>
+  </div>
+
+  <div class="card">
+    <h2>Injury Tracking Focus</h2>
+    <p>The system must track injuries and know deficiencies in defenses and offenses, including when 2nd/3rd/4th-string backups replace starters. Official injury reports are published weekly on nfl.com. Snapshot included for Week 10 (Thursday game: Commanders vs Giants). See <a href="injuries.html">Injuries page</a>.</p>
+    <p class="muted">Notable Week 10 injuries captured: Lucas Patrick (Commanders, C, Concussion, Out), Colson Yankoff (Commanders, TE, Knee, Out), Malik Harrison (Giants, LB, Groin, Questionable).</p>
+  </div>
+
+  <div class="card" style="border-color:#38bdf8">
+    <h2>What the verification work established (2026-11-12)</h2>
+    <p class="muted">Every figure below is reproducible from <code>data/verified/</code> and is shown with its source on the linked page.</p>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Finding</th><th>Number</th><th>Decision consequence</th><th>Page</th></tr></thead>
+      <tbody>
+        <tr><td>2026 completed games captured and reconciled to official standings</td><td><strong>136 / 136</strong> games, <strong>32 / 32</strong> teams</td><td>The season record is now trustworthy enough to model on; no score is missing.</td><td><a href="data.html">Verified Data</a></td></tr>
+        <tr><td>Own-line model vs simplest baseline (forward test)</td><td>MAE <strong>10.93</strong> vs <strong>10.62</strong></td><td>The model is <strong>not</strong> better than assuming an average game. Its Week 10 lines are published but not recommended.</td><td><a href="lines.html">Own Lines</a></td></tr>
+        <tr><td>Best directional strategy (straight-up winners)</td><td><strong>60.7%</strong>, Holm-adjusted p = <strong>0.063</strong></td><td>Suggestive, not significant. Brier skill is negative, so its probabilities are not yet useful.</td><td><a href="analysis.html">Validation</a></td></tr>
+        <tr><td>Measured correlations for parlay sizing</td><td>opponent quality ↔ points <strong>+0.386</strong>; margin ↔ total <strong>−0.161</strong></td><td>Same-game legs must be treated as dependent; independent multiplication overstates parlay value.</td><td><a href="analysis.html">Correlation</a></td></tr>
+        <tr><td>Home-field advantage in this sample</td><td><strong>49.6%</strong> home win rate (95% CI 41.2–58.1%)</td><td>Do not assume a normal home edge this season.</td><td><a href="analysis.html">Validation</a></td></tr>
+        <tr><td>Injury statuses verified for Week 10</td><td><strong>5 Out</strong>, <strong>1 Questionable</strong>, <strong>4 teams</strong> clean</td><td>Availability is sourced; replacement seniority is not, because no official depth chart exists.</td><td><a href="availability.html">Availability</a></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p><strong>The single most important gap:</strong> there is no market price data anywhere in this
+    project. Without the actual line and price, no strategy can be shown to be profitable, and the
+    leaderboard cannot pay rewards on evidence. This is decision D01/D02 on the
+    <a href="decisions.html">Decision Register</a>.</p>
+  </div>
+
+  <div class="card">
+    <h2>Key Open Items</h2>
+    <ul>
+      <li>Line origination strategies require validation gates and correlation analysis — see <a href="strategies.html">Strategies</a>.</li>
+      <li>Missing information and open questions — see <a href="questions.html">Questions &amp; Answers</a>.</li>
+      <li>Proposed improvements — see <a href="suggestions.html">Suggestions</a>.</li>
+      <li>Unverified/flagged items — see <a href="flagged.html">Flagged for Review</a>.</li>
+    </ul>
+  </div>
+</main>
+<footer>NFL1 — data sourced from official NFL.com pages.</footer>
+</body>
+</html>

@@ -262,5 +262,115 @@
     "action": "Confirm the interpretation on review.",
     "verified": true,
     "retrieved": "2026-11-12"
+  },
+  {
+    "id": "F25",
+    "category": "Combined data",
+    "description": "The earlier sessions' `data/standings.csv` contains a `rank` 1..32 column; the official standings page publishes no rank column.",
+    "impact": "The ordinal is a project value, not an official statistic; it must not be presented as verified.",
+    "status": "needs review",
+    "src": "S02",
+    "action": "Label it as site row order or leave blank; the new standings table omits rank entirely.",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "F26",
+    "category": "Dead official links",
+    "description": "An independent review found three cited operations.nfl.com URLs returning the NFL 404 page (gameday/nfl-schedule/, gameday/, the-rules/).",
+    "impact": "Those citations cannot be used as evidence on the preserved legacy pages.",
+    "status": "needs review",
+    "src": "S09",
+    "action": "Use the canonical 2026 rulebook and NFL.com schedule links; legacy pages remain labelled historical.",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "F27",
+    "category": "Stale content",
+    "description": "Two preserved legacy pages state that no NFL dataset or injury status was imported, which became stale after the earlier sessions' data pull requests.",
+    "impact": "Reviewers could read contradictory statements across the two site generations.",
+    "status": "needs review",
+    "src": "S24",
+    "action": "The new dashboard is authoritative; legacy pages are preserved at legacy-site.html and clearly labelled.",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "F28",
+    "category": "Combined navigation",
+    "description": "Two complete navigation systems now exist in one published site (root dashboard and preserved pages/ site).",
+    "impact": "Users may see different layouts depending on the entry point.",
+    "status": "needs review",
+    "src": "S23",
+    "action": "The landing dashboard links explicitly to the preserved site and to the combined-integration page.",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "F29",
+    "category": "Abbreviation mismatch",
+    "description": "The earlier sessions' `data/teams.csv` and `data/standings.csv` use `LAR` for the Los Angeles Rams; the standings snapshot transcribed in `data/standings.json` uses the official NFL.com abbreviation `LA`.",
+    "impact": "Two project snapshots refer to the same club with different abbreviations. Neither value was inferred; both were copied from official pages as rendered at different times.",
+    "status": "needs review",
+    "src": "S02",
+    "action": "The combined verifier maps LA↔LAR as an alias for comparison, preserves both spellings in their original files, and flags the discrepancy here.",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "F30",
+    "category": "Third-generation artifacts",
+    "description": "Sessions `25aa7696` and `7600ed8b` merged `data/verified/*`, `analysis/*`, `scripts/verified/*` and six new `pages/*.html` files containing 136 official game results, own lines, computed correlations, backtests and a luck analysis.",
+    "impact": "These are additional deliverables for the same brief. This integration session preserved them all and re-verified the standings, injuries and game results line by line; model-derived numbers were not re-derived here.",
+    "status": "needs review",
+    "src": "S02",
+    "action": "See integration.html for the cross-checks and links to the preserved pages. Their CI numeric audit is retained.",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "F31",
+    "category": "Differing correlation scopes",
+    "description": "This dashboard publishes six Pearson correlations computed from the 32 official standings rows; the third-generation pages publish four correlations computed from 136 official game results.",
+    "impact": "Both sets are computed from official data but answer different questions. Neither fills the other's blank cells.",
+    "status": "needs review",
+    "src": "S17",
+    "action": "Requested leg-level, injury-to-performance and QB/WR correlations remain blank; do not substitute an adjacent metric.",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "F32",
+    "category": "Own-line verdict",
+    "description": "The third-generation `pages/lines.html` publishes Week 10 model margins and totals with an explicit FAIL validation verdict; this dashboard's own-line pipeline remains a design with no implemented line values.",
+    "impact": "A reviewer could mistake the preserved model lines for a validated betting recommendation.",
+    "status": "needs review",
+    "src": "S18",
+    "action": "The preserved page states the model does not beat its baselines with 95% confidence; no strategy on the leaderboard has passed all gates.",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "F33",
+    "category": "Depth-chart conflict",
+    "description": "The third-generation availability page states that NFL.com team depth-chart URLs return 404 and that depth order is unknown; this dashboard transcribes 1st–4th strings from three official club sites (chiefs.com, packers.com, 49ers.com).",
+    "impact": "Two official-source classes disagree in coverage: league depth-chart URLs vs club-published unofficial depth charts.",
+    "status": "needs review",
+    "src": "S05",
+    "action": "Both are preserved with source links; club pages are labelled \"Unofficial\" by their publishers. Do not generalise three clubs to all 32.",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "F34",
+    "category": "Duplicate decision records",
+    "description": "There are now multiple Suggestions, Questions, Flagged and Executive Summary pages across the two site generations.",
+    "impact": "A reviewer may compare different versions without knowing which is authoritative.",
+    "status": "needs review",
+    "src": "S24",
+    "action": "The landing dashboard is the integration entry point; integration.html links every preserved page and explains the generations.",
+    "verified": true,
+    "retrieved": "2026-11-12"
   }
 ]

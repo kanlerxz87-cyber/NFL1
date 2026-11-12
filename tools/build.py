@@ -25,12 +25,34 @@ SOURCES = {s["id"]: s for s in L("sources.json")}
 META = L("site_meta.json")
 
 NAV = [
-    ("Overview", [("index.html", "Home"), ("executive-summary.html", "Executive Summary"), ("deployment.html", "Deployment & PR")]),
+    ("Overview", [("index.html", "Home"), ("executive-summary.html", "Executive Summary"), ("deployment.html", "Deployment & PR"), ("legacy-site.html", "Earlier sessions' site")]),
     ("Governance", [("requirements.html", "Requirements"), ("questions.html", "Decision Questions"), ("suggestions.html", "Suggestions & Paths")]),
     ("Competition", [("strategy-lab.html", "Strategy Lab"), ("leaderboard.html", "Leaderboard"), ("bet-types.html", "Bet Types & Risk")]),
     ("Official data", [("data-tables.html", "Standings & Findings"), ("injuries.html", "Injuries"), ("depth-chart.html", "Depth Charts")]),
-    ("Assurance", [("verification.html", "Verification & Sources"), ("flagged.html", "Flagged for Review")]),
+    ("Assurance", [("verification.html", "Verification & Sources"), ("flagged.html", "Flagged for Review"), ("integration.html", "Combined Integration")]),
 ]
+
+# Every page contributed by the earlier sessions stays reachable from the landing
+# dashboard. Generated from pages/ so their CI nav-completeness gate
+# (scripts/verified/check_site.py) remains satisfied after combining both generations.
+def preserved_nav():
+    pages_dir = os.path.join(ROOT, "pages")
+    if not os.path.isdir(pages_dir):
+        return []
+    labels = {
+        "executive-summary.html": "Executive summary", "teams.html": "Teams",
+        "standings.html": "Standings", "injuries.html": "Injuries",
+        "availability.html": "Availability", "data.html": "Verified data",
+        "lines.html": "Own lines", "analysis.html": "Validation & correlation",
+        "decisions.html": "Decision register", "verified.html": "Verified artifacts",
+        "evidence.html": "Evidence", "models.html": "Strategy lab",
+        "strategies.html": "Strategies", "suggestions.html": "Suggestions",
+        "questions.html": "Questions", "flagged.html": "Flagged", "review.html": "Review",
+    }
+    return [("pages/" + f, labels.get(f, f[:-5].replace("-", " ").title()))
+            for f in sorted(os.listdir(pages_dir)) if f.endswith(".html")]
+
+NAV.append(("Preserved pages", preserved_nav()))
 
 
 def e(x):
@@ -144,7 +166,7 @@ BASE = open(os.path.join(ROOT, "site", "templates", "base.html"), encoding="utf-
 
 def write_page(filename, title, kicker, lede, body, crumb, pills=None):
     pills = pills or ['<span class="pill ok">Source-linked rows</span>',
-                      '<span class="pill warn">24 flagged items</span>',
+                      '<span class="pill warn">%d flagged items</span>' % counts["flags"],
                       '<span class="pill">Snapshot 2026-11-12</span>']
     out = (BASE.replace("{{TITLE}}", e(title)).replace("{{KICKER}}", e(kicker))
            .replace("{{LEDE}}", lede).replace("{{BODY}}", body)
@@ -206,6 +228,8 @@ SITE_SECTIONS = [
     dict(id="SS-12", area="Assurance", page="verification.html", purpose="Verification policy, official source registry, line-by-line audit", src="S22", verified=True),
     dict(id="SS-13", area="Assurance", page="flagged.html", purpose="Irregularities and unverified values with official links", src="S24", verified=True),
     dict(id="SS-14", area="Overview", page="deployment.html", purpose="Pages configuration, PR, merge and deploy record", src="S25", verified=True),
+    dict(id="SS-15", area="Assurance", page="integration.html", purpose="Combined integration: cross-check of both sessions' data and link audit", src="S24", verified=True),
+    dict(id="SS-16", area="Overview", page="legacy-site.html", purpose="Preserved earlier sessions' dashboard (historical, labelled)", src="S24", verified=True),
 ]
 
 LINE_STEPS = [
@@ -919,10 +943,11 @@ def page_flagged():
     b.append('<div class="callout flag"><b>Flagged for Review.</b> These irregularities and unverified items do '
              'not block the merge or the live site. Each has an official source link for manual review and a '
              'suggested action. A status of <em>needs review</em> means exactly this: published here, not blocking.</div>')
+    fids = [f["id"] for f in d["flags"]]
     b.append(cards([("Flagged items", counts["flags"], "All with source links"),
-                    ("Official-page irregularities", 7, "F02–F08"),
-                    ("Missing official data", 5, "F09–F11, F14, F15"),
-                    ("Coordination / build", 5, "F16, F17, F22–F24")]))
+                    ("Official-page irregularities", sum(1 for x in fids if "F02" <= x <= "F08"), "F02–F08"),
+                    ("Missing official data", sum(1 for x in fids if x in ("F09", "F10", "F11", "F14", "F15")), "F09–F11, F14, F15"),
+                    ("Combined-site review", sum(1 for x in fids if x >= "F25"), "F25–F28")]))
     b.append('<h2 id="all">All flagged irregularities</h2>')
     b.append(T("tbl-flags", "Every flag with category, description, impact, status, official source link and suggested action for the reviewer.",
                [("ID", "id", "id"), ("Category", "category", "text"), ("Irregularity / unverified item", "description", "wide"),
@@ -977,6 +1002,107 @@ def page_flagged():
     return write_page("flagged.html", "Flagged for Review", "Assurance",
                       "Clearly labelled irregularities, official-page conflicts, unverified values and coordination issues — each with an official source link for manual review, none blocking the merge.",
                       "\n".join(b), "Flagged for Review")
+
+
+def maybe(name):
+    path = os.path.join(DATA, name)
+    if not os.path.isfile(path):
+        return []
+    return L(name)
+
+
+def page_integration():
+    b = []
+    summary = maybe("combined_verification.json")
+    stand = maybe("combined_standings_check.json")
+    inj = maybe("combined_injuries_check.json")
+    teams = maybe("combined_teams_check.json")
+    vstand = maybe("combined_verified_standings_check.json")
+    vinj = maybe("combined_verified_injuries_check.json")
+    vgames = maybe("combined_games_check.json")
+    b.append('<div class="callout"><b>Final integration of all merged sessions.</b> The repository now contains '
+             'two complete site generations plus a third set of verified-data artifacts: the dashboard you are reading, the earlier sessions\' '
+             'dashboard preserved at <a href="legacy-site.html">legacy-site.html</a> with its '
+             '<code>pages/</code> subpages, <code>styles.css</code>, <code>assets/</code> and CSV snapshots. '
+             'Nothing was discarded. The shared task boards were reconciled in '
+             '<a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/COORDINATION.md">COORDINATION.md</a> '
+             '(the pre-integration board is archived at <code>docs/COORDINATION-archive-main.md</code>).</div>')
+    if summary:
+        b.append(cards([("Combined checks", len(summary), "Data + links + review"),
+                        ("Standings rows compared", len(stand), "Line by line"),
+                        ("Injury rows compared", len(inj), "Line by line"),
+                        ("Official game rows", sum(r.get("games", 0) for r in vgames) // 2, "Weeks 1-9"),
+                        ("Broken local links", sum(r["mismatches"] for r in summary if r["id"] == "CV-04"), "Both site generations")]))
+        b.append('<h2 id="results">Re-verification of the combined data</h2>')
+        b.append(T("tbl-combined-summary", "Result of re-verifying the merged data sets line by line and auditing every local link in both published site generations.",
+                   [("ID", "id", "id"), ("Check", "check", "wide"), ("Files", "files", "wide"),
+                    ("Rows / links", "rows", "num"), ("Matches", "matches", "num"),
+                    ("Mismatches / broken", "mismatches", "num"), ("Note", "note", "wide")], summary))
+        b.append('<h2 id="standings">Standings cross-check — all 32 rows</h2>')
+        b.append(T("tbl-combined-standings", "Every row of the earlier sessions\' standings.csv compared to the JSON snapshot transcribed from the official standings page. Blank values are never filled in.",
+                   [("Club", "abbr", "text"), ("Team", "team", "text"), ("Compared fields", "compared", "wide"),
+                    ("Result", "fields", "wide"), ("Match", "match", "status"), ("Note", "note", "wide")], stand))
+        b.append('<h2 id="injuries">Injury cross-check — all 20 rows</h2>')
+        b.append(T("tbl-combined-injuries", "Every row of the earlier sessions\' Thursday-game injuries.csv compared to the JSON snapshot from the official injury report.",
+                   [("Player", "player", "text"), ("Team", "team", "text"), ("Compared", "compared", "wide"),
+                    ("Result", "fields", "wide"), ("Match", "match", "status"), ("Note", "note", "wide")], inj))
+        b.append('<h2 id="teams">Team directory cross-check</h2>')
+        b.append(T("tbl-combined-teams", "Team-directory abbreviations compared with the official standings snapshot.",
+                   [("Abbr", "abbr", "text"), ("Team", "team", "text"), ("Division", "division", "text"),
+                    ("Check", "fields", "wide"), ("Match", "match", "status"), ("Note", "note", "wide")], teams))
+    else:
+        b.append('<div class="callout warn">Combined verification data is pending; run <code>python3 tools/verify_combined.py</code> '
+                 'before the final build.</div>')
+    b.append('<h2 id="third-generation">Third generation — verified data and model artifacts</h2>')
+    b.append('<div class="callout">Sessions <code>25aa7696</code> and <code>7600ed8b</code> '
+             'published <code>data/verified/*</code>, <code>analysis/*</code>, '
+             '<code>scripts/verified/*</code> and six additional pages. All of their files are '
+             'preserved, and their standings, injuries and 136 official game results are '
+             're-verified below, line by line. Their model-derived correlations, own lines, '
+             'backtests and luck analysis are <b>not</b> re-derived by this integration session; '
+             'they remain published with their original sources and an explicit FAIL validation '
+             'verdict (flags F30-F34).</div>')
+    b.append(T("tbl-third-standings", "All 32 rows of data/verified/standings_2026.csv compared with the official standings snapshot.",
+               [("Club", "abbr", "text"), ("Team", "team", "text"), ("Compared", "compared", "wide"),
+                ("Result", "fields", "wide"), ("Match", "match", "status"), ("Note", "note", "wide")], vstand))
+    b.append(T("tbl-third-injuries", "All 6 published Week 10 game-designation rows compared with the official injury-report snapshot.",
+               [("Player", "player", "text"), ("Club", "team", "text"), ("Compared", "compared", "wide"),
+                ("Result", "fields", "wide"), ("Match", "match", "status"), ("Note", "note", "wide")], vinj))
+    b.append(T("tbl-third-games", "W/L/T, PF, PA, NET and PCT recomputed independently from 136 official game rows for every club.",
+               [("Club", "abbr", "text"), ("Team", "team", "text"), ("Games", "games", "num"),
+                ("Recomputed from official results", "recomputed", "wide"),
+                ("Result", "detail", "wide"), ("Match", "match", "status")], vgames))
+    b.append('<h2 id="preserved">Preserved work from earlier sessions</h2>')
+    preserved = [
+        dict(id="PR-01", item="Legacy landing page", path="legacy-site.html", note="Original index.html saved verbatim (self-links rewritten to the preserved path)", src="S24", verified=True),
+        dict(id="PR-02", item="Legacy subpages", path="pages/*.html", note="17 subpages from sessions 533256e1, 690e397b, 25aa7696 and 7600ed8b", src="S24", verified=True),
+        dict(id="PR-03", item="Legacy styles and assets", path="styles.css, assets/css/style.css", note="Kept so the preserved pages render unchanged", src="S24", verified=True),
+        dict(id="PR-04", item="CSV snapshots", path="data/teams.csv, data/standings.csv, data/injuries.csv", note="Cross-checked above; rank column flagged F25", src="S02", verified=True),
+        dict(id="PR-05", item="Independent review", path="docs/review/merged-site.md", note="Read-only post-merge review by session 15e79a53", src="S24", verified=True),
+        dict(id="PR-06", item="Archived coordination board", path="docs/COORDINATION-archive-main.md", note="Pre-integration board preserved verbatim", src="S24", verified=True),
+        dict(id="PR-07", item="Archived README", path="docs/README-session-533256e1.md", note="Earlier README preserved verbatim", src="S24", verified=True),
+        dict(id="PR-08", item="Deployment workflow", path=".github/workflows/pages.yml", note="Earlier sessions\' Actions deploy workflow kept; this session adds verify.yml", src="S22", verified=True),
+        dict(id="PR-09", item="Verified official game results", path="data/verified/games_2026.csv", note="136 games, weeks 1-9, each with an official NFL.com week URL", src="S02", verified=True),
+        dict(id="PR-10", item="Own-line and model artifacts", path="data/verified/model/*.json, pages/lines.html", note="Week 10 model margins/totals with an explicit FAIL validation verdict", src="S18", verified=True),
+        dict(id="PR-11", item="Correlation, backtest and luck analysis", path="pages/analysis.html, data/verified/model/correlations.json", note="Computed from the 136 official game results; distinct from the standings correlations", src="S17", verified=True),
+        dict(id="PR-12", item="Availability and depth-chart probe", path="pages/availability.html, data/verified/depth_chart_probe.csv", note="NFL.com depth-chart URLs probed and recorded as 404; see flag F33", src="S05", verified=True),
+        dict(id="PR-13", item="Analysis pipeline and CI gates", path="analysis/*.py, scripts/verified/*.py", note="Numeric audit, nav check, external-link report and validation gate retained in CI", src="S22", verified=True),
+        dict(id="PR-14", item="Official evidence snapshot", path="docs/official-evidence/2026-11-12-standings.md", note="Re-fetched official standings page content stored for manual line-by-line review", src="S02", verified=True),
+    ]
+    b.append(T("tbl-preserved", "Every artifact merged from main is preserved and reachable; each row links to the official repository.",
+               [("ID", "id", "id"), ("Artifact", "item", "text"), ("Path", "path", "wide"), ("Note", "note", "wide")], preserved))
+    b.append('<h2 id="reconcile">Board and scope reconciliation</h2>')
+    b.append('<div class="panel"><p>The pre-integration board contains an unclaimed task <b>T13</b> '
+             '("Apply post-merge source, table-citation, stale-content, and flagged-item corrections"). '
+             'This integration session claims T13 without editing the earlier sessions\' product files: '
+             'the new dashboard supplies row-level official citations on every table, omits the unsourced '
+             'rank column, and publishes the legacy pages as clearly labelled historical material. '
+             'Residual defects are flagged F25–F28 with official source links. Requests that would require '
+             'editing <code>pages/*.html</code> are logged here and in COORDINATION.md rather than applied, '
+             'because those files are owned by the earlier sessions.</p></div>')
+    return write_page("integration.html", "Combined integration verification", "Assurance",
+                      "Re-verification of the combined data from all merged sessions, line by line, plus a full audit of both published site generations and the preserved artifacts.",
+                      "\n".join(b), "Combined Integration")
 
 
 def page_deployment():
@@ -1201,18 +1327,32 @@ source. If an official source publishes no value, the cell is left blank and the
 | [verification.html](verification.html) | Verification policy, official source registry, line-by-line audit |
 | [flagged.html](flagged.html) | Flagged for Review (does not block the merge) |
 | [deployment.html](deployment.html) | Pages configuration, PR, merge and deploy record |
+| [integration.html](integration.html) | Combined integration: re-verification of all merged sessions' data, line by line |
+| [legacy-site.html](legacy-site.html) | Earlier sessions' dashboard, preserved verbatim (historical) |
 
 ## Rebuild and verify
 
 ```bash
 python3 tools/seed_data.py              # regenerate data/*.json from transcribed official values
 python3 tools/compute_correlations.py   # recompute Pearson r from official standings
+python3 tools/verify_combined.py        # re-verify merged CSV snapshots and all local links
 python3 tools/build.py                 # generate the HTML pages and docs/*.md
 python3 tools/verify.py                # source links, unverified blanks, internal links
 ```
 
-`tools/verify.py` also runs in GitHub Actions on every push and pull request. GitHub Pages publishes
-`main / /` (legacy build); `.nojekyll` keeps the generated HTML unchanged.
+`tools/verify.py` and `tools/verify_combined.py` also run in GitHub Actions on every push and pull
+request. GitHub Pages publishes `main / /`; `.nojekyll` keeps the generated HTML unchanged.
+
+## Combined site (final integration)
+
+`main` already contained a dashboard produced by earlier parallel sessions. Both site generations are
+published: this dashboard at `/`, and the earlier dashboard preserved at
+[legacy-site.html](legacy-site.html) with its `pages/` subpages, `styles.css`, `assets/` and
+`data/*.csv` snapshots. The pre-integration coordination board and README are preserved in
+`docs/COORDINATION-archive-main.md` and `docs/README-session-533256e1.md`. See
+[integration.html](integration.html) for the line-by-line combined-data check and the local link audit
+across both site generations. Residual combined-site issues are published as flags F25–F29 on
+[flagged.html](flagged.html).
 
 ## Coordination
 
@@ -1235,7 +1375,7 @@ the New Jersey Division of Gaming Enforcement, GitHub Docs and the GitHub REST A
 def main():
     page_home(); page_exec(); page_requirements(); page_questions(); page_suggestions()
     page_strategy(); page_leaderboard(); page_bet_types(); page_injuries(); page_depth()
-    page_data(); page_verification(); page_flagged(); page_deployment()
+    page_data(); page_verification(); page_flagged(); page_deployment(); page_integration()
     write_docs()
     write_readme()
     with open(os.path.join(ROOT, ".nojekyll"), "w", encoding="utf-8") as f:

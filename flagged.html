@@ -23,6 +23,7 @@
 <a href="index.html">Home</a>
 <a href="executive-summary.html">Executive Summary</a>
 <a href="deployment.html">Deployment &amp; PR</a>
+<a href="legacy-site.html">Earlier sessions&#x27; site</a>
 </div>
 <div class="navgroup"><h4>Governance</h4>
 <a href="requirements.html">Requirements</a>
@@ -42,6 +43,26 @@
 <div class="navgroup"><h4>Assurance</h4>
 <a href="verification.html">Verification &amp; Sources</a>
 <a href="flagged.html" class="active">Flagged for Review</a>
+<a href="integration.html">Combined Integration</a>
+</div>
+<div class="navgroup"><h4>Preserved pages</h4>
+<a href="pages/analysis.html">Validation &amp; correlation</a>
+<a href="pages/availability.html">Availability</a>
+<a href="pages/data.html">Verified data</a>
+<a href="pages/decisions.html">Decision register</a>
+<a href="pages/evidence.html">Evidence</a>
+<a href="pages/executive-summary.html">Executive summary</a>
+<a href="pages/flagged.html">Flagged</a>
+<a href="pages/injuries.html">Injuries</a>
+<a href="pages/lines.html">Own lines</a>
+<a href="pages/models.html">Strategy lab</a>
+<a href="pages/questions.html">Questions</a>
+<a href="pages/review.html">Review</a>
+<a href="pages/standings.html">Standings</a>
+<a href="pages/strategies.html">Strategies</a>
+<a href="pages/suggestions.html">Suggestions</a>
+<a href="pages/teams.html">Teams</a>
+<a href="pages/verified.html">Verified artifacts</a>
 </div>
     </nav>
     <div class="foot">
@@ -52,17 +73,17 @@
   <div class="main">
     <div class="topbar">
       <div class="crumb">NFL1 / <b>Flagged for Review</b></div>
-      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">24 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">34 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
     </div>
     <main class="content" id="main">
       <div class="kicker">Assurance</div>
       <h1>Flagged for Review</h1>
       <p class="lede">Clearly labelled irregularities, official-page conflicts, unverified values and coordination issues — each with an official source link for manual review, none blocking the merge.</p>
       <div class="callout flag"><b>Flagged for Review.</b> These irregularities and unverified items do not block the merge or the live site. Each has an official source link for manual review and a suggested action. A status of <em>needs review</em> means exactly this: published here, not blocking.</div>
-<div class="cards"><div class="card"><div class="label">Flagged items</div><div class="value">24</div><div class="detail">All with source links</div></div><div class="card"><div class="label">Official-page irregularities</div><div class="value">7</div><div class="detail">F02–F08</div></div><div class="card"><div class="label">Missing official data</div><div class="value">5</div><div class="detail">F09–F11, F14, F15</div></div><div class="card"><div class="label">Coordination / build</div><div class="value">5</div><div class="detail">F16, F17, F22–F24</div></div></div>
+<div class="cards"><div class="card"><div class="label">Flagged items</div><div class="value">34</div><div class="detail">All with source links</div></div><div class="card"><div class="label">Official-page irregularities</div><div class="value">7</div><div class="detail">F02–F08</div></div><div class="card"><div class="label">Missing official data</div><div class="value">5</div><div class="detail">F09–F11, F14, F15</div></div><div class="card"><div class="label">Combined-site review</div><div class="value">10</div><div class="detail">F25–F28</div></div></div>
 <h2 id="all">All flagged irregularities</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-flags" aria-label="Filter tbl-flags" placeholder="Filter rows…">
-<span class="count" data-count-for="tbl-flags">24 rows shown</span></div>
+<span class="count" data-count-for="tbl-flags">34 rows shown</span></div>
 <div class="tablewrap"><table class="data-table" id="tbl-flags"><caption>Every flag with category, description, impact, status, official source link and suggested action for the reviewer.</caption>
 <thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Category</th><th scope="col" class="sortable">Irregularity / unverified item</th><th scope="col" class="sortable">Impact on decisions</th><th scope="col" class="sortable">Status</th><th scope="col" class="sortable">Suggested action</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
 <tr id="F01" data-verified="true">
@@ -279,6 +300,96 @@
 <td data-value="1" class="wide">Ensures the rule is enforced without fabricating official support for internal states.</td>
 <td><span class="badge neutral">needs review</span></td>
 <td data-value="1" class="wide">Confirm the interpretation on review.</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F25" data-verified="true">
+<td><code>F25</code></td>
+<td data-value="1">Combined data</td>
+<td data-value="1" class="wide">The earlier sessions&#x27; `data/standings.csv` contains a `rank` 1..32 column; the official standings page publishes no rank column.</td>
+<td data-value="1" class="wide">The ordinal is a project value, not an official statistic; it must not be presented as verified.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Label it as site row order or leave blank; the new standings table omits rank entirely.</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F26" data-verified="true">
+<td><code>F26</code></td>
+<td data-value="1">Dead official links</td>
+<td data-value="1" class="wide">An independent review found three cited operations.nfl.com URLs returning the NFL 404 page (gameday/nfl-schedule/, gameday/, the-rules/).</td>
+<td data-value="1" class="wide">Those citations cannot be used as evidence on the preserved legacy pages.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Use the canonical 2026 rulebook and NFL.com schedule links; legacy pages remain labelled historical.</td>
+<td><span class="src"><a href="https://operations.nfl.com/rules-officiating/2026-nfl-rulebook" target="_blank" rel="noopener noreferrer" title="NFL Football Operations — Official playing rules">S09 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F27" data-verified="true">
+<td><code>F27</code></td>
+<td data-value="1">Stale content</td>
+<td data-value="1" class="wide">Two preserved legacy pages state that no NFL dataset or injury status was imported, which became stale after the earlier sessions&#x27; data pull requests.</td>
+<td data-value="1" class="wide">Reviewers could read contradictory statements across the two site generations.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">The new dashboard is authoritative; legacy pages are preserved at legacy-site.html and clearly labelled.</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F28" data-verified="true">
+<td><code>F28</code></td>
+<td data-value="1">Combined navigation</td>
+<td data-value="1" class="wide">Two complete navigation systems now exist in one published site (root dashboard and preserved pages/ site).</td>
+<td data-value="1" class="wide">Users may see different layouts depending on the entry point.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">The landing dashboard links explicitly to the preserved site and to the combined-integration page.</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S23 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F29" data-verified="true">
+<td><code>F29</code></td>
+<td data-value="1">Abbreviation mismatch</td>
+<td data-value="1" class="wide">The earlier sessions&#x27; `data/teams.csv` and `data/standings.csv` use `LAR` for the Los Angeles Rams; the standings snapshot transcribed in `data/standings.json` uses the official NFL.com abbreviation `LA`.</td>
+<td data-value="1" class="wide">Two project snapshots refer to the same club with different abbreviations. Neither value was inferred; both were copied from official pages as rendered at different times.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">The combined verifier maps LA↔LAR as an alias for comparison, preserves both spellings in their original files, and flags the discrepancy here.</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F30" data-verified="true">
+<td><code>F30</code></td>
+<td data-value="1">Third-generation artifacts</td>
+<td data-value="1" class="wide">Sessions `25aa7696` and `7600ed8b` merged `data/verified/*`, `analysis/*`, `scripts/verified/*` and six new `pages/*.html` files containing 136 official game results, own lines, computed correlations, backtests and a luck analysis.</td>
+<td data-value="1" class="wide">These are additional deliverables for the same brief. This integration session preserved them all and re-verified the standings, injuries and game results line by line; model-derived numbers were not re-derived here.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">See integration.html for the cross-checks and links to the preserved pages. Their CI numeric audit is retained.</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F31" data-verified="true">
+<td><code>F31</code></td>
+<td data-value="1">Differing correlation scopes</td>
+<td data-value="1" class="wide">This dashboard publishes six Pearson correlations computed from the 32 official standings rows; the third-generation pages publish four correlations computed from 136 official game results.</td>
+<td data-value="1" class="wide">Both sets are computed from official data but answer different questions. Neither fills the other&#x27;s blank cells.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Requested leg-level, injury-to-performance and QB/WR correlations remain blank; do not substitute an adjacent metric.</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F32" data-verified="true">
+<td><code>F32</code></td>
+<td data-value="1">Own-line verdict</td>
+<td data-value="1" class="wide">The third-generation `pages/lines.html` publishes Week 10 model margins and totals with an explicit FAIL validation verdict; this dashboard&#x27;s own-line pipeline remains a design with no implemented line values.</td>
+<td data-value="1" class="wide">A reviewer could mistake the preserved model lines for a validated betting recommendation.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">The preserved page states the model does not beat its baselines with 95% confidence; no strategy on the leaderboard has passed all gates.</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda353.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official statistical test">S18 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F33" data-verified="true">
+<td><code>F33</code></td>
+<td data-value="1">Depth-chart conflict</td>
+<td data-value="1" class="wide">The third-generation availability page states that NFL.com team depth-chart URLs return 404 and that depth order is unknown; this dashboard transcribes 1st–4th strings from three official club sites (chiefs.com, packers.com, 49ers.com).</td>
+<td data-value="1" class="wide">Two official-source classes disagree in coverage: league depth-chart URLs vs club-published unofficial depth charts.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Both are preserved with source links; club pages are labelled &quot;Unofficial&quot; by their publishers. Do not generalise three clubs to all 32.</td>
+<td><span class="src"><a href="https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official inactives list">S05 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F34" data-verified="true">
+<td><code>F34</code></td>
+<td data-value="1">Duplicate decision records</td>
+<td data-value="1" class="wide">There are now multiple Suggestions, Questions, Flagged and Executive Summary pages across the two site generations.</td>
+<td data-value="1" class="wide">A reviewer may compare different versions without knowing which is authoritative.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">The landing dashboard is the integration entry point; integration.html links every preserved page and explains the generations.</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
 </tr>
 </tbody></table></div>

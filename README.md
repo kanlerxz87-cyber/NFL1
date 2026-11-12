@@ -25,18 +25,32 @@ source. If an official source publishes no value, the cell is left blank and the
 | [verification.html](verification.html) | Verification policy, official source registry, line-by-line audit |
 | [flagged.html](flagged.html) | Flagged for Review (does not block the merge) |
 | [deployment.html](deployment.html) | Pages configuration, PR, merge and deploy record |
+| [integration.html](integration.html) | Combined integration: re-verification of all merged sessions' data, line by line |
+| [legacy-site.html](legacy-site.html) | Earlier sessions' dashboard, preserved verbatim (historical) |
 
 ## Rebuild and verify
 
 ```bash
 python3 tools/seed_data.py              # regenerate data/*.json from transcribed official values
 python3 tools/compute_correlations.py   # recompute Pearson r from official standings
+python3 tools/verify_combined.py        # re-verify merged CSV snapshots and all local links
 python3 tools/build.py                 # generate the HTML pages and docs/*.md
 python3 tools/verify.py                # source links, unverified blanks, internal links
 ```
 
-`tools/verify.py` also runs in GitHub Actions on every push and pull request. GitHub Pages publishes
-`main / /` (legacy build); `.nojekyll` keeps the generated HTML unchanged.
+`tools/verify.py` and `tools/verify_combined.py` also run in GitHub Actions on every push and pull
+request. GitHub Pages publishes `main / /`; `.nojekyll` keeps the generated HTML unchanged.
+
+## Combined site (final integration)
+
+`main` already contained a dashboard produced by earlier parallel sessions. Both site generations are
+published: this dashboard at `/`, and the earlier dashboard preserved at
+[legacy-site.html](legacy-site.html) with its `pages/` subpages, `styles.css`, `assets/` and
+`data/*.csv` snapshots. The pre-integration coordination board and README are preserved in
+`docs/COORDINATION-archive-main.md` and `docs/README-session-533256e1.md`. See
+[integration.html](integration.html) for the line-by-line combined-data check and the local link audit
+across both site generations. Residual combined-site issues are published as flags F25–F29 on
+[flagged.html](flagged.html).
 
 ## Coordination
 

@@ -1,0 +1,64 @@
+#!/usr/bin/env python3
+"""normalize_nav.py — ensure every page carries the same canonical navigation.
+
+Additive and idempotent: the <nav> block is rewritten to one shared list, preserving the
+current page's `active` state. No page content outside <nav> is touched.
+"""
+from __future__ import annotations
+import re
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+CANON = [
+    ("index.html", "Overview"),
+    ("executive-summary.html", "Executive Summary"),
+    ("teams.html", "Teams"),
+    ("standings.html", "Standings"),
+    ("injuries.html", "Injuries"),
+    ("availability.html", "Availability"),
+    ("data.html", "Verified Data"),
+    ("lines.html", "Own Lines"),
+    ("analysis.html", "Validation & Correlation"),
+    ("decisions.html", "Decision Register"),
+    ("verified.html", "Verified Artifacts"),
+    ("evidence.html", "Evidence"),
+    ("models.html", "Strategy Lab"),
+    ("strategies.html", "Strategies"),
+    ("suggestions.html", "Suggestions"),
+    ("questions.html", "Questions"),
+    ("flagged.html", "Flagged"),
+    ("review.html", "Review"),
+]
+
+
+def build(page_name: str, is_index: bool) -> str:
+    items = []
+    for href, label in CANON:
+        # index.html sits at the repo root; every sister page sits one level down in pages/
+        if is_index:
+            target = "index.html" if href == "index.html" else f"pages/{href}"
+        else:
+            target = "../index.html" if href == "index.html" else href
+        cls = ' class="active"' if href == page_name else ""
+        items.append(f'    <a href="{target}"{cls}>{label}</a>')
+    return "<nav>\n" + "\n".join(items) + "\n  </nav>"
+
+
+def main() -> int:
+    changed = 0
+    for p in [ROOT / "index.html", *sorted((ROOT / "pages").glob("*.html"))]:
+        t = p.read_text(encoding="utf-8")
+        m = re.search(r"<nav>.*?</nav>", t, flags=re.S)
+        if not m:
+            print(f"skip (no nav): {p.relative_to(ROOT)}")
+            continue
+        new = build(p.name, p.name == "index.html")
+        if m.group(0) != new:
+            p.write_text(t[:m.start()] + new + t[m.end():], encoding="utf-8")
+            changed += 1
+    print(f"navigation normalized on {changed} page(s)")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
