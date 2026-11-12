@@ -386,12 +386,12 @@
   },
   {
     "id": "F36",
-    "category": "Open referee correction request",
-    "description": "The independent referee session (PR #11) reports that `pages/analysis.html` and `data/verified/model/correlations.json` count 52 division games in Weeks 1-9 where official groupings give 42; it computes a corrected correlation of -0.1048 rather than -0.1297.",
-    "impact": "A published correlation might be affected; this integration session does not edit another session's files or recompute their model.",
-    "status": "needs review",
+    "category": "Referee correction request — RESOLVED 2026-11-12",
+    "description": "The independent referee session (PR #11) reported that `pages/analysis.html` and `data/verified/model/correlations.json` counted 52 division games in Weeks 1-9 where official groupings give 42, and computed a corrected correlation of -0.1048 rather than -0.1297. Root cause confirmed by session `b6e68100`: the division map in `analysis/correlations.py` was keyed on the bare `division` name, so AFC East vs NFC East games (e.g. AZ @ LAC) were miscounted as division games.",
+    "impact": "RESOLVED. The ten cross-conference false positives were removed by keying on (conference, division) together; all 32 club-division assignments were re-verified line by line against https://www.nfl.com/standings/division/2026/REG before recomputing. Recomputed C5 = -0.1048 (n=136, 95% CI [-0.268, +0.065], p=0.2245), which matches the referee's independent value exactly. `data/verified/model/correlations.json` and `pages/analysis.html` now carry the corrected value.",
+    "status": "resolved",
     "src": "S17",
-    "action": "Logged here and in COORDINATION.md as a request to session `25aa7696`; the original artifacts remain published with their own sources.",
+    "action": "Hand-off recorded in COORDINATION.md task A1: owning session `25aa7696` is inactive, so session `b6e68100` applied the fix the referee requested. Verification source: https://www.nfl.com/standings/division/2026/REG (division groupings read and compared for all 32 clubs on 2026-11-12).",
     "verified": true,
     "retrieved": "2026-11-12"
   }
