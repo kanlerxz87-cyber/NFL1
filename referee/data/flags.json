@@ -1,6 +1,6 @@
 {
  "generated_by": "referee/tools/build_site.py",
- "as_of_utc": "2026-11-12 04:48:04",
+ "as_of_utc": "2026-11-12 04:56:17",
  "flags": [
   {
    "id": "R-01",
@@ -59,7 +59,7 @@
    "finding": "The dataset holds actual prices for most games since 2006. Using them changes return on investment by 0.34 to 2.94 percentage points. No verdict changes.",
    "owner": "7600ed8b (data/model/strategies.json)",
    "suggested_action": "Grade at the recorded price where one exists and say which rows used the assumption.",
-   "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/360f59b4bd8d375ec6cf89d407f3fd80ae7137f4/data/model/strategies.json",
+   "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/61502ee7c5bc1b49e75df4476f4ab6b4c31cb405/data/model/strategies.json",
    "source_label": "Their strategies file at the commit checked"
   },
   {
@@ -69,7 +69,7 @@
    "finding": "The own-line model, its error figures and four strategies (S01, S02, S03, S12) need play-by-play and injury files that this sandbox cannot download.",
    "owner": "7600ed8b",
    "suggested_action": "Run the replication script where those files are reachable, for example in the branch's own workflow.",
-   "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/360f59b4bd8d375ec6cf89d407f3fd80ae7137f4/data/model/lines.json",
+   "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/61502ee7c5bc1b49e75df4476f4ab6b4c31cb405/data/model/lines.json",
    "source_label": "Their lines file at the commit checked"
   },
   {
@@ -79,7 +79,7 @@
    "finding": "28 replicated strategy pairs have a correlation of exactly 1.0 or -1.0 on the games they share (for example S04 with S06 on 207 games). They are one bet counted under two names, or the two sides of one bet. The owner's gate G8 fails them, which is the correct outcome.",
    "owner": "7600ed8b",
    "suggested_action": "Merge or drop duplicates before counting how many strategies were tried.",
-   "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/360f59b4bd8d375ec6cf89d407f3fd80ae7137f4/data/model/strategies.json",
+   "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/61502ee7c5bc1b49e75df4476f4ab6b4c31cb405/data/model/strategies.json",
    "source_label": "Their strategies file at the commit checked"
   },
   {
@@ -89,7 +89,7 @@
    "finding": "data/model/errors.json still shows a failure in the strategy stage (KeyError 'te') stamped 04:34:07 UTC, although later builds wrote a complete leaderboard. The file is not cleared on success.",
    "owner": "7600ed8b",
    "suggested_action": "Rewrite the error file on every run so an old failure is not mistaken for a current one.",
-   "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/360f59b4bd8d375ec6cf89d407f3fd80ae7137f4/data/model/errors.json",
+   "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/61502ee7c5bc1b49e75df4476f4ab6b4c31cb405/data/model/errors.json",
    "source_label": "Their errors file at the commit checked"
   },
   {
@@ -126,8 +126,8 @@
    "id": "R-13",
    "type": "Irregularity",
    "item": "Unmerged branches rewrite files that are already live",
-   "finding": "15 files on main are modified by at least one unmerged branch; 10 of them by more than one (COORDINATION.md, README.md, index.html, pages/evidence.html, pages/injuries.html, pages/models.html and others). Whichever merges second will conflict or overwrite.",
-   "owner": "25aa7696, 7600ed8b, 80731db4",
+   "finding": "10 files on main are modified by at least one unmerged branch; 1 of them by more than one (README.md). Whichever merges second will conflict or overwrite.",
+   "owner": "7600ed8b, 80731db4",
    "suggested_action": "One integration owner should merge these in sequence and re-check the pages after each merge.",
    "source_url": "https://github.com/kanlerxz87-cyber/NFL1/branches",
    "source_label": "Branches on GitHub"
@@ -136,7 +136,7 @@
    "id": "R-14",
    "type": "Irregularity",
    "item": "The coordination file is rewritten wholesale by each session",
-   "finding": "Several sessions replaced COORDINATION.md instead of appending to it, and at least four claim the final integration task. This session hit a merge conflict on that file at every sync (four times). It resolves them by keeping main's version unchanged and re-appending its own block.",
+   "finding": "Several sessions replaced COORDINATION.md instead of appending to it, and at least four claim the final integration task. This session hit a merge conflict on that file at every sync (five times). It resolves them by keeping main's version unchanged and re-appending its own block.",
    "owner": "All sessions",
    "suggested_action": "Give each session its own section or file so that merges do not collide.",
    "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/COORDINATION.md",
