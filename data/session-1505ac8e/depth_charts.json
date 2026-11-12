@@ -1,18 +1,32 @@
 {
- "generated_at": "2026-11-12T22:30:52.329542+00:00",
+ "generated_at": "2026-11-12T22:33:57.449622+00:00",
  "method": "Official NFL club sites, https://www.<club>/team/depth-chart. nfl.com itself publishes no depth chart (verified 404).",
  "nfl_com_depth_chart": {
   "url_probed": "https://www.nfl.com/teams/kansas-city-chiefs/depth-chart",
   "result": "HTTP 200 with body '404 - Flag on the Play.' (soft 404)",
-  "probed_at": "2026-11-12T22:30:52.329542+00:00"
+  "probed_at": "2026-11-12T22:33:57.449622+00:00"
  },
  "clubs_total": 32,
  "clubs_ok": 31,
  "clubs_unavailable": [
   "HOU"
  ],
- "position_rows_total": 988,
- "player_slots_total": 2218,
+ "position_rows_total": 946,
+ "unit_counts": {
+  "offense": 366,
+  "defense": 373,
+  "special_teams": 207
+ },
+ "slots_by_depth_rank": {
+  "1": 944,
+  "2": 740,
+  "3": 255,
+  "4": 73,
+  "5": 27,
+  "6": 20,
+  "7": 6
+ },
+ "player_slots_total": 2065,
  "clubs": [
   {
    "abbr": "ARI",
@@ -25,28 +39,6 @@
    "title": "Arizona Cardinals Team",
    "unofficial_label": false,
    "depth": [
-    {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "First"
-      },
-      {
-       "rank": 2,
-       "name": "Second"
-      },
-      {
-       "rank": 3,
-       "name": "Third"
-      },
-      {
-       "rank": 4,
-       "name": "Fourth"
-      }
-     ]
-    },
     {
      "unit": "offense",
      "position": "WR",
@@ -210,29 +202,7 @@
      ]
     },
     {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "First"
-      },
-      {
-       "rank": 2,
-       "name": "Second"
-      },
-      {
-       "rank": 3,
-       "name": "Third"
-      },
-      {
-       "rank": 4,
-       "name": "Fourth"
-      }
-     ]
-    },
-    {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DT",
      "players": [
       {
@@ -246,7 +216,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "NT",
      "players": [
       {
@@ -260,7 +230,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DT",
      "players": [
       {
@@ -274,7 +244,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "OLB",
      "players": [
       {
@@ -292,7 +262,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "ILB",
      "players": [
       {
@@ -306,7 +276,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "ILB",
      "players": [
       {
@@ -320,7 +290,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "OLB",
      "players": [
       {
@@ -330,7 +300,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -344,7 +314,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -358,7 +328,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -372,7 +342,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -386,7 +356,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -400,29 +370,7 @@
      ]
     },
     {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "First"
-      },
-      {
-       "rank": 2,
-       "name": "Second"
-      },
-      {
-       "rank": 3,
-       "name": "Third"
-      },
-      {
-       "rank": 4,
-       "name": "Fourth"
-      }
-     ]
-    },
-    {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "K",
      "players": [
       {
@@ -432,7 +380,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "P",
      "players": [
       {
@@ -442,7 +390,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "LS",
      "players": [
       {
@@ -452,7 +400,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "H",
      "players": [
       {
@@ -462,7 +410,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KR",
      "players": [
       {
@@ -480,7 +428,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "PR",
      "players": [
       {
@@ -493,7 +441,8 @@
       }
      ]
     }
-   ]
+   ],
+   "page_confirms_depth_chart": false
   },
   {
    "abbr": "ATL",
@@ -709,7 +658,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "POSITION",
      "players": [
       {
@@ -739,7 +688,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DE",
      "players": [
       {
@@ -757,7 +706,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DL",
      "players": [
       {
@@ -771,7 +720,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DL",
      "players": [
       {
@@ -785,7 +734,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DE",
      "players": [
       {
@@ -803,7 +752,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "ILB",
      "players": [
       {
@@ -821,7 +770,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "ILB",
      "players": [
       {
@@ -835,7 +784,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -849,7 +798,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -859,7 +808,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -873,7 +822,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -891,7 +840,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "NB",
      "players": [
       {
@@ -905,7 +854,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "POSITION",
      "players": [
       {
@@ -935,7 +884,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "K",
      "players": [
       {
@@ -945,7 +894,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "P",
      "players": [
       {
@@ -955,7 +904,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "LS",
      "players": [
       {
@@ -965,7 +914,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "PR",
      "players": [
       {
@@ -983,7 +932,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KR",
      "players": [
       {
@@ -1000,7 +949,8 @@
       }
      ]
     }
-   ]
+   ],
+   "page_confirms_depth_chart": false
   },
   {
    "abbr": "BAL",
@@ -1202,7 +1152,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "POSITION",
      "players": [
       {
@@ -1224,7 +1174,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DT",
      "players": [
       {
@@ -1238,7 +1188,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "NT",
      "players": [
       {
@@ -1252,7 +1202,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DE",
      "players": [
       {
@@ -1266,7 +1216,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "RUSH",
      "players": [
       {
@@ -1280,7 +1230,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "MLB",
      "players": [
       {
@@ -1294,7 +1244,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "WLB",
      "players": [
       {
@@ -1308,7 +1258,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "SAM",
      "players": [
       {
@@ -1326,7 +1276,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -1340,7 +1290,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DB",
      "players": [
       {
@@ -1358,7 +1308,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "SS",
      "players": [
       {
@@ -1372,7 +1322,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "FS",
      "players": [
       {
@@ -1386,7 +1336,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -1400,7 +1350,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "POSITION",
      "players": [
       {
@@ -1422,7 +1372,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "P",
      "players": [
       {
@@ -1432,7 +1382,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "H",
      "players": [
       {
@@ -1442,7 +1392,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "LS",
      "players": [
       {
@@ -1452,7 +1402,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KOR",
      "players": [
       {
@@ -1470,7 +1420,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "PR",
      "players": [
       {
@@ -1483,7 +1433,8 @@
       }
      ]
     }
-   ]
+   ],
+   "page_confirms_depth_chart": false
   },
   {
    "abbr": "BUF",
@@ -1496,28 +1447,6 @@
    "title": "Buffalo Bills Depth Chart | Buffalo Bills - buffalobills.com",
    "unofficial_label": false,
    "depth": [
-    {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "First"
-      },
-      {
-       "rank": 2,
-       "name": "Second"
-      },
-      {
-       "rank": 3,
-       "name": "Third"
-      },
-      {
-       "rank": 4,
-       "name": "Fourth"
-      }
-     ]
-    },
     {
      "unit": "offense",
      "position": "WR",
@@ -1681,29 +1610,7 @@
      ]
     },
     {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "First"
-      },
-      {
-       "rank": 2,
-       "name": "Second"
-      },
-      {
-       "rank": 3,
-       "name": "Third"
-      },
-      {
-       "rank": 4,
-       "name": "Fourth"
-      }
-     ]
-    },
-    {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DL",
      "players": [
       {
@@ -1717,7 +1624,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DL",
      "players": [
       {
@@ -1731,7 +1638,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DL",
      "players": [
       {
@@ -1745,7 +1652,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "OLB",
      "players": [
       {
@@ -1763,7 +1670,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "OLB",
      "players": [
       {
@@ -1781,7 +1688,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "ILB",
      "players": [
       {
@@ -1795,7 +1702,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "ILB",
      "players": [
       {
@@ -1809,7 +1716,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -1823,7 +1730,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -1837,7 +1744,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "NCB",
      "players": [
       {
@@ -1851,7 +1758,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -1865,7 +1772,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -1879,29 +1786,7 @@
      ]
     },
     {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "First"
-      },
-      {
-       "rank": 2,
-       "name": "Second"
-      },
-      {
-       "rank": 3,
-       "name": "Third"
-      },
-      {
-       "rank": 4,
-       "name": "Fourth"
-      }
-     ]
-    },
-    {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "K",
      "players": [
       {
@@ -1911,7 +1796,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "P",
      "players": [
       {
@@ -1921,7 +1806,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "H",
      "players": [
       {
@@ -1931,7 +1816,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "PR",
      "players": [
       {
@@ -1953,7 +1838,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KOR",
      "players": [
       {
@@ -1971,7 +1856,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "LS",
      "players": [
       {
@@ -1980,7 +1865,8 @@
       }
      ]
     }
-   ]
+   ],
+   "page_confirms_depth_chart": false
   },
   {
    "abbr": "CAR",
@@ -2194,7 +2080,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "POSITION",
      "players": [
       {
@@ -2224,7 +2110,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DL",
      "players": [
       {
@@ -2238,7 +2124,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DL",
      "players": [
       {
@@ -2252,7 +2138,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DL",
      "players": [
       {
@@ -2266,7 +2152,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "OLB",
      "players": [
       {
@@ -2284,7 +2170,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -2302,7 +2188,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -2316,7 +2202,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "OLB",
      "players": [
       {
@@ -2330,7 +2216,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -2344,7 +2230,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -2354,7 +2240,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -2368,7 +2254,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -2386,7 +2272,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "POSITION",
      "players": [
       {
@@ -2416,7 +2302,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KR",
      "players": [
       {
@@ -2430,7 +2316,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "PR",
      "players": [
       {
@@ -2440,7 +2326,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "LS",
      "players": [
       {
@@ -2450,7 +2336,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "P",
      "players": [
       {
@@ -2460,7 +2346,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "K",
      "players": [
       {
@@ -2470,7 +2356,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "H",
      "players": [
       {
@@ -2479,7 +2365,8 @@
       }
      ]
     }
-   ]
+   ],
+   "page_confirms_depth_chart": false
   },
   {
    "abbr": "CHI",
@@ -2673,7 +2560,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "POSITION",
      "players": [
       {
@@ -2695,7 +2582,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DL",
      "players": [
       {
@@ -2713,7 +2600,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DL",
      "players": [
       {
@@ -2731,7 +2618,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DL",
      "players": [
       {
@@ -2749,7 +2636,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DL",
      "players": [
       {
@@ -2763,7 +2650,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -2781,7 +2668,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -2799,7 +2686,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -2813,7 +2700,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -2827,7 +2714,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DB",
      "players": [
       {
@@ -2841,7 +2728,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -2855,7 +2742,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -2869,7 +2756,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "POSITION",
      "players": [
       {
@@ -2891,7 +2778,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "K",
      "players": [
       {
@@ -2901,7 +2788,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "P",
      "players": [
       {
@@ -2911,7 +2798,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KO",
      "players": [
       {
@@ -2921,7 +2808,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "H",
      "players": [
       {
@@ -2931,7 +2818,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "LS",
      "players": [
       {
@@ -2941,7 +2828,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KR",
      "players": [
       {
@@ -2955,7 +2842,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "PR",
      "players": [
       {
@@ -2968,7 +2855,8 @@
       }
      ]
     }
-   ]
+   ],
+   "page_confirms_depth_chart": false
   },
   {
    "abbr": "CIN",
@@ -2981,24 +2869,6 @@
    "title": "Depth Chart | Cincinnati Bengals - Bengals.com",
    "unofficial_label": false,
    "depth": [
-    {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "First"
-      },
-      {
-       "rank": 2,
-       "name": "Second"
-      },
-      {
-       "rank": 3,
-       "name": "Third"
-      }
-     ]
-    },
     {
      "unit": "offense",
      "position": "WR",
@@ -3158,25 +3028,7 @@
      ]
     },
     {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "First"
-      },
-      {
-       "rank": 2,
-       "name": "Second"
-      },
-      {
-       "rank": 3,
-       "name": "Third"
-      }
-     ]
-    },
-    {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LDE",
      "players": [
       {
@@ -3194,7 +3046,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "NT",
      "players": [
       {
@@ -3208,7 +3060,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DT",
      "players": [
       {
@@ -3226,7 +3078,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "RDE",
      "players": [
       {
@@ -3240,7 +3092,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -3258,7 +3110,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -3272,7 +3124,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "NCB",
      "players": [
       {
@@ -3286,7 +3138,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -3300,7 +3152,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -3314,7 +3166,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -3328,7 +3180,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -3346,25 +3198,7 @@
      ]
     },
     {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "First"
-      },
-      {
-       "rank": 2,
-       "name": "Second"
-      },
-      {
-       "rank": 3,
-       "name": "Third"
-      }
-     ]
-    },
-    {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "P",
      "players": [
       {
@@ -3374,7 +3208,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "K",
      "players": [
       {
@@ -3384,7 +3218,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "LS",
      "players": [
       {
@@ -3394,7 +3228,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "H",
      "players": [
       {
@@ -3404,7 +3238,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "PR",
      "players": [
       {
@@ -3418,7 +3252,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KOR",
      "players": [
       {
@@ -3435,7 +3269,8 @@
       }
      ]
     }
-   ]
+   ],
+   "page_confirms_depth_chart": false
   },
   {
    "abbr": "CLE",
@@ -3637,7 +3472,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "POSITION",
      "players": [
       {
@@ -3659,7 +3494,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LDE",
      "players": [
       {
@@ -3673,7 +3508,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LDT",
      "players": [
       {
@@ -3691,7 +3526,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "RDT",
      "players": [
       {
@@ -3705,7 +3540,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "RDE",
      "players": [
       {
@@ -3719,7 +3554,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "WILL",
      "players": [
       {
@@ -3729,7 +3564,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "MIKE",
      "players": [
       {
@@ -3743,7 +3578,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "SAM",
      "players": [
       {
@@ -3757,7 +3592,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -3775,7 +3610,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -3793,7 +3628,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "SS",
      "players": [
       {
@@ -3811,7 +3646,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "FS",
      "players": [
       {
@@ -3825,7 +3660,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "POSITION",
      "players": [
       {
@@ -3847,7 +3682,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "P",
      "players": [
       {
@@ -3857,7 +3692,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "K",
      "players": [
       {
@@ -3867,7 +3702,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "H",
      "players": [
       {
@@ -3877,7 +3712,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KR",
      "players": [
       {
@@ -3891,7 +3726,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "PR",
      "players": [
       {
@@ -3905,7 +3740,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "LS",
      "players": [
       {
@@ -3914,7 +3749,8 @@
       }
      ]
     }
-   ]
+   ],
+   "page_confirms_depth_chart": false
   },
   {
    "abbr": "DAL",
@@ -3927,24 +3763,6 @@
    "title": "Dallas Cowboys | Official Site of the Dallas Cowboys",
    "unofficial_label": true,
    "depth": [
-    {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "First"
-      },
-      {
-       "rank": 2,
-       "name": "Second"
-      },
-      {
-       "rank": 3,
-       "name": "Third"
-      }
-     ]
-    },
     {
      "unit": "offense",
      "position": "WR",
@@ -4110,25 +3928,7 @@
      ]
     },
     {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "First"
-      },
-      {
-       "rank": 2,
-       "name": "Second"
-      },
-      {
-       "rank": 3,
-       "name": "Third"
-      }
-     ]
-    },
-    {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DT",
      "players": [
       {
@@ -4142,7 +3942,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DT",
      "players": [
       {
@@ -4152,7 +3952,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DT",
      "players": [
       {
@@ -4166,7 +3966,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "OLB",
      "players": [
       {
@@ -4184,7 +3984,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -4202,7 +4002,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -4212,7 +4012,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "OLB",
      "players": [
       {
@@ -4230,7 +4030,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -4248,7 +4048,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DB",
      "players": [
       {
@@ -4258,7 +4058,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -4272,7 +4072,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -4286,7 +4086,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -4300,25 +4100,7 @@
      ]
     },
     {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "First"
-      },
-      {
-       "rank": 2,
-       "name": "Second"
-      },
-      {
-       "rank": 3,
-       "name": "Third"
-      }
-     ]
-    },
-    {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "K",
      "players": [
       {
@@ -4328,7 +4110,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "P",
      "players": [
       {
@@ -4338,7 +4120,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "LS",
      "players": [
       {
@@ -4348,7 +4130,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "H",
      "players": [
       {
@@ -4358,7 +4140,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KR",
      "players": [
       {
@@ -4376,7 +4158,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "PR",
      "players": [
       {
@@ -4393,7 +4175,8 @@
       }
      ]
     }
-   ]
+   ],
+   "page_confirms_depth_chart": false
   },
   {
    "abbr": "DEN",
@@ -4601,7 +4384,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "POSITION",
      "players": [
       {
@@ -4623,7 +4406,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DE",
      "players": [
       {
@@ -4641,7 +4424,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "NT",
      "players": [
       {
@@ -4655,7 +4438,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DE",
      "players": [
       {
@@ -4669,7 +4452,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "SLB",
      "players": [
       {
@@ -4683,7 +4466,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "WLB",
      "players": [
       {
@@ -4697,7 +4480,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "ILB",
      "players": [
       {
@@ -4711,7 +4494,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "ILB",
      "players": [
       {
@@ -4725,7 +4508,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LCB",
      "players": [
       {
@@ -4739,7 +4522,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "RCB",
      "players": [
       {
@@ -4753,7 +4536,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "NCB",
      "players": [
       {
@@ -4767,7 +4550,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -4785,7 +4568,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -4803,7 +4586,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "POSITION",
      "players": [
       {
@@ -4825,7 +4608,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "PK",
      "players": [
       {
@@ -4835,7 +4618,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KO",
      "players": [
       {
@@ -4845,7 +4628,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "P",
      "players": [
       {
@@ -4855,7 +4638,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "H",
      "players": [
       {
@@ -4865,7 +4648,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "LS",
      "players": [
       {
@@ -4875,7 +4658,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KR",
      "players": [
       {
@@ -4885,7 +4668,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "PR",
      "players": [
       {
@@ -4898,7 +4681,8 @@
       }
      ]
     }
-   ]
+   ],
+   "page_confirms_depth_chart": false
   },
   {
    "abbr": "DET",
@@ -4911,28 +4695,6 @@
    "title": "Detroit Lions Depth Chart | Detroit Lions - DetroitLions.com",
    "unofficial_label": true,
    "depth": [
-    {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "Player"
-      },
-      {
-       "rank": 2,
-       "name": "Player"
-      },
-      {
-       "rank": 3,
-       "name": "Player"
-      },
-      {
-       "rank": 4,
-       "name": "Player"
-      }
-     ]
-    },
     {
      "unit": "offense",
      "position": "WR",
@@ -5092,29 +4854,7 @@
      ]
     },
     {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "Player"
-      },
-      {
-       "rank": 2,
-       "name": "Player"
-      },
-      {
-       "rank": 3,
-       "name": "Player"
-      },
-      {
-       "rank": 4,
-       "name": "Player"
-      }
-     ]
-    },
-    {
-     "unit": "offense",
+     "unit": "defense",
      "position": "EDGE",
      "players": [
       {
@@ -5132,7 +4872,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DL",
      "players": [
       {
@@ -5150,7 +4890,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DL",
      "players": [
       {
@@ -5164,7 +4904,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "EDGE",
      "players": [
       {
@@ -5182,7 +4922,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -5196,7 +4936,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -5210,7 +4950,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -5224,7 +4964,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -5246,7 +4986,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -5264,7 +5004,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -5274,7 +5014,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -5288,29 +5028,7 @@
      ]
     },
     {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "Player"
-      },
-      {
-       "rank": 2,
-       "name": "Player"
-      },
-      {
-       "rank": 3,
-       "name": "Player"
-      },
-      {
-       "rank": 4,
-       "name": "Player"
-      }
-     ]
-    },
-    {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "K",
      "players": [
       {
@@ -5320,7 +5038,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "H",
      "players": [
       {
@@ -5330,7 +5048,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "P",
      "players": [
       {
@@ -5340,7 +5058,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "LS",
      "players": [
       {
@@ -5350,7 +5068,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "PR",
      "players": [
       {
@@ -5360,7 +5078,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KR",
      "players": [
       {
@@ -5373,7 +5091,8 @@
       }
      ]
     }
-   ]
+   ],
+   "page_confirms_depth_chart": false
   },
   {
    "abbr": "GB",
@@ -5386,24 +5105,6 @@
    "title": "Packers Depth Chart | Green Bay Packers &#x2013; packers.com",
    "unofficial_label": true,
    "depth": [
-    {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "Player"
-      },
-      {
-       "rank": 2,
-       "name": "Player"
-      },
-      {
-       "rank": 3,
-       "name": "Player"
-      }
-     ]
-    },
     {
      "unit": "offense",
      "position": "WR",
@@ -5579,25 +5280,7 @@
      ]
     },
     {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "Player"
-      },
-      {
-       "rank": 2,
-       "name": "Player"
-      },
-      {
-       "rank": 3,
-       "name": "Player"
-      }
-     ]
-    },
-    {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DT",
      "players": [
       {
@@ -5615,7 +5298,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DT",
      "players": [
       {
@@ -5629,7 +5312,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "EDGE",
      "players": [
       {
@@ -5643,7 +5326,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -5661,7 +5344,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -5675,7 +5358,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "EDGE",
      "players": [
       {
@@ -5689,7 +5372,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -5703,7 +5386,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -5717,7 +5400,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -5731,7 +5414,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -5745,7 +5428,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "NB",
      "players": [
       {
@@ -5759,25 +5442,7 @@
      ]
     },
     {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "Player"
-      },
-      {
-       "rank": 2,
-       "name": "Player"
-      },
-      {
-       "rank": 3,
-       "name": "Player"
-      }
-     ]
-    },
-    {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "K",
      "players": [
       {
@@ -5787,7 +5452,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "P",
      "players": [
       {
@@ -5797,7 +5462,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "H",
      "players": [
       {
@@ -5807,7 +5472,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "PR",
      "players": [
       {
@@ -5821,7 +5486,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KR",
      "players": [
       {
@@ -5835,7 +5500,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "LS",
      "players": [
       {
@@ -5844,7 +5509,8 @@
       }
      ]
     }
-   ]
+   ],
+   "page_confirms_depth_chart": false
   },
   {
    "abbr": "HOU",
@@ -5852,11 +5518,12 @@
    "status": "unavailable",
    "source_url": "https://www.houstontexans.com/team/depth-chart",
    "http_status": 200,
-   "reason": "page fetched but no depth rows parsed at houstontexans.com",
+   "reason": "page title confirms a depth chart exists, but its rows are rendered client-side and are absent from the server HTML at houstontexans.com",
    "as_of": "",
    "title": "Depth Chart | Houston Texans - HoustonTexans.com",
    "unofficial_label": false,
-   "depth": []
+   "depth": [],
+   "page_confirms_depth_chart": true
   },
   {
    "abbr": "IND",
@@ -5869,28 +5536,6 @@
    "title": "Colts Depth Chart | Indianapolis Colts - colts.com",
    "unofficial_label": true,
    "depth": [
-    {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "First"
-      },
-      {
-       "rank": 2,
-       "name": "Second"
-      },
-      {
-       "rank": 3,
-       "name": "Third"
-      },
-      {
-       "rank": 4,
-       "name": "Fourth"
-      }
-     ]
-    },
     {
      "unit": "offense",
      "position": "WR",
@@ -6054,29 +5699,7 @@
      ]
     },
     {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "First"
-      },
-      {
-       "rank": 2,
-       "name": "Second"
-      },
-      {
-       "rank": 3,
-       "name": "Third"
-      },
-      {
-       "rank": 4,
-       "name": "Fourth"
-      }
-     ]
-    },
-    {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DE",
      "players": [
       {
@@ -6090,7 +5713,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DT",
      "players": [
       {
@@ -6104,7 +5727,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "NT",
      "players": [
       {
@@ -6122,7 +5745,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DE",
      "players": [
       {
@@ -6136,7 +5759,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "WLB",
      "players": [
       {
@@ -6154,7 +5777,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "MLB",
      "players": [
       {
@@ -6172,7 +5795,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -6186,7 +5809,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "FS",
      "players": [
       {
@@ -6200,7 +5823,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "SS",
      "players": [
       {
@@ -6214,7 +5837,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "N",
      "players": [
       {
@@ -6228,7 +5851,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -6238,29 +5861,7 @@
      ]
     },
     {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "First"
-      },
-      {
-       "rank": 2,
-       "name": "Second"
-      },
-      {
-       "rank": 3,
-       "name": "Third"
-      },
-      {
-       "rank": 4,
-       "name": "Fourth"
-      }
-     ]
-    },
-    {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "P",
      "players": [
       {
@@ -6270,7 +5871,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "PK",
      "players": [
       {
@@ -6280,7 +5881,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "H",
      "players": [
       {
@@ -6290,7 +5891,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "LS",
      "players": [
       {
@@ -6300,7 +5901,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KR",
      "players": [
       {
@@ -6314,7 +5915,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "PR",
      "players": [
       {
@@ -6327,7 +5928,8 @@
       }
      ]
     }
-   ]
+   ],
+   "page_confirms_depth_chart": false
   },
   {
    "abbr": "JAX",
@@ -6533,7 +6135,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "POSITION",
      "players": [
       {
@@ -6567,7 +6169,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "NT",
      "players": [
       {
@@ -6585,7 +6187,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DT",
      "players": [
       {
@@ -6603,7 +6205,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DE",
      "players": [
       {
@@ -6617,7 +6219,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DE",
      "players": [
       {
@@ -6635,7 +6237,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -6649,7 +6251,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -6659,7 +6261,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -6673,7 +6275,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -6687,7 +6289,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -6701,7 +6303,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -6711,7 +6313,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -6729,7 +6331,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -6743,7 +6345,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "POSITION",
      "players": [
       {
@@ -6777,7 +6379,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "K",
      "players": [
       {
@@ -6787,7 +6389,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "H",
      "players": [
       {
@@ -6797,7 +6399,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "P",
      "players": [
       {
@@ -6807,7 +6409,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "LS",
      "players": [
       {
@@ -6817,7 +6419,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "PR",
      "players": [
       {
@@ -6827,7 +6429,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KR",
      "players": [
       {
@@ -6840,7 +6442,8 @@
       }
      ]
     }
-   ]
+   ],
+   "page_confirms_depth_chart": false
   },
   {
    "abbr": "KC",
@@ -6853,28 +6456,6 @@
    "title": "Chiefs Depth Chart | Kansas City Chiefs - chiefs.com",
    "unofficial_label": true,
    "depth": [
-    {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "First"
-      },
-      {
-       "rank": 2,
-       "name": "Second"
-      },
-      {
-       "rank": 3,
-       "name": "Third"
-      },
-      {
-       "rank": 4,
-       "name": "Fourth"
-      }
-     ]
-    },
     {
      "unit": "offense",
      "position": "WR",
@@ -7050,29 +6631,7 @@
      ]
     },
     {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "First"
-      },
-      {
-       "rank": 2,
-       "name": "Second"
-      },
-      {
-       "rank": 3,
-       "name": "Third"
-      },
-      {
-       "rank": 4,
-       "name": "Fourth"
-      }
-     ]
-    },
-    {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DE",
      "players": [
       {
@@ -7086,7 +6645,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DT",
      "players": [
       {
@@ -7104,7 +6663,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DT",
      "players": [
       {
@@ -7118,7 +6677,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DE",
      "players": [
       {
@@ -7132,7 +6691,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -7146,7 +6705,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -7160,7 +6719,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -7174,7 +6733,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -7188,7 +6747,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -7206,7 +6765,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -7220,7 +6779,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -7238,29 +6797,7 @@
      ]
     },
     {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "First"
-      },
-      {
-       "rank": 2,
-       "name": "Second"
-      },
-      {
-       "rank": 3,
-       "name": "Third"
-      },
-      {
-       "rank": 4,
-       "name": "Fourth"
-      }
-     ]
-    },
-    {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "K",
      "players": [
       {
@@ -7270,7 +6807,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "H",
      "players": [
       {
@@ -7280,7 +6817,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "P",
      "players": [
       {
@@ -7290,7 +6827,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "LS",
      "players": [
       {
@@ -7300,7 +6837,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KR",
      "players": [
       {
@@ -7314,7 +6851,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "PR",
      "players": [
       {
@@ -7327,7 +6864,8 @@
       }
      ]
     }
-   ]
+   ],
+   "page_confirms_depth_chart": false
   },
   {
    "abbr": "LV",
@@ -7525,7 +7063,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "POSITION",
      "players": [
       {
@@ -7547,7 +7085,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DE",
      "players": [
       {
@@ -7561,7 +7099,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DT",
      "players": [
       {
@@ -7579,7 +7117,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DT",
      "players": [
       {
@@ -7597,7 +7135,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "EDGE",
      "players": [
       {
@@ -7607,7 +7145,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -7625,7 +7163,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -7639,7 +7177,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -7657,7 +7195,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -7671,7 +7209,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -7681,7 +7219,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "FS",
      "players": [
       {
@@ -7699,7 +7237,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "SS",
      "players": [
       {
@@ -7713,7 +7251,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "POSITION",
      "players": [
       {
@@ -7735,7 +7273,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "P",
      "players": [
       {
@@ -7745,7 +7283,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "K",
      "players": [
       {
@@ -7755,7 +7293,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "H",
      "players": [
       {
@@ -7765,7 +7303,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "LS",
      "players": [
       {
@@ -7775,7 +7313,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KR",
      "players": [
       {
@@ -7789,7 +7327,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "PR",
      "players": [
       {
@@ -7802,7 +7340,8 @@
       }
      ]
     }
-   ]
+   ],
+   "page_confirms_depth_chart": false
   },
   {
    "abbr": "LAC",
@@ -8004,7 +7543,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "POSITION",
      "players": [
       {
@@ -8026,7 +7565,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "EDGE",
      "players": [
       {
@@ -8040,7 +7579,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DL",
      "players": [
       {
@@ -8054,7 +7593,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DL",
      "players": [
       {
@@ -8068,7 +7607,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DL",
      "players": [
       {
@@ -8078,7 +7617,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "EDGE",
      "players": [
       {
@@ -8092,7 +7631,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -8106,7 +7645,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -8120,7 +7659,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -8138,7 +7677,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -8156,7 +7695,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -8174,7 +7713,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -8192,7 +7731,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "POSITION",
      "players": [
       {
@@ -8214,7 +7753,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "K",
      "players": [
       {
@@ -8224,7 +7763,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "P",
      "players": [
       {
@@ -8234,7 +7773,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KO",
      "players": [
       {
@@ -8244,7 +7783,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "H",
      "players": [
       {
@@ -8254,7 +7793,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "LS",
      "players": [
       {
@@ -8264,7 +7803,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KR",
      "players": [
       {
@@ -8282,7 +7821,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "PR",
      "players": [
       {
@@ -8299,7 +7838,8 @@
       }
      ]
     }
-   ]
+   ],
+   "page_confirms_depth_chart": false
   },
   {
    "abbr": "LA",
@@ -8312,28 +7852,6 @@
    "title": "Rams Unofficial Depth Chart | Los Angeles Rams - therams.com",
    "unofficial_label": true,
    "depth": [
-    {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "First"
-      },
-      {
-       "rank": 2,
-       "name": "Second"
-      },
-      {
-       "rank": 3,
-       "name": "Third"
-      },
-      {
-       "rank": 4,
-       "name": "Fourth"
-      }
-     ]
-    },
     {
      "unit": "offense",
      "position": "WR",
@@ -8497,29 +8015,7 @@
      ]
     },
     {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "First"
-      },
-      {
-       "rank": 2,
-       "name": "Second"
-      },
-      {
-       "rank": 3,
-       "name": "Third"
-      },
-      {
-       "rank": 4,
-       "name": "Fourth"
-      }
-     ]
-    },
-    {
-     "unit": "offense",
+     "unit": "defense",
      "position": "OLB",
      "players": [
       {
@@ -8533,7 +8029,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DE",
      "players": [
       {
@@ -8543,7 +8039,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "NT",
      "players": [
       {
@@ -8557,7 +8053,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DE",
      "players": [
       {
@@ -8571,7 +8067,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "OLB",
      "players": [
       {
@@ -8589,7 +8085,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "ILB",
      "players": [
       {
@@ -8603,7 +8099,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "ILB",
      "players": [
       {
@@ -8617,7 +8113,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -8631,7 +8127,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -8649,7 +8145,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -8663,7 +8159,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -8673,29 +8169,7 @@
      ]
     },
     {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "First"
-      },
-      {
-       "rank": 2,
-       "name": "Second"
-      },
-      {
-       "rank": 3,
-       "name": "Third"
-      },
-      {
-       "rank": 4,
-       "name": "Fourth"
-      }
-     ]
-    },
-    {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "P",
      "players": [
       {
@@ -8705,7 +8179,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "K",
      "players": [
       {
@@ -8719,7 +8193,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "H",
      "players": [
       {
@@ -8729,7 +8203,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "LS",
      "players": [
       {
@@ -8739,7 +8213,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "PR",
      "players": [
       {
@@ -8753,7 +8227,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KR",
      "players": [
       {
@@ -8766,7 +8240,8 @@
       }
      ]
     }
-   ]
+   ],
+   "page_confirms_depth_chart": false
   },
   {
    "abbr": "MIA",
@@ -8982,7 +8457,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "POSITION",
      "players": [
       {
@@ -9008,7 +8483,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DT",
      "players": [
       {
@@ -9022,7 +8497,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DT",
      "players": [
       {
@@ -9032,7 +8507,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "EDGE",
      "players": [
       {
@@ -9050,7 +8525,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "EDGE",
      "players": [
       {
@@ -9064,7 +8539,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "ILB",
      "players": [
       {
@@ -9082,7 +8557,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "ILB",
      "players": [
       {
@@ -9096,7 +8571,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "NB",
      "players": [
       {
@@ -9106,7 +8581,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -9120,7 +8595,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -9134,7 +8609,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -9148,7 +8623,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -9166,7 +8641,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "POSITION",
      "players": [
       {
@@ -9192,7 +8667,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "P",
      "players": [
       {
@@ -9202,7 +8677,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "H",
      "players": [
       {
@@ -9212,7 +8687,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "LS",
      "players": [
       {
@@ -9222,7 +8697,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KR",
      "players": [
       {
@@ -9236,7 +8711,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "PR",
      "players": [
       {
@@ -9249,7 +8724,8 @@
       }
      ]
     }
-   ]
+   ],
+   "page_confirms_depth_chart": false
   },
   {
    "abbr": "MIN",
@@ -9457,7 +8933,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "POSITION",
      "players": [
       {
@@ -9487,7 +8963,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "OLB",
      "players": [
       {
@@ -9505,7 +8981,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DL",
      "players": [
       {
@@ -9519,7 +8995,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DL",
      "players": [
       {
@@ -9533,7 +9009,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DL",
      "players": [
       {
@@ -9547,7 +9023,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "OLB",
      "players": [
       {
@@ -9561,7 +9037,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -9575,7 +9051,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -9589,7 +9065,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -9607,7 +9083,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -9621,7 +9097,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -9639,7 +9115,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -9657,7 +9133,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "POSITION",
      "players": [
       {
@@ -9687,7 +9163,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "K",
      "players": [
       {
@@ -9697,7 +9173,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "P",
      "players": [
       {
@@ -9707,7 +9183,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "H",
      "players": [
       {
@@ -9717,7 +9193,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "LS",
      "players": [
       {
@@ -9727,7 +9203,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KR",
      "players": [
       {
@@ -9745,7 +9221,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "PR",
      "players": [
       {
@@ -9758,7 +9234,8 @@
       }
      ]
     }
-   ]
+   ],
+   "page_confirms_depth_chart": false
   },
   {
    "abbr": "NE",
@@ -9771,28 +9248,6 @@
    "title": "New England Patriots Unofficial Depth Chart",
    "unofficial_label": true,
    "depth": [
-    {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "FIRST"
-      },
-      {
-       "rank": 2,
-       "name": "SECOND"
-      },
-      {
-       "rank": 3,
-       "name": "THIRD"
-      },
-      {
-       "rank": 4,
-       "name": "FOURTH"
-      }
-     ]
-    },
     {
      "unit": "offense",
      "position": "WR",
@@ -9968,29 +9423,7 @@
      ]
     },
     {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "FIRST"
-      },
-      {
-       "rank": 2,
-       "name": "SECOND"
-      },
-      {
-       "rank": 3,
-       "name": "THIRD"
-      },
-      {
-       "rank": 4,
-       "name": "FOURTH"
-      }
-     ]
-    },
-    {
-     "unit": "offense",
+     "unit": "defense",
      "position": "OLB",
      "players": [
       {
@@ -10004,7 +9437,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DT",
      "players": [
       {
@@ -10018,7 +9451,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DT",
      "players": [
       {
@@ -10032,7 +9465,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DT",
      "players": [
       {
@@ -10046,7 +9479,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "OLB",
      "players": [
       {
@@ -10060,7 +9493,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -10078,7 +9511,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -10092,7 +9525,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -10106,7 +9539,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -10120,7 +9553,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -10138,7 +9571,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -10152,7 +9585,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -10166,29 +9599,7 @@
      ]
     },
     {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "FIRST"
-      },
-      {
-       "rank": 2,
-       "name": "SECOND"
-      },
-      {
-       "rank": 3,
-       "name": "THIRD"
-      },
-      {
-       "rank": 4,
-       "name": "FOURTH"
-      }
-     ]
-    },
-    {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "K",
      "players": [
       {
@@ -10198,7 +9609,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "P",
      "players": [
       {
@@ -10208,7 +9619,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "H",
      "players": [
       {
@@ -10218,7 +9629,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "LS",
      "players": [
       {
@@ -10228,7 +9639,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "PR",
      "players": [
       {
@@ -10242,7 +9653,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KR",
      "players": [
       {
@@ -10259,7 +9670,8 @@
       }
      ]
     }
-   ]
+   ],
+   "page_confirms_depth_chart": false
   },
   {
    "abbr": "NO",
@@ -10461,7 +9873,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "POSITION",
      "players": [
       {
@@ -10483,7 +9895,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "EDGE",
      "players": [
       {
@@ -10497,7 +9909,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DL",
      "players": [
       {
@@ -10511,7 +9923,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DL",
      "players": [
       {
@@ -10525,7 +9937,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DL",
      "players": [
       {
@@ -10539,7 +9951,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "EDGE",
      "players": [
       {
@@ -10553,7 +9965,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -10571,7 +9983,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -10589,7 +10001,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -10603,7 +10015,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -10617,7 +10029,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -10631,7 +10043,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -10645,7 +10057,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -10659,7 +10071,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "POSITION",
      "players": [
       {
@@ -10681,7 +10093,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "P",
      "players": [
       {
@@ -10691,7 +10103,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "K",
      "players": [
       {
@@ -10701,7 +10113,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KO",
      "players": [
       {
@@ -10711,7 +10123,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "LS",
      "players": [
       {
@@ -10721,7 +10133,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "H",
      "players": [
       {
@@ -10731,7 +10143,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "PR",
      "players": [
       {
@@ -10745,7 +10157,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KR",
      "players": [
       {
@@ -10758,7 +10170,8 @@
       }
      ]
     }
-   ]
+   ],
+   "page_confirms_depth_chart": false
   },
   {
    "abbr": "NYG",
@@ -10771,28 +10184,6 @@
    "title": "Giants Team Depth Chart | New York Giants &#x2013; Giants.com",
    "unofficial_label": false,
    "depth": [
-    {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "Player"
-      },
-      {
-       "rank": 2,
-       "name": "Player"
-      },
-      {
-       "rank": 3,
-       "name": "Player"
-      },
-      {
-       "rank": 4,
-       "name": "Player"
-      }
-     ]
-    },
     {
      "unit": "offense",
      "position": "WR",
@@ -10964,29 +10355,7 @@
      ]
     },
     {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "Player"
-      },
-      {
-       "rank": 2,
-       "name": "Player"
-      },
-      {
-       "rank": 3,
-       "name": "Player"
-      },
-      {
-       "rank": 4,
-       "name": "Player"
-      }
-     ]
-    },
-    {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DT",
      "players": [
       {
@@ -11004,7 +10373,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "NT",
      "players": [
       {
@@ -11018,7 +10387,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DE",
      "players": [
       {
@@ -11028,7 +10397,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "RUSH",
      "players": [
       {
@@ -11042,7 +10411,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "MLB",
      "players": [
       {
@@ -11056,7 +10425,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "WLB",
      "players": [
       {
@@ -11070,7 +10439,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "SAM",
      "players": [
       {
@@ -11084,7 +10453,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -11102,7 +10471,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "SS",
      "players": [
       {
@@ -11116,7 +10485,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "FS",
      "players": [
       {
@@ -11134,7 +10503,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -11148,7 +10517,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "NB",
      "players": [
       {
@@ -11162,29 +10531,7 @@
      ]
     },
     {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "Player"
-      },
-      {
-       "rank": 2,
-       "name": "Player"
-      },
-      {
-       "rank": 3,
-       "name": "Player"
-      },
-      {
-       "rank": 4,
-       "name": "Player"
-      }
-     ]
-    },
-    {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "P",
      "players": [
       {
@@ -11194,7 +10541,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "K",
      "players": [
       {
@@ -11204,7 +10551,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "H",
      "players": [
       {
@@ -11214,7 +10561,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "LS",
      "players": [
       {
@@ -11224,7 +10571,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KOR",
      "players": [
       {
@@ -11238,7 +10585,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "PR",
      "players": [
       {
@@ -11251,7 +10598,8 @@
       }
      ]
     }
-   ]
+   ],
+   "page_confirms_depth_chart": false
   },
   {
    "abbr": "NYJ",
@@ -11463,7 +10811,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "POSITION",
      "players": [
       {
@@ -11485,7 +10833,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "EDGE",
      "players": [
       {
@@ -11499,7 +10847,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DL",
      "players": [
       {
@@ -11513,7 +10861,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DL",
      "players": [
       {
@@ -11523,7 +10871,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DL",
      "players": [
       {
@@ -11537,7 +10885,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "EDGE",
      "players": [
       {
@@ -11555,7 +10903,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -11569,7 +10917,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -11583,7 +10931,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "NB",
      "players": [
       {
@@ -11597,7 +10945,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -11611,7 +10959,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -11625,7 +10973,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -11639,7 +10987,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -11649,7 +10997,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "POSITION",
      "players": [
       {
@@ -11671,7 +11019,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "K",
      "players": [
       {
@@ -11681,7 +11029,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "P",
      "players": [
       {
@@ -11691,7 +11039,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "H",
      "players": [
       {
@@ -11701,7 +11049,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "PR",
      "players": [
       {
@@ -11715,7 +11063,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KR",
      "players": [
       {
@@ -11733,7 +11081,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "LS",
      "players": [
       {
@@ -11742,7 +11090,8 @@
       }
      ]
     }
-   ]
+   ],
+   "page_confirms_depth_chart": false
   },
   {
    "abbr": "PHI",
@@ -11755,24 +11104,6 @@
    "title": "Philadelphia Eagles Depth Chart",
    "unofficial_label": true,
    "depth": [
-    {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "First"
-      },
-      {
-       "rank": 2,
-       "name": "Second"
-      },
-      {
-       "rank": 3,
-       "name": "Third"
-      }
-     ]
-    },
     {
      "unit": "offense",
      "position": "WR",
@@ -11924,25 +11255,7 @@
      ]
     },
     {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "First"
-      },
-      {
-       "rank": 2,
-       "name": "Second"
-      },
-      {
-       "rank": 3,
-       "name": "Third"
-      }
-     ]
-    },
-    {
-     "unit": "offense",
+     "unit": "defense",
      "position": "EDGE",
      "players": [
       {
@@ -11956,7 +11269,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DT",
      "players": [
       {
@@ -11970,7 +11283,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DT",
      "players": [
       {
@@ -11980,7 +11293,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DT",
      "players": [
       {
@@ -11990,7 +11303,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "EDGE",
      "players": [
       {
@@ -12004,7 +11317,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -12018,7 +11331,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -12032,7 +11345,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -12046,7 +11359,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -12060,7 +11373,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "NCB",
      "players": [
       {
@@ -12074,7 +11387,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -12088,7 +11401,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -12102,25 +11415,7 @@
      ]
     },
     {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "First"
-      },
-      {
-       "rank": 2,
-       "name": "Second"
-      },
-      {
-       "rank": 3,
-       "name": "Third"
-      }
-     ]
-    },
-    {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "P",
      "players": [
       {
@@ -12130,7 +11425,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "K",
      "players": [
       {
@@ -12140,7 +11435,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "H",
      "players": [
       {
@@ -12150,7 +11445,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "LS",
      "players": [
       {
@@ -12160,7 +11455,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "PR",
      "players": [
       {
@@ -12178,7 +11473,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KR",
      "players": [
       {
@@ -12191,7 +11486,8 @@
       }
      ]
     }
-   ]
+   ],
+   "page_confirms_depth_chart": false
   },
   {
    "abbr": "PIT",
@@ -12403,7 +11699,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "POSITION",
      "players": [
       {
@@ -12429,7 +11725,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DE",
      "players": [
       {
@@ -12447,7 +11743,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "NT",
      "players": [
       {
@@ -12457,7 +11753,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DT",
      "players": [
       {
@@ -12467,7 +11763,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LOLB",
      "players": [
       {
@@ -12477,7 +11773,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LILB",
      "players": [
       {
@@ -12491,7 +11787,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "RILB",
      "players": [
       {
@@ -12505,7 +11801,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "ROLB",
      "players": [
       {
@@ -12519,7 +11815,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "OLB",
      "players": [
       {
@@ -12529,7 +11825,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -12547,7 +11843,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "NCB",
      "players": [
       {
@@ -12561,7 +11857,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -12579,7 +11875,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -12597,7 +11893,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "POSITION",
      "players": [
       {
@@ -12623,7 +11919,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "K",
      "players": [
       {
@@ -12633,7 +11929,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "P",
      "players": [
       {
@@ -12643,7 +11939,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "LS",
      "players": [
       {
@@ -12653,7 +11949,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "H",
      "players": [
       {
@@ -12663,7 +11959,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KR",
      "players": [
       {
@@ -12681,7 +11977,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "PR",
      "players": [
       {
@@ -12694,7 +11990,8 @@
       }
      ]
     }
-   ]
+   ],
+   "page_confirms_depth_chart": false
   },
   {
    "abbr": "SF",
@@ -12896,7 +12193,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "POSITION",
      "players": [
       {
@@ -12918,7 +12215,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LDE",
      "players": [
       {
@@ -12936,7 +12233,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LDT",
      "players": [
       {
@@ -12954,7 +12251,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "RDT",
      "players": [
       {
@@ -12968,7 +12265,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "RDE",
      "players": [
       {
@@ -12982,7 +12279,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "SAM",
      "players": [
       {
@@ -12996,7 +12293,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "MIKE",
      "players": [
       {
@@ -13010,7 +12307,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "WILL",
      "players": [
       {
@@ -13024,7 +12321,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LCB",
      "players": [
       {
@@ -13034,7 +12331,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "RCB",
      "players": [
       {
@@ -13048,7 +12345,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "NB",
      "players": [
       {
@@ -13058,7 +12355,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "FS",
      "players": [
       {
@@ -13072,7 +12369,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "SS",
      "players": [
       {
@@ -13090,7 +12387,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "POSITION",
      "players": [
       {
@@ -13112,7 +12409,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "P",
      "players": [
       {
@@ -13122,7 +12419,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "K",
      "players": [
       {
@@ -13132,7 +12429,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "H",
      "players": [
       {
@@ -13142,7 +12439,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "PR",
      "players": [
       {
@@ -13156,7 +12453,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KOR",
      "players": [
       {
@@ -13170,7 +12467,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "LS",
      "players": [
       {
@@ -13179,7 +12476,8 @@
       }
      ]
     }
-   ]
+   ],
+   "page_confirms_depth_chart": false
   },
   {
    "abbr": "SEA",
@@ -13397,7 +12695,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "POSITION",
      "players": [
       {
@@ -13431,7 +12729,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DT",
      "players": [
       {
@@ -13445,7 +12743,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "NT",
      "players": [
       {
@@ -13463,7 +12761,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DE",
      "players": [
       {
@@ -13477,7 +12775,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "RUSH",
      "players": [
       {
@@ -13491,7 +12789,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "MLB",
      "players": [
       {
@@ -13505,7 +12803,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "WLB",
      "players": [
       {
@@ -13523,7 +12821,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "SLB",
      "players": [
       {
@@ -13541,7 +12839,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -13555,7 +12853,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -13569,7 +12867,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -13583,7 +12881,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -13593,7 +12891,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -13603,7 +12901,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "POSITION",
      "players": [
       {
@@ -13637,7 +12935,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "K",
      "players": [
       {
@@ -13647,7 +12945,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "P",
      "players": [
       {
@@ -13657,7 +12955,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "H",
      "players": [
       {
@@ -13667,7 +12965,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "PR",
      "players": [
       {
@@ -13681,7 +12979,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KR",
      "players": [
       {
@@ -13707,7 +13005,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "LS",
      "players": [
       {
@@ -13716,7 +13014,8 @@
       }
      ]
     }
-   ]
+   ],
+   "page_confirms_depth_chart": false
   },
   {
    "abbr": "TB",
@@ -13729,28 +13028,6 @@
    "title": "Buccaneers Depth Chart | Tampa Bay Buccaneers",
    "unofficial_label": false,
    "depth": [
-    {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "First"
-      },
-      {
-       "rank": 2,
-       "name": "Second"
-      },
-      {
-       "rank": 3,
-       "name": "Third"
-      },
-      {
-       "rank": 4,
-       "name": "Fourth"
-      }
-     ]
-    },
     {
      "unit": "offense",
      "position": "WR",
@@ -13918,29 +13195,7 @@
      ]
     },
     {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "First"
-      },
-      {
-       "rank": 2,
-       "name": "Second"
-      },
-      {
-       "rank": 3,
-       "name": "Third"
-      },
-      {
-       "rank": 4,
-       "name": "Fourth"
-      }
-     ]
-    },
-    {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DL",
      "players": [
       {
@@ -13954,7 +13209,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "NT",
      "players": [
       {
@@ -13972,7 +13227,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DL",
      "players": [
       {
@@ -13986,7 +13241,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "OLB",
      "players": [
       {
@@ -14004,7 +13259,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "ILB",
      "players": [
       {
@@ -14018,7 +13273,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "ILB",
      "players": [
       {
@@ -14028,7 +13283,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "OLB",
      "players": [
       {
@@ -14042,7 +13297,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -14060,7 +13315,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -14078,7 +13333,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -14092,7 +13347,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -14106,29 +13361,7 @@
      ]
     },
     {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "First"
-      },
-      {
-       "rank": 2,
-       "name": "Second"
-      },
-      {
-       "rank": 3,
-       "name": "Third"
-      },
-      {
-       "rank": 4,
-       "name": "Fourth"
-      }
-     ]
-    },
-    {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "P",
      "players": [
       {
@@ -14138,7 +13371,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "PK",
      "players": [
       {
@@ -14148,7 +13381,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KO",
      "players": [
       {
@@ -14158,7 +13391,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "H",
      "players": [
       {
@@ -14168,7 +13401,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "LS",
      "players": [
       {
@@ -14178,7 +13411,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "PR",
      "players": [
       {
@@ -14192,7 +13425,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KR",
      "players": [
       {
@@ -14206,7 +13439,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KR",
      "players": [
       {
@@ -14215,7 +13448,8 @@
       }
      ]
     }
-   ]
+   ],
+   "page_confirms_depth_chart": false
   },
   {
    "abbr": "TEN",
@@ -14228,24 +13462,6 @@
    "title": "Titans Depth Chart - Tennessee Titans - TennesseeTitans.com",
    "unofficial_label": true,
    "depth": [
-    {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "First"
-      },
-      {
-       "rank": 2,
-       "name": "Second"
-      },
-      {
-       "rank": 3,
-       "name": "Third"
-      }
-     ]
-    },
     {
      "unit": "offense",
      "position": "WR",
@@ -14401,25 +13617,7 @@
      ]
     },
     {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "First"
-      },
-      {
-       "rank": 2,
-       "name": "Second"
-      },
-      {
-       "rank": 3,
-       "name": "Third"
-      }
-     ]
-    },
-    {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DE",
      "players": [
       {
@@ -14433,7 +13631,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DT",
      "players": [
       {
@@ -14451,7 +13649,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DL",
      "players": [
       {
@@ -14469,7 +13667,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DE",
      "players": [
       {
@@ -14487,7 +13685,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -14497,7 +13695,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -14507,7 +13705,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -14521,7 +13719,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -14535,7 +13733,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "NCB",
      "players": [
       {
@@ -14553,7 +13751,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -14563,7 +13761,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "S",
      "players": [
       {
@@ -14577,7 +13775,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -14591,25 +13789,7 @@
      ]
     },
     {
-     "unit": "offense",
-     "position": "POSITION",
-     "players": [
-      {
-       "rank": 1,
-       "name": "First"
-      },
-      {
-       "rank": 2,
-       "name": "Second"
-      },
-      {
-       "rank": 3,
-       "name": "Third"
-      }
-     ]
-    },
-    {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "K",
      "players": [
       {
@@ -14623,7 +13803,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KO",
      "players": [
       {
@@ -14637,7 +13817,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "P",
      "players": [
       {
@@ -14651,7 +13831,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "H",
      "players": [
       {
@@ -14665,7 +13845,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "PR",
      "players": [
       {
@@ -14679,7 +13859,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KOR",
      "players": [
       {
@@ -14697,7 +13877,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "LS",
      "players": [
       {
@@ -14710,7 +13890,8 @@
       }
      ]
     }
-   ]
+   ],
+   "page_confirms_depth_chart": false
   },
   {
    "abbr": "WAS",
@@ -14934,7 +14115,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "POSITION",
      "players": [
       {
@@ -14964,7 +14145,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DL",
      "players": [
       {
@@ -14974,7 +14155,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DL",
      "players": [
       {
@@ -14988,7 +14169,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "DL",
      "players": [
       {
@@ -15002,7 +14183,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "OLB",
      "players": [
       {
@@ -15016,7 +14197,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -15030,7 +14211,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "LB",
      "players": [
       {
@@ -15044,7 +14225,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "OLB",
      "players": [
       {
@@ -15062,7 +14243,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -15076,7 +14257,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "CB",
      "players": [
       {
@@ -15090,7 +14271,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "SS",
      "players": [
       {
@@ -15104,7 +14285,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "defense",
      "position": "FS",
      "players": [
       {
@@ -15122,7 +14303,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "POSITION",
      "players": [
       {
@@ -15152,7 +14333,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "P",
      "players": [
       {
@@ -15162,7 +14343,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "K",
      "players": [
       {
@@ -15172,7 +14353,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "H",
      "players": [
       {
@@ -15182,7 +14363,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "LS",
      "players": [
       {
@@ -15192,7 +14373,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "KR",
      "players": [
       {
@@ -15210,7 +14391,7 @@
      ]
     },
     {
-     "unit": "offense",
+     "unit": "special_teams",
      "position": "PR",
      "players": [
       {
@@ -15227,7 +14408,8 @@
       }
      ]
     }
-   ]
+   ],
+   "page_confirms_depth_chart": false
   }
  ]
 }
