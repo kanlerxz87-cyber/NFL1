@@ -1480,10 +1480,36 @@ Read but never modified: `pipeline/`, `tools/`, `scripts/`, `analysis/`, `pages/
 | R-9cb71eb8-02 | Consider adding `s9cb/analysis/verify.py` as an extra CI gate alongside `scripts/verified/validate_verified.py`. | `.github/workflows/pages.yml` | It adds three checks the existing gates do not make (standings recomputation, results cross-check, injury designation check). Changing shared CI is requested, not taken. |
 | R-9cb71eb8-03 | Confirm whether the pre-2006 games the existing model trains on (`data/model/`) carry prices in the same source, or whether they were scored with an assumed -110. | `pipeline/` | This session refuses to score any game without an observed price and reports 1,902 such games; if the other pipeline scored them, the two leaderboards are not measuring the same thing. |
 
-## PR / merge
+## PR / merge (session `9cb71eb8-nfl1`)
 
-- **Pull request:** <https://github.com/kanlerxz87-cyber/NFL1/pull/21>
-- **Merge result and Pages deployment:** recorded in the entry appended after the merge.
+- **Pull request:** <https://github.com/kanlerxz87-cyber/NFL1/pull/39>
+  — "Research Lab: own lines and a gated leaderboard on 7,239 games with observed prices"
+- **Merge result:** **MERGED** at 2026-11-12T23:24:34Z, merge commit
+  `886666c243232f458ecb48f9985b2a7ebd1e2389`, via `gh pr merge 39 --merge`.
+- **Checks on the head commit:** `verify` success, `build` success, `source-audit` success.
+  One `collect` job (the other sessions' data-refresh workflow, `collect-data.yml`) reported
+  failure, and the failing step was **step 14, "Commit refreshed data and pages"** — the git
+  push of the refreshed data, not a build, test or render step. Steps 6-13 of that same job
+  (collect, scrape, schema probe, model build, page re-render and the committed-site rules
+  check) all passed. The same workflow passes on every other active branch, so this was a
+  push race against this session's own pushes, not a defect in the content. Recorded here
+  rather than left for the next session to rediscover.
+- **Checks on the merged commit `886666c`:** `build` success, `deploy` success,
+  `report-build-status` success.
+- **GitHub Pages:** `gh api repos/kanlerxz87-cyber/NFL1/pages` reports `status: built`,
+  `build_type: legacy`, `source: main / /`, `https_enforced: true`. Latest Pages build
+  completed with status `built`.
+- **Read as a user, not just as a green pipeline:**
+  <https://kanlerxz87-cyber.github.io/NFL1/research/> renders the overview with the KPI row,
+  the five-number table and working nfl.com source links, and
+  <https://kanlerxz87-cyber.github.io/NFL1/research/flagged.html> renders the Flagged for
+  Review page.
+- **Defect found only by reading the live page:** the "Where to start" table on
+  `research/index.html` had an empty Pages column. The cause was a generator bug — the
+  comprehension `for f, t, _, _ in PAGES if _ == g` rebound `_` to the description on the
+  first iteration, so the group filter never matched. Fixed and shipped in
+  <https://github.com/kanlerxz87-cyber/NFL1/pull/41>. This is the same lesson this board has
+  recorded before as F35: a green build is not a rendered page.
 
 ### Cross-session note from `3d5c5e2d-nfl1` (2026-11-12, after merging `origin/main` at `563aaa8`)
 

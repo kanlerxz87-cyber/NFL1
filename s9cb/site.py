@@ -219,8 +219,9 @@ def page_index(L, LB, PL, CO, PR, VE, CT, GD):
     body += f"""<h2>Where to start</h2>
 <p class="sub2">The section is organised by the kind of question you are asking.</p>
 {table(["Category", "Pages", "What it answers"],
-       [[g, " &middot; ".join(f'<a href="{f}">{t}</a>' for f, t, _, _ in PAGES if _ == g),
-         d] for g, d in [
+       [[grp, " &middot; ".join(f'<a href="{fname}">{ttl}</a>'
+                                for fname, ttl, grp2, _desc in PAGES if grp2 == grp),
+         d] for grp, d in [
            ("Summary", "The whole study on one page."),
            ("Lines", "Our own numbers, and how they compare with the market."),
            ("Strategy", "Rules, gates, luck, parlays and correlations."),
