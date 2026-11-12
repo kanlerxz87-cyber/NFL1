@@ -8,7 +8,7 @@
    "severity": "High",
    "area": "Injuries",
    "file": "data/model/availability.json; data/model/dashboard.json; pipeline/gen_site.py (Overview headline)",
-   "finding": "The Overview headline reads 'Starters flagged 103 — official game status'. The committed data now says 111 starters impacted, of which 108 are flagged on practice status alone (availability.json; dashboard.json counts.starters_flagged_unavailable). Only one starter has an official game designation (Carlton Davis III, Out). Of the official game-status rows, only Davis is on the starter list; Lucas Patrick, Colson Yankoff, Malik Harrison, Ben Brown and TreVeyon Henderson are not.",
+   "finding": "The Overview headline reads 'Starters flagged 103 — official game status'. The committed model (availability.json) says 111 starters impacted: 108 on practice status alone and 3 with an official game designation (Carlton Davis III NE, D.J. Reed DET and Cade Mays DET, all Out). The 103 figure does not reproduce from committed data, and the headline mixes practice status with game status.",
    "evidence": "data/model/availability.json counts: rows_with_game_designation 9 (scrape), rows_practice_only_starters 108, starters_impacted 111. Official game statuses: data/dashboard/official_injuries_2026_w10.psv (6 rows).",
    "source_url": "https://www.nfl.com/injuries/",
    "source_type": "official",
@@ -17,15 +17,15 @@
   },
   {
    "id": "RV-02",
-   "severity": "High",
+   "severity": "Medium",
    "area": "Injuries",
    "file": "data/model/official_injuries.json (scrape); data/dashboard/official_injuries_2026_w10.psv (transcription)",
-   "finding": "The injury scrape changes between refreshes and is not stable. On the 22:30Z refresh (main d4c1eec) it matched all 279 official rows. On 22:36Z (main 8e687fb) it had 295 rows, 16 not on the page and 37 field differences. On 22:40:41Z (this branch, commit 9040190) it matched 279 of 279. On 22:40:44Z (main, commit 89ecd84, merged here) it is back to 295 rows with 16 extra and 37 field differences. The current committed data is the 295-row version.",
-   "evidence": "tools/verify_official_injuries.py on the merged state: official 279, scraped 295, matched on every field 242, field differences 37, missing 0, extra 16. Live nfl.com re-read (chunks 0 and 1 of 7): 80 of 80 rows match the transcription. The dashboard shows official-page values.",
+   "finding": "The 279-row injury transcription (read earlier on 2026-11-12) is stale. On the live nfl.com page, 6 of the 16 rows re-checked differ from it (Cameron Latu, Walter Rouse, Kerby Joseph, Cade Mays, D.J. Reed, Brian Branch). All 16 rows that the old check called 'not on the official page' are on the live page. The earlier finding that the committed scrape was wrong (295 rows, 16 not on the page) is withdrawn. The committed scrape matches the live page on 16 of 16 re-checked rows, and on the practice status of all 16 extra rows.",
+   "evidence": "data/dashboard/live_recheck_2026-11-12.json: rows re-checked 16; scrape matches live 16; transcription matches live 10; extras on live page 16 of 16. Source: https://www.nfl.com/injuries/ (7 chunks read 2026-11-12).",
    "source_url": "https://www.nfl.com/injuries/",
    "source_type": "official",
    "status": "Verified mismatch",
-   "action": "Owner: pipeline/scrape_injuries.py (scrape output is committed by the collect bot). Add a per-refresh gate that fails the data build when the scrape differs from the page by row count or any field, and make the parse deterministic (R-6a232e79-10). Flag on the Flagged page until a refresh passes."
+   "action": "Owner: data integration. Full row-by-row re-transcription of the live page into the snapshot, then re-run tools/verify_official_injuries.py (R-6a232e79-13). Until then, the dashboard shows the live designations and re-checked rows only and does not present the snapshot as official."
   },
   {
    "id": "RV-03",
@@ -348,6 +348,26 @@
    "source_type": "official",
    "status": "Verified mismatch",
    "action": "Relabel the check as presence-only, or build it from the 279-row official page; commit or hash the mirror week so the 3 absent rows can be named (R-6a232e79-11). Regenerate the Overview from current data (integration owner only)."
+  },
+  {
+   "id": "RV-31",
+   "severity": "Low",
+   "area": "Flags · scraper claim",
+   "status": "Not re-checked",
+   "finding": "data/flags.json states the scraper was 'verified faithful (~120 rows compared row-for-row against the live page, 0 errors)' for the 22:30 UTC scrape. This session could not reproduce that count. The 279-row snapshot used here differs from the live page on 6 of 16 rows re-checked.",
+   "evidence": "data/flags.json (shared, from another session's audit); data/dashboard/live_recheck_2026-11-12.json.",
+   "action": "Owner: the session that wrote the flag. Re-run the row comparison and cite the count; do not change flags.json in this session.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "RV-30",
+   "severity": "Medium",
+   "area": "Questions · injuries (Q04)",
+   "status": "Verified mismatch",
+   "finding": "Q04 answers '6 rows with a non-blank injury or game-status cell'. The live page has 9 (Joseph, Mays and Reed were added to the six). The 'Six rows only' statement on the injuries page is stale.",
+   "evidence": "Live nfl.com read 2026-11-12: Out (Lucas Patrick, Colson Yankoff, Ben Brown, Carlton Davis III, TreVeyon Henderson, Kerby Joseph, Cade Mays, D.J. Reed); Questionable (Malik Harrison). The committed scrape also has 9 designation rows (data/model/availability.json rows_with_game_designation).",
+   "action": "Update the Q04 answer in data/questions.json to 9 (integration owner). The dashboard already shows the live count.",
+   "source_url": "https://www.nfl.com/injuries/"
   }
  ]
 }

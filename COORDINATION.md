@@ -1272,3 +1272,12 @@ Live nfl.com re-read (chunks 0 and 1 of 7): 80 of 80 rows match the 279-row tran
 | R-6a232e79-11 | Build `pipeline/build_all.py`'s mirrored-feed check (lines 1035–1066) from the official page, not the scrape. Commit or hash the mirror week so its absent rows can be named. | `pipeline/build_all.py` | RV-29 | Open |
 | R-6a232e79-12 | The collect workflow runs on pushes to feature branches and commits re-rendered shared outputs back to them. Limit the commit-back step to `main`, or make feature-branch runs artifact-only. | `.github/workflows/collect-data.yml` | Commit `9040190` on this branch | Open |
 
+
+**Update 3 — 2026-11-12. Supersedes Update 2 on RV-02.** The injury finding in Update 2 was wrong. On a live re-read of all 7 chunks of nfl.com/injuries, the committed scrape matches the page on 16 of 16 rows re-checked field by field, and on the practice status of all 16 rows the old check called "not on the official page". Those rows are on the page. The 279-row transcription is the stale one: it matches on 10 of 16 re-checked rows. The live page has 9 game designations, not 6. Evidence: `data/dashboard/live_recheck_2026-11-12.json`.
+
+| # | Request | File owner | Evidence | Status |
+| --- | --- | --- | --- | --- |
+| R-6a232e79-13 | Re-transcribe all rows of the live nfl.com/injuries page into the snapshot file, re-run `tools/verify_official_injuries.py`, and set the Q04 answer to the live count (9, RV-30). Retire the "scrape regression" wording from any published page. | Data integration owner (`data/dashboard/official_injuries_2026_w10.psv`, `data/questions.json`) | RV-02, RV-30, `live_recheck_2026-11-12.json` | Open |
+| R-6a232e79-10 | Keep, but re-scope: add a per-refresh gate that compares the scrape with the live page. The scrape is currently the more accurate of the two. | `pipeline/scrape_injuries.py` | RV-02 | Open |
+
+Also: `data/flags.json` states that the scraper was verified row-for-row (~120 rows, 0 errors). This session could not reproduce that count (RV-31). That file is another session's and is not changed here.

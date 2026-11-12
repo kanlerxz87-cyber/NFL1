@@ -24,11 +24,11 @@
   },
   {
    "id": "QA-03",
-   "question": "Why does the injury scrape change between refreshes (279 rows some runs, 295 others), and what stops a bad run being published?",
-   "known": "The injury scrape has been 279 of 279 on some refreshes (22:30Z; 22:40:41Z on 9040190) and 242 of 279 with 16 extra rows on others (22:36Z; 22:40:44Z on main 89ecd84). Live page re-read: 80 of 80 rows match the transcription.",
-   "unknown": "The parser change behind the 22:36Z result, and whether any change to the parser is still needed.",
-   "discovery": "Diff pipeline/scrape_injuries.py output across the three refreshes; re-run tools/verify_official_injuries.py on each.",
-   "blocks": "Trusting any single refresh without the per-refresh check.",
+   "question": "Which injury baseline is correct for the dashboard, and should the snapshot be re-transcribed in full?",
+   "known": "The 279-row snapshot is stale: 6 of 16 re-checked rows differ from the live page. The committed scrape matches the live page on 16 of 16 re-checked rows, and all 16 'extra' rows are on the live page.",
+   "unknown": "Whether all 295 rows match the live page (only 16 were compared field by field).",
+   "discovery": "Re-transcribe all 7 chunks of nfl.com/injuries into the snapshot and run tools/verify_official_injuries.py on it.",
+   "blocks": "Publishing the injury table as official.",
    "source_url": "https://www.nfl.com/injuries/",
    "status": "Open"
   },
@@ -87,8 +87,8 @@
   {
    "id": "S-6A-01",
    "area": "Data quality",
-   "title": "Add a per-refresh gate: fail the data build when the injury scrape differs from the official page by row count or any field.",
-   "decision_impact": "Stops a bad refresh being published, as happened at 22:36Z.",
+   "title": "Add a per-refresh gate that compares the scrape with the live official page (row count and every field) and fails the build on a mismatch.",
+   "decision_impact": "Catches a stale snapshot or a bad scrape before it is published.",
    "recommended_path": "Adopt",
    "status": "Awaiting choice",
    "source_url": "https://www.nfl.com/injuries/"

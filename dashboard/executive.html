@@ -23,8 +23,8 @@ The data the model produces (lines, strategy performance, prop lines) cannot be 
 <ul>
 <li><strong>Week 10 schedule.</strong> All 14 games, days, kickoff times and networks match the nfl.com schedule page
 (<a href="https://www.nfl.com/schedules/2026/REG10">nfl.com/schedules/2026/REG10</a>). The four bye teams are CHI, DEN, PHI and TB.</li>
-<li><strong>Injury report.</strong> 279 official rows on <a href="https://www.nfl.com/injuries/">nfl.com/injuries</a>. The committed scrape is unstable between refreshes. The current committed scrape has 295 rows: 242 match on every field, 37 differ, and 16 are not on the page (RV-02). Earlier refreshes matched all 279.</li>
-<li><strong>Official game designations.</strong> Six rows only (Out: Lucas Patrick, Colson Yankoff, Ben Brown, Carlton Davis III, TreVeyon Henderson; Questionable: Malik Harrison).</li>
+<li><strong>Injury report.</strong> Re-checked against the live nfl.com page on 2026-11-12. The committed scrape matches the live page on 16 of 16 re-checked rows. The earlier 279-row transcription is stale and not shown as official (RV-02). A full re-transcription is open (R-6a232e79-13).</li>
+<li><strong>Official game designations.</strong> Nine rows on the live page: 8 Out (Lucas Patrick, Colson Yankoff, Ben Brown, Carlton Davis III, TreVeyon Henderson, Kerby Joseph, Cade Mays, D.J. Reed) and 1 Questionable (Malik Harrison). The earlier count of six is stale (RV-30).</li>
 <li><strong>Strategy gates.</strong> All 12 gate results reproduce from the committed JSON, so the model is consistent with its own rules.</li>
 <li><strong>Standings correlations.</strong> All six reproduce from the 32 standings rows.</li>
 </ul>
@@ -44,7 +44,7 @@ The data the model produces (lines, strategy performance, prop lines) cannot be 
 <h2>Irregularities that need a decision</h2>
 <ul>
 <li>The headline "103 starters flagged, official game status" is not supported. The committed data says 111 starters are impacted, and 108 of them are practice-only (RV-01).</li>
-<li>The injury scrape is not stable between refreshes (RV-02): the current committed scrape is wrong (295 rows). A per-refresh gate is still needed. The dashboard shows official page values. The Overview's NE row is stale (RV-28).</li>
+<li>The injury scrape is consistent with the live page (16 of 16 rows re-checked). The 279-row transcription used for the older dashboard is stale (RV-02). The Overview's NE row is stale (RV-28).</li>
 <li>Two generators overwrite the root index.html, and five site generations overlap (RV-17, RV-21).</li>
 <li>The Overview says "actionable" for a line the model's own validation does not support (RV-11).</li>
 </ul>

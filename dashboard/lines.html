@@ -39,7 +39,7 @@ so they cannot be verified (flags UNV-LINE and UNV-SIGNAL).</p>
 </tbody></table></div>
 <p class="small">Bye teams in Week 10 (nfl.com): CHI, DEN, PHI, TB.
 nfl.com uses LAR and AZ for the Rams and Cardinals; the pipeline uses LA and ARI. Mapping only.
-Week 10 games are in the official schedule; the Munich game is listed at 9:30 AM ET.</p>
+Week 10 games are in the official schedule; the Munich game (NE @ DET) is listed at 9:30 AM ET on FOX, as shown on nfl.com (checked 2026-11-12).</p>
 
 <h2>Model validation (unverified model output)</h2>
 <div class="callout warn">
@@ -52,7 +52,7 @@ Week 10 games are in the official schedule; the Munich game is listed at 9:30 AM
 <li>The Overview labelled LA @ ARI 'actionable'. That label is not supported by the test above and should be removed (flag RV-11).</li>
 <li>The repo calls the mirrored market line a 'closing line' (lines.json). No official page publishes betting lines, and the nflverse dictionary page read this session does not confirm the field definitions (flag RV-12).</li>
 </ul>
-<p class="small">Sign convention (repo check, not an official definition): the mirrored line correlates 0.439 with the home margin over 5,591 games, which the repo reads as home-favourite-positive.</p>
+<p class="small">Correlation: the mirrored line and the home margin correlate at r = 0.439 over 5,591 games. This is a correlation, not a verified sign convention.</p>
 </div>
 
 </main>

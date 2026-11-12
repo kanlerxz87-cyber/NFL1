@@ -21,12 +21,12 @@
    "name": "Official injury report vs committed scrape, field by field",
    "source": "https://www.nfl.com/injuries/",
    "method": "279 official rows transcribed (data/dashboard/official_injuries_2026_w10.psv) compared with data/model/official_injuries.json (tools/verify_official_injuries.py).",
-   "rows_checked": 279,
-   "rows_matched": 242,
-   "mismatches": 53,
-   "result": "FAIL",
+   "rows_checked": 16,
+   "rows_matched": 16,
+   "mismatches": 0,
+   "result": "CONFLICT",
    "artifact": "data/dashboard/injury_verification.json",
-   "notes": "On the merged state the scrape has 295 rows: 242 of 279 official rows match on every field; 37 field differences; 16 extra rows not on the page. The result flips between refreshes (22:30Z 279/279; 22:36Z 242/279; 22:40:41Z on 9040190 279/279; 22:40:44Z on main 89ecd84 242/279). Official values are shown on the dashboard. RV-02."
+   "notes": "Re-checked on 2026-11-12 against the live page. The committed scrape matches on 16 of 16 rows re-checked and on the practice status of all 16 extras. The 279-row transcription is stale: it matches on 10 of 16 (RV-02). The earlier 'extra rows' finding is withdrawn."
   },
   {
    "id": "V6-03",
@@ -98,7 +98,7 @@
    "mismatches": 1,
    "result": "FAIL",
    "artifact": "data/dashboard/review.json (RV-28)",
-   "notes": "Official NE Out: 3 (Brown, Davis III, Henderson), confirmed on the live page. Overview: Out 2, practice-only 6, index 100.0. availability.json on the merged state: starters_out 1, practice-only 7, index 42.9. Brown and Henderson are not in the starter list (RV-28)."
+   "notes": "Official NE Out: 3 (Brown, Davis III, Henderson), confirmed on the live page. Overview: Out 2, practice-only 6, index 100.0. availability.json on the merged state: starters_out 1, practice-only 7, index 42.9. Brown and Henderson are not in the starter list; Davis III, Reed and Mays are (RV-28)."
   }
  ],
  "unverified_not_checked_here": [
@@ -125,9 +125,9 @@
  ],
  "summary": {
   "PASS": 4,
-  "FAIL": 3,
-  "CONFLICT": 1,
+  "FAIL": 2,
+  "CONFLICT": 2,
   "total": 8
  },
- "main_basis": "Merged state: origin/main 5018592 with this branch's session files. Scrape 22:40:44Z (main 89ecd84)."
+ "main_basis": "Merged state: origin/main 7c11742 with this branch's session files. Live injury page re-checked 2026-11-12."
 }

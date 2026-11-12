@@ -192,6 +192,7 @@ def load():
     d["avail"] = J("data/model/availability.json")
     d["dashboard"] = J("data/model/dashboard.json")
     d["official_rows"] = read_psv()
+    d["live"] = J("data/dashboard/live_recheck_2026-11-12.json")
     d["verification"] = J("data/dashboard/verification.json")
     return d
 
@@ -231,9 +232,9 @@ def page_index(d):
     new_s = len(d["gate6a"]["suggestions"])
     head_rows = [
         td("Official Week 10 games matched to model rows") + val(f'{sched["matched"]} of {sched["official_games"]}', NFL_SCHED) + td(link(NFL_SCHED, "nfl.com schedule, Week 10")),
-        td("Official injury rows on the page") + val(str(inj["official_rows"]), NFL_INJ) + td(link(NFL_INJ, "nfl.com injury report")),
-        td("Official rows matching the committed scrape on every field") + val(str(inj["matched_all_fields"]), NFL_INJ) + td(link(NFL_INJ, "nfl.com injury report")),
-        td("Official rows with a game status (Out, Questionable)") + val(str(len(d["inj"]["official_game_status_rows"])), NFL_INJ) + td(link(NFL_INJ, "nfl.com injury report")),
+        td("Injury rows re-checked against the live nfl.com page") + val(str(d["live"]["summary"]["rows_field_checked"]), NFL_INJ) + td(link(NFL_INJ, "nfl.com injury report")),
+        td("Re-checked rows where the committed scrape matches the live page") + val(f'{d["live"]["summary"]["scrape_matches_live_on_field_checked_rows"]} of {d["live"]["summary"]["rows_field_checked"]}', NFL_INJ) + td(link(NFL_INJ, "nfl.com injury report")),
+        td("Live game designations (Out, Questionable)") + val(str(len(d["live"]["live_game_designations"])), NFL_INJ) + td(link(NFL_INJ, "nfl.com injury report")),
         td("Standings correlations reproduced") + val(f'{sum(1 for c in rec["standings_correlations"] if c["agrees_to_3dp"])} of {len(rec["standings_correlations"])}', NFL_STAND) + td(link(NFL_STAND, "nfl.com standings 2026 REG")),
         td("Strategy gate results reproduced from committed JSON") + val(f'{gate_match} of {n_strat}', "https://github.com/kanlerxz87-cyber/NFL1/blob/main/tools/recompute_strategy_gates.py") + td(link(REPO_BLOB + "data/dashboard/recomputed.json", "recomputed.json (internal)")),
         td("Clubs with any depth chart in the repo") + val("3 of 32", "https://www.nfl.com/teams/washington-commanders/depth-chart") + td(link("https://www.chiefs.com/team/depth-chart", "chiefs.com (labelled unofficial)")),
@@ -245,8 +246,8 @@ def page_index(d):
              "Week 10 games match the official schedule. Own and market line values are blank: no official line source exists."),
         card("strategies.html", "Strategies", f"{gate_match}/{n_strat}",
              "Strategy gate results that reproduce from the committed data. Performance values are blank (unverified)."),
-        card("injuries.html", "Injuries", f'{inj["official_rows"]} rows',
-             f'{inj["matched_all_fields"]} match the official page on every field; {inj["field_differences"]} differ; {inj["missing_from_scrape"]} missing from the scrape.'),
+        card("injuries.html", "Injuries", f'{d["live"]["summary"]["scrape_matches_live_on_field_checked_rows"]}/{d["live"]["summary"]["rows_field_checked"]}',
+             f'Re-checked rows where the committed scrape matches the live nfl.com page. The earlier 279-row snapshot is stale and is not shown as official.'),
         card("depth.html", "Depth & backups", "3 of 32",
              "Clubs with any depth chart in the repo. No labelled official depth chart was found for the other 29."),
         card("questions.html", "Questions", f'{len(d["questions"]) + new_q}',
@@ -268,7 +269,7 @@ def page_index(d):
   <p><strong>What this is.</strong> A checked view of the NFL Decision Lab repository. Every value
   here is either confirmed against an official NFL page this session or left blank and flagged.
   It shows the model's own results as unverified findings, not as facts.</p>
-  <p><strong>Headline.</strong> The Week 10 schedule matches nfl.com (14 of 14). The official injury report (279 rows) is transcribed and checked against the live page. The committed injury scrape is not stable: it has matched all 279 official rows on some refreshes and 242 of 279 (with 16 extra rows) on others, including the current one (RV-02). The dashboard shows official-page values. The depth data covers 3 of 32 clubs.
+  <p><strong>Headline.</strong> The Week 10 schedule matches nfl.com (14 of 14 games, dates and matchups). The injury report was re-checked against the live nfl.com page on 2026-11-12: the committed scrape matches it on all 16 rows re-checked, and the earlier 279-row transcription is stale (RV-02, withdrawn as a scrape error). Own and market line values are blank: no official line source exists.</p>
   No model strategy passes all gates after recomputation, and the model's own lines do not beat the market in the 2026 test window
   (unverified model output). Nothing here is ready for a betting decision.</p>
 </section>
@@ -305,7 +306,7 @@ so they cannot be verified (flags UNV-LINE and UNV-SIGNAL).</p>
 {tbl}
 <p class="small">Bye teams in Week 10 (nfl.com): {", ".join(e(x) for x in d["sched"]["byes_week_10"])}.
 nfl.com uses LAR and AZ for the Rams and Cardinals; the pipeline uses LA and ARI. Mapping only.
-Week 10 games are in the official schedule; the Munich game is listed at 9:30 AM ET.</p>
+Week 10 games are in the official schedule; the Munich game (NE @ DET) is listed at 9:30 AM ET on FOX, as shown on nfl.com (checked 2026-11-12).</p>
 
 <h2>Model validation (unverified model output)</h2>
 <div class="callout warn">
@@ -318,7 +319,7 @@ Week 10 games are in the official schedule; the Munich game is listed at 9:30 AM
 <li>The Overview labelled LA @ ARI 'actionable'. That label is not supported by the test above and should be removed (flag RV-11).</li>
 <li>The repo calls the mirrored market line a 'closing line' (lines.json). No official page publishes betting lines, and the nflverse dictionary page read this session does not confirm the field definitions (flag RV-12).</li>
 </ul>
-<p class="small">Sign convention (repo check, not an official definition): the mirrored line correlates {lm["corr_market_line_vs_home_margin"]} with the home margin over {lm["n_games"]:,} games, which the repo reads as home-favourite-positive.</p>
+<p class="small">Correlation: the mirrored line and the home margin correlate at r = {lm["corr_market_line_vs_home_margin"]} over {lm["n_games"]:,} games. This is a correlation, not a verified sign convention.</p>
 </div>
 """
     return page("lines.html", "Lines & markets", "Week 10 schedule verified against nfl.com. Own lines and market values are blank until an official source exists.", body)
@@ -385,54 +386,61 @@ They reproduce from the 32 standings rows, so the recomputation agrees with the 
 
 
 def page_injuries(d):
-    inj = d["inj"]
-    c = inj["counts"]
-    diffs = {(x["team"], x["player"]): x["diffs"] for x in inj["field_differences"]}
-    missing = {(x["team"], x["player"]) for x in inj["missing_from_scrape"]}
-    rows = []
-    for r in d["official_rows"]:
-        key = (r["team"], r["player"])
-        if key in missing:
-            check = '<span class="b bad">Missing from scrape</span>'
-        elif key in diffs:
-            parts = []
-            for fld, vals in diffs[key].items():
-                parts.append(f'{e(fld)}: scrape "{e(vals.get("scraped") or "blank")}"')
-            check = '<span class="b bad">Scrape differs</span> <span class="small">' + "; ".join(parts) + '</span>'
-        else:
-            check = '<span class="b ok">Matched</span>'
-        rows.append(
-            td(f'<strong>{e(r["team"])}</strong>') + td(e(r["player"])) + td(e(r["pos"]))
-            + val(r["injury"] or "", NFL_INJ) + val(r["practice"], NFL_INJ) + val(r["game"] or "", NFL_INJ)
-            + td(check) + td(link(NFL_INJ, "nfl.com injury report"))
-        )
-    tbl = table(["Club", "Player", "Pos", "Injury (official)", "Practice (official)", "Game status (official)", "Scrape check", "Source"], rows)
-    summary = f"""
-<div class="stats">
-<div><b>{c["official_rows"]}</b><span>official rows (nfl.com, Week 10)</span></div>
-<div><b>{c["matched_all_fields"]}</b><span>match on every field</span></div>
-<div><b>{c["field_differences"]}</b><span>rows with a field that differs in the scrape</span></div>
-<div><b>{c["missing_from_scrape"]}</b><span>missing from scrape</span></div>
-<div><b>{len(d["inj"]["official_game_status_rows"])}</b><span>official game designations</span></div>
-<div><b>{c["clubs_on_official_page"]}</b><span>clubs with rows (LAC and BAL read 'No Injuries Reported')</span></div>
-</div>"""
+    live = d["live"]
+    summ = live["summary"]
+    fc = live["field_checks"]
+    ext = live["extras_on_live_page"]
+    des = live["live_game_designations"]
+    def stat(n, label):
+        return f'<div><b>{n}</b><span>{label}</span></div>'
+    summary = (
+        '<div class="stats">'
+        + stat(len(des), "live game designations (Out or Questionable)")
+        + stat(summ["rows_field_checked"], "rows re-checked against the live page")
+        + stat(f'{summ["scrape_matches_live_on_field_checked_rows"]}/{summ["rows_field_checked"]}', "re-checked rows where the scrape matches the live page")
+        + stat(f'{summ["transcription_matches_live_on_field_checked_rows"]}/{summ["rows_field_checked"]}', "re-checked rows where the earlier 279-row snapshot matches")
+        + stat(f'{summ["extras_on_live_page"]}/{summ["extras_checked_on_live_page"]}', "rows the old check called 'extra' that are on the live page")
+        + '</div>')
+    # Table 1: live game designations
+    t1 = table(["Club", "Player", "Injury", "Practice (live)", "Game status (live)", "Source"],
+        [td(f'<strong>{e(r["team"])}</strong>') + td(e(r["player"])) + val(r["injury"] or "", NFL_INJ)
+         + val(r["practice"], NFL_INJ) + val(r["game"], NFL_INJ) + td(link(NFL_INJ, "nfl.com injury report"))
+         for r in des])
+    # Table 2: re-checked rows
+    def mark(ok):
+        if ok is None:
+            return '<span class="b muted">not in snapshot</span>'
+        return '<span class="b ok">Matches</span>' if ok else '<span class="b bad">Differs</span>'
+    rows2 = []
+    for f in fc:
+        L = f["live"]; S = f["scrape"] or {}
+        rows2.append(
+            td(f'<strong>{e(f["team"])}</strong>') + td(e(f["player"]))
+            + val(L["injury"] or "", NFL_INJ) + val(L["practice"] or "", NFL_INJ) + val(L["game"] or "", NFL_INJ)
+            + td(mark(f["scrape_matches_live"]) + f' <span class="small">{e(S.get("practice") or "blank")}</span>')
+            + td(mark(f["transcription_matches_live"]))
+            + td(link(NFL_INJ, "nfl.com injury report")))
+    t2 = table(["Club", "Player", "Injury (live)", "Practice (live)", "Game (live)", "Scrape vs live", "279-row snapshot vs live", "Source"], rows2)
+    # Table 3: extras confirmed on live page
+    t3 = table(["Club", "Player", "Practice (live)", "In committed scrape", "Source"],
+        [td(f'<strong>{e(x["team"])}</strong>') + td(e(x["player"])) + val(x["live_practice"], NFL_INJ)
+         + td('<span class="b ok">Yes</span>' if x["in_scrape"] else '<span class="b bad">No</span>')
+         + td(link(NFL_INJ, "nfl.com injury report")) for x in ext])
     body = f"""
 {legend()}
 {summary}
-<div class="callout">
-<p><strong>How this table was checked.</strong> All 7 chunks of the nfl.com page were read on 2026-11-12. Each of the
-{c["official_rows"]} rows was transcribed and compared with the committed scrape field by field
-(<a href="{REPO_BLOB}data/dashboard/injury_verification.json">injury_verification.json</a>,
-script <a href="{REPO_BLOB}tools/verify_official_injuries.py">verify_official_injuries.py</a>).
-The official values are shown. The scrape check column shows where the committed scrape disagrees.</p>
-<p><strong>Game designations are rare.</strong> Only {len(d["inj"]["official_game_status_rows"])} rows carry a game status this week.
-Most rows show practice status only. The old Overview phrase "starters flagged 103, official game status" mixed the two (RV-01).</p>
+<div class="callout warn">
+<p><strong>The earlier 279-row transcription is stale.</strong> It was read earlier on 2026-11-12. It does not match the live page on {summ["transcription_differs_on_field_checked_rows"]} of the {summ["rows_field_checked"]} rows re-checked (table 2), and it lacks all {summ["extras_checked_on_live_page"]} rows that the old check called "not on the official page". Those rows are on the live page (table 3). The transcription is therefore not shown as the official report. Its file, <a href="{REPO_BLOB}data/dashboard/official_injuries_2026_w10.psv">official_injuries_2026_w10.psv</a>, is kept as a dated snapshot.</p>
+<p><strong>The committed scrape is consistent with the live page.</strong> It matches the live page on {summ["scrape_matches_live_on_field_checked_rows"]} of {summ["rows_field_checked"]} re-checked rows and on the practice status of all {summ["extras_in_scrape_with_live_practice"]} extra rows. The earlier "scrape regression" finding (RV-02) is withdrawn. A full row-by-row re-transcription of all rows on the live page is still open (R-6a232e79-13). The live check is recorded in <a href="{REPO_BLOB}data/dashboard/live_recheck_2026-11-12.json">live_recheck_2026-11-12.json</a>, and <a href="{REPO_BLOB}tools/verify_official_injuries.py">verify_official_injuries.py</a> is the verifier.</p>
+<p><strong>Game designations are rare.</strong> {len(des)} rows carry a game status on the live page: 8 Out and 1 Questionable. Most rows show practice status only. The old Overview phrase "starters flagged 103, official game status" mixed the two (RV-01).</p>
 </div>
-<h2>Official report, Week 10</h2>
-{tbl}
-<h2>In the committed scrape but not on the official page ({len(inj["extra_in_scrape"])})</h2>
-<div class="callout warn"><p>Rows in <a href="{REPO_BLOB}data/model/official_injuries.json">data/model/official_injuries.json</a> that are not on the nfl.com page read on 2026-11-12. {"None on the current refresh." if not inj["extra_in_scrape"] else "They are listed here, not in the official table above (flag RV-02)."} The current committed scrape has {len(inj["extra_in_scrape"])} such rows (RV-02).</p></div>
-{table(["Club", "Player", "Source of claim", "Status"], [td(e(x["team"])) + td(e(x["player"])) + td(link(REPO_BLOB + "data/model/official_injuries.json", "official_injuries.json (internal)")) + td('<span class="b bad">Not on official page</span>') for x in inj["extra_in_scrape"]])}
+<h2>Game designations on the live page ({len(des)})</h2>
+{t1}
+<h2>Rows re-checked against the live page ({len(fc)})</h2>
+{t2}
+<h2>On the live page and in the committed scrape, not in the 279-row snapshot ({len(ext)})</h2>
+<div class="callout"><p>The old check listed these as "not on the official page". They are on the live page. Practice status shown is the live value.</p></div>
+{t3}
 <h2>Official news ahead of the page</h2>
 <div class="callout warn">
 <p>On the same nfl.com page, a news item reports <strong>Sam Darnold ruled out</strong> for Seahawks' Week 10 game vs. Raiders,
@@ -440,8 +448,9 @@ with Drew Lock expected to start. The injury row for Darnold shows only <em>Did 
 The model shows Darnold as practice-only (RV-07).
 <a href="https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again">nfl.com news item</a> (linked from the nfl.com player page; article body not read).</p>
 </div>
+
 """
-    return page("injuries.html", "Injuries", "Official Week 10 injury report, checked row by row against the committed scrape.", body)
+    return page("injuries.html", "Injuries", "Official Week 10 injury report, re-checked against the live nfl.com page on 2026-11-12.", body)
 
 
 def page_depth(d):
@@ -658,7 +667,7 @@ def page_repo(d):
         ("dashboard/", "This clean dashboard (session 6a232e79)", "tools/build_dashboard.py", "New, self-contained", "dashboard"),
         ("data/", "Committed data: model outputs, verified transcriptions, questions, flags", "pipeline/ and tools/", "Mixed sources (RV-21)", "data"),
         ("data/model/", "Pipeline outputs (lines, strategies, availability, injuries)", "pipeline/build_all.py", "Errors log stale (RV-18)", "data/model"),
-        ("pipeline/", "Collector, scraper, model builder", "-", "Scrape on current main: 242 of 279 match on every field; 16 extra rows (RV-02, unstable between refreshes)", "pipeline"),
+        ("pipeline/", "Collector, scraper, model builder", "-", "Scrape matches the live nfl.com page on 16 of 16 re-checked rows; the 279-row snapshot is stale (RV-02, withdrawn as a scrape error)", "pipeline"),
         ("analysis/", "Analysis engine from earlier session", "-", "Not reviewed line by line", "analysis"),
         ("tools/", "Generators and verifiers", "-", "Several write the same files", "tools"),
         ("scripts/", "Verification scripts and builders", "-", "Not reviewed line by line", "scripts"),
@@ -700,8 +709,8 @@ The data the model produces (lines, strategy performance, prop lines) cannot be 
 <ul>
 <li><strong>Week 10 schedule.</strong> All 14 games, days, kickoff times and networks match the nfl.com schedule page
 (<a href="{NFL_SCHED}">nfl.com/schedules/2026/REG10</a>). The four bye teams are CHI, DEN, PHI and TB.</li>
-<li><strong>Injury report.</strong> 279 official rows on <a href="{NFL_INJ}">nfl.com/injuries</a>. The committed scrape is unstable between refreshes. The current committed scrape has 295 rows: 242 match on every field, 37 differ, and 16 are not on the page (RV-02). Earlier refreshes matched all 279.</li>
-<li><strong>Official game designations.</strong> Six rows only (Out: Lucas Patrick, Colson Yankoff, Ben Brown, Carlton Davis III, TreVeyon Henderson; Questionable: Malik Harrison).</li>
+<li><strong>Injury report.</strong> Re-checked against the live nfl.com page on 2026-11-12. The committed scrape matches the live page on 16 of 16 re-checked rows. The earlier 279-row transcription is stale and not shown as official (RV-02). A full re-transcription is open (R-6a232e79-13).</li>
+<li><strong>Official game designations.</strong> Nine rows on the live page: 8 Out (Lucas Patrick, Colson Yankoff, Ben Brown, Carlton Davis III, TreVeyon Henderson, Kerby Joseph, Cade Mays, D.J. Reed) and 1 Questionable (Malik Harrison). The earlier count of six is stale (RV-30).</li>
 <li><strong>Strategy gates.</strong> All 12 gate results reproduce from the committed JSON, so the model is consistent with its own rules.</li>
 <li><strong>Standings correlations.</strong> All six reproduce from the 32 standings rows.</li>
 </ul>
@@ -721,7 +730,7 @@ The data the model produces (lines, strategy performance, prop lines) cannot be 
 <h2>Irregularities that need a decision</h2>
 <ul>
 <li>The headline "103 starters flagged, official game status" is not supported. The committed data says {d["avail"]["counts"]["starters_impacted"]} starters are impacted, and {d["avail"]["counts"]["rows_practice_only_starters"]} of them are practice-only (RV-01).</li>
-<li>The injury scrape is not stable between refreshes (RV-02): the current committed scrape is wrong (295 rows). A per-refresh gate is still needed. The dashboard shows official page values. The Overview's NE row is stale (RV-28).</li>
+<li>The injury scrape is consistent with the live page (16 of 16 rows re-checked). The 279-row transcription used for the older dashboard is stale (RV-02). The Overview's NE row is stale (RV-28).</li>
 <li>Two generators overwrite the root index.html, and five site generations overlap (RV-17, RV-21).</li>
 <li>The Overview says "actionable" for a line the model's own validation does not support (RV-11).</li>
 </ul>
@@ -742,7 +751,7 @@ def page_sources(d):
                     + td(e(s.get("kind", ""))) + td(e(s.get("what", ""))) + td(e(s.get("retrieved", ""))))
     reg = table(["ID", "Publisher", "URL", "Kind", "What it is", "Retrieved"], rows)
     fetched = [
-        ("https://www.nfl.com/injuries/", "nfl.com injury report", "7 chunks read, all rows transcribed", "Verified (279 rows)"),
+        ("https://www.nfl.com/injuries/", "nfl.com injury report", "7 chunks read 2026-11-12; 16 rows re-checked against the page", "Verified for 16 re-checked rows; full re-transcription open (RV-02)"),
         ("https://www.nfl.com/schedules/2026/REG10", "nfl.com schedule, Week 10", "3 chunks read", "Verified (14 games)"),
         ("https://www.nfl.com/teams/washington-commanders/depth-chart", "nfl.com depth chart, Washington", "1 chunk; 404 page", "Verified 404"),
         ("https://www.chiefs.com/team/depth-chart", "chiefs.com depth chart, Kansas City", "1 chunk; titled 'Unofficial Depth Chart'", "Verified (24 of 28 rows match)"),
