@@ -137,6 +137,7 @@ not block other work.
 
 | Task | Description | Status | Owner (session ID) | File scope | Sources / verification / irregularities |
 | --- | --- | --- | --- | --- | --- |
+| T14 | Independent operational audit: make current injury-scrape fallback status explicit in Actions and test the reporting contract | in progress | `629e0db0-nfl1` | `.github/workflows/collect-data.yml`, `pipeline/scrape_injuries.py`, `tests/test_injury_scrape.py`, `COORDINATION.md` | Claim only. Scope avoids shared site/data outputs. Verify against the official [NFL injury report](https://www.nfl.com/injuries/) and prove success/fallback paths with local tests. |
 | T01 | Repo inventory, line-by-line review, board creation | done | `80731db4-nfl1` | `COORDINATION.md`, `docs/repo-audit.md` | 1 tracked file (`README.md`, single line `# NFL1`); no code, data, workflows or site. Verified with `git ls-tree`, `git log`, `gh repo view`, `gh api .../pages`. Sources: [repo](https://github.com/kanlerxz87-cyber/NFL1), [Pages API](https://api.github.com/repos/kanlerxz87-cyber/NFL1/pages). Irregularities F01, F16, F17, F22, F23 logged. |
 | T02 | Official source registry + verification policy | done | `80731db4-nfl1` | `data/sources.json`, `docs/verification.md` | Official-source registry; every URL fetched and checked 2026-11-12. |
 | T03 | Full requirements inventory & analysis | done | `80731db4-nfl1` | `data/requirements.json`, `docs/requirements-analysis.md` | 36 requirements decomposed verbatim; per-row official links; validator enforced. [requirements.json](data/requirements.json) |
