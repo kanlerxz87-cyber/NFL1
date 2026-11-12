@@ -1,0 +1,218 @@
+{
+ "generated_at": "2026-11-12T23:01:34+00:00",
+ "sample": {
+  "games": 7103,
+  "games_with_both_lines": 6975,
+  "seasons": [
+   1999,
+   2000,
+   2001,
+   2002,
+   2003,
+   2004,
+   2005,
+   2006,
+   2007,
+   2008,
+   2009,
+   2010,
+   2011,
+   2012,
+   2013,
+   2014,
+   2015,
+   2016,
+   2017,
+   2018,
+   2019,
+   2020,
+   2021,
+   2022,
+   2023,
+   2024,
+   2025,
+   2026
+  ],
+  "source": "https://www.nfl.com/schedules/"
+ },
+ "method": "Pearson r with a Fisher-z 95% confidence interval and a two-sided t test.",
+ "publication_rule": "A relationship is only published when at least 25 paired observations exist; otherwise it is reported as blank.",
+ "game_level": [
+  {
+   "id": "C1",
+   "relationship": "Closing spread vs the actual home margin",
+   "kind": "continuous",
+   "note": "How much of the result the market line already explains. This is the bar any own line has to beat.",
+   "source": "https://www.nfl.com/schedules/",
+   "n": 6975,
+   "r": 0.4312,
+   "ci95": [
+    0.4119,
+    0.4502
+   ],
+   "p_value": 0.0,
+   "t_stat": 39.9128,
+   "method": "Pearson r, Fisher-z 95% CI, two-sided t test"
+  },
+  {
+   "id": "C2",
+   "relationship": "Own model line vs the actual home margin",
+   "kind": "continuous",
+   "note": "The same measure for our own line.",
+   "source": "https://www.nfl.com/schedules/",
+   "n": 6975,
+   "r": 0.3451,
+   "ci95": [
+    0.3243,
+    0.3656
+   ],
+   "p_value": 0.0,
+   "t_stat": 30.7036,
+   "method": "Pearson r, Fisher-z 95% CI, two-sided t test"
+  },
+  {
+   "id": "C3",
+   "relationship": "Own line minus market line vs result minus market line",
+   "kind": "continuous",
+   "note": "The edge test: if the model's disagreement with the market is informative this is positive. If it is zero the model adds nothing beyond the closing line.",
+   "source": "https://www.nfl.com/schedules/",
+   "n": 6975,
+   "r": 0.019,
+   "ci95": [
+    -0.0045,
+    0.0424
+   ],
+   "p_value": 0.112798,
+   "t_stat": 1.5859,
+   "method": "Pearson r, Fisher-z 95% CI, two-sided t test"
+  },
+  {
+   "id": "C4",
+   "relationship": "Point margin vs total points, same game",
+   "kind": "continuous",
+   "note": "Whether blowouts travel with high scoring.",
+   "source": "https://www.nfl.com/schedules/",
+   "n": 6975,
+   "r": 0.017,
+   "ci95": [
+    -0.0065,
+    0.0405
+   ],
+   "p_value": 0.155304,
+   "t_stat": 1.4212,
+   "method": "Pearson r, Fisher-z 95% CI, two-sided t test"
+  },
+  {
+   "id": "C5",
+   "relationship": "Absolute point margin vs total points, same game",
+   "kind": "continuous",
+   "note": "The parlay question: close games and low totals tend to arrive together.",
+   "source": "https://www.nfl.com/schedules/",
+   "n": 6975,
+   "r": 0.0748,
+   "ci95": [
+    0.0514,
+    0.0981
+   ],
+   "p_value": 0.0,
+   "t_stat": 6.2658,
+   "method": "Pearson r, Fisher-z 95% CI, two-sided t test"
+  },
+  {
+   "id": "C6",
+   "relationship": "Closing total vs the actual total points",
+   "kind": "continuous",
+   "note": "How much of the realised total the market total explains.",
+   "source": "https://www.nfl.com/schedules/",
+   "n": 6975,
+   "r": 0.3176,
+   "ci95": [
+    0.2963,
+    0.3386
+   ],
+   "p_value": 0.0,
+   "t_stat": 27.9701,
+   "method": "Pearson r, Fisher-z 95% CI, two-sided t test"
+  },
+  {
+   "id": "C7",
+   "relationship": "Rest-days advantage (home minus away) vs the home margin",
+   "kind": "continuous",
+   "note": "Whether the rest edge is already in the price.",
+   "source": "https://www.nfl.com/schedules/",
+   "n": 6975,
+   "r": 0.0329,
+   "ci95": [
+    0.0094,
+    0.0563
+   ],
+   "p_value": 0.00605,
+   "t_stat": 2.7459,
+   "method": "Pearson r, Fisher-z 95% CI, two-sided t test"
+  },
+  {
+   "id": "C8",
+   "relationship": "Temperature vs total points",
+   "kind": "continuous",
+   "note": "Weather effect on scoring; only games with a recorded temperature are used.",
+   "source": "https://www.nfl.com/schedules/",
+   "n": 4931,
+   "r": 0.0092,
+   "ci95": [
+    -0.0187,
+    0.0371
+   ],
+   "p_value": 0.516691,
+   "t_stat": 0.6485,
+   "method": "Pearson r, Fisher-z 95% CI, two-sided t test"
+  },
+  {
+   "id": "C9",
+   "relationship": "Wind speed vs total points",
+   "kind": "continuous",
+   "note": "Wind effect on scoring; only games with a recorded wind reading are used.",
+   "source": "https://www.nfl.com/schedules/",
+   "n": 4931,
+   "r": -0.0923,
+   "ci95": [
+    -0.1199,
+    -0.0645
+   ],
+   "p_value": 0.0,
+   "t_stat": -6.5062,
+   "method": "Pearson r, Fisher-z 95% CI, two-sided t test"
+  },
+  {
+   "id": "C10",
+   "kind": "binary phi",
+   "relationship": "Home team covers vs the game goes over, same game",
+   "note": "The favourite covering and the over landing together. A non-zero phi is why the product of two leg prices is the wrong price for a same-game parlay.",
+   "source": "https://www.nfl.com/schedules/",
+   "n": 6975,
+   "r": 0.0092,
+   "ci95": [
+    -0.0143,
+    0.0326
+   ],
+   "p_value": 0.443516,
+   "t_stat": 0.7663,
+   "method": "Pearson r, Fisher-z 95% CI, two-sided t test"
+  },
+  {
+   "id": "C11",
+   "kind": "lag-1 autocorrelation",
+   "relationship": "A team's points scored in week t vs its points in week t+1",
+   "note": "If this were strongly positive, form would be real and worth betting on. A value near zero is why 'hot team' systems do not survive.",
+   "source": "https://www.nfl.com/schedules/",
+   "n": 13313,
+   "r": 0.1413,
+   "ci95": [
+    0.1246,
+    0.1579
+   ],
+   "p_value": 0.0,
+   "t_stat": 16.4706,
+   "method": "Pearson r, Fisher-z 95% CI, two-sided t test"
+  }
+ ]
+}

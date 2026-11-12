@@ -329,7 +329,7 @@ def overview(snap, dash, lines, strat, avail, props, verif):
   <div class="grid-3">
     <div class="stat"><h4>Answered</h4><p>{sum(1 for q in QUESTIONS if q['status'].lower().startswith(('answered', 'partially')))} of {len(QUESTIONS)} questions have a verified answer or partial answer.</p></div>
     <div class="stat"><h4>Blocked</h4><p>{sum(1 for q in QUESTIONS if 'blocked' in q['status'].lower())} questions cannot be answered with today's sources, mostly pricing and legality.</p></div>
-    <div class="stat"><h4>Next</h4><p>{len(SUGGESTIONS)} suggestions are ranked at <a href="pages/suggestions.html">Suggestions</a>; five decision records need a human choice.</p></div>
+    <div class="stat"><h4>Next</h4><p>{len(SUGGESTIONS)} suggestions are ranked at <a href="pages/suggestions.html">Suggestions</a>; {sum(1 for d in DECISIONS if 'implemented' not in d['status'].lower())} decision records need a human choice.</p></div>
   </div>
 </section>
 """
@@ -1013,7 +1013,7 @@ def suggestions_page(dash):
 """
     return page("pages/suggestions.html", "Suggestions & Paths",
                 body,
-                f"{len(SUGGESTIONS)} improvements, five decision records, and a review process for choosing before implementing.",
+                f"{len(SUGGESTIONS)} improvements, {len(DECISIONS)} decision records, and a review process for choosing before implementing.",
                 dash.get("generated_at"))
 
 
@@ -1283,7 +1283,7 @@ def executive_page(snap, dash, lines, strat, avail, verif, prov):
       <li><a href="injuries.html">Injuries &amp; Depth</a> — starters out, replacements, attrition index.</li>
       <li><a href="props.html">Props</a> — projections with intervals and deliberately blank market columns.</li>
       <li><a href="questions.html">Questions</a> — the decision gate: known, unknown, how to find out.</li>
-      <li><a href="suggestions.html">Suggestions</a> — {len(SUGGESTIONS)} ranked changes and five decision records.</li>
+      <li><a href="suggestions.html">Suggestions</a> — {len(SUGGESTIONS)} ranked changes and {len(DECISIONS)} decision records.</li>
       <li><a href="evidence.html">Evidence</a> — provenance and line-by-line verification.</li>
       <li><a href="review.html">Flagged for Review</a> — everything unverified or blocked.</li>
     </ul>
