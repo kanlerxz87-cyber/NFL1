@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flagged for Review — NFL1</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<header>
+  <div class="brand">NFL1 — NFL Analytics Dashboard</div>
+  <nav>
+    <a href="../index.html">Dashboard</a>
+    <a href="executive-summary.html">Executive Summary</a>
+    <a href="teams.html">Teams</a>
+    <a href="standings.html">Standings</a>
+    <a href="injuries.html">Injuries</a>
+    <a href="suggestions.html">Suggestions</a>
+    <a href="questions.html">Questions &amp; Answers</a>
+    <a href="strategies.html">Strategies &amp; Leaderboard</a>
+    <a href="flagged.html" class="active">Flagged for Review</a>
+  </nav>
+</header>
+<main>
+  <h1>Flagged for Review</h1>
+  <p class="muted">Unverified items and irregularities. These do not block merge. Source links provided for manual review.</p>
+
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>ID</th><th>Item</th><th>Reason</th><th>Source / Note</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>F1</td><td>Injury snapshot covers only Thursday game (Commanders vs Giants).</td><td>Full week not captured.</td><td><a href="https://www.nfl.com/injuries/" target="_blank">nfl.com/injuries</a></td><td><span class="badge warn">Unverified scope</span></td></tr>
+      <tr><td>F2</td><td>Schedule data not yet captured.</td><td>No schedule table in repo.</td><td><a href="https://www.nfl.com/schedules/2026/by-team" target="_blank">nfl.com/schedules/2026</a></td><td><span class="badge warn">Missing</span></td></tr>
+      <tr><td>F3</td><td>Player stats not yet captured.</td><td>No stats table in repo.</td><td><a href="https://www.nfl.com/stats/" target="_blank">nfl.com/stats</a></td><td><span class="badge warn">Missing</span></td></tr>
+      <tr><td>F4</td><td>Depth chart / starter vs backup not captured.</td><td>Needed for deficiency tracking.</td><td><a href="https://www.nfl.com/teams/" target="_blank">nfl.com/teams</a></td><td><span class="badge warn">Missing</span></td></tr>
+      <tr><td>F5</td><td>Standings snapshot is point-in-time (2026-11-12).</td><td>Will change weekly.</td><td><a href="https://www.nfl.com/standings/league/2026/reg" target="_blank">nfl.com standings</a></td><td><span class="badge ok">Verified (dated)</span></td></tr>
+      <tr><td>F6</td><td>Standings show Chargers 0-8 and some unusual records.</td><td>Possible synthetic/simulated 2026 season data on nfl.com; verify before betting use.</td><td><a href="https://www.nfl.com/standings/league/2026/reg" target="_blank">nfl.com standings</a></td><td><span class="badge danger">Irregularity</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+</main>
+<footer>NFL1 — flagged items are for manual review after site is live.</footer>
+</body>
+</html>

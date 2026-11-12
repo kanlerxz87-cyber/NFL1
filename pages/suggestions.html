@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suggestions — NFL1</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<header>
+  <div class="brand">NFL1 — NFL Analytics Dashboard</div>
+  <nav>
+    <a href="../index.html">Dashboard</a>
+    <a href="executive-summary.html">Executive Summary</a>
+    <a href="teams.html">Teams</a>
+    <a href="standings.html">Standings</a>
+    <a href="injuries.html">Injuries</a>
+    <a href="suggestions.html" class="active">Suggestions</a>
+    <a href="questions.html">Questions &amp; Answers</a>
+    <a href="strategies.html">Strategies &amp; Leaderboard</a>
+    <a href="flagged.html">Flagged for Review</a>
+  </nav>
+</header>
+<main>
+  <h1>Suggestions for Improving Decision Making</h1>
+  <p class="muted">Proposed improvements. Each suggestion is a candidate; review and choose the best path before implementing.</p>
+
+  <div class="card">
+    <h2>Review Workflow</h2>
+    <p>Suggestions are listed below with rationale and expected impact. A reviewer selects which to implement. No changes are auto-applied. Implementation only after explicit selection.</p>
+  </div>
+
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>ID</th><th>Suggestion</th><th>Category</th><th>Rationale</th><th>Impact</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>S1</td><td>Add weekly automated injury snapshot capture for all games (not just Thursday).</td><td>Data coverage</td><td>Current snapshot covers one game; full week needed for deficiency tracking.</td><td>High</td><td><span class="badge warn">Proposed</span></td></tr>
+      <tr><td>S2</td><td>Add schedule page with dates, matchups, TV networks from official NFL schedule.</td><td>Data coverage</td><td>Schedule data helps line origination and timing.</td><td>High</td><td><span class="badge warn">Proposed</span></td></tr>
+      <tr><td>S3</td><td>Add player-level stats (passing/rushing/receiving) from official NFL stats.</td><td>Data coverage</td><td>Needed for player prop bet combos.</td><td>High</td><td><span class="badge warn">Proposed</span></td></tr>
+      <tr><td>S4</td><td>Add a "depth chart / starter vs backup" tracker per team.</td><td>Injuries</td><td>Identifies 2nd/3rd/4th-string replacements affecting lines.</td><td>High</td><td><span class="badge warn">Proposed</span></td></tr>
+      <tr><td>S5</td><td>Add weather and venue data for each game.</td><td>Context</td><td>Weather affects scoring and totals.</td><td>Medium</td><td><span class="badge warn">Proposed</span></td></tr>
+      <tr><td>S6</td><td>Add historical results archive for backtesting strategies.</td><td>Validation</td><td>Validation gates need out-of-sample data.</td><td>High</td><td><span class="badge warn">Proposed</span></td></tr>
+      <tr><td>S7</td><td>Add correlation matrix output for parlay legs.</td><td>Strategy</td><td>Removes hidden correlation risk in parlays.</td><td>High</td><td><span class="badge warn">Proposed</span></td></tr>
+      <tr><td>S8</td><td>Add a leaderboard page tracking strategy performance with rewards.</td><td>Competition</td><td>Motivates skill-based strategy development.</td><td>Medium</td><td><span class="badge warn">Proposed</span></td></tr>
+      <tr><td>S9</td><td>Add automated link-check on build to catch broken sources.</td><td>Quality</td><td>Ensures every row keeps a valid official source link.</td><td>Medium</td><td><span class="badge warn">Proposed</span></td></tr>
+      <tr><td>S10</td><td>Add "Flagged for Review" page (already present) for unverified items.</td><td>Quality</td><td>Separates unverified from verified data.</td><td>Medium</td><td><span class="badge ok">Implemented</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+</main>
+<footer>NFL1 — suggestions are proposals, not implemented changes.</footer>
+</body>
+</html>
