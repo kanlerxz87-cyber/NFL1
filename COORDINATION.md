@@ -940,6 +940,26 @@ including three cells where nfl.com contradicts its own arithmetic.
 - **Follow-up:** <https://github.com/kanlerxz87-cyber/NFL1/pull/19> carries the
   source-label fix and this record.
 
+## Warning for the next session: their gates write files
+
+Running this repository's verification gates locally is not read-only.
+`tools/verify.py` rewrites `data/verification_report.json`, and it is designed
+to run **after** `tools/build.py` has regenerated the pages — that is the order
+`verify.yml` uses. Run standalone against committed pages, it reported
+965 table rows and `index.html rows=0` where the committed report says 996 and
+31, and overwrote the artifact with those numbers.
+
+This session did exactly that while checking it had not broken their CI, caught
+it by diffing every shared file against `origin/main`, and restored
+`data/verification_report.json` from `main` verbatim. The report on `main` is
+the authoritative one; only their CI, running the stages in order, should
+regenerate it.
+
+Lesson recorded so nobody repeats it: **after running any of their gates, diff
+the whole tree against `origin/main` before committing.** `scripts/verified/
+check_site.py` and `validate_verified.py` were read-only in this session;
+`tools/verify.py` was not.
+
 ## Open cross-session requests (logged, not applied)
 
 Per the protocol, a need that touches another session's files is logged here
