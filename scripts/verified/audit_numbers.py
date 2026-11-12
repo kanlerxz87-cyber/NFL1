@@ -63,6 +63,38 @@ def main() -> int:
     if abs(hw - co["home_win"]["rate"]) > 0.001:
         problems.append(f"home win rate: {hw:.4f} vs {co['home_win']['rate']}")
 
+    # C5 (flag F36): division-game flag must use conference + division together,
+    # checked against the official groupings published at
+    # https://www.nfl.com/standings/division/2026/REG (retrieved 2026-11-12).
+    OFFICIAL_GROUPS = {
+        ("AFC", "East"): {"BUF", "NE", "NYJ", "MIA"},
+        ("AFC", "North"): {"PIT", "CIN", "CLE", "BAL"},
+        ("AFC", "South"): {"JAX", "HOU", "IND", "TEN"},
+        ("AFC", "West"): {"DEN", "KC", "LV", "LAC"},
+        ("NFC", "East"): {"NYG", "DAL", "WAS", "PHI"},
+        ("NFC", "North"): {"CHI", "DET", "MIN", "GB"},
+        ("NFC", "South"): {"CAR", "NO", "TB", "ATL"},
+        ("NFC", "West"): {"SF", "SEA", "LA", "AZ"},
+    }
+    st_rows = list(csv.DictReader(open(ROOT / "data/verified/standings_2026.csv")))
+    csv_groups: dict[tuple[str, str], set[str]] = {}
+    for r in st_rows:
+        csv_groups.setdefault((r["conference"], r["division"]), set()).add(r["abbr"])
+    checks += 1
+    if csv_groups != OFFICIAL_GROUPS:
+        problems.append("standings_2026.csv groupings no longer match the official nfl.com divisions")
+    grp = {r["abbr"]: (r["conference"], r["division"]) for r in st_rows}
+    dflag = [1 if grp[g["home_abbr"]] == grp[g["away_abbr"]] else 0 for g in games]
+    df_mean, t_mean = mean(dflag), mean(tot)
+    r_c5 = (sum((a - df_mean) * (b - t_mean) for a, b in zip(dflag, tot)) /
+            (sum((a - df_mean) ** 2 for a in dflag) * sum((b - t_mean) ** 2 for b in tot)) ** 0.5)
+    pub_c5 = next(c for c in co["correlations"] if c["id"] == "C5")
+    checks += 2
+    if abs(r_c5 - pub_c5["r"]) > 0.001:
+        problems.append(f"C5: {r_c5:.4f} vs {pub_c5['r']}")
+    if sum(dflag) != int(pub_c5["note"].split()[0]):
+        problems.append(f"C5 division-game count: {sum(dflag)} vs note '{pub_c5['note']}'")
+
     inj = list(csv.DictReader(open(ROOT / "data/verified/injuries_week10.csv")))
     av = j("availability.json")
     checks += 1
