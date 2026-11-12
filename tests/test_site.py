@@ -10,8 +10,11 @@ import unittest
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-DOCS = ROOT / "docs"
-from nfl.sitekit import ALL_PAGES, NAV  # noqa: E402
+from nfl.sitekit import ALL_PAGES, NAV, SITE_OUT  # noqa: E402
+
+#: The built site lives wherever the builder writes it - the repository root,
+#: because Pages is pinned to `main` at `/`.
+DOCS = SITE_OUT
 
 HREF = re.compile(r'href="([^"]+)"')
 OFFICIAL = re.compile(r'href="(https?://(?:www\.)?nfl\.com[^"]*)"')
@@ -45,7 +48,8 @@ class TestSiteBuilds(unittest.TestCase):
 
     def test_nojekyll_present(self):
         self.assertTrue((DOCS / ".nojekyll").exists(),
-                        "docs/.nojekyll is required so Pages serves the folder verbatim")
+                        ".nojekyll is required so Pages serves the build verbatim "
+                        "instead of running it through Jekyll")
 
     def test_pages_are_well_formed(self):
         for slug, _, _ in ALL_PAGES:

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the static site into docs/ from data/processed/site_data.json.
+"""Generate the static site from data/processed/site_data.json.
 
     PYTHONPATH=src python3 scripts/build_site.py
 
@@ -17,11 +17,12 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from nfl import markdown_lite as md          # noqa: E402
+from nfl import sitekit
 from nfl.sitekit import (ALL_PAGES, NAV, REPO_URL, badge, callout, esc, first_url,  # noqa: E402
                          fmt, kpi, panel, render_page, src, table)
 
 DATA = json.loads((ROOT / "data" / "processed" / "site_data.json").read_text(encoding="utf-8"))
-OUT = ROOT / "docs"
+OUT = sitekit.SITE_OUT
 CONTENT = ROOT / "content"
 NFL_INJ = "https://www.nfl.com/injuries/"
 NFL_STD = "https://www.nfl.com/standings/"
@@ -848,7 +849,7 @@ def main() -> int:
         title, subtitle, body = BUILDERS[slug]()
         (OUT / f"{slug}.html").write_text(
             render_page(slug, title, body, subtitle, generated), encoding="utf-8")
-        print(f"  wrote docs/{slug}.html  ({(OUT / (slug + '.html')).stat().st_size:,} bytes)")
+        print(f"  wrote {(OUT / (slug + '.html')).relative_to(ROOT)}  "f"({(OUT / (slug + '.html')).stat().st_size:,} bytes)")
     total = sum(f.stat().st_size for f in OUT.glob("*.html"))
     print(f"{len(ALL_PAGES)} pages, {total:,} bytes total -> {OUT}")
     return 0

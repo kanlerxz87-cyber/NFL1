@@ -8,6 +8,8 @@ data/processed/site_data.json only - the generator never contains a number.
 from __future__ import annotations
 
 import html
+import os
+import pathlib
 import re
 from typing import Any, Iterable, Sequence
 
@@ -24,6 +26,14 @@ def first_url(text: str | None) -> str | None:
         return None
     m = _URL_RE.search(text)
     return m.group(0).rstrip(".,;") if m else None
+
+#: Where the built site is written, and therefore where GitHub Pages serves it
+#: from. The repository's Pages source is fixed to `main` at `/` and the API
+#: refuses to change it (403 - the integration token lacks `pages:write`), so
+#: the site is published from the repository root rather than from `docs/`.
+#: Override with NFL1_SITE_OUT for a scratch build.
+SITE_OUT = pathlib.Path(os.environ["NFL1_SITE_OUT"]).resolve() \
+    if os.environ.get("NFL1_SITE_OUT") else pathlib.Path(__file__).resolve().parents[2]
 
 REPO_URL = "https://github.com/kanlerxz87-cyber/NFL1"
 

@@ -38,7 +38,7 @@ your claim immediately.**
 
 | # | Task | Status | Owning session | Files touched | Notes |
 |---|------|--------|----------------|---------------|-------|
-| 1 | Verify repo contents line by line against official sources | done | `arena/a2cea255-nfl1` | `data/verified/*.tsv`, `src/nfl/verify.py`, `docs/verification.html` | 34 automated checks: 29 PASS, 5 FLAG, 0 FAIL |
+| 1 | Verify repo contents line by line against official sources | done | `arena/a2cea255-nfl1` | `data/verified/*.tsv`, `src/nfl/verify.py`, `verification.html` | 34 automated checks: 29 PASS, 5 FLAG, 0 FAIL |
 | 2 | Transcribe official Week 10 / 2026 REG data | done | `arena/a2cea255-nfl1` | `data/verified/standings_2026_reg.tsv`, `injury_report_2026_week10.tsv`, `schedule_2026_week10.tsv`, `bye_week10.tsv`, `team_report_status_week10.tsv`, `nfl_news_2026_week10.tsv`, `sources.json` | 32 standings rows, 254 injury entries, 14 games, 4 byes, 8 news items, 11 sources |
 | 3 | Provenance + stats + odds + correlation engines | done | `arena/a2cea255-nfl1` | `src/nfl/provenance.py`, `stats.py`, `ingest.py`, `odds.py`, `correlation.py`, `signals.py` | stdlib only; BH-FDR, hand-rolled incomplete beta |
 | 4 | Ratings, Pythagorean fit, home-field, line origination board | done | `arena/a2cea255-nfl1` | `src/nfl/ratings.py` | Spread/total/win-prob deliberately `None` — see task 8 |
@@ -46,9 +46,9 @@ your claim immediately.**
 | 6 | Strategy catalogue, validation gates, luck removal, leaderboard | done | `arena/a2cea255-nfl1` | `src/nfl/strategies.py`, `gates.py`, `luck.py`, `leaderboard.py` | 13 strategies, 9 gates, 0 APPROVED / 13 NOT_STAKEABLE, 0 scored / 13 withheld |
 | 7 | Pipeline → single site-data artifact | done | `arena/a2cea255-nfl1` | `src/nfl/pipeline.py`, `data/processed/site_data.json` | Generator contains no numbers; all values come from this artifact |
 | 8 | Executive summary, open questions, suggestions board, methodology | done | `arena/a2cea255-nfl1` | `content/*.md` | 22 open questions (Q01–Q22), 22 suggestions (S-01–S-22) with blank Decision columns |
-| 9 | Site generator + 20-page dashboard | done | `arena/a2cea255-nfl1` | `src/nfl/sitekit.py`, `src/nfl/markdown_lite.py`, `scripts/build_site.py`, `docs/` | 20 pages, 6 nav categories, inline CSS, no external assets |
+| 9 | Site generator + 20-page dashboard | done | `arena/a2cea255-nfl1` | `src/nfl/sitekit.py`, `src/nfl/markdown_lite.py`, `scripts/build_site.py`, `*.html` at repo root | 20 pages, 6 nav categories, inline CSS, no external assets |
 | 10 | Test suite incl. link checker + source-link enforcer | done | `arena/a2cea255-nfl1` | `tests/test_stats.py`, `test_odds.py`, `test_gates.py`, `test_data_integrity.py`, `test_site.py` | 102 tests, all passing |
-| 11 | **Final integration**: merge, re-verify, publish to Pages | done | `arena/a2cea255-nfl1` | `docs/`, `README.md`, `COORDINATION.md`, GitHub Pages settings | See *Integration record* below |
+| 11 | **Final integration**: merge, re-verify, publish to Pages | done | `arena/a2cea255-nfl1` | `*.html` + `.nojekyll` at repo root, `README.md`, `COORDINATION.md` | See *Integration record* below |
 
 No task is currently `unclaimed`. No task is currently `needs review` — every
 item requiring human attention is published on the
@@ -80,9 +80,13 @@ work).
   300+ rows checked. Passing. This test caught and fixed two real defects:
   a naive URL extractor emitting `href="A"`, and the Source Register printing
   URLs as text instead of links.
-- **Pages publication:** site is generated into `docs/`, `docs/.nojekyll` is
-  written so Pages serves the folder verbatim, and the Pages source is set to
-  `main` @ `/docs`. Live at
+- **Pages publication:** the site is generated into the **repository root** with
+  a `.nojekyll` file so Pages serves the build verbatim rather than running it
+  through Jekyll. The Pages source is already `main` @ `/`, and it could not be
+  moved to `/docs` — `PUT /repos/kanlerxz87-cyber/NFL1/pages` returns
+  **403 "Resource not accessible by integration"**, because the integration token
+  lacks `pages:write`. Publishing from the root is the workaround, and it is
+  recorded as an irregularity below. Live at
   **https://kanlerxz87-cyber.github.io/NFL1/**
 
 ---
@@ -161,6 +165,7 @@ with the arithmetic that proves each one. **None of them blocks the merge.**
 | — | **SEA / CIN / LAC / BAL print the literal text "No Injuries Reported"**; CHI / DEN / PHI / TB are absent because they are on bye. These are different facts and must not be collapsed into one another. | Kept distinct: `no injuries reported` vs `on bye (no report)` |
 | — | **No official depth chart is reachable.** NFL.com publishes none; Sportradar's sanctioned feed requires an API key. | `string_level_drop` registered UNAVAILABLE. 2nd/3rd/4th-string analysis uses only officially confirmed NFL.com news items |
 | — | **No verified 2026 odds source is reachable.** Unofficial aggregators were found and rejected. | Every odds field left blank and flagged. No spread, total, win probability or edge is published |
+| — | **The Pages source cannot be changed to `/docs`.** `PUT /repos/kanlerxz87-cyber/NFL1/pages` returns 403 "Resource not accessible by integration"; the integration token lacks `pages:write`. Pages is pinned to `main` at `/`. | The 20 generated pages are published from the repository root instead, with `.nojekyll`. The build location is a single variable (`sitekit.SITE_OUT`, overridable via `NFL1_SITE_OUT`), so moving it to `docs/` later is a one-line change once a token with `pages:write` is available |
 
 ## Environment limitations recorded (so nobody re-tries them)
 
@@ -173,6 +178,8 @@ with the arithmetic that proves each one. **None of them blocks the merge.**
   team stats, player stats, play-by-play and **odds**. Repository *contents*
   are reachable via the API and were used for the teams mirror.
 - `nflverse/nflverse-pbp`'s default branch is `master`, not `main`.
+- **GitHub Pages settings cannot be modified** with the available token
+  (403 on `PUT /repos/{owner}/{repo}/pages`). `pages:write` is not granted.
 - Searching for injury reports returns **2025-season** pages; the live season is
   **2026**. Never blend them.
 

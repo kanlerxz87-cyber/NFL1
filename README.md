@@ -103,10 +103,16 @@ data/processed/    site_data.json — generated; the site's single input
 src/nfl/           16 stdlib-only modules (no third-party dependency)
 content/           prose written by hand, rendered by markdown_lite
 scripts/           build_site.py — 20 page builders, contains no numbers
-docs/              generated site, served by GitHub Pages
+*.html + .nojekyll generated site at the repository root, served by GitHub Pages
 tests/             102 unit tests including link + source-link enforcement
 COORDINATION.md    shared task board for parallel sessions
 ```
+
+The site is generated into the **repository root**, not a `docs/` folder, because
+this repository's Pages source is pinned to `main` at `/` and the API refuses to
+change it (the integration token lacks `pages:write`). `.nojekyll` is written so
+Pages serves the build verbatim instead of running it through Jekyll. Set
+`NFL1_SITE_OUT=/some/scratch/dir` to build somewhere else.
 
 `src/nfl` and `scripts/build_site.py` are deliberately **standard library
 only**, so the entire pipeline and site build run on any Python 3.11+ without
@@ -121,7 +127,7 @@ installing anything.
 PYTHONPATH=src python3 -m nfl.pipeline        # -> data/processed/site_data.json
 
 # 2. rebuild all 20 pages
-PYTHONPATH=src python3 scripts/build_site.py  # -> docs/
+PYTHONPATH=src python3 scripts/build_site.py  # -> *.html at the repo root
 
 # 3. run the verification harness and the full test suite
 PYTHONPATH=src python3 -c "from nfl import verify; import json; \
