@@ -61,6 +61,7 @@
 <a href="pages/props.html">Props</a>
 <a href="pages/questions.html">Questions</a>
 <a href="pages/review.html">Review</a>
+<a href="pages/sections.html">Sections</a>
 <a href="pages/standings.html">Standings</a>
 <a href="pages/strategies.html">Strategies</a>
 <a href="pages/suggestions.html">Suggestions</a>
@@ -76,17 +77,17 @@
   <div class="main">
     <div class="topbar">
       <div class="crumb">NFL1 / <b>Flagged for Review</b></div>
-      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">40 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">44 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
     </div>
     <main class="content" id="main">
       <div class="kicker">Assurance</div>
       <h1>Flagged for Review</h1>
       <p class="lede">Clearly labelled irregularities, official-page conflicts, unverified values and coordination issues — each with an official source link for manual review, none blocking the merge.</p>
       <div class="callout flag"><b>Flagged for Review.</b> These irregularities and unverified items do not block the merge or the live site. Each has an official source link for manual review and a suggested action. A status of <em>needs review</em> means exactly this: published here, not blocking.</div>
-<div class="cards"><div class="card"><div class="label">Flagged items</div><div class="value">40</div><div class="detail">All with source links</div></div><div class="card"><div class="label">Official-page irregularities</div><div class="value">7</div><div class="detail">F02–F08</div></div><div class="card"><div class="label">Missing official data</div><div class="value">5</div><div class="detail">F09–F11, F14, F15</div></div><div class="card"><div class="label">Combined-site review</div><div class="value">12</div><div class="detail">F25–F36</div></div></div>
+<div class="cards"><div class="card"><div class="label">Flagged items</div><div class="value">44</div><div class="detail">All with source links</div></div><div class="card"><div class="label">Official-page irregularities</div><div class="value">7</div><div class="detail">F02–F08</div></div><div class="card"><div class="label">Missing official data</div><div class="value">5</div><div class="detail">F09–F11, F14, F15</div></div><div class="card"><div class="label">Combined-site review</div><div class="value">16</div><div class="detail">F25–F36</div></div></div>
 <h2 id="all">All flagged irregularities</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-flags" aria-label="Filter tbl-flags" placeholder="Filter rows…">
-<span class="count" data-count-for="tbl-flags">40 rows shown</span></div>
+<span class="count" data-count-for="tbl-flags">44 rows shown</span></div>
 <div class="tablewrap"><table class="data-table" id="tbl-flags"><caption>Every flag with category, description, impact, status, official source link and suggested action for the reviewer.</caption>
 <thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Category</th><th scope="col" class="sortable">Irregularity / unverified item</th><th scope="col" class="sortable">Impact on decisions</th><th scope="col" class="sortable">Status</th><th scope="col" class="sortable">Suggested action</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
 <tr id="F01" data-verified="true">
@@ -406,12 +407,48 @@
 </tr>
 <tr id="F36" data-verified="true">
 <td><code>F36</code></td>
-<td data-value="1">Referee correction request — RESOLVED 2026-11-12</td>
-<td data-value="1" class="wide">The independent referee session (PR #11) reported that `pages/analysis.html` and `data/verified/model/correlations.json` counted 52 division games in Weeks 1-9 where official groupings give 42, and computed a corrected correlation of -0.1048 rather than -0.1297. Root cause confirmed by session `b6e68100`: the division map in `analysis/correlations.py` was keyed on the bare `division` name, so AFC East vs NFC East games (e.g. AZ @ LAC) were miscounted as division games.</td>
-<td data-value="1" class="wide">RESOLVED. The ten cross-conference false positives were removed by keying on (conference, division) together; all 32 club-division assignments were re-verified line by line against https://www.nfl.com/standings/division/2026/REG before recomputing. Recomputed C5 = -0.1048 (n=136, 95% CI [-0.268, +0.065], p=0.2245), which matches the referee&#x27;s independent value exactly. `data/verified/model/correlations.json` and `pages/analysis.html` now carry the corrected value.</td>
+<td data-value="1">Open referee correction request</td>
+<td data-value="1" class="wide">The independent referee session (PR #11) reports that `pages/analysis.html` and `data/verified/model/correlations.json` count 52 division games in Weeks 1-9 where official groupings give 42; it computes a corrected correlation of -0.1048 rather than -0.1297.</td>
+<td data-value="1" class="wide">A published correlation might be affected; this integration session does not edit another session&#x27;s files or recompute their model.</td>
 <td><span class="badge neutral">resolved</span></td>
-<td data-value="1" class="wide">Hand-off recorded in COORDINATION.md task A1: owning session `25aa7696` is inactive, so session `b6e68100` applied the fix the referee requested. Verification source: https://www.nfl.com/standings/division/2026/REG (division groupings read and compared for all 32 clubs on 2026-11-12).</td>
-<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+<td data-value="1" class="wide">Fixed by session 08e0ce01: analysis/correlations.py now keys the division flag on conference + division. Reproduced both numbers independently (word-only: 52 games, r=-0.1297; official groupings: 42 games, r=-0.1048) and verified all eight official groupings against https://www.nfl.com/standings/division/2026/REG (2026-11-12). correlations.json and pages/analysis.html regenerated; audit_numbers.py now gates C5 against the official groupings (47 recomputations, all reproduce).</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/division/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — official league standings page">S26 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="F37" data-verified="true">
+<td><code>F37</code></td>
+<td data-value="1">Site navigation</td>
+<td data-value="1" class="wide">The published landing page (index.html) linked only to pages/*: the root section pages (requirements.html, strategy-lab.html, leaderboard.html, bet-types.html, depth-chart.html, data-tables.html, verification.html, integration.html, deployment.html, executive-summary.html, questions.html, suggestions.html, injuries.html, flagged.html, legacy-site.html) and the referee/ and verified-lab/ sub-sites had no inbound link from the landing navigation, so a reader could not reach them by clicking. Found by crawling every href in index.html and pages/*.html,2026-11-12.</td>
+<td data-value="1" class="wide">Sections required by the brief - most visibly the full requirements inventory - were one click unreachable from the published landing page; check_site.py only enforces reachability inside index.html + pages/*, which is why the gate stayed green.</td>
+<td><span class="badge neutral">resolved</span></td>
+<td data-value="1" class="wide">Fixed by session 08e0ce01: added pages/sections.html, a categorized index of every published section (all four site generations plus both sub-sites), linked from the landing navigation. The flat header nav was left otherwise unchanged so no other session&#x27;s layout was disturbed.</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="F38" data-verified="true">
+<td><code>F38</code></td>
+<td data-value="1">Verification coverage</td>
+<td data-value="1" class="wide">CI job &#x27;Verify NFL1 site&#x27; runs tools/build.py, which regenerates index.html from a different template (site/templates/base.html, sidebar layout) than the published landing page (pipeline/gen_site.py, header layout), and tools/verify.py then audits the regenerated substitute. The committed landing page is therefore never the page that tools/verify.py checks; it is covered only by scripts/verified/check_site.py and audit_numbers.py.</td>
+<td data-value="1" class="wide">A defect unique to the published landing page could pass the tools/verify.py gate. Found by diffing a local CI run against the committed tree, 2026-11-12.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Logged, not changed: making CI verify the published generation touches shared workflows and two generators&#x27; ownership. Published as suggestion S23 for a reviewer to choose a path.</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F39" data-verified="true">
+<td><code>F39</code></td>
+<td data-value="1">Generated artifacts</td>
+<td data-value="1" class="wide">Committed generated artifacts lagged their generators: data/combined_verification.json recorded 1,064 audited links where the current audit checks 1,159; the root sidebar pages were missing two navigation entries; index.html still showed &#x27;Data built 05:07&#x27; after the data bot committed a refresh at 18:53 that changed the official injury report from 254 rows / 103 starters flagged / 4 clubs without a report to 276 rows / 113 starters flagged / 2 clubs (BAL, LAC).</td>
+<td data-value="1" class="wide">The published site understated the current official injury report. Verified against the live page on 2026-11-12: Week 10 tables match row-for-row on spot checks, CIN and SEA now publish reports, and the Monday LAC/BAL game reads &#x27;No Injuries Reported&#x27; for both clubs.</td>
+<td><span class="badge neutral">resolved</span></td>
+<td data-value="1" class="wide">Regenerated by session 08e0ce01 (verify_combined -&gt; build -&gt; gen_site -&gt; build_site -&gt; normalize_nav) so committed pages match current data; suggestion S24 proposes a commit-back or staleness gate so this cannot recur.</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="F40" data-verified="true">
+<td><code>F40</code></td>
+<td data-value="1">CI coverage</td>
+<td data-value="1" class="wide">Data-bot commits carry [skip ci], so verify.yml and pages.yml never run on them: check-runs on bot commit c09c739 are only report-build-status, deploy and build (Pages). Refreshed data therefore reaches main without the verification gates until the next human push.</td>
+<td data-value="1" class="wide">The 18:53 refresh that changed the official injury report (254 -&gt; 276 rows) landed ungated; the published pages only caught up when this session regenerated them (flag F39).</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Logged for review: the skip also prevents the bot looping on its own commits, so the fix needs a chosen mechanism (gated refresh). Published as pipeline suggestion S13 and root suggestion S24; this session did not change the workflow unilaterally.</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
 </tr>
 <tr id="A-F01" data-verified="true">
 <td><code>A-F01</code></td>

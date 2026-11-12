@@ -1395,6 +1395,10 @@ def sections_page(dash):
          "Independent official-source audit and replication of published numbers"],
         ["Independent sub-sites", link("verified-lab/index.html", "Verified Lab"),
          "Hand transcription of nfl.com with a 34-check harness and 103 tests"],
+        ["Independent sub-sites", link("dashboard/index.html", "Dashboard (session 6a232e79)"),
+         "Live re-verified dashboard: depth charts, injuries, lines, questions, flagged, sources"],
+        ["Independent sub-sites", link("lab/index.html", "Decision lab (session 1505ac8e)"),
+         "Consolidated decision lab: live-verified data, own lines, ten-gate strategy lab, depth charts"],
         ["Companion register", link("docs/index.html", "Register (session 87deb7ab)"),
          "Independently built requirements, questions, suggestions and strategy registers"],
         ["Historical", link("legacy-site.html", "Earlier dashboard"),
@@ -1404,9 +1408,10 @@ def sections_page(dash):
 <section class="panel">
   <h2>All published sections</h2>
   <p>Every page and sub-site this repository publishes, grouped by category, so any
-  finding can be reached in one click from the landing navigation. Four generations
-  are published side by side; nothing is hidden or merged silently. Which one is
-  authoritative is open question Q21 on the Questions page.</p>
+  finding can be reached in one click from the landing navigation. Six generations
+  are published side by side (root dashboard, root section pages, docs/, dashboard/,
+  lab/, plus the referee and verified-lab sub-sites); nothing is hidden or merged
+  silently. Which one is authoritative is open question Q21 on the Questions page.</p>
   {table(["Category", "Section", "What it contains"], rows,
          note=f"{len(rows)} sections. Every link resolves locally; flags F37 to F39 record why "
               f"this page was added and what still needs a reviewer decision.")}

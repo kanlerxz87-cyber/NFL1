@@ -85,12 +85,12 @@ A crawl of every `href` in `index.html` and `pages/*.html` found **zero** inboun
 `requirements.html`, `strategy-lab.html`, `leaderboard.html`, `bet-types.html`,
 `depth-chart.html`, `data-tables.html`, `verification.html`, `integration.html`,
 `deployment.html`, `executive-summary.html`, `questions.html`, `suggestions.html`,
-`injuries.html`, `flagged.html`, `legacy-site.html`, to `referee/`, or to `verified-lab/` —
-including the full requirements inventory the brief asks for. `check_site.py` stayed green
-because its reachability rule covers only `index.html` + `pages/*`.
+`injuries.html`, `flagged.html`, `legacy-site.html`, to `referee/`, `verified-lab/`,
+`dashboard/` or `lab/` — including the full requirements inventory the brief asks for.
+`check_site.py` stayed green because its reachability rule covers only `index.html` + `pages/*`.
 
-**Fixed:** new `pages/sections.html` publishes a categorized index of all 38 published sections
-(four generations plus both sub-sites), linked from the landing navigation through both nav
+**Fixed:** new `pages/sections.html` publishes a categorized index of all 40 published sections
+(six generations plus both sub-sites), linked from the landing navigation through both nav
 authorities (`pipeline/gen_site.py` NAV and `scripts/verified/normalize_nav.py` CANON). The flat
 header nav was not otherwise disturbed. Flag F37 / suggestion S21.
 
