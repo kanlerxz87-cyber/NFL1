@@ -46,10 +46,19 @@ class TestSiteBuilds(unittest.TestCase):
         declared = {s for s, _, _ in ALL_PAGES}
         self.assertEqual(on_disk - declared, set())
 
-    def test_nojekyll_present(self):
-        self.assertTrue((DOCS / ".nojekyll").exists(),
-                        ".nojekyll is required so Pages serves the build verbatim "
-                        "instead of running it through Jekyll")
+    def test_pages_can_serve_this_build(self):
+        # Pages builds from the repository root with Jekyll disabled, which
+        # covers every subdirectory including this one.
+        self.assertTrue((ROOT / ".nojekyll").exists(),
+                        "a root .nojekyll is required so Pages serves the tree verbatim")
+
+    def test_subsite_does_not_collide_with_the_published_root_site(self):
+        # The root of this repository is another session's live site. This build
+        # must not overwrite it, so it lives in its own directory.
+        self.assertNotEqual(DOCS, ROOT,
+                            "this build would overwrite the root site published by "
+                            "earlier sessions")
+        self.assertEqual(DOCS.name, "verified-lab")
 
     def test_pages_are_well_formed(self):
         for slug, _, _ in ALL_PAGES:

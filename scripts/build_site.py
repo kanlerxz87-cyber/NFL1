@@ -839,7 +839,10 @@ BUILDERS = {
 
 def main() -> int:
     OUT.mkdir(parents=True, exist_ok=True)
-    (OUT / ".nojekyll").write_text("", encoding="utf-8")
+    # .nojekyll only matters when Pages builds from this directory; the root of
+    # the repository already carries one.
+    if OUT == ROOT:
+        (OUT / ".nojekyll").write_text("", encoding="utf-8")
     generated = f'Retrieved {DATA["meta"]["source_retrieved_at_utc"]}.'
     missing = [s for s, _, _ in ALL_PAGES if s not in BUILDERS]
     if missing:

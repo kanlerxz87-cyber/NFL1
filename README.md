@@ -1,148 +1,148 @@
-# NFL1
+# NFL Decision Lab
 
-A verified-data-first research system for the NFL: it collects official league
-data, checks it line by line, computes only what the data supports, and refuses
-to publish anything it cannot source.
+An evidence-first NFL decision support site: it originates its own lines from opponent-adjusted
+play-by-play, scores betting strategies against the closing line under eight validation gates,
+tracks starter availability against the weekly depth chart, and publishes every table with a
+source link and every gap as a flag.
 
-**Live dashboard → https://kanlerxz87-cyber.github.io/NFL1/**
+Live site: <https://kanlerxz87-cyber.github.io/NFL1/>
 
-> **Nothing on this site is a betting recommendation.** No value has been
-> estimated, interpolated or filled in to make a table look complete. Where an
-> official source could not confirm a number, the cell is blank and the item is
-> listed on the [Flagged for Review](https://kanlerxz87-cyber.github.io/NFL1/flagged.html)
-> page together with the source that would resolve it.
-
----
-
-## Start here
+## What the site contains
 
 | Page | What it answers |
 |---|---|
-| [Dashboard](https://kanlerxz87-cyber.github.io/NFL1/) | Current state of the league and of the system, in one view |
-| [Executive Summary](https://kanlerxz87-cyber.github.io/NFL1/executive-summary.html) | What is verified, what was found, what is missing |
-| [Open Questions](https://kanlerxz87-cyber.github.io/NFL1/open-questions.html) | 22 questions that must be answered **before** any decision |
-| [Suggestions Board](https://kanlerxz87-cyber.github.io/NFL1/suggestions.html) | 22 proposed improvements, each awaiting review — **none implemented** |
-| [Flagged for Review](https://kanlerxz87-cyber.github.io/NFL1/flagged.html) | Every irregularity, blank and blocked value, with its source link |
-| [Verification Report](https://kanlerxz87-cyber.github.io/NFL1/verification.html) | All 34 automated checks and their outcomes |
-| [Source Register](https://kanlerxz87-cyber.github.io/NFL1/sources.html) | Every source, its tier, and exactly what it was used for |
+| Overview | Season state, this week's own lines, top of the leaderboard, availability pressure, verification summary |
+| My Lines | Ratings, own spread/total/win probability with error bands, out-of-sample accuracy, model-vs-market blend test |
+| Strategy Lab | Leaderboard with gate matrix, correlation between strategies, parlay maths, reward scoring |
+| Injuries & Depth | Official game status joined to depth-chart rank, next man up, experience and snaps |
+| Props | Shrunk usage projections with intervals; market columns deliberately blank |
+| Questions | Twenty decision-gating questions: known, unknown, how to discover, what it blocks |
+| Suggestions | Twelve ranked improvements, five decision records, review process |
+| Evidence | Provenance (URL + sha256 per file) and line-by-line verification against nfl.com |
+| Flagged for Review | Every irregularity, unverified value and blocked decision |
+| Executive Summary | What was built, what the evidence says, what is unresolved, decisions requested |
 
-Data pages: [Standings 2026](https://kanlerxz87-cyber.github.io/NFL1/data-standings.html) ·
-[Week 10 Schedule](https://kanlerxz87-cyber.github.io/NFL1/data-schedule.html) ·
-[Injury Report](https://kanlerxz87-cyber.github.io/NFL1/data-injuries.html) ·
-[Official News](https://kanlerxz87-cyber.github.io/NFL1/data-news.html)
+## How the data gets here
 
-Analysis pages: [Team Ratings](https://kanlerxz87-cyber.github.io/NFL1/analysis-ratings.html) ·
-[Luck Table](https://kanlerxz87-cyber.github.io/NFL1/analysis-luck.html) ·
-[Correlations](https://kanlerxz87-cyber.github.io/NFL1/analysis-correlation.html) ·
-[Availability & Depth](https://kanlerxz87-cyber.github.io/NFL1/availability-depth.html)
-
-Line origination: [Week 10 Board](https://kanlerxz87-cyber.github.io/NFL1/lines-week10.html) ·
-[Methodology](https://kanlerxz87-cyber.github.io/NFL1/methodology.html)
-
-Strategies: [Leaderboard](https://kanlerxz87-cyber.github.io/NFL1/strategies-leaderboard.html) ·
-[Catalogue](https://kanlerxz87-cyber.github.io/NFL1/strategies-catalogue.html) ·
-[Validation Gates](https://kanlerxz87-cyber.github.io/NFL1/strategies-gates.html)
-
----
-
-## The headline result
-
-**Zero non-mechanical findings survive multiple-testing control.**
-
-38 correlation tests were run across 21 signals with Benjamini–Hochberg
-false-discovery-rate control at α = 0.10. At p < 0.05 alone, **1.9 false
-positives would be expected purely by chance**. Nine tests survive — and all
-nine are definitional (win percentage against other expressions of the same game
-outcomes). Every availability and injury signal that looks interesting is, so
-far, indistinguishable from a tautology or from noise.
-
-Consequently: **13 strategies are catalogued, 0 are APPROVED, 13 are
-NOT_STAKEABLE**, and the leaderboard shows **0 scored / 13 withheld**. Scores
-are withheld rather than zeroed, so "not yet measured" can never be confused
-with "measured and worthless".
-
-Two datasets are missing and neither can be invented: **closing market lines**
-(no licensed odds provider is reachable) and **official depth charts** (NFL.com
-publishes none; Sportradar's sanctioned feed is credential-gated).
-
----
-
-## Publication rules
-
-These are enforced by the test suite, not by convention.
-
-1. **Every table row carries a source link** to an official site.
-   `tests/test_site.py` fails the build if any row of any table declaring a
-   `Source` column lacks a link to an official host.
-2. **Unconfirmable values stay blank.** Rendered as an explicit em-dash marker
-   with a tooltip, never as `0` and never as a guess.
-3. **Nothing is inferred.** A blank `Injuries` cell stays blank even when the
-   player's practice status implies something.
-4. **Disputed official cells are published verbatim** and excluded from all
-   derived maths, with the arithmetic proof of the inconsistency shown.
-5. **No broken links.** The build fails if any internal link, page anchor or
-   navigation entry does not resolve.
-6. **Every value carries a provenance tier** — `VERIFIED`, `DERIVED`,
-   `MODELED` or `UNAVAILABLE` — and each tier is defined where it appears.
-
----
-
-## Repository layout
+The Arena sandbox can only reach a small host allow-list, so bulk downloads and the nfl.com
+injury scrape run in GitHub Actions:
 
 ```
-data/verified/     transcribed corpus, all from official nfl.com pages
-  standings_2026_reg.tsv          32 teams × 19 fields
-  injury_report_2026_week10.tsv   254 entries
-  schedule_2026_week10.tsv        14 games
-  bye_week10.tsv                  CHI, DEN, PHI, TB
-  team_report_status_week10.tsv   32 teams
-  nfl_news_2026_week10.tsv        8 headlines + URLs
-  sources.json                    11 sources with tier + used_for
-data/reference/    teams.csv — community mirror, labels/colours only
-data/processed/    site_data.json — generated; the site's single input
-src/nfl/           16 stdlib-only modules (no third-party dependency)
-content/           prose written by hand, rendered by markdown_lite
-scripts/           build_site.py — 20 page builders, contains no numbers
-*.html + .nojekyll generated site at the repository root, served by GitHub Pages
-tests/             102 unit tests including link + source-link enforcement
-COORDINATION.md    shared task board for parallel sessions
+.github/workflows/collect-data.yml
+  1. pipeline/collect.py          download nflverse release files, pin URL + sha256
+  2. pipeline/scrape_injuries.py  scrape the official nfl.com injury report (current week)
+  3. pipeline/schema.py           probe real column names (nothing is guessed)
+  4. pipeline/build_all.py        ratings, own lines, strategies, availability, props, verification
+  5. commit data/model/*.json     back to the branch
 ```
 
-The site is generated into the **repository root**, not a `docs/` folder, because
-this repository's Pages source is pinned to `main` at `/` and the API refuses to
-change it (the integration token lacks `pages:write`). `.nojekyll` is written so
-Pages serves the build verbatim instead of running it through Jekyll. Set
-`NFL1_SITE_OUT=/some/scratch/dir` to build somewhere else.
+Render the site locally (after data exists):
 
-`src/nfl` and `scripts/build_site.py` are deliberately **standard library
-only**, so the entire pipeline and site build run on any Python 3.11+ without
-installing anything.
+```
+python3 pipeline/gen_site.py      # writes index.html and pages/*.html
+```
+
+Everything on the site is static HTML generated from `data/model/*.json` plus
+`pipeline/content.py` (questions, suggestions, decision records).
+
+## Files
+
+- `pipeline/` — collector, official injury scraper, schema probe, models, verification, renderer.
+- `data/model/` — generated JSON: ratings and lines, strategy leaderboard, availability, props,
+  provenance, verification, snapshot, dashboard.
+- `data/verified/` — the only hand-entered values: nfl.com standings (32 rows) and an injury
+  report sample (44 rows), used to verify the automated feeds.
+- `data/*.csv` — independent transcriptions from a parallel session, kept and cross-checked.
+- `pages/` — generated site pages plus companion pages from that session.
+- `COORDINATION.md` — shared multi-session task board and integration log.
+- `src/nfl/`, `tests/`, `content/`, `verified-lab/` — the independent
+  verification subsystem added by session `a2cea255`; see below.
+
+## Honesty rules used in this repository
+
+- No value is inferred, interpolated or filled in. Unknown values render as a labelled blank.
+- Every strategy rule is fixed before evaluation, the number of rules tested is published, and
+  p-values are corrected for multiple testing.
+- Ratings never use information from the game being predicted (walk-forward only).
+- Anything that cannot be verified against an official source is published on the
+  **Flagged for Review** page with an explanation of what would settle it.
+
+## Sources and licences
+
+- Data: [nflverse](https://github.com/nflverse/nflverse-data), licence verified CC-BY-4.0
+  (attribution required, shown in the site footer).
+- Official entry points cited throughout: nfl.com standings, injury report, schedules, player
+  stats and club directory.
+- No official league odds exist. Closing lines in the mirrored feed are consensus numbers and are
+  labelled as such.
+
+This is a research tool, not betting advice.
 
 ---
 
-## Reproduce
+## The independent verification subsystem (`verified-lab/`)
+
+Session `a2cea255-nfl1` built a second, deliberately independent implementation of the same
+brief: a transcription of the official nfl.com pages done by hand rather than scraped, a
+verification harness, a provenance-and-gates engine, and a 20-page dashboard.
+
+**Sub-site: <https://kanlerxz87-cyber.github.io/NFL1/verified-lab/>**
+
+It is published in its own directory rather than at the repository root because the root is
+this lab's live site, and overwriting `index.html`, `executive-summary.html`, `flagged.html`,
+`suggestions.html` or `verification.html` would have destroyed merged work. Its CI footprint
+is nil: `scripts/verified/check_site.py` scans only `index.html` and `pages/`.
+
+| Path | What it is |
+|---|---|
+| `src/nfl/` | 16 **standard-library-only** modules — no third-party dependency at all |
+| `data/verified/*.tsv` | Hand transcription of nfl.com: 32 standings rows, 254 injury entries, 14 Week 10 games, byes, report status, 8 news items |
+| `data/processed/site_data.json` | Generated artifact; the sub-site's single input |
+| `content/*.md` | Hand-written prose: executive summary, 22 open questions, 22 suggestions with blank Decision columns, methodology |
+| `scripts/build_site.py` | 20 page builders. **Contains no numbers** — every value comes from the JSON artifact |
+| `tests/` | 103 unit tests, including a link checker and a per-row source-link enforcer |
+
+### What it adds that the main pipeline does not
+
+- **A 34-check verification harness** (`src/nfl/verify.py`) run over hand-transcribed cells:
+  **29 PASS, 5 FLAG, 0 FAIL**. It recomputes the tie-aware `PCT = (W + 0.5·T)/(W+L+T)` with
+  half-up `Decimal` rounding, checks league-wide balance, slate integrity, injury vocabulary,
+  and — its strongest check — that all 28 records printed beside club logos on the official
+  injury page agree exactly with the official standings page.
+- **Three official cells that contradict themselves**, found by that harness and never
+  silently corrected: WAS `non_conf` (2-5-1 is 8 games, CONF 3-2-1 is 6, so NON-CONF must be
+  2 games but the page prints `1-3-1`), IND `div` (`1-3-0` ⇒ 0.250, page prints 0.333), and
+  PHI `div` (`1-4-0` ⇒ 0.200, page prints 0.250). Published verbatim, excluded from derived
+  maths, flagged with the arithmetic proof.
+- **A provenance tier on every value** — `VERIFIED`, `DERIVED`, `MODELED`, `UNAVAILABLE` — and
+  a refusal path: when a required input is `None` the dependent output is `None` plus a named
+  blocking input, never a plausible-looking number.
+- **Nine validation gates proven bidirectional.** The harness *approves* a well-formed
+  strategy and *rejects* lookahead, an edge inside the noise, a confidence interval spanning
+  zero, and profit concentrated in one fold. A gate that only ever says no is not evidence.
+- **Two publication rules enforced by tests rather than by convention**: every `href` in all
+  20 pages must resolve, and every row of every table declaring a `Source` column must carry a
+  link to an official host. Both caught real defects during development.
+
+### Where the two systems disagree, and why that matters
+
+This subsystem reports **no spread, no total, no win probability and no edge**, and concludes
+that **zero non-mechanical findings survive** its correlation screen (38 tests, BH-FDR at
+α = 0.10; 9 survive and all 9 are definitional; 1.9 false positives expected at p < 0.05 by
+chance alone). That is not a contradiction of the main pipeline — it is a consequence of
+running inside the Arena sandbox, where GitHub **release assets cannot be downloaded** (302 to
+`release-assets.githubusercontent.com`, then exit 35 / 0 bytes), so the nflverse closing lines,
+depth charts and play-by-play that `pipeline/collect.py` fetches **in GitHub Actions** were
+never obtainable here. Blanks were left blank rather than filled from an unofficial
+aggregator. The main lab, running in CI, has that data and this subsystem does not.
+
+Read the two together: the lab for what the data supports, `verified-lab/` for an
+independent audit of the official pages themselves.
+
+Reproduce the subsystem with no dependencies installed:
 
 ```bash
-# 1. recompute every derived value from the transcribed corpus
 PYTHONPATH=src python3 -m nfl.pipeline        # -> data/processed/site_data.json
-
-# 2. rebuild all 20 pages
-PYTHONPATH=src python3 scripts/build_site.py  # -> *.html at the repo root
-
-# 3. run the verification harness and the full test suite
-PYTHONPATH=src python3 -c "from nfl import verify; import json; \
-r = verify.run(); print(r['total'], r['PASS'], r['FLAG'], r['FAIL'])"
+PYTHONPATH=src python3 scripts/build_site.py  # -> verified-lab/
 PYTHONPATH=src python3 -m unittest discover -s tests -v
 ```
-
-The pipeline is deterministic — every random routine is seeded
-(`20261112`), so two runs produce byte-identical output.
-
----
-
-## Working in this repository
-
-Read [`COORDINATION.md`](COORDINATION.md) before editing anything. It is the
-shared task board: claim a task and its file scope, commit the claim
-immediately, never start work another session has claimed, and route
-cross-file needs through a logged request rather than an edit.

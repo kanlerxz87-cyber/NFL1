@@ -1,0 +1,1414 @@
+{
+ "generated_by": "referee/analysis/replicate_25aa7696.py",
+ "owner_session": "25aa7696",
+ "ref": "origin/main",
+ "commit": "4904617614a1391f3fb492990877704c3f694c7d",
+ "c5_root_cause": {
+  "published_division_games": 52,
+  "official_grouping_division_games": 42,
+  "dataset_flag_division_games": 42,
+  "games_counted_when_only_the_division_word_is_compared": 52,
+  "r_using_official_grouping": -0.1048,
+  "r_using_division_word_only": -0.1297,
+  "cross_conference_games_counted_as_division_games": [
+   "Week 1: ARI (NFC West) at LAC (AFC West)",
+   "Week 3: LA (NFC West) at DEN (AFC West)",
+   "Week 4: DEN (AFC West) at SF (NFC West)",
+   "Week 4: LAC (AFC West) at SEA (NFC West)",
+   "Week 6: SEA (NFC West) at DEN (AFC West)",
+   "Week 7: DEN (AFC West) at ARI (NFC West)",
+   "Week 7: KC (AFC West) at SEA (NFC West)",
+   "Week 7: LA (NFC West) at LV (AFC West)",
+   "Week 8: LAC (AFC West) at LA (NFC West)",
+   "Week 9: LV (AFC West) at SF (NFC West)"
+  ],
+  "cause": "Their standings file stores the division as East/North/South/West without the conference, and analysis/correlations.py line 162-163 compares only that word, so an AFC East club playing an NFC East club is counted as a division game.",
+  "official_source": "https://www.nfl.com/standings/division/2026/REG"
+ },
+ "official_spot_check": {
+  "rows": [
+   {
+    "game": "Week 1: NE at SEA",
+    "official": "10-13",
+    "dataset": "10-13",
+    "result": "match",
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-1"
+   },
+   {
+    "game": "Week 1: SF at LA",
+    "official": "27-7",
+    "dataset": "27-7",
+    "result": "match",
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-1"
+   },
+   {
+    "game": "Week 1: CHI at CAR",
+    "official": "59-37",
+    "dataset": "59-37",
+    "result": "match",
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-1"
+   },
+   {
+    "game": "Week 1: TB at CIN",
+    "official": "27-33",
+    "dataset": "27-33",
+    "result": "match",
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-1"
+   },
+   {
+    "game": "Week 1: NO at DET",
+    "official": "30-31",
+    "dataset": "30-31",
+    "result": "match",
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-1"
+   },
+   {
+    "game": "Week 1: BUF at HOU",
+    "official": "36-31",
+    "dataset": "36-31",
+    "result": "match",
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-1"
+   },
+   {
+    "game": "Week 1: BAL at IND",
+    "official": "41-23",
+    "dataset": "41-23",
+    "result": "match",
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-1"
+   },
+   {
+    "game": "Week 1: CLE at JAX",
+    "official": "10-34",
+    "dataset": "10-34",
+    "result": "match",
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-1"
+   },
+   {
+    "game": "Week 1: ATL at PIT",
+    "official": "13-20",
+    "dataset": "13-20",
+    "result": "match",
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-1"
+   },
+   {
+    "game": "Week 1: NYJ at TEN",
+    "official": "23-10",
+    "dataset": "23-10",
+    "result": "match",
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-1"
+   },
+   {
+    "game": "Week 1: ARI at LAC",
+    "official": "26-14",
+    "dataset": "26-14",
+    "result": "match",
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-1"
+   },
+   {
+    "game": "Week 1: MIA at LV",
+    "official": "13-27",
+    "dataset": "13-27",
+    "result": "match",
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-1"
+   }
+  ],
+  "matching": 12
+ },
+ "game_level": {
+  "their_games": 136,
+  "dataset_games": 136,
+  "matching": 136,
+  "dataset_games_missing_from_their_file": [],
+  "rows": [
+   {
+    "game": "Week 1: NE at SEA",
+    "date": "2026-09-09",
+    "transcribed": "10-13",
+    "dataset": "10-13",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-1"
+   },
+   {
+    "game": "Week 1: SF at LA",
+    "date": "2026-09-10",
+    "transcribed": "27-7",
+    "dataset": "27-7",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-1"
+   },
+   {
+    "game": "Week 1: CHI at CAR",
+    "date": "2026-09-13",
+    "transcribed": "59-37",
+    "dataset": "59-37",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-1"
+   },
+   {
+    "game": "Week 1: TB at CIN",
+    "date": "2026-09-13",
+    "transcribed": "27-33",
+    "dataset": "27-33",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-1"
+   },
+   {
+    "game": "Week 1: NO at DET",
+    "date": "2026-09-13",
+    "transcribed": "30-31",
+    "dataset": "30-31",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-1"
+   },
+   {
+    "game": "Week 1: BUF at HOU",
+    "date": "2026-09-13",
+    "transcribed": "36-31",
+    "dataset": "36-31",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-1"
+   },
+   {
+    "game": "Week 1: BAL at IND",
+    "date": "2026-09-13",
+    "transcribed": "41-23",
+    "dataset": "41-23",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-1"
+   },
+   {
+    "game": "Week 1: CLE at JAX",
+    "date": "2026-09-13",
+    "transcribed": "10-34",
+    "dataset": "10-34",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-1"
+   },
+   {
+    "game": "Week 1: ATL at PIT",
+    "date": "2026-09-13",
+    "transcribed": "13-20",
+    "dataset": "13-20",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-1"
+   },
+   {
+    "game": "Week 1: NYJ at TEN",
+    "date": "2026-09-13",
+    "transcribed": "23-10",
+    "dataset": "23-10",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-1"
+   },
+   {
+    "game": "Week 1: ARI at LAC",
+    "date": "2026-09-13",
+    "transcribed": "26-14",
+    "dataset": "26-14",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-1"
+   },
+   {
+    "game": "Week 1: MIA at LV",
+    "date": "2026-09-13",
+    "transcribed": "13-27",
+    "dataset": "13-27",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-1"
+   },
+   {
+    "game": "Week 2: DET at BUF",
+    "date": "2026-09-17",
+    "transcribed": "31-41",
+    "dataset": "31-41",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-2"
+   },
+   {
+    "game": "Week 2: CAR at ATL",
+    "date": "2026-09-20",
+    "transcribed": "34-3",
+    "dataset": "34-3",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-2"
+   },
+   {
+    "game": "Week 2: NO at BAL",
+    "date": "2026-09-20",
+    "transcribed": "24-17",
+    "dataset": "24-17",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-2"
+   },
+   {
+    "game": "Week 2: MIN at CHI",
+    "date": "2026-09-20",
+    "transcribed": "9-3",
+    "dataset": "9-3",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-2"
+   },
+   {
+    "game": "Week 2: CIN at HOU",
+    "date": "2026-09-20",
+    "transcribed": "20-6",
+    "dataset": "20-6",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-2"
+   },
+   {
+    "game": "Week 2: PIT at NE",
+    "date": "2026-09-20",
+    "transcribed": "3-20",
+    "dataset": "3-20",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-2"
+   },
+   {
+    "game": "Week 2: GB at NYJ",
+    "date": "2026-09-20",
+    "transcribed": "20-17",
+    "dataset": "20-17",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-2"
+   },
+   {
+    "game": "Week 2: CLE at TB",
+    "date": "2026-09-20",
+    "transcribed": "23-19",
+    "dataset": "23-19",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-2"
+   },
+   {
+    "game": "Week 2: PHI at TEN",
+    "date": "2026-09-20",
+    "transcribed": "24-20",
+    "dataset": "24-20",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-2"
+   },
+   {
+    "game": "Week 2: JAX at DEN",
+    "date": "2026-09-20",
+    "transcribed": "13-20",
+    "dataset": "13-20",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-2"
+   },
+   {
+    "game": "Week 2: LV at LAC",
+    "date": "2026-09-20",
+    "transcribed": "26-14",
+    "dataset": "26-14",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-2"
+   },
+   {
+    "game": "Week 2: SEA at ARI",
+    "date": "2026-09-20",
+    "transcribed": "31-7",
+    "dataset": "31-7",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-2"
+   },
+   {
+    "game": "Week 1: GB at MIN",
+    "date": "2026-09-13",
+    "transcribed": "22-39",
+    "dataset": "22-39",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-1"
+   },
+   {
+    "game": "Week 1: WAS at PHI",
+    "date": "2026-09-13",
+    "transcribed": "22-24",
+    "dataset": "22-24",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-1"
+   },
+   {
+    "game": "Week 1: DAL at NYG",
+    "date": "2026-09-13",
+    "transcribed": "20-28",
+    "dataset": "20-28",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-1"
+   },
+   {
+    "game": "Week 1: DEN at KC",
+    "date": "2026-09-14",
+    "transcribed": "10-31",
+    "dataset": "10-31",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-1"
+   },
+   {
+    "game": "Week 3: ATL at GB",
+    "date": "2026-09-24",
+    "transcribed": "35-14",
+    "dataset": "35-14",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-3"
+   },
+   {
+    "game": "Week 3: LAC at BUF",
+    "date": "2026-09-27",
+    "transcribed": "16-24",
+    "dataset": "16-24",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-3"
+   },
+   {
+    "game": "Week 3: CAR at CLE",
+    "date": "2026-09-27",
+    "transcribed": "18-21",
+    "dataset": "18-21",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-3"
+   },
+   {
+    "game": "Week 3: NYJ at DET",
+    "date": "2026-09-27",
+    "transcribed": "24-31",
+    "dataset": "24-31",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-3"
+   },
+   {
+    "game": "Week 3: HOU at IND",
+    "date": "2026-09-27",
+    "transcribed": "17-19",
+    "dataset": "17-19",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-3"
+   },
+   {
+    "game": "Week 3: NE at JAX",
+    "date": "2026-09-27",
+    "transcribed": "6-35",
+    "dataset": "6-35",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-3"
+   },
+   {
+    "game": "Week 3: KC at MIA",
+    "date": "2026-09-27",
+    "transcribed": "24-10",
+    "dataset": "24-10",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-3"
+   },
+   {
+    "game": "Week 3: TEN at NYG",
+    "date": "2026-09-27",
+    "transcribed": "7-12",
+    "dataset": "7-12",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-3"
+   },
+   {
+    "game": "Week 3: CIN at PIT",
+    "date": "2026-09-27",
+    "transcribed": "27-30",
+    "dataset": "27-30",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-3"
+   },
+   {
+    "game": "Week 3: SEA at WAS",
+    "date": "2026-09-27",
+    "transcribed": "31-33",
+    "dataset": "31-33",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-3"
+   },
+   {
+    "game": "Week 3: ARI at SF",
+    "date": "2026-09-27",
+    "transcribed": "30-36",
+    "dataset": "30-36",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-3"
+   },
+   {
+    "game": "Week 3: MIN at TB",
+    "date": "2026-09-27",
+    "transcribed": "23-16",
+    "dataset": "23-16",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-3"
+   },
+   {
+    "game": "Week 3: LV at NO",
+    "date": "2026-09-27",
+    "transcribed": "35-27",
+    "dataset": "35-27",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-3"
+   },
+   {
+    "game": "Week 3: BAL at DAL",
+    "date": "2026-09-27",
+    "transcribed": "34-31",
+    "dataset": "34-31",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-3"
+   },
+   {
+    "game": "Week 3: LA at DEN",
+    "date": "2026-09-27",
+    "transcribed": "26-30",
+    "dataset": "26-30",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-3"
+   },
+   {
+    "game": "Week 3: PHI at CHI",
+    "date": "2026-09-28",
+    "transcribed": "7-27",
+    "dataset": "7-27",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-3"
+   },
+   {
+    "game": "Week 4: PIT at CLE",
+    "date": "2026-10-01",
+    "transcribed": "24-27",
+    "dataset": "24-27",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-4"
+   },
+   {
+    "game": "Week 4: IND at WAS",
+    "date": "2026-10-04",
+    "transcribed": "30-13",
+    "dataset": "30-13",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-4"
+   },
+   {
+    "game": "Week 4: TEN at BAL",
+    "date": "2026-10-04",
+    "transcribed": "18-24",
+    "dataset": "18-24",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-4"
+   },
+   {
+    "game": "Week 4: NE at BUF",
+    "date": "2026-10-04",
+    "transcribed": "29-26",
+    "dataset": "29-26",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-4"
+   },
+   {
+    "game": "Week 4: NYJ at CHI",
+    "date": "2026-10-04",
+    "transcribed": "12-23",
+    "dataset": "12-23",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-4"
+   },
+   {
+    "game": "Week 4: JAX at CIN",
+    "date": "2026-10-04",
+    "transcribed": "22-17",
+    "dataset": "22-17",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-4"
+   },
+   {
+    "game": "Week 4: DAL at HOU",
+    "date": "2026-10-04",
+    "transcribed": "34-30",
+    "dataset": "34-30",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-4"
+   },
+   {
+    "game": "Week 4: ARI at NYG",
+    "date": "2026-10-04",
+    "transcribed": "24-36",
+    "dataset": "24-36",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-4"
+   },
+   {
+    "game": "Week 4: LA at PHI",
+    "date": "2026-10-04",
+    "transcribed": "24-20",
+    "dataset": "24-20",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-4"
+   },
+   {
+    "game": "Week 4: GB at TB",
+    "date": "2026-10-04",
+    "transcribed": "17-14",
+    "dataset": "17-14",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-4"
+   },
+   {
+    "game": "Week 4: MIA at MIN",
+    "date": "2026-10-04",
+    "transcribed": "10-15",
+    "dataset": "10-15",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-4"
+   },
+   {
+    "game": "Week 4: KC at LV",
+    "date": "2026-10-04",
+    "transcribed": "30-27",
+    "dataset": "30-27",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-4"
+   },
+   {
+    "game": "Week 4: LAC at SEA",
+    "date": "2026-10-04",
+    "transcribed": "23-30",
+    "dataset": "23-30",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-4"
+   },
+   {
+    "game": "Week 4: DEN at SF",
+    "date": "2026-10-04",
+    "transcribed": "14-24",
+    "dataset": "14-24",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-4"
+   },
+   {
+    "game": "Week 4: DET at CAR",
+    "date": "2026-10-04",
+    "transcribed": "26-32",
+    "dataset": "26-32",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-4"
+   },
+   {
+    "game": "Week 4: ATL at NO",
+    "date": "2026-10-05",
+    "transcribed": "45-24",
+    "dataset": "45-24",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-4"
+   },
+   {
+    "game": "Week 5: TB at DAL",
+    "date": "2026-10-08",
+    "transcribed": "24-16",
+    "dataset": "24-16",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-5"
+   },
+   {
+    "game": "Week 5: PHI at JAX",
+    "date": "2026-10-11",
+    "transcribed": "17-19",
+    "dataset": "17-19",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-5"
+   },
+   {
+    "game": "Week 5: CIN at MIA",
+    "date": "2026-10-11",
+    "transcribed": "31-24",
+    "dataset": "31-24",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-5"
+   },
+   {
+    "game": "Week 5: LV at NE",
+    "date": "2026-10-11",
+    "transcribed": "17-45",
+    "dataset": "17-45",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-5"
+   },
+   {
+    "game": "Week 5: MIN at NO",
+    "date": "2026-10-11",
+    "transcribed": "23-13",
+    "dataset": "23-13",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-5"
+   },
+   {
+    "game": "Week 5: CLE at NYJ",
+    "date": "2026-10-11",
+    "transcribed": "12-17",
+    "dataset": "12-17",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-5"
+   },
+   {
+    "game": "Week 5: IND at PIT",
+    "date": "2026-10-11",
+    "transcribed": "22-34",
+    "dataset": "22-34",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-5"
+   },
+   {
+    "game": "Week 5: HOU at TEN",
+    "date": "2026-10-11",
+    "transcribed": "26-3",
+    "dataset": "26-3",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-5"
+   },
+   {
+    "game": "Week 5: NYG at WAS",
+    "date": "2026-10-11",
+    "transcribed": "27-27",
+    "dataset": "27-27",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-5"
+   },
+   {
+    "game": "Week 5: CHI at GB",
+    "date": "2026-10-11",
+    "transcribed": "7-31",
+    "dataset": "7-31",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-5"
+   },
+   {
+    "game": "Week 5: DEN at LAC",
+    "date": "2026-10-11",
+    "transcribed": "23-17",
+    "dataset": "23-17",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-5"
+   },
+   {
+    "game": "Week 5: DET at ARI",
+    "date": "2026-10-11",
+    "transcribed": "45-21",
+    "dataset": "45-21",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-5"
+   },
+   {
+    "game": "Week 5: SF at SEA",
+    "date": "2026-10-11",
+    "transcribed": "32-29",
+    "dataset": "32-29",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-5"
+   },
+   {
+    "game": "Week 5: BAL at ATL",
+    "date": "2026-10-11",
+    "transcribed": "30-23",
+    "dataset": "30-23",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-5"
+   },
+   {
+    "game": "Week 5: BUF at LA",
+    "date": "2026-10-12",
+    "transcribed": "37-34",
+    "dataset": "37-34",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-5"
+   },
+   {
+    "game": "Week 6: SEA at DEN",
+    "date": "2026-10-15",
+    "transcribed": "14-17",
+    "dataset": "14-17",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-6"
+   },
+   {
+    "game": "Week 6: HOU at JAX",
+    "date": "2026-10-18",
+    "transcribed": "34-31",
+    "dataset": "34-31",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-6"
+   },
+   {
+    "game": "Week 6: CHI at ATL",
+    "date": "2026-10-18",
+    "transcribed": "31-23",
+    "dataset": "31-23",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-6"
+   },
+   {
+    "game": "Week 6: BAL at CLE",
+    "date": "2026-10-18",
+    "transcribed": "10-13",
+    "dataset": "10-13",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-6"
+   },
+   {
+    "game": "Week 6: TEN at IND",
+    "date": "2026-10-18",
+    "transcribed": "26-20",
+    "dataset": "26-20",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-6"
+   },
+   {
+    "game": "Week 6: NYJ at NE",
+    "date": "2026-10-18",
+    "transcribed": "19-26",
+    "dataset": "19-26",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-6"
+   },
+   {
+    "game": "Week 6: NO at NYG",
+    "date": "2026-10-18",
+    "transcribed": "34-27",
+    "dataset": "34-27",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-6"
+   },
+   {
+    "game": "Week 6: CAR at PHI",
+    "date": "2026-10-18",
+    "transcribed": "25-14",
+    "dataset": "25-14",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-6"
+   },
+   {
+    "game": "Week 6: PIT at TB",
+    "date": "2026-10-18",
+    "transcribed": "26-19",
+    "dataset": "26-19",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-6"
+   },
+   {
+    "game": "Week 6: ARI at LA",
+    "date": "2026-10-18",
+    "transcribed": "18-16",
+    "dataset": "18-16",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-6"
+   },
+   {
+    "game": "Week 6: LAC at KC",
+    "date": "2026-10-18",
+    "transcribed": "6-22",
+    "dataset": "6-22",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-6"
+   },
+   {
+    "game": "Week 6: BUF at LV",
+    "date": "2026-10-18",
+    "transcribed": "33-30",
+    "dataset": "33-30",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-6"
+   },
+   {
+    "game": "Week 6: DAL at GB",
+    "date": "2026-10-18",
+    "transcribed": "13-23",
+    "dataset": "13-23",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-6"
+   },
+   {
+    "game": "Week 6: WAS at SF",
+    "date": "2026-10-19",
+    "transcribed": "17-23",
+    "dataset": "17-23",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-6"
+   },
+   {
+    "game": "Week 7: NE at CHI",
+    "date": "2026-10-22",
+    "transcribed": "24-30",
+    "dataset": "24-30",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-7"
+   },
+   {
+    "game": "Week 7: PIT at NO",
+    "date": "2026-10-25",
+    "transcribed": "16-10",
+    "dataset": "16-10",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-7"
+   },
+   {
+    "game": "Week 7: SF at ATL",
+    "date": "2026-10-25",
+    "transcribed": "20-29",
+    "dataset": "20-29",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-7"
+   },
+   {
+    "game": "Week 7: CIN at BAL",
+    "date": "2026-10-25",
+    "transcribed": "35-13",
+    "dataset": "35-13",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-7"
+   },
+   {
+    "game": "Week 7: TB at CAR",
+    "date": "2026-10-25",
+    "transcribed": "43-13",
+    "dataset": "43-13",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-7"
+   },
+   {
+    "game": "Week 7: NYG at HOU",
+    "date": "2026-10-25",
+    "transcribed": "27-21",
+    "dataset": "27-21",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-7"
+   },
+   {
+    "game": "Week 7: IND at MIN",
+    "date": "2026-10-25",
+    "transcribed": "10-16",
+    "dataset": "10-16",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-7"
+   },
+   {
+    "game": "Week 7: MIA at NYJ",
+    "date": "2026-10-25",
+    "transcribed": "28-25",
+    "dataset": "28-25",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-7"
+   },
+   {
+    "game": "Week 7: CLE at TEN",
+    "date": "2026-10-25",
+    "transcribed": "27-24",
+    "dataset": "27-24",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-7"
+   },
+   {
+    "game": "Week 7: DEN at ARI",
+    "date": "2026-10-25",
+    "transcribed": "30-16",
+    "dataset": "30-16",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-7"
+   },
+   {
+    "game": "Week 7: GB at DET",
+    "date": "2026-10-25",
+    "transcribed": "17-20",
+    "dataset": "17-20",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-7"
+   },
+   {
+    "game": "Week 7: LA at LV",
+    "date": "2026-10-25",
+    "transcribed": "35-21",
+    "dataset": "35-21",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-7"
+   },
+   {
+    "game": "Week 7: KC at SEA",
+    "date": "2026-10-25",
+    "transcribed": "3-20",
+    "dataset": "3-20",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-7"
+   },
+   {
+    "game": "Week 7: DAL at PHI",
+    "date": "2026-10-26",
+    "transcribed": "38-21",
+    "dataset": "38-21",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-7"
+   },
+   {
+    "game": "Week 8: CAR at GB",
+    "date": "2026-10-29",
+    "transcribed": "19-27",
+    "dataset": "19-27",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-8"
+   },
+   {
+    "game": "Week 8: BAL at BUF",
+    "date": "2026-11-01",
+    "transcribed": "10-36",
+    "dataset": "10-36",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-8"
+   },
+   {
+    "game": "Week 8: TEN at CIN",
+    "date": "2026-11-01",
+    "transcribed": "36-43",
+    "dataset": "36-43",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-8"
+   },
+   {
+    "game": "Week 8: ARI at DAL",
+    "date": "2026-11-01",
+    "transcribed": "33-30",
+    "dataset": "33-30",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-8"
+   },
+   {
+    "game": "Week 8: MIN at DET",
+    "date": "2026-11-01",
+    "transcribed": "15-19",
+    "dataset": "15-19",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-8"
+   },
+   {
+    "game": "Week 8: IND at JAX",
+    "date": "2026-11-01",
+    "transcribed": "7-42",
+    "dataset": "7-42",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-8"
+   },
+   {
+    "game": "Week 8: LV at NYJ",
+    "date": "2026-11-01",
+    "transcribed": "38-33",
+    "dataset": "38-33",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-8"
+   },
+   {
+    "game": "Week 8: CLE at PIT",
+    "date": "2026-11-01",
+    "transcribed": "6-27",
+    "dataset": "6-27",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-8"
+   },
+   {
+    "game": "Week 8: ATL at TB",
+    "date": "2026-11-01",
+    "transcribed": "0-16",
+    "dataset": "0-16",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-8"
+   },
+   {
+    "game": "Week 8: LAC at LA",
+    "date": "2026-11-01",
+    "transcribed": "9-24",
+    "dataset": "9-24",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-8"
+   },
+   {
+    "game": "Week 8: KC at DEN",
+    "date": "2026-11-01",
+    "transcribed": "24-28",
+    "dataset": "24-28",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-8"
+   },
+   {
+    "game": "Week 8: NE at MIA",
+    "date": "2026-11-01",
+    "transcribed": "24-19",
+    "dataset": "24-19",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-8"
+   },
+   {
+    "game": "Week 8: PHI at WAS",
+    "date": "2026-11-01",
+    "transcribed": "10-27",
+    "dataset": "10-27",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-8"
+   },
+   {
+    "game": "Week 8: CHI at SEA",
+    "date": "2026-11-02",
+    "transcribed": "34-17",
+    "dataset": "34-17",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-8"
+   },
+   {
+    "game": "Week 9: JAX at BAL",
+    "date": "2026-11-05",
+    "transcribed": "33-10",
+    "dataset": "33-10",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-9"
+   },
+   {
+    "game": "Week 9: CIN at ATL",
+    "date": "2026-11-08",
+    "transcribed": "34-17",
+    "dataset": "34-17",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-9"
+   },
+   {
+    "game": "Week 9: DEN at CAR",
+    "date": "2026-11-08",
+    "transcribed": "26-21",
+    "dataset": "26-21",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-9"
+   },
+   {
+    "game": "Week 9: DAL at IND",
+    "date": "2026-11-08",
+    "transcribed": "27-23",
+    "dataset": "27-23",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-9"
+   },
+   {
+    "game": "Week 9: NYJ at KC",
+    "date": "2026-11-08",
+    "transcribed": "12-35",
+    "dataset": "12-35",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-9"
+   },
+   {
+    "game": "Week 9: DET at MIA",
+    "date": "2026-11-08",
+    "transcribed": "19-9",
+    "dataset": "19-9",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-9"
+   },
+   {
+    "game": "Week 9: CLE at NO",
+    "date": "2026-11-08",
+    "transcribed": "22-23",
+    "dataset": "22-23",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-9"
+   },
+   {
+    "game": "Week 9: NYG at PHI",
+    "date": "2026-11-08",
+    "transcribed": "19-11",
+    "dataset": "19-11",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-9"
+   },
+   {
+    "game": "Week 9: LA at WAS",
+    "date": "2026-11-08",
+    "transcribed": "20-13",
+    "dataset": "20-13",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-9"
+   },
+   {
+    "game": "Week 9: HOU at LAC",
+    "date": "2026-11-08",
+    "transcribed": "44-22",
+    "dataset": "44-22",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-9"
+   },
+   {
+    "game": "Week 9: LV at SF",
+    "date": "2026-11-08",
+    "transcribed": "17-38",
+    "dataset": "17-38",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-9"
+   },
+   {
+    "game": "Week 9: GB at NE",
+    "date": "2026-11-08",
+    "transcribed": "45-27",
+    "dataset": "45-27",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-9"
+   },
+   {
+    "game": "Week 9: ARI at SEA",
+    "date": "2026-11-08",
+    "transcribed": "3-17",
+    "dataset": "3-17",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-9"
+   },
+   {
+    "game": "Week 9: TB at CHI",
+    "date": "2026-11-08",
+    "transcribed": "24-27",
+    "dataset": "24-27",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-9"
+   },
+   {
+    "game": "Week 9: BUF at MIN",
+    "date": "2026-11-09",
+    "transcribed": "23-6",
+    "dataset": "23-6",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-9"
+   },
+   {
+    "game": "Week 2: WAS at DAL",
+    "date": "2026-09-20",
+    "transcribed": "20-37",
+    "dataset": "20-37",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-2"
+   },
+   {
+    "game": "Week 2: MIA at SF",
+    "date": "2026-09-20",
+    "transcribed": "13-35",
+    "dataset": "13-35",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-2"
+   },
+   {
+    "game": "Week 2: IND at KC",
+    "date": "2026-09-20",
+    "transcribed": "30-33",
+    "dataset": "30-33",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-2"
+   },
+   {
+    "game": "Week 2: NYG at LA",
+    "date": "2026-09-21",
+    "transcribed": "6-28",
+    "dataset": "6-28",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/schedules/2026/by-week/week-2"
+   }
+  ]
+ },
+ "correlation_checks": [
+  {
+   "item": "Games used",
+   "published": 136,
+   "referee": 136,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "item": "C2 margin vs total, same game: r",
+   "published": -0.1608,
+   "referee": -0.1608,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "item": "C3 team points in consecutive weeks: pairs",
+   "published": 226,
+   "referee": 226,
+   "status": "replicated",
+   "note": "Referee definition: same team, week t and week t+1 both played."
+  },
+  {
+   "item": "C3 team points in consecutive weeks: r",
+   "published": 0.0685,
+   "referee": 0.0685,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "item": "C5 division-game flag vs total: r",
+   "published": -0.1297,
+   "referee": -0.1048,
+   "status": "NOT replicated",
+   "note": "Division flag taken from the dataset's div_game column."
+  },
+  {
+   "item": "C5 number of division games",
+   "published": 52,
+   "referee": 42,
+   "status": "NOT replicated",
+   "note": ""
+  },
+  {
+   "item": "Home wins",
+   "published": 67,
+   "referee": 67,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "item": "Decided games",
+   "published": 135,
+   "referee": 135,
+   "status": "replicated",
+   "note": ""
+  },
+  {
+   "item": "Ties",
+   "published": 1,
+   "referee": 1,
+   "status": "replicated",
+   "note": ""
+  }
+ ]
+}

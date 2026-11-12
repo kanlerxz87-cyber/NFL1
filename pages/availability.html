@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Availability &amp; Deficiencies — NFL1</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<header>
+  <div class="brand">NFL1 — NFL Analytics Dashboard</div>
+  <nav>
+    <a href="../index.html">Overview</a>
+    <a href="executive-summary.html">Executive Summary</a>
+    <a href="teams.html">Teams</a>
+    <a href="standings.html">Standings</a>
+    <a href="injuries.html">Injuries</a>
+    <a href="availability.html" class="active">Availability</a>
+    <a href="data.html">Verified Data</a>
+    <a href="lines.html">Own Lines</a>
+    <a href="analysis.html">Validation & Correlation</a>
+    <a href="decisions.html">Decision Register</a>
+    <a href="verified.html">Verified Artifacts</a>
+    <a href="evidence.html">Evidence</a>
+    <a href="models.html">Strategy Lab</a>
+    <a href="strategies.html">Strategies</a>
+    <a href="suggestions.html">Suggestions</a>
+    <a href="questions.html">Questions</a>
+    <a href="flagged.html">Flagged</a>
+    <a href="review.html">Review</a>
+  </nav>
+</header>
+<main>
+  <h1>Availability &amp; Deficiencies</h1>
+  <p class="muted">Injury-driven availability from official sources, with honest gaps · generated 2026-11-12</p>
+
+  <div class="grid">
+    <div class="stat"><div class="label">Verified out</div><div class="value">5</div>
+      <div class="muted">players with an official "Out" game status</div></div>
+    <div class="stat"><div class="label">Verified questionable</div><div class="value">1</div>
+      <div class="muted">officially listed as Questionable</div></div>
+    <div class="stat"><div class="label">Teams reporting clean</div><div class="value">4</div>
+      <div class="muted">official "No Injuries Reported"</div></div>
+    <div class="stat"><div class="label">Depth order known</div><div class="value">0/32</div>
+      <div class="muted">the NFL publishes no depth charts</div></div>
+  </div>
+
+  <div class="card" style="border-color:#f59e0b">
+    <h3><span class="badge warn">Scope limit</span> What this page can and cannot tell you</h3>
+    <p><strong>Can:</strong> name every player the official Week 10 report marks Out or Questionable,
+    count them by unit for each team, and confirm which teams have a clean report.</p>
+    <p><strong>Cannot:</strong> tell you whether an absent player was the starter, the 3rd-string
+    backup, or whether his replacement is a downgrade. Official depth charts are not published —
+    the depth-chart URL returns a 404 (checked 2026-11-12) — so the "starters vs backups" column is
+    deliberately blank. Filling it would mean inventing the order.</p>
+    <p class="muted">Only rows where the official report states a game status are counted. Players listed with a practice status but no game status are NOT counted as out or available, because the source does not assert either.</p>
+  </div>
+
+  <h2>Verified availability by team — Week 10</h2>
+  <p class="muted">Source for every row: <a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com/injuries</a>,
+  retrieved 2026-11-12. Teams with no verified absence and no clean-report statement are omitted
+  rather than shown as healthy.</p>
+  <div class="table-wrap"><table><thead><tr><th>Team</th><th>Out</th><th>Questionable</th><th>Offence</th><th>Defence</th><th>Specialists</th><th>Official clean report</th><th>Named players (position, status)</th><th>Replacement seniority</th></tr></thead><tbody>
+<tr><td>New England Patriots</td><td>3</td><td>0</td><td>2</td><td>1</td><td>0</td><td><span class="badge warn">no status stated</span></td><td>Ben Brown (C, Out), Carlton Davis III (CB, Out), TreVeyon Henderson (RB, Out)</td><td><span class="badge danger">unknown</span></td></tr>
+<tr><td>Washington Commanders</td><td>2</td><td>0</td><td>2</td><td>0</td><td>0</td><td><span class="badge warn">no status stated</span></td><td>Lucas Patrick (C, Out), Colson Yankoff (TE, Out)</td><td><span class="badge danger">unknown</span></td></tr>
+<tr><td>New York Giants</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td><span class="badge warn">no status stated</span></td><td>Malik Harrison (LB, Questionable)</td><td><span class="badge danger">unknown</span></td></tr>
+<tr><td>Baltimore Ravens</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td><span class="badge ok">no injuries reported</span></td><td>—</td><td><span class="badge danger">unknown</span></td></tr>
+<tr><td>Cincinnati Bengals</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td><span class="badge ok">no injuries reported</span></td><td>—</td><td><span class="badge danger">unknown</span></td></tr>
+<tr><td>Los Angeles Chargers</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td><span class="badge ok">no injuries reported</span></td><td>—</td><td><span class="badge danger">unknown</span></td></tr>
+<tr><td>Seattle Seahawks</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td><span class="badge ok">no injuries reported</span></td><td>—</td><td><span class="badge danger">unknown</span></td></tr>
+</tbody></table></div>
+
+  <h2>Officially stated quarterback changes</h2>
+  <p class="muted">These are the only starter-replacement events an official NFL source states
+  directly. They are recorded at headline level, which is a weaker level of verification than a
+  published depth chart — hence the badge. Performance impact is <strong>not</strong> measured.</p>
+  <div class="table-wrap"><table><thead><tr><th>Team</th><th>Change</th><th>Status as stated</th><th>Replacement as stated</th><th>Source</th><th>Verification level</th></tr></thead><tbody>
+<tr><td>MIA</td><td>Malik Willis (QB) placed on injured reserve (groin)</td><td>IR</td><td>Kyle McCord &quot;in line for first start&quot;</td><td><a href="https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start" target="_blank" rel="noopener">NFL.com article</a></td><td><span class="badge warn">headline-level</span></td></tr>
+<tr><td>SEA</td><td>Sam Darnold (QB) ruled out for Week 10 vs Raiders</td><td>ruled out</td><td>Drew Lock &quot;expected to start again&quot;</td><td><a href="https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again" target="_blank" rel="noopener">NFL.com article</a></td><td><span class="badge warn">headline-level</span></td></tr>
+<tr><td>AZ</td><td>Jacoby Brissett benched at QB (Week 8) then Carson Beck to start Week 10</td><td>change announced</td><td>Carson Beck named starter</td><td><a href="https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-wednesday-nov-11" target="_blank" rel="noopener">NFL.com article</a></td><td><span class="badge warn">headline-level</span></td></tr>
+<tr><td>CLE</td><td>Deshaun Watson to start Week 10 vs Texans</td><td>change announced</td><td>Deshaun Watson in at QB</td><td><a href="https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-wednesday-nov-11" target="_blank" rel="noopener">NFL.com article</a></td><td><span class="badge warn">headline-level</span></td></tr>
+<tr><td>BAL</td><td>Lamar Jackson (QB) right thumb out 6-9 weeks and placed on injured reserve</td><td>out / IR</td><td>not named in verified headline</td><td><a href="https://www.nfl.com/news/ravens-lamar-jackson-right-thumb-out-6-9-weeks-expects-to-return-this-season" target="_blank" rel="noopener">NFL.com article</a></td><td><span class="badge warn">headline-level</span></td></tr>
+</tbody></table></div>
+
+  <h2>Depth-chart probe — primary evidence for the limitation above</h2>
+  <p class="muted">Three different clubs were probed on 2026-11-12. All returned the NFL.com 404 page,
+  so this is a pattern rather than one broken link.</p>
+  <div class="table-wrap"><table><thead><tr><th>URL probed</th><th>Result</th><th>Observed</th><th>Checked at</th><th>Conclusion</th></tr></thead><tbody>
+<tr><td><a href="https://www.nfl.com/teams/washington-commanders/depth-chart" target="_blank" rel="noopener">https://www.nfl.com/teams/washington-commanders/depth-chart</a></td><td><span class="badge danger">404 page</span></td><td>NFL.com 404 &quot;Flag on the Play&quot; page returned</td><td>2026-11-12T04:32Z</td><td>no depth chart published at this URL</td></tr>
+<tr><td><a href="https://www.nfl.com/teams/buffalo-bills/depth-chart" target="_blank" rel="noopener">https://www.nfl.com/teams/buffalo-bills/depth-chart</a></td><td><span class="badge danger">404 page</span></td><td>NFL.com 404 &quot;Flag on the Play&quot; page returned</td><td>2026-11-12T04:45Z</td><td>no depth chart published at this URL</td></tr>
+<tr><td><a href="https://www.nfl.com/teams/kansas-city-chiefs/depth-chart" target="_blank" rel="noopener">https://www.nfl.com/teams/kansas-city-chiefs/depth-chart</a></td><td><span class="badge danger">404 page</span></td><td>NFL.com 404 &quot;Flag on the Play&quot; page returned</td><td>2026-11-12T04:45Z</td><td>no depth chart published at this URL</td></tr>
+</tbody></table></div>
+
+  <h2>Why the deficiency model is blocked, and what unblocks it</h2>
+  <div class="card">
+    <table>
+      <thead><tr><th>Requirement</th><th>Status</th><th>What would satisfy it</th></tr></thead>
+      <tbody>
+        <tr><td>Who is the starter?</td><td><span class="badge danger">blocked</span></td>
+            <td>An official or licensed depth chart with dates; the NFL does not publish one.</td></tr>
+        <tr><td>Who replaced him?</td><td><span class="badge warn">partial</span></td>
+            <td>Snap counts / participation per game, tied to the absence.</td></tr>
+        <tr><td>How much did it cost?</td><td><span class="badge danger">blocked</span></td>
+            <td>Per-player value estimates plus the participation data above, then a validated model.</td></tr>
+        <tr><td>Injury status itself</td><td><span class="badge ok">verified</span></td>
+            <td>Done — official Week 10 statuses captured with links.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</main>
+<footer class="muted" style="max-width:1200px;margin:0 auto;padding:24px">
+  Generated from data/verified by scripts/verified/build_site.py. Blank means unverified — never inferred.
+</footer>
+</body>
+</html>

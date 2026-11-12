@@ -1,0 +1,48 @@
+name: Verify NFL Decision Lab site build
+# Publishing: GitHub Pages for this repository is configured as a legacy branch build from
+# `main` /, so every push to main publishes automatically (run "pages build and deployment").
+# This workflow is the quality gate: it re-runs the analysis, recomputes published numbers and
+# fails on a broken local link or an unreachable page. It deliberately does not deploy, so two
+# deployment mechanisms cannot overwrite each other.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: pages-verify
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install analysis dependencies
+        run: python -m pip install --quiet numpy
+      - name: Verify official data reconciles (hard gate)
+        run: python3 scripts/verified/validate_verified.py
+      - name: Re-run analysis and regenerate pages from data
+        run: |
+          python3 analysis/engine.py
+          python3 analysis/luck.py
+          python3 analysis/correlations.py
+          python3 analysis/injuries.py
+          python3 scripts/verified/build_site.py
+          python3 scripts/verified/build_availability.py
+          python3 scripts/verified/normalize_nav.py
+      - name: Independently recompute every published number
+        run: python3 scripts/verified/audit_numbers.py
+      - name: Check every local link and nav entry
+        run: python3 scripts/verified/check_site.py
+      - name: Check external source links (reports dead URLs, never fails on unreachable hosts)
+        continue-on-error: true
+        run: python3 scripts/verified/check_external_links.py
+      - name: Confirm the deployment path is the branch build
+        run: |
+          echo "Pages publishes from main / via the legacy build; this job only verifies."
+          ls -la index.html pages/ | head -20

@@ -1,0 +1,90 @@
+[
+  {
+    "id": "CV-01",
+    "check": "Standings snapshot cross-check (line by line)",
+    "files": "data/standings.csv vs data/standings.json",
+    "rows": 32,
+    "matches": 32,
+    "mismatches": 0,
+    "note": "All 7 official fields compared for every club. The CSV rank column is flagged F25.",
+    "src": "S02",
+    "verified": true
+  },
+  {
+    "id": "CV-02",
+    "check": "Injury snapshot cross-check (line by line)",
+    "files": "data/injuries.csv vs data/injuries.json",
+    "rows": 20,
+    "matches": 20,
+    "mismatches": 0,
+    "note": "Position, injury, practice status and game status compared; blank cells preserved.",
+    "src": "S01",
+    "verified": true
+  },
+  {
+    "id": "CV-03",
+    "check": "Team directory cross-check",
+    "files": "data/teams.csv vs data/standings.json",
+    "rows": 32,
+    "matches": 32,
+    "mismatches": 0,
+    "note": "32 club abbreviations matched to the official standings snapshot; divisions noted as independently checked.",
+    "src": "S24",
+    "verified": true
+  },
+  {
+    "id": "CV-04",
+    "check": "Combined-site local link audit",
+    "files": "all root *.html and pages/*.html",
+    "rows": 1064,
+    "matches": 1064,
+    "mismatches": 0,
+    "note": "Checked both published site generations; broken links: none",
+    "src": "S23",
+    "verified": true
+  },
+  {
+    "id": "CV-06",
+    "check": "Third-generation standings cross-check (line by line)",
+    "files": "data/verified/standings_2026.csv vs data/standings.json",
+    "rows": 32,
+    "matches": 32,
+    "mismatches": 0,
+    "note": "All 7 official fields compared for each of the 32 clubs in data/verified.",
+    "src": "S02",
+    "verified": true
+  },
+  {
+    "id": "CV-07",
+    "check": "Third-generation injury cross-check (line by line)",
+    "files": "data/verified/injuries_week10.csv vs data/injuries.json",
+    "rows": 6,
+    "matches": 6,
+    "mismatches": 0,
+    "note": "All 6 published game-designation rows compared; blank cells preserved.",
+    "src": "S01",
+    "verified": true
+  },
+  {
+    "id": "CV-08",
+    "check": "136 official game results recomputed independently",
+    "files": "data/verified/games_2026.csv vs data/verified/standings_2026.csv",
+    "rows": 32,
+    "matches": 32,
+    "mismatches": 0,
+    "note": "W/L/T, PF, PA, NET and PCT recomputed from 136 official game rows; problems: none",
+    "src": "S02",
+    "verified": true
+  },
+  {
+    "id": "CV-05",
+    "check": "Independent post-merge review (earlier session)",
+    "files": "docs/review/merged-site.md",
+    "rows": 1,
+    "matches": 1,
+    "mismatches": 0,
+    "note": "Session 15e79a53 reviewed 32 standings rows, 20 injury rows, sources and deployment; its correction requests are flagged F25-F27.",
+    "src": "S24",
+    "verified": true
+  }
+]

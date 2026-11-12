@@ -1,0 +1,1710 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="NFL1 — a verified, source-linked NFL decision-intelligence dashboard: requirements, decision questions, improvement suggestions, strategy validation, injury and depth tracking, and a leaderboard competition.">
+<title>Combined integration verification | NFL1</title>
+<link rel="stylesheet" href="site/assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="mark">NFL</div>
+      <div><strong>NFL1</strong><small>Decision intelligence</small></div>
+    </div>
+    <div class="snapshot">
+      <b>Data snapshot</b><br>2026 season · Week 10<br>Retrieved 2026-11-12 (UTC)
+    </div>
+    <nav aria-label="Site sections">
+      <div class="navgroup"><h4>Overview</h4>
+<a href="index.html">Home</a>
+<a href="executive-summary.html">Executive Summary</a>
+<a href="deployment.html">Deployment &amp; PR</a>
+<a href="legacy-site.html">Earlier sessions&#x27; site</a>
+</div>
+<div class="navgroup"><h4>Governance</h4>
+<a href="requirements.html">Requirements</a>
+<a href="questions.html">Decision Questions</a>
+<a href="suggestions.html">Suggestions &amp; Paths</a>
+</div>
+<div class="navgroup"><h4>Competition</h4>
+<a href="strategy-lab.html">Strategy Lab</a>
+<a href="leaderboard.html">Leaderboard</a>
+<a href="bet-types.html">Bet Types &amp; Risk</a>
+</div>
+<div class="navgroup"><h4>Official data</h4>
+<a href="data-tables.html">Standings &amp; Findings</a>
+<a href="injuries.html">Injuries</a>
+<a href="depth-chart.html">Depth Charts</a>
+</div>
+<div class="navgroup"><h4>Assurance</h4>
+<a href="verification.html">Verification &amp; Sources</a>
+<a href="flagged.html">Flagged for Review</a>
+<a href="integration.html" class="active">Combined Integration</a>
+<a href="referee/index.html">Independent verification</a>
+</div>
+<div class="navgroup"><h4>Preserved pages</h4>
+<a href="pages/analysis.html">Validation &amp; correlation</a>
+<a href="pages/availability.html">Availability</a>
+<a href="pages/data.html">Verified data</a>
+<a href="pages/decisions.html">Decision register</a>
+<a href="pages/evidence.html">Evidence</a>
+<a href="pages/executive-summary.html">Executive summary</a>
+<a href="pages/flagged.html">Flagged</a>
+<a href="pages/injuries.html">Injuries</a>
+<a href="pages/lines.html">Own lines</a>
+<a href="pages/models.html">Strategy lab</a>
+<a href="pages/questions.html">Questions</a>
+<a href="pages/review.html">Review</a>
+<a href="pages/standings.html">Standings</a>
+<a href="pages/strategies.html">Strategies</a>
+<a href="pages/suggestions.html">Suggestions</a>
+<a href="pages/teams.html">Teams</a>
+<a href="pages/verified.html">Verified artifacts</a>
+</div>
+    </nav>
+    <div class="foot">
+      Every table row links to an official source. Unconfirmed values are left blank and flagged.
+      <br><br><a style="color:#fff;text-decoration:underline" href="https://github.com/kanlerxz87-cyber/NFL1">Repository ↗</a>
+    </div>
+  </aside>
+  <div class="main">
+    <div class="topbar">
+      <div class="crumb">NFL1 / <b>Combined Integration</b></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">36 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+    </div>
+    <main class="content" id="main">
+      <div class="kicker">Assurance</div>
+      <h1>Combined integration verification</h1>
+      <p class="lede">Re-verification of the combined data from all merged sessions, line by line, plus a full audit of both published site generations and the preserved artifacts.</p>
+      <div class="callout"><b>Final integration of all merged sessions.</b> The repository now contains two complete site generations plus a third set of verified-data artifacts: the dashboard you are reading, the earlier sessions' dashboard preserved at <a href="legacy-site.html">legacy-site.html</a> with its <code>pages/</code> subpages, <code>styles.css</code>, <code>assets/</code> and CSV snapshots. Nothing was discarded. The shared task boards were reconciled in <a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/COORDINATION.md">COORDINATION.md</a> (the pre-integration board is archived at <code>docs/COORDINATION-archive-main.md</code>).</div>
+<div class="cards"><div class="card"><div class="label">Combined checks</div><div class="value">8</div><div class="detail">Data + links + review</div></div><div class="card"><div class="label">Standings rows compared</div><div class="value">32</div><div class="detail">Line by line</div></div><div class="card"><div class="label">Injury rows compared</div><div class="value">20</div><div class="detail">Line by line</div></div><div class="card"><div class="label">Official game rows</div><div class="value">136</div><div class="detail">Weeks 1-9</div></div><div class="card"><div class="label">Broken local links</div><div class="value">0</div><div class="detail">Both site generations</div></div></div>
+<h2 id="results">Re-verification of the combined data</h2>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-combined-summary" aria-label="Filter tbl-combined-summary" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-combined-summary">8 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-combined-summary"><caption>Result of re-verifying the merged data sets line by line and auditing every local link in both published site generations.</caption>
+<thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Check</th><th scope="col" class="sortable">Files</th><th scope="col" class="sortable">Rows / links</th><th scope="col" class="sortable">Matches</th><th scope="col" class="sortable">Mismatches / broken</th><th scope="col" class="sortable">Note</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr id="CV-01" data-verified="true">
+<td><code>CV-01</code></td>
+<td data-value="1" class="wide">Standings snapshot cross-check (line by line)</td>
+<td data-value="1" class="wide">data/standings.csv vs data/standings.json</td>
+<td data-value="1" class="num">32</td>
+<td data-value="1" class="num">32</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="wide">All 7 official fields compared for every club. The CSV rank column is flagged F25.</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="CV-02" data-verified="true">
+<td><code>CV-02</code></td>
+<td data-value="1" class="wide">Injury snapshot cross-check (line by line)</td>
+<td data-value="1" class="wide">data/injuries.csv vs data/injuries.json</td>
+<td data-value="1" class="num">20</td>
+<td data-value="1" class="num">20</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="wide">Position, injury, practice status and game status compared; blank cells preserved.</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="CV-03" data-verified="true">
+<td><code>CV-03</code></td>
+<td data-value="1" class="wide">Team directory cross-check</td>
+<td data-value="1" class="wide">data/teams.csv vs data/standings.json</td>
+<td data-value="1" class="num">32</td>
+<td data-value="1" class="num">32</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="wide">32 club abbreviations matched to the official standings snapshot; divisions noted as independently checked.</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="CV-04" data-verified="true">
+<td><code>CV-04</code></td>
+<td data-value="1" class="wide">Combined-site local link audit</td>
+<td data-value="1" class="wide">all root *.html and pages/*.html</td>
+<td data-value="1" class="num">1064</td>
+<td data-value="1" class="num">1064</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="wide">Checked both published site generations; broken links: none</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S23 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="CV-06" data-verified="true">
+<td><code>CV-06</code></td>
+<td data-value="1" class="wide">Third-generation standings cross-check (line by line)</td>
+<td data-value="1" class="wide">data/verified/standings_2026.csv vs data/standings.json</td>
+<td data-value="1" class="num">32</td>
+<td data-value="1" class="num">32</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="wide">All 7 official fields compared for each of the 32 clubs in data/verified.</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="CV-07" data-verified="true">
+<td><code>CV-07</code></td>
+<td data-value="1" class="wide">Third-generation injury cross-check (line by line)</td>
+<td data-value="1" class="wide">data/verified/injuries_week10.csv vs data/injuries.json</td>
+<td data-value="1" class="num">6</td>
+<td data-value="1" class="num">6</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="wide">All 6 published game-designation rows compared; blank cells preserved.</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="CV-08" data-verified="true">
+<td><code>CV-08</code></td>
+<td data-value="1" class="wide">136 official game results recomputed independently</td>
+<td data-value="1" class="wide">data/verified/games_2026.csv vs data/verified/standings_2026.csv</td>
+<td data-value="1" class="num">32</td>
+<td data-value="1" class="num">32</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="wide">W/L/T, PF, PA, NET and PCT recomputed from 136 official game rows; problems: none</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="CV-05" data-verified="true">
+<td><code>CV-05</code></td>
+<td data-value="1" class="wide">Independent post-merge review (earlier session)</td>
+<td data-value="1" class="wide">docs/review/merged-site.md</td>
+<td data-value="1" class="num">1</td>
+<td data-value="1" class="num">1</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="wide">Session 15e79a53 reviewed 32 standings rows, 20 injury rows, sources and deployment; its correction requests are flagged F25-F27.</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+</tbody></table></div>
+<h2 id="standings">Standings cross-check — all 32 rows</h2>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-combined-standings" aria-label="Filter tbl-combined-standings" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-combined-standings">32 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-combined-standings"><caption>Every row of the earlier sessions' standings.csv compared to the JSON snapshot transcribed from the official standings page. Blank values are never filled in.</caption>
+<thead><tr><th scope="col" class="sortable">Club</th><th scope="col" class="sortable">Team</th><th scope="col" class="sortable">Compared fields</th><th scope="col" class="sortable">Result</th><th scope="col" class="sortable">Match</th><th scope="col" class="sortable">Note</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr data-verified="true">
+<td data-value="1">BUF</td>
+<td data-value="1">Buffalo Bills</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET = 7/1/0/0.875/256/187/69</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">CSV also carries rank=1, which the official standings page does not publish (F25)</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">SF</td>
+<td data-value="1">San Francisco 49ers</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET = 7/1/0/0.875/235/156/79</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">CSV also carries rank=2, which the official standings page does not publish (F25)</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">CHI</td>
+<td data-value="1">Chicago Bears</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET = 7/2/0/0.778/241/184/57</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">CSV also carries rank=3, which the official standings page does not publish (F25)</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">DEN</td>
+<td data-value="1">Denver Broncos</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET = 7/2/0/0.778/198/186/12</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">CSV also carries rank=4, which the official standings page does not publish (F25)</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">CIN</td>
+<td data-value="1">Cincinnati Bengals</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET = 6/2/0/0.750/240/175/65</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">CSV also carries rank=5, which the official standings page does not publish (F25)</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">DET</td>
+<td data-value="1">Detroit Lions</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET = 6/2/0/0.750/222/189/33</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">CSV also carries rank=6, which the official standings page does not publish (F25)</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">JAX</td>
+<td data-value="1">Jacksonville Jaguars</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET = 6/2/0/0.750/229/121/108</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">CSV also carries rank=7, which the official standings page does not publish (F25)</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">KC</td>
+<td data-value="1">Kansas City Chiefs</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET = 6/2/0/0.750/202/143/59</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">CSV also carries rank=8, which the official standings page does not publish (F25)</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">MIN</td>
+<td data-value="1">Minnesota Vikings</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET = 6/2/0/0.750/146/116/30</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">CSV also carries rank=9, which the official standings page does not publish (F25)</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">PIT</td>
+<td data-value="1">Pittsburgh Steelers</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET = 6/2/0/0.750/180/144/36</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">CSV also carries rank=10, which the official standings page does not publish (F25)</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NYG</td>
+<td data-value="1">New York Giants</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET = 5/2/1/0.688/182/172/10</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">CSV also carries rank=11, which the official standings page does not publish (F25)</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">GB</td>
+<td data-value="1">Green Bay Packers</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET = 6/3/0/0.667/216/191/25</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">CSV also carries rank=12, which the official standings page does not publish (F25)</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">CLE</td>
+<td data-value="1">Cleveland Browns</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET = 5/4/0/0.556/161/196/-35</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">CSV also carries rank=13, which the official standings page does not publish (F25)</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">LAR</td>
+<td data-value="1">Los Angeles Rams</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET = 5/4/0/0.556/214/181/33</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">CSV also carries rank=14, which the official standings page does not publish (F25)</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NE</td>
+<td data-value="1">New England Patriots</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET = 5/4/0/0.556/211/207/4</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">CSV also carries rank=15, which the official standings page does not publish (F25)</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">SEA</td>
+<td data-value="1">Seattle Seahawks</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET = 5/4/0/0.556/202/162/40</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">CSV also carries rank=16, which the official standings page does not publish (F25)</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">BAL</td>
+<td data-value="1">Baltimore Ravens</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET = 4/5/0/0.444/189/236/-47</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">CSV also carries rank=17, which the official standings page does not publish (F25)</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">DAL</td>
+<td data-value="1">Dallas Cowboys</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET = 4/5/0/0.444/246/236/10</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">CSV also carries rank=18, which the official standings page does not publish (F25)</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">LV</td>
+<td data-value="1">Las Vegas Raiders</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET = 4/5/0/0.444/238/268/-30</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">CSV also carries rank=19, which the official standings page does not publish (F25)</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">CAR</td>
+<td data-value="1">Carolina Panthers</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET = 3/5/0/0.375/199/219/-20</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">CSV also carries rank=20, which the official standings page does not publish (F25)</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">HOU</td>
+<td data-value="1">Houston Texans</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET = 3/5/0/0.375/209/192/17</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">CSV also carries rank=21, which the official standings page does not publish (F25)</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NO</td>
+<td data-value="1">New Orleans Saints</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET = 3/5/0/0.375/185/216/-31</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">CSV also carries rank=22, which the official standings page does not publish (F25)</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">AZ</td>
+<td data-value="1">Arizona Cardinals</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET = 3/6/0/0.333/178/255/-77</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">CSV also carries rank=23, which the official standings page does not publish (F25)</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">ATL</td>
+<td data-value="1">Atlanta Falcons</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET = 3/6/0/0.333/188/223/-35</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">CSV also carries rank=24, which the official standings page does not publish (F25)</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">TB</td>
+<td data-value="1">Tampa Bay Buccaneers</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET = 3/6/0/0.333/202/178/24</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">CSV also carries rank=25, which the official standings page does not publish (F25)</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">WAS</td>
+<td data-value="1">Washington Commanders</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET = 2/5/1/0.313/172/202/-30</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">CSV also carries rank=26, which the official standings page does not publish (F25)</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">IND</td>
+<td data-value="1">Indianapolis Colts</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET = 2/7/0/0.222/184/249/-65</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">CSV also carries rank=27, which the official standings page does not publish (F25)</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NYJ</td>
+<td data-value="1">New York Jets</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET = 2/7/0/0.222/182/223/-41</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">CSV also carries rank=28, which the official standings page does not publish (F25)</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">PHI</td>
+<td data-value="1">Philadelphia Eagles</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET = 2/7/0/0.222/148/221/-73</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">CSV also carries rank=29, which the official standings page does not publish (F25)</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">MIA</td>
+<td data-value="1">Miami Dolphins</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET = 1/7/0/0.125/126/200/-74</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">CSV also carries rank=30, which the official standings page does not publish (F25)</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">TEN</td>
+<td data-value="1">Tennessee Titans</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET = 1/7/0/0.125/144/199/-55</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">CSV also carries rank=31, which the official standings page does not publish (F25)</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">LAC</td>
+<td data-value="1">Los Angeles Chargers</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET = 0/8/0/0.000/121/219/-98</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">CSV also carries rank=32, which the official standings page does not publish (F25)</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+</tbody></table></div>
+<h2 id="injuries">Injury cross-check — all 20 rows</h2>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-combined-injuries" aria-label="Filter tbl-combined-injuries" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-combined-injuries">20 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-combined-injuries"><caption>Every row of the earlier sessions' Thursday-game injuries.csv compared to the JSON snapshot from the official injury report.</caption>
+<thead><tr><th scope="col" class="sortable">Player</th><th scope="col" class="sortable">Team</th><th scope="col" class="sortable">Compared</th><th scope="col" class="sortable">Result</th><th scope="col" class="sortable">Match</th><th scope="col" class="sortable">Note</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr data-verified="true">
+<td data-value="1">John Bates</td>
+<td data-value="1">Washington Commanders</td>
+<td data-value="1" class="wide">POS/injury/practice/game status</td>
+<td data-value="1" class="wide">all 4 fields identical (blanks preserved)</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Blank cells remain blank in both snapshots</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">Treylon Burks</td>
+<td data-value="1">Washington Commanders</td>
+<td data-value="1" class="wide">POS/injury/practice/game status</td>
+<td data-value="1" class="wide">all 4 fields identical (blanks preserved)</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Blank cells remain blank in both snapshots</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">Jayden Daniels</td>
+<td data-value="1">Washington Commanders</td>
+<td data-value="1" class="wide">POS/injury/practice/game status</td>
+<td data-value="1" class="wide">all 4 fields identical (blanks preserved)</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Blank cells remain blank in both snapshots</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">Matt Gulbin</td>
+<td data-value="1">Washington Commanders</td>
+<td data-value="1" class="wide">POS/injury/practice/game status</td>
+<td data-value="1" class="wide">all 4 fields identical (blanks preserved)</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Blank cells remain blank in both snapshots</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">Chig Okonkwo</td>
+<td data-value="1">Washington Commanders</td>
+<td data-value="1" class="wide">POS/injury/practice/game status</td>
+<td data-value="1" class="wide">all 4 fields identical (blanks preserved)</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Blank cells remain blank in both snapshots</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">Lucas Patrick</td>
+<td data-value="1">Washington Commanders</td>
+<td data-value="1" class="wide">POS/injury/practice/game status</td>
+<td data-value="1" class="wide">all 4 fields identical (blanks preserved)</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Blank cells remain blank in both snapshots</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">Amik Robertson</td>
+<td data-value="1">Washington Commanders</td>
+<td data-value="1" class="wide">POS/injury/practice/game status</td>
+<td data-value="1" class="wide">all 4 fields identical (blanks preserved)</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Blank cells remain blank in both snapshots</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">Shy Tuttle</td>
+<td data-value="1">Washington Commanders</td>
+<td data-value="1" class="wide">POS/injury/practice/game status</td>
+<td data-value="1" class="wide">all 4 fields identical (blanks preserved)</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Blank cells remain blank in both snapshots</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">Colson Yankoff</td>
+<td data-value="1">Washington Commanders</td>
+<td data-value="1" class="wide">POS/injury/practice/game status</td>
+<td data-value="1" class="wide">all 4 fields identical (blanks preserved)</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Blank cells remain blank in both snapshots</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">Abdul Carter</td>
+<td data-value="1">New York Giants</td>
+<td data-value="1" class="wide">POS/injury/practice/game status</td>
+<td data-value="1" class="wide">all 4 fields identical (blanks preserved)</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Blank cells remain blank in both snapshots</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">Jermaine Eluemunor</td>
+<td data-value="1">New York Giants</td>
+<td data-value="1" class="wide">POS/injury/practice/game status</td>
+<td data-value="1" class="wide">all 4 fields identical (blanks preserved)</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Blank cells remain blank in both snapshots</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">Malik Harrison</td>
+<td data-value="1">New York Giants</td>
+<td data-value="1" class="wide">POS/injury/practice/game status</td>
+<td data-value="1" class="wide">all 4 fields identical (blanks preserved)</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Blank cells remain blank in both snapshots</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">Colton Hood</td>
+<td data-value="1">New York Giants</td>
+<td data-value="1" class="wide">POS/injury/practice/game status</td>
+<td data-value="1" class="wide">all 4 fields identical (blanks preserved)</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Blank cells remain blank in both snapshots</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">Theo Johnson</td>
+<td data-value="1">New York Giants</td>
+<td data-value="1" class="wide">POS/injury/practice/game status</td>
+<td data-value="1" class="wide">all 4 fields identical (blanks preserved)</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Blank cells remain blank in both snapshots</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">Charlie Jones</td>
+<td data-value="1">New York Giants</td>
+<td data-value="1" class="wide">POS/injury/practice/game status</td>
+<td data-value="1" class="wide">all 4 fields identical (blanks preserved)</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Blank cells remain blank in both snapshots</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">J.J. McCarthy</td>
+<td data-value="1">New York Giants</td>
+<td data-value="1" class="wide">POS/injury/practice/game status</td>
+<td data-value="1" class="wide">all 4 fields identical (blanks preserved)</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Blank cells remain blank in both snapshots</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">Darnell Mooney</td>
+<td data-value="1">New York Giants</td>
+<td data-value="1" class="wide">POS/injury/practice/game status</td>
+<td data-value="1" class="wide">all 4 fields identical (blanks preserved)</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Blank cells remain blank in both snapshots</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">Malik Nabers</td>
+<td data-value="1">New York Giants</td>
+<td data-value="1" class="wide">POS/injury/practice/game status</td>
+<td data-value="1" class="wide">all 4 fields identical (blanks preserved)</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Blank cells remain blank in both snapshots</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">Cam Skattebo</td>
+<td data-value="1">New York Giants</td>
+<td data-value="1" class="wide">POS/injury/practice/game status</td>
+<td data-value="1" class="wide">all 4 fields identical (blanks preserved)</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Blank cells remain blank in both snapshots</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">Andrew Thomas</td>
+<td data-value="1">New York Giants</td>
+<td data-value="1" class="wide">POS/injury/practice/game status</td>
+<td data-value="1" class="wide">all 4 fields identical (blanks preserved)</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Blank cells remain blank in both snapshots</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+</tbody></table></div>
+<h2 id="teams">Team directory cross-check</h2>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-combined-teams" aria-label="Filter tbl-combined-teams" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-combined-teams">32 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-combined-teams"><caption>Team-directory abbreviations compared with the official standings snapshot.</caption>
+<thead><tr><th scope="col" class="sortable">Abbr</th><th scope="col" class="sortable">Team</th><th scope="col" class="sortable">Division</th><th scope="col" class="sortable">Check</th><th scope="col" class="sortable">Match</th><th scope="col" class="sortable">Note</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr data-verified="true">
+<td data-value="1">AZ</td>
+<td data-value="1">Arizona Cardinals</td>
+<td data-value="1">NFC West</td>
+<td data-value="1" class="wide">abbreviation present in official standings snapshot</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Division was cross-checked by session 15e79a53 against official division standings; not re-derived here</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">ATL</td>
+<td data-value="1">Atlanta Falcons</td>
+<td data-value="1">NFC South</td>
+<td data-value="1" class="wide">abbreviation present in official standings snapshot</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Division was cross-checked by session 15e79a53 against official division standings; not re-derived here</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">BAL</td>
+<td data-value="1">Baltimore Ravens</td>
+<td data-value="1">AFC North</td>
+<td data-value="1" class="wide">abbreviation present in official standings snapshot</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Division was cross-checked by session 15e79a53 against official division standings; not re-derived here</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">BUF</td>
+<td data-value="1">Buffalo Bills</td>
+<td data-value="1">AFC East</td>
+<td data-value="1" class="wide">abbreviation present in official standings snapshot</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Division was cross-checked by session 15e79a53 against official division standings; not re-derived here</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">CAR</td>
+<td data-value="1">Carolina Panthers</td>
+<td data-value="1">NFC South</td>
+<td data-value="1" class="wide">abbreviation present in official standings snapshot</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Division was cross-checked by session 15e79a53 against official division standings; not re-derived here</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">CHI</td>
+<td data-value="1">Chicago Bears</td>
+<td data-value="1">NFC North</td>
+<td data-value="1" class="wide">abbreviation present in official standings snapshot</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Division was cross-checked by session 15e79a53 against official division standings; not re-derived here</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">CIN</td>
+<td data-value="1">Cincinnati Bengals</td>
+<td data-value="1">AFC North</td>
+<td data-value="1" class="wide">abbreviation present in official standings snapshot</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Division was cross-checked by session 15e79a53 against official division standings; not re-derived here</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">CLE</td>
+<td data-value="1">Cleveland Browns</td>
+<td data-value="1">AFC North</td>
+<td data-value="1" class="wide">abbreviation present in official standings snapshot</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Division was cross-checked by session 15e79a53 against official division standings; not re-derived here</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">DAL</td>
+<td data-value="1">Dallas Cowboys</td>
+<td data-value="1">NFC East</td>
+<td data-value="1" class="wide">abbreviation present in official standings snapshot</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Division was cross-checked by session 15e79a53 against official division standings; not re-derived here</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">DEN</td>
+<td data-value="1">Denver Broncos</td>
+<td data-value="1">AFC West</td>
+<td data-value="1" class="wide">abbreviation present in official standings snapshot</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Division was cross-checked by session 15e79a53 against official division standings; not re-derived here</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">DET</td>
+<td data-value="1">Detroit Lions</td>
+<td data-value="1">NFC North</td>
+<td data-value="1" class="wide">abbreviation present in official standings snapshot</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Division was cross-checked by session 15e79a53 against official division standings; not re-derived here</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">GB</td>
+<td data-value="1">Green Bay Packers</td>
+<td data-value="1">NFC North</td>
+<td data-value="1" class="wide">abbreviation present in official standings snapshot</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Division was cross-checked by session 15e79a53 against official division standings; not re-derived here</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">HOU</td>
+<td data-value="1">Houston Texans</td>
+<td data-value="1">AFC South</td>
+<td data-value="1" class="wide">abbreviation present in official standings snapshot</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Division was cross-checked by session 15e79a53 against official division standings; not re-derived here</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">IND</td>
+<td data-value="1">Indianapolis Colts</td>
+<td data-value="1">AFC South</td>
+<td data-value="1" class="wide">abbreviation present in official standings snapshot</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Division was cross-checked by session 15e79a53 against official division standings; not re-derived here</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">JAX</td>
+<td data-value="1">Jacksonville Jaguars</td>
+<td data-value="1">AFC South</td>
+<td data-value="1" class="wide">abbreviation present in official standings snapshot</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Division was cross-checked by session 15e79a53 against official division standings; not re-derived here</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">KC</td>
+<td data-value="1">Kansas City Chiefs</td>
+<td data-value="1">AFC West</td>
+<td data-value="1" class="wide">abbreviation present in official standings snapshot</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Division was cross-checked by session 15e79a53 against official division standings; not re-derived here</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">LV</td>
+<td data-value="1">Las Vegas Raiders</td>
+<td data-value="1">AFC West</td>
+<td data-value="1" class="wide">abbreviation present in official standings snapshot</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Division was cross-checked by session 15e79a53 against official division standings; not re-derived here</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">LAC</td>
+<td data-value="1">Los Angeles Chargers</td>
+<td data-value="1">AFC West</td>
+<td data-value="1" class="wide">abbreviation present in official standings snapshot</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Division was cross-checked by session 15e79a53 against official division standings; not re-derived here</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">LAR</td>
+<td data-value="1">Los Angeles Rams</td>
+<td data-value="1">NFC West</td>
+<td data-value="1" class="wide">abbreviation present in official standings snapshot</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Division was cross-checked by session 15e79a53 against official division standings; not re-derived here</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">MIA</td>
+<td data-value="1">Miami Dolphins</td>
+<td data-value="1">AFC East</td>
+<td data-value="1" class="wide">abbreviation present in official standings snapshot</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Division was cross-checked by session 15e79a53 against official division standings; not re-derived here</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">MIN</td>
+<td data-value="1">Minnesota Vikings</td>
+<td data-value="1">NFC North</td>
+<td data-value="1" class="wide">abbreviation present in official standings snapshot</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Division was cross-checked by session 15e79a53 against official division standings; not re-derived here</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NE</td>
+<td data-value="1">New England Patriots</td>
+<td data-value="1">AFC East</td>
+<td data-value="1" class="wide">abbreviation present in official standings snapshot</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Division was cross-checked by session 15e79a53 against official division standings; not re-derived here</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NO</td>
+<td data-value="1">New Orleans Saints</td>
+<td data-value="1">NFC South</td>
+<td data-value="1" class="wide">abbreviation present in official standings snapshot</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Division was cross-checked by session 15e79a53 against official division standings; not re-derived here</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NYG</td>
+<td data-value="1">New York Giants</td>
+<td data-value="1">NFC East</td>
+<td data-value="1" class="wide">abbreviation present in official standings snapshot</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Division was cross-checked by session 15e79a53 against official division standings; not re-derived here</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NYJ</td>
+<td data-value="1">New York Jets</td>
+<td data-value="1">AFC East</td>
+<td data-value="1" class="wide">abbreviation present in official standings snapshot</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Division was cross-checked by session 15e79a53 against official division standings; not re-derived here</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">PHI</td>
+<td data-value="1">Philadelphia Eagles</td>
+<td data-value="1">NFC East</td>
+<td data-value="1" class="wide">abbreviation present in official standings snapshot</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Division was cross-checked by session 15e79a53 against official division standings; not re-derived here</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">PIT</td>
+<td data-value="1">Pittsburgh Steelers</td>
+<td data-value="1">AFC North</td>
+<td data-value="1" class="wide">abbreviation present in official standings snapshot</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Division was cross-checked by session 15e79a53 against official division standings; not re-derived here</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">SF</td>
+<td data-value="1">San Francisco 49ers</td>
+<td data-value="1">NFC West</td>
+<td data-value="1" class="wide">abbreviation present in official standings snapshot</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Division was cross-checked by session 15e79a53 against official division standings; not re-derived here</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">SEA</td>
+<td data-value="1">Seattle Seahawks</td>
+<td data-value="1">NFC West</td>
+<td data-value="1" class="wide">abbreviation present in official standings snapshot</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Division was cross-checked by session 15e79a53 against official division standings; not re-derived here</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">TB</td>
+<td data-value="1">Tampa Bay Buccaneers</td>
+<td data-value="1">NFC South</td>
+<td data-value="1" class="wide">abbreviation present in official standings snapshot</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Division was cross-checked by session 15e79a53 against official division standings; not re-derived here</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">TEN</td>
+<td data-value="1">Tennessee Titans</td>
+<td data-value="1">AFC South</td>
+<td data-value="1" class="wide">abbreviation present in official standings snapshot</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Division was cross-checked by session 15e79a53 against official division standings; not re-derived here</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">WAS</td>
+<td data-value="1">Washington Commanders</td>
+<td data-value="1">NFC East</td>
+<td data-value="1" class="wide">abbreviation present in official standings snapshot</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Division was cross-checked by session 15e79a53 against official division standings; not re-derived here</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+</tbody></table></div>
+<h2 id="third-generation">Third generation — verified data and model artifacts</h2>
+<div class="callout">Sessions <code>25aa7696</code> and <code>7600ed8b</code> published <code>data/verified/*</code>, <code>analysis/*</code>, <code>scripts/verified/*</code> and six additional pages. All of their files are preserved, and their standings, injuries and 136 official game results are re-verified below, line by line. Their model-derived correlations, own lines, backtests and luck analysis are <b>not</b> re-derived by this integration session; they remain published with their original sources and an explicit FAIL validation verdict (flags F30-F34).</div>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-third-standings" aria-label="Filter tbl-third-standings" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-third-standings">32 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-third-standings"><caption>All 32 rows of data/verified/standings_2026.csv compared with the official standings snapshot.</caption>
+<thead><tr><th scope="col" class="sortable">Club</th><th scope="col" class="sortable">Team</th><th scope="col" class="sortable">Compared</th><th scope="col" class="sortable">Result</th><th scope="col" class="sortable">Match</th><th scope="col" class="sortable">Note</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr data-verified="true">
+<td data-value="1">BUF</td>
+<td data-value="1">Buffalo Bills</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">PF - PA = NET and PCT = (W + T/2)/games also independently recomputed</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NE</td>
+<td data-value="1">New England Patriots</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">PF - PA = NET and PCT = (W + T/2)/games also independently recomputed</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NYJ</td>
+<td data-value="1">New York Jets</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">PF - PA = NET and PCT = (W + T/2)/games also independently recomputed</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">MIA</td>
+<td data-value="1">Miami Dolphins</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">PF - PA = NET and PCT = (W + T/2)/games also independently recomputed</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">PIT</td>
+<td data-value="1">Pittsburgh Steelers</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">PF - PA = NET and PCT = (W + T/2)/games also independently recomputed</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">CIN</td>
+<td data-value="1">Cincinnati Bengals</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">PF - PA = NET and PCT = (W + T/2)/games also independently recomputed</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">CLE</td>
+<td data-value="1">Cleveland Browns</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">PF - PA = NET and PCT = (W + T/2)/games also independently recomputed</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">BAL</td>
+<td data-value="1">Baltimore Ravens</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">PF - PA = NET and PCT = (W + T/2)/games also independently recomputed</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">JAX</td>
+<td data-value="1">Jacksonville Jaguars</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">PF - PA = NET and PCT = (W + T/2)/games also independently recomputed</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">HOU</td>
+<td data-value="1">Houston Texans</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">PF - PA = NET and PCT = (W + T/2)/games also independently recomputed</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">IND</td>
+<td data-value="1">Indianapolis Colts</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">PF - PA = NET and PCT = (W + T/2)/games also independently recomputed</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">TEN</td>
+<td data-value="1">Tennessee Titans</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">PF - PA = NET and PCT = (W + T/2)/games also independently recomputed</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">DEN</td>
+<td data-value="1">Denver Broncos</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">PF - PA = NET and PCT = (W + T/2)/games also independently recomputed</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">KC</td>
+<td data-value="1">Kansas City Chiefs</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">PF - PA = NET and PCT = (W + T/2)/games also independently recomputed</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">LV</td>
+<td data-value="1">Las Vegas Raiders</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">PF - PA = NET and PCT = (W + T/2)/games also independently recomputed</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">LAC</td>
+<td data-value="1">Los Angeles Chargers</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">PF - PA = NET and PCT = (W + T/2)/games also independently recomputed</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NYG</td>
+<td data-value="1">New York Giants</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">PF - PA = NET and PCT = (W + T/2)/games also independently recomputed</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">DAL</td>
+<td data-value="1">Dallas Cowboys</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">PF - PA = NET and PCT = (W + T/2)/games also independently recomputed</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">WAS</td>
+<td data-value="1">Washington Commanders</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">PF - PA = NET and PCT = (W + T/2)/games also independently recomputed</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">PHI</td>
+<td data-value="1">Philadelphia Eagles</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">PF - PA = NET and PCT = (W + T/2)/games also independently recomputed</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">CHI</td>
+<td data-value="1">Chicago Bears</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">PF - PA = NET and PCT = (W + T/2)/games also independently recomputed</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">DET</td>
+<td data-value="1">Detroit Lions</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">PF - PA = NET and PCT = (W + T/2)/games also independently recomputed</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">MIN</td>
+<td data-value="1">Minnesota Vikings</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">PF - PA = NET and PCT = (W + T/2)/games also independently recomputed</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">GB</td>
+<td data-value="1">Green Bay Packers</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">PF - PA = NET and PCT = (W + T/2)/games also independently recomputed</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">CAR</td>
+<td data-value="1">Carolina Panthers</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">PF - PA = NET and PCT = (W + T/2)/games also independently recomputed</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NO</td>
+<td data-value="1">New Orleans Saints</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">PF - PA = NET and PCT = (W + T/2)/games also independently recomputed</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">TB</td>
+<td data-value="1">Tampa Bay Buccaneers</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">PF - PA = NET and PCT = (W + T/2)/games also independently recomputed</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">ATL</td>
+<td data-value="1">Atlanta Falcons</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">PF - PA = NET and PCT = (W + T/2)/games also independently recomputed</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">SF</td>
+<td data-value="1">San Francisco 49ers</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">PF - PA = NET and PCT = (W + T/2)/games also independently recomputed</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">SEA</td>
+<td data-value="1">Seattle Seahawks</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">PF - PA = NET and PCT = (W + T/2)/games also independently recomputed</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">LA</td>
+<td data-value="1">Los Angeles Rams</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">PF - PA = NET and PCT = (W + T/2)/games also independently recomputed</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">AZ</td>
+<td data-value="1">Arizona Cardinals</td>
+<td data-value="1" class="wide">W/L/T/PCT/PF/PA/NET</td>
+<td data-value="1" class="wide">all 7 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">PF - PA = NET and PCT = (W + T/2)/games also independently recomputed</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+</tbody></table></div>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-third-injuries" aria-label="Filter tbl-third-injuries" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-third-injuries">6 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-third-injuries"><caption>All 6 published Week 10 game-designation rows compared with the official injury-report snapshot.</caption>
+<thead><tr><th scope="col" class="sortable">Player</th><th scope="col" class="sortable">Club</th><th scope="col" class="sortable">Compared</th><th scope="col" class="sortable">Result</th><th scope="col" class="sortable">Match</th><th scope="col" class="sortable">Note</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr data-verified="true">
+<td data-value="1">Lucas Patrick</td>
+<td data-value="1">WAS</td>
+<td data-value="1" class="wide">POS/injury/practice/game status</td>
+<td data-value="1" class="wide">all 4 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Only the 6 rows with a published game designation are stored</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">Colson Yankoff</td>
+<td data-value="1">WAS</td>
+<td data-value="1" class="wide">POS/injury/practice/game status</td>
+<td data-value="1" class="wide">all 4 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Only the 6 rows with a published game designation are stored</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">Malik Harrison</td>
+<td data-value="1">NYG</td>
+<td data-value="1" class="wide">POS/injury/practice/game status</td>
+<td data-value="1" class="wide">all 4 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Only the 6 rows with a published game designation are stored</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">Ben Brown</td>
+<td data-value="1">NE</td>
+<td data-value="1" class="wide">POS/injury/practice/game status</td>
+<td data-value="1" class="wide">all 4 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Only the 6 rows with a published game designation are stored</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">Carlton Davis III</td>
+<td data-value="1">NE</td>
+<td data-value="1" class="wide">POS/injury/practice/game status</td>
+<td data-value="1" class="wide">all 4 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Only the 6 rows with a published game designation are stored</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">TreVeyon Henderson</td>
+<td data-value="1">NE</td>
+<td data-value="1" class="wide">POS/injury/practice/game status</td>
+<td data-value="1" class="wide">all 4 fields identical</td>
+<td><span class="badge neutral">YES</span></td>
+<td data-value="1" class="wide">Only the 6 rows with a published game designation are stored</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+</tbody></table></div>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-third-games" aria-label="Filter tbl-third-games" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-third-games">32 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-third-games"><caption>W/L/T, PF, PA, NET and PCT recomputed independently from 136 official game rows for every club.</caption>
+<thead><tr><th scope="col" class="sortable">Club</th><th scope="col" class="sortable">Team</th><th scope="col" class="sortable">Games</th><th scope="col" class="sortable">Recomputed from official results</th><th scope="col" class="sortable">Result</th><th scope="col" class="sortable">Match</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr data-verified="true">
+<td data-value="1">BUF</td>
+<td data-value="1">Buffalo Bills</td>
+<td data-value="1" class="num">8</td>
+<td data-value="1" class="wide">7-1-0, 256 PF / 187 PA / 69 NET</td>
+<td data-value="1" class="wide">all 7 fields reproduce the published standings</td>
+<td><span class="badge neutral">YES</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NE</td>
+<td data-value="1">New England Patriots</td>
+<td data-value="1" class="num">9</td>
+<td data-value="1" class="wide">5-4-0, 211 PF / 207 PA / 4 NET</td>
+<td data-value="1" class="wide">all 7 fields reproduce the published standings</td>
+<td><span class="badge neutral">YES</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NYJ</td>
+<td data-value="1">New York Jets</td>
+<td data-value="1" class="num">9</td>
+<td data-value="1" class="wide">2-7-0, 182 PF / 223 PA / -41 NET</td>
+<td data-value="1" class="wide">all 7 fields reproduce the published standings</td>
+<td><span class="badge neutral">YES</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">MIA</td>
+<td data-value="1">Miami Dolphins</td>
+<td data-value="1" class="num">8</td>
+<td data-value="1" class="wide">1-7-0, 126 PF / 200 PA / -74 NET</td>
+<td data-value="1" class="wide">all 7 fields reproduce the published standings</td>
+<td><span class="badge neutral">YES</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">PIT</td>
+<td data-value="1">Pittsburgh Steelers</td>
+<td data-value="1" class="num">8</td>
+<td data-value="1" class="wide">6-2-0, 180 PF / 144 PA / 36 NET</td>
+<td data-value="1" class="wide">all 7 fields reproduce the published standings</td>
+<td><span class="badge neutral">YES</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">CIN</td>
+<td data-value="1">Cincinnati Bengals</td>
+<td data-value="1" class="num">8</td>
+<td data-value="1" class="wide">6-2-0, 240 PF / 175 PA / 65 NET</td>
+<td data-value="1" class="wide">all 7 fields reproduce the published standings</td>
+<td><span class="badge neutral">YES</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">CLE</td>
+<td data-value="1">Cleveland Browns</td>
+<td data-value="1" class="num">9</td>
+<td data-value="1" class="wide">5-4-0, 161 PF / 196 PA / -35 NET</td>
+<td data-value="1" class="wide">all 7 fields reproduce the published standings</td>
+<td><span class="badge neutral">YES</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">BAL</td>
+<td data-value="1">Baltimore Ravens</td>
+<td data-value="1" class="num">9</td>
+<td data-value="1" class="wide">4-5-0, 189 PF / 236 PA / -47 NET</td>
+<td data-value="1" class="wide">all 7 fields reproduce the published standings</td>
+<td><span class="badge neutral">YES</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">JAX</td>
+<td data-value="1">Jacksonville Jaguars</td>
+<td data-value="1" class="num">8</td>
+<td data-value="1" class="wide">6-2-0, 229 PF / 121 PA / 108 NET</td>
+<td data-value="1" class="wide">all 7 fields reproduce the published standings</td>
+<td><span class="badge neutral">YES</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">HOU</td>
+<td data-value="1">Houston Texans</td>
+<td data-value="1" class="num">8</td>
+<td data-value="1" class="wide">3-5-0, 209 PF / 192 PA / 17 NET</td>
+<td data-value="1" class="wide">all 7 fields reproduce the published standings</td>
+<td><span class="badge neutral">YES</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">IND</td>
+<td data-value="1">Indianapolis Colts</td>
+<td data-value="1" class="num">9</td>
+<td data-value="1" class="wide">2-7-0, 184 PF / 249 PA / -65 NET</td>
+<td data-value="1" class="wide">all 7 fields reproduce the published standings</td>
+<td><span class="badge neutral">YES</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">TEN</td>
+<td data-value="1">Tennessee Titans</td>
+<td data-value="1" class="num">8</td>
+<td data-value="1" class="wide">1-7-0, 144 PF / 199 PA / -55 NET</td>
+<td data-value="1" class="wide">all 7 fields reproduce the published standings</td>
+<td><span class="badge neutral">YES</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">DEN</td>
+<td data-value="1">Denver Broncos</td>
+<td data-value="1" class="num">9</td>
+<td data-value="1" class="wide">7-2-0, 198 PF / 186 PA / 12 NET</td>
+<td data-value="1" class="wide">all 7 fields reproduce the published standings</td>
+<td><span class="badge neutral">YES</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">KC</td>
+<td data-value="1">Kansas City Chiefs</td>
+<td data-value="1" class="num">8</td>
+<td data-value="1" class="wide">6-2-0, 202 PF / 143 PA / 59 NET</td>
+<td data-value="1" class="wide">all 7 fields reproduce the published standings</td>
+<td><span class="badge neutral">YES</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">LV</td>
+<td data-value="1">Las Vegas Raiders</td>
+<td data-value="1" class="num">9</td>
+<td data-value="1" class="wide">4-5-0, 238 PF / 268 PA / -30 NET</td>
+<td data-value="1" class="wide">all 7 fields reproduce the published standings</td>
+<td><span class="badge neutral">YES</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">LAC</td>
+<td data-value="1">Los Angeles Chargers</td>
+<td data-value="1" class="num">8</td>
+<td data-value="1" class="wide">0-8-0, 121 PF / 219 PA / -98 NET</td>
+<td data-value="1" class="wide">all 7 fields reproduce the published standings</td>
+<td><span class="badge neutral">YES</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NYG</td>
+<td data-value="1">New York Giants</td>
+<td data-value="1" class="num">8</td>
+<td data-value="1" class="wide">5-2-1, 182 PF / 172 PA / 10 NET</td>
+<td data-value="1" class="wide">all 7 fields reproduce the published standings</td>
+<td><span class="badge neutral">YES</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">DAL</td>
+<td data-value="1">Dallas Cowboys</td>
+<td data-value="1" class="num">9</td>
+<td data-value="1" class="wide">4-5-0, 246 PF / 236 PA / 10 NET</td>
+<td data-value="1" class="wide">all 7 fields reproduce the published standings</td>
+<td><span class="badge neutral">YES</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">WAS</td>
+<td data-value="1">Washington Commanders</td>
+<td data-value="1" class="num">8</td>
+<td data-value="1" class="wide">2-5-1, 172 PF / 202 PA / -30 NET</td>
+<td data-value="1" class="wide">all 7 fields reproduce the published standings</td>
+<td><span class="badge neutral">YES</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">PHI</td>
+<td data-value="1">Philadelphia Eagles</td>
+<td data-value="1" class="num">9</td>
+<td data-value="1" class="wide">2-7-0, 148 PF / 221 PA / -73 NET</td>
+<td data-value="1" class="wide">all 7 fields reproduce the published standings</td>
+<td><span class="badge neutral">YES</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">CHI</td>
+<td data-value="1">Chicago Bears</td>
+<td data-value="1" class="num">9</td>
+<td data-value="1" class="wide">7-2-0, 241 PF / 184 PA / 57 NET</td>
+<td data-value="1" class="wide">all 7 fields reproduce the published standings</td>
+<td><span class="badge neutral">YES</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">DET</td>
+<td data-value="1">Detroit Lions</td>
+<td data-value="1" class="num">8</td>
+<td data-value="1" class="wide">6-2-0, 222 PF / 189 PA / 33 NET</td>
+<td data-value="1" class="wide">all 7 fields reproduce the published standings</td>
+<td><span class="badge neutral">YES</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">MIN</td>
+<td data-value="1">Minnesota Vikings</td>
+<td data-value="1" class="num">8</td>
+<td data-value="1" class="wide">6-2-0, 146 PF / 116 PA / 30 NET</td>
+<td data-value="1" class="wide">all 7 fields reproduce the published standings</td>
+<td><span class="badge neutral">YES</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">GB</td>
+<td data-value="1">Green Bay Packers</td>
+<td data-value="1" class="num">9</td>
+<td data-value="1" class="wide">6-3-0, 216 PF / 191 PA / 25 NET</td>
+<td data-value="1" class="wide">all 7 fields reproduce the published standings</td>
+<td><span class="badge neutral">YES</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">CAR</td>
+<td data-value="1">Carolina Panthers</td>
+<td data-value="1" class="num">8</td>
+<td data-value="1" class="wide">3-5-0, 199 PF / 219 PA / -20 NET</td>
+<td data-value="1" class="wide">all 7 fields reproduce the published standings</td>
+<td><span class="badge neutral">YES</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">NO</td>
+<td data-value="1">New Orleans Saints</td>
+<td data-value="1" class="num">8</td>
+<td data-value="1" class="wide">3-5-0, 185 PF / 216 PA / -31 NET</td>
+<td data-value="1" class="wide">all 7 fields reproduce the published standings</td>
+<td><span class="badge neutral">YES</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">TB</td>
+<td data-value="1">Tampa Bay Buccaneers</td>
+<td data-value="1" class="num">9</td>
+<td data-value="1" class="wide">3-6-0, 202 PF / 178 PA / 24 NET</td>
+<td data-value="1" class="wide">all 7 fields reproduce the published standings</td>
+<td><span class="badge neutral">YES</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">ATL</td>
+<td data-value="1">Atlanta Falcons</td>
+<td data-value="1" class="num">9</td>
+<td data-value="1" class="wide">3-6-0, 188 PF / 223 PA / -35 NET</td>
+<td data-value="1" class="wide">all 7 fields reproduce the published standings</td>
+<td><span class="badge neutral">YES</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">SF</td>
+<td data-value="1">San Francisco 49ers</td>
+<td data-value="1" class="num">8</td>
+<td data-value="1" class="wide">7-1-0, 235 PF / 156 PA / 79 NET</td>
+<td data-value="1" class="wide">all 7 fields reproduce the published standings</td>
+<td><span class="badge neutral">YES</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">SEA</td>
+<td data-value="1">Seattle Seahawks</td>
+<td data-value="1" class="num">9</td>
+<td data-value="1" class="wide">5-4-0, 202 PF / 162 PA / 40 NET</td>
+<td data-value="1" class="wide">all 7 fields reproduce the published standings</td>
+<td><span class="badge neutral">YES</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">LA</td>
+<td data-value="1">Los Angeles Rams</td>
+<td data-value="1" class="num">9</td>
+<td data-value="1" class="wide">5-4-0, 214 PF / 181 PA / 33 NET</td>
+<td data-value="1" class="wide">all 7 fields reproduce the published standings</td>
+<td><span class="badge neutral">YES</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr data-verified="true">
+<td data-value="1">AZ</td>
+<td data-value="1">Arizona Cardinals</td>
+<td data-value="1" class="num">9</td>
+<td data-value="1" class="wide">3-6-0, 178 PF / 255 PA / -77 NET</td>
+<td data-value="1" class="wide">all 7 fields reproduce the published standings</td>
+<td><span class="badge neutral">YES</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+</tbody></table></div>
+<h2 id="preserved">Preserved work from earlier sessions</h2>
+<div class="tabletools"><input class="table-filter" data-target="#tbl-preserved" aria-label="Filter tbl-preserved" placeholder="Filter rows…">
+<span class="count" data-count-for="tbl-preserved">14 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-preserved"><caption>Every artifact merged from main is preserved and reachable; each row links to the official repository.</caption>
+<thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Artifact</th><th scope="col" class="sortable">Path</th><th scope="col" class="sortable">Note</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
+<tr id="PR-01" data-verified="true">
+<td><code>PR-01</code></td>
+<td data-value="1">Legacy landing page</td>
+<td data-value="1" class="wide">legacy-site.html</td>
+<td data-value="1" class="wide">Original index.html saved verbatim (self-links rewritten to the preserved path)</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="PR-02" data-verified="true">
+<td><code>PR-02</code></td>
+<td data-value="1">Legacy subpages</td>
+<td data-value="1" class="wide">pages/*.html</td>
+<td data-value="1" class="wide">17 subpages from sessions 533256e1, 690e397b, 25aa7696 and 7600ed8b</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="PR-03" data-verified="true">
+<td><code>PR-03</code></td>
+<td data-value="1">Legacy styles and assets</td>
+<td data-value="1" class="wide">styles.css, assets/css/style.css</td>
+<td data-value="1" class="wide">Kept so the preserved pages render unchanged</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="PR-04" data-verified="true">
+<td><code>PR-04</code></td>
+<td data-value="1">CSV snapshots</td>
+<td data-value="1" class="wide">data/teams.csv, data/standings.csv, data/injuries.csv</td>
+<td data-value="1" class="wide">Cross-checked above; rank column flagged F25</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="PR-05" data-verified="true">
+<td><code>PR-05</code></td>
+<td data-value="1">Independent review</td>
+<td data-value="1" class="wide">docs/review/merged-site.md</td>
+<td data-value="1" class="wide">Read-only post-merge review by session 15e79a53</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="PR-06" data-verified="true">
+<td><code>PR-06</code></td>
+<td data-value="1">Archived coordination board</td>
+<td data-value="1" class="wide">docs/COORDINATION-archive-main.md</td>
+<td data-value="1" class="wide">Pre-integration board preserved verbatim</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="PR-07" data-verified="true">
+<td><code>PR-07</code></td>
+<td data-value="1">Archived README</td>
+<td data-value="1" class="wide">docs/README-session-533256e1.md</td>
+<td data-value="1" class="wide">Earlier README preserved verbatim</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="PR-08" data-verified="true">
+<td><code>PR-08</code></td>
+<td data-value="1">Deployment workflow</td>
+<td data-value="1" class="wide">.github/workflows/pages.yml</td>
+<td data-value="1" class="wide">Earlier sessions&#x27; Actions deploy workflow kept; this session adds verify.yml</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S22 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="PR-09" data-verified="true">
+<td><code>PR-09</code></td>
+<td data-value="1">Verified official game results</td>
+<td data-value="1" class="wide">data/verified/games_2026.csv</td>
+<td data-value="1" class="wide">136 games, weeks 1-9, each with an official NFL.com week URL</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="PR-10" data-verified="true">
+<td><code>PR-10</code></td>
+<td data-value="1">Own-line and model artifacts</td>
+<td data-value="1" class="wide">data/verified/model/*.json, pages/lines.html</td>
+<td data-value="1" class="wide">Week 10 model margins/totals with an explicit FAIL validation verdict</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda353.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official statistical test">S18 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="PR-11" data-verified="true">
+<td><code>PR-11</code></td>
+<td data-value="1">Correlation, backtest and luck analysis</td>
+<td data-value="1" class="wide">pages/analysis.html, data/verified/model/correlations.json</td>
+<td data-value="1" class="wide">Computed from the 136 official game results; distinct from the standings correlations</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="PR-12" data-verified="true">
+<td><code>PR-12</code></td>
+<td data-value="1">Availability and depth-chart probe</td>
+<td data-value="1" class="wide">pages/availability.html, data/verified/depth_chart_probe.csv</td>
+<td data-value="1" class="wide">NFL.com depth-chart URLs probed and recorded as 404; see flag F33</td>
+<td><span class="src"><a href="https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official inactives list">S05 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="PR-13" data-verified="true">
+<td><code>PR-13</code></td>
+<td data-value="1">Analysis pipeline and CI gates</td>
+<td data-value="1" class="wide">analysis/*.py, scripts/verified/*.py</td>
+<td data-value="1" class="wide">Numeric audit, nav check, external-link report and validation gate retained in CI</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S22 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="PR-14" data-verified="true">
+<td><code>PR-14</code></td>
+<td data-value="1">Official evidence snapshot</td>
+<td data-value="1" class="wide">docs/official-evidence/2026-11-12-standings.md</td>
+<td data-value="1" class="wide">Re-fetched official standings page content stored for manual line-by-line review</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+</tbody></table></div>
+<h2 id="reconcile">Board and scope reconciliation</h2>
+<div class="panel"><p>The pre-integration board contains an unclaimed task <b>T13</b> ("Apply post-merge source, table-citation, stale-content, and flagged-item corrections"). This integration session claims T13 without editing the earlier sessions' product files: the new dashboard supplies row-level official citations on every table, omits the unsourced rank column, and publishes the legacy pages as clearly labelled historical material. Residual defects are flagged F25–F28 with official source links. Requests that would require editing <code>pages/*.html</code> are logged here and in COORDINATION.md rather than applied, because those files are owned by the earlier sessions.</p></div>
+      <div class="footer">
+        NFL1 · 2026 Week 10 snapshot retrieved 2026-11-12 (UTC) ·
+        <a href="verification.html">Verification &amp; sources</a> ·
+        <a href="flagged.html">Flagged for Review</a> ·
+        <a href="https://github.com/kanlerxz87-cyber/NFL1">Source repository ↗</a><br>
+        Blank cells are values the official source does not publish. No value on this site is inferred or filled in.
+      </div>
+    </main>
+  </div>
+</div>
+<script src="site/assets/app.js"></script>
+</body>
+</html>

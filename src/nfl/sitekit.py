@@ -27,13 +27,27 @@ def first_url(text: str | None) -> str | None:
     m = _URL_RE.search(text)
     return m.group(0).rstrip(".,;") if m else None
 
-#: Where the built site is written, and therefore where GitHub Pages serves it
-#: from. The repository's Pages source is fixed to `main` at `/` and the API
-#: refuses to change it (403 - the integration token lacks `pages:write`), so
-#: the site is published from the repository root rather than from `docs/`.
+#: Where this subsystem's built site is written, and therefore where GitHub
+#: Pages serves it from.
+#:
+#: This repository already has a live site published from the repository root by
+#: earlier sessions (`index.html` plus `pages/`), and the Pages source is pinned
+#: to `main` at `/` - `PUT /repos/.../pages` returns 403 because the integration
+#: token lacks `pages:write`. Publishing a second 20-page site at the root would
+#: overwrite five of their pages (`index`, `executive-summary`, `flagged`,
+#: `suggestions`, `verification`) and destroy merged work, which the coordination
+#: protocol forbids.
+#:
+#: So this subsystem publishes into `verified-lab/`, a directory no other session
+#: owns, and links are relative so the whole sub-site works unchanged at
+#: https://kanlerxz87-cyber.github.io/NFL1/verified-lab/. Their root site's CI
+#: gate (`scripts/verified/check_site.py`) scans only `index.html` and `pages/`,
+#: so this directory cannot break it.
+#:
 #: Override with NFL1_SITE_OUT for a scratch build.
-SITE_OUT = pathlib.Path(os.environ["NFL1_SITE_OUT"]).resolve() \
-    if os.environ.get("NFL1_SITE_OUT") else pathlib.Path(__file__).resolve().parents[2]
+SITE_OUT = (pathlib.Path(os.environ["NFL1_SITE_OUT"]).resolve()
+            if os.environ.get("NFL1_SITE_OUT")
+            else pathlib.Path(__file__).resolve().parents[2] / "verified-lab")
 
 REPO_URL = "https://github.com/kanlerxz87-cyber/NFL1"
 

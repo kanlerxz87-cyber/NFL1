@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verified Data — NFL1</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<header>
+  <div class="brand">NFL1 — NFL Analytics Dashboard</div>
+  <nav>
+    <a href="../index.html">Overview</a>
+    <a href="executive-summary.html">Executive Summary</a>
+    <a href="teams.html">Teams</a>
+    <a href="standings.html">Standings</a>
+    <a href="injuries.html">Injuries</a>
+    <a href="availability.html">Availability</a>
+    <a href="data.html" class="active">Verified Data</a>
+    <a href="lines.html">Own Lines</a>
+    <a href="analysis.html">Validation & Correlation</a>
+    <a href="decisions.html">Decision Register</a>
+    <a href="verified.html">Verified Artifacts</a>
+    <a href="evidence.html">Evidence</a>
+    <a href="models.html">Strategy Lab</a>
+    <a href="strategies.html">Strategies</a>
+    <a href="suggestions.html">Suggestions</a>
+    <a href="questions.html">Questions</a>
+    <a href="flagged.html">Flagged</a>
+    <a href="review.html">Review</a>
+  </nav>
+</header>
+<main>
+  <h1>Verified Data</h1>
+  <p class="muted">Official-source dataset, refreshed and re-checked automatically · generated 2026-11-12 04:50 UTC</p>
+
+  <div class="grid">
+    <div class="stat"><div class="label">Completed games verified</div><div class="value">136</div>
+      <div class="muted">2026 regular season weeks 1–9</div></div>
+    <div class="stat"><div class="label">Reconciliation</div><div class="value">32/32</div>
+      <div class="muted">teams whose game-by-game totals reproduce the official standings exactly</div></div>
+    <div class="stat"><div class="label">Validation checks</div><div class="value">14/14</div>
+      <div class="muted"><a href="analysis.html">see gate results</a></div></div>
+    <div class="stat"><div class="label">Injury rows captured</div><div class="value">6</div>
+      <div class="muted">only rows with an official game status</div></div>
+  </div>
+
+  <h2>What "verified" means here</h2>
+  <div class="card">
+    <p>Each value was read from an official NFL page and stored with that page's URL and a retrieval
+    timestamp. The dataset is then re-checked by an automated gate that recomputes every team's
+    record and points from the game-by-game scores and compares it to the official standings table.
+    If a single score were wrong, at least one team's totals would stop matching.</p>
+    <p class="muted">Retrieval date: 2026-11-12 (UTC). Environment note: outbound HTTP from the
+    build sandbox reaches only github.com, so all official NFL pages were read through the agent
+    page-fetch channel; a bulk download (nflverse release) is blocked and is documented as such.</p>
+  </div>
+
+  <h2>Official standings — 2026 regular season</h2>
+  <p class="muted">Source for every row: <a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">nfl.com/standings</a>.
+  Conference/division grouping is as published on that page.</p>
+  <div class="table-wrap"><table><thead><tr><th>Team</th><th>Conf</th><th>Div</th><th>W</th><th>L</th><th>T</th><th>PF</th><th>PA</th><th>Net</th><th>Streak</th><th>Source</th></tr></thead><tbody>
+<tr><td>Buffalo Bills</td><td>AFC</td><td>East</td><td>7</td><td>1</td><td>0</td><td>256</td><td>187</td><td>69</td><td>4W</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>New England Patriots</td><td>AFC</td><td>East</td><td>5</td><td>4</td><td>0</td><td>211</td><td>207</td><td>4</td><td>1L</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>New York Jets</td><td>AFC</td><td>East</td><td>2</td><td>7</td><td>0</td><td>182</td><td>223</td><td>-41</td><td>4L</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>Miami Dolphins</td><td>AFC</td><td>East</td><td>1</td><td>7</td><td>0</td><td>126</td><td>200</td><td>-74</td><td>2L</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>Pittsburgh Steelers</td><td>AFC</td><td>North</td><td>6</td><td>2</td><td>0</td><td>180</td><td>144</td><td>36</td><td>4W</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>Cincinnati Bengals</td><td>AFC</td><td>North</td><td>6</td><td>2</td><td>0</td><td>240</td><td>175</td><td>65</td><td>4W</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>Cleveland Browns</td><td>AFC</td><td>North</td><td>5</td><td>4</td><td>0</td><td>161</td><td>196</td><td>-35</td><td>2L</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>Baltimore Ravens</td><td>AFC</td><td>North</td><td>4</td><td>5</td><td>0</td><td>189</td><td>236</td><td>-47</td><td>4L</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>Jacksonville Jaguars</td><td>AFC</td><td>South</td><td>6</td><td>2</td><td>0</td><td>229</td><td>121</td><td>108</td><td>2W</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>Houston Texans</td><td>AFC</td><td>South</td><td>3</td><td>5</td><td>0</td><td>209</td><td>192</td><td>17</td><td>1W</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>Indianapolis Colts</td><td>AFC</td><td>South</td><td>2</td><td>7</td><td>0</td><td>184</td><td>249</td><td>-65</td><td>5L</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>Tennessee Titans</td><td>AFC</td><td>South</td><td>1</td><td>7</td><td>0</td><td>144</td><td>199</td><td>-55</td><td>2L</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>Denver Broncos</td><td>AFC</td><td>West</td><td>7</td><td>2</td><td>0</td><td>198</td><td>186</td><td>12</td><td>5W</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>Kansas City Chiefs</td><td>AFC</td><td>West</td><td>6</td><td>2</td><td>0</td><td>202</td><td>143</td><td>59</td><td>1W</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>Las Vegas Raiders</td><td>AFC</td><td>West</td><td>4</td><td>5</td><td>0</td><td>238</td><td>268</td><td>-30</td><td>1L</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>Los Angeles Chargers</td><td>AFC</td><td>West</td><td>0</td><td>8</td><td>0</td><td>121</td><td>219</td><td>-98</td><td>8L</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>New York Giants</td><td>NFC</td><td>East</td><td>5</td><td>2</td><td>1</td><td>182</td><td>172</td><td>10</td><td>2W</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>Dallas Cowboys</td><td>NFC</td><td>East</td><td>4</td><td>5</td><td>0</td><td>246</td><td>236</td><td>10</td><td>1W</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>Washington Commanders</td><td>NFC</td><td>East</td><td>2</td><td>5</td><td>1</td><td>172</td><td>202</td><td>-30</td><td>1L</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>Philadelphia Eagles</td><td>NFC</td><td>East</td><td>2</td><td>7</td><td>0</td><td>148</td><td>221</td><td>-73</td><td>7L</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>Chicago Bears</td><td>NFC</td><td>North</td><td>7</td><td>2</td><td>0</td><td>241</td><td>184</td><td>57</td><td>4W</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>Detroit Lions</td><td>NFC</td><td>North</td><td>6</td><td>2</td><td>0</td><td>222</td><td>189</td><td>33</td><td>4W</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>Minnesota Vikings</td><td>NFC</td><td>North</td><td>6</td><td>2</td><td>0</td><td>146</td><td>116</td><td>30</td><td>2L</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>Green Bay Packers</td><td>NFC</td><td>North</td><td>6</td><td>3</td><td>0</td><td>216</td><td>191</td><td>25</td><td>2W</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>Carolina Panthers</td><td>NFC</td><td>South</td><td>3</td><td>5</td><td>0</td><td>199</td><td>219</td><td>-20</td><td>3L</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>New Orleans Saints</td><td>NFC</td><td>South</td><td>3</td><td>5</td><td>0</td><td>185</td><td>216</td><td>-31</td><td>1W</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>Tampa Bay Buccaneers</td><td>NFC</td><td>South</td><td>3</td><td>6</td><td>0</td><td>202</td><td>178</td><td>24</td><td>1L</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>Atlanta Falcons</td><td>NFC</td><td>South</td><td>3</td><td>6</td><td>0</td><td>188</td><td>223</td><td>-35</td><td>2L</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>San Francisco 49ers</td><td>NFC</td><td>West</td><td>7</td><td>1</td><td>0</td><td>235</td><td>156</td><td>79</td><td>1W</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>Seattle Seahawks</td><td>NFC</td><td>West</td><td>5</td><td>4</td><td>0</td><td>202</td><td>162</td><td>40</td><td>1W</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>Los Angeles Rams</td><td>NFC</td><td>West</td><td>5</td><td>4</td><td>0</td><td>214</td><td>181</td><td>33</td><td>3W</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>Arizona Cardinals</td><td>NFC</td><td>West</td><td>3</td><td>6</td><td>0</td><td>178</td><td>255</td><td>-77</td><td>1L</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">Official source</a></td></tr>
+</tbody></table></div>
+
+  <h2>Week 10 official injury report — captured rows</h2>
+  <p class="muted">Only rows where the official page states a game status are stored as verified.
+  Players listed without a game status are <em>not</em> treated as available or unavailable —
+  that information is not asserted by the source, so it is left out rather than guessed.</p>
+  <div class="table-wrap"><table><thead><tr><th>Team</th><th>Player</th><th>Pos</th><th>Injury</th><th>Practice</th><th>Game status</th><th>Source</th></tr></thead><tbody>
+<tr><td>WAS</td><td>Lucas Patrick</td><td>C</td><td>Concussion</td><td>Did Not Participate In Practice</td><td><span class="badge danger">Out</span></td><td><a href="https://www.nfl.com/injuries/league/2026/reg10" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>WAS</td><td>Colson Yankoff</td><td>TE</td><td>Knee</td><td>Did Not Participate In Practice</td><td><span class="badge danger">Out</span></td><td><a href="https://www.nfl.com/injuries/league/2026/reg10" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>NYG</td><td>Malik Harrison</td><td>LB</td><td>Groin</td><td>Limited Participation in Practice</td><td><span class="badge warn">Questionable</span></td><td><a href="https://www.nfl.com/injuries/league/2026/reg10" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>NE</td><td>Ben Brown</td><td>C</td><td>Knee</td><td>Did Not Participate In Practice</td><td><span class="badge danger">Out</span></td><td><a href="https://www.nfl.com/injuries/league/2026/reg10" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>NE</td><td>Carlton Davis III</td><td>CB</td><td>Knee</td><td>Did Not Participate In Practice</td><td><span class="badge danger">Out</span></td><td><a href="https://www.nfl.com/injuries/league/2026/reg10" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>NE</td><td>TreVeyon Henderson</td><td>RB</td><td>Illness</td><td>Did Not Participate In Practice</td><td><span class="badge danger">Out</span></td><td><a href="https://www.nfl.com/injuries/league/2026/reg10" target="_blank" rel="noopener">Official source</a></td></tr>
+</tbody></table></div>
+
+  <h3>Teams reporting no injuries</h3>
+  <p class="muted">Published explicitly by the source for Week 10 — a genuinely verified "clear" state.</p>
+  <div class="table-wrap"><table><thead><tr><th>Team</th><th>Week</th><th>Official state</th><th>Source</th></tr></thead><tbody>
+<tr><td>SEA</td><td>10</td><td>No Injuries Reported</td><td><a href="https://www.nfl.com/injuries/league/2026/reg10" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>CIN</td><td>10</td><td>No Injuries Reported</td><td><a href="https://www.nfl.com/injuries/league/2026/reg10" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>LAC</td><td>10</td><td>No Injuries Reported</td><td><a href="https://www.nfl.com/injuries/league/2026/reg10" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>BAL</td><td>10</td><td>No Injuries Reported</td><td><a href="https://www.nfl.com/injuries/league/2026/reg10" target="_blank" rel="noopener">Official source</a></td></tr>
+</tbody></table></div>
+
+  <h2>Byes and Week 10 fixtures</h2>
+  <p class="muted">Needed so that rest advantage and the prediction set are not guessed.</p>
+  <div class="table-wrap"><table><thead><tr><th>Week</th><th>Team on bye</th><th>Source</th></tr></thead><tbody>
+<tr><td>5</td><td>CAR</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-5" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>5</td><td>KC</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-5" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>6</td><td>CIN</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-6" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>6</td><td>DET</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-6" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>6</td><td>MIA</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-6" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>6</td><td>MIN</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-6" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>7</td><td>BUF</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-7" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>7</td><td>JAX</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-7" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>7</td><td>LAC</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-7" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>7</td><td>WAS</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-7" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>8</td><td>HOU</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>8</td><td>NO</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>8</td><td>NYG</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>8</td><td>SF</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>9</td><td>PIT</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-9" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>9</td><td>TEN</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-9" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>10</td><td>CHI</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>10</td><td>DEN</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>10</td><td>PHI</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>10</td><td>TB</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">Official source</a></td></tr>
+</tbody></table></div>
+  <div class="table-wrap"><table><thead><tr><th>Game</th><th>Away</th><th>Home</th><th>Kickoff ET</th><th>Note</th><th>Source</th></tr></thead><tbody>
+<tr><td>2026_REG_10_WAS_NYG</td><td>WAS</td><td>NYG</td><td>20:15</td><td>Thursday Night Football PRIME</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>2026_REG_10_NE_DET</td><td>NE</td><td>DET</td><td>09:30</td><td>International game Munich</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>2026_REG_10_KC_ATL</td><td>KC</td><td>ATL</td><td>13:00</td><td>—</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>2026_REG_10_HOU_CLE</td><td>HOU</td><td>CLE</td><td>13:00</td><td>—</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>2026_REG_10_MIN_GB</td><td>MIN</td><td>GB</td><td>13:00</td><td>—</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>2026_REG_10_MIA_IND</td><td>MIA</td><td>IND</td><td>13:00</td><td>—</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>2026_REG_10_CAR_NO</td><td>CAR</td><td>NO</td><td>13:00</td><td>—</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>2026_REG_10_BUF_NYJ</td><td>BUF</td><td>NYJ</td><td>13:00</td><td>—</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>2026_REG_10_JAX_TEN</td><td>JAX</td><td>TEN</td><td>13:00</td><td>—</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>2026_REG_10_LA_AZ</td><td>LA</td><td>AZ</td><td>16:05</td><td>—</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>2026_REG_10_SEA_LV</td><td>SEA</td><td>LV</td><td>16:05</td><td>—</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>2026_REG_10_SF_DAL</td><td>SF</td><td>DAL</td><td>16:25</td><td>—</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>2026_REG_10_PIT_CIN</td><td>PIT</td><td>CIN</td><td>20:20</td><td>SNF</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">Official source</a></td></tr>
+<tr><td>2026_REG_10_LAC_BAL</td><td>LAC</td><td>BAL</td><td>20:15</td><td>MNF</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">Official source</a></td></tr>
+</tbody></table></div>
+
+  <h2>Validation gate output</h2>
+  <div class="table-wrap"><table><thead><tr><th>Check</th><th>Result</th><th>Detail</th></tr></thead><tbody>
+<tr><td>standings row count</td><td><span class="badge ok">PASS</span></td><td>32 rows (expected 32)</td></tr>
+<tr><td>unique team abbreviations in standings</td><td><span class="badge ok">PASS</span></td><td>all unique</td></tr>
+<tr><td>PF - PA == NET PTS (all teams)</td><td><span class="badge ok">PASS</span></td><td>32/32 consistent</td></tr>
+<tr><td>PCT == (W + T/2) / games (all teams)</td><td><span class="badge ok">PASS</span></td><td>32/32 consistent</td></tr>
+<tr><td>league win/loss balance</td><td><span class="badge ok">PASS</span></td><td>sum(W)=135 sum(L)=135</td></tr>
+<tr><td>league tie count is even (ties come in pairs)</td><td><span class="badge ok">PASS</span></td><td>sum(T)=2</td></tr>
+<tr><td>team-games are even (2 per game)</td><td><span class="badge ok">PASS</span></td><td>team-games=272 =&gt; 136 games</td></tr>
+<tr><td>unique game ids</td><td><span class="badge ok">PASS</span></td><td>136 unique ids</td></tr>
+<tr><td>all game teams exist in standings</td><td><span class="badge ok">PASS</span></td><td>all match</td></tr>
+<tr><td>no team plays itself</td><td><span class="badge ok">PASS</span></td><td>none</td></tr>
+<tr><td>no negative scores</td><td><span class="badge ok">PASS</span></td><td>none</td></tr>
+<tr><td>game dates inside 2026 season window</td><td><span class="badge ok">PASS</span></td><td>all dates within 2026-08-01..2027-01-15</td></tr>
+<tr><td>no team listed twice in one week</td><td><span class="badge ok">PASS</span></td><td>clean</td></tr>
+<tr><td>captured games never contradict official standings</td><td><span class="badge ok">PASS</span></td><td>no contradictions</td></tr>
+</tbody></table></div>
+
+  <div class="card">
+    <h3>How to reproduce</h3>
+    <pre class="muted">python3 scripts/verified/validate_verified.py
+python3 analysis/engine.py
+python3 analysis/luck.py
+python3 analysis/correlations.py
+python3 scripts/verified/build_site.py</pre>
+    <p class="muted">Data files: data/verified/games_2026.csv, standings_2026.csv,
+    injuries_week10.csv, no_injuries_week10.csv, byes_2026.csv, week10_fixtures_2026.csv.</p>
+  </div>
+
+</main>
+<footer class="muted" style="max-width:1200px;margin:0 auto;padding:24px">
+  Generated from data/verified by scripts/verified/build_site.py. Blank means unverified — never inferred.
+</footer>
+</body>
+</html>

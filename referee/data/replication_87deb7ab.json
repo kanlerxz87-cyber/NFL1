@@ -1,0 +1,533 @@
+{
+ "generated_by": "referee/analysis/replicate_87deb7ab.py",
+ "owner_session": "87deb7ab",
+ "ref": "origin/arena/87deb7ab-nfl1",
+ "commit": "5c23b3f3264f748e77a54c5172bd69f86c3b88fd",
+ "standings": {
+  "file": "data/standings.json",
+  "rows_checked": 32,
+  "rows_matching": 32,
+  "missing_official_teams": [],
+  "rows": [
+   {
+    "key": "Buffalo Bills",
+    "published": "7-1-0, PF 256, PA 187, net 69, pct 0.875, home 3-1-0, road 4-0-0, AFC",
+    "official": "7-1-0, PF 256, PA 187, net 69, pct 0.875, home 3-1-0, road 4-0-0, AFC",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/league/2026/REG"
+   },
+   {
+    "key": "New England Patriots",
+    "published": "5-4-0, PF 211, PA 207, net 4, pct 0.556, home 3-1-0, road 2-3-0, AFC",
+    "official": "5-4-0, PF 211, PA 207, net 4, pct 0.556, home 3-1-0, road 2-3-0, AFC",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/league/2026/REG"
+   },
+   {
+    "key": "New York Jets",
+    "published": "2-7-0, PF 182, PA 223, net -41, pct 0.222, home 1-3-0, road 1-4-0, AFC",
+    "official": "2-7-0, PF 182, PA 223, net -41, pct 0.222, home 1-3-0, road 1-4-0, AFC",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/league/2026/REG"
+   },
+   {
+    "key": "Miami Dolphins",
+    "published": "1-7-0, PF 126, PA 200, net -74, pct 0.125, home 0-4-0, road 1-3-0, AFC",
+    "official": "1-7-0, PF 126, PA 200, net -74, pct 0.125, home 0-4-0, road 1-3-0, AFC",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/league/2026/REG"
+   },
+   {
+    "key": "Pittsburgh Steelers",
+    "published": "6-2-0, PF 180, PA 144, net 36, pct 0.75, home 4-0-0, road 2-2-0, AFC",
+    "official": "6-2-0, PF 180, PA 144, net 36, pct 0.750, home 4-0-0, road 2-2-0, AFC",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/league/2026/REG"
+   },
+   {
+    "key": "Cincinnati Bengals",
+    "published": "6-2-0, PF 240, PA 175, net 65, pct 0.75, home 2-1-0, road 4-1-0, AFC",
+    "official": "6-2-0, PF 240, PA 175, net 65, pct 0.750, home 2-1-0, road 4-1-0, AFC",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/league/2026/REG"
+   },
+   {
+    "key": "Cleveland Browns",
+    "published": "5-4-0, PF 161, PA 196, net -35, pct 0.556, home 3-0-0, road 2-4-0, AFC",
+    "official": "5-4-0, PF 161, PA 196, net -35, pct 0.556, home 3-0-0, road 2-4-0, AFC",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/league/2026/REG"
+   },
+   {
+    "key": "Baltimore Ravens",
+    "published": "4-5-0, PF 189, PA 236, net -47, pct 0.444, home 1-3-0, road 3-2-0, AFC",
+    "official": "4-5-0, PF 189, PA 236, net -47, pct 0.444, home 1-3-0, road 3-2-0, AFC",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/league/2026/REG"
+   },
+   {
+    "key": "Jacksonville Jaguars",
+    "published": "6-2-0, PF 229, PA 121, net 108, pct 0.75, home 4-1-0, road 2-1-0, AFC",
+    "official": "6-2-0, PF 229, PA 121, net 108, pct 0.750, home 4-1-0, road 2-1-0, AFC",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/league/2026/REG"
+   },
+   {
+    "key": "Houston Texans",
+    "published": "3-5-0, PF 209, PA 192, net 17, pct 0.375, home 0-4-0, road 3-1-0, AFC",
+    "official": "3-5-0, PF 209, PA 192, net 17, pct 0.375, home 0-4-0, road 3-1-0, AFC",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/league/2026/REG"
+   },
+   {
+    "key": "Indianapolis Colts",
+    "published": "2-7-0, PF 184, PA 249, net -65, pct 0.222, home 1-3-0, road 1-4-0, AFC",
+    "official": "2-7-0, PF 184, PA 249, net -65, pct 0.222, home 1-3-0, road 1-4-0, AFC",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/league/2026/REG"
+   },
+   {
+    "key": "Tennessee Titans",
+    "published": "1-7-0, PF 144, PA 199, net -55, pct 0.125, home 0-4-0, road 1-3-0, AFC",
+    "official": "1-7-0, PF 144, PA 199, net -55, pct 0.125, home 0-4-0, road 1-3-0, AFC",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/league/2026/REG"
+   },
+   {
+    "key": "Denver Broncos",
+    "published": "7-2-0, PF 198, PA 186, net 12, pct 0.778, home 4-0-0, road 3-2-0, AFC",
+    "official": "7-2-0, PF 198, PA 186, net 12, pct 0.778, home 4-0-0, road 3-2-0, AFC",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/league/2026/REG"
+   },
+   {
+    "key": "Kansas City Chiefs",
+    "published": "6-2-0, PF 202, PA 143, net 59, pct 0.75, home 4-0-0, road 2-2-0, AFC",
+    "official": "6-2-0, PF 202, PA 143, net 59, pct 0.750, home 4-0-0, road 2-2-0, AFC",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/league/2026/REG"
+   },
+   {
+    "key": "Las Vegas Raiders",
+    "published": "4-5-0, PF 238, PA 268, net -30, pct 0.444, home 1-3-0, road 3-2-0, AFC",
+    "official": "4-5-0, PF 238, PA 268, net -30, pct 0.444, home 1-3-0, road 3-2-0, AFC",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/league/2026/REG"
+   },
+   {
+    "key": "Los Angeles Chargers",
+    "published": "0-8-0, PF 121, PA 219, net -98, pct 0.0, home 0-4-0, road 0-4-0, AFC",
+    "official": "0-8-0, PF 121, PA 219, net -98, pct 0.000, home 0-4-0, road 0-4-0, AFC",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/league/2026/REG"
+   },
+   {
+    "key": "New York Giants",
+    "published": "5-2-1, PF 182, PA 172, net 10, pct 0.688, home 3-1-0, road 2-1-1, NFC",
+    "official": "5-2-1, PF 182, PA 172, net 10, pct 0.688, home 3-1-0, road 2-1-1, NFC",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/league/2026/REG"
+   },
+   {
+    "key": "Dallas Cowboys",
+    "published": "4-5-0, PF 246, PA 236, net 10, pct 0.444, home 1-3-0, road 3-2-0, NFC",
+    "official": "4-5-0, PF 246, PA 236, net 10, pct 0.444, home 1-3-0, road 3-2-0, NFC",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/league/2026/REG"
+   },
+   {
+    "key": "Washington Commanders",
+    "published": "2-5-1, PF 172, PA 202, net -30, pct 0.313, home 2-2-1, road 0-3-0, NFC",
+    "official": "2-5-1, PF 172, PA 202, net -30, pct 0.312, home 2-2-1, road 0-3-0, NFC",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/league/2026/REG"
+   },
+   {
+    "key": "Philadelphia Eagles",
+    "published": "2-7-0, PF 148, PA 221, net -73, pct 0.222, home 1-4-0, road 1-3-0, NFC",
+    "official": "2-7-0, PF 148, PA 221, net -73, pct 0.222, home 1-4-0, road 1-3-0, NFC",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/league/2026/REG"
+   },
+   {
+    "key": "Chicago Bears",
+    "published": "7-2-0, PF 241, PA 184, net 57, pct 0.778, home 4-1-0, road 3-1-0, NFC",
+    "official": "7-2-0, PF 241, PA 184, net 57, pct 0.778, home 4-1-0, road 3-1-0, NFC",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/league/2026/REG"
+   },
+   {
+    "key": "Detroit Lions",
+    "published": "6-2-0, PF 222, PA 189, net 33, pct 0.75, home 4-0-0, road 2-2-0, NFC",
+    "official": "6-2-0, PF 222, PA 189, net 33, pct 0.750, home 4-0-0, road 2-2-0, NFC",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/league/2026/REG"
+   },
+   {
+    "key": "Minnesota Vikings",
+    "published": "6-2-0, PF 146, PA 116, net 30, pct 0.75, home 3-1-0, road 3-1-0, NFC",
+    "official": "6-2-0, PF 146, PA 116, net 30, pct 0.750, home 3-1-0, road 3-1-0, NFC",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/league/2026/REG"
+   },
+   {
+    "key": "Green Bay Packers",
+    "published": "6-3-0, PF 216, PA 191, net 25, pct 0.667, home 3-1-0, road 3-2-0, NFC",
+    "official": "6-3-0, PF 216, PA 191, net 25, pct 0.667, home 3-1-0, road 3-2-0, NFC",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/league/2026/REG"
+   },
+   {
+    "key": "Carolina Panthers",
+    "published": "3-5-0, PF 199, PA 219, net -20, pct 0.375, home 1-3-0, road 2-2-0, NFC",
+    "official": "3-5-0, PF 199, PA 219, net -20, pct 0.375, home 1-3-0, road 2-2-0, NFC",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/league/2026/REG"
+   },
+   {
+    "key": "New Orleans Saints",
+    "published": "3-5-0, PF 185, PA 216, net -31, pct 0.375, home 1-4-0, road 2-1-0, NFC",
+    "official": "3-5-0, PF 185, PA 216, net -31, pct 0.375, home 1-4-0, road 2-1-0, NFC",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/league/2026/REG"
+   },
+   {
+    "key": "Tampa Bay Buccaneers",
+    "published": "3-6-0, PF 202, PA 178, net 24, pct 0.333, home 1-4-0, road 2-2-0, NFC",
+    "official": "3-6-0, PF 202, PA 178, net 24, pct 0.333, home 1-4-0, road 2-2-0, NFC",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/league/2026/REG"
+   },
+   {
+    "key": "Atlanta Falcons",
+    "published": "3-6-0, PF 188, PA 223, net -35, pct 0.333, home 1-4-0, road 2-2-0, NFC",
+    "official": "3-6-0, PF 188, PA 223, net -35, pct 0.333, home 1-4-0, road 2-2-0, NFC",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/league/2026/REG"
+   },
+   {
+    "key": "San Francisco 49ers",
+    "published": "7-1-0, PF 235, PA 156, net 79, pct 0.875, home 5-0-0, road 2-1-0, NFC",
+    "official": "7-1-0, PF 235, PA 156, net 79, pct 0.875, home 5-0-0, road 2-1-0, NFC",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/league/2026/REG"
+   },
+   {
+    "key": "Seattle Seahawks",
+    "published": "5-4-0, PF 202, PA 162, net 40, pct 0.556, home 4-2-0, road 1-2-0, NFC",
+    "official": "5-4-0, PF 202, PA 162, net 40, pct 0.556, home 4-2-0, road 1-2-0, NFC",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/league/2026/REG"
+   },
+   {
+    "key": "Los Angeles Rams",
+    "published": "5-4-0, PF 214, PA 181, net 33, pct 0.556, home 2-3-0, road 3-1-0, NFC",
+    "official": "5-4-0, PF 214, PA 181, net 33, pct 0.556, home 2-3-0, road 3-1-0, NFC",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/league/2026/REG"
+   },
+   {
+    "key": "Arizona Cardinals",
+    "published": "3-6-0, PF 178, PA 255, net -77, pct 0.333, home 0-3-0, road 3-3-0, NFC",
+    "official": "3-6-0, PF 178, PA 255, net -77, pct 0.333, home 0-3-0, road 3-3-0, NFC",
+    "result": "match",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/league/2026/REG"
+   }
+  ]
+ },
+ "split_records": {
+  "rows_checked": 32,
+  "rows_replicated": 32,
+  "rows": [
+   {
+    "key": "Buffalo Bills",
+    "published": "division 0-1-0, conference 4-1-0, non-conference 3-0-0",
+    "referee": "division 0-1-0, conference 4-1-0, non-conference 3-0-0",
+    "status": "replicated",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/division/2026/REG"
+   },
+   {
+    "key": "New England Patriots",
+    "published": "division 3-0-0, conference 5-1-0, non-conference 0-3-0",
+    "referee": "division 3-0-0, conference 5-1-0, non-conference 0-3-0",
+    "status": "replicated",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/division/2026/REG"
+   },
+   {
+    "key": "New York Jets",
+    "published": "division 0-2-0, conference 2-4-0, non-conference 0-3-0",
+    "referee": "division 0-2-0, conference 2-4-0, non-conference 0-3-0",
+    "status": "replicated",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/division/2026/REG"
+   },
+   {
+    "key": "Miami Dolphins",
+    "published": "division 1-1-0, conference 1-4-0, non-conference 0-3-0",
+    "referee": "division 1-1-0, conference 1-4-0, non-conference 0-3-0",
+    "status": "replicated",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/division/2026/REG"
+   },
+   {
+    "key": "Pittsburgh Steelers",
+    "published": "division 2-1-0, conference 3-2-0, non-conference 3-0-0",
+    "referee": "division 2-1-0, conference 3-2-0, non-conference 3-0-0",
+    "status": "replicated",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/division/2026/REG"
+   },
+   {
+    "key": "Cincinnati Bengals",
+    "published": "division 1-1-0, conference 4-2-0, non-conference 2-0-0",
+    "referee": "division 1-1-0, conference 4-2-0, non-conference 2-0-0",
+    "status": "replicated",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/division/2026/REG"
+   },
+   {
+    "key": "Cleveland Browns",
+    "published": "division 2-1-0, conference 3-3-0, non-conference 2-1-0",
+    "referee": "division 2-1-0, conference 3-3-0, non-conference 2-1-0",
+    "status": "replicated",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/division/2026/REG"
+   },
+   {
+    "key": "Baltimore Ravens",
+    "published": "division 0-2-0, conference 2-4-0, non-conference 2-1-0",
+    "referee": "division 0-2-0, conference 2-4-0, non-conference 2-1-0",
+    "status": "replicated",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/division/2026/REG"
+   },
+   {
+    "key": "Jacksonville Jaguars",
+    "published": "division 1-1-0, conference 5-2-0, non-conference 1-0-0",
+    "referee": "division 1-1-0, conference 5-2-0, non-conference 1-0-0",
+    "status": "replicated",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/division/2026/REG"
+   },
+   {
+    "key": "Houston Texans",
+    "published": "division 2-1-0, conference 3-3-0, non-conference 0-2-0",
+    "referee": "division 2-1-0, conference 3-3-0, non-conference 0-2-0",
+    "status": "replicated",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/division/2026/REG"
+   },
+   {
+    "key": "Indianapolis Colts",
+    "published": "division 1-2-0, conference 1-5-0, non-conference 1-2-0",
+    "referee": "division 1-2-0, conference 1-5-0, non-conference 1-2-0",
+    "status": "replicated",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/division/2026/REG"
+   },
+   {
+    "key": "Tennessee Titans",
+    "published": "division 1-1-0, conference 1-5-0, non-conference 0-2-0",
+    "referee": "division 1-1-0, conference 1-5-0, non-conference 0-2-0",
+    "status": "replicated",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/division/2026/REG"
+   },
+   {
+    "key": "Denver Broncos",
+    "published": "division 2-1-0, conference 3-1-0, non-conference 4-1-0",
+    "referee": "division 2-1-0, conference 3-1-0, non-conference 4-1-0",
+    "status": "replicated",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/division/2026/REG"
+   },
+   {
+    "key": "Kansas City Chiefs",
+    "published": "division 3-1-0, conference 6-1-0, non-conference 0-1-0",
+    "referee": "division 3-1-0, conference 6-1-0, non-conference 0-1-0",
+    "status": "replicated",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/division/2026/REG"
+   },
+   {
+    "key": "Las Vegas Raiders",
+    "published": "division 1-1-0, conference 3-3-0, non-conference 1-2-0",
+    "referee": "division 1-1-0, conference 3-3-0, non-conference 1-2-0",
+    "status": "replicated",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/division/2026/REG"
+   },
+   {
+    "key": "Los Angeles Chargers",
+    "published": "division 0-3-0, conference 0-5-0, non-conference 0-3-0",
+    "referee": "division 0-3-0, conference 0-5-0, non-conference 0-3-0",
+    "status": "replicated",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/division/2026/REG"
+   },
+   {
+    "key": "New York Giants",
+    "published": "division 2-0-1, conference 3-2-1, non-conference 2-0-0",
+    "referee": "division 2-0-1, conference 3-2-1, non-conference 2-0-0",
+    "status": "replicated",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/division/2026/REG"
+   },
+   {
+    "key": "Dallas Cowboys",
+    "published": "division 2-1-0, conference 2-4-0, non-conference 2-1-0",
+    "referee": "division 2-1-0, conference 2-4-0, non-conference 2-1-0",
+    "status": "replicated",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/division/2026/REG"
+   },
+   {
+    "key": "Washington Commanders",
+    "published": "division 1-2-1, conference 2-4-1, non-conference 0-1-0",
+    "referee": "division 1-2-1, conference 2-4-1, non-conference 0-1-0",
+    "status": "replicated",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/division/2026/REG"
+   },
+   {
+    "key": "Philadelphia Eagles",
+    "published": "division 1-3-0, conference 1-6-0, non-conference 1-1-0",
+    "referee": "division 1-3-0, conference 1-6-0, non-conference 1-1-0",
+    "status": "replicated",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/division/2026/REG"
+   },
+   {
+    "key": "Chicago Bears",
+    "published": "division 0-2-0, conference 5-2-0, non-conference 2-0-0",
+    "referee": "division 0-2-0, conference 5-2-0, non-conference 2-0-0",
+    "status": "replicated",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/division/2026/REG"
+   },
+   {
+    "key": "Detroit Lions",
+    "published": "division 2-0-0, conference 4-1-0, non-conference 2-1-0",
+    "referee": "division 2-0-0, conference 4-1-0, non-conference 2-1-0",
+    "status": "replicated",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/division/2026/REG"
+   },
+   {
+    "key": "Minnesota Vikings",
+    "published": "division 2-1-0, conference 4-1-0, non-conference 2-1-0",
+    "referee": "division 2-1-0, conference 4-1-0, non-conference 2-1-0",
+    "status": "replicated",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/division/2026/REG"
+   },
+   {
+    "key": "Green Bay Packers",
+    "published": "division 1-2-0, conference 4-3-0, non-conference 2-0-0",
+    "referee": "division 1-2-0, conference 4-3-0, non-conference 2-0-0",
+    "status": "replicated",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/division/2026/REG"
+   },
+   {
+    "key": "Carolina Panthers",
+    "published": "division 1-1-0, conference 3-3-0, non-conference 0-2-0",
+    "referee": "division 1-1-0, conference 3-3-0, non-conference 0-2-0",
+    "status": "replicated",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/division/2026/REG"
+   },
+   {
+    "key": "New Orleans Saints",
+    "published": "division 0-1-0, conference 1-3-0, non-conference 2-2-0",
+    "referee": "division 0-1-0, conference 1-3-0, non-conference 2-2-0",
+    "status": "replicated",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/division/2026/REG"
+   },
+   {
+    "key": "Tampa Bay Buccaneers",
+    "published": "division 2-0-0, conference 3-3-0, non-conference 0-3-0",
+    "referee": "division 2-0-0, conference 3-3-0, non-conference 0-3-0",
+    "status": "replicated",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/division/2026/REG"
+   },
+   {
+    "key": "Atlanta Falcons",
+    "published": "division 1-2-0, conference 3-3-0, non-conference 0-3-0",
+    "referee": "division 1-2-0, conference 3-3-0, non-conference 0-3-0",
+    "status": "replicated",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/division/2026/REG"
+   },
+   {
+    "key": "San Francisco 49ers",
+    "published": "division 3-0-0, conference 4-1-0, non-conference 3-0-0",
+    "referee": "division 3-0-0, conference 4-1-0, non-conference 3-0-0",
+    "status": "replicated",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/division/2026/REG"
+   },
+   {
+    "key": "Seattle Seahawks",
+    "published": "division 2-1-0, conference 2-3-0, non-conference 3-1-0",
+    "referee": "division 2-1-0, conference 2-3-0, non-conference 3-1-0",
+    "status": "replicated",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/division/2026/REG"
+   },
+   {
+    "key": "Los Angeles Rams",
+    "published": "division 0-2-0, conference 3-2-0, non-conference 2-2-0",
+    "referee": "division 0-2-0, conference 3-2-0, non-conference 2-2-0",
+    "status": "replicated",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/division/2026/REG"
+   },
+   {
+    "key": "Arizona Cardinals",
+    "published": "division 1-3-0, conference 2-5-0, non-conference 1-1-0",
+    "referee": "division 1-3-0, conference 2-5-0, non-conference 1-1-0",
+    "status": "replicated",
+    "issues": [],
+    "source": "https://www.nfl.com/standings/division/2026/REG"
+   }
+  ],
+  "not_checked": "streak and last-5 columns were not transcribed or rebuilt by this session"
+ }
+}
