@@ -100,8 +100,26 @@ def table(headers, rows, cls="", note=None) -> str:
     return out
 
 
+def market_cell(g) -> str:
+    """Render the market line in the same signed home convention as the model line.
+
+    The previous build printed a bare float here (e.g. -9.5 for LA @ ARI) beside a signed
+    home line (ARI +5.2). A reader subtracting them across conventions saw a 14.7-point gap
+    where the real difference was 4.27. Printing the home-signed number and the away-signed
+    number from one source value removes the ambiguity without inventing anything.
+    """
+    mk = g.get("market_home_line")
+    if mk is None:
+        return num(None)
+    home, away = g["home"], g["away"]
+    return (f'<span class="mono">{esc(home)} {mk:+.1f}</span>'
+            f'<br><span class="sub">{esc(away)} {-mk:+.1f}</span>')
+
+
 def signal_cell(status) -> str:
-    mapping = {"actionable": ("pass", "actionable"),
+    # No odds feed is connected and the blend test puts a negative weight on the model, so
+    # no row can be called actionable. The strongest honest label is "largest difference".
+    mapping = {"actionable": ("neutral", "largest difference"),
                "watch": ("warn", "watch"),
                "no-edge": ("neutral", "no edge")}
     cls, text = mapping.get(status or "", ("neutral", status or "unknown"))
@@ -203,7 +221,7 @@ def overview(snap, dash, lines, strat, avail, props, verif):
             f"<strong>{esc(g['away'])} @ {esc(g['home'])}</strong><br><span class=\"sub\">{esc(g.get('gameday',''))}</span>",
             esc(g.get("my_line_display") or f"{g['home']} {g['my_home_line']:+.1f}"),
             num(g.get("my_total")),
-            num(g.get("market_home_line")),
+            market_cell(g),
             num(g.get("market_total")),
             num(g.get("edge_home_line"), 2),
             num(g.get("edge_total"), 2),
@@ -212,10 +230,13 @@ def overview(snap, dash, lines, strat, avail, props, verif):
         ])
     lines_tbl = table(
         ["Matchup", "My line", "My total", "Market line", "Market total",
-         "Edge (line)", "Edge (total)", "Signal", "Source"],
-        rows, note=("Positive line = home team favoured. Edges are model minus market; "
-                    "a signal is not a recommendation. See the Lines page for error bands "
-                    "and the out-of-sample accuracy table."))
+         "Difference (line)", "Difference (total)", "Marker", "Source"],
+        rows, note=("Model and market are both printed signed from the home team's point of "
+                    "view (positive = home favoured), with the away side in brackets so the "
+                    "convention cannot be misread. The difference is model minus market. No odds "
+                    "feed is connected: the market number is a consensus closing line from the "
+                    "mirrored feed, not a book price, so nothing here is a recommendation. See "
+                    "the Lines page for error bands and the out-of-sample accuracy table."))
 
     # leaderboard preview
     lb_rows = []
