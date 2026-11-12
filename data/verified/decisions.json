@@ -1,0 +1,83 @@
+[
+  {
+    "id": "D01",
+    "decision": "Use these model lines for any real decision?",
+    "have": "14 Week 10 lines built from 136 verified games, with published uncertainty bands.",
+    "lack": "Out-of-sample proof of value. The model lost to a naive baseline (MAE 10.93 vs 10.62) and failed the gate.",
+    "recommendation": "NO. Keep them as a transparency artifact and a baseline to beat, not as recommendations.",
+    "blocking": true,
+    "owner": "Reviewer"
+  },
+  {
+    "id": "D02",
+    "decision": "Score the leaderboard on straight-up winners or against the spread?",
+    "have": "Straight-up winner accuracy is measurable today (base rate 49.3% home picks).",
+    "lack": "Against-the-spread accuracy: impossible without closing lines.",
+    "recommendation": "Defer the choice until price data exists, but pre-register the metric now so it cannot be chosen after seeing results.",
+    "blocking": true,
+    "owner": "Reviewer"
+  },
+  {
+    "id": "D03",
+    "decision": "Promote the 60.7% directional signal to the leaderboard?",
+    "have": "60.7% straight-up accuracy, 95% CI [52.6%, 68.9%], raw p=0.0156, stable across halves (59.0% early, 63.2% late).",
+    "lack": "Significance after multiple-testing correction (Holm p=0.0626), positive Brier skill (-0.038), and any ATS evidence.",
+    "recommendation": "Promote to a monitored watch-list only. Do not label it a proven edge.",
+    "blocking": false,
+    "owner": "Analyst"
+  },
+  {
+    "id": "D04",
+    "decision": "Price player props or prop combos?",
+    "have": "Correlation structure measured; parlay maths published.",
+    "lack": "Row-level official player usage and yardage data.",
+    "recommendation": "NO for now. Blocked rather than estimated, to avoid fabricated distributions.",
+    "blocking": true,
+    "owner": "Data owner"
+  },
+  {
+    "id": "D05",
+    "decision": "Size same-game parlays as independent legs?",
+    "have": "C2 margin vs total r=-0.161; C4 scoring vs opponent quality r=+0.386.",
+    "lack": "A joint-probability model for 3+ legs and a larger sample.",
+    "recommendation": "NO. Treat same-game legs as dependent and apply the correlation penalty before comparing with any payout.",
+    "blocking": true,
+    "owner": "Analyst"
+  },
+  {
+    "id": "D06",
+    "decision": "Trust a claimed home-field advantage?",
+    "have": "Home win rate 49.6%, 95% CI [41.2%, 58.1%], fitted HFA slightly negative, n=135.",
+    "lack": "Any multi-season baseline; one partial season is not enough to establish a stable HFA.",
+    "recommendation": "Do not assume a positive home edge this season; re-estimate when more seasons are loaded.",
+    "blocking": false,
+    "owner": "Analyst"
+  },
+  {
+    "id": "D07",
+    "decision": "Claim we know the 2nd/3rd-string replacement chain?",
+    "have": "Official Week 10 injury statuses and four official backup-QB situations.",
+    "lack": "Official depth charts (NFL does not publish them; the URL returns 404) and participation data.",
+    "recommendation": "NO. Report only what the sources assert; leave depth order blank and flagged.",
+    "blocking": true,
+    "owner": "Data owner"
+  },
+  {
+    "id": "D08",
+    "decision": "Launch paid leaderboard rewards?",
+    "have": "A working scoring framework and published validation gates.",
+    "lack": "A metric that passes validation, price data, prize terms, and legal/eligibility review.",
+    "recommendation": "NO. Start with a zero-money paper leaderboard and revisit after one validated season.",
+    "blocking": true,
+    "owner": "Reviewer + legal"
+  },
+  {
+    "id": "D09",
+    "decision": "Keep publishing results that fail?",
+    "have": "Evidence that publishing failures is what makes the rest of the numbers credible.",
+    "lack": "Nothing — this is a policy choice.",
+    "recommendation": "YES, permanently. Every metric ships with sample size, CI and gate status.",
+    "blocking": false,
+    "owner": "Reviewer"
+  }
+]
