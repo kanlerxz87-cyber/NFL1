@@ -1055,3 +1055,101 @@ options and trade-offs for the repository owner rather than decided unilaterally
 | S8 | Executive summary page | pending |
 | S9 | Flagged-for-review page (all irregularities, official links) | pending |
 | S10 | PR → merge → confirm Pages deploy → record | pending |
+
+## S1-S10 results (session `1505ac8e-nfl1`)
+
+| ID | Task | Status | Evidence |
+|---|---|---|---|
+| S1 | Live re-fetch of official nfl.com sources | done | Standings (2 chunks), injuries (5 chunks), Week 10 schedule (3 chunks), nfl.com depth-chart 404 probe, chiefs.com and packers.com depth-chart probes, houstontexans.com probe. All fetched 2026-11-12. Transcriptions committed under `data/session-1505ac8e/`. |
+| S2 | Line-by-line cross-check of every committed dataset | done | `tools/verify_live.py`: 24 checks, **18 PASS / 6 FLAG / 0 FAIL**, 4,963 cells compared. |
+| S3 | Depth-chart / 2nd-4th string gap | done (31/32) | nfl.com 404 re-verified; 31 of 32 club sites scraped in CI, 946 position rows, 2,065 player slots. |
+| S4 | Unified site `lab/` | done | 16 pages, 366 internal links, 719 data rows, every row source-linked, 0 bare empty cells. |
+| S5 | Decision register + suggestions review | done | 20 questions, 16 suggestions with options, 4 decision records. Nothing implemented. |
+| S6 | Own lines, strategy gates, correlations, luck, leaderboard | done | 9 rules, 10 gates, 7 graded, 0 pass, walk-forward MAE 9.564 vs 10.325 naive baseline. |
+| S7 | Injury + availability deficiency model | done | 279 official rows joined to club depth charts; 203 matched, 76 withheld. |
+| S8 | Executive summary page | done | `lab/pages/executive-summary.html`. |
+| S9 | Flagged-for-review page | done | 20 flags, each with official source links. |
+| S10 | PR, merge, Pages | see below | |
+
+## Official sources used (every one fetched and read during this session)
+
+- Standings, 2026 REG: <https://www.nfl.com/standings/league/2026/REG> (2 chunks, 32 clubs)
+- Official injury report, Week 10: <https://www.nfl.com/injuries/> (5 chunks, 279 rows)
+- Week 10 schedule: <https://www.nfl.com/schedules/2026/week10> (3 chunks, 14 games + 4 byes)
+- Game results (transcribed by an earlier session, reconciled here):
+  <https://www.nfl.com/schedules/2026/by-week/week-1>
+- nfl.com depth-chart route (soft 404): <https://www.nfl.com/teams/kansas-city-chiefs/depth-chart>
+- Official club depth charts, 31 of 32: e.g. <https://www.chiefs.com/team/depth-chart>,
+  <https://www.packers.com/team/depth-chart> (full list in
+  `data/session-1505ac8e/depth_charts.json`, one URL per club)
+- Tie-breaking procedures: <http://www.nfl.com/standings/tiebreakingprocedures>
+- NFL Football Operations: <https://operations.nfl.com/gameday/>
+- NIST/SEMATECH e-Handbook (correlation, bootstrap):
+  <https://www.itl.nist.gov/div898/handbook/eda/section3/eda367.htm>,
+  <https://www.itl.nist.gov/div898/handbook/eda/section3/eda366.htm>
+- New Jersey Division of Gaming Enforcement: <https://www.nj.gov/oag/ge/>
+- Sportradar NFL weekly depth charts (cited, credential-gated, not used):
+  <https://developer.sportradar.com/football/reference/nfl-weekly-depth-charts>
+- Genius Sports / NFL data partnership (why no public odds exist):
+  <https://investors.geniussports.com/news/announcements/announcements-details/2023/National-Football-League-Extends-Strategic-Partnership-with-Genius-Sports-as-Exclusive-Official-NFL-Data-and-Watch--Bet-Distribution-Partner/default.aspx>
+
+## Verification performed (24 checks, 18 PASS / 6 FLAG / 0 FAIL)
+
+Published in full, with per-check source links, at `lab/pages/verification.html` and
+`data/session-1505ac8e/verification.json`.
+
+1. **Standings identities** (V02-V07, all PASS): PCT = (W + 0.5T)/GP to 3 dp; NET = PF - PA;
+   HOME + ROAD = W-L-T; CONF + NON-CONF = GP; DIV <= CONF; DIV_PCT and CONF_PCT recompute.
+   32 clubs x 6 identities.
+2. **League balance** (V08, PASS): W 135, L 135, T 2, PF 6,246 = PA 6,246, 136 games.
+3. **Recomputation from game results** (V09, PASS): the 136 completed games reproduce the
+   official standings for all 32 clubs on W, L, T, PF, PA - **160 of 160 cells**.
+4. **Cross-session reconciliation** (V10-V12, all PASS): session `25aa7696`'s
+   `data/verified/standings_2026.csv`, session `533256e1`'s `data/standings.csv` (LAR aliased
+   to LA) and session `7600ed8b`'s `data/model/snapshot.json` (ARI aliased to AZ) each match
+   the live official page on 32 clubs x 5 fields.
+5. **Week 10 slate integrity** (V13, PASS): 14 games, 28 distinct clubs, 4 byes (CHI, DEN,
+   PHI, TB), no club both playing and on bye, all 32 covered.
+6. **Schedule-page records vs standings page** (V14, PASS): all 28 club records printed
+   beside the fixtures match the official standings exactly.
+7. **Injury completeness** (V15, FLAG): 279 rows; 279 with a practice status, 6 with a game
+   status, 6 with a body part - and they are the same 6 rows.
+8. **Injury snapshot drift** (V16, FLAG): committed 254 rows vs live 279, drift +25.
+9. **Depth-chart coverage** (V17, FLAG): 31 of 32 clubs, 946 position rows, 2,065 slots.
+10. **Injury vs depth-chart reconciliation** (V18, FLAG): 203 of 279 rows agree; 76 withheld.
+11. **nfl.com 404** (V19, PASS): re-verified.
+12. **Earlier published figures** (V20, FLAG): `a2cea255`'s W = L = 134, T = 4, PF = PA =
+    6,267 no longer reproduce; the live page and the recomputed results both give 135/135/2/
+    6,246.
+13. **The three "nfl.com contradicts itself" cells** (V21, FLAG): WAS `non_conf`, IND `div`
+    and PHI `div` all recompute correctly on this retrieval. The flags no longer reproduce.
+14. **Site gates** (V22-V24, all PASS): 719 data rows across 16 pages, every one carrying a
+    link to an official or cited source; 0 bare empty cells; 366 internal links, none broken.
+
+## Irregularities (published at `lab/pages/flagged.html` with official links)
+
+NFL1-01..NFL1-20. Headline items: no prices exist (blocks every profit claim); only 6 of 279
+injury rows carry a game status; 76 injury rows disagree with the clubs' own depth charts; the
+committed injury snapshot is 25 rows stale; two earlier published figures no longer reproduce;
+four site generations are live at once; two CI jobs regenerate the same root pages. None
+blocks the site.
+
+## Cross-session requests logged (not applied)
+
+| # | Request | Owner | Why not applied |
+|---|---|---|---|
+| R-1505ac8e-01 | Fix the stray `EAD` fragment on line 1 of `COORDINATION.md`. | whichever session owns the board next | Logged as flag NFL1-18 rather than edited into another session's record. |
+| R-1505ac8e-02 | Reconcile the two root-page generators (`tools/build.py` vs `scripts/verified/build_site.py`). | sessions `7600ed8b` / `25aa7696` lineage | Published as suggestion S-14 with two options. |
+| R-1505ac8e-03 | Re-check the three "nfl.com contradicts itself" flags (V21). | session `a2cea255` | They no longer reproduce. The arithmetic proof is published; the earlier record is preserved, not overwritten. |
+| R-1505ac8e-04 | Adopt one club-code set across `data/`. | all sessions | Published as suggestion S-16; an alias table handles it today. |
+| R-1505ac8e-05 | Add this session's 24-check harness to CI. | shared CI | Requested, not made: adding a step to `.github/workflows/` is a shared-CI change. The harness is `tools/verify_live.py` and runs standalone. |
+
+## Files this session added (all new paths; nothing existing was edited except this board)
+
+- `lab/` - the site: `index.html`, `pages/*.html` (15 pages), `assets/style.css`.
+- `lab/scripts/` - `scrape_depth_charts.py`, `build_analysis.py`, `build_site.py`,
+  `content.py`, `nfl_stats.py`.
+- `data/session-1505ac8e/` - transcriptions and generated JSON.
+- `tools/verify_live.py` - the 24-check harness.
+- `.github/workflows/collect-depth-charts.yml` - new, additive; writes only
+  `data/session-1505ac8e/depth_charts.json`.
