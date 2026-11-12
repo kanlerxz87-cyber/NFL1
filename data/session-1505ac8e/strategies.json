@@ -1,0 +1,2564 @@
+{
+ "generated_at": "2026-11-12T22:58:33Z",
+ "rule_file_sha256": "b2db9d74c42bbf4d64b236d023ad610983e7ace988424fdc2257f6dcd57b1d32",
+ "gate_definitions": [
+  {
+   "id": "G0",
+   "name": "Rule written down before any outcome was computed",
+   "detail": "The rule file is committed and its SHA-256 is published with the results."
+  },
+  {
+   "id": "G1",
+   "name": "At least 30 graded bets",
+   "detail": "Sample size floor."
+  },
+  {
+   "id": "G2",
+   "name": "Walk-forward: no look-ahead information",
+   "detail": "Ratings and form use only games with week < W."
+  },
+  {
+   "id": "G3",
+   "name": "Bootstrap 95% CI for mean edge has a lower bound above 0",
+   "detail": "Percentile bootstrap, 10,000 resamples, fixed seed."
+  },
+  {
+   "id": "G4",
+   "name": "Beats the break-even vig of a real sportsbook",
+   "detail": "Needs book prices. BLOCKED: no official odds and no licensed feed."
+  },
+  {
+   "id": "G5",
+   "name": "No single week supplies more than 40% of the total edge",
+   "detail": "Concentration check."
+  },
+  {
+   "id": "G6",
+   "name": "Holds up in a second season",
+   "detail": "BLOCKED: only 2026 results are transcribed and verified in this repo."
+  },
+  {
+   "id": "G7",
+   "name": "Correlation below 0.70 with every other passing rule",
+   "detail": "Parlay diversification check. Evaluated once two rules pass."
+  },
+  {
+   "id": "G8",
+   "name": "p-value survives Benjamini-Hochberg at FDR 0.10",
+   "detail": "Multiple-testing correction across all graded rules."
+  },
+  {
+   "id": "G9",
+   "name": "Beats a random-bet null (permutation p <= 0.05)",
+   "detail": "10,000 same-size random draws from the same weeks. This is the luck test."
+  },
+  {
+   "id": "G10",
+   "name": "Selector is independent of the number the outcome is measured against",
+   "detail": "Catches self-referential rules such as 'bet my biggest edge'."
+  }
+ ],
+ "window": {
+  "season": 2026,
+  "weeks": [
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ],
+  "note": "Weeks 4-9 of 2026; weeks 1-3 are used only to train the ratings and the form measures."
+ },
+ "live_signals": [
+  {
+   "rule": "S1",
+   "rule_name": "Rest edge",
+   "game_id": "2026_10_JAX_TEN",
+   "home": "TEN",
+   "away": "JAX",
+   "side": "TEN",
+   "why": "rest 14d vs 10d",
+   "status": "not graded - game not played"
+  },
+  {
+   "rule": "S1",
+   "rule_name": "Rest edge",
+   "game_id": "2026_10_PIT_CIN",
+   "home": "CIN",
+   "away": "PIT",
+   "side": "PIT",
+   "why": "rest 14d vs 7d",
+   "status": "not graded - game not played"
+  },
+  {
+   "rule": "S1",
+   "rule_name": "Rest edge",
+   "game_id": "2026_10_LAC_BAL",
+   "home": "BAL",
+   "away": "LAC",
+   "side": "BAL",
+   "why": "rest 11d vs 8d",
+   "status": "not graded - game not played"
+  },
+  {
+   "rule": "S2",
+   "rule_name": "Home team off a bye",
+   "game_id": "2026_10_JAX_TEN",
+   "home": "TEN",
+   "away": "JAX",
+   "side": "TEN",
+   "why": "home off bye (14d)",
+   "status": "not graded - game not played"
+  },
+  {
+   "rule": "S3",
+   "rule_name": "Division dog",
+   "game_id": "2026_10_WAS_NYG",
+   "home": "NYG",
+   "away": "WAS",
+   "side": "WAS",
+   "why": "division game, worse net points per game",
+   "status": "not graded - game not played"
+  },
+  {
+   "rule": "S3",
+   "rule_name": "Division dog",
+   "game_id": "2026_10_MIN_GB",
+   "home": "GB",
+   "away": "MIN",
+   "side": "GB",
+   "why": "division game, worse net points per game",
+   "status": "not graded - game not played"
+  },
+  {
+   "rule": "S3",
+   "rule_name": "Division dog",
+   "game_id": "2026_10_CAR_NO",
+   "home": "NO",
+   "away": "CAR",
+   "side": "NO",
+   "why": "division game, worse net points per game",
+   "status": "not graded - game not played"
+  },
+  {
+   "rule": "S3",
+   "rule_name": "Division dog",
+   "game_id": "2026_10_BUF_NYJ",
+   "home": "NYJ",
+   "away": "BUF",
+   "side": "NYJ",
+   "why": "division game, worse net points per game",
+   "status": "not graded - game not played"
+  },
+  {
+   "rule": "S3",
+   "rule_name": "Division dog",
+   "game_id": "2026_10_JAX_TEN",
+   "home": "TEN",
+   "away": "JAX",
+   "side": "TEN",
+   "why": "division game, worse net points per game",
+   "status": "not graded - game not played"
+  },
+  {
+   "rule": "S3",
+   "rule_name": "Division dog",
+   "game_id": "2026_10_LA_AZ",
+   "home": "AZ",
+   "away": "LA",
+   "side": "AZ",
+   "why": "division game, worse net points per game",
+   "status": "not graded - game not played"
+  },
+  {
+   "rule": "S3",
+   "rule_name": "Division dog",
+   "game_id": "2026_10_PIT_CIN",
+   "home": "CIN",
+   "away": "PIT",
+   "side": "PIT",
+   "why": "division game, worse net points per game",
+   "status": "not graded - game not played"
+  },
+  {
+   "rule": "S4",
+   "rule_name": "Fade the hot streak",
+   "game_id": "2026_10_NE_DET",
+   "home": "DET",
+   "away": "NE",
+   "side": "NE",
+   "why": "fading DET on a 4-game win streak",
+   "status": "not graded - game not played"
+  },
+  {
+   "rule": "S4",
+   "rule_name": "Fade the hot streak",
+   "game_id": "2026_10_BUF_NYJ",
+   "home": "NYJ",
+   "away": "BUF",
+   "side": "NYJ",
+   "why": "fading BUF on a 4-game win streak",
+   "status": "not graded - game not played"
+  },
+  {
+   "rule": "S4",
+   "rule_name": "Fade the hot streak",
+   "game_id": "2026_10_LA_AZ",
+   "home": "AZ",
+   "away": "LA",
+   "side": "AZ",
+   "why": "fading LA on a 3-game win streak",
+   "status": "not graded - game not played"
+  },
+  {
+   "rule": "S4",
+   "rule_name": "Fade the hot streak",
+   "game_id": "2026_10_PIT_CIN",
+   "home": "CIN",
+   "away": "PIT",
+   "side": "PIT",
+   "why": "fading CIN on a 4-game win streak",
+   "status": "not graded - game not played"
+  },
+  {
+   "rule": "S4",
+   "rule_name": "Fade the hot streak",
+   "game_id": "2026_10_PIT_CIN",
+   "home": "CIN",
+   "away": "PIT",
+   "side": "CIN",
+   "why": "fading PIT on a 4-game win streak",
+   "status": "not graded - game not played"
+  },
+  {
+   "rule": "S5",
+   "rule_name": "Pythagorean bounce-back",
+   "game_id": "2026_10_HOU_CLE",
+   "home": "CLE",
+   "away": "HOU",
+   "side": "HOU",
+   "why": "pythag +1.40 wins",
+   "status": "not graded - game not played"
+  },
+  {
+   "rule": "S5",
+   "rule_name": "Pythagorean bounce-back",
+   "game_id": "2026_10_MIA_IND",
+   "home": "IND",
+   "away": "MIA",
+   "side": "MIA",
+   "why": "pythag +1.03 wins",
+   "status": "not graded - game not played"
+  },
+  {
+   "rule": "S5",
+   "rule_name": "Pythagorean bounce-back",
+   "game_id": "2026_10_BUF_NYJ",
+   "home": "NYJ",
+   "away": "BUF",
+   "side": "NYJ",
+   "why": "pythag +1.45 wins",
+   "status": "not graded - game not played"
+  },
+  {
+   "rule": "S5",
+   "rule_name": "Pythagorean bounce-back",
+   "game_id": "2026_10_JAX_TEN",
+   "home": "TEN",
+   "away": "JAX",
+   "side": "TEN",
+   "why": "pythag +1.56 wins",
+   "status": "not graded - game not played"
+  },
+  {
+   "rule": "S5",
+   "rule_name": "Pythagorean bounce-back",
+   "game_id": "2026_10_LAC_BAL",
+   "home": "BAL",
+   "away": "LAC",
+   "side": "LAC",
+   "why": "pythag +1.60 wins",
+   "status": "not graded - game not played"
+  },
+  {
+   "rule": "S6",
+   "rule_name": "Road dog with the better defence",
+   "game_id": "2026_10_NE_DET",
+   "home": "DET",
+   "away": "NE",
+   "side": "NE",
+   "why": "road NE allows 23.0 vs 23.6",
+   "status": "not graded - game not played"
+  },
+  {
+   "rule": "S6",
+   "rule_name": "Road dog with the better defence",
+   "game_id": "2026_10_MIA_IND",
+   "home": "IND",
+   "away": "MIA",
+   "side": "MIA",
+   "why": "road MIA allows 25.0 vs 27.7",
+   "status": "not graded - game not played"
+  }
+ ],
+ "rules": [
+  {
+   "id": "S1",
+   "name": "Rest edge",
+   "track": "single",
+   "text": "Bet the side with at least 3 more days of rest than its opponent. Rest = days since that club's previous game.",
+   "selector": "rest differential (official game dates)",
+   "uses_model_prediction": false,
+   "needs_market_price": false,
+   "backtestable": true,
+   "n_bets": 26,
+   "graded": true,
+   "stats": {
+    "n": 26,
+    "wins": 19,
+    "losses": 7,
+    "win_rate": 0.7308,
+    "mean_edge_pts": 8.035,
+    "sd_edge": 11.224,
+    "ci95_mean_edge": [
+     3.783,
+     12.371
+    ],
+    "t_stat": 3.65,
+    "p_t": 0.001209139900083671,
+    "p_binomial": 0.028959274291992188,
+    "permutation_p": 0.0004999500049995,
+    "max_single_week_share": 0.32,
+    "split_half_correlation": -0.04187970404306605,
+    "edge_by_week": {
+     "4": 40.29,
+     "5": 6.3,
+     "6": -7.53,
+     "7": 52.95,
+     "8": 66.9,
+     "9": 50.01
+    },
+    "p_t_bh": 0.008463979300585697,
+    "p_t_bh_reject": true
+   },
+   "bets": [
+    {
+     "week": 4,
+     "game_id": "2026_REG_4_GB_TB",
+     "side": "GB",
+     "why": "rest 10d vs 7d",
+     "edge": 10.398,
+     "win": true,
+     "actual_margin_home": -3
+    },
+    {
+     "week": 4,
+     "game_id": "2026_REG_4_ATL_NO",
+     "side": "ATL",
+     "why": "rest 11d vs 8d",
+     "edge": 29.888,
+     "win": true,
+     "actual_margin_home": -21
+    },
+    {
+     "week": 5,
+     "game_id": "2026_REG_5_CLE_NYJ",
+     "side": "CLE",
+     "why": "rest 10d vs 7d",
+     "edge": -7.345,
+     "win": false,
+     "actual_margin_home": 5
+    },
+    {
+     "week": 5,
+     "game_id": "2026_REG_5_IND_PIT",
+     "side": "PIT",
+     "why": "rest 10d vs 7d",
+     "edge": 13.64,
+     "win": true,
+     "actual_margin_home": 12
+    },
+    {
+     "week": 6,
+     "game_id": "2026_REG_6_CAR_PHI",
+     "side": "CAR",
+     "why": "rest 14d vs 7d",
+     "edge": 4.218,
+     "win": true,
+     "actual_margin_home": -11
+    },
+    {
+     "week": 6,
+     "game_id": "2026_REG_6_DAL_GB",
+     "side": "DAL",
+     "why": "rest 10d vs 7d",
+     "edge": -7.743,
+     "win": false,
+     "actual_margin_home": 10
+    },
+    {
+     "week": 6,
+     "game_id": "2026_REG_6_LAC_KC",
+     "side": "KC",
+     "why": "rest 14d vs 7d",
+     "edge": 1.249,
+     "win": true,
+     "actual_margin_home": 16
+    },
+    {
+     "week": 6,
+     "game_id": "2026_REG_6_PIT_TB",
+     "side": "TB",
+     "why": "rest 10d vs 7d",
+     "edge": -5.258,
+     "win": false,
+     "actual_margin_home": -7
+    },
+    {
+     "week": 7,
+     "game_id": "2026_REG_7_CIN_BAL",
+     "side": "CIN",
+     "why": "rest 14d vs 7d",
+     "edge": 19.258,
+     "win": true,
+     "actual_margin_home": -22
+    },
+    {
+     "week": 7,
+     "game_id": "2026_REG_7_DEN_AZ",
+     "side": "DEN",
+     "why": "rest 10d vs 7d",
+     "edge": 5.608,
+     "win": true,
+     "actual_margin_home": -14
+    },
+    {
+     "week": 7,
+     "game_id": "2026_REG_7_GB_DET",
+     "side": "DET",
+     "why": "rest 14d vs 7d",
+     "edge": 2.485,
+     "win": true,
+     "actual_margin_home": 3
+    },
+    {
+     "week": 7,
+     "game_id": "2026_REG_7_IND_MIN",
+     "side": "MIN",
+     "why": "rest 14d vs 7d",
+     "edge": -4.427,
+     "win": false,
+     "actual_margin_home": 6
+    },
+    {
+     "week": 7,
+     "game_id": "2026_REG_7_KC_SEA",
+     "side": "SEA",
+     "why": "rest 10d vs 7d",
+     "edge": 21.279,
+     "win": true,
+     "actual_margin_home": 17
+    },
+    {
+     "week": 7,
+     "game_id": "2026_REG_7_MIA_NYJ",
+     "side": "MIA",
+     "why": "rest 14d vs 7d",
+     "edge": 8.75,
+     "win": true,
+     "actual_margin_home": -3
+    },
+    {
+     "week": 8,
+     "game_id": "2026_REG_8_BAL_BUF",
+     "side": "BUF",
+     "why": "rest 14d vs 7d",
+     "edge": 22.804,
+     "win": true,
+     "actual_margin_home": 26
+    },
+    {
+     "week": 8,
+     "game_id": "2026_REG_8_IND_JAX",
+     "side": "JAX",
+     "why": "rest 14d vs 7d",
+     "edge": 24.134,
+     "win": true,
+     "actual_margin_home": 35
+    },
+    {
+     "week": 8,
+     "game_id": "2026_REG_8_LAC_LA",
+     "side": "LAC",
+     "why": "rest 14d vs 7d",
+     "edge": -6.933,
+     "win": false,
+     "actual_margin_home": 15
+    },
+    {
+     "week": 8,
+     "game_id": "2026_REG_8_NE_MIA",
+     "side": "NE",
+     "why": "rest 10d vs 7d",
+     "edge": -6.103,
+     "win": false,
+     "actual_margin_home": -5
+    },
+    {
+     "week": 8,
+     "game_id": "2026_REG_8_PHI_WAS",
+     "side": "WAS",
+     "why": "rest 13d vs 6d",
+     "edge": 17.722,
+     "win": true,
+     "actual_margin_home": 17
+    },
+    {
+     "week": 8,
+     "game_id": "2026_REG_8_CHI_SEA",
+     "side": "CHI",
+     "why": "rest 11d vs 8d",
+     "edge": 15.274,
+     "win": true,
+     "actual_margin_home": -17
+    },
+    {
+     "week": 9,
+     "game_id": "2026_REG_9_CLE_NO",
+     "side": "NO",
+     "why": "rest 14d vs 7d",
+     "edge": 1.495,
+     "win": true,
+     "actual_margin_home": 1
+    },
+    {
+     "week": 9,
+     "game_id": "2026_REG_9_DEN_CAR",
+     "side": "CAR",
+     "why": "rest 10d vs 7d",
+     "edge": -1.748,
+     "win": false,
+     "actual_margin_home": -5
+    },
+    {
+     "week": 9,
+     "game_id": "2026_REG_9_GB_NE",
+     "side": "GB",
+     "why": "rest 10d vs 7d",
+     "edge": 20.166,
+     "win": true,
+     "actual_margin_home": -18
+    },
+    {
+     "week": 9,
+     "game_id": "2026_REG_9_HOU_LAC",
+     "side": "HOU",
+     "why": "rest 14d vs 7d",
+     "edge": 13.378,
+     "win": true,
+     "actual_margin_home": -22
+    },
+    {
+     "week": 9,
+     "game_id": "2026_REG_9_LV_SF",
+     "side": "SF",
+     "why": "rest 14d vs 7d",
+     "edge": 13.66,
+     "win": true,
+     "actual_margin_home": 21
+    },
+    {
+     "week": 9,
+     "game_id": "2026_REG_9_NYG_PHI",
+     "side": "NYG",
+     "why": "rest 14d vs 7d",
+     "edge": 3.055,
+     "win": true,
+     "actual_margin_home": -8
+    }
+   ],
+   "gates": {
+    "G0": "PASS",
+    "G1": "FAIL",
+    "G2": "PASS",
+    "G3": "PASS",
+    "G4": "BLOCKED",
+    "G5": "PASS",
+    "G6": "BLOCKED",
+    "G7": "NOT EVALUATED",
+    "G8": "PASS",
+    "G9": "PASS",
+    "G10": "PASS"
+   },
+   "status": "FAIL",
+   "status_reason": "fails G1"
+  },
+  {
+   "id": "S2",
+   "name": "Home team off a bye",
+   "track": "single",
+   "text": "Bet the home side when it has had 13+ days since its last game and the visitor has not.",
+   "selector": "rest, home/away (official schedule)",
+   "uses_model_prediction": false,
+   "needs_market_price": false,
+   "backtestable": true,
+   "n_bets": 8,
+   "graded": true,
+   "stats": {
+    "n": 8,
+    "wins": 7,
+    "losses": 1,
+    "win_rate": 0.875,
+    "mean_edge_pts": 9.89,
+    "sd_edge": 11.021,
+    "ci95_mean_edge": [
+     2.963,
+     17.179
+    ],
+    "t_stat": 2.538,
+    "p_t": 0.03875828064761292,
+    "p_binomial": 0.0703125,
+    "permutation_p": 0.013398660133986601,
+    "max_single_week_share": 0.817,
+    "split_half_correlation": NaN,
+    "edge_by_week": {
+     "6": 1.25,
+     "7": -1.94,
+     "8": 64.66,
+     "9": 15.16
+    },
+    "p_t_bh": 0.09043598817776348,
+    "p_t_bh_reject": true
+   },
+   "bets": [
+    {
+     "week": 6,
+     "game_id": "2026_REG_6_LAC_KC",
+     "side": "KC",
+     "why": "home off bye (14d)",
+     "edge": 1.249,
+     "win": true,
+     "actual_margin_home": 16
+    },
+    {
+     "week": 7,
+     "game_id": "2026_REG_7_GB_DET",
+     "side": "DET",
+     "why": "home off bye (14d)",
+     "edge": 2.485,
+     "win": true,
+     "actual_margin_home": 3
+    },
+    {
+     "week": 7,
+     "game_id": "2026_REG_7_IND_MIN",
+     "side": "MIN",
+     "why": "home off bye (14d)",
+     "edge": -4.427,
+     "win": false,
+     "actual_margin_home": 6
+    },
+    {
+     "week": 8,
+     "game_id": "2026_REG_8_BAL_BUF",
+     "side": "BUF",
+     "why": "home off bye (14d)",
+     "edge": 22.804,
+     "win": true,
+     "actual_margin_home": 26
+    },
+    {
+     "week": 8,
+     "game_id": "2026_REG_8_IND_JAX",
+     "side": "JAX",
+     "why": "home off bye (14d)",
+     "edge": 24.134,
+     "win": true,
+     "actual_margin_home": 35
+    },
+    {
+     "week": 8,
+     "game_id": "2026_REG_8_PHI_WAS",
+     "side": "WAS",
+     "why": "home off bye (13d)",
+     "edge": 17.722,
+     "win": true,
+     "actual_margin_home": 17
+    },
+    {
+     "week": 9,
+     "game_id": "2026_REG_9_CLE_NO",
+     "side": "NO",
+     "why": "home off bye (14d)",
+     "edge": 1.495,
+     "win": true,
+     "actual_margin_home": 1
+    },
+    {
+     "week": 9,
+     "game_id": "2026_REG_9_LV_SF",
+     "side": "SF",
+     "why": "home off bye (14d)",
+     "edge": 13.66,
+     "win": true,
+     "actual_margin_home": 21
+    }
+   ],
+   "gates": {
+    "G0": "PASS",
+    "G1": "FAIL",
+    "G2": "PASS",
+    "G3": "PASS",
+    "G4": "BLOCKED",
+    "G5": "FAIL",
+    "G6": "BLOCKED",
+    "G7": "NOT EVALUATED",
+    "G8": "PASS",
+    "G9": "PASS",
+    "G10": "PASS"
+   },
+   "status": "FAIL",
+   "status_reason": "fails G1, G5"
+  },
+  {
+   "id": "S3",
+   "name": "Division dog",
+   "track": "single",
+   "text": "In division games, bet the club with the worse net points per game (points for minus points against, from completed games only).",
+   "selector": "official net points per game + division (official standings)",
+   "uses_model_prediction": false,
+   "needs_market_price": false,
+   "backtestable": true,
+   "n_bets": 29,
+   "graded": true,
+   "stats": {
+    "n": 29,
+    "wins": 18,
+    "losses": 11,
+    "win_rate": 0.6207,
+    "mean_edge_pts": 3.634,
+    "sd_edge": 15.704,
+    "ci95_mean_edge": [
+     -1.932,
+     9.229
+    ],
+    "t_stat": 1.246,
+    "p_t": 0.223040426450401,
+    "p_binomial": 0.26493089646101,
+    "permutation_p": 0.0321967803219678,
+    "max_single_week_share": 0.477,
+    "split_half_correlation": -0.24579864526256281,
+    "edge_by_week": {
+     "4": 35.51,
+     "5": 37.39,
+     "6": 44.43,
+     "7": 45.62,
+     "8": -50.22,
+     "9": -7.35
+    },
+    "p_t_bh": 0.2602138308588012,
+    "p_t_bh_reject": false
+   },
+   "bets": [
+    {
+     "week": 4,
+     "game_id": "2026_REG_4_PIT_CLE",
+     "side": "CLE",
+     "why": "division game, worse net points per game",
+     "edge": 0.764,
+     "win": true,
+     "actual_margin_home": 3
+    },
+    {
+     "week": 4,
+     "game_id": "2026_REG_4_KC_LV",
+     "side": "LV",
+     "why": "division game, worse net points per game",
+     "edge": -1.507,
+     "win": false,
+     "actual_margin_home": -3
+    },
+    {
+     "week": 4,
+     "game_id": "2026_REG_4_NE_BUF",
+     "side": "NE",
+     "why": "division game, worse net points per game",
+     "edge": 6.367,
+     "win": true,
+     "actual_margin_home": -3
+    },
+    {
+     "week": 4,
+     "game_id": "2026_REG_4_ATL_NO",
+     "side": "ATL",
+     "why": "division game, worse net points per game",
+     "edge": 29.888,
+     "win": true,
+     "actual_margin_home": -21
+    },
+    {
+     "week": 5,
+     "game_id": "2026_REG_5_CHI_GB",
+     "side": "GB",
+     "why": "division game, worse net points per game",
+     "edge": 41.456,
+     "win": true,
+     "actual_margin_home": 24
+    },
+    {
+     "week": 5,
+     "game_id": "2026_REG_5_DEN_LAC",
+     "side": "LAC",
+     "why": "division game, worse net points per game",
+     "edge": 3.918,
+     "win": true,
+     "actual_margin_home": -6
+    },
+    {
+     "week": 5,
+     "game_id": "2026_REG_5_HOU_TEN",
+     "side": "TEN",
+     "why": "division game, worse net points per game",
+     "edge": -19.822,
+     "win": false,
+     "actual_margin_home": -23
+    },
+    {
+     "week": 5,
+     "game_id": "2026_REG_5_NYG_WAS",
+     "side": "WAS",
+     "why": "division game, worse net points per game",
+     "edge": 6.384,
+     "win": true,
+     "actual_margin_home": 0
+    },
+    {
+     "week": 5,
+     "game_id": "2026_REG_5_SF_SEA",
+     "side": "SEA",
+     "why": "division game, worse net points per game",
+     "edge": 5.457,
+     "win": true,
+     "actual_margin_home": -3
+    },
+    {
+     "week": 6,
+     "game_id": "2026_REG_6_AZ_LA",
+     "side": "AZ",
+     "why": "division game, worse net points per game",
+     "edge": 11.641,
+     "win": true,
+     "actual_margin_home": -2
+    },
+    {
+     "week": 6,
+     "game_id": "2026_REG_6_BAL_CLE",
+     "side": "CLE",
+     "why": "division game, worse net points per game",
+     "edge": 5.315,
+     "win": true,
+     "actual_margin_home": 3
+    },
+    {
+     "week": 6,
+     "game_id": "2026_REG_6_HOU_JAX",
+     "side": "HOU",
+     "why": "division game, worse net points per game",
+     "edge": 14.443,
+     "win": true,
+     "actual_margin_home": -3
+    },
+    {
+     "week": 6,
+     "game_id": "2026_REG_6_LAC_KC",
+     "side": "LAC",
+     "why": "division game, worse net points per game",
+     "edge": -1.249,
+     "win": false,
+     "actual_margin_home": 16
+    },
+    {
+     "week": 6,
+     "game_id": "2026_REG_6_NYJ_NE",
+     "side": "NYJ",
+     "why": "division game, worse net points per game",
+     "edge": 0.094,
+     "win": true,
+     "actual_margin_home": 7
+    },
+    {
+     "week": 6,
+     "game_id": "2026_REG_6_TEN_IND",
+     "side": "TEN",
+     "why": "division game, worse net points per game",
+     "edge": 14.184,
+     "win": true,
+     "actual_margin_home": -6
+    },
+    {
+     "week": 7,
+     "game_id": "2026_REG_7_CIN_BAL",
+     "side": "CIN",
+     "why": "division game, worse net points per game",
+     "edge": 19.258,
+     "win": true,
+     "actual_margin_home": -22
+    },
+    {
+     "week": 7,
+     "game_id": "2026_REG_7_GB_DET",
+     "side": "GB",
+     "why": "division game, worse net points per game",
+     "edge": -2.485,
+     "win": false,
+     "actual_margin_home": 3
+    },
+    {
+     "week": 7,
+     "game_id": "2026_REG_7_MIA_NYJ",
+     "side": "MIA",
+     "why": "division game, worse net points per game",
+     "edge": 8.75,
+     "win": true,
+     "actual_margin_home": -3
+    },
+    {
+     "week": 7,
+     "game_id": "2026_REG_7_TB_CAR",
+     "side": "TB",
+     "why": "division game, worse net points per game",
+     "edge": 35.416,
+     "win": true,
+     "actual_margin_home": -30
+    },
+    {
+     "week": 7,
+     "game_id": "2026_REG_7_DAL_PHI",
+     "side": "PHI",
+     "why": "division game, worse net points per game",
+     "edge": -15.318,
+     "win": false,
+     "actual_margin_home": -17
+    },
+    {
+     "week": 8,
+     "game_id": "2026_REG_8_ATL_TB",
+     "side": "ATL",
+     "why": "division game, worse net points per game",
+     "edge": -14.434,
+     "win": false,
+     "actual_margin_home": 16
+    },
+    {
+     "week": 8,
+     "game_id": "2026_REG_8_CLE_PIT",
+     "side": "CLE",
+     "why": "division game, worse net points per game",
+     "edge": -17.569,
+     "win": false,
+     "actual_margin_home": 21
+    },
+    {
+     "week": 8,
+     "game_id": "2026_REG_8_IND_JAX",
+     "side": "IND",
+     "why": "division game, worse net points per game",
+     "edge": -24.134,
+     "win": false,
+     "actual_margin_home": 35
+    },
+    {
+     "week": 8,
+     "game_id": "2026_REG_8_KC_DEN",
+     "side": "DEN",
+     "why": "division game, worse net points per game",
+     "edge": 7.293,
+     "win": true,
+     "actual_margin_home": 4
+    },
+    {
+     "week": 8,
+     "game_id": "2026_REG_8_MIN_DET",
+     "side": "DET",
+     "why": "division game, worse net points per game",
+     "edge": 10.246,
+     "win": true,
+     "actual_margin_home": 4
+    },
+    {
+     "week": 8,
+     "game_id": "2026_REG_8_NE_MIA",
+     "side": "MIA",
+     "why": "division game, worse net points per game",
+     "edge": 6.103,
+     "win": true,
+     "actual_margin_home": -5
+    },
+    {
+     "week": 8,
+     "game_id": "2026_REG_8_PHI_WAS",
+     "side": "PHI",
+     "why": "division game, worse net points per game",
+     "edge": -17.722,
+     "win": false,
+     "actual_margin_home": 17
+    },
+    {
+     "week": 9,
+     "game_id": "2026_REG_9_AZ_SEA",
+     "side": "AZ",
+     "why": "division game, worse net points per game",
+     "edge": -4.296,
+     "win": false,
+     "actual_margin_home": 14
+    },
+    {
+     "week": 9,
+     "game_id": "2026_REG_9_NYG_PHI",
+     "side": "PHI",
+     "why": "division game, worse net points per game",
+     "edge": -3.055,
+     "win": false,
+     "actual_margin_home": -8
+    }
+   ],
+   "gates": {
+    "G0": "PASS",
+    "G1": "FAIL",
+    "G2": "PASS",
+    "G3": "FAIL",
+    "G4": "BLOCKED",
+    "G5": "FAIL",
+    "G6": "BLOCKED",
+    "G7": "NOT EVALUATED",
+    "G8": "FAIL",
+    "G9": "PASS",
+    "G10": "PASS"
+   },
+   "status": "FAIL",
+   "status_reason": "fails G1, G3, G5, G8"
+  },
+  {
+   "id": "S4",
+   "name": "Fade the hot streak",
+   "track": "single",
+   "text": "Bet against any club that enters the week on a win streak of 3 or more.",
+   "selector": "win/loss streak built from completed official results",
+   "uses_model_prediction": false,
+   "needs_market_price": false,
+   "backtestable": true,
+   "n_bets": 25,
+   "graded": true,
+   "stats": {
+    "n": 25,
+    "wins": 15,
+    "losses": 10,
+    "win_rate": 0.6,
+    "mean_edge_pts": 2.324,
+    "sd_edge": 9.251,
+    "ci95_mean_edge": [
+     -1.176,
+     5.809
+    ],
+    "t_stat": 1.256,
+    "p_t": 0.22120936372067057,
+    "p_binomial": 0.42435622215270996,
+    "permutation_p": 0.1095890410958904,
+    "max_single_week_share": 0.86,
+    "split_half_correlation": 0.1352302945463094,
+    "edge_by_week": {
+     "4": 13.25,
+     "5": 13.02,
+     "6": 28.28,
+     "7": 49.96,
+     "8": -14.62,
+     "9": -31.8
+    },
+    "p_t_bh": 0.2602138308588012,
+    "p_t_bh_reject": false
+   },
+   "bets": [
+    {
+     "week": 4,
+     "game_id": "2026_REG_4_DEN_SF",
+     "side": "DEN",
+     "why": "fading SF on a 3-game win streak",
+     "edge": -2.186,
+     "win": false,
+     "actual_margin_home": 10
+    },
+    {
+     "week": 4,
+     "game_id": "2026_REG_4_KC_LV",
+     "side": "KC",
+     "why": "fading LV on a 3-game win streak",
+     "edge": 1.507,
+     "win": true,
+     "actual_margin_home": -3
+    },
+    {
+     "week": 4,
+     "game_id": "2026_REG_4_KC_LV",
+     "side": "LV",
+     "why": "fading KC on a 3-game win streak",
+     "edge": -1.507,
+     "win": false,
+     "actual_margin_home": -3
+    },
+    {
+     "week": 4,
+     "game_id": "2026_REG_4_MIA_MIN",
+     "side": "MIA",
+     "why": "fading MIN on a 3-game win streak",
+     "edge": 9.064,
+     "win": true,
+     "actual_margin_home": 5
+    },
+    {
+     "week": 4,
+     "game_id": "2026_REG_4_NE_BUF",
+     "side": "NE",
+     "why": "fading BUF on a 3-game win streak",
+     "edge": 6.367,
+     "win": true,
+     "actual_margin_home": -3
+    },
+    {
+     "week": 5,
+     "game_id": "2026_REG_5_CLE_NYJ",
+     "side": "NYJ",
+     "why": "fading CLE on a 3-game win streak",
+     "edge": 7.345,
+     "win": true,
+     "actual_margin_home": 5
+    },
+    {
+     "week": 5,
+     "game_id": "2026_REG_5_MIN_NO",
+     "side": "NO",
+     "why": "fading MIN on a 4-game win streak",
+     "edge": 0.218,
+     "win": true,
+     "actual_margin_home": -10
+    },
+    {
+     "week": 5,
+     "game_id": "2026_REG_5_SF_SEA",
+     "side": "SEA",
+     "why": "fading SF on a 4-game win streak",
+     "edge": 5.457,
+     "win": true,
+     "actual_margin_home": -3
+    },
+    {
+     "week": 6,
+     "game_id": "2026_REG_6_BAL_CLE",
+     "side": "CLE",
+     "why": "fading BAL on a 3-game win streak",
+     "edge": 5.315,
+     "win": true,
+     "actual_margin_home": 3
+    },
+    {
+     "week": 6,
+     "game_id": "2026_REG_6_HOU_JAX",
+     "side": "HOU",
+     "why": "fading JAX on a 3-game win streak",
+     "edge": 14.443,
+     "win": true,
+     "actual_margin_home": -3
+    },
+    {
+     "week": 6,
+     "game_id": "2026_REG_6_LAC_KC",
+     "side": "LAC",
+     "why": "fading KC on a 4-game win streak",
+     "edge": -1.249,
+     "win": false,
+     "actual_margin_home": 16
+    },
+    {
+     "week": 6,
+     "game_id": "2026_REG_6_WAS_SF",
+     "side": "WAS",
+     "why": "fading SF on a 5-game win streak",
+     "edge": 9.771,
+     "win": true,
+     "actual_margin_home": 6
+    },
+    {
+     "week": 7,
+     "game_id": "2026_REG_7_NE_CHI",
+     "side": "CHI",
+     "why": "fading NE on a 3-game win streak",
+     "edge": 5.874,
+     "win": true,
+     "actual_margin_home": 6
+    },
+    {
+     "week": 7,
+     "game_id": "2026_REG_7_GB_DET",
+     "side": "DET",
+     "why": "fading GB on a 3-game win streak",
+     "edge": 2.485,
+     "win": true,
+     "actual_margin_home": 3
+    },
+    {
+     "week": 7,
+     "game_id": "2026_REG_7_IND_MIN",
+     "side": "IND",
+     "why": "fading MIN on a 5-game win streak",
+     "edge": 4.427,
+     "win": true,
+     "actual_margin_home": 6
+    },
+    {
+     "week": 7,
+     "game_id": "2026_REG_7_KC_SEA",
+     "side": "SEA",
+     "why": "fading KC on a 5-game win streak",
+     "edge": 21.279,
+     "win": true,
+     "actual_margin_home": 17
+    },
+    {
+     "week": 7,
+     "game_id": "2026_REG_7_SF_ATL",
+     "side": "ATL",
+     "why": "fading SF on a 6-game win streak",
+     "edge": 15.895,
+     "win": true,
+     "actual_margin_home": 9
+    },
+    {
+     "week": 8,
+     "game_id": "2026_REG_8_CLE_PIT",
+     "side": "CLE",
+     "why": "fading PIT on a 3-game win streak",
+     "edge": -17.569,
+     "win": false,
+     "actual_margin_home": 21
+    },
+    {
+     "week": 8,
+     "game_id": "2026_REG_8_KC_DEN",
+     "side": "KC",
+     "why": "fading DEN on a 3-game win streak",
+     "edge": -7.293,
+     "win": false,
+     "actual_margin_home": 4
+    },
+    {
+     "week": 8,
+     "game_id": "2026_REG_8_MIN_DET",
+     "side": "DET",
+     "why": "fading MIN on a 6-game win streak",
+     "edge": 10.246,
+     "win": true,
+     "actual_margin_home": 4
+    },
+    {
+     "week": 9,
+     "game_id": "2026_REG_9_CIN_ATL",
+     "side": "ATL",
+     "why": "fading CIN on a 3-game win streak",
+     "edge": -10.431,
+     "win": false,
+     "actual_margin_home": -17
+    },
+    {
+     "week": 9,
+     "game_id": "2026_REG_9_DEN_CAR",
+     "side": "CAR",
+     "why": "fading DEN on a 4-game win streak",
+     "edge": -1.748,
+     "win": false,
+     "actual_margin_home": -5
+    },
+    {
+     "week": 9,
+     "game_id": "2026_REG_9_DET_MIA",
+     "side": "MIA",
+     "why": "fading DET on a 3-game win streak",
+     "edge": -1.594,
+     "win": false,
+     "actual_margin_home": -10
+    },
+    {
+     "week": 9,
+     "game_id": "2026_REG_9_TB_CHI",
+     "side": "TB",
+     "why": "fading CHI on a 3-game win streak",
+     "edge": -0.959,
+     "win": false,
+     "actual_margin_home": 3
+    },
+    {
+     "week": 9,
+     "game_id": "2026_REG_9_BUF_MIN",
+     "side": "MIN",
+     "why": "fading BUF on a 3-game win streak",
+     "edge": -17.064,
+     "win": false,
+     "actual_margin_home": -17
+    }
+   ],
+   "gates": {
+    "G0": "PASS",
+    "G1": "FAIL",
+    "G2": "PASS",
+    "G3": "FAIL",
+    "G4": "BLOCKED",
+    "G5": "FAIL",
+    "G6": "BLOCKED",
+    "G7": "NOT EVALUATED",
+    "G8": "FAIL",
+    "G9": "FAIL",
+    "G10": "PASS"
+   },
+   "status": "FAIL",
+   "status_reason": "fails G1, G3, G5, G8, G9"
+  },
+  {
+   "id": "S5",
+   "name": "Pythagorean bounce-back",
+   "track": "single",
+   "text": "Bet the club whose Pythagorean expected wins exceed its actual wins by at least 1.0. Exponent 2.337.",
+   "selector": "points for/against from completed official results",
+   "uses_model_prediction": false,
+   "needs_market_price": false,
+   "backtestable": true,
+   "n_bets": 19,
+   "graded": true,
+   "stats": {
+    "n": 19,
+    "wins": 8,
+    "losses": 11,
+    "win_rate": 0.4211,
+    "mean_edge_pts": 1.402,
+    "sd_edge": 14.201,
+    "ci95_mean_edge": [
+     -4.572,
+     7.8
+    ],
+    "t_stat": 0.43,
+    "p_t": 0.6719464945403492,
+    "p_binomial": 0.6476058959960938,
+    "permutation_p": 0.21637836216378362,
+    "max_single_week_share": 0.92,
+    "split_half_correlation": 0.4214517186028611,
+    "edge_by_week": {
+     "4": -10.4,
+     "5": 15.0,
+     "6": 7.94,
+     "7": 24.51,
+     "8": 9.72,
+     "9": -20.12
+    },
+    "p_t_bh": 0.6719464945403492,
+    "p_t_bh_reject": false
+   },
+   "bets": [
+    {
+     "week": 4,
+     "game_id": "2026_REG_4_GB_TB",
+     "side": "TB",
+     "why": "pythag +1.09 wins",
+     "edge": -10.398,
+     "win": false,
+     "actual_margin_home": -3
+    },
+    {
+     "week": 5,
+     "game_id": "2026_REG_5_TB_DAL",
+     "side": "TB",
+     "why": "pythag +1.47 wins",
+     "edge": 11.083,
+     "win": true,
+     "actual_margin_home": -8
+    },
+    {
+     "week": 5,
+     "game_id": "2026_REG_5_DEN_LAC",
+     "side": "LAC",
+     "why": "pythag +1.02 wins",
+     "edge": 3.918,
+     "win": true,
+     "actual_margin_home": -6
+    },
+    {
+     "week": 5,
+     "game_id": "2026_REG_5_HOU_TEN",
+     "side": "TEN",
+     "why": "pythag +1.11 wins",
+     "edge": -19.822,
+     "win": false,
+     "actual_margin_home": -23
+    },
+    {
+     "week": 5,
+     "game_id": "2026_REG_5_HOU_TEN",
+     "side": "HOU",
+     "why": "pythag +1.41 wins",
+     "edge": 19.822,
+     "win": true,
+     "actual_margin_home": -23
+    },
+    {
+     "week": 6,
+     "game_id": "2026_REG_6_HOU_JAX",
+     "side": "HOU",
+     "why": "pythag +1.45 wins",
+     "edge": 14.443,
+     "win": true,
+     "actual_margin_home": -3
+    },
+    {
+     "week": 6,
+     "game_id": "2026_REG_6_LAC_KC",
+     "side": "LAC",
+     "why": "pythag +1.34 wins",
+     "edge": -1.249,
+     "win": false,
+     "actual_margin_home": 16
+    },
+    {
+     "week": 6,
+     "game_id": "2026_REG_6_PIT_TB",
+     "side": "TB",
+     "why": "pythag +1.17 wins",
+     "edge": -5.258,
+     "win": false,
+     "actual_margin_home": -7
+    },
+    {
+     "week": 7,
+     "game_id": "2026_REG_7_NYG_HOU",
+     "side": "HOU",
+     "why": "pythag +1.02 wins",
+     "edge": -10.909,
+     "win": false,
+     "actual_margin_home": -6
+    },
+    {
+     "week": 7,
+     "game_id": "2026_REG_7_TB_CAR",
+     "side": "TB",
+     "why": "pythag +1.49 wins",
+     "edge": 35.416,
+     "win": true,
+     "actual_margin_home": -30
+    },
+    {
+     "week": 8,
+     "game_id": "2026_REG_8_ATL_TB",
+     "side": "TB",
+     "why": "pythag +1.79 wins",
+     "edge": 14.434,
+     "win": true,
+     "actual_margin_home": 16
+    },
+    {
+     "week": 8,
+     "game_id": "2026_REG_8_LAC_LA",
+     "side": "LAC",
+     "why": "pythag +1.38 wins",
+     "edge": -6.933,
+     "win": false,
+     "actual_margin_home": 15
+    },
+    {
+     "week": 8,
+     "game_id": "2026_REG_8_LV_NYJ",
+     "side": "NYJ",
+     "why": "pythag +1.13 wins",
+     "edge": -4.82,
+     "win": false,
+     "actual_margin_home": -5
+    },
+    {
+     "week": 8,
+     "game_id": "2026_REG_8_TEN_CIN",
+     "side": "TEN",
+     "why": "pythag +1.08 wins",
+     "edge": 7.039,
+     "win": true,
+     "actual_margin_home": 7
+    },
+    {
+     "week": 9,
+     "game_id": "2026_REG_9_DAL_IND",
+     "side": "DAL",
+     "why": "pythag +1.13 wins",
+     "edge": -0.853,
+     "win": false,
+     "actual_margin_home": -4
+    },
+    {
+     "week": 9,
+     "game_id": "2026_REG_9_HOU_LAC",
+     "side": "LAC",
+     "why": "pythag +1.46 wins",
+     "edge": -13.378,
+     "win": false,
+     "actual_margin_home": -22
+    },
+    {
+     "week": 9,
+     "game_id": "2026_REG_9_HOU_LAC",
+     "side": "HOU",
+     "why": "pythag +1.38 wins",
+     "edge": 13.378,
+     "win": true,
+     "actual_margin_home": -22
+    },
+    {
+     "week": 9,
+     "game_id": "2026_REG_9_NYJ_KC",
+     "side": "NYJ",
+     "why": "pythag +1.53 wins",
+     "edge": -18.307,
+     "win": false,
+     "actual_margin_home": 23
+    },
+    {
+     "week": 9,
+     "game_id": "2026_REG_9_TB_CHI",
+     "side": "TB",
+     "why": "pythag +1.76 wins",
+     "edge": -0.959,
+     "win": false,
+     "actual_margin_home": 3
+    }
+   ],
+   "gates": {
+    "G0": "PASS",
+    "G1": "FAIL",
+    "G2": "PASS",
+    "G3": "FAIL",
+    "G4": "BLOCKED",
+    "G5": "FAIL",
+    "G6": "BLOCKED",
+    "G7": "NOT EVALUATED",
+    "G8": "FAIL",
+    "G9": "FAIL",
+    "G10": "PASS"
+   },
+   "status": "FAIL",
+   "status_reason": "fails G1, G3, G5, G8, G9"
+  },
+  {
+   "id": "S6",
+   "name": "Road dog with the better defence",
+   "track": "single",
+   "text": "Bet the road club when it allows fewer points per game than its host and enters with the worse record.",
+   "selector": "official points allowed per game and win-loss record",
+   "uses_model_prediction": false,
+   "needs_market_price": false,
+   "backtestable": true,
+   "n_bets": 10,
+   "graded": true,
+   "stats": {
+    "n": 10,
+    "wins": 7,
+    "losses": 3,
+    "win_rate": 0.7,
+    "mean_edge_pts": 8.234,
+    "sd_edge": 15.25,
+    "ci95_mean_edge": [
+     -0.877,
+     16.883
+    ],
+    "t_stat": 1.707,
+    "p_t": 0.12194291322194184,
+    "p_binomial": 0.34375,
+    "permutation_p": 0.014698530146985302,
+    "max_single_week_share": 0.845,
+    "split_half_correlation": 0.29931073881747855,
+    "edge_by_week": {
+     "4": 11.27,
+     "5": 11.08,
+     "6": 14.18,
+     "7": 69.56,
+     "8": -22.8,
+     "9": -0.96
+    },
+    "p_t_bh": 0.21340009813839822,
+    "p_t_bh_reject": false
+   },
+   "bets": [
+    {
+     "week": 4,
+     "game_id": "2026_REG_4_LA_PHI",
+     "side": "LA",
+     "why": "road LA allows 21.0 vs 23.0",
+     "edge": -1.198,
+     "win": false,
+     "actual_margin_home": -4
+    },
+    {
+     "week": 4,
+     "game_id": "2026_REG_4_NE_BUF",
+     "side": "NE",
+     "why": "road NE allows 17.0 vs 26.0",
+     "edge": 6.367,
+     "win": true,
+     "actual_margin_home": -3
+    },
+    {
+     "week": 4,
+     "game_id": "2026_REG_4_TEN_BAL",
+     "side": "TEN",
+     "why": "road TEN allows 19.7 vs 26.0",
+     "edge": 6.098,
+     "win": true,
+     "actual_margin_home": 6
+    },
+    {
+     "week": 5,
+     "game_id": "2026_REG_5_TB_DAL",
+     "side": "TB",
+     "why": "road TB allows 24.0 vs 28.0",
+     "edge": 11.083,
+     "win": true,
+     "actual_margin_home": -8
+    },
+    {
+     "week": 6,
+     "game_id": "2026_REG_6_TEN_IND",
+     "side": "TEN",
+     "why": "road TEN allows 21.8 vs 27.6",
+     "edge": 14.184,
+     "win": true,
+     "actual_margin_home": -6
+    },
+    {
+     "week": 7,
+     "game_id": "2026_REG_7_CIN_BAL",
+     "side": "CIN",
+     "why": "road CIN allows 21.8 vs 22.0",
+     "edge": 19.258,
+     "win": true,
+     "actual_margin_home": -22
+    },
+    {
+     "week": 7,
+     "game_id": "2026_REG_7_LA_LV",
+     "side": "LA",
+     "why": "road LA allows 23.0 vs 27.0",
+     "edge": 14.891,
+     "win": true,
+     "actual_margin_home": -14
+    },
+    {
+     "week": 7,
+     "game_id": "2026_REG_7_TB_CAR",
+     "side": "TB",
+     "why": "road TB allows 23.0 vs 24.6",
+     "edge": 35.416,
+     "win": true,
+     "actual_margin_home": -30
+    },
+    {
+     "week": 8,
+     "game_id": "2026_REG_8_BAL_BUF",
+     "side": "BAL",
+     "why": "road BAL allows 23.9 vs 28.5",
+     "edge": -22.804,
+     "win": false,
+     "actual_margin_home": 26
+    },
+    {
+     "week": 9,
+     "game_id": "2026_REG_9_TB_CHI",
+     "side": "TB",
+     "why": "road TB allows 18.9 vs 20.0",
+     "edge": -0.959,
+     "win": false,
+     "actual_margin_home": 3
+    }
+   ],
+   "gates": {
+    "G0": "PASS",
+    "G1": "FAIL",
+    "G2": "PASS",
+    "G3": "FAIL",
+    "G4": "BLOCKED",
+    "G5": "FAIL",
+    "G6": "BLOCKED",
+    "G7": "NOT EVALUATED",
+    "G8": "FAIL",
+    "G9": "PASS",
+    "G10": "PASS"
+   },
+   "status": "FAIL",
+   "status_reason": "fails G1, G3, G5, G8"
+  },
+  {
+   "id": "S7",
+   "name": "Model-vs-market disagreement",
+   "track": "single",
+   "text": "Bet the side my model favours when it differs from the consensus closing line by 3 points or more.",
+   "selector": "my line vs the consensus closing line",
+   "uses_model_prediction": true,
+   "needs_market_price": true,
+   "backtestable": false,
+   "blocked_reason": "No official NFL odds exist and no licensed book feed is connected. Historical closing lines are unavailable, so this rule cannot be scored and is published as a signal only.",
+   "n_bets": 0,
+   "graded": false,
+   "status": "NOT GRADED",
+   "status_reason": "No official NFL odds exist and no licensed book feed is connected. Historical closing lines are unavailable, so this rule cannot be scored and is published as a signal only.",
+   "gates": {
+    "G1": "BLOCKED",
+    "G3": "BLOCKED",
+    "G4": "BLOCKED",
+    "G5": "BLOCKED",
+    "G6": "BLOCKED",
+    "G8": "BLOCKED",
+    "G9": "BLOCKED",
+    "G2": "PASS",
+    "G0": "PASS",
+    "G10": "BLOCKED"
+   },
+   "stats": {}
+  },
+  {
+   "id": "S8",
+   "name": "Bet the model's biggest edge",
+   "track": "single",
+   "text": "Bet the side my model favours by 4 points or more. INCLUDED ON PURPOSE: the selector is the same number the outcome is measured against, so it is a self-referential test and gate G10 exists to catch it.",
+   "selector": "my own predicted margin (self-referential by design)",
+   "uses_model_prediction": true,
+   "needs_market_price": false,
+   "backtestable": true,
+   "self_referential": true,
+   "n_bets": 51,
+   "graded": true,
+   "stats": {
+    "n": 51,
+    "wins": 17,
+    "losses": 34,
+    "win_rate": 0.3333,
+    "mean_edge_pts": -4.659,
+    "sd_edge": 12.552,
+    "ci95_mean_edge": [
+     -8.125,
+     -1.358
+    ],
+    "t_stat": -2.651,
+    "p_t": 0.01072380768444852,
+    "p_binomial": 0.024092907698449295,
+    "permutation_p": 0.9849015098490151,
+    "max_single_week_share": 0.439,
+    "split_half_correlation": -0.03450165460902945,
+    "edge_by_week": {
+     "4": -68.1,
+     "5": -104.41,
+     "6": -41.07,
+     "7": -94.8,
+     "8": -2.52,
+     "9": 73.28
+    },
+    "p_t_bh": 0.03753332689556982,
+    "p_t_bh_reject": true
+   },
+   "bets": [
+    {
+     "week": 4,
+     "game_id": "2026_REG_4_DAL_HOU",
+     "side": "DAL",
+     "why": "model edge 5.0",
+     "edge": -1.013,
+     "win": false,
+     "actual_margin_home": -4
+    },
+    {
+     "week": 4,
+     "game_id": "2026_REG_4_DEN_SF",
+     "side": "SF",
+     "why": "model edge 7.8",
+     "edge": 2.186,
+     "win": true,
+     "actual_margin_home": 10
+    },
+    {
+     "week": 4,
+     "game_id": "2026_REG_4_GB_TB",
+     "side": "TB",
+     "why": "model edge 7.4",
+     "edge": -10.398,
+     "win": false,
+     "actual_margin_home": -3
+    },
+    {
+     "week": 4,
+     "game_id": "2026_REG_4_JAX_CIN",
+     "side": "JAX",
+     "why": "model edge 9.7",
+     "edge": -4.653,
+     "win": false,
+     "actual_margin_home": -5
+    },
+    {
+     "week": 4,
+     "game_id": "2026_REG_4_LAC_SEA",
+     "side": "SEA",
+     "why": "model edge 11.6",
+     "edge": -4.606,
+     "win": false,
+     "actual_margin_home": 7
+    },
+    {
+     "week": 4,
+     "game_id": "2026_REG_4_LA_PHI",
+     "side": "LA",
+     "why": "model edge 5.2",
+     "edge": -1.198,
+     "win": false,
+     "actual_margin_home": -4
+    },
+    {
+     "week": 4,
+     "game_id": "2026_REG_4_MIA_MIN",
+     "side": "MIN",
+     "why": "model edge 14.1",
+     "edge": -9.064,
+     "win": false,
+     "actual_margin_home": 5
+    },
+    {
+     "week": 4,
+     "game_id": "2026_REG_4_NYJ_CHI",
+     "side": "CHI",
+     "why": "model edge 14.4",
+     "edge": -3.372,
+     "win": false,
+     "actual_margin_home": 11
+    },
+    {
+     "week": 4,
+     "game_id": "2026_REG_4_TEN_BAL",
+     "side": "BAL",
+     "why": "model edge 12.1",
+     "edge": -6.098,
+     "win": false,
+     "actual_margin_home": 6
+    },
+    {
+     "week": 4,
+     "game_id": "2026_REG_4_ATL_NO",
+     "side": "NO",
+     "why": "model edge 8.9",
+     "edge": -29.888,
+     "win": false,
+     "actual_margin_home": -21
+    },
+    {
+     "week": 5,
+     "game_id": "2026_REG_5_CHI_GB",
+     "side": "CHI",
+     "why": "model edge 17.5",
+     "edge": -41.456,
+     "win": false,
+     "actual_margin_home": 24
+    },
+    {
+     "week": 5,
+     "game_id": "2026_REG_5_CIN_MIA",
+     "side": "CIN",
+     "why": "model edge 8.4",
+     "edge": -1.366,
+     "win": false,
+     "actual_margin_home": -7
+    },
+    {
+     "week": 5,
+     "game_id": "2026_REG_5_DEN_LAC",
+     "side": "DEN",
+     "why": "model edge 9.9",
+     "edge": -3.918,
+     "win": false,
+     "actual_margin_home": -6
+    },
+    {
+     "week": 5,
+     "game_id": "2026_REG_5_LV_NE",
+     "side": "LV",
+     "why": "model edge 5.0",
+     "edge": -32.963,
+     "win": false,
+     "actual_margin_home": 28
+    },
+    {
+     "week": 5,
+     "game_id": "2026_REG_5_MIN_NO",
+     "side": "MIN",
+     "why": "model edge 10.2",
+     "edge": -0.218,
+     "win": false,
+     "actual_margin_home": -10
+    },
+    {
+     "week": 5,
+     "game_id": "2026_REG_5_NYG_WAS",
+     "side": "NYG",
+     "why": "model edge 6.4",
+     "edge": -6.384,
+     "win": false,
+     "actual_margin_home": 0
+    },
+    {
+     "week": 5,
+     "game_id": "2026_REG_5_PHI_JAX",
+     "side": "JAX",
+     "why": "model edge 14.6",
+     "edge": -12.646,
+     "win": false,
+     "actual_margin_home": 2
+    },
+    {
+     "week": 5,
+     "game_id": "2026_REG_5_SF_SEA",
+     "side": "SF",
+     "why": "model edge 8.5",
+     "edge": -5.457,
+     "win": false,
+     "actual_margin_home": -3
+    },
+    {
+     "week": 6,
+     "game_id": "2026_REG_6_AZ_LA",
+     "side": "LA",
+     "why": "model edge 9.6",
+     "edge": -11.641,
+     "win": false,
+     "actual_margin_home": -2
+    },
+    {
+     "week": 6,
+     "game_id": "2026_REG_6_CAR_PHI",
+     "side": "CAR",
+     "why": "model edge 6.8",
+     "edge": 4.218,
+     "win": true,
+     "actual_margin_home": -11
+    },
+    {
+     "week": 6,
+     "game_id": "2026_REG_6_CHI_ATL",
+     "side": "CHI",
+     "why": "model edge 4.4",
+     "edge": 3.6,
+     "win": true,
+     "actual_margin_home": -8
+    },
+    {
+     "week": 6,
+     "game_id": "2026_REG_6_HOU_JAX",
+     "side": "JAX",
+     "why": "model edge 11.4",
+     "edge": -14.443,
+     "win": false,
+     "actual_margin_home": -3
+    },
+    {
+     "week": 6,
+     "game_id": "2026_REG_6_LAC_KC",
+     "side": "KC",
+     "why": "model edge 14.8",
+     "edge": 1.249,
+     "win": true,
+     "actual_margin_home": 16
+    },
+    {
+     "week": 6,
+     "game_id": "2026_REG_6_NYJ_NE",
+     "side": "NE",
+     "why": "model edge 7.1",
+     "edge": -0.094,
+     "win": false,
+     "actual_margin_home": 7
+    },
+    {
+     "week": 6,
+     "game_id": "2026_REG_6_TEN_IND",
+     "side": "IND",
+     "why": "model edge 8.2",
+     "edge": -14.184,
+     "win": false,
+     "actual_margin_home": -6
+    },
+    {
+     "week": 6,
+     "game_id": "2026_REG_6_WAS_SF",
+     "side": "SF",
+     "why": "model edge 15.8",
+     "edge": -9.771,
+     "win": false,
+     "actual_margin_home": 6
+    },
+    {
+     "week": 7,
+     "game_id": "2026_REG_7_CLE_TEN",
+     "side": "CLE",
+     "why": "model edge 7.8",
+     "edge": -4.809,
+     "win": false,
+     "actual_margin_home": -3
+    },
+    {
+     "week": 7,
+     "game_id": "2026_REG_7_DEN_AZ",
+     "side": "DEN",
+     "why": "model edge 8.4",
+     "edge": 5.608,
+     "win": true,
+     "actual_margin_home": -14
+    },
+    {
+     "week": 7,
+     "game_id": "2026_REG_7_IND_MIN",
+     "side": "MIN",
+     "why": "model edge 10.4",
+     "edge": -4.427,
+     "win": false,
+     "actual_margin_home": 6
+    },
+    {
+     "week": 7,
+     "game_id": "2026_REG_7_KC_SEA",
+     "side": "KC",
+     "why": "model edge 4.3",
+     "edge": -21.279,
+     "win": false,
+     "actual_margin_home": 17
+    },
+    {
+     "week": 7,
+     "game_id": "2026_REG_7_MIA_NYJ",
+     "side": "NYJ",
+     "why": "model edge 5.8",
+     "edge": -8.75,
+     "win": false,
+     "actual_margin_home": -3
+    },
+    {
+     "week": 7,
+     "game_id": "2026_REG_7_NYG_HOU",
+     "side": "HOU",
+     "why": "model edge 4.9",
+     "edge": -10.909,
+     "win": false,
+     "actual_margin_home": -6
+    },
+    {
+     "week": 7,
+     "game_id": "2026_REG_7_PIT_NO",
+     "side": "PIT",
+     "why": "model edge 4.9",
+     "edge": 1.072,
+     "win": true,
+     "actual_margin_home": -6
+    },
+    {
+     "week": 7,
+     "game_id": "2026_REG_7_SF_ATL",
+     "side": "SF",
+     "why": "model edge 6.9",
+     "edge": -15.895,
+     "win": false,
+     "actual_margin_home": 9
+    },
+    {
+     "week": 7,
+     "game_id": "2026_REG_7_TB_CAR",
+     "side": "CAR",
+     "why": "model edge 5.4",
+     "edge": -35.416,
+     "win": false,
+     "actual_margin_home": -30
+    },
+    {
+     "week": 8,
+     "game_id": "2026_REG_8_AZ_DAL",
+     "side": "DAL",
+     "why": "model edge 7.2",
+     "edge": -10.194,
+     "win": false,
+     "actual_margin_home": -3
+    },
+    {
+     "week": 8,
+     "game_id": "2026_REG_8_IND_JAX",
+     "side": "JAX",
+     "why": "model edge 10.9",
+     "edge": 24.134,
+     "win": true,
+     "actual_margin_home": 35
+    },
+    {
+     "week": 8,
+     "game_id": "2026_REG_8_LAC_LA",
+     "side": "LA",
+     "why": "model edge 8.1",
+     "edge": 6.933,
+     "win": true,
+     "actual_margin_home": 15
+    },
+    {
+     "week": 8,
+     "game_id": "2026_REG_8_MIN_DET",
+     "side": "MIN",
+     "why": "model edge 6.2",
+     "edge": -10.246,
+     "win": false,
+     "actual_margin_home": 4
+    },
+    {
+     "week": 8,
+     "game_id": "2026_REG_8_NE_MIA",
+     "side": "NE",
+     "why": "model edge 11.1",
+     "edge": -6.103,
+     "win": false,
+     "actual_margin_home": -5
+    },
+    {
+     "week": 8,
+     "game_id": "2026_REG_8_TEN_CIN",
+     "side": "CIN",
+     "why": "model edge 14.0",
+     "edge": -7.039,
+     "win": false,
+     "actual_margin_home": 7
+    },
+    {
+     "week": 9,
+     "game_id": "2026_REG_9_JAX_BAL",
+     "side": "JAX",
+     "why": "model edge 14.1",
+     "edge": 8.852,
+     "win": true,
+     "actual_margin_home": -23
+    },
+    {
+     "week": 9,
+     "game_id": "2026_REG_9_AZ_SEA",
+     "side": "SEA",
+     "why": "model edge 9.7",
+     "edge": 4.296,
+     "win": true,
+     "actual_margin_home": 14
+    },
+    {
+     "week": 9,
+     "game_id": "2026_REG_9_CIN_ATL",
+     "side": "CIN",
+     "why": "model edge 6.6",
+     "edge": 10.431,
+     "win": true,
+     "actual_margin_home": -17
+    },
+    {
+     "week": 9,
+     "game_id": "2026_REG_9_DAL_IND",
+     "side": "DAL",
+     "why": "model edge 4.9",
+     "edge": -0.853,
+     "win": false,
+     "actual_margin_home": -4
+    },
+    {
+     "week": 9,
+     "game_id": "2026_REG_9_DET_MIA",
+     "side": "DET",
+     "why": "model edge 8.4",
+     "edge": 1.594,
+     "win": true,
+     "actual_margin_home": -10
+    },
+    {
+     "week": 9,
+     "game_id": "2026_REG_9_HOU_LAC",
+     "side": "HOU",
+     "why": "model edge 8.6",
+     "edge": 13.378,
+     "win": true,
+     "actual_margin_home": -22
+    },
+    {
+     "week": 9,
+     "game_id": "2026_REG_9_LA_WAS",
+     "side": "LA",
+     "why": "model edge 6.4",
+     "edge": 0.562,
+     "win": true,
+     "actual_margin_home": -7
+    },
+    {
+     "week": 9,
+     "game_id": "2026_REG_9_LV_SF",
+     "side": "SF",
+     "why": "model edge 7.3",
+     "edge": 13.66,
+     "win": true,
+     "actual_margin_home": 21
+    },
+    {
+     "week": 9,
+     "game_id": "2026_REG_9_NYG_PHI",
+     "side": "NYG",
+     "why": "model edge 4.9",
+     "edge": 3.055,
+     "win": true,
+     "actual_margin_home": -8
+    },
+    {
+     "week": 9,
+     "game_id": "2026_REG_9_NYJ_KC",
+     "side": "KC",
+     "why": "model edge 4.7",
+     "edge": 18.307,
+     "win": true,
+     "actual_margin_home": 23
+    }
+   ],
+   "gates": {
+    "G0": "PASS",
+    "G1": "PASS",
+    "G2": "PASS",
+    "G3": "FAIL",
+    "G4": "BLOCKED",
+    "G5": "FAIL",
+    "G6": "BLOCKED",
+    "G7": "NOT EVALUATED",
+    "G8": "PASS",
+    "G9": "FAIL",
+    "G10": "FAIL"
+   },
+   "status": "FAIL",
+   "status_reason": "fails G3, G5, G9, G10"
+  },
+  {
+   "id": "S9",
+   "name": "Fade the injury-hit starter",
+   "track": "single",
+   "text": "Bet against a club with two or more starters (first string on its own depth chart) ruled Out or Questionable.",
+   "selector": "official injury report joined to official club depth charts",
+   "uses_model_prediction": false,
+   "needs_market_price": false,
+   "backtestable": false,
+   "blocked_reason": "The official injury report and club depth charts are only retained for the current week, so there is no history to backtest. Published as a live signal for Week 10 with no grade.",
+   "n_bets": 0,
+   "graded": false,
+   "status": "NOT GRADED",
+   "status_reason": "The official injury report and club depth charts are only retained for the current week, so there is no history to backtest. Published as a live signal for Week 10 with no grade.",
+   "gates": {
+    "G1": "BLOCKED",
+    "G3": "BLOCKED",
+    "G4": "BLOCKED",
+    "G5": "BLOCKED",
+    "G6": "BLOCKED",
+    "G8": "BLOCKED",
+    "G9": "BLOCKED",
+    "G2": "PASS",
+    "G0": "PASS",
+    "G10": "BLOCKED"
+   },
+   "stats": {}
+  }
+ ],
+ "leaderboard": [
+  {
+   "id": "S1",
+   "name": "Rest edge",
+   "track": "single",
+   "status": "FAIL",
+   "status_reason": "fails G1",
+   "n": 26,
+   "win_rate": 0.7308,
+   "mean_edge_pts": 8.035,
+   "ci95": [
+    3.783,
+    12.371
+   ],
+   "permutation_p": 0.0004999500049995,
+   "gates": {
+    "G0": "PASS",
+    "G1": "FAIL",
+    "G2": "PASS",
+    "G3": "PASS",
+    "G4": "BLOCKED",
+    "G5": "PASS",
+    "G6": "BLOCKED",
+    "G7": "NOT EVALUATED",
+    "G8": "PASS",
+    "G9": "PASS",
+    "G10": "PASS"
+   },
+   "points": 57
+  },
+  {
+   "id": "S3",
+   "name": "Division dog",
+   "track": "single",
+   "status": "FAIL",
+   "status_reason": "fails G1, G3, G5, G8",
+   "n": 29,
+   "win_rate": 0.6207,
+   "mean_edge_pts": 3.634,
+   "ci95": [
+    -1.932,
+    9.229
+   ],
+   "permutation_p": 0.0321967803219678,
+   "gates": {
+    "G0": "PASS",
+    "G1": "FAIL",
+    "G2": "PASS",
+    "G3": "FAIL",
+    "G4": "BLOCKED",
+    "G5": "FAIL",
+    "G6": "BLOCKED",
+    "G7": "NOT EVALUATED",
+    "G8": "FAIL",
+    "G9": "PASS",
+    "G10": "PASS"
+   },
+   "points": 54
+  },
+  {
+   "id": "S8",
+   "name": "Bet the model's biggest edge",
+   "track": "single",
+   "status": "FAIL",
+   "status_reason": "fails G3, G5, G9, G10",
+   "n": 51,
+   "win_rate": 0.3333,
+   "mean_edge_pts": -4.659,
+   "ci95": [
+    -8.125,
+    -1.358
+   ],
+   "permutation_p": 0.9849015098490151,
+   "gates": {
+    "G0": "PASS",
+    "G1": "PASS",
+    "G2": "PASS",
+    "G3": "FAIL",
+    "G4": "BLOCKED",
+    "G5": "FAIL",
+    "G6": "BLOCKED",
+    "G7": "NOT EVALUATED",
+    "G8": "PASS",
+    "G9": "FAIL",
+    "G10": "FAIL"
+   },
+   "points": 51
+  },
+  {
+   "id": "S4",
+   "name": "Fade the hot streak",
+   "track": "single",
+   "status": "FAIL",
+   "status_reason": "fails G1, G3, G5, G8, G9",
+   "n": 25,
+   "win_rate": 0.6,
+   "mean_edge_pts": 2.324,
+   "ci95": [
+    -1.176,
+    5.809
+   ],
+   "permutation_p": 0.1095890410958904,
+   "gates": {
+    "G0": "PASS",
+    "G1": "FAIL",
+    "G2": "PASS",
+    "G3": "FAIL",
+    "G4": "BLOCKED",
+    "G5": "FAIL",
+    "G6": "BLOCKED",
+    "G7": "NOT EVALUATED",
+    "G8": "FAIL",
+    "G9": "FAIL",
+    "G10": "PASS"
+   },
+   "points": 45
+  },
+  {
+   "id": "S5",
+   "name": "Pythagorean bounce-back",
+   "track": "single",
+   "status": "FAIL",
+   "status_reason": "fails G1, G3, G5, G8, G9",
+   "n": 19,
+   "win_rate": 0.4211,
+   "mean_edge_pts": 1.402,
+   "ci95": [
+    -4.572,
+    7.8
+   ],
+   "permutation_p": 0.21637836216378362,
+   "gates": {
+    "G0": "PASS",
+    "G1": "FAIL",
+    "G2": "PASS",
+    "G3": "FAIL",
+    "G4": "BLOCKED",
+    "G5": "FAIL",
+    "G6": "BLOCKED",
+    "G7": "NOT EVALUATED",
+    "G8": "FAIL",
+    "G9": "FAIL",
+    "G10": "PASS"
+   },
+   "points": 24
+  },
+  {
+   "id": "S2",
+   "name": "Home team off a bye",
+   "track": "single",
+   "status": "FAIL",
+   "status_reason": "fails G1, G5",
+   "n": 8,
+   "win_rate": 0.875,
+   "mean_edge_pts": 9.89,
+   "ci95": [
+    2.963,
+    17.179
+   ],
+   "permutation_p": 0.013398660133986601,
+   "gates": {
+    "G0": "PASS",
+    "G1": "FAIL",
+    "G2": "PASS",
+    "G3": "PASS",
+    "G4": "BLOCKED",
+    "G5": "FAIL",
+    "G6": "BLOCKED",
+    "G7": "NOT EVALUATED",
+    "G8": "PASS",
+    "G9": "PASS",
+    "G10": "PASS"
+   },
+   "points": 21
+  },
+  {
+   "id": "S6",
+   "name": "Road dog with the better defence",
+   "track": "single",
+   "status": "FAIL",
+   "status_reason": "fails G1, G3, G5, G8",
+   "n": 10,
+   "win_rate": 0.7,
+   "mean_edge_pts": 8.234,
+   "ci95": [
+    -0.877,
+    16.883
+   ],
+   "permutation_p": 0.014698530146985302,
+   "gates": {
+    "G0": "PASS",
+    "G1": "FAIL",
+    "G2": "PASS",
+    "G3": "FAIL",
+    "G4": "BLOCKED",
+    "G5": "FAIL",
+    "G6": "BLOCKED",
+    "G7": "NOT EVALUATED",
+    "G8": "FAIL",
+    "G9": "PASS",
+    "G10": "PASS"
+   },
+   "points": 21
+  },
+  {
+   "id": "S7",
+   "name": "Model-vs-market disagreement",
+   "track": "single",
+   "status": "NOT GRADED",
+   "status_reason": "No official NFL odds exist and no licensed book feed is connected. Historical closing lines are unavailable, so this rule cannot be scored and is published as a signal only.",
+   "n": null,
+   "win_rate": null,
+   "mean_edge_pts": null,
+   "ci95": null,
+   "permutation_p": null,
+   "gates": {
+    "G1": "BLOCKED",
+    "G3": "BLOCKED",
+    "G4": "BLOCKED",
+    "G5": "BLOCKED",
+    "G6": "BLOCKED",
+    "G8": "BLOCKED",
+    "G9": "BLOCKED",
+    "G2": "PASS",
+    "G0": "PASS",
+    "G10": "BLOCKED"
+   },
+   "points": 0.0
+  },
+  {
+   "id": "S9",
+   "name": "Fade the injury-hit starter",
+   "track": "single",
+   "status": "NOT GRADED",
+   "status_reason": "The official injury report and club depth charts are only retained for the current week, so there is no history to backtest. Published as a live signal for Week 10 with no grade.",
+   "n": null,
+   "win_rate": null,
+   "mean_edge_pts": null,
+   "ci95": null,
+   "permutation_p": null,
+   "gates": {
+    "G1": "BLOCKED",
+    "G3": "BLOCKED",
+    "G4": "BLOCKED",
+    "G5": "BLOCKED",
+    "G6": "BLOCKED",
+    "G8": "BLOCKED",
+    "G9": "BLOCKED",
+    "G2": "PASS",
+    "G0": "PASS",
+    "G10": "BLOCKED"
+   },
+   "points": 0.0
+  }
+ ],
+ "tracks": {
+  "single": "One bet per game.",
+  "parlay": {
+   "id": "P1",
+   "name": "Two-leg correlated parlay",
+   "text": "Combine the two least-correlated graded rules. Legs are only worth combining if their outcomes are genuinely independent; the measured correlation decides that, not intuition."
+  },
+  "props": {
+   "id": "R1",
+   "name": "Player-prop combos",
+   "text": "Same-game player-prop combinations. No official or book prop prices exist, so no line, price or edge can be produced. Track is defined and empty."
+  }
+ },
+ "rewards": {
+  "currency": "paper points only",
+  "scoring": "3 points per graded win against my line; +25 for a rule that passes every gate.",
+  "tiers": [
+   {
+    "tier": "Bronze",
+    "points": "0-49"
+   },
+   {
+    "tier": "Silver",
+    "points": "50-99"
+   },
+   {
+    "tier": "Gold",
+    "points": "100-199"
+   },
+   {
+    "tier": "Platinum",
+    "points": "200+"
+   }
+  ],
+  "legal_note": "No money, prize or thing of value is awarded. Any reward with monetary value needs legal review before it is offered; that review has not happened, so the board is paper only."
+ }
+}

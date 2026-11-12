@@ -16,6 +16,8 @@ Sessions that have worked here:
 | `946c1684-nfl1` | `arena/946c1684-nfl1` | League reference data, environment notes (curl allow-list; `fetch_page` has full internet) | not merged (superseded) |
 | `7600ed8b-nfl1` | `arena/7600ed8b-nfl1` | Quantitative pipeline, own lines, strategy gates, injury/depth model, props, verification, final integration | PR #13 |
 | `a2cea255-nfl1` | `arena/a2cea255-nfl1` | Independent verification subsystem: hand transcription of nfl.com, 34-check harness, provenance/gates engine, 103 tests, 20-page sub-site in `verified-lab/` | PR #18 |
+| `1505ac8e-nfl1` | `arena/1505ac8e-nfl1` | **Consolidation + re-verification session.** Live re-fetch of official nfl.com (standings, injuries, schedule, depth charts), cross-check of all four generations' committed data, unified site (`lab/`) with category nav, decision/suggestions workflow, gap-closing on depth charts, PR + merge + Pages | in progress |
+
 | `e3148b95-nfl1` | `arena/e3148b95-nfl1` | Official-source schedule/bye attribution audit and CI gate | in progress |
 | `b6e68100-nfl1` | `arena/b6e68100-nfl1` | Post-merge audit: C5 division-map fix (referee hand-off), line-by-line repo review, official-source re-verification, site health check, PR/merge/Pages confirmation | active |
 
@@ -1090,6 +1092,154 @@ produced independently of the thing it audits.
 
 ---
 
+# Session `1505ac8e-nfl1` — consolidation, live re-verification and unified site
+
+| Item | Value |
+|---|---|
+| This session ID | `1505ac8e-nfl1` |
+| This session branch | `arena/1505ac8e-nfl1` |
+| Base commit | `c09c739bd5825981e97dddeefba5de6bd89d36fc` (== `origin/main` at claim time; `git rev-list --left-right --count origin/main...HEAD` = `0 0`) |
+| Live site | <https://kanlerxz87-cyber.github.io/NFL1/> (Pages source: `main` / `/`, legacy build) |
+
+## Scope claimed (non-overlapping)
+
+All new work is written into a **new, previously unowned directory** plus this file, so no other
+session's files are edited:
+
+| Path | Purpose |
+|---|---|
+| `lab/` | The unified site: clean landing page + subpages grouped by category. New directory; nothing existing is overwritten. |
+| `data/session-1505ac8e/` | This session's JSON data layer (independent live transcription + verification results). |
+| `tools/verify_live.py` | Live official-source verification harness (new file). |
+| `COORDINATION.md` | This record (the board file, by design shared for claims). |
+
+**Not touched:** `index.html`, `pages/`, `docs/`, `verified-lab/`, `referee/`, `data/model/`,
+`data/verified/`, `pipeline/`, `scripts/verified/`, `tools/verify.py`, `.github/workflows/`.
+Those belong to earlier sessions and are preserved and linked from the new site.
+
+## Why a new directory rather than editing `index.html`
+
+Four site generations already exist (root `index.html`+`pages/`, `docs/`, `verified-lab/`,
+`referee/`) and two different CI jobs regenerate `index.html` and `pages/`
+(`tools/build.py` in `verify.yml`, `scripts/verified/build_site.py` in `pages.yml`). Writing a
+fifth generation into those contested files would be overwritten by the next CI run. A self-contained
+`lab/` directory is additive, has no CI footprint, and lets the reader see every generation side by
+side. Reconciliation of the four into one root is published as an open decision (D-1505-01) with
+options and trade-offs for the repository owner rather than decided unilaterally.
+
+## Tasks
+
+| ID | Task | Status |
+|---|---|---|
+| S1 | Live re-fetch of official nfl.com sources (standings, injuries, schedule, depth charts) | in progress |
+| S2 | Line-by-line cross-check of every committed dataset against the live official pages | in progress |
+| S3 | Depth-chart / 2nd-3rd-4th-string gap: probe official hosts again from scratch | in progress |
+| S4 | Unified site `lab/` with category nav, dashboard tables, every row source-linked | in progress |
+| S5 | Decision register (questions / known / unknown / answers / discovery) + Suggestions review & choose-a-path | pending |
+| S6 | Own lines, strategy gates, correlation, skill-vs-luck, leaderboard (verified, blanks honoured) | pending |
+| S7 | Injury + availability deficiency model | pending |
+| S8 | Executive summary page | pending |
+| S9 | Flagged-for-review page (all irregularities, official links) | pending |
+| S10 | PR → merge → confirm Pages deploy → record | pending |
+
+## S1-S10 results (session `1505ac8e-nfl1`)
+
+| ID | Task | Status | Evidence |
+|---|---|---|---|
+| S1 | Live re-fetch of official nfl.com sources | done | Standings (2 chunks), injuries (5 chunks), Week 10 schedule (3 chunks), nfl.com depth-chart 404 probe, chiefs.com and packers.com depth-chart probes, houstontexans.com probe. All fetched 2026-11-12. Transcriptions committed under `data/session-1505ac8e/`. |
+| S2 | Line-by-line cross-check of every committed dataset | done | `tools/verify_live.py`: 24 checks, **18 PASS / 6 FLAG / 0 FAIL**, 4,963 cells compared. |
+| S3 | Depth-chart / 2nd-4th string gap | done (31/32) | nfl.com 404 re-verified; 31 of 32 club sites scraped in CI, 946 position rows, 2,065 player slots. |
+| S4 | Unified site `lab/` | done | 16 pages, 366 internal links, 719 data rows, every row source-linked, 0 bare empty cells. |
+| S5 | Decision register + suggestions review | done | 20 questions, 16 suggestions with options, 4 decision records. Nothing implemented. |
+| S6 | Own lines, strategy gates, correlations, luck, leaderboard | done | 9 rules, 10 gates, 7 graded, 0 pass, walk-forward MAE 9.564 vs 10.325 naive baseline. |
+| S7 | Injury + availability deficiency model | done | 279 official rows joined to club depth charts; 203 matched, 76 withheld. |
+| S8 | Executive summary page | done | `lab/pages/executive-summary.html`. |
+| S9 | Flagged-for-review page | done | 20 flags, each with official source links. |
+| S10 | PR, merge, Pages | see below | |
+
+## Official sources used (every one fetched and read during this session)
+
+- Standings, 2026 REG: <https://www.nfl.com/standings/league/2026/REG> (2 chunks, 32 clubs)
+- Official injury report, Week 10: <https://www.nfl.com/injuries/> (5 chunks, 279 rows)
+- Week 10 schedule: <https://www.nfl.com/schedules/2026/week10> (3 chunks, 14 games + 4 byes)
+- Game results (transcribed by an earlier session, reconciled here):
+  <https://www.nfl.com/schedules/2026/by-week/week-1>
+- nfl.com depth-chart route (soft 404): <https://www.nfl.com/teams/kansas-city-chiefs/depth-chart>
+- Official club depth charts, 31 of 32: e.g. <https://www.chiefs.com/team/depth-chart>,
+  <https://www.packers.com/team/depth-chart> (full list in
+  `data/session-1505ac8e/depth_charts.json`, one URL per club)
+- Tie-breaking procedures: <http://www.nfl.com/standings/tiebreakingprocedures>
+- NFL Football Operations: <https://operations.nfl.com/gameday/>
+- NIST/SEMATECH e-Handbook (correlation, bootstrap):
+  <https://www.itl.nist.gov/div898/handbook/eda/section3/eda367.htm>,
+  <https://www.itl.nist.gov/div898/handbook/eda/section3/eda366.htm>
+- New Jersey Division of Gaming Enforcement: <https://www.nj.gov/oag/ge/>
+- Sportradar NFL weekly depth charts (cited, credential-gated, not used):
+  <https://developer.sportradar.com/football/reference/nfl-weekly-depth-charts>
+- Genius Sports / NFL data partnership (why no public odds exist):
+  <https://investors.geniussports.com/news/announcements/announcements-details/2023/National-Football-League-Extends-Strategic-Partnership-with-Genius-Sports-as-Exclusive-Official-NFL-Data-and-Watch--Bet-Distribution-Partner/default.aspx>
+
+## Verification performed (24 checks, 18 PASS / 6 FLAG / 0 FAIL)
+
+Published in full, with per-check source links, at `lab/pages/verification.html` and
+`data/session-1505ac8e/verification.json`.
+
+1. **Standings identities** (V02-V07, all PASS): PCT = (W + 0.5T)/GP to 3 dp; NET = PF - PA;
+   HOME + ROAD = W-L-T; CONF + NON-CONF = GP; DIV <= CONF; DIV_PCT and CONF_PCT recompute.
+   32 clubs x 6 identities.
+2. **League balance** (V08, PASS): W 135, L 135, T 2, PF 6,246 = PA 6,246, 136 games.
+3. **Recomputation from game results** (V09, PASS): the 136 completed games reproduce the
+   official standings for all 32 clubs on W, L, T, PF, PA - **160 of 160 cells**.
+4. **Cross-session reconciliation** (V10-V12, all PASS): session `25aa7696`'s
+   `data/verified/standings_2026.csv`, session `533256e1`'s `data/standings.csv` (LAR aliased
+   to LA) and session `7600ed8b`'s `data/model/snapshot.json` (ARI aliased to AZ) each match
+   the live official page on 32 clubs x 5 fields.
+5. **Week 10 slate integrity** (V13, PASS): 14 games, 28 distinct clubs, 4 byes (CHI, DEN,
+   PHI, TB), no club both playing and on bye, all 32 covered.
+6. **Schedule-page records vs standings page** (V14, PASS): all 28 club records printed
+   beside the fixtures match the official standings exactly.
+7. **Injury completeness** (V15, FLAG): 279 rows; 279 with a practice status, 6 with a game
+   status, 6 with a body part - and they are the same 6 rows.
+8. **Injury snapshot drift** (V16, FLAG): committed 254 rows vs live 279, drift +25.
+9. **Depth-chart coverage** (V17, FLAG): 31 of 32 clubs, 946 position rows, 2,065 slots.
+10. **Injury vs depth-chart reconciliation** (V18, FLAG): 203 of 279 rows agree; 76 withheld.
+11. **nfl.com 404** (V19, PASS): re-verified.
+12. **Earlier published figures** (V20, FLAG): `a2cea255`'s W = L = 134, T = 4, PF = PA =
+    6,267 no longer reproduce; the live page and the recomputed results both give 135/135/2/
+    6,246.
+13. **The three "nfl.com contradicts itself" cells** (V21, FLAG): WAS `non_conf`, IND `div`
+    and PHI `div` all recompute correctly on this retrieval. The flags no longer reproduce.
+14. **Site gates** (V22-V24, all PASS): 719 data rows across 16 pages, every one carrying a
+    link to an official or cited source; 0 bare empty cells; 366 internal links, none broken.
+
+## Irregularities (published at `lab/pages/flagged.html` with official links)
+
+NFL1-01..NFL1-20. Headline items: no prices exist (blocks every profit claim); only 6 of 279
+injury rows carry a game status; 76 injury rows disagree with the clubs' own depth charts; the
+committed injury snapshot is 25 rows stale; two earlier published figures no longer reproduce;
+four site generations are live at once; two CI jobs regenerate the same root pages. None
+blocks the site.
+
+## Cross-session requests logged (not applied)
+
+| # | Request | Owner | Why not applied |
+|---|---|---|---|
+| R-1505ac8e-01 | Fix the stray `EAD` fragment on line 1 of `COORDINATION.md`. | whichever session owns the board next | Logged as flag NFL1-18 rather than edited into another session's record. |
+| R-1505ac8e-02 | Reconcile the two root-page generators (`tools/build.py` vs `scripts/verified/build_site.py`). | sessions `7600ed8b` / `25aa7696` lineage | Published as suggestion S-14 with two options. |
+| R-1505ac8e-03 | Re-check the three "nfl.com contradicts itself" flags (V21). | session `a2cea255` | They no longer reproduce. The arithmetic proof is published; the earlier record is preserved, not overwritten. |
+| R-1505ac8e-04 | Adopt one club-code set across `data/`. | all sessions | Published as suggestion S-16; an alias table handles it today. |
+| R-1505ac8e-05 | Add this session's 24-check harness to CI. | shared CI | Requested, not made: adding a step to `.github/workflows/` is a shared-CI change. The harness is `tools/verify_live.py` and runs standalone. |
+
+## Files this session added (all new paths; nothing existing was edited except this board)
+
+- `lab/` - the site: `index.html`, `pages/*.html` (15 pages), `assets/style.css`.
+- `lab/scripts/` - `scrape_depth_charts.py`, `build_analysis.py`, `build_site.py`,
+  `content.py`, `nfl_stats.py`.
+- `data/session-1505ac8e/` - transcriptions and generated JSON.
+- `tools/verify_live.py` - the 24-check harness.
+- `.github/workflows/collect-depth-charts.yml` - new, additive; writes only
+  `data/session-1505ac8e/depth_charts.json`.
+
 # Session `3d5c5e2d-nfl1` — live-site freshness, signal honesty, and integration
 
 | Item | Value |
@@ -1366,3 +1516,18 @@ discarded.
 - **Known issues carried to main:** RV-02 (corrected; see Update 3), RV-01, RV-28, RV-29, RV-30, RV-31. The injury page's "Scrape vs live" column reads "Matches" with the practice text beside it (cosmetic, not corrected).
 - **Process gap logged:** R-6a232e79-12 (collect workflow commits shared outputs to feature branches) is the reason a bot commit reached the PR head after review. It needs an owner decision.
 
+
+### Merge of `origin/main` into this branch (PRs #27 and #35, sessions `6a232e79` / `3d5c5e2d`)
+
+`main` advanced while PR #34 was open. It was merged into this branch with a normal
+(non-rebase) merge. `COORDINATION.md` conflicted in two places -- the sessions table and the
+per-session sections -- and **both sides of both conflicts were kept**; nothing from either
+session was discarded. `git grep` confirms no conflict markers remain.
+
+Those sessions added a fifth site generation under `dashboard/`. It is preserved and linked
+from the `lab/` site's navigation and site map, and flags NFL1-16 and suggestion S-13 were
+updated from "four generations" to "five".
+
+No file this session depends on changed on `main` (`data/verified/games_2026.csv`,
+`data/verified/standings_2026.csv`, `data/standings.csv` and `data/model/snapshot.json` are
+byte-identical), so the verification results above are unchanged.

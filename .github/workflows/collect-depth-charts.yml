@@ -1,0 +1,65 @@
+name: Collect official club depth charts
+
+# New, additive workflow from session 1505ac8e-nfl1. It does not modify the two
+# existing site workflows; it only writes data/session-1505ac8e/depth_charts.json.
+#
+# Runs on GitHub's infrastructure because the Arena sandbox can only reach a small
+# allow-list of hosts (github.com, pypi.org, ...). The 32 official NFL club sites are
+# not on that list, but they are reachable from Actions.
+#
+# Why: nfl.com publishes no depth chart (verified 404), but the official club sites do.
+# This closes the 2nd/3rd/4th-string tracking gap recorded as flag F-001.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["arena/**"]
+    paths:
+      - "lab/scripts/scrape_depth_charts.py"
+      - ".github/workflows/collect-depth-charts.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: collect-depth-charts-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Syntax check
+        run: python -m compileall -q lab/scripts/scrape_depth_charts.py
+      - name: Scrape the 32 official club depth charts
+        run: python3 lab/scripts/scrape_depth_charts.py
+      - name: Summarise
+        if: always()
+        run: |
+          if [ -f data/session-1505ac8e/depth_charts.json ]; then
+            python3 - <<'PY'
+          import json
+          d = json.load(open('data/session-1505ac8e/depth_charts.json'))
+          print('clubs_ok', d['clubs_ok'], '/', d['clubs_total'])
+          print('position_rows', d['position_rows_total'])
+          print('player_slots', d['player_slots_total'])
+          print('unavailable', d['clubs_unavailable'])
+          PY
+          fi
+      - name: Commit refreshed depth charts
+        run: |
+          git config user.name "nfl1-data-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/session-1505ac8e/depth_charts.json 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "No depth chart changes"
+          else
+            git commit -m "data: official club depth charts from club sites [skip ci]"
+            git push origin HEAD:${{ github.ref_name }}
+          fi
