@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Strategy Leaderboard · NFL1</title>
+<meta name="description" content="Strategy Leaderboard - NFL1 verified-data analysis dashboard.">
+<style>
+:root{
+  --bg:#f6f7f9; --panel:#ffffff; --ink:#14181f; --muted:#5b6673;
+  --line:#e2e6eb; --line2:#eef1f4; --accent:#1b5fd9; --accent-soft:#eaf1fd;
+  --ok:#0f7b47; --ok-bg:#e7f6ed; --warn:#8a5a00; --warn-bg:#fdf3dc;
+  --bad:#a32020; --bad-bg:#fdeaea; --info:#1b5fd9; --info-bg:#eaf1fd;
+  --na:#5b6673; --na-bg:#eef1f4;
+  --radius:10px; --shadow:0 1px 2px rgba(16,24,40,.06),0 1px 3px rgba(16,24,40,.04);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+code{background:var(--line2);padding:.1em .35em;border-radius:4px;font-size:.88em}
+pre{background:#0f1419;color:#e6edf3;padding:14px 16px;border-radius:var(--radius);
+  overflow:auto;font-size:12.5px;line-height:1.5}
+pre code{background:none;padding:0;color:inherit}
+.wrap{display:grid;grid-template-columns:238px minmax(0,1fr);gap:26px;
+  max-width:1420px;margin:0 auto;padding:22px 22px 60px}
+header.top{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:12px;align-items:baseline;
+  justify-content:space-between;padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:6px}
+header.top h1{font-size:19px;margin:0;letter-spacing:-.2px}
+header.top .sub{color:var(--muted);font-size:13px}
+nav.side{position:sticky;top:22px;align-self:start;max-height:calc(100vh - 44px);overflow:auto}
+nav.side .grp{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);
+  margin:16px 0 6px;font-weight:700}
+nav.side a{display:block;padding:5px 9px;border-radius:7px;color:var(--ink);font-size:13.5px}
+nav.side a:hover{background:var(--line2);text-decoration:none}
+nav.side a.on{background:var(--accent-soft);color:var(--accent);font-weight:650}
+main{min-width:0}
+h2.pg{font-size:24px;margin:4px 0 4px;letter-spacing:-.4px}
+p.lead{color:var(--muted);margin:0 0 20px;max-width:82ch}
+section{margin:26px 0}
+h3{font-size:16.5px;margin:26px 0 8px;letter-spacing:-.2px}
+h4{font-size:14px;margin:18px 0 6px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  padding:16px 18px;box-shadow:var(--shadow);margin:12px 0}
+.grid{display:grid;gap:12px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  padding:13px 15px;box-shadow:var(--shadow)}
+.kpi .k{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:700}
+.kpi .v{font-size:26px;font-weight:700;letter-spacing:-.8px;margin:3px 0 1px;font-variant-numeric:tabular-nums}
+.kpi .n{font-size:12px;color:var(--muted);line-height:1.4}
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);
+  background:var(--panel);box-shadow:var(--shadow);margin:10px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+th,td{padding:7px 10px;text-align:left;border-bottom:1px solid var(--line2);vertical-align:top}
+thead th{position:sticky;top:0;background:#fafbfc;border-bottom:1px solid var(--line);
+  font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);
+  font-weight:700;white-space:nowrap;z-index:1}
+tbody tr:hover{background:#fbfcfd}
+tbody tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right}
+td.c,th.c{text-align:center}
+.badge{display:inline-block;padding:1.5px 7px;border-radius:999px;font-size:10.5px;
+  font-weight:700;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;
+  border:1px solid transparent}
+.b-VERIFIED,.b-PASS,.b-APPROVED,.b-ACTIVE{background:var(--ok-bg);color:var(--ok);border-color:#bfe6cd}
+.b-DERIVED,.b-INFO,.b-RUN{background:var(--info-bg);color:var(--info);border-color:#c5d9f8}
+.b-MODELED,.b-FLAG,.b-PROVISIONAL,.b-PARTIAL{background:var(--warn-bg);color:var(--warn);border-color:#f0dcae}
+.b-UNAVAILABLE,.b-FAIL,.b-REJECTED,.b-BLOCKED,.b-NOT_STAKEABLE,.b-NOT_RUN{background:var(--na-bg);color:var(--na);border-color:#dfe4ea}
+.b-MECHANICAL,.b-REDUNDANT{background:var(--na-bg);color:var(--na);border-color:#dfe4ea}
+.b-CANDIDATE{background:var(--info-bg);color:var(--info);border-color:#c5d9f8}
+.pill{display:inline-block;padding:1px 8px;border-radius:999px;font-size:11px;
+  background:var(--line2);color:var(--muted);white-space:nowrap}
+.blank{color:#98a2ae;font-style:italic}
+.src{font-size:11.5px;white-space:nowrap}
+.note{font-size:12.5px;color:var(--muted);margin:6px 0 0;max-width:96ch}
+.callout{border-left:3px solid var(--accent);background:var(--accent-soft);
+  padding:11px 14px;border-radius:0 8px 8px 0;margin:12px 0;font-size:13.5px}
+.callout.warn{border-left-color:#d9a400;background:var(--warn-bg)}
+.callout.bad{border-left-color:var(--bad);background:var(--bad-bg)}
+.callout.ok{border-left-color:var(--ok);background:var(--ok-bg)}
+.callout p:first-child{margin-top:0}.callout p:last-child{margin-bottom:0}
+footer{grid-column:1/-1;margin-top:34px;padding-top:14px;border-top:1px solid var(--line);
+  color:var(--muted);font-size:12px;display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:space-between}
+.md table{margin:10px 0}
+.md ul,.md ol{padding-left:22px;margin:8px 0}
+.md li{margin:3px 0}
+.md h2{font-size:19px;margin:26px 0 6px;letter-spacing:-.3px}
+.md h3{font-size:15.5px}
+.md blockquote{border-left:3px solid var(--line);margin:10px 0;padding:2px 0 2px 14px;color:var(--muted)}
+.toc{columns:2;column-gap:26px;font-size:13px}
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr;padding:14px 14px 40px}
+  nav.side{position:static;max-height:none;order:2;border-top:1px solid var(--line);padding-top:10px}
+  main{order:1}
+  .toc{columns:1}
+}
+@media print{nav.side,header.top .sub{display:none}.wrap{display:block}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+<h1>NFL1 <span style="color:var(--muted);font-weight:500">/ Leaderboard</span></h1>
+<div class="sub">Skill-ranked, luck-adjusted - and currently empty by design</div>
+</header>
+<nav class="side"><div class="grp">Overview</div><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive Summary</a><a href="open-questions.html">Open Questions</a><a href="suggestions.html">Suggestions Board</a><a href="flagged.html">Flagged for Review</a><div class="grp">Verified Data</div><a href="data-standings.html">Standings 2026</a><a href="data-schedule.html">Week 10 Schedule</a><a href="data-injuries.html">Injury Report</a><a href="data-news.html">Official News Feed</a><div class="grp">Analysis</div><a href="analysis-ratings.html">Team Ratings</a><a href="analysis-luck.html">Luck Table</a><a href="analysis-correlation.html">Correlations</a><a href="availability-depth.html">Availability &amp; Depth</a><div class="grp">Line Origination</div><a href="lines-week10.html">Week 10 Board</a><a href="methodology.html">Methodology</a><div class="grp">Strategies</div><a href="strategies-leaderboard.html" class="on">Leaderboard</a><a href="strategies-catalogue.html">Strategy Catalogue</a><a href="strategies-gates.html">Validation Gates</a><div class="grp">Integrity</div><a href="verification.html">Verification Report</a><a href="sources.html">Source Register</a><div class="grp">Repository</div><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/COORDINATION.md" target="_blank" rel="noopener noreferrer">Coordination board ↗</a></nav>
+<main>
+<div class="grid g3"><div class="kpi"><div class="k">Scored</div><div class="v">0</div><div class="n">a score is published only when gates G1-G7 pass</div></div><div class="kpi"><div class="k">Withheld</div><div class="v">13</div><div class="n">withheld, never zeroed</div></div><div class="kpi"><div class="k">Approved strategies</div><div class="v">0</div><div class="n">13 not stakeable</div></div></div><div class="callout warn"><strong>Why every score is blank.</strong> A leaderboard rank is computed from a t-statistic on no-vig return on investment. That requires settled wagers and a closing-odds feed, and neither exists. Blanking the score rather than zeroing it is deliberate: a zero would mean &quot;measured and worthless&quot;, which is a different claim from &quot;not yet measured&quot;, and confusing the two is how bad strategies get kept and good ones get thrown away.</div><div class="scroll"><table class=""><thead><tr><th class="num">Rank</th><th class="">Strategy</th><th class="c">Market</th><th class="num">n settled</th><th class="num">ROI (no vig)</th><th class="num">CLV (pts)</th><th class="num">t</th><th class="num">Score</th><th class="c">Gate verdict</th><th class="c">First blocking gate</th></tr></thead><tbody><tr><td class="num"><span class="blank" title="not ranked - no score">&mdash;</span></td><td class=""><strong>P1</strong> &middot; Same-game script: favourite + under</td><td class="c">parlay</td><td class="num">0</td><td class="num"><span class="blank" title="no settled wagers exist">&mdash;</span></td><td class="num"><span class="blank" title="needs a closing-odds feed">&mdash;</span></td><td class="num"><span class="blank" title="needs a closing-odds feed">&mdash;</span></td><td class="num"><span class="blank" title="gate verdict is NOT_STAKEABLE; score withheld, not zeroed">&mdash;</span></td><td class="c"><span class="badge b-NOT_STAKEABLE">NOT_STAKEABLE</span></td><td class="c">G2</td></tr><tr><td class="num"><span class="blank" title="not ranked - no score">&mdash;</span></td><td class=""><strong>P2</strong> &middot; QB-change stack</td><td class="c">parlay</td><td class="num">0</td><td class="num"><span class="blank" title="no settled wagers exist">&mdash;</span></td><td class="num"><span class="blank" title="needs a closing-odds feed">&mdash;</span></td><td class="num"><span class="blank" title="needs a closing-odds feed">&mdash;</span></td><td class="num"><span class="blank" title="gate verdict is NOT_STAKEABLE; score withheld, not zeroed">&mdash;</span></td><td class="c"><span class="badge b-NOT_STAKEABLE">NOT_STAKEABLE</span></td><td class="c">G2</td></tr><tr><td class="num"><span class="blank" title="not ranked - no score">&mdash;</span></td><td class=""><strong>P3</strong> &middot; Low-correlation diversifier</td><td class="c">parlay</td><td class="num">0</td><td class="num"><span class="blank" title="no settled wagers exist">&mdash;</span></td><td class="num"><span class="blank" title="needs a closing-odds feed">&mdash;</span></td><td class="num"><span class="blank" title="needs a closing-odds feed">&mdash;</span></td><td class="num"><span class="blank" title="gate verdict is NOT_STAKEABLE; score withheld, not zeroed">&mdash;</span></td><td class="c"><span class="badge b-NOT_STAKEABLE">NOT_STAKEABLE</span></td><td class="c">G2</td></tr><tr><td class="num"><span class="blank" title="not ranked - no score">&mdash;</span></td><td class=""><strong>S1</strong> &middot; Pythagorean regression (fade the lucky)</td><td class="c">single</td><td class="num">0</td><td class="num"><span class="blank" title="no settled wagers exist">&mdash;</span></td><td class="num"><span class="blank" title="needs a closing-odds feed">&mdash;</span></td><td class="num"><span class="blank" title="needs a closing-odds feed">&mdash;</span></td><td class="num"><span class="blank" title="gate verdict is NOT_STAKEABLE; score withheld, not zeroed">&mdash;</span></td><td class="c"><span class="badge b-NOT_STAKEABLE">NOT_STAKEABLE</span></td><td class="c">G2</td></tr><tr><td class="num"><span class="blank" title="not ranked - no score">&mdash;</span></td><td class=""><strong>S2</strong> &middot; Confirmed QB disruption</td><td class="c">single</td><td class="num">0</td><td class="num"><span class="blank" title="no settled wagers exist">&mdash;</span></td><td class="num"><span class="blank" title="needs a closing-odds feed">&mdash;</span></td><td class="num"><span class="blank" title="needs a closing-odds feed">&mdash;</span></td><td class="num"><span class="blank" title="gate verdict is NOT_STAKEABLE; score withheld, not zeroed">&mdash;</span></td><td class="c"><span class="badge b-NOT_STAKEABLE">NOT_STAKEABLE</span></td><td class="c">G2</td></tr><tr><td class="num"><span class="blank" title="not ranked - no score">&mdash;</span></td><td class=""><strong>S3</strong> &middot; Defensive absence cluster</td><td class="c">single</td><td class="num">0</td><td class="num"><span class="blank" title="no settled wagers exist">&mdash;</span></td><td class="num"><span class="blank" title="needs a closing-odds feed">&mdash;</span></td><td class="num"><span class="blank" title="needs a closing-odds feed">&mdash;</span></td><td class="num"><span class="blank" title="gate verdict is NOT_STAKEABLE; score withheld, not zeroed">&mdash;</span></td><td class="c"><span class="badge b-NOT_STAKEABLE">NOT_STAKEABLE</span></td><td class="c">G1</td></tr><tr><td class="num"><span class="blank" title="not ranked - no score">&mdash;</span></td><td class=""><strong>S4</strong> &middot; Streak fade (public-bias contrarian)</td><td class="c">single</td><td class="num">0</td><td class="num"><span class="blank" title="no settled wagers exist">&mdash;</span></td><td class="num"><span class="blank" title="needs a closing-odds feed">&mdash;</span></td><td class="num"><span class="blank" title="needs a closing-odds feed">&mdash;</span></td><td class="num"><span class="blank" title="gate verdict is NOT_STAKEABLE; score withheld, not zeroed">&mdash;</span></td><td class="c"><span class="badge b-NOT_STAKEABLE">NOT_STAKEABLE</span></td><td class="c">G2</td></tr><tr><td class="num"><span class="blank" title="not ranked - no score">&mdash;</span></td><td class=""><strong>S5</strong> &middot; Home-advantage mispricing</td><td class="c">total</td><td class="num">0</td><td class="num"><span class="blank" title="no settled wagers exist">&mdash;</span></td><td class="num"><span class="blank" title="needs a closing-odds feed">&mdash;</span></td><td class="num"><span class="blank" title="needs a closing-odds feed">&mdash;</span></td><td class="num"><span class="blank" title="gate verdict is NOT_STAKEABLE; score withheld, not zeroed">&mdash;</span></td><td class="c"><span class="badge b-NOT_STAKEABLE">NOT_STAKEABLE</span></td><td class="c">G2</td></tr><tr><td class="num"><span class="blank" title="not ranked - no score">&mdash;</span></td><td class=""><strong>S6</strong> &middot; Divisional rematch under</td><td class="c">total</td><td class="num">0</td><td class="num"><span class="blank" title="no settled wagers exist">&mdash;</span></td><td class="num"><span class="blank" title="needs a closing-odds feed">&mdash;</span></td><td class="num"><span class="blank" title="needs a closing-odds feed">&mdash;</span></td><td class="num"><span class="blank" title="gate verdict is NOT_STAKEABLE; score withheld, not zeroed">&mdash;</span></td><td class="c"><span class="badge b-NOT_STAKEABLE">NOT_STAKEABLE</span></td><td class="c">G2</td></tr><tr><td class="num"><span class="blank" title="not ranked - no score">&mdash;</span></td><td class=""><strong>X1</strong> &middot; Opportunity transfer</td><td class="c">player_prop</td><td class="num">0</td><td class="num"><span class="blank" title="no settled wagers exist">&mdash;</span></td><td class="num"><span class="blank" title="needs a closing-odds feed">&mdash;</span></td><td class="num"><span class="blank" title="needs a closing-odds feed">&mdash;</span></td><td class="num"><span class="blank" title="gate verdict is NOT_STAKEABLE; score withheld, not zeroed">&mdash;</span></td><td class="c"><span class="badge b-NOT_STAKEABLE">NOT_STAKEABLE</span></td><td class="c">G1</td></tr><tr><td class="num"><span class="blank" title="not ranked - no score">&mdash;</span></td><td class=""><strong>X2</strong> &middot; Pass-volume stack vs missing cornerback</td><td class="c">prop_combo</td><td class="num">0</td><td class="num"><span class="blank" title="no settled wagers exist">&mdash;</span></td><td class="num"><span class="blank" title="needs a closing-odds feed">&mdash;</span></td><td class="num"><span class="blank" title="needs a closing-odds feed">&mdash;</span></td><td class="num"><span class="blank" title="gate verdict is NOT_STAKEABLE; score withheld, not zeroed">&mdash;</span></td><td class="c"><span class="badge b-NOT_STAKEABLE">NOT_STAKEABLE</span></td><td class="c">G1</td></tr><tr><td class="num"><span class="blank" title="not ranked - no score">&mdash;</span></td><td class=""><strong>X3</strong> &middot; Rush-attempt transfer</td><td class="c">player_prop</td><td class="num">0</td><td class="num"><span class="blank" title="no settled wagers exist">&mdash;</span></td><td class="num"><span class="blank" title="needs a closing-odds feed">&mdash;</span></td><td class="num"><span class="blank" title="needs a closing-odds feed">&mdash;</span></td><td class="num"><span class="blank" title="gate verdict is NOT_STAKEABLE; score withheld, not zeroed">&mdash;</span></td><td class="c"><span class="badge b-NOT_STAKEABLE">NOT_STAKEABLE</span></td><td class="c">G1</td></tr><tr><td class="num"><span class="blank" title="not ranked - no score">&mdash;</span></td><td class=""><strong>X4</strong> &middot; Negative-correlation guard</td><td class="c">prop_combo</td><td class="num">0</td><td class="num"><span class="blank" title="no settled wagers exist">&mdash;</span></td><td class="num"><span class="blank" title="needs a closing-odds feed">&mdash;</span></td><td class="num"><span class="blank" title="needs a closing-odds feed">&mdash;</span></td><td class="num"><span class="blank" title="gate verdict is NOT_STAKEABLE; score withheld, not zeroed">&mdash;</span></td><td class="c"><span class="badge b-NOT_STAKEABLE">NOT_STAKEABLE</span></td><td class="c">G2</td></tr></tbody></table></div><h3>Scoring formula</h3><pre><code>leaderboard_score = t_statistic(no_vig_roi) x stability_multiplier x capacity_factor
+  t_statistic          = mean(no-vig ROI) / (sd(returns) / sqrt(n))
+  stability_multiplier = share of leave-one-week-out and leave-one-team-out
+                           folds that retain the sign of the edge, clipped to [0,1]
+  capacity_factor      = min(1, average posted limit / model stake)
+Gating: score is only published when gates G1-G7 PASS. A strategy that is
+NOT_STAKEABLE or REJECTED shows a blank score, never a zero, so that &#x27;not
+measured&#x27; is never confused with &#x27;measured and worthless&#x27;.</code></pre><div class="callout ">Ranking on a t-statistic rather than raw ROI is deliberate. Raw ROI ranks noise: a strategy returning 80% on eleven wagers outranks one returning 9% on nine hundred, which is exactly backwards. The t-statistic forces a strategy to be both good <em>and</em> proven, and sample size enters the score directly.</div><h3>Reward ladder</h3><div class="callout warn">This ladder is a <strong>PROPOSAL</strong> awaiting owner sign-off. It is not enacted and nothing in the code acts on it. See Suggestions Board item S-14 and Open Question Q18.</div><div class="scroll"><table class=""><thead><tr><th class="num">Tier</th><th class="">Name</th><th class="">Requirement</th><th class="">Reward</th><th class="c">Status</th></tr></thead><tbody><tr><td class="num">1</td><td class=""><strong>Promote to live paper trading</strong></td><td class="">All nine gates PASS, t &gt;= 3.0, n &gt;= 300, mean CLV &gt;= +0.20 pts</td><td class="">Allocated a live paper-trading bankroll in the tracking ledger; results published weekly on the Leaderboard page.</td><td class="c"><span class="badge b-MODELED">PROPOSAL - needs owner sign-off</span></td></tr><tr><td class="num">2</td><td class=""><strong>Extended validation</strong></td><td class="">Gates G1-G7 PASS, t &gt;= 2.0, n &gt;= 200</td><td class="">Granted a second held-out season of data for confirmation before any promotion.</td><td class="c"><span class="badge b-MODELED">PROPOSAL - needs owner sign-off</span></td></tr><tr><td class="num">3</td><td class=""><strong>Watchlist</strong></td><td class="">Gates G1-G4 PASS</td><td class="">Kept in the catalogue and re-scored weekly; no stake.</td><td class="c"><span class="badge b-MODELED">PROPOSAL - needs owner sign-off</span></td></tr><tr><td class="num">4</td><td class=""><strong>Retire</strong></td><td class="">G3 FAIL (lookahead) or G5 FAIL (luck not removed) or placebo p &gt; 0.05</td><td class="">Removed from the catalogue and archived with the reason recorded, so a rejected idea is never silently re-proposed.</td><td class="c"><span class="badge b-MODELED">PROPOSAL - needs owner sign-off</span></td></tr></tbody></table></div>
+</main>
+<footer>
+<span>Generated by <code>scripts/build_site.py</code> from <code>data/processed/site_data.json</code>. Retrieved 2026-11-12T04:30:00Z.</span>
+<span>Every published value carries a provenance tier. Blank cells are deliberate.</span>
+</footer>
+</div>
+</body>
+</html>

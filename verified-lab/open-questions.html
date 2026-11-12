@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Open Questions · NFL1</title>
+<meta name="description" content="Open Questions - NFL1 verified-data analysis dashboard.">
+<style>
+:root{
+  --bg:#f6f7f9; --panel:#ffffff; --ink:#14181f; --muted:#5b6673;
+  --line:#e2e6eb; --line2:#eef1f4; --accent:#1b5fd9; --accent-soft:#eaf1fd;
+  --ok:#0f7b47; --ok-bg:#e7f6ed; --warn:#8a5a00; --warn-bg:#fdf3dc;
+  --bad:#a32020; --bad-bg:#fdeaea; --info:#1b5fd9; --info-bg:#eaf1fd;
+  --na:#5b6673; --na-bg:#eef1f4;
+  --radius:10px; --shadow:0 1px 2px rgba(16,24,40,.06),0 1px 3px rgba(16,24,40,.04);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+code{background:var(--line2);padding:.1em .35em;border-radius:4px;font-size:.88em}
+pre{background:#0f1419;color:#e6edf3;padding:14px 16px;border-radius:var(--radius);
+  overflow:auto;font-size:12.5px;line-height:1.5}
+pre code{background:none;padding:0;color:inherit}
+.wrap{display:grid;grid-template-columns:238px minmax(0,1fr);gap:26px;
+  max-width:1420px;margin:0 auto;padding:22px 22px 60px}
+header.top{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:12px;align-items:baseline;
+  justify-content:space-between;padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:6px}
+header.top h1{font-size:19px;margin:0;letter-spacing:-.2px}
+header.top .sub{color:var(--muted);font-size:13px}
+nav.side{position:sticky;top:22px;align-self:start;max-height:calc(100vh - 44px);overflow:auto}
+nav.side .grp{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);
+  margin:16px 0 6px;font-weight:700}
+nav.side a{display:block;padding:5px 9px;border-radius:7px;color:var(--ink);font-size:13.5px}
+nav.side a:hover{background:var(--line2);text-decoration:none}
+nav.side a.on{background:var(--accent-soft);color:var(--accent);font-weight:650}
+main{min-width:0}
+h2.pg{font-size:24px;margin:4px 0 4px;letter-spacing:-.4px}
+p.lead{color:var(--muted);margin:0 0 20px;max-width:82ch}
+section{margin:26px 0}
+h3{font-size:16.5px;margin:26px 0 8px;letter-spacing:-.2px}
+h4{font-size:14px;margin:18px 0 6px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  padding:16px 18px;box-shadow:var(--shadow);margin:12px 0}
+.grid{display:grid;gap:12px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  padding:13px 15px;box-shadow:var(--shadow)}
+.kpi .k{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:700}
+.kpi .v{font-size:26px;font-weight:700;letter-spacing:-.8px;margin:3px 0 1px;font-variant-numeric:tabular-nums}
+.kpi .n{font-size:12px;color:var(--muted);line-height:1.4}
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);
+  background:var(--panel);box-shadow:var(--shadow);margin:10px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+th,td{padding:7px 10px;text-align:left;border-bottom:1px solid var(--line2);vertical-align:top}
+thead th{position:sticky;top:0;background:#fafbfc;border-bottom:1px solid var(--line);
+  font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);
+  font-weight:700;white-space:nowrap;z-index:1}
+tbody tr:hover{background:#fbfcfd}
+tbody tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right}
+td.c,th.c{text-align:center}
+.badge{display:inline-block;padding:1.5px 7px;border-radius:999px;font-size:10.5px;
+  font-weight:700;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;
+  border:1px solid transparent}
+.b-VERIFIED,.b-PASS,.b-APPROVED,.b-ACTIVE{background:var(--ok-bg);color:var(--ok);border-color:#bfe6cd}
+.b-DERIVED,.b-INFO,.b-RUN{background:var(--info-bg);color:var(--info);border-color:#c5d9f8}
+.b-MODELED,.b-FLAG,.b-PROVISIONAL,.b-PARTIAL{background:var(--warn-bg);color:var(--warn);border-color:#f0dcae}
+.b-UNAVAILABLE,.b-FAIL,.b-REJECTED,.b-BLOCKED,.b-NOT_STAKEABLE,.b-NOT_RUN{background:var(--na-bg);color:var(--na);border-color:#dfe4ea}
+.b-MECHANICAL,.b-REDUNDANT{background:var(--na-bg);color:var(--na);border-color:#dfe4ea}
+.b-CANDIDATE{background:var(--info-bg);color:var(--info);border-color:#c5d9f8}
+.pill{display:inline-block;padding:1px 8px;border-radius:999px;font-size:11px;
+  background:var(--line2);color:var(--muted);white-space:nowrap}
+.blank{color:#98a2ae;font-style:italic}
+.src{font-size:11.5px;white-space:nowrap}
+.note{font-size:12.5px;color:var(--muted);margin:6px 0 0;max-width:96ch}
+.callout{border-left:3px solid var(--accent);background:var(--accent-soft);
+  padding:11px 14px;border-radius:0 8px 8px 0;margin:12px 0;font-size:13.5px}
+.callout.warn{border-left-color:#d9a400;background:var(--warn-bg)}
+.callout.bad{border-left-color:var(--bad);background:var(--bad-bg)}
+.callout.ok{border-left-color:var(--ok);background:var(--ok-bg)}
+.callout p:first-child{margin-top:0}.callout p:last-child{margin-bottom:0}
+footer{grid-column:1/-1;margin-top:34px;padding-top:14px;border-top:1px solid var(--line);
+  color:var(--muted);font-size:12px;display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:space-between}
+.md table{margin:10px 0}
+.md ul,.md ol{padding-left:22px;margin:8px 0}
+.md li{margin:3px 0}
+.md h2{font-size:19px;margin:26px 0 6px;letter-spacing:-.3px}
+.md h3{font-size:15.5px}
+.md blockquote{border-left:3px solid var(--line);margin:10px 0;padding:2px 0 2px 14px;color:var(--muted)}
+.toc{columns:2;column-gap:26px;font-size:13px}
+@media(max-width:900px){
+  .wrap{grid-template-columns:1fr;padding:14px 14px 40px}
+  nav.side{position:static;max-height:none;order:2;border-top:1px solid var(--line);padding-top:10px}
+  main{order:1}
+  .toc{columns:1}
+}
+@media print{nav.side,header.top .sub{display:none}.wrap{display:block}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+<h1>NFL1 <span style="color:var(--muted);font-weight:500">/ Open Questions</span></h1>
+<div class="sub">What must be answered before any decision can reasonably be made</div>
+</header>
+<nav class="side"><div class="grp">Overview</div><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive Summary</a><a href="open-questions.html" class="on">Open Questions</a><a href="suggestions.html">Suggestions Board</a><a href="flagged.html">Flagged for Review</a><div class="grp">Verified Data</div><a href="data-standings.html">Standings 2026</a><a href="data-schedule.html">Week 10 Schedule</a><a href="data-injuries.html">Injury Report</a><a href="data-news.html">Official News Feed</a><div class="grp">Analysis</div><a href="analysis-ratings.html">Team Ratings</a><a href="analysis-luck.html">Luck Table</a><a href="analysis-correlation.html">Correlations</a><a href="availability-depth.html">Availability &amp; Depth</a><div class="grp">Line Origination</div><a href="lines-week10.html">Week 10 Board</a><a href="methodology.html">Methodology</a><div class="grp">Strategies</div><a href="strategies-leaderboard.html">Leaderboard</a><a href="strategies-catalogue.html">Strategy Catalogue</a><a href="strategies-gates.html">Validation Gates</a><div class="grp">Integrity</div><a href="verification.html">Verification Report</a><a href="sources.html">Source Register</a><div class="grp">Repository</div><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/COORDINATION.md" target="_blank" rel="noopener noreferrer">Coordination board ↗</a></nav>
+<main>
+<h2 id="how-to-read-this-page">How to read this page</h2>
+<p>A decision is only as good as the information behind it. This page lists every question that must be answered before a betting, modelling or product decision can reasonably be made, and separates for each one what is <strong>already known and verified</strong>, what is <strong>not known</strong>, and the <strong>concrete action that would discover it</strong>.</p>
+<p>Nothing here is rhetorical. Each question names the decision it blocks. Where the answer is already in hand it is stated with its source. Where it is not, the cell is blank rather than filled with a plausible guess.</p>
+<p>Priority key: <strong>P0</strong> blocks the entire programme, <strong>P1</strong> blocks a category of work, <strong>P2</strong> improves quality but is not blocking.</p>
+<hr>
+<h3 id="q01-what-closing-line-does-the-market-settle-on-for-each-game">Q01 · What closing line does the market settle on for each game?</h3>
+<p><strong>Category:</strong> Market data · <strong>Priority:</strong> P0 · <strong>Blocks:</strong> every ROI, edge, CLV and leaderboard computation; gates G5, G6 and G9. <strong>Have:</strong> nothing. No odds of any kind are stored. <strong>Do not have:</strong> opening lines, closing lines, line movement, stake limits, or which sportsbook. <strong>Discover it by:</strong> connecting a licensed odds or market-data provider. Historical closing lines for at least three full regular seasons (roughly 1,500 games) are the minimum for any credible validation. Community mirrors exist but are not an official source and would need to be reconciled against a licensed feed before use. <strong>Answer:</strong> <em>blank - unresolved.</em></p>
+<h3 id="q02-what-is-home-field-advantage-worth-in-points-in-the-current-nfl">Q02 · What is home-field advantage worth in points in the current NFL?</h3>
+<p><strong>Category:</strong> Model · <strong>Priority:</strong> P0 · <strong>Blocks:</strong> converting a rating gap into a point spread; the entire origination product. <strong>Have:</strong> league home win rate of 49.63% (Wilson 95% CI 41.36%-57.93%, n=136 home games), computed from the official HOME and ROAD cells on <a href="https://www.nfl.com/standings/">nfl.com/standings</a>. <strong>Do not have:</strong> game-level final scores with home/away designation, which are needed to express the advantage in <em>points</em> rather than in win rate. <strong>Discover it by:</strong> retrieving the official per-week score pages (<code>nfl.com/scores/2026/week-1</code> through <code>week-9</code>, and equivalent pages for prior seasons) or the <code>games.csv</code> asset of the nflverse schedules release, then regressing margin on venue. <strong>Answer:</strong> win rate is known and is <em>not</em> above 50% so far in 2026; the point value is <em>blank - unresolved</em>.</p>
+<h3 id="q03-which-backup-replaces-an-absent-starter-and-what-string-is-he">Q03 · Which backup replaces an absent starter, and what string is he?</h3>
+<p><strong>Category:</strong> Data · <strong>Priority:</strong> P0 · <strong>Blocks:</strong> the depth-deficiency requirement; strategy S2 (QB disruption), X1 (opportunity transfer), X2 (pass volume vs missing corner), X3 (rush-attempt transfer); signal <code>string_level_drop</code>. <strong>Have:</strong> 254 official injury-report entries with position and practice status; eight official news items, four of which name a confirmed starting-quarterback change. <strong>Do not have:</strong> any depth chart. NFL.com publishes none. String level (1st/2nd/3rd/4th) is unknown for every player in the dataset. <strong>Discover it by:</strong> obtaining credentials for Sportradar's NFL Official API - Sportradar is the NFL's official data partner and its weekly depth-chart endpoint is the sanctioned feed (<a href="https://developer.sportradar.com/football/reference/nfl-weekly-depth-charts">developer.sportradar.com</a>). Club websites publish charts but in inconsistent, unversioned formats that would need per-team scraping and a stability guarantee. <strong>Answer:</strong> <em>blank - unresolved.</em></p>
+<h3 id="q04-when-exactly-was-each-injury-report-retrieved-and-did-it-change-afterwards">Q04 · When exactly was each injury report retrieved, and did it change afterwards?</h3>
+<p><strong>Category:</strong> Operations · <strong>Priority:</strong> P0 · <strong>Blocks:</strong> gate G3 (no lookahead) for any availability-based strategy. <strong>Have:</strong> one retrieval timestamp for the whole snapshot (2026-11-12T04:30:00Z), and the finding that only 2.36% of entries carried an injury designation and 2.36% carried a game status at that moment. <strong>Do not have:</strong> any historical series of reports, so it is impossible to know how a Thursday-morning report differs from the final Friday 4:00pm ET version. <strong>Discover it by:</strong> running the retriever on a schedule - Wednesday, Thursday, Friday evening and Saturday - and storing every version with its own timestamp. Two weeks of that produces the first usable measurement of how much information arrives and when. <strong>Answer:</strong> the early-week report is nearly empty of designations; the magnitude of later revision is <em>blank - unresolved</em>.</p>
+<h3 id="q05-is-the-2026-home-win-rate-of-49-63-a-real-shift-or-noise">Q05 · Is the 2026 home win rate of 49.63% a real shift or noise?</h3>
+<p><strong>Category:</strong> Model · <strong>Priority:</strong> P1 · <strong>Blocks:</strong> strategy S5 (home-advantage mispricing). <strong>Have:</strong> n=136 home games, rate 49.63%, Wilson 95% CI 41.36%-57.93%. The interval includes 50%. <strong>Do not have:</strong> prior-season home win rates for comparison, and any market pricing of home field. <strong>Discover it by:</strong> computing the same statistic for 2023-2025 from official standings or official game results, then testing whether 2026 differs. Note the observations are not independent - each game contributes one home and one road record - so the interval is indicative only. <strong>Answer:</strong> <em>not established either way. Do not act on it.</em></p>
+<h3 id="q06-is-the-fitted-pythagorean-exponent-of-3-5073-trustworthy">Q06 · Is the fitted Pythagorean exponent of 3.5073 trustworthy?</h3>
+<p><strong>Category:</strong> Model · <strong>Priority:</strong> P1 · <strong>Blocks:</strong> the calibration of every rating. <strong>Have:</strong> exponent 3.5073, 95% bootstrap CI 2.7498-4.3113, n=32, R²=0.7715, calibration slope 0.9991, all fitted on official 2026 PF and PA. <strong>Do not have:</strong> a full-season fit, and out-of-sample confirmation on a different season. <strong>Discover it by:</strong> refitting on complete seasons and holding one season out. An exponent fitted on roughly 8.5 games per team is expected to be unstable and biased upward, because early-season scoring is noisier than season-long scoring. <strong>Answer:</strong> usable for ranking within 2026; <strong>not</strong> usable as a general constant.</p>
+<h3 id="q07-do-any-availability-signals-actually-predict-anything">Q07 · Do any availability signals actually predict anything?</h3>
+<p><strong>Category:</strong> Model · <strong>Priority:</strong> P1 · <strong>Blocks:</strong> strategies S2, S3, X1, X2, X3. <strong>Have:</strong> a 38-test correlation screen with Benjamini-Hochberg FDR control. Expected false positives at p&lt;0.05 alone: 1.9. Nine tests survive FDR at α=0.10 and <strong>all nine are definitional</strong> - win percentage against other expressions of the same results. <strong>Do not have:</strong> any statistically significant association between an availability signal and an outcome. The strongest non-mechanical leads are <code>qb_entries</code> vs <code>win_pct</code> (r=+0.346, q=0.246) and <code>qb_disruption</code> vs <code>win_pct</code> (r=-0.270, q=0.482). Neither survives. <strong>Discover it by:</strong> building a panel dataset - team-weeks over multiple seasons with the report as it stood before kickoff and the game result - rather than a single cross-section of 28 teams. Cross-sectional n=28 cannot detect a realistic effect size. <strong>Answer:</strong> <strong>no evidence of an availability edge exists in the current data.</strong></p>
+<h3 id="q08-are-these-correlations-contemporaneous-or-predictive">Q08 · Are these correlations contemporaneous or predictive?</h3>
+<p><strong>Category:</strong> Model · <strong>Priority:</strong> P1 · <strong>Blocks:</strong> every forward-looking claim. <strong>Have:</strong> a single-week cross-section. Injury counts and records are measured at the same moment in time. <strong>Do not have:</strong> any lead-lag structure. A team that has lost more games may simply report more injuries <em>because</em> it lost, which is reverse causation. <strong>Discover it by:</strong> time-stamping features strictly before kickoff and correlating week-<em>t</em> features against week-<em>t</em> results across a season. <strong>Answer:</strong> the current correlations are <strong>contemporaneous and must not be read as predictive.</strong></p>
+<h3 id="q09-how-are-leg-correlations-to-be-measured-for-parlays-and-prop-combos">Q09 · How are leg correlations to be measured for parlays and prop combos?</h3>
+<p><strong>Category:</strong> Model · <strong>Priority:</strong> P1 · <strong>Blocks:</strong> gate G8; strategies P1, P2, P3, X2, X4. <strong>Have:</strong> a complete pairwise correlation matrix over 21 team-level signals with n printed for every cell, five redundant pairs at |r|≥0.80, and a working first-order correlation adjustment in <code>odds.parlay_fair_prob</code>. <strong>Do not have:</strong> any correlation between <em>betting outcomes</em> - which is what a parlay actually needs. Signal-to-signal correlation is not the same thing. <strong>Discover it by:</strong> settling a history of individual legs, then measuring the empirical co-occurrence of leg wins within the same game and across the same slate. <strong>Answer:</strong> the machinery is built; the input does not exist.</p>
+<h3 id="q10-what-is-the-vig-and-does-any-model-edge-survive-it">Q10 · What is the vig, and does any model edge survive it?</h3>
+<p><strong>Category:</strong> Market · <strong>Priority:</strong> P0 · <strong>Blocks:</strong> gate G6. <strong>Have:</strong> exact, unit-tested arithmetic for American/decimal conversion, overround, multiplicative de-vig, Shin/power de-vig, parlay fair probability and edge at posted prices. <strong>Do not have:</strong> a single real price to apply it to. <strong>Discover it by:</strong> Q01. <strong>Answer:</strong> <em>blank - unresolved.</em></p>
+<h3 id="q11-how-much-bankroll-and-what-staking-rule">Q11 · How much bankroll, and what staking rule?</h3>
+<p><strong>Category:</strong> Risk · <strong>Priority:</strong> P1 · <strong>Blocks:</strong> any live or paper-trading deployment; reward tier 1. <strong>Have:</strong> nothing. No bankroll, no unit size, no maximum exposure, no correlation limits across simultaneous wagers. <strong>Do not have:</strong> an owner decision. <strong>Discover it by:</strong> an owner decision recorded on the Suggestions Board. Fractional Kelly with a hard cap is the conventional starting point, but the fraction and the cap are the owner's to set, not the system's to assume. <strong>Answer:</strong> <em>blank - awaiting owner decision.</em></p>
+<h3 id="q12-is-this-activity-permitted-for-the-owner-and-where">Q12 · Is this activity permitted for the owner, and where?</h3>
+<p><strong>Category:</strong> Legal / compliance · <strong>Priority:</strong> P0 · <strong>Blocks:</strong> any deployment with real money. <strong>Have:</strong> nothing. Jurisdiction is unknown to the system. <strong>Do not have:</strong> confirmation that sports wagering is legal for the owner in the owner's jurisdiction, that any intended operator is licensed there, and that automated data collection complies with each source's terms of use. <strong>Discover it by:</strong> owner confirmation. This is not a technical question and the system deliberately does not attempt to answer it. <strong>Answer:</strong> <em>blank - owner must confirm. Treat everything here as research until they do.</em></p>
+<h3 id="q13-which-sportsbooks-and-can-the-model-s-stake-actually-be-placed">Q13 · Which sportsbooks, and can the model's stake actually be placed?</h3>
+<p><strong>Category:</strong> Execution · <strong>Priority:</strong> P2 · <strong>Blocks:</strong> gate G9 (capacity). <strong>Have:</strong> the gate logic, including a limit-to-stake ratio test. <strong>Do not have:</strong> any limit data. <strong>Discover it by:</strong> recording posted limits alongside every captured price. <strong>Answer:</strong> <em>blank - unresolved.</em></p>
+<h3 id="q14-how-is-the-model-to-be-re-fit-each-week-without-leaking-the-future">Q14 · How is the model to be re-fit each week without leaking the future?</h3>
+<p><strong>Category:</strong> Operations · <strong>Priority:</strong> P1 · <strong>Blocks:</strong> gate G3. <strong>Have:</strong> the walk-forward requirement written into gate G3 and the retrieval-timestamp discipline built into the ingestion layer. <strong>Do not have:</strong> a scheduler, an immutable feature store, or a record of which data version produced which prediction. <strong>Discover it by:</strong> implementing an append-only feature store keyed by <code>(game_id, feature_name, retrieved_at)</code> and forbidding any read that is not filtered by <code>retrieved_at &lt; kickoff</code>. <strong>Answer:</strong> designed, not yet implemented.</p>
+<h3 id="q15-should-the-three-inconsistent-official-cells-be-trusted-at-all">Q15 · Should the three inconsistent official cells be trusted at all?</h3>
+<p><strong>Category:</strong> Data integrity · <strong>Priority:</strong> P1 · <strong>Blocks:</strong> use of division and non-conference splits. <strong>Have:</strong> three specific cells that contradict their own adjacent cells on NFL.com - the DIV record for Indianapolis and Philadelphia, and the NON-CONF record for Washington - each with an arithmetic proof and a note that the printed cell is character-identical to a neighbouring cell, which is consistent with a rendering duplication defect. <strong>Do not have:</strong> a second official retrieval of the same view to determine whether the defect is in the source or in the retrieval. <strong>Discover it by:</strong> re-retrieving <a href="https://www.nfl.com/standings/division/2026/REG">nfl.com/standings/division/2026/REG</a> independently, and cross-checking the three clubs' division records against the official conference standings view. <strong>Answer:</strong> cells are excluded from all computation and flagged. Root cause <em>unresolved</em>.</p>
+<h3 id="q16-what-is-a-player-s-opportunity-independent-of-his-output">Q16 · What is a player's opportunity, independent of his output?</h3>
+<p><strong>Category:</strong> Model · <strong>Priority:</strong> P1 · <strong>Blocks:</strong> every player-prop strategy. <strong>Have:</strong> nothing at player level. No snap counts, no route participation, no target share, no rush-attempt share. <strong>Do not have:</strong> NFL Next Gen Stats, which is the official source for tracking-derived opportunity measures. <strong>Discover it by:</strong> <a href="https://www.nfl.com/nextgenstats/">nfl.com/nextgenstats</a> plus official game logs. Snap share is the minimum viable opportunity measure. <strong>Answer:</strong> <em>blank - unresolved.</em></p>
+<h3 id="q17-how-much-does-one-absence-actually-move-a-line">Q17 · How much does one absence actually move a line?</h3>
+<p><strong>Category:</strong> Model · <strong>Priority:</strong> P1 · <strong>Blocks:</strong> sizing of S2, S3, X1, X2, X3. <strong>Have:</strong> the position and severity weight tables used by the availability index, published in full on the Methodology page. <strong>Do not have:</strong> any evidence those weights are right. They are analyst priors, not fitted values, and every number that depends on them is labelled MODELED. <strong>Discover it by:</strong> measuring observed line movement between the announcement of a confirmed absence and the next posted price. This needs Q01 and Q03 first. <strong>Answer:</strong> <em>blank - priors only, deliberately labelled.</em></p>
+<h3 id="q18-what-is-the-reward-structure-for-top-performing-strategies">Q18 · What is the reward structure for top-performing strategies?</h3>
+<p><strong>Category:</strong> Product · <strong>Priority:</strong> P2 · <strong>Blocks:</strong> leaderboard promotion decisions. <strong>Have:</strong> a four-tier reward ladder proposed in <code>src/nfl/leaderboard.py</code> and published on the Leaderboard page, explicitly marked PROPOSAL. <strong>Do not have:</strong> owner approval, and any statement of what a "reward" concretely is - bankroll allocation, promotion to live tracking, or something else. <strong>Discover it by:</strong> an owner decision on the Suggestions Board (item S-14). <strong>Answer:</strong> proposed, awaiting sign-off.</p>
+<h3 id="q19-how-is-a-strategy-retired-and-who-decides">Q19 · How is a strategy retired, and who decides?</h3>
+<p><strong>Category:</strong> Governance · <strong>Priority:</strong> P2 · <strong>Blocks:</strong> catalogue hygiene. <strong>Have:</strong> gate G3, G5 and the placebo test as automatic retirement triggers, and tier 4 of the reward ladder which archives a rejected strategy with its reason recorded. <strong>Do not have:</strong> a named owner of the decision, or a review cadence. <strong>Discover it by:</strong> an owner decision on the Suggestions Board (item S-15). <strong>Answer:</strong> mechanism built, governance <em>unresolved</em>.</p>
+<h3 id="q20-are-concurrent-sessions-actually-coordinating">Q20 · Are concurrent sessions actually coordinating?</h3>
+<p><strong>Category:</strong> Operations · <strong>Priority:</strong> P2 · <strong>Blocks:</strong> safe multi-agent work on this repo. <strong>Have:</strong> <code>COORDINATION.md</code> as the shared task board with claims, scopes, statuses, sources and handoff rules. <strong>Do not have:</strong> any second session to coordinate with; this session is the only one that has written to the repository. <strong>Discover it by:</strong> any subsequent session reading the board before claiming work. <strong>Answer:</strong> board is live and current.</p>
+<h3 id="q21-does-the-site-build-and-deploy-cleanly-with-no-broken-links">Q21 · Does the site build and deploy cleanly, with no broken links?</h3>
+<p><strong>Category:</strong> Product · <strong>Priority:</strong> P1 · <strong>Blocks:</strong> publication. <strong>Have:</strong> a static generator with no build-time dependencies beyond the standard library, and a link checker in the test suite. <strong>Do not have:</strong> a confirmed successful GitHub Pages deployment for this content. <strong>Discover it by:</strong> the link-check test, the Pages build status, and a manual pass over the live URL after the merge. <strong>Answer:</strong> verified locally; see the Verification Report and the pull request.</p>
+<h3 id="q22-what-should-be-believed-on-this-site-and-what-should-not">Q22 · What should be believed on this site, and what should not?</h3>
+<p><strong>Category:</strong> Governance · <strong>Priority:</strong> P0 · <strong>Blocks:</strong> every downstream use. <strong>Have:</strong> a four-tier provenance system - VERIFIED, DERIVED, MODELED, UNAVAILABLE - applied to every published number, with the definitions printed on every page that uses them. <strong>Do not have:</strong> any validated betting edge. Nothing on this site has ever been measured against a market. <strong>Discover it by:</strong> Q01, Q02 and Q03. <strong>Answer:</strong> <strong>believe the VERIFIED tables and the DERIVED arithmetic. Do not act on any MODELED value. Treat every blank as genuinely unknown.</strong></p>
+</main>
+<footer>
+<span>Generated by <code>scripts/build_site.py</code> from <code>data/processed/site_data.json</code>. Retrieved 2026-11-12T04:30:00Z.</span>
+<span>Every published value carries a provenance tier. Blank cells are deliberate.</span>
+</footer>
+</div>
+</body>
+</html>

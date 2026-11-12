@@ -125,3 +125,30 @@ same-named `data/*.json` files; both are preserved.
 **Cross-verification:** this session's standings and injury designations were compared against
 `data/verified/` on `main` — 32/32 clubs and 6/6 designations match exactly. The one
 difference is club abbreviation for the Rams (`LAR` here, `LA` on `main`), logged as F-013.
+
+---
+
+## Independent verification subsystem (`verified-lab/`)
+
+Session `a2cea255-nfl1` added a third, deliberately independent implementation of the same
+brief: a **hand transcription** of the official nfl.com pages (no scraper), a 34-check
+verification harness, a provenance-and-gates engine, 103 tests, and a 20-page sub-site.
+
+**Sub-site: <https://kanlerxz87-cyber.github.io/NFL1/verified-lab/>** ·
+full details in [`verified-lab/README.md`](verified-lab/README.md).
+
+It publishes into its own directory because the root and `docs/` are already other sessions'
+live sites, and overwriting them would destroy merged work. Its CI footprint is nil:
+`scripts/verified/check_site.py` and `normalize_nav.py` scan only `index.html` and `pages/`,
+and `tools/verify.py` uses an explicit page list.
+
+Its headline finding is an audit of the official pages themselves — three cells where nfl.com
+contradicts its own arithmetic (WAS `non_conf`, IND `div`, PHI `div`), published verbatim,
+excluded from derived maths and never silently corrected. It publishes **no spread, total or
+edge**, because GitHub release assets cannot be downloaded from the Arena sandbox, so the
+nflverse feeds `pipeline/collect.py` fetches in Actions were never obtainable there. Blanks
+were left blank rather than filled from an unofficial aggregator.
+
+> Note: `tools/build.py` regenerates this `README.md` from an embedded template, so this
+> pointer is expected to be transient. The durable fix is logged as request
+> `R-a2cea255-01` in `COORDINATION.md` rather than applied to another session's generator.

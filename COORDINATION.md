@@ -12,6 +12,7 @@ Sessions that have worked here:
 | `80731db4-nfl1` | `arena/80731db4-nfl1` | Task board scaffold | not merged (superseded) |
 | `946c1684-nfl1` | `arena/946c1684-nfl1` | League reference data, environment notes (curl allow-list; `fetch_page` has full internet) | not merged (superseded) |
 | `7600ed8b-nfl1` | `arena/7600ed8b-nfl1` | Quantitative pipeline, own lines, strategy gates, injury/depth model, props, verification, final integration | PR #13 |
+| `a2cea255-nfl1` | `arena/a2cea255-nfl1` | Independent verification subsystem: hand transcription of nfl.com, 34-check harness, provenance/gates engine, 103 tests, 20-page sub-site in `verified-lab/` | PR #18 |
 
 > Branch naming: Arena fixes each session to a single branch named `arena/<session>-nfl1`, so the
 > `session-<id>/<task>` convention in the brief cannot be followed here. Scopes were kept
@@ -742,3 +743,207 @@ Published with source links at `docs/flagged.html`. Non-blocking.
 - 2026-11-12 — Cross-verified against main's independently transcribed data: standings 32/32
   and injury designations 6/6 exact matches.
 - 2026-11-12 — Opened PR #14; merged to `main` without waiting for approval, per the brief.
+
+---
+
+# Session `a2cea255-nfl1` — independent verification subsystem
+
+Branched from `5aeb599` (the initial commit), so this session started without
+sight of the work above and rebuilt the brief from scratch. On discovering at
+integration time that `main` had advanced through PRs #1-#17 with a complete
+live site, the work was **merged additively**: nothing published by an earlier
+session was overwritten, renamed or deleted.
+
+**Sub-site: <https://kanlerxz87-cyber.github.io/NFL1/verified-lab/>**
+
+## Why it publishes into `verified-lab/` and not the root
+
+The repository's Pages source is pinned to `main` at `/` and cannot be changed:
+`PUT /repos/kanlerxz87-cyber/NFL1/pages` returns **403 "Resource not accessible by
+integration"** because the available token lacks `pages:write`. A 20-page site
+built at the root would therefore have replaced five of the lab's own published
+pages — `index.html`, `executive-summary.html`, `flagged.html`,
+`suggestions.html`, `verification.html` — which the protocol forbids.
+
+The sub-site lives in a directory no other session owns, uses relative links
+throughout, and has **no CI footprint**: `scripts/verified/check_site.py` scans
+only `index.html` and `pages/`, and `scripts/verified/normalize_nav.py` rewrites
+nav only in those same files. Neither touches `verified-lab/`. The output
+location is one variable (`sitekit.SITE_OUT`, overridable via `NFL1_SITE_OUT`),
+so moving it is a one-line change if the board later decides otherwise.
+
+## Task board (this session)
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| A1 | Hand-transcribe official nfl.com pages (no scraper) | done | `a2cea255` | `data/verified/*.tsv`, `data/verified/sources.json` |
+| A2 | Verification harness, 34 checks | done | `a2cea255` | `src/nfl/verify.py` |
+| A3 | Provenance, stats, odds, correlation/BH-FDR engines | done | `a2cea255` | `src/nfl/provenance.py`, `stats.py`, `ingest.py`, `odds.py`, `correlation.py`, `signals.py` |
+| A4 | Ratings, Pythagorean fit, line-origination board | done | `a2cea255` | `src/nfl/ratings.py` |
+| A5 | Availability and depth tracking | done | `a2cea255` | `src/nfl/availability.py` |
+| A6 | Strategies, 9 gates, luck removal, leaderboard | done | `a2cea255` | `src/nfl/strategies.py`, `gates.py`, `luck.py`, `leaderboard.py` |
+| A7 | Pipeline → single site-data artifact | done | `a2cea255` | `src/nfl/pipeline.py`, `data/processed/site_data.json` |
+| A8 | Executive summary, 22 open questions, 22 suggestions, methodology | done | `a2cea255` | `content/*.md` |
+| A9 | Site generator, 20 pages, 6 nav categories | done | `a2cea255` | `src/nfl/sitekit.py`, `src/nfl/markdown_lite.py`, `scripts/build_site.py`, `verified-lab/` |
+| A10 | Test suite: 103 tests incl. link + source-link enforcement | done | `a2cea255` | `tests/` |
+| A11 | Integration: merge `origin/main`, preserve all prior work, publish | done | `a2cea255` | see below |
+
+No task was `unclaimed` or `needs review` at hand-off. Items needing human
+attention are published on the sub-site's Flagged for Review page, which is
+their intended destination and blocks nothing.
+
+## Sources used
+
+All quantitative values were hand-transcribed from official nfl.com pages
+retrieved on 2026-11-12 — no scraper, no third-party aggregator:
+
+- Standings, 2026 REG — <https://www.nfl.com/standings/> and
+  <https://www.nfl.com/standings/division/2026/REG> (32 teams × 19 fields)
+- Injury report, Week 10 2026 — <https://www.nfl.com/injuries/> (254 entries)
+- Tie-breaking procedures — <http://www.nfl.com/standings/tiebreakingprocedures>
+- Eight news articles carrying the only officially confirmed availability facts
+  used: Watson/Beck starts, Willis to IR, Darnold ruled out with Lock to start,
+  Nacua likely to IR, Jacobs finger surgery, the Hooker and Henley trades,
+  McCarthy expected to play, Herbert avoiding a fracture, and the Week 9
+  injuries roundup.
+- **Cited, not used:** Sportradar's NFL Official API weekly depth charts —
+  <https://developer.sportradar.com/football/reference/nfl-weekly-depth-charts>.
+  The league's sanctioned depth-chart feed; credential-gated.
+- **Community mirror (tier `COMMUNITY_MIRROR`, labels and colours only, never
+  on-field values):** nflverse `teams_colors_logos.csv` →
+  `data/reference/teams.csv`.
+
+Full register with tiers, retrieval timestamps and `used_for` notes:
+`data/verified/sources.json`.
+
+## Verification performed
+
+**34 automated checks → 29 PASS, 5 FLAG, 0 FAIL.** Each check names its source.
+
+- Tie-aware `PCT = (W + 0.5·T)/(W+L+T)`, recomputed with half-up `Decimal`
+  rounding. (Python's `round()` is half-to-even and produced a spurious failure
+  on WAS's 0.3125 — recorded so nobody "fixes" it back.)
+- `NET = PF − PA`, `HOME + ROAD = GP`, `CONF + NON-CONF = GP`, `DIV ≤ CONF`.
+- League balance: 136 completed games, 272 team-games, W == L == 134, T == 4,
+  PF == PA == 6,267.
+- Slate integrity: 14 games, 28 distinct teams, playing ∪ bye == 32, no overlap.
+- **Cross-source agreement (V28, the strongest single check):** all 28 records
+  printed beside club logos on the official injury page match the official
+  standings page exactly, including both tied clubs.
+- Injury vocabulary and position checks over all 254 entries; bye list
+  corroborated by five independent retrievals; 100% of published rows carry a
+  source URL (V30).
+- Odds arithmetic: American↔decimal round-trips, implied probability,
+  overround, multiplicative and power devig (both sum to 1.0), parlay fair
+  probability with and without a ρ adjustment, edge.
+- **Gate harness proven bidirectional** — it approves a well-formed strategy and
+  rejects lookahead, an edge inside the noise, a CI spanning zero, and profit
+  concentrated in one fold.
+- **Site:** every `href` in all 20 pages resolves, no dead anchors, and every
+  row of every table declaring a `Source` column carries a link to an official
+  host (300+ rows checked). Both tests caught real defects during development:
+  a naive URL extractor emitting `href="A"`, and the Source Register printing
+  URLs as text instead of links.
+
+## Irregularities found
+
+Published verbatim, excluded from derived maths, listed on the sub-site's
+Flagged for Review page with the arithmetic proof. **None blocks the merge.**
+
+| ID | Irregularity | Handling |
+|---|---|---|
+| V07 | **WAS `non_conf` contradicts itself.** 2-5-1 is 8 games; CONF 3-2-1 is 6, so NON-CONF must cover 2 games — the page prints `1-3-1` (5 games), character-identical to WAS LAST-5. | Published verbatim, excluded from derived metrics, blank on site tables |
+| V10 | **IND `div` disagrees with its own PCT** — `1-3-0` ⇒ 0.250, page prints 0.333. | Same; `div_win_pct` is `None` for IND |
+| V10 | **PHI `div` disagrees with its own PCT** — `1-4-0` ⇒ 0.200, page prints 0.250. | Same; `div_win_pct` is `None` for PHI |
+| V10b/c | **Duplication defects** — IND DIV == IND HOME, PHI DIV == PHI HOME, WAS NON-CONF == WAS LAST-5. | Flagged with the duplication shown explicitly |
+| V32 | **The community mirror carries 4 retired codes** (`LAR`, `OAK`, `SD`, `STL`) alongside the 32 active ones; all 32 active codes are present and correct (V31 PASS). | Excluded from every join; tier `COMMUNITY_MIRROR`, labels/colours only |
+| — | **Injury report barely populated at retrieval time** — 6 of 254 entries (2.36%) carry a designation, retrieved on the Thursday of game week; practice participation *is* complete (93 DNP / 89 LP / 72 FP). | Blanks left blank; documented that any availability model must re-fetch after the Friday 4:00pm ET deadline and timestamp every retrieval |
+| — | **"No Injuries Reported" ≠ "on bye"** — SEA/CIN/LAC/BAL versus CHI/DEN/PHI/TB. | Kept distinct rather than collapsed into one zero |
+| — | **No official depth chart reachable from the sandbox.** | `string_level_drop` registered UNAVAILABLE; 2nd/3rd/4th-string analysis uses only officially confirmed news items |
+| — | **Pages source cannot be moved to `/docs`** — 403, token lacks `pages:write`. | Sub-site published from `verified-lab/`; root site untouched |
+| — | **`README.md` on `main` contained three committed merge-conflict blocks** (`<<<<<<< Updated upstream` / `=======` / `>>>>>>> Stashed changes`, lines 27-77) — a `git stash pop` conflict committed and published as repository documentation. | Resolved in this merge by keeping the more complete side of each block; no content discarded. `git grep` confirms no conflict markers remain anywhere in the tree |
+
+## Where this subsystem disagrees with the main pipeline — and why
+
+The sub-site publishes **no spread, no total, no win probability and no edge**,
+and reports that **zero non-mechanical findings survive** its correlation screen
+(38 tests, BH-FDR at α = 0.10; 9 survive and all 9 are definitional; 1.9 false
+positives expected at p < 0.05 by chance alone).
+
+This is **not** a contradiction of the main lab. It is a consequence of where
+each one ran. Inside the Arena sandbox, GitHub **release assets cannot be
+downloaded** — `curl -L .../releases/download/...` returns 302 to
+`release-assets.githubusercontent.com` and then exit 35 with 0 bytes — so the
+nflverse closing lines, depth charts and play-by-play that `pipeline/collect.py`
+fetches **in GitHub Actions** were never obtainable here. Unofficial odds
+aggregators were found and rejected rather than used. The main lab, running in
+CI with full network access, has that data; this subsystem does not, and left
+the cells blank.
+
+Both readings are worth keeping: the lab for what the data supports, and
+`verified-lab/` for an independent audit of the official pages themselves,
+including three cells where nfl.com contradicts its own arithmetic.
+
+## Integration record
+
+- **Branch:** `arena/a2cea255-nfl1`.
+- **Merged `origin/main` twice** rather than merging over it. The first merge
+  took in PRs #1-#17 (`ef66f3c`); while this branch was open, PR #14 from
+  session `87deb7ab` merged and the `collect-data` bot committed a refresh to
+  this branch, so `origin/main` was merged a second time at `e287fde`. The
+  first merge had eight conflicts
+  (`.gitignore`, `COORDINATION.md`, `README.md`, and five root `.html` pages)
+  were resolved **without discarding any prior session's work**:
+  - the five root pages were taken from `main` verbatim, and this session's
+    equivalents rebuilt into `verified-lab/`;
+  - `.gitignore` became the union of both sides' entries;
+  - `README.md` kept `main`'s text, plus a short pointer to the subsystem. The full write-up lives in
+    `verified-lab/README.md` because `tools/build.py` regenerates the root
+    `README.md` from an embedded template and would wipe anything added there
+    (see the open request below);
+  - `COORDINATION.md` kept `main`'s board in full, with this section appended
+    and this session's row added to the session table.
+- 15 root `.html` files that this session had generated were removed from the
+  index before the merge commit, so the root remains exactly `main`'s site.
+- The **second** merge conflicted on 13 files: `COORDINATION.md`, `README.md`
+  and eleven `data/model/*.json`. The generated JSON was taken from `main`
+  wholesale — those artifacts are owned by `pipeline/` and refreshed by the
+  `collect-data` workflow, and hand-merging generated data is how two sessions'
+  numbers end up mixed in one file. `README.md` was taken from `main` verbatim:
+  its regeneration by `tools/build.py` had already removed the three committed
+  conflict blocks, so the fix this session made was no longer needed.
+  `COORDINATION.md` was taken from `main` and this section re-appended to it.
+- After the second merge, all root pages and all `data/model/*.json` are
+  byte-identical to `origin/main` again (checked by sha1).
+- **Pull request:** <https://github.com/kanlerxz87-cyber/NFL1/pull/18>
+- **Merge result and Pages verification:** recorded in the follow-up commit
+  pushed to this branch and merged immediately afterwards, once the deployment
+  had actually been observed rather than assumed.
+
+## Open cross-session requests (logged, not applied)
+
+Per the protocol, a need that touches another session's files is logged here
+rather than edited.
+
+| # | Request | Owner of the file | Why this session did not do it |
+|---|---|---|---|
+| R-a2cea255-01 | Add a pointer to `verified-lab/` (the independent verification subsystem and its sub-site) to the README template inside `tools/build.py`. | `tools/build.py` — session `7600ed8b`/`25aa7696` lineage | `tools/build.py` writes `README.md` unconditionally (line ~1372), so any pointer committed directly to `README.md` is wiped the next time that generator runs. The short pointer added in this merge is therefore expected to be transient; the durable fix belongs in the generator's template. |
+| R-a2cea255-02 | Consider running this subsystem's 34-check harness (`PYTHONPATH=src python3 -c "from nfl import verify; ..."`) as an additional CI gate alongside `scripts/verified/validate_verified.py`. | `.github/workflows/pages.yml` | It audits the official nfl.com pages independently of the mirrored feeds and currently reports 29 PASS / 5 FLAG / 0 FAIL, including three cells where nfl.com contradicts its own arithmetic. Adding a workflow step is a change to shared CI, so it is requested rather than made. |
+| R-a2cea255-03 | Confirm whether the three disputed standings cells (WAS `non_conf`, IND `div`, PHI `div`) also affect `data/verified/standings_2026.csv` or the model outputs derived from it. | `data/verified/standings_2026.csv`, `pipeline/` | This session found them by recomputing the tie-aware PCT identity on its own transcription. It does not edit another session's data or recompute their model, so the finding is handed over with the arithmetic proof rather than applied. |
+
+## Note on the two verification datasets now living in `data/verified/`
+
+`data/verified/` contains two independent transcriptions of the same official
+pages, from different sessions, with different formats and different scopes:
+
+- `*.csv` — the lab's hand-entered fixtures (32 standings rows, a 44-row injury
+  sample) used to verify the automated feeds.
+- `*.tsv` — this subsystem's full hand transcription (32 standings rows × 19
+  fields, **254** injury entries, 14 Week 10 games, byes, report status, 8 news
+  items).
+
+Filenames do not collide, and neither is derived from the other. They agree
+where they overlap: both report 32 standings rows, and this subsystem's harness
+independently confirms all 28 pre-game records printed on the official injury
+page. Keeping both is deliberate — an audit is only worth anything if it was
+produced independently of the thing it audits.
