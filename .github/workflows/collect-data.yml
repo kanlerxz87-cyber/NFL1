@@ -33,7 +33,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --quiet --upgrade pip
-          python -m pip install --quiet pandas numpy scipy requests pyarrow beautifulsoup4 lxml beautifulsoup4 lxml
+          python -m pip install --quiet pandas numpy scipy requests pyarrow beautifulsoup4 lxml
       - name: Syntax check
         run: python -m compileall -q pipeline
       - name: Collect source files (pinned URLs + sha256)
