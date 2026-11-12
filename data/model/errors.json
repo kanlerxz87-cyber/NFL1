@@ -1,0 +1,10 @@
+{
+ "generated_at": "2026-11-12T04:51:02+00:00",
+ "errors": [
+  {
+   "stage": "D injury and depth attrition",
+   "error": "KeyError: 'home'",
+   "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/NFL1/NFL1/pipeline/build_all.py\", line 55, in run\n    return fn(*a, **k)\n           ^^^^^^^^^^^\n  File \"/home/runner/work/NFL1/NFL1/pipeline/build_all.py\", line 824, in availability\n    fixture_teams.add(g[\"home\"])\n                      ~^^^^^^^^\nKeyError: 'home'\n"
+  }
+ ]
+}
