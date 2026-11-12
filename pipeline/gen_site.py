@@ -1067,6 +1067,8 @@ def review_page(verif, strat, dash, avail=None):
          src(SOURCE["injuries"], "NFL injuries"), badge("resolved")],
         ["F18", "correlation C5", "The division-game flag compared only the division word, counting 10 AFC West vs NFC West games as division games (52 instead of 42; r=-0.1297 instead of -0.1048). Fixed: the flag now keys on conference + division, verified against the official division standings; audit_numbers.py gates it.",
          src(SOURCE["divisions"], "NFL division standings"), badge("resolved")],
+        ["F19", "CI coverage", "Data-bot commits carry [skip ci], so the verification workflows never run on them: refreshed data reaches main ungated until the next human push. Needs a reviewer decision on a gated-refresh mechanism (suggestions S13 and root S24).",
+         src(SOURCE["repo"], "repository"), badge("needs review")],
     ])
 
     tbl = table(["ID", "Area", "What is flagged", "Source", "State"], flags,
