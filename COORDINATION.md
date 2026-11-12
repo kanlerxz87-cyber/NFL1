@@ -1022,5 +1022,11 @@ Session branch: `arena/5cf5434e-nfl1`, branched from `c09c739` (= `main` = `orig
 - **F29** — `data/teams.csv` / `data/standings.csv` use `LAR` for the Los Angeles Rams; the official standings and club pages publish `LA`. Values kept as published; consumers must map LA↔LAR.
 - **F03** — Most official injury-report rows publish neither an injury description nor a game status; the site renders those cells blank and flags them.
 
-**PR / merge (session `5cf5434e-nfl1`):** to be filled in after the merge — PR number and link, merge commit, merge result, Pages build status at the merged commit, and live-site re-read confirmation.
+**PR / merge (session `5cf5434e-nfl1`):**
+- Pull request: [#22](https://github.com/kanlerxz87-cyber/NFL1/pull/22) — `arena/5cf5434e-nfl1` → `main`, "Session 5cf5434e-nfl1: independent re-verification and integration record".
+- Merge result: MERGED via `gh pr merge 22 --merge` at 2026-11-12T22:26:01Z, merge commit `8de9917f09ae5c8f433fbd2300df89ee67d66867`, `mergeable_state: clean`.
+- Checks on the merged commit: `verify` success, `build` success, `deploy` success, `report-build-status` success (one superseded `build` run cancelled).
+- GitHub Pages: `gh api repos/kanlerxz87-cyber/NFL1/pages/builds/latest` → status `built`, commit `8de9917`, no error; source `main / /`, https enforced.
+- Live site re-read as a user: https://kanlerxz87-cyber.github.io/NFL1/ returns the Overview dashboard (source-linked own-lines, strategy-leaderboard, availability and verification tables); https://kanlerxz87-cyber.github.io/NFL1/pages/flagged.html returns the clearly labelled Flagged for Review page with every irregularity and its official source link. Flagged irregularities (F02, F03, F29 among them) did not block the merge and remain published for review.
+- Sources used for this record: GitHub REST API (pulls/22, commits/8de9917 check-runs, Pages builds latest) and the live Pages URL above.
 
