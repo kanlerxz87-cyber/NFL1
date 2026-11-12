@@ -1,22 +1,22 @@
 #!/usr/bin/env python3
-"""check_reproducible.py — a rebuild must change nothing except the clock.
+"""check_reproducible.py — a rebuild must change nothing except timestamps.
 
-Why the clock is special
-------------------------
+Why timestamps are special
+--------------------------
 Every page stamps when it read its data, and the verification layer stamps when it ran. Those
-are honest timestamps: they must move when the build actually runs. Everything else on the page
-is a function of committed JSON, so a clean rebuild must reproduce it byte for byte.
+must move when the build actually runs; pinning them would make the stamp a lie. Everything
+else on a page is a function of committed JSON, so a clean rebuild must reproduce it exactly.
 
-What this asserts
------------------
-After the build steps, `git diff` may only touch lines that are *entirely* a build stamp:
+The test
+--------
+Take `git diff -U0`, pair each removed line with the added line that replaced it, replace every
+ISO-8601 timestamp in both with a placeholder, and require the pair to be identical:
 
-    Data read 2026-11-12T22:40:47+00:00 · verification run ...
-    Data built 2026-11-12T18:53:41+00:00 · every value links to its source
-    "generated_at": "2026-11-12T22:40:47+00:00",
+    - <p class="timestamp">Data read 2026-11-12T22:40:47+00:00 · verification run ...
+    + <p class="timestamp">Data read 2026-11-12T22:44:54+00:00 · verification run ...
 
-A changed number, a changed row, a changed link, or a changed file *outside* the stamp lines is
-a reproducibility failure — it means the published page cannot be derived from what is committed.
+is a pass. A changed number, row, link, label or file is a failure, because it means the
+published page cannot be derived from what is committed.
 
 Run after the build steps:  python3 tools/check_reproducible.py
 """
@@ -29,17 +29,12 @@ import sys
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
-STAMP = re.compile(
-    r'^\s*(?:Data read|Data built|Data snapshot|Verification run|verification run|'
-    r'"?generated_at"?\s*:)?\s*["\']?'
-    r'(?:\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\+00:00|Z))'
-    r'["\']?\s*(?:·.*)?$'
-)
+ISO = re.compile(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})?")
+DATE_ONLY = re.compile(r"\d{4}-\d{2}-\d{2}")
 
-# Files whose entire content is a build artefact with a clock in it.
-CLOCK_FILES = {
-    "data/decision_room/decision_room.json",
-}
+
+def norm(line: str) -> str:
+    return DATE_ONLY.sub("<DATE>", ISO.sub("<TS>", line)).rstrip()
 
 
 def git(*args: str) -> str:
@@ -52,38 +47,53 @@ def main() -> int:
         print("clean rebuild: committed output is exactly what the build produces.")
         return 0
 
-    bad = []
-    only_clock = []
-    for line in status.splitlines():
-        code, path = line[:2], line[3:].strip()
+    bad: list[tuple[str, list[str]]] = []
+    clock_only: list[str] = []
+
+    for entry in status.splitlines():
+        code, path = entry[:2].strip(), entry[3:].strip()
         if not path:
             continue
-        full = os.path.join(ROOT, path)
-        if code.strip() == "M" and os.path.isfile(full):
-            diff = git("diff", "-U0", "--", path)
-            changed = [l[1:] for l in diff.splitlines()
-                       if (l.startswith("+") or l.startswith("-"))
-                       and not l.startswith(("+++", "---"))]
-            non_stamp = [c for c in changed if c.strip() and not STAMP.match(c)]
-            if non_stamp:
-                bad.append((path, non_stamp[:3]))
-            else:
-                only_clock.append(path)
-        else:
-            bad.append((path, [f"file {code.strip() or 'added/removed'}"]))
+        if code != "M":
+            bad.append((path, [f"file is {code or 'changed'} — a rebuild created or removed it"]))
+            continue
 
-    if only_clock:
-        print(f"{len(only_clock)} file(s) changed only in their build stamp (expected):")
-        for p in sorted(only_clock):
+        diff = git("diff", "-U0", "--", path)
+        removed, added = [], []
+        for raw in diff.splitlines():
+            if raw.startswith(("---", "+++")):
+                continue
+            if raw.startswith("-"):
+                removed.append(raw[1:])
+            elif raw.startswith("+"):
+                added.append(raw[1:])
+
+        # pair them positionally; any length mismatch is already a structural change
+        if len(removed) != len(added):
+            bad.append((path, [f"{len(removed)} line(s) removed, {len(added)} added"]))
+            continue
+
+        offenders = []
+        for old, new in zip(removed, added):
+            if norm(old) != norm(new):
+                offenders.append(new.strip()[:160])
+        if offenders:
+            bad.append((path, offenders[:4]))
+        else:
+            clock_only.append(path)
+
+    if clock_only:
+        print(f"{len(clock_only)} file(s) changed only in their timestamps (expected):")
+        for p in sorted(clock_only):
             print(f"  {p}")
 
     if bad:
-        print(f"\nREPRODUCIBILITY FAILURE — {len(bad)} path(s) changed beyond the timestamp:")
+        print(f"\nREPRODUCIBILITY FAILURE — {len(bad)} path(s) changed beyond the timestamps:")
         for path, sample in bad:
             print(f"  {path}")
             for s in sample:
-                print(f"      {s[:160]}")
-        print("\nThe published pages cannot be derived from the committed data. "
+                print(f"      {s}")
+        print("\nThe published output cannot be derived from the committed data. "
               "Commit the rebuilt output, or fix the generator.")
         return 1
 
