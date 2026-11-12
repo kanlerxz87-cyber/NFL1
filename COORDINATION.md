@@ -1,4 +1,3 @@
-EAD
 # COORDINATION.md — shared task board and integration log
 
 Repository: `kanlerxz87-cyber/NFL1` · Default branch `main` · Site: <https://kanlerxz87-cyber.github.io/NFL1/>
@@ -7,6 +6,7 @@ Sessions that have worked here:
 
 | Session | Branch | Contribution | Status |
 |---|---|---|---|
+| `4c043747-nfl1` | `arena/4c043747-nfl1` | **Final integration session**: line-by-line repo + site audit, fresh official re-verification, single reproducible build, navigation reachability, auto-refresh | in progress |
 | `690e397b-nfl1` | `arena/690e397b-nfl1` | Framework site, evidence register, flagged page (PR #1) | merged |
 | `533256e1-nfl1` | `arena/533256e1-nfl1` | Data tables (teams, standings, injuries CSV) + dashboard (PR #2, #3) | merged |
 | `80731db4-nfl1` | `arena/80731db4-nfl1` | Task board scaffold | not merged (superseded) |
@@ -17,6 +17,23 @@ Sessions that have worked here:
 > Branch naming: Arena fixes each session to a single branch named `arena/<session>-nfl1`, so the
 > `session-<id>/<task>` convention in the brief cannot be followed here. Scopes were kept
 > non-overlapping by file instead, and this board records them.
+
+## Task board — session `4c043747-nfl1` (final integration)
+
+Claimed 2026-11-12 (UTC). This session is the integration session named in the brief: it may
+change shared outputs (site index, navigation, CI) once every other task on the board is done.
+It edits only files listed in the scope column and never rewrites another session's data layer.
+
+| ID | Task | Status | Owner | File scope | Evidence |
+|---|---|---|---|---|---|
+| I1 | Line-by-line repo audit: inventory every published page, generator, data file and workflow; record what each owns | in progress | `4c043747` | `docs/repo-audit-2026-11-12.md` | 76 published HTML pages, 6 generators, 3 workflows, 1 squashed commit |
+| I2 | Fresh official re-verification of the league standings page (two retrievals, every column) and the Week-10 schedule | in progress | `4c043747` | `data/audit/4c043747/`, `tools/audit_official.py` | <https://www.nfl.com/standings/league/2026/reg>, <https://www.nfl.com/schedules/2026/REG10> |
+| I3 | One reproducible build: exactly one generator per published file; CI fails when the committed page differs from the generated page | in progress | `4c043747` | `pipeline/gen_site.py`, `scripts/verified/build_site.py`, `scripts/verified/normalize_nav.py`, `tools/build.py`, `.github/workflows/*.yml` | `git diff --exit-code` gate |
+| I4 | Navigation integrity: every published page reachable from the landing page; no broken internal link | in progress | `4c043747` | `tools/check_reachability.py`, `pipeline/gen_site.py`, `scripts/verified/normalize_nav.py` | reachability + link report |
+| I5 | Auto-refresh: the data bot regenerates the published pages so data and site never drift (no manual step) | in progress | `4c043747` | `.github/workflows/collect-data.yml` | bot commits `index.html` + `pages/` with `data/model/` |
+| I6 | Landing page rebuilt as a clean dashboard with a section map, the decisions requested, and links to every register | in progress | `4c043747` | `pipeline/gen_site.py`, `index.html` | new "What is published here" + "Decisions requested" panels |
+| I7 | New published page: official-source audit (32 clubs, source link per row, unstable cells flagged) | in progress | `4c043747` | `pipeline/gen_site.py`, `pages/audit.html` | `data/audit/4c043747/official_audit.json` |
+| I8 | Integration verification, PR, merge, Pages deploy check | unclaimed | `4c043747` | `COORDINATION.md` | recorded after merge |
 
 ## Task board (final state, session `7600ed8b-nfl1` integration)
 
