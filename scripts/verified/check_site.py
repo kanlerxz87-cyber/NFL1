@@ -31,8 +31,9 @@ def main() -> int:
     problems = []
     all_ids = {}
     for p in pages:
+        body = p.read_text(encoding="utf-8")
         parser = Links()
-        parser.feed(p.read_text(encoding="utf-8"))
+        parser.feed(body)
         all_ids[p.resolve()] = set(parser.ids)
         for h in parser.hrefs:
             if h.startswith(("http://", "https://", "mailto:")):
@@ -51,6 +52,34 @@ def main() -> int:
         missing = names - linked - {p.name}
         if missing:
             problems.append(f"{p.relative_to(ROOT)}: nav missing {sorted(missing)}")
+
+        # stray markdown emphasis renders as literal asterisks/underscores on a static page
+        prose = re.sub(r"<code\b.*?</code>|<pre\b.*?</pre>", "", body, flags=re.S)
+        prose = re.sub(r"<[^>]+>", " ", prose)
+        for pat, label in ((r"\*\*[^*\n]{1,80}\*\*", "**bold**"),
+                           (r"(?<![\w_])_[A-Za-z][A-Za-z '\-]{0,40}_(?![\w_])", "_emphasis_")):
+            for m in re.finditer(pat, prose):
+                problems.append(f"{p.relative_to(ROOT)}: literal markdown {label} in prose "
+                                f"({m.group(0)[:40]!r})")
+                break
+
+        # structural integrity: a table with headers but no data rows renders as an
+        # empty shell that reads like "nothing to see" instead of a failure.
+        for m in re.finditer(r"<table\b.*?</table>", body, re.S):
+            block = m.group(0)
+            if "<thead" in block and "<tbody" in block:
+                tbody = block.split("<tbody", 1)[1]
+                if "<tr" not in tbody:
+                    snippet = re.sub(r"<[^>]+>", " ", block)
+                    snippet = " ".join(snippet.split())[:60]
+                    problems.append(
+                        f"{p.relative_to(ROOT)}: table has a header but zero data rows "
+                        f"({snippet!r})")
+            # empty rendered cells hide missing values
+            for cell in re.finditer(r"<td[^>]*>\s*</td>", block):
+                problems.append(f"{p.relative_to(ROOT)}: empty <td> in table "
+                                f"({re.sub(r'<[^>]+>', ' ', block)[:40].strip()!r})")
+                break
 
     print(f"pages checked: {len(pages)}")
     if problems:
