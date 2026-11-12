@@ -1,0 +1,518 @@
+{
+  "week": 10,
+  "generated_at": "2026-11-12",
+  "sources": {
+    "injury_report": "https://www.nfl.com/injuries/",
+    "depth_chart_attempt": "https://www.nfl.com/teams/washington-commanders/depth-chart (404)"
+  },
+  "coverage_note": "Only rows where the official report states a game status are counted. Players listed with a practice status but no game status are NOT counted as out or available, because the source does not assert either.",
+  "limitation": "Depth order (starter / 2nd / 3rd / 4th string) is not published by the NFL and is therefore unknown for every team. Absence counts below are verified; replacement seniority is not.",
+  "teams": [
+    {
+      "team": "New England Patriots",
+      "abbr": "NE",
+      "verified_out": 3,
+      "verified_questionable": 0,
+      "offence": 2,
+      "defence": 1,
+      "specialists": 0,
+      "reported_clean": false,
+      "depth_order_known": false,
+      "players": [
+        {
+          "player": "Ben Brown",
+          "pos": "C",
+          "injury": "Knee",
+          "status": "Out",
+          "unit": "offence",
+          "source_url": "https://www.nfl.com/injuries/league/2026/reg10"
+        },
+        {
+          "player": "Carlton Davis III",
+          "pos": "CB",
+          "injury": "Knee",
+          "status": "Out",
+          "unit": "defence",
+          "source_url": "https://www.nfl.com/injuries/league/2026/reg10"
+        },
+        {
+          "player": "TreVeyon Henderson",
+          "pos": "RB",
+          "injury": "Illness",
+          "status": "Out",
+          "unit": "offence",
+          "source_url": "https://www.nfl.com/injuries/league/2026/reg10"
+        }
+      ]
+    },
+    {
+      "team": "Washington Commanders",
+      "abbr": "WAS",
+      "verified_out": 2,
+      "verified_questionable": 0,
+      "offence": 2,
+      "defence": 0,
+      "specialists": 0,
+      "reported_clean": false,
+      "depth_order_known": false,
+      "players": [
+        {
+          "player": "Lucas Patrick",
+          "pos": "C",
+          "injury": "Concussion",
+          "status": "Out",
+          "unit": "offence",
+          "source_url": "https://www.nfl.com/injuries/league/2026/reg10"
+        },
+        {
+          "player": "Colson Yankoff",
+          "pos": "TE",
+          "injury": "Knee",
+          "status": "Out",
+          "unit": "offence",
+          "source_url": "https://www.nfl.com/injuries/league/2026/reg10"
+        }
+      ]
+    },
+    {
+      "team": "New York Giants",
+      "abbr": "NYG",
+      "verified_out": 0,
+      "verified_questionable": 1,
+      "offence": 0,
+      "defence": 1,
+      "specialists": 0,
+      "reported_clean": false,
+      "depth_order_known": false,
+      "players": [
+        {
+          "player": "Malik Harrison",
+          "pos": "LB",
+          "injury": "Groin",
+          "status": "Questionable",
+          "unit": "defence",
+          "source_url": "https://www.nfl.com/injuries/league/2026/reg10"
+        }
+      ]
+    },
+    {
+      "team": "Atlanta Falcons",
+      "abbr": "ATL",
+      "verified_out": 0,
+      "verified_questionable": 0,
+      "offence": 0,
+      "defence": 0,
+      "specialists": 0,
+      "reported_clean": false,
+      "depth_order_known": false,
+      "players": []
+    },
+    {
+      "team": "Arizona Cardinals",
+      "abbr": "AZ",
+      "verified_out": 0,
+      "verified_questionable": 0,
+      "offence": 0,
+      "defence": 0,
+      "specialists": 0,
+      "reported_clean": false,
+      "depth_order_known": false,
+      "players": []
+    },
+    {
+      "team": "Baltimore Ravens",
+      "abbr": "BAL",
+      "verified_out": 0,
+      "verified_questionable": 0,
+      "offence": 0,
+      "defence": 0,
+      "specialists": 0,
+      "reported_clean": true,
+      "depth_order_known": false,
+      "players": []
+    },
+    {
+      "team": "Buffalo Bills",
+      "abbr": "BUF",
+      "verified_out": 0,
+      "verified_questionable": 0,
+      "offence": 0,
+      "defence": 0,
+      "specialists": 0,
+      "reported_clean": false,
+      "depth_order_known": false,
+      "players": []
+    },
+    {
+      "team": "Carolina Panthers",
+      "abbr": "CAR",
+      "verified_out": 0,
+      "verified_questionable": 0,
+      "offence": 0,
+      "defence": 0,
+      "specialists": 0,
+      "reported_clean": false,
+      "depth_order_known": false,
+      "players": []
+    },
+    {
+      "team": "Chicago Bears",
+      "abbr": "CHI",
+      "verified_out": 0,
+      "verified_questionable": 0,
+      "offence": 0,
+      "defence": 0,
+      "specialists": 0,
+      "reported_clean": false,
+      "depth_order_known": false,
+      "players": []
+    },
+    {
+      "team": "Cincinnati Bengals",
+      "abbr": "CIN",
+      "verified_out": 0,
+      "verified_questionable": 0,
+      "offence": 0,
+      "defence": 0,
+      "specialists": 0,
+      "reported_clean": true,
+      "depth_order_known": false,
+      "players": []
+    },
+    {
+      "team": "Cleveland Browns",
+      "abbr": "CLE",
+      "verified_out": 0,
+      "verified_questionable": 0,
+      "offence": 0,
+      "defence": 0,
+      "specialists": 0,
+      "reported_clean": false,
+      "depth_order_known": false,
+      "players": []
+    },
+    {
+      "team": "Dallas Cowboys",
+      "abbr": "DAL",
+      "verified_out": 0,
+      "verified_questionable": 0,
+      "offence": 0,
+      "defence": 0,
+      "specialists": 0,
+      "reported_clean": false,
+      "depth_order_known": false,
+      "players": []
+    },
+    {
+      "team": "Denver Broncos",
+      "abbr": "DEN",
+      "verified_out": 0,
+      "verified_questionable": 0,
+      "offence": 0,
+      "defence": 0,
+      "specialists": 0,
+      "reported_clean": false,
+      "depth_order_known": false,
+      "players": []
+    },
+    {
+      "team": "Detroit Lions",
+      "abbr": "DET",
+      "verified_out": 0,
+      "verified_questionable": 0,
+      "offence": 0,
+      "defence": 0,
+      "specialists": 0,
+      "reported_clean": false,
+      "depth_order_known": false,
+      "players": []
+    },
+    {
+      "team": "Green Bay Packers",
+      "abbr": "GB",
+      "verified_out": 0,
+      "verified_questionable": 0,
+      "offence": 0,
+      "defence": 0,
+      "specialists": 0,
+      "reported_clean": false,
+      "depth_order_known": false,
+      "players": []
+    },
+    {
+      "team": "Houston Texans",
+      "abbr": "HOU",
+      "verified_out": 0,
+      "verified_questionable": 0,
+      "offence": 0,
+      "defence": 0,
+      "specialists": 0,
+      "reported_clean": false,
+      "depth_order_known": false,
+      "players": []
+    },
+    {
+      "team": "Indianapolis Colts",
+      "abbr": "IND",
+      "verified_out": 0,
+      "verified_questionable": 0,
+      "offence": 0,
+      "defence": 0,
+      "specialists": 0,
+      "reported_clean": false,
+      "depth_order_known": false,
+      "players": []
+    },
+    {
+      "team": "Jacksonville Jaguars",
+      "abbr": "JAX",
+      "verified_out": 0,
+      "verified_questionable": 0,
+      "offence": 0,
+      "defence": 0,
+      "specialists": 0,
+      "reported_clean": false,
+      "depth_order_known": false,
+      "players": []
+    },
+    {
+      "team": "Kansas City Chiefs",
+      "abbr": "KC",
+      "verified_out": 0,
+      "verified_questionable": 0,
+      "offence": 0,
+      "defence": 0,
+      "specialists": 0,
+      "reported_clean": false,
+      "depth_order_known": false,
+      "players": []
+    },
+    {
+      "team": "Los Angeles Rams",
+      "abbr": "LA",
+      "verified_out": 0,
+      "verified_questionable": 0,
+      "offence": 0,
+      "defence": 0,
+      "specialists": 0,
+      "reported_clean": false,
+      "depth_order_known": false,
+      "players": []
+    },
+    {
+      "team": "Los Angeles Chargers",
+      "abbr": "LAC",
+      "verified_out": 0,
+      "verified_questionable": 0,
+      "offence": 0,
+      "defence": 0,
+      "specialists": 0,
+      "reported_clean": true,
+      "depth_order_known": false,
+      "players": []
+    },
+    {
+      "team": "Las Vegas Raiders",
+      "abbr": "LV",
+      "verified_out": 0,
+      "verified_questionable": 0,
+      "offence": 0,
+      "defence": 0,
+      "specialists": 0,
+      "reported_clean": false,
+      "depth_order_known": false,
+      "players": []
+    },
+    {
+      "team": "Miami Dolphins",
+      "abbr": "MIA",
+      "verified_out": 0,
+      "verified_questionable": 0,
+      "offence": 0,
+      "defence": 0,
+      "specialists": 0,
+      "reported_clean": false,
+      "depth_order_known": false,
+      "players": []
+    },
+    {
+      "team": "Minnesota Vikings",
+      "abbr": "MIN",
+      "verified_out": 0,
+      "verified_questionable": 0,
+      "offence": 0,
+      "defence": 0,
+      "specialists": 0,
+      "reported_clean": false,
+      "depth_order_known": false,
+      "players": []
+    },
+    {
+      "team": "New Orleans Saints",
+      "abbr": "NO",
+      "verified_out": 0,
+      "verified_questionable": 0,
+      "offence": 0,
+      "defence": 0,
+      "specialists": 0,
+      "reported_clean": false,
+      "depth_order_known": false,
+      "players": []
+    },
+    {
+      "team": "New York Jets",
+      "abbr": "NYJ",
+      "verified_out": 0,
+      "verified_questionable": 0,
+      "offence": 0,
+      "defence": 0,
+      "specialists": 0,
+      "reported_clean": false,
+      "depth_order_known": false,
+      "players": []
+    },
+    {
+      "team": "Philadelphia Eagles",
+      "abbr": "PHI",
+      "verified_out": 0,
+      "verified_questionable": 0,
+      "offence": 0,
+      "defence": 0,
+      "specialists": 0,
+      "reported_clean": false,
+      "depth_order_known": false,
+      "players": []
+    },
+    {
+      "team": "Pittsburgh Steelers",
+      "abbr": "PIT",
+      "verified_out": 0,
+      "verified_questionable": 0,
+      "offence": 0,
+      "defence": 0,
+      "specialists": 0,
+      "reported_clean": false,
+      "depth_order_known": false,
+      "players": []
+    },
+    {
+      "team": "Seattle Seahawks",
+      "abbr": "SEA",
+      "verified_out": 0,
+      "verified_questionable": 0,
+      "offence": 0,
+      "defence": 0,
+      "specialists": 0,
+      "reported_clean": true,
+      "depth_order_known": false,
+      "players": []
+    },
+    {
+      "team": "San Francisco 49ers",
+      "abbr": "SF",
+      "verified_out": 0,
+      "verified_questionable": 0,
+      "offence": 0,
+      "defence": 0,
+      "specialists": 0,
+      "reported_clean": false,
+      "depth_order_known": false,
+      "players": []
+    },
+    {
+      "team": "Tampa Bay Buccaneers",
+      "abbr": "TB",
+      "verified_out": 0,
+      "verified_questionable": 0,
+      "offence": 0,
+      "defence": 0,
+      "specialists": 0,
+      "reported_clean": false,
+      "depth_order_known": false,
+      "players": []
+    },
+    {
+      "team": "Tennessee Titans",
+      "abbr": "TEN",
+      "verified_out": 0,
+      "verified_questionable": 0,
+      "offence": 0,
+      "defence": 0,
+      "specialists": 0,
+      "reported_clean": false,
+      "depth_order_known": false,
+      "players": []
+    }
+  ],
+  "reported_no_injuries": [
+    {
+      "team_abbr": "SEA",
+      "source_url": "https://www.nfl.com/injuries/league/2026/reg10"
+    },
+    {
+      "team_abbr": "CIN",
+      "source_url": "https://www.nfl.com/injuries/league/2026/reg10"
+    },
+    {
+      "team_abbr": "LAC",
+      "source_url": "https://www.nfl.com/injuries/league/2026/reg10"
+    },
+    {
+      "team_abbr": "BAL",
+      "source_url": "https://www.nfl.com/injuries/league/2026/reg10"
+    }
+  ],
+  "official_qb_changes": [
+    {
+      "team": "MIA",
+      "change": "Malik Willis (QB) placed on injured reserve (groin)",
+      "status": "IR",
+      "replacement_stated": "Kyle McCord \"in line for first start\"",
+      "article_url": "https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start",
+      "listing_source_url": "https://www.nfl.com/injuries/league/2026/reg10",
+      "verification_level": "headline on official NFL.com injuries page"
+    },
+    {
+      "team": "SEA",
+      "change": "Sam Darnold (QB) ruled out for Week 10 vs Raiders",
+      "status": "ruled out",
+      "replacement_stated": "Drew Lock \"expected to start again\"",
+      "article_url": "https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again",
+      "listing_source_url": "https://www.nfl.com/injuries/league/2026/reg10",
+      "verification_level": "headline on official NFL.com injuries page"
+    },
+    {
+      "team": "AZ",
+      "change": "Jacoby Brissett benched at QB (Week 8) then Carson Beck to start Week 10",
+      "status": "change announced",
+      "replacement_stated": "Carson Beck named starter",
+      "article_url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-wednesday-nov-11",
+      "listing_source_url": "https://www.nfl.com/injuries/league/2026/reg10",
+      "verification_level": "headline on official NFL.com injuries page"
+    },
+    {
+      "team": "CLE",
+      "change": "Deshaun Watson to start Week 10 vs Texans",
+      "status": "change announced",
+      "replacement_stated": "Deshaun Watson in at QB",
+      "article_url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-wednesday-nov-11",
+      "listing_source_url": "https://www.nfl.com/injuries/league/2026/reg10",
+      "verification_level": "headline on official NFL.com injuries page"
+    },
+    {
+      "team": "BAL",
+      "change": "Lamar Jackson (QB) right thumb out 6-9 weeks and placed on injured reserve",
+      "status": "out / IR",
+      "replacement_stated": "not named in verified headline",
+      "article_url": "https://www.nfl.com/news/ravens-lamar-jackson-right-thumb-out-6-9-weeks-expects-to-return-this-season",
+      "listing_source_url": "https://www.nfl.com/injuries/league/2026/reg10",
+      "verification_level": "headline on official NFL.com injuries page"
+    }
+  ],
+  "totals": {
+    "verified_out": 5,
+    "verified_questionable": 1,
+    "teams_with_clean_report": 4,
+    "teams_with_verified_absence": 3
+  }
+}

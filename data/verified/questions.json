@@ -1,0 +1,86 @@
+[
+  {
+    "id": "Q01",
+    "question": "Which team is actually better, after adjusting for opponents faced?",
+    "requires": "Opponent-adjusted offence/defence estimates from a complete, verified game log.",
+    "answer": "Answerable and computed. Ridge opponent-adjusted ratings are published for all 32 teams from 136 verified games. Caveat: 8-9 games per team is a small sample, and the ratings failed the forward-test gate for predicting results, so they rank teams descriptively but are not yet decision-grade.",
+    "status": "partial"
+  },
+  {
+    "id": "Q02",
+    "question": "Do we have every completed 2026 result, verified?",
+    "requires": "Every final score for weeks 1-9, reconciling to the official standings.",
+    "answer": "Yes. 136 of 136 completed games (weeks 1-9) were captured from official NFL week pages. All 32 teams' game-by-game win/loss and points-for/points-against reproduce nfl.com standings exactly, so no result is missing or mistyped.",
+    "status": "answered"
+  },
+  {
+    "id": "Q03",
+    "question": "Is there a home-field advantage we can price?",
+    "requires": "Home win rate and home scoring margin with a confidence interval.",
+    "answer": "Measured: home teams won 49.6% of decided games (95% CI 41.2%-58.1%, n=135). The interval comfortably includes 50%, and the fitted HFA is slightly negative. Treating a home edge as known would be unjustified on this data.",
+    "status": "answered"
+  },
+  {
+    "id": "Q04",
+    "question": "Can we generate our own lines today?",
+    "requires": "A fitted model plus out-of-sample evidence it beats naive baselines.",
+    "answer": "Lines are generated for all 14 Week 10 games, but they fail the gate: the model's mean absolute margin error (10.93) is worse than the home-field-only baseline (10.62), with a paired-bootstrap 95% CI on the difference of [-0.23, +0.86] and only a 13.3% probability the model is better. Published for transparency, explicitly not recommended for use.",
+    "status": "answered"
+  },
+  {
+    "id": "Q05",
+    "question": "What is the actual market price for each game?",
+    "requires": "Timestamped closing lines and prices from a lawful, official or licensed source.",
+    "answer": "Unknown. No official NFL odds or closing-line feed is reachable from this environment, and no price data exists in the repository. Without it, edge, ROI, and against-the-spread accuracy cannot be computed at all. This is the single largest blocker to the whole project.",
+    "status": "unknown"
+  },
+  {
+    "id": "Q06",
+    "question": "Which teams are missing starters right now, and how much does it matter?",
+    "requires": "Dated injury report, the depth order behind each player, and evidence of who actually replaced whom.",
+    "answer": "Partially answerable. The official Week 10 report is captured for rows that state a game status (6 rows) and 4 teams explicitly report no injuries. But official NFL depth charts are not published — nfl.com/teams/<team>/depth-chart returns 404 — so '2nd/3rd string' cannot be established from an official source. Replacement-chain claims stay blank.",
+    "status": "partial"
+  },
+  {
+    "id": "Q07",
+    "question": "Has a backup quarterback already started for a team in 2026, and what happened?",
+    "requires": "An official statement that the starter is out and a named replacement starting.",
+    "answer": "Yes for several teams, and only where NFL.com states it directly: Seahawks (Darnold ruled out, Drew Lock expected to start), Dolphins (Willis to IR, Kyle McCord in line for first start), Browns (Deshaun Watson to start), Cardinals (Carson Beck to start). These are cited on the Flagged page with links; performance impact is NOT yet measured.",
+    "status": "partial"
+  },
+  {
+    "id": "Q08",
+    "question": "Are two bets from the same game independent?",
+    "requires": "Measured correlations between the relevant outcomes.",
+    "answer": "No, and not safely assumed. Points scored correlate with opponent quality at r=+0.386, and margin correlates with total at r=-0.161. Any same-game parlay must be treated as dependent until a >2-leg joint model exists.",
+    "status": "answered"
+  },
+  {
+    "id": "Q09",
+    "question": "Is the apparent signal skill or luck?",
+    "requires": "Hit rate with CI, exact binomial p, multiple-testing correction, calibration, and split-half stability.",
+    "answer": "Luck cannot be ruled out. The strongest strategy hits 60.7% straight up, but after Holm-Bonferroni correction across the four strategies tested, p=0.0626 — not significant — and its Brier skill is negative (-0.038), meaning its probabilities are worse than a coin flip.",
+    "status": "answered"
+  },
+  {
+    "id": "Q10",
+    "question": "Should the leaderboard pay real rewards yet?",
+    "requires": "A metric that survives validation, rules for entry, prize terms, and legal review.",
+    "answer": "No. No strategy has passed the gates, no price data exists to compute returns, and prize/eligibility/jurisdiction terms are undecided. A paper-only leaderboard is defensible now; paid rewards are not.",
+    "status": "unknown"
+  },
+  {
+    "id": "Q11",
+    "question": "Can player prop lines or prop combos be built?",
+    "requires": "Official per-player usage, attempts/targets, and yardage distributions.",
+    "answer": "Unknown/blocked. Row-level player statistics were not obtainable in this environment. Building prop lines from memory or assertion would violate the no-hallucination requirement, so props remain explicitly out of scope rather than estimated.",
+    "status": "unknown"
+  },
+  {
+    "id": "Q12",
+    "question": "Does the data keep itself current without manual entry?",
+    "requires": "An automated refresh that re-verifies on each update.",
+    "answer": "Partially. The validation gate, model, and site build are scripted and reproducible from stored data, and a GitHub Actions workflow runs the gate on every push. The fetch step itself still requires the page-fetch channel, which is an environment limitation, not a solved automation.",
+    "status": "partial"
+  }
+]

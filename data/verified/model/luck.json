@@ -1,0 +1,255 @@
+{
+  "metric_definition": {
+    "metric": "straight-up winner accuracy (which team wins the game)",
+    "not_measured": "against-the-spread (ATS) accuracy",
+    "why_ats_missing": "ATS requires an observed closing line for every game. No official NFL odds/closing-line source is reachable from this environment and none is stored in the repo, so spread-beating accuracy and realised betting P/L are UNVERIFIED and left blank.",
+    "interpretation_warning": "Picking winners is materially easier than covering a spread. A ~60% straight-up hit rate is fully consistent with an average-accuracy forecaster and says nothing about beating a price."
+  },
+  "assumptions": {
+    "price_model": "-110 standard juice applied flat to every pick",
+    "price_is_observed_market": false,
+    "note": "No official NFL odds source is reachable from this environment and none is stored in the repo. P/L figures are a sensitivity scenario, not realised returns, and cannot be used to claim profitability.",
+    "ties": "ties excluded from accuracy (NFL regular season can tie; 1 tie in sample)"
+  },
+  "leaderboard": [
+    {
+      "strategy": "B3 last-5 differential",
+      "n_decided": 135,
+      "ties_excluded": 1,
+      "correct": 82,
+      "accuracy": 0.6074,
+      "acc_ci95": [
+        0.5259,
+        0.6889
+      ],
+      "p_value_vs_coinflip": 0.01564,
+      "brier": 0.2594,
+      "brier_coinflip": 0.25,
+      "brier_skill_score": -0.0377,
+      "log_loss": 0.7577,
+      "accuracy_weeks_1_5": 0.5897,
+      "accuracy_weeks_6_9": 0.6316,
+      "calibration": [
+        {
+          "bucket": 1,
+          "n": 28,
+          "mean_pred": 0.194,
+          "observed": 0.393
+        },
+        {
+          "bucket": 2,
+          "n": 27,
+          "mean_pred": 0.367,
+          "observed": 0.37
+        },
+        {
+          "bucket": 3,
+          "n": 27,
+          "mean_pred": 0.505,
+          "observed": 0.519
+        },
+        {
+          "bucket": 4,
+          "n": 27,
+          "mean_pred": 0.603,
+          "observed": 0.556
+        },
+        {
+          "bucket": 5,
+          "n": 27,
+          "mean_pred": 0.834,
+          "observed": 0.63
+        }
+      ],
+      "assumed_price": -110.0,
+      "units_at_assumed_price": 21.55,
+      "units_per_bet": 0.1596,
+      "roi_at_assumed_price": 0.0016,
+      "p_value_holm_adjusted": 0.06256,
+      "survives_multiple_testing_5pct": false,
+      "rank": 1
+    },
+    {
+      "strategy": "B2 season-to-date differential",
+      "n_decided": 135,
+      "ties_excluded": 1,
+      "correct": 82,
+      "accuracy": 0.6074,
+      "acc_ci95": [
+        0.5259,
+        0.6889
+      ],
+      "p_value_vs_coinflip": 0.01564,
+      "brier": 0.2609,
+      "brier_coinflip": 0.25,
+      "brier_skill_score": -0.0438,
+      "log_loss": 0.7617,
+      "accuracy_weeks_1_5": 0.5897,
+      "accuracy_weeks_6_9": 0.6316,
+      "calibration": [
+        {
+          "bucket": 1,
+          "n": 28,
+          "mean_pred": 0.204,
+          "observed": 0.429
+        },
+        {
+          "bucket": 2,
+          "n": 27,
+          "mean_pred": 0.384,
+          "observed": 0.296
+        },
+        {
+          "bucket": 3,
+          "n": 27,
+          "mean_pred": 0.522,
+          "observed": 0.556
+        },
+        {
+          "bucket": 4,
+          "n": 27,
+          "mean_pred": 0.606,
+          "observed": 0.556
+        },
+        {
+          "bucket": 5,
+          "n": 27,
+          "mean_pred": 0.831,
+          "observed": 0.63
+        }
+      ],
+      "assumed_price": -110.0,
+      "units_at_assumed_price": 21.55,
+      "units_per_bet": 0.1596,
+      "roi_at_assumed_price": 0.0016,
+      "p_value_holm_adjusted": 0.06256,
+      "survives_multiple_testing_5pct": false,
+      "rank": 2
+    },
+    {
+      "strategy": "model (opponent-adjusted, ridge)",
+      "n_decided": 135,
+      "ties_excluded": 1,
+      "correct": 70,
+      "accuracy": 0.5185,
+      "acc_ci95": [
+        0.4296,
+        0.6
+      ],
+      "p_value_vs_coinflip": 0.73079,
+      "brier": 0.2558,
+      "brier_coinflip": 0.25,
+      "brier_skill_score": -0.0233,
+      "log_loss": 0.7066,
+      "accuracy_weeks_1_5": 0.4872,
+      "accuracy_weeks_6_9": 0.5614,
+      "calibration": [
+        {
+          "bucket": 1,
+          "n": 28,
+          "mean_pred": 0.387,
+          "observed": 0.464
+        },
+        {
+          "bucket": 2,
+          "n": 27,
+          "mean_pred": 0.473,
+          "observed": 0.519
+        },
+        {
+          "bucket": 3,
+          "n": 27,
+          "mean_pred": 0.516,
+          "observed": 0.481
+        },
+        {
+          "bucket": 4,
+          "n": 27,
+          "mean_pred": 0.557,
+          "observed": 0.556
+        },
+        {
+          "bucket": 5,
+          "n": 27,
+          "mean_pred": 0.653,
+          "observed": 0.444
+        }
+      ],
+      "assumed_price": -110.0,
+      "units_at_assumed_price": -1.36,
+      "units_per_bet": -0.0101,
+      "roi_at_assumed_price": -0.0001,
+      "p_value_holm_adjusted": 0.73079,
+      "survives_multiple_testing_5pct": false,
+      "rank": 3
+    },
+    {
+      "strategy": "B1 home field only",
+      "n_decided": 135,
+      "ties_excluded": 1,
+      "correct": 55,
+      "accuracy": 0.4074,
+      "acc_ci95": [
+        0.3259,
+        0.4889
+      ],
+      "p_value_vs_coinflip": 0.03847,
+      "brier": 0.2502,
+      "brier_coinflip": 0.25,
+      "brier_skill_score": -0.0008,
+      "log_loss": 0.6935,
+      "accuracy_weeks_1_5": 0.4487,
+      "accuracy_weeks_6_9": 0.3509,
+      "calibration": [
+        {
+          "bucket": 1,
+          "n": 28,
+          "mean_pred": 0.49,
+          "observed": 0.75
+        },
+        {
+          "bucket": 2,
+          "n": 27,
+          "mean_pred": 0.502,
+          "observed": 0.37
+        },
+        {
+          "bucket": 3,
+          "n": 27,
+          "mean_pred": 0.505,
+          "observed": 0.333
+        },
+        {
+          "bucket": 4,
+          "n": 27,
+          "mean_pred": 0.509,
+          "observed": 0.519
+        },
+        {
+          "bucket": 5,
+          "n": 27,
+          "mean_pred": 0.539,
+          "observed": 0.481
+        }
+      ],
+      "assumed_price": -110.0,
+      "units_at_assumed_price": -30.0,
+      "units_per_bet": -0.2222,
+      "roi_at_assumed_price": -0.0022,
+      "p_value_holm_adjusted": 0.07694,
+      "survives_multiple_testing_5pct": false,
+      "rank": 4
+    }
+  ],
+  "gate_summary": {
+    "any_strategy_significant_after_multiple_testing": false,
+    "any_strategy_positive_brier_skill": false,
+    "required_before_any_real_use": [
+      "observed market closing lines with timestamps (unavailable)",
+      "at least one full season of forward-test predictions",
+      "pre-registered hypotheses to avoid multiple-testing bias",
+      "independent replication of the signal"
+    ]
+  },
+  "input_rows": 136
+}

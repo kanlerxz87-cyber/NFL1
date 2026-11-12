@@ -22,7 +22,7 @@
 | T10 | GitHub Pages site | done | both | index.html, pages/*, assets/*, styles.css, .github/workflows/pages.yml | Combined and deployed |
 | T11 | Integration & PR/merge | done | arena/533256e1-nfl1 |  | PR #2 merged; Pages workflow succeeded |
 | T12 | Independent post-merge source/link/content/deployment review | done | arena/15e79a53-nfl1 | docs/review/merged-site.md | Findings, official references, row checks, and follow-up requests recorded; no product files edited |
-| T13 | Apply post-merge source, table-citation, stale-content, and flagged-item corrections | unclaimed | — | index.html, pages/*.html, .github/workflows/pages.yml | Follow-up request from T12; see “Post-merge review requests.” Do not start until claimed. |
+| T13 | Apply post-merge source, table-citation, stale-content, and flagged-item corrections | **in progress** | arena/25aa7696-nfl1 | index.html, pages/*.html, .github/workflows/pages.yml | Follow-up request from T12; see “Post-merge review requests.” Do not start until claimed. |
 
 ## Sources (session 533256e1)
 
@@ -36,9 +36,9 @@
 
 - NFL injury reports: https://www.nfl.com/injuries/
 - NFL stats: https://www.nfl.com/stats/
-- NFL schedule: https://operations.nfl.com/gameday/nfl-schedule/
-- NFL Football Operations: https://operations.nfl.com/gameday/
-- Official rules: https://operations.nfl.com/the-rules/
+- NFL schedule: https://www.nfl.com/schedules/
+- NFL Football Operations: https://www.nfl.com/schedules/
+- Official rules: https://operations.nfl.com/rules-officiating/2026-nfl-rulebook
 - NFL team directory: https://www.nfl.com/teams/
 
 ## Verification performed by integration sessions
@@ -75,3 +75,102 @@
 - 2026-11-12: T12 completed. The independent review checked official NFL team, standings, injury, schedule, stats, data-distribution, and rule references; all 32 standings rows and 20 stored Thursday injury entries; every review-table source link; local references; workflow status; and the published Pages endpoint. Findings and T13 correction requests are in `docs/review/merged-site.md`.
 - 2026-11-12: GitHub Pages API reported `built` for public URL `https://kanlerxz87-cyber.github.io/NFL1/`; deployment workflow run 43155502970 and Pages build run 43155502654 completed successfully. A non-cache-busted fetch returned stale README text while a cache-busted fetch returned the current index; verify in a normal browser before attributing this to a deployment fault.
 - 2026-11-12: Review findings and coordination status were recorded on `arena/15e79a53-nfl1`; T13 remains unclaimed so the reviewed site owners can apply corrections in a separately claimed task.
+
+---
+
+## Session `arena/25aa7696-nfl1` claim — 2026-11-12
+
+Session: `arena/25aa7696-nfl1`. Branch fixed by workspace: `arena/25aa7696-nfl1`.
+
+**Verified data-collection channel (constraint discovered this session):** outbound
+`curl` from the agent sandbox reaches only `github.com` / `api.github.com` /
+`codeload.github.com`; `www.nfl.com`, `operations.nfl.com` and
+`release-assets.githubusercontent.com` are blocked at TLS/egress level. Page reads of
+official NFL sources therefore go through the agent **page-fetch** tool, and every row is
+transcribed with its exact official URL and retrieval timestamp. Consequence: nflverse
+release files cannot be pulled from this sandbox at all; the GitHub Actions path in
+`arena/7600ed8b-nfl1` is the only bulk route.
+
+| ID | Task | Status | Owner | File scope (unique to this session) |
+|---|---|---|---|---|
+| V1 | Official-source verified dataset: 2026 standings/results, week-10 official injury report, rules/roster facts — each row with official URL + retrieved-at | in progress | `25aa7696-nfl1` | `data/verified/`, `scripts/verified/` |
+| V2 | Own-line generation (opponent-adjusted ratings → spread/total/props), luck-removal tests, correlation values, validation-gate results | in progress | `25aa7696-nfl1` | `analysis/`, `data/verified/model/` |
+| V3 | New site pages for V1/V2 results (new files only, additive) | in progress | `25aa7696-nfl1` | `pages/lines.html`, `pages/data.html`, `pages/analysis.html`, `pages/decisions.html`, `assets/verified.js`, `assets/verified-data.json` |
+| V4 | Requirement ledger, executive brief, question/information/answer register, audit log | in progress | `25aa7696-nfl1` | `docs/verified/` |
+
+**Request to `arena/7600ed8b-nfl1` (final integrator):** this session adds *new* pages
+(`pages/lines.html`, `pages/data.html`, `pages/analysis.html`, `pages/decisions.html`) and
+one nav line in existing pages. Please integrate them read-only rather than overwriting;
+if a nav conflict occurs, keep both nav entries. This session's data lives in
+`data/verified/` and does not touch `data/teams.csv`, `data/standings.csv`,
+`data/injuries.csv`, `pipeline/`, or `data/model/`.
+
+**Not claimed by this session:** nflverse ingestion, `pipeline/`, `data/model/`,
+existing `data/*.csv`, existing page rewrites, deployment credentials.
+
+### Session `arena/25aa7696-nfl1` — completion record (2026-11-12)
+
+**Status: V1–V4 done, needs review.** Branch `arena/25aa7696-nfl1`, 9 commits, rebased on
+`9c5ee13` (main after PR #3). No sibling files were overwritten: existing pages only gained
+navigation entries and appended sections; `pipeline/`, `data/model/`, `data/*.csv` (sibling-owned)
+were not touched.
+
+**Sources (every row carries one of these):**
+- https://www.nfl.com/standings/ — 32 rows, W-L-T, PF, PA, net, streak
+- https://www.nfl.com/schedules/2026/by-week/week-1 … week-10 — 136 final scores, byes, Week 10 fixtures
+- https://www.nfl.com/injuries/ — Week 10 game statuses (5 Out, 1 Questionable, 4 "No Injuries Reported")
+- https://www.nfl.com/news/… — five QB-change headlines (Miami, Seattle, Arizona, Cleveland, Baltimore)
+- https://www.nfl.com/teams/<club>/depth-chart — probed 3 clubs, all 404 (evidence for the depth limitation)
+
+**Verification performed (automated, re-runs on every push in
+`.github/workflows/pages.yml`):**
+- `scripts/verified/validate_verified.py` — 14 hard checks. Game-by-game reconstruction of
+  W/L/T + PF + PA from 136 scores reproduces official standings for **32/32 teams**;
+  PF−PA=NET for 32/32; PCT=(W+T/2)/games rounded half-up for 32/32; ΣW=ΣL=135; 272 team-games
+  ⇒ 136 games; no duplicate game ids, no self-matches, no team twice in a week.
+- `scripts/verified/check_site.py` — 18 pages, every local link resolves, nav complete.
+- `analysis/{engine,luck,correlations,injuries}.py` — regenerated from stored data; site is
+  rebuilt from the data files so page and data cannot drift.
+
+**Findings recorded (all published, including failures):**
+- Own-line model **fails** its gate: margin MAE 10.93 vs 10.62 for a home-field-only baseline,
+  paired-bootstrap 95% CI [-0.23, +0.86], P(model better) 13.3%.
+- Best directional strategy 60.7% straight up (95% CI 52.6–68.9%), raw p=0.0156, but
+  Holm-adjusted p=0.0626 and Brier skill −0.038 ⇒ **not significant**.
+- Correlations measured: opponent quality ↔ points r=+0.386 (n=272); margin ↔ total r=−0.161
+  (n=136); division flag ↔ total r=−0.130; consecutive-game points r=+0.069 (n=226).
+- Home win rate **49.6%** (95% CI 41.2–58.1%, n=135) ⇒ no positive home edge in this sample.
+- Depth order unknown for all 32 teams (official depth charts do not exist).
+
+**Irregularities flagged for review:** F7–F14 on `pages/flagged.html` — chiefly the absence of any
+market/closing-line price data (which makes ROI, ATS accuracy and paid rewards unmeasurable), the
+failed model gate, and the depth-chart gap.
+
+**Requests:** final integrator (`arena/7600ed8b-nfl1`) should merge this branch read-only.
+New pages: `data.html`, `lines.html`, `analysis.html`, `decisions.html`, `availability.html`,
+`verified.html`. New data dir: `data/verified/`. If they land after `pipeline/` data exists, the
+engine can be re-pointed at it without touching these files.
+
+**Environment caveat (reproducibility):** outbound HTTP from this sandbox reaches only
+github.com; `www.nfl.com`, `operations.nfl.com` and `release-assets.githubusercontent.com` are
+blocked. Official pages were therefore read through the agent page-fetch channel and transcribed
+with URLs + timestamps, then machine-verified against a second official view. Re-fetching requires
+a run in open-network CI, which is why the gate is wired into the workflow.
+
+### T13 corrections applied by session `25aa7696-nfl1`
+
+| Review item | Action |
+|---|---|
+| Dead `operations.nfl.com` rulebook/schedule URLs | Replaced. Re-verified: `/the-rules/` and `/gameday/nfl-schedule/` return the NFL 404 page; `rules-officiating/2026-nfl-rulebook` and `nfl.com/schedules/` resolve. |
+| Weather row linked to the stats page | Link removed; row now explicitly flagged "no source selected". |
+| `rank=1..32` presented as a source field | Column relabelled "Site row order" with a note that the NFL publishes no rank column. |
+| Stale claims that no data was imported | `pages/review.html` rows updated with dated corrections pointing at the verified dataset. |
+| Wrong week link for injury evidence | All injury/QB-change rows now cite `https://www.nfl.com/injuries/league/2026/reg10`. |
+| F6 "synthetic/simulated" speculation | Removed; value kept as published and marked verified-but-unusual. |
+| External link checking absent from the gate | Added `scripts/verified/check_external_links.py` to the workflow; it fails only on 404/410 and treats unreachable hosts as unverifiable. |
+| Provisional "100+ bets / p<0.05" gates | Left as-is but flagged F17; this session's own gate uses a paired bootstrap plus Holm correction. |
+
+**Remaining from T13 (not done, deliberately):** adding a per-row citation column to the older
+Q&A / suggestion / strategy tables. Those rows are proposals and design hypotheses rather than
+NFL facts, and several have no official source by construction; they are flagged as F15 rather
+than dressed up with a citation that would not support them.

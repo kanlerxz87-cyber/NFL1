@@ -1,0 +1,82 @@
+{
+  "n_games_evaluated": 136,
+  "weeks": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "leaderboard": [
+    {
+      "strategy": "B1 home field only",
+      "n": 136,
+      "mae_margin": 10.62299235306698,
+      "rmse_margin": 13.26835696821335,
+      "mae_total": 11.862006431250228,
+      "side_accuracy": 0.40441176470588236,
+      "corr_margin": -0.03901660801296555,
+      "corr_total": -0.16345142155651454
+    },
+    {
+      "strategy": "model (opponent-adjusted, ridge)",
+      "n": 136,
+      "mae_margin": 10.927304174426089,
+      "rmse_margin": 13.567083916285211,
+      "mae_total": 12.116974695731653,
+      "side_accuracy": 0.5147058823529411,
+      "corr_margin": 0.05319314877096468,
+      "corr_total": -0.07387279666257791
+    },
+    {
+      "strategy": "B2 season-to-date differential",
+      "n": 136,
+      "mae_margin": 12.931558228607932,
+      "rmse_margin": 16.822100631506274,
+      "mae_total": 11.862006431250228,
+      "side_accuracy": 0.6029411764705882,
+      "corr_margin": 0.1219911774053357,
+      "corr_total": -0.16345142155651454
+    },
+    {
+      "strategy": "B3 last-5 differential",
+      "n": 136,
+      "mae_margin": 12.951230771606777,
+      "rmse_margin": 16.771678823831554,
+      "mae_total": 11.862006431250228,
+      "side_accuracy": 0.6029411764705882,
+      "corr_margin": 0.14218695462166522,
+      "corr_total": -0.16345142155651454
+    }
+  ],
+  "paired_bootstrap_model_vs_best_baseline": {
+    "comparison": "model vs B1 home field only",
+    "mean_abs_err_difference": 0.30431182135910795,
+    "ci95": [
+      -0.2315520669619571,
+      0.8572563570882488
+    ],
+    "p_model_better": 0.1333
+  },
+  "gates": {
+    "G1_time_ordered": true,
+    "G2_baselines_published": true,
+    "G3_nested_hyperparameter_selection": true,
+    "G4_uncertainty_reported": true,
+    "model_beats_best_baseline_with_95pct_confidence": false,
+    "model_side_accuracy_above_50pct": false
+  },
+  "verdict": "FAIL \u2014 the opponent-adjusted model does not beat the published baselines with 95% confidence; do not use these lines for decisions.",
+  "hfa_points_estimate": -0.113,
+  "inputs": [
+    "data/verified/games_2026.csv",
+    "data/verified/standings_2026.csv"
+  ],
+  "residual_sd_margin": 13.555312924930115,
+  "residual_sd_total": 14.97376439978219,
+  "lambda_selected_full": 16.0
+}
