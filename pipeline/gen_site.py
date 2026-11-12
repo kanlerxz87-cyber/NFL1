@@ -568,27 +568,33 @@ def injuries_page(avail, dash):
     t_rows = [[
         f"<strong>{esc(t['team'])}</strong>", esc(t.get("name")),
         t["starters_out"], t["starters_doubtful"], t["starters_questionable"],
+        t.get("starters_practice_only", 0),
         num(t.get("attrition_index_0_100")), num(t.get("backup_experience_avg")),
         num(t.get("backup_snaps_avg"), 0),
         src(t.get("source") or SOURCE["injuries"], "NFL injuries"),
     ] for t in teams]
-    t_tbl = table(["Team", "Club", "Starters out", "Doubtful", "Questionable",
-                   "Attrition index (0-100)", "Replacement yrs exp", "Replacement snaps",
-                   "Source"], t_rows,
+    t_tbl = table(["Team", "Club", "Out", "Doubtful", "Questionable",
+                   "Practice-only DNP/limited", "Attrition index (0-100)",
+                   "Replacement yrs exp", "Replacement snaps", "Source"], t_rows,
                   note=("Attrition index = sum over unavailable starters of position weight x status "
                         "weight (Out 1.0, Doubtful 0.7, Questionable 0.25), rescaled to the worst "
                         "team this week. It is a model assumption, not an NFL statistic."))
 
     p_rows = [[
         f"<strong>{esc(p['player'])}</strong>", esc(p["team"]), esc(p["position"]),
-        esc(p.get("depth_slot")), badge(p.get("game_status")),
+        esc(p.get("depth_slot")),
+        badge(p.get("game_status")) if p.get("game_status") else '<span class="missing">no game designation</span>',
+        esc(p.get("signal") or ""),
         esc(p.get("injury") or "—"), esc(p.get("practice_status") or "—"),
         esc(p.get("replacement") or "none listed"), num(p.get("replacement_years_exp")),
         num(p.get("replacement_snaps_2026"), 0),
         src(p.get("source") or SOURCE["injuries"], "NFL injuries"),
     ] for p in players]
-    p_tbl = table(["Player", "Team", "Pos", "Depth slot", "Game status", "Injury",
-                   "Practice", "Next man up", "Next man yrs", "Next man snaps", "Source"], p_rows)
+    p_tbl = table(["Player", "Team", "Pos", "Depth slot", "Game status", "Signal", "Injury",
+                   "Practice", "Next man up", "Next man yrs", "Next man snaps", "Source"], p_rows,
+                  note=("Clubs publish practice participation before game designations. Rows whose "
+                        "only signal is practice are labelled, weighted lower, and never presented "
+                        "as a game-day decision."))
 
     limits = "".join(f"<li>{esc(x)}</li>" for x in method.get("limits", []))
     weights = method.get("position_weights", {})
@@ -621,6 +627,9 @@ def injuries_page(avail, dash):
   next at that exact position slot, then measures the replacement's experience and 2026 snaps.
   What it cannot yet do is prove who took the first snap — see the flags.</p>
   <p class="note">{esc(method.get('depth_rank',''))} {esc(method.get('attrition_formula',''))}</p>
+  <p class="note">This week's report is a mid-week report: only the Thursday game carries game
+  designations, so most clubs appear with practice participation only. That is a property of the
+  official report, not a parsing gap, and it is why the practice-only column exists.</p>
   {t_tbl}
 </section>
 
@@ -776,6 +785,9 @@ def evidence_page(prov, verif, dash):
 <section class="panel">
   <div class="panel-head"><h2>Line-by-line verification against nfl.com</h2><a href="../data/verified/official_standings_2026.json">Fixtures →</a></div>
   {check_tbl}
+  <p class="note">Club codes follow the GSIS feed (ARI, LA, LV, WAS); nfl.com prints some of them
+  differently (AZ, LAR, OAK historically). The cross-checks map those aliases explicitly so a
+  labelling difference is never reported as a data disagreement.</p>
   {detail_html}
 </section>
 

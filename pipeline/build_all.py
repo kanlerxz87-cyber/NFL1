@@ -1143,7 +1143,8 @@ def verification(ctx):
                 rows.append({"team": abbr, "player": c["player"],
                              "position": c.get("position"),
                              "injury": c.get("injury") if not pd.isna(c.get("injury")) else None,
-                             "practice": c.get("practice_status"),
+                             "practice": (None if pd.isna(c.get("practice_status"))
+                                          else c.get("practice_status")),
                              "game": c.get("game_status") if not pd.isna(c.get("game_status")) else None,
                              "matched": not diffs, "feed": got, "diffs": diffs or None})
                 if diffs:

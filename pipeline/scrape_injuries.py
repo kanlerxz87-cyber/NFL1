@@ -151,12 +151,39 @@ def parse(html: str) -> dict:
     }
 
 
+def resolve_missing_clubs(rows: list[dict]) -> tuple[int, int]:
+    """Attribute rows whose club could not be read from the page, using the weekly roster.
+
+    Only names that appear on exactly one 2026 roster are used, so this cannot silently move a
+    player to the wrong club. Returns (resolved, still_unknown).
+    """
+    try:
+        roster = pd.read_parquet(os.path.join(RAW, "roster_weekly_2026.parquet"))
+    except Exception:  # noqa: BLE001
+        return 0, sum(1 for r in rows if not r.get("team"))
+    roster = roster[roster["week"] == roster["week"].max()]
+    counts = roster.groupby("full_name")["team"].nunique()
+    unique = set(counts[counts == 1].index)
+    owner = roster.drop_duplicates("full_name").set_index("full_name")["team"].to_dict()
+    resolved = 0
+    for r in rows:
+        if r.get("team"):
+            continue
+        name = (r.get("player") or "").strip()
+        if name in unique and name in owner:
+            r["team"] = owner[name]
+            r["team_source"] = "weekly roster (unique name)"
+            resolved += 1
+    return resolved, sum(1 for r in rows if not r.get("team"))
+
+
 def main() -> None:
     os.makedirs(OUT, exist_ok=True)
     html = fetch()
     digest = hashlib.sha256(html.encode()).hexdigest()
     parsed = parse(html)
     rows = parsed["rows"]
+    resolved, unresolved = resolve_missing_clubs(rows)
     teams = {r["team"] for r in rows if r["team"]}
     ok = len(rows) >= 150 and len(teams) >= 24
     payload = {
@@ -166,7 +193,8 @@ def main() -> None:
         "week": parsed["week"],
         "season": parsed["season"],
         "tables_parsed": parsed["tables_parsed"],
-        "counts": {"rows": len(rows), "teams": len(teams)},
+        "counts": {"rows": len(rows), "teams": len(teams),
+                   "clubs_resolved_from_roster": resolved, "rows_without_club": unresolved},
         "status": "ok" if ok else "parse-incomplete",
         "warning": (None if ok else
                     "Parsed fewer rows or clubs than expected; build will fall back to the "
