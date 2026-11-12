@@ -1,4 +1,3 @@
-EAD
 # COORDINATION.md — shared task board and integration log
 
 Repository: `kanlerxz87-cyber/NFL1` · Default branch `main` · Site: <https://kanlerxz87-cyber.github.io/NFL1/>
@@ -13,6 +12,7 @@ Sessions that have worked here:
 | `946c1684-nfl1` | `arena/946c1684-nfl1` | League reference data, environment notes (curl allow-list; `fetch_page` has full internet) | not merged (superseded) |
 | `7600ed8b-nfl1` | `arena/7600ed8b-nfl1` | Quantitative pipeline, own lines, strategy gates, injury/depth model, props, verification, final integration | PR #13 |
 | `a2cea255-nfl1` | `arena/a2cea255-nfl1` | Independent verification subsystem: hand transcription of nfl.com, 34-check harness, provenance/gates engine, 103 tests, 20-page sub-site in `verified-lab/` | PR #18 |
+| `e3148b95-nfl1` | `arena/e3148b95-nfl1` | Official-source schedule/bye attribution audit and CI gate | in progress |
 
 > Branch naming: Arena fixes each session to a single branch named `arena/<session>-nfl1`, so the
 > `session-<id>/<task>` convention in the brief cannot be followed here. Scopes were kept
@@ -31,10 +31,23 @@ Sessions that have worked here:
 | Q7 | Verification: 5 checks against official/comparison sources | done | `7600ed8b` | `pipeline/build_all.py` (stage G), `data/verified/` | 128 graded rows matched, 1 irregularity (mirror incomplete) |
 | Q8 | Site integration, link check, PR, merge, Pages verification | done | `7600ed8b` | `index.html`, `pages/`, `assets/style.css` | see Integration log |
 
+## Current session claim (`e3148b95-nfl1`)
+
+| ID | Task | Status | Owner | File scope | Evidence at claim |
+|---|---|---|---|---|---|
+| T14 | Correct Week 10 fixture and bye provenance to the official NFL schedule; add a read-only independent verification runner and CI workflow so hard discrepancies block publication while documented source flags remain visible | merged; required-check enforcement pending | `e3148b95` | `COORDINATION.md`, `.github/workflows/verified-source-audit.yml`, `scripts/verified/check_source_audit.py`, `src/nfl/ingest.py`, `src/nfl/availability.py`, `src/nfl/verify.py`, `data/verified/sources.json`, `data/verified/team_report_status_week10.tsv`, `tests/test_data_integrity.py`, `scripts/build_site.py`, `data/processed/site_data.json`, `verified-lab/data-schedule.html`, `verified-lab/availability-depth.html`, `verified-lab/verification.html`, `verified-lab/sources.html` | Baseline local 34-check harness: 29 PASS / 5 FLAG / 0 FAIL; all three official arithmetic discrepancies are flagged. NFL.com Week 10 schedule, retrieved via the official page-fetch tool on 2026-11-12, lists the 14 fixtures and explicitly identifies CHI, DEN, PHI and TB as on bye: <https://www.nfl.com/schedules/2026/by-week/week-10>. |
+
+### T14 progress — 2026-11-12
+
+The 14 Week 10 fixture dates, kickoff times and matchups cite the official NFL schedule; V33 compares every captured fixture against the retrieved schedule snapshot. Fixture rows also link the official injury page for broadcast metadata. Bye rows cite the schedule, and bye-status rows link both relevant official pages. Local verification passed: 35 checks (30 PASS / 5 documented FLAG / 0 FAIL), 117 tests, all hard reconciliation checks, 20-page link validation, and 44 independent figure recomputations. PR [#30](https://github.com/kanlerxz87-cyber/NFL1/pull/30) merged at `5018592`; the PR checks and all post-merge verification workflows passed. GitHub Pages reports `built` for that commit, and the deployed [Week 10 Schedule](https://kanlerxz87-cyber.github.io/NFL1/verified-lab/data-schedule.html) and [Flagged for Review](https://kanlerxz87-cyber.github.io/NFL1/verified-lab/flagged.html) pages were fetched and checked live.
+
+**Publication-gate coordination note:** the new audit workflow fails on hard discrepancies, invalid/missing provenance, or unpublished flags; documented flags remain non-blocking when visible on the review page. `.github/workflows/pages.yml` and the legacy branch-build Pages setting are outside T14's claimed scope, so they were not edited. The session could not inspect or set branch protection (GitHub API returned 403). Therefore, the audit check is active and passing, but repository-level required-check enforcement against direct pushes still needs an administrator's configuration; this is why the board records enforcement as pending.
+
 ## Sources used (all verified reachable during the build)
 
 - Standings (verification fixture): <https://www.nfl.com/standings/league/2026/reg>
 - Official injury report (scraped weekly): <https://www.nfl.com/injuries/>
+- Official 2026 Week 10 fixtures and bye list, rechecked 2026-11-12: <https://www.nfl.com/schedules/2026/by-week/week-10>
 - Schedules: <https://www.nfl.com/schedules/>
 - Player stats: <https://www.nfl.com/stats/player-stats/>
 - Club directory: <https://www.nfl.com/teams/>
@@ -160,8 +173,8 @@ request in this file instead.
 
 - 2026-11-12 — `629e0db0-nfl1`: completed T14 in isolated workflow/report/test files. The prior `|| true` could hide an unexpected scraper crash. Expected network/parse failures are still represented by the scraper status JSON and use the existing clearly marked stale-feed fallback; the Actions job now writes a summary and warning from the effective model source. Official reference checked: https://www.nfl.com/injuries/ (Week 10, retrieved 2026-11-12). Tests: `python3 -m unittest discover -s tests -v` (111 passed); `py_compile`; PyYAML parse; `scripts/verified/check_site.py`; `scripts/verified/validate_verified.py`; `git diff --check`.
 - Branch Actions run [43319697503](https://github.com/kanlerxz87-cyber/NFL1/actions/runs/43319697503) completed successfully after the workflow change; scraper, model build, new source-report step, and generated-data commit all succeeded. Automated data refresh is recorded in branch commit `bae1dc2`.
-- Cross-session coordination: PR #23 from session `3d5c5e2d-nfl1` also edits `.github/workflows/collect-data.yml` to re-render/publish the site. Request: retain both PRs’ independent workflow steps when integrating (injury-source summary from T14 and renderer/committed-site checks from PR #23); do not discard either. The first PR #21 pages-build check was canceled by the shared `pages-verify` concurrency group while PR #23’s run was queued; this was cancellation, not an analysis or link-check failure. After the competing run completed, the pages-build check passed on the final PR head (`43320351045`).
-- PR #21 (<https://github.com/kanlerxz87-cyber/NFL1/pull/21>) **MERGED** at 2026-11-12T22:30:05Z; merge commit `c564b60e350ef3224e6e328c82b10b0b44ad6ffe`. Latest-head checks passed: Verify NFL1 site (`43320351026`) and Verify NFL Decision Lab site build (`43320351045`). Pages deployment run `43320468792` succeeded; Pages API reports `built` at commit `5768d16ad829e65ad624a8f82a00d58350874d34`. Live homepage was fetched after deploy and still reports `Data built 2026-11-12T05:07:59Z` while the automated model refresh is at 22:30:46Z; this stale publication is not resolved by T14. It is flagged for the active site-integration PR #23, which is currently marked conflicting after #21; the owner was notified to preserve both workflows. Do not interpret deployment success as proof the page contents are current.
+- Cross-session coordination resolved: PR #23 preserved PR #21’s injury-source summary while adding the renderer and committed-site check. An initial build check was canceled by shared `pages-verify` concurrency; the rerun passed. See the PR #23 merge record in the `3d5c5e2d` session log below.
+- PR #21 (<https://github.com/kanlerxz87-cyber/NFL1/pull/21>) **MERGED** at 2026-11-12T22:30:05Z; merge commit `c564b60e350ef3224e6e328c82b10b0b44ad6ffe`. It introduced the injury-feed report and CI fallback visibility. The data-only deployment initially left the page stale; this was corrected by PR #23, whose merge and live-site verification are recorded in the `3d5c5e2d` session log below.
 - 2026-11-12 — `80731db4-nfl1`: created board. Repo contained exactly one tracked file,
   `README.md` (one line: `# NFL1`); no other files, no workflows, no Pages config in repo
   (Pages exists at the GitHub account/repo level with source `main` / `/`). Claimed T01.
@@ -1040,10 +1053,10 @@ Read-only audit of the live site against the repository's own data, done before 
 | --- | --- | --- | --- | --- |
 | S1 | Live-site freshness: re-render the root site from the current `data/model/*.json`; verify the committed pages | done | `3d5c5e2d` | `index.html`, `pages/{lines,injuries,strategies,props,questions,suggestions,evidence,review,executive,models}.html`, `pages/executive.html` | Stale publication found and fixed: pages stamped 05:07 UTC, data 18:53 UTC. Evidence: `tools/check_committed_site.py` PASS; `scripts/verified/check_site.py` PASS (20 pages, 0 broken links). Flag F16. |
 | S2 | Signal honesty: stop labelling unvalidated gaps "actionable"; state that no strategy has passed gates | done | `3d5c5e2d` | `pipeline/build_all.py` (status names only), `pipeline/gen_site.py` (labels, note) | Status names now `gap-large-unvalidated` / `gap-unvalidated` / `small-difference`; renderer maps legacy names too. Labels state gap size only. Blend test (model weight −0.328) and 0 of 12 strategies passing are printed beside the table. Flag F15. |
-| S3 | Automate the refresh: run the renderer in the `collect-data` workflow | done | `3d5c5e2d` | `.github/workflows/collect-data.yml`, `tools/check_committed_site.py` (new) | Workflow now runs `pipeline/gen_site.py`, then `tools/check_committed_site.py`, then commits `data/model`, `pipeline`, `index.html`, `pages`. Not run in Actions until this branch is pushed (see log). Flag F20. |
+| S3 | Automate the refresh: run the renderer in the `collect-data` workflow | done | `3d5c5e2d` | `.github/workflows/collect-data.yml`, `tools/check_committed_site.py` (new) | Workflow runs `pipeline/gen_site.py`, then `tools/check_committed_site.py`, then commits `data/model`, `pipeline`, `index.html`, `pages`; post-merge run 43321434445 completed all steps successfully. Flag F20 remains for committed-byte auditing beyond the rendered-output check. |
 | S4 | Official-source reconciliation of availability rows against nfl.com | done (partial scope) | `3d5c5e2d` | `data/verified/live_check_2026-11-12.tsv` (new) | 64 official rows (6 full clubs: WAS, NYG, NE, DET, KC, ATL) typed from nfl.com/injuries/ on 2026-11-12 and compared by script with `data/model/official_injuries.json` at 22:30 UTC: **64/64 MATCH**. All 6 official game designations match. The three rows the earlier 18:53 scrape missed are included (F22). Other clubs' rows are not hand-reconciled. Flags F18, F22. |
 | S5 | Brief-to-evidence coverage matrix, gaps flagged, no value inferred | done | `3d5c5e2d` | `pipeline/gen_site.py` (matrix on `executive.html`), `COORDINATION.md` | 14 requirements mapped to a page and a source; 8 implemented, 4 partial, 2 blocked (counted from the rendered page). Flags F17, F21. |
-| S6 | Integration: PR to `main`, required checks, merge, GitHub Pages deploy, PR and merge result recorded here | in progress | `3d5c5e2d` (integration) | `COORDINATION.md` | Open at time of writing; result appended to the log below. |
+| S6 | Integration: PR to `main`, required checks, merge, GitHub Pages deploy, PR and merge result recorded here | done | `3d5c5e2d` (integration) | `COORDINATION.md` | PR #23 merged; verification, collection/re-render, and Pages deployment succeeded. Merge and live-site confirmation recorded below. |
 
 Shared outputs (`index.html`, `pages/*`) are changed here only because this session is the sole active
 session and every other task on the board is `done`; that is the integration condition in the brief.
@@ -1078,6 +1091,11 @@ session and every other task on the board is `done`; that is the integration con
 
 - 2026-11-12 — Claimed S1–S6 and pushed the claim before any other edit (`dab0b26`).
 - 2026-11-12 — Found the stale publication (pages 05:07 UTC vs data 18:53 UTC) by re-rendering the working tree and diffing against the committed pages; found the "actionable" label and the starter-only availability gap by reading `pipeline/build_all.py` against `data/model/availability.json`.
+- Pull request [#23](https://github.com/kanlerxz87-cyber/NFL1/pull/23) merged at 2026-11-12T22:36:15Z as `332280f90793af2edc73dbc8e0c37c4a8824d845`. The merge retained PR #21's injury-feed report step and added post-refresh rendering plus the committed-site check.
+- Latest PR checks passed: `Verify NFL1 site` run `43321181711` and `Verify NFL Decision Lab site build` run `43321182052`. Post-merge collect/re-render/check/commit run `43321434445` succeeded; post-merge verification runs `43321435361` and `43321434458` succeeded.
+- GitHub Pages deployment run `43321530635` succeeded; Pages API reports `built`, no error, source `main / /`, build commit `8e687fbcd3549f8b14aefc90d59414ed9ceca364`.
+- Live homepage re-fetched with cache-busting query after deployment; it reports `Data built 2026-11-12T22:36:55Z` and the updated unvalidated-signal wording. Local/CI committed-site checks pass (20 pages, 409 internal links, 788 source-linked rows at the checked build).
+- **Remaining limitation F21:** the availability model still counts only matched depth-rank-1 starters and omits backup/unmatched rows; the live page flags this. This does not invalidate the site build, but the requested complete 2nd/3rd/4th-string impact model remains incomplete and is explicitly not claimed as delivered.
 ## Session `5cf5434e-nfl1` — independent re-verification, PR, merge and Pages confirmation (2026-11-12)
 
 Session branch: `arena/5cf5434e-nfl1`, branched from `c09c739` (= `main` = `origin/main`). Build environment may reach only GitHub hosts plus pages fetched through the retrieval tool, so no bulk data refresh is run in this session; every check below re-reads committed files and official pages directly.
@@ -1118,10 +1136,10 @@ While this session prepared PR #23, the following branches appeared, each with i
 | `arena/08e0ce01-nfl1` | U02 line-by-line review; U06 flags; U07 integration | F15–F21, integration |
 | `arena/b6e68100-nfl1` | A1 correlation takeover (F36); A2 post-merge audit; PR | none on site files |
 | `arena/e3148b95-nfl1` | T14 official-source audit and verification runner | S4 |
-| `arena/629e0db0-nfl1` | injury feed fallback status (PR #21, open) | F21 (injury feed) |
+| `arena/629e0db0-nfl1` | injury feed fallback status (PR #21, merged) | F21 (injury feed) |
 
 **Proposed resolution (logged, not forced):**
-1. `3d5c5e2d` claimed first (`dab0b26`, 22:23:21 UTC); PR #23 changes the root pages and `collect-data.yml`. Merge it first, then the other sessions rebase or merge `main` and log their changes here.
+1. **Completed:** PR #23 merged after PR #21 and #24; it includes both the injury-source reporter from PR #21 and the canonical page re-render/committed-site check. Remaining sessions should rebase or merge `main` and log their changes here.
 2. The root site should have **one renderer**: `pipeline/gen_site.py`, run by `collect-data.yml` after every data build. Other generators that write the same files (`scripts/verified/build_site.py`, `tools/build.py`) overwrite `index.html` and `pages/*` in CI and should be retired or pointed at the same renderer. Logged as F19 and F20.
 3. `lab/` or any second site should not duplicate the nav on `index.html`; add a single link only, and log it.
 4. Any session that changes `data/model/*.json` must re-run `tools/check_committed_site.py` before pushing.

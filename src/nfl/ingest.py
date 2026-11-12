@@ -23,6 +23,7 @@ PRACTICE_LABELS = {
 
 PLAYER_URL_PREFIX = "https://www.nfl.com/players/"
 INJURY_REPORT_URL = "https://www.nfl.com/injuries/"
+WEEK10_SCHEDULE_URL = "https://www.nfl.com/schedules/2026/by-week/week-10"
 STANDINGS_URL = "https://www.nfl.com/standings/"
 #: Community mirror (nflverse). Labels and colours only - never on-field values.
 TEAM_REF_URL = "https://github.com/nflverse/nflverse-pbp/blob/master/teams_colors_logos.csv"
@@ -88,18 +89,34 @@ def standings() -> list[dict[str, Any]]:
 
 
 def schedule() -> list[dict[str, Any]]:
-    return [{**r, "week": _int(r["week"]), "source_url": INJURY_REPORT_URL}
+    # The official schedule supports each fixture, date and kickoff time.
+    # Keep the injury page as a second official link for the broadcast listing.
+    return [{**r, "week": _int(r["week"]), "source_url": WEEK10_SCHEDULE_URL,
+             "source_urls": [WEEK10_SCHEDULE_URL, INJURY_REPORT_URL]}
             for r in _read_tsv("schedule_2026_week10.tsv")]
 
 
 def byes() -> list[dict[str, Any]]:
-    return [{**r, "week": _int(r["week"]), "source_url": INJURY_REPORT_URL}
+    # The official schedule explicitly lists teams on bye. Do not infer a bye
+    # from a team's absence on the injury-report page.
+    return [{**r, "week": _int(r["week"]), "source_url": WEEK10_SCHEDULE_URL}
             for r in _read_tsv("bye_week10.tsv")]
 
 
 def team_report_status() -> list[dict[str, Any]]:
-    return [{**r, "week": _int(r["week"]), "source_url": INJURY_REPORT_URL}
-            for r in _read_tsv("team_report_status_week10.tsv")]
+    rows = []
+    for r in _read_tsv("team_report_status_week10.tsv"):
+        # A bye is explicit on the NFL schedule. Keep both official links so
+        # reviewers can inspect the schedule and the injury-report omission.
+        if r["report_status"] == "on bye (no report)":
+            source_urls = [INJURY_REPORT_URL, WEEK10_SCHEDULE_URL]
+            source_url = WEEK10_SCHEDULE_URL
+        else:
+            source_urls = [INJURY_REPORT_URL]
+            source_url = INJURY_REPORT_URL
+        rows.append({**r, "week": _int(r["week"]), "source_url": source_url,
+                     "source_urls": source_urls})
+    return rows
 
 
 def injuries() -> list[dict[str, Any]]:
