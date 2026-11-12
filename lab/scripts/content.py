@@ -170,8 +170,9 @@ QUESTIONS = [
     dict(id="Q12", group="Site and governance",
          question="There are four site generations in this repository. Which is the site?",
          know=("Root index.html + pages/ (session 7600ed8b lineage), docs/ (87deb7ab), "
-               "verified-lab/ (a2cea255), and now lab/ (this session). All four are live and "
-               "all four are reachable from the published Pages site."),
+               "verified-lab/ (a2cea255), dashboard/ (6a232e79 / 3d5c5e2d) and lab/ (this "
+               "session). All five are live and all five are reachable from the published "
+               "Pages site."),
          know_src=[("GitHub Pages documentation", GH_PAGES)],
          unknown="Which one the operator wants to keep.",
          blocks="A single clean landing page. Right now a visitor has to know which door to use.",
@@ -484,7 +485,9 @@ SUGGESTIONS = [
                   cost="$0", effort="Low", risk="An extra click"),
          ],
          recommendation="C now, A when the other sessions are finished. C is honest and costs "
-                        "nothing; A is the right end state but should not be done unilaterally.",
+                        "nothing; A is the right end state but should not be done unilaterally. "
+                        "A sixth generation would make this worse - that is the argument for "
+                        "deciding it soon.",
          unblocks="A single clean landing page.",
          decision=dict(status="PROPOSED", by="", date="", note="Running C: lab/ links all four.")),
     dict(id="S-14", title="Retire one of the two page generators",
@@ -540,7 +543,7 @@ DECISION_RECORDS = [
          rationale=("Two CI jobs already regenerate the root pages from different generators, "
                     "so a hand-built fifth generation there would be overwritten. lab/ is "
                     "additive and destroys nothing."),
-         consequence="Four site generations are now live; see suggestion S-13.",
+         consequence="Five site generations are now live; see suggestion S-13.",
          status="DECIDED - reversible"),
     dict(id="D-1505-02", title="No suggestion is implemented in this session",
          decision="Every suggestion is published as PROPOSED with options and a recommendation.",
@@ -679,9 +682,10 @@ FLAGS = [
          sources=[("New Jersey Division of Gaming Enforcement", NJ_DGE)],
          status="needs review"),
     dict(id="NFL1-16", severity="Medium", area="Site",
-         summary="Four site generations are live at once.",
-         detail=("Root index.html + pages/, docs/, verified-lab/, and lab/. All are preserved "
-                 "and all are linked from this site. See suggestion S-13 for three options."),
+         summary="Five site generations are live at once.",
+         detail=("Root index.html + pages/, docs/, verified-lab/, dashboard/ and lab/. All are "
+                 "preserved and all are linked from this site. See suggestion S-13 for three "
+                 "options."),
          sources=[("GitHub Pages documentation", GH_PAGES)],
          status="needs review"),
     dict(id="NFL1-17", severity="Medium", area="Site",
@@ -774,6 +778,8 @@ SITE_GENERATIONS = [
          note="Hand transcription of nfl.com, a 34-check harness and 103 tests."),
     dict(path="referee/", name="Referee audit", owner="session 73fdd6c4",
          note="Independent official-source audit and replication."),
+    dict(path="dashboard/", name="Dashboard (dashboard/)", owner="session 6a232e79 / 3d5c5e2d",
+         note="Live-site freshness and signal-honesty pass; 12 pages."),
     dict(path="lab/", name="Consolidated decision lab (this site)", owner="session 1505ac8e",
          note="Live re-verification, decision register, suggestions review, depth charts."),
 ]

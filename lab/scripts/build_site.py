@@ -115,6 +115,7 @@ def page(title, nav_key, body, lead=None, wide=False):
       <a href="{rootup}docs/index.html" target="_blank" rel="noopener">docs/ dashboard &#8599;</a>
       <a href="{rootup}verified-lab/index.html" target="_blank" rel="noopener">verified-lab/ &#8599;</a>
       <a href="{rootup}referee/index.html" target="_blank" rel="noopener">referee/ audit &#8599;</a>
+      <a href="{rootup}dashboard/index.html" target="_blank" rel="noopener">dashboard/ &#8599;</a>
     </div>
   </nav>
   <main class="content{' wide' if wide else ''}">
@@ -312,7 +313,7 @@ Everything that blocks certification is listed on
           '<span class="pill pill-ok">live</span>']
          for g in C.SITE_GENERATIONS],
         cls="clean",
-        caption="Four earlier site generations are preserved and linked. Consolidating them is suggestion S-13, not a decision this session made."))
+        caption="Five other site generations are preserved and linked. Consolidating them is suggestion S-13, not a decision this session made."))
 
     return page("NFL Decision Lab", "index", "".join(body))
 
@@ -410,7 +411,7 @@ machine-readable.</li>
 
     body.append(f"""<h2>Coordination</h2>
 <p>This session (1505ac8e) built into a new <code>lab/</code> directory so that no other
-session's files were edited. Four earlier site generations are preserved and linked. The
+session's files were edited. Five other site generations are preserved and linked. The
 shared task board is <a href="../../COORDINATION.md">COORDINATION.md</a> in the repository root.</p>""")
     return page("Executive summary", "executive-summary", "".join(body))
 

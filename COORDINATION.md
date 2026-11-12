@@ -1516,3 +1516,18 @@ discarded.
 - **Known issues carried to main:** RV-02 (corrected; see Update 3), RV-01, RV-28, RV-29, RV-30, RV-31. The injury page's "Scrape vs live" column reads "Matches" with the practice text beside it (cosmetic, not corrected).
 - **Process gap logged:** R-6a232e79-12 (collect workflow commits shared outputs to feature branches) is the reason a bot commit reached the PR head after review. It needs an owner decision.
 
+
+### Merge of `origin/main` into this branch (PRs #27 and #35, sessions `6a232e79` / `3d5c5e2d`)
+
+`main` advanced while PR #34 was open. It was merged into this branch with a normal
+(non-rebase) merge. `COORDINATION.md` conflicted in two places -- the sessions table and the
+per-session sections -- and **both sides of both conflicts were kept**; nothing from either
+session was discarded. `git grep` confirms no conflict markers remain.
+
+Those sessions added a fifth site generation under `dashboard/`. It is preserved and linked
+from the `lab/` site's navigation and site map, and flags NFL1-16 and suggestion S-13 were
+updated from "four generations" to "five".
+
+No file this session depends on changed on `main` (`data/verified/games_2026.csv`,
+`data/verified/standings_2026.csv`, `data/standings.csv` and `data/model/snapshot.json` are
+byte-identical), so the verification results above are unchanged.
