@@ -1162,14 +1162,14 @@ there is needed, it is logged as a request in the section below, not made.
 
 **Scope note.** `tools/verify_official_injuries.py` and `tools/verify_schedule.py` were added under S6A-03 but are not on the claim's file-scope list. They are new files and touch no other session's file.
 
-**Basis.** Checks were re-run against `origin/main` at `d4c1eec`, which includes the refresh at 22:30Z. Some of this session's earlier numbers were from an older state and were corrected during the rebase; the register records each correction.
+**Basis.** Checks were re-run against `origin/main` at `d4c1eec` (scrape 22:30Z) and then at `8e687fb` (scrape 22:36Z). Some of this session's earlier numbers were from an older state and were corrected during the rebase; the register records each correction.
 
 **Cross-session requests.** Per the protocol, shared outputs and other sessions' files were not edited. Each item is logged for its owner.
 
 | # | Request | File owner | Evidence | Status on main |
 | --- | --- | --- | --- | --- |
 | R-6a232e79-01 | State and publish the definition of standings correlation C-05. This session uses net points per game vs pct (0.8758 reproduces). The published definition is not stated in the repo. | owner of `data/correlations.json` (the file that defines C-05 was not identified this session) | RV-13, `tools/recompute_strategy_gates.py` | Open |
-| R-6a232e79-02 | Keep the injury scrape at 279 of 279 rows on every refresh, and add a per-club row-count check against the page. The check `tools/verify_official_injuries.py` should run in CI. | `pipeline/scrape_injuries.py`, `.github/workflows/` | RV-02 (resolved on main d4c1eec), `data/dashboard/injury_verification.json` | Open for the row-count check |
+| R-6a232e79-02 | Keep the injury scrape at 279 of 279 rows on every refresh, and add a per-club row-count check against the page. The check `tools/verify_official_injuries.py` should run in CI. | `pipeline/scrape_injuries.py`, `.github/workflows/` | RV-02 (matched 279/279 on d4c1eec at 22:30Z; reopened on 8e687fb at 22:36Z, see R-6a232e79-10), `data/dashboard/injury_verification.json` | Open |
 | R-6a232e79-03 | Correct the four KC depth rows (WR row 2, DT row 1, KR, PR) against chiefs.com, and relabel S14 as "club depth chart, labelled unofficial by the club". | `data/depth_chart.json` (S14 source) | RV-06, RV-22 | Open |
 | R-6a232e79-04 | Regenerate the live Overview from current data. Its headline reads "Starters flagged 103 — official game status" (current committed value is 111, with 110 practice-only). It shows "5 of 20 questions", "Twelve suggestions" (the files hold 27 and 20), the NE row "Out 2 / practice 6 / index 100.0" (RV-28), and "Mirrored feed coverage 20/254 mismatch" (RV-29). | root `index.html` writers (see R-6a232e79-05) | RV-01, RV-16, RV-28, RV-29 | Open; integration session only |
 | R-6a232e79-05 | Choose one generator for the root `index.html`. `tools/build.py`, `pipeline/gen_site.py` and `scripts/verified/build_site.py` each write it. | `tools/build.py`, `pipeline/gen_site.py`, `scripts/verified/build_site.py` | RV-17, RV-21 | Open; a choice is needed |
@@ -1183,3 +1183,22 @@ there is needed, it is logged as a request in the section below, not made.
 **Open PR from another session.** PR #23 (`arena/3d5c5e2d-nfl1`, "re-render live site from current data…") is open. This session did not touch its files and did not merge it.
 
 - Response to the 3d5c5e2d overlap note (session `6a232e79-nfl1`, 2026-11-12): this session does not change root `index.html`, root `*.html`, `pages/`, `pipeline/gen_site.py`, `tools/build.py`, or `.github/workflows/*`. Its site is a separate folder, `dashboard/`, which is not linked from `index.html`. If a single link from `index.html` is wanted, that is a request for the integration owner (R-6a232e79-04). The S6A-04 integration PR is #27 (`arena/6a232e79-nfl1` → `main`). Its CI runs share the `pages-verify` concurrency group, so runs on other branches may cancel it; this session will re-run it rather than merge unverified.
+
+**Update — 2026-11-12, after merging `origin/main` at `8e687fb`.** The committed injury scrape regressed between the 22:30Z and 22:36Z refreshes:
+
+| Item | 22:30Z (`d4c1eec`) | 22:36Z (`8e687fb`) |
+| --- | --- | --- |
+| Rows in `data/model/official_injuries.json` | 279 | 295 |
+| Official rows matching on every field | 279 | 242 |
+| Field differences | 0 | 37 |
+| Rows not on the official page | 0 | 16 (for example Jaydn Ott KC; Kendal Daniels, Jawaan Taylor, Cameron Thomas ATL) |
+
+Live nfl.com re-read (chunks 0 and 1 of 7): 80 of 80 rows match the 279-row transcription, and the scrape disagrees with the page on the rows named in RV-02.
+
+| # | Request | File owner | Evidence | Status |
+| --- | --- | --- | --- | --- |
+| R-6a232e79-10 | URGENT. Fix the parse in `pipeline/scrape_injuries.py` so that the 22:36Z refresh does not add non-page rows or change statuses. Re-run `tools/verify_official_injuries.py` before the next data refresh is merged. | `pipeline/scrape_injuries.py` (owner not identified this session; the collect bot pushes the output) | RV-02 (reopened), `data/dashboard/injury_verification.json` | Open |
+| R-6a232e79-11 | Build `pipeline/build_all.py`'s mirrored-feed check (lines 1035–1066) from the 279-row official page or its transcription, not from the scrape. The check now reports 295 'official' rows. | `pipeline/build_all.py` | RV-29 | Open |
+
+**Merge decision (this session).** This PR changes only `dashboard/`, `data/dashboard/`, `docs/review-6a232e79.md`, and new tools. It does not change root pages, `data/model/*`, or the scrape. The injury regression is a flag, not a build break, so it does not block the merge under the brief. The dashboard shows official page values and lists the 16 extra rows as flagged.
+

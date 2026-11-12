@@ -268,7 +268,7 @@ def page_index(d):
   <p><strong>What this is.</strong> A checked view of the NFL Decision Lab repository. Every value
   here is either confirmed against an official NFL page this session or left blank and flagged.
   It shows the model's own results as unverified findings, not as facts.</p>
-  <p><strong>Headline.</strong> The Week 10 schedule matches nfl.com (14 of 14). The official injury report (279 rows) matches the committed scrape on every row on main; the earlier scrape had 7 differences, now resolved (RV-02). The depth data covers 3 of 32 clubs.
+  <p><strong>Headline.</strong> The Week 10 schedule matches nfl.com (14 of 14). The official injury report (279 rows) is transcribed and checked against the live page. The committed injury scrape on main does not match it (295 rows, 37 field differences; RV-02). The depth data covers 3 of 32 clubs.
   No model strategy passes all gates after recomputation, and the model's own lines do not beat the market in the 2026 test window
   (unverified model output). Nothing here is ready for a betting decision.</p>
 </section>
@@ -395,8 +395,10 @@ def page_injuries(d):
         if key in missing:
             check = '<span class="b bad">Missing from scrape</span>'
         elif key in diffs:
-            scraped = diffs[key]["practice"]["scraped"]
-            check = f'<span class="b bad">Scrape differs</span> <span class="small">scrape: {e(scraped)}</span>'
+            parts = []
+            for fld, vals in diffs[key].items():
+                parts.append(f'{e(fld)}: scrape "{e(vals.get("scraped") or "blank")}"')
+            check = '<span class="b bad">Scrape differs</span> <span class="small">' + "; ".join(parts) + '</span>'
         else:
             check = '<span class="b ok">Matched</span>'
         rows.append(
@@ -409,7 +411,7 @@ def page_injuries(d):
 <div class="stats">
 <div><b>{c["official_rows"]}</b><span>official rows (nfl.com, Week 10)</span></div>
 <div><b>{c["matched_all_fields"]}</b><span>match on every field</span></div>
-<div><b>{c["field_differences"]}</b><span>practice status differs in scrape</span></div>
+<div><b>{c["field_differences"]}</b><span>rows with a field that differs in the scrape</span></div>
 <div><b>{c["missing_from_scrape"]}</b><span>missing from scrape</span></div>
 <div><b>{len(d["inj"]["official_game_status_rows"])}</b><span>official game designations</span></div>
 <div><b>{c["clubs_on_official_page"]}</b><span>clubs with rows (LAC and BAL read 'No Injuries Reported')</span></div>
@@ -428,6 +430,9 @@ Most rows show practice status only. The old Overview phrase "starters flagged 1
 </div>
 <h2>Official report, Week 10</h2>
 {tbl}
+<h2>In the committed scrape but not on the official page ({len(inj["extra_in_scrape"])})</h2>
+<div class="callout warn"><p>These rows exist in <a href="{REPO_BLOB}data/model/official_injuries.json">data/model/official_injuries.json</a> on main but not on the nfl.com page read on 2026-11-12. They are shown here, not in the official table above (flag RV-02).</p></div>
+{table(["Club", "Player", "Source of claim", "Status"], [td(e(x["team"])) + td(e(x["player"])) + td(link(REPO_BLOB + "data/model/official_injuries.json", "official_injuries.json (internal)")) + td('<span class="b bad">Not on official page</span>') for x in inj["extra_in_scrape"]])}
 <h2>Official news ahead of the page</h2>
 <div class="callout warn">
 <p>On the same nfl.com page, a news item reports <strong>Sam Darnold ruled out</strong> for Seahawks' Week 10 game vs. Raiders,
@@ -653,7 +658,7 @@ def page_repo(d):
         ("dashboard/", "This clean dashboard (session 6a232e79)", "tools/build_dashboard.py", "New, self-contained", "dashboard"),
         ("data/", "Committed data: model outputs, verified transcriptions, questions, flags", "pipeline/ and tools/", "Mixed sources (RV-21)", "data"),
         ("data/model/", "Pipeline outputs (lines, strategies, availability, injuries)", "pipeline/build_all.py", "Errors log stale (RV-18)", "data/model"),
-        ("pipeline/", "Collector, scraper, model builder", "-", "Scrape matches 279 of 279 on main (RV-02 resolved)", "pipeline"),
+        ("pipeline/", "Collector, scraper, model builder", "-", "Scrape on main 8e687fb: 295 rows vs 279 official; 37 field differences (RV-02 reopened)", "pipeline"),
         ("analysis/", "Analysis engine from earlier session", "-", "Not reviewed line by line", "analysis"),
         ("tools/", "Generators and verifiers", "-", "Several write the same files", "tools"),
         ("scripts/", "Verification scripts and builders", "-", "Not reviewed line by line", "scripts"),
@@ -695,8 +700,7 @@ The data the model produces (lines, strategy performance, prop lines) cannot be 
 <ul>
 <li><strong>Week 10 schedule.</strong> All 14 games, days, kickoff times and networks match the nfl.com schedule page
 (<a href="{NFL_SCHED}">nfl.com/schedules/2026/REG10</a>). The four bye teams are CHI, DEN, PHI and TB.</li>
-<li><strong>Injury report.</strong> 279 official rows on <a href="{NFL_INJ}">nfl.com/injuries</a>. The committed scrape on main matches all 279 on every field.
-At the base commit it was missing 3 rows and had 4 practice differences; that is resolved (RV-02). The mirrored feed still covers only 276 of 279 rows by the model's own check (RV-29).</li>
+<li><strong>Injury report.</strong> 279 official rows on <a href="{NFL_INJ}">nfl.com/injuries</a>. The committed scrape on main (22:36Z) holds 295 rows: 242 match the official page on every field, 37 differ, and 16 are not on the page (RV-02, reopened). A scrape at 22:30Z had matched all 279.</li>
 <li><strong>Official game designations.</strong> Six rows only (Out: Lucas Patrick, Colson Yankoff, Ben Brown, Carlton Davis III, TreVeyon Henderson; Questionable: Malik Harrison).</li>
 <li><strong>Strategy gates.</strong> All 12 gate results reproduce from the committed JSON, so the model is consistent with its own rules.</li>
 <li><strong>Standings correlations.</strong> All six reproduce from the 32 standings rows.</li>
@@ -717,7 +721,7 @@ At the base commit it was missing 3 rows and had 4 practice differences; that is
 <h2>Irregularities that need a decision</h2>
 <ul>
 <li>The headline "103 starters flagged, official game status" is not supported. The committed data says {d["avail"]["counts"]["starters_impacted"]} starters are impacted, and {d["avail"]["counts"]["rows_practice_only_starters"]} of them are practice-only (RV-01).</li>
-<li>The injury scrape matched the page on main, but the check must run on every refresh (RV-02). The Overview's NE row is stale (RV-28).</li>
+<li>The committed injury scrape on main is wrong on the current refresh (RV-02). The dashboard shows the official page values, not the scrape. The Overview's NE row is stale (RV-28).</li>
 <li>Two generators overwrite the root index.html, and five site generations overlap (RV-17, RV-21).</li>
 <li>The Overview says "actionable" for a line the model's own validation does not support (RV-11).</li>
 </ul>

@@ -24,11 +24,11 @@
   },
   {
    "id": "QA-03",
-   "question": "Which change on main fixed the injury scrape, and does it stay at 279 rows on each refresh?",
-   "known": "On main d4c1eec, data/model/official_injuries.json holds 279 rows, all matching the official transcription (checked this session). The base commit held 276.",
-   "unknown": "Which commit made the change, and whether later refreshes keep the 279-row count.",
-   "discovery": "git log -p origin/main -- data/model/official_injuries.json; re-run tools/verify_official_injuries.py after each refresh.",
-   "blocks": "Relying on the scrape without a per-refresh check.",
+   "question": "Why does the committed injury scrape on main 8e687fb hold 295 rows (16 not on the official page) with 37 field differences?",
+   "known": "On d4c1eec (22:30Z) the scrape matched 279 of 279. On 8e687fb (22:36Z) it does not. Live page re-read: 80 of 80 rows compared match the transcription; the scrape disagrees on the named rows.",
+   "unknown": "Which parser change between the two refreshes produced the extra rows and the mixed statuses.",
+   "discovery": "Compare pipeline/scrape_injuries.py output for the two commits; check the table-to-club mapping on the saved HTML; re-run tools/verify_official_injuries.py.",
+   "blocks": "Relying on the scrape for any injury number.",
    "source_url": "https://www.nfl.com/injuries/",
    "status": "Open"
   },
@@ -87,8 +87,8 @@
   {
    "id": "S-6A-01",
    "area": "Data quality",
-   "title": "Keep the injury-scrape check on every refresh (279 of 279 on main) and add a per-club row-count check against the page.",
-   "decision_impact": "Stops a silent regression like the one at the base commit (3 missing rows, 4 practice differences).",
+   "title": "Fix the injury-scrape regression (295 rows vs 279; 37 field differences) and add a per-refresh check that fails the build when the row count or any field differs from the page.",
+   "decision_impact": "Stops a refresh from publishing wrong injury statuses.",
    "recommended_path": "Adopt",
    "status": "Awaiting choice",
    "source_url": "https://www.nfl.com/injuries/"

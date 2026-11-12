@@ -8,8 +8,8 @@
    "severity": "High",
    "area": "Injuries",
    "file": "data/model/availability.json; data/model/dashboard.json; pipeline/gen_site.py (Overview headline)",
-   "finding": "The Overview headline reads 'Starters flagged 103 — official game status'. The committed data on main (d4c1eec) says 111 starters impacted (dashboard.json counts.starters_flagged_unavailable = 111; earlier build 113). Only 1 of those 111 has an official game designation; 110 are flagged on practice status alone.",
-   "evidence": "data/model/availability.json counts: rows_with_game_designation 6, rows_practice_only_starters 110, starters_impacted 111. The official page has 6 game-status rows in total (data/dashboard/official_injuries_2026_w10.psv).",
+   "finding": "The Overview headline reads 'Starters flagged 103 — official game status'. The committed data on main now says 111 starters impacted (dashboard.json counts.starters_flagged_unavailable; earlier builds 113 and 111). 108 are flagged on practice status alone (on the earlier 22:30Z data: 110). Of the 6 official game-status rows, only one player (Carlton Davis III, Out) is on the starter list; the other five (Lucas Patrick, Colson Yankoff, Malik Harrison, Ben Brown, TreVeyon Henderson) are not on it.",
+   "evidence": "data/model/availability.json counts: rows_with_game_designation 9 (scrape), rows_practice_only_starters 108, starters_impacted 111. Official game statuses: data/dashboard/official_injuries_2026_w10.psv (6 rows).",
    "source_url": "https://www.nfl.com/injuries/",
    "source_type": "official",
    "status": "Verified mismatch",
@@ -17,15 +17,15 @@
   },
   {
    "id": "RV-02",
-   "severity": "Medium",
+   "severity": "High",
    "area": "Injuries",
    "file": "data/model/official_injuries.json (scrape); data/dashboard/official_injuries_2026_w10.psv (transcription)",
-   "finding": "Resolved on main. At the base commit c09c739 the committed scrape held 276 of 279 official rows: 3 missing (JAX: BJ Green II; IND: CJ Allen, Grover Stewart) and 4 Colts practice statuses differing (A.J. Haulcy, Jonathan Taylor, Jerry Tillery, Charvarius Ward). On main d4c1eec, data/model/official_injuries.json (generated 2026-11-12T22:30:33Z) holds 279 rows, and all 279 match the official transcription on every field.",
-   "evidence": "tools/verify_official_injuries.py re-run on main: data/dashboard/injury_verification.json shows official 279, scraped 279, matched 279, field diffs 0, missing 0, extra 0. Seven spot-checked rows (the four Colts and three missing) read the same values on the page and in the scrape.",
+   "finding": "Regressed on latest main. On main d4c1eec (scrape at 22:30:33Z) the committed scrape matched all 279 official rows. On main 8e687fb (scrape at 22:36:42Z) the committed scrape holds 295 rows: 242 of 279 official rows match on every field, 37 differ (e.g., Cameron Latu DNP on the page, Limited in scrape; Brian Branch Limited on the page, Full in scrape; Kerby Joseph and Cade Mays listed as Out in scrape with no injury on the page), and 16 rows are in the scrape but not on the official page (e.g., Jaydn Ott KC; Kendal Daniels, Jawaan Taylor, Cameron Thomas ATL). The scrape's game-status column has 9 entries; the official page has 6.",
+   "evidence": "tools/verify_official_injuries.py on main 8e687fb: data/dashboard/injury_verification.json counts official 279, scraped 295, matched 242, field diffs 37, missing 0, extra 16. Live nfl.com re-read this session (chunks 0 and 1 of 7): 80 of 80 rows compared with the transcription match; the scrape disagrees with the page on the rows named above and the 16 extras are not on the page.",
    "source_url": "https://www.nfl.com/injuries/",
    "source_type": "official",
-   "status": "Verified",
-   "action": "Keep the injury check in the pipeline gate: run tools/verify_official_injuries.py on every refresh. Add a per-club row-count check against the page (not yet implemented)."
+   "status": "Verified mismatch",
+   "action": "Owner of pipeline/scrape_injuries.py to re-run and fix the parse so that only the Week 10 tables are kept and each row takes its own practice and game status. Re-run tools/verify_official_injuries.py before merge of any data refresh (logged as R-6a232e79-10)."
   },
   {
    "id": "RV-03",
@@ -331,8 +331,8 @@
    "id": "RV-28",
    "severity": "High",
    "area": "Injuries / Overview",
-   "finding": "New England: the official report lists 3 players with game status Out (Ben Brown, Carlton Davis III, TreVeyon Henderson). The live Overview's NE row shows Out 2, Practice-only 6, attrition index 100.0. The committed availability.json shows starters_out 1, starters_practice_only 7, attrition index 53.6. Two of the three official Out players (Brown, Henderson) are not in availability.json's 113-player starter list, so its Out count is a starter-only count and is not comparable with the official count. The Overview figure of 2 cannot be reproduced from any committed JSON; the live Overview appears to be from an older build (data built 2026-11-12T05:07:59Z).",
-   "evidence": "Official: data/dashboard/official_injuries_2026_w10.psv (NE: game=Out for Brown, Davis III, Henderson). Committed on main: data/model/availability.json teams[NE] (starters_out 1, starters_practice_only 7, attrition_index_0_100 53.6); its players list has 111 names, none of Ben Brown or TreVeyon Henderson. Live Overview (fetched 2026-11-12): NE row 'Out 2 | 0 | 0 | 6 | 100.0'.",
+   "finding": "New England: the official report lists 3 players with game status Out (Ben Brown, Carlton Davis III, TreVeyon Henderson). The live Overview's NE row shows Out 2, Practice-only 6, attrition index 100.0. The committed availability.json on main shows starters_out 1, starters_practice_only 7, attrition index 42.9. Brown and Henderson are not in the 111-player starter list, so the model's Out count is a starter-only count and is not comparable with the official count. The Overview's figure of 2 cannot be reproduced from committed data.",
+   "evidence": "Official: nfl.com injuries page re-read 2026-11-12 (chunk 0): Ben Brown Out, Carlton Davis III Out, TreVeyon Henderson Out. Committed: data/model/availability.json teams[NE] (starters_out 1, practice 7, index 42.9). Live Overview: NE row 'Out 2 | 0 | 0 | 6 | 100.0'.",
    "source_url": "https://www.nfl.com/injuries/",
    "source_type": "official",
    "status": "Verified mismatch",
@@ -342,12 +342,12 @@
    "id": "RV-29",
    "severity": "High",
    "area": "Verification",
-   "finding": "Conflicting injury-feed results. On main (d4c1eec), data/model/verification.json (generated 2026-11-12T22:30:46Z) reports 'Mirrored feed coverage vs official report, week 10' as 276 of 279 official rows present in the mirrored feed, with 0 game-status disagreements. The same check on the earlier main state reported 276/276 with 0 mismatches. The live Overview still shows 20/254 with a mismatch, from an earlier build. The mirrored feed (injuries_2026.csv) is not committed to the repo, so the 3 absent rows cannot be named from it. The scrape itself matches the page on all 279 rows (RV-02).",
-   "evidence": "data/model/verification.json checks[2]: rows_checked 279, rows_matched 276, mismatches 3; detail 'official rows present in feed 276/279', 0 game-status disagreements (pipeline/build_all.py lines 1035-1066, which matches on team and full_name). Live Overview verification table: 'Mirrored feed coverage vs official report, week 10 | 20/254 | mismatch'.",
+   "finding": "The model's own injury checks use inputs that do not match the official page. On main 8e687fb, data/model/verification.json reports 'Mirrored feed coverage vs official report, week 10' as 295 rows checked, 276 matched, 19 mismatches. The 'official' list in that check is the 295-row scrape, not the 279-row official page. Earlier on d4c1eec the same check reported 276/279 present with 0 game-status disagreements. The live Overview still shows 20/254 with a mismatch, from an earlier build. The mirrored feed (injuries_2026.csv) is not committed, so the absent rows cannot be named from the repo.",
+   "evidence": "pipeline/build_all.py lines 1035–1066: 'off_index' is built from official['rows'] (the scrape). data/model/verification.json on main 8e687fb: checks[2] rows_checked 295, rows_matched 276, mismatches 19. Live Overview verification table: 'Mirrored feed coverage vs official report, week 10 | 20/254 | mismatch'.",
    "source_url": "https://www.nfl.com/injuries/",
    "source_type": "official",
    "status": "Verified mismatch",
-   "action": "Re-label the mirror check as presence-only. Commit the mirror's week-10 rows (or a hash of them) so the 3 absent rows can be named. Regenerate the live Overview from current data (integration session only)."
+   "action": "Build the coverage check from the 279-row official page (or the transcription with its source hash), not from the scrape. Label it presence-only until a game-status comparison is added. Regenerate the Overview from current data (integration owner only)."
   }
  ]
 }
