@@ -1228,7 +1228,7 @@ is `done`, and `gh pr list --state all` shows no open PR).
 | S6A-01 | Repo review: line-by-line irregularity register, each item with a source link and a verified / unverified status | in progress | `6a232e79-nfl1` | `data/dashboard/review.json`, `docs/review-6a232e79.md` |
 | S6A-02 | Clean dashboard site: landing page plus category subpages (lines, strategies, injuries & depth, questions, suggestions, flagged for review, executive summary, sources) | in progress | `6a232e79-nfl1` | `dashboard/**`, `tools/build_dashboard.py`, `tools/verify_dashboard.py` |
 | S6A-03 | Independent re-verification: schedule matchups and injury-table row counts against nfl.com; gate and correlation recomputation from the committed JSON | in progress | `6a232e79-nfl1` | `data/dashboard/verification.json`, `tools/recompute_strategy_gates.py` |
-| S6A-04 | Final integration for this session: PR to `main`, merge, Pages check, record here | in progress | `6a232e79-nfl1` | `COORDINATION.md` (append-only) |
+| S6A-04 | Final integration for this session: PR to `main`, merge, Pages check, record here | done (merged 2026-11-12 22:58:23Z; Pages built) | `6a232e79-nfl1` | `COORDINATION.md` (append-only) |
 
 **Shared outputs not touched by this session:** root `index.html`, root `README.md`,
 `tools/build.py`, `pipeline/gen_site.py`, `.github/workflows/*`, `data/model/*.json`. Where a change
@@ -1243,7 +1243,7 @@ there is needed, it is logged as a request in the section below, not made.
 | S6A-01 | done | `c64d395`, `41e1373` (rebased), `fa81074`, `45937fa` | `data/dashboard/review.json` (29 findings, RV-01 to RV-29), `docs/review-6a232e79.md`, `data/dashboard/decision_gate_6a.json` (8 questions, 8 suggestions, proposals only) |
 | S6A-02 | done | `7367387` (rebased to `97f6518`), `45937fa` | `dashboard/**` (12 pages + CSS), `tools/build_dashboard.py`, `tools/verify_dashboard.py` (PASS, 0 hard failures) |
 | S6A-03 | done | `dbaf488` (rebased to `456dfb2`), `45937fa` | `data/dashboard/verification.json` (8 checks: 5 PASS, 2 FAIL, 1 CONFLICT), `tools/recompute_strategy_gates.py`, `tools/verify_official_injuries.py`, `tools/verify_schedule.py` |
-| S6A-04 | in progress | see the PR section below | |
+| S6A-04 | done: PR #27 merged to `main` as `452cac8`; Pages `built` at `452cac8` | see the PR section below | |
 
 **Scope note.** `tools/verify_official_injuries.py` and `tools/verify_schedule.py` were added under S6A-03 but are not on the claim's file-scope list. They are new files and touch no other session's file.
 
@@ -1356,3 +1356,13 @@ discarded.
 ## PR / merge
 
 - (filled after merge)
+
+**S6A-04 record — 2026-11-12.**
+
+- **PR:** https://github.com/kanlerxz87-cyber/NFL1/pull/27 (`arena/6a232e79-nfl1` → `main`).
+- **Merge:** `gh pr merge 27 --merge`, 2026-11-12 22:58:23Z, merge commit `452cac8`. Checks at the time of merge: `Verify NFL1 site` (PR and push) and `Verify NFL Decision Lab site build` (PR) passed on `0f93f11`.
+- **Head at merge: `a3008fc`.** This is a bot refresh (`nfl1-data-bot`, collect workflow) pushed to the branch after the last check. It was merged without its own review. Its `data/model/*` and shared-page outputs are now on `main`. Checks after the merge: the pages build replay (14 steps) passes on `452cac8`; the dashboard rebuilt from `452cac8` data is unchanged.
+- **Pages:** `pages/builds/latest` = `built` at `452cac8` (source `main /`, legacy). Live page https://kanlerxz87-cyber.github.io/NFL1/dashboard/injuries.html returns the corrected content.
+- **Known issues carried to main:** RV-02 (corrected; see Update 3), RV-01, RV-28, RV-29, RV-30, RV-31. The injury page's "Scrape vs live" column reads "Matches" with the practice text beside it (cosmetic, not corrected).
+- **Process gap logged:** R-6a232e79-12 (collect workflow commits shared outputs to feature branches) is the reason a bot commit reached the PR head after review. It needs an owner decision.
+
