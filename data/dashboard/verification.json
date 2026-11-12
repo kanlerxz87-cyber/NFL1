@@ -1,0 +1,133 @@
+{
+ "checked_on": "2026-11-12",
+ "session": "6a232e79-nfl1",
+ "scope": "S6A-03 independent re-verification. Consolidates the session's three checks with the model's own verification.json, and records every disagreement. Nothing here overwrites a shared output.",
+ "rule": "A check is PASS only when it was run this session against the official page or re-derived from committed files, and the result matches. A model claim that does not reproduce is recorded as a conflict, not as a pass.",
+ "checks": [
+  {
+   "id": "V6-01",
+   "name": "Week 10 schedule vs nfl.com",
+   "source": "https://www.nfl.com/schedules/2026/REG10",
+   "method": "14 official games transcribed (data/dashboard/schedule_2026_w10.json) compared with data/model/lines.json by away, home and date (tools/verify_schedule.py).",
+   "rows_checked": 14,
+   "rows_matched": 14,
+   "mismatches": 0,
+   "result": "PASS",
+   "artifact": "data/dashboard/schedule_check.json",
+   "notes": "Club codes LAR and AZ (nfl.com) mapped to LA and ARI (pipeline). Byes CHI, DEN, PHI, TB."
+  },
+  {
+   "id": "V6-02",
+   "name": "Official injury report vs committed scrape, field by field",
+   "source": "https://www.nfl.com/injuries/",
+   "method": "279 official rows transcribed (data/dashboard/official_injuries_2026_w10.psv) compared with data/model/official_injuries.json (tools/verify_official_injuries.py).",
+   "rows_checked": 16,
+   "rows_matched": 16,
+   "mismatches": 0,
+   "result": "CONFLICT",
+   "artifact": "data/dashboard/injury_verification.json",
+   "notes": "Re-checked on 2026-11-12 against the live page. The committed scrape matches on 16 of 16 rows re-checked and on the practice status of all 16 extras. The 279-row transcription is stale: it matches on 10 of 16 (RV-02). The earlier 'extra rows' finding is withdrawn."
+  },
+  {
+   "id": "V6-03",
+   "name": "Standings correlations C-01 to C-06 (standings identities, not betting correlations)",
+   "source": "https://www.nfl.com/standings/league/2026/reg",
+   "method": "Recomputed from committed standings rows (tools/recompute_strategy_gates.py).",
+   "rows_checked": 6,
+   "rows_matched": 6,
+   "mismatches": 0,
+   "result": "PASS",
+   "artifact": "data/dashboard/recomputed.json",
+   "notes": "C-05 definition corrected this session to net points per game vs pct (published value 0.8758 reproduces). Context only (RV-13)."
+  },
+  {
+   "id": "V6-04",
+   "name": "Strategy gate counts re-derived from committed JSON",
+   "source": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/strategies.json",
+   "method": "tools/recompute_strategy_gates.py. G1 and G2 are documentary (counted as passes, not checked). G8 reuses published pairwise values.",
+   "rows_checked": 12,
+   "rows_matched": 12,
+   "mismatches": 0,
+   "result": "PASS",
+   "artifact": "data/dashboard/recomputed.json",
+   "notes": "0 of 12 pass all 8 gates. S11 WATCH 6/8 (fails G5, G6). S06 WATCH 5/8. The WATCH cut-offs (5 to 7 gates) are assumed, not taken from the published method."
+  },
+  {
+   "id": "V6-05",
+   "name": "Benjamini-Hochberg q-values",
+   "source": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/strategies.json",
+   "method": "Standard BH step-up on the 12 published p-values.",
+   "rows_checked": 12,
+   "rows_matched": 12,
+   "mismatches": 0,
+   "result": "PASS",
+   "artifact": "data/dashboard/review.json (RV-10)",
+   "notes": "All q-values are 0.9889. This is the correct result for these p-values (smallest p = 0.164)."
+  },
+  {
+   "id": "V6-06",
+   "name": "KC depth chart vs chiefs.com",
+   "source": "https://www.chiefs.com/team/depth-chart",
+   "method": "28 KC rows in data/depth_chart.json compared line by line with the club page (checked by hand, this session).",
+   "rows_checked": 28,
+   "rows_matched": 24,
+   "mismatches": 4,
+   "result": "FAIL",
+   "artifact": "data/dashboard/review.json (RV-06)",
+   "notes": "The club page is titled 'Unofficial Depth Chart'. Depth coverage is 3 of 32 clubs."
+  },
+  {
+   "id": "V6-07",
+   "name": "Model's own verification.json (as generated 2026-11-12T18:53:41Z)",
+   "source": "data/model/verification.json",
+   "method": "Read in full (5 checks, 5 unverifiable items). Each check reported beside this session's result.",
+   "rows_checked": 295,
+   "rows_matched": 276,
+   "mismatches": 19,
+   "result": "CONFLICT",
+   "artifact": "data/dashboard/review.json (RV-29)",
+   "notes": "Its mirror check uses the scrape as the official list and reports 276 of 295 present, presence only. The Overview shows 20/254 with a mismatch. Neither reproduces the other (RV-29)."
+  },
+  {
+   "id": "V6-08",
+   "name": "Overview NE row vs committed availability.json",
+   "source": "https://www.nfl.com/injuries/",
+   "method": "Live Overview (fetched 2026-11-12) compared with data/model/availability.json and the official NE rows.",
+   "rows_checked": 1,
+   "rows_matched": 0,
+   "mismatches": 1,
+   "result": "FAIL",
+   "artifact": "data/dashboard/review.json (RV-28)",
+   "notes": "Official NE Out: 3 (Brown, Davis III, Henderson), confirmed on the live page. Overview: Out 2, practice-only 6, index 100.0. availability.json on the merged state: starters_out 1, practice-only 7, index 42.9. Brown and Henderson are not in the starter list; Davis III, Reed and Mays are (RV-28)."
+  }
+ ],
+ "unverified_not_checked_here": [
+  {
+   "item": "Betting lines and closing prices",
+   "handling": "Blank in all tables (UNV-LINE). No official source publishes them."
+  },
+  {
+   "item": "Strategy return, win rate and ROI",
+   "handling": "Blank in all tables (UNV-PERF)."
+  },
+  {
+   "item": "Player-prop prices",
+   "handling": "Not shown (model-only output, RV-26)."
+  },
+  {
+   "item": "Depth charts for 29 of 32 clubs",
+   "handling": "Not in repo. Not probed beyond WAS, BUF, KC 404s (RV-04)."
+  },
+  {
+   "item": "Game times for unplayed games beyond Week 10",
+   "handling": "Not checked (model verification.json lists this as unverifiable)."
+  }
+ ],
+ "summary": {
+  "PASS": 4,
+  "FAIL": 2,
+  "CONFLICT": 2,
+  "total": 8
+ },
+ "main_basis": "Merged state: origin/main 7c11742 with this branch's session files. Live injury page re-checked 2026-11-12."
+}

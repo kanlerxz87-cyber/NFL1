@@ -21,9 +21,23 @@
         "tier": "OFFICIAL",
         "used_for": [
           "injury_report_2026_week10.tsv",
-          "schedule_2026_week10.tsv",
+          "schedule_2026_week10.tsv (broadcast metadata)",
           "nfl_news_2026_week10.tsv",
-          "team_report_status_week10.tsv"
+          "team_report_status_week10.tsv (injury-report status for playing teams)"
+        ]
+      },
+      {
+        "id": "nfl_schedule_week10_2026",
+        "publisher": "National Football League (official league website)",
+        "url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+        "page_title_as_retrieved": "NFL Week 10 Schedule 2026: Games, Times, Matchups & Tickets",
+        "tier": "OFFICIAL",
+        "reverified_date_utc": "2026-11-12",
+        "reverified_by": "arena/e3148b95-nfl1 via official page-fetch tool",
+        "used_for": [
+          "schedule_2026_week10.tsv (14 official Week 10 fixtures)",
+          "bye_week10.tsv (four clubs explicitly listed under Teams on Bye)",
+          "team_report_status_week10.tsv (bye status)"
         ]
       },
       {
@@ -48,8 +62,11 @@
       {
         "id": "nfl_tiebreak",
         "publisher": "National Football League (official league website)",
-        "url": "http://www.nfl.com/standings/tiebreakingprocedures",
+        "url": "https://www.nfl.com/standings/tie-breaking-procedures",
+        "page_title_as_retrieved": "NFL Tiebreaking Procedures | NFL.com",
         "tier": "OFFICIAL",
+        "reverified_date_utc": "2026-11-12",
+        "reverified_by": "arena/e3148b95-nfl1 via official page-fetch tool",
         "used_for": [
           "tie-break procedure reference"
         ]
@@ -97,6 +114,45 @@
         "tier": "OFFICIAL",
         "used_for": [
           "verified skill-position absence"
+        ]
+      },
+      {
+        "id": "nfl_news_hooker_henley",
+        "publisher": "National Football League (official league website)",
+        "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-tuesday-nov-10",
+        "page_title_as_retrieved": "NFL news roundup: Bills acquire S Amani Hooker; Broncos trade for Chargers' Daiyan Henley | Latest NFL News, Analysis & Updates | NFL.com",
+        "tier": "OFFICIAL",
+        "reverified_date_utc": "2026-11-12",
+        "reverified_by": "arena/e3148b95-nfl1 via official page-fetch tool",
+        "used_for": [
+          "nfl_news_2026_week10.tsv",
+          "verified Bills/ Broncos transaction facts"
+        ]
+      },
+      {
+        "id": "nfl_news_mccarthy_herbert",
+        "publisher": "National Football League (official league website)",
+        "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-monday-nov-9",
+        "page_title_as_retrieved": "NFL news roundup: J.J. McCarthy expected to play Week 10; Justin Herbert avoids finger fracture | Latest NFL News, Analysis & Updates | NFL.com",
+        "tier": "OFFICIAL",
+        "reverified_date_utc": "2026-11-12",
+        "reverified_by": "arena/e3148b95-nfl1 via official page-fetch tool",
+        "used_for": [
+          "nfl_news_2026_week10.tsv",
+          "verified player-availability facts"
+        ]
+      },
+      {
+        "id": "nfl_news_week9_injuries",
+        "publisher": "National Football League (official league website)",
+        "url": "https://www.nfl.com/news/notable-injuries-news-sunday-week-9-games-2026",
+        "page_title_as_retrieved": "Notable injuries, news from Sunday's Week 9 games: Rams WR Puka Nacua to undergo testing on knee injury | Latest NFL News, Analysis & Updates | NFL.com",
+        "tier": "OFFICIAL",
+        "reverified_date_utc": "2026-11-12",
+        "reverified_by": "arena/e3148b95-nfl1 via official page-fetch tool",
+        "used_for": [
+          "nfl_news_2026_week10.tsv",
+          "official Week 9 injury roundup"
         ]
       },
       {
@@ -304,7 +360,7 @@
         "expected": 14,
         "actual": 14,
         "result": "PASS",
-        "source_url": "https://www.nfl.com/injuries/",
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
         "note": ""
       },
       {
@@ -313,7 +369,7 @@
         "expected": 28,
         "actual": 28,
         "result": "PASS",
-        "source_url": "https://www.nfl.com/injuries/",
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
         "note": ""
       },
       {
@@ -322,7 +378,7 @@
         "expected": 32,
         "actual": 32,
         "result": "PASS",
-        "source_url": "https://www.nfl.com/injuries/",
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
         "note": ""
       },
       {
@@ -331,16 +387,16 @@
         "expected": [],
         "actual": [],
         "result": "PASS",
-        "source_url": "https://www.nfl.com/injuries/",
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
         "note": ""
       },
       {
         "check_id": "V18",
         "scope": "schedule: no team appears twice in the slate",
-        "expected": 28,
-        "actual": 28,
+        "expected": [],
+        "actual": [],
         "result": "PASS",
-        "source_url": "https://www.nfl.com/injuries/",
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
         "note": ""
       },
       {
@@ -350,7 +406,11 @@
         "actual": 32,
         "result": "PASS",
         "source_url": "https://www.nfl.com/injuries/",
-        "note": ""
+        "note": "",
+        "source_urls": [
+          "https://www.nfl.com/injuries/",
+          "https://www.nfl.com/schedules/2026/by-week/week-10"
+        ]
       },
       {
         "check_id": "V20",
@@ -425,7 +485,11 @@
         ],
         "result": "PASS",
         "source_url": "https://www.nfl.com/injuries/",
-        "note": ""
+        "note": "",
+        "source_urls": [
+          "https://www.nfl.com/injuries/",
+          "https://www.nfl.com/schedules/2026/by-week/week-10"
+        ]
       },
       {
         "check_id": "V21",
@@ -492,7 +556,11 @@
         ],
         "result": "PASS",
         "source_url": "https://www.nfl.com/injuries/",
-        "note": ""
+        "note": "",
+        "source_urls": [
+          "https://www.nfl.com/injuries/",
+          "https://www.nfl.com/schedules/2026/by-week/week-10"
+        ]
       },
       {
         "check_id": "V22",
@@ -501,7 +569,11 @@
         "actual": [],
         "result": "PASS",
         "source_url": "https://www.nfl.com/injuries/",
-        "note": ""
+        "note": "",
+        "source_urls": [
+          "https://www.nfl.com/injuries/",
+          "https://www.nfl.com/schedules/2026/by-week/week-10"
+        ]
       },
       {
         "check_id": "V23",
@@ -559,16 +631,26 @@
       },
       {
         "check_id": "V29",
-        "scope": "cross-source: the week-10 bye list is corroborated by five independent schedule sources",
-        "expected": [],
-        "actual": [],
+        "scope": "schedule: bye teams match the explicit Week 10 list on the official NFL schedule",
+        "expected": [
+          "CHI",
+          "DEN",
+          "PHI",
+          "TB"
+        ],
+        "actual": [
+          "CHI",
+          "DEN",
+          "PHI",
+          "TB"
+        ],
         "result": "PASS",
-        "source_url": "https://www.nfl.com/injuries/",
-        "note": "Primary evidence: CHI/DEN/PHI/TB are absent from the official injury report while all 28 other clubs appear. Corroborated by: https://www.newscentermaine.com/article/sports/nfl/how-to-watch-this-weekend-nfl-games-week-10/507-6d116a9f-0de9-4221-a4d7-ac4c426556cb ; https://printablepedia.com/nfl-week-10-schedule/ ; https://www.renderfoot.com/nfl-schedule/week-10 ; https://nflplayoffpass.com/nfl-bye-weeks/ ; https://www.comped.com/nfl/printable/week-10"
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+        "note": "Transcribed from the NFL.com Week 10 schedule's 'Teams on Bye' block. The four bye designations are not inferred from missing injury-report rows."
       },
       {
         "check_id": "V30",
-        "scope": "provenance: 100% of published rows carry a source URL",
+        "scope": "provenance: every published data row has a registered HTTPS source",
         "expected": [],
         "actual": [],
         "result": "PASS",
@@ -597,6 +679,15 @@
         "result": "FLAG",
         "source_url": "https://github.com/nflverse/nflverse-pbp/blob/master/teams_colors_logos.csv",
         "note": "Retired codes are present in the mirror and must be excluded from any join against current-season data. Flagged, not failed: the file is a community mirror and is never a source of on-field values."
+      },
+      {
+        "check_id": "V33",
+        "scope": "schedule: every Week 10 fixture, date and kickoff matches the official NFL schedule",
+        "expected": [],
+        "actual": [],
+        "result": "PASS",
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+        "note": "Independent fixture snapshot transcribed from NFL.com on 2026-11-12; abbreviations LA and AZ follow NFL.com."
       }
     ],
     "flags": [
@@ -625,8 +716,8 @@
         "handling": "published verbatim; EXCLUDED from all derived metrics; left blank on the site tables"
       }
     ],
-    "total": 34,
-    "PASS": 29,
+    "total": 35,
+    "PASS": 30,
     "FLAG": 5,
     "FAIL": 0,
     "completed_games": 136,
@@ -638,12 +729,11 @@
     "teams_reporting": 24,
     "teams_no_injuries_reported": 4,
     "teams_on_bye": 4,
-    "bye_corroboration": [
-      "https://www.newscentermaine.com/article/sports/nfl/how-to-watch-this-weekend-nfl-games-week-10/507-6d116a9f-0de9-4221-a4d7-ac4c426556cb",
-      "https://printablepedia.com/nfl-week-10-schedule/",
-      "https://www.renderfoot.com/nfl-schedule/week-10",
-      "https://nflplayoffpass.com/nfl-bye-weeks/",
-      "https://www.comped.com/nfl/printable/week-10"
+    "official_week10_byes": [
+      "CHI",
+      "DEN",
+      "PHI",
+      "TB"
     ]
   },
   "standings": {
@@ -2107,7 +2197,11 @@
         "home_abbr": "NYG",
         "broadcast": "Prime Video",
         "venue_status": "scheduled",
-        "source_url": "https://www.nfl.com/injuries/"
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+        "source_urls": [
+          "https://www.nfl.com/schedules/2026/by-week/week-10",
+          "https://www.nfl.com/injuries/"
+        ]
       },
       {
         "week": 10,
@@ -2118,7 +2212,11 @@
         "home_abbr": "DET",
         "broadcast": "FOX, FOX DEPORTES",
         "venue_status": "scheduled (international game)",
-        "source_url": "https://www.nfl.com/injuries/"
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+        "source_urls": [
+          "https://www.nfl.com/schedules/2026/by-week/week-10",
+          "https://www.nfl.com/injuries/"
+        ]
       },
       {
         "week": 10,
@@ -2129,7 +2227,11 @@
         "home_abbr": "ATL",
         "broadcast": "CBS",
         "venue_status": "scheduled",
-        "source_url": "https://www.nfl.com/injuries/"
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+        "source_urls": [
+          "https://www.nfl.com/schedules/2026/by-week/week-10",
+          "https://www.nfl.com/injuries/"
+        ]
       },
       {
         "week": 10,
@@ -2140,7 +2242,11 @@
         "home_abbr": "CLE",
         "broadcast": "FOX",
         "venue_status": "scheduled",
-        "source_url": "https://www.nfl.com/injuries/"
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+        "source_urls": [
+          "https://www.nfl.com/schedules/2026/by-week/week-10",
+          "https://www.nfl.com/injuries/"
+        ]
       },
       {
         "week": 10,
@@ -2151,7 +2257,11 @@
         "home_abbr": "GB",
         "broadcast": "FOX",
         "venue_status": "scheduled",
-        "source_url": "https://www.nfl.com/injuries/"
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+        "source_urls": [
+          "https://www.nfl.com/schedules/2026/by-week/week-10",
+          "https://www.nfl.com/injuries/"
+        ]
       },
       {
         "week": 10,
@@ -2162,7 +2272,11 @@
         "home_abbr": "IND",
         "broadcast": "CBS",
         "venue_status": "scheduled",
-        "source_url": "https://www.nfl.com/injuries/"
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+        "source_urls": [
+          "https://www.nfl.com/schedules/2026/by-week/week-10",
+          "https://www.nfl.com/injuries/"
+        ]
       },
       {
         "week": 10,
@@ -2173,7 +2287,11 @@
         "home_abbr": "NO",
         "broadcast": "FOX",
         "venue_status": "scheduled",
-        "source_url": "https://www.nfl.com/injuries/"
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+        "source_urls": [
+          "https://www.nfl.com/schedules/2026/by-week/week-10",
+          "https://www.nfl.com/injuries/"
+        ]
       },
       {
         "week": 10,
@@ -2184,7 +2302,11 @@
         "home_abbr": "NYJ",
         "broadcast": "CBS",
         "venue_status": "scheduled",
-        "source_url": "https://www.nfl.com/injuries/"
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+        "source_urls": [
+          "https://www.nfl.com/schedules/2026/by-week/week-10",
+          "https://www.nfl.com/injuries/"
+        ]
       },
       {
         "week": 10,
@@ -2195,7 +2317,11 @@
         "home_abbr": "TEN",
         "broadcast": "FOX",
         "venue_status": "scheduled",
-        "source_url": "https://www.nfl.com/injuries/"
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+        "source_urls": [
+          "https://www.nfl.com/schedules/2026/by-week/week-10",
+          "https://www.nfl.com/injuries/"
+        ]
       },
       {
         "week": 10,
@@ -2206,7 +2332,11 @@
         "home_abbr": "LV",
         "broadcast": "CBS",
         "venue_status": "scheduled",
-        "source_url": "https://www.nfl.com/injuries/"
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+        "source_urls": [
+          "https://www.nfl.com/schedules/2026/by-week/week-10",
+          "https://www.nfl.com/injuries/"
+        ]
       },
       {
         "week": 10,
@@ -2217,7 +2347,11 @@
         "home_abbr": "AZ",
         "broadcast": "CBS",
         "venue_status": "scheduled",
-        "source_url": "https://www.nfl.com/injuries/"
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+        "source_urls": [
+          "https://www.nfl.com/schedules/2026/by-week/week-10",
+          "https://www.nfl.com/injuries/"
+        ]
       },
       {
         "week": 10,
@@ -2228,7 +2362,11 @@
         "home_abbr": "DAL",
         "broadcast": "FOX",
         "venue_status": "scheduled",
-        "source_url": "https://www.nfl.com/injuries/"
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+        "source_urls": [
+          "https://www.nfl.com/schedules/2026/by-week/week-10",
+          "https://www.nfl.com/injuries/"
+        ]
       },
       {
         "week": 10,
@@ -2239,7 +2377,11 @@
         "home_abbr": "CIN",
         "broadcast": "NBC, UNIVERSO",
         "venue_status": "scheduled",
-        "source_url": "https://www.nfl.com/injuries/"
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+        "source_urls": [
+          "https://www.nfl.com/schedules/2026/by-week/week-10",
+          "https://www.nfl.com/injuries/"
+        ]
       },
       {
         "week": 10,
@@ -2250,7 +2392,11 @@
         "home_abbr": "BAL",
         "broadcast": "ESPN, ABC, ESPN2, ESPN DEPORTES",
         "venue_status": "scheduled",
-        "source_url": "https://www.nfl.com/injuries/"
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+        "source_urls": [
+          "https://www.nfl.com/schedules/2026/by-week/week-10",
+          "https://www.nfl.com/injuries/"
+        ]
       }
     ],
     "byes": [
@@ -2258,25 +2404,25 @@
         "week": 10,
         "team_abbr": "CHI",
         "status": "on bye",
-        "source_url": "https://www.nfl.com/injuries/"
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
       },
       {
         "week": 10,
         "team_abbr": "DEN",
         "status": "on bye",
-        "source_url": "https://www.nfl.com/injuries/"
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
       },
       {
         "week": 10,
         "team_abbr": "PHI",
         "status": "on bye",
-        "source_url": "https://www.nfl.com/injuries/"
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
       },
       {
         "week": 10,
         "team_abbr": "TB",
         "status": "on bye",
-        "source_url": "https://www.nfl.com/injuries/"
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
       }
     ],
     "origination_board": [
@@ -2289,7 +2435,7 @@
         "venue_status": "scheduled",
         "away_abbr": "WAS",
         "home_abbr": "NYG",
-        "source_url": "https://www.nfl.com/injuries/",
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
         "away_record": "2-5-1",
         "home_record": "5-2-1",
         "rating_gap_home_minus_away": 5.0,
@@ -2319,7 +2465,7 @@
         "venue_status": "scheduled (international game)",
         "away_abbr": "NE",
         "home_abbr": "DET",
-        "source_url": "https://www.nfl.com/injuries/",
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
         "away_record": "5-4",
         "home_record": "6-2",
         "rating_gap_home_minus_away": 3.681,
@@ -2349,7 +2495,7 @@
         "venue_status": "scheduled",
         "away_abbr": "KC",
         "home_abbr": "ATL",
-        "source_url": "https://www.nfl.com/injuries/",
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
         "away_record": "6-2",
         "home_record": "3-6",
         "rating_gap_home_minus_away": -11.264,
@@ -2379,7 +2525,7 @@
         "venue_status": "scheduled",
         "away_abbr": "HOU",
         "home_abbr": "CLE",
-        "source_url": "https://www.nfl.com/injuries/",
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
         "away_record": "3-5",
         "home_record": "5-4",
         "rating_gap_home_minus_away": -6.014,
@@ -2409,7 +2555,7 @@
         "venue_status": "scheduled",
         "away_abbr": "MIN",
         "home_abbr": "GB",
-        "source_url": "https://www.nfl.com/injuries/",
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
         "away_record": "6-2",
         "home_record": "6-3",
         "rating_gap_home_minus_away": -0.972,
@@ -2439,7 +2585,7 @@
         "venue_status": "scheduled",
         "away_abbr": "MIA",
         "home_abbr": "IND",
-        "source_url": "https://www.nfl.com/injuries/",
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
         "away_record": "1-7",
         "home_record": "2-7",
         "rating_gap_home_minus_away": 2.028,
@@ -2469,7 +2615,7 @@
         "venue_status": "scheduled",
         "away_abbr": "CAR",
         "home_abbr": "NO",
-        "source_url": "https://www.nfl.com/injuries/",
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
         "away_record": "3-5",
         "home_record": "3-5",
         "rating_gap_home_minus_away": -1.375,
@@ -2499,7 +2645,7 @@
         "venue_status": "scheduled",
         "away_abbr": "BUF",
         "home_abbr": "NYJ",
-        "source_url": "https://www.nfl.com/injuries/",
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
         "away_record": "7-1",
         "home_record": "2-7",
         "rating_gap_home_minus_away": -13.181,
@@ -2529,7 +2675,7 @@
         "venue_status": "scheduled",
         "away_abbr": "JAX",
         "home_abbr": "TEN",
-        "source_url": "https://www.nfl.com/injuries/",
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
         "away_record": "6-2",
         "home_record": "1-7",
         "rating_gap_home_minus_away": -20.375,
@@ -2559,7 +2705,7 @@
         "venue_status": "scheduled",
         "away_abbr": "SEA",
         "home_abbr": "LV",
-        "source_url": "https://www.nfl.com/injuries/",
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
         "away_record": "5-4",
         "home_record": "4-5",
         "rating_gap_home_minus_away": -7.777,
@@ -2589,7 +2735,7 @@
         "venue_status": "scheduled",
         "away_abbr": "LA",
         "home_abbr": "AZ",
-        "source_url": "https://www.nfl.com/injuries/",
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
         "away_record": "5-4",
         "home_record": "3-6",
         "rating_gap_home_minus_away": -12.223,
@@ -2619,7 +2765,7 @@
         "venue_status": "scheduled",
         "away_abbr": "SF",
         "home_abbr": "DAL",
-        "source_url": "https://www.nfl.com/injuries/",
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
         "away_record": "7-1",
         "home_record": "4-5",
         "rating_gap_home_minus_away": -8.764,
@@ -2649,7 +2795,7 @@
         "venue_status": "scheduled",
         "away_abbr": "PIT",
         "home_abbr": "CIN",
-        "source_url": "https://www.nfl.com/injuries/",
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
         "away_record": "6-2",
         "home_record": "6-2",
         "rating_gap_home_minus_away": 3.625,
@@ -2679,7 +2825,7 @@
         "venue_status": "scheduled",
         "away_abbr": "LAC",
         "home_abbr": "BAL",
-        "source_url": "https://www.nfl.com/injuries/",
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
         "away_record": "0-8",
         "home_record": "4-5",
         "rating_gap_home_minus_away": 7.028,
@@ -2710,6 +2856,9 @@
         "report_status": "reported",
         "evidence": "injury report table on nfl.com/injuries",
         "source_url": "https://www.nfl.com/injuries/",
+        "source_urls": [
+          "https://www.nfl.com/injuries/"
+        ],
         "entries": 6,
         "counts": {
           "FP": 0,
@@ -2759,6 +2908,9 @@
         "report_status": "reported",
         "evidence": "injury report table on nfl.com/injuries",
         "source_url": "https://www.nfl.com/injuries/",
+        "source_urls": [
+          "https://www.nfl.com/injuries/"
+        ],
         "entries": 13,
         "counts": {
           "FP": 0,
@@ -2818,6 +2970,9 @@
         "report_status": "no injuries reported",
         "evidence": "literal text \"No Injuries Reported\" on nfl.com/injuries",
         "source_url": "https://www.nfl.com/injuries/",
+        "source_urls": [
+          "https://www.nfl.com/injuries/"
+        ],
         "entries": 0,
         "counts": {
           "FP": 0,
@@ -2867,6 +3022,9 @@
         "report_status": "reported",
         "evidence": "injury report table on nfl.com/injuries",
         "source_url": "https://www.nfl.com/injuries/",
+        "source_urls": [
+          "https://www.nfl.com/injuries/"
+        ],
         "entries": 11,
         "counts": {
           "FP": 5,
@@ -2916,6 +3074,9 @@
         "report_status": "reported",
         "evidence": "injury report table on nfl.com/injuries",
         "source_url": "https://www.nfl.com/injuries/",
+        "source_urls": [
+          "https://www.nfl.com/injuries/"
+        ],
         "entries": 12,
         "counts": {
           "FP": 10,
@@ -2963,8 +3124,12 @@
         "team_abbr": "CHI",
         "week": 10,
         "report_status": "on bye (no report)",
-        "evidence": "not listed on nfl.com/injuries; bye confirmed independently",
-        "source_url": "https://www.nfl.com/injuries/",
+        "evidence": "not listed on nfl.com/injuries; explicitly listed under Teams on Bye on the official Week 10 NFL schedule",
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+        "source_urls": [
+          "https://www.nfl.com/injuries/",
+          "https://www.nfl.com/schedules/2026/by-week/week-10"
+        ],
         "entries": 0,
         "counts": {
           "FP": 0,
@@ -3014,6 +3179,9 @@
         "report_status": "no injuries reported",
         "evidence": "literal text \"No Injuries Reported\" on nfl.com/injuries",
         "source_url": "https://www.nfl.com/injuries/",
+        "source_urls": [
+          "https://www.nfl.com/injuries/"
+        ],
         "entries": 0,
         "counts": {
           "FP": 0,
@@ -3063,6 +3231,9 @@
         "report_status": "reported",
         "evidence": "injury report table on nfl.com/injuries",
         "source_url": "https://www.nfl.com/injuries/",
+        "source_urls": [
+          "https://www.nfl.com/injuries/"
+        ],
         "entries": 11,
         "counts": {
           "FP": 0,
@@ -3122,6 +3293,9 @@
         "report_status": "reported",
         "evidence": "injury report table on nfl.com/injuries",
         "source_url": "https://www.nfl.com/injuries/",
+        "source_urls": [
+          "https://www.nfl.com/injuries/"
+        ],
         "entries": 16,
         "counts": {
           "FP": 5,
@@ -3169,8 +3343,12 @@
         "team_abbr": "DEN",
         "week": 10,
         "report_status": "on bye (no report)",
-        "evidence": "not listed on nfl.com/injuries; bye confirmed independently",
-        "source_url": "https://www.nfl.com/injuries/",
+        "evidence": "not listed on nfl.com/injuries; explicitly listed under Teams on Bye on the official Week 10 NFL schedule",
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+        "source_urls": [
+          "https://www.nfl.com/injuries/",
+          "https://www.nfl.com/schedules/2026/by-week/week-10"
+        ],
         "entries": 0,
         "counts": {
           "FP": 0,
@@ -3220,6 +3398,9 @@
         "report_status": "reported",
         "evidence": "injury report table on nfl.com/injuries",
         "source_url": "https://www.nfl.com/injuries/",
+        "source_urls": [
+          "https://www.nfl.com/injuries/"
+        ],
         "entries": 9,
         "counts": {
           "FP": 2,
@@ -3269,6 +3450,9 @@
         "report_status": "reported",
         "evidence": "injury report table on nfl.com/injuries",
         "source_url": "https://www.nfl.com/injuries/",
+        "source_urls": [
+          "https://www.nfl.com/injuries/"
+        ],
         "entries": 16,
         "counts": {
           "FP": 1,
@@ -3328,6 +3512,9 @@
         "report_status": "reported",
         "evidence": "injury report table on nfl.com/injuries",
         "source_url": "https://www.nfl.com/injuries/",
+        "source_urls": [
+          "https://www.nfl.com/injuries/"
+        ],
         "entries": 13,
         "counts": {
           "FP": 2,
@@ -3377,6 +3564,9 @@
         "report_status": "reported",
         "evidence": "injury report table on nfl.com/injuries",
         "source_url": "https://www.nfl.com/injuries/",
+        "source_urls": [
+          "https://www.nfl.com/injuries/"
+        ],
         "entries": 11,
         "counts": {
           "FP": 2,
@@ -3426,6 +3616,9 @@
         "report_status": "reported",
         "evidence": "injury report table on nfl.com/injuries",
         "source_url": "https://www.nfl.com/injuries/",
+        "source_urls": [
+          "https://www.nfl.com/injuries/"
+        ],
         "entries": 10,
         "counts": {
           "FP": 0,
@@ -3475,6 +3668,9 @@
         "report_status": "reported",
         "evidence": "injury report table on nfl.com/injuries",
         "source_url": "https://www.nfl.com/injuries/",
+        "source_urls": [
+          "https://www.nfl.com/injuries/"
+        ],
         "entries": 11,
         "counts": {
           "FP": 8,
@@ -3524,6 +3720,9 @@
         "report_status": "reported",
         "evidence": "injury report table on nfl.com/injuries",
         "source_url": "https://www.nfl.com/injuries/",
+        "source_urls": [
+          "https://www.nfl.com/injuries/"
+        ],
         "entries": 10,
         "counts": {
           "FP": 1,
@@ -3583,6 +3782,9 @@
         "report_status": "no injuries reported",
         "evidence": "literal text \"No Injuries Reported\" on nfl.com/injuries",
         "source_url": "https://www.nfl.com/injuries/",
+        "source_urls": [
+          "https://www.nfl.com/injuries/"
+        ],
         "entries": 0,
         "counts": {
           "FP": 0,
@@ -3642,6 +3844,9 @@
         "report_status": "reported",
         "evidence": "injury report table on nfl.com/injuries",
         "source_url": "https://www.nfl.com/injuries/",
+        "source_urls": [
+          "https://www.nfl.com/injuries/"
+        ],
         "entries": 4,
         "counts": {
           "FP": 1,
@@ -3691,6 +3896,9 @@
         "report_status": "reported",
         "evidence": "injury report table on nfl.com/injuries",
         "source_url": "https://www.nfl.com/injuries/",
+        "source_urls": [
+          "https://www.nfl.com/injuries/"
+        ],
         "entries": 10,
         "counts": {
           "FP": 4,
@@ -3750,6 +3958,9 @@
         "report_status": "reported",
         "evidence": "injury report table on nfl.com/injuries",
         "source_url": "https://www.nfl.com/injuries/",
+        "source_urls": [
+          "https://www.nfl.com/injuries/"
+        ],
         "entries": 9,
         "counts": {
           "FP": 1,
@@ -3799,6 +4010,9 @@
         "report_status": "reported",
         "evidence": "injury report table on nfl.com/injuries",
         "source_url": "https://www.nfl.com/injuries/",
+        "source_urls": [
+          "https://www.nfl.com/injuries/"
+        ],
         "entries": 15,
         "counts": {
           "FP": 1,
@@ -3848,6 +4062,9 @@
         "report_status": "reported",
         "evidence": "injury report table on nfl.com/injuries",
         "source_url": "https://www.nfl.com/injuries/",
+        "source_urls": [
+          "https://www.nfl.com/injuries/"
+        ],
         "entries": 10,
         "counts": {
           "FP": 1,
@@ -3897,6 +4114,9 @@
         "report_status": "reported",
         "evidence": "injury report table on nfl.com/injuries",
         "source_url": "https://www.nfl.com/injuries/",
+        "source_urls": [
+          "https://www.nfl.com/injuries/"
+        ],
         "entries": 11,
         "counts": {
           "FP": 10,
@@ -3956,6 +4176,9 @@
         "report_status": "reported",
         "evidence": "injury report table on nfl.com/injuries",
         "source_url": "https://www.nfl.com/injuries/",
+        "source_urls": [
+          "https://www.nfl.com/injuries/"
+        ],
         "entries": 7,
         "counts": {
           "FP": 1,
@@ -4003,8 +4226,12 @@
         "team_abbr": "PHI",
         "week": 10,
         "report_status": "on bye (no report)",
-        "evidence": "not listed on nfl.com/injuries; bye confirmed independently",
-        "source_url": "https://www.nfl.com/injuries/",
+        "evidence": "not listed on nfl.com/injuries; explicitly listed under Teams on Bye on the official Week 10 NFL schedule",
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+        "source_urls": [
+          "https://www.nfl.com/injuries/",
+          "https://www.nfl.com/schedules/2026/by-week/week-10"
+        ],
         "entries": 0,
         "counts": {
           "FP": 0,
@@ -4054,6 +4281,9 @@
         "report_status": "reported",
         "evidence": "injury report table on nfl.com/injuries",
         "source_url": "https://www.nfl.com/injuries/",
+        "source_urls": [
+          "https://www.nfl.com/injuries/"
+        ],
         "entries": 8,
         "counts": {
           "FP": 3,
@@ -4103,6 +4333,9 @@
         "report_status": "no injuries reported",
         "evidence": "literal text \"No Injuries Reported\" on nfl.com/injuries",
         "source_url": "https://www.nfl.com/injuries/",
+        "source_urls": [
+          "https://www.nfl.com/injuries/"
+        ],
         "entries": 0,
         "counts": {
           "FP": 0,
@@ -4162,6 +4395,9 @@
         "report_status": "reported",
         "evidence": "injury report table on nfl.com/injuries",
         "source_url": "https://www.nfl.com/injuries/",
+        "source_urls": [
+          "https://www.nfl.com/injuries/"
+        ],
         "entries": 10,
         "counts": {
           "FP": 2,
@@ -4209,8 +4445,12 @@
         "team_abbr": "TB",
         "week": 10,
         "report_status": "on bye (no report)",
-        "evidence": "not listed on nfl.com/injuries; bye confirmed independently",
-        "source_url": "https://www.nfl.com/injuries/",
+        "evidence": "not listed on nfl.com/injuries; explicitly listed under Teams on Bye on the official Week 10 NFL schedule",
+        "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+        "source_urls": [
+          "https://www.nfl.com/injuries/",
+          "https://www.nfl.com/schedules/2026/by-week/week-10"
+        ],
         "entries": 0,
         "counts": {
           "FP": 0,
@@ -4260,6 +4500,9 @@
         "report_status": "reported",
         "evidence": "injury report table on nfl.com/injuries",
         "source_url": "https://www.nfl.com/injuries/",
+        "source_urls": [
+          "https://www.nfl.com/injuries/"
+        ],
         "entries": 12,
         "counts": {
           "FP": 7,
@@ -4309,6 +4552,9 @@
         "report_status": "reported",
         "evidence": "injury report table on nfl.com/injuries",
         "source_url": "https://www.nfl.com/injuries/",
+        "source_urls": [
+          "https://www.nfl.com/injuries/"
+        ],
         "entries": 9,
         "counts": {
           "FP": 5,

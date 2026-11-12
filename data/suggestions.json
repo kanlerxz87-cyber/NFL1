@@ -260,6 +260,32 @@
     "retrieved": "2026-11-12"
   },
   {
+    "id": "SA-01",
+    "area": "Site architecture",
+    "title": "Guard shared output paths across the four site generators",
+    "decision_impact": "Prevents a routine rebuild from silently replacing the canonical landing page (this audit had to restore index.html and README.md after tools/build.py regenerated them from another generation).",
+    "effort": "Small",
+    "recommended_path": "Review first",
+    "evidence": "docs/audit-b6e68100.md §3",
+    "src": "S23",
+    "status": "Awaiting review",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "SA-02",
+    "area": "Data freshness",
+    "title": "Add a pre-slate injury-report refresh before kickoffs",
+    "decision_impact": "Keeps game-day reads aligned with the official report",
+    "effort": "Small (one extra cron in collect-data.yml)",
+    "recommended_path": "Review first",
+    "evidence": "docs/audit-b6e68100.md §A-F04; https://www.nfl.com/injuries/",
+    "src": "S02",
+    "status": "Awaiting review",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
     "id": "S21",
     "area": "Navigation",
     "title": "Publish a categorized All Sections index so every finding is reachable from the landing page",
@@ -304,10 +330,10 @@
     "title": "Commit generated pages back after each data-bot refresh, or add a staleness gate",
     "decision_impact": "Published injury counts, KPIs and edges always match the current official report",
     "effort": "",
-    "recommended_path": "Review before implementing",
-    "evidence": "The 18:53 data refresh (254 -> 276 injury rows) was not reflected on the published site until a human regenerated it (flag F39)",
+    "recommended_path": "Regeneration step: implemented by session 3d5c5e2d in collect-data.yml. Remaining piece - staleness guard: review before implementing.",
+    "evidence": "The 18:53 data refresh (254 -> 276 injury rows) was not reflected on the published site until a human regenerated it (flag F39); session 3d5c5e2d added the re-render step to the refresh job afterwards.",
     "src": "S01",
-    "status": "Awaiting review",
+    "status": "Partly implemented (re-render) - staleness guard awaiting review",
     "verified": true,
     "retrieved": "2026-11-12"
   },

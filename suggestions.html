@@ -61,7 +61,6 @@
 <a href="pages/props.html">Props</a>
 <a href="pages/questions.html">Questions</a>
 <a href="pages/review.html">Review</a>
-<a href="pages/sections.html">Sections</a>
 <a href="pages/standings.html">Standings</a>
 <a href="pages/strategies.html">Strategies</a>
 <a href="pages/suggestions.html">Suggestions</a>
@@ -124,8 +123,8 @@
 </tbody></table></div>
 <h2 id="suggestions">Improvement suggestions</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-suggestions" aria-label="Filter tbl-suggestions" placeholder="Filter rows…">
-<span class="count" data-count-for="tbl-suggestions">25 rows shown</span></div>
-<div class="tablewrap"><table class="data-table" id="tbl-suggestions"><caption>25 suggestions to improve decision making on this site. Effort is blank and flagged; every row links to an official source.</caption>
+<span class="count" data-count-for="tbl-suggestions">22 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-suggestions"><caption>22 suggestions to improve decision making on this site. Effort is blank and flagged; every row links to an official source.</caption>
 <thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Area</th><th scope="col" class="sortable">Suggestion</th><th scope="col" class="sortable">How it improves decision making</th><th scope="col" class="sortable">Effort / risk estimate</th><th scope="col" class="sortable">Suggested disposition</th><th scope="col" class="sortable">Official evidence</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
 <tr id="S01" data-verified="true">
 <td><code>S01</code></td>
@@ -327,55 +326,25 @@
 <td class="blank wide"></td>
 <td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S23 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="S21" data-verified="true">
-<td><code>S21</code></td>
-<td>Navigation</td>
-<td class="wide">Publish a categorized All Sections index so every finding is reachable from the landing page</td>
-<td class="wide">A reviewer can reach every register, sub-site and finding in one click instead of guessing URLs</td>
-<td data-value="1" class="blank num"></td>
-<td><span class="badge neutral">Adopted (implemented by session 08e0ce01 as pages/sections.html)</span></td>
-<td class="wide">Crawl of index.html and pages/*.html showed zero inbound links to 15 root pages and both sub-sites (flag F37)</td>
-<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+<tr id="SA-01" data-verified="true">
+<td><code>SA-01</code></td>
+<td>Site architecture</td>
+<td class="wide">Guard shared output paths across the four site generators</td>
+<td class="wide">Prevents a routine rebuild from silently replacing the canonical landing page (this audit had to restore index.html and README.md after tools/build.py regenerated them from another generation).</td>
+<td data-value="1" class="num">Small</td>
+<td><span class="badge neutral">Review first</span></td>
+<td class="wide">docs/audit-b6e68100.md §3</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S23 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="S22" data-verified="true">
-<td><code>S22</code></td>
-<td>Governance</td>
-<td class="wide">Consolidate the four flag registers (root F01-F39, pipeline F01-F18, referee R-xx, verified-lab V-xx) into one cross-referenced register</td>
-<td class="wide">One place to triage every irregularity; removes the numbering collisions that already confused two sessions</td>
-<td data-value="1" class="blank num"></td>
-<td><span class="badge neutral">Review before implementing</span></td>
-<td class="wide">Four registers with overlapping IDs are published in one repository; flag F-014 and F26 already record the duplication</td>
-<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
-</tr>
-<tr id="S23" data-verified="true">
-<td><code>S23</code></td>
-<td>Verification</td>
-<td class="wide">Gate the published generation: verify the committed pages, not a regenerated substitute</td>
-<td class="wide">CI would fail on a defect a reader can actually see, instead of on a page that is never published</td>
-<td data-value="1" class="blank num"></td>
-<td><span class="badge neutral">Review before implementing</span></td>
-<td class="wide">tools/build.py rewrites index.html from a different template in CI than the published one (flag F38)</td>
-<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
-</tr>
-<tr id="S24" data-verified="true">
-<td><code>S24</code></td>
-<td>Data operations</td>
-<td class="wide">Commit generated pages back after each data-bot refresh, or add a staleness gate</td>
-<td class="wide">Published injury counts, KPIs and edges always match the current official report</td>
-<td data-value="1" class="blank num"></td>
-<td><span class="badge neutral">Review before implementing</span></td>
-<td class="wide">The 18:53 data refresh (254 -&gt; 276 injury rows) was not reflected on the published site until a human regenerated it (flag F39)</td>
-<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
-</tr>
-<tr id="S25" data-verified="true">
-<td><code>S25</code></td>
-<td>Verification</td>
-<td class="wide">Run the referee&#x27;s independent replication as a CI gate so cross-session disagreements are caught automatically</td>
-<td class="wide">Disputes like the C5 division count (flag F36) would fail the build instead of waiting for manual review</td>
-<td data-value="1" class="blank num"></td>
-<td><span class="badge neutral">Review before implementing</span></td>
-<td class="wide">referee/tools/check_site.py and the replication harness independently reproduced -0.1048 where the repo published -0.1297</td>
-<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+<tr id="SA-02" data-verified="true">
+<td><code>SA-02</code></td>
+<td>Data freshness</td>
+<td class="wide">Add a pre-slate injury-report refresh before kickoffs</td>
+<td class="wide">Keeps game-day reads aligned with the official report</td>
+<td data-value="1" class="num">Small (one extra cron in collect-data.yml)</td>
+<td><span class="badge neutral">Review first</span></td>
+<td class="wide">docs/audit-b6e68100.md §A-F04; https://www.nfl.com/injuries/</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
 </tbody></table></div>
 <h2 id="matrix">Decision matrix</h2>
@@ -427,7 +396,7 @@
 <section class="panel"><h2>Review workflow</h2>
 <ol class="tight">
 <li>Read the <a href="questions.html">decision questions</a> and the <a href="flagged.html">flagged items</a>.</li>
-<li>Compare the 25 suggestions and the three paths above.</li>
+<li>Compare the 22 suggestions and the three paths above.</li>
 <li>Select a path in the Review &amp; Choose a Path box; file the prefilled issue to make the decision durable.</li>
 <li>Close the blocking questions, then — and only then — authorise implementation of individual suggestions.</li>
 </ol>

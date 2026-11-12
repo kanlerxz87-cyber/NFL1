@@ -384,21 +384,16 @@ SUGGESTIONS = [
     },
     {
         "id": "S13",
-        "title": "Regenerate and commit the published pages whenever the data bot commits",
-        "problem": "The 18:53 data refresh changed the official injury report from 254 to 276 rows and "
-                   "starters flagged from 103 to 113, but the published site kept showing the 05:07 "
-                   "build until a human regenerated it (flag F39).",
-        "change": "Either have collect-data.yml run the site generators and commit the pages in the same "
-                  "push, or add a CI staleness gate that fails when data/model is newer than the "
-                  "timestamps embedded in index.html.",
-        "impact": "High - readers and decisions work from numbers that match the current official report.",
-        "effort": "",
-        "risk": "",
-        "depends": "Decision record on the authoritative generation (Q21).",
-        "evidence": "data/model generated_at 18:53 vs 'Data built 05:07' on the published landing page.",
-        "recommend": "Adopt the staleness gate first; it is additive and cannot overwrite another "
-                     "generation's pages.",
-        "status": "Proposed - decision required",
+        "title": "Guard the live site so HTML can never be older than its data",
+        "problem": "The daily data refresh updated data/model/*.json but committed with [skip ci], so the page-rebuild workflows never ran and the published HTML kept the numbers from the last merge. Measured on 2026-11-12: HTML built 05:07 vs data 18:53; 103 vs 113 starters flagged; 20/254 vs 276/276 mirrored-feed coverage.",
+        "change": "Regenerate the site inside the refresh job itself and commit the HTML with the JSON; add a check that fails the build if any page's build stamp predates the data stamp.",
+        "impact": "High - the point of a live dashboard is that it shows current numbers.",
+        "effort": "Low - the regeneration step is added to collect-data.yml; the staleness guard is a small check.",
+        "risk": "Low if the generators stay deterministic.",
+        "depends": "Nothing - the generators already exist.",
+        "evidence": "collect-data.yml 'Re-render the published pages from the refreshed data' step (session 3d5c5e2d); index.html stamp equals dashboard.json generated_at.",
+        "recommend": "Adopt. The regeneration step is implemented; the staleness guard is the remaining piece.",
+        "status": "Implemented (regeneration) - guard proposed",
     },
     {
         "id": "S14",
@@ -430,6 +425,32 @@ SUGGESTIONS = [
         "evidence": "referee replication computed -0.1048 where the site published -0.1297 (flag F36, now fixed).",
         "recommend": "Adopt; it is the cheapest way to keep every future number honest.",
         "status": "Proposed - decision required",
+    },
+    {
+        "id": "SA-01",
+        "title": "Guard shared output paths across the four site generators",
+        "problem": "pipeline/gen_site.py, scripts/verified/build_site.py and tools/build.py all write shared paths (index.html, pages/lines.html, README.md). This audit had to restore the canonical index.html and README.md after a routine tools/build.py run regenerated them from a different generation.",
+        "change": "Split tools/build.py's output paths (or add an output-path ownership guard) so no generator can silently overwrite another generation's page.",
+        "impact": "High - removes a whole class of silent-site regressions.",
+        "effort": "Low",
+        "risk": "Low",
+        "depends": "None",
+        "evidence": "docs/audit-b6e68100.md §3 (structural observation).",
+        "recommend": "Adopt - small change, prevents a recurring hazard.",
+        "status": "Proposed - queued (audit)",
+    },
+    {
+        "id": "SA-02",
+        "title": "Add a pre-slate injury-report refresh before kickoffs",
+        "problem": "The official injury page drifts within hours: between the 18:53 and 22:30 UTC scrapes on 2026-11-12 the Week-10 report changed four IND statuses and added three rows league-wide. A morning snapshot can be stale by kickoff.",
+        "change": "Add one scheduled run of pipeline/scrape_injuries.py + build_all.py shortly before the first Sunday kick-off (e.g. 16:30 UTC) alongside the existing 11:17 daily refresh.",
+        "impact": "High - keeps game-day availability reads aligned with the official report.",
+        "effort": "Low (one cron line in collect-data.yml)",
+        "risk": "Low - the scraper already records its source and falls back cleanly.",
+        "depends": "collect-data workflow (present)",
+        "evidence": "docs/audit-b6e68100.md §A-F04; flag A-F04; official source https://www.nfl.com/injuries/.",
+        "recommend": "Adopt before the next Sunday slate.",
+        "status": "Proposed - queued (audit)",
     },
 ]
 
@@ -479,6 +500,15 @@ DECISIONS = [
         "criteria": "Worst measured drawdown across strategies; user tolerance.",
         "blocks": "Risk gate wording.",
         "status": "Recommended",
+    },
+    {
+        "id": "D06",
+        "decision": "How does the live site stay current with the daily data refresh?",
+        "options": ["Regenerate HTML inside the refresh job and commit it", "Drop [skip ci] and let pages.yml rebuild", "Regenerate only on merge"],
+        "recommend": "Regenerate inside the refresh job (collect-data.yml) and commit the HTML with the JSON.",
+        "criteria": "The live HTML build stamp must match the data generated_at; no extra CI loop.",
+        "blocks": "Whether the dashboard shows current numbers at all.",
+        "status": "Implemented",
     },
 ]
 

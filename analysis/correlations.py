@@ -157,20 +157,17 @@ def main() -> int:
         "Opponent-quality dependence. Contaminates naive correlations that mix home and road legs.")
 
     # C5: division games vs total (needs a division map -> derived from standings file)
-    # FIX (session 08e0ce01, closes flag F36): the map must key on conference AND
-    # division together. Keying on the division word alone (East/West/...) counted
-    # cross-conference matchups such as AFC West vs NFC West as division games
-    # (52 instead of 42; r = -0.1297 instead of -0.1048). Verified against the
-    # official groupings published at https://www.nfl.com/standings/division/2026/REG
-    # on 2026-11-12: all eight groupings match data/verified/standings_2026.csv.
     with (DATA / "standings_2026.csv").open(newline="", encoding="utf-8") as fh:
         st = list(csv.DictReader(fh))
+    # Conference and division must BOTH match: AFC East and NFC East share the bare name
+    # "East", so a division-only key wrongly counted interconference games as division games
+    # (52 instead of 42 for weeks 1-9; fixed after the referee session flagged it —
+    # COORDINATION.md task A1, hand-off from session 25aa7696).
     div = {r["abbr"]: (r["conference"], r["division"]) for r in st}
     div_flag = [1 if div.get(g["home_abbr"]) == div.get(g["away_abbr"]) else 0 for g in games]
     if len(set(div_flag)) > 1:
         add("C5", "Division game flag vs total points", r_of(div_flag, [g["total"] for g in games]), n,
-            f"{sum(div_flag)} of {n} games were division games "
-            f"(conference + division grouping per nfl.com division standings).")
+            f"{sum(div_flag)} of {n} games were division games.")
 
     # Parlay multiplication examples using these measured values
     parlay = []

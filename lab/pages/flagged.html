@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flagged for review - NFL Decision Lab</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../index.html"><span class="brand-mark">NFL</span> Decision Lab</a>
+  <div class="tagline">Session 1505ac8e &middot; data retrieved 2026-11-12 &middot; every row links to its official source</div>
+</header>
+<div class="layout">
+  <nav class="sidebar">
+    <a class="nav-home" href="../index.html">Overview</a>
+    <div class="nav-group"><div class="nav-title">Decide</div><a class="" href="../pages/executive-summary.html">Executive summary</a><a class="" href="../pages/questions.html">Questions &amp; answers</a><a class="" href="../pages/suggestions.html">Suggestions: choose a path</a></div><div class="nav-group"><div class="nav-title">Model</div><a class="" href="../pages/lines.html">My lines</a><a class="" href="../pages/strategies.html">Strategy lab</a><a class="" href="../pages/correlations.html">Correlations</a><a class="" href="../pages/luck.html">Skill vs luck</a></div><div class="nav-group"><div class="nav-title">Availability</div><a class="" href="../pages/injuries.html">Official injury report</a><a class="" href="../pages/depth.html">Depth charts</a><a class="" href="../pages/availability.html">Availability pressure</a></div><div class="nav-group"><div class="nav-title">Data</div><a class="" href="../pages/standings.html">Standings</a><a class="" href="../pages/schedule.html">Week 10 schedule</a></div><div class="nav-group"><div class="nav-title">Assurance</div><a class="" href="../pages/sources.html">Sources</a><a class="" href="../pages/verification.html">Verification</a><a class="active" href="../pages/flagged.html">Flagged for review</a></div>
+    <div class="nav-group"><div class="nav-title">Other site generations</div>
+      <a href="../../index.html" target="_blank" rel="noopener">Root dashboard &#8599;</a>
+      <a href="../../docs/index.html" target="_blank" rel="noopener">docs/ dashboard &#8599;</a>
+      <a href="../../verified-lab/index.html" target="_blank" rel="noopener">verified-lab/ &#8599;</a>
+      <a href="../../referee/index.html" target="_blank" rel="noopener">referee/ audit &#8599;</a>
+      <a href="../../dashboard/index.html" target="_blank" rel="noopener">dashboard/ &#8599;</a>
+    </div>
+  </nav>
+  <main class="content">
+    <h1>Flagged for review</h1>
+    
+    <div class="kpis"><div class="kpi"><div class="kpi-label">Critical</div><div class="kpi-value">1</div></div><div class="kpi"><div class="kpi-label">High</div><div class="kpi-value">7</div></div><div class="kpi"><div class="kpi-label">Medium</div><div class="kpi-value">9</div></div><div class="kpi"><div class="kpi-label">Low</div><div class="kpi-value">3</div></div><div class="kpi"><div class="kpi-label">Needs review</div><div class="kpi-value">16</div></div></div><div class="callout"><h3>Flagged for review</h3>
+<p>Everything on this page is an irregularity, an unverifiable value or a decision that
+cannot reasonably be made with the data that exists. None of it blocks the site, and none of
+it has been silently fixed. Each row links to the official source that would settle it.</p></div><section class="flag">
+<h3>NFL1-01 &middot; No official or book betting prices exist in this repository.
+<span class="pill pill-bad">Critical</span>
+<span class="pill pill-neutral">needs review</span></h3>
+<p class="meta"><strong>Area:</strong> Prices</p>
+<p>Every edge, every ROI figure and the whole player-prop track are blank because there is no price to compute them from. Gates G4 and the prop track are blocked. The NFL&#x27;s authorised betting-data route is a commercial partnership, not a public feed.</p>
+<p class="srcs"><a class="src" href="https://investors.geniussports.com/news/announcements/announcements-details/2023/National-Football-League-Extends-Strategic-Partnership-with-Genius-Sports-as-Exclusive-Official-NFL-Data-and-Watch--Bet-Distribution-Partner/default.aspx" target="_blank" rel="noopener">Genius Sports - NFL exclusive data partnership</a><br><a class="src" href="https://www.nj.gov/oag/ge/" target="_blank" rel="noopener">New Jersey Division of Gaming Enforcement</a></p>
+</section><section class="flag">
+<h3>NFL1-02 &middot; nfl.com publishes no depth chart; club sites do.
+<span class="pill pill-warn">High</span>
+<span class="pill pill-neutral">resolved for 31 clubs</span></h3>
+<p class="meta"><strong>Area:</strong> Depth charts</p>
+<p>https://www.nfl.com/teams/kansas-city-chiefs/depth-chart returns a soft 404 (&#x27;404 - Flag on the Play.&#x27;), re-verified 2026-11-12. An earlier session recorded this as blocking (flag F-001). The 32 official club sites do publish one, and 31 of 32 were collected.</p>
+<p class="srcs"><a class="src" href="https://www.nfl.com/teams/kansas-city-chiefs/depth-chart" target="_blank" rel="noopener">nfl.com depth chart (404)</a><br><a class="src" href="https://www.chiefs.com/team/depth-chart" target="_blank" rel="noopener">chiefs.com official depth chart</a></p>
+</section><section class="flag">
+<h3>NFL1-03 &middot; Houston&#x27;s depth chart cannot be scraped; it is rendered in the browser.
+<span class="pill pill-info">Medium</span>
+<span class="pill pill-neutral">needs review</span></h3>
+<p class="meta"><strong>Area:</strong> Depth charts</p>
+<p>The page title confirms a depth chart exists, but no table is present in the server HTML. Recorded as unavailable rather than filled from elsewhere. 1 of 32 clubs.</p>
+<p class="srcs"><a class="src" href="https://www.houstontexans.com/team/depth-chart" target="_blank" rel="noopener">houstontexans.com depth chart</a></p>
+</section><section class="flag">
+<h3>NFL1-04 &middot; The clubs themselves label these charts &#x27;Unofficial&#x27;.
+<span class="pill pill-info">Medium</span>
+<span class="pill pill-neutral">needs review</span></h3>
+<p class="meta"><strong>Area:</strong> Depth charts</p>
+<p>chiefs.com&#x27;s page title is literally &#x27;Kansas City Chiefs Unofficial Depth Chart&#x27; and packers.com prints &#x27;Unofficial, Nov. 10, 2026&#x27;. The label is the clubs&#x27; own caveat and is carried on the site, not hidden.</p>
+<p class="srcs"><a class="src" href="https://www.chiefs.com/team/depth-chart" target="_blank" rel="noopener">chiefs.com official depth chart</a><br><a class="src" href="https://www.packers.com/team/depth-chart" target="_blank" rel="noopener">packers.com official depth chart</a></p>
+</section><section class="flag">
+<h3>NFL1-05 &middot; Only 6 of 279 injury rows carry a game status.
+<span class="pill pill-warn">High</span>
+<span class="pill pill-neutral">needs review</span></h3>
+<p class="meta"><strong>Area:</strong> Injuries</p>
+<p>5 Out and 1 Questionable as of the 2026-11-12 retrieval; the other 273 are blank. Game designations are filed later in the week. Any availability signal keyed on Out/Questionable is therefore near-empty until then.</p>
+<p class="srcs"><a class="src" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">Official NFL injury report, Week 10</a></p>
+</section><section class="flag">
+<h3>NFL1-06 &middot; Only 6 of 279 injury rows carry a body part - the same 6.
+<span class="pill pill-info">Medium</span>
+<span class="pill pill-neutral">needs review</span></h3>
+<p class="meta"><strong>Area:</strong> Injuries</p>
+<p>The Injuries column is empty on 273 rows. It is filled for exactly the rows that have a game status, which suggests the two columns are filed together.</p>
+<p class="srcs"><a class="src" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">Official NFL injury report, Week 10</a></p>
+</section><section class="flag">
+<h3>NFL1-07 &middot; 76 of 279 injury rows do not appear on the club&#x27;s own depth chart.
+<span class="pill pill-warn">High</span>
+<span class="pill pill-neutral">needs review</span></h3>
+<p class="meta"><strong>Area:</strong> Injuries</p>
+<p>203 rows match a player listed at a matching position on that club&#x27;s official depth chart. 76 do not. Two official sources disagree about club membership. The lab scores only the 203 that agree, which is conservative.</p>
+<p class="srcs"><a class="src" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">Official NFL injury report, Week 10</a><br><a class="src" href="https://www.chiefs.com/team/depth-chart" target="_blank" rel="noopener">Official club depth charts (31 clubs)</a></p>
+</section><section class="flag">
+<h3>NFL1-08 &middot; The committed injury snapshot is 25 rows behind the live official page.
+<span class="pill pill-warn">High</span>
+<span class="pill pill-neutral">needs review</span></h3>
+<p class="meta"><strong>Area:</strong> Repository state</p>
+<p>The repository holds 254 Week-10 injury rows; the live page carried 279 at retrieval. Committed injury data is a snapshot, not a feed.</p>
+<p class="srcs"><a class="src" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">Official NFL injury report, Week 10</a></p>
+</section><section class="flag">
+<h3>NFL1-09 &middot; A previously published league-balance figure no longer matches the official page.
+<span class="pill pill-warn">High</span>
+<span class="pill pill-neutral">needs review</span></h3>
+<p class="meta"><strong>Area:</strong> Repository state</p>
+<p>An earlier session published W = L = 134, T = 4, PF = PA = 6,267. The live official page gives W = L = 135, T = 2, PF = PA = 6,246, and the 136 verified game results reproduce that exactly for all 32 clubs.</p>
+<p class="srcs"><a class="src" href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">Official 2026 standings</a><br><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-1" target="_blank" rel="noopener">Official 2026 game results</a></p>
+</section><section class="flag">
+<h3>NFL1-10 &middot; Three &#x27;nfl.com contradicts its own arithmetic&#x27; flags no longer reproduce.
+<span class="pill pill-info">Medium</span>
+<span class="pill pill-neutral">needs review</span></h3>
+<p class="meta"><strong>Area:</strong> Repository state</p>
+<p>WAS non_conf, IND div and PHI div were published as self-contradictory. On the 2026-11-12 retrieval all 32 rows satisfy every identity tested. Either the page was corrected or the earlier transcription was wrong; both are possible and the record is preserved either way.</p>
+<p class="srcs"><a class="src" href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">Official 2026 standings</a></p>
+</section><section class="flag">
+<h3>NFL1-11 &middot; Three spellings of two club codes across sessions.
+<span class="pill pill-ok">Low</span>
+<span class="pill pill-neutral">handled</span></h3>
+<p class="meta"><strong>Area:</strong> Repository state</p>
+<p>nfl.com uses LA and AZ; a committed file uses LAR; a model artifact uses ARI. An alias table reconciles them and all 32 clubs then agree.</p>
+<p class="srcs"><a class="src" href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">Official 2026 standings</a></p>
+</section><section class="flag">
+<h3>NFL1-12 &middot; No rule can be certified: one season and no prices.
+<span class="pill pill-warn">High</span>
+<span class="pill pill-neutral">needs review</span></h3>
+<p class="meta"><strong>Area:</strong> Validation</p>
+<p>Seven rules were graded on weeks 4-9 of 2026. All seven fail at least one gate. G4 needs prices, G6 needs a second season, and both are blocked. The nearest miss is S1 (rest edge): 26 bets, 73% against my line, permutation p = 0.0005, failing only the 30-bet minimum and the multi-season check.</p>
+<p class="srcs"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-1" target="_blank" rel="noopener">Official 2026 game results</a><br><a class="src" href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda366.htm" target="_blank" rel="noopener">NIST/SEMATECH - bootstrap</a></p>
+</section><section class="flag">
+<h3>NFL1-13 &middot; The outcome measure is partly circular, and one rule demonstrates it.
+<span class="pill pill-info">Medium</span>
+<span class="pill pill-neutral">disclosed by design</span></h3>
+<p class="meta"><strong>Area:</strong> Validation</p>
+<p>Edge is measured against my own predicted margin, so any rule that selects on that number is self-referential. Gate G10 catches it; rule S8 exists purely to prove the gate fires, and it does.</p>
+<p class="srcs"><a class="src" href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda366.htm" target="_blank" rel="noopener">NIST/SEMATECH - bootstrap</a></p>
+</section><section class="flag">
+<h3>NFL1-14 &middot; Practice-participation weights are this project&#x27;s assumption, not an NFL rule.
+<span class="pill pill-info">Medium</span>
+<span class="pill pill-neutral">needs review</span></h3>
+<p class="meta"><strong>Area:</strong> Modelling</p>
+<p>DNP 0.5 and Limited 0.2, scaled by depth rank. They are published next to the scores they produce so a reviewer can change them.</p>
+<p class="srcs"><a class="src" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">Official NFL injury report, Week 10</a></p>
+</section><section class="flag">
+<h3>NFL1-15 &middot; Rewards of value need legal review that has not happened.
+<span class="pill pill-warn">High</span>
+<span class="pill pill-neutral">needs review</span></h3>
+<p class="meta"><strong>Area:</strong> Competition</p>
+<p>The leaderboard awards paper points only and says so on the page.</p>
+<p class="srcs"><a class="src" href="https://www.nj.gov/oag/ge/" target="_blank" rel="noopener">New Jersey Division of Gaming Enforcement</a></p>
+</section><section class="flag">
+<h3>NFL1-16 &middot; Five site generations are live at once.
+<span class="pill pill-info">Medium</span>
+<span class="pill pill-neutral">needs review</span></h3>
+<p class="meta"><strong>Area:</strong> Site</p>
+<p>Root index.html + pages/, docs/, verified-lab/, dashboard/ and lab/. All are preserved and all are linked from this site. See suggestion S-13 for three options.</p>
+<p class="srcs"><a class="src" href="https://docs.github.com/en/pages" target="_blank" rel="noopener">GitHub Pages documentation</a></p>
+</section><section class="flag">
+<h3>NFL1-17 &middot; Two CI jobs regenerate the same root pages from different generators.
+<span class="pill pill-info">Medium</span>
+<span class="pill pill-neutral">needs review</span></h3>
+<p class="meta"><strong>Area:</strong> Site</p>
+<p>tools/build.py (Verify NFL1 site) and scripts/verified/build_site.py (Verify NFL Decision Lab site build) both write index.html and pages/. That is why this session built into lab/ instead.</p>
+<p class="srcs"><a class="src" href="https://docs.github.com/en/pages" target="_blank" rel="noopener">GitHub Pages documentation</a></p>
+</section><section class="flag">
+<h3>NFL1-18 &middot; COORDINATION.md begins with a stray &#x27;EAD&#x27; fragment on line 1.
+<span class="pill pill-ok">Low</span>
+<span class="pill pill-neutral">needs review</span></h3>
+<p class="meta"><strong>Area:</strong> Repository state</p>
+<p>The shared task board&#x27;s first line is the three characters &#x27;EAD&#x27;, followed by a blank line and then the real heading. It looks like the tail of a truncated &#x27;README&#x27; written by a generator. Not fixed here because the file is shared; logged for whichever session owns it next.</p>
+<p class="srcs"><a class="src" href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener">This repository</a></p>
+</section><section class="flag">
+<h3>NFL1-19 &middot; Week 10 is in progress; standings cover weeks 1-9 only.
+<span class="pill pill-ok">Low</span>
+<span class="pill pill-neutral">informational</span></h3>
+<p class="meta"><strong>Area:</strong> Data coverage</p>
+<p>Washington and the Giants are both listed at 8 games played and their Thursday night game had not kicked off at retrieval time. The cut-off is stated on every page that shows standings.</p>
+<p class="srcs"><a class="src" href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">Official 2026 standings</a><br><a class="src" href="https://www.nfl.com/schedules/2026/week10" target="_blank" rel="noopener">Official Week 10 schedule</a></p>
+</section><section class="flag">
+<h3>NFL1-20 &middot; The ratings use 2026 only.
+<span class="pill pill-info">Medium</span>
+<span class="pill pill-neutral">needs review</span></h3>
+<p class="meta"><strong>Area:</strong> Data coverage</p>
+<p>Only the 136 games transcribed and reconciled against the official standings are used. Earlier seasons exist in a community mirror that this project does not treat as verified, so they are not used.</p>
+<p class="srcs"><a class="src" href="https://github.com/nflverse/nflverse-data" target="_blank" rel="noopener">nflverse community data mirror</a><br><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-1" target="_blank" rel="noopener">Official 2026 game results</a></p>
+</section>
+    <footer class="pagefoot">
+      <p>Every table row on this page links to the official page it came from. A value that
+      could not be confirmed is shown as <span class="blank">blank</span> &mdash; it is never
+      inferred or filled in. This is a research tool, not betting advice.</p>
+    </footer>
+  </main>
+</div>
+</body>
+</html>
