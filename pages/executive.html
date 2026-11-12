@@ -18,7 +18,7 @@
     <p class="eyebrow">Evidence-first dashboard</p>
     <h1>Executive Summary</h1>
     <p class="standfirst">What was built, what the evidence says, what is missing, and which decisions are waiting.</p>
-    <p class="timestamp">Data built 2026-11-12T18:53:41+00:00 · every value links to its source</p>
+    <p class="timestamp">Data built 2026-11-12T22:30:46+00:00 · every value links to its source</p>
   </section>
   
 <section class="panel">
@@ -37,11 +37,11 @@
     (2026 standings (W-L-T, points for/against); Scraped official injury report vs hand-transcribed sample; Computed standings vs companion transcription (data/standings.csv); Scraped official report vs companion injury CSV (data/injuries.csv)).</li>
     <li>12 source files pinned with download URL, byte count, sha256 and fetch time.</li>
     <li>The current week's official injury report is scraped directly from nfl.com:
-    276 rows across the clubs that had submitted a report,
+    279 rows across the clubs that had submitted a report,
     matched to the weekly depth chart. 2 clubs had no report at scrape time
     (BAL, LAC).</li>
     <li>The mirrored feed is incomplete in-season: 276 of
-    276 official week 10 rows were present in it, which is
+    279 official week 10 rows were present in it, which is
     exactly why the official page is scraped directly.</li>
     <li>The closing-line sign convention was proved from data: correlation
     0.439 with the home margin over
@@ -95,7 +95,7 @@
   </ol>
 </section>
 
-<section class="kpis"><article class="kpi"><span class="kpi-label">Rows verified vs nfl.com</span><strong class="kpi-value">128/128</strong><span class="kpi-sub">standings + injury sample</span></article><article class="kpi"><span class="kpi-label">Own-line test MAE</span><strong class="kpi-value">9.98</strong><span class="kpi-sub">market 9.48 over 136 games</span></article><article class="kpi"><span class="kpi-label">Strategies passing all gates</span><strong class="kpi-value">0 of 12</strong><span class="kpi-sub">8 gates + BH correction</span></article><article class="kpi"><span class="kpi-label">Starters flagged unavailable</span><strong class="kpi-value">113</strong><span class="kpi-sub">official game status</span></article><article class="kpi"><span class="kpi-label">Prop lines built</span><strong class="kpi-value">343</strong><span class="kpi-sub">market price: none</span></article><article class="kpi"><span class="kpi-label">Pinned source files</span><strong class="kpi-value">12</strong><span class="kpi-sub">URL + sha256</span></article></section>
+<section class="kpis"><article class="kpi"><span class="kpi-label">Rows verified vs nfl.com</span><strong class="kpi-value">128/128</strong><span class="kpi-sub">standings + injury sample</span></article><article class="kpi"><span class="kpi-label">Own-line test MAE</span><strong class="kpi-value">9.98</strong><span class="kpi-sub">market 9.48 over 136 games</span></article><article class="kpi"><span class="kpi-label">Strategies passing all gates</span><strong class="kpi-value">0 of 12</strong><span class="kpi-sub">8 gates + BH correction</span></article><article class="kpi"><span class="kpi-label">Starters flagged unavailable</span><strong class="kpi-value">111</strong><span class="kpi-sub">official game status</span></article><article class="kpi"><span class="kpi-label">Prop lines built</span><strong class="kpi-value">343</strong><span class="kpi-sub">market price: none</span></article><article class="kpi"><span class="kpi-label">Pinned source files</span><strong class="kpi-value">12</strong><span class="kpi-sub">URL + sha256</span></article></section>
 
 <section class="panel">
   <h2>Brief coverage: what is implemented, partial or blocked</h2>

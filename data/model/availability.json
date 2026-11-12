@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-12T18:53:40+00:00",
+ "generated_at": "2026-11-12T22:30:46+00:00",
  "week": 10,
  "clubs_without_report": [
   "BAL",
@@ -10,7 +10,7 @@
   "url": "https://www.nfl.com/injuries/",
   "warning": null,
   "official_counts": {
-   "rows": 276,
+   "rows": 279,
    "teams": 26,
    "clubs_resolved_from_roster": 0,
    "rows_without_club": 0
@@ -19,10 +19,10 @@
  },
  "depth_chart_timestamp": "2026-11-12T15:57:12Z",
  "counts": {
-  "injury_records": 276,
+  "injury_records": 279,
   "rows_with_game_designation": 6,
-  "rows_practice_only_starters": 112,
-  "starters_impacted": 113,
+  "rows_practice_only_starters": 110,
+  "starters_impacted": 111,
   "teams_with_starter_out": 1,
   "records_not_matched_to_depth_chart": 10
  },
@@ -170,20 +170,6 @@
    "source": "https://www.nfl.com/injuries/"
   },
   {
-   "team": "IND",
-   "name": "Indianapolis Colts",
-   "starters_out": 0,
-   "starters_doubtful": 0,
-   "starters_questionable": 0,
-   "starters_practice_only": 6,
-   "starters_no_game_designation": 6,
-   "attrition_points": 0.12,
-   "attrition_index_0_100": 42.9,
-   "backup_experience_avg": 1.8,
-   "backup_snaps_avg": 91.0,
-   "source": "https://www.nfl.com/injuries/"
-  },
-  {
    "team": "CLE",
    "name": "Cleveland Browns",
    "starters_out": 0,
@@ -237,6 +223,20 @@
    "attrition_index_0_100": 30.4,
    "backup_experience_avg": 2.0,
    "backup_snaps_avg": 201.0,
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "team": "IND",
+   "name": "Indianapolis Colts",
+   "starters_out": 0,
+   "starters_doubtful": 0,
+   "starters_questionable": 0,
+   "starters_practice_only": 4,
+   "starters_no_game_designation": 4,
+   "attrition_points": 0.08,
+   "attrition_index_0_100": 28.6,
+   "backup_experience_avg": 1.7,
+   "backup_snaps_avg": 55.0,
    "source": "https://www.nfl.com/injuries/"
   },
   {
@@ -607,28 +607,6 @@
    "position_weight": 0.06,
    "attrition_points": 0.03,
    "source": "https://www.nfl.com/players/d-j-reed/",
-   "depth_source": "https://www.nfl.com/teams/"
-  },
-  {
-   "team": "IND",
-   "player": "Charvarius Ward",
-   "position": "CB",
-   "depth_rank": 1,
-   "depth_slot": "Right Cornerback",
-   "injury": null,
-   "game_status": null,
-   "practice_status": "Did Not Participate In Practice",
-   "signal": "practice only (no game designation yet)",
-   "effective_status": "Did Not Participate In Practice",
-   "status_weight": 0.5,
-   "years_exp": null,
-   "roster_status": null,
-   "replacement": "Cam Taylor-Britt",
-   "replacement_years_exp": 4,
-   "replacement_snaps_2026": 91,
-   "position_weight": 0.06,
-   "attrition_points": 0.03,
-   "source": "https://www.nfl.com/players/charvarius-ward/",
    "depth_source": "https://www.nfl.com/teams/"
   },
   {
@@ -1183,10 +1161,10 @@
   },
   {
    "team": "IND",
-   "player": "A.J. Haulcy",
-   "position": "S",
+   "player": "Grover Stewart",
+   "position": "DT",
    "depth_rank": 1,
-   "depth_slot": "Strong Safety",
+   "depth_slot": "Left Defensive Tackle",
    "injury": null,
    "game_status": null,
    "practice_status": "Did Not Participate In Practice",
@@ -1195,12 +1173,12 @@
    "status_weight": 0.5,
    "years_exp": null,
    "roster_status": null,
-   "replacement": "Hunter Wohler",
+   "replacement": "Tim Smith",
    "replacement_years_exp": 1,
-   "replacement_snaps_2026": 160,
+   "replacement_snaps_2026": 94,
    "position_weight": 0.05,
    "attrition_points": 0.025,
-   "source": "https://www.nfl.com/players/a-j-haulcy/",
+   "source": "https://www.nfl.com/players/grover-stewart/",
    "depth_source": "https://www.nfl.com/teams/"
   },
   {
@@ -2367,28 +2345,6 @@
    "position_weight": 0.05,
    "attrition_points": 0.01,
    "source": "https://www.nfl.com/players/connor-mcgovern-2/",
-   "depth_source": "https://www.nfl.com/teams/"
-  },
-  {
-   "team": "IND",
-   "player": "Jonathan Taylor",
-   "position": "RB",
-   "depth_rank": 1,
-   "depth_slot": "Running Back",
-   "injury": null,
-   "game_status": null,
-   "practice_status": "Limited Participation in Practice",
-   "signal": "practice only (no game designation yet)",
-   "effective_status": "Limited Participation in Practice",
-   "status_weight": 0.2,
-   "years_exp": null,
-   "roster_status": null,
-   "replacement": "Seth McGowan",
-   "replacement_years_exp": 0,
-   "replacement_snaps_2026": 133,
-   "position_weight": 0.05,
-   "attrition_points": 0.01,
-   "source": "https://www.nfl.com/players/jonathan-taylor/",
    "depth_source": "https://www.nfl.com/teams/"
   },
   {
