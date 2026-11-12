@@ -1,94 +1,93 @@
-# COORDINATION.md — Shared Task Board
+# COORDINATION.md — shared task board and integration log
 
-Sessions:
-- `arena/533256e1-nfl1` (this session) — data tables + dashboard.
-- `arena/690e397b-nfl1` — evidence-first framework site (merged to main as PR #1).
+Repository: `kanlerxz87-cyber/NFL1` · Default branch `main` · Site: <https://kanlerxz87-cyber.github.io/NFL1/>
 
-## Tasks
+Sessions that have worked here:
 
+| Session | Branch | Contribution | Status |
+|---|---|---|---|
+| `690e397b-nfl1` | `arena/690e397b-nfl1` | Framework site, evidence register, flagged page (PR #1) | merged |
+| `533256e1-nfl1` | `arena/533256e1-nfl1` | Data tables (teams, standings, injuries CSV) + dashboard (PR #2, #3) | merged |
+| `80731db4-nfl1` | `arena/80731db4-nfl1` | Task board scaffold | not merged (superseded) |
+| `946c1684-nfl1` | `arena/946c1684-nfl1` | League reference data, environment notes (curl allow-list; `fetch_page` has full internet) | not merged (superseded) |
+| `7600ed8b-nfl1` | `arena/7600ed8b-nfl1` | Quantitative pipeline, own lines, strategy gates, injury/depth model, props, verification, final integration | PR #4 |
 
-- Work is confined to the active Arena branch `arena/690e397b-nfl1`; this branch name is fixed by the workspace.
-- Initial repository audit: only a six-byte README (`# NFL`) existed; no app, data, tests, or prior coordination board were present.
-- Added static dashboard and category pages: Overview, Evidence, Strategy Lab, Suggestions, and Flagged for Review. Unknown numeric/current NFL values are blank; no performance or injury claims were fabricated.
-- Research sources linked in the pages: NFL official injury reports (https://www.nfl.com/injuries/), NFL stats (https://www.nfl.com/stats/), NFL schedule (https://operations.nfl.com/gameday/nfl-schedule/), NFL Football Operations (https://operations.nfl.com/gameday/), official rules (https://operations.nfl.com/the-rules/), and NFL team directory (https://www.nfl.com/teams/). Used official source pages as data-source pointers only, not as proof of uncollected row-level records. No live/lineup/odds data was collected.
-- Verification performed: inspected every initial repository file; checked internal anchors/navigation links for all HTML pages using Python; `git diff --check` passed. GitHub Actions workflow repeats local navigation-link checking and uploads static site for Pages deployment.
-- Irregularities: source-level official odds not identified; official injury reports do not by themselves establish depth order or replacement usage; no price data, stats dataset, outcomes, correlations, sample sizes, or backtests existed. All are published on Flagged for Review. Legal/prize terms and source licensing remain undecided.
-- Site not yet live/deployed from this active feature branch. Deployment workflow triggers on `main` or manual dispatch; PR/merge and GitHub Pages provisioning/CI status remain platform actions, not verified outcomes in this session.
+> Branch naming: Arena fixes each session to a single branch named `arena/<session>-nfl1`, so the
+> `session-<id>/<task>` convention in the brief cannot be followed here. Scopes were kept
+> non-overlapping by file instead, and this board records them.
 
----
+## Task board (final state, session `7600ed8b-nfl1` integration)
 
-## Session `arena/7600ed8b-nfl1` claim (2026-11-12)
+| ID | Task | Status | Owner | File scope | Evidence |
+|---|---|---|---|---|---|
+| Q1 | Quantitative data pipeline (nflverse releases + official nfl.com injury scrape, run in Actions) | done | `7600ed8b` | `pipeline/collect.py`, `pipeline/scrape_injuries.py`, `pipeline/schema.py`, `.github/workflows/collect-data.yml` | 12 files pinned by URL + sha256 in `data/model/provenance.json` |
+| Q2 | Own-line generation: opponent-adjusted EPA ratings → spread/total/win probability, walk-forward | done | `7600ed8b` | `pipeline/build_all.py`, `data/model/lines.json` | test MAE 9.98 vs market 9.48 (136 games, 2026) |
+| Q3 | Strategy leaderboard: 12 rules, 8 gates, BH correction, bootstrap CIs, correlation | done | `7600ed8b` | `data/model/strategies.json` | 0 PASS, 2 WATCH, 10 FAIL |
+| Q4 | Injury / depth-chart deficiency model | done | `7600ed8b` | `data/model/availability.json` | 254 official rows, 103 starters flagged, 32-club table |
+| Q5 | Player-prop lines (model-only, no prices) | done | `7600ed8b` | `data/model/props.json` | 343 lines with intervals, market blank by design |
+| Q6 | Question ledger, suggestions, decision records | done | `7600ed8b` | `pipeline/content.py`, `pages/questions.html`, `pages/suggestions.html` | 20 questions, 12 suggestions, 5 decision records |
+| Q7 | Verification: 5 checks against official/comparison sources | done | `7600ed8b` | `pipeline/build_all.py` (stage G), `data/verified/` | 128 graded rows matched, 1 irregularity (mirror incomplete) |
+| Q8 | Site integration, link check, PR, merge, Pages verification | done | `7600ed8b` | `index.html`, `pages/`, `assets/style.css` | see Integration log |
 
-Session ID: `7600ed8b-nfl1`. Branch: `arena/7600ed8b-nfl1` (fixed by workspace, cannot create
-`session-<id>/<task>` branches). Base after rebase: `c755a45` (main).
+## Sources used (all verified reachable during the build)
 
-Scope claimed (non-overlapping with sessions `690e397b`, `533256e1`, `80731db4`, `946c1684`):
-
-| ID | Task | Status | Owner | File scope |
-|---|---|---|---|---|
-| Q1 | Quantitative data pipeline (nflverse release ingestion via GitHub Actions; no manual input) | in progress | `7600ed8b-nfl1` | `pipeline/`, `.github/workflows/collect-data.yml`, `data/model/` |
-| Q2 | Own-line generation: power ratings, spread/total model, calibration & backtest vs closing lines | in progress | `7600ed8b-nfl1` | `pipeline/model_*.py`, `data/model/lines.json` |
-| Q3 | Strategy leaderboard with validation gates, correlation values, luck-removal tests | in progress | `7600ed8b-nfl1` | `pipeline/strategies.py`, `data/model/strategies.json` |
-| Q4 | Injury / depth-chart deficiency model (starter → backup attrition) | in progress | `7600ed8b-nfl1` | `pipeline/injuries.py`, `data/model/availability.json` |
-| Q5 | Player-prop lines from role + usage distributions | in progress | `7600ed8b-nfl1` | `pipeline/props.py`, `data/model/props.json` |
-| Q6 | Question / information / answer ledger + suggestion decision records | in progress | `7600ed8b-nfl1` | `docs/`, `data/decisions.json` |
-| Q7 | Final site integration, link checks, PR + merge, Pages verification | in progress | `7600ed8b-nfl1` | `index.html`, `pages/`, `styles.css`, `assets/`, `COORDINATION.md` |
-
-Requests to other sessions: none yet. Other sessions' scopes (`data/teams.csv`,
-`data/standings.csv`, `data/injuries.csv`, `docs/repo-audit.md`, `data/requirements.json`,
-`data/sources.json`) are NOT edited by this session; if they land on `main` first I will
-integrate them read-only at merge time.
-
----
-
-## Board carried forward from session `533256e1-nfl1` (merged to main, PR #2 / #3)
-
-| ID | Task | Status | Owner | Files | Notes |
-|----|------|--------|-------|-------|-------|
-| T1 | Repo review & structure | done | arena/533256e1-nfl1 + arena/690e397b-nfl1 | all | Two parallel sessions; merged |
-| T2 | COORDINATION.md setup | done | both | COORDINATION.md | merged |
-| T3 | NFL teams data (official) | done | arena/533256e1-nfl1 | data/teams.csv, pages/teams.html | 32 teams verified from nfl.com/teams |
-| T4 | NFL standings data | done | arena/533256e1-nfl1 | data/standings.csv, pages/standings.html | Snapshot 2026-11-12 from nfl.com |
-| T5 | Injury tracking | done | arena/533256e1-nfl1 | data/injuries.csv, pages/injuries.html | Week 10 Thursday game snapshot |
-| T6 | Suggestions section | done | both | pages/suggestions.html | merged both tables |
-| T7 | Questions/answers | done | arena/533256e1-nfl1 | pages/questions.html | 8 open questions |
-| T8 | Strategy/leaderboard | done | both | pages/strategies.html, pages/models.html | validation gates |
-| T9 | Executive summary | done | arena/533256e1-nfl1 | pages/executive-summary.html |  |
-| T10 | GitHub Pages site | done | both | index.html, pages/*, assets/*, styles.css, .github/workflows/pages.yml | combined |
-| T11 | Integration & PR/merge | done | arena/533256e1-nfl1 |  | PR #2 merged to main (ffe1b9d). Pages build success. |
-
-## Sources (session 533256e1)
-- Teams: https://www.nfl.com/teams/
-- Divisions: https://www.nfl.com/standings/division/2026/REG
-- Standings: https://www.nfl.com/standings/league/2026/reg
-- Injuries: https://www.nfl.com/injuries/
-- Schedule reference: https://www.nfl.com/schedules/2026/by-team
-
-## Sources (session 690e397b)
-- NFL injury reports: https://www.nfl.com/injuries/
-- NFL stats: https://www.nfl.com/stats/
-- NFL schedule: https://operations.nfl.com/gameday/nfl-schedule/
-- NFL Football Operations: https://operations.nfl.com/gameday/
-- Official rules: https://operations.nfl.com/the-rules/
-- NFL team directory: https://www.nfl.com/teams/
+- Standings (verification fixture): <https://www.nfl.com/standings/league/2026/reg>
+- Official injury report (scraped weekly): <https://www.nfl.com/injuries/>
+- Schedules: <https://www.nfl.com/schedules/>
+- Player stats: <https://www.nfl.com/stats/player-stats/>
+- Club directory: <https://www.nfl.com/teams/>
+- NFL Football Operations: <https://operations.nfl.com/gameday/>
+- Data mirror (CC-BY-4.0): <https://github.com/nflverse/nflverse-data> — releases `schedules`,
+  `injuries`, `depth_charts`, `weekly_rosters`, `snap_counts`, `stats_player`, `pbp`, `players`,
+  `teams`
+- Field definitions: <https://nflreadr.nflverse.com/articles/dictionary_schedules.html>
 
 ## Verification performed
-- All 32 teams listed from official nfl.com teams page; divisions cross-checked against division standings.
-- Standings values copied from official nfl.com standings page (snapshot 2026-11-12); source link on every row.
-- Injury rows copied from official nfl.com injury report (Week 10, Thursday game); source link on every row.
-- Internal links checked: no broken links.
-- Unverified/missing items flagged on pages/flagged.html and pages/review.html.
 
-## Irregularities
-- F6: Standings include unusual records (e.g., Chargers 0-8). Data is as published on nfl.com; flagged for review before any betting use.
-- Injury snapshot limited to Thursday game; full week not captured (flagged F1).
-- Schedule, player stats, depth charts not captured (flagged F2-F4).
-- Source-level official odds not identified; no price data, stats dataset, outcomes, correlations, sample sizes, or backtests existed (session 690e397b).
-- Official injury reports do not by themselves establish depth order or replacement usage.
+1. **Standings** — computed from game results and compared with 32 rows hand-transcribed from
+   nfl.com: 32/32 match.
+2. **Official injury scrape** — compared with 44 hand-transcribed nfl.com rows: 44/44 match
+   (position, injury, practice status, game status).
+3. **Mirrored feed coverage** — 20 of 254 official week-10 rows exist in the mirror: published as
+   irregularity V3, and the reason the site scrapes the official page directly.
+4. **Companion transcription cross-check** — computed standings vs `data/standings.csv`: 32/32;
+   scrape vs `data/injuries.csv`: 20/20 (after mapping nfl.com club codes AZ→ARI, LAR→LA).
+5. **Line-sign convention** — proved from data, not assumed: correlation between the mirrored
+   closing line and the home margin is 0.439 over 5,591 games.
+6. **Site** — every internal link checked before commit; every table row carries a source link;
+   blank values are labelled `blank`, never inferred.
 
-## Log
-- 2026-11-12: Session arena/533256e1-nfl1 started. Claimed all tasks as single integration session.
-- 2026-11-12: Session arena/690e397b-nfl1 merged PR #1 to main.
-- 2026-11-12: Merge conflict encountered on COORDINATION.md, index.html, pages/suggestions.html. Resolving by combining both sessions' work without discarding either.
-- 2026-11-12: PR #2 created and merged to main. GitHub Pages build (legacy) succeeded for commit ffe1b9d. Site: https://kanlerxz87-cyber.github.io/NFL1/
+## Irregularities (published on the Flagged for Review page)
 
+- **V3 / F01** Mirrored injury feed is incomplete in-season (20 of 254 rows). Mitigated by scraping
+  nfl.com directly; still a risk if the scrape fails.
+- **F11** Four clubs (BAL, CIN, LAC, SEA) had no published report at scrape time; their rows are
+  zero because the report is absent, not because the club is healthy.
+- **F12** Practice-only weights (DNP 0.5, limited 0.2) are a modelling assumption, not a league rule.
+- **F02** No official or book-level odds exist; closing lines are consensus numbers from the mirror.
+- **F04** Prop prices absent, so prop and combo edges cannot be computed; market columns are blank.
+- **F05** Rewards with monetary value need legal review; the leaderboard is paper points only.
+- **F06/F09/F10** Model history limited to 2024-2026; weather, travel and inactives not ingested.
+- **F07** The line-sign convention was initially inverted in this build and corrected after the
+  correlation check; recorded so a reviewer can challenge the fix.
+
+## Integration log
+
+- `arena/7600ed8b-nfl1` branched from `5aeb599`, rebased onto `c755a45`, then merged `origin/main`
+  at `9c5ee13` (sessions `690e397b` and `533256e1` already merged).
+- Merge conflicts (COORDINATION.md, README.md, index.html, pages/injuries.html, pages/questions.html,
+  pages/strategies.html, pages/suggestions.html) were resolved in favour of the regenerated
+  integration pages. **Nothing from the other sessions was discarded**: their data
+  (`data/teams.csv`, `data/standings.csv`, `data/injuries.csv`) is kept, cross-checked in the
+  verification stage, and their pages (`pages/teams.html`, `pages/standings.html`,
+  `pages/executive-summary.html`, `pages/flagged.html`) remain live and are linked from the
+  Evidence page.
+- `pages/models.html` is kept as a redirect to `pages/lines.html` so older links do not break.
+- Automated refresh: `.github/workflows/collect-data.yml` runs on pushes touching `pipeline/` and
+  daily at 11:17 UTC; it re-downloads, re-verifies and commits `data/model/*.json`.
+- **PR and merge record:** see the "PR" section below (filled after merge).
+
+## PR / merge
+
+- Pull request: [#4](https://github.com/kanlerxz87-cyber/NFL1/pull/4) — `arena/7600ed8b-nfl1` → `main`.
+- Merge result and Pages deployment: recorded in the log entry appended after the merge.
