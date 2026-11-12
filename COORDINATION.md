@@ -107,3 +107,52 @@ if a nav conflict occurs, keep both nav entries. This session's data lives in
 
 **Not claimed by this session:** nflverse ingestion, `pipeline/`, `data/model/`,
 existing `data/*.csv`, existing page rewrites, deployment credentials.
+
+### Session `arena/25aa7696-nfl1` — completion record (2026-11-12)
+
+**Status: V1–V4 done, needs review.** Branch `arena/25aa7696-nfl1`, 9 commits, rebased on
+`9c5ee13` (main after PR #3). No sibling files were overwritten: existing pages only gained
+navigation entries and appended sections; `pipeline/`, `data/model/`, `data/*.csv` (sibling-owned)
+were not touched.
+
+**Sources (every row carries one of these):**
+- https://www.nfl.com/standings/ — 32 rows, W-L-T, PF, PA, net, streak
+- https://www.nfl.com/schedules/2026/by-week/week-1 … week-10 — 136 final scores, byes, Week 10 fixtures
+- https://www.nfl.com/injuries/ — Week 10 game statuses (5 Out, 1 Questionable, 4 "No Injuries Reported")
+- https://www.nfl.com/news/… — five QB-change headlines (Miami, Seattle, Arizona, Cleveland, Baltimore)
+- https://www.nfl.com/teams/<club>/depth-chart — probed 3 clubs, all 404 (evidence for the depth limitation)
+
+**Verification performed (automated, re-runs on every push in
+`.github/workflows/pages.yml`):**
+- `scripts/verified/validate_verified.py` — 14 hard checks. Game-by-game reconstruction of
+  W/L/T + PF + PA from 136 scores reproduces official standings for **32/32 teams**;
+  PF−PA=NET for 32/32; PCT=(W+T/2)/games rounded half-up for 32/32; ΣW=ΣL=135; 272 team-games
+  ⇒ 136 games; no duplicate game ids, no self-matches, no team twice in a week.
+- `scripts/verified/check_site.py` — 18 pages, every local link resolves, nav complete.
+- `analysis/{engine,luck,correlations,injuries}.py` — regenerated from stored data; site is
+  rebuilt from the data files so page and data cannot drift.
+
+**Findings recorded (all published, including failures):**
+- Own-line model **fails** its gate: margin MAE 10.93 vs 10.62 for a home-field-only baseline,
+  paired-bootstrap 95% CI [-0.23, +0.86], P(model better) 13.3%.
+- Best directional strategy 60.7% straight up (95% CI 52.6–68.9%), raw p=0.0156, but
+  Holm-adjusted p=0.0626 and Brier skill −0.038 ⇒ **not significant**.
+- Correlations measured: opponent quality ↔ points r=+0.386 (n=272); margin ↔ total r=−0.161
+  (n=136); division flag ↔ total r=−0.130; consecutive-game points r=+0.069 (n=226).
+- Home win rate **49.6%** (95% CI 41.2–58.1%, n=135) ⇒ no positive home edge in this sample.
+- Depth order unknown for all 32 teams (official depth charts do not exist).
+
+**Irregularities flagged for review:** F7–F14 on `pages/flagged.html` — chiefly the absence of any
+market/closing-line price data (which makes ROI, ATS accuracy and paid rewards unmeasurable), the
+failed model gate, and the depth-chart gap.
+
+**Requests:** final integrator (`arena/7600ed8b-nfl1`) should merge this branch read-only.
+New pages: `data.html`, `lines.html`, `analysis.html`, `decisions.html`, `availability.html`,
+`verified.html`. New data dir: `data/verified/`. If they land after `pipeline/` data exists, the
+engine can be re-pointed at it without touching these files.
+
+**Environment caveat (reproducibility):** outbound HTTP from this sandbox reaches only
+github.com; `www.nfl.com`, `operations.nfl.com` and `release-assets.githubusercontent.com` are
+blocked. Official pages were therefore read through the agent page-fetch channel and transcribed
+with URLs + timestamps, then machine-verified against a second official view. Re-fetching requires
+a run in open-network CI, which is why the gate is wired into the workflow.
