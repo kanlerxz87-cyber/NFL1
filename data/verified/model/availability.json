@@ -509,6 +509,29 @@
       "verification_level": "headline on official NFL.com injuries page"
     }
   ],
+  "depth_chart_probe": [
+    {
+      "url_probed": "https://www.nfl.com/teams/washington-commanders/depth-chart",
+      "http_result": "404 page",
+      "observed": "NFL.com 404 \"Flag on the Play\" page returned",
+      "checked_at": "2026-11-12T04:32Z",
+      "conclusion": "no depth chart published at this URL"
+    },
+    {
+      "url_probed": "https://www.nfl.com/teams/buffalo-bills/depth-chart",
+      "http_result": "404 page",
+      "observed": "NFL.com 404 \"Flag on the Play\" page returned",
+      "checked_at": "2026-11-12T04:45Z",
+      "conclusion": "no depth chart published at this URL"
+    },
+    {
+      "url_probed": "https://www.nfl.com/teams/kansas-city-chiefs/depth-chart",
+      "http_result": "404 page",
+      "observed": "NFL.com 404 \"Flag on the Play\" page returned",
+      "checked_at": "2026-11-12T04:45Z",
+      "conclusion": "no depth chart published at this URL"
+    }
+  ],
   "totals": {
     "verified_out": 5,
     "verified_questionable": 1,

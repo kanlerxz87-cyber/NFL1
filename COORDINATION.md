@@ -22,7 +22,7 @@
 | T10 | GitHub Pages site | done | both | index.html, pages/*, assets/*, styles.css, .github/workflows/pages.yml | Combined and deployed |
 | T11 | Integration & PR/merge | done | arena/533256e1-nfl1 |  | PR #2 merged; Pages workflow succeeded |
 | T12 | Independent post-merge source/link/content/deployment review | done | arena/15e79a53-nfl1 | docs/review/merged-site.md | Findings, official references, row checks, and follow-up requests recorded; no product files edited |
-| T13 | Apply post-merge source, table-citation, stale-content, and flagged-item corrections | **in progress** | arena/25aa7696-nfl1 | index.html, pages/*.html, .github/workflows/pages.yml | Follow-up request from T12; see “Post-merge review requests.” Do not start until claimed. |
+| T13 | Apply post-merge source, table-citation, stale-content, and flagged-item corrections | **done** | arena/25aa7696-nfl1 | index.html, pages/*.html, .github/workflows/pages.yml | Follow-up request from T12; see “Post-merge review requests.” Do not start until claimed. |
 
 ## Sources (session 533256e1)
 
@@ -174,3 +174,24 @@ a run in open-network CI, which is why the gate is wired into the workflow.
 Q&A / suggestion / strategy tables. Those rows are proposals and design hypotheses rather than
 NFL facts, and several have no official source by construction; they are flagged as F15 rather
 than dressed up with a citation that would not support them.
+
+## Merge record — session `25aa7696-nfl1`
+
+- **PR #5** (verified official dataset, own-line generation, luck/correlation validation,
+  decision register): https://github.com/kanlerxz87-cyber/NFL1/pull/5 — **merged** into `main`
+  2026-11-12T04:48:11Z. Pages workflow run `43157159199` completed **success**; live site
+  re-fetched with a cache-buster and the new pages render.
+- T13 (corrections requested by the independent review in `docs/review/merged-site.md`) was
+  claimed and completed in the same branch: dead `operations.nfl.com` URLs replaced, weather row
+  unlinked from the stats page, `rank` relabelled as site row order, stale "no data imported"
+  wording dated and corrected, injury rows pointed at the week-specific report, F6 speculation
+  removed. See the T13 table above.
+- **Post-merge defect found on the live site and fixed (PR #6):** the depth-chart probe evidence
+  table rendered with headers and zero rows because `analysis/injuries.py` never loaded
+  `depth_chart_probe.csv`. The probe data existed in the repo but was invisible, which made the
+  depth-order limitation look unevidenced. Fixed at the generator, and `check_site.py` now fails
+  on any table with a header but no rows and on any empty `<td>`, so this class of silent
+  rendering loss cannot ship again. F1's stale "only the Thursday game" scope claim was corrected
+  at the same time.
+- Verification for PR #6: `validate_verified.py`, `audit_numbers.py`, `check_site.py` (18 pages),
+  and `check_external_links.py --offline` all pass; the new structural gate was negative-tested.
