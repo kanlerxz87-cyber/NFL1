@@ -372,5 +372,16 @@
     "action": "The landing dashboard is the integration entry point; integration.html links every preserved page and explains the generations.",
     "verified": true,
     "retrieved": "2026-11-12"
+  },
+  {
+    "id": "F35",
+    "category": "Deployed-page reading",
+    "description": "The earlier sessions found three defects (#6, #7, #8) only by reading the live Pages site after a green CI run: an empty evidence table, empty table cells and literal markdown emphasis.",
+    "impact": "Automated link/number checks do not prove a rendered page reads correctly.",
+    "status": "needs review",
+    "src": "S23",
+    "action": "This integration fetches the deployed URL and reads the landing page as a user before declaring done; the earlier sessions added gates to check_site.py for all three defect classes.",
+    "verified": true,
+    "retrieved": "2026-11-12"
   }
 ]

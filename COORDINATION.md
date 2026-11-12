@@ -134,7 +134,7 @@ commit, not only the state at the first merge attempt.
 | `arena/690e397b-nfl1` | evidence-first framework site | PR #1 |
 | `arena/533256e1-nfl1` | teams / standings / injuries CSVs and dashboard | PR #2, PR #3 |
 | `arena/15e79a53-nfl1` | independent post-merge review (`docs/review/merged-site.md`) | PR #4 |
-| `arena/25aa7696-nfl1` | T13 corrections, 136 verified game results, analysis pipeline, own lines, correlations, luck tests, numeric audit | PR #5, PR #6 |
+| `arena/25aa7696-nfl1` | T13 corrections, 136 verified game results, analysis pipeline, own lines, correlations, luck tests, numeric audit, live-site fixes | PR #5, PR #6, PR #7, PR #8, PR #9, PR #10 |
 | `arena/80731db4-nfl1` (this session, integration) | 14-page source-linked dashboard, docs, JSON data layer, validators, combined integration, evidence snapshot | pending PR (recorded below after merge) |
 
 Other active session branches observed during the final fetch (`7600ed8b`, `73fdd6c4`, `87deb7ab`,
@@ -167,3 +167,23 @@ verbatim pre-integration board at `docs/COORDINATION-archive-main.md`.
   records. None blocks the merge.
 - Sources used: see `data/sources.json`, `verification.html`, `docs/official-evidence/` and the
   earlier sessions' source sections preserved in `docs/COORDINATION-archive-main.md`.
+
+## Additional reconciled commits (main advanced again during integration)
+
+`main` moved from `296443f` to `9b36f97` while this branch was running. The second merge
+preserved all of it: PR #7 (stale "no dataset" wording on the evidence page), PR #8 (literal
+markdown emphasis), PR #9 (coordination record), PR #10 (remaining stale claims found by reading
+the live site). The updated `pages/*.html` files, `scripts/verified/check_site.py` gates and
+`COORDINATION.md` from those commits are kept; the pre-integration board was refreshed verbatim
+at `docs/COORDINATION-archive-main.md` and the earlier landing page at `legacy-site.html`.
+
+The earlier sessions' lesson is recorded here as flag F35: a green pipeline does not prove a page
+reads correctly, so this integration fetched the deployed Pages URL and inspected the rendered
+landing page as a user before declaring the deployment done.
+
+### Deviation note
+
+The rule "run `git pull --rebase` before every push" was applied as `git pull --ff-only` for the
+commit that recorded the two-parent integration merge: a plain rebase would drop the merge commit
+and lose the other sessions' merged history. Remote `arena/80731db4-nfl1` was an ancestor, so no
+rebase was needed and no other work was discarded.
