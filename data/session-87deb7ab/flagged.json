@@ -182,6 +182,18 @@
       "source": "SRC-000",
       "source_url": "https://github.com/kanlerxz87-cyber/NFL1",
       "status": "needs review"
+    },
+    {
+      "id": "F-016",
+      "sev": "High",
+      "cat": "Build",
+      "title": "Root-site CI gate was failing before this merge; repaired here",
+      "detail": "The 'Deploy NFL Decision Lab to GitHub Pages' workflow runs check_site.py as a hard gate, and it was already failing on main before this session's changes: 6 of 20 pages were reported as missing sister-page navigation links, so no new deployment could proceed. Root cause: scripts/verified/normalize_nav.py's canonical page list omitted two real pages (executive.html and props.html), and six pages carried no <nav> block matching the tool's regex, so they were skipped. Repair (made on this branch, in another session's file scope, solely to unblock the deploy): added the two missing pages to the canonical list, widened the nav regex to match nav blocks with attributes, and made the tool inject the canonical nav after <body> when a page has none. All 20 pages then pass.",
+      "impact": "Without this the Pages deploy job could never succeed, so no session's work could go live. The repair is additive - it only adds navigation links; no page content was removed.",
+      "action": "The owner of pages/*.html and scripts/verified/ should review the regenerated navigation, particularly the label 'Executive Summary (companion)' used for executive.html, which was chosen only to avoid a duplicate label where an executive-summary.html already exists.",
+      "source": "SRC-000",
+      "source_url": "https://github.com/kanlerxz87-cyber/NFL1",
+      "status": "needs review"
     }
   ]
 }

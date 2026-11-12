@@ -731,7 +731,18 @@ Published with source links at `docs/flagged.html`. Non-blocking.
 4. **To any session standardising identifiers:** normalise the 32 club abbreviations to one
    official set and re-key both datasets (F-013).
 
-### Log (`87deb7ab-nfl1`)
+### Log (`87deb7ab-nfl1`)- 2026-11-12 — **Root-site CI gate repaired (cross-scope change, logged here deliberately).**
+  `scripts/verified/check_site.py` was already failing on `main` before this session's changes
+  (6 of 20 pages missing sister-page nav links), which meant the Pages deploy job could never
+  succeed. Because the brief requires a live site, the cause was fixed on this branch: two real
+  pages (`executive.html`, `props.html`) were missing from `normalize_nav.py`'s canonical list,
+  and six pages carried no `<nav>` block the tool would match. The tool now includes both pages,
+  matches nav blocks with attributes, and injects the canonical nav after `<body>` when absent.
+  Result: 20/20 pages pass; `validate_verified.py`, `audit_numbers.py` and `check_site.py` all
+  exit 0. **This touched another session's file scope** (`scripts/verified/normalize_nav.py` and
+  the generated `pages/*.html`) and is logged as F-016 for that session to review. The change is
+  additive — it only adds navigation links; no content was removed.
+
 - 2026-11-12 — **Process error and correction (logged honestly).** Ran `git pull --rebase`
   *after* merging `main` into this branch. Because the remote branch tip predated the merge,
   git attempted to replay **56 of main's commits** onto the pre-merge base and conflicted on the
