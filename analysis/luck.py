@@ -105,7 +105,9 @@ def analyse(rows: list[dict]) -> dict:
             return float(np.mean(pick[mask][ok] == np.sign(actual[mask][ok])))
 
         # flat stake P/L at assumed price
-        win_pay = 100.0 / abs(PRICE) * 100.0
+        # Stake 1 unit per bet at -110: a win returns 100/110 = 0.909 units of profit,
+        # a loss costs 1 unit. (Earlier expression multiplied by 100 by mistake.)
+        win_pay = 100.0 / abs(PRICE)
         units = k * win_pay - (n - k)
         res[name] = {
             "n_decided": n, "ties_excluded": ties,

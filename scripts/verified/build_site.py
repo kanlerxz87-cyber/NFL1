@@ -275,7 +275,7 @@ def build_analysis() -> str:
             badge("ok","survives") if sig else badge("warn","not significant"),
             f'{r["brier"]:.3f}',
             f'{r["brier_skill_score"]:+.3f}',
-            f'{r["units_at_assumed_price"]:+.0f}',
+            f'{r["units_at_assumed_price"] / r["n_decided"] * 100:+.1f}',
         ])
 
     corr_rows = [[esc(c["id"]), esc(c["relationship"]), "—" if c["r"] is None else f'{c["r"]:+.4f}',
@@ -319,7 +319,11 @@ def build_analysis() -> str:
   <p class="muted">Metric: <strong>{esc(lk["metric_definition"]["metric"])}</strong>. Note that this is
   <strong>not</strong> {esc(lk["metric_definition"]["not_measured"])} —
   {esc(lk["metric_definition"]["why_ats_missing"])}</p>
-  {table(["Strategy","Accuracy","95% CI","p vs coinflip","p (Holm)","Multiple testing","Brier","Brier skill","Units @ −110 (scenario)"], luck_rows)}
+  {table(["Strategy","Accuracy","95% CI","p vs coinflip","p (Holm)","Multiple testing","Brier","Brier skill","P/L per 100 bets @ −110 (scenario)"], luck_rows)}
+  <p class="muted">The last column applies a fixed −110 price to every pick purely to express
+  accuracy in units. <strong>It is not a market quote, not a realised return, and not evidence of
+  profit</strong> — the same strategies have negative Brier skill, meaning their probabilities are
+  worse than saying 50/50.</p>
   <div class="card">
     <h3>What this says</h3>
     <p>Two baseline strategies reach {lk["leaderboard"][0]["accuracy"]:.1%} straight-up accuracy, which looks

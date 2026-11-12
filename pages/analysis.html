@@ -72,12 +72,16 @@
   <p class="muted">Metric: <strong>straight-up winner accuracy (which team wins the game)</strong>. Note that this is
   <strong>not</strong> against-the-spread (ATS) accuracy —
   ATS requires an observed closing line for every game. No official NFL odds/closing-line source is reachable from this environment and none is stored in the repo, so spread-beating accuracy and realised betting P/L are UNVERIFIED and left blank.</p>
-  <div class="table-wrap"><table><thead><tr><th>Strategy</th><th>Accuracy</th><th>95% CI</th><th>p vs coinflip</th><th>p (Holm)</th><th>Multiple testing</th><th>Brier</th><th>Brier skill</th><th>Units @ −110 (scenario)</th></tr></thead><tbody>
-<tr><td>B3 last-5 differential</td><td>60.7%</td><td>[0.53, 0.69]</td><td>0.0156</td><td>0.0626</td><td><span class="badge warn">not significant</span></td><td>0.259</td><td>-0.038</td><td>+7402</td></tr>
-<tr><td>B2 season-to-date differential</td><td>60.7%</td><td>[0.53, 0.69]</td><td>0.0156</td><td>0.0626</td><td><span class="badge warn">not significant</span></td><td>0.261</td><td>-0.044</td><td>+7402</td></tr>
-<tr><td>model (opponent-adjusted, ridge)</td><td>51.8%</td><td>[0.43, 0.60]</td><td>0.7308</td><td>0.7308</td><td><span class="badge warn">not significant</span></td><td>0.256</td><td>-0.023</td><td>+6299</td></tr>
-<tr><td>B1 home field only</td><td>40.7%</td><td>[0.33, 0.49]</td><td>0.0385</td><td>0.0769</td><td><span class="badge warn">not significant</span></td><td>0.250</td><td>-0.001</td><td>+4920</td></tr>
+  <div class="table-wrap"><table><thead><tr><th>Strategy</th><th>Accuracy</th><th>95% CI</th><th>p vs coinflip</th><th>p (Holm)</th><th>Multiple testing</th><th>Brier</th><th>Brier skill</th><th>P/L per 100 bets @ −110 (scenario)</th></tr></thead><tbody>
+<tr><td>B3 last-5 differential</td><td>60.7%</td><td>[0.53, 0.69]</td><td>0.0156</td><td>0.0626</td><td><span class="badge warn">not significant</span></td><td>0.259</td><td>-0.038</td><td>+16.0</td></tr>
+<tr><td>B2 season-to-date differential</td><td>60.7%</td><td>[0.53, 0.69]</td><td>0.0156</td><td>0.0626</td><td><span class="badge warn">not significant</span></td><td>0.261</td><td>-0.044</td><td>+16.0</td></tr>
+<tr><td>model (opponent-adjusted, ridge)</td><td>51.8%</td><td>[0.43, 0.60]</td><td>0.7308</td><td>0.7308</td><td><span class="badge warn">not significant</span></td><td>0.256</td><td>-0.023</td><td>-1.0</td></tr>
+<tr><td>B1 home field only</td><td>40.7%</td><td>[0.33, 0.49]</td><td>0.0385</td><td>0.0769</td><td><span class="badge warn">not significant</span></td><td>0.250</td><td>-0.001</td><td>-22.2</td></tr>
 </tbody></table></div>
+  <p class="muted">The last column applies a fixed −110 price to every pick purely to express
+  accuracy in units. <strong>It is not a market quote, not a realised return, and not evidence of
+  profit</strong> — the same strategies have negative Brier skill, meaning their probabilities are
+  worse than saying 50/50.</p>
   <div class="card">
     <h3>What this says</h3>
     <p>Two baseline strategies reach 60.7% straight-up accuracy, which looks
