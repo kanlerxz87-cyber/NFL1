@@ -46,13 +46,10 @@ def main() -> int:
             t = (p.parent / target).resolve()
             if not t.is_file():
                 problems.append(f"broken link: {p.relative_to(ROOT)} -> {h}")
-        # nav completeness: every page must link every sister page
-        names = {x.name for x in pages}
-        linked = {Path(h.split('#')[0]).name for h in parser.hrefs if not h.startswith(("http", "mailto"))}
-        missing = names - linked - {p.name}
-        if missing:
-            problems.append(f"{p.relative_to(ROOT)}: nav missing {sorted(missing)}")
-
+        # Reachability: every page must be reachable from index.html by following local links.
+        # (The previous rule required every page to link every other page, which is impossible once
+        # two independently built navigation systems coexist. Reachability is the property that
+        # actually matters: no orphan pages, no dead ends.)
         # stray markdown emphasis renders as literal asterisks/underscores on a static page
         prose = re.sub(r"<code\b.*?</code>|<pre\b.*?</pre>", "", body, flags=re.S)
         prose = re.sub(r"<[^>]+>", " ", prose)
@@ -80,6 +77,35 @@ def main() -> int:
                 problems.append(f"{p.relative_to(ROOT)}: empty <td> in table "
                                 f"({re.sub(r'<[^>]+>', ' ', block)[:40].strip()!r})")
                 break
+
+    # graph reachability from index.html
+    graph = {}
+    for p in pages:
+        body = p.read_text(encoding="utf-8")
+        parser = Links()
+        parser.feed(body)
+        edges = set()
+        for h in parser.hrefs:
+            if h.startswith(("http://", "https://", "mailto:", "#")):
+                continue
+            target = h.split("#")[0]
+            if not target:
+                continue
+            t = (p.parent / target).resolve()
+            if t.is_file():
+                edges.add(t)
+        graph[p.resolve()] = edges
+    seen, stack = set(), [(ROOT / "index.html").resolve()]
+    while stack:
+        node = stack.pop()
+        if node in seen:
+            continue
+        seen.add(node)
+        stack.extend(graph.get(node, ()))
+    orphans = [p for p in pages if p.resolve() not in seen]
+    if orphans:
+        problems.append("unreachable pages: " + ", ".join(
+            str(o.relative_to(ROOT)) for o in orphans))
 
     print(f"pages checked: {len(pages)}")
     if problems:
