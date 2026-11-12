@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-12T22:53:09+00:00",
+ "generated_at": "2026-11-12T23:01:36+00:00",
  "source": "https://www.nfl.com/stats/player-stats/",
  "price_status": "UNVERIFIED / BLANK: no official or book-level price exists for any player prop in this repository's sources, so no prop bet is scored and no profit is claimed. Projections and correlations only.",
  "markets": [
@@ -17,48 +17,50 @@
     2025,
     2026
    ],
-   "mae_projection": 64.392,
-   "rmse_projection": 81.302,
-   "bias_projection": 3.839,
+   "mae_projection": 64.724,
+   "mae_projection_with_opponent_adjustment": 64.39,
+   "opponent_adjustment_helped": true,
+   "rmse_projection": 81.575,
+   "bias_projection": 1.615,
    "mae_naive_season_mean": 64.837,
-   "skill_vs_naive_pct": 0.69,
-   "observed_over_rate": 0.4836,
+   "skill_vs_naive_pct": 0.17,
+   "observed_over_rate": 0.4925,
    "calibration_note": "If the projection were a fair line the over rate would be 0.50. It is not a market line; it is the model's own median forecast.",
    "calibration_bands": [
     {
-     "projection_band": "5 to 192",
-     "n": 671,
-     "mean_projection": 150.25,
-     "mean_actual": 183.79,
-     "observed_over_rate": 0.6587
+     "projection_band": "4 to 191",
+     "n": 672,
+     "mean_projection": 149.21,
+     "mean_actual": 186.18,
+     "observed_over_rate": 0.6711
     },
     {
-     "projection_band": "192 to 223",
-     "n": 671,
-     "mean_projection": 209.1,
-     "mean_actual": 211.69,
-     "observed_over_rate": 0.538
+     "projection_band": "191 to 222",
+     "n": 673,
+     "mean_projection": 207.65,
+     "mean_actual": 210.75,
+     "observed_over_rate": 0.5364
     },
     {
-     "projection_band": "223 to 249",
-     "n": 670,
-     "mean_projection": 236.18,
-     "mean_actual": 230.96,
-     "observed_over_rate": 0.4925
+     "projection_band": "222 to 246",
+     "n": 667,
+     "mean_projection": 234.33,
+     "mean_actual": 234.16,
+     "observed_over_rate": 0.5022
     },
     {
-     "projection_band": "249 to 275",
+     "projection_band": "246 to 272",
      "n": 671,
-     "mean_projection": 261.44,
-     "mean_actual": 250.05,
-     "observed_over_rate": 0.4232
+     "mean_projection": 259.22,
+     "mean_actual": 248.7,
+     "observed_over_rate": 0.4531
     },
     {
-     "projection_band": "275 to 425",
+     "projection_band": "272 to 422",
      "n": 671,
-     "mean_projection": 302.0,
-     "mean_actual": 263.28,
-     "observed_over_rate": 0.3055
+     "mean_projection": 297.65,
+     "mean_actual": 260.13,
+     "observed_over_rate": 0.2996
     }
    ],
    "source": "https://www.nfl.com/stats/player-stats/"
@@ -77,48 +79,50 @@
     2025,
     2026
    ],
-   "mae_projection": 24.869,
-   "rmse_projection": 33.001,
-   "bias_projection": -0.198,
+   "mae_projection": 25.033,
+   "mae_projection_with_opponent_adjustment": 24.886,
+   "opponent_adjustment_helped": true,
+   "rmse_projection": 33.305,
+   "bias_projection": -0.953,
    "mae_naive_season_mean": 28.974,
-   "skill_vs_naive_pct": 14.17,
-   "observed_over_rate": 0.4525,
+   "skill_vs_naive_pct": 13.6,
+   "observed_over_rate": 0.4597,
    "calibration_note": "If the projection were a fair line the over rate would be 0.50. It is not a market line; it is the model's own median forecast.",
    "calibration_bands": [
     {
-     "projection_band": "-4 to 25",
-     "n": 1225,
-     "mean_projection": 16.63,
-     "mean_actual": 26.09,
-     "observed_over_rate": 0.5853
+     "projection_band": "-4 to 24",
+     "n": 1233,
+     "mean_projection": 16.46,
+     "mean_actual": 26.0,
+     "observed_over_rate": 0.5953
     },
     {
-     "projection_band": "25 to 39",
-     "n": 1225,
-     "mean_projection": 31.85,
-     "mean_actual": 35.35,
-     "observed_over_rate": 0.4604
+     "projection_band": "24 to 38",
+     "n": 1220,
+     "mean_projection": 31.57,
+     "mean_actual": 35.54,
+     "observed_over_rate": 0.4639
     },
     {
-     "projection_band": "39 to 53",
-     "n": 1224,
-     "mean_projection": 45.58,
-     "mean_actual": 46.99,
-     "observed_over_rate": 0.4477
+     "projection_band": "38 to 52",
+     "n": 1220,
+     "mean_projection": 45.16,
+     "mean_actual": 48.0,
+     "observed_over_rate": 0.4566
     },
     {
-     "projection_band": "53 to 69",
-     "n": 1223,
-     "mean_projection": 60.62,
-     "mean_actual": 60.28,
-     "observed_over_rate": 0.444
+     "projection_band": "52 to 68",
+     "n": 1227,
+     "mean_projection": 59.76,
+     "mean_actual": 59.44,
+     "observed_over_rate": 0.4401
     },
     {
-     "projection_band": "69 to 178",
-     "n": 1224,
-     "mean_projection": 86.96,
-     "mean_actual": 73.91,
-     "observed_over_rate": 0.3252
+     "projection_band": "68 to 152",
+     "n": 1221,
+     "mean_projection": 85.1,
+     "mean_actual": 73.75,
+     "observed_over_rate": 0.3415
     }
    ],
    "source": "https://www.nfl.com/stats/player-stats/"
@@ -137,48 +141,50 @@
     2025,
     2026
    ],
-   "mae_projection": 29.296,
-   "rmse_projection": 37.573,
-   "bias_projection": 1.391,
+   "mae_projection": 29.336,
+   "mae_projection_with_opponent_adjustment": 29.398,
+   "opponent_adjustment_helped": false,
+   "rmse_projection": 37.705,
+   "bias_projection": 0.925,
    "mae_naive_season_mean": 29.355,
-   "skill_vs_naive_pct": 0.2,
-   "observed_over_rate": 0.4396,
+   "skill_vs_naive_pct": 0.06,
+   "observed_over_rate": 0.4452,
    "calibration_note": "If the projection were a fair line the over rate would be 0.50. It is not a market line; it is the model's own median forecast.",
    "calibration_bands": [
     {
      "projection_band": "0 to 40",
-     "n": 1364,
-     "mean_projection": 30.75,
-     "mean_actual": 42.98,
-     "observed_over_rate": 0.6041
+     "n": 1366,
+     "mean_projection": 30.63,
+     "mean_actual": 43.9,
+     "observed_over_rate": 0.6105
     },
     {
      "projection_band": "40 to 52",
+     "n": 1375,
+     "mean_projection": 46.27,
+     "mean_actual": 50.88,
+     "observed_over_rate": 0.4771
+    },
+    {
+     "projection_band": "52 to 63",
+     "n": 1348,
+     "mean_projection": 57.67,
+     "mean_actual": 58.53,
+     "observed_over_rate": 0.4355
+    },
+    {
+     "projection_band": "63 to 77",
      "n": 1361,
-     "mean_projection": 46.43,
-     "mean_actual": 51.48,
-     "observed_over_rate": 0.4813
+     "mean_projection": 69.79,
+     "mean_actual": 65.25,
+     "observed_over_rate": 0.399
     },
     {
-     "projection_band": "52 to 64",
-     "n": 1362,
-     "mean_projection": 57.93,
-     "mean_actual": 57.97,
-     "observed_over_rate": 0.4288
-    },
-    {
-     "projection_band": "64 to 78",
-     "n": 1363,
-     "mean_projection": 70.32,
-     "mean_actual": 65.42,
-     "observed_over_rate": 0.3852
-    },
-    {
-     "projection_band": "78 to 169",
+     "projection_band": "77 to 154",
      "n": 1361,
-     "mean_projection": 94.34,
-     "mean_actual": 74.95,
-     "observed_over_rate": 0.2983
+     "mean_projection": 93.26,
+     "mean_actual": 74.35,
+     "observed_over_rate": 0.3027
     }
    ],
    "source": "https://www.nfl.com/stats/player-stats/"
@@ -197,48 +203,50 @@
     2025,
     2026
    ],
-   "mae_projection": 1.781,
-   "rmse_projection": 2.297,
-   "bias_projection": 0.064,
+   "mae_projection": 1.786,
+   "mae_projection_with_opponent_adjustment": 1.788,
+   "opponent_adjustment_helped": false,
+   "rmse_projection": 2.308,
+   "bias_projection": 0.044,
    "mae_naive_season_mean": 1.875,
-   "skill_vs_naive_pct": 5.02,
-   "observed_over_rate": 0.4616,
+   "skill_vs_naive_pct": 4.76,
+   "observed_over_rate": 0.451,
    "calibration_note": "If the projection were a fair line the over rate would be 0.50. It is not a market line; it is the model's own median forecast.",
    "calibration_bands": [
     {
      "projection_band": "1 to 3",
-     "n": 1371,
-     "mean_projection": 2.77,
-     "mean_actual": 3.5,
-     "observed_over_rate": 0.6229
+     "n": 1363,
+     "mean_projection": 2.76,
+     "mean_actual": 3.54,
+     "observed_over_rate": 0.6016
     },
     {
      "projection_band": "3 to 4",
-     "n": 1360,
-     "mean_projection": 3.77,
-     "mean_actual": 4.04,
-     "observed_over_rate": 0.5353
+     "n": 1381,
+     "mean_projection": 3.76,
+     "mean_actual": 4.03,
+     "observed_over_rate": 0.5177
     },
     {
      "projection_band": "4 to 5",
-     "n": 1369,
-     "mean_projection": 4.5,
+     "n": 1343,
+     "mean_projection": 4.48,
      "mean_actual": 4.46,
-     "observed_over_rate": 0.4244
+     "observed_over_rate": 0.4222
     },
     {
      "projection_band": "5 to 6",
-     "n": 1351,
-     "mean_projection": 5.36,
-     "mean_actual": 5.05,
-     "observed_over_rate": 0.3953
+     "n": 1369,
+     "mean_projection": 5.34,
+     "mean_actual": 5.06,
+     "observed_over_rate": 0.3901
     },
     {
      "projection_band": "6 to 12",
-     "n": 1360,
-     "mean_projection": 7.08,
-     "mean_actual": 6.09,
-     "observed_over_rate": 0.3287
+     "n": 1355,
+     "mean_projection": 7.04,
+     "mean_actual": 6.05,
+     "observed_over_rate": 0.3218
     }
    ],
    "source": "https://www.nfl.com/stats/player-stats/"

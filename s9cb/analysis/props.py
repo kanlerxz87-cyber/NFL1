@@ -41,6 +41,9 @@ def load():
 # ------------------------------------------------------- walk-forward projection
 def projections(pw: pd.DataFrame, stat: str, pos: str, window: int = 4,
                 shrink_k: float = 3.0) -> pd.DataFrame:
+    """Returns one row per player-week with a form-only projection, an opponent-adjusted
+    projection, and the realised value. The form-only projection is the headline one; the
+    adjusted column exists so the reader can see whether the adjustment earned its keep."""
     """Trailing form, shrunk toward the player's own season mean.
 
     projection = (sum of last `window` values + shrink_k * season_so_far_mean)
@@ -54,13 +57,15 @@ def projections(pw: pd.DataFrame, stat: str, pos: str, window: int = 4,
     d = d.rename(columns={stat: "y"})
     d["y"] = pd.to_numeric(d["y"], errors="coerce").fillna(0.0)
 
-    # defence season-to-date mean conceded, strictly before the current week
-    conceded = (d.groupby(["season", "week", "opponent_team"])["y"].mean()
-                 .groupby(["season", "opponent_team"]).expanding().mean()
-                 .reset_index(level=[0, 1], drop=True))
-    d = d.merge(conceded.rename("opp_conceded_running").reset_index(),
-                on=["season", "week", "opponent_team"], how="left")
-    d["opp_conceded_running"] = d.groupby(["season", "opponent_team"])["opp_conceded_running"].shift(1)
+    # Mean conceded by this defence in STRICTLY EARLIER weeks of the same season.
+    # Computed with a shifted expanding mean inside each group, so week W never sees
+    # week W or later.
+    d = d.sort_values(["season", "opponent_team", "week"]).reset_index(drop=True)
+    d["opp_conceded_prior"] = d.groupby(["season", "opponent_team"])["y"].transform(
+        lambda s: s.shift(1).expanding().mean())
+    d = d.sort_values(["season", "week"]).reset_index(drop=True)
+    d["league_prior"] = d.groupby("season")["y"].transform(
+        lambda s: s.shift(1).expanding().mean())
 
     proj, actual, rows = [], [], []
     hist: dict[str, list[float]] = {}
@@ -71,19 +76,22 @@ def projections(pw: pd.DataFrame, stat: str, pos: str, window: int = 4,
             last = prev[-window:]
             season_mean = float(np.mean(prev))
             base = (float(np.sum(last)) + shrink_k * season_mean) / (len(last) + shrink_k)
-            # opponent adjustment: multiply by (defence conceded / league baseline so far)
-            league = d[(d["season"] == r.season) & (d["week"] < r.week)]["y"].mean()
-            oc = r.opp_conceded_running
+            # opponent adjustment: scale by how much this defence has conceded relative
+            # to the league in earlier weeks of the same season. Damped to 0.75-1.25.
+            oc = r.opp_conceded_prior
+            lg = r.league_prior
             adj = 1.0
-            if oc is not None and np.isfinite(oc) and league and np.isfinite(league) and league > 0:
-                adj = 0.75 + 0.25 * (oc / league)
+            if oc is not None and lg is not None and np.isfinite(oc) and np.isfinite(lg) and lg > 0:
+                adj = float(np.clip(0.75 + 0.25 * (oc / lg), 0.75, 1.25))
             p = base * adj
             proj.append(p)
             actual.append(r.y)
             rows.append({"season": r.season, "week": r.week, "game_id": r.game_id,
                          "player_id": r.player_id, "player": r.player_display_name,
                          "team": r.team, "opponent": r.opponent_team,
-                         "projection": round(float(p), 2), "actual": float(r.y)})
+                         "projection": round(float(base), 2),
+                         "projection_opponent_adjusted": round(float(p), 2),
+                         "actual": float(r.y)})
         hist.setdefault(key, []).append(r.y)
     return pd.DataFrame(rows)
 
@@ -107,6 +115,10 @@ def projection_report(P: pd.DataFrame, stat: str, label: str) -> dict:
         "market": stat, "label": label, "n": int(len(P)),
         "seasons": [int(s) for s in sorted(P["season"].unique())],
         "mae_projection": round(float(err.abs().mean()), 3),
+        "mae_projection_with_opponent_adjustment": round(
+            float((P["projection_opponent_adjusted"] - P["actual"]).abs().mean()), 3),
+        "opponent_adjustment_helped": bool(
+            (P["projection_opponent_adjusted"] - P["actual"]).abs().mean() < err.abs().mean()),
         "rmse_projection": round(float(np.sqrt((err ** 2).mean())), 3),
         "bias_projection": round(float(err.mean()), 3),
         "mae_naive_season_mean": round(float((P["actual"] - naive).abs().mean()), 3),
