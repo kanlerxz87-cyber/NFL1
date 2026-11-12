@@ -1,0 +1,645 @@
+{
+ "generated_at": "2026-11-12T22:58:32Z",
+ "season": 2026,
+ "week": 10,
+ "method": {
+  "ratings": "Simple Rating System: margin = rating_home - rating_away + HFA, solved by least squares with a zero-sum constraint. Reference: Sports-Reference SRS definition.",
+  "totals": "total = a + b*(rating_home + rating_away), OLS on prior games.",
+  "win_prob": "P(home win) = Phi(predicted margin / residual SD).",
+  "walk_forward": "Ratings for week W use only games with week < W, so no game is predicted using information from itself or from a later week.",
+  "season_coverage": "Only the 2026 season is used, because that is the only season whose game results have been transcribed and verified against official nfl.com pages in this repo."
+ },
+ "rule_file_sha256": "b2db9d74c42bbf4d64b236d023ad610983e7ace988424fdc2257f6dcd57b1d32",
+ "n_training_games": 136,
+ "hfa": -0.458,
+ "home_field_crosscheck": {
+  "raw_mean_home_margin": 0.0,
+  "home_wins": 67,
+  "away_wins": 68,
+  "ties": 1,
+  "n": 136,
+  "note": "Raw, unadjusted home margin over every completed game. The fitted term differs from it because the fitted term is adjusted for the strength of the teams involved."
+ },
+ "residual_sd_margin": 10.367,
+ "total_model": {
+  "intercept": 45.932,
+  "slope": 0.0535,
+  "resid_sd": 14.3027
+ },
+ "ratings": [
+  {
+   "abbr": "ATL",
+   "rating": -1.236
+  },
+  {
+   "abbr": "AZ",
+   "rating": -6.967
+  },
+  {
+   "abbr": "BAL",
+   "rating": -4.582
+  },
+  {
+   "abbr": "BUF",
+   "rating": 7.196
+  },
+  {
+   "abbr": "CAR",
+   "rating": -1.448
+  },
+  {
+   "abbr": "CHI",
+   "rating": 6.119
+  },
+  {
+   "abbr": "CIN",
+   "rating": 7.206
+  },
+  {
+   "abbr": "CLE",
+   "rating": -3.621
+  },
+  {
+   "abbr": "DAL",
+   "rating": -1.258
+  },
+  {
+   "abbr": "DEN",
+   "rating": 2.605
+  },
+  {
+   "abbr": "DET",
+   "rating": 2.862
+  },
+  {
+   "abbr": "GB",
+   "rating": 3.631
+  },
+  {
+   "abbr": "HOU",
+   "rating": 1.724
+  },
+  {
+   "abbr": "IND",
+   "rating": -5.894
+  },
+  {
+   "abbr": "JAX",
+   "rating": 11.262
+  },
+  {
+   "abbr": "KC",
+   "rating": 4.339
+  },
+  {
+   "abbr": "LA",
+   "rating": 1.669
+  },
+  {
+   "abbr": "LAC",
+   "rating": -9.656
+  },
+  {
+   "abbr": "LV",
+   "rating": -3.092
+  },
+  {
+   "abbr": "MIA",
+   "rating": -5.864
+  },
+  {
+   "abbr": "MIN",
+   "rating": 4.27
+  },
+  {
+   "abbr": "NE",
+   "rating": 2.567
+  },
+  {
+   "abbr": "NO",
+   "rating": -3.784
+  },
+  {
+   "abbr": "NYG",
+   "rating": -2.105
+  },
+  {
+   "abbr": "NYJ",
+   "rating": -4.275
+  },
+  {
+   "abbr": "PHI",
+   "rating": -7.561
+  },
+  {
+   "abbr": "PIT",
+   "rating": 3.531
+  },
+  {
+   "abbr": "SEA",
+   "rating": 3.622
+  },
+  {
+   "abbr": "SF",
+   "rating": 7.346
+  },
+  {
+   "abbr": "TB",
+   "rating": 4.165
+  },
+  {
+   "abbr": "TEN",
+   "rating": -8.234
+  },
+  {
+   "abbr": "WAS",
+   "rating": -4.536
+  }
+ ],
+ "backtest": {
+  "folds": [
+   {
+    "week": 4,
+    "n": 16,
+    "n_train": 48,
+    "hfa": 0.349,
+    "sigma": 9.464,
+    "spread_mae": 7.146,
+    "spread_rmse": 10.294,
+    "total_mae": 10.83,
+    "baseline_hfa_only_mae": 7.5,
+    "baseline_zero_mae": 7.5
+   },
+   {
+    "week": 5,
+    "n": 15,
+    "n_train": 64,
+    "hfa": -0.422,
+    "sigma": 9.206,
+    "spread_mae": 12.216,
+    "spread_rmse": 16.817,
+    "total_mae": 12.265,
+    "baseline_hfa_only_mae": 10.716,
+    "baseline_zero_mae": 10.8
+   },
+   {
+    "week": 6,
+    "n": 14,
+    "n_train": 79,
+    "hfa": 0.306,
+    "sigma": 10.336,
+    "spread_mae": 6.476,
+    "spread_rmse": 7.882,
+    "total_mae": 11.053,
+    "baseline_hfa_only_mae": 6.615,
+    "baseline_zero_mae": 6.571
+   },
+   {
+    "week": 7,
+    "n": 14,
+    "n_train": 93,
+    "hfa": -0.069,
+    "sigma": 9.922,
+    "spread_mae": 11.857,
+    "spread_rmse": 14.877,
+    "total_mae": 9.496,
+    "baseline_hfa_only_mae": 11.123,
+    "baseline_zero_mae": 11.143
+   },
+   {
+    "week": 8,
+    "n": 14,
+    "n_train": 107,
+    "hfa": -0.678,
+    "sigma": 10.358,
+    "spread_mae": 12.215,
+    "spread_rmse": 13.702,
+    "total_mae": 12.132,
+    "baseline_hfa_only_mae": 13.362,
+    "baseline_zero_mae": 13.071
+   },
+   {
+    "week": 9,
+    "n": 15,
+    "n_train": 121,
+    "hfa": -0.112,
+    "sigma": 10.537,
+    "spread_mae": 7.761,
+    "spread_rmse": 10.403,
+    "total_mae": 11.018,
+    "baseline_hfa_only_mae": 12.829,
+    "baseline_zero_mae": 12.867
+   }
+  ],
+  "pooled_spread_mae": 9.564,
+  "baseline_hfa_only_mae": 10.325,
+  "baseline_zero_mae": 10.295,
+  "beats_hfa_baseline": true,
+  "beats_zero_baseline": true
+ },
+ "lines": [
+  {
+   "game_id": "2026_10_WAS_NYG",
+   "week": 10,
+   "gameday": "2026-11-12",
+   "kickoff_et": "20:15",
+   "network": "PRIME",
+   "away_record": "2-5-1",
+   "home_record": "5-2-1",
+   "away": "WAS",
+   "home": "NYG",
+   "my_home_line": 2.0,
+   "my_line_display": "NYG -2.0",
+   "my_total": 45.6,
+   "my_home_win_prob": 0.575,
+   "spread_band95": [
+    -18.3,
+    22.3
+   ],
+   "total_band95": [
+    17.5,
+    73.6
+   ],
+   "market_home_line": null,
+   "market_total": null,
+   "edge": null,
+   "source_game": "https://www.nfl.com/games/commanders-at-giants-2026-reg-10",
+   "source_results": "https://www.nfl.com/schedules/2026/by-week/week-1"
+  },
+  {
+   "game_id": "2026_10_NE_DET",
+   "week": 10,
+   "gameday": "2026-11-15",
+   "kickoff_et": "09:30",
+   "network": "FOX",
+   "away_record": "5-4",
+   "home_record": "6-2",
+   "away": "NE",
+   "home": "DET",
+   "my_home_line": -0.2,
+   "my_line_display": "DET +0.2",
+   "my_total": 46.2,
+   "my_home_win_prob": 0.494,
+   "spread_band95": [
+    -20.5,
+    20.2
+   ],
+   "total_band95": [
+    18.2,
+    74.3
+   ],
+   "market_home_line": null,
+   "market_total": null,
+   "edge": null,
+   "source_game": "https://www.nfl.com/games/patriots-at-lions-2026-reg-10",
+   "source_results": "https://www.nfl.com/schedules/2026/by-week/week-1"
+  },
+  {
+   "game_id": "2026_10_KC_ATL",
+   "week": 10,
+   "gameday": "2026-11-15",
+   "kickoff_et": "13:00",
+   "network": "CBS",
+   "away_record": "6-2",
+   "home_record": "3-6",
+   "away": "KC",
+   "home": "ATL",
+   "my_home_line": -6.0,
+   "my_line_display": "ATL +6.0",
+   "my_total": 46.1,
+   "my_home_win_prob": 0.28,
+   "spread_band95": [
+    -26.4,
+    14.3
+   ],
+   "total_band95": [
+    18.1,
+    74.1
+   ],
+   "market_home_line": null,
+   "market_total": null,
+   "edge": null,
+   "source_game": "https://www.nfl.com/games/chiefs-at-falcons-2026-reg-10",
+   "source_results": "https://www.nfl.com/schedules/2026/by-week/week-1"
+  },
+  {
+   "game_id": "2026_10_HOU_CLE",
+   "week": 10,
+   "gameday": "2026-11-15",
+   "kickoff_et": "13:00",
+   "network": "FOX",
+   "away_record": "3-5",
+   "home_record": "5-4",
+   "away": "HOU",
+   "home": "CLE",
+   "my_home_line": -5.8,
+   "my_line_display": "CLE +5.8",
+   "my_total": 45.8,
+   "my_home_win_prob": 0.288,
+   "spread_band95": [
+    -26.1,
+    14.5
+   ],
+   "total_band95": [
+    17.8,
+    73.9
+   ],
+   "market_home_line": null,
+   "market_total": null,
+   "edge": null,
+   "source_game": "https://www.nfl.com/games/texans-at-browns-2026-reg-10",
+   "source_results": "https://www.nfl.com/schedules/2026/by-week/week-1"
+  },
+  {
+   "game_id": "2026_10_MIN_GB",
+   "week": 10,
+   "gameday": "2026-11-15",
+   "kickoff_et": "13:00",
+   "network": "FOX",
+   "away_record": "6-2",
+   "home_record": "6-3",
+   "away": "MIN",
+   "home": "GB",
+   "my_home_line": -1.1,
+   "my_line_display": "GB +1.1",
+   "my_total": 46.4,
+   "my_home_win_prob": 0.458,
+   "spread_band95": [
+    -21.4,
+    19.2
+   ],
+   "total_band95": [
+    18.3,
+    74.4
+   ],
+   "market_home_line": null,
+   "market_total": null,
+   "edge": null,
+   "source_game": "https://www.nfl.com/games/vikings-at-packers-2026-reg-10",
+   "source_results": "https://www.nfl.com/schedules/2026/by-week/week-1"
+  },
+  {
+   "game_id": "2026_10_MIA_IND",
+   "week": 10,
+   "gameday": "2026-11-15",
+   "kickoff_et": "13:00",
+   "network": "CBS",
+   "away_record": "1-7",
+   "home_record": "2-7",
+   "away": "MIA",
+   "home": "IND",
+   "my_home_line": -0.5,
+   "my_line_display": "IND +0.5",
+   "my_total": 45.3,
+   "my_home_win_prob": 0.481,
+   "spread_band95": [
+    -20.8,
+    19.8
+   ],
+   "total_band95": [
+    17.3,
+    73.3
+   ],
+   "market_home_line": null,
+   "market_total": null,
+   "edge": null,
+   "source_game": "https://www.nfl.com/games/dolphins-at-colts-2026-reg-10",
+   "source_results": "https://www.nfl.com/schedules/2026/by-week/week-1"
+  },
+  {
+   "game_id": "2026_10_CAR_NO",
+   "week": 10,
+   "gameday": "2026-11-15",
+   "kickoff_et": "13:00",
+   "network": "FOX",
+   "away_record": "3-5",
+   "home_record": "3-5",
+   "away": "CAR",
+   "home": "NO",
+   "my_home_line": -2.8,
+   "my_line_display": "NO +2.8",
+   "my_total": 45.7,
+   "my_home_win_prob": 0.394,
+   "spread_band95": [
+    -23.1,
+    17.5
+   ],
+   "total_band95": [
+    17.6,
+    73.7
+   ],
+   "market_home_line": null,
+   "market_total": null,
+   "edge": null,
+   "source_game": "https://www.nfl.com/games/panthers-at-saints-2026-reg-10",
+   "source_results": "https://www.nfl.com/schedules/2026/by-week/week-1"
+  },
+  {
+   "game_id": "2026_10_BUF_NYJ",
+   "week": 10,
+   "gameday": "2026-11-15",
+   "kickoff_et": "13:00",
+   "network": "CBS",
+   "away_record": "7-1",
+   "home_record": "2-7",
+   "away": "BUF",
+   "home": "NYJ",
+   "my_home_line": -11.9,
+   "my_line_display": "NYJ +11.9",
+   "my_total": 46.1,
+   "my_home_win_prob": 0.125,
+   "spread_band95": [
+    -32.2,
+    8.4
+   ],
+   "total_band95": [
+    18.1,
+    74.1
+   ],
+   "market_home_line": null,
+   "market_total": null,
+   "edge": null,
+   "source_game": "https://www.nfl.com/games/bills-at-jets-2026-reg-10",
+   "source_results": "https://www.nfl.com/schedules/2026/by-week/week-1"
+  },
+  {
+   "game_id": "2026_10_JAX_TEN",
+   "week": 10,
+   "gameday": "2026-11-15",
+   "kickoff_et": "13:00",
+   "network": "FOX",
+   "away_record": "6-2",
+   "home_record": "1-7",
+   "away": "JAX",
+   "home": "TEN",
+   "my_home_line": -20.0,
+   "my_line_display": "TEN +20.0",
+   "my_total": 46.1,
+   "my_home_win_prob": 0.027,
+   "spread_band95": [
+    -40.3,
+    0.4
+   ],
+   "total_band95": [
+    18.1,
+    74.1
+   ],
+   "market_home_line": null,
+   "market_total": null,
+   "edge": null,
+   "source_game": "https://www.nfl.com/games/jaguars-at-titans-2026-reg-10",
+   "source_results": "https://www.nfl.com/schedules/2026/by-week/week-1"
+  },
+  {
+   "game_id": "2026_10_LA_AZ",
+   "week": 10,
+   "gameday": "2026-11-15",
+   "kickoff_et": "16:05",
+   "network": "CBS",
+   "away_record": "5-4",
+   "home_record": "3-6",
+   "away": "LA",
+   "home": "AZ",
+   "my_home_line": -9.1,
+   "my_line_display": "AZ +9.1",
+   "my_total": 45.6,
+   "my_home_win_prob": 0.19,
+   "spread_band95": [
+    -29.4,
+    11.2
+   ],
+   "total_band95": [
+    17.6,
+    73.7
+   ],
+   "market_home_line": null,
+   "market_total": null,
+   "edge": null,
+   "source_game": "https://www.nfl.com/games/rams-at-cardinals-2026-reg-10",
+   "source_results": "https://www.nfl.com/schedules/2026/by-week/week-1"
+  },
+  {
+   "game_id": "2026_10_SEA_LV",
+   "week": 10,
+   "gameday": "2026-11-15",
+   "kickoff_et": "16:05",
+   "network": "CBS",
+   "away_record": "5-4",
+   "home_record": "4-5",
+   "away": "SEA",
+   "home": "LV",
+   "my_home_line": -7.2,
+   "my_line_display": "LV +7.2",
+   "my_total": 46.0,
+   "my_home_win_prob": 0.245,
+   "spread_band95": [
+    -27.5,
+    13.1
+   ],
+   "total_band95": [
+    17.9,
+    74.0
+   ],
+   "market_home_line": null,
+   "market_total": null,
+   "edge": null,
+   "source_game": "https://www.nfl.com/games/seahawks-at-raiders-2026-reg-10",
+   "source_results": "https://www.nfl.com/schedules/2026/by-week/week-1"
+  },
+  {
+   "game_id": "2026_10_SF_DAL",
+   "week": 10,
+   "gameday": "2026-11-15",
+   "kickoff_et": "16:25",
+   "network": "FOX",
+   "away_record": "7-1",
+   "home_record": "4-5",
+   "away": "SF",
+   "home": "DAL",
+   "my_home_line": -9.1,
+   "my_line_display": "DAL +9.1",
+   "my_total": 46.3,
+   "my_home_win_prob": 0.191,
+   "spread_band95": [
+    -29.4,
+    11.3
+   ],
+   "total_band95": [
+    18.2,
+    74.3
+   ],
+   "market_home_line": null,
+   "market_total": null,
+   "edge": null,
+   "source_game": "https://www.nfl.com/games/49ers-at-cowboys-2026-reg-10",
+   "source_results": "https://www.nfl.com/schedules/2026/by-week/week-1"
+  },
+  {
+   "game_id": "2026_10_PIT_CIN",
+   "week": 10,
+   "gameday": "2026-11-15",
+   "kickoff_et": "20:20",
+   "network": "NBC",
+   "away_record": "6-2",
+   "home_record": "6-2",
+   "away": "PIT",
+   "home": "CIN",
+   "my_home_line": 3.2,
+   "my_line_display": "CIN -3.2",
+   "my_total": 46.5,
+   "my_home_win_prob": 0.622,
+   "spread_band95": [
+    -17.1,
+    23.5
+   ],
+   "total_band95": [
+    18.5,
+    74.5
+   ],
+   "market_home_line": null,
+   "market_total": null,
+   "edge": null,
+   "source_game": "https://www.nfl.com/games/steelers-at-bengals-2026-reg-10",
+   "source_results": "https://www.nfl.com/schedules/2026/by-week/week-1"
+  },
+  {
+   "game_id": "2026_10_LAC_BAL",
+   "week": 10,
+   "gameday": "2026-11-16",
+   "kickoff_et": "20:15",
+   "network": "ESPN",
+   "away_record": "0-8",
+   "home_record": "4-5",
+   "away": "LAC",
+   "home": "BAL",
+   "my_home_line": 4.6,
+   "my_line_display": "BAL -4.6",
+   "my_total": 45.2,
+   "my_home_win_prob": 0.672,
+   "spread_band95": [
+    -15.7,
+    24.9
+   ],
+   "total_band95": [
+    17.1,
+    73.2
+   ],
+   "market_home_line": null,
+   "market_total": null,
+   "edge": null,
+   "source_game": "https://www.nfl.com/games/chargers-at-ravens-2026-reg-10",
+   "source_results": "https://www.nfl.com/schedules/2026/by-week/week-1"
+  }
+ ],
+ "byes": [
+  "CHI",
+  "DEN",
+  "PHI",
+  "TB"
+ ],
+ "sources": {
+  "results": "https://www.nfl.com/schedules/2026/by-week/week-1",
+  "schedule": "https://www.nfl.com/schedules/2026/week10",
+  "standings": "https://www.nfl.com/standings/league/2026/REG"
+ }
+}
