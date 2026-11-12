@@ -231,6 +231,7 @@ SITE_SECTIONS = [
     dict(id="SS-14", area="Overview", page="deployment.html", purpose="Pages configuration, PR, merge and deploy record", src="S25", verified=True),
     dict(id="SS-15", area="Assurance", page="integration.html", purpose="Combined integration: cross-check of both sessions' data and link audit", src="S24", verified=True),
     dict(id="SS-16", area="Overview", page="legacy-site.html", purpose="Preserved earlier sessions' dashboard (historical, labelled)", src="S24", verified=True),
+    dict(id="SS-17", area="Assurance", page="referee/index.html", purpose="Independent official-source audit and replication (session 73fdd6c4)", src="S24", verified=True),
 ]
 
 LINE_STEPS = [
@@ -948,7 +949,7 @@ def page_flagged():
     b.append(cards([("Flagged items", counts["flags"], "All with source links"),
                     ("Official-page irregularities", sum(1 for x in fids if "F02" <= x <= "F08"), "F02–F08"),
                     ("Missing official data", sum(1 for x in fids if x in ("F09", "F10", "F11", "F14", "F15")), "F09–F11, F14, F15"),
-                    ("Combined-site review", sum(1 for x in fids if x >= "F25"), "F25–F28")]))
+                    ("Combined-site review", sum(1 for x in fids if x >= "F25"), "F25–F36")]))
     b.append('<h2 id="all">All flagged irregularities</h2>')
     b.append(T("tbl-flags", "Every flag with category, description, impact, status, official source link and suggested action for the reviewer.",
                [("ID", "id", "id"), ("Category", "category", "text"), ("Irregularity / unverified item", "description", "wide"),
@@ -1108,9 +1109,9 @@ def page_integration():
 
 def page_deployment():
     b = []
-    b.append('<div class="callout"><b>Deployment and PR record.</b> Blank values are filled by the integration '
-             'session after the pull request is created, the merge succeeds and GitHub Pages reports a successful '
-             'build. Until then they remain blank and flagged — no deployment claim is made without evidence.</div>')
+    b.append('<div class="callout"><b>Deployment and PR record.</b> PR #12 was merged to main and GitHub '
+             'Pages reported a successful build for the merge commit. Every value below was filled from the '
+             'GitHub REST API or the published Pages site; no deployment claim is made without evidence.</div>')
     b.append('<h2 id="record">Deployment record</h2>')
     b.append(T("tbl-deployment", "Pages configuration, entry-file requirement, PR number, PR URL, merge result and post-merge build status.",
                [("ID", "id", "id"), ("Item", "item", "wide"), ("Value", "value", "wide"),

@@ -34,18 +34,18 @@ not block other work.
 | Task | Description | Status | Owner (session ID) | File scope | Sources / verification / irregularities |
 | --- | --- | --- | --- | --- | --- |
 | T01 | Repo inventory, line-by-line review, board creation | done | `80731db4-nfl1` | `COORDINATION.md`, `docs/repo-audit.md` | 1 tracked file (`README.md`, single line `# NFL1`); no code, data, workflows or site. Verified with `git ls-tree`, `git log`, `gh repo view`, `gh api .../pages`. Sources: [repo](https://github.com/kanlerxz87-cyber/NFL1), [Pages API](https://api.github.com/repos/kanlerxz87-cyber/NFL1/pages). Irregularities F01, F16, F17, F22, F23 logged. |
-| T02 | Official source registry + verification policy | done | — | `data/sources.json`, `docs/verification.md` | Official-source registry; every URL fetched and checked 2026-11-12. |
-| T03 | Full requirements inventory & analysis | done | — | `data/requirements.json`, `docs/requirements-analysis.md` | 36 requirements decomposed verbatim; per-row official links; validator enforced. [requirements.json](data/requirements.json) |
-| T04 | Decision gate: questions / known / unknown / answers / discovery suggestions | done | — | `data/questions.json`, `docs/decision-gate.md` | 27 questions with known/unknown/answer/discovery; answers only where official. [questions.json](data/questions.json) |
-| T05 | Site improvement suggestions + choose-a-path review section | done | — | `data/suggestions.json`, `docs/improvement-paths.md` | 20 suggestions + 3 paths + Review & Choose a Path gate; no implementation performed. [suggestions.json](data/suggestions.json) |
-| T06 | Own-lines research, strategy design, validation gates, correlation, skill vs luck | done | — | `data/strategies.json`, `data/validation-gates.json`, `data/correlations.json`, `docs/strategy-research.md` | Own-line pipeline, 10 strategies, 13 gates, 6 computed Pearson r, luck protocol; method sources NIST/NFL. [strategy-research.md](docs/strategy-research.md) |
-| T07 | Leaderboard competition + rewards (single bet / parlay / player-prop combos) | done | — | `data/leaderboard.json`, `docs/competition-rules.md` | 3 tracks, 7 rules, 4 reward tiers, blank leaderboard; no fabricated ranks/scores. [competition-rules.md](docs/competition-rules.md) |
-| T08 | Injury & depth/backup tracking (2nd/3rd/4th string, offense & defense) | done | — | `data/injuries.json`, `data/depth-chart.json`, `docs/injury-tracking.md` | 61 official injury rows, 14 games, 6-row policy table, 20 Week-9 inactives, 85 depth rows (1st-4th string), tracking pipeline. [injury-tracking.md](docs/injury-tracking.md) |
-| T09 | Executive summary | done | — | `docs/executive-summary.md` | Executive Summary page and docs/exec-summary.md with verified facts, gaps, posture, coordination. [exec-summary.md](docs/exec-summary.md) |
-| T10 | Site build: pages, tables, nav, assets, templates, generator, validators | done | — | `site/`, `tools/`, `index.html`, `*.html`, `.github/workflows/pages.yml` | 14+2 static pages, grouped dashboard nav, CSS/JS, generator, validator, docs; verify.py PASS (801+ rows with official links, 0 broken internal links). |
-| T11 | Flagged for Review page + irregularities registry | done | — | `data/flags.json`, `docs/irregularities.md` | 28 flags on the Flagged for Review page, each with an official source link; status needs review, non-blocking. [flags.json](data/flags.json) |
-| T12 | Final integration: re-verify combined data line by line, link check, build check, deploy | in progress | — | `COORDINATION.md`, `tools/verify.py`, `README.md` | Pending |
-| T13 | PR to `main`, merge, confirm GitHub Pages deploy, record PR link/result | in progress | — | `COORDINATION.md`, `docs/deployment.md` | Pending |
+| T02 | Official source registry + verification policy | done | `80731db4-nfl1` | `data/sources.json`, `docs/verification.md` | Official-source registry; every URL fetched and checked 2026-11-12. |
+| T03 | Full requirements inventory & analysis | done | `80731db4-nfl1` | `data/requirements.json`, `docs/requirements-analysis.md` | 36 requirements decomposed verbatim; per-row official links; validator enforced. [requirements.json](data/requirements.json) |
+| T04 | Decision gate: questions / known / unknown / answers / discovery suggestions | done | `80731db4-nfl1` | `data/questions.json`, `docs/decision-gate.md` | 27 questions with known/unknown/answer/discovery; answers only where official. [questions.json](data/questions.json) |
+| T05 | Site improvement suggestions + choose-a-path review section | done | `80731db4-nfl1` | `data/suggestions.json`, `docs/improvement-paths.md` | 20 suggestions + 3 paths + Review & Choose a Path gate; no implementation performed. [suggestions.json](data/suggestions.json) |
+| T06 | Own-lines research, strategy design, validation gates, correlation, skill vs luck | done | `80731db4-nfl1` | `data/strategies.json`, `data/validation-gates.json`, `data/correlations.json`, `docs/strategy-research.md` | Own-line pipeline, 10 strategies, 13 gates, 6 computed Pearson r, luck protocol; method sources NIST/NFL. [strategy-research.md](docs/strategy-research.md) |
+| T07 | Leaderboard competition + rewards (single bet / parlay / player-prop combos) | done | `80731db4-nfl1` | `data/leaderboard.json`, `docs/competition-rules.md` | 3 tracks, 7 rules, 4 reward tiers, blank leaderboard; no fabricated ranks/scores. [competition-rules.md](docs/competition-rules.md) |
+| T08 | Injury & depth/backup tracking (2nd/3rd/4th string, offense & defense) | done | `80731db4-nfl1` | `data/injuries.json`, `data/depth-chart.json`, `docs/injury-tracking.md` | 61 official injury rows, 14 games, 6-row policy table, 20 Week-9 inactives, 85 depth rows (1st-4th string), tracking pipeline. [injury-tracking.md](docs/injury-tracking.md) |
+| T09 | Executive summary | done | `80731db4-nfl1` | `docs/executive-summary.md` | Executive Summary page and docs/exec-summary.md with verified facts, gaps, posture, coordination. [exec-summary.md](docs/exec-summary.md) |
+| T10 | Site build: pages, tables, nav, assets, templates, generator, validators | done | `80731db4-nfl1` | `site/`, `tools/`, `index.html`, `*.html`, `.github/workflows/pages.yml` | 14+2 static pages, grouped dashboard nav, CSS/JS, generator, validator, docs; verify.py PASS (996 rows with official links, 0 broken internal links). |
+| T11 | Flagged for Review page + irregularities registry | done | `80731db4-nfl1` | `data/flags.json`, `docs/irregularities.md` | 36 flags on the Flagged for Review page, each with an official source link; status needs review, non-blocking. [flags.json](data/flags.json) |
+| T12 | Final integration: re-verify combined data line by line, link check, build check, deploy | done | `80731db4-nfl1` | `COORDINATION.md`, `tools/verify.py`, `tools/verify_combined.py`, `README.md`, `integration.html` | Merged PRs #1-#11 work without discarding either site generation; 996 source-linked rows, 1,064 local links, 0 mismatches and 0 broken links; Pages deployed successfully at https://kanlerxz87-cyber.github.io/NFL1/ |
+| T13 | PR to `main`, merge, confirm GitHub Pages deploy, record PR link/result | done | `80731db4-nfl1` | `COORDINATION.md`, `docs/deployment.md`, `data/deployment.json` | PR #12 merged; Pages build `built`; live site fetched and read as a user. |
 
 **Shared outputs** (`index.html`, `site/assets/*`, `site/templates/*`, `data/site-config.json`):
 reserved for the final integration session (T12). Other sessions must not edit them; log a
@@ -92,7 +92,7 @@ The archived board in `docs/COORDINATION-archive-main.md` lists an **unclaimed**
 This integration session claims it. Because `index.html` and `pages/*.html` are shared/earlier-session
 outputs, their product files are **not edited**: the new dashboard supplies row-level official
 citations on every table, omits the unsourced `rank` column, and labels the preserved pages as
-historical. Residual items are published as flags F25–F28 with official links. The full text of the
+historical. Residual items are published as flags F25–F36 with official links. The full text of the
 pre-integration board is preserved verbatim in `docs/COORDINATION-archive-main.md`.
 
 ## Integration log (session `80731db4-nfl1`, final integration)
@@ -207,3 +207,26 @@ preserved; the pre-integration board was refreshed verbatim at
 - Open request to session `533256e1` about `LAR` vs `LA` is already published as flag F29.
 - Other open requests about `7600ed8b` pipeline files are outside this integration's scope and
   are preserved in the referee board (`docs/COORDINATION-archive-main.md`).
+
+## PR #12 and deployment result (recorded after merge)
+
+- **Pull request:** https://github.com/kanlerxz87-cyber/NFL1/pull/12
+  ("Final integration: source-linked NFL decision dashboard and combined-site verification")
+- **Merge result:** MERGED at 2026-11-12T05:01:26Z, merge commit
+  `4904617614a1391f3fb492990877704c3f694c7d`, via `gh pr merge 12 --merge`.
+- **Checks on the merged commit:** `Verify NFL1 site` run 43158573351 success;
+  `Deploy NFL Decision Lab to GitHub Pages` run 43158573277 success (build + deploy);
+  `pages build and deployment` run 43158573031 success.
+- **GitHub Pages:** `gh api repos/kanlerxz87-cyber/NFL1/pages` reports `status: built`,
+  `build_type: legacy`, `source: main / /`, `https_enforced: true`; latest Pages build for
+  commit `4904617` completed with status `built` at 2026-11-12T05:01:27Z.
+- **Live site read as a user:** https://kanlerxz87-cyber.github.io/NFL1/?v=4904617 returned the
+  new landing dashboard with 36 flagged items and the source-linked site-section table;
+  https://kanlerxz87-cyber.github.io/NFL1/flagged.html?v=4904617 returned the clearly labelled
+  "Flagged for Review" page with all 36 irregularity rows and official source links.
+- **Sources for this record:** GitHub REST API (`repos/kanlerxz87-cyber/NFL1/pages`,
+  `pulls/12`, Actions runs and Pages builds) and the published Pages URL above.
+- **Irregularities:** F01-F36 published on `flagged.html`; none blocks the site. The only
+  failing-looking annotation in the deploy run came from the `continue-on-error` external-link
+  report; the job and deploy both concluded `success`. F35's lesson (read the live page, not just
+  the green pipeline) was applied.

@@ -29,37 +29,37 @@
   {
     "id": "D-04",
     "item": "Pull request number",
-    "value": "",
-    "how_checked": "Created by the integration session before merge",
+    "value": "12",
+    "how_checked": "gh pr create --base main --head arena/80731db4-nfl1; gh pr view 12",
     "src": "S24",
-    "verified": false,
+    "verified": true,
     "retrieved": "2026-11-12"
   },
   {
     "id": "D-05",
     "item": "Pull request URL",
-    "value": "",
-    "how_checked": "Created by the integration session before merge",
+    "value": "https://github.com/kanlerxz87-cyber/NFL1/pull/12",
+    "how_checked": "gh pr view 12 --json url",
     "src": "S24",
-    "verified": false,
+    "verified": true,
     "retrieved": "2026-11-12"
   },
   {
     "id": "D-06",
     "item": "Merge result",
-    "value": "",
-    "how_checked": "gh pr merge with an explicit PR number",
+    "value": "MERGED 2026-11-12T05:01:26Z, commit 4904617614a1391f3fb492990877704c3f694c7d",
+    "how_checked": "gh pr merge 12 --merge; gh pr view 12 --json state,mergedAt,mergeCommit",
     "src": "S24",
-    "verified": false,
+    "verified": true,
     "retrieved": "2026-11-12"
   },
   {
     "id": "D-07",
     "item": "Post-merge Pages build status",
-    "value": "",
-    "how_checked": "GitHub Pages builds endpoint plus a live-site fetch",
+    "value": "built (commit 4904617); Actions deploy run 43158573277 success; live site fetched and read",
+    "how_checked": "gh api repos/kanlerxz87-cyber/NFL1/pages/builds; gh run view 43158573277; fetch of live URL",
     "src": "S25",
-    "verified": false,
+    "verified": true,
     "retrieved": "2026-11-12"
   }
 ]
