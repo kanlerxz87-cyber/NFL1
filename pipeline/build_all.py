@@ -821,8 +821,8 @@ def availability(ctx):
 
     fixture_teams = set()
     for g in ctx["fixtures"].to_dict("records"):
-        fixture_teams.add(g["home"])
-        fixture_teams.add(g["away"])
+        fixture_teams.add(g["home_team"])
+        fixture_teams.add(g["away_team"])
     reported = {r["team"] for r in recs if r.get("team")}
     clubs_missing = sorted(fixture_teams - reported)
 
