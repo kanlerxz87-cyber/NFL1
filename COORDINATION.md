@@ -270,4 +270,5 @@ All 17 flagged items (13 irregularities, 3 unverified, 1 not audited) are publis
 
 ### Pull request and merge (`73fdd6c4`)
 
-- Pull request: being opened; link and merge result are recorded here in the next commit.
+- Pull request: https://github.com/kanlerxz87-cyber/NFL1/pull/11 (opened 2026-11-12 UTC from `arena/73fdd6c4-nfl1` to `main`). Pre-merge checks: `referee/tools/check_site.py` pass (7 pages, 900 table rows, all local links resolve, every row has an outside source link); main's own gates `scripts/verified/check_site.py` and `scripts/verified/validate_verified.py` pass on the merged tree.
+- Merge result and Pages deployment: recorded in the follow-up pull request listed below once confirmed.
