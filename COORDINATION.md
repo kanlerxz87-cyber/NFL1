@@ -745,7 +745,10 @@ including three cells where nfl.com contradicts its own arithmetic.
     equivalents rebuilt into `verified-lab/`;
   - `.gitignore` became the union of both sides' entries;
   - `README.md` kept `main`'s text with the three committed conflict blocks
-    resolved, plus an appended section describing the subsystem;
+    resolved, plus a short pointer to the subsystem. The full write-up lives in
+    `verified-lab/README.md` because `tools/build.py` regenerates the root
+    `README.md` from an embedded template and would wipe anything added there
+    (see the open request below);
   - `COORDINATION.md` kept `main`'s board in full, with this section appended
     and this session's row added to the session table.
 - 15 root `.html` files that this session had generated were removed from the
@@ -754,3 +757,31 @@ including three cells where nfl.com contradicts its own arithmetic.
 - **Merge result and Pages verification:** recorded in the follow-up commit
   pushed to this branch and merged immediately afterwards, once the deployment
   had actually been observed rather than assumed.
+
+## Open cross-session requests (logged, not applied)
+
+Per the protocol, a need that touches another session's files is logged here
+rather than edited.
+
+| # | Request | Owner of the file | Why this session did not do it |
+|---|---|---|---|
+| R-a2cea255-01 | Add a pointer to `verified-lab/` (the independent verification subsystem and its sub-site) to the README template inside `tools/build.py`. | `tools/build.py` — session `7600ed8b`/`25aa7696` lineage | `tools/build.py` writes `README.md` unconditionally (line ~1372), so any pointer committed directly to `README.md` is wiped the next time that generator runs. The short pointer added in this merge is therefore expected to be transient; the durable fix belongs in the generator's template. |
+| R-a2cea255-02 | Consider running this subsystem's 34-check harness (`PYTHONPATH=src python3 -c "from nfl import verify; ..."`) as an additional CI gate alongside `scripts/verified/validate_verified.py`. | `.github/workflows/pages.yml` | It audits the official nfl.com pages independently of the mirrored feeds and currently reports 29 PASS / 5 FLAG / 0 FAIL, including three cells where nfl.com contradicts its own arithmetic. Adding a workflow step is a change to shared CI, so it is requested rather than made. |
+| R-a2cea255-03 | Confirm whether the three disputed standings cells (WAS `non_conf`, IND `div`, PHI `div`) also affect `data/verified/standings_2026.csv` or the model outputs derived from it. | `data/verified/standings_2026.csv`, `pipeline/` | This session found them by recomputing the tie-aware PCT identity on its own transcription. It does not edit another session's data or recompute their model, so the finding is handed over with the arithmetic proof rather than applied. |
+
+## Note on the two verification datasets now living in `data/verified/`
+
+`data/verified/` contains two independent transcriptions of the same official
+pages, from different sessions, with different formats and different scopes:
+
+- `*.csv` — the lab's hand-entered fixtures (32 standings rows, a 44-row injury
+  sample) used to verify the automated feeds.
+- `*.tsv` — this subsystem's full hand transcription (32 standings rows × 19
+  fields, **254** injury entries, 14 Week 10 games, byes, report status, 8 news
+  items).
+
+Filenames do not collide, and neither is derived from the other. They agree
+where they overlap: both report 32 standings rows, and this subsystem's harness
+independently confirms all 28 pre-game records printed on the official injury
+page. Keeping both is deliberate — an audit is only worth anything if it was
+produced independently of the thing it audits.

@@ -78,71 +78,18 @@ Everything on the site is static HTML generated from `data/model/*.json` plus
 
 This is a research tool, not betting advice.
 
----
+## Independent verification subsystem
 
-## The independent verification subsystem (`verified-lab/`)
+Session `a2cea255-nfl1` added a deliberately independent second implementation of the same
+brief in `verified-lab/`: a hand transcription of the official nfl.com pages, a 34-check
+verification harness, a provenance-and-gates engine, and a 20-page sub-site.
 
-Session `a2cea255-nfl1` built a second, deliberately independent implementation of the same
-brief: a transcription of the official nfl.com pages done by hand rather than scraped, a
-verification harness, a provenance-and-gates engine, and a 20-page dashboard.
+**Sub-site: <https://kanlerxz87-cyber.github.io/NFL1/verified-lab/>** ·
+details in [`verified-lab/README.md`](verified-lab/README.md).
 
-**Sub-site: <https://kanlerxz87-cyber.github.io/NFL1/verified-lab/>**
+It publishes into its own directory because the root is this lab's live site, and its CI
+footprint is nil. Where the two disagree — the sub-site publishes no spread, total or edge —
+the reason is that GitHub release assets cannot be downloaded from the Arena sandbox, so the
+nflverse feeds `pipeline/collect.py` fetches in Actions were never obtainable there. Blanks
+were left blank rather than filled from an unofficial aggregator.
 
-It is published in its own directory rather than at the repository root because the root is
-this lab's live site, and overwriting `index.html`, `executive-summary.html`, `flagged.html`,
-`suggestions.html` or `verification.html` would have destroyed merged work. Its CI footprint
-is nil: `scripts/verified/check_site.py` scans only `index.html` and `pages/`.
-
-| Path | What it is |
-|---|---|
-| `src/nfl/` | 16 **standard-library-only** modules — no third-party dependency at all |
-| `data/verified/*.tsv` | Hand transcription of nfl.com: 32 standings rows, 254 injury entries, 14 Week 10 games, byes, report status, 8 news items |
-| `data/processed/site_data.json` | Generated artifact; the sub-site's single input |
-| `content/*.md` | Hand-written prose: executive summary, 22 open questions, 22 suggestions with blank Decision columns, methodology |
-| `scripts/build_site.py` | 20 page builders. **Contains no numbers** — every value comes from the JSON artifact |
-| `tests/` | 103 unit tests, including a link checker and a per-row source-link enforcer |
-
-### What it adds that the main pipeline does not
-
-- **A 34-check verification harness** (`src/nfl/verify.py`) run over hand-transcribed cells:
-  **29 PASS, 5 FLAG, 0 FAIL**. It recomputes the tie-aware `PCT = (W + 0.5·T)/(W+L+T)` with
-  half-up `Decimal` rounding, checks league-wide balance, slate integrity, injury vocabulary,
-  and — its strongest check — that all 28 records printed beside club logos on the official
-  injury page agree exactly with the official standings page.
-- **Three official cells that contradict themselves**, found by that harness and never
-  silently corrected: WAS `non_conf` (2-5-1 is 8 games, CONF 3-2-1 is 6, so NON-CONF must be
-  2 games but the page prints `1-3-1`), IND `div` (`1-3-0` ⇒ 0.250, page prints 0.333), and
-  PHI `div` (`1-4-0` ⇒ 0.200, page prints 0.250). Published verbatim, excluded from derived
-  maths, flagged with the arithmetic proof.
-- **A provenance tier on every value** — `VERIFIED`, `DERIVED`, `MODELED`, `UNAVAILABLE` — and
-  a refusal path: when a required input is `None` the dependent output is `None` plus a named
-  blocking input, never a plausible-looking number.
-- **Nine validation gates proven bidirectional.** The harness *approves* a well-formed
-  strategy and *rejects* lookahead, an edge inside the noise, a confidence interval spanning
-  zero, and profit concentrated in one fold. A gate that only ever says no is not evidence.
-- **Two publication rules enforced by tests rather than by convention**: every `href` in all
-  20 pages must resolve, and every row of every table declaring a `Source` column must carry a
-  link to an official host. Both caught real defects during development.
-
-### Where the two systems disagree, and why that matters
-
-This subsystem reports **no spread, no total, no win probability and no edge**, and concludes
-that **zero non-mechanical findings survive** its correlation screen (38 tests, BH-FDR at
-α = 0.10; 9 survive and all 9 are definitional; 1.9 false positives expected at p < 0.05 by
-chance alone). That is not a contradiction of the main pipeline — it is a consequence of
-running inside the Arena sandbox, where GitHub **release assets cannot be downloaded** (302 to
-`release-assets.githubusercontent.com`, then exit 35 / 0 bytes), so the nflverse closing lines,
-depth charts and play-by-play that `pipeline/collect.py` fetches **in GitHub Actions** were
-never obtainable here. Blanks were left blank rather than filled from an unofficial
-aggregator. The main lab, running in CI, has that data and this subsystem does not.
-
-Read the two together: the lab for what the data supports, `verified-lab/` for an
-independent audit of the official pages themselves.
-
-Reproduce the subsystem with no dependencies installed:
-
-```bash
-PYTHONPATH=src python3 -m nfl.pipeline        # -> data/processed/site_data.json
-PYTHONPATH=src python3 scripts/build_site.py  # -> verified-lab/
-PYTHONPATH=src python3 -m unittest discover -s tests -v
-```
