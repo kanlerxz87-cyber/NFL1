@@ -39,7 +39,7 @@ jobs:
       - name: Collect source files (pinned URLs + sha256)
         run: python pipeline/collect.py
       - name: Scrape the official current-week injury report (nfl.com)
-        run: python pipeline/scrape_injuries.py || true
+        run: python pipeline/scrape_injuries.py
       - name: Probe real schemas (no guessed column names)
         run: python pipeline/schema.py
       - name: Build model and site data
@@ -49,6 +49,9 @@ jobs:
           else
             echo "build_all.py not present yet"
           fi
+      - name: Report injury source actually used (including fallback)
+        if: always()
+        run: python pipeline/report_ingestion.py
       - name: Publish generator log
         if: always()
         run: |
