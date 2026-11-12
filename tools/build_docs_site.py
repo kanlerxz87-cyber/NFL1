@@ -9,7 +9,7 @@ Design rules enforced here, not by convention:
   4. Governance rows sourced from the owner's brief are badged INTERNAL and are
      the only permitted exemption from rule 1 (flag F-006).
 
-Usage:  python3 tools/build_site.py
+Usage:  python3 tools/build_docs_site.py
 """
 from __future__ import annotations
 
@@ -20,7 +20,7 @@ import sys
 from datetime import datetime, timezone
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA = os.path.join(ROOT, "data")
+DATA = os.path.join(ROOT, "data", "session-87deb7ab")
 DOCS = os.path.join(ROOT, "docs")
 
 RETRIEVED = "2026-11-12"
