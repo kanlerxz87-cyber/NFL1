@@ -53,10 +53,12 @@
 <a href="pages/decisions.html">Decision register</a>
 <a href="pages/evidence.html">Evidence</a>
 <a href="pages/executive-summary.html">Executive summary</a>
+<a href="pages/executive.html">Executive</a>
 <a href="pages/flagged.html">Flagged</a>
 <a href="pages/injuries.html">Injuries</a>
 <a href="pages/lines.html">Own lines</a>
 <a href="pages/models.html">Strategy lab</a>
+<a href="pages/props.html">Props</a>
 <a href="pages/questions.html">Questions</a>
 <a href="pages/review.html">Review</a>
 <a href="pages/standings.html">Standings</a>
@@ -404,12 +406,12 @@
 </tr>
 <tr id="F36" data-verified="true">
 <td><code>F36</code></td>
-<td data-value="1">Open referee correction request</td>
-<td data-value="1" class="wide">The independent referee session (PR #11) reports that `pages/analysis.html` and `data/verified/model/correlations.json` count 52 division games in Weeks 1-9 where official groupings give 42; it computes a corrected correlation of -0.1048 rather than -0.1297.</td>
-<td data-value="1" class="wide">A published correlation might be affected; this integration session does not edit another session&#x27;s files or recompute their model.</td>
-<td><span class="badge neutral">needs review</span></td>
-<td data-value="1" class="wide">Logged here and in COORDINATION.md as a request to session `25aa7696`; the original artifacts remain published with their own sources.</td>
-<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+<td data-value="1">Referee correction request — RESOLVED 2026-11-12</td>
+<td data-value="1" class="wide">The independent referee session (PR #11) reported that `pages/analysis.html` and `data/verified/model/correlations.json` counted 52 division games in Weeks 1-9 where official groupings give 42, and computed a corrected correlation of -0.1048 rather than -0.1297. Root cause confirmed by session `b6e68100`: the division map in `analysis/correlations.py` was keyed on the bare `division` name, so AFC East vs NFC East games (e.g. AZ @ LAC) were miscounted as division games.</td>
+<td data-value="1" class="wide">RESOLVED. The ten cross-conference false positives were removed by keying on (conference, division) together; all 32 club-division assignments were re-verified line by line against https://www.nfl.com/standings/division/2026/REG before recomputing. Recomputed C5 = -0.1048 (n=136, 95% CI [-0.268, +0.065], p=0.2245), which matches the referee&#x27;s independent value exactly. `data/verified/model/correlations.json` and `pages/analysis.html` now carry the corrected value.</td>
+<td><span class="badge neutral">resolved</span></td>
+<td data-value="1" class="wide">Hand-off recorded in COORDINATION.md task A1: owning session `25aa7696` is inactive, so session `b6e68100` applied the fix the referee requested. Verification source: https://www.nfl.com/standings/division/2026/REG (division groupings read and compared for all 32 clubs on 2026-11-12).</td>
+<td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
 </tbody></table></div>
 <h2 id="unverified">Registry of blank/unverified values</h2>
