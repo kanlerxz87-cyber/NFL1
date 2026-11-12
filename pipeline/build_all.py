@@ -1140,14 +1140,17 @@ def verification(ctx):
                     mism.append({"team": abbr, "player": c["player"], "detail": "absent"})
                     continue
                 diffs = {}
-                for k, key2 in (("injury", "injury"), ("practice", "practice"),
-                                ("game", "game"), ("position", "position")):
-                    a = c.get(k)
+                for out_key, csv_col, scrape_key in (
+                        ("injury", "injury", "injury"),
+                        ("practice", "practice_status", "practice"),
+                        ("game", "game_status", "game"),
+                        ("position", "position", "position")):
+                    a = c.get(csv_col)
                     a = None if (a is None or (isinstance(a, float) and pd.isna(a))) else str(a).strip()
-                    b = got.get(key2)
+                    b = got.get(scrape_key)
                     b = None if (b is None or (isinstance(b, float) and pd.isna(b))) else str(b).strip()
                     if (a or None) != (b or None):
-                        diffs[k] = {"companion": a, "scraped": b}
+                        diffs[out_key] = {"companion": a, "scraped": b}
                 rows.append({"team": abbr, "player": c["player"],
                              "position": c.get("position"),
                              "injury": c.get("injury") if not pd.isna(c.get("injury")) else None,
