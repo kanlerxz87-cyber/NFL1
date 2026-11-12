@@ -36,8 +36,20 @@ def fetch() -> str:
 
 
 def nicknames() -> dict[str, str]:
+    """Map club nickname -> CURRENT abbreviation.
+
+    teams.csv contains historical franchise rows (OAK, STL, SD), so only clubs that appear in
+    the 2026 schedule are allowed to register a nickname.
+    """
     teams = pd.read_csv(os.path.join(RAW, "teams.csv"))
-    teams = teams.drop_duplicates("team_abbr")
+    active = set()
+    try:
+        g = pd.read_csv(os.path.join(RAW, "games.csv"))
+        g = g[g["season"] == g["season"].max()]
+        active = set(g["home_team"]) | set(g["away_team"])
+    except Exception:  # noqa: BLE001
+        active = set(teams["team_abbr"])
+    teams = teams[teams["team_abbr"].isin(active)].drop_duplicates("team_abbr")
     out = {}
     for _, t in teams.iterrows():
         for key in (t.get("team_nick"), t.get("team_name")):
@@ -56,6 +68,32 @@ def parse(html: str) -> dict:
     nicks = nicknames()
     marker = {k: v for k, v in nicks.items() if len(k) > 3}
 
+    def club_from_ancestors(table) -> str | None:
+        node = table
+        for _ in range(6):
+            node = node.parent
+            if node is None or node.name is None:
+                break
+            found = None
+            for img in node.find_all("img", src=True):
+                m = re.search(r"clubs/logos/([A-Z]{2,3})", img["src"])
+                if m:
+                    found = m.group(1)
+            if found:
+                return found
+        return None
+
+    def club_from_sibling_text(table) -> str | None:
+        prev = table
+        for _ in range(40):
+            prev = prev.find_previous(True)
+            if prev is None:
+                return None
+            own = prev.get_text(" ", strip=True)
+            if own and len(own) < 40 and own.lower() in marker:
+                return marker[own.lower()]
+        return None
+
     current = None
     rows = []
     tables = 0
@@ -73,6 +111,7 @@ def parse(html: str) -> dict:
         if not any("player" in h for h in header) or not any("status" in h for h in header):
             continue
         tables += 1
+        table_club = club_from_ancestors(el) or club_from_sibling_text(el) or current
 
         def col(name):
             for i, h in enumerate(header):
@@ -96,7 +135,7 @@ def parse(html: str) -> dict:
             def pick(i):
                 return cells[i] if i is not None and i < len(cells) and cells[i] else None
             rows.append({
-                "team": current,
+                "team": table_club,
                 "player": player,
                 "position": pick(i_pos),
                 "injury": pick(i_injury),
@@ -119,7 +158,7 @@ def main() -> None:
     parsed = parse(html)
     rows = parsed["rows"]
     teams = {r["team"] for r in rows if r["team"]}
-    ok = len(rows) >= 150 and len(teams) >= 20
+    ok = len(rows) >= 150 and len(teams) >= 24
     payload = {
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "source_url": URL,

@@ -654,6 +654,10 @@ POS_WEIGHTS = {
     "FS": 0.05, "SS": 0.05, "DB": 0.05, "K": 0.01, "P": 0.01, "LS": 0.01,
 }
 STATUS_WEIGHT = {"Out": 1.0, "Doubtful": 0.7, "Questionable": 0.25}
+# Early in the week clubs publish practice participation before any game designation. These
+# weights are a deliberately weaker leading signal and are labelled separately on the site.
+PRACTICE_WEIGHT = {"Did Not Participate In Practice": 0.5,
+                   "Limited Participation in Practice": 0.2}
 
 
 @stage("D injury and depth attrition")
@@ -743,7 +747,9 @@ def availability(ctx):
 
     rows, team_agg, unmatched = [], {}, 0
     for rec in recs:
-        if rec["game"] not in STATUS_WEIGHT:
+        game_ok = rec["game"] in STATUS_WEIGHT
+        practice_ok = (rec["practice"] in PRACTICE_WEIGHT and not game_ok)
+        if not (game_ok or practice_ok):
             continue
         d = depth_by_player.get((rec["team"], rec["gsis_id"])) if rec["gsis_id"] else None
         if d is None:
@@ -757,7 +763,9 @@ def availability(ctx):
                      if p["pos_rank"] == 2), None)
         pos = (rec["position"] or "").upper()
         w = POS_WEIGHTS.get(pos, 0.03)
-        contrib = w * STATUS_WEIGHT[rec["game"]]
+        eff_status = rec["game"] if game_ok else rec["practice"]
+        eff_weight = STATUS_WEIGHT[rec["game"]] if game_ok else PRACTICE_WEIGHT[rec["practice"]]
+        contrib = w * eff_weight
         snaps_total = 0
         if repl:
             srow = snap_team[(snap_team["team"] == rec["team"]) &
@@ -769,6 +777,8 @@ def availability(ctx):
             "depth_rank": d["pos_rank"], "depth_slot": d["pos_name"],
             "injury": rec["injury"], "game_status": rec["game"],
             "practice_status": rec["practice"],
+            "signal": "game designation" if game_ok else "practice only (no game designation yet)",
+            "effective_status": eff_status, "status_weight": eff_weight,
             "years_exp": exp.get(rec["gsis_id"]),
             "roster_status": rstatus.get(rec["gsis_id"]),
             "replacement": repl["player_name"] if repl else None,
@@ -794,6 +804,8 @@ def availability(ctx):
             "starters_out": sum(1 for x in trows if x["game_status"] == "Out"),
             "starters_doubtful": sum(1 for x in trows if x["game_status"] == "Doubtful"),
             "starters_questionable": sum(1 for x in trows if x["game_status"] == "Questionable"),
+            "starters_practice_only": sum(1 for x in trows if x["signal"].startswith("practice")),
+            "starters_no_game_designation": sum(1 for x in trows if not x["game_status"]),
             "attrition_points": round(val, 3),
             "attrition_index_0_100": round(100 * val / max_agg, 1) if max_agg else 0.0,
             "backup_experience_avg": (
@@ -816,6 +828,8 @@ def availability(ctx):
         "depth_chart_timestamp": str(dt),
         "counts": {
             "injury_records": int(len(recs)),
+            "rows_with_game_designation": int(sum(1 for r in recs if r["game"] in STATUS_WEIGHT)),
+            "rows_practice_only_starters": int(sum(1 for x in rows if x["signal"].startswith("practice"))),
             "starters_impacted": int(len(rows)),
             "teams_with_starter_out": int(sum(1 for t in team_table if t["starters_out"] > 0)),
             "records_not_matched_to_depth_chart": int(unmatched),
@@ -823,8 +837,12 @@ def availability(ctx):
         "method": {
             "depth_rank": "Depth chart mirrored weekly (pos_rank 1 = listed starter).",
             "attrition_formula": ("sum over unavailable starters of position_weight x status_weight; "
-                                  "status weights Out=1.0, Doubtful=0.7, Questionable=0.25. Index is "
-                                  "rescaled 0-100 against the worst team this week."),
+                                  "game weights Out=1.0, Doubtful=0.7, Questionable=0.25. When a club "
+                                  "has not published a game designation yet, the practice report is "
+                                  "used at a deliberately lower weight (DNP 0.5, limited 0.2) and "
+                                  "labelled 'practice only'. Index is rescaled 0-100 against the "
+                                  "worst team this week."),
+            "practice_weights": PRACTICE_WEIGHT,
             "position_weights": POS_WEIGHTS,
             "limits": [
                 "Game status is the official designation, not proof of who starts or plays.",
@@ -1047,6 +1065,10 @@ def verification(ctx):
         except Exception as exc:  # noqa: BLE001
             print(f"coverage check skipped: {exc}")
 
+    # nfl.com prints some clubs differently from the GSIS codes used by the feed.
+    ALIAS = {"AZ": "ARI", "LAR": "LA", "WSH": "WAS", "OAK": "LV", "SD": "LAC", "STL": "LA",
+             "LVR": "LV", "JAC": "JAX", "SF": "SF", "TB": "TB", "NE": "NE", "NO": "NO"}
+
     # D. cross-check against the companion transcription committed by session 533256e1
     cross_path = os.path.join(root, "data", "standings.csv")
     if os.path.exists(cross_path):
@@ -1057,6 +1079,7 @@ def verification(ctx):
             rows, mism = [], []
             for _, c in cross.iterrows():
                 abbr = str(c.get("abbr") or c.get("abbreviation") or "").strip()
+                abbr = ALIAS.get(abbr, abbr)
                 mine = comp.get(abbr)
                 if mine is None:
                     mism.append({"team": abbr, "detail": "not in computed standings"})
@@ -1100,6 +1123,7 @@ def verification(ctx):
             rows, mism = [], []
             for _, c in comp.iterrows():
                 abbr = tmap.get(str(c["team"]).strip(), str(c["team"]).strip())
+                abbr = ALIAS.get(abbr, abbr)
                 key = (abbr, str(c["player"]).strip())
                 got = scraped.get(key)
                 if got is None:
