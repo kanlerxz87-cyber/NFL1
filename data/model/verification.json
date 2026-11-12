@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-12T04:39:56+00:00",
+ "generated_at": "2026-11-12T04:41:11+00:00",
  "checks": [
   {
    "name": "2026 standings (W-L-T, points for/against)",
@@ -617,9 +617,815 @@
      "diffs": null
     }
    ]
+  },
+  {
+   "name": "Computed standings vs companion transcription (data/standings.csv)",
+   "source": "https://www.nfl.com/standings/league/2026/reg",
+   "rows_checked": 32,
+   "rows_matched": 30,
+   "mismatches": 2,
+   "detail": [
+    {
+     "team": "BUF",
+     "matched": true,
+     "computed": {
+      "team": "BUF",
+      "name": "Buffalo Bills",
+      "conference": "AFC",
+      "division": "AFC East",
+      "w": 7,
+      "l": 1,
+      "t": 0,
+      "pct": 0.875,
+      "pf": 256,
+      "pa": 187,
+      "diff": 69,
+      "source": "https://www.nfl.com/standings/league/2026/reg"
+     },
+     "nfl": {
+      "w": 7,
+      "l": 1,
+      "t": 0,
+      "pf": 256,
+      "pa": 187
+     },
+     "diffs": null
+    },
+    {
+     "team": "SF",
+     "matched": true,
+     "computed": {
+      "team": "SF",
+      "name": "San Francisco 49ers",
+      "conference": "NFC",
+      "division": "NFC West",
+      "w": 7,
+      "l": 1,
+      "t": 0,
+      "pct": 0.875,
+      "pf": 235,
+      "pa": 156,
+      "diff": 79,
+      "source": "https://www.nfl.com/standings/league/2026/reg"
+     },
+     "nfl": {
+      "w": 7,
+      "l": 1,
+      "t": 0,
+      "pf": 235,
+      "pa": 156
+     },
+     "diffs": null
+    },
+    {
+     "team": "CHI",
+     "matched": true,
+     "computed": {
+      "team": "CHI",
+      "name": "Chicago Bears",
+      "conference": "NFC",
+      "division": "NFC North",
+      "w": 7,
+      "l": 2,
+      "t": 0,
+      "pct": 0.778,
+      "pf": 241,
+      "pa": 184,
+      "diff": 57,
+      "source": "https://www.nfl.com/standings/league/2026/reg"
+     },
+     "nfl": {
+      "w": 7,
+      "l": 2,
+      "t": 0,
+      "pf": 241,
+      "pa": 184
+     },
+     "diffs": null
+    },
+    {
+     "team": "DEN",
+     "matched": true,
+     "computed": {
+      "team": "DEN",
+      "name": "Denver Broncos",
+      "conference": "AFC",
+      "division": "AFC West",
+      "w": 7,
+      "l": 2,
+      "t": 0,
+      "pct": 0.778,
+      "pf": 198,
+      "pa": 186,
+      "diff": 12,
+      "source": "https://www.nfl.com/standings/league/2026/reg"
+     },
+     "nfl": {
+      "w": 7,
+      "l": 2,
+      "t": 0,
+      "pf": 198,
+      "pa": 186
+     },
+     "diffs": null
+    },
+    {
+     "team": "CIN",
+     "matched": true,
+     "computed": {
+      "team": "CIN",
+      "name": "Cincinnati Bengals",
+      "conference": "AFC",
+      "division": "AFC North",
+      "w": 6,
+      "l": 2,
+      "t": 0,
+      "pct": 0.75,
+      "pf": 240,
+      "pa": 175,
+      "diff": 65,
+      "source": "https://www.nfl.com/standings/league/2026/reg"
+     },
+     "nfl": {
+      "w": 6,
+      "l": 2,
+      "t": 0,
+      "pf": 240,
+      "pa": 175
+     },
+     "diffs": null
+    },
+    {
+     "team": "DET",
+     "matched": true,
+     "computed": {
+      "team": "DET",
+      "name": "Detroit Lions",
+      "conference": "NFC",
+      "division": "NFC North",
+      "w": 6,
+      "l": 2,
+      "t": 0,
+      "pct": 0.75,
+      "pf": 222,
+      "pa": 189,
+      "diff": 33,
+      "source": "https://www.nfl.com/standings/league/2026/reg"
+     },
+     "nfl": {
+      "w": 6,
+      "l": 2,
+      "t": 0,
+      "pf": 222,
+      "pa": 189
+     },
+     "diffs": null
+    },
+    {
+     "team": "JAX",
+     "matched": true,
+     "computed": {
+      "team": "JAX",
+      "name": "Jacksonville Jaguars",
+      "conference": "AFC",
+      "division": "AFC South",
+      "w": 6,
+      "l": 2,
+      "t": 0,
+      "pct": 0.75,
+      "pf": 229,
+      "pa": 121,
+      "diff": 108,
+      "source": "https://www.nfl.com/standings/league/2026/reg"
+     },
+     "nfl": {
+      "w": 6,
+      "l": 2,
+      "t": 0,
+      "pf": 229,
+      "pa": 121
+     },
+     "diffs": null
+    },
+    {
+     "team": "KC",
+     "matched": true,
+     "computed": {
+      "team": "KC",
+      "name": "Kansas City Chiefs",
+      "conference": "AFC",
+      "division": "AFC West",
+      "w": 6,
+      "l": 2,
+      "t": 0,
+      "pct": 0.75,
+      "pf": 202,
+      "pa": 143,
+      "diff": 59,
+      "source": "https://www.nfl.com/standings/league/2026/reg"
+     },
+     "nfl": {
+      "w": 6,
+      "l": 2,
+      "t": 0,
+      "pf": 202,
+      "pa": 143
+     },
+     "diffs": null
+    },
+    {
+     "team": "MIN",
+     "matched": true,
+     "computed": {
+      "team": "MIN",
+      "name": "Minnesota Vikings",
+      "conference": "NFC",
+      "division": "NFC North",
+      "w": 6,
+      "l": 2,
+      "t": 0,
+      "pct": 0.75,
+      "pf": 146,
+      "pa": 116,
+      "diff": 30,
+      "source": "https://www.nfl.com/standings/league/2026/reg"
+     },
+     "nfl": {
+      "w": 6,
+      "l": 2,
+      "t": 0,
+      "pf": 146,
+      "pa": 116
+     },
+     "diffs": null
+    },
+    {
+     "team": "PIT",
+     "matched": true,
+     "computed": {
+      "team": "PIT",
+      "name": "Pittsburgh Steelers",
+      "conference": "AFC",
+      "division": "AFC North",
+      "w": 6,
+      "l": 2,
+      "t": 0,
+      "pct": 0.75,
+      "pf": 180,
+      "pa": 144,
+      "diff": 36,
+      "source": "https://www.nfl.com/standings/league/2026/reg"
+     },
+     "nfl": {
+      "w": 6,
+      "l": 2,
+      "t": 0,
+      "pf": 180,
+      "pa": 144
+     },
+     "diffs": null
+    },
+    {
+     "team": "NYG",
+     "matched": true,
+     "computed": {
+      "team": "NYG",
+      "name": "New York Giants",
+      "conference": "NFC",
+      "division": "NFC East",
+      "w": 5,
+      "l": 2,
+      "t": 1,
+      "pct": 0.688,
+      "pf": 182,
+      "pa": 172,
+      "diff": 10,
+      "source": "https://www.nfl.com/standings/league/2026/reg"
+     },
+     "nfl": {
+      "w": 5,
+      "l": 2,
+      "t": 1,
+      "pf": 182,
+      "pa": 172
+     },
+     "diffs": null
+    },
+    {
+     "team": "GB",
+     "matched": true,
+     "computed": {
+      "team": "GB",
+      "name": "Green Bay Packers",
+      "conference": "NFC",
+      "division": "NFC North",
+      "w": 6,
+      "l": 3,
+      "t": 0,
+      "pct": 0.667,
+      "pf": 216,
+      "pa": 191,
+      "diff": 25,
+      "source": "https://www.nfl.com/standings/league/2026/reg"
+     },
+     "nfl": {
+      "w": 6,
+      "l": 3,
+      "t": 0,
+      "pf": 216,
+      "pa": 191
+     },
+     "diffs": null
+    },
+    {
+     "team": "CLE",
+     "matched": true,
+     "computed": {
+      "team": "CLE",
+      "name": "Cleveland Browns",
+      "conference": "AFC",
+      "division": "AFC North",
+      "w": 5,
+      "l": 4,
+      "t": 0,
+      "pct": 0.556,
+      "pf": 161,
+      "pa": 196,
+      "diff": -35,
+      "source": "https://www.nfl.com/standings/league/2026/reg"
+     },
+     "nfl": {
+      "w": 5,
+      "l": 4,
+      "t": 0,
+      "pf": 161,
+      "pa": 196
+     },
+     "diffs": null
+    },
+    {
+     "team": "NE",
+     "matched": true,
+     "computed": {
+      "team": "NE",
+      "name": "New England Patriots",
+      "conference": "AFC",
+      "division": "AFC East",
+      "w": 5,
+      "l": 4,
+      "t": 0,
+      "pct": 0.556,
+      "pf": 211,
+      "pa": 207,
+      "diff": 4,
+      "source": "https://www.nfl.com/standings/league/2026/reg"
+     },
+     "nfl": {
+      "w": 5,
+      "l": 4,
+      "t": 0,
+      "pf": 211,
+      "pa": 207
+     },
+     "diffs": null
+    },
+    {
+     "team": "SEA",
+     "matched": true,
+     "computed": {
+      "team": "SEA",
+      "name": "Seattle Seahawks",
+      "conference": "NFC",
+      "division": "NFC West",
+      "w": 5,
+      "l": 4,
+      "t": 0,
+      "pct": 0.556,
+      "pf": 202,
+      "pa": 162,
+      "diff": 40,
+      "source": "https://www.nfl.com/standings/league/2026/reg"
+     },
+     "nfl": {
+      "w": 5,
+      "l": 4,
+      "t": 0,
+      "pf": 202,
+      "pa": 162
+     },
+     "diffs": null
+    },
+    {
+     "team": "BAL",
+     "matched": true,
+     "computed": {
+      "team": "BAL",
+      "name": "Baltimore Ravens",
+      "conference": "AFC",
+      "division": "AFC North",
+      "w": 4,
+      "l": 5,
+      "t": 0,
+      "pct": 0.444,
+      "pf": 189,
+      "pa": 236,
+      "diff": -47,
+      "source": "https://www.nfl.com/standings/league/2026/reg"
+     },
+     "nfl": {
+      "w": 4,
+      "l": 5,
+      "t": 0,
+      "pf": 189,
+      "pa": 236
+     },
+     "diffs": null
+    },
+    {
+     "team": "DAL",
+     "matched": true,
+     "computed": {
+      "team": "DAL",
+      "name": "Dallas Cowboys",
+      "conference": "NFC",
+      "division": "NFC East",
+      "w": 4,
+      "l": 5,
+      "t": 0,
+      "pct": 0.444,
+      "pf": 246,
+      "pa": 236,
+      "diff": 10,
+      "source": "https://www.nfl.com/standings/league/2026/reg"
+     },
+     "nfl": {
+      "w": 4,
+      "l": 5,
+      "t": 0,
+      "pf": 246,
+      "pa": 236
+     },
+     "diffs": null
+    },
+    {
+     "team": "LV",
+     "matched": true,
+     "computed": {
+      "team": "LV",
+      "name": "Las Vegas Raiders",
+      "conference": "AFC",
+      "division": "AFC West",
+      "w": 4,
+      "l": 5,
+      "t": 0,
+      "pct": 0.444,
+      "pf": 238,
+      "pa": 268,
+      "diff": -30,
+      "source": "https://www.nfl.com/standings/league/2026/reg"
+     },
+     "nfl": {
+      "w": 4,
+      "l": 5,
+      "t": 0,
+      "pf": 238,
+      "pa": 268
+     },
+     "diffs": null
+    },
+    {
+     "team": "CAR",
+     "matched": true,
+     "computed": {
+      "team": "CAR",
+      "name": "Carolina Panthers",
+      "conference": "NFC",
+      "division": "NFC South",
+      "w": 3,
+      "l": 5,
+      "t": 0,
+      "pct": 0.375,
+      "pf": 199,
+      "pa": 219,
+      "diff": -20,
+      "source": "https://www.nfl.com/standings/league/2026/reg"
+     },
+     "nfl": {
+      "w": 3,
+      "l": 5,
+      "t": 0,
+      "pf": 199,
+      "pa": 219
+     },
+     "diffs": null
+    },
+    {
+     "team": "HOU",
+     "matched": true,
+     "computed": {
+      "team": "HOU",
+      "name": "Houston Texans",
+      "conference": "AFC",
+      "division": "AFC South",
+      "w": 3,
+      "l": 5,
+      "t": 0,
+      "pct": 0.375,
+      "pf": 209,
+      "pa": 192,
+      "diff": 17,
+      "source": "https://www.nfl.com/standings/league/2026/reg"
+     },
+     "nfl": {
+      "w": 3,
+      "l": 5,
+      "t": 0,
+      "pf": 209,
+      "pa": 192
+     },
+     "diffs": null
+    },
+    {
+     "team": "NO",
+     "matched": true,
+     "computed": {
+      "team": "NO",
+      "name": "New Orleans Saints",
+      "conference": "NFC",
+      "division": "NFC South",
+      "w": 3,
+      "l": 5,
+      "t": 0,
+      "pct": 0.375,
+      "pf": 185,
+      "pa": 216,
+      "diff": -31,
+      "source": "https://www.nfl.com/standings/league/2026/reg"
+     },
+     "nfl": {
+      "w": 3,
+      "l": 5,
+      "t": 0,
+      "pf": 185,
+      "pa": 216
+     },
+     "diffs": null
+    },
+    {
+     "team": "ATL",
+     "matched": true,
+     "computed": {
+      "team": "ATL",
+      "name": "Atlanta Falcons",
+      "conference": "NFC",
+      "division": "NFC South",
+      "w": 3,
+      "l": 6,
+      "t": 0,
+      "pct": 0.333,
+      "pf": 188,
+      "pa": 223,
+      "diff": -35,
+      "source": "https://www.nfl.com/standings/league/2026/reg"
+     },
+     "nfl": {
+      "w": 3,
+      "l": 6,
+      "t": 0,
+      "pf": 188,
+      "pa": 223
+     },
+     "diffs": null
+    },
+    {
+     "team": "TB",
+     "matched": true,
+     "computed": {
+      "team": "TB",
+      "name": "Tampa Bay Buccaneers",
+      "conference": "NFC",
+      "division": "NFC South",
+      "w": 3,
+      "l": 6,
+      "t": 0,
+      "pct": 0.333,
+      "pf": 202,
+      "pa": 178,
+      "diff": 24,
+      "source": "https://www.nfl.com/standings/league/2026/reg"
+     },
+     "nfl": {
+      "w": 3,
+      "l": 6,
+      "t": 0,
+      "pf": 202,
+      "pa": 178
+     },
+     "diffs": null
+    },
+    {
+     "team": "WAS",
+     "matched": true,
+     "computed": {
+      "team": "WAS",
+      "name": "Washington Commanders",
+      "conference": "NFC",
+      "division": "NFC East",
+      "w": 2,
+      "l": 5,
+      "t": 1,
+      "pct": 0.312,
+      "pf": 172,
+      "pa": 202,
+      "diff": -30,
+      "source": "https://www.nfl.com/standings/league/2026/reg"
+     },
+     "nfl": {
+      "w": 2,
+      "l": 5,
+      "t": 1,
+      "pf": 172,
+      "pa": 202
+     },
+     "diffs": null
+    },
+    {
+     "team": "IND",
+     "matched": true,
+     "computed": {
+      "team": "IND",
+      "name": "Indianapolis Colts",
+      "conference": "AFC",
+      "division": "AFC South",
+      "w": 2,
+      "l": 7,
+      "t": 0,
+      "pct": 0.222,
+      "pf": 184,
+      "pa": 249,
+      "diff": -65,
+      "source": "https://www.nfl.com/standings/league/2026/reg"
+     },
+     "nfl": {
+      "w": 2,
+      "l": 7,
+      "t": 0,
+      "pf": 184,
+      "pa": 249
+     },
+     "diffs": null
+    },
+    {
+     "team": "NYJ",
+     "matched": true,
+     "computed": {
+      "team": "NYJ",
+      "name": "New York Jets",
+      "conference": "AFC",
+      "division": "AFC East",
+      "w": 2,
+      "l": 7,
+      "t": 0,
+      "pct": 0.222,
+      "pf": 182,
+      "pa": 223,
+      "diff": -41,
+      "source": "https://www.nfl.com/standings/league/2026/reg"
+     },
+     "nfl": {
+      "w": 2,
+      "l": 7,
+      "t": 0,
+      "pf": 182,
+      "pa": 223
+     },
+     "diffs": null
+    },
+    {
+     "team": "PHI",
+     "matched": true,
+     "computed": {
+      "team": "PHI",
+      "name": "Philadelphia Eagles",
+      "conference": "NFC",
+      "division": "NFC East",
+      "w": 2,
+      "l": 7,
+      "t": 0,
+      "pct": 0.222,
+      "pf": 148,
+      "pa": 221,
+      "diff": -73,
+      "source": "https://www.nfl.com/standings/league/2026/reg"
+     },
+     "nfl": {
+      "w": 2,
+      "l": 7,
+      "t": 0,
+      "pf": 148,
+      "pa": 221
+     },
+     "diffs": null
+    },
+    {
+     "team": "MIA",
+     "matched": true,
+     "computed": {
+      "team": "MIA",
+      "name": "Miami Dolphins",
+      "conference": "AFC",
+      "division": "AFC East",
+      "w": 1,
+      "l": 7,
+      "t": 0,
+      "pct": 0.125,
+      "pf": 126,
+      "pa": 200,
+      "diff": -74,
+      "source": "https://www.nfl.com/standings/league/2026/reg"
+     },
+     "nfl": {
+      "w": 1,
+      "l": 7,
+      "t": 0,
+      "pf": 126,
+      "pa": 200
+     },
+     "diffs": null
+    },
+    {
+     "team": "TEN",
+     "matched": true,
+     "computed": {
+      "team": "TEN",
+      "name": "Tennessee Titans",
+      "conference": "AFC",
+      "division": "AFC South",
+      "w": 1,
+      "l": 7,
+      "t": 0,
+      "pct": 0.125,
+      "pf": 144,
+      "pa": 199,
+      "diff": -55,
+      "source": "https://www.nfl.com/standings/league/2026/reg"
+     },
+     "nfl": {
+      "w": 1,
+      "l": 7,
+      "t": 0,
+      "pf": 144,
+      "pa": 199
+     },
+     "diffs": null
+    },
+    {
+     "team": "LAC",
+     "matched": true,
+     "computed": {
+      "team": "LAC",
+      "name": "Los Angeles Chargers",
+      "conference": "AFC",
+      "division": "AFC West",
+      "w": 0,
+      "l": 8,
+      "t": 0,
+      "pct": 0.0,
+      "pf": 121,
+      "pa": 219,
+      "diff": -98,
+      "source": "https://www.nfl.com/standings/league/2026/reg"
+     },
+     "nfl": {
+      "w": 0,
+      "l": 8,
+      "t": 0,
+      "pf": 121,
+      "pa": 219
+     },
+     "diffs": null
+    }
+   ]
   }
  ],
- "irregularities": [],
+ "irregularities": [
+  {
+   "id": "V4",
+   "area": "standings cross-check",
+   "issue": "2 rows differ between computed standings and the companion CSV",
+   "examples": [
+    {
+     "team": "LAR",
+     "detail": "not in computed standings"
+    },
+    {
+     "team": "AZ",
+     "detail": "not in computed standings"
+    }
+   ],
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  }
+ ],
  "unverifiable": [
   {
    "item": "Closing spread/total/moneylines",
