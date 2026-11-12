@@ -1,0 +1,79 @@
+{
+  "checks": [
+    {
+      "check": "standings row count",
+      "ok": true,
+      "detail": "32 rows (expected 32)"
+    },
+    {
+      "check": "unique team abbreviations in standings",
+      "ok": true,
+      "detail": "all unique"
+    },
+    {
+      "check": "PF - PA == NET PTS (all teams)",
+      "ok": true,
+      "detail": "32/32 consistent"
+    },
+    {
+      "check": "PCT == (W + T/2) / games (all teams)",
+      "ok": true,
+      "detail": "32/32 consistent"
+    },
+    {
+      "check": "league win/loss balance",
+      "ok": true,
+      "detail": "sum(W)=135 sum(L)=135"
+    },
+    {
+      "check": "league tie count is even (ties come in pairs)",
+      "ok": true,
+      "detail": "sum(T)=2"
+    },
+    {
+      "check": "team-games are even (2 per game)",
+      "ok": true,
+      "detail": "team-games=272 => 136 games"
+    },
+    {
+      "check": "unique game ids",
+      "ok": true,
+      "detail": "75 unique ids"
+    },
+    {
+      "check": "all game teams exist in standings",
+      "ok": true,
+      "detail": "all match"
+    },
+    {
+      "check": "no team plays itself",
+      "ok": true,
+      "detail": "none"
+    },
+    {
+      "check": "no negative scores",
+      "ok": true,
+      "detail": "none"
+    },
+    {
+      "check": "game dates inside 2026 season window",
+      "ok": true,
+      "detail": "all dates within 2026-08-01..2027-01-15"
+    },
+    {
+      "check": "no team listed twice in one week",
+      "ok": true,
+      "detail": "clean"
+    },
+    {
+      "check": "captured games never contradict official standings",
+      "ok": true,
+      "detail": "no contradictions"
+    }
+  ],
+  "failures": [],
+  "warnings": [],
+  "teams_fully_reconciled": 0,
+  "teams_partial": 32,
+  "games_captured": 75
+}
