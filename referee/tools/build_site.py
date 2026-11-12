@@ -192,13 +192,13 @@ def main():
          "73fdd6c4", "Repeat the audit for the remaining seasons before trusting long backtests that start in 1999 or 2005.", STAND.format(2020), "NFL.com standings 2020"),
         ("R-03", "Unverified", "Division names (East, North, South, West)",
          "The official division standings page, as fetched, shows the eight four-team groups but not their names. Conference and grouping are confirmed for all 32 clubs; the name labels are not confirmed by this session.",
-         "533256e1 (data/teams.csv)", "Confirm the names on a page that prints them, then mark the column verified.", DIVS, "NFL.com division standings 2026"),
+         "533256e1", "For data/teams.csv: confirm the names on a page that prints them, then mark the column verified.", DIVS, "NFL.com division standings 2026"),
         ("R-04", "Irregularity", "Division-game count on the live Validation and Correlation page",
          f"Published: {c5['published_division_games']} of 136 games were division games, correlation with total points -0.1297. "
          f"Using the official groupings: {c5['official_grouping_division_games']} games, correlation {c5['r_using_official_grouping']}. "
          f"The {len(c5['cross_conference_games_counted_as_division_games'])} extra games are all AFC West against NFC West: the code compares the word West and ignores the conference.",
-         "25aa7696 (analysis/correlations.py, data/verified/model/correlations.json, pages/analysis.html)",
-         "Compare conference and division together. Any rule that uses a division flag from this file needs re-running.", DIVS, "NFL.com division standings 2026"),
+         "25aa7696",
+         "In analysis/correlations.py compare conference and division together, then regenerate correlations.json and pages/analysis.html. Any rule that uses this division flag needs re-running.", DIVS, "NFL.com division standings 2026"),
         ("R-05", "Irregularity", "Two closing-line files from the same maintainer disagree",
          f"Across {lines['cross_file']['spread']['games_in_both']:,} games in both files, the spread is identical in {lines['cross_file']['spread']['exact_pct']}% and the total in {lines['cross_file']['total']['exact_pct']}%. "
          "There is no single closing line. Strategy win rates move by up to "
@@ -207,7 +207,7 @@ def main():
         ("R-06", "Irregularity", "Every bet graded at an assumed price of -110",
          f"The dataset holds actual prices for most games since 2006. Using them changes return on investment by {min(r['difference_pct_points'] for r in price)} to "
          f"{max(r['difference_pct_points'] for r in price)} percentage points. No verdict changes.",
-         "7600ed8b (data/model/strategies.json)", "Grade at the recorded price where one exists and say which rows used the assumption.", blob("data/model/strategies.json", ref76), "Their strategies file at the commit checked"),
+         "7600ed8b", "Grade at the recorded price where one exists and say which rows used the assumption.", blob("data/model/strategies.json", ref76), "Their strategies file at the commit checked"),
         ("R-07", "Unverified", f"{r76['counts'].get('not replicable here', 0)} published numbers could not be tested here",
          "The own-line model, its error figures and four strategies (S01, S02, S03, S12) need play-by-play and injury files that this sandbox cannot download.",
          "7600ed8b", "Run the replication script where those files are reachable, for example in the branch's own workflow.", blob("data/model/lines.json", ref76), "Their lines file at the commit checked"),
@@ -224,7 +224,7 @@ def main():
         ("R-11", "Irregularity", "Three NFL Football Operations addresses return 404",
          "operations.nfl.com/the-rules/, /gameday/ and /gameday/nfl-schedule/ each returned the site's 404 page when fetched by this session. "
          + (f"Still cited on main in: {', '.join(sorted({p for v in dead.values() for p in v}))}." if dead else "They are no longer cited on main (fixed after session 15e79a53 reported them)."),
-         "690e397b (original pages)", "Replace with working official addresses." if dead else "No action needed. Kept for the record.", "https://operations.nfl.com/", "NFL Football Operations home"),
+         "690e397b", "Replace with working official addresses." if dead else "No action needed. Kept for the record.", "https://operations.nfl.com/", "NFL Football Operations home"),
         ("R-12", "Irregularity", "Tasks marked done with no files on GitHub",
          ("; ".join(f"{s['session']}: {s['files_on_branch']} files on the branch, last commit {s['last_commit_utc'][11:]} UTC" for s in claim_only) + ". "
           "Their boards list data, scripts and pages as done, but none of those files has been pushed.") if claim_only else "No session is in this state at the time of the snapshot.",
@@ -416,7 +416,7 @@ def main():
                     ("bad" if nrep else "", str(nrep), "calculations not reproduced"),
                     ("idle", str(ntest), "calculations not testable here")]))
     b.append("<h2>Data tables on the live site (session 533256e1)</h2>")
-    b.append(table([("File", "k"), ("Contents", "w"), ("Rows matching", "n"), ("Official rows missing", "n"), ("Status", ""), ("Official source", "nw")],
+    b.append(table([("File", "id"), ("Contents", "w"), ("Rows matching", "n"), ("Official rows missing", "n"), ("Status", ""), ("Official source", "nw")],
                    [[f"<code>{e(t['file'])}</code>", e(t["what"]), f"{t['rows_matching']} / {t['rows_checked']}", str(len(t.get("missing_official_teams", []) or [])),
                      OK if t["rows_matching"] == t["rows_checked"] else chip("bad", "Mismatch"), a(t["official_source"], "NFL.com")] for t in rmain["tables"]]))
     for t in rmain["tables"]:
@@ -465,7 +465,7 @@ def main():
     b.append(f'<p class="small">Scoring rule as published: {e(r76["rewards"]["model"])}</p>')
 
     b.append(f"<h2>Tables of session 80731db4</h2><p>Checked at commit <code>{e(r80['commit'][:10])}</code> on its branch (not merged).</p>")
-    b.append(table([("File", "k"), ("Rows matching", "n"), ("Status", ""), ("Official source", "nw")], [
+    b.append(table([("File", "id"), ("Rows matching", "n"), ("Status", ""), ("Official source", "nw")], [
         ["<code>data/standings.json</code>", f"{r80['standings']['rows_matching']} / {r80['standings']['rows_checked']}", OK if r80["standings"]["rows_matching"] == r80["standings"]["rows_checked"] else chip("bad", "Mismatch"), a(STAND.format(2026), "NFL.com standings 2026")],
         ["<code>data/derived_standings.json</code> (per-game values)", f"{r80['per_game']['rows_matching']} / {r80['per_game']['rows_checked']}", chip("ok", "Replicated") if r80["per_game"]["rows_matching"] == r80["per_game"]["rows_checked"] else NREP, a(STAND.format(2026), "NFL.com standings 2026")]]))
     b.append(table([("Correlation across the 32 teams", "k w"), ("Published", "n"), ("Referee", "n"), ("Status", ""), ("Official source", "nw")],
@@ -528,7 +528,7 @@ def main():
                      str(len(s["modifies_files_already_on_main"])), e(s["observation"]), a(s["branch_url"], "Branch on GitHub")])
     b.append(table([("Session", "id"), ("State", ""), ("What it claimed", "w"), ("Files", "n"), ("Last commit", "n"), ("Pull requests", "m"), ("Live files touched", "n"), ("Referee observation", "w"), ("Source", "nw")], rows))
     b.append("<h2>Files on main that unmerged branches modify</h2><p>Each of these will need a deliberate merge order. Files touched by two branches are the ones most likely to be overwritten.</p>")
-    b.append(table([("File on main", "k"), ("Modified by", ""), ("Branches", "n"), ("Risk", ""), ("Source", "nw")],
+    b.append(table([("File on main", "id"), ("Modified by", ""), ("Branches", "n"), ("Risk", ""), ("Source", "nw")],
                    [[f"<code>{e(o['file'])}</code>", e(", ".join(o["modified_by_unmerged_branches"])), str(len(o["modified_by_unmerged_branches"])),
                      chip("bad", "Two or more") if len(o["modified_by_unmerged_branches"]) > 1 else chip("warn", "One"), a(o["file_url"], "File on main")] for o in sess["overlaps"]]
                    or [["", "", "0", chip("ok", "None"), a(f"{GH}/branches", "Branches on GitHub")]]))
@@ -548,7 +548,7 @@ def main():
          '<p class="lede">Irregularities and unverified items found by this session. Each has a link for checking by hand and a suggested action. None of them blocks a merge; they are here so that someone can decide.</p>']
     b.append(tiles([("bad", str(n_irr), "irregularities"), ("warn", str(sum(f[1] == "Unverified" for f in flags)), "unverified"), ("idle", str(sum(f[1] == "Not audited" for f in flags)), "not audited"),
                     ("", "0", "items that block a merge")]))
-    b.append(table([("ID", "id"), ("Type", ""), ("Item", "k m"), ("What was found", "w"), ("Owner", "m"), ("Suggested action", "w"), ("Source for manual review", "m")],
+    b.append(table([("ID", "id"), ("Type", ""), ("Item", "k m"), ("What was found", "w"), ("Owner", "s"), ("Suggested action", "w"), ("Source", "m")],
                    [[f'<span id="{f[0]}">{f[0]}</span>', type_chip(f[1]), e(f[2]), e(f[3]), e(f[4]), e(f[5]), a(f[6], f[7])] for f in flags]))
     b.append("<h2>Values left blank on purpose</h2><p>Where a value could not be confirmed it is not shown. These are the blanks on this site and the reason for each.</p>")
     b.append(table([("Where", "k"), ("What is blank", "w"), ("Why", "w"), ("Status", ""), ("Where to check", "nw")], [

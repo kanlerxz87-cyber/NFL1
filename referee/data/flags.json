@@ -27,8 +27,8 @@
    "type": "Unverified",
    "item": "Division names (East, North, South, West)",
    "finding": "The official division standings page, as fetched, shows the eight four-team groups but not their names. Conference and grouping are confirmed for all 32 clubs; the name labels are not confirmed by this session.",
-   "owner": "533256e1 (data/teams.csv)",
-   "suggested_action": "Confirm the names on a page that prints them, then mark the column verified.",
+   "owner": "533256e1",
+   "suggested_action": "For data/teams.csv: confirm the names on a page that prints them, then mark the column verified.",
    "source_url": "https://www.nfl.com/standings/division/2026/REG",
    "source_label": "NFL.com division standings 2026"
   },
@@ -37,8 +37,8 @@
    "type": "Irregularity",
    "item": "Division-game count on the live Validation and Correlation page",
    "finding": "Published: 52 of 136 games were division games, correlation with total points -0.1297. Using the official groupings: 42 games, correlation -0.1048. The 10 extra games are all AFC West against NFC West: the code compares the word West and ignores the conference.",
-   "owner": "25aa7696 (analysis/correlations.py, data/verified/model/correlations.json, pages/analysis.html)",
-   "suggested_action": "Compare conference and division together. Any rule that uses a division flag from this file needs re-running.",
+   "owner": "25aa7696",
+   "suggested_action": "In analysis/correlations.py compare conference and division together, then regenerate correlations.json and pages/analysis.html. Any rule that uses this division flag needs re-running.",
    "source_url": "https://www.nfl.com/standings/division/2026/REG",
    "source_label": "NFL.com division standings 2026"
   },
@@ -57,7 +57,7 @@
    "type": "Irregularity",
    "item": "Every bet graded at an assumed price of -110",
    "finding": "The dataset holds actual prices for most games since 2006. Using them changes return on investment by 0.34 to 2.94 percentage points. No verdict changes.",
-   "owner": "7600ed8b (data/model/strategies.json)",
+   "owner": "7600ed8b",
    "suggested_action": "Grade at the recorded price where one exists and say which rows used the assumption.",
    "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/61502ee7c5bc1b49e75df4476f4ab6b4c31cb405/data/model/strategies.json",
    "source_label": "Their strategies file at the commit checked"
@@ -107,7 +107,7 @@
    "type": "Irregularity",
    "item": "Three NFL Football Operations addresses return 404",
    "finding": "operations.nfl.com/the-rules/, /gameday/ and /gameday/nfl-schedule/ each returned the site's 404 page when fetched by this session. They are no longer cited on main (fixed after session 15e79a53 reported them).",
-   "owner": "690e397b (original pages)",
+   "owner": "690e397b",
    "suggested_action": "No action needed. Kept for the record.",
    "source_url": "https://operations.nfl.com/",
    "source_label": "NFL Football Operations home"
