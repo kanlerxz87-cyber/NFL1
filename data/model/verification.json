@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-12T04:44:24+00:00",
+ "generated_at": "2026-11-12T04:47:35+00:00",
  "checks": [
   {
    "name": "2026 standings (W-L-T, points for/against)",
@@ -1485,8 +1485,8 @@
    "name": "Computed standings vs companion transcription (data/standings.csv)",
    "source": "https://www.nfl.com/standings/league/2026/reg",
    "rows_checked": 32,
-   "rows_matched": 30,
-   "mismatches": 2,
+   "rows_matched": 32,
+   "mismatches": 0,
    "detail": [
     {
      "team": "BUF",
@@ -1827,6 +1827,32 @@
      "diffs": null
     },
     {
+     "team": "LA",
+     "matched": true,
+     "computed": {
+      "team": "LA",
+      "name": "Los Angeles Rams",
+      "conference": "NFC",
+      "division": "NFC West",
+      "w": 5,
+      "l": 4,
+      "t": 0,
+      "pct": 0.556,
+      "pf": 214,
+      "pa": 181,
+      "diff": 33,
+      "source": "https://www.nfl.com/standings/league/2026/reg"
+     },
+     "nfl": {
+      "w": 5,
+      "l": 4,
+      "t": 0,
+      "pf": 214,
+      "pa": 181
+     },
+     "diffs": null
+    },
+    {
      "team": "NE",
      "matched": true,
      "computed": {
@@ -2031,6 +2057,32 @@
       "t": 0,
       "pf": 185,
       "pa": 216
+     },
+     "diffs": null
+    },
+    {
+     "team": "ARI",
+     "matched": true,
+     "computed": {
+      "team": "ARI",
+      "name": "Arizona Cardinals",
+      "conference": "NFC",
+      "division": "NFC West",
+      "w": 3,
+      "l": 6,
+      "t": 0,
+      "pct": 0.333,
+      "pf": 178,
+      "pa": 255,
+      "diff": -77,
+      "source": "https://www.nfl.com/standings/league/2026/reg"
+     },
+     "nfl": {
+      "w": 3,
+      "l": 6,
+      "t": 0,
+      "pf": 178,
+      "pa": 255
      },
      "diffs": null
     },
@@ -2779,22 +2831,6 @@
    "issue": "The mirrored feed has 20 of 254 official week 10 rows (3 status disagreements).",
    "examples": [],
    "source": "https://www.nfl.com/injuries/"
-  },
-  {
-   "id": "V4",
-   "area": "standings cross-check",
-   "issue": "2 rows differ between computed standings and the companion CSV",
-   "examples": [
-    {
-     "team": "LAR",
-     "detail": "not in computed standings"
-    },
-    {
-     "team": "AZ",
-     "detail": "not in computed standings"
-    }
-   ],
-   "source": "https://www.nfl.com/standings/league/2026/reg"
   },
   {
    "id": "V5",
