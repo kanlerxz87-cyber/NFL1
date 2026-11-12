@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-12T22:40:47+00:00",
+ "generated_at": "2026-11-12T22:43:34+00:00",
  "official_sources": {
   "standings": "https://www.nfl.com/standings/league/2026/reg",
   "injuries": "https://www.nfl.com/injuries/",
@@ -87,8 +87,8 @@
    "area": "B2. injuries",
    "check": "data/model/official_injuries.json (automated scrape)",
    "status": "FLAG",
-   "rows_checked": 276,
-   "detail": "value mismatches: IND A.J. Haulcy practice: repo='Did Not Participate In Practice' official='Full Participation in Practice'; IND Jonathan Taylor practice: repo='Limited Participation in Practice' official='Full Participation in Practice'; IND Jerry Tillery practice: repo='Limited Participation in Practice' official='Did Not Participate In Practice'; IND Charvarius Ward practice: repo='Did Not Participate In Practice' official='Full Participation in Practice' | 3 official rows absent from repo, e.g. [('IND', 'CJ Allen'), ('IND', 'Grover Stewart'), ('JAX', 'BJ Green II')]"
+   "rows_checked": 295,
+   "detail": "value mismatches: NE Cameron Latu practice: repo='Limited Participation in Practice' official='Did Not Participate In Practice'; NE Walter Rouse practice: repo='Limited Participation in Practice' official='Did Not Participate In Practice'; NE Brenden Schooler practice: repo='Limited Participation in Practice' official='Did Not Participate In Practice'; NE Rhamondre Stevenson practice: repo='Limited Participation in Practice' official='Did Not Participate In Practice'; DET Brian Branch practice: repo='Full Participation in Practice' official='Limited Participation in Practice' | repo rows not on official page: [('KC', 'Jaydn Ott'), ('ATL', 'Kendal Daniels'), ('ATL', 'Jawaan Taylor'), ('ATL', 'Cameron Thomas'), ('BUF', 'Sam Franklin Jr.')]"
   },
   {
    "area": "B2. injuries",
@@ -109,7 +109,7 @@
    "check": "per-club row counts: scrape vs official page",
    "status": "FLAG",
    "rows_checked": 279,
-   "detail": "IND: 11/13; JAX: 10/11"
+   "detail": "ATL: 9/6; BUF: 12/11; CIN: 8/4; CLE: 12/11; DAL: 18/16; KC: 12/11; MIA: 11/10; NO: 12/10; NYJ: 8/7"
   },
   {
    "area": "B2. injuries",
@@ -192,7 +192,7 @@
    "area": "D. availability",
    "check": "practice-only rows are not labelled as game designations",
    "status": "PASS",
-   "rows_checked": 113,
+   "rows_checked": 111,
    "detail": ""
   },
   {
@@ -206,7 +206,7 @@
    "area": "E. counts",
    "check": "starters flagged matches availability detail",
    "status": "PASS",
-   "rows_checked": 113,
+   "rows_checked": 111,
    "detail": ""
   }
  ]
