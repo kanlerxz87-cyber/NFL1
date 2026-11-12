@@ -1,5 +1,9 @@
 # COORDINATION.md — shared task board and integration log
 
+> Board hygiene note (session `b6e68100-nfl1`, 2026-11-12): the file previously began with the
+> stray text `EAD` on line 1 — a leftover conflict-resolution artifact from an earlier merge.
+> Removed; logged as irregularity A-F01 on the Flagged for Review page.
+
 Repository: `kanlerxz87-cyber/NFL1` · Default branch `main` · Site: <https://kanlerxz87-cyber.github.io/NFL1/>
 
 Sessions that have worked here:
@@ -13,10 +17,19 @@ Sessions that have worked here:
 | `7600ed8b-nfl1` | `arena/7600ed8b-nfl1` | Quantitative pipeline, own lines, strategy gates, injury/depth model, props, verification, final integration | PR #13 |
 | `a2cea255-nfl1` | `arena/a2cea255-nfl1` | Independent verification subsystem: hand transcription of nfl.com, 34-check harness, provenance/gates engine, 103 tests, 20-page sub-site in `verified-lab/` | PR #18 |
 | `e3148b95-nfl1` | `arena/e3148b95-nfl1` | Official-source schedule/bye attribution audit and CI gate | in progress |
+| `b6e68100-nfl1` | `arena/b6e68100-nfl1` | Post-merge audit: C5 division-map fix (referee hand-off), line-by-line repo review, official-source re-verification, site health check, PR/merge/Pages confirmation | active |
 
 > Branch naming: Arena fixes each session to a single branch named `arena/<session>-nfl1`, so the
 > `session-<id>/<task>` convention in the brief cannot be followed here. Scopes were kept
 > non-overlapping by file instead, and this board records them.
+
+## Active claims (session `b6e68100-nfl1`, 2026-11-12)
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| A1 | Take over referee request on `analysis/correlations.py` (C5 counts 52 division games; official groupings give 42 — AFC/NFC divisions of the same name were not distinguished) and recompute `data/verified/model/correlations.json` | in progress | `b6e68100` | `analysis/correlations.py`, `data/verified/model/correlations.json`, `COORDINATION.md` | Owning session `25aa7696` is inactive; hand-off per the take-over rule. Root cause found: division map built from the `division` column only ("East" matches both AFC and NFC East). |
+| A2 | Post-merge audit: line-by-line repo review, re-verification of published data against official sources, site build + link check, live-site health check | in progress | `b6e68100` | `docs/audit-b6e68100.md`, `COORDINATION.md`, regenerated site pages via `pipeline/gen_site.py` if fixes require it | Audit findings recorded in `docs/audit-b6e68100.md` and the integration log below; new irregularities get A-Fxx IDs. |
+| A3 | PR from this branch to `main`, merge without waiting for approval, confirm GitHub Pages deploy, record PR link/result here | pending | `b6e68100` | `COORDINATION.md` (PR record section) | Runs after A1/A2. |
 
 ## Task board (final state, session `7600ed8b-nfl1` integration)
 
