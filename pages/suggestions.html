@@ -13,6 +13,7 @@
   <a class="brand" href="../index.html"><span class="mark">NFL</span><span class="brand-text">Decision Lab</span></a>
   <nav>
     <a href="../index.html">Overview</a>
+    <a href="sections.html">All Sections</a>
     <a href="executive-summary.html">Executive Summary</a>
     <a href="teams.html">Teams</a>
     <a href="standings.html">Standings</a>
@@ -38,8 +39,8 @@
   <section class="page-head">
     <p class="eyebrow">Evidence-first dashboard</p>
     <h1>Suggestions &amp; Paths</h1>
-    <p class="standfirst">Twelve improvements, five decision records, and a review process for choosing before implementing.</p>
-    <p class="timestamp">Data built 2026-11-12T05:07:59+00:00 · every value links to its source</p>
+    <p class="standfirst">15 improvements, five decision records, and a review process for choosing before implementing.</p>
+    <p class="timestamp">Data built 2026-11-12T18:53:41+00:00 · every value links to its source</p>
   </section>
   
 <section class="panel">
@@ -212,6 +213,45 @@
     <div><dt>Depends on</dt><dd>Automated refresh (present)</dd></div>
     <div><dt>Evidence it is right</dt><dd>Dated snapshot files in git.</dd></div>
     <div><dt>Recommendation</dt><dd>Adopt before the next kickoff.</dd></div>
+  </dl>
+</article>
+<article class="card">
+  <div class="card-head"><h3><span class="id">S13</span> Regenerate and commit the published pages whenever the data bot commits</h3><span class="badge neutral">Proposed - decision required</span></div>
+  <p class="problem"><strong>Problem:</strong> The 18:53 data refresh changed the official injury report from 254 to 276 rows and starters flagged from 103 to 113, but the published site kept showing the 05:07 build until a human regenerated it (flag F39).</p>
+  <p><strong>Change:</strong> Either have collect-data.yml run the site generators and commit the pages in the same push, or add a CI staleness gate that fails when data/model is newer than the timestamps embedded in index.html.</p>
+  <dl class="facts">
+    <div><dt>Impact</dt><dd>High - readers and decisions work from numbers that match the current official report.</dd></div>
+    <div><dt>Effort</dt><dd></dd></div>
+    <div><dt>Risk</dt><dd></dd></div>
+    <div><dt>Depends on</dt><dd>Decision record on the authoritative generation (Q21).</dd></div>
+    <div><dt>Evidence it is right</dt><dd>data/model generated_at 18:53 vs &#x27;Data built 05:07&#x27; on the published landing page.</dd></div>
+    <div><dt>Recommendation</dt><dd>Adopt the staleness gate first; it is additive and cannot overwrite another generation&#x27;s pages.</dd></div>
+  </dl>
+</article>
+<article class="card">
+  <div class="card-head"><h3><span class="id">S14</span> Verify the pages that are published, not a regenerated substitute</h3><span class="badge neutral">Proposed - decision required</span></div>
+  <p class="problem"><strong>Problem:</strong> The verify workflow rebuilds index.html from a different template than the published one and audits the rebuild, so a defect unique to the live landing page could pass the gate (flag F38).</p>
+  <p><strong>Change:</strong> Run the row-source and link checks against the committed HTML, or make one generator own index.html so CI and Pages cannot disagree.</p>
+  <dl class="facts">
+    <div><dt>Impact</dt><dd>High - CI would fail on what a reader actually sees.</dd></div>
+    <div><dt>Effort</dt><dd></dd></div>
+    <div><dt>Risk</dt><dd></dd></div>
+    <div><dt>Depends on</dt><dd>Choice of authoritative generation (Q21).</dd></div>
+    <div><dt>Evidence it is right</dt><dd>Diffing a local CI run against the committed tree shows two different index.html files.</dd></div>
+    <div><dt>Recommendation</dt><dd>Review with S13; both follow from the same decision.</dd></div>
+  </dl>
+</article>
+<article class="card">
+  <div class="card-head"><h3><span class="id">S15</span> Run the independent referee replication as a CI gate</h3><span class="badge neutral">Proposed - decision required</span></div>
+  <p class="problem"><strong>Problem:</strong> The C5 division-game error (52 games counted where official groupings give 42) was found by a manual cross-session review, not by a gate.</p>
+  <p><strong>Change:</strong> Add the referee&#x27;s replication checks to CI so any published number that an independent recomputation contradicts fails the build.</p>
+  <dl class="facts">
+    <div><dt>Impact</dt><dd>High - turns cross-session review from a manual favour into an automatic gate.</dd></div>
+    <div><dt>Effort</dt><dd></dd></div>
+    <div><dt>Risk</dt><dd></dd></div>
+    <div><dt>Depends on</dt><dd>None - additive workflow step.</dd></div>
+    <div><dt>Evidence it is right</dt><dd>referee replication computed -0.1048 where the site published -0.1297 (flag F36, now fixed).</dd></div>
+    <div><dt>Recommendation</dt><dd>Adopt; it is the cheapest way to keep every future number honest.</dd></div>
   </dl>
 </article></div>
 </section>

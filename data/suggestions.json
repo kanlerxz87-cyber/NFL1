@@ -258,5 +258,70 @@
     "status": "Awaiting review",
     "verified": true,
     "retrieved": "2026-11-12"
+  },
+  {
+    "id": "S21",
+    "area": "Navigation",
+    "title": "Publish a categorized All Sections index so every finding is reachable from the landing page",
+    "decision_impact": "A reviewer can reach every register, sub-site and finding in one click instead of guessing URLs",
+    "effort": "",
+    "recommended_path": "Adopted (implemented by session 08e0ce01 as pages/sections.html)",
+    "evidence": "Crawl of index.html and pages/*.html showed zero inbound links to 15 root pages and both sub-sites (flag F37)",
+    "src": "S24",
+    "status": "Implemented - needs review",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "S22",
+    "area": "Governance",
+    "title": "Consolidate the four flag registers (root F01-F39, pipeline F01-F18, referee R-xx, verified-lab V-xx) into one cross-referenced register",
+    "decision_impact": "One place to triage every irregularity; removes the numbering collisions that already confused two sessions",
+    "effort": "",
+    "recommended_path": "Review before implementing",
+    "evidence": "Four registers with overlapping IDs are published in one repository; flag F-014 and F26 already record the duplication",
+    "src": "S24",
+    "status": "Awaiting review",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "S23",
+    "area": "Verification",
+    "title": "Gate the published generation: verify the committed pages, not a regenerated substitute",
+    "decision_impact": "CI would fail on a defect a reader can actually see, instead of on a page that is never published",
+    "effort": "",
+    "recommended_path": "Review before implementing",
+    "evidence": "tools/build.py rewrites index.html from a different template in CI than the published one (flag F38)",
+    "src": "S24",
+    "status": "Awaiting review",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "S24",
+    "area": "Data operations",
+    "title": "Commit generated pages back after each data-bot refresh, or add a staleness gate",
+    "decision_impact": "Published injury counts, KPIs and edges always match the current official report",
+    "effort": "",
+    "recommended_path": "Review before implementing",
+    "evidence": "The 18:53 data refresh (254 -> 276 injury rows) was not reflected on the published site until a human regenerated it (flag F39)",
+    "src": "S01",
+    "status": "Awaiting review",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "S25",
+    "area": "Verification",
+    "title": "Run the referee's independent replication as a CI gate so cross-session disagreements are caught automatically",
+    "decision_impact": "Disputes like the C5 division count (flag F36) would fail the build instead of waiting for manual review",
+    "effort": "",
+    "recommended_path": "Review before implementing",
+    "evidence": "referee/tools/check_site.py and the replication harness independently reproduced -0.1048 where the repo published -0.1297",
+    "src": "S24",
+    "status": "Awaiting review",
+    "verified": true,
+    "retrieved": "2026-11-12"
   }
 ]

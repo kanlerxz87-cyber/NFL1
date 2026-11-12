@@ -251,5 +251,14 @@
     "retrieved": "2026-11-12",
     "verified": true,
     "note": "Queried with `gh api` during integration; returns status 'built', source main / '/'."
+  },
+  {
+    "id": "S26",
+    "publisher": "National Football League (NFL.com)",
+    "kind": "official league standings page",
+    "url": "https://www.nfl.com/standings/division/2026/REG",
+    "what": "Official 2026 division groupings (AFC/NFC x East/North/South/West) used to verify the C5 division-game flag",
+    "retrieved": "2026-11-12",
+    "used_for": "F36 fix verification; audit_numbers.py gates the groupings against this page"
   }
 ]

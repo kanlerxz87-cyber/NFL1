@@ -1302,73 +1302,160 @@ Flagged for Review page.
 
 
 def write_readme():
-    txt = """# NFL1 — NFL decision-intelligence dashboard
+    """Regenerate README.md from the canonical template below.
 
-**Live site:** https://kanlerxz87-cyber.github.io/NFL1/
-**Data snapshot:** 2026 NFL regular season, Week 10, retrieved 2026-11-12 (UTC).
+    The template is kept byte-identical to the published README so running this
+    generator can never clobber content again. This closes cross-session request
+    R-a2cea255-01 (previously this function wrote an obsolete template that
+    silently replaced the whole README, losing the verified-lab and companion
+    session sections).
+    """
+    txt = """# NFL Decision Lab
 
-A clean, static GitHub Pages dashboard built from a JSON data layer. Every table row links to an official
-source. If an official source publishes no value, the cell is left blank and the item is flagged on the
-[Flagged for Review](flagged.html) page. No value is inferred or filled in.
+An evidence-first NFL decision support site: it originates its own lines from opponent-adjusted
+play-by-play, scores betting strategies against the closing line under eight validation gates,
+tracks starter availability against the weekly depth chart, and publishes every table with a
+source link and every gap as a flag.
 
-## Pages
+Live site: <https://kanlerxz87-cyber.github.io/NFL1/>
 
-| Page | Contents |
-| --- | --- |
-| [index.html](index.html) | Landing dashboard, counts, decision posture |
-| [executive-summary.html](executive-summary.html) | Executive summary |
-| [requirements.html](requirements.html) | Full requirements inventory and analysis |
-| [questions.html](questions.html) | Decision questions, known/unknown information, answers, discovery actions |
-| [suggestions.html](suggestions.html) | Improvement suggestions + Review & Choose a Path gate |
-| [strategy-lab.html](strategy-lab.html) | Own lines, signal research, strategies, validation gates, correlations, skill vs luck |
-| [leaderboard.html](leaderboard.html) | Competition rules, rewards and the (empty) ranked board |
-| [bet-types.html](bet-types.html) | Single bets, parlays, player prop combos, official risk data |
-| [injuries.html](injuries.html) | Official injury report, filing policy, inactives, tracking design |
-| [depth-chart.html](depth-chart.html) | 1st/2nd/3rd/4th string for offense and defense |
-| [data-tables.html](data-tables.html) | Standings, derived metrics, correlations, bet facts, findings |
-| [verification.html](verification.html) | Verification policy, official source registry, line-by-line audit |
-| [flagged.html](flagged.html) | Flagged for Review (does not block the merge) |
-| [deployment.html](deployment.html) | Pages configuration, PR, merge and deploy record |
-| [integration.html](integration.html) | Combined integration: re-verification of all merged sessions' data, line by line |
-| [legacy-site.html](legacy-site.html) | Earlier sessions' dashboard, preserved verbatim (historical) |
+## What the site contains
 
-## Rebuild and verify
+| Page | What it answers |
+|---|---|
+| Overview | Season state, this week's own lines, top of the leaderboard, availability pressure, verification summary |
+| My Lines | Ratings, own spread/total/win probability with error bands, out-of-sample accuracy, model-vs-market blend test |
+| Strategy Lab | Leaderboard with gate matrix, correlation between strategies, parlay maths, reward scoring |
+| Injuries & Depth | Official game status joined to depth-chart rank, next man up, experience and snaps |
+| Props | Shrunk usage projections with intervals; market columns deliberately blank |
+| Questions | Twenty decision-gating questions: known, unknown, how to discover, what it blocks |
+| Suggestions | Twelve ranked improvements, five decision records, review process |
+| Evidence | Provenance (URL + sha256 per file) and line-by-line verification against nfl.com |
+| Flagged for Review | Every irregularity, unverified value and blocked decision |
+| Executive Summary | What was built, what the evidence says, what is unresolved, decisions requested |
 
-```bash
-python3 tools/seed_data.py              # regenerate data/*.json from transcribed official values
-python3 tools/compute_correlations.py   # recompute Pearson r from official standings
-python3 tools/verify_combined.py        # re-verify merged CSV snapshots and all local links
-python3 tools/build.py                 # generate the HTML pages and docs/*.md
-python3 tools/verify.py                # source links, unverified blanks, internal links
+## How the data gets here
+
+The Arena sandbox can only reach a small host allow-list, so bulk downloads and the nfl.com
+injury scrape run in GitHub Actions:
+
+```
+.github/workflows/collect-data.yml
+  1. pipeline/collect.py          download nflverse release files, pin URL + sha256
+  2. pipeline/scrape_injuries.py  scrape the official nfl.com injury report (current week)
+  3. pipeline/schema.py           probe real column names (nothing is guessed)
+  4. pipeline/build_all.py        ratings, own lines, strategies, availability, props, verification
+  5. commit data/model/*.json     back to the branch
 ```
 
-`tools/verify.py` and `tools/verify_combined.py` also run in GitHub Actions on every push and pull
-request. GitHub Pages publishes `main / /`; `.nojekyll` keeps the generated HTML unchanged.
+Render the site locally (after data exists):
 
-## Combined site (final integration)
+```
+python3 pipeline/gen_site.py      # writes index.html and pages/*.html
+```
 
-`main` already contained a dashboard produced by earlier parallel sessions. Both site generations are
-published: this dashboard at `/`, and the earlier dashboard preserved at
-[legacy-site.html](legacy-site.html) with its `pages/` subpages, `styles.css`, `assets/` and
-`data/*.csv` snapshots. The pre-integration coordination board and README are preserved in
-`docs/COORDINATION-archive-main.md` and `docs/README-session-533256e1.md`. See
-[integration.html](integration.html) for the line-by-line combined-data check and the local link audit
-across both site generations. Residual combined-site issues are published as flags F25–F29 on
-[flagged.html](flagged.html).
+Everything on the site is static HTML generated from `data/model/*.json` plus
+`pipeline/content.py` (questions, suggestions, decision records).
 
-## Coordination
+## Files
 
-[COORDINATION.md](COORDINATION.md) is the shared task board for parallel agent sessions. All work in this
-session stayed on the current branch with disjoint file scopes; conflicts and deviations are logged there and
-on the Flagged for Review page.
+- `pipeline/` — collector, official injury scraper, schema probe, models, verification, renderer.
+- `data/model/` — generated JSON: ratings and lines, strategy leaderboard, availability, props,
+  provenance, verification, snapshot, dashboard.
+- `data/verified/` — the only hand-entered values: nfl.com standings (32 rows) and an injury
+  report sample (44 rows), used to verify the automated feeds.
+- `data/*.csv` — independent transcriptions from a parallel session, kept and cross-checked.
+- `pages/` — generated site pages plus companion pages from that session.
+- `COORDINATION.md` — shared multi-session task board and integration log.
 
-## Sources
+## Honesty rules used in this repository
 
-The complete registry of %d official sources, with links for manual review, is in
-[data/sources.json](data/sources.json) and on the [Verification page](verification.html). Sources include
-NFL.com, NFL Football Operations, official club sites, NFL Next Gen Stats, the NIST/SEMATECH e-Handbook,
-the New Jersey Division of Gaming Enforcement, GitHub Docs and the GitHub REST API.
-""" % counts["sources"]
+- No value is inferred, interpolated or filled in. Unknown values render as a labelled blank.
+- Every strategy rule is fixed before evaluation, the number of rules tested is published, and
+  p-values are corrected for multiple testing.
+- Ratings never use information from the game being predicted (walk-forward only).
+- Anything that cannot be verified against an official source is published on the
+  **Flagged for Review** page with an explanation of what would settle it.
+
+## Sources and licences
+
+- Data: [nflverse](https://github.com/nflverse/nflverse-data), licence verified CC-BY-4.0
+  (attribution required, shown in the site footer).
+- Official entry points cited throughout: nfl.com standings, injury report, schedules, player
+  stats and club directory.
+- No official league odds exist. Closing lines in the mirrored feed are consensus numbers and are
+  labelled as such.
+
+This is a research tool, not betting advice.
+
+
+---
+
+## Session `87deb7ab-nfl1` additions (PR #14)
+
+A second, independently built dashboard generation lives under **`docs/`**. It was built on a
+branch based on the repository's initial commit while `main` had already received other
+sessions' work, so it runs **alongside** the root site rather than replacing it. See
+`docs/flagged.html` flags F-012 and F-014.
+
+Regenerate with:
+
+```bash
+python3 tools/build_docs_site.py
+```
+
+It reads `data/session-87deb7ab/*.json`, writes 13 pages into `docs/`, and **fails the build**
+if any data row lacks a source URL — tested by injecting an unregistered source id. The data
+layer is namespaced under `data/session-87deb7ab/` so it does not collide with `main`'s
+same-named `data/*.json` files; both are preserved.
+
+| Path | Contents |
+| --- | --- |
+| `docs/index.html` | Dashboard: KPIs, at-a-glance register table, Week 10 snapshot |
+| `docs/executive-summary.html` | Key details, what is blocked, next moves |
+| `docs/requirements.html` | 52 requirements from the brief |
+| `docs/questions.html` | 24 questions: answered / partial / open-blocking |
+| `docs/suggestions.html` | 16 improvements with options and decision paths |
+| `docs/strategy-lab.html` | Line pipeline, six gates, leaderboard, skill-vs-luck tests |
+| `docs/signals.html` | 18 candidate signals with blockers |
+| `docs/correlation.html` | Correlation register; every magnitude deliberately blank |
+| `docs/injury-depth.html` | Official Week 10 injury report, all 254 listed players |
+| `docs/standings.html` | Official 2026 standings, all 32 clubs |
+| `docs/data-sources.html` | Source register tiered by authority |
+| `docs/verification.html` | Checks performed and build-enforced rules |
+| `docs/flagged.html` | 14 flagged items with source links |
+
+**Cross-verification:** this session's standings and injury designations were compared against
+`data/verified/` on `main` — 32/32 clubs and 6/6 designations match exactly. The one
+difference is club abbreviation for the Rams (`LAR` here, `LA` on `main`), logged as F-013.
+
+---
+
+## Independent verification subsystem (`verified-lab/`)
+
+Session `a2cea255-nfl1` added a third, deliberately independent implementation of the same
+brief: a **hand transcription** of the official nfl.com pages (no scraper), a 34-check
+verification harness, a provenance-and-gates engine, 103 tests, and a 20-page sub-site.
+
+**Sub-site: <https://kanlerxz87-cyber.github.io/NFL1/verified-lab/>** ·
+full details in [`verified-lab/README.md`](verified-lab/README.md).
+
+It publishes into its own directory because the root and `docs/` are already other sessions'
+live sites, and overwriting them would destroy merged work. Its CI footprint is nil:
+`scripts/verified/check_site.py` and `normalize_nav.py` scan only `index.html` and `pages/`,
+and `tools/verify.py` uses an explicit page list.
+
+Its headline finding is an audit of the official pages themselves — three cells where nfl.com
+contradicts its own arithmetic (WAS `non_conf`, IND `div`, PHI `div`), published verbatim,
+excluded from derived maths and never silently corrected. It publishes **no spread, total or
+edge**, because GitHub release assets cannot be downloaded from the Arena sandbox, so the
+nflverse feeds `pipeline/collect.py` fetches in Actions were never obtainable there. Blanks
+were left blank rather than filled from an unofficial aggregator.
+
+> Note: `tools/build.py` regenerates this `README.md` from an embedded template, so this
+> pointer is expected to be transient. The durable fix is logged as request
+> `R-a2cea255-01` in `COORDINATION.md` rather than applied to another session's generator.
+"""
     with open(os.path.join(ROOT, "README.md"), "w", encoding="utf-8") as f:
         f.write(txt)
     print("wrote README.md")
