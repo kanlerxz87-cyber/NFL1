@@ -356,10 +356,12 @@ def page_index():
         card("At a glance", tbl_glance, body=False,
              sub='<span class="badge b-proposed">11 registers</span>'),
         card("What this is",
-             note("<strong>The repository was empty.</strong> At the start of this session the repo held one "
-                  "commit and one 6-byte file (<code>README.md</code> containing <code># NFL1</code>). There was "
-                  "no code, no data and no site to review, so this became a greenfield build rather than a "
-                  "review. See <a href=\"flagged.html\">F-012</a>.") +
+             note("<strong>Read this before anything else.</strong> This session's branch was created from the "
+                  "repository's initial commit (<code>5aeb599</code>), which held one commit and one 6-byte "
+                  "<code>README.md</code>. <code>main</code> has since received substantial work from other "
+                  "sessions. This content was therefore built in parallel to the existing site rather than on "
+                  "top of it, and the two generations need reconciling. See "
+                  "<a href=\"flagged.html\">F-012</a> and <a href=\"flagged.html\">F-014</a>.") +
              "<p>This dashboard is the collected, organised and analysed output of the brief: a requirement "
              "register, a decision register separating what we know from what we do not, a suggestion register "
              "with decision paths, a strategy lab with validation gates, an injury and depth tracker, a source "
@@ -392,7 +394,7 @@ def page_exec():
     blocking = [q for q in qs if q["status"] == "Open - blocking"]
 
     findings = [
-        ("The repository was empty", "One commit, one 6-byte README. Nothing to review; the work is a build, not an audit.", "flagged.html"),
+        ("Built in parallel to an existing site", "This branch came off the initial commit; main had already received other sessions' work. Two dashboard generations now exist and need reconciling (F-012, F-014).", "flagged.html"),
         ("No official depth chart exists", "nfl.com/teams/&lt;team&gt;/depth-chart returns 404. The 2nd/3rd/4th-string requirement cannot be met from official data as published.", "flagged.html"),
         ("No official NFL odds exist", "The league publishes no prices. Its exclusive betting-data distributor is Genius Sports, so market comparison needs a commercial feed.", "flagged.html"),
         ("The injury report is blind to injured reserve", "Seattle shows 'No Injuries Reported' while NFL.com news on the same page reports their starting quarterback ruled out.", "flagged.html"),
@@ -1144,6 +1146,18 @@ def page_verification():
         ("V-12", "Source assertion", "Build refuses to emit a page with a sourceless data row",
          "The generator raises and lists offending rows rather than publishing them.",
          "Enforced at build"),
+        ("V-13", "Cross-session standings check",
+         "Compared this session's 32 clubs against main's independently transcribed "
+         "data/verified/standings_2026.csv",
+         "All 32 clubs match exactly on wins, losses, ties, points for, points against, net points, "
+         "percentage and streak. One naming difference: main uses LA, this session uses LAR for the Rams.",
+         "Pass — flagged F-013"),
+        ("V-14", "Cross-session injury check",
+         "Compared the 6 published game designations against main's independently transcribed "
+         "data/verified/injuries_week10.csv",
+         "All 6 rows match exactly on club, player, position, body part, practice status and game status. "
+         "Two independent transcriptions of the same official page agree.",
+         "Pass"),
     ]
     tbl = render_table(
         [{"id": a, "n": b, "m": c, "r": d, "v": e} for a, b, c, d, e in checks],
@@ -1180,11 +1194,18 @@ def page_verification():
              "<p>Verification here means two things: checking each dataset against the official source it "
              "came from, and building rules that make it impossible to publish an unsourced value by "
              "accident. Both are covered below.</p>" +
-             note("<strong>The most useful check was an accident of arithmetic.</strong> Across all 32 "
-                  "teams, total points for equals total points against (6,246 each), and total wins "
-                  "equals total losses (135 each, with 2 ties). Those equalities hold only if every "
-                  "transcribed row is correct, which makes them a strong integrity test on the standings "
-                  "transcription.")),
+             note("<strong>The strongest check was not ours.</strong> Another session had independently "
+                  "transcribed the same official pages into <code>data/verified/</code> on main. Comparing "
+                  "the two transcriptions: all 32 clubs match exactly on every numeric field, and all 6 "
+                  "published game designations match exactly on every field. Two independent readings of the "
+                  "same official source agreeing is far better evidence than any internal consistency check.",
+                  "ok") +
+             note("A second check is arithmetic: across all 32 teams, total points for equals total points "
+                  "against (6,246 each), and total wins equals total losses (135 each, with 2 ties). Those "
+                  "equalities hold only if every transcribed row is correct.") +
+             note("<strong>One caveat on scope.</strong> This session's branch came off the repository's "
+                  "initial commit, so the repository review covered that lineage only. main had already "
+                  "received other sessions' work. See <a href=\"flagged.html\">F-012</a>.", "warn")),
         card("Checks performed", tbl, body=False,
              sub=f'<span class="badge b-proposed">{len(checks)} checks</span>'),
         card("Rules the build enforces",
@@ -1246,9 +1267,11 @@ def page_flagged():
                   "an irregularity we found in an official feed. Per the brief, <strong>none of these "
                   "blocks the merge</strong> — they are published here with their source links so you can "
                   "review them after the site is live and request changes.") +
-             "<p><strong>Please read F-012 first.</strong> It records that the repository was empty, so if "
-             "you expected an existing site to be reviewed, the content you were expecting is not in this "
-             "repository.</p>"),
+             "<p><strong>Please read F-012 first.</strong> It records that this session's branch came off the "
+             "repository's original initial commit, while <code>main</code> had already received other "
+             "sessions' work. If you expected an existing site to be reviewed, it is on "
+             "<code>main</code> — this content was built alongside it, not from it. F-013 and F-014 cover "
+             "the resulting naming drift and the duplicate navigation.</p>"),
         card("Queue", tools(filter_col=2, filter_label="All categories",
                             keys=[f["cat"] for f in rows]) + tbl, body=False,
              sub=f'<span class="badge b-flagged">{len(rows)} items</span>'),

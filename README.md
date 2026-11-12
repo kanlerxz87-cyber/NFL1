@@ -1,64 +1,104 @@
-# NFL1
+# NFL1 — NFL decision-intelligence dashboard
 
-A verified NFL analytics and strategy workspace: proprietary line origination, a strategy
-leaderboard with validation gates, injury and lineup-depth tracking, and a decision register
-that separates what we know from what we do not.
+**Live site:** https://kanlerxz87-cyber.github.io/NFL1/
+**Data snapshot:** 2026 NFL regular season, Week 10, retrieved 2026-11-12 (UTC).
 
-**Live site:** GitHub Pages — built from `/docs`. Every table row links to the official source
-it came from.
+A clean, static GitHub Pages dashboard built from a JSON data layer. Every table row links to an official
+source. If an official source publishes no value, the cell is left blank and the item is flagged on the
+[Flagged for Review](flagged.html) page. No value is inferred or filled in.
 
----
-
-## What is in here
-
-| Path | What it is |
-| --- | --- |
-| `COORDINATION.md` | Shared task board for parallel agent sessions. Claim before you edit. |
-| `data/` | The data layer. Every register lives here as JSON; the site is generated from it. |
-| `tools/build_site.py` | Generates the static site into `docs/`. Fails the build if any data row lacks a source URL. |
-| `docs/` | The published site (GitHub Pages). Generated — edit the data, not these files. |
-
-## The site
+## Pages
 
 | Page | Contents |
 | --- | --- |
-| `index.html` | Dashboard: KPIs, at-a-glance register table, Week 10 snapshot. |
-| `executive-summary.html` | The important details, what is blocked, what to do next. |
-| `requirements.html` | 52 requirements extracted line by line from the brief. |
-| `questions.html` | 24 questions: answered, partially answered, open-blocking. |
-| `suggestions.html` | 15 improvements with options, trade-offs and a decision path. |
-| `strategy-lab.html` | Line-origination pipeline, six validation gates, leaderboard, skill-vs-luck tests. |
-| `signals.html` | 18 candidate signals with hypotheses and blockers. |
-| `correlation.html` | Correlation register plus the algebra of combining legs. |
-| `injury-depth.html` | Official Week 10 injury report in full; the depth-chart gap. |
-| `standings.html` | Official 2026 standings, all 32 clubs. |
-| `data-sources.html` | Every source used, tiered by authority. |
-| `verification.html` | Checks performed and the rules the build enforces. |
-| `flagged.html` | Everything unverified or irregular, with source links. |
+| [index.html](index.html) | Landing dashboard, counts, decision posture |
+| [executive-summary.html](executive-summary.html) | Executive summary |
+| [requirements.html](requirements.html) | Full requirements inventory and analysis |
+| [questions.html](questions.html) | Decision questions, known/unknown information, answers, discovery actions |
+| [suggestions.html](suggestions.html) | Improvement suggestions + Review & Choose a Path gate |
+| [strategy-lab.html](strategy-lab.html) | Own lines, signal research, strategies, validation gates, correlations, skill vs luck |
+| [leaderboard.html](leaderboard.html) | Competition rules, rewards and the (empty) ranked board |
+| [bet-types.html](bet-types.html) | Single bets, parlays, player prop combos, official risk data |
+| [injuries.html](injuries.html) | Official injury report, filing policy, inactives, tracking design |
+| [depth-chart.html](depth-chart.html) | 1st/2nd/3rd/4th string for offense and defense |
+| [data-tables.html](data-tables.html) | Standings, derived metrics, correlations, bet facts, findings |
+| [verification.html](verification.html) | Verification policy, official source registry, line-by-line audit |
+| [flagged.html](flagged.html) | Flagged for Review (does not block the merge) |
+| [deployment.html](deployment.html) | Pages configuration, PR, merge and deploy record |
+| [integration.html](integration.html) | Combined integration: re-verification of all merged sessions' data, line by line |
+| [legacy-site.html](legacy-site.html) | Earlier sessions' dashboard, preserved verbatim (historical) |
 
-## Build
+## Rebuild and verify
+
+```bash
+python3 tools/seed_data.py              # regenerate data/*.json from transcribed official values
+python3 tools/compute_correlations.py   # recompute Pearson r from official standings
+python3 tools/verify_combined.py        # re-verify merged CSV snapshots and all local links
+python3 tools/build.py                 # generate the HTML pages and docs/*.md
+python3 tools/verify.py                # source links, unverified blanks, internal links
+```
+
+`tools/verify.py` and `tools/verify_combined.py` also run in GitHub Actions on every push and pull
+request. GitHub Pages publishes `main / /`; `.nojekyll` keeps the generated HTML unchanged.
+
+## Combined site (final integration)
+
+`main` already contained a dashboard produced by earlier parallel sessions. Both site generations are
+published: this dashboard at `/`, and the earlier dashboard preserved at
+[legacy-site.html](legacy-site.html) with its `pages/` subpages, `styles.css`, `assets/` and
+`data/*.csv` snapshots. The pre-integration coordination board and README are preserved in
+`docs/COORDINATION-archive-main.md` and `docs/README-session-533256e1.md`. See
+[integration.html](integration.html) for the line-by-line combined-data check and the local link audit
+across both site generations. Residual combined-site issues are published as flags F25–F29 on
+[flagged.html](flagged.html).
+
+## Coordination
+
+[COORDINATION.md](COORDINATION.md) is the shared task board for parallel agent sessions. All work in this
+session stayed on the current branch with disjoint file scopes; conflicts and deviations are logged there and
+on the Flagged for Review page.
+
+## Sources
+
+The complete registry of 25 official sources, with links for manual review, is in
+[data/sources.json](data/sources.json) and on the [Verification page](verification.html). Sources include
+NFL.com, NFL Football Operations, official club sites, NFL Next Gen Stats, the NIST/SEMATECH e-Handbook,
+the New Jersey Division of Gaming Enforcement, GitHub Docs and the GitHub REST API.
+
+
+---
+
+## Session `87deb7ab-nfl1` additions (PR #14)
+
+A second, independently built dashboard generation lives under **`docs/`**. It was built on a
+branch based on the repository's initial commit while `main` had already received other
+sessions' work, so it runs **alongside** the root site rather than replacing it. See
+`docs/flagged.html` flags F-012 and F-014.
+
+Regenerate with:
 
 ```bash
 python3 tools/build_site.py
 ```
 
-Reads `data/*.json`, writes `docs/*.html`. Requires Python 3.9+; no dependencies.
+It reads `data/*.json`, writes 13 pages into `docs/`, and **fails the build** if any data row
+lacks a source URL — tested by injecting an unregistered source id.
 
-## Rules
+| Path | Contents |
+| --- | --- |
+| `docs/index.html` | Dashboard: KPIs, at-a-glance register table, Week 10 snapshot |
+| `docs/executive-summary.html` | Key details, what is blocked, next moves |
+| `docs/requirements.html` | 52 requirements from the brief |
+| `docs/questions.html` | 24 questions: answered / partial / open-blocking |
+| `docs/suggestions.html` | 16 improvements with options and decision paths |
+| `docs/strategy-lab.html` | Line pipeline, six gates, leaderboard, skill-vs-luck tests |
+| `docs/signals.html` | 18 candidate signals with blockers |
+| `docs/correlation.html` | Correlation register; every magnitude deliberately blank |
+| `docs/injury-depth.html` | Official Week 10 injury report, all 254 listed players |
+| `docs/standings.html` | Official 2026 standings, all 32 clubs |
+| `docs/data-sources.html` | Source register tiered by authority |
+| `docs/verification.html` | Checks performed and build-enforced rules |
+| `docs/flagged.html` | 14 flagged items with source links |
 
-1. **Every data row carries a source link.** The generator refuses to emit a page otherwise.
-   The only exemption is the requirement register, which is governance sourced from the brief
-   (published as flag F-006).
-2. **Never infer or fill in a value.** Unconfirmed values render as `UNVERIFIED` and are listed
-   on the Flagged for Review page.
-3. **Derived values are labelled.** A total or tally computed from official values is badged
-   `DERIVED` so it is never mistaken for a read value.
-4. **Source tiers.** Tier 1 (league/government official) and Tier 2 (primary issuer) may
-   populate values. Tier 3 (community) may be referenced but never populates a value.
-
-## Current state
-
-The framework is complete and specified. The **evidence** it needs is not all available:
-there is no official odds feed, so no strategy has been backtested, no correlation has been
-measured, and no strategy has passed a gate. Every correlation magnitude is deliberately
-blank. See `docs/flagged.html` (or the Flagged for Review page on the site) for the full list.
+**Cross-verification:** this session's standings and injury designations were compared against
+`data/verified/` on `main` — 32/32 clubs and 6/6 designations match exactly.
