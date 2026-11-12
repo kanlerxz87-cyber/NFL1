@@ -1,0 +1,872 @@
+{
+ "generated_at": "2026-11-12T05:07:59+00:00",
+ "season": 2026,
+ "last_completed_week": 9,
+ "next_week": 10,
+ "counts": {
+  "games_played": 136,
+  "teams": 32,
+  "source_files_pinned": 12,
+  "own_lines_generated": 14,
+  "strategies_tested": 12,
+  "strategies_passing_all_gates": 0,
+  "strategies_watch": 2,
+  "starters_flagged_unavailable": 103,
+  "prop_lines_generated": 343
+ },
+ "top_strategies": [
+  {
+   "strategy": "S11 Under in divisional games with total 47+",
+   "status": "WATCH",
+   "gates_passed": 6,
+   "score_lower_ci_roi_pct": -3.85,
+   "n_graded": 548,
+   "wins": 299,
+   "losses": 249,
+   "pushes": 6,
+   "win_pct": 0.5456,
+   "roi": 0.0416,
+   "roi_ci95": [
+    -0.0385,
+    0.1218
+   ],
+   "units": 22.82,
+   "p_value": 0.1637,
+   "q_value": 0.9889,
+   "max_drawdown_units": -17.0,
+   "by_season": {
+    "2005": {
+     "n": 13,
+     "roi": 0.3217
+    },
+    "2006": {
+     "n": 7,
+     "roi": 0.3636
+    },
+    "2007": {
+     "n": 9,
+     "roi": 0.0606
+    },
+    "2008": {
+     "n": 17,
+     "roi": -0.3262
+    },
+    "2009": {
+     "n": 20,
+     "roi": 0.5273
+    },
+    "2010": {
+     "n": 15,
+     "roi": -0.2364
+    },
+    "2011": {
+     "n": 26,
+     "roi": -0.2657
+    },
+    "2012": {
+     "n": 33,
+     "roi": 0.0992
+    },
+    "2013": {
+     "n": 32,
+     "roi": 0.3125
+    },
+    "2014": {
+     "n": 37,
+     "roi": -0.0713
+    },
+    "2015": {
+     "n": 21,
+     "roi": 0.1818
+    },
+    "2016": {
+     "n": 31,
+     "roi": -0.261
+    },
+    "2017": {
+     "n": 22,
+     "roi": 0.2149
+    },
+    "2018": {
+     "n": 36,
+     "roi": 0.0606
+    },
+    "2019": {
+     "n": 35,
+     "roi": 0.3091
+    },
+    "2020": {
+     "n": 53,
+     "roi": -0.0995
+    },
+    "2021": {
+     "n": 36,
+     "roi": -0.0455
+    },
+    "2022": {
+     "n": 22,
+     "roi": 0.3017
+    },
+    "2023": {
+     "n": 17,
+     "roi": 0.0107
+    },
+    "2024": {
+     "n": 27,
+     "roi": -0.0808
+    },
+    "2025": {
+     "n": 30,
+     "roi": 0.0818
+    },
+    "2026": {
+     "n": 9,
+     "roi": -0.3636
+    }
+   },
+   "holdout_roi": 0.0818,
+   "max_abs_corr": 0.169,
+   "gates": [
+    {
+     "id": "G1",
+     "name": "Provenance",
+     "pass": true,
+     "detail": "All inputs pinned by URL + sha256 in provenance.json."
+    },
+    {
+     "id": "G2",
+     "name": "Pre-specified rule",
+     "pass": true,
+     "detail": "Round-number threshold fixed before evaluation; no parameter search."
+    },
+    {
+     "id": "G3",
+     "name": "Sample size",
+     "pass": true,
+     "detail": "n=548 graded bets (minimum 100)."
+    },
+    {
+     "id": "G4",
+     "name": "Holdout positive",
+     "pass": true,
+     "detail": "latest-window ROI=0.0818."
+    },
+    {
+     "id": "G5",
+     "name": "Significance",
+     "pass": false,
+     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
+    },
+    {
+     "id": "G6",
+     "name": "Stability",
+     "pass": false,
+     "detail": "13/22 seasons positive."
+    },
+    {
+     "id": "G7",
+     "name": "Drawdown",
+     "pass": true,
+     "detail": "max drawdown -17.0 units."
+    },
+    {
+     "id": "G8",
+     "name": "Diversification",
+     "pass": true,
+     "detail": "max |corr| with another strategy = 0.169."
+    }
+   ],
+   "window": "2005-2026"
+  },
+  {
+   "strategy": "S10 Over when closing total is 41 or lower",
+   "status": "FAIL",
+   "gates_passed": 3,
+   "score_lower_ci_roi_pct": -5.41,
+   "n_graded": 1437,
+   "wins": 750,
+   "losses": 687,
+   "pushes": 28,
+   "win_pct": 0.5219,
+   "roi": -0.0036,
+   "roi_ci95": [
+    -0.0541,
+    0.0443
+   ],
+   "units": -5.18,
+   "p_value": 0.5676,
+   "q_value": 0.9889,
+   "max_drawdown_units": -25.64,
+   "by_season": {
+    "2005": {
+     "n": 118,
+     "roi": -0.094
+    },
+    "2006": {
+     "n": 147,
+     "roi": -0.013
+    },
+    "2007": {
+     "n": 133,
+     "roi": 0.0909
+    },
+    "2008": {
+     "n": 105,
+     "roi": -0.0182
+    },
+    "2009": {
+     "n": 95,
+     "roi": -0.0153
+    },
+    "2010": {
+     "n": 87,
+     "roi": 0.0533
+    },
+    "2011": {
+     "n": 83,
+     "roi": 0.012
+    },
+    "2012": {
+     "n": 61,
+     "roi": 0.0328
+    },
+    "2013": {
+     "n": 57,
+     "roi": 0.1388
+    },
+    "2014": {
+     "n": 22,
+     "roi": -0.3058
+    },
+    "2015": {
+     "n": 31,
+     "roi": 0.1701
+    },
+    "2016": {
+     "n": 31,
+     "roi": 0.0469
+    },
+    "2017": {
+     "n": 68,
+     "roi": -0.0735
+    },
+    "2018": {
+     "n": 41,
+     "roi": 0.0244
+    },
+    "2019": {
+     "n": 43,
+     "roi": -0.0677
+    },
+    "2020": {
+     "n": 11,
+     "roi": 0.2149
+    },
+    "2021": {
+     "n": 24,
+     "roi": 0.0341
+    },
+    "2022": {
+     "n": 69,
+     "roi": -0.1146
+    },
+    "2023": {
+     "n": 91,
+     "roi": -0.035
+    },
+    "2024": {
+     "n": 53,
+     "roi": 0.0446
+    },
+    "2025": {
+     "n": 42,
+     "roi": 0.0909
+    },
+    "2026": {
+     "n": 25,
+     "roi": -0.3127
+    }
+   },
+   "holdout_roi": -0.1109,
+   "max_abs_corr": 1.0,
+   "gates": [
+    {
+     "id": "G1",
+     "name": "Provenance",
+     "pass": true,
+     "detail": "All inputs pinned by URL + sha256 in provenance.json."
+    },
+    {
+     "id": "G2",
+     "name": "Pre-specified rule",
+     "pass": true,
+     "detail": "Round-number threshold fixed before evaluation; no parameter search."
+    },
+    {
+     "id": "G3",
+     "name": "Sample size",
+     "pass": true,
+     "detail": "n=1437 graded bets (minimum 100)."
+    },
+    {
+     "id": "G4",
+     "name": "Holdout positive",
+     "pass": false,
+     "detail": "latest-window ROI=-0.1109."
+    },
+    {
+     "id": "G5",
+     "name": "Significance",
+     "pass": false,
+     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
+    },
+    {
+     "id": "G6",
+     "name": "Stability",
+     "pass": false,
+     "detail": "12/22 seasons positive."
+    },
+    {
+     "id": "G7",
+     "name": "Drawdown",
+     "pass": false,
+     "detail": "max drawdown -25.64 units."
+    },
+    {
+     "id": "G8",
+     "name": "Diversification",
+     "pass": false,
+     "detail": "max |corr| with another strategy = 1.0."
+    }
+   ],
+   "window": "2005-2026"
+  },
+  {
+   "strategy": "S04 Divisional underdog +6.5 or more",
+   "status": "FAIL",
+   "gates_passed": 4,
+   "score_lower_ci_roi_pct": -9.98,
+   "n_graded": 738,
+   "wins": 374,
+   "losses": 364,
+   "pushes": 20,
+   "win_pct": 0.5068,
+   "roi": -0.0325,
+   "roi_ci95": [
+    -0.0998,
+    0.0373
+   ],
+   "units": -24.0,
+   "p_value": 0.8323,
+   "q_value": 0.9889,
+   "max_drawdown_units": -39.09,
+   "by_season": {
+    "2005": {
+     "n": 31,
+     "roi": -0.1994
+    },
+    "2006": {
+     "n": 36,
+     "roi": 0.1136
+    },
+    "2007": {
+     "n": 35,
+     "roi": -0.0727
+    },
+    "2008": {
+     "n": 33,
+     "roi": 0.0992
+    },
+    "2009": {
+     "n": 45,
+     "roi": 0.0606
+    },
+    "2010": {
+     "n": 31,
+     "roi": 0.1085
+    },
+    "2011": {
+     "n": 41,
+     "roi": -0.0222
+    },
+    "2012": {
+     "n": 35,
+     "roi": -0.0182
+    },
+    "2013": {
+     "n": 37,
+     "roi": -0.2776
+    },
+    "2014": {
+     "n": 41,
+     "roi": -0.0222
+    },
+    "2015": {
+     "n": 28,
+     "roi": 0.1591
+    },
+    "2016": {
+     "n": 20,
+     "roi": -0.0455
+    },
+    "2017": {
+     "n": 34,
+     "roi": -0.3824
+    },
+    "2018": {
+     "n": 39,
+     "roi": -0.021
+    },
+    "2019": {
+     "n": 35,
+     "roi": -0.0182
+    },
+    "2020": {
+     "n": 39,
+     "roi": 0.028
+    },
+    "2021": {
+     "n": 40,
+     "roi": -0.3318
+    },
+    "2022": {
+     "n": 28,
+     "roi": 0.2955
+    },
+    "2023": {
+     "n": 28,
+     "roi": -0.1818
+    },
+    "2024": {
+     "n": 35,
+     "roi": 0.1455
+    },
+    "2025": {
+     "n": 36,
+     "roi": -0.0985
+    },
+    "2026": {
+     "n": 11,
+     "roi": 0.2149
+    }
+   },
+   "holdout_roi": 0.0582,
+   "max_abs_corr": 1.0,
+   "gates": [
+    {
+     "id": "G1",
+     "name": "Provenance",
+     "pass": true,
+     "detail": "All inputs pinned by URL + sha256 in provenance.json."
+    },
+    {
+     "id": "G2",
+     "name": "Pre-specified rule",
+     "pass": true,
+     "detail": "Round-number threshold fixed before evaluation; no parameter search."
+    },
+    {
+     "id": "G3",
+     "name": "Sample size",
+     "pass": true,
+     "detail": "n=738 graded bets (minimum 100)."
+    },
+    {
+     "id": "G4",
+     "name": "Holdout positive",
+     "pass": true,
+     "detail": "latest-window ROI=0.0582."
+    },
+    {
+     "id": "G5",
+     "name": "Significance",
+     "pass": false,
+     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
+    },
+    {
+     "id": "G6",
+     "name": "Stability",
+     "pass": false,
+     "detail": "9/22 seasons positive."
+    },
+    {
+     "id": "G7",
+     "name": "Drawdown",
+     "pass": false,
+     "detail": "max drawdown -39.09 units."
+    },
+    {
+     "id": "G8",
+     "name": "Diversification",
+     "pass": false,
+     "detail": "max |corr| with another strategy = 1.0."
+    }
+   ],
+   "window": "2005-2026"
+  },
+  {
+   "strategy": "S07 Home team with 3+ rest-day edge",
+   "status": "FAIL",
+   "gates_passed": 4,
+   "score_lower_ci_roi_pct": -12.67,
+   "n_graded": 505,
+   "wins": 253,
+   "losses": 252,
+   "pushes": 14,
+   "win_pct": 0.501,
+   "roi": -0.0436,
+   "roi_ci95": [
+    -0.1267,
+    0.0396
+   ],
+   "units": -22.0,
+   "p_value": 0.858,
+   "q_value": 0.9889,
+   "max_drawdown_units": -39.27,
+   "by_season": {
+    "2005": {
+     "n": 15,
+     "roi": 0.1455
+    },
+    "2006": {
+     "n": 21,
+     "roi": 0.0909
+    },
+    "2007": {
+     "n": 15,
+     "roi": 0.0182
+    },
+    "2008": {
+     "n": 22,
+     "roi": 0.2149
+    },
+    "2009": {
+     "n": 23,
+     "roi": -0.253
+    },
+    "2010": {
+     "n": 20,
+     "roi": 0.2409
+    },
+    "2011": {
+     "n": 17,
+     "roi": 0.0107
+    },
+    "2012": {
+     "n": 20,
+     "roi": -0.2364
+    },
+    "2013": {
+     "n": 30,
+     "roi": 0.0818
+    },
+    "2014": {
+     "n": 22,
+     "roi": -0.4793
+    },
+    "2015": {
+     "n": 19,
+     "roi": -0.0957
+    },
+    "2016": {
+     "n": 34,
+     "roi": 0.2353
+    },
+    "2017": {
+     "n": 21,
+     "roi": -0.3636
+    },
+    "2018": {
+     "n": 18,
+     "roi": -0.2576
+    },
+    "2019": {
+     "n": 28,
+     "roi": -0.1818
+    },
+    "2020": {
+     "n": 26,
+     "roi": -0.0455
+    },
+    "2021": {
+     "n": 27,
+     "roi": -0.0101
+    },
+    "2022": {
+     "n": 33,
+     "roi": 0.0992
+    },
+    "2023": {
+     "n": 25,
+     "roi": -0.0073
+    },
+    "2024": {
+     "n": 26,
+     "roi": -0.1923
+    },
+    "2025": {
+     "n": 27,
+     "roi": -0.2929
+    },
+    "2026": {
+     "n": 16,
+     "roi": 0.3125
+    }
+   },
+   "holdout_roi": 0.0098,
+   "max_abs_corr": 1.0,
+   "gates": [
+    {
+     "id": "G1",
+     "name": "Provenance",
+     "pass": true,
+     "detail": "All inputs pinned by URL + sha256 in provenance.json."
+    },
+    {
+     "id": "G2",
+     "name": "Pre-specified rule",
+     "pass": true,
+     "detail": "Round-number threshold fixed before evaluation; no parameter search."
+    },
+    {
+     "id": "G3",
+     "name": "Sample size",
+     "pass": true,
+     "detail": "n=505 graded bets (minimum 100)."
+    },
+    {
+     "id": "G4",
+     "name": "Holdout positive",
+     "pass": true,
+     "detail": "latest-window ROI=0.0098."
+    },
+    {
+     "id": "G5",
+     "name": "Significance",
+     "pass": false,
+     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
+    },
+    {
+     "id": "G6",
+     "name": "Stability",
+     "pass": false,
+     "detail": "10/22 seasons positive."
+    },
+    {
+     "id": "G7",
+     "name": "Drawdown",
+     "pass": false,
+     "detail": "max drawdown -39.27 units."
+    },
+    {
+     "id": "G8",
+     "name": "Diversification",
+     "pass": false,
+     "detail": "max |corr| with another strategy = 1.0."
+    }
+   ],
+   "window": "2005-2026"
+  },
+  {
+   "strategy": "S09 Home favourite of 10 or more",
+   "status": "FAIL",
+   "gates_passed": 4,
+   "score_lower_ci_roi_pct": -15.19,
+   "n_graded": 565,
+   "wins": 274,
+   "losses": 291,
+   "pushes": 17,
+   "win_pct": 0.485,
+   "roi": -0.0742,
+   "roi_ci95": [
+    -0.1519,
+    0.0035
+   ],
+   "units": -41.91,
+   "p_value": 0.9706,
+   "q_value": 0.9889,
+   "max_drawdown_units": -56.0,
+   "by_season": {
+    "2005": {
+     "n": 23,
+     "roi": -0.17
+    },
+    "2006": {
+     "n": 35,
+     "roi": -0.2909
+    },
+    "2007": {
+     "n": 34,
+     "roi": -0.0455
+    },
+    "2008": {
+     "n": 30,
+     "roi": -0.3636
+    },
+    "2009": {
+     "n": 40,
+     "roi": 0.0023
+    },
+    "2010": {
+     "n": 23,
+     "roi": -0.17
+    },
+    "2011": {
+     "n": 30,
+     "roi": 0.0818
+    },
+    "2012": {
+     "n": 27,
+     "roi": 0.0606
+    },
+    "2013": {
+     "n": 30,
+     "roi": -0.1091
+    },
+    "2014": {
+     "n": 20,
+     "roi": -0.0455
+    },
+    "2015": {
+     "n": 23,
+     "roi": -0.17
+    },
+    "2016": {
+     "n": 14,
+     "roi": 0.2273
+    },
+    "2017": {
+     "n": 28,
+     "roi": -0.0455
+    },
+    "2018": {
+     "n": 29,
+     "roi": -0.2759
+    },
+    "2019": {
+     "n": 29,
+     "roi": -0.21
+    },
+    "2020": {
+     "n": 21,
+     "roi": -0.2727
+    },
+    "2021": {
+     "n": 34,
+     "roi": 0.2914
+    },
+    "2022": {
+     "n": 25,
+     "roi": -0.2364
+    },
+    "2023": {
+     "n": 20,
+     "roi": -0.1409
+    },
+    "2024": {
+     "n": 16,
+     "roi": 0.1932
+    },
+    "2025": {
+     "n": 27,
+     "roi": 0.3434
+    },
+    "2026": {
+     "n": 7,
+     "roi": -0.4545
+    }
+   },
+   "holdout_roi": 0.3434,
+   "max_abs_corr": 1.0,
+   "gates": [
+    {
+     "id": "G1",
+     "name": "Provenance",
+     "pass": true,
+     "detail": "All inputs pinned by URL + sha256 in provenance.json."
+    },
+    {
+     "id": "G2",
+     "name": "Pre-specified rule",
+     "pass": true,
+     "detail": "Round-number threshold fixed before evaluation; no parameter search."
+    },
+    {
+     "id": "G3",
+     "name": "Sample size",
+     "pass": true,
+     "detail": "n=565 graded bets (minimum 100)."
+    },
+    {
+     "id": "G4",
+     "name": "Holdout positive",
+     "pass": true,
+     "detail": "latest-window ROI=0.3434."
+    },
+    {
+     "id": "G5",
+     "name": "Significance",
+     "pass": false,
+     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
+    },
+    {
+     "id": "G6",
+     "name": "Stability",
+     "pass": false,
+     "detail": "7/22 seasons positive."
+    },
+    {
+     "id": "G7",
+     "name": "Drawdown",
+     "pass": false,
+     "detail": "max drawdown -56.0 units."
+    },
+    {
+     "id": "G8",
+     "name": "Diversification",
+     "pass": false,
+     "detail": "max |corr| with another strategy = 1.0."
+    }
+   ],
+   "window": "2005-2026"
+  }
+ ],
+ "capabilities": [
+  {
+   "area": "Own lines",
+   "state": "built",
+   "detail": "Opponent-adjusted EPA ratings -> spread, total, win probability."
+  },
+  {
+   "area": "Backtest vs closing line",
+   "state": "built",
+   "detail": "Walk-forward; no look-ahead."
+  },
+  {
+   "area": "Strategy leaderboard",
+   "state": "built",
+   "detail": "8 validation gates, BH multiple-testing correction, bootstrap CIs."
+  },
+  {
+   "area": "Correlation",
+   "state": "built",
+   "detail": "Per-bet correlation between strategies, same-game leg phi."
+  },
+  {
+   "area": "Injuries and depth",
+   "state": "built",
+   "detail": "Official game status joined to depth chart rank and replacement experience."
+  },
+  {
+   "area": "Props",
+   "state": "model-only",
+   "detail": "Projections built; no verified market prop prices, so no edge claim."
+  },
+  {
+   "area": "Prize/rewards",
+   "state": "blocked",
+   "detail": "Paper points only until legal review."
+  }
+ ],
+ "errors": []
+}

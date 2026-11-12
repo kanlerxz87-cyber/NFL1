@@ -170,6 +170,18 @@
       "source": "SRC-000",
       "source_url": "https://github.com/kanlerxz87-cyber/NFL1",
       "status": "needs review"
+    },
+    {
+      "id": "F-015",
+      "sev": "Medium",
+      "cat": "Cross-session",
+      "title": "main's README.md carried unresolved merge-conflict markers into this merge",
+      "detail": "While merging main into this branch, README.md on main was found to contain three unresolved merge-conflict blocks ('Updated upstream' versus 'Stashed changes') left by an earlier session's merge. Two blocks differed only in whitespace and wording precision; the third had content on the upstream side only, with the following sections common to both. This session resolved the file non-destructively: the more precise upstream wording was kept for the two equivalent blocks, all content was retained, and no marker lines remain.",
+      "impact": "A published README containing conflict markers breaks rendering and causes every subsequent merge to conflict again. It also means one session's wording was silently staged as a conflict rather than reconciled.",
+      "action": "Confirm the resolved README reads correctly. Any session whose wording was dropped should re-add it if it mattered — nothing was deleted from the repository history.",
+      "source": "SRC-000",
+      "source_url": "https://github.com/kanlerxz87-cyber/NFL1",
+      "status": "needs review"
     }
   ]
 }

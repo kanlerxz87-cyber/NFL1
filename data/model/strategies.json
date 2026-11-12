@@ -1,0 +1,6662 @@
+{
+ "generated_at": "2026-11-12T05:07:58+00:00",
+ "window": {
+  "start_season": 2005,
+  "end_season": 2026,
+  "games_with_closing_spread": 5591,
+  "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+  "price_assumption": "-110 on every bet (no book-level prices in the data)"
+ },
+ "leaderboard": [
+  {
+   "strategy": "S11 Under in divisional games with total 47+",
+   "status": "WATCH",
+   "gates_passed": 6,
+   "score_lower_ci_roi_pct": -3.85,
+   "n_graded": 548,
+   "wins": 299,
+   "losses": 249,
+   "pushes": 6,
+   "win_pct": 0.5456,
+   "roi": 0.0416,
+   "roi_ci95": [
+    -0.0385,
+    0.1218
+   ],
+   "units": 22.82,
+   "p_value": 0.1637,
+   "q_value": 0.9889,
+   "max_drawdown_units": -17.0,
+   "by_season": {
+    "2005": {
+     "n": 13,
+     "roi": 0.3217
+    },
+    "2006": {
+     "n": 7,
+     "roi": 0.3636
+    },
+    "2007": {
+     "n": 9,
+     "roi": 0.0606
+    },
+    "2008": {
+     "n": 17,
+     "roi": -0.3262
+    },
+    "2009": {
+     "n": 20,
+     "roi": 0.5273
+    },
+    "2010": {
+     "n": 15,
+     "roi": -0.2364
+    },
+    "2011": {
+     "n": 26,
+     "roi": -0.2657
+    },
+    "2012": {
+     "n": 33,
+     "roi": 0.0992
+    },
+    "2013": {
+     "n": 32,
+     "roi": 0.3125
+    },
+    "2014": {
+     "n": 37,
+     "roi": -0.0713
+    },
+    "2015": {
+     "n": 21,
+     "roi": 0.1818
+    },
+    "2016": {
+     "n": 31,
+     "roi": -0.261
+    },
+    "2017": {
+     "n": 22,
+     "roi": 0.2149
+    },
+    "2018": {
+     "n": 36,
+     "roi": 0.0606
+    },
+    "2019": {
+     "n": 35,
+     "roi": 0.3091
+    },
+    "2020": {
+     "n": 53,
+     "roi": -0.0995
+    },
+    "2021": {
+     "n": 36,
+     "roi": -0.0455
+    },
+    "2022": {
+     "n": 22,
+     "roi": 0.3017
+    },
+    "2023": {
+     "n": 17,
+     "roi": 0.0107
+    },
+    "2024": {
+     "n": 27,
+     "roi": -0.0808
+    },
+    "2025": {
+     "n": 30,
+     "roi": 0.0818
+    },
+    "2026": {
+     "n": 9,
+     "roi": -0.3636
+    }
+   },
+   "holdout_roi": 0.0818,
+   "max_abs_corr": 0.169,
+   "gates": [
+    {
+     "id": "G1",
+     "name": "Provenance",
+     "pass": true,
+     "detail": "All inputs pinned by URL + sha256 in provenance.json."
+    },
+    {
+     "id": "G2",
+     "name": "Pre-specified rule",
+     "pass": true,
+     "detail": "Round-number threshold fixed before evaluation; no parameter search."
+    },
+    {
+     "id": "G3",
+     "name": "Sample size",
+     "pass": true,
+     "detail": "n=548 graded bets (minimum 100)."
+    },
+    {
+     "id": "G4",
+     "name": "Holdout positive",
+     "pass": true,
+     "detail": "latest-window ROI=0.0818."
+    },
+    {
+     "id": "G5",
+     "name": "Significance",
+     "pass": false,
+     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
+    },
+    {
+     "id": "G6",
+     "name": "Stability",
+     "pass": false,
+     "detail": "13/22 seasons positive."
+    },
+    {
+     "id": "G7",
+     "name": "Drawdown",
+     "pass": true,
+     "detail": "max drawdown -17.0 units."
+    },
+    {
+     "id": "G8",
+     "name": "Diversification",
+     "pass": true,
+     "detail": "max |corr| with another strategy = 0.169."
+    }
+   ],
+   "window": "2005-2026"
+  },
+  {
+   "strategy": "S10 Over when closing total is 41 or lower",
+   "status": "FAIL",
+   "gates_passed": 3,
+   "score_lower_ci_roi_pct": -5.41,
+   "n_graded": 1437,
+   "wins": 750,
+   "losses": 687,
+   "pushes": 28,
+   "win_pct": 0.5219,
+   "roi": -0.0036,
+   "roi_ci95": [
+    -0.0541,
+    0.0443
+   ],
+   "units": -5.18,
+   "p_value": 0.5676,
+   "q_value": 0.9889,
+   "max_drawdown_units": -25.64,
+   "by_season": {
+    "2005": {
+     "n": 118,
+     "roi": -0.094
+    },
+    "2006": {
+     "n": 147,
+     "roi": -0.013
+    },
+    "2007": {
+     "n": 133,
+     "roi": 0.0909
+    },
+    "2008": {
+     "n": 105,
+     "roi": -0.0182
+    },
+    "2009": {
+     "n": 95,
+     "roi": -0.0153
+    },
+    "2010": {
+     "n": 87,
+     "roi": 0.0533
+    },
+    "2011": {
+     "n": 83,
+     "roi": 0.012
+    },
+    "2012": {
+     "n": 61,
+     "roi": 0.0328
+    },
+    "2013": {
+     "n": 57,
+     "roi": 0.1388
+    },
+    "2014": {
+     "n": 22,
+     "roi": -0.3058
+    },
+    "2015": {
+     "n": 31,
+     "roi": 0.1701
+    },
+    "2016": {
+     "n": 31,
+     "roi": 0.0469
+    },
+    "2017": {
+     "n": 68,
+     "roi": -0.0735
+    },
+    "2018": {
+     "n": 41,
+     "roi": 0.0244
+    },
+    "2019": {
+     "n": 43,
+     "roi": -0.0677
+    },
+    "2020": {
+     "n": 11,
+     "roi": 0.2149
+    },
+    "2021": {
+     "n": 24,
+     "roi": 0.0341
+    },
+    "2022": {
+     "n": 69,
+     "roi": -0.1146
+    },
+    "2023": {
+     "n": 91,
+     "roi": -0.035
+    },
+    "2024": {
+     "n": 53,
+     "roi": 0.0446
+    },
+    "2025": {
+     "n": 42,
+     "roi": 0.0909
+    },
+    "2026": {
+     "n": 25,
+     "roi": -0.3127
+    }
+   },
+   "holdout_roi": -0.1109,
+   "max_abs_corr": 1.0,
+   "gates": [
+    {
+     "id": "G1",
+     "name": "Provenance",
+     "pass": true,
+     "detail": "All inputs pinned by URL + sha256 in provenance.json."
+    },
+    {
+     "id": "G2",
+     "name": "Pre-specified rule",
+     "pass": true,
+     "detail": "Round-number threshold fixed before evaluation; no parameter search."
+    },
+    {
+     "id": "G3",
+     "name": "Sample size",
+     "pass": true,
+     "detail": "n=1437 graded bets (minimum 100)."
+    },
+    {
+     "id": "G4",
+     "name": "Holdout positive",
+     "pass": false,
+     "detail": "latest-window ROI=-0.1109."
+    },
+    {
+     "id": "G5",
+     "name": "Significance",
+     "pass": false,
+     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
+    },
+    {
+     "id": "G6",
+     "name": "Stability",
+     "pass": false,
+     "detail": "12/22 seasons positive."
+    },
+    {
+     "id": "G7",
+     "name": "Drawdown",
+     "pass": false,
+     "detail": "max drawdown -25.64 units."
+    },
+    {
+     "id": "G8",
+     "name": "Diversification",
+     "pass": false,
+     "detail": "max |corr| with another strategy = 1.0."
+    }
+   ],
+   "window": "2005-2026"
+  },
+  {
+   "strategy": "S04 Divisional underdog +6.5 or more",
+   "status": "FAIL",
+   "gates_passed": 4,
+   "score_lower_ci_roi_pct": -9.98,
+   "n_graded": 738,
+   "wins": 374,
+   "losses": 364,
+   "pushes": 20,
+   "win_pct": 0.5068,
+   "roi": -0.0325,
+   "roi_ci95": [
+    -0.0998,
+    0.0373
+   ],
+   "units": -24.0,
+   "p_value": 0.8323,
+   "q_value": 0.9889,
+   "max_drawdown_units": -39.09,
+   "by_season": {
+    "2005": {
+     "n": 31,
+     "roi": -0.1994
+    },
+    "2006": {
+     "n": 36,
+     "roi": 0.1136
+    },
+    "2007": {
+     "n": 35,
+     "roi": -0.0727
+    },
+    "2008": {
+     "n": 33,
+     "roi": 0.0992
+    },
+    "2009": {
+     "n": 45,
+     "roi": 0.0606
+    },
+    "2010": {
+     "n": 31,
+     "roi": 0.1085
+    },
+    "2011": {
+     "n": 41,
+     "roi": -0.0222
+    },
+    "2012": {
+     "n": 35,
+     "roi": -0.0182
+    },
+    "2013": {
+     "n": 37,
+     "roi": -0.2776
+    },
+    "2014": {
+     "n": 41,
+     "roi": -0.0222
+    },
+    "2015": {
+     "n": 28,
+     "roi": 0.1591
+    },
+    "2016": {
+     "n": 20,
+     "roi": -0.0455
+    },
+    "2017": {
+     "n": 34,
+     "roi": -0.3824
+    },
+    "2018": {
+     "n": 39,
+     "roi": -0.021
+    },
+    "2019": {
+     "n": 35,
+     "roi": -0.0182
+    },
+    "2020": {
+     "n": 39,
+     "roi": 0.028
+    },
+    "2021": {
+     "n": 40,
+     "roi": -0.3318
+    },
+    "2022": {
+     "n": 28,
+     "roi": 0.2955
+    },
+    "2023": {
+     "n": 28,
+     "roi": -0.1818
+    },
+    "2024": {
+     "n": 35,
+     "roi": 0.1455
+    },
+    "2025": {
+     "n": 36,
+     "roi": -0.0985
+    },
+    "2026": {
+     "n": 11,
+     "roi": 0.2149
+    }
+   },
+   "holdout_roi": 0.0582,
+   "max_abs_corr": 1.0,
+   "gates": [
+    {
+     "id": "G1",
+     "name": "Provenance",
+     "pass": true,
+     "detail": "All inputs pinned by URL + sha256 in provenance.json."
+    },
+    {
+     "id": "G2",
+     "name": "Pre-specified rule",
+     "pass": true,
+     "detail": "Round-number threshold fixed before evaluation; no parameter search."
+    },
+    {
+     "id": "G3",
+     "name": "Sample size",
+     "pass": true,
+     "detail": "n=738 graded bets (minimum 100)."
+    },
+    {
+     "id": "G4",
+     "name": "Holdout positive",
+     "pass": true,
+     "detail": "latest-window ROI=0.0582."
+    },
+    {
+     "id": "G5",
+     "name": "Significance",
+     "pass": false,
+     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
+    },
+    {
+     "id": "G6",
+     "name": "Stability",
+     "pass": false,
+     "detail": "9/22 seasons positive."
+    },
+    {
+     "id": "G7",
+     "name": "Drawdown",
+     "pass": false,
+     "detail": "max drawdown -39.09 units."
+    },
+    {
+     "id": "G8",
+     "name": "Diversification",
+     "pass": false,
+     "detail": "max |corr| with another strategy = 1.0."
+    }
+   ],
+   "window": "2005-2026"
+  },
+  {
+   "strategy": "S07 Home team with 3+ rest-day edge",
+   "status": "FAIL",
+   "gates_passed": 4,
+   "score_lower_ci_roi_pct": -12.67,
+   "n_graded": 505,
+   "wins": 253,
+   "losses": 252,
+   "pushes": 14,
+   "win_pct": 0.501,
+   "roi": -0.0436,
+   "roi_ci95": [
+    -0.1267,
+    0.0396
+   ],
+   "units": -22.0,
+   "p_value": 0.858,
+   "q_value": 0.9889,
+   "max_drawdown_units": -39.27,
+   "by_season": {
+    "2005": {
+     "n": 15,
+     "roi": 0.1455
+    },
+    "2006": {
+     "n": 21,
+     "roi": 0.0909
+    },
+    "2007": {
+     "n": 15,
+     "roi": 0.0182
+    },
+    "2008": {
+     "n": 22,
+     "roi": 0.2149
+    },
+    "2009": {
+     "n": 23,
+     "roi": -0.253
+    },
+    "2010": {
+     "n": 20,
+     "roi": 0.2409
+    },
+    "2011": {
+     "n": 17,
+     "roi": 0.0107
+    },
+    "2012": {
+     "n": 20,
+     "roi": -0.2364
+    },
+    "2013": {
+     "n": 30,
+     "roi": 0.0818
+    },
+    "2014": {
+     "n": 22,
+     "roi": -0.4793
+    },
+    "2015": {
+     "n": 19,
+     "roi": -0.0957
+    },
+    "2016": {
+     "n": 34,
+     "roi": 0.2353
+    },
+    "2017": {
+     "n": 21,
+     "roi": -0.3636
+    },
+    "2018": {
+     "n": 18,
+     "roi": -0.2576
+    },
+    "2019": {
+     "n": 28,
+     "roi": -0.1818
+    },
+    "2020": {
+     "n": 26,
+     "roi": -0.0455
+    },
+    "2021": {
+     "n": 27,
+     "roi": -0.0101
+    },
+    "2022": {
+     "n": 33,
+     "roi": 0.0992
+    },
+    "2023": {
+     "n": 25,
+     "roi": -0.0073
+    },
+    "2024": {
+     "n": 26,
+     "roi": -0.1923
+    },
+    "2025": {
+     "n": 27,
+     "roi": -0.2929
+    },
+    "2026": {
+     "n": 16,
+     "roi": 0.3125
+    }
+   },
+   "holdout_roi": 0.0098,
+   "max_abs_corr": 1.0,
+   "gates": [
+    {
+     "id": "G1",
+     "name": "Provenance",
+     "pass": true,
+     "detail": "All inputs pinned by URL + sha256 in provenance.json."
+    },
+    {
+     "id": "G2",
+     "name": "Pre-specified rule",
+     "pass": true,
+     "detail": "Round-number threshold fixed before evaluation; no parameter search."
+    },
+    {
+     "id": "G3",
+     "name": "Sample size",
+     "pass": true,
+     "detail": "n=505 graded bets (minimum 100)."
+    },
+    {
+     "id": "G4",
+     "name": "Holdout positive",
+     "pass": true,
+     "detail": "latest-window ROI=0.0098."
+    },
+    {
+     "id": "G5",
+     "name": "Significance",
+     "pass": false,
+     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
+    },
+    {
+     "id": "G6",
+     "name": "Stability",
+     "pass": false,
+     "detail": "10/22 seasons positive."
+    },
+    {
+     "id": "G7",
+     "name": "Drawdown",
+     "pass": false,
+     "detail": "max drawdown -39.27 units."
+    },
+    {
+     "id": "G8",
+     "name": "Diversification",
+     "pass": false,
+     "detail": "max |corr| with another strategy = 1.0."
+    }
+   ],
+   "window": "2005-2026"
+  },
+  {
+   "strategy": "S09 Home favourite of 10 or more",
+   "status": "FAIL",
+   "gates_passed": 4,
+   "score_lower_ci_roi_pct": -15.19,
+   "n_graded": 565,
+   "wins": 274,
+   "losses": 291,
+   "pushes": 17,
+   "win_pct": 0.485,
+   "roi": -0.0742,
+   "roi_ci95": [
+    -0.1519,
+    0.0035
+   ],
+   "units": -41.91,
+   "p_value": 0.9706,
+   "q_value": 0.9889,
+   "max_drawdown_units": -56.0,
+   "by_season": {
+    "2005": {
+     "n": 23,
+     "roi": -0.17
+    },
+    "2006": {
+     "n": 35,
+     "roi": -0.2909
+    },
+    "2007": {
+     "n": 34,
+     "roi": -0.0455
+    },
+    "2008": {
+     "n": 30,
+     "roi": -0.3636
+    },
+    "2009": {
+     "n": 40,
+     "roi": 0.0023
+    },
+    "2010": {
+     "n": 23,
+     "roi": -0.17
+    },
+    "2011": {
+     "n": 30,
+     "roi": 0.0818
+    },
+    "2012": {
+     "n": 27,
+     "roi": 0.0606
+    },
+    "2013": {
+     "n": 30,
+     "roi": -0.1091
+    },
+    "2014": {
+     "n": 20,
+     "roi": -0.0455
+    },
+    "2015": {
+     "n": 23,
+     "roi": -0.17
+    },
+    "2016": {
+     "n": 14,
+     "roi": 0.2273
+    },
+    "2017": {
+     "n": 28,
+     "roi": -0.0455
+    },
+    "2018": {
+     "n": 29,
+     "roi": -0.2759
+    },
+    "2019": {
+     "n": 29,
+     "roi": -0.21
+    },
+    "2020": {
+     "n": 21,
+     "roi": -0.2727
+    },
+    "2021": {
+     "n": 34,
+     "roi": 0.2914
+    },
+    "2022": {
+     "n": 25,
+     "roi": -0.2364
+    },
+    "2023": {
+     "n": 20,
+     "roi": -0.1409
+    },
+    "2024": {
+     "n": 16,
+     "roi": 0.1932
+    },
+    "2025": {
+     "n": 27,
+     "roi": 0.3434
+    },
+    "2026": {
+     "n": 7,
+     "roi": -0.4545
+    }
+   },
+   "holdout_roi": 0.3434,
+   "max_abs_corr": 1.0,
+   "gates": [
+    {
+     "id": "G1",
+     "name": "Provenance",
+     "pass": true,
+     "detail": "All inputs pinned by URL + sha256 in provenance.json."
+    },
+    {
+     "id": "G2",
+     "name": "Pre-specified rule",
+     "pass": true,
+     "detail": "Round-number threshold fixed before evaluation; no parameter search."
+    },
+    {
+     "id": "G3",
+     "name": "Sample size",
+     "pass": true,
+     "detail": "n=565 graded bets (minimum 100)."
+    },
+    {
+     "id": "G4",
+     "name": "Holdout positive",
+     "pass": true,
+     "detail": "latest-window ROI=0.3434."
+    },
+    {
+     "id": "G5",
+     "name": "Significance",
+     "pass": false,
+     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
+    },
+    {
+     "id": "G6",
+     "name": "Stability",
+     "pass": false,
+     "detail": "7/22 seasons positive."
+    },
+    {
+     "id": "G7",
+     "name": "Drawdown",
+     "pass": false,
+     "detail": "max drawdown -56.0 units."
+    },
+    {
+     "id": "G8",
+     "name": "Diversification",
+     "pass": false,
+     "detail": "max |corr| with another strategy = 1.0."
+    }
+   ],
+   "window": "2005-2026"
+  },
+  {
+   "strategy": "S06 Fade divisional road favourite of 6.5+",
+   "status": "WATCH",
+   "gates_passed": 5,
+   "score_lower_ci_roi_pct": -17.92,
+   "n_graded": 207,
+   "wins": 103,
+   "losses": 104,
+   "pushes": 3,
+   "win_pct": 0.4976,
+   "roi": -0.0501,
+   "roi_ci95": [
+    -0.1792,
+    0.0791
+   ],
+   "units": -10.36,
+   "p_value": 0.7954,
+   "q_value": 0.9889,
+   "max_drawdown_units": -19.91,
+   "by_season": {
+    "2005": {
+     "n": 7,
+     "roi": -0.7273
+    },
+    "2006": {
+     "n": 6,
+     "roi": 0.5909
+    },
+    "2007": {
+     "n": 7,
+     "roi": 0.0909
+    },
+    "2008": {
+     "n": 6,
+     "roi": -0.0455
+    },
+    "2009": {
+     "n": 14,
+     "roi": -0.3182
+    },
+    "2010": {
+     "n": 6,
+     "roi": -0.0455
+    },
+    "2011": {
+     "n": 11,
+     "roi": 0.562
+    },
+    "2012": {
+     "n": 8,
+     "roi": -0.2841
+    },
+    "2013": {
+     "n": 10,
+     "roi": -0.2364
+    },
+    "2014": {
+     "n": 12,
+     "roi": 0.2727
+    },
+    "2015": {
+     "n": 7,
+     "roi": 0.0909
+    },
+    "2016": {
+     "n": 5,
+     "roi": -0.2364
+    },
+    "2017": {
+     "n": 11,
+     "roi": -0.1322
+    },
+    "2018": {
+     "n": 11,
+     "roi": -0.4793
+    },
+    "2019": {
+     "n": 14,
+     "roi": -0.5909
+    },
+    "2020": {
+     "n": 17,
+     "roi": 0.2353
+    },
+    "2021": {
+     "n": 13,
+     "roi": -0.2657
+    },
+    "2022": {
+     "n": 10,
+     "roi": 0.1455
+    },
+    "2023": {
+     "n": 8,
+     "roi": -0.2841
+    },
+    "2024": {
+     "n": 12,
+     "roi": 0.2727
+    },
+    "2025": {
+     "n": 10,
+     "roi": 0.3364
+    },
+    "2026": {
+     "n": 2,
+     "roi": -0.0455
+    }
+   },
+   "holdout_roi": 0.3364,
+   "max_abs_corr": 1.0,
+   "gates": [
+    {
+     "id": "G1",
+     "name": "Provenance",
+     "pass": true,
+     "detail": "All inputs pinned by URL + sha256 in provenance.json."
+    },
+    {
+     "id": "G2",
+     "name": "Pre-specified rule",
+     "pass": true,
+     "detail": "Round-number threshold fixed before evaluation; no parameter search."
+    },
+    {
+     "id": "G3",
+     "name": "Sample size",
+     "pass": true,
+     "detail": "n=207 graded bets (minimum 100)."
+    },
+    {
+     "id": "G4",
+     "name": "Holdout positive",
+     "pass": true,
+     "detail": "latest-window ROI=0.3364."
+    },
+    {
+     "id": "G5",
+     "name": "Significance",
+     "pass": false,
+     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
+    },
+    {
+     "id": "G6",
+     "name": "Stability",
+     "pass": false,
+     "detail": "9/22 seasons positive."
+    },
+    {
+     "id": "G7",
+     "name": "Drawdown",
+     "pass": true,
+     "detail": "max drawdown -19.91 units."
+    },
+    {
+     "id": "G8",
+     "name": "Diversification",
+     "pass": false,
+     "detail": "max |corr| with another strategy = 1.0."
+    }
+   ],
+   "window": "2005-2026"
+  },
+  {
+   "strategy": "S08 Home team facing opponent off a bye",
+   "status": "FAIL",
+   "gates_passed": 3,
+   "score_lower_ci_roi_pct": -21.52,
+   "n_graded": 343,
+   "wins": 159,
+   "losses": 184,
+   "pushes": 8,
+   "win_pct": 0.4636,
+   "roi": -0.115,
+   "roi_ci95": [
+    -0.2152,
+    -0.0148
+   ],
+   "units": -39.45,
+   "p_value": 0.9889,
+   "q_value": 0.9889,
+   "max_drawdown_units": -46.18,
+   "by_season": {
+    "2005": {
+     "n": 18,
+     "roi": -0.1515
+    },
+    "2006": {
+     "n": 16,
+     "roi": -0.0455
+    },
+    "2007": {
+     "n": 18,
+     "roi": -0.2576
+    },
+    "2008": {
+     "n": 14,
+     "roi": -0.3182
+    },
+    "2009": {
+     "n": 10,
+     "roi": 0.1455
+    },
+    "2010": {
+     "n": 14,
+     "roi": -0.0455
+    },
+    "2011": {
+     "n": 19,
+     "roi": -0.0957
+    },
+    "2012": {
+     "n": 18,
+     "roi": -0.3636
+    },
+    "2013": {
+     "n": 17,
+     "roi": -0.1016
+    },
+    "2014": {
+     "n": 18,
+     "roi": 0.1667
+    },
+    "2015": {
+     "n": 20,
+     "roi": -0.3318
+    },
+    "2016": {
+     "n": 11,
+     "roi": -0.1322
+    },
+    "2017": {
+     "n": 16,
+     "roi": -0.5227
+    },
+    "2018": {
+     "n": 21,
+     "roi": -0.3636
+    },
+    "2019": {
+     "n": 18,
+     "roi": 0.1667
+    },
+    "2020": {
+     "n": 16,
+     "roi": 0.0739
+    },
+    "2021": {
+     "n": 16,
+     "roi": 0.0739
+    },
+    "2022": {
+     "n": 12,
+     "roi": 0.1136
+    },
+    "2023": {
+     "n": 13,
+     "roi": -0.1189
+    },
+    "2024": {
+     "n": 18,
+     "roi": 0.1667
+    },
+    "2025": {
+     "n": 14,
+     "roi": -0.0455
+    },
+    "2026": {
+     "n": 6,
+     "roi": -0.6818
+    }
+   },
+   "holdout_roi": -0.0455,
+   "max_abs_corr": 1.0,
+   "gates": [
+    {
+     "id": "G1",
+     "name": "Provenance",
+     "pass": true,
+     "detail": "All inputs pinned by URL + sha256 in provenance.json."
+    },
+    {
+     "id": "G2",
+     "name": "Pre-specified rule",
+     "pass": true,
+     "detail": "Round-number threshold fixed before evaluation; no parameter search."
+    },
+    {
+     "id": "G3",
+     "name": "Sample size",
+     "pass": true,
+     "detail": "n=343 graded bets (minimum 100)."
+    },
+    {
+     "id": "G4",
+     "name": "Holdout positive",
+     "pass": false,
+     "detail": "latest-window ROI=-0.0455."
+    },
+    {
+     "id": "G5",
+     "name": "Significance",
+     "pass": false,
+     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
+    },
+    {
+     "id": "G6",
+     "name": "Stability",
+     "pass": false,
+     "detail": "7/22 seasons positive."
+    },
+    {
+     "id": "G7",
+     "name": "Drawdown",
+     "pass": false,
+     "detail": "max drawdown -46.18 units."
+    },
+    {
+     "id": "G8",
+     "name": "Diversification",
+     "pass": false,
+     "detail": "max |corr| with another strategy = 1.0."
+    }
+   ],
+   "window": "2005-2026"
+  },
+  {
+   "strategy": "S02 Own-line vs close, edge >= 3.0",
+   "status": "FAIL",
+   "gates_passed": 4,
+   "score_lower_ci_roi_pct": -22.6,
+   "n_graded": 148,
+   "wins": 72,
+   "losses": 76,
+   "pushes": 1,
+   "win_pct": 0.4865,
+   "roi": -0.0713,
+   "roi_ci95": [
+    -0.226,
+    0.0835
+   ],
+   "units": -10.55,
+   "p_value": 0.8393,
+   "q_value": 0.9889,
+   "max_drawdown_units": -15.36,
+   "by_season": {
+    "2025": {
+     "n": 105,
+     "roi": -0.0727
+    },
+    "2026": {
+     "n": 43,
+     "roi": -0.0677
+    }
+   },
+   "holdout_roi": -0.0702,
+   "max_abs_corr": 1.0,
+   "gates": [
+    {
+     "id": "G1",
+     "name": "Provenance",
+     "pass": true,
+     "detail": "All inputs pinned by URL + sha256 in provenance.json."
+    },
+    {
+     "id": "G2",
+     "name": "Pre-specified rule",
+     "pass": true,
+     "detail": "Round-number threshold fixed before evaluation; no parameter search."
+    },
+    {
+     "id": "G3",
+     "name": "Sample size",
+     "pass": true,
+     "detail": "n=148 graded bets (minimum 100)."
+    },
+    {
+     "id": "G4",
+     "name": "Holdout positive",
+     "pass": false,
+     "detail": "latest-window ROI=-0.0702."
+    },
+    {
+     "id": "G5",
+     "name": "Significance",
+     "pass": false,
+     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
+    },
+    {
+     "id": "G6",
+     "name": "Stability",
+     "pass": false,
+     "detail": "0/2 seasons positive."
+    },
+    {
+     "id": "G7",
+     "name": "Drawdown",
+     "pass": true,
+     "detail": "max drawdown -15.36 units."
+    },
+    {
+     "id": "G8",
+     "name": "Diversification",
+     "pass": false,
+     "detail": "max |corr| with another strategy = 1.0."
+    }
+   ],
+   "window": "2025-2026 walk-forward"
+  },
+  {
+   "strategy": "S05 Underdog on short rest (<=4 days)",
+   "status": "FAIL",
+   "gates_passed": 4,
+   "score_lower_ci_roi_pct": -22.94,
+   "n_graded": 275,
+   "wins": 127,
+   "losses": 148,
+   "pushes": 7,
+   "win_pct": 0.4618,
+   "roi": -0.1183,
+   "roi_ci95": [
+    -0.2294,
+    -0.0073
+   ],
+   "units": -32.55,
+   "p_value": 0.9829,
+   "q_value": 0.9889,
+   "max_drawdown_units": -40.09,
+   "by_season": {
+    "2005": {
+     "n": 2,
+     "roi": -0.0455
+    },
+    "2006": {
+     "n": 7,
+     "roi": -0.4545
+    },
+    "2007": {
+     "n": 6,
+     "roi": -0.6818
+    },
+    "2008": {
+     "n": 8,
+     "roi": -0.5227
+    },
+    "2009": {
+     "n": 8,
+     "roi": -0.2841
+    },
+    "2010": {
+     "n": 9,
+     "roi": -0.3636
+    },
+    "2011": {
+     "n": 9,
+     "roi": 0.2727
+    },
+    "2012": {
+     "n": 16,
+     "roi": -0.0455
+    },
+    "2013": {
+     "n": 16,
+     "roi": 0.1932
+    },
+    "2014": {
+     "n": 16,
+     "roi": -0.1648
+    },
+    "2015": {
+     "n": 15,
+     "roi": -0.1091
+    },
+    "2016": {
+     "n": 16,
+     "roi": -0.5227
+    },
+    "2017": {
+     "n": 14,
+     "roi": -0.3182
+    },
+    "2018": {
+     "n": 14,
+     "roi": -0.5909
+    },
+    "2019": {
+     "n": 15,
+     "roi": 0.2727
+    },
+    "2020": {
+     "n": 13,
+     "roi": 0.1748
+    },
+    "2021": {
+     "n": 15,
+     "roi": -0.1091
+    },
+    "2022": {
+     "n": 16,
+     "roi": 0.1932
+    },
+    "2023": {
+     "n": 15,
+     "roi": -0.3636
+    },
+    "2024": {
+     "n": 19,
+     "roi": -0.1962
+    },
+    "2025": {
+     "n": 18,
+     "roi": 0.3788
+    },
+    "2026": {
+     "n": 8,
+     "roi": -0.0455
+    }
+   },
+   "holdout_roi": 0.3788,
+   "max_abs_corr": 1.0,
+   "gates": [
+    {
+     "id": "G1",
+     "name": "Provenance",
+     "pass": true,
+     "detail": "All inputs pinned by URL + sha256 in provenance.json."
+    },
+    {
+     "id": "G2",
+     "name": "Pre-specified rule",
+     "pass": true,
+     "detail": "Round-number threshold fixed before evaluation; no parameter search."
+    },
+    {
+     "id": "G3",
+     "name": "Sample size",
+     "pass": true,
+     "detail": "n=275 graded bets (minimum 100)."
+    },
+    {
+     "id": "G4",
+     "name": "Holdout positive",
+     "pass": true,
+     "detail": "latest-window ROI=0.3788."
+    },
+    {
+     "id": "G5",
+     "name": "Significance",
+     "pass": false,
+     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
+    },
+    {
+     "id": "G6",
+     "name": "Stability",
+     "pass": false,
+     "detail": "6/22 seasons positive."
+    },
+    {
+     "id": "G7",
+     "name": "Drawdown",
+     "pass": false,
+     "detail": "max drawdown -40.09 units."
+    },
+    {
+     "id": "G8",
+     "name": "Diversification",
+     "pass": false,
+     "detail": "max |corr| with another strategy = 1.0."
+    }
+   ],
+   "window": "2005-2026"
+  },
+  {
+   "strategy": "S01 Own-line vs close, edge >= 2.0",
+   "status": "FAIL",
+   "gates_passed": 3,
+   "score_lower_ci_roi_pct": -25.26,
+   "n_graded": 212,
+   "wins": 97,
+   "losses": 115,
+   "pushes": 2,
+   "win_pct": 0.4575,
+   "roi": -0.1265,
+   "roi_ci95": [
+    -0.2526,
+    -0.0004
+   ],
+   "units": -26.82,
+   "p_value": 0.9772,
+   "q_value": 0.9889,
+   "max_drawdown_units": -27.73,
+   "by_season": {
+    "2025": {
+     "n": 140,
+     "roi": -0.1
+    },
+    "2026": {
+     "n": 72,
+     "roi": -0.178
+    }
+   },
+   "holdout_roi": -0.139,
+   "max_abs_corr": 1.0,
+   "gates": [
+    {
+     "id": "G1",
+     "name": "Provenance",
+     "pass": true,
+     "detail": "All inputs pinned by URL + sha256 in provenance.json."
+    },
+    {
+     "id": "G2",
+     "name": "Pre-specified rule",
+     "pass": true,
+     "detail": "Round-number threshold fixed before evaluation; no parameter search."
+    },
+    {
+     "id": "G3",
+     "name": "Sample size",
+     "pass": true,
+     "detail": "n=212 graded bets (minimum 100)."
+    },
+    {
+     "id": "G4",
+     "name": "Holdout positive",
+     "pass": false,
+     "detail": "latest-window ROI=-0.139."
+    },
+    {
+     "id": "G5",
+     "name": "Significance",
+     "pass": false,
+     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
+    },
+    {
+     "id": "G6",
+     "name": "Stability",
+     "pass": false,
+     "detail": "0/2 seasons positive."
+    },
+    {
+     "id": "G7",
+     "name": "Drawdown",
+     "pass": false,
+     "detail": "max drawdown -27.73 units."
+    },
+    {
+     "id": "G8",
+     "name": "Diversification",
+     "pass": false,
+     "detail": "max |corr| with another strategy = 1.0."
+    }
+   ],
+   "window": "2025-2026 walk-forward"
+  },
+  {
+   "strategy": "S03 Own-total vs close, edge >= 3",
+   "status": "FAIL",
+   "gates_passed": 3,
+   "score_lower_ci_roi_pct": -27.96,
+   "n_graded": 159,
+   "wins": 72,
+   "losses": 87,
+   "pushes": 0,
+   "win_pct": 0.4528,
+   "roi": -0.1355,
+   "roi_ci95": [
+    -0.2796,
+    0.0086
+   ],
+   "units": -21.55,
+   "p_value": 0.9693,
+   "q_value": 0.9889,
+   "max_drawdown_units": -36.27,
+   "by_season": {
+    "2025": {
+     "n": 100,
+     "roi": -0.0455
+    },
+    "2026": {
+     "n": 59,
+     "roi": -0.2881
+    }
+   },
+   "holdout_roi": -0.1668,
+   "max_abs_corr": 1.0,
+   "gates": [
+    {
+     "id": "G1",
+     "name": "Provenance",
+     "pass": true,
+     "detail": "All inputs pinned by URL + sha256 in provenance.json."
+    },
+    {
+     "id": "G2",
+     "name": "Pre-specified rule",
+     "pass": true,
+     "detail": "Round-number threshold fixed before evaluation; no parameter search."
+    },
+    {
+     "id": "G3",
+     "name": "Sample size",
+     "pass": true,
+     "detail": "n=159 graded bets (minimum 100)."
+    },
+    {
+     "id": "G4",
+     "name": "Holdout positive",
+     "pass": false,
+     "detail": "latest-window ROI=-0.1668."
+    },
+    {
+     "id": "G5",
+     "name": "Significance",
+     "pass": false,
+     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
+    },
+    {
+     "id": "G6",
+     "name": "Stability",
+     "pass": false,
+     "detail": "0/2 seasons positive."
+    },
+    {
+     "id": "G7",
+     "name": "Drawdown",
+     "pass": false,
+     "detail": "max drawdown -36.27 units."
+    },
+    {
+     "id": "G8",
+     "name": "Diversification",
+     "pass": false,
+     "detail": "max |corr| with another strategy = 1.0."
+    }
+   ],
+   "window": "2025-2026 walk-forward"
+  },
+  {
+   "strategy": "S12 Start the team whose QB is ruled Out/Doubtful",
+   "status": "FAIL",
+   "gates_passed": 3,
+   "score_lower_ci_roi_pct": null,
+   "n_graded": 73,
+   "wins": 38,
+   "losses": 35,
+   "pushes": 1,
+   "win_pct": 0.5205,
+   "roi": -0.0062,
+   "roi_ci95": [
+    -0.2154,
+    0.203
+   ],
+   "units": -0.45,
+   "p_value": 0.5693,
+   "q_value": 0.9889,
+   "max_drawdown_units": -5.73,
+   "by_season": {
+    "2025": {
+     "n": 51,
+     "roi": 0.0107
+    },
+    "2026": {
+     "n": 22,
+     "roi": -0.0455
+    }
+   },
+   "holdout_roi": -0.0174,
+   "max_abs_corr": 0.902,
+   "gates": [
+    {
+     "id": "G1",
+     "name": "Provenance",
+     "pass": true,
+     "detail": "All inputs pinned by URL + sha256 in provenance.json."
+    },
+    {
+     "id": "G2",
+     "name": "Pre-specified rule",
+     "pass": true,
+     "detail": "Round-number threshold fixed before evaluation; no parameter search."
+    },
+    {
+     "id": "G3",
+     "name": "Sample size",
+     "pass": false,
+     "detail": "n=73 graded bets (minimum 100)."
+    },
+    {
+     "id": "G4",
+     "name": "Holdout positive",
+     "pass": false,
+     "detail": "latest-window ROI=-0.0174."
+    },
+    {
+     "id": "G5",
+     "name": "Significance",
+     "pass": false,
+     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
+    },
+    {
+     "id": "G6",
+     "name": "Stability",
+     "pass": false,
+     "detail": "1/2 seasons positive."
+    },
+    {
+     "id": "G7",
+     "name": "Drawdown",
+     "pass": true,
+     "detail": "max drawdown -5.73 units."
+    },
+    {
+     "id": "G8",
+     "name": "Diversification",
+     "pass": false,
+     "detail": "max |corr| with another strategy = 0.902."
+    }
+   ],
+   "window": "2025-2026 walk-forward"
+  }
+ ],
+ "pairwise_correlation": {
+  "S04 Divisional underdog +6.5 or more | S05 Underdog on short rest (<=4 days)": {
+   "n_overlap": 55,
+   "corr": 1.0
+  },
+  "S04 Divisional underdog +6.5 or more | S06 Fade divisional road favourite of 6.5+": {
+   "n_overlap": 207,
+   "corr": 1.0
+  },
+  "S04 Divisional underdog +6.5 or more | S07 Home team with 3+ rest-day edge": {
+   "n_overlap": 69,
+   "corr": -0.572
+  },
+  "S04 Divisional underdog +6.5 or more | S08 Home team facing opponent off a bye": {
+   "n_overlap": 34,
+   "corr": -0.46
+  },
+  "S04 Divisional underdog +6.5 or more | S09 Home favourite of 10 or more": {
+   "n_overlap": 228,
+   "corr": -1.0
+  },
+  "S04 Divisional underdog +6.5 or more | S10 Over when closing total is 41 or lower": {
+   "n_overlap": 182,
+   "corr": 0.112
+  },
+  "S04 Divisional underdog +6.5 or more | S11 Under in divisional games with total 47+": {
+   "n_overlap": 205,
+   "corr": 0.037
+  },
+  "S04 Divisional underdog +6.5 or more | S01 Own-line vs close, edge >= 2.0": {
+   "n_overlap": 31,
+   "corr": 0.808
+  },
+  "S05 Underdog on short rest (<=4 days) | S09 Home favourite of 10 or more": {
+   "n_overlap": 31,
+   "corr": -1.0
+  },
+  "S05 Underdog on short rest (<=4 days) | S10 Over when closing total is 41 or lower": {
+   "n_overlap": 64,
+   "corr": -0.031
+  },
+  "S05 Underdog on short rest (<=4 days) | S11 Under in divisional games with total 47+": {
+   "n_overlap": 46,
+   "corr": -0.081
+  },
+  "S06 Fade divisional road favourite of 6.5+ | S10 Over when closing total is 41 or lower": {
+   "n_overlap": 42,
+   "corr": -0.005
+  },
+  "S06 Fade divisional road favourite of 6.5+ | S11 Under in divisional games with total 47+": {
+   "n_overlap": 62,
+   "corr": -0.066
+  },
+  "S07 Home team with 3+ rest-day edge | S09 Home favourite of 10 or more": {
+   "n_overlap": 70,
+   "corr": 1.0
+  },
+  "S07 Home team with 3+ rest-day edge | S10 Over when closing total is 41 or lower": {
+   "n_overlap": 92,
+   "corr": -0.085
+  },
+  "S07 Home team with 3+ rest-day edge | S11 Under in divisional games with total 47+": {
+   "n_overlap": 48,
+   "corr": 0.076
+  },
+  "S08 Home team facing opponent off a bye | S09 Home favourite of 10 or more": {
+   "n_overlap": 31,
+   "corr": 1.0
+  },
+  "S08 Home team facing opponent off a bye | S10 Over when closing total is 41 or lower": {
+   "n_overlap": 87,
+   "corr": -0.086
+  },
+  "S08 Home team facing opponent off a bye | S11 Under in divisional games with total 47+": {
+   "n_overlap": 36,
+   "corr": -0.169
+  },
+  "S09 Home favourite of 10 or more | S10 Over when closing total is 41 or lower": {
+   "n_overlap": 137,
+   "corr": 0.011
+  },
+  "S09 Home favourite of 10 or more | S11 Under in divisional games with total 47+": {
+   "n_overlap": 63,
+   "corr": -0.114
+  },
+  "S10 Over when closing total is 41 or lower | S03 Own-total vs close, edge >= 3": {
+   "n_overlap": 53,
+   "corr": 1.0
+  },
+  "S01 Own-line vs close, edge >= 2.0 | S02 Own-line vs close, edge >= 3.0": {
+   "n_overlap": 148,
+   "corr": 1.0
+  },
+  "S01 Own-line vs close, edge >= 2.0 | S03 Own-total vs close, edge >= 3": {
+   "n_overlap": 82,
+   "corr": 0.175
+  },
+  "S01 Own-line vs close, edge >= 2.0 | S12 Start the team whose QB is ruled Out/Doubtful": {
+   "n_overlap": 39,
+   "corr": 0.902
+  },
+  "S02 Own-line vs close, edge >= 3.0 | S03 Own-total vs close, edge >= 3": {
+   "n_overlap": 59,
+   "corr": 0.223
+  },
+  "S02 Own-line vs close, edge >= 3.0 | S12 Start the team whose QB is ruled Out/Doubtful": {
+   "n_overlap": 32,
+   "corr": 0.882
+  },
+  "S03 Own-total vs close, edge >= 3 | S12 Start the team whose QB is ruled Out/Doubtful": {
+   "n_overlap": 36,
+   "corr": 0.108
+  }
+ },
+ "parlay": {
+  "n_games": 5591,
+  "corr_margin_vs_total": 0.017,
+  "phi_home_cover_vs_over": 0.0088,
+  "note": "Same-game legs are not independent. Use the phi value to adjust a 2-leg same-game parlay: P = p1p2 + rho*sqrt(p1(1-p1)p2(1-p2))."
+ },
+ "parlay_payouts": {
+  "2": {
+   "decimal_payout": 3.645,
+   "breakeven_prob_independent": 0.2744,
+   "per_leg_win_prob_needed_at_50pct_legs": null,
+   "note": "payout = 1.909^legs at -110 per leg"
+  },
+  "3": {
+   "decimal_payout": 6.958,
+   "breakeven_prob_independent": 0.1437,
+   "per_leg_win_prob_needed_at_50pct_legs": null,
+   "note": "payout = 1.909^legs at -110 per leg"
+  },
+  "4": {
+   "decimal_payout": 13.283,
+   "breakeven_prob_independent": 0.0753,
+   "per_leg_win_prob_needed_at_50pct_legs": null,
+   "note": "payout = 1.909^legs at -110 per leg"
+  },
+  "5": {
+   "decimal_payout": 25.359,
+   "breakeven_prob_independent": 0.0394,
+   "per_leg_win_prob_needed_at_50pct_legs": null,
+   "note": "payout = 1.909^legs at -110 per leg"
+  }
+ },
+ "gate_definitions": [
+  {
+   "id": "G1",
+   "rule": "Every input file pinned by URL and sha256."
+  },
+  {
+   "id": "G2",
+   "rule": "Rule fixed before evaluation; no threshold search."
+  },
+  {
+   "id": "G3",
+   "rule": "At least 100 graded bets."
+  },
+  {
+   "id": "G4",
+   "rule": "Positive ROI across the two most recent seasons."
+  },
+  {
+   "id": "G5",
+   "rule": "Benjamini-Hochberg q < 0.10 against break-even win rate."
+  },
+  {
+   "id": "G6",
+   "rule": "At least 60% of tested seasons positive."
+  },
+  {
+   "id": "G7",
+   "rule": "Max drawdown no worse than -25 units."
+  },
+  {
+   "id": "G8",
+   "rule": "|correlation| with any other strategy below 0.7."
+  }
+ ],
+ "rewards": {
+  "model": "Points are awarded for statistically defensible performance, not raw ROI: 100 x max(0, lower 95% ROI bound) + 20 x seasons positive + 10 x gates passed. Strategies failing G3 (n<100) score zero. No cash, no prizes: this is a paper competition. Legal review is required before any real reward.",
+  "statuses": {
+   "PASS": "all gates passed",
+   "WATCH": "5-7 gates passed",
+   "FAIL": "fewer than 5 gates passed"
+  }
+ },
+ "bets": {
+  "S04 Divisional underdog +6.5 or more": [
+   {
+    "game_id": "2025_07_LV_KC",
+    "season": 2025,
+    "week": 7,
+    "team": "LV",
+    "side": "away",
+    "line": -13.5,
+    "result": "loss",
+    "market": 13.5
+   },
+   {
+    "game_id": "2025_08_NYG_PHI",
+    "season": 2025,
+    "week": 8,
+    "team": "NYG",
+    "side": "away",
+    "line": -7.0,
+    "result": "loss",
+    "market": 7.0
+   },
+   {
+    "game_id": "2025_08_TEN_IND",
+    "season": 2025,
+    "week": 8,
+    "team": "TEN",
+    "side": "away",
+    "line": -15.5,
+    "result": "loss",
+    "market": 15.5
+   },
+   {
+    "game_id": "2025_09_MIN_DET",
+    "season": 2025,
+    "week": 9,
+    "team": "MIN",
+    "side": "away",
+    "line": -9.5,
+    "result": "win",
+    "market": 9.5
+   },
+   {
+    "game_id": "2025_10_LV_DEN",
+    "season": 2025,
+    "week": 10,
+    "team": "LV",
+    "side": "away",
+    "line": -9.5,
+    "result": "win",
+    "market": 9.5
+   },
+   {
+    "game_id": "2025_10_BUF_MIA",
+    "season": 2025,
+    "week": 10,
+    "team": "MIA",
+    "side": "home",
+    "line": -8.5,
+    "result": "win",
+    "market": -8.5
+   },
+   {
+    "game_id": "2025_10_ARI_SEA",
+    "season": 2025,
+    "week": 10,
+    "team": "ARI",
+    "side": "away",
+    "line": -7.0,
+    "result": "loss",
+    "market": 7.0
+   },
+   {
+    "game_id": "2025_11_NYJ_NE",
+    "season": 2025,
+    "week": 11,
+    "team": "NYJ",
+    "side": "away",
+    "line": -12.5,
+    "result": "loss",
+    "market": 12.5
+   },
+   {
+    "game_id": "2025_11_BAL_CLE",
+    "season": 2025,
+    "week": 11,
+    "team": "CLE",
+    "side": "home",
+    "line": -7.5,
+    "result": "win",
+    "market": -7.5
+   },
+   {
+    "game_id": "2025_12_MIN_GB",
+    "season": 2025,
+    "week": 12,
+    "team": "MIN",
+    "side": "away",
+    "line": -6.5,
+    "result": "loss",
+    "market": 6.5
+   },
+   {
+    "game_id": "2025_13_CIN_BAL",
+    "season": 2025,
+    "week": 13,
+    "team": "CIN",
+    "side": "away",
+    "line": -7.0,
+    "result": "win",
+    "market": 7.0
+   },
+   {
+    "game_id": "2025_13_LV_LAC",
+    "season": 2025,
+    "week": 13,
+    "team": "LV",
+    "side": "away",
+    "line": -10.0,
+    "result": "loss",
+    "market": 10.0
+   },
+   {
+    "game_id": "2025_14_NO_TB",
+    "season": 2025,
+    "week": 14,
+    "team": "NO",
+    "side": "away",
+    "line": -7.5,
+    "result": "win",
+    "market": 7.5
+   },
+   {
+    "game_id": "2025_14_DEN_LV",
+    "season": 2025,
+    "week": 14,
+    "team": "LV",
+    "side": "home",
+    "line": -8.5,
+    "result": "win",
+    "market": -8.5
+   },
+   {
+    "game_id": "2025_14_LA_ARI",
+    "season": 2025,
+    "week": 14,
+    "team": "ARI",
+    "side": "home",
+    "line": -9.5,
+    "result": "loss",
+    "market": -9.5
+   },
+   {
+    "game_id": "2025_14_CHI_GB",
+    "season": 2025,
+    "week": 14,
+    "team": "CHI",
+    "side": "away",
+    "line": -6.5,
+    "result": "loss",
+    "market": 6.5
+   },
+   {
+    "game_id": "2025_16_PHI_WAS",
+    "season": 2025,
+    "week": 16,
+    "team": "WAS",
+    "side": "home",
+    "line": -7.0,
+    "result": "loss",
+    "market": -7.0
+   },
+   {
+    "game_id": "2025_17_DAL_WAS",
+    "season": 2025,
+    "week": 17,
+    "team": "WAS",
+    "side": "home",
+    "line": -8.5,
+    "result": "win",
+    "market": -8.5
+   },
+   {
+    "game_id": "2025_17_DET_MIN",
+    "season": 2025,
+    "week": 17,
+    "team": "MIN",
+    "side": "home",
+    "line": -7.0,
+    "result": "win",
+    "market": -7.0
+   },
+   {
+    "game_id": "2025_17_DEN_KC",
+    "season": 2025,
+    "week": 17,
+    "team": "KC",
+    "side": "home",
+    "line": -13.5,
+    "result": "win",
+    "market": -13.5
+   },
+   {
+    "game_id": "2025_17_NE_NYJ",
+    "season": 2025,
+    "week": 17,
+    "team": "NYJ",
+    "side": "home",
+    "line": -12.5,
+    "result": "loss",
+    "market": -12.5
+   },
+   {
+    "game_id": "2025_18_CLE_CIN",
+    "season": 2025,
+    "week": 18,
+    "team": "CLE",
+    "side": "away",
+    "line": -9.5,
+    "result": "win",
+    "market": 9.5
+   },
+   {
+    "game_id": "2025_18_IND_HOU",
+    "season": 2025,
+    "week": 18,
+    "team": "IND",
+    "side": "away",
+    "line": -9.5,
+    "result": "win",
+    "market": 9.5
+   },
+   {
+    "game_id": "2025_18_TEN_JAX",
+    "season": 2025,
+    "week": 18,
+    "team": "TEN",
+    "side": "away",
+    "line": -12.5,
+    "result": "loss",
+    "market": 12.5
+   },
+   {
+    "game_id": "2025_18_GB_MIN",
+    "season": 2025,
+    "week": 18,
+    "team": "GB",
+    "side": "away",
+    "line": -12.5,
+    "result": "loss",
+    "market": 12.5
+   },
+   {
+    "game_id": "2025_18_NYJ_BUF",
+    "season": 2025,
+    "week": 18,
+    "team": "NYJ",
+    "side": "away",
+    "line": -12.5,
+    "result": "loss",
+    "market": 12.5
+   },
+   {
+    "game_id": "2025_18_LAC_DEN",
+    "season": 2025,
+    "week": 18,
+    "team": "LAC",
+    "side": "away",
+    "line": -14.5,
+    "result": "loss",
+    "market": 14.5
+   },
+   {
+    "game_id": "2025_18_ARI_LA",
+    "season": 2025,
+    "week": 18,
+    "team": "ARI",
+    "side": "away",
+    "line": -14.5,
+    "result": "loss",
+    "market": 14.5
+   },
+   {
+    "game_id": "2025_18_MIA_NE",
+    "season": 2025,
+    "week": 18,
+    "team": "MIA",
+    "side": "away",
+    "line": -14.0,
+    "result": "loss",
+    "market": 14.0
+   },
+   {
+    "game_id": "2026_02_LV_LAC",
+    "season": 2026,
+    "week": 2,
+    "team": "LV",
+    "side": "away",
+    "line": -6.5,
+    "result": "win",
+    "market": 6.5
+   },
+   {
+    "game_id": "2026_03_ARI_SF",
+    "season": 2026,
+    "week": 3,
+    "team": "ARI",
+    "side": "away",
+    "line": -7.5,
+    "result": "win",
+    "market": 7.5
+   },
+   {
+    "game_id": "2026_04_NE_BUF",
+    "season": 2026,
+    "week": 4,
+    "team": "NE",
+    "side": "away",
+    "line": -7.0,
+    "result": "win",
+    "market": 7.0
+   },
+   {
+    "game_id": "2026_05_HOU_TEN",
+    "season": 2026,
+    "week": 5,
+    "team": "TEN",
+    "side": "home",
+    "line": -6.5,
+    "result": "loss",
+    "market": -6.5
+   },
+   {
+    "game_id": "2026_06_TEN_IND",
+    "season": 2026,
+    "week": 6,
+    "team": "TEN",
+    "side": "away",
+    "line": -6.5,
+    "result": "win",
+    "market": 6.5
+   },
+   {
+    "game_id": "2026_06_NYJ_NE",
+    "season": 2026,
+    "week": 6,
+    "team": "NYJ",
+    "side": "away",
+    "line": -7.5,
+    "result": "win",
+    "market": 7.5
+   },
+   {
+    "game_id": "2026_06_ARI_LA",
+    "season": 2026,
+    "week": 6,
+    "team": "ARI",
+    "side": "away",
+    "line": -12.5,
+    "result": "win",
+    "market": 12.5
+   },
+   {
+    "game_id": "2026_06_LAC_KC",
+    "season": 2026,
+    "week": 6,
+    "team": "LAC",
+    "side": "away",
+    "line": -7.5,
+    "result": "loss",
+    "market": 7.5
+   },
+   {
+    "game_id": "2026_08_IND_JAX",
+    "season": 2026,
+    "week": 8,
+    "team": "IND",
+    "side": "away",
+    "line": -10.0,
+    "result": "loss",
+    "market": 10.0
+   },
+   {
+    "game_id": "2026_08_NE_MIA",
+    "season": 2026,
+    "week": 8,
+    "team": "MIA",
+    "side": "home",
+    "line": -7.0,
+    "result": "win",
+    "market": -7.0
+   },
+   {
+    "game_id": "2026_09_ARI_SEA",
+    "season": 2026,
+    "week": 9,
+    "team": "ARI",
+    "side": "away",
+    "line": -8.5,
+    "result": "loss",
+    "market": 8.5
+   }
+  ],
+  "S05 Underdog on short rest (<=4 days)": [
+   {
+    "game_id": "2024_07_DEN_NO",
+    "season": 2024,
+    "week": 7,
+    "team": "NO",
+    "side": "home",
+    "line": -2.5,
+    "result": "loss",
+    "market": -2.5
+   },
+   {
+    "game_id": "2024_08_MIN_LA",
+    "season": 2024,
+    "week": 8,
+    "team": "LA",
+    "side": "home",
+    "line": -3.0,
+    "result": "win",
+    "market": -3.0
+   },
+   {
+    "game_id": "2024_09_HOU_NYJ",
+    "season": 2024,
+    "week": 9,
+    "team": "HOU",
+    "side": "away",
+    "line": -2.5,
+    "result": "loss",
+    "market": 2.5
+   },
+   {
+    "game_id": "2024_10_CIN_BAL",
+    "season": 2024,
+    "week": 10,
+    "team": "CIN",
+    "side": "away",
+    "line": -6.0,
+    "result": "win",
+    "market": 6.0
+   },
+   {
+    "game_id": "2024_11_WAS_PHI",
+    "season": 2024,
+    "week": 11,
+    "team": "WAS",
+    "side": "away",
+    "line": -4.5,
+    "result": "loss",
+    "market": 4.5
+   },
+   {
+    "game_id": "2024_12_PIT_CLE",
+    "season": 2024,
+    "week": 12,
+    "team": "CLE",
+    "side": "home",
+    "line": -3.5,
+    "result": "win",
+    "market": -3.5
+   },
+   {
+    "game_id": "2024_13_CHI_DET",
+    "season": 2024,
+    "week": 13,
+    "team": "CHI",
+    "side": "away",
+    "line": -9.5,
+    "result": "win",
+    "market": 9.5
+   },
+   {
+    "game_id": "2024_13_NYG_DAL",
+    "season": 2024,
+    "week": 13,
+    "team": "NYG",
+    "side": "away",
+    "line": -4.5,
+    "result": "loss",
+    "market": 4.5
+   },
+   {
+    "game_id": "2024_13_MIA_GB",
+    "season": 2024,
+    "week": 13,
+    "team": "MIA",
+    "side": "away",
+    "line": -3.5,
+    "result": "loss",
+    "market": 3.5
+   },
+   {
+    "game_id": "2024_15_LA_SF",
+    "season": 2024,
+    "week": 15,
+    "team": "LA",
+    "side": "away",
+    "line": -3.0,
+    "result": "win",
+    "market": 3.0
+   },
+   {
+    "game_id": "2024_16_DEN_LAC",
+    "season": 2024,
+    "week": 16,
+    "team": "DEN",
+    "side": "away",
+    "line": -3.0,
+    "result": "loss",
+    "market": 3.0
+   },
+   {
+    "game_id": "2024_17_KC_PIT",
+    "season": 2024,
+    "week": 17,
+    "team": "PIT",
+    "side": "home",
+    "line": -3.0,
+    "result": "loss",
+    "market": -3.0
+   },
+   {
+    "game_id": "2024_17_BAL_HOU",
+    "season": 2024,
+    "week": 17,
+    "team": "HOU",
+    "side": "home",
+    "line": -5.5,
+    "result": "loss",
+    "market": -5.5
+   },
+   {
+    "game_id": "2024_17_SEA_CHI",
+    "season": 2024,
+    "week": 17,
+    "team": "CHI",
+    "side": "home",
+    "line": -3.5,
+    "result": "win",
+    "market": -3.5
+   },
+   {
+    "game_id": "2025_02_WAS_GB",
+    "season": 2025,
+    "week": 2,
+    "team": "WAS",
+    "side": "away",
+    "line": -3.5,
+    "result": "loss",
+    "market": 3.5
+   },
+   {
+    "game_id": "2025_03_MIA_BUF",
+    "season": 2025,
+    "week": 3,
+    "team": "MIA",
+    "side": "away",
+    "line": -12.5,
+    "result": "win",
+    "market": 12.5
+   },
+   {
+    "game_id": "2025_04_SEA_ARI",
+    "season": 2025,
+    "week": 4,
+    "team": "ARI",
+    "side": "home",
+    "line": -1.5,
+    "result": "loss",
+    "market": -1.5
+   },
+   {
+    "game_id": "2025_05_SF_LA",
+    "season": 2025,
+    "week": 5,
+    "team": "SF",
+    "side": "away",
+    "line": -8.5,
+    "result": "win",
+    "market": 8.5
+   },
+   {
+    "game_id": "2025_06_PHI_NYG",
+    "season": 2025,
+    "week": 6,
+    "team": "NYG",
+    "side": "home",
+    "line": -7.0,
+    "result": "win",
+    "market": -7.0
+   },
+   {
+    "game_id": "2025_07_PIT_CIN",
+    "season": 2025,
+    "week": 7,
+    "team": "CIN",
+    "side": "home",
+    "line": -5.5,
+    "result": "win",
+    "market": -5.5
+   },
+   {
+    "game_id": "2025_08_MIN_LAC",
+    "season": 2025,
+    "week": 8,
+    "team": "MIN",
+    "side": "away",
+    "line": -3.0,
+    "result": "loss",
+    "market": 3.0
+   },
+   {
+    "game_id": "2025_09_BAL_MIA",
+    "season": 2025,
+    "week": 9,
+    "team": "MIA",
+    "side": "home",
+    "line": -7.5,
+    "result": "loss",
+    "market": -7.5
+   },
+   {
+    "game_id": "2025_10_LV_DEN",
+    "season": 2025,
+    "week": 10,
+    "team": "LV",
+    "side": "away",
+    "line": -9.5,
+    "result": "win",
+    "market": 9.5
+   },
+   {
+    "game_id": "2025_11_NYJ_NE",
+    "season": 2025,
+    "week": 11,
+    "team": "NYJ",
+    "side": "away",
+    "line": -12.5,
+    "result": "loss",
+    "market": 12.5
+   },
+   {
+    "game_id": "2025_12_BUF_HOU",
+    "season": 2025,
+    "week": 12,
+    "team": "HOU",
+    "side": "home",
+    "line": -5.5,
+    "result": "win",
+    "market": -5.5
+   },
+   {
+    "game_id": "2025_13_GB_DET",
+    "season": 2025,
+    "week": 13,
+    "team": "GB",
+    "side": "away",
+    "line": -2.5,
+    "result": "win",
+    "market": 2.5
+   },
+   {
+    "game_id": "2025_13_KC_DAL",
+    "season": 2025,
+    "week": 13,
+    "team": "DAL",
+    "side": "home",
+    "line": -3.5,
+    "result": "win",
+    "market": -3.5
+   },
+   {
+    "game_id": "2025_13_CIN_BAL",
+    "season": 2025,
+    "week": 13,
+    "team": "CIN",
+    "side": "away",
+    "line": -7.0,
+    "result": "win",
+    "market": 7.0
+   },
+   {
+    "game_id": "2025_15_ATL_TB",
+    "season": 2025,
+    "week": 15,
+    "team": "ATL",
+    "side": "away",
+    "line": -6.0,
+    "result": "win",
+    "market": 6.0
+   },
+   {
+    "game_id": "2025_16_LA_SEA",
+    "season": 2025,
+    "week": 16,
+    "team": "LA",
+    "side": "away",
+    "line": -1.5,
+    "result": "win",
+    "market": 1.5
+   },
+   {
+    "game_id": "2025_17_DET_MIN",
+    "season": 2025,
+    "week": 17,
+    "team": "MIN",
+    "side": "home",
+    "line": -7.0,
+    "result": "win",
+    "market": -7.0
+   },
+   {
+    "game_id": "2025_17_DEN_KC",
+    "season": 2025,
+    "week": 17,
+    "team": "KC",
+    "side": "home",
+    "line": -13.5,
+    "result": "win",
+    "market": -13.5
+   },
+   {
+    "game_id": "2026_02_DET_BUF",
+    "season": 2026,
+    "week": 2,
+    "team": "DET",
+    "side": "away",
+    "line": -5.5,
+    "result": "loss",
+    "market": 5.5
+   },
+   {
+    "game_id": "2026_03_ATL_GB",
+    "season": 2026,
+    "week": 3,
+    "team": "ATL",
+    "side": "away",
+    "line": -4.5,
+    "result": "win",
+    "market": 4.5
+   },
+   {
+    "game_id": "2026_04_PIT_CLE",
+    "season": 2026,
+    "week": 4,
+    "team": "CLE",
+    "side": "home",
+    "line": -2.5,
+    "result": "win",
+    "market": -2.5
+   },
+   {
+    "game_id": "2026_05_TB_DAL",
+    "season": 2026,
+    "week": 5,
+    "team": "TB",
+    "side": "away",
+    "line": -9.5,
+    "result": "win",
+    "market": 9.5
+   },
+   {
+    "game_id": "2026_06_SEA_DEN",
+    "season": 2026,
+    "week": 6,
+    "team": "DEN",
+    "side": "home",
+    "line": -2.5,
+    "result": "win",
+    "market": -2.5
+   },
+   {
+    "game_id": "2026_07_NE_CHI",
+    "season": 2026,
+    "week": 7,
+    "team": "NE",
+    "side": "away",
+    "line": -3.0,
+    "result": "loss",
+    "market": 3.0
+   },
+   {
+    "game_id": "2026_08_CAR_GB",
+    "season": 2026,
+    "week": 8,
+    "team": "CAR",
+    "side": "away",
+    "line": -3.5,
+    "result": "loss",
+    "market": 3.5
+   },
+   {
+    "game_id": "2026_09_JAX_BAL",
+    "season": 2026,
+    "week": 9,
+    "team": "BAL",
+    "side": "home",
+    "line": -8.5,
+    "result": "loss",
+    "market": -8.5
+   }
+  ],
+  "S06 Fade divisional road favourite of 6.5+": [
+   {
+    "game_id": "2022_11_SF_ARI",
+    "season": 2022,
+    "week": 11,
+    "team": "ARI",
+    "side": "home",
+    "line": -10.0,
+    "result": "loss",
+    "market": -10.0
+   },
+   {
+    "game_id": "2022_13_SEA_LA",
+    "season": 2022,
+    "week": 13,
+    "team": "LA",
+    "side": "home",
+    "line": -7.0,
+    "result": "win",
+    "market": -7.0
+   },
+   {
+    "game_id": "2022_14_PHI_NYG",
+    "season": 2022,
+    "week": 14,
+    "team": "NYG",
+    "side": "home",
+    "line": -7.5,
+    "result": "loss",
+    "market": -7.5
+   },
+   {
+    "game_id": "2022_14_KC_DEN",
+    "season": 2022,
+    "week": 14,
+    "team": "DEN",
+    "side": "home",
+    "line": -8.5,
+    "result": "win",
+    "market": -8.5
+   },
+   {
+    "game_id": "2022_18_KC_LV",
+    "season": 2022,
+    "week": 18,
+    "team": "LV",
+    "side": "home",
+    "line": -9.0,
+    "result": "loss",
+    "market": -9.0
+   },
+   {
+    "game_id": "2022_18_MIN_CHI",
+    "season": 2022,
+    "week": 18,
+    "team": "CHI",
+    "side": "home",
+    "line": -6.5,
+    "result": "loss",
+    "market": -6.5
+   },
+   {
+    "game_id": "2022_18_DAL_WAS",
+    "season": 2022,
+    "week": 18,
+    "team": "WAS",
+    "side": "home",
+    "line": -7.5,
+    "result": "win",
+    "market": -7.5
+   },
+   {
+    "game_id": "2023_02_SF_LA",
+    "season": 2023,
+    "week": 2,
+    "team": "LA",
+    "side": "home",
+    "line": -7.5,
+    "result": "win",
+    "market": -7.5
+   },
+   {
+    "game_id": "2023_07_BUF_NE",
+    "season": 2023,
+    "week": 7,
+    "team": "NE",
+    "side": "home",
+    "line": -7.5,
+    "result": "win",
+    "market": -7.5
+   },
+   {
+    "game_id": "2023_08_PHI_WAS",
+    "season": 2023,
+    "week": 8,
+    "team": "WAS",
+    "side": "home",
+    "line": -7.0,
+    "result": "push",
+    "market": -7.0
+   },
+   {
+    "game_id": "2023_08_KC_DEN",
+    "season": 2023,
+    "week": 8,
+    "team": "DEN",
+    "side": "home",
+    "line": -7.0,
+    "result": "win",
+    "market": -7.0
+   },
+   {
+    "game_id": "2023_12_SF_SEA",
+    "season": 2023,
+    "week": 12,
+    "team": "SEA",
+    "side": "home",
+    "line": -7.0,
+    "result": "loss",
+    "market": -7.0
+   },
+   {
+    "game_id": "2023_12_MIA_NYJ",
+    "season": 2023,
+    "week": 12,
+    "team": "NYJ",
+    "side": "home",
+    "line": -9.5,
+    "result": "loss",
+    "market": -9.5
+   },
+   {
+    "game_id": "2023_12_KC_LV",
+    "season": 2023,
+    "week": 12,
+    "team": "LV",
+    "side": "home",
+    "line": -9.0,
+    "result": "loss",
+    "market": -9.0
+   },
+   {
+    "game_id": "2023_15_SF_ARI",
+    "season": 2023,
+    "week": 15,
+    "team": "ARI",
+    "side": "home",
+    "line": -12.5,
+    "result": "loss",
+    "market": -12.5
+   },
+   {
+    "game_id": "2023_18_DAL_WAS",
+    "season": 2023,
+    "week": 18,
+    "team": "WAS",
+    "side": "home",
+    "line": -13.0,
+    "result": "loss",
+    "market": -13.0
+   },
+   {
+    "game_id": "2024_04_KC_LAC",
+    "season": 2024,
+    "week": 4,
+    "team": "LAC",
+    "side": "home",
+    "line": -7.5,
+    "result": "win",
+    "market": -7.5
+   },
+   {
+    "game_id": "2024_08_BAL_CLE",
+    "season": 2024,
+    "week": 8,
+    "team": "CLE",
+    "side": "home",
+    "line": -7.5,
+    "result": "win",
+    "market": -7.5
+   },
+   {
+    "game_id": "2024_08_NYJ_NE",
+    "season": 2024,
+    "week": 8,
+    "team": "NE",
+    "side": "home",
+    "line": -7.0,
+    "result": "win",
+    "market": -7.0
+   },
+   {
+    "game_id": "2024_08_KC_LV",
+    "season": 2024,
+    "week": 8,
+    "team": "LV",
+    "side": "home",
+    "line": -9.0,
+    "result": "win",
+    "market": -9.0
+   },
+   {
+    "game_id": "2024_09_NO_CAR",
+    "season": 2024,
+    "week": 9,
+    "team": "CAR",
+    "side": "home",
+    "line": -7.0,
+    "result": "win",
+    "market": -7.0
+   },
+   {
+    "game_id": "2024_10_PHI_DAL",
+    "season": 2024,
+    "week": 10,
+    "team": "DAL",
+    "side": "home",
+    "line": -7.5,
+    "result": "loss",
+    "market": -7.5
+   },
+   {
+    "game_id": "2024_12_DEN_LV",
+    "season": 2024,
+    "week": 12,
+    "team": "LV",
+    "side": "home",
+    "line": -6.5,
+    "result": "loss",
+    "market": -6.5
+   },
+   {
+    "game_id": "2024_13_TB_CAR",
+    "season": 2024,
+    "week": 13,
+    "team": "CAR",
+    "side": "home",
+    "line": -6.5,
+    "result": "win",
+    "market": -6.5
+   },
+   {
+    "game_id": "2024_16_DET_CHI",
+    "season": 2024,
+    "week": 16,
+    "team": "CHI",
+    "side": "home",
+    "line": -7.0,
+    "result": "loss",
+    "market": -7.0
+   },
+   {
+    "game_id": "2024_18_WAS_DAL",
+    "season": 2024,
+    "week": 18,
+    "team": "DAL",
+    "side": "home",
+    "line": -7.0,
+    "result": "win",
+    "market": -7.0
+   },
+   {
+    "game_id": "2024_18_SEA_LA",
+    "season": 2024,
+    "week": 18,
+    "team": "LA",
+    "side": "home",
+    "line": -7.5,
+    "result": "win",
+    "market": -7.5
+   },
+   {
+    "game_id": "2024_18_LAC_LV",
+    "season": 2024,
+    "week": 18,
+    "team": "LV",
+    "side": "home",
+    "line": -7.0,
+    "result": "loss",
+    "market": -7.0
+   },
+   {
+    "game_id": "2025_06_PHI_NYG",
+    "season": 2025,
+    "week": 6,
+    "team": "NYG",
+    "side": "home",
+    "line": -7.0,
+    "result": "win",
+    "market": -7.0
+   },
+   {
+    "game_id": "2025_10_BUF_MIA",
+    "season": 2025,
+    "week": 10,
+    "team": "MIA",
+    "side": "home",
+    "line": -8.5,
+    "result": "win",
+    "market": -8.5
+   },
+   {
+    "game_id": "2025_11_BAL_CLE",
+    "season": 2025,
+    "week": 11,
+    "team": "CLE",
+    "side": "home",
+    "line": -7.5,
+    "result": "win",
+    "market": -7.5
+   },
+   {
+    "game_id": "2025_14_DEN_LV",
+    "season": 2025,
+    "week": 14,
+    "team": "LV",
+    "side": "home",
+    "line": -8.5,
+    "result": "win",
+    "market": -8.5
+   },
+   {
+    "game_id": "2025_14_LA_ARI",
+    "season": 2025,
+    "week": 14,
+    "team": "ARI",
+    "side": "home",
+    "line": -9.5,
+    "result": "loss",
+    "market": -9.5
+   },
+   {
+    "game_id": "2025_16_PHI_WAS",
+    "season": 2025,
+    "week": 16,
+    "team": "WAS",
+    "side": "home",
+    "line": -7.0,
+    "result": "loss",
+    "market": -7.0
+   },
+   {
+    "game_id": "2025_17_DAL_WAS",
+    "season": 2025,
+    "week": 17,
+    "team": "WAS",
+    "side": "home",
+    "line": -8.5,
+    "result": "win",
+    "market": -8.5
+   },
+   {
+    "game_id": "2025_17_DET_MIN",
+    "season": 2025,
+    "week": 17,
+    "team": "MIN",
+    "side": "home",
+    "line": -7.0,
+    "result": "win",
+    "market": -7.0
+   },
+   {
+    "game_id": "2025_17_DEN_KC",
+    "season": 2025,
+    "week": 17,
+    "team": "KC",
+    "side": "home",
+    "line": -13.5,
+    "result": "win",
+    "market": -13.5
+   },
+   {
+    "game_id": "2025_17_NE_NYJ",
+    "season": 2025,
+    "week": 17,
+    "team": "NYJ",
+    "side": "home",
+    "line": -12.5,
+    "result": "loss",
+    "market": -12.5
+   },
+   {
+    "game_id": "2026_05_HOU_TEN",
+    "season": 2026,
+    "week": 5,
+    "team": "TEN",
+    "side": "home",
+    "line": -6.5,
+    "result": "loss",
+    "market": -6.5
+   },
+   {
+    "game_id": "2026_08_NE_MIA",
+    "season": 2026,
+    "week": 8,
+    "team": "MIA",
+    "side": "home",
+    "line": -7.0,
+    "result": "win",
+    "market": -7.0
+   }
+  ],
+  "S07 Home team with 3+ rest-day edge": [
+   {
+    "game_id": "2025_05_TEN_ARI",
+    "season": 2025,
+    "week": 5,
+    "team": "ARI",
+    "side": "home",
+    "line": 7.5,
+    "result": "loss",
+    "market": 7.5
+   },
+   {
+    "game_id": "2025_05_TB_SEA",
+    "season": 2025,
+    "week": 5,
+    "team": "SEA",
+    "side": "home",
+    "line": 3.5,
+    "result": "loss",
+    "market": 3.5
+   },
+   {
+    "game_id": "2025_06_CLE_PIT",
+    "season": 2025,
+    "week": 6,
+    "team": "PIT",
+    "side": "home",
+    "line": 5.5,
+    "result": "win",
+    "market": 5.5
+   },
+   {
+    "game_id": "2025_06_CIN_GB",
+    "season": 2025,
+    "week": 6,
+    "team": "GB",
+    "side": "home",
+    "line": 14.0,
+    "result": "loss",
+    "market": 14.0
+   },
+   {
+    "game_id": "2025_06_BUF_ATL",
+    "season": 2025,
+    "week": 6,
+    "team": "ATL",
+    "side": "home",
+    "line": -3.5,
+    "result": "win",
+    "market": -3.5
+   },
+   {
+    "game_id": "2025_07_PHI_MIN",
+    "season": 2025,
+    "week": 7,
+    "team": "MIN",
+    "side": "home",
+    "line": -2.5,
+    "result": "loss",
+    "market": -2.5
+   },
+   {
+    "game_id": "2025_08_CHI_BAL",
+    "season": 2025,
+    "week": 8,
+    "team": "BAL",
+    "side": "home",
+    "line": 2.5,
+    "result": "win",
+    "market": 2.5
+   },
+   {
+    "game_id": "2025_08_NYJ_CIN",
+    "season": 2025,
+    "week": 8,
+    "team": "CIN",
+    "side": "home",
+    "line": 5.5,
+    "result": "loss",
+    "market": 5.5
+   },
+   {
+    "game_id": "2025_08_GB_PIT",
+    "season": 2025,
+    "week": 8,
+    "team": "PIT",
+    "side": "home",
+    "line": -3.0,
+    "result": "loss",
+    "market": -3.0
+   },
+   {
+    "game_id": "2025_09_MIN_DET",
+    "season": 2025,
+    "week": 9,
+    "team": "DET",
+    "side": "home",
+    "line": 9.5,
+    "result": "loss",
+    "market": 9.5
+   },
+   {
+    "game_id": "2025_09_NO_LA",
+    "season": 2025,
+    "week": 9,
+    "team": "LA",
+    "side": "home",
+    "line": 14.0,
+    "result": "win",
+    "market": 14.0
+   },
+   {
+    "game_id": "2025_10_BUF_MIA",
+    "season": 2025,
+    "week": 10,
+    "team": "MIA",
+    "side": "home",
+    "line": -8.5,
+    "result": "win",
+    "market": -8.5
+   },
+   {
+    "game_id": "2025_10_NE_TB",
+    "season": 2025,
+    "week": 10,
+    "team": "TB",
+    "side": "home",
+    "line": 2.5,
+    "result": "loss",
+    "market": 2.5
+   },
+   {
+    "game_id": "2025_11_HOU_TEN",
+    "season": 2025,
+    "week": 11,
+    "team": "TEN",
+    "side": "home",
+    "line": -5.5,
+    "result": "win",
+    "market": -5.5
+   },
+   {
+    "game_id": "2025_12_ATL_NO",
+    "season": 2025,
+    "week": 12,
+    "team": "NO",
+    "side": "home",
+    "line": 1.5,
+    "result": "loss",
+    "market": 1.5
+   },
+   {
+    "game_id": "2025_13_NO_MIA",
+    "season": 2025,
+    "week": 13,
+    "team": "MIA",
+    "side": "home",
+    "line": 5.5,
+    "result": "loss",
+    "market": 5.5
+   },
+   {
+    "game_id": "2025_13_LV_LAC",
+    "season": 2025,
+    "week": 13,
+    "team": "LAC",
+    "side": "home",
+    "line": 10.0,
+    "result": "win",
+    "market": 10.0
+   },
+   {
+    "game_id": "2025_14_PIT_BAL",
+    "season": 2025,
+    "week": 14,
+    "team": "BAL",
+    "side": "home",
+    "line": 5.5,
+    "result": "loss",
+    "market": 5.5
+   },
+   {
+    "game_id": "2025_14_HOU_KC",
+    "season": 2025,
+    "week": 14,
+    "team": "KC",
+    "side": "home",
+    "line": 4.5,
+    "result": "loss",
+    "market": 4.5
+   },
+   {
+    "game_id": "2025_15_BUF_NE",
+    "season": 2025,
+    "week": 15,
+    "team": "NE",
+    "side": "home",
+    "line": -2.5,
+    "result": "loss",
+    "market": -2.5
+   },
+   {
+    "game_id": "2025_15_WAS_NYG",
+    "season": 2025,
+    "week": 15,
+    "team": "NYG",
+    "side": "home",
+    "line": 2.5,
+    "result": "loss",
+    "market": 2.5
+   },
+   {
+    "game_id": "2025_15_TEN_SF",
+    "season": 2025,
+    "week": 15,
+    "team": "SF",
+    "side": "home",
+    "line": 12.5,
+    "result": "win",
+    "market": 12.5
+   },
+   {
+    "game_id": "2025_15_MIN_DAL",
+    "season": 2025,
+    "week": 15,
+    "team": "DAL",
+    "side": "home",
+    "line": 5.5,
+    "result": "loss",
+    "market": 5.5
+   },
+   {
+    "game_id": "2026_02_PIT_NE",
+    "season": 2026,
+    "week": 2,
+    "team": "NE",
+    "side": "home",
+    "line": 4.5,
+    "result": "win",
+    "market": 4.5
+   },
+   {
+    "game_id": "2026_02_MIA_SF",
+    "season": 2026,
+    "week": 2,
+    "team": "SF",
+    "side": "home",
+    "line": 12.5,
+    "result": "win",
+    "market": 12.5
+   },
+   {
+    "game_id": "2026_02_NYG_LA",
+    "season": 2026,
+    "week": 2,
+    "team": "LA",
+    "side": "home",
+    "line": 6.5,
+    "result": "win",
+    "market": 6.5
+   },
+   {
+    "game_id": "2026_03_LAC_BUF",
+    "season": 2026,
+    "week": 3,
+    "team": "BUF",
+    "side": "home",
+    "line": 7.0,
+    "result": "win",
+    "market": 7.0
+   },
+   {
+    "game_id": "2026_03_NYJ_DET",
+    "season": 2026,
+    "week": 3,
+    "team": "DET",
+    "side": "home",
+    "line": 7.0,
+    "result": "push",
+    "market": 7.0
+   },
+   {
+    "game_id": "2026_05_IND_PIT",
+    "season": 2026,
+    "week": 5,
+    "team": "PIT",
+    "side": "home",
+    "line": 3.0,
+    "result": "win",
+    "market": 3.0
+   },
+   {
+    "game_id": "2026_06_PIT_TB",
+    "season": 2026,
+    "week": 6,
+    "team": "TB",
+    "side": "home",
+    "line": -2.5,
+    "result": "loss",
+    "market": -2.5
+   },
+   {
+    "game_id": "2026_06_LAC_KC",
+    "season": 2026,
+    "week": 6,
+    "team": "KC",
+    "side": "home",
+    "line": 7.5,
+    "result": "win",
+    "market": 7.5
+   },
+   {
+    "game_id": "2026_07_IND_MIN",
+    "season": 2026,
+    "week": 7,
+    "team": "MIN",
+    "side": "home",
+    "line": 6.5,
+    "result": "loss",
+    "market": 6.5
+   },
+   {
+    "game_id": "2026_07_GB_DET",
+    "season": 2026,
+    "week": 7,
+    "team": "DET",
+    "side": "home",
+    "line": 3.5,
+    "result": "loss",
+    "market": 3.5
+   },
+   {
+    "game_id": "2026_07_KC_SEA",
+    "season": 2026,
+    "week": 7,
+    "team": "SEA",
+    "side": "home",
+    "line": 3.0,
+    "result": "win",
+    "market": 3.0
+   },
+   {
+    "game_id": "2026_08_BAL_BUF",
+    "season": 2026,
+    "week": 8,
+    "team": "BUF",
+    "side": "home",
+    "line": 3.0,
+    "result": "win",
+    "market": 3.0
+   },
+   {
+    "game_id": "2026_08_IND_JAX",
+    "season": 2026,
+    "week": 8,
+    "team": "JAX",
+    "side": "home",
+    "line": 10.0,
+    "result": "win",
+    "market": 10.0
+   },
+   {
+    "game_id": "2026_08_PHI_WAS",
+    "season": 2026,
+    "week": 8,
+    "team": "WAS",
+    "side": "home",
+    "line": 6.0,
+    "result": "win",
+    "market": 6.0
+   },
+   {
+    "game_id": "2026_09_DEN_CAR",
+    "season": 2026,
+    "week": 9,
+    "team": "CAR",
+    "side": "home",
+    "line": -3.0,
+    "result": "loss",
+    "market": -3.0
+   },
+   {
+    "game_id": "2026_09_CLE_NO",
+    "season": 2026,
+    "week": 9,
+    "team": "NO",
+    "side": "home",
+    "line": 4.5,
+    "result": "loss",
+    "market": 4.5
+   },
+   {
+    "game_id": "2026_09_LV_SF",
+    "season": 2026,
+    "week": 9,
+    "team": "SF",
+    "side": "home",
+    "line": 8.5,
+    "result": "win",
+    "market": 8.5
+   }
+  ],
+  "S08 Home team facing opponent off a bye": [
+   {
+    "game_id": "2023_14_BUF_KC",
+    "season": 2023,
+    "week": 14,
+    "team": "KC",
+    "side": "home",
+    "line": 2.0,
+    "result": "loss",
+    "market": 2.0
+   },
+   {
+    "game_id": "2023_15_WAS_LA",
+    "season": 2023,
+    "week": 15,
+    "team": "LA",
+    "side": "home",
+    "line": 6.5,
+    "result": "win",
+    "market": 6.5
+   },
+   {
+    "game_id": "2024_06_LAC_DEN",
+    "season": 2024,
+    "week": 6,
+    "team": "DEN",
+    "side": "home",
+    "line": -3.0,
+    "result": "loss",
+    "market": -3.0
+   },
+   {
+    "game_id": "2024_06_DET_DAL",
+    "season": 2024,
+    "week": 6,
+    "team": "DAL",
+    "side": "home",
+    "line": -3.5,
+    "result": "loss",
+    "market": -3.5
+   },
+   {
+    "game_id": "2024_07_MIA_IND",
+    "season": 2024,
+    "week": 7,
+    "team": "IND",
+    "side": "home",
+    "line": 3.0,
+    "result": "win",
+    "market": 3.0
+   },
+   {
+    "game_id": "2024_07_KC_SF",
+    "season": 2024,
+    "week": 7,
+    "team": "SF",
+    "side": "home",
+    "line": 2.5,
+    "result": "loss",
+    "market": 2.5
+   },
+   {
+    "game_id": "2024_08_CHI_WAS",
+    "season": 2024,
+    "week": 8,
+    "team": "WAS",
+    "side": "home",
+    "line": 1.5,
+    "result": "win",
+    "market": 1.5
+   },
+   {
+    "game_id": "2024_08_DAL_SF",
+    "season": 2024,
+    "week": 8,
+    "team": "SF",
+    "side": "home",
+    "line": 5.5,
+    "result": "win",
+    "market": 5.5
+   },
+   {
+    "game_id": "2024_10_SF_TB",
+    "season": 2024,
+    "week": 10,
+    "team": "TB",
+    "side": "home",
+    "line": -6.5,
+    "result": "win",
+    "market": -6.5
+   },
+   {
+    "game_id": "2024_10_PIT_WAS",
+    "season": 2024,
+    "week": 10,
+    "team": "WAS",
+    "side": "home",
+    "line": 1.5,
+    "result": "loss",
+    "market": 1.5
+   },
+   {
+    "game_id": "2024_11_GB_CHI",
+    "season": 2024,
+    "week": 11,
+    "team": "CHI",
+    "side": "home",
+    "line": -6.0,
+    "result": "win",
+    "market": -6.0
+   },
+   {
+    "game_id": "2024_11_LV_MIA",
+    "season": 2024,
+    "week": 11,
+    "team": "MIA",
+    "side": "home",
+    "line": 8.0,
+    "result": "win",
+    "market": 8.0
+   },
+   {
+    "game_id": "2024_11_CLE_NO",
+    "season": 2024,
+    "week": 11,
+    "team": "NO",
+    "side": "home",
+    "line": -1.0,
+    "result": "win",
+    "market": -1.0
+   },
+   {
+    "game_id": "2024_11_SEA_SF",
+    "season": 2024,
+    "week": 11,
+    "team": "SF",
+    "side": "home",
+    "line": 6.0,
+    "result": "loss",
+    "market": 6.0
+   },
+   {
+    "game_id": "2024_12_TB_NYG",
+    "season": 2024,
+    "week": 12,
+    "team": "NYG",
+    "side": "home",
+    "line": -6.5,
+    "result": "loss",
+    "market": -6.5
+   },
+   {
+    "game_id": "2024_12_ARI_SEA",
+    "season": 2024,
+    "week": 12,
+    "team": "SEA",
+    "side": "home",
+    "line": -1.0,
+    "result": "win",
+    "market": -1.0
+   },
+   {
+    "game_id": "2024_15_WAS_NO",
+    "season": 2024,
+    "week": 15,
+    "team": "NO",
+    "side": "home",
+    "line": -7.5,
+    "result": "win",
+    "market": -7.5
+   },
+   {
+    "game_id": "2024_15_BAL_NYG",
+    "season": 2024,
+    "week": 15,
+    "team": "NYG",
+    "side": "home",
+    "line": -16.5,
+    "result": "loss",
+    "market": -16.5
+   },
+   {
+    "game_id": "2024_15_NE_ARI",
+    "season": 2024,
+    "week": 15,
+    "team": "ARI",
+    "side": "home",
+    "line": 6.0,
+    "result": "win",
+    "market": 6.0
+   },
+   {
+    "game_id": "2024_15_IND_DEN",
+    "season": 2024,
+    "week": 15,
+    "team": "DEN",
+    "side": "home",
+    "line": 4.5,
+    "result": "win",
+    "market": 4.5
+   },
+   {
+    "game_id": "2025_06_CHI_WAS",
+    "season": 2025,
+    "week": 6,
+    "team": "WAS",
+    "side": "home",
+    "line": 5.5,
+    "result": "loss",
+    "market": 5.5
+   },
+   {
+    "game_id": "2025_07_HOU_SEA",
+    "season": 2025,
+    "week": 7,
+    "team": "SEA",
+    "side": "home",
+    "line": 3.0,
+    "result": "win",
+    "market": 3.0
+   },
+   {
+    "game_id": "2025_08_BUF_CAR",
+    "season": 2025,
+    "week": 8,
+    "team": "CAR",
+    "side": "home",
+    "line": -7.0,
+    "result": "loss",
+    "market": -7.0
+   },
+   {
+    "game_id": "2025_09_JAX_LV",
+    "season": 2025,
+    "week": 9,
+    "team": "LV",
+    "side": "home",
+    "line": -2.5,
+    "result": "win",
+    "market": -2.5
+   },
+   {
+    "game_id": "2025_09_SEA_WAS",
+    "season": 2025,
+    "week": 9,
+    "team": "WAS",
+    "side": "home",
+    "line": -2.5,
+    "result": "loss",
+    "market": -2.5
+   },
+   {
+    "game_id": "2025_09_ARI_DAL",
+    "season": 2025,
+    "week": 9,
+    "team": "DAL",
+    "side": "home",
+    "line": 3.5,
+    "result": "loss",
+    "market": 3.5
+   },
+   {
+    "game_id": "2025_10_CLE_NYJ",
+    "season": 2025,
+    "week": 10,
+    "team": "NYJ",
+    "side": "home",
+    "line": -1.5,
+    "result": "win",
+    "market": -1.5
+   },
+   {
+    "game_id": "2025_10_PHI_GB",
+    "season": 2025,
+    "week": 10,
+    "team": "GB",
+    "side": "home",
+    "line": 1.5,
+    "result": "loss",
+    "market": 1.5
+   },
+   {
+    "game_id": "2025_11_CIN_PIT",
+    "season": 2025,
+    "week": 11,
+    "team": "PIT",
+    "side": "home",
+    "line": 5.5,
+    "result": "win",
+    "market": 5.5
+   },
+   {
+    "game_id": "2025_11_KC_DEN",
+    "season": 2025,
+    "week": 11,
+    "team": "DEN",
+    "side": "home",
+    "line": -3.5,
+    "result": "win",
+    "market": -3.5
+   },
+   {
+    "game_id": "2025_11_DAL_LV",
+    "season": 2025,
+    "week": 11,
+    "team": "LV",
+    "side": "home",
+    "line": -3.5,
+    "result": "loss",
+    "market": -3.5
+   },
+   {
+    "game_id": "2025_12_IND_KC",
+    "season": 2025,
+    "week": 12,
+    "team": "KC",
+    "side": "home",
+    "line": 3.5,
+    "result": "loss",
+    "market": 3.5
+   },
+   {
+    "game_id": "2025_13_DEN_WAS",
+    "season": 2025,
+    "week": 13,
+    "team": "WAS",
+    "side": "home",
+    "line": -6.5,
+    "result": "win",
+    "market": -6.5
+   },
+   {
+    "game_id": "2025_15_CAR_NO",
+    "season": 2025,
+    "week": 15,
+    "team": "NO",
+    "side": "home",
+    "line": -2.5,
+    "result": "win",
+    "market": -2.5
+   },
+   {
+    "game_id": "2026_06_CAR_PHI",
+    "season": 2026,
+    "week": 6,
+    "team": "PHI",
+    "side": "home",
+    "line": -3.0,
+    "result": "loss",
+    "market": -3.0
+   },
+   {
+    "game_id": "2026_07_CIN_BAL",
+    "season": 2026,
+    "week": 7,
+    "team": "BAL",
+    "side": "home",
+    "line": -3.0,
+    "result": "loss",
+    "market": -3.0
+   },
+   {
+    "game_id": "2026_07_MIA_NYJ",
+    "season": 2026,
+    "week": 7,
+    "team": "NYJ",
+    "side": "home",
+    "line": 3.5,
+    "result": "loss",
+    "market": 3.5
+   },
+   {
+    "game_id": "2026_08_LAC_LA",
+    "season": 2026,
+    "week": 8,
+    "team": "LA",
+    "side": "home",
+    "line": 6.5,
+    "result": "win",
+    "market": 6.5
+   },
+   {
+    "game_id": "2026_09_NYG_PHI",
+    "season": 2026,
+    "week": 9,
+    "team": "PHI",
+    "side": "home",
+    "line": -3.0,
+    "result": "loss",
+    "market": -3.0
+   },
+   {
+    "game_id": "2026_09_HOU_LAC",
+    "season": 2026,
+    "week": 9,
+    "team": "LAC",
+    "side": "home",
+    "line": -5.5,
+    "result": "loss",
+    "market": -5.5
+   }
+  ],
+  "S09 Home favourite of 10 or more": [
+   {
+    "game_id": "2024_16_NO_GB",
+    "season": 2024,
+    "week": 16,
+    "team": "GB",
+    "side": "home",
+    "line": 14.0,
+    "result": "win",
+    "market": 14.0
+   },
+   {
+    "game_id": "2024_17_NYJ_BUF",
+    "season": 2024,
+    "week": 17,
+    "team": "BUF",
+    "side": "home",
+    "line": 10.0,
+    "result": "win",
+    "market": 10.0
+   },
+   {
+    "game_id": "2024_18_CLE_BAL",
+    "season": 2024,
+    "week": 18,
+    "team": "BAL",
+    "side": "home",
+    "line": 19.5,
+    "result": "win",
+    "market": 19.5
+   },
+   {
+    "game_id": "2024_18_CHI_GB",
+    "season": 2024,
+    "week": 18,
+    "team": "GB",
+    "side": "home",
+    "line": 10.0,
+    "result": "loss",
+    "market": 10.0
+   },
+   {
+    "game_id": "2024_18_NO_TB",
+    "season": 2024,
+    "week": 18,
+    "team": "TB",
+    "side": "home",
+    "line": 14.5,
+    "result": "loss",
+    "market": 14.5
+   },
+   {
+    "game_id": "2024_18_KC_DEN",
+    "season": 2024,
+    "week": 18,
+    "team": "DEN",
+    "side": "home",
+    "line": 10.5,
+    "result": "win",
+    "market": 10.5
+   },
+   {
+    "game_id": "2025_02_CLE_BAL",
+    "season": 2025,
+    "week": 2,
+    "team": "BAL",
+    "side": "home",
+    "line": 12.5,
+    "result": "win",
+    "market": 12.5
+   },
+   {
+    "game_id": "2025_03_MIA_BUF",
+    "season": 2025,
+    "week": 3,
+    "team": "BUF",
+    "side": "home",
+    "line": 12.5,
+    "result": "loss",
+    "market": 12.5
+   },
+   {
+    "game_id": "2025_04_NO_BUF",
+    "season": 2025,
+    "week": 4,
+    "team": "BUF",
+    "side": "home",
+    "line": 15.5,
+    "result": "loss",
+    "market": 15.5
+   },
+   {
+    "game_id": "2025_04_CLE_DET",
+    "season": 2025,
+    "week": 4,
+    "team": "DET",
+    "side": "home",
+    "line": 10.0,
+    "result": "win",
+    "market": 10.0
+   },
+   {
+    "game_id": "2025_06_CIN_GB",
+    "season": 2025,
+    "week": 6,
+    "team": "GB",
+    "side": "home",
+    "line": 14.0,
+    "result": "loss",
+    "market": 14.0
+   },
+   {
+    "game_id": "2025_07_LV_KC",
+    "season": 2025,
+    "week": 7,
+    "team": "KC",
+    "side": "home",
+    "line": 13.5,
+    "result": "win",
+    "market": 13.5
+   },
+   {
+    "game_id": "2025_08_TEN_IND",
+    "season": 2025,
+    "week": 8,
+    "team": "IND",
+    "side": "home",
+    "line": 15.5,
+    "result": "win",
+    "market": 15.5
+   },
+   {
+    "game_id": "2025_08_WAS_KC",
+    "season": 2025,
+    "week": 8,
+    "team": "KC",
+    "side": "home",
+    "line": 10.5,
+    "result": "win",
+    "market": 10.5
+   },
+   {
+    "game_id": "2025_09_CAR_GB",
+    "season": 2025,
+    "week": 9,
+    "team": "GB",
+    "side": "home",
+    "line": 12.5,
+    "result": "loss",
+    "market": 12.5
+   },
+   {
+    "game_id": "2025_09_NO_LA",
+    "season": 2025,
+    "week": 9,
+    "team": "LA",
+    "side": "home",
+    "line": 14.0,
+    "result": "win",
+    "market": 14.0
+   },
+   {
+    "game_id": "2025_11_NYJ_NE",
+    "season": 2025,
+    "week": 11,
+    "team": "NE",
+    "side": "home",
+    "line": 12.5,
+    "result": "win",
+    "market": 12.5
+   },
+   {
+    "game_id": "2025_12_NYJ_BAL",
+    "season": 2025,
+    "week": 12,
+    "team": "BAL",
+    "side": "home",
+    "line": 14.0,
+    "result": "loss",
+    "market": 14.0
+   },
+   {
+    "game_id": "2025_12_NYG_DET",
+    "season": 2025,
+    "week": 12,
+    "team": "DET",
+    "side": "home",
+    "line": 14.0,
+    "result": "loss",
+    "market": 14.0
+   },
+   {
+    "game_id": "2025_13_MIN_SEA",
+    "season": 2025,
+    "week": 13,
+    "team": "SEA",
+    "side": "home",
+    "line": 12.5,
+    "result": "win",
+    "market": 12.5
+   },
+   {
+    "game_id": "2025_13_LV_LAC",
+    "season": 2025,
+    "week": 13,
+    "team": "LAC",
+    "side": "home",
+    "line": 10.0,
+    "result": "win",
+    "market": 10.0
+   },
+   {
+    "game_id": "2025_15_ARI_HOU",
+    "season": 2025,
+    "week": 15,
+    "team": "HOU",
+    "side": "home",
+    "line": 10.5,
+    "result": "win",
+    "market": 10.5
+   },
+   {
+    "game_id": "2025_15_NYJ_JAX",
+    "season": 2025,
+    "week": 15,
+    "team": "JAX",
+    "side": "home",
+    "line": 13.5,
+    "result": "win",
+    "market": 13.5
+   },
+   {
+    "game_id": "2025_15_LV_PHI",
+    "season": 2025,
+    "week": 15,
+    "team": "PHI",
+    "side": "home",
+    "line": 12.5,
+    "result": "win",
+    "market": 12.5
+   },
+   {
+    "game_id": "2025_15_IND_SEA",
+    "season": 2025,
+    "week": 15,
+    "team": "SEA",
+    "side": "home",
+    "line": 13.5,
+    "result": "loss",
+    "market": 13.5
+   },
+   {
+    "game_id": "2025_15_TEN_SF",
+    "season": 2025,
+    "week": 15,
+    "team": "SF",
+    "side": "home",
+    "line": 12.5,
+    "result": "win",
+    "market": 12.5
+   },
+   {
+    "game_id": "2025_16_LV_HOU",
+    "season": 2025,
+    "week": 16,
+    "team": "HOU",
+    "side": "home",
+    "line": 14.5,
+    "result": "loss",
+    "market": 14.5
+   },
+   {
+    "game_id": "2025_18_TEN_JAX",
+    "season": 2025,
+    "week": 18,
+    "team": "JAX",
+    "side": "home",
+    "line": 12.5,
+    "result": "win",
+    "market": 12.5
+   },
+   {
+    "game_id": "2025_18_GB_MIN",
+    "season": 2025,
+    "week": 18,
+    "team": "MIN",
+    "side": "home",
+    "line": 12.5,
+    "result": "win",
+    "market": 12.5
+   },
+   {
+    "game_id": "2025_18_NYJ_BUF",
+    "season": 2025,
+    "week": 18,
+    "team": "BUF",
+    "side": "home",
+    "line": 12.5,
+    "result": "win",
+    "market": 12.5
+   },
+   {
+    "game_id": "2025_18_LAC_DEN",
+    "season": 2025,
+    "week": 18,
+    "team": "DEN",
+    "side": "home",
+    "line": 14.5,
+    "result": "win",
+    "market": 14.5
+   },
+   {
+    "game_id": "2025_18_ARI_LA",
+    "season": 2025,
+    "week": 18,
+    "team": "LA",
+    "side": "home",
+    "line": 14.5,
+    "result": "win",
+    "market": 14.5
+   },
+   {
+    "game_id": "2025_18_MIA_NE",
+    "season": 2025,
+    "week": 18,
+    "team": "NE",
+    "side": "home",
+    "line": 14.0,
+    "result": "win",
+    "market": 14.0
+   },
+   {
+    "game_id": "2026_02_MIA_SF",
+    "season": 2026,
+    "week": 2,
+    "team": "SF",
+    "side": "home",
+    "line": 12.5,
+    "result": "win",
+    "market": 12.5
+   },
+   {
+    "game_id": "2026_04_TEN_BAL",
+    "season": 2026,
+    "week": 4,
+    "team": "BAL",
+    "side": "home",
+    "line": 11.5,
+    "result": "loss",
+    "market": 11.5
+   },
+   {
+    "game_id": "2026_04_MIA_MIN",
+    "season": 2026,
+    "week": 4,
+    "team": "MIN",
+    "side": "home",
+    "line": 10.0,
+    "result": "loss",
+    "market": 10.0
+   },
+   {
+    "game_id": "2026_06_ARI_LA",
+    "season": 2026,
+    "week": 6,
+    "team": "LA",
+    "side": "home",
+    "line": 12.5,
+    "result": "loss",
+    "market": 12.5
+   },
+   {
+    "game_id": "2026_07_NYG_HOU",
+    "season": 2026,
+    "week": 7,
+    "team": "HOU",
+    "side": "home",
+    "line": 10.0,
+    "result": "loss",
+    "market": 10.0
+   },
+   {
+    "game_id": "2026_08_TEN_CIN",
+    "season": 2026,
+    "week": 8,
+    "team": "CIN",
+    "side": "home",
+    "line": 13.5,
+    "result": "loss",
+    "market": 13.5
+   },
+   {
+    "game_id": "2026_08_IND_JAX",
+    "season": 2026,
+    "week": 8,
+    "team": "JAX",
+    "side": "home",
+    "line": 10.0,
+    "result": "win",
+    "market": 10.0
+   }
+  ],
+  "S10 Over when closing total is 41 or lower": [
+   {
+    "game_id": "2025_16_NYJ_NO",
+    "season": 2025,
+    "week": 16,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 39.5,
+    "result": "loss",
+    "market": 6.5
+   },
+   {
+    "game_id": "2025_16_KC_TEN",
+    "season": 2025,
+    "week": 16,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 37.5,
+    "result": "loss",
+    "market": -3.5
+   },
+   {
+    "game_id": "2025_16_LV_HOU",
+    "season": 2025,
+    "week": 16,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 39.5,
+    "result": "win",
+    "market": 14.5
+   },
+   {
+    "game_id": "2025_17_DEN_KC",
+    "season": 2025,
+    "week": 17,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 37.5,
+    "result": "loss",
+    "market": -13.5
+   },
+   {
+    "game_id": "2025_17_HOU_LAC",
+    "season": 2025,
+    "week": 17,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 40.5,
+    "result": "loss",
+    "market": 1.5
+   },
+   {
+    "game_id": "2025_17_BAL_GB",
+    "season": 2025,
+    "week": 17,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 38.5,
+    "result": "win",
+    "market": 2.5
+   },
+   {
+    "game_id": "2025_17_PIT_CLE",
+    "season": 2025,
+    "week": 17,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 35.5,
+    "result": "loss",
+    "market": -4.5
+   },
+   {
+    "game_id": "2025_17_NO_TEN",
+    "season": 2025,
+    "week": 17,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 39.5,
+    "result": "win",
+    "market": -1.5
+   },
+   {
+    "game_id": "2025_17_NYG_LV",
+    "season": 2025,
+    "week": 17,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 40.5,
+    "result": "win",
+    "market": -3.0
+   },
+   {
+    "game_id": "2025_18_IND_HOU",
+    "season": 2025,
+    "week": 18,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 37.5,
+    "result": "win",
+    "market": 9.5
+   },
+   {
+    "game_id": "2025_18_GB_MIN",
+    "season": 2025,
+    "week": 18,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 37.5,
+    "result": "loss",
+    "market": 12.5
+   },
+   {
+    "game_id": "2025_18_NYJ_BUF",
+    "season": 2025,
+    "week": 18,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 39.5,
+    "result": "win",
+    "market": 12.5
+   },
+   {
+    "game_id": "2025_18_LAC_DEN",
+    "season": 2025,
+    "week": 18,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 37.5,
+    "result": "loss",
+    "market": 14.5
+   },
+   {
+    "game_id": "2025_18_KC_LV",
+    "season": 2025,
+    "week": 18,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 36.5,
+    "result": "loss",
+    "market": -3.5
+   },
+   {
+    "game_id": "2025_18_WAS_PHI",
+    "season": 2025,
+    "week": 18,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 38.5,
+    "result": "win",
+    "market": 3.0
+   },
+   {
+    "game_id": "2026_01_CLE_JAX",
+    "season": 2026,
+    "week": 1,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 40.5,
+    "result": "win",
+    "market": 8.5
+   },
+   {
+    "game_id": "2026_01_ATL_PIT",
+    "season": 2026,
+    "week": 1,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 40.5,
+    "result": "loss",
+    "market": 6.5
+   },
+   {
+    "game_id": "2026_01_NYJ_TEN",
+    "season": 2026,
+    "week": 1,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 39.5,
+    "result": "loss",
+    "market": 1.5
+   },
+   {
+    "game_id": "2026_01_MIA_LV",
+    "season": 2026,
+    "week": 1,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 40.5,
+    "result": "loss",
+    "market": 3.0
+   },
+   {
+    "game_id": "2026_02_PHI_TEN",
+    "season": 2026,
+    "week": 2,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 39.5,
+    "result": "win",
+    "market": -7.0
+   },
+   {
+    "game_id": "2026_02_SEA_ARI",
+    "season": 2026,
+    "week": 2,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 40.5,
+    "result": "loss",
+    "market": -3.5
+   },
+   {
+    "game_id": "2026_03_TEN_NYG",
+    "season": 2026,
+    "week": 3,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 37.5,
+    "result": "loss",
+    "market": 2.5
+   },
+   {
+    "game_id": "2026_03_SEA_WAS",
+    "season": 2026,
+    "week": 3,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 40.5,
+    "result": "win",
+    "market": -8.5
+   },
+   {
+    "game_id": "2026_04_PIT_CLE",
+    "season": 2026,
+    "week": 4,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 38.5,
+    "result": "win",
+    "market": -2.5
+   },
+   {
+    "game_id": "2026_04_GB_TB",
+    "season": 2026,
+    "week": 4,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 38.5,
+    "result": "loss",
+    "market": -3.0
+   },
+   {
+    "game_id": "2026_04_MIA_MIN",
+    "season": 2026,
+    "week": 4,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 38.5,
+    "result": "loss",
+    "market": 10.0
+   },
+   {
+    "game_id": "2026_05_CLE_NYJ",
+    "season": 2026,
+    "week": 5,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 38.5,
+    "result": "loss",
+    "market": 2.5
+   },
+   {
+    "game_id": "2026_05_HOU_TEN",
+    "season": 2026,
+    "week": 5,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 37.5,
+    "result": "loss",
+    "market": -6.5
+   },
+   {
+    "game_id": "2026_06_SEA_DEN",
+    "season": 2026,
+    "week": 6,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 40.5,
+    "result": "loss",
+    "market": -2.5
+   },
+   {
+    "game_id": "2026_06_BAL_CLE",
+    "season": 2026,
+    "week": 6,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 39.5,
+    "result": "loss",
+    "market": -3.0
+   },
+   {
+    "game_id": "2026_06_CAR_PHI",
+    "season": 2026,
+    "week": 6,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 39.5,
+    "result": "loss",
+    "market": -3.0
+   },
+   {
+    "game_id": "2026_06_PIT_TB",
+    "season": 2026,
+    "week": 6,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 38.5,
+    "result": "win",
+    "market": -2.5
+   },
+   {
+    "game_id": "2026_07_MIA_NYJ",
+    "season": 2026,
+    "week": 7,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 39.5,
+    "result": "win",
+    "market": 3.5
+   },
+   {
+    "game_id": "2026_07_CLE_TEN",
+    "season": 2026,
+    "week": 7,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 36.5,
+    "result": "win",
+    "market": -1.5
+   },
+   {
+    "game_id": "2026_08_CLE_PIT",
+    "season": 2026,
+    "week": 8,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 38.5,
+    "result": "loss",
+    "market": 3.5
+   },
+   {
+    "game_id": "2026_08_PHI_WAS",
+    "season": 2026,
+    "week": 8,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 40.5,
+    "result": "loss",
+    "market": 6.0
+   },
+   {
+    "game_id": "2026_09_JAX_BAL",
+    "season": 2026,
+    "week": 9,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 40.5,
+    "result": "win",
+    "market": -8.5
+   },
+   {
+    "game_id": "2026_09_NYG_PHI",
+    "season": 2026,
+    "week": 9,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 38.5,
+    "result": "loss",
+    "market": -3.0
+   },
+   {
+    "game_id": "2026_09_HOU_LAC",
+    "season": 2026,
+    "week": 9,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 40.5,
+    "result": "win",
+    "market": -5.5
+   },
+   {
+    "game_id": "2026_09_ARI_SEA",
+    "season": 2026,
+    "week": 9,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 39.5,
+    "result": "loss",
+    "market": 8.5
+   }
+  ],
+  "S11 Under in divisional games with total 47+": [
+   {
+    "game_id": "2024_18_MIN_DET",
+    "season": 2024,
+    "week": 18,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 56.5,
+    "result": "win",
+    "market": 3.0
+   },
+   {
+    "game_id": "2025_01_DAL_PHI",
+    "season": 2025,
+    "week": 1,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 47.5,
+    "result": "win",
+    "market": 8.5
+   },
+   {
+    "game_id": "2025_01_KC_LAC",
+    "season": 2025,
+    "week": 1,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 47.5,
+    "result": "loss",
+    "market": -3.0
+   },
+   {
+    "game_id": "2025_01_TB_ATL",
+    "season": 2025,
+    "week": 1,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 47.5,
+    "result": "win",
+    "market": -1.5
+   },
+   {
+    "game_id": "2025_01_CIN_CLE",
+    "season": 2025,
+    "week": 1,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 47.5,
+    "result": "win",
+    "market": -5.5
+   },
+   {
+    "game_id": "2025_01_DET_GB",
+    "season": 2025,
+    "week": 1,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 48.5,
+    "result": "win",
+    "market": 1.5
+   },
+   {
+    "game_id": "2025_02_BUF_NYJ",
+    "season": 2025,
+    "week": 2,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 47.5,
+    "result": "win",
+    "market": -6.0
+   },
+   {
+    "game_id": "2025_03_MIA_BUF",
+    "season": 2025,
+    "week": 3,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 50.5,
+    "result": "loss",
+    "market": 12.5
+   },
+   {
+    "game_id": "2025_05_NE_BUF",
+    "season": 2025,
+    "week": 5,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 49.5,
+    "result": "win",
+    "market": 7.5
+   },
+   {
+    "game_id": "2025_07_WAS_DAL",
+    "season": 2025,
+    "week": 7,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 54.5,
+    "result": "loss",
+    "market": 1.5
+   },
+   {
+    "game_id": "2025_08_TEN_IND",
+    "season": 2025,
+    "week": 8,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 47.5,
+    "result": "loss",
+    "market": 15.5
+   },
+   {
+    "game_id": "2025_09_MIN_DET",
+    "season": 2025,
+    "week": 9,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 47.5,
+    "result": "loss",
+    "market": 9.5
+   },
+   {
+    "game_id": "2025_10_BUF_MIA",
+    "season": 2025,
+    "week": 10,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 50.5,
+    "result": "win",
+    "market": -8.5
+   },
+   {
+    "game_id": "2025_10_LA_SF",
+    "season": 2025,
+    "week": 10,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 49.5,
+    "result": "loss",
+    "market": -5.5
+   },
+   {
+    "game_id": "2025_11_CHI_MIN",
+    "season": 2025,
+    "week": 11,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 47.5,
+    "result": "win",
+    "market": 3.0
+   },
+   {
+    "game_id": "2025_11_CIN_PIT",
+    "season": 2025,
+    "week": 11,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 48.5,
+    "result": "win",
+    "market": 5.5
+   },
+   {
+    "game_id": "2025_11_SF_ARI",
+    "season": 2025,
+    "week": 11,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 48.5,
+    "result": "loss",
+    "market": -3.5
+   },
+   {
+    "game_id": "2025_11_SEA_LA",
+    "season": 2025,
+    "week": 11,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 49.5,
+    "result": "win",
+    "market": 3.0
+   },
+   {
+    "game_id": "2025_12_PHI_DAL",
+    "season": 2025,
+    "week": 12,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 47.5,
+    "result": "win",
+    "market": -3.0
+   },
+   {
+    "game_id": "2025_13_GB_DET",
+    "season": 2025,
+    "week": 13,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 48.5,
+    "result": "loss",
+    "market": 2.5
+   },
+   {
+    "game_id": "2025_13_CIN_BAL",
+    "season": 2025,
+    "week": 13,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 52.5,
+    "result": "win",
+    "market": 7.0
+   },
+   {
+    "game_id": "2025_14_LA_ARI",
+    "season": 2025,
+    "week": 14,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 49.5,
+    "result": "loss",
+    "market": -9.5
+   },
+   {
+    "game_id": "2025_15_BAL_CIN",
+    "season": 2025,
+    "week": 15,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 51.5,
+    "result": "win",
+    "market": -2.5
+   },
+   {
+    "game_id": "2025_15_BUF_NE",
+    "season": 2025,
+    "week": 15,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 49.5,
+    "result": "loss",
+    "market": -2.5
+   },
+   {
+    "game_id": "2025_17_DAL_WAS",
+    "season": 2025,
+    "week": 17,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 50.5,
+    "result": "loss",
+    "market": -8.5
+   },
+   {
+    "game_id": "2025_17_JAX_IND",
+    "season": 2025,
+    "week": 17,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 48.5,
+    "result": "win",
+    "market": -3.5
+   },
+   {
+    "game_id": "2025_18_SEA_SF",
+    "season": 2025,
+    "week": 18,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 47.5,
+    "result": "win",
+    "market": -2.5
+   },
+   {
+    "game_id": "2025_18_CLE_CIN",
+    "season": 2025,
+    "week": 18,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 47.5,
+    "result": "win",
+    "market": 9.5
+   },
+   {
+    "game_id": "2025_18_DAL_NYG",
+    "season": 2025,
+    "week": 18,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 50.5,
+    "result": "loss",
+    "market": -3.0
+   },
+   {
+    "game_id": "2025_18_DET_CHI",
+    "season": 2025,
+    "week": 18,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 51.5,
+    "result": "win",
+    "market": 3.5
+   },
+   {
+    "game_id": "2025_18_ARI_LA",
+    "season": 2025,
+    "week": 18,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 49.5,
+    "result": "loss",
+    "market": 14.5
+   },
+   {
+    "game_id": "2026_01_SF_LA",
+    "season": 2026,
+    "week": 1,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 47.5,
+    "result": "win",
+    "market": 3.5
+   },
+   {
+    "game_id": "2026_01_DAL_NYG",
+    "season": 2026,
+    "week": 1,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 47.5,
+    "result": "loss",
+    "market": -3.0
+   },
+   {
+    "game_id": "2026_02_WAS_DAL",
+    "season": 2026,
+    "week": 2,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 51.5,
+    "result": "loss",
+    "market": 3.5
+   },
+   {
+    "game_id": "2026_03_ARI_SF",
+    "season": 2026,
+    "week": 3,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 48.5,
+    "result": "loss",
+    "market": 7.5
+   },
+   {
+    "game_id": "2026_04_NE_BUF",
+    "season": 2026,
+    "week": 4,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 49.5,
+    "result": "loss",
+    "market": 7.0
+   },
+   {
+    "game_id": "2026_04_KC_LV",
+    "season": 2026,
+    "week": 4,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 47.5,
+    "result": "loss",
+    "market": -4.5
+   },
+   {
+    "game_id": "2026_04_ATL_NO",
+    "season": 2026,
+    "week": 4,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 47.5,
+    "result": "loss",
+    "market": 1.5
+   },
+   {
+    "game_id": "2026_06_ARI_LA",
+    "season": 2026,
+    "week": 6,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 51.5,
+    "result": "win",
+    "market": 12.5
+   },
+   {
+    "game_id": "2026_07_GB_DET",
+    "season": 2026,
+    "week": 7,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 55.5,
+    "result": "win",
+    "market": 3.5
+   }
+  ],
+  "S01 Own-line vs close, edge >= 2.0": [
+   {
+    "game_id": "2026_04_DET_CAR",
+    "season": 2026,
+    "week": 4,
+    "team": "CAR",
+    "side": "home",
+    "line": -4.5,
+    "result": "win",
+    "market": -4.5
+   },
+   {
+    "game_id": "2026_05_TB_DAL",
+    "season": 2026,
+    "week": 5,
+    "team": "TB",
+    "side": "away",
+    "line": -9.5,
+    "result": "win",
+    "market": 9.5
+   },
+   {
+    "game_id": "2026_05_CIN_MIA",
+    "season": 2026,
+    "week": 5,
+    "team": "MIA",
+    "side": "home",
+    "line": -7.0,
+    "result": "push",
+    "market": -7.0
+   },
+   {
+    "game_id": "2026_05_LV_NE",
+    "season": 2026,
+    "week": 5,
+    "team": "NE",
+    "side": "home",
+    "line": 3.5,
+    "result": "win",
+    "market": 3.5
+   },
+   {
+    "game_id": "2026_05_CLE_NYJ",
+    "season": 2026,
+    "week": 5,
+    "team": "CLE",
+    "side": "away",
+    "line": -2.5,
+    "result": "loss",
+    "market": 2.5
+   },
+   {
+    "game_id": "2026_05_DET_ARI",
+    "season": 2026,
+    "week": 5,
+    "team": "ARI",
+    "side": "home",
+    "line": -5.5,
+    "result": "loss",
+    "market": -5.5
+   },
+   {
+    "game_id": "2026_05_BAL_ATL",
+    "season": 2026,
+    "week": 5,
+    "team": "BAL",
+    "side": "away",
+    "line": -3.5,
+    "result": "win",
+    "market": 3.5
+   },
+   {
+    "game_id": "2026_06_HOU_JAX",
+    "season": 2026,
+    "week": 6,
+    "team": "JAX",
+    "side": "home",
+    "line": 2.5,
+    "result": "loss",
+    "market": 2.5
+   },
+   {
+    "game_id": "2026_06_CHI_ATL",
+    "season": 2026,
+    "week": 6,
+    "team": "ATL",
+    "side": "home",
+    "line": -1.5,
+    "result": "loss",
+    "market": -1.5
+   },
+   {
+    "game_id": "2026_06_TEN_IND",
+    "season": 2026,
+    "week": 6,
+    "team": "IND",
+    "side": "home",
+    "line": 6.5,
+    "result": "loss",
+    "market": 6.5
+   },
+   {
+    "game_id": "2026_06_NYJ_NE",
+    "season": 2026,
+    "week": 6,
+    "team": "NE",
+    "side": "home",
+    "line": 7.5,
+    "result": "loss",
+    "market": 7.5
+   },
+   {
+    "game_id": "2026_06_NO_NYG",
+    "season": 2026,
+    "week": 6,
+    "team": "NYG",
+    "side": "home",
+    "line": -1.5,
+    "result": "loss",
+    "market": -1.5
+   },
+   {
+    "game_id": "2026_06_CAR_PHI",
+    "season": 2026,
+    "week": 6,
+    "team": "PHI",
+    "side": "home",
+    "line": -3.0,
+    "result": "loss",
+    "market": -3.0
+   },
+   {
+    "game_id": "2026_06_PIT_TB",
+    "season": 2026,
+    "week": 6,
+    "team": "TB",
+    "side": "home",
+    "line": -2.5,
+    "result": "loss",
+    "market": -2.5
+   },
+   {
+    "game_id": "2026_06_ARI_LA",
+    "season": 2026,
+    "week": 6,
+    "team": "ARI",
+    "side": "away",
+    "line": -12.5,
+    "result": "win",
+    "market": 12.5
+   },
+   {
+    "game_id": "2026_06_LAC_KC",
+    "season": 2026,
+    "week": 6,
+    "team": "LAC",
+    "side": "away",
+    "line": -7.5,
+    "result": "loss",
+    "market": 7.5
+   },
+   {
+    "game_id": "2026_06_DAL_GB",
+    "season": 2026,
+    "week": 6,
+    "team": "GB",
+    "side": "home",
+    "line": -1.5,
+    "result": "win",
+    "market": -1.5
+   },
+   {
+    "game_id": "2026_07_NE_CHI",
+    "season": 2026,
+    "week": 7,
+    "team": "NE",
+    "side": "away",
+    "line": -3.0,
+    "result": "loss",
+    "market": 3.0
+   },
+   {
+    "game_id": "2026_07_CIN_BAL",
+    "season": 2026,
+    "week": 7,
+    "team": "BAL",
+    "side": "home",
+    "line": -3.0,
+    "result": "loss",
+    "market": -3.0
+   },
+   {
+    "game_id": "2026_07_NYG_HOU",
+    "season": 2026,
+    "week": 7,
+    "team": "NYG",
+    "side": "away",
+    "line": -10.0,
+    "result": "win",
+    "market": 10.0
+   },
+   {
+    "game_id": "2026_07_IND_MIN",
+    "season": 2026,
+    "week": 7,
+    "team": "IND",
+    "side": "away",
+    "line": -6.5,
+    "result": "win",
+    "market": 6.5
+   },
+   {
+    "game_id": "2026_07_DEN_ARI",
+    "season": 2026,
+    "week": 7,
+    "team": "ARI",
+    "side": "home",
+    "line": -4.5,
+    "result": "loss",
+    "market": -4.5
+   },
+   {
+    "game_id": "2026_07_GB_DET",
+    "season": 2026,
+    "week": 7,
+    "team": "GB",
+    "side": "away",
+    "line": -3.5,
+    "result": "win",
+    "market": 3.5
+   },
+   {
+    "game_id": "2026_07_LA_LV",
+    "season": 2026,
+    "week": 7,
+    "team": "LA",
+    "side": "away",
+    "line": 3.5,
+    "result": "win",
+    "market": -3.5
+   },
+   {
+    "game_id": "2026_07_DAL_PHI",
+    "season": 2026,
+    "week": 7,
+    "team": "PHI",
+    "side": "home",
+    "line": -4.5,
+    "result": "loss",
+    "market": -4.5
+   },
+   {
+    "game_id": "2026_08_TEN_CIN",
+    "season": 2026,
+    "week": 8,
+    "team": "TEN",
+    "side": "away",
+    "line": -13.5,
+    "result": "win",
+    "market": 13.5
+   },
+   {
+    "game_id": "2026_08_ARI_DAL",
+    "season": 2026,
+    "week": 8,
+    "team": "ARI",
+    "side": "away",
+    "line": -7.0,
+    "result": "win",
+    "market": 7.0
+   },
+   {
+    "game_id": "2026_08_IND_JAX",
+    "season": 2026,
+    "week": 8,
+    "team": "IND",
+    "side": "away",
+    "line": -10.0,
+    "result": "loss",
+    "market": 10.0
+   },
+   {
+    "game_id": "2026_08_LAC_LA",
+    "season": 2026,
+    "week": 8,
+    "team": "LA",
+    "side": "home",
+    "line": 6.5,
+    "result": "win",
+    "market": 6.5
+   },
+   {
+    "game_id": "2026_08_PHI_WAS",
+    "season": 2026,
+    "week": 8,
+    "team": "PHI",
+    "side": "away",
+    "line": -6.0,
+    "result": "loss",
+    "market": 6.0
+   },
+   {
+    "game_id": "2026_09_JAX_BAL",
+    "season": 2026,
+    "week": 9,
+    "team": "BAL",
+    "side": "home",
+    "line": -8.5,
+    "result": "loss",
+    "market": -8.5
+   },
+   {
+    "game_id": "2026_09_CIN_ATL",
+    "season": 2026,
+    "week": 9,
+    "team": "ATL",
+    "side": "home",
+    "line": -3.0,
+    "result": "loss",
+    "market": -3.0
+   },
+   {
+    "game_id": "2026_09_DAL_IND",
+    "season": 2026,
+    "week": 9,
+    "team": "IND",
+    "side": "home",
+    "line": -4.5,
+    "result": "win",
+    "market": -4.5
+   },
+   {
+    "game_id": "2026_09_NYJ_KC",
+    "season": 2026,
+    "week": 9,
+    "team": "NYJ",
+    "side": "away",
+    "line": -9.5,
+    "result": "loss",
+    "market": 9.5
+   },
+   {
+    "game_id": "2026_09_DET_MIA",
+    "season": 2026,
+    "week": 9,
+    "team": "MIA",
+    "side": "home",
+    "line": -6.5,
+    "result": "loss",
+    "market": -6.5
+   },
+   {
+    "game_id": "2026_09_CLE_NO",
+    "season": 2026,
+    "week": 9,
+    "team": "CLE",
+    "side": "away",
+    "line": -4.5,
+    "result": "win",
+    "market": 4.5
+   },
+   {
+    "game_id": "2026_09_NYG_PHI",
+    "season": 2026,
+    "week": 9,
+    "team": "PHI",
+    "side": "home",
+    "line": -3.0,
+    "result": "loss",
+    "market": -3.0
+   },
+   {
+    "game_id": "2026_09_LA_WAS",
+    "season": 2026,
+    "week": 9,
+    "team": "LA",
+    "side": "away",
+    "line": 4.5,
+    "result": "win",
+    "market": -4.5
+   },
+   {
+    "game_id": "2026_09_HOU_LAC",
+    "season": 2026,
+    "week": 9,
+    "team": "LAC",
+    "side": "home",
+    "line": -5.5,
+    "result": "loss",
+    "market": -5.5
+   },
+   {
+    "game_id": "2026_09_BUF_MIN",
+    "season": 2026,
+    "week": 9,
+    "team": "MIN",
+    "side": "home",
+    "line": -3.0,
+    "result": "loss",
+    "market": -3.0
+   }
+  ],
+  "S02 Own-line vs close, edge >= 3.0": [
+   {
+    "game_id": "2026_01_ARI_LAC",
+    "season": 2026,
+    "week": 1,
+    "team": "ARI",
+    "side": "away",
+    "line": -8.5,
+    "result": "win",
+    "market": 8.5
+   },
+   {
+    "game_id": "2026_01_MIA_LV",
+    "season": 2026,
+    "week": 1,
+    "team": "MIA",
+    "side": "away",
+    "line": -3.0,
+    "result": "loss",
+    "market": 3.0
+   },
+   {
+    "game_id": "2026_01_DAL_NYG",
+    "season": 2026,
+    "week": 1,
+    "team": "NYG",
+    "side": "home",
+    "line": -3.0,
+    "result": "win",
+    "market": -3.0
+   },
+   {
+    "game_id": "2026_02_CAR_ATL",
+    "season": 2026,
+    "week": 2,
+    "team": "ATL",
+    "side": "home",
+    "line": -2.5,
+    "result": "loss",
+    "market": -2.5
+   },
+   {
+    "game_id": "2026_02_NO_BAL",
+    "season": 2026,
+    "week": 2,
+    "team": "NO",
+    "side": "away",
+    "line": -8.5,
+    "result": "win",
+    "market": 8.5
+   },
+   {
+    "game_id": "2026_02_CLE_TB",
+    "season": 2026,
+    "week": 2,
+    "team": "CLE",
+    "side": "away",
+    "line": -8.5,
+    "result": "win",
+    "market": 8.5
+   },
+   {
+    "game_id": "2026_02_JAX_DEN",
+    "season": 2026,
+    "week": 2,
+    "team": "JAX",
+    "side": "away",
+    "line": -2.5,
+    "result": "loss",
+    "market": 2.5
+   },
+   {
+    "game_id": "2026_02_MIA_SF",
+    "season": 2026,
+    "week": 2,
+    "team": "MIA",
+    "side": "away",
+    "line": -12.5,
+    "result": "loss",
+    "market": 12.5
+   },
+   {
+    "game_id": "2026_02_IND_KC",
+    "season": 2026,
+    "week": 2,
+    "team": "IND",
+    "side": "away",
+    "line": -6.0,
+    "result": "win",
+    "market": 6.0
+   },
+   {
+    "game_id": "2026_03_KC_MIA",
+    "season": 2026,
+    "week": 3,
+    "team": "MIA",
+    "side": "home",
+    "line": -10.0,
+    "result": "loss",
+    "market": -10.0
+   },
+   {
+    "game_id": "2026_03_CIN_PIT",
+    "season": 2026,
+    "week": 3,
+    "team": "PIT",
+    "side": "home",
+    "line": -3.5,
+    "result": "win",
+    "market": -3.5
+   },
+   {
+    "game_id": "2026_03_LA_DEN",
+    "season": 2026,
+    "week": 3,
+    "team": "LA",
+    "side": "away",
+    "line": -1.5,
+    "result": "loss",
+    "market": 1.5
+   },
+   {
+    "game_id": "2026_03_PHI_CHI",
+    "season": 2026,
+    "week": 3,
+    "team": "CHI",
+    "side": "home",
+    "line": -3.5,
+    "result": "win",
+    "market": -3.5
+   },
+   {
+    "game_id": "2026_04_IND_WAS",
+    "season": 2026,
+    "week": 4,
+    "team": "WAS",
+    "side": "home",
+    "line": -4.5,
+    "result": "loss",
+    "market": -4.5
+   },
+   {
+    "game_id": "2026_04_NE_BUF",
+    "season": 2026,
+    "week": 4,
+    "team": "NE",
+    "side": "away",
+    "line": -7.0,
+    "result": "win",
+    "market": 7.0
+   },
+   {
+    "game_id": "2026_04_NYJ_CHI",
+    "season": 2026,
+    "week": 4,
+    "team": "CHI",
+    "side": "home",
+    "line": 3.5,
+    "result": "win",
+    "market": 3.5
+   },
+   {
+    "game_id": "2026_04_JAX_CIN",
+    "season": 2026,
+    "week": 4,
+    "team": "JAX",
+    "side": "away",
+    "line": -2.5,
+    "result": "win",
+    "market": 2.5
+   },
+   {
+    "game_id": "2026_04_MIA_MIN",
+    "season": 2026,
+    "week": 4,
+    "team": "MIA",
+    "side": "away",
+    "line": -10.0,
+    "result": "win",
+    "market": 10.0
+   },
+   {
+    "game_id": "2026_05_TB_DAL",
+    "season": 2026,
+    "week": 5,
+    "team": "TB",
+    "side": "away",
+    "line": -9.5,
+    "result": "win",
+    "market": 9.5
+   },
+   {
+    "game_id": "2026_05_CIN_MIA",
+    "season": 2026,
+    "week": 5,
+    "team": "MIA",
+    "side": "home",
+    "line": -7.0,
+    "result": "push",
+    "market": -7.0
+   },
+   {
+    "game_id": "2026_05_LV_NE",
+    "season": 2026,
+    "week": 5,
+    "team": "NE",
+    "side": "home",
+    "line": 3.5,
+    "result": "win",
+    "market": 3.5
+   },
+   {
+    "game_id": "2026_05_CLE_NYJ",
+    "season": 2026,
+    "week": 5,
+    "team": "CLE",
+    "side": "away",
+    "line": -2.5,
+    "result": "loss",
+    "market": 2.5
+   },
+   {
+    "game_id": "2026_05_DET_ARI",
+    "season": 2026,
+    "week": 5,
+    "team": "ARI",
+    "side": "home",
+    "line": -5.5,
+    "result": "loss",
+    "market": -5.5
+   },
+   {
+    "game_id": "2026_05_BAL_ATL",
+    "season": 2026,
+    "week": 5,
+    "team": "BAL",
+    "side": "away",
+    "line": -3.5,
+    "result": "win",
+    "market": 3.5
+   },
+   {
+    "game_id": "2026_06_CAR_PHI",
+    "season": 2026,
+    "week": 6,
+    "team": "PHI",
+    "side": "home",
+    "line": -3.0,
+    "result": "loss",
+    "market": -3.0
+   },
+   {
+    "game_id": "2026_06_ARI_LA",
+    "season": 2026,
+    "week": 6,
+    "team": "ARI",
+    "side": "away",
+    "line": -12.5,
+    "result": "win",
+    "market": 12.5
+   },
+   {
+    "game_id": "2026_06_LAC_KC",
+    "season": 2026,
+    "week": 6,
+    "team": "LAC",
+    "side": "away",
+    "line": -7.5,
+    "result": "loss",
+    "market": 7.5
+   },
+   {
+    "game_id": "2026_06_DAL_GB",
+    "season": 2026,
+    "week": 6,
+    "team": "GB",
+    "side": "home",
+    "line": -1.5,
+    "result": "win",
+    "market": -1.5
+   },
+   {
+    "game_id": "2026_07_CIN_BAL",
+    "season": 2026,
+    "week": 7,
+    "team": "BAL",
+    "side": "home",
+    "line": -3.0,
+    "result": "loss",
+    "market": -3.0
+   },
+   {
+    "game_id": "2026_07_NYG_HOU",
+    "season": 2026,
+    "week": 7,
+    "team": "NYG",
+    "side": "away",
+    "line": -10.0,
+    "result": "win",
+    "market": 10.0
+   },
+   {
+    "game_id": "2026_07_IND_MIN",
+    "season": 2026,
+    "week": 7,
+    "team": "IND",
+    "side": "away",
+    "line": -6.5,
+    "result": "win",
+    "market": 6.5
+   },
+   {
+    "game_id": "2026_07_DAL_PHI",
+    "season": 2026,
+    "week": 7,
+    "team": "PHI",
+    "side": "home",
+    "line": -4.5,
+    "result": "loss",
+    "market": -4.5
+   },
+   {
+    "game_id": "2026_08_TEN_CIN",
+    "season": 2026,
+    "week": 8,
+    "team": "TEN",
+    "side": "away",
+    "line": -13.5,
+    "result": "win",
+    "market": 13.5
+   },
+   {
+    "game_id": "2026_08_ARI_DAL",
+    "season": 2026,
+    "week": 8,
+    "team": "ARI",
+    "side": "away",
+    "line": -7.0,
+    "result": "win",
+    "market": 7.0
+   },
+   {
+    "game_id": "2026_08_PHI_WAS",
+    "season": 2026,
+    "week": 8,
+    "team": "PHI",
+    "side": "away",
+    "line": -6.0,
+    "result": "loss",
+    "market": 6.0
+   },
+   {
+    "game_id": "2026_09_JAX_BAL",
+    "season": 2026,
+    "week": 9,
+    "team": "BAL",
+    "side": "home",
+    "line": -8.5,
+    "result": "loss",
+    "market": -8.5
+   },
+   {
+    "game_id": "2026_09_CIN_ATL",
+    "season": 2026,
+    "week": 9,
+    "team": "ATL",
+    "side": "home",
+    "line": -3.0,
+    "result": "loss",
+    "market": -3.0
+   },
+   {
+    "game_id": "2026_09_DAL_IND",
+    "season": 2026,
+    "week": 9,
+    "team": "IND",
+    "side": "home",
+    "line": -4.5,
+    "result": "win",
+    "market": -4.5
+   },
+   {
+    "game_id": "2026_09_NYG_PHI",
+    "season": 2026,
+    "week": 9,
+    "team": "PHI",
+    "side": "home",
+    "line": -3.0,
+    "result": "loss",
+    "market": -3.0
+   },
+   {
+    "game_id": "2026_09_HOU_LAC",
+    "season": 2026,
+    "week": 9,
+    "team": "LAC",
+    "side": "home",
+    "line": -5.5,
+    "result": "loss",
+    "market": -5.5
+   }
+  ],
+  "S03 Own-total vs close, edge >= 3": [
+   {
+    "game_id": "2026_04_JAX_CIN",
+    "season": 2026,
+    "week": 4,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 51.5,
+    "result": "win",
+    "market": 2.5
+   },
+   {
+    "game_id": "2026_04_LA_PHI",
+    "season": 2026,
+    "week": 4,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 42.5,
+    "result": "win",
+    "market": -3.5
+   },
+   {
+    "game_id": "2026_04_GB_TB",
+    "season": 2026,
+    "week": 4,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 38.5,
+    "result": "loss",
+    "market": -3.0
+   },
+   {
+    "game_id": "2026_04_MIA_MIN",
+    "season": 2026,
+    "week": 4,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 38.5,
+    "result": "loss",
+    "market": 10.0
+   },
+   {
+    "game_id": "2026_04_KC_LV",
+    "season": 2026,
+    "week": 4,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 47.5,
+    "result": "loss",
+    "market": -4.5
+   },
+   {
+    "game_id": "2026_04_DET_CAR",
+    "season": 2026,
+    "week": 4,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 52.5,
+    "result": "loss",
+    "market": -4.5
+   },
+   {
+    "game_id": "2026_04_ATL_NO",
+    "season": 2026,
+    "week": 4,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 47.5,
+    "result": "loss",
+    "market": 1.5
+   },
+   {
+    "game_id": "2026_05_PHI_JAX",
+    "season": 2026,
+    "week": 5,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 41.5,
+    "result": "loss",
+    "market": 7.5
+   },
+   {
+    "game_id": "2026_05_IND_PIT",
+    "season": 2026,
+    "week": 5,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 41.5,
+    "result": "win",
+    "market": 3.0
+   },
+   {
+    "game_id": "2026_05_HOU_TEN",
+    "season": 2026,
+    "week": 5,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 37.5,
+    "result": "loss",
+    "market": -6.5
+   },
+   {
+    "game_id": "2026_05_NYG_WAS",
+    "season": 2026,
+    "week": 5,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 41.5,
+    "result": "win",
+    "market": 3.5
+   },
+   {
+    "game_id": "2026_05_DET_ARI",
+    "season": 2026,
+    "week": 5,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 55.5,
+    "result": "loss",
+    "market": -5.5
+   },
+   {
+    "game_id": "2026_05_BUF_LA",
+    "season": 2026,
+    "week": 5,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 55.5,
+    "result": "loss",
+    "market": 3.5
+   },
+   {
+    "game_id": "2026_06_SEA_DEN",
+    "season": 2026,
+    "week": 6,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 40.5,
+    "result": "loss",
+    "market": -2.5
+   },
+   {
+    "game_id": "2026_06_CHI_ATL",
+    "season": 2026,
+    "week": 6,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 51.5,
+    "result": "loss",
+    "market": -1.5
+   },
+   {
+    "game_id": "2026_06_BAL_CLE",
+    "season": 2026,
+    "week": 6,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 39.5,
+    "result": "loss",
+    "market": -3.0
+   },
+   {
+    "game_id": "2026_06_NO_NYG",
+    "season": 2026,
+    "week": 6,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 46.5,
+    "result": "loss",
+    "market": -1.5
+   },
+   {
+    "game_id": "2026_06_CAR_PHI",
+    "season": 2026,
+    "week": 6,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 39.5,
+    "result": "loss",
+    "market": -3.0
+   },
+   {
+    "game_id": "2026_06_PIT_TB",
+    "season": 2026,
+    "week": 6,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 38.5,
+    "result": "win",
+    "market": -2.5
+   },
+   {
+    "game_id": "2026_06_ARI_LA",
+    "season": 2026,
+    "week": 6,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 51.5,
+    "result": "win",
+    "market": 12.5
+   },
+   {
+    "game_id": "2026_06_BUF_LV",
+    "season": 2026,
+    "week": 6,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 53.5,
+    "result": "loss",
+    "market": -5.5
+   },
+   {
+    "game_id": "2026_06_DAL_GB",
+    "season": 2026,
+    "week": 6,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 53.5,
+    "result": "win",
+    "market": -1.5
+   },
+   {
+    "game_id": "2026_07_MIA_NYJ",
+    "season": 2026,
+    "week": 7,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 39.5,
+    "result": "win",
+    "market": 3.5
+   },
+   {
+    "game_id": "2026_07_CLE_TEN",
+    "season": 2026,
+    "week": 7,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 36.5,
+    "result": "win",
+    "market": -1.5
+   },
+   {
+    "game_id": "2026_07_GB_DET",
+    "season": 2026,
+    "week": 7,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 55.5,
+    "result": "win",
+    "market": 3.5
+   },
+   {
+    "game_id": "2026_07_LA_LV",
+    "season": 2026,
+    "week": 7,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 49.5,
+    "result": "loss",
+    "market": -3.5
+   },
+   {
+    "game_id": "2026_08_BAL_BUF",
+    "season": 2026,
+    "week": 8,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 54.5,
+    "result": "win",
+    "market": 3.0
+   },
+   {
+    "game_id": "2026_08_ARI_DAL",
+    "season": 2026,
+    "week": 8,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 54.5,
+    "result": "loss",
+    "market": 7.0
+   },
+   {
+    "game_id": "2026_08_LV_NYJ",
+    "season": 2026,
+    "week": 8,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 46.5,
+    "result": "loss",
+    "market": 1.5
+   },
+   {
+    "game_id": "2026_08_CLE_PIT",
+    "season": 2026,
+    "week": 8,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 38.5,
+    "result": "loss",
+    "market": 3.5
+   },
+   {
+    "game_id": "2026_08_KC_DEN",
+    "season": 2026,
+    "week": 8,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 41.5,
+    "result": "win",
+    "market": 1.5
+   },
+   {
+    "game_id": "2026_08_NE_MIA",
+    "season": 2026,
+    "week": 8,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 41.5,
+    "result": "win",
+    "market": -7.0
+   },
+   {
+    "game_id": "2026_08_PHI_WAS",
+    "season": 2026,
+    "week": 8,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 40.5,
+    "result": "loss",
+    "market": 6.0
+   },
+   {
+    "game_id": "2026_09_JAX_BAL",
+    "season": 2026,
+    "week": 9,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 40.5,
+    "result": "win",
+    "market": -8.5
+   },
+   {
+    "game_id": "2026_09_CIN_ATL",
+    "season": 2026,
+    "week": 9,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 52.5,
+    "result": "win",
+    "market": -3.0
+   },
+   {
+    "game_id": "2026_09_DAL_IND",
+    "season": 2026,
+    "week": 9,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 51.5,
+    "result": "win",
+    "market": -4.5
+   },
+   {
+    "game_id": "2026_09_NYG_PHI",
+    "season": 2026,
+    "week": 9,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 38.5,
+    "result": "loss",
+    "market": -3.0
+   },
+   {
+    "game_id": "2026_09_LV_SF",
+    "season": 2026,
+    "week": 9,
+    "team": "TOTAL",
+    "side": "under",
+    "line": 51.5,
+    "result": "loss",
+    "market": 8.5
+   },
+   {
+    "game_id": "2026_09_GB_NE",
+    "season": 2026,
+    "week": 9,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 44.5,
+    "result": "win",
+    "market": 3.0
+   },
+   {
+    "game_id": "2026_09_ARI_SEA",
+    "season": 2026,
+    "week": 9,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 39.5,
+    "result": "loss",
+    "market": 8.5
+   }
+  ],
+  "S12 Start the team whose QB is ruled Out/Doubtful": [
+   {
+    "game_id": "2025_14_MIA_NYJ",
+    "season": 2025,
+    "week": 14,
+    "team": "NYJ",
+    "side": "home",
+    "line": -2.5,
+    "result": "loss",
+    "market": -2.5
+   },
+   {
+    "game_id": "2025_15_CLE_CHI",
+    "season": 2025,
+    "week": 15,
+    "team": "CLE",
+    "side": "away",
+    "line": -7.5,
+    "result": "loss",
+    "market": 7.5
+   },
+   {
+    "game_id": "2025_15_NYJ_JAX",
+    "season": 2025,
+    "week": 15,
+    "team": "NYJ",
+    "side": "away",
+    "line": -13.5,
+    "result": "loss",
+    "market": 13.5
+   },
+   {
+    "game_id": "2025_15_WAS_NYG",
+    "season": 2025,
+    "week": 15,
+    "team": "WAS",
+    "side": "away",
+    "line": -2.5,
+    "result": "win",
+    "market": 2.5
+   },
+   {
+    "game_id": "2025_15_LV_PHI",
+    "season": 2025,
+    "week": 15,
+    "team": "LV",
+    "side": "away",
+    "line": -12.5,
+    "result": "loss",
+    "market": 12.5
+   },
+   {
+    "game_id": "2025_15_TEN_SF",
+    "season": 2025,
+    "week": 15,
+    "team": "SF",
+    "side": "home",
+    "line": 12.5,
+    "result": "win",
+    "market": 12.5
+   },
+   {
+    "game_id": "2025_16_PHI_WAS",
+    "season": 2025,
+    "week": 16,
+    "team": "WAS",
+    "side": "home",
+    "line": -7.0,
+    "result": "loss",
+    "market": -7.0
+   },
+   {
+    "game_id": "2025_16_BUF_CLE",
+    "season": 2025,
+    "week": 16,
+    "team": "CLE",
+    "side": "home",
+    "line": -10.5,
+    "result": "win",
+    "market": -10.5
+   },
+   {
+    "game_id": "2025_16_SF_IND",
+    "season": 2025,
+    "week": 16,
+    "team": "IND",
+    "side": "home",
+    "line": -4.5,
+    "result": "loss",
+    "market": -4.5
+   },
+   {
+    "game_id": "2025_17_DAL_WAS",
+    "season": 2025,
+    "week": 17,
+    "team": "WAS",
+    "side": "home",
+    "line": -8.5,
+    "result": "win",
+    "market": -8.5
+   },
+   {
+    "game_id": "2025_17_DET_MIN",
+    "season": 2025,
+    "week": 17,
+    "team": "MIN",
+    "side": "home",
+    "line": -7.0,
+    "result": "win",
+    "market": -7.0
+   },
+   {
+    "game_id": "2025_17_BAL_GB",
+    "season": 2025,
+    "week": 17,
+    "team": "GB",
+    "side": "home",
+    "line": 2.5,
+    "result": "loss",
+    "market": 2.5
+   },
+   {
+    "game_id": "2025_17_JAX_IND",
+    "season": 2025,
+    "week": 17,
+    "team": "IND",
+    "side": "home",
+    "line": -3.5,
+    "result": "loss",
+    "market": -3.5
+   },
+   {
+    "game_id": "2025_17_CHI_SF",
+    "season": 2025,
+    "week": 17,
+    "team": "SF",
+    "side": "home",
+    "line": 3.5,
+    "result": "win",
+    "market": 3.5
+   },
+   {
+    "game_id": "2025_18_IND_HOU",
+    "season": 2025,
+    "week": 18,
+    "team": "IND",
+    "side": "away",
+    "line": -9.5,
+    "result": "win",
+    "market": 9.5
+   },
+   {
+    "game_id": "2025_18_KC_LV",
+    "season": 2025,
+    "week": 18,
+    "team": "LV",
+    "side": "home",
+    "line": -3.5,
+    "result": "win",
+    "market": -3.5
+   },
+   {
+    "game_id": "2025_18_WAS_PHI",
+    "season": 2025,
+    "week": 18,
+    "team": "WAS",
+    "side": "away",
+    "line": -3.0,
+    "result": "win",
+    "market": 3.0
+   },
+   {
+    "game_id": "2026_01_ATL_PIT",
+    "season": 2026,
+    "week": 1,
+    "team": "ATL",
+    "side": "away",
+    "line": -6.5,
+    "result": "loss",
+    "market": 6.5
+   },
+   {
+    "game_id": "2026_02_CAR_ATL",
+    "season": 2026,
+    "week": 2,
+    "team": "ATL",
+    "side": "home",
+    "line": -2.5,
+    "result": "loss",
+    "market": -2.5
+   },
+   {
+    "game_id": "2026_02_MIN_CHI",
+    "season": 2026,
+    "week": 2,
+    "team": "MIN",
+    "side": "away",
+    "line": -4.5,
+    "result": "win",
+    "market": 4.5
+   },
+   {
+    "game_id": "2026_02_SEA_ARI",
+    "season": 2026,
+    "week": 2,
+    "team": "SEA",
+    "side": "away",
+    "line": 3.5,
+    "result": "win",
+    "market": -3.5
+   },
+   {
+    "game_id": "2026_03_SEA_WAS",
+    "season": 2026,
+    "week": 3,
+    "team": "WAS",
+    "side": "home",
+    "line": -8.5,
+    "result": "win",
+    "market": -8.5
+   },
+   {
+    "game_id": "2026_03_PHI_CHI",
+    "season": 2026,
+    "week": 3,
+    "team": "CHI",
+    "side": "home",
+    "line": -3.5,
+    "result": "win",
+    "market": -3.5
+   },
+   {
+    "game_id": "2026_04_IND_WAS",
+    "season": 2026,
+    "week": 4,
+    "team": "WAS",
+    "side": "home",
+    "line": -4.5,
+    "result": "loss",
+    "market": -4.5
+   },
+   {
+    "game_id": "2026_04_NYJ_CHI",
+    "season": 2026,
+    "week": 4,
+    "team": "CHI",
+    "side": "home",
+    "line": 3.5,
+    "result": "win",
+    "market": 3.5
+   },
+   {
+    "game_id": "2026_04_GB_TB",
+    "season": 2026,
+    "week": 4,
+    "team": "TB",
+    "side": "home",
+    "line": -3.0,
+    "result": "push",
+    "market": -3.0
+   },
+   {
+    "game_id": "2026_05_TB_DAL",
+    "season": 2026,
+    "week": 5,
+    "team": "TB",
+    "side": "away",
+    "line": -9.5,
+    "result": "win",
+    "market": 9.5
+   },
+   {
+    "game_id": "2026_05_CLE_NYJ",
+    "season": 2026,
+    "week": 5,
+    "team": "CLE",
+    "side": "away",
+    "line": -2.5,
+    "result": "loss",
+    "market": 2.5
+   },
+   {
+    "game_id": "2026_05_NYG_WAS",
+    "season": 2026,
+    "week": 5,
+    "team": "WAS",
+    "side": "home",
+    "line": 3.5,
+    "result": "loss",
+    "market": 3.5
+   },
+   {
+    "game_id": "2026_05_DEN_LAC",
+    "season": 2026,
+    "week": 5,
+    "team": "LAC",
+    "side": "home",
+    "line": -3.5,
+    "result": "loss",
+    "market": -3.5
+   },
+   {
+    "game_id": "2026_05_BAL_ATL",
+    "season": 2026,
+    "week": 5,
+    "team": "BAL",
+    "side": "away",
+    "line": -3.5,
+    "result": "win",
+    "market": 3.5
+   },
+   {
+    "game_id": "2026_06_BAL_CLE",
+    "season": 2026,
+    "week": 6,
+    "team": "CLE",
+    "side": "home",
+    "line": -3.0,
+    "result": "win",
+    "market": -3.0
+   },
+   {
+    "game_id": "2026_06_CAR_PHI",
+    "season": 2026,
+    "week": 6,
+    "team": "PHI",
+    "side": "home",
+    "line": -3.0,
+    "result": "loss",
+    "market": -3.0
+   },
+   {
+    "game_id": "2026_06_PIT_TB",
+    "season": 2026,
+    "week": 6,
+    "team": "TB",
+    "side": "home",
+    "line": -2.5,
+    "result": "loss",
+    "market": -2.5
+   },
+   {
+    "game_id": "2026_06_WAS_SF",
+    "season": 2026,
+    "week": 6,
+    "team": "WAS",
+    "side": "away",
+    "line": -7.5,
+    "result": "win",
+    "market": 7.5
+   },
+   {
+    "game_id": "2026_07_CIN_BAL",
+    "season": 2026,
+    "week": 7,
+    "team": "BAL",
+    "side": "home",
+    "line": -3.0,
+    "result": "loss",
+    "market": -3.0
+   },
+   {
+    "game_id": "2026_07_CLE_TEN",
+    "season": 2026,
+    "week": 7,
+    "team": "CLE",
+    "side": "away",
+    "line": 1.5,
+    "result": "win",
+    "market": -1.5
+   },
+   {
+    "game_id": "2026_09_JAX_BAL",
+    "season": 2026,
+    "week": 9,
+    "team": "BAL",
+    "side": "home",
+    "line": -8.5,
+    "result": "loss",
+    "market": -8.5
+   },
+   {
+    "game_id": "2026_09_ARI_SEA",
+    "season": 2026,
+    "week": 9,
+    "team": "SEA",
+    "side": "home",
+    "line": 8.5,
+    "result": "win",
+    "market": 8.5
+   },
+   {
+    "game_id": "2026_09_BUF_MIN",
+    "season": 2026,
+    "week": 9,
+    "team": "MIN",
+    "side": "home",
+    "line": -3.0,
+    "result": "loss",
+    "market": -3.0
+   }
+  ]
+ }
+}
