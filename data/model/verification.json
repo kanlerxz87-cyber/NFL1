@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-12T18:53:41+00:00",
+ "generated_at": "2026-11-12T22:57:02+00:00",
  "checks": [
   {
    "name": "2026 standings (W-L-T, points for/against)",
@@ -622,8 +622,8 @@
    "name": "Scraped official injury report vs hand-transcribed sample",
    "source": "https://www.nfl.com/injuries/",
    "rows_checked": 44,
-   "rows_matched": 44,
-   "mismatches": 0,
+   "rows_matched": 35,
+   "mismatches": 9,
    "detail": [
     {
      "team": "WAS",
@@ -1145,17 +1145,22 @@
      "injury": null,
      "practice": "Did Not Participate In Practice",
      "game": null,
-     "matched": true,
+     "matched": false,
      "scraped": {
       "team": "NE",
       "player": "Cameron Latu",
       "position": "TE",
       "injury": null,
-      "practice": "Did Not Participate In Practice",
+      "practice": "Limited Participation in Practice",
       "game": null,
       "player_url": "https://www.nfl.com/players/cameron-latu/"
      },
-     "diffs": null
+     "diffs": {
+      "practice": {
+       "nfl_fixture": "Did Not Participate In Practice",
+       "scraped": "Limited Participation in Practice"
+      }
+     }
     },
     {
      "team": "NE",
@@ -1202,17 +1207,22 @@
      "injury": null,
      "practice": "Did Not Participate In Practice",
      "game": null,
-     "matched": true,
+     "matched": false,
      "scraped": {
       "team": "NE",
       "player": "Walter Rouse",
       "position": "T",
       "injury": null,
-      "practice": "Did Not Participate In Practice",
+      "practice": "Limited Participation in Practice",
       "game": null,
       "player_url": "https://www.nfl.com/players/walter-rouse/"
      },
-     "diffs": null
+     "diffs": {
+      "practice": {
+       "nfl_fixture": "Did Not Participate In Practice",
+       "scraped": "Limited Participation in Practice"
+      }
+     }
     },
     {
      "team": "NE",
@@ -1221,17 +1231,22 @@
      "injury": null,
      "practice": "Did Not Participate In Practice",
      "game": null,
-     "matched": true,
+     "matched": false,
      "scraped": {
       "team": "NE",
       "player": "Brenden Schooler",
       "position": "S",
       "injury": null,
-      "practice": "Did Not Participate In Practice",
+      "practice": "Limited Participation in Practice",
       "game": null,
       "player_url": "https://www.nfl.com/players/brenden-schooler/"
      },
-     "diffs": null
+     "diffs": {
+      "practice": {
+       "nfl_fixture": "Did Not Participate In Practice",
+       "scraped": "Limited Participation in Practice"
+      }
+     }
     },
     {
      "team": "NE",
@@ -1240,17 +1255,22 @@
      "injury": null,
      "practice": "Did Not Participate In Practice",
      "game": null,
-     "matched": true,
+     "matched": false,
      "scraped": {
       "team": "NE",
       "player": "Rhamondre Stevenson",
       "position": "RB",
       "injury": null,
-      "practice": "Did Not Participate In Practice",
+      "practice": "Limited Participation in Practice",
       "game": null,
       "player_url": "https://www.nfl.com/players/rhamondre-stevenson/"
      },
-     "diffs": null
+     "diffs": {
+      "practice": {
+       "nfl_fixture": "Did Not Participate In Practice",
+       "scraped": "Limited Participation in Practice"
+      }
+     }
     },
     {
      "team": "NE",
@@ -1297,17 +1317,22 @@
      "injury": null,
      "practice": "Limited Participation in Practice",
      "game": null,
-     "matched": true,
+     "matched": false,
      "scraped": {
       "team": "DET",
       "player": "Brian Branch",
       "position": "S",
       "injury": null,
-      "practice": "Limited Participation in Practice",
+      "practice": "Full Participation in Practice",
       "game": null,
       "player_url": "https://www.nfl.com/players/brian-branch/"
      },
-     "diffs": null
+     "diffs": {
+      "practice": {
+       "nfl_fixture": "Limited Participation in Practice",
+       "scraped": "Full Participation in Practice"
+      }
+     }
     },
     {
      "team": "DET",
@@ -1316,17 +1341,22 @@
      "injury": null,
      "practice": "Limited Participation in Practice",
      "game": null,
-     "matched": true,
+     "matched": false,
      "scraped": {
       "team": "DET",
       "player": "Jared Goff",
       "position": "QB",
       "injury": null,
-      "practice": "Limited Participation in Practice",
+      "practice": "Full Participation in Practice",
       "game": null,
       "player_url": "https://www.nfl.com/players/jared-goff/"
      },
-     "diffs": null
+     "diffs": {
+      "practice": {
+       "nfl_fixture": "Limited Participation in Practice",
+       "scraped": "Full Participation in Practice"
+      }
+     }
     },
     {
      "team": "DET",
@@ -1335,17 +1365,30 @@
      "injury": null,
      "practice": "Limited Participation in Practice",
      "game": null,
-     "matched": true,
+     "matched": false,
      "scraped": {
       "team": "DET",
       "player": "Kerby Joseph",
       "position": "S",
-      "injury": null,
-      "practice": "Limited Participation in Practice",
-      "game": null,
+      "injury": "Knee",
+      "practice": "Full Participation in Practice",
+      "game": "Out",
       "player_url": "https://www.nfl.com/players/kerby-joseph/"
      },
-     "diffs": null
+     "diffs": {
+      "injury": {
+       "nfl_fixture": null,
+       "scraped": "Knee"
+      },
+      "practice": {
+       "nfl_fixture": "Limited Participation in Practice",
+       "scraped": "Full Participation in Practice"
+      },
+      "game": {
+       "nfl_fixture": null,
+       "scraped": "Out"
+      }
+     }
     },
     {
      "team": "DET",
@@ -1354,17 +1397,26 @@
      "injury": null,
      "practice": "Did Not Participate In Practice",
      "game": null,
-     "matched": true,
+     "matched": false,
      "scraped": {
       "team": "DET",
       "player": "Cade Mays",
       "position": "C",
-      "injury": null,
+      "injury": "Ankle",
       "practice": "Did Not Participate In Practice",
-      "game": null,
+      "game": "Out",
       "player_url": "https://www.nfl.com/players/cade-mays/"
      },
-     "diffs": null
+     "diffs": {
+      "injury": {
+       "nfl_fixture": null,
+       "scraped": "Ankle"
+      },
+      "game": {
+       "nfl_fixture": null,
+       "scraped": "Out"
+      }
+     }
     },
     {
      "team": "DET",
@@ -1373,17 +1425,26 @@
      "injury": null,
      "practice": "Did Not Participate In Practice",
      "game": null,
-     "matched": true,
+     "matched": false,
      "scraped": {
       "team": "DET",
       "player": "D.J. Reed",
       "position": "CB",
-      "injury": null,
+      "injury": "Hip",
       "practice": "Did Not Participate In Practice",
-      "game": null,
+      "game": "Out",
       "player_url": "https://www.nfl.com/players/d-j-reed/"
      },
-     "diffs": null
+     "diffs": {
+      "injury": {
+       "nfl_fixture": null,
+       "scraped": "Hip"
+      },
+      "game": {
+       "nfl_fixture": null,
+       "scraped": "Out"
+      }
+     }
     },
     {
      "team": "DET",
@@ -1466,17 +1527,17 @@
   {
    "name": "Mirrored feed coverage vs official report, week 10",
    "source": "https://www.nfl.com/injuries/",
-   "rows_checked": 276,
+   "rows_checked": 295,
    "rows_matched": 276,
-   "mismatches": 0,
+   "mismatches": 19,
    "detail": [
     {
      "team": "coverage summary",
      "player": "official rows present in feed",
-     "position": "276/276",
-     "matched": true,
+     "position": "276/295",
+     "matched": false,
      "feed": {
-      "game": "0 game-status disagreements"
+      "game": "3 game-status disagreements"
      }
     }
    ]
@@ -2149,7 +2210,7 @@
       "w": 2,
       "l": 5,
       "t": 1,
-      "pct": 0.312,
+      "pct": 0.313,
       "pf": 172,
       "pa": 202,
       "diff": -30,
@@ -2712,7 +2773,115 @@
    ]
   }
  ],
- "irregularities": [],
+ "irregularities": [
+  {
+   "id": "V2",
+   "area": "injury scrape",
+   "issue": "9 of 44 sampled rows differ from the scrape",
+   "examples": [
+    {
+     "team": "NE",
+     "player": "Cameron Latu",
+     "diffs": {
+      "practice": {
+       "nfl_fixture": "Did Not Participate In Practice",
+       "scraped": "Limited Participation in Practice"
+      }
+     }
+    },
+    {
+     "team": "NE",
+     "player": "Walter Rouse",
+     "diffs": {
+      "practice": {
+       "nfl_fixture": "Did Not Participate In Practice",
+       "scraped": "Limited Participation in Practice"
+      }
+     }
+    },
+    {
+     "team": "NE",
+     "player": "Brenden Schooler",
+     "diffs": {
+      "practice": {
+       "nfl_fixture": "Did Not Participate In Practice",
+       "scraped": "Limited Participation in Practice"
+      }
+     }
+    },
+    {
+     "team": "NE",
+     "player": "Rhamondre Stevenson",
+     "diffs": {
+      "practice": {
+       "nfl_fixture": "Did Not Participate In Practice",
+       "scraped": "Limited Participation in Practice"
+      }
+     }
+    },
+    {
+     "team": "DET",
+     "player": "Brian Branch",
+     "diffs": {
+      "practice": {
+       "nfl_fixture": "Limited Participation in Practice",
+       "scraped": "Full Participation in Practice"
+      }
+     }
+    },
+    {
+     "team": "DET",
+     "player": "Jared Goff",
+     "diffs": {
+      "practice": {
+       "nfl_fixture": "Limited Participation in Practice",
+       "scraped": "Full Participation in Practice"
+      }
+     }
+    },
+    {
+     "team": "DET",
+     "player": "Kerby Joseph",
+     "diffs": {
+      "injury": {
+       "nfl_fixture": null,
+       "scraped": "Knee"
+      },
+      "practice": {
+       "nfl_fixture": "Limited Participation in Practice",
+       "scraped": "Full Participation in Practice"
+      },
+      "game": {
+       "nfl_fixture": null,
+       "scraped": "Out"
+      }
+     }
+    },
+    {
+     "team": "DET",
+     "player": "Cade Mays",
+     "diffs": {
+      "injury": {
+       "nfl_fixture": null,
+       "scraped": "Ankle"
+      },
+      "game": {
+       "nfl_fixture": null,
+       "scraped": "Out"
+      }
+     }
+    }
+   ],
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "V3",
+   "area": "mirrored injury feed",
+   "issue": "The mirrored feed has 276 of 295 official week 10 rows (3 status disagreements).",
+   "examples": [],
+   "source": "https://www.nfl.com/injuries/"
+  }
+ ],
  "unverifiable": [
   {
    "item": "Closing spread/total/moneylines",

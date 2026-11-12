@@ -1,0 +1,564 @@
+{
+ "summary": {
+  "checked_on": "2026-11-12",
+  "source": "https://www.nfl.com/injuries/ (all 7 chunks read in this check)",
+  "live_game_designations": 9,
+  "rows_field_checked": 16,
+  "scrape_matches_live_on_field_checked_rows": 16,
+  "transcription_matches_live_on_field_checked_rows": 10,
+  "extras_checked_on_live_page": 16,
+  "extras_on_live_page": 16,
+  "extras_in_scrape_with_live_practice": 16,
+  "conclusion": "The 279-row transcription is a stale baseline: it lacks all 16 rows the verifier called extra, and it differs from the live page on the rows checked. The 295-row scrape matches the live page on every field-checked row and on the practice status of every extra row checked. The earlier 'not on the official page' finding was wrong. A full row-by-row re-transcription of the live page is still required (R-6a232e79-13).",
+  "transcription_differs_on_field_checked_rows": 6
+ },
+ "live_game_designations": [
+  {
+   "team": "WAS",
+   "player": "Lucas Patrick",
+   "injury": "Concussion",
+   "practice": "Did Not Participate In Practice",
+   "game": "Out"
+  },
+  {
+   "team": "WAS",
+   "player": "Colson Yankoff",
+   "injury": "Knee",
+   "practice": "Did Not Participate In Practice",
+   "game": "Out"
+  },
+  {
+   "team": "NYG",
+   "player": "Malik Harrison",
+   "injury": "Groin",
+   "practice": "Limited Participation in Practice",
+   "game": "Questionable"
+  },
+  {
+   "team": "NE",
+   "player": "Ben Brown",
+   "injury": "Knee",
+   "practice": "Did Not Participate In Practice",
+   "game": "Out"
+  },
+  {
+   "team": "NE",
+   "player": "Carlton Davis III",
+   "injury": "Knee",
+   "practice": "Did Not Participate In Practice",
+   "game": "Out"
+  },
+  {
+   "team": "NE",
+   "player": "TreVeyon Henderson",
+   "injury": "Illness",
+   "practice": "Did Not Participate In Practice",
+   "game": "Out"
+  },
+  {
+   "team": "DET",
+   "player": "Kerby Joseph",
+   "injury": "Knee",
+   "practice": "Full Participation in Practice",
+   "game": "Out"
+  },
+  {
+   "team": "DET",
+   "player": "Cade Mays",
+   "injury": "Ankle",
+   "practice": "Did Not Participate In Practice",
+   "game": "Out"
+  },
+  {
+   "team": "DET",
+   "player": "D.J. Reed",
+   "injury": "Hip",
+   "practice": "Did Not Participate In Practice",
+   "game": "Out"
+  }
+ ],
+ "field_checks": [
+  {
+   "team": "WAS",
+   "player": "Lucas Patrick",
+   "live": {
+    "injury": "Concussion",
+    "practice": "Did Not Participate In Practice",
+    "game": "Out"
+   },
+   "scrape": {
+    "injury": "Concussion",
+    "practice": "Did Not Participate In Practice",
+    "game": "Out"
+   },
+   "scrape_matches_live": true,
+   "transcription": {
+    "injury": "Concussion",
+    "practice": "Did Not Participate In Practice",
+    "game": "Out"
+   },
+   "transcription_matches_live": true
+  },
+  {
+   "team": "WAS",
+   "player": "Colson Yankoff",
+   "live": {
+    "injury": "Knee",
+    "practice": "Did Not Participate In Practice",
+    "game": "Out"
+   },
+   "scrape": {
+    "injury": "Knee",
+    "practice": "Did Not Participate In Practice",
+    "game": "Out"
+   },
+   "scrape_matches_live": true,
+   "transcription": {
+    "injury": "Knee",
+    "practice": "Did Not Participate In Practice",
+    "game": "Out"
+   },
+   "transcription_matches_live": true
+  },
+  {
+   "team": "NYG",
+   "player": "Malik Harrison",
+   "live": {
+    "injury": "Groin",
+    "practice": "Limited Participation in Practice",
+    "game": "Questionable"
+   },
+   "scrape": {
+    "injury": "Groin",
+    "practice": "Limited Participation in Practice",
+    "game": "Questionable"
+   },
+   "scrape_matches_live": true,
+   "transcription": {
+    "injury": "Groin",
+    "practice": "Limited Participation in Practice",
+    "game": "Questionable"
+   },
+   "transcription_matches_live": true
+  },
+  {
+   "team": "NE",
+   "player": "Ben Brown",
+   "live": {
+    "injury": "Knee",
+    "practice": "Did Not Participate In Practice",
+    "game": "Out"
+   },
+   "scrape": {
+    "injury": "Knee",
+    "practice": "Did Not Participate In Practice",
+    "game": "Out"
+   },
+   "scrape_matches_live": true,
+   "transcription": {
+    "injury": "Knee",
+    "practice": "Did Not Participate In Practice",
+    "game": "Out"
+   },
+   "transcription_matches_live": true
+  },
+  {
+   "team": "NE",
+   "player": "Carlton Davis III",
+   "live": {
+    "injury": "Knee",
+    "practice": "Did Not Participate In Practice",
+    "game": "Out"
+   },
+   "scrape": {
+    "injury": "Knee",
+    "practice": "Did Not Participate In Practice",
+    "game": "Out"
+   },
+   "scrape_matches_live": true,
+   "transcription": {
+    "injury": "Knee",
+    "practice": "Did Not Participate In Practice",
+    "game": "Out"
+   },
+   "transcription_matches_live": true
+  },
+  {
+   "team": "NE",
+   "player": "TreVeyon Henderson",
+   "live": {
+    "injury": "Illness",
+    "practice": "Did Not Participate In Practice",
+    "game": "Out"
+   },
+   "scrape": {
+    "injury": "Illness",
+    "practice": "Did Not Participate In Practice",
+    "game": "Out"
+   },
+   "scrape_matches_live": true,
+   "transcription": {
+    "injury": "Illness",
+    "practice": "Did Not Participate In Practice",
+    "game": "Out"
+   },
+   "transcription_matches_live": true
+  },
+  {
+   "team": "NE",
+   "player": "Cameron Latu",
+   "live": {
+    "injury": null,
+    "practice": "Limited Participation in Practice",
+    "game": null
+   },
+   "scrape": {
+    "injury": null,
+    "practice": "Limited Participation in Practice",
+    "game": null
+   },
+   "scrape_matches_live": true,
+   "transcription": {
+    "injury": null,
+    "practice": "Did Not Participate In Practice",
+    "game": null
+   },
+   "transcription_matches_live": false
+  },
+  {
+   "team": "NE",
+   "player": "Walter Rouse",
+   "live": {
+    "injury": null,
+    "practice": "Limited Participation in Practice",
+    "game": null
+   },
+   "scrape": {
+    "injury": null,
+    "practice": "Limited Participation in Practice",
+    "game": null
+   },
+   "scrape_matches_live": true,
+   "transcription": {
+    "injury": null,
+    "practice": "Did Not Participate In Practice",
+    "game": null
+   },
+   "transcription_matches_live": false
+  },
+  {
+   "team": "DET",
+   "player": "Kerby Joseph",
+   "live": {
+    "injury": "Knee",
+    "practice": "Full Participation in Practice",
+    "game": "Out"
+   },
+   "scrape": {
+    "injury": "Knee",
+    "practice": "Full Participation in Practice",
+    "game": "Out"
+   },
+   "scrape_matches_live": true,
+   "transcription": {
+    "injury": null,
+    "practice": "Limited Participation in Practice",
+    "game": null
+   },
+   "transcription_matches_live": false
+  },
+  {
+   "team": "DET",
+   "player": "Cade Mays",
+   "live": {
+    "injury": "Ankle",
+    "practice": "Did Not Participate In Practice",
+    "game": "Out"
+   },
+   "scrape": {
+    "injury": "Ankle",
+    "practice": "Did Not Participate In Practice",
+    "game": "Out"
+   },
+   "scrape_matches_live": true,
+   "transcription": {
+    "injury": null,
+    "practice": "Did Not Participate In Practice",
+    "game": null
+   },
+   "transcription_matches_live": false
+  },
+  {
+   "team": "DET",
+   "player": "D.J. Reed",
+   "live": {
+    "injury": "Hip",
+    "practice": "Did Not Participate In Practice",
+    "game": "Out"
+   },
+   "scrape": {
+    "injury": "Hip",
+    "practice": "Did Not Participate In Practice",
+    "game": "Out"
+   },
+   "scrape_matches_live": true,
+   "transcription": {
+    "injury": null,
+    "practice": "Did Not Participate In Practice",
+    "game": null
+   },
+   "transcription_matches_live": false
+  },
+  {
+   "team": "DET",
+   "player": "Brian Branch",
+   "live": {
+    "injury": null,
+    "practice": "Full Participation in Practice",
+    "game": null
+   },
+   "scrape": {
+    "injury": null,
+    "practice": "Full Participation in Practice",
+    "game": null
+   },
+   "scrape_matches_live": true,
+   "transcription": {
+    "injury": null,
+    "practice": "Limited Participation in Practice",
+    "game": null
+   },
+   "transcription_matches_live": false
+  },
+  {
+   "team": "DET",
+   "player": "Sione Vaki",
+   "live": {
+    "injury": null,
+    "practice": "Did Not Participate In Practice",
+    "game": null
+   },
+   "scrape": {
+    "injury": null,
+    "practice": "Did Not Participate In Practice",
+    "game": null
+   },
+   "scrape_matches_live": true,
+   "transcription": {
+    "injury": null,
+    "practice": "Did Not Participate In Practice",
+    "game": null
+   },
+   "transcription_matches_live": true
+  },
+  {
+   "team": "ATL",
+   "player": "Zachariah Branch",
+   "live": {
+    "injury": null,
+    "practice": "Did Not Participate In Practice",
+    "game": null
+   },
+   "scrape": {
+    "injury": null,
+    "practice": "Did Not Participate In Practice",
+    "game": null
+   },
+   "scrape_matches_live": true,
+   "transcription": {
+    "injury": null,
+    "practice": "Did Not Participate In Practice",
+    "game": null
+   },
+   "transcription_matches_live": true
+  },
+  {
+   "team": "SEA",
+   "player": "Sam Darnold",
+   "live": {
+    "injury": null,
+    "practice": "Did Not Participate In Practice",
+    "game": null
+   },
+   "scrape": {
+    "injury": null,
+    "practice": "Did Not Participate In Practice",
+    "game": null
+   },
+   "scrape_matches_live": true,
+   "transcription": {
+    "injury": null,
+    "practice": "Did Not Participate In Practice",
+    "game": null
+   },
+   "transcription_matches_live": true
+  },
+  {
+   "team": "SEA",
+   "player": "Drew Lock",
+   "live": {
+    "injury": null,
+    "practice": "Limited Participation in Practice",
+    "game": null
+   },
+   "scrape": {
+    "injury": null,
+    "practice": "Limited Participation in Practice",
+    "game": null
+   },
+   "scrape_matches_live": true,
+   "transcription": {
+    "injury": null,
+    "practice": "Limited Participation in Practice",
+    "game": null
+   },
+   "transcription_matches_live": true
+  }
+ ],
+ "extras_on_live_page": [
+  {
+   "team": "KC",
+   "player": "Jaydn Ott",
+   "live_practice": "Limited Participation in Practice",
+   "on_live_page": true,
+   "in_scrape": true,
+   "scrape_practice_matches": true,
+   "in_transcription": false
+  },
+  {
+   "team": "ATL",
+   "player": "Kendal Daniels",
+   "live_practice": "Limited Participation in Practice",
+   "on_live_page": true,
+   "in_scrape": true,
+   "scrape_practice_matches": true,
+   "in_transcription": false
+  },
+  {
+   "team": "ATL",
+   "player": "Jawaan Taylor",
+   "live_practice": "Did Not Participate In Practice",
+   "on_live_page": true,
+   "in_scrape": true,
+   "scrape_practice_matches": true,
+   "in_transcription": false
+  },
+  {
+   "team": "ATL",
+   "player": "Cameron Thomas",
+   "live_practice": "Limited Participation in Practice",
+   "on_live_page": true,
+   "in_scrape": true,
+   "scrape_practice_matches": true,
+   "in_transcription": false
+  },
+  {
+   "team": "BUF",
+   "player": "Sam Franklin Jr.",
+   "live_practice": "Limited Participation in Practice",
+   "on_live_page": true,
+   "in_scrape": true,
+   "scrape_practice_matches": true,
+   "in_transcription": false
+  },
+  {
+   "team": "NYJ",
+   "player": "Jarvis Brownlee Jr.",
+   "live_practice": "Did Not Participate In Practice",
+   "on_live_page": true,
+   "in_scrape": true,
+   "scrape_practice_matches": true,
+   "in_transcription": false
+  },
+  {
+   "team": "MIA",
+   "player": "Jared Wayne",
+   "live_practice": "Limited Participation in Practice",
+   "on_live_page": true,
+   "in_scrape": true,
+   "scrape_practice_matches": true,
+   "in_transcription": false
+  },
+  {
+   "team": "NO",
+   "player": "Taliese Fuaga",
+   "live_practice": "Limited Participation in Practice",
+   "on_live_page": true,
+   "in_scrape": true,
+   "scrape_practice_matches": true,
+   "in_transcription": false
+  },
+  {
+   "team": "NO",
+   "player": "Quincy Riley",
+   "live_practice": "Limited Participation in Practice",
+   "on_live_page": true,
+   "in_scrape": true,
+   "scrape_practice_matches": true,
+   "in_transcription": false
+  },
+  {
+   "team": "CLE",
+   "player": "Donovan McMillon",
+   "live_practice": "Limited Participation in Practice",
+   "on_live_page": true,
+   "in_scrape": true,
+   "scrape_practice_matches": true,
+   "in_transcription": false
+  },
+  {
+   "team": "DAL",
+   "player": "Alijah Clark",
+   "live_practice": "Did Not Participate In Practice",
+   "on_live_page": true,
+   "in_scrape": true,
+   "scrape_practice_matches": true,
+   "in_transcription": false
+  },
+  {
+   "team": "DAL",
+   "player": "Juanyeh Thomas",
+   "live_practice": "Limited Participation in Practice",
+   "on_live_page": true,
+   "in_scrape": true,
+   "scrape_practice_matches": true,
+   "in_transcription": false
+  },
+  {
+   "team": "CIN",
+   "player": "Jalen Davis",
+   "live_practice": "Full Participation in Practice",
+   "on_live_page": true,
+   "in_scrape": true,
+   "scrape_practice_matches": true,
+   "in_transcription": false
+  },
+  {
+   "team": "CIN",
+   "player": "B.J. Hill",
+   "live_practice": "Limited Participation in Practice",
+   "on_live_page": true,
+   "in_scrape": true,
+   "scrape_practice_matches": true,
+   "in_transcription": false
+  },
+  {
+   "team": "CIN",
+   "player": "Andrei Iosivas",
+   "live_practice": "Full Participation in Practice",
+   "on_live_page": true,
+   "in_scrape": true,
+   "scrape_practice_matches": true,
+   "in_transcription": false
+  },
+  {
+   "team": "CIN",
+   "player": "Brian Parker II",
+   "live_practice": "Full Participation in Practice",
+   "on_live_page": true,
+   "in_scrape": true,
+   "scrape_practice_matches": true,
+   "in_transcription": false
+  }
+ ]
+}

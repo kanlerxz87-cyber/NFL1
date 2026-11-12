@@ -101,11 +101,24 @@ def table(headers, rows, cls="", note=None) -> str:
 
 
 def signal_cell(status) -> str:
-    mapping = {"actionable": ("pass", "actionable"),
-               "watch": ("warn", "watch"),
-               "no-edge": ("neutral", "no edge")}
+    # Labels describe the size of the model-market gap only. None is a validated signal:
+    # no strategy has passed the eight gates, so no label may read as a recommendation.
+    mapping = {"gap-large-unvalidated": ("warn", "large gap · unvalidated"),
+               "gap-unvalidated": ("neutral", "gap · unvalidated"),
+               "small-difference": ("neutral", "small difference"),
+               # legacy names written by earlier builds of lines.json
+               "actionable": ("warn", "large gap · unvalidated"),
+               "watch": ("neutral", "gap · unvalidated"),
+               "no-edge": ("neutral", "small difference")}
     cls, text = mapping.get(status or "", ("neutral", status or "unknown"))
     return f'<span class="badge {cls}">{esc(text)}</span>'
+
+
+def team_line(team, home_margin) -> str:
+    """Render a home-margin line as the favourite's spread, e.g. NYG -2.5 (home favoured)."""
+    if home_margin is None:
+        return '<span class="missing">blank</span>'
+    return f"{esc(team)} {-float(home_margin):+.1f}"
 
 
 def kpi(label, value, sub="") -> str:
@@ -203,7 +216,7 @@ def overview(snap, dash, lines, strat, avail, props, verif):
             f"<strong>{esc(g['away'])} @ {esc(g['home'])}</strong><br><span class=\"sub\">{esc(g.get('gameday',''))}</span>",
             esc(g.get("my_line_display") or f"{g['home']} {g['my_home_line']:+.1f}"),
             num(g.get("my_total")),
-            num(g.get("market_home_line")),
+            team_line(g["home"], g.get("market_home_line")),
             num(g.get("market_total")),
             num(g.get("edge_home_line"), 2),
             num(g.get("edge_total"), 2),
@@ -213,9 +226,11 @@ def overview(snap, dash, lines, strat, avail, props, verif):
     lines_tbl = table(
         ["Matchup", "My line", "My total", "Market line", "Market total",
          "Edge (line)", "Edge (total)", "Signal", "Source"],
-        rows, note=("Positive line = home team favoured. Edges are model minus market; "
-                    "a signal is not a recommendation. See the Lines page for error bands "
-                    "and the out-of-sample accuracy table."))
+        rows, note=("Lines are the favourite's spread (NYG -2.6 = NYG favoured by 2.6). Edges are model "
+                    "minus market. Labels give the size of the gap only: "
+                    f"{counts.get('strategies_passing_all_gates', 0)} of "
+                    f"{counts.get('strategies_tested', 0)} strategies pass all gates, so no line here "
+                    "is a validated signal. See the Lines page for error bands and the accuracy table."))
 
     # leaderboard preview
     lb_rows = []
@@ -241,10 +256,11 @@ def overview(snap, dash, lines, strat, avail, props, verif):
             num(t.get("attrition_index_0_100")), num(t.get("backup_experience_avg")),
             src(t.get("source") or SOURCE["injuries"], "NFL injuries"),
         ])
-    av_tbl = table(["Team", "Club", "Out", "Doubtful", "Questionable", "Practice-only",
-                    "Attrition index", "Backup yrs exp", "Source"], av_rows,
-                   note=("Attrition index is a documented model weight, not an NFL statistic. "
-                         "Mid-week, most clubs have published practice participation only."))
+    av_tbl = table(["Team", "Club", "Starters out", "Starters doubtful", "Starters questionable",
+                    "Starters practice-only", "Attrition index", "Backup yrs exp", "Source"], av_rows,
+                   note=("Starter counts use only players matched to the depth chart at rank 1. Backups and "
+                         "unmatched players are not counted (F21). Attrition index is a documented model weight, "
+                         "not an NFL statistic. Mid-week, most clubs have published practice participation only."))
 
     v_checks = (verif or {}).get("checks", [])
     v_rows = []
@@ -375,14 +391,14 @@ def lines_page(snap, lines, dash):
             f"[{g['home_line_band95'][0]:.1f}, {g['home_line_band95'][1]:.1f}]" if g.get("home_line_band95") else "",
             num(g.get("my_total")),
             num(g.get("my_win_prob_home"), 3),
-            num(g.get("market_home_line")),
+            team_line(g["home"], g.get("market_home_line")),
             num(g.get("market_total")),
             num(g.get("edge_home_line"), 2),
             num(g.get("edge_total"), 2),
-            badge(g.get("status")),
+            signal_cell(g.get("status")),
             src(g.get("source_games") or SOURCE["schedule"], "NFL schedule"),
         ])
-    fx_tbl = table(["Matchup", "My line", "95% band", "My total", "P(home win)",
+    fx_tbl = table(["Matchup", "My line", "95% band (home margin)", "My total", "P(home win)",
                     "Market line", "Market total", "Edge line", "Edge total",
                     "Signal", "Source"], fx_rows)
 
@@ -1055,8 +1071,24 @@ def review_page(verif, strat, dash, avail=None):
          src(SOURCE["ops"], "reference"), badge("unverified")],
         ["F13", "companion pages", "Companion pages from earlier sessions state that no closing lines are stored in the repository. That was true for their inputs; the integration pipeline now carries consensus closing lines and compares every line against them.",
          src(SOURCE["schedules"], "schedules release"), badge("resolved")],
-        ["F14", "two models", "Two independently built models disagree on the week 10 WAS @ NYG margin. Both are inside their own error bands; neither is promoted.",
-         src("../pages/evidence.html", "replication table"), badge("needs review")],
+        ["F14", "two models", "Two independently built models disagree on the week 10 WAS @ NYG margin (replication table on the Evidence page). Both are inside their own error bands; neither is promoted.",
+         src(SOURCE["schedule"], "NFL schedule"), badge("needs review")],
+        ["F15", "signal labels", "Week 10 signal labels earlier read 'actionable' for any gap of 3+ points, with no validation gate. Labels now state the size of the gap and that it is unvalidated; no strategy has passed all gates.",
+         src(SOURCE["schedules"], "closing lines"), badge("resolved")],
+        ["F16", "publication lag", "Pages rendered at 05:07 UTC showed Out counts that the 18:53 UTC data and the official page no longer matched (NE: 2 shown, 3 on nfl.com). The renderer now runs in the data workflow, and check_committed_site.py fails the build if a page's build time is older than the data.",
+         src(SOURCE["injuries"], "NFL injuries"), badge("resolved")],
+        ["F17", "depth chart", "2nd-, 3rd- and 4th-string tracking uses the nflverse depth-chart mirror (community data). The official nfl.com depth-chart page returns 404 (checked 2026-11-12), so backup status is not official.",
+         src("https://www.nfl.com/teams/kansas-city-chiefs/depth-chart", "nfl.com 404 check"), badge("needs review")],
+        ["F18", "official reconciliation", "Checked against nfl.com on 2026-11-12: all 6 game designations match (WAS 2 Out, NYG 1 Questionable, NE 3 Out), and every practice row for WAS, NYG, NE, DET, KC and ATL matches. Other clubs' practice rows are not hand-reconciled; see data/verified/live_check_2026-11-12.tsv.",
+         src(SOURCE["injuries"], "NFL injuries"), badge("needs review")],
+        ["F19", "companion pages", "Pages from earlier generators (executive-summary, data, verified, analysis, decisions, teams, standings, availability) are not re-rendered by the data workflow. They are kept for review and may lag the data.",
+         src(SOURCE["repo"], "repository"), badge("needs review")],
+        ["F21", "starter-only availability", "The availability model counts only players matched to the depth chart at rank 1. Official Out or Questionable players who are backups, or who fail to match, are dropped without a row. In the 22:30 UTC build, 5 of the 6 official game designations are absent from the starter list (Brown, Henderson, Patrick, Yankoff, Harrison). Only Carlton Davis III is counted. This does not meet the 2nd/3rd/4th-string requirement.",
+         src(SOURCE["injuries"], "NFL injuries"), badge("needs review")],
+        ["F22", "scrape completeness", "The 18:53 UTC scrape returned 276 official rows; the nfl.com page lists 279. The 22:30 UTC scrape returned 279, including JAX BJ Green II, IND CJ Allen and IND Grover Stewart, which the earlier scrape missed. Cause not diagnosed; any row-count drop between scrapes should block publication.",
+         src(SOURCE["injuries"], "NFL injuries"), badge("needs review")],
+        ["F20", "CI checks", "Some CI workflows regenerate pages and then check the regenerated copies, so the committed bytes are not what is checked. tools/check_committed_site.py checks the committed files.",
+         src(SOURCE["repo"] + "/blob/main/.github/workflows/pages.yml", "pages workflow"), badge("needs review")],
     ])
 
     tbl = table(["ID", "Area", "What is flagged", "Source", "State"], flags,
@@ -1118,6 +1150,38 @@ def executive_page(snap, dash, lines, strat, avail, verif, prov):
         kpi("Pinned source files", n_files, "URL + sha256"),
     ])
 
+    coverage_rows = [
+        ["Own NFL lines for the current week", "<a href=\"lines.html\">My Lines</a>", badge("implemented"),
+         src(SOURCE["schedule"], "NFL schedule"), "F15"],
+        ["Strategy leaderboard: single bets", "<a href=\"strategies.html\">Strategy Lab</a>", badge("implemented"),
+         src(SOURCE["schedules"], "closing lines"), "GATES"],
+        ["Parlays and player-prop combos", "<a href=\"props.html\">Props</a>", badge("blocked"),
+         src(SOURCE["stats"], "NFL stats"), "F02"],
+        ["Correlation values", "<a href=\"strategies.html\">Strategy Lab</a>", badge("partial"),
+         src(SOURCE["schedules"], "closing lines"), "F02"],
+        ["Validation gates and luck removal", "<a href=\"strategies.html\">Strategy Lab</a>", badge("implemented"),
+         src(SOURCE["schedules"], "closing lines"), "GATES"],
+        ["Injury tracking from the official report", "<a href=\"injuries.html\">Injuries &amp; Depth</a>", badge("implemented"),
+         src(SOURCE["injuries"], "NFL injuries"), "F18"],
+        ["2nd-, 3rd- and 4th-string backups, offence and defence", "<a href=\"injuries.html\">Injuries &amp; Depth</a>", badge("partial"),
+         src("https://www.nfl.com/teams/kansas-city-chiefs/depth-chart", "nfl.com 404 check"), "F17"],
+        ["Suggestions to choose a path before any change", "<a href=\"suggestions.html\">Suggestions</a>", badge("implemented"),
+         src(SOURCE["ops"], "NFL operations"), "—"],
+        ["Clear questions: known, unknown, answers", "<a href=\"questions.html\">Questions</a>", badge("implemented"),
+         src(SOURCE["ops"], "NFL operations"), "—"],
+        ["Executive summary", "<a href=\"executive.html\">Executive Summary</a>", badge("implemented"),
+         src(SOURCE["repo"], "repository"), "—"],
+        ["Live site with category pages and source links on every table row", "<a href=\"../index.html\">Overview</a>", badge("partial"),
+         src(SOURCE["repo"], "repository"), "F16, F19"],
+        ["Rewards competition with real value", "<a href=\"review.html\">Flagged for Review</a>", badge("blocked"),
+         src(SOURCE["ops"], "NFL operations"), "F04"],
+        ["Line-by-line check against official sources", "<a href=\"evidence.html\">Evidence</a>", badge("partial"),
+         src(SOURCE["standings"], "NFL standings"), "F08, F18"],
+        ["Repository review and flagged irregularities", "<a href=\"review.html\">Flagged for Review</a>", badge("implemented"),
+         src(SOURCE["repo"], "repository"), "F19, F20"],
+    ]
+    coverage_tbl = table(["Requirement", "Where it lives", "Status", "Source", "Flag"], coverage_rows)
+
     body = f"""
 <section class="panel">
   <h2>Executive summary</h2>
@@ -1167,15 +1231,17 @@ def executive_page(snap, dash, lines, strat, avail, verif, prov):
     {num(par.get('phi_home_cover_vs_over'), 3)} across {num(par.get('n_games'))} games, so naive parlay
     multiplication is roughly right for spread/total combos but must never be used for
     player-prop combos without their own correlation.</li>
-    <li><strong>Availability is concentrated.</strong> The injury table names every unavailable
-    starter, the next man at that slot, his experience and his 2026 snaps, so a reviewer can see
-    which clubs are leaning on 2nd and 3rd string players.</li>
+    <li><strong>Availability is only partly measured.</strong> The injury table names the unavailable
+    starters that the depth chart could match, with the next man at that slot, his experience and his
+    2026 snaps. It does not yet show backups who are out, so 2nd- and 3rd-string exposure is
+    understated (F17, F21).</li>
   </ul>
 
   <h3>What remains unresolved</h3>
   <ul class="tight">
     <li>No official or book-level prices: edge, CLV and prop value are unmeasurable (F01, F02).</li>
     <li>Depth chart rank is not participation; the injury effect is not yet quantified (F03).</li>
+    <li>Availability counts starters only and drops unmatched records: 5 of 6 official game designations are missing from the starter list (F21).</li>
     <li>Rewards with real value need legal review (F04).</li>
     <li>Model history covers 2024-2026 only, so confidence intervals are wide (F06).</li>
     <li>Weather, travel and inactives are missing, so those signals are untested (F09, F10).</li>
@@ -1192,6 +1258,13 @@ def executive_page(snap, dash, lines, strat, avail, verif, prov):
 </section>
 
 <section class="kpis">{figures}</section>
+
+<section class="panel">
+  <h2>Brief coverage: what is implemented, partial or blocked</h2>
+  <p>Each requirement from the brief, where it lives, and how far the evidence goes. Nothing is marked
+  implemented unless it is on a page with its source.</p>
+  {coverage_tbl}
+</section>
 
 <section class="grid-2">
   <div class="panel">

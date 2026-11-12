@@ -258,5 +258,31 @@
     "status": "Awaiting review",
     "verified": true,
     "retrieved": "2026-11-12"
+  },
+  {
+    "id": "SA-01",
+    "area": "Site architecture",
+    "title": "Guard shared output paths across the four site generators",
+    "decision_impact": "Prevents a routine rebuild from silently replacing the canonical landing page (this audit had to restore index.html and README.md after tools/build.py regenerated them from another generation).",
+    "effort": "Small",
+    "recommended_path": "Review first",
+    "evidence": "docs/audit-b6e68100.md §3",
+    "src": "S23",
+    "status": "Awaiting review",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "SA-02",
+    "area": "Data freshness",
+    "title": "Add a pre-slate injury-report refresh before kickoffs",
+    "decision_impact": "Keeps game-day reads aligned with the official report",
+    "effort": "Small (one extra cron in collect-data.yml)",
+    "recommended_path": "Review first",
+    "evidence": "docs/audit-b6e68100.md §A-F04; https://www.nfl.com/injuries/",
+    "src": "S02",
+    "status": "Awaiting review",
+    "verified": true,
+    "retrieved": "2026-11-12"
   }
 ]

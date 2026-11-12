@@ -34,7 +34,7 @@
 </header>
 <main>
   <h1>Validation &amp; Correlation</h1>
-  <p class="muted">Forward test, luck removal, and measured correlation values · generated 2026-11-12 05:17 UTC</p>
+  <p class="muted">Forward test, luck removal, and measured correlation values · generated 2026-11-12 22:34 UTC</p>
 
   <div class="grid">
     <div class="stat"><div class="label">Forward-test games</div><div class="value">136</div>
@@ -105,7 +105,7 @@
 <tr><td>C2</td><td>Point margin vs total points, same game</td><td>-0.1608</td><td>136</td><td>[-0.321, +0.008]</td><td>0.0615</td><td><span class="badge ok">no detectable dependence</span></td><td>Measures whether blowouts travel with high totals. Matters for spread+total parlays.</td></tr>
 <tr><td>C3</td><td>Team points in consecutive games (week t vs week t+1)</td><td>+0.0685</td><td>226</td><td>[-0.062, +0.197]</td><td>0.3049</td><td><span class="badge ok">no detectable dependence</span></td><td>Persistence of a team&#x27;s scoring. Autocorrelation implies form/structure, not independence.</td></tr>
 <tr><td>C4</td><td>Away/home points scored vs opponent&#x27;s average points allowed</td><td>+0.3861</td><td>272</td><td>[+0.280, +0.483]</td><td>0.0000</td><td><span class="badge warn">assume dependent</span></td><td>Opponent-quality dependence. Contaminates naive correlations that mix home and road legs.</td></tr>
-<tr><td>C5</td><td>Division game flag vs total points</td><td>-0.1297</td><td>136</td><td>[-0.292, +0.040]</td><td>0.1324</td><td><span class="badge ok">no detectable dependence</span></td><td>52 of 136 games were division games.</td></tr>
+<tr><td>C5</td><td>Division game flag vs total points</td><td>-0.1048</td><td>136</td><td>[-0.268, +0.065]</td><td>0.2245</td><td><span class="badge ok">no detectable dependence</span></td><td>42 of 136 games were division games. Corrected 2026-11-12 (task A1): the division map previously matched the bare name only, so AFC East vs NFC East games were miscounted &mdash; published value was r&nbsp;=&nbsp;-0.1297 with 52 division games.</td></tr>
 </tbody></table></div>
   <div class="card">
     <h3>Correlation findings that change decisions</h3>
