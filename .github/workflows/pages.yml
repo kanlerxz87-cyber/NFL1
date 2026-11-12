@@ -31,6 +31,8 @@ jobs:
           python3 scripts/verified/build_site.py
           python3 scripts/verified/build_availability.py
           python3 scripts/verified/normalize_nav.py
+      - name: Independently recompute every published number
+        run: python3 scripts/verified/audit_numbers.py
       - name: Check every local link and nav entry
         run: python3 scripts/verified/check_site.py
       - name: Check external source links (reports dead URLs, never fails on unreachable hosts)
