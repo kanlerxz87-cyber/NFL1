@@ -260,7 +260,7 @@ def build_analysis() -> str:
     lb = [[esc(r["strategy"]), f'{r["mae_margin"]:.2f}', f'{r["rmse_margin"]:.2f}',
            f'{r["mae_total"]:.2f}', f'{r["side_accuracy"]:.1%}',
            "—" if r["corr_margin"] is None else f'{r["corr_margin"]:+.3f}',
-           badge("ok","rank 1") if r["strategy"]==bt["leaderboard"][0]["strategy"] else ""]
+           badge("ok","rank 1") if r["strategy"]==bt["leaderboard"][0]["strategy"] else '<span class="muted">—</span>']
           for r in bt["leaderboard"]]
 
     luck_rows = []
