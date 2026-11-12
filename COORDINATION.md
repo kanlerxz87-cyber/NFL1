@@ -50,24 +50,24 @@ immediately.
 | ID | Task | Status | Owner | Files |
 | --- | --- | --- | --- | --- |
 | T-01 | Repository inventory and line-by-line review of pre-existing code | done | session-87deb7ab | `README.md`, `COORDINATION.md` |
-| T-02 | Requirements register (full requirement list from the brief) | in progress | session-87deb7ab | `data/requirements.json`, `docs/requirements.html` |
-| T-03 | Decision register — questions, known info, missing info | in progress | session-87deb7ab | `data/questions.json`, `docs/questions.html` |
-| T-04 | Suggestion register + decision paths (review → choose → implement) | in progress | session-87deb7ab | `data/suggestions.json`, `docs/suggestions.html` |
-| T-05 | Executive summary | in progress | session-87deb7ab | `docs/executive-summary.html` |
-| T-06 | Strategy lab: origin lines, signal catalogue | in progress | session-87deb7ab | `data/strategies.json`, `docs/strategy-lab.html`, `docs/signals.html` |
-| T-07 | Strategy validation gates (G0–G5) | in progress | session-87deb7ab | `data/gates.json`, `docs/strategy-lab.html` |
-| T-08 | Leaderboard competition + reward structure | in progress | session-87deb7ab | `docs/strategy-lab.html` |
-| T-09 | Correlation register + estimation method | in progress | session-87deb7ab | `data/correlation.json`, `docs/correlation.html` |
-| T-10 | Skill-vs-luck separation methodology | in progress | session-87deb7ab | `docs/strategy-lab.html` |
-| T-11 | Injury tracking + official Week 10 snapshot | in progress | session-87deb7ab | `data/injuries.json`, `docs/injury-depth.html` |
-| T-12 | Offense/defense backup deficiency model (2nd/3rd/4th string) | in progress | session-87deb7ab | `docs/injury-depth.html` |
-| T-13 | Source register (official vs. non-official tiering) | in progress | session-87deb7ab | `data/sources.json`, `docs/data-sources.html` |
-| T-14 | Verification methodology + log | in progress | session-87deb7ab | `docs/verification.html` |
-| T-15 | Flagged-for-review page | in progress | session-87deb7ab | `data/flagged.json`, `docs/flagged.html` |
-| T-16 | Site scaffold: landing page, subpages, nav, CSS | in progress | session-87deb7ab | `docs/assets/css/style.css`, `docs/assets/js/*.js`, `tools/build_site.py` |
+| T-02 | Requirements register (full requirement list from the brief) | done | session-87deb7ab | `data/requirements.json`, `docs/requirements.html` |
+| T-03 | Decision register — questions, known info, missing info | done | session-87deb7ab | `data/questions.json`, `docs/questions.html` |
+| T-04 | Suggestion register + decision paths (review → choose → implement) | done | session-87deb7ab | `data/suggestions.json`, `docs/suggestions.html` |
+| T-05 | Executive summary | done | session-87deb7ab | `docs/executive-summary.html` |
+| T-06 | Strategy lab: origin lines, signal catalogue | done | session-87deb7ab | `data/strategies.json`, `docs/strategy-lab.html`, `docs/signals.html` |
+| T-07 | Strategy validation gates (G0–G5) | done | session-87deb7ab | `data/gates.json`, `docs/strategy-lab.html` |
+| T-08 | Leaderboard competition + reward structure | done | session-87deb7ab | `docs/strategy-lab.html` |
+| T-09 | Correlation register + estimation method | done | session-87deb7ab | `data/correlation.json`, `docs/correlation.html` |
+| T-10 | Skill-vs-luck separation methodology | done | session-87deb7ab | `docs/strategy-lab.html` |
+| T-11 | Injury tracking + official Week 10 snapshot | done | session-87deb7ab | `data/injuries.json`, `docs/injury-depth.html` |
+| T-12 | Offense/defense backup deficiency model (2nd/3rd/4th string) | done | session-87deb7ab | `docs/injury-depth.html` |
+| T-13 | Source register (official vs. non-official tiering) | done | session-87deb7ab | `data/sources.json`, `docs/data-sources.html` |
+| T-14 | Verification methodology + log | done | session-87deb7ab | `docs/verification.html` |
+| T-15 | Flagged-for-review page | done | session-87deb7ab | `data/flagged.json`, `docs/flagged.html` |
+| T-16 | Site scaffold: landing page, subpages, nav, CSS | done | session-87deb7ab | `docs/assets/css/style.css`, `docs/assets/js/*.js`, `tools/build_site.py` |
 | T-17 | Official data ingestion (standings, Week 10 injury report) | done | session-87deb7ab | `data/standings.json`, `data/injuries.json` |
-| T-18 | Final integration: merge, re-verify, link check, publish | unclaimed | — | `docs/**` |
-| T-19 | Pull request → merge → GitHub Pages deploy verification | unclaimed | — | `COORDINATION.md` |
+| T-18 | Final integration: merge, re-verify, link check, publish | in progress | session-87deb7ab | `docs/**` |
+| T-19 | Pull request → merge → GitHub Pages deploy verification | in progress | session-87deb7ab | `COORDINATION.md` |
 
 ---
 
@@ -79,6 +79,10 @@ immediately.
 | 2026-11-12 | session-87deb7ab | Claimed T-01 … T-17 (single active session; no contention observed). |
 | 2026-11-12 | session-87deb7ab | Verified official sources reachable: `nfl.com/standings/`, `nfl.com/injuries/`. |
 | 2026-11-12 | session-87deb7ab | **Irregularity found:** `nfl.com/teams/<team>/depth-chart` returns HTTP 404. The NFL does not publish official depth charts. Logged as F-001. |
+| 2026-11-12 | session-87deb7ab | Ingested official data: `standings.json` (32 clubs, NFL.com standings) and `injuries.json` (254 players / 28 clubs / 14 matchups, NFL.com Week 10 injury report). Integrity checks: total PF == total PA (6,246 each); total W == total L (135 each, 2 ties); DNP+LP+FP == 254 with zero per-club mismatches. |
+| 2026-11-12 | session-87deb7ab | Attempted to locate the written NFL injury-reporting policy on official domains. Three URLs returned 404 (`operations.nfl.com/gameday/nfl-game-status`, `operations.nfl.com/inside-football-ops/health-and-safety/injury-report`, `nfl.com/injuries/inactives`). Definitions and deadlines therefore published as **unverified** — flag F-007. |
+| 2026-11-12 | session-87deb7ab | Built `tools/build_site.py`, which generates 13 static pages into `/docs` from the JSON data layer and **fails the build** if any data row lacks a source URL. Assertion tested by injecting an unregistered source id (`SRC-999`): build exited 1 and named the offending row. Restored and rebuilt clean. |
+| 2026-11-12 | session-87deb7ab | Link check: 13/13 pages served HTTP 200 locally, 0 broken internal links, 0 missing assets, 45 distinct external links (40 to nfl.com). HTML structure validated with a tag-balance parser: 0 pages with mismatched or unclosed tags. |
 
 ---
 
