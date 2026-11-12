@@ -13,6 +13,7 @@ Sessions that have worked here:
 | `946c1684-nfl1` | `arena/946c1684-nfl1` | League reference data, environment notes (curl allow-list; `fetch_page` has full internet) | not merged (superseded) |
 | `7600ed8b-nfl1` | `arena/7600ed8b-nfl1` | Quantitative pipeline, own lines, strategy gates, injury/depth model, props, verification, final integration | PR #13 |
 | `a2cea255-nfl1` | `arena/a2cea255-nfl1` | Independent verification subsystem: hand transcription of nfl.com, 34-check harness, provenance/gates engine, 103 tests, 20-page sub-site in `verified-lab/` | PR #18 |
+| `1505ac8e-nfl1` | `arena/1505ac8e-nfl1` | **Consolidation + re-verification session.** Live re-fetch of official nfl.com (standings, injuries, schedule, depth charts), cross-check of all four generations' committed data, unified site (`lab/`) with category nav, decision/suggestions workflow, gap-closing on depth charts, PR + merge + Pages | in progress |
 
 > Branch naming: Arena fixes each session to a single branch named `arena/<session>-nfl1`, so the
 > `session-<id>/<task>` convention in the brief cannot be followed here. Scopes were kept
@@ -1002,3 +1003,55 @@ where they overlap: both report 32 standings rows, and this subsystem's harness
 independently confirms all 28 pre-game records printed on the official injury
 page. Keeping both is deliberate — an audit is only worth anything if it was
 produced independently of the thing it audits.
+
+---
+
+# Session `1505ac8e-nfl1` — consolidation, live re-verification and unified site
+
+| Item | Value |
+|---|---|
+| This session ID | `1505ac8e-nfl1` |
+| This session branch | `arena/1505ac8e-nfl1` |
+| Base commit | `c09c739bd5825981e97dddeefba5de6bd89d36fc` (== `origin/main` at claim time; `git rev-list --left-right --count origin/main...HEAD` = `0 0`) |
+| Live site | <https://kanlerxz87-cyber.github.io/NFL1/> (Pages source: `main` / `/`, legacy build) |
+
+## Scope claimed (non-overlapping)
+
+All new work is written into a **new, previously unowned directory** plus this file, so no other
+session's files are edited:
+
+| Path | Purpose |
+|---|---|
+| `lab/` | The unified site: clean landing page + subpages grouped by category. New directory; nothing existing is overwritten. |
+| `data/session-1505ac8e/` | This session's JSON data layer (independent live transcription + verification results). |
+| `tools/verify_live.py` | Live official-source verification harness (new file). |
+| `COORDINATION.md` | This record (the board file, by design shared for claims). |
+
+**Not touched:** `index.html`, `pages/`, `docs/`, `verified-lab/`, `referee/`, `data/model/`,
+`data/verified/`, `pipeline/`, `scripts/verified/`, `tools/verify.py`, `.github/workflows/`.
+Those belong to earlier sessions and are preserved and linked from the new site.
+
+## Why a new directory rather than editing `index.html`
+
+Four site generations already exist (root `index.html`+`pages/`, `docs/`, `verified-lab/`,
+`referee/`) and two different CI jobs regenerate `index.html` and `pages/`
+(`tools/build.py` in `verify.yml`, `scripts/verified/build_site.py` in `pages.yml`). Writing a
+fifth generation into those contested files would be overwritten by the next CI run. A self-contained
+`lab/` directory is additive, has no CI footprint, and lets the reader see every generation side by
+side. Reconciliation of the four into one root is published as an open decision (D-1505-01) with
+options and trade-offs for the repository owner rather than decided unilaterally.
+
+## Tasks
+
+| ID | Task | Status |
+|---|---|---|
+| S1 | Live re-fetch of official nfl.com sources (standings, injuries, schedule, depth charts) | in progress |
+| S2 | Line-by-line cross-check of every committed dataset against the live official pages | in progress |
+| S3 | Depth-chart / 2nd-3rd-4th-string gap: probe official hosts again from scratch | in progress |
+| S4 | Unified site `lab/` with category nav, dashboard tables, every row source-linked | in progress |
+| S5 | Decision register (questions / known / unknown / answers / discovery) + Suggestions review & choose-a-path | pending |
+| S6 | Own lines, strategy gates, correlation, skill-vs-luck, leaderboard (verified, blanks honoured) | pending |
+| S7 | Injury + availability deficiency model | pending |
+| S8 | Executive summary page | pending |
+| S9 | Flagged-for-review page (all irregularities, official links) | pending |
+| S10 | PR → merge → confirm Pages deploy → record | pending |
