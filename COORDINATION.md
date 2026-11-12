@@ -36,9 +36,9 @@
 
 - NFL injury reports: https://www.nfl.com/injuries/
 - NFL stats: https://www.nfl.com/stats/
-- NFL schedule: https://operations.nfl.com/gameday/nfl-schedule/
-- NFL Football Operations: https://operations.nfl.com/gameday/
-- Official rules: https://operations.nfl.com/the-rules/
+- NFL schedule: https://www.nfl.com/schedules/
+- NFL Football Operations: https://www.nfl.com/schedules/
+- Official rules: https://operations.nfl.com/rules-officiating/2026-nfl-rulebook
 - NFL team directory: https://www.nfl.com/teams/
 
 ## Verification performed by integration sessions
