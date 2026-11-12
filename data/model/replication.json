@@ -1,0 +1,67 @@
+{
+ "generated_at": "2026-11-12T05:02:30+00:00",
+ "available": true,
+ "comparisons": [
+  {
+   "metric": "2026 spread error (MAE, points)",
+   "this_pipeline": 9.984,
+   "companion_model": 10.927304174426089,
+   "market_baseline": 9.485,
+   "reading": "Both independent models are further from the result than the closing line; the market is the better forecast."
+  },
+  {
+   "metric": "2026 total error (MAE, points)",
+   "this_pipeline": 11.308,
+   "companion_model": 12.116974695731653,
+   "market_baseline": 10.596,
+   "reading": "Same conclusion for totals: neither model beats the close."
+  }
+ ],
+ "correlations": [
+  {
+   "relationship": "point margin vs game total (same game)",
+   "this_pipeline": {
+    "r": 0.017,
+    "n": 5591,
+    "window": "2005-2026"
+   },
+   "companion": {
+    "r": -0.1608,
+    "n": 136,
+    "window": "2026 weeks 1-9",
+    "ci95": [
+     -0.3205,
+     0.0077
+    ],
+    "p_value": 0.061476
+   },
+   "reading": "Different windows, same conclusion: the two are effectively independent, so a spread+total parlay is priced close to independent legs."
+  }
+ ],
+ "conflicts": [
+  {
+   "item": "Availability of closing lines",
+   "this_pipeline": "Consensus closing spread/total/moneyline mirrored from nflverse for 2005-2026; labelled consensus, not an official book quote.",
+   "companion": "No official NFL odds/closing-line source is reachable here and none is stored in the repo; model numbers are NOT edges against a market and must not be treated as such.",
+   "resolution": "Superseded by the integration pipeline. Companion pages that state no closing lines exist are accurate for their inputs, not for the repo as it stands now; see Flagged F13.",
+   "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules"
+  },
+  {
+   "item": "Week 10 model margin for WAS @ NYG",
+   "this_pipeline": 2.6,
+   "companion": -1.2,
+   "resolution": "Two different rating systems on the same inputs. Both are inside the model's own error band, which is why neither is promoted.",
+   "source": "https://www.nfl.com/schedules/"
+  }
+ ],
+ "companion_inputs": [
+  "availability.json",
+  "backtest.json",
+  "correlations.json",
+  "lines_week10.json",
+  "luck.json",
+  "predictions_log.json",
+  "ratings.json",
+  "validation.json"
+ ]
+}
