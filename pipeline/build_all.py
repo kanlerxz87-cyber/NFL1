@@ -208,7 +208,8 @@ def ratings_and_lines(ctx):
     def predict(df):
         d = df.copy()
         d["pred_margin"] = coef_m[0] + coef_m[1] * (d["home_net"] - d["away_net"])
-        d["model_spread"] = -d["pred_margin"]
+        # nflverse convention: positive = home team favoured, so the model line IS pred_margin
+        d["model_spread"] = d["pred_margin"]
         d["pred_total"] = (coef_t[0] + coef_t[1] * (d["home_off"] + d["away_off"])
                            + coef_t[2] * (d["home_def"] + d["away_def"]))
         d["win_prob_home"] = 0.5 * (1 + np.vectorize(math.erf)(
@@ -221,7 +222,7 @@ def ratings_and_lines(ctx):
         d = df.dropna(subset=["spread_line", "total_line"])
         if len(d) == 0:
             return {"label": label, "n": 0}
-        err_sp = d["model_spread"] - d["margin"]
+        err_sp = d["pred_margin"] - d["margin"]
         err_sp_mkt = d["spread_line"] - d["margin"]
         err_tot = d["pred_total"] - d["actual_total"]
         err_tot_mkt = d["total_line"] - d["actual_total"]
@@ -248,6 +249,42 @@ def ratings_and_lines(ctx):
     calibration = [score(tr_p, "train 2024"), score(va_p, "validation 2025"),
                    score(te_p, "test 2026")]
 
+    # Does the model add information on top of the closing line? Fit the blend weight on
+    # 2025 and test on 2026. A weight near zero means the model adds nothing to the market.
+    blend = None
+    both = pd.concat([va_p, te_p], ignore_index=True).dropna(
+        subset=["spread_line", "pred_margin", "margin"])
+    if len(both) > 60:
+        v = both[both["season"] == 2025]
+        t = both[both["season"] == 2026]
+        if len(v) > 30 and len(t) > 30:
+            A = np.column_stack([np.ones(len(v)), v["spread_line"], v["pred_margin"]])
+            coef, *_ = np.linalg.lstsq(A, v["margin"].to_numpy(float), rcond=None)
+            At = np.column_stack([np.ones(len(t)), t["spread_line"], t["pred_margin"]])
+            pred = At @ coef
+            blend = {
+                "fit": "margin ~ 1 + market_line + model_line on 2025, tested on 2026",
+                "intercept": round(float(coef[0]), 3),
+                "weight_market": round(float(coef[1]), 3),
+                "weight_model": round(float(coef[2]), 3),
+                "n_train": int(len(v)), "n_test": int(len(t)),
+                "test_mae_hybrid": round(float(np.abs(pred - t["margin"]).mean()), 3),
+                "test_mae_market_only": round(float(np.abs(
+                    t["spread_line"] - t["margin"]).mean()), 3),
+                "interpretation": ("weight_model near 0 means the EPA model carries no "
+                                   "incremental information beyond the closing line."),
+            }
+
+    # Measured proof of the line-sign convention we grade against.
+    conv = reg[reg["home_score"].notna() & reg["spread_line"].notna() & (reg["season"] >= 2005)]
+    sign_check = {
+        "corr_market_line_vs_home_margin": round(float(np.corrcoef(
+            conv["spread_line"], conv["margin"])[0, 1]), 3),
+        "n_games": int(len(conv)),
+        "conclusion": ("Positive correlation proves the mirrored closing line is expressed as "
+                       "points the HOME team is expected to win by (positive = home favourite)."),
+    }
+
     # Current-week own lines
     week = int(ctx["snapshot"]["last_completed_week"]) + 1
     fx = ctx["fixtures"].copy()
@@ -262,16 +299,17 @@ def ratings_and_lines(ctx):
               + coef_t[2] * (rh["def"] + ra["def"]))
         mkt_sp = None if pd.isna(g["spread_line"]) else float(g["spread_line"])
         mkt_tot = None if pd.isna(g["total_line"]) else float(g["total_line"])
-        edge_sp = None if mkt_sp is None else round((-pm) - mkt_sp, 2)
+        edge_sp = None if mkt_sp is None else round(pm - mkt_sp, 2)
         edge_tot = None if mkt_tot is None else round(pt - mkt_tot, 2)
         pl = {
             "game_id": g["game_id"], "week": week, "gameday": str(g["gameday"]),
             "away": g["away_team"], "home": g["home_team"],
-            "my_spread_home": round(-pm, 1), "my_total": round(pt, 1),
+            "my_home_line": round(pm, 1), "my_total": round(pt, 1),
+            "my_line_display": f"{g['home_team']} {-pm:+.1f}" if pm >= 0 else f"{g['home_team']} +{-pm:.1f}",
             "my_win_prob_home": round(float(0.5 * (1 + math.erf(pm / (sd_m * math.sqrt(2))))), 3),
-            "market_spread_home": mkt_sp, "market_total": mkt_tot,
-            "edge_spread": edge_sp, "edge_total": edge_tot,
-            "spread_band95": [round(-pm - 1.96 * sd_m, 1), round(-pm + 1.96 * sd_m, 1)],
+            "market_home_line": mkt_sp, "market_total": mkt_tot,
+            "edge_home_line": edge_sp, "edge_total": edge_tot,
+            "home_line_band95": [round(pm - 1.96 * sd_m, 1), round(pm + 1.96 * sd_m, 1)],
             "status": ("actionable" if (edge_sp is not None and abs(edge_sp) >= 3) else
                        "watch" if (edge_sp is not None and abs(edge_sp) >= 2) else "no-edge"),
             "home_rating": {k: round(v, 4) for k, v in rh.items()},
@@ -283,6 +321,8 @@ def ratings_and_lines(ctx):
 
     payload = {
         "generated_at": L.now(),
+        "sign_convention_check": sign_check,
+        "blend_test": blend,
         "method": {
             "ratings": ("Two-way ridge fixed effect on non-garbage-time plays: "
                         "EPA ~ offense team + defense team + home. Prior season weighted 0.4."),
@@ -355,9 +395,12 @@ def strategies(ctx):
     print(f"line window {lo_season}-2026, {len(hist)} games with closing spread")
 
     # ---- strategy definitions (round-number thresholds, no tuning)
+    def side_line(row, side):
+        """Points this side is favoured by (positive = favourite)."""
+        return row["spread_line"] if side == "home" else -row["spread_line"]
+
     def underdog(row, side):
-        line = row["spread_line"] if side == "home" else -row["spread_line"]
-        return line > 0
+        return side_line(row, side) < 0
 
     bets_all = {}
 
@@ -374,7 +417,7 @@ def strategies(ctx):
             rows.append({"game_id": g["game_id"], "season": int(g["season"]),
                          "week": int(g["week"]),
                          "team": g["home_team"] if side == "home" else g["away_team"],
-                         "side": side, "line": g["spread_line"] if side == "home" else -g["spread_line"],
+                         "side": side, "line": side_line(g, side),
                          "result": res, "market": g["spread_line"]})
         add(name, rows)
 
@@ -395,7 +438,7 @@ def strategies(ctx):
     ats("S04 Divisional underdog +6.5 or more",
         lambda g: next((s for s in ("home", "away")
                         if g["div_game"] == 1 and underdog(g, s)
-                        and (g["spread_line"] if s == "home" else -g["spread_line"]) >= 6.5), None))
+                        and side_line(g, s) <= -6.5), None))
     ats("S05 Underdog on short rest (<=4 days)",
         lambda g: next((s for s in ("home", "away")
                         if underdog(g, s) and (g[f"{s}_rest"] if not pd.isna(g[f"{s}_rest"]) else 99) <= 4), None))
@@ -407,7 +450,7 @@ def strategies(ctx):
     ats("S12 Home team facing opponent off a bye",
         lambda g: "home" if (not pd.isna(g["away_rest"]) and g["away_rest"] >= 13) else None)
     ats("S13 Home favourite of 10 or more",
-        lambda g: "home" if g["spread_line"] <= -10 else None)
+        lambda g: "home" if g["spread_line"] >= 10 else None)
     tot("S08 Over when closing total is 41 or lower",
         lambda g: "over" if g["total_line"] <= 41 else None)
     tot("S14 Under in divisional games with total 47+",
@@ -419,16 +462,16 @@ def strategies(ctx):
         for thr in (2.0, 3.0):
             rows = []
             for _, g in d.iterrows():
-                edge = (-g["pred_margin"]) - g["spread_line"]
+                edge = g["pred_margin"] - g["spread_line"]
                 if abs(edge) < thr:
                     continue
-                side = "home" if edge < 0 else "away"
+                side = "home" if edge > 0 else "away"
                 res = L.cover_result(g["margin"], g["spread_line"], side)
                 rows.append({"game_id": g["game_id"], "season": int(g["season"]),
                              "week": int(g["week"]),
                              "team": g["home"] if side == "home" else g["away"],
                              "side": side,
-                             "line": g["spread_line"] if side == "home" else -g["spread_line"],
+                             "line": side_line(g, side),
                              "result": res, "market": g["spread_line"]})
             add(f"S01 Own-line vs close, edge >= {thr}", rows)
         rows = []
@@ -460,7 +503,7 @@ def strategies(ctx):
                     rows.append({"game_id": g["game_id"], "season": int(g["season"]),
                                  "week": int(g["week"]), "team": g[f"{s}_team"],
                                  "side": s,
-                                 "line": g["spread_line"] if s == "home" else -g["spread_line"],
+                                 "line": side_line(g, s),
                                  "result": res, "market": g["spread_line"]})
                     break
         add("S15 Start the team whose QB is ruled Out/Doubtful", rows)
@@ -538,7 +581,7 @@ def strategies(ctx):
     parlay = {}
     if len(hist) > 100:
         over = (hist["actual_total"] > hist["total_line"]).astype(int)
-        home_cover = (m > -hist["spread_line"]).astype(int)
+        home_cover = (m - hist["spread_line"] > 0).astype(int)
         parlay = {
             "n_games": int(len(hist)),
             "corr_margin_vs_total": round(float(np.corrcoef(m, hist["actual_total"])[0, 1]), 3),
@@ -611,7 +654,11 @@ def availability(ctx):
     snaps = L.load("snap_counts_2026.parquet")
     roster = L.load("roster_weekly_2026.parquet")
 
-    week = int(inj["week"].max())
+    # The feed can contain a partially reported next week, so pick the latest week that is
+    # actually complete for the current game week, and report which week was used.
+    target = int(ctx["snapshot"]["last_completed_week"]) + 1
+    by_week = inj.groupby("week").size()
+    week = target if by_week.get(target, 0) >= 100 else int(by_week.idxmax())
     inj_w = inj[inj["week"] == week].copy()
     dt = dc["dt"].max()
     dc_latest = dc[dc["dt"] == dt].copy()
@@ -818,6 +865,117 @@ def props(ctx):
     return payload
 
 
+# ---------------------------------------------------------------- G. verification
+@stage("G verification against official pages")
+def verification(ctx):
+    """Line-by-line comparison of our computed rows against hand-transcribed nfl.com rows.
+
+    The fixtures in data/verified/ were copied from nfl.com on 2026-11-12 by the agent and
+    are the only human-entered data in the project. Anything that does not match is listed
+    as an irregularity instead of being quietly reconciled.
+    """
+    out = {"generated_at": L.now(), "checks": [], "irregularities": []}
+    root = L.ROOT
+
+    # --- 1. standings
+    path = os.path.join(root, "data", "verified", "official_standings_2026.json")
+    if os.path.exists(path):
+        off = json.load(open(path))
+        snap = json.load(open(os.path.join(L.OUT, "snapshot.json")))
+        comp = {r["team"]: r for r in snap["standings"]}
+        rows, mism = [], []
+        for o in off["rows"]:
+            c = comp.get(o["team"])
+            if c is None:
+                rows.append({"team": o["team"], "matched": False, "detail": "team missing"})
+                mism.append({"team": o["team"], "detail": "team missing from computed table"})
+                continue
+            fields = {"w": c["w"], "l": c["l"], "t": c["t"], "pf": c["pf"], "pa": c["pa"]}
+            diffs = {k: {"nfl": o[k], "computed": fields[k]}
+                     for k in fields if int(o[k]) != int(fields[k])}
+            rows.append({"team": o["team"], "matched": not diffs,
+                         "nfl": fields if not diffs else {k: o[k] for k in fields},
+                         "computed": fields, "diffs": diffs or None})
+            if diffs:
+                mism.append({"team": o["team"], "diffs": diffs})
+        out["checks"].append({
+            "name": "2026 standings (W-L-T, points for/against)",
+            "source": off["source_url"],
+            "rows_checked": len(off["rows"]),
+            "rows_matched": sum(1 for r in rows if r["matched"]),
+            "mismatches": len(mism),
+            "detail": rows,
+        })
+        if mism:
+            out["irregularities"].append(
+                {"id": "V1", "area": "standings",
+                 "issue": f"{len(mism)} of {len(off['rows'])} team records differ from nfl.com",
+                 "examples": mism[:10], "source": off["source_url"]})
+
+    # --- 2. injury report sample
+    path = os.path.join(root, "data", "verified", "official_injuries_2026_w10_sample.json")
+    if os.path.exists(path):
+        off = json.load(open(path))
+        inj = L.load("injuries_2026.csv")
+        wk = int(inj["week"].max())
+        inj_w = inj[inj["week"] == wk]
+        rows, mism, missing = [], [], []
+        for o in off["rows"]:
+            match = inj_w[(inj_w["team"] == o["team"]) & (inj_w["full_name"] == o["player"])]
+            if match.empty:
+                rows.append({**o, "feed": "row not present", "matched": False})
+                missing.append({**o, "reason": "not present in mirrored feed"})
+                continue
+            m = match.iloc[0]
+            got = {
+                "position": m["position"],
+                "injury": None if pd.isna(m["report_primary_injury"]) else m["report_primary_injury"],
+                "practice": None if pd.isna(m["practice_status"]) else m["practice_status"],
+                "game": None if pd.isna(m["report_status"]) else m["report_status"],
+            }
+            diffs = {k: {"nfl": o[k], "feed": got[k]}
+                     for k in ("position", "injury", "practice", "game")
+                     if (o[k] or None) != (got[k] or None)}
+            rows.append({**o, "feed": got, "matched": not diffs, "diffs": diffs or None})
+            if diffs:
+                mism.append({"team": o["team"], "player": o["player"], "diffs": diffs})
+        out["checks"].append({
+            "name": f"2026 week {wk} injury report sample (4 clubs)",
+            "source": off["source_url"],
+            "rows_checked": len(off["rows"]),
+            "rows_matched": sum(1 for r in rows if r["matched"]),
+            "mismatches": len(mism),
+            "detail": rows,
+        })
+        if mism or missing:
+            out["irregularities"].append(
+                {"id": "V2", "area": "injury feed",
+                 "issue": (f"{len(mism)} field mismatches and {len(missing)} missing rows in the "
+                           "sampled clubs"),
+                 "examples": (mism + missing)[:10], "source": off["source_url"]})
+
+    # --- 3. things this project cannot verify from an official league source
+    out["unverifiable"] = [
+        {"item": "Closing spread/total/moneylines",
+         "why": ("The NFL does not publish betting lines; nflverse mirrors consensus closing "
+                 "lines. No official league source exists, and no second book-level source was "
+                 "reachable from the build environment."),
+         "handling": "Used for backtests only; labelled as consensus closing lines."},
+        {"item": "Player prop prices/lines",
+         "why": "No official source; no licensed odds feed connected.",
+         "handling": "Own prop lines published as model-only, market columns left blank."},
+        {"item": "Depth chart order",
+         "why": ("nfl.com publishes depth charts per club; the mirrored copy is a weekly snapshot "
+                 "and does not guarantee who starts or plays."),
+         "handling": "Starter label used only as a modelling assumption, flagged."},
+        {"item": "Week 10 kickoff times",
+         "why": "Not fetched line-by-line from the schedule page in this run.",
+         "handling": "Fixture table shows date only; time marked unverified."},
+    ]
+    L.write_json("verification.json", jclean(out))
+    return out
+
+
 # ---------------------------------------------------------------- F. dashboard
 @stage("F dashboard payload")
 def dashboard(ctx, strategies_payload, lines_payload, avail, props_payload):
@@ -863,9 +1021,11 @@ def main():
     if ctx is None:
         raise SystemExit("league snapshot failed; nothing to build")
     lines_ctx = ratings_and_lines(ctx)
-    strategies_payload = strategies(ctx) if lines_ctx else None
+    merged = {**ctx, **(lines_ctx or {})}
+    strategies_payload = strategies(merged) if lines_ctx else None
     avail = availability(ctx)
     props_payload = props(ctx)
+    verification(ctx)
     dashboard(ctx, strategies_payload, (lines_ctx or {}).get("payload"), avail, props_payload)
     print(f"\ncompleted with {len(ERRORS)} stage error(s)")
     if ERRORS:

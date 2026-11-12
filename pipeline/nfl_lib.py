@@ -151,8 +151,13 @@ def week_ratings(pbp_all: pd.DataFrame, teams: list[str], season: int, week: int
 
 # ---------------------------------------------------------------- market / grading
 def cover_result(margin: float, spread_line: float, side: str) -> str:
-    """Graded against the closing line. spread_line is from the home team's view."""
-    v = margin + spread_line
+    """Graded against the closing line.
+
+    Convention (nflverse schedules, measured in build stage B): `spread_line` is the home
+    team's line expressed as points the home team is expected to win by. Positive = home
+    favourite, negative = home underdog. `margin` = home score - away score.
+    """
+    v = margin - spread_line
     if abs(v) < 1e-9:
         return "push"
     home_covers = v > 0
