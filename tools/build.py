@@ -1311,39 +1311,52 @@ A clean, static GitHub Pages dashboard built from a JSON data layer. Every table
 source. If an official source publishes no value, the cell is left blank and the item is flagged on the
 [Flagged for Review](flagged.html) page. No value is inferred or filled in.
 
-## Pages
+## The site
 
-| Page | Contents |
-| --- | --- |
-| [index.html](index.html) | Landing dashboard, counts, decision posture |
-| [executive-summary.html](executive-summary.html) | Executive summary |
-| [requirements.html](requirements.html) | Full requirements inventory and analysis |
-| [questions.html](questions.html) | Decision questions, known/unknown information, answers, discovery actions |
-| [suggestions.html](suggestions.html) | Improvement suggestions + Review & Choose a Path gate |
-| [strategy-lab.html](strategy-lab.html) | Own lines, signal research, strategies, validation gates, correlations, skill vs luck |
-| [leaderboard.html](leaderboard.html) | Competition rules, rewards and the (empty) ranked board |
-| [bet-types.html](bet-types.html) | Single bets, parlays, player prop combos, official risk data |
-| [injuries.html](injuries.html) | Official injury report, filing policy, inactives, tracking design |
-| [depth-chart.html](depth-chart.html) | 1st/2nd/3rd/4th string for offense and defense |
-| [data-tables.html](data-tables.html) | Standings, derived metrics, correlations, bet facts, findings |
-| [verification.html](verification.html) | Verification policy, official source registry, line-by-line audit |
-| [flagged.html](flagged.html) | Flagged for Review (does not block the merge) |
-| [deployment.html](deployment.html) | Pages configuration, PR, merge and deploy record |
-| [integration.html](integration.html) | Combined integration: re-verification of all merged sessions' data, line by line |
-| [legacy-site.html](legacy-site.html) | Earlier sessions' dashboard, preserved verbatim (historical) |
+| Section | Entry point | What it holds |
+| --- | --- | --- |
+| Landing dashboard | [index.html](index.html) | Season state, this week's own lines, leaderboard head, availability pressure, decisions requested, and a map of every published page |
+| Decision Lab | [pages/lines.html](pages/lines.html) | Own lines, strategy lab, injuries & depth, player props, official-source audit, questions, suggestions, decision register, evidence, flags, executive summary |
+| Governance registers | [dashboard.html](dashboard.html) | Requirements inventory, decision questions, suggestions & paths, strategy lab, leaderboard rules, bet types, injuries, depth charts, data tables, verification policy, flags, deployment record |
+| Independent build | [docs/index.html](docs/index.html) | Session `87deb7ab`: 13 pages built from its own data namespace |
+| Independent verification | [verified-lab/index.html](verified-lab/index.html) | Session `a2cea255`: 20 pages, a 34-check harness and a hand transcription of the official pages |
+| Independent audit | [referee/index.html](referee/index.html) | Session `73fdd6c4`: replication, luck and line audits against the official pages |
+| Preserved earlier dashboard | [legacy-site.html](legacy-site.html) | The first session's dashboard, kept verbatim (historical) |
 
 ## Rebuild and verify
 
+One command builds every published page, in a fixed order, from the data files:
+
 ```bash
-python3 tools/seed_data.py              # regenerate data/*.json from transcribed official values
-python3 tools/compute_correlations.py   # recompute Pearson r from official standings
-python3 tools/verify_combined.py        # re-verify merged CSV snapshots and all local links
-python3 tools/build.py                 # generate the HTML pages and docs/*.md
-python3 tools/verify.py                # source links, unverified blanks, internal links
+python3 tools/build_site_all.py            # build
+python3 tools/build_site_all.py --check    # build, then fail if the committed pages differ
 ```
 
-`tools/verify.py` and `tools/verify_combined.py` also run in GitHub Actions on every push and pull
-request. GitHub Pages publishes `main / /`; `.nojekyll` keeps the generated HTML unchanged.
+The gates that run in CI on every push and pull request:
+
+```bash
+python3 tools/compute_correlations.py      # recompute Pearson r from the official standings
+python3 tools/verify_combined.py           # re-verify the merged CSV snapshots and every local link
+python3 scripts/verified/validate_verified.py   # the official data must reconcile
+python3 tools/audit_official.py            # audit every published number against nfl.com
+python3 tools/check_reachability.py         # no broken link, no orphan page, every source-linked row has a link
+python3 tools/verify.py                    # every table row has an official source link; blanks stay blank
+```
+
+`tools/build_site_all.py` owns the file map, so exactly one generator writes each published file:
+`pipeline/gen_site.py` writes the landing page and the Decision Lab, `tools/build.py` writes the
+governance registers and `dashboard.html`, `scripts/verified/build_site.py` writes the verified-data
+pages, and the three independent sessions keep their own sub-sites. The daily data refresh
+(`.github/workflows/collect-data.yml`) rebuilds the pages and commits the data and the pages
+together, so a page can never show numbers the repository does not also hold.
+
+## Official-source audit
+
+`data/audit/4c043747/` holds two verbatim transcriptions of the official league standings page,
+taken about 20 minutes apart, plus the official Week 10 schedule. `tools/audit_official.py` compares
+them with every standings table published in this repository and with the published Week 10 slate,
+then publishes the result on [pages/audit.html](pages/audit.html). Only a column that was identical
+in both retrievals *and* consistent with the club's own record is treated as a verified value.
 
 ## Combined site (final integration)
 

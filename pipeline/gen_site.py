@@ -45,6 +45,8 @@ SOURCE = {
     "schedules": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
     "depth": "https://github.com/nflverse/nflverse-data/releases/tag/depth_charts",
     "provenance": "https://github.com/nflverse/nflverse-data",
+    "depthchart": "https://www.chiefs.com/team/depth-chart",
+    "sportradar": "https://developer.sportradar.com/football/reference/nfl-weekly-depth-charts",
     "repo": "https://github.com/kanlerxz87-cyber/NFL1",
 }
 
@@ -52,6 +54,14 @@ SOURCE = {
 # ---------------------------------------------------------------- helpers
 def esc(v) -> str:
     return html.escape("" if v is None else str(v))
+
+
+def load_repo_json(rel_path, default=None):
+    p = os.path.join(ROOT, rel_path)
+    if not os.path.exists(p):
+        return default
+    with open(p, encoding="utf-8") as f:
+        return json.load(f)
 
 
 def load(name, default=None):
@@ -178,6 +188,25 @@ def write(path: str, content: str) -> None:
     with open(full, "w") as f:
         f.write(content)
     print(f"wrote {path}")
+
+
+# Position groups. A classification of the position the official report prints, not a
+# value taken from a source; it is used to label a row as offence or defence.
+OFFENSE_POS = {"QB", "C", "G", "T", "OT", "OG", "OL", "WR", "TE", "RB", "FB"}
+DEFENSE_POS = {"DE", "DT", "NT", "IDL", "EDGE", "LB", "ILB", "OLB", "MLB",
+                "CB", "S", "FS", "SS", "DB"}
+SPECIAL_POS = {"K", "P", "LS"}
+
+
+def unit_of(position):
+    p = (position or "").upper()
+    if p in OFFENSE_POS:
+        return "Offence"
+    if p in DEFENSE_POS:
+        return "Defence"
+    if p in SPECIAL_POS:
+        return "Special teams"
+    return None
 
 
 # ---------------------------------------------------------------- site map
@@ -874,8 +903,25 @@ def injuries_page(avail, dash):
                         "weight (Out 1.0, Doubtful 0.7, Questionable 0.25), rescaled to the worst "
                         "team this week. It is a model assumption, not an NFL statistic."))
 
+    depth = load_repo_json("data/depth_chart.json", []) or []
+    registry = {x["id"]: x for x in (load_repo_json("data/sources.json", []) or [])}
+    depth_by_code_pos = {}
+    for d in depth:
+        depth_by_code_pos.setdefault((d.get("code"), d.get("pos")), d)
+
+    def strip_number(name):
+        """Club charts print a jersey number in front of the name; the model prints the name."""
+        if not name:
+            return ""
+        parts = name.split()
+        if parts and parts[0].isdigit():
+            return " ".join(parts[1:])
+        return name
+
     p_rows = [[
-        f"<strong>{esc(p['player'])}</strong>", esc(p["team"]), esc(p["position"]),
+        f"<strong>{esc(p['player'])}</strong>", esc(p["team"]),
+        esc(unit_of(p.get("position")) or ""),
+        esc(p["position"]),
         esc(p.get("depth_slot")),
         badge(p.get("game_status")) if p.get("game_status") else '<span class="missing">no game designation</span>',
         esc(p.get("signal") or ""),
@@ -884,11 +930,66 @@ def injuries_page(avail, dash):
         num(p.get("replacement_snaps_2026"), 0),
         src(p.get("source") or SOURCE["injuries"], "NFL injuries"),
     ] for p in players]
-    p_tbl = table(["Player", "Team", "Pos", "Depth slot", "Game status", "Signal", "Injury",
-                   "Practice", "Next man up", "Next man yrs", "Next man snaps", "Source"], p_rows,
+    p_tbl = table(["Player", "Team", "Unit", "Pos", "Depth slot", "Game status", "Signal", "Injury",
+                   "Practice", "Next man up (2nd string)", "Next man yrs", "Next man snaps", "Source"], p_rows,
                   note=("Clubs publish practice participation before game designations. Rows whose "
                         "only signal is practice are labelled, weighted lower, and never presented "
                         "as a game-day decision."))
+
+    d_rows = []
+    for d in sorted(depth, key=lambda r: (r.get("code", ""), r.get("unit", ""), r.get("pos", ""))):
+        reg = registry.get(d.get("src"), {})
+        d_rows.append([
+            f"<strong>{esc(d.get('code'))}</strong>", esc(d.get("team")),
+            esc(d.get("unit")), esc(d.get("pos")),
+            esc(d.get("s1") or "none listed"), esc(d.get("s2") or "none listed"),
+            esc(d.get("s3") or "none listed"), esc(d.get("s4") or "none listed"),
+            esc(d.get("chart_label") or "not stated"),
+            src(reg.get("url") or SOURCE["depthchart"], "club depth chart"),
+        ])
+    d_tbl = table(["Club", "Team", "Unit", "Position", "1st string", "2nd string", "3rd string",
+                   "4th string", "Chart label as published", "Source"], d_rows,
+                  note=("Three clubs publish their own depth chart and the repository holds all "
+                        "three; the wording in the last column is the club's own. The league's "
+                        "sanctioned weekly depth-chart feed is credential-gated and cannot be "
+                        "fetched from the build environment, so the 3rd and 4th strings are "
+                        "published for these clubs only and left blank everywhere else."))
+
+    cross = []
+    for p in players:
+        d = depth_by_code_pos.get((p.get("team"), p.get("position")))
+        if not d:
+            continue
+        s1 = strip_number(d.get("s1"))
+        s2 = strip_number(d.get("s2"))
+        starter_check = "match" if s1 and s1.lower() == (p.get("player") or "").lower() else "differs"
+        repl_check = "match" if s2 and s2.lower() == (p.get("replacement") or "").lower() else "differs"
+        reg = registry.get(d.get("src"), {})
+        cross.append([
+            f"<strong>{esc(p.get('team'))}</strong>", esc(p.get("position")),
+            esc(unit_of(p.get("position")) or ""),
+            esc(p.get("player")), esc(s1 or "none listed"),
+            esc(p.get("replacement") or "none listed"), esc(s2 or "none listed"),
+            esc(d.get("s3") or "none listed"), esc(d.get("s4") or "none listed"),
+            starter_check, repl_check,
+            src(reg.get("url") or SOURCE["depthchart"], "club depth chart"),
+        ])
+    n_cross = len(cross)
+    starter_match = sum(1 for r in cross if r[9] == "match")
+    repl_match = sum(1 for r in cross if r[10] == "match")
+    cross_tbl = table(["Club", "Pos", "Unit", "Starter named by the injury report",
+                       "1st string on the club chart", "Next man up in the model",
+                       "2nd string on the club chart", "3rd string", "4th string",
+                       "Starter check", "Replacement check", "Source"], cross,
+                      note=(f"Independent cross-check: the model names the next player at the "
+                            f"position from the weekly depth-chart mirror. Where the club publishes "
+                            f"its own chart, the two are compared here; a blank cell means the club "
+                            f"chart has no player at that string. Result: the starter matches the "
+                            f"club's 1st string in {starter_match} of {n_cross} checked rows, and the "
+                            f"model's next man up matches the club's 2nd string in {repl_match} of "
+                            f"{n_cross}. A depth chart is a weekly snapshot and the injury report is "
+                            f"newer, so a difference is expected rather than an error; the rows that "
+                            f"differ are published so a reviewer can judge."))
 
     limits = "".join(f"<li>{esc(x)}</li>" for x in method.get("limits", []))
     weights = method.get("position_weights", {})
@@ -939,6 +1040,20 @@ def injuries_page(avail, dash):
 <section class="panel">
   <div class="panel-head"><h2>Starter-level detail</h2><a href="../data/model/availability.json">Raw JSON →</a></div>
   {p_tbl}
+</section>
+
+<section class="panel">
+  <h2>Depth strings, 1st to 4th, offence and defence</h2>
+  {d_tbl}
+</section>
+
+<section class="panel">
+  <h2>Cross-check: the model's next man up against the club's own chart</h2>
+  {cross_tbl}
+  <p class="note">The league's official weekly depth-chart feed is credential-gated
+  ({src(SOURCE["sportradar"], "Sportradar, the NFL's official data partner")}); it cannot be
+  fetched from the build environment, so the 2nd string is published league-wide from the pinned
+  depth-chart mirror and the 3rd and 4th strings only where a club publishes its own chart.</p>
 </section>
 
 <section class="grid-2">
@@ -1357,6 +1472,12 @@ def review_page(verif, strat, dash, avail=None):
          src(SOURCE["repo"], "site map"), badge("resolved")],
         ["F20", "stale pages", "The published pages carried a build stamp 13 hours older than the model snapshot they displayed, because the daily data refresh committed new data without rebuilding the pages. The refresh now rebuilds and commits the pages together.",
          src(SOURCE["repo"], "refresh workflow"), badge("resolved")],
+        ["F22", "depth strings beyond the second", "The league's sanctioned weekly depth-chart feed is credential-gated, so the 3rd and 4th strings are published only for the three clubs whose own depth charts the repository holds (Kansas City, Green Bay, San Francisco). Everywhere else the cell is blank rather than guessed.",
+         src(SOURCE["sportradar"], "Sportradar, the NFL's official data partner") + " " + src(SOURCE["depthchart"], "club depth chart"),
+         badge("needs review")],
+        ["F23", "next man up vs the club chart", "Where a club publishes its own depth chart, the model's next man up matches the club's published 2nd string in some rows and not in others; the depth chart is a weekly snapshot and the injury report is newer. Every compared row is published on the Injuries page with both names.",
+         src(SOURCE["depthchart"], "club depth chart") + " " + src("injuries.html", "cross-check"),
+         badge("needs review")],
         ["F21", "verification report", "The committed verification report counted 996 table rows because the landing page it measured was a different page from the one that is published. The gate now measures every published page (1,968 rows) and the report is regenerated in the same order as the build.",
          src(SOURCE["repo"], "verification report"), badge("resolved")],
     ])
@@ -1392,6 +1513,7 @@ def review_page(verif, strat, dash, avail=None):
 # ---------------------------------------------------------------- executive
 def executive_page(snap, dash, lines, strat, avail, verif, prov):
     counts = (dash or {}).get("counts", {})
+    audit = load_audit()
     cal = (lines or {}).get("calibration", [])
     test = next((c for c in cal if "2026" in (c.get("label") or "")), {})
     lb = (strat or {}).get("leaderboard", [])
@@ -1447,6 +1569,12 @@ def executive_page(snap, dash, lines, strat, avail, verif, prov):
     {num(sign.get('corr_market_line_vs_home_margin'), 3)} with the home margin over
     {num(sign.get('n_games'))} games.</li>
     <li>nflverse file licence verified as CC-BY-4.0 (attribution shown in the footer).</li>
+    <li>A second, independent reading of the official pages on the same day:
+    {num(audit.get('checks_total'))} comparisons of the published tables against two verbatim
+    transcriptions of the official league standings page and the official Week 10 schedule,
+    {num(audit.get('checks_failed'))} of them failing. {len(audit.get('flags', []))} irregularities
+    were found on the official pages themselves and are published on the
+    <a href="audit.html">Official-Source Audit</a> page — they are quoted, not corrected.</li>
   </ul>
 
   <h3>What the numbers say</h3>
@@ -1481,6 +1609,9 @@ def executive_page(snap, dash, lines, strat, avail, verif, prov):
     <li>Rewards with real value need legal review (F04).</li>
     <li>Model history covers 2024-2026 only, so confidence intervals are wide (F06).</li>
     <li>Weather, travel and inactives are missing, so those signals are untested (F09, F10).</li>
+    <li>The official standings page does not reproduce its own split columns between two readings
+    and contradicts the clubs' games played in 23 printed rows, so only W-L-T, PCT, PF, PA and NET
+    are published as verified facts (F15, F16, F17).</li>
   </ul>
 
   <h3>Decisions requested</h3>
@@ -1503,6 +1634,7 @@ def executive_page(snap, dash, lines, strat, avail, verif, prov):
       <li><a href="strategies.html">Strategy Lab</a> — leaderboard, gate matrix, correlation, parlay maths, rewards rules.</li>
       <li><a href="injuries.html">Injuries &amp; Depth</a> — starters out, replacements, attrition index.</li>
       <li><a href="props.html">Props</a> — projections with intervals and deliberately blank market columns.</li>
+      <li><a href="audit.html">Official Audit</a> — every published number compared with the official pages, line by line.</li>
       <li><a href="questions.html">Questions</a> — the decision gate: known, unknown, how to find out.</li>
       <li><a href="suggestions.html">Suggestions</a> — twelve ranked changes and five decision records.</li>
       <li><a href="evidence.html">Evidence</a> — provenance and line-by-line verification.</li>
