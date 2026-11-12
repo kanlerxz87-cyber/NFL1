@@ -106,9 +106,9 @@
    "id": "R-11",
    "type": "Irregularity",
    "item": "Three NFL Football Operations addresses return 404",
-   "finding": "operations.nfl.com/the-rules/, /gameday/ and /gameday/nfl-schedule/ each returned the site's 404 page when fetched by this session. They are no longer cited on main. Session 15e79a53 reported them as well.",
+   "finding": "operations.nfl.com/the-rules/, /gameday/ and /gameday/nfl-schedule/ each returned the site's 404 page when fetched by this session. Still cited on main in: pages/questions.html, pages/review.html.",
    "owner": "690e397b",
-   "suggested_action": "No action needed. Kept for the record.",
+   "suggested_action": "Replace with working official addresses.",
    "source_url": "https://operations.nfl.com/",
    "source_label": "NFL Football Operations home"
   },

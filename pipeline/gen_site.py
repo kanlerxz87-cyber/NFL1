@@ -10,6 +10,7 @@ from __future__ import annotations
 import html
 import json
 import os
+import re
 from datetime import datetime, timezone
 
 from content import DECISIONS, METHOD_NOTES, QUESTIONS, REVIEW_PROCESS, SUGGESTIONS
@@ -23,8 +24,11 @@ NAV = [
     ("pages/strategies.html", "Strategy Lab"),
     ("pages/injuries.html", "Injuries & Depth"),
     ("pages/props.html", "Props"),
+    ("pages/audit.html", "Official Audit"),
     ("pages/questions.html", "Questions"),
     ("pages/suggestions.html", "Suggestions"),
+    ("pages/decisions.html", "Decision Register"),
+    ("pages/analysis.html", "Validation & Correlation"),
     ("pages/evidence.html", "Evidence"),
     ("pages/review.html", "Flagged for Review"),
     ("pages/executive.html", "Executive Summary"),
@@ -176,6 +180,231 @@ def write(path: str, content: str) -> None:
     print(f"wrote {path}")
 
 
+# ---------------------------------------------------------------- site map
+CATEGORY_ORDER = [
+    "Landing page",
+    "Decision Lab · model outputs and registers",
+    "Governance registers · requirements, questions, suggestions, decisions",
+    "Independent build · session 87deb7ab",
+    "Independent verification · session a2cea255",
+    "Independent audit · session 73fdd6c4",
+    "Other published pages",
+]
+SKIP_DIRS = {".git", ".github", "__pycache__", "node_modules", "site", ".venv"}
+
+
+def category_of(rel):
+    if rel == "index.html":
+        return "Landing page"
+    if rel.startswith("pages/"):
+        return "Decision Lab · model outputs and registers"
+    if rel.startswith("docs/"):
+        return "Independent build · session 87deb7ab"
+    if rel.startswith("verified-lab/"):
+        return "Independent verification · session a2cea255"
+    if rel.startswith("referee/"):
+        return "Independent audit · session 73fdd6c4"
+    if "/" not in rel:
+        return "Governance registers · requirements, questions, suggestions, decisions"
+    return "Other published pages"
+
+
+def _title_and_h1(text):
+    title = ""
+    h1 = ""
+    m = re.search(r"<title>(.*?)</title>", text, re.S | re.I)
+    if m:
+        title = " ".join(m.group(1).split())
+    m = re.search(r"<h1[^>]*>(.*?)</h1>", text, re.S | re.I)
+    if m:
+        h1 = re.sub(r"<[^>]+>", "", m.group(1))
+        h1 = " ".join(html.unescape(h1).split())
+    return title, h1
+
+
+def site_map():
+    """Every published page, grouped by category, with the page's own heading.
+
+    The table is built from the files on disk, so a page can never be published
+    without appearing in the site map on the landing page.
+    """
+    found = []
+    for dirpath, dirnames, filenames in os.walk(ROOT):
+        dirnames[:] = [d for d in dirnames if d not in SKIP_DIRS]
+        for f in sorted(filenames):
+            if not f.endswith(".html"):
+                continue
+            full = os.path.join(dirpath, f)
+            rel = os.path.relpath(full, ROOT).replace(os.sep, "/")
+            try:
+                text = open(full, encoding="utf-8").read()
+            except OSError:
+                continue
+            title, h1 = _title_and_h1(text)
+            found.append((rel, title or h1, h1))
+    groups = []
+    for label in CATEGORY_ORDER:
+        rows = [r for r in found if category_of(r[0]) == label]
+        if not rows:
+            continue
+        rows.sort(key=lambda r: r[1].lower())
+        groups.append((label, rows))
+    return groups
+
+
+# ---------------------------------------------------------------- official audit
+AUDIT_DIR = os.path.join(ROOT, "data", "audit", "4c043747")
+
+
+def load_audit():
+    p = os.path.join(AUDIT_DIR, "official_audit.json")
+    if not os.path.exists(p):
+        return {}
+    with open(p, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def read_tsv(path):
+    rows = []
+    if not os.path.exists(path):
+        return rows
+    with open(path, encoding="utf-8") as f:
+        for line in f:
+            line = line.rstrip("\n")
+            if not line or line.startswith("#"):
+                continue
+            rows.append(line.split("\t"))
+    if not rows:
+        return rows
+    header = rows[0]
+    return [dict(zip(header, r)) for r in rows[1:]]
+
+
+def audit_page(audit, dash):
+    a = audit or {}
+    gen = a.get("generated_at") or (dash or {}).get("generated_at")
+    standings = read_tsv(os.path.join(AUDIT_DIR, "standings_retrieval_T1.tsv"))
+    schedule = read_tsv(os.path.join(AUDIT_DIR, "schedule_week10_20261112.tsv"))
+    games = [r for r in schedule if r.get("away") and r.get("home") and r["away"] != "bye_teams"]
+    byes_row = next((r for r in schedule if r.get("away") == "bye_teams"), None)
+    byes = byes_row["home"].split() if byes_row else []
+
+    verified = a.get("verified_columns", [])
+    reproducible = a.get("reproducible_columns", [])
+    changed = a.get("columns_changed_between_retrievals", {})
+
+    col_rows = []
+    for col in ["w", "l", "t", "pct", "pf", "pa", "net_pts", "home", "road", "div", "div_pct",
+                "conf", "conf_pct", "non_conf", "strk", "last5"]:
+        n_changed = len(changed.get(col, []))
+        reproducible_yes = "yes" if col in reproducible else f"no ({n_changed} club(s) changed)"
+        consistent_yes = "yes" if col in verified else "no"
+        used = "published as verified" if col in verified else "left blank / flagged"
+        col_rows.append([f"<code>{esc(col)}</code>", esc(reproducible_yes), esc(consistent_yes),
+                         esc(used), src(SOURCE["standings"], "official page")])
+    col_tbl = table(
+        ["Printed column", "Same in both retrievals?", "Consistent with the club's own record?",
+         "Treatment on this site", "Source"],
+        col_rows,
+        note=("A column is only published as a verified fact when it was identical in two "
+              "retrievals of the official page AND satisfies the arithmetic the page itself "
+              "implies. Everything else is shown as a blank and flagged."))
+
+    st_rows = []
+    for r in standings:
+        st_rows.append([
+            f"<strong>{esc(r['team'])}</strong>",
+            f"{esc(r['w'])}-{esc(r['l'])}-{esc(r['t'])}",
+            esc(r["pct"]),
+            esc(r["pf"]),
+            esc(r["pa"]),
+            esc(r["net_pts"]),
+            src(SOURCE["standings"], "nfl.com standings"),
+        ])
+    st_tbl = table(["Club", "W-L-T", "PCT", "PF", "PA", "NET", "Source"], st_rows,
+                   note=("Week 10 reading of the official league standings page. The split "
+                         "columns (HOME, ROAD, DIV, CONF, NON-CONF, STRK, LAST 5) are not shown "
+                         "because they do not reproduce between retrievals and, for several "
+                         "clubs, contradict the club's own games played — see the flags below."))
+
+    sl_rows = []
+    for g in games:
+        sl_rows.append([
+            f"<strong>{esc(g['away'])} @ {esc(g['home'])}</strong>",
+            esc(g["gameday"]),
+            esc(g["local_time"]),
+            esc(g["network"]),
+            f"{esc(g['away_record'])} / {esc(g['home_record'])}",
+            src(g["game_url"], "official game page"),
+        ])
+    sl_tbl = table(["Matchup", "Date", "Time (ET)", "Network", "Records printed by NFL.com",
+                    "Source"], sl_rows,
+                   note=("Week 10 slate exactly as the official schedule page lists it. Teams on "
+                         "bye: " + ", ".join(byes) + ". The published model lines are matched to "
+                         "this slate one game at a time by the audit harness."))
+
+    flag_rows = []
+    for f in a.get("flags", []):
+        flag_rows.append([
+            esc(f.get("item")),
+            esc(f.get("detail")),
+            src(f.get("source") or SOURCE["standings"], "official page"),
+        ])
+    flag_tbl = table(["Irregularity", "What was observed", "Source"], flag_rows)
+
+    kpis = "".join([
+        kpi("Checks run", a.get("checks_total"), "line-by-line comparisons"),
+        kpi("Checks failed", a.get("checks_failed"), "published vs official"),
+        kpi("Irregularities flagged", len(a.get("flags", [])), "published for review"),
+        kpi("Retrievals", 2, "of the same official page"),
+        kpi("Clubs verified", len(standings), "W-L-T, PCT, PF, PA, NET"),
+        kpi("Games verified", len(games), "Week 10 slate"),
+    ])
+
+    body = f"""
+<section class="kpis">{kpis}</section>
+
+<section class="panel">
+  <h2>What this page is</h2>
+  <p>Session 4c043747 read the official NFL league standings page twice on 2026-11-12
+  (about 22:05Z and 22:25Z) and transcribed all 32 clubs, every printed column, and the
+  official Week 10 schedule with the records the schedule page prints beside each club.
+  The harness <code>tools/audit_official.py</code> then compared every standings table
+  published in this repository with that transcription and published the Week 10 model
+  slate against the official slate.</p>
+  <p class="note">The two retrievals are stored verbatim in
+  <code>data/audit/4c043747/</code> so any line can be re-checked by hand:
+  <a href="https://github.com/kanlerxz87-cyber/NFL1/tree/main/data/audit/4c043747"
+     target="_blank" rel="noopener">transcription files</a>.</p>
+</section>
+
+<section class="panel">
+  <h2>Which official columns can be verified</h2>
+  {col_tbl}
+</section>
+
+<section class="panel">
+  <h2>Official league standings, 2026 (verified columns)</h2>
+  {st_tbl}
+</section>
+
+<section class="panel">
+  <h2>Official Week 10 slate</h2>
+  {sl_tbl}
+</section>
+
+<section class="panel">
+  <h2>Irregularities found on the official pages</h2>
+  {flag_tbl}
+  <p class="note">These are published, not corrected. Every one of them is also listed on
+  the <a href="review.html">Flagged for Review</a> page with its source link.</p>
+</section>
+"""
+    return page("pages/audit.html", "Official-Source Audit", body,
+                "Every published number compared, line by line, with the official NFL pages.",
+                gen)
+
+
 # ---------------------------------------------------------------- overview
 def overview(snap, dash, lines, strat, avail, props, verif):
     gen = dash.get("generated_at") or snap.get("generated_at")
@@ -257,6 +486,40 @@ def overview(snap, dash, lines, strat, avail, props, verif):
         ])
     v_tbl = table(["Verification check", "Rows matched", "Result", "Source"], v_rows)
 
+    # decisions requested (the human choice that unblocks the rest)
+    dec_rows = []
+    for d in DECISIONS:
+        dec_rows.append([
+            f"<strong>{esc(d['id'])}</strong>",
+            esc(d.get("decision")),
+            esc(" · ".join(d.get("options", []))),
+            esc(d.get("recommend")),
+            badge(d.get("status")),
+            esc(d.get("blocks")),
+        ])
+    decisions_tbl = table(
+        ["#", "Decision", "Options", "Recommendation", "Status", "What it blocks"], dec_rows,
+        note=("Options are the choice; the recommendation is the evidence-weighted default. "
+              "A decision stays open until it is signed off, so nothing downstream is built "
+              "on an assumption."))
+
+    # site map: every published page, so no page can be published without a route to it
+    groups = site_map()
+    page_count = sum(len(rows) for _, rows in groups)
+    sm_rows = []
+    for label, rows in groups:
+        sm_rows.append([f"<strong>{esc(label)}</strong>", f"{len(rows)} page(s)", "", ""])
+        for rel, title, _h1 in rows:
+            sm_rows.append([
+                f'<a href="{esc(rel)}">{esc(title)}</a>',
+                esc(rel),
+                esc(category_of(rel)),
+                src(SOURCE["repo"], "repository"),
+            ])
+    sitemap_tbl = table(["Page", "File", "Category", "Source"], sm_rows,
+                         note=("Built from the files on disk at generation time, so the map cannot "
+                               "drift from what is published."))
+
     body = f"""
 <section class="hero">
   <div>
@@ -313,6 +576,25 @@ def overview(snap, dash, lines, strat, avail, props, verif):
     <div class="stat"><h4>Blocked</h4><p>{sum(1 for q in QUESTIONS if 'blocked' in q['status'].lower())} questions cannot be answered with today's sources, mostly pricing and legality.</p></div>
     <div class="stat"><h4>Next</h4><p>Twelve suggestions are ranked at <a href="pages/suggestions.html">Suggestions</a>; five decision records need a human choice.</p></div>
   </div>
+</section>
+
+<section class="panel">
+  <div class="panel-head">
+    <h2>Decisions requested</h2>
+    <a href="pages/decisions.html">Full decision register →</a>
+  </div>
+  {decisions_tbl}
+  <p class="note">Nothing on this site is changed automatically on the strength of a suggestion.
+  A suggestion becomes a change only after the decision it belongs to is signed off — the
+  review path is described on the <a href="pages/suggestions.html">Suggestions</a> page.</p>
+</section>
+
+<section class="panel">
+  <div class="panel-head">
+    <h2>What is published here</h2>
+    <span class="sub">{page_count} pages, every one listed below</span>
+  </div>
+  {sitemap_tbl}
 </section>
 """
     return page("index.html", "Overview", body,
@@ -1246,6 +1528,7 @@ def main():
     write("pages/questions.html", questions_page(dash))
     write("pages/suggestions.html", suggestions_page(dash))
     write("pages/review.html", review_page(verif, strat, dash, avail))
+    write("pages/audit.html", audit_page(load_audit(), dash))
     write("pages/executive.html", executive_page(snap, dash, lines, strat, avail, verif, prov))
     # keep old URLs working
     for old in ("models", "teams", "standings", "injuries_old"):

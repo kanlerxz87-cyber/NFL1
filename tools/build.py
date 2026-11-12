@@ -363,7 +363,7 @@ flagged. No value is inferred or filled in.</p>"""))
 </ul></div></div>
 <p class="small">See <a href="questions.html">Decision Questions</a> for the full known/unknown list and
 <a href="flagged.html">Flagged for Review</a> for every irregularity with its official source link.</p>"""))
-    return write_page("index.html", "NFL1 decision dashboard", "Overview",
+    return write_page("dashboard.html", "NFL1 governance dashboard", "Overview",
                       "A clean, source-linked dashboard for NFL requirements, decision questions, strategy validation, injury and depth tracking, and a leaderboard competition.",
                       "\n".join(b), "Home")
 

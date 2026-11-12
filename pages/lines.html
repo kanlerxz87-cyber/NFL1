@@ -1,107 +1,105 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Own Lines — NFL1</title>
-<link rel="stylesheet" href="../assets/css/style.css">
+<title>My Lines · NFL Decision Lab</title>
+<meta name="description" content="Evidence-first NFL decision support: own lines, validation gates, injury and depth analysis.">
+<link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
-<header>
-  <div class="brand">NFL1 — NFL Analytics Dashboard</div>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="brand" href="../index.html"><span class="mark">NFL</span><span class="brand-text">Decision Lab</span></a>
   <nav>
     <a href="../index.html">Overview</a>
-    <a href="executive-summary.html">Executive Summary</a>
-    <a href="teams.html">Teams</a>
-    <a href="standings.html">Standings</a>
-    <a href="injuries.html">Injuries</a>
-    <a href="availability.html">Availability</a>
-    <a href="data.html">Verified Data</a>
-    <a href="lines.html" class="active">Own Lines</a>
-    <a href="analysis.html">Validation & Correlation</a>
-    <a href="decisions.html">Decision Register</a>
-    <a href="verified.html">Verified Artifacts</a>
-    <a href="evidence.html">Evidence</a>
-    <a href="models.html">Strategy Lab</a>
-    <a href="strategies.html">Strategies</a>
-    <a href="suggestions.html">Suggestions</a>
-    <a href="questions.html">Questions</a>
-    <a href="flagged.html">Flagged</a>
-    <a href="review.html">Review</a>
-    <a href="executive.html">Executive Summary (companion)</a>
+    <a href="lines.html" class="active">My Lines</a>
+    <a href="strategies.html">Strategy Lab</a>
+    <a href="injuries.html">Injuries & Depth</a>
     <a href="props.html">Player Props</a>
+    <a href="audit.html">Official Audit</a>
+    <a href="questions.html">Questions</a>
+    <a href="suggestions.html">Suggestions</a>
+    <a href="decisions.html">Decision Register</a>
+    <a href="analysis.html">Validation & Correlation</a>
+    <a href="evidence.html">Evidence</a>
+    <a href="review.html">Flagged for Review</a>
+    <a href="executive.html">Executive Summary</a>
   </nav>
 </header>
-<main>
-  <h1>Own Lines</h1>
-  <p class="muted">Model-generated spreads and totals, with the validation verdict attached · generated 2026-11-12 05:17 UTC</p>
+<main id="main">
+  <section class="page-head">
+    <p class="eyebrow">Evidence-first dashboard</p>
+    <h1>My Lines</h1>
+    <p class="standfirst">Opponent-adjusted EPA ratings converted into a spread, a total and a win probability — then scored against the closing line.</p>
+    <p class="timestamp">Data built 2026-11-12T18:53:41+00:00 · every value links to its source</p>
+  </section>
+  
+<section class="panel">
+  <h2>Method, in one paragraph</h2>
+  <p>Two-way ridge fixed effect on non-garbage-time plays: EPA ~ offense team + defense team + home. Prior season weighted 0.4.</p>
+  <p class="note">Ratings for week W use only weeks &lt; W of the current season plus the previous season at 40% weight, so the backtest has no look-ahead. Margin model: a = 1.62,
+  b = 27.93, residual SD = 13.38.
+  Total model: intercept 45.48, offence coefficient 18.66,
+  defence coefficient -5.63, residual SD 12.92.</p>
+</section>
 
-  <div class="card" style="border-color:#f59e0b">
-    <h3><span class="badge danger">Read this first</span> These are model numbers, not market edges</h3>
-    <p>FAIL — the opponent-adjusted model does not beat the published baselines with 95% confidence; do not use these lines for decisions.</p>
-    <p class="muted">No official NFL odds/closing-line source is reachable here and none is stored in the repo; model numbers are NOT edges against a market and must not be treated as such.</p>
-    <p><strong>Consequence:</strong> the table below cannot tell you whether any game is worth a
-    bet. Judging value requires the actual price offered, and no official price source was
-    available. Every market-line cell is therefore left blank rather than estimated.</p>
-  </div>
+<section class="panel">
+  <h2>Line sign convention (measured, not assumed)</h2>
+  <p>Across 5591 games the correlation between the mirrored closing line and the
+  home team's actual margin is <strong>0.439</strong>.
+  Positive correlation proves the mirrored closing line is expressed as points the HOME team is expected to win by (positive = home favourite).</p>
+  <p class="note">This is why the first build produced an inverted comparison: the convention was
+  assumed wrongly and then proved from the data. It is published here so a reviewer can challenge it.
+  <a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">schedules release</a></p>
+</section>
 
-  <h2>Your own lines — Week 10, 2026</h2>
-  <p class="muted">Generated only from completed weeks 1–9 (136 games).
-  Model margin is from the home team's perspective; the spread shown is the home handicap
-  (negative = home favoured). Uncertainty bands are the model's own forward-test residual
-  standard deviation (13.56 points on margin,
-  14.97 on total).</p>
-  <div class="table-wrap"><table><thead><tr><th>Date</th><th>Matchup</th><th>Model spread (home)</th><th>Model total</th><th>Power (away / home)</th><th>Margin SD</th><th>Market line</th><th>Fixture source</th></tr></thead><tbody>
-<tr><td>2026-11-12</td><td>WAS @ NYG</td><td>+1.2</td><td>45.6</td><td>+0.4 / -0.7</td><td>±13.6</td><td><span class="badge warn">blank</span></td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">NFL schedule</a></td></tr>
-<tr><td>2026-11-15</td><td>NE @ DET</td><td>-1.5</td><td>47.8</td><td>+0.2 / +1.8</td><td>±13.6</td><td><span class="badge warn">blank</span></td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">NFL schedule</a></td></tr>
-<tr><td>2026-11-15</td><td>KC @ ATL</td><td>-0.4</td><td>44.8</td><td>-0.8 / -0.2</td><td>±13.6</td><td><span class="badge warn">blank</span></td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">NFL schedule</a></td></tr>
-<tr><td>2026-11-15</td><td>HOU @ CLE</td><td>+3.4</td><td>44.9</td><td>+1.2 / -2.1</td><td>±13.6</td><td><span class="badge warn">blank</span></td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">NFL schedule</a></td></tr>
-<tr><td>2026-11-15</td><td>MIN @ GB</td><td>-4.2</td><td>41.0</td><td>-4.6 / -0.3</td><td>±13.6</td><td><span class="badge warn">blank</span></td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">NFL schedule</a></td></tr>
-<tr><td>2026-11-15</td><td>MIA @ IND</td><td>-2.7</td><td>45.0</td><td>-1.8 / +1.0</td><td>±13.6</td><td><span class="badge warn">blank</span></td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">NFL schedule</a></td></tr>
-<tr><td>2026-11-15</td><td>CAR @ NO</td><td>+0.8</td><td>49.7</td><td>+2.3 / +1.6</td><td>±13.6</td><td><span class="badge warn">blank</span></td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">NFL schedule</a></td></tr>
-<tr><td>2026-11-15</td><td>BUF @ NYJ</td><td>+3.6</td><td>48.7</td><td>+3.2 / -0.3</td><td>±13.6</td><td><span class="badge warn">blank</span></td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">NFL schedule</a></td></tr>
-<tr><td>2026-11-15</td><td>JAX @ TEN</td><td>+0.4</td><td>44.2</td><td>-0.7 / -1.0</td><td>±13.6</td><td><span class="badge warn">blank</span></td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">NFL schedule</a></td></tr>
-<tr><td>2026-11-15</td><td>LA @ AZ</td><td>-1.7</td><td>45.9</td><td>-0.9 / +0.9</td><td>±13.6</td><td><span class="badge warn">blank</span></td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">NFL schedule</a></td></tr>
-<tr><td>2026-11-15</td><td>SEA @ LV</td><td>-5.6</td><td>47.5</td><td>-2.0 / +3.7</td><td>±13.6</td><td><span class="badge warn">blank</span></td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">NFL schedule</a></td></tr>
-<tr><td>2026-11-15</td><td>SF @ DAL</td><td>-1.6</td><td>49.7</td><td>+1.1 / +2.8</td><td>±13.6</td><td><span class="badge warn">blank</span></td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">NFL schedule</a></td></tr>
-<tr><td>2026-11-15</td><td>PIT @ CIN</td><td>-3.9</td><td>46.3</td><td>-1.7 / +2.2</td><td>±13.6</td><td><span class="badge warn">blank</span></td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">NFL schedule</a></td></tr>
-<tr><td>2026-11-16</td><td>LAC @ BAL</td><td>-1.4</td><td>44.8</td><td>-1.3 / +0.2</td><td>±13.6</td><td><span class="badge warn">blank</span></td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">NFL schedule</a></td></tr>
-</tbody></table></div>
+<section class="panel">
+  <div class="panel-head"><h2>Week 10 lines</h2><a href="../data/model/lines.json">Raw JSON →</a></div>
+  <div class="table-wrap"><table class=""><thead><tr><th>Matchup</th><th>My line</th><th>95% band</th><th>My total</th><th>P(home win)</th><th>Market line</th><th>Market total</th><th>Edge line</th><th>Edge total</th><th>Signal</th><th>Source</th></tr></thead><tbody><tr><td><strong>WAS @ NYG</strong><br><span class="sub">2026-11-12</span></td><td>NYG -2.6</td><td>[-23.7, 28.8]</td><td>45.3</td><td>0.576</td><td>2.5</td><td>40.5</td><td>0.07</td><td>4.76</td><td><span class="badge neutral">no-edge</span></td><td><a class="src" href="https://www.nfl.com/schedules/2026/REG10" target="_blank" rel="noopener">NFL schedule</a></td></tr><tr><td><strong>NE @ DET</strong><br><span class="sub">2026-11-15</span></td><td>DET +0.3</td><td>[-26.5, 26.0]</td><td>48.8</td><td>0.492</td><td>2.5</td><td>51.5</td><td>-2.75</td><td>-2.73</td><td><span class="badge warn">watch</span></td><td><a class="src" href="https://www.nfl.com/schedules/2026/REG10" target="_blank" rel="noopener">NFL schedule</a></td></tr><tr><td><strong>KC @ ATL</strong><br><span class="sub">2026-11-15</span></td><td>ATL +0.9</td><td>[-27.2, 25.3]</td><td>46.4</td><td>0.472</td><td>-3.0</td><td>46.5</td><td>2.06</td><td>-0.12</td><td><span class="badge warn">watch</span></td><td><a class="src" href="https://www.nfl.com/schedules/2026/REG10" target="_blank" rel="noopener">NFL schedule</a></td></tr><tr><td><strong>HOU @ CLE</strong><br><span class="sub">2026-11-15</span></td><td>CLE +3.2</td><td>[-29.4, 23.1]</td><td>42.8</td><td>0.407</td><td>-4.5</td><td>40.5</td><td>1.34</td><td>2.29</td><td><span class="badge neutral">no-edge</span></td><td><a class="src" href="https://www.nfl.com/schedules/2026/REG10" target="_blank" rel="noopener">NFL schedule</a></td></tr><tr><td><strong>MIN @ GB</strong><br><span class="sub">2026-11-15</span></td><td>GB -4.4</td><td>[-21.8, 30.6]</td><td>43.5</td><td>0.629</td><td>3.0</td><td>41.5</td><td>1.40</td><td>2.02</td><td><span class="badge neutral">no-edge</span></td><td><a class="src" href="https://www.nfl.com/schedules/2026/REG10" target="_blank" rel="noopener">NFL schedule</a></td></tr><tr><td><strong>MIA @ IND</strong><br><span class="sub">2026-11-15</span></td><td>IND -3.9</td><td>[-22.3, 30.1]</td><td>45.1</td><td>0.614</td><td>3.5</td><td>38.5</td><td>0.39</td><td>6.62</td><td><span class="badge neutral">no-edge</span></td><td><a class="src" href="https://www.nfl.com/schedules/2026/REG10" target="_blank" rel="noopener">NFL schedule</a></td></tr><tr><td><strong>CAR @ NO</strong><br><span class="sub">2026-11-15</span></td><td>NO -1.2</td><td>[-25.1, 27.4]</td><td>45.2</td><td>0.535</td><td>2.5</td><td>48.5</td><td>-1.33</td><td>-3.26</td><td><span class="badge neutral">no-edge</span></td><td><a class="src" href="https://www.nfl.com/schedules/2026/REG10" target="_blank" rel="noopener">NFL schedule</a></td></tr><tr><td><strong>BUF @ NYJ</strong><br><span class="sub">2026-11-15</span></td><td>NYJ +6.0</td><td>[-32.3, 20.2]</td><td>46.9</td><td>0.326</td><td>-8.5</td><td>50.5</td><td>2.48</td><td>-3.64</td><td><span class="badge warn">watch</span></td><td><a class="src" href="https://www.nfl.com/schedules/2026/REG10" target="_blank" rel="noopener">NFL schedule</a></td></tr><tr><td><strong>JAX @ TEN</strong><br><span class="sub">2026-11-15</span></td><td>TEN +10.9</td><td>[-37.2, 15.3]</td><td>45.6</td><td>0.207</td><td>-10.5</td><td>46.5</td><td>-0.44</td><td>-0.90</td><td><span class="badge neutral">no-edge</span></td><td><a class="src" href="https://www.nfl.com/schedules/2026/REG10" target="_blank" rel="noopener">NFL schedule</a></td></tr><tr><td><strong>LA @ ARI</strong><br><span class="sub">2026-11-15</span></td><td>ARI +5.2</td><td>[-31.5, 21.0]</td><td>46.9</td><td>0.348</td><td>-9.5</td><td>39.5</td><td>4.27</td><td>7.36</td><td><span class="badge neutral">actionable</span></td><td><a class="src" href="https://www.nfl.com/schedules/2026/REG10" target="_blank" rel="noopener">NFL schedule</a></td></tr><tr><td><strong>SEA @ LV</strong><br><span class="sub">2026-11-15</span></td><td>LV +7.1</td><td>[-33.4, 19.1]</td><td>43.8</td><td>0.297</td><td>-6.5</td><td>40.5</td><td>-0.63</td><td>3.34</td><td><span class="badge neutral">no-edge</span></td><td><a class="src" href="https://www.nfl.com/schedules/2026/REG10" target="_blank" rel="noopener">NFL schedule</a></td></tr><tr><td><strong>SF @ DAL</strong><br><span class="sub">2026-11-15</span></td><td>DAL +4.3</td><td>[-30.6, 21.9]</td><td>51.5</td><td>0.373</td><td>-3.5</td><td>55.5</td><td>-0.82</td><td>-3.95</td><td><span class="badge neutral">no-edge</span></td><td><a class="src" href="https://www.nfl.com/schedules/2026/REG10" target="_blank" rel="noopener">NFL schedule</a></td></tr><tr><td><strong>PIT @ CIN</strong><br><span class="sub">2026-11-15</span></td><td>CIN -1.7</td><td>[-24.5, 27.9]</td><td>48.1</td><td>0.551</td><td>3.5</td><td>49.5</td><td>-1.80</td><td>-1.35</td><td><span class="badge neutral">no-edge</span></td><td><a class="src" href="https://www.nfl.com/schedules/2026/REG10" target="_blank" rel="noopener">NFL schedule</a></td></tr><tr><td><strong>LAC @ BAL</strong><br><span class="sub">2026-11-16</span></td><td>BAL -5.2</td><td>[-21.0, 31.4]</td><td>43.1</td><td>0.651</td><td>4.5</td><td>38.5</td><td>0.69</td><td>4.60</td><td><span class="badge neutral">no-edge</span></td><td><a class="src" href="https://www.nfl.com/schedules/2026/REG10" target="_blank" rel="noopener">NFL schedule</a></td></tr></tbody></table></div>
+</section>
 
-  <h2>How the number is built</h2>
-  <div class="card">
-    <p>Ridge-regularised opponent-adjusted points model, fitted on verified final scores:</p>
-    <pre class="muted">home points = μ + offence[home] − defence[away] + HFA
-away points = μ + offence[away] − defence[home]</pre>
-    <p>Estimated from the captured season: home-field advantage
-    <strong>-0.113 points</strong>
-    (ridge penalty λ = 16.0, chosen by nested cross-validation inside
-    the training window only).</p>
-    <p class="muted">The home-field estimate is close to zero because this season's verified
-    results show home teams winning only
-    49.6% of decided games —
-    see the correlation page before assuming a normal home edge.</p>
-  </div>
+<section class="panel">
+  <div class="panel-head"><h2>Out-of-sample accuracy</h2><a href="../data/model/lines.json">Raw JSON →</a></div>
+  <div class="table-wrap"><table class=""><thead><tr><th>Sample</th><th>Games</th><th>Model spread MAE</th><th>Market spread MAE</th><th>MAE difference 95% CI</th><th>Corr(model, market)</th><th>Model total MAE</th><th>Market total MAE</th><th>Source</th></tr></thead><tbody><tr><td>train 2024</td><td>256</td><td>10.50</td><td>9.65</td><td>[0.37, 1.33]</td><td>0.722</td><td>9.77</td><td>9.72</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">closing lines</a></td></tr><tr><td>validation 2025</td><td>272</td><td>10.39</td><td>9.72</td><td>[0.28, 1.07]</td><td>0.807</td><td>10.68</td><td>10.39</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">closing lines</a></td></tr><tr><td>test 2026</td><td>136</td><td>9.98</td><td>9.48</td><td>[-0.05, 1.03]</td><td>0.779</td><td>11.31</td><td>10.60</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">closing lines</a></td></tr></tbody></table></div><p class="note">MAE = mean absolute error against the actual result, in points. A positive MAE difference means the market was closer. The model is evaluated on games it never saw.</p>
+</section>
 
-  <h2>Why no props or parlays are priced yet</h2>
-  <div class="card">
-    <p>Player-prop lines need per-player usage and yardage distributions. That requires an official
-    player-statistics feed at row level, which was not obtainable here; inventing distributions
-    from memory would break the no-hallucination rule. Parity with single bets also requires
-    measured same-game correlations, which <em>are</em> published (see
-    <a href="analysis.html">Validation &amp; Correlation</a>) so the dependency structure is ready
-    — only the player-level inputs are missing.</p>
-    <div class="table-wrap"><table><thead><tr><th>Product</th><th>Status</th><th>Blocking requirement</th></tr></thead><tbody>
-<tr><td><span class="badge ok">Ready</span></td><td>Single-game spread / total lines</td><td>market price feed to turn model numbers into decisions</td></tr>
-<tr><td><span class="badge warn">Partial</span></td><td>Parlay maths and correlation adjustment</td><td>measured correlations exist; joint-probability model for >2 legs</td></tr>
-<tr><td><span class="badge danger">Blocked</span></td><td>Player prop lines and prop combos</td><td>official row-level player usage/yardage data</td></tr>
-<tr><td><span class="badge warn">Partial</span></td><td>Leaderboard with rewards</td><td>prize terms, eligibility, audit — see Decision Register</td></tr>
-</tbody></table></div>
-  </div>
+
+<section class="panel">
+  <h2>Does the model add information beyond the closing line?</h2>
+  <p>Regressing the actual margin on both the closing line and the model line (fit 2025, tested 2026)
+  gives the market a weight of <strong>1.336</strong> and the model
+  <strong>-0.328</strong>. Test MAE: hybrid
+  <strong>9.54</strong> vs market-only
+  <strong>9.48</strong> over 136 games.</p>
+  <p class="note">A model weight at or below zero means the model&#x27;s disagreement with the market was wrong on average in the test window; a positive weight with a lower test MAE means genuine incremental information. Weight on the model near zero means the
+  EPA signal is already in the price; a positive weight with lower MAE is genuine incremental
+  information. <a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">closing-line source</a></p>
+</section>
+
+<section class="panel">
+  <div class="panel-head"><h2>League table (verified against nfl.com)</h2><a href="evidence.html">32/32 rows checked →</a></div>
+  <div class="table-wrap"><table class=""><thead><tr><th>Team</th><th>Club</th><th>Record</th><th>Win pct</th><th>PF</th><th>PA</th><th>Net</th><th>Source</th></tr></thead><tbody><tr><td><strong>SF</strong></td><td>San Francisco 49ers</td><td>7-1-0</td><td>0.875</td><td>235</td><td>156</td><td>+79</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a></td></tr><tr><td><strong>BUF</strong></td><td>Buffalo Bills</td><td>7-1-0</td><td>0.875</td><td>256</td><td>187</td><td>+69</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a></td></tr><tr><td><strong>CHI</strong></td><td>Chicago Bears</td><td>7-2-0</td><td>0.778</td><td>241</td><td>184</td><td>+57</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a></td></tr><tr><td><strong>DEN</strong></td><td>Denver Broncos</td><td>7-2-0</td><td>0.778</td><td>198</td><td>186</td><td>+12</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a></td></tr><tr><td><strong>JAX</strong></td><td>Jacksonville Jaguars</td><td>6-2-0</td><td>0.750</td><td>229</td><td>121</td><td>+108</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a></td></tr><tr><td><strong>CIN</strong></td><td>Cincinnati Bengals</td><td>6-2-0</td><td>0.750</td><td>240</td><td>175</td><td>+65</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a></td></tr><tr><td><strong>KC</strong></td><td>Kansas City Chiefs</td><td>6-2-0</td><td>0.750</td><td>202</td><td>143</td><td>+59</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a></td></tr><tr><td><strong>PIT</strong></td><td>Pittsburgh Steelers</td><td>6-2-0</td><td>0.750</td><td>180</td><td>144</td><td>+36</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a></td></tr><tr><td><strong>DET</strong></td><td>Detroit Lions</td><td>6-2-0</td><td>0.750</td><td>222</td><td>189</td><td>+33</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a></td></tr><tr><td><strong>MIN</strong></td><td>Minnesota Vikings</td><td>6-2-0</td><td>0.750</td><td>146</td><td>116</td><td>+30</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a></td></tr><tr><td><strong>NYG</strong></td><td>New York Giants</td><td>5-2-1</td><td>0.688</td><td>182</td><td>172</td><td>+10</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a></td></tr><tr><td><strong>GB</strong></td><td>Green Bay Packers</td><td>6-3-0</td><td>0.667</td><td>216</td><td>191</td><td>+25</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a></td></tr><tr><td><strong>SEA</strong></td><td>Seattle Seahawks</td><td>5-4-0</td><td>0.556</td><td>202</td><td>162</td><td>+40</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a></td></tr><tr><td><strong>LA</strong></td><td>Los Angeles Rams</td><td>5-4-0</td><td>0.556</td><td>214</td><td>181</td><td>+33</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a></td></tr><tr><td><strong>NE</strong></td><td>New England Patriots</td><td>5-4-0</td><td>0.556</td><td>211</td><td>207</td><td>+4</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a></td></tr><tr><td><strong>CLE</strong></td><td>Cleveland Browns</td><td>5-4-0</td><td>0.556</td><td>161</td><td>196</td><td>-35</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a></td></tr><tr><td><strong>DAL</strong></td><td>Dallas Cowboys</td><td>4-5-0</td><td>0.444</td><td>246</td><td>236</td><td>+10</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a></td></tr><tr><td><strong>LV</strong></td><td>Las Vegas Raiders</td><td>4-5-0</td><td>0.444</td><td>238</td><td>268</td><td>-30</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a></td></tr><tr><td><strong>BAL</strong></td><td>Baltimore Ravens</td><td>4-5-0</td><td>0.444</td><td>189</td><td>236</td><td>-47</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a></td></tr><tr><td><strong>HOU</strong></td><td>Houston Texans</td><td>3-5-0</td><td>0.375</td><td>209</td><td>192</td><td>+17</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a></td></tr><tr><td><strong>CAR</strong></td><td>Carolina Panthers</td><td>3-5-0</td><td>0.375</td><td>199</td><td>219</td><td>-20</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a></td></tr><tr><td><strong>NO</strong></td><td>New Orleans Saints</td><td>3-5-0</td><td>0.375</td><td>185</td><td>216</td><td>-31</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a></td></tr><tr><td><strong>TB</strong></td><td>Tampa Bay Buccaneers</td><td>3-6-0</td><td>0.333</td><td>202</td><td>178</td><td>+24</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a></td></tr><tr><td><strong>ATL</strong></td><td>Atlanta Falcons</td><td>3-6-0</td><td>0.333</td><td>188</td><td>223</td><td>-35</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a></td></tr><tr><td><strong>ARI</strong></td><td>Arizona Cardinals</td><td>3-6-0</td><td>0.333</td><td>178</td><td>255</td><td>-77</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a></td></tr><tr><td><strong>WAS</strong></td><td>Washington Commanders</td><td>2-5-1</td><td>0.312</td><td>172</td><td>202</td><td>-30</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a></td></tr><tr><td><strong>NYJ</strong></td><td>New York Jets</td><td>2-7-0</td><td>0.222</td><td>182</td><td>223</td><td>-41</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a></td></tr><tr><td><strong>IND</strong></td><td>Indianapolis Colts</td><td>2-7-0</td><td>0.222</td><td>184</td><td>249</td><td>-65</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a></td></tr><tr><td><strong>PHI</strong></td><td>Philadelphia Eagles</td><td>2-7-0</td><td>0.222</td><td>148</td><td>221</td><td>-73</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a></td></tr><tr><td><strong>TEN</strong></td><td>Tennessee Titans</td><td>1-7-0</td><td>0.125</td><td>144</td><td>199</td><td>-55</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a></td></tr><tr><td><strong>MIA</strong></td><td>Miami Dolphins</td><td>1-7-0</td><td>0.125</td><td>126</td><td>200</td><td>-74</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a></td></tr><tr><td><strong>LAC</strong></td><td>Los Angeles Chargers</td><td>0-8-0</td><td>0.000</td><td>121</td><td>219</td><td>-98</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a></td></tr></tbody></table></div><p class="note">Computed from game results, then checked row by row against nfl.com (see Evidence).</p>
+</section>
+
+<section class="panel">
+  <div class="panel-head"><h2>Team ratings (week 10)</h2><a href="strategies.html">How they are used →</a></div>
+  <div class="table-wrap"><table class=""><thead><tr><th>Rank</th><th>Team</th><th>Offence EPA/play</th><th>Defence EPA/play (good +)</th><th>Net rating</th><th>Source</th></tr></thead><tbody><tr><td>1</td><td><strong>JAX</strong></td><td>0.108</td><td>0.104</td><td>0.212</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/pbp" target="_blank" rel="noopener">play-by-play</a></td></tr><tr><td>2</td><td><strong>LA</strong></td><td>0.116</td><td>0.079</td><td>0.194</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/pbp" target="_blank" rel="noopener">play-by-play</a></td></tr><tr><td>3</td><td><strong>SEA</strong></td><td>0.013</td><td>0.150</td><td>0.163</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/pbp" target="_blank" rel="noopener">play-by-play</a></td></tr><tr><td>4</td><td><strong>SF</strong></td><td>0.178</td><td>-0.021</td><td>0.157</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/pbp" target="_blank" rel="noopener">play-by-play</a></td></tr><tr><td>5</td><td><strong>BUF</strong></td><td>0.128</td><td>0.006</td><td>0.134</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/pbp" target="_blank" rel="noopener">play-by-play</a></td></tr><tr><td>6</td><td><strong>CHI</strong></td><td>0.104</td><td>0.030</td><td>0.134</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/pbp" target="_blank" rel="noopener">play-by-play</a></td></tr><tr><td>7</td><td><strong>GB</strong></td><td>0.074</td><td>0.032</td><td>0.106</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/pbp" target="_blank" rel="noopener">play-by-play</a></td></tr><tr><td>8</td><td><strong>NE</strong></td><td>0.100</td><td>-0.006</td><td>0.093</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/pbp" target="_blank" rel="noopener">play-by-play</a></td></tr><tr><td>9</td><td><strong>DEN</strong></td><td>0.013</td><td>0.068</td><td>0.081</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/pbp" target="_blank" rel="noopener">play-by-play</a></td></tr><tr><td>10</td><td><strong>KC</strong></td><td>0.079</td><td>-0.004</td><td>0.075</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/pbp" target="_blank" rel="noopener">play-by-play</a></td></tr><tr><td>11</td><td><strong>HOU</strong></td><td>0.019</td><td>0.042</td><td>0.061</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/pbp" target="_blank" rel="noopener">play-by-play</a></td></tr><tr><td>12</td><td><strong>DET</strong></td><td>0.064</td><td>-0.037</td><td>0.026</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/pbp" target="_blank" rel="noopener">play-by-play</a></td></tr><tr><td>13</td><td><strong>CIN</strong></td><td>0.111</td><td>-0.091</td><td>0.020</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/pbp" target="_blank" rel="noopener">play-by-play</a></td></tr><tr><td>14</td><td><strong>PIT</strong></td><td>0.007</td><td>0.010</td><td>0.017</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/pbp" target="_blank" rel="noopener">play-by-play</a></td></tr><tr><td>15</td><td><strong>BAL</strong></td><td>0.027</td><td>-0.013</td><td>0.013</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/pbp" target="_blank" rel="noopener">play-by-play</a></td></tr><tr><td>16</td><td><strong>MIN</strong></td><td>-0.129</td><td>0.136</td><td>0.006</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/pbp" target="_blank" rel="noopener">play-by-play</a></td></tr><tr><td>17</td><td><strong>TB</strong></td><td>-0.072</td><td>0.070</td><td>-0.001</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/pbp" target="_blank" rel="noopener">play-by-play</a></td></tr><tr><td>18</td><td><strong>ATL</strong></td><td>-0.029</td><td>0.012</td><td>-0.017</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/pbp" target="_blank" rel="noopener">play-by-play</a></td></tr><tr><td>19</td><td><strong>ARI</strong></td><td>-0.026</td><td>-0.025</td><td>-0.051</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/pbp" target="_blank" rel="noopener">play-by-play</a></td></tr><tr><td>20</td><td><strong>NYG</strong></td><td>-0.026</td><td>-0.029</td><td>-0.054</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/pbp" target="_blank" rel="noopener">play-by-play</a></td></tr><tr><td>21</td><td><strong>DAL</strong></td><td>0.095</td><td>-0.151</td><td>-0.056</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/pbp" target="_blank" rel="noopener">play-by-play</a></td></tr><tr><td>22</td><td><strong>PHI</strong></td><td>-0.084</td><td>0.025</td><td>-0.058</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/pbp" target="_blank" rel="noopener">play-by-play</a></td></tr><tr><td>23</td><td><strong>CAR</strong></td><td>0.002</td><td>-0.077</td><td>-0.075</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/pbp" target="_blank" rel="noopener">play-by-play</a></td></tr><tr><td>24</td><td><strong>IND</strong></td><td>-0.021</td><td>-0.063</td><td>-0.084</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/pbp" target="_blank" rel="noopener">play-by-play</a></td></tr><tr><td>25</td><td><strong>WAS</strong></td><td>-0.017</td><td>-0.072</td><td>-0.088</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/pbp" target="_blank" rel="noopener">play-by-play</a></td></tr><tr><td>26</td><td><strong>NO</strong></td><td>-0.050</td><td>-0.040</td><td>-0.091</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/pbp" target="_blank" rel="noopener">play-by-play</a></td></tr><tr><td>27</td><td><strong>CLE</strong></td><td>-0.141</td><td>0.031</td><td>-0.111</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/pbp" target="_blank" rel="noopener">play-by-play</a></td></tr><tr><td>28</td><td><strong>LAC</strong></td><td>-0.148</td><td>0.034</td><td>-0.115</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/pbp" target="_blank" rel="noopener">play-by-play</a></td></tr><tr><td>29</td><td><strong>NYJ</strong></td><td>-0.072</td><td>-0.067</td><td>-0.140</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/pbp" target="_blank" rel="noopener">play-by-play</a></td></tr><tr><td>30</td><td><strong>LV</strong></td><td>-0.078</td><td>-0.072</td><td>-0.150</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/pbp" target="_blank" rel="noopener">play-by-play</a></td></tr><tr><td>31</td><td><strong>MIA</strong></td><td>-0.052</td><td>-0.114</td><td>-0.166</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/pbp" target="_blank" rel="noopener">play-by-play</a></td></tr><tr><td>32</td><td><strong>TEN</strong></td><td>-0.109</td><td>-0.128</td><td>-0.237</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/pbp" target="_blank" rel="noopener">play-by-play</a></td></tr></tbody></table></div><p class="note">Ratings use non-garbage-time plays only, opponent-adjusted, with the previous season at 40% weight.</p>
+</section>
 
 </main>
-<footer class="muted" style="max-width:1200px;margin:0 auto;padding:24px">
-  Generated from data/verified by scripts/verified/build_site.py. Blank means unverified — never inferred.
+<footer>
+  <div>
+    <strong>NFL Decision Lab</strong>
+    <p>Research tool. Not betting advice. No official league odds exist; contact with real markets is required before any edge claim.</p>
+  </div>
+  <div class="foot-links">
+    <a href="../pages/evidence.html">Sources &amp; provenance</a>
+    <a href="../pages/review.html">Flagged for review</a>
+    <a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener">Repository</a>
+  </div>
+  <p class="credit">Data: nflverse (CC-BY-4.0), built from NFL GSIS and the official weekly injury report.
+  Club names and marks belong to the NFL and its clubs.</p>
 </footer>
 </body>
 </html>
