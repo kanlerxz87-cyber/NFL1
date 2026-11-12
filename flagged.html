@@ -76,17 +76,17 @@
   <div class="main">
     <div class="topbar">
       <div class="crumb">NFL1 / <b>Flagged for Review</b></div>
-      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">36 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">40 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
     </div>
     <main class="content" id="main">
       <div class="kicker">Assurance</div>
       <h1>Flagged for Review</h1>
       <p class="lede">Clearly labelled irregularities, official-page conflicts, unverified values and coordination issues — each with an official source link for manual review, none blocking the merge.</p>
       <div class="callout flag"><b>Flagged for Review.</b> These irregularities and unverified items do not block the merge or the live site. Each has an official source link for manual review and a suggested action. A status of <em>needs review</em> means exactly this: published here, not blocking.</div>
-<div class="cards"><div class="card"><div class="label">Flagged items</div><div class="value">36</div><div class="detail">All with source links</div></div><div class="card"><div class="label">Official-page irregularities</div><div class="value">7</div><div class="detail">F02–F08</div></div><div class="card"><div class="label">Missing official data</div><div class="value">5</div><div class="detail">F09–F11, F14, F15</div></div><div class="card"><div class="label">Combined-site review</div><div class="value">12</div><div class="detail">F25–F36</div></div></div>
+<div class="cards"><div class="card"><div class="label">Flagged items</div><div class="value">40</div><div class="detail">All with source links</div></div><div class="card"><div class="label">Official-page irregularities</div><div class="value">7</div><div class="detail">F02–F08</div></div><div class="card"><div class="label">Missing official data</div><div class="value">5</div><div class="detail">F09–F11, F14, F15</div></div><div class="card"><div class="label">Combined-site review</div><div class="value">12</div><div class="detail">F25–F36</div></div></div>
 <h2 id="all">All flagged irregularities</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-flags" aria-label="Filter tbl-flags" placeholder="Filter rows…">
-<span class="count" data-count-for="tbl-flags">36 rows shown</span></div>
+<span class="count" data-count-for="tbl-flags">40 rows shown</span></div>
 <div class="tablewrap"><table class="data-table" id="tbl-flags"><caption>Every flag with category, description, impact, status, official source link and suggested action for the reviewer.</caption>
 <thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Category</th><th scope="col" class="sortable">Irregularity / unverified item</th><th scope="col" class="sortable">Impact on decisions</th><th scope="col" class="sortable">Status</th><th scope="col" class="sortable">Suggested action</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
 <tr id="F01" data-verified="true">
@@ -412,6 +412,42 @@
 <td><span class="badge neutral">resolved</span></td>
 <td data-value="1" class="wide">Hand-off recorded in COORDINATION.md task A1: owning session `25aa7696` is inactive, so session `b6e68100` applied the fix the referee requested. Verification source: https://www.nfl.com/standings/division/2026/REG (division groupings read and compared for all 32 clubs on 2026-11-12).</td>
 <td><span class="src"><a href="https://www.itl.nist.gov/div898/handbook/glossary.htm" target="_blank" rel="noopener noreferrer" title="NIST / SEMATECH e-Handbook of Statistical Methods — Official US government statistical reference">S17 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="A-F01" data-verified="true">
+<td><code>A-F01</code></td>
+<td data-value="1">Board hygiene — FIXED 2026-11-12</td>
+<td data-value="1" class="wide">COORDINATION.md began with the stray text &#x27;EAD&#x27; on line 1 — a leftover conflict-resolution artifact from an earlier merge.</td>
+<td data-value="1" class="wide">FIXED by session b6e68100; removed in the claim commit. Cosmetic, but it made the board&#x27;s first heading unreadable to strict parsers.</td>
+<td><span class="badge neutral">resolved</span></td>
+<td data-value="1" class="wide">Line-1 artefact removed; board content unchanged. Source: https://github.com/kanlerxz87-cyber/NFL1/blob/main/COORDINATION.md</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S23 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="A-F02" data-verified="true">
+<td><code>A-F02</code></td>
+<td data-value="1">Rounding convention — FIXED in pipeline 2026-11-12</td>
+<td data-value="1" class="wide">data/model/snapshot.json published WAS winning percentage as 0.312 (float banker&#x27;s rounding of 0.3125) while the official standings page shows 0.313. The hand-transcribed data/verified/standings_2026.csv already matched the official 0.313, and the stale 0.312 never rendered on any live page.</td>
+<td data-value="1" class="wide">FIXED in pipeline/build_all.py with exact integer round-half-up arithmetic matching the official convention. The corrected snapshot lands automatically via the collect-data workflow (triggers on pipeline/ changes).</td>
+<td><span class="badge neutral">resolved</span></td>
+<td data-value="1" class="wide">Verification source: https://www.nfl.com/standings/league/2026/reg (WAS 2-5-1 shown as 0.313, fetched 2026-11-12); audit trail in docs/audit-b6e68100.md §A2.</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="A-F03" data-verified="true">
+<td><code>A-F03</code></td>
+<td data-value="1">Injury-report club coverage — fully explained 2026-11-12</td>
+<td data-value="1" class="wide">Week-10 official injury report has 26 club tables. All six absent clubs are now explained from official sources: CHI, DEN, PHI, TB are on bye (official Week-10 schedule page); LAC and BAL print &#x27;No Injuries Reported&#x27; on the official injury page.</td>
+<td data-value="1" class="wide">Supersedes the uncertainty in F11 (absence-of-rows no longer conflates on-bye, no-injuries-reported and scrape-failure). Consumers should treat absent bye clubs as expected, not as a scrape gap.</td>
+<td><span class="badge neutral">resolved</span></td>
+<td data-value="1" class="wide">Sources: https://www.nfl.com/schedules/2026/by-week/week-10 and https://www.nfl.com/injuries/ (both fetched 2026-11-12); audit trail in docs/audit-b6e68100.md §A-F03.</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="A-F04" data-verified="true">
+<td><code>A-F04</code></td>
+<td data-value="1">Live-page drift — needs review</td>
+<td data-value="1" class="wide">The official injury page changes during the day: between the 18:53 UTC scrape (276 rows) and the 22:30 UTC scrape (279 rows), IND statuses changed (Haulcy, Taylor, Tillery, Ward) and 3 rows were added league-wide (CJ Allen, Grover Stewart on IND; BJ Green II on JAX). The scraper was verified faithful (~120 rows compared row-for-row against the live page, 0 errors).</td>
+<td data-value="1" class="wide">Site injury data is a dated snapshot that can lag the official page by hours. Decision reads shortly before kickoff should re-scrape; the daily 11:17 UTC refresh alone is insufficient on game day.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Discovery suggestion logged on the Suggestions page (SA-02): add a scheduled pre-slate refresh. Source: https://www.nfl.com/injuries/ (fetched 2026-11-12); audit trail in docs/audit-b6e68100.md §A-F04.</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
 </tr>
 </tbody></table></div>
 <h2 id="unverified">Registry of blank/unverified values</h2>
