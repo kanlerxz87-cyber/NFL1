@@ -66,7 +66,7 @@ def num(x, nd=None):
 
 def table(cols, rows, caption=None):
     """cols: list of (label, css class). rows: list of lists of HTML strings."""
-    out = [f'<div class="tablewrap{" wide" if len(cols) >= 9 else ""}"><table>']
+    out = [f'<div class="tablewrap{" wide" if len(cols) >= 8 else ""}"><table>']
     if caption:
         out.append(f"<caption>{caption}</caption>")
     out.append("<thead><tr>" + "".join(f'<th class="{c}" scope="col">{e(l)}</th>' for l, c in cols) + "</tr></thead><tbody>")
