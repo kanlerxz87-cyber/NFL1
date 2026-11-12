@@ -22,7 +22,7 @@
 | T10 | GitHub Pages site | done | both | index.html, pages/*, assets/*, styles.css, .github/workflows/pages.yml | Combined and deployed |
 | T11 | Integration & PR/merge | done | arena/533256e1-nfl1 |  | PR #2 merged; Pages workflow succeeded |
 | T12 | Independent post-merge source/link/content/deployment review | done | arena/15e79a53-nfl1 | docs/review/merged-site.md | Findings, official references, row checks, and follow-up requests recorded; no product files edited |
-| T13 | Apply post-merge source, table-citation, stale-content, and flagged-item corrections | unclaimed | — | index.html, pages/*.html, .github/workflows/pages.yml | Follow-up request from T12; see “Post-merge review requests.” Do not start until claimed. |
+| T13 | Apply post-merge source, table-citation, stale-content, and flagged-item corrections | **in progress** | arena/25aa7696-nfl1 | index.html, pages/*.html, .github/workflows/pages.yml | Follow-up request from T12; see “Post-merge review requests.” Do not start until claimed. |
 
 ## Sources (session 533256e1)
 
@@ -156,3 +156,21 @@ github.com; `www.nfl.com`, `operations.nfl.com` and `release-assets.githubuserco
 blocked. Official pages were therefore read through the agent page-fetch channel and transcribed
 with URLs + timestamps, then machine-verified against a second official view. Re-fetching requires
 a run in open-network CI, which is why the gate is wired into the workflow.
+
+### T13 corrections applied by session `25aa7696-nfl1`
+
+| Review item | Action |
+|---|---|
+| Dead `operations.nfl.com` rulebook/schedule URLs | Replaced. Re-verified: `/the-rules/` and `/gameday/nfl-schedule/` return the NFL 404 page; `rules-officiating/2026-nfl-rulebook` and `nfl.com/schedules/` resolve. |
+| Weather row linked to the stats page | Link removed; row now explicitly flagged "no source selected". |
+| `rank=1..32` presented as a source field | Column relabelled "Site row order" with a note that the NFL publishes no rank column. |
+| Stale claims that no data was imported | `pages/review.html` rows updated with dated corrections pointing at the verified dataset. |
+| Wrong week link for injury evidence | All injury/QB-change rows now cite `https://www.nfl.com/injuries/league/2026/reg10`. |
+| F6 "synthetic/simulated" speculation | Removed; value kept as published and marked verified-but-unusual. |
+| External link checking absent from the gate | Added `scripts/verified/check_external_links.py` to the workflow; it fails only on 404/410 and treats unreachable hosts as unverifiable. |
+| Provisional "100+ bets / p<0.05" gates | Left as-is but flagged F17; this session's own gate uses a paired bootstrap plus Holm correction. |
+
+**Remaining from T13 (not done, deliberately):** adding a per-row citation column to the older
+Q&A / suggestion / strategy tables. Those rows are proposals and design hypotheses rather than
+NFL facts, and several have no official source by construction; they are flagged as F15 rather
+than dressed up with a citation that would not support them.
