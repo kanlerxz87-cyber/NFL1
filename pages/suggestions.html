@@ -15,21 +15,25 @@
     <a href="teams.html">Teams</a>
     <a href="standings.html">Standings</a>
     <a href="injuries.html">Injuries</a>
+    <a href="evidence.html">Evidence</a>
+    <a href="models.html">Strategy Lab</a>
+    <a href="strategies.html">Strategies</a>
     <a href="suggestions.html" class="active">Suggestions</a>
-    <a href="questions.html">Questions &amp; Answers</a>
-    <a href="strategies.html">Strategies &amp; Leaderboard</a>
-    <a href="flagged.html">Flagged for Review</a>
+    <a href="questions.html">Questions</a>
+    <a href="flagged.html">Flagged</a>
+    <a href="review.html">Review</a>
   </nav>
 </header>
 <main>
   <h1>Suggestions for Improving Decision Making</h1>
-  <p class="muted">Proposed improvements. Each suggestion is a candidate; review and choose the best path before implementing.</p>
+  <p class="muted">Proposed improvements. Each suggestion is a candidate; review and choose the best path before implementing. No changes are auto-applied.</p>
 
   <div class="card">
     <h2>Review Workflow</h2>
-    <p>Suggestions are listed below with rationale and expected impact. A reviewer selects which to implement. No changes are auto-applied. Implementation only after explicit selection.</p>
+    <p>Suggestions are listed below with rationale and expected impact. A reviewer selects which to implement. Implementation only after explicit selection.</p>
   </div>
 
+  <h2>Session 533256e1 — Data &amp; Site Suggestions</h2>
   <div class="table-wrap">
   <table>
     <thead><tr><th>ID</th><th>Suggestion</th><th>Category</th><th>Rationale</th><th>Impact</th><th>Status</th></tr></thead>
@@ -43,11 +47,34 @@
       <tr><td>S7</td><td>Add correlation matrix output for parlay legs.</td><td>Strategy</td><td>Removes hidden correlation risk in parlays.</td><td>High</td><td><span class="badge warn">Proposed</span></td></tr>
       <tr><td>S8</td><td>Add a leaderboard page tracking strategy performance with rewards.</td><td>Competition</td><td>Motivates skill-based strategy development.</td><td>Medium</td><td><span class="badge warn">Proposed</span></td></tr>
       <tr><td>S9</td><td>Add automated link-check on build to catch broken sources.</td><td>Quality</td><td>Ensures every row keeps a valid official source link.</td><td>Medium</td><td><span class="badge warn">Proposed</span></td></tr>
-      <tr><td>S10</td><td>Add "Flagged for Review" page (already present) for unverified items.</td><td>Quality</td><td>Separates unverified from verified data.</td><td>Medium</td><td><span class="badge ok">Implemented</span></td></tr>
+      <tr><td>S10</td><td>Add "Flagged for Review" page for unverified items.</td><td>Quality</td><td>Separates unverified from verified data.</td><td>Medium</td><td><span class="badge ok">Implemented</span></td></tr>
     </tbody>
   </table>
   </div>
+
+  <h2>Session 690e397b — Evidence &amp; Governance Suggestions</h2>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Priority</th><th>Suggestion</th><th>Decision / tradeoff</th><th>Proposed acceptance criterion</th><th>Dependency</th></tr></thead>
+    <tbody>
+      <tr><td>1 · Foundation</td><td>Agree allowed data sources, licensing, retention, and update cadence; build a source registry with retrieval timestamps and record-level citations.</td><td>Official league sources are authoritative for league records but may not supply odds or every required historical feature; a licensed provider may be needed.</td><td>Every populated field has source URL, retrieved-at time, entity/time scope, and a documented correction policy.</td><td>Data rights/legal review; feeds not selected</td></tr>
+      <tr><td>2 · Market integrity</td><td>Choose target markets and benchmark odds capture policy, including market close definition and book/provider.</td><td>Broad market coverage increases complexity and multiple-testing risk; one market is easier to audit.</td><td>Frozen, reproducible quotes are available for each eligible prediction and settlement.</td><td>Price feed/provider and historical availability</td></tr>
+      <tr><td>3 · Availability</td><td>Create injury/replacement tracker with report chronology; track offense and defense separately, backup order and actual role evidence.</td><td>Depth chart designation alone may not capture actual usage; role/participation must be timestamped and sourced.</td><td>For each relevant absence, preserve official report and dated roster/role evidence; unknown depth remains blank.</td><td>Official reports; authoritative depth/role source still to identify</td></tr>
+      <tr><td>4 · Modeling</td><td>Start with interpretable, preregistered single-market baselines; add props and parlays only after component calibration is demonstrated.</td><td>Parlays amplify joint-probability and price error; harder to diagnose and validate.</td><td>Prospective performance exceeds declared baseline with uncertainty and no test leakage.</td><td>Gates on Strategy Lab page</td></tr>
+      <tr><td>5 · Operations</td><td>Run a paper-only leaderboard before any prizes or stakes; add audit logs and versioned model cards.</td><td>Rewards can create incentives to overfit or manipulate; eligibility and legal terms vary.</td><td>Public rules, locked predictions, minimum samples, settled bets, risk metrics, and independent audit.</td><td>Legal, regulatory, tax and budget review</td></tr>
+      <tr><td>6 · Decision UX</td><td>Display data freshness, coverage, evidence confidence, prediction intervals, edge after price, correlation warning, and reasons a signal is withheld.</td><td>A single score hides uncertainty and missing-data risk.</td><td>Reviewer can trace each displayed claim to evidence and reproduce its calculation.</td><td>Evidence pipeline and calibration</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>Questions that must be answered (from 690e397b)</h2>
+  <div class="grid">
+    <div class="card"><h3>Product &amp; audience</h3><ul><li>Research dashboard, public predictions, or private decision tool?</li><li>Which leagues, seasons, markets, books, and jurisdictions are in scope?</li><li>Is this strictly informational/paper testing, or is any wagering/reward contemplated?</li></ul></div>
+    <div class="card"><h3>Data &amp; provenance</h3><ul><li>Which sources are permitted, licensed, stable, and historically complete?</li><li>What are update latency, archival rights, correction behavior, and costs?</li><li>Which official source can verify depth-chart order and replacement roles with dates?</li></ul></div>
+    <div class="card"><h3>Evaluation</h3><ul><li>What precisely counts as a bet, price snapshot, close, push, void, and settled result?</li><li>Which benchmark, metrics, minimum sample, confidence level, and promotion threshold?</li><li>How will overlapping parlays, correlated markets, and repeated experiments be controlled?</li></ul></div>
+    <div class="card"><h3>Governance &amp; safety</h3><ul><li>Who reviews strategy submissions, disputes, cheating, and data errors?</li><li>What exposure, drawdown, access, responsible-use and jurisdiction controls are required?</li><li>What are prize eligibility, funding, tax, terms, and independent verification rules?</li></ul></div>
+  </div>
 </main>
-<footer>NFL1 — suggestions are proposals, not implemented changes.</footer>
+<footer>NFL1 — suggestions are proposals, not approved changes.</footer>
 </body>
 </html>
