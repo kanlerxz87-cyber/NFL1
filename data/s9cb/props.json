@@ -1,0 +1,417 @@
+{
+ "generated_at": "2026-11-12T22:53:09+00:00",
+ "source": "https://www.nfl.com/stats/player-stats/",
+ "price_status": "UNVERIFIED / BLANK: no official or book-level price exists for any player prop in this repository's sources, so no prop bet is scored and no profit is claimed. Projections and correlations only.",
+ "markets": [
+  {
+   "market": "passing_yards",
+   "label": "Quarter-back passing yards",
+   "n": 3354,
+   "seasons": [
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+   ],
+   "mae_projection": 64.392,
+   "rmse_projection": 81.302,
+   "bias_projection": 3.839,
+   "mae_naive_season_mean": 64.837,
+   "skill_vs_naive_pct": 0.69,
+   "observed_over_rate": 0.4836,
+   "calibration_note": "If the projection were a fair line the over rate would be 0.50. It is not a market line; it is the model's own median forecast.",
+   "calibration_bands": [
+    {
+     "projection_band": "5 to 192",
+     "n": 671,
+     "mean_projection": 150.25,
+     "mean_actual": 183.79,
+     "observed_over_rate": 0.6587
+    },
+    {
+     "projection_band": "192 to 223",
+     "n": 671,
+     "mean_projection": 209.1,
+     "mean_actual": 211.69,
+     "observed_over_rate": 0.538
+    },
+    {
+     "projection_band": "223 to 249",
+     "n": 670,
+     "mean_projection": 236.18,
+     "mean_actual": 230.96,
+     "observed_over_rate": 0.4925
+    },
+    {
+     "projection_band": "249 to 275",
+     "n": 671,
+     "mean_projection": 261.44,
+     "mean_actual": 250.05,
+     "observed_over_rate": 0.4232
+    },
+    {
+     "projection_band": "275 to 425",
+     "n": 671,
+     "mean_projection": 302.0,
+     "mean_actual": 263.28,
+     "observed_over_rate": 0.3055
+    }
+   ],
+   "source": "https://www.nfl.com/stats/player-stats/"
+  },
+  {
+   "market": "rushing_yards",
+   "label": "Running-back rushing yards",
+   "n": 6121,
+   "seasons": [
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+   ],
+   "mae_projection": 24.869,
+   "rmse_projection": 33.001,
+   "bias_projection": -0.198,
+   "mae_naive_season_mean": 28.974,
+   "skill_vs_naive_pct": 14.17,
+   "observed_over_rate": 0.4525,
+   "calibration_note": "If the projection were a fair line the over rate would be 0.50. It is not a market line; it is the model's own median forecast.",
+   "calibration_bands": [
+    {
+     "projection_band": "-4 to 25",
+     "n": 1225,
+     "mean_projection": 16.63,
+     "mean_actual": 26.09,
+     "observed_over_rate": 0.5853
+    },
+    {
+     "projection_band": "25 to 39",
+     "n": 1225,
+     "mean_projection": 31.85,
+     "mean_actual": 35.35,
+     "observed_over_rate": 0.4604
+    },
+    {
+     "projection_band": "39 to 53",
+     "n": 1224,
+     "mean_projection": 45.58,
+     "mean_actual": 46.99,
+     "observed_over_rate": 0.4477
+    },
+    {
+     "projection_band": "53 to 69",
+     "n": 1223,
+     "mean_projection": 60.62,
+     "mean_actual": 60.28,
+     "observed_over_rate": 0.444
+    },
+    {
+     "projection_band": "69 to 178",
+     "n": 1224,
+     "mean_projection": 86.96,
+     "mean_actual": 73.91,
+     "observed_over_rate": 0.3252
+    }
+   ],
+   "source": "https://www.nfl.com/stats/player-stats/"
+  },
+  {
+   "market": "receiving_yards",
+   "label": "Receiver receiving yards",
+   "n": 6811,
+   "seasons": [
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+   ],
+   "mae_projection": 29.296,
+   "rmse_projection": 37.573,
+   "bias_projection": 1.391,
+   "mae_naive_season_mean": 29.355,
+   "skill_vs_naive_pct": 0.2,
+   "observed_over_rate": 0.4396,
+   "calibration_note": "If the projection were a fair line the over rate would be 0.50. It is not a market line; it is the model's own median forecast.",
+   "calibration_bands": [
+    {
+     "projection_band": "0 to 40",
+     "n": 1364,
+     "mean_projection": 30.75,
+     "mean_actual": 42.98,
+     "observed_over_rate": 0.6041
+    },
+    {
+     "projection_band": "40 to 52",
+     "n": 1361,
+     "mean_projection": 46.43,
+     "mean_actual": 51.48,
+     "observed_over_rate": 0.4813
+    },
+    {
+     "projection_band": "52 to 64",
+     "n": 1362,
+     "mean_projection": 57.93,
+     "mean_actual": 57.97,
+     "observed_over_rate": 0.4288
+    },
+    {
+     "projection_band": "64 to 78",
+     "n": 1363,
+     "mean_projection": 70.32,
+     "mean_actual": 65.42,
+     "observed_over_rate": 0.3852
+    },
+    {
+     "projection_band": "78 to 169",
+     "n": 1361,
+     "mean_projection": 94.34,
+     "mean_actual": 74.95,
+     "observed_over_rate": 0.2983
+    }
+   ],
+   "source": "https://www.nfl.com/stats/player-stats/"
+  },
+  {
+   "market": "receptions",
+   "label": "Receiver receptions",
+   "n": 6811,
+   "seasons": [
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+   ],
+   "mae_projection": 1.781,
+   "rmse_projection": 2.297,
+   "bias_projection": 0.064,
+   "mae_naive_season_mean": 1.875,
+   "skill_vs_naive_pct": 5.02,
+   "observed_over_rate": 0.4616,
+   "calibration_note": "If the projection were a fair line the over rate would be 0.50. It is not a market line; it is the model's own median forecast.",
+   "calibration_bands": [
+    {
+     "projection_band": "1 to 3",
+     "n": 1371,
+     "mean_projection": 2.77,
+     "mean_actual": 3.5,
+     "observed_over_rate": 0.6229
+    },
+    {
+     "projection_band": "3 to 4",
+     "n": 1360,
+     "mean_projection": 3.77,
+     "mean_actual": 4.04,
+     "observed_over_rate": 0.5353
+    },
+    {
+     "projection_band": "4 to 5",
+     "n": 1369,
+     "mean_projection": 4.5,
+     "mean_actual": 4.46,
+     "observed_over_rate": 0.4244
+    },
+    {
+     "projection_band": "5 to 6",
+     "n": 1351,
+     "mean_projection": 5.36,
+     "mean_actual": 5.05,
+     "observed_over_rate": 0.3953
+    },
+    {
+     "projection_band": "6 to 12",
+     "n": 1360,
+     "mean_projection": 7.08,
+     "mean_actual": 6.09,
+     "observed_over_rate": 0.3287
+    }
+   ],
+   "source": "https://www.nfl.com/stats/player-stats/"
+  }
+ ],
+ "same_game_correlations": [
+  {
+   "id": "P1",
+   "relationship": "Team passing yards vs the same team's rushing yards, same game",
+   "kind": "continuous",
+   "note": "The classic game-script negative correlation: a team that runs it well throws it less. A same-team pass-plus-rush prop combination is therefore worth less than the product of its legs.",
+   "source": "https://www.nfl.com/stats/player-stats/",
+   "n": 1991,
+   "r": -0.2388,
+   "ci95": [
+    -0.2797,
+    -0.1969
+   ],
+   "p_value": 0.0,
+   "t_stat": -10.9649,
+   "method": "Pearson r, Fisher-z 95% CI, two-sided t test"
+  },
+  {
+   "id": "P2",
+   "relationship": "Home passing yards vs away passing yards, same game",
+   "kind": "continuous",
+   "note": "Two quarter-backs in the same game share the same game script, so their passing yards are usually positively correlated, not independent.",
+   "source": "https://www.nfl.com/stats/player-stats/",
+   "n": 1991,
+   "r": 0.155,
+   "ci95": [
+    0.1118,
+    0.1976
+   ],
+   "p_value": 0.0,
+   "t_stat": 6.9971,
+   "method": "Pearson r, Fisher-z 95% CI, two-sided t test"
+  },
+  {
+   "id": "P3",
+   "relationship": "Home passing yards vs the game total points",
+   "kind": "continuous",
+   "note": "How much of the game total is driven by one team's passing game.",
+   "source": "https://www.nfl.com/stats/player-stats/",
+   "n": 1991,
+   "r": 0.438,
+   "ci95": [
+    0.4018,
+    0.4729
+   ],
+   "p_value": 0.0,
+   "t_stat": 21.731,
+   "method": "Pearson r, Fisher-z 95% CI, two-sided t test"
+  },
+  {
+   "id": "P4",
+   "relationship": "Team passing touchdowns vs the same team's rushing touchdowns",
+   "kind": "continuous",
+   "note": "Two scoring props from the same team compete for the same red-zone trips.",
+   "source": "https://www.nfl.com/stats/player-stats/",
+   "n": 1991,
+   "r": -0.1159,
+   "ci95": [
+    -0.159,
+    -0.0724
+   ],
+   "p_value": 0.0,
+   "t_stat": -5.2051,
+   "method": "Pearson r, Fisher-z 95% CI, two-sided t test"
+  },
+  {
+   "id": "P5",
+   "relationship": "Game total points vs the closing total line",
+   "kind": "continuous",
+   "note": "How much of the realised total the market line already explains.",
+   "source": "https://www.nfl.com/stats/player-stats/",
+   "n": 1991,
+   "r": 0.3174,
+   "ci95": [
+    0.2773,
+    0.3564
+   ],
+   "p_value": 0.0,
+   "t_stat": 14.927,
+   "method": "Pearson r, Fisher-z 95% CI, two-sided t test"
+  },
+  {
+   "id": "P6",
+   "kind": "continuous",
+   "relationship": "Top receiver yards vs the second receiver's yards, same team and game",
+   "note": "Target competition inside one passing game. Two receiver overs from the same team are usually negatively correlated.",
+   "source": "https://www.nfl.com/stats/player-stats/",
+   "n": 3803,
+   "r": 0.4946,
+   "ci95": [
+    0.4702,
+    0.5182
+   ],
+   "p_value": 0.0,
+   "t_stat": 35.0813,
+   "method": "Pearson r, Fisher-z 95% CI, two-sided t test"
+  },
+  {
+   "id": "P7",
+   "kind": "continuous",
+   "relationship": "Lead back rushing yards vs the backup's rushing yards, same team and game",
+   "note": "Committee split: the backup's workload rises when the lead back's falls.",
+   "source": "https://www.nfl.com/stats/player-stats/",
+   "n": 3244,
+   "r": 0.3188,
+   "ci95": [
+    0.2875,
+    0.3494
+   ],
+   "p_value": 0.0,
+   "t_stat": 19.1506,
+   "method": "Pearson r, Fisher-z 95% CI, two-sided t test"
+  },
+  {
+   "id": "P8",
+   "kind": "continuous",
+   "relationship": "Quarter-back passing yards vs his top receiver's receiving yards, same team and game",
+   "note": "The single most common same-game prop pairing. A strong positive correlation means the parlay is worth MORE than the product of its legs, which is why books price these specially.",
+   "source": "https://www.nfl.com/stats/player-stats/",
+   "n": 3989,
+   "r": 0.6724,
+   "ci95": [
+    0.6551,
+    0.6891
+   ],
+   "p_value": 0.0,
+   "t_stat": 57.3645,
+   "method": "Pearson r, Fisher-z 95% CI, two-sided t test"
+  }
+ ],
+ "anytime_td_base_rates": [
+  {
+   "position": "RB",
+   "player_weeks": 7975,
+   "anytime_td": 2635,
+   "rate": 0.3304,
+   "note": "Base rate over all qualifying player-weeks in the extract (2019-2026, players with at least four opportunities).",
+   "source": "https://www.nfl.com/stats/player-stats/"
+  },
+  {
+   "position": "WR",
+   "player_weeks": 9244,
+   "anytime_td": 2735,
+   "rate": 0.2959,
+   "note": "Base rate over all qualifying player-weeks in the extract (2019-2026, players with at least four opportunities).",
+   "source": "https://www.nfl.com/stats/player-stats/"
+  },
+  {
+   "position": "TE",
+   "player_weeks": 3252,
+   "anytime_td": 910,
+   "rate": 0.2798,
+   "note": "Base rate over all qualifying player-weeks in the extract (2019-2026, players with at least four opportunities).",
+   "source": "https://www.nfl.com/stats/player-stats/"
+  }
+ ],
+ "sample": {
+  "player_weeks": 24932,
+  "seasons": [
+   2019,
+   2020,
+   2021,
+   2022,
+   2023,
+   2024,
+   2025,
+   2026
+  ],
+  "players": 1104
+ }
+}
