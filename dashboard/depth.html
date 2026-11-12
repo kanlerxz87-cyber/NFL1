@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Depth &amp; backups · NFL Decision Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html">NFL Decision Dashboard</a>
+  <nav><a href="index.html">Overview</a><a href="lines.html">Lines &amp; markets</a><a href="strategies.html">Strategies</a><a href="injuries.html">Injuries</a><a href="depth.html" class="on">Depth &amp; backups</a><a href="verification.html">Verification</a><a href="questions.html">Questions</a><a href="suggestions.html">Suggestions</a><a href="flagged.html">Flagged for review</a><a href="repo.html">Repo review</a><a href="executive.html">Executive summary</a><a href="sources.html">Sources</a></nav>
+</header>
+<main>
+<h1>Depth &amp; backups</h1>
+<p class="lead">Depth-chart coverage by club. Three clubs have data. None is labelled official on the club's own page.</p>
+
+<div class="legend"><span class="b ok">Verified</span> value checked against an official page this session · <span class="b bad">Mismatch</span> source and repo disagree · <span class="b warn">Unverified</span> cannot be confirmed from an official source; cell left blank · <span class="b muted">Not re-checked</span> carried from an earlier session, not re-read here · <span class="b internal">Internal file</span> repository file, not an official source</div>
+<div class="callout warn">
+<p><strong>Only 3 of 32 clubs have any depth data in the repo (SF, KC, GB).</strong> The brief asks for 2nd, 3rd and 4th-string
+tracking for every club. The model's availability table uses depth rank 1 for all 113 starters, so no backup is identified
+by the model (RV-04, RV-05). Backup columns are therefore not shown.</p>
+</div>
+<h2>Club by club</h2>
+<div class="tw"><table class=""><thead><tr><th>Club</th><th>Official depth-chart page</th><th>Status</th><th>Rows in repo (2nd to 4th string)</th></tr></thead><tbody>
+<tr><td><strong>ARI</strong> Arizona Cardinals</td><td><a href="https://www.nfl.com/teams/arizona-cardinals/depth-chart" target="_blank" rel="noopener">nfl.com depth-chart URL (built from club slug; not probed)</a></td><td><span class="b muted">Not probed this session</span></td><td><span class="blank-inline">none in repo</span></td></tr>
+<tr><td><strong>ATL</strong> Atlanta Falcons</td><td><a href="https://www.nfl.com/teams/atlanta-falcons/depth-chart" target="_blank" rel="noopener">nfl.com depth-chart URL (built from club slug; not probed)</a></td><td><span class="b muted">Not probed this session</span></td><td><span class="blank-inline">none in repo</span></td></tr>
+<tr><td><strong>AZ</strong> Arizona Cardinals</td><td><a href="https://www.nfl.com/teams/arizona-cardinals/depth-chart" target="_blank" rel="noopener">nfl.com depth-chart URL (built from club slug; not probed)</a></td><td><span class="b muted">Not probed this session</span></td><td><span class="blank-inline">none in repo</span></td></tr>
+<tr><td><strong>BAL</strong> Baltimore Ravens</td><td><a href="https://www.nfl.com/teams/baltimore-ravens/depth-chart" target="_blank" rel="noopener">nfl.com depth-chart URL (built from club slug; not probed)</a></td><td><span class="b muted">Not probed this session</span></td><td><span class="blank-inline">none in repo</span></td></tr>
+<tr><td><strong>BUF</strong> Buffalo Bills</td><td><a href="https://www.nfl.com/teams/buffalo-bills/depth-chart" target="_blank" rel="noopener">nfl.com depth-chart URL</a></td><td><span class="b bad">404 (committed probe log, 2026-11-12 04:45Z)</span></td><td><span class="blank-inline">none in repo</span></td></tr>
+<tr><td><strong>CAR</strong> Carolina Panthers</td><td><a href="https://www.nfl.com/teams/carolina-panthers/depth-chart" target="_blank" rel="noopener">nfl.com depth-chart URL (built from club slug; not probed)</a></td><td><span class="b muted">Not probed this session</span></td><td><span class="blank-inline">none in repo</span></td></tr>
+<tr><td><strong>CHI</strong> Chicago Bears</td><td><a href="https://www.nfl.com/teams/chicago-bears/depth-chart" target="_blank" rel="noopener">nfl.com depth-chart URL (built from club slug; not probed)</a></td><td><span class="b muted">Not probed this session</span></td><td><span class="blank-inline">none in repo</span></td></tr>
+<tr><td><strong>CIN</strong> Cincinnati Bengals</td><td><a href="https://www.nfl.com/teams/cincinnati-bengals/depth-chart" target="_blank" rel="noopener">nfl.com depth-chart URL (built from club slug; not probed)</a></td><td><span class="b muted">Not probed this session</span></td><td><span class="blank-inline">none in repo</span></td></tr>
+<tr><td><strong>CLE</strong> Cleveland Browns</td><td><a href="https://www.nfl.com/teams/cleveland-browns/depth-chart" target="_blank" rel="noopener">nfl.com depth-chart URL (built from club slug; not probed)</a></td><td><span class="b muted">Not probed this session</span></td><td><span class="blank-inline">none in repo</span></td></tr>
+<tr><td><strong>DAL</strong> Dallas Cowboys</td><td><a href="https://www.nfl.com/teams/dallas-cowboys/depth-chart" target="_blank" rel="noopener">nfl.com depth-chart URL (built from club slug; not probed)</a></td><td><span class="b muted">Not probed this session</span></td><td><span class="blank-inline">none in repo</span></td></tr>
+<tr><td><strong>DEN</strong> Denver Broncos</td><td><a href="https://www.nfl.com/teams/denver-broncos/depth-chart" target="_blank" rel="noopener">nfl.com depth-chart URL (built from club slug; not probed)</a></td><td><span class="b muted">Not probed this session</span></td><td><span class="blank-inline">none in repo</span></td></tr>
+<tr><td><strong>DET</strong> Detroit Lions</td><td><a href="https://www.nfl.com/teams/detroit-lions/depth-chart" target="_blank" rel="noopener">nfl.com depth-chart URL (built from club slug; not probed)</a></td><td><span class="b muted">Not probed this session</span></td><td><span class="blank-inline">none in repo</span></td></tr>
+<tr><td><strong>GB</strong> Green Bay Packers</td><td><a href="https://www.nfl.com/teams/green-bay-packers/depth-chart" target="_blank" rel="noopener">nfl.com depth-chart URL (built from club slug; not probed)</a></td><td><span class="b muted">Not probed this session</span></td><td>28 rows; label "Unofficial"</td></tr>
+<tr><td><strong>HOU</strong> Houston Texans</td><td><a href="https://www.nfl.com/teams/houston-texans/depth-chart" target="_blank" rel="noopener">nfl.com depth-chart URL (built from club slug; not probed)</a></td><td><span class="b muted">Not probed this session</span></td><td><span class="blank-inline">none in repo</span></td></tr>
+<tr><td><strong>IND</strong> Indianapolis Colts</td><td><a href="https://www.nfl.com/teams/indianapolis-colts/depth-chart" target="_blank" rel="noopener">nfl.com depth-chart URL (built from club slug; not probed)</a></td><td><span class="b muted">Not probed this session</span></td><td><span class="blank-inline">none in repo</span></td></tr>
+<tr><td><strong>JAX</strong> Jacksonville Jaguars</td><td><a href="https://www.nfl.com/teams/jacksonville-jaguars/depth-chart" target="_blank" rel="noopener">nfl.com depth-chart URL (built from club slug; not probed)</a></td><td><span class="b muted">Not probed this session</span></td><td><span class="blank-inline">none in repo</span></td></tr>
+<tr><td><strong>KC</strong> Kansas City Chiefs</td><td><a href="https://www.nfl.com/teams/kansas-city-chiefs/depth-chart" target="_blank" rel="noopener">nfl.com depth-chart URL</a></td><td><span class="b bad">404 (committed probe log, 2026-11-12 04:45Z)</span></td><td>28 rows; label "Unofficial Depth Chart"</td></tr>
+<tr><td><strong>LA</strong> Los Angeles Rams</td><td><a href="https://www.nfl.com/teams/los-angeles-rams/depth-chart" target="_blank" rel="noopener">nfl.com depth-chart URL (built from club slug; not probed)</a></td><td><span class="b muted">Not probed this session</span></td><td><span class="blank-inline">none in repo</span></td></tr>
+<tr><td><strong>LAC</strong> Los Angeles Chargers</td><td><a href="https://www.nfl.com/teams/los-angeles-chargers/depth-chart" target="_blank" rel="noopener">nfl.com depth-chart URL (built from club slug; not probed)</a></td><td><span class="b muted">Not probed this session</span></td><td><span class="blank-inline">none in repo</span></td></tr>
+<tr><td><strong>LAR</strong> Los Angeles Rams</td><td><a href="https://www.nfl.com/teams/los-angeles-rams/depth-chart" target="_blank" rel="noopener">nfl.com depth-chart URL (built from club slug; not probed)</a></td><td><span class="b muted">Not probed this session</span></td><td><span class="blank-inline">none in repo</span></td></tr>
+<tr><td><strong>LV</strong> Las Vegas Raiders</td><td><a href="https://www.nfl.com/teams/las-vegas-raiders/depth-chart" target="_blank" rel="noopener">nfl.com depth-chart URL (built from club slug; not probed)</a></td><td><span class="b muted">Not probed this session</span></td><td><span class="blank-inline">none in repo</span></td></tr>
+<tr><td><strong>MIA</strong> Miami Dolphins</td><td><a href="https://www.nfl.com/teams/miami-dolphins/depth-chart" target="_blank" rel="noopener">nfl.com depth-chart URL (built from club slug; not probed)</a></td><td><span class="b muted">Not probed this session</span></td><td><span class="blank-inline">none in repo</span></td></tr>
+<tr><td><strong>MIN</strong> Minnesota Vikings</td><td><a href="https://www.nfl.com/teams/minnesota-vikings/depth-chart" target="_blank" rel="noopener">nfl.com depth-chart URL (built from club slug; not probed)</a></td><td><span class="b muted">Not probed this session</span></td><td><span class="blank-inline">none in repo</span></td></tr>
+<tr><td><strong>NE</strong> New England Patriots</td><td><a href="https://www.nfl.com/teams/new-england-patriots/depth-chart" target="_blank" rel="noopener">nfl.com depth-chart URL (built from club slug; not probed)</a></td><td><span class="b muted">Not probed this session</span></td><td><span class="blank-inline">none in repo</span></td></tr>
+<tr><td><strong>NO</strong> New Orleans Saints</td><td><a href="https://www.nfl.com/teams/new-orleans-saints/depth-chart" target="_blank" rel="noopener">nfl.com depth-chart URL (built from club slug; not probed)</a></td><td><span class="b muted">Not probed this session</span></td><td><span class="blank-inline">none in repo</span></td></tr>
+<tr><td><strong>NYG</strong> New York Giants</td><td><a href="https://www.nfl.com/teams/new-york-giants/depth-chart" target="_blank" rel="noopener">nfl.com depth-chart URL (built from club slug; not probed)</a></td><td><span class="b muted">Not probed this session</span></td><td><span class="blank-inline">none in repo</span></td></tr>
+<tr><td><strong>NYJ</strong> New York Jets</td><td><a href="https://www.nfl.com/teams/new-york-jets/depth-chart" target="_blank" rel="noopener">nfl.com depth-chart URL (built from club slug; not probed)</a></td><td><span class="b muted">Not probed this session</span></td><td><span class="blank-inline">none in repo</span></td></tr>
+<tr><td><strong>PHI</strong> Philadelphia Eagles</td><td><a href="https://www.nfl.com/teams/philadelphia-eagles/depth-chart" target="_blank" rel="noopener">nfl.com depth-chart URL (built from club slug; not probed)</a></td><td><span class="b muted">Not probed this session</span></td><td><span class="blank-inline">none in repo</span></td></tr>
+<tr><td><strong>PIT</strong> Pittsburgh Steelers</td><td><a href="https://www.nfl.com/teams/pittsburgh-steelers/depth-chart" target="_blank" rel="noopener">nfl.com depth-chart URL (built from club slug; not probed)</a></td><td><span class="b muted">Not probed this session</span></td><td><span class="blank-inline">none in repo</span></td></tr>
+<tr><td><strong>SEA</strong> Seattle Seahawks</td><td><a href="https://www.nfl.com/teams/seattle-seahawks/depth-chart" target="_blank" rel="noopener">nfl.com depth-chart URL (built from club slug; not probed)</a></td><td><span class="b muted">Not probed this session</span></td><td><span class="blank-inline">none in repo</span></td></tr>
+<tr><td><strong>SF</strong> San Francisco 49ers</td><td><a href="https://www.nfl.com/teams/san-francisco-49ers/depth-chart" target="_blank" rel="noopener">nfl.com depth-chart URL (built from club slug; not probed)</a></td><td><span class="b muted">Not probed this session</span></td><td>29 rows; label "Depth Chart"</td></tr>
+<tr><td><strong>TB</strong> Tampa Bay Buccaneers</td><td><a href="https://www.nfl.com/teams/tampa-bay-buccaneers/depth-chart" target="_blank" rel="noopener">nfl.com depth-chart URL (built from club slug; not probed)</a></td><td><span class="b muted">Not probed this session</span></td><td><span class="blank-inline">none in repo</span></td></tr>
+<tr><td><strong>TEN</strong> Tennessee Titans</td><td><a href="https://www.nfl.com/teams/tennessee-titans/depth-chart" target="_blank" rel="noopener">nfl.com depth-chart URL (built from club slug; not probed)</a></td><td><span class="b muted">Not probed this session</span></td><td><span class="blank-inline">none in repo</span></td></tr>
+<tr><td><strong>WAS</strong> Washington Commanders</td><td><a href="https://www.nfl.com/teams/washington-commanders/depth-chart" target="_blank" rel="noopener">nfl.com depth-chart URL</a></td><td><span class="b bad">404 (re-checked 2026-11-12)</span></td><td><span class="blank-inline">none in repo</span></td></tr>
+</tbody></table></div>
+<h2>Kansas City rows checked against the club page</h2>
+<p>24 of the 28 KC rows match chiefs.com line by line (checked 2026-11-12). The four that differ are listed below. chiefs.com titles its own page
+"Unofficial Depth Chart", so the repo label "Unofficial" is right and the registry label "Official club depth chart" is wrong (RV-06, RV-22).</p>
+<div class="tw"><table class=""><thead><tr><th>Position</th><th>Repo rows (depth_chart.json)</th><th>Difference from club page (RV-06)</th><th>Source</th></tr></thead><tbody>
+<tr><td>WR, row 2</td><td>Xavier Worthy; (blank); Cyrus Allen in row 3</td><td><span class="b bad">Differs</span> Cyrus Allen shifted into slot 3; Josh Downs missing</td><td><a href="https://www.chiefs.com/team/depth-chart" target="_blank" rel="noopener">chiefs.com depth chart</a></td></tr>
+<tr><td>DT, row 1</td><td>Chris Jones; Peter Woods; (row 3 blank)</td><td><span class="b bad">Differs</span> Marcus Harris missing</td><td><a href="https://www.chiefs.com/team/depth-chart" target="_blank" rel="noopener">chiefs.com depth chart</a></td></tr>
+<tr><td>KR</td><td>(row 1 blank); Emmett Johnson in row 2</td><td><span class="b bad">Differs</span> Emmett Johnson and Cyrus Allen shifted</td><td><a href="https://www.chiefs.com/team/depth-chart" target="_blank" rel="noopener">chiefs.com depth chart</a></td></tr>
+<tr><td>PR</td><td>(row 1 blank); Emmett Johnson in row 2</td><td><span class="b bad">Differs</span> Emmett Johnson and Cyrus Allen shifted</td><td><a href="https://www.chiefs.com/team/depth-chart" target="_blank" rel="noopener">chiefs.com depth chart</a></td></tr>
+</tbody></table></div>
+<h2>Sources not checked here</h2>
+<p>The Green Bay and San Francisco rows (labelled 'Unofficial' and 'Depth Chart') were not compared with their club pages in this session.
+Their status is unverified (flag UNV-DEPTH).</p>
+
+</main>
+<footer>
+  <p>Built 2026-11-12 from committed files in <a href="https://github.com/kanlerxz87-cyber/NFL1/tree/main/">the repository</a>. Official values are checked against the nfl.com pages linked in each row.
+  Blank cells are unverified and are never filled in. A flag ID (⚑) points to the <a href="flagged.html">Flagged for review</a> page.</p>
+  <p>Research and education only. This is not betting advice. No official NFL betting odds exist, and no prices are shown.</p>
+</footer>
+</body>
+</html>

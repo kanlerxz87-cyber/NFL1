@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Executive summary · NFL Decision Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html">NFL Decision Dashboard</a>
+  <nav><a href="index.html">Overview</a><a href="lines.html">Lines &amp; markets</a><a href="strategies.html">Strategies</a><a href="injuries.html">Injuries</a><a href="depth.html">Depth &amp; backups</a><a href="verification.html">Verification</a><a href="questions.html">Questions</a><a href="suggestions.html">Suggestions</a><a href="flagged.html">Flagged for review</a><a href="repo.html">Repo review</a><a href="executive.html" class="on">Executive summary</a><a href="sources.html">Sources</a></nav>
+</header>
+<main>
+<h1>Executive summary</h1>
+<p class="lead">What is verified, what is not, what the model shows, and the decisions still open.</p>
+
+<div class="callout">
+<p><strong>Decision status: no decision is ready.</strong> The data that is verified is the schedule and the official injury report.
+The data the model produces (lines, strategy performance, prop lines) cannot be confirmed from an official source, so it is shown as unverified or left blank.</p>
+</div>
+<h2>What was verified</h2>
+<ul>
+<li><strong>Week 10 schedule.</strong> All 14 games, days, kickoff times and networks match the nfl.com schedule page
+(<a href="https://www.nfl.com/schedules/2026/REG10">nfl.com/schedules/2026/REG10</a>). The four bye teams are CHI, DEN, PHI and TB.</li>
+<li><strong>Injury report.</strong> 279 official rows on <a href="https://www.nfl.com/injuries/">nfl.com/injuries</a>. 272 match the committed scrape on every field.
+3 rows are missing and 4 Colts practice statuses differ. The committed scrape is not reliable for IND and JAX.</li>
+<li><strong>Official game designations.</strong> Six rows only (Out: Lucas Patrick, Colson Yankoff, Ben Brown, Carlton Davis III, TreVeyon Henderson; Questionable: Malik Harrison).</li>
+<li><strong>Strategy gates.</strong> All 12 gate results reproduce from the committed JSON, so the model is consistent with its own rules.</li>
+<li><strong>Standings correlations.</strong> All six reproduce from the 32 standings rows.</li>
+</ul>
+<h2>What could not be verified, and why</h2>
+<ul>
+<li><strong>Betting lines and prices.</strong> No official NFL source publishes them. Every own-line, market-line and edge value is blank (flag UNV-LINE).</li>
+<li><strong>Strategy performance.</strong> Depends on those prices. Blank (flag UNV-PERF).</li>
+<li><strong>Depth charts for backups.</strong> Official depth-chart pages are not found for the clubs checked (WAS: 404; BUF and KC: 404 in the committed log). Only 3 clubs have any rows, and the club page for KC calls its chart unofficial.</li>
+<li><strong>Prop lines.</strong> Model output only; no prices (flag RV-26).</li>
+</ul>
+<h2>What the model shows (unverified model output)</h2>
+<ul>
+<li>In the 2026 test window the model's own spread is further from the result than the market (9.98 vs 9.49 points). Its blend weight is negative.</li>
+<li>None of the 12 strategies passes all 8 gates after recomputation. S11 reaches 6 of 8; it fails significance and stability.</li>
+<li>S04 and S06 are the same bet and should be merged. Diversification numbers depend on overlap-only correlations and are not reliable.</li>
+</ul>
+<h2>Irregularities that need a decision</h2>
+<ul>
+<li>The headline "103 starters flagged, official game status" is not supported. The JSON says 113, and 112 of them are practice-only (RV-01).</li>
+<li>The injury scrape must be fixed before any injury number is used (RV-02).</li>
+<li>Two generators overwrite the root index.html, and five site generations overlap (RV-17, RV-21).</li>
+<li>The Overview says "actionable" for a line the model's own validation does not support (RV-11).</li>
+</ul>
+<h2>Decisions needed from you</h2>
+<p>See <a href="suggestions.html">Suggestions</a> (choose a path for each) and <a href="questions.html">Questions</a>.
+The first decisions are: a depth-chart source for all 32 clubs (S-6A-03), whether to keep the "actionable" language (S-6A-04), and which site is canonical (S-6A-07).</p>
+<h2>Source links</h2>
+<p><a href="https://www.nfl.com/schedules/2026/REG10">nfl.com schedule</a> · <a href="https://www.nfl.com/injuries/">nfl.com injury report</a> · <a href="https://www.nfl.com/standings/league/2026/reg">nfl.com standings</a> ·
+<a href="https://www.chiefs.com/team/depth-chart">chiefs.com depth chart</a> · <a href="https://nflreadr.nflverse.com/articles/dictionary_schedules.html">nflreadr schedule dictionary (third party)</a></p>
+
+</main>
+<footer>
+  <p>Built 2026-11-12 from committed files in <a href="https://github.com/kanlerxz87-cyber/NFL1/tree/main/">the repository</a>. Official values are checked against the nfl.com pages linked in each row.
+  Blank cells are unverified and are never filled in. A flag ID (⚑) points to the <a href="flagged.html">Flagged for review</a> page.</p>
+  <p>Research and education only. This is not betting advice. No official NFL betting odds exist, and no prices are shown.</p>
+</footer>
+</body>
+</html>

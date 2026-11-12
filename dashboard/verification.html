@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verification · NFL Decision Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html">NFL Decision Dashboard</a>
+  <nav><a href="index.html">Overview</a><a href="lines.html">Lines &amp; markets</a><a href="strategies.html">Strategies</a><a href="injuries.html">Injuries</a><a href="depth.html">Depth &amp; backups</a><a href="verification.html" class="on">Verification</a><a href="questions.html">Questions</a><a href="suggestions.html">Suggestions</a><a href="flagged.html">Flagged for review</a><a href="repo.html">Repo review</a><a href="executive.html">Executive summary</a><a href="sources.html">Sources</a></nav>
+</header>
+<main>
+<h1>Verification</h1>
+<p class="lead">Independent checks run on 2026-11-12, with every result and every conflict shown.</p>
+
+<div class="legend"><span class="b ok">Verified</span> value checked against an official page this session · <span class="b bad">Mismatch</span> source and repo disagree · <span class="b warn">Unverified</span> cannot be confirmed from an official source; cell left blank · <span class="b muted">Not re-checked</span> carried from an earlier session, not re-read here · <span class="b internal">Internal file</span> repository file, not an official source</div>
+<div class="stats">
+<div><b>4</b><span>checks pass</span></div>
+<div><b>3</b><span>checks fail (see notes)</span></div>
+<div><b>1</b><span>conflict with the model's own check</span></div>
+</div>
+<div class="callout">
+<p><strong>Rule used.</strong> A check is PASS only when it was run this session against the official page or re-derived from committed files, and the result matches. A model claim that does not reproduce is recorded as a conflict, not as a pass.</p>
+</div>
+<h2>Checks run this session</h2>
+<div class="tw"><table class=""><thead><tr><th>ID</th><th>Check</th><th>Result</th><th>Matched</th><th>Mismatches</th><th>Notes</th><th>Source</th><th>Artifact</th></tr></thead><tbody>
+<tr><td><strong>V6-01</strong></td><td>Week 10 schedule vs nfl.com</td><td><span class="b ok">PASS</span></td><td>14 of 14</td><td>0</td><td>Club codes LAR and AZ (nfl.com) mapped to LA and ARI (pipeline). Byes CHI, DEN, PHI, TB.</td><td><a href="https://www.nfl.com/schedules/2026/REG10" target="_blank" rel="noopener">https://www.nfl.com/schedules/2026/REG10</a></td><td><span class="small">data/dashboard/schedule_check.json</span></td></tr>
+<tr><td><strong>V6-02</strong></td><td>Official injury report vs committed scrape, field by field</td><td><span class="b bad">FAIL</span></td><td>272 of 279</td><td>7</td><td>4 practice-status differences (all IND): A.J. Haulcy, Jonathan Taylor, Jerry Tillery, Charvarius Ward. 3 rows missing from the scrape: BJ Green II (JAX), CJ Allen (IND), Grover Stewart (IND). The transcription is hand-entered; a spot-check against the page is still open (see RV-02).</td><td><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">https://www.nfl.com/injuries/</a></td><td><span class="small">data/dashboard/injury_verification.json</span></td></tr>
+<tr><td><strong>V6-03</strong></td><td>Standings correlations C-01 to C-06 (standings identities, not betting correlations)</td><td><span class="b ok">PASS</span></td><td>6 of 6</td><td>0</td><td>C-05 definition corrected this session to net points per game vs pct (published value 0.8758 reproduces). Context only (RV-13).</td><td><a href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">https://www.nfl.com/standings/league/2026/reg</a></td><td><span class="small">data/dashboard/recomputed.json</span></td></tr>
+<tr><td><strong>V6-04</strong></td><td>Strategy gate counts re-derived from committed JSON</td><td><span class="b ok">PASS</span></td><td>12 of 12</td><td>0</td><td>0 of 12 pass all 8 gates. S11 WATCH 6/8 (fails G5, G6). S06 WATCH 5/8. The WATCH cut-offs (5 to 7 gates) are assumed, not taken from the published method.</td><td><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/strategies.json" target="_blank" rel="noopener"><span class="src-int">internal</span> https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/strategies.json</a></td><td><span class="small">data/dashboard/recomputed.json</span></td></tr>
+<tr><td><strong>V6-05</strong></td><td>Benjamini-Hochberg q-values</td><td><span class="b ok">PASS</span></td><td>12 of 12</td><td>0</td><td>All q-values are 0.9889. This is the correct result for these p-values (smallest p = 0.164).</td><td><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/strategies.json" target="_blank" rel="noopener"><span class="src-int">internal</span> https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/strategies.json</a></td><td><span class="small">data/dashboard/review.json (RV-10)</span></td></tr>
+<tr><td><strong>V6-06</strong></td><td>KC depth chart vs chiefs.com</td><td><span class="b bad">FAIL</span></td><td>24 of 28</td><td>4</td><td>The club page is titled &#x27;Unofficial Depth Chart&#x27;. Depth coverage is 3 of 32 clubs.</td><td><a href="https://www.chiefs.com/team/depth-chart" target="_blank" rel="noopener">https://www.chiefs.com/team/depth-chart</a></td><td><span class="small">data/dashboard/review.json (RV-06)</span></td></tr>
+<tr><td><strong>V6-07</strong></td><td>Model&#x27;s own verification.json (as generated 2026-11-12T18:53:41Z)</td><td><span class="b bad">CONFLICT</span></td><td>404 of 404</td><td>0</td><td>Its &#x27;mirrored feed vs official report&#x27; check shows 276/276 with 0 mismatches. This session&#x27;s comparison against the page found 4 field differences and 3 missing rows. The Overview shows 20/254 with a mismatch. These three results disagree and none is reproduced by the other two.</td><td><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/verification.json" target="_blank" rel="noopener"><span class="src-int">internal</span> data/model/verification.json</a></td><td><span class="small">data/dashboard/review.json (RV-29)</span></td></tr>
+<tr><td><strong>V6-08</strong></td><td>Overview NE row vs committed availability.json</td><td><span class="b bad">FAIL</span></td><td>0 of 1</td><td>1</td><td>Official NE Out: 3 (Brown, Davis III, Henderson). Overview: Out 2, practice-only 6, index 100.0. availability.json: starters_out 1, practice-only 7, index 53.6. Brown and Henderson are not in the 113-player starter list.</td><td><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">https://www.nfl.com/injuries/</a></td><td><span class="small">data/dashboard/review.json (RV-28)</span></td></tr>
+</tbody></table></div>
+<h2>Not checked here</h2>
+<div class="tw"><table class=""><thead><tr><th>Not checked here</th><th>Handling</th><th>Source</th></tr></thead><tbody>
+<tr><td>Betting lines and closing prices</td><td>Blank in all tables (UNV-LINE). No official source publishes them.</td><td><a href="https://www.nfl.com/schedules/2026/REG10" target="_blank" rel="noopener">nfl.com schedule page (no betting lines shown)</a></td></tr>
+<tr><td>Strategy return, win rate and ROI</td><td>Blank in all tables (UNV-PERF).</td><td><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/strategies.json" target="_blank" rel="noopener"><span class="src-int">internal</span> strategies.json</a></td></tr>
+<tr><td>Player-prop prices</td><td>Not shown (model-only output, RV-26).</td><td><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/props.json" target="_blank" rel="noopener"><span class="src-int">internal</span> props.json</a></td></tr>
+<tr><td>Depth charts for 29 of 32 clubs</td><td>Not in repo. Not probed beyond WAS, BUF, KC 404s (RV-04).</td><td><a href="https://www.nfl.com/teams/washington-commanders/depth-chart" target="_blank" rel="noopener">nfl.com depth chart (WAS: 404)</a></td></tr>
+<tr><td>Game times for unplayed games beyond Week 10</td><td>Not checked (model verification.json lists this as unverifiable).</td><td><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/verification.json" target="_blank" rel="noopener"><span class="src-int">internal</span> verification.json</a></td></tr>
+</tbody></table></div>
+
+</main>
+<footer>
+  <p>Built 2026-11-12 from committed files in <a href="https://github.com/kanlerxz87-cyber/NFL1/tree/main/">the repository</a>. Official values are checked against the nfl.com pages linked in each row.
+  Blank cells are unverified and are never filled in. A flag ID (⚑) points to the <a href="flagged.html">Flagged for review</a> page.</p>
+  <p>Research and education only. This is not betting advice. No official NFL betting odds exist, and no prices are shown.</p>
+</footer>
+</body>
+</html>
