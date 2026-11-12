@@ -7,6 +7,7 @@ import re
 import sys
 import pathlib
 import unittest
+import html as html_module
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
@@ -197,6 +198,87 @@ class TestSourceLinks(unittest.TestCase):
     def test_no_blank_cell_is_silently_zero(self):
         for slug in ("lines-week10", "strategies-leaderboard"):
             self.assertIn('class="blank"', html(slug), f"{slug} has no explicit blank markers")
+
+
+class TestSourceLabels(unittest.TestCase):
+    """A source link must say where it actually goes.
+
+    Labelling a github.com permalink or a Sportradar reference "NFL.com" would
+    misrepresent the provenance of the value it supports, which is the one thing
+    this site must never do.
+    """
+
+    SRC_ANCHOR = re.compile(
+        r'<a class="src" href="([^"]+)"[^>]*>([^<]*?)\s*&harr;?</a>'
+        r'|<a class="src" href="([^"]+)"[^>]*>([^<]*?)\s*↗</a>')
+
+    def anchors(self, page):
+        out = []
+        for m in re.finditer(r'<a class="src" href="([^"]+)"[^>]*>(.*?)</a>', page, flags=re.S):
+            out.append((m.group(1), re.sub(r"\s*↗\s*$", "", m.group(2)).strip()))
+        return out
+
+    def test_no_link_claims_a_host_it_does_not_point_to(self):
+        """The rule that matters: a label must never name the wrong host.
+
+        A link labelled `report`, or with a player's name, is more informative
+        than one labelled with its host, and is fine. What is not fine - because
+        it misrepresents provenance, the one thing this site must never do - is
+        a link labelled "NFL.com" that actually goes to GitHub or Sportradar.
+        """
+        offenders = []
+        checked = 0
+        for slug, _, _ in ALL_PAGES:
+            for href, label in self.anchors(html(slug)):
+                checked += 1
+                host = re.sub(r"^https?://", "", href).split("/")[0].lower()
+                host = host[4:] if host.startswith("www.") else host
+                lab = html_module.unescape(label).lower()
+                names_a_host = any(h in lab for h in
+                                   ("nfl.com", "github", "sportradar", "nflverse", "espn", ".org"))
+                if names_a_host and not host.endswith("nfl.com") and "nfl.com" in lab:
+                    offenders.append(f"{slug}: {host} link labelled {label!r}")
+                if names_a_host and host.endswith("nfl.com") and "nfl.com" not in lab:
+                    offenders.append(f"{slug}: nfl.com link labelled {label!r}")
+        self.assertGreater(checked, 300, f"only {checked} source links checked")
+        self.assertEqual(offenders, [])
+
+    def test_host_labels_are_used_where_no_role_label_applies(self):
+        """Where a link carries a host label, it must be the correct host."""
+        seen = {}
+        for slug, _, _ in ALL_PAGES:
+            for href, label in self.anchors(html(slug)):
+                lab = html_module.unescape(label)
+                if "github.com/kanlerxz87-cyber/NFL1" in href and lab == "this repository":
+                    seen["repo"] = lab
+                if "github.com/nflverse" in href and lab == "nflverse mirror":
+                    seen["mirror"] = lab
+                if "developer.sportradar.com" in href and lab.startswith("Sportradar"):
+                    seen["partner"] = lab
+                if re.sub(r"^https?://(www\.)?", "", href).startswith("nfl.com") and lab == "NFL.com":
+                    seen["nfl"] = lab
+        self.assertEqual(seen.get("nfl"), "NFL.com")
+        self.assertEqual(seen.get("repo"), "this repository")
+        self.assertEqual(seen.get("mirror"), "nflverse mirror")
+        self.assertEqual(seen.get("partner"), "Sportradar (NFL's official data partner)")
+
+    def test_no_repository_link_is_dressed_up_as_an_official_source(self):
+        for slug, _, _ in ALL_PAGES:
+            for href, label in self.anchors(html(slug)):
+                if "github.com" in href:
+                    self.assertNotEqual(html_module.unescape(label), "NFL.com",
+                                        f"{slug}: a repository link is labelled NFL.com")
+
+    def test_host_label_helper(self):
+        from nfl.sitekit import host_label
+        self.assertEqual(host_label("https://www.nfl.com/standings/"), "NFL.com")
+        self.assertEqual(host_label("https://github.com/kanlerxz87-cyber/NFL1/blob/main/x.py"),
+                         "this repository")
+        self.assertEqual(host_label("https://github.com/nflverse/nflverse-data"), "nflverse mirror")
+        self.assertEqual(host_label("https://developer.sportradar.com/x"),
+                         "Sportradar (NFL's official data partner)")
+        self.assertEqual(host_label("https://example.org/x"), "example.org")
+        self.assertEqual(host_label(None), "source")
 
 
 class TestContentIntegrity(unittest.TestCase):

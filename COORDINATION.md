@@ -861,6 +861,7 @@ Flagged for Review page with the arithmetic proof. **None blocks the merge.**
 | — | **"No Injuries Reported" ≠ "on bye"** — SEA/CIN/LAC/BAL versus CHI/DEN/PHI/TB. | Kept distinct rather than collapsed into one zero |
 | — | **No official depth chart reachable from the sandbox.** | `string_level_drop` registered UNAVAILABLE; 2nd/3rd/4th-string analysis uses only officially confirmed news items |
 | — | **Pages source cannot be moved to `/docs`** — 403, token lacks `pages:write`. | Sub-site published from `verified-lab/`; root site untouched |
+| — | **Source links were labelled with the wrong host.** `srccell()` defaulted its label to the literal string `"NFL.com"` regardless of the URL, so 14 links on `flagged.html` alone — GitHub permalinks, the nflverse mirror and the Sportradar depth-chart reference — were presented to the reader as "NFL.com ↗". That misrepresents the provenance of the value the link supports, which is the one thing this site must never do. Found by reading the published page after the merge, not by any local gate. | Fixed: labels are now derived from the URL by `sitekit.host_label()` (`NFL.com`, `this repository`, `nflverse mirror`, `Sportradar (NFL's official data partner)`, else the hostname). Where a role label is genuinely more informative — a player's name, or `report` — it is kept. Three new tests enforce that no link may claim a host it does not point to. Shipped in PR #19 |
 | — | **`README.md` on `main` contained three committed merge-conflict blocks** (`<<<<<<< Updated upstream` / `=======` / `>>>>>>> Stashed changes`, lines 27-77) — a `git stash pop` conflict committed and published as repository documentation. | Resolved in this merge by keeping the more complete side of each block; no content discarded. `git grep` confirms no conflict markers remain anywhere in the tree |
 
 ## Where this subsystem disagrees with the main pipeline — and why
@@ -916,9 +917,28 @@ including three cells where nfl.com contradicts its own arithmetic.
 - After the second merge, all root pages and all `data/model/*.json` are
   byte-identical to `origin/main` again (checked by sha1).
 - **Pull request:** <https://github.com/kanlerxz87-cyber/NFL1/pull/18>
-- **Merge result and Pages verification:** recorded in the follow-up commit
-  pushed to this branch and merged immediately afterwards, once the deployment
-  had actually been observed rather than assumed.
+- **Merge result:** **MERGED** at 2026-11-12T05:22:43Z, merge commit
+  `a98b9b319712aa8ae88a0ce6f61dccfdaf48efea`, via `gh pr merge 18 --merge`.
+  `mergeable_state` was `clean` and all three checks on the head commit
+  (`Verify NFL1 site`, `Verify NFL Decision Lab site build`) reported `success`
+  before the merge.
+- **Checks on the merged commit `a98b9b3`:** `Verify NFL Decision Lab site
+  build` success, `Verify NFL1 site` success, `pages build and deployment`
+  success.
+- **GitHub Pages:** `gh api repos/kanlerxz87-cyber/NFL1/pages` reports
+  `status: built`, `build_type: legacy`, `source: main / /`. The Pages build for
+  commit `a98b9b31` completed with status `built` and no error at
+  2026-11-12T05:22:45Z.
+- **Read as a user, not just as a green pipeline:**
+  <https://kanlerxz87-cyber.github.io/NFL1/verified-lab/> renders the dashboard
+  with the expected KPIs (29/34 checks, 254 injury entries, 21 signals,
+  13 strategies, 136 games, 38 correlation tests, 0 scored, 3 disputed cells),
+  and <https://kanlerxz87-cyber.github.io/NFL1/verified-lab/flagged.html>
+  renders all flagged items with working source links. Reading the live page is
+  what caught the defect recorded immediately below, which no local gate had
+  reported - the same lesson this board logged as F35.
+- **Follow-up:** <https://github.com/kanlerxz87-cyber/NFL1/pull/19> carries the
+  source-label fix and this record.
 
 ## Open cross-session requests (logged, not applied)
 

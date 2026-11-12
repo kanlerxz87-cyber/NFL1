@@ -19,7 +19,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from nfl import markdown_lite as md          # noqa: E402
 from nfl import sitekit
 from nfl.sitekit import (ALL_PAGES, NAV, REPO_URL, badge, callout, esc, first_url,  # noqa: E402
-                         fmt, kpi, panel, render_page, src, table)
+                         fmt, host_label, kpi, panel, render_page, src, table)
 
 DATA = json.loads((ROOT / "data" / "processed" / "site_data.json").read_text(encoding="utf-8"))
 OUT = sitekit.SITE_OUT
@@ -37,7 +37,8 @@ def blank_cell(title: str = "not available from an official source") -> str:
     return f'<span class="blank" title="{esc(title)}">&mdash;</span>'
 
 
-def srccell(url: str, label: str = "NFL.com") -> str:
+def srccell(url: str, label: str | None = None) -> str:
+    """A table cell holding one source link, labelled by its real host."""
     return src(url, label)
 
 
@@ -97,10 +98,10 @@ def p_index() -> tuple[str, str, str]:
     for b in DATA["signals"]["blocked"]:
         rows.append([f'<strong>{esc(b["name"])}</strong><div class="note">{esc(b["definition"])}</div>',
                      esc(b.get("blocked_reason", "")),
-                     src(first_url(b.get("resolving_source")) or
-                         (REPO_URL + "/blob/main/src/nfl/signals.py"),
-                         "resolving source" if first_url(b.get("resolving_source"))
-                         else "defined in code")])
+                     # No explicit label: the column header already says
+                     # "Resolving source", so the link names the host it goes to.
+                     src(first_url(b.get("resolving_source"))
+                         or (REPO_URL + "/blob/main/src/nfl/signals.py"))])
     body.append(table(["Blocked signal", "Why it cannot be produced", "Resolving source"], rows))
     body.append("<h3>Pages</h3>")
     for cat, items in NAV.items():
@@ -446,8 +447,7 @@ def p_availability_depth():
     return ("Availability & Depth", "Injuries, unit deficiencies and the depth-chart gap",
             callout(f'<strong>Depth charts are unavailable.</strong> {esc(dc["reason"])} '
                     f'<br><br>Consequence: {esc(dc["consequence"])}', "bad")
-            + '<p>' + src(first_url(dc["resolving_source"]),
-                          "Sportradar NFL Official API - weekly depth charts") + '</p>'
+            + '<p>' + src(first_url(dc["resolving_source"])) + '</p>'
             + "<h3>What can be established without a depth chart</h3>"
             + table(["Team", "Report status", "Entries", "DNP", "Off DNP", "Def DNP", "Out",
                      "Key pos", "QB", "Confirmed QB change", "Pressure", "Source"], rows,

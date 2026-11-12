@@ -212,10 +212,37 @@ def badge(tier: str | None, label: str | None = None) -> str:
     return f'<span class="badge b-{esc(t)}">{esc(label or t)}</span>'
 
 
-def src(url: str | None, label: str = "source") -> str:
+def host_label(url: str | None) -> str:
+    """Name a source by the host it actually points at.
+
+    Every row on this site must carry a source link, and a link is only useful
+    if the reader knows where it goes. Labelling a github.com permalink
+    "NFL.com" would misrepresent the provenance of the value it supports, so
+    the label is derived from the URL rather than hardcoded.
+    """
+    if not url:
+        return "source"
+    m = re.match(r"https?://([^/]+)(/.*)?$", url)
+    host = (m.group(1) if m else url).lower().removeprefix("www.")
+    path = (m.group(2) or "") if m else ""
+    if host.endswith("nfl.com"):
+        return "NFL.com"
+    if host == "developer.sportradar.com":
+        return "Sportradar (NFL's official data partner)"
+    if host == "github.com":
+        if path.startswith("/kanlerxz87-cyber/NFL1"):
+            return "this repository"
+        if path.startswith("/nflverse"):
+            return "nflverse mirror"
+        return "GitHub"
+    return host or "source"
+
+
+def src(url: str | None, label: str | None = None) -> str:
     if not url:
         return ""
-    return f'<a class="src" href="{esc(url)}" rel="noopener noreferrer" target="_blank">{esc(label)} ↗</a>'
+    text = label if label else host_label(url)
+    return f'<a class="src" href="{esc(url)}" rel="noopener noreferrer" target="_blank">{esc(text)} ↗</a>'
 
 
 def table(headers: Sequence[str], rows: Iterable[Sequence[str]],
