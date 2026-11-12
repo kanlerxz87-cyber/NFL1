@@ -11,35 +11,14 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="top">
   <a class="brand" href="../index.html"><span class="mark">NFL</span><span class="brand-text">Decision Lab</span></a>
-  <nav>
-    <a href="../index.html">Overview</a>
-    <a href="executive-summary.html">Executive Summary</a>
-    <a href="teams.html">Teams</a>
-    <a href="standings.html">Standings</a>
-    <a href="injuries.html">Injuries</a>
-    <a href="availability.html">Availability</a>
-    <a href="data.html">Verified Data</a>
-    <a href="lines.html">Own Lines</a>
-    <a href="analysis.html">Validation & Correlation</a>
-    <a href="decisions.html">Decision Register</a>
-    <a href="verified.html">Verified Artifacts</a>
-    <a href="evidence.html">Evidence</a>
-    <a href="models.html">Strategy Lab</a>
-    <a href="strategies.html">Strategies</a>
-    <a href="suggestions.html">Suggestions</a>
-    <a href="questions.html">Questions</a>
-    <a href="flagged.html">Flagged</a>
-    <a href="review.html">Review</a>
-    <a href="executive.html" class="active">Executive Summary (companion)</a>
-    <a href="props.html">Player Props</a>
-  </nav>
+  <nav aria-label="Main"><a href="../index.html">Overview</a><a href="../pages/lines.html">My Lines</a><a href="../pages/strategies.html">Strategy Lab</a><a href="../pages/injuries.html">Injuries &amp; Depth</a><a href="../pages/props.html">Props</a><a href="../pages/questions.html">Questions</a><a href="../pages/suggestions.html">Suggestions</a><a href="../pages/evidence.html">Evidence</a><a href="../pages/review.html">Flagged for Review</a><a href="../pages/executive.html" class="active">Executive Summary</a></nav>
 </header>
 <main id="main">
   <section class="page-head">
     <p class="eyebrow">Evidence-first dashboard</p>
     <h1>Executive Summary</h1>
     <p class="standfirst">What was built, what the evidence says, what is missing, and which decisions are waiting.</p>
-    <p class="timestamp">Data built 2026-11-12T05:07:59+00:00 · every value links to its source</p>
+    <p class="timestamp">Data built 2026-11-12T22:36:55+00:00 · every value links to its source</p>
   </section>
   
 <section class="panel">
@@ -54,15 +33,15 @@
 
   <h3>What was verified</h3>
   <ul class="tight">
-    <li>128 of 128 verification rows matched the source they were checked against
+    <li>119 of 128 verification rows matched the source they were checked against
     (2026 standings (W-L-T, points for/against); Scraped official injury report vs hand-transcribed sample; Computed standings vs companion transcription (data/standings.csv); Scraped official report vs companion injury CSV (data/injuries.csv)).</li>
     <li>12 source files pinned with download URL, byte count, sha256 and fetch time.</li>
     <li>The current week's official injury report is scraped directly from nfl.com:
-    254 rows across the clubs that had submitted a report,
-    matched to the weekly depth chart. 4 clubs had no report at scrape time
-    (BAL, CIN, LAC, SEA).</li>
-    <li>The mirrored feed is incomplete in-season: 20 of
-    254 official week 10 rows were present in it, which is
+    295 rows across the clubs that had submitted a report,
+    matched to the weekly depth chart. 2 clubs had no report at scrape time
+    (BAL, LAC).</li>
+    <li>The mirrored feed is incomplete in-season: 276 of
+    295 official week 10 rows were present in it, which is
     exactly why the official page is scraped directly.</li>
     <li>The closing-line sign convention was proved from data: correlation
     0.439 with the home margin over
@@ -90,15 +69,17 @@
     0.009 across 5591 games, so naive parlay
     multiplication is roughly right for spread/total combos but must never be used for
     player-prop combos without their own correlation.</li>
-    <li><strong>Availability is concentrated.</strong> The injury table names every unavailable
-    starter, the next man at that slot, his experience and his 2026 snaps, so a reviewer can see
-    which clubs are leaning on 2nd and 3rd string players.</li>
+    <li><strong>Availability is only partly measured.</strong> The injury table names the unavailable
+    starters that the depth chart could match, with the next man at that slot, his experience and his
+    2026 snaps. It does not yet show backups who are out, so 2nd- and 3rd-string exposure is
+    understated (F17, F21).</li>
   </ul>
 
   <h3>What remains unresolved</h3>
   <ul class="tight">
     <li>No official or book-level prices: edge, CLV and prop value are unmeasurable (F01, F02).</li>
     <li>Depth chart rank is not participation; the injury effect is not yet quantified (F03).</li>
+    <li>Availability counts starters only and drops unmatched records: 5 of 6 official game designations are missing from the starter list (F21).</li>
     <li>Rewards with real value need legal review (F04).</li>
     <li>Model history covers 2024-2026 only, so confidence intervals are wide (F06).</li>
     <li>Weather, travel and inactives are missing, so those signals are untested (F09, F10).</li>
@@ -114,7 +95,14 @@
   </ol>
 </section>
 
-<section class="kpis"><article class="kpi"><span class="kpi-label">Rows verified vs nfl.com</span><strong class="kpi-value">128/128</strong><span class="kpi-sub">standings + injury sample</span></article><article class="kpi"><span class="kpi-label">Own-line test MAE</span><strong class="kpi-value">9.98</strong><span class="kpi-sub">market 9.48 over 136 games</span></article><article class="kpi"><span class="kpi-label">Strategies passing all gates</span><strong class="kpi-value">0 of 12</strong><span class="kpi-sub">8 gates + BH correction</span></article><article class="kpi"><span class="kpi-label">Starters flagged unavailable</span><strong class="kpi-value">103</strong><span class="kpi-sub">official game status</span></article><article class="kpi"><span class="kpi-label">Prop lines built</span><strong class="kpi-value">343</strong><span class="kpi-sub">market price: none</span></article><article class="kpi"><span class="kpi-label">Pinned source files</span><strong class="kpi-value">12</strong><span class="kpi-sub">URL + sha256</span></article></section>
+<section class="kpis"><article class="kpi"><span class="kpi-label">Rows verified vs nfl.com</span><strong class="kpi-value">119/128</strong><span class="kpi-sub">standings + injury sample</span></article><article class="kpi"><span class="kpi-label">Own-line test MAE</span><strong class="kpi-value">9.98</strong><span class="kpi-sub">market 9.48 over 136 games</span></article><article class="kpi"><span class="kpi-label">Strategies passing all gates</span><strong class="kpi-value">0 of 12</strong><span class="kpi-sub">8 gates + BH correction</span></article><article class="kpi"><span class="kpi-label">Starters flagged unavailable</span><strong class="kpi-value">111</strong><span class="kpi-sub">official game status</span></article><article class="kpi"><span class="kpi-label">Prop lines built</span><strong class="kpi-value">343</strong><span class="kpi-sub">market price: none</span></article><article class="kpi"><span class="kpi-label">Pinned source files</span><strong class="kpi-value">12</strong><span class="kpi-sub">URL + sha256</span></article></section>
+
+<section class="panel">
+  <h2>Brief coverage: what is implemented, partial or blocked</h2>
+  <p>Each requirement from the brief, where it lives, and how far the evidence goes. Nothing is marked
+  implemented unless it is on a page with its source.</p>
+  <div class="table-wrap"><table class=""><thead><tr><th>Requirement</th><th>Where it lives</th><th>Status</th><th>Source</th><th>Flag</th></tr></thead><tbody><tr><td>Own NFL lines for the current week</td><td><a href="lines.html">My Lines</a></td><td><span class="badge pass">implemented</span></td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">NFL schedule</a></td><td>F15</td></tr><tr><td>Strategy leaderboard: single bets</td><td><a href="strategies.html">Strategy Lab</a></td><td><span class="badge pass">implemented</span></td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">closing lines</a></td><td>GATES</td></tr><tr><td>Parlays and player-prop combos</td><td><a href="props.html">Props</a></td><td><span class="badge fail">blocked</span></td><td><a class="src" href="https://www.nfl.com/stats/player-stats/" target="_blank" rel="noopener">NFL stats</a></td><td>F02</td></tr><tr><td>Correlation values</td><td><a href="strategies.html">Strategy Lab</a></td><td><span class="badge neutral">partial</span></td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">closing lines</a></td><td>F02</td></tr><tr><td>Validation gates and luck removal</td><td><a href="strategies.html">Strategy Lab</a></td><td><span class="badge pass">implemented</span></td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">closing lines</a></td><td>GATES</td></tr><tr><td>Injury tracking from the official report</td><td><a href="injuries.html">Injuries &amp; Depth</a></td><td><span class="badge pass">implemented</span></td><td><a class="src" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">NFL injuries</a></td><td>F18</td></tr><tr><td>2nd-, 3rd- and 4th-string backups, offence and defence</td><td><a href="injuries.html">Injuries &amp; Depth</a></td><td><span class="badge neutral">partial</span></td><td><a class="src" href="https://www.nfl.com/teams/kansas-city-chiefs/depth-chart" target="_blank" rel="noopener">nfl.com 404 check</a></td><td>F17</td></tr><tr><td>Suggestions to choose a path before any change</td><td><a href="suggestions.html">Suggestions</a></td><td><span class="badge pass">implemented</span></td><td><a class="src" href="https://operations.nfl.com/gameday/" target="_blank" rel="noopener">NFL operations</a></td><td>—</td></tr><tr><td>Clear questions: known, unknown, answers</td><td><a href="questions.html">Questions</a></td><td><span class="badge pass">implemented</span></td><td><a class="src" href="https://operations.nfl.com/gameday/" target="_blank" rel="noopener">NFL operations</a></td><td>—</td></tr><tr><td>Executive summary</td><td><a href="executive.html">Executive Summary</a></td><td><span class="badge pass">implemented</span></td><td><a class="src" href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener">repository</a></td><td>—</td></tr><tr><td>Live site with category pages and source links on every table row</td><td><a href="../index.html">Overview</a></td><td><span class="badge neutral">partial</span></td><td><a class="src" href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener">repository</a></td><td>F16, F19</td></tr><tr><td>Rewards competition with real value</td><td><a href="review.html">Flagged for Review</a></td><td><span class="badge fail">blocked</span></td><td><a class="src" href="https://operations.nfl.com/gameday/" target="_blank" rel="noopener">NFL operations</a></td><td>F04</td></tr><tr><td>Line-by-line check against official sources</td><td><a href="evidence.html">Evidence</a></td><td><span class="badge neutral">partial</span></td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a></td><td>F08, F18</td></tr><tr><td>Repository review and flagged irregularities</td><td><a href="review.html">Flagged for Review</a></td><td><span class="badge pass">implemented</span></td><td><a class="src" href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener">repository</a></td><td>F19, F20</td></tr></tbody></table></div>
+</section>
 
 <section class="grid-2">
   <div class="panel">
