@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Research section overview &middot; NFL Decision Lab</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html">NFL Decision Lab<span class="tag">research section</span></a>
+  <nav class="crumb"><a href="../index.html">Main site</a> &middot; <a href="index.html">Lab overview</a> &middot; Summary</nav>
+</header>
+<div class="wrap">
+  <aside class="side"><nav><div class="navgroup"><span>Summary</span><a class="" href="executive-summary.html">Executive Summary</a></div><div class="navgroup"><span>Lines</span><a class="" href="lines.html">My Lines</a></div><div class="navgroup"><span>Strategy</span><a class="" href="leaderboard.html">Strategy Lab</a><a class="" href="parlays.html">Parlays</a><a class="" href="correlations.html">Correlations</a></div><div class="navgroup"><span>Props</span><a class="" href="props.html">Player Props</a></div><div class="navgroup"><span>Availability</span><a class="" href="injuries.html">Injuries &amp; Depth</a></div><div class="navgroup"><span>Decisions</span><a class="" href="questions.html">Questions</a><a class="" href="suggestions.html">Suggestions</a><a class="" href="requirements.html">Requirements</a></div><div class="navgroup"><span>Evidence</span><a class="" href="verification.html">Verification</a><a class="" href="repo-review.html">Repo Review</a><a class="" href="flagged.html">Flagged for Review</a></div></nav></aside>
+  <main>
+    <h1>Research section overview</h1>
+    <p class="sub">Own lines, a gated strategy leaderboard and every number traced to a source. Built by session 9cb71eb8-nfl1.</p>
+    <div class="kpis"><div class="kpi"><span class="k">Games in the sample</span><span class="v">7,239</span><span class="n">regular season 1999-2026; 7,103 have final scores</span></div><div class="kpi"><span class="k">Bets scored</span><span class="v">14,440</span><span class="n">at prices taken from the source, never assumed</span></div><div class="kpi"><span class="k">Our spread error</span><span class="v">10.70 pts</span><span class="n">market 10.24 pts</span></div><div class="kpi"><span class="k">Own lines live</span><span class="v">136</span><span class="n">unplayed 2026 games with a model spread and total</span></div><div class="kpi"><span class="k">Strategies passing all gates</span><span class="v">0 of 12</span><span class="n">eight gates, see the Strategy Lab</span></div><div class="kpi"><span class="k">Rows verified</span><span class="v">5,372 / 7,274</span><span class="n">against official nfl.com pages</span></div></div><h2>Where to start</h2>
+<p class="sub2">The section is organised by the kind of question you are asking.</p>
+<div class="tw"><table><thead><tr><th>Category</th><th>Pages</th><th>What it answers</th></tr></thead><tbody><tr><td>Summary</td><td></td><td>The whole study on one page.</td></tr><tr><td>Lines</td><td></td><td>Our own numbers, and how they compare with the market.</td></tr><tr><td>Strategy</td><td></td><td>Rules, gates, luck, parlays and correlations.</td></tr><tr><td>Props</td><td></td><td>Player projections and the correlations that govern combinations.</td></tr><tr><td>Availability</td><td></td><td>Injuries, depth charts and what is missing from both.</td></tr><tr><td>Decisions</td><td></td><td>Questions, suggestions with paths, and the requirement checklist.</td></tr><tr><td>Evidence</td><td></td><td>Verification, the repository review, and everything flagged.</td></tr></tbody></table></div>
+<h2>The five numbers that matter</h2>
+<div class="tw"><table><thead><tr><th>Finding</th><th>Value</th><th>What it means</th><th>Source</th></tr></thead><tbody><tr><td>Our line versus the market</td><td>MAE 10.70 vs 10.24 points</td><td>Our line is the less accurate of the two, by a paired test with t = 10.33.</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">nfl.com &#8599;</a></td></tr><tr><td>Does our line add anything?</td><td>weight 0.161, t = 3.35</td><td>Yes. Our disagreement with the closing line carries information even though our line is worse overall.</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">nfl.com &#8599;</a></td></tr><tr><td>Closest strategy to passing</td><td>S07 Fade the road favourite of 7+ &mdash; 6.06% over 401 bets</td><td>6 of 8 gates. Its 95% luck band is -37.2 to 37.2 units and it made 24.3.</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">nfl.com &#8599;</a></td></tr><tr><td>Parlay legs across games</td><td>dependence ratio mean 1.000</td><td>Different-game legs are independent, so the product rule is a fair price. Inside one game they are not: quarterback yards to his top receiver's yards, r = +0.672.</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">nfl.com &#8599;</a></td></tr><tr><td>Verification against official pages</td><td>5,372 of 7,274 rows</td><td>The gap is games with no published price, which are used for training and never scored.</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">nfl.com &#8599;</a></td></tr></tbody></table></div>
+<h2>What this section is not</h2>
+<p>It does not replace the other site generations in this repository &mdash; it adds to them.
+It is the only generation built on a sample large enough to test a strategy, because it is the
+only one whose research extract was committed as text the analysis could actually read. The
+duplication is recorded as flag <a href="flagged.html">U08</a>.</p>
+<p>Every number on this site was computed by a script you can run. Nothing was typed into a
+table by hand except the official values transcribed for verification, and those are stored
+with the page they verify.</p>
+    <footer class="foot">
+      <p>Generated from <code>data/s9cb/*.json</code> by <code>s9cb/site.py</code>.
+      Every table row links to the source it came from. A blank cell means the source does
+      not publish that value; nothing is inferred to fill it.</p>
+      <p>Source data: <a href="https://github.com/nflverse/nflverse-data" target="_blank" rel="noopener">nflverse</a>
+      (CC-BY-4.0), a parse of the NFL's own GSIS feed, the official weekly injury report and
+      the official depth charts. Official entry points:
+      <a href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">schedules</a> &middot;
+      <a href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">standings</a> &middot;
+      <a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">injuries</a> &middot;
+      <a href="https://www.nfl.com/stats/player-stats/" target="_blank" rel="noopener">player stats</a>.</p>
+      <p>Other site generations in this repository, all preserved:
+      <a href="../index.html">root dashboard</a> &middot;
+      <a href="../docs/index.html">docs/</a> &middot;
+      <a href="../verified-lab/index.html">verified-lab/</a> &middot;
+      <a href="../referee/index.html">referee/</a> &middot;
+      <a href="../dashboard/index.html">dashboard/</a> &middot;
+      <a href="../lab/index.html">lab/</a>.</p>
+      <p>This is a research tool, not betting advice.</p>
+    </footer>
+  </main>
+</div>
+</body>
+</html>
