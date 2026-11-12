@@ -506,19 +506,21 @@ def overview(snap, dash, lines, strat, avail, props, verif):
     # site map: every published page, so no page can be published without a route to it
     groups = site_map()
     page_count = sum(len(rows) for _, rows in groups)
-    sm_rows = []
+    sm_parts = []
     for label, rows in groups:
-        sm_rows.append([f"<strong>{esc(label)}</strong>", f"{len(rows)} page(s)", "", ""])
+        sm_rows = []
         for rel, title, _h1 in rows:
             sm_rows.append([
                 f'<a href="{esc(rel)}">{esc(title)}</a>',
                 esc(rel),
-                esc(category_of(rel)),
                 src(SOURCE["repo"], "repository"),
             ])
-    sitemap_tbl = table(["Page", "File", "Category", "Source"], sm_rows,
-                         note=("Built from the files on disk at generation time, so the map cannot "
-                               "drift from what is published."))
+        sm_parts.append(
+            f"<h3>{esc(label)} <span class=\"sub\">{len(rows)} page(s)</span></h3>"
+            + table(["Page", "File", "Source"], sm_rows))
+    sitemap_tbl = ("".join(sm_parts) +
+                   '<p class="note">Built from the files on disk at generation time, so the map '
+                   'cannot drift from what is published.</p>')
 
     body = f"""
 <section class="hero">
@@ -1338,7 +1340,25 @@ def review_page(verif, strat, dash, avail=None):
         ["F13", "companion pages", "Companion pages from earlier sessions state that no closing lines are stored in the repository. That was true for their inputs; the integration pipeline now carries consensus closing lines and compares every line against them.",
          src(SOURCE["schedules"], "schedules release"), badge("resolved")],
         ["F14", "two models", "Two independently built models disagree on the week 10 WAS @ NYG margin. Both are inside their own error bands; neither is promoted.",
-         src("../pages/evidence.html", "replication table"), badge("needs review")],
+         src(SOURCE["schedules"], "schedules release") + " " + src("evidence.html", "replication table"),
+         badge("needs review")],
+        ["F15", "official source stability", "The official league standings page printed a different split record for 9 clubs when the same page was read twice about 20 minutes apart (DIV, CONF, NON-CONF, DIV%, CONF%, STRK and LAST 5 changed). Only the columns that were identical in both readings are published as verified.",
+         src(SOURCE["standings"], "NFL standings") + " " + src("audit.html", "both retrievals"),
+         badge("needs review")],
+        ["F16", "official source arithmetic", "23 printed rows on the official standings page contradict the club's own W-L-T: HOME + ROAD, CONF + NON-CONF, DIV% or CONF% do not reconcile with the games played. The page is published verbatim and the disagreeing cells are left blank.",
+         src(SOURCE["standings"], "NFL standings") + " " + src("audit.html", "audit detail"),
+         badge("needs review")],
+        ["F17", "transcription disagreement", "Two independent transcriptions of the official HOME/ROAD columns disagree for four clubs (JAX, LV, MIN, ATL) while the clubs' W-L-T agrees everywhere. The affected cells are left blank rather than picked from one transcription.",
+         src(SOURCE["standings"], "NFL standings") + " " + src("audit.html", "audit detail"),
+         badge("needs review")],
+        ["F18", "two generators, one file", "Four different generators wrote into the same directories and two of them wrote the same files (index.html and pages/lines.html), so the published site could not be reproduced from the repository and the landing page could be replaced by a different site. One build script now owns every published file.",
+         src(SOURCE["repo"], "build script"), badge("resolved")],
+        ["F19", "orphan pages", "56 of the 76 published pages were not reachable from the landing page, so more than half the site was invisible to a reader. The landing page now publishes a site map built from the files on disk, and a CI gate fails if any published page is unreachable.",
+         src(SOURCE["repo"], "site map"), badge("resolved")],
+        ["F20", "stale pages", "The published pages carried a build stamp 13 hours older than the model snapshot they displayed, because the daily data refresh committed new data without rebuilding the pages. The refresh now rebuilds and commits the pages together.",
+         src(SOURCE["repo"], "refresh workflow"), badge("resolved")],
+        ["F21", "verification report", "The committed verification report counted 996 table rows because the landing page it measured was a different page from the one that is published. The gate now measures every published page (1,968 rows) and the report is regenerated in the same order as the build.",
+         src(SOURCE["repo"], "verification report"), badge("resolved")],
     ])
 
     tbl = table(["ID", "Area", "What is flagged", "Source", "State"], flags,
