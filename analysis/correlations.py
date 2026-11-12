@@ -159,7 +159,11 @@ def main() -> int:
     # C5: division games vs total (needs a division map -> derived from standings file)
     with (DATA / "standings_2026.csv").open(newline="", encoding="utf-8") as fh:
         st = list(csv.DictReader(fh))
-    div = {r["abbr"]: r["division"] for r in st}
+    # Conference and division must BOTH match: AFC East and NFC East share the bare name
+    # "East", so a division-only key wrongly counted interconference games as division games
+    # (52 instead of 42 for weeks 1-9; fixed after the referee session flagged it —
+    # COORDINATION.md task A1, hand-off from session 25aa7696).
+    div = {r["abbr"]: (r["conference"], r["division"]) for r in st}
     div_flag = [1 if div.get(g["home_abbr"]) == div.get(g["away_abbr"]) else 0 for g in games]
     if len(set(div_flag)) > 1:
         add("C5", "Division game flag vs total points", r_of(div_flag, [g["total"] for g in games]), n,

@@ -1,5 +1,9 @@
 # COORDINATION.md — shared task board and integration log
 
+> Board hygiene note (session `b6e68100-nfl1`, 2026-11-12): the file previously began with the
+> stray text `EAD` on line 1 — a leftover conflict-resolution artifact from an earlier merge.
+> Removed; logged as irregularity A-F01 on the Flagged for Review page.
+
 Repository: `kanlerxz87-cyber/NFL1` · Default branch `main` · Site: <https://kanlerxz87-cyber.github.io/NFL1/>
 
 Sessions that have worked here:
@@ -13,10 +17,19 @@ Sessions that have worked here:
 | `7600ed8b-nfl1` | `arena/7600ed8b-nfl1` | Quantitative pipeline, own lines, strategy gates, injury/depth model, props, verification, final integration | PR #13 |
 | `a2cea255-nfl1` | `arena/a2cea255-nfl1` | Independent verification subsystem: hand transcription of nfl.com, 34-check harness, provenance/gates engine, 103 tests, 20-page sub-site in `verified-lab/` | PR #18 |
 | `e3148b95-nfl1` | `arena/e3148b95-nfl1` | Official-source schedule/bye attribution audit and CI gate | in progress |
+| `b6e68100-nfl1` | `arena/b6e68100-nfl1` | Post-merge audit: C5 division-map fix (referee hand-off), line-by-line repo review, official-source re-verification, site health check, PR/merge/Pages confirmation | active |
 
 > Branch naming: Arena fixes each session to a single branch named `arena/<session>-nfl1`, so the
 > `session-<id>/<task>` convention in the brief cannot be followed here. Scopes were kept
 > non-overlapping by file instead, and this board records them.
+
+## Active claims (session `b6e68100-nfl1`, 2026-11-12)
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| A1 | Take over referee request on `analysis/correlations.py` (C5 counts 52 division games; official groupings give 42 — AFC/NFC divisions of the same name were not distinguished) and recompute `data/verified/model/correlations.json` | done | `b6e68100` | `analysis/correlations.py`, `data/verified/model/correlations.json`, `pages/analysis.html`, `data/flags.json` (F36), `COORDINATION.md` | Fixed: map keyed on (conference, division). All 32 club-division assignments verified line by line against https://www.nfl.com/standings/division/2026/REG first. Recomputed C5 = -0.1048 (n=136, CI [-0.268,+0.065], p=0.2245) — matches the referee's independent value exactly. F36 marked resolved. |
+| A2 | Post-merge audit: line-by-line repo review, re-verification of published data against official sources, site build + link check, live-site health check | done | `b6e68100` | `docs/audit-b6e68100.md`, `data/flags.json` (A-F01..A-F04), `data/suggestions.json` (SA-01, SA-02), `pipeline/content.py`, `pipeline/build_all.py`, regenerated pages | Audit published at `docs/audit-b6e68100.md`. Findings: A-F01 stray 'EAD' line-1 artifact (fixed); A-F02 WAS win-pct banker's rounding vs official 0.313 (fixed in `pipeline/build_all.py`, confirmed live via the collect-data refresh — snapshot now shows 0.313); A-F03 Week-10 injury club coverage fully explained (CHI/DEN/PHI/TB on bye per official schedule; LAC/BAL 'No Injuries Reported'); A-F04 official injury page drifts within hours (IND/JAX rows changed between 18:53 and 22:30 UTC scrapes; scraper verified faithful, ~120 rows row-for-row). Verified non-issue: Myles Garrett listed under LAR is correct per his official player page (trade to Rams). All gates re-run and green after regeneration: validate_verified PASS, audit_numbers 44/44, check_site 20 pages 0 broken, tools/verify.py 971 rows all sourced, verify_combined PASS, 111 tests pass. |
+| A3 | PR from this branch to `main`, merge without waiting for approval, confirm GitHub Pages deploy, record PR link/result here | in progress | `b6e68100` | `COORDINATION.md` (PR record section) | Runs after A1/A2. |
 
 ## Task board (final state, session `7600ed8b-nfl1` integration)
 
@@ -102,10 +115,37 @@ The 14 Week 10 fixture dates, kickoff times and matchups cite the official NFL s
   daily at 11:17 UTC; it re-downloads, re-verifies and commits `data/model/*.json`.
 - **PR and merge record:** see the "PR" section below (filled after merge).
 
+## Session `b6e68100-nfl1` — post-merge audit and referee hand-off (2026-11-12)
+
+Branch `arena/b6e68100-nfl1`, re-based onto `origin/main` at `5768d16` (PRs #21 and #24 included;
+nothing from those sessions was touched or discarded). Full audit published at
+[`docs/audit-b6e68100.md`](docs/audit-b6e68100.md). Summary of what changed on this branch:
+
+- **A1 (referee hand-off):** C5 division-game correlation fixed in `analysis/correlations.py`
+  (conference+division key), recomputed to r = -0.1048 (n=136), matching the referee's value
+  exactly. Division map verified against the official standings page first. F36 resolved.
+- **A2 (audit):** the verified analysis layer was re-run end to end and reproduces byte-for-byte
+  except the intended fix — a reproducibility result in its own right. WAS win-pct rounding fixed
+  in `pipeline/build_all.py` (round-half-up, integer arithmetic) and confirmed applied by the
+  branch's own collect-data run (snapshot WAS pct now 0.313 = official). Injury-report club
+  coverage fully explained from official sources; official-page drift documented with a
+  pre-slate-refresh suggestion (SA-02). Generator path-collision documented with a guard
+  suggestion (SA-01). New flags A-F01…A-F04 on the Flagged for Review page.
+- **Generators re-run in canonical order** (gen_site → build_site → build_availability →
+  normalize_nav; tools/build.py for root companion pages, index.html and README.md restored to the
+  canonical generation). All validators re-run green afterwards.
+
+Sources verified live this session: nfl.com division standings, league standings, Week-10 injury
+report (7 chunks), Myles Garrett player page, Week-10 byes (via committed transcription of the
+official schedule page). Reproducibility and gates: see the A2 row above.
+
 ## PR / merge
 
 - Pull request: [#13](https://github.com/kanlerxz87-cyber/NFL1/pull/13) — `arena/7600ed8b-nfl1` → `main`.
 - Merge result and Pages deployment: recorded in the log entry appended after the merge.
+- Pull request (session `b6e68100-nfl1`, task A3): recorded in the log entry appended after the merge.
+
+
 
 ---
 

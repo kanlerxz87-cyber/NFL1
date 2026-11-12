@@ -18,7 +18,7 @@
     <p class="eyebrow">Evidence-first dashboard</p>
     <h1>Suggestions &amp; Paths</h1>
     <p class="standfirst">Twelve improvements, five decision records, and a review process for choosing before implementing.</p>
-    <p class="timestamp">Data built 2026-11-12T22:44:47+00:00 · every value links to its source</p>
+    <p class="timestamp">Data built 2026-11-12T22:49:45+00:00 · every value links to its source</p>
   </section>
   
 <section class="panel">
@@ -202,8 +202,34 @@
     <div><dt>Effort</dt><dd>Low - the regeneration step is added to collect-data.yml; the staleness guard is a small check.</dd></div>
     <div><dt>Risk</dt><dd>Low if the generators stay deterministic.</dd></div>
     <div><dt>Depends on</dt><dd>Nothing - the generators already exist.</dd></div>
-    <div><dt>Evidence it is right</dt><dd>collect-data.yml &#x27;Regenerate site HTML from refreshed data&#x27; step; index.html stamp now equals dashboard.json generated_at (2026-11-12T18:53:41).</dd></div>
-    <div><dt>Recommendation</dt><dd>Adopt. The regeneration step is implemented this session; the staleness guard is the remaining piece.</dd></div>
+    <div><dt>Evidence it is right</dt><dd>collect-data.yml &#x27;Re-render the published pages from the refreshed data&#x27; step (session 3d5c5e2d); index.html stamp equals dashboard.json generated_at.</dd></div>
+    <div><dt>Recommendation</dt><dd>Adopt. The regeneration step is implemented; the staleness guard is the remaining piece.</dd></div>
+  </dl>
+</article>
+<article class="card">
+  <div class="card-head"><h3><span class="id">SA-01</span> Guard shared output paths across the four site generators</h3><span class="badge neutral">Proposed - queued (audit)</span></div>
+  <p class="problem"><strong>Problem:</strong> pipeline/gen_site.py, scripts/verified/build_site.py and tools/build.py all write shared paths (index.html, pages/lines.html, README.md). This audit had to restore the canonical index.html and README.md after a routine tools/build.py run regenerated them from a different generation.</p>
+  <p><strong>Change:</strong> Split tools/build.py&#x27;s output paths (or add an output-path ownership guard) so no generator can silently overwrite another generation&#x27;s page.</p>
+  <dl class="facts">
+    <div><dt>Impact</dt><dd>High - removes a whole class of silent-site regressions.</dd></div>
+    <div><dt>Effort</dt><dd>Low</dd></div>
+    <div><dt>Risk</dt><dd>Low</dd></div>
+    <div><dt>Depends on</dt><dd>None</dd></div>
+    <div><dt>Evidence it is right</dt><dd>docs/audit-b6e68100.md §3 (structural observation).</dd></div>
+    <div><dt>Recommendation</dt><dd>Adopt - small change, prevents a recurring hazard.</dd></div>
+  </dl>
+</article>
+<article class="card">
+  <div class="card-head"><h3><span class="id">SA-02</span> Add a pre-slate injury-report refresh before kickoffs</h3><span class="badge neutral">Proposed - queued (audit)</span></div>
+  <p class="problem"><strong>Problem:</strong> The official injury page drifts within hours: between the 18:53 and 22:30 UTC scrapes on 2026-11-12 the Week-10 report changed four IND statuses and added three rows league-wide. A morning snapshot can be stale by kickoff.</p>
+  <p><strong>Change:</strong> Add one scheduled run of pipeline/scrape_injuries.py + build_all.py shortly before the first Sunday kick-off (e.g. 16:30 UTC) alongside the existing 11:17 daily refresh.</p>
+  <dl class="facts">
+    <div><dt>Impact</dt><dd>High - keeps game-day availability reads aligned with the official report.</dd></div>
+    <div><dt>Effort</dt><dd>Low (one cron line in collect-data.yml)</dd></div>
+    <div><dt>Risk</dt><dd>Low - the scraper already records its source and falls back cleanly.</dd></div>
+    <div><dt>Depends on</dt><dd>collect-data workflow (present)</dd></div>
+    <div><dt>Evidence it is right</dt><dd>docs/audit-b6e68100.md §A-F04; flag A-F04; official source https://www.nfl.com/injuries/.</dd></div>
+    <div><dt>Recommendation</dt><dd>Adopt before the next Sunday slate.</dd></div>
   </dl>
 </article></div>
 </section>
