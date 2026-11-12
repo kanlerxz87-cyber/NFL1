@@ -819,9 +819,17 @@ def availability(ctx):
             "source": source_url,
         })
 
+    fixture_teams = set()
+    for g in ctx["fixtures"].to_dict("records"):
+        fixture_teams.add(g["home"])
+        fixture_teams.add(g["away"])
+    reported = {r["team"] for r in recs if r.get("team")}
+    clubs_missing = sorted(fixture_teams - reported)
+
     payload = {
         "generated_at": L.now(),
         "week": week,
+        "clubs_without_report": clubs_missing,
         "source": {"label": source_label, "url": source_url, "warning": source_note,
                    "official_counts": official.get("counts") if official else None,
                    "official_status": official.get("status") if official else None},

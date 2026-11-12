@@ -602,12 +602,21 @@ def injuries_page(avail, dash):
     w_tbl = table(["Position", "Weight"], w_rows)
 
     source = a.get("source", {})
+    missing = a.get("clubs_without_report") or []
+    if missing:
+        banner_extra = (f'<p class="alert">No injury report was present for '
+                        f'{esc(", ".join(missing))} at scrape time. Those clubs are listed with zero '
+                        f'rows — this is a gap in the published report, not an assumption of health. '
+                        f'{src(source.get("url"), "check the official page")}</p>')
+    else:
+        banner_extra = ""
     banner = ""
     if source.get("warning"):
         banner = f'<p class="alert">{esc(source["warning"])} {src(source.get("url"), "official page")}</p>'
     else:
         banner = (f'<p class="okline">Source: {esc(source.get("label",""))} — '
                   f'{src(source.get("url"), "nfl.com/injuries")}</p>')
+    banner += banner_extra
 
     body = f"""
 <section class="kpis">
