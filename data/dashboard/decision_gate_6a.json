@@ -1,24 +1,160 @@
 {
-  "checked_on": "2026-11-12",
-  "note": "Added by session 6a232e79-nfl1. These items are proposals and questions. Nothing here has been implemented. Each suggestion needs a human choice before any change is made to the data, the model or the live pages.",
-  "questions": [
-    {"id": "QA-01", "question": "Is there an official source for depth charts for all 32 clubs?", "known": "nfl.com depth-chart URL for Washington returns 404 (re-checked 2026-11-12). The chiefs.com page is titled 'Unofficial Depth Chart'.", "unknown": "Whether any club or league page publishes a labelled official depth chart for the other 29 clubs.", "discovery": "Read each of the 32 club depth-chart pages; record the page title, the label, the 'as of' date, and the status code.", "blocks": "Any league-wide 2nd, 3rd and 4th-string tracking (brief item: injuries and depth).", "source_url": "https://www.nfl.com/teams/washington-commanders/depth-chart", "status": "Open"},
-    {"id": "QA-02", "question": "When does the official injury page publish game statuses (Out, Doubtful, Questionable) relative to kickoff?", "known": "On the Week 10 page, 6 of 279 rows carry a game status; the rest have practice status only. Official news (Darnold, ruled out) runs ahead of the page's game-status column.", "unknown": "The publication schedule for game statuses in Week 10, and whether news and page agree at kickoff.", "discovery": "Snapshot the page Wednesday, Thursday, Friday and Sunday morning; record each change with its time.", "blocks": "Any availability feature that depends on the game designation.", "source_url": "https://www.nfl.com/injuries/", "status": "Open"},
-    {"id": "QA-03", "question": "Why did the scrape drop 3 rows and misread 4 Colts practice statuses?", "known": "Scrape 276 rows; official page 279 rows (verified this session).", "unknown": "The parser step that loses those rows.", "discovery": "Re-run the scraper on the saved HTML; compare per-club row counts with the page's own counts.", "blocks": "Trusting the scraped table for any club.", "source_url": "https://www.nfl.com/injuries/", "status": "Open"},
-    {"id": "QA-04", "question": "Is there a licensed source for closing or current betting lines that can be cited?", "known": "No official nfl.com betting lines were found on the pages read. The repo's line data is a third-party mirror (F02).", "unknown": "Whether a licensed or published feed exists, and under what terms it may be cited.", "discovery": "Check the terms of each candidate feed; record whether lines are closing or current, and the timestamp.", "blocks": "Every market-based value on the lines and strategy pages (left blank until resolved).", "source_url": "https://nflreadr.nflverse.com/articles/dictionary_schedules.html", "status": "Open"},
-    {"id": "QA-05", "question": "How many tests make up the Benjamini-Hochberg family, and does the family include the 12 strategies only?", "known": "The published q-values reproduce from the 12 published p-values (standard BH).", "unknown": "Whether other rules were tested and not published (researcher degrees of freedom).", "discovery": "Log every rule tested, including rejected ones, with a date. Publish the count next to the q-values.", "blocks": "Any claim that a strategy beats chance after correction.", "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/strategies.json", "status": "Open"},
-    {"id": "QA-06", "question": "Do own lines beat the market out of sample with a margin that is larger than the noise?", "known": "2026 test (136 games): model spread MAE 9.98 vs market 9.49; model weight negative (model output, unverified).", "unknown": "Performance over a larger out-of-sample window with a pre-stated margin.", "discovery": "Pre-register the margin and the window; add seasons only as they complete; report the interval of the difference.", "blocks": "Any 'edge' or 'actionable' label on the lines page.", "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/lines.json", "status": "Open"},
-    {"id": "QA-07", "question": "Are the 12 strategies distinct bets?", "known": "S04 and S06 share 207 games with correlation 1.0 (model output, unverified).", "unknown": "Correlation on the full bet series, with zeros for games not bet.", "discovery": "Build a bet matrix over all games and compute pairwise correlation on it.", "blocks": "Gate G8 (diversification) and any portfolio claim.", "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/strategies.json", "status": "Open"},
-    {"id": "QA-08", "question": "Which official source states the rules on who may be listed as injured, and on when a player is removed from the report (for example, injured reserve)?", "known": "The official page lists current-week rows; news on the same page reports injured-reserve moves (e.g., Lamar Jackson IR, Malik Willis IR).", "unknown": "The league's stated reporting rule for players placed on IR during the week.", "discovery": "Read the official injury-report policy and the game-day report rules; record the section and date.", "blocks": "Interpreting 'No Injuries Reported' for BAL and LAC.", "source_url": "https://www.nfl.com/injuries/", "status": "Open"}
-  ],
-  "suggestions": [
-    {"id": "S-6A-01", "area": "Data quality", "title": "Fix the injury scrape (3 missing rows, 4 misread Colts statuses) and add a per-club row-count check against the page.", "decision_impact": "Makes the injury table match the official page.", "recommended_path": "Adopt", "status": "Awaiting choice", "source_url": "https://www.nfl.com/injuries/"},
-    {"id": "S-6A-02", "area": "Labels", "title": "Replace 'Starters flagged 103 — official game status' with two labelled numbers: official game designations (6) and practice-only starters (112).", "decision_impact": "Stops an official-sounding label from covering a model assumption.", "recommended_path": "Adopt", "status": "Awaiting choice", "source_url": "https://www.nfl.com/injuries/"},
-    {"id": "S-6A-03", "area": "Depth charts", "title": "Choose a depth-chart source for all 32 clubs: (a) scrape each club's depth-chart page and keep its label; (b) use a third-party weekly depth release as a cross-check only; (c) keep three clubs and say so.", "decision_impact": "Decides whether 2nd, 3rd and 4th-string tracking is possible at all.", "recommended_path": "Decide: (a) with a label check, then (b) as a cross-check", "status": "Awaiting choice", "source_url": "https://www.chiefs.com/team/depth-chart"},
-    {"id": "S-6A-04", "area": "Own lines", "title": "Remove the 'actionable' label until the model beats the market out of sample by a pre-stated margin.", "decision_impact": "Stops a negative validation result being shown as a signal.", "recommended_path": "Adopt", "status": "Awaiting choice", "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/lines.json"},
-    {"id": "S-6A-05", "area": "Strategies", "title": "Merge duplicate strategies (S04 and S06) and compute diversification on the full bet series.", "decision_impact": "Removes a false source of diversification.", "recommended_path": "Adopt", "status": "Awaiting choice", "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/strategies.json"},
-    {"id": "S-6A-06", "area": "Strategies", "title": "Require G5 (significance) for any status above FAIL, or rename WATCH.", "decision_impact": "Stops WATCH implying significance when G5 fails.", "recommended_path": "Decide between requiring G5 and renaming the status", "status": "Awaiting choice", "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/strategies.json"},
-    {"id": "S-6A-07", "area": "Structure", "title": "Choose one canonical site and archive the other generations under legacy/ with a notice (RV-17, RV-21).", "decision_impact": "Removes conflicting pages; changes existing links.", "recommended_path": "Decide", "status": "Awaiting choice", "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/tools/build.py"},
-    {"id": "S-6A-08", "area": "Injuries", "title": "Add a news-to-status reconciliation: when official news reports an absence, flag the matching injury row until the page catches up.", "decision_impact": "Closes the gap seen with Darnold (news ahead of the page).", "recommended_path": "Adopt", "status": "Awaiting choice", "source_url": "https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again"}
-  ]
+ "checked_on": "2026-11-12",
+ "note": "Added by session 6a232e79-nfl1. These items are proposals and questions. Nothing here has been implemented. Each suggestion needs a human choice before any change is made to the data, the model or the live pages.",
+ "questions": [
+  {
+   "id": "QA-01",
+   "question": "Is there an official source for depth charts for all 32 clubs?",
+   "known": "nfl.com depth-chart URL for Washington returns 404 (re-checked 2026-11-12). The chiefs.com page is titled 'Unofficial Depth Chart'.",
+   "unknown": "Whether any club or league page publishes a labelled official depth chart for the other 29 clubs.",
+   "discovery": "Read each of the 32 club depth-chart pages; record the page title, the label, the 'as of' date, and the status code.",
+   "blocks": "Any league-wide 2nd, 3rd and 4th-string tracking (brief item: injuries and depth).",
+   "source_url": "https://www.nfl.com/teams/washington-commanders/depth-chart",
+   "status": "Open"
+  },
+  {
+   "id": "QA-02",
+   "question": "When does the official injury page publish game statuses (Out, Doubtful, Questionable) relative to kickoff?",
+   "known": "On the Week 10 page, 6 of 279 rows carry a game status; the rest have practice status only. Official news (Darnold, ruled out) runs ahead of the page's game-status column.",
+   "unknown": "The publication schedule for game statuses in Week 10, and whether news and page agree at kickoff.",
+   "discovery": "Snapshot the page Wednesday, Thursday, Friday and Sunday morning; record each change with its time.",
+   "blocks": "Any availability feature that depends on the game designation.",
+   "source_url": "https://www.nfl.com/injuries/",
+   "status": "Open"
+  },
+  {
+   "id": "QA-03",
+   "question": "Which change on main fixed the injury scrape, and does it stay at 279 rows on each refresh?",
+   "known": "On main d4c1eec, data/model/official_injuries.json holds 279 rows, all matching the official transcription (checked this session). The base commit held 276.",
+   "unknown": "Which commit made the change, and whether later refreshes keep the 279-row count.",
+   "discovery": "git log -p origin/main -- data/model/official_injuries.json; re-run tools/verify_official_injuries.py after each refresh.",
+   "blocks": "Relying on the scrape without a per-refresh check.",
+   "source_url": "https://www.nfl.com/injuries/",
+   "status": "Open"
+  },
+  {
+   "id": "QA-04",
+   "question": "Is there a licensed source for closing or current betting lines that can be cited?",
+   "known": "No official nfl.com betting lines were found on the pages read. The repo's line data is a third-party mirror (F02).",
+   "unknown": "Whether a licensed or published feed exists, and under what terms it may be cited.",
+   "discovery": "Check the terms of each candidate feed; record whether lines are closing or current, and the timestamp.",
+   "blocks": "Every market-based value on the lines and strategy pages (left blank until resolved).",
+   "source_url": "https://nflreadr.nflverse.com/articles/dictionary_schedules.html",
+   "status": "Open"
+  },
+  {
+   "id": "QA-05",
+   "question": "How many tests make up the Benjamini-Hochberg family, and does the family include the 12 strategies only?",
+   "known": "The published q-values reproduce from the 12 published p-values (standard BH).",
+   "unknown": "Whether other rules were tested and not published (researcher degrees of freedom).",
+   "discovery": "Log every rule tested, including rejected ones, with a date. Publish the count next to the q-values.",
+   "blocks": "Any claim that a strategy beats chance after correction.",
+   "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/strategies.json",
+   "status": "Open"
+  },
+  {
+   "id": "QA-06",
+   "question": "Do own lines beat the market out of sample with a margin that is larger than the noise?",
+   "known": "2026 test (136 games): model spread MAE 9.98 vs market 9.49; model weight negative (model output, unverified).",
+   "unknown": "Performance over a larger out-of-sample window with a pre-stated margin.",
+   "discovery": "Pre-register the margin and the window; add seasons only as they complete; report the interval of the difference.",
+   "blocks": "Any 'edge' or 'actionable' label on the lines page.",
+   "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/lines.json",
+   "status": "Open"
+  },
+  {
+   "id": "QA-07",
+   "question": "Are the 12 strategies distinct bets?",
+   "known": "S04 and S06 share 207 games with correlation 1.0 (model output, unverified).",
+   "unknown": "Correlation on the full bet series, with zeros for games not bet.",
+   "discovery": "Build a bet matrix over all games and compute pairwise correlation on it.",
+   "blocks": "Gate G8 (diversification) and any portfolio claim.",
+   "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/strategies.json",
+   "status": "Open"
+  },
+  {
+   "id": "QA-08",
+   "question": "Which official source states the rules on who may be listed as injured, and on when a player is removed from the report (for example, injured reserve)?",
+   "known": "The official page lists current-week rows; news on the same page reports injured-reserve moves (e.g., Lamar Jackson IR, Malik Willis IR).",
+   "unknown": "The league's stated reporting rule for players placed on IR during the week.",
+   "discovery": "Read the official injury-report policy and the game-day report rules; record the section and date.",
+   "blocks": "Interpreting 'No Injuries Reported' for BAL and LAC.",
+   "source_url": "https://www.nfl.com/injuries/",
+   "status": "Open"
+  }
+ ],
+ "suggestions": [
+  {
+   "id": "S-6A-01",
+   "area": "Data quality",
+   "title": "Keep the injury-scrape check on every refresh (279 of 279 on main) and add a per-club row-count check against the page.",
+   "decision_impact": "Stops a silent regression like the one at the base commit (3 missing rows, 4 practice differences).",
+   "recommended_path": "Adopt",
+   "status": "Awaiting choice",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "S-6A-02",
+   "area": "Labels",
+   "title": "Replace 'Starters flagged 103 — official game status' with two labelled numbers: official game designations (6) and practice-only starters (112).",
+   "decision_impact": "Stops an official-sounding label from covering a model assumption.",
+   "recommended_path": "Adopt",
+   "status": "Awaiting choice",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "S-6A-03",
+   "area": "Depth charts",
+   "title": "Choose a depth-chart source for all 32 clubs: (a) scrape each club's depth-chart page and keep its label; (b) use a third-party weekly depth release as a cross-check only; (c) keep three clubs and say so.",
+   "decision_impact": "Decides whether 2nd, 3rd and 4th-string tracking is possible at all.",
+   "recommended_path": "Decide: (a) with a label check, then (b) as a cross-check",
+   "status": "Awaiting choice",
+   "source_url": "https://www.chiefs.com/team/depth-chart"
+  },
+  {
+   "id": "S-6A-04",
+   "area": "Own lines",
+   "title": "Remove the 'actionable' label until the model beats the market out of sample by a pre-stated margin.",
+   "decision_impact": "Stops a negative validation result being shown as a signal.",
+   "recommended_path": "Adopt",
+   "status": "Awaiting choice",
+   "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/lines.json"
+  },
+  {
+   "id": "S-6A-05",
+   "area": "Strategies",
+   "title": "Merge duplicate strategies (S04 and S06) and compute diversification on the full bet series.",
+   "decision_impact": "Removes a false source of diversification.",
+   "recommended_path": "Adopt",
+   "status": "Awaiting choice",
+   "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/strategies.json"
+  },
+  {
+   "id": "S-6A-06",
+   "area": "Strategies",
+   "title": "Require G5 (significance) for any status above FAIL, or rename WATCH.",
+   "decision_impact": "Stops WATCH implying significance when G5 fails.",
+   "recommended_path": "Decide between requiring G5 and renaming the status",
+   "status": "Awaiting choice",
+   "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/strategies.json"
+  },
+  {
+   "id": "S-6A-07",
+   "area": "Structure",
+   "title": "Choose one canonical site and archive the other generations under legacy/ with a notice (RV-17, RV-21).",
+   "decision_impact": "Removes conflicting pages; changes existing links.",
+   "recommended_path": "Decide",
+   "status": "Awaiting choice",
+   "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/tools/build.py"
+  },
+  {
+   "id": "S-6A-08",
+   "area": "Injuries",
+   "title": "Add a news-to-status reconciliation: when official news reports an absence, flag the matching injury row until the page catches up.",
+   "decision_impact": "Closes the gap seen with Darnold (news ahead of the page).",
+   "recommended_path": "Adopt",
+   "status": "Awaiting choice",
+   "source_url": "https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again"
+  }
+ ]
 }

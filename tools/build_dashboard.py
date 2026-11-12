@@ -268,7 +268,7 @@ def page_index(d):
   <p><strong>What this is.</strong> A checked view of the NFL Decision Lab repository. Every value
   here is either confirmed against an official NFL page this session or left blank and flagged.
   It shows the model's own results as unverified findings, not as facts.</p>
-  <p><strong>Headline.</strong> The Week 10 schedule matches nfl.com (14 of 14). The official injury report (279 rows) matches the committed scrape on 272 rows; 7 differ. The depth data covers 3 of 32 clubs.
+  <p><strong>Headline.</strong> The Week 10 schedule matches nfl.com (14 of 14). The official injury report (279 rows) matches the committed scrape on every row on main; the earlier scrape had 7 differences, now resolved (RV-02). The depth data covers 3 of 32 clubs.
   No model strategy passes all gates after recomputation, and the model's own lines do not beat the market in the 2026 test window
   (unverified model output). Nothing here is ready for a betting decision.</p>
 </section>
@@ -475,7 +475,7 @@ def page_depth(d):
 {legend()}
 <div class="callout warn">
 <p><strong>Only 3 of 32 clubs have any depth data in the repo (SF, KC, GB).</strong> The brief asks for 2nd, 3rd and 4th-string
-tracking for every club. The model's availability table uses depth rank 1 for all 113 starters, so no backup is identified
+tracking for every club. The model's availability table uses depth rank 1 for all {d["avail"]["counts"]["starters_impacted"]} starters, so no backup is identified
 by the model (RV-04, RV-05). Backup columns are therefore not shown.</p>
 </div>
 <h2>Club by club</h2>
@@ -653,7 +653,7 @@ def page_repo(d):
         ("dashboard/", "This clean dashboard (session 6a232e79)", "tools/build_dashboard.py", "New, self-contained", "dashboard"),
         ("data/", "Committed data: model outputs, verified transcriptions, questions, flags", "pipeline/ and tools/", "Mixed sources (RV-21)", "data"),
         ("data/model/", "Pipeline outputs (lines, strategies, availability, injuries)", "pipeline/build_all.py", "Errors log stale (RV-18)", "data/model"),
-        ("pipeline/", "Collector, scraper, model builder", "-", "Scraper drops 3 rows (RV-02)", "pipeline"),
+        ("pipeline/", "Collector, scraper, model builder", "-", "Scrape matches 279 of 279 on main (RV-02 resolved)", "pipeline"),
         ("analysis/", "Analysis engine from earlier session", "-", "Not reviewed line by line", "analysis"),
         ("tools/", "Generators and verifiers", "-", "Several write the same files", "tools"),
         ("scripts/", "Verification scripts and builders", "-", "Not reviewed line by line", "scripts"),
@@ -695,8 +695,8 @@ The data the model produces (lines, strategy performance, prop lines) cannot be 
 <ul>
 <li><strong>Week 10 schedule.</strong> All 14 games, days, kickoff times and networks match the nfl.com schedule page
 (<a href="{NFL_SCHED}">nfl.com/schedules/2026/REG10</a>). The four bye teams are CHI, DEN, PHI and TB.</li>
-<li><strong>Injury report.</strong> 279 official rows on <a href="{NFL_INJ}">nfl.com/injuries</a>. 272 match the committed scrape on every field.
-3 rows are missing and 4 Colts practice statuses differ. The committed scrape is not reliable for IND and JAX.</li>
+<li><strong>Injury report.</strong> 279 official rows on <a href="{NFL_INJ}">nfl.com/injuries</a>. The committed scrape on main matches all 279 on every field.
+At the base commit it was missing 3 rows and had 4 practice differences; that is resolved (RV-02). The mirrored feed still covers only 276 of 279 rows by the model's own check (RV-29).</li>
 <li><strong>Official game designations.</strong> Six rows only (Out: Lucas Patrick, Colson Yankoff, Ben Brown, Carlton Davis III, TreVeyon Henderson; Questionable: Malik Harrison).</li>
 <li><strong>Strategy gates.</strong> All 12 gate results reproduce from the committed JSON, so the model is consistent with its own rules.</li>
 <li><strong>Standings correlations.</strong> All six reproduce from the 32 standings rows.</li>
@@ -716,8 +716,8 @@ The data the model produces (lines, strategy performance, prop lines) cannot be 
 </ul>
 <h2>Irregularities that need a decision</h2>
 <ul>
-<li>The headline "103 starters flagged, official game status" is not supported. The JSON says 113, and 112 of them are practice-only (RV-01).</li>
-<li>The injury scrape must be fixed before any injury number is used (RV-02).</li>
+<li>The headline "103 starters flagged, official game status" is not supported. The committed data says {d["avail"]["counts"]["starters_impacted"]} starters are impacted, and {d["avail"]["counts"]["rows_practice_only_starters"]} of them are practice-only (RV-01).</li>
+<li>The injury scrape matched the page on main, but the check must run on every refresh (RV-02). The Overview's NE row is stale (RV-28).</li>
 <li>Two generators overwrite the root index.html, and five site generations overlap (RV-17, RV-21).</li>
 <li>The Overview says "actionable" for a line the model's own validation does not support (RV-11).</li>
 </ul>

@@ -4,87 +4,17 @@
  "method": "Hand transcription of all 7 fetched chunks of the official page (data/dashboard/official_injuries_2026_w10.psv), compared field by field with data/model/official_injuries.json. Club codes AZ->ARI and LAR->LA mapped as in the pipeline.",
  "counts": {
   "official_rows": 279,
-  "scraped_rows": 276,
-  "matched_all_fields": 272,
-  "field_differences": 4,
-  "missing_from_scrape": 3,
+  "scraped_rows": 279,
+  "matched_all_fields": 279,
+  "field_differences": 0,
+  "missing_from_scrape": 0,
   "extra_in_scrape": 0,
   "clubs_on_official_page": 26,
   "clubs_in_scrape": 26
  },
- "missing_from_scrape": [
-  {
-   "team": "JAX",
-   "player": "BJ Green II",
-   "position": "DE",
-   "practice": "Full Participation in Practice",
-   "game": null,
-   "official_line": 96
-  },
-  {
-   "team": "IND",
-   "player": "CJ Allen",
-   "position": "LB",
-   "practice": "Full Participation in Practice",
-   "game": null,
-   "official_line": 144
-  },
-  {
-   "team": "IND",
-   "player": "Grover Stewart",
-   "position": "DT",
-   "practice": "Did Not Participate In Practice",
-   "game": null,
-   "official_line": 150
-  }
- ],
+ "missing_from_scrape": [],
  "extra_in_scrape": [],
- "field_differences": [
-  {
-   "team": "IND",
-   "player": "A.J. Haulcy",
-   "diffs": {
-    "practice": {
-     "official": "Full Participation in Practice",
-     "scraped": "Did Not Participate In Practice"
-    }
-   },
-   "official_line": 147
-  },
-  {
-   "team": "IND",
-   "player": "Jonathan Taylor",
-   "diffs": {
-    "practice": {
-     "official": "Full Participation in Practice",
-     "scraped": "Limited Participation in Practice"
-    }
-   },
-   "official_line": 151
-  },
-  {
-   "team": "IND",
-   "player": "Jerry Tillery",
-   "diffs": {
-    "practice": {
-     "official": "Did Not Participate In Practice",
-     "scraped": "Limited Participation in Practice"
-    }
-   },
-   "official_line": 152
-  },
-  {
-   "team": "IND",
-   "player": "Charvarius Ward",
-   "diffs": {
-    "practice": {
-     "official": "Full Participation in Practice",
-     "scraped": "Did Not Participate In Practice"
-    }
-   },
-   "official_line": 155
-  }
- ],
+ "field_differences": [],
  "club_counts": [
   {
    "team": "ARI",
@@ -149,14 +79,14 @@
   {
    "team": "IND",
    "official_rows": 13,
-   "scraped_rows": 11,
-   "match": false
+   "scraped_rows": 13,
+   "match": true
   },
   {
    "team": "JAX",
    "official_rows": 11,
-   "scraped_rows": 10,
-   "match": false
+   "scraped_rows": 11,
+   "match": true
   },
   {
    "team": "KC",
@@ -696,6 +626,11 @@
   },
   {
    "team": "JAX",
+   "player": "BJ Green II",
+   "official_line": 96
+  },
+  {
+   "team": "JAX",
    "player": "Robert Hainsey",
    "official_line": 97
   },
@@ -931,6 +866,11 @@
   },
   {
    "team": "IND",
+   "player": "CJ Allen",
+   "official_line": 144
+  },
+  {
+   "team": "IND",
    "player": "Jaylon Carlies",
    "official_line": 145
   },
@@ -938,6 +878,11 @@
    "team": "IND",
    "player": "Akeem Davis-Gaither",
    "official_line": 146
+  },
+  {
+   "team": "IND",
+   "player": "A.J. Haulcy",
+   "official_line": 147
   },
   {
    "team": "IND",
@@ -951,6 +896,21 @@
   },
   {
    "team": "IND",
+   "player": "Grover Stewart",
+   "official_line": 150
+  },
+  {
+   "team": "IND",
+   "player": "Jonathan Taylor",
+   "official_line": 151
+  },
+  {
+   "team": "IND",
+   "player": "Jerry Tillery",
+   "official_line": 152
+  },
+  {
+   "team": "IND",
    "player": "Jalen Travis",
    "official_line": 153
   },
@@ -958,6 +918,11 @@
    "team": "IND",
    "player": "Justin Walley",
    "official_line": 154
+  },
+  {
+   "team": "IND",
+   "player": "Charvarius Ward",
+   "official_line": 155
   },
   {
    "team": "CAR",

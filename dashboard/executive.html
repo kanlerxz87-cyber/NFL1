@@ -23,8 +23,8 @@ The data the model produces (lines, strategy performance, prop lines) cannot be 
 <ul>
 <li><strong>Week 10 schedule.</strong> All 14 games, days, kickoff times and networks match the nfl.com schedule page
 (<a href="https://www.nfl.com/schedules/2026/REG10">nfl.com/schedules/2026/REG10</a>). The four bye teams are CHI, DEN, PHI and TB.</li>
-<li><strong>Injury report.</strong> 279 official rows on <a href="https://www.nfl.com/injuries/">nfl.com/injuries</a>. 272 match the committed scrape on every field.
-3 rows are missing and 4 Colts practice statuses differ. The committed scrape is not reliable for IND and JAX.</li>
+<li><strong>Injury report.</strong> 279 official rows on <a href="https://www.nfl.com/injuries/">nfl.com/injuries</a>. The committed scrape on main matches all 279 on every field.
+At the base commit it was missing 3 rows and had 4 practice differences; that is resolved (RV-02). The mirrored feed still covers only 276 of 279 rows by the model's own check (RV-29).</li>
 <li><strong>Official game designations.</strong> Six rows only (Out: Lucas Patrick, Colson Yankoff, Ben Brown, Carlton Davis III, TreVeyon Henderson; Questionable: Malik Harrison).</li>
 <li><strong>Strategy gates.</strong> All 12 gate results reproduce from the committed JSON, so the model is consistent with its own rules.</li>
 <li><strong>Standings correlations.</strong> All six reproduce from the 32 standings rows.</li>
@@ -44,8 +44,8 @@ The data the model produces (lines, strategy performance, prop lines) cannot be 
 </ul>
 <h2>Irregularities that need a decision</h2>
 <ul>
-<li>The headline "103 starters flagged, official game status" is not supported. The JSON says 113, and 112 of them are practice-only (RV-01).</li>
-<li>The injury scrape must be fixed before any injury number is used (RV-02).</li>
+<li>The headline "103 starters flagged, official game status" is not supported. The committed data says 111 starters are impacted, and 110 of them are practice-only (RV-01).</li>
+<li>The injury scrape matched the page on main, but the check must run on every refresh (RV-02). The Overview's NE row is stale (RV-28).</li>
 <li>Two generators overwrite the root index.html, and five site generations overlap (RV-17, RV-21).</li>
 <li>The Overview says "actionable" for a line the model's own validation does not support (RV-11).</li>
 </ul>
