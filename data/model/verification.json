@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-12T04:54:04+00:00",
+ "generated_at": "2026-11-12T04:57:28+00:00",
  "checks": [
   {
    "name": "2026 standings (W-L-T, points for/against)",
@@ -2326,8 +2326,8 @@
    "name": "Scraped official report vs companion injury CSV (data/injuries.csv)",
    "source": "https://www.nfl.com/injuries/",
    "rows_checked": 20,
-   "rows_matched": 0,
-   "mismatches": 20,
+   "rows_matched": 20,
+   "mismatches": 0,
    "detail": [
     {
      "team": "WAS",
@@ -2336,7 +2336,7 @@
      "injury": null,
      "practice": "Full Participation in Practice",
      "game": null,
-     "matched": false,
+     "matched": true,
      "feed": {
       "team": "WAS",
       "player": "John Bates",
@@ -2346,12 +2346,7 @@
       "game": null,
       "player_url": "https://www.nfl.com/players/john-bates/"
      },
-     "diffs": {
-      "practice": {
-       "companion": null,
-       "scraped": "Full Participation in Practice"
-      }
-     }
+     "diffs": null
     },
     {
      "team": "WAS",
@@ -2360,7 +2355,7 @@
      "injury": null,
      "practice": "Did Not Participate In Practice",
      "game": null,
-     "matched": false,
+     "matched": true,
      "feed": {
       "team": "WAS",
       "player": "Treylon Burks",
@@ -2370,12 +2365,7 @@
       "game": null,
       "player_url": "https://www.nfl.com/players/treylon-burks/"
      },
-     "diffs": {
-      "practice": {
-       "companion": null,
-       "scraped": "Did Not Participate In Practice"
-      }
-     }
+     "diffs": null
     },
     {
      "team": "WAS",
@@ -2384,7 +2374,7 @@
      "injury": null,
      "practice": "Full Participation in Practice",
      "game": null,
-     "matched": false,
+     "matched": true,
      "feed": {
       "team": "WAS",
       "player": "Jayden Daniels",
@@ -2394,12 +2384,7 @@
       "game": null,
       "player_url": "https://www.nfl.com/players/jayden-daniels/"
      },
-     "diffs": {
-      "practice": {
-       "companion": null,
-       "scraped": "Full Participation in Practice"
-      }
-     }
+     "diffs": null
     },
     {
      "team": "WAS",
@@ -2408,7 +2393,7 @@
      "injury": null,
      "practice": "Full Participation in Practice",
      "game": null,
-     "matched": false,
+     "matched": true,
      "feed": {
       "team": "WAS",
       "player": "Matt Gulbin",
@@ -2418,12 +2403,7 @@
       "game": null,
       "player_url": "https://www.nfl.com/players/matt-gulbin/"
      },
-     "diffs": {
-      "practice": {
-       "companion": null,
-       "scraped": "Full Participation in Practice"
-      }
-     }
+     "diffs": null
     },
     {
      "team": "WAS",
@@ -2432,7 +2412,7 @@
      "injury": null,
      "practice": "Full Participation in Practice",
      "game": null,
-     "matched": false,
+     "matched": true,
      "feed": {
       "team": "WAS",
       "player": "Chig Okonkwo",
@@ -2442,12 +2422,7 @@
       "game": null,
       "player_url": "https://www.nfl.com/players/chigoziem-okonkwo/"
      },
-     "diffs": {
-      "practice": {
-       "companion": null,
-       "scraped": "Full Participation in Practice"
-      }
-     }
+     "diffs": null
     },
     {
      "team": "WAS",
@@ -2456,7 +2431,7 @@
      "injury": "Concussion",
      "practice": "Did Not Participate In Practice",
      "game": "Out",
-     "matched": false,
+     "matched": true,
      "feed": {
       "team": "WAS",
       "player": "Lucas Patrick",
@@ -2466,16 +2441,7 @@
       "game": "Out",
       "player_url": "https://www.nfl.com/players/lucas-patrick/"
      },
-     "diffs": {
-      "practice": {
-       "companion": null,
-       "scraped": "Did Not Participate In Practice"
-      },
-      "game": {
-       "companion": null,
-       "scraped": "Out"
-      }
-     }
+     "diffs": null
     },
     {
      "team": "WAS",
@@ -2484,7 +2450,7 @@
      "injury": null,
      "practice": "Limited Participation in Practice",
      "game": null,
-     "matched": false,
+     "matched": true,
      "feed": {
       "team": "WAS",
       "player": "Amik Robertson",
@@ -2494,12 +2460,7 @@
       "game": null,
       "player_url": "https://www.nfl.com/players/amik-robertson/"
      },
-     "diffs": {
-      "practice": {
-       "companion": null,
-       "scraped": "Limited Participation in Practice"
-      }
-     }
+     "diffs": null
     },
     {
      "team": "WAS",
@@ -2508,7 +2469,7 @@
      "injury": null,
      "practice": "Full Participation in Practice",
      "game": null,
-     "matched": false,
+     "matched": true,
      "feed": {
       "team": "WAS",
       "player": "Shy Tuttle",
@@ -2518,12 +2479,7 @@
       "game": null,
       "player_url": "https://www.nfl.com/players/shy-tuttle/"
      },
-     "diffs": {
-      "practice": {
-       "companion": null,
-       "scraped": "Full Participation in Practice"
-      }
-     }
+     "diffs": null
     },
     {
      "team": "WAS",
@@ -2532,7 +2488,7 @@
      "injury": "Knee",
      "practice": "Did Not Participate In Practice",
      "game": "Out",
-     "matched": false,
+     "matched": true,
      "feed": {
       "team": "WAS",
       "player": "Colson Yankoff",
@@ -2542,16 +2498,7 @@
       "game": "Out",
       "player_url": "https://www.nfl.com/players/colson-yankoff/"
      },
-     "diffs": {
-      "practice": {
-       "companion": null,
-       "scraped": "Did Not Participate In Practice"
-      },
-      "game": {
-       "companion": null,
-       "scraped": "Out"
-      }
-     }
+     "diffs": null
     },
     {
      "team": "NYG",
@@ -2560,7 +2507,7 @@
      "injury": null,
      "practice": "Full Participation in Practice",
      "game": null,
-     "matched": false,
+     "matched": true,
      "feed": {
       "team": "NYG",
       "player": "Abdul Carter",
@@ -2570,12 +2517,7 @@
       "game": null,
       "player_url": "https://www.nfl.com/players/abdul-carter/"
      },
-     "diffs": {
-      "practice": {
-       "companion": null,
-       "scraped": "Full Participation in Practice"
-      }
-     }
+     "diffs": null
     },
     {
      "team": "NYG",
@@ -2584,7 +2526,7 @@
      "injury": null,
      "practice": "Full Participation in Practice",
      "game": null,
-     "matched": false,
+     "matched": true,
      "feed": {
       "team": "NYG",
       "player": "Jermaine Eluemunor",
@@ -2594,12 +2536,7 @@
       "game": null,
       "player_url": "https://www.nfl.com/players/jermaine-eluemunor/"
      },
-     "diffs": {
-      "practice": {
-       "companion": null,
-       "scraped": "Full Participation in Practice"
-      }
-     }
+     "diffs": null
     },
     {
      "team": "NYG",
@@ -2608,7 +2545,7 @@
      "injury": "Groin",
      "practice": "Limited Participation in Practice",
      "game": "Questionable",
-     "matched": false,
+     "matched": true,
      "feed": {
       "team": "NYG",
       "player": "Malik Harrison",
@@ -2618,16 +2555,7 @@
       "game": "Questionable",
       "player_url": "https://www.nfl.com/players/malik-harrison/"
      },
-     "diffs": {
-      "practice": {
-       "companion": null,
-       "scraped": "Limited Participation in Practice"
-      },
-      "game": {
-       "companion": null,
-       "scraped": "Questionable"
-      }
-     }
+     "diffs": null
     },
     {
      "team": "NYG",
@@ -2636,7 +2564,7 @@
      "injury": null,
      "practice": "Full Participation in Practice",
      "game": null,
-     "matched": false,
+     "matched": true,
      "feed": {
       "team": "NYG",
       "player": "Colton Hood",
@@ -2646,12 +2574,7 @@
       "game": null,
       "player_url": "https://www.nfl.com/players/colton-hood/"
      },
-     "diffs": {
-      "practice": {
-       "companion": null,
-       "scraped": "Full Participation in Practice"
-      }
-     }
+     "diffs": null
     },
     {
      "team": "NYG",
@@ -2660,7 +2583,7 @@
      "injury": null,
      "practice": "Full Participation in Practice",
      "game": null,
-     "matched": false,
+     "matched": true,
      "feed": {
       "team": "NYG",
       "player": "Theo Johnson",
@@ -2670,12 +2593,7 @@
       "game": null,
       "player_url": "https://www.nfl.com/players/theo-johnson/"
      },
-     "diffs": {
-      "practice": {
-       "companion": null,
-       "scraped": "Full Participation in Practice"
-      }
-     }
+     "diffs": null
     },
     {
      "team": "NYG",
@@ -2684,7 +2602,7 @@
      "injury": null,
      "practice": "Full Participation in Practice",
      "game": null,
-     "matched": false,
+     "matched": true,
      "feed": {
       "team": "NYG",
       "player": "Charlie Jones",
@@ -2694,12 +2612,7 @@
       "game": null,
       "player_url": "https://www.nfl.com/players/charlie-jones-3/"
      },
-     "diffs": {
-      "practice": {
-       "companion": null,
-       "scraped": "Full Participation in Practice"
-      }
-     }
+     "diffs": null
     },
     {
      "team": "NYG",
@@ -2708,7 +2621,7 @@
      "injury": null,
      "practice": "Full Participation in Practice",
      "game": null,
-     "matched": false,
+     "matched": true,
      "feed": {
       "team": "NYG",
       "player": "J.J. McCarthy",
@@ -2718,12 +2631,7 @@
       "game": null,
       "player_url": "https://www.nfl.com/players/j-j-mccarthy/"
      },
-     "diffs": {
-      "practice": {
-       "companion": null,
-       "scraped": "Full Participation in Practice"
-      }
-     }
+     "diffs": null
     },
     {
      "team": "NYG",
@@ -2732,7 +2640,7 @@
      "injury": null,
      "practice": "Full Participation in Practice",
      "game": null,
-     "matched": false,
+     "matched": true,
      "feed": {
       "team": "NYG",
       "player": "Darnell Mooney",
@@ -2742,12 +2650,7 @@
       "game": null,
       "player_url": "https://www.nfl.com/players/darnell-mooney/"
      },
-     "diffs": {
-      "practice": {
-       "companion": null,
-       "scraped": "Full Participation in Practice"
-      }
-     }
+     "diffs": null
     },
     {
      "team": "NYG",
@@ -2756,7 +2659,7 @@
      "injury": null,
      "practice": "Full Participation in Practice",
      "game": null,
-     "matched": false,
+     "matched": true,
      "feed": {
       "team": "NYG",
       "player": "Malik Nabers",
@@ -2766,12 +2669,7 @@
       "game": null,
       "player_url": "https://www.nfl.com/players/malik-nabers/"
      },
-     "diffs": {
-      "practice": {
-       "companion": null,
-       "scraped": "Full Participation in Practice"
-      }
-     }
+     "diffs": null
     },
     {
      "team": "NYG",
@@ -2780,7 +2678,7 @@
      "injury": null,
      "practice": "Full Participation in Practice",
      "game": null,
-     "matched": false,
+     "matched": true,
      "feed": {
       "team": "NYG",
       "player": "Cam Skattebo",
@@ -2790,12 +2688,7 @@
       "game": null,
       "player_url": "https://www.nfl.com/players/cam-skattebo/"
      },
-     "diffs": {
-      "practice": {
-       "companion": null,
-       "scraped": "Full Participation in Practice"
-      }
-     }
+     "diffs": null
     },
     {
      "team": "NYG",
@@ -2804,7 +2697,7 @@
      "injury": null,
      "practice": "Full Participation in Practice",
      "game": null,
-     "matched": false,
+     "matched": true,
      "feed": {
       "team": "NYG",
       "player": "Andrew Thomas",
@@ -2814,12 +2707,7 @@
       "game": null,
       "player_url": "https://www.nfl.com/players/andrew-thomas/"
      },
-     "diffs": {
-      "practice": {
-       "companion": null,
-       "scraped": "Full Participation in Practice"
-      }
-     }
+     "diffs": null
     }
    ]
   }
@@ -2830,98 +2718,6 @@
    "area": "mirrored injury feed",
    "issue": "The mirrored feed has 20 of 254 official week 10 rows (3 status disagreements).",
    "examples": [],
-   "source": "https://www.nfl.com/injuries/"
-  },
-  {
-   "id": "V5",
-   "area": "injury cross-check",
-   "issue": "20 of 20 companion injury rows disagree with the scrape",
-   "examples": [
-    {
-     "team": "WAS",
-     "player": "John Bates",
-     "diffs": {
-      "practice": {
-       "companion": null,
-       "scraped": "Full Participation in Practice"
-      }
-     }
-    },
-    {
-     "team": "WAS",
-     "player": "Treylon Burks",
-     "diffs": {
-      "practice": {
-       "companion": null,
-       "scraped": "Did Not Participate In Practice"
-      }
-     }
-    },
-    {
-     "team": "WAS",
-     "player": "Jayden Daniels",
-     "diffs": {
-      "practice": {
-       "companion": null,
-       "scraped": "Full Participation in Practice"
-      }
-     }
-    },
-    {
-     "team": "WAS",
-     "player": "Matt Gulbin",
-     "diffs": {
-      "practice": {
-       "companion": null,
-       "scraped": "Full Participation in Practice"
-      }
-     }
-    },
-    {
-     "team": "WAS",
-     "player": "Chig Okonkwo",
-     "diffs": {
-      "practice": {
-       "companion": null,
-       "scraped": "Full Participation in Practice"
-      }
-     }
-    },
-    {
-     "team": "WAS",
-     "player": "Lucas Patrick",
-     "diffs": {
-      "practice": {
-       "companion": null,
-       "scraped": "Did Not Participate In Practice"
-      },
-      "game": {
-       "companion": null,
-       "scraped": "Out"
-      }
-     }
-    },
-    {
-     "team": "WAS",
-     "player": "Amik Robertson",
-     "diffs": {
-      "practice": {
-       "companion": null,
-       "scraped": "Limited Participation in Practice"
-      }
-     }
-    },
-    {
-     "team": "WAS",
-     "player": "Shy Tuttle",
-     "diffs": {
-      "practice": {
-       "companion": null,
-       "scraped": "Full Participation in Practice"
-      }
-     }
-    }
-   ],
    "source": "https://www.nfl.com/injuries/"
   }
  ],

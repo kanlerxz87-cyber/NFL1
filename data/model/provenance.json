@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-12T04:53:55+00:00",
+ "generated_at": "2026-11-12T04:57:15+00:00",
  "source_repo": "https://github.com/nflverse/nflverse-data",
  "source_note": "nflverse parses the NFL's GSIS feed, the official weekly injury report and the official depth charts. Files are pinned by URL + sha256 below. nfl.com is the primary publisher but blocks automated clients, so nfl.com pages are cited as the official entry point and spot-checked separately (see verification.json).",
  "files": [
@@ -12,7 +12,7 @@
    "description": "Game results, closing spread/total/moneylines, rest days, roof, surface, officials",
    "bytes": 2189959,
    "status": "ok",
-   "fetched_at": "2026-11-12T04:53:51+00:00",
+   "fetched_at": "2026-11-12T04:57:11+00:00",
    "sha256": "14e1e589fd4ffc806ba8b6ddc6fd39e4f26c6b8ed4476c23679080bd45645992"
   },
   {
@@ -24,7 +24,7 @@
    "description": "Club directory: abbreviation, full name, conference, division, colors, logo",
    "bytes": 18919,
    "status": "ok",
-   "fetched_at": "2026-11-12T04:53:51+00:00",
+   "fetched_at": "2026-11-12T04:57:12+00:00",
    "sha256": "4eab559fcf89cb4eaf61cb63a88abc47b01b6c9049187c59f3efe95888c3d048"
   },
   {
@@ -36,7 +36,7 @@
    "description": "Player master (GSIS id, position, debut year, draft, latest team)",
    "bytes": 7306971,
    "status": "ok",
-   "fetched_at": "2026-11-12T04:53:52+00:00",
+   "fetched_at": "2026-11-12T04:57:12+00:00",
    "sha256": "da58c285c9013d65bb517d687095e0970f3a4bb148bb81f6ed2aec2bf398b72e"
   },
   {
@@ -48,7 +48,7 @@
    "description": "Official weekly injury report, 2026 season (game status + practice status)",
    "bytes": 324443,
    "status": "ok",
-   "fetched_at": "2026-11-12T04:53:52+00:00",
+   "fetched_at": "2026-11-12T04:57:12+00:00",
    "sha256": "7fab15bfe864d80e97b66186ea727329c84466aff1246a88dd39954fe471603c"
   },
   {
@@ -60,7 +60,7 @@
    "description": "Official weekly injury report, 2025 season",
    "bytes": 696006,
    "status": "ok",
-   "fetched_at": "2026-11-12T04:53:52+00:00",
+   "fetched_at": "2026-11-12T04:57:13+00:00",
    "sha256": "873ca1606dd575bd01152508a243ef6b3a0f8f97b90b707217e62ee8c7ceb735"
   },
   {
@@ -72,7 +72,7 @@
    "description": "Weekly depth charts, 2026 (starter=1, backup=2, ...)",
    "bytes": 3475983,
    "status": "ok",
-   "fetched_at": "2026-11-12T04:53:52+00:00",
+   "fetched_at": "2026-11-12T04:57:13+00:00",
    "sha256": "82b047a2700367869c1a5facdb002d2976b2d469c442c3ff49d1f9cb2c106dbf"
   },
   {
@@ -84,7 +84,7 @@
    "description": "Weekly roster status (Active / Injured Reserve / Practice Squad) 2026",
    "bytes": 821492,
    "status": "ok",
-   "fetched_at": "2026-11-12T04:53:53+00:00",
+   "fetched_at": "2026-11-12T04:57:13+00:00",
    "sha256": "ad5aaeefbae79632fa53f8f96e18ef6f7a696d93fd3ce78270ae74195b1528da"
   },
   {
@@ -96,7 +96,7 @@
    "description": "Offensive/defensive snap counts by player and week, 2026",
    "bytes": 134114,
    "status": "ok",
-   "fetched_at": "2026-11-12T04:53:53+00:00",
+   "fetched_at": "2026-11-12T04:57:13+00:00",
    "sha256": "78c013d97bde36622c435c878cacf48e1c8b3f58d02967c9e0ed2fc884f449e9"
   },
   {
@@ -108,7 +108,7 @@
    "description": "Player weekly stat lines, 2026 (passing/rushing/receiving)",
    "bytes": 497664,
    "status": "ok",
-   "fetched_at": "2026-11-12T04:53:53+00:00",
+   "fetched_at": "2026-11-12T04:57:14+00:00",
    "sha256": "3f533a869af00d8ed734011e7d4a2e2c8bd6140a23d6e04e0f814f057b8c255b"
   },
   {
@@ -120,7 +120,7 @@
    "description": "Play-by-play with EPA/success, 2026 season to date",
    "bytes": 10122154,
    "status": "ok",
-   "fetched_at": "2026-11-12T04:53:53+00:00",
+   "fetched_at": "2026-11-12T04:57:14+00:00",
    "sha256": "8211d9a24b0e162732ccb048b8d416354b54e968a4b6fde1cde87059f4ae67ed"
   },
   {
@@ -132,7 +132,7 @@
    "description": "Play-by-play with EPA/success, 2025 season (model training/validation)",
    "bytes": 20337029,
    "status": "ok",
-   "fetched_at": "2026-11-12T04:53:54+00:00",
+   "fetched_at": "2026-11-12T04:57:14+00:00",
    "sha256": "c6ecedd6d678cc37ed316b23ef84ee1ec6abb69c514bb11868a7ebd5a367df29"
   },
   {
@@ -144,7 +144,7 @@
    "description": "Play-by-play with EPA/success, 2024 season (model training/validation)",
    "bytes": 20597560,
    "status": "ok",
-   "fetched_at": "2026-11-12T04:53:55+00:00",
+   "fetched_at": "2026-11-12T04:57:15+00:00",
    "sha256": "3fd2896bc0b911b615142d2f1fabae54a4bbba5ab7b73b28187b118ef8af6a3b"
   }
  ]
