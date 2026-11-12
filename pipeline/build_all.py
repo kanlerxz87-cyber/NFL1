@@ -89,7 +89,12 @@ def league_snapshot():
         w=("win", "sum"), l=("loss", "sum"), t=("tie", "sum"),
         pf=("pf", "sum"), pa=("pa", "sum")).reset_index()
     st["gp"] = st["w"] + st["l"] + st["t"]
-    st["pct"] = ((st["w"] + 0.5 * st["t"]) / st["gp"]).round(3)
+    # Winning percentage rounded to 3 decimals with ROUND-HALF-UP, matching the convention
+    # published on nfl.com (e.g. WAS 2-5-1 shows 0.313, not Python banker's-rounding 0.312).
+    # Integer arithmetic so the result never depends on float representation:
+    # pct = (1000*w + 500*t)/gp, rounded half-up = (2*num + gp) // (2*gp) / 1000.
+    num = 1000 * st["w"] + 500 * st["t"]
+    st["pct"] = (2 * num + st["gp"]) // (2 * st["gp"]) / 1000.0
     st["diff"] = (st["pf"] - st["pa"]).astype(int)
     st = st.sort_values(["pct", "diff"], ascending=False)
 
@@ -313,8 +318,11 @@ def ratings_and_lines(ctx):
             "market_home_line": mkt_sp, "market_total": mkt_tot,
             "edge_home_line": edge_sp, "edge_total": edge_tot,
             "home_line_band95": [round(pm - 1.96 * sd_m, 1), round(pm + 1.96 * sd_m, 1)],
-            "status": ("actionable" if (edge_sp is not None and abs(edge_sp) >= 3) else
-                       "watch" if (edge_sp is not None and abs(edge_sp) >= 2) else "no-edge"),
+            # Size of the model-market gap only. No gate has been applied here, so none of
+            # these labels is a validated signal (see strategies.json and the blend test).
+            "status": ("gap-large-unvalidated" if (edge_sp is not None and abs(edge_sp) >= 3) else
+                       "gap-unvalidated" if (edge_sp is not None and abs(edge_sp) >= 2) else
+                       "small-difference"),
             "home_rating": {k: round(v, 4) for k, v in rh.items()},
             "away_rating": {k: round(v, 4) for k, v in ra.items()},
             "source_games": "https://www.nfl.com/schedules/2026/REG" + str(week),

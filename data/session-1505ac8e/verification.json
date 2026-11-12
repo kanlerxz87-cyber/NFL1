@@ -1,0 +1,370 @@
+{
+ "generated_at": "2026-11-12T23:03:36+00:00",
+ "retrieved": "2026-11-12",
+ "purpose": "Line-by-line verification of everything this session publishes, against the official pages it came from.",
+ "summary": {
+  "total": 24,
+  "pass": 18,
+  "flag": 6,
+  "fail": 0,
+  "cells_compared": 4905
+ },
+ "checks": [
+  {
+   "id": "V01",
+   "name": "Standings row count",
+   "against": "official league standings",
+   "result": "PASS",
+   "detail": "32 clubs transcribed from the official league standings page",
+   "sources": [
+    [
+     "nfl.com standings",
+     "https://www.nfl.com/standings/league/2026/REG"
+    ]
+   ],
+   "cells": 32
+  },
+  {
+   "id": "V02",
+   "name": "Winning percentage identity",
+   "against": "PCT = (W + 0.5*T) / (W+L+T), rounded half-up to 3 dp",
+   "result": "PASS",
+   "detail": "all 32 clubs satisfy the winning-percentage identity",
+   "sources": [
+    [
+     "nfl.com standings",
+     "https://www.nfl.com/standings/league/2026/REG"
+    ]
+   ],
+   "cells": 32
+  },
+  {
+   "id": "V03",
+   "name": "Net points identity",
+   "against": "NET = PF - PA",
+   "result": "PASS",
+   "detail": "all 32 clubs satisfy the net-points identity",
+   "sources": [
+    [
+     "nfl.com standings",
+     "https://www.nfl.com/standings/league/2026/REG"
+    ]
+   ],
+   "cells": 32
+  },
+  {
+   "id": "V04",
+   "name": "Home plus road equals overall record",
+   "against": "HOME + ROAD = W-L-T",
+   "result": "PASS",
+   "detail": "all 32 clubs satisfy home plus road equals the overall record",
+   "sources": [
+    [
+     "nfl.com standings",
+     "https://www.nfl.com/standings/league/2026/REG"
+    ]
+   ],
+   "cells": 32
+  },
+  {
+   "id": "V05",
+   "name": "Conference plus non-conference equals games played",
+   "against": "CONF + NON-CONF = W+L+T (conference includes division)",
+   "result": "PASS",
+   "detail": "all 32 clubs satisfy conference plus non-conference equals games played",
+   "sources": [
+    [
+     "nfl.com standings",
+     "https://www.nfl.com/standings/league/2026/REG"
+    ]
+   ],
+   "cells": 32
+  },
+  {
+   "id": "V06",
+   "name": "Division record sits inside conference record",
+   "against": "DIV <= CONF",
+   "result": "PASS",
+   "detail": "all 32 clubs satisfy division within conference",
+   "sources": [
+    [
+     "nfl.com standings",
+     "https://www.nfl.com/standings/league/2026/REG"
+    ]
+   ],
+   "cells": 32
+  },
+  {
+   "id": "V07",
+   "name": "Division and conference percentages",
+   "against": "DIV_PCT = (W + 0.5*T)/division games; CONF_PCT likewise",
+   "result": "PASS",
+   "detail": "all 32 clubs: DIV_PCT and CONF_PCT both recompute correctly",
+   "sources": [
+    [
+     "nfl.com standings",
+     "https://www.nfl.com/standings/league/2026/REG"
+    ]
+   ],
+   "cells": 64
+  },
+  {
+   "id": "V08",
+   "name": "League balance",
+   "against": "the league must score exactly what it concedes",
+   "result": "PASS",
+   "detail": "W 135, L 135, T 2, PF 6246, PA 6246, 136 games played. Points for equals points against, as it must.",
+   "sources": [
+    [
+     "nfl.com standings",
+     "https://www.nfl.com/standings/league/2026/REG"
+    ]
+   ],
+   "cells": 5
+  },
+  {
+   "id": "V09",
+   "name": "Standings recomputed from game results",
+   "against": "136 completed games read from the official schedule pages",
+   "result": "PASS",
+   "detail": "all 32 clubs x 5 fields = 160 cells match; 136 games recomputed",
+   "sources": [
+    [
+     "nfl.com game results",
+     "https://www.nfl.com/schedules/2026/by-week/week-1"
+    ],
+    [
+     "nfl.com standings",
+     "https://www.nfl.com/standings/league/2026/REG"
+    ]
+   ],
+   "cells": 160
+  },
+  {
+   "id": "V10",
+   "name": "Cross-check: session 25aa7696 standings transcription",
+   "against": "data/verified/standings_2026.csv",
+   "result": "PASS",
+   "detail": "32 clubs x 5 fields = 160 cells match. No aliasing needed; this file already uses the nfl.com codes.",
+   "sources": [
+    [
+     "nfl.com standings",
+     "https://www.nfl.com/standings/league/2026/REG"
+    ]
+   ],
+   "cells": 160
+  },
+  {
+   "id": "V11",
+   "name": "Cross-check: session 533256e1 standings CSV",
+   "against": "data/standings.csv",
+   "result": "PASS",
+   "detail": "32 clubs x 5 fields = 160 cells match. LAR aliased to LA.",
+   "sources": [
+    [
+     "nfl.com standings",
+     "https://www.nfl.com/standings/league/2026/REG"
+    ]
+   ],
+   "cells": 160
+  },
+  {
+   "id": "V12",
+   "name": "Cross-check: session 7600ed8b model snapshot",
+   "against": "data/model/snapshot.json",
+   "result": "PASS",
+   "detail": "32 clubs x 5 fields = 160 cells match. ARI aliased to AZ and LA is already the nfl.com code.",
+   "sources": [
+    [
+     "nfl.com standings",
+     "https://www.nfl.com/standings/league/2026/REG"
+    ]
+   ],
+   "cells": 160
+  },
+  {
+   "id": "V13",
+   "name": "Week 10 slate integrity",
+   "against": "official Week 10 schedule",
+   "result": "PASS",
+   "detail": "14 games, 28 clubs playing, 4 byes (CHI, DEN, PHI, TB), no overlap, all 32 clubs covered",
+   "sources": [
+    [
+     "nfl.com schedule",
+     "https://www.nfl.com/schedules/2026/week10"
+    ]
+   ],
+   "cells": 32
+  },
+  {
+   "id": "V14",
+   "name": "Schedule page records match the standings page",
+   "against": "the records nfl.com prints beside each Week 10 fixture",
+   "result": "PASS",
+   "detail": "all 28 club records printed on the schedule page match the official standings",
+   "sources": [
+    [
+     "nfl.com schedule",
+     "https://www.nfl.com/schedules/2026/week10"
+    ],
+    [
+     "nfl.com standings",
+     "https://www.nfl.com/standings/league/2026/REG"
+    ]
+   ],
+   "cells": 28
+  },
+  {
+   "id": "V15",
+   "name": "Injury report completeness",
+   "against": "official Week 10 injury report",
+   "result": "FLAG",
+   "detail": "279 rows: 279 with a practice status, 6 with a game status, 6 with a body part. The 6 rows with a game status are the same 6 rows with a body part.",
+   "sources": [
+    [
+     "nfl.com injuries",
+     "https://www.nfl.com/injuries/"
+    ]
+   ],
+   "cells": 279
+  },
+  {
+   "id": "V16",
+   "name": "Committed injury snapshot vs the live page",
+   "against": "data/verified/injury_report_2026_week10.tsv",
+   "result": "FLAG",
+   "detail": "committed snapshot 254 rows, live page 279 rows, drift +25. The committed file is a snapshot, not a feed.",
+   "sources": [
+    [
+     "nfl.com injuries",
+     "https://www.nfl.com/injuries/"
+    ]
+   ],
+   "cells": 279
+  },
+  {
+   "id": "V17",
+   "name": "Depth chart coverage",
+   "against": "the 32 official club sites",
+   "result": "FLAG",
+   "detail": "31 of 32 club depth charts collected; 934 position rows, 1990 player slots. By string: 1th 932, 2th 728, 3th 243, 4th 61, 5th 15, 6th 11.",
+   "sources": [
+    [
+     "chiefs.com depth chart",
+     "https://www.chiefs.com/team/depth-chart"
+    ],
+    [
+     "nfl.com depth chart (404)",
+     "https://www.nfl.com/teams/kansas-city-chiefs/depth-chart"
+    ]
+   ],
+   "cells": 1990
+  },
+  {
+   "id": "V18",
+   "name": "Injury report vs club depth chart reconciliation",
+   "against": "official injury report and official club depth charts",
+   "result": "FLAG",
+   "detail": "203 of 279 injury rows match a player on that club's own depth chart; 76 do not. Two official sources disagree about club membership. Only the 203 that agree are scored.",
+   "sources": [
+    [
+     "nfl.com injuries",
+     "https://www.nfl.com/injuries/"
+    ],
+    [
+     "chiefs.com depth chart",
+     "https://www.chiefs.com/team/depth-chart"
+    ]
+   ],
+   "cells": 279
+  },
+  {
+   "id": "V19",
+   "name": "nfl.com publishes no depth chart",
+   "against": "nfl.com",
+   "result": "PASS",
+   "detail": "nfl.com/teams/<club>/depth-chart returns a soft 404 ('404 - Flag on the Play.'). Re-verified 2026-11-12. An earlier session recorded this as a blocking gap; the club sites close it.",
+   "sources": [
+    [
+     "nfl.com depth chart (404)",
+     "https://www.nfl.com/teams/kansas-city-chiefs/depth-chart"
+    ]
+   ],
+   "cells": 1
+  },
+  {
+   "id": "V20",
+   "name": "Earlier published league-balance figures",
+   "against": "the figures published by session a2cea255",
+   "result": "FLAG",
+   "detail": "Earlier published figures: W = L = 134, T = 4, PF = PA = 6,267 (session a2cea255). Live official page and the recomputed game results both give W = L = 135, T = 2, PF = PA = 6246. The earlier figures no longer reproduce.",
+   "sources": [
+    [
+     "nfl.com standings",
+     "https://www.nfl.com/standings/league/2026/REG"
+    ],
+    [
+     "nfl.com game results",
+     "https://www.nfl.com/schedules/2026/by-week/week-1"
+    ]
+   ],
+   "cells": 5
+  },
+  {
+   "id": "V21",
+   "name": "The three 'nfl.com contradicts itself' cells",
+   "against": "the flags published by session a2cea255",
+   "result": "FLAG",
+   "detail": "WAS non_conf, IND div and PHI div were published as cells where nfl.com contradicts its own arithmetic. All three recompute correctly on this retrieval, so the flags no longer reproduce. Either the page was corrected or the earlier transcription was wrong; both remain possible.",
+   "sources": [
+    [
+     "nfl.com standings",
+     "https://www.nfl.com/standings/league/2026/REG"
+    ]
+   ],
+   "cells": 9
+  },
+  {
+   "id": "V22",
+   "name": "Every data row carries a source link",
+   "against": "the generated site in lab/",
+   "result": "PASS",
+   "detail": "719 data rows checked across 16 pages; every one carries a link to an official or cited source",
+   "sources": [
+    [
+     "this repository",
+     "https://github.com/kanlerxz87-cyber/NFL1"
+    ]
+   ],
+   "cells": 719
+  },
+  {
+   "id": "V23",
+   "name": "Unconfirmed values are labelled, not left bare",
+   "against": "the generated site in lab/",
+   "result": "PASS",
+   "detail": "no bare empty cells: unknown values render as a labelled blank span",
+   "sources": [
+    [
+     "this repository",
+     "https://github.com/kanlerxz87-cyber/NFL1"
+    ]
+   ],
+   "cells": 0
+  },
+  {
+   "id": "V24",
+   "name": "Internal links resolve",
+   "against": "the generated site in lab/",
+   "result": "PASS",
+   "detail": "383 internal links checked across 16 pages; none broken",
+   "sources": [
+    [
+     "this repository",
+     "https://github.com/kanlerxz87-cyber/NFL1"
+    ]
+   ],
+   "cells": 383
+  }
+ ]
+}

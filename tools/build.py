@@ -1368,6 +1368,13 @@ The complete registry of %d official sources, with links for manual review, is i
 [data/sources.json](data/sources.json) and on the [Verification page](verification.html). Sources include
 NFL.com, NFL Football Operations, official club sites, NFL Next Gen Stats, the NIST/SEMATECH e-Handbook,
 the New Jersey Division of Gaming Enforcement, GitHub Docs and the GitHub REST API.
+
+## Independent verification sub-site
+
+An independent, hand-transcribed audit of the official nfl.com pages (34-check harness, provenance and
+gate engines, 103 tests) is published at [verified-lab/](verified-lab/). It runs no scraper and uses no
+third-party aggregator, so it can disagree with the mirrored-feed pipeline on purpose; where it does, both
+readings are kept and the disagreement is flagged on its own Flagged for Review page.
 """ % counts["sources"]
     with open(os.path.join(ROOT, "README.md"), "w", encoding="utf-8") as f:
         f.write(txt)

@@ -53,10 +53,12 @@
 <a href="pages/decisions.html">Decision register</a>
 <a href="pages/evidence.html">Evidence</a>
 <a href="pages/executive-summary.html">Executive summary</a>
+<a href="pages/executive.html">Executive</a>
 <a href="pages/flagged.html">Flagged</a>
 <a href="pages/injuries.html">Injuries</a>
 <a href="pages/lines.html">Own lines</a>
 <a href="pages/models.html">Strategy lab</a>
+<a href="pages/props.html">Props</a>
 <a href="pages/questions.html">Questions</a>
 <a href="pages/review.html">Review</a>
 <a href="pages/standings.html">Standings</a>
@@ -74,7 +76,7 @@
   <div class="main">
     <div class="topbar">
       <div class="crumb">NFL1 / <b>Suggestions &amp; Paths</b></div>
-      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">36 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">40 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
     </div>
     <main class="content" id="main">
       <div class="kicker">Governance</div>
@@ -121,8 +123,8 @@
 </tbody></table></div>
 <h2 id="suggestions">Improvement suggestions</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-suggestions" aria-label="Filter tbl-suggestions" placeholder="Filter rows…">
-<span class="count" data-count-for="tbl-suggestions">20 rows shown</span></div>
-<div class="tablewrap"><table class="data-table" id="tbl-suggestions"><caption>20 suggestions to improve decision making on this site. Effort is blank and flagged; every row links to an official source.</caption>
+<span class="count" data-count-for="tbl-suggestions">22 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-suggestions"><caption>22 suggestions to improve decision making on this site. Effort is blank and flagged; every row links to an official source.</caption>
 <thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Area</th><th scope="col" class="sortable">Suggestion</th><th scope="col" class="sortable">How it improves decision making</th><th scope="col" class="sortable">Effort / risk estimate</th><th scope="col" class="sortable">Suggested disposition</th><th scope="col" class="sortable">Official evidence</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
 <tr id="S01" data-verified="true">
 <td><code>S01</code></td>
@@ -324,6 +326,26 @@
 <td class="blank wide"></td>
 <td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S23 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
+<tr id="SA-01" data-verified="true">
+<td><code>SA-01</code></td>
+<td>Site architecture</td>
+<td class="wide">Guard shared output paths across the four site generators</td>
+<td class="wide">Prevents a routine rebuild from silently replacing the canonical landing page (this audit had to restore index.html and README.md after tools/build.py regenerated them from another generation).</td>
+<td data-value="1" class="num">Small</td>
+<td><span class="badge neutral">Review first</span></td>
+<td class="wide">docs/audit-b6e68100.md §3</td>
+<td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S23 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="SA-02" data-verified="true">
+<td><code>SA-02</code></td>
+<td>Data freshness</td>
+<td class="wide">Add a pre-slate injury-report refresh before kickoffs</td>
+<td class="wide">Keeps game-day reads aligned with the official report</td>
+<td data-value="1" class="num">Small (one extra cron in collect-data.yml)</td>
+<td><span class="badge neutral">Review first</span></td>
+<td class="wide">docs/audit-b6e68100.md §A-F04; https://www.nfl.com/injuries/</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
 </tbody></table></div>
 <h2 id="matrix">Decision matrix</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-matrix" aria-label="Filter tbl-matrix" placeholder="Filter rows…">
@@ -374,7 +396,7 @@
 <section class="panel"><h2>Review workflow</h2>
 <ol class="tight">
 <li>Read the <a href="questions.html">decision questions</a> and the <a href="flagged.html">flagged items</a>.</li>
-<li>Compare the 20 suggestions and the three paths above.</li>
+<li>Compare the 22 suggestions and the three paths above.</li>
 <li>Select a path in the Review &amp; Choose a Path box; file the prefilled issue to make the decision durable.</li>
 <li>Close the blocking questions, then — and only then — authorise implementation of individual suggestions.</li>
 </ol>
