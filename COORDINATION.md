@@ -1727,3 +1727,30 @@ Content: `pipeline/gen_site.py` dynamic counts (replaced hardcoded "Twelve sugge
 - Added D06 decision record and S13 suggestion documenting the staleness finding and fix.
 - Fixed hardcoded suggestion/decision count text in gen_site.py (PR #36).
 - Merged PRs #28 and #36 to main; both CI gates pass.
+
+## PR #40 and deployment result (session `9cb71eb8-nfl1`, follow-up)
+
+- **Pull request:** <https://github.com/kanlerxz87-cyber/NFL1/pull/40>
+  — "Research: fix the empty Pages column found by reading the live site; record PR #39 merge"
+- **Merge result:** **MERGED** at 2026-11-12T23:34:13Z, merge commit
+  `5be8e8a255d9e646badc3e20f992dfa13f9e3977`, via `gh pr merge 40 --merge`.
+- **Checks on the head commit:** `build` success, `verify` success, `verify` success.
+  The `collect` job that failed on the PR #39 head commit passed here, which confirms the
+  earlier failure was a push race rather than a defect.
+- **Checks on the merged commit `5be8e8a`:** `build` success, `deploy` success,
+  `report-build-status` success.
+- **GitHub Pages:** latest build `built`; `gh api .../pages` reports `status: built`,
+  `build_type: legacy`, `source: main / /`, `https_enforced: true`.
+- **Read as a user, twice.** The first read of
+  <https://kanlerxz87-cyber.github.io/NFL1/research/> still showed the empty Pages column.
+  The committed file on `main` was checked with `git show origin/main:research/index.html`
+  and already contained the fix, so the page was re-read with a cache-busting query string
+  (<code>?v=5be8e8a</code>) and rendered correctly. The lesson is recorded for the next
+  session: **on this repository a Pages deploy is not visible until the CDN copy is
+  bypassed, so verify a fix with a cache-buster before concluding it did not ship.**
+- **Live pages confirmed:** `research/`, `research/flagged.html` and
+  `research/leaderboard.html` (including the per-season and leave-one-season-out tables).
+- **Final state of this session's work:** 14 pages under `research/`, 336 internal links,
+  0 broken, every page carrying at least one official nfl.com source link; 7,239 games and
+  14,440 scored bets behind them; 0 of 12 strategies passing all eight gates; 10
+  irregularities published with source links and none blocking.
