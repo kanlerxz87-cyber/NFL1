@@ -80,7 +80,7 @@
       <div class="kicker">Overview</div>
       <h1>Deployment &amp; pull request</h1>
       <p class="lede">GitHub Pages configuration, the verification pipeline, and the recorded pull request, merge and deployment result.</p>
-      <div class="callout"><b>Deployment and PR record.</b> Blank values are filled by the integration session after the pull request is created, the merge succeeds and GitHub Pages reports a successful build. Until then they remain blank and flagged — no deployment claim is made without evidence.</div>
+      <div class="callout"><b>Deployment and PR record.</b> PR #12 was merged to main and GitHub Pages reported a successful build for the merge commit. Every value below was filled from the GitHub REST API or the published Pages site; no deployment claim is made without evidence.</div>
 <h2 id="record">Deployment record</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-deployment" aria-label="Filter tbl-deployment" placeholder="Filter rows…">
 <span class="count" data-count-for="tbl-deployment">7 rows shown</span></div>
@@ -107,33 +107,33 @@
 <td class="wide">GitHub Docs: Creating a GitHub Pages site</td>
 <td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S23 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="D-04" data-verified="false">
+<tr id="D-04" data-verified="true">
 <td><code>D-04</code></td>
 <td class="wide">Pull request number</td>
-<td data-value="1" class="blank wide"></td>
-<td class="wide">Created by the integration session before merge</td>
-<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><a class="badge flag" href="flagged.html">UNVERIFIED</a></td>
+<td data-value="1" class="wide">12</td>
+<td class="wide">gh pr create --base main --head arena/80731db4-nfl1; gh pr view 12</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="D-05" data-verified="false">
+<tr id="D-05" data-verified="true">
 <td><code>D-05</code></td>
 <td class="wide">Pull request URL</td>
-<td data-value="1" class="blank wide"></td>
-<td class="wide">Created by the integration session before merge</td>
-<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><a class="badge flag" href="flagged.html">UNVERIFIED</a></td>
+<td data-value="1" class="wide">https://github.com/kanlerxz87-cyber/NFL1/pull/12</td>
+<td class="wide">gh pr view 12 --json url</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="D-06" data-verified="false">
+<tr id="D-06" data-verified="true">
 <td><code>D-06</code></td>
 <td class="wide">Merge result</td>
-<td data-value="1" class="blank wide"></td>
-<td class="wide">gh pr merge with an explicit PR number</td>
-<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><a class="badge flag" href="flagged.html">UNVERIFIED</a></td>
+<td data-value="1" class="wide">MERGED 2026-11-12T05:01:26Z, commit 4904617614a1391f3fb492990877704c3f694c7d</td>
+<td class="wide">gh pr merge 12 --merge; gh pr view 12 --json state,mergedAt,mergeCommit</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="D-07" data-verified="false">
+<tr id="D-07" data-verified="true">
 <td><code>D-07</code></td>
 <td class="wide">Post-merge Pages build status</td>
-<td data-value="1" class="blank wide"></td>
-<td class="wide">GitHub Pages builds endpoint plus a live-site fetch</td>
-<td><span class="src"><a href="https://api.github.com/repos/kanlerxz87-cyber/NFL1/pages" target="_blank" rel="noopener noreferrer" title="GitHub REST API — Official platform API">S25 ↗</a></span></td><td><a class="badge flag" href="flagged.html">UNVERIFIED</a></td>
+<td data-value="1" class="wide">built (commit 4904617); Actions deploy run 43158573277 success; live site fetched and read</td>
+<td class="wide">gh api repos/kanlerxz87-cyber/NFL1/pages/builds; gh run view 43158573277; fetch of live URL</td>
+<td><span class="src"><a href="https://api.github.com/repos/kanlerxz87-cyber/NFL1/pages" target="_blank" rel="noopener noreferrer" title="GitHub REST API — Official platform API">S25 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
 </tbody></table></div>
 <h2 id="config">Publishing configuration</h2>

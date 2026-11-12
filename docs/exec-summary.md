@@ -1,6 +1,6 @@
 # Executive summary
 
-The repository began as a single-line README. This session built a 16-page, source-linked GitHub Pages dashboard from 25 official sources covering the 2026 NFL Week 10 snapshot (2026-11-12 UTC): 32 standings rows, 61 injury rows, 85 depth-chart rows, 20 official inactives rows, official bet-type statistics and official statistical methods.
+The repository began as a single-line README. This session built a 17-page, source-linked GitHub Pages dashboard from 25 official sources covering the 2026 NFL Week 10 snapshot (2026-11-12 UTC): 32 standings rows, 61 injury rows, 85 depth-chart rows, 20 official inactives rows, official bet-type statistics and official statistical methods.
 
 **Decision posture: NOT READY.** 36 flagged irregularities and multiple unverified values remain. No official source was found for NFL betting lines, vig, leg-level correlations, injury-to-performance correlations, reward values or a skill threshold; every such cell is blank and flagged. The Review & Choose a Path gate must be resolved before implementation.
 
