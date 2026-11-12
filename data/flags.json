@@ -394,5 +394,49 @@
     "action": "Logged here and in COORDINATION.md as a request to session `25aa7696`; the original artifacts remain published with their own sources.",
     "verified": true,
     "retrieved": "2026-11-12"
+  },
+  {
+    "id": "A-F01",
+    "category": "Board hygiene — FIXED 2026-11-12",
+    "description": "COORDINATION.md began with the stray text 'EAD' on line 1 — a leftover conflict-resolution artifact from an earlier merge.",
+    "impact": "FIXED by session b6e68100; removed in the claim commit. Cosmetic, but it made the board's first heading unreadable to strict parsers.",
+    "status": "resolved",
+    "src": "S23",
+    "action": "Line-1 artefact removed; board content unchanged. Source: https://github.com/kanlerxz87-cyber/NFL1/blob/main/COORDINATION.md",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "A-F02",
+    "category": "Rounding convention — FIXED in pipeline 2026-11-12",
+    "description": "data/model/snapshot.json published WAS winning percentage as 0.312 (float banker's rounding of 0.3125) while the official standings page shows 0.313. The hand-transcribed data/verified/standings_2026.csv already matched the official 0.313, and the stale 0.312 never rendered on any live page.",
+    "impact": "FIXED in pipeline/build_all.py with exact integer round-half-up arithmetic matching the official convention. The corrected snapshot lands automatically via the collect-data workflow (triggers on pipeline/ changes).",
+    "status": "resolved",
+    "src": "S01",
+    "action": "Verification source: https://www.nfl.com/standings/league/2026/reg (WAS 2-5-1 shown as 0.313, fetched 2026-11-12); audit trail in docs/audit-b6e68100.md §A2.",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "A-F03",
+    "category": "Injury-report club coverage — fully explained 2026-11-12",
+    "description": "Week-10 official injury report has 26 club tables. All six absent clubs are now explained from official sources: CHI, DEN, PHI, TB are on bye (official Week-10 schedule page); LAC and BAL print 'No Injuries Reported' on the official injury page.",
+    "impact": "Supersedes the uncertainty in F11 (absence-of-rows no longer conflates on-bye, no-injuries-reported and scrape-failure). Consumers should treat absent bye clubs as expected, not as a scrape gap.",
+    "status": "resolved",
+    "src": "S02",
+    "action": "Sources: https://www.nfl.com/schedules/2026/by-week/week-10 and https://www.nfl.com/injuries/ (both fetched 2026-11-12); audit trail in docs/audit-b6e68100.md §A-F03.",
+    "verified": true,
+    "retrieved": "2026-11-12"
+  },
+  {
+    "id": "A-F04",
+    "category": "Live-page drift — needs review",
+    "description": "The official injury page changes during the day: between the 18:53 UTC scrape (276 rows) and the 22:30 UTC scrape (279 rows), IND statuses changed (Haulcy, Taylor, Tillery, Ward) and 3 rows were added league-wide (CJ Allen, Grover Stewart on IND; BJ Green II on JAX). The scraper was verified faithful (~120 rows compared row-for-row against the live page, 0 errors).",
+    "impact": "Site injury data is a dated snapshot that can lag the official page by hours. Decision reads shortly before kickoff should re-scrape; the daily 11:17 UTC refresh alone is insufficient on game day.",
+    "status": "needs review",
+    "src": "S02",
+    "action": "Discovery suggestion logged on the Suggestions page (SA-02): add a scheduled pre-slate refresh. Source: https://www.nfl.com/injuries/ (fetched 2026-11-12); audit trail in docs/audit-b6e68100.md §A-F04.",
+    "verified": true,
+    "retrieved": "2026-11-12"
   }
 ]
