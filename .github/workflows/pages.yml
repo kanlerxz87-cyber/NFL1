@@ -1,0 +1,51 @@
+name: Deploy NFL Decision Lab to GitHub Pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check site files and local links
+        run: |
+          test -s index.html
+          test -s styles.css
+          for f in pages/evidence.html pages/models.html pages/suggestions.html pages/review.html; do test -s "$f"; done
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          class Links(HTMLParser):
+              def __init__(self): super().__init__(); self.links=[]
+              def handle_starttag(self, tag, attrs):
+                  if tag == 'a':
+                      href = dict(attrs).get('href', '')
+                      if href and not href.startswith(('https://','http://','#','mailto:')): self.links.append(href.split('#')[0])
+          for page in [Path('index.html'), *Path('pages').glob('*.html')]:
+              parser=Links(); parser.feed(page.read_text())
+              for href in parser.links:
+                  target=(page.parent / href).resolve()
+                  if not target.is_file(): raise SystemExit(f'Broken local link: {page} -> {href}')
+          print('Local HTML navigation links verified.')
+          PY
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
