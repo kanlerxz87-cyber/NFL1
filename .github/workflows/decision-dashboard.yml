@@ -41,11 +41,5 @@ jobs:
       - name: Fail if two generators claim the same output file
         run: python3 tools/check_generators.py
 
-      - name: Confirm the committed pages match a clean rebuild
-        run: |
-          if ! git diff --quiet --exit-code; then
-            echo "::error::Generated pages or data changed during the build. Commit the output of:"
-            git --no-pager diff --stat
-            exit 1
-          fi
-          echo "Committed output is reproducible from a clean build."
+      - name: Confirm a clean rebuild changes nothing but the build stamp
+        run: python3 tools/check_reproducible.py
