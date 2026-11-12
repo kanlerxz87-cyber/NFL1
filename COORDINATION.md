@@ -13,10 +13,33 @@ Sessions that have worked here:
 | `946c1684-nfl1` | `arena/946c1684-nfl1` | League reference data, environment notes (curl allow-list; `fetch_page` has full internet) | not merged (superseded) |
 | `7600ed8b-nfl1` | `arena/7600ed8b-nfl1` | Quantitative pipeline, own lines, strategy gates, injury/depth model, props, verification, final integration | PR #13 |
 | `a2cea255-nfl1` | `arena/a2cea255-nfl1` | Independent verification subsystem: hand transcription of nfl.com, 34-check harness, provenance/gates engine, 103 tests, 20-page sub-site in `verified-lab/` | PR #18 |
+| `9cb71eb8-nfl1` | `arena/9cb71eb8-nfl1` | Large-sample research build: closing-line + real price history, walk-forward own lines, scored leaderboard (single/parlay/prop-combo), correlation register, luck-removal gates, consolidated site | in progress |
 
 > Branch naming: Arena fixes each session to a single branch named `arena/<session>-nfl1`, so the
 > `session-<id>/<task>` convention in the brief cannot be followed here. Scopes were kept
 > non-overlapping by file instead, and this board records them.
+
+## Task board — session `9cb71eb8-nfl1` (ACTIVE; claims below)
+
+This session acts as the **final integration session** for the current state of the repo. All
+other session branches have merged (PRs #1-#20), so no other session owns an unclaimed task.
+File scope claimed here is **additive and non-overlapping** with every earlier session:
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| U1 | Provenance-pinned bulk history (games with closing lines **and real prices**, player-week, injuries) fetched in Actions, committed as CSV | in progress | `9cb71eb8` | `s9cb/`, `data/s9cb/`, `.github/workflows/s9cb-collect.yml` | sandbox cannot reach release-asset hosts; Actions can |
+| U2 | Walk-forward own lines (spread / total / win prob) on the full sample, with baselines | unclaimed→in progress | `9cb71eb8` | `s9cb/analysis/`, `data/s9cb/` | replaces the 136-game verdict with a large-sample one |
+| U3 | Scored strategy leaderboard: single bets, parlays, prop combos; 8 validation gates; real prices | in progress | `9cb71eb8` | `s9cb/analysis/` | |
+| U4 | Correlation register with computed values (game-level, strategy-level, prop-level) | in progress | `9cb71eb8` | `s9cb/analysis/` | fills the blanks left by earlier sessions |
+| U5 | Luck-removal protocol (binomial, bootstrap, multiple testing, holdout) | in progress | `9cb71eb8` | `s9cb/analysis/` | |
+| U6 | Injury / depth deficiency refresh joined to official nfl.com week-10 report | in progress | `9cb71eb8` | `s9cb/analysis/` | reuses `data/model/official_injuries.json` |
+| U7 | Consolidated clean site: one landing page + subpages by category | in progress | `9cb71eb8` | `lab/` (new), one nav entry in `index.html` | additive; no earlier page is deleted |
+| U8 | Line-by-line verification of every new row against an official source; blanks stay blank | in progress | `9cb71eb8` | `s9cb/verify.py`, `lab/` | |
+| U9 | PR → merge → confirm Pages deploy → record here | in progress | `9cb71eb8` | `COORDINATION.md` | |
+
+**Not touched by this session (owned by others):** `index.html` (only one additive nav entry at
+integration time), `pages/`, `docs/`, `verified-lab/`, `referee/`, `pipeline/`, `tools/`,
+`scripts/`, `analysis/`, `data/model/`, `data/verified/`.
 
 ## Task board (final state, session `7600ed8b-nfl1` integration)
 
