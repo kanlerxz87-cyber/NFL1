@@ -66,7 +66,7 @@ def num(x, nd=None):
 
 def table(cols, rows, caption=None):
     """cols: list of (label, css class). rows: list of lists of HTML strings."""
-    out = ['<div class="tablewrap"><table>']
+    out = [f'<div class="tablewrap{" wide" if len(cols) >= 9 else ""}"><table>']
     if caption:
         out.append(f"<caption>{caption}</caption>")
     out.append("<thead><tr>" + "".join(f'<th class="{c}" scope="col">{e(l)}</th>' for l, c in cols) + "</tr></thead><tbody>")
@@ -186,7 +186,7 @@ def main():
     flags = [
         ("R-01", "Unverified", "Betting lines, prices and totals, every season",
          "No official NFL page publishes historical closing lines. Every line-based number here and in other sessions' strategy tables rests on a community dataset.",
-         "All sessions using lines", "Pick one line source with capture times and licence terms, or accept that line-based results stay unverified.", GAMES, "nflverse games.csv (community data)"),
+         "All sessions using lines", "Pick one line source with capture times and licence terms, or accept that line-based results stay unverified.", GAMES, "nflverse games.csv (community data, unofficial)"),
         ("R-02", "Not audited", "Game results, seasons 1999 to 2020",
          f"Only 2021 to 2026 were compared with the official standings ({T['fields_matching']:,} of {T['fields_checked']:,} fields match). The earlier {len(T['seasons_not_audited'])} seasons were not compared.",
          "73fdd6c4", "Repeat the audit for the remaining seasons before trusting long backtests that start in 1999 or 2005.", STAND.format(2020), "NFL.com standings 2020"),
@@ -203,7 +203,7 @@ def main():
          f"Across {lines['cross_file']['spread']['games_in_both']:,} games in both files, the spread is identical in {lines['cross_file']['spread']['exact_pct']}% and the total in {lines['cross_file']['total']['exact_pct']}%. "
          "There is no single closing line. Strategy win rates move by up to "
          f"{max(abs(r['win_pct_change_points']) for r in src_rows)} points when the other file is used.",
-         "nflverse (upstream)", "Record which book and which timestamp each line comes from.", CLOSING, "nflverse closing_lines.csv (community data)"),
+         "nflverse (upstream)", "Record which book and which timestamp each line comes from.", CLOSING, "nflverse second file (unofficial)"),
         ("R-06", "Irregularity", "Every bet graded at an assumed price of -110",
          f"The dataset holds actual prices for most games since 2006. Using them changes return on investment by {min(r['difference_pct_points'] for r in price)} to "
          f"{max(r['difference_pct_points'] for r in price)} percentage points. No verdict changes.",
@@ -280,14 +280,14 @@ def main():
          "Use results from these seasons freely. Earlier seasons are not yet audited.", OK, a(STAND.format(2026), "NFL.com standings") + " · " + a("results.html", "detail")],
         ["Betting lines cannot be verified.",
          f"No official source exists. Two files from the same maintainer give the same spread in only {lines['cross_file']['spread']['exact_pct']}% of games.",
-         "Treat every line-based result as provisional until a timestamped line source is chosen.", UNV, a(GAMES, "nflverse games.csv (community data)") + " · " + a("lines.html", "detail")],
+         "Treat every line-based result as provisional until a timestamped line source is chosen.", UNV, a(GAMES, "nflverse games file (unofficial)") + " · " + a("lines.html", "detail")],
         ["No strategy has shown skill yet.",
          f"The best published record is {best[0]['strategy'].split(' ', 1)[0]} at {100 * best[1] / best[4]:.2f}% over {best[4]} graded bets. With {tried} strategies tried, a record over that many bets has to reach "
          f"{100 * best[6] / best[4]:.2f}% before luck becomes an unlikely explanation. The owners' own gates reach the same verdict.",
          "Do not stake money on any current strategy. Keep collecting graded bets.", UNV, a(blob("data/model/strategies.json", ref76), "Published leaderboard") + " · " + a("luck.html", "detail")],
         ["The closing line is the benchmark to beat, and it is hard to beat.",
          f"Across {lines['games_with_spread_and_total']:,} games the home side covered {_all(lines, 'home_cover_pct')}% and the favourite {_all(lines, 'favorite_cover_pct')}%; a bet at -110 needs {luck['breakeven_win_pct']}%.",
-         "Judge every own-line model against the closing line first. A model that is less accurate than the market has no edge.", UNV, a(GAMES, "nflverse games.csv (community data)") + " · " + a("lines.html", "detail")],
+         "Judge every own-line model against the closing line first. A model that is less accurate than the market has no edge.", UNV, a(GAMES, "nflverse games file (unofficial)") + " · " + a("lines.html", "detail")],
         ["One published correlation on the live site is wrong.",
          f"Division games are counted as {c5['published_division_games']}; the official groupings give {c5['official_grouping_division_games']}.",
          "Fix before any division-based rule is tested. Logged as a request to the owning session.", chip("bad", "Not replicated"), a(DIVS, "NFL.com division standings") + " · " + a("flagged.html#R-04", "flag R-04")],
@@ -299,7 +299,7 @@ def main():
     rows = [
         ["Results dataset against official standings", "2021 to 2026, seven fields per team", f"{T['fields_matching']:,} of {T['fields_checked']:,} fields", OK, a(STAND.format(2026), "NFL.com standings"), a("results.html", "Results audit")],
         ["Results dataset, seasons 1999 to 2020", "Not compared with official pages", "", NAUD, a(STAND.format(2020), "NFL.com standings 2020"), a("results.html", "Results audit")],
-        ["Betting lines: internal consistency", f"{lines['games_with_spread_and_total']:,} games, eight checks", f"{sum(c['violations'] for c in lines['checks'])} anomalies", UNV, a(GAMES, "nflverse games.csv (community data)"), a("lines.html", "Betting lines")],
+        ["Betting lines: internal consistency", f"{lines['games_with_spread_and_total']:,} games, eight checks", f"{sum(c['violations'] for c in lines['checks'])} anomalies", UNV, a(GAMES, "nflverse games file (unofficial)"), a("lines.html", "Betting lines")],
     ]
     for t in rmain["tables"]:
         rows.append([f"Live site table <code>{e(t['file'])}</code>", e(t["what"]), f"{t['rows_matching']} of {t['rows_checked']} rows", OK if t["rows_matching"] == t["rows_checked"] else chip("bad", "Mismatch"),
@@ -320,7 +320,7 @@ def main():
     b.append(table([("Label", ""), ("Meaning", "w"), ("Reference", "")], [
         [OK, "The published value equals the value on the linked official page, read by this session.", a(STAND.format(2026), "Example official page")],
         [chip("ok", "Replicated"), "This session recomputed the number independently and got the same result. It says the arithmetic is right, not that the input is official.", a(blob("referee/analysis"), "Scripts")],
-        [UNV, "The number is computed correctly from data that has no official source. Betting lines are always in this group.", a(GAMES, "nflverse games.csv (community data)")],
+        [UNV, "The number is computed correctly from data that has no official source. Betting lines are always in this group.", a(GAMES, "nflverse games file (unofficial)")],
         [NREP, "This session's independent calculation gives a different number.", a(DIVS, "Example: official division groups") + " · " + a("flagged.html", "Flagged for Review")],
         [NTEST, "The inputs could not be obtained in this environment. The value is neither confirmed nor contradicted.", a(blob("data/model/lines.json", ref76), "Example: model file") + " · " + a("flagged.html", "Flagged for Review")],
         [NAUD, "Not compared with an official source in this session. The cell is left blank.", a(STAND.format(2020), "Where to check")],
@@ -357,7 +357,7 @@ def main():
                          f"{d['W']}-{d['L']}-{d['T']} · {d['PF']} · {d['PA']} · {e(d['HOME'])} · {e(d['ROAD'])}",
                          OK if r["match"] else chip("bad", "Mismatch: " + ", ".join(r["mismatched_fields"])), a(r["source"], f"NFL.com {season}")])
         b.append(fold(f"{season}: {sum(r['match'] for r in rs)} of {len(rs)} teams match", table(
-            [("Team", "k"), ("Official W-L-T", "n"), ("PF", "n"), ("PA", "n"), ("Home", "n"), ("Road", "n"), ("Dataset (W-L-T · PF · PA · home · road)", "nw"), ("Status", ""), ("Official source", "nw")], rows)))
+            [("Team", "k"), ("Official W-L-T", "n"), ("PF", "n"), ("PA", "n"), ("Home", "n"), ("Road", "n"), ("Dataset rebuilt from game rows", "nw"), ("Status", ""), ("Official source", "nw")], rows)))
     b.append("<h2>Internal consistency, all 28 seasons</h2><p>These checks need no outside source: the stored margin must equal home score minus away score, the stored total must equal their sum, ties must be flagged as overtime games, and no game may appear twice.</p>")
     rows = []
     for c in audit["internal_checks"]:
@@ -381,29 +381,29 @@ def main():
                     ("warn", f"{luck['breakeven_win_pct']}%", "win rate needed to break even at -110"),
                     ("warn", f"{lines['cross_file']['spread']['exact_pct']}%", "of spreads identical in a second file from the same maintainer")]))
     b.append("<h2>Consistency checks</h2>")
-    b.append(table([("Check", "k"), ("What it tests", "w"), ("Games checked", "n"), ("Anomalies", "n"), ("Examples", "w"), ("Status", ""), ("Source", "nw")],
-                   [[e(c["check"]), e(c["description"]), num(c["checked"]), num(c["violations"]), e("; ".join(c["examples"][:2])), UNV, a(GAMES, "nflverse games.csv (community data)")] for c in lines["checks"]]))
+    b.append(table([("Check", "k w"), ("What it tests", "w"), ("Games checked", "n"), ("Anomalies", "n"), ("Examples", "m"), ("Status", ""), ("Source", "s")],
+                   [[e(c["check"]), e(c["description"]), num(c["checked"]), num(c["violations"]), e("; ".join(c["examples"][:2])), UNV, a(GAMES, "nflverse games file (unofficial)")] for c in lines["checks"]]))
     cf = lines["cross_file"]
     b.append("<h2>Same games, second file</h2><p>The maintainer ships a second closing-line file for 2006 to 2018. If closing lines were a single agreed number the two files would match. They do not.</p>")
-    b.append(table([("Field", "k"), ("Games in both files", "n"), ("Identical", "n"), ("Identical %", "n"), ("Within half a point", "n"), ("Within one point", "n"), ("Status", ""), ("Source", "nw")],
-                   [[lab, num(cf[k]["games_in_both"]), num(cf[k]["exact"]), f"{cf[k]['exact_pct']}%", num(cf[k]["within_half_point"]), num(cf[k]["within_one_point"]), UNV, a(CLOSING, "nflverse closing_lines.csv (community data)")]
+    b.append(table([("Field", "k"), ("Games in both files", "n"), ("Identical", "n"), ("Identical %", "n"), ("Within half a point", "n"), ("Within one point", "n"), ("Status", ""), ("Source", "s")],
+                   [[lab, num(cf[k]["games_in_both"]), num(cf[k]["exact"]), f"{cf[k]['exact_pct']}%", num(cf[k]["within_half_point"]), num(cf[k]["within_one_point"]), UNV, a(CLOSING, "nflverse second file (unofficial)")]
                     for k, lab in (("spread", "Point spread"), ("total", "Total"), ("home_moneyline", "Home moneyline"))]))
     b.append("<h2>Benchmarks any strategy has to beat</h2><p>Cover rates leave out pushes. The error columns are the average miss, in points, of the closing spread against the final margin and of the closing total against the final total. The last column is the miss of a naive guess that every home team wins by the era's average margin.</p>")
-    bcols = [("Period", "k"), ("Games", "n"), ("Home covers", "n"), ("Favourite covers", "n"), ("Favourite wins", "n"), ("Over", "n"), ("Spread miss", "n"), ("Total miss", "n"), ("Naive miss", "n"), ("Status", ""), ("Source", "nw")]
+    bcols = [("Period", "k"), ("Games", "n"), ("Home covers", "n"), ("Favourite covers", "n"), ("Favourite wins", "n"), ("Over", "n"), ("Spread miss", "n"), ("Total miss", "n"), ("Naive miss", "n"), ("Status", ""), ("Source", "m")]
 
     def brow(r, label):
         return [e(label), num(r["games"]), f"{r['home_cover_pct']}%", f"{r['favorite_cover_pct']}%", f"{r['favorite_win_pct']}%", f"{r['over_pct']}%",
-                num(r["spread_mae"], 2), num(r["total_mae"], 2), num(r["naive_margin_mae"], 2), UNV, a(GAMES, "nflverse games.csv (community data)")]
+                num(r["spread_mae"], 2), num(r["total_mae"], 2), num(r["naive_margin_mae"], 2), UNV, a(GAMES, "nflverse games file (unofficial)")]
     b.append(table(bcols, [brow(r, r["era"]) for r in lines["benchmarks_by_era"]]))
     b.append(fold("Each season, 1999 to 2026", table(bcols, [brow(r, str(r["season"])) for r in sorted(lines["benchmarks_by_season"], key=lambda r: -r["season"])])))
     mc = lines["moneyline_calibration"]
     b.append(f"<h2>Are the moneylines well calibrated?</h2><p>Each team's price was converted to a probability with the bookmaker margin removed, then grouped. If the market is well calibrated the two percentage columns agree. Across {mc['games']:,} games they do, closely (Brier score {mc['brier_score']}).</p>")
-    b.append(table([("Market probability of the favourite", "k"), ("Games", "n"), ("Average market probability", "n"), ("Favourite actually won", "n"), ("Status", ""), ("Source", "nw")],
-                   [[e(x["bin"]), num(x["games"]), f"{x['mean_market_probability_pct']}%", f"{x['actual_win_pct']}%", UNV, a(GAMES, "nflverse games.csv (community data)")] for x in mc["bins"]]))
+    b.append(table([("Market probability of the favourite", "k"), ("Games", "n"), ("Average market probability", "n"), ("Favourite actually won", "n"), ("Status", ""), ("Source", "m")],
+                   [[e(x["bin"]), num(x["games"]), f"{x['mean_market_probability_pct']}%", f"{x['actual_win_pct']}%", UNV, a(GAMES, "nflverse games file (unofficial)")] for x in mc["bins"]]))
     b.append("<h2>Which seasons have which fields</h2>")
-    b.append(fold("Coverage by season", table([("Season", "k"), ("Games played", "n"), ("Spread", "n"), ("Total", "n"), ("Moneylines", "n"), ("Spread prices", "n"), ("Total prices", "n"), ("Status", ""), ("Source", "nw")],
+    b.append(fold("Coverage by season", table([("Season", "k"), ("Games played", "n"), ("Spread", "n"), ("Total", "n"), ("Moneylines", "n"), ("Spread prices", "n"), ("Total prices", "n"), ("Status", ""), ("Source", "m")],
                                               [[str(c["season"]), num(c["played"]), num(c["spread_line"]), num(c["total_line"]), num(c["home_moneyline"]), num(c["home_spread_odds"]), num(c["over_odds"]), UNV,
-                                                a(GAMES, "nflverse games.csv (community data)")] for c in lines["coverage"]])))
+                                                a(GAMES, "nflverse games file (unofficial)")] for c in lines["coverage"]])))
     page("lines.html", "Betting lines", "\n".join(b), as_of)
 
     # ================================================================================================
@@ -435,7 +435,7 @@ def main():
         [("Game", "k"), ("Date", "nw"), ("Transcribed (away-home)", "n"), ("Dataset", "n"), ("Status", ""), ("Official source", "nw")],
         [[e(r["game"]), e(r["date"]), e(r["transcribed"]), e(r["dataset"]), status_chip(r["result"]), a(r["source"], "NFL.com schedule")] for r in r25["game_level"]["rows"]])))
     b.append("<h3>Correlation values that depend only on scores</h3>")
-    b.append(table([("Published value", "k w"), ("Published", "n"), ("Referee", "n"), ("Status", ""), ("Note", "w"), ("Source", "nw")],
+    b.append(table([("Published value", "k w"), ("Published", "n"), ("Referee", "n"), ("Status", ""), ("Note", "w"), ("Source", "m")],
                    [[e(c["item"]), num(c["published"]), num(c["referee"]), status_chip(c["status"]), e(c["note"]),
                      a(DIVS if c["item"].startswith("C5") else "https://www.nfl.com/schedules/2026/by-week/week-1", "NFL.com division standings" if c["item"].startswith("C5") else "NFL.com schedule")] for c in c25]))
     b.append(f'<div class="note bad"><p><b>Why the division-game numbers differ.</b> {e(c5["cause"])} Counting with only the division word gives {c5["games_counted_when_only_the_division_word_is_compared"]} games and a correlation of {c5["r_using_division_word_only"]}, '
@@ -450,7 +450,7 @@ def main():
         rows.append([e(s["strategy"]), e(s["published_status"]), e(s["published_record"]), e(s["referee_record"]),
                      "" if s["published_win_pct"] is None else f"{100 * s['published_win_pct']:.2f}%", "" if s["published_roi"] is None else f"{100 * s['published_roi']:+.2f}%",
                      num(s["published_p"]), status_chip(s["result"]) + " " + UNV, a(blob("data/model/strategies.json", ref76), "Their file")])
-    b.append(table([("Strategy", "k w"), ("Their verdict", ""), ("Published record (W-L-push)", "n"), ("Referee record", "n"), ("Win rate", "n"), ("Return at -110", "n"), ("p-value", "n"), ("Status", "nw"), ("Source", "nw")], rows,
+    b.append(table([("Strategy", "k m"), ("Their verdict", ""), ("Published record (W-L-push)", "n"), ("Referee record", "n"), ("Win rate", "n"), ("Return at -110", "n"), ("p-value", "n"), ("Status", ""), ("Source", "")], rows,
                    "A blank referee record means the strategy could not be rebuilt here. All records rest on unverified lines."))
     secs = {}
     for r in r76["rows"]:
@@ -459,9 +459,9 @@ def main():
     for sec, rs in secs.items():
         for r in rs:
             rows.append([e(sec), e(r["item"]), num(r["published"]), num(r["referee"]), status_chip(r["status"]), e(r["note"]), a(blob("data/model/strategies.json" if "Own-line" not in sec and "Market" not in sec and "sign" not in sec.lower() else "data/model/lines.json", ref76), "Their file")])
-    b.append(fold(f"All {len(r76['rows'])} numbers checked", table([("Group", "k"), ("Number", "w"), ("Published", "n"), ("Referee", "n"), ("Status", ""), ("Note", "w"), ("Source", "nw")], rows)))
+    b.append(fold(f"All {len(r76['rows'])} numbers checked", table([("Group", "k"), ("Number", "w"), ("Published", "n"), ("Referee", "n"), ("Status", ""), ("Note", "w"), ("Source", "m")], rows)))
     b.append("<h3>The gates that session applies</h3>")
-    b.append(table([("Gate", "k"), ("Rule", "w"), ("Source", "nw")], [[e(g["id"]), e(g["rule"]), a(blob("data/model/strategies.json", ref76), "Their file")] for g in r76["gate_definitions"]]))
+    b.append(table([("Gate", "k"), ("Rule", "w"), ("Source", "m")], [[e(g["id"]), e(g["rule"]), a(blob("data/model/strategies.json", ref76), "Their file")] for g in r76["gate_definitions"]]))
     b.append(f'<p class="small">Scoring rule as published: {e(r76["rewards"]["model"])}</p>')
 
     b.append(f"<h2>Tables of session 80731db4</h2><p>Checked at commit <code>{e(r80['commit'][:10])}</code> on its branch (not merged).</p>")
@@ -495,20 +495,20 @@ def main():
     for s, w, l, p, n, b1, bk, clears in bar_rows:
         rows.append([e(s["strategy"]), num(n), num(w), f"{100 * w / n:.2f}%", f"{100 * b1 / n:.2f}%", f"{100 * bk / n:.2f}%",
                      chip("ok", "Clears the bar") if clears else chip("bad", "Within luck"), status_chip(s["result"]) + " " + UNV, a(blob("data/model/strategies.json", ref76), "Their file")])
-    b.append(table([("Strategy", "k w"), ("Graded bets", "n"), ("Wins", "n"), ("Win rate", "n"), ("Bar, 1 tried", "n"), (f"Bar, {tried} tried", "n"), ("Verdict", ""), ("Record status", "nw"), ("Source", "nw")], rows))
+    b.append(table([("Strategy", "k m"), ("Graded bets", "n"), ("Wins", "n"), ("Win rate", "n"), ("Bar, 1 tried", "n"), (f"Bar, {tried} tried", "n"), ("Verdict", ""), ("Record status", ""), ("Source", "")], rows))
     b.append("<h2>Why patience is required</h2><p>Chance that a strategy whose true win rate is 55% clears the single-strategy bar. Most real edges are smaller than that.</p>")
     b.append(table([("Graded bets", "k n"), ("True win rate", "n"), ("Chance to clear the bar", "n"), ("Status", ""), ("Method", "nw")],
                    [[num(r["graded_bets"]), f"{r['true_win_pct']}%", f"{r['chance_to_clear_bar_pct']}%", chip("ok", "Arithmetic"), a(blob("referee/analysis/replicate_luck_thresholds.py"), "Script")] for r in luck["power_at_55pct"]]))
     b.append("<h2>Sensitivity 1: the assumed price</h2><p>The leaderboard grades every bet at -110. Where the dataset records an actual closing price, the same bets were graded at that price.</p>")
-    b.append(table([("Strategy", "k w"), ("Bets with a price", "n"), ("Win rate", "n"), ("Return at -110", "n"), ("Return at actual price", "n"), ("Difference", "n"), ("Median price", "n"), ("Status", ""), ("Source", "nw")],
+    b.append(table([("Strategy", "k m"), ("Bets with a price", "n"), ("Win rate", "n"), ("Return at -110", "n"), ("Return at actual price", "n"), ("Change", "n"), ("Median price", "n"), ("Status", ""), ("Source", "m")],
                    [[e(r["strategy"]), num(r["graded_bets_with_a_price"]), f"{r['win_pct']}%", f"{r['roi_at_assumed_minus_110_pct']:+.2f}%", f"{r['roi_at_actual_price_pct']:+.2f}%", f"{r['difference_pct_points']:+.2f}",
-                     f"{r['median_price']:.0f}", UNV, a(GAMES, "nflverse games.csv (community data)")] for r in price]))
+                     f"{r['median_price']:.0f}", UNV, a(GAMES, "nflverse games file (unofficial)")] for r in price]))
     b.append('<p class="small">Recorded prices are typically a little better than -110, so returns rise slightly. The ranking and every verdict stay the same.</p>')
     lst = sens["line_source_test"]
     b.append(f"<h2>Sensitivity 2: which closing line</h2><p>The same rules, run on the {lst['games_in_both_files']:,} games ({lst['seasons'][0]} to {lst['seasons'][-1]}) that appear in both closing-line files, once with each file's lines.</p>")
-    b.append(table([("Strategy", "k w"), ("Record, file 1", "n"), ("Win rate", "n"), ("Record, file 2", "n"), ("Win rate", "n"), ("Change", "n"), ("Bets only in file 1", "n"), ("Bets only in file 2", "n"), ("Same bet, different result", "n"), ("Status", ""), ("Source", "nw")],
+    b.append(table([("Strategy", "k m"), ("Record, file 1", "n"), ("Win rate", "n"), ("Record, file 2", "n"), ("Win rate", "n"), ("Change", "n"), ("Only in file 1", "n"), ("Only in file 2", "n"), ("Result flipped", "n"), ("Status", ""), ("Source", "m")],
                    [[e(r["strategy"]), e(r["record_games_csv"]), f"{r['win_pct_games_csv']}%", e(r["record_closing_lines_csv"]), f"{r['win_pct_closing_lines_csv']}%", f"{r['win_pct_change_points']:+.2f}",
-                     num(r["bets_only_in_games_csv"]), num(r["bets_only_in_closing_lines_csv"]), num(r["same_bet_different_result"]), UNV, a(CLOSING, "nflverse closing_lines.csv (community data)")] for r in src_rows]))
+                     num(r["bets_only_in_games_csv"]), num(r["bets_only_in_closing_lines_csv"]), num(r["same_bet_different_result"]), UNV, a(CLOSING, "nflverse second file (unofficial)")] for r in src_rows]))
     b.append('<p class="small">File 1 is games.csv, file 2 is closing_lines.csv. Rules with a threshold (for example a total of 41 or lower) pick up and drop games when the line moves by half a point.</p>')
     page("luck.html", "Luck and sensitivity", "\n".join(b), as_of)
 
@@ -526,9 +526,9 @@ def main():
         kind = {"merged": "ok", "merged, still active": "ok", "this session": "ok", "claim only": "bad"}.get(s["state"], "warn")
         rows.append([f"<code>{e(s['session'])}</code>", chip(kind, s["state"].capitalize()), e(s["claimed"]), num(s["files_on_branch"]), e(s["last_commit_utc"][11:]), prs,
                      str(len(s["modifies_files_already_on_main"])), e(s["observation"]), a(s["branch_url"], "Branch on GitHub")])
-    b.append(table([("Session", "id"), ("State", ""), ("What it claimed", "w"), ("Files", "n"), ("Last commit", "n"), ("Pull requests", "m"), ("Live files touched", "n"), ("Referee observation", "w"), ("Source", "nw")], rows))
+    b.append(table([("Session", "id"), ("State", ""), ("What it claimed", "m"), ("Files", "n"), ("Last commit", "n"), ("Pull requests", "m"), ("Live files touched", "n"), ("Referee observation", "w"), ("Source", "s")], rows))
     b.append("<h2>Files on main that unmerged branches modify</h2><p>Each of these will need a deliberate merge order. Files touched by two branches are the ones most likely to be overwritten.</p>")
-    b.append(table([("File on main", "id"), ("Modified by", ""), ("Branches", "n"), ("Risk", ""), ("Source", "nw")],
+    b.append(table([("File on main", "id"), ("Modified by", ""), ("Branches", "n"), ("Risk", ""), ("Source", "m")],
                    [[f"<code>{e(o['file'])}</code>", e(", ".join(o["modified_by_unmerged_branches"])), str(len(o["modified_by_unmerged_branches"])),
                      chip("bad", "Two or more") if len(o["modified_by_unmerged_branches"]) > 1 else chip("warn", "One"), a(o["file_url"], "File on main")] for o in sess["overlaps"]]
                    or [["", "", "0", chip("ok", "None"), a(f"{GH}/branches", "Branches on GitHub")]]))
