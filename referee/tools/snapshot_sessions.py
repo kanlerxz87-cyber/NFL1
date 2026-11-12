@@ -27,9 +27,9 @@ NOTES = {
                                 "Claims final integration and rewrites pages already on main."},
     "25aa7696": {"claimed": "Its own V1-V4: official-source dataset (136 games), own lines, new site pages, requirement ledger.",
                  "observation": "All 136 transcribed scores match the dataset. One published correlation uses a wrong division-game count (flag R-04). "
-                                "Rewrites pages already on main and the deploy workflow."},
+                                "Its pull request replaced the deploy workflow and rewrote pages that earlier sessions had merged."},
     "80731db4": {"claimed": "T01-T13: full project, including site build, final integration and merge.",
-                 "observation": "Only the coordination board has been pushed. No task output is on GitHub."},
+                 "observation": "Pushed a 14-page site and data layer at 04:47 UTC, after 13 minutes with only a claim. Its standings, per-game values and six correlations all reproduce (see Replication). Not merged."},
     "946c1684": {"claimed": "T0-T14: full project. Board marks T0-T13 as done.",
                  "observation": "The board says done, but none of the files it lists (data/, scripts/, src/) are on the pushed branch."},
     "87deb7ab": {"claimed": "T-01 to T-17: full project. Board marks T-01 and T-17 (data/standings.json, data/injuries.json) as done.",
@@ -68,6 +68,8 @@ def main():
         idle = int((now - last_dt).total_seconds() // 60)
         if mine and all(p["state"] == "MERGED" for p in mine) and ahead <= 1:
             state = "merged"
+        elif mine and any(p["state"] == "MERGED" for p in mine):
+            state = "merged, still active"
         elif len(files) <= 2:
             state = "claim only"
         else:
@@ -82,7 +84,7 @@ def main():
                          "state": state, "claimed": note["claimed"], "observation": note["observation"]})
     owners = {}
     for s in sessions:
-        if s["state"] in ("merged", "this session"):
+        if s["state"] in ("merged", "this session") or s["commits_not_on_main"] == 0:
             continue
         for f in s["modifies_files_already_on_main"]:
             owners.setdefault(f, []).append(s["session"])

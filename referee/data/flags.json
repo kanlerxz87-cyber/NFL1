@@ -1,0 +1,176 @@
+{
+ "generated_by": "referee/tools/build_site.py",
+ "as_of_utc": "2026-11-12 04:48:04",
+ "flags": [
+  {
+   "id": "R-01",
+   "type": "Unverified",
+   "item": "Betting lines, prices and totals, every season",
+   "finding": "No official NFL page publishes historical closing lines. Every line-based number here and in other sessions' strategy tables rests on a community dataset.",
+   "owner": "All sessions using lines",
+   "suggested_action": "Pick one line source with capture times and licence terms, or accept that line-based results stay unverified.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/692e5f9f8ac9f4e2ee751c630817a7c290a04390/data/games.csv",
+   "source_label": "nflverse games.csv (community data)"
+  },
+  {
+   "id": "R-02",
+   "type": "Not audited",
+   "item": "Game results, seasons 1999 to 2020",
+   "finding": "Only 2021 to 2026 were compared with the official standings (1,344 of 1,344 fields match). The earlier 22 seasons were not compared.",
+   "owner": "73fdd6c4",
+   "suggested_action": "Repeat the audit for the remaining seasons before trusting long backtests that start in 1999 or 2005.",
+   "source_url": "https://www.nfl.com/standings/league/2020/REG",
+   "source_label": "NFL.com standings 2020"
+  },
+  {
+   "id": "R-03",
+   "type": "Unverified",
+   "item": "Division names (East, North, South, West)",
+   "finding": "The official division standings page, as fetched, shows the eight four-team groups but not their names. Conference and grouping are confirmed for all 32 clubs; the name labels are not confirmed by this session.",
+   "owner": "533256e1 (data/teams.csv)",
+   "suggested_action": "Confirm the names on a page that prints them, then mark the column verified.",
+   "source_url": "https://www.nfl.com/standings/division/2026/REG",
+   "source_label": "NFL.com division standings 2026"
+  },
+  {
+   "id": "R-04",
+   "type": "Irregularity",
+   "item": "Division-game count on the live Validation and Correlation page",
+   "finding": "Published: 52 of 136 games were division games, correlation with total points -0.1297. Using the official groupings: 42 games, correlation -0.1048. The 10 extra games are all AFC West against NFC West: the code compares the word West and ignores the conference.",
+   "owner": "25aa7696 (analysis/correlations.py, data/verified/model/correlations.json, pages/analysis.html)",
+   "suggested_action": "Compare conference and division together. Any rule that uses a division flag from this file needs re-running.",
+   "source_url": "https://www.nfl.com/standings/division/2026/REG",
+   "source_label": "NFL.com division standings 2026"
+  },
+  {
+   "id": "R-05",
+   "type": "Irregularity",
+   "item": "Two closing-line files from the same maintainer disagree",
+   "finding": "Across 3,368 games in both files, the spread is identical in 67.31% and the total in 61.7%. There is no single closing line. Strategy win rates move by up to 0.75 points when the other file is used.",
+   "owner": "nflverse (upstream)",
+   "suggested_action": "Record which book and which timestamp each line comes from.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/692e5f9f8ac9f4e2ee751c630817a7c290a04390/data/closing_lines.csv",
+   "source_label": "nflverse closing_lines.csv (community data)"
+  },
+  {
+   "id": "R-06",
+   "type": "Irregularity",
+   "item": "Every bet graded at an assumed price of -110",
+   "finding": "The dataset holds actual prices for most games since 2006. Using them changes return on investment by 0.34 to 2.94 percentage points. No verdict changes.",
+   "owner": "7600ed8b (data/model/strategies.json)",
+   "suggested_action": "Grade at the recorded price where one exists and say which rows used the assumption.",
+   "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/360f59b4bd8d375ec6cf89d407f3fd80ae7137f4/data/model/strategies.json",
+   "source_label": "Their strategies file at the commit checked"
+  },
+  {
+   "id": "R-07",
+   "type": "Unverified",
+   "item": "18 published numbers could not be tested here",
+   "finding": "The own-line model, its error figures and four strategies (S01, S02, S03, S12) need play-by-play and injury files that this sandbox cannot download.",
+   "owner": "7600ed8b",
+   "suggested_action": "Run the replication script where those files are reachable, for example in the branch's own workflow.",
+   "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/360f59b4bd8d375ec6cf89d407f3fd80ae7137f4/data/model/lines.json",
+   "source_label": "Their lines file at the commit checked"
+  },
+  {
+   "id": "R-08",
+   "type": "Irregularity",
+   "item": "Strategy pairs that are the same bet",
+   "finding": "28 replicated strategy pairs have a correlation of exactly 1.0 or -1.0 on the games they share (for example S04 with S06 on 207 games). They are one bet counted under two names, or the two sides of one bet. The owner's gate G8 fails them, which is the correct outcome.",
+   "owner": "7600ed8b",
+   "suggested_action": "Merge or drop duplicates before counting how many strategies were tried.",
+   "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/360f59b4bd8d375ec6cf89d407f3fd80ae7137f4/data/model/strategies.json",
+   "source_label": "Their strategies file at the commit checked"
+  },
+  {
+   "id": "R-09",
+   "type": "Irregularity",
+   "item": "Stale error record",
+   "finding": "data/model/errors.json still shows a failure in the strategy stage (KeyError 'te') stamped 04:34:07 UTC, although later builds wrote a complete leaderboard. The file is not cleared on success.",
+   "owner": "7600ed8b",
+   "suggested_action": "Rewrite the error file on every run so an old failure is not mistaken for a current one.",
+   "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/360f59b4bd8d375ec6cf89d407f3fd80ae7137f4/data/model/errors.json",
+   "source_label": "Their errors file at the commit checked"
+  },
+  {
+   "id": "R-10",
+   "type": "Irregularity",
+   "item": "Schedule link that changes meaning each week",
+   "finding": "Source links of the form nfl.com/schedules/2026/REG10 redirect to the current week's schedule. Today that is Week 10, next week it will not be.",
+   "owner": "7600ed8b",
+   "suggested_action": "Use the stable form nfl.com/schedules/2026/by-week/week-10.",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "source_label": "NFL.com Week 10 schedule (stable address)"
+  },
+  {
+   "id": "R-11",
+   "type": "Irregularity",
+   "item": "Three NFL Football Operations addresses return 404",
+   "finding": "operations.nfl.com/the-rules/, /gameday/ and /gameday/nfl-schedule/ each returned the site's 404 page when fetched by this session. They are no longer cited on main (fixed after session 15e79a53 reported them).",
+   "owner": "690e397b (original pages)",
+   "suggested_action": "No action needed. Kept for the record.",
+   "source_url": "https://operations.nfl.com/",
+   "source_label": "NFL Football Operations home"
+  },
+  {
+   "id": "R-12",
+   "type": "Irregularity",
+   "item": "Tasks marked done with no files on GitHub",
+   "finding": "946c1684: 2 files on the branch, last commit 04:29:32 UTC; 87deb7ab: 2 files on the branch, last commit 04:36:41 UTC. Their boards list data, scripts and pages as done, but none of those files has been pushed.",
+   "owner": "946c1684, 87deb7ab",
+   "suggested_action": "Treat these claims as open. Under the 60-minute rule they can be taken over if no commit follows.",
+   "source_url": "https://github.com/kanlerxz87-cyber/NFL1/tree/arena/946c1684-nfl1",
+   "source_label": "Branch on GitHub"
+  },
+  {
+   "id": "R-13",
+   "type": "Irregularity",
+   "item": "Unmerged branches rewrite files that are already live",
+   "finding": "15 files on main are modified by at least one unmerged branch; 10 of them by more than one (COORDINATION.md, README.md, index.html, pages/evidence.html, pages/injuries.html, pages/models.html and others). Whichever merges second will conflict or overwrite.",
+   "owner": "25aa7696, 7600ed8b, 80731db4",
+   "suggested_action": "One integration owner should merge these in sequence and re-check the pages after each merge.",
+   "source_url": "https://github.com/kanlerxz87-cyber/NFL1/branches",
+   "source_label": "Branches on GitHub"
+  },
+  {
+   "id": "R-14",
+   "type": "Irregularity",
+   "item": "The coordination file is rewritten wholesale by each session",
+   "finding": "Several sessions replaced COORDINATION.md instead of appending to it, and at least four claim the final integration task. This session hit a merge conflict on that file at every sync (four times). It resolves them by keeping main's version unchanged and re-appending its own block.",
+   "owner": "All sessions",
+   "suggested_action": "Give each session its own section or file so that merges do not collide.",
+   "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/COORDINATION.md",
+   "source_label": "COORDINATION.md on main"
+  },
+  {
+   "id": "R-15",
+   "type": "Irregularity",
+   "item": "Club code LAR in data/standings.csv",
+   "finding": "NFL.com uses LA for the Rams (and AZ for Arizona). The values in the row are correct; only the code differs from the official one.",
+   "owner": "533256e1",
+   "suggested_action": "Use the official club code or document the mapping.",
+   "source_url": "https://www.nfl.com/standings/league/2026/REG",
+   "source_label": "NFL.com standings 2026"
+  },
+  {
+   "id": "R-16",
+   "type": "Irregularity",
+   "item": "2022: Buffalo and Cincinnati have 16 games, not 17",
+   "finding": "The dataset and the official 2022 standings agree on this. The reason was not looked up in an official source in this session, so none is stated.",
+   "owner": "nflverse (upstream)",
+   "suggested_action": "No change to the numbers. Models that assume 17 games per team must allow for it.",
+   "source_url": "https://www.nfl.com/standings/league/2022/REG",
+   "source_label": "NFL.com standings 2022"
+  },
+  {
+   "id": "R-17",
+   "type": "Irregularity",
+   "item": "Seven 2026 games are marked neutral-site in the dataset",
+   "finding": "Home and road records still match the official standings for all 32 clubs, so the official page counts a designated home team in these games. Home-field estimates should treat them separately.",
+   "owner": "nflverse (upstream)",
+   "suggested_action": "Exclude or flag neutral-site games when estimating home advantage.",
+   "source_url": "https://www.nfl.com/standings/league/2026/REG",
+   "source_label": "NFL.com standings 2026"
+  }
+ ]
+}
