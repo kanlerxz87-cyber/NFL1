@@ -230,3 +230,11 @@ preserved; the pre-integration board was refreshed verbatim at
   failing-looking annotation in the deploy run came from the `continue-on-error` external-link
   report; the job and deploy both concluded `success`. F35's lesson (read the live page, not just
   the green pipeline) was applied.
+
+## Reconciliation of PR #15 (referee follow-up, merged while PR #16 was open)
+
+`main` advanced from `4904617` to `dcb8523` (PR #15) between the creation and merge of PR #16.
+All `referee/**` updates from that PR are preserved. The pre-integration board was refreshed
+verbatim at `docs/COORDINATION-archive-main.md`; the active board above keeps this session's
+reconciled task table and the PR #12 / Pages deployment record. The merge conflict was limited to
+`COORDINATION.md` and was resolved without discarding either side's text.

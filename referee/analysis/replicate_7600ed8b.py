@@ -157,6 +157,17 @@ def run_rule(hist, rule):
             "p_value": round(binom_tail(w, n, BREAKEVEN), 4), "_bets": res}
 
 
+def _errors(ref):
+    """Their own build-error record, copied as published (stage and first line of the error only)."""
+    try:
+        raw = subprocess.run(["git", "-C", os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".."), "show", f"{ref}:data/model/errors.json"],
+                             capture_output=True, text=True, check=True).stdout
+        d = json.loads(raw)
+        return {"generated_at": d.get("generated_at"), "errors": [{"stage": x.get("stage"), "error": str(x.get("error", "")).splitlines()[0][:200]} for x in d.get("errors", [])]}
+    except Exception:
+        return {"generated_at": None, "errors": [], "note": "file not present at this ref"}
+
+
 def main():
     ref = sys.argv[1] if len(sys.argv) > 1 else "origin/arena/7600ed8b-nfl1"
     sha = git("rev-parse", ref).strip()
@@ -270,7 +281,8 @@ def main():
         counts[r["status"]] = counts.get(r["status"], 0) + 1
     out = {"generated_by": "referee/analysis/replicate_7600ed8b.py", "owner_session": "7600ed8b",
            "ref": ref, "commit": sha, "their_generated_at": strat.get("generated_at"),
-           "files_read": ["data/model/strategies.json", "data/model/lines.json"],
+           "files_read": ["data/model/strategies.json", "data/model/lines.json", "data/model/errors.json"],
+           "their_error_file": _errors(ref),
            "counts": counts, "strategies": strategy_rows, "rows": rows,
            "gate_definitions": strat.get("gate_definitions"), "rewards": strat.get("rewards")}
     with open(OUT, "w") as fh:
