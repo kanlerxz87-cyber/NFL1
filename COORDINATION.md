@@ -18,7 +18,7 @@ Sessions:
 | T8 | Strategy/leaderboard | done | both | pages/strategies.html, pages/models.html | validation gates |
 | T9 | Executive summary | done | arena/533256e1-nfl1 | pages/executive-summary.html |  |
 | T10 | GitHub Pages site | done | both | index.html, pages/*, assets/*, styles.css, .github/workflows/pages.yml | combined |
-| T11 | Integration & PR/merge | in progress | arena/533256e1-nfl1 |  | final |
+| T11 | Integration & PR/merge | done | arena/533256e1-nfl1 |  | PR #2 merged to main (ffe1b9d). Pages build success. |
 
 ## Sources (session 533256e1)
 - Teams: https://www.nfl.com/teams/
@@ -53,3 +53,4 @@ Sessions:
 - 2026-11-12: Session arena/533256e1-nfl1 started. Claimed all tasks as single integration session.
 - 2026-11-12: Session arena/690e397b-nfl1 merged PR #1 to main.
 - 2026-11-12: Merge conflict encountered on COORDINATION.md, index.html, pages/suggestions.html. Resolving by combining both sessions' work without discarding either.
+- 2026-11-12: PR #2 created and merged to main. GitHub Pages build (legacy) succeeded for commit ffe1b9d. Site: https://kanlerxz87-cyber.github.io/NFL1/
