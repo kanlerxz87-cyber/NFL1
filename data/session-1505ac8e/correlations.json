@@ -1,0 +1,244 @@
+{
+ "generated_at": "2026-11-12T22:56:52Z",
+ "definition": "Pearson r between two rules' per-game edge series. Edge = actual home margin minus my predicted home margin, signed to the side the rule bet. Only games both rules bet on are used.",
+ "method_sources": [
+  {
+   "name": "NIST/SEMATECH e-Handbook, correlation",
+   "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda367.htm"
+  },
+  {
+   "name": "Benjamini & Hochberg (1995) FDR",
+   "url": "https://doi.org/10.1111/j.2517-6161.1995.tb02031.x"
+  }
+ ],
+ "n_rules": 7,
+ "pairs": [
+  {
+   "a": "S1",
+   "b": "S2",
+   "n": 8,
+   "r": 1.0,
+   "p": null,
+   "ci95": null,
+   "note": "the two rules picked the same side on every shared game, so the correlation is degenerate at this sample size and no p-value is meaningful"
+  },
+  {
+   "a": "S1",
+   "b": "S3",
+   "n": 9,
+   "r": 0.1342,
+   "p": 0.7306822320626504,
+   "ci95": [
+    -0.5818,
+    0.733
+   ],
+   "note": ""
+  },
+  {
+   "a": "S1",
+   "b": "S4",
+   "n": 6,
+   "r": 0.7531,
+   "p": 0.08394212803590202,
+   "ci95": [
+    -0.1505,
+    0.9711
+   ],
+   "note": ""
+  },
+  {
+   "a": "S1",
+   "b": "S5",
+   "n": 5,
+   "r": 0.5101,
+   "p": 0.37990580525379314,
+   "ci95": [
+    -0.6767,
+    0.9602
+   ],
+   "note": ""
+  },
+  {
+   "a": "S1",
+   "b": "S6",
+   "n": 2,
+   "r": null,
+   "p": null,
+   "ci95": null,
+   "note": "fewer than 5 shared games; not estimated"
+  },
+  {
+   "a": "S1",
+   "b": "S8",
+   "n": 14,
+   "r": -0.2117,
+   "p": 0.46759565657352087,
+   "ci95": [
+    -0.6673,
+    0.3593
+   ],
+   "note": ""
+  },
+  {
+   "a": "S2",
+   "b": "S3",
+   "n": 4,
+   "r": null,
+   "p": null,
+   "ci95": null,
+   "note": "fewer than 5 shared games; not estimated"
+  },
+  {
+   "a": "S2",
+   "b": "S4",
+   "n": 3,
+   "r": null,
+   "p": null,
+   "ci95": null,
+   "note": "fewer than 5 shared games; not estimated"
+  },
+  {
+   "a": "S2",
+   "b": "S5",
+   "n": 1,
+   "r": null,
+   "p": null,
+   "ci95": null,
+   "note": "fewer than 5 shared games; not estimated"
+  },
+  {
+   "a": "S2",
+   "b": "S6",
+   "n": 1,
+   "r": null,
+   "p": null,
+   "ci95": null,
+   "note": "fewer than 5 shared games; not estimated"
+  },
+  {
+   "a": "S2",
+   "b": "S8",
+   "n": 4,
+   "r": null,
+   "p": null,
+   "ci95": null,
+   "note": "fewer than 5 shared games; not estimated"
+  },
+  {
+   "a": "S3",
+   "b": "S4",
+   "n": 10,
+   "r": 0.8452,
+   "p": 0.0020755292477463256,
+   "ci95": [
+    0.4608,
+    0.9626
+   ],
+   "note": ""
+  },
+  {
+   "a": "S3",
+   "b": "S5",
+   "n": 6,
+   "r": 0.475,
+   "p": 0.34112991872600795,
+   "ci95": [
+    -0.5477,
+    0.9286
+   ],
+   "note": ""
+  },
+  {
+   "a": "S3",
+   "b": "S6",
+   "n": 4,
+   "r": null,
+   "p": null,
+   "ci95": null,
+   "note": "fewer than 5 shared games; not estimated"
+  },
+  {
+   "a": "S3",
+   "b": "S8",
+   "n": 17,
+   "r": -1.0,
+   "p": null,
+   "ci95": null,
+   "note": "the two rules picked the same side on every shared game, so the correlation is degenerate at this sample size and no p-value is meaningful"
+  },
+  {
+   "a": "S4",
+   "b": "S5",
+   "n": 3,
+   "r": null,
+   "p": null,
+   "ci95": null,
+   "note": "fewer than 5 shared games; not estimated"
+  },
+  {
+   "a": "S4",
+   "b": "S6",
+   "n": 2,
+   "r": null,
+   "p": null,
+   "ci95": null,
+   "note": "fewer than 5 shared games; not estimated"
+  },
+  {
+   "a": "S4",
+   "b": "S8",
+   "n": 13,
+   "r": -1.0,
+   "p": null,
+   "ci95": null,
+   "note": "the two rules picked the same side on every shared game, so the correlation is degenerate at this sample size and no p-value is meaningful"
+  },
+  {
+   "a": "S5",
+   "b": "S6",
+   "n": 3,
+   "r": null,
+   "p": null,
+   "ci95": null,
+   "note": "fewer than 5 shared games; not estimated"
+  },
+  {
+   "a": "S5",
+   "b": "S8",
+   "n": 11,
+   "r": -0.6376,
+   "p": 0.034822240084618886,
+   "ci95": [
+    -0.8951,
+    -0.0611
+   ],
+   "note": ""
+  },
+  {
+   "a": "S6",
+   "b": "S8",
+   "n": 4,
+   "r": null,
+   "p": null,
+   "ci95": null,
+   "note": "fewer than 5 shared games; not estimated"
+  }
+ ],
+ "parlay": {
+  "note": "Combine the two least-correlated graded rules. Legs are only worth combining if their outcomes are genuinely independent; the measured correlation decides that, not intuition.",
+  "best_pair": {
+   "legs": [
+    "S3",
+    "S8"
+   ],
+   "n_shared_games": 17,
+   "p_leg_a": 0.6207,
+   "p_leg_b": 0.3333,
+   "phi": -1.0,
+   "p_both_independent": 0.2069,
+   "p_both_with_correlation": -0.0218,
+   "formula": "p(A and B) = p(A)p(B) + rho*sqrt(p(A)(1-p(A))p(B)(1-p(B)))",
+   "caveat": "Win probabilities are measured against MY line, not against a book price, so this is a correlation exercise, not a payout."
+  }
+ }
+}

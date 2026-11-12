@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suggestions: review and choose a path - NFL Decision Lab</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../index.html"><span class="brand-mark">NFL</span> Decision Lab</a>
+  <div class="tagline">Session 1505ac8e &middot; data retrieved 2026-11-12 &middot; every row links to its official source</div>
+</header>
+<div class="layout">
+  <nav class="sidebar">
+    <a class="nav-home" href="../index.html">Overview</a>
+    <div class="nav-group"><div class="nav-title">Decide</div><a class="" href="../pages/executive-summary.html">Executive summary</a><a class="" href="../pages/questions.html">Questions &amp; answers</a><a class="active" href="../pages/suggestions.html">Suggestions: choose a path</a></div><div class="nav-group"><div class="nav-title">Model</div><a class="" href="../pages/lines.html">My lines</a><a class="" href="../pages/strategies.html">Strategy lab</a><a class="" href="../pages/correlations.html">Correlations</a><a class="" href="../pages/luck.html">Skill vs luck</a></div><div class="nav-group"><div class="nav-title">Availability</div><a class="" href="../pages/injuries.html">Official injury report</a><a class="" href="../pages/depth.html">Depth charts</a><a class="" href="../pages/availability.html">Availability pressure</a></div><div class="nav-group"><div class="nav-title">Data</div><a class="" href="../pages/standings.html">Standings</a><a class="" href="../pages/schedule.html">Week 10 schedule</a></div><div class="nav-group"><div class="nav-title">Assurance</div><a class="" href="../pages/sources.html">Sources</a><a class="" href="../pages/verification.html">Verification</a><a class="" href="../pages/flagged.html">Flagged for review</a></div>
+    <div class="nav-group"><div class="nav-title">Other site generations</div>
+      <a href="../../index.html" target="_blank" rel="noopener">Root dashboard &#8599;</a>
+      <a href="../../docs/index.html" target="_blank" rel="noopener">docs/ dashboard &#8599;</a>
+      <a href="../../verified-lab/index.html" target="_blank" rel="noopener">verified-lab/ &#8599;</a>
+      <a href="../../referee/index.html" target="_blank" rel="noopener">referee/ audit &#8599;</a>
+    </div>
+  </nav>
+  <main class="content">
+    <h1>Suggestions: review and choose a path</h1>
+    
+    <div class="kpis"><div class="kpi"><div class="kpi-label">Critical</div><div class="kpi-value">3</div><div class="kpi-sub">suggestions</div></div><div class="kpi"><div class="kpi-label">High</div><div class="kpi-value">6</div><div class="kpi-sub">suggestions</div></div><div class="kpi"><div class="kpi-label">Medium</div><div class="kpi-value">5</div><div class="kpi-sub">suggestions</div></div><div class="kpi"><div class="kpi-label">Low</div><div class="kpi-value">2</div><div class="kpi-sub">suggestions</div></div><div class="kpi"><div class="kpi-label">Decided</div><div class="kpi-value">0</div><div class="kpi-sub">none - that is the point of this page</div></div></div><div class="callout">
+<h3>How to use this page</h3>
+<p>Every suggestion below is <strong>PROPOSED</strong>. None has been implemented, because the
+brief asks for a review step where the best path is chosen before anything changes. Each one
+sets out the problem, two or three options with cost, effort and risk, and a recommendation
+with the reason for it. Pick a path, record it in the decision column, and only then
+implement. The executive summary lists the critical and high-priority ones.</p>
+</div><h2>Data acquisition</h2><section class="suggest">
+<h3>S-01 &middot; License or log real prices <span class="pill pill-bad">Critical</span>
+<span class="pill pill-neutral">PROPOSED</span></h3>
+<p><strong>Problem.</strong> Nothing about profit can be measured, and gates G4 and the whole prop track are blocked, because there is not a single verified price in the repository.</p>
+<table class="clean"><thead><tr><th>Option</th><th>What it means</th><th>Cost</th><th>Effort</th><th>Risk</th></tr></thead><tbody><tr><td><strong>A. License an odds feed</strong></td><td>A commercial NFL odds or official-data licence. Complete history, clean licensing, costs money and may restrict redistribution.</td><td>$$$</td><td>Low</td><td>Contract terms</td></tr><tr><td><strong>B. Log prices yourself</strong></td><td>Capture spreads, totals and prices at a fixed clock time each week into a dated, versioned file. Free and fully auditable; history only starts the day you begin.</td><td>$</td><td>Medium</td><td>Gaps if a week is missed</td></tr><tr><td><strong>C. Do nothing</strong></td><td>Keep the lab as an accuracy exercise and say plainly that no profitability claim is made.</td><td>$0</td><td>None</td><td>The leaderboard can never certify anything</td></tr></tbody></table>
+<p><strong>Recommendation.</strong> B now, A later if the project proves out. B costs nothing and starts the clock on the one asset that cannot be bought retroactively.</p>
+<p><strong>Unblocks.</strong> G4, every edge number, the prop track, and rules S7.</p>
+<table class="decision"><tbody>
+<tr><th>Decision</th><td><span class="blank">not yet made</span></td>
+<th>Decided by</th><td><span class="blank">blank</span></td>
+<th>Date</th><td><span class="blank">blank</span></td></tr>
+</tbody></table>
+</section><section class="suggest">
+<h3>S-02 &middot; Start a dated closing-line log <span class="pill pill-bad">Critical</span>
+<span class="pill pill-neutral">PROPOSED</span></h3>
+<p><strong>Problem.</strong> There is no verified closing-line history, so rule S7 cannot be scored.</p>
+<table class="clean"><thead><tr><th>Option</th><th>What it means</th><th>Cost</th><th>Effort</th><th>Risk</th></tr></thead><tbody><tr><td><strong>A. Log every market every week</strong></td><td>Spread, total, moneyline and every prop, captured at a fixed time.</td><td>$</td><td>High</td><td>Storage grows fast</td></tr><tr><td><strong>B. Log spreads and totals only</strong></td><td>Enough to grade S1-S8; prop combos stay blocked for now.</td><td>$</td><td>Medium</td><td>Prop track stays empty</td></tr></tbody></table>
+<p><strong>Recommendation.</strong> B. It unblocks most of the board for a fraction of the work.</p>
+<p><strong>Unblocks.</strong> S7 and any future market-comparison rule.</p>
+<table class="decision"><tbody>
+<tr><th>Decision</th><td><span class="blank">not yet made</span></td>
+<th>Decided by</th><td><span class="blank">blank</span></td>
+<th>Date</th><td><span class="blank">blank</span></td></tr>
+</tbody></table>
+</section><section class="suggest">
+<h3>S-03 &middot; Buy a historical odds file <span class="pill pill-info">Medium</span>
+<span class="pill pill-neutral">PROPOSED</span></h3>
+<p><strong>Problem.</strong> If the board must be graded historically, self-logging cannot reach back.</p>
+<table class="clean"><thead><tr><th>Option</th><th>What it means</th><th>Cost</th><th>Effort</th><th>Risk</th></tr></thead><tbody><tr><td><strong>A. Purchase a back-file</strong></td><td>One-off purchase of historical NFL closing lines.</td><td>$$</td><td>Low</td><td>Provenance must still be checked</td></tr><tr><td><strong>B. Reconstruct from public archives</strong></td><td>Slower, patchier, and harder to verify.</td><td>$</td><td>High</td><td>Coverage gaps</td></tr></tbody></table>
+<p><strong>Recommendation.</strong> Only after S-01 is decided. Buying history before deciding the licence model risks paying twice.</p>
+<p><strong>Unblocks.</strong> Historical grading of every rule.</p>
+<table class="decision"><tbody>
+<tr><th>Decision</th><td><span class="blank">not yet made</span></td>
+<th>Decided by</th><td><span class="blank">blank</span></td>
+<th>Date</th><td><span class="blank">blank</span></td></tr>
+</tbody></table>
+</section><section class="suggest">
+<h3>S-04 &middot; Transcribe two more seasons from official pages <span class="pill pill-bad">Critical</span>
+<span class="pill pill-neutral">PROPOSED</span></h3>
+<p><strong>Problem.</strong> Gate G6 needs a second season and there is only one. Nothing can be certified until this exists.</p>
+<table class="clean"><thead><tr><th>Option</th><th>What it means</th><th>Cost</th><th>Effort</th><th>Risk</th></tr></thead><tbody><tr><td><strong>A. Transcribe 2024 and 2025 the way 2026 was done</strong></td><td>Game results read off the official schedule pages and reconciled against the official standings. Fully verifiable, slow.</td><td>$0</td><td>High</td><td>Transcription error, mitigated by the standings reconciliation</td></tr><tr><td><strong>B. Use the community mirror unverified</strong></td><td>Fast, but the whole point of this project is that unverified inputs are not trusted.</td><td>$0</td><td>Low</td><td>Provenance</td></tr></tbody></table>
+<p><strong>Recommendation.</strong> A. The reconciliation against official standings is what makes the 2026 data trustworthy, and the same trick works for any season.</p>
+<p><strong>Unblocks.</strong> G6, and with it any chance of a certified rule.</p>
+<table class="decision"><tbody>
+<tr><th>Decision</th><td><span class="blank">not yet made</span></td>
+<th>Decided by</th><td><span class="blank">blank</span></td>
+<th>Date</th><td><span class="blank">blank</span></td></tr>
+</tbody></table>
+</section><section class="suggest">
+<h3>S-06 &middot; Re-scrape the injury report on a weekday schedule <span class="pill pill-warn">High</span>
+<span class="pill pill-neutral">PROPOSED</span></h3>
+<p><strong>Problem.</strong> One club&#x27;s report was missing at scrape time in an earlier session and the committed snapshot is 25 rows behind the live page.</p>
+<table class="clean"><thead><tr><th>Option</th><th>What it means</th><th>Cost</th><th>Effort</th><th>Risk</th></tr></thead><tbody><tr><td><strong>A. Daily during the week, hourly on Friday and Sunday</strong></td><td>Closes the staleness gap and captures when game statuses appear.</td><td>$0</td><td>Medium</td><td>More commits</td></tr><tr><td><strong>B. Weekly only</strong></td><td>Cheaper, but the report is filed late in the week, so a weekly scrape can easily land on an empty page.</td><td>$0</td><td>Low</td><td>Mostly-empty snapshots</td></tr></tbody></table>
+<p><strong>Recommendation.</strong> A. It also answers Q03 empirically - capture when the statuses land.</p>
+<p><strong>Unblocks.</strong> A usable availability signal, and an answer to Q03.</p>
+<table class="decision"><tbody>
+<tr><th>Decision</th><td><span class="blank">not yet made</span></td>
+<th>Decided by</th><td><span class="blank">blank</span></td>
+<th>Date</th><td><span class="blank">blank</span></td></tr>
+</tbody></table>
+</section><h2>Validation</h2><section class="suggest">
+<h3>S-05 &middot; Do not lower the 30-bet floor yet <span class="pill pill-warn">High</span>
+<span class="pill pill-neutral">PROPOSED</span></h3>
+<p><strong>Problem.</strong> S1 looks strong (26 bets, 73%, permutation p = 0.0005) and it is tempting to lower the sample floor to 20 so it passes.</p>
+<table class="clean"><thead><tr><th>Option</th><th>What it means</th><th>Cost</th><th>Effort</th><th>Risk</th></tr></thead><tbody><tr><td><strong>A. Keep 30 and wait for more seasons</strong></td><td>The floor exists to stop one lucky season from certifying a rule.</td><td>$0</td><td>None</td><td>Board stays empty for now</td></tr><tr><td><strong>B. Lower to 20</strong></td><td>S1 would pass G1, and would still fail G6, so it still could not be certified - but the board would look busier.</td><td>$0</td><td>Low</td><td>Certifies noise</td></tr></tbody></table>
+<p><strong>Recommendation.</strong> A. Lowering a gate to make a result pass is the exact failure mode the gates were built to prevent.</p>
+<p><strong>Unblocks.</strong> Nothing - it protects the board instead.</p>
+<table class="decision"><tbody>
+<tr><th>Decision</th><td><span class="blank">not yet made</span></td>
+<th>Decided by</th><td><span class="blank">blank</span></td>
+<th>Date</th><td><span class="blank">blank</span></td></tr>
+</tbody></table>
+</section><h2>Injuries and depth</h2><section class="suggest">
+<h3>S-07 &middot; Find the written rule for game-status filing <span class="pill pill-info">Medium</span>
+<span class="pill pill-neutral">PROPOSED</span></h3>
+<p><strong>Problem.</strong> Three official URLs 404&#x27;d for earlier sessions; the deadline is unknown.</p>
+<table class="clean"><thead><tr><th>Option</th><th>What it means</th><th>Cost</th><th>Effort</th><th>Risk</th></tr></thead><tbody><tr><td><strong>A. Read the Game Operations Manual</strong></td><td>Search the NFL Football Operations library for the injury-report section and cite the clause.</td><td>$0</td><td>Medium</td><td>May be behind a PDF</td></tr><tr><td><strong>B. Infer it empirically</strong></td><td>Scrape hourly for a week and record when designations appear.</td><td>$0</td><td>Medium</td><td>Describes behaviour, not the rule</td></tr></tbody></table>
+<p><strong>Recommendation.</strong> Do both. The manual gives the rule; the scrape proves it is followed.</p>
+<p><strong>Unblocks.</strong> Confidence in the availability signal&#x27;s timing.</p>
+<table class="decision"><tbody>
+<tr><th>Decision</th><td><span class="blank">not yet made</span></td>
+<th>Decided by</th><td><span class="blank">blank</span></td>
+<th>Date</th><td><span class="blank">blank</span></td></tr>
+</tbody></table>
+</section><section class="suggest">
+<h3>S-08 &middot; Add club rosters as a third source for player identity <span class="pill pill-warn">High</span>
+<span class="pill pill-neutral">PROPOSED</span></h3>
+<p><strong>Problem.</strong> 76 injury rows name players who are not on that club&#x27;s own depth chart.</p>
+<table class="clean"><thead><tr><th>Option</th><th>What it means</th><th>Cost</th><th>Effort</th><th>Risk</th></tr></thead><tbody><tr><td><strong>A. Two-out-of-three across report, depth chart and roster</strong></td><td>Resolve each disagreement by majority and publish the dissenters.</td><td>$0</td><td>Medium</td><td>Still two officials disagreeing</td></tr><tr><td><strong>B. Trust the depth chart only</strong></td><td>Conservative: score only players the club itself lists.</td><td>$0</td><td>Low</td><td>Drops real injuries</td></tr></tbody></table>
+<p><strong>Recommendation.</strong> A, with B as the fallback until the roster pages are collected.</p>
+<p><strong>Unblocks.</strong> Trust in the availability model&#x27;s inputs.</p>
+<table class="decision"><tbody>
+<tr><th>Decision</th><td><span class="blank">not yet made</span></td>
+<th>Decided by</th><td><span class="blank">blank</span></td>
+<th>Date</th><td><span class="blank">blank</span></td></tr>
+</tbody></table>
+</section><section class="suggest">
+<h3>S-09 &middot; Use the league&#x27;s sanctioned depth-chart feed <span class="pill pill-info">Medium</span>
+<span class="pill pill-neutral">PROPOSED</span></h3>
+<p><strong>Problem.</strong> Club charts are self-published, labelled &#x27;Unofficial&#x27;, and differ in format.</p>
+<table class="clean"><thead><tr><th>Option</th><th>What it means</th><th>Cost</th><th>Effort</th><th>Risk</th></tr></thead><tbody><tr><td><strong>A. Credentialed Sportradar weekly depth charts</strong></td><td>The league&#x27;s official data partner; consistent format, authorised source, requires credentials and probably payment.</td><td>$$</td><td>Low</td><td>Licence terms</td></tr><tr><td><strong>B. Keep scraping the 32 club sites</strong></td><td>Free, official, and works for 31 of 32 today.</td><td>$0</td><td>Medium</td><td>Format drift</td></tr></tbody></table>
+<p><strong>Recommendation.</strong> B for now, A if availability becomes a scored input rather than a displayed one.</p>
+<p><strong>Unblocks.</strong> A league-authoritative depth chart.</p>
+<table class="decision"><tbody>
+<tr><th>Decision</th><td><span class="blank">not yet made</span></td>
+<th>Decided by</th><td><span class="blank">blank</span></td>
+<th>Date</th><td><span class="blank">blank</span></td></tr>
+</tbody></table>
+</section><section class="suggest">
+<h3>S-10 &middot; Scrape the one club whose chart needs a browser <span class="pill pill-ok">Low</span>
+<span class="pill pill-neutral">PROPOSED</span></h3>
+<p><strong>Problem.</strong> Houston&#x27;s depth chart is rendered client-side; the page source has no table.</p>
+<table class="clean"><thead><tr><th>Option</th><th>What it means</th><th>Cost</th><th>Effort</th><th>Risk</th></tr></thead><tbody><tr><td><strong>A. Headless browser in CI</strong></td><td>Render the page, then parse. Adds a heavy dependency to the workflow.</td><td>$</td><td>Medium</td><td>Slow, fragile</td></tr><tr><td><strong>B. Leave it blank and flag it</strong></td><td>One club out of 32, clearly marked on the page.</td><td>$0</td><td>None</td><td>Incomplete coverage</td></tr></tbody></table>
+<p><strong>Recommendation.</strong> B for now. Revisit when the club count matters to a scored signal.</p>
+<p><strong>Unblocks.</strong> Full 32-club coverage.</p>
+<table class="decision"><tbody>
+<tr><th>Decision</th><td><span class="blank">not yet made</span></td>
+<th>Decided by</th><td><span class="blank">blank</span></td>
+<th>Date</th><td><span class="blank">blank</span></td></tr>
+</tbody></table>
+</section><h2>Modelling</h2><section class="suggest">
+<h3>S-11 &middot; Add rest, travel and weather to the ratings <span class="pill pill-info">Medium</span>
+<span class="pill pill-neutral">PROPOSED</span></h3>
+<p><strong>Problem.</strong> The model reads scores only, and the single strongest signal found (rest) is therefore left on the table.</p>
+<table class="clean"><thead><tr><th>Option</th><th>What it means</th><th>Cost</th><th>Effort</th><th>Risk</th></tr></thead><tbody><tr><td><strong>A. Add rest first</strong></td><td>Rest is derivable from official game dates, so it costs nothing and is fully verifiable.</td><td>$0</td><td>Low</td><td>Overfitting on one season</td></tr><tr><td><strong>B. Add travel and weather too</strong></td><td>Needs non-NFL sources (distances, forecasts) and a provenance policy for them.</td><td>$</td><td>High</td><td>Provenance</td></tr></tbody></table>
+<p><strong>Recommendation.</strong> A, measured against the existing walk-forward. Only then consider B.</p>
+<p><strong>Unblocks.</strong> A lower error and a sharper read on whether the rest edge is real.</p>
+<table class="decision"><tbody>
+<tr><th>Decision</th><td><span class="blank">not yet made</span></td>
+<th>Decided by</th><td><span class="blank">blank</span></td>
+<th>Date</th><td><span class="blank">blank</span></td></tr>
+</tbody></table>
+</section><h2>Competition</h2><section class="suggest">
+<h3>S-12 &middot; Decide the rewards question <span class="pill pill-warn">High</span>
+<span class="pill pill-neutral">PROPOSED</span></h3>
+<p><strong>Problem.</strong> The brief asks for rewards; anything of value needs legal review.</p>
+<table class="clean"><thead><tr><th>Option</th><th>What it means</th><th>Cost</th><th>Effort</th><th>Risk</th></tr></thead><tbody><tr><td><strong>A. Paper points only</strong></td><td>What runs today. No legal exposure, no prize.</td><td>$0</td><td>None</td><td>Lower motivation</td></tr><tr><td><strong>B. Real prizes after counsel</strong></td><td>Get advice first, then offer prizes in permitted jurisdictions.</td><td>$$$</td><td>High</td><td>Regulatory</td></tr></tbody></table>
+<p><strong>Recommendation.</strong> A until someone with authority asks for B in writing.</p>
+<p><strong>Unblocks.</strong> The competition&#x27;s reward tier.</p>
+<table class="decision"><tbody>
+<tr><th>Decision</th><td><span class="blank">not yet made</span></td>
+<th>Decided by</th><td><span class="blank">blank</span></td>
+<th>Date</th><td><span class="blank">blank</span></td></tr>
+</tbody></table>
+</section><h2>Site and governance</h2><section class="suggest">
+<h3>S-13 &middot; Pick one canonical site root <span class="pill pill-warn">High</span>
+<span class="pill pill-neutral">PROPOSED</span></h3>
+<p><strong>Problem.</strong> Four site generations are live; a visitor has to guess which door to use.</p>
+<table class="clean"><thead><tr><th>Option</th><th>What it means</th><th>Cost</th><th>Effort</th><th>Risk</th></tr></thead><tbody><tr><td><strong>A. Make lab/ the root</strong></td><td>Move this site to the top and reduce the other three to an archive page. Cleanest result, touches other sessions&#x27; files.</td><td>$0</td><td>Medium</td><td>Cross-session change</td></tr><tr><td><strong>B. Keep the root, make lab/ a sub-site</strong></td><td>Zero disruption; the landing page still points four ways.</td><td>$0</td><td>Low</td><td>Ambiguity persists</td></tr><tr><td><strong>C. Publish a site index at the root only</strong></td><td>One page that names and links all four generations honestly.</td><td>$0</td><td>Low</td><td>An extra click</td></tr></tbody></table>
+<p><strong>Recommendation.</strong> C now, A when the other sessions are finished. C is honest and costs nothing; A is the right end state but should not be done unilaterally.</p>
+<p><strong>Unblocks.</strong> A single clean landing page.</p>
+<table class="decision"><tbody>
+<tr><th>Decision</th><td><span class="blank">not yet made</span></td>
+<th>Decided by</th><td><span class="blank">blank</span></td>
+<th>Date</th><td><span class="blank">blank</span></td></tr>
+</tbody></table>
+</section><section class="suggest">
+<h3>S-14 &middot; Retire one of the two page generators <span class="pill pill-info">Medium</span>
+<span class="pill pill-neutral">PROPOSED</span></h3>
+<p><strong>Problem.</strong> Two CI jobs regenerate index.html and pages/ from different generators.</p>
+<table class="clean"><thead><tr><th>Option</th><th>What it means</th><th>Cost</th><th>Effort</th><th>Risk</th></tr></thead><tbody><tr><td><strong>A. Keep one, delete the other</strong></td><td>Needs an owner for the surviving generator.</td><td>$0</td><td>Medium</td><td>Cross-session change</td></tr><tr><td><strong>B. Make the second write elsewhere</strong></td><td>Both keep running; they stop fighting over the same files.</td><td>$0</td><td>Low</td><td>Two similar sites</td></tr></tbody></table>
+<p><strong>Recommendation.</strong> B as the safe step; A once there is one owner.</p>
+<p><strong>Unblocks.</strong> Safe editing of the root site.</p>
+<table class="decision"><tbody>
+<tr><th>Decision</th><td><span class="blank">not yet made</span></td>
+<th>Decided by</th><td><span class="blank">blank</span></td>
+<th>Date</th><td><span class="blank">blank</span></td></tr>
+</tbody></table>
+</section><section class="suggest">
+<h3>S-16 &middot; Adopt one club code set and enforce it <span class="pill pill-ok">Low</span>
+<span class="pill pill-neutral">PROPOSED</span></h3>
+<p><strong>Problem.</strong> Three spellings (LA/LAR, AZ/ARI) across sessions force alias handling.</p>
+<table class="clean"><thead><tr><th>Option</th><th>What it means</th><th>Cost</th><th>Effort</th><th>Risk</th></tr></thead><tbody><tr><td><strong>A. Enforce the nfl.com codes in the build</strong></td><td>Fail the build on any other spelling, keep the alias table for reads.</td><td>$0</td><td>Low</td><td>Touches other sessions&#x27; files</td></tr><tr><td><strong>B. Keep the alias table</strong></td><td>Works today; a new spelling would slip through silently.</td><td>$0</td><td>None</td><td>Silent drift</td></tr></tbody></table>
+<p><strong>Recommendation.</strong> B now, A when one owner controls the whole data layer.</p>
+<p><strong>Unblocks.</strong> Joins without an alias table.</p>
+<table class="decision"><tbody>
+<tr><th>Decision</th><td><span class="blank">not yet made</span></td>
+<th>Decided by</th><td><span class="blank">blank</span></td>
+<th>Date</th><td><span class="blank">blank</span></td></tr>
+</tbody></table>
+</section><h2>Verification</h2><section class="suggest">
+<h3>S-15 &middot; Run the integrity checks in CI on every refresh <span class="pill pill-warn">High</span>
+<span class="pill pill-neutral">PROPOSED</span></h3>
+<p><strong>Problem.</strong> Two published figures (league balance, and three &#x27;nfl.com contradicts itself&#x27; cells) went stale without anything noticing.</p>
+<table class="clean"><thead><tr><th>Option</th><th>What it means</th><th>Cost</th><th>Effort</th><th>Risk</th></tr></thead><tbody><tr><td><strong>A. Add the checks to the refresh workflow</strong></td><td>Recompute every identity and fail loudly on any mismatch.</td><td>$0</td><td>Low</td><td>None</td></tr><tr><td><strong>B. Check on commit only</strong></td><td>Catches less; the page can change without a commit.</td><td>$0</td><td>Low</td><td>Silent drift</td></tr></tbody></table>
+<p><strong>Recommendation.</strong> A. These checks already exist in this session&#x27;s verifier; wiring them up is the only work.</p>
+<p><strong>Unblocks.</strong> Automatic detection of stale or self-contradictory official data.</p>
+<table class="decision"><tbody>
+<tr><th>Decision</th><td><span class="blank">not yet made</span></td>
+<th>Decided by</th><td><span class="blank">blank</span></td>
+<th>Date</th><td><span class="blank">blank</span></td></tr>
+</tbody></table>
+</section><h2>Decision records</h2><table class="clean"><thead><tr><th>ID</th><th>Decision</th><th>Why</th><th>Consequence</th><th>Status</th></tr></thead><tbody><tr><td>D-1505-01</td><td><strong>Where this session&#x27;s site lives</strong><br>Built in a new lab/ directory rather than editing the existing root index.html.</td><td>Two CI jobs already regenerate the root pages from different generators, so a hand-built fifth generation there would be overwritten. lab/ is additive and destroys nothing.</td><td>Four site generations are now live; see suggestion S-13.</td><td>DECIDED - reversible</td></tr><tr><td>D-1505-02</td><td><strong>No suggestion is implemented in this session</strong><br>Every suggestion is published as PROPOSED with options and a recommendation.</td><td>The brief asks for a review step where the best path is chosen before anything changes. Implementing a suggestion would remove that choice.</td><td>The board is empty of decisions and full of choices, on purpose.</td><td>DECIDED</td></tr><tr><td>D-1505-03</td><td><strong>Unverifiable values stay blank</strong><br>Market lines, edges, prop prices and any unconfirmed cell render as a labelled blank.</td><td>The brief forbids inferring or filling values.</td><td>Several tables have visibly empty columns. That is the point.</td><td>DECIDED</td></tr><tr><td>D-1505-04</td><td><strong>Depth charts come from club sites, not nfl.com</strong><br>Scrape the 32 official club sites; nfl.com publishes no depth chart.</td><td>Verified 404 on nfl.com; verified working on 31 of 32 club sites.</td><td>The clubs label their own charts &#x27;Unofficial&#x27;, and that label is published with the data.</td><td>DECIDED - reversible</td></tr></tbody></table>
+    <footer class="pagefoot">
+      <p>Every table row on this page links to the official page it came from. A value that
+      could not be confirmed is shown as <span class="blank">blank</span> &mdash; it is never
+      inferred or filled in. This is a research tool, not betting advice.</p>
+    </footer>
+  </main>
+</div>
+</body>
+</html>

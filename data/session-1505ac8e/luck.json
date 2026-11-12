@@ -1,0 +1,92 @@
+{
+ "generated_at": "2026-11-12T22:56:52Z",
+ "definition": "Luck is removed by asking how a rule would have done had it bet the same number of games chosen at random from the same weeks. 10,000 random draws, fixed seed. A rule is only interesting if it sits in the top 5% of that null distribution.",
+ "rules": [
+  {
+   "id": "S1",
+   "n": 26,
+   "mean_edge_pts": 8.035,
+   "permutation_p": 0.0004999500049995,
+   "ci95_mean_edge": [
+    3.783,
+    12.371
+   ],
+   "split_half_correlation": -0.04187970404306605,
+   "verdict": "beats the random-bet null"
+  },
+  {
+   "id": "S2",
+   "n": 8,
+   "mean_edge_pts": 9.89,
+   "permutation_p": 0.013398660133986601,
+   "ci95_mean_edge": [
+    2.963,
+    17.179
+   ],
+   "split_half_correlation": NaN,
+   "verdict": "beats the random-bet null"
+  },
+  {
+   "id": "S3",
+   "n": 29,
+   "mean_edge_pts": 3.634,
+   "permutation_p": 0.0321967803219678,
+   "ci95_mean_edge": [
+    -1.932,
+    9.229
+   ],
+   "split_half_correlation": -0.24579864526256281,
+   "verdict": "beats the random-bet null"
+  },
+  {
+   "id": "S4",
+   "n": 25,
+   "mean_edge_pts": 2.324,
+   "permutation_p": 0.1095890410958904,
+   "ci95_mean_edge": [
+    -1.176,
+    5.809
+   ],
+   "split_half_correlation": 0.1352302945463094,
+   "verdict": "indistinguishable from random bet selection"
+  },
+  {
+   "id": "S5",
+   "n": 19,
+   "mean_edge_pts": 1.402,
+   "permutation_p": 0.21637836216378362,
+   "ci95_mean_edge": [
+    -4.572,
+    7.8
+   ],
+   "split_half_correlation": 0.4214517186028611,
+   "verdict": "indistinguishable from random bet selection"
+  },
+  {
+   "id": "S6",
+   "n": 10,
+   "mean_edge_pts": 8.234,
+   "permutation_p": 0.014698530146985302,
+   "ci95_mean_edge": [
+    -0.877,
+    16.883
+   ],
+   "split_half_correlation": 0.29931073881747855,
+   "verdict": "beats the random-bet null"
+  },
+  {
+   "id": "S8",
+   "n": 51,
+   "mean_edge_pts": -4.659,
+   "permutation_p": 0.9849015098490151,
+   "ci95_mean_edge": [
+    -8.125,
+    -1.358
+   ],
+   "split_half_correlation": -0.03450165460902945,
+   "verdict": "indistinguishable from random bet selection"
+  }
+ ],
+ "pool_size": 88,
+ "note": "This measures whether the SELECTION has information. It does not measure profit, because no book prices exist."
+}

@@ -148,7 +148,8 @@ def section_of(html: str, upto: int) -> str:
 HEADING = re.compile(r"^[\s>#*_]*(OFFENSE|DEFENSE|SPECIAL\s*TEAMS)\b", re.I)
 # Cells that are column headers, not players (chiefs.com uses First/Second/Third/Fourth,
 # packers.com uses Player/Player/Player).
-HEADER_WORDS = {"position", "player", "first", "second", "third", "fourth", "pos"}
+HEADER_WORDS = {"position", "pos", "player", "first", "second", "third",
+                "fourth", "fifth", "sixth", "seventh"}
 
 
 def is_header_row(cells) -> bool:

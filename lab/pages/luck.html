@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skill vs luck - NFL Decision Lab</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../index.html"><span class="brand-mark">NFL</span> Decision Lab</a>
+  <div class="tagline">Session 1505ac8e &middot; data retrieved 2026-11-12 &middot; every row links to its official source</div>
+</header>
+<div class="layout">
+  <nav class="sidebar">
+    <a class="nav-home" href="../index.html">Overview</a>
+    <div class="nav-group"><div class="nav-title">Decide</div><a class="" href="../pages/executive-summary.html">Executive summary</a><a class="" href="../pages/questions.html">Questions &amp; answers</a><a class="" href="../pages/suggestions.html">Suggestions: choose a path</a></div><div class="nav-group"><div class="nav-title">Model</div><a class="" href="../pages/lines.html">My lines</a><a class="" href="../pages/strategies.html">Strategy lab</a><a class="" href="../pages/correlations.html">Correlations</a><a class="active" href="../pages/luck.html">Skill vs luck</a></div><div class="nav-group"><div class="nav-title">Availability</div><a class="" href="../pages/injuries.html">Official injury report</a><a class="" href="../pages/depth.html">Depth charts</a><a class="" href="../pages/availability.html">Availability pressure</a></div><div class="nav-group"><div class="nav-title">Data</div><a class="" href="../pages/standings.html">Standings</a><a class="" href="../pages/schedule.html">Week 10 schedule</a></div><div class="nav-group"><div class="nav-title">Assurance</div><a class="" href="../pages/sources.html">Sources</a><a class="" href="../pages/verification.html">Verification</a><a class="" href="../pages/flagged.html">Flagged for review</a></div>
+    <div class="nav-group"><div class="nav-title">Other site generations</div>
+      <a href="../../index.html" target="_blank" rel="noopener">Root dashboard &#8599;</a>
+      <a href="../../docs/index.html" target="_blank" rel="noopener">docs/ dashboard &#8599;</a>
+      <a href="../../verified-lab/index.html" target="_blank" rel="noopener">verified-lab/ &#8599;</a>
+      <a href="../../referee/index.html" target="_blank" rel="noopener">referee/ audit &#8599;</a>
+    </div>
+  </nav>
+  <main class="content">
+    <h1>Skill vs luck</h1>
+    <p class="lead">Permutation tests, bootstrap intervals, split-half stability and multiple-testing correction - the four things that separate a real signal from a good week.</p>
+    <div class="kpis"><div class="kpi"><div class="kpi-label">Rules tested</div><div class="kpi-value">7</div></div><div class="kpi"><div class="kpi-label">Beating the null</div><div class="kpi-value">4</div></div><div class="kpi"><div class="kpi-label">Indistinguishable from random</div><div class="kpi-value">3</div></div><div class="kpi"><div class="kpi-label">Random-draw pool</div><div class="kpi-value">88</div><div class="kpi-sub">game results available to a random bet</div></div></div><p class="lead">Luck is removed by asking how a rule would have done had it bet the same number of games chosen at random from the same weeks. 10,000 random draws, fixed seed. A rule is only interesting if it sits in the top 5% of that null distribution.</p><table class="numeric"><caption>Split-half r correlates the rule&#x27;s early-week edges with its late-week edges. A negative or near-zero value means the result does not repeat within the season.</caption><thead><tr><th>Rule</th><th>Bets</th><th>Mean edge (pts)</th><th>95% CI</th><th>Permutation p</th><th>Split-half r</th><th>Verdict</th></tr></thead><tbody><tr><td>S1</td><td>26</td><td>8.035</td><td>[3.783, 12.371]</td><td>0.0005</td><td>-0.042</td><td>beats the random-bet null</td></tr><tr><td>S2</td><td>8</td><td>9.89</td><td>[2.963, 17.179]</td><td>0.0134</td><td><span class="blank" title="Not confirmed from an official source">blank</span></td><td>beats the random-bet null</td></tr><tr><td>S3</td><td>29</td><td>3.634</td><td>[-1.932, 9.229]</td><td>0.0322</td><td>-0.246</td><td>beats the random-bet null</td></tr><tr><td>S4</td><td>25</td><td>2.324</td><td>[-1.176, 5.809]</td><td>0.1096</td><td>0.135</td><td>indistinguishable from random bet selection</td></tr><tr><td>S5</td><td>19</td><td>1.402</td><td>[-4.572, 7.8]</td><td>0.2164</td><td>0.421</td><td>indistinguishable from random bet selection</td></tr><tr><td>S6</td><td>10</td><td>8.234</td><td>[-0.877, 16.883]</td><td>0.0147</td><td>0.299</td><td>beats the random-bet null</td></tr><tr><td>S8</td><td>51</td><td>-4.659</td><td>[-8.125, -1.358]</td><td>0.9849</td><td>-0.035</td><td>indistinguishable from random bet selection</td></tr></tbody></table><h2>Why this is the honest test</h2>
+<p>Luck is removed by changing the question from "did this rule make money?" to "would a
+random set of the same number of bets, chosen from the same weeks, have done as well?". Ten
+thousand random draws, fixed seed, published p-value. A rule that cannot beat that
+distribution has not demonstrated selection skill, however good its raw record looks.</p>
+<p><strong>Limit, stated plainly:</strong> This measures whether the SELECTION has information. It does not measure profit, because no book prices exist. With no book prices, profit
+cannot be computed, so what is measured is whether the rule's <em>selection</em> carries
+information about the margin relative to my own line.</p>
+    <footer class="pagefoot">
+      <p>Every table row on this page links to the official page it came from. A value that
+      could not be confirmed is shown as <span class="blank">blank</span> &mdash; it is never
+      inferred or filled in. This is a research tool, not betting advice.</p>
+    </footer>
+  </main>
+</div>
+</body>
+</html>
