@@ -1053,3 +1053,116 @@ Session branch: `arena/5cf5434e-nfl1`, branched from `c09c739` (= `main` = `orig
 - Live site re-read as a user: https://kanlerxz87-cyber.github.io/NFL1/ returns the Overview dashboard (source-linked own-lines, strategy-leaderboard, availability and verification tables); https://kanlerxz87-cyber.github.io/NFL1/pages/flagged.html returns the clearly labelled Flagged for Review page with every irregularity and its official source link. Flagged irregularities (F02, F03, F29 among them) did not block the merge and remain published for review.
 - Sources used for this record: GitHub REST API (pulls/22, commits/8de9917 check-runs, Pages builds latest) and the live Pages URL above.
 
+
+---
+
+# Session `9cb71eb8-nfl1` — large-sample research build, integration, PR and merge
+
+Session branch: `arena/9cb71eb8-nfl1`, branched from `c09c739` (= `origin/main`).
+Acted as the **final integration session** for the current state of the repository: every
+other session branch had already merged (PRs #1-#20), so no other session owned an
+unclaimed task. Session `5cf5434e-nfl1` was still active and had claimed `COORDINATION.md`
+only, so its work was merged in twice (`563aaa8`, and again before the final push) with no
+conflict beyond auto-merging this file.
+
+## Claimed tasks (U1-U9) — all done
+
+| ID | Task | Status | File scope | Evidence |
+|---|---|---|---|---|
+| U1 | Provenance-pinned research extract (games with closing lines **and observed prices**, player weeks, injuries 2016-2026), fetched in Actions and committed as CSV | done | `s9cb/collect.py`, `data/s9cb/`, `.github/workflows/s9cb-collect.yml` | 7,239 games, 24,932 player weeks, 56,537 injury rows; every file pinned by URL + sha256 in `data/s9cb/provenance.json` |
+| U2 | Walk-forward own lines with nested hyper-parameter selection and a look-ahead probe | done | `s9cb/analysis/lines.py` | `data/s9cb/lines.json`; 6,975 games scored; probe proves the walk-forward cut is real |
+| U3 | Scored leaderboard: 12 rules, 14,440 bets at observed prices, 8 gates, BH correction, bootstrap CIs, holdout, leave-one-season-out | done | `s9cb/analysis/strategies.py` | `data/s9cb/leaderboard.json`; 0 PASS, 5 WATCH, 7 FAIL |
+| U4 | Correlation register with computed values | done | `s9cb/analysis/run.py`, `props.py` | 11 game-level + 8 same-game prop correlations, each with a Fisher-z 95% interval |
+| U5 | Luck-removal protocol | done | `s9cb/analysis/run.py` | Exact null from observed prices (variance d-1 per bet) plus bootstrap, BH and a power calculation |
+| U6 | Parlay and prop-combination analysis | done | `s9cb/analysis/strategies.py`, `props.py` | 66 priced two-leg combinations, none cherry-picked |
+| U7 | Injury and depth page joined to the official week-10 report | done | `s9cb/site.py` | `lab/injuries.html`; 276 rows, 26 clubs, 6 game designations |
+| U8 | Consolidated site section: one landing page plus 13 subpages by category | done | `s9cb/site.py`, `lab/` | 14 pages, 239 internal links, 0 broken |
+| U9 | Line-by-line verification against official pages; PR, merge, Pages confirmation | done | `s9cb/analysis/verify.py` | see below |
+
+## Sources used (all read directly during this session unless noted)
+
+- <https://www.nfl.com/standings/league/2026/reg> — 32 clubs transcribed by hand into
+  `data/s9cb/official_standings_2026.csv`
+- <https://www.nfl.com/injuries/> — week-10 report read directly; 3 designations
+  transcribed and checked, 5 Out designations cross-confirmed
+- <https://www.nfl.com/schedules/> — cited as the official entry point for results and prices
+- <https://www.nfl.com/stats/player-stats/> — cited for the player-week panel
+- <https://github.com/nflverse/nflverse-data> (CC-BY-4.0) — the parse of the NFL's GSIS
+  feed, the official weekly injury report and the official depth charts; every file pinned
+  by URL and sha256 in `data/s9cb/provenance.json`
+- <https://operations.nfl.com/gameday/> — cited where a league rule was being distinguished
+  from a modelling assumption
+
+## Verification performed
+
+1. **Standings** — recomputed from all 136 completed 2026 games and compared field by field
+   with the 32 clubs hand-transcribed from nfl.com: **32/32 match** on W, L, T, PF and PA.
+2. **Game results** — the extract's 2026 results compared with the independent hand
+   transcription in `data/verified/games_2026.csv`: **136/136 match** after the published
+   AZ/ARI alias.
+3. **Injuries** — three week-10 game designations read from nfl.com compared with the
+   extract: **3/3 match**. Separately, the five Out designations in the extract are exactly
+   the five visible on the official page.
+4. **Price coverage** — 5,201 of 7,103 played games carry an observed price; the 1,902 that
+   do not are pre-2006 and are used for training only, never scored.
+5. **Sign convention** — proved from the data, not assumed: the closing spread correlates
+   +0.431 (95% CI 0.412 to 0.450) with the actual home margin over 6,975 games.
+6. **Walk-forward guard** — the 2025 week-12 block was re-fitted with future data added;
+   the predictions differ, so the cut is real.
+7. **Statistics** — the hand-written Student-t CDF was found to be wrong in the middle of its
+   range and was replaced with scipy's, then asserted equal to it at five points. This is
+   recorded in `lab/repo-review.html` because it had silently inverted every p-value in the
+   first run.
+8. **Existing gates re-run after the integration edit** — `scripts/verified/check_site.py`
+   (20 pages, 0 broken links) and `scripts/verified/validate_verified.py` (all hard checks)
+   both pass with the added navigation entry.
+9. **New section link check** — 239 internal links across 14 pages, 0 broken.
+
+## Headline findings (all reproducible from `data/s9cb/*.json`)
+
+- Our line is less accurate than the market closing line: spread MAE 10.70 vs 10.24 points
+  over 6,975 games, paired t = 10.33.
+- Our line still adds information: in a regression of the result on both lines the model
+  weight is 0.161 (SE 0.048, t = 3.35).
+- Nothing passes all eight gates. The closest, S07 fade the road favourite of 7+, returned
+  +6.06% over 401 bets with p = 0.199 and needs about 1,950 bets before that edge is
+  detectable at 80% power.
+- The strongest single result is a loss: S09, the under when the closing total is 40 or
+  lower, returned -7.93% over 887 bets (p = 0.015, BH-adjusted 0.178).
+- Parlay legs in different games are independent: across 66 combinations the dependence
+  ratio averages 1.0002 (median 0.998). Inside one game they are not — a quarterback's
+  passing yards and his top receiver's receiving yards correlate +0.672.
+
+## Irregularities raised (published on `lab/flagged.html`, none blocking)
+
+U01 no prop prices exist anywhere reachable · U02 the mirrored injury feed lags the official
+page on game designations (6 of 276 week-10 rows) · U03 six clubs published no week-10
+report · U04 1,902 played games carry a line but no price · U05 same-game parlay prices are
+unobservable, so the size of the mispricing cannot be measured · U06 no historical depth
+charts, so backup quality cannot be back-tested · U07 the incremental test (t = 3.35) and
+the raw edge correlation (r = 0.019, p = 0.113) disagree in significance; both are
+published · U08 five site generations now coexist · U09 nfl.com prints Arizona as AZ where
+the feed uses ARI · U10 reward legality is unreviewed.
+
+## Files touched (additive only)
+
+New: `s9cb/collect.py`, `s9cb/content.py`, `s9cb/site.py`, `s9cb/analysis/{common,lines,
+strategies,props,run,verify}.py`, `.github/workflows/s9cb-collect.yml`, `data/s9cb/*`,
+`lab/**` (14 pages + stylesheet).
+Modified: `COORDINATION.md` (this section and the session table), `index.html` (one
+navigation entry and one hero link, both additive).
+Read but never modified: `pipeline/`, `tools/`, `scripts/`, `analysis/`, `pages/`, `docs/`,
+`verified-lab/`, `referee/`, `data/model/`, `data/verified/`, `data/*.csv`.
+
+## Open cross-session requests (logged, not applied)
+
+| # | Request | Owner of the file | Why not applied here |
+|---|---|---|---|
+| R-9cb71eb8-01 | Add the `lab/` navigation entry to the template inside `tools/build.py` so it survives the next regeneration of `index.html`. | `tools/build.py` — `7600ed8b` / `25aa7696` lineage | `tools/build.py` rewrites `index.html` unconditionally, so the entry added directly to `index.html` in this merge is expected to be transient. |
+| R-9cb71eb8-02 | Consider adding `s9cb/analysis/verify.py` as an extra CI gate alongside `scripts/verified/validate_verified.py`. | `.github/workflows/pages.yml` | It adds three checks the existing gates do not make (standings recomputation, results cross-check, injury designation check). Changing shared CI is requested, not taken. |
+| R-9cb71eb8-03 | Confirm whether the pre-2006 games the existing model trains on (`data/model/`) carry prices in the same source, or whether they were scored with an assumed -110. | `pipeline/` | This session refuses to score any game without an observed price and reports 1,902 such games; if the other pipeline scored them, the two leaderboards are not measuring the same thing. |
+
+## PR / merge
+
+- **Pull request:** <https://github.com/kanlerxz87-cyber/NFL1/pull/21>
+- **Merge result and Pages deployment:** recorded in the entry appended after the merge.
