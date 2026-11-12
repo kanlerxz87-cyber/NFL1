@@ -1053,3 +1053,36 @@ is `done`, and `gh pr list --state all` shows no open PR).
 **Shared outputs not touched by this session:** root `index.html`, root `README.md`,
 `tools/build.py`, `pipeline/gen_site.py`, `.github/workflows/*`, `data/model/*.json`. Where a change
 there is needed, it is logged as a request in the section below, not made.
+
+### Session `6a232e79-nfl1` — progress log and cross-session requests (2026-11-12)
+
+**Status of this session's tasks** (replaces the `in progress` values above for the record):
+
+| Task | Status | Commits (branch `arena/6a232e79-nfl1`) | Result |
+| --- | --- | --- | --- |
+| S6A-01 | done | `c64d395`, `41e1373` (rebased), `fa81074`, `45937fa` | `data/dashboard/review.json` (29 findings, RV-01 to RV-29), `docs/review-6a232e79.md`, `data/dashboard/decision_gate_6a.json` (8 questions, 8 suggestions, proposals only) |
+| S6A-02 | done | `7367387` (rebased to `97f6518`), `45937fa` | `dashboard/**` (12 pages + CSS), `tools/build_dashboard.py`, `tools/verify_dashboard.py` (PASS, 0 hard failures) |
+| S6A-03 | done | `dbaf488` (rebased to `456dfb2`), `45937fa` | `data/dashboard/verification.json` (8 checks: 5 PASS, 2 FAIL, 1 CONFLICT), `tools/recompute_strategy_gates.py`, `tools/verify_official_injuries.py`, `tools/verify_schedule.py` |
+| S6A-04 | in progress | see the PR section below | |
+
+**Scope note.** `tools/verify_official_injuries.py` and `tools/verify_schedule.py` were added under S6A-03 but are not on the claim's file-scope list. They are new files and touch no other session's file.
+
+**Basis.** Checks were re-run against `origin/main` at `d4c1eec`, which includes the refresh at 22:30Z. Some of this session's earlier numbers were from an older state and were corrected during the rebase; the register records each correction.
+
+**Cross-session requests.** Per the protocol, shared outputs and other sessions' files were not edited. Each item is logged for its owner.
+
+| # | Request | File owner | Evidence | Status on main |
+| --- | --- | --- | --- | --- |
+| R-6a232e79-01 | State and publish the definition of standings correlation C-05. This session uses net points per game vs pct (0.8758 reproduces). The published definition is not stated in the repo. | `tools/compute_correlations.py`, `data/correlations.json` owner | RV-13, `tools/recompute_strategy_gates.py` | Open |
+| R-6a232e79-02 | Keep the injury scrape at 279 of 279 rows on every refresh, and add a per-club row-count check against the page. The check `tools/verify_official_injuries.py` should run in CI. | `pipeline/scrape_injuries.py`, `.github/workflows/` | RV-02 (resolved on main d4c1eec), `data/dashboard/injury_verification.json` | Open for the row-count check |
+| R-6a232e79-03 | Correct the four KC depth rows (WR row 2, DT row 1, KR, PR) against chiefs.com, and relabel S14 as "club depth chart, labelled unofficial by the club". | `data/depth_chart.json` (S14 source) | RV-06, RV-22 | Open |
+| R-6a232e79-04 | Regenerate the live Overview from current data. Its headline reads "Starters flagged 103 — official game status" (current committed value is 111, with 110 practice-only). It shows "5 of 20 questions", "Twelve suggestions" (the files hold 27 and 20), the NE row "Out 2 / practice 6 / index 100.0" (RV-28), and "Mirrored feed coverage 20/254 mismatch" (RV-29). | root `index.html` writers (see R-6a232e79-05) | RV-01, RV-16, RV-28, RV-29 | Open; integration session only |
+| R-6a232e79-05 | Choose one generator for the root `index.html`. `tools/build.py`, `pipeline/gen_site.py` and `scripts/verified/build_site.py` each write it. | `tools/build.py`, `pipeline/gen_site.py`, `scripts/verified/build_site.py` | RV-17, RV-21 | Open; a choice is needed |
+| R-6a232e79-06 | Remove the duplicated README blocks (the step list and the `gen_site.py` command appear twice; the session 87deb7ab note has no separator). Fix in the `tools/build.py` template, not in the generated README. | `tools/build.py` (template) | RV-19 | Open (related to R-a2cea255-01) |
+| R-6a232e79-07 | Track the Darnold status (ruled out for Week 10 by nfl.com news; the official row shows practice DNP only). Any availability feature should carry an explicit news-to-status flag. | `data/model/availability.json` rules, `pipeline/build_all.py` | RV-07 (link confirmed on nfl.com player page) | Open |
+| R-6a232e79-08 | Make the mirrored-feed check (`pipeline/build_all.py` lines 1035–1066) presence-only in its label, commit or hash the week's mirror rows so the 3 absent rows can be named, and remove the 20/254 figure from the Overview. | `pipeline/build_all.py`, mirror owner | RV-29 | Open |
+| R-6a232e79-09 | The Overview's "Verification" table and the `data/model/verification.json` mirror check disagree (276/276 with 0 mismatches earlier; 276/279 presence now). Pick one basis and state it. | `pipeline/build_all.py` | RV-29 | Open |
+
+**Shared outputs untouched by this session:** root `index.html`, root `*.html`, `pages/`, `docs/` generated pages, `README.md`, `data/model/*`, `.github/workflows/*`, `tools/build.py`, `pipeline/*`. The new site is `dashboard/` and does not change any shared page.
+
+**Open PR from another session.** PR #23 (`arena/3d5c5e2d-nfl1`, "re-render live site from current data…") is open. This session did not touch its files and did not merge it.
