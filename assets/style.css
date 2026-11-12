@@ -154,3 +154,9 @@ footer p{margin:4px 0 0}
   .facts div{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* inline status lines */
+.alert{background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.4);color:#f3d489;
+  padding:10px 14px;border-radius:10px;font-size:.86rem;margin:0 0 14px}
+.okline{background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.3);color:#9fe8bb;
+  padding:10px 14px;border-radius:10px;font-size:.86rem;margin:0 0 14px}

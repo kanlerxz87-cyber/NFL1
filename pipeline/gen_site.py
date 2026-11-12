@@ -101,16 +101,23 @@ def table(headers, rows, cls="", note=None) -> str:
 
 
 def kpi(label, value, sub="") -> str:
+    shown = esc(value) if value is not None else "&mdash;"
     return (f'<article class="kpi"><span class="kpi-label">{esc(label)}</span>'
-            f'<strong class="kpi-value">{value}</strong>'
+            f'<strong class="kpi-value">{shown}</strong>'
             f'<span class="kpi-sub">{esc(sub)}</span></article>')
 
 
 def page(path: str, title: str, body: str, subtitle: str = "", generated: str = "") -> str:
     prefix = "../" if path.startswith("pages/") else ""
-    nav = "".join(
-        f'<a href="{prefix}{href}"{" class=\"active\"" if href.endswith(path.split("/")[-1]) and href.startswith(path.split("/")[0] + "/") or href == path else ""}>{esc(label)}</a>'
-        for href, label in NAV)
+    current = path.split("/")[-1]
+    links = []
+    for href, label in NAV:
+        cls = ' class="active"' if href.split("/")[-1] == current else ""
+        links.append(f'<a href="{prefix}{href}"{cls}>{esc(label)}</a>')
+    nav = "".join(links)
+    sub = f'<p class="standfirst">{subtitle}</p>' if subtitle else ""
+    stamp = (f'<p class="timestamp">Data built {esc(generated)} · every value links to its source</p>'
+             if generated else "")
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -130,8 +137,8 @@ def page(path: str, title: str, body: str, subtitle: str = "", generated: str = 
   <section class="page-head">
     <p class="eyebrow">Evidence-first dashboard</p>
     <h1>{esc(title)}</h1>
-    {f'<p class="standfirst">{subtitle}</p>' if subtitle else ''}
-    {f'<p class="timestamp">Data built {esc(generated)} · every value links to its source</p>' if generated else ''}
+    {sub}
+    {stamp}
   </section>
   {body}
 </main>
@@ -571,13 +578,23 @@ def injuries_page(avail, dash):
     w_rows = [[esc(k), num(v, 3)] for k, v in weights.items()]
     w_tbl = table(["Position", "Weight"], w_rows)
 
+    source = a.get("source", {})
+    banner = ""
+    if source.get("warning"):
+        banner = f'<p class="alert">{esc(source["warning"])} {src(source.get("url"), "official page")}</p>'
+    else:
+        banner = (f'<p class="okline">Source: {esc(source.get("label",""))} — '
+                  f'{src(source.get("url"), "nfl.com/injuries")}</p>')
+
     body = f"""
 <section class="kpis">
-  {kpi("Injury rows this week", counts.get("injury_rows_this_week"), f"week {a.get('week','')}")}
+  {kpi("Injury records", counts.get("injury_records"), f"week {a.get('week','')}")}
   {kpi("Starters impacted", counts.get("starters_impacted"), "depth rank 1 only")}
   {kpi("Clubs with a starter out", counts.get("teams_with_starter_out"), "official game status")}
+  {kpi("Unmatched records", counts.get("records_not_matched_to_depth_chart"), "not guessed")}
   {kpi("Depth chart snapshot", (a.get("depth_chart_timestamp") or "")[:10], "weekly mirror")}
 </section>
+{banner}
 
 <section class="panel">
   <h2>What this measures</h2>
@@ -621,7 +638,7 @@ def props_page(props, dash):
             f"<strong>{esc(r['player'])}</strong>", esc(r["team"]), esc(r["position"]),
             f"vs {esc(r['opponent'])}", num(r.get("games")),
             num(r.get("season_mean")), num(r.get("opponent_factor"), 3),
-            num(r.get("projection")), esc(r.get("my_line")),
+            num(r.get("projection")), num(r.get("my_line")),
             f"[{r['interval80'][0]}, {r['interval80'][1]}]" if r.get("interval80") else "",
             '<span class="missing">blank</span>',
             badge("model-only"),
@@ -653,7 +670,7 @@ def props_page(props, dash):
   game-level legs; player-level leg correlation needs game-level receiving data per target, which
   is not yet wired in. Until then, prop combos are published as model output only, never as a
   priced bet.</p>
-  <p class="note">{src(SOURCE['stats'], 'NFL player stats')} · {src(SOURCE['injury'], 'injury report')}</p>
+  <p class="note">{src(SOURCE['stats'], 'NFL player stats')} · {src(SOURCE["injuries"], 'injury report')}</p>
 </section>
 """
     return page("pages/props.html", "Player Props",
@@ -782,8 +799,8 @@ def questions_page(dash):
         ["Official injury reports", "2009-2026, weekly practice and game status", badge("verified"), src(SOURCE["injuries"], "NFL.com")],
         ["Depth charts", "Weekly, all clubs", badge("verified"), src(SOURCE["depth"], "release")],
         ["Snap counts and player stats", "2026 to date", badge("verified"), src(SOURCE["stats"], "NFL.com")],
-        ["Book-level prices and line history", "None", badge("blocked"), src(SOURCE["ops"], "NFL operations")],
-        ["Player prop prices", "None", badge("blocked"), src(SOURCE["stats"], "NFL stats")],
+        ["Book-level prices and line history", "Not available anywhere in this build", badge("blocked"), src(SOURCE["ops"], "NFL operations")],
+        ["Player prop prices", "Not available anywhere in this build", badge("blocked"), src(SOURCE["stats"], "NFL stats")],
         ["Game-day inactives and participation", "Not ingested", badge("open"), src(SOURCE["injuries"], "NFL.com")],
         ["Legal position on rewards", "No review", badge("blocked"), src(SOURCE["ops"], "NFL operations")],
     ]
