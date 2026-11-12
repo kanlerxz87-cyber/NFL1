@@ -1531,3 +1531,29 @@ updated from "four generations" to "five".
 No file this session depends on changed on `main` (`data/verified/games_2026.csv`,
 `data/verified/standings_2026.csv`, `data/standings.csv` and `data/model/snapshot.json` are
 byte-identical), so the verification results above are unchanged.
+
+### Session `bc923016-nfl1` — final merge and verification (PRs #28 and #36)
+
+**PR #28** (`https://github.com/kanlerxz87-cyber/NFL1/pull/28`) — **MERGED** 2026-11-12T22:53:51Z, merge commit `e36d2d5`.
+Content: `pipeline/content.py` decision record D06 (live-site currency, Implemented) + suggestion S13 (staleness guard); `tools/build.py` verified-lab README pointer; `COORDINATION.md` session record. Merged after resolving conflicts with `main` (which had advanced through PRs #21–#32).
+
+**PR #36** (`https://github.com/kanlerxz87-cyber/NFL1/pull/36`) — **MERGED** 2026-11-12T23:09:24Z, merge commit `6fbe1fa`.
+Content: `pipeline/gen_site.py` dynamic counts (replaced hardcoded "Twelve suggestions / five decision records" with `len(SUGGESTIONS)` / `len(DECISIONS)` in three places: index.html Next stat, suggestions page subtitle, executive footer). Merged after resolving a suggestions.html timestamp conflict with `main` (PR #34).
+
+**Verification on main at `6fbe1fa`:**
+- `check_committed_site.py`: PASS (20 pages, 408 internal links, 33 source tables / 790 rows with https source links, no stale stamps).
+- `check_site.py`: 20 pages, all local links resolve and navigation complete.
+- `validate_verified.py`: all hard checks pass.
+- Main's committed `pages/suggestions.html` shows "15 improvements, 6 decision records"; `index.html` shows "15 suggestions"; `pipeline/gen_site.py` has 3 dynamic `len(SUGGESTIONS)` references and 0 hardcoded "Twelve" strings.
+- `dashboard.json` generated_at matches `index.html` Data built stamp (no staleness).
+
+**Live site** (`https://kanlerxz87-cyber.github.io/NFL1/`): Pages deployment at `6fbe1fa` completed (legacy build, source `main /`). Legacy Pages propagation delay means the live site may lag the committed HTML by a few minutes; the committed HTML on main is correct.
+
+**Known irregularities carried to main:** F01–F36 + V-series; F19/F20 (multiple site renderers); V3 (mirrored feed coverage — now 276/295, see live site verification table). Flagged for Review page at `pages/review.html` carries all flagged items with source links.
+
+**Tasks completed this session:**
+- Fresh verification against live nfl.com (standings 32/32, injuries 276 rows, spot-checked BUF/SF/CHI/NYG standings and WAS/NYG/NE injuries).
+- Identified and fixed the live-site staleness root cause (collect-data workflow commits refreshed JSON with `[skip ci]`, suppressing pages.yml). Session `3d5c5e2d` already fixed this on main via PR #23; this session's redundant fix was dropped in the merge.
+- Added D06 decision record and S13 suggestion documenting the staleness finding and fix.
+- Fixed hardcoded suggestion/decision count text in gen_site.py (PR #36).
+- Merged PRs #28 and #36 to main; both CI gates pass.
