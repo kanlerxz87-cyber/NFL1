@@ -159,6 +159,7 @@ request in this file instead.
 ## Change log
 
 - 2026-11-12 — `629e0db0-nfl1`: completed T14 in isolated workflow/report/test files. The prior `|| true` could hide an unexpected scraper crash. Expected network/parse failures are still represented by the scraper status JSON and use the existing clearly marked stale-feed fallback; the Actions job now writes a summary and warning from the effective model source. Official reference checked: https://www.nfl.com/injuries/ (Week 10, retrieved 2026-11-12). Tests: `python3 -m unittest discover -s tests -v` (111 passed); `py_compile`; PyYAML parse; `scripts/verified/check_site.py`; `scripts/verified/validate_verified.py`; `git diff --check`.
+- Branch Actions run [43319697503](https://github.com/kanlerxz87-cyber/NFL1/actions/runs/43319697503) completed successfully after the workflow change; scraper, model build, new source-report step, and generated-data commit all succeeded. Automated data refresh is recorded in branch commit `bae1dc2`.
 - 2026-11-12 — `80731db4-nfl1`: created board. Repo contained exactly one tracked file,
   `README.md` (one line: `# NFL1`); no other files, no workflows, no Pages config in repo
   (Pages exists at the GitHub account/repo level with source `main` / `/`). Claimed T01.
