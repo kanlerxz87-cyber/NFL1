@@ -1002,3 +1002,22 @@ where they overlap: both report 32 standings rows, and this subsystem's harness
 independently confirms all 28 pre-game records printed on the official injury
 page. Keeping both is deliberate — an audit is only worth anything if it was
 produced independently of the thing it audits.
+
+---
+
+# Session `6a232e79-nfl1` — claims (branch `arena/6a232e79-nfl1`, base `c09c739` on `main`)
+
+Claimed at the start of this session, before any other file was edited. Status values follow the
+board above. No other session holds an `in progress` claim at this point (checked: every row above
+is `done`, and `gh pr list --state all` shows no open PR).
+
+| Task | Description | Status | Owner | File scope |
+| --- | --- | --- | --- | --- |
+| S6A-01 | Repo review: line-by-line irregularity register, each item with a source link and a verified / unverified status | in progress | `6a232e79-nfl1` | `data/dashboard/review.json`, `docs/review-6a232e79.md` |
+| S6A-02 | Clean dashboard site: landing page plus category subpages (lines, strategies, injuries & depth, questions, suggestions, flagged for review, executive summary, sources) | in progress | `6a232e79-nfl1` | `dashboard/**`, `tools/build_dashboard.py`, `tools/verify_dashboard.py` |
+| S6A-03 | Independent re-verification: schedule matchups and injury-table row counts against nfl.com; gate and correlation recomputation from the committed JSON | in progress | `6a232e79-nfl1` | `data/dashboard/verification.json`, `tools/recompute_strategy_gates.py` |
+| S6A-04 | Final integration for this session: PR to `main`, merge, Pages check, record here | in progress | `6a232e79-nfl1` | `COORDINATION.md` (append-only) |
+
+**Shared outputs not touched by this session:** root `index.html`, root `README.md`,
+`tools/build.py`, `pipeline/gen_site.py`, `.github/workflows/*`, `data/model/*.json`. Where a change
+there is needed, it is logged as a request in the section below, not made.
