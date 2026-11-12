@@ -1,4 +1,3 @@
-EAD
 # COORDINATION.md — shared task board and integration log
 
 Repository: `kanlerxz87-cyber/NFL1` · Default branch `main` · Site: <https://kanlerxz87-cyber.github.io/NFL1/>
@@ -13,6 +12,7 @@ Sessions that have worked here:
 | `946c1684-nfl1` | `arena/946c1684-nfl1` | League reference data, environment notes (curl allow-list; `fetch_page` has full internet) | not merged (superseded) |
 | `7600ed8b-nfl1` | `arena/7600ed8b-nfl1` | Quantitative pipeline, own lines, strategy gates, injury/depth model, props, verification, final integration | PR #13 |
 | `a2cea255-nfl1` | `arena/a2cea255-nfl1` | Independent verification subsystem: hand transcription of nfl.com, 34-check harness, provenance/gates engine, 103 tests, 20-page sub-site in `verified-lab/` | PR #18 |
+| `e3148b95-nfl1` | `arena/e3148b95-nfl1` | Official-source schedule/bye attribution audit and CI gate | in progress |
 
 > Branch naming: Arena fixes each session to a single branch named `arena/<session>-nfl1`, so the
 > `session-<id>/<task>` convention in the brief cannot be followed here. Scopes were kept
@@ -30,6 +30,12 @@ Sessions that have worked here:
 | Q6 | Question ledger, suggestions, decision records | done | `7600ed8b` | `pipeline/content.py`, `pages/questions.html`, `pages/suggestions.html` | 20 questions, 12 suggestions, 5 decision records |
 | Q7 | Verification: 5 checks against official/comparison sources | done | `7600ed8b` | `pipeline/build_all.py` (stage G), `data/verified/` | 128 graded rows matched, 1 irregularity (mirror incomplete) |
 | Q8 | Site integration, link check, PR, merge, Pages verification | done | `7600ed8b` | `index.html`, `pages/`, `assets/style.css` | see Integration log |
+
+## Current session claim (`e3148b95-nfl1`)
+
+| ID | Task | Status | Owner | File scope | Evidence at claim |
+|---|---|---|---|---|---|
+| T14 | Correct Week 10 bye provenance to the official NFL schedule; add a read-only independent verification runner and CI workflow so hard discrepancies block publication while documented source flags remain visible | in progress | `e3148b95` | `COORDINATION.md`, `.github/workflows/verified-source-audit.yml`, `scripts/verified/check_source_audit.py`, `src/nfl/ingest.py`, `src/nfl/verify.py`, `data/verified/sources.json`, `tests/test_data_integrity.py`, `scripts/build_site.py`, `data/processed/site_data.json`, `verified-lab/data-schedule.html`, `verified-lab/verification.html`, `verified-lab/sources.html` | Baseline local 34-check harness: 29 PASS / 5 FLAG / 0 FAIL; all three official arithmetic discrepancies are flagged. NFL.com Week 10 schedule, retrieved via the official page-fetch tool on 2026-11-12, lists the 14 fixtures and explicitly identifies CHI, DEN, PHI and TB as on bye: <https://www.nfl.com/schedules/2026/by-week/week-10>. |
 
 ## Sources used (all verified reachable during the build)
 
