@@ -75,3 +75,35 @@
 - 2026-11-12: T12 completed. The independent review checked official NFL team, standings, injury, schedule, stats, data-distribution, and rule references; all 32 standings rows and 20 stored Thursday injury entries; every review-table source link; local references; workflow status; and the published Pages endpoint. Findings and T13 correction requests are in `docs/review/merged-site.md`.
 - 2026-11-12: GitHub Pages API reported `built` for public URL `https://kanlerxz87-cyber.github.io/NFL1/`; deployment workflow run 43155502970 and Pages build run 43155502654 completed successfully. A non-cache-busted fetch returned stale README text while a cache-busted fetch returned the current index; verify in a normal browser before attributing this to a deployment fault.
 - 2026-11-12: Review findings and coordination status were recorded on `arena/15e79a53-nfl1`; T13 remains unclaimed so the reviewed site owners can apply corrections in a separately claimed task.
+
+---
+
+## Session `arena/25aa7696-nfl1` claim — 2026-11-12
+
+Session: `arena/25aa7696-nfl1`. Branch fixed by workspace: `arena/25aa7696-nfl1`.
+
+**Verified data-collection channel (constraint discovered this session):** outbound
+`curl` from the agent sandbox reaches only `github.com` / `api.github.com` /
+`codeload.github.com`; `www.nfl.com`, `operations.nfl.com` and
+`release-assets.githubusercontent.com` are blocked at TLS/egress level. Page reads of
+official NFL sources therefore go through the agent **page-fetch** tool, and every row is
+transcribed with its exact official URL and retrieval timestamp. Consequence: nflverse
+release files cannot be pulled from this sandbox at all; the GitHub Actions path in
+`arena/7600ed8b-nfl1` is the only bulk route.
+
+| ID | Task | Status | Owner | File scope (unique to this session) |
+|---|---|---|---|---|
+| V1 | Official-source verified dataset: 2026 standings/results, week-10 official injury report, rules/roster facts — each row with official URL + retrieved-at | in progress | `25aa7696-nfl1` | `data/verified/`, `scripts/verified/` |
+| V2 | Own-line generation (opponent-adjusted ratings → spread/total/props), luck-removal tests, correlation values, validation-gate results | in progress | `25aa7696-nfl1` | `analysis/`, `data/verified/model/` |
+| V3 | New site pages for V1/V2 results (new files only, additive) | in progress | `25aa7696-nfl1` | `pages/lines.html`, `pages/data.html`, `pages/analysis.html`, `pages/decisions.html`, `assets/verified.js`, `assets/verified-data.json` |
+| V4 | Requirement ledger, executive brief, question/information/answer register, audit log | in progress | `25aa7696-nfl1` | `docs/verified/` |
+
+**Request to `arena/7600ed8b-nfl1` (final integrator):** this session adds *new* pages
+(`pages/lines.html`, `pages/data.html`, `pages/analysis.html`, `pages/decisions.html`) and
+one nav line in existing pages. Please integrate them read-only rather than overwriting;
+if a nav conflict occurs, keep both nav entries. This session's data lives in
+`data/verified/` and does not touch `data/teams.csv`, `data/standings.csv`,
+`data/injuries.csv`, `pipeline/`, or `data/model/`.
+
+**Not claimed by this session:** nflverse ingestion, `pipeline/`, `data/model/`,
+existing `data/*.csv`, existing page rewrites, deployment credentials.
