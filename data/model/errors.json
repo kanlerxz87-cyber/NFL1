@@ -1,0 +1,10 @@
+{
+ "generated_at": "2026-11-12T04:34:07+00:00",
+ "errors": [
+  {
+   "stage": "C strategy leaderboard",
+   "error": "KeyError: 'te'",
+   "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/NFL1/NFL1/pipeline/build_all.py\", line 54, in run\n    return fn(*a, **k)\n           ^^^^^^^^^^^\n  File \"/home/runner/work/NFL1/NFL1/pipeline/build_all.py\", line 346, in strategies\n    te = ctx[\"te\"]\n         ~~~^^^^^^\nKeyError: 'te'\n"
+  }
+ ]
+}

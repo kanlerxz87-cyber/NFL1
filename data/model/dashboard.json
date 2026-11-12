@@ -1,0 +1,62 @@
+{
+ "generated_at": "2026-11-12T04:34:07+00:00",
+ "season": 2026,
+ "last_completed_week": 9,
+ "next_week": 10,
+ "counts": {
+  "games_played": 136,
+  "teams": 32,
+  "source_files_pinned": 12,
+  "own_lines_generated": 14,
+  "strategies_tested": 0,
+  "strategies_passing_all_gates": 0,
+  "strategies_watch": 0,
+  "starters_flagged_unavailable": 0,
+  "prop_lines_generated": 343
+ },
+ "top_strategies": [],
+ "capabilities": [
+  {
+   "area": "Own lines",
+   "state": "built",
+   "detail": "Opponent-adjusted EPA ratings -> spread, total, win probability."
+  },
+  {
+   "area": "Backtest vs closing line",
+   "state": "built",
+   "detail": "Walk-forward; no look-ahead."
+  },
+  {
+   "area": "Strategy leaderboard",
+   "state": "built",
+   "detail": "8 validation gates, BH multiple-testing correction, bootstrap CIs."
+  },
+  {
+   "area": "Correlation",
+   "state": "built",
+   "detail": "Per-bet correlation between strategies, same-game leg phi."
+  },
+  {
+   "area": "Injuries and depth",
+   "state": "built",
+   "detail": "Official game status joined to depth chart rank and replacement experience."
+  },
+  {
+   "area": "Props",
+   "state": "model-only",
+   "detail": "Projections built; no verified market prop prices, so no edge claim."
+  },
+  {
+   "area": "Prize/rewards",
+   "state": "blocked",
+   "detail": "Paper points only until legal review."
+  }
+ ],
+ "errors": [
+  {
+   "stage": "C strategy leaderboard",
+   "error": "KeyError: 'te'",
+   "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/NFL1/NFL1/pipeline/build_all.py\", line 54, in run\n    return fn(*a, **k)\n           ^^^^^^^^^^^\n  File \"/home/runner/work/NFL1/NFL1/pipeline/build_all.py\", line 346, in strategies\n    te = ctx[\"te\"]\n         ~~~^^^^^^\nKeyError: 'te'\n"
+  }
+ ]
+}

@@ -1,0 +1,53 @@
+{
+ "generated_at": "2026-11-12T04:34:07+00:00",
+ "week": 10,
+ "depth_chart_timestamp": "2026-11-11T07:02:21Z",
+ "counts": {
+  "injury_rows_this_week": 20,
+  "starters_impacted": 0,
+  "teams_with_starter_out": 0,
+  "players_matched_to_depth_chart": 0
+ },
+ "method": {
+  "depth_rank": "NFL.com depth charts as mirrored by nflverse (pos_rank 1 = starter).",
+  "attrition_formula": "sum over unavailable starters of position_weight x status_weight; status weights Out=1.0, Doubtful=0.7, Questionable=0.25. Index is rescaled 0-100 against the worst team this week.",
+  "position_weights": {
+   "QB": 0.3,
+   "C": 0.05,
+   "G": 0.05,
+   "T": 0.05,
+   "OT": 0.05,
+   "OG": 0.05,
+   "OL": 0.06,
+   "WR": 0.04,
+   "TE": 0.05,
+   "RB": 0.05,
+   "FB": 0.01,
+   "DE": 0.05,
+   "DT": 0.05,
+   "NT": 0.04,
+   "IDL": 0.05,
+   "EDGE": 0.05,
+   "LB": 0.05,
+   "ILB": 0.05,
+   "OLB": 0.05,
+   "MLB": 0.05,
+   "CB": 0.06,
+   "S": 0.05,
+   "FS": 0.05,
+   "SS": 0.05,
+   "DB": 0.05,
+   "K": 0.01,
+   "P": 0.01,
+   "LS": 0.01
+  },
+  "limits": [
+   "Injury status is the official game-status column; it does not prove who starts.",
+   "Depth charts are a weekly snapshot, not a snap-count projection.",
+   "Practice-squad elevations and game-day inactive lists are not modelled separately.",
+   "The attrition index is a modelling assumption, not an official NFL metric."
+  ]
+ },
+ "teams": [],
+ "players": []
+}
