@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-12T23:10:05+00:00",
+ "generated_at": "2026-11-12T23:31:01+00:00",
  "week": 10,
  "clubs_without_report": [
   "BAL",
@@ -10,7 +10,7 @@
   "url": "https://www.nfl.com/injuries/",
   "warning": null,
   "official_counts": {
-   "rows": 295,
+   "rows": 296,
    "teams": 26,
    "clubs_resolved_from_roster": 0,
    "rows_without_club": 0
@@ -19,12 +19,12 @@
  },
  "depth_chart_timestamp": "2026-11-12T15:57:12Z",
  "counts": {
-  "injury_records": 295,
+  "injury_records": 296,
   "rows_with_game_designation": 9,
-  "rows_practice_only_starters": 108,
-  "starters_impacted": 111,
+  "rows_practice_only_starters": 106,
+  "starters_impacted": 109,
   "teams_with_starter_out": 2,
-  "records_not_matched_to_depth_chart": 9
+  "records_not_matched_to_depth_chart": 8
  },
  "method": {
   "depth_rank": "Depth chart mirrored weekly (pos_rank 1 = listed starter).",
@@ -86,20 +86,6 @@
    "source": "https://www.nfl.com/injuries/"
   },
   {
-   "team": "ARI",
-   "name": "Arizona Cardinals",
-   "starters_out": 0,
-   "starters_doubtful": 0,
-   "starters_questionable": 0,
-   "starters_practice_only": 9,
-   "starters_no_game_designation": 9,
-   "attrition_points": 0.167,
-   "attrition_index_0_100": 59.6,
-   "backup_experience_avg": 2.8,
-   "backup_snaps_avg": 107.0,
-   "source": "https://www.nfl.com/injuries/"
-  },
-  {
    "team": "SF",
    "name": "San Francisco 49ers",
    "starters_out": 0,
@@ -139,6 +125,20 @@
    "attrition_index_0_100": 49.3,
    "backup_experience_avg": 2.7,
    "backup_snaps_avg": 166.0,
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "team": "ARI",
+   "name": "Arizona Cardinals",
+   "starters_out": 0,
+   "starters_doubtful": 0,
+   "starters_questionable": 0,
+   "starters_practice_only": 7,
+   "starters_no_game_designation": 7,
+   "attrition_points": 0.132,
+   "attrition_index_0_100": 47.1,
+   "backup_experience_avg": 3.0,
+   "backup_snaps_avg": 124.0,
    "source": "https://www.nfl.com/injuries/"
   },
   {
@@ -1271,28 +1271,6 @@
   },
   {
    "team": "ARI",
-   "player": "Budda Baker",
-   "position": "S",
-   "depth_rank": 1,
-   "depth_slot": "Strong Safety",
-   "injury": null,
-   "game_status": null,
-   "practice_status": "Did Not Participate In Practice",
-   "signal": "practice only (no game designation yet)",
-   "effective_status": "Did Not Participate In Practice",
-   "status_weight": 0.5,
-   "years_exp": null,
-   "roster_status": null,
-   "replacement": "Dadrion Taylor-Demerson",
-   "replacement_years_exp": 2,
-   "replacement_snaps_2026": 98,
-   "position_weight": 0.05,
-   "attrition_points": 0.025,
-   "source": "https://www.nfl.com/players/budda-baker/",
-   "depth_source": "https://www.nfl.com/teams/"
-  },
-  {
-   "team": "ARI",
    "player": "Hjalte Froholdt",
    "position": "C",
    "depth_rank": 1,
@@ -1337,28 +1315,6 @@
   },
   {
    "team": "ARI",
-   "player": "Isaac Seumalo",
-   "position": "G",
-   "depth_rank": 1,
-   "depth_slot": "Left Guard",
-   "injury": null,
-   "game_status": null,
-   "practice_status": "Did Not Participate In Practice",
-   "signal": "practice only (no game designation yet)",
-   "effective_status": "Did Not Participate In Practice",
-   "status_weight": 0.5,
-   "years_exp": null,
-   "roster_status": null,
-   "replacement": "Kingsley Eguakun",
-   "replacement_years_exp": 2,
-   "replacement_snaps_2026": 0,
-   "position_weight": 0.05,
-   "attrition_points": 0.025,
-   "source": "https://www.nfl.com/players/isaac-seumalo/",
-   "depth_source": "https://www.nfl.com/teams/"
-  },
-  {
-   "team": "ARI",
    "player": "Josh Sweat",
    "position": "LB",
    "depth_rank": 1,
@@ -1377,6 +1333,28 @@
    "position_weight": 0.05,
    "attrition_points": 0.025,
    "source": "https://www.nfl.com/players/josh-sweat/",
+   "depth_source": "https://www.nfl.com/teams/"
+  },
+  {
+   "team": "ARI",
+   "player": "Andrew Wingard",
+   "position": "S",
+   "depth_rank": 1,
+   "depth_slot": "Free Safety",
+   "injury": null,
+   "game_status": null,
+   "practice_status": "Did Not Participate In Practice",
+   "signal": "practice only (no game designation yet)",
+   "effective_status": "Did Not Participate In Practice",
+   "status_weight": 0.5,
+   "years_exp": null,
+   "roster_status": null,
+   "replacement": "Kitan Crawford",
+   "replacement_years_exp": 1,
+   "replacement_snaps_2026": 22,
+   "position_weight": 0.05,
+   "attrition_points": 0.025,
+   "source": "https://www.nfl.com/players/andrew-wingard/",
    "depth_source": "https://www.nfl.com/teams/"
   },
   {
@@ -2675,28 +2653,6 @@
    "position_weight": 0.05,
    "attrition_points": 0.01,
    "source": "https://www.nfl.com/players/jayden-williams/",
-   "depth_source": "https://www.nfl.com/teams/"
-  },
-  {
-   "team": "ARI",
-   "player": "Andrew Wingard",
-   "position": "S",
-   "depth_rank": 1,
-   "depth_slot": "Free Safety",
-   "injury": null,
-   "game_status": null,
-   "practice_status": "Limited Participation in Practice",
-   "signal": "practice only (no game designation yet)",
-   "effective_status": "Limited Participation in Practice",
-   "status_weight": 0.2,
-   "years_exp": null,
-   "roster_status": null,
-   "replacement": "Kitan Crawford",
-   "replacement_years_exp": 1,
-   "replacement_snaps_2026": 22,
-   "position_weight": 0.05,
-   "attrition_points": 0.01,
-   "source": "https://www.nfl.com/players/andrew-wingard/",
    "depth_source": "https://www.nfl.com/teams/"
   },
   {
