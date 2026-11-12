@@ -1,4 +1,3 @@
-EAD
 # COORDINATION.md — shared task board and integration log
 
 Repository: `kanlerxz87-cyber/NFL1` · Default branch `main` · Site: <https://kanlerxz87-cyber.github.io/NFL1/>
@@ -13,6 +12,7 @@ Sessions that have worked here:
 | `946c1684-nfl1` | `arena/946c1684-nfl1` | League reference data, environment notes (curl allow-list; `fetch_page` has full internet) | not merged (superseded) |
 | `7600ed8b-nfl1` | `arena/7600ed8b-nfl1` | Quantitative pipeline, own lines, strategy gates, injury/depth model, props, verification, final integration | PR #13 |
 | `a2cea255-nfl1` | `arena/a2cea255-nfl1` | Independent verification subsystem: hand transcription of nfl.com, 34-check harness, provenance/gates engine, 103 tests, 20-page sub-site in `verified-lab/` | PR #18 |
+| `e3148b95-nfl1` | `arena/e3148b95-nfl1` | Official-source schedule/bye attribution audit and CI gate | in progress |
 
 > Branch naming: Arena fixes each session to a single branch named `arena/<session>-nfl1`, so the
 > `session-<id>/<task>` convention in the brief cannot be followed here. Scopes were kept
@@ -31,10 +31,23 @@ Sessions that have worked here:
 | Q7 | Verification: 5 checks against official/comparison sources | done | `7600ed8b` | `pipeline/build_all.py` (stage G), `data/verified/` | 128 graded rows matched, 1 irregularity (mirror incomplete) |
 | Q8 | Site integration, link check, PR, merge, Pages verification | done | `7600ed8b` | `index.html`, `pages/`, `assets/style.css` | see Integration log |
 
+## Current session claim (`e3148b95-nfl1`)
+
+| ID | Task | Status | Owner | File scope | Evidence at claim |
+|---|---|---|---|---|---|
+| T14 | Correct Week 10 fixture and bye provenance to the official NFL schedule; add a read-only independent verification runner and CI workflow so hard discrepancies block publication while documented source flags remain visible | in progress | `e3148b95` | `COORDINATION.md`, `.github/workflows/verified-source-audit.yml`, `scripts/verified/check_source_audit.py`, `src/nfl/ingest.py`, `src/nfl/availability.py`, `src/nfl/verify.py`, `data/verified/sources.json`, `data/verified/team_report_status_week10.tsv`, `tests/test_data_integrity.py`, `scripts/build_site.py`, `data/processed/site_data.json`, `verified-lab/data-schedule.html`, `verified-lab/availability-depth.html`, `verified-lab/verification.html`, `verified-lab/sources.html` | Baseline local 34-check harness: 29 PASS / 5 FLAG / 0 FAIL; all three official arithmetic discrepancies are flagged. NFL.com Week 10 schedule, retrieved via the official page-fetch tool on 2026-11-12, lists the 14 fixtures and explicitly identifies CHI, DEN, PHI and TB as on bye: <https://www.nfl.com/schedules/2026/by-week/week-10>. |
+
+### T14 progress — 2026-11-12
+
+The 14 Week 10 fixture dates, kickoff times and matchups now cite the official NFL schedule; V33 compares every captured fixture against the retrieved schedule snapshot. Fixture rows also link the official injury page for broadcast metadata. Bye rows cite the same schedule, and each bye-status row links both the injury-report page and the schedule. The read-only source audit and CI workflow are implemented. Local verification is 35 checks (30 PASS / 5 documented FLAG / 0 FAIL), 117 tests passed, all hard reconciliation checks passed, and the 20-page link check plus 44 independent figure recomputations passed. The GitHub workflow and deployment are not yet verified.
+
+**Publication-gate coordination note:** `.github/workflows/pages.yml` and the repository's legacy branch-build Pages setting are outside T14's claimed file scope, so they were not edited. The new audit workflow is a failing PR/push check; repository branch protection cannot be inspected or changed with this session's GitHub permissions (API returned 403). A required-check/Pages gate may need repository-level configuration before anyone can guarantee that a direct push with a failed audit cannot publish.
+
 ## Sources used (all verified reachable during the build)
 
 - Standings (verification fixture): <https://www.nfl.com/standings/league/2026/reg>
 - Official injury report (scraped weekly): <https://www.nfl.com/injuries/>
+- Official 2026 Week 10 fixtures and bye list, rechecked 2026-11-12: <https://www.nfl.com/schedules/2026/by-week/week-10>
 - Schedules: <https://www.nfl.com/schedules/>
 - Player stats: <https://www.nfl.com/stats/player-stats/>
 - Club directory: <https://www.nfl.com/teams/>

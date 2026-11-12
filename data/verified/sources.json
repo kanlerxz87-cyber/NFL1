@@ -8,7 +8,17 @@
       "url": "https://www.nfl.com/injuries/",
       "page_title_as_retrieved": "Official Latest NFL Injury Report for Players - Week 10 of the 2026 Season | NFL.com",
       "tier": "OFFICIAL",
-      "used_for": ["injury_report_2026_week10.tsv", "schedule_2026_week10.tsv", "nfl_news_2026_week10.tsv", "team_report_status_week10.tsv"]
+      "used_for": ["injury_report_2026_week10.tsv", "schedule_2026_week10.tsv (broadcast metadata)", "nfl_news_2026_week10.tsv", "team_report_status_week10.tsv (injury-report status for playing teams)"]
+    },
+    {
+      "id": "nfl_schedule_week10_2026",
+      "publisher": "National Football League (official league website)",
+      "url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+      "page_title_as_retrieved": "NFL Week 10 Schedule 2026: Games, Times, Matchups & Tickets",
+      "tier": "OFFICIAL",
+      "reverified_date_utc": "2026-11-12",
+      "reverified_by": "arena/e3148b95-nfl1 via official page-fetch tool",
+      "used_for": ["schedule_2026_week10.tsv (14 official Week 10 fixtures)", "bye_week10.tsv (four clubs explicitly listed under Teams on Bye)", "team_report_status_week10.tsv (bye status)"]
     },
     {
       "id": "nfl_standings_2026",
@@ -28,8 +38,11 @@
     {
       "id": "nfl_tiebreak",
       "publisher": "National Football League (official league website)",
-      "url": "http://www.nfl.com/standings/tiebreakingprocedures",
+      "url": "https://www.nfl.com/standings/tie-breaking-procedures",
+      "page_title_as_retrieved": "NFL Tiebreaking Procedures | NFL.com",
       "tier": "OFFICIAL",
+      "reverified_date_utc": "2026-11-12",
+      "reverified_by": "arena/e3148b95-nfl1 via official page-fetch tool",
       "used_for": ["tie-break procedure reference"]
     },
     {
@@ -66,6 +79,36 @@
       "url": "https://www.nfl.com/news/packers-rb-josh-jacobs-to-undergo-surgery-on-finger-this-week",
       "tier": "OFFICIAL",
       "used_for": ["verified skill-position absence"]
+    },
+    {
+      "id": "nfl_news_hooker_henley",
+      "publisher": "National Football League (official league website)",
+      "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-tuesday-nov-10",
+      "page_title_as_retrieved": "NFL news roundup: Bills acquire S Amani Hooker; Broncos trade for Chargers' Daiyan Henley | Latest NFL News, Analysis & Updates | NFL.com",
+      "tier": "OFFICIAL",
+      "reverified_date_utc": "2026-11-12",
+      "reverified_by": "arena/e3148b95-nfl1 via official page-fetch tool",
+      "used_for": ["nfl_news_2026_week10.tsv", "verified Bills/ Broncos transaction facts"]
+    },
+    {
+      "id": "nfl_news_mccarthy_herbert",
+      "publisher": "National Football League (official league website)",
+      "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-monday-nov-9",
+      "page_title_as_retrieved": "NFL news roundup: J.J. McCarthy expected to play Week 10; Justin Herbert avoids finger fracture | Latest NFL News, Analysis & Updates | NFL.com",
+      "tier": "OFFICIAL",
+      "reverified_date_utc": "2026-11-12",
+      "reverified_by": "arena/e3148b95-nfl1 via official page-fetch tool",
+      "used_for": ["nfl_news_2026_week10.tsv", "verified player-availability facts"]
+    },
+    {
+      "id": "nfl_news_week9_injuries",
+      "publisher": "National Football League (official league website)",
+      "url": "https://www.nfl.com/news/notable-injuries-news-sunday-week-9-games-2026",
+      "page_title_as_retrieved": "Notable injuries, news from Sunday's Week 9 games: Rams WR Puka Nacua to undergo testing on knee injury | Latest NFL News, Analysis & Updates | NFL.com",
+      "tier": "OFFICIAL",
+      "reverified_date_utc": "2026-11-12",
+      "reverified_by": "arena/e3148b95-nfl1 via official page-fetch tool",
+      "used_for": ["nfl_news_2026_week10.tsv", "official Week 9 injury roundup"]
     },
     {
       "id": "sportradar_nfl_official_depth_charts",

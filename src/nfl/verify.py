@@ -52,12 +52,16 @@ def _games(w, l, t) -> int:
     return (w or 0) + (l or 0) + (t or 0)
 
 
-def _row(check_id, scope, expected, actual, source_url, result=None, note=""):
+def _row(check_id, scope, expected, actual, source_url, result=None, note="",
+         source_urls=None):
     if result is None:
         result = "PASS" if expected == actual else "FAIL"
-    return {"check_id": check_id, "scope": scope, "expected": expected,
-            "actual": actual, "result": result, "source_url": source_url,
-            "note": note}
+    row = {"check_id": check_id, "scope": scope, "expected": expected,
+           "actual": actual, "result": result, "source_url": source_url,
+           "note": note}
+    if source_urls:
+        row["source_urls"] = list(source_urls)
+    return row
 
 
 #: Transcribed verbatim from the record printed beside each team logo on
@@ -71,15 +75,28 @@ INJURY_PAGE_RECORDS = {
     "CIN": "6-2", "LAC": "0-8", "BAL": "4-5",
 }
 
-#: Independent confirmations of the Week 10 bye list (non-NFL, corroborating
-#: only - the primary evidence is the omission of these four clubs from the
-#: official injury report).
-BYE_CORROBORATION = [
-    "https://www.newscentermaine.com/article/sports/nfl/how-to-watch-this-weekend-nfl-games-week-10/507-6d116a9f-0de9-4221-a4d7-ac4c426556cb",
-    "https://printablepedia.com/nfl-week-10-schedule/",
-    "https://www.renderfoot.com/nfl-schedule/week-10",
-    "https://nflplayoffpass.com/nfl-bye-weeks/",
-    "https://www.comped.com/nfl/printable/week-10",
+#: Week 10 clubs explicitly listed in the "Teams on Bye" block of the
+#: official NFL schedule. Transcribed and rechecked against the source on
+#: 2026-11-12; never inferred from injury-report omissions.
+OFFICIAL_WEEK10_BYES = ["CHI", "DEN", "PHI", "TB"]
+
+#: Week 10 fixture snapshot transcribed from the official NFL schedule on
+#: 2026-11-12. Matchup order is away, home.
+OFFICIAL_WEEK10_FIXTURES = [
+    (10, "2026-11-12", "Thursday", "8:15 PM", "WAS", "NYG"),
+    (10, "2026-11-15", "Sunday", "9:30 AM", "NE", "DET"),
+    (10, "2026-11-15", "Sunday", "1:00 PM", "KC", "ATL"),
+    (10, "2026-11-15", "Sunday", "1:00 PM", "HOU", "CLE"),
+    (10, "2026-11-15", "Sunday", "1:00 PM", "MIN", "GB"),
+    (10, "2026-11-15", "Sunday", "1:00 PM", "MIA", "IND"),
+    (10, "2026-11-15", "Sunday", "1:00 PM", "CAR", "NO"),
+    (10, "2026-11-15", "Sunday", "1:00 PM", "BUF", "NYJ"),
+    (10, "2026-11-15", "Sunday", "1:00 PM", "JAX", "TEN"),
+    (10, "2026-11-15", "Sunday", "4:05 PM", "SEA", "LV"),
+    (10, "2026-11-15", "Sunday", "4:05 PM", "LA", "AZ"),
+    (10, "2026-11-15", "Sunday", "4:25 PM", "SF", "DAL"),
+    (10, "2026-11-15", "Sunday", "8:20 PM", "PIT", "CIN"),
+    (10, "2026-11-16", "Monday", "8:15 PM", "LAC", "BAL"),
 ]
 
 
@@ -202,29 +219,34 @@ def run() -> dict[str, Any]:
 
     playing = {g["away_abbr"] for g in sch} | {g["home_abbr"] for g in sch}
     bye_set = {b["team_abbr"] for b in byes}
-    checks.append(_row("V14", "schedule: week 10 has 14 games", 14, len(sch), iu))
-    checks.append(_row("V15", "schedule: 28 distinct teams play", 28, len(playing), iu))
+    schedule_url = ingest.WEEK10_SCHEDULE_URL
+    checks.append(_row("V14", "schedule: week 10 has 14 games", 14, len(sch), schedule_url))
+    checks.append(_row("V15", "schedule: 28 distinct teams play", 28, len(playing), schedule_url))
     checks.append(_row("V16", "schedule: playing + bye == 32 teams", 32,
-                       len(playing | bye_set), iu))
+                       len(playing | bye_set), schedule_url))
     checks.append(_row("V17", "schedule: no team both plays and has a bye", set(),
-                       playing & bye_set, iu))
+                       playing & bye_set, schedule_url))
     listed = [g["away_abbr"] for g in sch] + [g["home_abbr"] for g in sch]
-    checks.append(_row("V18", "schedule: no team appears twice in the slate", 28,
-                       len(listed), iu))
+    repeated_teams = sorted({team for team in listed if listed.count(team) > 1})
+    checks.append(_row("V18", "schedule: no team appears twice in the slate", [],
+                       repeated_teams, schedule_url))
     stset = {r["team_abbr"] for r in trs}
+    schedule_and_injuries = [iu, schedule_url]
     checks.append(_row("V19", "injuries: all 32 teams have an explicit report status",
-                       32, len(stset), iu))
+                       32, len(stset), iu, source_urls=schedule_and_injuries))
     checks.append(_row("V20", "injuries: report status covers exactly the 32 teams",
-                       sorted(playing | bye_set), sorted(stset), iu))
+                       sorted(playing | bye_set), sorted(stset), iu,
+                       source_urls=schedule_and_injuries))
 
     inj_teams = {r["team_abbr"] for r in inj}
     reported_none = {r["team_abbr"] for r in trs
                      if r["report_status"] == "no injuries reported"}
     checks.append(_row("V21", "injuries: teams with rows + teams printing an explicit "
                               "'No Injuries Reported' == the 28 playing teams",
-                       sorted(playing), sorted(inj_teams | reported_none), iu))
+                       sorted(playing), sorted(inj_teams | reported_none), iu,
+                       source_urls=schedule_and_injuries))
     checks.append(_row("V22", "injuries: no bye team has an injury row", set(),
-                       inj_teams & bye_set, iu))
+                       inj_teams & bye_set, iu, source_urls=schedule_and_injuries))
     checks.append(_row("V23", "injuries: game_status uses only the NFL's published "
                               "designations (Out / Doubtful / Questionable)", [],
                        sorted({r["game_status"] for r in inj
@@ -252,17 +274,36 @@ def run() -> dict[str, Any]:
                        note="two separate official NFL.com pages retrieved in the same "
                             "session; agreement is a genuine cross-check"))
 
-    checks.append(_row("V29", "cross-source: the week-10 bye list is corroborated by five "
-                              "independent schedule sources", [], [], iu,
-                       note="Primary evidence: CHI/DEN/PHI/TB are absent from the official "
-                            "injury report while all 28 other clubs appear. Corroborated by: "
-                            + " ; ".join(BYE_CORROBORATION)))
+    actual_byes = sorted(bye_set)
+    checks.append(_row(
+        "V29", "schedule: bye teams match the explicit Week 10 list on the official NFL schedule",
+        OFFICIAL_WEEK10_BYES, actual_byes, schedule_url,
+        note="Transcribed from the NFL.com Week 10 schedule's 'Teams on Bye' block. "
+             "The four bye designations are not inferred from missing injury-report rows."))
 
-    # Every published row must be able to name its source.
-    no_src = [r["team_abbr"] for r in st if not r.get("source_url")]
-    no_src += [r["player"] for r in inj if not r.get("source_url")]
-    no_src += [g["away_abbr"] for g in sch if not g.get("source_url")]
-    checks.append(_row("V30", "provenance: 100% of published rows carry a source URL",
+    # Every published input row must carry an HTTPS source URL that is present
+    # in the provenance register. News uses its article URL; all other datasets
+    # use the source_url attached by ingest.
+    registered_urls = {s.get("url") for s in ingest.sources().get("sources", [])}
+    published_rows = (
+        [("standings", r, "source_url") for r in st]
+        + [("schedule", r, "source_url") for r in sch]
+        + [("byes", r, "source_url") for r in byes]
+        + [("team report status", r, "source_url") for r in trs]
+        + [("injury report", r, "source_url") for r in inj]
+        + [("official news", r, "url") for r in ingest.news()]
+        + [("team reference", r, "source_url") for r in ingest.teams_reference()]
+    )
+    no_src = []
+    for dataset, row, field in published_rows:
+        row_urls = row.get("source_urls") or [row.get(field)]
+        for url in row_urls:
+            row_label = row.get("team_abbr", row.get("player", row.get("headline", "?")))
+            if not isinstance(url, str) or not url.startswith("https://"):
+                no_src.append(f"{dataset}:{row_label} (missing HTTPS source URL)")
+            elif url not in registered_urls:
+                no_src.append(f"{dataset}:{row_label} (source not in register: {url})")
+    checks.append(_row("V30", "provenance: every published data row has a registered HTTPS source",
                        [], no_src, su))
 
     # V31/V32 - the community team-metadata mirror. Labels and colours only;
@@ -290,6 +331,25 @@ def run() -> dict[str, Any]:
     # The mirror's retired codes are reported with their own check row so the
     # schema stays honest about what each list means.
 
+    fixture_fields = ("week", "game_date", "day", "kickoff_et", "away_abbr", "home_abbr")
+    official_fixtures = set(OFFICIAL_WEEK10_FIXTURES)
+    captured_fixtures = {
+        tuple(g[field] for field in fixture_fields)
+        for g in sch
+    }
+    fixture_discrepancies = [
+        "missing official fixture: " + " ".join(map(str, item))
+        for item in sorted(official_fixtures - captured_fixtures)
+    ] + [
+        "unexpected captured fixture: " + " ".join(map(str, item))
+        for item in sorted(captured_fixtures - official_fixtures)
+    ]
+    checks.append(_row(
+        "V33", "schedule: every Week 10 fixture, date and kickoff matches the official NFL schedule",
+        [], fixture_discrepancies, schedule_url,
+        note="Independent fixture snapshot transcribed from NFL.com on 2026-11-12; "
+             "abbreviations LA and AZ follow NFL.com."))
+
     counts = {"PASS": 0, "FLAG": 0, "FAIL": 0}
     for c in checks:
         counts[c["result"]] = counts.get(c["result"], 0) + 1
@@ -300,5 +360,5 @@ def run() -> dict[str, Any]:
         "league_wins": total_w, "league_losses": total_l, "league_ties": total_t,
         "injury_rows": len(inj), "teams_reporting": len(inj_teams),
         "teams_no_injuries_reported": len(reported_none), "teams_on_bye": len(bye_set),
-        "bye_corroboration": BYE_CORROBORATION,
+        "official_week10_byes": OFFICIAL_WEEK10_BYES,
     }
