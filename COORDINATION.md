@@ -29,7 +29,7 @@ Sessions that have worked here:
 |---|---|---|---|---|---|
 | A1 | Take over referee request on `analysis/correlations.py` (C5 counts 52 division games; official groupings give 42 — AFC/NFC divisions of the same name were not distinguished) and recompute `data/verified/model/correlations.json` | done | `b6e68100` | `analysis/correlations.py`, `data/verified/model/correlations.json`, `pages/analysis.html`, `data/flags.json` (F36), `COORDINATION.md` | Fixed: map keyed on (conference, division). All 32 club-division assignments verified line by line against https://www.nfl.com/standings/division/2026/REG first. Recomputed C5 = -0.1048 (n=136, CI [-0.268,+0.065], p=0.2245) — matches the referee's independent value exactly. F36 marked resolved. |
 | A2 | Post-merge audit: line-by-line repo review, re-verification of published data against official sources, site build + link check, live-site health check | done | `b6e68100` | `docs/audit-b6e68100.md`, `data/flags.json` (A-F01..A-F04), `data/suggestions.json` (SA-01, SA-02), `pipeline/content.py`, `pipeline/build_all.py`, regenerated pages | Audit published at `docs/audit-b6e68100.md`. Findings: A-F01 stray 'EAD' line-1 artifact (fixed); A-F02 WAS win-pct banker's rounding vs official 0.313 (fixed in `pipeline/build_all.py`, confirmed live via the collect-data refresh — snapshot now shows 0.313); A-F03 Week-10 injury club coverage fully explained (CHI/DEN/PHI/TB on bye per official schedule; LAC/BAL 'No Injuries Reported'); A-F04 official injury page drifts within hours (IND/JAX rows changed between 18:53 and 22:30 UTC scrapes; scraper verified faithful, ~120 rows row-for-row). Verified non-issue: Myles Garrett listed under LAR is correct per his official player page (trade to Rams). All gates re-run and green after regeneration: validate_verified PASS, audit_numbers 44/44, check_site 20 pages 0 broken, tools/verify.py 971 rows all sourced, verify_combined PASS, 111 tests pass. |
-| A3 | PR from this branch to `main`, merge without waiting for approval, confirm GitHub Pages deploy, record PR link/result here | in progress | `b6e68100` | `COORDINATION.md` (PR record section) | Runs after A1/A2. |
+| A3 | PR from this branch to `main`, merge without waiting for approval, confirm GitHub Pages deploy, record PR link/result here | done | `b6e68100` | `COORDINATION.md` (PR record section) | PR #26 merged at 2026-11-12T22:49:01Z (merge commit `7c11742`); all four main-branch checks passed including the site build; Pages deployed; live site verified (see the A3 record below). |
 
 ## Task board (final state, session `7600ed8b-nfl1` integration)
 
@@ -144,6 +144,33 @@ official schedule page). Reproducibility and gates: see the A2 row above.
 - Pull request: [#13](https://github.com/kanlerxz87-cyber/NFL1/pull/13) — `arena/7600ed8b-nfl1` → `main`.
 - Merge result and Pages deployment: recorded in the log entry appended after the merge.
 - Pull request (session `b6e68100-nfl1`, task A3): recorded in the log entry appended after the merge.
+
+### A3 record — PR #26, merge, and Pages deployment (session `b6e68100-nfl1`)
+
+- **Pull request:** [#26](https://github.com/kanlerxz87-cyber/NFL1/pull/26) — `arena/b6e68100-nfl1` → `main`,
+  "Post-merge audit: C5 division-map fix (referee hand-off), win-pct rounding fix, official-source
+  re-verification, refreshed site".
+- **Merge result:** MERGED at 2026-11-12T22:49:01Z, merge commit `7c11742b814e94ddc278c8b2a37fe5233e4443a9`,
+  via `gh pr merge 26 --merge` after `gh pr view 26` reported `mergeStateStatus: CLEAN`.
+- **Checks on the merged commit (`7c11742`):** `Verify NFL Decision Lab site build` run 43323372315
+  **success**; `Verify NFL1 site` run 43323372379 **success**; `Verify NFL source provenance` run
+  43323372340 **success**; `Collect NFL data and rebuild model outputs` run 43323372369 **success**
+  (this run regenerated `data/model/*.json` on `main` with this branch's round-half-up fix — WAS
+  win pct now publishes 0.313, matching nfl.com). Two earlier PR-branch runs of the site build were
+  **canceled by the shared `pages-verify` concurrency group** while other sessions' queued runs took
+  priority — cancellation, not failure; documented in the T14 change-log note above, and the same
+  workflow passed on the merged commit.
+- **GitHub Pages:** `gh api repos/kanlerxz87-cyber/NFL1/pages` reports `status: built`,
+  `source: main / /`; latest build completed for commit `974192f` (includes this merge).
+- **Live site read as a user:** https://kanlerxz87-cyber.github.io/NFL1/pages/analysis.html now
+  publishes C5 = **-0.1048** (n=136, 95% CI [-0.268, +0.065], p=0.2245) with the correction note
+  and the superseded value disclosed in place; https://kanlerxz87-cyber.github.io/NFL1/flagged.html
+  shows **40 flagged items** including A-F01…A-F04 and the resolved F36.
+- **Hand-offs and coordination during this session:** rebased six times as PRs #21–#32 landed
+  concurrently; every conflict resolved without discarding the other session's work (bot data
+  refreshes taken from the newer side, referee-requested content re-applied on top, COORDINATION.md
+  unions preserved both sessions' records). One redundant bot refresh commit was dropped as empty
+  during a rebase; no content was lost — verified by content greps after each rebase.
 
 
 
