@@ -1,5 +1,21 @@
 {
- "generated_at": "2026-11-12T04:34:07+00:00",
+ "generated_at": "2026-11-12T04:36:02+00:00",
+ "sign_convention_check": {
+  "corr_market_line_vs_home_margin": 0.439,
+  "n_games": 5591,
+  "conclusion": "Positive correlation proves the mirrored closing line is expressed as points the HOME team is expected to win by (positive = home favourite)."
+ },
+ "blend_test": {
+  "fit": "margin ~ 1 + market_line + model_line on 2025, tested on 2026",
+  "intercept": 0.578,
+  "weight_market": 1.336,
+  "weight_model": -0.328,
+  "n_train": 272,
+  "n_test": 136,
+  "test_mae_hybrid": 9.542,
+  "test_mae_market_only": 9.485,
+  "interpretation": "weight_model near 0 means the EPA model carries no incremental information beyond the closing line."
+ },
  "method": {
   "ratings": "Two-way ridge fixed effect on non-garbage-time plays: EPA ~ offense team + defense team + home. Prior season weighted 0.4.",
   "margin_model": {
@@ -20,49 +36,49 @@
   {
    "label": "train 2024",
    "n": 256,
-   "spread_mae_model": 13.926,
+   "spread_mae_model": 10.498,
    "spread_mae_market": 9.648,
    "spread_mae_diff_ci95": [
-    3.248,
-    5.311
+    0.372,
+    1.327
    ],
    "total_mae_model": 9.765,
    "total_mae_market": 9.723,
-   "corr_model_market_spread": -0.722,
+   "corr_model_market_spread": 0.722,
    "corr_model_market_total": 0.675,
-   "residual_sd_margin": 17.56,
+   "residual_sd_margin": 13.36,
    "residual_sd_total": 12.89
   },
   {
    "label": "validation 2025",
    "n": 272,
-   "spread_mae_model": 13.102,
+   "spread_mae_model": 10.395,
    "spread_mae_market": 9.722,
    "spread_mae_diff_ci95": [
-    2.407,
-    4.37
+    0.279,
+    1.07
    ],
    "total_mae_model": 10.682,
    "total_mae_market": 10.393,
-   "corr_model_market_spread": -0.807,
+   "corr_model_market_spread": 0.807,
    "corr_model_market_total": 0.677,
-   "residual_sd_margin": 16.39,
+   "residual_sd_margin": 13.19,
    "residual_sd_total": 13.48
   },
   {
    "label": "test 2026",
    "n": 136,
-   "spread_mae_model": 12.292,
+   "spread_mae_model": 9.984,
    "spread_mae_market": 9.485,
    "spread_mae_diff_ci95": [
-    1.581,
-    4.032
+    -0.054,
+    1.033
    ],
    "total_mae_model": 11.308,
    "total_mae_market": 10.596,
-   "corr_model_market_spread": -0.779,
+   "corr_model_market_spread": 0.779,
    "corr_model_market_total": 0.671,
-   "residual_sd_margin": 15.12,
+   "residual_sd_margin": 12.6,
    "residual_sd_total": 13.99
   }
  ],
@@ -74,18 +90,19 @@
    "gameday": "2026-11-12",
    "away": "WAS",
    "home": "NYG",
-   "my_spread_home": -2.6,
+   "my_home_line": 2.6,
    "my_total": 45.3,
+   "my_line_display": "NYG -2.6",
    "my_win_prob_home": 0.576,
-   "market_spread_home": 2.5,
+   "market_home_line": 2.5,
    "market_total": 40.5,
-   "edge_spread": -5.07,
+   "edge_home_line": 0.07,
    "edge_total": 4.76,
-   "spread_band95": [
-    -28.8,
-    23.7
+   "home_line_band95": [
+    -23.7,
+    28.8
    ],
-   "status": "actionable",
+   "status": "no-edge",
    "home_rating": {
     "off": -0.0257,
     "def": -0.0287,
@@ -109,16 +126,17 @@
    "gameday": "2026-11-15",
    "away": "NE",
    "home": "DET",
-   "my_spread_home": 0.3,
+   "my_home_line": -0.3,
    "my_total": 48.8,
+   "my_line_display": "DET +0.3",
    "my_win_prob_home": 0.492,
-   "market_spread_home": 2.5,
+   "market_home_line": 2.5,
    "market_total": 51.5,
-   "edge_spread": -2.25,
+   "edge_home_line": -2.75,
    "edge_total": -2.73,
-   "spread_band95": [
-    -26.0,
-    26.5
+   "home_line_band95": [
+    -26.5,
+    26.0
    ],
    "status": "watch",
    "home_rating": {
@@ -144,18 +162,19 @@
    "gameday": "2026-11-15",
    "away": "KC",
    "home": "ATL",
-   "my_spread_home": 0.9,
+   "my_home_line": -0.9,
    "my_total": 46.4,
+   "my_line_display": "ATL +0.9",
    "my_win_prob_home": 0.472,
-   "market_spread_home": -3.0,
+   "market_home_line": -3.0,
    "market_total": 46.5,
-   "edge_spread": 3.94,
+   "edge_home_line": 2.06,
    "edge_total": -0.12,
-   "spread_band95": [
-    -25.3,
-    27.2
+   "home_line_band95": [
+    -27.2,
+    25.3
    ],
-   "status": "actionable",
+   "status": "watch",
    "home_rating": {
     "off": -0.0287,
     "def": 0.0119,
@@ -179,18 +198,19 @@
    "gameday": "2026-11-15",
    "away": "HOU",
    "home": "CLE",
-   "my_spread_home": 3.2,
+   "my_home_line": -3.2,
    "my_total": 42.8,
+   "my_line_display": "CLE +3.2",
    "my_win_prob_home": 0.407,
-   "market_spread_home": -4.5,
+   "market_home_line": -4.5,
    "market_total": 41.5,
-   "edge_spread": 7.66,
+   "edge_home_line": 1.34,
    "edge_total": 1.29,
-   "spread_band95": [
-    -23.1,
-    29.4
+   "home_line_band95": [
+    -29.4,
+    23.1
    ],
-   "status": "actionable",
+   "status": "no-edge",
    "home_rating": {
     "off": -0.1413,
     "def": 0.0308,
@@ -214,18 +234,19 @@
    "gameday": "2026-11-15",
    "away": "MIN",
    "home": "GB",
-   "my_spread_home": -4.4,
+   "my_home_line": 4.4,
    "my_total": 43.5,
+   "my_line_display": "GB -4.4",
    "my_win_prob_home": 0.629,
-   "market_spread_home": 3.0,
+   "market_home_line": 3.0,
    "market_total": 42.5,
-   "edge_spread": -7.4,
+   "edge_home_line": 1.4,
    "edge_total": 1.02,
-   "spread_band95": [
-    -30.6,
-    21.8
+   "home_line_band95": [
+    -21.8,
+    30.6
    ],
-   "status": "actionable",
+   "status": "no-edge",
    "home_rating": {
     "off": 0.0743,
     "def": 0.0317,
@@ -249,18 +270,19 @@
    "gameday": "2026-11-15",
    "away": "MIA",
    "home": "IND",
-   "my_spread_home": -3.9,
+   "my_home_line": 3.9,
    "my_total": 45.1,
+   "my_line_display": "IND -3.9",
    "my_win_prob_home": 0.614,
-   "market_spread_home": 3.5,
+   "market_home_line": 3.5,
    "market_total": 38.5,
-   "edge_spread": -7.39,
+   "edge_home_line": 0.39,
    "edge_total": 6.62,
-   "spread_band95": [
-    -30.1,
-    22.3
+   "home_line_band95": [
+    -22.3,
+    30.1
    ],
-   "status": "actionable",
+   "status": "no-edge",
    "home_rating": {
     "off": -0.0211,
     "def": -0.0632,
@@ -284,18 +306,19 @@
    "gameday": "2026-11-15",
    "away": "CAR",
    "home": "NO",
-   "my_spread_home": -1.2,
+   "my_home_line": 1.2,
    "my_total": 45.2,
+   "my_line_display": "NO -1.2",
    "my_win_prob_home": 0.535,
-   "market_spread_home": 2.5,
+   "market_home_line": 2.5,
    "market_total": 48.5,
-   "edge_spread": -3.67,
+   "edge_home_line": -1.33,
    "edge_total": -3.26,
-   "spread_band95": [
-    -27.4,
-    25.1
+   "home_line_band95": [
+    -25.1,
+    27.4
    ],
-   "status": "actionable",
+   "status": "no-edge",
    "home_rating": {
     "off": -0.0502,
     "def": -0.0403,
@@ -319,18 +342,19 @@
    "gameday": "2026-11-15",
    "away": "BUF",
    "home": "NYJ",
-   "my_spread_home": 6.0,
+   "my_home_line": -6.0,
    "my_total": 46.9,
+   "my_line_display": "NYJ +6.0",
    "my_win_prob_home": 0.326,
-   "market_spread_home": -8.5,
+   "market_home_line": -8.5,
    "market_total": 50.5,
-   "edge_spread": 14.52,
+   "edge_home_line": 2.48,
    "edge_total": -3.64,
-   "spread_band95": [
-    -20.2,
-    32.3
+   "home_line_band95": [
+    -32.3,
+    20.2
    ],
-   "status": "actionable",
+   "status": "watch",
    "home_rating": {
     "off": -0.0725,
     "def": -0.0671,
@@ -354,18 +378,19 @@
    "gameday": "2026-11-15",
    "away": "JAX",
    "home": "TEN",
-   "my_spread_home": 10.9,
+   "my_home_line": -10.9,
    "my_total": 45.6,
+   "my_line_display": "TEN +10.9",
    "my_win_prob_home": 0.207,
-   "market_spread_home": -10.5,
+   "market_home_line": -10.5,
    "market_total": 46.5,
-   "edge_spread": 21.44,
+   "edge_home_line": -0.44,
    "edge_total": -0.9,
-   "spread_band95": [
-    -15.3,
-    37.2
+   "home_line_band95": [
+    -37.2,
+    15.3
    ],
-   "status": "actionable",
+   "status": "no-edge",
    "home_rating": {
     "off": -0.1093,
     "def": -0.128,
@@ -389,16 +414,17 @@
    "gameday": "2026-11-15",
    "away": "LA",
    "home": "ARI",
-   "my_spread_home": 5.2,
+   "my_home_line": -5.2,
    "my_total": 46.9,
+   "my_line_display": "ARI +5.2",
    "my_win_prob_home": 0.348,
-   "market_spread_home": -9.5,
+   "market_home_line": -9.5,
    "market_total": 39.5,
-   "edge_spread": 14.73,
+   "edge_home_line": 4.27,
    "edge_total": 7.36,
-   "spread_band95": [
-    -21.0,
-    31.5
+   "home_line_band95": [
+    -31.5,
+    21.0
    ],
    "status": "actionable",
    "home_rating": {
@@ -424,18 +450,19 @@
    "gameday": "2026-11-15",
    "away": "SEA",
    "home": "LV",
-   "my_spread_home": 7.1,
+   "my_home_line": -7.1,
    "my_total": 43.8,
+   "my_line_display": "LV +7.1",
    "my_win_prob_home": 0.297,
-   "market_spread_home": -6.5,
+   "market_home_line": -6.5,
    "market_total": 40.5,
-   "edge_spread": 13.63,
+   "edge_home_line": -0.63,
    "edge_total": 3.34,
-   "spread_band95": [
-    -19.1,
-    33.4
+   "home_line_band95": [
+    -33.4,
+    19.1
    ],
-   "status": "actionable",
+   "status": "no-edge",
    "home_rating": {
     "off": -0.078,
     "def": -0.0719,
@@ -459,18 +486,19 @@
    "gameday": "2026-11-15",
    "away": "SF",
    "home": "DAL",
-   "my_spread_home": 4.3,
+   "my_home_line": -4.3,
    "my_total": 51.5,
+   "my_line_display": "DAL +4.3",
    "my_win_prob_home": 0.373,
-   "market_spread_home": -3.5,
+   "market_home_line": -3.5,
    "market_total": 55.5,
-   "edge_spread": 7.82,
+   "edge_home_line": -0.82,
    "edge_total": -3.95,
-   "spread_band95": [
-    -21.9,
-    30.6
+   "home_line_band95": [
+    -30.6,
+    21.9
    ],
-   "status": "actionable",
+   "status": "no-edge",
    "home_rating": {
     "off": 0.0949,
     "def": -0.1506,
@@ -494,18 +522,19 @@
    "gameday": "2026-11-15",
    "away": "PIT",
    "home": "CIN",
-   "my_spread_home": -1.7,
+   "my_home_line": 1.7,
    "my_total": 48.1,
+   "my_line_display": "CIN -1.7",
    "my_win_prob_home": 0.551,
-   "market_spread_home": 3.5,
+   "market_home_line": 3.5,
    "market_total": 49.5,
-   "edge_spread": -5.2,
+   "edge_home_line": -1.8,
    "edge_total": -1.35,
-   "spread_band95": [
-    -27.9,
-    24.5
+   "home_line_band95": [
+    -24.5,
+    27.9
    ],
-   "status": "actionable",
+   "status": "no-edge",
    "home_rating": {
     "off": 0.1112,
     "def": -0.0911,
@@ -529,18 +558,19 @@
    "gameday": "2026-11-16",
    "away": "LAC",
    "home": "BAL",
-   "my_spread_home": -5.2,
+   "my_home_line": 5.2,
    "my_total": 43.1,
+   "my_line_display": "BAL -5.2",
    "my_win_prob_home": 0.651,
-   "market_spread_home": 4.5,
+   "market_home_line": 4.5,
    "market_total": 38.5,
-   "edge_spread": -9.69,
+   "edge_home_line": 0.69,
    "edge_total": 4.6,
-   "spread_band95": [
-    -31.4,
-    21.0
+   "home_line_band95": [
+    -21.0,
+    31.4
    ],
-   "status": "actionable",
+   "status": "no-edge",
    "home_rating": {
     "off": 0.0266,
     "def": -0.0132,
