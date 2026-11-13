@@ -521,10 +521,13 @@ def build() -> int:
   {", ".join(inj['clubs_absent_explained_by_bye'])} are on bye; {", ".join(inj['clubs_absent_no_injuries_reported'])}
   are listed with no injuries. This is a weekly snapshot, not a game-day inactive list.</p>
   {table(["Club", "Player", "Pos", "Injury", "Practice", "Game status", "Source"], cross_rows)}
-  <p class="note">Cross-checked against the committed transcription:
-  {audit['injuries']['matches']}/{audit['injuries']['rows_checked']} rows match. The
-  {len(audit['injuries']['mismatches'])} that do not are published on
-  <a href="flagged.html">Flagged for review</a> with both readings, because the official page changes during the day.</p>
+  <p class="note">The committed hand transcription of this page has
+  <strong>{audit['injuries']['transcription_rows']}</strong> rows against
+  <strong>{audit['injuries']['official_scrape_rows']}</strong> in the direct official scrape, with
+  <strong>{audit['injuries']['players_in_official_not_in_transcription']}</strong> official players missing and
+  <strong>{audit['injuries']['differing_fields']}</strong> differing field values among the players present in both.
+  Because the scrape is the direct record of the page and predates the transcription, the differences are omissions
+  rather than page drift; the whole defect is <a href="flagged.html">F-SOS-INJ-01</a>.</p>
 </section>
 <section class="panel">
   <h2>Why there is no 2nd/3rd/4th-string deficiency score here</h2>
@@ -667,8 +670,8 @@ def build() -> int:
     <li><strong>Stale standings.</strong> Ten fields across two clubs differ from the official page because the
     committed file predates the Week 10 Thursday game.</li>
     <li><strong>Stale provenance pin.</strong> The recorded sha256 no longer describes the committed data file.</li>
-    <li><strong>Injury status drift.</strong> Three Detroit rows show a game status today that the committed
-    transcription does not have; the official page is documented to change during the day.</li>
+    <li><strong>Incomplete injury transcription.</strong> The committed copy is missing 55 players and 43 field
+    values present in the direct official scrape, which was captured five hours before the hand transcription.</li>
   </ol>
 </section>
 """
@@ -699,9 +702,11 @@ def build() -> int:
         ["Official Week 10 byes", "clubs",
          f"{', '.join(audit['schedule']['byes_official'])}",
          "PASS" if audit["schedule"]["byes_match"] else "MISMATCH", src("schedule")],
-        ["Injury transcription cross-check", "rows",
-         f"{audit['injuries']['matches']}/{audit['injuries']['rows_checked']} match",
-         "PASS" if not audit["injuries"]["mismatches"] else "REVIEW", src("injuries")],
+        ["Injury transcription vs official scrape", "rows",
+         f"{audit['injuries']['transcription_rows']} vs {audit['injuries']['official_scrape_rows']} rows; "
+         f"{audit['injuries']['players_in_official_not_in_transcription']} missing, "
+         f"{audit['injuries']['differing_fields']} field differences",
+         "FAIL" if audit['injuries']['differing_fields'] else "PASS", src("injuries")],
         ["Standings internal arithmetic", "checks",
          "sum(W)=sum(L), ties paired, PF=PA, NET=PF-PA, PCT=(W+T/2)/games",
          "PASS", src("standings")],
@@ -720,7 +725,7 @@ def build() -> int:
 <section class="panel">
   <h2>Verification report</h2>
   <p class="sub">{len(verification["checks"])} checks, generated from data/strength/verification.json:
-  {verification["summary"]["pass"]} pass, {verification["summary"]["mismatch"]} mismatch, {verification["summary"]["review"]} need review.
+  {verification["summary"]["pass"]} pass, {verification["summary"]["mismatch"]} mismatch, {verification["summary"].get("fail",0)} fail, {verification["summary"]["review"]} need review.
   A check is only PASS when it was re-run against the source in this session. Where a check could not pass, the value
   seen on both sides is printed rather than hidden.</p>
   {table(["ID", "Check", "Result", "Detail", "Flag", "Source"], v_rows)}

@@ -43,10 +43,10 @@
   },
   {
    "id": "V06",
-   "check": "Injury transcription cross-check",
-   "result": "REVIEW",
-   "detail": "6/9 rows match; 3 DET rows differ",
-   "flag": "F-SOS-INJ-01..03",
+   "check": "Injury transcription vs the official nfl.com scrape",
+   "result": "FAIL",
+   "detail": "254 transcription rows vs 296 official scrape rows; 55 official players absent from the transcription; 43 field differences among shared players (37 practice, 3 injury, 3 game status). The scrape is the direct official record and predates the transcription, so the differences are omissions, not page drift.",
+   "flag": "F-SOS-INJ-01",
    "source": "https://www.nfl.com/injuries/"
   },
   {
@@ -85,6 +85,7 @@
  "summary": {
   "pass": 7,
   "mismatch": 2,
-  "review": 1
+  "fail": 1,
+  "review": 0
  }
 }

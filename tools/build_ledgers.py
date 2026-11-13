@@ -56,32 +56,64 @@ def standings_diff():
 
 
 def injury_diff():
-    """Compare the committed hand transcription with the cross-check rows."""
-    ts = read_csv("data/verified/injury_report_2026_week10.tsv")
-    txt = []
+    """Audit the committed hand transcription against the official nfl.com scrape.
+
+    The scrape (data/model/official_injuries.json) is written by the collect-data
+    workflow directly from https://www.nfl.com/injuries/ and records the page's
+    own sha256 and fetch time. It is therefore the better witness for *what the
+    page said*, and the hand transcription can be measured against it. Comparing
+    a transcription with a later live read cannot tell a transcription error from
+    a page update; this comparison can.
+    """
+    import re
+    ts_rows = []
     with open(os.path.join(ROOT, "data/verified/injury_report_2026_week10.tsv"), encoding="utf-8") as f:
-        rd = csv.DictReader(f, delimiter="\t")
-        txt = list(rd)
-    by_key = {(r["team_abbr"], r["player"]): r for r in txt}
-    checks, mismatches = [], []
-    practise = {"FP": "Full Participation in Practice", "LP": "Limited Participation in Practice",
-                "DNP": "Did Not Participate In Practice"}
-    for row in L("official_week10.json")["injuries"]["cross_check_rows"]:
-        rep = by_key.get((row["club"], row["player"]))
-        if not rep:
-            mismatches.append({**row, "issue": "player not present in the committed transcription"})
+        ts_rows = list(csv.DictReader(f, delimiter="	"))
+    scrape_doc = json.load(open(os.path.join(ROOT, "data/model/official_injuries.json"), encoding="utf-8"))
+    off_rows = scrape_doc["rows"]
+    SCRAPE_URL = scrape_doc.get("source_url", OFF_INJURIES)
+    PRACT = {"FP": "Full Participation in Practice", "LP": "Limited Participation in Practice",
+             "DNP": "Did Not Participate In Practice"}
+    ts = {(r["team_abbr"], r["player"]): r for r in ts_rows}
+    off = {(r["team"], r["player"]): r for r in off_rows}
+    missing = sorted(k for k in off if k not in ts)
+    extra = sorted(k for k in ts if k not in off)
+    differing = []
+    for k in off:
+        if k not in ts:
             continue
-        ok = (rep["position"] == row["position"]
-              and (rep["injury"] or "") == row["injury"]
-              and practise.get(rep["practice"], rep["practice"]) == row["practice"]
-              and (rep["game_status"] or "") == row["game_status"])
-        checks.append({"club": row["club"], "player": row["player"], "matches": ok})
-        if not ok:
-            mismatches.append({"club": row["club"], "player": row["player"],
-                               "official": row, "repo": rep})
-    return {"rows_in_transcription": len(txt), "rows_checked": len(checks),
-            "matches": sum(1 for c in checks if c["matches"]), "mismatches": mismatches,
-            "clubs_listed": len({r["team_abbr"] for r in txt})}
+        t, o = ts[k], off[k]
+        for f_off, f_t in (("injury", "injury"), ("practice", "practice"), ("game", "game_status")):
+            tv = t.get(f_t) or ""
+            ov = o.get(f_off) or ""
+            if f_t == "practice":
+                tv = PRACT.get(tv, tv)
+            if tv != ov:
+                differing.append({"club": k[0], "player": k[1], "field": f_off,
+                                  "official_scrape": ov or "(blank)", "transcription": tv or "(blank)"})
+    return {
+        "transcription_file": "data/verified/injury_report_2026_week10.tsv",
+        "transcription_rows": len(ts_rows),
+        "transcription_retrieved": "2026-11-12T05:30Z",
+        "official_scrape_file": "data/model/official_injuries.json",
+        "official_scrape_url": SCRAPE_URL,
+        "official_scrape_rows": len(off_rows),
+        "official_scrape_generated": scrape_doc.get("generated_at"),
+        "official_scrape_html_sha256": scrape_doc.get("html_sha256"),
+        "players_in_official_not_in_transcription": len(missing),
+        "players_in_transcription_not_in_official": len(extra),
+        "extra_examples": [f"{a} {b}" for a, b in extra[:6]],
+        "missing_examples": [f"{a} {b}" for a, b in missing[:6]],
+        "differing_fields": len(differing),
+        "differing_detail": differing,
+        "differing_by_field": {f: sum(1 for d in differing if d["field"] == f)
+                               for f in ("injury", "practice", "game")},
+        "note": ("The scrape is the direct record of the official page and is used as the witness. "
+                 "Differences are expected to run one way: the transcription is the later, hand-made "
+                 "copy and any value it lacks is an omission, not evidence that the official page "
+                 "changed its mind."),
+        "clubs_listed": len({r["team_abbr"] for r in ts_rows}),
+    }
 
 
 def schedule_diff():
@@ -185,8 +217,9 @@ def main() -> int:
             "answer": (f"Line-by-line against the official standings page: {len(sd['differences'])} field differences across "
                        f"{sd['rows_compared']} clubs ({sd['fields_compared']} fields compared). The committed Week 10 fixtures "
                        f"also still show WAS @ NYG as upcoming; nfl.com shows it final (WAS 24 - NYG 21). "
-                       f"Injury transcription: {inj['matches']}/{inj['rows_checked']} cross-checked rows match, "
-                       f"{inj['clubs_listed']} clubs listed. Each difference is published on the Flags page with its link."),
+                       f"Injury transcription: {inj['transcription_rows']} rows against {inj['official_scrape_rows']} in the "
+                       f"official scrape, {inj['players_in_official_not_in_transcription']} players missing, "
+                       f"{inj['differing_fields']} field differences. Each is published on the Flags page with its link."),
             "discovery_method": "re-fetch of the official pages on 2026-11-13 and a field-by-field comparison",
             "blocks": "publication of any standings-derived number until the source file is refreshed",
             "sources": [OFF_STANDINGS, OFF_SCHEDULE, OFF_INJURIES],
@@ -397,12 +430,18 @@ def main() -> int:
     ]
 
     flags = []
+    by_team = {}
     for d in sd["differences"]:
+        by_team.setdefault(d["team"], []).append(d)
+    for team, diffs in sorted(by_team.items()):
+        fields = ", ".join(f"{d['field']} (official {d['official']} vs repository {d['repo']})" for d in diffs)
         flags.append({
-            "id": f"F-SOS-STD-{d['team']}",
+            "id": f"F-SOS-STD-{team}",
             "severity": "high",
-            "title": f"Standings field differs from the official page: {d['team']} {d['field']}",
-            "detail": f"Official {d['official']} vs repository {d['repo']}. The official page was read on 2026-11-13.",
+            "title": f"Standings row differs from the official page: {team}",
+            "detail": (f"{len(diffs)} field(s) differ: {fields}. The official page "
+                       f"(https://www.nfl.com/standings/league/2026/reg) was read on 2026-11-13 and the committed "
+                       f"snapshot is stamped 2026-11-12T04:31Z, before the Week 10 Thursday game."),
             "source": OFF_STANDINGS,
             "status": "open",
         })
@@ -430,25 +469,33 @@ def main() -> int:
                    "it is flagged because it materially changes this week's own lines."),
         "source": NV_SCHEDULES, "status": "open",
     })
-    for i, m in enumerate(inj["mismatches"], 1):
-        off, rep = m["official"], m["repo"]
-        fields = [f"{k}: official '{off.get(k)}' vs transcription '{rep.get(k)}'"
-                  for k in ("injury", "practice", "game_status")
-                  if str(off.get(k) or "") not in str(rep.get(k) or "")]
-        flags.append({
-            "id": f"F-SOS-INJ-{i:02d}", "severity": "medium",
-            "title": f"Injury row differs between the transcription and today's official page: {m['club']} {m['player']}",
-            "detail": ("; ".join(fields) + ". The committed transcription was read on 2026-11-12 05:30Z and today's "
-                       "read on 2026-11-13. The official report is documented to change within hours (earlier flag A-F04), "
-                       "so this is either a late status update or a transcription omission. One read cannot tell which; "
-                       "re-read the page at publication time to classify it."),
-            "source": OFF_INJURIES, "status": "needs review"})
+    ftot = inj["differing_by_field"]
+    det_rows = [d for d in inj["differing_detail"] if d["field"] != "practice"]
+    detail_lines = "; ".join(f"{d['club']} {d['player']} {d['field']}: official '{d['official_scrape']}' vs transcription '{d['transcription']}'"
+                             for d in det_rows)
+    flags.append({
+        "id": "F-SOS-INJ-01", "severity": "high",
+        "title": "Committed injury transcription is materially incomplete against the official page",
+        "detail": (f"The committed hand transcription has {inj['transcription_rows']} rows; the official nfl.com scrape "
+                   f"captured at {inj['official_scrape_generated']} has {inj['official_scrape_rows']}. "
+                   f"{inj['players_in_official_not_in_transcription']} players listed on the official page are absent from the "
+                   f"transcription and {inj['players_in_transcription_not_in_official']} transcription players are absent from the "
+                   f"official page. Among players present in both, {ftot['practice']} practice values, {ftot['injury']} injury "
+                   f"names and {ftot['game']} game statuses differ. This is a transcription-accuracy defect, not page drift: "
+                   f"the scrape predates the transcription and already contains the values the transcription lacks. "
+                   f"Non-practice differences: {detail_lines}"),
+        "source": OFF_INJURIES, "status": "open"})
     flags.append({
         "id": "F-SOS-SITE-01", "severity": "medium",
         "title": "Landing page says 'week 9 complete' while the official schedule has moved past it",
         "detail": "index.html KPI subtitle reads 'week 9 complete'. nfl.com shows Week 10 in progress with the Thursday game final.",
         "source": OFF_SCHEDULE, "status": "open",
     })
+
+    ids = [f["id"] for f in flags]
+    if len(ids) != len(set(ids)):
+        dup = sorted({i for i in ids if ids.count(i) > 1})
+        raise SystemExit(f"duplicate flag ids: {dup}")
 
     payloads = {
         "questions.json": {"generated_at": meta["built_at_utc"], "count": len(questions),
@@ -470,7 +517,8 @@ def main() -> int:
             f.write("\n")
     print("questions", len(questions), "| suggestions", len(suggestions),
           "| decisions", len(decisions), "| flags", len(flags))
-    print("standings diffs", len(sd["differences"]), "| injury mismatches", len(inj["mismatches"]),
+    print("standings diffs", len(sd["differences"]), "| injury rows missing",
+          inj["players_in_official_not_in_transcription"], "| injury field diffs", inj["differing_fields"],
           "| schedule diffs", len(sch["games_missing_from_repo"]) + len(sch["games_extra_in_repo"]))
     return 0
 

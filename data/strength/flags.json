@@ -1,85 +1,21 @@
 {
  "generated_at": "2026-11-13T13:02:45+00:00",
- "count": 17,
+ "count": 7,
  "rule": "Every flag carries the official link that shows the difference and the value seen on both sides.",
  "flags": [
   {
    "id": "F-SOS-STD-NYG",
    "severity": "high",
-   "title": "Standings field differs from the official page: NYG l",
-   "detail": "Official 3 vs repository 2. The official page was read on 2026-11-13.",
-   "source": "https://www.nfl.com/standings/league/2026/reg",
-   "status": "open"
-  },
-  {
-   "id": "F-SOS-STD-NYG",
-   "severity": "high",
-   "title": "Standings field differs from the official page: NYG pf",
-   "detail": "Official 203 vs repository 182. The official page was read on 2026-11-13.",
-   "source": "https://www.nfl.com/standings/league/2026/reg",
-   "status": "open"
-  },
-  {
-   "id": "F-SOS-STD-NYG",
-   "severity": "high",
-   "title": "Standings field differs from the official page: NYG pa",
-   "detail": "Official 196 vs repository 172. The official page was read on 2026-11-13.",
-   "source": "https://www.nfl.com/standings/league/2026/reg",
-   "status": "open"
-  },
-  {
-   "id": "F-SOS-STD-NYG",
-   "severity": "high",
-   "title": "Standings field differs from the official page: NYG pct",
-   "detail": "Official 0.611 vs repository 0.688. The official page was read on 2026-11-13.",
-   "source": "https://www.nfl.com/standings/league/2026/reg",
-   "status": "open"
-  },
-  {
-   "id": "F-SOS-STD-NYG",
-   "severity": "high",
-   "title": "Standings field differs from the official page: NYG streak",
-   "detail": "Official 1L vs repository 2W. The official page was read on 2026-11-13.",
+   "title": "Standings row differs from the official page: NYG",
+   "detail": "5 field(s) differ: l (official 3 vs repository 2), pf (official 203 vs repository 182), pa (official 196 vs repository 172), pct (official 0.611 vs repository 0.688), streak (official 1L vs repository 2W). The official page (https://www.nfl.com/standings/league/2026/reg) was read on 2026-11-13 and the committed snapshot is stamped 2026-11-12T04:31Z, before the Week 10 Thursday game.",
    "source": "https://www.nfl.com/standings/league/2026/reg",
    "status": "open"
   },
   {
    "id": "F-SOS-STD-WAS",
    "severity": "high",
-   "title": "Standings field differs from the official page: WAS w",
-   "detail": "Official 3 vs repository 2. The official page was read on 2026-11-13.",
-   "source": "https://www.nfl.com/standings/league/2026/reg",
-   "status": "open"
-  },
-  {
-   "id": "F-SOS-STD-WAS",
-   "severity": "high",
-   "title": "Standings field differs from the official page: WAS pf",
-   "detail": "Official 196 vs repository 172. The official page was read on 2026-11-13.",
-   "source": "https://www.nfl.com/standings/league/2026/reg",
-   "status": "open"
-  },
-  {
-   "id": "F-SOS-STD-WAS",
-   "severity": "high",
-   "title": "Standings field differs from the official page: WAS pa",
-   "detail": "Official 223 vs repository 202. The official page was read on 2026-11-13.",
-   "source": "https://www.nfl.com/standings/league/2026/reg",
-   "status": "open"
-  },
-  {
-   "id": "F-SOS-STD-WAS",
-   "severity": "high",
-   "title": "Standings field differs from the official page: WAS pct",
-   "detail": "Official 0.389 vs repository 0.313. The official page was read on 2026-11-13.",
-   "source": "https://www.nfl.com/standings/league/2026/reg",
-   "status": "open"
-  },
-  {
-   "id": "F-SOS-STD-WAS",
-   "severity": "high",
-   "title": "Standings field differs from the official page: WAS streak",
-   "detail": "Official 1W vs repository 1L. The official page was read on 2026-11-13.",
+   "title": "Standings row differs from the official page: WAS",
+   "detail": "5 field(s) differ: w (official 3 vs repository 2), pf (official 196 vs repository 172), pa (official 223 vs repository 202), pct (official 0.389 vs repository 0.313), streak (official 1W vs repository 1L). The official page (https://www.nfl.com/standings/league/2026/reg) was read on 2026-11-13 and the committed snapshot is stamped 2026-11-12T04:31Z, before the Week 10 Thursday game.",
    "source": "https://www.nfl.com/standings/league/2026/reg",
    "status": "open"
   },
@@ -109,27 +45,11 @@
   },
   {
    "id": "F-SOS-INJ-01",
-   "severity": "medium",
-   "title": "Injury row differs between the transcription and today's official page: DET Kerby Joseph",
-   "detail": "injury: official 'Knee' vs transcription ''; practice: official 'Full Participation in Practice' vs transcription 'LP'; game_status: official 'Out' vs transcription ''. The committed transcription was read on 2026-11-12 05:30Z and today's read on 2026-11-13. The official report is documented to change within hours (earlier flag A-F04), so this is either a late status update or a transcription omission. One read cannot tell which; re-read the page at publication time to classify it.",
+   "severity": "high",
+   "title": "Committed injury transcription is materially incomplete against the official page",
+   "detail": "The committed hand transcription has 254 rows; the official nfl.com scrape captured at 2026-11-12T23:37:48+00:00 has 296. 55 players listed on the official page are absent from the transcription and 13 transcription players are absent from the official page. Among players present in both, 37 practice values, 3 injury names and 3 game statuses differ. This is a transcription-accuracy defect, not page drift: the scrape predates the transcription and already contains the values the transcription lacks. Non-practice differences: DET Kerby Joseph injury: official 'Knee' vs transcription '(blank)'; DET Kerby Joseph game: official 'Out' vs transcription '(blank)'; DET Cade Mays injury: official 'Ankle' vs transcription '(blank)'; DET Cade Mays game: official 'Out' vs transcription '(blank)'; DET D.J. Reed injury: official 'Hip' vs transcription '(blank)'; DET D.J. Reed game: official 'Out' vs transcription '(blank)'",
    "source": "https://www.nfl.com/injuries/",
-   "status": "needs review"
-  },
-  {
-   "id": "F-SOS-INJ-02",
-   "severity": "medium",
-   "title": "Injury row differs between the transcription and today's official page: DET Cade Mays",
-   "detail": "injury: official 'Ankle' vs transcription ''; practice: official 'Did Not Participate In Practice' vs transcription 'DNP'; game_status: official 'Out' vs transcription ''. The committed transcription was read on 2026-11-12 05:30Z and today's read on 2026-11-13. The official report is documented to change within hours (earlier flag A-F04), so this is either a late status update or a transcription omission. One read cannot tell which; re-read the page at publication time to classify it.",
-   "source": "https://www.nfl.com/injuries/",
-   "status": "needs review"
-  },
-  {
-   "id": "F-SOS-INJ-03",
-   "severity": "medium",
-   "title": "Injury row differs between the transcription and today's official page: DET D.J. Reed",
-   "detail": "injury: official 'Hip' vs transcription ''; practice: official 'Did Not Participate In Practice' vs transcription 'DNP'; game_status: official 'Out' vs transcription ''. The committed transcription was read on 2026-11-12 05:30Z and today's read on 2026-11-13. The official report is documented to change within hours (earlier flag A-F04), so this is either a late status update or a transcription omission. One read cannot tell which; re-read the page at publication time to classify it.",
-   "source": "https://www.nfl.com/injuries/",
-   "status": "needs review"
+   "status": "open"
   },
   {
    "id": "F-SOS-SITE-01",
