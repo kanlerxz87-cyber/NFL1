@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skill vs Luck · NFL Decision Lab</title>
+<meta name="description" content="Evidence-first NFL decision support: own lines, validation gates, injury and depth analysis.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="brand" href="../index.html"><span class="mark">NFL</span><span class="brand-text">Decision Lab</span></a>
+  <nav>
+    <a href="../index.html">Overview</a>
+    <a href="../pages/executive.html">Executive Summary</a>
+    <a href="../pages/lines.html">My Lines</a>
+    <a href="../pages/correlations.html">Correlations</a>
+    <a href="../pages/strategies.html">Strategy Lab</a>
+    <a href="../pages/luck.html">Skill vs Luck</a>
+    <a href="../pages/parlays.html">Parlays &amp; Combos</a>
+    <a href="../pages/props.html">Player Props</a>
+    <a href="../pages/injuries.html">Injuries</a>
+    <a href="../pages/depth.html">Depth &amp; Deficiency</a>
+    <a href="../pages/questions.html">Questions</a>
+    <a href="../pages/suggestions.html">Suggestions</a>
+    <a href="../pages/evidence.html">Evidence</a>
+    <a href="../pages/review.html">Flagged for Review</a>
+    <a href="../pages/sections.html">All Sections</a>
+    <a href="../room/index.html">Decision Room</a>
+    <a href="../strength/index.html">SOS Study</a>
+    <a href="../pages/executive-summary.html">Executive Summary (companion)</a>
+    <a href="../pages/teams.html">Teams</a>
+    <a href="../pages/standings.html">Standings</a>
+    <a href="../pages/availability.html">Availability</a>
+    <a href="../pages/data.html">Verified Data</a>
+    <a href="../pages/analysis.html">Validation &amp; Correlation</a>
+    <a href="../pages/decisions.html">Decision Register</a>
+    <a href="../pages/verified.html">Verified Artifacts</a>
+    <a href="../pages/models.html">Models</a>
+    <a href="../pages/flagged.html">Flagged (companion)</a>
+  </nav>
+</header>
+<div class="shell">
+<aside class="sidebar" aria-label="Categories"><div class="navgroup"><span>Overview</span><a href="../index.html">Overview</a><a href="../pages/executive.html">Executive Summary</a><a href="../pages/sections.html">All Sections</a></div><div class="navgroup"><span>Lines & model</span><a href="../pages/lines.html">My Lines</a><a href="../pages/correlations.html">Correlations</a></div><div class="navgroup"><span>Competition</span><a href="../pages/strategies.html">Strategy Lab</a><a href="../pages/luck.html">Skill vs Luck</a><a href="../pages/parlays.html">Parlays &amp; Combos</a><a href="../pages/props.html">Player Props</a></div><div class="navgroup"><span>Availability</span><a href="../pages/injuries.html">Injuries</a><a href="../pages/depth.html">Depth &amp; Deficiency</a></div><div class="navgroup"><span>Decisions</span><a href="../pages/questions.html">Questions</a><a href="../pages/suggestions.html">Suggestions</a></div><div class="navgroup"><span>Evidence</span><a href="../pages/evidence.html">Evidence</a><a href="../pages/review.html">Flagged for Review</a></div><div class="navgroup"><span>Companion pages</span><a href="../room/index.html">Decision Room</a><a href="../strength/index.html">SOS Study</a><a href="../pages/teams.html">Teams</a><a href="../pages/standings.html">Standings</a><a href="../pages/availability.html">Availability</a><a href="../pages/data.html">Verified data</a><a href="../pages/analysis.html">Validation &amp; correlation</a><a href="../pages/decisions.html">Decision register</a><a href="../pages/verified.html">Verified artifacts</a><a href="../pages/models.html">Models</a><a href="../pages/executive-summary.html">Executive summary (companion)</a><a href="../pages/flagged.html">Flagged (companion)</a></div></aside>
+<main id="main">
+  <section class="page-head">
+    <p class="eyebrow">Evidence-first dashboard</p>
+    <h1>Skill vs Luck</h1>
+    <p class="standfirst">What a purely lucky run would have produced, and whether any strategy left that band.</p>
+    <p class="timestamp">Data built 2026-11-13T13:31:32+00:00 · every value links to its source</p>
+  </section>
+  
+<p class="note">These figures come from a committed research extract built
+  2026-11-13T12:58:21+00:00. The daily refresh does not rebuild that extract, so this
+  page states its own extract time rather than inheriting the site stamp.</p>
+
+<section class="panel">
+  <div class="panel-head"><h2>Every strategy against a fair-price null</h2>
+    <a href="strategies.html">Leaderboard &rarr;</a></div>
+  <div class="table-wrap"><table class=""><thead><tr><th>Strategy</th><th>Bets</th><th>Profit (units)</th><th>95% luck band</th><th>z</th><th>p</th><th>Bets needed for 80% power</th><th>Verdict</th><th>Source</th></tr></thead><tbody><tr><td>S07 Fade the road favourite of 7+</td><td>401</td><td>24.32</td><td>-37.2 to +37.2</td><td>1.282</td><td>0.1999</td><td>1950</td><td><span class="badge neutral">inside the luck band</span></td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">nfl.com</a></td></tr><tr><td>S03 Model total edge &gt;= 2.5 pts</td><td>2463</td><td>45.36</td><td>-93.8 to +93.8</td><td>0.948</td><td>0.3431</td><td>21856</td><td><span class="badge neutral">inside the luck band</span></td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">nfl.com</a></td></tr><tr><td>S04 Model total edge &gt;= 4.0 pts</td><td>1295</td><td>32.36</td><td>-68.0 to +68.0</td><td>0.932</td><td>0.3513</td><td>11872</td><td><span class="badge neutral">inside the luck band</span></td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">nfl.com</a></td></tr><tr><td>S05 Rest edge &gt;= 3 days</td><td>1103</td><td>5.37</td><td>-62.6 to +62.6</td><td>0.168</td><td>0.8665</td><td>314129</td><td><span class="badge neutral">inside the luck band</span></td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">nfl.com</a></td></tr><tr><td>S12 Out-count gap of 3 or more</td><td>685</td><td>-2.08</td><td>-49.0 to +49.0</td><td>-0.083</td><td>0.9335</td><td><span class="missing">blank</span></td><td><span class="badge neutral">inside the luck band</span></td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">nfl.com</a></td></tr><tr><td>S02 Model spread edge &gt;= 3.0 pts</td><td>2277</td><td>-10.26</td><td>-89.5 to +89.5</td><td>-0.225</td><td>0.8223</td><td><span class="missing">blank</span></td><td><span class="badge neutral">inside the luck band</span></td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">nfl.com</a></td></tr><tr><td>S01 Model spread edge &gt;= 1.5 pts</td><td>3546</td><td>-12.99</td><td>-111.8 to +111.8</td><td>-0.228</td><td>0.8198</td><td><span class="missing">blank</span></td><td><span class="badge neutral">inside the luck band</span></td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">nfl.com</a></td></tr><tr><td>S11 Opponent QB ruled Out/Doubtful</td><td>380</td><td>-5.73</td><td>-36.8 to +36.8</td><td>-0.305</td><td>0.7600</td><td><span class="missing">blank</span></td><td><span class="badge neutral">inside the luck band</span></td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">nfl.com</a></td></tr><tr><td>S06 Divisional road underdog of 3+</td><td>531</td><td>-9.86</td><td>-43.8 to +43.8</td><td>-0.442</td><td>0.6587</td><td><span class="missing">blank</span></td><td><span class="badge neutral">inside the luck band</span></td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">nfl.com</a></td></tr><tr><td>S08 Home team off a bye</td><td>273</td><td>-13.99</td><td>-31.1 to +31.1</td><td>-0.882</td><td>0.3779</td><td><span class="missing">blank</span></td><td><span class="badge neutral">inside the luck band</span></td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">nfl.com</a></td></tr><tr><td>S10 Over when the total is 50 or higher</td><td>599</td><td>-32.42</td><td>-46.2 to +46.2</td><td>-1.375</td><td>0.1692</td><td><span class="missing">blank</span></td><td><span class="badge neutral">inside the luck band</span></td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">nfl.com</a></td></tr><tr><td>S09 Under when the total is 40 or lower</td><td>887</td><td>-70.38</td><td>-56.5 to +56.5</td><td>-2.443</td><td>0.0146</td><td><span class="missing">blank</span></td><td><span class="badge neutral">outside the luck band</span></td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">nfl.com</a></td></tr></tbody></table></div><p class="note">Null: the observed prices are fair, so a 1-unit bet at decimal d has mean profit 0 and variance d-1. The standard deviation of total profit is then sqrt(sum(d_i - 1)) over the bets actually placed. No simulation and no assumption beyond independence of bets. The last column is the number of bets the strategy would need before an edge of the observed size could be detected 80% of the time at the 5% level. Where that number is larger than any realistic season, the honest answer is that the sample cannot settle the question.</p>
+</section>
+
+<section class="panel">
+  <div class="panel-head"><h2>The eight gates</h2></div>
+  <div class="table-wrap"><table class=""><thead><tr><th>Gate</th><th>Requirement</th><th>Why it exists</th></tr></thead><tbody><tr><td><strong>G1</strong></td><td>walk-forward / pre-game information only</td><td>Every input to the bet decision is known before kick-off and, for the model rules, comes from a fit that used only earlier games.</td></tr><tr><td><strong>G2</strong></td><td>observed prices on every scored bet</td><td>Every scored bet carries a price taken from the source file. No -110 assumption is used.</td></tr><tr><td><strong>G3</strong></td><td>at least 200 scored bets</td><td>Below this, a run of luck is indistinguishable from skill at any plausible effect size.</td></tr><tr><td><strong>G4</strong></td><td>hit rate beats the break-even implied by the actual prices taken</td><td>Break-even is computed from the real price on each bet, not from 0.5.</td></tr><tr><td><strong>G5</strong></td><td>survives multiple testing (BH-adjusted p &lt; 0.05, 12 rules tested)</td><td>Testing many rules and reporting only the best one manufactures winners; the Benjamini-Hochberg step charges for that.</td></tr><tr><td><strong>G6</strong></td><td>positive in a untouched holdout (2024 + 2025)</td><td>The holdout seasons were never used to tune the rule thresholds.</td></tr><tr><td><strong>G7</strong></td><td>positive in at least 60% of individual seasons</td><td>An edge that exists in only one season is a season, not a strategy.</td></tr><tr><td><strong>G8</strong></td><td>95% bootstrap confidence interval on ROI excludes zero</td><td>Ten thousand resamples of the actual bet log; the interval must sit above zero.</td></tr></tbody></table></div><p class="note">8 gates, fixed before any strategy was evaluated. A strategy must clear all 8 to be called proven; the leaderboard publishes how many each one cleared.</p>
+</section>
+
+<section class="grid-2">
+  <div class="panel">
+    <div class="panel-head"><h2>What "removing luck" actually means here</h2></div>
+    <ul class="bullets">
+      <li><strong>A fair-price null, not a simulation.</strong> If the observed prices are fair, a
+        1-unit bet at decimal odds d has mean profit 0 and variance d-1. The 95% band on total profit
+        is therefore ±1.96·sqrt(Σ(d-1)) over the bets actually placed.</li>
+      <li><strong>Multiple testing.</strong> 12 rules were tested; every p-value
+        is Benjamini-Hochberg corrected, so the best of a dozen rules cannot buy significance.</li>
+      <li><strong>Holdout.</strong> 2024 and 2025 were never used to tune thresholds and are scored
+        separately.</li>
+      <li><strong>Power, not just significance.</strong> Where the bets needed for 80% power exceeds
+        any realistic season, the honest answer is that this sample cannot settle the question.</li>
+    </ul>
+  </div>
+  <div class="panel">
+    <div class="panel-head"><h2>What the sample cannot settle</h2></div>
+    <ul class="bullets">
+      <li>14440 bets scored across
+        4751 games.</li>
+      <li>1902 games in the extract carry no published price. They
+        are used for training and are never scored, because scoring them would require inventing a price.</li>
+      <li>Every scored bet carries an observed price
+        (True). No vig assumption is applied.</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+</div>
+<footer>
+  <div>
+    <strong>NFL Decision Lab</strong>
+    <p>Research tool. Not betting advice. No official league odds exist; contact with real markets is required before any edge claim.</p>
+  </div>
+  <div class="foot-links">
+    <a href="../pages/evidence.html">Sources &amp; provenance</a>
+    <a href="../pages/review.html">Flagged for review</a>
+    <a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener">Repository</a>
+  </div>
+  <p class="credit">Data: nflverse (CC-BY-4.0), built from NFL GSIS and the official weekly injury report.
+  Club names and marks belong to the NFL and its clubs.</p>
+</footer>
+</body>
+</html>

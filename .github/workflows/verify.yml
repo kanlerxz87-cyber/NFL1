@@ -29,3 +29,15 @@ jobs:
         run: python3 tools/check_generators.py
       - name: Verify line by line (source links, blank values, internal links)
         run: python3 tools/verify.py
+      # Session ca779bcc-nfl1. Additive: the strength-of-schedule sub-site has its own
+      # hard gate (every table row source-linked, no broken local link, no placeholder
+      # cell) plus unit tests, including the spread sign-convention regression that
+      # caught four false PASSes during development. Nothing above is modified.
+      - name: Install numpy and pandas for the strength study
+        run: python -m pip install --quiet numpy pandas
+      - name: Strength study unit tests
+        run: python3 -m unittest tests.test_strength -v
+      - name: Rebuild the strength sub-site from its data layer
+        run: python3 tools/build_strength.py
+      - name: Gate the strength sub-site (source links, links, placeholders)
+        run: python3 tools/check_strength_site.py

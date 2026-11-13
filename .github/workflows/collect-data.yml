@@ -52,6 +52,11 @@ jobs:
       - name: Report injury source actually used (including fallback)
         if: always()
         run: python pipeline/report_ingestion.py
+      # Session c56ebee8-nfl1: the 1st-to-6th string ladder joins the club depth charts to the
+      # injury report that was scraped two steps above. Without this the published ladder would
+      # keep last run's injury statuses while the rest of the site refreshed.
+      - name: Rebuild the depth ladder from the refreshed injury report
+        run: python pipeline/build_depth_ladder.py
       # Session 3d5c5e2d-nfl1: re-render the published pages from the data just built. Before this
       # step, a data refresh changed data/model/*.json but never the pages that show it.
       - name: Re-render the published pages from the refreshed data
@@ -80,7 +85,7 @@ jobs:
         run: |
           git config user.name "nfl1-data-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/model pipeline data/evidence data/audit data/decision_room index.html pages web 2>/dev/null || true
+          git add data/model pipeline data/evidence data/audit data/decision_room data/depth_ladder.json index.html pages web 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "No data or page changes"
             exit 0

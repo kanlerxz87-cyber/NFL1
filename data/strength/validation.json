@@ -1,0 +1,416 @@
+{
+ "all_seasons": {
+  "games": 7104,
+  "spread_mae_own": 11.145,
+  "spread_mae_market": 10.248,
+  "spread_rmse_own": 14.284,
+  "spread_rmse_market": 13.167,
+  "total_mae_own": 11.122,
+  "total_mae_market": 10.614,
+  "bias_spread_own": 0.261,
+  "bias_total_own": -1.417
+ },
+ "holdout": {
+  "games": 681,
+  "spread_mae_own": 10.708,
+  "spread_mae_market": 9.623,
+  "spread_rmse_own": 13.901,
+  "spread_rmse_market": 12.352,
+  "total_mae_own": 10.923,
+  "total_mae_market": 10.16,
+  "bias_spread_own": 0.693,
+  "bias_total_own": -1.688
+ },
+ "holdout_seasons": [
+  2024,
+  2025,
+  2026
+ ],
+ "by_season": [
+  {
+   "games": 248,
+   "spread_mae_own": 10.028,
+   "spread_mae_market": 10.327,
+   "spread_rmse_own": 13.031,
+   "spread_rmse_market": 13.096,
+   "total_mae_own": 11.508,
+   "total_mae_market": 11.169,
+   "bias_spread_own": -2.11,
+   "bias_total_own": -0.753,
+   "season": 1999
+  },
+  {
+   "games": 248,
+   "spread_mae_own": 10.598,
+   "spread_mae_market": 10.419,
+   "spread_rmse_own": 13.217,
+   "spread_rmse_market": 13.098,
+   "total_mae_own": 12.04,
+   "total_mae_market": 11.431,
+   "bias_spread_own": -0.249,
+   "bias_total_own": 0.225,
+   "season": 2000
+  },
+  {
+   "games": 248,
+   "spread_mae_own": 11.287,
+   "spread_mae_market": 10.153,
+   "spread_rmse_own": 14.527,
+   "spread_rmse_market": 13.067,
+   "total_mae_own": 10.875,
+   "total_mae_market": 10.821,
+   "bias_spread_own": 0.774,
+   "bias_total_own": 0.835,
+   "season": 2001
+  },
+  {
+   "games": 256,
+   "spread_mae_own": 10.627,
+   "spread_mae_market": 10.146,
+   "spread_rmse_own": 13.568,
+   "spread_rmse_market": 13.217,
+   "total_mae_own": 11.605,
+   "total_mae_market": 11.17,
+   "bias_spread_own": 0.253,
+   "bias_total_own": -1.909,
+   "season": 2002
+  },
+  {
+   "games": 256,
+   "spread_mae_own": 11.124,
+   "spread_mae_market": 10.605,
+   "spread_rmse_own": 13.956,
+   "spread_rmse_market": 13.559,
+   "total_mae_own": 10.533,
+   "total_mae_market": 10.615,
+   "bias_spread_own": -1.025,
+   "bias_total_own": -0.076,
+   "season": 2003
+  },
+  {
+   "games": 256,
+   "spread_mae_own": 11.301,
+   "spread_mae_market": 10.32,
+   "spread_rmse_own": 14.17,
+   "spread_rmse_market": 12.868,
+   "total_mae_own": 10.839,
+   "total_mae_market": 10.793,
+   "bias_spread_own": 0.218,
+   "bias_total_own": -1.356,
+   "season": 2004
+  },
+  {
+   "games": 256,
+   "spread_mae_own": 11.533,
+   "spread_mae_market": 9.871,
+   "spread_rmse_own": 14.666,
+   "spread_rmse_market": 12.982,
+   "total_mae_own": 10.456,
+   "total_mae_market": 10.285,
+   "bias_spread_own": -0.843,
+   "bias_total_own": 0.523,
+   "season": 2005
+  },
+  {
+   "games": 256,
+   "spread_mae_own": 11.383,
+   "spread_mae_market": 10.918,
+   "spread_rmse_own": 14.434,
+   "spread_rmse_market": 13.608,
+   "total_mae_own": 11.404,
+   "total_mae_market": 11.051,
+   "bias_spread_own": 1.965,
+   "bias_total_own": 0.369,
+   "season": 2006
+  },
+  {
+   "games": 256,
+   "spread_mae_own": 12.161,
+   "spread_mae_market": 10.805,
+   "spread_rmse_own": 15.053,
+   "spread_rmse_market": 13.445,
+   "total_mae_own": 12.237,
+   "total_mae_market": 11.27,
+   "bias_spread_own": -0.317,
+   "bias_total_own": -1.62,
+   "season": 2007
+  },
+  {
+   "games": 256,
+   "spread_mae_own": 11.744,
+   "spread_mae_market": 11.172,
+   "spread_rmse_own": 14.873,
+   "spread_rmse_market": 13.924,
+   "total_mae_own": 10.858,
+   "total_mae_market": 10.262,
+   "bias_spread_own": 0.047,
+   "bias_total_own": -2.024,
+   "season": 2008
+  },
+  {
+   "games": 256,
+   "spread_mae_own": 12.444,
+   "spread_mae_market": 11.141,
+   "spread_rmse_own": 16.01,
+   "spread_rmse_market": 14.219,
+   "total_mae_own": 10.828,
+   "total_mae_market": 10.623,
+   "bias_spread_own": 0.357,
+   "bias_total_own": -0.752,
+   "season": 2009
+  },
+  {
+   "games": 256,
+   "spread_mae_own": 11.059,
+   "spread_mae_market": 10.83,
+   "spread_rmse_own": 14.345,
+   "spread_rmse_market": 13.961,
+   "total_mae_own": 11.197,
+   "total_mae_market": 10.877,
+   "bias_spread_own": 0.653,
+   "bias_total_own": -1.797,
+   "season": 2010
+  },
+  {
+   "games": 256,
+   "spread_mae_own": 11.889,
+   "spread_mae_market": 10.467,
+   "spread_rmse_own": 15.35,
+   "spread_rmse_market": 13.671,
+   "total_mae_own": 10.29,
+   "total_mae_market": 9.379,
+   "bias_spread_own": -0.721,
+   "bias_total_own": -1.903,
+   "season": 2011
+  },
+  {
+   "games": 256,
+   "spread_mae_own": 12.088,
+   "spread_mae_market": 10.869,
+   "spread_rmse_own": 15.656,
+   "spread_rmse_market": 14.021,
+   "total_mae_own": 10.809,
+   "total_mae_market": 10.396,
+   "bias_spread_own": 0.117,
+   "bias_total_own": -2.856,
+   "season": 2012
+  },
+  {
+   "games": 256,
+   "spread_mae_own": 10.942,
+   "spread_mae_market": 9.822,
+   "spread_rmse_own": 14.21,
+   "spread_rmse_market": 12.68,
+   "total_mae_own": 11.579,
+   "total_mae_market": 11.111,
+   "bias_spread_own": -0.529,
+   "bias_total_own": -3.942,
+   "season": 2013
+  },
+  {
+   "games": 256,
+   "spread_mae_own": 12.048,
+   "spread_mae_market": 11.391,
+   "spread_rmse_own": 15.043,
+   "spread_rmse_market": 14.481,
+   "total_mae_own": 11.136,
+   "total_mae_market": 10.77,
+   "bias_spread_own": 0.127,
+   "bias_total_own": -2.07,
+   "season": 2014
+  },
+  {
+   "games": 256,
+   "spread_mae_own": 11.061,
+   "spread_mae_market": 10.127,
+   "spread_rmse_own": 14.221,
+   "spread_rmse_market": 12.876,
+   "total_mae_own": 11.005,
+   "total_mae_market": 10.529,
+   "bias_spread_own": 0.999,
+   "bias_total_own": -2.389,
+   "season": 2015
+  },
+  {
+   "games": 256,
+   "spread_mae_own": 9.353,
+   "spread_mae_market": 9.02,
+   "spread_rmse_own": 12.129,
+   "spread_rmse_market": 11.787,
+   "total_mae_own": 10.818,
+   "total_mae_market": 9.918,
+   "bias_spread_own": -0.068,
+   "bias_total_own": -2.442,
+   "season": 2016
+  },
+  {
+   "games": 256,
+   "spread_mae_own": 11.193,
+   "spread_mae_market": 10.094,
+   "spread_rmse_own": 14.472,
+   "spread_rmse_market": 13.124,
+   "total_mae_own": 11.158,
+   "total_mae_market": 11.162,
+   "bias_spread_own": 0.027,
+   "bias_total_own": -0.342,
+   "season": 2017
+  },
+  {
+   "games": 256,
+   "spread_mae_own": 10.547,
+   "spread_mae_market": 9.979,
+   "spread_rmse_own": 13.605,
+   "spread_rmse_market": 13.144,
+   "total_mae_own": 11.445,
+   "total_mae_market": 10.598,
+   "bias_spread_own": 0.332,
+   "bias_total_own": -3.258,
+   "season": 2018
+  },
+  {
+   "games": 256,
+   "spread_mae_own": 11.266,
+   "spread_mae_market": 10.211,
+   "spread_rmse_own": 14.366,
+   "spread_rmse_market": 13.127,
+   "total_mae_own": 11.369,
+   "total_mae_market": 10.828,
+   "bias_spread_own": 2.606,
+   "bias_total_own": -1.988,
+   "season": 2019
+  },
+  {
+   "games": 256,
+   "spread_mae_own": 10.965,
+   "spread_mae_market": 9.83,
+   "spread_rmse_own": 14.211,
+   "spread_rmse_market": 12.771,
+   "total_mae_own": 11.485,
+   "total_mae_market": 10.146,
+   "bias_spread_own": 2.302,
+   "bias_total_own": -5.393,
+   "season": 2020
+  },
+  {
+   "games": 272,
+   "spread_mae_own": 12.001,
+   "spread_mae_market": 10.781,
+   "spread_rmse_own": 14.968,
+   "spread_rmse_market": 13.669,
+   "total_mae_own": 11.105,
+   "total_mae_market": 10.789,
+   "bias_spread_own": 0.571,
+   "bias_total_own": -1.423,
+   "season": 2021
+  },
+  {
+   "games": 271,
+   "spread_mae_own": 9.809,
+   "spread_mae_market": 8.742,
+   "spread_rmse_own": 12.729,
+   "spread_rmse_market": 11.433,
+   "total_mae_own": 11.094,
+   "total_mae_market": 10.395,
+   "bias_spread_own": 0.251,
+   "bias_total_own": 0.73,
+   "season": 2022
+  },
+  {
+   "games": 272,
+   "spread_mae_own": 11.302,
+   "spread_mae_market": 9.901,
+   "spread_rmse_own": 14.593,
+   "spread_rmse_market": 13.071,
+   "total_mae_own": 10.951,
+   "total_mae_market": 10.239,
+   "bias_spread_own": -0.414,
+   "bias_total_own": 0.787,
+   "season": 2023
+  },
+  {
+   "games": 272,
+   "spread_mae_own": 11.026,
+   "spread_mae_market": 9.61,
+   "spread_rmse_own": 14.395,
+   "spread_rmse_market": 12.605,
+   "total_mae_own": 10.337,
+   "total_mae_market": 9.73,
+   "bias_spread_own": 0.344,
+   "bias_total_own": -1.609,
+   "season": 2024
+  },
+  {
+   "games": 272,
+   "spread_mae_own": 10.372,
+   "spread_mae_market": 9.722,
+   "spread_rmse_own": 13.492,
+   "spread_rmse_market": 12.271,
+   "total_mae_own": 11.215,
+   "total_mae_market": 10.393,
+   "bias_spread_own": 0.198,
+   "bias_total_own": -1.782,
+   "season": 2025
+  },
+  {
+   "games": 137,
+   "spread_mae_own": 10.741,
+   "spread_mae_market": 9.449,
+   "spread_rmse_own": 13.703,
+   "spread_rmse_market": 11.997,
+   "total_mae_own": 11.507,
+   "total_mae_market": 10.551,
+   "bias_spread_own": 2.367,
+   "bias_total_own": -1.657,
+   "season": 2026
+  }
+ ],
+ "calibration": [
+  {
+   "bucket": "[-30,-7)",
+   "games": 176,
+   "mean_own_margin": -9.43,
+   "mean_actual_margin": -4.96
+  },
+  {
+   "bucket": "[-7,-3)",
+   "games": 623,
+   "mean_own_margin": -4.67,
+   "mean_actual_margin": -2.49
+  },
+  {
+   "bucket": "[-3,0)",
+   "games": 1224,
+   "mean_own_margin": -1.38,
+   "mean_actual_margin": -0.9
+  },
+  {
+   "bucket": "[0,3)",
+   "games": 1884,
+   "mean_own_margin": 1.55,
+   "mean_actual_margin": 1.65
+  },
+  {
+   "bucket": "[3,7)",
+   "games": 2118,
+   "mean_own_margin": 4.83,
+   "mean_actual_margin": 3.83
+  },
+  {
+   "bucket": "[7,30)",
+   "games": 1079,
+   "mean_own_margin": 9.78,
+   "mean_actual_margin": 7.33
+  }
+ ],
+ "correlation_model_market": {
+  "n": 7104,
+  "r": 0.466,
+  "ci95": [
+   0.4476,
+   0.484
+  ],
+  "p_value": 0.0,
+  "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+ },
+ "rule": "Own line is produced walk-forward. Market MAE/RMSE is the closing line's own error on the same games, so the comparison is like-for-like."
+}

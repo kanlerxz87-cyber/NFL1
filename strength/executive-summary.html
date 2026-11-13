@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Executive summary · NFL Strength of Schedule Lab</title>
+<meta name="description" content="Strength of schedule, schedule-adjusted ratings and own lines, verified against official NFL sources.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="brand" href="../index.html"><span class="mark">NFL</span><span class="brand-text">Strength Lab</span></a>
+  <nav aria-label="Strength of schedule sections"><a href="index.html">Overview</a><a href="ratings.html">Ratings & SOS</a><a href="lines.html">My Lines</a><a href="leaderboard.html">Leaderboard</a><a href="parlays.html">Parlays & Combos</a><a href="props.html">Props</a><a href="injuries.html">Injuries & Depth</a><a href="correlations.html">Correlations</a><a href="questions.html">Questions</a><a href="suggestions.html">Suggestions</a><a href="decisions.html">Decisions</a><a href="flagged.html">Flagged for Review</a><a href="verification.html">Verification</a><a href="executive-summary.html" class="active">Executive Summary</a></nav>
+</header>
+<main id="main">
+  <section class="page-head">
+    <p class="eyebrow">Strength of schedule study</p>
+    <h1>Executive summary</h1>
+    <p class="standfirst">The whole study on one page: question, method, result, defects, and the decisions that need a human.</p>
+    <p class="timestamp">Built 2026-11-13T13:14:06+00:00 · every table row links to the source it came from · blanks are deliberate</p>
+    
+  </section>
+  
+<section class="panel">
+  <h2>Executive summary</h2>
+  <p class="lede">A full-sample test of whether schedule strength can beat the NFL closing line. The
+  architecture is sound, the evidence is negative, and the negative is worth publishing.</p>
+  <h3>What was asked</h3>
+  <p>The brief asks for four things: find out what is missing before a decision can be made; originate independent
+  NFL lines; run strategies through validation gates with correlation and luck removed; and track injuries and
+  depth-chart deficiencies. This study answers each with a number and a link.</p>
+  <h3>What was found</h3>
+  <ul class="plain">
+    <li><strong>Own lines are not better than the market.</strong> Over 7,104 games
+    the closing line beats the model in every season: holdout spread MAE
+    9.623 (market) versus 10.708 (model).</li>
+    <li><strong>No schedule signal survives the gates.</strong> 0 of
+    11 rules pass; the best rule's 95% ROI interval still crosses zero.</li>
+    <li><strong>Schedule strength is not predictive of results.</strong> The correlation between rating difference and
+    actual margin is r=0.466 against the spread, and the model's edge over the
+    market is negative.</li>
+    <li><strong>Three published defects were found and are flagged.</strong> Stale standings
+    (10 fields), a stale provenance pin, and three injury rows that changed on
+    the official page.</li>
+    <li><strong>Two whole tracks cannot be built from the current sources.</strong> Prop combos need prices; depth-chart
+    deficiency needs game-day inactives and dated depth charts.</li>
+  </ul>
+  <h3>What it means</h3>
+  <p>The absence of a schedule edge is not a failure of the model — it is the expected result in a market that prices
+  information efficiently. The value of the exercise is the gate set: it rejected a 94%-hit-rate result in this very
+  session because the hit rate was arithmetically impossible. Any future rule set should be registered against the same
+  eight gates before it is evaluated.</p>
+  <h3>Decisions requested</h3>
+  <div class="table-wrap"><table class=""><thead><tr><th>ID</th><th>Decision</th><th>Options</th><th>Source</th></tr></thead><tbody><tr><td>D-SOS-01</td><td>Treat the schedule-information edge as absent for now</td><td>accept / request a new pre-registered rule set</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">nflverse schedules release ↗</a></td></tr><tr><td>D-SOS-02</td><td>Refresh the committed standings and fixtures from the official pages</td><td>refresh now / freeze with &#x27;as-of&#x27; / exclude 2026</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings ↗</a></td></tr><tr><td>D-SOS-03</td><td>Fund a timestamped odds feed before further edge work</td><td>fund / stay consensus-only</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">nflverse schedules release ↗</a></td></tr><tr><td>D-SOS-04</td><td>Pick the reward scheme for the leaderboard</td><td>badges / scoring only / cash (needs legal)</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">nflverse schedules release ↗</a></td></tr></tbody></table></div>
+  <h3>What to do next</h3>
+  <ol class="plain">
+    <li>Review the 7 flags and accept or reject the data refresh (S-SOS-01, S-SOS-02).</li>
+    <li>Decide whether to fund a timestamped odds feed (D-SOS-03). Without it, no edge below can be tested.</li>
+    <li>Freeze the rule set as published here and stop searching for a schedule edge (S-SOS-06).</li>
+  </ol>
+</section>
+
+</main>
+<footer>
+  <p>Research tool, not betting advice. Closing lines in the source file are consensus numbers, not book quotes.
+  Official entry points: <a href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a> ·
+  <a href="https://www.nfl.com/schedules/2026/reg10" target="_blank" rel="noopener">NFL schedule</a> ·
+  <a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">NFL injuries</a>.
+  Data: <a href="https://github.com/nflverse/nflverse-data" target="_blank" rel="noopener">nflverse</a> (CC-BY-4.0).</p>
+  <p><a href="flagged.html">Flagged for review</a> · <a href="verification.html">Verification</a> · <a href="../pages/sections.html">All site sections</a></p>
+</footer>
+</body>
+</html>

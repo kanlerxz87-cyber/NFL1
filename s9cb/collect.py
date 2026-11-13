@@ -119,7 +119,12 @@ def main() -> None:
             "official_upstream": official, "description": desc, "bytes": size,
             "status": "ok" if size else "unavailable",
             "fetched_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+            # sha256/bytes describe the DOWNLOADED asset in build/raw/, which is not
+            # committed. The extract that is committed is a filtered, re-serialised
+            # copy and therefore has a different hash; `committed_*` below pins that
+            # file, which is what a reviewer can actually verify against the repo.
             "sha256": sha256(dest) if size else None,
+            "hash_describes": "downloaded asset (build/raw/, not committed)",
         })
         print(f"{local}: {'ok' if size else 'MISSING'} {size}")
 
@@ -236,9 +241,35 @@ def main() -> None:
         inj_rows = int(len(inj))
         print(f"injuries.csv -> {inj_rows} rows")
 
+    def _committed(name: str) -> dict:
+        path = os.path.join(OUT, name)
+        if not os.path.exists(path):
+            return {"committed_bytes": None, "committed_sha256": None}
+        return {"committed_bytes": os.path.getsize(path), "committed_sha256": sha256(path)}
+
+    committed = {
+        "games.csv": _committed("games.csv"),
+        "teams.csv": _committed("teams.csv"),
+        "player_week.csv": _committed("player_week.csv"),
+        "injuries.csv": _committed("injuries.csv"),
+    }
+    for entry in manifest:
+        if entry["local"] in committed:
+            entry.update(committed[entry["local"]])
+            entry["committed_note"] = (
+                "committed_sha256 is the hash of the file in data/s9cb/; verify that one "
+                "with `sha256sum data/s9cb/<file>`."
+            )
+
     prov = {
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "session": "9cb71eb8-nfl1",
+        "hash_convention": (
+            "`sha256`/`bytes` describe the downloaded asset in build/raw/ (not committed). "
+            "`committed_sha256`/`committed_bytes` describe the file actually stored in "
+            "data/s9cb/, which is the one a reviewer can check. The two differ because the "
+            "extract is filtered to REG games and a fixed column set before it is written."
+        ),
         "source_repo": "https://github.com/nflverse/nflverse-data",
         "source_note": (
             "nflverse publishes parsed copies of the NFL's GSIS feed, the official weekly "
