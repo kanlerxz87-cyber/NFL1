@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[2]
 CANON = [
     ("index.html", "Overview"),
     ("sections.html", "All Sections"),
+    ("../room/index.html", "Decision Room"),
     ("executive-summary.html", "Executive Summary"),
     ("teams.html", "Teams"),
     ("standings.html", "Standings"),
