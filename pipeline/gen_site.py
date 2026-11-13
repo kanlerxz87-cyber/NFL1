@@ -1117,35 +1117,55 @@ def depth_strings_page(dstr, dash):
     inj_src = (source.get("injuries") or {})
     dc_src = (source.get("depth_chart") or {})
 
-    c_rows = [[
-        f"<strong>{esc(c['team'])}</strong>",
-        c.get("positions_tracked", 0),
-        c.get("positions_starter_unavailable", 0),
-        c.get("positions_down_to_2nd", 0),
-        c.get("positions_down_to_3rd", 0),
-        c.get("positions_down_to_4th_or_beyond", 0),
-        c.get("no_healthy_player_listed", 0),
-        c.get("defensive_positions_starter_unavailable", 0),
-        c.get("offensive_positions_starter_unavailable", 0),
-        src(c.get("source") or inj_src.get("url") or SOURCE["injuries"], "NFL injuries"),
-    ] for c in clubs]
-    c_tbl = table(["Team", "Positions tracked", "Starter unavailable",
-                   "Down to 2nd string", "Down to 3rd string", "Down to 4th string",
+    def both_sources(chart_url, inj_url):
+        links = []
+        if chart_url:
+            links.append(src(chart_url, "club chart"))
+        links.append(src(inj_url or inj_src.get("url") or SOURCE["injuries"], "NFL injuries"))
+        return " ".join(links)
+
+    c_rows = []
+    for c in clubs:
+        team_cell = f"<strong>{esc(c['team'])}</strong>"
+        if c.get("no_chart"):
+            team_cell += " " + badge("no chart published")
+        c_rows.append([
+            team_cell,
+            c.get("positions_tracked", 0),
+            c.get("positions_starter_unavailable", 0),
+            c.get("positions_starter_at_risk", 0),
+            c.get("positions_down_to_2nd", 0),
+            c.get("positions_down_to_3rd", 0),
+            c.get("positions_down_to_4th_or_beyond", 0),
+            c.get("no_healthy_player_listed", 0),
+            c.get("defensive_positions_starter_unavailable", 0),
+            c.get("offensive_positions_starter_unavailable", 0),
+            both_sources(c.get("chart_source"), c.get("source")),
+        ])
+    c_tbl = table(["Team", "Positions tracked", "Starter unavailable (Out)",
+                   "Starter at risk (Doubtful/Questionable/DNP)", "Down to 2nd string",
+                   "Down to 3rd string", "Down to 4th string",
                    "No healthy player listed", "Defence starter out",
                    "Offence starter out", "Source"], c_rows,
                   note=("Counts are positions whose listed starter carries an official Out "
-                        "designation, and the string the club projects to field at that "
-                        "position once the designations are applied. A position with no "
-                        "designation is not counted as unavailable."))
+                        "designation (unavailable) or is Doubtful/Questionable or did not "
+                        "practise (at risk), and the string the club projects to field at "
+                        "that position once the designations are applied. A position with "
+                        "no designation is counted in neither column. A club with no "
+                        "published chart shows zeros and a badge — never another club's "
+                        "players."))
 
     p_rows = []
     for r in positions:
+        flagged = {f.get("name") for f in r.get("merged_name_flags") or []}
         chain_txt = " → ".join(
             f"#{c['rank']} {c['player']}"
+            + (" ⚑" if c["player"] in flagged else "")
             + (f" ({c['designation']})" if c.get("designation") else "")
             for c in r.get("chain", []))
         p_rows.append([
-            f"<strong>{esc(r['team'])}</strong>", esc(r.get("unit") or "—"),
+            f"<strong>{esc(r['team'])}</strong>",
+            esc(UNIT_LABEL.get(r.get("unit"), r.get("unit") or "—")),
             esc(r.get("position") or "—"), esc(r.get("slot_name") or "—"),
             esc(r.get("starter") or "—"),
             desig_badge(r.get("starter_designation")) if r.get("starter_designation")
@@ -1154,7 +1174,7 @@ def depth_strings_page(dstr, dash):
             esc(r.get("string_if_doubtful_sits_label")),
             esc(r.get("next_man_up") or "—"),
             f'<span class="sub">{esc(chain_txt)}</span>',
-            src(r.get("source") or inj_src.get("url") or SOURCE["injuries"], "NFL injuries"),
+            both_sources(r.get("chart_source"), r.get("source")),
         ])
     p_tbl = table(["Team", "Unit", "Pos", "Slot", "Listed starter", "Starter designation",
                    "Projected string", "Next certain string", "Next man up",
@@ -1164,13 +1184,17 @@ def depth_strings_page(dstr, dash):
                         "certain string excludes Doubtful/Questionable as well — that is the "
                         "player who takes over if the projected starter cannot go. Chains "
                         "stop at the fourth string the depth chart actually lists; nothing "
-                        "is invented beyond it."))
+                        "is invented beyond it. A club may render one position as several "
+                        "chart lines (columns) — those rows are labelled 'line N' and are "
+                        "chart layout, not depth order. The Source cell links the club "
+                        "chart the chain came from and the nfl.com report the "
+                        "designations came from."))
 
     limits = "".join(f"<li>{esc(x)}</li>" for x in method.get("limits", []))
     banner = (f'<p class="okline">Injury source: {esc(inj_src.get("label", ""))} — '
               f'{src(inj_src.get("url") or SOURCE["injuries"], "nfl.com/injuries")} · '
               f'Depth chart: {esc(dc_src.get("label", ""))} — '
-              f'{src(dc_src.get("url") or SOURCE["depth"], "nflverse depth charts")}</p>')
+              f'{src(dc_src.get("url") or SOURCE["depth"], "club depth charts")}</p>')
     if inj_src.get("warning"):
         banner += f'<p class="alert">{esc(inj_src["warning"])} {src(inj_src.get("url"), "official page")}</p>'
 
@@ -1185,7 +1209,9 @@ def depth_strings_page(dstr, dash):
     body = f"""
 <section class="kpis">
   {kpi("Positions tracked", counts.get("positions_tracked"), "all clubs")}
-  {kpi("Clubs tracked", counts.get("clubs_tracked"), "with a published chain")}
+  {kpi("Clubs tracked", counts.get("clubs_tracked"),
+       (f'{counts.get("clubs_without_chart", 0)} without a published chart'
+        if counts.get("clubs_without_chart") else "with a published chain"))}
   {kpi("Starter unavailable", counts.get("positions_with_starter_unavailable"), "official Out")}
   {kpi("Down to 2nd string", counts.get("positions_down_to_2nd_string"), "projected")}
   {kpi("Down to 3rd string", counts.get("positions_down_to_3rd_string"), "projected")}
@@ -1202,7 +1228,14 @@ def depth_strings_page(dstr, dash):
   string at every tracked position, offence and defence. Three numbers are kept apart on
   purpose — the string that projects to play, the next certain string if the doubtful players
   sit, and the next man up if the projected starter cannot go.</p>
+  <p>Every row's Source cell carries two links: the <strong>club chart</strong> the chain
+  was read from (an official page of the club itself) and the <strong>nfl.com injury
+  report</strong> the designations were taken from. Neither is inferred; a string the chart
+  does not list stays missing.</p>
   <p class="note">{esc(method.get("chains", ""))} {esc(method.get("statuses", ""))}</p>
+  <p class="note">⚑ marks a name cell the scraper appears to have merged from two
+  co-starters. It is published exactly as the club chart shows it and never split into
+  two players; treat the chain behind it as unverified at that rank.</p>
 </section>
 
 <section class="panel">
