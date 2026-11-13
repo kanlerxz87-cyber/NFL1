@@ -20,7 +20,7 @@
     </div>
     <nav aria-label="Site sections">
       <div class="navgroup"><h4>Overview</h4>
-<a href="index.html">Home</a>
+<a href="governance.html">Governance home</a>
 <a href="executive-summary.html">Executive Summary</a>
 <a href="deployment.html">Deployment &amp; PR</a>
 <a href="legacy-site.html">Earlier sessions&#x27; site</a>
@@ -48,6 +48,7 @@
 </div>
 <div class="navgroup"><h4>Preserved pages</h4>
 <a href="pages/analysis.html">Validation &amp; correlation</a>
+<a href="pages/audit.html">Audit</a>
 <a href="pages/availability.html">Availability</a>
 <a href="pages/data.html">Verified data</a>
 <a href="pages/decisions.html">Decision register</a>
@@ -66,6 +67,7 @@
 <a href="pages/strategies.html">Strategies</a>
 <a href="pages/suggestions.html">Suggestions</a>
 <a href="pages/teams.html">Teams</a>
+<a href="pages/verified-lines.html">Verified Lines</a>
 <a href="pages/verified.html">Verified artifacts</a>
 </div>
     </nav>
@@ -84,7 +86,7 @@
       <h1>Verification &amp; official sources</h1>
       <p class="lede">How every value was verified line by line, the complete official source registry with links for manual review, and the per-file data audit.</p>
       <div class="callout"><b>Verification policy.</b> Work line by line; cite an official source on every table row; leave a cell blank when the official source publishes no value; flag it; never infer or fill in a value. This page documents the procedure, the source registry and the line-by-line audit of the data layer.</div>
-<div class="cards"><div class="card"><div class="label">Official sources</div><div class="value">26</div><div class="detail">All fetched 2026-11-12</div></div><div class="card"><div class="label">Data files audited</div><div class="value">33</div><div class="detail">Row counts and blanks</div></div><div class="card"><div class="label">Table rows</div><div class="value">600+</div><div class="detail">Each with a source link</div></div><div class="card"><div class="label">Flagged items</div><div class="value">44</div><div class="detail">Needs review</div></div></div>
+<div class="cards"><div class="card"><div class="label">Official sources</div><div class="value">26</div><div class="detail">All fetched 2026-11-12</div></div><div class="card"><div class="label">Data files audited</div><div class="value">35</div><div class="detail">Row counts and blanks</div></div><div class="card"><div class="label">Table rows</div><div class="value">600+</div><div class="detail">Each with a source link</div></div><div class="card"><div class="label">Flagged items</div><div class="value">44</div><div class="detail">Needs review</div></div></div>
 <h2 id="policy">Verification procedure</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-verify-policy" aria-label="Filter tbl-verify-policy" placeholder="Filter rows…">
 <span class="count" data-count-for="tbl-verify-policy">7 rows shown</span></div>
@@ -382,7 +384,7 @@
 </tbody></table></div>
 <h2 id="audit">Line-by-line data audit</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-audit" aria-label="Filter tbl-audit" placeholder="Filter rows…">
-<span class="count" data-count-for="tbl-audit">33 rows shown</span></div>
+<span class="count" data-count-for="tbl-audit">35 rows shown</span></div>
 <div class="tablewrap"><table class="data-table" id="tbl-audit"><caption>Per-file row counts, rows carrying a valid official source id, blank cells and unverified rows. Generated directly from the committed JSON files.</caption>
 <thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Data file</th><th scope="col" class="sortable">Rows / object</th><th scope="col" class="sortable">Rows with official source id</th><th scope="col" class="sortable">Blank cells</th><th scope="col" class="sortable">Unverified rows</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
 <tr id="AU-01" data-verified="true">
@@ -459,6 +461,15 @@
 </tr>
 <tr id="AU-09" data-verified="true">
 <td><code>AU-09</code></td>
+<td data-value="1">data/contradictions.json</td>
+<td data-value="1" class="num">1</td>
+<td data-value="1">0 / 1</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="AU-10" data-verified="true">
+<td><code>AU-10</code></td>
 <td data-value="1">data/correlation_requests.json</td>
 <td data-value="1" class="num">8</td>
 <td data-value="1">8 / 8</td>
@@ -466,8 +477,8 @@
 <td data-value="1" class="num">8</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="AU-10" data-verified="true">
-<td><code>AU-10</code></td>
+<tr id="AU-11" data-verified="true">
+<td><code>AU-11</code></td>
 <td data-value="1">data/correlations.json</td>
 <td data-value="1" class="num">6</td>
 <td data-value="1">6 / 6</td>
@@ -475,8 +486,8 @@
 <td data-value="1" class="num">0</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="AU-11" data-verified="true">
-<td><code>AU-11</code></td>
+<tr id="AU-12" data-verified="true">
+<td><code>AU-12</code></td>
 <td data-value="1">data/deployment.json</td>
 <td data-value="1" class="num">7</td>
 <td data-value="1">7 / 7</td>
@@ -484,8 +495,8 @@
 <td data-value="1" class="num">0</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="AU-12" data-verified="true">
-<td><code>AU-12</code></td>
+<tr id="AU-13" data-verified="true">
+<td><code>AU-13</code></td>
 <td data-value="1">data/depth_chart.json</td>
 <td data-value="1" class="num">85</td>
 <td data-value="1">85 / 85</td>
@@ -493,8 +504,8 @@
 <td data-value="1" class="num">0</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="AU-13" data-verified="true">
-<td><code>AU-13</code></td>
+<tr id="AU-14" data-verified="true">
+<td><code>AU-14</code></td>
 <td data-value="1">data/depth_chart_meta.json</td>
 <td data-value="1" class="num">3</td>
 <td data-value="1">3 / 3</td>
@@ -502,8 +513,8 @@
 <td data-value="1" class="num">0</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="AU-14" data-verified="true">
-<td><code>AU-14</code></td>
+<tr id="AU-15" data-verified="true">
+<td><code>AU-15</code></td>
 <td data-value="1">data/derived_standings.json</td>
 <td data-value="1" class="num">32</td>
 <td data-value="1">32 / 32</td>
@@ -511,8 +522,17 @@
 <td data-value="1" class="num">0</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="AU-15" data-verified="true">
-<td><code>AU-15</code></td>
+<tr id="AU-16" data-verified="true">
+<td><code>AU-16</code></td>
+<td data-value="1">data/fillable_decisions.json</td>
+<td data-value="1" class="num">1</td>
+<td data-value="1">0 / 1</td>
+<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">0</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="AU-17" data-verified="true">
+<td><code>AU-17</code></td>
 <td data-value="1">data/findings.json</td>
 <td data-value="1" class="num">14</td>
 <td data-value="1">14 / 14</td>
@@ -520,8 +540,8 @@
 <td data-value="1" class="num">0</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="AU-16" data-verified="true">
-<td><code>AU-16</code></td>
+<tr id="AU-18" data-verified="true">
+<td><code>AU-18</code></td>
 <td data-value="1">data/flags.json</td>
 <td data-value="1" class="num">44</td>
 <td data-value="1">44 / 44</td>
@@ -529,8 +549,8 @@
 <td data-value="1" class="num">0</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="AU-17" data-verified="true">
-<td><code>AU-17</code></td>
+<tr id="AU-19" data-verified="true">
+<td><code>AU-19</code></td>
 <td data-value="1">data/inactives.json</td>
 <td data-value="1" class="num">20</td>
 <td data-value="1">20 / 20</td>
@@ -538,8 +558,8 @@
 <td data-value="1" class="num">0</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="AU-18" data-verified="true">
-<td><code>AU-18</code></td>
+<tr id="AU-20" data-verified="true">
+<td><code>AU-20</code></td>
 <td data-value="1">data/injuries.json</td>
 <td data-value="1" class="num">61</td>
 <td data-value="1">61 / 61</td>
@@ -547,8 +567,8 @@
 <td data-value="1" class="num">0</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="AU-19" data-verified="true">
-<td><code>AU-19</code></td>
+<tr id="AU-21" data-verified="true">
+<td><code>AU-21</code></td>
 <td data-value="1">data/injury_games.json</td>
 <td data-value="1" class="num">14</td>
 <td data-value="1">14 / 14</td>
@@ -556,8 +576,8 @@
 <td data-value="1" class="num">0</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="AU-20" data-verified="true">
-<td><code>AU-20</code></td>
+<tr id="AU-22" data-verified="true">
+<td><code>AU-22</code></td>
 <td data-value="1">data/injury_policy.json</td>
 <td data-value="1" class="num">6</td>
 <td data-value="1">6 / 6</td>
@@ -565,8 +585,8 @@
 <td data-value="1" class="num">0</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="AU-21" data-verified="true">
-<td><code>AU-21</code></td>
+<tr id="AU-23" data-verified="true">
+<td><code>AU-23</code></td>
 <td data-value="1">data/leaderboard.json</td>
 <td data-value="1" class="num">10</td>
 <td data-value="1">10 / 10</td>
@@ -574,8 +594,8 @@
 <td data-value="1" class="num">10</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="AU-22" data-verified="true">
-<td><code>AU-22</code></td>
+<tr id="AU-24" data-verified="true">
+<td><code>AU-24</code></td>
 <td data-value="1">data/leaderboard_rules.json</td>
 <td data-value="1" class="num">7</td>
 <td data-value="1">7 / 7</td>
@@ -583,8 +603,8 @@
 <td data-value="1" class="num">2</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="AU-23" data-verified="true">
-<td><code>AU-23</code></td>
+<tr id="AU-25" data-verified="true">
+<td><code>AU-25</code></td>
 <td data-value="1">data/paths.json</td>
 <td data-value="1" class="num">3</td>
 <td data-value="1">3 / 3</td>
@@ -592,8 +612,8 @@
 <td data-value="1" class="num">0</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="AU-24" data-verified="true">
-<td><code>AU-24</code></td>
+<tr id="AU-26" data-verified="true">
+<td><code>AU-26</code></td>
 <td data-value="1">data/questions.json</td>
 <td data-value="1" class="num">28</td>
 <td data-value="1">28 / 28</td>
@@ -601,8 +621,8 @@
 <td data-value="1" class="num">0</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="AU-25" data-verified="true">
-<td><code>AU-25</code></td>
+<tr id="AU-27" data-verified="true">
+<td><code>AU-27</code></td>
 <td data-value="1">data/requirements.json</td>
 <td data-value="1" class="num">36</td>
 <td data-value="1">36 / 36</td>
@@ -610,8 +630,8 @@
 <td data-value="1" class="num">0</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="AU-26" data-verified="true">
-<td><code>AU-26</code></td>
+<tr id="AU-28" data-verified="true">
+<td><code>AU-28</code></td>
 <td data-value="1">data/site_meta.json</td>
 <td data-value="1" class="num">1</td>
 <td data-value="1">0 / 1</td>
@@ -619,8 +639,8 @@
 <td data-value="1" class="num">0</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="AU-27" data-verified="true">
-<td><code>AU-27</code></td>
+<tr id="AU-29" data-verified="true">
+<td><code>AU-29</code></td>
 <td data-value="1">data/sources.json</td>
 <td data-value="1" class="num">26</td>
 <td data-value="1">0 / 26</td>
@@ -628,8 +648,8 @@
 <td data-value="1" class="num">0</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="AU-28" data-verified="true">
-<td><code>AU-28</code></td>
+<tr id="AU-30" data-verified="true">
+<td><code>AU-30</code></td>
 <td data-value="1">data/standings.json</td>
 <td data-value="1" class="num">32</td>
 <td data-value="1">32 / 32</td>
@@ -637,8 +657,8 @@
 <td data-value="1" class="num">0</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="AU-29" data-verified="true">
-<td><code>AU-29</code></td>
+<tr id="AU-31" data-verified="true">
+<td><code>AU-31</code></td>
 <td data-value="1">data/strategies.json</td>
 <td data-value="1" class="num">10</td>
 <td data-value="1">10 / 10</td>
@@ -646,8 +666,8 @@
 <td data-value="1" class="num">0</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="AU-30" data-verified="true">
-<td><code>AU-30</code></td>
+<tr id="AU-32" data-verified="true">
+<td><code>AU-32</code></td>
 <td data-value="1">data/suggestions.json</td>
 <td data-value="1" class="num">27</td>
 <td data-value="1">27 / 27</td>
@@ -655,8 +675,8 @@
 <td data-value="1" class="num">0</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="AU-31" data-verified="true">
-<td><code>AU-31</code></td>
+<tr id="AU-33" data-verified="true">
+<td><code>AU-33</code></td>
 <td data-value="1">data/terms.json</td>
 <td data-value="1" class="num">8</td>
 <td data-value="1">8 / 8</td>
@@ -664,8 +684,8 @@
 <td data-value="1" class="num">0</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="AU-32" data-verified="true">
-<td><code>AU-32</code></td>
+<tr id="AU-34" data-verified="true">
+<td><code>AU-34</code></td>
 <td data-value="1">data/validation_gates.json</td>
 <td data-value="1" class="num">13</td>
 <td data-value="1">13 / 13</td>
@@ -673,8 +693,8 @@
 <td data-value="1" class="num">0</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="AU-33" data-verified="true">
-<td><code>AU-33</code></td>
+<tr id="AU-35" data-verified="true">
+<td><code>AU-35</code></td>
 <td data-value="1">data/verification_report.json</td>
 <td data-value="1" class="num">1</td>
 <td data-value="1">0 / 1</td>
