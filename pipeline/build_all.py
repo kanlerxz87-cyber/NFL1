@@ -13,12 +13,14 @@ Run: python pipeline/build_all.py
 """
 from __future__ import annotations
 
+import importlib.util
 import json
 import math
 import os
 import re
 import traceback
 from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 
 import numpy as np
 import pandas as pd
@@ -26,6 +28,45 @@ import pandas as pd
 import nfl_lib as L
 
 ERRORS: list[dict] = []
+
+# The schedule's gameday/gametime columns are published in US Eastern time.
+ET = ZoneInfo("America/New_York")
+
+
+def _load_module(rel_path: str, name: str):
+    """Load a module by file path so the pipeline never depends on sys.path order."""
+    path = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", rel_path))
+    spec = importlib.util.spec_from_file_location(name, path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+# Depth-string model (2nd / 3rd / 4th string) kept as a pure, unit-tested module.
+depth_strings = _load_module(os.path.join("analysis", "depth_strings.py"), "depth_strings")
+
+
+def kickoff_utc(gameday, gametime):
+    """Kickoff as a UTC timestamp, or None when the schedule row carries no usable time.
+
+    Returns None rather than guessing: a fixture whose time is unknown is kept in the
+    published slate (it cannot be proven to have started) and is labelled on the site.
+    """
+    try:
+        d = pd.to_datetime(str(gameday)).date()
+    except Exception:  # noqa: BLE001
+        return None
+    t = str(gametime or "").strip()
+    if not t or t.upper() == "TBD":
+        return None
+    m = re.match(r"^(\d{1,2}):(\d{2})", t)
+    if not m:
+        return None
+    try:
+        local = datetime(d.year, d.month, d.day, int(m.group(1)), int(m.group(2)), tzinfo=ET)
+    except Exception:  # noqa: BLE001
+        return None
+    return local.astimezone(timezone.utc)
 
 
 def jclean(obj):
@@ -74,8 +115,53 @@ def league_snapshot():
 
     cur = reg[reg["season"] == 2026].copy()
     played = cur[cur["home_score"].notna()]
-    last_week = int(played["week"].max())
-    fixtures = cur[cur["week"] == last_week + 1].copy()
+    # A week counts as complete only when every one of its games has a result. Using "the
+    # latest week with any result" jumps to the following week as soon as a single mid-week
+    # game finishes (a Thursday night kickoff), which silently drops the remaining games of
+    # that week's slate from every published line. The target week is therefore the first
+    # week of the season that still contains an unplayed game; every week before it is
+    # complete by construction.
+    incomplete = cur[cur["home_score"].isna()]["week"]
+    if len(incomplete):
+        target_week = int(incomplete.min())
+        last_week = target_week - 1
+    else:
+        last_week = int(cur["week"].max())
+        target_week = last_week + 1
+    fixtures = cur[cur["week"] == target_week].copy()
+
+    # Documented corrections to the upstream schedules feed's kickoff times, each one
+    # verified against the official game page (flag LR-07, session 65df4799-nfl1):
+    #   2026_11_JAX_NYG — feed said 13:00; official page says 4:25 PM ET
+    #   2026_11_PIT_PHI — feed said 16:25; official page says 1:00 PM ET
+    # Source: https://www.nfl.com/schedules/2026/by-week/week-11 (read 2026-11-13).
+    # The two feed values were swapped with each other; keep this table until the
+    # upstream feed matches the official page. Applied before the kickoff split below so
+    # every downstream kickoff_utc uses the corrected time.
+    SCHEDULE_FEED_FIXES = {
+        "2026_11_JAX_NYG": {"gametime": "16:25"},
+        "2026_11_PIT_PHI": {"gametime": "13:00"},
+    }
+    fixtures["gametime"] = [
+        SCHEDULE_FEED_FIXES.get(gid, {}).get("gametime", gt)
+        for gid, gt in zip(fixtures["game_id"], fixtures["gametime"])] if len(fixtures) \
+        else fixtures["gametime"]
+
+    # Split the slate: a game that has already kicked off (or already has a score) is not a
+    # betting decision any more, so no own line is published for it. It is published as a
+    # result instead, with the official game link.
+    now_utc = datetime.now(timezone.utc)
+    upcoming_rows, started_rows = [], []
+    for _, g in fixtures.iterrows():
+        ko = kickoff_utc(g.get("gameday"), g.get("gametime"))
+        has_score = not pd.isna(g.get("home_score"))
+        if has_score or (ko is not None and ko <= now_utc):
+            started_rows.append(g)
+        else:
+            upcoming_rows.append(g)
+    fixtures = pd.DataFrame(upcoming_rows).reset_index(drop=True) if upcoming_rows \
+        else fixtures.iloc[0:0].copy()
+    started_games = started_rows
 
     rows = []
     for _, g in played.iterrows():
@@ -114,29 +200,24 @@ def league_snapshot():
             "source": "https://www.nfl.com/standings/league/2026/reg",
         }
 
-    # Documented corrections to the upstream schedules feed's kickoff times, each one
-    # verified against the official game page (flag LR-07, session 65df4799-nfl1):
-    #   2026_11_JAX_NYG — feed said 13:00; official page says 4:25 PM ET
-    #   2026_11_PIT_PHI — feed said 16:25; official page says 1:00 PM ET
-    # Source: https://www.nfl.com/schedules/2026/by-week/week-11 (read 2026-11-13).
-    # The two feed values were swapped with each other; keep this table until the
-    # upstream feed matches the official page.
-    SCHEDULE_FEED_FIXES = {
-        "2026_11_JAX_NYG": {"gametime": "16:25"},
-        "2026_11_PIT_PHI": {"gametime": "13:00"},
-    }
-
     snapshot = {
         "generated_at": L.now(),
         "season": 2026,
         "last_completed_week": last_week,
+        "last_completed_week_definition": (
+            "The most recent week in which every scheduled game has a result. A week with a "
+            "single finished game is not complete, so the rest of that week's slate stays in "
+            "the published lines."),
+        "target_week": target_week,
         "games_played": int(len(played)),
         "games_scheduled": int(len(cur)),
         "standings": [team_row(r) for _, r in st.iterrows()],
         "fixtures": [{
             "game_id": g["game_id"], "week": int(g["week"]), "gameday": str(g["gameday"]),
-            "weekday": g["weekday"],
-            "gametime": SCHEDULE_FEED_FIXES.get(g["game_id"], {}).get("gametime", g["gametime"]),
+            "weekday": g["weekday"], "gametime": g["gametime"],
+            "kickoff_utc": (kickoff_utc(g.get("gameday"), g.get("gametime"))
+                            .isoformat() if kickoff_utc(g.get("gameday"), g.get("gametime"))
+                            else None),
             "away": g["away_team"], "home": g["home_team"],
             "market_spread_home": None if pd.isna(g["spread_line"]) else float(g["spread_line"]),
             "market_total": None if pd.isna(g["total_line"]) else float(g["total_line"]),
@@ -145,15 +226,29 @@ def league_snapshot():
             "div_game": int(g["div_game"]) if not pd.isna(g["div_game"]) else None,
             "source": "https://www.nfl.com/schedules/2026/REG" + str(int(g["week"])),
         } for _, g in fixtures.iterrows()],
+        "already_started": [{
+            "game_id": g["game_id"], "week": int(g["week"]), "gameday": str(g["gameday"]),
+            "gametime": g["gametime"],
+            "kickoff_utc": (kickoff_utc(g.get("gameday"), g.get("gametime"))
+                            .isoformat() if kickoff_utc(g.get("gameday"), g.get("gametime"))
+                            else None),
+            "away": g["away_team"], "home": g["home_team"],
+            "away_score": None if pd.isna(g.get("away_score")) else int(g["away_score"]),
+            "home_score": None if pd.isna(g.get("home_score")) else int(g["home_score"]),
+            "has_result": bool(not pd.isna(g.get("home_score"))),
+            "source": "https://www.nfl.com/schedules/2026/REG" + str(int(g["week"])),
+        } for g in started_games],
         "line_coverage_2026": {
             "completed_with_spread": int(played["spread_line"].notna().sum()),
             "completed_games": int(len(played)),
-            "upcoming_with_spread": int(fixtures["spread_line"].notna().sum()),
+            "upcoming_with_spread": int(fixtures["spread_line"].notna().sum()) if len(fixtures) else 0,
             "upcoming_games": int(len(fixtures)),
+            "already_started_games": int(len(started_games)),
         },
     }
     L.write_json("snapshot.json", jclean(snapshot))
-    return dict(reg=reg, cur=cur, played=played, fixtures=fixtures, snapshot=snapshot)
+    return dict(reg=reg, cur=cur, played=played, fixtures=fixtures, snapshot=snapshot,
+                started_games=started_games)
 
 
 # ---------------------------------------------------------------- B. own lines
@@ -796,6 +891,7 @@ def availability(ctx):
         rows.append({
             "team": rec["team"], "player": rec["player"], "position": rec["position"],
             "depth_rank": d["pos_rank"], "depth_slot": d["pos_name"],
+            "unit": d.get("pos_grp"),
             "injury": rec["injury"], "game_status": rec["game"],
             "practice_status": rec["practice"],
             "signal": "game designation" if game_ok else "practice only (no game designation yet)",
@@ -846,6 +942,79 @@ def availability(ctx):
         fixture_teams.add(g["away_team"])
     reported = {r["team"] for r in recs if r.get("team")}
     clubs_missing = sorted(fixture_teams - reported)
+
+    # ---- depth strings: who is the 2nd, 3rd and 4th string at every position, and how
+    # far down the chart the club is projected to be once the designations are applied.
+    chains = []
+    for (team, slot, abb), players in pool.items():
+        if not players:
+            continue
+        first = players[0]
+        chains.append({
+            "team": team, "unit": first.get("pos_grp"), "slot": slot,
+            "position": abb, "slot_name": first.get("pos_name"),
+            "players": [{"name": p["player_name"], "rank": int(p["pos_rank"])}
+                        for p in players],
+        })
+    status_map = {}
+    for r in recs:
+        key = (r["team"], depth_strings.norm_name(r["player"]))
+        entry = {"game_status": r.get("game"), "practice_status": r.get("practice"),
+                 "source": r.get("source")}
+        prev = status_map.get(key)
+        if prev is None or (entry["game_status"] and not prev.get("game_status")):
+            status_map[key] = entry
+    depth_rows = depth_strings.build_depth_strings(chains, status_map, max_strings=4)
+    depth_clubs = depth_strings.summarise_by_club(depth_rows)
+    depth_payload = {
+        "generated_at": L.now(),
+        "week": week,
+        "source": {
+            "injuries": {"label": source_label, "url": source_url, "warning": source_note},
+            "depth_chart": {
+                "label": "mirrored weekly depth chart (not an official NFL publication)",
+                "url": "https://github.com/nflverse/nflverse-data/releases/tag/depth_charts",
+                "timestamp": str(dt)},
+        },
+        "method": {
+            "chains": ("One chain per club and position slot, ordered by the mirrored depth "
+                       "rank. The first four strings are published; a fourth string that the "
+                       "chart does not list is absent, never invented."),
+            "statuses": ("Official game designations from the injury report. 'Out' removes a "
+                         "player from the projected depth; Doubtful and Questionable still "
+                         "project to play, so they are counted as projecting and reported "
+                         "separately."),
+            "projected_string": ("The lowest rank whose player is not listed Out. This is who "
+                                  "projects to be in the lineup now."),
+            "string_if_doubtful_sits": ("The lowest rank whose player is neither Out nor "
+                                        "Doubtful/Questionable: the next certain man up."),
+            "next_man_up": ("The lowest certain player after the projected starter: who would "
+                            "take the job if the projected starter cannot play."),
+            "limits": [
+                "Depth charts are a weekly snapshot published by a mirror, not by the league.",
+                "A depth chart is a listing, not a lineup; clubs promote players without notice.",
+                "A position with no designation is not evidence that the player is healthy.",
+                "The string labels describe the depth chart, not the official lineup.",
+            ],
+        },
+        "counts": {
+            "positions_tracked": len(depth_rows),
+            "clubs_tracked": len(depth_clubs),
+            "positions_with_starter_unavailable": sum(1 for r in depth_rows
+                                                      if r["starter_unavailable"]),
+            "positions_down_to_2nd_string": sum(1 for r in depth_rows
+                                                if r["projected_string"] == 2),
+            "positions_down_to_3rd_string": sum(1 for r in depth_rows
+                                                if r["projected_string"] == 3),
+            "positions_down_to_4th_string_or_beyond": sum(1 for r in depth_rows
+                                                          if (r["projected_string"] or 0) >= 4),
+            "positions_with_no_healthy_player_listed": sum(1 for r in depth_rows
+                                                           if r["projected_string"] is None),
+        },
+        "clubs": depth_clubs,
+        "positions": depth_rows,
+    }
+    L.write_json("depth_strings.json", jclean(depth_payload))
 
     payload = {
         "generated_at": L.now(),
@@ -1094,7 +1263,37 @@ def verification(ctx):
         except Exception as exc:  # noqa: BLE001
             print(f"coverage check skipped: {exc}")
 
-    # nfl.com prints some clubs differently from the GSIS codes used by the feed.
+    # D. depth-string register: every published position must carry a source, and every
+    #    published string number must exist in that position's own chain.
+    depth_path = os.path.join(L.OUT, "depth_strings.json")
+    if os.path.exists(depth_path):
+        dp = json.load(open(depth_path))
+        rows = dp.get("positions", [])
+        no_source = [r for r in rows if not r.get("source")]
+        not_in_chain = [r for r in rows
+                        if r.get("projected_string") is not None
+                        and not any(c["rank"] == r["projected_string"]
+                                    for c in r.get("chain", []))]
+        bad = no_source + not_in_chain
+        out["checks"].append({
+            "name": "Depth-string register (source link + string exists in the chain)",
+            "source": "https://www.nfl.com/injuries/",
+            "rows_checked": len(rows),
+            "rows_matched": len(rows) - len(bad),
+            "mismatches": len(bad),
+            "detail": [{
+                "team": r.get("team"), "player": r.get("slot_name"),
+                "position": r.get("position"), "matched": False,
+                "detail": ("missing source" if not r.get("source")
+                           else "projected string is not in the published chain"),
+            } for r in bad[:10]],
+        })
+        if bad:
+            out["irregularities"].append(
+                {"id": "V31", "area": "depth-string register",
+                 "issue": f"{len(bad)} published depth rows fail their own consistency check",
+                 "examples": bad[:5], "source": "https://www.nfl.com/injuries/"})
+
     ALIAS = {"AZ": "ARI", "LAR": "LA", "WSH": "WAS", "OAK": "LV", "SD": "LAC", "STL": "LA",
              "LVR": "LV", "JAC": "JAX", "SF": "SF", "TB": "TB", "NE": "NE", "NO": "NO"}
 
