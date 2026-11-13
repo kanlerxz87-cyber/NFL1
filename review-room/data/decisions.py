@@ -133,7 +133,7 @@ DECISIONS = [
     },
     {
         "id": "D04",
-        "title": "How should the personnel-deficiency signal be used, given that none of it beat the price?",
+        "title": "How should the personnel-deficiency signal be used, now that it has been tested against the price?",
         "area": "Signals",
         "why_it_matters": (
             "This session tested thirteen personnel measures against the closing line on up to "

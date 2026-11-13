@@ -90,9 +90,11 @@ given where the evidence supports one and withheld where it does not.</p>
 first, and the blocker is named so it can be chased.</p>
 
 <div class="tw"><table><thead><tr><th>ID</th><th>Decision</th><th>Status</th>
-<th>Waiting on</th><th>Recommended</th></tr></thead><tbody>
-<tr><td><a href="#D01">D01</a></td><td>Which site generation is the one published product?</td><td><span class="badge b-blocked">blocked</span></td><td>Q28, G01</td><td>A</td></tr><tr><td><a href="#D02">D02</a></td><td>Buy a licensed odds feed, or publish without one?</td><td><span class="badge b-blocked">blocked</span></td><td>Q01 (price, book, timestamp), G02</td><td>A</td></tr><tr><td><a href="#D03">D03</a></td><td>What exactly does the leaderboard reward, and can it be paid?</td><td><span class="badge b-blocked">blocked</span></td><td>Q20 (what rewards), Q27, G03 legal review</td><td>C</td></tr><tr><td><a href="#D04">D04</a></td><td>How should the personnel-deficiency signal be used, given that none of it beat the price?</td><td><span class="badge b-ready">ready</span></td><td>&mdash;</td><td>A</td></tr><tr><td><a href="#D05">D05</a></td><td>Stop publishing implied or model-only numbers where a verified value is missing?</td><td><span class="badge b-ready">ready</span></td><td>&mdash;</td><td>B</td></tr><tr><td><a href="#D06">D06</a></td><td>What is the publication gate for a number that changed after it was verified?</td><td><span class="badge b-ready">ready</span></td><td>&mdash;</td><td>A</td></tr><tr><td><a href="#D07">D07</a></td><td>How should the two independent analyses of correlation be reconciled?</td><td><span class="badge b-ready">ready</span></td><td>&mdash;</td><td>A</td></tr>
+<th>Waiting on</th><th>Recommended</th><th>Grounding</th></tr></thead><tbody>
+<tr><td><a href="#D01">D01</a></td><td>Which site generation is the one published product?</td><td><span class="badge b-blocked">blocked</span></td><td>Q28, G01</td><td>A</td><td><a class="src" href="../pages/sections.html">pages/sections.html</a></td></tr><tr><td><a href="#D02">D02</a></td><td>Buy a licensed odds feed, or publish without one?</td><td><span class="badge b-blocked">blocked</span></td><td>Q01 (price, book, timestamp), G02</td><td>A</td><td><a class="src" href="../pages/lines.html">pages/lines.html</a></td></tr><tr><td><a href="#D03">D03</a></td><td>What exactly does the leaderboard reward, and can it be paid?</td><td><span class="badge b-blocked">blocked</span></td><td>Q20 (what rewards), Q27, G03 legal review</td><td>C</td><td><a class="src" href="../pages/strategies.html">pages/strategies.html</a></td></tr><tr><td><a href="#D04">D04</a></td><td>How should the personnel-deficiency signal be used, now that it has been tested against the price?</td><td><span class="badge b-ready">ready</span></td><td>---</td><td>A</td><td><a class="src" href="../review-room/evidence.html">review-room/evidence.html</a></td></tr><tr><td><a href="#D05">D05</a></td><td>Stop publishing implied or model-only numbers where a verified value is missing?</td><td><span class="badge b-ready">ready</span></td><td>---</td><td>B</td><td><a class="src" href="../pages/evidence.html">pages/evidence.html</a></td></tr><tr><td><a href="#D06">D06</a></td><td>What is the publication gate for a number that changed after it was verified?</td><td><span class="badge b-ready">ready</span></td><td>---</td><td>A</td><td><a class="src" href="../review-room/verification.html">review-room/verification.html</a></td></tr><tr><td><a href="#D07">D07</a></td><td>How should the two independent analyses of correlation be reconciled?</td><td><span class="badge b-ready">ready</span></td><td>---</td><td>A</td><td><a class="src" href="../pages/analysis.html">pages/analysis.html</a></td></tr>
 </tbody></table></div>
+<p class="sub">The Grounding column links the page where the problem is visible; each decision's
+own section lists all of its evidence.</p>
 
 <h2 id="D01">D01 · Which site generation is the one published product?</h2>
 <p><span class="badge b-blocked">blocked</span> <span class="pill">Architecture</span>
@@ -166,7 +168,7 @@ first, and the blocker is named so it can be chased.</p>
 <p><b>What you have to do:</b> Choose A or B; C happens automatically if nothing is chosen.</p>
 <p class="src">Evidence: <a class="src" href="../pages/strategies.html">pages/strategies.html</a> · <a class="src" href="../pages/review.html">pages/review.html</a></p>
 
-<h2 id="D04">D04 · How should the personnel-deficiency signal be used, given that none of it beat the price?</h2>
+<h2 id="D04">D04 · How should the personnel-deficiency signal be used, now that it has been tested against the price?</h2>
 <p><span class="badge b-ready">ready</span> <span class="pill">Signals</span>
 <span class="pill">waiting on: nothing</span></p>
 <div class="card"><p>This session tested thirteen personnel measures against the closing line on up to 7,083 played games, and separately asked whether the market&#x27;s own number already contains them. The measures are readable and descriptive — who is out, who is starting in place of whom — but as a group they did not show a reliable information edge after correction, and none of the five bet rules built on them passed the gates. The live counts and corrected p-values are on the Signals and Week 10 pages; they are read from the data files, not repeated here. Deciding what that negative result means for the project is the owner&#x27;s call, not the analysis&#x27;s.</p></div>
@@ -253,7 +255,7 @@ first, and the blocker is named so it can be chased.</p>
 <p class="src">Evidence: <a class="src" href="../pages/analysis.html">pages/analysis.html</a> · <a class="src" href="../review-room/evidence.html">review-room/evidence.html</a></p>
 
 <footer>
-  <p>Built 2026-11-13T12:54:36+00:00 from files in this repository. Every figure on this page is read
+  <p>Built 2026-11-13T12:56:50+00:00 from files in this repository. Every figure on this page is read
   from a data file at build time; nothing is typed in by hand. <span class="src">Generated by
   tools/review_room.py.</span></p>
 </footer>

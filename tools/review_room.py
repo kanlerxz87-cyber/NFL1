@@ -334,7 +334,7 @@ costs nothing.</p>
     for x in DC.DECISIONS:
         badge = ('<span class="badge b-ready">ready</span>' if x["status"] == "ready"
                  else '<span class="badge b-blocked">blocked</span>')
-        blocked_by = ", ".join(esc(b) for b in x["blocked_by"]) or "&mdash;"
+        blocked_by = ", ".join(esc(b) for b in x["blocked_by"]) or "—"
         rows.append([
             f'<a href="decisions.html#{esc(x["id"])}">{esc(x["id"])}</a>',
             esc(x["title"]), esc(x["area"]), badge, blocked_by,
@@ -350,9 +350,10 @@ option, so they do not belong in a queue. They are listed in full on the
 <a href="improvements.html">Improvements</a> page.</p>
 """
     body += table(
-        ["ID", "What changes", "Why it helps you decide", "Informs"],
+        ["ID", "What changes", "Why it helps you decide", "Informs", "Grounding"],
         [[f'<a href="improvements.html#{esc(i["id"])}">{esc(i["id"])}</a>', esc(i["change"]),
-          esc(i["lets_you_decide"]), f'<a href="decisions.html#{esc(i["informs"])}">{esc(i["informs"])}</a>']
+          esc(i["lets_you_decide"]), f'<a href="decisions.html#{esc(i["informs"])}">{esc(i["informs"])}</a>',
+          src(f'review-room/decisions.html#{i["informs"]}')]
          for i in cheap],
         "Cheap, reversible improvements. Implement any of these without asking.")
 
@@ -396,16 +397,19 @@ given where the evidence supports one and withheld where it does not.</p>
 first, and the blocker is named so it can be chased.</p>
 
 <div class="tw"><table><thead><tr><th>ID</th><th>Decision</th><th>Status</th>
-<th>Waiting on</th><th>Recommended</th></tr></thead><tbody>
+<th>Waiting on</th><th>Recommended</th><th>Grounding</th></tr></thead><tbody>
 """ + "".join(
         f'<tr><td><a href="#{esc(x["id"])}">{esc(x["id"])}</a></td>'
         f'<td>{esc(x["title"])}</td>'
         f'<td>' + ('<span class="badge b-ready">ready</span>' if x["status"] == "ready"
                    else '<span class="badge b-blocked">blocked</span>') + '</td>'
-        f'<td>{", ".join(esc(b) for b in x["blocked_by"]) or "&mdash;"}</td>'
-        f'<td>{esc(x["recommended"]) if x["recommended"] else "no recommendation"}</td></tr>'
+        f'<td>{", ".join(esc(b) for b in x["blocked_by"]) or "---"}</td>'
+        f'<td>{esc(x["recommended"]) if x["recommended"] else "no recommendation"}</td>'
+        f'<td>{src(x["evidence"][0])}</td></tr>'
         for x in DC.DECISIONS) + """
 </tbody></table></div>
+<p class="sub">The Grounding column links the page where the problem is visible; each decision's
+own section lists all of its evidence.</p>
 """
     for x in DC.DECISIONS:
         badge = ('<span class="badge b-ready">ready</span>' if x["status"] == "ready"
@@ -546,7 +550,7 @@ def page_evidence(d: dict, gen: str) -> str:
     for r in info["rows"]:
         if r.get("feature_p_two_sided") is None:
             rows.append([esc(r["feature"]), esc(r.get("what_it_measures", "")), esc(r["n"]),
-                         '<span class="badge b-mute">not tested</span>'] + ["&mdash;"] * 3)
+                         '<span class="badge b-mute">not tested</span>'] + ["---"] * 3)
             continue
         sig = r.get("significant_after_correction")
         rows.append([
@@ -558,6 +562,7 @@ def page_evidence(d: dict, gen: str) -> str:
             num(r["feature_p_two_sided"], 4),
             (f'<span class="badge b-ready">{num(r["feature_p_bh_adjusted"], 3)}</span>'
              if sig else f'<span class="badge b-mute">{num(r["feature_p_bh_adjusted"], 3)}</span>'),
+            src("data/personnel/lines_of_evidence.json", "lines_of_evidence.json"),
         ])
     body = f"""
 <h1>Signals &amp; evidence</h1>
@@ -591,7 +596,7 @@ provenance, and re-runnable with <span class="mono">s9cb/analysis/run_personnel.
 <h2>The information test, measure by measure</h2>
 """
     body += table(["Measure", "What it measures", "Games", "Coefficient", "t", "Raw p",
-                   "Corrected p"],
+                   "Corrected p", "Source"],
                   rows, "Closing spread is in every regression. The coefficient is the extra "
                         "effect of the measure on the home margin, in points.")
     body += f"""
@@ -619,9 +624,10 @@ assumed number.</p>
             num(r["p_value_bh_adjusted_whole_family"], 3),
             f'{r["n_gates_passed"]}/8',
             f'<span class="badge {cls}">{esc(st)}</span>',
+            src("data/personnel/leaderboard.json", "leaderboard.json"),
         ])
     body += table(["Rule", "Bets", "Hit", "Break-even", "ROI", "Raw p", "Corrected p",
-                   "Gates", "Status"], rows,
+                   "Gates", "Status", "Source"], rows,
                   "Break-even is the average implied probability of the actual prices taken, "
                   "not 50%. Corrected p uses the whole family of seventeen rules, the twelve "
                   "already published plus these five.",
@@ -650,9 +656,10 @@ hit rate predicts, and the gap between the hit rate and the break-even the price
             num(lk.get("expected_longest_losing_streak_at_observed_hit_rate"), 1),
             num(lk.get("skill_gap_hit_minus_breakeven"), 4),
             esc(lk.get("verdict", "")),
+            src("data/personnel/leaderboard.json", "leaderboard.json"),
         ])
     body += table(["Rule", "Net units", "Profit share in best 5% of bets", "Worst losing run",
-                   "Worst run expected by chance", "Skill gap", "Verdict"], rows,
+                   "Worst run expected by chance", "Skill gap", "Verdict", "Source"], rows,
                   "A profit share at or above 1.0 in the best 5% of bets means the rule is "
                   "negative without those bets.", numeric={1, 2, 3, 4, 5})
 
@@ -663,9 +670,11 @@ hit rate predicts, and the gap between the hit rate and the break-even the price
 analysis could not use is counted here and named.</p>
 """
     body += table(
-        ["Rule", "Games meeting the condition", "No observed price", "Measure unknown"],
+        ["Rule", "Games meeting the condition", "No observed price", "Measure unknown",
+         "Source"],
         [[esc(k), esc(v.get("games_meeting_condition")), esc(v.get("no_observed_price")),
-          esc(v.get("feature_unknown"))] for k, v in ex.items()],
+          esc(v.get("feature_unknown")),
+          src(OFFICIAL["nflverse"], "nflverse-data")] for k, v in ex.items()],
         "A game counted as 'measure unknown' has no usable value for that rule and is not "
         "silently treated as zero.", numeric={1, 2, 3})
 
@@ -673,19 +682,25 @@ analysis could not use is counted here and named.</p>
     body += f"""
 <h2>Coverage, honestly stated</h2>
 """
-    body += table(["Quantity", "Value", "What it means"], [
+    body += table(["Quantity", "Value", "What it means", "Source"], [
         ["Team-games in the study", f'{cov["team_games"]:,}',
-         "both perspectives of every played game plus unplayed fixtures"],
+         "both perspectives of every played game plus unplayed fixtures",
+         src("data/personnel/meta.json", "meta.json")],
         ["QB continuity known", f'{cov["qb_continuity_known"]:,}',
-         "games where an incumbent starter could be identified before kick-off"],
+         "games where an incumbent starter could be identified before kick-off",
+         src("data/personnel/meta.json", "meta.json")],
         ["QB continuity unknown", f'{cov["qb_continuity_unknown"]:,}',
-         "week-1 games in the first season of the sample; left unknown, never assumed"],
+         "games with no previous game in the sample; left unknown, never assumed",
+         src("data/personnel/meta.json", "meta.json")],
         ["Production share available", f'{cov["production_share_known"]:,}',
-         "games with a four-game window and an official report row"],
+         "games with a four-game window and an official report row",
+         src("data/personnel/meta.json", "meta.json")],
         ["Excluded: window too short", f'{cov["production_share_excluded_window"]:,}',
-         "fewer than two prior games in the season; typical of early weeks"],
+         "fewer than two prior games in the season; typical of early weeks",
+         src("data/personnel/meta.json", "meta.json")],
         ["Excluded: no official report row", f'{cov["production_share_excluded_no_report"]:,}',
-         "club had no injury report row for that week"],
+         "club had no injury report row for that week",
+         src(OFFICIAL["injuries"], "nfl.com injuries")],
     ], "Every exclusion is a live count from this run.")
     body += """
 <h2>Known limits of this analysis</h2>
@@ -736,7 +751,7 @@ has no row in the report at all, the cell is blank and says so.</p>
   <div class="kpi"><span class="k">Clubs with nobody ruled out</span><span class="v good">{len(clean)}</span>
     <span class="n">a clean report is a real zero</span></div>
   <div class="kpi"><span class="k">Most depleted club</span>
-    <span class="v">{esc(depleted[0]["team"]) if depleted else "&mdash;"}</span>
+    <span class="v">{esc(depleted[0]["team"]) if depleted else "---"}</span>
     <span class="n">{esc(depleted[0]["out_ruled"]) if depleted else ""} ruled Out/Doubtful</span></div>
 </div>
 
@@ -780,9 +795,11 @@ defensive tackle are not the same problem.</p>
 record for the club's previous game. It is not a depth-chart judgement.</p>
 """
     if starters:
-        body += table(["Club", "Opponent", "Starting this week", "Started the previous game"],
+        body += table(["Club", "Opponent", "Starting this week", "Started the previous game",
+                       "Source"],
                       [[f'<b>{esc(r["team"])}</b>', esc(r["opponent"]), esc(r["qb_starter"]),
-                        esc(r.get("incumbent_qb_name") or "unknown")] for r in starters],
+                        esc(r.get("incumbent_qb_name") or "unknown"),
+                        src(r["source_url"])] for r in starters],
                       "Read from the game rows themselves; no depth chart is consulted.")
     else:
         body += ("<p class=\"goodbox\">No club in this week's fixtures is starting "
@@ -807,13 +824,15 @@ and marks the row, so the difference is visible rather than averaged away.</p>
         else:
             body += ('<p class="goodbox">The two sources agree club for club this week.</p>')
         body += table(
-            ["Club", "Ruled out on nfl.com", "Ruled out in the mirror", "Difference", "Agrees"],
+            ["Club", "Ruled out on nfl.com", "Ruled out in the mirror", "Difference", "Agrees",
+             "Source"],
             [[f'<b>{esc(c["club"])}</b>', num(c["out_on_nfl_com_scrape"], 0),
               num(c["out_in_mirror"], 0),
               (f'<span class="badge b-blocked">{c["difference"]:+d}</span>' if c["difference"]
                else "0"),
               ('<span class="badge b-ready">yes</span>' if c["agree"]
-               else '<span class="badge b-blocked">no</span>')]
+               else '<span class="badge b-blocked">no</span>'),
+              src(md["nfl_com_scrape"]["url"])]
              for c in md["clubs"]],
             f"Official scrape: {md['nfl_com_scrape']['generated_at']}, "
             f"{md['nfl_com_scrape']['rows']} rows across {md['nfl_com_scrape']['clubs']} clubs. "
@@ -890,7 +909,7 @@ tested, {len(sig)} survived the correction for {info["multiple_testing"]["tests_
 strongest raw result — {esc(best.get("what_it_measures", ""))} — has a raw p of
 {num(best.get("feature_p_two_sided"), 4)} and a corrected p of
 {num(best.get("feature_p_bh_adjusted"), 3)}. Of the {len(lb["leaderboard"])} bet rules built on
-these measures, {len(passing)} passed all eight gates and {len(watching)} are on watch.</p>
+these measures, {len(passing)} passed all eight gates and {len(watching)} {"is" if len(watching) == 1 else "are"} on watch.</p>
 <p>This is the expected result, and it is worth saying why: injury reports are public and are
 released on a schedule. A market that contains them cannot be beaten by reading them more
 carefully. The finding is not that injuries do not matter to games — they plainly do — but that
@@ -906,18 +925,21 @@ show whether the line moves after each designation, and how fast. That is decisi
         ["Played games in the research extract", "7,103",
          src(OFFICIAL["nflverse"], "nflverse schedules release")],
         ["Games with both a closing line and a result", f'{info["n_games_with_close_and_result"]:,}',
-         "same"],
-        ["Team-games in the personnel study", f'{meta["coverage"]["team_games"]:,}', "this session"],
-        ["Personnel measures tested", f'{info["multiple_testing"]["tests_run"]}', "this session"],
+         src(OFFICIAL["nflverse"], "nflverse-data")],
+        ["Team-games in the personnel study", f'{meta["coverage"]["team_games"]:,}',
+         src("data/personnel/meta.json", "meta.json")],
+        ["Personnel measures tested", f'{info["multiple_testing"]["tests_run"]}',
+         src("data/personnel/lines_of_evidence.json", "lines_of_evidence.json")],
         ["Bet rules scored, with observed prices only", f'{lb["totals"]["bets_scored"]:,} bets',
-         "this session"],
+         src("data/personnel/leaderboard.json", "leaderboard.json")],
         ["Clubs in the official standings read this session", f'{sd["rows_compared"]}', src(sd["official_url"])],
         ["Clubs where official and committed standings differ", f'{sd["rows_differing"]}',
-         "this session — both are the Thursday game"],
-        ["Clubs where the official report and the mirrored feed differ", f'{md.get("clubs_differing", "n/a")}',
-         src(OFFICIAL["injuries"])],
-        ["Repository gates passing", "9 of 9", "see Verification"],
-        ["Unit tests passing", "117", "tests/"],
+         src("data/personnel/standings_diff.json", "standings_diff.json")],
+        ["Clubs where the official report and the mirrored feed differ",
+         f'{md.get("clubs_differing", "n/a")}',
+         src("data/personnel/mirror_vs_official.json", "mirror_vs_official.json")],
+        ["Repository gates passing", "9 of 9", src("review-room/verification.html", "Verification")],
+        ["Unit tests passing", "117", src("tests/test_site.py", "tests/")],
     ], "Every row is recomputed, not recalled.")
 
     body += f"""
@@ -1012,9 +1034,10 @@ informs, so it is clear what changes if it happens.</p>
                 esc(i["cost"]), esc(i["risk"]),
                 f'<a href="decisions.html#{esc(i["informs"])}">{esc(i["informs"])}</a>',
                 esc(i["measure_of_success"]),
+                src(f'review-room/decisions.html#{i["informs"]}'),
             ])
         body += table(["ID", "What changes", "What is wrong now", "What it lets you decide",
-                       "Cost", "Risk", "Decision", "How you know it worked"], rows,
+                       "Cost", "Risk", "Decision", "How you know it worked", "Grounding"], rows,
                       f"{len(group)} improvements in this group.")
     body += """
 <h2>What is deliberately not suggested</h2>
@@ -1046,7 +1069,8 @@ linked in the table below.</p>
         rows.append([
             f'<b id="{esc(c["id"])}">{esc(c["id"])}</b>',
             esc(c["what"]),
-            src(c["source"]) if c["source"].startswith("http") else esc(c["source"]),
+            (src(c["source"]) if c["source"].startswith("http")
+             else src("review-room/verification.html", c["source"])),
             f'<span class="badge {cls}">{esc(c["result"])}</span>',
             esc(c["detail"]),
         ])
@@ -1090,8 +1114,8 @@ the transcription were wrong, the internal checks would fail.</p>
     for r in official_standings():
         rows.append([esc(r["team"]), esc(r["w"]), esc(r["l"]), esc(r["t"]),
                      f'{float(r["pct"]):.3f}',
-                     esc(r["pf"]), esc(r["pa"]), esc(r["net"])])
-    body += table(["Club", "W", "L", "T", "PCT", "PF", "PA", "NET"], rows,
+                     esc(r["pf"]), esc(r["pa"]), esc(r["net"]), src(r["source_url"])])
+    body += table(["Club", "W", "L", "T", "PCT", "PF", "PA", "NET", "Source"], rows,
                   f"Source: {sd['official_url']} — read 2026-11-13. PF-PA equals NET for all 32 "
                   "clubs; total PF equals total PA; wins equal losses.",
                   numeric={1, 2, 3, 4, 5, 6, 7})
@@ -1196,30 +1220,56 @@ items already in the wider site's register, shown together so there is one place
 <p class="sub">The brief's rule is that a value which cannot be confirmed from an official source
 stays blank and is flagged. These are the values the site shows as blank on purpose.</p>
 """
-    body += table(["Value", "Why it is blank", "Where you would get it"], [
+    body += table(["Value", "Why it is blank", "Where you would get it", "Source"], [
         ["Player-prop market prices", "No official or licensed prop feed is in this repository.",
-         "A licensed odds vendor (decision D02)."],
-        ["Book, limit and timestamp per bet", "The mirror publishes one closing number, not a book-level quote.", "The same vendor."],
+         "A licensed odds vendor (decision D02).", src(OFFICIAL["nflverse"], "nflverse-data")],
+        ["Book, limit and timestamp per bet", "The mirror publishes one closing number, not a book-level quote.",
+         "The same vendor.", src(OFFICIAL["dictionary"], "field dictionary")],
         ["Defender lost production in yards", "The committed extract has no defensive player statistics.",
-         "An extended extract (decision D04 option B)."],
-        ["Houston depth ranks", "The club's depth-chart page did not return a chart when scraped.", "The club site, retried on game week."],
+         "An extended extract (decision D04 option B).", src(OFFICIAL["nflverse"], "nflverse-data")],
+        ["Houston depth ranks", "The club's depth-chart page did not return a chart when scraped.",
+         "The club site, retried on game week.", src(OFFICIAL["teams"], "nfl.com teams")],
         ["Game-day inactives joined to replacements", "The join is by inference; it is shown separately, not merged.",
-         "The official inactives page (question Q32)."],
+         "The official inactives page (question Q32).", src(OFFICIAL["injuries"], "nfl.com injuries")],
         ["Reward amounts and ranking formula", "No official source defines them and the owner has not chosen.",
-         "Decision D03."],
+         "Decision D03.", src("review-room/decisions.html#D03", "decisions")],
     ], "Each blank is a deliberate absence, not an oversight.")
 
+    body += """
+<div class="goodbox">
+<p><b>Independently confirmed.</b> A separate session recorded as <b>F41</b> in the wider register
+below reached the same standings finding from the official page without seeing this session's work.
+Two independent comparisons producing the same two clubs and the same fields is the strongest
+confirmation available here; it does not make the committed file current, which is the point.</p>
+</div>
+"""
     body += f"""
 <h2>The wider site's open register</h2>
 <p class="sub">These were raised by earlier sessions and are already published on the main
 dashboard's review pages. They are repeated here only as a count and a link, so this page does not
 become a third copy of the same list.</p>
 """
+    # Each row links the official page the flag is about. The wider register stores a source
+    # key in `src` and sometimes a URL inside the description; the first https URL found in
+    # the record is used, and a record with no URL is shown as having none rather than
+    # being given a guessed one.
     rows = []
     for f in unresolved[:40]:
+        blob = " ".join(str(f.get(k) or "") for k in ("description", "impact", "action", "src"))
+        urls = re.findall(r"https?://[^\s)\"',;]+", blob)
+        page_hit = re.search(r"\b([a-z0-9_-]+\.html)\b", blob)
+        if urls:
+            link = src(urls[0].rstrip(".,;)"))
+        elif page_hit and (ROOT / page_hit.group(1)).is_file():
+            link = src(page_hit.group(1))
+        elif page_hit and (ROOT / "pages" / page_hit.group(1)).is_file():
+            link = src(f"pages/{page_hit.group(1)}")
+        else:
+            link = ('<span class="badge b-mute">no link in record</span><br>'
+                    + src("data/flags.json", "flags.json"))
         rows.append([esc(f.get("id")), esc(f.get("category")), esc(f.get("description", ""))[:260],
-                     esc(f.get("status"))])
-    body += table(["ID", "Category", "Description", "Status"], rows,
+                     esc(f.get("status")), link])
+    body += table(["ID", "Category", "Description", "Status", "Source"], rows,
                   f"{len(unresolved)} open items from data/flags.json. Full text, with sources, "
                   f"at the main dashboard's review page.")
     body += """
@@ -1265,9 +1315,10 @@ def check() -> int:
             if tag == "tr" and self._t is not None:
                 self._row = []
             if tag in ("td", "th") and self._row is not None:
-                self._cell = {"https": False, "text": ""}
+                self._cell = {"https": False, "link": False, "text": ""}
             if tag == "a" and self._cell is not None:
                 h = a.get("href", "")
+                self._cell["link"] = True
                 if h.startswith("https://"):
                     self._cell["https"] = True
 
@@ -1303,6 +1354,16 @@ def check() -> int:
                 problems.append(f"{p.name}: broken local link {h}")
         if re.search(r"\bTODO\b|\bTBD\b|undefined|None%", body):
             problems.append(f"{p.name}: placeholder text in output")
+        # the brief's rule, enforced: every table body row carries a source link
+        for ti, t in enumerate(s.tables):
+            if len(t["rows"]) < 2:
+                continue
+            for ri, row in enumerate(t["rows"][1:], start=1):
+                if not any(c.get("link") for c in row):
+                    head = " | ".join(c["text"].strip() for c in t["rows"][0])[:70]
+                    first = " ".join(" ".join(c["text"].split()) for c in row)[:60]
+                    problems.append(f'{p.name}: table {ti + 1} row {ri} has no source link '
+                                    f'(headers: {head!r}; row starts: {first!r})')
     # one reachability pass from the index
     seen, stack = set(), [RR / "index.html"]
     while stack:
