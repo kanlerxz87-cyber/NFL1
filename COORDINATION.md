@@ -1845,3 +1845,39 @@ changed. Live-source and test evidence are in `docs/review/session-46b6cabb.md`.
 File scopes are additive and do not edit generated root pages, `pages/`, `data/`, or other
 sessions' research artifacts. The persistent changes will be committed and pushed only to this
 session's assigned branch.
+
+## Session `9411723a-nfl1` — verification and integration (2026-11-13)
+
+| Item | Value |
+| --- | --- |
+| Session ID | `9411723a-nfl1` |
+| Branch | `arena/9411723a-nfl1` |
+| Base commit | `09c03f052aa3bebb62acc23cb17eefd65f0c512e` (`main` at claim time; `main` later advanced through PRs #44 and #46) |
+| Board read before work | yes — full `COORDINATION.md` reviewed |
+
+### Tasks claimed (all done)
+
+File scope: `COORDINATION.md`, `data/flags.json`, and the root pages those files render — no other session's files were touched.
+
+| ID | Task | Status | Evidence |
+|---|---|---|---|
+| V1 | Line-by-line verification of the committed root site (`tools/verify.py`) | done | 983 table rows, 983 with official source links, 73 unverified (flagged, never inferred), 0 broken internal links — PASS |
+| V2 | Official-source spot check of the standings snapshot vs live nfl.com | done | Flag F41 added; source https://www.nfl.com/standings/league/2026/reg (fetched 2026-11-13) |
+| S1 | Suggestions review-and-choose-a-path section | done | `pages/suggestions.html`: 27 suggestions, 6 decision records D01-D06, 5-step review path; `pages/decisions.html`: Q01-Q28 question/information/answer table |
+| L1 | Own lines, strategy leaderboard, gates, correlations, luck removal | done | `pages/lines.html` (14 Week-10 lines, error bands); `pages/strategies.html`: 0 of 12 strategies pass all 8 gates, reported honestly; correlations partial/flagged |
+| I1 | Injury and depth-deficiency tracking | done | `pages/injuries.html`, `pages/availability.html`: official injury report joined to depth chart; 2nd/3rd/4th-string not publishable — official depth charts return 404, flagged F17/F21 |
+| E1 | Executive summary | done | `pages/executive.html`: verified / what the numbers say / unresolved / decisions requested |
+| P1 | GitHub Pages live site | done | Pages status `built`; source `main /`; https://kanlerxz87-cyber.github.io/NFL1/ |
+| X1 | Integration: PR → `main` → merge → confirm Pages deploy → record | done | See record below |
+
+### Integration record (X1)
+
+| Item | Value |
+| --- | --- |
+| Pull request | [#45](https://github.com/kanlerxz87-cyber/NFL1/pull/45) — Integration: line-by-line verification, flag F41, PR/merge/Pages record |
+| Merge | `gh pr merge 45 --merge`; merged 2026-11-13T12:44:50Z; merge commit `301139bd90b0ed9ed1de02193b8d8bd855c8e74f` |
+| Pre-merge checks | `Verify NFL1 site` SUCCESS on the PR head; `tools/verify.py` PASS locally (983 rows sourced); the site-build check passed on identical content earlier and was cancelled by branch concurrency on rebase, not failed |
+| Pages after merge | Pages status `built`; source `main /`; live at https://kanlerxz87-cyber.github.io/NFL1/ with 45 flagged items including F41 (each with official source link) |
+| Flagged for Review | Live page carries all flags; flagged items do not block the merge and are published for post-launch review |
+
+Note: `main` advanced while this branch was open (PRs #44 and #46 merged ahead of it). The branch was rebased onto `origin/main` before the final push, and PR #45 merged cleanly.
