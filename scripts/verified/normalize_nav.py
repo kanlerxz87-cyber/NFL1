@@ -43,6 +43,7 @@ CANON = [
     ("teams.html", "Teams"),
     ("standings.html", "Standings"),
     ("availability.html", "Availability"),
+    ("depth-strings.html", "Depth Strings"),
     ("data.html", "Verified Data"),
     ("verified-lines.html", "Own Lines"),
     ("analysis.html", "Validation & Correlation"),

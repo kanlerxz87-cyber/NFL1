@@ -33,6 +33,7 @@ NAV = [
     ("pages/props.html", "Player Props"),
     ("pages/injuries.html", "Injuries"),
     ("pages/depth.html", "Depth & Deficiency"),
+    ("pages/depth-strings.html", "Depth Strings"),
     ("pages/questions.html", "Questions"),
     ("pages/suggestions.html", "Suggestions"),
     ("pages/evidence.html", "Evidence"),
@@ -784,6 +785,26 @@ def lines_page(snap, lines, dash):
                     "Market line", "Market total", "Edge line", "Edge total",
                     "Signal", "Source"], fx_rows)
 
+    # Games of the target week that have already kicked off: no line is published for them
+    # because the decision window has closed. They are listed so the slate is complete and
+    # nothing silently disappears from the page.
+    started_rows = []
+    for g in (snap or {}).get("already_started", []):
+        score = ('<span class="missing">kickoff passed · score not in feed yet</span>'
+                 if not g.get("has_result")
+                 else f"{esc(g.get('away'))} {num(g.get('away_score'), 0)} – "
+                      f"{esc(g.get('home'))} {num(g.get('home_score'), 0)} (final)")
+        started_rows.append([
+            f"<strong>{esc(g['away'])} @ {esc(g['home'])}</strong>"
+            f"<br><span class=\"sub\">{esc(g.get('gameday',''))} {esc(g.get('gametime',''))}</span>",
+            score,
+            src(g.get("source") or SOURCE["schedule"], "NFL schedule"),
+        ])
+    started_tbl = table(["Matchup", "Result", "Source"], started_rows,
+                        note=("A game that has kicked off is no longer a betting decision, so "
+                              "the model publishes no line for it. Scores are shown as recorded "
+                              "by the schedule feed at build time."))
+
     rat_rows = []
     for i, r in enumerate(l.get("ratings", []), start=1):
         rat_rows.append([
@@ -831,6 +852,11 @@ def lines_page(snap, lines, dash):
   <div class="panel-head"><h2>Week {num(l.get('week'))} lines</h2><a href="../data/model/lines.json">Raw JSON →</a></div>
   {"".join([fx_tbl]) if fx_rows else '<p class="empty">Own lines are not available for this week: the rating snapshots are missing or the schedule has no unplayed games.</p>'}
 </section>
+
+{f'''<section class="panel">
+  <div class="panel-head"><h2>Already kicked off this week (no line published)</h2></div>
+  {started_tbl}
+</section>''' if started_rows else ''}
 
 <section class="panel">
   <div class="panel-head"><h2>Out-of-sample accuracy</h2><a href="../data/model/lines.json">Raw JSON →</a></div>
@@ -1069,6 +1095,135 @@ def injuries_page(avail, dash):
     return page("pages/injuries.html", "Injuries & Depth",
                 body,
                 "Which listed starters are unavailable, who replaces them, and how exposed each club is.",
+                dash.get("generated_at"))
+
+
+# ---------------------------------------------------------------- depth strings
+def desig_badge(status) -> str:
+    """Designation badge with injury semantics (Out red, Doubtful/Questionable amber)."""
+    s = (status or "").lower()
+    cls = ("fail" if s == "out" else "warn" if s in ("doubtful", "questionable") else "neutral")
+    return f'<span class="badge {cls}">{esc(status)}</span>'
+
+
+def depth_strings_page(dstr, dash):
+    """Published 2nd/3rd/4th-string register: who is down at each position, with sources."""
+    d = dstr or {}
+    counts = d.get("counts", {})
+    method = d.get("method", {})
+    clubs = d.get("clubs", [])
+    positions = d.get("positions", [])
+    source = d.get("source", {})
+    inj_src = (source.get("injuries") or {})
+    dc_src = (source.get("depth_chart") or {})
+
+    c_rows = [[
+        f"<strong>{esc(c['team'])}</strong>",
+        c.get("positions_tracked", 0),
+        c.get("positions_starter_unavailable", 0),
+        c.get("positions_down_to_2nd", 0),
+        c.get("positions_down_to_3rd", 0),
+        c.get("positions_down_to_4th_or_beyond", 0),
+        c.get("no_healthy_player_listed", 0),
+        c.get("defensive_positions_starter_unavailable", 0),
+        c.get("offensive_positions_starter_unavailable", 0),
+        src(c.get("source") or inj_src.get("url") or SOURCE["injuries"], "NFL injuries"),
+    ] for c in clubs]
+    c_tbl = table(["Team", "Positions tracked", "Starter unavailable",
+                   "Down to 2nd string", "Down to 3rd string", "Down to 4th string",
+                   "No healthy player listed", "Defence starter out",
+                   "Offence starter out", "Source"], c_rows,
+                  note=("Counts are positions whose listed starter carries an official Out "
+                        "designation, and the string the club projects to field at that "
+                        "position once the designations are applied. A position with no "
+                        "designation is not counted as unavailable."))
+
+    p_rows = []
+    for r in positions:
+        chain_txt = " → ".join(
+            f"#{c['rank']} {c['player']}"
+            + (f" ({c['designation']})" if c.get("designation") else "")
+            for c in r.get("chain", []))
+        p_rows.append([
+            f"<strong>{esc(r['team'])}</strong>", esc(r.get("unit") or "—"),
+            esc(r.get("position") or "—"), esc(r.get("slot_name") or "—"),
+            esc(r.get("starter") or "—"),
+            desig_badge(r.get("starter_designation")) if r.get("starter_designation")
+            else '<span class="missing">no designation</span>',
+            esc(r.get("projected_string_label")),
+            esc(r.get("string_if_doubtful_sits_label")),
+            esc(r.get("next_man_up") or "—"),
+            f'<span class="sub">{esc(chain_txt)}</span>',
+            src(r.get("source") or inj_src.get("url") or SOURCE["injuries"], "NFL injuries"),
+        ])
+    p_tbl = table(["Team", "Unit", "Pos", "Slot", "Listed starter", "Starter designation",
+                   "Projected string", "Next certain string", "Next man up",
+                   "Published chain (rank · player · designation)", "Source"], p_rows,
+                  note=("The projected string is the first listed player who is not Out; "
+                        "Doubtful and Questionable players still project to play. The next "
+                        "certain string excludes Doubtful/Questionable as well — that is the "
+                        "player who takes over if the projected starter cannot go. Chains "
+                        "stop at the fourth string the depth chart actually lists; nothing "
+                        "is invented beyond it."))
+
+    limits = "".join(f"<li>{esc(x)}</li>" for x in method.get("limits", []))
+    banner = (f'<p class="okline">Injury source: {esc(inj_src.get("label", ""))} — '
+              f'{src(inj_src.get("url") or SOURCE["injuries"], "nfl.com/injuries")} · '
+              f'Depth chart: {esc(dc_src.get("label", ""))} — '
+              f'{src(dc_src.get("url") or SOURCE["depth"], "nflverse depth charts")}</p>')
+    if inj_src.get("warning"):
+        banner += f'<p class="alert">{esc(inj_src["warning"])} {src(inj_src.get("url"), "official page")}</p>'
+
+    # Link the raw JSON only when the file is actually present in this build, so a page
+    # rendered before the data stage can never publish a broken link.
+    has_json = os.path.exists(os.path.join(DATA, "depth_strings.json"))
+    raw_link = ('<a href="../data/model/depth_strings.json">Raw JSON →</a>' if has_json else "")
+    empty_note = ("" if has_json else
+                  '<p class="empty">depth_strings.json has not been generated in this build yet, '
+                  'so no rows are published. Nothing is filled in from another source.</p>')
+
+    body = f"""
+<section class="kpis">
+  {kpi("Positions tracked", counts.get("positions_tracked"), "all clubs")}
+  {kpi("Clubs tracked", counts.get("clubs_tracked"), "with a published chain")}
+  {kpi("Starter unavailable", counts.get("positions_with_starter_unavailable"), "official Out")}
+  {kpi("Down to 2nd string", counts.get("positions_down_to_2nd_string"), "projected")}
+  {kpi("Down to 3rd string", counts.get("positions_down_to_3rd_string"), "projected")}
+  {kpi("Down to 4th string", counts.get("positions_down_to_4th_string_or_beyond"), "projected")}
+  {kpi("No healthy player listed", counts.get("positions_with_no_healthy_player_listed"), "flagged, not guessed")}
+</section>
+{banner}
+
+<section class="panel">
+  <h2>How to read this page</h2>
+  <p>The availability table answers <em>which listed starters are out</em>. This table answers
+  <em>how far down the depth chart each club is projected to be</em> once the official game
+  designations are applied to the published depth chain: the first, second, third or fourth
+  string at every tracked position, offence and defence. Three numbers are kept apart on
+  purpose — the string that projects to play, the next certain string if the doubtful players
+  sit, and the next man up if the projected starter cannot go.</p>
+  <p class="note">{esc(method.get("chains", ""))} {esc(method.get("statuses", ""))}</p>
+</section>
+
+<section class="panel">
+  <div class="panel-head"><h2>By club</h2>{raw_link}</div>
+  {c_tbl}
+  {empty_note}
+</section>
+
+<section class="panel">
+  <div class="panel-head"><h2>By position</h2>{raw_link}</div>
+  {p_tbl}
+</section>
+
+<section class="panel">
+  <h2>Limits, stated plainly</h2>
+  <ul class="tight">{limits}</ul>
+</section>
+"""
+    return page("pages/depth-strings.html", "Depth Strings",
+                body,
+                "Who is the 2nd, 3rd and 4th string at every position, joined to the official game designations.",
                 dash.get("generated_at"))
 
 
@@ -1812,6 +1967,8 @@ def sections_page(dash):
          "Shrunk usage projections with intervals; market columns deliberately blank"],
         ["Official data", link("pages/injuries.html", "Injuries & Depth"),
          "Official game status joined to depth-chart rank, next man up, attrition index"],
+        ["Official data", link("pages/depth-strings.html", "Depth Strings (2nd-4th)"),
+         "Every position's published chain with the projected string once designations are applied"],
         ["Official data", link("pages/availability.html", "Availability & Deficiencies"),
          "Starter availability, backup exposure, clubs without a published report"],
         ["Official data", link("injuries.html", "Injuries (register)"),
@@ -2268,6 +2425,7 @@ def main():
     lines = load("lines.json")
     strat = load("strategies.json")
     avail = load("availability.json")
+    dstr = load("depth_strings.json")
     props = load("props.json")
     verif = load("verification.json")
     prov = load("provenance.json")
@@ -2283,6 +2441,7 @@ def main():
     write("pages/luck.html", luck_page(load_rel("data/s9cb/leaderboard.json"), dash))
     write("pages/parlays.html", parlays_page(load_rel("data/s9cb/parlays.json"),
                                              load_rel("data/s9cb/props.json"), dash))
+    write("pages/depth-strings.html", depth_strings_page(dstr, dash))
     write("pages/props.html", props_page(props, dash))
     write("pages/injuries.html", injuries_page(avail, dash))
     write("pages/depth.html",
