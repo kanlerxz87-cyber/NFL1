@@ -1,0 +1,259 @@
+{
+ "built_utc": "2026-11-13T12:45Z",
+ "week_played": 10,
+ "week_next": 11,
+ "headline": "The laboratory's methods hold up under independent recomputation, and today's scheduled refresh closed a standings drift that this session found on arrival: the site now matches the official page on all 32 clubs and 137 games. What remains is not a data-entry problem. The injury table's fallback to week-6 statuses is mislabelled, two leaderboards disagree, the priced board's sample cannot be reconciled with the file it was computed from, and 90% of the depth-chart evidence collected is unpublished. None of the twelve strategy rules passes its own gates.",
+ "kpis": [
+  {
+   "label": "2026 games complete",
+   "value": "137",
+   "note": "reconciled from all 32 official rows: W=136 L=136 T=2",
+   "src": {
+    "t": "standings_2026-11-13.tsv",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/official/2026-11-13/standings_2026-11-13.tsv",
+    "note": "32 rows"
+   }
+  },
+  {
+   "label": "Games remaining",
+   "value": "135",
+   "note": "272-game season minus 137",
+   "src": {
+    "t": "snapshot.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/snapshot.json",
+    "note": "272-game season"
+   }
+  },
+  {
+   "label": "Official standings rows re-verified",
+   "value": "32 / 32",
+   "note": "2026-11-13T12:05Z",
+   "src": {
+    "t": "REG",
+    "u": "https://www.nfl.com/standings/division/2026/REG",
+    "note": "official"
+   }
+  },
+  {
+   "label": "Clubs whose record drifted",
+   "value": "0",
+   "note": "was 2 at session start; refresh closed it",
+   "src": {
+    "t": "snapshot.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/snapshot.json",
+    "note": "committed snapshot"
+   }
+  },
+  {
+   "label": "Injury rows on the official report",
+   "value": "296",
+   "note": "26 clubs; 4 on bye; 2 report none",
+   "src": {
+    "t": "",
+    "u": "https://www.nfl.com/injuries/",
+    "note": "official"
+   }
+  },
+  {
+   "label": "Injury rows re-verified club by club",
+   "value": "24 / 24",
+   "note": "0 differences; NO and CIN partial",
+   "src": {
+    "t": "injury_report_counts_2026-11-13.py",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/official/2026-11-13/injury_report_counts_2026-11-13.py",
+    "note": "count audit"
+   }
+  },
+  {
+   "label": "Player game designations this week",
+   "value": "9 official",
+   "note": "181 after the stale fallback - see F-118",
+   "src": {
+    "t": "injury_designations_2026-11-13.tsv",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/official/2026-11-13/injury_designations_2026-11-13.tsv",
+    "note": "9 rows"
+   }
+  },
+  {
+   "label": "Depth charts captured",
+   "value": "31 / 32",
+   "note": "31 parsed; HOU publishes a graphic",
+   "src": {
+    "t": "depth_charts.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/session-1505ac8e/depth_charts.json",
+    "note": "clubs_ok 31"
+   }
+  },
+  {
+   "label": "Depth charts published",
+   "value": "3 / 31",
+   "note": "KC, GB, SF only",
+   "src": {
+    "t": "depth_chart.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/depth_chart.json",
+    "note": "3 clubs"
+   }
+  },
+  {
+   "label": "Strategy rules tested",
+   "value": "12",
+   "note": "two independent boards",
+   "src": {
+    "t": "leaderboard.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json",
+    "note": "12 rules"
+   }
+  },
+  {
+   "label": "Strategy rules passing all gates",
+   "value": "0",
+   "note": "best priced rule p=0.198",
+   "src": {
+    "t": "leaderboard.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json",
+    "note": "gate matrix"
+   }
+  },
+  {
+   "label": "Best rule ROI reproduced",
+   "value": "6.064%",
+   "note": "S07, 401 bets, exact match",
+   "src": {
+    "t": "games.csv",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/games.csv",
+    "note": "recomputed from this file"
+   }
+  },
+  {
+   "label": "Correlation reproduced",
+   "value": "0.4309",
+   "note": "vs 0.4312 published; n differs",
+   "src": {
+    "t": "correlations.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/correlations.json",
+    "note": "C1"
+   }
+  },
+  {
+   "label": "Prop bets scoreable",
+   "value": "0",
+   "note": "no prop price exists in any source",
+   "src": {
+    "t": "props.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/props.json",
+    "note": "price status"
+   }
+  },
+  {
+   "label": "Open findings",
+   "value": "12 open, 3 pass",
+   "note": "3 material, 9 minor, 3 verified",
+   "src": {
+    "t": "findings.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/findings.json",
+    "note": "13 findings"
+   }
+  }
+ ],
+ "what_we_know": [
+  "The official 2026 standings reconcile arithmetically and now match the site: 32 clubs, 137 games, wins equal losses, ties in pairs, points for equal points against, and 0 clubs drifting from today's official page after the 12:51Z refresh.",
+  "The committed 296-row Week 10 injury scrape matches today's official nfl.com report club by club, with zero row-count differences on every club that could be read to its last row.",
+  "nfl.com publishes no depth chart: the club URL returns a soft 404. The 32 club sites publish their own charts and several label them 'Unofficial'.",
+  "The priced strategy board reproduces exactly from committed data. S07 (fade the road favourite of 7+) is 401 bets, 55.58% hit rate, +24.318 units, 6.064% ROI - identical to the published row.",
+  "No rule passes all eight validation gates on either board. The best priced rule has p=0.198 before multiple-testing correction.",
+  "The own-line model does not beat the market: 10.40 vs 9.72 points of mean absolute spread error in the 2025 validation season, with an interval that excludes zero.",
+  "Of 66 scored parlay pairs, exactly one survives multiple-testing correction, and the published reading correctly attributes it to the parlay pricing rule rather than skill.",
+  "No player-prop price exists in any source, so no prop bet can be scored and no prop ROI is published.",
+  "The leaderboard's ordering matches its caption: the table is sorted by the lower 95% ROI bound, as the page says. An earlier draft of this review called it a defect; the claim was withdrawn and is recorded as F-116."
+ ],
+ "what_we_do_not_know": [
+  "Whether the nflverse closing lines are a consensus or a single book - nfl.com publishes no odds, so there is nothing official to check them against (Q-18).",
+  "The exact filter behind the published correlation sample: r reproduces, n does not (Q-16, F-109).",
+  "Which players actually dressed: no inactive list is captured for any week (Q-09).",
+  "When each club last updated its depth chart; only 3 of 31 pages carry a date (Q-08).",
+  "Whether HOU has a depth chart at all (Q-07).",
+  "What a prop price would be, and whether any licensed feed is affordable (Q-11).",
+  "What the competition rewards; no official source publishes a reward value (Q-13).",
+  "Whether using any of this to bet is legal where the reader lives (Q-20).",
+  "How the season ends - every forward-looking number on the site is a modelled distribution, not a forecast with a track record."
+ ],
+ "what_is_wrong": [
+  "The injury fallback is unlabelled in the table: after the 12:50Z refresh the availability page mixes week-10 official rows with week-6 mirrored statuses and still calls itself mid-week (F-118, material).",
+  "Two leaderboards: one assumes -110 on every bet, the other uses observed prices, and they rank different rules under the same names (F-102, material).",
+  "The depth-chart page shows 3 of the 31 captured clubs (F-104, material).",
+  "The priced board's totals cannot be reconciled with the committed extract: 6,653 candidate games published, 5,471 in the file (F-114, minor).",
+  "Missing prices are concentrated in 2006, 2008 and the unfinished 2026 season, so the exclusion is a selection effect (F-115, minor).",
+  "The market column cites an official page that publishes no odds (F-106, minor).",
+  "Blank injury designations read as healthy (F-105, minor).",
+  "Two generators write index.html and the pull-request check audits the one that is not served (F-107, minor).",
+  "Several site generations publish overlapping numbers (F-103, minor)."
+ ],
+ "decisions_requested": [
+  {
+   "id": "D-01",
+   "title": "Standings reconciliation gate before publish",
+   "rec": "A - reconcile then publish, with a documented override"
+  },
+  {
+   "id": "D-02",
+   "title": "One headline leaderboard",
+   "rec": "A - observed prices only; -110 board becomes a labelled sensitivity table"
+  },
+  {
+   "id": "D-03",
+   "title": "Lock the (correct) ranking order with a test",
+   "rec": "A - keep the rule, add the assertion"
+  },
+  {
+   "id": "D-05",
+   "title": "Club depth charts as the official fallback",
+   "rec": "A - cite the club and its own label, per row"
+  },
+  {
+   "id": "D-06",
+   "title": "Publish all 31 captured charts",
+   "rec": "A - render the existing scrape, label HOU blank"
+  },
+  {
+   "id": "D-07",
+   "title": "Three-state availability",
+   "rec": "A - out / may-play / no designation yet"
+  },
+  {
+   "id": "D-12",
+   "title": "Official-source audit as a required check",
+   "rec": "A - required, with a recorded override path"
+  },
+  {
+   "id": "D-14",
+   "title": "One writer for the landing page",
+   "rec": "A - build.py stops writing index.html"
+  }
+ ],
+ "blocked_decisions": [
+  {
+   "id": "D-04",
+   "title": "Props: licensed price feed",
+   "blocker": "Q-11 - no prop price exists in any source"
+  },
+  {
+   "id": "D-08",
+   "title": "Capture official inactive lists",
+   "blocker": "Q-09 - no inactive list archived; URL pattern unstable"
+  },
+  {
+   "id": "D-13",
+   "title": "Reward values",
+   "blocker": "Q-13 - no official or commercial reward figure exists"
+  }
+ ],
+ "next_actions": [
+  "Fix the injury fallback label (F-118): if the official scrape fails, name the fallback week in the table caption and stop calling the report mid-week.",
+  "Run the collect workflow once so the snapshot includes the Thursday result and the 137-game state (closes F-101).",
+  "Apply SG-03 and SG-12: both are one-line changes with existing flags pointing at them.",
+  "Publish the 31-club depth table from the committed scrape (SG-05).",
+  "Add the sample filter and n to every correlation row (SG-04).",
+  "Decide D-02 before any strategy is presented as a candidate."
+ ],
+ "limits": "Every number on this site is a research output, not betting advice. No official league odds exist, so no market price on this site is official. Values that could not be verified are blank and listed on the Flagged for Review page with the source that would settle them."
+}

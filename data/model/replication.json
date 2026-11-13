@@ -1,19 +1,19 @@
 {
- "generated_at": "2026-11-12T23:37:56+00:00",
+ "generated_at": "2026-11-13T13:04:54+00:00",
  "available": true,
  "comparisons": [
   {
    "metric": "2026 spread error (MAE, points)",
-   "this_pipeline": 9.984,
+   "this_pipeline": 9.952,
    "companion_model": 10.927304174426089,
-   "market_baseline": 9.485,
+   "market_baseline": 9.449,
    "reading": "Both independent models are further from the result than the closing line; the market is the better forecast."
   },
   {
    "metric": "2026 total error (MAE, points)",
-   "this_pipeline": 11.308,
+   "this_pipeline": 11.228,
    "companion_model": 12.116974695731653,
-   "market_baseline": 10.596,
+   "market_baseline": 10.551,
    "reading": "Same conclusion for totals: neither model beats the close."
   }
  ],
@@ -22,7 +22,7 @@
    "relationship": "point margin vs game total (same game)",
    "this_pipeline": {
     "r": 0.017,
-    "n": 5591,
+    "n": 5592,
     "window": "2005-2026"
    },
    "companion": {
@@ -48,7 +48,7 @@
   },
   {
    "item": "Week 10 model margin for WAS @ NYG",
-   "this_pipeline": 2.6,
+   "this_pipeline": null,
    "companion": -1.2,
    "resolution": "Two different rating systems on the same inputs. Both are inside the model's own error band, which is why neither is promoted.",
    "source": "https://www.nfl.com/schedules/"

@@ -1,0 +1,51 @@
+{
+ "generated_at": "2026-11-13T12:58:50+00:00",
+ "session": "1e159b2e-nfl1",
+ "inputs": {
+  "games": "data/s9cb/games.csv (nflverse schedules release, closing lines and prices)",
+  "injuries": "data/s9cb/injuries.csv (nflverse mirror of the official weekly report)",
+  "player_week": "data/s9cb/player_week.csv (nflverse stats_player release)",
+  "prior_leaderboard": "data/s9cb/leaderboard.json (the twelve published rules)"
+ },
+ "source_urls": {
+  "schedules": "https://www.nfl.com/schedules/",
+  "standings": "https://www.nfl.com/standings/league/2026/reg",
+  "injuries_current": "https://www.nfl.com/injuries/",
+  "nflverse": "https://github.com/nflverse/nflverse-data"
+ },
+ "method_notes": {
+  "qb_continuity": "incumbent = most starts for that club this season in games strictly before this one; week 1 falls back to the previous season's most frequent starter; unknown otherwise, never assumed",
+  "production_window": "the club's previous 4 games in the same season",
+  "min_prior_games": 2,
+  "production_gap_threshold_pct": 15.0,
+  "defensive_out_gap_threshold": 3,
+  "prices": "observed only; a bet with no quoted price is excluded and counted",
+  "multiple_testing": "one Benjamini-Hochberg correction over the twelve already published rules plus these five"
+ },
+ "coverage": {
+  "team_games": 14478,
+  "qb_continuity_known": 14443,
+  "qb_continuity_unknown": 35,
+  "production_share_known": 3511,
+  "production_share_excluded_window": 10718,
+  "production_share_excluded_no_report": 249,
+  "player_week_seasons": [
+   2019,
+   2026
+  ],
+  "game_seasons": [
+   1999,
+   2026
+  ],
+  "injury_seasons": [
+   2016,
+   2026
+  ]
+ },
+ "known_limits": [
+  "The committed extract has no defensive player statistics, so a defensive deficiency is measured in ruled-out players, not in lost production.",
+  "The official report lists game status; it does not list who replaced whom. Replacement identity comes from the depth chart on the main site, not here.",
+  "Practice-squad promotions and in-game injuries are not in the report.",
+  "The 2026 season is in progress: its rows are small-sample and are shown as such."
+ ]
+}

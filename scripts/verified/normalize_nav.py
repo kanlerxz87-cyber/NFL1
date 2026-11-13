@@ -26,6 +26,19 @@ CANON = [
     ("evidence.html", "Evidence"),
     ("review.html", "Flagged for Review"),
     ("sections.html", "All Sections"),
+    ("room/index.html", "Decision Room"),
+    # pages produced by the other generators in this repository, kept in the shared
+    # navigation so no session's page can become unreachable
+    ("executive-summary.html", "Executive Summary (companion)"),
+    ("teams.html", "Teams"),
+    ("standings.html", "Standings"),
+    ("availability.html", "Availability"),
+    ("data.html", "Verified Data"),
+    ("analysis.html", "Validation & Correlation"),
+    ("decisions.html", "Decision Register"),
+    ("verified.html", "Verified Artifacts"),
+    ("models.html", "Models"),
+    ("flagged.html", "Flagged (companion)"),
 ]
 
 
@@ -33,10 +46,12 @@ def build(page_name: str, is_index: bool) -> str:
     items = []
     for href, label in CANON:
         # index.html sits at the repo root; every sister page sits one level down in pages/
-        if is_index:
-            target = "index.html" if href == "index.html" else f"pages/{href}"
+        if href == "index.html":
+            target = "index.html" if is_index else "../index.html"
+        elif "/" in href:
+            target = href if is_index else "../" + href
         else:
-            target = "../index.html" if href == "index.html" else href
+            target = ("pages/" + href) if is_index else href
         cls = ' class="active"' if href == page_name else ""
         items.append(f'    <a href="{html.escape(target, quote=True)}"{cls}>{html.escape(label)}</a>')
     return "<nav>\n" + "\n".join(items) + "\n  </nav>"

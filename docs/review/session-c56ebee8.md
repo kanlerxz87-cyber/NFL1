@@ -62,7 +62,10 @@ of the league's GSIS feed — useful, licensed CC-BY-4.0, and **not** official.
 
 ### C-A — Two of 32 standings rows are one game behind the live official table
 
-**Severity: high (visible on the published dashboard).**
+**Severity: high (visible on the published dashboard). Independently confirmed, not new:**
+flag F41 for this finding was already raised by session `9411723a` (PR #45) and session
+`1e159b2e` reached the same 30-of-32 result by a separate transcription (its check N5). Three
+independent checks now agree, which is worth more than any one of them.
 
 The committed standings snapshot was taken before the Week 10 Thursday game. That game has since
 finished (Commanders 24, Giants 21, final, per
@@ -83,8 +86,7 @@ Every one of the other 30 clubs matches exactly, including the two clubs whose r
 Affected files: `data/verified/standings_2026.csv` and `data/standings.csv`.
 
 **Not silently corrected.** Both files are dated evidence records; editing them by hand would
-destroy the thing that makes them evidence. The daily `collect-data` workflow re-scrapes. Published
-as flag **F41**.
+destroy the thing that makes them evidence. The daily `collect-data` workflow re-scrapes. Published as flag **F41**, with the completed-fixture consequence added to its text.
 
 **Consequence also visible on the dashboard:** the Week 10 own-lines table still lists WAS @ NYG,
 which has now been played. Those lines were built before kick-off, so they are a legitimate

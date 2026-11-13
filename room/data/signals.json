@@ -1,0 +1,142 @@
+{
+ "meta": {
+  "built_utc": "2026-11-13T12:45Z",
+  "count": 12,
+  "rule": "Every signal was declared before it was scored. Signals that fail are published with their effect size, because the failures are the useful output.",
+  "source_board": "data/s9cb/leaderboard.json"
+ },
+ "signals": [
+  {
+   "id": "SG",
+   "name": "Own-line spread edge",
+   "tested": "Model home margin minus the closing spread, either side, at 1.5 and 3.0 point thresholds",
+   "why_it_should_work": "If the opponent-adjusted ratings carry information the market has not priced, the disagreement should predict the margin.",
+   "sample": "3,546 spreads at 1.5 pts; 2,277 at 3.0 pts",
+   "result": "+0.37% at 1.5 (p=0.820); -0.45% at 3.0 (p=0.823)",
+   "verdict": "not established",
+   "why_not": "The model's own spread error is larger than the market's (10.40 vs 9.72 points in 2025), so its disagreements are mostly its own noise.",
+   "source": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
+  },
+  {
+   "id": "S1",
+   "name": "Own-total edge",
+   "tested": "Model total minus the closing total at 2.5 and 4.0 point thresholds",
+   "why_it_should_work": "Totals are less efficiently priced than sides in some markets, so a ratings-based total could carry information.",
+   "sample": "2,463 overs/unders at 2.5 pts; 1,295 at 4.0 pts",
+   "result": "+1.84% at 2.5 (p=0.343); +2.50% at 4.0 (p=0.351)",
+   "verdict": "interesting, unproven",
+   "why_not": "Both are positive but neither survives correction, and both are negative in the 2024-2025 holdout.",
+   "source": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
+  },
+  {
+   "id": "S2",
+   "name": "Rest differential",
+   "tested": "Bet the side with 3+ more rest days",
+   "why_it_should_work": "A short week is a documented recovery cost.",
+   "sample": "1,103 bets",
+   "result": "+0.49% (p=0.867)",
+   "verdict": "no signal",
+   "why_not": "Effect size indistinguishable from zero over the largest sample on the board.",
+   "source": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
+  },
+  {
+   "id": "S3",
+   "name": "Divisional road underdog",
+   "tested": "Divisional away dog of 3+ points",
+   "why_it_should_work": "Familiarity compresses margins in division games.",
+   "sample": "531 bets",
+   "result": "-1.86% (p=0.660)",
+   "verdict": "no signal",
+   "why_not": "Negative point estimate; the familiarity story did not show up in the price.",
+   "source": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
+  },
+  {
+   "id": "S4",
+   "name": "Fade the road favourite",
+   "tested": "Home side when the visitor is favoured by 7+",
+   "why_it_should_work": "Large road favourites are a well-known public-bias target.",
+   "sample": "401 bets",
+   "result": "+6.06% (p=0.198), holdout +26.3% on 44 bets",
+   "verdict": "best candidate, still fails",
+   "why_not": "Twelve rules were tested; p=0.198 does not survive Benjamini-Hochberg, and a 44-bet holdout cannot confirm 6%.",
+   "source": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
+  },
+  {
+   "id": "S5",
+   "name": "Home off a bye",
+   "tested": "Home team with 13+ rest days against a visitor with fewer",
+   "why_it_should_work": "Extra preparation time.",
+   "sample": "273 bets",
+   "result": "-5.13% (p=0.379)",
+   "verdict": "no signal",
+   "why_not": "Negative; also the smallest sample on the board, so it cannot rule out a small effect either way.",
+   "source": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
+  },
+  {
+   "id": "S6",
+   "name": "Extreme totals",
+   "tested": "Under when the closing total is 40 or lower; over when it is 50 or higher",
+   "why_it_should_work": "Totals at the extremes may be over-adjusted by the market.",
+   "sample": "887 unders; 599 overs",
+   "result": "-7.93% (p=0.015); -5.41% (p=0.170)",
+   "verdict": "negative and significant",
+   "why_not": "The under rule is the only rule on the board whose raw p-value clears 0.05, and it clears it in the wrong direction.",
+   "source": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
+  },
+  {
+   "id": "S7",
+   "name": "Opponent quarterback out",
+   "tested": "Bet against a side whose QB is ruled Out or Doubtful",
+   "why_it_should_work": "A backup quarterback is a large, publicly known downgrade \u2014 the market should already price it, and the test is whether it over- or under-prices.",
+   "sample": "380 bets",
+   "result": "-1.51% (p=0.760)",
+   "verdict": "no signal",
+   "why_not": "The market appears to price the downgrade fully; there is no residual edge in the direction tested.",
+   "source": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
+  },
+  {
+   "id": "S8",
+   "name": "Injury-count gap",
+   "tested": "Bet against the side with 3+ more players ruled Out",
+   "why_it_should_work": "Availability should move the line.",
+   "sample": "685 bets",
+   "result": "-0.30% (p=0.934)",
+   "verdict": "no signal",
+   "why_not": "A count of 'Out' players is a poor measure of lost value: it ignores who the player is, which is exactly what the depth-chart work is meant to fix.",
+   "source": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
+  },
+  {
+   "id": "S9",
+   "name": "Closing-line correlation",
+   "tested": "Pearson r between the closing spread and the actual home margin",
+   "why_it_should_work": "Not a strategy \u2014 the benchmark any own line has to beat.",
+   "sample": "6,975 games published; 7,103 recomputed",
+   "result": "r = 0.4312 published; 0.4309 recomputed",
+   "verdict": "benchmark",
+   "why_not": "An own line beating the market must correlate with the margin better than this; the current model correlates 0.345.",
+   "source": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/correlations.json"
+  },
+  {
+   "id": "S10",
+   "name": "Parlay leg dependence",
+   "tested": "66 two-leg combinations, correlation ratio against independence, BH-corrected",
+   "why_it_should_work": "Standard parlays are priced at the product of the legs, which is only fair if the legs are independent.",
+   "sample": "66 pairs",
+   "result": "1 pair survives BH at 5%",
+   "verdict": "pricing artefact, not skill",
+   "why_not": "A positive return on a correlated pair is the book's multiplication rule, not a forecast. A book that prices same-game correlation would remove it.",
+   "source": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/parlays.json"
+  },
+  {
+   "id": "S11",
+   "name": "Player props",
+   "tested": "Usage-based projections for passing, rushing and receiving markets",
+   "why_it_should_work": "Shrunk usage projections can beat a naive per-game average.",
+   "sample": "343 model lines",
+   "result": "no price, so no bet scored",
+   "verdict": "unscoreable",
+   "why_not": "No prop price exists in any source in this repository, so a prop ROI would be invented. Projections are published; results are not.",
+   "source": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/props.json"
+  }
+ ]
+}

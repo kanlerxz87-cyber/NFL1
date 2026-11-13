@@ -36,6 +36,19 @@ NAV = [
     ("pages/evidence.html", "Evidence"),
     ("pages/review.html", "Flagged for Review"),
     ("pages/sections.html", "All Sections"),
+    ("room/index.html", "Decision Room"),
+    # pages produced by the other generators in this repository, kept in the shared
+    # navigation so no session's page can become unreachable
+    ("pages/executive-summary.html", "Executive Summary (companion)"),
+    ("pages/teams.html", "Teams"),
+    ("pages/standings.html", "Standings"),
+    ("pages/availability.html", "Availability"),
+    ("pages/data.html", "Verified Data"),
+    ("pages/analysis.html", "Validation & Correlation"),
+    ("pages/decisions.html", "Decision Register"),
+    ("pages/verified.html", "Verified Artifacts"),
+    ("pages/models.html", "Models"),
+    ("pages/flagged.html", "Flagged (companion)"),
 ]
 
 # Sidebar: the same pages grouped by category, rendered on every page so the site reads
@@ -59,7 +72,8 @@ SIDEBAR = [
     # Pages produced by the other generators in this repository. They are kept one click
     # away rather than in the header so the header stays readable; every one of them is
     # also listed on the All Sections page.
-    ("Companion pages", [("pages/teams.html", "Teams"),
+    ("Companion pages", [("room/index.html", "Decision Room"),
+                         ("pages/teams.html", "Teams"),
                          ("pages/standings.html", "Standings"),
                          ("pages/availability.html", "Availability"),
                          ("pages/data.html", "Verified data"),
@@ -178,9 +192,12 @@ def _target(href: str, is_index: bool) -> str:
     links. index.html links to pages/x.html; a page inside pages/ links to a bare
     filename and to ../index.html.
     """
-    if is_index:
-        return href
-    return "../index.html" if href == "index.html" else href[len("pages/"):]
+    if href == "index.html":
+        return "index.html" if is_index else "../index.html"
+    if "/" in href:
+        # a sub-site path such as room/index.html: already relative to the repo root
+        return href if is_index else "../" + href
+    return ("pages/" + href) if is_index else href
 
 
 def _nav_block(current: str, is_index: bool) -> str:
@@ -966,7 +983,12 @@ def evidence_page(prov, verif, dash, repl=None):
                          f"r = {num(c['companion'].get('r'),3)} (n={num(c['companion'].get('n'))}, {esc(c['companion'].get('window'))})",
                          esc(c.get("reading")), src(SOURCE["schedules"], "results")])
         corr_tbl = table(["Relationship", "This pipeline", "Companion session", "Reading", "Source"], crow)
-        conf = [[f"<strong>{esc(c['item'])}</strong>", esc(c["this_pipeline"]), esc(c["companion"]),
+        # A missing side of a comparison is a fact about the comparison, not a blank to sweep
+        # away: render it as an explicit label so the cell is never empty.
+        BLANK = '<span class="missing">no comparable value in this build</span>'
+        conf = [[f"<strong>{esc(c['item'])}</strong>",
+                 esc(c["this_pipeline"]) if c.get("this_pipeline") not in (None, "") else BLANK,
+                 esc(c["companion"]) if c.get("companion") not in (None, "") else BLANK,
                  esc(c["resolution"]), src(c.get("source") or SOURCE["schedules"], "source")]
                 for c in repl.get("conflicts", [])]
         conf_tbl = table(["Item", "This pipeline", "Companion session", "Resolution", "Source"], conf)
@@ -1242,16 +1264,21 @@ def review_page(verif, strat, dash, avail=None):
     ])
 
     # --- session c56ebee8-nfl1, fresh official re-verification on 2026-11-13 -------
+    flags.append([
+        "F41",
+        "standings freshness",
+        "Independent confirmation, 2026-11-13. Session 9411723a raised F41 for the standings "
+        "snapshot lagging the live table. This session reached the same conclusion by a separate "
+        "comparison: 30 of 32 rows match nfl.com exactly, and the two that do not are the Giants "
+        "and the Commanders, because the committed snapshot predates the Week 10 Thursday game "
+        "(Commanders 24, Giants 21, final). Official now reads NYG 5-3-1 / 203 PF / 196 PA and "
+        "WAS 3-5-1 / 196 PF / 223 PA; the repository publishes 5-2-1 / 182 / 172 and "
+        "2-5-1 / 172 / 202. A third session (1e159b2e, check N5) transcribed all 32 clubs "
+        "independently and also reports 30 of 32. Three independent checks agree. The same lag "
+        "means WAS @ NYG still appears in the Week 10 own-lines table even though it has since "
+        "kicked off; those lines are a legitimate pre-game prediction and the page now says so.",
+        src(SOURCE["standings"], "NFL standings"), badge("confirmed x3")])
     flags.extend([
-        ["F41", "standings freshness",
-         "Re-checked line by line against nfl.com on 2026-11-13: 30 of 32 standings rows still "
-         "match, but NYG and WAS do not. The committed snapshot predates the Week 10 Thursday "
-         "game (Commanders 24, Giants 21, final). Official now reads NYG 5-3-1 / 203 PF / 196 PA "
-         "and WAS 3-5-1 / 196 PF / 223 PA; the repository publishes 5-2-1 / 182 / 172 and "
-         "2-5-1 / 172 / 202. Both files affected: data/verified/standings_2026.csv and "
-         "data/standings.csv. Not corrected here, because the snapshot is a dated evidence "
-         "record; the fix is to re-scrape, which the daily workflow does.",
-         src(SOURCE["standings"], "NFL standings"), badge("needs review")],
         ["F42", "depth chart source",
          "nfl.com publishes no depth chart at all: "
          "https://www.nfl.com/teams/kansas-city-chiefs/depth-chart returns HTTP 404 (re-checked "
@@ -2028,6 +2055,7 @@ def main():
     write("pages/parlays.html", parlays_page(load_rel("data/s9cb/parlays.json"),
                                              load_rel("data/s9cb/props.json"), dash))
     write("pages/props.html", props_page(props, dash))
+    write("pages/injuries.html", injuries_page(avail, dash))
     write("pages/depth.html", depth_page(load_rel("data/depth_ladder.json"), snap))
     write("pages/evidence.html", evidence_page(prov, verif, dash, repl))
     write("pages/questions.html", questions_page(dash))
