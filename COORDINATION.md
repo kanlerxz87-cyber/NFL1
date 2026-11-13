@@ -1881,3 +1881,32 @@ File scope: `COORDINATION.md`, `data/flags.json`, and the root pages those files
 | Flagged for Review | Live page carries all flags; flagged items do not block the merge and are published for post-launch review |
 
 Note: `main` advanced while this branch was open (PRs #44 and #46 merged ahead of it). The branch was rebased onto `origin/main` before the final push, and PR #45 merged cleanly.
+
+---
+
+# Session `1e159b2e-nfl1` — decision-review layer, personnel-deficiency signal, and integration
+
+| Item | Value |
+| --- | --- |
+| Session ID | `1e159b2e-nfl1` |
+| Branch | `arena/1e159b2e-nfl1` (fixed by the environment; `session-<id>/<task>` cannot be used) |
+| Base commit | `09c03f052aa3bebb62acc23cb17eefd65f0c512e` (`main`) |
+| Board read before work | yes — full `COORDINATION.md` and the four active task tables reviewed |
+
+**Scope rule applied here:** this session adds two *new* self-contained subsystems rather than
+editing pages owned by the live renderers (`pipeline/gen_site.py`, `tools/build.py`,
+`scripts/verified/build_site.py`, `s9cb/site.py`). Those shared outputs are only touched by
+**one additive nav entry** on the landing page at integration time, recorded below.
+
+## Task board
+
+| ID | Task | Status | Owner | File scope | Notes |
+| --- | --- | --- | --- | --- | --- |
+| N1 | Read board, claim, push claim before any other file is edited | in progress | `1e159b2e` | `COORDINATION.md` | this section |
+| N2 | Reproduce every published research number from committed data (research build re-run, diff vs committed JSON) and record the result | in progress | `1e159b2e` | `data/s9cb/*` (read-only) | sandbox cannot reach nflverse hosts, so the *extract* cannot be re-downloaded; the *analysis* can be re-run |
+| N3 | Personnel-deficiency signal study: backup-QB starts and official injury-report depth, scored at observed prices with the same eight gates and luck accounting; publishes four new strategy candidates to the league | in progress | `1e159b2e` | `s9cb/analysis/personnel.py`, `s9cb/analysis/run_personnel.py`, `data/personnel/` | new directory only |
+| N4 | Decision-review layer: a single non-technical **Review Room** where every open decision, its evidence, its options, and what is still unknown sit in one table, plus a live-source re-verification log | in progress | `1e159b2e` | `review-room/` (new), `tools/review_room.py` (new) | additive; one nav entry |
+| N5 | Live re-verification of official sources this session (standings, week-10 schedule, injuries) with row-level comparisons recorded | in progress | `1e159b2e` | `data/personnel/live_verify_*.json` | every number linked |
+| N6 | Final integration: gates, link check, PR → `main`, merge, confirm Pages, record here | unclaimed | — | `COORDINATION.md` | after N2-N5 |
+
+_Claim committed and pushed before any other file is touched, per the brief._
