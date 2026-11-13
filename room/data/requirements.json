@@ -1,0 +1,194 @@
+{
+ "meta": {
+  "built_utc": "2026-11-13T12:45Z",
+  "count": 26,
+  "legend": {
+   "met": "delivered and verifiable on this site",
+   "partial": "delivered in part; the missing part is named in the evidence"
+  }
+ },
+ "requirements": [
+  {
+   "id": "R-01",
+   "category": "",
+   "requirement": "Collect, organise and analyse against a full list of requirements",
+   "how": "Requirements page: 26 brief requirements with status and evidence",
+   "status": "met"
+  },
+  {
+   "id": "R-02",
+   "category": "",
+   "requirement": "Suggest improvements to decision making",
+   "how": "15 suggestions, each with decision impact, cost, risk and evidence",
+   "status": "met"
+  },
+  {
+   "id": "R-03",
+   "category": "",
+   "requirement": "A dedicated section where someone can review suggestions and choose a path before implementing",
+   "how": "Suggestions and Decisions pages: 14 decisions, 30 options, recommendation + gate per decision",
+   "status": "met"
+  },
+  {
+   "id": "R-04",
+   "category": "",
+   "requirement": "A clear list of questions, information and answers needed before a decision",
+   "how": "Questions page: 22 gating questions, each with known / unknown / discovery method / what it blocks",
+   "status": "met"
+  },
+  {
+   "id": "R-05",
+   "category": "",
+   "requirement": "Suggestions to discover missing information",
+   "how": "Each question carries a discovery method; SG-10 and SG-14 are discovery-first suggestions",
+   "status": "met"
+  },
+  {
+   "id": "R-06",
+   "category": "",
+   "requirement": "Originate own NFL lines",
+   "how": "Own lines: opponent-adjusted EPA ratings, spread / total / win probability, walk-forward",
+   "status": "partial"
+  },
+  {
+   "id": "R-07",
+   "category": "",
+   "requirement": "Research and develop strategies for generating useful signals",
+   "how": "12 rules tested on both boards; failures published with effect sizes",
+   "status": "met"
+  },
+  {
+   "id": "R-08",
+   "category": "",
+   "requirement": "Treat it as a leaderboard competition with rewards for top strategies",
+   "how": "Board exists and is scored; reward values are blank (Q-13)",
+   "status": "partial"
+  },
+  {
+   "id": "R-09",
+   "category": "",
+   "requirement": "Single bets",
+   "how": "Scored with observed prices, 14,440 bets",
+   "status": "met"
+  },
+  {
+   "id": "R-10",
+   "category": "",
+   "requirement": "Parlays",
+   "how": "66 pairs scored, correlation ratio computed, 1 survives correction",
+   "status": "met"
+  },
+  {
+   "id": "R-11",
+   "category": "",
+   "requirement": "Player prop bet combos",
+   "how": "Projections and same-game correlations only; no price exists, so nothing is scored",
+   "status": "partial"
+  },
+  {
+   "id": "R-12",
+   "category": "",
+   "requirement": "Every strategy must pass validation gates",
+   "how": "Eight gates defined and applied; 0 of 12 rules pass",
+   "status": "met"
+  },
+  {
+   "id": "R-13",
+   "category": "",
+   "requirement": "Determine correlation values",
+   "how": "11 game-level relationships + 66 pair correlations with n, r, CI",
+   "status": "met"
+  },
+  {
+   "id": "R-14",
+   "category": "",
+   "requirement": "Remove luck from the equation",
+   "how": "Bootstrap, binomial vs break-even, BH correction, holdout, per-season stability, null-variance luck band",
+   "status": "met"
+  },
+  {
+   "id": "R-15",
+   "category": "",
+   "requirement": "Build strategies that are selectively skill based",
+   "how": "Nothing survives correction yet; the gate set is the mechanism that would prove it",
+   "status": "partial"
+  },
+  {
+   "id": "R-16",
+   "category": "",
+   "requirement": "Track injuries",
+   "how": "296 official rows scraped and re-verified club by club today",
+   "status": "met"
+  },
+  {
+   "id": "R-17",
+   "category": "",
+   "requirement": "Know deficiencies where 2nd/3rd/4th string replace starters",
+   "how": "Depth ranks captured for 31 clubs; next-man-up published only where the chart names a backup",
+   "status": "partial"
+  },
+  {
+   "id": "R-18",
+   "category": "",
+   "requirement": "Same for offense and defense",
+   "how": "Depth chart covers offense, defense and special teams; next-man-up table shows both units",
+   "status": "met"
+  },
+  {
+   "id": "R-19",
+   "category": "",
+   "requirement": "Executive summary",
+   "how": "Executive page: 15 KPIs, what we know, what we do not, what is wrong, decisions requested",
+   "status": "met"
+  },
+  {
+   "id": "R-20",
+   "category": "",
+   "requirement": "No manual input required",
+   "how": "Every page is generated from committed data by one script; no form, no login, no manual step",
+   "status": "met"
+  },
+  {
+   "id": "R-21",
+   "category": "",
+   "requirement": "Work line by line, verify from official sources, no hallucinations",
+   "how": "Every table row carries a source URL; blanks are labelled; 32/32 standings and 24/24 injury clubs re-verified today",
+   "status": "met"
+  },
+  {
+   "id": "R-22",
+   "category": "",
+   "requirement": "Review the repo and flag irregularities",
+   "how": "11 findings published with official links, 9 open and 2 passing",
+   "status": "met"
+  },
+  {
+   "id": "R-23",
+   "category": "",
+   "requirement": "A clean landing page and subpages organised by category",
+   "how": "Room: 1 landing page + 8 category pages + 1 about page",
+   "status": "met"
+  },
+  {
+   "id": "R-24",
+   "category": "",
+   "requirement": "Tables in a simple, easy to read format",
+   "how": "Every page is a table first, prose second",
+   "status": "met"
+  },
+  {
+   "id": "R-25",
+   "category": "",
+   "requirement": "Every table row must have a source link",
+   "how": "Enforced by verify.py in this directory; the build fails without one",
+   "status": "met"
+  },
+  {
+   "id": "R-26",
+   "category": "",
+   "requirement": "If a value cannot be confirmed, leave it blank and flag it",
+   "how": "Blank + 'not established' labels; 9 open findings",
+   "status": "met"
+  }
+ ]
+}

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About this room · NFL Decision Room</title>
+<meta name="description" content="Evidence-first NFL decision room: source-linked verification, gating questions, and a review-and-choose workflow before any change is implemented.">
+<link rel="stylesheet" href="assets/room.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="top-in">
+  <a class="brand" href="index.html"><span class="mark">NFL</span><span>Decision Room<small>review before change</small></span></a>
+  <nav class="main" aria-label="Sections"><a href="index.html">Overview</a><a href="executive.html">Executive summary</a><a href="decisions.html">Decide</a><a href="suggestions.html">Suggestions</a><a href="questions.html">Open questions</a><a href="strategy.html">Strategy &amp; luck</a><a href="injuries.html">Injuries &amp; depth</a><a href="data.html">Verified data</a><a href="flagged.html">Flagged for review</a><a href="about.html" aria-current="page">About</a></nav>
+</div></header>
+<main id="main">
+  <section class="page-head">
+    <p class="eyebrow">Method</p>
+    <h1>About this room</h1>
+    <p class="lede">What was verified, how, what was deliberately left blank, and how to reproduce every number on the site.</p>
+    <p class="stamp">Built 2026-11-13 12:50 UTC · data captured 2026-11-13T12:05Z–12:30Z · season 2026, week 10 complete · every table row links to its source</p>
+  </section>
+  
+<h2>How this room was built</h2>
+<ol class="tight">
+  <li><strong>Read the board.</strong> The repository keeps a multi-session task board. This session claimed a file scope, pushed the claim, and touched nothing outside it.</li>
+  <li><strong>Re-fetched the official pages</strong> rather than trusting committed copies: standings, both schedule weeks, the injury report, and two club depth charts.</li>
+  <li><strong>Compared line by line.</strong> 32 standings rows and 24 readable injury tables were checked against today's official values; every diff is published, including the ones that passed.</li>
+  <li><strong>Recomputed what could be recomputed</strong> from committed data with no model code: the best strategy's ROI, the correlation, and the league's own arithmetic.</li>
+  <li><strong>Wrote the questions before the suggestions.</strong> A suggestion that is not tied to a question is an opinion.</li>
+  <li><strong>Built this site from the data files.</strong> No number on it is typed into a template; the build fails if a table row lacks an https source link.</li>
+</ol>
+
+<h2>Sources used today</h2>
+<div class="table-wrap"><table class=""><caption>Source register</caption><thead><tr><th>ID</th><th>Publisher</th><th>Page</th><th>Used for</th></tr></thead><tbody><tr><td class="key">S-STD</td><td>NFL</td><td class="src"><a href="https://www.nfl.com/standings/division/2026/REG" rel="noopener">2026 NFL Division Standings</a></td><td>standings_2026-11-13.tsv (32 clubs)</td></tr><tr><td class="key">S-SCH10</td><td>NFL</td><td class="src"><a href="https://www.nfl.com/schedules/2026/by-week/week-10" rel="noopener">NFL Week 10 Schedule 2026</a></td><td>schedule_week10_2026-11-13.tsv (14 fixtures, 4 byes); WAS@NYG final score 24-21</td></tr><tr><td class="key">S-SCH11</td><td>NFL</td><td class="src"><a href="https://www.nfl.com/schedules/2026/by-week/week-11" rel="noopener">NFL Week 11 Schedule 2026</a></td><td>schedule_week10_2026-11-13.tsv rows tagged week 11 (13 fixtures, 6 byes)</td></tr><tr><td class="key">S-INJ</td><td>NFL</td><td class="src"><a href="https://www.nfl.com/injuries/" rel="noopener">Official Latest NFL Injury Report for Players - Week 10 of the 2026 Season</a></td><td>injury_report_counts_2026-11-13.py; injury_designations_2026-11-13.tsv</td></tr><tr><td class="key">S-CLUB-KC</td><td>Kansas City Chiefs (official club site)</td><td class="src"><a href="https://www.chiefs.com/team/depth-chart" rel="noopener">Kansas City Chiefs Unofficial Depth Chart</a></td><td>depth-chart method note: nfl.com has no depth chart page (verified 404 today); spot-check of the committed 31-club scrape</td></tr><tr><td class="key">S-CLUB-PHI</td><td>Philadelphia Eagles (official club site)</td><td class="src"><a href="https://www.philadelphiaeagles.com/team/depth-chart" rel="noopener">Philadelphia Eagles Depth Chart</a></td><td>depth-chart spot-check on a club the scrape covers</td></tr><tr><td class="key">S-NFL404</td><td>NFL</td><td class="src"><a href="https://www.nfl.com/teams/kansas-city-chiefs/depth-chart" rel="noopener">404 - Flag on the Play</a></td><td>confirms nfl.com publishes no depth chart page</td></tr></tbody></table></div>
+
+<h2>Rules this site follows</h2>
+<div class="cols">
+  <div class="panel"><h3>Published</h3><ul class="tight">
+    <li>A value is published only with a link to the page it came from, or with the file and calculation that produced it.</li>
+    <li>Recomputation results are published even when they disagree with the site.</li>
+    <li>A failed rule, a blocked decision and a passing check are all published.</li>
+  </ul></div>
+  <div class="panel"><h3>Not published</h3><ul class="tight">
+    <li>An inferred or interpolated value. Blanks stay blank.</li>
+    <li>A market price described as official. No official odds exist.</li>
+    <li>A prop bet result. No prop price exists in any source, so nothing is scored.</li>
+    <li>A reward value. No official or commercial figure exists.</li>
+  </ul></div>
+</div>
+
+<h2>Reproduce it</h2>
+<pre class="panel mono" style="white-space:pre-wrap">python3 room/build.py      # rebuilds every page in room/ from room/data/*.json
+python3 room/verify.py     # fails if a table row has no source link or an unmarked blank</pre>
+<p class="small">The generator and the verifier are part of the repository, so a reviewer can
+re-run both and diff the output.</p>
+
+<h2>Relationship to the rest of the repository</h2>
+<p>This room cites, and does not replace, the dashboards built by earlier sessions: the evidence
+dashboard in <code class="mono">pages/</code>, the research lab in <code class="mono">lab/</code>,
+the register in <code class="mono">docs/</code>, the independent verification build in
+<code class="mono">verified-lab/</code> and the referee replication in <code class="mono">referee/</code>.
+Where they disagree, the disagreement is a finding on the
+<a href="flagged.html">Flagged for review</a> page rather than a silent edit.</p>
+<p class="small">Repository: <a href="https://github.com/kanlerxz87-cyber/NFL1" rel="noopener">https://github.com/kanlerxz87-cyber/NFL1</a> · task board:
+<a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/COORDINATION.md">COORDINATION.md</a></p>
+</main>
+<footer><div class="foot-in">
+  <div><strong>NFL Decision Room</strong>Research tool, not betting advice. No official league odds exist, so no market price here is official.
+  Values that could not be verified are blank and carry a source that would settle them.</div>
+  <div>Sections: <a href="decisions.html">Decide</a> · <a href="questions.html">Questions</a> ·
+  <a href="flagged.html">Flagged</a> · <a href="about.html">About &amp; method</a><br>
+  Repository: <a href="https://github.com/kanlerxz87-cyber/NFL1" rel="noopener">kanlerxz87-cyber/NFL1</a></div>
+</div></footer>
+</body>
+</html>

@@ -20,6 +20,7 @@ DATA = os.path.join(ROOT, "data", "model")
 NAV = [
     ("index.html", "Overview"),
     ("pages/sections.html", "All Sections"),
+    ("room/index.html", "Decision Room"),
     ("pages/lines.html", "My Lines"),
     ("pages/strategies.html", "Strategy Lab"),
     ("pages/injuries.html", "Injuries & Depth"),

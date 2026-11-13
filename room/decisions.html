@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decide · NFL Decision Room</title>
+<meta name="description" content="Evidence-first NFL decision room: source-linked verification, gating questions, and a review-and-choose workflow before any change is implemented.">
+<link rel="stylesheet" href="assets/room.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="top-in">
+  <a class="brand" href="index.html"><span class="mark">NFL</span><span>Decision Room<small>review before change</small></span></a>
+  <nav class="main" aria-label="Sections"><a href="index.html">Overview</a><a href="executive.html">Executive summary</a><a href="decisions.html" aria-current="page">Decide</a><a href="suggestions.html">Suggestions</a><a href="questions.html">Open questions</a><a href="strategy.html">Strategy &amp; luck</a><a href="injuries.html">Injuries &amp; depth</a><a href="data.html">Verified data</a><a href="flagged.html">Flagged for review</a><a href="about.html">About</a></nav>
+</div></header>
+<main id="main">
+  <section class="page-head">
+    <p class="eyebrow">Review and choose a path</p>
+    <h1>Decide</h1>
+    <p class="lede">Every suggestion, restated as a decision with options. Nothing here has been implemented: the page exists so a human can pick a path before any change is made.</p>
+    <p class="stamp">Built 2026-11-13 12:50 UTC · data captured 2026-11-13T12:05Z–12:30Z · season 2026, week 10 complete · every table row links to its source</p>
+  </section>
+  
+<ol class="tight">
+  <li><strong>Read</strong> the question and the options. Each option states what it buys, what it costs and what it risks.</li>
+  <li><strong>Open the evidence</strong> on the option you prefer. Every link goes to an official page or to the committed data the claim is computed from.</li>
+  <li><strong>Choose</strong> a path and record it. The gate under the card is the acceptance test the change has to pass before it ships.</li>
+  <li><strong>Only then</strong> implement. Nothing on this page has been applied to the site.</li>
+</ol>
+<p class="note">12 decisions are ready for a choice and 2 are blocked
+until a named piece of information exists. Findings and unverified values never block a
+decision; they travel with it to the <a href="flagged.html">Flagged for review</a> page.</p>
+<h2>Ready to decide</h2><details class="dec" id="D-01" >
+  <summary><span class="id">D-01</span>
+    <span><span class="title">Publish from a snapshot taken after the last final whistle</span><span class="area">Data currency · 1 new gate script + 1 workflow step; no data model change</span></span>
+    <span class="status"><span class="b b-ok">ready to decide</span></span></summary>
+  <div class="body">
+    <p class="q">Should the site keep serving the 2026-11-12 23:37 UTC snapshot while Thursday&#x27;s game is finishing, or reconcile to the latest official standings before every publish?</p>
+    
+    <div class="opts"><div class="opt rec">
+  <header><span class="letter">A</span><span class="label">Reconcile-then-publish (blocking gate)</span><span class="b b-ok">recommended</span></header>
+  <dl>
+    <dt>Buys</dt><dd>The standings page can never show a win total that contradicts a game the site itself lists as final.</dd>
+    <dt>Costs</dt><dd>A publish can be delayed by minutes while the official page settles; a broken fetch blocks the site update.</dd>
+    <dt>Risk</dt><dd>If nfl.com is unreachable, the publish fails closed and the site goes stale — needs a documented override.</dd>
+    <dt>Evidence</dt><dd><ul class="ev"><li><a href="https://www.nfl.com/standings/division/2026/REG" rel="noopener">Today&#x27;s official standings</a> <span class="small">NYG 5-3-1 / WAS 3-5-1</span></li><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/snapshot.json" rel="noopener">Committed snapshot</a> <span class="small">NYG 5-2-1 / WAS 2-5-1, built 2026-11-12T23:37Z</span></li><li><a href="https://www.nfl.com/schedules/2026/by-week/week-10" rel="noopener">Thursday result</a> <span class="small">Commanders 24, Giants 21, FINAL</span></li></ul></dd>
+  </dl></div><div class="opt">
+  <header><span class="letter">B</span><span class="label">Publish now, flag the lag</span></header>
+  <dl>
+    <dt>Buys</dt><dd>No build risk; the site always updates.</dd>
+    <dt>Costs</dt><dd>Two numbers on the same site disagree (snapshot says 136 games, the schedule page lists 137) and a reader has to notice the flag.</dd>
+    <dt>Risk</dt><dd>Silent-looking inconsistency; a reader who ignores the flag makes a decision on a stale table.</dd>
+    <dt>Evidence</dt><dd><ul class="ev"><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/official/2026-11-13/standings_2026-11-13.tsv" rel="noopener">Standings diff table</a> <span class="small">only NYG and WAS differ</span></li></ul></dd>
+  </dl></div><div class="opt">
+  <header><span class="letter">C</span><span class="label">Show both snapshots side by side until they agree</span></header>
+  <dl>
+    <dt>Buys</dt><dd>Transparent and needs no new gate.</dd>
+    <dt>Costs</dt><dd>Doubles the size of the standings table; readers must choose which row to trust.</dd>
+    <dt>Risk</dt><dd>Presentation is longer than the problem deserves.</dd>
+    <dt>Evidence</dt><dd><ul class="ev"><li><a href="https://www.nfl.com/standings/division/2026/REG" rel="noopener">Standings page</a> <span class="small">official single source of truth</span></li></ul></dd>
+  </dl></div></div>
+    <div class="rec-box"><span class="h">Recommendation</span>
+      <strong>A</strong> — The failure mode of B is a reader trusting a table that the site&#x27;s own schedule page contradicts. The override for A is one documented switch, exercised only when the official fetch fails.</div>
+    <div class="gate"><span class="h">Pre-implementation gate</span>Gate: a script fails the build if any club&#x27;s W-L-T differs from the official page fetched in the same run, unless the run is flagged `official_unreachable`.</div>
+  </div></details><details class="dec" id="D-02" >
+  <summary><span class="id">D-02</span>
+    <span><span class="title">Retire the -110 price assumption before any strategy is presented as a candidate</span><span class="area">Strategy leaderboard · 1 renderer + 1 data file; no analysis rewrite</span></span>
+    <span class="status"><span class="b b-ok">ready to decide</span></span></summary>
+  <div class="body">
+    <p class="q">Two leaderboards are live: one assumes -110 on every bet, the other uses observed prices. Which one should be the only one on the site?</p>
+    
+    <div class="opts"><div class="opt rec">
+  <header><span class="letter">A</span><span class="label">Observed-price board only</span><span class="b b-ok">recommended</span></header>
+  <dl>
+    <dt>Buys</dt><dd>Every scored bet carries the price the source recorded; the ROI is achievable by definition at that price.</dd>
+    <dt>Costs</dt><dd>Parts of the file carry no price, so 1,902 of 6,653 priced-or-unpriced games are excluded and must be published as excluded.</dd>
+    <dt>Risk</dt><dd>Smaller samples per rule; several rules fall below 200 bets and therefore cannot pass any gate.</dd>
+    <dt>Evidence</dt><dd><ul class="ev"><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json" rel="noopener">Observed-price board</a> <span class="small">14,440 scored bets, 12 rules</span></li><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/s9cb/analysis/strategies.py" rel="noopener">Price rule (G2)</a> <span class="small">&#x27;No -110 assumption is used&#x27;</span></li></ul></dd>
+  </dl></div><div class="opt">
+  <header><span class="letter">B</span><span class="label">-110 board only</span></header>
+  <dl>
+    <dt>Buys</dt><dd>A much longer window (2005-2026) and bigger samples.</dd>
+    <dt>Costs</dt><dd>Every ROI on the page is an assumption, not an observed return; a real book prices most of these at worse than -110.</dd>
+    <dt>Risk</dt><dd>Overstates returns by construction; the assumption is documented but the headline number is not achievable.</dd>
+    <dt>Evidence</dt><dd><ul class="ev"><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/strategies.json" rel="noopener">-110 board</a> <span class="small">window.price_assumption = &#x27;-110 on every bet&#x27;</span></li></ul></dd>
+  </dl></div><div class="opt">
+  <header><span class="letter">C</span><span class="label">Keep both, labelled and separated</span></header>
+  <dl>
+    <dt>Buys</dt><dd>Continuity with earlier pages; both methodologies stay visible.</dd>
+    <dt>Costs</dt><dd>Two rows can carry the same rule name and different ROI, which is the current state.</dd>
+    <dt>Risk</dt><dd>Reader confusion; this is exactly what produced the conflicting numbers today.</dd>
+    <dt>Evidence</dt><dd><ul class="ev"><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/index.html" rel="noopener">Homepage leaderboard</a> <span class="small">S11 &#x27;Under in divisional games with total 47+&#x27; 4.2% (-110 board)</span></li><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json" rel="noopener">Research board</a> <span class="small">the closest rule is S09 &#x27;Under when the total is 40 or lower&#x27; at -7.9%</span></li></ul></dd>
+  </dl></div></div>
+    <div class="rec-box"><span class="h">Recommendation</span>
+      <strong>A</strong> — A leaderboard competition is only meaningful if the number it ranks is a return someone could have earned. The -110 board can stay as a labelled sensitivity table, never as the headline.</div>
+    <div class="gate"><span class="h">Pre-implementation gate</span>Gate: no strategy may appear in the headline table without a non-null average decimal price and a count of excluded bets on the same row.</div>
+  </div></details><details class="dec" id="D-03" >
+  <summary><span class="id">D-03</span>
+    <span><span class="title">Keep the published ranking rule and lock it with a test</span><span class="area">Strategy leaderboard · 1 sort key in 1 renderer</span></span>
+    <span class="status"><span class="b b-ok">ready to decide</span></span></summary>
+  <div class="body">
+    <p class="q">The board is correctly ordered by the lower 95% ROI bound. Should that ordering be enforced by a test, or left to the renderer?</p>
+    
+    <div class="opts"><div class="opt rec">
+  <header><span class="letter">A</span><span class="label">Rank by lower 95% bound of ROI</span><span class="b b-ok">recommended</span></header>
+  <dl>
+    <dt>Buys</dt><dd>Matches the published sentence; a lucky small sample cannot top the table.</dd>
+    <dt>Costs</dt><dd>Every row currently shows a negative lower bound, so the top of the table is the &#x27;least negative&#x27; strategy — honest but unflattering.</dd>
+    <dt>Risk</dt><dd>A reader may read rank 1 as a winner. Needs an explicit &#x27;no rule passes&#x27; banner above the table.</dd>
+    <dt>Evidence</dt><dd><ul class="ev"><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/index.html" rel="noopener">Stated rule</a> <span class="small">&#x27;Ranked by the lower bound of the 95% ROI interval&#x27;</span></li><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/strategies.json" rel="noopener">Actual order</a> <span class="small">gates_passed desc, then score</span></li></ul></dd>
+  </dl></div><div class="opt">
+  <header><span class="letter">B</span><span class="label">Rank by gates passed, and say so</span></header>
+  <dl>
+    <dt>Buys</dt><dd>Zero code risk; matches what the table already does.</dd>
+    <dt>Costs</dt><dd>A rule with a good gate count and a deeply negative ROI can outrank a rule with a better return.</dd>
+    <dt>Risk</dt><dd>Ranks methodology compliance, not skill — the opposite of a competition.</dd>
+    <dt>Evidence</dt><dd><ul class="ev"><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json" rel="noopener">Gate definitions</a> <span class="small">8 gates incl. holdout and BH</span></li></ul></dd>
+  </dl></div></div>
+    <div class="rec-box"><span class="h">Recommendation</span>
+      <strong>A</strong> — The order is right today and nothing protects it. A one-line assertion is cheaper than re-auditing the table next time it changes.</div>
+    <div class="gate"><span class="h">Pre-implementation gate</span>Gate: a unit test fails if the rendered row order differs from the order of score_lower_ci_roi_pct.</div>
+  </div></details><details class="dec" id="D-05" >
+  <summary><span class="id">D-05</span>
+    <span><span class="title">Use club-published charts as the official fallback for 2nd/3rd/4th string</span><span class="area">Depth charts · 1 method note + 1 coverage gate</span></span>
+    <span class="status"><span class="b b-ok">ready to decide</span></span></summary>
+  <div class="body">
+    <p class="q">nfl.com publishes no depth chart (verified 404 today). Are the 32 club sites acceptable official sources for depth order?</p>
+    
+    <div class="opts"><div class="opt rec">
+  <header><span class="letter">A</span><span class="label">Club sites, labelled per club</span><span class="b b-ok">recommended</span></header>
+  <dl>
+    <dt>Buys</dt><dd>31 of 32 clubs are already scraped; the chart is the club&#x27;s own publication, and several label it &#x27;Unofficial&#x27;.</dd>
+    <dt>Costs</dt><dd>Labels and update cadence differ by club; HOU could not be read.</dd>
+    <dt>Risk</dt><dd>Two clubs may publish on different days, so a cross-team comparison can mix snapshots.</dd>
+    <dt>Evidence</dt><dd><ul class="ev"><li><a href="https://www.nfl.com/teams/kansas-city-chiefs/depth-chart" rel="noopener">nfl.com 404</a> <span class="small">HTTP 200 body &#x27;404 - Flag on the Play&#x27;</span></li><li><a href="https://www.chiefs.com/team/depth-chart" rel="noopener">KC chart</a> <span class="small">titled &#x27;Unofficial Depth Chart&#x27;</span></li><li><a href="https://www.philadelphiaeagles.com/team/depth-chart" rel="noopener">PHI chart</a> <span class="small">&#x27;compiled by the Eagles communications department&#x27;</span></li></ul></dd>
+  </dl></div><div class="opt">
+  <header><span class="letter">B</span><span class="label">Wait for an official league-wide chart</span></header>
+  <dl>
+    <dt>Buys</dt><dd>One consistent source for all 32 clubs.</dd>
+    <dt>Costs</dt><dd>No such page exists; the 2nd/3rd/4th-string requirement would stay unmet.</dd>
+    <dt>Risk</dt><dd>Indefinite block on an explicitly requested feature.</dd>
+    <dt>Evidence</dt><dd><ul class="ev"><li><a href="https://www.nfl.com/teams/kansas-city-chiefs/depth-chart" rel="noopener">nfl.com depth chart probe</a> <span class="small">no league-wide chart page found</span></li></ul></dd>
+  </dl></div></div>
+    <div class="rec-box"><span class="h">Recommendation</span>
+      <strong>A</strong> — The club publishes the chart; citing the club and its own label is a stronger provenance claim than citing a third-party aggregator. The gap that matters is coverage, not authority.</div>
+    <div class="gate"><span class="h">Pre-implementation gate</span>Gate: every depth row carries its club URL and the club&#x27;s own chart date, or renders as an explicit blank.</div>
+  </div></details><details class="dec" id="D-06" >
+  <summary><span class="id">D-06</span>
+    <span><span class="title">Publish all 31 scraped clubs, not the 3 that reach the page</span><span class="area">Depth charts · 1 renderer + 1 data file</span></span>
+    <span class="status"><span class="b b-ok">ready to decide</span></span></summary>
+  <div class="body">
+    <p class="q">The scrape holds 31 clubs and 934 position rows, but the published chart page covers 3 clubs (KC, GB, SF). Why, and what should be published?</p>
+    
+    <div class="opts"><div class="opt rec">
+  <header><span class="letter">A</span><span class="label">Render all 31 clubs from the existing scrape</span><span class="b b-ok">recommended</span></header>
+  <dl>
+    <dt>Buys</dt><dd>Closes the 2nd/3rd/4th-string gap for 31 clubs with data already in the repo and already sourced.</dd>
+    <dt>Costs</dt><dd>A large page; needs a per-club filter or one page per club.</dd>
+    <dt>Risk</dt><dd>HOU stays blank and must be labelled, not hidden.</dd>
+    <dt>Evidence</dt><dd><ul class="ev"><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/session-1505ac8e/depth_charts.json" rel="noopener">31-club scrape</a> <span class="small">clubs_ok 31, clubs_unavailable [HOU], 934 rows</span></li><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/depth_chart.json" rel="noopener">3-club page data</a> <span class="small">85 rows, codes KC/GB/SF only</span></li></ul></dd>
+  </dl></div><div class="opt">
+  <header><span class="letter">B</span><span class="label">Keep the 3-club sample</span></header>
+  <dl>
+    <dt>Buys</dt><dd>No work.</dd>
+    <dt>Costs</dt><dd>The site does not answer the question it was built to answer for 28 clubs.</dd>
+    <dt>Risk</dt><dd>A reader assumes no other club has a chart.</dd>
+    <dt>Evidence</dt><dd><ul class="ev"><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/depth-chart.html" rel="noopener">Published page</a> <span class="small">KC/GB/SF tables only</span></li></ul></dd>
+  </dl></div></div>
+    <div class="rec-box"><span class="h">Recommendation</span>
+      <strong>A</strong> — The data is already collected, hashed and sourced. Rendering it is a presentation change with no new claims.</div>
+    <div class="gate"><span class="h">Pre-implementation gate</span>Gate: a coverage counter on the page prints captured clubs / 32 and names the clubs without a chart.</div>
+  </div></details><details class="dec" id="D-07" >
+  <summary><span class="id">D-07</span>
+    <span><span class="title">Separate &#x27;no game designation yet&#x27; from &#x27;healthy&#x27;</span><span class="area">Injury tracking · 1 column + 1 rule in the availability model</span></span>
+    <span class="status"><span class="b b-ok">ready to decide</span></span></summary>
+  <div class="body">
+    <p class="q">Mid-week, most clubs publish practice participation only. Should a blank game status be treated as available?</p>
+    
+    <div class="opts"><div class="opt rec">
+  <header><span class="letter">A</span><span class="label">Three-state column: Out / Questionable-family / No designation yet</span><span class="b b-ok">recommended</span></header>
+  <dl>
+    <dt>Buys</dt><dd>A reader can see that &#x27;blank&#x27; means &#x27;not published&#x27;, not &#x27;fit&#x27;.</dd>
+    <dt>Costs</dt><dd>One more column; the attrition index needs a documented weight for the third state (it already uses 0.5/0.2 for practice-only).</dd>
+    <dt>Risk</dt><dd>Any weighting is a modelling choice and must be labelled as a model weight, not an NFL statistic.</dd>
+    <dt>Evidence</dt><dd><ul class="ev"><li><a href="https://www.nfl.com/injuries/" rel="noopener">Official page</a> <span class="small">9 rows carry a game status; the rest are practice-only</span></li><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/availability.json" rel="noopener">Model weights</a> <span class="small">practice DNP 0.5 / limited 0.2, rescaled 0-100</span></li></ul></dd>
+  </dl></div><div class="opt">
+  <header><span class="letter">B</span><span class="label">Keep the current single index</span></header>
+  <dl>
+    <dt>Buys</dt><dd>One number per club, easy to scan.</dd>
+    <dt>Costs</dt><dd>Collapses &#x27;not published&#x27; and &#x27;fit&#x27; into the same reading.</dd>
+    <dt>Risk</dt><dd>A club that has not reported looks as healthy as a club with a fully cleared list.</dd>
+    <dt>Evidence</dt><dd><ul class="ev"><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/pages/injuries.html" rel="noopener">Availability page</a> <span class="small">attrition index per club</span></li></ul></dd>
+  </dl></div></div>
+    <div class="rec-box"><span class="h">Recommendation</span>
+      <strong>A</strong> — The distinction is the whole point of tracking injuries against a depth chart: the reader needs to know whether a starter is out or simply not yet designated.</div>
+    <div class="gate"><span class="h">Pre-implementation gate</span>Gate: no cell may render blank; each renders &#x27;No designation yet&#x27; with the source date, or the official value.</div>
+  </div></details><details class="dec" id="D-09" >
+  <summary><span class="id">D-09</span>
+    <span><span class="title">Make the market comparison explicit on every line</span><span class="area">Own lines · 1 column + 1 footnote</span></span>
+    <span class="status"><span class="b b-ok">ready to decide</span></span></summary>
+  <div class="body">
+    <p class="q">Own lines are published next to consensus closing lines. Should the page state where the market number comes from every time?</p>
+    
+    <div class="opts"><div class="opt rec">
+  <header><span class="letter">A</span><span class="label">Every market cell links to its feed</span><span class="b b-ok">recommended</span></header>
+  <dl>
+    <dt>Buys</dt><dd>A reader can tell an observed price from a modelled one.</dd>
+    <dt>Costs</dt><dd>Cells get a second link next to the official one.</dd>
+    <dt>Risk</dt><dd>None identified.</dd>
+    <dt>Evidence</dt><dd><ul class="ev"><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/provenance.json" rel="noopener">Price provenance</a> <span class="small">file URL + sha256</span></li><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/lines.json" rel="noopener">Own lines</a> <span class="small">market_home_line / market_total per fixture</span></li></ul></dd>
+  </dl></div><div class="opt">
+  <header><span class="letter">B</span><span class="label">One footnote for the whole table</span></header>
+  <dl>
+    <dt>Buys</dt><dd>Cleaner table.</dd>
+    <dt>Costs</dt><dd>A reader who screenshots one row loses the provenance.</dd>
+    <dt>Risk</dt><dd>Same class of problem as the standings drift: provenance that lives far from the number.</dd>
+    <dt>Evidence</dt><dd><ul class="ev"><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/index.html" rel="noopener">Current page</a> <span class="small">market columns cite the nfl.com schedule page</span></li></ul></dd>
+  </dl></div></div>
+    <div class="rec-box"><span class="h">Recommendation</span>
+      <strong>A</strong> — The brief asks for a source link on every row. A modelled market number presented without its feed is the one place the site currently breaks that rule.</div>
+    <div class="gate"><span class="h">Pre-implementation gate</span>Gate: the link checker fails a table row whose market cell has no https source.</div>
+  </div></details><details class="dec" id="D-10" >
+  <summary><span class="id">D-10</span>
+    <span><span class="title">Define the reward pool before the first passing strategy</span><span class="area">Competition · 1 spec page; no code</span></span>
+    <span class="status"><span class="b b-ok">ready to decide</span></span></summary>
+  <div class="body">
+    <p class="q">The competition promises rewards for top strategies. No official source publishes reward values. Should the pool be defined now or after a strategy passes?</p>
+    <div class="warnbox"><strong>Blocked by</strong> <a href="questions.html#Q-13">Q-13</a></div>
+    <div class="opts"><div class="opt rec">
+  <header><span class="letter">A</span><span class="label">Publish the reward spec as a formula with blank values</span><span class="b b-ok">recommended</span></header>
+  <dl>
+    <dt>Buys</dt><dd>The rules are fixed before anyone can win, which is the anti-cherry-picking argument.</dd>
+    <dt>Costs</dt><dd>A document with blanks looks unfinished.</dd>
+    <dt>Risk</dt><dd>A formula can still be tuned later; only a signed-off spec prevents that.</dd>
+    <dt>Evidence</dt><dd><ul class="ev"><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/leaderboard_rules.json" rel="noopener">Reward fields</a> <span class="small">existing schema</span></li><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/flags.json" rel="noopener">Flag F12</a> <span class="small">reward values not published by any official source</span></li></ul></dd>
+  </dl></div><div class="opt">
+  <header><span class="letter">B</span><span class="label">Wait until a strategy passes the gates</span></header>
+  <dl>
+    <dt>Buys</dt><dd>No premature spec.</dd>
+    <dt>Costs</dt><dd>At the current rate (0 of 12 rules pass) that could be a long wait, and the formula would then be chosen by the winner&#x27;s shape.</dd>
+    <dt>Risk</dt><dd>Any reward defined after the fact is a post-hoc selection.</dd>
+    <dt>Evidence</dt><dd><ul class="ev"><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json" rel="noopener">Gate matrix</a> <span class="small">0 rules pass all 8 gates</span></li></ul></dd>
+  </dl></div></div>
+    <div class="rec-box"><span class="h">Recommendation</span>
+      <strong>A</strong> — Publishing the formula before a winner exists is the cheapest way to make the competition credible. The values can stay blank until a human sets them.</div>
+    <div class="gate"><span class="h">Pre-implementation gate</span>Gate: the reward page must show the formula version and the date it was frozen.</div>
+  </div></details><details class="dec" id="D-11" >
+  <summary><span class="id">D-11</span>
+    <span><span class="title">One entry point or six generations</span><span class="area">Site structure · 1 landing page + 1 index of generations</span></span>
+    <span class="status"><span class="b b-ok">ready to decide</span></span></summary>
+  <div class="body">
+    <p class="q">The repo publishes six site generations (root dashboard, pages/, docs/, verified-lab/, referee/, lab/, dashboard/, research/, room/). Should the landing page route readers to one of them?</p>
+    
+    <div class="opts"><div class="opt rec">
+  <header><span class="letter">A</span><span class="label">One landing page, every generation linked and labelled</span><span class="b b-ok">recommended</span></header>
+  <dl>
+    <dt>Buys</dt><dd>A reader sees one front door and can still reach every earlier build.</dd>
+    <dt>Costs</dt><dd>The landing page must carry a &#x27;what is this&#x27; line per generation.</dd>
+    <dt>Risk</dt><dd>Six links invite comparison shopping between conflicting numbers.</dd>
+    <dt>Evidence</dt><dd><ul class="ev"><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/pages/sections.html" rel="noopener">Sections register</a> <span class="small">40 sections across six generations</span></li></ul></dd>
+  </dl></div><div class="opt">
+  <header><span class="letter">B</span><span class="label">Merge everything into one generation</span></header>
+  <dl>
+    <dt>Buys</dt><dd>No conflicting numbers.</dd>
+    <dt>Costs</dt><dd>Destroys independent implementations that cross-check each other, which is the repo&#x27;s main quality signal.</dd>
+    <dt>Risk</dt><dd>Loses the independent reproduction that caught the division-count bug.</dd>
+    <dt>Evidence</dt><dd><ul class="ev"><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/README.md" rel="noopener">Independent builds</a> <span class="small">three deliberately independent implementations</span></li></ul></dd>
+  </dl></div></div>
+    <div class="rec-box"><span class="h">Recommendation</span>
+      <strong>A</strong> — The independent builds are the reason several errors were caught. Keep them, but make the front door single and state which generation is authoritative for each table.</div>
+    <div class="gate"><span class="h">Pre-implementation gate</span>Gate: every generation page carries a one-line &#x27;authoritative for&#x27; statement.</div>
+  </div></details><details class="dec" id="D-12" >
+  <summary><span class="id">D-12</span>
+    <span><span class="title">Run the official-source audit as a required check, not an advisory one</span><span class="area">Verification · 1 workflow file + branch protection</span></span>
+    <span class="status"><span class="b b-ok">ready to decide</span></span></summary>
+  <div class="body">
+    <p class="q">The 34-check source audit exists but does not block a merge. Should it?</p>
+    
+    <div class="opts"><div class="opt rec">
+  <header><span class="letter">A</span><span class="label">Make it a required check</span><span class="b b-ok">recommended</span></header>
+  <dl>
+    <dt>Buys</dt><dd>A hard mismatch stops publication; documented flags stay visible.</dd>
+    <dt>Costs</dt><dd>A flaky nfl.com fetch can block a legitimate merge.</dd>
+    <dt>Risk</dt><dd>Requires a documented override path with a recorded reason.</dd>
+    <dt>Evidence</dt><dd><ul class="ev"><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/.github/workflows/verified-source-audit.yml" rel="noopener">Audit workflow</a> <span class="small">exists; enforcement pending</span></li><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/scripts/verified/check_source_audit.py" rel="noopener">Audit runner</a> <span class="small">baseline 29 PASS / 5 FLAG / 0 FAIL</span></li></ul></dd>
+  </dl></div><div class="opt">
+  <header><span class="letter">B</span><span class="label">Keep it advisory</span></header>
+  <dl>
+    <dt>Buys</dt><dd>No blocked merges.</dd>
+    <dt>Costs</dt><dd>Every drift has to be spotted by a human reading the flag page.</dd>
+    <dt>Risk</dt><dd>Today&#x27;s NYG/WAS drift was found by hand, not by CI.</dd>
+    <dt>Evidence</dt><dd><ul class="ev"><li><a href="https://www.nfl.com/standings/division/2026/REG" rel="noopener">Standings drift</a> <span class="small">caught in this session by re-fetching</span></li></ul></dd>
+  </dl></div></div>
+    <div class="rec-box"><span class="h">Recommendation</span>
+      <strong>A</strong> — An advisory audit is a report; a required audit is a gate. The brief asks for validation gates that block.</div>
+    <div class="gate"><span class="h">Pre-implementation gate</span>Gate: the workflow is listed under required status checks and its failure message names the failing row.</div>
+  </div></details><details class="dec" id="D-13" >
+  <summary><span class="id">D-13</span>
+    <span><span class="title">Publish the sample definition next to every correlation</span><span class="area">Correlation · 1 column + 1 filter statement per figure</span></span>
+    <span class="status"><span class="b b-ok">ready to decide</span></span></summary>
+  <div class="body">
+    <p class="q">Correlation C1 reproduces in value (0.4309 vs 0.4312) but not in sample size (7103 vs 6975). What should a published correlation carry?</p>
+    
+    <div class="opts"><div class="opt rec">
+  <header><span class="letter">A</span><span class="label">Sample definition + n + exclusion count on every figure</span><span class="b b-ok">recommended</span></header>
+  <dl>
+    <dt>Buys</dt><dd>A reviewer can reproduce n exactly, not just r.</dd>
+    <dt>Costs</dt><dd>More columns.</dd>
+    <dt>Risk</dt><dd>None identified.</dd>
+    <dt>Evidence</dt><dd><ul class="ev"><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/correlations.json" rel="noopener">Published C1</a> <span class="small">n=6975, r=0.4312, games=7103</span></li><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/official/2026-11-13/sources.json" rel="noopener">This session&#x27;s recompute</a> <span class="small">n=7103, r=0.4309 with every row that has a spread and a result</span></li></ul></dd>
+  </dl></div><div class="opt">
+  <header><span class="letter">B</span><span class="label">Publish r with a confidence interval only</span></header>
+  <dl>
+    <dt>Buys</dt><dd>Compact.</dd>
+    <dt>Costs</dt><dd>n cannot be audited, so the interval cannot be checked.</dd>
+    <dt>Risk</dt><dd>The width of the interval is the claim; without n it is unverifiable.</dd>
+    <dt>Evidence</dt><dd><ul class="ev"><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/correlations.json" rel="noopener">Method note</a> <span class="small">Fisher-z interval</span></li></ul></dd>
+  </dl></div></div>
+    <div class="rec-box"><span class="h">Recommendation</span>
+      <strong>A</strong> — The whole repository argues that an unreproducible number is not evidence. That has to apply to its own correlations.</div>
+    <div class="gate"><span class="h">Pre-implementation gate</span>Gate: a correlation row without n and a filter description is a build failure.</div>
+  </div></details><details class="dec" id="D-14" >
+  <summary><span class="id">D-14</span>
+    <span><span class="title">Give the two index.html writers one owner</span><span class="area">Process · 1 generator change + 1 guard</span></span>
+    <span class="status"><span class="b b-ok">ready to decide</span></span></summary>
+  <div class="body">
+    <p class="q">`pipeline/gen_site.py` writes `index.html` and the collect workflow commits it. `tools/build.py` also writes it and runs in the pull-request job, where its output is used only to check that the committed site would pass. Which one owns the file?</p>
+    
+    <div class="opts"><div class="opt rec">
+  <header><span class="letter">A</span><span class="label">build.py stops writing index.html (writes legacy-site.html instead)</span><span class="b b-ok">recommended</span></header>
+  <dl>
+    <dt>Buys</dt><dd>One committed writer for the front door; the pull-request check then audits the page the site actually serves instead of a substitute.</dd>
+    <dt>Costs</dt><dd>One line moves; the legacy page already exists.</dd>
+    <dt>Risk</dt><dd>tools/verify.py reads index.html and needs the same file-list change; another session&#x27;s generator changes shape.</dd>
+    <dt>Evidence</dt><dd><ul class="ev"><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/pipeline/gen_site.py" rel="noopener">Writer 1</a> <span class="small">writes index.html + pages/*</span></li><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/tools/build.py" rel="noopener">Writer 2</a> <span class="small">write_page(&#x27;index.html&#x27;, ...) at line ~366</span></li><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/flags.json" rel="noopener">Existing flag</a> <span class="small">F38 records the same hazard</span></li></ul></dd>
+  </dl></div><div class="opt">
+  <header><span class="letter">B</span><span class="label">Leave both, keep the CI replacement</span></header>
+  <dl>
+    <dt>Buys</dt><dd>No risk today.</dd>
+    <dt>Costs</dt><dd>The pull-request check keeps auditing a generated substitute, and any local or ad-hoc run of tools/build.py still overwrites the front door in the working tree.</dd>
+    <dt>Risk</dt><dd>A regeneration in the wrong context silently republishes a page whose numbers come from a different data layer. This happened in the repository&#x27;s own history.</dd>
+    <dt>Evidence</dt><dd><ul class="ev"><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/.github/workflows/verify.yml" rel="noopener">CI order</a> <span class="small">tools/build.py runs before tools/verify.py</span></li></ul></dd>
+  </dl></div></div>
+    <div class="rec-box"><span class="h">Recommendation</span>
+      <strong>A</strong> — A front door with two authors will drift every time either runs. The fix is one line and the existing flag already documents it.</div>
+    <div class="gate"><span class="h">Pre-implementation gate</span>Gate: a grep-based test fails if more than one renderer writes index.html.</div>
+  </div></details>
+<h2>Blocked</h2><details class="dec" id="D-04" open>
+  <summary><span class="id">D-04</span>
+    <span><span class="title">Decide whether props stay projection-only or get a licensed price source</span><span class="area">Player props · 1 new data source + licence review; no code until a source exists</span></span>
+    <span class="status"><span class="b b-bad">blocked</span></span></summary>
+  <div class="body">
+    <p class="q">No prop market on the site has a price, so no prop bet can be scored. Is a priced prop feed in scope?</p>
+    <div class="warnbox"><strong>Blocked by</strong> <a href="questions.html#Q-11">Q-11</a></div>
+    <div class="opts"><div class="opt rec">
+  <header><span class="letter">A</span><span class="label">Stay projection-only, say so once</span><span class="b b-ok">recommended</span></header>
+  <dl>
+    <dt>Buys</dt><dd>Honest and free; nothing on the site implies a prop edge.</dd>
+    <dt>Costs</dt><dd>Prop combos cannot enter the leaderboard; the &#x27;single bet / parlay / prop combo&#x27; requirement stays partially met.</dd>
+    <dt>Risk</dt><dd>The competition covers two of the three bet types the brief asks for.</dd>
+    <dt>Evidence</dt><dd><ul class="ev"><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/props.json" rel="noopener">Prop price status</a> <span class="small">&#x27;UNVERIFIED / BLANK: no official or book-level price exists&#x27;</span></li></ul></dd>
+  </dl></div><div class="opt">
+  <header><span class="letter">B</span><span class="label">Add a licensed price feed</span></header>
+  <dl>
+    <dt>Buys</dt><dd>Props become scoreable and the competition is complete.</dd>
+    <dt>Costs</dt><dd>A commercial licence, a new collector, and a price-history store; none of that exists today.</dd>
+    <dt>Risk</dt><dd>Licence cost and terms are commercial facts this repository cannot verify. Blank until quoted.</dd>
+    <dt>Evidence</dt><dd><ul class="ev"><li><a href="https://www.nfl.com/standings/division/2026/REG" rel="noopener">No official odds</a> <span class="small">the NFL publishes standings, not prices</span></li></ul></dd>
+  </dl></div></div>
+    <div class="rec-box"><span class="h">Recommendation</span>
+      <strong>A now, B only with a quoted licence</strong> — Publishing a prop leaderboard without prices would be a fabricated edge. The blank is the correct output until a priced source exists.</div>
+    <div class="gate"><span class="h">Pre-implementation gate</span>Gate: a prop bet may only be scored when its price is present and timestamped before kick-off.</div>
+  </div></details><details class="dec" id="D-08" open>
+  <summary><span class="id">D-08</span>
+    <span><span class="title">Publish inactive lists for games already played</span><span class="area">Injury tracking · 1 collector + 1 table; depends on a reachable official page</span></span>
+    <span class="status"><span class="b b-bad">blocked</span></span></summary>
+  <div class="body">
+    <p class="q">Once a game kicks off, the official inactive list is the authoritative availability record. Is it in scope?</p>
+    <div class="warnbox"><strong>Blocked by</strong> <a href="questions.html#Q-09">Q-09</a></div>
+    <div class="opts"><div class="opt rec">
+  <header><span class="letter">A</span><span class="label">Add the official inactives page per week</span><span class="b b-ok">recommended</span></header>
+  <dl>
+    <dt>Buys</dt><dd>Turns &#x27;questionable&#x27; into &#x27;did not dress&#x27;, which is what actually happened.</dd>
+    <dt>Costs</dt><dd>The list is published about 90 minutes before kick-off and is per game, not per player.</dd>
+    <dt>Risk</dt><dd>The nfl.com inactives article URL changes weekly; the collector must fail loudly rather than silently skip.</dd>
+    <dt>Evidence</dt><dd><ul class="ev"><li><a href="https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season" rel="noopener">Inactives entry point</a> <span class="small">week-9 article linked from the injury page news rail</span></li></ul></dd>
+  </dl></div><div class="opt">
+  <header><span class="letter">B</span><span class="label">Leave it out</span></header>
+  <dl>
+    <dt>Buys</dt><dd>No new dependency.</dd>
+    <dt>Costs</dt><dd>Post-game availability analysis stays weaker than pre-game.</dd>
+    <dt>Risk</dt><dd>None, other than the gap.</dd>
+    <dt>Evidence</dt><dd><ul class="ev"><li><a href="https://www.nfl.com/injuries/" rel="noopener">Injury page</a> <span class="small">game status only</span></li></ul></dd>
+  </dl></div></div>
+    <div class="rec-box"><span class="h">Recommendation</span>
+      <strong>A</strong> — Inactives are the only official record of who actually dressed; without them, &#x27;Questionable&#x27; remains an unresolved category forever.</div>
+    <div class="gate"><span class="h">Pre-implementation gate</span>Gate: an inactive row is only published with the game id and the official article URL it came from.</div>
+  </div></details>
+</main>
+<footer><div class="foot-in">
+  <div><strong>NFL Decision Room</strong>Research tool, not betting advice. No official league odds exist, so no market price here is official.
+  Values that could not be verified are blank and carry a source that would settle them.</div>
+  <div>Sections: <a href="decisions.html">Decide</a> · <a href="questions.html">Questions</a> ·
+  <a href="flagged.html">Flagged</a> · <a href="about.html">About &amp; method</a><br>
+  Repository: <a href="https://github.com/kanlerxz87-cyber/NFL1" rel="noopener">kanlerxz87-cyber/NFL1</a></div>
+</div></footer>
+</body>
+</html>

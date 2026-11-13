@@ -1,0 +1,651 @@
+[
+ {
+  "id": "Q-01",
+  "group": "Season state",
+  "status": "answered",
+  "question": "How many 2026 regular-season games have been played, and what are the official standings right now?",
+  "answer": "137 games. Sum of all 32 rows: W=136, L=136, T=2, which is 274 team-games = 137 games. Points for and against both total 6,291.",
+  "unknown": "",
+  "how": {
+   "method": "Read the official division standings page and reconciled it arithmetically against itself.",
+   "evidence": [
+    {
+     "t": "Official standings",
+     "u": "https://www.nfl.com/standings/division/2026/REG",
+     "note": "retrieved 2026-11-13T12:05Z"
+    },
+    {
+     "t": "Captured verbatim",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/official/2026-11-13/standings_2026-11-13.tsv",
+     "note": "32 rows"
+    }
+   ]
+  },
+  "blocks": [
+   "Every strength rating, every own line, the week label on the site"
+  ],
+  "source": {
+   "u": "https://www.nfl.com/standings/division/2026/REG"
+  }
+ },
+ {
+  "id": "Q-02",
+  "group": "Season state",
+  "status": "answered",
+  "question": "What was the result of the Thursday Week 10 game?",
+  "answer": "Commanders 24, Giants 21, FINAL (Thursday, November 12, 8:15 PM ET, Prime Video).",
+  "unknown": "",
+  "how": {
+   "method": "Read the official Week 10 schedule page.",
+   "evidence": [
+    {
+     "t": "Official Week 10 schedule",
+     "u": "https://www.nfl.com/schedules/2026/by-week/week-10",
+     "note": "game card shows FINAL 24-21"
+    }
+   ]
+  },
+  "blocks": [
+   "Sunday's lines for NYG and WAS in any later week",
+   "Updated standings for both clubs"
+  ],
+  "source": {
+   "u": "https://www.nfl.com/schedules/2026/by-week/week-10"
+  }
+ },
+ {
+  "id": "Q-03",
+  "group": "Season state",
+  "status": "answered",
+  "question": "Which clubs are on bye in weeks 10 and 11, and what are the week-11 fixtures?",
+  "answer": "Week 10 byes: CHI, DEN, PHI, TB (4 clubs; 14 fixtures). Week 11 byes: ATL, CLE, GB, LA, NE, SEA (6 clubs; 13 fixtures). Week 11 includes two international games: MIN@SF in Mexico City and the Munich game is week 10 (NE@DET).",
+  "unknown": "",
+  "how": {
+   "method": "Read both official schedule pages and counted clubs per week.",
+   "evidence": [
+    {
+     "t": "Week 10",
+     "u": "https://www.nfl.com/schedules/2026/by-week/week-10",
+     "note": "4 bye clubs listed"
+    },
+    {
+     "t": "Week 11",
+     "u": "https://www.nfl.com/schedules/2026/by-week/week-11",
+     "note": "6 bye clubs listed"
+    },
+    {
+     "t": "Captured",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/official/2026-11-13/schedule_week10_2026-11-13.tsv",
+     "note": "27 fixture rows"
+    }
+   ]
+  },
+  "blocks": [
+   "Waiver and rest modelling",
+   "Which clubs have no injury report this week"
+  ],
+  "source": {
+   "u": "https://www.nfl.com/schedules/2026/by-week/week-10"
+  }
+ },
+ {
+  "id": "Q-04",
+  "group": "Injury tracking",
+  "status": "answered",
+  "question": "How many players are on the official Week 10 injury report, and does the committed scrape match it club by club?",
+  "answer": "296 rows across 26 clubs. Every club that could be read to its last row matches the committed scrape exactly (24 of 24 readable clubs, 0 differences); LAC and BAL publish 'No Injuries Reported'; CHI, DEN, PHI and TB are on bye and publish no table. Two clubs (NO, CIN) are recorded as partial because the page was read in chunks and their first rows were not captured.",
+  "unknown": "Full row-by-row transcripts for NO and CIN at this timestamp.",
+  "how": {
+   "method": "Counted rows in each official club table, then compared with data/model/official_injuries.json.",
+   "evidence": [
+    {
+     "t": "Official injury report",
+     "u": "https://www.nfl.com/injuries/",
+     "note": "Week 10 of the 2026 season"
+    },
+    {
+     "t": "Count audit",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/official/2026-11-13/injury_report_counts_2026-11-13.py",
+     "note": "26 clubs"
+    },
+    {
+     "t": "Committed scrape",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/official_injuries.json",
+     "note": "296 rows"
+    }
+   ]
+  },
+  "blocks": [
+   "Any injury-based signal for NO or CIN this week"
+  ],
+  "partial": "NO, CIN",
+  "source": {
+   "u": "https://www.nfl.com/injuries/"
+  }
+ },
+ {
+  "id": "Q-05",
+  "group": "Injury tracking",
+  "status": "answered",
+  "question": "How many players carry an actual game designation (Out / Doubtful / Questionable) rather than practice-only?",
+  "answer": "9 rows on the captured clubs carry a game designation: WAS 2 (both Out), NYG 1 (Questionable), NE 3 (all Out), DET 3 (all Out). Every other listed player is practice-participation only, because the week is mid-progress.",
+  "unknown": "",
+  "how": {
+   "method": "Read every injury table row and recorded the Game Status column.",
+   "evidence": [
+    {
+     "t": "Captured designations",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/official/2026-11-13/injury_designations_2026-11-13.tsv",
+     "note": "9 rows"
+    },
+    {
+     "t": "Official page",
+     "u": "https://www.nfl.com/injuries/",
+     "note": ""
+    }
+   ]
+  },
+  "blocks": [
+   "Distinguishing 'out' from 'not yet designated' in the availability model"
+  ],
+  "source": {
+   "u": "https://www.nfl.com/injuries/"
+  }
+ },
+ {
+  "id": "Q-06",
+  "group": "Depth charts",
+  "status": "answered",
+  "question": "Does nfl.com publish a depth chart page?",
+  "answer": "No league-wide page and no club page under nfl.com. The probe returns HTTP 200 with the body '404 - Flag on the Play'. Depth charts are published by the 32 club sites instead; several label them 'Unofficial'.",
+  "unknown": "",
+  "how": {
+   "method": "Fetched the nfl.com club depth-chart URL directly and read it; then fetched two club pages.",
+   "evidence": [
+    {
+     "t": "nfl.com probe",
+     "u": "https://www.nfl.com/teams/kansas-city-chiefs/depth-chart",
+     "note": "soft 404"
+    },
+    {
+     "t": "Chiefs",
+     "u": "https://www.chiefs.com/team/depth-chart",
+     "note": "labelled Unofficial"
+    },
+    {
+     "t": "Eagles",
+     "u": "https://www.philadelphiaeagles.com/team/depth-chart",
+     "note": "compiled by club comms"
+    }
+   ]
+  },
+  "blocks": [
+   "The method note under every depth table"
+  ],
+  "source": {
+   "u": "https://www.nfl.com/teams/kansas-city-chiefs/depth-chart"
+  }
+ },
+ {
+  "id": "Q-07",
+  "group": "Depth charts",
+  "status": "partial",
+  "question": "Which of the 32 clubs have a sourced depth chart, and which do not?",
+  "answer": "31 of 32 have a chart that parses into position rows. Houston publishes its chart as an image, so its depth order exists but cannot be transcribed as text here. The scrape holds 934 position rows and 1,990 player slots by rank.",
+  "unknown": "Houston's depth order (image only). Whether any club changed its chart between 2026-11-10 and today.",
+  "how": {
+   "method": "Read the committed 31-club scrape and checked its per-club status field; spot-checked KC against the live club page.",
+   "evidence": [
+    {
+     "t": "31-club scrape",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/session-1505ac8e/depth_charts.json",
+     "note": "clubs_ok 31"
+    },
+    {
+     "t": "HOU page",
+     "u": "https://www.houstontexans.com/team/depth-chart",
+     "note": "chart published as an image"
+    },
+    {
+     "t": "KC live",
+     "u": "https://www.chiefs.com/team/depth-chart",
+     "note": "matches the scrape row for row"
+    }
+   ]
+  },
+  "blocks": [
+   "Next-man-up for HOU",
+   "Any statement of the form 'all 32 clubs'"
+  ],
+  "partial": "HOU (image)",
+  "source": {
+   "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/session-1505ac8e/depth_charts.json"
+  }
+ },
+ {
+  "id": "Q-08",
+  "group": "Depth charts",
+  "status": "unknown",
+  "question": "When each club last updated its depth chart, and how often it changes?",
+  "answer": "Not established. Three clubs carry a date on the page ('Nov. 10, 2026', '11/10/26') and 28 do not, so the chart date is not comparable across clubs.",
+  "unknown": "Publication timestamp per club; update cadence; whether a chart lags a trade or a signing.",
+  "how": {
+   "method": "Read the as_of field for all 31 captured clubs.",
+   "evidence": [
+    {
+     "t": "Depth metadata",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/depth_chart_meta.json",
+     "note": "3 dated clubs, others blank"
+    },
+    {
+     "t": "Scrape",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/session-1505ac8e/depth_charts.json",
+     "note": "as_of field"
+    }
+   ]
+  },
+  "blocks": [
+   "Any claim that a chart is current",
+   "Comparing two clubs' depth on the same day"
+  ],
+  "source": {
+   "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/depth_chart_meta.json"
+  }
+ },
+ {
+  "id": "Q-09",
+  "group": "Injury tracking",
+  "status": "unknown",
+  "question": "Which players actually did not dress for each game?",
+  "answer": "Not established for week 10. The inactives list is published roughly 90 minutes before each kick-off as a per-game news article; it is not in the repository for any week.",
+  "unknown": "Week 10 inactive lists; a stable URL pattern for past weeks.",
+  "how": {
+   "method": "Looked for the official inactives article linked from the injury page news rail.",
+   "evidence": [
+    {
+     "t": "Example inactives article",
+     "u": "https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season",
+     "note": "week 9 only"
+    },
+    {
+     "t": "Injury page",
+     "u": "https://www.nfl.com/injuries/",
+     "note": "game status only"
+    }
+   ]
+  },
+  "blocks": [
+   "Post-game availability analysis",
+   "Any 'did the backup actually play' claim"
+  ],
+  "source": {
+   "u": "https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season"
+  }
+ },
+ {
+  "id": "Q-10",
+  "group": "Strategy",
+  "status": "answered",
+  "question": "Does the published large-sample ROI reproduce from the committed data?",
+  "answer": "Yes for the rules tested. S07 (fade the road favourite of 7+) recomputed from data/s9cb/games.csv gives exactly the published values: 401 bets, 394 decided, 219 wins, 55.58% hit rate, +24.318 units, 6.064% ROI.",
+  "unknown": "",
+  "how": {
+   "method": "Re-implemented the rule and the money arithmetic from the raw columns, using observed prices only.",
+   "evidence": [
+    {
+     "t": "Committed games",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/games.csv",
+     "note": "7,239 rows"
+    },
+    {
+     "t": "Published",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json",
+     "note": "S07 row"
+    }
+   ]
+  },
+  "blocks": [
+   "Nothing - this is a reproduction, and it passed"
+  ],
+  "source": {
+   "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/games.csv"
+  }
+ },
+ {
+  "id": "Q-11",
+  "group": "Strategy",
+  "status": "blocked",
+  "question": "What price can be obtained on a player prop?",
+  "answer": "No price exists anywhere in the repository's sources. The NFL publishes no odds; nflverse publishes no prop prices. Every prop projection is therefore unscoreable.",
+  "unknown": "Any book-level prop price, and its terms of use.",
+  "how": {
+   "method": "Searched the committed sources and the official pages for a prop price column.",
+   "evidence": [
+    {
+     "t": "Prop status",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/props.json",
+     "note": "'UNVERIFIED / BLANK: no official or book-level price exists'"
+    }
+   ]
+  },
+  "blocks": [
+   "Scoring single prop bets",
+   "Prop combos in the competition",
+   "Any prop ROI claim"
+  ],
+  "source": {
+   "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/props.json"
+  }
+ },
+ {
+  "id": "Q-12",
+  "group": "Strategy",
+  "status": "partial",
+  "question": "Do any strategy rules survive all validation gates?",
+  "answer": "No. Both published boards report zero rules passing the full gate set. The observed-price board's best rule (S07) still fails multiple-testing correction (p=0.198 before correction). The -110 board's best row passes 6 of 8 gates and fails significance and stability.",
+  "unknown": "Whether any rule would pass with a longer priced sample.",
+  "how": {
+   "method": "Read both gate matrices and the p-values; reproduced the best rule's numbers.",
+   "evidence": [
+    {
+     "t": "Observed-price board",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json",
+     "note": "0 pass"
+    },
+    {
+     "t": "-110 board",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/strategies.json",
+     "note": "0 pass, 2 WATCH"
+    }
+   ]
+  },
+  "blocks": [
+   "Naming a winner",
+   "Paying a reward",
+   "Presenting any line as a validated signal"
+  ],
+  "source": {
+   "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
+  }
+ },
+ {
+  "id": "Q-13",
+  "group": "Competition",
+  "status": "blocked",
+  "question": "What are the rewards for top-performing strategies?",
+  "answer": "Undefined and unverifiable. No official source publishes a reward value for a research competition; the repository's own flag F12 records this.",
+  "unknown": "Reward units, pool size, payout rule, and who adjudicates.",
+  "how": {
+   "method": "Searched the committed rule files and every cited official source.",
+   "evidence": [
+    {
+     "t": "Rules schema",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/leaderboard_rules.json",
+     "note": "fields only"
+    },
+    {
+     "t": "Flag",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/flags.json",
+     "note": "F12"
+    }
+   ]
+  },
+  "blocks": [
+   "Publishing a reward table",
+   "Any incentive-compatible ranking"
+  ],
+  "source": {
+   "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/leaderboard_rules.json"
+  }
+ },
+ {
+  "id": "Q-14",
+  "group": "Own lines",
+  "status": "answered",
+  "question": "Do the published own lines beat the market?",
+  "answer": "No. On the last completed season's calibration the model's spread error is larger than the market's (10.40 vs 9.72 points of mean absolute error in the 2025 validation set), and the difference's interval excludes zero.",
+  "unknown": "",
+  "how": {
+   "method": "Read the published calibration table.",
+   "evidence": [
+    {
+     "t": "Calibration",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/lines.json",
+     "note": "validation 2025 row"
+    }
+   ]
+  },
+  "blocks": [
+   "Any claim that an own line is sharper than the close"
+  ],
+  "source": {
+   "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/lines.json"
+  }
+ },
+ {
+  "id": "Q-15",
+  "group": "Own lines",
+  "status": "partial",
+  "question": "Where does the market line in the own-lines table come from?",
+  "answer": "Partly answered. The table cites the official schedule page, which does publish results and kick-off times but not closing spreads. The numbers themselves come from the nflverse schedules release that the collector downloads and hash-pins.",
+  "unknown": "Whether the pinned feed's closing lines are a consensus or a single book.",
+  "how": {
+   "method": "Compared the cited link with the numbers and the provenance file.",
+   "evidence": [
+    {
+     "t": "Cited link",
+     "u": "https://www.nfl.com/schedules/2026/by-week/week-10",
+     "note": "no spread column"
+    },
+    {
+     "t": "Provenance",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/provenance.json",
+     "note": "nflverse schedules file + sha256"
+    }
+   ]
+  },
+  "blocks": [
+   "Calling the market column 'official'",
+   "A reader who follows the link and finds no spread"
+  ],
+  "partial": "line provenance",
+  "source": {
+   "u": "https://www.nfl.com/schedules/2026/by-week/week-10"
+  }
+ },
+ {
+  "id": "Q-16",
+  "group": "Correlation",
+  "status": "partial",
+  "question": "What is the correlation between the closing spread and the actual margin, and on what sample?",
+  "answer": "r = 0.4312 is published on n = 6,975 games. Recomputing from the committed file over every game with a spread and a result gives r = 0.4309 on n = 7,103. The value reproduces to three decimals; the sample does not, because the publication's filter is not stated.",
+  "unknown": "The exact filter that takes 7,103 games down to 6,975.",
+  "how": {
+   "method": "Pearson r recomputed directly from the committed columns.",
+   "evidence": [
+    {
+     "t": "Published",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/correlations.json",
+     "note": "C1"
+    },
+    {
+     "t": "Method",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/provenance.json",
+     "note": "file pin"
+    }
+   ]
+  },
+  "blocks": [
+   "Reproducing the confidence interval exactly",
+   "Any claim that a correlation was audited line by line"
+  ],
+  "source": {
+   "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/correlations.json"
+  }
+ },
+ {
+  "id": "Q-17",
+  "group": "Correlation",
+  "status": "answered",
+  "question": "Are parlay legs independent, and does correlation ever survive correction?",
+  "answer": "Of 66 scored pairs, one survives Benjamini-Hochberg at 5%. The published reading states that the surviving pairs reflect the pricing rule (multiplication assumes independence) rather than skill \u2014 which is the correct reading.",
+  "unknown": "",
+  "how": {
+   "method": "Read the pair table and its correction count.",
+   "evidence": [
+    {
+     "t": "Parlays",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/parlays.json",
+     "note": "66 pairs, 1 surviving"
+    }
+   ]
+  },
+  "blocks": [
+   "Promoting a parlay as an edge"
+  ],
+  "source": {
+   "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/parlays.json"
+  }
+ },
+ {
+  "id": "Q-18",
+  "group": "Data",
+  "status": "unknown",
+  "question": "Can the nflverse feeds be independently checked against nfl.com for the historical columns (closing lines, prices)?",
+  "answer": "Partly. Results, standings and injuries reconcile against nfl.com. Closing lines and prices cannot be checked because nfl.com publishes no odds \u2014 the only comparable official page confirms no odds exist.",
+  "unknown": "Any official archive of closing lines.",
+  "how": {
+   "method": "Attempted to find an official odds page.",
+   "evidence": [
+    {
+     "t": "Standings",
+     "u": "https://www.nfl.com/standings/division/2026/REG",
+     "note": "no odds column"
+    },
+    {
+     "t": "Schedule",
+     "u": "https://www.nfl.com/schedules/2026/by-week/week-10",
+     "note": "no odds column"
+    }
+   ]
+  },
+  "blocks": [
+   "Verifying the price history behind every ROI on the site"
+  ],
+  "source": {
+   "u": "https://www.nfl.com/standings/division/2026/REG"
+  }
+ },
+ {
+  "id": "Q-19",
+  "group": "Data",
+  "status": "answered",
+  "question": "Is the standings data internally consistent?",
+  "answer": "Yes. On all 32 rows PF \u2212 PA = NET PTS, the league's points-for total equals its points-against total, wins equal losses, and ties come in pairs.",
+  "unknown": "",
+  "how": {
+   "method": "Reconciled the captured table arithmetically.",
+   "evidence": [
+    {
+     "t": "Captured",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/official/2026-11-13/standings_2026-11-13.tsv",
+     "note": "32 rows"
+    }
+   ]
+  },
+  "blocks": [
+   "Nothing - this is a passing check"
+  ],
+  "source": {
+   "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/official/2026-11-13/standings_2026-11-13.tsv"
+  }
+ },
+ {
+  "id": "Q-20",
+  "group": "Legality",
+  "status": "blocked",
+  "question": "Is it legal to place bets based on any of this, and in which jurisdictions?",
+  "answer": "Not established. Nothing in the repository or its official sources addresses legality; it is a legal question, not a data question.",
+  "unknown": "Jurisdiction, licensing, and terms of any operator.",
+  "how": {
+   "method": "No source exists in the repository for this; recorded as out of scope rather than guessed.",
+   "evidence": [
+    {
+     "t": "Site disclaimer",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/index.html",
+     "note": "'Research tool. Not betting advice.'"
+    }
+   ]
+  },
+  "blocks": [
+   "Any instruction that implies a bet should be placed"
+  ],
+  "source": {
+   "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/index.html"
+  }
+ },
+ {
+  "id": "Q-21",
+  "group": "Site",
+  "status": "answered",
+  "question": "Which generator owns index.html?",
+  "answer": "Two do, and they disagree. pipeline/gen_site.py writes it first; tools/build.py overwrites it with a different template, which is what CI leaves behind.",
+  "unknown": "",
+  "how": {
+   "method": "Ran both generators locally and watched the file change.",
+   "evidence": [
+    {
+     "t": "Writer 1",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pipeline/gen_site.py",
+     "note": "NAV + overview()"
+    },
+    {
+     "t": "Writer 2",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/tools/build.py",
+     "note": "write_page('index.html', ...)"
+    },
+    {
+     "t": "Flag",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/flags.json",
+     "note": "F38"
+    }
+   ]
+  },
+  "blocks": [
+   "Any UI work on the landing page"
+  ],
+  "source": {
+   "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pipeline/gen_site.py"
+  }
+ },
+ {
+  "id": "Q-22",
+  "group": "Season state",
+  "status": "answered",
+  "question": "How many games remain in the 2026 regular season?",
+  "answer": "135. A 32-club, 18-week season is 272 games; 137 are complete, which leaves 135.",
+  "unknown": "",
+  "how": {
+   "method": "Computed from the reconciled standings total and the league schedule length implicit in the committed games file (272).",
+   "evidence": [
+    {
+     "t": "Standings",
+     "u": "https://www.nfl.com/standings/division/2026/REG",
+     "note": "137 games played"
+    },
+    {
+     "t": "Committed snapshot",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/snapshot.json",
+     "note": "games_scheduled 272"
+    }
+   ]
+  },
+  "blocks": [
+   "Season-progress displays",
+   "Any 'games remaining' filter"
+  ],
+  "source": {
+   "u": "https://www.nfl.com/standings/division/2026/REG"
+  }
+ }
+]
