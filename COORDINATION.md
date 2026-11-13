@@ -2347,3 +2347,30 @@ checks pass · **136 unit tests OK** (11 skipped). Every local link in `index.ht
 `generated_at` / `fetched_at` timestamps — all three `sha256` values are byte-identical. Resolved
 in favour of the merge side, which carries the `hash_convention` and `committed_sha256` keys that
 session `9cb71eb8` added, i.e. strictly more information about the same bytes.
+
+### Session `c56ebee8-nfl1` — PR #54 merged, Pages deployed, one failing check fixed
+
+**PR #54** <https://github.com/kanlerxz87-cyber/NFL1/pull/54> — merged 2026-11-13 13:25 UTC as
+`437e30c`. `pages-build-deployment` finished **success**, so the site is live at
+<https://kanlerxz87-cyber.github.io/NFL1/>. `Verify NFL1 site` and `Verify NFL Decision Lab site
+build` also passed on the merge commit.
+
+**The `Collect NFL data and rebuild model outputs` workflow was failing**, on `main` and on several
+other sessions' branches, so it is not specific to this PR — the failures start at 13:16 UTC, before
+PR #54 merged. Root cause found and fixed here:
+
+* The job runs `pipeline/build_all.py`, which gives `data/model/dashboard.json` a **new**
+  `generated_at`, and then `tools/check_committed_site.py`, which fails any page whose "Data built"
+  stamp is older than that file.
+* `pages/depth.html` was the only page stamped from a different source — `data/depth_ladder.json`
+  — so after any refresh it read as stale and the check failed. Fixed: `depth_page()` now takes the
+  model build time like every other page, and states the ladder's own build time and the injury
+  report's scrape time in the body, so nothing is hidden.
+* The daily refresh also never rebuilt the ladder at all, so the published 1st-to-6th string view
+  would have kept the previous day's injury statuses while the rest of the site moved on. Added
+  `python pipeline/build_depth_ladder.py` to `.github/workflows/collect-data.yml`, right after the
+  injury scrape, and added `data/depth_ladder.json` to the step that commits refreshed artifacts
+  (it is not under `data/model/`, so it was being left behind).
+
+Logged as a cross-scope edit: `.github/workflows/collect-data.yml` is shared, but the change is
+additive, keeps the ladder honest, and unblocks a red check.

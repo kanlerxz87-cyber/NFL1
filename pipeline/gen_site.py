@@ -1699,7 +1699,7 @@ def load_rel(rel: str, default=None):
 UNIT_LABEL = {"offense": "Offense", "defense": "Defense", "special_teams": "Special teams"}
 
 
-def depth_page(ladder, snap):
+def depth_page(ladder, snap, dash=None):
     c = ladder.get("counts", {})
     clubs = ladder.get("clubs", [])
     deficient = ladder.get("deficient_slots", [])
@@ -1812,6 +1812,9 @@ def depth_page(ladder, snap):
 
 <section class="panel">
   <div class="panel-head"><h2>How the ladder is built, and what it cannot see</h2></div>
+  <p class="muted">Club depth charts were built {esc(ladder.get("generated_at", ""))}; the injury
+  report they are joined to was scraped {esc(snap.get("generated_at", ""))}. Both are official
+  snapshots, and the page header stamp follows the model build, like every other page.</p>
   <div class="grid-3">
     <div class="stat"><h4>Where the ladder comes from</h4>
       <p>{esc(ladder["method"]["depth_charts"])}</p></div>
@@ -1832,10 +1835,13 @@ def depth_page(ladder, snap):
   {gap_table}
 </section>
 """
+    # Stamp: the model build, like every other page. The ladder's own build time is stated in
+    # the body, because tools/check_committed_site.py reads the header stamp and the daily
+    # refresh rebuilds the model without rebuilding the ladder.
     return page("pages/depth.html", "Depth & Deficiency", body,
                 "First, second, third and fourth string for every club, joined to the official "
                 "injury report, for the offence and the defence separately.",
-                ladder.get("generated_at"))
+                (dash or {}).get("generated_at") or ladder.get("generated_at"))
 
 
 # ------------------------------------------------------------- correlations
@@ -2072,7 +2078,8 @@ def main():
                                              load_rel("data/s9cb/props.json"), dash))
     write("pages/props.html", props_page(props, dash))
     write("pages/injuries.html", injuries_page(avail, dash))
-    write("pages/depth.html", depth_page(load_rel("data/depth_ladder.json"), snap))
+    write("pages/depth.html",
+          depth_page(load_rel("data/depth_ladder.json"), snap, dash))
     write("pages/evidence.html", evidence_page(prov, verif, dash, repl))
     write("pages/questions.html", questions_page(dash))
     write("pages/suggestions.html", suggestions_page(dash))
