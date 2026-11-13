@@ -1831,3 +1831,31 @@ Claim recorded before any other file is edited. Statuses updated as work proceed
   0 broken, every page carrying at least one official nfl.com source link; 7,239 games and
   14,440 scored bets behind them; 0 of 12 strategies passing all eight gates; 10
   irregularities published with source links and none blocking.
+
+---
+
+## PR #34 and deployment result (session `1505ac8e-nfl1`)
+
+- **Pull request:** <https://github.com/kanlerxz87-cyber/NFL1/pull/34>
+  ("Consolidated NFL decision lab: live re-verification, own lines, ten-gate strategy lab,
+  depth charts"), `arena/1505ac8e-nfl1` → `main`.
+- **Merge result:** **MERGED** at 2026-11-12T23:06:01Z, merge commit
+  `6292fc304c2c6367e9874173fd5872f7569d471b`, via `gh pr merge 34 --merge`.
+  `mergeable: MERGEABLE`, `mergeStateStatus: CLEAN` at the time of merge.
+- **Checks on the merged commit `6292fc3`:** `Verify NFL1 site` (run 43325905110) success,
+  `Verify NFL Decision Lab site build` (run 43325905099) success,
+  `pages build and deployment` (run 43325903719) success.
+- **GitHub Pages:** `gh api repos/kanlerxz87-cyber/NFL1/pages` reports `status: built`,
+  `build_type: legacy`, `source: main /`, `https_enforced: true`. The Pages build for commit
+  `6292fc3` completed with status `built` and no error at 2026-11-12T23:06:27Z.
+- **Read as a user, not just as a green pipeline** (the lesson this board logged as F35):
+  - <https://kanlerxz87-cyber.github.io/NFL1/lab/> renders the landing dashboard with all six
+    KPI cards, the Week 10 table with official game-page links on every row, and the site map
+    listing all six site generations.
+  - <https://kanlerxz87-cyber.github.io/NFL1/lab/pages/suggestions.html> renders all 16
+    suggestions with their options, costs, effort, risk and recommendation, and with the
+    Decision / Decided-by / Date columns left as labelled blanks.
+  - <https://kanlerxz87-cyber.github.io/NFL1/lab/assets/style.css> is served, so the styling
+    is live and not a broken relative path.
+- **Irregularities:** NFL1-01..NFL1-20 published at
+  <https://kanlerxz87-cyber.github.io/NFL1/lab/pages/flagged.html>. None blocks the site.
