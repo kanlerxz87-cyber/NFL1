@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-13T13:24:45+00:00",
+ "generated_at": "2026-11-13T13:39:20+00:00",
  "session": "9cb71eb8-nfl1",
  "hash_convention": "`sha256`/`bytes` describe the downloaded asset in build/raw/ (not committed). `committed_sha256`/`committed_bytes` describe the file actually stored in data/s9cb/, which is the one a reviewer can check. The two differ because the extract is filtered to REG games and a fixed column set before it is written.",
  "source_repo": "https://github.com/nflverse/nflverse-data",
@@ -15,7 +15,7 @@
    "description": "Game results, closing spread/total/moneylines with the price on each side, rest days, roof, surface, temperature, wind, division flag, referee, starting QBs",
    "bytes": 2190032,
    "status": "ok",
-   "fetched_at": "2026-11-13T13:24:40+00:00",
+   "fetched_at": "2026-11-13T13:39:14+00:00",
    "sha256": "50939c24d43e78f3369227d5c800a6bc1187b343ac35321102d79bd523f36395",
    "hash_describes": "downloaded asset (build/raw/, not committed)",
    "committed_bytes": 1665522,
@@ -31,7 +31,7 @@
    "description": "Club directory: abbreviation, name, conference, division",
    "bytes": 18919,
    "status": "ok",
-   "fetched_at": "2026-11-13T13:24:40+00:00",
+   "fetched_at": "2026-11-13T13:39:14+00:00",
    "sha256": "4eab559fcf89cb4eaf61cb63a88abc47b01b6c9049187c59f3efe95888c3d048",
    "hash_describes": "downloaded asset (build/raw/, not committed)",
    "committed_bytes": null,
@@ -47,7 +47,7 @@
    "description": "Player master (GSIS id, position, years of experience, latest team)",
    "bytes": 7308461,
    "status": "ok",
-   "fetched_at": "2026-11-13T13:24:41+00:00",
+   "fetched_at": "2026-11-13T13:39:14+00:00",
    "sha256": "f90a9d0009b8e5d50353b0013971b466534b25cc2f98b7ad14d39361356975d7",
    "hash_describes": "downloaded asset (build/raw/, not committed)"
   }
@@ -115,7 +115,7 @@
    "bytes": 499988,
    "official_upstream": "https://www.nfl.com/stats/player-stats/",
    "status": "ok",
-   "sha256": "6d540b00c58352038315b589c63430f26492ab9d80b5bdeb3af395fb720af5da"
+   "sha256": "fecb5ef839503ab6a860a01087939357a5e834421559e659faaffd829fed6e7b"
   }
  ],
  "injury_files": [
