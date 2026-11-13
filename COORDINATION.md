@@ -1783,3 +1783,44 @@ _This claim is committed and pushed before any other file is touched, per the br
 | Merges from `origin/main` | two (PRs #21–#39, then the s9cb refresh); every conflict resolved keeping both sides — COORDINATION.md, `data/suggestions.json` (27 ids), `pipeline/content.py` (main's implemented S13 + SA-01/02 plus this session's S14/S15/Q21), `pipeline/gen_site.py` (main's signal labels F15–F22 plus this session's sections page and F23–F25), `tools/build.py` (this session's `write_readme`, subsuming main's template addition), `analysis/correlations.py` (main's A1 fix kept, this session's audit gate kept) |
 | Open items left for reviewers | F38 + S14 (CI audits a regenerated index substitute) · F40 + S13/S24 (`[skip ci]` data pushes run no verify) · Q28/Q21 (authoritative generation) · S22 (four flag registers) · S25 / `R-a2cea255-02` (referee replication as a CI gate) |
 | Note for session `9cb71eb8` | `Collect s9cb research extract` failed once ("Commit the extract") on this branch's push `fd8133e` — their workflow, not a site gate; PR #41 checks were green. Logged here, their file not edited. |
+
+
+---
+
+# Session `c56ebee8-nfl1` — final integration, fresh official re-verification, unified category site
+
+| Item | Value |
+|---|---|
+| This session ID | `c56ebee8-nfl1` |
+| This session branch | `arena/c56ebee8-nfl1` (fixed by Arena; the brief's `session-<id>/<task>` convention cannot be used here — same deviation as every earlier session) |
+| Base commit | `09c03f052aa3bebb62acc23cb17eefd65f0c512e` (= `origin/main` at start; 0 behind / 0 ahead) |
+| Board read before work | yes — all 1,785 lines of `COORDINATION.md` read before any edit |
+| Role | **final integration session** for the current state of the repo |
+
+**Board state at claim:** no other session branch exists on the remote (`git branch -r` shows only
+`origin/main`), so no other session owns an unclaimed task. Three PRs are open (`#31`, `#37`, `#43`);
+`#37` and `#43` are COORDINATION-only records and are CONFLICTING, `#31` is a content PR from
+`6e8ca348-nfl1` whose branch has since been deleted. This session does not edit other sessions'
+branches and does not close their PRs.
+
+## Task board (this session)
+
+Status values: `unclaimed` | `in progress` | `done` | `needs review`.
+
+| ID | Task | Status | Owner | File scope | Evidence |
+|---|---|---|---|---|---|
+| C1 | Read the board, claim tasks, push the claim first | in progress | `c56ebee8` | `COORDINATION.md` | this section, pushed before any other file is touched |
+| C2 | Fresh official-source re-verification (2026-11-13): standings, injury report, Week-10 schedule, depth charts; line-by-line repo review with source links | unclaimed→in progress | `c56ebee8` | `docs/review/session-c56ebee8.md`, `data/verified/` (additive, dated), `data/flags.json` | new flags C-Axx published on the Flagged page |
+| C3 | Unified category site: one clean landing page, sidebar navigation grouped by category, every generation reachable, no broken links | unclaimed→in progress | `c56ebee8` | `pipeline/gen_site.py`, `assets/style.css`, `index.html`, `pages/*.html` (additive pages) | link check + reachability check |
+| C4 | Injury / depth deficiency register: 2nd, 3rd, 4th-string replacements by position group, offence and defence, joined to the official report | unclaimed→in progress | `c56ebee8` | `pages/depth.html` (new), `data/flags.json` | rows sourced to nfl.com |
+| C5 | Executive summary refreshed from the current data (not stale counts) | unclaimed→in progress | `c56ebee8` | `pages/executive.html`, `pipeline/gen_site.py` | every figure traced to a source |
+| C6 | Final integration: run every gate, rebuild, link check, PR → `main`, merge, confirm Pages deploy, record here | unclaimed | `c56ebee8` | `COORDINATION.md` (+ PR) | recorded below after merge |
+
+**Not touched by this session:** `docs/`, `verified-lab/`, `referee/`, `dashboard/`, `lab/`,
+`research/`, `s9cb/`, `data/s9cb/`, `analysis/`, `data/model/`, `data/verified/model/`,
+`.github/workflows/` (except nothing), `tools/` (read-only), `tests/` (read-only).
+`index.html` and `pages/` are owned by the `pipeline/gen_site.py` generation; this session edits
+that generator (an integration-session output, per the brief) and re-runs it rather than
+hand-editing HTML.
+
+_This claim is committed and pushed before any other file is touched, per the brief._
