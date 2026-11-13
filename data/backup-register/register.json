@@ -1,0 +1,358 @@
+{
+  "generated_at": "2026-11-13T12:39:30Z",
+  "status": "ok",
+  "week": 10,
+  "season": 2026,
+  "sources": {
+    "injury_report": {
+      "url": "https://www.nfl.com/injuries/",
+      "generated_at": "2026-11-12T23:37:48+00:00",
+      "html_sha256": "dbb91ca6ce0076c44c7db0d9d89db2b976136b4446b1b49dce988efe11ebf572",
+      "rows": 296
+    },
+    "rosters": {
+      "index": "https://www.nfl.com/teams/",
+      "generated_at": "2026-11-13T12:39:30Z",
+      "clubs": []
+    }
+  },
+  "method": [
+    "Designations: official nfl.com game status Out, Doubtful or Questionable (week 10 report).",
+    "Match: the injury row is matched to the official roster row of the same club by full name; no match or more than one match is flagged and no backups are listed.",
+    "Backups: other players on the same club's official roster with roster status ACT and the same position group (mapping in tools/build_backup_register.py). Listed alphabetically, not ranked.",
+    "Depth order (2nd / 3rd / 4th string) is not published by nfl.com, so it is left blank.",
+    "Generic 'DB' roster players cannot be assigned to CB or S, so they are listed but not counted.",
+    "Roster pages show the roster at the time they were fetched; they are not a Week 10 snapshot."
+  ],
+  "summary": {
+    "designations_total": 9,
+    "by_status": {
+      "Out": 8,
+      "Questionable": 1
+    },
+    "matched_to_roster": 0,
+    "unmatched": 9,
+    "with_zero_active_backups": 0,
+    "clubs_with_designations": 4,
+    "rosters_parsed": 0,
+    "roster_status_values": {},
+    "name_link_mismatches": 0
+  },
+  "clubs": [
+    {
+      "club": "DET",
+      "roster_url": null,
+      "designations": 3,
+      "matched": 0,
+      "min_active_same_group_backups": null,
+      "designated_players": "Cade Mays (Out), D.J. Reed (Out), Kerby Joseph (Out)"
+    },
+    {
+      "club": "NE",
+      "roster_url": null,
+      "designations": 3,
+      "matched": 0,
+      "min_active_same_group_backups": null,
+      "designated_players": "Ben Brown (Out), Carlton Davis III (Out), TreVeyon Henderson (Out)"
+    },
+    {
+      "club": "NYG",
+      "roster_url": null,
+      "designations": 1,
+      "matched": 0,
+      "min_active_same_group_backups": null,
+      "designated_players": "Malik Harrison (Questionable)"
+    },
+    {
+      "club": "WAS",
+      "roster_url": null,
+      "designations": 2,
+      "matched": 0,
+      "min_active_same_group_backups": null,
+      "designated_players": "Colson Yankoff (Out), Lucas Patrick (Out)"
+    }
+  ],
+  "entries": [
+    {
+      "week": 10,
+      "club": "DET",
+      "player": "Cade Mays",
+      "injury_position": "C",
+      "game_status": "Out",
+      "injury": "Ankle",
+      "practice_status": "Did Not Participate In Practice",
+      "injury_player_url": "https://www.nfl.com/players/cade-mays/",
+      "injury_source": "https://www.nfl.com/injuries/",
+      "roster_url": null,
+      "roster_position": null,
+      "roster_status": null,
+      "roster_experience": null,
+      "match": "club not in roster scrape",
+      "backups": [],
+      "backup_count": 0,
+      "non_active_same_group": 0,
+      "unassigned_db": [],
+      "depth_rank": null,
+      "depth_note": "nfl.com publishes no depth order; rank intentionally blank",
+      "row_flags": [
+        "club missing from roster scrape"
+      ]
+    },
+    {
+      "week": 10,
+      "club": "DET",
+      "player": "D.J. Reed",
+      "injury_position": "CB",
+      "game_status": "Out",
+      "injury": "Hip",
+      "practice_status": "Did Not Participate In Practice",
+      "injury_player_url": "https://www.nfl.com/players/d-j-reed/",
+      "injury_source": "https://www.nfl.com/injuries/",
+      "roster_url": null,
+      "roster_position": null,
+      "roster_status": null,
+      "roster_experience": null,
+      "match": "club not in roster scrape",
+      "backups": [],
+      "backup_count": 0,
+      "non_active_same_group": 0,
+      "unassigned_db": [],
+      "depth_rank": null,
+      "depth_note": "nfl.com publishes no depth order; rank intentionally blank",
+      "row_flags": [
+        "club missing from roster scrape"
+      ]
+    },
+    {
+      "week": 10,
+      "club": "DET",
+      "player": "Kerby Joseph",
+      "injury_position": "S",
+      "game_status": "Out",
+      "injury": "Knee",
+      "practice_status": "Full Participation in Practice",
+      "injury_player_url": "https://www.nfl.com/players/kerby-joseph/",
+      "injury_source": "https://www.nfl.com/injuries/",
+      "roster_url": null,
+      "roster_position": null,
+      "roster_status": null,
+      "roster_experience": null,
+      "match": "club not in roster scrape",
+      "backups": [],
+      "backup_count": 0,
+      "non_active_same_group": 0,
+      "unassigned_db": [],
+      "depth_rank": null,
+      "depth_note": "nfl.com publishes no depth order; rank intentionally blank",
+      "row_flags": [
+        "club missing from roster scrape"
+      ]
+    },
+    {
+      "week": 10,
+      "club": "NE",
+      "player": "Ben Brown",
+      "injury_position": "C",
+      "game_status": "Out",
+      "injury": "Knee",
+      "practice_status": "Did Not Participate In Practice",
+      "injury_player_url": "https://www.nfl.com/players/ben-brown-2/",
+      "injury_source": "https://www.nfl.com/injuries/",
+      "roster_url": null,
+      "roster_position": null,
+      "roster_status": null,
+      "roster_experience": null,
+      "match": "club not in roster scrape",
+      "backups": [],
+      "backup_count": 0,
+      "non_active_same_group": 0,
+      "unassigned_db": [],
+      "depth_rank": null,
+      "depth_note": "nfl.com publishes no depth order; rank intentionally blank",
+      "row_flags": [
+        "club missing from roster scrape"
+      ]
+    },
+    {
+      "week": 10,
+      "club": "NE",
+      "player": "Carlton Davis III",
+      "injury_position": "CB",
+      "game_status": "Out",
+      "injury": "Knee",
+      "practice_status": "Did Not Participate In Practice",
+      "injury_player_url": "https://www.nfl.com/players/carlton-davis/",
+      "injury_source": "https://www.nfl.com/injuries/",
+      "roster_url": null,
+      "roster_position": null,
+      "roster_status": null,
+      "roster_experience": null,
+      "match": "club not in roster scrape",
+      "backups": [],
+      "backup_count": 0,
+      "non_active_same_group": 0,
+      "unassigned_db": [],
+      "depth_rank": null,
+      "depth_note": "nfl.com publishes no depth order; rank intentionally blank",
+      "row_flags": [
+        "club missing from roster scrape"
+      ]
+    },
+    {
+      "week": 10,
+      "club": "NE",
+      "player": "TreVeyon Henderson",
+      "injury_position": "RB",
+      "game_status": "Out",
+      "injury": "Illness",
+      "practice_status": "Did Not Participate In Practice",
+      "injury_player_url": "https://www.nfl.com/players/treveyon-henderson/",
+      "injury_source": "https://www.nfl.com/injuries/",
+      "roster_url": null,
+      "roster_position": null,
+      "roster_status": null,
+      "roster_experience": null,
+      "match": "club not in roster scrape",
+      "backups": [],
+      "backup_count": 0,
+      "non_active_same_group": 0,
+      "unassigned_db": [],
+      "depth_rank": null,
+      "depth_note": "nfl.com publishes no depth order; rank intentionally blank",
+      "row_flags": [
+        "club missing from roster scrape"
+      ]
+    },
+    {
+      "week": 10,
+      "club": "NYG",
+      "player": "Malik Harrison",
+      "injury_position": "LB",
+      "game_status": "Questionable",
+      "injury": "Groin",
+      "practice_status": "Limited Participation in Practice",
+      "injury_player_url": "https://www.nfl.com/players/malik-harrison/",
+      "injury_source": "https://www.nfl.com/injuries/",
+      "roster_url": null,
+      "roster_position": null,
+      "roster_status": null,
+      "roster_experience": null,
+      "match": "club not in roster scrape",
+      "backups": [],
+      "backup_count": 0,
+      "non_active_same_group": 0,
+      "unassigned_db": [],
+      "depth_rank": null,
+      "depth_note": "nfl.com publishes no depth order; rank intentionally blank",
+      "row_flags": [
+        "club missing from roster scrape"
+      ]
+    },
+    {
+      "week": 10,
+      "club": "WAS",
+      "player": "Colson Yankoff",
+      "injury_position": "TE",
+      "game_status": "Out",
+      "injury": "Knee",
+      "practice_status": "Did Not Participate In Practice",
+      "injury_player_url": "https://www.nfl.com/players/colson-yankoff/",
+      "injury_source": "https://www.nfl.com/injuries/",
+      "roster_url": null,
+      "roster_position": null,
+      "roster_status": null,
+      "roster_experience": null,
+      "match": "club not in roster scrape",
+      "backups": [],
+      "backup_count": 0,
+      "non_active_same_group": 0,
+      "unassigned_db": [],
+      "depth_rank": null,
+      "depth_note": "nfl.com publishes no depth order; rank intentionally blank",
+      "row_flags": [
+        "club missing from roster scrape"
+      ]
+    },
+    {
+      "week": 10,
+      "club": "WAS",
+      "player": "Lucas Patrick",
+      "injury_position": "C",
+      "game_status": "Out",
+      "injury": "Concussion",
+      "practice_status": "Did Not Participate In Practice",
+      "injury_player_url": "https://www.nfl.com/players/lucas-patrick/",
+      "injury_source": "https://www.nfl.com/injuries/",
+      "roster_url": null,
+      "roster_position": null,
+      "roster_status": null,
+      "roster_experience": null,
+      "match": "club not in roster scrape",
+      "backups": [],
+      "backup_count": 0,
+      "non_active_same_group": 0,
+      "unassigned_db": [],
+      "depth_rank": null,
+      "depth_note": "nfl.com publishes no depth order; rank intentionally blank",
+      "row_flags": [
+        "club missing from roster scrape"
+      ]
+    }
+  ],
+  "flags": [
+    {
+      "id": "X-CLUB-MAP",
+      "kind": "club mapping",
+      "text": "Lucas Patrick (WAS): club not in roster scrape",
+      "source": "https://www.nfl.com/injuries/"
+    },
+    {
+      "id": "X-CLUB-MAP",
+      "kind": "club mapping",
+      "text": "Colson Yankoff (WAS): club not in roster scrape",
+      "source": "https://www.nfl.com/injuries/"
+    },
+    {
+      "id": "X-CLUB-MAP",
+      "kind": "club mapping",
+      "text": "Malik Harrison (NYG): club not in roster scrape",
+      "source": "https://www.nfl.com/injuries/"
+    },
+    {
+      "id": "X-CLUB-MAP",
+      "kind": "club mapping",
+      "text": "Ben Brown (NE): club not in roster scrape",
+      "source": "https://www.nfl.com/injuries/"
+    },
+    {
+      "id": "X-CLUB-MAP",
+      "kind": "club mapping",
+      "text": "Carlton Davis III (NE): club not in roster scrape",
+      "source": "https://www.nfl.com/injuries/"
+    },
+    {
+      "id": "X-CLUB-MAP",
+      "kind": "club mapping",
+      "text": "TreVeyon Henderson (NE): club not in roster scrape",
+      "source": "https://www.nfl.com/injuries/"
+    },
+    {
+      "id": "X-CLUB-MAP",
+      "kind": "club mapping",
+      "text": "Kerby Joseph (DET): club not in roster scrape",
+      "source": "https://www.nfl.com/injuries/"
+    },
+    {
+      "id": "X-CLUB-MAP",
+      "kind": "club mapping",
+      "text": "Cade Mays (DET): club not in roster scrape",
+      "source": "https://www.nfl.com/injuries/"
+    },
+    {
+      "id": "X-CLUB-MAP",
+      "kind": "club mapping",
+      "text": "D.J. Reed (DET): club not in roster scrape",
+      "source": "https://www.nfl.com/injuries/"
+    }
+  ]
+}
