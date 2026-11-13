@@ -45,9 +45,172 @@
  "min_bets": 200,
  "strategies": [
   {
+   "strategy": "X01 Own spread edge >= 1.5 pts",
+   "n_bets": 4047,
+   "considered_games": 7104,
+   "wins": 2067,
+   "losses": 1980,
+   "hit_rate": 0.5107,
+   "break_even_hit_rate": 0.5161,
+   "profit_units": -38.566,
+   "roi_pct": -0.953,
+   "avg_decimal": 1.9399,
+   "t_stat": -0.6246,
+   "p_value": 0.532262,
+   "roi_ci95": [
+    -0.039,
+    0.0208
+   ],
+   "holdout_n": 523,
+   "holdout_roi_pct": -3.406,
+   "seasons": [
+    {
+     "season": 2006,
+     "n_bets": 164,
+     "hit_rate": 0.5488,
+     "roi_pct": 7.464
+    },
+    {
+     "season": 2007,
+     "n_bets": 206,
+     "hit_rate": 0.4612,
+     "roi_pct": -9.527
+    },
+    {
+     "season": 2008,
+     "n_bets": 141,
+     "hit_rate": 0.5106,
+     "roi_pct": -0.032
+    },
+    {
+     "season": 2009,
+     "n_bets": 194,
+     "hit_rate": 0.4691,
+     "roi_pct": -9.353
+    },
+    {
+     "season": 2010,
+     "n_bets": 194,
+     "hit_rate": 0.5722,
+     "roi_pct": 11.859
+    },
+    {
+     "season": 2011,
+     "n_bets": 184,
+     "hit_rate": 0.4891,
+     "roi_pct": -4.938
+    },
+    {
+     "season": 2012,
+     "n_bets": 207,
+     "hit_rate": 0.4783,
+     "roi_pct": -6.261
+    },
+    {
+     "season": 2013,
+     "n_bets": 205,
+     "hit_rate": 0.5024,
+     "roi_pct": -2.176
+    },
+    {
+     "season": 2014,
+     "n_bets": 192,
+     "hit_rate": 0.5104,
+     "roi_pct": -0.335
+    },
+    {
+     "season": 2015,
+     "n_bets": 203,
+     "hit_rate": 0.5074,
+     "roi_pct": -0.993
+    },
+    {
+     "season": 2016,
+     "n_bets": 185,
+     "hit_rate": 0.5514,
+     "roi_pct": 7.258
+    },
+    {
+     "season": 2017,
+     "n_bets": 206,
+     "hit_rate": 0.5243,
+     "roi_pct": 1.709
+    },
+    {
+     "season": 2018,
+     "n_bets": 194,
+     "hit_rate": 0.5412,
+     "roi_pct": 4.848
+    },
+    {
+     "season": 2019,
+     "n_bets": 204,
+     "hit_rate": 0.5049,
+     "roi_pct": -2.254
+    },
+    {
+     "season": 2020,
+     "n_bets": 202,
+     "hit_rate": 0.5644,
+     "roi_pct": 8.752
+    },
+    {
+     "season": 2021,
+     "n_bets": 221,
+     "hit_rate": 0.4932,
+     "roi_pct": -4.71
+    },
+    {
+     "season": 2022,
+     "n_bets": 215,
+     "hit_rate": 0.5302,
+     "roi_pct": 2.474
+    },
+    {
+     "season": 2023,
+     "n_bets": 207,
+     "hit_rate": 0.4638,
+     "roi_pct": -11.287
+    },
+    {
+     "season": 2024,
+     "n_bets": 214,
+     "hit_rate": 0.5047,
+     "roi_pct": -3.13
+    },
+    {
+     "season": 2025,
+     "n_bets": 206,
+     "hit_rate": 0.534,
+     "roi_pct": 2.054
+    },
+    {
+     "season": 2026,
+     "n_bets": 103,
+     "hit_rate": 0.4466,
+     "roi_pct": -14.897
+    }
+   ],
+   "seasons_positive": 8,
+   "seasons_played": 21,
+   "bh_q": 0.951313,
+   "gates": {
+    "G1": true,
+    "G2": true,
+    "G3": true,
+    "G4": false,
+    "G5": false,
+    "G6": false,
+    "G7": false,
+    "G8": false
+   },
+   "gates_passed": 3,
+   "status": "FAIL"
+  },
+  {
    "strategy": "X07 Own rating edge vs market >= 2.0 pts",
    "n_bets": 3731,
-   "considered_games": 7103,
+   "considered_games": 7104,
    "wins": 1908,
    "losses": 1823,
    "hit_rate": 0.5114,
@@ -208,172 +371,9 @@
    "status": "FAIL"
   },
   {
-   "strategy": "X01 Own spread edge >= 1.5 pts",
-   "n_bets": 4046,
-   "considered_games": 7103,
-   "wins": 2067,
-   "losses": 1979,
-   "hit_rate": 0.5109,
-   "break_even_hit_rate": 0.5161,
-   "profit_units": -37.566,
-   "roi_pct": -0.928,
-   "avg_decimal": 1.9399,
-   "t_stat": -0.6084,
-   "p_value": 0.542896,
-   "roi_ci95": [
-    -0.0397,
-    0.0213
-   ],
-   "holdout_n": 522,
-   "holdout_roi_pct": -3.221,
-   "seasons": [
-    {
-     "season": 2006,
-     "n_bets": 164,
-     "hit_rate": 0.5488,
-     "roi_pct": 7.464
-    },
-    {
-     "season": 2007,
-     "n_bets": 206,
-     "hit_rate": 0.4612,
-     "roi_pct": -9.527
-    },
-    {
-     "season": 2008,
-     "n_bets": 141,
-     "hit_rate": 0.5106,
-     "roi_pct": -0.032
-    },
-    {
-     "season": 2009,
-     "n_bets": 194,
-     "hit_rate": 0.4691,
-     "roi_pct": -9.353
-    },
-    {
-     "season": 2010,
-     "n_bets": 194,
-     "hit_rate": 0.5722,
-     "roi_pct": 11.859
-    },
-    {
-     "season": 2011,
-     "n_bets": 184,
-     "hit_rate": 0.4891,
-     "roi_pct": -4.938
-    },
-    {
-     "season": 2012,
-     "n_bets": 207,
-     "hit_rate": 0.4783,
-     "roi_pct": -6.261
-    },
-    {
-     "season": 2013,
-     "n_bets": 205,
-     "hit_rate": 0.5024,
-     "roi_pct": -2.176
-    },
-    {
-     "season": 2014,
-     "n_bets": 192,
-     "hit_rate": 0.5104,
-     "roi_pct": -0.335
-    },
-    {
-     "season": 2015,
-     "n_bets": 203,
-     "hit_rate": 0.5074,
-     "roi_pct": -0.993
-    },
-    {
-     "season": 2016,
-     "n_bets": 185,
-     "hit_rate": 0.5514,
-     "roi_pct": 7.258
-    },
-    {
-     "season": 2017,
-     "n_bets": 206,
-     "hit_rate": 0.5243,
-     "roi_pct": 1.709
-    },
-    {
-     "season": 2018,
-     "n_bets": 194,
-     "hit_rate": 0.5412,
-     "roi_pct": 4.848
-    },
-    {
-     "season": 2019,
-     "n_bets": 204,
-     "hit_rate": 0.5049,
-     "roi_pct": -2.254
-    },
-    {
-     "season": 2020,
-     "n_bets": 202,
-     "hit_rate": 0.5644,
-     "roi_pct": 8.752
-    },
-    {
-     "season": 2021,
-     "n_bets": 221,
-     "hit_rate": 0.4932,
-     "roi_pct": -4.71
-    },
-    {
-     "season": 2022,
-     "n_bets": 215,
-     "hit_rate": 0.5302,
-     "roi_pct": 2.474
-    },
-    {
-     "season": 2023,
-     "n_bets": 207,
-     "hit_rate": 0.4638,
-     "roi_pct": -11.287
-    },
-    {
-     "season": 2024,
-     "n_bets": 214,
-     "hit_rate": 0.5047,
-     "roi_pct": -3.13
-    },
-    {
-     "season": 2025,
-     "n_bets": 206,
-     "hit_rate": 0.534,
-     "roi_pct": 2.054
-    },
-    {
-     "season": 2026,
-     "n_bets": 102,
-     "hit_rate": 0.451,
-     "roi_pct": -14.062
-    }
-   ],
-   "seasons_positive": 8,
-   "seasons_played": 21,
-   "bh_q": 0.951313,
-   "gates": {
-    "G1": true,
-    "G2": true,
-    "G3": true,
-    "G4": false,
-    "G5": false,
-    "G6": false,
-    "G7": false,
-    "G8": false
-   },
-   "gates_passed": 3,
-   "status": "FAIL"
-  },
-  {
    "strategy": "X08 Under when both clubs' SOS to date is above league average",
    "n_bets": 1244,
-   "considered_games": 7103,
+   "considered_games": 7104,
    "wins": 645,
    "losses": 599,
    "hit_rate": 0.5185,
@@ -535,23 +535,23 @@
   },
   {
    "strategy": "X11 Recency: back the club with the better last-5 form when it is an underdog",
-   "n_bets": 1924,
-   "considered_games": 7103,
-   "wins": 991,
+   "n_bets": 1925,
+   "considered_games": 7104,
+   "wins": 992,
    "losses": 933,
-   "hit_rate": 0.5151,
+   "hit_rate": 0.5153,
    "break_even_hit_rate": 0.5172,
-   "profit_units": -6.877,
-   "roi_pct": -0.357,
+   "profit_units": -5.968,
+   "roi_pct": -0.31,
    "avg_decimal": 1.9354,
-   "t_stat": -0.1619,
-   "p_value": 0.871357,
+   "t_stat": -0.1405,
+   "p_value": 0.888268,
    "roi_ci95": [
-    -0.0472,
-    0.0401
+    -0.0476,
+    0.0395
    ],
-   "holdout_n": 264,
-   "holdout_roi_pct": -6.521,
+   "holdout_n": 265,
+   "holdout_roi_pct": -6.153,
    "seasons": [
     {
      "season": 2006,
@@ -675,9 +675,9 @@
     },
     {
      "season": 2026,
-     "n_bets": 40,
-     "hit_rate": 0.45,
-     "roi_pct": -13.872
+     "n_bets": 41,
+     "hit_rate": 0.4634,
+     "roi_pct": -11.316
     }
    ],
    "seasons_positive": 9,
@@ -699,7 +699,7 @@
   {
    "strategy": "X04 Own total edge >= 5.0 pts",
    "n_bets": 1458,
-   "considered_games": 7103,
+   "considered_games": 7104,
    "wins": 750,
    "losses": 708,
    "hit_rate": 0.5144,
@@ -862,7 +862,7 @@
   {
    "strategy": "X02 Own spread edge >= 3.0 pts",
    "n_bets": 3116,
-   "considered_games": 7103,
+   "considered_games": 7104,
    "wins": 1584,
    "losses": 1532,
    "hit_rate": 0.5083,
@@ -1025,7 +1025,7 @@
   {
    "strategy": "X03 Own total edge >= 3.0 pts",
    "n_bets": 2696,
-   "considered_games": 7103,
+   "considered_games": 7104,
    "wins": 1365,
    "losses": 1331,
    "hit_rate": 0.5063,
@@ -1188,7 +1188,7 @@
   {
    "strategy": "X09 Over when both clubs' SOS to date is below league average",
    "n_bets": 1139,
-   "considered_games": 7103,
+   "considered_games": 7104,
    "wins": 570,
    "losses": 569,
    "hit_rate": 0.5004,
@@ -1351,7 +1351,7 @@
   {
    "strategy": "X05 Fade a club with a lucky record (luck >= +1.5 wins) when it is favoured",
    "n_bets": 241,
-   "considered_games": 7103,
+   "considered_games": 7104,
    "wins": 120,
    "losses": 121,
    "hit_rate": 0.4979,
@@ -1514,7 +1514,7 @@
   {
    "strategy": "X10 Divisional underdog of 6.5+ with a positive own-rating edge",
    "n_bets": 155,
-   "considered_games": 7103,
+   "considered_games": 7104,
    "wins": 77,
    "losses": 78,
    "hit_rate": 0.4968,
@@ -1677,7 +1677,7 @@
   {
    "strategy": "X06 Back a club with an unlucky record (luck <= -1.5 wins) when it is an underdog",
    "n_bets": 178,
-   "considered_games": 7103,
+   "considered_games": 7104,
    "wins": 83,
    "losses": 95,
    "hit_rate": 0.4663,
@@ -1839,12 +1839,12 @@
   }
  ],
  "totals": {
-  "bets_scored": 19928,
+  "bets_scored": 19930,
   "rules": 11,
   "pass": 0,
   "watch": 0,
   "fail": 11,
-  "games_in_sample": 7103,
+  "games_in_sample": 7104,
   "seasons": [
    1999,
    2026

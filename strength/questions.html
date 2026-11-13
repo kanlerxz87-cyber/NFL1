@@ -18,7 +18,7 @@
     <p class="eyebrow">Strength of schedule study</p>
     <h1>Questions</h1>
     <p class="standfirst">What is known, what is unknown, and the exact thing that would settle each open question.</p>
-    <p class="timestamp">Built 2026-11-13T13:02:45+00:00 · every table row links to the source it came from · blanks are deliberate</p>
+    <p class="timestamp">Built 2026-11-13T13:14:06+00:00 · every table row links to the source it came from · blanks are deliberate</p>
     
   </section>
   
@@ -28,14 +28,14 @@
   
 <div class="q">
   <h3>Q-SOS-01 — Does strength of schedule, measured walk-forward, add information beyond the closing line? <span class="badge pass">ANSWERED</span></h3>
-  <p>Own ratings correlate r=0.466 with the closing spread over 7,103 games, but the own line is less accurate than the market out of sample: spread MAE 10.714 vs 9.63 in the untouched holdout seasons, and every one of the 11 schedule-based rules fails the gate set (0 of 11 PASS). The honest reading is that schedule information is already inside the price.</p>
+  <p>Own ratings correlate r=0.466 with the closing spread over 7,104 games, but the own line is less accurate than the market out of sample: spread MAE 10.708 vs 9.623 in the untouched holdout seasons, and every one of the 11 schedule-based rules fails the gate set (0 of 11 PASS). The honest reading is that schedule information is already inside the price.</p>
   <p class="meta"><strong>How to discover it:</strong> computed in analysis/strength.py; re-runnable ·
   <strong>What it blocks:</strong> any decision to trade schedule-based angles</p>
   <p class="meta"><a href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">source ↗</a> <a href="https://www.nfl.com/schedules/2026/reg10" target="_blank" rel="noopener">source ↗</a></p>
 </div>
 <div class="q">
   <h3>Q-SOS-02 — Which clubs are strongest once opponents are adjusted for? <span class="badge pass">ANSWERED</span></h3>
-  <p>JAX +9.55 (SOS +1.08); SF +6.39 (SOS -0.62); BUF +6.30 (SOS +0.91); SEA +4.94 (SOS +0.12); CHI +4.27 (SOS +1.14). Home-field advantage fitted at -0.47 points for this season&#x27;s completed games.</p>
+  <p>JAX +9.56 (SOS +1.08); SF +6.42 (SOS -0.62); BUF +6.29 (SOS +0.91); SEA +4.96 (SOS +0.12); CHI +4.27 (SOS +1.14). Home-field advantage fitted at -0.50 points for this season&#x27;s completed games.</p>
   <p class="meta"><strong>How to discover it:</strong> ridge rating fit, walk-forward, published on the Ratings page ·
   <strong>What it blocks:</strong> nothing; this is a published estimate with its method</p>
   <p class="meta"><a href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">source ↗</a> <a href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">source ↗</a></p>
@@ -49,7 +49,7 @@
 </div>
 <div class="q">
   <h3>Q-SOS-04 — Who has played the hardest and easiest schedule so far? <span class="badge pass">ANSWERED</span></h3>
-  <p>Hardest (mean pre-game opponent rating): WAS +1.39; LV +1.28; CHI +1.14; JAX +1.08; BUF +0.91. Easiest: PHI -1.04; NO -0.63; SF -0.62; LA -0.58; BAL -0.54. SOS is the mean of the opponents&#x27; ratings *before* each game, so it contains no future information.</p>
+  <p>Hardest (mean pre-game opponent rating): LV +1.28; CHI +1.14; JAX +1.08; WAS +1.05; BUF +0.91. Easiest: PHI -1.04; NO -0.63; SF -0.62; LA -0.58; BAL -0.54. SOS is the mean of the opponents&#x27; ratings *before* each game, so it contains no future information.</p>
   <p class="meta"><strong>How to discover it:</strong> computed from the walk-forward panel ·
   <strong>What it blocks:</strong> nothing</p>
   <p class="meta"><a href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">source ↗</a></p>
@@ -63,7 +63,7 @@
 </div>
 <div class="q">
   <h3>Q-SOS-06 — Does the pinned provenance still describe the committed data? <span class="badge pass">ANSWERED</span></h3>
-  <p>No. data/s9cb/provenance.json pins games.csv at 2,189,959 bytes / sha256 5ae004ff6d26..., but the committed file is 1,665,511 bytes / sha256 6f0777c68703.... The row count is intact (7,239 games) and the results reconcile, so the study still runs, but the pin is stale and the integrity claim cannot be sustained.</p>
+  <p>No. data/s9cb/provenance.json pins games.csv at 2,190,032 bytes / sha256 50939c24d43e..., but the committed file is 1,665,522 bytes / sha256 483beddbdf22.... The row count is intact (7,239 games) and the results reconcile, so the study still runs, but the pin is stale and the integrity claim cannot be sustained.</p>
   <p class="meta"><strong>How to discover it:</strong> sha256 of the committed file compared with the recorded hash ·
   <strong>What it blocks:</strong> any claim that this data is byte-for-byte the downloaded release</p>
   <p class="meta"><a href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">source ↗</a></p>
@@ -91,7 +91,7 @@
 </div>
 <div class="q">
   <h3>Q-SOS-10 — Which of the 2026 results are inside the current sample? <span class="badge pass">ANSWERED</span></h3>
-  <p>7,103 games from 1999 to 2026 are scored. The 2026 season in the committed extract stops at Week 9: 136 games. Week 10&#x27;s Thursday game is not in the file, so the current-state page counts 8 games for WAS and NYG, which matches the official 3-5-1 / 5-3-1 records.</p>
+  <p>7,104 games from 1999 to 2026 are scored. The 2026 season in the committed extract stops at Week 9: 136 games. Week 10&#x27;s Thursday game is not in the file, so the current-state page counts 8 games for WAS and NYG, which matches the official 3-5-1 / 5-3-1 records.</p>
   <p class="meta"><strong>How to discover it:</strong> row count by season and a comparison with the official standings games-played ·
   <strong>What it blocks:</strong> nothing; stated so the reader knows where the sample ends</p>
   <p class="meta"><a href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">source ↗</a> <a href="https://www.nfl.com/schedules/2026/reg10" target="_blank" rel="noopener">source ↗</a></p>

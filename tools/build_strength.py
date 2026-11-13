@@ -251,7 +251,7 @@ def build() -> int:
   <article class="kpi"><span class="kpi-label">Rules passing all gates</span><strong class="kpi-value">{strat['totals']['pass']}</strong><span class="kpi-sub">of {strat['n_rules_tested']} pre-registered</span></article>
   <article class="kpi"><span class="kpi-label">Own spread MAE</span><strong class="kpi-value">{val['holdout']['spread_mae_own']:.2f}</strong><span class="kpi-sub">market {val['holdout']['spread_mae_market']:.2f}, holdout</span></article>
   <article class="kpi"><span class="kpi-label">Strongest club</span><strong class="kpi-value">{e(top['team'])}</strong><span class="kpi-sub">rating {top['rating']:+.2f}</span></article>
-  <article class="kpi"><span class="kpi-label">Open flags</span><strong class="kpi-value">{flags['count']}</strong><span class="kpi-sub">published with links</span></article>
+  <article class="kpi"><span class="kpi-label">Flags</span><strong class="kpi-value">{flags['count']}</strong><span class="kpi-sub">{sum(1 for f in flags['flags'] if f['severity'] != 'resolved')} open · {sum(1 for f in flags['flags'] if f['severity'] == 'resolved')} resolved</span></article>
 </section>
 <div class="grid-2">
   <div class="panel">
@@ -272,6 +272,8 @@ def build() -> int:
       <li>{audit['standings']['rows_compared']} clubs compared field by field with the official standings —
         <strong>{len(audit['standings']['differences'])} differences</strong>;
         <a href="flagged.html">flagged</a>.</li>
+      <li>A reported provenance mismatch was traced to the collector pinning the wrong file and is now
+        <strong>resolved</strong> (<a href="flagged.html">F-SOS-DATA-01</a>).</li>
     </ul>
   </div>
   <div class="panel">
@@ -652,7 +654,10 @@ def build() -> int:
                                    body, built)
 
     # ---------------------------------------------------------------- flagged
-    flag_rows = [[e(f["id"]), badge(f["severity"].upper()), e(f["title"]), e(f["detail"]), e(f["status"]),
+    sev_badge = {"resolved": '<span class="badge pass">RESOLVED</span>',
+                 "high": '<span class="badge fail">HIGH</span>',
+                 "medium": '<span class="badge warn">MEDIUM</span>'}
+    flag_rows = [[e(f["id"]), sev_badge.get(f["severity"], badge(f["severity"].upper())), e(f["title"]), e(f["detail"]), e(f["status"]),
                   f'<a class="src" href="{e(f["source"])}" target="_blank" rel="noopener">official source ↗</a>'
                   if f["source"] else blank("no official source exists")] for f in flags["flags"]]
     body = f"""

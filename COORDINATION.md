@@ -2120,3 +2120,38 @@ standings finding, which is recorded here as independent confirmation rather tha
 to be removed.
 
 _Claim committed and pushed before any other file is touched, per the brief._
+
+### Session `ca779bcc-nfl1` — result record (2026-11-13)
+
+| Item | Value |
+| --- | --- |
+| Pull request | [#52](https://github.com/kanlerxz87-cyber/NFL1/pull/52) |
+| Merge | see the PR link above |
+| Study | `analysis/strength.py` → `data/strength/` → `strength/` (14 pages) |
+| Sample | 7,104 played games, 1999–2026; 19,930 scored bets; 11 pre-registered rules |
+| Result | **0 PASS / 0 WATCH / 11 FAIL**; holdout spread MAE 10.71 own vs 9.62 market |
+| Ledgers | 12 questions (8 answered, 1 partial, 3 blocked), 8 suggestions, 4 decisions, 7 flags (6 open, 1 resolved) |
+| Gates on the merged tree | validate_verified PASS · audit_numbers PASS · check_committed_site PASS · check_site PASS (21 pages) · verify PASS · verify_combined PASS · check_strength_site PASS (14 pages, every row source-linked) · 19 unit tests OK |
+| CI | `Verify NFL1 site`, `Verify NFL source provenance`, `Verify NFL Decision Lab site build`, `Decision Room build and gate` all success on `9a70aa0` |
+
+**Defect found by the gates, in this session's own work.** The first implementation of the study
+reported four PASSes at 94–99% cover rates. The cause was a sign convention: the closing line was
+treated as points *given to* the home club instead of the home club's *expected margin*. The
+convention was verified against the site's own Week 10 table (`spread_line` 1.5 renders as
+"NYG -1.5"), fixed, and locked with four unit tests (`tests/test_strength.py`). Every rule now
+fails, which is the honest result.
+
+**F-SOS-DATA-01 — root cause found and fixed (resolved).** The reported provenance mismatch was not
+a corrupted file. `s9cb/collect.py` pinned the sha256 of the **raw download** in `build/raw/` while
+committing a filtered, re-serialised extract, so the pin could never match. The collector now records
+`committed_sha256`/`committed_bytes` alongside the raw pin, with a `hash_convention` note, and the
+committed hash reproduces exactly (`sha256sum data/s9cb/games.csv`). The next refresh writes it
+automatically.
+
+**Merge hygiene incident, logged rather than hidden.** The first merge of `origin/main` into this
+branch resolved the `COORDINATION.md` conflict by keeping one side, which silently dropped 617
+substantive lines of board history and part of sessions `9c208ed8` and `46b6cabb`. It was caught by
+comparing the merged file against both parents line by line, and the board was rebuilt so that **0
+substantive lines are missing from either parent**. The `9c208ed8` result record is restored under a
+labelled heading. This is the second time a one-sided conflict resolution has damaged this file
+(`A-F01` was the first), which is itself evidence for suggestion S24 (a single flag/board register).

@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-13T13:02:45+00:00",
+ "generated_at": "2026-11-13T13:14:06+00:00",
  "count": 7,
  "rule": "Every flag carries the official link that shows the difference and the value seen on both sides.",
  "flags": [
@@ -29,17 +29,17 @@
   },
   {
    "id": "F-SOS-DATA-01",
-   "severity": "medium",
-   "title": "Pinned provenance hash does not match the committed games.csv",
-   "detail": "recorded 2,189,959 bytes / 5ae004ff6d26b081..., committed 1,665,511 bytes / 6f0777c6870329ba.... Row count intact (7,239) and results reconcile.",
+   "severity": "resolved",
+   "title": "Provenance pin described the wrong file and now pins the committed extract",
+   "detail": "ROOT CAUSE (verified): s9cb/collect.py pinned the sha256 of the raw download in build/raw/ (2,190,032 bytes / 50939c24d43e78f3...) while committing a filtered, re-serialised extract (1,665,522 bytes / 483beddbdf226901...), so the pin could never match. Fixed: the collector now records committed_sha256/committed_bytes for data/s9cb/ alongside the raw pin, and the committed hash reproduces exactly with `sha256sum data/s9cb/games.csv`. Row count intact (7,239) and every result reconciles.",
    "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
-   "status": "open"
+   "status": "resolved (collector fixed; next refresh writes it automatically)"
   },
   {
    "id": "F-SOS-MODEL-01",
    "severity": "medium",
    "title": "Home-field advantage fitted near zero for the 2026 sample",
-   "detail": "The ridge fit gives hfa -0.47 points on 136 games, against roughly +2 points in every earlier season. This is a computed property of a small 2026 sample (home win rate 49.3%), not a data error; it is flagged because it materially changes this week's own lines.",
+   "detail": "The ridge fit gives hfa -0.50 points on 136 games, against roughly +2 points in every earlier season. This is a computed property of a small 2026 sample (home win rate 49.3%), not a data error; it is flagged because it materially changes this week's own lines.",
    "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
    "status": "open"
   },

@@ -1,23 +1,23 @@
 {
- "built_at_utc": "2026-11-13T13:02:45+00:00",
+ "built_at_utc": "2026-11-13T13:14:06+00:00",
  "session": "ca779bcc-nfl1",
  "inputs": {
   "file": "data/s9cb/games.csv",
-  "sha256_now": "6f0777c6870329ba74826c9af7371472816dfa85ecbd7d662446a483250ce050",
-  "bytes_now": 1665511,
-  "sha256_recorded": "5ae004ff6d26b08109cbd7424127b0eaa89f59a4bed445229e8683e98d22c8d0",
-  "bytes_recorded": 2189959,
+  "sha256_now": "483beddbdf226901b903ccc6e84f3dbc38df05110bc53a92eb63da8ec44f054f",
+  "bytes_now": 1665522,
+  "sha256_recorded": "50939c24d43e78f3369227d5c800a6bc1187b343ac35321102d79bd523f36395",
+  "bytes_recorded": 2190032,
   "matches_provenance": false,
   "url": "https://github.com/nflverse/nflverse-data/releases/download/schedules/games.csv",
   "official_upstream": "https://www.nfl.com/schedules/",
-  "provenance_generated_at": "2026-11-12T23:34:48+00:00",
+  "provenance_generated_at": "2026-11-13T13:08:53+00:00",
   "rows_in_file": 7239,
   "result_sign_check": {
-   "rows": 7103,
+   "rows": 7104,
    "mismatches": 0,
    "rule": "result == home_score - away_score"
   },
-  "played_games_used": 7103
+  "played_games_used": 7104
  },
  "frozen_parameters": {
   "ridge_rating": 5.0,

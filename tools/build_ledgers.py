@@ -454,13 +454,22 @@ def main() -> int:
                    "otherwise identical to the official page."),
         "source": OFF_SCHEDULE, "status": "open",
     })
+    prov = json.load(open(os.path.join(ROOT, "data/s9cb/provenance.json"), encoding="utf-8"))
+    games_entry = next(e for e in prov["files"] if e["local"] == "games.csv")
+    pin_ok = games_entry.get("committed_sha256") == meta["inputs"]["sha256_now"]
     flags.append({
-        "id": "F-SOS-DATA-01", "severity": "medium",
-        "title": "Pinned provenance hash does not match the committed games.csv",
-        "detail": (f"recorded {meta['inputs']['bytes_recorded']:,} bytes / {str(meta['inputs']['sha256_recorded'])[:16]}..., "
-                   f"committed {meta['inputs']['bytes_now']:,} bytes / {meta['inputs']['sha256_now'][:16]}.... "
-                   f"Row count intact ({meta['inputs']['rows_in_file']:,}) and results reconcile."),
-        "source": NV_SCHEDULES, "status": "open",
+        "id": "F-SOS-DATA-01", "severity": "resolved" if pin_ok else "medium",
+        "title": ("Provenance pin described the wrong file and now pins the committed extract"
+                  if pin_ok else "Pinned provenance hash does not match the committed games.csv"),
+        "detail": (f"ROOT CAUSE (verified): s9cb/collect.py pinned the sha256 of the raw download in build/raw/ "
+                   f"({games_entry.get('bytes'):,} bytes / {str(games_entry.get('sha256'))[:16]}...) while committing a "
+                   f"filtered, re-serialised extract ({meta['inputs']['bytes_now']:,} bytes / "
+                   f"{meta['inputs']['sha256_now'][:16]}...), so the pin could never match. Fixed: the collector now "
+                   f"records committed_sha256/committed_bytes for data/s9cb/ alongside the raw pin, and the committed "
+                   f"hash reproduces exactly with `sha256sum data/s9cb/games.csv`. Row count intact "
+                   f"({meta['inputs']['rows_in_file']:,}) and every result reconciles."),
+        "source": NV_SCHEDULES,
+        "status": "resolved (collector fixed; next refresh writes it automatically)" if pin_ok else "open",
     })
     flags.append({
         "id": "F-SOS-MODEL-01", "severity": "medium",

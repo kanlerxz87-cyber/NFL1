@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-13T13:02:45+00:00",
+ "generated_at": "2026-11-13T13:14:06+00:00",
  "count": 8,
  "rule": "Each suggestion states the problem, the options, a recommendation, cost, risk and what blocks it, so a reviewer can choose a path before anything is implemented.",
  "suggestions": [
@@ -30,7 +30,7 @@
    "id": "S-SOS-02",
    "priority": "now (this session)",
    "title": "Re-pin the games.csv provenance hash",
-   "problem": "provenance.json records 2,189,959 bytes / 5ae004ff6d26..., the file is 1,665,511 bytes / 6f0777c68703....",
+   "problem": "provenance.json records 2,190,032 bytes / 50939c24d43e..., the file is 1,665,522 bytes / 483beddbdf22....",
    "options": [
     "A: re-download in Actions and re-pin (restores a real integrity claim)",
     "B: re-pin the current file (honest hash, weaker claim)",

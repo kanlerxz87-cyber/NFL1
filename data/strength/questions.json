@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-13T13:02:45+00:00",
+ "generated_at": "2026-11-13T13:14:06+00:00",
  "count": 12,
  "rule": "Every question is either ANSWERED with the computed number, PARTIAL with the reason, or BLOCKED with the exact source that would settle it.",
  "questions": [
@@ -7,7 +7,7 @@
    "id": "Q-SOS-01",
    "question": "Does strength of schedule, measured walk-forward, add information beyond the closing line?",
    "status": "ANSWERED (no, not on this sample)",
-   "answer": "Own ratings correlate r=0.466 with the closing spread over 7,103 games, but the own line is less accurate than the market out of sample: spread MAE 10.714 vs 9.63 in the untouched holdout seasons, and every one of the 11 schedule-based rules fails the gate set (0 of 11 PASS). The honest reading is that schedule information is already inside the price.",
+   "answer": "Own ratings correlate r=0.466 with the closing spread over 7,104 games, but the own line is less accurate than the market out of sample: spread MAE 10.708 vs 9.623 in the untouched holdout seasons, and every one of the 11 schedule-based rules fails the gate set (0 of 11 PASS). The honest reading is that schedule information is already inside the price.",
    "discovery_method": "computed in analysis/strength.py; re-runnable",
    "blocks": "any decision to trade schedule-based angles",
    "sources": [
@@ -19,7 +19,7 @@
    "id": "Q-SOS-02",
    "question": "Which clubs are strongest once opponents are adjusted for?",
    "status": "ANSWERED",
-   "answer": "JAX +9.55 (SOS +1.08); SF +6.39 (SOS -0.62); BUF +6.30 (SOS +0.91); SEA +4.94 (SOS +0.12); CHI +4.27 (SOS +1.14). Home-field advantage fitted at -0.47 points for this season's completed games.",
+   "answer": "JAX +9.56 (SOS +1.08); SF +6.42 (SOS -0.62); BUF +6.29 (SOS +0.91); SEA +4.96 (SOS +0.12); CHI +4.27 (SOS +1.14). Home-field advantage fitted at -0.50 points for this season's completed games.",
    "discovery_method": "ridge rating fit, walk-forward, published on the Ratings page",
    "blocks": "nothing; this is a published estimate with its method",
    "sources": [
@@ -42,7 +42,7 @@
    "id": "Q-SOS-04",
    "question": "Who has played the hardest and easiest schedule so far?",
    "status": "ANSWERED",
-   "answer": "Hardest (mean pre-game opponent rating): WAS +1.39; LV +1.28; CHI +1.14; JAX +1.08; BUF +0.91. Easiest: PHI -1.04; NO -0.63; SF -0.62; LA -0.58; BAL -0.54. SOS is the mean of the opponents' ratings *before* each game, so it contains no future information.",
+   "answer": "Hardest (mean pre-game opponent rating): LV +1.28; CHI +1.14; JAX +1.08; WAS +1.05; BUF +0.91. Easiest: PHI -1.04; NO -0.63; SF -0.62; LA -0.58; BAL -0.54. SOS is the mean of the opponents' ratings *before* each game, so it contains no future information.",
    "discovery_method": "computed from the walk-forward panel",
    "blocks": "nothing",
    "sources": [
@@ -66,7 +66,7 @@
    "id": "Q-SOS-06",
    "question": "Does the pinned provenance still describe the committed data?",
    "status": "ANSWERED (no)",
-   "answer": "No. data/s9cb/provenance.json pins games.csv at 2,189,959 bytes / sha256 5ae004ff6d26..., but the committed file is 1,665,511 bytes / sha256 6f0777c68703.... The row count is intact (7,239 games) and the results reconcile, so the study still runs, but the pin is stale and the integrity claim cannot be sustained.",
+   "answer": "No. data/s9cb/provenance.json pins games.csv at 2,190,032 bytes / sha256 50939c24d43e..., but the committed file is 1,665,522 bytes / sha256 483beddbdf22.... The row count is intact (7,239 games) and the results reconcile, so the study still runs, but the pin is stale and the integrity claim cannot be sustained.",
    "discovery_method": "sha256 of the committed file compared with the recorded hash",
    "blocks": "any claim that this data is byte-for-byte the downloaded release",
    "sources": [
@@ -111,7 +111,7 @@
    "id": "Q-SOS-10",
    "question": "Which of the 2026 results are inside the current sample?",
    "status": "ANSWERED",
-   "answer": "7,103 games from 1999 to 2026 are scored. The 2026 season in the committed extract stops at Week 9: 136 games. Week 10's Thursday game is not in the file, so the current-state page counts 8 games for WAS and NYG, which matches the official 3-5-1 / 5-3-1 records.",
+   "answer": "7,104 games from 1999 to 2026 are scored. The 2026 season in the committed extract stops at Week 9: 136 games. Week 10's Thursday game is not in the file, so the current-state page counts 8 games for WAS and NYG, which matches the official 3-5-1 / 5-3-1 records.",
    "discovery_method": "row count by season and a comparison with the official standings games-played",
    "blocks": "nothing; stated so the reader knows where the sample ends",
    "sources": [

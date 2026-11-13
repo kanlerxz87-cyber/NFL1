@@ -6,10 +6,10 @@
    "id": "P-01",
    "relationship": "Club passing yards vs same-club receiver yards (same game)",
    "value": {
-    "n": 3988,
+    "n": 3990,
     "r": 0.8426,
     "ci95": [
-     0.8333,
+     0.8334,
      0.8514
     ],
     "p_value": 0.0,
@@ -20,7 +20,7 @@
    "id": "P-02",
    "relationship": "Club receiver yards vs same-club rushing yards (same game)",
    "value": {
-    "n": 3988,
+    "n": 3990,
     "r": -0.1765,
     "ci95": [
      -0.2064,
@@ -34,13 +34,13 @@
    "id": "P-03",
    "relationship": "Club receiver yards vs opponent rushing yards (same game)",
    "value": {
-    "n": 3997,
-    "r": -0.0274,
+    "n": 3999,
+    "r": -0.0275,
     "ci95": [
      -0.0584,
-     0.0036
+     0.0035
     ],
-    "p_value": 0.083115,
+    "p_value": 0.082154,
     "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
    }
   }
