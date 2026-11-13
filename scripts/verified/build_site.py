@@ -47,7 +47,14 @@ def page(title: str, active: str, body: str, subtitle: str = "") -> str:
     nav_items = []
     for h, t in NAV:
         if active.startswith("pages/"):
-            href = "../index.html" if h == "index.html" else h
+            if h == "index.html":
+                href = "../index.html"
+            elif "/" in h:
+                # sub-site entries (room/index.html, strength/index.html) sit at the
+                # repository root — one level up from pages/
+                href = "../" + h
+            else:
+                href = h
         else:
             href = "index.html" if h == "index.html" else f"pages/{h}"
         cls = ' class="active"' if h == active else ""
