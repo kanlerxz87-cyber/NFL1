@@ -22,6 +22,7 @@ Sessions that have worked here:
 
 | `e3148b95-nfl1` | `arena/e3148b95-nfl1` | Official-source schedule/bye attribution audit and CI gate | in progress |
 | `b6e68100-nfl1` | `arena/b6e68100-nfl1` | Post-merge audit: C5 division-map fix (referee hand-off), line-by-line repo review, official-source re-verification, site health check, PR/merge/Pages confirmation | active |
+| `9411723a-nfl1` | `arena/9411723a-nfl1` | Verification of the committed site, official-source spot checks, new flag F41 (standings snapshot vs live drift), PR -> main -> merge -> Pages deploy, integration record | active |
 
 > Branch naming: Arena fixes each session to a single branch named `arena/<session>-nfl1`, so the
 > `session-<id>/<task>` convention in the brief cannot be followed here. Scopes were kept
@@ -56,6 +57,21 @@ integration time), `pages/`, `docs/`, `verified-lab/`, `referee/`, `pipeline/`, 
 | A1 | Take over referee request on `analysis/correlations.py` (C5 counts 52 division games; official groupings give 42 — AFC/NFC divisions of the same name were not distinguished) and recompute `data/verified/model/correlations.json` | done | `b6e68100` | `analysis/correlations.py`, `data/verified/model/correlations.json`, `pages/analysis.html`, `data/flags.json` (F36), `COORDINATION.md` | Fixed: map keyed on (conference, division). All 32 club-division assignments verified line by line against https://www.nfl.com/standings/division/2026/REG first. Recomputed C5 = -0.1048 (n=136, CI [-0.268,+0.065], p=0.2245) — matches the referee's independent value exactly. F36 marked resolved. |
 | A2 | Post-merge audit: line-by-line repo review, re-verification of published data against official sources, site build + link check, live-site health check | done | `b6e68100` | `docs/audit-b6e68100.md`, `data/flags.json` (A-F01..A-F04), `data/suggestions.json` (SA-01, SA-02), `pipeline/content.py`, `pipeline/build_all.py`, regenerated pages | Audit published at `docs/audit-b6e68100.md`. Findings: A-F01 stray 'EAD' line-1 artifact (fixed); A-F02 WAS win-pct banker's rounding vs official 0.313 (fixed in `pipeline/build_all.py`, confirmed live via the collect-data refresh — snapshot now shows 0.313); A-F03 Week-10 injury club coverage fully explained (CHI/DEN/PHI/TB on bye per official schedule; LAC/BAL 'No Injuries Reported'); A-F04 official injury page drifts within hours (IND/JAX rows changed between 18:53 and 22:30 UTC scrapes; scraper verified faithful, ~120 rows row-for-row). Verified non-issue: Myles Garrett listed under LAR is correct per his official player page (trade to Rams). All gates re-run and green after regeneration: validate_verified PASS, audit_numbers 44/44, check_site 20 pages 0 broken, tools/verify.py 971 rows all sourced, verify_combined PASS, 111 tests pass. |
 | A3 | PR from this branch to `main`, merge without waiting for approval, confirm GitHub Pages deploy, record PR link/result here | done | `b6e68100` | `COORDINATION.md` (PR record section) | PR #26 merged at 2026-11-12T22:49:01Z (merge commit `7c11742`); all four main-branch checks passed including the site build; Pages deployed; live site verified (see the A3 record below). |
+
+## Task board — session `9411723a-nfl1` (ACTIVE; claims below)
+
+File scope claimed here is **additive and non-overlapping**: `COORDINATION.md`, `data/flags.json`, and the root pages those files render (regenerated only with `python3 tools/build.py`). No other session's files are touched.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| V1 | Line-by-line verification of the committed root site with `tools/verify.py` | done | `9411723a` | `data/flags.json`, `data/suggestions.json`, `data/questions.json`, root `*.html` | `tools/verify.py`: 982 table rows, 982 with official source links, 73 unverified (flagged), 0 broken internal links — PASS |
+| V2 | Official-source spot check of the 2026 standings snapshot vs the live nfl.com page | done | `9411723a` | `data/flags.json` (F41) | Live page https://www.nfl.com/standings/league/2026/reg fetched 2026-11-13 shows NYG 5-3-1 (203/196) and WAS 3-5-1 (196/223); snapshot (retrieved 2026-11-12T04:31Z) shows NYG 5-2-1 (182/172) and WAS 2-5-1 (172/202) — drift explained by the WAS @ NYG game on 2026-11-12 after the snapshot time; logged as flag F41 |
+| S1 | Confirm the suggestions review-and-choose-a-path section is complete | done | `9411723a` | `pages/suggestions.html`, `pages/decisions.html`, `data/suggestions.json`, `data/questions.json` | 27 suggestions, 6 decision records (D01-D06), 5-step review path; Q01-Q28 question/information/answer table |
+| L1 | Confirm own-lines research, strategy leaderboard, gates, correlations, luck removal | done | `9411723a` | `pages/lines.html`, `pages/strategies.html`, `data/model/*` | 14 Week-10 own lines; 0 of 12 strategies pass all 8 gates (reported honestly); correlations partial/flagged; luck-removal documented |
+| I1 | Confirm injury and depth-deficiency tracking | done | `9411723a` | `pages/injuries.html`, `pages/availability.html`, `data/model/availability.json` | Official injury report joined to depth chart; 2nd/3rd/4th-string not publishable — official depth charts return 404 (flagged F17/F21) |
+| E1 | Confirm executive summary | done | `9411723a` | `pages/executive.html` | Implemented: what was verified, what the numbers say, unresolved items, decisions requested |
+| P1 | Confirm GitHub Pages live site | done | `9411723a` | `index.html`, `pages/`, `.nojekyll` | Pages status `built`; source `main /`; https://kanlerxz87-cyber.github.io/NFL1/ |
+| X1 | Integration: PR from this branch to `main`, merge, confirm Pages deploy, record result | in progress | `9411723a` | `COORDINATION.md` | PR created after this claim commit is pushed |
 
 ## Task board (final state, session `7600ed8b-nfl1` integration)
 
@@ -970,3 +986,202 @@ CI on the merged branch: **Decision Room build and gate**, **Verify NFL1 site** 
 **Collect NFL data** all success.
 
 _This session's claim is closed. The board is free for the next session._
+
+---
+
+## Earlier records from `main` (preserved on merge)
+
+| Item | Value |
+| --- | --- |
+| Pull request | [#41](https://github.com/kanlerxz87-cyber/NFL1/pull/41) — *Integration: line-by-line review, F36 fix + audit gate, All Sections index, fresh data (F37-F40)* |
+| Merge | `gh pr merge 41 --merge`; merged 2026-11-12T23:30:20Z; merge commit `59eb21d0` |
+| Checks on `main` after merge | `Verify NFL1 site` success · `Verify NFL Decision Lab site build` success · `pages build and deployment` success (run 43329410900) |
+| Live verification (read as a user) | landing `index.html` stamp `23:31` with the All Sections nav entry; `pages/sections.html` live with all 40 sections across six generations; `flagged.html` live with 44 source-linked flagged items |
+| Final gates on the merged tree | validate_verified PASS · audit_numbers 47/47 · check_site 21 pages · tools/check_committed_site PASS · tools/verify 1,013 rows all source-linked · verify_combined 1,198 links 0 broken · referee check_site PASS · 117 unit tests OK |
+| Merges from `origin/main` | two (PRs #21–#39, then the s9cb refresh); every conflict resolved keeping both sides — COORDINATION.md, `data/suggestions.json` (27 ids), `pipeline/content.py` (main's implemented S13 + SA-01/02 plus this session's S14/S15/Q21), `pipeline/gen_site.py` (main's signal labels F15–F22 plus this session's sections page and F23–F25), `tools/build.py` (this session's `write_readme`, subsuming main's template addition), `analysis/correlations.py` (main's A1 fix kept, this session's audit gate kept) |
+| Open items left for reviewers | F38 + S14 (CI audits a regenerated index substitute) · F40 + S13/S24 (`[skip ci]` data pushes run no verify) · Q28/Q21 (authoritative generation) · S22 (four flag registers) · S25 / `R-a2cea255-02` (referee replication as a CI gate) |
+| Note for session `9cb71eb8` | `Collect s9cb research extract` failed once ("Commit the extract") on this branch's push `fd8133e` — their workflow, not a site gate; PR #41 checks were green. Logged here, their file not edited. |
+
+---
+
+# Session `46b6cabb-nfl1` — documentation consistency and post-merge audit
+
+| Item | Value |
+| --- | --- |
+| This session ID | `46b6cabb-nfl1` |
+| This session branch | `arena/46b6cabb-nfl1` |
+| Base commit | `09c03f052aa3bebb62acc23cb17eefd65f0c512e` (`main`) |
+| Board read before work | yes; full board reviewed |
+
+**Constraint:** Arena pins this session to `arena/46b6cabb-nfl1`; the requested
+`session-<id>/<task>` branch convention cannot be followed. Work stays on the assigned branch.
+
+## Task board (this session)
+
+| ID | Task | Status | Owner | File scope | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| N1 | Address stale README claims and non-destructive README generation | needs review | `46b6cabb` | request only in `COORDINATION.md`; implementation excluded from this scope | Open PR #31 also changes `README.md` and `tools/build.py`; request its owner to incorporate this audit finding. No overlapping edits retained. |
+| N2 | Run full repository/site gates and document reproducible results and remaining issues | done | `46b6cabb` | `docs/review/session-46b6cabb.md`, `COORDINATION.md` | Site gates pass; live official NFL schedule proves published overview is stale after WAS @ NYG became final. README issue and verifier-count drift documented. |
+| N3 | Final integration assessment; submit PR only if tests/build are green, then verify deployment and record outcome | done | `46b6cabb` | `COORDINATION.md` | PR #44 merged; all PR checks passed; Pages build/deploy succeeded for merge commit `114bbbe6`; live site remains a stale pregame snapshot and is explicitly not represented as refreshed. |
+
+**Coordination request to the owner of open PR #31 (`arena/6e8ca348-nfl1`):** the current
+`README.md` contains fixed suggestion / decision-record counts, and `tools/build.py:write_readme()`
+can replace the full hand-maintained README with an incomplete embedded template despite its
+comment claiming it is byte-identical. Please consider making the template a no-op or ensuring it
+cannot overwrite the full README, and remove the obsolete fixed counts. This session deliberately
+reverted its overlapping local edits and retains only the audit report; no files from PR #31 were
+changed. Live-source and test evidence are in `docs/review/session-46b6cabb.md`.
+
+## Integration record (N3) — 2026-11-13
+
+| Item | Value |
+| --- | --- |
+| Pull request | [#44](https://github.com/kanlerxz87-cyber/NFL1/pull/44) — *Audit live NFL dashboard freshness and document reproducible findings* |
+| Merge | Squash-merged 2026-11-13T12:41:33Z; merge commit `114bbbe6c9130c660c51d93ca33b6d10369f02b8` |
+| PR checks | `Verify NFL1 site` success; `Verify NFL Decision Lab site build` success |
+| Pages | `pages-build-deployment` run 43427328508 success; Pages API reports `built` for commit `114bbbe6` |
+| Live-site status | Root site fetched after deploy; static snapshot still shows the November 12 pregame WAS @ NYG row. The report is repository documentation, not a fabricated data refresh. Official schedule is the review source. |
+| Post-merge workflow note | A redundant `Verify NFL Decision Lab site build` run 43427329054 was cancelled by GitHub Actions concurrency (“higher priority waiting request”); the same workflow had already passed on PR #44 at `43427056631`, and the PR's `Verify NFL1 site` plus Pages deployment passed after merge. |
+| Remaining review items | README/template fix requested from open PR #31 owner due overlapping `README.md` / `tools/build.py` scope. New staleness observation documents recurrence of existing F39/F40 and S13/S24. |
+
+File scopes are additive and do not edit generated root pages, `pages/`, `data/`, or other
+sessions' research artifacts. The persistent changes will be committed and pushed only to this
+session's assigned branch.
+
+## Session `9411723a-nfl1` — verification and integration (2026-11-13)
+
+| Item | Value |
+| --- | --- |
+| Session ID | `9411723a-nfl1` |
+| Branch | `arena/9411723a-nfl1` |
+| Base commit | `09c03f052aa3bebb62acc23cb17eefd65f0c512e` (`main` at claim time; `main` later advanced through PRs #44 and #46) |
+| Board read before work | yes — full `COORDINATION.md` reviewed |
+
+### Tasks claimed (all done)
+
+File scope: `COORDINATION.md`, `data/flags.json`, and the root pages those files render — no other session's files were touched.
+
+| ID | Task | Status | Evidence |
+|---|---|---|---|
+| V1 | Line-by-line verification of the committed root site (`tools/verify.py`) | done | 983 table rows, 983 with official source links, 73 unverified (flagged, never inferred), 0 broken internal links — PASS |
+| V2 | Official-source spot check of the standings snapshot vs live nfl.com | done | Flag F41 added; source https://www.nfl.com/standings/league/2026/reg (fetched 2026-11-13) |
+| S1 | Suggestions review-and-choose-a-path section | done | `pages/suggestions.html`: 27 suggestions, 6 decision records D01-D06, 5-step review path; `pages/decisions.html`: Q01-Q28 question/information/answer table |
+| L1 | Own lines, strategy leaderboard, gates, correlations, luck removal | done | `pages/lines.html` (14 Week-10 lines, error bands); `pages/strategies.html`: 0 of 12 strategies pass all 8 gates, reported honestly; correlations partial/flagged |
+| I1 | Injury and depth-deficiency tracking | done | `pages/injuries.html`, `pages/availability.html`: official injury report joined to depth chart; 2nd/3rd/4th-string not publishable — official depth charts return 404, flagged F17/F21 |
+| E1 | Executive summary | done | `pages/executive.html`: verified / what the numbers say / unresolved / decisions requested |
+| P1 | GitHub Pages live site | done | Pages status `built`; source `main /`; https://kanlerxz87-cyber.github.io/NFL1/ |
+| X1 | Integration: PR → `main` → merge → confirm Pages deploy → record | done | See record below |
+
+### Integration record (X1)
+
+| Item | Value |
+| --- | --- |
+| Pull request | [#45](https://github.com/kanlerxz87-cyber/NFL1/pull/45) — Integration: line-by-line verification, flag F41, PR/merge/Pages record |
+| Merge | `gh pr merge 45 --merge`; merged 2026-11-13T12:44:50Z; merge commit `301139bd90b0ed9ed1de02193b8d8bd855c8e74f` |
+| Pre-merge checks | `Verify NFL1 site` SUCCESS on the PR head; `tools/verify.py` PASS locally (983 rows sourced); the site-build check passed on identical content earlier and was cancelled by branch concurrency on rebase, not failed |
+| Pages after merge | Pages status `built`; source `main /`; live at https://kanlerxz87-cyber.github.io/NFL1/ with 45 flagged items including F41 (each with official source link) |
+| Flagged for Review | Live page carries all flags; flagged items do not block the merge and are published for post-launch review |
+
+Note: `main` advanced while this branch was open (PRs #44 and #46 merged ahead of it). The branch was rebased onto `origin/main` before the final push, and PR #45 merged cleanly.
+
+---
+
+# Session `1e159b2e-nfl1` — decision-review layer, personnel-deficiency signal, and integration
+
+| Item | Value |
+| --- | --- |
+| Session ID | `1e159b2e-nfl1` |
+| Branch | `arena/1e159b2e-nfl1` (fixed by the environment; `session-<id>/<task>` cannot be used) |
+| Base commit | `09c03f052aa3bebb62acc23cb17eefd65f0c512e` (`main`) |
+| Board read before work | yes — full `COORDINATION.md` and the four active task tables reviewed |
+
+**Scope rule applied here:** this session adds two *new* self-contained subsystems rather than
+editing pages owned by the live renderers (`pipeline/gen_site.py`, `tools/build.py`,
+`scripts/verified/build_site.py`, `s9cb/site.py`). Those shared outputs are only touched by
+**one additive nav entry** on the landing page at integration time, recorded below.
+
+## Task board
+
+| ID | Task | Status | Owner | File scope | Notes |
+| --- | --- | --- | --- | --- | --- |
+| N1 | Read board, claim, push claim before any other file is edited | done | `1e159b2e` | `COORDINATION.md` | claim commit `19a66d2` |
+| N2 | Reproduce every published research number from committed data (research build re-run, diff vs committed JSON) and record the result | done | `1e159b2e` | `data/s9cb/*` (read-only) | all five research JSON files reproduce **byte-identically** except `generated_at`; the extract itself cannot be re-downloaded from the sandbox, so provenance is taken from `data/s9cb/provenance.json` |
+| N3 | Personnel-deficiency study: does a personnel loss carry information the closing line has not priced, and do bet rules built on it survive the eight gates? | done | `1e159b2e` | `s9cb/analysis/personnel.py`, `s9cb/analysis/run_personnel.py`, `data/personnel/` | 13 measures, 5 rules, 2,608 scored bets; **0 significant after correction, 0 rules pass all gates, 1 WATCH** |
+| N4 | Decision-review layer: the **Review Room** (9 pages) where every open decision, its options, costs and blockers live in one place, with a re-verification log | done | `1e159b2e` | `review-room/` (new), `tools/review_room.py` (new) | additive; one nav entry on `index.html` |
+| N5 | Live re-verification of official sources this session (standings, week-10 schedule, injuries) with row-level comparisons recorded | done | `1e159b2e` | `data/personnel/standings_diff.json`, `data/personnel/official_standings_2026-11-13.csv` | 32/32 standings transcribed and self-checked; 30/32 agree with the committed file, 2 differ and both are the Week 10 Thursday game; 14/14 fixtures match; 10/10 sampled injury rows match |
+| N6 | Final integration: gates, link check, PR → `main`, merge, confirm Pages, record here | done | `1e159b2e` | `COORDINATION.md` | record below |
+
+## Results (session `1e159b2e-nfl1`)
+
+**Personnel study — what was built.** Two questions, tested separately because they are
+different: (a) does a personnel measure predict the game result, and (b) does it predict the
+result *beyond* what the closing spread already encodes? Question (a) alone would find a
+"signal" in anything correlated with team quality. A measure is only a candidate edge if it
+survives (b). The QB measure is defined pre-game and was **redefined during the session**:
+an earlier draft used "most starts this season", which described a club that had already
+changed starter weeks earlier as breaking continuity. The corrected rule is "the QB who started
+the club's previous game", still strictly pre-game. The whole analysis was rerun after the fix.
+A second defect was also found and fixed: a club with a clean report (nobody ruled out) was being
+treated as having no report at all, discarding a real zero. Both are published as **V07** rather
+than quietly corrected.
+
+**Personnel study — what it found.** With 13 information tests on up to 7,087 games and five
+pre-declared bet rules scored at **observed prices only** (2,608 scored bets; games without a
+price are excluded and counted), **none of the measures is significant after Benjamini-Hochberg
+correction**, and **no rule passes all eight gates** (best is P04, 6/8, WATCH). The strongest raw
+result — the away club's ruled-out offensive players — has raw p = 0.0105 and corrected
+p = 0.136. The market coefficient sits at 1.03–1.08 with p ≈ 0 in every regression, which is the
+control showing the specification and the join are sound: the null is a real null, not a broken
+model. **Conclusion: injury/personnel information is descriptive, not a profitable edge against
+the closing line.** That is not a failure of the analysis; it is the analysis working.
+
+**Official-source re-verification.** All 32 clubs' 2026 standings were hand-transcribed from
+<https://www.nfl.com/standings/league/2026/reg> and accepted only after passing five internal
+arithmetic checks (PF−PA = NET for 32/32; PCT = (W+T/2)/games for 32/32; ΣW = ΣL = 136;
+ΣT = 2; ΣPF = ΣPA = 6,291; 274 team-games = 137 games, which is exactly the 136 committed results
+plus the Week 10 Thursday game). Compared club by club against `data/verified/standings_2026.csv`:
+**30 of 32 agree exactly; NYG and WAS differ**, and both are the two clubs that played the
+Thursday game after the committed snapshot was taken (2026-11-12T04:31Z). This is staleness, not
+arithmetic error, and it is independently corroborated by flag **F41** raised by a different
+session. All 14 Week 10 fixtures match <https://www.nfl.com/schedules/2026/by-week/week-10>
+including the Munich game and the official byes (CHI, DEN, PHI, TB). Ten sampled rows across
+WAS/NYG/NE/DET match <https://www.nfl.com/injuries/> field for field, as do the four club row
+counts (9, 11, 15, 9).
+
+**New irregularity found.** The direct nfl.com scrape (`data/model/official_injuries.json`) and
+the mirrored feed (`data/s9cb/injuries.csv`) agree on ruled-out counts for 25 of 26 reporting
+clubs, and **differ for Detroit: 3 ruled out on the official page, 0 in the mirror** (R05 on the
+Flagged page). The live Week 10 board uses the official scrape and marks the affected row.
+
+**Data refresh during the session (must be read with the results above).** The `Collect s9cb
+research extract` workflow committed a refreshed extract to this branch at `177cfe3` while the
+session was still working (commit `[skip ci]`), and the workstation sandbox cannot download the
+release assets itself. The **entire analysis chain was re-run from that refreshed extract**, and
+this is the second set of results: 7,104 priced games (was 7,103), 13 information tests, **still
+0 significant after correction**, the same five rules with the same gates and **still 0 PASS /
+1 WATCH (P04, 6/8)**, 2,608 scored bets. The refresh materially changed one thing: the mirrored
+injury feed now carries **296 rows across 26 clubs, matching the direct nfl.com scrape row for
+row and club for club (26/26)**, so the Detroit gap found earlier in the session is closed. Flag
+R05 is therefore published as *resolved this week, monitored every build* with the earlier gap
+recorded, not deleted — the check is more useful than the finding. The standings staleness
+(30/32 agree; NYG and WAS differ) is unaffected: `data/verified/standings_2026.csv` did not
+change in the refresh, and the Week 10 game is still absent from `data/verified/games_2026.csv`.
+
+**Gates after this session's changes (all local, all green):** `validate_verified` PASS ·
+`audit_numbers` 47/47 PASS · `check_site` 21 pages, no broken links · `tools/verify` PASS ·
+`check_committed_site` PASS · `verify_combined` PASS · `tools/review_room.py --check` 9 pages,
+no broken links, **every table row carries a source link (enforced by the checker)** ·
+117 unit tests PASS.
+
+**Files added (all new paths; the only edit to an existing file is one nav entry):**
+`s9cb/analysis/personnel.py`, `s9cb/analysis/run_personnel.py`, `data/personnel/*` (8 files),
+`review-room/*` (9 HTML pages + data generators), `tools/review_room.py`, `tools/v_sources.py`,
+plus one `<a>` in `index.html`.
+
+**Cross-session note.** `main` advanced to `00d957d` (PRs #44-#48) while this session worked.
+The branch was rebased onto it; the only conflict was `COORDINATION.md` and **both sides were
+kept** — nothing from `46b6cabb` was discarded. Their new flag F41 duplicates this session's
+standings finding, which is recorded here as independent confirmation rather than as duplication
+to be removed.
+
+_Claim committed and pushed before any other file is touched, per the brief._
