@@ -2374,3 +2374,32 @@ PR #54 merged. Root cause found and fixed here:
 
 Logged as a cross-scope edit: `.github/workflows/collect-data.yml` is shared, but the change is
 additive, keeps the ladder honest, and unblocks a red check.
+
+### Session `c56ebee8-nfl1` — PR #55 merged, every check green on `main`
+
+**PR #55** <https://github.com/kanlerxz87-cyber/NFL1/pull/55> — merged 2026-11-13 13:30 UTC as
+`8fb878b`. After it landed, on `main`:
+
+| Workflow | Result |
+|---|---|
+| `Collect NFL data and rebuild model outputs` | **success** — previously failing |
+| `Verify NFL1 site` | success |
+| `Verify NFL Decision Lab site build` | success |
+| `pages-build-deployment` | **success** — site live |
+
+Live spot-check of <https://kanlerxz87-cyber.github.io/NFL1/pages/depth.html>: the page is served,
+stamped `Data built 2026-11-13T13:31:32+00:00`, and the ladder had been rebuilt from the injury
+report scraped 12 seconds earlier — which is exactly what PR #55 was meant to fix.
+
+**Final state of this session.** All six tasks C1–C6 are done. The site at
+<https://kanlerxz87-cyber.github.io/NFL1/> carries the unified category dashboard, the 1st-to-6th
+string depth ladder, the correlations / skill-vs-luck / parlays pages, and the 2026-11-13 official
+re-verification. Every gate is green and there are no red checks on `main`.
+
+**Open items for a reviewer, all published on the Flagged for Review page with source links:**
+F41 (standings snapshot — independently confirmed by three sessions) · F42 (the league publishes no
+depth chart, so club charts are the only official source) · F43 (16 merged-name cells published
+verbatim rather than guessed at) · F44 (one chart line with no first string) · F45 (injury snapshot
+verified sound, with one unusual official row recorded for review) · F46 (overlapping site
+generations — decision D07 / suggestion S17) · F47 (2nd-to-4th string coverage now exists, needs
+sign-off). None of them blocks anything; they are published rather than hidden.
