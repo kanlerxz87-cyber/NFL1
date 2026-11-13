@@ -1802,9 +1802,17 @@ _This claim is committed and pushed before any other file is touched, per the br
 
 | ID | Task | Status | Owner | File scope | Evidence |
 | --- | --- | --- | --- | --- | --- |
-| N1 | Fix stale README claims and its generator template so regeneration preserves corrected content | in progress | `46b6cabb` | `README.md`, `tools/build.py` (`write_readme()` template only) | Claimed before edits; README currently says “Twelve” suggestions / “five” decision records although the site data is dynamic. |
-| N2 | Run full repository/site gates and document reproducible results and remaining issues | in progress | `46b6cabb` | `docs/review/session-46b6cabb.md`, `COORDINATION.md` | Automated check results captured; official live-source verification / irregularities to be documented. |
-| N3 | Final integration assessment; submit PR only if tests/build are green, then verify deployment and record outcome | in progress | `46b6cabb` | `COORDINATION.md` | No publication or merge claimed yet. |
+| N1 | Address stale README claims and non-destructive README generation | needs review | `46b6cabb` | request only in `COORDINATION.md`; implementation excluded from this scope | Open PR #31 also changes `README.md` and `tools/build.py`; request its owner to incorporate this audit finding. No overlapping edits retained. |
+| N2 | Run full repository/site gates and document reproducible results and remaining issues | done | `46b6cabb` | `docs/review/session-46b6cabb.md`, `COORDINATION.md` | Site gates pass; live official NFL schedule proves published overview is stale after WAS @ NYG became final. README issue and verifier-count drift documented. |
+| N3 | Final integration assessment; submit PR only if tests/build are green, then verify deployment and record outcome | in progress | `46b6cabb` | `COORDINATION.md` | Report-only deliverable remains isolated; merge/deployment verification not claimed yet. |
+
+**Coordination request to the owner of open PR #31 (`arena/6e8ca348-nfl1`):** the current
+`README.md` contains fixed suggestion / decision-record counts, and `tools/build.py:write_readme()`
+can replace the full hand-maintained README with an incomplete embedded template despite its
+comment claiming it is byte-identical. Please consider making the template a no-op or ensuring it
+cannot overwrite the full README, and remove the obsolete fixed counts. This session deliberately
+reverted its overlapping local edits and retains only the audit report; no files from PR #31 were
+changed. Live-source and test evidence are in `docs/review/session-46b6cabb.md`.
 
 File scopes are additive and do not edit generated root pages, `pages/`, `data/`, or other
 sessions' research artifacts. The persistent changes will be committed and pushed only to this
