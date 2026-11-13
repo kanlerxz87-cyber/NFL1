@@ -22,6 +22,7 @@ Sessions that have worked here:
 
 | `e3148b95-nfl1` | `arena/e3148b95-nfl1` | Official-source schedule/bye attribution audit and CI gate | in progress |
 | `b6e68100-nfl1` | `arena/b6e68100-nfl1` | Post-merge audit: C5 division-map fix (referee hand-off), line-by-line repo review, official-source re-verification, site health check, PR/merge/Pages confirmation | active |
+| `9411723a-nfl1` | `arena/9411723a-nfl1` | Verification of the committed site, official-source spot checks, new flag F41 (standings snapshot vs live drift), PR -> main -> merge -> Pages deploy, integration record | active |
 
 > Branch naming: Arena fixes each session to a single branch named `arena/<session>-nfl1`, so the
 > `session-<id>/<task>` convention in the brief cannot be followed here. Scopes were kept
@@ -56,6 +57,21 @@ integration time), `pages/`, `docs/`, `verified-lab/`, `referee/`, `pipeline/`, 
 | A1 | Take over referee request on `analysis/correlations.py` (C5 counts 52 division games; official groupings give 42 — AFC/NFC divisions of the same name were not distinguished) and recompute `data/verified/model/correlations.json` | done | `b6e68100` | `analysis/correlations.py`, `data/verified/model/correlations.json`, `pages/analysis.html`, `data/flags.json` (F36), `COORDINATION.md` | Fixed: map keyed on (conference, division). All 32 club-division assignments verified line by line against https://www.nfl.com/standings/division/2026/REG first. Recomputed C5 = -0.1048 (n=136, CI [-0.268,+0.065], p=0.2245) — matches the referee's independent value exactly. F36 marked resolved. |
 | A2 | Post-merge audit: line-by-line repo review, re-verification of published data against official sources, site build + link check, live-site health check | done | `b6e68100` | `docs/audit-b6e68100.md`, `data/flags.json` (A-F01..A-F04), `data/suggestions.json` (SA-01, SA-02), `pipeline/content.py`, `pipeline/build_all.py`, regenerated pages | Audit published at `docs/audit-b6e68100.md`. Findings: A-F01 stray 'EAD' line-1 artifact (fixed); A-F02 WAS win-pct banker's rounding vs official 0.313 (fixed in `pipeline/build_all.py`, confirmed live via the collect-data refresh — snapshot now shows 0.313); A-F03 Week-10 injury club coverage fully explained (CHI/DEN/PHI/TB on bye per official schedule; LAC/BAL 'No Injuries Reported'); A-F04 official injury page drifts within hours (IND/JAX rows changed between 18:53 and 22:30 UTC scrapes; scraper verified faithful, ~120 rows row-for-row). Verified non-issue: Myles Garrett listed under LAR is correct per his official player page (trade to Rams). All gates re-run and green after regeneration: validate_verified PASS, audit_numbers 44/44, check_site 20 pages 0 broken, tools/verify.py 971 rows all sourced, verify_combined PASS, 111 tests pass. |
 | A3 | PR from this branch to `main`, merge without waiting for approval, confirm GitHub Pages deploy, record PR link/result here | done | `b6e68100` | `COORDINATION.md` (PR record section) | PR #26 merged at 2026-11-12T22:49:01Z (merge commit `7c11742`); all four main-branch checks passed including the site build; Pages deployed; live site verified (see the A3 record below). |
+
+## Task board — session `9411723a-nfl1` (ACTIVE; claims below)
+
+File scope claimed here is **additive and non-overlapping**: `COORDINATION.md`, `data/flags.json`, and the root pages those files render (regenerated only with `python3 tools/build.py`). No other session's files are touched.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| V1 | Line-by-line verification of the committed root site with `tools/verify.py` | done | `9411723a` | `data/flags.json`, `data/suggestions.json`, `data/questions.json`, root `*.html` | `tools/verify.py`: 982 table rows, 982 with official source links, 73 unverified (flagged), 0 broken internal links — PASS |
+| V2 | Official-source spot check of the 2026 standings snapshot vs the live nfl.com page | done | `9411723a` | `data/flags.json` (F41) | Live page https://www.nfl.com/standings/league/2026/reg fetched 2026-11-13 shows NYG 5-3-1 (203/196) and WAS 3-5-1 (196/223); snapshot (retrieved 2026-11-12T04:31Z) shows NYG 5-2-1 (182/172) and WAS 2-5-1 (172/202) — drift explained by the WAS @ NYG game on 2026-11-12 after the snapshot time; logged as flag F41 |
+| S1 | Confirm the suggestions review-and-choose-a-path section is complete | done | `9411723a` | `pages/suggestions.html`, `pages/decisions.html`, `data/suggestions.json`, `data/questions.json` | 27 suggestions, 6 decision records (D01-D06), 5-step review path; Q01-Q28 question/information/answer table |
+| L1 | Confirm own-lines research, strategy leaderboard, gates, correlations, luck removal | done | `9411723a` | `pages/lines.html`, `pages/strategies.html`, `data/model/*` | 14 Week-10 own lines; 0 of 12 strategies pass all 8 gates (reported honestly); correlations partial/flagged; luck-removal documented |
+| I1 | Confirm injury and depth-deficiency tracking | done | `9411723a` | `pages/injuries.html`, `pages/availability.html`, `data/model/availability.json` | Official injury report joined to depth chart; 2nd/3rd/4th-string not publishable — official depth charts return 404 (flagged F17/F21) |
+| E1 | Confirm executive summary | done | `9411723a` | `pages/executive.html` | Implemented: what was verified, what the numbers say, unresolved items, decisions requested |
+| P1 | Confirm GitHub Pages live site | done | `9411723a` | `index.html`, `pages/`, `.nojekyll` | Pages status `built`; source `main /`; https://kanlerxz87-cyber.github.io/NFL1/ |
+| X1 | Integration: PR from this branch to `main`, merge, confirm Pages deploy, record result | in progress | `9411723a` | `COORDINATION.md` | PR created after this claim commit is pushed |
 
 ## Task board (final state, session `7600ed8b-nfl1` integration)
 
