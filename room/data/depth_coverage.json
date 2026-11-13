@@ -1,0 +1,272 @@
+{
+ "meta": {
+  "built_utc": "2026-11-13T12:45Z",
+  "captured": 31,
+  "total": 32,
+  "rule": "A club is 'captured' only when its own site returned a chart that parsed into position rows. 'graphic' means the club publishes the chart as an image, so it is not transcribable as text; that is different from the club publishing no chart. Every row links to that club's page; a club without parseable rows is labelled, never omitted.",
+  "source_file": "data/session-1505ac8e/depth_charts.json",
+  "position_rows": 934,
+  "statuses": {
+   "ok": 31,
+   "graphic": 1
+  }
+ },
+ "clubs": [
+  {
+   "abbr": "ARI",
+   "club": "Arizona Cardinals",
+   "status": "ok",
+   "source_url": "https://www.azcardinals.com/team/depth-chart",
+   "as_of": "",
+   "reason": ""
+  },
+  {
+   "abbr": "ATL",
+   "club": "Atlanta Falcons",
+   "status": "ok",
+   "source_url": "https://www.atlantafalcons.com/team/depth-chart",
+   "as_of": "",
+   "reason": ""
+  },
+  {
+   "abbr": "BAL",
+   "club": "Baltimore Ravens",
+   "status": "ok",
+   "source_url": "https://www.baltimoreravens.com/team/depth-chart",
+   "as_of": "",
+   "reason": ""
+  },
+  {
+   "abbr": "BUF",
+   "club": "Buffalo Bills",
+   "status": "ok",
+   "source_url": "https://www.buffalobills.com/team/depth-chart",
+   "as_of": "",
+   "reason": ""
+  },
+  {
+   "abbr": "CAR",
+   "club": "Carolina Panthers",
+   "status": "ok",
+   "source_url": "https://www.panthers.com/team/depth-chart",
+   "as_of": "",
+   "reason": ""
+  },
+  {
+   "abbr": "CHI",
+   "club": "Chicago Bears",
+   "status": "ok",
+   "source_url": "https://www.chicagobears.com/team/depth-chart",
+   "as_of": "",
+   "reason": ""
+  },
+  {
+   "abbr": "CIN",
+   "club": "Cincinnati Bengals",
+   "status": "ok",
+   "source_url": "https://www.bengals.com/team/depth-chart",
+   "as_of": "",
+   "reason": ""
+  },
+  {
+   "abbr": "CLE",
+   "club": "Cleveland Browns",
+   "status": "ok",
+   "source_url": "https://www.clevelandbrowns.com/team/depth-chart",
+   "as_of": "",
+   "reason": ""
+  },
+  {
+   "abbr": "DAL",
+   "club": "Dallas Cowboys",
+   "status": "ok",
+   "source_url": "https://www.dallascowboys.com/team/depth-chart",
+   "as_of": "",
+   "reason": ""
+  },
+  {
+   "abbr": "DEN",
+   "club": "Denver Broncos",
+   "status": "ok",
+   "source_url": "https://www.denverbroncos.com/team/depth-chart",
+   "as_of": "",
+   "reason": ""
+  },
+  {
+   "abbr": "DET",
+   "club": "Detroit Lions",
+   "status": "ok",
+   "source_url": "https://www.detroitlions.com/team/depth-chart",
+   "as_of": "",
+   "reason": ""
+  },
+  {
+   "abbr": "GB",
+   "club": "Green Bay Packers",
+   "status": "ok",
+   "source_url": "https://www.packers.com/team/depth-chart",
+   "as_of": "Nov. 10, 2026",
+   "reason": ""
+  },
+  {
+   "abbr": "HOU",
+   "club": "Houston Texans",
+   "status": "graphic",
+   "source_url": "https://www.houstontexans.com/team/depth-chart",
+   "as_of": "",
+   "reason": "The club publishes its depth chart as an image on the page, not as a table. Nothing can be read from it as text without transcribing the image, which this repository does not do."
+  },
+  {
+   "abbr": "IND",
+   "club": "Indianapolis Colts",
+   "status": "ok",
+   "source_url": "https://www.colts.com/team/depth-chart",
+   "as_of": "",
+   "reason": ""
+  },
+  {
+   "abbr": "JAX",
+   "club": "Jacksonville Jaguars",
+   "status": "ok",
+   "source_url": "https://www.jaguars.com/team/depth-chart",
+   "as_of": "",
+   "reason": ""
+  },
+  {
+   "abbr": "KC",
+   "club": "Kansas City Chiefs",
+   "status": "ok",
+   "source_url": "https://www.chiefs.com/team/depth-chart",
+   "as_of": "",
+   "reason": ""
+  },
+  {
+   "abbr": "LA",
+   "club": "Los Angeles Rams",
+   "status": "ok",
+   "source_url": "https://www.therams.com/team/depth-chart",
+   "as_of": "",
+   "reason": ""
+  },
+  {
+   "abbr": "LAC",
+   "club": "Los Angeles Chargers",
+   "status": "ok",
+   "source_url": "https://www.chargers.com/team/depth-chart",
+   "as_of": "",
+   "reason": ""
+  },
+  {
+   "abbr": "LV",
+   "club": "Las Vegas Raiders",
+   "status": "ok",
+   "source_url": "https://www.raiders.com/team/depth-chart",
+   "as_of": "",
+   "reason": ""
+  },
+  {
+   "abbr": "MIA",
+   "club": "Miami Dolphins",
+   "status": "ok",
+   "source_url": "https://www.miamidolphins.com/team/depth-chart",
+   "as_of": "",
+   "reason": ""
+  },
+  {
+   "abbr": "MIN",
+   "club": "Minnesota Vikings",
+   "status": "ok",
+   "source_url": "https://www.vikings.com/team/depth-chart",
+   "as_of": "",
+   "reason": ""
+  },
+  {
+   "abbr": "NE",
+   "club": "New England Patriots",
+   "status": "ok",
+   "source_url": "https://www.patriots.com/team/depth-chart",
+   "as_of": "",
+   "reason": ""
+  },
+  {
+   "abbr": "NO",
+   "club": "New Orleans Saints",
+   "status": "ok",
+   "source_url": "https://www.neworleanssaints.com/team/depth-chart",
+   "as_of": "",
+   "reason": ""
+  },
+  {
+   "abbr": "NYG",
+   "club": "New York Giants",
+   "status": "ok",
+   "source_url": "https://www.giants.com/team/depth-chart",
+   "as_of": "",
+   "reason": ""
+  },
+  {
+   "abbr": "NYJ",
+   "club": "New York Jets",
+   "status": "ok",
+   "source_url": "https://www.newyorkjets.com/team/depth-chart",
+   "as_of": "",
+   "reason": ""
+  },
+  {
+   "abbr": "PHI",
+   "club": "Philadelphia Eagles",
+   "status": "ok",
+   "source_url": "https://www.philadelphiaeagles.com/team/depth-chart",
+   "as_of": "",
+   "reason": ""
+  },
+  {
+   "abbr": "PIT",
+   "club": "Pittsburgh Steelers",
+   "status": "ok",
+   "source_url": "https://www.steelers.com/team/depth-chart",
+   "as_of": "",
+   "reason": ""
+  },
+  {
+   "abbr": "SEA",
+   "club": "Seattle Seahawks",
+   "status": "ok",
+   "source_url": "https://www.seahawks.com/team/depth-chart",
+   "as_of": "",
+   "reason": ""
+  },
+  {
+   "abbr": "SF",
+   "club": "San Francisco 49ers",
+   "status": "ok",
+   "source_url": "https://www.49ers.com/team/depth-chart",
+   "as_of": "",
+   "reason": ""
+  },
+  {
+   "abbr": "TB",
+   "club": "Tampa Bay Buccaneers",
+   "status": "ok",
+   "source_url": "https://www.buccaneers.com/team/depth-chart",
+   "as_of": "",
+   "reason": ""
+  },
+  {
+   "abbr": "TEN",
+   "club": "Tennessee Titans",
+   "status": "ok",
+   "source_url": "https://www.tennesseetitans.com/team/depth-chart",
+   "as_of": "",
+   "reason": ""
+  },
+  {
+   "abbr": "WAS",
+   "club": "Washington Commanders",
+   "status": "ok",
+   "source_url": "https://www.commanders.com/team/depth-chart",
+   "as_of": "",
+   "reason": ""
+  }
+ ]
+}

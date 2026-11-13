@@ -1,18 +1,18 @@
 {
- "generated_at": "2026-11-12T23:37:56+00:00",
+ "generated_at": "2026-11-13T12:57:13+00:00",
  "season": 2026,
- "last_completed_week": 9,
- "next_week": 10,
+ "last_completed_week": 10,
+ "next_week": 11,
  "counts": {
-  "games_played": 136,
+  "games_played": 137,
   "teams": 32,
   "source_files_pinned": 12,
-  "own_lines_generated": 14,
+  "own_lines_generated": 13,
   "strategies_tested": 12,
   "strategies_passing_all_gates": 0,
   "strategies_watch": 2,
-  "starters_flagged_unavailable": 109,
-  "prop_lines_generated": 343
+  "starters_flagged_unavailable": 117,
+  "prop_lines_generated": 323
  },
  "top_strategies": [
   {
@@ -182,19 +182,19 @@
    "strategy": "S10 Over when closing total is 41 or lower",
    "status": "FAIL",
    "gates_passed": 3,
-   "score_lower_ci_roi_pct": -5.41,
-   "n_graded": 1437,
-   "wins": 750,
+   "score_lower_ci_roi_pct": -5.21,
+   "n_graded": 1438,
+   "wins": 751,
    "losses": 687,
    "pushes": 28,
-   "win_pct": 0.5219,
-   "roi": -0.0036,
+   "win_pct": 0.5223,
+   "roi": -0.003,
    "roi_ci95": [
-    -0.0541,
-    0.0443
+    -0.0521,
+    0.0461
    ],
-   "units": -5.18,
-   "p_value": 0.5676,
+   "units": -4.27,
+   "p_value": 0.5576,
    "q_value": 0.9889,
    "max_drawdown_units": -25.64,
    "by_season": {
@@ -283,11 +283,11 @@
      "roi": 0.0909
     },
     "2026": {
-     "n": 25,
-     "roi": -0.3127
+     "n": 26,
+     "roi": -0.2657
     }
    },
-   "holdout_roi": -0.1109,
+   "holdout_roi": -0.0874,
    "max_abs_corr": 1.0,
    "gates": [
     {
@@ -306,13 +306,13 @@
      "id": "G3",
      "name": "Sample size",
      "pass": true,
-     "detail": "n=1437 graded bets (minimum 100)."
+     "detail": "n=1438 graded bets (minimum 100)."
     },
     {
      "id": "G4",
      "name": "Holdout positive",
      "pass": false,
-     "detail": "latest-window ROI=-0.1109."
+     "detail": "latest-window ROI=-0.0874."
     },
     {
      "id": "G5",

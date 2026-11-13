@@ -1,0 +1,248 @@
+{
+ "meta": {
+  "built_utc": "2026-11-13T12:45Z",
+  "count": 15
+ },
+ "suggestions": [
+  {
+   "id": "SG-01",
+   "area": "Data currency",
+   "priority": "P1",
+   "decision": "D-01",
+   "title": "Add a standings reconciliation gate that blocks a publish when a club's record disagrees with the official page",
+   "why": "The site currently serves NYG 5-2-1 and WAS 2-5-1 while the official page reads 5-3-1 and 3-5-1, because the Thursday game went final after the snapshot was taken.",
+   "how": "Fetch the official standings page in the same run, parse 32 rows, compare W-L-T to the snapshot, fail on any difference unless the fetch itself failed (then mark the run official_unreachable and publish with a banner).",
+   "cost": "Low - one script, one workflow step",
+   "risk": "A fetch failure must not silently pass",
+   "evidence": "Q-01, Q-02, F-101",
+   "source": {
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/suggestions.json",
+    "t": "suggestion record"
+   }
+  },
+  {
+   "id": "SG-02",
+   "area": "Strategy leaderboard",
+   "priority": "P1",
+   "decision": "D-02",
+   "title": "Make the observed-price leaderboard the only headline table",
+   "why": "Two boards are live. The one readers see assumes -110 on every bet; the priced one excludes unpriced games but measures a return that exists.",
+   "how": "Render data/s9cb/leaderboard.json as the headline; move the -110 board to a labelled sensitivity page with the assumption in the first column.",
+   "cost": "Low - one renderer change",
+   "risk": "Some rules drop below the 200-bet minimum and must be shown as unscored",
+   "evidence": "Q-10, Q-11, Q-12",
+   "source": {
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/suggestions.json",
+    "t": "suggestion record"
+   }
+  },
+  {
+   "id": "SG-03",
+   "area": "Strategy leaderboard",
+   "priority": "P1",
+   "decision": "D-03",
+   "title": "Add a unit test that pins the leaderboard sort order to its caption",
+   "why": "The ordering is currently correct (sorted by the lower 95% ROI bound), but nothing enforces it; a renderer change would silently break the sentence beside the table.",
+   "how": "Assert that the rendered row order equals the score_lower_ci_roi_pct order, and that the caption string is present.",
+   "cost": "Very low - one sort key",
+   "risk": "None identified",
+   "evidence": "F-116",
+   "source": {
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/suggestions.json",
+    "t": "suggestion record"
+   }
+  },
+  {
+   "id": "SG-04",
+   "area": "Correlation",
+   "priority": "P1",
+   "decision": "D-13",
+   "title": "Publish the sample filter and n beside every correlation",
+   "why": "C1 reproduces as r=0.4309 on 7,103 games but the site publishes 0.4312 on 6,975 games. The value is reproducible; the sample is not.",
+   "how": "Add filter, n, excluded count and source file to each row; fail the build if any is missing.",
+   "cost": "Low",
+   "risk": "None identified",
+   "evidence": "Q-16, F-109",
+   "source": {
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/suggestions.json",
+    "t": "suggestion record"
+   }
+  },
+  {
+   "id": "SG-05",
+   "area": "Depth charts",
+   "priority": "P1",
+   "decision": "D-06",
+   "title": "Render the 31-club depth-chart scrape that already exists",
+   "why": "934 sourced position rows covering 31 clubs are committed, but the published page shows 3 clubs.",
+   "how": "Render data/session-1505ac8e/depth_charts.json with a per-club anchor and a coverage counter; render HOU as 'no chart captured'.",
+   "cost": "Medium - page build + filter",
+   "risk": "Chart dates are not comparable across clubs (Q-08)",
+   "evidence": "Q-07, F-104",
+   "source": {
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/suggestions.json",
+    "t": "suggestion record"
+   }
+  },
+  {
+   "id": "SG-06",
+   "area": "Injury tracking",
+   "priority": "P1",
+   "decision": "D-07",
+   "title": "Carry a three-state availability column instead of one blended index",
+   "why": "9 of 296 injury rows carry a game designation. Folding 'no designation yet' into the same number as 'fit' makes an unreported club look healthy.",
+   "how": "Add game_status_state in {out, doubtful, questionable, practice-only, cleared}. Show the practice-only weight as a model parameter, not a statistic.",
+   "cost": "Medium",
+   "risk": "Weights are a modelling choice",
+   "evidence": "Q-05, F-105",
+   "source": {
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/suggestions.json",
+    "t": "suggestion record"
+   }
+  },
+  {
+   "id": "SG-07",
+   "area": "Site structure",
+   "priority": "P2",
+   "decision": "D-11",
+   "title": "Declare an authoritative generation per table on the landing page",
+   "why": "Several generations publish overlapping numbers. A reader cannot tell which one to trust for standings.",
+   "how": "One table on the front door: table, authoritative page, last verified, other copies.",
+   "cost": "Low",
+   "risk": "Readers may still prefer an older page",
+   "evidence": "F-103",
+   "source": {
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/suggestions.json",
+    "t": "suggestion record"
+   }
+  },
+  {
+   "id": "SG-08",
+   "area": "Verification",
+   "priority": "P2",
+   "decision": "D-12",
+   "title": "Promote the official-source audit to a required check",
+   "why": "The audit exists and runs, but a hard mismatch does not stop a merge.",
+   "how": "Add the job to required status checks; document the override path with a recorded reason.",
+   "cost": "Low",
+   "risk": "A flaky upstream fetch blocks merges; mitigate with retry and an explicit override",
+   "evidence": "D-12",
+   "source": {
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/suggestions.json",
+    "t": "suggestion record"
+   }
+  },
+  {
+   "id": "SG-09",
+   "area": "Player props",
+   "priority": "P2",
+   "decision": "D-04",
+   "title": "Keep props projection-only and state the block once, prominently",
+   "why": "No prop price exists in any source, so no prop bet can be scored; a prop leaderboard without prices would be invented.",
+   "how": "Keep the price column blank with a badge; add one sentence to the landing page explaining why the third bet type is unscoreable.",
+   "cost": "Very low",
+   "risk": "Leaves a requested feature partial",
+   "evidence": "Q-11, F-102",
+   "source": {
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/suggestions.json",
+    "t": "suggestion record"
+   }
+  },
+  {
+   "id": "SG-10",
+   "area": "Injury tracking",
+   "priority": "P2",
+   "decision": "D-08",
+   "title": "Collect the official inactive lists once they are published",
+   "why": "Inactives are the only official record of who actually dressed; without them 'Questionable' never resolves.",
+   "how": "Per week, capture the official inactives article linked from the injury page; parse game, club, player, status; store with URL and fetch time.",
+   "cost": "Medium",
+   "risk": "URL pattern changes weekly; must fail loudly",
+   "evidence": "Q-09",
+   "source": {
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/suggestions.json",
+    "t": "suggestion record"
+   }
+  },
+  {
+   "id": "SG-11",
+   "area": "Own lines",
+   "priority": "P2",
+   "decision": "D-09",
+   "title": "Link the market number to its feed on every row",
+   "why": "The own-lines table cites the nfl.com schedule page, which publishes no spread. The number is modelled from a pinned feed and the row does not say so.",
+   "how": "Split the source column into fixture (official) and market feed (provenance-pinned).",
+   "cost": "Low",
+   "risk": "None identified",
+   "evidence": "Q-15, F-106",
+   "source": {
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/suggestions.json",
+    "t": "suggestion record"
+   }
+  },
+  {
+   "id": "SG-12",
+   "area": "Process",
+   "priority": "P2",
+   "decision": "D-14",
+   "title": "Give index.html a single writer",
+   "why": "pipeline/gen_site.py and tools/build.py both write it; the second one wins, so CI verifies a page the site does not serve.",
+   "how": "tools/build.py writes legacy-site.html; tools/verify.py reads the new name; add a grep test that only one module writes index.html.",
+   "cost": "Low",
+   "risk": "Another session's generator changes shape",
+   "evidence": "Q-21, F-107",
+   "source": {
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/suggestions.json",
+    "t": "suggestion record"
+   }
+  },
+  {
+   "id": "SG-13",
+   "area": "Competition",
+   "priority": "P2",
+   "decision": "D-10",
+   "title": "Freeze the reward formula before any rule passes",
+   "why": "Reward values are unpublished by any official source and defining them after a winner appears is post-hoc selection.",
+   "how": "Version and date the formula; keep values blank until a human sets them.",
+   "cost": "Low",
+   "risk": "The formula can still be changed later",
+   "evidence": "Q-13",
+   "source": {
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/suggestions.json",
+    "t": "suggestion record"
+   }
+  },
+  {
+   "id": "SG-14",
+   "area": "Signals",
+   "priority": "P3",
+   "decision": "",
+   "title": "Publish the list of signals that were tested and failed, with their effect sizes",
+   "why": "Twelve rules are tested and none pass. The failures are the most valuable output of the lab and they are buried.",
+   "how": "A table: signal, sample, point estimate, interval, verdict. Never a single number without its interval.",
+   "cost": "Low",
+   "risk": "None identified",
+   "evidence": "Q-12",
+   "source": {
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/suggestions.json",
+    "t": "suggestion record"
+   }
+  },
+  {
+   "id": "SG-15",
+   "area": "Signals",
+   "priority": "P3",
+   "decision": "",
+   "title": "Add an out-of-sample decay column to every rule",
+   "why": "A rule can look good over 20 seasons and be dead in the last two; the holdout column exists but is not shown beside the headline.",
+   "how": "Show holdout ROI next to full-sample ROI in the same row.",
+   "cost": "Low",
+   "risk": "None identified",
+   "evidence": "SG-02",
+   "source": {
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/suggestions.json",
+    "t": "suggestion record"
+   }
+  }
+ ]
+}

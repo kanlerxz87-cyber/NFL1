@@ -1,0 +1,774 @@
+{
+ "meta": {
+  "session": "9c208ed8-nfl1",
+  "built_utc": "2026-11-13T12:45Z",
+  "retrieved_window": "2026-11-13T12:05Z\u201312:30Z",
+  "season": 2026,
+  "week_played": 10,
+  "week_next": 11,
+  "official_sources": [
+   "https://www.nfl.com/standings/division/2026/REG",
+   "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "https://www.nfl.com/injuries/",
+   "https://www.chiefs.com/team/depth-chart",
+   "https://www.philadelphiaeagles.com/team/depth-chart",
+   "https://www.nfl.com/teams/kansas-city-chiefs/depth-chart"
+  ]
+ },
+ "decisions": [
+  {
+   "id": "D-01",
+   "area": "Data currency",
+   "title": "Publish from a snapshot taken after the last final whistle",
+   "question": "Should the site keep serving the 2026-11-12 23:37 UTC snapshot while Thursday's game is finishing, or reconcile to the latest official standings before every publish?",
+   "status": "ready",
+   "scope": "1 new gate script + 1 workflow step; no data model change",
+   "options": [
+    {
+     "id": "A",
+     "label": "Reconcile-then-publish (blocking gate)",
+     "buys": "The standings page can never show a win total that contradicts a game the site itself lists as final.",
+     "costs": "A publish can be delayed by minutes while the official page settles; a broken fetch blocks the site update.",
+     "risk": "If nfl.com is unreachable, the publish fails closed and the site goes stale \u2014 needs a documented override.",
+     "evidence": [
+      {
+       "t": "Today's official standings",
+       "u": "https://www.nfl.com/standings/division/2026/REG",
+       "note": "NYG 5-3-1 / WAS 3-5-1"
+      },
+      {
+       "t": "Committed snapshot",
+       "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/snapshot.json",
+       "note": "NYG 5-2-1 / WAS 2-5-1, built 2026-11-12T23:37Z"
+      },
+      {
+       "t": "Thursday result",
+       "u": "https://www.nfl.com/schedules/2026/by-week/week-10",
+       "note": "Commanders 24, Giants 21, FINAL"
+      }
+     ]
+    },
+    {
+     "id": "B",
+     "label": "Publish now, flag the lag",
+     "buys": "No build risk; the site always updates.",
+     "costs": "Two numbers on the same site disagree (snapshot says 136 games, the schedule page lists 137) and a reader has to notice the flag.",
+     "risk": "Silent-looking inconsistency; a reader who ignores the flag makes a decision on a stale table.",
+     "evidence": [
+      {
+       "t": "Standings diff table",
+       "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/official/2026-11-13/standings_2026-11-13.tsv",
+       "note": "only NYG and WAS differ"
+      }
+     ]
+    },
+    {
+     "id": "C",
+     "label": "Show both snapshots side by side until they agree",
+     "buys": "Transparent and needs no new gate.",
+     "costs": "Doubles the size of the standings table; readers must choose which row to trust.",
+     "risk": "Presentation is longer than the problem deserves.",
+     "evidence": [
+      {
+       "t": "Standings page",
+       "u": "https://www.nfl.com/standings/division/2026/REG",
+       "note": "official single source of truth"
+      }
+     ]
+    }
+   ],
+   "recommendation": "A",
+   "rec_why": "The failure mode of B is a reader trusting a table that the site's own schedule page contradicts. The override for A is one documented switch, exercised only when the official fetch fails.",
+   "gate": "Gate: a script fails the build if any club's W-L-T differs from the official page fetched in the same run, unless the run is flagged `official_unreachable`.",
+   "blocked_by": [],
+   "source": {
+    "u": "https://www.nfl.com/standings/division/2026/REG",
+    "t": "NFL"
+   }
+  },
+  {
+   "id": "D-02",
+   "area": "Strategy leaderboard",
+   "title": "Retire the -110 price assumption before any strategy is presented as a candidate",
+   "question": "Two leaderboards are live: one assumes -110 on every bet, the other uses observed prices. Which one should be the only one on the site?",
+   "status": "ready",
+   "scope": "1 renderer + 1 data file; no analysis rewrite",
+   "options": [
+    {
+     "id": "A",
+     "label": "Observed-price board only",
+     "buys": "Every scored bet carries the price the source recorded; the ROI is achievable by definition at that price.",
+     "costs": "Parts of the file carry no price, so 1,902 of 6,653 priced-or-unpriced games are excluded and must be published as excluded.",
+     "risk": "Smaller samples per rule; several rules fall below 200 bets and therefore cannot pass any gate.",
+     "evidence": [
+      {
+       "t": "Observed-price board",
+       "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json",
+       "note": "14,440 scored bets, 12 rules"
+      },
+      {
+       "t": "Price rule (G2)",
+       "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/s9cb/analysis/strategies.py",
+       "note": "'No -110 assumption is used'"
+      }
+     ]
+    },
+    {
+     "id": "B",
+     "label": "-110 board only",
+     "buys": "A much longer window (2005-2026) and bigger samples.",
+     "costs": "Every ROI on the page is an assumption, not an observed return; a real book prices most of these at worse than -110.",
+     "risk": "Overstates returns by construction; the assumption is documented but the headline number is not achievable.",
+     "evidence": [
+      {
+       "t": "-110 board",
+       "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/strategies.json",
+       "note": "window.price_assumption = '-110 on every bet'"
+      }
+     ]
+    },
+    {
+     "id": "C",
+     "label": "Keep both, labelled and separated",
+     "buys": "Continuity with earlier pages; both methodologies stay visible.",
+     "costs": "Two rows can carry the same rule name and different ROI, which is the current state.",
+     "risk": "Reader confusion; this is exactly what produced the conflicting numbers today.",
+     "evidence": [
+      {
+       "t": "Homepage leaderboard",
+       "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/index.html",
+       "note": "S11 'Under in divisional games with total 47+' 4.2% (-110 board)"
+      },
+      {
+       "t": "Research board",
+       "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json",
+       "note": "the closest rule is S09 'Under when the total is 40 or lower' at -7.9%"
+      }
+     ]
+    }
+   ],
+   "recommendation": "A",
+   "rec_why": "A leaderboard competition is only meaningful if the number it ranks is a return someone could have earned. The -110 board can stay as a labelled sensitivity table, never as the headline.",
+   "gate": "Gate: no strategy may appear in the headline table without a non-null average decimal price and a count of excluded bets on the same row.",
+   "blocked_by": [],
+   "source": {
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json",
+    "t": "repository"
+   }
+  },
+  {
+   "id": "D-03",
+   "area": "Strategy leaderboard",
+   "title": "Keep the published ranking rule and lock it with a test",
+   "question": "The board is correctly ordered by the lower 95% ROI bound. Should that ordering be enforced by a test, or left to the renderer?",
+   "status": "ready",
+   "scope": "1 sort key in 1 renderer",
+   "options": [
+    {
+     "id": "A",
+     "label": "Rank by lower 95% bound of ROI",
+     "buys": "Matches the published sentence; a lucky small sample cannot top the table.",
+     "costs": "Every row currently shows a negative lower bound, so the top of the table is the 'least negative' strategy \u2014 honest but unflattering.",
+     "risk": "A reader may read rank 1 as a winner. Needs an explicit 'no rule passes' banner above the table.",
+     "evidence": [
+      {
+       "t": "Stated rule",
+       "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/index.html",
+       "note": "'Ranked by the lower bound of the 95% ROI interval'"
+      },
+      {
+       "t": "Actual order",
+       "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/strategies.json",
+       "note": "gates_passed desc, then score"
+      }
+     ]
+    },
+    {
+     "id": "B",
+     "label": "Rank by gates passed, and say so",
+     "buys": "Zero code risk; matches what the table already does.",
+     "costs": "A rule with a good gate count and a deeply negative ROI can outrank a rule with a better return.",
+     "risk": "Ranks methodology compliance, not skill \u2014 the opposite of a competition.",
+     "evidence": [
+      {
+       "t": "Gate definitions",
+       "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json",
+       "note": "8 gates incl. holdout and BH"
+      }
+     ]
+    }
+   ],
+   "recommendation": "A",
+   "rec_why": "The order is right today and nothing protects it. A one-line assertion is cheaper than re-auditing the table next time it changes.",
+   "gate": "Gate: a unit test fails if the rendered row order differs from the order of score_lower_ci_roi_pct.",
+   "blocked_by": [],
+   "source": {
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/index.html",
+    "t": "repository"
+   }
+  },
+  {
+   "id": "D-04",
+   "area": "Player props",
+   "title": "Decide whether props stay projection-only or get a licensed price source",
+   "question": "No prop market on the site has a price, so no prop bet can be scored. Is a priced prop feed in scope?",
+   "status": "blocked",
+   "scope": "1 new data source + licence review; no code until a source exists",
+   "options": [
+    {
+     "id": "A",
+     "label": "Stay projection-only, say so once",
+     "buys": "Honest and free; nothing on the site implies a prop edge.",
+     "costs": "Prop combos cannot enter the leaderboard; the 'single bet / parlay / prop combo' requirement stays partially met.",
+     "risk": "The competition covers two of the three bet types the brief asks for.",
+     "evidence": [
+      {
+       "t": "Prop price status",
+       "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/props.json",
+       "note": "'UNVERIFIED / BLANK: no official or book-level price exists'"
+      }
+     ]
+    },
+    {
+     "id": "B",
+     "label": "Add a licensed price feed",
+     "buys": "Props become scoreable and the competition is complete.",
+     "costs": "A commercial licence, a new collector, and a price-history store; none of that exists today.",
+     "risk": "Licence cost and terms are commercial facts this repository cannot verify. Blank until quoted.",
+     "evidence": [
+      {
+       "t": "No official odds",
+       "u": "https://www.nfl.com/standings/division/2026/REG",
+       "note": "the NFL publishes standings, not prices"
+      }
+     ]
+    }
+   ],
+   "recommendation": "A now, B only with a quoted licence",
+   "rec_why": "Publishing a prop leaderboard without prices would be a fabricated edge. The blank is the correct output until a priced source exists.",
+   "gate": "Gate: a prop bet may only be scored when its price is present and timestamped before kick-off.",
+   "blocked_by": [
+    "Q-11"
+   ],
+   "source": {
+    "u": "https://www.nfl.com/standings/division/2026/REG",
+    "t": "NFL"
+   }
+  },
+  {
+   "id": "D-05",
+   "area": "Depth charts",
+   "title": "Use club-published charts as the official fallback for 2nd/3rd/4th string",
+   "question": "nfl.com publishes no depth chart (verified 404 today). Are the 32 club sites acceptable official sources for depth order?",
+   "status": "ready",
+   "scope": "1 method note + 1 coverage gate",
+   "options": [
+    {
+     "id": "A",
+     "label": "Club sites, labelled per club",
+     "buys": "31 of 32 clubs are already scraped; the chart is the club's own publication, and several label it 'Unofficial'.",
+     "costs": "Labels and update cadence differ by club; HOU could not be read.",
+     "risk": "Two clubs may publish on different days, so a cross-team comparison can mix snapshots.",
+     "evidence": [
+      {
+       "t": "nfl.com 404",
+       "u": "https://www.nfl.com/teams/kansas-city-chiefs/depth-chart",
+       "note": "HTTP 200 body '404 - Flag on the Play'"
+      },
+      {
+       "t": "KC chart",
+       "u": "https://www.chiefs.com/team/depth-chart",
+       "note": "titled 'Unofficial Depth Chart'"
+      },
+      {
+       "t": "PHI chart",
+       "u": "https://www.philadelphiaeagles.com/team/depth-chart",
+       "note": "'compiled by the Eagles communications department'"
+      }
+     ]
+    },
+    {
+     "id": "B",
+     "label": "Wait for an official league-wide chart",
+     "buys": "One consistent source for all 32 clubs.",
+     "costs": "No such page exists; the 2nd/3rd/4th-string requirement would stay unmet.",
+     "risk": "Indefinite block on an explicitly requested feature.",
+     "evidence": [
+      {
+       "t": "nfl.com depth chart probe",
+       "u": "https://www.nfl.com/teams/kansas-city-chiefs/depth-chart",
+       "note": "no league-wide chart page found"
+      }
+     ]
+    }
+   ],
+   "recommendation": "A",
+   "rec_why": "The club publishes the chart; citing the club and its own label is a stronger provenance claim than citing a third-party aggregator. The gap that matters is coverage, not authority.",
+   "gate": "Gate: every depth row carries its club URL and the club's own chart date, or renders as an explicit blank.",
+   "blocked_by": [],
+   "source": {
+    "u": "https://www.nfl.com/teams/kansas-city-chiefs/depth-chart",
+    "t": "NFL"
+   }
+  },
+  {
+   "id": "D-06",
+   "area": "Depth charts",
+   "title": "Publish all 31 scraped clubs, not the 3 that reach the page",
+   "question": "The scrape holds 31 clubs and 934 position rows, but the published chart page covers 3 clubs (KC, GB, SF). Why, and what should be published?",
+   "status": "ready",
+   "scope": "1 renderer + 1 data file",
+   "options": [
+    {
+     "id": "A",
+     "label": "Render all 31 clubs from the existing scrape",
+     "buys": "Closes the 2nd/3rd/4th-string gap for 31 clubs with data already in the repo and already sourced.",
+     "costs": "A large page; needs a per-club filter or one page per club.",
+     "risk": "HOU stays blank and must be labelled, not hidden.",
+     "evidence": [
+      {
+       "t": "31-club scrape",
+       "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/session-1505ac8e/depth_charts.json",
+       "note": "clubs_ok 31, clubs_unavailable [HOU], 934 rows"
+      },
+      {
+       "t": "3-club page data",
+       "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/depth_chart.json",
+       "note": "85 rows, codes KC/GB/SF only"
+      }
+     ]
+    },
+    {
+     "id": "B",
+     "label": "Keep the 3-club sample",
+     "buys": "No work.",
+     "costs": "The site does not answer the question it was built to answer for 28 clubs.",
+     "risk": "A reader assumes no other club has a chart.",
+     "evidence": [
+      {
+       "t": "Published page",
+       "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/depth-chart.html",
+       "note": "KC/GB/SF tables only"
+      }
+     ]
+    }
+   ],
+   "recommendation": "A",
+   "rec_why": "The data is already collected, hashed and sourced. Rendering it is a presentation change with no new claims.",
+   "gate": "Gate: a coverage counter on the page prints captured clubs / 32 and names the clubs without a chart.",
+   "blocked_by": [],
+   "source": {
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/session-1505ac8e/depth_charts.json",
+    "t": "repository"
+   }
+  },
+  {
+   "id": "D-07",
+   "area": "Injury tracking",
+   "title": "Separate 'no game designation yet' from 'healthy'",
+   "question": "Mid-week, most clubs publish practice participation only. Should a blank game status be treated as available?",
+   "status": "ready",
+   "scope": "1 column + 1 rule in the availability model",
+   "options": [
+    {
+     "id": "A",
+     "label": "Three-state column: Out / Questionable-family / No designation yet",
+     "buys": "A reader can see that 'blank' means 'not published', not 'fit'.",
+     "costs": "One more column; the attrition index needs a documented weight for the third state (it already uses 0.5/0.2 for practice-only).",
+     "risk": "Any weighting is a modelling choice and must be labelled as a model weight, not an NFL statistic.",
+     "evidence": [
+      {
+       "t": "Official page",
+       "u": "https://www.nfl.com/injuries/",
+       "note": "9 rows carry a game status; the rest are practice-only"
+      },
+      {
+       "t": "Model weights",
+       "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/availability.json",
+       "note": "practice DNP 0.5 / limited 0.2, rescaled 0-100"
+      }
+     ]
+    },
+    {
+     "id": "B",
+     "label": "Keep the current single index",
+     "buys": "One number per club, easy to scan.",
+     "costs": "Collapses 'not published' and 'fit' into the same reading.",
+     "risk": "A club that has not reported looks as healthy as a club with a fully cleared list.",
+     "evidence": [
+      {
+       "t": "Availability page",
+       "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pages/injuries.html",
+       "note": "attrition index per club"
+      }
+     ]
+    }
+   ],
+   "recommendation": "A",
+   "rec_why": "The distinction is the whole point of tracking injuries against a depth chart: the reader needs to know whether a starter is out or simply not yet designated.",
+   "gate": "Gate: no cell may render blank; each renders 'No designation yet' with the source date, or the official value.",
+   "blocked_by": [],
+   "source": {
+    "u": "https://www.nfl.com/injuries/",
+    "t": "NFL"
+   }
+  },
+  {
+   "id": "D-08",
+   "area": "Injury tracking",
+   "title": "Publish inactive lists for games already played",
+   "question": "Once a game kicks off, the official inactive list is the authoritative availability record. Is it in scope?",
+   "status": "blocked",
+   "scope": "1 collector + 1 table; depends on a reachable official page",
+   "options": [
+    {
+     "id": "A",
+     "label": "Add the official inactives page per week",
+     "buys": "Turns 'questionable' into 'did not dress', which is what actually happened.",
+     "costs": "The list is published about 90 minutes before kick-off and is per game, not per player.",
+     "risk": "The nfl.com inactives article URL changes weekly; the collector must fail loudly rather than silently skip.",
+     "evidence": [
+      {
+       "t": "Inactives entry point",
+       "u": "https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season",
+       "note": "week-9 article linked from the injury page news rail"
+      }
+     ]
+    },
+    {
+     "id": "B",
+     "label": "Leave it out",
+     "buys": "No new dependency.",
+     "costs": "Post-game availability analysis stays weaker than pre-game.",
+     "risk": "None, other than the gap.",
+     "evidence": [
+      {
+       "t": "Injury page",
+       "u": "https://www.nfl.com/injuries/",
+       "note": "game status only"
+      }
+     ]
+    }
+   ],
+   "recommendation": "A",
+   "rec_why": "Inactives are the only official record of who actually dressed; without them, 'Questionable' remains an unresolved category forever.",
+   "gate": "Gate: an inactive row is only published with the game id and the official article URL it came from.",
+   "blocked_by": [
+    "Q-09"
+   ],
+   "source": {
+    "u": "https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season",
+    "t": "NFL"
+   }
+  },
+  {
+   "id": "D-09",
+   "area": "Own lines",
+   "title": "Make the market comparison explicit on every line",
+   "question": "Own lines are published next to consensus closing lines. Should the page state where the market number comes from every time?",
+   "status": "ready",
+   "scope": "1 column + 1 footnote",
+   "options": [
+    {
+     "id": "A",
+     "label": "Every market cell links to its feed",
+     "buys": "A reader can tell an observed price from a modelled one.",
+     "costs": "Cells get a second link next to the official one.",
+     "risk": "None identified.",
+     "evidence": [
+      {
+       "t": "Price provenance",
+       "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/provenance.json",
+       "note": "file URL + sha256"
+      },
+      {
+       "t": "Own lines",
+       "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/lines.json",
+       "note": "market_home_line / market_total per fixture"
+      }
+     ]
+    },
+    {
+     "id": "B",
+     "label": "One footnote for the whole table",
+     "buys": "Cleaner table.",
+     "costs": "A reader who screenshots one row loses the provenance.",
+     "risk": "Same class of problem as the standings drift: provenance that lives far from the number.",
+     "evidence": [
+      {
+       "t": "Current page",
+       "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/index.html",
+       "note": "market columns cite the nfl.com schedule page"
+      }
+     ]
+    }
+   ],
+   "recommendation": "A",
+   "rec_why": "The brief asks for a source link on every row. A modelled market number presented without its feed is the one place the site currently breaks that rule.",
+   "gate": "Gate: the link checker fails a table row whose market cell has no https source.",
+   "blocked_by": [],
+   "source": {
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/provenance.json",
+    "t": "repository"
+   }
+  },
+  {
+   "id": "D-10",
+   "area": "Competition",
+   "title": "Define the reward pool before the first passing strategy",
+   "question": "The competition promises rewards for top strategies. No official source publishes reward values. Should the pool be defined now or after a strategy passes?",
+   "status": "ready",
+   "scope": "1 spec page; no code",
+   "options": [
+    {
+     "id": "A",
+     "label": "Publish the reward spec as a formula with blank values",
+     "buys": "The rules are fixed before anyone can win, which is the anti-cherry-picking argument.",
+     "costs": "A document with blanks looks unfinished.",
+     "risk": "A formula can still be tuned later; only a signed-off spec prevents that.",
+     "evidence": [
+      {
+       "t": "Reward fields",
+       "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/leaderboard_rules.json",
+       "note": "existing schema"
+      },
+      {
+       "t": "Flag F12",
+       "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/flags.json",
+       "note": "reward values not published by any official source"
+      }
+     ]
+    },
+    {
+     "id": "B",
+     "label": "Wait until a strategy passes the gates",
+     "buys": "No premature spec.",
+     "costs": "At the current rate (0 of 12 rules pass) that could be a long wait, and the formula would then be chosen by the winner's shape.",
+     "risk": "Any reward defined after the fact is a post-hoc selection.",
+     "evidence": [
+      {
+       "t": "Gate matrix",
+       "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json",
+       "note": "0 rules pass all 8 gates"
+      }
+     ]
+    }
+   ],
+   "recommendation": "A",
+   "rec_why": "Publishing the formula before a winner exists is the cheapest way to make the competition credible. The values can stay blank until a human sets them.",
+   "gate": "Gate: the reward page must show the formula version and the date it was frozen.",
+   "blocked_by": [
+    "Q-13"
+   ],
+   "source": {
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/leaderboard_rules.json",
+    "t": "repository"
+   }
+  },
+  {
+   "id": "D-11",
+   "area": "Site structure",
+   "title": "One entry point or six generations",
+   "question": "The repo publishes six site generations (root dashboard, pages/, docs/, verified-lab/, referee/, lab/, dashboard/, research/, room/). Should the landing page route readers to one of them?",
+   "status": "ready",
+   "scope": "1 landing page + 1 index of generations",
+   "options": [
+    {
+     "id": "A",
+     "label": "One landing page, every generation linked and labelled",
+     "buys": "A reader sees one front door and can still reach every earlier build.",
+     "costs": "The landing page must carry a 'what is this' line per generation.",
+     "risk": "Six links invite comparison shopping between conflicting numbers.",
+     "evidence": [
+      {
+       "t": "Sections register",
+       "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pages/sections.html",
+       "note": "40 sections across six generations"
+      }
+     ]
+    },
+    {
+     "id": "B",
+     "label": "Merge everything into one generation",
+     "buys": "No conflicting numbers.",
+     "costs": "Destroys independent implementations that cross-check each other, which is the repo's main quality signal.",
+     "risk": "Loses the independent reproduction that caught the division-count bug.",
+     "evidence": [
+      {
+       "t": "Independent builds",
+       "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/README.md",
+       "note": "three deliberately independent implementations"
+      }
+     ]
+    }
+   ],
+   "recommendation": "A",
+   "rec_why": "The independent builds are the reason several errors were caught. Keep them, but make the front door single and state which generation is authoritative for each table.",
+   "gate": "Gate: every generation page carries a one-line 'authoritative for' statement.",
+   "blocked_by": [],
+   "source": {
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pages/sections.html",
+    "t": "repository"
+   }
+  },
+  {
+   "id": "D-12",
+   "area": "Verification",
+   "title": "Run the official-source audit as a required check, not an advisory one",
+   "question": "The 34-check source audit exists but does not block a merge. Should it?",
+   "status": "ready",
+   "scope": "1 workflow file + branch protection",
+   "options": [
+    {
+     "id": "A",
+     "label": "Make it a required check",
+     "buys": "A hard mismatch stops publication; documented flags stay visible.",
+     "costs": "A flaky nfl.com fetch can block a legitimate merge.",
+     "risk": "Requires a documented override path with a recorded reason.",
+     "evidence": [
+      {
+       "t": "Audit workflow",
+       "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/.github/workflows/verified-source-audit.yml",
+       "note": "exists; enforcement pending"
+      },
+      {
+       "t": "Audit runner",
+       "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/scripts/verified/check_source_audit.py",
+       "note": "baseline 29 PASS / 5 FLAG / 0 FAIL"
+      }
+     ]
+    },
+    {
+     "id": "B",
+     "label": "Keep it advisory",
+     "buys": "No blocked merges.",
+     "costs": "Every drift has to be spotted by a human reading the flag page.",
+     "risk": "Today's NYG/WAS drift was found by hand, not by CI.",
+     "evidence": [
+      {
+       "t": "Standings drift",
+       "u": "https://www.nfl.com/standings/division/2026/REG",
+       "note": "caught in this session by re-fetching"
+      }
+     ]
+    }
+   ],
+   "recommendation": "A",
+   "rec_why": "An advisory audit is a report; a required audit is a gate. The brief asks for validation gates that block.",
+   "gate": "Gate: the workflow is listed under required status checks and its failure message names the failing row.",
+   "blocked_by": [],
+   "source": {
+    "u": "https://www.nfl.com/standings/division/2026/REG",
+    "t": "NFL"
+   }
+  },
+  {
+   "id": "D-13",
+   "area": "Correlation",
+   "title": "Publish the sample definition next to every correlation",
+   "question": "Correlation C1 reproduces in value (0.4309 vs 0.4312) but not in sample size (7103 vs 6975). What should a published correlation carry?",
+   "status": "ready",
+   "scope": "1 column + 1 filter statement per figure",
+   "options": [
+    {
+     "id": "A",
+     "label": "Sample definition + n + exclusion count on every figure",
+     "buys": "A reviewer can reproduce n exactly, not just r.",
+     "costs": "More columns.",
+     "risk": "None identified.",
+     "evidence": [
+      {
+       "t": "Published C1",
+       "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/correlations.json",
+       "note": "n=6975, r=0.4312, games=7103"
+      },
+      {
+       "t": "This session's recompute",
+       "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/official/2026-11-13/sources.json",
+       "note": "n=7103, r=0.4309 with every row that has a spread and a result"
+      }
+     ]
+    },
+    {
+     "id": "B",
+     "label": "Publish r with a confidence interval only",
+     "buys": "Compact.",
+     "costs": "n cannot be audited, so the interval cannot be checked.",
+     "risk": "The width of the interval is the claim; without n it is unverifiable.",
+     "evidence": [
+      {
+       "t": "Method note",
+       "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/correlations.json",
+       "note": "Fisher-z interval"
+      }
+     ]
+    }
+   ],
+   "recommendation": "A",
+   "rec_why": "The whole repository argues that an unreproducible number is not evidence. That has to apply to its own correlations.",
+   "gate": "Gate: a correlation row without n and a filter description is a build failure.",
+   "blocked_by": [],
+   "source": {
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/correlations.json",
+    "t": "repository"
+   }
+  },
+  {
+   "id": "D-14",
+   "area": "Process",
+   "title": "Give the two index.html writers one owner",
+   "question": "`pipeline/gen_site.py` writes `index.html` and the collect workflow commits it. `tools/build.py` also writes it and runs in the pull-request job, where its output is used only to check that the committed site would pass. Which one owns the file?",
+   "status": "ready",
+   "scope": "1 generator change + 1 guard",
+   "options": [
+    {
+     "id": "A",
+     "label": "build.py stops writing index.html (writes legacy-site.html instead)",
+     "buys": "One committed writer for the front door; the pull-request check then audits the page the site actually serves instead of a substitute.",
+     "costs": "One line moves; the legacy page already exists.",
+     "risk": "tools/verify.py reads index.html and needs the same file-list change; another session's generator changes shape.",
+     "evidence": [
+      {
+       "t": "Writer 1",
+       "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pipeline/gen_site.py",
+       "note": "writes index.html + pages/*"
+      },
+      {
+       "t": "Writer 2",
+       "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/tools/build.py",
+       "note": "write_page('index.html', ...) at line ~366"
+      },
+      {
+       "t": "Existing flag",
+       "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/flags.json",
+       "note": "F38 records the same hazard"
+      }
+     ]
+    },
+    {
+     "id": "B",
+     "label": "Leave both, keep the CI replacement",
+     "buys": "No risk today.",
+     "costs": "The pull-request check keeps auditing a generated substitute, and any local or ad-hoc run of tools/build.py still overwrites the front door in the working tree.",
+     "risk": "A regeneration in the wrong context silently republishes a page whose numbers come from a different data layer. This happened in the repository's own history.",
+     "evidence": [
+      {
+       "t": "CI order",
+       "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/.github/workflows/verify.yml",
+       "note": "tools/build.py runs before tools/verify.py"
+      }
+     ]
+    }
+   ],
+   "recommendation": "A",
+   "rec_why": "A front door with two authors will drift every time either runs. The fix is one line and the existing flag already documents it.",
+   "gate": "Gate: a grep-based test fails if more than one renderer writes index.html.",
+   "blocked_by": [],
+   "source": {
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pipeline/gen_site.py",
+    "t": "repository"
+   }
+  }
+ ]
+}

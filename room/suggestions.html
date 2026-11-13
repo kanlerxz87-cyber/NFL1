@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suggestions · NFL Decision Room</title>
+<meta name="description" content="Evidence-first NFL decision room: source-linked verification, gating questions, and a review-and-choose workflow before any change is implemented.">
+<link rel="stylesheet" href="assets/room.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="top-in">
+  <a class="brand" href="index.html"><span class="mark">NFL</span><span>Decision Room<small>review before change</small></span></a>
+  <nav class="main" aria-label="Sections"><a href="index.html">Overview</a><a href="executive.html">Executive summary</a><a href="decisions.html">Decide</a><a href="suggestions.html" aria-current="page">Suggestions</a><a href="questions.html">Open questions</a><a href="strategy.html">Strategy &amp; luck</a><a href="injuries.html">Injuries &amp; depth</a><a href="data.html">Verified data</a><a href="flagged.html">Flagged for review</a><a href="requirements.html">Requirements</a><a href="about.html">About</a></nav>
+</div></header>
+<main id="main">
+  <section class="page-head">
+    <p class="eyebrow">Improvements, ranked</p>
+    <h1>Suggestions</h1>
+    <p class="lede">Fifteen improvements, each tied to the decision it feeds and to the finding that justifies it.</p>
+    <p class="stamp">Built 2026-11-13 12:45 UTC · data captured 2026-11-13T12:05Z–12:30Z · season 2026, week 10 complete · every table row links to its source</p>
+  </section>
+  
+<p>Ranked by what they unblock, not by how interesting they are. <strong>P1</strong> items fix a
+number a reader currently cannot trust; <strong>P2</strong> items close a named gap;
+<strong>P3</strong> items make the research stronger but change no decision today.</p>
+<div class="table-wrap"><table class=""><caption>15 suggestions</caption><thead><tr><th>ID</th><th>Priority</th><th>Suggestion</th><th>Area</th><th>Cost</th><th>Risk</th><th>Decision</th><th>Evidence refs</th><th>Source</th></tr></thead><tbody><tr><td class="key">SG-01</td><td><span class="b b-p1">P1</span></td><td>Add a standings reconciliation gate that blocks a publish when a club&#x27;s record disagrees with the official page</td><td>Data currency</td><td>Low - one script, one workflow step</td><td>A fetch failure must not silently pass</td><td><a href="decisions.html#D-01">D-01</a></td><td>Q-01, Q-02, F-101</td><td class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/suggestions.json" rel="noopener">suggestion record</a></td></tr><tr><td class="key">SG-02</td><td><span class="b b-p1">P1</span></td><td>Make the observed-price leaderboard the only headline table</td><td>Strategy leaderboard</td><td>Low - one renderer change</td><td>Some rules drop below the 200-bet minimum and must be shown as unscored</td><td><a href="decisions.html#D-02">D-02</a></td><td>Q-10, Q-11, Q-12</td><td class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/suggestions.json" rel="noopener">suggestion record</a></td></tr><tr><td class="key">SG-03</td><td><span class="b b-p1">P1</span></td><td>Add a unit test that pins the leaderboard sort order to its caption</td><td>Strategy leaderboard</td><td>Very low - one sort key</td><td>None identified</td><td><a href="decisions.html#D-03">D-03</a></td><td>F-116</td><td class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/suggestions.json" rel="noopener">suggestion record</a></td></tr><tr><td class="key">SG-04</td><td><span class="b b-p1">P1</span></td><td>Publish the sample filter and n beside every correlation</td><td>Correlation</td><td>Low</td><td>None identified</td><td><a href="decisions.html#D-13">D-13</a></td><td>Q-16, F-109</td><td class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/suggestions.json" rel="noopener">suggestion record</a></td></tr><tr><td class="key">SG-05</td><td><span class="b b-p1">P1</span></td><td>Render the 31-club depth-chart scrape that already exists</td><td>Depth charts</td><td>Medium - page build + filter</td><td>Chart dates are not comparable across clubs (Q-08)</td><td><a href="decisions.html#D-06">D-06</a></td><td>Q-07, F-104</td><td class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/suggestions.json" rel="noopener">suggestion record</a></td></tr><tr><td class="key">SG-06</td><td><span class="b b-p1">P1</span></td><td>Carry a three-state availability column instead of one blended index</td><td>Injury tracking</td><td>Medium</td><td>Weights are a modelling choice</td><td><a href="decisions.html#D-07">D-07</a></td><td>Q-05, F-105</td><td class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/suggestions.json" rel="noopener">suggestion record</a></td></tr><tr><td class="key">SG-07</td><td><span class="b b-p2">P2</span></td><td>Declare an authoritative generation per table on the landing page</td><td>Site structure</td><td>Low</td><td>Readers may still prefer an older page</td><td><a href="decisions.html#D-11">D-11</a></td><td>F-103</td><td class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/suggestions.json" rel="noopener">suggestion record</a></td></tr><tr><td class="key">SG-08</td><td><span class="b b-p2">P2</span></td><td>Promote the official-source audit to a required check</td><td>Verification</td><td>Low</td><td>A flaky upstream fetch blocks merges; mitigate with retry and an explicit override</td><td><a href="decisions.html#D-12">D-12</a></td><td>D-12</td><td class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/suggestions.json" rel="noopener">suggestion record</a></td></tr><tr><td class="key">SG-09</td><td><span class="b b-p2">P2</span></td><td>Keep props projection-only and state the block once, prominently</td><td>Player props</td><td>Very low</td><td>Leaves a requested feature partial</td><td><a href="decisions.html#D-04">D-04</a></td><td>Q-11, F-102</td><td class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/suggestions.json" rel="noopener">suggestion record</a></td></tr><tr><td class="key">SG-10</td><td><span class="b b-p2">P2</span></td><td>Collect the official inactive lists once they are published</td><td>Injury tracking</td><td>Medium</td><td>URL pattern changes weekly; must fail loudly</td><td><a href="decisions.html#D-08">D-08</a></td><td>Q-09</td><td class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/suggestions.json" rel="noopener">suggestion record</a></td></tr><tr><td class="key">SG-11</td><td><span class="b b-p2">P2</span></td><td>Link the market number to its feed on every row</td><td>Own lines</td><td>Low</td><td>None identified</td><td><a href="decisions.html#D-09">D-09</a></td><td>Q-15, F-106</td><td class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/suggestions.json" rel="noopener">suggestion record</a></td></tr><tr><td class="key">SG-12</td><td><span class="b b-p2">P2</span></td><td>Give index.html a single writer</td><td>Process</td><td>Low</td><td>Another session&#x27;s generator changes shape</td><td><a href="decisions.html#D-14">D-14</a></td><td>Q-21, F-107</td><td class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/suggestions.json" rel="noopener">suggestion record</a></td></tr><tr><td class="key">SG-13</td><td><span class="b b-p2">P2</span></td><td>Freeze the reward formula before any rule passes</td><td>Competition</td><td>Low</td><td>The formula can still be changed later</td><td><a href="decisions.html#D-10">D-10</a></td><td>Q-13</td><td class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/suggestions.json" rel="noopener">suggestion record</a></td></tr><tr><td class="key">SG-14</td><td><span class="b b-p3">P3</span></td><td>Publish the list of signals that were tested and failed, with their effect sizes</td><td>Signals</td><td>Low</td><td>None identified</td><td><span class="blank">no decision yet</span></td><td>Q-12</td><td class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/suggestions.json" rel="noopener">suggestion record</a></td></tr><tr><td class="key">SG-15</td><td><span class="b b-p3">P3</span></td><td>Add an out-of-sample decay column to every rule</td><td>Signals</td><td>Low</td><td>None identified</td><td><span class="blank">no decision yet</span></td><td>SG-02</td><td class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/suggestions.json" rel="noopener">suggestion record</a></td></tr></tbody></table></div>
+<h2>Detail, one card per suggestion</h2>
+<details class="dec" id="SG-01">
+  <summary><span class="id">SG-01</span>
+    <span><span class="title">Add a standings reconciliation gate that blocks a publish when a club&#x27;s record disagrees with the official page</span><span class="area">Data currency · P1</span></span>
+    <span class="status"><span class="b b-p1">P1</span></span></summary>
+  <div class="body">
+    <dl class="opt" style="border:0;padding:0">
+      <dt>Why</dt><dd>The site currently serves NYG 5-2-1 and WAS 2-5-1 while the official page reads 5-3-1 and 3-5-1, because the Thursday game went final after the snapshot was taken.</dd>
+      <dt>How</dt><dd>Fetch the official standings page in the same run, parse 32 rows, compare W-L-T to the snapshot, fail on any difference unless the fetch itself failed (then mark the run official_unreachable and publish with a banner).</dd>
+      <dt>Cost</dt><dd>Low - one script, one workflow step</dd>
+      <dt>Risk</dt><dd>A fetch failure must not silently pass</dd>
+      <dt>Evidence</dt><dd>Q-01, Q-02, F-101</dd>
+    </dl></div></details><details class="dec" id="SG-02">
+  <summary><span class="id">SG-02</span>
+    <span><span class="title">Make the observed-price leaderboard the only headline table</span><span class="area">Strategy leaderboard · P1</span></span>
+    <span class="status"><span class="b b-p1">P1</span></span></summary>
+  <div class="body">
+    <dl class="opt" style="border:0;padding:0">
+      <dt>Why</dt><dd>Two boards are live. The one readers see assumes -110 on every bet; the priced one excludes unpriced games but measures a return that exists.</dd>
+      <dt>How</dt><dd>Render data/s9cb/leaderboard.json as the headline; move the -110 board to a labelled sensitivity page with the assumption in the first column.</dd>
+      <dt>Cost</dt><dd>Low - one renderer change</dd>
+      <dt>Risk</dt><dd>Some rules drop below the 200-bet minimum and must be shown as unscored</dd>
+      <dt>Evidence</dt><dd>Q-10, Q-11, Q-12</dd>
+    </dl></div></details><details class="dec" id="SG-03">
+  <summary><span class="id">SG-03</span>
+    <span><span class="title">Add a unit test that pins the leaderboard sort order to its caption</span><span class="area">Strategy leaderboard · P1</span></span>
+    <span class="status"><span class="b b-p1">P1</span></span></summary>
+  <div class="body">
+    <dl class="opt" style="border:0;padding:0">
+      <dt>Why</dt><dd>The ordering is currently correct (sorted by the lower 95% ROI bound), but nothing enforces it; a renderer change would silently break the sentence beside the table.</dd>
+      <dt>How</dt><dd>Assert that the rendered row order equals the score_lower_ci_roi_pct order, and that the caption string is present.</dd>
+      <dt>Cost</dt><dd>Very low - one sort key</dd>
+      <dt>Risk</dt><dd>None identified</dd>
+      <dt>Evidence</dt><dd>F-116</dd>
+    </dl></div></details><details class="dec" id="SG-04">
+  <summary><span class="id">SG-04</span>
+    <span><span class="title">Publish the sample filter and n beside every correlation</span><span class="area">Correlation · P1</span></span>
+    <span class="status"><span class="b b-p1">P1</span></span></summary>
+  <div class="body">
+    <dl class="opt" style="border:0;padding:0">
+      <dt>Why</dt><dd>C1 reproduces as r=0.4309 on 7,103 games but the site publishes 0.4312 on 6,975 games. The value is reproducible; the sample is not.</dd>
+      <dt>How</dt><dd>Add filter, n, excluded count and source file to each row; fail the build if any is missing.</dd>
+      <dt>Cost</dt><dd>Low</dd>
+      <dt>Risk</dt><dd>None identified</dd>
+      <dt>Evidence</dt><dd>Q-16, F-109</dd>
+    </dl></div></details><details class="dec" id="SG-05">
+  <summary><span class="id">SG-05</span>
+    <span><span class="title">Render the 31-club depth-chart scrape that already exists</span><span class="area">Depth charts · P1</span></span>
+    <span class="status"><span class="b b-p1">P1</span></span></summary>
+  <div class="body">
+    <dl class="opt" style="border:0;padding:0">
+      <dt>Why</dt><dd>934 sourced position rows covering 31 clubs are committed, but the published page shows 3 clubs.</dd>
+      <dt>How</dt><dd>Render data/session-1505ac8e/depth_charts.json with a per-club anchor and a coverage counter; render HOU as &#x27;no chart captured&#x27;.</dd>
+      <dt>Cost</dt><dd>Medium - page build + filter</dd>
+      <dt>Risk</dt><dd>Chart dates are not comparable across clubs (Q-08)</dd>
+      <dt>Evidence</dt><dd>Q-07, F-104</dd>
+    </dl></div></details><details class="dec" id="SG-06">
+  <summary><span class="id">SG-06</span>
+    <span><span class="title">Carry a three-state availability column instead of one blended index</span><span class="area">Injury tracking · P1</span></span>
+    <span class="status"><span class="b b-p1">P1</span></span></summary>
+  <div class="body">
+    <dl class="opt" style="border:0;padding:0">
+      <dt>Why</dt><dd>9 of 296 injury rows carry a game designation. Folding &#x27;no designation yet&#x27; into the same number as &#x27;fit&#x27; makes an unreported club look healthy.</dd>
+      <dt>How</dt><dd>Add game_status_state in {out, doubtful, questionable, practice-only, cleared}. Show the practice-only weight as a model parameter, not a statistic.</dd>
+      <dt>Cost</dt><dd>Medium</dd>
+      <dt>Risk</dt><dd>Weights are a modelling choice</dd>
+      <dt>Evidence</dt><dd>Q-05, F-105</dd>
+    </dl></div></details><details class="dec" id="SG-07">
+  <summary><span class="id">SG-07</span>
+    <span><span class="title">Declare an authoritative generation per table on the landing page</span><span class="area">Site structure · P2</span></span>
+    <span class="status"><span class="b b-p2">P2</span></span></summary>
+  <div class="body">
+    <dl class="opt" style="border:0;padding:0">
+      <dt>Why</dt><dd>Several generations publish overlapping numbers. A reader cannot tell which one to trust for standings.</dd>
+      <dt>How</dt><dd>One table on the front door: table, authoritative page, last verified, other copies.</dd>
+      <dt>Cost</dt><dd>Low</dd>
+      <dt>Risk</dt><dd>Readers may still prefer an older page</dd>
+      <dt>Evidence</dt><dd>F-103</dd>
+    </dl></div></details><details class="dec" id="SG-08">
+  <summary><span class="id">SG-08</span>
+    <span><span class="title">Promote the official-source audit to a required check</span><span class="area">Verification · P2</span></span>
+    <span class="status"><span class="b b-p2">P2</span></span></summary>
+  <div class="body">
+    <dl class="opt" style="border:0;padding:0">
+      <dt>Why</dt><dd>The audit exists and runs, but a hard mismatch does not stop a merge.</dd>
+      <dt>How</dt><dd>Add the job to required status checks; document the override path with a recorded reason.</dd>
+      <dt>Cost</dt><dd>Low</dd>
+      <dt>Risk</dt><dd>A flaky upstream fetch blocks merges; mitigate with retry and an explicit override</dd>
+      <dt>Evidence</dt><dd>D-12</dd>
+    </dl></div></details><details class="dec" id="SG-09">
+  <summary><span class="id">SG-09</span>
+    <span><span class="title">Keep props projection-only and state the block once, prominently</span><span class="area">Player props · P2</span></span>
+    <span class="status"><span class="b b-p2">P2</span></span></summary>
+  <div class="body">
+    <dl class="opt" style="border:0;padding:0">
+      <dt>Why</dt><dd>No prop price exists in any source, so no prop bet can be scored; a prop leaderboard without prices would be invented.</dd>
+      <dt>How</dt><dd>Keep the price column blank with a badge; add one sentence to the landing page explaining why the third bet type is unscoreable.</dd>
+      <dt>Cost</dt><dd>Very low</dd>
+      <dt>Risk</dt><dd>Leaves a requested feature partial</dd>
+      <dt>Evidence</dt><dd>Q-11, F-102</dd>
+    </dl></div></details><details class="dec" id="SG-10">
+  <summary><span class="id">SG-10</span>
+    <span><span class="title">Collect the official inactive lists once they are published</span><span class="area">Injury tracking · P2</span></span>
+    <span class="status"><span class="b b-p2">P2</span></span></summary>
+  <div class="body">
+    <dl class="opt" style="border:0;padding:0">
+      <dt>Why</dt><dd>Inactives are the only official record of who actually dressed; without them &#x27;Questionable&#x27; never resolves.</dd>
+      <dt>How</dt><dd>Per week, capture the official inactives article linked from the injury page; parse game, club, player, status; store with URL and fetch time.</dd>
+      <dt>Cost</dt><dd>Medium</dd>
+      <dt>Risk</dt><dd>URL pattern changes weekly; must fail loudly</dd>
+      <dt>Evidence</dt><dd>Q-09</dd>
+    </dl></div></details><details class="dec" id="SG-11">
+  <summary><span class="id">SG-11</span>
+    <span><span class="title">Link the market number to its feed on every row</span><span class="area">Own lines · P2</span></span>
+    <span class="status"><span class="b b-p2">P2</span></span></summary>
+  <div class="body">
+    <dl class="opt" style="border:0;padding:0">
+      <dt>Why</dt><dd>The own-lines table cites the nfl.com schedule page, which publishes no spread. The number is modelled from a pinned feed and the row does not say so.</dd>
+      <dt>How</dt><dd>Split the source column into fixture (official) and market feed (provenance-pinned).</dd>
+      <dt>Cost</dt><dd>Low</dd>
+      <dt>Risk</dt><dd>None identified</dd>
+      <dt>Evidence</dt><dd>Q-15, F-106</dd>
+    </dl></div></details><details class="dec" id="SG-12">
+  <summary><span class="id">SG-12</span>
+    <span><span class="title">Give index.html a single writer</span><span class="area">Process · P2</span></span>
+    <span class="status"><span class="b b-p2">P2</span></span></summary>
+  <div class="body">
+    <dl class="opt" style="border:0;padding:0">
+      <dt>Why</dt><dd>pipeline/gen_site.py and tools/build.py both write it; the second one wins, so CI verifies a page the site does not serve.</dd>
+      <dt>How</dt><dd>tools/build.py writes legacy-site.html; tools/verify.py reads the new name; add a grep test that only one module writes index.html.</dd>
+      <dt>Cost</dt><dd>Low</dd>
+      <dt>Risk</dt><dd>Another session&#x27;s generator changes shape</dd>
+      <dt>Evidence</dt><dd>Q-21, F-107</dd>
+    </dl></div></details><details class="dec" id="SG-13">
+  <summary><span class="id">SG-13</span>
+    <span><span class="title">Freeze the reward formula before any rule passes</span><span class="area">Competition · P2</span></span>
+    <span class="status"><span class="b b-p2">P2</span></span></summary>
+  <div class="body">
+    <dl class="opt" style="border:0;padding:0">
+      <dt>Why</dt><dd>Reward values are unpublished by any official source and defining them after a winner appears is post-hoc selection.</dd>
+      <dt>How</dt><dd>Version and date the formula; keep values blank until a human sets them.</dd>
+      <dt>Cost</dt><dd>Low</dd>
+      <dt>Risk</dt><dd>The formula can still be changed later</dd>
+      <dt>Evidence</dt><dd>Q-13</dd>
+    </dl></div></details><details class="dec" id="SG-14">
+  <summary><span class="id">SG-14</span>
+    <span><span class="title">Publish the list of signals that were tested and failed, with their effect sizes</span><span class="area">Signals · P3</span></span>
+    <span class="status"><span class="b b-p3">P3</span></span></summary>
+  <div class="body">
+    <dl class="opt" style="border:0;padding:0">
+      <dt>Why</dt><dd>Twelve rules are tested and none pass. The failures are the most valuable output of the lab and they are buried.</dd>
+      <dt>How</dt><dd>A table: signal, sample, point estimate, interval, verdict. Never a single number without its interval.</dd>
+      <dt>Cost</dt><dd>Low</dd>
+      <dt>Risk</dt><dd>None identified</dd>
+      <dt>Evidence</dt><dd>Q-12</dd>
+    </dl></div></details><details class="dec" id="SG-15">
+  <summary><span class="id">SG-15</span>
+    <span><span class="title">Add an out-of-sample decay column to every rule</span><span class="area">Signals · P3</span></span>
+    <span class="status"><span class="b b-p3">P3</span></span></summary>
+  <div class="body">
+    <dl class="opt" style="border:0;padding:0">
+      <dt>Why</dt><dd>A rule can look good over 20 seasons and be dead in the last two; the holdout column exists but is not shown beside the headline.</dd>
+      <dt>How</dt><dd>Show holdout ROI next to full-sample ROI in the same row.</dd>
+      <dt>Cost</dt><dd>Low</dd>
+      <dt>Risk</dt><dd>None identified</dd>
+      <dt>Evidence</dt><dd>SG-02</dd>
+    </dl></div></details>
+</main>
+<footer><div class="foot-in">
+  <div><strong>NFL Decision Room</strong>Research tool, not betting advice. No official league odds exist, so no market price here is official.
+  Values that could not be verified are blank and carry a source that would settle them.</div>
+  <div>Sections: <a href="decisions.html">Decide</a> · <a href="questions.html">Questions</a> ·
+  <a href="flagged.html">Flagged</a> · <a href="about.html">About &amp; method</a><br>
+  Repository: <a href="https://github.com/kanlerxz87-cyber/NFL1" rel="noopener">kanlerxz87-cyber/NFL1</a></div>
+</div></footer>
+</body>
+</html>

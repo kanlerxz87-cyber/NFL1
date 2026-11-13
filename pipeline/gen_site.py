@@ -20,6 +20,7 @@ DATA = os.path.join(ROOT, "data", "model")
 NAV = [
     ("index.html", "Overview"),
     ("pages/sections.html", "All Sections"),
+    ("room/index.html", "Decision Room"),
     ("pages/lines.html", "My Lines"),
     ("pages/strategies.html", "Strategy Lab"),
     ("pages/injuries.html", "Injuries & Depth"),
@@ -824,7 +825,12 @@ def evidence_page(prov, verif, dash, repl=None):
                          f"r = {num(c['companion'].get('r'),3)} (n={num(c['companion'].get('n'))}, {esc(c['companion'].get('window'))})",
                          esc(c.get("reading")), src(SOURCE["schedules"], "results")])
         corr_tbl = table(["Relationship", "This pipeline", "Companion session", "Reading", "Source"], crow)
-        conf = [[f"<strong>{esc(c['item'])}</strong>", esc(c["this_pipeline"]), esc(c["companion"]),
+        # A missing side of a comparison is a fact about the comparison, not a blank to sweep
+        # away: render it as an explicit label so the cell is never empty.
+        BLANK = '<span class="missing">no comparable value in this build</span>'
+        conf = [[f"<strong>{esc(c['item'])}</strong>",
+                 esc(c["this_pipeline"]) if c.get("this_pipeline") not in (None, "") else BLANK,
+                 esc(c["companion"]) if c.get("companion") not in (None, "") else BLANK,
                  esc(c["resolution"]), src(c.get("source") or SOURCE["schedules"], "source")]
                 for c in repl.get("conflicts", [])]
         conf_tbl = table(["Item", "This pipeline", "Companion session", "Resolution", "Source"], conf)

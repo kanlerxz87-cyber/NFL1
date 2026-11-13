@@ -2,7 +2,7 @@
 
 The repository began as a single-line README. This session built a 17-page, source-linked GitHub Pages dashboard from 26 official sources covering the 2026 NFL Week 10 snapshot (2026-11-12 UTC): 32 standings rows, 61 injury rows, 85 depth-chart rows, 20 official inactives rows, official bet-type statistics and official statistical methods.
 
-**Decision posture: NOT READY.** 44 flagged irregularities and multiple unverified values remain. No official source was found for NFL betting lines, vig, leg-level correlations, injury-to-performance correlations, reward values or a skill threshold; every such cell is blank and flagged. The Review & Choose a Path gate must be resolved before implementation.
+**Decision posture: NOT READY.** 45 flagged irregularities and multiple unverified values remain. No official source was found for NFL betting lines, vig, leg-level correlations, injury-to-performance correlations, reward values or a skill threshold; every such cell is blank and flagged. The Review & Choose a Path gate must be resolved before implementation.
 
 **Own lines and competition.** A reproducible own-line pipeline and 10 candidate strategies across single bets, parlays and player prop combos are specified. Every strategy must pass 13 validation gates; all are currently NOT PASSED, so the leaderboard contains no ranks or scores. 6 Pearson correlations were computed from official standings (net points per game vs winning percentage r = 0.8758, n = 32); all other requested correlations remain blank. NIST guidance on cross-validation, significance testing and 'correlation does not imply causality' underpins the luck-control protocol.
 
