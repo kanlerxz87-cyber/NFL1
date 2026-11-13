@@ -345,7 +345,12 @@ def read_tsv(path):
 
 def audit_page(audit, dash):
     a = audit or {}
-    gen = a.get("generated_at") or (dash or {}).get("generated_at")
+    # Stamp with the data snapshot the rest of the site carries. The audit JSON's own
+    # generated_at is the transcription-retrieval time (stated in the prose below); using
+    # it as the page stamp made the page look older than the model data and failed
+    # tools/check_committed_site.py, and it made the page's bytes change on every
+    # audit_official.py run (breaking build_site_all --check in CI).
+    gen = (dash or {}).get("generated_at") or a.get("generated_at")
     standings = read_tsv(os.path.join(AUDIT_DIR, "standings_retrieval_T1.tsv"))
     schedule = read_tsv(os.path.join(AUDIT_DIR, "schedule_week10_20261112.tsv"))
     games = [r for r in schedule if r.get("away") and r.get("home") and r["away"] != "bye_teams"]

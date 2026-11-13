@@ -295,7 +295,10 @@ def main() -> int:
           f"repo={sorted(repo_byes)} official={sorted(official_byes)}")
 
     out = {
-        "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        # placeholder; preserved from the committed file when the payload is unchanged
+        # so a re-run on the same transcriptions is byte-stable (d23c65ad fix: a fresh
+        # timestamp here changed pages/audit.html on every run and broke --check).
+        "generated_at": None,
         "session": "4c043747-nfl1",
         "sources": {"standings": SOURCE_STANDINGS, "schedule": SOURCE_SCHEDULE},
         "retrievals": {"T1": "2026-11-12 ~22:05Z", "T2": "2026-11-12 ~22:25Z"},
@@ -310,7 +313,21 @@ def main() -> int:
         "failures": failures,
         "checks": checks,
     }
-    with open(os.path.join(AUDIT, "official_audit.json"), "w", encoding="utf-8") as fh:
+    audit_path = os.path.join(AUDIT, "official_audit.json")
+    prior = {}
+    if os.path.exists(audit_path):
+        try:
+            with open(audit_path, encoding="utf-8") as fh:
+                prior = json.load(fh)
+        except (OSError, ValueError):
+            prior = {}
+    prior_payload = {k: v for k, v in prior.items() if k != "generated_at"}
+    new_payload = {k: v for k, v in out.items() if k != "generated_at"}
+    if prior_payload == new_payload and prior.get("generated_at"):
+        out["generated_at"] = prior["generated_at"]
+    else:
+        out["generated_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    with open(audit_path, "w", encoding="utf-8") as fh:
         json.dump(out, fh, indent=1)
 
     print(f"checks run: {len(checks)}   failed: {len(failures)}   flags: {len(flags)}")
