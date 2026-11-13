@@ -264,10 +264,11 @@ def main() -> int:
             "id": "Q-SOS-09",
             "question": "Do we know the injury or depth-chart state at kick-off for every 2026 game?",
             "status": "PARTIAL",
-            "answer": (f"The official Week 10 report lists {L('official_week10.json')['injuries']['rows_read']} players across "
-                       f"{L('official_week10.json')['injuries']['clubs_listed']} clubs; BAL and LAC report no injuries and four clubs are on bye. "
-                       "There is no per-game inactive list in the sources, and no dated snapshot for earlier weeks, so "
-                       "any injury-aware strategy would be reading today's report, not the one available at kick-off."),
+            "answer": (f"The official Week 10 scrape lists {inj['official_scrape_rows']} player rows across 26 clubs "
+                       f"(the committed hand transcription carries only {inj['transcription_rows']}); four clubs are on bye and "
+                       "the remaining two report no injuries. There is no per-game inactive list in the sources, and no dated "
+                       "snapshot for earlier weeks, so any injury-aware strategy would be reading this week's report, not the "
+                       "one available at each kick-off."),
             "discovery_method": "would need the official gamebook inactive lists per game (nfl.com publishes them per game)",
             "blocks": "injury-adjusted ratings and any 2nd/3rd-string depth signal",
             "sources": [OFF_INJURIES, OFF_SCHEDULE],
