@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verification · NFL Strength of Schedule Lab</title>
+<meta name="description" content="Strength of schedule, schedule-adjusted ratings and own lines, verified against official NFL sources.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="brand" href="../index.html"><span class="mark">NFL</span><span class="brand-text">Strength Lab</span></a>
+  <nav aria-label="Strength of schedule sections"><a href="index.html">Overview</a><a href="ratings.html">Ratings & SOS</a><a href="lines.html">My Lines</a><a href="leaderboard.html">Leaderboard</a><a href="parlays.html">Parlays & Combos</a><a href="props.html">Props</a><a href="injuries.html">Injuries & Depth</a><a href="correlations.html">Correlations</a><a href="questions.html">Questions</a><a href="suggestions.html">Suggestions</a><a href="decisions.html">Decisions</a><a href="flagged.html">Flagged for Review</a><a href="verification.html" class="active">Verification</a><a href="executive-summary.html">Executive Summary</a></nav>
+</header>
+<main id="main">
+  <section class="page-head">
+    <p class="eyebrow">Strength of schedule study</p>
+    <h1>Verification</h1>
+    <p class="standfirst">What was checked, what passed, what did not, and how to reproduce every number.</p>
+    <p class="timestamp">Built 2026-11-13T13:14:06+00:00 · every table row links to the source it came from · blanks are deliberate</p>
+    
+  </section>
+  
+<section class="panel">
+  <h2>Verification report</h2>
+  <p class="sub">10 checks, generated from data/strength/verification.json:
+  7 pass, 2 mismatch, 1 fail, 0 need review.
+  A check is only PASS when it was re-run against the source in this session. Where a check could not pass, the value
+  seen on both sides is printed rather than hidden.</p>
+  <div class="table-wrap"><table class=""><thead><tr><th>ID</th><th>Check</th><th>Result</th><th>Detail</th><th>Flag</th><th>Source</th></tr></thead><tbody><tr><td>V01</td><td>Provenance sha256 vs committed games.csv</td><td><span class="badge fail">FAIL</span></td><td>recorded 2,189,959 bytes / 5ae004ff6d26b08109cbd7424127b0eaa89f59a4bed445229e8683e98d22c8d0; committed 1,665,511 bytes / 6f0777c6870329ba74826c9af7371472816dfa85ecbd7d662446a483250ce050</td><td>F-SOS-DATA-01</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/download/schedules/games.csv" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td>V02</td><td>Result sign convention (result == home - away)</td><td><span class="badge pass">PASS</span></td><td>7,103 rows, 0 mismatches</td><td>—</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/download/schedules/games.csv" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td>V03</td><td>Official standings, every club x 7 fields</td><td><span class="badge fail">FAIL</span></td><td>224 fields compared, 10 differences (NYG, WAS only)</td><td>F-SOS-STD-NYG, F-SOS-STD-WAS</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td>V04</td><td>Official Week 10 fixture set</td><td><span class="badge pass">PASS</span></td><td>14 vs 14 games; 0 missing, 0 extra</td><td>F-SOS-W10-01 (result status only)</td><td><a class="src" href="https://www.nfl.com/schedules/2026/reg10" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td>V05</td><td>Official Week 10 byes</td><td><span class="badge pass">PASS</span></td><td>CHI, DEN, PHI, TB match the committed byes file</td><td>—</td><td><a class="src" href="https://www.nfl.com/schedules/2026/reg10" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td>V06</td><td>Injury transcription vs the official nfl.com scrape</td><td><span class="badge fail">FAIL</span></td><td>254 transcription rows vs 296 official scrape rows; 55 official players absent from the transcription; 43 field differences among shared players (37 practice, 3 injury, 3 game status). The scrape is the direct official record and predates the transcription, so the differences are omissions, not page drift.</td><td>F-SOS-INJ-01</td><td><a class="src" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td>V07</td><td>Standings internal arithmetic</td><td><span class="badge pass">PASS</span></td><td>sum(W)=sum(L)=136, ties=2, PF=PA=6291, NET=PF-PA and PCT=(W+T/2)/games for all 32 rows</td><td>—</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td>V08</td><td>Spread sign convention regression test</td><td><span class="badge pass">PASS</span></td><td>tests/test_strength.py covers home cover, home fail, underdog cover and push under the verified nflverse convention</td><td>—</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td>V09</td><td>Rule pre-registration hash</td><td><span class="badge pass">PASS</span></td><td>sha256 48d2086663cbe0fd3ab9df08a0e4a5dc... over 11 frozen rules and parameters</td><td>—</td><td><a class="src" href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/analysis/strength.py" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td>V10</td><td>Every table row carries an https source link</td><td><span class="badge pass">PASS</span></td><td>tools/check_strength_site.py: 14 pages, every table row source-linked, 0 broken local links, 0 placeholder cells</td><td>—</td><td><a class="src" href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/tools/check_strength_site.py" target="_blank" rel="noopener">source ↗</a></td></tr></tbody></table></div>
+  <h3>Supporting detail</h3>
+  <div class="table-wrap"><table class=""><thead><tr><th>Check</th><th>Unit</th><th>Result</th><th>State</th><th>Source</th></tr></thead><tbody><tr><td>Provenance pin vs committed file</td><td>sha256</td><td>MISMATCH</td><td><span class="blank" title="not confirmed from a source">blank</span></td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/download/schedules/games.csv" target="_blank" rel="noopener">release file ↗</a></td></tr><tr><td>Recorded bytes vs committed bytes</td><td>bytes</td><td>2,190,032 vs 1,665,522</td><td>delta -524,510</td><td><a class="src" href="https://github.com/nflverse/nflverse-data" target="_blank" rel="noopener">nflverse data repository ↗</a></td></tr><tr><td>Result sign convention</td><td>rows checked</td><td>7,104 rows, 0 mismatches</td><td>PASS</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">nflverse schedules release ↗</a></td></tr><tr><td>Official standings, field by field</td><td>fields compared</td><td>224 fields, 10 differences</td><td>MISMATCH</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings ↗</a></td></tr><tr><td>Official Week 10 fixtures</td><td>games</td><td>14 in repo vs 14 official</td><td>PASS</td><td><a class="src" href="https://www.nfl.com/schedules/2026/reg10" target="_blank" rel="noopener">NFL Week 10 schedule ↗</a></td></tr><tr><td>Official Week 10 byes</td><td>clubs</td><td>CHI, DEN, PHI, TB</td><td>PASS</td><td><a class="src" href="https://www.nfl.com/schedules/2026/reg10" target="_blank" rel="noopener">NFL Week 10 schedule ↗</a></td></tr><tr><td>Injury transcription vs official scrape</td><td>rows</td><td>254 vs 296 rows; 55 missing, 43 field differences</td><td>FAIL</td><td><a class="src" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">NFL injury report ↗</a></td></tr><tr><td>Standings internal arithmetic</td><td>checks</td><td>sum(W)=sum(L), ties paired, PF=PA, NET=PF-PA, PCT=(W+T/2)/games</td><td>PASS</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings ↗</a></td></tr><tr><td>Market favourite cover rate</td><td>sanity check</td><td>the closing line should cover about half the time ("about half" is the test, not a stored value)</td><td>PASS</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">nflverse schedules release ↗</a></td></tr><tr><td>Rules pre-registered before scoring</td><td>hash</td><td><code>48d2086663cbe0fd3ab9df08…</code> over 11 rules</td><td>PASS</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">nflverse schedules release ↗</a></td></tr></tbody></table></div>
+</section>
+<section class="panel">
+  <h2>Rules this site enforces on itself</h2>
+  <ul class="plain">
+    <li>Every table row carries a link to the page or file the value came from; the build fails otherwise.</li>
+    <li>A value that cannot be confirmed renders as a labelled blank. It is never 0, "n/a" or a guess.</li>
+    <li>The bet log only contains bets whose price was observed in the source file.</li>
+    <li>Ratings never use the game they are predicting.</li>
+    <li>The rule set and its thresholds are hashed before scoring, so they cannot be tuned afterwards.</li>
+  </ul>
+</section>
+<section class="panel">
+  <h2>Reproduce it</h2>
+  <pre><code>pip install numpy pandas
+python3 analysis/strength.py      # writes data/strength/*.json
+python3 tools/build_ledgers.py    # questions, suggestions, flags
+python3 tools/build_strength.py   # writes strength/*.html
+python3 tools/check_strength_site.py  # fails on a source-less row or a broken link</code></pre>
+  <p class="note">Code hash of analysis/strength.py at build time: <code>65bd593414965c00d5f84112cb3ee37e…</code></p>
+</section>
+
+</main>
+<footer>
+  <p>Research tool, not betting advice. Closing lines in the source file are consensus numbers, not book quotes.
+  Official entry points: <a href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a> ·
+  <a href="https://www.nfl.com/schedules/2026/reg10" target="_blank" rel="noopener">NFL schedule</a> ·
+  <a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">NFL injuries</a>.
+  Data: <a href="https://github.com/nflverse/nflverse-data" target="_blank" rel="noopener">nflverse</a> (CC-BY-4.0).</p>
+  <p><a href="flagged.html">Flagged for review</a> · <a href="verification.html">Verification</a> · <a href="../pages/sections.html">All site sections</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suggestions · NFL Strength of Schedule Lab</title>
+<meta name="description" content="Strength of schedule, schedule-adjusted ratings and own lines, verified against official NFL sources.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="brand" href="../index.html"><span class="mark">NFL</span><span class="brand-text">Strength Lab</span></a>
+  <nav aria-label="Strength of schedule sections"><a href="index.html">Overview</a><a href="ratings.html">Ratings & SOS</a><a href="lines.html">My Lines</a><a href="leaderboard.html">Leaderboard</a><a href="parlays.html">Parlays & Combos</a><a href="props.html">Props</a><a href="injuries.html">Injuries & Depth</a><a href="correlations.html">Correlations</a><a href="questions.html">Questions</a><a href="suggestions.html" class="active">Suggestions</a><a href="decisions.html">Decisions</a><a href="flagged.html">Flagged for Review</a><a href="verification.html">Verification</a><a href="executive-summary.html">Executive Summary</a></nav>
+</header>
+<main id="main">
+  <section class="page-head">
+    <p class="eyebrow">Strength of schedule study</p>
+    <h1>Suggestions</h1>
+    <p class="standfirst">Ranked improvement paths with options, a recommendation, and what each one costs — for review before anything is implemented.</p>
+    <p class="timestamp">Built 2026-11-13T13:14:06+00:00 · every table row links to the source it came from · blanks are deliberate</p>
+    
+  </section>
+  
+<section class="panel">
+  <h2>A review queue, not a to-do list</h2>
+  <p class="sub">Each suggestion states the problem, the options, a recommendation, cost, risk and what blocks it, so a reviewer can choose a path before anything is implemented. Nothing below has been implemented unilaterally; each is a path a reviewer can
+  accept, reject or re-scope.</p>
+  
+<div class="q">
+  <h3>S-SOS-01 — Fix the stale standings rows and the unplayed-result fixture <span class="badge neutral">now (this session)</span></h3>
+  <p><strong>Problem:</strong> 10 field differences in data/verified/standings_2026.csv and the WAS @ NYG fixture still listed as upcoming.</p>
+  <ul class="plain"><li>A: refresh the committed standings from the official page and re-run every generator that reads them (correct, larger blast radius)</li><li>B: leave the file frozen with a dated stamp and publish the difference (safe, keeps published numbers stale)</li><li>C: freeze only the disputed rows and refresh the rest (not recommended: mixes vintages in one table)</li></ul>
+  <p><strong>Recommendation:</strong> A, executed as its own task with a fresh official fetch, then B as a permanent &#x27;as-of&#x27; stamp on every table.</p>
+  <p class="meta">Cost low · risk medium (regenerates several pages) · blocked by nothing ·
+  files <code>data/verified/standings_2026.csv</code>, <code>data/verified/week10_fixtures_2026.csv</code> ·
+  <a href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">source ↗</a> <a href="https://www.nfl.com/schedules/2026/reg10" target="_blank" rel="noopener">source ↗</a></p>
+</div>
+<div class="q">
+  <h3>S-SOS-02 — Re-pin the games.csv provenance hash <span class="badge neutral">now (this session)</span></h3>
+  <p><strong>Problem:</strong> provenance.json records 2,190,032 bytes / 50939c24d43e..., the file is 1,665,522 bytes / 483beddbdf22....</p>
+  <ul class="plain"><li>A: re-download in Actions and re-pin (restores a real integrity claim)</li><li>B: re-pin the current file (honest hash, weaker claim)</li><li>C: drop the sha256 field (stops the false claim, loses the check)</li></ul>
+  <p><strong>Recommendation:</strong> A, because the whole repository rests on pinned provenance; B is acceptable as an interim.</p>
+  <p class="meta">Cost low · risk low · blocked by nothing ·
+  files <code>data/s9cb/provenance.json</code>, <code>.github/workflows/s9cb-collect.yml</code> ·
+  <a href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">source ↗</a></p>
+</div>
+<div class="q">
+  <h3>S-SOS-03 — Add an &#x27;as-of&#x27; timestamp to every published table <span class="badge neutral">next</span></h3>
+  <p><strong>Problem:</strong> Tables show a build time but not the time of the official data, so a stale row looks live.</p>
+  <ul class="plain"><li>A: per-table &#x27;official data as of&#x27; stamp</li><li>B: one site-wide stamp</li><li>C: no stamp, rely on the Flags page</li></ul>
+  <p><strong>Recommendation:</strong> A: the reader can then tell a stale row from a wrong one without reading the flags.</p>
+  <p class="meta">Cost low · risk low · blocked by nothing ·
+  files <code>tools/build_strength.py</code>, <code>pipeline/gen_site.py</code> ·
+  <a href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">source ↗</a></p>
+</div>
+<div class="q">
+  <h3>S-SOS-04 — Buy or build a timestamped odds history before any edge work continues <span class="badge neutral">next</span></h3>
+  <p><strong>Problem:</strong> No bettable price series exists; the consensus closing line cannot be transacted.</p>
+  <ul class="plain"><li>A: licensed historical odds vendor</li><li>B: scrape a book (terms-of-service risk)</li><li>C: stay consensus-only and never claim bettable profit</li></ul>
+  <p><strong>Recommendation:</strong> A, and until then publish C explicitly so no number is mistaken for a realisable return.</p>
+  <p class="meta">Cost high · risk low · blocked by budget decision ·
+  files <code>data/s9cb/provenance.json</code>, <code>analysis/strength.py</code> ·
+  <a href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">source ↗</a></p>
+</div>
+<div class="q">
+  <h3>S-SOS-05 — Publish a per-game inactive list for 2026 so depth signals can be measured <span class="badge neutral">next</span></h3>
+  <p><strong>Problem:</strong> The injury report is a weekly snapshot, not the game-day inactive list, so 2nd/3rd-string effects cannot be scored.</p>
+  <ul class="plain"><li>A: add the official per-game inactives to the collector</li><li>B: use the weekly report with an explicit accuracy caveat</li><li>C: leave injury effects out of the model</li></ul>
+  <p><strong>Recommendation:</strong> A; B is acceptable only if the model keeps saying the effect is unmeasured.</p>
+  <p class="meta">Cost medium · risk medium · blocked by Q-SOS-09 ·
+  files <code>pipeline/collect.py</code>, <code>analysis/strength.py</code> ·
+  <a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">source ↗</a></p>
+</div>
+<div class="q">
+  <h3>S-SOS-06 — Keep the negative result and stop searching for a schedule edge <span class="badge neutral">later</span></h3>
+  <p><strong>Problem:</strong> 0 of 11 rules pass; searching harder after seeing the data is how false positives are made.</p>
+  <ul class="plain"><li>A: publish the negative result and freeze the rule set</li><li>B: keep adding rules until one passes</li><li>C: change the threshold on the best rule until it passes</li></ul>
+  <p><strong>Recommendation:</strong> A. B and C are what the Benjamini-Hochberg gate and the pre-registration hash exist to prevent. If new rules are wanted they must be registered before the next evaluation.</p>
+  <p class="meta">Cost none · risk low · blocked by nothing ·
+  files <code>analysis/strength.py</code> ·
+  <a href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">source ↗</a></p>
+</div>
+<div class="q">
+  <h3>S-SOS-07 — Give the leaderboard rewards that are not money <span class="badge neutral">later</span></h3>
+  <p><strong>Problem:</strong> The brief asks for rewards for top-performing strategies; paying for picks raises legal exposure.</p>
+  <ul class="plain"><li>A: non-monetary badges (Verified Signal, Top Single Bet)</li><li>B: internal scoring only</li><li>C: cash prizes (needs legal review in every jurisdiction)</li></ul>
+  <p><strong>Recommendation:</strong> A now, C only with written legal advice; this study&#x27;s leaderboard is empty so no reward is live.</p>
+  <p class="meta">Cost low · risk low · blocked by legal review for C ·
+  files <code>data/leaderboard_rules.json</code> ·
+  </p>
+</div>
+<div class="q">
+  <h3>S-SOS-08 — Consolidate the five site generations into one navigable site <span class="badge neutral">next</span></h3>
+  <p><strong>Problem:</strong> Root, pages/, docs/, lab/, dashboard/, verified-lab/ and research/ all publish overlapping pages.</p>
+  <ul class="plain"><li>A: one landing page linking every category (this study&#x27;s approach)</li><li>B: delete the older generations (loses evidence)</li><li>C: leave them all and hope the reader finds the right one</li></ul>
+  <p><strong>Recommendation:</strong> A: additive, nothing is lost, and the All Sections page keeps every page reachable.</p>
+  <p class="meta">Cost low · risk low · blocked by nothing ·
+  files <code>index.html</code>, <code>sections.html</code> ·
+  </p>
+</div>
+</section>
+<section class="panel">
+  <h2>How to review a suggestion in two minutes</h2>
+  <ol class="plain">
+    <li>Does the problem cite a number or a link you can check? If not, reject it.</li>
+    <li>Does the recommendation change a published number? If so, the blast radius line matters more than the upside.</li>
+    <li>If it is blocked, is the blocker a source, a budget, or a decision? Only the first two can be fixed by an agent.</li>
+  </ol>
+</section>
+
+</main>
+<footer>
+  <p>Research tool, not betting advice. Closing lines in the source file are consensus numbers, not book quotes.
+  Official entry points: <a href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a> ·
+  <a href="https://www.nfl.com/schedules/2026/reg10" target="_blank" rel="noopener">NFL schedule</a> ·
+  <a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">NFL injuries</a>.
+  Data: <a href="https://github.com/nflverse/nflverse-data" target="_blank" rel="noopener">nflverse</a> (CC-BY-4.0).</p>
+  <p><a href="flagged.html">Flagged for review</a> · <a href="verification.html">Verification</a> · <a href="../pages/sections.html">All site sections</a></p>
+</footer>
+</body>
+</html>

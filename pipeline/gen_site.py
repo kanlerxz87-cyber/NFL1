@@ -36,7 +36,10 @@ NAV = [
     ("pages/evidence.html", "Evidence"),
     ("pages/review.html", "Flagged for Review"),
     ("pages/sections.html", "All Sections"),
+    # Session ca779bcc-nfl1: the strength-of-schedule study is its own sub-site under
+    # strength/; the entry keeps it reachable from the root dashboard.
     ("room/index.html", "Decision Room"),
+    ("strength/index.html", "SOS Study"),
     # pages produced by the other generators in this repository, kept in the shared
     # navigation so no session's page can become unreachable
     ("pages/executive-summary.html", "Executive Summary (companion)"),
@@ -73,6 +76,7 @@ SIDEBAR = [
     # away rather than in the header so the header stays readable; every one of them is
     # also listed on the All Sections page.
     ("Companion pages", [("room/index.html", "Decision Room"),
+                         ("strength/index.html", "SOS Study"),
                          ("pages/teams.html", "Teams"),
                          ("pages/standings.html", "Standings"),
                          ("pages/availability.html", "Availability"),
@@ -200,11 +204,21 @@ def _target(href: str, is_index: bool) -> str:
     return ("pages/" + href) if is_index else href
 
 
+def _is_active(href: str, current: str) -> bool:
+    """True when this nav entry is the page being rendered.
+
+    A sub-site entry (room/index.html, strength/index.html) shares its basename with the
+    root index.html, so the basename alone is not enough — the whole href has to match
+    when it carries a directory. Rule contributed by session ca779bcc-nfl1.
+    """
+    return href == current if "/" in href else href.split("/")[-1] == current
+
+
 def _nav_block(current: str, is_index: bool) -> str:
     items = []
     for href, label in NAV:
         target = _target(href, is_index)
-        cls = ' class="active"' if href.split("/")[-1] == current else ""
+        cls = ' class="active"' if _is_active(href, current) else ""
         items.append(f'    <a href="{esc(target)}"{cls}>{esc(label)}</a>')
     return "<nav>\n" + "\n".join(items) + "\n  </nav>"
 
@@ -215,7 +229,7 @@ def _sidebar_block(current: str, is_index: bool) -> str:
         links = []
         for href, label in items:
             target = _target(href, is_index)
-            cls = ' class="active"' if href.split("/")[-1] == current else ""
+            cls = ' class="active"' if _is_active(href, current) else ""
             links.append(f'<a href="{esc(target)}"{cls}>{esc(label)}</a>')
         groups.append(f'<div class="navgroup"><span>{group}</span>{"".join(links)}</div>')
     return f'<aside class="sidebar" aria-label="Categories">{"".join(groups)}</aside>'
@@ -1649,6 +1663,8 @@ def sections_page(dash):
          "Consolidated decision lab: live-verified data, own lines, ten-gate strategy lab, depth charts"],
         ["Companion register", link("docs/index.html", "Register (session 87deb7ab)"),
          "Independently built requirements, questions, suggestions and strategy registers"],
+        ["Independent sub-sites", link("strength/index.html", "Strength of schedule study (session ca779bcc)"),
+         "Walk-forward ratings, SOS, own lines, gated leaderboard, questions, suggestions, flagged items (14 pages)"],
         ["Historical", link("legacy-site.html", "Earlier dashboard"),
          "The first integrated dashboard, preserved verbatim"],
     ]

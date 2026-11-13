@@ -26,7 +26,10 @@ CANON = [
     ("evidence.html", "Evidence"),
     ("review.html", "Flagged for Review"),
     ("sections.html", "All Sections"),
+    # Session ca779bcc-nfl1: the strength-of-schedule study is its own sub-site under
+    # strength/; the target rule below keeps its href correct from both levels.
     ("room/index.html", "Decision Room"),
+    ("strength/index.html", "SOS Study"),
     # pages produced by the other generators in this repository, kept in the shared
     # navigation so no session's page can become unreachable
     ("executive-summary.html", "Executive Summary (companion)"),
@@ -52,7 +55,8 @@ def build(page_name: str, is_index: bool) -> str:
             target = href if is_index else "../" + href
         else:
             target = ("pages/" + href) if is_index else href
-        cls = ' class="active"' if href == page_name else ""
+        cls = (' class="active"' if ((href == page_name) if "/" in href
+                                    else href.split("/")[-1] == page_name) else "")
         items.append(f'    <a href="{html.escape(target, quote=True)}"{cls}>{html.escape(label)}</a>')
     return "<nav>\n" + "\n".join(items) + "\n  </nav>"
 
