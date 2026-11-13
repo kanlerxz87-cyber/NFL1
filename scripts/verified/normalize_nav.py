@@ -16,6 +16,7 @@ CANON = [
     ("teams.html", "Teams"),
     ("standings.html", "Standings"),
     ("injuries.html", "Injuries"),
+    ("backup-register.html", "Backup Register"),
     ("availability.html", "Availability"),
     ("data.html", "Verified Data"),
     ("lines.html", "Own Lines"),

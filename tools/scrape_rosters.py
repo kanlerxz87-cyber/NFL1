@@ -18,6 +18,7 @@ import os
 import re
 import time
 from datetime import datetime, timezone
+from urllib.parse import urljoin
 
 import requests
 from bs4 import BeautifulSoup
@@ -111,7 +112,8 @@ def parse_roster(html: str) -> tuple[str | None, list[dict], list[str]]:
         name_idx = next((i for i, c in enumerate(cells) if c.find("a", href=re.compile(r"/players/"))), 0)
         name = link.get_text(" ", strip=True)
         data = [t for i, t in enumerate(texts) if i != name_idx]
-        rec = {"name": name, "player_url": link["href"], "raw_cells": texts}
+        rec = {"name": name, "player_url": urljoin("https://www.nfl.com/", link["href"].strip()),
+               "raw_cells": texts}
         if len(data) < len(COLUMNS):
             warnings.append(f"row has {len(data)} data cells, expected {len(COLUMNS)}: {name}")
             data = data + [""] * (len(COLUMNS) - len(data))
@@ -140,6 +142,9 @@ def main() -> int:
             soup_title = BeautifulSoup(r.text, "lxml")
             rec["page_title"] = soup_title.title.get_text(" ", strip=True) if soup_title.title else None
             abbr, players, warnings = parse_roster(r.text)
+            if not warnings:  # raw cells are kept only for rows that need review
+                for pl in players:
+                    pl.pop("raw_cells", None)
             rec.update({"abbr": abbr, "player_count": len(players), "warnings": warnings,
                         "players": players})
             if not abbr or len(players) < 40:

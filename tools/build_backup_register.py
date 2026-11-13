@@ -43,6 +43,9 @@ GROUP = {
 }
 SUFFIXES = {"jr", "sr", "ii", "iii", "iv", "v"}
 ABBR_ALIAS = {"AZ": "ARI", "LAR": "LA", "WSH": "WAS", "JAC": "JAX"}
+# Position labels that name the same family (a label difference, not a disagreement).
+LABEL_FAMILIES = [{"S", "SAF", "FS", "SS"}, {"LB", "OLB", "ILB", "MLB"}, {"DE", "DL"},
+                  {"DT", "NT", "DL"}, {"OT", "T"}]
 
 
 def now_iso() -> str:
@@ -121,6 +124,11 @@ def main() -> int:
     for g, n in unknown_game.items():
         flag("X-GAME", "unknown designation", f"{n} row(s) carry game status '{g}', not counted", INJURY_URL)
 
+    flag("X-DEPTH", "depth order unavailable",
+         "nfl.com publishes no depth chart (team depth-chart URL returns 404). Some official roster pages link "
+         "to a club-site depth chart (e.g. detroitlions.com/team/depth-chart). It has not been parsed or "
+         "verified here, so depth order stays blank.", "https://www.nfl.com/teams/detroit-lions/roster")
+
     entries = []
     for r in designations:
         abbr = ABBR_ALIAS.get(r.get("team"), r.get("team"))
@@ -158,11 +166,20 @@ def main() -> int:
         entry["roster_experience"] = me.get("experience")
         entry["roster_player_url"] = me.get("player_url")
         inj_pos = (r.get("position") or "").upper()
-        if me.get("position") and inj_pos != me["position"].upper():
-            entry["row_flags"].append(f"position differs: injury report {inj_pos}, roster {me['position']}")
-            flag("X-POS", "position disagreement",
-                 f"{r.get('player')} ({abbr}): injury report says {inj_pos}, roster says {me['position']}; "
-                 "group taken from the injury report", INJURY_URL)
+        ros_pos = (me.get("position") or "").upper()
+        if ros_pos and inj_pos != ros_pos:
+            if any(inj_pos in fam and ros_pos in fam for fam in LABEL_FAMILIES):
+                entry["row_flags"].append(f"label variant: injury report {inj_pos}, roster {ros_pos} (same family)")
+            else:
+                entry["row_flags"].append(f"position differs: injury report {inj_pos}, roster {ros_pos}")
+                flag("X-POS", "position disagreement",
+                     f"{r.get('player')} ({abbr}): injury report says {inj_pos}, roster says {ros_pos}; "
+                     "group taken from the injury report, roster position shown for review", INJURY_URL)
+        if (me.get("status") or "").upper() != "ACT":
+            entry["row_flags"].append(f"designated player's roster status is {me.get('status')} (not ACT)")
+            flag("X-STATUS", "designated player not ACT",
+                 f"{r.get('player')} ({abbr}, game status {r.get('game')}): roster status {me.get('status')} "
+                 "on the official roster page; both values shown as published", club["url"])
         group = GROUP.get(inj_pos)
         if group is None:
             entry["row_flags"].append(f"position {inj_pos or '(blank)'} has no group mapping; backups not counted")
@@ -382,6 +399,21 @@ def render(p: dict) -> str:
       <thead><tr><th>ID</th><th>Kind</th><th>What needs review</th><th>Source</th></tr></thead>
       <tbody>{flag_rows}</tbody>
     </table></div>
+  </section>
+  <section class="panel">
+    <h2>Options for review (not implemented)</h2>
+    <p>Each option closes part of the depth-order gap. None is applied; choose one, or none, before any change.</p>
+    <ol>
+      <li><strong>Keep depth order blank</strong> (current). Shows official status and official same-group backups only.
+      Trade-off: no 2nd / 3rd / 4th-string ranking.</li>
+      <li><strong>Parse club-published depth charts</strong> from each club's own site (the nfl.com roster pages link to them,
+      e.g. detroitlions.com/team/depth-chart). Trade-off: 32 different page layouts; each club page must be re-read and
+      checked before use. This is the most direct official route.</li>
+      <li><strong>Use the nflverse depth-chart mirror</strong> already in the pipeline. Trade-off: not an official NFL
+      source, so under the site rules its values must stay blank or be labelled unverified.</li>
+      <li><strong>Add snap counts</strong> (who actually played) to show backups used in practice. Trade-off: needs a source
+      that is itself verified; not yet identified.</li>
+    </ol>
   </section>
   <section class="panel">
     <h2>Method and limits</h2>
