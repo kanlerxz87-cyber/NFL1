@@ -1,0 +1,146 @@
+{
+ "generated_at": "2026-11-13T13:02:45+00:00",
+ "count": 12,
+ "rule": "Every question is either ANSWERED with the computed number, PARTIAL with the reason, or BLOCKED with the exact source that would settle it.",
+ "questions": [
+  {
+   "id": "Q-SOS-01",
+   "question": "Does strength of schedule, measured walk-forward, add information beyond the closing line?",
+   "status": "ANSWERED (no, not on this sample)",
+   "answer": "Own ratings correlate r=0.466 with the closing spread over 7,103 games, but the own line is less accurate than the market out of sample: spread MAE 10.714 vs 9.63 in the untouched holdout seasons, and every one of the 11 schedule-based rules fails the gate set (0 of 11 PASS). The honest reading is that schedule information is already inside the price.",
+   "discovery_method": "computed in analysis/strength.py; re-runnable",
+   "blocks": "any decision to trade schedule-based angles",
+   "sources": [
+    "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+    "https://www.nfl.com/schedules/2026/reg10"
+   ]
+  },
+  {
+   "id": "Q-SOS-02",
+   "question": "Which clubs are strongest once opponents are adjusted for?",
+   "status": "ANSWERED",
+   "answer": "JAX +9.55 (SOS +1.08); SF +6.39 (SOS -0.62); BUF +6.30 (SOS +0.91); SEA +4.94 (SOS +0.12); CHI +4.27 (SOS +1.14). Home-field advantage fitted at -0.47 points for this season's completed games.",
+   "discovery_method": "ridge rating fit, walk-forward, published on the Ratings page",
+   "blocks": "nothing; this is a published estimate with its method",
+   "sources": [
+    "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+    "https://www.nfl.com/standings/league/2026/reg"
+   ]
+  },
+  {
+   "id": "Q-SOS-03",
+   "question": "Whose record overstates them, and whose understates them?",
+   "status": "ANSWERED (with a caveat)",
+   "answer": "Luck = actual wins minus Pythagorean expectation (exponent 2.37). Most lucky: DEN +2.17; BUF +1.58; CLE +1.53; DET +1.25; SF +1.20. Most unlucky: TB -2.17; LAC -1.57; TEN -1.54; NYJ -1.44; HOU -1.40. Caveat: the rules that trade on this (X05, X06) both fail the gates, so the signal is a description, not an edge.",
+   "discovery_method": "Pythagorean expectation computed from official scored/allowed points",
+   "blocks": "nothing; published as a description",
+   "sources": [
+    "https://www.nfl.com/standings/league/2026/reg"
+   ]
+  },
+  {
+   "id": "Q-SOS-04",
+   "question": "Who has played the hardest and easiest schedule so far?",
+   "status": "ANSWERED",
+   "answer": "Hardest (mean pre-game opponent rating): WAS +1.39; LV +1.28; CHI +1.14; JAX +1.08; BUF +0.91. Easiest: PHI -1.04; NO -0.63; SF -0.62; LA -0.58; BAL -0.54. SOS is the mean of the opponents' ratings *before* each game, so it contains no future information.",
+   "discovery_method": "computed from the walk-forward panel",
+   "blocks": "nothing",
+   "sources": [
+    "https://github.com/nflverse/nflverse-data/releases/tag/schedules"
+   ]
+  },
+  {
+   "id": "Q-SOS-05",
+   "question": "Which published values on this repository are stale or wrong right now?",
+   "status": "ANSWERED (defects found)",
+   "answer": "Line-by-line against the official standings page: 10 field differences across 32 clubs (224 fields compared). The committed Week 10 fixtures also still show WAS @ NYG as upcoming; nfl.com shows it final (WAS 24 - NYG 21). Injury transcription: 6/9 cross-checked rows match, 24 clubs listed. Each difference is published on the Flags page with its link.",
+   "discovery_method": "re-fetch of the official pages on 2026-11-13 and a field-by-field comparison",
+   "blocks": "publication of any standings-derived number until the source file is refreshed",
+   "sources": [
+    "https://www.nfl.com/standings/league/2026/reg",
+    "https://www.nfl.com/schedules/2026/reg10",
+    "https://www.nfl.com/injuries/"
+   ]
+  },
+  {
+   "id": "Q-SOS-06",
+   "question": "Does the pinned provenance still describe the committed data?",
+   "status": "ANSWERED (no)",
+   "answer": "No. data/s9cb/provenance.json pins games.csv at 2,189,959 bytes / sha256 5ae004ff6d26..., but the committed file is 1,665,511 bytes / sha256 6f0777c68703.... The row count is intact (7,239 games) and the results reconcile, so the study still runs, but the pin is stale and the integrity claim cannot be sustained.",
+   "discovery_method": "sha256 of the committed file compared with the recorded hash",
+   "blocks": "any claim that this data is byte-for-byte the downloaded release",
+   "sources": [
+    "https://github.com/nflverse/nflverse-data/releases/tag/schedules"
+   ]
+  },
+  {
+   "id": "Q-SOS-07",
+   "question": "Can player-prop combos be scored?",
+   "status": "BLOCKED",
+   "answer": "No. The same-game prop correlations are computable and published (passing yards vs receiver yards r\u22480.8426), but no official or book price for any prop exists in these sources, so no combo can be priced, scored, or ranked. Filling a price in would be a fabrication.",
+   "discovery_method": "would need a licensed odds feed with per-book prop prices and timestamps",
+   "blocks": "the entire prop-combo track of the leaderboard",
+   "sources": [
+    "https://www.nfl.com/stats/player-stats/"
+   ]
+  },
+  {
+   "id": "Q-SOS-08",
+   "question": "Are the 2026 closing lines official NFL numbers?",
+   "status": "ANSWERED (no)",
+   "answer": "No official league odds exist. The closing line in the nflverse release is a consensus number. Every ROI on this site is therefore measured against a consensus price, not a book you could actually bet, and the site says so on every table.",
+   "discovery_method": "documented in the nflverse release description and in data/s9cb/provenance.json",
+   "blocks": "any claim of realisable profit",
+   "sources": [
+    "https://github.com/nflverse/nflverse-data/releases/tag/schedules"
+   ]
+  },
+  {
+   "id": "Q-SOS-09",
+   "question": "Do we know the injury or depth-chart state at kick-off for every 2026 game?",
+   "status": "PARTIAL",
+   "answer": "The official Week 10 report lists 254 players across 24 clubs; BAL and LAC report no injuries and four clubs are on bye. There is no per-game inactive list in the sources, and no dated snapshot for earlier weeks, so any injury-aware strategy would be reading today's report, not the one available at kick-off.",
+   "discovery_method": "would need the official gamebook inactive lists per game (nfl.com publishes them per game)",
+   "blocks": "injury-adjusted ratings and any 2nd/3rd-string depth signal",
+   "sources": [
+    "https://www.nfl.com/injuries/",
+    "https://www.nfl.com/schedules/2026/reg10"
+   ]
+  },
+  {
+   "id": "Q-SOS-10",
+   "question": "Which of the 2026 results are inside the current sample?",
+   "status": "ANSWERED",
+   "answer": "7,103 games from 1999 to 2026 are scored. The 2026 season in the committed extract stops at Week 9: 136 games. Week 10's Thursday game is not in the file, so the current-state page counts 8 games for WAS and NYG, which matches the official 3-5-1 / 5-3-1 records.",
+   "discovery_method": "row count by season and a comparison with the official standings games-played",
+   "blocks": "nothing; stated so the reader knows where the sample ends",
+   "sources": [
+    "https://www.nfl.com/standings/league/2026/reg",
+    "https://www.nfl.com/schedules/2026/reg10"
+   ]
+  },
+  {
+   "id": "Q-SOS-11",
+   "question": "Is the gate set strong enough to stop a lucky strategy?",
+   "status": "ANSWERED (it caught two real defects)",
+   "answer": "During this session the gates rejected a first implementation whose sign convention made the market line a points-given rather than an expected margin: it reported 94% cover rates and four false PASSes. After the fix every rule fails, and the same sign check now lives in the unit tests. The lesson is that a plausible-looking edge is the default failure mode, and the gates must be able to say no.",
+   "discovery_method": "unit tests in tests/test_strength.py plus manual inspection of the bet log",
+   "blocks": "nothing",
+   "sources": [
+    "https://github.com/nflverse/nflverse-data/releases/tag/schedules"
+   ]
+  },
+  {
+   "id": "Q-SOS-12",
+   "question": "What would we need to get a real, bettable edge?",
+   "status": "BLOCKED",
+   "answer": "At minimum: (1) a licensed historical odds feed with per-book, timestamped prices and line movement; (2) injury/inactive data as it stood at kick-off, not today's; (3) a pre-registered hypothesis set fixed before peeking; (4) enough seasons that a 2% edge is distinguishable from zero at the tested sample size. Without (1) and (2) any edge claim is untestable.",
+   "discovery_method": "gap analysis of the sources in data/s9cb/provenance.json",
+   "blocks": "any decision to place or recommend a wager",
+   "sources": [
+    "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+    "https://www.nfl.com/injuries/"
+   ]
+  }
+ ]
+}

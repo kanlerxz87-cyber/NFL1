@@ -1,0 +1,178 @@
+{
+ "generated_at": "2026-11-13T13:02:45+00:00",
+ "count": 8,
+ "rule": "Each suggestion states the problem, the options, a recommendation, cost, risk and what blocks it, so a reviewer can choose a path before anything is implemented.",
+ "suggestions": [
+  {
+   "id": "S-SOS-01",
+   "priority": "now (this session)",
+   "title": "Fix the stale standings rows and the unplayed-result fixture",
+   "problem": "10 field differences in data/verified/standings_2026.csv and the WAS @ NYG fixture still listed as upcoming.",
+   "options": [
+    "A: refresh the committed standings from the official page and re-run every generator that reads them (correct, larger blast radius)",
+    "B: leave the file frozen with a dated stamp and publish the difference (safe, keeps published numbers stale)",
+    "C: freeze only the disputed rows and refresh the rest (not recommended: mixes vintages in one table)"
+   ],
+   "recommendation": "A, executed as its own task with a fresh official fetch, then B as a permanent 'as-of' stamp on every table.",
+   "files": [
+    "data/verified/standings_2026.csv",
+    "data/verified/week10_fixtures_2026.csv"
+   ],
+   "cost": "low",
+   "risk": "medium (regenerates several pages)",
+   "blocked_by": null,
+   "sources": [
+    "https://www.nfl.com/standings/league/2026/reg",
+    "https://www.nfl.com/schedules/2026/reg10"
+   ]
+  },
+  {
+   "id": "S-SOS-02",
+   "priority": "now (this session)",
+   "title": "Re-pin the games.csv provenance hash",
+   "problem": "provenance.json records 2,189,959 bytes / 5ae004ff6d26..., the file is 1,665,511 bytes / 6f0777c68703....",
+   "options": [
+    "A: re-download in Actions and re-pin (restores a real integrity claim)",
+    "B: re-pin the current file (honest hash, weaker claim)",
+    "C: drop the sha256 field (stops the false claim, loses the check)"
+   ],
+   "recommendation": "A, because the whole repository rests on pinned provenance; B is acceptable as an interim.",
+   "files": [
+    "data/s9cb/provenance.json",
+    ".github/workflows/s9cb-collect.yml"
+   ],
+   "cost": "low",
+   "risk": "low",
+   "blocked_by": null,
+   "sources": [
+    "https://github.com/nflverse/nflverse-data/releases/tag/schedules"
+   ]
+  },
+  {
+   "id": "S-SOS-03",
+   "priority": "next",
+   "title": "Add an 'as-of' timestamp to every published table",
+   "problem": "Tables show a build time but not the time of the official data, so a stale row looks live.",
+   "options": [
+    "A: per-table 'official data as of' stamp",
+    "B: one site-wide stamp",
+    "C: no stamp, rely on the Flags page"
+   ],
+   "recommendation": "A: the reader can then tell a stale row from a wrong one without reading the flags.",
+   "files": [
+    "tools/build_strength.py",
+    "pipeline/gen_site.py"
+   ],
+   "cost": "low",
+   "risk": "low",
+   "blocked_by": null,
+   "sources": [
+    "https://www.nfl.com/standings/league/2026/reg"
+   ]
+  },
+  {
+   "id": "S-SOS-04",
+   "priority": "next",
+   "title": "Buy or build a timestamped odds history before any edge work continues",
+   "problem": "No bettable price series exists; the consensus closing line cannot be transacted.",
+   "options": [
+    "A: licensed historical odds vendor",
+    "B: scrape a book (terms-of-service risk)",
+    "C: stay consensus-only and never claim bettable profit"
+   ],
+   "recommendation": "A, and until then publish C explicitly so no number is mistaken for a realisable return.",
+   "files": [
+    "data/s9cb/provenance.json",
+    "analysis/strength.py"
+   ],
+   "cost": "high",
+   "risk": "low",
+   "blocked_by": "budget decision",
+   "sources": [
+    "https://github.com/nflverse/nflverse-data/releases/tag/schedules"
+   ]
+  },
+  {
+   "id": "S-SOS-05",
+   "priority": "next",
+   "title": "Publish a per-game inactive list for 2026 so depth signals can be measured",
+   "problem": "The injury report is a weekly snapshot, not the game-day inactive list, so 2nd/3rd-string effects cannot be scored.",
+   "options": [
+    "A: add the official per-game inactives to the collector",
+    "B: use the weekly report with an explicit accuracy caveat",
+    "C: leave injury effects out of the model"
+   ],
+   "recommendation": "A; B is acceptable only if the model keeps saying the effect is unmeasured.",
+   "files": [
+    "pipeline/collect.py",
+    "analysis/strength.py"
+   ],
+   "cost": "medium",
+   "risk": "medium",
+   "blocked_by": "Q-SOS-09",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ]
+  },
+  {
+   "id": "S-SOS-06",
+   "priority": "later",
+   "title": "Keep the negative result and stop searching for a schedule edge",
+   "problem": "0 of 11 rules pass; searching harder after seeing the data is how false positives are made.",
+   "options": [
+    "A: publish the negative result and freeze the rule set",
+    "B: keep adding rules until one passes",
+    "C: change the threshold on the best rule until it passes"
+   ],
+   "recommendation": "A. B and C are what the Benjamini-Hochberg gate and the pre-registration hash exist to prevent. If new rules are wanted they must be registered before the next evaluation.",
+   "files": [
+    "analysis/strength.py"
+   ],
+   "cost": "none",
+   "risk": "low",
+   "blocked_by": null,
+   "sources": [
+    "https://github.com/nflverse/nflverse-data/releases/tag/schedules"
+   ]
+  },
+  {
+   "id": "S-SOS-07",
+   "priority": "later",
+   "title": "Give the leaderboard rewards that are not money",
+   "problem": "The brief asks for rewards for top-performing strategies; paying for picks raises legal exposure.",
+   "options": [
+    "A: non-monetary badges (Verified Signal, Top Single Bet)",
+    "B: internal scoring only",
+    "C: cash prizes (needs legal review in every jurisdiction)"
+   ],
+   "recommendation": "A now, C only with written legal advice; this study's leaderboard is empty so no reward is live.",
+   "files": [
+    "data/leaderboard_rules.json"
+   ],
+   "cost": "low",
+   "risk": "low",
+   "blocked_by": "legal review for C",
+   "sources": []
+  },
+  {
+   "id": "S-SOS-08",
+   "priority": "next",
+   "title": "Consolidate the five site generations into one navigable site",
+   "problem": "Root, pages/, docs/, lab/, dashboard/, verified-lab/ and research/ all publish overlapping pages.",
+   "options": [
+    "A: one landing page linking every category (this study's approach)",
+    "B: delete the older generations (loses evidence)",
+    "C: leave them all and hope the reader finds the right one"
+   ],
+   "recommendation": "A: additive, nothing is lost, and the All Sections page keeps every page reachable.",
+   "files": [
+    "index.html",
+    "sections.html"
+   ],
+   "cost": "low",
+   "risk": "low",
+   "blocked_by": null,
+   "sources": []
+  }
+ ]
+}

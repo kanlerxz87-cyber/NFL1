@@ -1,0 +1,1019 @@
+{
+ "method": "Two-leg parlay combos from every pair of frozen rules that fired on the same game. Price = product of the two observed leg prices (constructed, not a sportsbook quote).",
+ "pairs_scored": 46,
+ "pairs_with_positive_phi": 11,
+ "pairs": [
+  {
+   "legs": [
+    "X01 Own spread edge >= 1.5 pts",
+    "X02 Own spread edge >= 3.0 pts"
+   ],
+   "n_parlays": 3116,
+   "hit_rate": 0.5083,
+   "hit_rate_if_independent": 0.2584,
+   "correlation_ratio": 1.9672,
+   "avg_decimal": 3.7621,
+   "constructed_roi_pct": 91.1,
+   "phi": {
+    "n": 3116,
+    "r": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ],
+    "p_value": 0.0,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X01 Own spread edge >= 1.5 pts",
+    "X07 Own rating edge vs market >= 2.0 pts"
+   ],
+   "n_parlays": 3731,
+   "hit_rate": 0.5114,
+   "hit_rate_if_independent": 0.2615,
+   "correlation_ratio": 1.9555,
+   "avg_decimal": 3.7669,
+   "constructed_roi_pct": 92.492,
+   "phi": {
+    "n": 3731,
+    "r": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ],
+    "p_value": 0.0,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X02 Own spread edge >= 3.0 pts",
+    "X07 Own rating edge vs market >= 2.0 pts"
+   ],
+   "n_parlays": 3116,
+   "hit_rate": 0.5083,
+   "hit_rate_if_independent": 0.2584,
+   "correlation_ratio": 1.9672,
+   "avg_decimal": 3.7621,
+   "constructed_roi_pct": 91.1,
+   "phi": {
+    "n": 3116,
+    "r": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ],
+    "p_value": 0.0,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X03 Own total edge >= 3.0 pts",
+    "X04 Own total edge >= 5.0 pts"
+   ],
+   "n_parlays": 1458,
+   "hit_rate": 0.5144,
+   "hit_rate_if_independent": 0.2646,
+   "correlation_ratio": 1.944,
+   "avg_decimal": 3.7858,
+   "constructed_roi_pct": 95.12,
+   "phi": {
+    "n": 1458,
+    "r": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ],
+    "p_value": 0.0,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X02 Own spread edge >= 3.0 pts",
+    "X11 Recency: back the club with the better last-5 form when it is an underdog"
+   ],
+   "n_parlays": 1290,
+   "hit_rate": 0.4512,
+   "hit_rate_if_independent": 0.2698,
+   "correlation_ratio": 1.6725,
+   "avg_decimal": 3.7416,
+   "constructed_roi_pct": 68.132,
+   "phi": {
+    "n": 1290,
+    "r": 0.7267,
+    "ci95": [
+     0.6999,
+     0.7515
+    ],
+    "p_value": 0.0,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X07 Own rating edge vs market >= 2.0 pts",
+    "X11 Recency: back the club with the better last-5 form when it is an underdog"
+   ],
+   "n_parlays": 1503,
+   "hit_rate": 0.4398,
+   "hit_rate_if_independent": 0.269,
+   "correlation_ratio": 1.6351,
+   "avg_decimal": 3.7483,
+   "constructed_roi_pct": 64.273,
+   "phi": {
+    "n": 1503,
+    "r": 0.6842,
+    "ci95": [
+     0.6564,
+     0.7102
+    ],
+    "p_value": 0.0,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X01 Own spread edge >= 1.5 pts",
+    "X11 Recency: back the club with the better last-5 form when it is an underdog"
+   ],
+   "n_parlays": 1606,
+   "hit_rate": 0.4346,
+   "hit_rate_if_independent": 0.2677,
+   "correlation_ratio": 1.6234,
+   "avg_decimal": 3.7507,
+   "constructed_roi_pct": 62.395,
+   "phi": {
+    "n": 1606,
+    "r": 0.6685,
+    "ci95": [
+     0.6405,
+     0.6947
+    ],
+    "p_value": 0.0,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X04 Own total edge >= 5.0 pts",
+    "X08 Under when both clubs' SOS to date is above league average"
+   ],
+   "n_parlays": 379,
+   "hit_rate": 0.3747,
+   "hit_rate_if_independent": 0.2688,
+   "correlation_ratio": 1.3938,
+   "avg_decimal": 3.7729,
+   "constructed_roi_pct": 41.407,
+   "phi": {
+    "n": 379,
+    "r": 0.424,
+    "ci95": [
+     0.3377,
+     0.5033
+    ],
+    "p_value": 0.0,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X03 Own total edge >= 3.0 pts",
+    "X08 Under when both clubs' SOS to date is above league average"
+   ],
+   "n_parlays": 681,
+   "hit_rate": 0.3598,
+   "hit_rate_if_independent": 0.2755,
+   "correlation_ratio": 1.3057,
+   "avg_decimal": 3.7781,
+   "constructed_roi_pct": 36.43,
+   "phi": {
+    "n": 681,
+    "r": 0.3378,
+    "ci95": [
+     0.2695,
+     0.4027
+    ],
+    "p_value": 0.0,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X05 Fade a club with a lucky record (luck >= +1.5 wins) when it is favoured",
+    "X11 Recency: back the club with the better last-5 form when it is an underdog"
+   ],
+   "n_parlays": 76,
+   "hit_rate": 0.3026,
+   "hit_rate_if_independent": 0.2296,
+   "correlation_ratio": 1.3183,
+   "avg_decimal": 3.7168,
+   "constructed_roi_pct": 12.815,
+   "phi": {
+    "n": 76,
+    "r": 0.294,
+    "ci95": [
+     0.0734,
+     0.4871
+    ],
+    "p_value": 0.00815,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X06 Back a club with an unlucky record (luck <= -1.5 wins) when it is an underdog",
+    "X11 Recency: back the club with the better last-5 form when it is an underdog"
+   ],
+   "n_parlays": 54,
+   "hit_rate": 0.2407,
+   "hit_rate_if_independent": 0.1728,
+   "correlation_ratio": 1.3929,
+   "avg_decimal": 3.7512,
+   "constructed_roi_pct": -8.221,
+   "phi": {
+    "n": 54,
+    "r": 0.2803,
+    "ci95": [
+     0.0136,
+     0.5098
+    ],
+    "p_value": 0.035228,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X03 Own total edge >= 3.0 pts",
+    "X10 Divisional underdog of 6.5+ with a positive own-rating edge"
+   ],
+   "n_parlays": 91,
+   "hit_rate": 0.3407,
+   "hit_rate_if_independent": 0.3111,
+   "correlation_ratio": 1.0951,
+   "avg_decimal": 3.8524,
+   "constructed_roi_pct": 31.806,
+   "phi": {
+    "n": 91,
+    "r": 0.1216,
+    "ci95": [
+     -0.0865,
+     0.3196
+    ],
+    "p_value": 0.247652,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X04 Own total edge >= 5.0 pts",
+    "X11 Recency: back the club with the better last-5 form when it is an underdog"
+   ],
+   "n_parlays": 552,
+   "hit_rate": 0.2862,
+   "hit_rate_if_independent": 0.2668,
+   "correlation_ratio": 1.0728,
+   "avg_decimal": 3.7686,
+   "constructed_roi_pct": 7.662,
+   "phi": {
+    "n": 552,
+    "r": 0.078,
+    "ci95": [
+     -0.0055,
+     0.1604
+    ],
+    "p_value": 0.066632,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X03 Own total edge >= 3.0 pts",
+    "X11 Recency: back the club with the better last-5 form when it is an underdog"
+   ],
+   "n_parlays": 1039,
+   "hit_rate": 0.2714,
+   "hit_rate_if_independent": 0.2614,
+   "correlation_ratio": 1.0383,
+   "avg_decimal": 3.7704,
+   "constructed_roi_pct": 2.262,
+   "phi": {
+    "n": 1039,
+    "r": 0.0401,
+    "ci95": [
+     -0.0207,
+     0.1007
+    ],
+    "p_value": 0.195907,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X02 Own spread edge >= 3.0 pts",
+    "X08 Under when both clubs' SOS to date is above league average"
+   ],
+   "n_parlays": 773,
+   "hit_rate": 0.2717,
+   "hit_rate_if_independent": 0.2638,
+   "correlation_ratio": 1.03,
+   "avg_decimal": 3.7703,
+   "constructed_roi_pct": 2.56,
+   "phi": {
+    "n": 773,
+    "r": 0.0317,
+    "ci95": [
+     -0.0389,
+     0.102
+    ],
+    "p_value": 0.378671,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X07 Own rating edge vs market >= 2.0 pts",
+    "X08 Under when both clubs' SOS to date is above league average"
+   ],
+   "n_parlays": 921,
+   "hit_rate": 0.2704,
+   "hit_rate_if_independent": 0.2632,
+   "correlation_ratio": 1.0272,
+   "avg_decimal": 3.7742,
+   "constructed_roi_pct": 2.111,
+   "phi": {
+    "n": 921,
+    "r": 0.0287,
+    "ci95": [
+     -0.036,
+     0.0931
+    ],
+    "p_value": 0.384303,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X08 Under when both clubs' SOS to date is above league average",
+    "X11 Recency: back the club with the better last-5 form when it is an underdog"
+   ],
+   "n_parlays": 554,
+   "hit_rate": 0.2906,
+   "hit_rate_if_independent": 0.2835,
+   "correlation_ratio": 1.0251,
+   "avg_decimal": 3.7673,
+   "constructed_roi_pct": 9.414,
+   "phi": {
+    "n": 554,
+    "r": 0.0286,
+    "ci95": [
+     -0.0548,
+     0.1116
+    ],
+    "p_value": 0.501387,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X02 Own spread edge >= 3.0 pts",
+    "X09 Over when both clubs' SOS to date is below league average"
+   ],
+   "n_parlays": 676,
+   "hit_rate": 0.2604,
+   "hit_rate_if_independent": 0.2545,
+   "correlation_ratio": 1.0232,
+   "avg_decimal": 3.7696,
+   "constructed_roi_pct": -1.745,
+   "phi": {
+    "n": 676,
+    "r": 0.0236,
+    "ci95": [
+     -0.0519,
+     0.0988
+    ],
+    "p_value": 0.539956,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X01 Own spread edge >= 1.5 pts",
+    "X08 Under when both clubs' SOS to date is above league average"
+   ],
+   "n_parlays": 988,
+   "hit_rate": 0.2642,
+   "hit_rate_if_independent": 0.2592,
+   "correlation_ratio": 1.0193,
+   "avg_decimal": 3.7747,
+   "constructed_roi_pct": -0.219,
+   "phi": {
+    "n": 988,
+    "r": 0.02,
+    "ci95": [
+     -0.0424,
+     0.0823
+    ],
+    "p_value": 0.529458,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X04 Own total edge >= 5.0 pts",
+    "X05 Fade a club with a lucky record (luck >= +1.5 wins) when it is favoured"
+   ],
+   "n_parlays": 73,
+   "hit_rate": 0.274,
+   "hit_rate_if_independent": 0.2693,
+   "correlation_ratio": 1.0174,
+   "avg_decimal": 3.7822,
+   "constructed_roi_pct": 4.141,
+   "phi": {
+    "n": 73,
+    "r": 0.0189,
+    "ci95": [
+     -0.2121,
+     0.2479
+    ],
+    "p_value": 0.873277,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X01 Own spread edge >= 1.5 pts",
+    "X09 Over when both clubs' SOS to date is below league average"
+   ],
+   "n_parlays": 875,
+   "hit_rate": 0.2606,
+   "hit_rate_if_independent": 0.2569,
+   "correlation_ratio": 1.0144,
+   "avg_decimal": 3.7746,
+   "constructed_roi_pct": -1.518,
+   "phi": {
+    "n": 875,
+    "r": 0.0148,
+    "ci95": [
+     -0.0515,
+     0.081
+    ],
+    "p_value": 0.662313,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X07 Own rating edge vs market >= 2.0 pts",
+    "X09 Over when both clubs' SOS to date is below league average"
+   ],
+   "n_parlays": 803,
+   "hit_rate": 0.259,
+   "hit_rate_if_independent": 0.2562,
+   "correlation_ratio": 1.0109,
+   "avg_decimal": 3.7743,
+   "constructed_roi_pct": -1.979,
+   "phi": {
+    "n": 803,
+    "r": 0.0111,
+    "ci95": [
+     -0.0581,
+     0.0803
+    ],
+    "p_value": 0.752715,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X09 Over when both clubs' SOS to date is below league average",
+    "X11 Recency: back the club with the better last-5 form when it is an underdog"
+   ],
+   "n_parlays": 497,
+   "hit_rate": 0.2374,
+   "hit_rate_if_independent": 0.2347,
+   "correlation_ratio": 1.0115,
+   "avg_decimal": 3.766,
+   "constructed_roi_pct": -10.437,
+   "phi": {
+    "n": 497,
+    "r": 0.0108,
+    "ci95": [
+     -0.0772,
+     0.0987
+    ],
+    "p_value": 0.810164,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X03 Own total edge >= 3.0 pts",
+    "X05 Fade a club with a lucky record (luck >= +1.5 wins) when it is favoured"
+   ],
+   "n_parlays": 116,
+   "hit_rate": 0.25,
+   "hit_rate_if_independent": 0.2497,
+   "correlation_ratio": 1.0012,
+   "avg_decimal": 3.7865,
+   "constructed_roi_pct": -5.13,
+   "phi": {
+    "n": 116,
+    "r": 0.0012,
+    "ci95": [
+     -0.1812,
+     0.1835
+    ],
+    "p_value": 0.989859,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X02 Own spread edge >= 3.0 pts",
+    "X03 Own total edge >= 3.0 pts"
+   ],
+   "n_parlays": 1613,
+   "hit_rate": 0.2517,
+   "hit_rate_if_independent": 0.2537,
+   "correlation_ratio": 0.992,
+   "avg_decimal": 3.7704,
+   "constructed_roi_pct": -5.086,
+   "phi": {
+    "n": 1613,
+    "r": -0.0081,
+    "ci95": [
+     -0.0569,
+     0.0407
+    ],
+    "p_value": 0.745191,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X03 Own total edge >= 3.0 pts",
+    "X07 Own rating edge vs market >= 2.0 pts"
+   ],
+   "n_parlays": 1925,
+   "hit_rate": 0.254,
+   "hit_rate_if_independent": 0.2563,
+   "correlation_ratio": 0.9912,
+   "avg_decimal": 3.7736,
+   "constructed_roi_pct": -4.183,
+   "phi": {
+    "n": 1925,
+    "r": -0.009,
+    "ci95": [
+     -0.0536,
+     0.0357
+    ],
+    "p_value": 0.693542,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X04 Own total edge >= 5.0 pts",
+    "X07 Own rating edge vs market >= 2.0 pts"
+   ],
+   "n_parlays": 1017,
+   "hit_rate": 0.2547,
+   "hit_rate_if_independent": 0.2584,
+   "correlation_ratio": 0.9856,
+   "avg_decimal": 3.768,
+   "constructed_roi_pct": -4.085,
+   "phi": {
+    "n": 1017,
+    "r": -0.0149,
+    "ci95": [
+     -0.0763,
+     0.0466
+    ],
+    "p_value": 0.635061,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X01 Own spread edge >= 1.5 pts",
+    "X03 Own total edge >= 3.0 pts"
+   ],
+   "n_parlays": 2082,
+   "hit_rate": 0.2555,
+   "hit_rate_if_independent": 0.2597,
+   "correlation_ratio": 0.9839,
+   "avg_decimal": 3.775,
+   "constructed_roi_pct": -3.548,
+   "phi": {
+    "n": 2082,
+    "r": -0.0167,
+    "ci95": [
+     -0.0596,
+     0.0263
+    ],
+    "p_value": 0.446156,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X01 Own spread edge >= 1.5 pts",
+    "X04 Own total edge >= 5.0 pts"
+   ],
+   "n_parlays": 1104,
+   "hit_rate": 0.2591,
+   "hit_rate_if_independent": 0.2638,
+   "correlation_ratio": 0.9822,
+   "avg_decimal": 3.7701,
+   "constructed_roi_pct": -2.343,
+   "phi": {
+    "n": 1104,
+    "r": -0.0188,
+    "ci95": [
+     -0.0777,
+     0.0403
+    ],
+    "p_value": 0.532762,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X03 Own total edge >= 3.0 pts",
+    "X06 Back a club with an unlucky record (luck <= -1.5 wins) when it is an underdog"
+   ],
+   "n_parlays": 92,
+   "hit_rate": 0.1957,
+   "hit_rate_if_independent": 0.2011,
+   "correlation_ratio": 0.973,
+   "avg_decimal": 3.8017,
+   "constructed_roi_pct": -25.202,
+   "phi": {
+    "n": 92,
+    "r": -0.0222,
+    "ci95": [
+     -0.226,
+     0.1835
+    ],
+    "p_value": 0.833393,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X05 Fade a club with a lucky record (luck >= +1.5 wins) when it is favoured",
+    "X09 Over when both clubs' SOS to date is below league average"
+   ],
+   "n_parlays": 54,
+   "hit_rate": 0.2037,
+   "hit_rate_if_independent": 0.2112,
+   "correlation_ratio": 0.9643,
+   "avg_decimal": 3.7724,
+   "constructed_roi_pct": -20.381,
+   "phi": {
+    "n": 54,
+    "r": -0.0307,
+    "ci95": [
+     -0.2961,
+     0.239
+    ],
+    "p_value": 0.824543,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X02 Own spread edge >= 3.0 pts",
+    "X04 Own total edge >= 5.0 pts"
+   ],
+   "n_parlays": 866,
+   "hit_rate": 0.2506,
+   "hit_rate_if_independent": 0.2598,
+   "correlation_ratio": 0.9644,
+   "avg_decimal": 3.7658,
+   "constructed_roi_pct": -5.559,
+   "phi": {
+    "n": 866,
+    "r": -0.037,
+    "ci95": [
+     -0.1033,
+     0.0297
+    ],
+    "p_value": 0.276714,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X05 Fade a club with a lucky record (luck >= +1.5 wins) when it is favoured",
+    "X08 Under when both clubs' SOS to date is above league average"
+   ],
+   "n_parlays": 87,
+   "hit_rate": 0.2069,
+   "hit_rate_if_independent": 0.2438,
+   "correlation_ratio": 0.8488,
+   "avg_decimal": 3.815,
+   "constructed_roi_pct": -21.099,
+   "phi": {
+    "n": 87,
+    "r": -0.1478,
+    "ci95": [
+     -0.3476,
+     0.0649
+    ],
+    "p_value": 0.168343,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X06 Back a club with an unlucky record (luck <= -1.5 wins) when it is an underdog",
+    "X08 Under when both clubs' SOS to date is above league average"
+   ],
+   "n_parlays": 65,
+   "hit_rate": 0.1846,
+   "hit_rate_if_independent": 0.2265,
+   "correlation_ratio": 0.815,
+   "avg_decimal": 3.8178,
+   "constructed_roi_pct": -29.165,
+   "phi": {
+    "n": 65,
+    "r": -0.1686,
+    "ci95": [
+     -0.3962,
+     0.0786
+    ],
+    "p_value": 0.174641,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X03 Own total edge >= 3.0 pts",
+    "X09 Over when both clubs' SOS to date is below league average"
+   ],
+   "n_parlays": 591,
+   "hit_rate": 0.1844,
+   "hit_rate_if_independent": 0.2456,
+   "correlation_ratio": 0.7508,
+   "avg_decimal": 3.7939,
+   "constructed_roi_pct": -30.042,
+   "phi": {
+    "n": 591,
+    "r": -0.245,
+    "ci95": [
+     -0.3194,
+     -0.1677
+    ],
+    "p_value": 0.0,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X04 Own total edge >= 5.0 pts",
+    "X09 Over when both clubs' SOS to date is below league average"
+   ],
+   "n_parlays": 316,
+   "hit_rate": 0.1709,
+   "hit_rate_if_independent": 0.252,
+   "correlation_ratio": 0.6782,
+   "avg_decimal": 3.7955,
+   "constructed_roi_pct": -35.082,
+   "phi": {
+    "n": 316,
+    "r": -0.3259,
+    "ci95": [
+     -0.4211,
+     -0.2236
+    ],
+    "p_value": 0.0,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X01 Own spread edge >= 1.5 pts",
+    "X05 Fade a club with a lucky record (luck >= +1.5 wins) when it is favoured"
+   ],
+   "n_parlays": 186,
+   "hit_rate": 0.1075,
+   "hit_rate_if_independent": 0.2523,
+   "correlation_ratio": 0.4261,
+   "avg_decimal": 3.7905,
+   "constructed_roi_pct": -59.734,
+   "phi": {
+    "n": 186,
+    "r": -0.5801,
+    "ci95": [
+     -0.6682,
+     -0.4759
+    ],
+    "p_value": 0.0,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X01 Own spread edge >= 1.5 pts",
+    "X06 Back a club with an unlucky record (luck <= -1.5 wins) when it is an underdog"
+   ],
+   "n_parlays": 135,
+   "hit_rate": 0.1185,
+   "hit_rate_if_independent": 0.2667,
+   "correlation_ratio": 0.4444,
+   "avg_decimal": 3.7885,
+   "constructed_roi_pct": -55.278,
+   "phi": {
+    "n": 135,
+    "r": -0.6086,
+    "ci95": [
+     -0.705,
+     -0.49
+    ],
+    "p_value": 0.0,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X06 Back a club with an unlucky record (luck <= -1.5 wins) when it is an underdog",
+    "X07 Own rating edge vs market >= 2.0 pts"
+   ],
+   "n_parlays": 120,
+   "hit_rate": 0.125,
+   "hit_rate_if_independent": 0.2724,
+   "correlation_ratio": 0.4589,
+   "avg_decimal": 3.791,
+   "constructed_roi_pct": -52.625,
+   "phi": {
+    "n": 120,
+    "r": -0.6103,
+    "ci95": [
+     -0.7117,
+     -0.4841
+    ],
+    "p_value": 0.0,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X05 Fade a club with a lucky record (luck >= +1.5 wins) when it is favoured",
+    "X07 Own rating edge vs market >= 2.0 pts"
+   ],
+   "n_parlays": 171,
+   "hit_rate": 0.0936,
+   "hit_rate_if_independent": 0.2496,
+   "correlation_ratio": 0.3749,
+   "avg_decimal": 3.7866,
+   "constructed_roi_pct": -65.279,
+   "phi": {
+    "n": 171,
+    "r": -0.6251,
+    "ci95": [
+     -0.7087,
+     -0.5242
+    ],
+    "p_value": 0.0,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X02 Own spread edge >= 3.0 pts",
+    "X06 Back a club with an unlucky record (luck <= -1.5 wins) when it is an underdog"
+   ],
+   "n_parlays": 90,
+   "hit_rate": 0.1,
+   "hit_rate_if_independent": 0.2696,
+   "correlation_ratio": 0.3709,
+   "avg_decimal": 3.7877,
+   "constructed_roi_pct": -62.704,
+   "phi": {
+    "n": 90,
+    "r": -0.7061,
+    "ci95": [
+     -0.7967,
+     -0.5844
+    ],
+    "p_value": 0.0,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X02 Own spread edge >= 3.0 pts",
+    "X05 Fade a club with a lucky record (luck >= +1.5 wins) when it is favoured"
+   ],
+   "n_parlays": 137,
+   "hit_rate": 0.0511,
+   "hit_rate_if_independent": 0.2427,
+   "correlation_ratio": 0.2105,
+   "avg_decimal": 3.7796,
+   "constructed_roi_pct": -81.197,
+   "phi": {
+    "n": 137,
+    "r": -0.7668,
+    "ci95": [
+     -0.828,
+     -0.6875
+    ],
+    "p_value": 0.0,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X10 Divisional underdog of 6.5+ with a positive own-rating edge",
+    "X11 Recency: back the club with the better last-5 form when it is an underdog"
+   ],
+   "n_parlays": 105,
+   "hit_rate": 0.0095,
+   "hit_rate_if_independent": 0.25,
+   "correlation_ratio": 0.0381,
+   "avg_decimal": 3.7917,
+   "constructed_roi_pct": -96.671,
+   "phi": {
+    "n": 105,
+    "r": -0.9619,
+    "ci95": [
+     -0.974,
+     -0.9443
+    ],
+    "p_value": 0.0,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X07 Own rating edge vs market >= 2.0 pts",
+    "X10 Divisional underdog of 6.5+ with a positive own-rating edge"
+   ],
+   "n_parlays": 140,
+   "hit_rate": 0.0,
+   "hit_rate_if_independent": 0.2464,
+   "correlation_ratio": 0.0,
+   "avg_decimal": 3.7937,
+   "constructed_roi_pct": -100.0,
+   "phi": {
+    "n": 140,
+    "r": -0.9858,
+    "ci95": [
+     -0.9898,
+     -0.9802
+    ],
+    "p_value": 0.0,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X01 Own spread edge >= 1.5 pts",
+    "X10 Divisional underdog of 6.5+ with a positive own-rating edge"
+   ],
+   "n_parlays": 142,
+   "hit_rate": 0.0,
+   "hit_rate_if_independent": 0.2464,
+   "correlation_ratio": 0.0,
+   "avg_decimal": 3.7947,
+   "constructed_roi_pct": -100.0,
+   "phi": {
+    "n": 142,
+    "r": -0.986,
+    "ci95": [
+     -0.9899,
+     -0.9805
+    ],
+    "p_value": 0.0,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "legs": [
+    "X02 Own spread edge >= 3.0 pts",
+    "X10 Divisional underdog of 6.5+ with a positive own-rating edge"
+   ],
+   "n_parlays": 131,
+   "hit_rate": 0.0,
+   "hit_rate_if_independent": 0.2499,
+   "correlation_ratio": 0.0,
+   "avg_decimal": 3.7934,
+   "constructed_roi_pct": -100.0,
+   "phi": {
+    "n": 131,
+    "r": -1.0,
+    "ci95": [
+     -1.0,
+     -1.0
+    ],
+    "p_value": 0.0,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  }
+ ]
+}

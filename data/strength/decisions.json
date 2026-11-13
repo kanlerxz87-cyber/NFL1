@@ -1,0 +1,52 @@
+{
+ "generated_at": "2026-11-13T13:02:45+00:00",
+ "count": 4,
+ "decisions": [
+  {
+   "id": "D-SOS-01",
+   "decision": "Treat the schedule-information edge as absent for now",
+   "evidence": "0/11 rules pass 8 gates over 19,928 scored bets",
+   "status": "READY FOR REVIEW",
+   "owner": "human",
+   "options": [
+    "accept",
+    "request a new pre-registered rule set"
+   ]
+  },
+  {
+   "id": "D-SOS-02",
+   "decision": "Refresh the committed standings and fixtures from the official pages",
+   "evidence": "10 field differences; 1 result now final on nfl.com",
+   "status": "READY FOR REVIEW",
+   "owner": "human",
+   "options": [
+    "refresh now",
+    "freeze with 'as-of'",
+    "exclude 2026"
+   ]
+  },
+  {
+   "id": "D-SOS-03",
+   "decision": "Fund a timestamped odds feed before further edge work",
+   "evidence": "no bettable price series exists in the sources",
+   "status": "BLOCKED ON BUDGET",
+   "owner": "human",
+   "options": [
+    "fund",
+    "stay consensus-only"
+   ]
+  },
+  {
+   "id": "D-SOS-04",
+   "decision": "Pick the reward scheme for the leaderboard",
+   "evidence": "leaderboard has 0 eligible entrants, so no reward is live yet",
+   "status": "READY FOR REVIEW",
+   "owner": "human",
+   "options": [
+    "badges",
+    "scoring only",
+    "cash (needs legal)"
+   ]
+  }
+ ]
+}

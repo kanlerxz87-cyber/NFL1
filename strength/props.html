@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Player props · NFL Strength of Schedule Lab</title>
+<meta name="description" content="Strength of schedule, schedule-adjusted ratings and own lines, verified against official NFL sources.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="brand" href="../index.html"><span class="mark">NFL</span><span class="brand-text">Strength Lab</span></a>
+  <nav aria-label="Strength of schedule sections"><a href="index.html">Overview</a><a href="ratings.html">Ratings & SOS</a><a href="lines.html">My Lines</a><a href="leaderboard.html">Leaderboard</a><a href="parlays.html">Parlays & Combos</a><a href="props.html" class="active">Props</a><a href="injuries.html">Injuries & Depth</a><a href="correlations.html">Correlations</a><a href="questions.html">Questions</a><a href="suggestions.html">Suggestions</a><a href="decisions.html">Decisions</a><a href="flagged.html">Flagged for Review</a><a href="verification.html">Verification</a><a href="executive-summary.html">Executive Summary</a></nav>
+</header>
+<main id="main">
+  <section class="page-head">
+    <p class="eyebrow">Strength of schedule study</p>
+    <h1>Player props</h1>
+    <p class="standfirst">Same-game prop correlations, and an explicit account of why no prop combo is scored.</p>
+    <p class="timestamp">Built 2026-11-13T13:02:45+00:00 · every table row links to the source it came from · blanks are deliberate</p>
+    
+  </section>
+  
+<section class="panel">
+  <h2>Player props: correlations yes, prices no</h2>
+  <p class="sub">BLANK: no official or book price exists in this repository&#x27;s sources for any player prop, so no prop combo is scored and no profit is claimed.</p>
+  <div class="table-wrap"><table class=""><thead><tr><th>ID</th><th>Relationship</th><th>n</th><th>r</th><th>95% CI</th><th>Interpretation</th><th>Source</th></tr></thead><tbody><tr><td>P-01</td><td>Club passing yards vs same-club receiver yards (same game)</td><td>3988</td><td>+0.843</td><td>+0.833 to +0.851</td><td>same-club passing and receiving yards move together as expected</td><td><a class="src" href="https://www.nfl.com/stats/player-stats/" target="_blank" rel="noopener">NFL player stats ↗</a></td></tr><tr><td>P-02</td><td>Club receiver yards vs same-club rushing yards (same game)</td><td>3988</td><td>-0.176</td><td>-0.206 to -0.146</td><td>alternative usage: passing volume and rushing volume trade off</td><td><a class="src" href="https://www.nfl.com/stats/player-stats/" target="_blank" rel="noopener">NFL player stats ↗</a></td></tr><tr><td>P-03</td><td>Club receiver yards vs opponent rushing yards (same game)</td><td>3997</td><td>-0.027</td><td>-0.058 to +0.004</td><td>game script does not link these two</td><td><a class="src" href="https://www.nfl.com/stats/player-stats/" target="_blank" rel="noopener">NFL player stats ↗</a></td></tr></tbody></table></div>
+  <p class="note">A parlay of two positively correlated props is worth less than the product of the two prices; a parlay of
+  negatively correlated props is worth more. Without a price neither can be converted into a decision, so the track
+  stays empty and the leaderboard carries no prop entries.</p>
+</section>
+<section class="panel">
+  <h2>What would unblock it</h2>
+  <ol class="plain">
+    <li>A licensed odds feed with per-book prop prices and timestamps (see <a href="suggestions.html">S-SOS-04</a>).</li>
+    <li>Inactive lists per game, because a prop depends on who is actually dressed.</li>
+    <li>A pre-registered combo rule set, so the evaluation is not chosen after the fact.</li>
+  </ol>
+</section>
+
+</main>
+<footer>
+  <p>Research tool, not betting advice. Closing lines in the source file are consensus numbers, not book quotes.
+  Official entry points: <a href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a> ·
+  <a href="https://www.nfl.com/schedules/2026/reg10" target="_blank" rel="noopener">NFL schedule</a> ·
+  <a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">NFL injuries</a>.
+  Data: <a href="https://github.com/nflverse/nflverse-data" target="_blank" rel="noopener">nflverse</a> (CC-BY-4.0).</p>
+  <p><a href="flagged.html">Flagged for review</a> · <a href="verification.html">Verification</a> · <a href="../pages/sections.html">All site sections</a></p>
+</footer>
+</body>
+</html>

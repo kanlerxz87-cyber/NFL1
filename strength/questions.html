@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Questions · NFL Strength of Schedule Lab</title>
+<meta name="description" content="Strength of schedule, schedule-adjusted ratings and own lines, verified against official NFL sources.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="brand" href="../index.html"><span class="mark">NFL</span><span class="brand-text">Strength Lab</span></a>
+  <nav aria-label="Strength of schedule sections"><a href="index.html">Overview</a><a href="ratings.html">Ratings & SOS</a><a href="lines.html">My Lines</a><a href="leaderboard.html">Leaderboard</a><a href="parlays.html">Parlays & Combos</a><a href="props.html">Props</a><a href="injuries.html">Injuries & Depth</a><a href="correlations.html">Correlations</a><a href="questions.html" class="active">Questions</a><a href="suggestions.html">Suggestions</a><a href="decisions.html">Decisions</a><a href="flagged.html">Flagged for Review</a><a href="verification.html">Verification</a><a href="executive-summary.html">Executive Summary</a></nav>
+</header>
+<main id="main">
+  <section class="page-head">
+    <p class="eyebrow">Strength of schedule study</p>
+    <h1>Questions</h1>
+    <p class="standfirst">What is known, what is unknown, and the exact thing that would settle each open question.</p>
+    <p class="timestamp">Built 2026-11-13T13:02:45+00:00 · every table row links to the source it came from · blanks are deliberate</p>
+    
+  </section>
+  
+<section class="panel">
+  <h2>12 questions that decide what can be built next</h2>
+  <p class="sub">Every question is either ANSWERED with the computed number, PARTIAL with the reason, or BLOCKED with the exact source that would settle it.</p>
+  
+<div class="q">
+  <h3>Q-SOS-01 — Does strength of schedule, measured walk-forward, add information beyond the closing line? <span class="badge pass">ANSWERED</span></h3>
+  <p>Own ratings correlate r=0.466 with the closing spread over 7,103 games, but the own line is less accurate than the market out of sample: spread MAE 10.714 vs 9.63 in the untouched holdout seasons, and every one of the 11 schedule-based rules fails the gate set (0 of 11 PASS). The honest reading is that schedule information is already inside the price.</p>
+  <p class="meta"><strong>How to discover it:</strong> computed in analysis/strength.py; re-runnable ·
+  <strong>What it blocks:</strong> any decision to trade schedule-based angles</p>
+  <p class="meta"><a href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">source ↗</a> <a href="https://www.nfl.com/schedules/2026/reg10" target="_blank" rel="noopener">source ↗</a></p>
+</div>
+<div class="q">
+  <h3>Q-SOS-02 — Which clubs are strongest once opponents are adjusted for? <span class="badge pass">ANSWERED</span></h3>
+  <p>JAX +9.55 (SOS +1.08); SF +6.39 (SOS -0.62); BUF +6.30 (SOS +0.91); SEA +4.94 (SOS +0.12); CHI +4.27 (SOS +1.14). Home-field advantage fitted at -0.47 points for this season&#x27;s completed games.</p>
+  <p class="meta"><strong>How to discover it:</strong> ridge rating fit, walk-forward, published on the Ratings page ·
+  <strong>What it blocks:</strong> nothing; this is a published estimate with its method</p>
+  <p class="meta"><a href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">source ↗</a> <a href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">source ↗</a></p>
+</div>
+<div class="q">
+  <h3>Q-SOS-03 — Whose record overstates them, and whose understates them? <span class="badge pass">ANSWERED</span></h3>
+  <p>Luck = actual wins minus Pythagorean expectation (exponent 2.37). Most lucky: DEN +2.17; BUF +1.58; CLE +1.53; DET +1.25; SF +1.20. Most unlucky: TB -2.17; LAC -1.57; TEN -1.54; NYJ -1.44; HOU -1.40. Caveat: the rules that trade on this (X05, X06) both fail the gates, so the signal is a description, not an edge.</p>
+  <p class="meta"><strong>How to discover it:</strong> Pythagorean expectation computed from official scored/allowed points ·
+  <strong>What it blocks:</strong> nothing; published as a description</p>
+  <p class="meta"><a href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">source ↗</a></p>
+</div>
+<div class="q">
+  <h3>Q-SOS-04 — Who has played the hardest and easiest schedule so far? <span class="badge pass">ANSWERED</span></h3>
+  <p>Hardest (mean pre-game opponent rating): WAS +1.39; LV +1.28; CHI +1.14; JAX +1.08; BUF +0.91. Easiest: PHI -1.04; NO -0.63; SF -0.62; LA -0.58; BAL -0.54. SOS is the mean of the opponents&#x27; ratings *before* each game, so it contains no future information.</p>
+  <p class="meta"><strong>How to discover it:</strong> computed from the walk-forward panel ·
+  <strong>What it blocks:</strong> nothing</p>
+  <p class="meta"><a href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">source ↗</a></p>
+</div>
+<div class="q">
+  <h3>Q-SOS-05 — Which published values on this repository are stale or wrong right now? <span class="badge pass">ANSWERED</span></h3>
+  <p>Line-by-line against the official standings page: 10 field differences across 32 clubs (224 fields compared). The committed Week 10 fixtures also still show WAS @ NYG as upcoming; nfl.com shows it final (WAS 24 - NYG 21). Injury transcription: 6/9 cross-checked rows match, 24 clubs listed. Each difference is published on the Flags page with its link.</p>
+  <p class="meta"><strong>How to discover it:</strong> re-fetch of the official pages on 2026-11-13 and a field-by-field comparison ·
+  <strong>What it blocks:</strong> publication of any standings-derived number until the source file is refreshed</p>
+  <p class="meta"><a href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">source ↗</a> <a href="https://www.nfl.com/schedules/2026/reg10" target="_blank" rel="noopener">source ↗</a> <a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">source ↗</a></p>
+</div>
+<div class="q">
+  <h3>Q-SOS-06 — Does the pinned provenance still describe the committed data? <span class="badge pass">ANSWERED</span></h3>
+  <p>No. data/s9cb/provenance.json pins games.csv at 2,189,959 bytes / sha256 5ae004ff6d26..., but the committed file is 1,665,511 bytes / sha256 6f0777c68703.... The row count is intact (7,239 games) and the results reconcile, so the study still runs, but the pin is stale and the integrity claim cannot be sustained.</p>
+  <p class="meta"><strong>How to discover it:</strong> sha256 of the committed file compared with the recorded hash ·
+  <strong>What it blocks:</strong> any claim that this data is byte-for-byte the downloaded release</p>
+  <p class="meta"><a href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">source ↗</a></p>
+</div>
+<div class="q">
+  <h3>Q-SOS-07 — Can player-prop combos be scored? <span class="badge fail">BLOCKED</span></h3>
+  <p>No. The same-game prop correlations are computable and published (passing yards vs receiver yards r≈0.8426), but no official or book price for any prop exists in these sources, so no combo can be priced, scored, or ranked. Filling a price in would be a fabrication.</p>
+  <p class="meta"><strong>How to discover it:</strong> would need a licensed odds feed with per-book prop prices and timestamps ·
+  <strong>What it blocks:</strong> the entire prop-combo track of the leaderboard</p>
+  <p class="meta"><a href="https://www.nfl.com/stats/player-stats/" target="_blank" rel="noopener">source ↗</a></p>
+</div>
+<div class="q">
+  <h3>Q-SOS-08 — Are the 2026 closing lines official NFL numbers? <span class="badge pass">ANSWERED</span></h3>
+  <p>No official league odds exist. The closing line in the nflverse release is a consensus number. Every ROI on this site is therefore measured against a consensus price, not a book you could actually bet, and the site says so on every table.</p>
+  <p class="meta"><strong>How to discover it:</strong> documented in the nflverse release description and in data/s9cb/provenance.json ·
+  <strong>What it blocks:</strong> any claim of realisable profit</p>
+  <p class="meta"><a href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">source ↗</a></p>
+</div>
+<div class="q">
+  <h3>Q-SOS-09 — Do we know the injury or depth-chart state at kick-off for every 2026 game? <span class="badge warn">PARTIAL</span></h3>
+  <p>The official Week 10 report lists 254 players across 24 clubs; BAL and LAC report no injuries and four clubs are on bye. There is no per-game inactive list in the sources, and no dated snapshot for earlier weeks, so any injury-aware strategy would be reading today&#x27;s report, not the one available at kick-off.</p>
+  <p class="meta"><strong>How to discover it:</strong> would need the official gamebook inactive lists per game (nfl.com publishes them per game) ·
+  <strong>What it blocks:</strong> injury-adjusted ratings and any 2nd/3rd-string depth signal</p>
+  <p class="meta"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">source ↗</a> <a href="https://www.nfl.com/schedules/2026/reg10" target="_blank" rel="noopener">source ↗</a></p>
+</div>
+<div class="q">
+  <h3>Q-SOS-10 — Which of the 2026 results are inside the current sample? <span class="badge pass">ANSWERED</span></h3>
+  <p>7,103 games from 1999 to 2026 are scored. The 2026 season in the committed extract stops at Week 9: 136 games. Week 10&#x27;s Thursday game is not in the file, so the current-state page counts 8 games for WAS and NYG, which matches the official 3-5-1 / 5-3-1 records.</p>
+  <p class="meta"><strong>How to discover it:</strong> row count by season and a comparison with the official standings games-played ·
+  <strong>What it blocks:</strong> nothing; stated so the reader knows where the sample ends</p>
+  <p class="meta"><a href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">source ↗</a> <a href="https://www.nfl.com/schedules/2026/reg10" target="_blank" rel="noopener">source ↗</a></p>
+</div>
+<div class="q">
+  <h3>Q-SOS-11 — Is the gate set strong enough to stop a lucky strategy? <span class="badge pass">ANSWERED</span></h3>
+  <p>During this session the gates rejected a first implementation whose sign convention made the market line a points-given rather than an expected margin: it reported 94% cover rates and four false PASSes. After the fix every rule fails, and the same sign check now lives in the unit tests. The lesson is that a plausible-looking edge is the default failure mode, and the gates must be able to say no.</p>
+  <p class="meta"><strong>How to discover it:</strong> unit tests in tests/test_strength.py plus manual inspection of the bet log ·
+  <strong>What it blocks:</strong> nothing</p>
+  <p class="meta"><a href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">source ↗</a></p>
+</div>
+<div class="q">
+  <h3>Q-SOS-12 — What would we need to get a real, bettable edge? <span class="badge fail">BLOCKED</span></h3>
+  <p>At minimum: (1) a licensed historical odds feed with per-book, timestamped prices and line movement; (2) injury/inactive data as it stood at kick-off, not today&#x27;s; (3) a pre-registered hypothesis set fixed before peeking; (4) enough seasons that a 2% edge is distinguishable from zero at the tested sample size. Without (1) and (2) any edge claim is untestable.</p>
+  <p class="meta"><strong>How to discover it:</strong> gap analysis of the sources in data/s9cb/provenance.json ·
+  <strong>What it blocks:</strong> any decision to place or recommend a wager</p>
+  <p class="meta"><a href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">source ↗</a> <a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">source ↗</a></p>
+</div>
+</section>
+
+</main>
+<footer>
+  <p>Research tool, not betting advice. Closing lines in the source file are consensus numbers, not book quotes.
+  Official entry points: <a href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a> ·
+  <a href="https://www.nfl.com/schedules/2026/reg10" target="_blank" rel="noopener">NFL schedule</a> ·
+  <a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">NFL injuries</a>.
+  Data: <a href="https://github.com/nflverse/nflverse-data" target="_blank" rel="noopener">nflverse</a> (CC-BY-4.0).</p>
+  <p><a href="flagged.html">Flagged for review</a> · <a href="verification.html">Verification</a> · <a href="../pages/sections.html">All site sections</a></p>
+</footer>
+</body>
+</html>

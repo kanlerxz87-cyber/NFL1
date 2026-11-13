@@ -1821,3 +1821,41 @@ Status values: `unclaimed` | `in progress` | `done` | `needs review`.
 by an earlier generator. New data is written only under `data/strength/`.
 
 _This claim is committed and pushed before any other file is touched, per the brief._
+
+## Task board update — session `ca779bcc-nfl1` (2026-11-13)
+
+| ID | Task | Status | Owner | File scope | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| S1 | Claim pushed before any other file was touched | done | `ca779bcc` | `COORDINATION.md` | commit `bf550fe` |
+| S2 | Line-by-line audit of the newest published data against live official nfl.com pages | done | `ca779bcc` | `data/strength/flags.json`, `data/strength/audit.json` | 32 clubs × 7 fields compared; **10 differences** (NYG + WAS); Week 10 14 fixtures and 4 byes match; injury cross-check 6/9 with 3 DET rows differing; provenance hash mismatch; 17 flags published with links |
+| S3 | Strength-of-schedule study: walk-forward ratings, SOS, own lines, gated strategies | done | `ca779bcc` | `analysis/strength.py`, `data/strength/*.json` | 7,103 games 1999–2026; 11 pre-registered rules; 19,928 bets; **0 PASS / 0 WATCH / 11 FAIL**; holdout spread MAE 10.71 own vs 9.63 market |
+| S4 | Questions / information ledger | done | `ca779bcc` | `data/strength/questions.json` | 12 questions: 8 answered with a number, 1 partial, 3 blocked with the exact source that would settle each |
+| S5 | Suggestions register with decision paths | done | `ca779bcc` | `data/strength/suggestions.json` | 8 suggestions, each with options, recommendation, cost, risk, blocker |
+| S6 | Executive summary | done | `ca779bcc` | `strength/executive-summary.html` | question, method, result, defects, decisions |
+| S7 | Verification report | done | `ca779bcc` | `strength/verification.html`, `data/strength/verification.json` | 10 checks, states printed both sides |
+| S8 | Generator, checker and tests | done | `ca779bcc` | `tools/build_strength.py`, `tools/build_ledgers.py`, `tools/check_strength_site.py`, `tests/test_strength.py` | 14 pages, 234 table rows, every row source-linked; 19 unit tests pass; `check_strength_site` PASS |
+| S9 | Integration, PR, merge, Pages | in progress | `ca779bcc` | `COORDINATION.md` | |
+
+**Sources used in this session (official first):** standings https://www.nfl.com/standings/league/2026/reg ·
+Week 10 schedule/results https://www.nfl.com/schedules/2026/reg10 · injury report https://www.nfl.com/injuries/ ·
+game page https://www.nfl.com/games/commanders-at-giants-2026-reg-10 · data from the pinned nflverse release
+https://github.com/nflverse/nflverse-data/releases/tag/schedules (CC-BY-4.0).
+
+**Verification performed:** live re-fetch of every official page above on 2026-11-13; field-by-field comparison of
+all 32 standings rows (224 fields) and the Week 10 fixture/bye set; sha256 of the committed `games.csv` against
+`data/s9cb/provenance.json`; unit tests for the spread sign convention after a real defect was found and fixed in
+this session (a first implementation treated the closing line as points-given and produced four false PASSes at
+94% hit rates).
+
+**Irregularities recorded (all published with source links on `strength/flagged.html`):**
+F-SOS-STD-{NYG,WAS} (10 field differences vs official), F-SOS-W10-01 (WAS @ NYG still listed as upcoming; official
+page shows it final 24–21), F-SOS-DATA-01 (provenance pin 2,189,959 bytes / `5ae004…` vs committed 1,665,511 bytes /
+`6f0777…`), F-SOS-MODEL-01 (2026 home-field fit −0.47 pts, a property of a small sample), F-SOS-INJ-01..03
+(three Detroit rows whose game status differs between the committed transcription and today's official page),
+F-SOS-SITE-01 (landing KPI still says "week 9 complete").
+
+**Not touched:** `pages/` content, `docs/`, `lab/`, `dashboard/`, `verified-lab/`, `referee/`, `s9cb/`,
+`analysis/engine.py|luck.py|injuries.py|correlations.py`, `pipeline/build_all.py`, `tools/build.py` and every
+`data/*.json` owned by an earlier generator. `pipeline/gen_site.py` received **one** additive nav entry plus one
+`sections_page` row; `scripts/verified/normalize_nav.py` received **one** additive nav entry. New data lives only
+under `data/strength/`.

@@ -29,6 +29,9 @@ NAV = [
     ("pages/evidence.html", "Evidence"),
     ("pages/review.html", "Flagged for Review"),
     ("pages/executive.html", "Executive Summary"),
+    # Session ca779bcc-nfl1: one additive entry so the strength-of-schedule study
+    # (its own sub-site under strength/) is reachable from the root dashboard.
+    ("strength/index.html", "SOS Study"),
 ]
 
 SOURCE = {
@@ -135,7 +138,11 @@ def page(path: str, title: str, body: str, subtitle: str = "", generated: str = 
     current = path.split("/")[-1]
     links = []
     for href, label in NAV:
-        cls = ' class="active"' if href.split("/")[-1] == current else ""
+        # The active state only applies to the page being rendered; for a
+        # sub-site entry (strength/index.html) the name would otherwise collide
+        # with the root index.html, so the full href is compared too.
+        active = href.split("/")[-1] == current and (href == path or "/" not in href)
+        cls = ' class="active"' if active else ""
         links.append(f'<a href="{prefix}{href}"{cls}>{esc(label)}</a>')
     nav = "".join(links)
     sub = f'<p class="standfirst">{subtitle}</p>' if subtitle else ""
@@ -1401,6 +1408,8 @@ def sections_page(dash):
          "Consolidated decision lab: live-verified data, own lines, ten-gate strategy lab, depth charts"],
         ["Companion register", link("docs/index.html", "Register (session 87deb7ab)"),
          "Independently built requirements, questions, suggestions and strategy registers"],
+        ["Independent sub-sites", link("strength/index.html", "Strength of schedule study (session ca779bcc)"),
+         "Walk-forward ratings, SOS, own lines, gated leaderboard, questions, suggestions, flagged items (14 pages)"],
         ["Historical", link("legacy-site.html", "Earlier dashboard"),
          "The first integrated dashboard, preserved verbatim"],
     ]

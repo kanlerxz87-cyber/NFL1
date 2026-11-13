@@ -1,0 +1,143 @@
+{
+ "generated_at": "2026-11-13T13:02:45+00:00",
+ "count": 17,
+ "rule": "Every flag carries the official link that shows the difference and the value seen on both sides.",
+ "flags": [
+  {
+   "id": "F-SOS-STD-NYG",
+   "severity": "high",
+   "title": "Standings field differs from the official page: NYG l",
+   "detail": "Official 3 vs repository 2. The official page was read on 2026-11-13.",
+   "source": "https://www.nfl.com/standings/league/2026/reg",
+   "status": "open"
+  },
+  {
+   "id": "F-SOS-STD-NYG",
+   "severity": "high",
+   "title": "Standings field differs from the official page: NYG pf",
+   "detail": "Official 203 vs repository 182. The official page was read on 2026-11-13.",
+   "source": "https://www.nfl.com/standings/league/2026/reg",
+   "status": "open"
+  },
+  {
+   "id": "F-SOS-STD-NYG",
+   "severity": "high",
+   "title": "Standings field differs from the official page: NYG pa",
+   "detail": "Official 196 vs repository 172. The official page was read on 2026-11-13.",
+   "source": "https://www.nfl.com/standings/league/2026/reg",
+   "status": "open"
+  },
+  {
+   "id": "F-SOS-STD-NYG",
+   "severity": "high",
+   "title": "Standings field differs from the official page: NYG pct",
+   "detail": "Official 0.611 vs repository 0.688. The official page was read on 2026-11-13.",
+   "source": "https://www.nfl.com/standings/league/2026/reg",
+   "status": "open"
+  },
+  {
+   "id": "F-SOS-STD-NYG",
+   "severity": "high",
+   "title": "Standings field differs from the official page: NYG streak",
+   "detail": "Official 1L vs repository 2W. The official page was read on 2026-11-13.",
+   "source": "https://www.nfl.com/standings/league/2026/reg",
+   "status": "open"
+  },
+  {
+   "id": "F-SOS-STD-WAS",
+   "severity": "high",
+   "title": "Standings field differs from the official page: WAS w",
+   "detail": "Official 3 vs repository 2. The official page was read on 2026-11-13.",
+   "source": "https://www.nfl.com/standings/league/2026/reg",
+   "status": "open"
+  },
+  {
+   "id": "F-SOS-STD-WAS",
+   "severity": "high",
+   "title": "Standings field differs from the official page: WAS pf",
+   "detail": "Official 196 vs repository 172. The official page was read on 2026-11-13.",
+   "source": "https://www.nfl.com/standings/league/2026/reg",
+   "status": "open"
+  },
+  {
+   "id": "F-SOS-STD-WAS",
+   "severity": "high",
+   "title": "Standings field differs from the official page: WAS pa",
+   "detail": "Official 223 vs repository 202. The official page was read on 2026-11-13.",
+   "source": "https://www.nfl.com/standings/league/2026/reg",
+   "status": "open"
+  },
+  {
+   "id": "F-SOS-STD-WAS",
+   "severity": "high",
+   "title": "Standings field differs from the official page: WAS pct",
+   "detail": "Official 0.389 vs repository 0.313. The official page was read on 2026-11-13.",
+   "source": "https://www.nfl.com/standings/league/2026/reg",
+   "status": "open"
+  },
+  {
+   "id": "F-SOS-STD-WAS",
+   "severity": "high",
+   "title": "Standings field differs from the official page: WAS streak",
+   "detail": "Official 1W vs repository 1L. The official page was read on 2026-11-13.",
+   "source": "https://www.nfl.com/standings/league/2026/reg",
+   "status": "open"
+  },
+  {
+   "id": "F-SOS-W10-01",
+   "severity": "high",
+   "title": "Week 10 fixture listed as upcoming after the game went final",
+   "detail": "data/verified/week10_fixtures_2026.csv lists WAS @ NYG on 2026-11-12 as a fixture. nfl.com shows 'Commanders 24, Giants 21, FINAL'. The 14-fixture set and the four byes are otherwise identical to the official page.",
+   "source": "https://www.nfl.com/schedules/2026/reg10",
+   "status": "open"
+  },
+  {
+   "id": "F-SOS-DATA-01",
+   "severity": "medium",
+   "title": "Pinned provenance hash does not match the committed games.csv",
+   "detail": "recorded 2,189,959 bytes / 5ae004ff6d26b081..., committed 1,665,511 bytes / 6f0777c6870329ba.... Row count intact (7,239) and results reconcile.",
+   "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+   "status": "open"
+  },
+  {
+   "id": "F-SOS-MODEL-01",
+   "severity": "medium",
+   "title": "Home-field advantage fitted near zero for the 2026 sample",
+   "detail": "The ridge fit gives hfa -0.47 points on 136 games, against roughly +2 points in every earlier season. This is a computed property of a small 2026 sample (home win rate 49.3%), not a data error; it is flagged because it materially changes this week's own lines.",
+   "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+   "status": "open"
+  },
+  {
+   "id": "F-SOS-INJ-01",
+   "severity": "medium",
+   "title": "Injury row differs between the transcription and today's official page: DET Kerby Joseph",
+   "detail": "injury: official 'Knee' vs transcription ''; practice: official 'Full Participation in Practice' vs transcription 'LP'; game_status: official 'Out' vs transcription ''. The committed transcription was read on 2026-11-12 05:30Z and today's read on 2026-11-13. The official report is documented to change within hours (earlier flag A-F04), so this is either a late status update or a transcription omission. One read cannot tell which; re-read the page at publication time to classify it.",
+   "source": "https://www.nfl.com/injuries/",
+   "status": "needs review"
+  },
+  {
+   "id": "F-SOS-INJ-02",
+   "severity": "medium",
+   "title": "Injury row differs between the transcription and today's official page: DET Cade Mays",
+   "detail": "injury: official 'Ankle' vs transcription ''; practice: official 'Did Not Participate In Practice' vs transcription 'DNP'; game_status: official 'Out' vs transcription ''. The committed transcription was read on 2026-11-12 05:30Z and today's read on 2026-11-13. The official report is documented to change within hours (earlier flag A-F04), so this is either a late status update or a transcription omission. One read cannot tell which; re-read the page at publication time to classify it.",
+   "source": "https://www.nfl.com/injuries/",
+   "status": "needs review"
+  },
+  {
+   "id": "F-SOS-INJ-03",
+   "severity": "medium",
+   "title": "Injury row differs between the transcription and today's official page: DET D.J. Reed",
+   "detail": "injury: official 'Hip' vs transcription ''; practice: official 'Did Not Participate In Practice' vs transcription 'DNP'; game_status: official 'Out' vs transcription ''. The committed transcription was read on 2026-11-12 05:30Z and today's read on 2026-11-13. The official report is documented to change within hours (earlier flag A-F04), so this is either a late status update or a transcription omission. One read cannot tell which; re-read the page at publication time to classify it.",
+   "source": "https://www.nfl.com/injuries/",
+   "status": "needs review"
+  },
+  {
+   "id": "F-SOS-SITE-01",
+   "severity": "medium",
+   "title": "Landing page says 'week 9 complete' while the official schedule has moved past it",
+   "detail": "index.html KPI subtitle reads 'week 9 complete'. nfl.com shows Week 10 in progress with the Thursday game final.",
+   "source": "https://www.nfl.com/schedules/2026/reg10",
+   "status": "open"
+  }
+ ]
+}

@@ -1,0 +1,167 @@
+{
+ "generated_at": "2026-11-13T13:02:45+00:00",
+ "standings": {
+  "rows_compared": 32,
+  "fields_compared": 224,
+  "differences": [
+   {
+    "team": "NYG",
+    "field": "l",
+    "official": 3,
+    "repo": "2"
+   },
+   {
+    "team": "NYG",
+    "field": "pf",
+    "official": 203,
+    "repo": "182"
+   },
+   {
+    "team": "NYG",
+    "field": "pa",
+    "official": 196,
+    "repo": "172"
+   },
+   {
+    "team": "NYG",
+    "field": "pct",
+    "official": 0.611,
+    "repo": "0.688"
+   },
+   {
+    "team": "NYG",
+    "field": "streak",
+    "official": "1L",
+    "repo": "2W"
+   },
+   {
+    "team": "WAS",
+    "field": "w",
+    "official": 3,
+    "repo": "2"
+   },
+   {
+    "team": "WAS",
+    "field": "pf",
+    "official": 196,
+    "repo": "172"
+   },
+   {
+    "team": "WAS",
+    "field": "pa",
+    "official": 223,
+    "repo": "202"
+   },
+   {
+    "team": "WAS",
+    "field": "pct",
+    "official": 0.389,
+    "repo": "0.313"
+   },
+   {
+    "team": "WAS",
+    "field": "streak",
+    "official": "1W",
+    "repo": "1L"
+   }
+  ]
+ },
+ "injuries": {
+  "rows_in_transcription": 254,
+  "rows_checked": 9,
+  "matches": 6,
+  "mismatches": [
+   {
+    "club": "DET",
+    "player": "Kerby Joseph",
+    "official": {
+     "club": "DET",
+     "player": "Kerby Joseph",
+     "position": "S",
+     "injury": "Knee",
+     "practice": "Full Participation in Practice",
+     "game_status": "Out"
+    },
+    "repo": {
+     "team_abbr": "DET",
+     "player": "Kerby Joseph",
+     "position": "S",
+     "injury": "",
+     "practice": "LP",
+     "game_status": "",
+     "player_slug": "kerby-joseph"
+    }
+   },
+   {
+    "club": "DET",
+    "player": "Cade Mays",
+    "official": {
+     "club": "DET",
+     "player": "Cade Mays",
+     "position": "C",
+     "injury": "Ankle",
+     "practice": "Did Not Participate In Practice",
+     "game_status": "Out"
+    },
+    "repo": {
+     "team_abbr": "DET",
+     "player": "Cade Mays",
+     "position": "C",
+     "injury": "",
+     "practice": "DNP",
+     "game_status": "",
+     "player_slug": "cade-mays"
+    }
+   },
+   {
+    "club": "DET",
+    "player": "D.J. Reed",
+    "official": {
+     "club": "DET",
+     "player": "D.J. Reed",
+     "position": "CB",
+     "injury": "Hip",
+     "practice": "Did Not Participate In Practice",
+     "game_status": "Out"
+    },
+    "repo": {
+     "team_abbr": "DET",
+     "player": "D.J. Reed",
+     "position": "CB",
+     "injury": "",
+     "practice": "DNP",
+     "game_status": "",
+     "player_slug": "d-j-reed"
+    }
+   }
+  ],
+  "clubs_listed": 24
+ },
+ "schedule": {
+  "official_games": 14,
+  "repo_games": 14,
+  "games_missing_from_repo": [],
+  "games_extra_in_repo": [],
+  "byes_official": [
+   "CHI",
+   "DEN",
+   "PHI",
+   "TB"
+  ],
+  "byes_repo_week10": [
+   "CHI",
+   "DEN",
+   "PHI",
+   "TB"
+  ],
+  "byes_match": true,
+  "played_results_repo": 0,
+  "played_results_official": 1,
+  "note": "The committed fixtures file lists the WAS @ NYG game as upcoming. nfl.com now shows it final (WAS 24 - NYG 21)."
+ },
+ "sources": {
+  "standings": "https://www.nfl.com/standings/league/2026/reg",
+  "week10_schedule": "https://www.nfl.com/schedules/2026/reg10",
+  "injuries": "https://www.nfl.com/injuries/"
+ }
+}
