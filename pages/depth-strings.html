@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Depth Strings · NFL Decision Lab</title>
+<meta name="description" content="Evidence-first NFL decision support: own lines, validation gates, injury and depth analysis.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="brand" href="../index.html"><span class="mark">NFL</span><span class="brand-text">Decision Lab</span></a>
+  <nav>
+    <a href="../index.html">Overview</a>
+    <a href="sections.html">All Sections</a>
+    <a href="executive-summary.html">Executive Summary</a>
+    <a href="teams.html">Teams</a>
+    <a href="standings.html">Standings</a>
+    <a href="injuries.html">Injuries</a>
+    <a href="availability.html">Availability</a>
+    <a href="depth-strings.html" class="active">Depth Strings</a>
+    <a href="data.html">Verified Data</a>
+    <a href="lines.html">Own Lines</a>
+    <a href="analysis.html">Validation & Correlation</a>
+    <a href="decisions.html">Decision Register</a>
+    <a href="verified.html">Verified Artifacts</a>
+    <a href="evidence.html">Evidence</a>
+    <a href="models.html">Strategy Lab</a>
+    <a href="strategies.html">Strategies</a>
+    <a href="suggestions.html">Suggestions</a>
+    <a href="questions.html">Questions</a>
+    <a href="flagged.html">Flagged</a>
+    <a href="review.html">Review</a>
+    <a href="executive.html">Executive Summary (companion)</a>
+    <a href="props.html">Player Props</a>
+  </nav>
+</header>
+<main id="main">
+  <section class="page-head">
+    <p class="eyebrow">Evidence-first dashboard</p>
+    <h1>Depth Strings</h1>
+    <p class="standfirst">Who is the 2nd, 3rd and 4th string at every position, joined to the official game designations.</p>
+    <p class="timestamp">Data built 2026-11-12T23:37:56+00:00 · every value links to its source</p>
+  </section>
+  
+<section class="kpis">
+  <article class="kpi"><span class="kpi-label">Positions tracked</span><strong class="kpi-value">&mdash;</strong><span class="kpi-sub">all clubs</span></article>
+  <article class="kpi"><span class="kpi-label">Clubs tracked</span><strong class="kpi-value">&mdash;</strong><span class="kpi-sub">with a published chain</span></article>
+  <article class="kpi"><span class="kpi-label">Starter unavailable</span><strong class="kpi-value">&mdash;</strong><span class="kpi-sub">official Out</span></article>
+  <article class="kpi"><span class="kpi-label">Down to 2nd string</span><strong class="kpi-value">&mdash;</strong><span class="kpi-sub">projected</span></article>
+  <article class="kpi"><span class="kpi-label">Down to 3rd string</span><strong class="kpi-value">&mdash;</strong><span class="kpi-sub">projected</span></article>
+  <article class="kpi"><span class="kpi-label">Down to 4th string</span><strong class="kpi-value">&mdash;</strong><span class="kpi-sub">projected</span></article>
+  <article class="kpi"><span class="kpi-label">No healthy player listed</span><strong class="kpi-value">&mdash;</strong><span class="kpi-sub">flagged, not guessed</span></article>
+</section>
+<p class="okline">Injury source:  — <a class="src" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com/injuries</a> · Depth chart:  — <a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/depth_charts" target="_blank" rel="noopener">nflverse depth charts</a></p>
+
+<section class="panel">
+  <h2>How to read this page</h2>
+  <p>The availability table answers <em>which listed starters are out</em>. This table answers
+  <em>how far down the depth chart each club is projected to be</em> once the official game
+  designations are applied to the published depth chain: the first, second, third or fourth
+  string at every tracked position, offence and defence. Three numbers are kept apart on
+  purpose — the string that projects to play, the next certain string if the doubtful players
+  sit, and the next man up if the projected starter cannot go.</p>
+  <p class="note"> </p>
+</section>
+
+<section class="panel">
+  <div class="panel-head"><h2>By club</h2></div>
+  <p class="empty">No rows available yet.</p>
+  <p class="empty">depth_strings.json has not been generated in this build yet, so no rows are published. Nothing is filled in from another source.</p>
+</section>
+
+<section class="panel">
+  <div class="panel-head"><h2>By position</h2></div>
+  <p class="empty">No rows available yet.</p>
+</section>
+
+<section class="panel">
+  <h2>Limits, stated plainly</h2>
+  <ul class="tight"></ul>
+</section>
+
+</main>
+<footer>
+  <div>
+    <strong>NFL Decision Lab</strong>
+    <p>Research tool. Not betting advice. No official league odds exist; contact with real markets is required before any edge claim.</p>
+  </div>
+  <div class="foot-links">
+    <a href="../pages/evidence.html">Sources &amp; provenance</a>
+    <a href="../pages/review.html">Flagged for review</a>
+    <a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener">Repository</a>
+  </div>
+  <p class="credit">Data: nflverse (CC-BY-4.0), built from NFL GSIS and the official weekly injury report.
+  Club names and marks belong to the NFL and its clubs.</p>
+</footer>
+</body>
+</html>
