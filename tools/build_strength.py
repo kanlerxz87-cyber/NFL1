@@ -204,6 +204,7 @@ code{background:#eef1f5;padding:1px 5px;border-radius:4px;font-size:12.5px}
 def build() -> int:
     os.makedirs(os.path.join(OUT, "assets"), exist_ok=True)
     meta = L("meta.json")
+    verification = L("verification.json")
     state = L("current_state.json")
     val = L("validation.json")
     strat = L("strategies.json")
@@ -711,11 +712,19 @@ def build() -> int:
          f"<code>{meta['preregistration_sha256'][:24]}…</code> over {meta['rules_tested']} rules",
          "PASS", src("games")],
     ]
+    v_rows = [[f"{c['id']}", e(c["check"]), badge("PASS") if c["result"] == "PASS" else badge("PARTIAL") if c["result"] == "REVIEW" else badge("FAIL"),
+               e(c["detail"]), e(c["flag"] or "—"),
+               f'<a class="src" href="{e(c["source"])}" target="_blank" rel="noopener">source ↗</a>']
+              for c in verification["checks"]]
     body = f"""
 <section class="panel">
   <h2>Verification report</h2>
-  <p class="sub">Ten checks. A check is only PASS when it was re-run against the source in this session. Where a check
-  could not pass, the number seen on both sides is printed rather than hidden.</p>
+  <p class="sub">{len(verification["checks"])} checks, generated from data/strength/verification.json:
+  {verification["summary"]["pass"]} pass, {verification["summary"]["mismatch"]} mismatch, {verification["summary"]["review"]} need review.
+  A check is only PASS when it was re-run against the source in this session. Where a check could not pass, the value
+  seen on both sides is printed rather than hidden.</p>
+  {table(["ID", "Check", "Result", "Detail", "Flag", "Source"], v_rows)}
+  <h3>Supporting detail</h3>
   {table(["Check", "Unit", "Result", "State", "Source"], rows_v)}
 </section>
 <section class="panel">

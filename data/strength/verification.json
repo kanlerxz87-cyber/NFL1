@@ -1,0 +1,90 @@
+{
+ "generated_at": "2026-11-13T13:02:45+00:00",
+ "checks": [
+  {
+   "id": "V01",
+   "check": "Provenance sha256 vs committed games.csv",
+   "result": "MISMATCH",
+   "detail": "recorded 2,189,959 bytes / 5ae004ff6d26b08109cbd7424127b0eaa89f59a4bed445229e8683e98d22c8d0; committed 1,665,511 bytes / 6f0777c6870329ba74826c9af7371472816dfa85ecbd7d662446a483250ce050",
+   "flag": "F-SOS-DATA-01",
+   "source": "https://github.com/nflverse/nflverse-data/releases/download/schedules/games.csv"
+  },
+  {
+   "id": "V02",
+   "check": "Result sign convention (result == home - away)",
+   "result": "PASS",
+   "detail": "7,103 rows, 0 mismatches",
+   "flag": null,
+   "source": "https://github.com/nflverse/nflverse-data/releases/download/schedules/games.csv"
+  },
+  {
+   "id": "V03",
+   "check": "Official standings, every club x 7 fields",
+   "result": "MISMATCH",
+   "detail": "224 fields compared, 10 differences (NYG, WAS only)",
+   "flag": "F-SOS-STD-NYG, F-SOS-STD-WAS",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "id": "V04",
+   "check": "Official Week 10 fixture set",
+   "result": "PASS",
+   "detail": "14 vs 14 games; 0 missing, 0 extra",
+   "flag": "F-SOS-W10-01 (result status only)",
+   "source": "https://www.nfl.com/schedules/2026/reg10"
+  },
+  {
+   "id": "V05",
+   "check": "Official Week 10 byes",
+   "result": "PASS",
+   "detail": "CHI, DEN, PHI, TB match the committed byes file",
+   "flag": null,
+   "source": "https://www.nfl.com/schedules/2026/reg10"
+  },
+  {
+   "id": "V06",
+   "check": "Injury transcription cross-check",
+   "result": "REVIEW",
+   "detail": "6/9 rows match; 3 DET rows differ",
+   "flag": "F-SOS-INJ-01..03",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "V07",
+   "check": "Standings internal arithmetic",
+   "result": "PASS",
+   "detail": "sum(W)=sum(L)=136, ties=2, PF=PA=6291, NET=PF-PA and PCT=(W+T/2)/games for all 32 rows",
+   "flag": null,
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "id": "V08",
+   "check": "Spread sign convention regression test",
+   "result": "PASS",
+   "detail": "tests/test_strength.py covers home cover, home fail, underdog cover and push under the verified nflverse convention",
+   "flag": null,
+   "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules"
+  },
+  {
+   "id": "V09",
+   "check": "Rule pre-registration hash",
+   "result": "PASS",
+   "detail": "sha256 48d2086663cbe0fd3ab9df08a0e4a5dc... over 11 frozen rules and parameters",
+   "flag": null,
+   "source": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/analysis/strength.py"
+  },
+  {
+   "id": "V10",
+   "check": "Every table row carries an https source link",
+   "result": "PASS",
+   "detail": "tools/check_strength_site.py: 14 pages, every table row source-linked, 0 broken local links, 0 placeholder cells",
+   "flag": null,
+   "source": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/tools/check_strength_site.py"
+  }
+ ],
+ "summary": {
+  "pass": 7,
+  "mismatch": 2,
+  "review": 1
+ }
+}
