@@ -2798,3 +2798,41 @@ verified sound, with one unusual official row recorded for review) · F46 (overl
 generations — decision D07 / suggestion S17) · F47 (2nd-to-4th string coverage now exists, needs
 sign-off). None of them blocks anything; they are published rather than hidden.
 
+# Session `c927cd40-nfl1` — depth-string model, repo-wide audit, fresh official re-verification, final integration
+
+| Item | Value |
+|---|---|
+| This session ID | `c927cd40-nfl1` |
+| This session branch | `arena/c927cd40-nfl1` |
+| Base commit | `09c03f052aa3bebb62acc23cb17eefd65f0c512e` on `main` (byte-identical to `origin/main` at claim time) |
+| Role | Final integration session for the current repository state |
+| Board read before work | yes — full `COORDINATION.md` (1,785 lines) read before this claim |
+
+**Coordination facts at claim time (2026-11-13T12:37Z):** `git fetch --prune` shows
+`origin/main` = `09c03f0` and this branch 0/0 with it. Every remote session branch was last
+committed on 2026-11-12 or earlier, so **no other session is active** and no task on the board
+is `in progress` by another session. The only open pull requests are #43 and #37, both
+`COORDINATION.md`-only records from finished sessions; this session integrates them (V07).
+The environment pins this session to `arena/c927cd40-nfl1`, so the brief's
+`session-<id>/<task>` branch convention cannot be used — non-overlapping file scopes are used
+instead, as in every earlier session.
+
+## Task board (this session)
+
+| ID | Task | Status | Owner | File scope | Evidence / notes |
+|---|---|---|---|---|---|
+| V01 | Read the board, claim this scope, push the claim before any other edit | in progress | `c927cd40` | `COORDINATION.md` | this section |
+| V02 | Fresh, independent official-source re-verification (nfl.com injury report, Week 10 schedule and byes, league/division standings) against the committed data layers, item by item, with a source link for every checked value | in progress | `c927cd40` | `docs/review/session-c927cd40.md` | new pass dated 2026-11-13; prior sessions verified on 2026-11-12 |
+| V03 | Repo-wide link + source-link audit across **all** published site generations (root, `pages/`, `docs/`, `dashboard/`, `lab/`, `research/`, `referee/`, `verified-lab/`) | in progress | `c927cd40` | `tools/check_all_sites.py` | new read-only checker; today only `index.html` + `pages/` are covered by the CI gates |
+| V04 | **Depth-string (2nd / 3rd / 4th string) deficiency model for both units**, joined to the official game designations, published as a table with a source link on every row | in progress | `c927cd40` | `pipeline/build_all.py`, `pipeline/gen_site.py`, `data/model/depth_strings.json`, `pages/depth-strings.html` | today `data/model/availability.json` publishes `depth_rank` = 1 only and always names the #2 player as the replacement, so "who is the 3rd/4rd string and is the 2nd string also hurt" is not answerable from the site |
+| V05 | Re-run every gate, regenerate every site generation, confirm zero broken links and zero source-less table rows | unclaimed | `c927cd40` | — | |
+| V06 | PR → merge → confirm the GitHub Pages deploy → record the result here | unclaimed | `c927cd40` | `COORDINATION.md` | |
+| V07 | Integrate the two open coordination-only PRs (#43, #37) without discarding either record | unclaimed | `c927cd40` | `COORDINATION.md` | both branches are additions at the end of the board |
+
+**Not touched by this session (other sessions' outputs, kept intact):** `analysis/`,
+`data/verified/`, `data/model/{ratings,lines,strategies,props,correlations,verification}.json`
+(except the additive `depth_strings.json`), `referee/`, `verified-lab/`, `dashboard/`,
+`docs/`, `research/`, `s9cb/`, `src/`, `scripts/verified/`, and the other sessions'
+`data/session-*` directories.
+
+_This claim is committed and pushed before any other file is touched, per the brief._
