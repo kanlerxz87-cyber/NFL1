@@ -222,6 +222,27 @@ QUESTIONS = [
         "blocks": "Any claim that the site is internally consistent across generations.",
         "status": "Open - blocked on reviewer decision",
     },
+
+    {
+        "id": "Q22",
+        "question": "May a committed official snapshot lag the live league page, and who re-scrapes it when it does?",
+        "why": "On 2026-11-13 the committed standings still described the league before the Week 10 Thursday game: 30 of 32 rows matched nfl.com, and the Giants and Commanders did not. A dated evidence record that is quietly edited stops being evidence.",
+        "have": "Flag F41 names both rows, gives the official and committed values, and links the official page. The daily collect workflow re-scrapes on its own schedule.",
+        "missing": "A stated policy: either a snapshot is immutable and labelled with the instant it was taken, or it is refreshed on a fixed cadence and the refresh is checked.",
+        "discovery": "Decide the policy, then make check_committed_site.py or an equivalent call the site stale when a snapshot is older than the agreed cadence.",
+        "blocks": "Any claim that the published standings are current.",
+        "status": "Open - decision required",
+    },
+    {
+        "id": "Q23",
+        "question": "Are club-published depth charts an acceptable official source, given that the league publishes none?",
+        "why": "The brief asks for 2nd-, 3rd- and 4th-string tracking. nfl.com publishes no depth chart at all: https://www.nfl.com/teams/kansas-city-chiefs/depth-chart returns HTTP 404, re-checked on 2026-11-13. The only place the ladder exists is the clubs' own sites, several of which label their chart unofficial and one of which (Houston) publishes none.",
+        "have": "31 of 32 club charts, 933 position slots, ranks 1 to 6, each with the club URL it came from. One line was spot-checked row for row against the live page and matched exactly. 16 malformed cells are published verbatim and flagged rather than guessed at.",
+        "missing": "A reviewer ruling on whether a club publication counts as official for this purpose, and what to do about the club that publishes no chart.",
+        "discovery": "Read flags F42, F43 and F44, then decide whether the Depth & Deficiency page is authoritative or advisory.",
+        "blocks": "Whether any 2nd- to 4th-string claim can be made without a caveat.",
+        "status": "Open - decision required",
+    },
 ]
 
 # ---------------------------------------------------------------- suggestions
@@ -452,6 +473,33 @@ SUGGESTIONS = [
         "recommend": "Adopt before the next Sunday slate.",
         "status": "Proposed - queued (audit)",
     },
+
+    {
+        "id": "S16",
+        "title": "Publish the full depth ladder, not just the starter and his nominal backup",
+        "problem": "The availability model only ever emitted depth rank 1 and its rank 2 replacement, so a club whose starter and backup were both out looked no worse than a club missing one player. That is exactly the deficiency the brief asks the system to detect.",
+        "change": "Join the official injury report to the whole club ladder (ranks 1 to 6 as published) and compute the projected starter as the lowest-ranked listed player who is not Out or Doubtful. Report offence and defence separately, and publish chart defects rather than repairing them.",
+        "impact": "High - it is the only part of the build that answers the 2nd/3rd/4th-string requirement directly.",
+        "effort": "Done (pipeline/build_depth_ladder.py, pages/depth.html)",
+        "risk": "Low - club charts are weekly snapshots and the page says so in three places.",
+        "depends": "Official club depth charts and the official injury report, both committed",
+        "evidence": "933 slots across 31 of 32 clubs; 4 lines started by a backup; 110 with an at-risk starter; 1 chart gap. Sources on the page.",
+        "recommend": "Adopted this session; a reviewer should rule on whether club charts count as official (Q23).",
+        "status": "Implemented - needs sign-off",
+    },
+    {
+        "id": "S17",
+        "title": "Collapse the seven site generations into one authoritative dashboard",
+        "problem": "Seven independently built site generations now publish overlapping findings in the same repository. They disagree in places, they duplicate the same tables with different numbers, and a reader cannot tell which one to trust.",
+        "change": "Pick one generation as authoritative, move the rest under an archive directory linked from the All Sections page, and delete nothing until the choice is recorded.",
+        "impact": "High - it is the single biggest source of confusion on the live site.",
+        "effort": "Medium - a reviewer decision plus one integration pass",
+        "risk": "Medium - earlier sessions' work must be archived, not destroyed",
+        "depends": "A reviewer decision (question Q21, decision D07)",
+        "evidence": "Flag F46; the All Sections page lists all seven.",
+        "recommend": "Decide before adding any further pages.",
+        "status": "Proposed - decision required",
+    },
 ]
 
 # ---------------------------------------------------------------- decision records
@@ -509,6 +557,16 @@ DECISIONS = [
         "criteria": "The live HTML build stamp must match the data generated_at; no extra CI loop.",
         "blocks": "Whether the dashboard shows current numbers at all.",
         "status": "Implemented",
+    },
+
+    {
+        "id": "D07",
+        "decision": "Which site generation becomes the single authoritative dashboard?",
+        "options": ["Root dashboard (pipeline/gen_site.py) plus pages/", "research/ (largest sample, observed prices)", "docs/ register", "Keep all seven and label each"],
+        "recommend": "Root dashboard: it is the only generation rebuilt by the daily data workflow, so it is the only one that cannot silently go stale.",
+        "criteria": "Rebuilt by CI on every data refresh; every row source-linked; covers every requirement in the brief.",
+        "blocks": "Whether a reader can trust any number without checking which generation produced it.",
+        "status": "Open - decision required",
     },
 ]
 

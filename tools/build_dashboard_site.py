@@ -1,19 +1,20 @@
 #!/usr/bin/env python3
 """Build the clean dashboard under dashboard/ from committed, verified data.
 
-Rules enforced in code (checked independently by tools/verify_dashboard_site.py):
+NOTE (integration session 65df4799-nfl1): this file was originally named
+``tools/build_dashboard.py`` (session 6a232e79-nfl1). The name was taken over by the
+web/ decision-dashboard builder from session 6e8ca348-nfl1, which its workflow and
+gates pin by filename. Both tools are kept; this one now runs as
+``python3 tools/build_dashboard_site.py``. Nothing else was changed.
+
+Rules enforced in code (checked independently by tools/verify_dashboard.py):
   * A value is printed only when it is verified against an official source or re-derived
     from committed files this session. Everything else is a blank cell with a flag ID.
   * Every table row carries at least one source link. Official links point to nfl.com or
     a club page. Repository links are labelled 'internal' and are flagged as not official.
   * No value is inferred. Club codes are mapped only where nfl.com itself uses a different code.
 
-Run:  python3 tools/build_dashboard_site.py   (then python3 tools/verify_dashboard_site.py)
-
-RENAMED during the d23c65ad integration merge (2026-11-13): this script kept building
-dashboard/ while session 6e8ca348's tools/build_decision_room companion, which has live
-workflow callers, keeps the tools/build_dashboard.py name and builds web/. Nothing was
-deleted; the names no longer collide.
+Run:  python3 tools/build_dashboard.py   (then python3 tools/verify_dashboard.py)
 """
 import html
 import json
@@ -673,7 +674,7 @@ def page_repo(d):
         ("referee/", "Independent verification site (earlier session)", "referee/tools/build_site.py", "Overlaps root (RV-21)", "referee"),
         ("verified-lab/", "Verification subsystem and sub-site (earlier session)", "not located by grep", "Generator unknown", "verified-lab"),
         ("site/", "Templates and assets for the tools/build.py generation", "tools/build.py", "Overlaps root (RV-21)", "site"),
-        ("dashboard/", "This clean dashboard (session 6a232e79)", "tools/build_dashboard_site.py", "New, self-contained", "dashboard"),
+        ("dashboard/", "This clean dashboard (session 6a232e79)", "tools/build_dashboard.py", "New, self-contained", "dashboard"),
         ("data/", "Committed data: model outputs, verified transcriptions, questions, flags", "pipeline/ and tools/", "Mixed sources (RV-21)", "data"),
         ("data/model/", "Pipeline outputs (lines, strategies, availability, injuries)", "pipeline/build_all.py", "Errors log stale (RV-18)", "data/model"),
         ("pipeline/", "Collector, scraper, model builder", "-", "Scrape matches the live nfl.com page on 16 of 16 re-checked rows; the 279-row snapshot is stale (RV-02, withdrawn as a scrape error)", "pipeline"),

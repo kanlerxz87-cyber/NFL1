@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Correlations · NFL Decision Lab</title>
+<meta name="description" content="Evidence-first NFL decision support: own lines, validation gates, injury and depth analysis.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="brand" href="../index.html"><span class="mark">NFL</span><span class="brand-text">Decision Lab</span></a>
+  <nav>
+    <a href="../index.html">Overview</a>
+    <a href="../pages/executive.html">Executive Summary</a>
+    <a href="../web/dashboard.html">Decision Dashboard</a>
+    <a href="../pages/lines.html">My Lines</a>
+    <a href="../pages/correlations.html">Correlations</a>
+    <a href="../pages/strategies.html">Strategy Lab</a>
+    <a href="../pages/luck.html">Skill vs Luck</a>
+    <a href="../pages/parlays.html">Parlays &amp; Combos</a>
+    <a href="../pages/props.html">Player Props</a>
+    <a href="../pages/injuries.html">Injuries</a>
+    <a href="../pages/depth.html">Depth &amp; Deficiency</a>
+    <a href="../pages/questions.html">Questions</a>
+    <a href="../pages/suggestions.html">Suggestions</a>
+    <a href="../pages/evidence.html">Evidence</a>
+    <a href="../pages/review.html">Flagged for Review</a>
+    <a href="../pages/sections.html">All Sections</a>
+    <a href="../room/index.html">Decision Room</a>
+    <a href="../strength/index.html">SOS Study</a>
+    <a href="../pages/executive-summary.html">Executive Summary (companion)</a>
+    <a href="../pages/teams.html">Teams</a>
+    <a href="../pages/standings.html">Standings</a>
+    <a href="../pages/availability.html">Availability</a>
+    <a href="../pages/data.html">Verified Data</a>
+    <a href="../pages/analysis.html">Validation &amp; Correlation</a>
+    <a href="../pages/decisions.html">Decision Register</a>
+    <a href="../pages/verified.html">Verified Artifacts</a>
+    <a href="../pages/models.html">Models</a>
+    <a href="../pages/flagged.html">Flagged (companion)</a>
+  </nav>
+</header>
+<div class="shell">
+<aside class="sidebar" aria-label="Categories"><div class="navgroup"><span>Overview</span><a href="../index.html">Overview</a><a href="../pages/executive.html">Executive Summary</a><a href="../pages/sections.html">All Sections</a></div><div class="navgroup"><span>Lines & model</span><a href="../pages/lines.html">My Lines</a><a href="../pages/correlations.html">Correlations</a></div><div class="navgroup"><span>Competition</span><a href="../pages/strategies.html">Strategy Lab</a><a href="../pages/luck.html">Skill vs Luck</a><a href="../pages/parlays.html">Parlays &amp; Combos</a><a href="../pages/props.html">Player Props</a></div><div class="navgroup"><span>Availability</span><a href="../pages/injuries.html">Injuries</a><a href="../pages/depth.html">Depth &amp; Deficiency</a></div><div class="navgroup"><span>Decisions</span><a href="../pages/questions.html">Questions</a><a href="../pages/suggestions.html">Suggestions</a></div><div class="navgroup"><span>Evidence</span><a href="../pages/evidence.html">Evidence</a><a href="../pages/review.html">Flagged for Review</a></div><div class="navgroup"><span>Companion pages</span><a href="../room/index.html">Decision Room</a><a href="../strength/index.html">SOS Study</a><a href="../pages/teams.html">Teams</a><a href="../pages/standings.html">Standings</a><a href="../pages/availability.html">Availability</a><a href="../pages/data.html">Verified data</a><a href="../pages/analysis.html">Validation &amp; correlation</a><a href="../pages/decisions.html">Decision register</a><a href="../pages/verified.html">Verified artifacts</a><a href="../pages/models.html">Models</a><a href="../pages/executive-summary.html">Executive summary (companion)</a><a href="../pages/flagged.html">Flagged (companion)</a></div></aside>
+<main id="main">
+  <section class="page-head">
+    <p class="eyebrow">Evidence-first dashboard</p>
+    <h1>Correlations</h1>
+    <p class="standfirst">Measured relationships, with confidence intervals, on a 7,000-game sample.</p>
+    <p class="timestamp">Data built 2026-11-13T13:40:47+00:00 · every value links to its source</p>
+  </section>
+  
+<p class="note">These figures come from a committed research extract built
+  2026-11-13T12:58:21+00:00. The daily refresh does not rebuild that extract, so this
+  page states its own extract time rather than inheriting the site stamp.</p>
+
+<section class="panel">
+  <div class="panel-head"><h2>Game-level correlations, measured</h2>
+    <a href="strategies.html">What the gates do with them &rarr;</a></div>
+  <div class="table-wrap"><table class=""><thead><tr><th>ID</th><th>Relationship</th><th>n</th><th>Pearson r</th><th>95% CI</th><th>p</th><th>Strength</th><th>Why it matters</th><th>Source</th></tr></thead><tbody><tr><td><strong>C1</strong></td><td>Closing spread vs the actual home margin</td><td>6976</td><td>0.4312</td><td>[+0.4119, +0.4502]</td><td>0.0000</td><td><span class="badge pass">material</span></td><td>How much of the result the market line already explains. This is the bar any own line has to beat.</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">nfl.com</a></td></tr><tr><td><strong>C2</strong></td><td>Own model line vs the actual home margin</td><td>6976</td><td>0.3451</td><td>[+0.3243, +0.3656]</td><td>0.0000</td><td><span class="badge pass">material</span></td><td>The same measure for our own line.</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">nfl.com</a></td></tr><tr><td><strong>C3</strong></td><td>Own line minus market line vs result minus market line</td><td>6976</td><td>0.0190</td><td>[-0.0045, +0.0424]</td><td>0.1129</td><td><span class="badge neutral">weak</span></td><td>The edge test: if the model&#x27;s disagreement with the market is informative this is positive. If it is zero the model adds nothing beyond the closing line.</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">nfl.com</a></td></tr><tr><td><strong>C4</strong></td><td>Point margin vs total points, same game</td><td>6976</td><td>0.0170</td><td>[-0.0065, +0.0405]</td><td>0.1553</td><td><span class="badge neutral">weak</span></td><td>Whether blowouts travel with high scoring.</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">nfl.com</a></td></tr><tr><td><strong>C5</strong></td><td>Absolute point margin vs total points, same game</td><td>6976</td><td>0.0748</td><td>[+0.0514, +0.0981]</td><td>0.0000</td><td><span class="badge neutral">weak</span></td><td>The parlay question: close games and low totals tend to arrive together.</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">nfl.com</a></td></tr><tr><td><strong>C6</strong></td><td>Closing total vs the actual total points</td><td>6976</td><td>0.3176</td><td>[+0.2963, +0.3385]</td><td>0.0000</td><td><span class="badge pass">material</span></td><td>How much of the realised total the market total explains.</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">nfl.com</a></td></tr><tr><td><strong>C7</strong></td><td>Rest-days advantage (home minus away) vs the home margin</td><td>6976</td><td>0.0329</td><td>[+0.0094, +0.0563]</td><td>0.0060</td><td><span class="badge neutral">weak</span></td><td>Whether the rest edge is already in the price.</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">nfl.com</a></td></tr><tr><td><strong>C8</strong></td><td>Temperature vs total points</td><td>4931</td><td>0.0092</td><td>[-0.0187, +0.0371]</td><td>0.5167</td><td><span class="badge neutral">weak</span></td><td>Weather effect on scoring; only games with a recorded temperature are used.</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">nfl.com</a></td></tr><tr><td><strong>C9</strong></td><td>Wind speed vs total points</td><td>4931</td><td>-0.0923</td><td>[-0.1199, -0.0645]</td><td>0.0000</td><td><span class="badge neutral">weak</span></td><td>Wind effect on scoring; only games with a recorded wind reading are used.</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">nfl.com</a></td></tr><tr><td><strong>C10</strong></td><td>Home team covers vs the game goes over, same game</td><td>6976</td><td>0.0090</td><td>[-0.0144, +0.0325]</td><td>0.4505</td><td><span class="badge neutral">weak</span></td><td>The favourite covering and the over landing together. A non-zero phi is why the product of two leg prices is the wrong price for a same-game parlay.</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">nfl.com</a></td></tr><tr><td><strong>C11</strong></td><td>A team&#x27;s points scored in week t vs its points in week t+1</td><td>13315</td><td>0.1413</td><td>[+0.1246, +0.1579]</td><td>0.0000</td><td><span class="badge pass">material</span></td><td>If this were strongly positive, form would be real and worth betting on. A value near zero is why &#x27;hot team&#x27; systems do not survive.</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">nfl.com</a></td></tr></tbody></table></div><p class="note">Pearson r with a Fisher-z 95% confidence interval and a two-sided t test. A relationship is only published when at least 25 paired observations exist; otherwise it is reported as blank.</p>
+</section>
+
+<section class="grid-2">
+  <div class="panel">
+    <div class="panel-head"><h2>The three that decide everything</h2></div>
+    <ul class="bullets">
+      <li><strong>C1 = 0.4312.</strong> The closing spread already explains the result this well.
+        That is the bar any own line has to beat, and it is why an unvalidated model line is not a signal.</li>
+      <li><strong>C3 = 0.0190 (p = 0.113).</strong> Our disagreement with the closing line is not
+        significantly correlated with the part of the result the market got wrong. This is the single
+        most important number on the site: it is the reason no strategy is promoted.</li>
+      <li><strong>C9 = -0.0923.</strong> Wind is the only environmental variable that moves the total
+        at all, and it moves it down. Temperature does not (C8 = 0.0092, p = 0.517).</li>
+    </ul>
+  </div>
+  <div class="panel">
+    <div class="panel-head"><h2>Sample</h2></div>
+    <ul class="bullets">
+      <li>7104 games, seasons
+        1999 to
+        2026.</li>
+      <li>6976 carry both a closing spread and a
+        closing total, so every figure above uses paired observations only.</li>
+      <li>Relationships with fewer than 25 paired observations are published as
+        <span class="missing">blank</span>, never as a number.</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+</div>
+<footer>
+  <div>
+    <strong>NFL Decision Lab</strong>
+    <p>Research tool. Not betting advice. No official league odds exist; contact with real markets is required before any edge claim.</p>
+  </div>
+  <div class="foot-links">
+    <a href="../pages/evidence.html">Sources &amp; provenance</a>
+    <a href="../pages/review.html">Flagged for review</a>
+    <a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener">Repository</a>
+  </div>
+  <p class="credit">Data: nflverse (CC-BY-4.0), built from NFL GSIS and the official weekly injury report.
+  Club names and marks belong to the NFL and its clubs.</p>
+</footer>
+</body>
+</html>

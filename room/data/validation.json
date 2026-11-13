@@ -1,0 +1,77 @@
+{
+ "meta": {
+  "built_utc": "2026-11-13T12:45Z",
+  "count": 8,
+  "legend": {
+   "met": "implemented and holding today",
+   "partial": "implemented; holds for some rules only",
+   "failed": "implemented; no rule clears it"
+  }
+ },
+ "validation": [
+  {
+   "id": "G1",
+   "gate": "Walk-forward / pre-game only",
+   "how": "Every model input comes from a fit that used only earlier games; ratings for week W use weeks < W plus the prior season at 40% weight.",
+   "status": "met",
+   "note": "Implemented in pipeline/build_all.py; the backtest has no look-ahead.",
+   "source": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pipeline/build_all.py"
+  },
+  {
+   "id": "G2",
+   "gate": "Observed price on every scored bet",
+   "how": "A bet is scored only when the source carries a price for that side; no -110 is assumed.",
+   "status": "met",
+   "note": "2,477 games in 2006-2026 carry no spread price and are excluded, not filled.",
+   "source": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/s9cb/analysis/strategies.py"
+  },
+  {
+   "id": "G3",
+   "gate": "At least 200 scored bets",
+   "how": "Below 200, a run of luck is indistinguishable from skill at plausible effect sizes.",
+   "status": "met",
+   "note": "Smallest rule on the priced board has 273 bets.",
+   "source": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
+  },
+  {
+   "id": "G4",
+   "gate": "Hit rate beats the break-even implied by the actual prices",
+   "how": "Break-even is the mean implied probability of the prices actually taken, not 0.5.",
+   "status": "partial",
+   "note": "True for S07 and the model-total rules; false for the rest.",
+   "source": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
+  },
+  {
+   "id": "G5",
+   "gate": "Survives multiple testing",
+   "how": "Benjamini-Hochberg across all 12 tested rules at q<0.05.",
+   "status": "failed",
+   "note": "Best raw p is 0.198 (S07); the only p below 0.05 (S09, 0.015) is negative.",
+   "source": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
+  },
+  {
+   "id": "G6",
+   "gate": "Positive in an untouched holdout",
+   "how": "2024+2025 were never used to set thresholds.",
+   "status": "partial",
+   "note": "Only S07 is positive in the holdout (+26.3% on 44 bets); every model rule is negative.",
+   "source": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
+  },
+  {
+   "id": "G7",
+   "gate": "Positive in 60%+ of seasons",
+   "how": "A per-season ROI table is published for every rule.",
+   "status": "failed",
+   "note": "S07 is positive in roughly half its seasons; no rule clears the stability bar.",
+   "source": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
+  },
+  {
+   "id": "G8",
+   "gate": "Bootstrap interval on ROI excludes zero",
+   "how": "10,000 resamples of the actual bet log.",
+   "status": "failed",
+   "note": "The interval includes zero for every rule after correction.",
+   "source": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/s9cb/analysis/common.py"
+  }
+ ]
+}

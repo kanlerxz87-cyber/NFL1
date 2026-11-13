@@ -50,15 +50,19 @@
 <a href="pages/analysis.html">Validation &amp; correlation</a>
 <a href="pages/audit.html">Audit</a>
 <a href="pages/availability.html">Availability</a>
+<a href="pages/correlations.html">Correlations</a>
 <a href="pages/data.html">Verified data</a>
 <a href="pages/decisions.html">Decision register</a>
+<a href="pages/depth.html">Depth</a>
 <a href="pages/evidence.html">Evidence</a>
 <a href="pages/executive-summary.html">Executive summary</a>
 <a href="pages/executive.html">Executive</a>
 <a href="pages/flagged.html">Flagged</a>
 <a href="pages/injuries.html">Injuries</a>
 <a href="pages/lines.html">Own lines</a>
+<a href="pages/luck.html">Luck</a>
 <a href="pages/models.html">Strategy lab</a>
+<a href="pages/parlays.html">Parlays</a>
 <a href="pages/props.html">Props</a>
 <a href="pages/questions.html">Questions</a>
 <a href="pages/review.html">Review</a>
@@ -79,7 +83,7 @@
   <div class="main">
     <div class="topbar">
       <div class="crumb">NFL1 / <b>Suggestions &amp; Paths</b></div>
-      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">44 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">52 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
     </div>
     <main class="content" id="main">
       <div class="kicker">Governance</div>
@@ -126,8 +130,8 @@
 </tbody></table></div>
 <h2 id="suggestions">Improvement suggestions</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-suggestions" aria-label="Filter tbl-suggestions" placeholder="Filter rows…">
-<span class="count" data-count-for="tbl-suggestions">27 rows shown</span></div>
-<div class="tablewrap"><table class="data-table" id="tbl-suggestions"><caption>27 suggestions to improve decision making on this site. Effort is blank and flagged; every row links to an official source.</caption>
+<span class="count" data-count-for="tbl-suggestions">32 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-suggestions"><caption>32 suggestions to improve decision making on this site. Effort is blank and flagged; every row links to an official source.</caption>
 <thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Area</th><th scope="col" class="sortable">Suggestion</th><th scope="col" class="sortable">How it improves decision making</th><th scope="col" class="sortable">Effort / risk estimate</th><th scope="col" class="sortable">Suggested disposition</th><th scope="col" class="sortable">Official evidence</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
 <tr id="S01" data-verified="true">
 <td><code>S01</code></td>
@@ -399,6 +403,56 @@
 <td class="wide">referee/tools/check_site.py and the replication harness independently reproduced -0.1048 where the repo published -0.1297</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
+<tr id="S26" data-verified="true">
+<td><code>S26</code></td>
+<td>Build &amp; integration</td>
+<td class="wide">Publish one canonical build order and run it identically in CI and locally</td>
+<td class="wide">The merged tree is only reproducible when generators run data-first (evidence -&gt; verify_official -&gt; decision_room -&gt; dashboard -&gt; gen_site -&gt; verified pages -&gt; build.py). CI and local runs currently differ in order, which is how stale numbers appeared on live pages before.</td>
+<td data-value="1" class="num">small</td>
+<td><span class="badge neutral">Review before implementing</span></td>
+<td class="wide">docs/audit-65df4799.md §5-6; tools/check_reproducible.py passes only under this order</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S27" data-verified="true">
+<td><code>S27</code></td>
+<td>Injuries &amp; depth</td>
+<td class="wide">Re-transcribe club depth charts weekly with per-row as-of dates and a diff gate</td>
+<td class="wide">KC WR2/KR/PR rows disagree with the club&#x27;s own chart (flag LR-02); 2nd/3rd-string replacement reads are wrong until charts are refreshed. A weekly diff against club pages would catch this automatically.</td>
+<td data-value="1" class="num">medium</td>
+<td><span class="badge neutral">Review before implementing</span></td>
+<td class="wide">docs/audit-65df4799.md §4; https://www.chiefs.com/team/depth-chart fetched 2026-11-13</td>
+<td><span class="src"><a href="https://www.chiefs.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Kansas City Chiefs (chiefs.com) — Official club depth chart">S14 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S28" data-verified="true">
+<td><code>S28</code></td>
+<td>Injuries &amp; depth</td>
+<td class="wide">Add a news-to-status layer: link official news as evidence and flag divergences from the game-status column</td>
+<td class="wide">Darnold is ruled out by official news while the official report row shows practice-only (flag LR-05). Without this layer, availability and next-man-up signals under-state absences in exactly the window decisions are made.</td>
+<td data-value="1" class="num">medium</td>
+<td><span class="badge neutral">Review before implementing</span></td>
+<td class="wide">docs/audit-65df4799.md §3; R-6a232e79-07</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S29" data-verified="true">
+<td><code>S29</code></td>
+<td>Decision quality</td>
+<td class="wide">Show data-freshness stamps on every table that can go stale mid-week (standings, injuries) and state the snapshot cut-off</td>
+<td class="wide">The NYG/WAS rows looked like errors until the retrieval stamps were read (flag LR-01). A visible &#x27;as of &lt;retrieval&gt;&#x27; stamp on each table prevents snapshot age being mistaken for bad data and tells a reviewer exactly when to re-verify.</td>
+<td data-value="1" class="num">small</td>
+<td><span class="badge neutral">Review before implementing</span></td>
+<td class="wide">docs/audit-65df4799.md §1</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S30" data-verified="true">
+<td><code>S30</code></td>
+<td>Verification &amp; data feeds</td>
+<td class="wide">Cross-check every feed-provided kickoff time against the official schedule before publication</td>
+<td class="wide">LR-07 showed the upstream schedules feed can carry wrong kickoff times while citing the official schedule as source (JAX @ NYG and PIT @ PHI were swapped on 2026-11-13). A kickoff printed on a betting-decision page must come from the official page, so each model refresh should compare every fixture&#x27;s date and kickoff against the current official capture and block on mismatch.</td>
+<td data-value="1" class="num">small</td>
+<td><span class="badge neutral">Review before implementing</span></td>
+<td class="wide">data/flags.json LR-07; tools/verify_official.py check B3; https://www.nfl.com/schedules/2026/by-week/week-11</td>
+<td><span class="src"><a href="https://www.nfl.com/schedules" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official schedule">S06 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
 </tbody></table></div>
 <h2 id="matrix">Decision matrix</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-matrix" aria-label="Filter tbl-matrix" placeholder="Filter rows…">
@@ -449,7 +503,7 @@
 <section class="panel"><h2>Review workflow</h2>
 <ol class="tight">
 <li>Read the <a href="questions.html">decision questions</a> and the <a href="flagged.html">flagged items</a>.</li>
-<li>Compare the 27 suggestions and the three paths above.</li>
+<li>Compare the 32 suggestions and the three paths above.</li>
 <li>Select a path in the Review &amp; Choose a Path box; file the prefilled issue to make the decision durable.</li>
 <li>Close the blocking questions, then — and only then — authorise implementation of individual suggestions.</li>
 </ol>

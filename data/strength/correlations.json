@@ -1,0 +1,116 @@
+{
+ "method": "Pearson r, Fisher-z 95% CI, n reported. Values publish only when n >= 4 and both series vary.",
+ "register": [
+  {
+   "id": "C-SOS-01",
+   "relationship": "Own rating difference vs closing spread",
+   "value": {
+    "n": 7104,
+    "r": 0.4657,
+    "ci95": [
+     0.4473,
+     0.4837
+    ],
+    "p_value": 0.0,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   },
+   "reading": "published"
+  },
+  {
+   "id": "C-SOS-02",
+   "relationship": "Own rating difference vs actual margin",
+   "value": {
+    "n": 7104,
+    "r": 0.2263,
+    "ci95": [
+     0.2041,
+     0.2483
+    ],
+    "p_value": 0.0,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   },
+   "reading": "published"
+  },
+  {
+   "id": "C-SOS-03",
+   "relationship": "Own total vs closing total",
+   "value": {
+    "n": 7104,
+    "r": 0.5303,
+    "ci95": [
+     0.5134,
+     0.5468
+    ],
+    "p_value": 0.0,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   },
+   "reading": "published"
+  },
+  {
+   "id": "C-SOS-04",
+   "relationship": "Own total vs actual total",
+   "value": {
+    "n": 7104,
+    "r": 0.1696,
+    "ci95": [
+     0.1469,
+     0.1921
+    ],
+    "p_value": 0.0,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   },
+   "reading": "published"
+  },
+  {
+   "id": "C-SOS-05",
+   "relationship": "Home rest days vs margin",
+   "value": {
+    "n": 7104,
+    "r": 0.0183,
+    "ci95": [
+     -0.0049,
+     0.0416
+    ],
+    "p_value": 0.122636,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   },
+   "reading": "published"
+  },
+  {
+   "id": "C-SOS-06",
+   "relationship": "Rest differential vs margin",
+   "value": {
+    "n": 7104,
+    "r": 0.0346,
+    "ci95": [
+     0.0114,
+     0.0578
+    ],
+    "p_value": 0.003494,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   },
+   "reading": "published"
+  },
+  {
+   "id": "C-SOS-07",
+   "relationship": "This is deliberately blank: a pre-game rating difference cannot be correlated with an ATS result, because the rating difference is what the own line is made of -- the two series are the same number and the correlation would be a tautology",
+   "value": null,
+   "reading": "blank: fewer than 4 paired observations or no variance"
+  },
+  {
+   "id": "C-SOS-08",
+   "relationship": "Sum of own predicted points vs actual total",
+   "value": {
+    "n": 7104,
+    "r": 0.1696,
+    "ci95": [
+     0.1469,
+     0.1921
+    ],
+    "p_value": 0.0,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   },
+   "reading": "published"
+  }
+ ]
+}

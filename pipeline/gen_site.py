@@ -10,7 +10,6 @@ from __future__ import annotations
 import html
 import json
 import os
-import re
 from datetime import datetime, timezone
 
 from content import DECISIONS, METHOD_NOTES, QUESTIONS, REVIEW_PROCESS, SUGGESTIONS
@@ -18,22 +17,77 @@ from content import DECISIONS, METHOD_NOTES, QUESTIONS, REVIEW_PROCESS, SUGGESTI
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 DATA = os.path.join(ROOT, "data", "model")
 
+# Flat navigation, ordered by category. Kept byte-identical to the canonical list in
+# scripts/verified/normalize_nav.py so that running one after the other is a no-op
+# (both generators touch index.html and pages/*.html).
 NAV = [
     ("index.html", "Overview"),
-    ("pages/sections.html", "All Sections"),
+    ("pages/executive.html", "Executive Summary"),
     ("web/dashboard.html", "Decision Dashboard"),
     ("pages/lines.html", "My Lines"),
+    ("pages/correlations.html", "Correlations"),
     ("pages/strategies.html", "Strategy Lab"),
-    ("pages/injuries.html", "Injuries & Depth"),
-    ("pages/props.html", "Props"),
-    ("pages/audit.html", "Official Audit"),
+    ("pages/luck.html", "Skill vs Luck"),
+    ("pages/parlays.html", "Parlays & Combos"),
+    ("pages/props.html", "Player Props"),
+    ("pages/injuries.html", "Injuries"),
+    ("pages/depth.html", "Depth & Deficiency"),
     ("pages/questions.html", "Questions"),
     ("pages/suggestions.html", "Suggestions"),
-    ("pages/decisions.html", "Decision Register"),
-    ("pages/analysis.html", "Validation & Correlation"),
     ("pages/evidence.html", "Evidence"),
     ("pages/review.html", "Flagged for Review"),
-    ("pages/executive.html", "Executive Summary"),
+    ("pages/sections.html", "All Sections"),
+    # Session ca779bcc-nfl1: the strength-of-schedule study is its own sub-site under
+    # strength/; the entry keeps it reachable from the root dashboard.
+    ("room/index.html", "Decision Room"),
+    ("strength/index.html", "SOS Study"),
+    # pages produced by the other generators in this repository, kept in the shared
+    # navigation so no session's page can become unreachable
+    ("pages/executive-summary.html", "Executive Summary (companion)"),
+    ("pages/teams.html", "Teams"),
+    ("pages/standings.html", "Standings"),
+    ("pages/availability.html", "Availability"),
+    ("pages/data.html", "Verified Data"),
+    ("pages/analysis.html", "Validation & Correlation"),
+    ("pages/decisions.html", "Decision Register"),
+    ("pages/verified.html", "Verified Artifacts"),
+    ("pages/models.html", "Models"),
+    ("pages/flagged.html", "Flagged (companion)"),
+]
+
+# Sidebar: the same pages grouped by category, rendered on every page so the site reads
+# as a dashboard rather than a list of links.
+SIDEBAR = [
+    ("Overview", [("index.html", "Overview"),
+                  ("pages/executive.html", "Executive Summary"),
+                  ("pages/sections.html", "All Sections")]),
+    ("Lines & model", [("pages/lines.html", "My Lines"),
+                           ("pages/correlations.html", "Correlations")]),
+    ("Competition", [("pages/strategies.html", "Strategy Lab"),
+                     ("pages/luck.html", "Skill vs Luck"),
+                     ("pages/parlays.html", "Parlays & Combos"),
+                     ("pages/props.html", "Player Props")]),
+    ("Availability", [("pages/injuries.html", "Injuries"),
+                      ("pages/depth.html", "Depth & Deficiency")]),
+    ("Decisions", [("pages/questions.html", "Questions"),
+                   ("pages/suggestions.html", "Suggestions")]),
+    ("Evidence", [("pages/evidence.html", "Evidence"),
+                  ("pages/review.html", "Flagged for Review")]),
+    # Pages produced by the other generators in this repository. They are kept one click
+    # away rather than in the header so the header stays readable; every one of them is
+    # also listed on the All Sections page.
+    ("Companion pages", [("room/index.html", "Decision Room"),
+                         ("strength/index.html", "SOS Study"),
+                         ("pages/teams.html", "Teams"),
+                         ("pages/standings.html", "Standings"),
+                         ("pages/availability.html", "Availability"),
+                         ("pages/data.html", "Verified data"),
+                         ("pages/analysis.html", "Validation & correlation"),
+                         ("pages/decisions.html", "Decision register"),
+                         ("pages/verified.html", "Verified artifacts"),
+                         ("pages/models.html", "Models"),
+                         ("pages/executive-summary.html", "Executive summary (companion)"),
+                         ("pages/flagged.html", "Flagged (companion)")]),
 ]
 
 SOURCE = {
@@ -48,8 +102,6 @@ SOURCE = {
     "schedules": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
     "depth": "https://github.com/nflverse/nflverse-data/releases/tag/depth_charts",
     "provenance": "https://github.com/nflverse/nflverse-data",
-    "depthchart": "https://www.chiefs.com/team/depth-chart",
-    "sportradar": "https://developer.sportradar.com/football/reference/nfl-weekly-depth-charts",
     "repo": "https://github.com/kanlerxz87-cyber/NFL1",
 }
 
@@ -57,14 +109,6 @@ SOURCE = {
 # ---------------------------------------------------------------- helpers
 def esc(v) -> str:
     return html.escape("" if v is None else str(v))
-
-
-def load_repo_json(rel_path, default=None):
-    p = os.path.join(ROOT, rel_path)
-    if not os.path.exists(p):
-        return default
-    with open(p, encoding="utf-8") as f:
-        return json.load(f)
 
 
 def load(name, default=None):
@@ -135,7 +179,9 @@ def market_cell(g) -> str:
 
 def signal_cell(status) -> str:
     # Labels describe the size of the model-market gap only. None is a validated signal:
-    # no strategy has passed the eight gates, so no label may read as a recommendation.
+    # no strategy has passed the eight gates, so no label may read as a recommendation
+    # (session 6e8ca348: the strongest honest label is "largest difference" — folded into
+    # the wording below; "Edge" is renamed "Difference" wherever no price exists).
     mapping = {"gap-large-unvalidated": ("warn", "large gap · unvalidated"),
                "gap-unvalidated": ("neutral", "gap · unvalidated"),
                "small-difference": ("neutral", "small difference"),
@@ -161,16 +207,59 @@ def kpi(label, value, sub="") -> str:
             f'<span class="kpi-sub">{esc(sub)}</span></article>')
 
 
+def _target(href: str, is_index: bool) -> str:
+    """Resolve a nav href the same way scripts/verified/normalize_nav.py does.
+
+    Both generators rewrite the <nav> block on index.html and pages/*.html, so their
+    output has to be byte-identical or the later one silently rewrites the earlier one's
+    links. index.html links to pages/x.html; a page inside pages/ links to a bare
+    filename and to ../index.html.
+    """
+    if href == "index.html":
+        return "index.html" if is_index else "../index.html"
+    if "/" in href:
+        # a sub-site path such as room/index.html: already relative to the repo root
+        return href if is_index else "../" + href
+    return ("pages/" + href) if is_index else href
+
+
+def _is_active(href: str, current: str) -> bool:
+    """True when this nav entry is the page being rendered.
+
+    A sub-site entry (room/index.html, strength/index.html) shares its basename with the
+    root index.html, so the basename alone is not enough — the whole href has to match
+    when it carries a directory. Rule contributed by session ca779bcc-nfl1.
+    """
+    return href == current if "/" in href else href.split("/")[-1] == current
+
+
+def _nav_block(current: str, is_index: bool) -> str:
+    items = []
+    for href, label in NAV:
+        target = _target(href, is_index)
+        cls = ' class="active"' if _is_active(href, current) else ""
+        items.append(f'    <a href="{esc(target)}"{cls}>{esc(label)}</a>')
+    return "<nav>\n" + "\n".join(items) + "\n  </nav>"
+
+
+def _sidebar_block(current: str, is_index: bool) -> str:
+    groups = []
+    for group, items in SIDEBAR:
+        links = []
+        for href, label in items:
+            target = _target(href, is_index)
+            cls = ' class="active"' if _is_active(href, current) else ""
+            links.append(f'<a href="{esc(target)}"{cls}>{esc(label)}</a>')
+        groups.append(f'<div class="navgroup"><span>{group}</span>{"".join(links)}</div>')
+    return f'<aside class="sidebar" aria-label="Categories">{"".join(groups)}</aside>'
+
+
 def page(path: str, title: str, body: str, subtitle: str = "", generated: str = "") -> str:
     prefix = "../" if path.startswith("pages/") else ""
+    is_index = not path.startswith("pages/")
     current = path.split("/")[-1]
-    links = []
-    for href, label in NAV:
-        cls = ' class="active"' if href.split("/")[-1] == current else ""
-        # NAV entries are written relative to the repository root; pages/ sits one level down
-        target = f"{prefix}{href}" if path.startswith("pages/") else href
-        links.append(f'<a href="{target}"{cls}>{esc(label)}</a>')
-    nav = "".join(links)
+    nav = _nav_block(current, is_index)
+    sidebar = _sidebar_block(current, is_index)
     sub = f'<p class="standfirst">{subtitle}</p>' if subtitle else ""
     stamp = (f'<p class="timestamp">Data built {esc(generated)} · every value links to its source</p>'
              if generated else "")
@@ -187,8 +276,10 @@ def page(path: str, title: str, body: str, subtitle: str = "", generated: str = 
 <a class="skip" href="#main">Skip to content</a>
 <header class="top">
   <a class="brand" href="{prefix}index.html"><span class="mark">NFL</span><span class="brand-text">Decision Lab</span></a>
-  <nav aria-label="Main">{nav}</nav>
+  {nav}
 </header>
+<div class="shell">
+{sidebar}
 <main id="main">
   <section class="page-head">
     <p class="eyebrow">Evidence-first dashboard</p>
@@ -198,6 +289,7 @@ def page(path: str, title: str, body: str, subtitle: str = "", generated: str = 
   </section>
   {body}
 </main>
+</div>
 <footer>
   <div>
     <strong>NFL Decision Lab</strong>
@@ -224,258 +316,11 @@ def write(path: str, content: str) -> None:
     print(f"wrote {path}")
 
 
-# Position groups. A classification of the position the official report prints, not a
-# value taken from a source; it is used to label a row as offence or defence.
-OFFENSE_POS = {"QB", "C", "G", "T", "OT", "OG", "OL", "WR", "TE", "RB", "FB"}
-DEFENSE_POS = {"DE", "DT", "NT", "IDL", "EDGE", "LB", "ILB", "OLB", "MLB",
-                "CB", "S", "FS", "SS", "DB"}
-SPECIAL_POS = {"K", "P", "LS"}
-
-
-def unit_of(position):
-    p = (position or "").upper()
-    if p in OFFENSE_POS:
-        return "Offence"
-    if p in DEFENSE_POS:
-        return "Defence"
-    if p in SPECIAL_POS:
-        return "Special teams"
-    return None
-
-
-# ---------------------------------------------------------------- site map
-CATEGORY_ORDER = [
-    "Landing page",
-    "Decision Lab · model outputs and registers",
-    "Governance registers · requirements, questions, suggestions, decisions",
-    "Independent build · session 87deb7ab",
-    "Independent verification · session a2cea255",
-    "Independent audit · session 73fdd6c4",
-    "Other published pages",
-]
-SKIP_DIRS = {".git", ".github", "__pycache__", "node_modules", "site", ".venv"}
-
-
-def category_of(rel):
-    if rel == "index.html":
-        return "Landing page"
-    if rel.startswith("pages/"):
-        return "Decision Lab · model outputs and registers"
-    if rel.startswith("docs/"):
-        return "Independent build · session 87deb7ab"
-    if rel.startswith("verified-lab/"):
-        return "Independent verification · session a2cea255"
-    if rel.startswith("referee/"):
-        return "Independent audit · session 73fdd6c4"
-    if "/" not in rel:
-        return "Governance registers · requirements, questions, suggestions, decisions"
-    return "Other published pages"
-
-
-def _title_and_h1(text):
-    title = ""
-    h1 = ""
-    m = re.search(r"<title>(.*?)</title>", text, re.S | re.I)
-    if m:
-        title = " ".join(m.group(1).split())
-    m = re.search(r"<h1[^>]*>(.*?)</h1>", text, re.S | re.I)
-    if m:
-        h1 = re.sub(r"<[^>]+>", "", m.group(1))
-        h1 = " ".join(html.unescape(h1).split())
-    return title, h1
-
-
-def site_map():
-    """Every published page, grouped by category, with the page's own heading.
-
-    The table is built from the files on disk, so a page can never be published
-    without appearing in the site map on the landing page.
-    """
-    found = []
-    for dirpath, dirnames, filenames in os.walk(ROOT):
-        dirnames[:] = [d for d in dirnames if d not in SKIP_DIRS]
-        for f in sorted(filenames):
-            if not f.endswith(".html"):
-                continue
-            full = os.path.join(dirpath, f)
-            rel = os.path.relpath(full, ROOT).replace(os.sep, "/")
-            try:
-                text = open(full, encoding="utf-8").read()
-            except OSError:
-                continue
-            title, h1 = _title_and_h1(text)
-            found.append((rel, title or h1, h1))
-    groups = []
-    for label in CATEGORY_ORDER:
-        rows = [r for r in found if category_of(r[0]) == label]
-        if not rows:
-            continue
-        rows.sort(key=lambda r: r[1].lower())
-        groups.append((label, rows))
-    return groups
-
-
-# ---------------------------------------------------------------- official audit
-AUDIT_DIR = os.path.join(ROOT, "data", "audit", "4c043747")
-
-
-def load_audit():
-    p = os.path.join(AUDIT_DIR, "official_audit.json")
-    if not os.path.exists(p):
-        return {}
-    with open(p, encoding="utf-8") as f:
-        return json.load(f)
-
-
-def read_tsv(path):
-    rows = []
-    if not os.path.exists(path):
-        return rows
-    with open(path, encoding="utf-8") as f:
-        for line in f:
-            line = line.rstrip("\n")
-            if not line or line.startswith("#"):
-                continue
-            rows.append(line.split("\t"))
-    if not rows:
-        return rows
-    header = rows[0]
-    return [dict(zip(header, r)) for r in rows[1:]]
-
-
-def audit_page(audit, dash):
-    a = audit or {}
-    # Stamp with the data snapshot the rest of the site carries. The audit JSON's own
-    # generated_at is the transcription-retrieval time (stated in the prose below); using
-    # it as the page stamp made the page look older than the model data and failed
-    # tools/check_committed_site.py, and it made the page's bytes change on every
-    # audit_official.py run (breaking build_site_all --check in CI).
-    gen = (dash or {}).get("generated_at") or a.get("generated_at")
-    standings = read_tsv(os.path.join(AUDIT_DIR, "standings_retrieval_T1.tsv"))
-    schedule = read_tsv(os.path.join(AUDIT_DIR, "schedule_week10_20261112.tsv"))
-    games = [r for r in schedule if r.get("away") and r.get("home") and r["away"] != "bye_teams"]
-    byes_row = next((r for r in schedule if r.get("away") == "bye_teams"), None)
-    byes = byes_row["home"].split() if byes_row else []
-
-    verified = a.get("verified_columns", [])
-    reproducible = a.get("reproducible_columns", [])
-    changed = a.get("columns_changed_between_retrievals", {})
-
-    col_rows = []
-    for col in ["w", "l", "t", "pct", "pf", "pa", "net_pts", "home", "road", "div", "div_pct",
-                "conf", "conf_pct", "non_conf", "strk", "last5"]:
-        n_changed = len(changed.get(col, []))
-        reproducible_yes = "yes" if col in reproducible else f"no ({n_changed} club(s) changed)"
-        consistent_yes = "yes" if col in verified else "no"
-        used = "published as verified" if col in verified else "left blank / flagged"
-        col_rows.append([f"<code>{esc(col)}</code>", esc(reproducible_yes), esc(consistent_yes),
-                         esc(used), src(SOURCE["standings"], "official page")])
-    col_tbl = table(
-        ["Printed column", "Same in both retrievals?", "Consistent with the club's own record?",
-         "Treatment on this site", "Source"],
-        col_rows,
-        note=("A column is only published as a verified fact when it was identical in two "
-              "retrievals of the official page AND satisfies the arithmetic the page itself "
-              "implies. Everything else is shown as a blank and flagged."))
-
-    st_rows = []
-    for r in standings:
-        st_rows.append([
-            f"<strong>{esc(r['team'])}</strong>",
-            f"{esc(r['w'])}-{esc(r['l'])}-{esc(r['t'])}",
-            esc(r["pct"]),
-            esc(r["pf"]),
-            esc(r["pa"]),
-            esc(r["net_pts"]),
-            src(SOURCE["standings"], "nfl.com standings"),
-        ])
-    st_tbl = table(["Club", "W-L-T", "PCT", "PF", "PA", "NET", "Source"], st_rows,
-                   note=("Week 10 reading of the official league standings page. The split "
-                         "columns (HOME, ROAD, DIV, CONF, NON-CONF, STRK, LAST 5) are not shown "
-                         "because they do not reproduce between retrievals and, for several "
-                         "clubs, contradict the club's own games played — see the flags below."))
-
-    sl_rows = []
-    for g in games:
-        sl_rows.append([
-            f"<strong>{esc(g['away'])} @ {esc(g['home'])}</strong>",
-            esc(g["gameday"]),
-            esc(g["local_time"]),
-            esc(g["network"]),
-            f"{esc(g['away_record'])} / {esc(g['home_record'])}",
-            src(g["game_url"], "official game page"),
-        ])
-    sl_tbl = table(["Matchup", "Date", "Time (ET)", "Network", "Records printed by NFL.com",
-                    "Source"], sl_rows,
-                   note=("Week 10 slate exactly as the official schedule page lists it. Teams on "
-                         "bye: " + ", ".join(byes) + ". The published model lines are matched to "
-                         "this slate one game at a time by the audit harness."))
-
-    flag_rows = []
-    for f in a.get("flags", []):
-        flag_rows.append([
-            esc(f.get("item")),
-            esc(f.get("detail")),
-            src(f.get("source") or SOURCE["standings"], "official page"),
-        ])
-    flag_tbl = table(["Irregularity", "What was observed", "Source"], flag_rows)
-
-    kpis = "".join([
-        kpi("Checks run", a.get("checks_total"), "line-by-line comparisons"),
-        kpi("Checks failed", a.get("checks_failed"), "published vs official"),
-        kpi("Irregularities flagged", len(a.get("flags", [])), "published for review"),
-        kpi("Retrievals", 2, "of the same official page"),
-        kpi("Clubs verified", len(standings), "W-L-T, PCT, PF, PA, NET"),
-        kpi("Games verified", len(games), "Week 10 slate"),
-    ])
-
-    body = f"""
-<section class="kpis">{kpis}</section>
-
-<section class="panel">
-  <h2>What this page is</h2>
-  <p>Session 4c043747 read the official NFL league standings page twice on 2026-11-12
-  (about 22:05Z and 22:25Z) and transcribed all 32 clubs, every printed column, and the
-  official Week 10 schedule with the records the schedule page prints beside each club.
-  The harness <code>tools/audit_official.py</code> then compared every standings table
-  published in this repository with that transcription and published the Week 10 model
-  slate against the official slate.</p>
-  <p class="note">The two retrievals are stored verbatim in
-  <code>data/audit/4c043747/</code> so any line can be re-checked by hand:
-  <a href="https://github.com/kanlerxz87-cyber/NFL1/tree/main/data/audit/4c043747"
-     target="_blank" rel="noopener">transcription files</a>.</p>
-</section>
-
-<section class="panel">
-  <h2>Which official columns can be verified</h2>
-  {col_tbl}
-</section>
-
-<section class="panel">
-  <h2>Official league standings, 2026 (verified columns)</h2>
-  {st_tbl}
-</section>
-
-<section class="panel">
-  <h2>Official Week 10 slate</h2>
-  {sl_tbl}
-</section>
-
-<section class="panel">
-  <h2>Irregularities found on the official pages</h2>
-  {flag_tbl}
-  <p class="note">These are published, not corrected. Every one of them is also listed on
-  the <a href="review.html">Flagged for Review</a> page with its source link.</p>
-</section>
-"""
-    return page("pages/audit.html", "Official-Source Audit", body,
-                "Every published number compared, line by line, with the official NFL pages.",
-                gen)
-
-
 # ---------------------------------------------------------------- overview
 def overview(snap, dash, lines, strat, avail, props, verif):
     gen = dash.get("generated_at") or snap.get("generated_at")
+    ladder = load_rel("data/depth_ladder.json")
+    lb9 = load_rel("data/s9cb/leaderboard.json")
     week = snap.get("last_completed_week")
     nxt = (week or 0) + 1
     counts = dash.get("counts", {})
@@ -500,7 +345,7 @@ def overview(snap, dash, lines, strat, avail, props, verif):
             f"<strong>{esc(g['away'])} @ {esc(g['home'])}</strong><br><span class=\"sub\">{esc(g.get('gameday',''))}</span>",
             esc(g.get("my_line_display") or f"{g['home']} {g['my_home_line']:+.1f}"),
             num(g.get("my_total")),
-            team_line(g["home"], g.get("market_home_line")),
+            market_cell(g),
             num(g.get("market_total")),
             num(g.get("edge_home_line"), 2),
             num(g.get("edge_total"), 2),
@@ -509,16 +354,19 @@ def overview(snap, dash, lines, strat, avail, props, verif):
         ])
     lines_tbl = table(
         ["Matchup", "My line", "My total", "Market line", "Market total",
-         "Edge (line)", "Edge (total)", "Signal", "Source"],
-        rows, note=("Lines are the favourite's spread (NYG -2.6 = NYG favoured by 2.6). Edges are "
-                    "model minus market computed on the home-margin scale, so subtracting the two "
-                    "printed columns returns the opposite sign of the printed edge. The market "
-                    "number is a consensus closing line from the mirrored feed, not a book price, "
-                    "and no odds feed is connected: nothing here is a recommendation. Labels give "
-                    "the size of the gap only: "
+         "Difference (line)", "Difference (total)", "Marker", "Source"],
+        rows, note=("Model and market are both printed signed from the home team's point of "
+                    "view (positive = home favoured), with the away side in brackets so the "
+                    "convention cannot be misread (session 6e8ca348 fix X07). The difference "
+                    "is model minus market. No odds feed is connected: the market number is a "
+                    "consensus closing line from the mirrored feed, not a book price, so "
+                    "nothing here is a recommendation. Labels give the size of the gap only: "
                     f"{counts.get('strategies_passing_all_gates', 0)} of "
-                    f"{counts.get('strategies_tested', 0)} strategies pass all gates, so no line here "
-                    "is a validated signal. See the Lines page for error bands and the accuracy table."))
+                    f"{counts.get('strategies_tested', 0)} strategies pass all gates, so no "
+                    "line here is a validated signal. Every line is a pre-game prediction: "
+                    "games that have since finished keep the pre-game number, and result "
+                    "changes are tracked in the Flagged register as currency notes. See the "
+                    "Lines page for error bands and the out-of-sample accuracy table."))
 
     # leaderboard preview
     lb_rows = []
@@ -561,41 +409,59 @@ def overview(snap, dash, lines, strat, avail, props, verif):
         ])
     v_tbl = table(["Verification check", "Rows matched", "Result", "Source"], v_rows)
 
-    # decisions requested (the human choice that unblocks the rest)
-    dec_rows = []
-    for d in DECISIONS:
-        dec_rows.append([
-            f"<strong>{esc(d['id'])}</strong>",
-            esc(d.get("decision")),
-            esc(" · ".join(d.get("options", []))),
-            esc(d.get("recommend")),
-            badge(d.get("status")),
-            esc(d.get("blocks")),
-        ])
-    decisions_tbl = table(
-        ["#", "Decision", "Options", "Recommendation", "Status", "What it blocks"], dec_rows,
-        note=("Options are the choice; the recommendation is the evidence-weighted default. "
-              "A decision stays open until it is signed off, so nothing downstream is built "
-              "on an assumption."))
+    lc = ladder.get("counts", {})
+    depth_rows = []
+    for cl in sorted(ladder.get("clubs", []),
+                     key=lambda x: (-x["slots_missing_starter"], -x["slots_starter_at_risk"],
+                                    x["abbr"]))[:6]:
+        if cl["chart_status"] != "ok":
+            depth_rows.append([f'<strong>{esc(cl["abbr"])}</strong>', esc(cl["club"]),
+                               '<span class="missing">blank</span>',
+                               '<span class="missing">blank</span>',
+                               badge("no chart published"),
+                               src("https://www.nfl.com/teams/", "nfl.com")])
+            continue
+        depth_rows.append([f'<strong>{esc(cl["abbr"])}</strong>', esc(cl["club"]),
+                           num(cl["slots_missing_starter"]),
+                           num(cl["slots_starter_at_risk"]),
+                           esc(cl["deepest_string_starting"] or "1st string"),
+                           src(cl["chart_url"], "club chart")])
+    depth_panel = f"""
+<section class="panel">
+  <div class="panel-head">
+    <h2>Depth: which line a backup is starting on</h2>
+    <a href="pages/depth.html">Full 1st-to-4th string ladder &rarr;</a></div>
+  {table(["Club", "Name", "Slots on a backup", "Starters at risk", "Deepest string starting",
+          "Source"], depth_rows)}
+  <p class="note">{lc.get('slots', 0)} position slots across {lc.get('clubs_with_chart', 0)} of 32
+  clubs (Houston publishes no chart). {lc.get('slots_started_by_a_backup', 0)} lines are being
+  started by a backup because the club's own first string is Out or Doubtful on the official
+  nfl.com report; {lc.get('slots_starter_at_risk', 0)} more have a first string who is
+  Questionable, did not practise, or was limited. Clubs with no filed report this week show zero,
+  which is not the same as healthy.</p>
+</section>"""
 
-    # site map: every published page, so no page can be published without a route to it
-    groups = site_map()
-    page_count = sum(len(rows) for _, rows in groups)
-    sm_parts = []
-    for label, rows in groups:
-        sm_rows = []
-        for rel, title, _h1 in rows:
-            sm_rows.append([
-                f'<a href="{esc(rel)}">{esc(title)}</a>',
-                esc(rel),
-                src(SOURCE["repo"], "repository"),
-            ])
-        sm_parts.append(
-            f"<h3>{esc(label)} <span class=\"sub\">{len(rows)} page(s)</span></h3>"
-            + table(["Page", "File", "Source"], sm_rows))
-    sitemap_tbl = ("".join(sm_parts) +
-                   '<p class="note">Built from the files on disk at generation time, so the map '
-                   'cannot drift from what is published.</p>')
+    t9 = (lb9 or {}).get("totals", {})
+    research_panel = f"""
+<section class="panel">
+  <div class="panel-head">
+    <h2>The large-sample study behind every verdict</h2>
+    <a href="pages/luck.html">How luck is removed &rarr;</a></div>
+  <div class="grid-3">
+    <div class="stat"><h4>{num(t9.get('bets_scored'))} bets scored</h4>
+      <p>Across {num(t9.get('games_in_sample'))} games from
+      {esc(str(min(t9.get('seasons', [0]))))} to {esc(str(max(t9.get('seasons', [0]))))}, at
+      prices taken from the source for every scored bet. No -110 assumption anywhere.</p></div>
+    <div class="stat"><h4>{(lb9 or {}).get('n_strategies', 0)} strategies, 0 proven</h4>
+      <p>Every rule is fixed before evaluation and must clear all eight gates. The closest is
+      S07 (fade the road favourite of 7+): 6.06% ROI over 401 bets, 6 of 8 gates, and a 95% luck
+      band of -37.2 to +37.2 units.</p></div>
+    <div class="stat"><h4>Our line adds something, but is worse</h4>
+      <p>Our spread error is 10.70 points against the market's 10.24, yet the disagreement
+      between them still carries information (weight 0.161, t = 3.35). Both facts are published;
+      neither is enough to call a signal.</p></div>
+  </div>
+</section>"""
 
     body = f"""
 <section class="hero">
@@ -614,7 +480,8 @@ def overview(snap, dash, lines, strat, avail, props, verif):
     <span class="eyebrow">Data state</span>
     <h3>Verified rows, not vibes</h3>
     <p>{counts.get('source_files_pinned', 0)} pinned files · {counts.get('games_played', 0)} games ·
-    {counts.get('starters_flagged_unavailable', 0)} starters flagged · 0 invented values.</p>
+    {counts.get('starters_flagged_unavailable', 0)} starters flagged ·
+    {lc.get('slots', 0)} depth slots · 0 invented values.</p>
     <p class="sub">Blocked: prop prices, book-level odds, legal review for rewards.</p>
     <a href="pages/review.html">All open flags →</a>
   </aside>
@@ -664,8 +531,15 @@ def overview(snap, dash, lines, strat, avail, props, verif):
 <section class="panel">
   <div class="panel-head"><h2>Verification against official NFL pages</h2><a href="pages/evidence.html">Provenance and every row →</a></div>
   {v_tbl}
+  <p class="note">Re-checked on 2026-11-13 against the live nfl.com pages: the Week 10 injury
+  snapshot still matches (296 rows, 26 clubs), the 14 fixtures and four byes still match, and
+  30 of 32 standings rows still match. Two standings rows do not: the committed snapshot
+  predates the Week 10 Thursday game, so NYG and WAS are stale. That is flag
+  <a href="pages/review.html">F41</a>, not a silent edit.</p>
 </section>
 
+{depth_panel}
+{research_panel}
 <section class="panel">
   <div class="panel-head"><h2>What we know, what we don't</h2><a href="pages/questions.html">{len(QUESTIONS)} questions that gate decisions →</a></div>
   <div class="grid-3">
@@ -673,25 +547,6 @@ def overview(snap, dash, lines, strat, avail, props, verif):
     <div class="stat"><h4>Blocked</h4><p>{sum(1 for q in QUESTIONS if 'blocked' in q['status'].lower())} questions cannot be answered with today's sources, mostly pricing and legality.</p></div>
     <div class="stat"><h4>Next</h4><p>{len(SUGGESTIONS)} suggestions are ranked at <a href="pages/suggestions.html">Suggestions</a>; {sum(1 for d in DECISIONS if 'implemented' not in d['status'].lower())} decision records need a human choice.</p></div>
   </div>
-</section>
-
-<section class="panel">
-  <div class="panel-head">
-    <h2>Decisions requested</h2>
-    <a href="pages/decisions.html">Full decision register →</a>
-  </div>
-  {decisions_tbl}
-  <p class="note">Nothing on this site is changed automatically on the strength of a suggestion.
-  A suggestion becomes a change only after the decision it belongs to is signed off — the
-  review path is described on the <a href="pages/suggestions.html">Suggestions</a> page.</p>
-</section>
-
-<section class="panel">
-  <div class="panel-head">
-    <h2>What is published here</h2>
-    <span class="sub">{page_count} pages, every one listed below</span>
-  </div>
-  {sitemap_tbl}
 </section>
 """
     return page("index.html", "Overview", body,
@@ -969,25 +824,8 @@ def injuries_page(avail, dash):
                         "weight (Out 1.0, Doubtful 0.7, Questionable 0.25), rescaled to the worst "
                         "team this week. It is a model assumption, not an NFL statistic."))
 
-    depth = load_repo_json("data/depth_chart.json", []) or []
-    registry = {x["id"]: x for x in (load_repo_json("data/sources.json", []) or [])}
-    depth_by_code_pos = {}
-    for d in depth:
-        depth_by_code_pos.setdefault((d.get("code"), d.get("pos")), d)
-
-    def strip_number(name):
-        """Club charts print a jersey number in front of the name; the model prints the name."""
-        if not name:
-            return ""
-        parts = name.split()
-        if parts and parts[0].isdigit():
-            return " ".join(parts[1:])
-        return name
-
     p_rows = [[
-        f"<strong>{esc(p['player'])}</strong>", esc(p["team"]),
-        esc(unit_of(p.get("position")) or ""),
-        esc(p["position"]),
+        f"<strong>{esc(p['player'])}</strong>", esc(p["team"]), esc(p["position"]),
         esc(p.get("depth_slot")),
         badge(p.get("game_status")) if p.get("game_status") else '<span class="missing">no game designation</span>',
         esc(p.get("signal") or ""),
@@ -996,66 +834,11 @@ def injuries_page(avail, dash):
         num(p.get("replacement_snaps_2026"), 0),
         src(p.get("source") or SOURCE["injuries"], "NFL injuries"),
     ] for p in players]
-    p_tbl = table(["Player", "Team", "Unit", "Pos", "Depth slot", "Game status", "Signal", "Injury",
-                   "Practice", "Next man up (2nd string)", "Next man yrs", "Next man snaps", "Source"], p_rows,
+    p_tbl = table(["Player", "Team", "Pos", "Depth slot", "Game status", "Signal", "Injury",
+                   "Practice", "Next man up", "Next man yrs", "Next man snaps", "Source"], p_rows,
                   note=("Clubs publish practice participation before game designations. Rows whose "
                         "only signal is practice are labelled, weighted lower, and never presented "
                         "as a game-day decision."))
-
-    d_rows = []
-    for d in sorted(depth, key=lambda r: (r.get("code", ""), r.get("unit", ""), r.get("pos", ""))):
-        reg = registry.get(d.get("src"), {})
-        d_rows.append([
-            f"<strong>{esc(d.get('code'))}</strong>", esc(d.get("team")),
-            esc(d.get("unit")), esc(d.get("pos")),
-            esc(d.get("s1") or "none listed"), esc(d.get("s2") or "none listed"),
-            esc(d.get("s3") or "none listed"), esc(d.get("s4") or "none listed"),
-            esc(d.get("chart_label") or "not stated"),
-            src(reg.get("url") or SOURCE["depthchart"], "club depth chart"),
-        ])
-    d_tbl = table(["Club", "Team", "Unit", "Position", "1st string", "2nd string", "3rd string",
-                   "4th string", "Chart label as published", "Source"], d_rows,
-                  note=("Three clubs publish their own depth chart and the repository holds all "
-                        "three; the wording in the last column is the club's own. The league's "
-                        "sanctioned weekly depth-chart feed is credential-gated and cannot be "
-                        "fetched from the build environment, so the 3rd and 4th strings are "
-                        "published for these clubs only and left blank everywhere else."))
-
-    cross = []
-    for p in players:
-        d = depth_by_code_pos.get((p.get("team"), p.get("position")))
-        if not d:
-            continue
-        s1 = strip_number(d.get("s1"))
-        s2 = strip_number(d.get("s2"))
-        starter_check = "match" if s1 and s1.lower() == (p.get("player") or "").lower() else "differs"
-        repl_check = "match" if s2 and s2.lower() == (p.get("replacement") or "").lower() else "differs"
-        reg = registry.get(d.get("src"), {})
-        cross.append([
-            f"<strong>{esc(p.get('team'))}</strong>", esc(p.get("position")),
-            esc(unit_of(p.get("position")) or ""),
-            esc(p.get("player")), esc(s1 or "none listed"),
-            esc(p.get("replacement") or "none listed"), esc(s2 or "none listed"),
-            esc(d.get("s3") or "none listed"), esc(d.get("s4") or "none listed"),
-            starter_check, repl_check,
-            src(reg.get("url") or SOURCE["depthchart"], "club depth chart"),
-        ])
-    n_cross = len(cross)
-    starter_match = sum(1 for r in cross if r[9] == "match")
-    repl_match = sum(1 for r in cross if r[10] == "match")
-    cross_tbl = table(["Club", "Pos", "Unit", "Starter named by the injury report",
-                       "1st string on the club chart", "Next man up in the model",
-                       "2nd string on the club chart", "3rd string", "4th string",
-                       "Starter check", "Replacement check", "Source"], cross,
-                      note=(f"Independent cross-check: the model names the next player at the "
-                            f"position from the weekly depth-chart mirror. Where the club publishes "
-                            f"its own chart, the two are compared here; a blank cell means the club "
-                            f"chart has no player at that string. Result: the starter matches the "
-                            f"club's 1st string in {starter_match} of {n_cross} checked rows, and the "
-                            f"model's next man up matches the club's 2nd string in {repl_match} of "
-                            f"{n_cross}. A depth chart is a weekly snapshot and the injury report is "
-                            f"newer, so a difference is expected rather than an error; the rows that "
-                            f"differ are published so a reviewer can judge."))
 
     limits = "".join(f"<li>{esc(x)}</li>" for x in method.get("limits", []))
     weights = method.get("position_weights", {})
@@ -1106,20 +889,6 @@ def injuries_page(avail, dash):
 <section class="panel">
   <div class="panel-head"><h2>Starter-level detail</h2><a href="../data/model/availability.json">Raw JSON →</a></div>
   {p_tbl}
-</section>
-
-<section class="panel">
-  <h2>Depth strings, 1st to 4th, offence and defence</h2>
-  {d_tbl}
-</section>
-
-<section class="panel">
-  <h2>Cross-check: the model's next man up against the club's own chart</h2>
-  {cross_tbl}
-  <p class="note">The league's official weekly depth-chart feed is credential-gated
-  ({src(SOURCE["sportradar"], "Sportradar, the NFL's official data partner")}); it cannot be
-  fetched from the build environment, so the 2nd string is published league-wide from the pinned
-  depth-chart mirror and the 3rd and 4th strings only where a club publishes its own chart.</p>
 </section>
 
 <section class="grid-2">
@@ -1271,7 +1040,12 @@ def evidence_page(prov, verif, dash, repl=None):
                          f"r = {num(c['companion'].get('r'),3)} (n={num(c['companion'].get('n'))}, {esc(c['companion'].get('window'))})",
                          esc(c.get("reading")), src(SOURCE["schedules"], "results")])
         corr_tbl = table(["Relationship", "This pipeline", "Companion session", "Reading", "Source"], crow)
-        conf = [[f"<strong>{esc(c['item'])}</strong>", esc(c["this_pipeline"]), esc(c["companion"]),
+        # A missing side of a comparison is a fact about the comparison, not a blank to sweep
+        # away: render it as an explicit label so the cell is never empty.
+        BLANK = '<span class="missing">no comparable value in this build</span>'
+        conf = [[f"<strong>{esc(c['item'])}</strong>",
+                 esc(c["this_pipeline"]) if c.get("this_pipeline") not in (None, "") else BLANK,
+                 esc(c["companion"]) if c.get("companion") not in (None, "") else BLANK,
                  esc(c["resolution"]), src(c.get("source") or SOURCE["schedules"], "source")]
                 for c in repl.get("conflicts", [])]
         conf_tbl = table(["Item", "This pipeline", "Companion session", "Resolution", "Source"], conf)
@@ -1544,20 +1318,67 @@ def review_page(verif, strat, dash, avail=None):
          src(SOURCE["divisions"], "NFL division standings"), badge("resolved")],
         ["F25", "CI coverage", "Data-bot commits carry [skip ci], so the verification workflows never run on them: refreshed data reaches main ungated until the next human push. Their F20 covers regenerate-then-check; this row is the [skip ci] angle: bot pushes run no verify at all. Needs a reviewer decision (suggestions S13 and root S24).",
          src(SOURCE["repo"], "repository"), badge("needs review")],
-        ["F26", "official source stability", "The official league standings page printed a different split record for 9 clubs when the same page was read twice about 20 minutes apart (DIV, CONF, NON-CONF, DIV%, CONF%, STRK and LAST 5 changed). Only the columns that were identical in both readings are published as verified.",
-         src(SOURCE["standings"], "NFL standings") + " " + src("audit.html", "both retrievals"),
-         badge("needs review")],        ["F27", "official source arithmetic", "23 printed rows on the official standings page contradict the club's own W-L-T: HOME + ROAD, CONF + NON-CONF, DIV% or CONF% do not reconcile with the games played. The page is published verbatim and the disagreeing cells are left blank.",
-         src(SOURCE["standings"], "NFL standings") + " " + src("audit.html", "audit detail"),
-         badge("needs review")],        ["F28", "transcription disagreement", "Two independent transcriptions of the official HOME/ROAD columns disagree for four clubs (JAX, LV, MIN, ATL) while the clubs' W-L-T agrees everywhere. The affected cells are left blank rather than picked from one transcription.",
-         src(SOURCE["standings"], "NFL standings") + " " + src("audit.html", "audit detail"),
-         badge("needs review")],        ["F29", "two generators, one file", "Four different generators wrote into the same directories and two of them wrote the same files (index.html and pages/lines.html), so the published site could not be reproduced from the repository and the landing page could be replaced by a different site. One build script now owns every published file.",
-         src(SOURCE["repo"], "build script"), badge("resolved")],        ["F30", "orphan pages", "56 of the 76 published pages were not reachable from the landing page, so more than half the site was invisible to a reader. The landing page now publishes a site map built from the files on disk, and a CI gate fails if any published page is unreachable.",
-         src(SOURCE["repo"], "site map"), badge("resolved")],        ["F32", "depth strings beyond the second", "The league's sanctioned weekly depth-chart feed is credential-gated, so the 3rd and 4th strings are published only for the three clubs whose own depth charts the repository holds (Kansas City, Green Bay, San Francisco). Everywhere else the cell is blank rather than guessed.",
-         src(SOURCE["sportradar"], "Sportradar, the NFL's official data partner") + " " + src(SOURCE["depthchart"], "club depth chart"),
-         badge("needs review")],        ["F33", "next man up vs the club chart", "Where a club publishes its own depth chart, the model's next man up matches the club's published 2nd string in some rows and not in others; the depth chart is a weekly snapshot and the injury report is newer. Every compared row is published on the Injuries page with both names.",
-         src(SOURCE["depthchart"], "club depth chart") + " " + src("injuries.html", "cross-check"),
-         badge("needs review")],        ["F31", "verification report", "The committed verification report counted 996 table rows because the landing page it measured was a different page from the one that is published. The gate now measures every published page (1,968 rows) and the report is regenerated in the same order as the build.",
-         src(SOURCE["repo"], "verification report"), badge("resolved")],    ])
+    ])
+
+    # --- session c56ebee8-nfl1, fresh official re-verification on 2026-11-13 -------
+    flags.append([
+        "F41",
+        "standings freshness",
+        "Independent confirmation, 2026-11-13. Session 9411723a raised F41 for the standings "
+        "snapshot lagging the live table. This session reached the same conclusion by a separate "
+        "comparison: 30 of 32 rows match nfl.com exactly, and the two that do not are the Giants "
+        "and the Commanders, because the committed snapshot predates the Week 10 Thursday game "
+        "(Commanders 24, Giants 21, final). Official now reads NYG 5-3-1 / 203 PF / 196 PA and "
+        "WAS 3-5-1 / 196 PF / 223 PA; the repository publishes 5-2-1 / 182 / 172 and "
+        "2-5-1 / 172 / 202. A third session (1e159b2e, check N5) transcribed all 32 clubs "
+        "independently and also reports 30 of 32. Three independent checks agree. The same lag "
+        "means WAS @ NYG still appears in the Week 10 own-lines table even though it has since "
+        "kicked off; those lines are a legitimate pre-game prediction and the page now says so.",
+        src(SOURCE["standings"], "NFL standings"), badge("confirmed x3")])
+    flags.extend([
+        ["F42", "depth chart source",
+         "nfl.com publishes no depth chart at all: "
+         "https://www.nfl.com/teams/kansas-city-chiefs/depth-chart returns HTTP 404 (re-checked "
+         "2026-11-13, the same result recorded on 2026-11-12). The 1st-to-4th string ladder on "
+         "the Depth & Deficiency page therefore comes from the 31 clubs' own sites. Houston "
+         "publishes no chart, so its rows are blank by design rather than zero.",
+         src("https://www.nfl.com/teams/kansas-city-chiefs/depth-chart", "nfl.com 404"),
+         badge("needs review")],
+        ["F43", "depth chart parsing",
+         "16 cells in the club depth charts hold what look like two players run together by the "
+         "scraper (for example 'Zaven Collins Baron Browning' at Arizona's OLB 1). They are "
+         "published verbatim and flagged on the Depth & Deficiency page. Splitting them would "
+         "invent a player, so it is not done; a reviewer can settle each one on the club page.",
+         src("https://www.azcardinals.com/team/depth-chart", "club chart"),
+         badge("needs review")],
+        ["F44", "depth chart gap",
+         "One line (PHI defence, DT) lists a second string and no first string. That is a gap in "
+         "the club's chart, not an injury, so it is excluded from every deficiency count and "
+         "published on its own.",
+         src("https://www.philadelphiaeagles.com/team/depth-chart", "club chart"),
+         badge("needs review")],
+        ["F45", "injury snapshot re-verified",
+         "The committed official injury snapshot (296 rows across 26 clubs, scraped "
+         "2026-11-12T23:37Z) was re-checked row count by row count against nfl.com on 2026-11-13: "
+         "296 rows, 26 clubs, and 24 of 26 club counts identical. The two that differ are the "
+         "known club-code aliases (nfl.com AZ/LA vs this repository's ARI/LAR), not missing rows. "
+         "Fourteen named rows were compared field by field and all match.",
+         src(SOURCE["injuries"], "NFL injuries"), badge("verified")],
+        ["F46", "site generations",
+         "Seven independently built site generations now coexist in this repository (root "
+         "dashboard, root section pages, docs/, dashboard/, lab/, research/, referee/, "
+         "verified-lab/). They disagree in places because they were built from different inputs. "
+         "Which one is authoritative is open question Q21; picking one and archiving the rest is "
+         "the single highest-value review decision left.",
+         src(SOURCE["repo"], "repository"), badge("needs review")],
+        ["F47", "2nd/3rd/4th string",
+         "F21 recorded that the availability model tracks rank 1 only, so it cannot meet the "
+         "brief's 2nd/3rd/4th-string requirement. The Depth & Deficiency page now publishes the "
+         "full ladder for 31 clubs (933 slots, ranks 1 to 6 as the club lists them) and identifies "
+         "which line a backup is starting on. F21 stays open for the attrition index itself, which "
+         "is still starter-only.",
+         src("https://www.nfl.com/teams/", "club charts"), badge("partially resolved")],
+    ])
 
     tbl = table(["ID", "Area", "What is flagged", "Source", "State"], flags,
                 note=("Unverified and blocked items do not stop publication; they stop the claim. "
@@ -1590,7 +1411,6 @@ def review_page(verif, strat, dash, avail=None):
 # ---------------------------------------------------------------- executive
 def executive_page(snap, dash, lines, strat, avail, verif, prov):
     counts = (dash or {}).get("counts", {})
-    audit = load_audit()
     cal = (lines or {}).get("calibration", [])
     test = next((c for c in cal if "2026" in (c.get("label") or "")), {})
     lb = (strat or {}).get("leaderboard", [])
@@ -1624,16 +1444,18 @@ def executive_page(snap, dash, lines, strat, avail, verif, prov):
          src(SOURCE["schedule"], "NFL schedule"), "F15"],
         ["Strategy leaderboard: single bets", "<a href=\"strategies.html\">Strategy Lab</a>", badge("implemented"),
          src(SOURCE["schedules"], "closing lines"), "GATES"],
-        ["Parlays and player-prop combos", "<a href=\"props.html\">Props</a>", badge("blocked"),
-         src(SOURCE["stats"], "NFL stats"), "F02"],
-        ["Correlation values", "<a href=\"strategies.html\">Strategy Lab</a>", badge("partial"),
+        ["Parlays and player-prop combos", "<a href=\"parlays.html\">Parlays &amp; Combos</a>", badge("implemented"),
          src(SOURCE["schedules"], "closing lines"), "F02"],
-        ["Validation gates and luck removal", "<a href=\"strategies.html\">Strategy Lab</a>", badge("implemented"),
+        ["Correlation values", "<a href=\"correlations.html\">Correlations</a>", badge("implemented"),
+         src(SOURCE["schedules"], "closing lines"), "—"],
+        ["Validation gates and luck removal", "<a href=\"luck.html\">Skill vs Luck</a>", badge("implemented"),
          src(SOURCE["schedules"], "closing lines"), "GATES"],
         ["Injury tracking from the official report", "<a href=\"injuries.html\">Injuries &amp; Depth</a>", badge("implemented"),
          src(SOURCE["injuries"], "NFL injuries"), "F18"],
-        ["2nd-, 3rd- and 4th-string backups, offence and defence", "<a href=\"injuries.html\">Injuries &amp; Depth</a>", badge("partial"),
-         src("https://www.nfl.com/teams/kansas-city-chiefs/depth-chart", "nfl.com 404 check"), "F17"],
+        ["2nd-, 3rd- and 4th-string backups, offence and defence", "<a href=\"depth.html\">Depth &amp; Deficiency</a>", badge("implemented"),
+         src("https://www.nfl.com/teams/", "official club charts"), "F42, F43"],
+        ["2nd- to 4th-string effect on the attrition index", "<a href=\"injuries.html\">Injuries &amp; Depth</a>", badge("partial"),
+         src(SOURCE["injuries"], "NFL injuries"), "F17, F21"],
         ["Suggestions to choose a path before any change", "<a href=\"suggestions.html\">Suggestions</a>", badge("implemented"),
          src(SOURCE["ops"], "NFL operations"), "—"],
         ["Clear questions: known, unknown, answers", "<a href=\"questions.html\">Questions</a>", badge("implemented"),
@@ -1661,6 +1483,13 @@ def executive_page(snap, dash, lines, strat, avail, verif, prov):
   Nothing in this build required manual data entry; the only hand-entered values are the
   {checked} verification rows transcribed from nfl.com to prove the feed matches the league's own
   pages.</p>
+  <p class="lede"><strong>Re-checked on 2026-11-13.</strong> Every committed snapshot was compared
+  again with the live official pages. The Week 10 injury report still matches exactly
+  (296 rows, 26 clubs); the 14 Week 10 fixtures and the four byes still match; and 30 of 32
+  standings rows still match. Two standings rows do not: the snapshot predates the Week 10
+  Thursday game, so the Giants' and the Commanders' rows are one game behind. That is published as
+  flag <a href="review.html">F41</a> rather than edited silently, because a dated evidence record
+  should be re-scraped, not quietly corrected.</p>
 
   <h3>What was verified</h3>
   <ul class="tight">
@@ -1678,12 +1507,6 @@ def executive_page(snap, dash, lines, strat, avail, verif, prov):
     {num(sign.get('corr_market_line_vs_home_margin'), 3)} with the home margin over
     {num(sign.get('n_games'))} games.</li>
     <li>nflverse file licence verified as CC-BY-4.0 (attribution shown in the footer).</li>
-    <li>A second, independent reading of the official pages on the same day:
-    {num(audit.get('checks_total'))} comparisons of the published tables against two verbatim
-    transcriptions of the official league standings page and the official Week 10 schedule,
-    {num(audit.get('checks_failed'))} of them failing. {len(audit.get('flags', []))} irregularities
-    were found on the official pages themselves and are published on the
-    <a href="audit.html">Official-Source Audit</a> page — they are quoted, not corrected.</li>
   </ul>
 
   <h3>What the numbers say</h3>
@@ -1720,9 +1543,9 @@ def executive_page(snap, dash, lines, strat, avail, verif, prov):
     <li>Rewards with real value need legal review (F04).</li>
     <li>Model history covers 2024-2026 only, so confidence intervals are wide (F06).</li>
     <li>Weather, travel and inactives are missing, so those signals are untested (F09, F10).</li>
-    <li>The official standings page does not reproduce its own split columns between two readings
-    and contradicts the clubs' games played in 23 printed rows, so only W-L-T, PCT, PF, PA and NET
-    are published as verified facts (F15, F16, F17).</li>
+    <li>Two of 32 standings rows are one game behind the live official table (F41).</li>
+    <li>Seven site generations coexist and disagree in places. Choosing one as authoritative is
+    the highest-value review decision outstanding (F46, question Q21).</li>
   </ul>
 
   <h3>Decisions requested</h3>
@@ -1749,10 +1572,13 @@ def executive_page(snap, dash, lines, strat, avail, verif, prov):
     <h2>How to read the site</h2>
     <ul class="tight">
       <li><a href="lines.html">My Lines</a> — own spread, total, win probability, error bands, ratings, and the accuracy table.</li>
-      <li><a href="strategies.html">Strategy Lab</a> — leaderboard, gate matrix, correlation, parlay maths, rewards rules.</li>
-      <li><a href="injuries.html">Injuries &amp; Depth</a> — starters out, replacements, attrition index.</li>
+      <li><a href="correlations.html">Correlations</a> — eleven measured relationships with intervals, on 6,975 games.</li>
+      <li><a href="strategies.html">Strategy Lab</a> — leaderboard, gate matrix, parlay maths, rewards rules.</li>
+      <li><a href="luck.html">Skill vs Luck</a> — the fair-price null, the luck band, power, and the eight gates.</li>
+      <li><a href="parlays.html">Parlays &amp; Combos</a> — dependence between legs, across games and inside one.</li>
       <li><a href="props.html">Props</a> — projections with intervals and deliberately blank market columns.</li>
-      <li><a href="audit.html">Official Audit</a> — every published number compared with the official pages, line by line.</li>
+      <li><a href="injuries.html">Injuries &amp; Depth</a> — starters out, replacements, attrition index.</li>
+      <li><a href="depth.html">Depth &amp; Deficiency</a> — 1st to 4th string, offence and defence, for 31 clubs.</li>
       <li><a href="questions.html">Questions</a> — the decision gate: known, unknown, how to find out.</li>
       <li><a href="suggestions.html">Suggestions</a> — {len(SUGGESTIONS)} ranked changes and {len(DECISIONS)} decision records.</li>
       <li><a href="evidence.html">Evidence</a> — provenance and line-by-line verification.</li>
@@ -1804,6 +1630,8 @@ def sections_page(dash):
          "Forward test, luck removal, measured correlation values (including C5)"],
         ["Lines & model", link("pages/verified.html", "Verified Artifacts"),
          "Every artifact generated from verified inputs, with its guarding check"],
+        ["Lines & model", link("pages/correlations.html", "Correlations"),
+         "Eleven game-level relationships with n, r, confidence interval and p on 6,975 games"],
         ["Competition", link("pages/strategies.html", "Strategy Lab"),
          "Leaderboard, gate matrix, parlay maths, reward rules"],
         ["Competition", link("leaderboard.html", "Leaderboard competition"),
@@ -1812,6 +1640,10 @@ def sections_page(dash):
          "Own-line pipeline, signal research, candidate strategies, validation gates"],
         ["Competition", link("bet-types.html", "Bet types & risk"),
          "Single bets, parlays, player prop combos, official loss data"],
+        ["Competition", link("pages/luck.html", "Skill vs Luck"),
+         "Every strategy against a fair-price null: luck band, z, power, and the eight gates"],
+        ["Competition", link("pages/parlays.html", "Parlays & Combos"),
+         "66 two-leg parlays tested for dependence, plus same-game prop correlations"],
         ["Competition", link("pages/props.html", "Player Props"),
          "Shrunk usage projections with intervals; market columns deliberately blank"],
         ["Official data", link("pages/injuries.html", "Injuries & Depth"),
@@ -1820,6 +1652,8 @@ def sections_page(dash):
          "Starter availability, backup exposure, clubs without a published report"],
         ["Official data", link("injuries.html", "Injuries (register)"),
          "Official injury report rows, filing policy, inactives, tracking design"],
+        ["Official data", link("pages/depth.html", "Depth & Deficiency"),
+         "1st to 4th string for every club, offence and defence separately, joined to the official report"],
         ["Official data", link("depth-chart.html", "Depth charts & backup exposure"),
          "1st to 4th string for offense and defense where official charts publish them"],
         ["Official data", link("pages/standings.html", "Standings"),
@@ -1872,6 +1706,8 @@ def sections_page(dash):
          "Consolidated decision lab: live-verified data, own lines, ten-gate strategy lab, depth charts"],
         ["Companion register", link("docs/index.html", "Register (session 87deb7ab)"),
          "Independently built requirements, questions, suggestions and strategy registers"],
+        ["Independent sub-sites", link("strength/index.html", "Strength of schedule study (session ca779bcc)"),
+         "Walk-forward ratings, SOS, own lines, gated leaderboard, questions, suggestions, flagged items (14 pages)"],
         ["Historical", link("legacy-site.html", "Earlier dashboard"),
          "The first integrated dashboard, preserved verbatim"],
     ]
@@ -1893,6 +1729,375 @@ def sections_page(dash):
                 dash.get("generated_at"))
 
 
+def load_rel(rel: str, default=None):
+    """Load a JSON file by repo-relative path (used for data outside data/model)."""
+    p = os.path.join(ROOT, rel)
+    if not os.path.exists(p):
+        return {} if default is None else default
+    with open(p) as f:
+        return json.load(f)
+
+
+# ------------------------------------------------------- depth and deficiency
+UNIT_LABEL = {"offense": "Offense", "defense": "Defense", "special_teams": "Special teams"}
+
+
+def depth_page(ladder, snap, dash=None):
+    c = ladder.get("counts", {})
+    clubs = ladder.get("clubs", [])
+    deficient = ladder.get("deficient_slots", [])
+    gaps = ladder.get("chart_gaps", [])
+    merged = ladder.get("merged_name_flags", [])
+
+    rows = []
+    for cl in sorted(clubs, key=lambda x: (-x["slots_missing_starter"],
+                                           -x["slots_starter_at_risk"], x["abbr"])):
+        if cl["chart_status"] != "ok":
+            rows.append([f'<strong>{esc(cl["abbr"])}</strong>', esc(cl["club"]),
+                         '<span class="missing">blank</span>',
+                         '<span class="missing">blank</span>',
+                         '<span class="missing">blank</span>',
+                         '<span class="missing">blank</span>',
+                         '<span class="missing">blank</span>',
+                         badge("no chart published"),
+                         src("https://www.nfl.com/teams/", "nfl.com")])
+            continue
+        report = ("published" if cl["report_published"]
+                  else badge("no report this week"))
+        rows.append([
+            f'<strong>{esc(cl["abbr"])}</strong>',
+            esc(cl["club"]),
+            num(cl["slots"]),
+            num(cl["offense_missing_starter"]),
+            num(cl["defense_missing_starter"]),
+            num(cl["slots_starter_at_risk"]),
+            esc(cl["deepest_string_starting"] or "1st string"),
+            report,
+            src(cl["chart_url"], "club chart"),
+        ])
+
+    def slot_rows(unit):
+        out = []
+        for s in deficient:
+            if s["unit"] != unit:
+                continue
+            out.append([
+                f'<strong>{esc(s["abbr"])}</strong>',
+                esc(s["position"]),
+                esc(s["string_label"]),
+                esc(s["starter_name"] or "blank"),
+                esc(s["starter_status"]),
+                esc(s["out_above"] or "&mdash;"),
+                src(s["chart_url"], "chart"),
+            ])
+        return out
+
+    club_note = ("Slots on a backup counts only lines where the club's own chart lists a first "
+                 "string who is Out or Doubtful on the official nfl.com report. Starters at risk "
+                 "counts lines whose first string is Questionable, did not practise, or was limited. "
+                 "Clubs on a bye or with no filed report (BAL, LAC, CHI, DEN, PHI, TB this week) "
+                 "show zero: the absence of a report is not evidence of health.")
+    merged_rows = [[f'<strong>{esc(m["abbr"])}</strong>',
+                    UNIT_LABEL.get(m["unit"], esc(m["unit"])),
+                    esc(m["position"]), num(m["rank"]), esc(m["raw"]),
+                    src(m["chart_url"], "chart")] for m in merged]
+    merged_note = (f"{len(merged)} cells hold what look like two players run together by the "
+                   f"scraper (for example two co-starters on one line). They are published "
+                   f"verbatim and flagged. Splitting them would invent a player, so it is not done.")
+    gap_rows = [[f'<strong>{esc(g["abbr"])}</strong>',
+                 UNIT_LABEL.get(g["unit"], esc(g["unit"])),
+                 esc(g["position"]), esc(g["listed"]),
+                 src(g["chart_url"], "chart")] for g in gaps]
+    gap_note = ("Lines with no first string listed at all. These are chart gaps, not injuries, "
+                "so they are excluded from every count above.")
+    defence_rows, offence_rows = slot_rows("defense"), slot_rows("offense")
+    limits_html = "".join("<li>" + esc(x) + "</li>" for x in ladder["method"]["limits"])
+    merged_table = table(["Club", "Unit", "Position", "Rank",
+                          "Cell as published on the club site", "Source"],
+                         merged_rows, note=merged_note)
+    gap_table = table(["Club", "Unit", "Position", "Players the chart lists", "Source"],
+                      gap_rows, note=gap_note) if gap_rows else ""
+    slot_headers = ["Club", "Position", "Now starting", "Player", "Their status",
+                    "Who is out above them", "Source"]
+
+    body = f"""
+<section class="kpis">
+  {kpi("Clubs with a chart", c.get("clubs_with_chart"), f'{c.get("clubs_without_chart")} of 32 publish none')}
+  {kpi("Position slots", c.get("slots"), f'{c.get("offense_slots")} offense · {c.get("defense_slots")} defence')}
+  {kpi("Backups starting", c.get("slots_started_by_a_backup"), "slots where the 1st string is Out or Doubtful")}
+  {kpi("3rd string or worse", c.get("slots_with_3rd_string_or_worse"), "no club is this thin this week")}
+  {kpi("Starters at risk", c.get("slots_starter_at_risk"), "questionable, DNP or limited")}
+  {kpi("Chart gaps flagged", c.get("chart_gap_slots"), "slots with no 1st string listed")}
+</section>
+
+<section class="panel">
+  <div class="panel-head"><h2>Every club, offence and defence</h2><a href="injuries.html">Official injury rows &rarr;</a></div>
+  {table(["Club", "Name", "Slots", "Offence slots on a backup", "Defence slots on a backup",
+          "Starters at risk", "Deepest string starting", "Injury report", "Source"], rows,
+         note=club_note)}
+</section>
+
+<section class="grid-2">
+  <div class="panel">
+    <div class="panel-head"><h2>Defence: backups pressed into duty</h2></div>
+    {table(slot_headers, defence_rows,
+           note="Empty is the honest answer when no defensive line meets the test. It is not a gap in the data.")
+     if defence_rows
+     else '<p class="empty">No defensive line this week has its first string ruled Out or Doubtful on the official report.</p>'}
+  </div>
+  <div class="panel">
+    <div class="panel-head"><h2>Offence: backups pressed into duty</h2></div>
+    {table(slot_headers, offence_rows, note="Same test, offensive unit only.")
+     if offence_rows
+     else '<p class="empty">No offensive line this week has its first string ruled Out or Doubtful on the official report.</p>'}
+  </div>
+</section>
+
+<section class="panel">
+  <div class="panel-head"><h2>How the ladder is built, and what it cannot see</h2></div>
+  <p class="muted">Club depth charts were built {esc(ladder.get("generated_at", ""))}; the injury
+  report they are joined to was scraped {esc(snap.get("generated_at", ""))}. Both are official
+  snapshots, and the page header stamp follows the model build, like every other page.</p>
+  <div class="grid-3">
+    <div class="stat"><h4>Where the ladder comes from</h4>
+      <p>{esc(ladder["method"]["depth_charts"])}</p></div>
+    <div class="stat"><h4>Who counts as unavailable</h4>
+      <p>{esc(ladder["method"]["starter_rule"])}</p></div>
+    <div class="stat"><h4>What is left blank</h4>
+      <p>{esc(ladder["method"]["no_report_clubs"])}</p></div>
+  </div>
+  <ul class="bullets">
+    {limits_html}
+  </ul>
+</section>
+
+<section class="panel">
+  <div class="panel-head"><h2>Chart defects found and published, not silently fixed</h2>
+    <a href="review.html">Flagged for Review &rarr;</a></div>
+  {merged_table}
+  {gap_table}
+</section>
+"""
+    # Stamp: the model build, like every other page. The ladder's own build time is stated in
+    # the body, because tools/check_committed_site.py reads the header stamp and the daily
+    # refresh rebuilds the model without rebuilding the ladder.
+    return page("pages/depth.html", "Depth & Deficiency", body,
+                "First, second, third and fourth string for every club, joined to the official "
+                "injury report, for the offence and the defence separately.",
+                (dash or {}).get("generated_at") or ladder.get("generated_at"))
+
+
+# ------------------------------------------------------------- correlations
+def correlations_page(corr, dash=None):
+    rows = []
+    for r in corr.get("game_level", []):
+        r_ = r.get("r")
+        ci = r.get("ci95")
+        p = r.get("p_value")
+        strong = r_ is not None and abs(r_) >= 0.10
+        rows.append([
+            f'<strong>{esc(r.get("id"))}</strong>',
+            esc(r.get("relationship")),
+            num(r.get("n")),
+            num(r_, 4) if r_ is not None else '<span class="missing">blank</span>',
+            (f"[{ci[0]:+.4f}, {ci[1]:+.4f}]" if ci else '<span class="missing">blank</span>'),
+            num(p, 4) if p is not None else '<span class="missing">blank</span>',
+            '<span class="badge pass">material</span>' if strong
+            else '<span class="badge neutral">weak</span>',
+            esc(r.get("note", "")),
+            src(r.get("source", SOURCE["schedule"]), "nfl.com"),
+        ])
+    body = f"""
+<p class="note">These figures come from a committed research extract built
+  {esc(corr.get("generated_at"))}. The daily refresh does not rebuild that extract, so this
+  page states its own extract time rather than inheriting the site stamp.</p>
+
+<section class="panel">
+  <div class="panel-head"><h2>Game-level correlations, measured</h2>
+    <a href="strategies.html">What the gates do with them &rarr;</a></div>
+  {table(["ID", "Relationship", "n", "Pearson r", "95% CI", "p", "Strength", "Why it matters", "Source"], rows,
+         note=esc(corr.get("method", "")) + " " + esc(corr.get("publication_rule", "")))}
+</section>
+
+<section class="grid-2">
+  <div class="panel">
+    <div class="panel-head"><h2>The three that decide everything</h2></div>
+    <ul class="bullets">
+      <li><strong>C1 = 0.4312.</strong> The closing spread already explains the result this well.
+        That is the bar any own line has to beat, and it is why an unvalidated model line is not a signal.</li>
+      <li><strong>C3 = 0.0190 (p = 0.113).</strong> Our disagreement with the closing line is not
+        significantly correlated with the part of the result the market got wrong. This is the single
+        most important number on the site: it is the reason no strategy is promoted.</li>
+      <li><strong>C9 = -0.0923.</strong> Wind is the only environmental variable that moves the total
+        at all, and it moves it down. Temperature does not (C8 = 0.0092, p = 0.517).</li>
+    </ul>
+  </div>
+  <div class="panel">
+    <div class="panel-head"><h2>Sample</h2></div>
+    <ul class="bullets">
+      <li>{num(corr.get("sample", {}).get("games"))} games, seasons
+        {esc(str(min(corr.get("sample", {}).get("seasons", [0]))))} to
+        {esc(str(max(corr.get("sample", {}).get("seasons", [0]))))}.</li>
+      <li>{num(corr.get("sample", {}).get("games_with_both_lines"))} carry both a closing spread and a
+        closing total, so every figure above uses paired observations only.</li>
+      <li>Relationships with fewer than 25 paired observations are published as
+        <span class="missing">blank</span>, never as a number.</li>
+    </ul>
+  </div>
+</section>
+"""
+    return page("pages/correlations.html", "Correlations", body,
+                "Measured relationships, with confidence intervals, on a 7,000-game sample.",
+                (dash or {}).get("generated_at") or corr.get("generated_at"))
+
+
+# ------------------------------------------------------------------ parlays
+def parlays_page(par, props, dash=None):
+    pairs = par.get("pairs", [])
+    rows = []
+    for p in pairs:
+        phi = p.get("leg_phi_correlation") or {}
+        rows.append([
+            esc(" + ".join(p.get("pair", []))),
+            num(p.get("n_parlays")),
+            pct(p.get("hit_rate"), 2),
+            pct(p.get("hit_rate_if_independent"), 2),
+            num(p.get("correlation_ratio"), 4),
+            num(phi.get("r"), 4) if phi.get("r") is not None else '<span class="missing">blank</span>',
+            (f'{p["roi_pct"]:.2f}%' if p.get("roi_pct") is not None
+             else '<span class="missing">blank</span>'),
+            num(p.get("p_value_bh_adjusted"), 4) if p.get("p_value_bh_adjusted") is not None
+            else '<span class="missing">blank</span>',
+            badge("PROVEN" if p.get("survives_multiple_testing_5pct") else "NOT PROVEN"),
+            src("https://www.nfl.com/schedules/", "nfl.com"),
+        ])
+    same_game = (props or {}).get("same_game_correlations", [])
+    sg_rows = [[f'<strong>{esc(s.get("id"))}</strong>', esc(s.get("relationship")), num(s.get("n")),
+                num(s.get("r"), 4) if s.get("r") is not None else '<span class="missing">blank</span>',
+                (f"[{s['ci95'][0]:+.4f}, {s['ci95'][1]:+.4f}]" if s.get("ci95")
+                 else '<span class="missing">blank</span>'),
+                num(s.get("p_value"), 4) if s.get("p_value") is not None
+                else '<span class="missing">blank</span>',
+                esc(s.get("note", "")),
+                src("https://www.nfl.com/stats/player-stats/", "nfl.com")]
+               for s in same_game]
+
+    body = f"""
+<p class="note">These figures come from a committed research extract built
+  {esc(par.get("generated_at"))}. The daily refresh does not rebuild that extract, so this
+  page states its own extract time rather than inheriting the site stamp.</p>
+
+<section class="panel">
+  <div class="panel-head"><h2>Two-leg parlays across different games</h2></div>
+  {table(["Legs", "Parlays", "Hit rate", "Hit rate if independent", "Dependence ratio",
+          "Leg correlation (phi)", "ROI", "BH-adjusted p", "Verdict", "Source"], rows,
+         note=esc(par.get("reading", "")) + " " + esc(par.get("pricing_note", "")) +
+              f" {len(pairs)} pairs tested, {par.get('n_pairs_surviving_bh_5pct')} survive correction "
+              f"for multiple testing at the 5% level. The dependence ratio is the observed joint hit "
+              f"rate divided by the product of the marginal hit rates: 1.0000 means the legs behave "
+              f"as if they were independent.")}
+</section>
+
+<section class="panel">
+  <div class="panel-head"><h2>Same-game prop combinations</h2>
+    <a href="props.html">Player projections &rarr;</a></div>
+  {table(["ID", "Combination", "n", "Pearson r", "95% CI", "p", "What it means for a combo", "Source"], sg_rows,
+         note="These are the correlations that decide whether a same-game parlay is fairly priced. "
+              "A book that prices a two-leg same-game parlay as if the legs were independent is "
+              "underpricing it whenever r is strongly positive, and the table shows where that is true.")
+    if sg_rows else '<p class="empty">No same-game correlations published.</p>'}
+</section>
+
+<section class="panel">
+  <div class="panel-head"><h2>Why no parlay on this site is a recommendation</h2></div>
+  <ul class="bullets">
+    <li>Every price used is taken from the source file for each leg. No -110 assumption is made anywhere.</li>
+    <li>Legs are combined only when both fired in the same week in <strong>different</strong> games,
+      so the independence question is about week effects, not about one play causing another.</li>
+    <li>P-values are corrected across all {len(pairs)} pairs with Benjamini-Hochberg. Testing dozens of
+      parlays and reporting the best one manufactures a winner; the correction charges for that.</li>
+    <li>{esc((props or {}).get("price_status", ""))}</li>
+  </ul>
+</section>
+"""
+    return page("pages/parlays.html", "Parlays & Combos", body,
+                "Parlay pricing, dependence between legs, and why the product rule is fair between "
+                "games and unfair inside one.",
+                (dash or {}).get("generated_at") or par.get("generated_at"))
+
+
+# ------------------------------------------------------------- skill vs luck
+def luck_page(lb, dash=None):
+    rows = []
+    for r in lb.get("luck_accounting", {}).get("rows", []):
+        band = r.get("luck_band_95_units") or [None, None]
+        rows.append([
+            esc(r.get("strategy")),
+            num(r.get("n_bets")),
+            num(r.get("profit_units"), 2),
+            f"{band[0]:+.1f} to {band[1]:+.1f}" if band[0] is not None else '<span class="missing">blank</span>',
+            num(r.get("z_vs_fair_price"), 3),
+            num(r.get("p_value_two_sided"), 4),
+            num(r.get("bets_needed_for_80pct_power")),
+            badge("outside the luck band" if r.get("profit_outside_luck_band") else "inside the luck band"),
+            src(lb.get("official_source", SOURCE["schedule"]), "nfl.com"),
+        ])
+    gates = lb.get("gate_definitions", [])
+    body = f"""
+<p class="note">These figures come from a committed research extract built
+  {esc(lb.get("generated_at"))}. The daily refresh does not rebuild that extract, so this
+  page states its own extract time rather than inheriting the site stamp.</p>
+
+<section class="panel">
+  <div class="panel-head"><h2>Every strategy against a fair-price null</h2>
+    <a href="strategies.html">Leaderboard &rarr;</a></div>
+  {table(["Strategy", "Bets", "Profit (units)", "95% luck band", "z", "p", "Bets needed for 80% power",
+          "Verdict", "Source"], rows,
+         note=esc(lb.get("luck_accounting", {}).get("method", "")) + " " +
+              esc(lb.get("luck_accounting", {}).get("note", "")))}
+</section>
+
+<section class="panel">
+  <div class="panel-head"><h2>The eight gates</h2></div>
+  {table(["Gate", "Requirement", "Why it exists"],
+         [[f'<strong>{esc(g["id"])}</strong>', esc(g["name"]), esc(g["why"])] for g in gates],
+         note=f"{len(gates)} gates, fixed before any strategy was evaluated. A strategy must clear all "
+              f"{len(gates)} to be called proven; the leaderboard publishes how many each one cleared.")}
+</section>
+
+<section class="grid-2">
+  <div class="panel">
+    <div class="panel-head"><h2>What "removing luck" actually means here</h2></div>
+    <ul class="bullets">
+      <li><strong>A fair-price null, not a simulation.</strong> If the observed prices are fair, a
+        1-unit bet at decimal odds d has mean profit 0 and variance d-1. The 95% band on total profit
+        is therefore ±1.96·sqrt(Σ(d-1)) over the bets actually placed.</li>
+      <li><strong>Multiple testing.</strong> {lb.get("n_strategies")} rules were tested; every p-value
+        is Benjamini-Hochberg corrected, so the best of a dozen rules cannot buy significance.</li>
+      <li><strong>Holdout.</strong> 2024 and 2025 were never used to tune thresholds and are scored
+        separately.</li>
+      <li><strong>Power, not just significance.</strong> Where the bets needed for 80% power exceeds
+        any realistic season, the honest answer is that this sample cannot settle the question.</li>
+    </ul>
+  </div>
+  <div class="panel">
+    <div class="panel-head"><h2>What the sample cannot settle</h2></div>
+    <ul class="bullets">
+      <li>{num(lb.get("totals", {}).get("bets_scored"))} bets scored across
+        {num(lb.get("totals", {}).get("games_in_sample"))} games.</li>
+      <li>{num(lb.get("unscored_games_no_price"))} games in the extract carry no published price. They
+        are used for training and are never scored, because scoring them would require inventing a price.</li>
+      <li>Every scored bet carries an observed price
+        ({esc(str(lb.get("totals", {}).get("all_prices_observed")))}). No vig assumption is applied.</li>
+    </ul>
+  </div>
+</section>
+"""
+    return page("pages/luck.html", "Skill vs Luck", body,
+                "What a purely lucky run would have produced, and whether any strategy left that band.",
+                (dash or {}).get("generated_at") or lb.get("generated_at"))
+
+
 def main():
     snap = load("snapshot.json")
     dash = load("dashboard.json")
@@ -1908,14 +2113,20 @@ def main():
     write("index.html", overview(snap, dash, lines, strat, avail, props, verif))
     write("pages/sections.html", sections_page(dash))
     write("pages/lines.html", lines_page(snap, lines, dash))
+    write("pages/correlations.html",
+          correlations_page(load_rel("data/s9cb/correlations.json"), dash))
     write("pages/strategies.html", strategies_page(strat, dash))
-    write("pages/injuries.html", injuries_page(avail, dash))
+    write("pages/luck.html", luck_page(load_rel("data/s9cb/leaderboard.json"), dash))
+    write("pages/parlays.html", parlays_page(load_rel("data/s9cb/parlays.json"),
+                                             load_rel("data/s9cb/props.json"), dash))
     write("pages/props.html", props_page(props, dash))
+    write("pages/injuries.html", injuries_page(avail, dash))
+    write("pages/depth.html",
+          depth_page(load_rel("data/depth_ladder.json"), snap, dash))
     write("pages/evidence.html", evidence_page(prov, verif, dash, repl))
     write("pages/questions.html", questions_page(dash))
     write("pages/suggestions.html", suggestions_page(dash))
     write("pages/review.html", review_page(verif, strat, dash, avail))
-    write("pages/audit.html", audit_page(load_audit(), dash))
     write("pages/executive.html", executive_page(snap, dash, lines, strat, avail, verif, prov))
     # keep old URLs working
     for old in ("models", "teams", "standings", "injuries_old"):

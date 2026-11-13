@@ -1,0 +1,435 @@
+{
+ "generated_at": "2026-11-13T13:14:06+00:00",
+ "standings": {
+  "rows_compared": 32,
+  "fields_compared": 224,
+  "differences": [
+   {
+    "team": "NYG",
+    "field": "l",
+    "official": 3,
+    "repo": "2"
+   },
+   {
+    "team": "NYG",
+    "field": "pf",
+    "official": 203,
+    "repo": "182"
+   },
+   {
+    "team": "NYG",
+    "field": "pa",
+    "official": 196,
+    "repo": "172"
+   },
+   {
+    "team": "NYG",
+    "field": "pct",
+    "official": 0.611,
+    "repo": "0.688"
+   },
+   {
+    "team": "NYG",
+    "field": "streak",
+    "official": "1L",
+    "repo": "2W"
+   },
+   {
+    "team": "WAS",
+    "field": "w",
+    "official": 3,
+    "repo": "2"
+   },
+   {
+    "team": "WAS",
+    "field": "pf",
+    "official": 196,
+    "repo": "172"
+   },
+   {
+    "team": "WAS",
+    "field": "pa",
+    "official": 223,
+    "repo": "202"
+   },
+   {
+    "team": "WAS",
+    "field": "pct",
+    "official": 0.389,
+    "repo": "0.313"
+   },
+   {
+    "team": "WAS",
+    "field": "streak",
+    "official": "1W",
+    "repo": "1L"
+   }
+  ]
+ },
+ "injuries": {
+  "transcription_file": "data/verified/injury_report_2026_week10.tsv",
+  "transcription_rows": 254,
+  "transcription_retrieved": "2026-11-12T05:30Z",
+  "official_scrape_file": "data/model/official_injuries.json",
+  "official_scrape_url": "https://www.nfl.com/injuries/",
+  "official_scrape_rows": 296,
+  "official_scrape_generated": "2026-11-13T13:04:40+00:00",
+  "official_scrape_html_sha256": "87123af0830605cab7292c412e24661312f188dae2dfdf007d4f6013ffb5ca9b",
+  "players_in_official_not_in_transcription": 55,
+  "players_in_transcription_not_in_official": 13,
+  "extra_examples": [
+   "AZ Bam Knight",
+   "AZ Budda Baker",
+   "AZ Dante Stills",
+   "AZ Hjalte Froholdt",
+   "AZ Hunter Long",
+   "AZ Isaac Seumalo"
+  ],
+  "missing_examples": [
+   "ARI Andrew Wingard",
+   "ARI Bam Knight",
+   "ARI Budda Baker",
+   "ARI Dante Stills",
+   "ARI Darius Robinson",
+   "ARI Hjalte Froholdt"
+  ],
+  "differing_fields": 43,
+  "differing_detail": [
+   {
+    "club": "NE",
+    "player": "Cameron Latu",
+    "field": "practice",
+    "official_scrape": "Limited Participation in Practice",
+    "transcription": "Did Not Participate In Practice"
+   },
+   {
+    "club": "NE",
+    "player": "Walter Rouse",
+    "field": "practice",
+    "official_scrape": "Limited Participation in Practice",
+    "transcription": "Did Not Participate In Practice"
+   },
+   {
+    "club": "NE",
+    "player": "Brenden Schooler",
+    "field": "practice",
+    "official_scrape": "Limited Participation in Practice",
+    "transcription": "Did Not Participate In Practice"
+   },
+   {
+    "club": "NE",
+    "player": "Rhamondre Stevenson",
+    "field": "practice",
+    "official_scrape": "Limited Participation in Practice",
+    "transcription": "Did Not Participate In Practice"
+   },
+   {
+    "club": "DET",
+    "player": "Brian Branch",
+    "field": "practice",
+    "official_scrape": "Full Participation in Practice",
+    "transcription": "Limited Participation in Practice"
+   },
+   {
+    "club": "DET",
+    "player": "Jared Goff",
+    "field": "practice",
+    "official_scrape": "Full Participation in Practice",
+    "transcription": "Limited Participation in Practice"
+   },
+   {
+    "club": "DET",
+    "player": "Kerby Joseph",
+    "field": "injury",
+    "official_scrape": "Knee",
+    "transcription": "(blank)"
+   },
+   {
+    "club": "DET",
+    "player": "Kerby Joseph",
+    "field": "practice",
+    "official_scrape": "Full Participation in Practice",
+    "transcription": "Limited Participation in Practice"
+   },
+   {
+    "club": "DET",
+    "player": "Kerby Joseph",
+    "field": "game",
+    "official_scrape": "Out",
+    "transcription": "(blank)"
+   },
+   {
+    "club": "DET",
+    "player": "Cade Mays",
+    "field": "injury",
+    "official_scrape": "Ankle",
+    "transcription": "(blank)"
+   },
+   {
+    "club": "DET",
+    "player": "Cade Mays",
+    "field": "game",
+    "official_scrape": "Out",
+    "transcription": "(blank)"
+   },
+   {
+    "club": "DET",
+    "player": "D.J. Reed",
+    "field": "injury",
+    "official_scrape": "Hip",
+    "transcription": "(blank)"
+   },
+   {
+    "club": "DET",
+    "player": "D.J. Reed",
+    "field": "game",
+    "official_scrape": "Out",
+    "transcription": "(blank)"
+   },
+   {
+    "club": "ATL",
+    "player": "Divine Deablo",
+    "field": "practice",
+    "official_scrape": "Did Not Participate In Practice",
+    "transcription": "Limited Participation in Practice"
+   },
+   {
+    "club": "ATL",
+    "player": "Gervon Dexter Sr.",
+    "field": "practice",
+    "official_scrape": "Limited Participation in Practice",
+    "transcription": "Did Not Participate In Practice"
+   },
+   {
+    "club": "ATL",
+    "player": "James Pearce Jr.",
+    "field": "practice",
+    "official_scrape": "Limited Participation in Practice",
+    "transcription": "Did Not Participate In Practice"
+   },
+   {
+    "club": "ATL",
+    "player": "Za'Darius Smith",
+    "field": "practice",
+    "official_scrape": "Full Participation in Practice",
+    "transcription": "Did Not Participate In Practice"
+   },
+   {
+    "club": "ATL",
+    "player": "Josh Woods",
+    "field": "practice",
+    "official_scrape": "Limited Participation in Practice",
+    "transcription": "Did Not Participate In Practice"
+   },
+   {
+    "club": "GB",
+    "player": "Trey Smack",
+    "field": "practice",
+    "official_scrape": "Full Participation in Practice",
+    "transcription": "Limited Participation in Practice"
+   },
+   {
+    "club": "JAX",
+    "player": "Jakobi Meyers",
+    "field": "practice",
+    "official_scrape": "Limited Participation in Practice",
+    "transcription": "Did Not Participate In Practice"
+   },
+   {
+    "club": "JAX",
+    "player": "Travon Walker",
+    "field": "practice",
+    "official_scrape": "Limited Participation in Practice",
+    "transcription": "Did Not Participate In Practice"
+   },
+   {
+    "club": "TEN",
+    "player": "Tony Pollard",
+    "field": "practice",
+    "official_scrape": "Did Not Participate In Practice",
+    "transcription": "Full Participation in Practice"
+   },
+   {
+    "club": "TEN",
+    "player": "Tyjae Spears",
+    "field": "practice",
+    "official_scrape": "Limited Participation in Practice",
+    "transcription": "Did Not Participate In Practice"
+   },
+   {
+    "club": "TEN",
+    "player": "Kevin Winston Jr.",
+    "field": "practice",
+    "official_scrape": "Limited Participation in Practice",
+    "transcription": "Full Participation in Practice"
+   },
+   {
+    "club": "BUF",
+    "player": "Spencer Brown",
+    "field": "practice",
+    "official_scrape": "Did Not Participate In Practice",
+    "transcription": "Limited Participation in Practice"
+   },
+   {
+    "club": "MIA",
+    "player": "Chris Bell",
+    "field": "practice",
+    "official_scrape": "Did Not Participate In Practice",
+    "transcription": "Limited Participation in Practice"
+   },
+   {
+    "club": "MIA",
+    "player": "Will Kacmarek",
+    "field": "practice",
+    "official_scrape": "Limited Participation in Practice",
+    "transcription": "Did Not Participate In Practice"
+   },
+   {
+    "club": "IND",
+    "player": "A.J. Haulcy",
+    "field": "practice",
+    "official_scrape": "Full Participation in Practice",
+    "transcription": "Did Not Participate In Practice"
+   },
+   {
+    "club": "IND",
+    "player": "Jonathan Taylor",
+    "field": "practice",
+    "official_scrape": "Full Participation in Practice",
+    "transcription": "Limited Participation in Practice"
+   },
+   {
+    "club": "IND",
+    "player": "Jerry Tillery",
+    "field": "practice",
+    "official_scrape": "Did Not Participate In Practice",
+    "transcription": "Limited Participation in Practice"
+   },
+   {
+    "club": "IND",
+    "player": "Charvarius Ward",
+    "field": "practice",
+    "official_scrape": "Full Participation in Practice",
+    "transcription": "Did Not Participate In Practice"
+   },
+   {
+    "club": "CAR",
+    "player": "Chuba Hubbard",
+    "field": "practice",
+    "official_scrape": "Full Participation in Practice",
+    "transcription": "Did Not Participate In Practice"
+   },
+   {
+    "club": "CAR",
+    "player": "Damien Lewis",
+    "field": "practice",
+    "official_scrape": "Limited Participation in Practice",
+    "transcription": "Full Participation in Practice"
+   },
+   {
+    "club": "CAR",
+    "player": "Jaelan Phillips",
+    "field": "practice",
+    "official_scrape": "Limited Participation in Practice",
+    "transcription": "Full Participation in Practice"
+   },
+   {
+    "club": "NO",
+    "player": "Noah Fant",
+    "field": "practice",
+    "official_scrape": "Full Participation in Practice",
+    "transcription": "Limited Participation in Practice"
+   },
+   {
+    "club": "NO",
+    "player": "Alvin Kamara",
+    "field": "practice",
+    "official_scrape": "Full Participation in Practice",
+    "transcription": "Did Not Participate In Practice"
+   },
+   {
+    "club": "NO",
+    "player": "Christen Miller",
+    "field": "practice",
+    "official_scrape": "Did Not Participate In Practice",
+    "transcription": "Limited Participation in Practice"
+   },
+   {
+    "club": "CLE",
+    "player": "Elgton Jenkins",
+    "field": "practice",
+    "official_scrape": "Limited Participation in Practice",
+    "transcription": "Did Not Participate In Practice"
+   },
+   {
+    "club": "LV",
+    "player": "Foley Fatukasi",
+    "field": "practice",
+    "official_scrape": "Full Participation in Practice",
+    "transcription": "Limited Participation in Practice"
+   },
+   {
+    "club": "DAL",
+    "player": "DeMarvion Overshown",
+    "field": "practice",
+    "official_scrape": "Full Participation in Practice",
+    "transcription": "Limited Participation in Practice"
+   },
+   {
+    "club": "PIT",
+    "player": "DeShon Elliott",
+    "field": "practice",
+    "official_scrape": "Full Participation in Practice",
+    "transcription": "Limited Participation in Practice"
+   },
+   {
+    "club": "PIT",
+    "player": "Darnell Washington",
+    "field": "practice",
+    "official_scrape": "Full Participation in Practice",
+    "transcription": "Did Not Participate In Practice"
+   },
+   {
+    "club": "PIT",
+    "player": "T.J. Watt",
+    "field": "practice",
+    "official_scrape": "Limited Participation in Practice",
+    "transcription": "Did Not Participate In Practice"
+   }
+  ],
+  "differing_by_field": {
+   "injury": 3,
+   "practice": 37,
+   "game": 3
+  },
+  "note": "The scrape is the direct record of the official page and is used as the witness. Differences are expected to run one way: the transcription is the later, hand-made copy and any value it lacks is an omission, not evidence that the official page changed its mind.",
+  "clubs_listed": 24
+ },
+ "schedule": {
+  "official_games": 14,
+  "repo_games": 14,
+  "games_missing_from_repo": [],
+  "games_extra_in_repo": [],
+  "byes_official": [
+   "CHI",
+   "DEN",
+   "PHI",
+   "TB"
+  ],
+  "byes_repo_week10": [
+   "CHI",
+   "DEN",
+   "PHI",
+   "TB"
+  ],
+  "byes_match": true,
+  "played_results_repo": 0,
+  "played_results_official": 1,
+  "note": "The committed fixtures file lists the WAS @ NYG game as upcoming. nfl.com now shows it final (WAS 24 - NYG 21)."
+ },
+ "sources": {
+  "standings": "https://www.nfl.com/standings/league/2026/reg",
+  "week10_schedule": "https://www.nfl.com/schedules/2026/reg10",
+  "injuries": "https://www.nfl.com/injuries/"
+ }
+}

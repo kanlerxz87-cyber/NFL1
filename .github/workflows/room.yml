@@ -1,0 +1,53 @@
+name: Decision Room build and gate
+
+# The Decision Room (room/) is a self-contained, source-linked site built from
+# room/data/*.json. This workflow rebuilds it from data and fails if the committed
+# pages are stale, if any table row lost its source link, or if any page is
+# unreachable. It writes nothing back: the committed pages are the artifact.
+#
+# It does not touch index.html, pages/, or any other session's output.
+
+on:
+  push:
+    paths:
+      - "room/**"
+      - "data/official/**"
+      - ".github/workflows/room.yml"
+  pull_request:
+    paths:
+      - "room/**"
+      - "data/official/**"
+      - ".github/workflows/room.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: room-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Rebuild every page from the committed data
+        run: python3 room/build.py
+      - name: Verify source links, blanks, links and reachability
+        run: python3 room/verify.py
+      - name: Fail if the committed pages differ from the rebuild
+        run: |
+          if ! git diff --quiet -- room/; then
+            echo "::error::room/ pages are stale. Run 'python3 room/build.py' and commit the result."
+            git diff --stat -- room/
+            exit 1
+          fi
+          echo "Committed room pages are reproducible from room/data."
+      - name: Report the gate summary
+        run: |
+          echo "room pages: $(ls room/*.html | wc -l)"
+          echo "data files: $(ls room/data/*.json | wc -l)"

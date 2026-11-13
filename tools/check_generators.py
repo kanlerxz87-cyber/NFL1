@@ -32,7 +32,7 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 GENERATORS = {
     "pipeline/gen_site.py": [r'write\(\s*"([^"]+\.html)"'],
     "tools/build.py": [r'write_page\(\s*"([^"]+\.html)"'],
-    "scripts/verified/build_site.py": [r'\(PAGES / fname\)'],
+    "scripts/verified/build_site.py": [r'\(PAGES / fname\)', r'"([a-z0-9-]+\.html)": \('],
     "tools/build_dashboard.py": [r'web/[a-z-]+\.html'],
 }
 
@@ -40,6 +40,7 @@ GENERATORS = {
 KNOWN_OWNERS = {
     "index.html": "pipeline/gen_site.py",
     "pages/lines.html": "pipeline/gen_site.py",
+    "pages/verified-lines.html": "scripts/verified/build_site.py",
     "pages/strategies.html": "pipeline/gen_site.py",
     "pages/injuries.html": "pipeline/gen_site.py",
     "pages/props.html": "pipeline/gen_site.py",
@@ -79,8 +80,10 @@ def claims():
                 if m.groups():
                     found.add(m.group(1))
         if gen == "scripts/verified/build_site.py":
+            # dict keys are bare filenames; the generator writes them under pages/
+            found = {(f if "/" in f else "pages/" + f) for f in found}
             found |= {"pages/data.html", "pages/analysis.html", "pages/decisions.html",
-                      "pages/verified.html"}
+                      "pages/verified.html", "pages/verified-lines.html"}
         if gen == "tools/build_dashboard.py":
             found |= set(DASHBOARD_PAGES)
         for f in found:

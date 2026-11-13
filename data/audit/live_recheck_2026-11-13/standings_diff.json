@@ -1,0 +1,300 @@
+{
+ "checked_against": "https://www.nfl.com/standings/league/2026/reg (fetched 2026-11-13)",
+ "clubs": 32,
+ "files": {
+  "data/verified/standings_2026.csv": {
+   "rows": 32,
+   "rows_matching_live": 30,
+   "mismatches": [
+    {
+     "club": "NYG",
+     "diffs": {
+      "l": {
+       "repo": "2",
+       "live": "3"
+      },
+      "pct": {
+       "repo": "0.688",
+       "live": "0.611"
+      },
+      "pf": {
+       "repo": "182",
+       "live": "203"
+      },
+      "pa": {
+       "repo": "172",
+       "live": "196"
+      },
+      "net": {
+       "repo": "10",
+       "live": "7"
+      }
+     }
+    },
+    {
+     "club": "WAS",
+     "diffs": {
+      "w": {
+       "repo": "2",
+       "live": "3"
+      },
+      "pct": {
+       "repo": "0.313",
+       "live": "0.389"
+      },
+      "pf": {
+       "repo": "172",
+       "live": "196"
+      },
+      "pa": {
+       "repo": "202",
+       "live": "223"
+      },
+      "net": {
+       "repo": "-30",
+       "live": "-27"
+      }
+     }
+    }
+   ],
+   "clubs_missing_from_file": []
+  },
+  "data/verified/standings_2026_reg.tsv": {
+   "rows": 32,
+   "rows_matching_live": 30,
+   "mismatches": [
+    {
+     "club": "NYG",
+     "diffs": {
+      "l": {
+       "repo": "2",
+       "live": "3"
+      },
+      "pct": {
+       "repo": "0.688",
+       "live": "0.611"
+      },
+      "pf": {
+       "repo": "182",
+       "live": "203"
+      },
+      "pa": {
+       "repo": "172",
+       "live": "196"
+      },
+      "net": {
+       "repo": "10",
+       "live": "7"
+      }
+     }
+    },
+    {
+     "club": "WAS",
+     "diffs": {
+      "w": {
+       "repo": "2",
+       "live": "3"
+      },
+      "pct": {
+       "repo": "0.313",
+       "live": "0.389"
+      },
+      "pf": {
+       "repo": "172",
+       "live": "196"
+      },
+      "pa": {
+       "repo": "202",
+       "live": "223"
+      },
+      "net": {
+       "repo": "-30",
+       "live": "-27"
+      }
+     }
+    }
+   ],
+   "clubs_missing_from_file": []
+  },
+  "data/verified/official_standings_2026.json": {
+   "rows": 32,
+   "rows_matching_live": 30,
+   "mismatches": [
+    {
+     "club": "NYG",
+     "diffs": {
+      "l": {
+       "repo": "2",
+       "live": "3"
+      },
+      "pf": {
+       "repo": "182",
+       "live": "203"
+      },
+      "pa": {
+       "repo": "172",
+       "live": "196"
+      }
+     }
+    },
+    {
+     "club": "WAS",
+     "diffs": {
+      "w": {
+       "repo": "2",
+       "live": "3"
+      },
+      "pf": {
+       "repo": "172",
+       "live": "196"
+      },
+      "pa": {
+       "repo": "202",
+       "live": "223"
+      }
+     }
+    }
+   ],
+   "clubs_missing_from_file": []
+  },
+  "data/s9cb/official_standings_2026.csv": {
+   "rows": 32,
+   "rows_matching_live": 30,
+   "mismatches": [
+    {
+     "club": "NYG",
+     "diffs": {
+      "l": {
+       "repo": "2",
+       "live": "3"
+      },
+      "pct": {
+       "repo": "0.688",
+       "live": "0.611"
+      },
+      "pf": {
+       "repo": "182",
+       "live": "203"
+      },
+      "pa": {
+       "repo": "172",
+       "live": "196"
+      },
+      "net": {
+       "repo": "10",
+       "live": "7"
+      }
+     }
+    },
+    {
+     "club": "WAS",
+     "diffs": {
+      "w": {
+       "repo": "2",
+       "live": "3"
+      },
+      "pct": {
+       "repo": "0.313",
+       "live": "0.389"
+      },
+      "pf": {
+       "repo": "172",
+       "live": "196"
+      },
+      "pa": {
+       "repo": "202",
+       "live": "223"
+      },
+      "net": {
+       "repo": "-30",
+       "live": "-27"
+      }
+     }
+    }
+   ],
+   "clubs_missing_from_file": []
+  },
+  "data/derived_standings.json": {
+   "rows": 32,
+   "rows_matching_live": 30,
+   "mismatches": [
+    {
+     "club": "NYG",
+     "diffs": {
+      "games": {
+       "repo": 8,
+       "live_recomputed": 9
+      },
+      "pf_pg": {
+       "repo": 22.75,
+       "live_recomputed": 22.556
+      },
+      "pa_pg": {
+       "repo": 21.5,
+       "live_recomputed": 21.778
+      },
+      "net_pg": {
+       "repo": 1.25,
+       "live_recomputed": 0.778
+      }
+     }
+    },
+    {
+     "club": "WAS",
+     "diffs": {
+      "games": {
+       "repo": 8,
+       "live_recomputed": 9
+      },
+      "pf_pg": {
+       "repo": 21.5,
+       "live_recomputed": 21.778
+      },
+      "pa_pg": {
+       "repo": 25.25,
+       "live_recomputed": 24.778
+      },
+      "net_pg": {
+       "repo": -3.75,
+       "live_recomputed": -3.0
+      }
+     }
+    }
+   ],
+   "note": "compared after recomputing per-game values from live totals (no repo row copied)"
+  },
+  "data/model/snapshot.json (standings)": {
+   "rows": 32,
+   "rows_matching_live": 30,
+   "mismatches": [
+    {
+     "club": "NYG",
+     "diffs": {
+      "l": {
+       "repo": "2",
+       "live": "3"
+      },
+      "pct": {
+       "repo": "0.688",
+       "live": "0.611"
+      }
+     }
+    },
+    {
+     "club": "WAS",
+     "diffs": {
+      "w": {
+       "repo": "2",
+       "live": "3"
+      },
+      "pct": {
+       "repo": "0.313",
+       "live": "0.389"
+      }
+     }
+    }
+   ],
+   "clubs_missing_from_file": []
+  }
+ }
+}

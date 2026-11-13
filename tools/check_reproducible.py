@@ -30,11 +30,16 @@ import sys
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
 ISO = re.compile(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})?")
+# session 65df4799-nfl1: scripts/verified/build_site.py stamps pages as
+# "YYYY-MM-DD HH:MM UTC" (strftime, not ISO). Without this, every rebuild of those
+# pages looked like a reproducibility failure while changing only the clock.
+STAMP = re.compile(r"\d{4}-\d{2}-\d{2} \d{2}:\d{2} UTC")
+CLOCK = re.compile(r"\b\d{2}:\d{2} UTC\b")
 DATE_ONLY = re.compile(r"\d{4}-\d{2}-\d{2}")
 
 
 def norm(line: str) -> str:
-    return DATE_ONLY.sub("<DATE>", ISO.sub("<TS>", line)).rstrip()
+    return DATE_ONLY.sub("<DATE>", CLOCK.sub("<TIME>", STAMP.sub("<TS>", ISO.sub("<TS>", line)))).rstrip()
 
 
 def git(*args: str) -> str:

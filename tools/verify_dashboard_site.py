@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Independent checks on dashboard/*.html. Run after tools/build_dashboard_site.py.
 
-RENAMED during the d23c65ad integration merge (2026-11-13) to clear the name collision
-with session 6e8ca348's tools/verify_dashboard.py, which checks web/.
+NOTE (integration session 65df4799-nfl1): this file was originally named
+``tools/verify_dashboard.py`` (session 6a232e79-nfl1) and was renamed alongside
+``tools/build_dashboard_site.py`` when the name was taken over by the web/
+verifier from session 6e8ca348-nfl1. Nothing else was changed.
 
 Hard failures (exit 1):
   * a table row in tbody has no link at all

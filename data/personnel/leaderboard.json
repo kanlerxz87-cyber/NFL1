@@ -1,0 +1,1322 @@
+{
+ "n_new_strategies": 5,
+ "n_prior_strategies_in_family": 12,
+ "family_size_for_multiple_testing": 17,
+ "leaderboard": [
+  {
+   "strategy": "P03 Under when combined ruled-out production share is high",
+   "n_bets": 329,
+   "n_decided": 324,
+   "n_pushes": 5,
+   "wins": 151,
+   "losses": 173,
+   "hit_rate": 0.466,
+   "break_even_hit_rate": 0.5189,
+   "profit_units": -32.96,
+   "roi": -0.10018,
+   "roi_pct": -10.018,
+   "avg_decimal_odds": 1.9281,
+   "sd_profit_per_bet": 0.9561,
+   "t_stat": -1.9006,
+   "p_value": 0.058229,
+   "p_value_binomial_vs_breakeven": 0.058789,
+   "roi_ci95": [
+    -0.204415,
+    0.005529
+   ],
+   "luck": {
+    "n_bets": 329,
+    "net_profit_units": -32.96,
+    "profit_share_from_best_5pct_of_bets": -0.4873,
+    "profit_share_from_best_single_bet": -0.0316,
+    "longest_losing_streak": 13,
+    "expected_longest_losing_streak_at_observed_hit_rate": 8.21,
+    "max_drawdown_units": -40.415,
+    "skill_gap_hit_minus_breakeven": -0.0528,
+    "verdict": "no positive return to explain: there is nothing here for luck to have caused, and the rule loses money in this sample"
+   },
+   "seasons": [
+    {
+     "season": 2019,
+     "n_bets": 36,
+     "hit_rate": 0.4167,
+     "profit_units": -6.738,
+     "roi_pct": -18.715
+    },
+    {
+     "season": 2020,
+     "n_bets": 41,
+     "hit_rate": 0.4634,
+     "profit_units": -3.849,
+     "roi_pct": -9.387
+    },
+    {
+     "season": 2021,
+     "n_bets": 45,
+     "hit_rate": 0.5,
+     "profit_units": -1.168,
+     "roi_pct": -2.595
+    },
+    {
+     "season": 2022,
+     "n_bets": 54,
+     "hit_rate": 0.566,
+     "profit_units": 4.888,
+     "roi_pct": 9.052
+    },
+    {
+     "season": 2023,
+     "n_bets": 39,
+     "hit_rate": 0.5,
+     "profit_units": -1.724,
+     "roi_pct": -4.421
+    },
+    {
+     "season": 2024,
+     "n_bets": 39,
+     "hit_rate": 0.3333,
+     "profit_units": -14.248,
+     "roi_pct": -36.534
+    },
+    {
+     "season": 2025,
+     "n_bets": 48,
+     "hit_rate": 0.3542,
+     "profit_units": -15.807,
+     "roi_pct": -32.931
+    },
+    {
+     "season": 2026,
+     "n_bets": 27,
+     "hit_rate": 0.6296,
+     "profit_units": 5.685,
+     "roi_pct": 21.054
+    }
+   ],
+   "seasons_positive": 2,
+   "seasons_evaluated": 8,
+   "leave_one_season_out": {
+    "2019": {
+     "roi_pct": -8.95,
+     "profit_units": -26.223,
+     "n_bets": 293
+    },
+    "2020": {
+     "roi_pct": -10.108,
+     "profit_units": -29.112,
+     "n_bets": 288
+    },
+    "2021": {
+     "roi_pct": -11.195,
+     "profit_units": -31.792,
+     "n_bets": 284
+    },
+    "2022": {
+     "roi_pct": -13.763,
+     "profit_units": -37.848,
+     "n_bets": 275
+    },
+    "2023": {
+     "roi_pct": -10.771,
+     "profit_units": -31.236,
+     "n_bets": 290
+    },
+    "2024": {
+     "roi_pct": -6.452,
+     "profit_units": -18.712,
+     "n_bets": 290
+    },
+    "2025": {
+     "roi_pct": -6.104,
+     "profit_units": -17.154,
+     "n_bets": 281
+    },
+    "2026": {
+     "roi_pct": -12.796,
+     "profit_units": -38.645,
+     "n_bets": 302
+    }
+   },
+   "worst_case_roi_pct_after_dropping_a_season": -13.763,
+   "holdout_2024_2025": {
+    "n_bets": 87,
+    "roi_pct": -34.546,
+    "hit_rate": 0.3448
+   },
+   "gates": {
+    "G1": true,
+    "G2": true,
+    "G3": true,
+    "G4": false,
+    "G5": false,
+    "G6": false,
+    "G7": false,
+    "G8": false
+   },
+   "p_value_bh_adjusted_whole_family": 0.494947,
+   "gates_passed": [
+    "G1",
+    "G2",
+    "G3"
+   ],
+   "n_gates_passed": 3,
+   "status": "FAIL",
+   "rank_by_p_value": 1
+  },
+  {
+   "strategy": "P01 Back the opponent when the club starts a backup QB",
+   "n_bets": 979,
+   "n_decided": 951,
+   "n_pushes": 28,
+   "wins": 468,
+   "losses": 483,
+   "hit_rate": 0.4921,
+   "break_even_hit_rate": 0.5117,
+   "profit_units": -36.335,
+   "roi": -0.03711,
+   "roi_pct": -3.711,
+   "avg_decimal_odds": 1.9569,
+   "sd_profit_per_bet": 0.965,
+   "t_stat": -1.2034,
+   "p_value": 0.2291,
+   "p_value_binomial_vs_breakeven": 0.230195,
+   "roi_ci95": [
+    -0.097228,
+    0.024321
+   ],
+   "luck": {
+    "n_bets": 979,
+    "net_profit_units": -36.335,
+    "profit_share_from_best_5pct_of_bets": -1.4785,
+    "profit_share_from_best_single_bet": -0.033,
+    "longest_losing_streak": 8,
+    "expected_longest_losing_streak_at_observed_hit_rate": 9.12,
+    "max_drawdown_units": -51.15,
+    "skill_gap_hit_minus_breakeven": -0.0196,
+    "verdict": "no positive return to explain: there is nothing here for luck to have caused, and the rule loses money in this sample"
+   },
+   "seasons": [
+    {
+     "season": 2006,
+     "n_bets": 21,
+     "hit_rate": 0.5789,
+     "profit_units": 2.876,
+     "roi_pct": 13.695
+    },
+    {
+     "season": 2007,
+     "n_bets": 74,
+     "hit_rate": 0.5352,
+     "profit_units": 3.069,
+     "roi_pct": 4.147
+    },
+    {
+     "season": 2008,
+     "n_bets": 30,
+     "hit_rate": 0.5357,
+     "profit_units": 1.569,
+     "roi_pct": 5.229
+    },
+    {
+     "season": 2009,
+     "n_bets": 44,
+     "hit_rate": 0.4286,
+     "profit_units": -6.314,
+     "roi_pct": -14.349
+    },
+    {
+     "season": 2010,
+     "n_bets": 55,
+     "hit_rate": 0.4727,
+     "profit_units": -3.51,
+     "roi_pct": -6.381
+    },
+    {
+     "season": 2011,
+     "n_bets": 40,
+     "hit_rate": 0.5135,
+     "profit_units": 0.45,
+     "roi_pct": 1.125
+    },
+    {
+     "season": 2012,
+     "n_bets": 34,
+     "hit_rate": 0.5625,
+     "profit_units": 3.82,
+     "roi_pct": 11.236
+    },
+    {
+     "season": 2013,
+     "n_bets": 46,
+     "hit_rate": 0.5,
+     "profit_units": -0.668,
+     "roi_pct": -1.452
+    },
+    {
+     "season": 2014,
+     "n_bets": 46,
+     "hit_rate": 0.4444,
+     "profit_units": -5.226,
+     "roi_pct": -11.361
+    },
+    {
+     "season": 2015,
+     "n_bets": 49,
+     "hit_rate": 0.4468,
+     "profit_units": -5.447,
+     "roi_pct": -11.117
+    },
+    {
+     "season": 2016,
+     "n_bets": 43,
+     "hit_rate": 0.5349,
+     "profit_units": 2.188,
+     "roi_pct": 5.089
+    },
+    {
+     "season": 2017,
+     "n_bets": 46,
+     "hit_rate": 0.6222,
+     "profit_units": 9.676,
+     "roi_pct": 21.035
+    },
+    {
+     "season": 2018,
+     "n_bets": 41,
+     "hit_rate": 0.475,
+     "profit_units": -2.747,
+     "roi_pct": -6.701
+    },
+    {
+     "season": 2019,
+     "n_bets": 51,
+     "hit_rate": 0.4694,
+     "profit_units": -3.895,
+     "roi_pct": -7.637
+    },
+    {
+     "season": 2020,
+     "n_bets": 55,
+     "hit_rate": 0.4545,
+     "profit_units": -5.742,
+     "roi_pct": -10.44
+    },
+    {
+     "season": 2021,
+     "n_bets": 60,
+     "hit_rate": 0.4833,
+     "profit_units": -3.898,
+     "roi_pct": -6.496
+    },
+    {
+     "season": 2022,
+     "n_bets": 57,
+     "hit_rate": 0.4545,
+     "profit_units": -6.05,
+     "roi_pct": -10.614
+    },
+    {
+     "season": 2023,
+     "n_bets": 54,
+     "hit_rate": 0.5098,
+     "profit_units": -1.354,
+     "roi_pct": -2.508
+    },
+    {
+     "season": 2024,
+     "n_bets": 47,
+     "hit_rate": 0.5319,
+     "profit_units": 0.949,
+     "roi_pct": 2.019
+    },
+    {
+     "season": 2025,
+     "n_bets": 55,
+     "hit_rate": 0.3889,
+     "profit_units": -14.385,
+     "roi_pct": -26.155
+    },
+    {
+     "season": 2026,
+     "n_bets": 31,
+     "hit_rate": 0.5,
+     "profit_units": -1.696,
+     "roi_pct": -5.47
+    }
+   ],
+   "seasons_positive": 8,
+   "seasons_evaluated": 21,
+   "leave_one_season_out": {
+    "2006": {
+     "roi_pct": -4.093,
+     "profit_units": -39.211,
+     "n_bets": 958
+    },
+    "2007": {
+     "roi_pct": -4.354,
+     "profit_units": -39.404,
+     "n_bets": 905
+    },
+    "2008": {
+     "roi_pct": -3.994,
+     "profit_units": -37.904,
+     "n_bets": 949
+    },
+    "2009": {
+     "roi_pct": -3.211,
+     "profit_units": -30.021,
+     "n_bets": 935
+    },
+    "2010": {
+     "roi_pct": -3.553,
+     "profit_units": -32.825,
+     "n_bets": 924
+    },
+    "2011": {
+     "roi_pct": -3.917,
+     "profit_units": -36.785,
+     "n_bets": 939
+    },
+    "2012": {
+     "roi_pct": -4.249,
+     "profit_units": -40.155,
+     "n_bets": 945
+    },
+    "2013": {
+     "roi_pct": -3.823,
+     "profit_units": -35.667,
+     "n_bets": 933
+    },
+    "2014": {
+     "roi_pct": -3.334,
+     "profit_units": -31.109,
+     "n_bets": 933
+    },
+    "2015": {
+     "roi_pct": -3.321,
+     "profit_units": -30.887,
+     "n_bets": 930
+    },
+    "2016": {
+     "roi_pct": -4.116,
+     "profit_units": -38.523,
+     "n_bets": 936
+    },
+    "2017": {
+     "roi_pct": -4.931,
+     "profit_units": -46.011,
+     "n_bets": 933
+    },
+    "2018": {
+     "roi_pct": -3.581,
+     "profit_units": -33.588,
+     "n_bets": 938
+    },
+    "2019": {
+     "roi_pct": -3.496,
+     "profit_units": -32.44,
+     "n_bets": 928
+    },
+    "2020": {
+     "roi_pct": -3.311,
+     "profit_units": -30.593,
+     "n_bets": 924
+    },
+    "2021": {
+     "roi_pct": -3.53,
+     "profit_units": -32.437,
+     "n_bets": 919
+    },
+    "2022": {
+     "roi_pct": -3.285,
+     "profit_units": -30.285,
+     "n_bets": 922
+    },
+    "2023": {
+     "roi_pct": -3.782,
+     "profit_units": -34.981,
+     "n_bets": 925
+    },
+    "2024": {
+     "roi_pct": -4.0,
+     "profit_units": -37.284,
+     "n_bets": 932
+    },
+    "2025": {
+     "roi_pct": -2.375,
+     "profit_units": -21.95,
+     "n_bets": 924
+    },
+    "2026": {
+     "roi_pct": -3.654,
+     "profit_units": -34.639,
+     "n_bets": 948
+    }
+   },
+   "worst_case_roi_pct_after_dropping_a_season": -4.931,
+   "holdout_2024_2025": {
+    "n_bets": 102,
+    "roi_pct": -13.173,
+    "hit_rate": 0.4554
+   },
+   "gates": {
+    "G1": true,
+    "G2": true,
+    "G3": true,
+    "G4": false,
+    "G5": false,
+    "G6": false,
+    "G7": false,
+    "G8": false
+   },
+   "p_value_bh_adjusted_whole_family": 0.77894,
+   "gates_passed": [
+    "G1",
+    "G2",
+    "G3"
+   ],
+   "n_gates_passed": 3,
+   "status": "FAIL",
+   "rank_by_p_value": 2
+  },
+  {
+   "strategy": "P04 Fade the side missing 3+ more defenders",
+   "n_bets": 273,
+   "n_decided": 265,
+   "n_pushes": 8,
+   "wins": 143,
+   "losses": 122,
+   "hit_rate": 0.5396,
+   "break_even_hit_rate": 0.5173,
+   "profit_units": 10.843,
+   "roi": 0.03972,
+   "roi_pct": 3.972,
+   "avg_decimal_odds": 1.9352,
+   "sd_profit_per_bet": 0.9499,
+   "t_stat": 0.6909,
+   "p_value": 0.490246,
+   "p_value_binomial_vs_breakeven": 0.499061,
+   "roi_ci95": [
+    -0.073219,
+    0.15164
+   ],
+   "luck": {
+    "n_bets": 273,
+    "net_profit_units": 10.843,
+    "profit_share_from_best_5pct_of_bets": 1.3455,
+    "profit_share_from_best_single_bet": 0.1024,
+    "longest_losing_streak": 6,
+    "expected_longest_losing_streak_at_observed_hit_rate": 6.19,
+    "max_drawdown_units": -15.909,
+    "skill_gap_hit_minus_breakeven": 0.0223,
+    "verdict": "the entire return sits in the best few bets: remove them and the rule is negative, which is what luck looks like"
+   },
+   "seasons": [
+    {
+     "season": 2016,
+     "n_bets": 29,
+     "hit_rate": 0.4643,
+     "profit_units": -2.666,
+     "roi_pct": -9.195
+    },
+    {
+     "season": 2017,
+     "n_bets": 34,
+     "hit_rate": 0.6667,
+     "profit_units": 9.983,
+     "roi_pct": 29.362
+    },
+    {
+     "season": 2018,
+     "n_bets": 19,
+     "hit_rate": 0.3529,
+     "profit_units": -5.191,
+     "roi_pct": -27.321
+    },
+    {
+     "season": 2019,
+     "n_bets": 28,
+     "hit_rate": 0.3929,
+     "profit_units": -6.886,
+     "roi_pct": -24.592
+    },
+    {
+     "season": 2020,
+     "n_bets": 27,
+     "hit_rate": 0.5185,
+     "profit_units": 0.263,
+     "roi_pct": 0.973
+    },
+    {
+     "season": 2021,
+     "n_bets": 20,
+     "hit_rate": 0.6,
+     "profit_units": 3.085,
+     "roi_pct": 15.427
+    },
+    {
+     "season": 2022,
+     "n_bets": 25,
+     "hit_rate": 0.4783,
+     "profit_units": -1.35,
+     "roi_pct": -5.399
+    },
+    {
+     "season": 2023,
+     "n_bets": 18,
+     "hit_rate": 0.7059,
+     "profit_units": 5.826,
+     "roi_pct": 32.368
+    },
+    {
+     "season": 2024,
+     "n_bets": 33,
+     "hit_rate": 0.6061,
+     "profit_units": 5.186,
+     "roi_pct": 15.715
+    },
+    {
+     "season": 2025,
+     "n_bets": 27,
+     "hit_rate": 0.5556,
+     "profit_units": 1.31,
+     "roi_pct": 4.852
+    },
+    {
+     "season": 2026,
+     "n_bets": 13,
+     "hit_rate": 0.5833,
+     "profit_units": 1.283,
+     "roi_pct": 9.866
+    }
+   ],
+   "seasons_positive": 5,
+   "seasons_evaluated": 8,
+   "leave_one_season_out": {
+    "2016": {
+     "roi_pct": 5.537,
+     "profit_units": 13.51,
+     "n_bets": 244
+    },
+    "2017": {
+     "roi_pct": 0.36,
+     "profit_units": 0.86,
+     "n_bets": 239
+    },
+    "2018": {
+     "roi_pct": 6.313,
+     "profit_units": 16.034,
+     "n_bets": 254
+    },
+    "2019": {
+     "roi_pct": 7.236,
+     "profit_units": 17.729,
+     "n_bets": 245
+    },
+    "2020": {
+     "roi_pct": 4.301,
+     "profit_units": 10.581,
+     "n_bets": 246
+    },
+    "2021": {
+     "roi_pct": 3.066,
+     "profit_units": 7.758,
+     "n_bets": 253
+    },
+    "2022": {
+     "roi_pct": 4.917,
+     "profit_units": 12.193,
+     "n_bets": 248
+    },
+    "2023": {
+     "roi_pct": 1.968,
+     "profit_units": 5.017,
+     "n_bets": 255
+    },
+    "2024": {
+     "roi_pct": 2.357,
+     "profit_units": 5.657,
+     "n_bets": 240
+    },
+    "2025": {
+     "roi_pct": 3.875,
+     "profit_units": 9.533,
+     "n_bets": 246
+    },
+    "2026": {
+     "roi_pct": 3.677,
+     "profit_units": 9.561,
+     "n_bets": 260
+    }
+   },
+   "worst_case_roi_pct_after_dropping_a_season": 0.36,
+   "holdout_2024_2025": {
+    "n_bets": 60,
+    "roi_pct": 10.827,
+    "hit_rate": 0.5833
+   },
+   "gates": {
+    "G1": true,
+    "G2": true,
+    "G3": true,
+    "G4": true,
+    "G5": false,
+    "G6": true,
+    "G7": true,
+    "G8": false
+   },
+   "p_value_bh_adjusted_whole_family": 0.920845,
+   "gates_passed": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G6",
+    "G7"
+   ],
+   "n_gates_passed": 6,
+   "status": "WATCH",
+   "rank_by_p_value": 3
+  },
+  {
+   "strategy": "P02 Fade the club that starts a backup QB",
+   "n_bets": 979,
+   "n_decided": 951,
+   "n_pushes": 28,
+   "wins": 483,
+   "losses": 468,
+   "hit_rate": 0.5079,
+   "break_even_hit_rate": 0.5157,
+   "profit_units": -15.6,
+   "roi": -0.01593,
+   "roi_pct": -1.593,
+   "avg_decimal_odds": 1.9415,
+   "sd_profit_per_bet": 0.9557,
+   "t_stat": -0.5217,
+   "p_value": 0.602018,
+   "p_value_binomial_vs_breakeven": 0.649708,
+   "roi_ci95": [
+    -0.076268,
+    0.043274
+   ],
+   "luck": {
+    "n_bets": 979,
+    "net_profit_units": -15.6,
+    "profit_share_from_best_5pct_of_bets": -3.2898,
+    "profit_share_from_best_single_bet": -0.0769,
+    "longest_losing_streak": 8,
+    "expected_longest_losing_streak_at_observed_hit_rate": 8.67,
+    "max_drawdown_units": -28.529,
+    "skill_gap_hit_minus_breakeven": -0.0078,
+    "verdict": "no positive return to explain: there is nothing here for luck to have caused, and the rule loses money in this sample"
+   },
+   "seasons": [
+    {
+     "season": 2006,
+     "n_bets": 21,
+     "hit_rate": 0.4211,
+     "profit_units": -3.389,
+     "roi_pct": -16.136
+    },
+    {
+     "season": 2007,
+     "n_bets": 74,
+     "hit_rate": 0.4648,
+     "profit_units": -6.915,
+     "roi_pct": -9.345
+    },
+    {
+     "season": 2008,
+     "n_bets": 30,
+     "hit_rate": 0.4643,
+     "profit_units": -2.806,
+     "roi_pct": -9.355
+    },
+    {
+     "season": 2009,
+     "n_bets": 44,
+     "hit_rate": 0.5714,
+     "profit_units": 4.176,
+     "roi_pct": 9.49
+    },
+    {
+     "season": 2010,
+     "n_bets": 55,
+     "hit_rate": 0.5273,
+     "profit_units": 2.116,
+     "roi_pct": 3.847
+    },
+    {
+     "season": 2011,
+     "n_bets": 40,
+     "hit_rate": 0.4865,
+     "profit_units": -1.76,
+     "roi_pct": -4.4
+    },
+    {
+     "season": 2012,
+     "n_bets": 34,
+     "hit_rate": 0.4375,
+     "profit_units": -5.344,
+     "roi_pct": -15.719
+    },
+    {
+     "season": 2013,
+     "n_bets": 46,
+     "hit_rate": 0.5,
+     "profit_units": -1.686,
+     "roi_pct": -3.664
+    },
+    {
+     "season": 2014,
+     "n_bets": 46,
+     "hit_rate": 0.5556,
+     "profit_units": 3.761,
+     "roi_pct": 8.176
+    },
+    {
+     "season": 2015,
+     "n_bets": 49,
+     "hit_rate": 0.5532,
+     "profit_units": 3.976,
+     "roi_pct": 8.114
+    },
+    {
+     "season": 2016,
+     "n_bets": 43,
+     "hit_rate": 0.4651,
+     "profit_units": -3.928,
+     "roi_pct": -9.134
+    },
+    {
+     "season": 2017,
+     "n_bets": 46,
+     "hit_rate": 0.3778,
+     "profit_units": -12.063,
+     "roi_pct": -26.223
+    },
+    {
+     "season": 2018,
+     "n_bets": 41,
+     "hit_rate": 0.525,
+     "profit_units": 0.463,
+     "roi_pct": 1.128
+    },
+    {
+     "season": 2019,
+     "n_bets": 51,
+     "hit_rate": 0.5306,
+     "profit_units": 1.189,
+     "roi_pct": 2.332
+    },
+    {
+     "season": 2020,
+     "n_bets": 55,
+     "hit_rate": 0.5455,
+     "profit_units": 3.056,
+     "roi_pct": 5.557
+    },
+    {
+     "season": 2021,
+     "n_bets": 60,
+     "hit_rate": 0.5167,
+     "profit_units": 0.288,
+     "roi_pct": 0.479
+    },
+    {
+     "season": 2022,
+     "n_bets": 57,
+     "hit_rate": 0.5455,
+     "profit_units": 3.199,
+     "roi_pct": 5.612
+    },
+    {
+     "season": 2023,
+     "n_bets": 54,
+     "hit_rate": 0.4902,
+     "profit_units": -3.209,
+     "roi_pct": -5.942
+    },
+    {
+     "season": 2024,
+     "n_bets": 47,
+     "hit_rate": 0.4681,
+     "profit_units": -4.812,
+     "roi_pct": -10.239
+    },
+    {
+     "season": 2025,
+     "n_bets": 55,
+     "hit_rate": 0.6111,
+     "profit_units": 9.374,
+     "roi_pct": 17.044
+    },
+    {
+     "season": 2026,
+     "n_bets": 31,
+     "hit_rate": 0.5,
+     "profit_units": -1.286,
+     "roi_pct": -4.148
+    }
+   ],
+   "seasons_positive": 10,
+   "seasons_evaluated": 21,
+   "leave_one_season_out": {
+    "2006": {
+     "roi_pct": -1.275,
+     "profit_units": -12.211,
+     "n_bets": 958
+    },
+    "2007": {
+     "roi_pct": -0.96,
+     "profit_units": -8.685,
+     "n_bets": 905
+    },
+    "2008": {
+     "roi_pct": -1.348,
+     "profit_units": -12.793,
+     "n_bets": 949
+    },
+    "2009": {
+     "roi_pct": -2.115,
+     "profit_units": -19.775,
+     "n_bets": 935
+    },
+    "2010": {
+     "roi_pct": -1.917,
+     "profit_units": -17.715,
+     "n_bets": 924
+    },
+    "2011": {
+     "roi_pct": -1.474,
+     "profit_units": -13.84,
+     "n_bets": 939
+    },
+    "2012": {
+     "roi_pct": -1.085,
+     "profit_units": -10.255,
+     "n_bets": 945
+    },
+    "2013": {
+     "roi_pct": -1.491,
+     "profit_units": -13.914,
+     "n_bets": 933
+    },
+    "2014": {
+     "roi_pct": -2.075,
+     "profit_units": -19.361,
+     "n_bets": 933
+    },
+    "2015": {
+     "roi_pct": -2.105,
+     "profit_units": -19.576,
+     "n_bets": 930
+    },
+    "2016": {
+     "roi_pct": -1.247,
+     "profit_units": -11.672,
+     "n_bets": 936
+    },
+    "2017": {
+     "roi_pct": -0.379,
+     "profit_units": -3.537,
+     "n_bets": 933
+    },
+    "2018": {
+     "roi_pct": -1.712,
+     "profit_units": -16.062,
+     "n_bets": 938
+    },
+    "2019": {
+     "roi_pct": -1.809,
+     "profit_units": -16.789,
+     "n_bets": 928
+    },
+    "2020": {
+     "roi_pct": -2.019,
+     "profit_units": -18.656,
+     "n_bets": 924
+    },
+    "2021": {
+     "roi_pct": -1.729,
+     "profit_units": -15.887,
+     "n_bets": 919
+    },
+    "2022": {
+     "roi_pct": -2.039,
+     "profit_units": -18.798,
+     "n_bets": 922
+    },
+    "2023": {
+     "roi_pct": -1.34,
+     "profit_units": -12.391,
+     "n_bets": 925
+    },
+    "2024": {
+     "roi_pct": -1.157,
+     "profit_units": -10.787,
+     "n_bets": 932
+    },
+    "2025": {
+     "roi_pct": -2.703,
+     "profit_units": -24.974,
+     "n_bets": 924
+    },
+    "2026": {
+     "roi_pct": -1.51,
+     "profit_units": -14.314,
+     "n_bets": 948
+    }
+   },
+   "worst_case_roi_pct_after_dropping_a_season": -2.703,
+   "holdout_2024_2025": {
+    "n_bets": 102,
+    "roi_pct": 4.473,
+    "hit_rate": 0.5446
+   },
+   "gates": {
+    "G1": true,
+    "G2": true,
+    "G3": true,
+    "G4": false,
+    "G5": false,
+    "G6": true,
+    "G7": false,
+    "G8": false
+   },
+   "p_value_bh_adjusted_whole_family": 0.920845,
+   "gates_passed": [
+    "G1",
+    "G2",
+    "G3",
+    "G6"
+   ],
+   "n_gates_passed": 4,
+   "status": "FAIL",
+   "rank_by_p_value": 4
+  },
+  {
+   "strategy": "P05 Over when both defences are missing 3+",
+   "n_bets": 48,
+   "n_decided": 47,
+   "n_pushes": 1,
+   "wins": 26,
+   "losses": 21,
+   "hit_rate": 0.5532,
+   "break_even_hit_rate": 0.5199,
+   "profit_units": 2.906,
+   "roi": 0.06054,
+   "roi_pct": 6.054,
+   "avg_decimal_odds": 1.9245,
+   "sd_profit_per_bet": 0.9549,
+   "t_stat": 0.4392,
+   "p_value": 0.662503,
+   "p_value_binomial_vs_breakeven": 0.664639,
+   "roi_ci95": [
+    -0.20881,
+    0.324985
+   ],
+   "luck": {
+    "n_bets": 48,
+    "net_profit_units": 2.906,
+    "profit_share_from_best_5pct_of_bets": 0.6986,
+    "profit_share_from_best_single_bet": 0.351,
+    "longest_losing_streak": 8,
+    "expected_longest_losing_streak_at_observed_hit_rate": 3.78,
+    "max_drawdown_units": -7.0,
+    "skill_gap_hit_minus_breakeven": 0.0333,
+    "verdict": "most of the return sits in a handful of bets, the signature of luck"
+   },
+   "seasons": [
+    {
+     "season": 2016,
+     "n_bets": 3,
+     "hit_rate": 0.3333,
+     "profit_units": -0.98,
+     "roi_pct": -32.667
+    },
+    {
+     "season": 2017,
+     "n_bets": 2,
+     "hit_rate": 0.0,
+     "profit_units": -2.0,
+     "roi_pct": -100.0
+    },
+    {
+     "season": 2018,
+     "n_bets": 2,
+     "hit_rate": 0.5,
+     "profit_units": 0.01,
+     "roi_pct": 0.5
+    },
+    {
+     "season": 2019,
+     "n_bets": 4,
+     "hit_rate": 0.75,
+     "profit_units": 1.871,
+     "roi_pct": 46.771
+    },
+    {
+     "season": 2020,
+     "n_bets": 3,
+     "hit_rate": 1.0,
+     "profit_units": 2.72,
+     "roi_pct": 90.666
+    },
+    {
+     "season": 2021,
+     "n_bets": 2,
+     "hit_rate": 1.0,
+     "profit_units": 0.943,
+     "roi_pct": 47.17
+    },
+    {
+     "season": 2022,
+     "n_bets": 10,
+     "hit_rate": 0.2,
+     "profit_units": -6.17,
+     "roi_pct": -61.704
+    },
+    {
+     "season": 2023,
+     "n_bets": 4,
+     "hit_rate": 0.75,
+     "profit_units": 1.695,
+     "roi_pct": 42.37
+    },
+    {
+     "season": 2024,
+     "n_bets": 5,
+     "hit_rate": 0.8,
+     "profit_units": 2.62,
+     "roi_pct": 52.403
+    },
+    {
+     "season": 2025,
+     "n_bets": 11,
+     "hit_rate": 0.6364,
+     "profit_units": 2.328,
+     "roi_pct": 21.16
+    },
+    {
+     "season": 2026,
+     "n_bets": 2,
+     "hit_rate": 0.5,
+     "profit_units": -0.13,
+     "roi_pct": -6.522
+    }
+   ],
+   "seasons_positive": 0,
+   "seasons_evaluated": 0,
+   "leave_one_season_out": {
+    "2016": {
+     "roi_pct": 8.635,
+     "profit_units": 3.886,
+     "n_bets": 45
+    },
+    "2017": {
+     "roi_pct": 10.665,
+     "profit_units": 4.906,
+     "n_bets": 46
+    },
+    "2018": {
+     "roi_pct": 6.295,
+     "profit_units": 2.896,
+     "n_bets": 46
+    },
+    "2019": {
+     "roi_pct": 2.352,
+     "profit_units": 1.035,
+     "n_bets": 44
+    },
+    "2020": {
+     "roi_pct": 0.413,
+     "profit_units": 0.186,
+     "n_bets": 45
+    },
+    "2021": {
+     "roi_pct": 4.266,
+     "profit_units": 1.962,
+     "n_bets": 46
+    },
+    "2022": {
+     "roi_pct": 23.885,
+     "profit_units": 9.076,
+     "n_bets": 38
+    },
+    "2023": {
+     "roi_pct": 2.752,
+     "profit_units": 1.211,
+     "n_bets": 44
+    },
+    "2024": {
+     "roi_pct": 0.664,
+     "profit_units": 0.286,
+     "n_bets": 43
+    },
+    "2025": {
+     "roi_pct": 1.563,
+     "profit_units": 0.578,
+     "n_bets": 37
+    },
+    "2026": {
+     "roi_pct": 6.601,
+     "profit_units": 3.036,
+     "n_bets": 46
+    }
+   },
+   "worst_case_roi_pct_after_dropping_a_season": 0.413,
+   "holdout_2024_2025": {
+    "n_bets": 16,
+    "roi_pct": 30.923,
+    "hit_rate": 0.6875
+   },
+   "gates": {
+    "G1": true,
+    "G2": true,
+    "G3": false,
+    "G4": true,
+    "G5": false,
+    "G6": true,
+    "G7": false,
+    "G8": false
+   },
+   "p_value_bh_adjusted_whole_family": 0.920845,
+   "gates_passed": [
+    "G1",
+    "G2",
+    "G4",
+    "G6"
+   ],
+   "n_gates_passed": 4,
+   "status": "FAIL",
+   "rank_by_p_value": 5
+  }
+ ],
+ "gate_definitions": [
+  {
+   "id": "G1",
+   "name": "walk-forward / pre-game information only",
+   "why": "Every input to the bet decision is known before kick-off and, for the model rules, comes from a fit that used only earlier games."
+  },
+  {
+   "id": "G2",
+   "name": "observed prices on every scored bet",
+   "why": "Every scored bet carries a price taken from the source file. No -110 assumption is used."
+  },
+  {
+   "id": "G3",
+   "name": "at least 200 scored bets",
+   "why": "Below this, a run of luck is indistinguishable from skill at any plausible effect size."
+  },
+  {
+   "id": "G4",
+   "name": "hit rate beats the break-even implied by the actual prices taken",
+   "why": "Break-even is computed from the real price on each bet, not from 0.5."
+  },
+  {
+   "id": "G5",
+   "name": "survives multiple testing (BH-adjusted p < 0.05, 12 rules tested)",
+   "why": "Testing many rules and reporting only the best one manufactures winners; the Benjamini-Hochberg step charges for that."
+  },
+  {
+   "id": "G6",
+   "name": "positive in a untouched holdout (2024 + 2025)",
+   "why": "The holdout seasons were never used to tune the rule thresholds."
+  },
+  {
+   "id": "G7",
+   "name": "positive in at least 60% of individual seasons",
+   "why": "An edge that exists in only one season is a season, not a strategy."
+  },
+  {
+   "id": "G8",
+   "name": "95% bootstrap confidence interval on ROI excludes zero",
+   "why": "Ten thousand resamples of the actual bet log; the interval must sit above zero."
+  }
+ ],
+ "generated_at": "2026-11-13T12:58:50+00:00",
+ "rules": [
+  {
+   "id": "P01 Back the opponent when the club starts a backup QB",
+   "basis": "qb_continuity",
+   "statement": "Opponent's club starts a QB who is not its incumbent starter. Side is the OTHER club, so the rule bets on the information advantage, not on the disrupted club."
+  },
+  {
+   "id": "P02 Fade the club that starts a backup QB",
+   "basis": "qb_continuity",
+   "statement": "Same flag as P01, bet the opposite way. Published as a control: if P01 only worked because the market had not moved, its mirror image would lose by a similar amount."
+  },
+  {
+   "id": "P03 Under when combined ruled-out production share is high",
+   "basis": "production",
+   "statement": "Both clubs' ruled-out share of recent offensive output sums above the declared threshold. Lost producers mean fewer available yards, so the total is the market."
+  },
+  {
+   "id": "P04 Fade the side missing 3+ more defenders",
+   "basis": "defense",
+   "statement": "One club has at least DEF_OUT_GAP more ruled-out defenders (front seven plus secondary) than its opponent; bet the side with the healthier defence."
+  },
+  {
+   "id": "P05 Over when both defences are missing 3+",
+   "basis": "defense",
+   "statement": "Both clubs are missing DEF_OUT_GAP or more ruled-out defenders: replacement defenders on both sides, so the total is the market."
+  }
+ ],
+ "exclusions": {
+  "P01 Back the opponent when the club starts a backup QB": {
+   "games_meeting_condition": 1362,
+   "no_observed_price": 383,
+   "feature_unknown": 40
+  },
+  "P02 Fade the club that starts a backup QB": {
+   "games_meeting_condition": 1362,
+   "no_observed_price": 383,
+   "feature_unknown": 40
+  },
+  "P03 Under when combined ruled-out production share is high": {
+   "games_meeting_condition": 329,
+   "no_observed_price": 0,
+   "feature_unknown": 10738
+  },
+  "P04 Fade the side missing 3+ more defenders": {
+   "games_meeting_condition": 273,
+   "no_observed_price": 0,
+   "feature_unknown": 11439
+  },
+  "P05 Over when both defences are missing 3+": {
+   "games_meeting_condition": 48,
+   "no_observed_price": 0,
+   "feature_unknown": 11439
+  }
+ },
+ "totals": {
+  "bets_scored": 2608,
+  "games_in_bet_log": 1388,
+  "seasons": [
+   2006,
+   2007,
+   2008,
+   2009,
+   2010,
+   2011,
+   2012,
+   2013,
+   2014,
+   2015,
+   2016,
+   2017,
+   2018,
+   2019,
+   2020,
+   2021,
+   2022,
+   2023,
+   2024,
+   2025,
+   2026
+  ],
+  "all_prices_observed": true
+ },
+ "reading": "These five rules were written down before they were scored, and their p-values are corrected together with the twelve rules already published, so a rule cannot pass by being the best of a small batch. A WATCH result means the price was beaten in the scored sample but the significance, holdout or stability gate did not clear; it is not a recommendation to bet."
+}

@@ -54,6 +54,10 @@ STEPS = [
     ("governance dashboard (dashboard/)", [sys.executable, "tools/build_dashboard_site.py"], ROOT),
     ("lab sub-site", [sys.executable, "lab/scripts/build_site.py"], ROOT),
     ("research sub-site", [sys.executable, "s9cb/site.py"], ROOT),
+    # main's newer sub-sites (PRs #49-#56): the Decision Room review-and-decide site
+    # and the strength-of-schedule sub-site.
+    ("decision room site (room/)", [sys.executable, "room/build.py"], ROOT),
+    ("strength sub-site", [sys.executable, "tools/build_strength.py"], ROOT),
     ("landing page and decision lab", [sys.executable, "gen_site.py"], os.path.join(ROOT, "pipeline")),
     ("canonical navigation", [sys.executable, "scripts/verified/normalize_nav.py"], ROOT),
     ("docs sub-site", [sys.executable, "tools/build_docs_site.py"], ROOT),

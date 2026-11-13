@@ -35,6 +35,15 @@ jobs:
           python3 analysis/correlations.py
           python3 analysis/injuries.py
           python3 tools/build_site_all.py
+      - name: Build the Decision Room and run its source-link gate
+        run: |
+          python3 room/build.py
+          python3 room/verify.py
+          if ! git diff --quiet -- room/; then
+            echo "::error::room/ pages are stale. Run 'python3 room/build.py' and commit the result."
+            git diff --stat -- room/
+            exit 1
+          fi
       - name: Independently recompute every published number
         run: python3 scripts/verified/audit_numbers.py
       - name: Audit every published number against the official NFL pages

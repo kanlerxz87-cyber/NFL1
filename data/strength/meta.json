@@ -1,0 +1,55 @@
+{
+ "built_at_utc": "2026-11-13T13:14:06+00:00",
+ "session": "ca779bcc-nfl1",
+ "inputs": {
+  "file": "data/s9cb/games.csv",
+  "sha256_now": "483beddbdf226901b903ccc6e84f3dbc38df05110bc53a92eb63da8ec44f054f",
+  "bytes_now": 1665522,
+  "sha256_recorded": "50939c24d43e78f3369227d5c800a6bc1187b343ac35321102d79bd523f36395",
+  "bytes_recorded": 2190032,
+  "matches_provenance": false,
+  "url": "https://github.com/nflverse/nflverse-data/releases/download/schedules/games.csv",
+  "official_upstream": "https://www.nfl.com/schedules/",
+  "provenance_generated_at": "2026-11-13T13:08:53+00:00",
+  "rows_in_file": 7239,
+  "result_sign_check": {
+   "rows": 7104,
+   "mismatches": 0,
+   "rule": "result == home_score - away_score"
+  },
+  "played_games_used": 7104
+ },
+ "frozen_parameters": {
+  "ridge_rating": 5.0,
+  "ridge_hfa": 5.0,
+  "ridge_score": 8.0,
+  "carryover": 0.6,
+  "holdout_seasons": [
+   2024,
+   2025,
+   2026
+  ],
+  "min_bets": 200,
+  "bootstrap": 10000,
+  "seed": 20261113,
+  "sos_min_games": 3,
+  "recent_window": 5,
+  "pythagorean_exponent": 2.37
+ },
+ "rules_tested": 11,
+ "preregistration_sha256": "48d2086663cbe0fd3ab9df08a0e4a5dca6606c8bad99ff31595d74b1a4b8bd56",
+ "preregistration_note": "Hash of the rule names and frozen parameters. Changing a threshold or adding a rule changes this hash, which is how a reader can tell the rules were fixed before scoring.",
+ "code_sha256": "65bd593414965c00d5f84112cb3ee37ee2aa928edaa798f3a8fe09280522b5c2",
+ "official_sources": {
+  "standings": "https://www.nfl.com/standings/league/2026/reg",
+  "week10_schedule": "https://www.nfl.com/schedules/2026/reg10",
+  "injuries": "https://www.nfl.com/injuries/",
+  "nflverse_release": "https://github.com/nflverse/nflverse-data/releases/tag/schedules"
+ },
+ "limitations": [
+  "The nflverse closing line is a consensus number, not a book quote; no official league odds exist.",
+  "Prop markets have no price in these sources, so prop combos cannot be scored.",
+  "Remaining opponents come from the official Week 10 snapshot only; the source file carries no future fixtures.",
+  "Ratings are linear; injuries, weather and quarterback changes enter only through the score."
+ ]
+}

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flagged for review · NFL Strength of Schedule Lab</title>
+<meta name="description" content="Strength of schedule, schedule-adjusted ratings and own lines, verified against official NFL sources.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="brand" href="../index.html"><span class="mark">NFL</span><span class="brand-text">Strength Lab</span></a>
+  <nav aria-label="Strength of schedule sections"><a href="index.html">Overview</a><a href="ratings.html">Ratings & SOS</a><a href="lines.html">My Lines</a><a href="leaderboard.html">Leaderboard</a><a href="parlays.html">Parlays & Combos</a><a href="props.html">Props</a><a href="injuries.html">Injuries & Depth</a><a href="correlations.html">Correlations</a><a href="questions.html">Questions</a><a href="suggestions.html">Suggestions</a><a href="decisions.html">Decisions</a><a href="flagged.html" class="active">Flagged for Review</a><a href="verification.html">Verification</a><a href="executive-summary.html">Executive Summary</a></nav>
+</header>
+<main id="main">
+  <section class="page-head">
+    <p class="eyebrow">Strength of schedule study</p>
+    <h1>Flagged for review</h1>
+    <p class="standfirst">Everything that does not reconcile, with the official link that shows it.</p>
+    <p class="timestamp">Built 2026-11-13T13:14:06+00:00 · every table row links to the source it came from · blanks are deliberate</p>
+    
+  </section>
+  
+<section class="panel">
+  <h2>7 flagged items</h2>
+  <p class="sub">Every item carries the official page that shows the difference. Nothing here blocks the site from
+  publishing; it exists so a human can decide what to correct first.</p>
+  <div class="table-wrap"><table class=""><thead><tr><th>ID</th><th>Severity</th><th>Item</th><th>Detail</th><th>Status</th><th>Source</th></tr></thead><tbody><tr><td>F-SOS-STD-NYG</td><td><span class="badge fail">HIGH</span></td><td>Standings row differs from the official page: NYG</td><td>5 field(s) differ: l (official 3 vs repository 2), pf (official 203 vs repository 182), pa (official 196 vs repository 172), pct (official 0.611 vs repository 0.688), streak (official 1L vs repository 2W). The official page (https://www.nfl.com/standings/league/2026/reg) was read on 2026-11-13 and the committed snapshot is stamped 2026-11-12T04:31Z, before the Week 10 Thursday game.</td><td>open</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">official source ↗</a></td></tr><tr><td>F-SOS-STD-WAS</td><td><span class="badge fail">HIGH</span></td><td>Standings row differs from the official page: WAS</td><td>5 field(s) differ: w (official 3 vs repository 2), pf (official 196 vs repository 172), pa (official 223 vs repository 202), pct (official 0.389 vs repository 0.313), streak (official 1W vs repository 1L). The official page (https://www.nfl.com/standings/league/2026/reg) was read on 2026-11-13 and the committed snapshot is stamped 2026-11-12T04:31Z, before the Week 10 Thursday game.</td><td>open</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">official source ↗</a></td></tr><tr><td>F-SOS-W10-01</td><td><span class="badge fail">HIGH</span></td><td>Week 10 fixture listed as upcoming after the game went final</td><td>data/verified/week10_fixtures_2026.csv lists WAS @ NYG on 2026-11-12 as a fixture. nfl.com shows &#x27;Commanders 24, Giants 21, FINAL&#x27;. The 14-fixture set and the four byes are otherwise identical to the official page.</td><td>open</td><td><a class="src" href="https://www.nfl.com/schedules/2026/reg10" target="_blank" rel="noopener">official source ↗</a></td></tr><tr><td>F-SOS-DATA-01</td><td><span class="badge pass">RESOLVED</span></td><td>Provenance pin described the wrong file and now pins the committed extract</td><td>ROOT CAUSE (verified): s9cb/collect.py pinned the sha256 of the raw download in build/raw/ (2,190,032 bytes / 50939c24d43e78f3...) while committing a filtered, re-serialised extract (1,665,522 bytes / 483beddbdf226901...), so the pin could never match. Fixed: the collector now records committed_sha256/committed_bytes for data/s9cb/ alongside the raw pin, and the committed hash reproduces exactly with `sha256sum data/s9cb/games.csv`. Row count intact (7,239) and every result reconciles.</td><td>resolved (collector fixed; next refresh writes it automatically)</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">official source ↗</a></td></tr><tr><td>F-SOS-MODEL-01</td><td><span class="badge warn">MEDIUM</span></td><td>Home-field advantage fitted near zero for the 2026 sample</td><td>The ridge fit gives hfa -0.50 points on 136 games, against roughly +2 points in every earlier season. This is a computed property of a small 2026 sample (home win rate 49.3%), not a data error; it is flagged because it materially changes this week&#x27;s own lines.</td><td>open</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">official source ↗</a></td></tr><tr><td>F-SOS-INJ-01</td><td><span class="badge fail">HIGH</span></td><td>Committed injury transcription is materially incomplete against the official page</td><td>The committed hand transcription has 254 rows; the official nfl.com scrape captured at 2026-11-13T13:04:40+00:00 has 296. 55 players listed on the official page are absent from the transcription and 13 transcription players are absent from the official page. Among players present in both, 37 practice values, 3 injury names and 3 game statuses differ. This is a transcription-accuracy defect, not page drift: the scrape predates the transcription and already contains the values the transcription lacks. Non-practice differences: DET Kerby Joseph injury: official &#x27;Knee&#x27; vs transcription &#x27;(blank)&#x27;; DET Kerby Joseph game: official &#x27;Out&#x27; vs transcription &#x27;(blank)&#x27;; DET Cade Mays injury: official &#x27;Ankle&#x27; vs transcription &#x27;(blank)&#x27;; DET Cade Mays game: official &#x27;Out&#x27; vs transcription &#x27;(blank)&#x27;; DET D.J. Reed injury: official &#x27;Hip&#x27; vs transcription &#x27;(blank)&#x27;; DET D.J. Reed game: official &#x27;Out&#x27; vs transcription &#x27;(blank)&#x27;</td><td>open</td><td><a class="src" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">official source ↗</a></td></tr><tr><td>F-SOS-SITE-01</td><td><span class="badge warn">MEDIUM</span></td><td>Landing page says &#x27;week 9 complete&#x27; while the official schedule has moved past it</td><td>index.html KPI subtitle reads &#x27;week 9 complete&#x27;. nfl.com shows Week 10 in progress with the Thursday game final.</td><td>open</td><td><a class="src" href="https://www.nfl.com/schedules/2026/reg10" target="_blank" rel="noopener">official source ↗</a></td></tr></tbody></table></div>
+  <p class="note">Severity is a judgement: <strong>high</strong> means a published number is wrong or a live game is
+  mis-described, <strong>medium</strong> means the provenance or method claim needs attention.</p>
+</section>
+<section class="panel">
+  <h2>The three that matter most</h2>
+  <ol class="plain">
+    <li><strong>Stale standings.</strong> Ten fields across two clubs differ from the official page because the
+    committed file predates the Week 10 Thursday game.</li>
+    <li><strong>Stale provenance pin.</strong> The recorded sha256 no longer describes the committed data file.</li>
+    <li><strong>Incomplete injury transcription.</strong> The committed copy is missing 55 players and 43 field
+    values present in the direct official scrape, which was captured five hours before the hand transcription.</li>
+  </ol>
+</section>
+
+</main>
+<footer>
+  <p>Research tool, not betting advice. Closing lines in the source file are consensus numbers, not book quotes.
+  Official entry points: <a href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings</a> ·
+  <a href="https://www.nfl.com/schedules/2026/reg10" target="_blank" rel="noopener">NFL schedule</a> ·
+  <a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">NFL injuries</a>.
+  Data: <a href="https://github.com/nflverse/nflverse-data" target="_blank" rel="noopener">nflverse</a> (CC-BY-4.0).</p>
+  <p><a href="flagged.html">Flagged for review</a> · <a href="verification.html">Verification</a> · <a href="../pages/sections.html">All site sections</a></p>
+</footer>
+</body>
+</html>
