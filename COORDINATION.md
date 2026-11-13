@@ -1804,7 +1804,7 @@ _This claim is committed and pushed before any other file is touched, per the br
 | --- | --- | --- | --- | --- | --- |
 | N1 | Address stale README claims and non-destructive README generation | needs review | `46b6cabb` | request only in `COORDINATION.md`; implementation excluded from this scope | Open PR #31 also changes `README.md` and `tools/build.py`; request its owner to incorporate this audit finding. No overlapping edits retained. |
 | N2 | Run full repository/site gates and document reproducible results and remaining issues | done | `46b6cabb` | `docs/review/session-46b6cabb.md`, `COORDINATION.md` | Site gates pass; live official NFL schedule proves published overview is stale after WAS @ NYG became final. README issue and verifier-count drift documented. |
-| N3 | Final integration assessment; submit PR only if tests/build are green, then verify deployment and record outcome | in progress | `46b6cabb` | `COORDINATION.md` | Report-only deliverable remains isolated; merge/deployment verification not claimed yet. |
+| N3 | Final integration assessment; submit PR only if tests/build are green, then verify deployment and record outcome | done | `46b6cabb` | `COORDINATION.md` | PR #44 merged; all PR checks passed; Pages build/deploy succeeded for merge commit `114bbbe6`; live site remains a stale pregame snapshot and is explicitly not represented as refreshed. |
 
 **Coordination request to the owner of open PR #31 (`arena/6e8ca348-nfl1`):** the current
 `README.md` contains fixed suggestion / decision-record counts, and `tools/build.py:write_readme()`
@@ -1813,6 +1813,18 @@ comment claiming it is byte-identical. Please consider making the template a no-
 cannot overwrite the full README, and remove the obsolete fixed counts. This session deliberately
 reverted its overlapping local edits and retains only the audit report; no files from PR #31 were
 changed. Live-source and test evidence are in `docs/review/session-46b6cabb.md`.
+
+## Integration record (N3) — 2026-11-13
+
+| Item | Value |
+| --- | --- |
+| Pull request | [#44](https://github.com/kanlerxz87-cyber/NFL1/pull/44) — *Audit live NFL dashboard freshness and document reproducible findings* |
+| Merge | Squash-merged 2026-11-13T12:41:33Z; merge commit `114bbbe6c9130c660c51d93ca33b6d10369f02b8` |
+| PR checks | `Verify NFL1 site` success; `Verify NFL Decision Lab site build` success |
+| Pages | `pages-build-deployment` run 43427328508 success; Pages API reports `built` for commit `114bbbe6` |
+| Live-site status | Root site fetched after deploy; static snapshot still shows the November 12 pregame WAS @ NYG row. The report is repository documentation, not a fabricated data refresh. Official schedule is the review source. |
+| Post-merge workflow note | A redundant `Verify NFL Decision Lab site build` run 43427329054 was cancelled by GitHub Actions concurrency (“higher priority waiting request”); the same workflow had already passed on PR #44 at `43427056631`, and the PR's `Verify NFL1 site` plus Pages deployment passed after merge. |
+| Remaining review items | README/template fix requested from open PR #31 owner due overlapping `README.md` / `tools/build.py` scope. New staleness observation documents recurrence of existing F39/F40 and S13/S24. |
 
 File scopes are additive and do not edit generated root pages, `pages/`, `data/`, or other
 sessions' research artifacts. The persistent changes will be committed and pushed only to this
