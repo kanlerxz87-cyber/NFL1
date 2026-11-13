@@ -37,6 +37,7 @@ CANON = [
     ("standings.html", "Standings"),
     ("availability.html", "Availability"),
     ("data.html", "Verified Data"),
+    ("verified-lines.html", "Own Lines"),
     ("analysis.html", "Validation & Correlation"),
     ("decisions.html", "Decision Register"),
     ("verified.html", "Verified Artifacts"),

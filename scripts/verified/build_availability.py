@@ -96,7 +96,10 @@ def main() -> int:
     stamp = "2026-11-12"
     (ROOT / "pages/availability.html").write_text(
         bs.page("Availability & Deficiencies",
-                "availability.html", body,
+                # session 65df4799-nfl1: pass the pages/-qualified name so page() emits
+                # sibling-relative hrefs (the bare name produced root-style links that
+                # broke all 21 nav links from inside pages/).
+                "pages/availability.html", body,
                 f"Injury-driven availability from official sources, with honest gaps · generated {stamp}"),
         encoding="utf-8")
     print("wrote pages/availability.html")

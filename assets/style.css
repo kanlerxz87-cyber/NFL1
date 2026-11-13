@@ -161,6 +161,48 @@ footer p{margin:4px 0 0}
 .okline{background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.3);color:#9fe8bb;
   padding:10px 14px;border-radius:10px;font-size:.86rem;margin:0 0 14px}
 
+/* ------------------------------------------------------------------------
+   Decision dashboard (web/) — added by session 6e8ca348.
+   Reuses the existing tokens so the new pages sit inside the same design.
+   ------------------------------------------------------------------------ */
+.panel + .panel{margin-top:18px}
+.panel h2{margin-top:0}
+.data-table{width:100%;border-collapse:collapse;font-size:.86rem}
+.data-table th,.data-table td{text-align:left;vertical-align:top;padding:9px 11px;
+  border-bottom:1px solid var(--line)}
+.data-table thead th{background:var(--panel-2);color:var(--muted);font-weight:600;
+  font-size:.74rem;text-transform:uppercase;letter-spacing:.07em;white-space:nowrap;
+  position:sticky;top:0}
+.data-table tbody tr:hover{background:rgba(96,165,250,.06)}
+.data-table caption{caption-side:top;text-align:left;color:var(--muted);padding:0 0 8px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;
+  margin:0 0 20px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  padding:13px 15px;box-shadow:var(--shadow)}
+.kpi-label{display:block;color:var(--muted);font-size:.72rem;text-transform:uppercase;
+  letter-spacing:.08em}
+.kpi-value{display:block;font-size:1.45rem;line-height:1.2;margin:3px 0}
+.kpi-sub{display:block;color:#7f90ad;font-size:.75rem}
+.badge{display:inline-block;padding:2px 9px;border-radius:999px;font-size:.68rem;
+  font-weight:600;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+.badge.pass{background:rgba(74,222,128,.14);color:var(--accent);border:1px solid rgba(74,222,128,.38)}
+.badge.warn{background:rgba(251,191,36,.13);color:var(--amber);border:1px solid rgba(251,191,36,.36)}
+.badge.fail{background:rgba(248,113,113,.13);color:var(--red);border:1px solid rgba(248,113,113,.38)}
+.badge.neutral{background:rgba(147,164,192,.13);color:#b3c1d8;border:1px solid rgba(147,164,192,.3)}
+.missing{color:#a0aec4;font-style:italic;background:rgba(251,191,36,.1);
+  border-radius:5px;padding:0 5px;font-size:.8em}
+.sub{color:#7f90ad;font-size:.78rem}
+.src{font-size:.8rem;white-space:nowrap}
+.note{color:var(--muted);font-size:.8rem;margin:-4px 0 14px;max-width:95ch}
+.empty{color:var(--muted);font-style:italic}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:8px 0 12px}
+.panel pre{background:#0a1220;border:1px solid var(--line);border-radius:10px;
+  padding:12px 14px;overflow-x:auto;font-size:.8rem;line-height:1.5}
+@media (max-width:640px){
+  .kpis{grid-template-columns:repeat(auto-fit,minmax(140px,1fr))}
+  .data-table{font-size:.8rem}
+}
+
 /* ------------------------------------------------- dashboard shell + sidebar
    Added by session c56ebee8-nfl1. Purely additive: every rule below targets a
    class that only the new shell emits, so no earlier page can be affected. */

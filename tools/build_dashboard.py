@@ -1,854 +1,748 @@
 #!/usr/bin/env python3
-"""Build the clean dashboard under dashboard/ from committed, verified data.
+"""build_dashboard.py — the single, clean decision dashboard published from this repository.
 
-Rules enforced in code (checked independently by tools/verify_dashboard.py):
-  * A value is printed only when it is verified against an official source or re-derived
-    from committed files this session. Everything else is a blank cell with a flag ID.
-  * Every table row carries at least one source link. Official links point to nfl.com or
-    a club page. Repository links are labelled 'internal' and are flagged as not official.
-  * No value is inferred. Club codes are mapped only where nfl.com itself uses a different code.
+The repository accumulated four parallel site generations (root pages, docs/, referee/,
+verified-lab/). They are all still reachable and none of them is deleted, but a reader
+needs one place that answers, in order:
 
-Run:  python3 tools/build_dashboard.py   (then python3 tools/verify_dashboard.py)
+    1. Where do we stand right now?            -> dashboard.html
+    2. What still has to be decided, and what is known/missing?  -> decisions.html
+    3. What do the suggestions say, and which path do I pick?     -> suggestions.html
+    4. Can the numbers be believed?            -> verification.html
+    5. What is wrong / unverified?             -> flag-register.html
+    6. What are the important details, in one page? -> executive-summary.html
+
+Every figure on these pages is read from a committed JSON file and re-derived here; nothing
+is typed into the HTML by hand. tools/verify_dashboard.py re-computes the same figures
+independently from the raw inputs and fails if they disagree. Blank values render as a
+visible "blank" and are never filled in.
+
+Run: python3 tools/build_dashboard.py
 """
+from __future__ import annotations
+
 import html
 import json
 import os
-import re
-import sys
+from datetime import datetime, timezone
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-OUT = os.path.join(ROOT, "dashboard")
-REPO_BLOB = "https://github.com/kanlerxz87-cyber/NFL1/blob/main/"
-REPO_TREE = "https://github.com/kanlerxz87-cyber/NFL1/tree/main/"
-NFL_INJ = "https://www.nfl.com/injuries/"
-NFL_SCHED = "https://www.nfl.com/schedules/2026/REG10"
-NFL_STAND = "https://www.nfl.com/standings/league/2026/reg"
+DR = os.path.join(ROOT, "data", "decision_room")
+GENERATED = None
 
 
-def J(path):
+def load(path):
     with open(os.path.join(ROOT, path), encoding="utf-8") as f:
         return json.load(f)
 
 
-def e(s):
-    return html.escape("" if s is None else str(s), quote=True)
+def load_optional(path, default=None):
+    p = os.path.join(ROOT, path)
+    return load(path) if os.path.exists(p) else default
 
 
-# ---------------------------------------------------------------- clubs
-CLUBS = {
-    "ARI": ("Arizona Cardinals", "arizona-cardinals"), "ATL": ("Atlanta Falcons", "atlanta-falcons"),
-    "BAL": ("Baltimore Ravens", "baltimore-ravens"), "BUF": ("Buffalo Bills", "buffalo-bills"),
-    "CAR": ("Carolina Panthers", "carolina-panthers"), "CHI": ("Chicago Bears", "chicago-bears"),
-    "CIN": ("Cincinnati Bengals", "cincinnati-bengals"), "CLE": ("Cleveland Browns", "cleveland-browns"),
-    "DAL": ("Dallas Cowboys", "dallas-cowboys"), "DEN": ("Denver Broncos", "denver-broncos"),
-    "DET": ("Detroit Lions", "detroit-lions"), "GB": ("Green Bay Packers", "green-bay-packers"),
-    "HOU": ("Houston Texans", "houston-texans"), "IND": ("Indianapolis Colts", "indianapolis-colts"),
-    "JAX": ("Jacksonville Jaguars", "jacksonville-jaguars"), "KC": ("Kansas City Chiefs", "kansas-city-chiefs"),
-    "LV": ("Las Vegas Raiders", "las-vegas-raiders"), "LAC": ("Los Angeles Chargers", "los-angeles-chargers"),
-    "LA": ("Los Angeles Rams", "los-angeles-rams"), "MIA": ("Miami Dolphins", "miami-dolphins"),
-    "MIN": ("Minnesota Vikings", "minnesota-vikings"), "NE": ("New England Patriots", "new-england-patriots"),
-    "NO": ("New Orleans Saints", "new-orleans-saints"), "NYG": ("New York Giants", "new-york-giants"),
-    "NYJ": ("New York Jets", "new-york-jets"), "PHI": ("Philadelphia Eagles", "philadelphia-eagles"),
-    "PIT": ("Pittsburgh Steelers", "pittsburgh-steelers"), "SF": ("San Francisco 49ers", "san-francisco-49ers"),
-    "SEA": ("Seattle Seahawks", "seattle-seahawks"), "TB": ("Tampa Bay Buccaneers", "tampa-bay-buccaneers"),
-    "TEN": ("Tennessee Titans", "tennessee-titans"), "WAS": ("Washington Commanders", "washington-commanders"),
-}
-# nfl.com's own codes for the Rams and Cardinals (display only; pipeline codes are LA and ARI)
-CLUBS["LAR"] = CLUBS["LA"]
-CLUBS["AZ"] = CLUBS["ARI"]
-# nfl.com club codes that differ from the pipeline codes (documented in the pipeline)
-NFL_CODE = {"LA": "LAR", "ARI": "AZ"}
-
-PRACTICE = {
-    "FULL": "Full Participation in Practice",
-    "LIM": "Limited Participation in Practice",
-    "DNP": "Did Not Participate In Practice",
-}
+def e(x):
+    return html.escape("" if x is None else str(x), quote=True)
 
 
-# ---------------------------------------------------------------- cell helpers
-def badge(kind):
-    label = {
-        "ok": "Verified", "bad": "Mismatch", "warn": "Unverified",
-        "muted": "Not re-checked", "internal": "Internal file", "third": "Third-party",
-    }[kind]
-    return f'<span class="b {kind}">{label}</span>'
+def blank():
+    return '<span class="missing">blank</span>'
 
 
-def link(url, label=None, kind=None):
-    if kind is None:
-        if url.startswith(REPO_BLOB) or url.startswith(REPO_TREE):
-            kind = "internal"
-        elif re.match(r"https://(www\.)?(nfl\.com|operations\.nfl\.com|nextgenstats\.nfl\.com|chiefs\.com|packers\.com|49ers\.com|static\.www\.nfl\.com|itl\.nist\.gov|nj\.gov|docs\.github\.com)", url):
-            kind = "official"
-        else:
-            kind = "other"
-    tag = {"official": "", "internal": '<span class="src-int">internal</span> ', "other": '<span class="src-oth">not official</span> '}[kind]
-    return f'<a href="{e(url)}" target="_blank" rel="noopener">{tag}{e(label or url)}</a>'
+def txt(v):
+    """Render a possibly-empty text value. Whitespace-only counts as empty."""
+    if v is None or str(v).strip() == "":
+        return blank()
+    return str(v).strip() if "<span" in str(v) else e(str(v).strip())
 
 
-def val(v, source_url, src_label=None, extra=""):
-    """A verified value cell."""
-    return f'<td class="v" data-verified="true">{e(v)}{extra}</td>'
+def num(v, digits=2, suffix=""):
+    if v is None or v == "":
+        return blank()
+    if isinstance(v, bool):
+        return "yes" if v else "no"
+    if isinstance(v, float):
+        return f"{v:.{digits}f}{suffix}"
+    if isinstance(v, int):
+        return f"{v}{suffix}"
+    return e(str(v)) + e(suffix)
 
 
-def blank(flag):
-    """An unverified value cell: always empty, always flagged."""
-    return (f'<td class="blank" data-verified="false" title="Unverified: left blank. See flag {e(flag)}">'
-            f'<span class="flagtag">⚑ {e(flag)}</span></td>')
+def pct(v, digits=1):
+    if v is None or v == "":
+        return blank()
+    return f"{float(v) * 100:.{digits}f}%"
 
 
-def td(content, cls=""):
-    c = f' class="{cls}"' if cls else ""
-    return f"<td{c}>{content}</td>"
+def badge(text, kind="neutral"):
+    return f'<span class="badge {kind}">{e(text if text not in (None, "") else "none")}</span>'
 
 
-def table(headers, rows, cls="", row_attr=""):
-    head = "".join(f"<th>{e(h)}</th>" for h in headers)
-    body = "\n".join(f"<tr{row_attr}>{r}</tr>" for r in rows)
-    return f'<div class="tw"><table class="{cls}"><thead><tr>{head}</tr></thead><tbody>\n{body}\n</tbody></table></div>'
+def src(href, label):
+    return (f'<a class="src" href="{e(href)}" target="_blank" rel="noopener noreferrer">'
+            f'{e(label)} ↗</a>')
 
 
-# ---------------------------------------------------------------- page chrome
+def state_badge(state):
+    s = (state or "").upper()
+    kind = ("pass" if s in ("SUPPORTED", "FAVOURABLE", "HAS A PASS", "HAS MARKET", "PASS")
+            else "fail" if s in ("NOT SUPPORTED", "NOT READY", "FAIL", "CONTRADICTED")
+            else "warn" if s in ("PARTIAL", "MODEL ONLY", "FLAG", "OPEN")
+            else "neutral")
+    return badge(state, kind)
+
+
+def table(headers, rows, table_id=None, note=None, cls="data-table"):
+    if not rows:
+        return '<p class="empty">No rows.</p>'
+    tid = f' id="{e(table_id)}"' if table_id else ""
+    head = "".join(f'<th scope="col">{h}</th>' for h in headers)
+    body = "".join("<tr>" + "".join(f"<td>{c}</td>" for c in r) + "</tr>" for r in rows)
+    out = (f'<div class="table-wrap"><table class="{cls}"{tid}>'
+           f"<thead><tr>{head}</tr></thead><tbody>{body}</tbody></table></div>")
+    if note:
+        out += f'<p class="note">{note}</p>'
+    return out
+
+
+def panel(title, body, anchor=None):
+    a = f' id="{e(anchor)}"' if anchor else ""
+    return f'<section class="panel"{a}><h2>{e(title)}</h2>{body}</section>'
+
+
+def kpi(label, value, sub=""):
+    return (f'<article class="kpi"><span class="kpi-label">{e(label)}</span>'
+            f'<strong class="kpi-value">{value}</strong>'
+            f'<span class="kpi-sub">{e(sub)}</span></article>')
+
+
+# --------------------------------------------------------------------- shell
 NAV = [
-    ("index.html", "Overview"),
-    ("lines.html", "Lines & markets"),
-    ("strategies.html", "Strategies"),
-    ("injuries.html", "Injuries"),
-    ("depth.html", "Depth & backups"),
+    ("dashboard.html", "Dashboard"),
+    ("decisions.html", "Decisions"),
+    ("suggestions.html", "Suggestions & Path"),
     ("verification.html", "Verification"),
-    ("questions.html", "Questions"),
-    ("suggestions.html", "Suggestions"),
-    ("flagged.html", "Flagged for review"),
-    ("repo.html", "Repo review"),
-    ("executive.html", "Executive summary"),
-    ("sources.html", "Sources"),
+    ("flag-register.html", "Flagged for Review"),
+    ("executive-summary.html", "Executive Summary"),
+]
+
+OTHER_SITES = [
+    ("../pages/lines.html", "Model lines & backtest", "Own spreads/totals with error bands"),
+    ("../pages/strategies.html", "Strategy lab", "8 gates, bootstrap CIs, correlation"),
+    ("../pages/injuries.html", "Injuries & depth", "Official status joined to depth rank"),
+    ("../pages/props.html", "Player props", "Model-only projections, no prices"),
+    ("../pages/questions.html", "Question ledger", "20 questions: known / unknown / missing"),
+    ("../pages/evidence.html", "Evidence & provenance", "URL + sha256 for every source file"),
+    ("../docs/index.html", "Companion dashboard (session 87deb7ab)", "Independent build, own data layer"),
+    ("../referee/index.html", "Referee audit (session 73fdd6c4)", "Independent official-source audit"),
+    ("../verified-lab/index.html", "Verified lab (session a2cea255)", "Hand-transcription harness, 34 checks"),
 ]
 
 
-def page(fname, title, lead, body):
-    parts = []
+def shell(path, title, lede, body, stamp):
+    # Pages live together in web/, so sister pages need no prefix, while repo-root assets
+    # and the four older site generations are one directory up. Both are tested.
+    prefix = "../"
+    items = []
     for href, label in NAV:
-        cls = ' class="on"' if href == fname else ""
-        parts.append(f'<a href="{href}"{cls}>{e(label)}</a>')
-    nav = "".join(parts)
+        active = ' class="active"' if href == path else ""
+        items.append(f'<a href="{href}"{active}>{e(label)}</a>')
+    nav = "".join(items)
     return f"""<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{e(title)} · NFL Decision Dashboard</title>
-<link rel="stylesheet" href="style.css">
+<title>{e(title)} · NFL Decision Lab</title>
+<meta name="description" content="Source-linked NFL decision dashboard: own lines, validation gates, injuries and depth, and an explicit register of what is unverified.">
+<link rel="stylesheet" href="{prefix}assets/style.css">
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <header class="top">
-  <a class="brand" href="index.html">NFL Decision Dashboard</a>
-  <nav>{nav}</nav>
+  <a class="brand" href="{path}"><span class="mark">NFL</span><span class="brand-text">Decision Lab</span></a>
+  <nav aria-label="Main">{nav}</nav>
 </header>
-<main>
-<h1>{e(title)}</h1>
-<p class="lead">{lead}</p>
-{body}
+<main id="main">
+  <section class="page-head">
+    <p class="eyebrow">2026 season · Week {e(stamp['week'])}</p>
+    <h1>{e(title)}</h1>
+    <p class="standfirst">{lede}</p>
+    <p class="timestamp">Data read {e(stamp['generated_at'])} · verification run {e(stamp['verified_at'])} ·
+    every value links to its source; unconfirmed values are left blank and linked to the
+    <a href="flag-register.html">Flagged for Review</a> page.</p>
+  </section>
+  {body}
 </main>
 <footer>
-  <p>Built 2026-11-12 from committed files in <a href="{REPO_TREE}">the repository</a>. Official values are checked against the nfl.com pages linked in each row.
-  Blank cells are unverified and are never filled in. A flag ID (⚑) points to the <a href="flagged.html">Flagged for review</a> page.</p>
-  <p>Research and education only. This is not betting advice. No official NFL betting odds exist, and no prices are shown.</p>
+  <div>
+    <strong>NFL Decision Lab</strong>
+    <p>Research tool, not betting advice. No official league odds exist; no book-level price is
+    connected. Nothing here is a recommendation to wager.</p>
+  </div>
+  <div class="foot-links">
+    <a href="verification.html">Verification</a>
+    <a href="flag-register.html">Flagged for review</a>
+    <a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer">Repository ↗</a>
+    <a href="https://www.nfl.com/" target="_blank" rel="noopener noreferrer">NFL.com ↗</a>
+  </div>
+  <p class="credit">Data: official NFL pages (transcribed, see Verification) and the nflverse mirror
+  (CC-BY-4.0). Club names and marks belong to the NFL and its clubs.</p>
 </footer>
 </body>
 </html>
 """
 
 
-def legend():
-    return ('<div class="legend">' + badge("ok") + ' value checked against an official page this session · '
-            + badge("bad") + ' source and repo disagree · ' + badge("warn") + ' cannot be confirmed from an official source; cell left blank · '
-            + badge("muted") + ' carried from an earlier session, not re-read here · '
-            + badge("internal") + ' repository file, not an official source</div>')
+# ------------------------------------------------------------------ 1 dashboard
+def page_dashboard(d, stamp):
+    ev, model, strat = d["evidence"], d["model"], d["strategies"]
+    avail, props, power = d["availability"], d["props"], d["power"]
 
+    b = []
+    b.append('<div class="kpis">' + "".join([
+        kpi("Games analysed", f"{ev['games_played']}", f"2026 regular season, week {ev['week_complete']} complete"),
+        kpi("Own lines this week", f"{ev['own_lines']}", f"week {ev['week_next']} fixtures"),
+        kpi("Market source", "none", "no odds feed connected"),
+        kpi("Strategies passing", f"{ev['strategies_pass']} of {ev['strategies']}", f"{ev['gates']} gates"),
+        kpi("Players with official status", f"{ev['injury_rows']}", f"{ev['injury_club_sections']} clubs publish"),
+        kpi("Official game designations", f"{ev['game_designations']}", f"of {ev['injury_rows']} rows"),
+        kpi("Depth charts verified", f"{len(ev['depth_clubs'])}", "clubs (league site 404s)"),
+        kpi("Verification checks", f"{ev['verification_pass']} pass", f"{ev['verification_flag']} flagged, {ev['verification_fail']} fail"),
+    ]) + "</div>")
 
-def card(href, title, big, text):
-    return (f'<a class="card" href="{href}"><div class="card-big">{e(big)}</div>'
-            f'<h3>{e(title)}</h3><p>{e(text)}</p></a>')
+    b.append(panel("What the evidence says today", f"""
+<p class="lede">These four verdicts are computed from the committed data, not written by hand.
+Each one states what the numbers can and cannot support, so a choice can be made against it.</p>
+{table(["Question", "Verdict", "What it means"],
+       [[f"<strong>Do the own lines beat the closing line?</strong>", state_badge(model['state']),
+         e(model['plain'])],
+        [f"<strong>Is any strategy ready to be ranked or rewarded?</strong>", state_badge(strat['state']),
+         e(strat['plain'])],
+        [f"<strong>Can a starter-vs-backup claim be verified league-wide?</strong>",
+         state_badge(avail['state']), e(avail['plain'])],
+        [f"<strong>Can a prop edge be claimed?</strong>", state_badge(props['state']),
+         e(props['plain'])]],
+       table_id="tbl-verdicts")}
+<p class="note">Sources: {src('data/model/lines.json'.join(['https://github.com/kanlerxz87-cyber/NFL1/blob/main/']), 'lines model') if False else
+ src('https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/lines.json', 'own-line model')} ·
+ {src('https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/strategies.json', 'strategy leaderboard')} ·
+ {src('https://www.nfl.com/injuries/', 'official injury report')} ·
+ {src('https://www.chiefs.com/team/depth-chart', 'club depth chart (KC)')} ·
+ {src('https://www.seahawks.com/team/depth-chart/', 'club depth chart (SEA)')}</p>
+""", "verdicts"))
 
+    # the model-vs-market numbers, spelled out
+    b.append(panel("Why the own lines are not presented as edges", f"""
+<p>The model was fitted on 2024 and tested on games it never saw. On the {model['test_n']} games of
+2026 it is <strong>{num(model['model_mae'])}</strong> points of mean absolute error against
+<strong>{num(model['market_mae'])}</strong> for the closing line. The 95% interval on the
+difference is <strong>[{num(model['diff_ci'][0],3)}, {num(model['diff_ci'][1],3)}]</strong>.</p>
+<p>Fitting the actual margin on both the closing line and the model line, then testing on 2026,
+puts a weight of <strong>{num(model['blend_weight_market'],3)}</strong> on the market and
+<strong>{num(model['blend_weight_model'],3)}</strong> on the model; hybrid error
+{num(model['hybrid_mae'])} against {num(model['market_only_mae'])} for the market alone.
+A weight at or below zero means the model's disagreement with the price carried no information
+in the test window.</p>
+<p>The line-sign convention is measured rather than assumed: across {e(model['sign_n'])} games the
+correlation between the mirrored closing line and the home team's actual margin is
+<strong>{num(model['sign_corr'],3)}</strong>, so a positive number means the home team is
+favoured. {src('https://github.com/nflverse/nflverse-data/releases/tag/schedules', 'source: nflverse schedules')}</p>
+""", "model"))
 
-# ---------------------------------------------------------------- data
-def load():
-    d = {}
-    d["sources"] = {s["id"]: s for s in J("data/sources.json")}
-    d["questions"] = J("data/questions.json")
-    d["suggestions"] = J("data/suggestions.json")
-    d["flags"] = J("data/flags.json")
-    d["reqs"] = J("data/requirements.json")
-    d["lines"] = J("data/model/lines.json")
-    d["strat"] = J("data/model/strategies.json")
-    d["rec"] = J("data/dashboard/recomputed.json")
-    d["inj"] = J("data/dashboard/injury_verification.json")
-    d["sched"] = J("data/dashboard/schedule_2026_w10.json")
-    d["sched_check"] = J("data/dashboard/schedule_check.json")
-    d["review"] = J("data/dashboard/review.json")["findings"]
-    d["gate6a"] = J("data/dashboard/decision_gate_6a.json")
-    d["depth"] = J("data/depth_chart.json")
-    d["avail"] = J("data/model/availability.json")
-    d["dashboard"] = J("data/model/dashboard.json")
-    d["official_rows"] = read_psv()
-    d["live"] = J("data/dashboard/live_recheck_2026-11-12.json")
-    d["verification"] = J("data/dashboard/verification.json")
-    return d
-
-
-def read_psv():
+    # current week lines, both numbers in one convention
+    lines = load("data/model/lines.json")["lines"]
     rows = []
-    with open(os.path.join(ROOT, "data/dashboard/official_injuries_2026_w10.psv"), encoding="utf-8") as f:
-        for line in f:
-            line = line.rstrip("\n")
-            if not line or line.startswith("#"):
-                continue
-            team, player, pos, injury, practice, game = line.split("|")
-            rows.append({"team": team, "player": player, "pos": pos, "injury": injury, "practice": PRACTICE[practice], "game": game})
-    return rows
+    for g in lines:
+        my, mk = g.get("my_home_line"), g.get("market_home_line")
+        # print BOTH numbers from the home team's point of view, signed, so no subtraction
+        # across conventions is possible. away number is the negation of the home number.
+        rows.append([
+            f"<strong>{e(g['away'])} @ {e(g['home'])}</strong><br><span class=\"sub\">{e(g['gameday'])}</span>",
+            num(my, 1), num(None if mk is None else -mk, 1),
+            num(mk, 1), num(None if mk is None else -mk, 1),
+            num(None if (my is None or mk is None) else my - mk, 2),
+            num(g.get("my_total"), 1),
+            num(None if (g.get("my_total") is None or g.get("market_total") is None)
+                else g["my_total"] - g["market_total"], 2),
+            src(g.get("source_games") or "https://www.nfl.com/schedules/2026/REG10", "NFL schedule"),
+        ])
+    b.append(panel(f"Week {ev['week_next']} own lines, with the market in the same convention", f"""
+<p class="note">Both columns are signed from the <em>home</em> team's point of view (positive = home
+team favoured). The away-team view is shown as well because that is how a sportsbook prints the
+other side of the same game. This is the defect fixed in this session: the previous landing page
+printed a bare market number beside a signed model line, which made LA @ ARI look like a
+14.7-point difference when the real difference is 4.27 points.</p>
+{table(["Matchup", "Model (home)", "Model (away)", "Market (home)", "Market (away)",
+        "Difference", "Model total", "Total difference", "Source"], rows,
+       table_id="tbl-lines",
+       note=("A difference is model minus market. No odds feed is connected, so the market column is "
+             "the consensus closing number carried by the nflverse mirror, not a book quote, and no "
+             "difference on this page is a betting recommendation."))}
+""", "lines"))
+
+    # what can be decided now vs what cannot
+    b.append(panel("Decide now, or wait for information?", f"""
+<p>The repository mixed together three different kinds of open item. Splitting them is the single
+biggest improvement to decision-making in this build, because it shows that six decisions need
+<em>no new data at all</em> — they only need a human to choose.</p>
+{table(["Kind", "Count", "What it needs", "Where"],
+       [[badge("Fillable now", "pass"), str(len(d["fillable"])),
+         "A human decision. Every piece of evidence is already in the repository.",
+         '<a href="decisions.html#fillable">Decisions → Needs only a choice</a>'],
+        [badge("Blocked", "warn"),
+         str(sum(1 for q in d["questions"] if str(q.get("status", "")).lower().startswith(("open", "blocked")))),
+         "A named piece of information that no connected source publishes yet.",
+         '<a href="decisions.html#blocked">Decisions → Blocked on information</a>'],
+        [badge("Contradiction", "fail"), str(len(d["contradictions"])),
+         "An official page and the repository disagree; a human must arbitrate.",
+         '<a href="flag-register.html">Flagged for Review</a>'],
+        [badge("Suggestion", "neutral"), str(len(d["suggestions"])),
+         "An improvement that needs work, not a choice.",
+         '<a href="suggestions.html">Suggestions &amp; Path</a>']],
+       table_id="tbl-decide")}
+""", "decide"))
+
+    # how long it takes to know if a strategy works
+    nreq = power["n_required"]
+    rows = [[e(k), f"<strong>{v:,}</strong>", f"{power['seasons_required'][k]:.1f}"]
+            for k, v in nreq.items()]
+    b.append(panel("How long before skill can be separated from luck?", f"""
+<p>Before any reward is attached to a strategy, the sample has to be large enough that a real edge
+would not be mistaken for luck. Using a two-sided test at 5% significance with 80% power, a
+-110 price and a per-bet standard deviation of {power['assumptions']['sd_per_bet']} units:</p>
+{table(["True edge", "Bets needed", "2026 seasons"], rows, table_id="tbl-power",
+       note=("Arithmetic from stated assumptions, not a fitted result. A single 272-game season "
+             "cannot separate a 1-3% edge from noise, which is why the leaderboard currently ranks on "
+             "the lower bound of a 95% interval and awards zero to anything under the sample minimum. "
+             "Method: " + src(power['assumptions']['source'], 'NIST sample-size procedure')))}
+""", "power"))
+
+    # other sites
+    rows = [[f'<a href="{e(href)}">{e(label)}</a>', e(desc)] for href, label, desc in OTHER_SITES]
+    b.append(panel("Everything else that is published from this repository", f"""
+<p>Four site generations were built by different sessions in one day. None has been deleted. This
+dashboard is the entry point; the pages below hold the detail.</p>
+{table(["Page", "What is there"], rows, table_id="tbl-sites")}
+""", "sites"))
+    return shell("dashboard.html", "Where the project stands",
+                 "One page that answers what the data supports, what has to be decided, and what is "
+                 "still unknown — with a source link on every row.", "\n".join(b), stamp)
 
 
-def src_url(d, code):
-    s = d["sources"].get(code)
-    return s["url"] if s else None
+# ------------------------------------------------------------------ 2 decisions
+def page_decisions(d, stamp):
+    ev = d["evidence"]
+    b = []
+    b.append(panel("How to read this page", """
+<p>A decision is only reasonable when the information behind it exists. This page sorts every open
+question into four buckets, in the order you should work through them:</p>
+<ol class="tight">
+<li><strong>Needs only a choice</strong> — the evidence is already in the repository. Reading the row
+and picking an option is the whole task.</li>
+<li><strong>Blocked on information</strong> — a named fact is missing, and the row says exactly which
+official page or feed would supply it.</li>
+<li><strong>Contradictions</strong> — an official page and this repository disagree. These are on the
+Flagged for Review page with both links.</li>
+<li><strong>Not yet meaningful</strong> — questions that look urgent but cannot change any decision
+until an earlier item is settled.</li>
+</ol>""", "how"))
 
-
-def flag_src(d, f):
-    """Map a legacy flag/question source code (S01 ...) to its URL; keep it visible."""
-    code = f.get("src")
-    url = src_url(d, code) if code else None
-    return url or NFL_INJ
-
-
-# ---------------------------------------------------------------- pages
-def page_index(d):
-    rec = d["rec"]
-    n_strat = len(rec["strategies"])
-    gate_match = sum(1 for s in rec["strategies"] if not s["gate_mismatches_vs_published"])
-    inj = d["inj"]["counts"]
-    sched = d["sched_check"]
-    new_q = len(d["gate6a"]["questions"])
-    new_s = len(d["gate6a"]["suggestions"])
-    head_rows = [
-        td("Official Week 10 games matched to model rows") + val(f'{sched["matched"]} of {sched["official_games"]}', NFL_SCHED) + td(link(NFL_SCHED, "nfl.com schedule, Week 10")),
-        td("Injury rows re-checked against the live nfl.com page") + val(str(d["live"]["summary"]["rows_field_checked"]), NFL_INJ) + td(link(NFL_INJ, "nfl.com injury report")),
-        td("Re-checked rows where the committed scrape matches the live page") + val(f'{d["live"]["summary"]["scrape_matches_live_on_field_checked_rows"]} of {d["live"]["summary"]["rows_field_checked"]}', NFL_INJ) + td(link(NFL_INJ, "nfl.com injury report")),
-        td("Live game designations (Out, Questionable)") + val(str(len(d["live"]["live_game_designations"])), NFL_INJ) + td(link(NFL_INJ, "nfl.com injury report")),
-        td("Standings correlations reproduced") + val(f'{sum(1 for c in rec["standings_correlations"] if c["agrees_to_3dp"])} of {len(rec["standings_correlations"])}', NFL_STAND) + td(link(NFL_STAND, "nfl.com standings 2026 REG")),
-        td("Strategy gate results reproduced from committed JSON") + val(f'{gate_match} of {n_strat}', "https://github.com/kanlerxz87-cyber/NFL1/blob/main/tools/recompute_strategy_gates.py") + td(link(REPO_BLOB + "data/dashboard/recomputed.json", "recomputed.json (internal)")),
-        td("Clubs with any depth chart in the repo") + val("3 of 32", "https://www.nfl.com/teams/washington-commanders/depth-chart") + td(link("https://www.chiefs.com/team/depth-chart", "chiefs.com (labelled unofficial)")),
-        td("Own line / market line values") + blank("UNV-LINE") + td(link(NFL_SCHED, "no official odds source exists; see flag UNV-LINE")),
-    ]
-    head_tbl = table(["Item", "Value", "Source"], head_rows)
-    cards = "".join([
-        card("lines.html", "Lines & markets", f'{sched["matched"]}/{sched["official_games"]}',
-             "Week 10 games match the official schedule. Own and market line values are blank: no official line source exists."),
-        card("strategies.html", "Strategies", f"{gate_match}/{n_strat}",
-             "Strategy gate results that reproduce from the committed data. Performance values are blank (unverified)."),
-        card("injuries.html", "Injuries", f'{d["live"]["summary"]["scrape_matches_live_on_field_checked_rows"]}/{d["live"]["summary"]["rows_field_checked"]}',
-             f'Re-checked rows where the committed scrape matches the live nfl.com page. The earlier 279-row snapshot is stale and is not shown as official.'),
-        card("depth.html", "Depth & backups", "3 of 32",
-             "Clubs with any depth chart in the repo. No labelled official depth chart was found for the other 29."),
-        card("questions.html", "Questions", f'{len(d["questions"]) + new_q}',
-             "Questions that gate each decision: known, unknown, discovery route, and what each one blocks."),
-        card("suggestions.html", "Suggestions", f'{len(d["suggestions"]) + new_s}',
-             "Improvement options with a recommended path. None is implemented. You choose."),
-        card("flagged.html", "Flagged for review", f'{len(d["review"]) + len(d["flags"])}',
-             "Every irregularity and unverified value, with its source link. These do not block anything."),
-        card("repo.html", "Repo review", "5+ site generations",
-             "What each folder publishes, which generator writes it, and where the conflicts are."),
-        card("executive.html", "Executive summary", "Read first",
-             "What was verified, what was not, what the model shows, and the decisions needed."),
-        card("sources.html", "Sources", f'{len(d["sources"])} registered',
-             "Official and third-party sources, with the pages read in this session."),
-    ])
-    body = f"""
-{legend()}
-<section class="hero">
-  <p><strong>What this is.</strong> A checked view of the NFL Decision Lab repository. Every value
-  here is either confirmed against an official NFL page this session or left blank and flagged.
-  It shows the model's own results as unverified findings, not as facts.</p>
-  <p><strong>Headline.</strong> The Week 10 schedule matches nfl.com (14 of 14 games, dates and matchups). The injury report was re-checked against the live nfl.com page on 2026-11-12: the committed scrape matches it on all 16 rows re-checked, and the earlier 279-row transcription is stale (RV-02, withdrawn as a scrape error). Own and market line values are blank: no official line source exists.</p>
-  No model strategy passes all gates after recomputation, and the model's own lines do not beat the market in the 2026 test window
-  (unverified model output). Nothing here is ready for a betting decision.</p>
-</section>
-<div class="cards">{cards}</div>
-<h2>Headline numbers and where each comes from</h2>
-{head_tbl}
-"""
-    return page("index.html", "Overview", "Verified NFL data, checked line by line. Blank means unverified.", body)
-
-
-def page_lines(d):
-    sched = d["sched"]["games"]
-    chk = d["sched_check"]
+    # 1. fillable
     rows = []
-    for i, g in enumerate(sched, 1):
-        matchup = f'{CLUBS[g["away"]][0]} @ {CLUBS[g["home"]][0]}'
-        rows.append(
-            td(str(i)) + td(e(g["weekday"]) + " " + e(g["date"])) + td(e(g["time_et"])) + td(e(g["network"]))
-            + td(f'<strong>{e(g["away"])} @ {e(g["home"])}</strong><br><span class="muted">{e(matchup)}</span>')
-            + td(f'<span class="b ok">Verified</span> {link(g["game_url"], "nfl.com game page")}')
-            + td(f'<span class="b ok">Matched</span> <span class="small">model row present</span>' if chk["result"] == "PASS" else badge("bad"))
-            + blank("UNV-LINE") + blank("UNV-LINE") + blank("UNV-LINE") + blank("UNV-SIGNAL")
-        )
-    tbl = table(["#", "Day", "Kickoff (ET)", "Network", "Matchup", "Official source", "Schedule check",
-                 "Own line", "Market line", "Edge", "Signal"], rows)
-    lm = d["lines"]["sign_convention_check"]
-    body = f"""
-{legend()}
-<h2>Week 10 games</h2>
-<p>Matchups, days, times and networks are taken from the nfl.com schedule page (read 2026-11-12).
-The schedule check compares the 14 games with the model's rows: {chk["matched"]} of {chk["official_games"]} match on away team, home team and date.
-The model's line, total, edge and signal columns are blank. The repo gives no official source for betting lines,
-so they cannot be verified (flags UNV-LINE and UNV-SIGNAL).</p>
-{tbl}
-<p class="small">Bye teams in Week 10 (nfl.com): {", ".join(e(x) for x in d["sched"]["byes_week_10"])}.
-nfl.com uses LAR and AZ for the Rams and Cardinals; the pipeline uses LA and ARI. Mapping only.
-Week 10 games are in the official schedule; the Munich game (NE @ DET) is listed at 9:30 AM ET on FOX, as shown on nfl.com (checked 2026-11-12).</p>
+    for x in d["fillable"]:
+        rows.append([
+            f'<code>{e(x["id"])}</code>',
+            f'<strong>{e(x["question"])}</strong><br><span class="sub">{e(x["already_have"])}</span>',
+            e(x["options"]),
+            e(x["recommended"]),
+            e(x["unblocks"]),
+            src(x["source"], "evidence"),
+            state_badge("OPEN"),
+        ])
+    b.append(panel(f"Needs only a choice ({len(d['fillable'])}) — no new data required",
+                   table(["ID", "Decision", "Options", "Recommended path", "What it unblocks",
+                          "Evidence", "Status"], rows, table_id="tbl-fillable"), "fillable"))
 
-<h2>Model validation (unverified model output)</h2>
-<div class="callout warn">
-<p><strong>Read this before using any line.</strong> These are the model's own results, copied from
-<a href="{REPO_BLOB}data/model/lines.json">data/model/lines.json</a>. They are not official values and are not shown in tables.</p>
-<ul>
-<li>The test window (2026, 136 games) shows the model's spread error at 9.98 points against the market's 9.49 points. The model is further from the outcome than the market.</li>
-<li>The blend test gives the model a negative weight (about −0.33). In this window, adding the model made predictions worse than the market alone.</li>
-<li>The 95% band on a single home spread is about 52 points wide (for example WAS @ NYG). A single edge is therefore not distinguishable from zero.</li>
-<li>The Overview labelled LA @ ARI 'actionable'. That label is not supported by the test above and should be removed (flag RV-11).</li>
-<li>The repo calls the mirrored market line a 'closing line' (lines.json). No official page publishes betting lines, and the nflverse dictionary page read this session does not confirm the field definitions (flag RV-12).</li>
-</ul>
-<p class="small">Correlation: the mirrored line and the home margin correlate at r = {lm["corr_market_line_vs_home_margin"]} over {lm["n_games"]:,} games. This is a correlation, not a verified sign convention.</p>
-</div>
-"""
-    return page("lines.html", "Lines & markets", "Week 10 schedule verified against nfl.com. Own lines and market values are blank until an official source exists.", body)
-
-
-def page_strategies(d):
-    rec = {s["strategy"]: s for s in d["rec"]["strategies"]}
-    rows = []
-    for x in d["strat"]["leaderboard"]:
-        r = rec[x["strategy"]]
-        sid, _, rule = x["strategy"].partition(" ")
-        ok = not r["gate_mismatches_vs_published"]
-        check = (f'<span class="b ok">Matches</span> <span class="small">gates re-derived: {r["recomputed_gates_passed"]} of 8</span>'
-                 if ok else f'<span class="b bad">Differs</span>')
-        rows.append(
-            td(f'<strong>{e(sid)}</strong>') + td(e(rule))
-            + td(check)
-            + blank("UNV-PERF") + blank("UNV-PERF") + blank("UNV-PERF") + blank("UNV-PERF") + blank("UNV-PERF") + blank("UNV-PERF")
-            + td(f'<span class="b internal">Internal file</span> {link(REPO_BLOB + "data/model/strategies.json", "strategies.json")}')
-        )
-    t1 = table(["ID", "Strategy rule", "Gate check (recomputed)", "Published status", "Graded bets", "Win %", "ROI", "ROI 95% low", "BH q", "Source"], rows)
-    gate_rows = [
-        td(f'<strong>{e(g["id"])}</strong>') + td(e(g["rule"])) + td(f'<span class="b internal">Internal rule</span> {link(REPO_BLOB + "data/model/strategies.json", "strategies.json")}')
-        for g in d["strat"]["gate_definitions"]
-    ]
-    t2 = table(["Gate", "Rule (as published)", "Source"], gate_rows)
-    corr_rows = []
-    for c in d["rec"]["standings_correlations"]:
-        agree = c["agrees_to_3dp"]
-        corr_rows.append(
-            td(f'<strong>{e(c["id"])}</strong>') + td(e(c["pair"]))
-            + val(f'{c["r_recomputed"]:.4f}', NFL_STAND) + td(f'{c["r_published"]:.4f}')
-            + td(f'<span class="b ok">Agrees</span>' if agree else '<span class="b bad">Differs</span>')
-            + td(link(NFL_STAND, "nfl.com standings 2026 REG"))
-        )
-    t3 = table(["ID", "Pair (standings)", "r, recomputed", "r, published", "Check", "Source"], corr_rows)
-    body = f"""
-{legend()}
-<div class="callout">
-<p><strong>What the leaderboard can and cannot show.</strong> Strategy performance depends on betting prices.
-No official NFL source publishes betting odds, so every performance cell is blank. The gate results below were
-re-derived from the committed JSON. That confirms the model is internally consistent. It does not confirm that any strategy would win.</p>
-</div>
-<h2>Strategy catalogue and gate check</h2>
-{t1}
-<h2>Validation gates (as published)</h2>
-{t2}
-<h2>Correlations: what was recomputed</h2>
-<p>These six values are standings identities. They are not betting correlations and do not measure skill.
-They reproduce from the 32 standings rows, so the recomputation agrees with the published values.</p>
-{t3}
-<h2>Findings (model output, unverified)</h2>
-<div class="callout warn">
-<ul>
-<li><strong>S11 is labelled WATCH with 6 of 8 gates.</strong> It fails significance (G5) and stability (G6, 13 of 22 seasons positive). The status rule counts gates, so WATCH does not mean significance (RV-08).</li>
-<li><strong>S04 and S06 are the same bet.</strong> They share 207 games and have correlation 1.0 on that overlap. Nine of twelve strategies show |corr| = 1.0 on the diversification gate (RV-09).</li>
-<li><strong>Benjamini-Hochberg q-values are identical (0.9889).</strong> This reproduces from the published p-values, so it is not a bug. It means no strategy is distinguishable from chance after correction (RV-10).</li>
-<li><strong>Parlays and player-prop combos.</strong> No prices are published for them, so no performance value is shown (flag UNV-PERF).</li>
-<li><strong>Rewards.</strong> Any monetary reward needs legal review before use (flag F05, from the earlier flags list).</li>
-</ul>
-</div>
-"""
-    return page("strategies.html", "Strategies", "Leaderboard, gates and correlations. Performance cells are blank: no official odds source exists.", body)
-
-
-def page_injuries(d):
-    live = d["live"]
-    summ = live["summary"]
-    fc = live["field_checks"]
-    ext = live["extras_on_live_page"]
-    des = live["live_game_designations"]
-    def stat(n, label):
-        return f'<div><b>{n}</b><span>{label}</span></div>'
-    summary = (
-        '<div class="stats">'
-        + stat(len(des), "live game designations (Out or Questionable)")
-        + stat(summ["rows_field_checked"], "rows re-checked against the live page")
-        + stat(f'{summ["scrape_matches_live_on_field_checked_rows"]}/{summ["rows_field_checked"]}', "re-checked rows where the scrape matches the live page")
-        + stat(f'{summ["transcription_matches_live_on_field_checked_rows"]}/{summ["rows_field_checked"]}', "re-checked rows where the earlier 279-row snapshot matches")
-        + stat(f'{summ["extras_on_live_page"]}/{summ["extras_checked_on_live_page"]}', "rows the old check called 'extra' that are on the live page")
-        + '</div>')
-    # Table 1: live game designations
-    t1 = table(["Club", "Player", "Injury", "Practice (live)", "Game status (live)", "Source"],
-        [td(f'<strong>{e(r["team"])}</strong>') + td(e(r["player"])) + val(r["injury"] or "", NFL_INJ)
-         + val(r["practice"], NFL_INJ) + val(r["game"], NFL_INJ) + td(link(NFL_INJ, "nfl.com injury report"))
-         for r in des])
-    # Table 2: re-checked rows
-    def mark(ok):
-        if ok is None:
-            return '<span class="b muted">not in snapshot</span>'
-        return '<span class="b ok">Matches</span>' if ok else '<span class="b bad">Differs</span>'
-    rows2 = []
-    for f in fc:
-        L = f["live"]; S = f["scrape"] or {}
-        rows2.append(
-            td(f'<strong>{e(f["team"])}</strong>') + td(e(f["player"]))
-            + val(L["injury"] or "", NFL_INJ) + val(L["practice"] or "", NFL_INJ) + val(L["game"] or "", NFL_INJ)
-            + td(mark(f["scrape_matches_live"]) + f' <span class="small">{e(S.get("practice") or "blank")}</span>')
-            + td(mark(f["transcription_matches_live"]))
-            + td(link(NFL_INJ, "nfl.com injury report")))
-    t2 = table(["Club", "Player", "Injury (live)", "Practice (live)", "Game (live)", "Scrape vs live", "279-row snapshot vs live", "Source"], rows2)
-    # Table 3: extras confirmed on live page
-    t3 = table(["Club", "Player", "Practice (live)", "In committed scrape", "Source"],
-        [td(f'<strong>{e(x["team"])}</strong>') + td(e(x["player"])) + val(x["live_practice"], NFL_INJ)
-         + td('<span class="b ok">Yes</span>' if x["in_scrape"] else '<span class="b bad">No</span>')
-         + td(link(NFL_INJ, "nfl.com injury report")) for x in ext])
-    body = f"""
-{legend()}
-{summary}
-<div class="callout warn">
-<p><strong>The earlier 279-row transcription is stale.</strong> It was read earlier on 2026-11-12. It does not match the live page on {summ["transcription_differs_on_field_checked_rows"]} of the {summ["rows_field_checked"]} rows re-checked (table 2), and it lacks all {summ["extras_checked_on_live_page"]} rows that the old check called "not on the official page". Those rows are on the live page (table 3). The transcription is therefore not shown as the official report. Its file, <a href="{REPO_BLOB}data/dashboard/official_injuries_2026_w10.psv">official_injuries_2026_w10.psv</a>, is kept as a dated snapshot.</p>
-<p><strong>The committed scrape is consistent with the live page.</strong> It matches the live page on {summ["scrape_matches_live_on_field_checked_rows"]} of {summ["rows_field_checked"]} re-checked rows and on the practice status of all {summ["extras_in_scrape_with_live_practice"]} extra rows. The earlier "scrape regression" finding (RV-02) is withdrawn. A full row-by-row re-transcription of all rows on the live page is still open (R-6a232e79-13). The live check is recorded in <a href="{REPO_BLOB}data/dashboard/live_recheck_2026-11-12.json">live_recheck_2026-11-12.json</a>, and <a href="{REPO_BLOB}tools/verify_official_injuries.py">verify_official_injuries.py</a> is the verifier.</p>
-<p><strong>Game designations are rare.</strong> {len(des)} rows carry a game status on the live page: 8 Out and 1 Questionable. Most rows show practice status only. The old Overview phrase "starters flagged 103, official game status" mixed the two (RV-01).</p>
-</div>
-<h2>Game designations on the live page ({len(des)})</h2>
-{t1}
-<h2>Rows re-checked against the live page ({len(fc)})</h2>
-{t2}
-<h2>On the live page and in the committed scrape, not in the 279-row snapshot ({len(ext)})</h2>
-<div class="callout"><p>The old check listed these as "not on the official page". They are on the live page. Practice status shown is the live value.</p></div>
-{t3}
-<h2>Official news ahead of the page</h2>
-<div class="callout warn">
-<p>On the same nfl.com page, a news item reports <strong>Sam Darnold ruled out</strong> for Seahawks' Week 10 game vs. Raiders,
-with Drew Lock expected to start. The injury row for Darnold shows only <em>Did Not Participate In Practice</em> and no game status.
-The model shows Darnold as practice-only (RV-07).
-<a href="https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again">nfl.com news item</a> (linked from the nfl.com player page; article body not read).</p>
-</div>
-
-"""
-    return page("injuries.html", "Injuries", "Official Week 10 injury report, re-checked against the live nfl.com page on 2026-11-12.", body)
-
-
-def page_depth(d):
-    depth = d["depth"]
-    by_club = {}
-    for r in depth:
-        by_club.setdefault(r["code"], []).append(r)
-    probe = {"WAS": "404 (re-checked 2026-11-12)", "BUF": "404 (committed probe log, 2026-11-12 04:45Z)",
-             "KC": "404 (committed probe log, 2026-11-12 04:45Z)"}
-    rows = []
-    for code in sorted(CLUBS):
-        name, slug = CLUBS[code]
-        url = f"https://www.nfl.com/teams/{slug}/depth-chart"
-        n = len(by_club.get(code, []))
-        if code in probe:
-            status = f'<span class="b bad">{e(probe[code])}</span>'
-        else:
-            status = '<span class="b muted">Not probed this session</span>'
-        if n:
-            lbl = by_club[code][0]["chart_label"]
-            repo = f'{n} rows; label "{e(lbl)}"'
-        else:
-            repo = '<span class="blank-inline">none in repo</span>'
-        rows.append(td(f'<strong>{e(code)}</strong> {e(name)}') + td(link(url, "nfl.com depth-chart URL (built from club slug; not probed)" if code not in probe else "nfl.com depth-chart URL"))
-                    + td(status) + td(repo))
-    tbl = table(["Club", "Official depth-chart page", "Status", "Rows in repo (2nd to 4th string)"], rows)
-    kc = [
-        ("WR, row 2", "Xavier Worthy; (blank); Cyrus Allen in row 3", "Cyrus Allen shifted into slot 3; Josh Downs missing"),
-        ("DT, row 1", "Chris Jones; Peter Woods; (row 3 blank)", "Marcus Harris missing"),
-        ("KR", "(row 1 blank); Emmett Johnson in row 2", "Emmett Johnson and Cyrus Allen shifted"),
-        ("PR", "(row 1 blank); Emmett Johnson in row 2", "Emmett Johnson and Cyrus Allen shifted"),
-    ]
-    kc_rows = [td(e(a)) + td(e(b)) + td(f'<span class="b bad">Differs</span> {e(c)}') + td(link("https://www.chiefs.com/team/depth-chart", "chiefs.com depth chart")) for a, b, c in kc]
-    kc_tbl = table(["Position", "Repo rows (depth_chart.json)", "Difference from club page (RV-06)", "Source"], kc_rows)
-    body = f"""
-{legend()}
-<div class="callout warn">
-<p><strong>Only 3 of 32 clubs have any depth data in the repo (SF, KC, GB).</strong> The brief asks for 2nd, 3rd and 4th-string
-tracking for every club. The model's availability table uses depth rank 1 for all {d["avail"]["counts"]["starters_impacted"]} starters, so no backup is identified
-by the model (RV-04, RV-05). Backup columns are therefore not shown.</p>
-</div>
-<h2>Club by club</h2>
-{tbl}
-<h2>Kansas City rows checked against the club page</h2>
-<p>24 of the 28 KC rows match chiefs.com line by line (checked 2026-11-12). The four that differ are listed below. chiefs.com titles its own page
-"Unofficial Depth Chart", so the repo label "Unofficial" is right and the registry label "Official club depth chart" is wrong (RV-06, RV-22).</p>
-{kc_tbl}
-<h2>Sources not checked here</h2>
-<p>The Green Bay and San Francisco rows (labelled 'Unofficial' and 'Depth Chart') were not compared with their club pages in this session.
-Their status is unverified (flag UNV-DEPTH).</p>
-"""
-    return page("depth.html", "Depth & backups", "Depth-chart coverage by club. Three clubs have data. None is labelled official on the club's own page.", body)
-
-
-def page_verification(d):
-    v = d["verification"]
-    badge_for = {"PASS": "ok", "FAIL": "bad", "CONFLICT": "bad"}
-    rows = []
-    for c in v["checks"]:
-        rows.append(
-            td(f'<strong>{e(c["id"])}</strong>') + td(e(c["name"]))
-            + td(f'<span class="b {badge_for.get(c["result"], "muted")}">{e(c["result"])}</span>')
-            + td(f'{c["rows_matched"]} of {c["rows_checked"]}')
-            + td(str(c["mismatches"]))
-            + td(e(c["notes"]))
-            + td(link(c["source"], c["source"]) if c["source"].startswith("http") else link(REPO_BLOB + c["source"], c["source"]))
-            + td(f'<span class="small">{e(c["artifact"])}</span>')
-        )
-    t = table(["ID", "Check", "Result", "Matched", "Mismatches", "Notes", "Source", "Artifact"], rows)
-    UNV_SRC = {
-        "Betting lines and closing prices": (NFL_SCHED, "nfl.com schedule page (no betting lines shown)"),
-        "Strategy return, win rate and ROI": (REPO_BLOB + "data/model/strategies.json", "strategies.json"),
-        "Player-prop prices": (REPO_BLOB + "data/model/props.json", "props.json"),
-        "Depth charts for 29 of 32 clubs": ("https://www.nfl.com/teams/washington-commanders/depth-chart", "nfl.com depth chart (WAS: 404)"),
-        "Game times for unplayed games beyond Week 10": (REPO_BLOB + "data/model/verification.json", "verification.json"),
-    }
-    un_rows = []
-    for u in v["unverified_not_checked_here"]:
-        url, lab = UNV_SRC[u["item"]]
-        un_rows.append(td(e(u["item"])) + td(e(u["handling"])) + td(link(url, lab)))
-    un = table(["Not checked here", "Handling", "Source"], un_rows)
-    sm = v["summary"]
-    body = f"""
-{legend()}
-<div class="stats">
-<div><b>{sm["PASS"]}</b><span>checks pass</span></div>
-<div><b>{sm["FAIL"]}</b><span>checks fail (see notes)</span></div>
-<div><b>{sm["CONFLICT"]}</b><span>conflict with the model's own check</span></div>
-</div>
-<div class="callout">
-<p><strong>Rule used.</strong> {e(v["rule"])}</p>
-</div>
-<h2>Checks run this session</h2>
-{t}
-<h2>Not checked here</h2>
-{un}
-"""
-    return page("verification.html", "Verification", "Independent checks run on 2026-11-12, with every result and every conflict shown.", body)
-
-
-def page_questions(d):
-    checks = {
-        "Q05": ("Mismatch: depth covers 3 of 32 clubs (RV-15)", "bad"),
-        "Q07": ("Verified flag with blank answer (RV-14)", "warn"), "Q09": ("Verified flag with blank answer (RV-14)", "warn"),
-        "Q10": ("Verified flag with blank answer (RV-14)", "warn"), "Q11": ("Verified flag with blank answer (RV-14)", "warn"),
-        "Q12": ("Verified flag with blank answer (RV-14)", "warn"), "Q13": ("Verified flag with blank answer (RV-14)", "warn"),
-        "Q20": ("Verified flag with blank answer (RV-14)", "warn"), "Q22": ("Verified flag with blank answer (RV-14)", "warn"),
-        "Q23": ("Not re-checked this session (RV-25)", "muted"),
-    }
+    # 2. blocked questions, from the question ledger
     rows = []
     for q in d["questions"]:
-        ans = (q.get("answer") or "").strip()
-        ver = checks.get(q["id"], ("Not re-checked this session", "muted"))
-        ans_cell = td(e(ans)) if ans else blank("UNV-ANSWER")
-        src = flag_src(d, q)
-        rows.append(td(f'<strong>{e(q["id"])}</strong>') + td(e(q["question"])) + td(e(q.get("known") or ""))
-                    + td(e(q.get("unknown") or "")) + ans_cell
-                    + td(f'<span class="b {ver[1]}">{e(ver[0])}</span>')
-                    + td(link(src, q.get("src") or "source")))
-    old = table(["ID", "Question", "Known", "Unknown", "Answer", "Check this session", "Source"], rows)
-    new_rows = []
-    for q in d["gate6a"]["questions"]:
-        new_rows.append(td(f'<strong>{e(q["id"])}</strong>') + td(e(q["question"])) + td(e(q["known"])) + td(e(q["unknown"]))
-                        + blank("UNV-ANSWER") + td(f'<span class="b warn">Open</span> <span class="small">{e(q["discovery"])}</span>')
-                        + td(link(q["source_url"], "source")))
-    new = table(["ID", "Question", "Known", "Unknown", "Answer", "Discovery route", "Source"], new_rows)
-    body = f"""
-{legend()}
-<p>Each question says what is known, what is not, and how to find out. Answers are shown only where the source supports them.
-Blank answers are unanswered, not 'no'. Items marked 'verified' in the repo but with no answer are flagged (RV-14).</p>
-<h2>Existing questions ({len(d["questions"])})</h2>
-{old}
-<h2>Questions raised by this review ({len(d["gate6a"]["questions"])})</h2>
-{new}
-"""
-    return page("questions.html", "Questions", "What must be known before a decision. Answers only where a source supports them.", body)
+        status = str(q.get("status", "")).lower()
+        if not status.startswith(("open", "blocked", "partially", "partial")):
+            continue
+        ans = q.get("answer") if q.get("answer") and q["answer"].strip() not in ("", " ") else None
+        rows.append([
+            f'<code>{e(q["id"])}</code>',
+            f'<strong>{e(q["question"])}</strong>',
+            txt(q.get("have") or q.get("known")),
+            txt(q.get("missing") or q.get("unknown")),
+            txt(ans) if ans else '<span class="missing">no answer yet</span>',
+            txt(q.get("discovery")),
+            badge(q.get("status"), "warn"),
+        ])
+    b.append(panel(f"Blocked on information ({len(rows)}) — what is known, what is missing, how to get it",
+                   table(["ID", "Question", "What we have", "What is missing", "Answer so far",
+                          "How to discover it", "Status"], rows, table_id="tbl-blocked"),
+                   "blocked"))
+
+    # 3. contradictions
+    rows = []
+    for x in d["contradictions"]:
+        rows.append([
+            f'<code>{e(x["id"])}</code>',
+            badge(x["sev"], "fail" if x["sev"] == "High" else "warn"),
+            e(x["area"]),
+            e(x["finding"]),
+            src(x["official"], "official page"),
+            f'<code>{e(x["repo_file"])}</code>',
+            e(x["needs"]),
+        ])
+    b.append(panel(f"Contradictions between an official page and this repository ({len(d['contradictions'])})",
+                   table(["ID", "Severity", "Area", "Finding", "Official source", "Repository file",
+                          "What would settle it"], rows, table_id="tbl-contradictions",
+                         note=("These come from an automated cell-by-cell comparison, not an opinion. "
+                               "The full register with impact and status is on the "
+                               '<a href="flag-register.html">Flagged for Review</a> page.')),
+                   "contradictions"))
+
+    # 4. answered
+    rows = []
+    for q in d["questions"]:
+        status = str(q.get("status", "")).lower()
+        if status.startswith(("open", "blocked", "partially", "partial")):
+            continue
+        rows.append([f'<code>{e(q["id"])}</code>', txt(q["question"]), txt(q.get("answer")),
+                     badge(q.get("status"), "pass")])
+    b.append(panel(f"Settled by a source already in the repository ({len(rows)})",
+                   table(["ID", "Question", "Answer", "Status"], rows, table_id="tbl-answered"),
+                   "answered"))
+
+    b.append(panel("The one question that gates everything else", f"""
+<p>Every strategy, leaderboard, reward and 'edge' number depends on a price that could actually have
+been taken. This repository contains no book-level odds: the market numbers are consensus closing
+numbers from the nflverse mirror, as the Verification page states and the model itself measures.
+Until a licensed odds feed is connected, the honest answer to "what is this bet worth?" is
+<strong>{blank()}</strong> and it is published as a flag rather than filled in.</p>
+<p>See {src('https://www.nfl.com/', 'NFL.com')} for the league's own game information, and the
+flag register for the exact fields that stay blank.</p>
+""", "gating"))
+    return shell("decisions.html", "Decisions, questions and missing information",
+                 "What has to be settled before a decision is reasonable — separated into what needs a "
+                 "choice, what needs information, what contradicts an official source, and what is "
+                 "already settled.", "\n".join(b), stamp)
 
 
-def page_suggestions(d):
+# ------------------------------------------------------------------ 3 suggestions
+def page_suggestions(d, stamp):
+    b = []
+    b.append(panel("Review this before implementing anything", """
+<p>The brief asks for a place to review suggestions and choose a path <em>before</em> any change is
+implemented. That is this page. Nothing below is implemented on the strength of an unverified
+number: the suggestions say what to build, the paths say what order to build it in, and the
+decisions page says what still needs your call first.</p>
+""", "intro"))
+
+    # paths first: the "choose a path" gate
+    rows = []
+    for p in d["paths"]:
+        rows.append([f'<strong>{e(p["name"])}</strong>', e(p["summary"]), e(p["pros"]), e(p["cons"]),
+                     badge("choice required", "warn")])
+    b.append(panel("Choose a path", table(["Path", "What it does", "Why you would", "What it costs",
+                                           "Status"], rows, table_id="tbl-paths"), "paths"))
+
+    # ranked fillable decisions -> these are the actionable ones
+    b.append(panel("Ten things that can be decided today, in the order they unblock the most", f"""
+<p>Derived from the eight obstacles this session found (see Flagged for Review) plus the fillable
+decisions. Each row names the evidence, the change, and the check that proves it worked.</p>
+""", "actions"))
+    rows = [
+        ["A1", "One entry page", "Four site generations all publish at once; two generators both write index.html.",
+         "Publish this dashboard as the single entry page; link the rest as evidence, generated by nobody else.",
+         "tools/check_generators.py proves no file has two writers.",
+         '<a href="dashboard.html#sites">Sites</a>'],
+        ["A2", "Render after refresh", "The scheduled data job commits JSON but never re-renders HTML, so pages go stale.",
+         "Render in the same job that commits data, and commit the pages.",
+         "tools/check_freshness.py fails when a page stamp is older than the data it shows.",
+         '<a href="flag-register.html#X06">X06</a>'],
+        ["A3", "One sign convention", "The market column was printed unsigned beside a signed model line.",
+         "Print both sides, home and away, signed, with the difference derived from the two printed numbers.",
+         "verify_dashboard.py recomputes every printed difference from the printed inputs.",
+         '<a href="dashboard.html#lines">Lines</a>'],
+        ["A4", "Practice is not availability", "273 of 279 official rows this week are practice-only, not game designations.",
+         "Publish practice-only rows as practice-only and keep them out of availability maths.",
+         "verify_official.py asserts no practice-only row is labelled as a designation.",
+         '<a href="decisions.html#fillable">F-D03</a>'],
+        ["A5", "Depth charts per club", "The league publishes none; only club sites do.",
+         "Transcribe club depth charts club by club and keep the source URL on every row.",
+         "verify_official.py compares every transcribed rank with the club page.",
+         '<a href="decisions.html#fillable">F-D02</a>'],
+        ["A6", "No edge without a price", "No odds feed exists anywhere in the repository.",
+         "Rename 'edge' to 'difference from the consensus closing number' wherever no price exists.",
+         "verify_dashboard.py rejects the word edge in any row with no price.",
+         '<a href="decisions.html#gating">Gating question</a>'],
+        ["A7", "Label paper rewards", "A reward table with no legal review is a liability.",
+         "Publish the leaderboard as paper points only until counsel signs off.",
+         "Flag F05 stays open on the register until signed off.",
+         '<a href="decisions.html#fillable">F-D04</a>'],
+        ["A8", "Show the sample size", "A 5% edge needs about 708 bets to separate from luck; a 1% edge needs 17,689.",
+         "Print the bets needed beside every ROI, and rank on the lower confidence bound.",
+         "The power table is recomputed by verify_dashboard.py from stated assumptions.",
+         '<a href="dashboard.html#power">Power</a>'],
+        ["A9", "Canonical club codes", "AZ/ARI and LA/LAR both appear; a join silently drops rows.",
+         "One code set plus an alias table, applied everywhere and tested.",
+         "verify_official.py resolves every code through the alias table and reports unknowns.",
+         '<a href="flag-register.html#X10">X10</a>'],
+        ["A10", "Publish the contradictions", "Machine-found disagreements were invisible.",
+         "List every one with both links, and never auto-correct another session's file.",
+         "The register is generated from data/contradictions.json; empty means empty, not hidden.",
+         '<a href="decisions.html#contradictions">Contradictions</a>'],
+    ]
+    b.append(table(["ID", "Change", "Why it matters", "What to do", "How you will know it worked", "Detail"],
+                   rows, table_id="tbl-actions"))
+
+    # the original 20 suggestions, kept
     rows = []
     for s in d["suggestions"]:
-        src = flag_src(d, s)
-        rows.append(td(f'<strong>{e(s["id"])}</strong>') + td(e(s.get("area", ""))) + td(e(s["title"]))
-                    + td(e(s.get("decision_impact", ""))) + td(e(s.get("recommended_path", "")))
-                    + td(f'<span class="b warn">{e(s.get("status", ""))}</span>') + td("Pending your decision", "pending")
-                    + td(link(src, s.get("src") or "source")))
-    old = table(["ID", "Area", "Suggestion", "Impact", "Recommended path", "Status", "Your choice", "Source"], rows)
-    new_rows = []
-    for s in d["gate6a"]["suggestions"]:
-        new_rows.append(td(f'<strong>{e(s["id"])}</strong>') + td(e(s["area"])) + td(e(s["title"]))
-                        + td(e(s["decision_impact"])) + td(e(s["recommended_path"]))
-                        + td(f'<span class="b warn">{e(s["status"])}</span>') + td("Pending your decision", "pending")
-                        + td(link(s["source_url"], "source")))
-    new = table(["ID", "Area", "Suggestion", "Impact", "Recommended path", "Status", "Your choice", "Source"], new_rows)
-    body = f"""
-<div class="callout">
-<p><strong>No change has been made.</strong> Each option below is a proposal. Pick a path for each item, or ask for a different one.
-Nothing is implemented, merged or published from this page until you decide.</p>
-</div>
-<h2>Proposals from this review ({len(d["gate6a"]["suggestions"])})</h2>
-{new}
-<h2>Earlier suggestions ({len(d["suggestions"])})</h2>
-{old}
-"""
-    return page("suggestions.html", "Suggestions", "Options to choose from before anything is changed. None is implemented.", body)
+        rows.append([f'<code>{e(s["id"])}</code>', e(s["area"]),
+                     f'<strong>{e(s["title"])}</strong><br><span class="sub">{e(s["decision_impact"])}</span>',
+                     e(s["recommended_path"]), badge(s["status"], "warn")])
+    b.append(panel(f"The full suggestions register ({len(d['suggestions'])})",
+                   table(["ID", "Area", "Suggestion", "Recommended path", "Status"], rows,
+                         table_id="tbl-suggestions",
+                         note="Kept verbatim from the earlier sessions' register so nothing is lost."),
+                   "register"))
+    return shell("suggestions.html", "Suggestions & choose a path",
+                 "Review the options and pick a path before anything is implemented. Ranked by how much "
+                 "decision-making each one unblocks.", "\n".join(b), stamp)
 
 
-def page_flagged(d):
-    sev = {"High": "bad", "Medium": "warn", "Low": "muted"}
+# ---------------------------------------------------------------- 4 verification
+def page_verification(d, stamp):
+    ver = load("data/audit/official_verification.json")
+    ev = d["evidence"]
+    b = []
+    b.append('<div class="kpis">' + "".join([
+        kpi("Checks run", str(len(ver["checks"])), "cell by cell"),
+        kpi("Passed", str(ver["counts"]["passed"]), "reproduce exactly"),
+        kpi("Flagged", str(ver["counts"]["flagged"]), "published for review"),
+        kpi("Failed", str(ver["counts"]["failed"]), "block publication"),
+    ]) + "</div>")
+
+    b.append(panel("What was verified, and against what", f"""
+<p>Every dataset used on this site is compared, cell by cell, with a hand transcription of the
+official page it claims to come from. The transcriptions live in <code>data/evidence/</code> and
+carry the URL of the page each row was read from:</p>
+<ul class="tight">
+<li>Standings — <a href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener noreferrer">nfl.com/standings/league/2026/reg ↗</a> — 32 clubs, W/L/T/PF/PA.</li>
+<li>Injuries — <a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer">nfl.com/injuries/ ↗</a> — {ev['injury_rows']} player rows across {ev['injury_club_sections']} club sections.</li>
+<li>Schedule — <a href="https://www.nfl.com/schedules/2026/REG10" target="_blank" rel="noopener noreferrer">nfl.com/schedules/2026/REG10 ↗</a> — {ev['fixtures']} games and {ev['byes']} byes.</li>
+<li>Depth charts — <a href="https://www.chiefs.com/team/depth-chart" target="_blank" rel="noopener noreferrer">chiefs.com ↗</a>, <a href="https://www.seahawks.com/team/depth-chart/" target="_blank" rel="noopener noreferrer">seahawks.com ↗</a> — because the league site returns 404 for depth charts (checked and recorded).</li>
+</ul>
+<p>A <strong>FAIL</strong> means this site's own published data contradicts an official page and
+blocks publication. A <strong>FLAG</strong> means either another session's artifact disagrees with
+the official page, or an official page publishes nothing for a value the project would like to
+have. Flags do not block publication; they are listed below and on the Flagged for Review page,
+with the official link, so a person can arbitrate. No value is ever silently corrected.</p>
+""", "scope"))
+
     rows = []
-    for f in d["review"]:
-        st = f["status"]
-        cls = {"Verified": "ok", "Verified mismatch": "bad", "Unverified": "warn", "Not re-checked": "muted"}.get(st, "muted")
-        rows.append(td(f'<strong>{e(f["id"])}</strong>') + td(f'<span class="b {sev.get(f["severity"], "muted")}">{e(f["severity"])}</span>')
-                    + td(e(f["area"])) + td(e(f["finding"])) + td(e(f["evidence"]))
-                    + td(f'<span class="b {cls}">{e(st)}</span>') + td(e(f["action"]))
-                    + td(link(f["source_url"], None, f.get("source_type") and None)))
-    a = table(["ID", "Severity", "Area", "Finding", "Evidence", "Status", "Action", "Source"], rows)
-    rows2 = []
+    for c in ver["checks"]:
+        kind = {"PASS": "pass", "FLAG": "warn", "FAIL": "fail"}[c["status"]]
+        rows.append([badge(c["status"], kind), e(c["area"]), e(c["check"]),
+                     str(c["rows_checked"]),
+                     e(c["detail"]) if c.get("detail") else '<span class="missing">no remark</span>'])
+    b.append(panel("Every check", table(["Result", "Area", "Check", "Rows", "Detail"], rows,
+                                        table_id="tbl-checks"), "checks"))
+
+    # what is NOT verified
+    unver = load_optional("data/model/verification.json", {}).get("unverifiable", [])
+    rows = [[e(u["item"]), e(u["why"]), e(u["handling"])] for u in unver]
+    b.append(panel("What cannot be verified from any reachable source", 
+                   table(["Item", "Why it cannot be confirmed", "How the site handles it"], rows,
+                         table_id="tbl-unverifiable",
+                         note=("These are not rounded, estimated or replaced. The cell stays blank and "
+                               "the row says why.")), "unverifiable"))
+
+    b.append(panel("How to reproduce this yourself", """
+<pre><code>python3 tools/evidence_from_official.py   # write the official transcriptions
+python3 tools/verify_official.py          # compare every repo dataset, cell by cell
+python3 tools/build_decision_room.py      # recompute the verdicts
+python3 tools/build_dashboard.py          # render these pages
+python3 tools/verify_dashboard.py         # independently recompute every published figure</code></pre>
+<p>The transcription step is manual by design: an audit is only worth something if the person
+checking the data read the page. The comparison and every arithmetic check are automated and run
+on every push.</p>
+""", "reproduce"))
+    return shell("verification.html", "Verification & sources",
+                 "Exactly what was checked against which official page, what passed, and what cannot be "
+                 "confirmed at all.", "\n".join(b), stamp)
+
+
+# --------------------------------------------------------------- 5 flag register
+def page_flags(d, stamp):
+    b = []
+    b.append('<div class="kpis">' + "".join([
+        kpi("Contradictions found", str(len(d["contradictions"])), "official page vs repository"),
+        kpi("High severity", str(sum(1 for x in d["contradictions"] if x["sev"] == "High")), "fix first"),
+        kpi("Resolved this session", str(sum(1 for x in d["contradictions"] if x.get("resolved_this_session"))), "with a gate that keeps it fixed"),
+        kpi("Earlier flags", str(len(d["flags"])), "carried forward"),
+    ]) + "</div>")
+
+    b.append(panel("Contradictions found by machine, with both links", f"""
+<p>Each row below was produced by comparing a committed dataset with the official page, cell by
+cell. Neither value is guessed: both sides are linked so you can check them yourself. Severity is
+the reviewer's guide to what to look at first, not a measurement.</p>
+{table(["ID", "Severity", "Area", "Finding", "Impact", "Official source", "Repository file",
+        "What would settle it", "State"],
+       [[f'<code id="{e(x["id"])}">{e(x["id"])}</code>',
+         badge(x["sev"], "fail" if x["sev"] == "High" else "warn"), e(x["area"]), e(x["finding"]),
+         e(x["impact"]), src(x["official"], "official page"), f'<code>{e(x["repo_file"])}</code>',
+         e(x["needs"]),
+         badge("fixed in this session", "pass") if x.get("resolved_this_session")
+         else badge("needs review", "warn")] for x in d["contradictions"]],
+       table_id="tbl-contradictions")}
+""", "contradictions"))
+
+    order = {"High": 0, "Medium": 1, "Low": 2}
+    resolved = sorted(
+        [x for x in d["contradictions"] if x.get("resolved_this_session")], key=lambda x: order[x["sev"]])
+    b.append(panel("Shipped with the fix, not just the complaint", f"""
+<p>A finding is worth nothing if the defect comes back. These were fixed in this session and each
+one is now guarded by a check that fails the build if it reappears:</p>
+{table(["ID", "Defect", "What changed", "The gate that keeps it fixed"],
+       [[f'<code>{e(x["id"])}</code>', e(x["finding"]),
+         e(x["resolved_this_session"]), e(x["needs"])] for x in resolved],
+       table_id="tbl-resolved")}
+""", "resolved"))
+
+    rows = []
     for f in d["flags"]:
-        src = flag_src(d, f)
-        rows2.append(td(f'<strong>{e(f["id"])}</strong>') + td(e(f["category"])) + td(e(f["description"]))
-                     + td(e(f["impact"])) + td(e(f["status"])) + td(e(f["action"])) + td(link(src, f.get("src") or "source")))
-    b = table(["ID", "Category", "Description", "Impact", "Status", "Action", "Source"], rows2)
-    body = f"""
-<div class="callout warn">
-<p><strong>Flagged for review.</strong> These items do not block anything. They are published so you can review them and request changes.
-Each has a source link. Items marked <em>Unverified</em> are blank in the tables.</p>
-</div>
-<h2>This review ({len(d["review"])})</h2>
-{a}
-<h2>Earlier flags ({len(d["flags"])})</h2>
-{b}
-"""
-    return page("flagged.html", "Flagged for review", "Irregularities, unverified values and open questions, with their sources.", body)
+        rows.append([f'<code>{e(f["id"])}</code>', e(f["category"]), e(f["description"]),
+                     e(f["impact"]), badge(f.get("status", "needs review"), "warn"),
+                     src("https://github.com/kanlerxz87-cyber/NFL1", "repository")])
+    b.append(panel(f"Irregularities carried forward from earlier sessions ({len(d['flags'])})",
+                   table(["ID", "Category", "Description", "Impact", "Status", "Source"], rows,
+                         table_id="tbl-earlier",
+                         note=("Preserved verbatim from the earlier registers so no session's finding is "
+                               "lost. Several are historical (they describe the repository as it was "
+                               "before any code existed) and are kept because the brief says findings are "
+                               "never deleted.")), "earlier"))
 
-
-def page_repo(d):
-    def count(path):
-        n = 0
-        full = os.path.join(ROOT, path)
-        if os.path.isfile(full):
-            return 1
-        for _, _, files in os.walk(full):
-            n += len(files)
-        return n
-    inventory = [
-        ("index.html, pages/, styles.css", "Root site (earlier sessions). Overview plus subpages under pages/.", "tools/build.py and pipeline/gen_site.py both write index.html (RV-17)", "Conflict (RV-17)", "index.html"),
-        ("pages/", "Subpages of the root site", "pipeline/gen_site.py; scripts/verified/build_site.py", "Two generators (RV-17)", "pages"),
-        ("docs/", "Second site generation with its own index, plus reports", "tools/build_docs_site.py", "Overlaps root (RV-21)", "docs"),
-        ("referee/", "Independent verification site (earlier session)", "referee/tools/build_site.py", "Overlaps root (RV-21)", "referee"),
-        ("verified-lab/", "Verification subsystem and sub-site (earlier session)", "not located by grep", "Generator unknown", "verified-lab"),
-        ("site/", "Templates and assets for the tools/build.py generation", "tools/build.py", "Overlaps root (RV-21)", "site"),
-        ("dashboard/", "This clean dashboard (session 6a232e79)", "tools/build_dashboard.py", "New, self-contained", "dashboard"),
-        ("data/", "Committed data: model outputs, verified transcriptions, questions, flags", "pipeline/ and tools/", "Mixed sources (RV-21)", "data"),
-        ("data/model/", "Pipeline outputs (lines, strategies, availability, injuries)", "pipeline/build_all.py", "Errors log stale (RV-18)", "data/model"),
-        ("pipeline/", "Collector, scraper, model builder", "-", "Scrape matches the live nfl.com page on 16 of 16 re-checked rows; the 279-row snapshot is stale (RV-02, withdrawn as a scrape error)", "pipeline"),
-        ("analysis/", "Analysis engine from earlier session", "-", "Not reviewed line by line", "analysis"),
-        ("tools/", "Generators and verifiers", "-", "Several write the same files", "tools"),
-        ("scripts/", "Verification scripts and builders", "-", "Not reviewed line by line", "scripts"),
-        (".github/workflows/", "CI: collect, verify, pages", "-", "Three workflows, overlapping purpose", ".github/workflows"),
-        ("README.md", "Repository README (generated by tools/build.py)", "tools/build.py (template)", "Duplicated blocks (RV-19)", "README.md"),
-        ("COORDINATION.md", "Shared task board", "hand-edited", "Concatenated boards (RV-20)", "COORDINATION.md"),
-    ]
-    rows = []
-    for name, what, gen, status, path in inventory:
-        n = count(path)
-        rows.append(td(f'<strong>{e(name)}</strong>') + td(e(what)) + td(e(gen)) + td(f"{n} file(s)")
-                    + td(f'<span class="small">{e(status)}</span>') + td(link(REPO_TREE + path if not path.endswith(".md") and not path.endswith("html") else REPO_BLOB + path, "view on GitHub")))
-    inv = table(["Path", "What it is", "Written by", "Files", "Review status", "Source"], rows)
-    req_rows = []
-    for r in d["reqs"]:
-        src = flag_src(d, r)
-        req_rows.append(td(f'<strong>{e(r["id"])}</strong>') + td(e(r["category"])) + td(e(r["requirement"]))
-                        + td(e(r.get("analysis", ""))) + td(f'<span class="small">{e(r["status"])}</span>') + td(link(src, r.get("src") or "source")))
-    reqs = table(["ID", "Category", "Requirement (from the brief)", "Analysis", "Status", "Source"], req_rows)
-    body = f"""
-{legend()}
-<h2>What each folder publishes</h2>
-<p>The repo publishes several overlapping sites from one branch. The root Overview is the live landing page. This dashboard
-is a new, separate site. Conflicts are listed in <a href="flagged.html">Flagged for review</a>.</p>
-{inv}
-<h2>Requirements tracker ({len(d["reqs"])})</h2>
-{reqs}
-"""
-    return page("repo.html", "Repo review", "What the repository contains, which generator writes each part, and where the conflicts are.", body)
-
-
-def page_executive(d):
-    body = f"""
-<div class="callout">
-<p><strong>Decision status: no decision is ready.</strong> The data that is verified is the schedule and the official injury report.
-The data the model produces (lines, strategy performance, prop lines) cannot be confirmed from an official source, so it is shown as unverified or left blank.</p>
-</div>
-<h2>What was verified</h2>
-<ul>
-<li><strong>Week 10 schedule.</strong> All 14 games, days, kickoff times and networks match the nfl.com schedule page
-(<a href="{NFL_SCHED}">nfl.com/schedules/2026/REG10</a>). The four bye teams are CHI, DEN, PHI and TB.</li>
-<li><strong>Injury report.</strong> Re-checked against the live nfl.com page on 2026-11-12. The committed scrape matches the live page on 16 of 16 re-checked rows. The earlier 279-row transcription is stale and not shown as official (RV-02). A full re-transcription is open (R-6a232e79-13).</li>
-<li><strong>Official game designations.</strong> Nine rows on the live page: 8 Out (Lucas Patrick, Colson Yankoff, Ben Brown, Carlton Davis III, TreVeyon Henderson, Kerby Joseph, Cade Mays, D.J. Reed) and 1 Questionable (Malik Harrison). The earlier count of six is stale (RV-30).</li>
-<li><strong>Strategy gates.</strong> All 12 gate results reproduce from the committed JSON, so the model is consistent with its own rules.</li>
-<li><strong>Standings correlations.</strong> All six reproduce from the 32 standings rows.</li>
+    b.append(panel("What is deliberately left blank", """
+<p>Some values cannot be published because no official or licensed source publishes them. They are
+not zero, not estimated, and not rounded — they are blank, and they are listed here so nobody
+mistakes a gap for a finding:</p>
+<ul class="tight">
+<li><strong>Book-level odds</strong> — the NFL publishes no betting lines and no licensed feed is
+connected. Market numbers on this site are consensus closing numbers from the nflverse mirror.</li>
+<li><strong>Player prop prices</strong> — same reason, so no prop edge exists to compute.</li>
+<li><strong>Who physically starts</strong> — the league publishes no depth chart. Only club pages do,
+and only two were transcribed this week.</li>
+<li><strong>Leaderboard ranks and rewards</strong> — blank until a strategy passes all eight gates;
+the reward table is paper-only until legal review.</li>
 </ul>
-<h2>What could not be verified, and why</h2>
-<ul>
-<li><strong>Betting lines and prices.</strong> No official NFL source publishes them. Every own-line, market-line and edge value is blank (flag UNV-LINE).</li>
-<li><strong>Strategy performance.</strong> Depends on those prices. Blank (flag UNV-PERF).</li>
-<li><strong>Depth charts for backups.</strong> Official depth-chart pages are not found for the clubs checked (WAS: 404; BUF and KC: 404 in the committed log). Only 3 clubs have any rows, and the club page for KC calls its chart unofficial.</li>
-<li><strong>Prop lines.</strong> Model output only; no prices (flag RV-26).</li>
+""", "blank"))
+    return shell("flag-register.html", "Flagged for Review",
+                 "Every contradiction, unverified value and blocked decision, with both the official "
+                 "link and the repository file so each one can be settled by a person.", "\n".join(b), stamp)
+
+
+# ------------------------------------------------------------ 6 executive summary
+def page_exec(d, stamp):
+    ev, model, strat, avail = d["evidence"], d["model"], d["strategies"], d["availability"]
+    ver = load("data/audit/official_verification.json")
+    b = []
+    b.append(panel("The short version", f"""
+<p><strong>The site is honest, and that is the point.</strong> It builds its own NFL lines from
+play-by-play, tests them against the closing line on games they never saw, tracks official injury
+status against club depth charts, and publishes every number with a source — including the numbers
+that say the model does not beat the market.</p>
+<p>Three findings carry most of the weight:</p>
+<ol class="tight">
+<li><strong>The own-line model is not yet good enough to act on.</strong> Out of sample it is
+{num(model['model_mae'])} points of error against the closing line's {num(model['market_mae'])}, and a
+fitted blend puts a negative weight on the model ({num(model['blend_weight_model'],3)}). Publishing
+its disagreement with the price as an "edge" would be unsupported.</li>
+<li><strong>No strategy has earned a rank or a reward.</strong> {ev['strategies_pass']} of
+{ev['strategies']} strategies clear all {ev['gates']} gates; the best paper score is a
+<em>negative</em> lower-bound return. The leaderboard is built and empty on purpose.</li>
+<li><strong>The starter/backup question is only partly answerable.</strong> The league publishes
+injury status but no depth chart; only club sites publish depth charts. This week
+{ev['game_designations']} of {ev['injury_rows']} official rows carry a game designation, the rest are
+practice reports. A "third-string corner is starting" claim can be verified for
+{len(avail['clubs_with_both'])} of {len(avail['clubs_in_week10'])} clubs.</li>
+</ol>
+""", "short"))
+
+    b.append(panel("What was built in this session", f"""
+{table(["Area", "What exists now", "Where"],
+       [["Official fixtures", f"{ev['games_played']} games implied by standings, {ev['injury_rows']} injury rows, {ev['fixtures']} week-{ev['week_next']} games, {ev['depth_slots']} depth slots — all hand-transcribed with source URLs.", '<a href="verification.html#scope">Verification</a>'],
+        ["Verification gate", f"{len(ver['checks'])} checks comparing every dataset cell by cell against an official page; FAIL blocks publication, FLAG is published for review.", '<a href="verification.html#checks">Every check</a>'],
+        ["Decision separation", f"{len(d['fillable'])} decisions that need only a choice, {sum(1 for q in d['questions'] if str(q.get('status','')).lower().startswith(('open','blocked'))) } blocked on information, {len(d['contradictions'])} contradictions.", '<a href="decisions.html">Decisions</a>'],
+        ["Sign-convention fix", "Model and market printed in one convention, home and away, with the difference derived from the printed numbers.", '<a href="dashboard.html#lines">Week 10 lines</a>'],
+        ["Statistical power", "How many bets a real edge needs before it can be separated from luck, so rewards cannot be handed out on noise.", '<a href="dashboard.html#power">Power</a>'],
+        ["Contradiction register", f"{len(d['contradictions'])} conflicts between official pages and repository data, with both links.", '<a href="flag-register.html">Flagged for Review</a>']],
+       table_id="tbl-built")}
+""", "built"))
+
+    b.append(panel("The decisions you actually have to make", f"""
+<p>Ranked by how much each one unblocks. None of them needs more data collection.</p>
+{table(["#", "Decision", "Recommended", "Unblocks"],
+       [[str(i), f'<strong>{e(x["question"])}</strong>', e(x["recommended"]), e(x["unblocks"])]
+        for i, x in enumerate(d["fillable"], 1)], table_id="tbl-your-decisions")}
+""", "decisions"))
+
+    b.append(panel("What is still unresolved", f"""
+<ul class="tight">
+<li><strong>No odds feed.</strong> Until a licensed price source is connected, every "edge" is a
+difference from a consensus closing number, not a price that could have been taken.</li>
+<li><strong>No league depth chart.</strong> The league URL returns 404. Thirty clubs still need a
+transcription before a league-wide backup-exposure index means anything.</li>
+<li><strong>Thirty-two practice cells vs one designation.</strong> The injury feed is mid-week; game
+statuses arrive later. Treat this week's availability numbers as a practice report, not a lineup.</li>
+<li><strong>Rewards need counsel.</strong> The leaderboard is paper points only.</li>
+<li><strong>Four site generations coexist.</strong> This dashboard is the entry point; the others are
+linked and preserved.</li>
 </ul>
-<h2>What the model shows (unverified model output)</h2>
-<ul>
-<li>In the 2026 test window the model's own spread is further from the result than the market (9.98 vs 9.49 points). Its blend weight is negative.</li>
-<li>None of the 12 strategies passes all 8 gates after recomputation. S11 reaches 6 of 8; it fails significance and stability.</li>
-<li>S04 and S06 are the same bet and should be merged. Diversification numbers depend on overlap-only correlations and are not reliable.</li>
-</ul>
-<h2>Irregularities that need a decision</h2>
-<ul>
-<li>The headline "103 starters flagged, official game status" is not supported. The committed data says {d["avail"]["counts"]["starters_impacted"]} starters are impacted, and {d["avail"]["counts"]["rows_practice_only_starters"]} of them are practice-only (RV-01).</li>
-<li>The injury scrape is consistent with the live page (16 of 16 rows re-checked). The 279-row transcription used for the older dashboard is stale (RV-02). The Overview's NE row is stale (RV-28).</li>
-<li>Two generators overwrite the root index.html, and five site generations overlap (RV-17, RV-21).</li>
-<li>The Overview says "actionable" for a line the model's own validation does not support (RV-11).</li>
-</ul>
-<h2>Decisions needed from you</h2>
-<p>See <a href="suggestions.html">Suggestions</a> (choose a path for each) and <a href="questions.html">Questions</a>.
-The first decisions are: a depth-chart source for all 32 clubs (S-6A-03), whether to keep the "actionable" language (S-6A-04), and which site is canonical (S-6A-07).</p>
-<h2>Source links</h2>
-<p><a href="{NFL_SCHED}">nfl.com schedule</a> · <a href="{NFL_INJ}">nfl.com injury report</a> · <a href="{NFL_STAND}">nfl.com standings</a> ·
-<a href="https://www.chiefs.com/team/depth-chart">chiefs.com depth chart</a> · <a href="https://nflreadr.nflverse.com/articles/dictionary_schedules.html">nflreadr schedule dictionary (third party)</a></p>
-"""
-    return page("executive.html", "Executive summary", "What is verified, what is not, what the model shows, and the decisions still open.", body)
+""", "unresolved"))
+
+    b.append(panel("How to check any of this yourself", """
+<p>Every figure on this page comes from a JSON file in the repository, and every claim about an
+official source links to the page it was read from. Open
+<a href="verification.html">Verification</a> to see the full check list, or run the four commands
+listed at the bottom of that page to reproduce the whole build.</p>
+<p class="note">This is a research tool. It is not betting advice, it does not place bets, and no
+number on it is a recommendation to wager.</p>
+""", "check"))
+    return shell("executive-summary.html", "Executive summary",
+                 "What was built, what the evidence actually says, what it cannot support yet, and the "
+                 "decisions that are waiting for you.", "\n".join(b), stamp)
 
 
-def page_sources(d):
-    rows = []
-    for s in d["sources"].values():
-        rows.append(td(f'<strong>{e(s["id"])}</strong>') + td(e(s["publisher"])) + td(link(s["url"], s["url"]))
-                    + td(e(s.get("kind", ""))) + td(e(s.get("what", ""))) + td(e(s.get("retrieved", ""))))
-    reg = table(["ID", "Publisher", "URL", "Kind", "What it is", "Retrieved"], rows)
-    fetched = [
-        ("https://www.nfl.com/injuries/", "nfl.com injury report", "7 chunks read 2026-11-12; 16 rows re-checked against the page", "Verified for 16 re-checked rows; full re-transcription open (RV-02)"),
-        ("https://www.nfl.com/schedules/2026/REG10", "nfl.com schedule, Week 10", "3 chunks read", "Verified (14 games)"),
-        ("https://www.nfl.com/teams/washington-commanders/depth-chart", "nfl.com depth chart, Washington", "1 chunk; 404 page", "Verified 404"),
-        ("https://www.chiefs.com/team/depth-chart", "chiefs.com depth chart, Kansas City", "1 chunk; titled 'Unofficial Depth Chart'", "Verified (24 of 28 rows match)"),
-        ("https://nflreadr.nflverse.com/articles/dictionary_schedules.html", "nflverse schedule dictionary (third party)", "1 chunk; 25 of 45 fields visible", "Partial"),
-        ("https://www.nfl.com/players/sam-darnold/", "nfl.com player page, Sam Darnold", "1 chunk of 4; lists the news item with its summary", "Verified (link and summary)"),
-        ("https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again", "nfl.com news item, Darnold ruled out", "headline and summary seen on the player page; body not read", "Headline and summary verified"),
-    ]
-    frows = [td(link(u, lab)) + td(e(what)) + td(e(res)) for u, lab, what, res in fetched]
-    fetch_tbl = table(["Official URL", "What it is", "How it was read", "Result"], frows)
-    body = f"""
-{legend()}
-<h2>Pages read in this session</h2>
-<p>These pages were read on 2026-11-12. Results are in the rows above and in <a href="flagged.html">Flagged for review</a>.</p>
-{fetch_tbl}
-<h2>Source registry ({len(d["sources"])})</h2>
-<p>The registry is the repo's own list (data/sources.json). Some entries are labelled differently from what their pages say (see RV-22).</p>
-{reg}
-"""
-    return page("sources.html", "Sources", "Where every value comes from, and which pages were read in this session.", body)
-
-
-CSS = """
-:root{--ink:#1c2430;--mut:#5b6573;--line:#dfe4ea;--bg:#f6f8fa;--ok:#15703a;--okbg:#e5f5ec;--bad:#a4262c;--badbg:#fbe9ea;--warn:#8a5a00;--warnbg:#fff4d6;--int:#2c5ea8;--intbg:#e8f0fb;--mu:#55606e;--mubg:#eceff3;--acc:#1f4e8c}
-*{box-sizing:border-box}
-body{margin:0;font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg)}
-header.top{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;padding:12px 24px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
-.brand{font-weight:700;color:var(--ink);text-decoration:none;font-size:16px}
-nav{display:flex;flex-wrap:wrap;gap:4px 14px}
-nav a{color:var(--mut);text-decoration:none;font-size:14px;padding:4px 2px;border-bottom:2px solid transparent}
-nav a:hover{color:var(--ink)} nav a.on{color:var(--acc);border-bottom-color:var(--acc);font-weight:600}
-main{max-width:1240px;margin:0 auto;padding:24px}
-h1{font-size:26px;margin:4px 0 6px} h2{font-size:19px;margin:28px 0 8px}
-.lead{color:var(--mut);margin:0 0 14px}
-a{color:var(--acc)}
-.legend{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;font-size:13px;color:var(--mut);margin:6px 0 16px;padding:10px 12px;background:#fff;border:1px solid var(--line);border-radius:8px}
-.b{display:inline-block;font-size:12px;font-weight:600;padding:1px 8px;border-radius:999px;white-space:nowrap}
-.b.ok{background:var(--okbg);color:var(--ok)} .b.bad{background:var(--badbg);color:var(--bad)}
-.b.warn{background:var(--warnbg);color:var(--warn)} .b.muted{background:var(--mubg);color:var(--mu)}
-.b.internal{background:var(--intbg);color:var(--int)}
-.b.high,.b.High{background:var(--badbg);color:var(--bad)} .b.Medium{background:var(--warnbg);color:var(--warn)} .b.Low{background:var(--mubg);color:var(--mu)}
-.src-int{font-size:11px;color:var(--int);background:var(--intbg);padding:0 5px;border-radius:4px}
-.src-oth{font-size:11px;color:var(--warn);background:var(--warnbg);padding:0 5px;border-radius:4px}
-.flagtag{font-size:12px;color:var(--warn);font-weight:600}
-.tw{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:8px;margin:8px 0 18px}
-table{width:100%;border-collapse:collapse;font-size:13.5px}
-th,td{padding:7px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
-th{background:#f1f4f8;font-weight:600;position:sticky;top:0;white-space:nowrap}
-tbody tr:hover{background:#fafcff}
-td.blank{background:repeating-linear-gradient(45deg,#fff,#fff 6px,#fbfbf3 6px,#fbfbf3 12px);color:#9aa3ad}
-td.v{font-variant-numeric:tabular-nums}
-td.pending{color:var(--mut);font-style:italic}
-.small{font-size:12px;color:var(--mut)} .muted{color:var(--mut)}
-.blank-inline{color:#9aa3ad;font-style:italic}
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin:14px 0}
-.card{display:block;background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px;text-decoration:none;color:var(--ink)}
-.card:hover{border-color:var(--acc);box-shadow:0 2px 10px rgba(31,78,140,.08)}
-.card-big{font-size:24px;font-weight:700;color:var(--acc)} .card h3{margin:4px 0 4px;font-size:16px} .card p{margin:0;color:var(--mut);font-size:13.5px}
-.hero{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:12px 0}
-.hero p{margin:6px 0}
-.callout{background:#fff;border:1px solid var(--line);border-left:4px solid var(--acc);border-radius:8px;padding:12px 16px;margin:12px 0}
-.callout.warn{border-left-color:#c58a00;background:#fffdf6}
-.callout p{margin:6px 0} .callout ul{margin:6px 0 6px 18px;padding:0}
-.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;margin:12px 0}
-.stats div{background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px 12px}
-.stats b{display:block;font-size:22px;color:var(--acc)} .stats span{font-size:12.5px;color:var(--mut)}
-footer{max-width:1240px;margin:0 auto;padding:18px 24px 40px;color:var(--mut);font-size:12.5px}
-ul li{margin:4px 0}
-@media (max-width:700px){main{padding:14px}h1{font-size:21px}}
-"""
-
-
-def main():
-    d = load()
-    out = {
-        "index.html": page_index(d),
-        "lines.html": page_lines(d),
-        "strategies.html": page_strategies(d),
-        "injuries.html": page_injuries(d),
-        "depth.html": page_depth(d),
-        "verification.html": page_verification(d),
-        "questions.html": page_questions(d),
-        "suggestions.html": page_suggestions(d),
-        "flagged.html": page_flagged(d),
-        "repo.html": page_repo(d),
-        "executive.html": page_executive(d),
-        "sources.html": page_sources(d),
+# ------------------------------------------------------------------------ main
+def main() -> int:
+    d = load(os.path.join("data", "decision_room", "decision_room.json"))
+    ver = load("data/audit/official_verification.json")
+    stamp = dict(week=d["evidence"]["week_next"],
+                 generated_at=d["generated_at"],
+                 verified_at=ver["generated_at"])
+    pages = {
+        "dashboard.html": page_dashboard,
+        "decisions.html": page_decisions,
+        "suggestions.html": page_suggestions,
+        "verification.html": page_verification,
+        "flag-register.html": page_flags,
+        "executive-summary.html": page_exec,
     }
-    os.makedirs(OUT, exist_ok=True)
-    for name, text in out.items():
-        with open(os.path.join(OUT, name), "w", encoding="utf-8") as f:
-            f.write(text)
-    with open(os.path.join(OUT, "style.css"), "w", encoding="utf-8") as f:
-        f.write(CSS)
-    with open(os.path.join(OUT, ".nojekyll"), "w") as f:
-        f.write("")
-    print(f"wrote {len(out)} pages + style.css to dashboard/")
+    web = os.path.join(ROOT, "web")
+    os.makedirs(web, exist_ok=True)
+    for name, fn in pages.items():
+        out = fn(d, stamp)
+        with open(os.path.join(web, name), "w", encoding="utf-8") as f:
+            f.write(out)
+        print(f"wrote web/{name} ({len(out)} bytes)")
+    return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

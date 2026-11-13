@@ -20,7 +20,7 @@
     </div>
     <nav aria-label="Site sections">
       <div class="navgroup"><h4>Overview</h4>
-<a href="index.html">Home</a>
+<a href="governance.html">Governance home</a>
 <a href="executive-summary.html">Executive Summary</a>
 <a href="deployment.html">Deployment &amp; PR</a>
 <a href="legacy-site.html">Earlier sessions&#x27; site</a>
@@ -49,15 +49,19 @@
 <div class="navgroup"><h4>Preserved pages</h4>
 <a href="pages/analysis.html">Validation &amp; correlation</a>
 <a href="pages/availability.html">Availability</a>
+<a href="pages/correlations.html">Correlations</a>
 <a href="pages/data.html">Verified data</a>
 <a href="pages/decisions.html">Decision register</a>
+<a href="pages/depth.html">Depth</a>
 <a href="pages/evidence.html">Evidence</a>
 <a href="pages/executive-summary.html">Executive summary</a>
 <a href="pages/executive.html">Executive</a>
 <a href="pages/flagged.html">Flagged</a>
 <a href="pages/injuries.html">Injuries</a>
 <a href="pages/lines.html">Own lines</a>
+<a href="pages/luck.html">Luck</a>
 <a href="pages/models.html">Strategy lab</a>
+<a href="pages/parlays.html">Parlays</a>
 <a href="pages/props.html">Props</a>
 <a href="pages/questions.html">Questions</a>
 <a href="pages/review.html">Review</a>
@@ -66,6 +70,7 @@
 <a href="pages/strategies.html">Strategies</a>
 <a href="pages/suggestions.html">Suggestions</a>
 <a href="pages/teams.html">Teams</a>
+<a href="pages/verified-lines.html">Verified Lines</a>
 <a href="pages/verified.html">Verified artifacts</a>
 </div>
     </nav>
@@ -77,17 +82,17 @@
   <div class="main">
     <div class="topbar">
       <div class="crumb">NFL1 / <b>Flagged for Review</b></div>
-      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">45 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">52 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
     </div>
     <main class="content" id="main">
       <div class="kicker">Assurance</div>
       <h1>Flagged for Review</h1>
       <p class="lede">Clearly labelled irregularities, official-page conflicts, unverified values and coordination issues — each with an official source link for manual review, none blocking the merge.</p>
       <div class="callout flag"><b>Flagged for Review.</b> These irregularities and unverified items do not block the merge or the live site. Each has an official source link for manual review and a suggested action. A status of <em>needs review</em> means exactly this: published here, not blocking.</div>
-<div class="cards"><div class="card"><div class="label">Flagged items</div><div class="value">45</div><div class="detail">All with source links</div></div><div class="card"><div class="label">Official-page irregularities</div><div class="value">7</div><div class="detail">F02–F08</div></div><div class="card"><div class="label">Missing official data</div><div class="value">5</div><div class="detail">F09–F11, F14, F15</div></div><div class="card"><div class="label">Combined-site review</div><div class="value">17</div><div class="detail">F25–F36</div></div></div>
+<div class="cards"><div class="card"><div class="label">Flagged items</div><div class="value">52</div><div class="detail">All with source links</div></div><div class="card"><div class="label">Official-page irregularities</div><div class="value">7</div><div class="detail">F02–F08</div></div><div class="card"><div class="label">Missing official data</div><div class="value">5</div><div class="detail">F09–F11, F14, F15</div></div><div class="card"><div class="label">Combined-site review</div><div class="value">24</div><div class="detail">F25–F36</div></div></div>
 <h2 id="all">All flagged irregularities</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-flags" aria-label="Filter tbl-flags" placeholder="Filter rows…">
-<span class="count" data-count-for="tbl-flags">45 rows shown</span></div>
+<span class="count" data-count-for="tbl-flags">52 rows shown</span></div>
 <div class="tablewrap"><table class="data-table" id="tbl-flags"><caption>Every flag with category, description, impact, status, official source link and suggested action for the reviewer.</caption>
 <thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Category</th><th scope="col" class="sortable">Irregularity / unverified item</th><th scope="col" class="sortable">Impact on decisions</th><th scope="col" class="sortable">Status</th><th scope="col" class="sortable">Suggested action</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
 <tr id="F01" data-verified="true">
@@ -486,6 +491,60 @@
 <td data-value="1" class="wide">Discovery suggestion logged on the Suggestions page (SA-02): add a scheduled pre-slate refresh. Source: https://www.nfl.com/injuries/ (fetched 2026-11-12); audit trail in docs/audit-b6e68100.md §A-F04.</td>
 <td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
 </tr>
+<tr id="LR-01" data-verified="true">
+<td><code>LR-01</code></td>
+<td data-value="1">Standings snapshot vs live page (currency note)</td>
+<td data-value="1" class="wide">Live recheck 2026-11-13: 30 of 32 standing rows match every published file exactly. NYG and WAS differ only because the Week-10 TNF game (Commanders 24, Giants 21, FINAL, Thu Nov 12) finished after every file&#x27;s recorded retrieval (2026-11-12T04:31Z..23:37Z). The delta is arithmetically exact (+21/+24 PF-PA NYG, +24/+21 WAS) and all six files agree with each other on pre-game values.</td>
+<td data-value="1" class="wide">Readers comparing the site to nfl.com after Thursday night will see two stale rows. Not a data error; the daily collect refresh folds results in.</td>
+<td><span class="badge neutral">open</span></td>
+<td data-value="1" class="wide">Sources: https://www.nfl.com/standings/league/2026/reg and https://www.nfl.com/games/commanders-at-giants-2026-reg-10 (fetched 2026-11-13); diff in data/audit/live_recheck_2026-11-13/standings_diff.json; audit docs/audit-65df4799.md §1.</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="LR-02" data-verified="true">
+<td><code>LR-02</code></td>
+<td data-value="1">KC depth chart rows disagree with the club page</td>
+<td data-value="1" class="wide">Live recheck 2026-11-13 of the 28 KC rows: 25 exact. Still differing: Offense WR row 2 (club: 2nd Cyrus Allen, 3rd Josh Downs; repo: s2 blank, s3 Cyrus Allen, Josh Downs absent) and KR/PR (club: 1st Emmett Johnson, 2nd Cyrus Allen; repo: s1 blank, s2 Emmett Johnson). DT row 1 (Chris Jones/Peter Woods) now matches and that part of X09 is resolved. The club labels its chart &#x27;Unofficial Depth Chart&#x27;.</td>
+<td data-value="1" class="wide">Down-2/3rd-string deficiency reads for KC are wrong on three rows (WR2, KR, PR). X09 and R-6a232e79-03 stay open until data/depth_chart.json is re-transcribed by its owner.</td>
+<td><span class="badge neutral">open</span></td>
+<td data-value="1" class="wide">Source: https://www.chiefs.com/team/depth-chart (fetched 2026-11-13); comparison in docs/audit-65df4799.md §4. Not silently corrected (no-silent-correction rule).</td>
+<td><span class="src"><a href="https://www.chiefs.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Kansas City Chiefs (chiefs.com) — Official club depth chart">S14 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="LR-03" data-verified="true">
+<td><code>LR-03</code></td>
+<td data-value="1">Two generators wrote pages/lines.html (fixed in this session)</td>
+<td data-value="1" class="wide">pipeline/gen_site.py (&#x27;My Lines&#x27;) and scripts/verified/build_site.py (&#x27;Own Lines&#x27;) both wrote pages/lines.html; whichever ran last silently replaced the page. tools/check_generators.py could not see it because its regex missed the builder&#x27;s page dict.</td>
+<td data-value="1" class="wide">The live landing page&#x27;s &#x27;My Lines&#x27; link could show the wrong document depending on build order. Fixed: the verified sub-site page is now pages/verified-lines.html, the ownership map records both, and the gate detects dict-key claims.</td>
+<td><span class="badge neutral">resolved</span></td>
+<td data-value="1" class="wide">Fix commit on this branch (integration merge 2026-11-13); gate: tools/check_generators.py PASS with both owners recorded.</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="LR-04" data-verified="true">
+<td><code>LR-04</code></td>
+<td data-value="1">Broken nav links on pages/availability.html (fixed in this session)</td>
+<td data-value="1" class="wide">scripts/verified/build_availability.py passed a bare page name to the renderer, so all 21 nav links on pages/availability.html were written root-style (pages/x.html from inside pages/) and were broken.</td>
+<td data-value="1" class="wide">Every navigation link on the Availability page 404&#x27;d. Fixed by passing the pages/-qualified name; check_committed_site and the verified check_site now report 0 broken links.</td>
+<td><span class="badge neutral">resolved</span></td>
+<td data-value="1" class="wide">Fix commit on this branch; re-verified with tools/check_committed_site.py and scripts/verified/check_site.py.</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="LR-05" data-verified="true">
+<td><code>LR-05</code></td>
+<td data-value="1">News-to-status gap in the availability model</td>
+<td data-value="1" class="wide">Sam Darnold (SEA): the official report row shows Did Not Participate with a blank game status while official news says he is ruled out for Week 10. Both are official; the model carries no news column, so the row under-states the absence.</td>
+<td data-value="1" class="wide">Starter-availability and next-man-up reads can be too optimistic whenever news outruns the game-status column (R-6a232e79-07).</td>
+<td><span class="badge neutral">open</span></td>
+<td data-value="1" class="wide">Sources: https://www.nfl.com/injuries/ (row) and https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again (both fetched 2026-11-13). Feature request S28 filed.</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="LR-06" data-verified="true">
+<td><code>LR-06</code></td>
+<td data-value="1">Earlier injury-scrape anomalies re-verified resolved</td>
+<td data-value="1" class="wide">Live recheck 2026-11-13 read the full official Week-10 report (296 rows, 26 clubs) and compared every field with data/model/official_injuries.json: 296/296 match. All rows previously flagged as missing or extra (X01 IND practice cells; X02 BJ Green II/CJ Allen/Grover Stewart; RV-02 Jaydn Ott/Kendal Daniels/Jawaan Taylor/Cameron Thomas) are present and match the live page. LAC and BAL print &#x27;No Injuries Reported&#x27;.</td>
+<td data-value="1" class="wide">Confirms the scrape is faithful and the earlier discrepancies were page drift between scrape times (A-F04), not parser corruption. RV-02/X01/X02 can be closed by their owners.</td>
+<td><span class="badge neutral">resolved</span></td>
+<td data-value="1" class="wide">Source: https://www.nfl.com/injuries/ (all 7 chunks fetched 2026-11-13); audit docs/audit-65df4799.md §3.</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
 <tr id="F41" data-verified="true">
 <td><code>F41</code></td>
 <td data-value="1">Official page snapshot drift</td>
@@ -494,6 +553,15 @@
 <td><span class="badge neutral">needs review</span></td>
 <td data-value="1" class="wide">Re-snapshot the official standings page after each Sunday slate and quote retrieved_at beside every published standings value; treat same-week changes as drift, not error (see also A-F04 for injury-page drift). Source: https://www.nfl.com/standings/league/2026/reg.</td>
 <td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="LR-07" data-verified="true">
+<td><code>LR-07</code></td>
+<td data-value="1">Feed data error corrected (kickoff times)</td>
+<td data-value="1" class="wide">The Week-11 refresh of data/model/snapshot.json (generated 2026-11-13T13:04Z from the upstream schedules feed) listed JAX @ NYG at 13:00 and PIT @ PHI at 16:25. The official Week-11 page, read 2026-11-13, shows Jaguars at Giants 4:25 PM ET (16:25) and Steelers at Eagles 1:00 PM ET (13:00): the two kickoff times were swapped with each other in the feed, and the snapshot rows cite the official schedule as their source, so the values contradicted their own citation.</td>
+<td data-value="1" class="wide">A wrong kickoff time on a betting-decision page changes which games are live when. tools/verify_official.py check B3 caught the mismatch against the official capture.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Fixed: the two snapshot values were corrected to the official times and pipeline/build_all.py now applies a documented, source-linked SCHEDULE_FEED_FIXES table at build time so scheduled refreshes keep the official values. Reviewer: confirm against https://www.nfl.com/schedules/2026/by-week/week-11 and https://www.nfl.com/schedules/2026/REG11 (fetched 2026-11-13); if the upstream feed is corrected, the table can be dropped (it is idempotent).</td>
+<td><span class="src"><a href="https://www.nfl.com/schedules" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official schedule">S06 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
 </tr>
 </tbody></table></div>
 <h2 id="unverified">Registry of blank/unverified values</h2>

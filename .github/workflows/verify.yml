@@ -24,6 +24,9 @@ jobs:
         run: python3 tools/verify_combined.py
       - name: Rebuild pages from the JSON data layer
         run: python3 tools/build.py
+
+      - name: Fail if two generators claim the same output file
+        run: python3 tools/check_generators.py
       - name: Verify line by line (source links, blank values, internal links)
         run: python3 tools/verify.py
       # Session ca779bcc-nfl1. Additive: the strength-of-schedule sub-site has its own
