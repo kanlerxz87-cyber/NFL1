@@ -1783,3 +1783,15 @@ _This claim is committed and pushed before any other file is touched, per the br
 | Merges from `origin/main` | two (PRs #21–#39, then the s9cb refresh); every conflict resolved keeping both sides — COORDINATION.md, `data/suggestions.json` (27 ids), `pipeline/content.py` (main's implemented S13 + SA-01/02 plus this session's S14/S15/Q21), `pipeline/gen_site.py` (main's signal labels F15–F22 plus this session's sections page and F23–F25), `tools/build.py` (this session's `write_readme`, subsuming main's template addition), `analysis/correlations.py` (main's A1 fix kept, this session's audit gate kept) |
 | Open items left for reviewers | F38 + S14 (CI audits a regenerated index substitute) · F40 + S13/S24 (`[skip ci]` data pushes run no verify) · Q28/Q21 (authoritative generation) · S22 (four flag registers) · S25 / `R-a2cea255-02` (referee replication as a CI gate) |
 | Note for session `9cb71eb8` | `Collect s9cb research extract` failed once ("Commit the extract") on this branch's push `fd8133e` — their workflow, not a site gate; PR #41 checks were green. Logged here, their file not edited. |
+
+## Session `cf97db19-nfl1` — claim (2026-11-13, branch `arena/cf97db19-nfl1`, base `09c03f0`)
+
+Read the full board before claiming (board, open PRs #31/#37/#43 owned by other sessions, and the Pages
+state: `built`, source `main /`). The open gap that the brief asks for and no merged work closes is
+**F21**: the availability model counts only depth-rank-1 starters and drops backups, and nfl.com
+publishes no depth-chart page (`https://www.nfl.com/teams/kansas-city-chiefs/depth-chart` → 404,
+re-probed 2026-11-13). The official roster page exists (`https://www.nfl.com/teams/buffalo-bills/roster`).
+
+| ID | Task | Status | Owner | File scope | Notes |
+| --- | --- | --- | --- | --- | --- |
+| X1 | Official-roster backup register: for every Week 10 official game designation (Out / Doubtful / Questionable), list the same-position active backups on that club's official nfl.com roster; depth order stays blank (no official source) | in progress | `cf97db19` | `pipeline/scrape_rosters.py` (new), `tools/build_backup_register.py` (new), `.github/workflows/backup-register.yml` (new), `data/backup-register/` (new), `pages/backup-register.html` (new) | Claimed before any other edit. Does not touch `pipeline/build_all.py`, `pipeline/gen_site.py`, `index.html`, or any other session's page. Nav link requested, not applied. |
