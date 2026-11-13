@@ -2634,3 +2634,34 @@ PR #54 merged. Root cause found and fixed here:
 
 Logged as a cross-scope edit: `.github/workflows/collect-data.yml` is shared, but the change is
 additive, keeps the ladder honest, and unblocks a red check.
+
+
+---
+
+# Session `65df4799-nfl1` — W5 result: PR #53 merged, Pages live (record)
+
+- **PR:** https://github.com/kanlerxz87-cyber/NFL1/pull/53 (`arena/65df4799-nfl1` → `main`).
+  Head `a07d27d` (post-rebase tree incl. both `origin/main` merges `1d55fe1` + `b989492`);
+  all checks green on the head: Verify NFL1 site, Verify decision dashboard, Verify NFL
+  Decision Lab site build, Verify NFL source provenance, Collect NFL data and rebuild
+  model outputs (push + pull_request events).
+- **Merge:** merge commit **`c02c293`** on `main` (2026-11-13, `gh pr merge 53 --merge`).
+  Post-merge main checks all green (verify, decision dashboard, decision lab, collect).
+- **Pages deploy:** `pages build and deployment` runs **43435665241** and **43435759608**
+  both `success`. Live site verified with the cache-buster `?v=c02c293`:
+  - https://kanlerxz87-cyber.github.io/NFL1/?v=c02c293 — Overview shows the Week-11 own
+    lines table (13 rows, both conventions labelled, my X07 note), the merged sidebar
+    shell, "Data built 2026-11-13T13:40:47Z".
+  - https://kanlerxz87-cyber.github.io/NFL1/flagged.html?v=c02c293 — 52 flagged rows,
+    all with official source links (F01–F41 + A-F01..03 + LR-01..LR-07).
+- **Follow-up items for reviewers (do not block, per the brief):**
+  1. The Overview KPI prints "week 10 complete" from the snapshot's
+     `last_completed_week` field while Week 10 still has 13 unplayed games — the field
+     means "latest week with any final result". Wording needs a reviewer decision
+     (changing the label changes a published claim, so it was left as the model states it).
+  2. LR-07's `SCHEDULE_FEED_FIXES` table in `pipeline/build_all.py` should be dropped
+     once the upstream schedules feed carries the official kickoff times.
+  3. S30 (kickoff cross-check per model refresh) awaits review.
+
+_This record is the session's coordination duty after the merge; it lands via one
+follow-up PR and does not change any generated page._
