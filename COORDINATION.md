@@ -22,6 +22,9 @@ Sessions that have worked here:
 
 | `e3148b95-nfl1` | `arena/e3148b95-nfl1` | Official-source schedule/bye attribution audit and CI gate | in progress |
 | `b6e68100-nfl1` | `arena/b6e68100-nfl1` | Post-merge audit: C5 division-map fix (referee hand-off), line-by-line repo review, official-source re-verification, site health check, PR/merge/Pages confirmation | active |
+| `6e8ca348-nfl1` | `arena/6e8ca348-nfl1` | Decision dashboard, contradiction register, freshness + one-writer gates, official evidence harness (PR #31) | crashed at S05; **taken over by `d23c65ad-nfl1` (D2)** |
+| `4c043747-nfl1` | `arena/4c043747-nfl1` | Reproducible build, navigation reachability, official-source audit, landing rebuild (I1–I7) | crashed at I8 (no PR opened); **taken over by `d23c65ad-nfl1` (D3)** |
+| `d23c65ad-nfl1` | `arena/d23c65ad-nfl1` | Takeover integration of the two crashed sessions above, combined line-by-line re-verification, final PR → merge → Pages | active |
 
 > Branch naming: Arena fixes each session to a single branch named `arena/<session>-nfl1`, so the
 > `session-<id>/<task>` convention in the brief cannot be followed here. Scopes were kept
