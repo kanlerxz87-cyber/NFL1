@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Where the project stands · NFL Decision Lab</title>
+<meta name="description" content="Source-linked NFL decision dashboard: own lines, validation gates, injuries and depth, and an explicit register of what is unverified.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="brand" href="dashboard.html"><span class="mark">NFL</span><span class="brand-text">Decision Lab</span></a>
+  <nav aria-label="Main"><a href="dashboard.html" class="active">Dashboard</a><a href="decisions.html">Decisions</a><a href="suggestions.html">Suggestions &amp; Path</a><a href="verification.html">Verification</a><a href="flag-register.html">Flagged for Review</a><a href="executive-summary.html">Executive Summary</a></nav>
+</header>
+<main id="main">
+  <section class="page-head">
+    <p class="eyebrow">2026 season · Week 10</p>
+    <h1>Where the project stands</h1>
+    <p class="standfirst">One page that answers what the data supports, what has to be decided, and what is still unknown — with a source link on every row.</p>
+    <p class="timestamp">Data read 2026-11-13T12:51:04+00:00 · verification run 2026-11-13T12:50:51+00:00 ·
+    every value links to its source; unconfirmed values are left blank and linked to the
+    <a href="flag-register.html">Flagged for Review</a> page.</p>
+  </section>
+  <div class="kpis"><article class="kpi"><span class="kpi-label">Games analysed</span><strong class="kpi-value">136</strong><span class="kpi-sub">2026 regular season, week 9 complete</span></article><article class="kpi"><span class="kpi-label">Own lines this week</span><strong class="kpi-value">14</strong><span class="kpi-sub">week 10 fixtures</span></article><article class="kpi"><span class="kpi-label">Market source</span><strong class="kpi-value">none</strong><span class="kpi-sub">no odds feed connected</span></article><article class="kpi"><span class="kpi-label">Strategies passing</span><strong class="kpi-value">0 of 12</strong><span class="kpi-sub">8 gates</span></article><article class="kpi"><span class="kpi-label">Players with official status</span><strong class="kpi-value">279</strong><span class="kpi-sub">26 clubs publish</span></article><article class="kpi"><span class="kpi-label">Official game designations</span><strong class="kpi-value">6</strong><span class="kpi-sub">of 279 rows</span></article><article class="kpi"><span class="kpi-label">Depth charts verified</span><strong class="kpi-value">2</strong><span class="kpi-sub">clubs (league site 404s)</span></article><article class="kpi"><span class="kpi-label">Verification checks</span><strong class="kpi-value">20 pass</strong><span class="kpi-sub">8 flagged, 0 fail</span></article></div>
+<section class="panel" id="verdicts"><h2>What the evidence says today</h2>
+<p class="lede">These four verdicts are computed from the committed data, not written by hand.
+Each one states what the numbers can and cannot support, so a choice can be made against it.</p>
+<div class="table-wrap"><table class="data-table" id="tbl-verdicts"><thead><tr><th scope="col">Question</th><th scope="col">Verdict</th><th scope="col">What it means</th></tr></thead><tbody><tr><td><strong>Do the own lines beat the closing line?</strong></td><td><span class="badge fail">NOT SUPPORTED</span></td><td>The model lost to the closing line out of sample and the fitted weight on the model is at or below zero, so its disagreement with the market carried no information in the test window. Publishing a model-vs-market difference as an &#x27;edge&#x27; is not supported by this evidence.</td></tr><tr><td><strong>Is any strategy ready to be ranked or rewarded?</strong></td><td><span class="badge fail">NOT READY</span></td><td>0 of 12 strategies passed every gate. The best paper score is negative (-3.85% lower-bound ROI), which is the ranking&#x27;s own way of saying no strategy is yet better than luck.</td></tr><tr><td><strong>Can a starter-vs-backup claim be verified league-wide?</strong></td><td><span class="badge warn">PARTIAL</span></td><td>The league publishes injury status for players but publishes no depth chart (the league URL 404s). Only club sites do. So a statement like &#x27;the third-string corner is starting&#x27; can be verified for 2 of 26 clubs this week, and is an assumption elsewhere. The model flags 109 players as impacted starters; only 3 of them carry an official game designation, the other 106 are practice-only reports that the league has not yet converted into an availability ruling.</td></tr><tr><td><strong>Can a prop edge be claimed?</strong></td><td><span class="badge warn">MODEL ONLY</span></td><td>343 prop lines for 343 players, all built from the player&#x27;s own shrunk usage and the opponent&#x27;s defensive rating. No prop price exists in any connected source, so no prop edge can be claimed and the market column is deliberately blank.</td></tr></tbody></table></div>
+<p class="note">Sources: <a class="src" href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/lines.json" target="_blank" rel="noopener noreferrer">own-line model ↗</a> ·
+ <a class="src" href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/strategies.json" target="_blank" rel="noopener noreferrer">strategy leaderboard ↗</a> ·
+ <a class="src" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer">official injury report ↗</a> ·
+ <a class="src" href="https://www.chiefs.com/team/depth-chart" target="_blank" rel="noopener noreferrer">club depth chart (KC) ↗</a> ·
+ <a class="src" href="https://www.seahawks.com/team/depth-chart/" target="_blank" rel="noopener noreferrer">club depth chart (SEA) ↗</a></p>
+</section>
+<section class="panel" id="model"><h2>Why the own lines are not presented as edges</h2>
+<p>The model was fitted on 2024 and tested on games it never saw. On the 136 games of
+2026 it is <strong>9.98</strong> points of mean absolute error against
+<strong>9.48</strong> for the closing line. The 95% interval on the
+difference is <strong>[-0.054, 1.033]</strong>.</p>
+<p>Fitting the actual margin on both the closing line and the model line, then testing on 2026,
+puts a weight of <strong>1.336</strong> on the market and
+<strong>-0.328</strong> on the model; hybrid error
+9.54 against 9.48 for the market alone.
+A weight at or below zero means the model's disagreement with the price carried no information
+in the test window.</p>
+<p>The line-sign convention is measured rather than assumed: across 5591 games the
+correlation between the mirrored closing line and the home team's actual margin is
+<strong>0.439</strong>, so a positive number means the home team is
+favoured. <a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener noreferrer">source: nflverse schedules ↗</a></p>
+</section>
+<section class="panel" id="lines"><h2>Week 10 own lines, with the market in the same convention</h2>
+<p class="note">Both columns are signed from the <em>home</em> team's point of view (positive = home
+team favoured). The away-team view is shown as well because that is how a sportsbook prints the
+other side of the same game. This is the defect fixed in this session: the previous landing page
+printed a bare market number beside a signed model line, which made LA @ ARI look like a
+14.7-point difference when the real difference is 4.27 points.</p>
+<div class="table-wrap"><table class="data-table" id="tbl-lines"><thead><tr><th scope="col">Matchup</th><th scope="col">Model (home)</th><th scope="col">Model (away)</th><th scope="col">Market (home)</th><th scope="col">Market (away)</th><th scope="col">Difference</th><th scope="col">Model total</th><th scope="col">Total difference</th><th scope="col">Source</th></tr></thead><tbody><tr><td><strong>WAS @ NYG</strong><br><span class="sub">2026-11-12</span></td><td>2.6</td><td>-1.5</td><td>1.5</td><td>-1.5</td><td>1.10</td><td>45.3</td><td>4.80</td><td><a class="src" href="https://www.nfl.com/schedules/2026/REG10" target="_blank" rel="noopener noreferrer">NFL schedule ↗</a></td></tr><tr><td><strong>NE @ DET</strong><br><span class="sub">2026-11-15</span></td><td>-0.3</td><td>-2.5</td><td>2.5</td><td>-2.5</td><td>-2.80</td><td>48.8</td><td>-2.70</td><td><a class="src" href="https://www.nfl.com/schedules/2026/REG10" target="_blank" rel="noopener noreferrer">NFL schedule ↗</a></td></tr><tr><td><strong>KC @ ATL</strong><br><span class="sub">2026-11-15</span></td><td>-0.9</td><td>3.0</td><td>-3.0</td><td>3.0</td><td>2.10</td><td>46.4</td><td>-0.10</td><td><a class="src" href="https://www.nfl.com/schedules/2026/REG10" target="_blank" rel="noopener noreferrer">NFL schedule ↗</a></td></tr><tr><td><strong>HOU @ CLE</strong><br><span class="sub">2026-11-15</span></td><td>-3.2</td><td>4.5</td><td>-4.5</td><td>4.5</td><td>1.30</td><td>42.8</td><td>2.30</td><td><a class="src" href="https://www.nfl.com/schedules/2026/REG10" target="_blank" rel="noopener noreferrer">NFL schedule ↗</a></td></tr><tr><td><strong>MIN @ GB</strong><br><span class="sub">2026-11-15</span></td><td>4.4</td><td>-3.0</td><td>3.0</td><td>-3.0</td><td>1.40</td><td>43.5</td><td>1.00</td><td><a class="src" href="https://www.nfl.com/schedules/2026/REG10" target="_blank" rel="noopener noreferrer">NFL schedule ↗</a></td></tr><tr><td><strong>MIA @ IND</strong><br><span class="sub">2026-11-15</span></td><td>3.9</td><td>-3.5</td><td>3.5</td><td>-3.5</td><td>0.40</td><td>45.1</td><td>6.60</td><td><a class="src" href="https://www.nfl.com/schedules/2026/REG10" target="_blank" rel="noopener noreferrer">NFL schedule ↗</a></td></tr><tr><td><strong>CAR @ NO</strong><br><span class="sub">2026-11-15</span></td><td>1.2</td><td>-2.5</td><td>2.5</td><td>-2.5</td><td>-1.30</td><td>45.2</td><td>-3.30</td><td><a class="src" href="https://www.nfl.com/schedules/2026/REG10" target="_blank" rel="noopener noreferrer">NFL schedule ↗</a></td></tr><tr><td><strong>BUF @ NYJ</strong><br><span class="sub">2026-11-15</span></td><td>-6.0</td><td>8.5</td><td>-8.5</td><td>8.5</td><td>2.50</td><td>46.9</td><td>-3.60</td><td><a class="src" href="https://www.nfl.com/schedules/2026/REG10" target="_blank" rel="noopener noreferrer">NFL schedule ↗</a></td></tr><tr><td><strong>JAX @ TEN</strong><br><span class="sub">2026-11-15</span></td><td>-10.9</td><td>10.5</td><td>-10.5</td><td>10.5</td><td>-0.40</td><td>45.6</td><td>-0.90</td><td><a class="src" href="https://www.nfl.com/schedules/2026/REG10" target="_blank" rel="noopener noreferrer">NFL schedule ↗</a></td></tr><tr><td><strong>LA @ ARI</strong><br><span class="sub">2026-11-15</span></td><td>-5.2</td><td>9.5</td><td>-9.5</td><td>9.5</td><td>4.30</td><td>46.9</td><td>7.40</td><td><a class="src" href="https://www.nfl.com/schedules/2026/REG10" target="_blank" rel="noopener noreferrer">NFL schedule ↗</a></td></tr><tr><td><strong>SEA @ LV</strong><br><span class="sub">2026-11-15</span></td><td>-7.1</td><td>6.5</td><td>-6.5</td><td>6.5</td><td>-0.60</td><td>43.8</td><td>3.30</td><td><a class="src" href="https://www.nfl.com/schedules/2026/REG10" target="_blank" rel="noopener noreferrer">NFL schedule ↗</a></td></tr><tr><td><strong>SF @ DAL</strong><br><span class="sub">2026-11-15</span></td><td>-4.3</td><td>3.5</td><td>-3.5</td><td>3.5</td><td>-0.80</td><td>51.5</td><td>-4.00</td><td><a class="src" href="https://www.nfl.com/schedules/2026/REG10" target="_blank" rel="noopener noreferrer">NFL schedule ↗</a></td></tr><tr><td><strong>PIT @ CIN</strong><br><span class="sub">2026-11-15</span></td><td>1.7</td><td>-3.5</td><td>3.5</td><td>-3.5</td><td>-1.80</td><td>48.1</td><td>-1.40</td><td><a class="src" href="https://www.nfl.com/schedules/2026/REG10" target="_blank" rel="noopener noreferrer">NFL schedule ↗</a></td></tr><tr><td><strong>LAC @ BAL</strong><br><span class="sub">2026-11-16</span></td><td>5.2</td><td>-4.5</td><td>4.5</td><td>-4.5</td><td>0.70</td><td>43.1</td><td>4.60</td><td><a class="src" href="https://www.nfl.com/schedules/2026/REG10" target="_blank" rel="noopener noreferrer">NFL schedule ↗</a></td></tr></tbody></table></div><p class="note">A difference is model minus market. No odds feed is connected, so the market column is the consensus closing number carried by the nflverse mirror, not a book quote, and no difference on this page is a betting recommendation.</p>
+</section>
+<section class="panel" id="decide"><h2>Decide now, or wait for information?</h2>
+<p>The repository mixed together three different kinds of open item. Splitting them is the single
+biggest improvement to decision-making in this build, because it shows that six decisions need
+<em>no new data at all</em> — they only need a human to choose.</p>
+<div class="table-wrap"><table class="data-table" id="tbl-decide"><thead><tr><th scope="col">Kind</th><th scope="col">Count</th><th scope="col">What it needs</th><th scope="col">Where</th></tr></thead><tbody><tr><td><span class="badge pass">Fillable now</span></td><td>6</td><td>A human decision. Every piece of evidence is already in the repository.</td><td><a href="decisions.html#fillable">Decisions → Needs only a choice</a></td></tr><tr><td><span class="badge warn">Blocked</span></td><td>0</td><td>A named piece of information that no connected source publishes yet.</td><td><a href="decisions.html#blocked">Decisions → Blocked on information</a></td></tr><tr><td><span class="badge fail">Contradiction</span></td><td>10</td><td>An official page and the repository disagree; a human must arbitrate.</td><td><a href="flag-register.html">Flagged for Review</a></td></tr><tr><td><span class="badge neutral">Suggestion</span></td><td>27</td><td>An improvement that needs work, not a choice.</td><td><a href="suggestions.html">Suggestions &amp; Path</a></td></tr></tbody></table></div>
+</section>
+<section class="panel" id="power"><h2>How long before skill can be separated from luck?</h2>
+<p>Before any reward is attached to a strategy, the sample has to be large enough that a real edge
+would not be mistaken for luck. Using a two-sided test at 5% significance with 80% power, a
+-110 price and a per-bet standard deviation of 0.95 units:</p>
+<div class="table-wrap"><table class="data-table" id="tbl-power"><thead><tr><th scope="col">True edge</th><th scope="col">Bets needed</th><th scope="col">2026 seasons</th></tr></thead><tbody><tr><td>1% win-probability edge</td><td><strong>17,689</strong></td><td>65.0</td></tr><tr><td>2% win-probability edge</td><td><strong>4,423</strong></td><td>16.3</td></tr><tr><td>3% win-probability edge</td><td><strong>1,966</strong></td><td>7.2</td></tr><tr><td>5% win-probability edge</td><td><strong>708</strong></td><td>2.6</td></tr></tbody></table></div><p class="note">Arithmetic from stated assumptions, not a fitted result. A single 272-game season cannot separate a 1-3% edge from noise, which is why the leaderboard currently ranks on the lower bound of a 95% interval and awards zero to anything under the sample minimum. Method: <a class="src" href="https://www.itl.nist.gov/div898/handbook/prc/section2/prc222.htm" target="_blank" rel="noopener noreferrer">NIST sample-size procedure ↗</a></p>
+</section>
+<section class="panel" id="sites"><h2>Everything else that is published from this repository</h2>
+<p>Four site generations were built by different sessions in one day. None has been deleted. This
+dashboard is the entry point; the pages below hold the detail.</p>
+<div class="table-wrap"><table class="data-table" id="tbl-sites"><thead><tr><th scope="col">Page</th><th scope="col">What is there</th></tr></thead><tbody><tr><td><a href="../pages/lines.html">Model lines &amp; backtest</a></td><td>Own spreads/totals with error bands</td></tr><tr><td><a href="../pages/strategies.html">Strategy lab</a></td><td>8 gates, bootstrap CIs, correlation</td></tr><tr><td><a href="../pages/injuries.html">Injuries &amp; depth</a></td><td>Official status joined to depth rank</td></tr><tr><td><a href="../pages/props.html">Player props</a></td><td>Model-only projections, no prices</td></tr><tr><td><a href="../pages/questions.html">Question ledger</a></td><td>20 questions: known / unknown / missing</td></tr><tr><td><a href="../pages/evidence.html">Evidence &amp; provenance</a></td><td>URL + sha256 for every source file</td></tr><tr><td><a href="../docs/index.html">Companion dashboard (session 87deb7ab)</a></td><td>Independent build, own data layer</td></tr><tr><td><a href="../referee/index.html">Referee audit (session 73fdd6c4)</a></td><td>Independent official-source audit</td></tr><tr><td><a href="../verified-lab/index.html">Verified lab (session a2cea255)</a></td><td>Hand-transcription harness, 34 checks</td></tr></tbody></table></div>
+</section>
+</main>
+<footer>
+  <div>
+    <strong>NFL Decision Lab</strong>
+    <p>Research tool, not betting advice. No official league odds exist; no book-level price is
+    connected. Nothing here is a recommendation to wager.</p>
+  </div>
+  <div class="foot-links">
+    <a href="verification.html">Verification</a>
+    <a href="flag-register.html">Flagged for review</a>
+    <a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer">Repository ↗</a>
+    <a href="https://www.nfl.com/" target="_blank" rel="noopener noreferrer">NFL.com ↗</a>
+  </div>
+  <p class="credit">Data: official NFL pages (transcribed, see Verification) and the nflverse mirror
+  (CC-BY-4.0). Club names and marks belong to the NFL and its clubs.</p>
+</footer>
+</body>
+</html>

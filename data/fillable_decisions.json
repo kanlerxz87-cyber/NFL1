@@ -1,0 +1,83 @@
+{
+  "_readme": "Fillable decisions: choices that need NO new data collection, only a human decision. Each row names the evidence already in the repository, the option set, and what the decision unblocks. Kept separate from data/suggestions.json (improvements that still need something built) so nobody re-reads the same 20 items twice.",
+  "_sources": {
+    "S02": "https://www.nfl.com/standings/league/2026/reg",
+    "S01": "https://www.nfl.com/injuries/",
+    "S17": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda35b.htm",
+    "S24": "https://github.com/kanlerxz87-cyber/NFL1"
+  },
+  "decisions": [
+    {
+      "id": "F-D01",
+      "question": "Which line does the site publish by default: pure model, market, or both?",
+      "already_have": "14 Week 10 own lines with 95% bands; a blend test fitted on 2025 and tested on 2026 giving the market weight 1.336 and the model weight -0.328, with hybrid MAE 9.54 against market-only 9.49.",
+      "what_changes_the_answer": "Nothing measurable. The blend test already says the model adds no incremental information over the closing line in the test window.",
+      "options": "A: publish the pure model line, labelled as a baseline to beat. B: publish both, model first. C: publish the hybrid.",
+      "recommended": "B already happens on the Lines page. The open decision is a one-line policy statement on the Overview: the site must not describe a model-vs-market difference as an edge when the model weight is negative.",
+      "unblocks": "The wording of every 'edge' and 'signal' column on the Overview and Lines pages.",
+      "owner_needed": "You (policy), no data collection",
+      "source": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/lines.json",
+      "status": "Open - decision required"
+    },
+    {
+      "id": "F-D02",
+      "question": "What counts as a starter while the league publishes no depth chart?",
+      "already_have": "Official injury report: 279 player rows this week. Club depth charts: available for KC and SEA in string order (1st-4th). League site /teams/<club>/depth-chart returns 404 (recorded).",
+      "what_changes_the_answer": "Only the site's own transcription budget: 30 more club depth charts would make 'starter' mean 'listed 1st string on the club's own page' for all 32 clubs.",
+      "options": "A: define starter = depth rank 1 where a club chart exists, otherwise blank. B: define starter by snap share once snap counts are ingested. C: drop the starter label and publish only official game designations.",
+      "recommended": "A, immediately. It removes an assumption the site currently makes (113 'starters' flagged) without needing a new feed, because the two clubs that do have charts prove the definition works.",
+      "unblocks": "The 'starters flagged' KPI, the attrition index, and the backup-replacement table.",
+      "owner_needed": "You (definition), no data collection",
+      "source": "https://www.chiefs.com/team/depth-chart",
+      "status": "Open - decision required"
+    },
+    {
+      "id": "F-D03",
+      "question": "Does an official game designation or a practice report carry the signal?",
+      "already_have": "This week the official page prints a game designation on 6 of 279 rows and a practice status on 279 of 279. The model currently weights practice-only rows (DNP 0.5, limited 0.2) as if they were availability.",
+      "what_changes_the_answer": "Nothing for this week's snapshot: the official page is mid-week and has not filed game statuses yet. The answer changes only after Friday/Saturday filings.",
+      "options": "A: publish practice-only lines as 'practice only' and exclude them from availability maths. B: keep the weighting but publish it as an assumption. C: wait for game designations before publishing availability at all.",
+      "recommended": "A. The page already labels them; the maths should stop treating them as availability.",
+      "unblocks": "The attrition index and every 'starters impacted' count.",
+      "owner_needed": "You (policy), no data collection",
+      "source": "https://www.nfl.com/injuries/",
+      "status": "Open - decision required"
+    },
+    {
+      "id": "F-D04",
+      "question": "What may the leaderboard reward, given no odds source is connected?",
+      "already_have": "12 strategies scored against consensus closing lines with 8 gates, bootstrap intervals and Benjamini-Hochberg correction. 0 pass, 2 on watch. No book-level price anywhere in the repository.",
+      "what_changes_the_answer": "A licensed odds feed would let ROI be computed against a price that could actually have been taken. Survey data already in the repo (13 official bet-type facts) says most parlay money is lost.",
+      "options": "A: paper points only, no cash value. B: cash prizes after legal review. C: no leaderboard until a priced feed exists.",
+      "recommended": "A now, with the reward table published as 'paper only'. Any cash structure needs legal review (already flagged F05).",
+      "unblocks": "The reward table on the Leaderboard page and whether ranks can be shown at all.",
+      "owner_needed": "You + counsel, no data collection",
+      "source": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/strategies.json",
+      "status": "Open - decision required"
+    },
+    {
+      "id": "F-D05",
+      "question": "Which of the four existing sites is the one that gets published?",
+      "already_have": "Four generations now live in one repository: root pages (two generators), docs/, referee/, verified-lab/. Each was built by a different session and each re-states the same brief differently.",
+      "what_changes_the_answer": "Nothing: the duplication is a publishing decision, not a data problem. The new Decision Room index links every generation so nothing is lost.",
+      "options": "A: one canonical site, others archived behind a clearly labelled link. B: keep all four and link them (current state). C: merge page by page.",
+      "recommended": "A. The repo now has a single entry page that says which site is canonical and links the rest as evidence.",
+      "unblocks": "Navigation, search-engine behaviour, and which numbers a reader sees first.",
+      "owner_needed": "You, no data collection",
+      "source": "https://kanlerxz87-cyber.github.io/NFL1/",
+      "status": "Open - decision required"
+    },
+    {
+      "id": "F-D06",
+      "question": "What is the authority order when the league page and a club page disagree?",
+      "already_have": "This week: the league injury page lists players, club depth charts list strings, and club sites are on the NFL platform but publish independently. No conflict was observed in the two clubs read, but no rule exists for one.",
+      "what_changes_the_answer": "A single observed conflict would settle it by example; none exists yet, which is exactly why the rule has to be chosen in advance.",
+      "options": "A: league page wins for status, club page wins for depth order. B: newest timestamp wins. C: publish both and flag the conflict.",
+      "recommended": "A plus C: league page for status, club page for depth, conflict flagged with both links.",
+      "unblocks": "Any future automated merge of the two sources.",
+      "owner_needed": "You, no data collection",
+      "source": "https://www.nfl.com/teams/",
+      "status": "Open - decision required"
+    }
+  ]
+}

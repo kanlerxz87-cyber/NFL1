@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Executive summary · NFL Decision Lab</title>
+<meta name="description" content="Source-linked NFL decision dashboard: own lines, validation gates, injuries and depth, and an explicit register of what is unverified.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="brand" href="executive-summary.html"><span class="mark">NFL</span><span class="brand-text">Decision Lab</span></a>
+  <nav aria-label="Main"><a href="dashboard.html">Dashboard</a><a href="decisions.html">Decisions</a><a href="suggestions.html">Suggestions &amp; Path</a><a href="verification.html">Verification</a><a href="flag-register.html">Flagged for Review</a><a href="executive-summary.html" class="active">Executive Summary</a></nav>
+</header>
+<main id="main">
+  <section class="page-head">
+    <p class="eyebrow">2026 season · Week 10</p>
+    <h1>Executive summary</h1>
+    <p class="standfirst">What was built, what the evidence actually says, what it cannot support yet, and the decisions that are waiting for you.</p>
+    <p class="timestamp">Data read 2026-11-13T12:51:04+00:00 · verification run 2026-11-13T12:50:51+00:00 ·
+    every value links to its source; unconfirmed values are left blank and linked to the
+    <a href="flag-register.html">Flagged for Review</a> page.</p>
+  </section>
+  <section class="panel" id="short"><h2>The short version</h2>
+<p><strong>The site is honest, and that is the point.</strong> It builds its own NFL lines from
+play-by-play, tests them against the closing line on games they never saw, tracks official injury
+status against club depth charts, and publishes every number with a source — including the numbers
+that say the model does not beat the market.</p>
+<p>Three findings carry most of the weight:</p>
+<ol class="tight">
+<li><strong>The own-line model is not yet good enough to act on.</strong> Out of sample it is
+9.98 points of error against the closing line's 9.48, and a
+fitted blend puts a negative weight on the model (-0.328). Publishing
+its disagreement with the price as an "edge" would be unsupported.</li>
+<li><strong>No strategy has earned a rank or a reward.</strong> 0 of
+12 strategies clear all 8 gates; the best paper score is a
+<em>negative</em> lower-bound return. The leaderboard is built and empty on purpose.</li>
+<li><strong>The starter/backup question is only partly answerable.</strong> The league publishes
+injury status but no depth chart; only club sites publish depth charts. This week
+6 of 279 official rows carry a game designation, the rest are
+practice reports. A "third-string corner is starting" claim can be verified for
+2 of 26 clubs.</li>
+</ol>
+</section>
+<section class="panel" id="built"><h2>What was built in this session</h2>
+<div class="table-wrap"><table class="data-table" id="tbl-built"><thead><tr><th scope="col">Area</th><th scope="col">What exists now</th><th scope="col">Where</th></tr></thead><tbody><tr><td>Official fixtures</td><td>136 games implied by standings, 279 injury rows, 14 week-10 games, 122 depth slots — all hand-transcribed with source URLs.</td><td><a href="verification.html#scope">Verification</a></td></tr><tr><td>Verification gate</td><td>28 checks comparing every dataset cell by cell against an official page; FAIL blocks publication, FLAG is published for review.</td><td><a href="verification.html#checks">Every check</a></td></tr><tr><td>Decision separation</td><td>6 decisions that need only a choice, 0 blocked on information, 10 contradictions.</td><td><a href="decisions.html">Decisions</a></td></tr><tr><td>Sign-convention fix</td><td>Model and market printed in one convention, home and away, with the difference derived from the printed numbers.</td><td><a href="dashboard.html#lines">Week 10 lines</a></td></tr><tr><td>Statistical power</td><td>How many bets a real edge needs before it can be separated from luck, so rewards cannot be handed out on noise.</td><td><a href="dashboard.html#power">Power</a></td></tr><tr><td>Contradiction register</td><td>10 conflicts between official pages and repository data, with both links.</td><td><a href="flag-register.html">Flagged for Review</a></td></tr></tbody></table></div>
+</section>
+<section class="panel" id="decisions"><h2>The decisions you actually have to make</h2>
+<p>Ranked by how much each one unblocks. None of them needs more data collection.</p>
+<div class="table-wrap"><table class="data-table" id="tbl-your-decisions"><thead><tr><th scope="col">#</th><th scope="col">Decision</th><th scope="col">Recommended</th><th scope="col">Unblocks</th></tr></thead><tbody><tr><td>1</td><td><strong>Which line does the site publish by default: pure model, market, or both?</strong></td><td>B already happens on the Lines page. The open decision is a one-line policy statement on the Overview: the site must not describe a model-vs-market difference as an edge when the model weight is negative.</td><td>The wording of every &#x27;edge&#x27; and &#x27;signal&#x27; column on the Overview and Lines pages.</td></tr><tr><td>2</td><td><strong>What counts as a starter while the league publishes no depth chart?</strong></td><td>A, immediately. It removes an assumption the site currently makes (113 &#x27;starters&#x27; flagged) without needing a new feed, because the two clubs that do have charts prove the definition works.</td><td>The &#x27;starters flagged&#x27; KPI, the attrition index, and the backup-replacement table.</td></tr><tr><td>3</td><td><strong>Does an official game designation or a practice report carry the signal?</strong></td><td>A. The page already labels them; the maths should stop treating them as availability.</td><td>The attrition index and every &#x27;starters impacted&#x27; count.</td></tr><tr><td>4</td><td><strong>What may the leaderboard reward, given no odds source is connected?</strong></td><td>A now, with the reward table published as &#x27;paper only&#x27;. Any cash structure needs legal review (already flagged F05).</td><td>The reward table on the Leaderboard page and whether ranks can be shown at all.</td></tr><tr><td>5</td><td><strong>Which of the four existing sites is the one that gets published?</strong></td><td>A. The repo now has a single entry page that says which site is canonical and links the rest as evidence.</td><td>Navigation, search-engine behaviour, and which numbers a reader sees first.</td></tr><tr><td>6</td><td><strong>What is the authority order when the league page and a club page disagree?</strong></td><td>A plus C: league page for status, club page for depth, conflict flagged with both links.</td><td>Any future automated merge of the two sources.</td></tr></tbody></table></div>
+</section>
+<section class="panel" id="unresolved"><h2>What is still unresolved</h2>
+<ul class="tight">
+<li><strong>No odds feed.</strong> Until a licensed price source is connected, every "edge" is a
+difference from a consensus closing number, not a price that could have been taken.</li>
+<li><strong>No league depth chart.</strong> The league URL returns 404. Thirty clubs still need a
+transcription before a league-wide backup-exposure index means anything.</li>
+<li><strong>Thirty-two practice cells vs one designation.</strong> The injury feed is mid-week; game
+statuses arrive later. Treat this week's availability numbers as a practice report, not a lineup.</li>
+<li><strong>Rewards need counsel.</strong> The leaderboard is paper points only.</li>
+<li><strong>Four site generations coexist.</strong> This dashboard is the entry point; the others are
+linked and preserved.</li>
+</ul>
+</section>
+<section class="panel" id="check"><h2>How to check any of this yourself</h2>
+<p>Every figure on this page comes from a JSON file in the repository, and every claim about an
+official source links to the page it was read from. Open
+<a href="verification.html">Verification</a> to see the full check list, or run the four commands
+listed at the bottom of that page to reproduce the whole build.</p>
+<p class="note">This is a research tool. It is not betting advice, it does not place bets, and no
+number on it is a recommendation to wager.</p>
+</section>
+</main>
+<footer>
+  <div>
+    <strong>NFL Decision Lab</strong>
+    <p>Research tool, not betting advice. No official league odds exist; no book-level price is
+    connected. Nothing here is a recommendation to wager.</p>
+  </div>
+  <div class="foot-links">
+    <a href="verification.html">Verification</a>
+    <a href="flag-register.html">Flagged for review</a>
+    <a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer">Repository ↗</a>
+    <a href="https://www.nfl.com/" target="_blank" rel="noopener noreferrer">NFL.com ↗</a>
+  </div>
+  <p class="credit">Data: official NFL pages (transcribed, see Verification) and the nflverse mirror
+  (CC-BY-4.0). Club names and marks belong to the NFL and its clubs.</p>
+</footer>
+</body>
+</html>

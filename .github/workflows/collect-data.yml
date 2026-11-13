@@ -56,20 +56,44 @@ jobs:
       # step, a data refresh changed data/model/*.json but never the pages that show it.
       - name: Re-render the published pages from the refreshed data
         run: python pipeline/gen_site.py
+
+      # Session 6e8ca348-nfl1 (defect X06 kept in this integration): also re-render every other
+      # page that prints a model number, and run the freshness / generator-ownership gates before
+      # anything is committed. (Their block re-ran pipeline/gen_site.py; the duplicate call was
+      # dropped in the merge because the step above already runs it — no step is removed.)
+      - name: Re-render the decision dashboard and evidence layer from the refreshed data
+        run: |
+          python tools/evidence_from_official.py
+          python tools/verify_official.py
+          python tools/build_decision_room.py
+          python tools/build_dashboard.py
+          python tools/check_freshness.py
+          python tools/check_generators.py
+
       - name: Check the committed-site rules would pass on the rendered pages
         run: python tools/check_committed_site.py
       - name: Publish generator log
         if: always()
         run: |
           ls -la data/model/ || true
-      - name: Commit refreshed data and pages
+      - name: Commit refreshed data and the pages rendered from it
         run: |
           git config user.name "nfl1-data-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/model pipeline index.html pages 2>/dev/null || true
+          git add data/model pipeline data/evidence data/audit data/decision_room index.html pages web 2>/dev/null || true
           if git diff --cached --quiet; then
-            echo "No data changes"
-          else
-            git commit -m "data: refresh model outputs and re-render pages from nflverse releases [skip ci]"
-            git push origin HEAD:${{ github.ref_name }}
+            echo "No data or page changes"
+            exit 0
           fi
+          git commit -m "data: refresh model outputs and re-render every page [skip ci]"
+          for attempt in 1 2 3; do
+            if git push origin HEAD:${{ github.ref_name }}; then
+              echo "pushed on attempt $attempt"
+              exit 0
+            fi
+            echo "push rejected, rebasing onto the remote and retrying"
+            git pull --rebase origin ${{ github.ref_name }} || true
+            sleep 5
+          done
+          echo "::error::could not push the refreshed data after three attempts"
+          exit 1

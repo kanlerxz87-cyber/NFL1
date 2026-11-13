@@ -18,7 +18,7 @@ CANON = [
     ("injuries.html", "Injuries"),
     ("availability.html", "Availability"),
     ("data.html", "Verified Data"),
-    ("lines.html", "Own Lines"),
+    ("verified-lines.html", "Own Lines"),
     ("analysis.html", "Validation & Correlation"),
     ("decisions.html", "Decision Register"),
     ("verified.html", "Verified Artifacts"),

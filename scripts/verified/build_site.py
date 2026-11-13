@@ -5,7 +5,7 @@ data can never drift apart. Every table row is emitted from data/verified/*, and
 row that came from an official page carries that page's URL.
 
 Run:  python3 scripts/verified/build_site.py
-Out:  pages/data.html, pages/lines.html, pages/analysis.html, pages/decisions.html
+Out:  pages/data.html, pages/verified-lines.html, pages/analysis.html, pages/decisions.html
       pages/verified.html   (index of this session's deliverables)
 """
 from __future__ import annotations
@@ -435,7 +435,10 @@ def main() -> int:
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     pages = {
         "data.html": ("Verified Data", "Official-source dataset, refreshed and re-checked automatically", build_data),
-        "lines.html": ("Own Lines", "Model-generated spreads and totals, with the validation verdict attached", build_lines),
+        # Session 65df4799-nfl1: renamed from lines.html — pipeline/gen_site.py owns
+        # pages/lines.html ("My Lines"), and both generators were silently clobbering
+        # each other on the same path. The verified sub-site's page keeps its content.
+        "verified-lines.html": ("Own Lines", "Model-generated spreads and totals, with the validation verdict attached", build_lines),
         "analysis.html": ("Validation & Correlation", "Forward test, luck removal, and measured correlation values", build_analysis),
         "decisions.html": ("Decision Register", "Questions, missing information, and options to choose between", build_decisions),
         "verified.html": ("Verified Artifacts", "Everything generated from verified inputs", build_verified_index),
