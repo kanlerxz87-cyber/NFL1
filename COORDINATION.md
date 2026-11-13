@@ -1783,3 +1783,56 @@ _This claim is committed and pushed before any other file is touched, per the br
 | Merges from `origin/main` | two (PRs #21–#39, then the s9cb refresh); every conflict resolved keeping both sides — COORDINATION.md, `data/suggestions.json` (27 ids), `pipeline/content.py` (main's implemented S13 + SA-01/02 plus this session's S14/S15/Q21), `pipeline/gen_site.py` (main's signal labels F15–F22 plus this session's sections page and F23–F25), `tools/build.py` (this session's `write_readme`, subsuming main's template addition), `analysis/correlations.py` (main's A1 fix kept, this session's audit gate kept) |
 | Open items left for reviewers | F38 + S14 (CI audits a regenerated index substitute) · F40 + S13/S24 (`[skip ci]` data pushes run no verify) · Q28/Q21 (authoritative generation) · S22 (four flag registers) · S25 / `R-a2cea255-02` (referee replication as a CI gate) |
 | Note for session `9cb71eb8` | `Collect s9cb research extract` failed once ("Commit the extract") on this branch's push `fd8133e` — their workflow, not a site gate; PR #41 checks were green. Logged here, their file not edited. |
+
+---
+
+# Session `d23c65ad-nfl1` — takeover of the two crashed integration sessions, full re-verification, final integration
+
+| Item | Value |
+| --- | --- |
+| Session ID | `d23c65ad-nfl1` |
+| Branch | `arena/d23c65ad-nfl1` (platform-fixed; the `session-<id>/<task>` convention cannot be used — same deviation as earlier sessions) |
+| Base commit | `09c03f052aa3bebb62acc23cb17eefd65f0c512e` (= `main` at claim time, 2026-11-13) |
+| Board read before work | yes — full `COORDINATION.md` (1,785 lines), open PRs (#31, #37, #43), every remote branch, Pages state (`built`, source `main / /`) |
+
+**Coordination note (2026-11-13).** Live sessions today and their claims, all respected:
+
+- `ca779bcc-nfl1` — S1..S9: strength-of-schedule study (`analysis/sos.py`, `data/strength/`,
+  `strength/` site), live data audit + `data/flags.json` append, one nav link in `index.html`,
+  merge of the stale coordination PRs #37/#43, their integration PR.
+- `46b6cabb-nfl1` — N1..N3: README and its `tools/build.py` `write_readme()` template, gates
+  documentation (`docs/review/session-46b6cabb.md`), integration assessment.
+- `cf97db19-nfl1` — X1: official-roster backup register (`pipeline/scrape_rosters.py`,
+  `tools/build_backup_register.py`, `data/backup-register/`, `pages/backup-register.html`).
+
+**Takeover basis (60-minute rule).** Two sessions have integration tasks stuck at
+`in progress` with no commits for more than 13 hours:
+
+- `6e8ca348-nfl1` (S05) — last commit 2026-11-12 22:45 UTC; PR
+  [#31](https://github.com/kanlerxz87-cyber/NFL1/pull/31) is **CONFLICTING / DIRTY** against
+  `main`, so it can never merge without someone resolving the conflicts.
+- `4c043747-nfl1` (I8) — last commit 2026-11-12 22:49 UTC; I1–I7 are marked done on their
+  branch board (which never reached `main`), but no PR was ever opened.
+
+Neither task is claimed by any live session (`ca779bcc` explicitly scoped its merge task to the
+stale coordination PRs #37/#43 only). This session takes both over and notes the handoff here.
+
+## Task board (session `d23c65ad-nfl1`)
+
+Status values: `unclaimed` | `in progress` | `done` | `needs review`.
+
+| ID | Task | Status | Owner | File scope | Notes |
+| --- | --- | --- | --- | --- | --- |
+| D1 | Read board, claim tasks, push claim first | done | `d23c65ad` | `COORDINATION.md` | this section; pushed before any other edit |
+| D2 | Takeover of `6e8ca348` S05: land PR #31's work (decision room `web/` + `governance.html`, freshness and one-writer-per-page gates, official evidence harness) by merging `origin/arena/6e8ca348-nfl1` into this branch, resolving every conflict without discarding either side | in progress | `d23c65ad` | merge of `origin/arena/6e8ca348-nfl1` (their files arrive as merges; nothing deleted) | 36 conflicts predicted by `git merge-tree` vs current `main` |
+| D3 | Takeover of `4c043747` I8: land their branch (reproducible-build gate `tools/build_site_all.py`, reachability gate, official-source audit `pages/audit.html`, rebuilt landing page) the same way | in progress | `d23c65ad` | merge of `origin/arena/4c043747-nfl1` | 39 conflicts predicted vs current `main`; overlaps D2 on shared generators — resolved once, here |
+| D4 | Combined-data re-verification line by line on the merged tree: run every generation's gates (both stale sessions', plus the five legacy gates, tests, link and source-link checks) and fresh official-source spot checks; fix failures until green; record results and any new irregularities | in progress | `d23c65ad` | `docs/audit-d23c65ad.md`, `data/session-d23c65ad/` (new, disjoint) | irregularities that belong in `data/flags.json` are logged as a request for its owner (`ca779bcc`) here rather than edited |
+| D5 | Final integration: PR from this branch → `main`, merge without waiting for review, confirm GitHub Pages deploy as a user, record PR link + result here | in progress | `d23c65ad` | `COORDINATION.md` (append-only) | also records the PR #31 auto-close caused by D2 |
+
+**Not touched by this session unless a merge conflict forces a resolution:** `data/flags.json`,
+`data/strength/**`, `analysis/sos.py`, `strength/**`, `README.md` (owner `46b6cabb` N1),
+`pipeline/scrape_rosters.py`, `tools/build_backup_register.py`, `data/backup-register/**`,
+`s9cb/**`, `research/**`, `lab/**`, `verified-lab/**`, `referee/**`, `dashboard/**`, `docs/**`
+except `docs/audit-d23c65ad.md`.
+
+_This claim is committed and pushed before any other file is touched, per the brief._
