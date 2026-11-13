@@ -7,6 +7,36 @@ source link and every gap as a flag.
 
 Live site: <https://kanlerxz87-cyber.github.io/NFL1/>
 
+## Decision Room (`room/`) — start here
+
+<https://kanlerxz87-cyber.github.io/NFL1/room/>
+
+A self-contained site for **choosing a path before any change is implemented**. Eleven pages, all
+built from `room/data/*.json`, every table row carrying its own source link:
+
+| Page | What it answers |
+|---|---|
+| Overview | 15 verified numbers, the decisions ready for a choice, the blocked ones, and where every section lives |
+| Executive summary | What holds up, what does not, what is missing, what a human must decide |
+| **Decide** | 14 decisions, 30 options with buys / costs / risks, evidence links, a recommendation and the gate that enforces the change |
+| Suggestions | 15 ranked improvements, each tied to a decision and a finding |
+| Open questions | 22 questions that gate decisions: known, missing, how to discover it, what it blocks |
+| Strategy & luck | The 12 tested signals, the 8 gates checked one by one, correlations, own lines, next man up |
+| Injuries & depth | Official designations, the next man up, depth coverage for all 32 clubs, and the stale-fallback defect |
+| Verified data | Today's official capture: 32 standings rows and 27 fixtures, reconciled arithmetically |
+| Requirements | All 26 requirements in the brief, 21 met and 5 partial, each traced to the page that satisfies it |
+| Flagged for review | 19 findings — 13 open, 6 closed — each with the official source that settles it |
+| About | Method, source register, and what is deliberately blank |
+
+```bash
+python3 room/build.py     # rebuild every page from room/data/*.json
+python3 room/verify.py    # fail on a broken link, an empty cell, or a row with no https source
+```
+
+The official capture behind it (2026-11-13) is committed verbatim under `data/official/2026-11-13/`
+so the transcription can be checked against the live page. A rebuild must be byte-identical or
+`.github/workflows/room.yml` fails.
+
 ## What the site contains
 
 | Page | What it answers |

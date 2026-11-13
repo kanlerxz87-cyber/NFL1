@@ -11,7 +11,30 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="top">
   <a class="brand" href="../index.html"><span class="mark">NFL</span><span class="brand-text">Decision Lab</span></a>
-  <nav aria-label="Main"><a href="../index.html">Overview</a><a href="../pages/sections.html">All Sections</a><a href="../room/index.html">Decision Room</a><a href="../pages/lines.html">My Lines</a><a href="../pages/strategies.html">Strategy Lab</a><a href="../pages/injuries.html">Injuries &amp; Depth</a><a href="../pages/props.html">Props</a><a href="../pages/questions.html">Questions</a><a href="../pages/suggestions.html">Suggestions</a><a href="../pages/evidence.html" class="active">Evidence</a><a href="../pages/review.html">Flagged for Review</a><a href="../pages/executive.html">Executive Summary</a></nav>
+  <nav>
+    <a href="../index.html">Overview</a>
+    <a href="sections.html">All Sections</a>
+    <a href="../room/index.html">Decision Room</a>
+    <a href="executive-summary.html">Executive Summary</a>
+    <a href="teams.html">Teams</a>
+    <a href="standings.html">Standings</a>
+    <a href="injuries.html">Injuries</a>
+    <a href="availability.html">Availability</a>
+    <a href="data.html">Verified Data</a>
+    <a href="lines.html">Own Lines</a>
+    <a href="analysis.html">Validation & Correlation</a>
+    <a href="decisions.html">Decision Register</a>
+    <a href="verified.html">Verified Artifacts</a>
+    <a href="evidence.html" class="active">Evidence</a>
+    <a href="models.html">Strategy Lab</a>
+    <a href="strategies.html">Strategies</a>
+    <a href="suggestions.html">Suggestions</a>
+    <a href="questions.html">Questions</a>
+    <a href="flagged.html">Flagged</a>
+    <a href="review.html">Review</a>
+    <a href="executive.html">Executive Summary (companion)</a>
+    <a href="props.html">Player Props</a>
+  </nav>
 </header>
 <main id="main">
   <section class="page-head">
@@ -51,7 +74,7 @@
   <div class="table-wrap"><table class=""><thead><tr><th>Metric (2026)</th><th>This pipeline</th><th>Companion model</th><th>Market baseline</th><th>Reading</th><th>Source</th></tr></thead><tbody><tr><td>2026 spread error (MAE, points)</td><td>9.95</td><td>10.93</td><td>9.45</td><td>Both independent models are further from the result than the closing line; the market is the better forecast.</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/pbp" target="_blank" rel="noopener">play-by-play</a></td></tr><tr><td>2026 total error (MAE, points)</td><td>11.23</td><td>12.12</td><td>10.55</td><td>Same conclusion for totals: neither model beats the close.</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/pbp" target="_blank" rel="noopener">play-by-play</a></td></tr></tbody></table></div>
   <div class="table-wrap"><table class=""><thead><tr><th>Relationship</th><th>This pipeline</th><th>Companion session</th><th>Reading</th><th>Source</th></tr></thead><tbody><tr><td>point margin vs game total (same game)</td><td>r = 0.017 (n=5592, 2005-2026)</td><td>r = -0.161 (n=136, 2026 weeks 1-9)</td><td>Different windows, same conclusion: the two are effectively independent, so a spread+total parlay is priced close to independent legs.</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">results</a></td></tr></tbody></table></div>
   <h3>Where the two builds differ</h3>
-  <div class="table-wrap"><table class=""><thead><tr><th>Item</th><th>This pipeline</th><th>Companion session</th><th>Resolution</th><th>Source</th></tr></thead><tbody><tr><td><strong>Availability of closing lines</strong></td><td>Consensus closing spread/total/moneyline mirrored from nflverse for 2005-2026; labelled consensus, not an official book quote.</td><td>No official NFL odds/closing-line source is reachable here and none is stored in the repo; model numbers are NOT edges against a market and must not be treated as such.</td><td>Superseded by the integration pipeline. Companion pages that state no closing lines exist are accurate for their inputs, not for the repo as it stands now; see Flagged F13.</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">source</a></td></tr><tr><td><strong>Week 10 model margin for WAS @ NYG</strong></td><td></td><td>-1.2</td><td>Two different rating systems on the same inputs. Both are inside the model&#x27;s own error band, which is why neither is promoted.</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">source</a></td></tr></tbody></table></div>
+  <div class="table-wrap"><table class=""><thead><tr><th>Item</th><th>This pipeline</th><th>Companion session</th><th>Resolution</th><th>Source</th></tr></thead><tbody><tr><td><strong>Availability of closing lines</strong></td><td>Consensus closing spread/total/moneyline mirrored from nflverse for 2005-2026; labelled consensus, not an official book quote.</td><td>No official NFL odds/closing-line source is reachable here and none is stored in the repo; model numbers are NOT edges against a market and must not be treated as such.</td><td>Superseded by the integration pipeline. Companion pages that state no closing lines exist are accurate for their inputs, not for the repo as it stands now; see Flagged F13.</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">source</a></td></tr><tr><td><strong>Week 10 model margin for WAS @ NYG</strong></td><td><span class="missing">no comparable value in this build</span></td><td>-1.2</td><td>Two different rating systems on the same inputs. Both are inside the model&#x27;s own error band, which is why neither is promoted.</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">source</a></td></tr></tbody></table></div>
   <p class="note">Companion artifacts: availability.json, backtest.json, correlations.json, lines_week10.json, luck.json, predictions_log.json, ratings.json, validation.json.
   Raw comparison: <a href="../data/model/replication.json">replication.json</a>.</p>
 </section>

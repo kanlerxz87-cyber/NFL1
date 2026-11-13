@@ -35,10 +35,25 @@ NAV = [
     ("injuries.html", "Injuries & depth"),
     ("data.html", "Verified data"),
     ("flagged.html", "Flagged for review"),
+    ("requirements.html", "Requirements"),
     ("about.html", "About"),
 ]
 
-BUILD_STAMP = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+def _stamp() -> str:
+    """Derive the build stamp from the captured data, never from the wall clock.
+
+    .github/workflows/room.yml rebuilds and fails if `git diff -- room/` is non-empty.
+    A wall-clock stamp guarantees that diff on any later UTC date, so the stamp has to
+    come from the data: the capture time recorded in room/data/meta.json.
+    """
+    try:
+        with open(os.path.join(DATA, "meta.json"), encoding="utf-8") as f:
+            return json.load(f)["built_utc"].replace("T", " ").replace("Z", " UTC")
+    except Exception:
+        return "unavailable"
+
+
+BUILD_STAMP = _stamp()
 
 
 def e(v) -> str:
@@ -201,8 +216,8 @@ def page_index() -> str:
     _mat = sum(1 for x in _f if x["severity"] == "material" and x["status"] == "open")
     for k in ex["kpis"]:
         if k["label"] == "Open findings":
-            k["value"] = f"{_open} open, {_pass} pass"
-            k["note"] = f"{_mat} material, {_open - _mat} minor, {_pass} verified today"
+            k["value"] = f"{_open} open, {len(_f) - _open} closed"
+            k["note"] = f"{_mat} material open; {_pass} confirmed holding today"
     kpis = "".join(
         f'<article class="kpi"><span class="label">{e(k["label"])}</span>'
         f'<span class="value">{e(k["value"])}</span>'
@@ -264,6 +279,8 @@ early would mean guessing, which is the one thing this repository does not do.</
         ("data.html", "Verified data", "Today's official capture with an arithmetic reconciliation", "32 clubs · 27 fixtures"),
         ("flagged.html", "Flagged for review", "Every irregularity and every unverified value, with the source that would settle it", f'{len(load("findings.json")["findings"])} findings'),
         ("about.html", "About", "Method, sources, what is deliberately blank, and how to reproduce everything", "method"),
+        ("requirements.html", "Requirements", "Every requirement in the brief, with the page that meets it and what keeps five partial",
+         f'{len(load("requirements.json")["requirements"])} requirements'),
        ]], caption="Categories — every row links to the page it describes", key_col=0, src_col=3, nav=True)}
 <p class="note">Every figure on this page is rendered from a committed JSON file in
 <code class="mono">room/data/</code>. Rebuild with <code class="mono">python3 room/build.py</code>;
@@ -284,8 +301,8 @@ def page_executive() -> str:
             _open = sum(1 for x in _f if x["status"] == "open")
             _pass = sum(1 for x in _f if x["status"] == "verified-ok")
             _mat = sum(1 for x in _f if x["severity"] == "material" and x["status"] == "open")
-            k["value"] = f"{_open} open, {_pass} pass"
-            k["note"] = f"{_mat} material, {_open - _mat} minor, {_pass} verified today"
+            k["value"] = f"{_open} open, {len(_f) - _open} closed"
+            k["note"] = f"{_mat} material open; {_pass} confirmed holding today"
     def ul(items):
         return '<ul class="tight">' + "".join(f"<li>{e(x)}</li>" for x in items) + "</ul>"
     rows = [[e(k["label"]), f'<strong>{e(k["value"])}</strong>', e(k["note"]),
@@ -483,6 +500,16 @@ def page_strategy() -> str:
 p-values are corrected for that number. A rule that cannot clear all eight is published as a
 failure with its effect size, because a failed rule is the useful output.</p>
 
+<h2>Signal research: what was tested and what it returned</h2>
+<p>Each signal was declared before it was scored. A signal that fails is published with its
+effect size, because on this board the failures carry more information than the one rule that
+looks promising.</p>
+<table_signals>
+<h2>Validation gates: does each one actually hold?</h2>
+<p>A gate that is defined but never applied is decoration. This table says which of the eight
+are met today, which hold for some rules only, and which no rule clears.</p>
+<table_validation>
+
 <h2>Removing luck</h2>
 <div class="cols">
   <div class="panel"><h3>What is tested against</h3><ul class="tight">
@@ -522,6 +549,28 @@ failure with its effect size, because a failed rule is the useful output.</p>
 <p class="small">Where the club chart lists nobody behind the absent player, the row is blank on
 purpose. A chart is an ordering, and three of this week's designated players do not appear on
 their own club's chart at all — see <a href="flagged.html#F-112">F-112</a>.</p>"""
+    sig = load("signals.json")["signals"]
+    srows = []
+    for x in sig:
+        v = x["verdict"]
+        kind = ("ok" if v == "benchmark" else "bad" if v in ("negative and significant", "no signal", "unscoreable")
+                else "warn" if "fail" in v or "unproven" in v or "not established" in v else "info")
+        srows.append([f'<strong>{e(x["id"])}</strong> · {e(x["name"])}', e(x["tested"]), e(x["sample"]),
+                      e(x["result"]), badge(v, kind), e(x["why_not"]),
+                      src_links([{"t": "data", "u": x["source"]}])])
+    signals_tbl = table(["Signal", "How it was tested", "Sample", "Result", "Verdict", "Why it is not a strategy yet", "Source"],
+                        srows, caption="Signal register", src_col=6)
+    val = load("validation.json")["validation"]
+    vrows = []
+    for x in val:
+        kind = {"met": "ok", "partial": "warn", "failed": "bad"}[x["status"]]
+        vrows.append([e(x["id"]), f'<strong>{e(x["gate"])}</strong>', e(x["how"]),
+                      badge(x["status"], kind), e(x["note"]),
+                      src_links([{"t": "code", "u": x["source"]}])])
+    val_tbl = table(["Gate", "What it requires", "How it is enforced", "Today", "What that means", "Source"],
+                    vrows, caption="Eight validation gates, checked one by one", src_col=5)
+    body = body.replace("<table_signals>", signals_tbl).replace("<table_validation>", val_tbl)
+
     # own lines table from the model file, labelled with where the market number comes from
     try:
         model = json.load(open(os.path.join(ROOT, "data", "model", "lines.json")))
@@ -818,6 +867,65 @@ Where they disagree, the disagreement is a finding on the
                 "every number on the site.", body)
 
 
+
+def page_requirements() -> str:
+    d = load("requirements.json")
+    reqs = d["requirements"]
+    met = sum(1 for r in reqs if r["status"] == "met")
+    part = sum(1 for r in reqs if r["status"] == "partial")
+    rows = []
+    for r in reqs:
+        kind = "ok" if r["status"] == "met" else "warn"
+        rows.append([e(r["id"]), e(r["requirement"]), e(r["how"]), badge(r["status"], kind),
+                     src_links([r["src"]])])
+    tbl = table(["ID", "Requirement, in the brief's words", "How it is met here", "Status", "Source"],
+                rows, caption=f"All {len(reqs)} requirements from the brief", num_cols=(), src_col=4)
+    body = f"""
+<div class="kpis">
+  <article class="kpi"><span class="label">Requirements</span><span class="value">{len(reqs)}</span><span class="note">every one traced to the page that satisfies it</span></article>
+  <article class="kpi"><span class="label">Met</span><span class="value">{met}</span><span class="note">implemented; the evidence is one click away</span></article>
+  <article class="kpi"><span class="label">Partial</span><span class="value">{part}</span><span class="note">the machinery exists but a named input is missing</span></article>
+  <article class="kpi"><span class="label">Unmet</span><span class="value">{len(reqs) - met - part}</span><span class="note">none</span></article>
+</div>
+<div class="callout"><strong>How to read the partial rows.</strong> A partial is not a broken
+promise: it is a requirement whose machinery is built and whose result is blocked by something
+outside this repository — a price that does not exist, or a reward table nobody has chosen yet.
+Each one names the question that unblocks it.</div>
+{tbl}
+<h2>The five partials, and exactly what each one is waiting for</h2>
+<table>
+<tr><th>Requirement</th><th>What exists today</th><th>What is missing</th><th>Unblocked by</th><th>Source</th></tr>
+<tr><td>R-06 own lines</td><td>Spread, total and win probability for every remaining fixture, with error bands</td>
+<td>The line does not beat the market: 10.40 vs 9.72 points mean spread error in 2025</td>
+<td>D-06 — retrain on the full season and re-test out of sample</td>
+<td>{src_links([{"t": "model", "u": REPO + "/blob/main/data/model/lines.json"}])}</td></tr>
+<tr><td>R-08 competition rewards</td><td>A board, a scoring rule and a corrected significance test</td>
+<td>No reward values exist anywhere: paying for a strategy that has not been shown to work would be invented</td>
+<td>Q-13 — the reward table has to be chosen by a human</td>
+<td>{src_links([{"t": "board", "u": REPO + "/blob/main/data/s9cb/leaderboard.json"}])}</td></tr>
+<tr><td>R-11 prop combos</td><td>343 shrunk projections and a same-game correlation matrix</td>
+<td>No prop price in any source, so no prop bet can be scored honestly</td>
+<td>Q-09 — a licensed feed, or accept projections only</td>
+<td>{src_links([{"t": "props", "u": REPO + "/blob/main/data/s9cb/props.json"}])}</td></tr>
+<tr><td>R-15 selective skill</td><td>Eight gates, correction for multiple testing, a held-out window</td>
+<td>Nothing on the board survives correction yet</td>
+<td>D-04 — publish the gate set as the standard, then keep testing</td>
+<td>{src_links([{"t": "gates", "u": REPO + "/blob/main/room/data/validation.json"}])}</td></tr>
+<tr><td>R-17 backup deficiencies</td><td>Depth ranks for 31 clubs, 934 position rows, next man up for every designation</td>
+<td>Only 3 clubs' charts are published and HOU publishes an image</td>
+<td>D-08 — render all 31 from the committed capture</td>
+<td>{src_links([{"t": "capture", "u": REPO + "/blob/main/room/data/depth_coverage.json"}])}</td></tr>
+</table>
+<p class="small">The brief asks for no manual input. Every row above is satisfied or traced
+without one; the two that need a human (the reward table and the licensed feed) are decisions,
+not data-entry tasks, and they are recorded as blocked in the decision register.</p>
+"""
+    return page("requirements.html", "Requirements", "Every promise in the brief, traced",
+                "All 26 requirements in the brief, with the page that satisfies each one and the exact input that keeps five of them partial.",
+                body)
+
+
+
 def main() -> int:
     pages = {
         "index.html": page_index(),
@@ -829,6 +937,7 @@ def main() -> int:
         "injuries.html": page_injuries(),
         "data.html": page_data(),
         "flagged.html": page_flagged(),
+        "requirements.html": page_requirements(),
         "about.html": page_about(),
     }
     for name, content in pages.items():
