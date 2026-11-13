@@ -33,6 +33,8 @@ CANON = [
     # strength/; the target rule below keeps its href correct from both levels.
     ("room/index.html", "Decision Room"),
     ("strength/index.html", "SOS Study"),
+    # Sessions d23c65ad/c56ebee8: the review room and the s9cb research sub-site join
+    # the shared bar so no published page can become unreachable.
     ("review-room/index.html", "Review Room"),
     ("research/index.html", "s9cb Research"),
     # pages produced by the other generators in this repository, kept in the shared
@@ -41,10 +43,9 @@ CANON = [
     ("teams.html", "Teams"),
     ("standings.html", "Standings"),
     ("availability.html", "Availability"),
-    ("room/index.html", "Decision Room"),
-    ("strength/index.html", "SOS Study"),
-    ("review-room/index.html", "Review Room"),
-    ("research/index.html", "s9cb Research"),
+    ("data.html", "Verified Data"),
+    ("verified-lines.html", "Own Lines"),
+    ("analysis.html", "Validation & Correlation"),
     ("decisions.html", "Decision Register"),
     ("verified.html", "Verified Artifacts"),
     ("models.html", "Models"),
