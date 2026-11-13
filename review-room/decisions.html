@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decisions · NFL Review Room</title>
+<meta name="description" content="The decision queue: options, costs, blockers and recommendations.">
+<style>:root{--bg:#0d1117;--panel:#161b22;--panel2:#1c2330;--line:#2a3441;--ink:#e6edf3;
+--muted:#8b98a8;--accent:#58a6ff;--good:#3fb950;--warn:#d29922;--bad:#f85149;--violet:#bc8cff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.top{position:sticky;top:0;z-index:20;display:flex;gap:18px;align-items:center;
+padding:12px 24px;background:rgba(13,17,23,.96);border-bottom:1px solid var(--line);
+flex-wrap:wrap;backdrop-filter:blur(6px)}
+.brand{font-weight:700;color:var(--ink)}
+.brand .tag{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+border:1px solid var(--line);border-radius:99px;padding:1px 8px;margin-left:8px}
+nav.main{display:flex;gap:4px;flex-wrap:wrap}
+nav.main a{padding:5px 11px;border-radius:7px;font-size:13.5px;color:var(--muted)}
+nav.main a:hover{background:var(--panel2);text-decoration:none}
+nav.main a.on{background:var(--panel2);color:var(--ink);font-weight:600}
+.wrap{max-width:1180px;margin:0 auto;padding:26px 24px 80px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:-.01em}
+h2{font-size:19px;margin:38px 0 10px;padding-bottom:7px;border-bottom:1px solid var(--line)}
+h3{font-size:15px;margin:22px 0 8px}
+.lede{font-size:16.5px;color:var(--ink);background:var(--panel);border:1px solid var(--line);
+border-left:3px solid var(--accent);border-radius:9px;padding:13px 16px;margin:0 0 18px}
+.sub{color:var(--muted);margin:0 0 16px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:11px;margin:16px 0}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.kpi .k{display:block;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.kpi .v{display:block;font-size:24px;font-weight:700;margin:2px 0}
+.kpi .n{display:block;font-size:11.5px;color:var(--muted)}
+.kpi .v.good{color:var(--good)}.kpi .v.warn{color:var(--warn)}.kpi .v.bad{color:var(--bad)}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:12px 0}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+caption{text-align:left;color:var(--muted);font-size:12px;padding:9px 12px}
+th,td{padding:8px 11px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--panel2);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+color:var(--muted);font-weight:600;white-space:nowrap}
+tbody tr:hover{background:rgba(88,166,255,.05)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.badge{display:inline-block;font-size:11px;font-weight:600;padding:1px 8px;border-radius:99px;
+border:1px solid;white-space:nowrap}
+.b-ready{color:var(--good);border-color:var(--good);background:rgba(63,185,80,.1)}
+.b-blocked{color:var(--bad);border-color:var(--bad);background:rgba(248,81,73,.1)}
+.b-watch{color:var(--warn);border-color:var(--warn);background:rgba(210,153,34,.12)}
+.b-info{color:var(--accent);border-color:var(--accent);background:rgba(88,166,255,.1)}
+.b-mute{color:var(--muted);border-color:var(--line)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:11px;
+padding:16px 18px;margin:14px 0}
+.card h3{margin-top:0}
+.src{font-size:12px;color:var(--muted);word-break:break-all}
+.flagbox{border-left:3px solid var(--warn);background:rgba(210,153,34,.07);
+padding:11px 15px;border-radius:0 8px 8px 0;margin:12px 0}
+.badbox{border-left:3px solid var(--bad);background:rgba(248,81,73,.07);
+padding:11px 15px;border-radius:0 8px 8px 0;margin:12px 0}
+.goodbox{border-left:3px solid var(--good);background:rgba(63,185,80,.07);
+padding:11px 15px;border-radius:0 8px 8px 0;margin:12px 0}
+.opts{display:grid;gap:10px;margin:10px 0 0}
+.opt{border:1px solid var(--line);border-radius:9px;padding:11px 13px;background:var(--panel2)}
+.opt.rec{border-color:var(--good);box-shadow:inset 3px 0 0 var(--good)}
+.opt .lbl{font-weight:650;margin:0 0 6px}
+.opt dl{display:grid;grid-template-columns:104px 1fr;gap:2px 10px;margin:0;font-size:13px}
+.opt dt{color:var(--muted);font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;padding-top:2px}
+.opt dd{margin:0}
+footer{border-top:1px solid var(--line);margin-top:50px;padding-top:16px;
+color:var(--muted);font-size:12.5px}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px}
+ul.tight{margin:8px 0;padding-left:20px}ul.tight li{margin:3px 0}
+.pill{display:inline-block;font-size:11px;padding:1px 7px;border-radius:99px;
+background:var(--panel2);border:1px solid var(--line);color:var(--muted);margin-right:5px}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html">Review Room<span class="tag">decide before you build</span></a>
+  <nav class="main"><a href="index.html">Start here</a><a href="executive.html">Executive summary</a><a href="decisions.html" class="on">Decisions</a><a href="questions.html">Questions</a><a href="week10.html">This week's personnel</a><a href="evidence.html">Signals &amp; evidence</a><a href="improvements.html">Improvements</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged for review</a><a href="../index.html">Main dashboard &rarr;</a></nav>
+</header>
+<main class="wrap">
+
+<h1>Decisions</h1>
+<p class="lede">Seven decisions. For each one: why it cannot wait, the real options with what
+each costs and buys, what is blocking it, and what the reader has to do. A recommendation is
+given where the evidence supports one and withheld where it does not.</p>
+<p class="sub">A decision marked <span class="badge b-ready">ready</span> can be taken now.
+<span class="badge b-blocked">blocked</span> means an unanswered question or an approval comes
+first, and the blocker is named so it can be chased.</p>
+
+<div class="tw"><table><thead><tr><th>ID</th><th>Decision</th><th>Status</th>
+<th>Waiting on</th><th>Recommended</th></tr></thead><tbody>
+<tr><td><a href="#D01">D01</a></td><td>Which site generation is the one published product?</td><td><span class="badge b-blocked">blocked</span></td><td>Q28, G01</td><td>A</td></tr><tr><td><a href="#D02">D02</a></td><td>Buy a licensed odds feed, or publish without one?</td><td><span class="badge b-blocked">blocked</span></td><td>Q01 (price, book, timestamp), G02</td><td>A</td></tr><tr><td><a href="#D03">D03</a></td><td>What exactly does the leaderboard reward, and can it be paid?</td><td><span class="badge b-blocked">blocked</span></td><td>Q20 (what rewards), Q27, G03 legal review</td><td>C</td></tr><tr><td><a href="#D04">D04</a></td><td>How should the personnel-deficiency signal be used, given that none of it beat the price?</td><td><span class="badge b-ready">ready</span></td><td>&mdash;</td><td>A</td></tr><tr><td><a href="#D05">D05</a></td><td>Stop publishing implied or model-only numbers where a verified value is missing?</td><td><span class="badge b-ready">ready</span></td><td>&mdash;</td><td>B</td></tr><tr><td><a href="#D06">D06</a></td><td>What is the publication gate for a number that changed after it was verified?</td><td><span class="badge b-ready">ready</span></td><td>&mdash;</td><td>A</td></tr><tr><td><a href="#D07">D07</a></td><td>How should the two independent analyses of correlation be reconciled?</td><td><span class="badge b-ready">ready</span></td><td>&mdash;</td><td>A</td></tr>
+</tbody></table></div>
+
+<h2 id="D01">D01 · Which site generation is the one published product?</h2>
+<p><span class="badge b-blocked">blocked</span> <span class="pill">Architecture</span>
+<span class="pill">waiting on: Q28, G01</span></p>
+<div class="card"><p>Six generations of this site now exist in one repository (root dashboard, pages/, lab/, research/, verified-lab/, referee/, dashboard/). The same question is answered differently on different generations, so a reader cannot tell which number is current. Every later decision depends on a single answer being current.</p></div>
+<div class="opts"><div class="opt rec">
+<p class="lbl">Option A — Declare the root dashboard authoritative and redirect the rest <span class="badge b-ready">recommended</span></p>
+<dl><dt>Buys</dt><dd>One number per question, reachable from one place. Readers stop comparing generations.</dd>
+<dt>Costs</dt><dd>Low: one nav entry per generation plus a banner on each superseded page.</dd>
+<dt>Could go wrong</dt><dd>Working pages from other sessions become second-class; their extra detail is harder to find.</dd>
+<dt>Effort</dt><dd>1 session</dd></dl></div><div class="opt">
+<p class="lbl">Option B — Declare the research section authoritative and redirect the rest</p>
+<dl><dt>Buys</dt><dd>The biggest evidence base becomes the front door.</dd>
+<dt>Costs</dt><dd>Medium: the research section carries the largest samples and the gate matrix, but not the official-source depth-chart join.</dd>
+<dt>Could go wrong</dt><dd>The official-source verification pages (the ones that made every value auditable) fall behind a redirect.</dd>
+<dt>Effort</dt><dd>1 session</dd></dl></div><div class="opt">
+<p class="lbl">Option C — Keep all generations and publish a comparison table on the landing page</p>
+<dl><dt>Buys</dt><dd>Nothing is deleted; every session&#x27;s work stays visible.</dd>
+<dt>Costs</dt><dd>Ongoing: every change must be made in the place(s) that own it.</dd>
+<dt>Could go wrong</dt><dd>Duplicated, drifting numbers remain the reader&#x27;s problem, which is the current state.</dd>
+<dt>Effort</dt><dd>Ongoing tax</dd></dl></div></div>
+<div class="goodbox"><b>Why option A:</b> The root dashboard is the only generation whose CI regenerates it from the data layer and whose figures an independent audit recomputes (47 checks). Its weakness is breadth, not correctness. Option C preserves the current defect.</div>
+<p><b>What you have to do:</b> Say which letter you want; nothing is redirected until you do.</p>
+<p class="src">Evidence: <a class="src" href="../pages/sections.html">pages/sections.html</a> · <a class="src" href="../docs/audit-b6e68100.md">docs/audit-b6e68100.md</a></p>
+
+<h2 id="D02">D02 · Buy a licensed odds feed, or publish without one?</h2>
+<p><span class="badge b-blocked">blocked</span> <span class="pill">Data</span>
+<span class="pill">waiting on: Q01 (price, book, timestamp), G02</span></p>
+<div class="card"><p>The project wants to originate its own lines and rank strategies for reward. Without a timestamped, book-level price there is no closing-line value, no prop pricing and no honest ROI. Everything currently published is scored against a mirrored closing price, not against a price a bettor could have taken.</p></div>
+<div class="opts"><div class="opt rec">
+<p class="lbl">Option A — Licence one odds API and store every quote append-only <span class="badge b-ready">recommended</span></p>
+<dl><dt>Buys</dt><dd>Real prices at real times: CLV, prop markets, parlay pricing and honest ROI all become possible.</dd>
+<dt>Costs</dt><dd>Recurring fee, contract, integration; probably the largest single cost in this project.</dd>
+<dt>Could go wrong</dt><dd>Vendor terms can restrict redistribution, which would affect publishing every price on a public site.</dd>
+<dt>Effort</dt><dd>2-3 sessions plus a contract</dd></dl></div><div class="opt">
+<p class="lbl">Option B — Publish model lines only, no ROI or leaderboard rewards</p>
+<dl><dt>Buys</dt><dd>Every published claim stays supportable.</dd>
+<dt>Costs</dt><dd>Nothing to buy; drop the reward and ROI claims from the site.</dd>
+<dt>Could go wrong</dt><dd>The leaderboard, which is the point of the project, becomes an accuracy contest rather than a profit contest.</dd>
+<dt>Effort</dt><dd>1 session</dd></dl></div><div class="opt">
+<p class="lbl">Option C — Keep the mirrored closing line and label every result as indicative</p>
+<dl><dt>Buys</dt><dd>Large samples now (7,103 played games, 5,228 priced).</dd>
+<dt>Costs</dt><dd>Already paid.</dd>
+<dt>Could go wrong</dt><dd>It answers &#x27;did the model beat the close&#x27;, not &#x27;could you have made money&#x27;. Those are different questions and the site must not blur them.</dd>
+<dt>Effort</dt><dd>Done, if labelled</dd></dl></div></div>
+<div class="goodbox"><b>Why option A:</b> The project&#x27;s stated goal (originate lines, reward top strategies) cannot be measured honestly without prices. Until A is funded, C is the only defensible publication mode and the label has to be on every table.</div>
+<p><b>What you have to do:</b> Approve or decline the licence; if declined, choose B or C.</p>
+<p class="src">Evidence: <a class="src" href="../pages/lines.html">pages/lines.html</a> · <a class="src" href="../pages/strategies.html">pages/strategies.html</a></p>
+
+<h2 id="D03">D03 · What exactly does the leaderboard reward, and can it be paid?</h2>
+<p><span class="badge b-blocked">blocked</span> <span class="pill">Competition</span>
+<span class="pill">waiting on: Q20 (what rewards), Q27, G03 legal review</span></p>
+<div class="card"><p>A reward on a leaderboard is a policy statement, and if it is money it is a regulated activity in most US states. No official source reviewed defines a reward formula, and the site currently publishes none.</p></div>
+<div class="opts"><div class="opt">
+<p class="lbl">Option A — No money: rank and badge only</p>
+<dl><dt>Buys</dt><dd>No licensing, no jurisdiction problem, no payout accounting.</dd>
+<dt>Costs</dt><dd>Low. A ranking rule and a badge.</dd>
+<dt>Could go wrong</dt><dd>Weaker incentive; the leaderboard becomes editorial rather than a contest.</dd>
+<dt>Effort</dt><dd>1 session</dd></dl></div><div class="opt">
+<p class="lbl">Option B — Prize pool with an entry rule and full terms</p>
+<dl><dt>Buys</dt><dd>A real contest, which is what the brief asks for.</dd>
+<dt>Costs</dt><dd>High: legal review of every state the site can be read in, payout accounting, tax reporting, dispute process.</dd>
+<dt>Could go wrong</dt><dd>Likely requires a licence or exemption in several jurisdictions; the project may not be eligible at all.</dd>
+<dt>Effort</dt><dd>Multi-month, outside a code session</dd></dl></div><div class="opt rec">
+<p class="lbl">Option C — Rank-only now, with the reward formula pre-registered for later <span class="badge b-ready">recommended</span></p>
+<dl><dt>Buys</dt><dd>The ranking rule can be frozen now, so scores cannot be tuned to whoever is winning.</dd>
+<dt>Costs</dt><dd>Low.</dd>
+<dt>Could go wrong</dt><dd>Formula announced but unpayable until a decision is made.</dd>
+<dt>Effort</dt><dd>1 session</dd></dl></div></div>
+<div class="goodbox"><b>Why option C:</b> Pre-registering the formula is the part that protects the science, and it costs nothing. Paying is a legal question this analysis cannot answer, so it stays open rather than being guessed.</div>
+<p><b>What you have to do:</b> Choose A or B; C happens automatically if nothing is chosen.</p>
+<p class="src">Evidence: <a class="src" href="../pages/strategies.html">pages/strategies.html</a> · <a class="src" href="../pages/review.html">pages/review.html</a></p>
+
+<h2 id="D04">D04 · How should the personnel-deficiency signal be used, given that none of it beat the price?</h2>
+<p><span class="badge b-ready">ready</span> <span class="pill">Signals</span>
+<span class="pill">waiting on: nothing</span></p>
+<div class="card"><p>This session tested thirteen personnel measures against the closing line on up to 7,083 played games, and separately asked whether the market&#x27;s own number already contains them. The measures are readable and descriptive — who is out, who is starting in place of whom — but as a group they did not show a reliable information edge after correction, and none of the five bet rules built on them passed the gates. The live counts and corrected p-values are on the Signals and Week 10 pages; they are read from the data files, not repeated here. Deciding what that negative result means for the project is the owner&#x27;s call, not the analysis&#x27;s.</p></div>
+<div class="opts"><div class="opt rec">
+<p class="lbl">Option A — Keep the deficiency register as a descriptive dashboard and publish no personnel-driven bets <span class="badge b-ready">recommended</span></p>
+<dl><dt>Buys</dt><dd>Honest presentation: the register answers &#x27;who is out and who is next&#x27;, not &#x27;who covers&#x27;.</dd>
+<dt>Costs</dt><dd>None: already built.</dd>
+<dt>Could go wrong</dt><dd>The brief asked for personnel signals; this answers it with a negative result, which is still an answer.</dd>
+<dt>Effort</dt><dd>Done</dd></dl></div><div class="opt">
+<p class="lbl">Option B — Collect player-level defensive data and retest with a production-loss measure on defence</p>
+<dl><dt>Buys</dt><dd>A real test of the &#x27;2nd/3rd/4th string defender&#x27; question instead of a count of names on a report.</dd>
+<dt>Costs</dt><dd>One collection change plus one analysis pass; needs per-player defensive snaps and statistics, which the current extract lacks.</dd>
+<dt>Could go wrong</dt><dd>Likely also a negative result; the market prices injuries quickly and publicly.</dd>
+<dt>Effort</dt><dd>1 session</dd></dl></div><div class="opt">
+<p class="lbl">Option C — Test the reaction instead of the level: how fast does the line move after a designation?</p>
+<dl><dt>Buys</dt><dd>The realistic question: the information is public, so the edge can only be in speed.</dd>
+<dt>Costs</dt><dd>Needs a timestamped odds history, which is D02.</dd>
+<dt>Could go wrong</dt><dd>Blocked until D02 is decided; unmeasurable with closing lines only.</dd>
+<dt>Effort</dt><dd>Blocked</dd></dl></div></div>
+<div class="goodbox"><b>Why option A:</b> A is what the evidence supports today and costs nothing. B is worth doing only as a deliberate second attempt, and C is the only option with a plausible route to an edge, but it depends on D02.</div>
+<p><b>What you have to do:</b> Accept the negative result, or commission B or C.</p>
+<p class="src">Evidence: <a class="src" href="../review-room/evidence.html">review-room/evidence.html</a> · <a class="src" href="../review-room/decisions.html">review-room/decisions.html</a></p>
+
+<h2 id="D05">D05 · Stop publishing implied or model-only numbers where a verified value is missing?</h2>
+<p><span class="badge b-ready">ready</span> <span class="pill">Integrity</span>
+<span class="pill">waiting on: nothing</span></p>
+<div class="card"><p>The brief says: if a value cannot be confirmed from an official source, leave it blank and flag it. The site mostly obeys this, but prop market columns are model-only and several legacy pages publish derived figures with no official counterpart. Deciding the rule once fixes every page instead of page by page.</p></div>
+<div class="opts"><div class="opt">
+<p class="lbl">Option A — Hard rule: a cell is either official-sourced or blank with a flag</p>
+<dl><dt>Buys</dt><dd>One rule, mechanically checkable, no exceptions to argue about.</dd>
+<dt>Costs</dt><dd>Some tables shrink visibly; some pages lose their point.</dd>
+<dt>Could go wrong</dt><dd>Model output (own lines, projections) is not official by definition, so it must be labelled as model output rather than deleted.</dd>
+<dt>Effort</dt><dd>1 session</dd></dl></div><div class="opt rec">
+<p class="lbl">Option B — Two classes: official facts, and model estimates clearly marked <span class="badge b-ready">recommended</span></p>
+<dl><dt>Buys</dt><dd>Keeps the model content while never presenting it as an official value.</dd>
+<dt>Costs</dt><dd>Costs a per-cell or per-column marker.</dd>
+<dt>Could go wrong</dt><dd>Reader must respect the distinction; marking has to be consistent or it degrades.</dd>
+<dt>Effort</dt><dd>1-2 sessions</dd></dl></div></div>
+<div class="goodbox"><b>Why option B:</b> The site&#x27;s purpose includes originating lines, which are by definition not official. B keeps that purpose while obeying the blank-and-flag rule for anything claiming to be a fact.</div>
+<p><b>What you have to do:</b> Pick A or B; B is the default if the model pages are to survive.</p>
+<p class="src">Evidence: <a class="src" href="../pages/evidence.html">pages/evidence.html</a> · <a class="src" href="../pages/props.html">pages/props.html</a> · <a class="src" href="../pages/review.html">pages/review.html</a></p>
+
+<h2 id="D06">D06 · What is the publication gate for a number that changed after it was verified?</h2>
+<p><span class="badge b-ready">ready</span> <span class="pill">Operations</span>
+<span class="pill">waiting on: nothing</span></p>
+<div class="card"><p>This session found the committed standings were one game stale (the Week 10 Thursday game was missing) and that the official injury page changes during the day. A published value can therefore be correct when verified and wrong when read. The repository has no rule for that.</p></div>
+<div class="opts"><div class="opt rec">
+<p class="lbl">Option A — Show an as-of timestamp and the source&#x27;s own refresh window on every time-sensitive table <span class="badge b-ready">recommended</span></p>
+<dl><dt>Buys</dt><dd>The reader can tell how old a number is and whether it can still change.</dd>
+<dt>Costs</dt><dd>Low: the timestamps already exist in the data files.</dd>
+<dt>Could go wrong</dt><dd>None material; a timestamp does not fix staleness, it only discloses it.</dd>
+<dt>Effort</dt><dd>1 session</dd></dl></div><div class="opt">
+<p class="lbl">Option B — Refresh time-sensitive sources immediately before each publication and block the build if older than a threshold</p>
+<dl><dt>Buys</dt><dd>A stale number cannot be published silently.</dd>
+<dt>Costs</dt><dd>Medium: a refresh step and a freshness check in CI.</dd>
+<dt>Could go wrong</dt><dd>A source that is offline blocks publication of everything; needs an override path that is itself logged.</dd>
+<dt>Effort</dt><dd>1-2 sessions</dd></dl></div><div class="opt">
+<p class="lbl">Option C — Do nothing beyond the existing flags</p>
+<dl><dt>Buys</dt><dd>Nothing.</dd>
+<dt>Costs</dt><dd>None.</dd>
+<dt>Could go wrong</dt><dd>The staleness found this session recurs and is only caught by a reader noticing.</dd>
+<dt>Effort</dt><dd>None</dd></dl></div></div>
+<div class="goodbox"><b>Why option A:</b> A is cheap and can be done in this session; B is the better control once the refresh path is stable. C leaves a known defect in place.</div>
+<p><b>What you have to do:</b> Confirm A now and whether to fund B later.</p>
+<p class="src">Evidence: <a class="src" href="../review-room/verification.html">review-room/verification.html</a></p>
+
+<h2 id="D07">D07 · How should the two independent analyses of correlation be reconciled?</h2>
+<p><span class="badge b-ready">ready</span> <span class="pill">Verification</span>
+<span class="pill">waiting on: nothing</span></p>
+<div class="card"><p>Different sessions computed the same correlations on different scopes (32 standings rows vs 136 games vs 7,103 games) and published values that cannot be compared. A reader comparing two pages sees two numbers for one concept.</p></div>
+<div class="opts"><div class="opt rec">
+<p class="lbl">Option A — Publish one correlation register with the scope in the column header <span class="badge b-ready">recommended</span></p>
+<dl><dt>Buys</dt><dd>No two numbers with the same name.</dd>
+<dt>Costs</dt><dd>Low: merge on presentation, keep every underlying computation.</dd>
+<dt>Could go wrong</dt><dd>Requires deleting or relabelling the smaller-scope figures from display.</dd>
+<dt>Effort</dt><dd>1 session</dd></dl></div><div class="opt">
+<p class="lbl">Option B — Keep both and add a comparability warning</p>
+<dl><dt>Buys</dt><dd>Nothing is removed.</dd>
+<dt>Costs</dt><dd>Low.</dd>
+<dt>Could go wrong</dt><dd>The reader still has to do the reconciliation.</dd>
+<dt>Effort</dt><dd>1 session</dd></dl></div></div>
+<div class="goodbox"><b>Why option A:</b> The correlation question is the one most likely to be quoted out of context. One register with the scope in the header removes the ambiguity at the source.</div>
+<p><b>What you have to do:</b> Confirm A; it can be applied at the next integration.</p>
+<p class="src">Evidence: <a class="src" href="../pages/analysis.html">pages/analysis.html</a> · <a class="src" href="../review-room/evidence.html">review-room/evidence.html</a></p>
+
+<footer>
+  <p>Built 2026-11-13T12:54:36+00:00 from files in this repository. Every figure on this page is read
+  from a data file at build time; nothing is typed in by hand. <span class="src">Generated by
+  tools/review_room.py.</span></p>
+</footer>
+</main>
+</body>
+</html>

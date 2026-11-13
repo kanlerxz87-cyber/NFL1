@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verification · NFL Review Room</title>
+<meta name="description" content="Each official source re-read this session, and what it showed.">
+<style>:root{--bg:#0d1117;--panel:#161b22;--panel2:#1c2330;--line:#2a3441;--ink:#e6edf3;
+--muted:#8b98a8;--accent:#58a6ff;--good:#3fb950;--warn:#d29922;--bad:#f85149;--violet:#bc8cff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.top{position:sticky;top:0;z-index:20;display:flex;gap:18px;align-items:center;
+padding:12px 24px;background:rgba(13,17,23,.96);border-bottom:1px solid var(--line);
+flex-wrap:wrap;backdrop-filter:blur(6px)}
+.brand{font-weight:700;color:var(--ink)}
+.brand .tag{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+border:1px solid var(--line);border-radius:99px;padding:1px 8px;margin-left:8px}
+nav.main{display:flex;gap:4px;flex-wrap:wrap}
+nav.main a{padding:5px 11px;border-radius:7px;font-size:13.5px;color:var(--muted)}
+nav.main a:hover{background:var(--panel2);text-decoration:none}
+nav.main a.on{background:var(--panel2);color:var(--ink);font-weight:600}
+.wrap{max-width:1180px;margin:0 auto;padding:26px 24px 80px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:-.01em}
+h2{font-size:19px;margin:38px 0 10px;padding-bottom:7px;border-bottom:1px solid var(--line)}
+h3{font-size:15px;margin:22px 0 8px}
+.lede{font-size:16.5px;color:var(--ink);background:var(--panel);border:1px solid var(--line);
+border-left:3px solid var(--accent);border-radius:9px;padding:13px 16px;margin:0 0 18px}
+.sub{color:var(--muted);margin:0 0 16px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:11px;margin:16px 0}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.kpi .k{display:block;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.kpi .v{display:block;font-size:24px;font-weight:700;margin:2px 0}
+.kpi .n{display:block;font-size:11.5px;color:var(--muted)}
+.kpi .v.good{color:var(--good)}.kpi .v.warn{color:var(--warn)}.kpi .v.bad{color:var(--bad)}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:12px 0}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+caption{text-align:left;color:var(--muted);font-size:12px;padding:9px 12px}
+th,td{padding:8px 11px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--panel2);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+color:var(--muted);font-weight:600;white-space:nowrap}
+tbody tr:hover{background:rgba(88,166,255,.05)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.badge{display:inline-block;font-size:11px;font-weight:600;padding:1px 8px;border-radius:99px;
+border:1px solid;white-space:nowrap}
+.b-ready{color:var(--good);border-color:var(--good);background:rgba(63,185,80,.1)}
+.b-blocked{color:var(--bad);border-color:var(--bad);background:rgba(248,81,73,.1)}
+.b-watch{color:var(--warn);border-color:var(--warn);background:rgba(210,153,34,.12)}
+.b-info{color:var(--accent);border-color:var(--accent);background:rgba(88,166,255,.1)}
+.b-mute{color:var(--muted);border-color:var(--line)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:11px;
+padding:16px 18px;margin:14px 0}
+.card h3{margin-top:0}
+.src{font-size:12px;color:var(--muted);word-break:break-all}
+.flagbox{border-left:3px solid var(--warn);background:rgba(210,153,34,.07);
+padding:11px 15px;border-radius:0 8px 8px 0;margin:12px 0}
+.badbox{border-left:3px solid var(--bad);background:rgba(248,81,73,.07);
+padding:11px 15px;border-radius:0 8px 8px 0;margin:12px 0}
+.goodbox{border-left:3px solid var(--good);background:rgba(63,185,80,.07);
+padding:11px 15px;border-radius:0 8px 8px 0;margin:12px 0}
+.opts{display:grid;gap:10px;margin:10px 0 0}
+.opt{border:1px solid var(--line);border-radius:9px;padding:11px 13px;background:var(--panel2)}
+.opt.rec{border-color:var(--good);box-shadow:inset 3px 0 0 var(--good)}
+.opt .lbl{font-weight:650;margin:0 0 6px}
+.opt dl{display:grid;grid-template-columns:104px 1fr;gap:2px 10px;margin:0;font-size:13px}
+.opt dt{color:var(--muted);font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;padding-top:2px}
+.opt dd{margin:0}
+footer{border-top:1px solid var(--line);margin-top:50px;padding-top:16px;
+color:var(--muted);font-size:12.5px}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px}
+ul.tight{margin:8px 0;padding-left:20px}ul.tight li{margin:3px 0}
+.pill{display:inline-block;font-size:11px;padding:1px 7px;border-radius:99px;
+background:var(--panel2);border:1px solid var(--line);color:var(--muted);margin-right:5px}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html">Review Room<span class="tag">decide before you build</span></a>
+  <nav class="main"><a href="index.html">Start here</a><a href="executive.html">Executive summary</a><a href="decisions.html">Decisions</a><a href="questions.html">Questions</a><a href="week10.html">This week's personnel</a><a href="evidence.html">Signals &amp; evidence</a><a href="improvements.html">Improvements</a><a href="verification.html" class="on">Verification</a><a href="flagged.html">Flagged for review</a><a href="../index.html">Main dashboard &rarr;</a></nav>
+</header>
+<main class="wrap">
+
+<h1>Verification</h1>
+<p class="lede">Everything re-checked in this session against the official page it claims to come
+from, with what was found. Checks that found a difference keep the difference.</p>
+<p class="sub">Read https://www.nfl.com/standings/league/2026/reg and https://www.nfl.com/injuries/ yourself; both are
+linked in the table below.</p>
+<div class="tw"><table><caption>Every check names the page it was run against and the date it was read.</caption><thead><tr><th>ID</th><th>What was checked</th><th>Source</th><th>Result</th><th>Detail</th></tr></thead><tbody><tr><td><b id="V01">V01</b></td><td>Official 2026 league standings, all 32 clubs (W, L, T, PCT, PF, PA, NET)</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">https://www.nfl.com/standings/league/2026/reg</a></td><td><span class="badge b-ready">transcription accepted</span></td><td>League totals: 136 wins, 136 losses, 2 ties, 6,291 points for and 6,291 against, and 274 team-games, which is exactly 137 games. That matches the 136 completed games already in the committed schedule file plus the Week 10 Thursday game (WAS 24, NYG 21), so the table is internally complete and the one-game gap to the committed file is fully explained.</td></tr><tr><td><b id="V02">V02</b></td><td>Committed standings file vs the official page, club by club</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">https://www.nfl.com/standings/league/2026/reg</a></td><td><span class="badge b-blocked">2 of 32 clubs differ</span></td><td>The committed transcription (data/verified/standings_2026.csv, retrieved 2026-11-12T04:31Z) predates the Week 10 Thursday night game. Both clubs that differ are the two that played in it: Washington&#x27;s and the Giants&#x27; records and points moved, and every other club is unchanged. This is a staleness finding, not an arithmetic error.</td></tr><tr><td><b id="V03">V03</b></td><td>Week 10 fixtures: date, kickoff, matchup, bye clubs</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">https://www.nfl.com/schedules/2026/by-week/week-10</a></td><td><span class="badge b-ready">14 of 14 match</span></td><td>Including the Munich international game (NE at DET, 9:30 AM ET) and the Thursday game, which the page now shows as final: WAS 24, NYG 21. The official byes are CHI, DEN, PHI and TB, which is what the repository publishes.</td></tr><tr><td><b id="V04">V04</b></td><td>Official injury report, week 10: row-level spot check and club counts</td><td><a class="src" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">https://www.nfl.com/injuries/</a></td><td><span class="badge b-ready">10 of 10 rows match; 4 of 4 club counts match</span></td><td>Washington 9 rows, the Giants 11, New England 15, Detroit 9, all exactly as the committed scrape has them. This confirms the scraper is faithful on the day it runs; it does not settle how quickly the page changes, which is R03 on the Flagged page.</td></tr><tr><td><b id="V05">V05</b></td><td>Game-by-game review of the committed research extract</td><td><a class="src" href="https://github.com/nflverse/nflverse-data" target="_blank" rel="noopener">https://github.com/nflverse/nflverse-data</a></td><td><span class="badge b-ready">identical except the generation timestamp</span></td><td>All five files (own lines, leaderboard, parlays, correlations, props) reproduce exactly from data/s9cb/*.csv. The extract itself could not be re-downloaded here because the sandbox cannot reach the release-asset host, so the source files are taken as committed and pinned by the provenance file.</td></tr><tr><td><b id="V06">V06</b></td><td>Personnel-deficiency study, recomputed</td><td><a class="src" href="https://github.com/nflverse/nflverse-data" target="_blank" rel="noopener">https://github.com/nflverse/nflverse-data</a></td><td><span class="badge b-ready">reproducible; see the Signals page for the verdict</span></td><td>Seven thousand one hundred and three played games, thirteen information tests and five candidate rules. Every count and p-value on the Signals page is read from the output file, not typed here. The QB-continuity definition was corrected during this session after a spot check on the Giants exposed a stale incumbent, and the whole analysis was rerun.</td></tr><tr><td><b id="V07">V07</b></td><td>A defect in this session&#x27;s own work, found by spot check</td><td><a class="src" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">https://www.nfl.com/injuries/</a></td><td><span class="badge b-blocked">two defects found, both fixed, analysis rerun</span></td><td>First, the &#x27;incumbent&#x27; quarterback was defined as the club&#x27;s most-starts quarterback of the season, which labelled a club that had already changed starter two weeks earlier as breaking continuity. Second, a club with a completely clean report was being treated as having no report, discarding a real zero. Both are fixed; the numbers on the Signals page are from the rerun. This is recorded because a session that only reports clean results is not a verification session.</td></tr><tr><td><b id="V08">V08</b></td><td>Repository gates, all of them</td><td>repository</td><td><span class="badge b-warn">see review-room/verification.html for the live result</span></td><td>The result of each gate is printed on this page from the last run, not typed here.</td></tr><tr><td><b id="V09">V09</b></td><td>Publication path</td><td><a class="src" href="https://api.github.com/repos/kanlerxz87-cyber/NFL1/pages" target="_blank" rel="noopener">https://api.github.com/repos/kanlerxz87-cyber/NFL1/pages</a></td><td><span class="badge b-blocked">legacy branch build from main at /, status built, https enforced</span></td><td>So every push to main publishes. There is no separate deploy step to fail, but also no staging area: a broken page is live as soon as it is pushed, which is why the link checker runs before the push and not after.</td></tr></tbody></table></div>
+<h2>The one difference found: standings, club by club</h2>
+<p class="sub">2 of 32 clubs differ between the committed
+file and the official page. Both differences are confined to the two clubs that played the Week 10
+Thursday game. Neither file was edited to make them agree.</p>
+<div class="tw"><table><caption>Official values read 2026-11-13; committed values carry their own retrieval stamp of 2026-11-12T04:31Z.</caption><thead><tr><th>Club</th><th>Official W-L-T</th><th>Committed W-L-T</th><th>Official PF / PA</th><th>Committed PF / PA</th><th>Fields that differ</th><th>Source</th></tr></thead><tbody><tr><td>NYG</td><td>5-3-1</td><td>5-2-1</td><td>203 / 196</td><td>182 / 172</td><td>l, pf, pa, net</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">https://www.nfl.com/standings/league/2026/reg</a></td></tr><tr><td>WAS</td><td>3-5-1</td><td>2-5-1</td><td>196 / 223</td><td>172 / 202</td><td>w, pf, pa, net</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">https://www.nfl.com/standings/league/2026/reg</a></td></tr></tbody></table></div>
+<div class="flagbox">
+<p><b>What this means.</b> The committed standings are stale by one game, not wrong. The
+implication for a reader is in <a href="decisions.html#D06">D06</a>: a published number can be
+correct when verified and old when read, and the site has no rule for that yet.</p>
+</div>
+
+<h2>The 32-club official table this session read</h2>
+<p class="sub">Transcribed by hand and checked against its own arithmetic before being used. If
+the transcription were wrong, the internal checks would fail.</p>
+<div class="tw"><table><caption>Source: https://www.nfl.com/standings/league/2026/reg — read 2026-11-13. PF-PA equals NET for all 32 clubs; total PF equals total PA; wins equal losses.</caption><thead><tr><th>Club</th><th class="num">W</th><th class="num">L</th><th class="num">T</th><th class="num">PCT</th><th class="num">PF</th><th class="num">PA</th><th class="num">NET</th></tr></thead><tbody><tr><td>BUF</td><td class="num">7</td><td class="num">1</td><td class="num">0</td><td class="num">0.875</td><td class="num">256</td><td class="num">187</td><td class="num">69</td></tr><tr><td>SF</td><td class="num">7</td><td class="num">1</td><td class="num">0</td><td class="num">0.875</td><td class="num">235</td><td class="num">156</td><td class="num">79</td></tr><tr><td>CHI</td><td class="num">7</td><td class="num">2</td><td class="num">0</td><td class="num">0.778</td><td class="num">241</td><td class="num">184</td><td class="num">57</td></tr><tr><td>DEN</td><td class="num">7</td><td class="num">2</td><td class="num">0</td><td class="num">0.778</td><td class="num">198</td><td class="num">186</td><td class="num">12</td></tr><tr><td>CIN</td><td class="num">6</td><td class="num">2</td><td class="num">0</td><td class="num">0.750</td><td class="num">240</td><td class="num">175</td><td class="num">65</td></tr><tr><td>DET</td><td class="num">6</td><td class="num">2</td><td class="num">0</td><td class="num">0.750</td><td class="num">222</td><td class="num">189</td><td class="num">33</td></tr><tr><td>JAX</td><td class="num">6</td><td class="num">2</td><td class="num">0</td><td class="num">0.750</td><td class="num">229</td><td class="num">121</td><td class="num">108</td></tr><tr><td>KC</td><td class="num">6</td><td class="num">2</td><td class="num">0</td><td class="num">0.750</td><td class="num">202</td><td class="num">143</td><td class="num">59</td></tr><tr><td>MIN</td><td class="num">6</td><td class="num">2</td><td class="num">0</td><td class="num">0.750</td><td class="num">146</td><td class="num">116</td><td class="num">30</td></tr><tr><td>PIT</td><td class="num">6</td><td class="num">2</td><td class="num">0</td><td class="num">0.750</td><td class="num">180</td><td class="num">144</td><td class="num">36</td></tr><tr><td>GB</td><td class="num">6</td><td class="num">3</td><td class="num">0</td><td class="num">0.667</td><td class="num">216</td><td class="num">191</td><td class="num">25</td></tr><tr><td>NYG</td><td class="num">5</td><td class="num">3</td><td class="num">1</td><td class="num">0.611</td><td class="num">203</td><td class="num">196</td><td class="num">7</td></tr><tr><td>CLE</td><td class="num">5</td><td class="num">4</td><td class="num">0</td><td class="num">0.556</td><td class="num">161</td><td class="num">196</td><td class="num">-35</td></tr><tr><td>LA</td><td class="num">5</td><td class="num">4</td><td class="num">0</td><td class="num">0.556</td><td class="num">214</td><td class="num">181</td><td class="num">33</td></tr><tr><td>NE</td><td class="num">5</td><td class="num">4</td><td class="num">0</td><td class="num">0.556</td><td class="num">211</td><td class="num">207</td><td class="num">4</td></tr><tr><td>SEA</td><td class="num">5</td><td class="num">4</td><td class="num">0</td><td class="num">0.556</td><td class="num">202</td><td class="num">162</td><td class="num">40</td></tr><tr><td>BAL</td><td class="num">4</td><td class="num">5</td><td class="num">0</td><td class="num">0.444</td><td class="num">189</td><td class="num">236</td><td class="num">-47</td></tr><tr><td>DAL</td><td class="num">4</td><td class="num">5</td><td class="num">0</td><td class="num">0.444</td><td class="num">246</td><td class="num">236</td><td class="num">10</td></tr><tr><td>LV</td><td class="num">4</td><td class="num">5</td><td class="num">0</td><td class="num">0.444</td><td class="num">238</td><td class="num">268</td><td class="num">-30</td></tr><tr><td>WAS</td><td class="num">3</td><td class="num">5</td><td class="num">1</td><td class="num">0.389</td><td class="num">196</td><td class="num">223</td><td class="num">-27</td></tr><tr><td>CAR</td><td class="num">3</td><td class="num">5</td><td class="num">0</td><td class="num">0.375</td><td class="num">199</td><td class="num">219</td><td class="num">-20</td></tr><tr><td>HOU</td><td class="num">3</td><td class="num">5</td><td class="num">0</td><td class="num">0.375</td><td class="num">209</td><td class="num">192</td><td class="num">17</td></tr><tr><td>NO</td><td class="num">3</td><td class="num">5</td><td class="num">0</td><td class="num">0.375</td><td class="num">185</td><td class="num">216</td><td class="num">-31</td></tr><tr><td>AZ</td><td class="num">3</td><td class="num">6</td><td class="num">0</td><td class="num">0.333</td><td class="num">178</td><td class="num">255</td><td class="num">-77</td></tr><tr><td>ATL</td><td class="num">3</td><td class="num">6</td><td class="num">0</td><td class="num">0.333</td><td class="num">188</td><td class="num">223</td><td class="num">-35</td></tr><tr><td>TB</td><td class="num">3</td><td class="num">6</td><td class="num">0</td><td class="num">0.333</td><td class="num">202</td><td class="num">178</td><td class="num">24</td></tr><tr><td>IND</td><td class="num">2</td><td class="num">7</td><td class="num">0</td><td class="num">0.222</td><td class="num">184</td><td class="num">249</td><td class="num">-65</td></tr><tr><td>NYJ</td><td class="num">2</td><td class="num">7</td><td class="num">0</td><td class="num">0.222</td><td class="num">182</td><td class="num">223</td><td class="num">-41</td></tr><tr><td>PHI</td><td class="num">2</td><td class="num">7</td><td class="num">0</td><td class="num">0.222</td><td class="num">148</td><td class="num">221</td><td class="num">-73</td></tr><tr><td>MIA</td><td class="num">1</td><td class="num">7</td><td class="num">0</td><td class="num">0.125</td><td class="num">126</td><td class="num">200</td><td class="num">-74</td></tr><tr><td>TEN</td><td class="num">1</td><td class="num">7</td><td class="num">0</td><td class="num">0.125</td><td class="num">144</td><td class="num">199</td><td class="num">-55</td></tr><tr><td>LAC</td><td class="num">0</td><td class="num">8</td><td class="num">0</td><td class="num">0.000</td><td class="num">121</td><td class="num">219</td><td class="num">-98</td></tr></tbody></table></div>
+<h2>How to re-run all of this yourself</h2>
+<pre class="mono">python3 tools/v_sources.py            # re-compare the committed standings with the official file
+cd s9cb/analysis &amp;&amp; python3 run_personnel.py   # rebuild every number on the evidence page
+python3 tools/review_room.py --check  # verify this site's links and sources
+python3 tools/verify.py               # verify every table row in the wider site</pre>
+
+<footer>
+  <p>Built 2026-11-13T12:54:36+00:00 from files in this repository. Every figure on this page is read
+  from a data file at build time; nothing is typed in by hand. <span class="src">Generated by
+  tools/review_room.py.</span></p>
+</footer>
+</main>
+</body>
+</html>

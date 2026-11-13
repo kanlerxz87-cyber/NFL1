@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Questions · NFL Review Room</title>
+<meta name="description" content="Every question that gates a decision, with what is known and what is missing.">
+<style>:root{--bg:#0d1117;--panel:#161b22;--panel2:#1c2330;--line:#2a3441;--ink:#e6edf3;
+--muted:#8b98a8;--accent:#58a6ff;--good:#3fb950;--warn:#d29922;--bad:#f85149;--violet:#bc8cff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.top{position:sticky;top:0;z-index:20;display:flex;gap:18px;align-items:center;
+padding:12px 24px;background:rgba(13,17,23,.96);border-bottom:1px solid var(--line);
+flex-wrap:wrap;backdrop-filter:blur(6px)}
+.brand{font-weight:700;color:var(--ink)}
+.brand .tag{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+border:1px solid var(--line);border-radius:99px;padding:1px 8px;margin-left:8px}
+nav.main{display:flex;gap:4px;flex-wrap:wrap}
+nav.main a{padding:5px 11px;border-radius:7px;font-size:13.5px;color:var(--muted)}
+nav.main a:hover{background:var(--panel2);text-decoration:none}
+nav.main a.on{background:var(--panel2);color:var(--ink);font-weight:600}
+.wrap{max-width:1180px;margin:0 auto;padding:26px 24px 80px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:-.01em}
+h2{font-size:19px;margin:38px 0 10px;padding-bottom:7px;border-bottom:1px solid var(--line)}
+h3{font-size:15px;margin:22px 0 8px}
+.lede{font-size:16.5px;color:var(--ink);background:var(--panel);border:1px solid var(--line);
+border-left:3px solid var(--accent);border-radius:9px;padding:13px 16px;margin:0 0 18px}
+.sub{color:var(--muted);margin:0 0 16px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:11px;margin:16px 0}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.kpi .k{display:block;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.kpi .v{display:block;font-size:24px;font-weight:700;margin:2px 0}
+.kpi .n{display:block;font-size:11.5px;color:var(--muted)}
+.kpi .v.good{color:var(--good)}.kpi .v.warn{color:var(--warn)}.kpi .v.bad{color:var(--bad)}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:12px 0}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+caption{text-align:left;color:var(--muted);font-size:12px;padding:9px 12px}
+th,td{padding:8px 11px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--panel2);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+color:var(--muted);font-weight:600;white-space:nowrap}
+tbody tr:hover{background:rgba(88,166,255,.05)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.badge{display:inline-block;font-size:11px;font-weight:600;padding:1px 8px;border-radius:99px;
+border:1px solid;white-space:nowrap}
+.b-ready{color:var(--good);border-color:var(--good);background:rgba(63,185,80,.1)}
+.b-blocked{color:var(--bad);border-color:var(--bad);background:rgba(248,81,73,.1)}
+.b-watch{color:var(--warn);border-color:var(--warn);background:rgba(210,153,34,.12)}
+.b-info{color:var(--accent);border-color:var(--accent);background:rgba(88,166,255,.1)}
+.b-mute{color:var(--muted);border-color:var(--line)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:11px;
+padding:16px 18px;margin:14px 0}
+.card h3{margin-top:0}
+.src{font-size:12px;color:var(--muted);word-break:break-all}
+.flagbox{border-left:3px solid var(--warn);background:rgba(210,153,34,.07);
+padding:11px 15px;border-radius:0 8px 8px 0;margin:12px 0}
+.badbox{border-left:3px solid var(--bad);background:rgba(248,81,73,.07);
+padding:11px 15px;border-radius:0 8px 8px 0;margin:12px 0}
+.goodbox{border-left:3px solid var(--good);background:rgba(63,185,80,.07);
+padding:11px 15px;border-radius:0 8px 8px 0;margin:12px 0}
+.opts{display:grid;gap:10px;margin:10px 0 0}
+.opt{border:1px solid var(--line);border-radius:9px;padding:11px 13px;background:var(--panel2)}
+.opt.rec{border-color:var(--good);box-shadow:inset 3px 0 0 var(--good)}
+.opt .lbl{font-weight:650;margin:0 0 6px}
+.opt dl{display:grid;grid-template-columns:104px 1fr;gap:2px 10px;margin:0;font-size:13px}
+.opt dt{color:var(--muted);font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;padding-top:2px}
+.opt dd{margin:0}
+footer{border-top:1px solid var(--line);margin-top:50px;padding-top:16px;
+color:var(--muted);font-size:12.5px}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px}
+ul.tight{margin:8px 0;padding-left:20px}ul.tight li{margin:3px 0}
+.pill{display:inline-block;font-size:11px;padding:1px 7px;border-radius:99px;
+background:var(--panel2);border:1px solid var(--line);color:var(--muted);margin-right:5px}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html">Review Room<span class="tag">decide before you build</span></a>
+  <nav class="main"><a href="index.html">Start here</a><a href="executive.html">Executive summary</a><a href="decisions.html">Decisions</a><a href="questions.html" class="on">Questions</a><a href="week10.html">This week's personnel</a><a href="evidence.html">Signals &amp; evidence</a><a href="improvements.html">Improvements</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged for review</a><a href="../index.html">Main dashboard &rarr;</a></nav>
+</header>
+<main class="wrap">
+
+<h1>Questions</h1>
+<p class="lede">What must be answered before a decision can reasonably be made. Each row
+separates what we have from what we do not, states the concrete step that would close the gap,
+and names the decision it blocks.</p>
+<p class="sub">The most useful column is <b>answerable now</b>. A question whose answer could be
+collected with tools already in this repository, and that is still open, is a task rather than a
+question — 7 of the 11 rows below are in that state.</p>
+
+<div class="kpis">
+  <div class="kpi"><span class="k">Answerable now</span><span class="v good">7</span>
+    <span class="n">tools exist; nobody has done it</span></div>
+  <div class="kpi"><span class="k">Needs money or a person</span><span class="v warn">4</span>
+    <span class="n">a licence, a contract or a league answer</span></div>
+  <div class="kpi"><span class="k">Questions listed</span><span class="v">11</span>
+    <span class="n">every one blocks a named decision</span></div>
+</div>
+<h2>Answerable now — these are tasks</h2><div class="tw"><table><caption>7 questions. 'Answerable now — these are tasks'.</caption><thead><tr><th>ID</th><th>Question and what we have</th><th>What is missing</th><th>How to find out</th><th>What it blocks</th><th>Source</th></tr></thead><tbody><tr><td>Q28</td><td><b>Which of the published site generations is authoritative, and do they stay in sync?</b><br><span class="sub">Seven generations exist and are all live; pages/sections.html lists them.</span></td><td>A single declared authority.</td><td>Owner names one generation; the others get a banner and a redirect (decision D01).</td><td>D01, and any claim that a published number is &#x27;the&#x27; number.</td><td><a class="src" href="../pages/sections.html">pages/sections.html</a></td></tr><tr><td>Q25</td><td><b>What is the GitHub Pages publishing source for this repository?</b><br><span class="sub">Legacy branch build from main at /, build_type legacy, https enforced (checked this session through the GitHub API).</span></td><td>Nothing.</td><td>Already answered: repos/kanlerxz87-cyber/NFL1/pages.</td><td>Nothing.</td><td><a class="src" href="https://api.github.com/repos/kanlerxz87-cyber/NFL1/pages" target="_blank" rel="noopener">https://api.github.com/repos/kanlerxz87-cyber/NFL1/pages</a></td></tr><tr><td>Q29</td><td><b>Do personnel losses carry information the closing line has not already priced?</b><br><span class="sub">Answered this session and revisited once the QB-continuity definition was corrected: the measures were tested against the closing spread and corrected for the whole family. The counts, coefficients and corrected p-values are read live from the data file on the Signals page rather than typed here, so this entry cannot drift out of date.</span></td><td>Anything measured at player level on defence: the committed extract has no defensive player statistics, so defensive deficiency is counted in names on the report, not in lost production.</td><td>Add per-player defensive snaps and statistics to the extract and rerun the same regression (decision D04 option B).</td><td>Any personnel-driven betting rule; decision D04.</td><td><a class="src" href="../review-room/evidence.html">review-room/evidence.html</a></td></tr><tr><td>Q31</td><td><b>Who is allowed to enter the leaderboard, and can a strategy be changed after it scores?</b><br><span class="sub">Twelve lab rules plus five new rules are scored under eight gates and a whole-family correction.</span></td><td>An entry process, an identity rule, and a frozen rulebook per season.</td><td>Freeze a dated rulebook in git before the season; publish the hash (suggestion S11).</td><td>Any reward ranking (D03), and the credibility of the gate matrix.</td><td><a class="src" href="../pages/strategies.html">pages/strategies.html</a></td></tr><tr><td>Q32</td><td><b>Who actually replaced a ruled-out starter, and how many snaps did the replacement play?</b><br><span class="sub">The official per-club depth charts name the next man up for 31 of 32 clubs (Houston&#x27;s chart was unavailable when scraped), and the week-10 official report gives the game status.</span></td><td>Game-day inactives as published, and the replacement&#x27;s actual snap share. The two facts are never joined automatically: the join is by inference, so it is shown separately and labelled.</td><td>Scrape the official inactives page on game day and join nflverse snap counts; both are already collected in other parts of this repository.</td><td>Turning the deficiency register into a measurable replacement effect.</td><td><a class="src" href="../pages/injuries.html">pages/injuries.html</a></td></tr><tr><td>Q33</td><td><b>How stale is each published number, and how fast does its source change?</b><br><span class="sub">Measured this session: the committed 2026 standings were one game behind the official page because the Week 10 Thursday game (WAS 24, NYG 21) had finished; 30 of 32 clubs still matched, and the two that differed are exactly the two clubs that played. The official injury page was confirmed to change during the day in an earlier session.</span></td><td>A published refresh window per source, and a build gate on age.</td><td>Show the retrieval timestamp and the source&#x27;s update cadence; fail the build past a threshold (decision D06).</td><td>Any table whose value can change between verification and reading.</td><td><a class="src" href="../review-room/verification.html">review-room/verification.html</a></td></tr><tr><td>Q34</td><td><b>Is the closing line in the extract the consensus close, and from which books?</b><br><span class="sub">The field is documented as a closing line in the mirror&#x27;s field dictionary.</span></td><td>The book list, the weighting and the capture time. No official league source publishes odds at all, so this can only be answered by the mirror&#x27;s own documentation.</td><td>Read the nflverse field dictionary for the schedules release and cite it per column.</td><td>Any statement of the form &#x27;we beat the closing line&#x27;.</td><td><a class="src" href="https://nflreadr.nflverse.com/articles/dictionary_schedules.html" target="_blank" rel="noopener">https://nflreadr.nflverse.com/articles/dictionary_schedules.html</a></td></tr></tbody></table></div><h2>Needs money, a contract or an answer from the league</h2><div class="tw"><table><caption>4 questions. 'Needs money, a contract or an answer from the league'.</caption><thead><tr><th>ID</th><th>Question and what we have</th><th>What is missing</th><th>How to find out</th><th>What it blocks</th><th>Source</th></tr></thead><tbody><tr><td>Q01</td><td><b>Which price, at which book, at what timestamp, is being evaluated?</b><br><span class="sub">A mirrored consensus closing spread/total for 5,228 of 7,103 played games, with American odds.</span></td><td>Book-level quotes, limits, and open/close snapshots.</td><td>A licensed odds API with 15-minute snapshots, stored append-only (decision D02).</td><td>Every ROI, closing-line-value and reward claim.</td><td><a class="src" href="https://github.com/nflverse/nflverse-data" target="_blank" rel="noopener">https://github.com/nflverse/nflverse-data</a></td></tr><tr><td>Q04</td><td><b>Are player props priced at all, and with what correlation for combos?</b><br><span class="sub">Model projections for four markets with error bands; measured leg correlation from results.</span></td><td>Any prop price.</td><td>Licensed prop feed; until then props stay model-only and are labelled as such.</td><td>Prop and same-game-parlay strategies.</td><td><a class="src" href="../pages/props.html">pages/props.html</a></td></tr><tr><td>Q30</td><td><b>Does the market move on injury news, and how fast?</b><br><span class="sub">Nothing. The extract carries one closing price per game, with no history.</span></td><td>Timestamped odds history around each designation.</td><td>The same feed as Q01, queried at T-24h, T-1h and close around each report.</td><td>The only version of the personnel question with a plausible route to an edge: the information is public, so speed is the only place an edge can live.</td><td><a class="src" href="../pages/strategies.html">pages/strategies.html</a></td></tr><tr><td>Q35</td><td><b>Is &#x27;Unofficial Depth Chart&#x27; an official statement of the lineup?</b><br><span class="sub">Two clubs label their own published chart &#x27;Unofficial&#x27; (Kansas City, Green Bay); one states an as-of date (San Francisco, 11/10/26); nfl.com itself publishes no depth chart and returns 404 at the club-style URL.</span></td><td>A statement from the league or a club that the chart is authoritative.</td><td>Ask the clubs; until then treat the chart as a snapshot, not a lineup.</td><td>Presenting depth rank as fact rather than as the club&#x27;s own publication.</td><td><a class="src" href="https://www.nfl.com/teams/" target="_blank" rel="noopener">https://www.nfl.com/teams/</a></td></tr></tbody></table></div>
+<h2>Questions this session closed</h2>
+<div class="goodbox">
+<p><b>Q29 — do personnel losses carry information the closing line has not priced?</b>
+Answered: no, not at a level that survives correction. The evidence is on the
+<a href="evidence.html">Signals &amp; evidence</a> page, and the decision it feeds is
+<a href="decisions.html#D04">D04</a>.</p>
+<p><b>Q33 — how stale is a published number?</b> Partly answered and measured: the committed
+standings were one game behind the official page, and the difference is exactly the Week 10
+Thursday game. See <a href="verification.html#V02">V02</a>.</p>
+</div>
+<p class="sub">Earlier question registers still exist on other pages of the wider site; they are
+linked from the <a href="../pages/questions.html">main dashboard's Questions page</a> so nothing
+is hidden, but this page is the one that decides anything.</p>
+
+<footer>
+  <p>Built 2026-11-13T12:54:36+00:00 from files in this repository. Every figure on this page is read
+  from a data file at build time; nothing is typed in by hand. <span class="src">Generated by
+  tools/review_room.py.</span></p>
+</footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Improvements · NFL Review Room</title>
+<meta name="description" content="Ten improvements, sorted by whether they need permission.">
+<style>:root{--bg:#0d1117;--panel:#161b22;--panel2:#1c2330;--line:#2a3441;--ink:#e6edf3;
+--muted:#8b98a8;--accent:#58a6ff;--good:#3fb950;--warn:#d29922;--bad:#f85149;--violet:#bc8cff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.top{position:sticky;top:0;z-index:20;display:flex;gap:18px;align-items:center;
+padding:12px 24px;background:rgba(13,17,23,.96);border-bottom:1px solid var(--line);
+flex-wrap:wrap;backdrop-filter:blur(6px)}
+.brand{font-weight:700;color:var(--ink)}
+.brand .tag{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+border:1px solid var(--line);border-radius:99px;padding:1px 8px;margin-left:8px}
+nav.main{display:flex;gap:4px;flex-wrap:wrap}
+nav.main a{padding:5px 11px;border-radius:7px;font-size:13.5px;color:var(--muted)}
+nav.main a:hover{background:var(--panel2);text-decoration:none}
+nav.main a.on{background:var(--panel2);color:var(--ink);font-weight:600}
+.wrap{max-width:1180px;margin:0 auto;padding:26px 24px 80px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:-.01em}
+h2{font-size:19px;margin:38px 0 10px;padding-bottom:7px;border-bottom:1px solid var(--line)}
+h3{font-size:15px;margin:22px 0 8px}
+.lede{font-size:16.5px;color:var(--ink);background:var(--panel);border:1px solid var(--line);
+border-left:3px solid var(--accent);border-radius:9px;padding:13px 16px;margin:0 0 18px}
+.sub{color:var(--muted);margin:0 0 16px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:11px;margin:16px 0}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.kpi .k{display:block;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.kpi .v{display:block;font-size:24px;font-weight:700;margin:2px 0}
+.kpi .n{display:block;font-size:11.5px;color:var(--muted)}
+.kpi .v.good{color:var(--good)}.kpi .v.warn{color:var(--warn)}.kpi .v.bad{color:var(--bad)}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:12px 0}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+caption{text-align:left;color:var(--muted);font-size:12px;padding:9px 12px}
+th,td{padding:8px 11px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--panel2);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+color:var(--muted);font-weight:600;white-space:nowrap}
+tbody tr:hover{background:rgba(88,166,255,.05)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.badge{display:inline-block;font-size:11px;font-weight:600;padding:1px 8px;border-radius:99px;
+border:1px solid;white-space:nowrap}
+.b-ready{color:var(--good);border-color:var(--good);background:rgba(63,185,80,.1)}
+.b-blocked{color:var(--bad);border-color:var(--bad);background:rgba(248,81,73,.1)}
+.b-watch{color:var(--warn);border-color:var(--warn);background:rgba(210,153,34,.12)}
+.b-info{color:var(--accent);border-color:var(--accent);background:rgba(88,166,255,.1)}
+.b-mute{color:var(--muted);border-color:var(--line)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:11px;
+padding:16px 18px;margin:14px 0}
+.card h3{margin-top:0}
+.src{font-size:12px;color:var(--muted);word-break:break-all}
+.flagbox{border-left:3px solid var(--warn);background:rgba(210,153,34,.07);
+padding:11px 15px;border-radius:0 8px 8px 0;margin:12px 0}
+.badbox{border-left:3px solid var(--bad);background:rgba(248,81,73,.07);
+padding:11px 15px;border-radius:0 8px 8px 0;margin:12px 0}
+.goodbox{border-left:3px solid var(--good);background:rgba(63,185,80,.07);
+padding:11px 15px;border-radius:0 8px 8px 0;margin:12px 0}
+.opts{display:grid;gap:10px;margin:10px 0 0}
+.opt{border:1px solid var(--line);border-radius:9px;padding:11px 13px;background:var(--panel2)}
+.opt.rec{border-color:var(--good);box-shadow:inset 3px 0 0 var(--good)}
+.opt .lbl{font-weight:650;margin:0 0 6px}
+.opt dl{display:grid;grid-template-columns:104px 1fr;gap:2px 10px;margin:0;font-size:13px}
+.opt dt{color:var(--muted);font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;padding-top:2px}
+.opt dd{margin:0}
+footer{border-top:1px solid var(--line);margin-top:50px;padding-top:16px;
+color:var(--muted);font-size:12.5px}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px}
+ul.tight{margin:8px 0;padding-left:20px}ul.tight li{margin:3px 0}
+.pill{display:inline-block;font-size:11px;padding:1px 7px;border-radius:99px;
+background:var(--panel2);border:1px solid var(--line);color:var(--muted);margin-right:5px}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html">Review Room<span class="tag">decide before you build</span></a>
+  <nav class="main"><a href="index.html">Start here</a><a href="executive.html">Executive summary</a><a href="decisions.html">Decisions</a><a href="questions.html">Questions</a><a href="week10.html">This week's personnel</a><a href="evidence.html">Signals &amp; evidence</a><a href="improvements.html" class="on">Improvements</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged for review</a><a href="../index.html">Main dashboard &rarr;</a></nav>
+</header>
+<main class="wrap">
+
+<h1>Improvements</h1>
+<p class="lede">Ten ways to make the site more useful for deciding things, separated into the ones
+that need no permission at all and the ones that need a choice. Each names the decision it
+informs, so it is clear what changes if it happens.</p>
+
+<div class="kpis">
+  <div class="kpi"><span class="k">No approval needed</span><span class="v good">6</span>
+    <span class="n">cheap and reversible</span></div>
+  <div class="kpi"><span class="k">Needs a decision</span><span class="v warn">4</span>
+    <span class="n">cost, risk or a purchase</span></div>
+</div>
+<h2>Implement without asking</h2><p class="sub">These are reversible and do not foreclose any option. Doing them now removes ambiguity from every later decision.</p><div class="tw"><table><caption>6 improvements in this group.</caption><thead><tr><th>ID</th><th>What changes</th><th>What is wrong now</th><th>What it lets you decide</th><th>Cost</th><th>Risk</th><th>Decision</th><th>How you know it worked</th></tr></thead><tbody><tr><td><b id="I01">I01</b></td><td>Name one authoritative generation; put a dated banner and a link on every superseded page.</td><td>Seven site generations answer the same question with different numbers.</td><td>Which number to quote.</td><td>Low</td><td>Low - nothing is deleted.</td><td><a href="decisions.html#D01">D01</a></td><td>One navigation path from the landing page to every current number.</td></tr><tr><td><b id="I03">I03</b></td><td>Freeze a dated rulebook in git before the season and publish its hash.</td><td>No entry rule, no frozen rulebook, no stated reward.</td><td>Whether a winning score was skill or selection.</td><td>Low</td><td>Low.</td><td><a href="decisions.html#D03">D03</a></td><td>Every scored rule has a commit that predates its results.</td></tr><tr><td><b id="I05">I05</b></td><td>Mark every column as OFFICIAL, MODEL or DERIVED, and blank anything unconfirmed.</td><td>Model output and official fact sit in the same tables without a marker.</td><td>Which cells you may quote as fact.</td><td>Low</td><td>Low.</td><td><a href="decisions.html#D05">D05</a></td><td>A checker that fails a page containing an unmarked model value in an official column.</td></tr><tr><td><b id="I07">I07</b></td><td>One register, scope in the column header, sample size in every cell.</td><td>Two correlations with the same name on two pages.</td><td>Which correlation to believe.</td><td>Low</td><td>Low.</td><td><a href="decisions.html#D07">D07</a></td><td>No two published cells share a name but differ in scope.</td></tr><tr><td><b id="I09">I09</b></td><td>Add a one-line source badge above every table: official, model, or derived.</td><td>A reader cannot tell which tables are verified facts and which are analysis.</td><td>What to screenshot and quote.</td><td>Low</td><td>Low.</td><td><a href="decisions.html#D01">D01</a></td><td>Every table on the site carries a badge.</td></tr><tr><td><b id="I10">I10</b></td><td>State the maximum acceptable measured dependence before a combo is eligible.</td><td>Parlay and prop-combo pages show measured dependence but no decision rule.</td><td>Whether a combo may be published at all.</td><td>Low</td><td>Low.</td><td><a href="decisions.html#D03">D03</a></td><td>Every combo row shows pass/fail against the stated threshold.</td></tr></tbody></table></div><h2>Needs a decision first</h2><p class="sub">Each of these costs money, forecloses an option, or depends on something that has not been bought or agreed.</p><div class="tw"><table><caption>4 improvements in this group.</caption><thead><tr><th>ID</th><th>What changes</th><th>What is wrong now</th><th>What it lets you decide</th><th>Cost</th><th>Risk</th><th>Decision</th><th>How you know it worked</th></tr></thead><tbody><tr><td><b id="I02">I02</b></td><td>Store a timestamped book-level quote with every scored bet.</td><td>ROI is computed against a mirrored close, not a price a bettor could take.</td><td>Whether any strategy actually made money.</td><td>High (licence)</td><td>Medium - vendor terms may forbid republication.</td><td><a href="decisions.html#D02">D02</a></td><td>Every scored bet carries a book, a timestamp and a limit.</td></tr><tr><td><b id="I04">I04</b></td><td>Add per-player defensive snaps and statistics to the collected extract.</td><td>Defensive deficiency is counted in names on a report, not in lost production.</td><td>Whether a 2nd- or 3rd-string defender actually costs points.</td><td>Medium</td><td>Low - additive column, no published value changes.</td><td><a href="decisions.html#D04">D04</a></td><td>The same regression, rerun with a real defensive production measure.</td></tr><tr><td><b id="I06">I06</b></td><td>Show the retrieval time and the source&#x27;s refresh cadence; fail the build past a threshold.</td><td>A published value can be correct when verified and wrong when read.</td><td>Whether a number is current enough to act on.</td><td>Low-Medium</td><td>Medium - an offline source must not block every publication.</td><td><a href="decisions.html#D06">D06</a></td><td>A stale table cannot be published without an explicit, logged override.</td></tr><tr><td><b id="I08">I08</b></td><td>Join the official inactives list and snap counts to the depth chart, labelled as a join.</td><td>The site names the next man up but never shows whether he played.</td><td>Whether a backup actually replaced the starter.</td><td>Medium</td><td>Medium - the join is by inference and must be labelled as such.</td><td><a href="decisions.html#Q32">Q32</a></td><td>Every ruled-out starter has a named replacement and a snap count, or a blank.</td></tr></tbody></table></div>
+<h2>What is deliberately not suggested</h2>
+<div class="flagbox">
+<p>More strategy rules. The repository already scores seventeen of them and none passes every
+gate. Adding an eighteenth rule to a family that is already corrected for multiplicity does not
+produce a winner; it produces a smaller p-value threshold. The work that would change the answer
+is prices and speed, not more rules.</p>
+</div>
+
+<footer>
+  <p>Built 2026-11-13T12:54:36+00:00 from files in this repository. Every figure on this page is read
+  from a data file at build time; nothing is typed in by hand. <span class="src">Generated by
+  tools/review_room.py.</span></p>
+</footer>
+</main>
+</body>
+</html>

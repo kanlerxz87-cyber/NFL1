@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Signals &amp; evidence · NFL Review Room</title>
+<meta name="description" content="Personnel-deficiency signals tested against the closing line, with gates and luck accounting.">
+<style>:root{--bg:#0d1117;--panel:#161b22;--panel2:#1c2330;--line:#2a3441;--ink:#e6edf3;
+--muted:#8b98a8;--accent:#58a6ff;--good:#3fb950;--warn:#d29922;--bad:#f85149;--violet:#bc8cff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.top{position:sticky;top:0;z-index:20;display:flex;gap:18px;align-items:center;
+padding:12px 24px;background:rgba(13,17,23,.96);border-bottom:1px solid var(--line);
+flex-wrap:wrap;backdrop-filter:blur(6px)}
+.brand{font-weight:700;color:var(--ink)}
+.brand .tag{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+border:1px solid var(--line);border-radius:99px;padding:1px 8px;margin-left:8px}
+nav.main{display:flex;gap:4px;flex-wrap:wrap}
+nav.main a{padding:5px 11px;border-radius:7px;font-size:13.5px;color:var(--muted)}
+nav.main a:hover{background:var(--panel2);text-decoration:none}
+nav.main a.on{background:var(--panel2);color:var(--ink);font-weight:600}
+.wrap{max-width:1180px;margin:0 auto;padding:26px 24px 80px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:-.01em}
+h2{font-size:19px;margin:38px 0 10px;padding-bottom:7px;border-bottom:1px solid var(--line)}
+h3{font-size:15px;margin:22px 0 8px}
+.lede{font-size:16.5px;color:var(--ink);background:var(--panel);border:1px solid var(--line);
+border-left:3px solid var(--accent);border-radius:9px;padding:13px 16px;margin:0 0 18px}
+.sub{color:var(--muted);margin:0 0 16px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:11px;margin:16px 0}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.kpi .k{display:block;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.kpi .v{display:block;font-size:24px;font-weight:700;margin:2px 0}
+.kpi .n{display:block;font-size:11.5px;color:var(--muted)}
+.kpi .v.good{color:var(--good)}.kpi .v.warn{color:var(--warn)}.kpi .v.bad{color:var(--bad)}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:12px 0}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+caption{text-align:left;color:var(--muted);font-size:12px;padding:9px 12px}
+th,td{padding:8px 11px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--panel2);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+color:var(--muted);font-weight:600;white-space:nowrap}
+tbody tr:hover{background:rgba(88,166,255,.05)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.badge{display:inline-block;font-size:11px;font-weight:600;padding:1px 8px;border-radius:99px;
+border:1px solid;white-space:nowrap}
+.b-ready{color:var(--good);border-color:var(--good);background:rgba(63,185,80,.1)}
+.b-blocked{color:var(--bad);border-color:var(--bad);background:rgba(248,81,73,.1)}
+.b-watch{color:var(--warn);border-color:var(--warn);background:rgba(210,153,34,.12)}
+.b-info{color:var(--accent);border-color:var(--accent);background:rgba(88,166,255,.1)}
+.b-mute{color:var(--muted);border-color:var(--line)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:11px;
+padding:16px 18px;margin:14px 0}
+.card h3{margin-top:0}
+.src{font-size:12px;color:var(--muted);word-break:break-all}
+.flagbox{border-left:3px solid var(--warn);background:rgba(210,153,34,.07);
+padding:11px 15px;border-radius:0 8px 8px 0;margin:12px 0}
+.badbox{border-left:3px solid var(--bad);background:rgba(248,81,73,.07);
+padding:11px 15px;border-radius:0 8px 8px 0;margin:12px 0}
+.goodbox{border-left:3px solid var(--good);background:rgba(63,185,80,.07);
+padding:11px 15px;border-radius:0 8px 8px 0;margin:12px 0}
+.opts{display:grid;gap:10px;margin:10px 0 0}
+.opt{border:1px solid var(--line);border-radius:9px;padding:11px 13px;background:var(--panel2)}
+.opt.rec{border-color:var(--good);box-shadow:inset 3px 0 0 var(--good)}
+.opt .lbl{font-weight:650;margin:0 0 6px}
+.opt dl{display:grid;grid-template-columns:104px 1fr;gap:2px 10px;margin:0;font-size:13px}
+.opt dt{color:var(--muted);font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;padding-top:2px}
+.opt dd{margin:0}
+footer{border-top:1px solid var(--line);margin-top:50px;padding-top:16px;
+color:var(--muted);font-size:12.5px}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px}
+ul.tight{margin:8px 0;padding-left:20px}ul.tight li{margin:3px 0}
+.pill{display:inline-block;font-size:11px;padding:1px 7px;border-radius:99px;
+background:var(--panel2);border:1px solid var(--line);color:var(--muted);margin-right:5px}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html">Review Room<span class="tag">decide before you build</span></a>
+  <nav class="main"><a href="index.html">Start here</a><a href="executive.html">Executive summary</a><a href="decisions.html">Decisions</a><a href="questions.html">Questions</a><a href="week10.html">This week's personnel</a><a href="evidence.html" class="on">Signals &amp; evidence</a><a href="improvements.html">Improvements</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged for review</a><a href="../index.html">Main dashboard &rarr;</a></nav>
+</header>
+<main class="wrap">
+
+<h1>Signals &amp; evidence</h1>
+<p class="lede">Does a personnel loss tell you anything the price has not already told you?
+This page answers that with a regression, not an opinion: the result of a game is regressed on
+the closing spread alone, then on the closing spread plus the measure. What the measure adds is
+the whole test.</p>
+<p class="sub">Sources: <a class="src" href="https://github.com/nflverse/nflverse-data" target="_blank" rel="noopener">nflverse schedules and stats releases</a> and
+<a class="src" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">the official injury report</a>. Inputs are committed, pinned by
+provenance, and re-runnable with <span class="mono">s9cb/analysis/run_personnel.py</span>.</p>
+
+<div class="kpis">
+  <div class="kpi"><span class="k">Games analysed</span>
+    <span class="v">7,103</span>
+    <span class="n">with both a closing line and a result</span></div>
+  <div class="kpi"><span class="k">Information tests</span>
+    <span class="v">13</span>
+    <span class="n">corrected together</span></div>
+  <div class="kpi"><span class="k">Significant after correction</span>
+    <span class="v bad">0</span>
+    <span class="n">Benjamini-Hochberg, 5%</span></div>
+  <div class="kpi"><span class="k">Seasons covered</span>
+    <span class="v">2019-2026</span>
+    <span class="n">player-week data; game results from 1999</span></div>
+</div>
+
+<div class="badbox">
+<p><b>The result, stated without decoration.</b> None of the 13 measures tested adds statistically significant information beyond the closing spread once the correction for 13 tests is applied.</p><p>The smallest raw p belongs to <b>away ruled-out offensive players</b>: raw p=0.0105, corrected p=0.136. It is reported here precisely because it is the best-looking number in the table, and it still does not clear the bar.</p><p>The closing-spread coefficient sits between 1.03 to 1.05 with p effectively zero in every row, which is the check that the join and the specification are right. Without that, a null result could just be a broken regression.</p>
+</div>
+
+<h2>The information test, measure by measure</h2>
+<div class="tw"><table><caption>Closing spread is in every regression. The coefficient is the extra effect of the measure on the home margin, in points.</caption><thead><tr><th>Measure</th><th>What it measures</th><th>Games</th><th>Coefficient</th><th>t</th><th>Raw p</th><th>Corrected p</th></tr></thead><tbody><tr><td><span class="mono">backup_qb_start_diff_home_minus_away</span></td><td>home club is starting a backup QB minus away club is (+1 = home is the disrupted side)</td><td>7083</td><td>-0.568</td><td>-1.550</td><td>0.1212</td><td><span class="badge b-mute">0.315</span></td></tr><tr><td><span class="mono">production_loss_share_diff_home_minus_away</span></td><td>home ruled-out share of recent offensive output minus away</td><td>1734</td><td>-1.659</td><td>-0.759</td><td>0.4478</td><td><span class="badge b-mute">0.728</span></td></tr><tr><td><span class="mono">own_out_defense_diff_home_minus_away</span></td><td>home ruled-out defenders minus away ruled-out defenders</td><td>2768</td><td>-0.043</td><td>-0.271</td><td>0.7865</td><td><span class="badge b-mute">0.920</span></td></tr><tr><td><span class="mono">own_out_offense_diff_home_minus_away</span></td><td>home ruled-out offensive players minus away</td><td>2768</td><td>-0.294</td><td>-1.858</td><td>0.0633</td><td><span class="badge b-mute">0.315</span></td></tr><tr><td><span class="mono">own_n_out_diff_home_minus_away</span></td><td>home total ruled Out/Doubtful minus away</td><td>2768</td><td>-0.171</td><td>-1.581</td><td>0.1139</td><td><span class="badge b-mute">0.315</span></td></tr><tr><td><span class="mono">backup_qb_start</span></td><td>home club starts a backup QB (0/1)</td><td>7087</td><td>-0.462</td><td>-0.955</td><td>0.3395</td><td><span class="badge b-mute">0.630</span></td></tr><tr><td><span class="mono">away_backup_qb_start</span></td><td>away club starts a backup QB (0/1)</td><td>7084</td><td>0.547</td><td>1.112</td><td>0.2661</td><td><span class="badge b-mute">0.577</span></td></tr><tr><td><span class="mono">production_loss_share</span></td><td>home ruled-out share of recent offensive output</td><td>1743</td><td>1.427</td><td>0.464</td><td>0.6429</td><td><span class="badge b-mute">0.873</span></td></tr><tr><td><span class="mono">away_production_loss_share</span></td><td>away ruled-out share of recent offensive output</td><td>1742</td><td>5.020</td><td>1.611</td><td>0.1074</td><td><span class="badge b-mute">0.315</span></td></tr><tr><td><span class="mono">own_out_defense</span></td><td>home ruled-out defenders (front seven + secondary)</td><td>2770</td><td>0.023</td><td>0.105</td><td>0.9160</td><td><span class="badge b-mute">0.920</span></td></tr><tr><td><span class="mono">away_own_out_defense</span></td><td>away ruled-out defenders (front seven + secondary)</td><td>2773</td><td>0.094</td><td>0.424</td><td>0.6717</td><td><span class="badge b-mute">0.873</span></td></tr><tr><td><span class="mono">own_out_offense</span></td><td>home ruled-out offensive players</td><td>2770</td><td>-0.022</td><td>-0.100</td><td>0.9200</td><td><span class="badge b-mute">0.920</span></td></tr><tr><td><span class="mono">away_own_out_offense</span></td><td>away ruled-out offensive players</td><td>2773</td><td>0.562</td><td>2.562</td><td>0.0105</td><td><span class="badge b-mute">0.136</span></td></tr></tbody></table></div>
+<p class="sub">Read a coefficient as "points of margin per unit of the measure". A ruled-out
+defender is worth a fraction of a point at most, and the standard error is larger than the
+estimate, which is what a null result looks like.</p>
+
+<h2>The five bet rules built on those measures</h2>
+<p class="sub">Each rule was written down before it was scored. Prices are the observed quotes in
+the source file; a game with no quoted price is excluded and counted, never filled with an
+assumed number.</p>
+<div class="tw"><table><caption>Break-even is the average implied probability of the actual prices taken, not 50%. Corrected p uses the whole family of seventeen rules, the twelve already published plus these five.</caption><thead><tr><th>Rule</th><th class="num">Bets</th><th class="num">Hit</th><th class="num">Break-even</th><th class="num">ROI</th><th class="num">Raw p</th><th class="num">Corrected p</th><th class="num">Gates</th><th>Status</th></tr></thead><tbody><tr><td><b>P03 Under when combined ruled-out production share is high</b></td><td class="num">329</td><td class="num">46.6%</td><td class="num">51.9%</td><td class="num">-10.02%</td><td class="num">0.0582</td><td class="num">0.495</td><td class="num">3/8</td><td><span class="badge b-bad">FAIL</span></td></tr><tr><td><b>P01 Back the opponent when the club starts a backup QB</b></td><td class="num">979</td><td class="num">49.2%</td><td class="num">51.2%</td><td class="num">-3.71%</td><td class="num">0.2291</td><td class="num">0.779</td><td class="num">3/8</td><td><span class="badge b-bad">FAIL</span></td></tr><tr><td><b>P04 Fade the side missing 3+ more defenders</b></td><td class="num">273</td><td class="num">54.0%</td><td class="num">51.7%</td><td class="num">3.97%</td><td class="num">0.4902</td><td class="num">0.921</td><td class="num">6/8</td><td><span class="badge b-watch">WATCH</span></td></tr><tr><td><b>P02 Fade the club that starts a backup QB</b></td><td class="num">979</td><td class="num">50.8%</td><td class="num">51.6%</td><td class="num">-1.59%</td><td class="num">0.6020</td><td class="num">0.921</td><td class="num">4/8</td><td><span class="badge b-bad">FAIL</span></td></tr><tr><td><b>P05 Over when both defences are missing 3+</b></td><td class="num">48</td><td class="num">55.3%</td><td class="num">52.0%</td><td class="num">6.05%</td><td class="num">0.6625</td><td class="num">0.921</td><td class="num">4/8</td><td><span class="badge b-bad">FAIL</span></td></tr></tbody></table></div>
+<div class="flagbox">
+<p><b>Why the correction counts seventeen rules and not five.</b> The repository already scores
+twelve rules. Adding five and reporting only the best of the five would manufacture a winner out
+of the arithmetic, so all seventeen enter one Benjamini-Hochberg correction. The family size is
+printed on every row.</p>
+</div>
+
+<h2>The luck accounting, rule by rule</h2>
+<p class="sub">A positive return can come from one good Sunday. These three numbers say whether
+it did: how concentrated the profit is, how the worst losing run compares with what the rule's own
+hit rate predicts, and the gap between the hit rate and the break-even the prices demanded.</p>
+<div class="tw"><table><caption>A profit share at or above 1.0 in the best 5% of bets means the rule is negative without those bets.</caption><thead><tr><th>Rule</th><th class="num">Net units</th><th class="num">Profit share in best 5% of bets</th><th class="num">Worst losing run</th><th class="num">Worst run expected by chance</th><th class="num">Skill gap</th><th>Verdict</th></tr></thead><tbody><tr><td><b>P03 Under when combined ruled-out production share is high</b></td><td class="num">-32.96</td><td class="num">-0.49</td><td class="num">13</td><td class="num">8.2</td><td class="num">-0.0528</td><td>no positive return to explain: there is nothing here for luck to have caused, and the rule loses money in this sample</td></tr><tr><td><b>P01 Back the opponent when the club starts a backup QB</b></td><td class="num">-36.34</td><td class="num">-1.48</td><td class="num">8</td><td class="num">9.1</td><td class="num">-0.0196</td><td>no positive return to explain: there is nothing here for luck to have caused, and the rule loses money in this sample</td></tr><tr><td><b>P04 Fade the side missing 3+ more defenders</b></td><td class="num">10.84</td><td class="num">1.35</td><td class="num">6</td><td class="num">6.2</td><td class="num">0.0223</td><td>the entire return sits in the best few bets: remove them and the rule is negative, which is what luck looks like</td></tr><tr><td><b>P02 Fade the club that starts a backup QB</b></td><td class="num">-15.60</td><td class="num">-3.29</td><td class="num">8</td><td class="num">8.7</td><td class="num">-0.0078</td><td>no positive return to explain: there is nothing here for luck to have caused, and the rule loses money in this sample</td></tr><tr><td><b>P05 Over when both defences are missing 3+</b></td><td class="num">2.91</td><td class="num">0.70</td><td class="num">8</td><td class="num">3.8</td><td class="num">0.0333</td><td>most of the return sits in a handful of bets, the signature of luck</td></tr></tbody></table></div>
+<h2>What was excluded, and why</h2>
+<p class="sub">Exclusions are the place a dishonest analysis hides its bad results. Every game the
+analysis could not use is counted here and named.</p>
+<div class="tw"><table><caption>A game counted as 'measure unknown' has no usable value for that rule and is not silently treated as zero.</caption><thead><tr><th>Rule</th><th class="num">Games meeting the condition</th><th class="num">No observed price</th><th class="num">Measure unknown</th></tr></thead><tbody><tr><td>P01 Back the opponent when the club starts a backup QB</td><td class="num">1362</td><td class="num">383</td><td class="num">40</td></tr><tr><td>P02 Fade the club that starts a backup QB</td><td class="num">1362</td><td class="num">383</td><td class="num">40</td></tr><tr><td>P03 Under when combined ruled-out production share is high</td><td class="num">329</td><td class="num">0</td><td class="num">10738</td></tr><tr><td>P04 Fade the side missing 3+ more defenders</td><td class="num">273</td><td class="num">0</td><td class="num">11438</td></tr><tr><td>P05 Over when both defences are missing 3+</td><td class="num">48</td><td class="num">0</td><td class="num">11438</td></tr></tbody></table></div>
+<h2>Coverage, honestly stated</h2>
+<div class="tw"><table><caption>Every exclusion is a live count from this run.</caption><thead><tr><th>Quantity</th><th>Value</th><th>What it means</th></tr></thead><tbody><tr><td>Team-games in the study</td><td>14,478</td><td>both perspectives of every played game plus unplayed fixtures</td></tr><tr><td>QB continuity known</td><td>14,443</td><td>games where an incumbent starter could be identified before kick-off</td></tr><tr><td>QB continuity unknown</td><td>35</td><td>week-1 games in the first season of the sample; left unknown, never assumed</td></tr><tr><td>Production share available</td><td>3,511</td><td>games with a four-game window and an official report row</td></tr><tr><td>Excluded: window too short</td><td>10,718</td><td>fewer than two prior games in the season; typical of early weeks</td></tr><tr><td>Excluded: no official report row</td><td>249</td><td>club had no injury report row for that week</td></tr></tbody></table></div>
+<h2>Known limits of this analysis</h2>
+<ul class="tight">
+<li>The committed extract has no defensive player statistics, so a defensive deficiency is measured in ruled-out players, not in lost production.</li><li>The official report lists game status; it does not list who replaced whom. Replacement identity comes from the depth chart on the main site, not here.</li><li>Practice-squad promotions and in-game injuries are not in the report.</li><li>The 2026 season is in progress: its rows are small-sample and are shown as such.</li>
+</ul>
+<p class="sub">Source URLs used: <a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">https://www.nfl.com/schedules/</a> · <a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">https://www.nfl.com/standings/league/2026/reg</a> · <a class="src" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">https://www.nfl.com/injuries/</a> · <a class="src" href="https://github.com/nflverse/nflverse-data" target="_blank" rel="noopener">https://github.com/nflverse/nflverse-data</a></p>
+
+<footer>
+  <p>Built 2026-11-13T12:54:36+00:00 from files in this repository. Every figure on this page is read
+  from a data file at build time; nothing is typed in by hand. <span class="src">Generated by
+  tools/review_room.py.</span></p>
+</footer>
+</main>
+</body>
+</html>

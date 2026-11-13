@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Executive summary · NFL Review Room</title>
+<meta name="description" content="The project on one page: what it proves, what it does not, and what needs deciding.">
+<style>:root{--bg:#0d1117;--panel:#161b22;--panel2:#1c2330;--line:#2a3441;--ink:#e6edf3;
+--muted:#8b98a8;--accent:#58a6ff;--good:#3fb950;--warn:#d29922;--bad:#f85149;--violet:#bc8cff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.top{position:sticky;top:0;z-index:20;display:flex;gap:18px;align-items:center;
+padding:12px 24px;background:rgba(13,17,23,.96);border-bottom:1px solid var(--line);
+flex-wrap:wrap;backdrop-filter:blur(6px)}
+.brand{font-weight:700;color:var(--ink)}
+.brand .tag{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+border:1px solid var(--line);border-radius:99px;padding:1px 8px;margin-left:8px}
+nav.main{display:flex;gap:4px;flex-wrap:wrap}
+nav.main a{padding:5px 11px;border-radius:7px;font-size:13.5px;color:var(--muted)}
+nav.main a:hover{background:var(--panel2);text-decoration:none}
+nav.main a.on{background:var(--panel2);color:var(--ink);font-weight:600}
+.wrap{max-width:1180px;margin:0 auto;padding:26px 24px 80px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:-.01em}
+h2{font-size:19px;margin:38px 0 10px;padding-bottom:7px;border-bottom:1px solid var(--line)}
+h3{font-size:15px;margin:22px 0 8px}
+.lede{font-size:16.5px;color:var(--ink);background:var(--panel);border:1px solid var(--line);
+border-left:3px solid var(--accent);border-radius:9px;padding:13px 16px;margin:0 0 18px}
+.sub{color:var(--muted);margin:0 0 16px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:11px;margin:16px 0}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.kpi .k{display:block;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.kpi .v{display:block;font-size:24px;font-weight:700;margin:2px 0}
+.kpi .n{display:block;font-size:11.5px;color:var(--muted)}
+.kpi .v.good{color:var(--good)}.kpi .v.warn{color:var(--warn)}.kpi .v.bad{color:var(--bad)}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:12px 0}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+caption{text-align:left;color:var(--muted);font-size:12px;padding:9px 12px}
+th,td{padding:8px 11px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--panel2);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+color:var(--muted);font-weight:600;white-space:nowrap}
+tbody tr:hover{background:rgba(88,166,255,.05)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.badge{display:inline-block;font-size:11px;font-weight:600;padding:1px 8px;border-radius:99px;
+border:1px solid;white-space:nowrap}
+.b-ready{color:var(--good);border-color:var(--good);background:rgba(63,185,80,.1)}
+.b-blocked{color:var(--bad);border-color:var(--bad);background:rgba(248,81,73,.1)}
+.b-watch{color:var(--warn);border-color:var(--warn);background:rgba(210,153,34,.12)}
+.b-info{color:var(--accent);border-color:var(--accent);background:rgba(88,166,255,.1)}
+.b-mute{color:var(--muted);border-color:var(--line)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:11px;
+padding:16px 18px;margin:14px 0}
+.card h3{margin-top:0}
+.src{font-size:12px;color:var(--muted);word-break:break-all}
+.flagbox{border-left:3px solid var(--warn);background:rgba(210,153,34,.07);
+padding:11px 15px;border-radius:0 8px 8px 0;margin:12px 0}
+.badbox{border-left:3px solid var(--bad);background:rgba(248,81,73,.07);
+padding:11px 15px;border-radius:0 8px 8px 0;margin:12px 0}
+.goodbox{border-left:3px solid var(--good);background:rgba(63,185,80,.07);
+padding:11px 15px;border-radius:0 8px 8px 0;margin:12px 0}
+.opts{display:grid;gap:10px;margin:10px 0 0}
+.opt{border:1px solid var(--line);border-radius:9px;padding:11px 13px;background:var(--panel2)}
+.opt.rec{border-color:var(--good);box-shadow:inset 3px 0 0 var(--good)}
+.opt .lbl{font-weight:650;margin:0 0 6px}
+.opt dl{display:grid;grid-template-columns:104px 1fr;gap:2px 10px;margin:0;font-size:13px}
+.opt dt{color:var(--muted);font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;padding-top:2px}
+.opt dd{margin:0}
+footer{border-top:1px solid var(--line);margin-top:50px;padding-top:16px;
+color:var(--muted);font-size:12.5px}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px}
+ul.tight{margin:8px 0;padding-left:20px}ul.tight li{margin:3px 0}
+.pill{display:inline-block;font-size:11px;padding:1px 7px;border-radius:99px;
+background:var(--panel2);border:1px solid var(--line);color:var(--muted);margin-right:5px}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html">Review Room<span class="tag">decide before you build</span></a>
+  <nav class="main"><a href="index.html">Start here</a><a href="executive.html" class="on">Executive summary</a><a href="decisions.html">Decisions</a><a href="questions.html">Questions</a><a href="week10.html">This week's personnel</a><a href="evidence.html">Signals &amp; evidence</a><a href="improvements.html">Improvements</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged for review</a><a href="../index.html">Main dashboard &rarr;</a></nav>
+</header>
+<main class="wrap">
+
+<h1>Executive summary</h1>
+<p class="lede">One page for the reader who will not open anything else. What exists, what it
+proves, what it does not, and the four things only the owner can decide.</p>
+<p class="sub">Every number below is read from the repository's data files at build time. The
+source for each is linked in the section where it is used.</p>
+
+<h2>1. What this project is</h2>
+<p>An evidence-first NFL decision site. It publishes its own spread, total and win-probability
+lines; scores betting strategies against observed closing prices under eight validation gates it
+declares in advance; tracks official injuries and club depth charts; and refuses to publish a
+number that cannot be traced to a source. Where a value cannot be confirmed from an official page,
+it stays blank and is listed as flagged.</p>
+
+<h2>2. What was added in this session</h2>
+<ul class="tight">
+<li><b>A personnel-deficiency study</b> — the question the brief asks that the site previously
+could not answer: do injury and lineup losses carry information the price has not already taken?
+It is built from 14,478 team-games and tested two ways: whether the
+measure predicts the result, and whether it predicts the result <i>beyond</i> the closing line.</li>
+<li><b>A week-by-week deficiency board</b> — who is ruled out, split into front seven, secondary,
+quarterback, skill and offensive line, plus which clubs are starting a quarterback who did not
+start their previous game.</li>
+<li><b>A Review Room</b> — this section. Seven decisions, the questions that gate them, ten
+improvements, and every check this session ran, on separate pages that a non-developer can read.</li>
+<li><b>Two defects in this session's own work, found and fixed</b> — a QB-continuity definition
+that mislabelled a club that had already changed starter, and a clean injury report that was being
+treated as a missing one. Both are recorded rather than quietly corrected.</li>
+</ul>
+
+<h2>3. The headline finding</h2>
+<div class="badbox">
+<p><b>Personnel information has not beaten the closing line.</b> Of 13 measures
+tested, 0 survived the correction for 13 tests. The
+strongest raw result — away ruled-out offensive players — has a raw p of
+0.0105 and a corrected p of
+0.136. Of the 5 bet rules built on
+these measures, 0 passed all eight gates and 1 are on watch.</p>
+<p>This is the expected result, and it is worth saying why: injury reports are public and are
+released on a schedule. A market that contains them cannot be beaten by reading them more
+carefully. The finding is not that injuries do not matter to games — they plainly do — but that
+they do not matter <i>relative to the price</i>.</p>
+</div>
+<p>What would change that answer is speed rather than knowledge: a timestamped price history would
+show whether the line moves after each designation, and how fast. That is decision
+<a href="decisions.html#D02">D02</a>, and it is the only route to an edge this analysis can see.</p>
+
+<h2>4. The evidence base, in numbers</h2>
+<div class="tw"><table><caption>Every row is recomputed, not recalled.</caption><thead><tr><th>Quantity</th><th>Value</th><th>Where it comes from</th></tr></thead><tbody><tr><td>Played games in the research extract</td><td>7,103</td><td><a class="src" href="https://github.com/nflverse/nflverse-data" target="_blank" rel="noopener">nflverse schedules release</a></td></tr><tr><td>Games with both a closing line and a result</td><td>7,103</td><td>same</td></tr><tr><td>Team-games in the personnel study</td><td>14,478</td><td>this session</td></tr><tr><td>Personnel measures tested</td><td>13</td><td>this session</td></tr><tr><td>Bet rules scored, with observed prices only</td><td>2,608 bets</td><td>this session</td></tr><tr><td>Clubs in the official standings read this session</td><td>32</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">https://www.nfl.com/standings/league/2026/reg</a></td></tr><tr><td>Clubs where official and committed standings differ</td><td>2</td><td>this session — both are the Thursday game</td></tr><tr><td>Clubs where the official report and the mirrored feed differ</td><td>1</td><td><a class="src" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">https://www.nfl.com/injuries/</a></td></tr><tr><td>Repository gates passing</td><td>9 of 9</td><td>see Verification</td></tr><tr><td>Unit tests passing</td><td>117</td><td>tests/</td></tr></tbody></table></div>
+<h2>5. What is unresolved, and what it blocks</h2>
+<div class="tw"><table><thead><tr><th>Decision</th><th>Status</th><th>What it blocks</th></tr></thead><tbody><tr><td><a href="decisions.html#D01">D01 Which site generation is the one published product?</a></td><td><span class="badge b-blocked">blocked</span></td><td>Q28, G01</td></tr><tr><td><a href="decisions.html#D02">D02 Buy a licensed odds feed, or publish without one?</a></td><td><span class="badge b-blocked">blocked</span></td><td>Q01 (price, book, timestamp), G02</td></tr><tr><td><a href="decisions.html#D03">D03 What exactly does the leaderboard reward, and can it be paid?</a></td><td><span class="badge b-blocked">blocked</span></td><td>Q20 (what rewards), Q27, G03 legal review</td></tr><tr><td><a href="decisions.html#D04">D04 How should the personnel-deficiency signal be used, given that none of it beat the price?</a></td><td><span class="badge b-ready">ready</span></td><td>nothing</td></tr><tr><td><a href="decisions.html#D05">D05 Stop publishing implied or model-only numbers where a verified value is missing?</a></td><td><span class="badge b-ready">ready</span></td><td>nothing</td></tr><tr><td><a href="decisions.html#D06">D06 What is the publication gate for a number that changed after it was verified?</a></td><td><span class="badge b-ready">ready</span></td><td>nothing</td></tr><tr><td><a href="decisions.html#D07">D07 How should the two independent analyses of correlation be reconciled?</a></td><td><span class="badge b-ready">ready</span></td><td>nothing</td></tr></tbody></table></div>
+<h2>6. The four things only you can decide</h2>
+<ol class="tight">
+<li><b>Name one authoritative site</b> (<a href="decisions.html#D01">D01</a>). Six generations
+answer the same question differently. Until one is named, every number on this project is one of
+several.</li>
+<li><b>Buy prices or stop claiming profit</b> (<a href="decisions.html#D02">D02</a>). Every ROI
+figure currently rests on a mirrored closing number, not a price a bettor could take.</li>
+<li><b>Decide what the leaderboard rewards, and whether it can be paid</b>
+(<a href="decisions.html#D03">D03</a>). No official source defines a reward formula, and paying
+one is a regulated activity.</li>
+<li><b>Accept the negative personnel result, or fund a second attempt</b>
+(<a href="decisions.html#D04">D04</a>). Option B needs defensive player data; option C needs the
+price feed from D02.</li>
+</ol>
+<p class="sub">4 of the seven decisions can be taken today without waiting for anything.</p>
+
+<h2>7. What you can rely on, and what you cannot</h2>
+<div class="goodbox">
+<p><b>Reliable:</b> the official standings, schedule, injury and depth-chart transcriptions, each
+with a source link; the repository gates, which recompute published figures independently; the
+research extract's own outputs, which reproduce byte for byte from the committed inputs.</p>
+</div>
+<div class="flagbox">
+<p><b>Not reliable as a claim of profit:</b> any ROI on this site. The prices are a mirrored
+closing line with no book, limit or timestamp. The records are indicative of model accuracy, not
+of what a bettor could have collected.</p>
+<p><b>Stale, and disclosed:</b> the committed standings are one game behind the official page as
+of this session, because the Week 10 Thursday game had finished. The difference is published
+club by club on the Verification page rather than silently corrected.</p>
+</div>
+
+<h2>8. How to check any of this</h2>
+<pre class="mono">python3 tools/v_sources.py                    # official vs committed standings, club by club
+cd s9cb/analysis &amp;&amp; python3 run_personnel.py   # every personnel number on this site
+python3 tools/review_room.py --check          # this section's links and sources
+python3 scripts/verified/audit_numbers.py     # independent recomputation of published figures
+python3 tools/verify.py                       # every table row in the wider site</pre>
+<p class="sub">Full detail: <a href="evidence.html">Signals &amp; evidence</a> ·
+<a href="week10.html">Week 10 personnel</a> · <a href="verification.html">Verification</a> ·
+<a href="flagged.html">Flagged for review</a>.</p>
+
+<footer>
+  <p>Built 2026-11-13T12:54:36+00:00 from files in this repository. Every figure on this page is read
+  from a data file at build time; nothing is typed in by hand. <span class="src">Generated by
+  tools/review_room.py.</span></p>
+</footer>
+</main>
+</body>
+</html>
