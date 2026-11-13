@@ -1794,4 +1794,40 @@ re-probed 2026-11-13). The official roster page exists (`https://www.nfl.com/tea
 
 | ID | Task | Status | Owner | File scope | Notes |
 | --- | --- | --- | --- | --- | --- |
-| X1 | Official-roster backup register: for every Week 10 official game designation (Out / Doubtful / Questionable), list the same-position active backups on that club's official nfl.com roster; depth order stays blank (no official source) | in progress | `cf97db19` | `pipeline/scrape_rosters.py` (new), `tools/build_backup_register.py` (new), `.github/workflows/backup-register.yml` (new), `data/backup-register/` (new), `pages/backup-register.html` (new) | Claimed before any other edit. Does not touch `pipeline/build_all.py`, `pipeline/gen_site.py`, `index.html`, or any other session's page. Nav link requested, not applied. |
+| X1 | Official-roster backup register: for every Week 10 official game designation (Out / Doubtful / Questionable), list the same-position active backups on that club's official nfl.com roster; depth order stays blank (no official source) | done (needs review for 3 clubs' roster rows, see record) | `cf97db19` | `tools/scrape_rosters.py` (new; moved from `pipeline/` so `collect-data.yml` does not run), `tools/build_backup_register.py` (new), `.github/workflows/backup-register.yml` (new), `data/backup-register/` (new), `pages/backup-register.html` (new). Cross-scope, one line each, logged below: `scripts/verified/normalize_nav.py` (CANON entry), `index.html` (one landing CTA) | Claimed before any other edit. `pipeline/build_all.py` and `pipeline/gen_site.py` were NOT changed, so F21 stays open for their owner. |
+
+### Session `cf97db19-nfl1` — record for X1 (2026-11-13)
+
+**Result.** A new page, [Backup Register](https://kanlerxz87-cyber.github.io/NFL1/pages/backup-register.html) (after Pages deploys), lists the 9 Week 10 official game designations and, for each, the same-position players whose roster status is ACT on the club's official nfl.com roster. Depth order is blank on every row, because nfl.com publishes no depth chart. This closes the part of F21 that official sources can support. It does not rank 2nd, 3rd or 4th string. That ranking needs a source not yet verified (see the options on the page).
+
+**Sources (all read directly during this session, 2026-11-13):**
+- Official Week 10 injury report, all 7 chunks read: <https://www.nfl.com/injuries/>
+- Depth-chart probe, 404: <https://www.nfl.com/teams/kansas-city-chiefs/depth-chart>
+- Team directory: <https://www.nfl.com/teams/>
+- Official rosters, re-read line by line: Detroit Lions <https://www.nfl.com/teams/detroit-lions/roster> (3 of 3 chunks); Buffalo Bills <https://www.nfl.com/teams/buffalo-bills/roster> (chunk 1 of 3, for the Dee Alford link)
+- Official rosters, scraped in GitHub Actions and hash-recorded (SHA-256 in `data/backup-register/rosters_2026.json`), not re-read: all 32 club roster pages, `https://www.nfl.com/teams/<club>/roster`
+
+**Verification performed:**
+1. Designations: the 9 Out/Questionable rows in `data/model/official_injuries.json` were compared with the live injury page, all seven chunks read. Result: 9/9 match (WAS Patrick, Yankoff Out; NYG Harrison Questionable; NE Brown, Davis III, Henderson Out; DET Joseph, Mays, Reed Out). No other club has a game status in the report.
+2. Detroit backups, line by line: the 3 designated DET players, the 8 + 6 + 3 ACT backups per group, and the non-ACT counts (5, 2, 3) match the live roster exactly.
+3. Roster scrape: 32 of 32 clubs parsed, 2,850 player rows, 0 row warnings, every page title matches its club. Gate in the workflow requires this.
+4. Builder: 9 of 9 designations matched to exactly one roster row (0 unmatched). 0 designations have zero active same-group backups.
+5. Site checks run locally on the committed tree: `tools/check_committed_site.py` PASS (no source-less rows, no broken links); `scripts/verified/check_site.py` (all links resolve, nav complete, 22 pages); `scripts/verified/validate_verified.py` hard checks PASS; `scripts/verified/audit_numbers.py` 47/47; `tests/test_site.py` 29 tests OK; `scripts/verified/check_external_links.py` 185 links, 0 dead, 182 unverifiable from the sandbox (nfl.com is not reachable from it).
+
+**Irregularities (also on the page's "Flagged for review" table, each with its source):**
+- **X-DEPTH** — no official depth chart. The team depth-chart URL returns 404. Some roster pages link to club-site depth charts (for example `detroitlions.com/team/depth-chart`). These are not parsed or verified. Depth order stays blank.
+- **X-POS** — Ben Brown: the injury report says **C**, the official roster says **G** (<https://www.nfl.com/injuries/>, <https://www.nfl.com/teams/new-england-patriots/roster>). Both are the OL group, so the counts are unaffected, but the disagreement is published.
+- **X-STATUS** — Kerby Joseph (DET): the injury report says **Out**, the roster says **PUP** (<https://www.nfl.com/teams/detroit-lions/roster>). Both values are shown as published.
+- **Label variant (not flagged)** — Kerby Joseph: injury report **S**, roster **SAF** (same safety family).
+- **X-LINK (40 items, informational)** — roster display names differ from the player-profile URL slug (e.g. "Dee Alford" links to `/players/deaundre-ford/`, <https://www.nfl.com/teams/buffalo-bills/roster>; "Chig Okonkwo" → `chigoziem-okonkwo`). Full list on the page.
+- **X-VERIFY** — WAS, NE and NYG roster rows are scraped and hash-recorded but not yet re-read line by line. Shown per row as "not yet re-read".
+- **Pipeline provenance (not changed here)** — `pipeline/build_all.py` sets `depth_source` to `https://www.nfl.com/teams/`, which is the team directory and carries no depth chart. The depth values come from the nflverse mirror. The label is misleading and should be corrected by the pipeline owner.
+- **Status codes** — roster status codes other than ACT (DEV, RES, CUT, PUP, TRC, TRD, TRT, RSR, RSN, RLS, EXE) are shown as published. Their meanings are not defined on the page and were not verified; only ACT is counted as active.
+
+**Cross-session requests (logged, not applied):**
+- `R-cf97db19-01` (for the `pipeline/` owner): F21 stays open for the starter model. The availability model still counts only depth-rank-1 starters. This session's register is an independent, official-roster view and does not replace that model.
+- `R-cf97db19-02` (for the integration session): the canonical nav in `scripts/verified/normalize_nav.py` now includes "Backup Register". The committed pages were NOT re-normalised, because the canonical list would change the nav on 22 live pages (it adds about 10 entries that the committed site does not have). Decide whether to adopt the canonical nav.
+- `R-cf97db19-03` (for the integration session): add this page's flags to the global Flagged for Review register (`data/flags.json`).
+- `R-cf97db19-04`: the three open PRs from other sessions (#31, #37, #43) were not merged or edited by this session.
+
+**Not done (explicit):** depth ranking (2nd / 3rd / 4th string) for any club; line-by-line re-read of WAS, NE and NYG rosters; a Week-10 snapshot (the roster pages are the rosters at fetch time).

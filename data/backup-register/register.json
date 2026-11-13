@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-13T12:44:04Z",
+  "generated_at": "2026-11-13T12:44:49Z",
   "status": "ok",
   "week": 10,
   "season": 2026,
@@ -378,7 +378,8 @@
       "depth_rank": null,
       "depth_note": "nfl.com publishes no depth order; rank intentionally blank",
       "row_flags": [],
-      "roster_player_url": "https://www.nfl.com/players/cade-mays/"
+      "roster_player_url": "https://www.nfl.com/players/cade-mays/",
+      "verification": "designation re-read on nfl.com (2026-11-13); roster rows re-read on nfl.com (2026-11-13)"
     },
     {
       "week": 10,
@@ -461,7 +462,8 @@
       "depth_rank": null,
       "depth_note": "nfl.com publishes no depth order; rank intentionally blank",
       "row_flags": [],
-      "roster_player_url": "https://www.nfl.com/players/d-j-reed/"
+      "roster_player_url": "https://www.nfl.com/players/d-j-reed/",
+      "verification": "designation re-read on nfl.com (2026-11-13); roster rows re-read on nfl.com (2026-11-13)"
     },
     {
       "week": 10,
@@ -520,7 +522,8 @@
         "label variant: injury report S, roster SAF (same family)",
         "designated player's roster status is PUP (not ACT)"
       ],
-      "roster_player_url": "https://www.nfl.com/players/kerby-joseph/"
+      "roster_player_url": "https://www.nfl.com/players/kerby-joseph/",
+      "verification": "designation re-read on nfl.com (2026-11-13); roster rows re-read on nfl.com (2026-11-13)"
     },
     {
       "week": 10,
@@ -621,7 +624,8 @@
       "row_flags": [
         "position differs: injury report C, roster G"
       ],
-      "roster_player_url": "https://www.nfl.com/players/ben-brown-2/"
+      "roster_player_url": "https://www.nfl.com/players/ben-brown-2/",
+      "verification": "designation re-read on nfl.com (2026-11-13); roster rows scraped from the official page (sha256 recorded), not yet re-read line by line"
     },
     {
       "week": 10,
@@ -693,7 +697,8 @@
       "depth_rank": null,
       "depth_note": "nfl.com publishes no depth order; rank intentionally blank",
       "row_flags": [],
-      "roster_player_url": "https://www.nfl.com/players/carlton-davis/"
+      "roster_player_url": "https://www.nfl.com/players/carlton-davis/",
+      "verification": "designation re-read on nfl.com (2026-11-13); roster rows scraped from the official page (sha256 recorded), not yet re-read line by line"
     },
     {
       "week": 10,
@@ -747,7 +752,8 @@
       "depth_rank": null,
       "depth_note": "nfl.com publishes no depth order; rank intentionally blank",
       "row_flags": [],
-      "roster_player_url": "https://www.nfl.com/players/treveyon-henderson/"
+      "roster_player_url": "https://www.nfl.com/players/treveyon-henderson/",
+      "verification": "designation re-read on nfl.com (2026-11-13); roster rows scraped from the official page (sha256 recorded), not yet re-read line by line"
     },
     {
       "week": 10,
@@ -848,7 +854,8 @@
       "depth_rank": null,
       "depth_note": "nfl.com publishes no depth order; rank intentionally blank",
       "row_flags": [],
-      "roster_player_url": "https://www.nfl.com/players/malik-harrison/"
+      "roster_player_url": "https://www.nfl.com/players/malik-harrison/",
+      "verification": "designation re-read on nfl.com (2026-11-13); roster rows scraped from the official page (sha256 recorded), not yet re-read line by line"
     },
     {
       "week": 10,
@@ -903,7 +910,8 @@
       "depth_rank": null,
       "depth_note": "nfl.com publishes no depth order; rank intentionally blank",
       "row_flags": [],
-      "roster_player_url": "https://www.nfl.com/players/colson-yankoff/"
+      "roster_player_url": "https://www.nfl.com/players/colson-yankoff/",
+      "verification": "designation re-read on nfl.com (2026-11-13); roster rows scraped from the official page (sha256 recorded), not yet re-read line by line"
     },
     {
       "week": 10,
@@ -1012,7 +1020,8 @@
       "depth_rank": null,
       "depth_note": "nfl.com publishes no depth order; rank intentionally blank",
       "row_flags": [],
-      "roster_player_url": "https://www.nfl.com/players/lucas-patrick/"
+      "roster_player_url": "https://www.nfl.com/players/lucas-patrick/",
+      "verification": "designation re-read on nfl.com (2026-11-13); roster rows scraped from the official page (sha256 recorded), not yet re-read line by line"
     }
   ],
   "flags": [
@@ -1255,6 +1264,12 @@
       "kind": "name/link mismatch",
       "text": "TEN: roster name 'Jacob Martin' links to /players/jake-martin/ — check the player page",
       "source": "https://www.nfl.com/players/jake-martin/"
+    },
+    {
+      "id": "X-VERIFY",
+      "kind": "verification pending",
+      "text": "Live re-read status: DET roster re-read line by line on 2026-11-13. WAS, NE and NYG rosters were scraped from the official pages and hash-recorded, but not yet re-read. Their backup lists stay published with that status, not as verified.",
+      "source": "https://www.nfl.com/teams/detroit-lions/roster"
     },
     {
       "id": "X-DEPTH",

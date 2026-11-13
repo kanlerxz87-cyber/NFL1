@@ -43,6 +43,8 @@ GROUP = {
 }
 SUFFIXES = {"jr", "sr", "ii", "iii", "iv", "v"}
 ABBR_ALIAS = {"AZ": "ARI", "LAR": "LA", "WSH": "WAS", "JAC": "JAX"}
+# Clubs whose official roster page was re-read line by line on nfl.com during session cf97db19 (2026-11-13).
+REREAD_CLUBS = {"DET"}
 # Position labels that name the same family (a label difference, not a disagreement).
 LABEL_FAMILIES = [{"S", "SAF", "FS", "SS"}, {"LB", "OLB", "ILB", "MLB"}, {"DE", "DL"},
                   {"DT", "NT", "DL"}, {"OT", "T"}]
@@ -124,6 +126,10 @@ def main() -> int:
     for g, n in unknown_game.items():
         flag("X-GAME", "unknown designation", f"{n} row(s) carry game status '{g}', not counted", INJURY_URL)
 
+    flag("X-VERIFY", "verification pending",
+         "Live re-read status: DET roster re-read line by line on 2026-11-13. WAS, NE and NYG rosters were "
+         "scraped from the official pages and hash-recorded, but not yet re-read. Their backup lists stay "
+         "published with that status, not as verified.", "https://www.nfl.com/teams/detroit-lions/roster")
     flag("X-DEPTH", "depth order unavailable",
          "nfl.com publishes no depth chart (team depth-chart URL returns 404). Some official roster pages link "
          "to a club-site depth chart (e.g. detroitlions.com/team/depth-chart). It has not been parsed or "
@@ -209,6 +215,14 @@ def main() -> int:
         entry["backup_count"] = len(same_group)
         entry["unassigned_db"] = sorted(entry["unassigned_db"])
         entries.append(entry)
+
+    for e in entries:
+        reread = e["club"] in REREAD_CLUBS
+        e["verification"] = (
+            "designation re-read on nfl.com (2026-11-13); roster rows re-read on nfl.com (2026-11-13)"
+            if reread else
+            "designation re-read on nfl.com (2026-11-13); roster rows scraped from the official page "
+            "(sha256 recorded), not yet re-read line by line")
 
     entries.sort(key=lambda e: (e["club"] or "", e["player"] or ""))
 
@@ -317,7 +331,8 @@ def render(p: dict) -> str:
             f"<br><small>not counted (non-ACT same group): {e['non_active_same_group']}</small></td>"
             f"<td>{backups}</td>"
             "<td><span class='blank'>blank</span><br><small>nfl.com publishes no depth order</small></td>"
-            f"<td>{link(INJURY_URL, 'injury report')}<br>{link(e.get('roster_url'), 'club roster')}</td>"
+            f"<td>{link(INJURY_URL, 'injury report')}<br>{link(e.get('roster_url'), 'club roster')}"
+            f"<br><small>{html.escape(e.get('verification') or '')}</small></td>"
             f"<td><small>{html.escape(flags_txt)}</small></td>"
             "</tr>")
     club_rows = "".join(
