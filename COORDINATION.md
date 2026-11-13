@@ -2341,3 +2341,9 @@ outside the list. Both corrected; the sidebar now has 7 groups with no duplicate
 `verify_combined` 1,979 links / 0 broken · `audit_numbers` 47/47 · `validate_verified` all hard
 checks pass · **136 unit tests OK** (11 skipped). Every local link in `index.html`, `pages/`,
 `room/` and `strength/` resolves — 0 broken.
+
+**Note on `data/s9cb/provenance.json`:** the daily refresh workflow (`[skip ci]`) committed
+`b16d2c4` to this branch while the merge above was being prepared. It changed only the
+`generated_at` / `fetched_at` timestamps — all three `sha256` values are byte-identical. Resolved
+in favour of the merge side, which carries the `hash_convention` and `committed_sha256` keys that
+session `9cb71eb8` added, i.e. strictly more information about the same bytes.
