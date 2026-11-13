@@ -26,6 +26,10 @@ import numpy as np
 import pandas as pd
 
 import nfl_lib as L
+# Shared, already-shipped helpers for the official club charts: the fragment dedupe and
+# the nfl.com-vs-club site team-code aliases. One source of truth with the published
+# depth ladder (session c56ebee8) so the two pages can never disagree on chart parsing.
+import build_depth_ladder as depth_ladder_lib
 
 ERRORS: list[dict] = []
 
@@ -249,6 +253,193 @@ def league_snapshot():
     L.write_json("snapshot.json", jclean(snapshot))
     return dict(reg=reg, cur=cur, played=played, fixtures=fixtures, snapshot=snapshot,
                 started_games=started_games)
+
+
+# ------------------------------------------------------- A2. depth-string register
+@stage("A2 depth-string register")
+def depth_strings_register(ctx):
+    """Publish every position's 1st-4th string chain joined to the official designations.
+
+    Depth source: the official club depth charts transcribed from the clubs' own sites
+    (nfl.com publishes no depth chart — verified 404, session c56ebee8). Designation
+    source: the official nfl.com injury report. The register is written only when both
+    sources are current for the target week; otherwise nothing is published rather than
+    something stale or unofficial.
+    """
+    snap = ctx.get("snapshot") or {}
+    target = int(snap.get("target_week")
+                 or (int(snap.get("last_completed_week") or 0) + 1))
+    charts_path = os.path.join(L.ROOT, "data", "session-1505ac8e", "depth_charts.json")
+    inj_path = os.path.join(L.OUT, "official_injuries.json")
+    if not os.path.exists(charts_path):
+        raise FileNotFoundError(f"club depth charts missing: {charts_path}")
+    if not os.path.exists(inj_path):
+        raise FileNotFoundError("official_injuries.json missing; depth register not published")
+    with open(inj_path) as f:
+        official = json.load(f)
+    if not (official.get("status") == "ok"
+            and int(official.get("week") or -1) == target
+            and len(official.get("rows", [])) >= 150):
+        raise RuntimeError(
+            "official injury report is not a current full week "
+            f"(status={official.get('status')!r}, week={official.get('week')!r}, "
+            f"rows={len(official.get('rows', []))}, target={target}); "
+            "depth register not published")
+    with open(charts_path) as f:
+        charts = json.load(f)
+
+    chains, clubs_without_chart, chart_source_by_team = [], [], {}
+    header_rows_excluded = []
+    for club in charts.get("clubs", []):
+        abbr = club.get("abbr")
+        if club.get("status") != "ok" or not club.get("depth"):
+            clubs_without_chart.append(abbr)
+            continue
+        chart_source_by_team[abbr] = club.get("source_url")
+        # Drop scraper fragments (a repeated line holding only players the previous line
+        # already lists at the same rank) using the ladder's own, reviewed rule.
+        entries = depth_ladder_lib.dedupe_fragments(club.get("depth", []))
+        seen = {}
+        for entry in entries:
+            unit = entry.get("unit") or ""
+            pos = entry.get("position") or ""
+            players = [p for p in entry.get("players", [])
+                       if p.get("name") and p.get("rank") is not None]
+            # Table-header rows the scraper captured as if they were players (the chart
+            # renders POSITION | NAME column headings). They are excluded and counted,
+            # never published as a player named "NAME".
+            if pos.upper() == "POSITION" or all(
+                    str(p["name"]).strip().upper() == "NAME" for p in players):
+                header_rows_excluded.append(f"{abbr} {unit}")
+                continue
+            ordinal = seen.get((unit, pos), 0) + 1
+            seen[(unit, pos)] = ordinal
+            players.sort(key=lambda p: int(p["rank"]))
+            # Club sites render a position as one or more chart lines (columns). Each line
+            # stays its own chain — merging co-starter columns would invent a player — and
+            # the label says "line", never "string", so nothing implies depth order.
+            chains.append({
+                "team": abbr, "unit": unit, "position": pos, "slot": ordinal - 1,
+                "slot_name": pos if ordinal == 1 else f"{pos} (line {ordinal})",
+                "chart_source": club.get("source_url"),
+                # clean_name html-unescapes the scraped cell (41 chart names carry
+                # &#x27;/&#xA0; entities) so display and status matching see the real
+                # name the club published.
+                "players": [{"name": depth_ladder_lib.clean_name(p["name"]),
+                             "rank": int(p["rank"])} for p in players],
+            })
+
+    status_map = {}
+    for r in official.get("rows", []):
+        if not r.get("team") or not r.get("player"):
+            continue
+        team = depth_ladder_lib.CLUB_ALIAS.get(r["team"], r["team"])
+        key = (team, depth_strings.norm_name(depth_ladder_lib.clean_name(r["player"])))
+        entry = {"game_status": r.get("game"), "practice_status": r.get("practice"),
+                 "source": r.get("player_url") or official.get("source_url")}
+        prev = status_map.get(key)
+        if prev is None or (entry["game_status"] and not prev.get("game_status")):
+            status_map[key] = entry
+
+    depth_rows = depth_strings.build_depth_strings(chains, status_map, max_strings=4)
+    # Cells where the scraper concatenated two co-starters are published verbatim and
+    # flagged, never split (same rule and detector as the published depth ladder).
+    for r in depth_rows:
+        r["merged_name_flags"] = [
+            {"rank": c["rank"], "name": c["player"]}
+            for c in r["chain"] if depth_ladder_lib.looks_merged(c["player"])]
+    depth_clubs = depth_strings.summarise_by_club(depth_rows)
+    for abbr in clubs_without_chart:
+        depth_clubs.append({
+            "team": abbr, "positions_tracked": 0, "positions_starter_unavailable": 0,
+            "positions_starter_at_risk": 0,
+            "positions_down_to_2nd": 0, "positions_down_to_3rd": 0,
+            "positions_down_to_4th_or_beyond": 0, "no_healthy_player_listed": 0,
+            "defensive_positions_starter_unavailable": 0,
+            "offensive_positions_starter_unavailable": 0,
+            "chart_source": None, "no_chart": True,
+            "source": "https://www.nfl.com/teams/",
+        })
+    depth_clubs.sort(key=lambda c: c["team"])
+    for c in depth_clubs:
+        if not c.get("no_chart"):
+            c["chart_source"] = chart_source_by_team.get(c["team"])
+
+    payload = {
+        "generated_at": L.now(),
+        "week": target,
+        "source": {
+            "injuries": {"label": "official nfl.com injury report (scraped)",
+                         "url": official.get("source_url"), "warning": None},
+            "depth_chart": {
+                "label": ("official club depth charts, transcribed from each club's own "
+                          "site (nfl.com publishes no depth chart — verified 404)"),
+                "url": "https://www.nfl.com/teams/",
+                "timestamp": charts.get("generated_at"),
+            },
+        },
+        "method": {
+            "chains": ("One chain per club chart line, ordered by the rank the club "
+                       "published. Club sites render a position as one or more lines "
+                       "(columns); each line stays separate and is labelled 'line N', "
+                       "never 'string', so a co-starter column is never implied to be a "
+                       "backup. The first four strings of each line are published; a "
+                       "string the chart does not list is absent, never invented."),
+            "statuses": ("Official game designations from the injury report. 'Out' removes a "
+                         "player from the projected depth; Doubtful and Questionable still "
+                         "project to play, so they are counted as projecting and reported "
+                         "separately."),
+            "projected_string": ("The lowest rank whose player is not listed Out. This is who "
+                                 "projects to be in the lineup now."),
+            "string_if_doubtful_sits": ("The lowest rank whose player is neither Out nor "
+                                        "Doubtful/Questionable: the next certain man up."),
+            "next_man_up": ("The lowest certain player after the projected starter: who would "
+                            "take the job if the projected starter cannot play."),
+            "limits": [
+                "A club that publishes no depth chart contributes no rows; it is counted "
+                "in clubs_without_chart and never filled from another club.",
+                "A chart line may begin below the first string (the published list itself "
+                "starts at rank 2); the row then says which ranks are not listed instead "
+                "of inventing the missing ones.",
+                (f"{len(header_rows_excluded)} table-header rows the scraper captured as "
+                 "players (position 'POSITION', name 'NAME') were excluded from the "
+                 "register and counted here; they are a chart-rendering defect, not "
+                 "players." if header_rows_excluded else
+                 "No table-header rows were captured in the chart transcriptions."),
+                (f"{sum(1 for r in depth_rows if r['merged_name_flags'])} position rows "
+                 "hold a cell that looks like two co-starters merged by the scraper. They "
+                 "are published verbatim with a flagged marker and never split."
+                 if any(r["merged_name_flags"] for r in depth_rows) else
+                 "No merged-name cells were detected in the chart transcriptions."),
+                "A depth chart is a listing, not a lineup; clubs promote players without "
+                "notice, and the chart is a snapshot from the club site, not the league.",
+                "A position with no designation is not evidence that the player is healthy.",
+                "The string labels describe the depth chart, not the official lineup.",
+            ],
+        },
+        "counts": {
+            "positions_tracked": len(depth_rows),
+            "clubs_tracked": sum(1 for c in depth_clubs if not c.get("no_chart")),
+            "clubs_without_chart": len(clubs_without_chart),
+            "positions_with_starter_unavailable": sum(1 for r in depth_rows
+                                                      if r["starter_unavailable"]),
+            "positions_down_to_2nd_string": sum(1 for r in depth_rows
+                                                if r["projected_string"] == 2),
+            "positions_down_to_3rd_string": sum(1 for r in depth_rows
+                                                if r["projected_string"] == 3),
+            "positions_down_to_4th_string_or_beyond": sum(1 for r in depth_rows
+                                                          if (r["projected_string"] or 0) >= 4),
+            "positions_with_no_healthy_player_listed": sum(1 for r in depth_rows
+                                                           if r["projected_string"] is None),
+            "header_rows_excluded": len(header_rows_excluded),
+            "merged_name_cells_flagged": sum(1 for r in depth_rows
+                                             if r["merged_name_flags"]),
+        },
+        "clubs": depth_clubs,
+        "positions": depth_rows,
+    }
+    L.write_json("depth_strings.json", jclean(payload))
+    return payload
 
 
 # ---------------------------------------------------------------- B. own lines
@@ -943,79 +1134,6 @@ def availability(ctx):
     reported = {r["team"] for r in recs if r.get("team")}
     clubs_missing = sorted(fixture_teams - reported)
 
-    # ---- depth strings: who is the 2nd, 3rd and 4th string at every position, and how
-    # far down the chart the club is projected to be once the designations are applied.
-    chains = []
-    for (team, slot, abb), players in pool.items():
-        if not players:
-            continue
-        first = players[0]
-        chains.append({
-            "team": team, "unit": first.get("pos_grp"), "slot": slot,
-            "position": abb, "slot_name": first.get("pos_name"),
-            "players": [{"name": p["player_name"], "rank": int(p["pos_rank"])}
-                        for p in players],
-        })
-    status_map = {}
-    for r in recs:
-        key = (r["team"], depth_strings.norm_name(r["player"]))
-        entry = {"game_status": r.get("game"), "practice_status": r.get("practice"),
-                 "source": r.get("source")}
-        prev = status_map.get(key)
-        if prev is None or (entry["game_status"] and not prev.get("game_status")):
-            status_map[key] = entry
-    depth_rows = depth_strings.build_depth_strings(chains, status_map, max_strings=4)
-    depth_clubs = depth_strings.summarise_by_club(depth_rows)
-    depth_payload = {
-        "generated_at": L.now(),
-        "week": week,
-        "source": {
-            "injuries": {"label": source_label, "url": source_url, "warning": source_note},
-            "depth_chart": {
-                "label": "mirrored weekly depth chart (not an official NFL publication)",
-                "url": "https://github.com/nflverse/nflverse-data/releases/tag/depth_charts",
-                "timestamp": str(dt)},
-        },
-        "method": {
-            "chains": ("One chain per club and position slot, ordered by the mirrored depth "
-                       "rank. The first four strings are published; a fourth string that the "
-                       "chart does not list is absent, never invented."),
-            "statuses": ("Official game designations from the injury report. 'Out' removes a "
-                         "player from the projected depth; Doubtful and Questionable still "
-                         "project to play, so they are counted as projecting and reported "
-                         "separately."),
-            "projected_string": ("The lowest rank whose player is not listed Out. This is who "
-                                  "projects to be in the lineup now."),
-            "string_if_doubtful_sits": ("The lowest rank whose player is neither Out nor "
-                                        "Doubtful/Questionable: the next certain man up."),
-            "next_man_up": ("The lowest certain player after the projected starter: who would "
-                            "take the job if the projected starter cannot play."),
-            "limits": [
-                "Depth charts are a weekly snapshot published by a mirror, not by the league.",
-                "A depth chart is a listing, not a lineup; clubs promote players without notice.",
-                "A position with no designation is not evidence that the player is healthy.",
-                "The string labels describe the depth chart, not the official lineup.",
-            ],
-        },
-        "counts": {
-            "positions_tracked": len(depth_rows),
-            "clubs_tracked": len(depth_clubs),
-            "positions_with_starter_unavailable": sum(1 for r in depth_rows
-                                                      if r["starter_unavailable"]),
-            "positions_down_to_2nd_string": sum(1 for r in depth_rows
-                                                if r["projected_string"] == 2),
-            "positions_down_to_3rd_string": sum(1 for r in depth_rows
-                                                if r["projected_string"] == 3),
-            "positions_down_to_4th_string_or_beyond": sum(1 for r in depth_rows
-                                                          if (r["projected_string"] or 0) >= 4),
-            "positions_with_no_healthy_player_listed": sum(1 for r in depth_rows
-                                                           if r["projected_string"] is None),
-        },
-        "clubs": depth_clubs,
-        "positions": depth_rows,
-    }
-    L.write_json("depth_strings.json", jclean(depth_payload))
-
     payload = {
         "generated_at": L.now(),
         "week": week,
@@ -1560,6 +1678,7 @@ def main():
     ctx = league_snapshot()
     if ctx is None:
         raise SystemExit("league snapshot failed; nothing to build")
+    depth_strings_register(ctx)
     lines_ctx = ratings_and_lines(ctx)
     merged = {**ctx, **(lines_ctx or {})}
     strategies_payload = strategies(merged) if lines_ctx else None
