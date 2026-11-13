@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-12T23:34:48+00:00",
+ "generated_at": "2026-11-13T13:03:38+00:00",
  "session": "9cb71eb8-nfl1",
  "source_repo": "https://github.com/nflverse/nflverse-data",
  "source_note": "nflverse publishes parsed copies of the NFL's GSIS feed, the official weekly injury report and the official depth charts. nfl.com is the primary publisher but blocks automated clients, so nfl.com pages are cited as the official entry point and spot-checked separately against this repository's hand transcriptions.",
@@ -12,10 +12,10 @@
    "url": "https://github.com/nflverse/nflverse-data/releases/download/schedules/games.csv",
    "official_upstream": "https://www.nfl.com/schedules/",
    "description": "Game results, closing spread/total/moneylines with the price on each side, rest days, roof, surface, temperature, wind, division flag, referee, starting QBs",
-   "bytes": 2189959,
+   "bytes": 2190032,
    "status": "ok",
-   "fetched_at": "2026-11-12T23:34:42+00:00",
-   "sha256": "5ae004ff6d26b08109cbd7424127b0eaa89f59a4bed445229e8683e98d22c8d0"
+   "fetched_at": "2026-11-13T13:03:33+00:00",
+   "sha256": "50939c24d43e78f3369227d5c800a6bc1187b343ac35321102d79bd523f36395"
   },
   {
    "local": "teams.csv",
@@ -26,7 +26,7 @@
    "description": "Club directory: abbreviation, name, conference, division",
    "bytes": 18919,
    "status": "ok",
-   "fetched_at": "2026-11-12T23:34:42+00:00",
+   "fetched_at": "2026-11-13T13:03:33+00:00",
    "sha256": "4eab559fcf89cb4eaf61cb63a88abc47b01b6c9049187c59f3efe95888c3d048"
   },
   {
@@ -38,7 +38,7 @@
    "description": "Player master (GSIS id, position, years of experience, latest team)",
    "bytes": 7308461,
    "status": "ok",
-   "fetched_at": "2026-11-12T23:34:42+00:00",
+   "fetched_at": "2026-11-13T13:03:34+00:00",
    "sha256": "f90a9d0009b8e5d50353b0013971b466534b25cc2f98b7ad14d39361356975d7"
   }
  ],
@@ -102,10 +102,10 @@
   {
    "asset": "stats_player_week_2026.parquet",
    "url": "https://github.com/nflverse/nflverse-data/releases/download/stats_player/stats_player_week_2026.parquet",
-   "bytes": 497666,
+   "bytes": 499988,
    "official_upstream": "https://www.nfl.com/stats/player-stats/",
    "status": "ok",
-   "sha256": "2c48b9ee6defd3a260dd5df5bf2364e7df223a88936ddce9ded1c8785b1e3288"
+   "sha256": "6d540b00c58352038315b589c63430f26492ab9d80b5bdeb3af395fb720af5da"
   }
  ],
  "injury_files": [
@@ -192,16 +192,16 @@
   {
    "asset": "injuries_2026.csv",
    "url": "https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2026.csv",
-   "bytes": 352316,
+   "bytes": 354572,
    "official_upstream": "https://www.nfl.com/injuries/",
    "status": "ok",
-   "sha256": "89785d46c2b4a86108d5fd31d4353fa9d663116044fc9b63cdea8d1758dfb500"
+   "sha256": "495d7ae957b1059f978d11802e9abbf01c015ddbd46766b90ed4e622af12c088"
   }
  ],
  "extract": {
   "games_rows": 7239,
-  "player_week_rows": 24932,
-  "injuries_rows": 56537
+  "player_week_rows": 24944,
+  "injuries_rows": 56557
  },
  "price_coverage": {
   "spread_line": {

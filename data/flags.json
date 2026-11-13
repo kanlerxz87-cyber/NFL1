@@ -548,5 +548,16 @@
   "action": "Source: https://www.nfl.com/injuries/ (all 7 chunks fetched 2026-11-13); audit docs/audit-65df4799.md \u00a73.",
   "verified": true,
   "retrieved": "2026-11-13"
+ },
+ {
+  "id": "F41",
+  "category": "Official page snapshot drift",
+  "description": "The committed standings snapshot (retrieved 2026-11-12T04:31Z from https://www.nfl.com/standings/league/2026/reg) shows NYG 5-2-1, PF 182, PA 172 and WAS 2-5-1, PF 172, PA 202. The same official page fetched 2026-11-13 shows NYG 5-3-1, PF 203, PA 196 and WAS 3-5-1, PF 196, PA 223. The change matches the WAS @ NYG game played 2026-11-12, after the snapshot was taken: the snapshot is not wrong, it is dated, and the live page keeps moving.",
+  "impact": "Any comparison between the committed data and the live official page must quote retrieved_at, or the difference looks like a data error. No decision should use the older values as current.",
+  "status": "needs review",
+  "src": "S02",
+  "action": "Re-snapshot the official standings page after each Sunday slate and quote retrieved_at beside every published standings value; treat same-week changes as drift, not error (see also A-F04 for injury-page drift). Source: https://www.nfl.com/standings/league/2026/reg.",
+  "verified": true,
+  "retrieved": "2026-11-13"
  }
 ]

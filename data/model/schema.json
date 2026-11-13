@@ -1,8 +1,8 @@
 {
- "generated_at": "2026-11-12T23:37:49+00:00",
+ "generated_at": "2026-11-13T13:04:41+00:00",
  "files": {
   "depth_charts_2026.parquet": {
-   "rows": 780140,
+   "rows": 782468,
    "columns": [
     "dt",
     "team",
@@ -33,7 +33,7 @@
    },
    "head": [
     {
-     "dt": "2026-11-12T15:57:12Z",
+     "dt": "2026-11-13T07:02:06Z",
      "team": "ARI",
      "player_name": "Josh Sweat",
      "espn_id": "3693166",
@@ -47,7 +47,7 @@
      "pos_rank": 1
     },
     {
-     "dt": "2026-11-12T15:57:12Z",
+     "dt": "2026-11-13T07:02:06Z",
      "team": "ARI",
      "player_name": "Roy Lopez",
      "espn_id": "4040805",
@@ -342,7 +342,7 @@
    "missing_expected_columns": []
   },
   "injuries_2026.csv": {
-   "rows": 3097,
+   "rows": 3117,
    "columns": [
     "season",
     "season_type",
@@ -3424,7 +3424,7 @@
    "missing_expected_columns": []
   },
   "pbp_2026.parquet": {
-   "rows": 23822,
+   "rows": 24002,
    "columns": [
     "play_id",
     "game_id",
@@ -5098,7 +5098,7 @@
    ]
   },
   "roster_weekly_2026.parquet": {
-   "rows": 24549,
+   "rows": 24561,
    "columns": [
     "season",
     "team",
@@ -5202,7 +5202,7 @@
      "years_exp": 21,
      "headshot_url": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/dypvakakxhccxs67tb0y",
      "ngs_position": "QB",
-     "week": 2,
+     "week": 8,
      "game_type": "REG",
      "status_description_abbr": "A01",
      "football_name": "Aaron",
@@ -5240,7 +5240,7 @@
      "years_exp": 21,
      "headshot_url": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/dypvakakxhccxs67tb0y",
      "ngs_position": "QB",
-     "week": 1,
+     "week": 5,
      "game_type": "REG",
      "status_description_abbr": "A01",
      "football_name": "Aaron",
@@ -5256,7 +5256,7 @@
    "missing_expected_columns": []
   },
   "snap_counts_2026.parquet": {
-   "rows": 12693,
+   "rows": 12785,
    "columns": [
     "game_id",
     "pfr_game_id",
@@ -5334,7 +5334,7 @@
    "missing_expected_columns": []
   },
   "stats_player_week_2026.parquet": {
-   "rows": 9464,
+   "rows": 9534,
    "columns": [
     "player_id",
     "player_name",
