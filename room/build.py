@@ -675,17 +675,28 @@ def page_data() -> str:
     for r in rows:
         official[r["abbr"]] = r
     diffs = []
+    missing = []
+    # The official page writes AZ where the model writes ARI. Normalise before comparing:
+    # a missing key used to render a false "drift" badge. Only map to codes the model
+    # actually uses — it says LA, not LAR.
+    ALIAS = {"AZ": "ARI", "ARZ": "ARI", "WSH": "WAS", "JAC": "JAX", "CLV": "CLE",
+             "BLT": "BAL", "LA": "LA", "LAR": "LA"}
     for abbr, r in official.items():
-        s = snapmap.get(abbr)
+        s = snapmap.get(ALIAS.get(abbr, abbr))
         if not s:
+            missing.append(abbr)
             continue
         if (str(s["w"]), str(s["l"]), str(s["t"])) != (r["w"], r["l"], r["t"]):
             diffs.append((abbr, r, s))
     trows = []
     for r in rows:
-        s = snapmap.get(r["abbr"], {})
-        drift = (str(s.get("w")), str(s.get("l")), str(s.get("t"))) != (r["w"], r["l"], r["t"])
-        mark = badge("drift", "bad") if drift else badge("match", "ok")
+        s = snapmap.get(ALIAS.get(r["abbr"], r["abbr"]), {})
+        if not s:
+            mark = badge("no model row", "warn")
+        elif (str(s.get("w")), str(s.get("l")), str(s.get("t"))) != (r["w"], r["l"], r["t"]):
+            mark = badge("drift", "bad")
+        else:
+            mark = badge("match", "ok")
         trows.append([e(r["abbr"]), f'{r["w"]}-{r["l"]}-{r["t"]}', r["pct"], r["pf"], r["pa"], r["net"], mark,
                       f'<a href="{e(r["source_url"])}" rel="noopener">NFL</a>'])
     # fixtures
@@ -698,6 +709,20 @@ def page_data() -> str:
                       e(f["network"]), e(f["result"]),
                       f'<a href="{e(f["source_url"])}" rel="noopener">NFL schedule</a>'])
     finished = sum(1 for f in fix if "FINAL" in f["result"])
+    if diffs:
+        _names = ", ".join(d[0] for d in diffs)
+        recon_line = (f'<strong>{len(diffs)} club(s) drift from the committed snapshot.</strong> '
+                      f'{_names} changed after the model data was built at {e(snap["generated_at"])}. '
+                      'The official values are below; the site\'s own pages catch up on the next '
+                      'collector run. See <a href="flagged.html#F-101">F-101</a>.')
+    elif missing:
+        recon_line = (f'<strong>0 clubs drift.</strong> {len(missing)} official row(s) could not be '
+                      f'matched to a model row by abbreviation ({e(", ".join(missing))}); they are '
+                      'labelled "no model row" rather than counted as a match.')
+    else:
+        recon_line = ('<strong>All 32 clubs match the committed snapshot exactly</strong> on wins, '
+                      'losses and ties, after normalising the official page\'s AZ code to '
+                      'the model\'s ARI (LA is spelled the same on both). Nothing to reconcile today.')
     body = f"""
 <h2>2026 standings, captured today</h2>
 <p>Read from the official division standings page at <span class="mono">2026-11-13T12:05Z</span> and
@@ -706,11 +731,7 @@ net points, and the league's points-for total equals its points-against total at
 <strong>{sum(int(r['pf']) for r in rows)}</strong> each. That arithmetic is what makes
 <strong>{int((sum(int(r['w'])+int(r['l'])+int(r['t']) for r in rows))/2)} games</strong> the right
 number rather than a copied one.</p>
-<div class="warnbox"><strong>{len(diffs)} clubs drift from the committed snapshot.</strong>
-{", ".join(d[0] for d in diffs)} changed after the site's data was built at
-{e(snap["generated_at"])}, because the Week 10 Thursday game finished afterwards. The official
-values are below; the site's own pages still show the older ones until the collector re-runs.
-See <a href="flagged.html#F-101">F-101</a>.</div>
+<div class="{'warnbox' if diffs or missing else 'okbox'}">{recon_line}</div>
 {table(["Club", "W-L-T", "Pct", "PF", "PA", "Net", "vs committed snapshot", "Source"], trows,
        caption="Official standings · https://www.nfl.com/standings/division/2026/REG",
        num_cols=(1, 2, 3, 4, 5), src_col=7)}

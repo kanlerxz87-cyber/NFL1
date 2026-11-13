@@ -455,6 +455,33 @@
     }
    ],
    "settle": "Both generators now carry the entry; a future page added outside them will be caught by check_site.py."
+  },
+  {
+   "id": "F-121",
+   "severity": "material",
+   "status": "resolved",
+   "area": "Verified data",
+   "title": "A club-code mismatch made Arizona read as a standings drift, and the page still asserted the drift after it was gone",
+   "detail": "The official standings page writes the Cardinals as AZ and the Rams as LA; the model writes ARI and LAR. room/build.py looked the official code up directly, got nothing, and fell through to the comparison test, which rendered a red 'drift' badge against an empty model row. The summary line above the table still read '0 clubs drift', so the page contradicted itself: 0 in prose, 1 in red. Both were wrong. Fixed with an explicit alias map restricted to codes the model really uses, and an honest third state: a row with no model counterpart now reads 'no model row' in amber rather than being counted as either a match or a drift. The summary sentence is now generated from the outcome instead of hard-coded, so it cannot assert a drift that is not there. After the fix all 32 clubs match on W-L-T.",
+   "official": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/blob/main/room/build.py",
+   "here": [
+    {
+     "t": "official page",
+     "u": "https://www.nfl.com/standings/division/2026/REG",
+     "note": "Cardinals written AZ"
+    },
+    {
+     "t": "model",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/blob/main/data/model/snapshot.json",
+     "note": "Cardinals written ARI"
+    },
+    {
+     "t": "rendered",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/blob/main/room/data.html",
+     "note": "now reads 'All 32 clubs match'"
+    }
+   ],
+   "settle": "Alias map plus a generated summary line. The same trap is already documented for the injury model, which uses AZ while the official feed uses ARI \u2014 the two directions of the same mismatch."
   }
  ]
 }
