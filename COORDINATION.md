@@ -2821,10 +2821,10 @@ instead, as in every earlier session.
 
 | ID | Task | Status | Owner | File scope | Evidence / notes |
 |---|---|---|---|---|---|
-| V01 | Read the board, claim this scope, push the claim before any other edit | in progress | `c927cd40` | `COORDINATION.md` | this section |
+| V01 | Read the board, claim this scope, push the claim before any other edit | **done** | `c927cd40` | `COORDINATION.md` | claim pushed as `2f32131` before any other file was touched |
 | V02 | Fresh, independent official-source re-verification (nfl.com injury report, Week 10 schedule and byes, league/division standings) against the committed data layers, item by item, with a source link for every checked value | in progress | `c927cd40` | `docs/review/session-c927cd40.md` | new pass dated 2026-11-13; prior sessions verified on 2026-11-12 |
 | V03 | Repo-wide link + source-link audit across **all** published site generations (root, `pages/`, `docs/`, `dashboard/`, `lab/`, `research/`, `referee/`, `verified-lab/`) | in progress | `c927cd40` | `tools/check_all_sites.py` | new read-only checker; today only `index.html` + `pages/` are covered by the CI gates |
-| V04 | **Depth-string (2nd / 3rd / 4th string) deficiency model for both units**, joined to the official game designations, published as a table with a source link on every row | in progress | `c927cd40` | `pipeline/build_all.py`, `pipeline/gen_site.py`, `data/model/depth_strings.json`, `pages/depth-strings.html` | today `data/model/availability.json` publishes `depth_rank` = 1 only and always names the #2 player as the replacement, so "who is the 3rd/4rd string and is the 2nd string also hurt" is not answerable from the site |
+| V04 | **Depth-string (2nd / 3rd / 4th string) deficiency model for both units**, joined to the official game designations, published as a table with a source link on every row | **code complete (CI must build the data)** | `c927cd40` | `pipeline/build_all.py`, `pipeline/gen_site.py`, `analysis/depth_strings.py`, `tests/test_depth_strings.py`, `scripts/verified/normalize_nav.py` (one CANON line), `data/model/depth_strings.json` (CI-built), `pages/depth-strings.html` | 15 unit tests plus a local end-to-end integration run (real official injury report joined to synthetic depth parquets; source/label assertions all pass); `gen_site` renders the page; `tools/check_committed_site.py` and `scripts/verified/check_site.py` both pass; `depth_strings.json` can only be built in CI because `build/raw/` inputs are release assets this sandbox cannot download, so `collect-data.yml` must run after the push |
 | V05 | Re-run every gate, regenerate every site generation, confirm zero broken links and zero source-less table rows | unclaimed | `c927cd40` | — | |
 | V06 | PR → merge → confirm the GitHub Pages deploy → record the result here | unclaimed | `c927cd40` | `COORDINATION.md` | |
 | V07 | Integrate the two open coordination-only PRs (#43, #37) without discarding either record | unclaimed | `c927cd40` | `COORDINATION.md` | both branches are additions at the end of the board |
@@ -2836,3 +2836,18 @@ instead, as in every earlier session.
 `data/session-*` directories.
 
 _This claim is committed and pushed before any other file is touched, per the brief._
+
+**Scope additions logged during V04 (additive, no other session's content altered):**
+
+1. `analysis/depth_strings.py` + `tests/test_depth_strings.py` — the pure depth-string model
+   with its unit tests, split out of `pipeline/build_all.py` for testability. New files only;
+   no existing file under `analysis/` was edited.
+2. `scripts/verified/normalize_nav.py` — **one line**: `("depth-strings.html", "Depth Strings")`
+   added to `CANON`. Required because `pages.yml` runs `normalize_nav.py` on every PR; without
+   the entry the normalizer would strip the new nav link from all pages and
+   `scripts/verified/check_site.py` would then fail with the new page unreachable.
+3. `pipeline/gen_site.py` — beyond the page itself: a `Depth Strings` NAV entry, a row in the
+   All Sections index (reachability for `check_site`), a `desig_badge()` helper for Out/Doubtful/
+   Questionable badges, and an "already started" fixtures table on the lines page
+   (`data/model/snapshot.json` gains `target_week`, `kickoff_utc`, `already_started` from the
+   `build_all.py` stage-A fix — same scope).
