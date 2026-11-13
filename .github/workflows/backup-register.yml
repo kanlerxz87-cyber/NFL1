@@ -1,0 +1,60 @@
+name: Backup register (official nfl.com rosters)
+
+# Runs in GitHub Actions because the Arena sandbox cannot reach nfl.com. Scrapes the 32 official
+# club roster pages, joins them to the committed Week 10 official injury report, and commits only
+# data/backup-register/ and pages/backup-register.html. Commits carry [skip ci] so they never loop.
+on:
+  workflow_dispatch:
+  push:
+    branches: ["arena/cf97db19-nfl1"]
+    paths:
+      - "tools/scrape_rosters.py"
+      - "tools/build_backup_register.py"
+      - ".github/workflows/backup-register.yml"
+      - "data/model/official_injuries.json"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: backup-register-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  register:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: python -m pip install --quiet requests beautifulsoup4 lxml
+      - name: Scrape the official club roster pages (nfl.com)
+        run: python tools/scrape_rosters.py
+      - name: Gate - all 32 official rosters must parse
+        run: |
+          python - <<'PY'
+          import json, sys
+          d = json.load(open("data/backup-register/rosters_2026.json"))
+          c = d["counts"]
+          print(c)
+          if c["clubs_parsed"] != 32 or c["row_warnings"] != 0:
+              print("GATE FAILED: expected 32 clubs parsed with no row warnings")
+              sys.exit(1)
+          PY
+      - name: Build the backup register from the official injury report and rosters
+        run: python tools/build_backup_register.py
+      - name: Commit the register
+        run: |
+          git config user.name "nfl1-data-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/backup-register pages/backup-register.html
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "data: backup register from official nfl.com rosters [skip ci]"
+            git push origin HEAD:${{ github.ref_name }}
+          fi
