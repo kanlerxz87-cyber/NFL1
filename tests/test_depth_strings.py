@@ -148,6 +148,23 @@ class TestDepthStrings(unittest.TestCase):
         r = depth_strings.build_depth_strings([chain()], st)[0]
         self.assertEqual(r["projected_string_label"], "1st string (starter not Out)")
         self.assertEqual(r["string_if_doubtful_sits_label"], "2nd string (1 listed unavailable)")
+        # A Doubtful starter is not "unavailable" (that word means official Out on the
+        # page); he is counted as at risk instead.
+        self.assertFalse(r["starter_unavailable"])
+        self.assertTrue(r["starter_at_risk"])
+
+    def test_out_starter_is_unavailable_not_at_risk(self):
+        st = dict([status("NE", "Carlton Davis III", game="Out")])
+        r = depth_strings.build_depth_strings([chain()], st)[0]
+        self.assertTrue(r["starter_unavailable"])
+        self.assertFalse(r["starter_at_risk"])
+
+    def test_dnp_practice_starter_is_at_risk(self):
+        st = dict([status("NE", "Carlton Davis III",
+                          practice="Did Not Participate In Practice")])
+        r = depth_strings.build_depth_strings([chain()], st)[0]
+        self.assertFalse(r["starter_unavailable"])
+        self.assertTrue(r["starter_at_risk"])
 
 
 if __name__ == "__main__":

@@ -198,8 +198,19 @@ def build_depth_strings(
             "next_man_up": next_up_player,
             "out_ranks": out_ranks,
             "uncertain_ranks": uncertain_ranks,
-            "starter_unavailable": bool(rank1 and starter_designation in BLOCKED),
+            # "Unavailable" means the official report says Out — the same rule the page's
+            # KPI and notes state. Doubtful/Questionable starters are counted separately
+            # as at risk: they still project to play.
+            "starter_unavailable": bool(rank1 and starter_designation in OUT_STATUSES),
+            "starter_at_risk": bool(
+                rank1 and (
+                    starter_designation in UNCERTAIN_STATUSES
+                    or (not rank1["game_status"]
+                        and rank1["practice_status"] == "Did Not Participate In Practice"))),
             "chain": chain,
+            # Where the chain itself came from (the official club chart), alongside the
+            # designation source on `source` (the official injury report).
+            "chart_source": ch.get("chart_source"),
             "source": "https://www.nfl.com/injuries/",
         })
 
@@ -215,6 +226,7 @@ def summarise_by_club(rows: list[dict]) -> list[dict]:
             "team": r["team"],
             "positions_tracked": 0,
             "positions_starter_unavailable": 0,
+            "positions_starter_at_risk": 0,
             "positions_down_to_2nd": 0,
             "positions_down_to_3rd": 0,
             "positions_down_to_4th_or_beyond": 0,
@@ -232,6 +244,8 @@ def summarise_by_club(rows: list[dict]) -> list[dict]:
                 c["defensive_positions_starter_unavailable"] += 1
             elif unit.startswith("off"):
                 c["offensive_positions_starter_unavailable"] += 1
+        if r.get("starter_at_risk"):
+            c["positions_starter_at_risk"] += 1
         if s == 2:
             c["positions_down_to_2nd"] += 1
         elif s == 3:
