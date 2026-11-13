@@ -32,6 +32,9 @@ CANON = [
     ("review.html", "Review"),
     ("executive.html", "Executive Summary (companion)"),
     ("props.html", "Player Props"),
+    # Session ca779bcc-nfl1: one additive entry. The strength/ sub-site has its own
+    # nav; from pages/ it is one level up, so the href is expanded before use.
+    ("../strength/index.html", "SOS Study"),
 ]
 
 
@@ -43,6 +46,9 @@ def build(page_name: str, is_index: bool) -> str:
             target = "index.html" if href == "index.html" else f"pages/{href}"
         else:
             target = "../index.html" if href == "index.html" else href
+        # an entry that already carries a parent prefix is used verbatim
+        if href.startswith("../"):
+            target = "../" + href[3:] if not is_index else href[3:]
         cls = ' class="active"' if href == page_name else ""
         items.append(f'    <a href="{target}"{cls}>{label}</a>')
     return "<nav>\n" + "\n".join(items) + "\n  </nav>"

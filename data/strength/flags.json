@@ -1,0 +1,63 @@
+{
+ "generated_at": "2026-11-13T13:14:06+00:00",
+ "count": 7,
+ "rule": "Every flag carries the official link that shows the difference and the value seen on both sides.",
+ "flags": [
+  {
+   "id": "F-SOS-STD-NYG",
+   "severity": "high",
+   "title": "Standings row differs from the official page: NYG",
+   "detail": "5 field(s) differ: l (official 3 vs repository 2), pf (official 203 vs repository 182), pa (official 196 vs repository 172), pct (official 0.611 vs repository 0.688), streak (official 1L vs repository 2W). The official page (https://www.nfl.com/standings/league/2026/reg) was read on 2026-11-13 and the committed snapshot is stamped 2026-11-12T04:31Z, before the Week 10 Thursday game.",
+   "source": "https://www.nfl.com/standings/league/2026/reg",
+   "status": "open"
+  },
+  {
+   "id": "F-SOS-STD-WAS",
+   "severity": "high",
+   "title": "Standings row differs from the official page: WAS",
+   "detail": "5 field(s) differ: w (official 3 vs repository 2), pf (official 196 vs repository 172), pa (official 223 vs repository 202), pct (official 0.389 vs repository 0.313), streak (official 1W vs repository 1L). The official page (https://www.nfl.com/standings/league/2026/reg) was read on 2026-11-13 and the committed snapshot is stamped 2026-11-12T04:31Z, before the Week 10 Thursday game.",
+   "source": "https://www.nfl.com/standings/league/2026/reg",
+   "status": "open"
+  },
+  {
+   "id": "F-SOS-W10-01",
+   "severity": "high",
+   "title": "Week 10 fixture listed as upcoming after the game went final",
+   "detail": "data/verified/week10_fixtures_2026.csv lists WAS @ NYG on 2026-11-12 as a fixture. nfl.com shows 'Commanders 24, Giants 21, FINAL'. The 14-fixture set and the four byes are otherwise identical to the official page.",
+   "source": "https://www.nfl.com/schedules/2026/reg10",
+   "status": "open"
+  },
+  {
+   "id": "F-SOS-DATA-01",
+   "severity": "resolved",
+   "title": "Provenance pin described the wrong file and now pins the committed extract",
+   "detail": "ROOT CAUSE (verified): s9cb/collect.py pinned the sha256 of the raw download in build/raw/ (2,190,032 bytes / 50939c24d43e78f3...) while committing a filtered, re-serialised extract (1,665,522 bytes / 483beddbdf226901...), so the pin could never match. Fixed: the collector now records committed_sha256/committed_bytes for data/s9cb/ alongside the raw pin, and the committed hash reproduces exactly with `sha256sum data/s9cb/games.csv`. Row count intact (7,239) and every result reconciles.",
+   "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+   "status": "resolved (collector fixed; next refresh writes it automatically)"
+  },
+  {
+   "id": "F-SOS-MODEL-01",
+   "severity": "medium",
+   "title": "Home-field advantage fitted near zero for the 2026 sample",
+   "detail": "The ridge fit gives hfa -0.50 points on 136 games, against roughly +2 points in every earlier season. This is a computed property of a small 2026 sample (home win rate 49.3%), not a data error; it is flagged because it materially changes this week's own lines.",
+   "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+   "status": "open"
+  },
+  {
+   "id": "F-SOS-INJ-01",
+   "severity": "high",
+   "title": "Committed injury transcription is materially incomplete against the official page",
+   "detail": "The committed hand transcription has 254 rows; the official nfl.com scrape captured at 2026-11-13T13:04:40+00:00 has 296. 55 players listed on the official page are absent from the transcription and 13 transcription players are absent from the official page. Among players present in both, 37 practice values, 3 injury names and 3 game statuses differ. This is a transcription-accuracy defect, not page drift: the scrape predates the transcription and already contains the values the transcription lacks. Non-practice differences: DET Kerby Joseph injury: official 'Knee' vs transcription '(blank)'; DET Kerby Joseph game: official 'Out' vs transcription '(blank)'; DET Cade Mays injury: official 'Ankle' vs transcription '(blank)'; DET Cade Mays game: official 'Out' vs transcription '(blank)'; DET D.J. Reed injury: official 'Hip' vs transcription '(blank)'; DET D.J. Reed game: official 'Out' vs transcription '(blank)'",
+   "source": "https://www.nfl.com/injuries/",
+   "status": "open"
+  },
+  {
+   "id": "F-SOS-SITE-01",
+   "severity": "medium",
+   "title": "Landing page says 'week 9 complete' while the official schedule has moved past it",
+   "detail": "index.html KPI subtitle reads 'week 9 complete'. nfl.com shows Week 10 in progress with the Thursday game final.",
+   "source": "https://www.nfl.com/schedules/2026/reg10",
+   "status": "open"
+  }
+ ]
+}

@@ -1,0 +1,48 @@
+{
+ "source": "data/s9cb/player_week.csv (nflverse weekly player stats)",
+ "price_status": "BLANK: no official or book price exists in this repository's sources for any player prop, so no prop combo is scored and no profit is claimed.",
+ "register": [
+  {
+   "id": "P-01",
+   "relationship": "Club passing yards vs same-club receiver yards (same game)",
+   "value": {
+    "n": 3990,
+    "r": 0.8426,
+    "ci95": [
+     0.8334,
+     0.8514
+    ],
+    "p_value": 0.0,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "id": "P-02",
+   "relationship": "Club receiver yards vs same-club rushing yards (same game)",
+   "value": {
+    "n": 3990,
+    "r": -0.1765,
+    "ci95": [
+     -0.2064,
+     -0.1463
+    ],
+    "p_value": 0.0,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  },
+  {
+   "id": "P-03",
+   "relationship": "Club receiver yards vs opponent rushing yards (same game)",
+   "value": {
+    "n": 3999,
+    "r": -0.0275,
+    "ci95": [
+     -0.0584,
+     0.0035
+    ],
+    "p_value": 0.082154,
+    "method": "Pearson r, Fisher-z 95% CI, two-sided t test (normal approximation for p)"
+   }
+  }
+ ]
+}
