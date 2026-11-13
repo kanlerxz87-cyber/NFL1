@@ -1,0 +1,213 @@
+{
+ "generated_at": "2026-11-12T22:43:34+00:00",
+ "official_sources": {
+  "standings": "https://www.nfl.com/standings/league/2026/reg",
+  "injuries": "https://www.nfl.com/injuries/",
+  "schedule": "https://www.nfl.com/schedules/2026/REG10",
+  "depth_charts": "club official depth-chart pages (URL per row in data/evidence/depth_charts.json)"
+ },
+ "result": "PASS",
+ "counts": {
+  "passed": 20,
+  "flagged": 8,
+  "failed": 0
+ },
+ "checks": [
+  {
+   "area": "A. fixture",
+   "check": "official standings: NET PTS = PF - PA on every row",
+   "status": "PASS",
+   "rows_checked": 32,
+   "detail": ""
+  },
+  {
+   "area": "A. fixture",
+   "check": "official standings: 32 clubs, no duplicates",
+   "status": "PASS",
+   "rows_checked": 32,
+   "detail": ""
+  },
+  {
+   "area": "A. fixture",
+   "check": "official injury report: club sections match section order",
+   "status": "PASS",
+   "rows_checked": 279,
+   "detail": "26 clubs, 279 player rows"
+  },
+  {
+   "area": "A. fixture",
+   "check": "every listed club has at least one transcribed row",
+   "status": "PASS",
+   "rows_checked": 26,
+   "detail": ""
+  },
+  {
+   "area": "A. fixture",
+   "check": "clubs marked 'No Injuries Reported' have no player rows",
+   "status": "PASS",
+   "rows_checked": 2,
+   "detail": ""
+  },
+  {
+   "area": "A. fixture",
+   "check": "official schedule: 14 games in week 10",
+   "status": "PASS",
+   "rows_checked": 14,
+   "detail": ""
+  },
+  {
+   "area": "A. fixture",
+   "check": "schedule: 14 games (28 clubs) + 4 byes = 32 clubs",
+   "status": "PASS",
+   "rows_checked": 18,
+   "detail": ""
+  },
+  {
+   "area": "B1. standings",
+   "check": "data/standings.json vs official standings",
+   "status": "PASS",
+   "rows_checked": 32,
+   "detail": "every W/L/T/PF/PA cell matches the official page"
+  },
+  {
+   "area": "B1. standings",
+   "check": "data/verified/standings_2026.csv vs official standings",
+   "status": "PASS",
+   "rows_checked": 32,
+   "detail": "every W/L/T/PF/PA cell matches the official page"
+  },
+  {
+   "area": "B1. standings",
+   "check": "data/verified/standings_2026_reg.tsv vs official standings",
+   "status": "PASS",
+   "rows_checked": 32,
+   "detail": "every W/L/T/PF/PA cell matches the official page"
+  },
+  {
+   "area": "B2. injuries",
+   "check": "data/model/official_injuries.json (automated scrape)",
+   "status": "FLAG",
+   "rows_checked": 295,
+   "detail": "value mismatches: NE Cameron Latu practice: repo='Limited Participation in Practice' official='Did Not Participate In Practice'; NE Walter Rouse practice: repo='Limited Participation in Practice' official='Did Not Participate In Practice'; NE Brenden Schooler practice: repo='Limited Participation in Practice' official='Did Not Participate In Practice'; NE Rhamondre Stevenson practice: repo='Limited Participation in Practice' official='Did Not Participate In Practice'; DET Brian Branch practice: repo='Full Participation in Practice' official='Limited Participation in Practice' | repo rows not on official page: [('KC', 'Jaydn Ott'), ('ATL', 'Kendal Daniels'), ('ATL', 'Jawaan Taylor'), ('ATL', 'Cameron Thomas'), ('BUF', 'Sam Franklin Jr.')]"
+  },
+  {
+   "area": "B2. injuries",
+   "check": "data/verified/injury_report_2026_week10.tsv (hand transcription)",
+   "status": "FLAG",
+   "rows_checked": 254,
+   "detail": "value mismatches: IND A.J. Haulcy practice: repo='Did Not Participate In Practice' official='Full Participation in Practice'; IND Jonathan Taylor practice: repo='Limited Participation in Practice' official='Full Participation in Practice'; IND Jerry Tillery practice: repo='Limited Participation in Practice' official='Did Not Participate In Practice'; IND Charvarius Ward practice: repo='Did Not Participate In Practice' official='Full Participation in Practice' | 25 official rows absent from repo, e.g. [('AZ', 'Andrew Wingard'), ('CIN', 'DJ Turner II'), ('CIN', 'Dylan Fairchild'), ('CIN', 'Jonathan Allen'), ('CIN', 'Kyle Dugger')]"
+  },
+  {
+   "area": "B2. injuries",
+   "check": "data/injuries.json (companion transcription)",
+   "status": "FLAG",
+   "rows_checked": 61,
+   "detail": "218 official rows absent from repo, e.g. [('AZ', 'Andrew Wingard'), ('AZ', 'Bam Knight'), ('AZ', 'Budda Baker'), ('AZ', 'Dante Stills'), ('AZ', 'Hjalte Froholdt')]"
+  },
+  {
+   "area": "B2. injuries",
+   "check": "per-club row counts: scrape vs official page",
+   "status": "FLAG",
+   "rows_checked": 279,
+   "detail": "ATL: 9/6; BUF: 12/11; CIN: 8/4; CLE: 12/11; DAL: 18/16; KC: 12/11; MIA: 11/10; NO: 12/10; NYJ: 8/7"
+  },
+  {
+   "area": "B2. injuries",
+   "check": "per-club row counts: tsv vs official page",
+   "status": "FLAG",
+   "rows_checked": 279,
+   "detail": "AZ: 13/14; CIN: 0/4; IND: 11/13; JAX: 10/11; SEA: 0/15; SF: 10/12"
+  },
+  {
+   "area": "B2. injuries",
+   "check": "per-club row counts: companion vs official page",
+   "status": "FLAG",
+   "rows_checked": 279,
+   "detail": "AZ: 0/14; BUF: 0/11; CAR: 0/12; CIN: 0/4; CLE: 0/11; DAL: 0/16; GB: 0/16; HOU: 0/13; IND: 0/13; JAX: 0/11; LA: 0/10; LV: 0/4; MIA: 0/10; MIN: 0/9; NO: 0/10; NYJ: 0/7; PIT: 0/8; SEA: 0/15; SF: 0/12; TEN: 0/12"
+  },
+  {
+   "area": "B3. schedule",
+   "check": "data/model/snapshot.json fixtures vs official schedule",
+   "status": "PASS",
+   "rows_checked": 14,
+   "detail": "date, kickoff time and source link match the official page"
+  },
+  {
+   "area": "B3. schedule",
+   "check": "data/verified/week10_fixtures_2026.csv vs official schedule",
+   "status": "PASS",
+   "rows_checked": 14,
+   "detail": "all 14 games match date and kickoff time"
+  },
+  {
+   "area": "B3. schedule",
+   "check": "published own-line dates vs official schedule",
+   "status": "PASS",
+   "rows_checked": 14,
+   "detail": ""
+  },
+  {
+   "area": "B4. depth",
+   "check": "data/depth_chart.json vs club official depth charts",
+   "status": "FLAG",
+   "rows_checked": 107,
+   "detail": "KC Emmett Johnson: official rank 1, repo [2, 2, 2]; KC Cyrus Allen: official rank 2, repo [3]; absent: ['KC Josh Downs (rank 3)', 'KC Marcus Harris (rank 3)', 'SEA Cooper Kupp (rank 1)', 'SEA Rashid Shaheed (rank 1)', 'SEA Irvin Charles (rank 3)', 'SEA Charles Cross (rank 1)']"
+  },
+  {
+   "area": "C. convention",
+   "check": "market line convention documented from data",
+   "status": "PASS",
+   "rows_checked": 1,
+   "detail": "Positive correlation proves the mirrored closing line is expressed as points the HOME team is expected to win by (positi"
+  },
+  {
+   "area": "C. convention",
+   "check": "published edge equals model minus market",
+   "status": "PASS",
+   "rows_checked": 14,
+   "detail": "every edge row reproduces from my_home_line - market_home_line"
+  },
+  {
+   "area": "C. convention",
+   "check": "games where model and market favour different sides (sign ambiguity risk)",
+   "status": "FLAG",
+   "rows_checked": 1,
+   "detail": "NE@DET"
+  },
+  {
+   "area": "D. availability",
+   "check": "club starter-out counts reproduce from player rows",
+   "status": "PASS",
+   "rows_checked": 32,
+   "detail": ""
+  },
+  {
+   "area": "D. availability",
+   "check": "all official publishing clubs appear in availability table",
+   "status": "PASS",
+   "rows_checked": 26,
+   "detail": ""
+  },
+  {
+   "area": "D. availability",
+   "check": "practice-only rows are not labelled as game designations",
+   "status": "PASS",
+   "rows_checked": 111,
+   "detail": ""
+  },
+  {
+   "area": "E. counts",
+   "check": "games played = half the sum of club games",
+   "status": "PASS",
+   "rows_checked": 136,
+   "detail": "official standings imply 136"
+  },
+  {
+   "area": "E. counts",
+   "check": "starters flagged matches availability detail",
+   "status": "PASS",
+   "rows_checked": 111,
+   "detail": ""
+  }
+ ]
+}

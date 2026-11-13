@@ -20,6 +20,7 @@ DATA = os.path.join(ROOT, "data", "model")
 NAV = [
     ("index.html", "Overview"),
     ("pages/sections.html", "All Sections"),
+    ("web/dashboard.html", "Decision Dashboard"),
     ("pages/lines.html", "My Lines"),
     ("pages/strategies.html", "Strategy Lab"),
     ("pages/injuries.html", "Injuries & Depth"),
@@ -102,6 +103,22 @@ def table(headers, rows, cls="", note=None) -> str:
     return out
 
 
+def market_cell(g) -> str:
+    """Render the market line in the same signed home convention as the model line.
+
+    The previous build printed a bare float here (e.g. -9.5 for LA @ ARI) beside a signed
+    home line (ARI +5.2). A reader subtracting them across conventions saw a 14.7-point gap
+    where the real difference was 4.27. Printing the home-signed number and the away-signed
+    number from one source value removes the ambiguity without inventing anything.
+    """
+    mk = g.get("market_home_line")
+    if mk is None:
+        return num(None)
+    home, away = g["home"], g["away"]
+    return (f'<span class="mono">{esc(home)} {mk:+.1f}</span>'
+            f'<br><span class="sub">{esc(away)} {-mk:+.1f}</span>')
+
+
 def signal_cell(status) -> str:
     # Labels describe the size of the model-market gap only. None is a validated signal:
     # no strategy has passed the eight gates, so no label may read as a recommendation.
@@ -136,7 +153,9 @@ def page(path: str, title: str, body: str, subtitle: str = "", generated: str = 
     links = []
     for href, label in NAV:
         cls = ' class="active"' if href.split("/")[-1] == current else ""
-        links.append(f'<a href="{prefix}{href}"{cls}>{esc(label)}</a>')
+        # NAV entries are written relative to the repository root; pages/ sits one level down
+        target = f"{prefix}{href}" if path.startswith("pages/") else href
+        links.append(f'<a href="{target}"{cls}>{esc(label)}</a>')
     nav = "".join(links)
     sub = f'<p class="standfirst">{subtitle}</p>' if subtitle else ""
     stamp = (f'<p class="timestamp">Data built {esc(generated)} · every value links to its source</p>'
@@ -228,8 +247,12 @@ def overview(snap, dash, lines, strat, avail, props, verif):
     lines_tbl = table(
         ["Matchup", "My line", "My total", "Market line", "Market total",
          "Edge (line)", "Edge (total)", "Signal", "Source"],
-        rows, note=("Lines are the favourite's spread (NYG -2.6 = NYG favoured by 2.6). Edges are model "
-                    "minus market. Labels give the size of the gap only: "
+        rows, note=("Lines are the favourite's spread (NYG -2.6 = NYG favoured by 2.6). Edges are "
+                    "model minus market computed on the home-margin scale, so subtracting the two "
+                    "printed columns returns the opposite sign of the printed edge. The market "
+                    "number is a consensus closing line from the mirrored feed, not a book price, "
+                    "and no odds feed is connected: nothing here is a recommendation. Labels give "
+                    "the size of the gap only: "
                     f"{counts.get('strategies_passing_all_gates', 0)} of "
                     f"{counts.get('strategies_tested', 0)} strategies pass all gates, so no line here "
                     "is a validated signal. See the Lines page for error bands and the accuracy table."))
@@ -283,7 +306,8 @@ def overview(snap, dash, lines, strat, avail, props, verif):
     prices them against the consensus closing line, and refuses to promote a strategy that
     cannot clear eight validation gates. Every table row carries a link to the page it came from.</p>
     <div class="hero-actions">
-      <a class="btn" href="pages/lines.html">See this week's own lines</a>
+      <a class="btn" href="web/dashboard.html">Open the decision dashboard</a>
+      <a class="btn ghost" href="pages/lines.html">See this week's own lines</a>
       <a class="btn ghost" href="pages/executive.html">Read the executive summary</a>
     </div>
   </div>
@@ -298,6 +322,25 @@ def overview(snap, dash, lines, strat, avail, props, verif):
 </section>
 
 <section class="kpis">{kpis}</section>
+
+<section class="panel">
+  <div class="panel-head">
+    <h2>Start here: what can be decided, and what cannot</h2>
+    <a href="web/dashboard.html">Open the decision dashboard →</a>
+  </div>
+  <p class="note">The decision dashboard separates the open items into decisions that need only a
+  choice, questions blocked on information that no connected source publishes, and
+  contradictions between an official page and this repository — each with the official link.
+  It also states plainly why the own lines are not presented as edges: out of sample the model
+  is 9.98 points of error against the closing line's 9.485, and a fitted blend puts a negative
+  weight on the model.</p>
+  <div class="hero-actions">
+    <a class="btn" href="web/dashboard.html">Where the project stands</a>
+    <a class="btn ghost" href="web/decisions.html">Decisions &amp; missing information</a>
+    <a class="btn ghost" href="web/suggestions.html">Review suggestions and pick a path</a>
+    <a class="btn ghost" href="web/flag-register.html">Flagged for Review</a>
+  </div>
+</section>
 
 <section class="panel">
   <div class="panel-head">

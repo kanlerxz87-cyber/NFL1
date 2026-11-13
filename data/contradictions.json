@@ -1,0 +1,120 @@
+{
+ "_readme": "Machine-found contradictions between official NFL pages and the repository's own data. Each row links the official page and names the repository file. Produced by tools/verify_official.py; published on the Flagged for Review page.",
+ "generated_from": "data/audit/official_verification.json",
+ "items": [
+  {
+   "id": "X01",
+   "sev": "High",
+   "area": "Injury data",
+   "finding": "Four Indianapolis Colts practice cells disagree with the official page, and both repo datasets make the same four errors: A.J. Haulcy (page: Full; repo: DNP), Jonathan Taylor (page: Full; repo: Limited), Jerry Tillery (page: DNP; repo: Limited), Charvarius Ward (page: Full; repo: DNP).",
+   "official": "https://www.nfl.com/injuries/",
+   "repo_file": "data/model/official_injuries.json and data/verified/injury_report_2026_week10.tsv",
+   "impact": "Two independent extractions agreeing on a wrong value is the failure mode this project is built to catch. Any availability or prop number built on these four players inherits the error.",
+   "needs": "A second human read of the Colts section of the official page, then a corrected transcription plus a parser test.",
+   "blocks": "The availability table for IND, and any prop line for Taylor, Tillery or Ward."
+  },
+  {
+   "id": "X02",
+   "sev": "High",
+   "area": "Injury data",
+   "finding": "The automated scrape is missing three players the official page lists: BJ Green II (JAX, DE), CJ Allen (IND, LB), Grover Stewart (IND, DT). The page shows 279 player rows; the scrape captured 276.",
+   "official": "https://www.nfl.com/injuries/",
+   "repo_file": "data/model/official_injuries.json",
+   "impact": "A dropped row is invisible on the site: the player simply never appears, so no blank is rendered and nothing looks wrong.",
+   "needs": "Parser fix plus a completeness assertion (row count per club section) in the scrape stage.",
+   "blocks": "Completeness of the injury feed; the site now checks per-club counts and flags the gap."
+  },
+  {
+   "id": "X03",
+   "sev": "Medium",
+   "area": "Injury data",
+   "finding": "The hand transcription data/verified/injury_report_2026_week10.tsv is missing 25 official rows: the entire Seattle section (15 rows), the entire Cincinnati section (4), Dre Greenlaw and Christian McCaffrey (SF), Andrew Wingard (AZ), plus the three rows X02 names.",
+   "official": "https://www.nfl.com/injuries/",
+   "repo_file": "data/verified/injury_report_2026_week10.tsv",
+   "impact": "This file is used as a verification fixture. A fixture that silently drops whole clubs makes the feed it 'verifies' look better than it is.",
+   "needs": "Re-transcription of the five affected sections, or the fixture replaced by data/evidence/injuries_week10.json.",
+   "blocks": "Any claim that the automated feed was verified against an independent transcription."
+  },
+  {
+   "id": "X04",
+   "sev": "Medium",
+   "area": "Injury data",
+   "finding": "data/injuries.json holds 61 of the 279 official rows (it covers only the first eight club sections) but is presented next to full-coverage tables.",
+   "official": "https://www.nfl.com/injuries/",
+   "repo_file": "data/injuries.json",
+   "impact": "Reading it as a full report understates league-wide injuries by more than three quarters.",
+   "needs": "A coverage label on every page that renders it, or completion.",
+   "blocks": "Nothing, once labelled; it is a partial transcription by design."
+  },
+  {
+   "id": "X05",
+   "sev": "High",
+   "area": "Site generation",
+   "finding": "Two different generators both write index.html. tools/build.py writes a 'NFL1 decision dashboard' page and pipeline/gen_site.py writes an 'Overview \u00b7 NFL Decision Lab' page. Whichever CI job runs last decides what the site is.",
+   "official": "https://github.com/kanlerxz87-cyber/NFL1/tree/main",
+   "repo_file": "tools/build.py (page_home) and pipeline/gen_site.py (main)",
+   "impact": "Navigation, styling and the numbers on the landing page change depending on job order. A reader cannot know which build they are looking at.",
+   "needs": "One owner per page, enforced by a build check that fails when two generators claim the same file.",
+   "blocks": "Any statement about what the published landing page contains.",
+   "resolved_this_session": "tools/check_generators.py now parses every generator, and the landing page is generated once from a single entry point."
+  },
+  {
+   "id": "X06",
+   "sev": "High",
+   "area": "Freshness",
+   "finding": "The scheduled data job commits new data/model/*.json but never re-renders HTML, so the published pages keep the numbers from the last manual build. Proof: data/model/dashboard.json is stamped 2026-11-12T18:53 while the committed index.html says 'Data built 2026-11-12T05:07:59'. The live New England row reads Out 2 / practice-only 6; the same page regenerated from the committed data reads Out 1 / practice-only 7.",
+   "official": "https://kanlerxz87-cyber.github.io/NFL1/",
+   "repo_file": ".github/workflows/collect-data.yml and index.html",
+   "impact": "Every published number can be up to a day stale with no visible warning. A stale injury number is worse than a missing one because it looks current.",
+   "needs": "Render in the same job that commits the data, and a CI check that fails when a page stamp is older than the data stamp.",
+   "blocks": "Trust in every number on the site.",
+   "resolved_this_session": "The refresh job now renders and commits pages, and an automated stale-page gate fails the build on any mismatch."
+  },
+  {
+   "id": "X07",
+   "sev": "High",
+   "area": "Line conventions",
+   "finding": "On the Overview the market column is printed as a bare number (e.g. 2.5, -8.5, -9.5) next to a signed home-team model line, under a note that says 'positive line = home team favoured'. For LA @ ARI the model says ARI +5.2 while the market prints -9.5, which reads as a 14.7-point edge; the real difference is 4.27 points. The same framing appears on SEA @ LV and MIA @ IND.",
+   "official": "https://github.com/kanlerxz87-cyber/NFL1/releases/tag/schedules",
+   "repo_file": "data/model/lines.json and pipeline/gen_site.py",
+   "impact": "A reader can be shown a fabricated edge three times its real size. This is the single most decision-relevant defect found in this audit.",
+   "needs": "Print both numbers in the same convention, or print the market as an away-team number with an explicit label, plus a regression test.",
+   "blocks": "Every 'signal' badge on the landing page.",
+   "resolved_this_session": "The dashboard publishes market and model numbers in one stated convention, with a signed away-team column and a test that the printed edge equals the difference of the two printed numbers."
+  },
+  {
+   "id": "X08",
+   "sev": "Medium",
+   "area": "Depth charts",
+   "finding": "The league site publishes no depth chart: /teams/<club>/depth-chart returns the 404 'Flag on the Play' page for both clubs tested. Club sites do publish depth charts in string order, so the '1st/2nd/3rd/4th string' requirement is satisfiable, but only club by club.",
+   "official": "https://www.nfl.com/teams/seattle-seahawks/depth-chart",
+   "repo_file": "data/depth_chart.json and data/verified/depth_chart_probe.csv",
+   "impact": "Any league-wide starter/backup table currently rests on two transcribed clubs plus a weekly mirror. The site must say so rather than implying full coverage.",
+   "needs": "30 more club depth-chart transcriptions (or the weekly mirror, clearly labelled as a mirror).",
+   "blocks": "A league-wide backup-exposure index."
+  },
+  {
+   "id": "X09",
+   "sev": "Medium",
+   "area": "Depth charts",
+   "finding": "The repo's depth-chart rows put KC running back Kenneth Walker at 1st string and Emmett Johnson at 2nd; the club's official page lists Emmett Johnson 1st and Walker 3rd. Cyrus Allen is 3rd in the repo and 2nd on the club page.",
+   "official": "https://www.chiefs.com/team/depth-chart",
+   "repo_file": "data/depth_chart.json",
+   "impact": "A starter/backup label is the input to every 'next man up' claim, so a stale chart mislabels who is actually replacing whom.",
+   "needs": "Confirm which snapshot the mirror row came from, then either re-transcribe from the club page or label the mirror date.",
+   "blocks": "Next-man-up rows for Kansas City."
+  },
+  {
+   "id": "X10",
+   "sev": "Medium",
+   "area": "Naming",
+   "finding": "The same club appears under different codes across the repository: the league page prints AZ and LA, the model prints ARI and LA, the tsv prints AZ but is missing LAR entirely, and the README of one session notes LAR where another says LA.",
+   "official": "https://www.nfl.com/standings/league/2026/reg",
+   "repo_file": "data/standings.json, data/model/*.json, data/verified/*.tsv",
+   "impact": "Any join on club code silently drops rows. This audit's own first run hit it (ARI vs AZ produced a 32-row mismatch before the alias table was added).",
+   "needs": "One canonical code set, with an explicit alias table stored in the repository and tested.",
+   "blocks": "Every cross-dataset join.",
+   "resolved_this_session": "A single alias map is applied in the verification tool and reported, so a join can no longer drop a club silently."
+  }
+ ]
+}

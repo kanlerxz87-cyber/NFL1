@@ -30,7 +30,7 @@ OFFICIAL_DOMAINS = {
 }
 
 PAGES = [
-    "index.html", "executive-summary.html", "requirements.html", "questions.html",
+    "index.html", "governance.html", "executive-summary.html", "requirements.html", "questions.html",
     "suggestions.html", "strategy-lab.html", "leaderboard.html", "bet-types.html",
     "injuries.html", "depth-chart.html", "data-tables.html", "verification.html",
     "flagged.html", "deployment.html", "integration.html",
