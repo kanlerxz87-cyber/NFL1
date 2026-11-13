@@ -30,10 +30,18 @@ OFFICIAL_DOMAINS = {
 }
 
 PAGES = [
-    "index.html", "governance.html", "executive-summary.html", "requirements.html", "questions.html",
-    "suggestions.html", "strategy-lab.html", "leaderboard.html", "bet-types.html",
-    "injuries.html", "depth-chart.html", "data-tables.html", "verification.html",
-    "flagged.html", "deployment.html", "integration.html",
+    "index.html", "governance.html", "dashboard.html", "executive-summary.html", "requirements.html",
+    "questions.html", "suggestions.html", "strategy-lab.html", "leaderboard.html",
+    "bet-types.html", "injuries.html", "depth-chart.html", "data-tables.html",
+    "verification.html", "flagged.html", "deployment.html", "integration.html",
+    "legacy-site.html",
+    "pages/lines.html", "pages/strategies.html", "pages/injuries.html",
+    "pages/props.html", "pages/audit.html", "pages/evidence.html",
+    "pages/questions.html", "pages/suggestions.html", "pages/review.html",
+    "pages/executive.html", "pages/analysis.html", "pages/decisions.html",
+    "pages/data.html", "pages/verified.html", "pages/verified-lines.html",
+    "pages/availability.html", "pages/teams.html", "pages/standings.html",
+    "pages/flagged.html", "pages/executive-summary.html",
 ]
 DOCS = [
     "repo-audit.md", "verification.md", "requirements-analysis.md", "decision-gate.md",
@@ -51,17 +59,25 @@ def is_official(url):
 
 
 class Checker(HTMLParser):
+    """Collects data-table rows, page links and anchors.
+
+    A table counts as a data table when it is marked ``class="data-table"`` (the
+    governance registers) or when its header row declares a "Source" column (the
+    Decision Lab pages).  Both conventions put a source link on every data row, and
+    both are therefore held to the same rule.
+    """
+
     def __init__(self):
         super().__init__(convert_charrefs=True)
-        self.in_data_table = False
-        self.in_thead = False
-        self.table_depth = 0
-        self.rows = []
-        self.row = None
-        self.td = None
         self.links = []
         self.ids = set()
-        self.errors = []
+        self.rows = []
+        self._table = None
+        self._row = None
+        self._td = None
+        self._in_thead = False
+        self._headers = []
+        self._depth = 0
 
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
@@ -70,44 +86,57 @@ class Checker(HTMLParser):
         for key in ("href", "src"):
             if a.get(key):
                 self.links.append((tag, key, a[key]))
-        if tag == "thead" and self.in_data_table:
-            self.in_thead = True
-        if tag == "table" and "data-table" in (a.get("class") or "").split():
-            self.in_data_table = True
-            self.table_depth = 1
-        elif self.in_data_table and tag == "table":
-            self.table_depth += 1
-        if tag == "tr" and self.in_data_table and not self.in_thead:
-            self.row = dict(verified=True, links=[], cells=[], id=a.get("id"))
-            if a.get("data-verified") == "false":
-                self.row["verified"] = False
-        if tag == "a" and self.row is not None:
-            href = a.get("href") or ""
-            self.row["links"].append(href)
-            if self.td is not None:
-                self.td["links"].append(href)
-        if tag == "td" and self.row is not None:
+        if tag == "table":
+            self._depth += 1
+            if self._depth == 1:
+                classes = (a.get("class") or "").split()
+                self._table = {"data": "data-table" in classes, "headers": [], "rows": []}
+        elif tag == "thead" and self._table is not None:
+            self._in_thead = True
+            self._headers = []
+        elif tag == "th" and self._table is not None and self._in_thead:
+            self._td = dict(blank=False, value=False, text=[], links=[])
+        elif tag == "tr":
+            if self._in_thead:
+                self._headers = []
+            elif self._table is not None and self._table["data"]:
+                self._row = dict(verified=True, links=[], cells=[], id=a.get("id"))
+                if a.get("data-verified") == "false":
+                    self._row["verified"] = False
+        elif tag == "td" and self._row is not None:
             classes = (a.get("class") or "").split()
-            self.td = dict(blank="blank" in classes, value="data-value" in a,
-                           text=[], links=[])
-            self.row["cells"].append(self.td)
+            self._td = dict(blank="blank" in classes, value="data-value" in classes,
+                            text=[], links=[])
+            self._row["cells"].append(self._td)
+        elif tag == "a":
+            href = a.get("href") or ""
+            if self._row is not None:
+                self._row["links"].append(href)
+            if self._td is not None:
+                self._td["links"].append(href)
 
     def handle_data(self, data):
-        if self.td is not None:
-            self.td["text"].append(data)
+        if self._td is not None:
+            self._td["text"].append(data)
 
     def handle_endtag(self, tag):
-        if tag == "td":
-            self.td = None
-        if tag == "tr" and self.row is not None:
-            self.rows.append(self.row)
-            self.row = None
-        if tag == "thead" and self.in_data_table:
-            self.in_thead = False
-        if tag == "table" and self.in_data_table:
-            self.table_depth -= 1
-            if self.table_depth == 0:
-                self.in_data_table = False
+        if tag == "th" and self._td is not None and self._in_thead:
+            self._headers.append("".join(self._td["text"]).strip().lower())
+            self._td = None
+        elif tag == "thead":
+            self._in_thead = False
+            if self._table is not None and "source" in self._headers:
+                self._table["data"] = True
+        elif tag == "td" and self._td is not None:
+            self._td = None
+        elif tag == "tr" and self._row is not None:
+            self._table["rows"].append(self._row)
+            self._row = None
+        elif tag == "table":
+            self._depth = max(0, self._depth - 1)
+            if self._depth == 0 and self._table is not None:
+                self.rows.extend(self._table["rows"])
+                self._table = None
 
 
 def check():
@@ -171,7 +200,7 @@ def check():
             clean = h.split("#", 1)[0].split("?", 1)[0]
             if not clean:
                 continue
-            target = os.path.normpath(os.path.join(ROOT, clean))
+            target = os.path.normpath(os.path.join(os.path.dirname(path), clean))
             if not os.path.isfile(target):
                 broken.append("%s=%s" % (key, h))
             elif "#" in h:

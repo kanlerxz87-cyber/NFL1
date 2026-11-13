@@ -1,0 +1,4769 @@
+{
+ "generated_at": "2026-11-12T22:48:59+00:00",
+ "session": "4c043747-nfl1",
+ "sources": {
+  "standings": "https://www.nfl.com/standings/league/2026/reg",
+  "schedule": "https://www.nfl.com/schedules/2026/REG10"
+ },
+ "retrievals": {
+  "T1": "2026-11-12 ~22:05Z",
+  "T2": "2026-11-12 ~22:25Z"
+ },
+ "reproducible_columns": [
+  "w",
+  "l",
+  "t",
+  "pct",
+  "pf",
+  "pa",
+  "net_pts",
+  "home",
+  "road"
+ ],
+ "verified_columns": [
+  "l",
+  "net_pts",
+  "pa",
+  "pct",
+  "pf",
+  "t",
+  "w"
+ ],
+ "columns_changed_between_retrievals": {
+  "div": [
+   "ATL",
+   "CAR",
+   "LV",
+   "NO",
+   "SEA"
+  ],
+  "conf": [
+   "NO",
+   "PIT"
+  ],
+  "non_conf": [
+   "CLE",
+   "DEN",
+   "LV",
+   "NO",
+   "PHI",
+   "SEA"
+  ],
+  "div_pct": [
+   "NO"
+  ],
+  "conf_pct": [
+   "NO",
+   "NYJ",
+   "PIT"
+  ],
+  "strk": [
+   "AZ",
+   "LV"
+  ],
+  "last5": [
+   "AZ",
+   "LV",
+   "NYJ",
+   "SEA",
+   "TB"
+  ]
+ },
+ "official_page_self_contradictions": {
+  "T1 DEN": [
+   "CONF 3-2-0 + NON-CONF 2-0-0 covers 7 games, the club has 9",
+   "CONF% 0.750 does not match CONF 3-2-0 (0.6)"
+  ],
+  "T1 DET": [
+   "DIV% 1.000 does not match DIV 1-2-0 (0.333)",
+   "CONF% 0.800 does not match CONF 4-2-0 (0.667)"
+  ],
+  "T1 JAX": [
+   "HOME 4-1-0 + ROAD 2-2-0 covers 9 games, the club has 8",
+   "DIV% 0.500 does not match DIV 1-2-0 (0.333)"
+  ],
+  "T1 MIN": [
+   "HOME 3-1-0 + ROAD 3-2-0 covers 9 games, the club has 8",
+   "CONF 4-1-0 + NON-CONF 2-0-0 covers 7 games, the club has 8"
+  ],
+  "T1 PIT": [
+   "CONF 4-1-0 + NON-CONF 3-0-0 covers 8 games, the club has 8",
+   "DIV% 0.667 does not match DIV 3-1-0 (0.75)"
+  ],
+  "T1 CLE": [
+   "CONF 3-3-0 + NON-CONF 2-0-0 covers 8 games, the club has 9"
+  ],
+  "T1 LA": [
+   "CONF 3-2-0 + NON-CONF 2-1-0 covers 8 games, the club has 9"
+  ],
+  "T1 SEA": [
+   "CONF 2-3-0 + NON-CONF 2-0-0 covers 7 games, the club has 9",
+   "DIV 3-0-0 is not contained in CONF 2-3-0",
+   "DIV% 0.667 does not match DIV 3-0-0 (1.0)"
+  ],
+  "T1 LV": [
+   "DIV% 0.500 does not match DIV 1-2-0 (0.333)"
+  ],
+  "T1 CAR": [
+   "DIV% 0.500 does not match DIV 2-1-0 (0.667)"
+  ],
+  "T1 NO": [
+   "CONF 2-3-0 + NON-CONF 2-0-0 covers 7 games, the club has 8",
+   "CONF% 0.375 does not match CONF 2-3-0 (0.4)"
+  ],
+  "T1 ATL": [
+   "HOME 1-4-0 + ROAD 3-2-0 covers 10 games, the club has 9",
+   "CONF 3-3-0 + NON-CONF 2-1-0 covers 9 games, the club has 9",
+   "DIV% 0.333 does not match DIV 1-3-0 (0.25)"
+  ],
+  "T1 NYJ": [
+   "CONF% 0.143 does not match CONF 1-5-0 (0.167)"
+  ],
+  "T1 PHI": [
+   "CONF 1-6-0 + NON-CONF 1-3-0 covers 11 games, the club has 9"
+  ],
+  "T2 DEN": [
+   "CONF 3-2-0 + NON-CONF 4-1-0 covers 10 games, the club has 9",
+   "CONF% 0.750 does not match CONF 3-2-0 (0.6)"
+  ],
+  "T2 DET": [
+   "DIV% 1.000 does not match DIV 1-2-0 (0.333)",
+   "CONF% 0.800 does not match CONF 4-2-0 (0.667)"
+  ],
+  "T2 JAX": [
+   "HOME 4-1-0 + ROAD 2-2-0 covers 9 games, the club has 8",
+   "DIV% 0.500 does not match DIV 1-2-0 (0.333)"
+  ],
+  "T2 MIN": [
+   "HOME 3-1-0 + ROAD 3-2-0 covers 9 games, the club has 8",
+   "CONF 4-1-0 + NON-CONF 2-0-0 covers 7 games, the club has 8"
+  ],
+  "T2 PIT": [
+   "CONF 4-2-0 + NON-CONF 3-0-0 covers 9 games, the club has 8",
+   "DIV% 0.667 does not match DIV 3-1-0 (0.75)",
+   "CONF% 0.600 does not match CONF 4-2-0 (0.667)"
+  ],
+  "T2 LA": [
+   "CONF 3-2-0 + NON-CONF 2-1-0 covers 8 games, the club has 9"
+  ],
+  "T2 LV": [
+   "CONF 3-3-0 + NON-CONF 1-1-0 covers 8 games, the club has 9"
+  ],
+  "T2 ATL": [
+   "HOME 1-4-0 + ROAD 3-2-0 covers 10 games, the club has 9",
+   "CONF 3-3-0 + NON-CONF 2-1-0 covers 9 games, the club has 9"
+  ],
+  "T2 NYJ": [
+   "CONF% 0.333 does not match CONF 1-5-0 (0.167)"
+  ]
+ },
+ "columns_contradicting_the_club_record": {
+  "conf": [
+   "T1 ATL",
+   "T1 CLE",
+   "T1 DEN",
+   "T1 LA",
+   "T1 MIN",
+   "T1 NO",
+   "T1 PHI",
+   "T1 PIT",
+   "T1 SEA",
+   "T2 ATL",
+   "T2 DEN",
+   "T2 LA",
+   "T2 LV",
+   "T2 MIN",
+   "T2 PIT"
+  ],
+  "non_conf": [
+   "T1 ATL",
+   "T1 CLE",
+   "T1 DEN",
+   "T1 LA",
+   "T1 MIN",
+   "T1 NO",
+   "T1 PHI",
+   "T1 PIT",
+   "T1 SEA",
+   "T2 ATL",
+   "T2 DEN",
+   "T2 LA",
+   "T2 LV",
+   "T2 MIN",
+   "T2 PIT"
+  ],
+  "conf_pct": [
+   "T1 DEN",
+   "T1 DET",
+   "T1 NO",
+   "T1 NYJ",
+   "T2 DEN",
+   "T2 DET",
+   "T2 NYJ",
+   "T2 PIT"
+  ],
+  "div_pct": [
+   "T1 ATL",
+   "T1 CAR",
+   "T1 DET",
+   "T1 JAX",
+   "T1 LV",
+   "T1 PIT",
+   "T1 SEA",
+   "T2 DET",
+   "T2 JAX",
+   "T2 PIT"
+  ],
+  "home": [
+   "T1 ATL",
+   "T1 JAX",
+   "T1 MIN",
+   "T2 ATL",
+   "T2 JAX",
+   "T2 MIN"
+  ],
+  "road": [
+   "T1 ATL",
+   "T1 JAX",
+   "T1 MIN",
+   "T2 ATL",
+   "T2 JAX",
+   "T2 MIN"
+  ],
+  "div": [
+   "T1 SEA"
+  ]
+ },
+ "checks_total": 841,
+ "checks_failed": 0,
+ "flags": [
+  {
+   "item": "Official column not reproducible between two retrievals: div",
+   "detail": "The same official page, read twice about 20 minutes apart, printed a different value for 5 club(s): ATL, CAR, LV, NO, SEA. Example: ATL: T1=1-3-0 / T2=1-2-0; CAR: T1=2-1-0 / T2=1-1-0; LV: T1=1-2-0 / T2=1-1-0; NO: T1=1-1-0 / T2=0-1-0; SEA: T1=3-0-0 / T2=2-1-0. No value in this column is published as a verified fact on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official column not reproducible between two retrievals: conf",
+   "detail": "The same official page, read twice about 20 minutes apart, printed a different value for 2 club(s): NO, PIT. Example: NO: T1=2-3-0 / T2=1-3-0; PIT: T1=4-1-0 / T2=4-2-0. No value in this column is published as a verified fact on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official column not reproducible between two retrievals: non_conf",
+   "detail": "The same official page, read twice about 20 minutes apart, printed a different value for 6 club(s): CLE, DEN, LV, NO, PHI, SEA. Example: CLE: T1=2-0-0 / T2=2-1-0; DEN: T1=2-0-0 / T2=4-1-0; LV: T1=1-2-0 / T2=1-1-0; NO: T1=2-0-0 / T2=2-2-0; PHI: T1=1-3-0 / T2=1-1-0. No value in this column is published as a verified fact on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official column not reproducible between two retrievals: div_pct",
+   "detail": "The same official page, read twice about 20 minutes apart, printed a different value for 1 club(s): NO. Example: NO: T1=0.500 / T2=0.000. No value in this column is published as a verified fact on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official column not reproducible between two retrievals: conf_pct",
+   "detail": "The same official page, read twice about 20 minutes apart, printed a different value for 3 club(s): NO, NYJ, PIT. Example: NO: T1=0.375 / T2=0.250; NYJ: T1=0.143 / T2=0.333; PIT: T1=0.800 / T2=0.600. No value in this column is published as a verified fact on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official column not reproducible between two retrievals: strk",
+   "detail": "The same official page, read twice about 20 minutes apart, printed a different value for 2 club(s): AZ, LV. Example: AZ: T1=2L / T2=1L; LV: T1=2L / T2=1L. No value in this column is published as a verified fact on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official column not reproducible between two retrievals: last5",
+   "detail": "The same official page, read twice about 20 minutes apart, printed a different value for 5 club(s): AZ, LV, NYJ, SEA, TB. Example: AZ: T1=3-3-0 / T2=2-3-0; LV: T1=3-3-0 / T2=1-4-0; NYJ: T1=0-5-0 / T2=1-4-0; SEA: T1=3-2-0 / T2=2-3-0; TB: T1=3-3-0 / T2=3-2-0. No value in this column is published as a verified fact on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official page contradicts itself: T1 ATL",
+   "detail": "HOME 1-4-0 + ROAD 3-2-0 covers 10 games, the club has 9 | CONF 3-3-0 + NON-CONF 2-1-0 covers 9 games, the club has 9 | DIV% 0.333 does not match DIV 1-3-0 (0.25). The cell is left blank on the site and the club's own W-L-T is used instead.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official page contradicts itself: T1 CAR",
+   "detail": "DIV% 0.500 does not match DIV 2-1-0 (0.667). The cell is left blank on the site and the club's own W-L-T is used instead.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official page contradicts itself: T1 CLE",
+   "detail": "CONF 3-3-0 + NON-CONF 2-0-0 covers 8 games, the club has 9. The cell is left blank on the site and the club's own W-L-T is used instead.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official page contradicts itself: T1 DEN",
+   "detail": "CONF 3-2-0 + NON-CONF 2-0-0 covers 7 games, the club has 9 | CONF% 0.750 does not match CONF 3-2-0 (0.6). The cell is left blank on the site and the club's own W-L-T is used instead.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official page contradicts itself: T1 DET",
+   "detail": "DIV% 1.000 does not match DIV 1-2-0 (0.333) | CONF% 0.800 does not match CONF 4-2-0 (0.667). The cell is left blank on the site and the club's own W-L-T is used instead.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official page contradicts itself: T1 JAX",
+   "detail": "HOME 4-1-0 + ROAD 2-2-0 covers 9 games, the club has 8 | DIV% 0.500 does not match DIV 1-2-0 (0.333). The cell is left blank on the site and the club's own W-L-T is used instead.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official page contradicts itself: T1 LA",
+   "detail": "CONF 3-2-0 + NON-CONF 2-1-0 covers 8 games, the club has 9. The cell is left blank on the site and the club's own W-L-T is used instead.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official page contradicts itself: T1 LV",
+   "detail": "DIV% 0.500 does not match DIV 1-2-0 (0.333). The cell is left blank on the site and the club's own W-L-T is used instead.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official page contradicts itself: T1 MIN",
+   "detail": "HOME 3-1-0 + ROAD 3-2-0 covers 9 games, the club has 8 | CONF 4-1-0 + NON-CONF 2-0-0 covers 7 games, the club has 8. The cell is left blank on the site and the club's own W-L-T is used instead.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official page contradicts itself: T1 NO",
+   "detail": "CONF 2-3-0 + NON-CONF 2-0-0 covers 7 games, the club has 8 | CONF% 0.375 does not match CONF 2-3-0 (0.4). The cell is left blank on the site and the club's own W-L-T is used instead.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official page contradicts itself: T1 NYJ",
+   "detail": "CONF% 0.143 does not match CONF 1-5-0 (0.167). The cell is left blank on the site and the club's own W-L-T is used instead.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official page contradicts itself: T1 PHI",
+   "detail": "CONF 1-6-0 + NON-CONF 1-3-0 covers 11 games, the club has 9. The cell is left blank on the site and the club's own W-L-T is used instead.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official page contradicts itself: T1 PIT",
+   "detail": "CONF 4-1-0 + NON-CONF 3-0-0 covers 8 games, the club has 8 | DIV% 0.667 does not match DIV 3-1-0 (0.75). The cell is left blank on the site and the club's own W-L-T is used instead.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official page contradicts itself: T1 SEA",
+   "detail": "CONF 2-3-0 + NON-CONF 2-0-0 covers 7 games, the club has 9 | DIV 3-0-0 is not contained in CONF 2-3-0 | DIV% 0.667 does not match DIV 3-0-0 (1.0). The cell is left blank on the site and the club's own W-L-T is used instead.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official page contradicts itself: T2 ATL",
+   "detail": "HOME 1-4-0 + ROAD 3-2-0 covers 10 games, the club has 9 | CONF 3-3-0 + NON-CONF 2-1-0 covers 9 games, the club has 9. The cell is left blank on the site and the club's own W-L-T is used instead.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official page contradicts itself: T2 DEN",
+   "detail": "CONF 3-2-0 + NON-CONF 4-1-0 covers 10 games, the club has 9 | CONF% 0.750 does not match CONF 3-2-0 (0.6). The cell is left blank on the site and the club's own W-L-T is used instead.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official page contradicts itself: T2 DET",
+   "detail": "DIV% 1.000 does not match DIV 1-2-0 (0.333) | CONF% 0.800 does not match CONF 4-2-0 (0.667). The cell is left blank on the site and the club's own W-L-T is used instead.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official page contradicts itself: T2 JAX",
+   "detail": "HOME 4-1-0 + ROAD 2-2-0 covers 9 games, the club has 8 | DIV% 0.500 does not match DIV 1-2-0 (0.333). The cell is left blank on the site and the club's own W-L-T is used instead.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official page contradicts itself: T2 LA",
+   "detail": "CONF 3-2-0 + NON-CONF 2-1-0 covers 8 games, the club has 9. The cell is left blank on the site and the club's own W-L-T is used instead.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official page contradicts itself: T2 LV",
+   "detail": "CONF 3-3-0 + NON-CONF 1-1-0 covers 8 games, the club has 9. The cell is left blank on the site and the club's own W-L-T is used instead.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official page contradicts itself: T2 MIN",
+   "detail": "HOME 3-1-0 + ROAD 3-2-0 covers 9 games, the club has 8 | CONF 4-1-0 + NON-CONF 2-0-0 covers 7 games, the club has 8. The cell is left blank on the site and the club's own W-L-T is used instead.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official page contradicts itself: T2 NYJ",
+   "detail": "CONF% 0.333 does not match CONF 1-5-0 (0.167). The cell is left blank on the site and the club's own W-L-T is used instead.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official page contradicts itself: T2 PIT",
+   "detail": "CONF 4-2-0 + NON-CONF 3-0-0 covers 9 games, the club has 8 | DIV% 0.667 does not match DIV 3-1-0 (0.75) | CONF% 0.600 does not match CONF 4-2-0 (0.667). The cell is left blank on the site and the club's own W-L-T is used instead.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official column contradicts the club's own record: conf",
+   "detail": "15 printed row(s) disagree with the club's games played or with the record printed beside it: T1 ATL, T1 CLE, T1 DEN, T1 LA, T1 MIN, T1 NO, T1 PHI, T1 PIT, T1 SEA, T2 ATL, T2 DEN, T2 LA, T2 LV, T2 MIN, T2 PIT. The column is therefore excluded from every verified table on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official column contradicts the club's own record: conf_pct",
+   "detail": "8 printed row(s) disagree with the club's games played or with the record printed beside it: T1 DEN, T1 DET, T1 NO, T1 NYJ, T2 DEN, T2 DET, T2 NYJ, T2 PIT. The column is therefore excluded from every verified table on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official column contradicts the club's own record: div",
+   "detail": "1 printed row(s) disagree with the club's games played or with the record printed beside it: T1 SEA. The column is therefore excluded from every verified table on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official column contradicts the club's own record: div_pct",
+   "detail": "10 printed row(s) disagree with the club's games played or with the record printed beside it: T1 ATL, T1 CAR, T1 DET, T1 JAX, T1 LV, T1 PIT, T1 SEA, T2 DET, T2 JAX, T2 PIT. The column is therefore excluded from every verified table on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official column contradicts the club's own record: home",
+   "detail": "6 printed row(s) disagree with the club's games played or with the record printed beside it: T1 ATL, T1 JAX, T1 MIN, T2 ATL, T2 JAX, T2 MIN. The column is therefore excluded from every verified table on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official column contradicts the club's own record: non_conf",
+   "detail": "15 printed row(s) disagree with the club's games played or with the record printed beside it: T1 ATL, T1 CLE, T1 DEN, T1 LA, T1 MIN, T1 NO, T1 PHI, T1 PIT, T1 SEA, T2 ATL, T2 DEN, T2 LA, T2 LV, T2 MIN, T2 PIT. The column is therefore excluded from every verified table on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Official column contradicts the club's own record: road",
+   "detail": "6 printed row(s) disagree with the club's games played or with the record printed beside it: T1 ATL, T1 JAX, T1 MIN, T2 ATL, T2 JAX, T2 MIN. The column is therefore excluded from every verified table on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Two transcriptions of the same official column disagree: NYJ conf",
+   "detail": "data/verified/standings_2026_reg.tsv prints 2-4-0; the official page printed 1-5-0 at ~22:05Z and 1-5-0 at ~22:25Z. This column is not reproducible or self-consistent on the official page, so the cell is left blank on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Two transcriptions of the same official column disagree: NYJ non_conf",
+   "detail": "data/verified/standings_2026_reg.tsv prints 0-3-0; the official page printed 1-2-0 at ~22:05Z and 1-2-0 at ~22:25Z. This column is not reproducible or self-consistent on the official page, so the cell is left blank on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Two transcriptions of the same official column disagree: MIA last5",
+   "detail": "data/verified/standings_2026_reg.tsv prints 1-4-0; the official page printed 2-3-0 at ~22:05Z and 2-3-0 at ~22:25Z. This column is not reproducible or self-consistent on the official page, so the cell is left blank on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Two transcriptions of the same official column disagree: PIT div",
+   "detail": "data/verified/standings_2026_reg.tsv prints 2-1-0; the official page printed 3-1-0 at ~22:05Z and 3-1-0 at ~22:25Z. This column is not reproducible or self-consistent on the official page, so the cell is left blank on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Two transcriptions of the same official column disagree: PIT conf",
+   "detail": "data/verified/standings_2026_reg.tsv prints 3-2-0; the official page printed 4-1-0 at ~22:05Z and 4-2-0 at ~22:25Z. This column is not reproducible or self-consistent on the official page, so the cell is left blank on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Two transcriptions of the same official column disagree: PIT last5",
+   "detail": "data/verified/standings_2026_reg.tsv prints 4-1-0; the official page printed 3-2-0 at ~22:05Z and 3-2-0 at ~22:25Z. This column is not reproducible or self-consistent on the official page, so the cell is left blank on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Two transcriptions of the same official column disagree: CLE last5",
+   "detail": "data/verified/standings_2026_reg.tsv prints 2-3-0; the official page printed 3-3-0 at ~22:05Z and 3-3-0 at ~22:25Z. This column is not reproducible or self-consistent on the official page, so the cell is left blank on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Two transcriptions of the same official column disagree: JAX road",
+   "detail": "data/verified/standings_2026_reg.tsv prints 2-1-0; the official page printed 2-2-0 at ~22:05Z and 2-2-0 at ~22:25Z. This column is not reproducible or self-consistent on the official page, so the cell is left blank on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Two transcriptions of the same official column disagree: JAX div",
+   "detail": "data/verified/standings_2026_reg.tsv prints 1-1-0; the official page printed 1-2-0 at ~22:05Z and 1-2-0 at ~22:25Z. This column is not reproducible or self-consistent on the official page, so the cell is left blank on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Two transcriptions of the same official column disagree: HOU last5",
+   "detail": "data/verified/standings_2026_reg.tsv prints 3-2-0; the official page printed 3-3-0 at ~22:05Z and 3-3-0 at ~22:25Z. This column is not reproducible or self-consistent on the official page, so the cell is left blank on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Two transcriptions of the same official column disagree: IND div",
+   "detail": "data/verified/standings_2026_reg.tsv prints 1-3-0; the official page printed 1-2-0 at ~22:05Z and 1-2-0 at ~22:25Z. This column is not reproducible or self-consistent on the official page, so the cell is left blank on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Two transcriptions of the same official column disagree: TEN last5",
+   "detail": "data/verified/standings_2026_reg.tsv prints 1-4-0; the official page printed 2-3-0 at ~22:05Z and 2-3-0 at ~22:25Z. This column is not reproducible or self-consistent on the official page, so the cell is left blank on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Two transcriptions of the same official column disagree: DEN conf",
+   "detail": "data/verified/standings_2026_reg.tsv prints 3-1-0; the official page printed 3-2-0 at ~22:05Z and 3-2-0 at ~22:25Z. This column is not reproducible or self-consistent on the official page, so the cell is left blank on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Two transcriptions of the same official column disagree: LV home",
+   "detail": "data/verified/standings_2026_reg.tsv prints 1-3-0; the official page printed 1-1-0 at ~22:05Z and 1-1-0 at ~22:25Z. This column is not reproducible or self-consistent on the official page, so the cell is left blank on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Two transcriptions of the same official column disagree: LV road",
+   "detail": "data/verified/standings_2026_reg.tsv prints 3-2-0; the official page printed 3-4-0 at ~22:05Z and 3-4-0 at ~22:25Z. This column is not reproducible or self-consistent on the official page, so the cell is left blank on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Two transcriptions of the same official column disagree: DAL last5",
+   "detail": "data/verified/standings_2026_reg.tsv prints 2-3-0; the official page printed 2-4-0 at ~22:05Z and 2-4-0 at ~22:25Z. This column is not reproducible or self-consistent on the official page, so the cell is left blank on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Two transcriptions of the same official column disagree: WAS non_conf",
+   "detail": "data/verified/standings_2026_reg.tsv prints 1-3-1; the official page printed 0-1-0 at ~22:05Z and 0-1-0 at ~22:25Z. This column is not reproducible or self-consistent on the official page, so the cell is left blank on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Two transcriptions of the same official column disagree: PHI div",
+   "detail": "data/verified/standings_2026_reg.tsv prints 1-4-0; the official page printed 1-3-0 at ~22:05Z and 1-3-0 at ~22:25Z. This column is not reproducible or self-consistent on the official page, so the cell is left blank on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Two transcriptions of the same official column disagree: DET div",
+   "detail": "data/verified/standings_2026_reg.tsv prints 2-0-0; the official page printed 1-2-0 at ~22:05Z and 1-2-0 at ~22:25Z. This column is not reproducible or self-consistent on the official page, so the cell is left blank on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Two transcriptions of the same official column disagree: DET conf",
+   "detail": "data/verified/standings_2026_reg.tsv prints 4-1-0; the official page printed 4-2-0 at ~22:05Z and 4-2-0 at ~22:25Z. This column is not reproducible or self-consistent on the official page, so the cell is left blank on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Two transcriptions of the same official column disagree: DET non_conf",
+   "detail": "data/verified/standings_2026_reg.tsv prints 2-1-0; the official page printed 2-0-0 at ~22:05Z and 2-0-0 at ~22:25Z. This column is not reproducible or self-consistent on the official page, so the cell is left blank on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Two transcriptions of the same official column disagree: MIN road",
+   "detail": "data/verified/standings_2026_reg.tsv prints 3-1-0; the official page printed 3-2-0 at ~22:05Z and 3-2-0 at ~22:25Z. This column is not reproducible or self-consistent on the official page, so the cell is left blank on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Two transcriptions of the same official column disagree: MIN non_conf",
+   "detail": "data/verified/standings_2026_reg.tsv prints 2-1-0; the official page printed 2-0-0 at ~22:05Z and 2-0-0 at ~22:25Z. This column is not reproducible or self-consistent on the official page, so the cell is left blank on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Two transcriptions of the same official column disagree: ATL road",
+   "detail": "data/verified/standings_2026_reg.tsv prints 2-2-0; the official page printed 3-2-0 at ~22:05Z and 3-2-0 at ~22:25Z. This column is not reproducible or self-consistent on the official page, so the cell is left blank on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Two transcriptions of the same official column disagree: ATL non_conf",
+   "detail": "data/verified/standings_2026_reg.tsv prints 0-3-0; the official page printed 2-1-0 at ~22:05Z and 2-1-0 at ~22:25Z. This column is not reproducible or self-consistent on the official page, so the cell is left blank on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Two transcriptions of the same official column disagree: ATL last5",
+   "detail": "data/verified/standings_2026_reg.tsv prints 1-4-0; the official page printed 3-3-0 at ~22:05Z and 3-3-0 at ~22:25Z. This column is not reproducible or self-consistent on the official page, so the cell is left blank on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Two transcriptions of the same official column disagree: LA non_conf",
+   "detail": "data/verified/standings_2026_reg.tsv prints 2-2-0; the official page printed 2-1-0 at ~22:05Z and 2-1-0 at ~22:25Z. This column is not reproducible or self-consistent on the official page, so the cell is left blank on the site.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  }
+ ],
+ "failures": [],
+ "checks": [
+  {
+   "check": "standings transcription rows",
+   "result": "PASS",
+   "detail": "T1 rows=32 T2 rows=32 (expected 32 each)"
+  },
+  {
+   "check": "same clubs in both retrievals",
+   "result": "PASS",
+   "detail": "only in T1=[] only in T2=[]"
+  },
+  {
+   "check": "T1 BUF PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.875 vs (W+0.5T)/GP=0.875"
+  },
+  {
+   "check": "T1 BUF NET identity",
+   "result": "PASS",
+   "detail": "printed NET=69 vs PF-PA=69"
+  },
+  {
+   "check": "T1 SF PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.875 vs (W+0.5T)/GP=0.875"
+  },
+  {
+   "check": "T1 SF NET identity",
+   "result": "PASS",
+   "detail": "printed NET=79 vs PF-PA=79"
+  },
+  {
+   "check": "T1 CHI PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.778 vs (W+0.5T)/GP=0.778"
+  },
+  {
+   "check": "T1 CHI NET identity",
+   "result": "PASS",
+   "detail": "printed NET=57 vs PF-PA=57"
+  },
+  {
+   "check": "T1 DEN PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.778 vs (W+0.5T)/GP=0.778"
+  },
+  {
+   "check": "T1 DEN NET identity",
+   "result": "PASS",
+   "detail": "printed NET=12 vs PF-PA=12"
+  },
+  {
+   "check": "T1 CIN PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.750 vs (W+0.5T)/GP=0.75"
+  },
+  {
+   "check": "T1 CIN NET identity",
+   "result": "PASS",
+   "detail": "printed NET=65 vs PF-PA=65"
+  },
+  {
+   "check": "T1 DET PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.750 vs (W+0.5T)/GP=0.75"
+  },
+  {
+   "check": "T1 DET NET identity",
+   "result": "PASS",
+   "detail": "printed NET=33 vs PF-PA=33"
+  },
+  {
+   "check": "T1 JAX PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.750 vs (W+0.5T)/GP=0.75"
+  },
+  {
+   "check": "T1 JAX NET identity",
+   "result": "PASS",
+   "detail": "printed NET=108 vs PF-PA=108"
+  },
+  {
+   "check": "T1 KC PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.750 vs (W+0.5T)/GP=0.75"
+  },
+  {
+   "check": "T1 KC NET identity",
+   "result": "PASS",
+   "detail": "printed NET=59 vs PF-PA=59"
+  },
+  {
+   "check": "T1 MIN PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.750 vs (W+0.5T)/GP=0.75"
+  },
+  {
+   "check": "T1 MIN NET identity",
+   "result": "PASS",
+   "detail": "printed NET=30 vs PF-PA=30"
+  },
+  {
+   "check": "T1 PIT PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.750 vs (W+0.5T)/GP=0.75"
+  },
+  {
+   "check": "T1 PIT NET identity",
+   "result": "PASS",
+   "detail": "printed NET=36 vs PF-PA=36"
+  },
+  {
+   "check": "T1 NYG PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.688 vs (W+0.5T)/GP=0.688"
+  },
+  {
+   "check": "T1 NYG NET identity",
+   "result": "PASS",
+   "detail": "printed NET=10 vs PF-PA=10"
+  },
+  {
+   "check": "T1 GB PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.667 vs (W+0.5T)/GP=0.667"
+  },
+  {
+   "check": "T1 GB NET identity",
+   "result": "PASS",
+   "detail": "printed NET=25 vs PF-PA=25"
+  },
+  {
+   "check": "T1 CLE PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.556 vs (W+0.5T)/GP=0.556"
+  },
+  {
+   "check": "T1 CLE NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-35 vs PF-PA=-35"
+  },
+  {
+   "check": "T1 LA PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.556 vs (W+0.5T)/GP=0.556"
+  },
+  {
+   "check": "T1 LA NET identity",
+   "result": "PASS",
+   "detail": "printed NET=33 vs PF-PA=33"
+  },
+  {
+   "check": "T1 NE PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.556 vs (W+0.5T)/GP=0.556"
+  },
+  {
+   "check": "T1 NE NET identity",
+   "result": "PASS",
+   "detail": "printed NET=4 vs PF-PA=4"
+  },
+  {
+   "check": "T1 SEA PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.556 vs (W+0.5T)/GP=0.556"
+  },
+  {
+   "check": "T1 SEA NET identity",
+   "result": "PASS",
+   "detail": "printed NET=40 vs PF-PA=40"
+  },
+  {
+   "check": "T1 BAL PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.444 vs (W+0.5T)/GP=0.444"
+  },
+  {
+   "check": "T1 BAL NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-47 vs PF-PA=-47"
+  },
+  {
+   "check": "T1 DAL PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.444 vs (W+0.5T)/GP=0.444"
+  },
+  {
+   "check": "T1 DAL NET identity",
+   "result": "PASS",
+   "detail": "printed NET=10 vs PF-PA=10"
+  },
+  {
+   "check": "T1 LV PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.444 vs (W+0.5T)/GP=0.444"
+  },
+  {
+   "check": "T1 LV NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-30 vs PF-PA=-30"
+  },
+  {
+   "check": "T1 CAR PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.375 vs (W+0.5T)/GP=0.375"
+  },
+  {
+   "check": "T1 CAR NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-20 vs PF-PA=-20"
+  },
+  {
+   "check": "T1 HOU PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.375 vs (W+0.5T)/GP=0.375"
+  },
+  {
+   "check": "T1 HOU NET identity",
+   "result": "PASS",
+   "detail": "printed NET=17 vs PF-PA=17"
+  },
+  {
+   "check": "T1 NO PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.375 vs (W+0.5T)/GP=0.375"
+  },
+  {
+   "check": "T1 NO NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-31 vs PF-PA=-31"
+  },
+  {
+   "check": "T1 AZ PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.333 vs (W+0.5T)/GP=0.333"
+  },
+  {
+   "check": "T1 AZ NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-77 vs PF-PA=-77"
+  },
+  {
+   "check": "T1 ATL PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.333 vs (W+0.5T)/GP=0.333"
+  },
+  {
+   "check": "T1 ATL NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-35 vs PF-PA=-35"
+  },
+  {
+   "check": "T1 TB PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.333 vs (W+0.5T)/GP=0.333"
+  },
+  {
+   "check": "T1 TB NET identity",
+   "result": "PASS",
+   "detail": "printed NET=24 vs PF-PA=24"
+  },
+  {
+   "check": "T1 WAS PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.313 vs (W+0.5T)/GP=0.313"
+  },
+  {
+   "check": "T1 WAS NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-30 vs PF-PA=-30"
+  },
+  {
+   "check": "T1 IND PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.222 vs (W+0.5T)/GP=0.222"
+  },
+  {
+   "check": "T1 IND NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-65 vs PF-PA=-65"
+  },
+  {
+   "check": "T1 NYJ PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.222 vs (W+0.5T)/GP=0.222"
+  },
+  {
+   "check": "T1 NYJ NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-41 vs PF-PA=-41"
+  },
+  {
+   "check": "T1 PHI PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.222 vs (W+0.5T)/GP=0.222"
+  },
+  {
+   "check": "T1 PHI NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-73 vs PF-PA=-73"
+  },
+  {
+   "check": "T1 MIA PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.125 vs (W+0.5T)/GP=0.125"
+  },
+  {
+   "check": "T1 MIA NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-74 vs PF-PA=-74"
+  },
+  {
+   "check": "T1 TEN PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.125 vs (W+0.5T)/GP=0.125"
+  },
+  {
+   "check": "T1 TEN NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-55 vs PF-PA=-55"
+  },
+  {
+   "check": "T1 LAC PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.000 vs (W+0.5T)/GP=0.0"
+  },
+  {
+   "check": "T1 LAC NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-98 vs PF-PA=-98"
+  },
+  {
+   "check": "T1 league wins equal losses",
+   "result": "PASS",
+   "detail": "W=135 L=135 T=2"
+  },
+  {
+   "check": "T1 league points balance",
+   "result": "PASS",
+   "detail": "PF=6246 PA=6246"
+  },
+  {
+   "check": "T2 BUF PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.875 vs (W+0.5T)/GP=0.875"
+  },
+  {
+   "check": "T2 BUF NET identity",
+   "result": "PASS",
+   "detail": "printed NET=69 vs PF-PA=69"
+  },
+  {
+   "check": "T2 SF PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.875 vs (W+0.5T)/GP=0.875"
+  },
+  {
+   "check": "T2 SF NET identity",
+   "result": "PASS",
+   "detail": "printed NET=79 vs PF-PA=79"
+  },
+  {
+   "check": "T2 CHI PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.778 vs (W+0.5T)/GP=0.778"
+  },
+  {
+   "check": "T2 CHI NET identity",
+   "result": "PASS",
+   "detail": "printed NET=57 vs PF-PA=57"
+  },
+  {
+   "check": "T2 DEN PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.778 vs (W+0.5T)/GP=0.778"
+  },
+  {
+   "check": "T2 DEN NET identity",
+   "result": "PASS",
+   "detail": "printed NET=12 vs PF-PA=12"
+  },
+  {
+   "check": "T2 CIN PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.750 vs (W+0.5T)/GP=0.75"
+  },
+  {
+   "check": "T2 CIN NET identity",
+   "result": "PASS",
+   "detail": "printed NET=65 vs PF-PA=65"
+  },
+  {
+   "check": "T2 DET PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.750 vs (W+0.5T)/GP=0.75"
+  },
+  {
+   "check": "T2 DET NET identity",
+   "result": "PASS",
+   "detail": "printed NET=33 vs PF-PA=33"
+  },
+  {
+   "check": "T2 JAX PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.750 vs (W+0.5T)/GP=0.75"
+  },
+  {
+   "check": "T2 JAX NET identity",
+   "result": "PASS",
+   "detail": "printed NET=108 vs PF-PA=108"
+  },
+  {
+   "check": "T2 KC PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.750 vs (W+0.5T)/GP=0.75"
+  },
+  {
+   "check": "T2 KC NET identity",
+   "result": "PASS",
+   "detail": "printed NET=59 vs PF-PA=59"
+  },
+  {
+   "check": "T2 MIN PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.750 vs (W+0.5T)/GP=0.75"
+  },
+  {
+   "check": "T2 MIN NET identity",
+   "result": "PASS",
+   "detail": "printed NET=30 vs PF-PA=30"
+  },
+  {
+   "check": "T2 PIT PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.750 vs (W+0.5T)/GP=0.75"
+  },
+  {
+   "check": "T2 PIT NET identity",
+   "result": "PASS",
+   "detail": "printed NET=36 vs PF-PA=36"
+  },
+  {
+   "check": "T2 NYG PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.688 vs (W+0.5T)/GP=0.688"
+  },
+  {
+   "check": "T2 NYG NET identity",
+   "result": "PASS",
+   "detail": "printed NET=10 vs PF-PA=10"
+  },
+  {
+   "check": "T2 GB PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.667 vs (W+0.5T)/GP=0.667"
+  },
+  {
+   "check": "T2 GB NET identity",
+   "result": "PASS",
+   "detail": "printed NET=25 vs PF-PA=25"
+  },
+  {
+   "check": "T2 CLE PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.556 vs (W+0.5T)/GP=0.556"
+  },
+  {
+   "check": "T2 CLE NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-35 vs PF-PA=-35"
+  },
+  {
+   "check": "T2 LA PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.556 vs (W+0.5T)/GP=0.556"
+  },
+  {
+   "check": "T2 LA NET identity",
+   "result": "PASS",
+   "detail": "printed NET=33 vs PF-PA=33"
+  },
+  {
+   "check": "T2 NE PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.556 vs (W+0.5T)/GP=0.556"
+  },
+  {
+   "check": "T2 NE NET identity",
+   "result": "PASS",
+   "detail": "printed NET=4 vs PF-PA=4"
+  },
+  {
+   "check": "T2 SEA PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.556 vs (W+0.5T)/GP=0.556"
+  },
+  {
+   "check": "T2 SEA NET identity",
+   "result": "PASS",
+   "detail": "printed NET=40 vs PF-PA=40"
+  },
+  {
+   "check": "T2 BAL PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.444 vs (W+0.5T)/GP=0.444"
+  },
+  {
+   "check": "T2 BAL NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-47 vs PF-PA=-47"
+  },
+  {
+   "check": "T2 DAL PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.444 vs (W+0.5T)/GP=0.444"
+  },
+  {
+   "check": "T2 DAL NET identity",
+   "result": "PASS",
+   "detail": "printed NET=10 vs PF-PA=10"
+  },
+  {
+   "check": "T2 LV PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.444 vs (W+0.5T)/GP=0.444"
+  },
+  {
+   "check": "T2 LV NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-30 vs PF-PA=-30"
+  },
+  {
+   "check": "T2 CAR PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.375 vs (W+0.5T)/GP=0.375"
+  },
+  {
+   "check": "T2 CAR NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-20 vs PF-PA=-20"
+  },
+  {
+   "check": "T2 HOU PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.375 vs (W+0.5T)/GP=0.375"
+  },
+  {
+   "check": "T2 HOU NET identity",
+   "result": "PASS",
+   "detail": "printed NET=17 vs PF-PA=17"
+  },
+  {
+   "check": "T2 NO PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.375 vs (W+0.5T)/GP=0.375"
+  },
+  {
+   "check": "T2 NO NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-31 vs PF-PA=-31"
+  },
+  {
+   "check": "T2 AZ PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.333 vs (W+0.5T)/GP=0.333"
+  },
+  {
+   "check": "T2 AZ NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-77 vs PF-PA=-77"
+  },
+  {
+   "check": "T2 ATL PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.333 vs (W+0.5T)/GP=0.333"
+  },
+  {
+   "check": "T2 ATL NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-35 vs PF-PA=-35"
+  },
+  {
+   "check": "T2 TB PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.333 vs (W+0.5T)/GP=0.333"
+  },
+  {
+   "check": "T2 TB NET identity",
+   "result": "PASS",
+   "detail": "printed NET=24 vs PF-PA=24"
+  },
+  {
+   "check": "T2 WAS PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.313 vs (W+0.5T)/GP=0.313"
+  },
+  {
+   "check": "T2 WAS NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-30 vs PF-PA=-30"
+  },
+  {
+   "check": "T2 IND PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.222 vs (W+0.5T)/GP=0.222"
+  },
+  {
+   "check": "T2 IND NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-65 vs PF-PA=-65"
+  },
+  {
+   "check": "T2 NYJ PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.222 vs (W+0.5T)/GP=0.222"
+  },
+  {
+   "check": "T2 NYJ NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-41 vs PF-PA=-41"
+  },
+  {
+   "check": "T2 PHI PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.222 vs (W+0.5T)/GP=0.222"
+  },
+  {
+   "check": "T2 PHI NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-73 vs PF-PA=-73"
+  },
+  {
+   "check": "T2 MIA PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.125 vs (W+0.5T)/GP=0.125"
+  },
+  {
+   "check": "T2 MIA NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-74 vs PF-PA=-74"
+  },
+  {
+   "check": "T2 TEN PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.125 vs (W+0.5T)/GP=0.125"
+  },
+  {
+   "check": "T2 TEN NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-55 vs PF-PA=-55"
+  },
+  {
+   "check": "T2 LAC PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.000 vs (W+0.5T)/GP=0.0"
+  },
+  {
+   "check": "T2 LAC NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-98 vs PF-PA=-98"
+  },
+  {
+   "check": "T2 league wins equal losses",
+   "result": "PASS",
+   "detail": "W=135 L=135 T=2"
+  },
+  {
+   "check": "T2 league points balance",
+   "result": "PASS",
+   "detail": "PF=6246 PA=6246"
+  },
+  {
+   "check": "snapshot SF w",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "snapshot SF l",
+   "result": "PASS",
+   "detail": "published 1 vs official 1"
+  },
+  {
+   "check": "snapshot SF t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot SF pf",
+   "result": "PASS",
+   "detail": "published 235 vs official 235"
+  },
+  {
+   "check": "snapshot SF pa",
+   "result": "PASS",
+   "detail": "published 156 vs official 156"
+  },
+  {
+   "check": "snapshot BUF w",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "snapshot BUF l",
+   "result": "PASS",
+   "detail": "published 1 vs official 1"
+  },
+  {
+   "check": "snapshot BUF t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot BUF pf",
+   "result": "PASS",
+   "detail": "published 256 vs official 256"
+  },
+  {
+   "check": "snapshot BUF pa",
+   "result": "PASS",
+   "detail": "published 187 vs official 187"
+  },
+  {
+   "check": "snapshot CHI w",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "snapshot CHI l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "snapshot CHI t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot CHI pf",
+   "result": "PASS",
+   "detail": "published 241 vs official 241"
+  },
+  {
+   "check": "snapshot CHI pa",
+   "result": "PASS",
+   "detail": "published 184 vs official 184"
+  },
+  {
+   "check": "snapshot DEN w",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "snapshot DEN l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "snapshot DEN t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot DEN pf",
+   "result": "PASS",
+   "detail": "published 198 vs official 198"
+  },
+  {
+   "check": "snapshot DEN pa",
+   "result": "PASS",
+   "detail": "published 186 vs official 186"
+  },
+  {
+   "check": "snapshot JAX w",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "snapshot JAX l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "snapshot JAX t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot JAX pf",
+   "result": "PASS",
+   "detail": "published 229 vs official 229"
+  },
+  {
+   "check": "snapshot JAX pa",
+   "result": "PASS",
+   "detail": "published 121 vs official 121"
+  },
+  {
+   "check": "snapshot CIN w",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "snapshot CIN l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "snapshot CIN t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot CIN pf",
+   "result": "PASS",
+   "detail": "published 240 vs official 240"
+  },
+  {
+   "check": "snapshot CIN pa",
+   "result": "PASS",
+   "detail": "published 175 vs official 175"
+  },
+  {
+   "check": "snapshot KC w",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "snapshot KC l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "snapshot KC t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot KC pf",
+   "result": "PASS",
+   "detail": "published 202 vs official 202"
+  },
+  {
+   "check": "snapshot KC pa",
+   "result": "PASS",
+   "detail": "published 143 vs official 143"
+  },
+  {
+   "check": "snapshot PIT w",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "snapshot PIT l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "snapshot PIT t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot PIT pf",
+   "result": "PASS",
+   "detail": "published 180 vs official 180"
+  },
+  {
+   "check": "snapshot PIT pa",
+   "result": "PASS",
+   "detail": "published 144 vs official 144"
+  },
+  {
+   "check": "snapshot DET w",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "snapshot DET l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "snapshot DET t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot DET pf",
+   "result": "PASS",
+   "detail": "published 222 vs official 222"
+  },
+  {
+   "check": "snapshot DET pa",
+   "result": "PASS",
+   "detail": "published 189 vs official 189"
+  },
+  {
+   "check": "snapshot MIN w",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "snapshot MIN l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "snapshot MIN t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot MIN pf",
+   "result": "PASS",
+   "detail": "published 146 vs official 146"
+  },
+  {
+   "check": "snapshot MIN pa",
+   "result": "PASS",
+   "detail": "published 116 vs official 116"
+  },
+  {
+   "check": "snapshot NYG w",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "snapshot NYG l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "snapshot NYG t",
+   "result": "PASS",
+   "detail": "published 1 vs official 1"
+  },
+  {
+   "check": "snapshot NYG pf",
+   "result": "PASS",
+   "detail": "published 182 vs official 182"
+  },
+  {
+   "check": "snapshot NYG pa",
+   "result": "PASS",
+   "detail": "published 172 vs official 172"
+  },
+  {
+   "check": "snapshot GB w",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "snapshot GB l",
+   "result": "PASS",
+   "detail": "published 3 vs official 3"
+  },
+  {
+   "check": "snapshot GB t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot GB pf",
+   "result": "PASS",
+   "detail": "published 216 vs official 216"
+  },
+  {
+   "check": "snapshot GB pa",
+   "result": "PASS",
+   "detail": "published 191 vs official 191"
+  },
+  {
+   "check": "snapshot SEA w",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "snapshot SEA l",
+   "result": "PASS",
+   "detail": "published 4 vs official 4"
+  },
+  {
+   "check": "snapshot SEA t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot SEA pf",
+   "result": "PASS",
+   "detail": "published 202 vs official 202"
+  },
+  {
+   "check": "snapshot SEA pa",
+   "result": "PASS",
+   "detail": "published 162 vs official 162"
+  },
+  {
+   "check": "snapshot LA w",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "snapshot LA l",
+   "result": "PASS",
+   "detail": "published 4 vs official 4"
+  },
+  {
+   "check": "snapshot LA t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot LA pf",
+   "result": "PASS",
+   "detail": "published 214 vs official 214"
+  },
+  {
+   "check": "snapshot LA pa",
+   "result": "PASS",
+   "detail": "published 181 vs official 181"
+  },
+  {
+   "check": "snapshot NE w",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "snapshot NE l",
+   "result": "PASS",
+   "detail": "published 4 vs official 4"
+  },
+  {
+   "check": "snapshot NE t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot NE pf",
+   "result": "PASS",
+   "detail": "published 211 vs official 211"
+  },
+  {
+   "check": "snapshot NE pa",
+   "result": "PASS",
+   "detail": "published 207 vs official 207"
+  },
+  {
+   "check": "snapshot CLE w",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "snapshot CLE l",
+   "result": "PASS",
+   "detail": "published 4 vs official 4"
+  },
+  {
+   "check": "snapshot CLE t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot CLE pf",
+   "result": "PASS",
+   "detail": "published 161 vs official 161"
+  },
+  {
+   "check": "snapshot CLE pa",
+   "result": "PASS",
+   "detail": "published 196 vs official 196"
+  },
+  {
+   "check": "snapshot DAL w",
+   "result": "PASS",
+   "detail": "published 4 vs official 4"
+  },
+  {
+   "check": "snapshot DAL l",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "snapshot DAL t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot DAL pf",
+   "result": "PASS",
+   "detail": "published 246 vs official 246"
+  },
+  {
+   "check": "snapshot DAL pa",
+   "result": "PASS",
+   "detail": "published 236 vs official 236"
+  },
+  {
+   "check": "snapshot LV w",
+   "result": "PASS",
+   "detail": "published 4 vs official 4"
+  },
+  {
+   "check": "snapshot LV l",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "snapshot LV t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot LV pf",
+   "result": "PASS",
+   "detail": "published 238 vs official 238"
+  },
+  {
+   "check": "snapshot LV pa",
+   "result": "PASS",
+   "detail": "published 268 vs official 268"
+  },
+  {
+   "check": "snapshot BAL w",
+   "result": "PASS",
+   "detail": "published 4 vs official 4"
+  },
+  {
+   "check": "snapshot BAL l",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "snapshot BAL t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot BAL pf",
+   "result": "PASS",
+   "detail": "published 189 vs official 189"
+  },
+  {
+   "check": "snapshot BAL pa",
+   "result": "PASS",
+   "detail": "published 236 vs official 236"
+  },
+  {
+   "check": "snapshot HOU w",
+   "result": "PASS",
+   "detail": "published 3 vs official 3"
+  },
+  {
+   "check": "snapshot HOU l",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "snapshot HOU t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot HOU pf",
+   "result": "PASS",
+   "detail": "published 209 vs official 209"
+  },
+  {
+   "check": "snapshot HOU pa",
+   "result": "PASS",
+   "detail": "published 192 vs official 192"
+  },
+  {
+   "check": "snapshot CAR w",
+   "result": "PASS",
+   "detail": "published 3 vs official 3"
+  },
+  {
+   "check": "snapshot CAR l",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "snapshot CAR t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot CAR pf",
+   "result": "PASS",
+   "detail": "published 199 vs official 199"
+  },
+  {
+   "check": "snapshot CAR pa",
+   "result": "PASS",
+   "detail": "published 219 vs official 219"
+  },
+  {
+   "check": "snapshot NO w",
+   "result": "PASS",
+   "detail": "published 3 vs official 3"
+  },
+  {
+   "check": "snapshot NO l",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "snapshot NO t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot NO pf",
+   "result": "PASS",
+   "detail": "published 185 vs official 185"
+  },
+  {
+   "check": "snapshot NO pa",
+   "result": "PASS",
+   "detail": "published 216 vs official 216"
+  },
+  {
+   "check": "snapshot TB w",
+   "result": "PASS",
+   "detail": "published 3 vs official 3"
+  },
+  {
+   "check": "snapshot TB l",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "snapshot TB t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot TB pf",
+   "result": "PASS",
+   "detail": "published 202 vs official 202"
+  },
+  {
+   "check": "snapshot TB pa",
+   "result": "PASS",
+   "detail": "published 178 vs official 178"
+  },
+  {
+   "check": "snapshot ATL w",
+   "result": "PASS",
+   "detail": "published 3 vs official 3"
+  },
+  {
+   "check": "snapshot ATL l",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "snapshot ATL t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot ATL pf",
+   "result": "PASS",
+   "detail": "published 188 vs official 188"
+  },
+  {
+   "check": "snapshot ATL pa",
+   "result": "PASS",
+   "detail": "published 223 vs official 223"
+  },
+  {
+   "check": "snapshot ARI w",
+   "result": "PASS",
+   "detail": "published 3 vs official 3"
+  },
+  {
+   "check": "snapshot ARI l",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "snapshot ARI t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot ARI pf",
+   "result": "PASS",
+   "detail": "published 178 vs official 178"
+  },
+  {
+   "check": "snapshot ARI pa",
+   "result": "PASS",
+   "detail": "published 255 vs official 255"
+  },
+  {
+   "check": "snapshot WAS w",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "snapshot WAS l",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "snapshot WAS t",
+   "result": "PASS",
+   "detail": "published 1 vs official 1"
+  },
+  {
+   "check": "snapshot WAS pf",
+   "result": "PASS",
+   "detail": "published 172 vs official 172"
+  },
+  {
+   "check": "snapshot WAS pa",
+   "result": "PASS",
+   "detail": "published 202 vs official 202"
+  },
+  {
+   "check": "snapshot NYJ w",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "snapshot NYJ l",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "snapshot NYJ t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot NYJ pf",
+   "result": "PASS",
+   "detail": "published 182 vs official 182"
+  },
+  {
+   "check": "snapshot NYJ pa",
+   "result": "PASS",
+   "detail": "published 223 vs official 223"
+  },
+  {
+   "check": "snapshot IND w",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "snapshot IND l",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "snapshot IND t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot IND pf",
+   "result": "PASS",
+   "detail": "published 184 vs official 184"
+  },
+  {
+   "check": "snapshot IND pa",
+   "result": "PASS",
+   "detail": "published 249 vs official 249"
+  },
+  {
+   "check": "snapshot PHI w",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "snapshot PHI l",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "snapshot PHI t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot PHI pf",
+   "result": "PASS",
+   "detail": "published 148 vs official 148"
+  },
+  {
+   "check": "snapshot PHI pa",
+   "result": "PASS",
+   "detail": "published 221 vs official 221"
+  },
+  {
+   "check": "snapshot TEN w",
+   "result": "PASS",
+   "detail": "published 1 vs official 1"
+  },
+  {
+   "check": "snapshot TEN l",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "snapshot TEN t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot TEN pf",
+   "result": "PASS",
+   "detail": "published 144 vs official 144"
+  },
+  {
+   "check": "snapshot TEN pa",
+   "result": "PASS",
+   "detail": "published 199 vs official 199"
+  },
+  {
+   "check": "snapshot MIA w",
+   "result": "PASS",
+   "detail": "published 1 vs official 1"
+  },
+  {
+   "check": "snapshot MIA l",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "snapshot MIA t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot MIA pf",
+   "result": "PASS",
+   "detail": "published 126 vs official 126"
+  },
+  {
+   "check": "snapshot MIA pa",
+   "result": "PASS",
+   "detail": "published 200 vs official 200"
+  },
+  {
+   "check": "snapshot LAC w",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot LAC l",
+   "result": "PASS",
+   "detail": "published 8 vs official 8"
+  },
+  {
+   "check": "snapshot LAC t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot LAC pf",
+   "result": "PASS",
+   "detail": "published 121 vs official 121"
+  },
+  {
+   "check": "snapshot LAC pa",
+   "result": "PASS",
+   "detail": "published 219 vs official 219"
+  },
+  {
+   "check": "data/verified/standings_2026.csv BUF w",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "data/verified/standings_2026.csv BUF l",
+   "result": "PASS",
+   "detail": "published 1 vs official 1"
+  },
+  {
+   "check": "data/verified/standings_2026.csv BUF t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026.csv BUF pf",
+   "result": "PASS",
+   "detail": "published 256 vs official 256"
+  },
+  {
+   "check": "data/verified/standings_2026.csv BUF pa",
+   "result": "PASS",
+   "detail": "published 187 vs official 187"
+  },
+  {
+   "check": "data/verified/standings_2026.csv NE w",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "data/verified/standings_2026.csv NE l",
+   "result": "PASS",
+   "detail": "published 4 vs official 4"
+  },
+  {
+   "check": "data/verified/standings_2026.csv NE t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026.csv NE pf",
+   "result": "PASS",
+   "detail": "published 211 vs official 211"
+  },
+  {
+   "check": "data/verified/standings_2026.csv NE pa",
+   "result": "PASS",
+   "detail": "published 207 vs official 207"
+  },
+  {
+   "check": "data/verified/standings_2026.csv NYJ w",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "data/verified/standings_2026.csv NYJ l",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "data/verified/standings_2026.csv NYJ t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026.csv NYJ pf",
+   "result": "PASS",
+   "detail": "published 182 vs official 182"
+  },
+  {
+   "check": "data/verified/standings_2026.csv NYJ pa",
+   "result": "PASS",
+   "detail": "published 223 vs official 223"
+  },
+  {
+   "check": "data/verified/standings_2026.csv MIA w",
+   "result": "PASS",
+   "detail": "published 1 vs official 1"
+  },
+  {
+   "check": "data/verified/standings_2026.csv MIA l",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "data/verified/standings_2026.csv MIA t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026.csv MIA pf",
+   "result": "PASS",
+   "detail": "published 126 vs official 126"
+  },
+  {
+   "check": "data/verified/standings_2026.csv MIA pa",
+   "result": "PASS",
+   "detail": "published 200 vs official 200"
+  },
+  {
+   "check": "data/verified/standings_2026.csv PIT w",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "data/verified/standings_2026.csv PIT l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "data/verified/standings_2026.csv PIT t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026.csv PIT pf",
+   "result": "PASS",
+   "detail": "published 180 vs official 180"
+  },
+  {
+   "check": "data/verified/standings_2026.csv PIT pa",
+   "result": "PASS",
+   "detail": "published 144 vs official 144"
+  },
+  {
+   "check": "data/verified/standings_2026.csv CIN w",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "data/verified/standings_2026.csv CIN l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "data/verified/standings_2026.csv CIN t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026.csv CIN pf",
+   "result": "PASS",
+   "detail": "published 240 vs official 240"
+  },
+  {
+   "check": "data/verified/standings_2026.csv CIN pa",
+   "result": "PASS",
+   "detail": "published 175 vs official 175"
+  },
+  {
+   "check": "data/verified/standings_2026.csv CLE w",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "data/verified/standings_2026.csv CLE l",
+   "result": "PASS",
+   "detail": "published 4 vs official 4"
+  },
+  {
+   "check": "data/verified/standings_2026.csv CLE t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026.csv CLE pf",
+   "result": "PASS",
+   "detail": "published 161 vs official 161"
+  },
+  {
+   "check": "data/verified/standings_2026.csv CLE pa",
+   "result": "PASS",
+   "detail": "published 196 vs official 196"
+  },
+  {
+   "check": "data/verified/standings_2026.csv BAL w",
+   "result": "PASS",
+   "detail": "published 4 vs official 4"
+  },
+  {
+   "check": "data/verified/standings_2026.csv BAL l",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "data/verified/standings_2026.csv BAL t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026.csv BAL pf",
+   "result": "PASS",
+   "detail": "published 189 vs official 189"
+  },
+  {
+   "check": "data/verified/standings_2026.csv BAL pa",
+   "result": "PASS",
+   "detail": "published 236 vs official 236"
+  },
+  {
+   "check": "data/verified/standings_2026.csv JAX w",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "data/verified/standings_2026.csv JAX l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "data/verified/standings_2026.csv JAX t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026.csv JAX pf",
+   "result": "PASS",
+   "detail": "published 229 vs official 229"
+  },
+  {
+   "check": "data/verified/standings_2026.csv JAX pa",
+   "result": "PASS",
+   "detail": "published 121 vs official 121"
+  },
+  {
+   "check": "data/verified/standings_2026.csv HOU w",
+   "result": "PASS",
+   "detail": "published 3 vs official 3"
+  },
+  {
+   "check": "data/verified/standings_2026.csv HOU l",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "data/verified/standings_2026.csv HOU t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026.csv HOU pf",
+   "result": "PASS",
+   "detail": "published 209 vs official 209"
+  },
+  {
+   "check": "data/verified/standings_2026.csv HOU pa",
+   "result": "PASS",
+   "detail": "published 192 vs official 192"
+  },
+  {
+   "check": "data/verified/standings_2026.csv IND w",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "data/verified/standings_2026.csv IND l",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "data/verified/standings_2026.csv IND t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026.csv IND pf",
+   "result": "PASS",
+   "detail": "published 184 vs official 184"
+  },
+  {
+   "check": "data/verified/standings_2026.csv IND pa",
+   "result": "PASS",
+   "detail": "published 249 vs official 249"
+  },
+  {
+   "check": "data/verified/standings_2026.csv TEN w",
+   "result": "PASS",
+   "detail": "published 1 vs official 1"
+  },
+  {
+   "check": "data/verified/standings_2026.csv TEN l",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "data/verified/standings_2026.csv TEN t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026.csv TEN pf",
+   "result": "PASS",
+   "detail": "published 144 vs official 144"
+  },
+  {
+   "check": "data/verified/standings_2026.csv TEN pa",
+   "result": "PASS",
+   "detail": "published 199 vs official 199"
+  },
+  {
+   "check": "data/verified/standings_2026.csv DEN w",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "data/verified/standings_2026.csv DEN l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "data/verified/standings_2026.csv DEN t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026.csv DEN pf",
+   "result": "PASS",
+   "detail": "published 198 vs official 198"
+  },
+  {
+   "check": "data/verified/standings_2026.csv DEN pa",
+   "result": "PASS",
+   "detail": "published 186 vs official 186"
+  },
+  {
+   "check": "data/verified/standings_2026.csv KC w",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "data/verified/standings_2026.csv KC l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "data/verified/standings_2026.csv KC t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026.csv KC pf",
+   "result": "PASS",
+   "detail": "published 202 vs official 202"
+  },
+  {
+   "check": "data/verified/standings_2026.csv KC pa",
+   "result": "PASS",
+   "detail": "published 143 vs official 143"
+  },
+  {
+   "check": "data/verified/standings_2026.csv LV w",
+   "result": "PASS",
+   "detail": "published 4 vs official 4"
+  },
+  {
+   "check": "data/verified/standings_2026.csv LV l",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "data/verified/standings_2026.csv LV t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026.csv LV pf",
+   "result": "PASS",
+   "detail": "published 238 vs official 238"
+  },
+  {
+   "check": "data/verified/standings_2026.csv LV pa",
+   "result": "PASS",
+   "detail": "published 268 vs official 268"
+  },
+  {
+   "check": "data/verified/standings_2026.csv LAC w",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026.csv LAC l",
+   "result": "PASS",
+   "detail": "published 8 vs official 8"
+  },
+  {
+   "check": "data/verified/standings_2026.csv LAC t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026.csv LAC pf",
+   "result": "PASS",
+   "detail": "published 121 vs official 121"
+  },
+  {
+   "check": "data/verified/standings_2026.csv LAC pa",
+   "result": "PASS",
+   "detail": "published 219 vs official 219"
+  },
+  {
+   "check": "data/verified/standings_2026.csv NYG w",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "data/verified/standings_2026.csv NYG l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "data/verified/standings_2026.csv NYG t",
+   "result": "PASS",
+   "detail": "published 1 vs official 1"
+  },
+  {
+   "check": "data/verified/standings_2026.csv NYG pf",
+   "result": "PASS",
+   "detail": "published 182 vs official 182"
+  },
+  {
+   "check": "data/verified/standings_2026.csv NYG pa",
+   "result": "PASS",
+   "detail": "published 172 vs official 172"
+  },
+  {
+   "check": "data/verified/standings_2026.csv DAL w",
+   "result": "PASS",
+   "detail": "published 4 vs official 4"
+  },
+  {
+   "check": "data/verified/standings_2026.csv DAL l",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "data/verified/standings_2026.csv DAL t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026.csv DAL pf",
+   "result": "PASS",
+   "detail": "published 246 vs official 246"
+  },
+  {
+   "check": "data/verified/standings_2026.csv DAL pa",
+   "result": "PASS",
+   "detail": "published 236 vs official 236"
+  },
+  {
+   "check": "data/verified/standings_2026.csv WAS w",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "data/verified/standings_2026.csv WAS l",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "data/verified/standings_2026.csv WAS t",
+   "result": "PASS",
+   "detail": "published 1 vs official 1"
+  },
+  {
+   "check": "data/verified/standings_2026.csv WAS pf",
+   "result": "PASS",
+   "detail": "published 172 vs official 172"
+  },
+  {
+   "check": "data/verified/standings_2026.csv WAS pa",
+   "result": "PASS",
+   "detail": "published 202 vs official 202"
+  },
+  {
+   "check": "data/verified/standings_2026.csv PHI w",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "data/verified/standings_2026.csv PHI l",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "data/verified/standings_2026.csv PHI t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026.csv PHI pf",
+   "result": "PASS",
+   "detail": "published 148 vs official 148"
+  },
+  {
+   "check": "data/verified/standings_2026.csv PHI pa",
+   "result": "PASS",
+   "detail": "published 221 vs official 221"
+  },
+  {
+   "check": "data/verified/standings_2026.csv CHI w",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "data/verified/standings_2026.csv CHI l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "data/verified/standings_2026.csv CHI t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026.csv CHI pf",
+   "result": "PASS",
+   "detail": "published 241 vs official 241"
+  },
+  {
+   "check": "data/verified/standings_2026.csv CHI pa",
+   "result": "PASS",
+   "detail": "published 184 vs official 184"
+  },
+  {
+   "check": "data/verified/standings_2026.csv DET w",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "data/verified/standings_2026.csv DET l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "data/verified/standings_2026.csv DET t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026.csv DET pf",
+   "result": "PASS",
+   "detail": "published 222 vs official 222"
+  },
+  {
+   "check": "data/verified/standings_2026.csv DET pa",
+   "result": "PASS",
+   "detail": "published 189 vs official 189"
+  },
+  {
+   "check": "data/verified/standings_2026.csv MIN w",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "data/verified/standings_2026.csv MIN l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "data/verified/standings_2026.csv MIN t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026.csv MIN pf",
+   "result": "PASS",
+   "detail": "published 146 vs official 146"
+  },
+  {
+   "check": "data/verified/standings_2026.csv MIN pa",
+   "result": "PASS",
+   "detail": "published 116 vs official 116"
+  },
+  {
+   "check": "data/verified/standings_2026.csv GB w",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "data/verified/standings_2026.csv GB l",
+   "result": "PASS",
+   "detail": "published 3 vs official 3"
+  },
+  {
+   "check": "data/verified/standings_2026.csv GB t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026.csv GB pf",
+   "result": "PASS",
+   "detail": "published 216 vs official 216"
+  },
+  {
+   "check": "data/verified/standings_2026.csv GB pa",
+   "result": "PASS",
+   "detail": "published 191 vs official 191"
+  },
+  {
+   "check": "data/verified/standings_2026.csv CAR w",
+   "result": "PASS",
+   "detail": "published 3 vs official 3"
+  },
+  {
+   "check": "data/verified/standings_2026.csv CAR l",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "data/verified/standings_2026.csv CAR t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026.csv CAR pf",
+   "result": "PASS",
+   "detail": "published 199 vs official 199"
+  },
+  {
+   "check": "data/verified/standings_2026.csv CAR pa",
+   "result": "PASS",
+   "detail": "published 219 vs official 219"
+  },
+  {
+   "check": "data/verified/standings_2026.csv NO w",
+   "result": "PASS",
+   "detail": "published 3 vs official 3"
+  },
+  {
+   "check": "data/verified/standings_2026.csv NO l",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "data/verified/standings_2026.csv NO t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026.csv NO pf",
+   "result": "PASS",
+   "detail": "published 185 vs official 185"
+  },
+  {
+   "check": "data/verified/standings_2026.csv NO pa",
+   "result": "PASS",
+   "detail": "published 216 vs official 216"
+  },
+  {
+   "check": "data/verified/standings_2026.csv TB w",
+   "result": "PASS",
+   "detail": "published 3 vs official 3"
+  },
+  {
+   "check": "data/verified/standings_2026.csv TB l",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "data/verified/standings_2026.csv TB t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026.csv TB pf",
+   "result": "PASS",
+   "detail": "published 202 vs official 202"
+  },
+  {
+   "check": "data/verified/standings_2026.csv TB pa",
+   "result": "PASS",
+   "detail": "published 178 vs official 178"
+  },
+  {
+   "check": "data/verified/standings_2026.csv ATL w",
+   "result": "PASS",
+   "detail": "published 3 vs official 3"
+  },
+  {
+   "check": "data/verified/standings_2026.csv ATL l",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "data/verified/standings_2026.csv ATL t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026.csv ATL pf",
+   "result": "PASS",
+   "detail": "published 188 vs official 188"
+  },
+  {
+   "check": "data/verified/standings_2026.csv ATL pa",
+   "result": "PASS",
+   "detail": "published 223 vs official 223"
+  },
+  {
+   "check": "data/verified/standings_2026.csv SF w",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "data/verified/standings_2026.csv SF l",
+   "result": "PASS",
+   "detail": "published 1 vs official 1"
+  },
+  {
+   "check": "data/verified/standings_2026.csv SF t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026.csv SF pf",
+   "result": "PASS",
+   "detail": "published 235 vs official 235"
+  },
+  {
+   "check": "data/verified/standings_2026.csv SF pa",
+   "result": "PASS",
+   "detail": "published 156 vs official 156"
+  },
+  {
+   "check": "data/verified/standings_2026.csv SEA w",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "data/verified/standings_2026.csv SEA l",
+   "result": "PASS",
+   "detail": "published 4 vs official 4"
+  },
+  {
+   "check": "data/verified/standings_2026.csv SEA t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026.csv SEA pf",
+   "result": "PASS",
+   "detail": "published 202 vs official 202"
+  },
+  {
+   "check": "data/verified/standings_2026.csv SEA pa",
+   "result": "PASS",
+   "detail": "published 162 vs official 162"
+  },
+  {
+   "check": "data/verified/standings_2026.csv LA w",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "data/verified/standings_2026.csv LA l",
+   "result": "PASS",
+   "detail": "published 4 vs official 4"
+  },
+  {
+   "check": "data/verified/standings_2026.csv LA t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026.csv LA pf",
+   "result": "PASS",
+   "detail": "published 214 vs official 214"
+  },
+  {
+   "check": "data/verified/standings_2026.csv LA pa",
+   "result": "PASS",
+   "detail": "published 181 vs official 181"
+  },
+  {
+   "check": "data/verified/standings_2026.csv AZ w",
+   "result": "PASS",
+   "detail": "published 3 vs official 3"
+  },
+  {
+   "check": "data/verified/standings_2026.csv AZ l",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "data/verified/standings_2026.csv AZ t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026.csv AZ pf",
+   "result": "PASS",
+   "detail": "published 178 vs official 178"
+  },
+  {
+   "check": "data/verified/standings_2026.csv AZ pa",
+   "result": "PASS",
+   "detail": "published 255 vs official 255"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv BUF w",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv BUF l",
+   "result": "PASS",
+   "detail": "published 1 vs official 1"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv BUF t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv BUF pf",
+   "result": "PASS",
+   "detail": "published 256 vs official 256"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv BUF pa",
+   "result": "PASS",
+   "detail": "published 187 vs official 187"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv NE w",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv NE l",
+   "result": "PASS",
+   "detail": "published 4 vs official 4"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv NE t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv NE pf",
+   "result": "PASS",
+   "detail": "published 211 vs official 211"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv NE pa",
+   "result": "PASS",
+   "detail": "published 207 vs official 207"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv NYJ w",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv NYJ l",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv NYJ t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv NYJ pf",
+   "result": "PASS",
+   "detail": "published 182 vs official 182"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv NYJ pa",
+   "result": "PASS",
+   "detail": "published 223 vs official 223"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv MIA w",
+   "result": "PASS",
+   "detail": "published 1 vs official 1"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv MIA l",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv MIA t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv MIA pf",
+   "result": "PASS",
+   "detail": "published 126 vs official 126"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv MIA pa",
+   "result": "PASS",
+   "detail": "published 200 vs official 200"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv PIT w",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv PIT l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv PIT t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv PIT pf",
+   "result": "PASS",
+   "detail": "published 180 vs official 180"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv PIT pa",
+   "result": "PASS",
+   "detail": "published 144 vs official 144"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv CIN w",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv CIN l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv CIN t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv CIN pf",
+   "result": "PASS",
+   "detail": "published 240 vs official 240"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv CIN pa",
+   "result": "PASS",
+   "detail": "published 175 vs official 175"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv CLE w",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv CLE l",
+   "result": "PASS",
+   "detail": "published 4 vs official 4"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv CLE t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv CLE pf",
+   "result": "PASS",
+   "detail": "published 161 vs official 161"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv CLE pa",
+   "result": "PASS",
+   "detail": "published 196 vs official 196"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv BAL w",
+   "result": "PASS",
+   "detail": "published 4 vs official 4"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv BAL l",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv BAL t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv BAL pf",
+   "result": "PASS",
+   "detail": "published 189 vs official 189"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv BAL pa",
+   "result": "PASS",
+   "detail": "published 236 vs official 236"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv JAX w",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv JAX l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv JAX t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv JAX pf",
+   "result": "PASS",
+   "detail": "published 229 vs official 229"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv JAX pa",
+   "result": "PASS",
+   "detail": "published 121 vs official 121"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv HOU w",
+   "result": "PASS",
+   "detail": "published 3 vs official 3"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv HOU l",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv HOU t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv HOU pf",
+   "result": "PASS",
+   "detail": "published 209 vs official 209"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv HOU pa",
+   "result": "PASS",
+   "detail": "published 192 vs official 192"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv IND w",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv IND l",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv IND t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv IND pf",
+   "result": "PASS",
+   "detail": "published 184 vs official 184"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv IND pa",
+   "result": "PASS",
+   "detail": "published 249 vs official 249"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv TEN w",
+   "result": "PASS",
+   "detail": "published 1 vs official 1"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv TEN l",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv TEN t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv TEN pf",
+   "result": "PASS",
+   "detail": "published 144 vs official 144"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv TEN pa",
+   "result": "PASS",
+   "detail": "published 199 vs official 199"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv DEN w",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv DEN l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv DEN t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv DEN pf",
+   "result": "PASS",
+   "detail": "published 198 vs official 198"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv DEN pa",
+   "result": "PASS",
+   "detail": "published 186 vs official 186"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv KC w",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv KC l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv KC t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv KC pf",
+   "result": "PASS",
+   "detail": "published 202 vs official 202"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv KC pa",
+   "result": "PASS",
+   "detail": "published 143 vs official 143"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv LV w",
+   "result": "PASS",
+   "detail": "published 4 vs official 4"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv LV l",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv LV t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv LV pf",
+   "result": "PASS",
+   "detail": "published 238 vs official 238"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv LV pa",
+   "result": "PASS",
+   "detail": "published 268 vs official 268"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv LAC w",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv LAC l",
+   "result": "PASS",
+   "detail": "published 8 vs official 8"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv LAC t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv LAC pf",
+   "result": "PASS",
+   "detail": "published 121 vs official 121"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv LAC pa",
+   "result": "PASS",
+   "detail": "published 219 vs official 219"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv NYG w",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv NYG l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv NYG t",
+   "result": "PASS",
+   "detail": "published 1 vs official 1"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv NYG pf",
+   "result": "PASS",
+   "detail": "published 182 vs official 182"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv NYG pa",
+   "result": "PASS",
+   "detail": "published 172 vs official 172"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv DAL w",
+   "result": "PASS",
+   "detail": "published 4 vs official 4"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv DAL l",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv DAL t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv DAL pf",
+   "result": "PASS",
+   "detail": "published 246 vs official 246"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv DAL pa",
+   "result": "PASS",
+   "detail": "published 236 vs official 236"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv WAS w",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv WAS l",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv WAS t",
+   "result": "PASS",
+   "detail": "published 1 vs official 1"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv WAS pf",
+   "result": "PASS",
+   "detail": "published 172 vs official 172"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv WAS pa",
+   "result": "PASS",
+   "detail": "published 202 vs official 202"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv PHI w",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv PHI l",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv PHI t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv PHI pf",
+   "result": "PASS",
+   "detail": "published 148 vs official 148"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv PHI pa",
+   "result": "PASS",
+   "detail": "published 221 vs official 221"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv CHI w",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv CHI l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv CHI t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv CHI pf",
+   "result": "PASS",
+   "detail": "published 241 vs official 241"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv CHI pa",
+   "result": "PASS",
+   "detail": "published 184 vs official 184"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv DET w",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv DET l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv DET t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv DET pf",
+   "result": "PASS",
+   "detail": "published 222 vs official 222"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv DET pa",
+   "result": "PASS",
+   "detail": "published 189 vs official 189"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv MIN w",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv MIN l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv MIN t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv MIN pf",
+   "result": "PASS",
+   "detail": "published 146 vs official 146"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv MIN pa",
+   "result": "PASS",
+   "detail": "published 116 vs official 116"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv GB w",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv GB l",
+   "result": "PASS",
+   "detail": "published 3 vs official 3"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv GB t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv GB pf",
+   "result": "PASS",
+   "detail": "published 216 vs official 216"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv GB pa",
+   "result": "PASS",
+   "detail": "published 191 vs official 191"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv CAR w",
+   "result": "PASS",
+   "detail": "published 3 vs official 3"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv CAR l",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv CAR t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv CAR pf",
+   "result": "PASS",
+   "detail": "published 199 vs official 199"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv CAR pa",
+   "result": "PASS",
+   "detail": "published 219 vs official 219"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv NO w",
+   "result": "PASS",
+   "detail": "published 3 vs official 3"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv NO l",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv NO t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv NO pf",
+   "result": "PASS",
+   "detail": "published 185 vs official 185"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv NO pa",
+   "result": "PASS",
+   "detail": "published 216 vs official 216"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv TB w",
+   "result": "PASS",
+   "detail": "published 3 vs official 3"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv TB l",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv TB t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv TB pf",
+   "result": "PASS",
+   "detail": "published 202 vs official 202"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv TB pa",
+   "result": "PASS",
+   "detail": "published 178 vs official 178"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv ATL w",
+   "result": "PASS",
+   "detail": "published 3 vs official 3"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv ATL l",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv ATL t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv ATL pf",
+   "result": "PASS",
+   "detail": "published 188 vs official 188"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv ATL pa",
+   "result": "PASS",
+   "detail": "published 223 vs official 223"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv SF w",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv SF l",
+   "result": "PASS",
+   "detail": "published 1 vs official 1"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv SF t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv SF pf",
+   "result": "PASS",
+   "detail": "published 235 vs official 235"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv SF pa",
+   "result": "PASS",
+   "detail": "published 156 vs official 156"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv SEA w",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv SEA l",
+   "result": "PASS",
+   "detail": "published 4 vs official 4"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv SEA t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv SEA pf",
+   "result": "PASS",
+   "detail": "published 202 vs official 202"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv SEA pa",
+   "result": "PASS",
+   "detail": "published 162 vs official 162"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv LA w",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv LA l",
+   "result": "PASS",
+   "detail": "published 4 vs official 4"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv LA t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv LA pf",
+   "result": "PASS",
+   "detail": "published 214 vs official 214"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv LA pa",
+   "result": "PASS",
+   "detail": "published 181 vs official 181"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv AZ w",
+   "result": "PASS",
+   "detail": "published 3 vs official 3"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv AZ l",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv AZ t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv AZ pf",
+   "result": "PASS",
+   "detail": "published 178 vs official 178"
+  },
+  {
+   "check": "data/verified/standings_2026_reg.tsv AZ pa",
+   "result": "PASS",
+   "detail": "published 255 vs official 255"
+  },
+  {
+   "check": "referee transcription BUF w",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "referee transcription BUF l",
+   "result": "PASS",
+   "detail": "published 1 vs official 1"
+  },
+  {
+   "check": "referee transcription BUF t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "referee transcription BUF pf",
+   "result": "PASS",
+   "detail": "published 256 vs official 256"
+  },
+  {
+   "check": "referee transcription BUF pa",
+   "result": "PASS",
+   "detail": "published 187 vs official 187"
+  },
+  {
+   "check": "referee transcription SF w",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "referee transcription SF l",
+   "result": "PASS",
+   "detail": "published 1 vs official 1"
+  },
+  {
+   "check": "referee transcription SF t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "referee transcription SF pf",
+   "result": "PASS",
+   "detail": "published 235 vs official 235"
+  },
+  {
+   "check": "referee transcription SF pa",
+   "result": "PASS",
+   "detail": "published 156 vs official 156"
+  },
+  {
+   "check": "referee transcription CHI w",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "referee transcription CHI l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "referee transcription CHI t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "referee transcription CHI pf",
+   "result": "PASS",
+   "detail": "published 241 vs official 241"
+  },
+  {
+   "check": "referee transcription CHI pa",
+   "result": "PASS",
+   "detail": "published 184 vs official 184"
+  },
+  {
+   "check": "referee transcription DEN w",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "referee transcription DEN l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "referee transcription DEN t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "referee transcription DEN pf",
+   "result": "PASS",
+   "detail": "published 198 vs official 198"
+  },
+  {
+   "check": "referee transcription DEN pa",
+   "result": "PASS",
+   "detail": "published 186 vs official 186"
+  },
+  {
+   "check": "referee transcription CIN w",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "referee transcription CIN l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "referee transcription CIN t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "referee transcription CIN pf",
+   "result": "PASS",
+   "detail": "published 240 vs official 240"
+  },
+  {
+   "check": "referee transcription CIN pa",
+   "result": "PASS",
+   "detail": "published 175 vs official 175"
+  },
+  {
+   "check": "referee transcription DET w",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "referee transcription DET l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "referee transcription DET t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "referee transcription DET pf",
+   "result": "PASS",
+   "detail": "published 222 vs official 222"
+  },
+  {
+   "check": "referee transcription DET pa",
+   "result": "PASS",
+   "detail": "published 189 vs official 189"
+  },
+  {
+   "check": "referee transcription JAX w",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "referee transcription JAX l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "referee transcription JAX t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "referee transcription JAX pf",
+   "result": "PASS",
+   "detail": "published 229 vs official 229"
+  },
+  {
+   "check": "referee transcription JAX pa",
+   "result": "PASS",
+   "detail": "published 121 vs official 121"
+  },
+  {
+   "check": "referee transcription KC w",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "referee transcription KC l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "referee transcription KC t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "referee transcription KC pf",
+   "result": "PASS",
+   "detail": "published 202 vs official 202"
+  },
+  {
+   "check": "referee transcription KC pa",
+   "result": "PASS",
+   "detail": "published 143 vs official 143"
+  },
+  {
+   "check": "referee transcription MIN w",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "referee transcription MIN l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "referee transcription MIN t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "referee transcription MIN pf",
+   "result": "PASS",
+   "detail": "published 146 vs official 146"
+  },
+  {
+   "check": "referee transcription MIN pa",
+   "result": "PASS",
+   "detail": "published 116 vs official 116"
+  },
+  {
+   "check": "referee transcription PIT w",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "referee transcription PIT l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "referee transcription PIT t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "referee transcription PIT pf",
+   "result": "PASS",
+   "detail": "published 180 vs official 180"
+  },
+  {
+   "check": "referee transcription PIT pa",
+   "result": "PASS",
+   "detail": "published 144 vs official 144"
+  },
+  {
+   "check": "referee transcription NYG w",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "referee transcription NYG l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "referee transcription NYG t",
+   "result": "PASS",
+   "detail": "published 1 vs official 1"
+  },
+  {
+   "check": "referee transcription NYG pf",
+   "result": "PASS",
+   "detail": "published 182 vs official 182"
+  },
+  {
+   "check": "referee transcription NYG pa",
+   "result": "PASS",
+   "detail": "published 172 vs official 172"
+  },
+  {
+   "check": "referee transcription GB w",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "referee transcription GB l",
+   "result": "PASS",
+   "detail": "published 3 vs official 3"
+  },
+  {
+   "check": "referee transcription GB t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "referee transcription GB pf",
+   "result": "PASS",
+   "detail": "published 216 vs official 216"
+  },
+  {
+   "check": "referee transcription GB pa",
+   "result": "PASS",
+   "detail": "published 191 vs official 191"
+  },
+  {
+   "check": "referee transcription CLE w",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "referee transcription CLE l",
+   "result": "PASS",
+   "detail": "published 4 vs official 4"
+  },
+  {
+   "check": "referee transcription CLE t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "referee transcription CLE pf",
+   "result": "PASS",
+   "detail": "published 161 vs official 161"
+  },
+  {
+   "check": "referee transcription CLE pa",
+   "result": "PASS",
+   "detail": "published 196 vs official 196"
+  },
+  {
+   "check": "referee transcription LA w",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "referee transcription LA l",
+   "result": "PASS",
+   "detail": "published 4 vs official 4"
+  },
+  {
+   "check": "referee transcription LA t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "referee transcription LA pf",
+   "result": "PASS",
+   "detail": "published 214 vs official 214"
+  },
+  {
+   "check": "referee transcription LA pa",
+   "result": "PASS",
+   "detail": "published 181 vs official 181"
+  },
+  {
+   "check": "referee transcription NE w",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "referee transcription NE l",
+   "result": "PASS",
+   "detail": "published 4 vs official 4"
+  },
+  {
+   "check": "referee transcription NE t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "referee transcription NE pf",
+   "result": "PASS",
+   "detail": "published 211 vs official 211"
+  },
+  {
+   "check": "referee transcription NE pa",
+   "result": "PASS",
+   "detail": "published 207 vs official 207"
+  },
+  {
+   "check": "referee transcription SEA w",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "referee transcription SEA l",
+   "result": "PASS",
+   "detail": "published 4 vs official 4"
+  },
+  {
+   "check": "referee transcription SEA t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "referee transcription SEA pf",
+   "result": "PASS",
+   "detail": "published 202 vs official 202"
+  },
+  {
+   "check": "referee transcription SEA pa",
+   "result": "PASS",
+   "detail": "published 162 vs official 162"
+  },
+  {
+   "check": "referee transcription BAL w",
+   "result": "PASS",
+   "detail": "published 4 vs official 4"
+  },
+  {
+   "check": "referee transcription BAL l",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "referee transcription BAL t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "referee transcription BAL pf",
+   "result": "PASS",
+   "detail": "published 189 vs official 189"
+  },
+  {
+   "check": "referee transcription BAL pa",
+   "result": "PASS",
+   "detail": "published 236 vs official 236"
+  },
+  {
+   "check": "referee transcription DAL w",
+   "result": "PASS",
+   "detail": "published 4 vs official 4"
+  },
+  {
+   "check": "referee transcription DAL l",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "referee transcription DAL t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "referee transcription DAL pf",
+   "result": "PASS",
+   "detail": "published 246 vs official 246"
+  },
+  {
+   "check": "referee transcription DAL pa",
+   "result": "PASS",
+   "detail": "published 236 vs official 236"
+  },
+  {
+   "check": "referee transcription LV w",
+   "result": "PASS",
+   "detail": "published 4 vs official 4"
+  },
+  {
+   "check": "referee transcription LV l",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "referee transcription LV t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "referee transcription LV pf",
+   "result": "PASS",
+   "detail": "published 238 vs official 238"
+  },
+  {
+   "check": "referee transcription LV pa",
+   "result": "PASS",
+   "detail": "published 268 vs official 268"
+  },
+  {
+   "check": "referee transcription CAR w",
+   "result": "PASS",
+   "detail": "published 3 vs official 3"
+  },
+  {
+   "check": "referee transcription CAR l",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "referee transcription CAR t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "referee transcription CAR pf",
+   "result": "PASS",
+   "detail": "published 199 vs official 199"
+  },
+  {
+   "check": "referee transcription CAR pa",
+   "result": "PASS",
+   "detail": "published 219 vs official 219"
+  },
+  {
+   "check": "referee transcription HOU w",
+   "result": "PASS",
+   "detail": "published 3 vs official 3"
+  },
+  {
+   "check": "referee transcription HOU l",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "referee transcription HOU t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "referee transcription HOU pf",
+   "result": "PASS",
+   "detail": "published 209 vs official 209"
+  },
+  {
+   "check": "referee transcription HOU pa",
+   "result": "PASS",
+   "detail": "published 192 vs official 192"
+  },
+  {
+   "check": "referee transcription NO w",
+   "result": "PASS",
+   "detail": "published 3 vs official 3"
+  },
+  {
+   "check": "referee transcription NO l",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "referee transcription NO t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "referee transcription NO pf",
+   "result": "PASS",
+   "detail": "published 185 vs official 185"
+  },
+  {
+   "check": "referee transcription NO pa",
+   "result": "PASS",
+   "detail": "published 216 vs official 216"
+  },
+  {
+   "check": "referee transcription ATL w",
+   "result": "PASS",
+   "detail": "published 3 vs official 3"
+  },
+  {
+   "check": "referee transcription ATL l",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "referee transcription ATL t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "referee transcription ATL pf",
+   "result": "PASS",
+   "detail": "published 188 vs official 188"
+  },
+  {
+   "check": "referee transcription ATL pa",
+   "result": "PASS",
+   "detail": "published 223 vs official 223"
+  },
+  {
+   "check": "referee transcription TB w",
+   "result": "PASS",
+   "detail": "published 3 vs official 3"
+  },
+  {
+   "check": "referee transcription TB l",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "referee transcription TB t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "referee transcription TB pf",
+   "result": "PASS",
+   "detail": "published 202 vs official 202"
+  },
+  {
+   "check": "referee transcription TB pa",
+   "result": "PASS",
+   "detail": "published 178 vs official 178"
+  },
+  {
+   "check": "referee transcription WAS w",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "referee transcription WAS l",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "referee transcription WAS t",
+   "result": "PASS",
+   "detail": "published 1 vs official 1"
+  },
+  {
+   "check": "referee transcription WAS pf",
+   "result": "PASS",
+   "detail": "published 172 vs official 172"
+  },
+  {
+   "check": "referee transcription WAS pa",
+   "result": "PASS",
+   "detail": "published 202 vs official 202"
+  },
+  {
+   "check": "referee transcription IND w",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "referee transcription IND l",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "referee transcription IND t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "referee transcription IND pf",
+   "result": "PASS",
+   "detail": "published 184 vs official 184"
+  },
+  {
+   "check": "referee transcription IND pa",
+   "result": "PASS",
+   "detail": "published 249 vs official 249"
+  },
+  {
+   "check": "referee transcription NYJ w",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "referee transcription NYJ l",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "referee transcription NYJ t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "referee transcription NYJ pf",
+   "result": "PASS",
+   "detail": "published 182 vs official 182"
+  },
+  {
+   "check": "referee transcription NYJ pa",
+   "result": "PASS",
+   "detail": "published 223 vs official 223"
+  },
+  {
+   "check": "referee transcription PHI w",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "referee transcription PHI l",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "referee transcription PHI t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "referee transcription PHI pf",
+   "result": "PASS",
+   "detail": "published 148 vs official 148"
+  },
+  {
+   "check": "referee transcription PHI pa",
+   "result": "PASS",
+   "detail": "published 221 vs official 221"
+  },
+  {
+   "check": "referee transcription MIA w",
+   "result": "PASS",
+   "detail": "published 1 vs official 1"
+  },
+  {
+   "check": "referee transcription MIA l",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "referee transcription MIA t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "referee transcription MIA pf",
+   "result": "PASS",
+   "detail": "published 126 vs official 126"
+  },
+  {
+   "check": "referee transcription MIA pa",
+   "result": "PASS",
+   "detail": "published 200 vs official 200"
+  },
+  {
+   "check": "referee transcription TEN w",
+   "result": "PASS",
+   "detail": "published 1 vs official 1"
+  },
+  {
+   "check": "referee transcription TEN l",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "referee transcription TEN t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "referee transcription TEN pf",
+   "result": "PASS",
+   "detail": "published 144 vs official 144"
+  },
+  {
+   "check": "referee transcription TEN pa",
+   "result": "PASS",
+   "detail": "published 199 vs official 199"
+  },
+  {
+   "check": "referee transcription LAC w",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "referee transcription LAC l",
+   "result": "PASS",
+   "detail": "published 8 vs official 8"
+  },
+  {
+   "check": "referee transcription LAC t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "referee transcription LAC pf",
+   "result": "PASS",
+   "detail": "published 121 vs official 121"
+  },
+  {
+   "check": "referee transcription LAC pa",
+   "result": "PASS",
+   "detail": "published 219 vs official 219"
+  },
+  {
+   "check": "Week 10 slate size",
+   "result": "PASS",
+   "detail": "model=14 official=14"
+  },
+  {
+   "check": "slate contains WAS @ NYG",
+   "result": "PASS",
+   "detail": "matchup missing from the published model output"
+  },
+  {
+   "check": "slate contains NE @ DET",
+   "result": "PASS",
+   "detail": "matchup missing from the published model output"
+  },
+  {
+   "check": "slate contains KC @ ATL",
+   "result": "PASS",
+   "detail": "matchup missing from the published model output"
+  },
+  {
+   "check": "slate contains HOU @ CLE",
+   "result": "PASS",
+   "detail": "matchup missing from the published model output"
+  },
+  {
+   "check": "slate contains MIN @ GB",
+   "result": "PASS",
+   "detail": "matchup missing from the published model output"
+  },
+  {
+   "check": "slate contains MIA @ IND",
+   "result": "PASS",
+   "detail": "matchup missing from the published model output"
+  },
+  {
+   "check": "slate contains CAR @ NO",
+   "result": "PASS",
+   "detail": "matchup missing from the published model output"
+  },
+  {
+   "check": "slate contains BUF @ NYJ",
+   "result": "PASS",
+   "detail": "matchup missing from the published model output"
+  },
+  {
+   "check": "slate contains JAX @ TEN",
+   "result": "PASS",
+   "detail": "matchup missing from the published model output"
+  },
+  {
+   "check": "slate contains LA @ AZ",
+   "result": "PASS",
+   "detail": "matchup missing from the published model output"
+  },
+  {
+   "check": "slate contains SEA @ LV",
+   "result": "PASS",
+   "detail": "matchup missing from the published model output"
+  },
+  {
+   "check": "slate contains SF @ DAL",
+   "result": "PASS",
+   "detail": "matchup missing from the published model output"
+  },
+  {
+   "check": "slate contains PIT @ CIN",
+   "result": "PASS",
+   "detail": "matchup missing from the published model output"
+  },
+  {
+   "check": "slate contains LAC @ BAL",
+   "result": "PASS",
+   "detail": "matchup missing from the published model output"
+  },
+  {
+   "check": "model game WAS @ NYG is an official game",
+   "result": "PASS",
+   "detail": "published game is not on the official Week 10 schedule"
+  },
+  {
+   "check": "gameday WAS @ NYG",
+   "result": "PASS",
+   "detail": "model 2026-11-12 vs official 2026-11-12"
+  },
+  {
+   "check": "model game NE @ DET is an official game",
+   "result": "PASS",
+   "detail": "published game is not on the official Week 10 schedule"
+  },
+  {
+   "check": "gameday NE @ DET",
+   "result": "PASS",
+   "detail": "model 2026-11-15 vs official 2026-11-15"
+  },
+  {
+   "check": "model game KC @ ATL is an official game",
+   "result": "PASS",
+   "detail": "published game is not on the official Week 10 schedule"
+  },
+  {
+   "check": "gameday KC @ ATL",
+   "result": "PASS",
+   "detail": "model 2026-11-15 vs official 2026-11-15"
+  },
+  {
+   "check": "model game HOU @ CLE is an official game",
+   "result": "PASS",
+   "detail": "published game is not on the official Week 10 schedule"
+  },
+  {
+   "check": "gameday HOU @ CLE",
+   "result": "PASS",
+   "detail": "model 2026-11-15 vs official 2026-11-15"
+  },
+  {
+   "check": "model game MIN @ GB is an official game",
+   "result": "PASS",
+   "detail": "published game is not on the official Week 10 schedule"
+  },
+  {
+   "check": "gameday MIN @ GB",
+   "result": "PASS",
+   "detail": "model 2026-11-15 vs official 2026-11-15"
+  },
+  {
+   "check": "model game MIA @ IND is an official game",
+   "result": "PASS",
+   "detail": "published game is not on the official Week 10 schedule"
+  },
+  {
+   "check": "gameday MIA @ IND",
+   "result": "PASS",
+   "detail": "model 2026-11-15 vs official 2026-11-15"
+  },
+  {
+   "check": "model game CAR @ NO is an official game",
+   "result": "PASS",
+   "detail": "published game is not on the official Week 10 schedule"
+  },
+  {
+   "check": "gameday CAR @ NO",
+   "result": "PASS",
+   "detail": "model 2026-11-15 vs official 2026-11-15"
+  },
+  {
+   "check": "model game BUF @ NYJ is an official game",
+   "result": "PASS",
+   "detail": "published game is not on the official Week 10 schedule"
+  },
+  {
+   "check": "gameday BUF @ NYJ",
+   "result": "PASS",
+   "detail": "model 2026-11-15 vs official 2026-11-15"
+  },
+  {
+   "check": "model game JAX @ TEN is an official game",
+   "result": "PASS",
+   "detail": "published game is not on the official Week 10 schedule"
+  },
+  {
+   "check": "gameday JAX @ TEN",
+   "result": "PASS",
+   "detail": "model 2026-11-15 vs official 2026-11-15"
+  },
+  {
+   "check": "model game LA @ AZ is an official game",
+   "result": "PASS",
+   "detail": "published game is not on the official Week 10 schedule"
+  },
+  {
+   "check": "gameday LA @ AZ",
+   "result": "PASS",
+   "detail": "model 2026-11-15 vs official 2026-11-15"
+  },
+  {
+   "check": "model game SEA @ LV is an official game",
+   "result": "PASS",
+   "detail": "published game is not on the official Week 10 schedule"
+  },
+  {
+   "check": "gameday SEA @ LV",
+   "result": "PASS",
+   "detail": "model 2026-11-15 vs official 2026-11-15"
+  },
+  {
+   "check": "model game SF @ DAL is an official game",
+   "result": "PASS",
+   "detail": "published game is not on the official Week 10 schedule"
+  },
+  {
+   "check": "gameday SF @ DAL",
+   "result": "PASS",
+   "detail": "model 2026-11-15 vs official 2026-11-15"
+  },
+  {
+   "check": "model game PIT @ CIN is an official game",
+   "result": "PASS",
+   "detail": "published game is not on the official Week 10 schedule"
+  },
+  {
+   "check": "gameday PIT @ CIN",
+   "result": "PASS",
+   "detail": "model 2026-11-15 vs official 2026-11-15"
+  },
+  {
+   "check": "model game LAC @ BAL is an official game",
+   "result": "PASS",
+   "detail": "published game is not on the official Week 10 schedule"
+  },
+  {
+   "check": "gameday LAC @ BAL",
+   "result": "PASS",
+   "detail": "model 2026-11-16 vs official 2026-11-16"
+  },
+  {
+   "check": "schedule record WAS (away)",
+   "result": "PASS",
+   "detail": "schedule page prints 2-5-1 vs standings page 2-5-1"
+  },
+  {
+   "check": "schedule record NYG (home)",
+   "result": "PASS",
+   "detail": "schedule page prints 5-2-1 vs standings page 5-2-1"
+  },
+  {
+   "check": "schedule record NE (away)",
+   "result": "PASS",
+   "detail": "schedule page prints 5-4 vs standings page 5-4-0"
+  },
+  {
+   "check": "schedule record DET (home)",
+   "result": "PASS",
+   "detail": "schedule page prints 6-2 vs standings page 6-2-0"
+  },
+  {
+   "check": "schedule record KC (away)",
+   "result": "PASS",
+   "detail": "schedule page prints 6-2 vs standings page 6-2-0"
+  },
+  {
+   "check": "schedule record ATL (home)",
+   "result": "PASS",
+   "detail": "schedule page prints 3-6 vs standings page 3-6-0"
+  },
+  {
+   "check": "schedule record HOU (away)",
+   "result": "PASS",
+   "detail": "schedule page prints 3-5 vs standings page 3-5-0"
+  },
+  {
+   "check": "schedule record CLE (home)",
+   "result": "PASS",
+   "detail": "schedule page prints 5-4 vs standings page 5-4-0"
+  },
+  {
+   "check": "schedule record MIN (away)",
+   "result": "PASS",
+   "detail": "schedule page prints 6-2 vs standings page 6-2-0"
+  },
+  {
+   "check": "schedule record GB (home)",
+   "result": "PASS",
+   "detail": "schedule page prints 6-3 vs standings page 6-3-0"
+  },
+  {
+   "check": "schedule record MIA (away)",
+   "result": "PASS",
+   "detail": "schedule page prints 1-7 vs standings page 1-7-0"
+  },
+  {
+   "check": "schedule record IND (home)",
+   "result": "PASS",
+   "detail": "schedule page prints 2-7 vs standings page 2-7-0"
+  },
+  {
+   "check": "schedule record CAR (away)",
+   "result": "PASS",
+   "detail": "schedule page prints 3-5 vs standings page 3-5-0"
+  },
+  {
+   "check": "schedule record NO (home)",
+   "result": "PASS",
+   "detail": "schedule page prints 3-5 vs standings page 3-5-0"
+  },
+  {
+   "check": "schedule record BUF (away)",
+   "result": "PASS",
+   "detail": "schedule page prints 7-1 vs standings page 7-1-0"
+  },
+  {
+   "check": "schedule record NYJ (home)",
+   "result": "PASS",
+   "detail": "schedule page prints 2-7 vs standings page 2-7-0"
+  },
+  {
+   "check": "schedule record JAX (away)",
+   "result": "PASS",
+   "detail": "schedule page prints 6-2 vs standings page 6-2-0"
+  },
+  {
+   "check": "schedule record TEN (home)",
+   "result": "PASS",
+   "detail": "schedule page prints 1-7 vs standings page 1-7-0"
+  },
+  {
+   "check": "schedule record LA (away)",
+   "result": "PASS",
+   "detail": "schedule page prints 5-4 vs standings page 5-4-0"
+  },
+  {
+   "check": "schedule record AZ (home)",
+   "result": "PASS",
+   "detail": "schedule page prints 3-6 vs standings page 3-6-0"
+  },
+  {
+   "check": "schedule record SEA (away)",
+   "result": "PASS",
+   "detail": "schedule page prints 5-4 vs standings page 5-4-0"
+  },
+  {
+   "check": "schedule record LV (home)",
+   "result": "PASS",
+   "detail": "schedule page prints 4-5 vs standings page 4-5-0"
+  },
+  {
+   "check": "schedule record SF (away)",
+   "result": "PASS",
+   "detail": "schedule page prints 7-1 vs standings page 7-1-0"
+  },
+  {
+   "check": "schedule record DAL (home)",
+   "result": "PASS",
+   "detail": "schedule page prints 4-5 vs standings page 4-5-0"
+  },
+  {
+   "check": "schedule record PIT (away)",
+   "result": "PASS",
+   "detail": "schedule page prints 6-2 vs standings page 6-2-0"
+  },
+  {
+   "check": "schedule record CIN (home)",
+   "result": "PASS",
+   "detail": "schedule page prints 6-2 vs standings page 6-2-0"
+  },
+  {
+   "check": "schedule record LAC (away)",
+   "result": "PASS",
+   "detail": "schedule page prints 0-8 vs standings page 0-8-0"
+  },
+  {
+   "check": "schedule record BAL (home)",
+   "result": "PASS",
+   "detail": "schedule page prints 4-5 vs standings page 4-5-0"
+  },
+  {
+   "check": "Week 10 bye list",
+   "result": "PASS",
+   "detail": "repo=['CHI', 'DEN', 'PHI', 'TB'] official=['CHI', 'DEN', 'PHI', 'TB']"
+  }
+ ]
+}

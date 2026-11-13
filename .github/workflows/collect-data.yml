@@ -3,6 +3,11 @@ name: Collect NFL data and rebuild model outputs
 # Runs on GitHub's infrastructure because the Arena sandbox can only reach a small
 # allow-list of hosts (github.com, pypi.org, ...). Release assets live on
 # release-assets.githubusercontent.com, which is reachable from Actions.
+#
+# The refresh is deliberately end-to-end: it downloads the pinned source files, rebuilds the
+# model outputs, rebuilds every published page from those outputs and commits the data and
+# the pages together.  A page can therefore never show numbers from a snapshot that the
+# repository does not also hold.
 on:
   workflow_dispatch:
   push:
@@ -15,7 +20,6 @@ on:
     - cron: "17 11 * * *"   # daily refresh, 11:17 UTC
 permissions:
   contents: write
-
 concurrency:
   group: collect-data-${{ github.ref }}
   cancel-in-progress: true
@@ -52,43 +56,42 @@ jobs:
       - name: Report injury source actually used (including fallback)
         if: always()
         run: python pipeline/report_ingestion.py
-      # Session 3d5c5e2d-nfl1: re-render the published pages from the data just built. Before this
-      # step, a data refresh changed data/model/*.json but never the pages that show it.
-      - name: Re-render the published pages from the refreshed data
-        run: python pipeline/gen_site.py
-      - name: Check the committed-site rules would pass on the rendered pages
-        run: python tools/check_committed_site.py
+      # 4c043747: one build script rebuilds every published page from the refreshed data
+      # (supersedes the plain gen_site re-render step that used to live here).
+      - name: Rebuild every published page from the refreshed data
+        run: python3 tools/build_site_all.py
+      # Session 6e8ca348's decision-room render + official-evidence gates, kept whole
+      # during the d23c65ad takeover merge (their web/ pages are not covered by
+      # build_site_all.py).
+      - name: Render the decision room and verify against official pages
+        run: |
+          python3 tools/evidence_from_official.py
+          python3 tools/verify_official.py
+          python3 tools/build_decision_room.py
+          python3 tools/build_dashboard.py
       - name: Publish generator log
         if: always()
         run: |
           ls -la data/model/ || true
-
-      # ---- re-render every page that prints a model number -------------------
-      # Without this step the job commits refreshed JSON and the published HTML keeps the
-      # previous week's numbers with no visible warning. That is the staleness defect this
-      # repository found on the live landing page (NE "Out 2" beside data saying "Out 1").
-      # Session 6e8ca348's extended render + gate block, kept whole during the d23c65ad
-      # takeover merge; main's check_committed_site.py step above still runs first.
-      - name: Re-render the model pages from the refreshed data
+      - name: Check every page, link, source link and freshness rule
         run: |
-          python pipeline/gen_site.py
-          python tools/evidence_from_official.py
-          python tools/verify_official.py
-          python tools/build_decision_room.py
-          python tools/build_dashboard.py
-          python tools/check_freshness.py
-          python tools/check_generators.py
+          python3 tools/check_committed_site.py
+          python3 scripts/verified/check_site.py
+          python3 tools/check_reachability.py
+          python3 tools/audit_official.py
+          python3 tools/check_freshness.py
+          python3 tools/check_generators.py
 
-      - name: Commit refreshed data and the pages rendered from it
+      - name: Commit refreshed data and the rebuilt pages
         run: |
           git config user.name "nfl1-data-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/model pipeline data/evidence data/audit data/decision_room index.html pages web governance.html 2>/dev/null || true
+          git add -A
           if git diff --cached --quiet; then
-            echo "No data or page changes"
+            echo "No data changes"
             exit 0
           fi
-          git commit -m "data: refresh model outputs and re-render every page [skip ci]"
+          git commit -m "data: refresh model outputs and rebuild the published site [skip ci]"
           for attempt in 1 2 3; do
             if git push origin HEAD:${{ github.ref_name }}; then
               echo "pushed on attempt $attempt"
