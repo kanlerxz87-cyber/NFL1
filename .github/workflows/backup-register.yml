@@ -34,20 +34,10 @@ jobs:
         run: python -m pip install --quiet requests beautifulsoup4 lxml
       - name: Scrape the official club roster pages (nfl.com)
         run: python tools/scrape_rosters.py
-      - name: Gate - all 32 official rosters must parse
-        run: |
-          python - <<'PY'
-          import json, sys
-          d = json.load(open("data/backup-register/rosters_2026.json"))
-          c = d["counts"]
-          print(c)
-          if c["clubs_parsed"] != 32 or c["row_warnings"] != 0:
-              print("GATE FAILED: expected 32 clubs parsed with no row warnings")
-              sys.exit(1)
-          PY
       - name: Build the backup register from the official injury report and rosters
         run: python tools/build_backup_register.py
-      - name: Commit the register
+      - name: Commit the register (always, so diagnostics are visible)
+        if: always()
         run: |
           git config user.name "nfl1-data-bot"
           git config user.email "actions@users.noreply.github.com"
@@ -58,3 +48,14 @@ jobs:
             git commit -m "data: backup register from official nfl.com rosters [skip ci]"
             git push origin HEAD:${{ github.ref_name }}
           fi
+      - name: Gate - all 32 official rosters must parse (runs last)
+        run: |
+          python - <<'PY'
+          import json, sys
+          d = json.load(open("data/backup-register/rosters_2026.json"))
+          c = d["counts"]
+          print(c)
+          if c["clubs_parsed"] != 32 or c["row_warnings"] != 0:
+              print("GATE FAILED: expected 32 clubs parsed with no row warnings")
+              sys.exit(1)
+          PY
