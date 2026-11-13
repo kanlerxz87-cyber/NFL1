@@ -110,6 +110,11 @@ def main() -> int:
                 else:
                     problems.append(f"{p.name}: data table with no https source link")
 
+        # A doubled repo path (blob/main/blob/main/) resolves to a 404 on GitHub while still
+        # looking like a link in the HTML, so check it explicitly.
+        for bad in re.findall(r'href="[^"]*(?:blob|tree)/[a-z]+/(?:blob|tree)/[a-z]+/[^"]*"', text):
+            problems.append(f"{p.name}: doubled repo path in link ({bad[:80]})")
+
         prose = re.sub(r"<code\b.*?</code>|<pre\b.*?</pre>", "", text, flags=re.S)
         prose = re.sub(r"<[^>]+>", " ", prose)
         for pat, label in ((r"\*\*[^*\n]{1,80}\*\*", "**bold**"),
