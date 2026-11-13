@@ -464,7 +464,11 @@ def main() -> int:
     flags = [c for c in R.checks if c["status"] == "FLAG"]
     passes = [c for c in R.checks if c["status"] == "PASS"]
     report = dict(
-        generated_at=datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        # placeholder; preserved from the committed file when the payload is unchanged
+        # (d23c65ad fix: web/*.html embed this generated_at as their verification stamp,
+        # so a fresh timestamp on every rerun broke tools/verify_dashboard.py whenever
+        # verify_official ran after the web build).
+        generated_at=None,
         official_sources=dict(
             standings="https://www.nfl.com/standings/league/2026/reg",
             injuries="https://www.nfl.com/injuries/",
@@ -474,7 +478,21 @@ def main() -> int:
         counts=dict(passed=len(passes), flagged=len(flags), failed=len(fails)),
         checks=R.checks,
     )
-    with open(os.path.join(OUT, "official_verification.json"), "w", encoding="utf-8") as f:
+    out_path = os.path.join(OUT, "official_verification.json")
+    prior = {}
+    if os.path.exists(out_path):
+        try:
+            with open(out_path, encoding="utf-8") as f:
+                prior = json.load(f)
+        except (OSError, ValueError):
+            prior = {}
+    prior_payload = {k: v for k, v in prior.items() if k != "generated_at"}
+    new_payload = {k: v for k, v in report.items() if k != "generated_at"}
+    if prior_payload == new_payload and prior.get("generated_at"):
+        report["generated_at"] = prior["generated_at"]
+    else:
+        report["generated_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    with open(out_path, "w", encoding="utf-8") as f:
         json.dump(report, f, indent=1)
         f.write("\n")
 
