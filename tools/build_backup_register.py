@@ -42,6 +42,7 @@ GROUP = {
     "K": "K", "P": "P", "LS": "LS",
 }
 SUFFIXES = {"jr", "sr", "ii", "iii", "iv", "v"}
+ABBR_ALIAS = {"AZ": "ARI", "LAR": "LA", "WSH": "WAS", "JAC": "JAX"}
 
 
 def now_iso() -> str:
@@ -122,7 +123,7 @@ def main() -> int:
 
     entries = []
     for r in designations:
-        abbr = r.get("team")
+        abbr = ABBR_ALIAS.get(r.get("team"), r.get("team"))
         club = clubs.get(abbr)
         slug_url = club["url"] if club else None
         entry = {
