@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-13T13:09:51+00:00",
+ "generated_at": "2026-11-13T13:14:33+00:00",
  "evidence": {
   "season": 2026,
-  "week_complete": 9,
-  "week_next": 10,
+  "week_complete": 10,
+  "week_next": 11,
   "games_played": 136,
   "clubs": 32,
   "injury_rows": 279,
@@ -18,37 +18,37 @@
    "SEA"
   ],
   "depth_slots": 122,
-  "own_lines": 14,
+  "own_lines": 13,
   "strategies": 12,
   "strategies_pass": 0,
   "strategies_watch": 2,
   "strategies_fail": 10,
   "gates": 8,
-  "starters_flagged": 109,
-  "depth_matched_rows": 296,
+  "starters_flagged": 117,
+  "depth_matched_rows": 376,
   "unmatched_records": 8,
   "source_files_pinned": 12,
   "verification_checks": 28,
-  "verification_pass": 20,
+  "verification_pass": 18,
   "verification_flag": 8,
-  "verification_fail": 0
+  "verification_fail": 2
  },
  "model": {
   "state": "NOT SUPPORTED",
   "plain": "The model lost to the closing line out of sample and the fitted weight on the model is at or below zero, so its disagreement with the market carried no information in the test window. Publishing a model-vs-market difference as an 'edge' is not supported by this evidence.",
-  "test_n": 136,
-  "model_mae": 9.984,
-  "market_mae": 9.485,
+  "test_n": 137,
+  "model_mae": 9.952,
+  "market_mae": 9.449,
   "diff_ci": [
-   -0.054,
-   1.033
+   -0.032,
+   1.036
   ],
   "blend_weight_model": -0.328,
   "blend_weight_market": 1.336,
-  "hybrid_mae": 9.542,
-  "market_only_mae": 9.485,
+  "hybrid_mae": 9.507,
+  "market_only_mae": 9.449,
   "sign_corr": 0.439,
-  "sign_n": 5591,
+  "sign_n": 5592,
   "source": "data/model/lines.json"
  },
  "strategies": {
@@ -99,9 +99,9 @@
    }
   ],
   "parlay": {
-   "n_games": 5591,
+   "n_games": 5592,
    "corr_margin_vs_total": 0.017,
-   "phi_home_cover_vs_over": 0.0088,
+   "phi_home_cover_vs_over": 0.0086,
    "note": "Same-game legs are not independent. Use the phi value to adjust a 2-leg same-game parlay: P = p1p2 + rho*sqrt(p1(1-p1)p2(1-p2))."
   },
   "rewards": "Points are awarded for statistically defensible performance, not raw ROI: 100 x max(0, lower 95% ROI bound) + 20 x seasons positive + 10 x gates passed. Strategies failing G3 (n<100) score zero. No cash, no prizes: this is a paper competition. Legal review is required before any real reward.",
@@ -173,20 +173,20 @@
    "TEN",
    "WAS"
   ],
-  "flagged_players": 109,
-  "flagged_with_game_designation": 3,
-  "flagged_practice_only": 106,
-  "model_starters_flagged": 109,
+  "flagged_players": 117,
+  "flagged_with_game_designation": 86,
+  "flagged_practice_only": 31,
+  "model_starters_flagged": 117,
   "model_unmatched": 8,
-  "plain": "The league publishes injury status for players but publishes no depth chart (the league URL 404s). Only club sites do. So a statement like 'the third-string corner is starting' can be verified for 2 of 26 clubs this week, and is an assumption elsewhere. The model flags 109 players as impacted starters; only 3 of them carry an official game designation, the other 106 are practice-only reports that the league has not yet converted into an availability ruling.",
+  "plain": "The league publishes injury status for players but publishes no depth chart (the league URL 404s). Only club sites do. So a statement like 'the third-string corner is starting' can be verified for 2 of 26 clubs this week, and is an assumption elsewhere. The model flags 117 players as impacted starters; only 86 of them carry an official game designation, the other 31 are practice-only reports that the league has not yet converted into an availability ruling.",
   "source": "https://www.nfl.com/injuries/ and club depth-chart pages"
  },
  "props": {
   "state": "MODEL ONLY",
-  "lines": 343,
-  "players": 343,
+  "lines": 323,
+  "players": 323,
   "with_market": 0,
-  "plain": "343 prop lines for 343 players, all built from the player's own shrunk usage and the opponent's defensive rating. No prop price exists in any connected source, so no prop edge can be claimed and the market column is deliberately blank.",
+  "plain": "323 prop lines for 323 players, all built from the player's own shrunk usage and the opponent's defensive rating. No prop price exists in any connected source, so no prop edge can be claimed and the market column is deliberately blank.",
   "source": "data/model/props.json"
  },
  "power": {
@@ -1914,6 +1914,17 @@
    "status": "resolved",
    "src": "S01",
    "action": "Source: https://www.nfl.com/injuries/ (all 7 chunks fetched 2026-11-13); audit docs/audit-65df4799.md \u00a73.",
+   "verified": true,
+   "retrieved": "2026-11-13"
+  },
+  {
+   "id": "F41",
+   "category": "Official page snapshot drift",
+   "description": "The committed standings snapshot (retrieved 2026-11-12T04:31Z from https://www.nfl.com/standings/league/2026/reg) shows NYG 5-2-1, PF 182, PA 172 and WAS 2-5-1, PF 172, PA 202. The same official page fetched 2026-11-13 shows NYG 5-3-1, PF 203, PA 196 and WAS 3-5-1, PF 196, PA 223. The change matches the WAS @ NYG game played 2026-11-12, after the snapshot was taken: the snapshot is not wrong, it is dated, and the live page keeps moving.",
+   "impact": "Any comparison between the committed data and the live official page must quote retrieved_at, or the difference looks like a data error. No decision should use the older values as current.",
+   "status": "needs review",
+   "src": "S02",
+   "action": "Re-snapshot the official standings page after each Sunday slate and quote retrieved_at beside every published standings value; treat same-week changes as drift, not error (see also A-F04 for injury-page drift). Source: https://www.nfl.com/standings/league/2026/reg.",
    "verified": true,
    "retrieved": "2026-11-13"
   }
