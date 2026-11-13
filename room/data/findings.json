@@ -414,21 +414,21 @@
    "area": "Site build",
    "title": "The evidence page shipped an empty table cell, and the site gate that catches it was failing",
    "detail": "data/model/replication.json carries a conflict row 'Week 10 model margin for WAS @ NYG' where this pipeline's value is null. The generator rendered null as an empty <td>, so pages/evidence.html contained a blank cell \u2014 the exact condition the brief forbids, since an empty cell reads as a measured zero. scripts/verified/check_site.py caught it (exit 1) and pages.yml runs that script, so the next push would have failed the deploy. Fixed at the generator: a missing side of a comparison now renders as an explicit 'no comparable value in this build' label rather than a blank. Re-verified: 21 pages, zero empty cells.",
-   "official": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/blob/main/pipeline/gen_site.py",
+   "official": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pipeline/gen_site.py",
    "here": [
     {
      "t": "generator",
-     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/blob/main/pipeline/gen_site.py",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pipeline/gen_site.py",
      "note": "BLANK label added to the conflict row builder"
     },
     {
      "t": "page",
-     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/blob/main/pages/evidence.html",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pages/evidence.html",
      "note": "now shows the label"
     },
     {
      "t": "gate",
-     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/blob/main/scripts/verified/check_site.py",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/scripts/verified/check_site.py",
      "note": "exit 0"
     }
    ],
@@ -441,16 +441,16 @@
    "area": "Site build",
    "title": "Half the published pages did not link to the Decision Room",
    "detail": "Ten of the 21 pages under pages/ are produced by an earlier generator that has its own navigation list, so the single NAV insertion in pipeline/gen_site.py reached only the 11 pages it writes. The canonical list in scripts/verified/normalize_nav.py now includes the Decision Room, and the script was re-run: 21 of 21 pages link to it. check_site.py confirms navigation is complete.",
-   "official": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/blob/main/scripts/verified/normalize_nav.py",
+   "official": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/scripts/verified/normalize_nav.py",
    "here": [
     {
      "t": "nav canon",
-     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/blob/main/scripts/verified/normalize_nav.py",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/scripts/verified/normalize_nav.py",
      "note": "room entry added"
     },
     {
      "t": "gate",
-     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/blob/main/scripts/verified/check_site.py",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/scripts/verified/check_site.py",
      "note": "navigation complete"
     }
    ],
@@ -463,7 +463,7 @@
    "area": "Verified data",
    "title": "A club-code mismatch made Arizona read as a standings drift, and the page still asserted the drift after it was gone",
    "detail": "The official standings page writes the Cardinals as AZ and the Rams as LA; the model writes ARI and LAR. room/build.py looked the official code up directly, got nothing, and fell through to the comparison test, which rendered a red 'drift' badge against an empty model row. The summary line above the table still read '0 clubs drift', so the page contradicted itself: 0 in prose, 1 in red. Both were wrong. Fixed with an explicit alias map restricted to codes the model really uses, and an honest third state: a row with no model counterpart now reads 'no model row' in amber rather than being counted as either a match or a drift. The summary sentence is now generated from the outcome instead of hard-coded, so it cannot assert a drift that is not there. After the fix all 32 clubs match on W-L-T.",
-   "official": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/blob/main/room/build.py",
+   "official": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/build.py",
    "here": [
     {
      "t": "official page",
@@ -472,12 +472,12 @@
     },
     {
      "t": "model",
-     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/blob/main/data/model/snapshot.json",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/snapshot.json",
      "note": "Cardinals written ARI"
     },
     {
      "t": "rendered",
-     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/blob/main/room/data.html",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data.html",
      "note": "now reads 'All 32 clubs match'"
     }
    ],
