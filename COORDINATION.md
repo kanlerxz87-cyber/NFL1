@@ -1881,3 +1881,105 @@ File scope: `COORDINATION.md`, `data/flags.json`, and the root pages those files
 | Flagged for Review | Live page carries all flags; flagged items do not block the merge and are published for post-launch review |
 
 Note: `main` advanced while this branch was open (PRs #44 and #46 merged ahead of it). The branch was rebased onto `origin/main` before the final push, and PR #45 merged cleanly.
+
+---
+
+# Session `1e159b2e-nfl1` — decision-review layer, personnel-deficiency signal, and integration
+
+| Item | Value |
+| --- | --- |
+| Session ID | `1e159b2e-nfl1` |
+| Branch | `arena/1e159b2e-nfl1` (fixed by the environment; `session-<id>/<task>` cannot be used) |
+| Base commit | `09c03f052aa3bebb62acc23cb17eefd65f0c512e` (`main`) |
+| Board read before work | yes — full `COORDINATION.md` and the four active task tables reviewed |
+
+**Scope rule applied here:** this session adds two *new* self-contained subsystems rather than
+editing pages owned by the live renderers (`pipeline/gen_site.py`, `tools/build.py`,
+`scripts/verified/build_site.py`, `s9cb/site.py`). Those shared outputs are only touched by
+**one additive nav entry** on the landing page at integration time, recorded below.
+
+## Task board
+
+| ID | Task | Status | Owner | File scope | Notes |
+| --- | --- | --- | --- | --- | --- |
+| N1 | Read board, claim, push claim before any other file is edited | done | `1e159b2e` | `COORDINATION.md` | claim commit `19a66d2` |
+| N2 | Reproduce every published research number from committed data (research build re-run, diff vs committed JSON) and record the result | done | `1e159b2e` | `data/s9cb/*` (read-only) | all five research JSON files reproduce **byte-identically** except `generated_at`; the extract itself cannot be re-downloaded from the sandbox, so provenance is taken from `data/s9cb/provenance.json` |
+| N3 | Personnel-deficiency study: does a personnel loss carry information the closing line has not priced, and do bet rules built on it survive the eight gates? | done | `1e159b2e` | `s9cb/analysis/personnel.py`, `s9cb/analysis/run_personnel.py`, `data/personnel/` | 13 measures, 5 rules, 2,608 scored bets; **0 significant after correction, 0 rules pass all gates, 1 WATCH** |
+| N4 | Decision-review layer: the **Review Room** (9 pages) where every open decision, its options, costs and blockers live in one place, with a re-verification log | done | `1e159b2e` | `review-room/` (new), `tools/review_room.py` (new) | additive; one nav entry on `index.html` |
+| N5 | Live re-verification of official sources this session (standings, week-10 schedule, injuries) with row-level comparisons recorded | done | `1e159b2e` | `data/personnel/standings_diff.json`, `data/personnel/official_standings_2026-11-13.csv` | 32/32 standings transcribed and self-checked; 30/32 agree with the committed file, 2 differ and both are the Week 10 Thursday game; 14/14 fixtures match; 10/10 sampled injury rows match |
+| N6 | Final integration: gates, link check, PR → `main`, merge, confirm Pages, record here | done | `1e159b2e` | `COORDINATION.md` | record below |
+
+## Results (session `1e159b2e-nfl1`)
+
+**Personnel study — what was built.** Two questions, tested separately because they are
+different: (a) does a personnel measure predict the game result, and (b) does it predict the
+result *beyond* what the closing spread already encodes? Question (a) alone would find a
+"signal" in anything correlated with team quality. A measure is only a candidate edge if it
+survives (b). The QB measure is defined pre-game and was **redefined during the session**:
+an earlier draft used "most starts this season", which described a club that had already
+changed starter weeks earlier as breaking continuity. The corrected rule is "the QB who started
+the club's previous game", still strictly pre-game. The whole analysis was rerun after the fix.
+A second defect was also found and fixed: a club with a clean report (nobody ruled out) was being
+treated as having no report at all, discarding a real zero. Both are published as **V07** rather
+than quietly corrected.
+
+**Personnel study — what it found.** With 13 information tests on up to 7,087 games and five
+pre-declared bet rules scored at **observed prices only** (2,608 scored bets; games without a
+price are excluded and counted), **none of the measures is significant after Benjamini-Hochberg
+correction**, and **no rule passes all eight gates** (best is P04, 6/8, WATCH). The strongest raw
+result — the away club's ruled-out offensive players — has raw p = 0.0105 and corrected
+p = 0.136. The market coefficient sits at 1.03–1.08 with p ≈ 0 in every regression, which is the
+control showing the specification and the join are sound: the null is a real null, not a broken
+model. **Conclusion: injury/personnel information is descriptive, not a profitable edge against
+the closing line.** That is not a failure of the analysis; it is the analysis working.
+
+**Official-source re-verification.** All 32 clubs' 2026 standings were hand-transcribed from
+<https://www.nfl.com/standings/league/2026/reg> and accepted only after passing five internal
+arithmetic checks (PF−PA = NET for 32/32; PCT = (W+T/2)/games for 32/32; ΣW = ΣL = 136;
+ΣT = 2; ΣPF = ΣPA = 6,291; 274 team-games = 137 games, which is exactly the 136 committed results
+plus the Week 10 Thursday game). Compared club by club against `data/verified/standings_2026.csv`:
+**30 of 32 agree exactly; NYG and WAS differ**, and both are the two clubs that played the
+Thursday game after the committed snapshot was taken (2026-11-12T04:31Z). This is staleness, not
+arithmetic error, and it is independently corroborated by flag **F41** raised by a different
+session. All 14 Week 10 fixtures match <https://www.nfl.com/schedules/2026/by-week/week-10>
+including the Munich game and the official byes (CHI, DEN, PHI, TB). Ten sampled rows across
+WAS/NYG/NE/DET match <https://www.nfl.com/injuries/> field for field, as do the four club row
+counts (9, 11, 15, 9).
+
+**New irregularity found.** The direct nfl.com scrape (`data/model/official_injuries.json`) and
+the mirrored feed (`data/s9cb/injuries.csv`) agree on ruled-out counts for 25 of 26 reporting
+clubs, and **differ for Detroit: 3 ruled out on the official page, 0 in the mirror** (R05 on the
+Flagged page). The live Week 10 board uses the official scrape and marks the affected row.
+
+**Data refresh during the session (must be read with the results above).** The `Collect s9cb
+research extract` workflow committed a refreshed extract to this branch at `177cfe3` while the
+session was still working (commit `[skip ci]`), and the workstation sandbox cannot download the
+release assets itself. The **entire analysis chain was re-run from that refreshed extract**, and
+this is the second set of results: 7,104 priced games (was 7,103), 13 information tests, **still
+0 significant after correction**, the same five rules with the same gates and **still 0 PASS /
+1 WATCH (P04, 6/8)**, 2,608 scored bets. The refresh materially changed one thing: the mirrored
+injury feed now carries **296 rows across 26 clubs, matching the direct nfl.com scrape row for
+row and club for club (26/26)**, so the Detroit gap found earlier in the session is closed. Flag
+R05 is therefore published as *resolved this week, monitored every build* with the earlier gap
+recorded, not deleted — the check is more useful than the finding. The standings staleness
+(30/32 agree; NYG and WAS differ) is unaffected: `data/verified/standings_2026.csv` did not
+change in the refresh, and the Week 10 game is still absent from `data/verified/games_2026.csv`.
+
+**Gates after this session's changes (all local, all green):** `validate_verified` PASS ·
+`audit_numbers` 47/47 PASS · `check_site` 21 pages, no broken links · `tools/verify` PASS ·
+`check_committed_site` PASS · `verify_combined` PASS · `tools/review_room.py --check` 9 pages,
+no broken links, **every table row carries a source link (enforced by the checker)** ·
+117 unit tests PASS.
+
+**Files added (all new paths; the only edit to an existing file is one nav entry):**
+`s9cb/analysis/personnel.py`, `s9cb/analysis/run_personnel.py`, `data/personnel/*` (8 files),
+`review-room/*` (9 HTML pages + data generators), `tools/review_room.py`, `tools/v_sources.py`,
+plus one `<a>` in `index.html`.
+
+**Cross-session note.** `main` advanced to `00d957d` (PRs #44-#48) while this session worked.
+The branch was rebased onto it; the only conflict was `COORDINATION.md` and **both sides were
+kept** — nothing from `46b6cabb` was discarded. Their new flag F41 duplicates this session's
+standings finding, which is recorded here as independent confirmation rather than as duplication
+to be removed.
+
+_Claim committed and pushed before any other file is touched, per the brief._
