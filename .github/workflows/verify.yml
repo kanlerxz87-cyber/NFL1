@@ -22,13 +22,17 @@ jobs:
         run: python3 tools/compute_correlations.py
       - name: Re-verify merged session data line by line
         run: python3 tools/verify_combined.py
-      - name: Rebuild pages from the JSON data layer
-        run: python3 tools/build.py
+      - name: Rebuild every published page from the JSON data layer
+        run: python3 tools/build_site_all.py
 
       - name: Fail if two generators claim the same output file
         run: python3 tools/check_generators.py
       - name: Verify line by line (source links, blank values, internal links)
         run: python3 tools/verify.py
+      - name: Audit the published numbers against the official NFL pages
+        run: python3 tools/audit_official.py
+      - name: Every published page must be reachable from the landing page
+        run: python3 tools/check_reachability.py
       # Session ca779bcc-nfl1. Additive: the strength-of-schedule sub-site has its own
       # hard gate (every table row source-linked, no broken local link, no placeholder
       # cell) plus unit tests, including the spread sign-convention regression that

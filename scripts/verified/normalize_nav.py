@@ -13,6 +13,8 @@ ROOT = Path(__file__).resolve().parents[2]
 CANON = [
     ("index.html", "Overview"),
     ("executive.html", "Executive Summary"),
+    ("web/dashboard.html", "Decision Dashboard"),
+    ("./dashboard.html", "Governance Registers"),
     ("lines.html", "My Lines"),
     ("correlations.html", "Correlations"),
     ("strategies.html", "Strategy Lab"),
@@ -24,12 +26,17 @@ CANON = [
     ("questions.html", "Questions"),
     ("suggestions.html", "Suggestions"),
     ("evidence.html", "Evidence"),
+    ("audit.html", "Official Audit"),
     ("review.html", "Flagged for Review"),
     ("sections.html", "All Sections"),
     # Session ca779bcc-nfl1: the strength-of-schedule study is its own sub-site under
     # strength/; the target rule below keeps its href correct from both levels.
     ("room/index.html", "Decision Room"),
     ("strength/index.html", "SOS Study"),
+    # Sessions d23c65ad/c56ebee8: the review room and the s9cb research sub-site join
+    # the shared bar so no published page can become unreachable.
+    ("review-room/index.html", "Review Room"),
+    ("research/index.html", "s9cb Research"),
     # pages produced by the other generators in this repository, kept in the shared
     # navigation so no session's page can become unreachable
     ("executive-summary.html", "Executive Summary (companion)"),

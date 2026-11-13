@@ -439,7 +439,14 @@ def build_verified_index() -> str:
 
 
 def main() -> int:
-    stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    # Deterministic stamp: the pages are a function of the verified data, not of the
+    # moment they are rendered, so a rebuild reproduces the committed file byte for byte
+    # (d23c65ad fix: a wall-clock minute stamp broke build_site_all --check and
+    # check_reproducible whenever two builds straddled a minute boundary).
+    raw_sources = json.loads((DATA / "sources.json").read_text(encoding="utf-8"))
+    retrieved_at = (raw_sources.get("retrieved_at_utc", "") if isinstance(raw_sources, dict)
+                    else "")
+    stamp = (retrieved_at[:10] + " data snapshot") if retrieved_at else "committed data snapshot"
     pages = {
         "data.html": ("Verified Data", "Official-source dataset, refreshed and re-checked automatically", build_data),
         # Session 65df4799-nfl1: renamed from lines.html — pipeline/gen_site.py owns

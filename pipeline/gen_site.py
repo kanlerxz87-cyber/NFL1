@@ -24,6 +24,7 @@ NAV = [
     ("index.html", "Overview"),
     ("pages/executive.html", "Executive Summary"),
     ("web/dashboard.html", "Decision Dashboard"),
+    ("./dashboard.html", "Governance Registers"),
     ("pages/lines.html", "My Lines"),
     ("pages/correlations.html", "Correlations"),
     ("pages/strategies.html", "Strategy Lab"),
@@ -35,12 +36,15 @@ NAV = [
     ("pages/questions.html", "Questions"),
     ("pages/suggestions.html", "Suggestions"),
     ("pages/evidence.html", "Evidence"),
+    ("pages/audit.html", "Official Audit"),
     ("pages/review.html", "Flagged for Review"),
     ("pages/sections.html", "All Sections"),
     # Session ca779bcc-nfl1: the strength-of-schedule study is its own sub-site under
     # strength/; the entry keeps it reachable from the root dashboard.
     ("room/index.html", "Decision Room"),
     ("strength/index.html", "SOS Study"),
+    ("review-room/index.html", "Review Room"),
+    ("research/index.html", "s9cb Research"),
     # pages produced by the other generators in this repository, kept in the shared
     # navigation so no session's page can become unreachable
     ("pages/executive-summary.html", "Executive Summary (companion)"),
@@ -48,6 +52,7 @@ NAV = [
     ("pages/standings.html", "Standings"),
     ("pages/availability.html", "Availability"),
     ("pages/data.html", "Verified Data"),
+    ("pages/verified-lines.html", "Own Lines"),
     ("pages/analysis.html", "Validation & Correlation"),
     ("pages/decisions.html", "Decision Register"),
     ("pages/verified.html", "Verified Artifacts"),
@@ -252,6 +257,165 @@ def _sidebar_block(current: str, is_index: bool) -> str:
             links.append(f'<a href="{esc(target)}"{cls}>{esc(label)}</a>')
         groups.append(f'<div class="navgroup"><span>{group}</span>{"".join(links)}</div>')
     return f'<aside class="sidebar" aria-label="Categories">{"".join(groups)}</aside>'
+
+
+# ---------------------------------------------------------------- official audit
+AUDIT_DIR = os.path.join(ROOT, "data", "audit", "4c043747")
+
+
+def load_audit():
+    p = os.path.join(AUDIT_DIR, "official_audit.json")
+    if not os.path.exists(p):
+        return {}
+    with open(p, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def read_tsv(path):
+    rows = []
+    if not os.path.exists(path):
+        return rows
+    with open(path, encoding="utf-8") as f:
+        for line in f:
+            line = line.rstrip("\n")
+            if not line or line.startswith("#"):
+                continue
+            rows.append(line.split("\t"))
+    if not rows:
+        return rows
+    header = rows[0]
+    return [dict(zip(header, r)) for r in rows[1:]]
+
+
+def audit_page(audit, dash):
+    a = audit or {}
+    # Stamp with the data snapshot the rest of the site carries. The audit JSON's own
+    # generated_at is the transcription-retrieval time (quoted in the prose below); using
+    # it as the page stamp made the page look older than the model data and failed
+    # tools/check_committed_site.py, and it made the page's bytes change on every
+    # audit_official.py run (breaking build_site_all --check in CI).
+    gen = (dash or {}).get("generated_at") or a.get("generated_at")
+    standings = read_tsv(os.path.join(AUDIT_DIR, "standings_retrieval_T3_20261113.tsv"))
+    schedule = read_tsv(os.path.join(AUDIT_DIR, "schedule_week11_20261113.tsv"))
+    games = [r for r in schedule if r.get("away") and r.get("home") and r["away"] != "bye_teams"]
+    byes_row = next((r for r in schedule if r.get("away") == "bye_teams"), None)
+    byes = byes_row["home"].split() if byes_row else []
+
+    verified = a.get("verified_columns", [])
+    reproducible = a.get("reproducible_columns", [])
+    changed = a.get("columns_changed_between_retrievals", {})
+
+    col_rows = []
+    for col in ["w", "l", "t", "pct", "pf", "pa", "net_pts", "home", "road", "div", "div_pct",
+                "conf", "conf_pct", "non_conf", "strk", "last5"]:
+        n_changed = len(changed.get(col, []))
+        reproducible_yes = "yes" if col in reproducible else f"no ({n_changed} club(s) changed)"
+        consistent_yes = "yes" if col in verified else "no"
+        used = "published as verified" if col in verified else "left blank / flagged"
+        col_rows.append([f"<code>{esc(col)}</code>", esc(reproducible_yes), esc(consistent_yes),
+                         esc(used), src(SOURCE["standings"], "official page")])
+    col_tbl = table(
+        ["Printed column", "Same in both retrievals?", "Consistent with the club's own record?",
+         "Treatment on this site", "Source"],
+        col_rows,
+        note=("A column is only published as a verified fact when it was identical in two "
+              "retrievals of the official page AND satisfies the arithmetic the page itself "
+              "implies. Everything else is shown as a blank and flagged."))
+
+    st_rows = []
+    for r in standings:
+        st_rows.append([
+            f"<strong>{esc(r['team'])}</strong>",
+            f"{esc(r['w'])}-{esc(r['l'])}-{esc(r['t'])}",
+            esc(r["pct"]),
+            esc(r["pf"]),
+            esc(r["pa"]),
+            esc(r["net_pts"]),
+            src(SOURCE["standings"], "nfl.com standings"),
+        ])
+    st_tbl = table(["Club", "W-L-T", "PCT", "PF", "PA", "NET", "Source"], st_rows,
+                   note=("Current reading (retrieval T3, 2026-11-13) of the official league "
+                         "standings page. The split columns (HOME, ROAD, DIV, CONF, NON-CONF, "
+                         "STRK, LAST 5) are governed by the two-retrieval analysis below."))
+
+    sl_rows = []
+    for g in games:
+        sl_rows.append([
+            f"<strong>{esc(g['away'])} @ {esc(g['home'])}</strong>",
+            esc(g["gameday"]),
+            esc(g["local_time"]),
+            esc(g["network"]),
+            f"{esc(g['away_record'])} / {esc(g['home_record'])}",
+            src(g["game_url"], "official game page"),
+        ])
+    sl_tbl = table(["Matchup", "Date", "Time (ET)", "Network", "Records printed by NFL.com",
+                    "Source"], sl_rows,
+                   note=("Week 11 slate exactly as the official schedule page lists it. Teams on "
+                         "bye: " + ", ".join(byes) + ". The published model lines are matched to "
+                         "this slate one game at a time by the audit harness."))
+
+    flag_rows = []
+    for f in a.get("flags", []):
+        flag_rows.append([
+            esc(f.get("item")),
+            esc(f.get("detail")),
+            src(f.get("source") or SOURCE["standings"], "official page"),
+        ])
+    flag_tbl = table(["Irregularity", "What was observed", "Source"], flag_rows)
+
+    kpis = "".join([
+        kpi("Checks run", a.get("checks_total"), "line-by-line comparisons"),
+        kpi("Checks failed", a.get("checks_failed"), "published vs official"),
+        kpi("Irregularities flagged", len(a.get("flags", [])), "published for review"),
+        kpi("Retrievals", 3, "T1/T2 2026-11-12, T3 2026-11-13"),
+        kpi("Clubs verified", len(standings), "W-L-T, PCT, PF, PA, NET"),
+        kpi("Games verified", len(games), "Week 11 slate"),
+    ])
+
+    body = f"""
+<section class="kpis">{kpis}</section>
+
+<section class="panel">
+  <h2>What this page is</h2>
+  <p>Session 4c043747 read the official NFL league standings page twice on 2026-11-12
+  (about 22:05Z and 22:25Z) and transcribed all 32 clubs, every printed column, and the
+  official Week 10 schedule. Session d23c65ad added retrieval T3 on 2026-11-13
+  (~14:05Z) after week 10 completed, and the official Week 11 schedule, so the audit
+  stays time-consistent with the model data, which has moved to week 11.
+  The harness <code>tools/audit_official.py</code> compares every standings table
+  published in this repository with the transcriptions and publishes the model slate
+  against the official slate.</p>
+  <p class="note">The retrievals are stored verbatim in
+  <code>data/audit/4c043747/</code> so any line can be re-checked by hand:
+  <a href="https://github.com/kanlerxz87-cyber/NFL1/tree/main/data/audit/4c043747"
+     target="_blank" rel="noopener">transcription files</a>.</p>
+</section>
+
+<section class="panel">
+  <h2>Which official columns can be verified</h2>
+  {col_tbl}
+</section>
+
+<section class="panel">
+  <h2>Official league standings, 2026 (current reading)</h2>
+  {st_tbl}
+</section>
+
+<section class="panel">
+  <h2>Official Week 11 slate</h2>
+  {sl_tbl}
+</section>
+
+<section class="panel">
+  <h2>Irregularities found on the official pages</h2>
+  {flag_tbl}
+  <p class="note">These are published, not corrected. Every one of them is also listed on
+  the <a href="review.html">Flagged for Review</a> page with its source link.</p>
+</section>
+"""
+    return page("pages/audit.html", "Official-Source Audit", body,
+                "Every published number compared, line by line, with the official NFL pages.",
+                gen)
 
 
 def page(path: str, title: str, body: str, subtitle: str = "", generated: str = "") -> str:
@@ -2127,6 +2291,7 @@ def main():
     write("pages/questions.html", questions_page(dash))
     write("pages/suggestions.html", suggestions_page(dash))
     write("pages/review.html", review_page(verif, strat, dash, avail))
+    write("pages/audit.html", audit_page(load_audit(), dash))
     write("pages/executive.html", executive_page(snap, dash, lines, strat, avail, verif, prov))
     # keep old URLs working
     for old in ("models", "teams", "standings", "injuries_old"):

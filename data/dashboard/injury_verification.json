@@ -4,11 +4,11 @@
  "method": "Hand transcription of all 7 fetched chunks of the official page (data/dashboard/official_injuries_2026_w10.psv), compared field by field with data/model/official_injuries.json. Club codes AZ->ARI and LAR->LA mapped as in the pipeline.",
  "counts": {
   "official_rows": 279,
-  "scraped_rows": 295,
-  "matched_all_fields": 242,
-  "field_differences": 37,
+  "scraped_rows": 296,
+  "matched_all_fields": 237,
+  "field_differences": 42,
   "missing_from_scrape": 0,
-  "extra_in_scrape": 16,
+  "extra_in_scrape": 17,
   "clubs_on_official_page": 26,
   "clubs_in_scrape": 26
  },
@@ -53,6 +53,10 @@
   {
    "team": "CLE",
    "player": "Donovan McMillon"
+  },
+  {
+   "team": "ARI",
+   "player": "Darius Robinson"
   },
   {
    "team": "DAL",
@@ -427,6 +431,61 @@
    "official_line": 198
   },
   {
+   "team": "ARI",
+   "player": "Budda Baker",
+   "diffs": {
+    "practice": {
+     "official": "Did Not Participate In Practice",
+     "scraped": "Full Participation in Practice"
+    }
+   },
+   "official_line": 212
+  },
+  {
+   "team": "ARI",
+   "player": "Bam Knight",
+   "diffs": {
+    "practice": {
+     "official": "Limited Participation in Practice",
+     "scraped": "Full Participation in Practice"
+    }
+   },
+   "official_line": 216
+  },
+  {
+   "team": "ARI",
+   "player": "Isaac Seumalo",
+   "diffs": {
+    "practice": {
+     "official": "Did Not Participate In Practice",
+     "scraped": "Full Participation in Practice"
+    }
+   },
+   "official_line": 220
+  },
+  {
+   "team": "ARI",
+   "player": "Mack Wilson",
+   "diffs": {
+    "practice": {
+     "official": "Did Not Participate In Practice",
+     "scraped": "Full Participation in Practice"
+    }
+   },
+   "official_line": 224
+  },
+  {
+   "team": "ARI",
+   "player": "Andrew Wingard",
+   "diffs": {
+    "practice": {
+     "official": "Limited Participation in Practice",
+     "scraped": "Did Not Participate In Practice"
+    }
+   },
+   "official_line": 225
+  },
+  {
    "team": "LV",
    "player": "Foley Fatukasi",
    "diffs": {
@@ -508,8 +567,8 @@
   {
    "team": "ARI",
    "official_rows": 14,
-   "scraped_rows": 14,
-   "match": true
+   "scraped_rows": 15,
+   "match": false
   },
   {
    "team": "ATL",
@@ -1545,11 +1604,6 @@
   },
   {
    "team": "ARI",
-   "player": "Budda Baker",
-   "official_line": 212
-  },
-  {
-   "team": "ARI",
    "player": "Zachary Carter",
    "official_line": 213
   },
@@ -1562,11 +1616,6 @@
    "team": "ARI",
    "player": "Jon Gaines II",
    "official_line": 215
-  },
-  {
-   "team": "ARI",
-   "player": "Bam Knight",
-   "official_line": 216
   },
   {
    "team": "ARI",
@@ -1585,11 +1634,6 @@
   },
   {
    "team": "ARI",
-   "player": "Isaac Seumalo",
-   "official_line": 220
-  },
-  {
-   "team": "ARI",
    "player": "Dante Stills",
    "official_line": 221
   },
@@ -1602,16 +1646,6 @@
    "team": "ARI",
    "player": "Jayden Williams",
    "official_line": 223
-  },
-  {
-   "team": "ARI",
-   "player": "Mack Wilson",
-   "official_line": 224
-  },
-  {
-   "team": "ARI",
-   "player": "Andrew Wingard",
-   "official_line": 225
   },
   {
    "team": "SEA",

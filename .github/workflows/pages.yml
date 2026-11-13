@@ -1,9 +1,11 @@
 name: Verify NFL Decision Lab site build
 # Publishing: GitHub Pages for this repository is configured as a legacy branch build from
 # `main` /, so every push to main publishes automatically (run "pages build and deployment").
-# This workflow is the quality gate: it re-runs the analysis, recomputes published numbers and
-# fails on a broken local link or an unreachable page. It deliberately does not deploy, so two
-# deployment mechanisms cannot overwrite each other.
+# This workflow is the quality gate: it re-runs the analysis, rebuilds every published page
+# from the data, re-verifies every published number against the official NFL pages and the
+# committed transcriptions, and fails on a broken link, an unreachable page, a table row
+# without a source link, or a committed page that differs from the generated one.
+# It deliberately does not deploy, so two deployment mechanisms cannot overwrite each other.
 on:
   push:
     branches: [main]
@@ -23,18 +25,16 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install analysis dependencies
-        run: python -m pip install --quiet numpy
+        run: python -m pip install --quiet numpy pandas
       - name: Verify official data reconciles (hard gate)
         run: python3 scripts/verified/validate_verified.py
-      - name: Re-run analysis and regenerate pages from data
+      - name: Re-run the analysis and rebuild every published page
         run: |
           python3 analysis/engine.py
           python3 analysis/luck.py
           python3 analysis/correlations.py
           python3 analysis/injuries.py
-          python3 scripts/verified/build_site.py
-          python3 scripts/verified/build_availability.py
-          python3 scripts/verified/normalize_nav.py
+          python3 tools/build_site_all.py
       - name: Build the Decision Room and run its source-link gate
         run: |
           python3 room/build.py
@@ -46,12 +46,19 @@ jobs:
           fi
       - name: Independently recompute every published number
         run: python3 scripts/verified/audit_numbers.py
-      - name: Check every local link and nav entry
-        run: python3 scripts/verified/check_site.py
+      - name: Audit every published number against the official NFL pages
+        run: python3 tools/audit_official.py
+      - name: Check every local link, navigation entry and source link
+        run: |
+          python3 scripts/verified/check_site.py
+          python3 tools/check_reachability.py
+          python3 tools/verify.py
+      - name: The committed pages must equal the generated pages
+        run: python3 tools/build_site_all.py --check
       - name: Check external source links (reports dead URLs, never fails on unreachable hosts)
         continue-on-error: true
         run: python3 scripts/verified/check_external_links.py
       - name: Confirm the deployment path is the branch build
         run: |
           echo "Pages publishes from main / via the legacy build; this job only verifies."
-          ls -la index.html pages/ | head -20
+          ls -la index.html dashboard.html pages/ | head -20

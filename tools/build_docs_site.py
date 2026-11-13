@@ -24,7 +24,10 @@ DATA = os.path.join(ROOT, "data", "session-87deb7ab")
 DOCS = os.path.join(ROOT, "docs")
 
 RETRIEVED = "2026-11-12"
-BUILD_STAMP = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+# Deterministic stamp taken from the data this site is built from, so a rebuild
+# reproduces the committed files exactly.
+with open(os.path.join(ROOT, "data", "session-87deb7ab", "sources.json"), encoding="utf-8") as _fh:
+    BUILD_STAMP = json.load(_fh).get("meta", {}).get("generated_utc", "") + " data snapshot"
 
 problems: list[str] = []
 
