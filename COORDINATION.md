@@ -1783,3 +1783,44 @@ _This claim is committed and pushed before any other file is touched, per the br
 | Merges from `origin/main` | two (PRs #21–#39, then the s9cb refresh); every conflict resolved keeping both sides — COORDINATION.md, `data/suggestions.json` (27 ids), `pipeline/content.py` (main's implemented S13 + SA-01/02 plus this session's S14/S15/Q21), `pipeline/gen_site.py` (main's signal labels F15–F22 plus this session's sections page and F23–F25), `tools/build.py` (this session's `write_readme`, subsuming main's template addition), `analysis/correlations.py` (main's A1 fix kept, this session's audit gate kept) |
 | Open items left for reviewers | F38 + S14 (CI audits a regenerated index substitute) · F40 + S13/S24 (`[skip ci]` data pushes run no verify) · Q28/Q21 (authoritative generation) · S22 (four flag registers) · S25 / `R-a2cea255-02` (referee replication as a CI gate) |
 | Note for session `9cb71eb8` | `Collect s9cb research extract` failed once ("Commit the extract") on this branch's push `fd8133e` — their workflow, not a site gate; PR #41 checks were green. Logged here, their file not edited. |
+
+---
+
+# Session `9c208ed8-nfl1` — consolidation, live verification, decision room (2026-11-13)
+
+| Item | Value |
+| --- | --- |
+| Session ID | `9c208ed8-nfl1` |
+| Branch | `arena/9c208ed8-nfl1` |
+| Base commit | `09c03f052aa3bebb62acc23cb17eefd65f0c512e` (`main`, after PR #43 was opened) |
+| Board read before work | yes — full 1,785-line `COORDINATION.md`, all prior session sections |
+
+**Branch-naming deviation (same as every earlier session):** this environment fixes the
+session to the single branch `arena/9c208ed8-nfl1`; the brief's `session-<id>/<task>` branch
+convention cannot be followed. Scopes are kept non-overlapping **by file** and recorded here.
+
+**Takeover check (60-minute rule):** every task table on this board is marked `done`; the only
+open item is PR #43, which is a coordination-record commit from a finished session. No live
+claim is older than 60 minutes with work outstanding, so this session takes the **integration**
+role. PR #43 is left untouched (it is another session's record and merges cleanly).
+
+## Task board (this session)
+
+| ID | Task | Status | Owner | File scope | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| V01 | Read the board, claim tasks, push the claim before touching anything else | in progress | `9c208ed8` | `COORDINATION.md` | this section |
+| V02 | Fresh official-source verification of the live data layer against nfl.com **today** (standings, week-10 results, week-11 fixtures, injury report); store the retrieved evidence verbatim with URL + timestamp | unclaimed | `9c208ed8` | `data/official/2026-11-13/**` (new) | every row keeps its own source URL |
+| V03 | Line-by-line diff of the committed data layer against today's official values; publish drift as flags, never silently | unclaimed | `9c208ed8` | `data/flags.json` (append-only), `data/official/2026-11-13/report.json` | |
+| V04 | Decision Room: a review-and-choose surface for every suggestion (options, trade-offs, evidence, recommendation, pre-implementation gate) | unclaimed | `9c208ed8` | `room/**` (new), `data/room/**` (new) | |
+| V05 | Decision-gating question register: known / unknown / discovery method / what it blocks, incl. gaps this audit discovers | unclaimed | `9c208ed8` | `data/questions.json` (append-only) | |
+| V06 | Depth-chart coverage audit: which of the 32 clubs have an official sourced chart, which are blank, and what closing them requires | unclaimed | `9c208ed8` | `data/official/2026-11-13/depth_coverage.json`, `room/**` | |
+| V07 | Executive summary refresh to today's verified state | unclaimed | `9c208ed8` | `data/room/executive.json`, `room/**` | |
+| V08 | Run every gate, fix failures, rebuild, link check | unclaimed | `9c208ed8` | regenerated site output | |
+| V09 | PR → merge without waiting → confirm Pages deploy → record here | unclaimed | `9c208ed8` | `COORDINATION.md` | |
+
+**Not touched by this session:** `s9cb/`, `pipeline/`, `analysis/`, `src/nfl/`, `tests/`, `docs/`,
+`verified-lab/`, `referee/`, `lab/`, `dashboard/`, `pages/*.html` (generated), `index.html`
+(generated). Shared generators are re-run, never hand-edited, so no other session's output is
+clobbered.
+
+_This claim is committed and pushed before any other file is touched, per the brief._
