@@ -1783,3 +1783,37 @@ _This claim is committed and pushed before any other file is touched, per the br
 | Merges from `origin/main` | two (PRs #21–#39, then the s9cb refresh); every conflict resolved keeping both sides — COORDINATION.md, `data/suggestions.json` (27 ids), `pipeline/content.py` (main's implemented S13 + SA-01/02 plus this session's S14/S15/Q21), `pipeline/gen_site.py` (main's signal labels F15–F22 plus this session's sections page and F23–F25), `tools/build.py` (this session's `write_readme`, subsuming main's template addition), `analysis/correlations.py` (main's A1 fix kept, this session's audit gate kept) |
 | Open items left for reviewers | F38 + S14 (CI audits a regenerated index substitute) · F40 + S13/S24 (`[skip ci]` data pushes run no verify) · Q28/Q21 (authoritative generation) · S22 (four flag registers) · S25 / `R-a2cea255-02` (referee replication as a CI gate) |
 | Note for session `9cb71eb8` | `Collect s9cb research extract` failed once ("Commit the extract") on this branch's push `fd8133e` — their workflow, not a site gate; PR #41 checks were green. Logged here, their file not edited. |
+
+---
+
+# Session `46b6cabb-nfl1` — documentation consistency and post-merge audit
+
+| Item | Value |
+| --- | --- |
+| This session ID | `46b6cabb-nfl1` |
+| This session branch | `arena/46b6cabb-nfl1` |
+| Base commit | `09c03f052aa3bebb62acc23cb17eefd65f0c512e` (`main`) |
+| Board read before work | yes; full board reviewed |
+
+**Constraint:** Arena pins this session to `arena/46b6cabb-nfl1`; the requested
+`session-<id>/<task>` branch convention cannot be followed. Work stays on the assigned branch.
+
+## Task board (this session)
+
+| ID | Task | Status | Owner | File scope | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| N1 | Address stale README claims and non-destructive README generation | needs review | `46b6cabb` | request only in `COORDINATION.md`; implementation excluded from this scope | Open PR #31 also changes `README.md` and `tools/build.py`; request its owner to incorporate this audit finding. No overlapping edits retained. |
+| N2 | Run full repository/site gates and document reproducible results and remaining issues | done | `46b6cabb` | `docs/review/session-46b6cabb.md`, `COORDINATION.md` | Site gates pass; live official NFL schedule proves published overview is stale after WAS @ NYG became final. README issue and verifier-count drift documented. |
+| N3 | Final integration assessment; submit PR only if tests/build are green, then verify deployment and record outcome | in progress | `46b6cabb` | `COORDINATION.md` | Report-only deliverable remains isolated; merge/deployment verification not claimed yet. |
+
+**Coordination request to the owner of open PR #31 (`arena/6e8ca348-nfl1`):** the current
+`README.md` contains fixed suggestion / decision-record counts, and `tools/build.py:write_readme()`
+can replace the full hand-maintained README with an incomplete embedded template despite its
+comment claiming it is byte-identical. Please consider making the template a no-op or ensuring it
+cannot overwrite the full README, and remove the obsolete fixed counts. This session deliberately
+reverted its overlapping local edits and retains only the audit report; no files from PR #31 were
+changed. Live-source and test evidence are in `docs/review/session-46b6cabb.md`.
+
+File scopes are additive and do not edit generated root pages, `pages/`, `data/`, or other
+sessions' research artifacts. The persistent changes will be committed and pushed only to this
+session's assigned branch.
