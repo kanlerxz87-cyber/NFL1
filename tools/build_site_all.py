@@ -18,7 +18,11 @@ The order below is the contract:
   1. scripts/verified/build_site.py        -> pages/{data,verified-lines,analysis,decisions,verified}.html
   2. scripts/verified/build_availability.py -> pages/availability.html
   3. tools/build.py                         -> the governance registers at the repository root,
-                                              dashboard.html and README.md
+                                              governance.html, dashboard.html and README.md
+  3b. tools/build_decision_room.py + tools/build_dashboard.py -> data/decision_room/ and web/
+  3c. tools/build_dashboard_site.py         -> dashboard/
+  3d. lab/scripts/build_site.py             -> lab/
+  3e. s9cb/site.py                          -> research/
   4. pipeline/gen_site.py                   -> index.html and the Decision Lab pages
                                               (last, so the landing page's site map lists every
                                               page that the earlier steps produced)
@@ -42,6 +46,14 @@ STEPS = [
     ("verified pages", [sys.executable, "scripts/verified/build_site.py"], ROOT),
     ("availability page", [sys.executable, "scripts/verified/build_availability.py"], ROOT),
     ("governance registers", [sys.executable, "tools/build.py"], ROOT),
+    # d23c65ad: every remaining published generation joins the one build so that
+    # `--check` covers them too (web/, dashboard/, research/ and lab/ used to be
+    # rebuildable only by hand, which is how page/data drift hid in them).
+    ("decision room data", [sys.executable, "tools/build_decision_room.py"], ROOT),
+    ("decision dashboard (web/)", [sys.executable, "tools/build_dashboard.py"], ROOT),
+    ("governance dashboard (dashboard/)", [sys.executable, "tools/build_dashboard_site.py"], ROOT),
+    ("lab sub-site", [sys.executable, "lab/scripts/build_site.py"], ROOT),
+    ("research sub-site", [sys.executable, "s9cb/site.py"], ROOT),
     ("landing page and decision lab", [sys.executable, "gen_site.py"], os.path.join(ROOT, "pipeline")),
     ("canonical navigation", [sys.executable, "scripts/verified/normalize_nav.py"], ROOT),
     ("docs sub-site", [sys.executable, "tools/build_docs_site.py"], ROOT),

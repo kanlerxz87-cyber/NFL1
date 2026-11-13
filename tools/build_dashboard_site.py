@@ -655,12 +655,16 @@ Each has a source link. Items marked <em>Unverified</em> are blank in the tables
 
 def page_repo(d):
     def count(path):
+        # Count only stable, committed content: __pycache__ and other hidden/runtime
+        # directories appear and disappear between runs, which made this table's
+        # "file(s)" column environment-dependent (d23c65ad determinism fix).
         n = 0
         full = os.path.join(ROOT, path)
         if os.path.isfile(full):
             return 1
-        for _, _, files in os.walk(full):
-            n += len(files)
+        for dirpath, dirnames, files in os.walk(full):
+            dirnames[:] = [d for d in dirnames if not d.startswith(".") and d != "__pycache__"]
+            n += sum(1 for f in files if not f.startswith(".") and not f.endswith(".pyc"))
         return n
     inventory = [
         ("index.html, pages/, styles.css", "Root site (earlier sessions). Overview plus subpages under pages/.", "tools/build.py and pipeline/gen_site.py both write index.html (RV-17)", "Conflict (RV-17)", "index.html"),

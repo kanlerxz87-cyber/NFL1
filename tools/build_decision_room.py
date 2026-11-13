@@ -235,7 +235,10 @@ def main() -> int:
     os.makedirs(OUT, exist_ok=True)
     ev = evidence_inventory()
     payload = dict(
-        generated_at=datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        # placeholder; preserved from the committed file when the payload is unchanged
+        # (d23c65ad fix: a fresh timestamp here changed web/*.html on every run, so the
+        # pages could never be byte-reproducible).
+        generated_at=None,
         evidence=ev,
         model=model_verdict(),
         strategies=strategy_verdict(),
@@ -250,7 +253,21 @@ def main() -> int:
         gates=load("data/validation_gates.json"),
         flags=load("data/flags.json"),
     )
-    with open(os.path.join(OUT, "decision_room.json"), "w", encoding="utf-8") as f:
+    out_path = os.path.join(OUT, "decision_room.json")
+    prior = {}
+    if os.path.exists(out_path):
+        try:
+            with open(out_path, encoding="utf-8") as f:
+                prior = json.load(f)
+        except (OSError, ValueError):
+            prior = {}
+    prior_payload = {k: v for k, v in prior.items() if k != "generated_at"}
+    new_payload = {k: v for k, v in payload.items() if k != "generated_at"}
+    if prior_payload == new_payload and prior.get("generated_at"):
+        payload["generated_at"] = prior["generated_at"]
+    else:
+        payload["generated_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    with open(out_path, "w", encoding="utf-8") as f:
         json.dump(payload, f, indent=1)
         f.write("\n")
     print(f"wrote data/decision_room/decision_room.json")

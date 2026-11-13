@@ -25,7 +25,7 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install analysis dependencies
-        run: python -m pip install --quiet numpy
+        run: python -m pip install --quiet numpy pandas
       - name: Verify official data reconciles (hard gate)
         run: python3 scripts/verified/validate_verified.py
       - name: Re-run the analysis and rebuild every published page
