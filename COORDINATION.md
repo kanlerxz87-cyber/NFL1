@@ -1824,3 +1824,80 @@ that generator (an integration-session output, per the brief) and re-runs it rat
 hand-editing HTML.
 
 _This claim is committed and pushed before any other file is touched, per the brief._
+
+
+### Session `c56ebee8-nfl1` — results (C1–C6)
+
+**C1 — claim.** Pushed before any other file was touched. Board read in full (1,785 lines).
+No other session branch existed on the remote at claim time (`git branch -r` returned only
+`origin/main`), so nothing was taken from another session. Open PRs `#31`, `#37`, `#43` were left
+alone and not closed by this session.
+
+**C2 — fresh official re-verification and line-by-line review.** Full write-up with every source
+link: [`docs/review/session-c56ebee8.md`](docs/review/session-c56ebee8.md). Headline results,
+all fetched on 2026-11-13:
+
+| Check | Result |
+|---|---|
+| 2026 standings vs <https://www.nfl.com/standings/league/2026/REG> | **30 of 32 rows match**; NYG and WAS are one game behind (irregularity **C-A**, flag **F41**) |
+| Week 10 injury report vs <https://www.nfl.com/injuries/> | **296 rows / 26 clubs, exact match** with `data/model/official_injuries.json`; 24 of 26 club counts identical, the 2 differences are the known `AZ`/`LA` vs `ARI`/`LAR` aliases; 12 of 14 named rows match field by field (flag **F45**) |
+| Week 10 fixtures and byes vs <https://www.nfl.com/schedules/2026/by-week/week-10> | **14 fixtures and 4 byes (CHI, DEN, PHI, TB) match** |
+| Does nfl.com publish a depth chart? | **No** — <https://www.nfl.com/teams/kansas-city-chiefs/depth-chart> returns HTTP 404, re-checked today (flag **F42**) |
+| Club chart spot-check, ARI vs <https://www.azcardinals.com/team/depth-chart> | **Matches row for row**, ranks 1–3, all three units |
+| nflverse licence via `api.github.com/repos/nflverse/nflverse-data` | **CC-BY-4.0**, not archived — the site's attribution is correct |
+| 12 pinned files, 136 game rows, 296 injury records, 109 starters | all reproduce from the committed data |
+
+Irregularities raised: **C-A** stale standings (F41) · **C-B** no league depth chart (F42) ·
+**C-C** 16 merged name cells published verbatim, never split (F43) · **C-D** one chart line with no
+first string (F44) · **C-E** seven overlapping site generations (F46, Q21, D07, S17) · **C-F**
+one unusual official row recorded for a reviewer (DET Kerby Joseph: "Full Participation in
+Practice" with a game status of "Out" — the scrape is faithful to the page).
+
+**C3 — unified category site.** `pipeline/gen_site.py` now renders a category sidebar on every page
+(Overview · Lines & model · Competition · Availability · Decisions · Evidence · Companion pages)
+alongside the flat header navigation, so the site reads as a dashboard rather than a link list.
+Four new pages close gaps that previously existed only inside the `research/` sub-site:
+`pages/correlations.html` (11 measured relationships with n, r, 95% CI and p on 6,975 games),
+`pages/luck.html` (every strategy against a fair-price null, plus the eight gates),
+`pages/parlays.html` (66 two-leg parlays tested for dependence, plus same-game prop correlations)
+and `pages/depth.html`. CSS in `assets/style.css` is additive only — no existing rule was changed.
+
+**C4 — depth and deficiency.** New `pipeline/build_depth_ladder.py` joins the official club depth
+charts to the official injury report and publishes the whole ladder: **933 slots across 31 of 32
+clubs**, ranks 1–6 as the club lists them, for **offence, defence and special teams separately**.
+Findings: **4 lines are being started by a backup** because the club's own first string is Out or
+Doubtful (DET C and CB, NE LG and CB); **110 lines have an at-risk first string** (Questionable,
+did not practise, or limited); **no line is down to its 3rd string**; **1 chart gap** (PHI DT);
+**16 merged-name cells** published verbatim. Houston publishes no chart, so its rows are blank by
+design. Clubs with no filed report this week (BAL, LAC, and the four on bye) show zero, with the
+page stating three times that no report is not the same as healthy. This closes the gap recorded in
+flag **F21**; F21 stays open for the attrition index itself, which is still starter-only (flag **F47**).
+
+**C5 — executive summary.** `pages/executive.html` now opens with a "re-checked on 2026-11-13"
+paragraph, its brief-coverage table points the parlay, correlation, luck and 2nd-to-4th-string rows
+at the pages that actually answer them, and its "what remains unresolved" list carries F41 and F46.
+
+**C6 — final integration.** Every gate re-run on the final tree and **all green**:
+`check_site.py` 25 pages / 0 broken / 0 unreachable · `check_committed_site.py` PASS (no
+source-less rows, no stale stamps) · `tools/verify.py` 982 rows, **982 with an official source
+link**, 73 unverified rows keep blank cells · `verify_combined.py` PASS (1,613 links, 0 broken) ·
+`audit_numbers.py` 47/47 reproduce · `validate_verified.py` all hard checks pass ·
+**117 unit tests OK**.
+
+**Cross-scope edits this session, both logged in `docs/review/session-c56ebee8.md` §6:**
+1. `scripts/verified/normalize_nav.py` — the canonical nav list was resynced with
+   `pipeline/gen_site.py` and labels are now HTML-escaped the way the generator escapes them.
+   Both scripts rewrite the same `<nav>` block on the same files; their lists had drifted, so
+   whichever ran second silently rewrote the other's links. They are now byte-identical, verified
+   by running one after the other and diffing (0 changes on this generation's pages).
+2. `tools/check_committed_site.py` — **not edited.** Its staleness rule flags the three research
+   pages, because they read from a committed extract the daily refresh never rebuilds. Rather than
+   weaken another session's gate, each page now carries the site stamp in its header and states its
+   own extract time in the body. An explicit exemption list is the tool owner's call.
+
+**Editorial additions (append-only, `pipeline/content.py`):** questions **Q22** (may a committed
+official snapshot lag the live page, and who re-scrapes it?) and **Q23** (are club-published depth
+charts an acceptable official source when the league publishes none?); suggestions **S16** (publish
+the full ladder, not just starter plus nominal backup) and **S17** (collapse the seven generations
+into one authoritative dashboard); decision **D07** (which generation becomes authoritative).
+Registers now hold 23 questions, 19 suggestions and 7 decision records.

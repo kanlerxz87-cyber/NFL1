@@ -5,32 +5,27 @@ Additive and idempotent: the <nav> block is rewritten to one shared list, preser
 current page's `active` state. No page content outside <nav> is touched.
 """
 from __future__ import annotations
+import html
 import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 CANON = [
     ("index.html", "Overview"),
-    ("sections.html", "All Sections"),
-    ("executive-summary.html", "Executive Summary"),
-    ("teams.html", "Teams"),
-    ("standings.html", "Standings"),
-    ("injuries.html", "Injuries"),
-    ("availability.html", "Availability"),
-    ("data.html", "Verified Data"),
-    ("lines.html", "Own Lines"),
-    ("analysis.html", "Validation & Correlation"),
-    ("decisions.html", "Decision Register"),
-    ("verified.html", "Verified Artifacts"),
-    ("evidence.html", "Evidence"),
-    ("models.html", "Strategy Lab"),
-    ("strategies.html", "Strategies"),
-    ("suggestions.html", "Suggestions"),
-    ("questions.html", "Questions"),
-    ("flagged.html", "Flagged"),
-    ("review.html", "Review"),
-    ("executive.html", "Executive Summary (companion)"),
+    ("executive.html", "Executive Summary"),
+    ("lines.html", "My Lines"),
+    ("correlations.html", "Correlations"),
+    ("strategies.html", "Strategy Lab"),
+    ("luck.html", "Skill vs Luck"),
+    ("parlays.html", "Parlays & Combos"),
     ("props.html", "Player Props"),
+    ("injuries.html", "Injuries"),
+    ("depth.html", "Depth & Deficiency"),
+    ("questions.html", "Questions"),
+    ("suggestions.html", "Suggestions"),
+    ("evidence.html", "Evidence"),
+    ("review.html", "Flagged for Review"),
+    ("sections.html", "All Sections"),
 ]
 
 
@@ -43,7 +38,7 @@ def build(page_name: str, is_index: bool) -> str:
         else:
             target = "../index.html" if href == "index.html" else href
         cls = ' class="active"' if href == page_name else ""
-        items.append(f'    <a href="{target}"{cls}>{label}</a>')
+        items.append(f'    <a href="{html.escape(target, quote=True)}"{cls}>{html.escape(label)}</a>')
     return "<nav>\n" + "\n".join(items) + "\n  </nav>"
 
 
