@@ -1783,3 +1783,41 @@ _This claim is committed and pushed before any other file is touched, per the br
 | Merges from `origin/main` | two (PRs #21–#39, then the s9cb refresh); every conflict resolved keeping both sides — COORDINATION.md, `data/suggestions.json` (27 ids), `pipeline/content.py` (main's implemented S13 + SA-01/02 plus this session's S14/S15/Q21), `pipeline/gen_site.py` (main's signal labels F15–F22 plus this session's sections page and F23–F25), `tools/build.py` (this session's `write_readme`, subsuming main's template addition), `analysis/correlations.py` (main's A1 fix kept, this session's audit gate kept) |
 | Open items left for reviewers | F38 + S14 (CI audits a regenerated index substitute) · F40 + S13/S24 (`[skip ci]` data pushes run no verify) · Q28/Q21 (authoritative generation) · S22 (four flag registers) · S25 / `R-a2cea255-02` (referee replication as a CI gate) |
 | Note for session `9cb71eb8` | `Collect s9cb research extract` failed once ("Commit the extract") on this branch's push `fd8133e` — their workflow, not a site gate; PR #41 checks were green. Logged here, their file not edited. |
+
+---
+
+# Session `ca779bcc-nfl1` — strength-of-schedule study, source audit, live-site rebuild
+
+| Item | Value |
+| --- | --- |
+| Session ID | `ca779bcc-nfl1` |
+| Branch | `arena/ca779bcc-nfl1` (fixed by Arena; the `session-<id>/<task>` convention cannot be used) |
+| Base commit | `09c03f052aa3bebb62acc23cb17eefd65f0c512e` (`main`, 2026-11-12 23:37 UTC) |
+| Board read before work | yes — full `COORDINATION.md` (1,785 lines) plus PR list |
+
+**Coordination note.** Every earlier session branch has merged, and no task on this board is
+`in progress`, so there is no competing owner. This session claims the scopes below; they are
+**additive and non-overlapping** with every earlier session. Two stale PRs (#37, #43) are
+COORDINATION-only records that were left open; they are handled under S9, not edited.
+
+## Task board (session `ca779bcc-nfl1`)
+
+Status values: `unclaimed` | `in progress` | `done` | `needs review`.
+
+| ID | Task | Status | Owner | File scope | Notes |
+| --- | --- | --- | --- | --- | --- |
+| S1 | Read board, claim tasks, push claim first | in progress | `ca779bcc` | `COORDINATION.md` | this section |
+| S2 | Line-by-line audit of the newest published data against live official nfl.com pages (standings, week-10 schedule/results, injury report); flag every discrepancy with links | in progress | `ca779bcc` | `data/flags.json` (append-only), `COORDINATION.md` | |
+| S3 | **New study: strength of schedule and schedule-adjusted results.** Ratings, SOS, remaining SOS, adjusted scores; own line vs market; SOS-conditioned strategy hypotheses with gates | in progress | `ca779bcc` | `analysis/sos.py` (new), `data/strength/` (new) | nflverse inputs only |
+| S4 | Questions / information ledger: what is known, unknown and blocking, with the discovery method for each gap | in progress | `ca779bcc` | `data/strength/questions.json` | |
+| S5 | Suggestions register with decision paths (so a reviewer can choose before anything is implemented) | in progress | `ca779bcc` | `data/strength/suggestions.json` | |
+| S6 | Executive summary page for this study | in progress | `ca779bcc` | `strength/executive-summary.html` | generated |
+| S7 | Verification report: every published row carries an official/deeded source link; blanks stay blank and are flagged | in progress | `ca779bcc` | `strength/verification.html`, `data/strength/verification.json` | |
+| S8 | Generator + tests: `tools/build_strength.py`, `tools/check_strength_site.py`, unit tests; one additive nav entry from `index.html` | in progress | `ca779bcc` | `tools/build_strength.py`, `tools/check_strength_site.py`, `tests/test_strength.py`, `index.html` (one nav link) | |
+| S9 | Integration: merge stale PRs #37/#43, PR from this branch, merge, confirm Pages deploy, record result here | in progress | `ca779bcc` | `COORDINATION.md` | |
+
+**Not touched by this session:** `pages/`, `docs/`, `lab/`, `dashboard/`, `verified-lab/`,
+`referee/`, `s9cb/`, `pipeline/`, `scripts/`, `tools/build.py` and every `data/*.json` file owned
+by an earlier generator. New data is written only under `data/strength/`.
+
+_This claim is committed and pushed before any other file is touched, per the brief._
