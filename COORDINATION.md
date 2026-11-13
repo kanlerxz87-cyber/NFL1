@@ -1903,3 +1903,64 @@ Claim recorded before any other file is edited. Statuses updated as work proceed
     is live and not a broken relative path.
 - **Irregularities:** NFL1-01..NFL1-20 published at
   <https://kanlerxz87-cyber.github.io/NFL1/lab/pages/flagged.html>. None blocks the site.
+
+### Session `65df4799-nfl1` — takeover log (W2), 2026-11-13
+
+All three idle PRs were conflicting and their sessions had been quiet far beyond the 60-minute
+limit, so this session took them over. Their branches were merged **into this session's branch**
+(the environment forbids switching branches or pushing to another session's branch), then this
+branch carries everything to `main` in the W5 PR. Nothing was discarded.
+
+| PR | Branch | Conflict | Resolution |
+| --- | --- | --- | --- |
+| #43 | `arena/9cb71eb8-nfl1` | COORDINATION.md | both sides kept: their PR #40 / CDN-cache record appended after this board's sections |
+| #37 | `arena/1505ac8e-nfl1` | COORDINATION.md | both sides kept: their PR #34 / lab record appended |
+| #31 | `arena/6e8ca348-nfl1` | 37 files | see merge commit `0f0816d` message: data/model JSONs kept ours (main's 23:37Z refresh supersedes their 22:43Z regeneration; their substantive work is in generators + `web/` + `data/evidence/`, all merged unchanged); `collect-data.yml` combined both sides (their X06 re-render + push-retry, main's gen_site step; their duplicate gen_site call dropped); `gen_site.py` kept both nav entries, main's signal-label mapping and their `market_cell()` X07 fix + "Difference/Marker" honesty rename with both notes merged; `tools/build.py` README template kept both sides; `tools/build_dashboard.py`/`verify_dashboard.py` name collision resolved (their web/ builder keeps the name, session 6a232e79's `dashboard/` builder preserved verbatim as `build_dashboard_site.py`/`verify_dashboard_site.py`) |
+
+Integration fixes applied on top (published as flags LR-03/LR-04, fixed and gated):
+two writers on `pages/lines.html` (verified sub-site page moved to `pages/verified-lines.html`,
+gate tightened to see dict-key claims) and 21 broken nav links on `pages/availability.html`
+(builder passed a bare page name). Full detail: `docs/audit-65df4799.md` §6.
+
+### Session `65df4799-nfl1` — verification record (W3), 2026-11-13
+
+Line-by-line re-verification against **live official pages fetched 2026-11-13**, transcriptions
+and comparators committed under `data/audit/live_recheck_2026-11-13/`, full write-up in
+[`docs/audit-65df4799.md`](docs/audit-65df4799.md):
+
+1. **Standings** — 6 published files × 32 clubs, field by field vs
+   <https://www.nfl.com/standings/league/2026/reg>: 30/32 rows exact in every file; the NYG/WAS
+   delta is the Week-10 TNF final (Commanders 24, Giants 21) landing after each file's recorded
+   retrieval — arithmetically exact, all files internally consistent. Currency note LR-01.
+2. **Week-10 schedule + byes** — 14/14 fixtures, kickoffs and broadcasts exact in 4 files vs
+   <https://www.nfl.com/schedules/2026/by-week/week-10>; byes CHI/DEN/PHI/TB exact.
+3. **Injuries** — **296/296 rows field-by-field exact** vs <https://www.nfl.com/injuries/>
+   (26 clubs + LAC/BAL "No Injuries Reported"). Every earlier flagged row (X01, X02, RV-02)
+   re-verified present and matching — earlier discrepancies were page drift (A-F04), not parser
+   corruption (flag LR-06). Darnold news-vs-status gap confirmed live (LR-05).
+4. **Depth charts** — KC 25/28 exact vs <https://www.chiefs.com/team/depth-chart> (WR2/KR/PR
+   still differ — X09 open, LR-02); SEA 63/63 exact vs <https://www.seahawks.com/team/depth-chart/>.
+5. **Model figures** — independent recomputation gates all green (audit_numbers 47/47,
+   verify_official 20 pass/8 flag/0 fail, verify_dashboard 399 assertions, tools/verify 1,026
+   rows all sourced, verify_combined 1,276 links 0 broken, check_reproducible clean-rebuild).
+
+Sources for every row are linked in the audit and on the generated pages; unverifiable values
+(no odds feed, no league depth chart) remain blank and flagged. New flags LR-01..LR-06 and
+suggestions S26..S29 appended to the shared registers.
+
+### Session `65df4799-nfl1` — site completeness (W4), 2026-11-13
+
+Checked the published tree against the brief, as a user reading the live pages:
+landing page (`index.html`) links every category; `pages/sections.html` lists all sections across
+the site generations; executive summary (root + `pages/executive.html` + `web/executive-summary.html`);
+questions/missing-information ledger (`questions.html` — known/unknown/answers/discovery per question);
+dedicated suggestions section with a Review & Choose-a-Path gate (`suggestions.html`, `web/suggestions.html`,
+31 suggestions + 6 decision records, all `Awaiting review` until a path is picked);
+strategy research + validation gates + correlations + skill-vs-luck (`strategy-lab.html`,
+`pages/strategies.html`, `pages/analysis.html`, `research/`); leaderboard with rewards rules
+(`leaderboard.html`, `research/leaderboard.html`); singles/parlays/prop-combos (`bet-types.html`,
+`research/parlays.html`, `research/props.html`); injuries + depth-deficiency tracking
+(`injuries.html`, `depth-chart.html`, `pages/injuries.html`, `pages/availability.html`);
+verification + flagged for review (`verification.html`, `flagged.html`, `web/flag-register.html`).
+No gaps required new pages; the fixes in W2/W3 removed the broken links and the double-written
+page. All 50 flagged items and 31 suggestions carry source links.
