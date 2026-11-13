@@ -2,7 +2,7 @@
  "built_utc": "2026-11-13T12:45Z",
  "week_played": 10,
  "week_next": 11,
- "headline": "The laboratory's methods hold up under independent recomputation. Its published state does not: the site is serving a standings snapshot one game behind, two leaderboards disagree, the priced board's sample cannot be reconciled with the file it was computed from, and 90% of the depth-chart evidence it collected is unpublished. None of the twelve strategy rules passes its own gates.",
+ "headline": "The laboratory's methods hold up under independent recomputation, and today's scheduled refresh closed a standings drift that this session found on arrival: the site now matches the official page on all 32 clubs and 137 games. What remains is not a data-entry problem. The injury table's fallback to week-6 statuses is mislabelled, two leaderboards disagree, the priced board's sample cannot be reconciled with the file it was computed from, and 90% of the depth-chart evidence collected is unpublished. None of the twelve strategy rules passes its own gates.",
  "kpis": [
   {
    "label": "2026 games complete",
@@ -36,8 +36,8 @@
   },
   {
    "label": "Clubs whose record drifted",
-   "value": "2",
-   "note": "NYG, WAS - one Thursday game",
+   "value": "0",
+   "note": "was 2 at session start; refresh closed it",
    "src": {
     "t": "snapshot.json",
     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/snapshot.json",
@@ -66,8 +66,8 @@
   },
   {
    "label": "Player game designations this week",
-   "value": "9",
-   "note": "all others practice-only",
+   "value": "9 official",
+   "note": "181 after the stale fallback - see F-118",
    "src": {
     "t": "injury_designations_2026-11-13.tsv",
     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/official/2026-11-13/injury_designations_2026-11-13.tsv",
@@ -156,7 +156,7 @@
   }
  ],
  "what_we_know": [
-  "The official 2026 standings reconcile arithmetically: 32 clubs, 137 games, wins equal losses, ties in pairs, points for equal points against. Captured today and stored with its URL.",
+  "The official 2026 standings reconcile arithmetically and now match the site: 32 clubs, 137 games, wins equal losses, ties in pairs, points for equal points against, and 0 clubs drifting from today's official page after the 12:51Z refresh.",
   "The committed 296-row Week 10 injury scrape matches today's official nfl.com report club by club, with zero row-count differences on every club that could be read to its last row.",
   "nfl.com publishes no depth chart: the club URL returns a soft 404. The 32 club sites publish their own charts and several label them 'Unofficial'.",
   "The priced strategy board reproduces exactly from committed data. S07 (fade the road favourite of 7+) is 401 bets, 55.58% hit rate, +24.318 units, 6.064% ROI - identical to the published row.",
@@ -178,7 +178,7 @@
   "How the season ends - every forward-looking number on the site is a modelled distribution, not a forecast with a track record."
  ],
  "what_is_wrong": [
-  "Standings drift: the site shows NYG 5-2-1 and WAS 2-5-1; the official page shows 5-3-1 and 3-5-1 after Thursday's 24-21 result (F-101, material).",
+  "The injury fallback is unlabelled in the table: after the 12:50Z refresh the availability page mixes week-10 official rows with week-6 mirrored statuses and still calls itself mid-week (F-118, material).",
   "Two leaderboards: one assumes -110 on every bet, the other uses observed prices, and they rank different rules under the same names (F-102, material).",
   "The depth-chart page shows 3 of the 31 captured clubs (F-104, material).",
   "The priced board's totals cannot be reconciled with the committed extract: 6,653 candidate games published, 5,471 in the file (F-114, minor).",
@@ -248,6 +248,7 @@
   }
  ],
  "next_actions": [
+  "Fix the injury fallback label (F-118): if the official scrape fails, name the fallback week in the table caption and stop calling the report mid-week.",
   "Run the collect workflow once so the snapshot includes the Thursday result and the 137-game state (closes F-101).",
   "Apply SG-03 and SG-12: both are one-line changes with existing flags pointing at them.",
   "Publish the 31-club depth table from the committed scrape (SG-05).",

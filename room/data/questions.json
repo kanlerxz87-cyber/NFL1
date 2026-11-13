@@ -93,7 +93,7 @@
   "group": "Injury tracking",
   "status": "answered",
   "question": "How many players are on the official Week 10 injury report, and does the committed scrape match it club by club?",
-  "answer": "296 rows across 26 clubs. Every club that could be read to its last row matches the committed scrape exactly (24 of 24 readable clubs, 0 differences); LAC and BAL publish 'No Injuries Reported'; CHI, DEN, PHI and TB are on bye and publish no table. Two clubs (NO, CIN) are recorded as partial because the page was read in chunks and their first rows were not captured.",
+  "answer": "296 rows across 26 clubs on the official week-10 page. Every club readable to its last row matched the committed scrape exactly at 12:20Z (24 of 24, zero differences); LAC and BAL publish 'No Injuries Reported' and CHI, DEN, PHI and TB are on bye. The 12:50Z automated refresh kept all 296 rows but its availability model fell back to the week-6 mirrored feed for game statuses - see F-118.",
   "unknown": "Full row-by-row transcripts for NO and CIN at this timestamp.",
   "how": {
    "method": "Counted rows in each official club table, then compared with data/model/official_injuries.json.",
@@ -128,7 +128,7 @@
   "group": "Injury tracking",
   "status": "answered",
   "question": "How many players carry an actual game designation (Out / Doubtful / Questionable) rather than practice-only?",
-  "answer": "9 rows on the captured clubs carry a game designation: WAS 2 (both Out), NYG 1 (Questionable), NE 3 (all Out), DET 3 (all Out). Every other listed player is practice-participation only, because the week is mid-progress.",
+  "answer": "9 players carried an official game designation at 12:20Z: WAS 2 (both Out), NYG 1 (Questionable), NE 3 (all Out), DET 3 (all Out). Every other listed player was practice-participation only. After the 12:50Z refresh the availability model shows 181 designations, but those come from the week-6 fallback and are not week-10 designations.",
   "unknown": "",
   "how": {
    "method": "Read every injury table row and recorded the Game Status column.",

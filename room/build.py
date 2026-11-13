@@ -73,6 +73,8 @@ STATUS_BADGE = {
     "verified-ok": ("passing check", "ok"),
     "open": ("open", "warn"),
     "met": ("met", "ok"),
+    "resolved": ("resolved", "ok"),
+    "graphic": ("published as an image", "warn"),
 }
 SEV_BADGE = {"material": ("material", "bad"), "minor": ("minor", "warn"), "info": ("info", "info")}
 
@@ -192,7 +194,15 @@ EXEC = load("executive.json")
 
 
 def page_index() -> str:
-    ex = EXEC
+    ex = json.loads(json.dumps(EXEC))
+    _f = load("findings.json")["findings"]
+    _open = sum(1 for x in _f if x["status"] == "open")
+    _pass = sum(1 for x in _f if x["status"] == "verified-ok")
+    _mat = sum(1 for x in _f if x["severity"] == "material" and x["status"] == "open")
+    for k in ex["kpis"]:
+        if k["label"] == "Open findings":
+            k["value"] = f"{_open} open, {_pass} pass"
+            k["note"] = f"{_mat} material, {_open - _mat} minor, {_pass} verified today"
     kpis = "".join(
         f'<article class="kpi"><span class="label">{e(k["label"])}</span>'
         f'<span class="value">{e(k["value"])}</span>'
@@ -267,7 +277,15 @@ the build fails if a table row has no source link.</p>"""
 
 
 def page_executive() -> str:
-    ex = EXEC
+    ex = json.loads(json.dumps(EXEC))
+    _f = load("findings.json")["findings"]
+    for k in ex["kpis"]:
+        if k["label"] == "Open findings":
+            _open = sum(1 for x in _f if x["status"] == "open")
+            _pass = sum(1 for x in _f if x["status"] == "verified-ok")
+            _mat = sum(1 for x in _f if x["severity"] == "material" and x["status"] == "open")
+            k["value"] = f"{_open} open, {_pass} pass"
+            k["note"] = f"{_mat} material, {_open - _mat} minor, {_pass} verified today"
     def ul(items):
         return '<ul class="tight">' + "".join(f"<li>{e(x)}</li>" for x in items) + "</ul>"
     rows = [[e(k["label"]), f'<strong>{e(k["value"])}</strong>', e(k["note"]),
@@ -557,7 +575,8 @@ def page_injuries() -> str:
     <li><strong>24 of 24</strong> readable clubs match the committed scrape exactly — zero row-count differences.</li>
     <li><strong>LAC</strong> and <strong>BAL</strong> publish “No Injuries Reported”.</li>
     <li><strong>CHI, DEN, PHI, TB</strong> are on bye and publish no table.</li>
-    <li><strong>9</strong> players carry a game designation; the rest are practice-only.</li>
+    <li><strong>9</strong> players carried an official game designation at 12:20Z; the rest were practice-only.</li>
+    <li>After the 12:50Z refresh the model shows <strong>181</strong> designations because it fell back to week 6. That is a defect, not new information: <a href="flagged.html#F-118">F-118</a>.</li>
   </ul><p class="small"><a href="data.html">The full count audit →</a></p></div>
   <div class="panel"><h3>Depth charts</h3><ul class="tight">
     <li>nfl.com publishes <strong>no</strong> depth chart: the club URL returns a soft 404.</li>
@@ -585,7 +604,7 @@ indistinguishable from a fact.</p>
               nrows, caption="Week 10 game designations joined to the club chart", src_col=6)
     crows = []
     for c in cov["clubs"]:
-        stat = badge("captured", "ok") if c["status"] == "ok" else badge(c["status"], "bad")
+        stat = badge("captured", "ok") if c["status"] == "ok" else sb(c["status"])
         crows.append([e(c["abbr"]), e(c["club"]), stat,
                       e(c["as_of"]) if c.get("as_of") else '<span class="blank">not published</span>',
                       src_links([{"t": c["abbr"], "u": c["source_url"]}])])
@@ -652,6 +671,38 @@ See <a href="flagged.html#F-101">F-101</a>.</div>
 games is final. Byes are listed on the official pages and are recorded in the source file.</p>
 {table(["Wk", "Day", "ET", "Fixture", "Network", "Result", "Source"], frows,
        caption="Official schedule capture", src_col=6)}
+
+<h2>What was checked today, and what it returned</h2>
+{table(["Check", "Result", "Detail", "Source"],
+       [[e("Official standings vs committed snapshot"),
+         badge("0 drift", "ok"),
+         "32 clubs compared on W-L-T, points for and points against, before and after the 12:51Z refresh",
+         src_links([{"t": "NFL", "u": "https://www.nfl.com/standings/division/2026/REG"}])],
+        [e("League arithmetic"), badge("consistent", "ok"),
+         "Wins 136 = losses 136; ties 2 (a pair); PF total 6,291 = PA total; PF − PA = net on all 32 rows",
+         src_links([{"t": "capture", "u": REPO + "/blob/main/data/official/2026-11-13/standings_2026-11-13.tsv"}])],
+        [e("Injury report, club by club"), badge("24 of 24 match", "ok"),
+         "Every club readable to its last row matches the committed 296-row scrape; NO and CIN recorded partial",
+         src_links([{"t": "NFL", "u": "https://www.nfl.com/injuries/"}])],
+        [e("Injury statuses after the refresh"), badge("fallback in use", "bad"),
+         "181 designations shown, 9 real; the model fell back to week 6 - see F-118",
+         src_links([{"t": "model", "u": REPO + "/blob/main/data/model/availability.json"}])],
+        [e("Best strategy ROI"), badge("exact match", "ok"),
+         "S07: 401 bets, 219 wins, +24.318 units, 6.064% ROI recomputed from the committed file",
+         src_links([{"t": "data", "u": REPO + "/blob/main/data/s9cb/games.csv"}])],
+        [e("Correlation C1"), badge("value matches, n does not", "warn"),
+         "r = 0.4309 on 7,103 games recomputed; publication states 0.4312 on 6,975",
+         src_links([{"t": "published", "u": REPO + "/blob/main/data/s9cb/correlations.json"}])],
+        [e("Priced-board sample"), badge("not reconcilable", "bad"),
+         "6,653 candidate games published against 5,471 in the committed extract - F-114",
+         src_links([{"t": "board", "u": REPO + "/blob/main/data/s9cb/leaderboard.json"}])],
+        [e("nfl.com depth chart"), badge("no such page", "info"),
+         "Club URL returns HTTP 200 with the body '404 - Flag on the Play'",
+         src_links([{"t": "probe", "u": "https://www.nfl.com/teams/kansas-city-chiefs/depth-chart"}])],
+        [e("Leaderboard ordering"), badge("matches its caption", "ok"),
+         "Sorted by the lower 95% ROI bound, exactly as the page states (withdrawn claim, see F-116)",
+         src_links([{"t": "sort key", "u": REPO + "/blob/main/pipeline/build_all.py"}])]],
+       caption="Verification log", src_col=3)}
 
 <h2>What is deliberately not on this page</h2>
 <ul class="tight">

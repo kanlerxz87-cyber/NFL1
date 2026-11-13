@@ -5,17 +5,17 @@
  "findings": [
   {
    "id": "F-101",
-   "severity": "material",
-   "status": "open",
+   "severity": "info",
+   "status": "resolved",
    "area": "Data currency",
-   "title": "Published standings lag one completed game",
-   "detail": "The site serves data built at 2026-11-12T23:37Z. That snapshot has NYG at 5-2-1 (182 PF / 172 PA) and WAS at 2-5-1 (172 PF / 202 PA). The official division standings read on 2026-11-13 at 12:05Z show NYG 5-3-1 (203/196) and WAS 3-5-1 (196/223), after the Week 10 Thursday game finished 24-21 to Washington. Every other club matches exactly.",
+   "title": "Standings lagged one completed game \u2014 resolved during this session",
+   "detail": "When this session started, the site served a snapshot built at 2026-11-12T23:37Z with NYG at 5-2-1 (182 PF / 172 PA) and WAS at 2-5-1 (172 PF / 202 PA). The official division standings read on 2026-11-13 at 12:05Z showed NYG 5-3-1 (203/196) and WAS 3-5-1 (196/223) after the Week 10 Thursday game finished 24-21 to Washington; every other club matched exactly. The scheduled collect run re-fetched at 2026-11-13T12:51Z and now publishes 137 games with both clubs correct, so the drift is closed. Re-verified line by line after the refresh: 32 of 32 clubs match today's official page on W-L-T, points for and points against, 0 drift.",
    "official": "https://www.nfl.com/standings/division/2026/REG",
    "here": [
     {
      "t": "Committed snapshot",
      "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/snapshot.json",
-     "note": "generated_at 2026-11-12T23:37Z"
+     "note": "generated_at 2026-11-13T12:51Z, 137 games"
     },
     {
      "t": "Today's capture",
@@ -23,12 +23,12 @@
      "note": "32 rows"
     },
     {
-     "t": "Game result",
-     "u": "https://www.nfl.com/schedules/2026/by-week/week-10",
-     "note": "Commanders 24, Giants 21, FINAL"
+     "t": "Official page",
+     "u": "https://www.nfl.com/standings/division/2026/REG",
+     "note": "NYG 5-3-1, WAS 3-5-1"
     }
    ],
-   "settle": "Re-run the collect workflow after the Thursday game settled, or add the gate in SG-01."
+   "settle": "Closed by the data refresh. The prevention measure is still open as SG-01 and D-01."
   },
   {
    "id": "F-102",
@@ -379,6 +379,33 @@
     }
    ],
    "settle": "Either transcribe the image by hand with a reviewer's sign-off, or leave HOU blank and say why."
+  },
+  {
+   "id": "F-118",
+   "severity": "material",
+   "status": "open",
+   "area": "Injury tracking",
+   "title": "The availability table now mixes official week-10 rows with week-6 mirrored statuses, and still calls itself mid-week",
+   "detail": "The off-site sweep at 2026-11-13T12:50Z could not read the official injury page, so the pipeline fell back to the mirrored feed's most complete week, which is week 6. The rendered page does print a warning that statuses are stale, but the same page also states 'mid-week report: only the Thursday game carries game designations' and shows 181 game designations (86 tagged 'game designation', 95 from the practice-only path) against 9 real week-10 designations at 12:20Z today. Concretely, Baker Mayfield is shown as Out and Caleb Williams as Questionable; both clubs are on bye in week 10, so neither official week-10 row exists. The row-level source still cites nfl.com/injuries.",
+   "official": "https://www.nfl.com/injuries/",
+   "here": [
+    {
+     "t": "Availability model",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/availability.json",
+     "note": "source.label 'mirrored feed, latest complete week (6)'"
+    },
+    {
+     "t": "Official week 10",
+     "u": "https://www.nfl.com/injuries/",
+     "note": "Baker Mayfield and Caleb Williams are CHI/TB, both on bye - no week 10 rows"
+    },
+    {
+     "t": "Rendered page",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pages/injuries.html",
+     "note": "warning present; 'mid-week' sentence present"
+    }
+   ],
+   "settle": "Hard-fail or visibly re-label the availability table when the official scrape fails: show the fallback week in the table caption itself, drop the 'mid-week' sentence, and never tag a fallback row as a 'game designation'."
   }
  ]
 }
