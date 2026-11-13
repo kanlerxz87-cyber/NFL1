@@ -13,35 +13,41 @@
   <a class="brand" href="../index.html"><span class="mark">NFL</span><span class="brand-text">Decision Lab</span></a>
   <nav>
     <a href="../index.html">Overview</a>
+    <a href="executive.html">Executive Summary</a>
+    <a href="lines.html">My Lines</a>
+    <a href="correlations.html">Correlations</a>
+    <a href="strategies.html">Strategy Lab</a>
+    <a href="luck.html">Skill vs Luck</a>
+    <a href="parlays.html">Parlays &amp; Combos</a>
+    <a href="props.html">Player Props</a>
+    <a href="injuries.html">Injuries</a>
+    <a href="depth.html">Depth &amp; Deficiency</a>
+    <a href="questions.html">Questions</a>
+    <a href="suggestions.html" class="active">Suggestions</a>
+    <a href="evidence.html">Evidence</a>
+    <a href="review.html">Flagged for Review</a>
     <a href="sections.html">All Sections</a>
     <a href="../room/index.html">Decision Room</a>
-    <a href="executive-summary.html">Executive Summary</a>
+    <a href="../strength/index.html">SOS Study</a>
+    <a href="executive-summary.html">Executive Summary (companion)</a>
     <a href="teams.html">Teams</a>
     <a href="standings.html">Standings</a>
-    <a href="injuries.html">Injuries</a>
     <a href="availability.html">Availability</a>
     <a href="data.html">Verified Data</a>
-    <a href="lines.html">Own Lines</a>
-    <a href="analysis.html">Validation & Correlation</a>
+    <a href="analysis.html">Validation &amp; Correlation</a>
     <a href="decisions.html">Decision Register</a>
     <a href="verified.html">Verified Artifacts</a>
-    <a href="evidence.html">Evidence</a>
-    <a href="models.html">Strategy Lab</a>
-    <a href="strategies.html">Strategies</a>
-    <a href="suggestions.html" class="active">Suggestions</a>
-    <a href="questions.html">Questions</a>
-    <a href="flagged.html">Flagged</a>
-    <a href="review.html">Review</a>
-    <a href="executive.html">Executive Summary (companion)</a>
-    <a href="props.html">Player Props</a>
-    <a href="../strength/index.html">SOS Study</a>
+    <a href="models.html">Models</a>
+    <a href="flagged.html">Flagged (companion)</a>
   </nav>
 </header>
+<div class="shell">
+<aside class="sidebar" aria-label="Categories"><div class="navgroup"><span>Overview</span><a href="../index.html">Overview</a><a href="../pages/executive.html">Executive Summary</a><a href="../pages/sections.html">All Sections</a></div><div class="navgroup"><span>Lines & model</span><a href="../pages/lines.html">My Lines</a><a href="../pages/correlations.html">Correlations</a></div><div class="navgroup"><span>Competition</span><a href="../pages/strategies.html">Strategy Lab</a><a href="../pages/luck.html">Skill vs Luck</a><a href="../pages/parlays.html">Parlays &amp; Combos</a><a href="../pages/props.html">Player Props</a></div><div class="navgroup"><span>Availability</span><a href="../pages/injuries.html">Injuries</a><a href="../pages/depth.html">Depth &amp; Deficiency</a></div><div class="navgroup"><span>Decisions</span><a href="../pages/questions.html">Questions</a><a href="../pages/suggestions.html">Suggestions</a></div><div class="navgroup"><span>Evidence</span><a href="../pages/evidence.html">Evidence</a><a href="../pages/review.html">Flagged for Review</a></div><div class="navgroup"><span>Companion pages</span><a href="../room/index.html">Decision Room</a><a href="../strength/index.html">SOS Study</a><a href="../pages/teams.html">Teams</a><a href="../pages/standings.html">Standings</a><a href="../pages/availability.html">Availability</a><a href="../pages/data.html">Verified data</a><a href="../pages/analysis.html">Validation &amp; correlation</a><a href="../pages/decisions.html">Decision register</a><a href="../pages/verified.html">Verified artifacts</a><a href="../pages/models.html">Models</a><a href="../pages/executive-summary.html">Executive summary (companion)</a><a href="../pages/flagged.html">Flagged (companion)</a></div></aside>
 <main id="main">
   <section class="page-head">
     <p class="eyebrow">Evidence-first dashboard</p>
     <h1>Suggestions &amp; Paths</h1>
-    <p class="standfirst">17 improvements, 6 decision records, and a review process for choosing before implementing.</p>
+    <p class="standfirst">19 improvements, 7 decision records, and a review process for choosing before implementing.</p>
     <p class="timestamp">Data built 2026-11-13T13:04:54+00:00 · every value links to its source</p>
   </section>
   
@@ -55,7 +61,7 @@
 
 <section class="panel">
   <div class="panel-head"><h2>Decision records</h2><a href="review.html">Blocking flags →</a></div>
-  <div class="table-wrap"><table class=""><thead><tr><th>ID</th><th>Decision</th><th>Options</th><th>Recommendation</th><th>Criteria</th><th>What it blocks</th><th>Status</th></tr></thead><tbody><tr><td><strong>D01</strong></td><td>What is the default line the site publishes?</td><td>• Pure EPA model line<br>• Market line<br>• Hybrid (fitted weight)<br>• Both, labelled</td><td>Hybrid as default, pure model always visible.</td><td>Out-of-sample MAE on 2026; weight stability across seasons; transparency.</td><td>Every downstream &#x27;edge&#x27; number.</td><td><span class="badge warn">Needs sign-off</span></td></tr><tr><td><strong>D02</strong></td><td>Do we buy a licensed odds feed?</td><td>• Yes now<br>• Yes next season<br>• No - model-only publication</td><td>Yes now if budget allows; otherwise stop claiming edge and publish model-only.</td><td>Cost vs value of CLV and prop pricing; terms permitting republication.</td><td>S03, prop leaderboard, parlay scoring, CLV gate.</td><td><span class="badge warn">Open</span></td></tr><tr><td><strong>D03</strong></td><td>Does the rewards competition carry real value?</td><td>• Paper points only<br>• Non-cash prizes<br>• Cash prizes</td><td>Paper points only until legal review concludes.</td><td>Jurisdiction, terms, anti-gaming controls, tax treatment.</td><td>Rewards launch.</td><td><span class="badge neutral">Blocked - legal</span></td></tr><tr><td><strong>D04</strong></td><td>Which bet types are scored on the leaderboard?</td><td>• Singles only<br>• Singles + parlays<br>• All incl. props and combos</td><td>Singles now; add parlay and prop categories only when priced.</td><td>Data availability per type; variance comparability.</td><td>Leaderboard scope.</td><td><span class="badge warn">Recommended</span></td></tr><tr><td><strong>D05</strong></td><td>How many units may a strategy risk before review?</td><td>• Flat 1 unit, stop at -25<br>• Flat 1 unit, stop at -10<br>• Fractional Kelly</td><td>Flat 1 unit with a -25 unit review trigger (matches gate G7).</td><td>Worst measured drawdown across strategies; user tolerance.</td><td>Risk gate wording.</td><td><span class="badge warn">Recommended</span></td></tr><tr><td><strong>D06</strong></td><td>How does the live site stay current with the daily data refresh?</td><td>• Regenerate HTML inside the refresh job and commit it<br>• Drop [skip ci] and let pages.yml rebuild<br>• Regenerate only on merge</td><td>Regenerate inside the refresh job (collect-data.yml) and commit the HTML with the JSON.</td><td>The live HTML build stamp must match the data generated_at; no extra CI loop.</td><td>Whether the dashboard shows current numbers at all.</td><td><span class="badge pass">Implemented</span></td></tr></tbody></table></div>
+  <div class="table-wrap"><table class=""><thead><tr><th>ID</th><th>Decision</th><th>Options</th><th>Recommendation</th><th>Criteria</th><th>What it blocks</th><th>Status</th></tr></thead><tbody><tr><td><strong>D01</strong></td><td>What is the default line the site publishes?</td><td>• Pure EPA model line<br>• Market line<br>• Hybrid (fitted weight)<br>• Both, labelled</td><td>Hybrid as default, pure model always visible.</td><td>Out-of-sample MAE on 2026; weight stability across seasons; transparency.</td><td>Every downstream &#x27;edge&#x27; number.</td><td><span class="badge warn">Needs sign-off</span></td></tr><tr><td><strong>D02</strong></td><td>Do we buy a licensed odds feed?</td><td>• Yes now<br>• Yes next season<br>• No - model-only publication</td><td>Yes now if budget allows; otherwise stop claiming edge and publish model-only.</td><td>Cost vs value of CLV and prop pricing; terms permitting republication.</td><td>S03, prop leaderboard, parlay scoring, CLV gate.</td><td><span class="badge warn">Open</span></td></tr><tr><td><strong>D03</strong></td><td>Does the rewards competition carry real value?</td><td>• Paper points only<br>• Non-cash prizes<br>• Cash prizes</td><td>Paper points only until legal review concludes.</td><td>Jurisdiction, terms, anti-gaming controls, tax treatment.</td><td>Rewards launch.</td><td><span class="badge neutral">Blocked - legal</span></td></tr><tr><td><strong>D04</strong></td><td>Which bet types are scored on the leaderboard?</td><td>• Singles only<br>• Singles + parlays<br>• All incl. props and combos</td><td>Singles now; add parlay and prop categories only when priced.</td><td>Data availability per type; variance comparability.</td><td>Leaderboard scope.</td><td><span class="badge warn">Recommended</span></td></tr><tr><td><strong>D05</strong></td><td>How many units may a strategy risk before review?</td><td>• Flat 1 unit, stop at -25<br>• Flat 1 unit, stop at -10<br>• Fractional Kelly</td><td>Flat 1 unit with a -25 unit review trigger (matches gate G7).</td><td>Worst measured drawdown across strategies; user tolerance.</td><td>Risk gate wording.</td><td><span class="badge warn">Recommended</span></td></tr><tr><td><strong>D06</strong></td><td>How does the live site stay current with the daily data refresh?</td><td>• Regenerate HTML inside the refresh job and commit it<br>• Drop [skip ci] and let pages.yml rebuild<br>• Regenerate only on merge</td><td>Regenerate inside the refresh job (collect-data.yml) and commit the HTML with the JSON.</td><td>The live HTML build stamp must match the data generated_at; no extra CI loop.</td><td>Whether the dashboard shows current numbers at all.</td><td><span class="badge pass">Implemented</span></td></tr><tr><td><strong>D07</strong></td><td>Which site generation becomes the single authoritative dashboard?</td><td>• Root dashboard (pipeline/gen_site.py) plus pages/<br>• research/ (largest sample, observed prices)<br>• docs/ register<br>• Keep all seven and label each</td><td>Root dashboard: it is the only generation rebuilt by the daily data workflow, so it is the only one that cannot silently go stale.</td><td>Rebuilt by CI on every data refresh; every row source-linked; covers every requirement in the brief.</td><td>Whether a reader can trust any number without checking which generation produced it.</td><td><span class="badge warn">Open - decision required</span></td></tr></tbody></table></div>
 </section>
 
 <section class="panel">
@@ -281,6 +287,32 @@
     <div><dt>Evidence it is right</dt><dd>docs/audit-b6e68100.md §A-F04; flag A-F04; official source https://www.nfl.com/injuries/.</dd></div>
     <div><dt>Recommendation</dt><dd>Adopt before the next Sunday slate.</dd></div>
   </dl>
+</article>
+<article class="card">
+  <div class="card-head"><h3><span class="id">S16</span> Publish the full depth ladder, not just the starter and his nominal backup</h3><span class="badge neutral">Implemented - needs sign-off</span></div>
+  <p class="problem"><strong>Problem:</strong> The availability model only ever emitted depth rank 1 and its rank 2 replacement, so a club whose starter and backup were both out looked no worse than a club missing one player. That is exactly the deficiency the brief asks the system to detect.</p>
+  <p><strong>Change:</strong> Join the official injury report to the whole club ladder (ranks 1 to 6 as published) and compute the projected starter as the lowest-ranked listed player who is not Out or Doubtful. Report offence and defence separately, and publish chart defects rather than repairing them.</p>
+  <dl class="facts">
+    <div><dt>Impact</dt><dd>High - it is the only part of the build that answers the 2nd/3rd/4th-string requirement directly.</dd></div>
+    <div><dt>Effort</dt><dd>Done (pipeline/build_depth_ladder.py, pages/depth.html)</dd></div>
+    <div><dt>Risk</dt><dd>Low - club charts are weekly snapshots and the page says so in three places.</dd></div>
+    <div><dt>Depends on</dt><dd>Official club depth charts and the official injury report, both committed</dd></div>
+    <div><dt>Evidence it is right</dt><dd>933 slots across 31 of 32 clubs; 4 lines started by a backup; 110 with an at-risk starter; 1 chart gap. Sources on the page.</dd></div>
+    <div><dt>Recommendation</dt><dd>Adopted this session; a reviewer should rule on whether club charts count as official (Q23).</dd></div>
+  </dl>
+</article>
+<article class="card">
+  <div class="card-head"><h3><span class="id">S17</span> Collapse the seven site generations into one authoritative dashboard</h3><span class="badge neutral">Proposed - decision required</span></div>
+  <p class="problem"><strong>Problem:</strong> Seven independently built site generations now publish overlapping findings in the same repository. They disagree in places, they duplicate the same tables with different numbers, and a reader cannot tell which one to trust.</p>
+  <p><strong>Change:</strong> Pick one generation as authoritative, move the rest under an archive directory linked from the All Sections page, and delete nothing until the choice is recorded.</p>
+  <dl class="facts">
+    <div><dt>Impact</dt><dd>High - it is the single biggest source of confusion on the live site.</dd></div>
+    <div><dt>Effort</dt><dd>Medium - a reviewer decision plus one integration pass</dd></div>
+    <div><dt>Risk</dt><dd>Medium - earlier sessions&#x27; work must be archived, not destroyed</dd></div>
+    <div><dt>Depends on</dt><dd>A reviewer decision (question Q21, decision D07)</dd></div>
+    <div><dt>Evidence it is right</dt><dd>Flag F46; the All Sections page lists all seven.</dd></div>
+    <div><dt>Recommendation</dt><dd>Decide before adding any further pages.</dd></div>
+  </dl>
 </article></div>
 </section>
 
@@ -292,6 +324,7 @@
 </section>
 
 </main>
+</div>
 <footer>
   <div>
     <strong>NFL Decision Lab</strong>

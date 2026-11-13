@@ -5,36 +5,43 @@ Additive and idempotent: the <nav> block is rewritten to one shared list, preser
 current page's `active` state. No page content outside <nav> is touched.
 """
 from __future__ import annotations
+import html
 import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 CANON = [
     ("index.html", "Overview"),
+    ("executive.html", "Executive Summary"),
+    ("lines.html", "My Lines"),
+    ("correlations.html", "Correlations"),
+    ("strategies.html", "Strategy Lab"),
+    ("luck.html", "Skill vs Luck"),
+    ("parlays.html", "Parlays & Combos"),
+    ("props.html", "Player Props"),
+    ("injuries.html", "Injuries"),
+    ("depth.html", "Depth & Deficiency"),
+    ("questions.html", "Questions"),
+    ("suggestions.html", "Suggestions"),
+    ("evidence.html", "Evidence"),
+    ("review.html", "Flagged for Review"),
     ("sections.html", "All Sections"),
-    ("../room/index.html", "Decision Room"),
-    ("executive-summary.html", "Executive Summary"),
+    # Session ca779bcc-nfl1: the strength-of-schedule study is its own sub-site under
+    # strength/; the target rule below keeps its href correct from both levels.
+    ("room/index.html", "Decision Room"),
+    ("strength/index.html", "SOS Study"),
+    # pages produced by the other generators in this repository, kept in the shared
+    # navigation so no session's page can become unreachable
+    ("executive-summary.html", "Executive Summary (companion)"),
     ("teams.html", "Teams"),
     ("standings.html", "Standings"),
-    ("injuries.html", "Injuries"),
     ("availability.html", "Availability"),
     ("data.html", "Verified Data"),
-    ("lines.html", "Own Lines"),
     ("analysis.html", "Validation & Correlation"),
     ("decisions.html", "Decision Register"),
     ("verified.html", "Verified Artifacts"),
-    ("evidence.html", "Evidence"),
-    ("models.html", "Strategy Lab"),
-    ("strategies.html", "Strategies"),
-    ("suggestions.html", "Suggestions"),
-    ("questions.html", "Questions"),
-    ("flagged.html", "Flagged"),
-    ("review.html", "Review"),
-    ("executive.html", "Executive Summary (companion)"),
-    ("props.html", "Player Props"),
-    # Session ca779bcc-nfl1: one additive entry. The strength/ sub-site has its own
-    # nav; from pages/ it is one level up, so the href is expanded before use.
-    ("../strength/index.html", "SOS Study"),
+    ("models.html", "Models"),
+    ("flagged.html", "Flagged (companion)"),
 ]
 
 
@@ -42,15 +49,15 @@ def build(page_name: str, is_index: bool) -> str:
     items = []
     for href, label in CANON:
         # index.html sits at the repo root; every sister page sits one level down in pages/
-        if is_index:
-            target = "index.html" if href == "index.html" else f"pages/{href}"
+        if href == "index.html":
+            target = "index.html" if is_index else "../index.html"
+        elif "/" in href:
+            target = href if is_index else "../" + href
         else:
-            target = "../index.html" if href == "index.html" else href
-        # an entry that already carries a parent prefix is used verbatim
-        if href.startswith("../"):
-            target = "../" + href[3:] if not is_index else href[3:]
-        cls = ' class="active"' if href == page_name else ""
-        items.append(f'    <a href="{target}"{cls}>{label}</a>')
+            target = ("pages/" + href) if is_index else href
+        cls = (' class="active"' if ((href == page_name) if "/" in href
+                                    else href.split("/")[-1] == page_name) else "")
+        items.append(f'    <a href="{html.escape(target, quote=True)}"{cls}>{html.escape(label)}</a>')
     return "<nav>\n" + "\n".join(items) + "\n  </nav>"
 
 
