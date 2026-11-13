@@ -1130,6 +1130,33 @@ python3 tools/verify.py               # verify every table row in the wider site
                 "Each official source re-read this session, and what it showed.", body, gen)
 
 
+
+def _mirror_detail(d: dict) -> str:
+    """Describe the official-vs-mirror comparison from the data, not from memory.
+
+    This exists because the first draft of this flag described a real gap that a data refresh
+    then closed. A flag that keeps asserting yesterday's state is worse than no flag."""
+    md = d.get("mirror_diff") or {}
+    clubs = md.get("clubs") or []
+    if not clubs:
+        return "The comparison did not run in this build, so nothing is claimed."
+    diffs = [c for c in clubs if not c["agree"]]
+    sc, mi = md["nfl_com_scrape"], md["mirror"]
+    base = (f"Official nfl.com scrape: {sc['rows']} rows across {sc['clubs']} clubs, "
+            f"generated {sc['generated_at']}. Mirrored feed: {mi['rows']} rows across "
+            f"{mi['clubs']} clubs. "
+            f"{len(clubs) - len(diffs)} of {len(clubs)} clubs agree on the ruled-out count.")
+    if not diffs:
+        return (base + " No club differs in this build. An earlier build of this session used a "
+                       "stale extract in which Detroit showed no ruled-out players while the "
+                       "official page showed three; the refreshed extract closed that gap, which "
+                       "is recorded here rather than deleted so the reader can see the check "
+                       "working.")
+    return (base + " Differing: " +
+            "; ".join(f"{c['club']} (official {c['out_on_nfl_com_scrape']}, "
+                      f"mirror {c['out_in_mirror']})" for c in diffs) + ".")
+
+
 def page_flagged(d: dict, gen: str) -> str:
     sd = d["standings_diff"]
     flags = d["flags"]
@@ -1177,18 +1204,17 @@ def page_flagged(d: dict, gen: str) -> str:
         },
         {
             "id": "R05",
-            "what": "The mirrored injury feed is behind the official page for at least one club.",
-            "detail": ((f"The direct nfl.com scrape and the mirrored feed both cover "
-                        f"{(d.get('mirror_diff') or {}).get('nfl_com_scrape', {}).get('clubs', 'the same')} "
-                        f"clubs this week, but they disagree on how many players are ruled out for "
-                        f"{(d.get('mirror_diff') or {}).get('clubs_differing', 'some')} of them. "
-                        f"Detroit is the clear case: the official page lists three ruled-out "
-                        f"players, the mirror lists none.")),
-            "impact": ("Any analysis built on the mirror understates that club's deficiency for "
-                       "that week. The current-week board uses the official scrape and marks the "
-                       "row; the historical study uses the mirror and therefore inherits the gap."),
+            "what": ("The mirrored injury feed and the official page agree this week"
+                     if (d.get("mirror_diff") or {}).get("clubs_differing") == 0 else
+                     "The mirrored injury feed is behind the official page for at least one club."),
+            "detail": _mirror_detail(d),
+            "impact": ("The two data paths are separate code and can drift silently. That is why "
+                       "they are compared on every build rather than trusted; this week's "
+                       "comparison is on the Week 10 page."),
             "source": VF.OFFICIAL["injuries"],
-            "status": "needs review — not blocking, published here",
+            "status": ("resolved this week, monitored every build"
+                       if (d.get("mirror_diff") or {}).get("clubs_differing") == 0 else
+                       "needs review — not blocking, published here"),
         },
         {
             "id": "R06",

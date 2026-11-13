@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-13T12:53:23+00:00",
+ "generated_at": "2026-11-13T12:58:50+00:00",
  "nfl_com_scrape": {
   "file": "data/model/official_injuries.json",
   "generated_at": "2026-11-12T23:37:48+00:00",
@@ -14,7 +14,7 @@
   "source": "https://github.com/nflverse/nflverse-data",
   "season": 2026,
   "week": 10,
-  "rows": 276,
+  "rows": 296,
   "clubs": 26
  },
  "clubs": [
@@ -70,9 +70,9 @@
   {
    "club": "DET",
    "out_on_nfl_com_scrape": 3,
-   "out_in_mirror": 0,
-   "difference": 3,
-   "agree": false
+   "out_in_mirror": 3,
+   "difference": 0,
+   "agree": true
   },
   {
    "club": "GB",
@@ -201,11 +201,11 @@
    "agree": true
   }
  ],
- "clubs_agreeing": 25,
- "clubs_differing": 1,
+ "clubs_agreeing": 26,
+ "clubs_differing": 0,
  "totals": {
   "out_on_scrape": 8,
-  "out_in_mirror": 5
+  "out_in_mirror": 8
  },
  "reading": "Where a club has more ruled-out players on the official nfl.com page than in the mirrored feed, the mirror is behind for that club. The difference is published rather than averaged away, and this week's board is built from the newer of the two."
 }

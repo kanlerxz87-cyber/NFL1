@@ -1951,6 +1951,20 @@ the mirrored feed (`data/s9cb/injuries.csv`) agree on ruled-out counts for 25 of
 clubs, and **differ for Detroit: 3 ruled out on the official page, 0 in the mirror** (R05 on the
 Flagged page). The live Week 10 board uses the official scrape and marks the affected row.
 
+**Data refresh during the session (must be read with the results above).** The `Collect s9cb
+research extract` workflow committed a refreshed extract to this branch at `177cfe3` while the
+session was still working (commit `[skip ci]`), and the workstation sandbox cannot download the
+release assets itself. The **entire analysis chain was re-run from that refreshed extract**, and
+this is the second set of results: 7,104 priced games (was 7,103), 13 information tests, **still
+0 significant after correction**, the same five rules with the same gates and **still 0 PASS /
+1 WATCH (P04, 6/8)**, 2,608 scored bets. The refresh materially changed one thing: the mirrored
+injury feed now carries **296 rows across 26 clubs, matching the direct nfl.com scrape row for
+row and club for club (26/26)**, so the Detroit gap found earlier in the session is closed. Flag
+R05 is therefore published as *resolved this week, monitored every build* with the earlier gap
+recorded, not deleted — the check is more useful than the finding. The standings staleness
+(30/32 agree; NYG and WAS differ) is unaffected: `data/verified/standings_2026.csv` did not
+change in the refresh, and the Week 10 game is still absent from `data/verified/games_2026.csv`.
+
 **Gates after this session's changes (all local, all green):** `validate_verified` PASS ·
 `audit_numbers` 47/47 PASS · `check_site` 21 pages, no broken links · `tools/verify` PASS ·
 `check_committed_site` PASS · `verify_combined` PASS · `tools/review_room.py --check` 9 pages,
