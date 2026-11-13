@@ -263,9 +263,14 @@ def check_injuries(R: Report):
 
 # ------------------------------------------------ B3. schedule / fixtures vs official
 def check_schedule(R: Report):
-    off = load("data/evidence/schedule_week10.json")["rows"]
+    # Time-point rule: the model side (snapshot fixtures, own lines) rolls forward with
+    # the calendar, so it is checked against the CURRENT official capture. The pinned
+    # hand files (week10_fixtures_2026.csv) stay on the pinned Week-10 capture they were
+    # transcribed against. Every comparison remains strict; each artifact is matched to
+    # the official page of its own time point.
     key = lambda a, h: (canon(a), canon(h))
-    om = {key(r["away"], r["home"]): r for r in off}
+    off_cur = load("data/evidence/schedule_current.json")["rows"]
+    om = {key(r["away"], r["home"]): r for r in off_cur}
 
     snap = load("data/model/snapshot.json")["fixtures"]
     bad = []
@@ -282,21 +287,24 @@ def check_schedule(R: Report):
         if f.get("source") is None:
             bad.append(f"{k} has no source link")
     if bad:
-        R.fail("B3. schedule", "data/model/snapshot.json fixtures vs official schedule",
+        R.fail("B3. schedule", "data/model/snapshot.json fixtures vs current official schedule",
                len(snap), "; ".join(bad[:8]))
     else:
-        R.ok("B3. schedule", "data/model/snapshot.json fixtures vs official schedule", len(snap),
+        R.ok("B3. schedule", "data/model/snapshot.json fixtures vs current official schedule", len(snap),
              "date, kickoff time and source link match the official page")
+
+    off = load("data/evidence/schedule_week10.json")["rows"]
+    om_pinned = {key(r["away"], r["home"]): r for r in off}
 
     fx = list(csv.DictReader(open(os.path.join(ROOT, "data/verified/week10_fixtures_2026.csv"),
                                   encoding="utf-8")))
     bad = []
     for f in fx:
         k = key(f["away_abbr"], f["home_abbr"])
-        if k not in om:
+        if k not in om_pinned:
             bad.append(f"{k} not on official schedule")
             continue
-        o = om[k]
+        o = om_pinned[k]
         if f["gameday"] != o["gameday"]:
             bad.append(f"{k} date repo={f['gameday']} official={o['gameday']}")
         hhmm = o["kickoff_et"].replace(":", "")
@@ -315,9 +323,11 @@ def check_schedule(R: Report):
            for g in lines
            if key(g["away"], g["home"]) in om
            and str(g["gameday"]) != om[key(g["away"], g["home"])]["gameday"]]
-    R.fail("B3. schedule", "published own-line dates vs official schedule", len(lines),
+    bad.extend(f"{g['away']}@{g['home']} not on the current official schedule"
+               for g in lines if key(g["away"], g["home"]) not in om)
+    R.fail("B3. schedule", "published own-line dates vs current official schedule", len(lines),
            "; ".join(bad)) if bad else R.ok(
-        "B3. schedule", "published own-line dates vs official schedule", len(lines))
+        "B3. schedule", "published own-line dates vs current official schedule", len(lines))
 
 
 # ------------------------------------------------------ B4. depth charts vs official
@@ -433,11 +443,12 @@ def check_availability(R: Report):
 def check_counts(R: Report):
     dash = load("data/model/dashboard.json")
     counts = dash["counts"]
-    st = load("data/evidence/standings_2026.json")["rows"]
+    # game counts move with the calendar — compare against the CURRENT standings capture
+    st = load("data/evidence/standings_current.json")["rows"]
     games = sum(r["w"] + r["l"] + r["t"] for r in st) // 2
     R.ok("E. counts", "games played = half the sum of club games", counts["games_played"],
-         f"official standings imply {games}") if games == counts["games_played"] else R.fail(
-        "E. counts", "games played reconciles with official standings", counts["games_played"],
+         f"current official standings imply {games}") if games == counts["games_played"] else R.fail(
+        "E. counts", "games played reconciles with current official standings", counts["games_played"],
         f"sum of club games / 2 = {games}")
     a = load("data/model/availability.json")
     R.ok("E. counts", "starters flagged matches availability detail",

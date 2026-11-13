@@ -1,16 +1,16 @@
 {
- "generated_at": "2026-11-13T13:14:33+00:00",
+ "generated_at": "2026-11-13T13:29:58+00:00",
  "official_sources": {
   "standings": "https://www.nfl.com/standings/league/2026/reg",
   "injuries": "https://www.nfl.com/injuries/",
   "schedule": "https://www.nfl.com/schedules/2026/REG10",
   "depth_charts": "club official depth-chart pages (URL per row in data/evidence/depth_charts.json)"
  },
- "result": "FAIL",
+ "result": "PASS",
  "counts": {
-  "passed": 18,
+  "passed": 20,
   "flagged": 8,
-  "failed": 2
+  "failed": 0
  },
  "checks": [
   {
@@ -127,10 +127,10 @@
   },
   {
    "area": "B3. schedule",
-   "check": "data/model/snapshot.json fixtures vs official schedule",
-   "status": "FAIL",
+   "check": "data/model/snapshot.json fixtures vs current official schedule",
+   "status": "PASS",
    "rows_checked": 13,
-   "detail": "('IND', 'HOU') not on official schedule; ('MIA', 'BUF') not on official schedule; ('BAL', 'CAR') not on official schedule; ('NO', 'CHI') not on official schedule; ('TEN', 'DAL') not on official schedule; ('TB', 'DET') not on official schedule; ('AZ', 'KC') not on official schedule; ('JAX', 'NYG') not on official schedule"
+   "detail": "date, kickoff time and source link match the official page"
   },
   {
    "area": "B3. schedule",
@@ -141,7 +141,7 @@
   },
   {
    "area": "B3. schedule",
-   "check": "published own-line dates vs official schedule",
+   "check": "published own-line dates vs current official schedule",
    "status": "PASS",
    "rows_checked": 13,
    "detail": ""
@@ -197,10 +197,10 @@
   },
   {
    "area": "E. counts",
-   "check": "games played reconciles with official standings",
-   "status": "FAIL",
+   "check": "games played = half the sum of club games",
+   "status": "PASS",
    "rows_checked": 137,
-   "detail": "sum of club games / 2 = 136"
+   "detail": "current official standings imply 137"
   },
   {
    "area": "E. counts",

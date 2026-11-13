@@ -20,6 +20,23 @@ Read on 2026-11-12 (UTC) from:
   injuries  …… https://www.nfl.com/injuries/            (WEEK 10, filing of Thursday 12 Nov)
   schedule  …… https://www.nfl.com/schedules/2026/REG10
   depth     …… club official depth-chart pages (URL per row)
+
+Second capture — the "current" fixture (2026-11-13)
+----------------------------------------------------
+The 2026-11-12 files above are a pinned point-in-time capture used to verify pinned
+hand-transcribed artifacts (data/verified/*.csv/tsv, data/standings.json). The model
+side of the repo (data/model/snapshot.json, lines.json, dashboard.json) rolls forward
+with the calendar — after the WAS @ NYG Thursday-night game it moved to Week 11 and
+its standings include that result. verify_official.py therefore compares moving
+artifacts against the *current* capture below (data/evidence/standings_current.json,
+data/evidence/schedule_current.json) and pinned artifacts against the pinned capture.
+Both captures are transcribed by hand from the official pages at their retrieval
+stamps; nothing here is derived.
+
+Read on 2026-11-13 (UTC) from:
+  standings_current  …… https://www.nfl.com/standings/league/2026/reg   (post-TNF)
+  schedule_current   …… https://www.nfl.com/schedules/2026/by-week/week-11 (13 games,
+                         6 byes; matches the Week-11 rows in snapshot.json one by one)
 """
 from __future__ import annotations
 
@@ -418,6 +435,89 @@ LAC|BAL|2026-11-16|20:15|Monday Night Football|ESPN
 
 BYES_WEEK_10 = ["CHI", "DEN", "PHI", "TB"]
 
+# ------------------------------------------- current capture (2026-11-13)
+# Post-TNF league standings, hand-transcribed 2026-11-13 from the official table.
+# Only NYG and WAS differ from the pinned 2026-11-12 capture (WAS @ NYG was played
+# Thu 2026-11-12, final WAS 24-21 NYG per https://www.nfl.com/games/commanders-at-giants-2026-reg-10).
+RETRIEVED_CURRENT = "2026-11-13"
+SCHEDULE_URL_CURRENT = "https://www.nfl.com/schedules/2026/by-week/week-11"
+
+STANDINGS_CURRENT = """
+BUF|Buffalo Bills|7|1|0|256|187
+SF|San Francisco 49ers|7|1|0|235|156
+CHI|Chicago Bears|7|2|0|241|184
+DEN|Denver Broncos|7|2|0|198|186
+CIN|Cincinnati Bengals|6|2|0|240|175
+DET|Detroit Lions|6|2|0|222|189
+JAX|Jacksonville Jaguars|6|2|0|229|121
+KC|Kansas City Chiefs|6|2|0|202|143
+MIN|Minnesota Vikings|6|2|0|146|116
+PIT|Pittsburgh Steelers|6|2|0|180|144
+NYG|New York Giants|5|3|1|203|196
+GB|Green Bay Packers|6|3|0|216|191
+CLE|Cleveland Browns|5|4|0|161|196
+LA|Los Angeles Rams|5|4|0|214|181
+NE|New England Patriots|5|4|0|211|207
+SEA|Seattle Seahawks|5|4|0|202|162
+BAL|Baltimore Ravens|4|5|0|189|236
+DAL|Dallas Cowboys|4|5|0|246|236
+LV|Las Vegas Raiders|4|5|0|238|268
+CAR|Carolina Panthers|3|5|0|199|219
+HOU|Houston Texans|3|5|0|209|192
+NO|New Orleans Saints|3|5|0|185|216
+AZ|Arizona Cardinals|3|6|0|178|255
+ATL|Atlanta Falcons|3|6|0|188|223
+TB|Tampa Bay Buccaneers|3|6|0|202|178
+WAS|Washington Commanders|3|5|1|196|223
+IND|Indianapolis Colts|2|7|0|184|249
+NYJ|New York Jets|2|7|0|182|223
+PHI|Philadelphia Eagles|2|7|0|148|221
+MIA|Miami Dolphins|1|7|0|126|200
+TEN|Tennessee Titans|1|7|0|144|199
+LAC|Los Angeles Chargers|0|8|0|121|219
+"""
+
+# Official Week 11 schedule, hand-transcribed 2026-11-13. 13 games + 6 byes = 32 clubs.
+# Club codes kept as the page prints them (AZ, LA).
+SCHEDULE_WEEK_11 = """
+IND|HOU|2026-11-19|20:15|Thursday Night Football|PRIME
+MIA|BUF|2026-11-22|13:00||CBS
+BAL|CAR|2026-11-22|13:00||FOX
+NO|CHI|2026-11-22|13:00||FOX
+TEN|DAL|2026-11-22|13:00||FOX
+TB|DET|2026-11-22|13:00||FOX
+AZ|KC|2026-11-22|13:00||CBS
+PIT|PHI|2026-11-22|13:00||CBS
+NYJ|LAC|2026-11-22|16:05||FOX
+JAX|NYG|2026-11-22|16:25||CBS
+LV|DEN|2026-11-22|16:25||CBS
+MIN|SF|2026-11-22|20:20|Sunday Night Football|NBC
+CIN|WAS|2026-11-23|20:15|Monday Night Football|ESPN
+"""
+
+BYES_WEEK_11 = ["ATL", "CLE", "GB", "LA", "NE", "SEA"]
+
+
+def standings_current_rows():
+    rows = []
+    for line in STANDINGS_CURRENT.strip().splitlines():
+        code, name, w, l, t, pf, pa = line.split("|")
+        rows.append(dict(code=code, team=name, w=int(w), l=int(l), t=int(t),
+                         pf=int(pf), pa=int(pa), net=int(pf) - int(pa),
+                         source=STANDINGS_URL, retrieved=RETRIEVED_CURRENT,
+                         verified_by="hand transcription of the official league standings table"))
+    return rows
+
+
+def schedule_current_rows():
+    rows = []
+    for line in SCHEDULE_WEEK_11.strip().splitlines():
+        away, home, day, kick, slot, net = line.split("|")
+        rows.append(dict(away=away, home=home, gameday=day, kickoff_et=kick,
+                         slot=slot, network=net, venue_note="",
+                         source=SCHEDULE_URL_CURRENT, retrieved=RETRIEVED_CURRENT))
+    return rows
+
 
 def schedule_rows():
     rows = []
@@ -538,6 +638,19 @@ def main() -> int:
                     + SCHEDULE_URL + ". Kickoff is the local ET clock time printed on the page.",
             source_url=SCHEDULE_URL, retrieved=RETRIEVED, captured_at=captured,
             byes=BYES_WEEK_10, rows=schedule_rows()),
+        "standings_current.json": dict(
+            _readme="CURRENT capture: official league standings, hand-transcribed on "
+                    "2026-11-13 from " + STANDINGS_URL + " after the WAS @ NYG Thursday "
+                    "night game. Moving artifacts (data/model/*) are checked against "
+                    "this capture; pinned artifacts stay on standings_2026.json (2026-11-12).",
+            source_url=STANDINGS_URL, retrieved=RETRIEVED_CURRENT, captured_at=captured,
+            rows=standings_current_rows()),
+        "schedule_current.json": dict(
+            _readme="CURRENT capture: official Week 11 schedule, hand-transcribed on "
+                    "2026-11-13 from " + SCHEDULE_URL_CURRENT + ". Kickoff is the local ET "
+                    "clock time printed on the page. 13 games + 6 byes = 32 clubs.",
+            source_url=SCHEDULE_URL_CURRENT, retrieved=RETRIEVED_CURRENT, captured_at=captured,
+            byes=BYES_WEEK_11, rows=schedule_current_rows()),
         "depth_charts.json": dict(
             _readme="Club depth charts transcribed from each club's own official page on "
                     "2026-11-12. The league site's /teams/<club>/depth-chart URL returns 404 "

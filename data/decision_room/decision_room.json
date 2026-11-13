@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-13T13:14:33+00:00",
+ "generated_at": "2026-11-13T13:29:58+00:00",
  "evidence": {
   "season": 2026,
   "week_complete": 10,
@@ -29,9 +29,9 @@
   "unmatched_records": 8,
   "source_files_pinned": 12,
   "verification_checks": 28,
-  "verification_pass": 18,
+  "verification_pass": 20,
   "verification_flag": 8,
-  "verification_fail": 2
+  "verification_fail": 0
  },
  "model": {
   "state": "NOT SUPPORTED",
@@ -1200,6 +1200,19 @@
    "status": "Awaiting review",
    "verified": true,
    "retrieved": "2026-11-13"
+  },
+  {
+   "id": "S30",
+   "area": "Verification & data feeds",
+   "title": "Cross-check every feed-provided kickoff time against the official schedule before publication",
+   "decision_impact": "LR-07 showed the upstream schedules feed can carry wrong kickoff times while citing the official schedule as source (JAX @ NYG and PIT @ PHI were swapped on 2026-11-13). A kickoff printed on a betting-decision page must come from the official page, so each model refresh should compare every fixture's date and kickoff against the current official capture and block on mismatch.",
+   "effort": "small",
+   "recommended_path": "Review before implementing",
+   "evidence": "data/flags.json LR-07; tools/verify_official.py check B3; https://www.nfl.com/schedules/2026/by-week/week-11",
+   "src": "S06",
+   "status": "Awaiting review",
+   "verified": true,
+   "retrieved": "2026-11-13"
   }
  ],
  "paths": [
@@ -1925,6 +1938,17 @@
    "status": "needs review",
    "src": "S02",
    "action": "Re-snapshot the official standings page after each Sunday slate and quote retrieved_at beside every published standings value; treat same-week changes as drift, not error (see also A-F04 for injury-page drift). Source: https://www.nfl.com/standings/league/2026/reg.",
+   "verified": true,
+   "retrieved": "2026-11-13"
+  },
+  {
+   "id": "LR-07",
+   "category": "Feed data error corrected (kickoff times)",
+   "description": "The Week-11 refresh of data/model/snapshot.json (generated 2026-11-13T13:04Z from the upstream schedules feed) listed JAX @ NYG at 13:00 and PIT @ PHI at 16:25. The official Week-11 page, read 2026-11-13, shows Jaguars at Giants 4:25 PM ET (16:25) and Steelers at Eagles 1:00 PM ET (13:00): the two kickoff times were swapped with each other in the feed, and the snapshot rows cite the official schedule as their source, so the values contradicted their own citation.",
+   "impact": "A wrong kickoff time on a betting-decision page changes which games are live when. tools/verify_official.py check B3 caught the mismatch against the official capture.",
+   "status": "needs review",
+   "src": "S06",
+   "action": "Fixed: the two snapshot values were corrected to the official times and pipeline/build_all.py now applies a documented, source-linked SCHEDULE_FEED_FIXES table at build time so scheduled refreshes keep the official values. Reviewer: confirm against https://www.nfl.com/schedules/2026/by-week/week-11 and https://www.nfl.com/schedules/2026/REG11 (fetched 2026-11-13); if the upstream feed is corrected, the table can be dropped (it is idempotent).",
    "verified": true,
    "retrieved": "2026-11-13"
   }

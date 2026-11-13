@@ -1368,3 +1368,58 @@ standings finding, which is recorded here as independent confirmation rather tha
 to be removed.
 
 _Claim committed and pushed before any other file is touched, per the brief._
+
+
+---
+
+# Session `65df4799-nfl1` — W5 integration: merge `origin/main` (b525401) into PR #53
+
+Recorded 2026-11-13 (UTC). The session's PR (#53, head `552199c`) became CONFLICTING after
+`main` advanced `09c03f0..b525401` (PRs #44-#51 from sessions `9411723a` / `9c208ed8` /
+`1e159b2e`: Decision Room + `room/` site, personnel-deficiency signal study, flag F41,
+suggestions status rewording, and the standardized flag schema).
+
+**Merge policy applied — nothing from `main` was discarded:**
+- `data/flags.json` (36 conflicts resolved by 3-way union): final register = 52 entries =
+  their F01-F40 + A-F01..A-F03 + F41, plus this session's LR-01..LR-06 + LR-07. Their
+  standardized entry schema (id/category/description/impact/status/src/action/verified/
+  retrieved) is kept for every entry.
+- `COORDINATION.md` (2 conflicts): both sides kept — the `6e8ca348` claim block and the
+  `9411723a` board stay side by side; this session's W2-W4 records and the `46b6cabb`
+  audit record stay side by side.
+- `pipeline/gen_site.py` (NAV conflict): both nav entries kept (Decision Dashboard +
+  Decision Room).
+- 33 generated artifacts (pages, reports): staged ours and regenerated from the merged
+  generators + merged data via the canonical chain (incl. `room/build.py`, 11 pages).
+
+**Structural defect found in `tools/verify_official.py` and fixed (flagged, no check
+weakened):** the schedule/counts checks compared *rolling* model artifacts (snapshot
+fixtures, own lines, dashboard counts) against the *pinned* 2026-11-12 capture. After the
+WAS @ NYG result landed and the model rolled to Week 11, those two checks could not pass
+under any data state (check A pins the schedule fixture to exactly 14 rows, while the
+week-10 hand file and the week-11 model fixtures are disjoint sets). Fix, per the
+"match every artifact to the official page of its own time point" rule:
+- `tools/evidence_from_official.py` now also writes a **current** capture,
+  `data/evidence/standings_current.json` + `data/evidence/schedule_current.json`, both
+  hand-transcribed 2026-11-13 from the official pages (32 standings rows incl. the TNF
+  result; 13 Week-11 games + 6 byes).
+- Moving-artifact comparisons (snapshot fixtures, own-line dates, games-played counts)
+  read the current capture; pinned artifacts (week10_fixtures_2026.csv, verified
+  standings files) still read the pinned 2026-11-12 capture. No check was deleted or
+  loosened — B3c's missing-pair case is now an explicit failure instead of a vacuous pass.
+
+**New irregularity LR-07 (needs review) + suggestion S30:** the Week-11 refresh
+(generated 2026-11-13T13:04Z from the upstream schedules feed) listed JAX @ NYG at 13:00
+and PIT @ PHI at 16:25; the official Week-11 page shows 4:25 PM ET and 1:00 PM ET — the
+two kickoff times were swapped in the feed, while the rows cite the official schedule as
+their source. Caught by check B3 against the official capture. Fixed: snapshot values
+corrected to the official times and `pipeline/build_all.py` now applies a documented,
+source-linked `SCHEDULE_FEED_FIXES` table at build time. Reviewer: confirm on
+https://www.nfl.com/schedules/2026/by-week/week-11.
+
+**Post-merge gate state:** verify_official 20 passed / 8 flagged / 0 failed; verify.py
+every table row sourced; verify_combined PASS (0 broken links); check_generators /
+check_freshness / check_committed_site / verify_dashboard PASS; validate_verified PASS;
+audit_numbers PASS; verified check_site PASS; room build 11 pages (its own row-source
+gate passes); 117 tests pass. Next: push, confirm the four workflows green, merge PR #53,
+confirm the Pages deploy with the `?v=<sha>` cache-buster, and record the merge below.

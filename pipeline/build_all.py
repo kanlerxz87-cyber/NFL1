@@ -114,6 +114,18 @@ def league_snapshot():
             "source": "https://www.nfl.com/standings/league/2026/reg",
         }
 
+    # Documented corrections to the upstream schedules feed's kickoff times, each one
+    # verified against the official game page (flag LR-07, session 65df4799-nfl1):
+    #   2026_11_JAX_NYG — feed said 13:00; official page says 4:25 PM ET
+    #   2026_11_PIT_PHI — feed said 16:25; official page says 1:00 PM ET
+    # Source: https://www.nfl.com/schedules/2026/by-week/week-11 (read 2026-11-13).
+    # The two feed values were swapped with each other; keep this table until the
+    # upstream feed matches the official page.
+    SCHEDULE_FEED_FIXES = {
+        "2026_11_JAX_NYG": {"gametime": "16:25"},
+        "2026_11_PIT_PHI": {"gametime": "13:00"},
+    }
+
     snapshot = {
         "generated_at": L.now(),
         "season": 2026,
@@ -123,7 +135,8 @@ def league_snapshot():
         "standings": [team_row(r) for _, r in st.iterrows()],
         "fixtures": [{
             "game_id": g["game_id"], "week": int(g["week"]), "gameday": str(g["gameday"]),
-            "weekday": g["weekday"], "gametime": g["gametime"],
+            "weekday": g["weekday"],
+            "gametime": SCHEDULE_FEED_FIXES.get(g["game_id"], {}).get("gametime", g["gametime"]),
             "away": g["away_team"], "home": g["home_team"],
             "market_spread_home": None if pd.isna(g["spread_line"]) else float(g["spread_line"]),
             "market_total": None if pd.isna(g["total_line"]) else float(g["total_line"]),
