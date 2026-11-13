@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-12T23:37:56+00:00",
+ "generated_at": "2026-11-13T12:51:11+00:00",
  "window": {
   "start_season": 2005,
   "end_season": 2026,
-  "games_with_closing_spread": 5591,
+  "games_with_closing_spread": 5592,
   "source": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
   "price_assumption": "-110 on every bet (no book-level prices in the data)"
  },
@@ -175,19 +175,19 @@
    "strategy": "S10 Over when closing total is 41 or lower",
    "status": "FAIL",
    "gates_passed": 3,
-   "score_lower_ci_roi_pct": -5.41,
-   "n_graded": 1437,
-   "wins": 750,
+   "score_lower_ci_roi_pct": -5.21,
+   "n_graded": 1438,
+   "wins": 751,
    "losses": 687,
    "pushes": 28,
-   "win_pct": 0.5219,
-   "roi": -0.0036,
+   "win_pct": 0.5223,
+   "roi": -0.003,
    "roi_ci95": [
-    -0.0541,
-    0.0443
+    -0.0521,
+    0.0461
    ],
-   "units": -5.18,
-   "p_value": 0.5676,
+   "units": -4.27,
+   "p_value": 0.5576,
    "q_value": 0.9889,
    "max_drawdown_units": -25.64,
    "by_season": {
@@ -276,11 +276,11 @@
      "roi": 0.0909
     },
     "2026": {
-     "n": 25,
-     "roi": -0.3127
+     "n": 26,
+     "roi": -0.2657
     }
    },
-   "holdout_roi": -0.1109,
+   "holdout_roi": -0.0874,
    "max_abs_corr": 1.0,
    "gates": [
     {
@@ -299,13 +299,13 @@
      "id": "G3",
      "name": "Sample size",
      "pass": true,
-     "detail": "n=1437 graded bets (minimum 100)."
+     "detail": "n=1438 graded bets (minimum 100)."
     },
     {
      "id": "G4",
      "name": "Holdout positive",
      "pass": false,
-     "detail": "latest-window ROI=-0.1109."
+     "detail": "latest-window ROI=-0.0874."
     },
     {
      "id": "G5",
@@ -1150,105 +1150,22 @@
    "window": "2005-2026"
   },
   {
-   "strategy": "S02 Own-line vs close, edge >= 3.0",
-   "status": "FAIL",
-   "gates_passed": 4,
-   "score_lower_ci_roi_pct": -22.6,
-   "n_graded": 148,
-   "wins": 72,
-   "losses": 76,
-   "pushes": 1,
-   "win_pct": 0.4865,
-   "roi": -0.0713,
-   "roi_ci95": [
-    -0.226,
-    0.0835
-   ],
-   "units": -10.55,
-   "p_value": 0.8393,
-   "q_value": 0.9889,
-   "max_drawdown_units": -15.36,
-   "by_season": {
-    "2025": {
-     "n": 105,
-     "roi": -0.0727
-    },
-    "2026": {
-     "n": 43,
-     "roi": -0.0677
-    }
-   },
-   "holdout_roi": -0.0702,
-   "max_abs_corr": 1.0,
-   "gates": [
-    {
-     "id": "G1",
-     "name": "Provenance",
-     "pass": true,
-     "detail": "All inputs pinned by URL + sha256 in provenance.json."
-    },
-    {
-     "id": "G2",
-     "name": "Pre-specified rule",
-     "pass": true,
-     "detail": "Round-number threshold fixed before evaluation; no parameter search."
-    },
-    {
-     "id": "G3",
-     "name": "Sample size",
-     "pass": true,
-     "detail": "n=148 graded bets (minimum 100)."
-    },
-    {
-     "id": "G4",
-     "name": "Holdout positive",
-     "pass": false,
-     "detail": "latest-window ROI=-0.0702."
-    },
-    {
-     "id": "G5",
-     "name": "Significance",
-     "pass": false,
-     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
-    },
-    {
-     "id": "G6",
-     "name": "Stability",
-     "pass": false,
-     "detail": "0/2 seasons positive."
-    },
-    {
-     "id": "G7",
-     "name": "Drawdown",
-     "pass": true,
-     "detail": "max drawdown -15.36 units."
-    },
-    {
-     "id": "G8",
-     "name": "Diversification",
-     "pass": false,
-     "detail": "max |corr| with another strategy = 1.0."
-    }
-   ],
-   "window": "2025-2026 walk-forward"
-  },
-  {
    "strategy": "S05 Underdog on short rest (<=4 days)",
    "status": "FAIL",
    "gates_passed": 4,
-   "score_lower_ci_roi_pct": -22.94,
-   "n_graded": 275,
-   "wins": 127,
+   "score_lower_ci_roi_pct": -22.53,
+   "n_graded": 276,
+   "wins": 128,
    "losses": 148,
    "pushes": 7,
-   "win_pct": 0.4618,
-   "roi": -0.1183,
+   "win_pct": 0.4638,
+   "roi": -0.1146,
    "roi_ci95": [
-    -0.2294,
-    -0.0073
+    -0.2253,
+    -0.004
    ],
-   "units": -32.55,
-   "p_value": 0.9829,
+   "units": -31.64,
+   "p_value": 0.9801,
    "q_value": 0.9889,
    "max_drawdown_units": -40.09,
    "by_season": {
@@ -1337,8 +1254,8 @@
      "roi": 0.3788
     },
     "2026": {
-     "n": 8,
-     "roi": -0.0455
+     "n": 9,
+     "roi": 0.0606
     }
    },
    "holdout_roi": 0.3788,
@@ -1360,7 +1277,7 @@
      "id": "G3",
      "name": "Sample size",
      "pass": true,
-     "detail": "n=275 graded bets (minimum 100)."
+     "detail": "n=276 graded bets (minimum 100)."
     },
     {
      "id": "G4",
@@ -1378,7 +1295,7 @@
      "id": "G6",
      "name": "Stability",
      "pass": false,
-     "detail": "6/22 seasons positive."
+     "detail": "7/22 seasons positive."
     },
     {
      "id": "G7",
@@ -1394,6 +1311,89 @@
     }
    ],
    "window": "2005-2026"
+  },
+  {
+   "strategy": "S02 Own-line vs close, edge >= 3.0",
+   "status": "FAIL",
+   "gates_passed": 4,
+   "score_lower_ci_roi_pct": -22.6,
+   "n_graded": 148,
+   "wins": 72,
+   "losses": 76,
+   "pushes": 1,
+   "win_pct": 0.4865,
+   "roi": -0.0713,
+   "roi_ci95": [
+    -0.226,
+    0.0835
+   ],
+   "units": -10.55,
+   "p_value": 0.8393,
+   "q_value": 0.9889,
+   "max_drawdown_units": -15.36,
+   "by_season": {
+    "2025": {
+     "n": 105,
+     "roi": -0.0727
+    },
+    "2026": {
+     "n": 43,
+     "roi": -0.0677
+    }
+   },
+   "holdout_roi": -0.0702,
+   "max_abs_corr": 1.0,
+   "gates": [
+    {
+     "id": "G1",
+     "name": "Provenance",
+     "pass": true,
+     "detail": "All inputs pinned by URL + sha256 in provenance.json."
+    },
+    {
+     "id": "G2",
+     "name": "Pre-specified rule",
+     "pass": true,
+     "detail": "Round-number threshold fixed before evaluation; no parameter search."
+    },
+    {
+     "id": "G3",
+     "name": "Sample size",
+     "pass": true,
+     "detail": "n=148 graded bets (minimum 100)."
+    },
+    {
+     "id": "G4",
+     "name": "Holdout positive",
+     "pass": false,
+     "detail": "latest-window ROI=-0.0702."
+    },
+    {
+     "id": "G5",
+     "name": "Significance",
+     "pass": false,
+     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
+    },
+    {
+     "id": "G6",
+     "name": "Stability",
+     "pass": false,
+     "detail": "0/2 seasons positive."
+    },
+    {
+     "id": "G7",
+     "name": "Drawdown",
+     "pass": true,
+     "detail": "max drawdown -15.36 units."
+    },
+    {
+     "id": "G8",
+     "name": "Diversification",
+     "pass": false,
+     "detail": "max |corr| with another strategy = 1.0."
+    }
+   ],
+   "window": "2025-2026 walk-forward"
   },
   {
    "strategy": "S01 Own-line vs close, edge >= 2.0",
@@ -1482,19 +1482,19 @@
    "strategy": "S03 Own-total vs close, edge >= 3",
    "status": "FAIL",
    "gates_passed": 3,
-   "score_lower_ci_roi_pct": -27.96,
-   "n_graded": 159,
-   "wins": 72,
+   "score_lower_ci_roi_pct": -27.22,
+   "n_graded": 160,
+   "wins": 73,
    "losses": 87,
    "pushes": 0,
-   "win_pct": 0.4528,
-   "roi": -0.1355,
+   "win_pct": 0.4562,
+   "roi": -0.129,
    "roi_ci95": [
-    -0.2796,
-    0.0086
+    -0.2722,
+    0.0142
    ],
-   "units": -21.55,
-   "p_value": 0.9693,
+   "units": -20.64,
+   "p_value": 0.9632,
    "q_value": 0.9889,
    "max_drawdown_units": -36.27,
    "by_season": {
@@ -1503,11 +1503,11 @@
      "roi": -0.0455
     },
     "2026": {
-     "n": 59,
-     "roi": -0.2881
+     "n": 60,
+     "roi": -0.2682
     }
    },
-   "holdout_roi": -0.1668,
+   "holdout_roi": -0.1568,
    "max_abs_corr": 1.0,
    "gates": [
     {
@@ -1526,13 +1526,13 @@
      "id": "G3",
      "name": "Sample size",
      "pass": true,
-     "detail": "n=159 graded bets (minimum 100)."
+     "detail": "n=160 graded bets (minimum 100)."
     },
     {
      "id": "G4",
      "name": "Holdout positive",
      "pass": false,
-     "detail": "latest-window ROI=-0.1668."
+     "detail": "latest-window ROI=-0.1568."
     },
     {
      "id": "G5",
@@ -1683,8 +1683,8 @@
    "corr": -1.0
   },
   "S05 Underdog on short rest (<=4 days) | S10 Over when closing total is 41 or lower": {
-   "n_overlap": 64,
-   "corr": -0.031
+   "n_overlap": 65,
+   "corr": -0.014
   },
   "S05 Underdog on short rest (<=4 days) | S11 Under in divisional games with total 47+": {
    "n_overlap": 46,
@@ -1731,7 +1731,7 @@
    "corr": -0.114
   },
   "S10 Over when closing total is 41 or lower | S03 Own-total vs close, edge >= 3": {
-   "n_overlap": 53,
+   "n_overlap": 54,
    "corr": 1.0
   },
   "S01 Own-line vs close, edge >= 2.0 | S02 Own-line vs close, edge >= 3.0": {
@@ -1760,9 +1760,9 @@
   }
  },
  "parlay": {
-  "n_games": 5591,
+  "n_games": 5592,
   "corr_margin_vs_total": 0.017,
-  "phi_home_cover_vs_over": 0.0088,
+  "phi_home_cover_vs_over": 0.0086,
   "note": "Same-game legs are not independent. Use the phi value to adjust a 2-leg same-game parlay: P = p1p2 + rho*sqrt(p1(1-p1)p2(1-p2))."
  },
  "parlay_payouts": {
@@ -2238,16 +2238,6 @@
   ],
   "S05 Underdog on short rest (<=4 days)": [
    {
-    "game_id": "2024_07_DEN_NO",
-    "season": 2024,
-    "week": 7,
-    "team": "NO",
-    "side": "home",
-    "line": -2.5,
-    "result": "loss",
-    "market": -2.5
-   },
-   {
     "game_id": "2024_08_MIN_LA",
     "season": 2024,
     "week": 8,
@@ -2636,6 +2626,16 @@
     "line": -8.5,
     "result": "loss",
     "market": -8.5
+   },
+   {
+    "game_id": "2026_10_WAS_NYG",
+    "season": 2026,
+    "week": 10,
+    "team": "WAS",
+    "side": "away",
+    "line": -1.5,
+    "result": "win",
+    "market": 1.5
    }
   ],
   "S06 Fade divisional road favourite of 6.5+": [
@@ -4248,16 +4248,6 @@
   ],
   "S10 Over when closing total is 41 or lower": [
    {
-    "game_id": "2025_16_NYJ_NO",
-    "season": 2025,
-    "week": 16,
-    "team": "TOTAL",
-    "side": "over",
-    "line": 39.5,
-    "result": "loss",
-    "market": 6.5
-   },
-   {
     "game_id": "2025_16_KC_TEN",
     "season": 2025,
     "week": 16,
@@ -4646,6 +4636,16 @@
     "line": 39.5,
     "result": "loss",
     "market": 8.5
+   },
+   {
+    "game_id": "2026_10_WAS_NYG",
+    "season": 2026,
+    "week": 10,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 40.5,
+    "result": "win",
+    "market": 1.5
    }
   ],
   "S11 Under in divisional games with total 47+": [
@@ -5856,16 +5856,6 @@
   ],
   "S03 Own-total vs close, edge >= 3": [
    {
-    "game_id": "2026_04_JAX_CIN",
-    "season": 2026,
-    "week": 4,
-    "team": "TOTAL",
-    "side": "under",
-    "line": 51.5,
-    "result": "win",
-    "market": 2.5
-   },
-   {
     "game_id": "2026_04_LA_PHI",
     "season": 2026,
     "week": 4,
@@ -6254,6 +6244,16 @@
     "line": 39.5,
     "result": "loss",
     "market": 8.5
+   },
+   {
+    "game_id": "2026_10_WAS_NYG",
+    "season": 2026,
+    "week": 10,
+    "team": "TOTAL",
+    "side": "over",
+    "line": 40.5,
+    "result": "win",
+    "market": 1.5
    }
   ],
   "S12 Start the team whose QB is ruled Out/Doubtful": [

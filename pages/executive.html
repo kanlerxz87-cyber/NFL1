@@ -18,7 +18,7 @@
     <p class="eyebrow">Evidence-first dashboard</p>
     <h1>Executive Summary</h1>
     <p class="standfirst">What was built, what the evidence says, what is missing, and which decisions are waiting.</p>
-    <p class="timestamp">Data built 2026-11-12T23:37:56+00:00 · every value links to its source</p>
+    <p class="timestamp">Data built 2026-11-13T12:51:12+00:00 · every value links to its source</p>
   </section>
   
 <section class="panel">
@@ -33,40 +33,40 @@
 
   <h3>What was verified</h3>
   <ul class="tight">
-    <li>119 of 128 verification rows matched the source they were checked against
+    <li>115 of 128 verification rows matched the source they were checked against
     (2026 standings (W-L-T, points for/against); Scraped official injury report vs hand-transcribed sample; Computed standings vs companion transcription (data/standings.csv); Scraped official report vs companion injury CSV (data/injuries.csv)).</li>
     <li>12 source files pinned with download URL, byte count, sha256 and fetch time.</li>
     <li>The current week's official injury report is scraped directly from nfl.com:
-    296 rows across the clubs that had submitted a report,
-    matched to the weekly depth chart. 2 clubs had no report at scrape time
-    (BAL, LAC).</li>
-    <li>The mirrored feed is incomplete in-season: 276 of
+    376 rows across the clubs that had submitted a report,
+    matched to the weekly depth chart. 4 clubs had no report at scrape time
+    (CIN, DET, MIA, MIN).</li>
+    <li>The mirrored feed is incomplete in-season: 296 of
     296 official week 10 rows were present in it, which is
     exactly why the official page is scraped directly.</li>
     <li>The closing-line sign convention was proved from data: correlation
     0.439 with the home margin over
-    5591 games.</li>
+    5592 games.</li>
     <li>nflverse file licence verified as CC-BY-4.0 (attribution shown in the footer).</li>
   </ul>
 
   <h3>What the numbers say</h3>
   <ul class="tight">
     <li><strong>Our lines are not yet better than the market.</strong> Out-of-sample spread MAE
-    9.98 points versus 9.48
+    9.95 points versus 9.45
     for the closing line, and the paired difference interval excludes zero — the market is
     significantly closer. The totals model is similarly behind
-    (11.31 vs 10.60).</li>
+    (11.23 vs 10.55).</li>
     <li><strong>The model's incremental information is measurable, not assumed.</strong> Blend test:
     market weight 1.336, model weight
-    -0.328, test MAE 9.54 vs
-    9.48 market-only over 136 games.</li>
+    -0.328, test MAE 9.51 vs
+    9.45 market-only over 137 games.</li>
     <li><strong>No strategy earns promotion.</strong> 12 rules were tested; 0 passed
     all eight gates. The top score belongs to
     S11 Under in divisional games with total 47+ with ROI 4.2% on
     548 bets and a lower 95% bound of
     -3.9%.</li>
     <li><strong>Same-game legs are only weakly linked.</strong> phi(home covers, over hits) =
-    0.009 across 5591 games, so naive parlay
+    0.009 across 5592 games, so naive parlay
     multiplication is roughly right for spread/total combos but must never be used for
     player-prop combos without their own correlation.</li>
     <li><strong>Availability is only partly measured.</strong> The injury table names the unavailable
@@ -95,7 +95,7 @@
   </ol>
 </section>
 
-<section class="kpis"><article class="kpi"><span class="kpi-label">Rows verified vs nfl.com</span><strong class="kpi-value">119/128</strong><span class="kpi-sub">standings + injury sample</span></article><article class="kpi"><span class="kpi-label">Own-line test MAE</span><strong class="kpi-value">9.98</strong><span class="kpi-sub">market 9.48 over 136 games</span></article><article class="kpi"><span class="kpi-label">Strategies passing all gates</span><strong class="kpi-value">0 of 12</strong><span class="kpi-sub">8 gates + BH correction</span></article><article class="kpi"><span class="kpi-label">Starters flagged unavailable</span><strong class="kpi-value">109</strong><span class="kpi-sub">official game status</span></article><article class="kpi"><span class="kpi-label">Prop lines built</span><strong class="kpi-value">343</strong><span class="kpi-sub">market price: none</span></article><article class="kpi"><span class="kpi-label">Pinned source files</span><strong class="kpi-value">12</strong><span class="kpi-sub">URL + sha256</span></article></section>
+<section class="kpis"><article class="kpi"><span class="kpi-label">Rows verified vs nfl.com</span><strong class="kpi-value">115/128</strong><span class="kpi-sub">standings + injury sample</span></article><article class="kpi"><span class="kpi-label">Own-line test MAE</span><strong class="kpi-value">9.95</strong><span class="kpi-sub">market 9.45 over 137 games</span></article><article class="kpi"><span class="kpi-label">Strategies passing all gates</span><strong class="kpi-value">0 of 12</strong><span class="kpi-sub">8 gates + BH correction</span></article><article class="kpi"><span class="kpi-label">Starters flagged unavailable</span><strong class="kpi-value">117</strong><span class="kpi-sub">official game status</span></article><article class="kpi"><span class="kpi-label">Prop lines built</span><strong class="kpi-value">323</strong><span class="kpi-sub">market price: none</span></article><article class="kpi"><span class="kpi-label">Pinned source files</span><strong class="kpi-value">12</strong><span class="kpi-sub">URL + sha256</span></article></section>
 
 <section class="panel">
   <h2>Brief coverage: what is implemented, partial or blocked</h2>

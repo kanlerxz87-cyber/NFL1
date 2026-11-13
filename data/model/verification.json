@@ -1,12 +1,12 @@
 {
- "generated_at": "2026-11-12T23:37:56+00:00",
+ "generated_at": "2026-11-13T12:51:12+00:00",
  "checks": [
   {
    "name": "2026 standings (W-L-T, points for/against)",
    "source": "https://www.nfl.com/standings/league/2026/reg",
    "rows_checked": 32,
-   "rows_matched": 32,
-   "mismatches": 0,
+   "rows_matched": 30,
+   "mismatches": 2,
    "detail": [
     {
      "team": "BUF",
@@ -200,7 +200,7 @@
     },
     {
      "team": "NYG",
-     "matched": true,
+     "matched": false,
      "nfl": {
       "w": 5,
       "l": 2,
@@ -210,12 +210,25 @@
      },
      "computed": {
       "w": 5,
-      "l": 2,
+      "l": 3,
       "t": 1,
-      "pf": 182,
-      "pa": 172
+      "pf": 203,
+      "pa": 196
      },
-     "diffs": null
+     "diffs": {
+      "l": {
+       "nfl": 2,
+       "computed": 3
+      },
+      "pf": {
+       "nfl": 182,
+       "computed": 203
+      },
+      "pa": {
+       "nfl": 172,
+       "computed": 196
+      }
+     }
     },
     {
      "team": "GB",
@@ -485,7 +498,7 @@
     },
     {
      "team": "WAS",
-     "matched": true,
+     "matched": false,
      "nfl": {
       "w": 2,
       "l": 5,
@@ -494,13 +507,26 @@
       "pa": 202
      },
      "computed": {
-      "w": 2,
+      "w": 3,
       "l": 5,
       "t": 1,
-      "pf": 172,
-      "pa": 202
+      "pf": 196,
+      "pa": 223
      },
-     "diffs": null
+     "diffs": {
+      "w": {
+       "nfl": 2,
+       "computed": 3
+      },
+      "pf": {
+       "nfl": 172,
+       "computed": 196
+      },
+      "pa": {
+       "nfl": 202,
+       "computed": 223
+      }
+     }
     },
     {
      "team": "IND",
@@ -1528,16 +1554,16 @@
    "name": "Mirrored feed coverage vs official report, week 10",
    "source": "https://www.nfl.com/injuries/",
    "rows_checked": 296,
-   "rows_matched": 276,
-   "mismatches": 20,
+   "rows_matched": 296,
+   "mismatches": 0,
    "detail": [
     {
      "team": "coverage summary",
      "player": "official rows present in feed",
-     "position": "276/296",
-     "matched": false,
+     "position": "296/296",
+     "matched": true,
      "feed": {
-      "game": "3 game-status disagreements"
+      "game": "0 game-status disagreements"
      }
     }
    ]
@@ -1546,8 +1572,8 @@
    "name": "Computed standings vs companion transcription (data/standings.csv)",
    "source": "https://www.nfl.com/standings/league/2026/reg",
    "rows_checked": 32,
-   "rows_matched": 32,
-   "mismatches": 0,
+   "rows_matched": 30,
+   "mismatches": 2,
    "detail": [
     {
      "team": "BUF",
@@ -1811,19 +1837,19 @@
     },
     {
      "team": "NYG",
-     "matched": true,
+     "matched": false,
      "computed": {
       "team": "NYG",
       "name": "New York Giants",
       "conference": "NFC",
       "division": "NFC East",
       "w": 5,
-      "l": 2,
+      "l": 3,
       "t": 1,
-      "pct": 0.688,
-      "pf": 182,
-      "pa": 172,
-      "diff": 10,
+      "pct": 0.611,
+      "pf": 203,
+      "pa": 196,
+      "diff": 7,
       "source": "https://www.nfl.com/standings/league/2026/reg"
      },
      "nfl": {
@@ -1833,7 +1859,20 @@
       "pf": 182,
       "pa": 172
      },
-     "diffs": null
+     "diffs": {
+      "l": {
+       "companion": 2,
+       "computed": 3
+      },
+      "pf": {
+       "companion": 182,
+       "computed": 203
+      },
+      "pa": {
+       "companion": 172,
+       "computed": 196
+      }
+     }
     },
     {
      "team": "GB",
@@ -2201,19 +2240,19 @@
     },
     {
      "team": "WAS",
-     "matched": true,
+     "matched": false,
      "computed": {
       "team": "WAS",
       "name": "Washington Commanders",
       "conference": "NFC",
       "division": "NFC East",
-      "w": 2,
+      "w": 3,
       "l": 5,
       "t": 1,
-      "pct": 0.313,
-      "pf": 172,
-      "pa": 202,
-      "diff": -30,
+      "pct": 0.389,
+      "pf": 196,
+      "pa": 223,
+      "diff": -27,
       "source": "https://www.nfl.com/standings/league/2026/reg"
      },
      "nfl": {
@@ -2223,7 +2262,20 @@
       "pf": 172,
       "pa": 202
      },
-     "diffs": null
+     "diffs": {
+      "w": {
+       "companion": 2,
+       "computed": 3
+      },
+      "pf": {
+       "companion": 172,
+       "computed": 196
+      },
+      "pa": {
+       "companion": 202,
+       "computed": 223
+      }
+     }
     },
     {
      "team": "IND",
@@ -2775,6 +2827,48 @@
  ],
  "irregularities": [
   {
+   "id": "V1",
+   "area": "standings",
+   "issue": "2 of 32 team records differ from nfl.com",
+   "examples": [
+    {
+     "team": "NYG",
+     "diffs": {
+      "l": {
+       "nfl": 2,
+       "computed": 3
+      },
+      "pf": {
+       "nfl": 182,
+       "computed": 203
+      },
+      "pa": {
+       "nfl": 172,
+       "computed": 196
+      }
+     }
+    },
+    {
+     "team": "WAS",
+     "diffs": {
+      "w": {
+       "nfl": 2,
+       "computed": 3
+      },
+      "pf": {
+       "nfl": 172,
+       "computed": 196
+      },
+      "pa": {
+       "nfl": 202,
+       "computed": 223
+      }
+     }
+    }
+   ],
+   "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
    "id": "V2",
    "area": "injury scrape",
    "issue": "9 of 44 sampled rows differ from the scrape",
@@ -2875,11 +2969,46 @@
    "source": "https://www.nfl.com/injuries/"
   },
   {
-   "id": "V3",
-   "area": "mirrored injury feed",
-   "issue": "The mirrored feed has 276 of 296 official week 10 rows (3 status disagreements).",
-   "examples": [],
-   "source": "https://www.nfl.com/injuries/"
+   "id": "V4",
+   "area": "standings cross-check",
+   "issue": "2 rows differ between computed standings and the companion CSV",
+   "examples": [
+    {
+     "team": "NYG",
+     "diffs": {
+      "l": {
+       "companion": 2,
+       "computed": 3
+      },
+      "pf": {
+       "companion": 182,
+       "computed": 203
+      },
+      "pa": {
+       "companion": 172,
+       "computed": 196
+      }
+     }
+    },
+    {
+     "team": "WAS",
+     "diffs": {
+      "w": {
+       "companion": 2,
+       "computed": 3
+      },
+      "pf": {
+       "companion": 172,
+       "computed": 196
+      },
+      "pa": {
+       "companion": 202,
+       "computed": 223
+      }
+     }
+    }
+   ],
+   "source": "https://www.nfl.com/standings/league/2026/reg"
   }
  ],
  "unverifiable": [
