@@ -102,10 +102,31 @@ def main() -> int:
 
     t1 = {r["team"]: r for r in read_tsv(os.path.join(AUDIT, "standings_retrieval_T1.tsv"))}
     t2 = {r["team"]: r for r in read_tsv(os.path.join(AUDIT, "standings_retrieval_T2.tsv"))}
+    t3 = {r["team"]: r for r in read_tsv(os.path.join(AUDIT, "standings_retrieval_T3_20261113.tsv"))}
     check("standings transcription rows", len(t1) == 32 and len(t2) == 32,
           f"T1 rows={len(t1)} T2 rows={len(t2)} (expected 32 each)")
     check("same clubs in both retrievals", set(t1) == set(t2),
           f"only in T1={sorted(set(t1) - set(t2))} only in T2={sorted(set(t2) - set(t1))}")
+    # T3 (2026-11-13, after week 10 completed) is the current-state retrieval. The model
+    # data refreshed to week 11, so current-state comparisons use T3; the week-10-era
+    # repo transcriptions keep being compared against T1 (their own retrieval time).
+    check("standings transcription rows (T3)", len(t3) == 32,
+          f"T3 rows={len(t3)} (expected 32)")
+    check("same clubs in T3 as in T1", set(t3) == set(t1),
+          f"only in T3={sorted(set(t3) - set(t1))} only in T1={sorted(set(t1) - set(t3))}")
+    for team, r in t3.items():
+        w, l, t = int(r["w"]), int(r["l"]), int(r["t"])
+        check(f"T3 {team} PCT identity", abs(float(r["pct"]) - tie_pct((w, l, t))) < 5e-4,
+              f"printed PCT={r['pct']} vs (W+0.5T)/GP={tie_pct((w, l, t))}")
+        check(f"T3 {team} NET identity", int(r["net_pts"]) == int(r["pf"]) - int(r["pa"]),
+              f"printed NET={r['net_pts']} vs PF-PA={int(r['pf']) - int(r['pa'])}")
+    sw = sum(int(r["w"]) for r in t3.values())
+    sl = sum(int(r["l"]) for r in t3.values())
+    st = sum(int(r["t"]) for r in t3.values())
+    spf = sum(int(r["pf"]) for r in t3.values())
+    spa = sum(int(r["pa"]) for r in t3.values())
+    check("T3 league wins equal losses", sw == sl, f"W={sw} L={sl} T={st}")
+    check("T3 league points balance", spf == spa, f"PF={spf} PA={spa}")
 
     # --------------------------------------------------- 1. reproducibility between retrievals
     changed = {}
@@ -191,12 +212,20 @@ def main() -> int:
         return {"ARI": "AZ", "LAR": "LA"}.get(code, code)
 
     def official(team):
-        """Official transcription row for a club code, tolerating the ARI/AZ difference."""
+        """Official transcription row for a club code, tolerating the ARI/AZ difference.
+
+        Week-10-era comparison (retrieval T1): used for the repository's week-10-era
+        transcriptions, which must match what the page said when they were made.
+        """
         return t1.get(norm(team))
+
+    def official_live(team):
+        """Current official row (retrieval T3, 2026-11-13) for current-state comparisons."""
+        return t3.get(norm(team))
 
     snap = json.load(open(os.path.join(ROOT, "data", "model", "snapshot.json"), encoding="utf-8"))
     for r in snap["standings"]:
-        off = official(r["team"])
+        off = official_live(r["team"])
         if not off:
             check(f"snapshot row {r['team']}", False, "club missing from the official transcription")
             continue
@@ -250,17 +279,23 @@ def main() -> int:
                 check(f"referee transcription {code} {col}", parts[idx] == off[col],
                       f"published {parts[idx]} vs official {off[col]}")
 
-    # --------------------------------------------------- 4. week 10 slate
-    sched_rows = read_tsv(os.path.join(AUDIT, "schedule_week10_20261112.tsv"))
+    # --------------------------------------------------- 4. week 11 slate (current)
+    # The model's published lines are week 11 (week 10 is complete), so the slate audit
+    # compares against the official week-11 schedule (retrieval T4, 2026-11-13). The
+    # week-10 audit against retrieval T1/T2 is preserved in git history and in the two
+    # week-10 transcription files.
+    sched_rows = read_tsv(os.path.join(AUDIT, "schedule_week11_20261113.tsv"))
     games = [r for r in sched_rows if r.get("away") and r.get("home") and r["away"] != "bye_teams"]
     byes_row = next((r for r in sched_rows if r.get("away") == "bye_teams"), None)
     official_byes = byes_row["home"].split() if byes_row else []
     official_byes = [norm(b) for b in official_byes]
 
     lines = json.load(open(os.path.join(ROOT, "data", "model", "lines.json"), encoding="utf-8"))
+    check("model lines week matches the audited official week", lines.get("week") == 11,
+          f"model week={lines.get('week')} (audit transcription is week 11)")
     model_games = {(norm(g["away"]), norm(g["home"])): g for g in lines["lines"]}
     official_games = {(norm(g["away"]), norm(g["home"])): g for g in games}
-    check("Week 10 slate size", len(model_games) == len(official_games) == 14,
+    check("Week 11 slate size", len(model_games) == len(official_games) == 13,
           f"model={len(model_games)} official={len(official_games)}")
     for key in official_games:
         check(f"slate contains {key[0]} @ {key[1]}", key in model_games,
@@ -277,7 +312,7 @@ def main() -> int:
             parts = g[f"{side}_record"].split("-")
             w, l = parts[0], parts[1]
             t = parts[2] if len(parts) > 2 else "0"
-            off = official(team)
+            off = official_live(team)
             if not off:
                 continue
             check(f"schedule record {team} ({side})",
@@ -285,14 +320,24 @@ def main() -> int:
                   f"schedule page prints {g[f'{side}_record']} vs standings page "
                   f"{off['w']}-{off['l']}-{off['t']}")
 
+    slate_teams = {norm(g["away"]) for g in games} | {norm(g["home"]) for g in games}
+    arithmetic_byes = sorted(set(t1.keys()) - slate_teams)
+    check("Week 11 bye list vs slate arithmetic", sorted(official_byes) == arithmetic_byes,
+          f"official={sorted(official_byes)} arithmetic={arithmetic_byes}")
     repo_byes = []
     byes_csv = os.path.join(ROOT, "data", "verified", "byes_2026.csv")
     if os.path.exists(byes_csv):
         for r in read_csv(byes_csv):
-            if r.get("week") == "10":
+            if r.get("week") == "11":
                 repo_byes.append(norm(r["team_abbr"]))
-    check("Week 10 bye list", sorted(repo_byes) == sorted(official_byes),
-          f"repo={sorted(repo_byes)} official={sorted(official_byes)}")
+    if repo_byes:
+        check("Week 11 bye list vs repo CSV", sorted(repo_byes) == sorted(official_byes),
+              f"repo={sorted(repo_byes)} official={sorted(official_byes)}")
+    else:
+        flag("Repo bye CSV does not cover week 11 yet",
+             "data/verified/byes_2026.csv publishes weeks 5-10. The official week-11 bye "
+             "teams (" + ", ".join(official_byes) + ") are published on the audit page from "
+             "retrieval T4; the verified-layer CSV needs a week-11 refresh by its owner.")
 
     out = {
         # placeholder; preserved from the committed file when the payload is unchanged
@@ -301,7 +346,11 @@ def main() -> int:
         "generated_at": None,
         "session": "4c043747-nfl1",
         "sources": {"standings": SOURCE_STANDINGS, "schedule": SOURCE_SCHEDULE},
-        "retrievals": {"T1": "2026-11-12 ~22:05Z", "T2": "2026-11-12 ~22:25Z"},
+        "retrievals": {"T1": "2026-11-12 ~22:05Z", "T2": "2026-11-12 ~22:25Z",
+                       "T3 (standings)": "2026-11-13 ~14:05Z",
+                       "T4 (week-11 schedule)": "2026-11-13 ~14:05Z"},
+        "audited_week": 11,
+        "session_note": "T1/T2 by session 4c043747; T3/T4 by session d23c65ad",
         "reproducible_columns": reproducible,
         "verified_columns": verified_columns,
         "columns_changed_between_retrievals": {c: v for c, v in changed.items()},

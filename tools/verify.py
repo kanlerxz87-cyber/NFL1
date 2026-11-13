@@ -27,6 +27,17 @@ OFFICIAL_DOMAINS = {
     "chiefs.com", "packers.com", "49ers.com",
     "itl.nist.gov", "nj.gov", "docs.github.com", "github.com", "api.github.com",
     "static.www.nfl.com", "static.clubs.nfl.com", "charts-cdn-a.nextgenstats.nfl.com",
+    # Club depth charts (flag F42): the league publishes no official depth chart, so each
+    # club's own site is the authoritative publisher for its chart. All 32 official club
+    # domains are accepted as official sources for depth-chart rows only.
+    "azcardinals.com", "atlantafalcons.com", "baltimoreravens.com", "buffalobills.com",
+    "bengals.com", "browns.com", "clevelandbrowns.com", "cowboys.com", "dallascowboys.com",
+    "denverbroncos.com", "detroitlions.com", "giants.com", "houstontexans.com",
+    "colts.com", "jaguars.com", "chiefs.com", "chargers.com", "raiders.com",
+    "therams.com", "miamidolphins.com", "vikings.com", "newenglandpatriots.com",
+    "patriots.com", "neworleanssaints.com", "giants.com", "newyorkjets.com",
+    "philadelphiaeagles.com", "steelers.com", "49ers.com", "seahawks.com",
+    "buccaneers.com", "tennesseetitans.com", "commanders.com", "panthers.com",
 }
 
 PAGES = [

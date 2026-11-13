@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-12T22:48:59+00:00",
+ "generated_at": "2026-11-13T14:01:11+00:00",
  "session": "4c043747-nfl1",
  "sources": {
   "standings": "https://www.nfl.com/standings/league/2026/reg",
@@ -7,8 +7,12 @@
  },
  "retrievals": {
   "T1": "2026-11-12 ~22:05Z",
-  "T2": "2026-11-12 ~22:25Z"
+  "T2": "2026-11-12 ~22:25Z",
+  "T3 (standings)": "2026-11-13 ~14:05Z",
+  "T4 (week-11 schedule)": "2026-11-13 ~14:05Z"
  },
+ "audited_week": 11,
+ "session_note": "T1/T2 by session 4c043747; T3/T4 by session d23c65ad",
  "reproducible_columns": [
   "w",
   "l",
@@ -234,7 +238,7 @@
    "T1 SEA"
   ]
  },
- "checks_total": 841,
+ "checks_total": 905,
  "checks_failed": 0,
  "flags": [
   {
@@ -556,6 +560,11 @@
    "item": "Two transcriptions of the same official column disagree: LA non_conf",
    "detail": "data/verified/standings_2026_reg.tsv prints 2-2-0; the official page printed 2-1-0 at ~22:05Z and 2-1-0 at ~22:25Z. This column is not reproducible or self-consistent on the official page, so the cell is left blank on the site.",
    "source": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "item": "Repo bye CSV does not cover week 11 yet",
+   "detail": "data/verified/byes_2026.csv publishes weeks 5-10. The official week-11 bye teams (ATL, CLE, GB, LA, NE, SEA) are published on the audit page from retrieval T4; the verified-layer CSV needs a week-11 refresh by its owner.",
+   "source": "https://www.nfl.com/standings/league/2026/reg"
   }
  ],
  "failures": [],
@@ -569,6 +578,346 @@
    "check": "same clubs in both retrievals",
    "result": "PASS",
    "detail": "only in T1=[] only in T2=[]"
+  },
+  {
+   "check": "standings transcription rows (T3)",
+   "result": "PASS",
+   "detail": "T3 rows=32 (expected 32)"
+  },
+  {
+   "check": "same clubs in T3 as in T1",
+   "result": "PASS",
+   "detail": "only in T3=[] only in T1=[]"
+  },
+  {
+   "check": "T3 BUF PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.875 vs (W+0.5T)/GP=0.875"
+  },
+  {
+   "check": "T3 BUF NET identity",
+   "result": "PASS",
+   "detail": "printed NET=69 vs PF-PA=69"
+  },
+  {
+   "check": "T3 SF PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.875 vs (W+0.5T)/GP=0.875"
+  },
+  {
+   "check": "T3 SF NET identity",
+   "result": "PASS",
+   "detail": "printed NET=79 vs PF-PA=79"
+  },
+  {
+   "check": "T3 CHI PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.778 vs (W+0.5T)/GP=0.778"
+  },
+  {
+   "check": "T3 CHI NET identity",
+   "result": "PASS",
+   "detail": "printed NET=57 vs PF-PA=57"
+  },
+  {
+   "check": "T3 DEN PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.778 vs (W+0.5T)/GP=0.778"
+  },
+  {
+   "check": "T3 DEN NET identity",
+   "result": "PASS",
+   "detail": "printed NET=12 vs PF-PA=12"
+  },
+  {
+   "check": "T3 CIN PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.750 vs (W+0.5T)/GP=0.75"
+  },
+  {
+   "check": "T3 CIN NET identity",
+   "result": "PASS",
+   "detail": "printed NET=65 vs PF-PA=65"
+  },
+  {
+   "check": "T3 DET PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.750 vs (W+0.5T)/GP=0.75"
+  },
+  {
+   "check": "T3 DET NET identity",
+   "result": "PASS",
+   "detail": "printed NET=33 vs PF-PA=33"
+  },
+  {
+   "check": "T3 JAX PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.750 vs (W+0.5T)/GP=0.75"
+  },
+  {
+   "check": "T3 JAX NET identity",
+   "result": "PASS",
+   "detail": "printed NET=108 vs PF-PA=108"
+  },
+  {
+   "check": "T3 KC PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.750 vs (W+0.5T)/GP=0.75"
+  },
+  {
+   "check": "T3 KC NET identity",
+   "result": "PASS",
+   "detail": "printed NET=59 vs PF-PA=59"
+  },
+  {
+   "check": "T3 MIN PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.750 vs (W+0.5T)/GP=0.75"
+  },
+  {
+   "check": "T3 MIN NET identity",
+   "result": "PASS",
+   "detail": "printed NET=30 vs PF-PA=30"
+  },
+  {
+   "check": "T3 PIT PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.750 vs (W+0.5T)/GP=0.75"
+  },
+  {
+   "check": "T3 PIT NET identity",
+   "result": "PASS",
+   "detail": "printed NET=36 vs PF-PA=36"
+  },
+  {
+   "check": "T3 GB PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.667 vs (W+0.5T)/GP=0.667"
+  },
+  {
+   "check": "T3 GB NET identity",
+   "result": "PASS",
+   "detail": "printed NET=25 vs PF-PA=25"
+  },
+  {
+   "check": "T3 NYG PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.611 vs (W+0.5T)/GP=0.611"
+  },
+  {
+   "check": "T3 NYG NET identity",
+   "result": "PASS",
+   "detail": "printed NET=7 vs PF-PA=7"
+  },
+  {
+   "check": "T3 CLE PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.556 vs (W+0.5T)/GP=0.556"
+  },
+  {
+   "check": "T3 CLE NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-35 vs PF-PA=-35"
+  },
+  {
+   "check": "T3 LA PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.556 vs (W+0.5T)/GP=0.556"
+  },
+  {
+   "check": "T3 LA NET identity",
+   "result": "PASS",
+   "detail": "printed NET=33 vs PF-PA=33"
+  },
+  {
+   "check": "T3 NE PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.556 vs (W+0.5T)/GP=0.556"
+  },
+  {
+   "check": "T3 NE NET identity",
+   "result": "PASS",
+   "detail": "printed NET=4 vs PF-PA=4"
+  },
+  {
+   "check": "T3 SEA PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.556 vs (W+0.5T)/GP=0.556"
+  },
+  {
+   "check": "T3 SEA NET identity",
+   "result": "PASS",
+   "detail": "printed NET=40 vs PF-PA=40"
+  },
+  {
+   "check": "T3 BAL PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.444 vs (W+0.5T)/GP=0.444"
+  },
+  {
+   "check": "T3 BAL NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-47 vs PF-PA=-47"
+  },
+  {
+   "check": "T3 DAL PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.444 vs (W+0.5T)/GP=0.444"
+  },
+  {
+   "check": "T3 DAL NET identity",
+   "result": "PASS",
+   "detail": "printed NET=10 vs PF-PA=10"
+  },
+  {
+   "check": "T3 LV PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.444 vs (W+0.5T)/GP=0.444"
+  },
+  {
+   "check": "T3 LV NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-30 vs PF-PA=-30"
+  },
+  {
+   "check": "T3 WAS PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.389 vs (W+0.5T)/GP=0.389"
+  },
+  {
+   "check": "T3 WAS NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-27 vs PF-PA=-27"
+  },
+  {
+   "check": "T3 CAR PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.375 vs (W+0.5T)/GP=0.375"
+  },
+  {
+   "check": "T3 CAR NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-20 vs PF-PA=-20"
+  },
+  {
+   "check": "T3 HOU PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.375 vs (W+0.5T)/GP=0.375"
+  },
+  {
+   "check": "T3 HOU NET identity",
+   "result": "PASS",
+   "detail": "printed NET=17 vs PF-PA=17"
+  },
+  {
+   "check": "T3 NO PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.375 vs (W+0.5T)/GP=0.375"
+  },
+  {
+   "check": "T3 NO NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-31 vs PF-PA=-31"
+  },
+  {
+   "check": "T3 AZ PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.333 vs (W+0.5T)/GP=0.333"
+  },
+  {
+   "check": "T3 AZ NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-77 vs PF-PA=-77"
+  },
+  {
+   "check": "T3 ATL PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.333 vs (W+0.5T)/GP=0.333"
+  },
+  {
+   "check": "T3 ATL NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-35 vs PF-PA=-35"
+  },
+  {
+   "check": "T3 TB PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.333 vs (W+0.5T)/GP=0.333"
+  },
+  {
+   "check": "T3 TB NET identity",
+   "result": "PASS",
+   "detail": "printed NET=24 vs PF-PA=24"
+  },
+  {
+   "check": "T3 IND PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.222 vs (W+0.5T)/GP=0.222"
+  },
+  {
+   "check": "T3 IND NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-65 vs PF-PA=-65"
+  },
+  {
+   "check": "T3 NYJ PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.222 vs (W+0.5T)/GP=0.222"
+  },
+  {
+   "check": "T3 NYJ NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-41 vs PF-PA=-41"
+  },
+  {
+   "check": "T3 PHI PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.222 vs (W+0.5T)/GP=0.222"
+  },
+  {
+   "check": "T3 PHI NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-73 vs PF-PA=-73"
+  },
+  {
+   "check": "T3 MIA PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.125 vs (W+0.5T)/GP=0.125"
+  },
+  {
+   "check": "T3 MIA NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-74 vs PF-PA=-74"
+  },
+  {
+   "check": "T3 TEN PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.125 vs (W+0.5T)/GP=0.125"
+  },
+  {
+   "check": "T3 TEN NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-55 vs PF-PA=-55"
+  },
+  {
+   "check": "T3 LAC PCT identity",
+   "result": "PASS",
+   "detail": "printed PCT=0.000 vs (W+0.5T)/GP=0.0"
+  },
+  {
+   "check": "T3 LAC NET identity",
+   "result": "PASS",
+   "detail": "printed NET=-98 vs PF-PA=-98"
+  },
+  {
+   "check": "T3 league wins equal losses",
+   "result": "PASS",
+   "detail": "W=136 L=136 T=2"
+  },
+  {
+   "check": "T3 league points balance",
+   "result": "PASS",
+   "detail": "PF=6291 PA=6291"
   },
   {
    "check": "T1 BUF PCT identity",
@@ -1481,31 +1830,6 @@
    "detail": "published 116 vs official 116"
   },
   {
-   "check": "snapshot NYG w",
-   "result": "PASS",
-   "detail": "published 5 vs official 5"
-  },
-  {
-   "check": "snapshot NYG l",
-   "result": "PASS",
-   "detail": "published 2 vs official 2"
-  },
-  {
-   "check": "snapshot NYG t",
-   "result": "PASS",
-   "detail": "published 1 vs official 1"
-  },
-  {
-   "check": "snapshot NYG pf",
-   "result": "PASS",
-   "detail": "published 182 vs official 182"
-  },
-  {
-   "check": "snapshot NYG pa",
-   "result": "PASS",
-   "detail": "published 172 vs official 172"
-  },
-  {
    "check": "snapshot GB w",
    "result": "PASS",
    "detail": "published 6 vs official 6"
@@ -1529,6 +1853,31 @@
    "check": "snapshot GB pa",
    "result": "PASS",
    "detail": "published 191 vs official 191"
+  },
+  {
+   "check": "snapshot NYG w",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "snapshot NYG l",
+   "result": "PASS",
+   "detail": "published 3 vs official 3"
+  },
+  {
+   "check": "snapshot NYG t",
+   "result": "PASS",
+   "detail": "published 1 vs official 1"
+  },
+  {
+   "check": "snapshot NYG pf",
+   "result": "PASS",
+   "detail": "published 203 vs official 203"
+  },
+  {
+   "check": "snapshot NYG pa",
+   "result": "PASS",
+   "detail": "published 196 vs official 196"
   },
   {
    "check": "snapshot SEA w",
@@ -1706,6 +2055,31 @@
    "detail": "published 236 vs official 236"
   },
   {
+   "check": "snapshot WAS w",
+   "result": "PASS",
+   "detail": "published 3 vs official 3"
+  },
+  {
+   "check": "snapshot WAS l",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "snapshot WAS t",
+   "result": "PASS",
+   "detail": "published 1 vs official 1"
+  },
+  {
+   "check": "snapshot WAS pf",
+   "result": "PASS",
+   "detail": "published 196 vs official 196"
+  },
+  {
+   "check": "snapshot WAS pa",
+   "result": "PASS",
+   "detail": "published 223 vs official 223"
+  },
+  {
    "check": "snapshot HOU w",
    "result": "PASS",
    "detail": "published 3 vs official 3"
@@ -1854,31 +2228,6 @@
    "check": "snapshot ARI pa",
    "result": "PASS",
    "detail": "published 255 vs official 255"
-  },
-  {
-   "check": "snapshot WAS w",
-   "result": "PASS",
-   "detail": "published 2 vs official 2"
-  },
-  {
-   "check": "snapshot WAS l",
-   "result": "PASS",
-   "detail": "published 5 vs official 5"
-  },
-  {
-   "check": "snapshot WAS t",
-   "result": "PASS",
-   "detail": "published 1 vs official 1"
-  },
-  {
-   "check": "snapshot WAS pf",
-   "result": "PASS",
-   "detail": "published 172 vs official 172"
-  },
-  {
-   "check": "snapshot WAS pa",
-   "result": "PASS",
-   "detail": "published 202 vs official 202"
   },
   {
    "check": "snapshot NYJ w",
@@ -4406,269 +4755,219 @@
    "detail": "published 219 vs official 219"
   },
   {
-   "check": "Week 10 slate size",
+   "check": "model lines week matches the audited official week",
    "result": "PASS",
-   "detail": "model=14 official=14"
+   "detail": "model week=11 (audit transcription is week 11)"
   },
   {
-   "check": "slate contains WAS @ NYG",
+   "check": "Week 11 slate size",
    "result": "PASS",
-   "detail": "matchup missing from the published model output"
+   "detail": "model=13 official=13"
   },
   {
-   "check": "slate contains NE @ DET",
-   "result": "PASS",
-   "detail": "matchup missing from the published model output"
-  },
-  {
-   "check": "slate contains KC @ ATL",
+   "check": "slate contains IND @ HOU",
    "result": "PASS",
    "detail": "matchup missing from the published model output"
   },
   {
-   "check": "slate contains HOU @ CLE",
+   "check": "slate contains MIA @ BUF",
    "result": "PASS",
    "detail": "matchup missing from the published model output"
   },
   {
-   "check": "slate contains MIN @ GB",
+   "check": "slate contains BAL @ CAR",
    "result": "PASS",
    "detail": "matchup missing from the published model output"
   },
   {
-   "check": "slate contains MIA @ IND",
+   "check": "slate contains NO @ CHI",
    "result": "PASS",
    "detail": "matchup missing from the published model output"
   },
   {
-   "check": "slate contains CAR @ NO",
+   "check": "slate contains TEN @ DAL",
    "result": "PASS",
    "detail": "matchup missing from the published model output"
   },
   {
-   "check": "slate contains BUF @ NYJ",
+   "check": "slate contains TB @ DET",
    "result": "PASS",
    "detail": "matchup missing from the published model output"
   },
   {
-   "check": "slate contains JAX @ TEN",
+   "check": "slate contains AZ @ KC",
    "result": "PASS",
    "detail": "matchup missing from the published model output"
   },
   {
-   "check": "slate contains LA @ AZ",
+   "check": "slate contains PIT @ PHI",
    "result": "PASS",
    "detail": "matchup missing from the published model output"
   },
   {
-   "check": "slate contains SEA @ LV",
+   "check": "slate contains NYJ @ LAC",
    "result": "PASS",
    "detail": "matchup missing from the published model output"
   },
   {
-   "check": "slate contains SF @ DAL",
+   "check": "slate contains JAX @ NYG",
    "result": "PASS",
    "detail": "matchup missing from the published model output"
   },
   {
-   "check": "slate contains PIT @ CIN",
+   "check": "slate contains LV @ DEN",
    "result": "PASS",
    "detail": "matchup missing from the published model output"
   },
   {
-   "check": "slate contains LAC @ BAL",
+   "check": "slate contains MIN @ SF",
    "result": "PASS",
    "detail": "matchup missing from the published model output"
   },
   {
-   "check": "model game WAS @ NYG is an official game",
+   "check": "slate contains CIN @ WAS",
+   "result": "PASS",
+   "detail": "matchup missing from the published model output"
+  },
+  {
+   "check": "model game IND @ HOU is an official game",
    "result": "PASS",
    "detail": "published game is not on the official Week 10 schedule"
   },
   {
-   "check": "gameday WAS @ NYG",
+   "check": "gameday IND @ HOU",
    "result": "PASS",
-   "detail": "model 2026-11-12 vs official 2026-11-12"
+   "detail": "model 2026-11-19 vs official 2026-11-19"
   },
   {
-   "check": "model game NE @ DET is an official game",
-   "result": "PASS",
-   "detail": "published game is not on the official Week 10 schedule"
-  },
-  {
-   "check": "gameday NE @ DET",
-   "result": "PASS",
-   "detail": "model 2026-11-15 vs official 2026-11-15"
-  },
-  {
-   "check": "model game KC @ ATL is an official game",
+   "check": "model game MIA @ BUF is an official game",
    "result": "PASS",
    "detail": "published game is not on the official Week 10 schedule"
   },
   {
-   "check": "gameday KC @ ATL",
+   "check": "gameday MIA @ BUF",
    "result": "PASS",
-   "detail": "model 2026-11-15 vs official 2026-11-15"
+   "detail": "model 2026-11-22 vs official 2026-11-22"
   },
   {
-   "check": "model game HOU @ CLE is an official game",
-   "result": "PASS",
-   "detail": "published game is not on the official Week 10 schedule"
-  },
-  {
-   "check": "gameday HOU @ CLE",
-   "result": "PASS",
-   "detail": "model 2026-11-15 vs official 2026-11-15"
-  },
-  {
-   "check": "model game MIN @ GB is an official game",
+   "check": "model game BAL @ CAR is an official game",
    "result": "PASS",
    "detail": "published game is not on the official Week 10 schedule"
   },
   {
-   "check": "gameday MIN @ GB",
+   "check": "gameday BAL @ CAR",
    "result": "PASS",
-   "detail": "model 2026-11-15 vs official 2026-11-15"
+   "detail": "model 2026-11-22 vs official 2026-11-22"
   },
   {
-   "check": "model game MIA @ IND is an official game",
-   "result": "PASS",
-   "detail": "published game is not on the official Week 10 schedule"
-  },
-  {
-   "check": "gameday MIA @ IND",
-   "result": "PASS",
-   "detail": "model 2026-11-15 vs official 2026-11-15"
-  },
-  {
-   "check": "model game CAR @ NO is an official game",
+   "check": "model game NO @ CHI is an official game",
    "result": "PASS",
    "detail": "published game is not on the official Week 10 schedule"
   },
   {
-   "check": "gameday CAR @ NO",
+   "check": "gameday NO @ CHI",
    "result": "PASS",
-   "detail": "model 2026-11-15 vs official 2026-11-15"
+   "detail": "model 2026-11-22 vs official 2026-11-22"
   },
   {
-   "check": "model game BUF @ NYJ is an official game",
-   "result": "PASS",
-   "detail": "published game is not on the official Week 10 schedule"
-  },
-  {
-   "check": "gameday BUF @ NYJ",
-   "result": "PASS",
-   "detail": "model 2026-11-15 vs official 2026-11-15"
-  },
-  {
-   "check": "model game JAX @ TEN is an official game",
+   "check": "model game TEN @ DAL is an official game",
    "result": "PASS",
    "detail": "published game is not on the official Week 10 schedule"
   },
   {
-   "check": "gameday JAX @ TEN",
+   "check": "gameday TEN @ DAL",
    "result": "PASS",
-   "detail": "model 2026-11-15 vs official 2026-11-15"
+   "detail": "model 2026-11-22 vs official 2026-11-22"
   },
   {
-   "check": "model game LA @ AZ is an official game",
-   "result": "PASS",
-   "detail": "published game is not on the official Week 10 schedule"
-  },
-  {
-   "check": "gameday LA @ AZ",
-   "result": "PASS",
-   "detail": "model 2026-11-15 vs official 2026-11-15"
-  },
-  {
-   "check": "model game SEA @ LV is an official game",
+   "check": "model game TB @ DET is an official game",
    "result": "PASS",
    "detail": "published game is not on the official Week 10 schedule"
   },
   {
-   "check": "gameday SEA @ LV",
+   "check": "gameday TB @ DET",
    "result": "PASS",
-   "detail": "model 2026-11-15 vs official 2026-11-15"
+   "detail": "model 2026-11-22 vs official 2026-11-22"
   },
   {
-   "check": "model game SF @ DAL is an official game",
-   "result": "PASS",
-   "detail": "published game is not on the official Week 10 schedule"
-  },
-  {
-   "check": "gameday SF @ DAL",
-   "result": "PASS",
-   "detail": "model 2026-11-15 vs official 2026-11-15"
-  },
-  {
-   "check": "model game PIT @ CIN is an official game",
+   "check": "model game AZ @ KC is an official game",
    "result": "PASS",
    "detail": "published game is not on the official Week 10 schedule"
   },
   {
-   "check": "gameday PIT @ CIN",
+   "check": "gameday AZ @ KC",
    "result": "PASS",
-   "detail": "model 2026-11-15 vs official 2026-11-15"
+   "detail": "model 2026-11-22 vs official 2026-11-22"
   },
   {
-   "check": "model game LAC @ BAL is an official game",
+   "check": "model game JAX @ NYG is an official game",
    "result": "PASS",
    "detail": "published game is not on the official Week 10 schedule"
   },
   {
-   "check": "gameday LAC @ BAL",
+   "check": "gameday JAX @ NYG",
    "result": "PASS",
-   "detail": "model 2026-11-16 vs official 2026-11-16"
+   "detail": "model 2026-11-22 vs official 2026-11-22"
   },
   {
-   "check": "schedule record WAS (away)",
+   "check": "model game NYJ @ LAC is an official game",
    "result": "PASS",
-   "detail": "schedule page prints 2-5-1 vs standings page 2-5-1"
+   "detail": "published game is not on the official Week 10 schedule"
   },
   {
-   "check": "schedule record NYG (home)",
+   "check": "gameday NYJ @ LAC",
    "result": "PASS",
-   "detail": "schedule page prints 5-2-1 vs standings page 5-2-1"
+   "detail": "model 2026-11-22 vs official 2026-11-22"
   },
   {
-   "check": "schedule record NE (away)",
+   "check": "model game LV @ DEN is an official game",
    "result": "PASS",
-   "detail": "schedule page prints 5-4 vs standings page 5-4-0"
+   "detail": "published game is not on the official Week 10 schedule"
   },
   {
-   "check": "schedule record DET (home)",
+   "check": "gameday LV @ DEN",
    "result": "PASS",
-   "detail": "schedule page prints 6-2 vs standings page 6-2-0"
+   "detail": "model 2026-11-22 vs official 2026-11-22"
   },
   {
-   "check": "schedule record KC (away)",
+   "check": "model game PIT @ PHI is an official game",
    "result": "PASS",
-   "detail": "schedule page prints 6-2 vs standings page 6-2-0"
+   "detail": "published game is not on the official Week 10 schedule"
   },
   {
-   "check": "schedule record ATL (home)",
+   "check": "gameday PIT @ PHI",
    "result": "PASS",
-   "detail": "schedule page prints 3-6 vs standings page 3-6-0"
+   "detail": "model 2026-11-22 vs official 2026-11-22"
   },
   {
-   "check": "schedule record HOU (away)",
+   "check": "model game MIN @ SF is an official game",
+   "result": "PASS",
+   "detail": "published game is not on the official Week 10 schedule"
+  },
+  {
+   "check": "gameday MIN @ SF",
+   "result": "PASS",
+   "detail": "model 2026-11-22 vs official 2026-11-22"
+  },
+  {
+   "check": "model game CIN @ WAS is an official game",
+   "result": "PASS",
+   "detail": "published game is not on the official Week 10 schedule"
+  },
+  {
+   "check": "gameday CIN @ WAS",
+   "result": "PASS",
+   "detail": "model 2026-11-23 vs official 2026-11-23"
+  },
+  {
+   "check": "schedule record IND (away)",
+   "result": "PASS",
+   "detail": "schedule page prints 2-7 vs standings page 2-7-0"
+  },
+  {
+   "check": "schedule record HOU (home)",
    "result": "PASS",
    "detail": "schedule page prints 3-5 vs standings page 3-5-0"
-  },
-  {
-   "check": "schedule record CLE (home)",
-   "result": "PASS",
-   "detail": "schedule page prints 5-4 vs standings page 5-4-0"
-  },
-  {
-   "check": "schedule record MIN (away)",
-   "result": "PASS",
-   "detail": "schedule page prints 6-2 vs standings page 6-2-0"
-  },
-  {
-   "check": "schedule record GB (home)",
-   "result": "PASS",
-   "detail": "schedule page prints 6-3 vs standings page 6-3-0"
   },
   {
    "check": "schedule record MIA (away)",
@@ -4676,64 +4975,34 @@
    "detail": "schedule page prints 1-7 vs standings page 1-7-0"
   },
   {
-   "check": "schedule record IND (home)",
-   "result": "PASS",
-   "detail": "schedule page prints 2-7 vs standings page 2-7-0"
-  },
-  {
-   "check": "schedule record CAR (away)",
-   "result": "PASS",
-   "detail": "schedule page prints 3-5 vs standings page 3-5-0"
-  },
-  {
-   "check": "schedule record NO (home)",
-   "result": "PASS",
-   "detail": "schedule page prints 3-5 vs standings page 3-5-0"
-  },
-  {
-   "check": "schedule record BUF (away)",
+   "check": "schedule record BUF (home)",
    "result": "PASS",
    "detail": "schedule page prints 7-1 vs standings page 7-1-0"
   },
   {
-   "check": "schedule record NYJ (home)",
-   "result": "PASS",
-   "detail": "schedule page prints 2-7 vs standings page 2-7-0"
-  },
-  {
-   "check": "schedule record JAX (away)",
-   "result": "PASS",
-   "detail": "schedule page prints 6-2 vs standings page 6-2-0"
-  },
-  {
-   "check": "schedule record TEN (home)",
-   "result": "PASS",
-   "detail": "schedule page prints 1-7 vs standings page 1-7-0"
-  },
-  {
-   "check": "schedule record LA (away)",
-   "result": "PASS",
-   "detail": "schedule page prints 5-4 vs standings page 5-4-0"
-  },
-  {
-   "check": "schedule record AZ (home)",
-   "result": "PASS",
-   "detail": "schedule page prints 3-6 vs standings page 3-6-0"
-  },
-  {
-   "check": "schedule record SEA (away)",
-   "result": "PASS",
-   "detail": "schedule page prints 5-4 vs standings page 5-4-0"
-  },
-  {
-   "check": "schedule record LV (home)",
+   "check": "schedule record BAL (away)",
    "result": "PASS",
    "detail": "schedule page prints 4-5 vs standings page 4-5-0"
   },
   {
-   "check": "schedule record SF (away)",
+   "check": "schedule record CAR (home)",
    "result": "PASS",
-   "detail": "schedule page prints 7-1 vs standings page 7-1-0"
+   "detail": "schedule page prints 3-5 vs standings page 3-5-0"
+  },
+  {
+   "check": "schedule record NO (away)",
+   "result": "PASS",
+   "detail": "schedule page prints 3-5 vs standings page 3-5-0"
+  },
+  {
+   "check": "schedule record CHI (home)",
+   "result": "PASS",
+   "detail": "schedule page prints 7-2 vs standings page 7-2-0"
+  },
+  {
+   "check": "schedule record TEN (away)",
+   "result": "PASS",
+   "detail": "schedule page prints 1-7 vs standings page 1-7-0"
   },
   {
    "check": "schedule record DAL (home)",
@@ -4741,29 +5010,89 @@
    "detail": "schedule page prints 4-5 vs standings page 4-5-0"
   },
   {
+   "check": "schedule record TB (away)",
+   "result": "PASS",
+   "detail": "schedule page prints 3-6 vs standings page 3-6-0"
+  },
+  {
+   "check": "schedule record DET (home)",
+   "result": "PASS",
+   "detail": "schedule page prints 6-2 vs standings page 6-2-0"
+  },
+  {
+   "check": "schedule record AZ (away)",
+   "result": "PASS",
+   "detail": "schedule page prints 3-6 vs standings page 3-6-0"
+  },
+  {
+   "check": "schedule record KC (home)",
+   "result": "PASS",
+   "detail": "schedule page prints 6-2 vs standings page 6-2-0"
+  },
+  {
    "check": "schedule record PIT (away)",
    "result": "PASS",
    "detail": "schedule page prints 6-2 vs standings page 6-2-0"
   },
   {
-   "check": "schedule record CIN (home)",
+   "check": "schedule record PHI (home)",
    "result": "PASS",
-   "detail": "schedule page prints 6-2 vs standings page 6-2-0"
+   "detail": "schedule page prints 2-7 vs standings page 2-7-0"
   },
   {
-   "check": "schedule record LAC (away)",
+   "check": "schedule record NYJ (away)",
+   "result": "PASS",
+   "detail": "schedule page prints 2-7 vs standings page 2-7-0"
+  },
+  {
+   "check": "schedule record LAC (home)",
    "result": "PASS",
    "detail": "schedule page prints 0-8 vs standings page 0-8-0"
   },
   {
-   "check": "schedule record BAL (home)",
+   "check": "schedule record JAX (away)",
+   "result": "PASS",
+   "detail": "schedule page prints 6-2 vs standings page 6-2-0"
+  },
+  {
+   "check": "schedule record NYG (home)",
+   "result": "PASS",
+   "detail": "schedule page prints 5-3-1 vs standings page 5-3-1"
+  },
+  {
+   "check": "schedule record LV (away)",
    "result": "PASS",
    "detail": "schedule page prints 4-5 vs standings page 4-5-0"
   },
   {
-   "check": "Week 10 bye list",
+   "check": "schedule record DEN (home)",
    "result": "PASS",
-   "detail": "repo=['CHI', 'DEN', 'PHI', 'TB'] official=['CHI', 'DEN', 'PHI', 'TB']"
+   "detail": "schedule page prints 7-2 vs standings page 7-2-0"
+  },
+  {
+   "check": "schedule record MIN (away)",
+   "result": "PASS",
+   "detail": "schedule page prints 6-2 vs standings page 6-2-0"
+  },
+  {
+   "check": "schedule record SF (home)",
+   "result": "PASS",
+   "detail": "schedule page prints 7-1 vs standings page 7-1-0"
+  },
+  {
+   "check": "schedule record CIN (away)",
+   "result": "PASS",
+   "detail": "schedule page prints 6-2 vs standings page 6-2-0"
+  },
+  {
+   "check": "schedule record WAS (home)",
+   "result": "PASS",
+   "detail": "schedule page prints 3-5-1 vs standings page 3-5-1"
+  },
+  {
+   "check": "Week 11 bye list vs slate arithmetic",
+   "result": "PASS",
+   "detail": "official=['ATL', 'CLE', 'GB', 'LA', 'NE', 'SEA'] arithmetic=['ATL', 'CLE', 'GB', 'LA', 'NE', 'SEA']"
   }
  ]
 }
