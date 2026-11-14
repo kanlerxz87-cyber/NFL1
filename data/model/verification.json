@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-13T18:30:53+00:00",
+ "generated_at": "2026-11-14T17:02:39+00:00",
  "checks": [
   {
    "name": "2026 standings (W-L-T, points for/against)",
@@ -648,8 +648,8 @@
    "name": "Scraped official injury report vs hand-transcribed sample",
    "source": "https://www.nfl.com/injuries/",
    "rows_checked": 44,
-   "rows_matched": 29,
-   "mismatches": 15,
+   "rows_matched": 27,
+   "mismatches": 17,
    "detail": [
     {
      "team": "WAS",
@@ -1491,7 +1491,7 @@
       "player": "Kerby Joseph",
       "position": "S",
       "injury": "Knee",
-      "practice": "Full Participation in Practice",
+      "practice": "Did Not Participate In Practice",
       "game": "Out",
       "player_url": "https://www.nfl.com/players/kerby-joseph/"
      },
@@ -1502,7 +1502,7 @@
       },
       "practice": {
        "nfl_fixture": "Limited Participation in Practice",
-       "scraped": "Full Participation in Practice"
+       "scraped": "Did Not Participate In Practice"
       },
       "game": {
        "nfl_fixture": null,
@@ -1592,17 +1592,26 @@
      "injury": null,
      "practice": "Limited Participation in Practice",
      "game": null,
-     "matched": true,
+     "matched": false,
      "scraped": {
       "team": "DET",
       "player": "Amon-Ra St. Brown",
       "position": "WR",
-      "injury": null,
+      "injury": "Rib",
       "practice": "Limited Participation in Practice",
-      "game": null,
+      "game": "Questionable",
       "player_url": "https://www.nfl.com/players/amon-ra-st-brown/"
      },
-     "diffs": null
+     "diffs": {
+      "injury": {
+       "nfl_fixture": null,
+       "scraped": "Rib"
+      },
+      "game": {
+       "nfl_fixture": null,
+       "scraped": "Questionable"
+      }
+     }
     },
     {
      "team": "DET",
@@ -1611,17 +1620,30 @@
      "injury": null,
      "practice": "Did Not Participate In Practice",
      "game": null,
-     "matched": true,
+     "matched": false,
      "scraped": {
       "team": "DET",
       "player": "Sione Vaki",
       "position": "RB",
-      "injury": null,
-      "practice": "Did Not Participate In Practice",
-      "game": null,
+      "injury": "Ankle",
+      "practice": "Limited Participation in Practice",
+      "game": "Questionable",
       "player_url": "https://www.nfl.com/players/sione-vaki/"
      },
-     "diffs": null
+     "diffs": {
+      "injury": {
+       "nfl_fixture": null,
+       "scraped": "Ankle"
+      },
+      "practice": {
+       "nfl_fixture": "Did Not Participate In Practice",
+       "scraped": "Limited Participation in Practice"
+      },
+      "game": {
+       "nfl_fixture": null,
+       "scraped": "Questionable"
+      }
+     }
     },
     {
      "team": "DET",
@@ -1647,15 +1669,15 @@
   {
    "name": "Mirrored feed coverage vs official report, week 10",
    "source": "https://www.nfl.com/injuries/",
-   "rows_checked": 326,
-   "rows_matched": 300,
-   "mismatches": 26,
+   "rows_checked": 345,
+   "rows_matched": 345,
+   "mismatches": 0,
    "detail": [
     {
      "team": "coverage summary",
      "player": "official rows present in feed",
-     "position": "300/326",
-     "matched": false,
+     "position": "345/345",
+     "matched": true,
      "feed": {
       "game": "0 game-status disagreements"
      }
@@ -2965,7 +2987,7 @@
   {
    "id": "V2",
    "area": "injury scrape",
-   "issue": "15 of 44 sampled rows differ from the scrape",
+   "issue": "17 of 44 sampled rows differ from the scrape",
    "examples": [
     {
      "team": "NE",
@@ -3096,13 +3118,6 @@
      }
     }
    ],
-   "source": "https://www.nfl.com/injuries/"
-  },
-  {
-   "id": "V3",
-   "area": "mirrored injury feed",
-   "issue": "The mirrored feed has 300 of 326 official week 10 rows (0 status disagreements).",
-   "examples": [],
    "source": "https://www.nfl.com/injuries/"
   },
   {
