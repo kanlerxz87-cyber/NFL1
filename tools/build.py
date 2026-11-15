@@ -165,7 +165,7 @@ def toc(items):
 BASE = open(os.path.join(ROOT, "site", "templates", "base.html"), encoding="utf-8").read()
 
 
-def write_page(filename, title, kicker, lede, body, crumb, pills=None, footer_stamp=None):
+def write_page(filename, title, kicker, lede, body, crumb, pills=None):
     pills = pills or ['<span class="pill ok">Source-linked rows</span>',
                       '<span class="pill warn">%d flagged items</span>' % counts["flags"],
                       '<span class="pill">Snapshot 2026-11-12</span>']
@@ -173,11 +173,6 @@ def write_page(filename, title, kicker, lede, body, crumb, pills=None, footer_st
            .replace("{{LEDE}}", lede).replace("{{BODY}}", body)
            .replace("{{CRUMB}}", e(crumb)).replace("{{NAV}}", nav_html(filename))
            .replace("{{PILLS}}", "".join(pills)))
-    if footer_stamp:
-        # session 543676f8-nfl1: the executive summary carries a re-verification stamp in its footer.
-        old = "NFL1 · 2026 Week 10 snapshot retrieved 2026-11-12 (UTC) ·"
-        assert out.count(old) == 1, "footer stamp template changed; update footer_stamp"
-        out = out.replace(old, footer_stamp)
     with open(os.path.join(ROOT, filename), "w", encoding="utf-8") as f:
         f.write(out)
     print("page", filename)
@@ -456,14 +451,18 @@ def page_exec():
              '<a href="flagged.html">Flagged for Review</a> page with official source links, including an unresolved '
              'template variable in the official standings heading and a conflict between the official injury report '
              'and official NFL.com news headlines.</p></div>' % counts["flags"])
-    # Live re-verification block (2026-11-15). It was hand-edited into this page on main (PR #61);
-    # it lives in a fragment file now so the page is reproducible from the generator.
-    with open(os.path.join(ROOT, "site", "fragments", "executive_reverify_2026-11-15.html"), encoding="utf-8") as fh:
-        b.append(fh.read().rstrip("\n"))
-    return write_page("executive-summary.html", "Executive summary", "Overview",
+    b.append('<h2 id="reverify">Official-source re-verification (2026-11-15 UTC)</h2>')
+    b.append('<div class="panel"><div class="tablewrap"><table class="data-table" id="tbl-reverify">'
+             '<caption>Spot-checked live NFL official pages against the committed snapshots. Snapshot facts remain time-bounded; no result row is added without its official game evidence.</caption>'
+             '<thead><tr><th scope="col">Check</th><th scope="col">Result</th><th scope="col">Finding</th><th scope="col">Official source</th></tr></thead><tbody>'
+             '<tr id="V1"><td>Standings</td><td>32 clubs checked</td><td>Committed W-L-T, PCT, PF and PA match the official 2026 standings retrieval used for this audit.</td><td><a href="https://www.nfl.com/standings/league/2026/REG">NFL standings ↗</a></td></tr>'
+             '<tr id="V2"><td>Injuries</td><td>12 rows spot-checked</td><td>Named statuses matched the live page sample. The automated 345-row snapshot has team codes but no normalized club field; club-keyed joins remain blocked (F48). Injury rows are point-in-time, not current availability guarantees.</td><td><a href="https://www.nfl.com/injuries/">NFL injury report ↗</a></td></tr>'
+             '<tr id="V3"><td>Schedule</td><td>13 Week-11 fixtures checked</td><td>Matchups, dates, kickoff times and byes match the official schedule snapshot.</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-11">NFL Week 11 schedule ↗</a></td></tr>'
+             '<tr id="V4"><td>Results corpus</td><td>BLOCKED — review F49</td><td>The verified corpus has 136 games through Week 9; official standings imply 137 completed games and the official Game Center shows WAS 24–21 NYG FINAL. The result remains out of the corpus pending Game Book-level capture and provenance; nothing was inferred or inserted.</td><td><a href="https://www.nfl.com/games/commanders-at-giants-2026-reg-10">NFL Game Center ↗</a> · <a href="https://www.nfl.com/standings/league/2026/REG">Standings ↗</a></td></tr>'
+             '</tbody></table></div><p class="note">These source checks are timestamped observations, not continuous feeds. Re-fetch before using availability or results for a decision; see Flagged for Review for evidence and gates.</p></div>')
+    return write_page("executive-summary.html", "Executive summary", "Overview", 
                       "The important details: what is verified, what is missing, why no implementation decision can reasonably be made yet, and what the site delivers.",
-                      "\n".join(b), "Executive Summary",
-                      footer_stamp="NFL1 · Week 10 snapshot retrieved 2026-11-12 (UTC); live official re-verification 2026-11-15 (UTC) ·")
+                      "\n".join(b), "Executive Summary")
 
 
 def page_requirements():

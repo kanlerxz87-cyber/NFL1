@@ -260,5 +260,15 @@
     "what": "Official 2026 division groupings (AFC/NFC x East/North/South/West) used to verify the C5 division-game flag",
     "retrieved": "2026-11-12",
     "used_for": "F36 fix verification; audit_numbers.py gates the groupings against this page"
+  },
+  {
+    "id": "S27",
+    "publisher": "National Football League (NFL.com)",
+    "url": "https://www.nfl.com/games/commanders-at-giants-2026-reg-10",
+    "kind": "Official Game Center result",
+    "what": "Washington Commanders at New York Giants, Week 10, 2026; final score and game status",
+    "retrieved": "2026-11-15",
+    "verified": true,
+    "note": "Official Game Center showed Commanders 24, Giants 21, FINAL; used only to identify the unresolved result-corpus gap, not to add a result row."
   }
 ]

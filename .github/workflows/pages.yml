@@ -14,7 +14,9 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: pages-verify
+  # Push and pull_request events are both emitted for PR commits. Keep separate groups
+  # so one event cannot cancel the other and leave a cancelled required check.
+  group: pages-verify-${{ github.event_name }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 jobs:
   build:

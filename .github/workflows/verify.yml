@@ -18,7 +18,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Install numpy and pandas
+      - name: Install analysis and site-build dependencies
         run: python -m pip install --quiet numpy pandas
       - name: Recompute derived values
         run: python3 tools/compute_correlations.py
@@ -44,8 +44,6 @@ jobs:
       # hard gate (every table row source-linked, no broken local link, no placeholder
       # cell) plus unit tests, including the spread sign-convention regression that
       # caught four false PASSes during development. Nothing above is modified.
-      - name: Install numpy and pandas for the strength study
-        run: python -m pip install --quiet numpy pandas
       - name: Strength study unit tests
         run: python3 -m unittest tests.test_strength -v
       - name: Rebuild the strength sub-site from its data layer
