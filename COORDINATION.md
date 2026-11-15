@@ -3024,3 +3024,17 @@ additive and non-overlapping with every earlier session, which are all closed.
 - **Open board defect (log, not edited):** the daily data job (`collect-data.yml`, which also runs on `arena/**` pushes) re-renders some pages with a different path than `tools/build_site_all.py`: nav links are written as `../pages/…` (e.g. `pages/luck.html`, `pages/readiness.html`), so `build_site_all.py --check` fails after each refresh commit, although every link still resolves. Owner: the session that owns `tools/build_dashboard.py` and the collect-data step. Request: make the data job end with `tools/build_site_all.py` (or make the check run after it). Logged as part of F-7810-10.
 - Follow-up PR (label corrections in the register; PR-09 wording and IN-10 count) opened from the same branch after the merge; its result is recorded here when it is merged.
 - Follow-up PR #66 (register label corrections; cross-reference SP-09 → SI-09): **MERGED** at 2026-11-15T12:38:16Z, merge commit `95618e7`. Its head `bb6b8a0` passed all four workflows. GitHub Pages: built for `8c57b7c` (later main data refresh) after the `95618e7` Pages run succeeded.
+
+---
+
+## Session `739408a8-nfl1` — claims (branch `arena/739408a8-nfl1`, base `df084b5` on `main`, 2026-11-15 UTC)
+
+Claimed before any other file change. Branch name is fixed by Arena (not `session-<id>/<task>`).
+Scope is additive; no file owned by another session is rewritten. All earlier claims on this board are `done`, `merged` or `needs review`.
+Narrow scope on purpose: most of the 100-item brief is already tracked by earlier sessions (readiness register, flags F01–F49, F-7810-01..12). This session does not re-open those; it adds the two items that were still missing.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| P1 | Pre-registration ledger: freeze the rule text, sample window and gates of every strategy that is fully specified, commit the hash before any forward result exists; list every strategy that cannot be frozen and why | in progress | `739408a8` | `data/prereg/**`, `tools/check_prereg.py`, `tests/test_prereg.py` | forward window starts after the registration commit (Week 11 onward) |
+| P2 | Live official spot-check of the brief's concrete claims (Lions game-status cells CAP-04, Seattle/Cincinnati "No Injuries Reported" CAP-03, Week 10 counts, Lamar Jackson / Huntley IR, Malik Willis reserve list) against nfl.com fetched this session; publish confirmed or refuted with the link | in progress | `739408a8` | `data/verified_739408a8/**`, `data/flags.json` (append only) | fetch_page only; bash has no nfl.com access |
+| P3 | Integration: PR `arena/739408a8-nfl1` → `main`, merge without waiting, confirm Pages, record here | unclaimed | `739408a8` | `COORDINATION.md` | after P1–P2 pass the gates |
