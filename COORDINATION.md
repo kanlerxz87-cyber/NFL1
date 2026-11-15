@@ -3724,3 +3724,11 @@ Three registered baselines now coexist and none double-scores: `PR-02` (record s
 5. Parallel open PRs respected at integration: #81, #80, #79, #77, #59, #57, #47 —
    none touch `prereg/**` or `data/prereg/**`; #80 touches `pipeline/gen_site.py` like we
    do, so whoever merges second resolves the NAV block additively (both entries keep).
+
+### Integration result (appended after the merge)
+
+| PR | [#87](https://github.com/kanlerxz87-cyber/NFL1/pull/87) `arena/0c5215c1-nfl1` → `main` |
+| Merged | 2026-11-15T13:56:07Z, `--merge`, no approval, no auto-merge. Merge commit `6a1c90c` (head `3cb457c` plus the data bot's snapshot `f5c05bd`). |
+| Checks on `6a1c90c` | all green: Verify NFL1 site, Verify NFL Decision Lab site build, Verify decision dashboard, Collect NFL data and rebuild model outputs. |
+| Pages | `pages build and deployment` success (`43721595986` for `6a1c90c`, and a second green run `43721658020`). Live check with cache-buster: <https://kanlerxz87-cyber.github.io/NFL1/prereg/registry.html?v=6a15a68> serves the prospective board with registration hashes; `prereg/forecasts.html` and `prereg/archive.html` reachable from the nav. |
+| Main verified after merge | `build_site_all.py --check`, `verify.py`, `verify_combined.py`, `check_site.py`, `validate_verified.py`, `audit_numbers.py`, `check_committed_site.py`, `check_reachability.py` (193/193), `check_generators.py`, `check_reproducible.py`, `room/verify.py`, `prereg/verify.py` (14 checks), both preregistration checkers, 198 unit tests — all pass on the merged tree (pre-merge local run; CI confirms post-merge). |
