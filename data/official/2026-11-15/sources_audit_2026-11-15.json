@@ -1,0 +1,60 @@
+{
+  "audit_id": "3738d9f0-nfl1-official-source-audit",
+  "date_utc": "2026-11-15",
+  "audit_recorded_at_utc": "2026-11-15T12:36:03Z",
+  "retrieved_by": "Arena page-fetch tool (fetch_page)",
+  "exact_response_timestamps_available": false,
+  "timestamp_note": "The timestamp records when the audit/transcription was recorded after the source responses were available, not an HTTP response timestamp. The page-fetch tool did not expose per-response timestamps or raw response bodies.",
+  "sources": [
+    {
+      "id": "NFL-STANDINGS-2026-11-15",
+      "publisher": "NFL",
+      "url": "https://www.nfl.com/standings/league/2026/reg",
+      "page_title": "2026 NFL League Standings",
+      "chunks_read": "2/2",
+      "used_for": ["standings_2026-11-15.tsv", "comparison with data/model/snapshot.json standings"]
+    },
+    {
+      "id": "NFL-WEEK11-SCHEDULE-2026-11-15",
+      "publisher": "NFL",
+      "url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+      "page_title": "NFL Week 11 Schedule 2026: Games, Times, Matchups & Tickets",
+      "chunks_read": "3/3",
+      "used_for": ["week11_schedule_2026-11-15.tsv", "comparison with data/model/snapshot.json fixtures"]
+    },
+    {
+      "id": "NFL-INJURIES-WEEK10-2026-11-15",
+      "publisher": "NFL",
+      "url": "https://www.nfl.com/injuries/",
+      "page_title": "Official Latest NFL Injury Report for Players - Week 10 of the 2026 Season | NFL.com",
+      "chunks_read": "8/8",
+      "used_for": ["injury_spotchecks_2026-11-15.tsv", "12 row spot check against data/model/official_injuries.json"]
+    }
+  ],
+  "injury_capture_boundary": {
+    "page_week": 10,
+    "model_snapshot_generated_at_utc": "2026-11-14T17:02:31+00:00",
+    "model_snapshot_rows": 345,
+    "model_snapshot_teams": 28,
+    "live_rows_transcribed_and_compared": 12,
+    "remaining_model_rows_not_independently_transcribed_from_the_2026-11-15_live_page": 333,
+    "live_page_total_row_count_independently_recounted": false,
+    "status": "partial - full current live injury report row audit remains for review",
+    "note": "All eight live-page chunks were read, but only the twelve explicitly listed rows were transcribed and checked against the model snapshot. The model row count is not presented as an independently verified live-page row count. No other injury rows are claimed as verified."
+  },
+  "standing_capture": {
+    "rows": 32,
+    "fields_transcribed": ["team code", "team name", "W", "L", "T", "PCT", "PF", "PA", "NET"]
+  },
+  "schedule_capture": {
+    "rows": 13,
+    "fields_transcribed": ["matchup", "date", "kickoff ET", "network"],
+    "byes_as_displayed": ["ATL", "CLE", "GB", "LAR", "NE", "SEA"],
+    "abbreviation_note": "The bye list text uses LAR for the Rams while the adjacent logo asset uses LA; retain the exact source convention and do not normalize it."
+  },
+  "comparison_code_aliases": {
+    "AZ": "ARI",
+    "note": "The official NFL standings/schedule page uses AZ for Arizona; the repository model uses ARI. The official capture preserves AZ verbatim. The offline verifier applies AZ-to-ARI only to comparison keys; it does not rewrite either dataset."
+  },
+  "raw_live_page_bodies_archived": false
+}

@@ -1,0 +1,141 @@
+{
+  "audit_id": "3738d9f0-nfl1-official-source-audit",
+  "audit_recorded_at_utc": "2026-11-15T12:36:03Z",
+  "result": "PASS_WITH_REVIEW",
+  "summary": {
+    "standings_rows": 32,
+    "standings_matches": 32,
+    "schedule_rows": 13,
+    "schedule_matches": 13,
+    "injury_rows_spot_checked": 12,
+    "injury_model_snapshot_rows": 345,
+    "injury_model_rows_not_independently_checked": 333,
+    "review_flags": [
+      {
+        "id": "INJURY-LIVE-ROW-COVERAGE",
+        "status": "needs review",
+        "detail": "Only 12/345 model injury rows were independently transcribed and compared with the current live report; 333 remain unverified. The model total is not claimed as the official live-page row count.",
+        "source_url": "https://www.nfl.com/injuries/"
+      }
+    ]
+  },
+  "comparison_code_aliases": {
+    "official_to_model": {
+      "AZ": "ARI"
+    },
+    "note": "Official values remain unchanged in the TSV; AZ→ARI is applied only to the comparison key."
+  },
+  "checks": [
+    {
+      "check": "audit timestamp",
+      "result": "PASS",
+      "detail": "2026-11-15T12:36:03Z"
+    },
+    {
+      "check": "standings source links and timestamps",
+      "result": "PASS",
+      "detail": "valid=32/32"
+    },
+    {
+      "check": "32 standings rows",
+      "result": "PASS",
+      "detail": "rows=32"
+    },
+    {
+      "check": "unique standings team codes",
+      "result": "PASS",
+      "detail": "unique=32"
+    },
+    {
+      "check": "standings team coverage",
+      "result": "PASS",
+      "detail": "symmetric difference after documented AZ→ARI comparison alias=[]"
+    },
+    {
+      "check": "standings row-by-row comparison",
+      "result": "PASS",
+      "detail": "field mismatches=0"
+    },
+    {
+      "check": "standings league totals balance",
+      "result": "PASS",
+      "detail": "W=136 L=136 T=2 PF=6291 PA=6291"
+    },
+    {
+      "check": "13 schedule rows",
+      "result": "PASS",
+      "detail": "rows=13"
+    },
+    {
+      "check": "unique schedule matchup keys",
+      "result": "PASS",
+      "detail": "unique=13"
+    },
+    {
+      "check": "schedule row provenance and keys",
+      "result": "PASS",
+      "detail": "each Week 11 row has official schedule and direct Game Center links"
+    },
+    {
+      "check": "schedule fixture coverage",
+      "result": "PASS",
+      "detail": "source=13 model=13 after documented AZ→ARI comparison alias; source-only=[]; model-only=[]"
+    },
+    {
+      "check": "schedule date/time row-by-row comparison",
+      "result": "PASS",
+      "detail": "field mismatches=0"
+    },
+    {
+      "check": "12 injury spot-check rows",
+      "result": "PASS",
+      "detail": "rows=12"
+    },
+    {
+      "check": "unique injury spot-check keys",
+      "result": "PASS",
+      "detail": "unique=12"
+    },
+    {
+      "check": "injury spot-check source links and timestamps",
+      "result": "PASS",
+      "detail": "valid=12/12"
+    },
+    {
+      "check": "injury spot-check comparison",
+      "result": "PASS",
+      "detail": "field mismatches=0"
+    },
+    {
+      "check": "injury incompleteness is explicitly recorded",
+      "result": "PASS",
+      "detail": "spot_checked=12 model_rows=345 not independently checked=333"
+    }
+  ],
+  "mismatches": {
+    "standings": [],
+    "schedule": [],
+    "injury_spot_checks": []
+  },
+  "league_totals": {
+    "w": 136,
+    "l": 136,
+    "t": 2,
+    "pf": 6291,
+    "pa": 6291
+  },
+  "input_sha256": {
+    "standings_2026-11-15.tsv": "ad826cffdedbe70e331824557e74adc18ecf1499b6df63630ca746abe23ac554",
+    "week11_schedule_2026-11-15.tsv": "567a956104cd16e6bd52434779fc6f588a391edc501d7c264e5360c437b3871f",
+    "injury_spotchecks_2026-11-15.tsv": "62d68bd975fcd8d653b109d26aea962bbb32686cd2491e03c1cb2b6f02727743",
+    "sources_audit_2026-11-15.json": "27916c7dd7d45084ce74690cf8a7075b33e7a8b535507fc19693d52ecd3c6e71",
+    "snapshot.json": "0dd1902ba84f6a1ff5cd7b72665b115ebca7971b40095729f41e2a2e136496d9",
+    "official_injuries.json": "f4c91e20dd5650abfff6f35e8dea8b7ed6216be3f6ceb3ab86b8d7b14b7b6885"
+  },
+  "limitations": [
+    "Offline verifier only; it does not fetch NFL pages.",
+    "Standings and Week 11 fixtures are fully transcribed and compared; the Week 10 injury report has only the twelve listed rows checked against the live page.",
+    "The remaining live injury rows were not independently transcribed from the 2026-11-15 responses. No full live-page injury row-count or full row-match claim is made.",
+    "The page-fetch tool did not provide raw page bodies or exact response timestamps; audit timestamps identify the recorded transcript, not an HTTP response instant."
+  ]
+}
