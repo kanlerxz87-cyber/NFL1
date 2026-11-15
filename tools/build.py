@@ -165,7 +165,7 @@ def toc(items):
 BASE = open(os.path.join(ROOT, "site", "templates", "base.html"), encoding="utf-8").read()
 
 
-def write_page(filename, title, kicker, lede, body, crumb, pills=None):
+def write_page(filename, title, kicker, lede, body, crumb, pills=None, footer_stamp=None):
     pills = pills or ['<span class="pill ok">Source-linked rows</span>',
                       '<span class="pill warn">%d flagged items</span>' % counts["flags"],
                       '<span class="pill">Snapshot 2026-11-12</span>']
@@ -173,6 +173,11 @@ def write_page(filename, title, kicker, lede, body, crumb, pills=None):
            .replace("{{LEDE}}", lede).replace("{{BODY}}", body)
            .replace("{{CRUMB}}", e(crumb)).replace("{{NAV}}", nav_html(filename))
            .replace("{{PILLS}}", "".join(pills)))
+    if footer_stamp:
+        # session 543676f8-nfl1: the executive summary carries a re-verification stamp in its footer.
+        old = "NFL1 · 2026 Week 10 snapshot retrieved 2026-11-12 (UTC) ·"
+        assert out.count(old) == 1, "footer stamp template changed; update footer_stamp"
+        out = out.replace(old, footer_stamp)
     with open(os.path.join(ROOT, filename), "w", encoding="utf-8") as f:
         f.write(out)
     print("page", filename)
@@ -451,9 +456,14 @@ def page_exec():
              '<a href="flagged.html">Flagged for Review</a> page with official source links, including an unresolved '
              'template variable in the official standings heading and a conflict between the official injury report '
              'and official NFL.com news headlines.</p></div>' % counts["flags"])
+    # Live re-verification block (2026-11-15). It was hand-edited into this page on main (PR #61);
+    # it lives in a fragment file now so the page is reproducible from the generator.
+    with open(os.path.join(ROOT, "site", "fragments", "executive_reverify_2026-11-15.html"), encoding="utf-8") as fh:
+        b.append(fh.read().rstrip("\n"))
     return write_page("executive-summary.html", "Executive summary", "Overview",
                       "The important details: what is verified, what is missing, why no implementation decision can reasonably be made yet, and what the site delivers.",
-                      "\n".join(b), "Executive Summary")
+                      "\n".join(b), "Executive Summary",
+                      footer_stamp="NFL1 · Week 10 snapshot retrieved 2026-11-12 (UTC); live official re-verification 2026-11-15 (UTC) ·")
 
 
 def page_requirements():
