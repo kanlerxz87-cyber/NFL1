@@ -45,9 +45,9 @@ No open claim on the board covered these files at the time of claiming (all earl
 | ID | Task | Status | Owner | File scope | Notes |
 |---|---|---|---|---|---|
 | X1 | Official capture of the nfl.com Week 10 injury report (every club, every row), immutable TSV + manifest with sha256 and counts | done | `543676f8` | `data/capture/`, `tools/check_capture.py`, `tools/build_capture_site.py`, `capture/` | replaces the stale 254-row hand copy for publication; the old file is left in place and labelled |
-| X2 | Decision-readiness table on the landing page: one row per brief requirement, the gate that blocks it, the number that would clear it, a source link | done (43 rows: 3 done, 15 partial, 9 blocked, 12 not started, 4 not assessed) | `543676f8` | `data/capture/readiness.json`, `pipeline/gen_site.py` (overview block only) | status is `done`, `partial`, `blocked` or `not started`, decided from repo evidence |
+| X2 | Decision-readiness table on the landing page: one row per brief requirement, the gate that blocks it, the number that would clear it, a source link | done as evidence (`data/capture/readiness.json`, 43 rows: 3 done, 15 partial, 9 blocked, 12 not started, 4 not assessed). The landing page shows `main`'s 82-row register from `07810d9f-nfl1` (PR #65), so this 43-row table is not rendered. | `543676f8` | `data/capture/readiness.json`, `pipeline/gen_site.py` (overview block only) | status is `done`, `partial`, `blocked` or `not started`, decided from repo evidence |
 | X3 | Flag new irregularities for the Flagged for Review page (scrape row loss, stale verified file, blank Lions designations, club code conflict, backtest figures on the leaderboard) | done (10 entries in `data/capture/flags.json`, 4 open, 6 resolved or corrections) | `543676f8` | `data/capture/flags.json`, `capture/` | every flag carries the official link that settles it |
-| X4 | Integrate: one build step, gates green, PR to `main`, merge, Pages check, record here | in progress (PR and merge: see log) | `543676f8` | `tools/build_site_all.py` (one step), generated pages, `COORDINATION.md` | |
+| X4 | Integrate: one build step, gates green, PR to `main`, merge, Pages check, record here | done. PR #64 merged 2026-11-15 12:37:32 UTC, merge commit `cf4d9aa5`; Pages build and deployment succeeded for that commit | `543676f8` | `tools/build_site_all.py` (one step), generated pages, `COORDINATION.md` | |
 
 ### Log — `543676f8-nfl1` (2026-11-15, UTC)
 
@@ -81,6 +81,10 @@ No open claim on the board covered these files at the time of claiming (all earl
 **Merge record.** Merged `origin/main` (PR #63, `dbf2aa5`) and the data bot's `3573334` into the branch. All 17 conflicts were generated pages or derived data; the evidence files differed only in timestamps. The branch took the generator output and rebuilt until stable. The bot re-runs on pushes that touch `pipeline/**` (`collect-data.yml`), so this branch receives bot commits during the session.
 
 **CI fix.** `.github/workflows/verify.yml` installed pandas only after the rebuild, but `s9cb/site.py` imports pandas during `build_site_all.py`. The install now runs before the rebuild.
+
+**Integration result (X4).** PR #64 (`arena/543676f8-nfl1` into `main`) merged with `gh pr merge --merge`, merge commit `cf4d9aa5` at 2026-11-15 12:37:32 UTC. Checks on the final head: verify ×2 pass, build pass. On `main`, for that commit: Verify NFL Decision Lab site build, Verify decision dashboard, Verify NFL1 site, pages build and deployment, and the collect workflow all succeeded. Live check: `https://kanlerxz87-cyber.github.io/NFL1/capture/index.html` serves the 347-row capture with links.
+
+**Race record.** `main` moved five times during the integration (PRs #61, #62, #63, #65 and the daily bot commit `fde0ee7`). Each time the branch merged `main`, resolved generated and bot-data conflicts by regeneration or `main`'s bot refresh, and re-ran the CI replay before pushing. Two code-level conflicts needed manual resolution: `tools/build.py` (kept `main`'s executive re-verification block; the fragment approach was dropped) and `pipeline/gen_site.py` (two readiness panels; kept `main`'s register, removed mine). The capture page is linked from the Flagged for Review page.
 
 **Deviations.** Branch name is `arena/543676f8-nfl1` (Arena-fixed, not `session-<id>/<task>`). The claim commit was rebased and the remote history reconciled by merge; no history was rewritten on origin.
 
