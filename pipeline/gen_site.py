@@ -45,6 +45,7 @@ NAV = [
     # strength/; the entry keeps it reachable from the root dashboard.
     ("room/index.html", "Decision Room"),
     ("strength/index.html", "SOS Study"),
+    ("shadow/index.html", "Shadow Baseline"),
     ("review-room/index.html", "Review Room"),
     ("research/index.html", "s9cb Research"),
     # pages produced by the other generators in this repository, kept in the shared

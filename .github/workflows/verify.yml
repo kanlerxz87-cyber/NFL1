@@ -40,6 +40,10 @@ jobs:
         run: python3 tools/check_generators.py
       - name: Verify line by line (source links, blank values, internal links)
         run: python3 tools/verify.py
+      - name: Injury scrape drift alarm (pinned counts, required fields, row-by-row vs capture)
+        run: |
+          python3 -m unittest tests/test_scrape_drift.py
+          python3 tools/check_scrape_drift.py
       - name: Audit the published numbers against the official NFL pages
         run: python3 tools/audit_official.py
       - name: Every published page must be reachable from the landing page

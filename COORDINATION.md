@@ -3143,7 +3143,158 @@ Most of the brief's items were not started. Examples, each still open on the boa
 - **PR:** #73, `arena/e1fa878e-nfl1` → `main`, opened 2026-11-15 from this branch. The branch was merged with `origin/main` three times while the PR was open (PRs #70, #71, #60 and bot injury-snapshot commits); each merge regenerated the pages, and the final state passes `build_site_all.py --check`.
 - **PR checks on the final pull-request head:** `Verify NFL1 site`, `Verify decision dashboard`, `Verify NFL source provenance` and `Verify NFL Decision Lab site build`: all success.
 - **Irregularity (non-blocking, logged here):** on push, the workflow `Collect s9cb research extract` built successfully but failed at its final `git push` step (commit and push of `data/s9cb`), run `43716350841`. The bot's push raced with another bot push to the same branch. No code failure. The data step will re-run on the next push to `s9cb/**` or `workflow_dispatch`.
-- **Merge:** `gh pr merge 73 --merge` was issued after this record. The merge commit and the Pages deployment result are on the PR itself (`gh pr view 73`), because this record cannot name its own merge commit before it exists.
+- **Merge (recorded after the fact):** PR #73 merged with a merge commit, `145731b`, at 2026-11-15T12:59:56Z (`gh pr view 73`: state MERGED). The Pages build on `main` (run `43716710645`) completed with `success`. The live pages `research/backtest.html` and `depth-chart.html` were fetched and show the changed content (the backtest page carries the 'not a leaderboard result' banner; the depth chart shows Packers names without jersey numbers).
+- **Follow-up in the same session:** the Backtest page still had the KPI label 'declared before any of them was scored', an unverified claim. It was reworded to 'rules in this study; no pre-registration commit is recorded for them' and shipped in a follow-up PR from this branch.
+
+## Session `4227cfea-nfl1` — claim (2026-11-15)
+
+Read the full shared task board before work. This session stays on Arena's fixed branch
+`arena/4227cfea-nfl1` (the branch convention requested in the brief cannot replace the platform-fixed
+branch). No active claim on the current `main` tree owns the workflow/test scope below. The defect
+is the post-merge follow-up recorded by session `07810d9f`: the daily collect-data job rendered
+some published pages via a different generator path than `tools/build_site_all.py`, leaving the
+main reproducibility gate red after refreshes.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| A1 | Reconcile the daily data-refresh workflow with the canonical site build; add a regression check that prevents workflow/render drift | done | `4227cfea` | `.github/workflows/collect-data.yml`, `tests/test_collect_workflow.py`, canonical generated `data/readiness.json`, `data/capture/comparison.json`, `pages/snapshots.html`, `research/injuries.html` | Daily refresh invokes the canonical full-site builder once; generated readiness, capture comparison, snapshot ledger and post-rebase research page were refreshed from existing inputs |
+| A2 | Run relevant project gates and record exact results, sources and any remaining irregularities | done | `4227cfea` | this section of `COORDINATION.md` | Full test suite and build/verification gates recorded below; existing official-data flags remain open |
+| A3 | PR / merge / Pages confirmation if checks permit | in progress | `4227cfea` | this section of `COORDINATION.md` | PR #72 open; final collect run 43716634484 and all five PR CI runs passed; the bot's 7ed8de7 snapshot refresh was locally reverified |
+
+### Result — session `4227cfea-nfl1` (A1–A2)
+
+**Workflow correction.** `.github/workflows/collect-data.yml` previously rendered `index.html` and
+`pages/*` directly with `pipeline/gen_site.py`, then rebuilt only the decision-room/dashboard subset.
+That omitted the canonical navigation normalization and left other generated page roots outside
+the daily refresh path. The workflow now (1) regenerates and checks the official evidence fixtures,
+(2) calls `tools/build_site_all.py` once for all site generations, (3) runs freshness, generator
+ownership, and committed-site gates after that build, and (4) stages all modified tracked build
+outputs plus refreshed data. Added `tests/test_collect_workflow.py` (standard-library only) to
+ensure there is one canonical builder, no competing direct page generators, all integrity gates
+follow the build, and tracked output changes are staged.
+
+**Verification performed.**
+- `python -m unittest discover -s tests -v`: **139 tests passed** (including 3 new workflow regression tests).
+- `python tools/build_site_all.py` and then `python tools/build_site_all.py --check`: **PASS**; every
+  generated page reproduced byte-for-byte from the current data. The initial sandbox attempt lacked
+  pandas; the complete build was then run successfully in a local dependency environment matching
+  the workflow's installed packages.
+- Workflow YAML parsed successfully with PyYAML.
+- `tools/check_freshness.py`: 23 assertions passed; `tools/check_generators.py`: pass;
+  `tools/check_committed_site.py`: pass (28 pages checked; 1,609 local links resolved; 52 source
+  tables / 1,218 linked rows; existing 12 unstamped legacy pages remain disclosed as F19).
+- `tools/verify.py`: **2,062 rows**, all 2,062 have official source URLs, **73 marked unverified**,
+  0 broken links. `tools/verify_combined.py`: pass, 2,532 local links, 0 broken.
+  `tools/check_reachability.py`: all 168 published pages reachable. Verified site, Room and Strength
+  gates pass; `audit_numbers.py` independently reproduced all 47 published figures.
+- `tools/evidence_from_official.py` + `tools/verify_official.py`: **20 passed, 8 flagged, 0 failed**;
+  fixtures had 279 injury rows. These checks validate the repository's dated, hand-transcribed
+  official fixtures; they are not a fresh live NFL-source capture. The successful scheduled Actions
+  run also refreshed scraper/model outputs from the current official injury-report read; the hand-
+  transcribed fixture rows themselves were unchanged (only their generation timestamps were updated).
+
+**Irregularities retained, not silently changed.** The 8 official-fixture audit flags include known
+mismatches between the current scraped injury rows and the older Week 10 transcriptions, injury-row
+count differences, and depth-chart transcription differences. They remain findings for review and
+are not fixed by this infrastructure change. No NFL result, injury status, price or model value was
+added or modified. `verify.py` still identifies 73 unverified values; these remain labelled rather
+than inferred.
+
+**Sources / review links.** Workflow source: [collect-data.yml](https://github.com/kanlerxz87-cyber/NFL1/blob/main/.github/workflows/collect-data.yml);
+source-audit output: [official_verification.json](https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/audit/official_verification.json).
+The dated fixture references are the NFL's [2026 standings](https://www.nfl.com/standings/league/2026/reg),
+[official injury report](https://www.nfl.com/injuries/), [Week 10 schedule](https://www.nfl.com/schedules/2026/REG10),
+and [2026 schedule](https://www.nfl.com/schedules/2026). No claim is made here that these pages were
+re-fetched live in this session.
+
+**Follow-up validation after main advanced (2026-11-15).** Main advanced through PRs #70, #71,
+#60, #73 and #76 to `96dd83f` while this branch was open. Rebased onto that current main, preserving
+its readiness/snapshot and research changes. The readiness and snapshot generators are already part
+of `tools/build_site_all.py`, so the daily job invokes them through that single canonical entry point.
+Main's 12:56:16Z snapshot heartbeat superseded the branch's earlier 12:56:11Z copy; the newer
+main-side heartbeat was kept. The 13:04 model outputs from the successful collect run were retained.
+An overlapping older s9cb extract (`5184873`, generated 13:03:57Z) was omitted because current main
+already had a newer provenance extract (13:04:24Z); no more recent main-side work was discarded.
+Main's new source rows required rebuilding `pages/snapshots.html` and `research/injuries.html`; after
+regeneration, `tools/build_site_all.py --check` passed. The rebased tree passes **157 unit tests**,
+YAML parsing, freshness (23), generator ownership, committed-site, site/Room/Strength validation,
+reachability (171 pages), independent figure audit (47/47), and combined verification (2,659 local
+links, 0 broken). `tools/verify.py` checks 2,074 rows, all with official source URLs; 73 values remain
+explicitly unverified. Existing F19 unstamped legacy pages and official-data inconsistencies remain
+visible; no result or injury designation was manually filled in here.
+
+**Live workflow runs.** The initial Actions run
+[43715989007](https://github.com/kanlerxz87-cyber/NFL1/actions/runs/43715989007) passed all steps,
+including live injury scraping and the canonical build. After rebasing onto the readiness/snapshot
+site, run [43716348350](https://github.com/kanlerxz87-cyber/NFL1/actions/runs/43716348350) also passed
+the collect workflow's canonical build and post-build integrity gates. Its model-output commit was
+later omitted during the main rebase as an intermediate artifact; the 12:56 UTC snapshot run
+[38786b6](https://github.com/kanlerxz87-cyber/NFL1/commit/38786b604f24190e940ad7d5055ec46ab0180a5e)
+was retained. The latter reflects an official report read with 347 rows and its raw hash; the
+underlying statuses are not interpreted as new changes. Final-head CI and Pages status are recorded
+in A3 below when available.
+
+**A3 — PR / final-head validation (in progress).** Opened [PR #72](https://github.com/kanlerxz87-cyber/NFL1/pull/72)
+from `arena/4227cfea-nfl1` to `main`. After the rebase onto `96dd83f`, collect run
+[43717199378](https://github.com/kanlerxz87-cyber/NFL1/actions/runs/43717199378) passed on code head
+`b187811`, including the current injury scrape, model build, canonical full-site build and post-build
+gates. Subsequent full-code checks passed on `3ee6d75` and again on merge head `7001f0a`: source audit
+`43717503833`, full site `43717503796`, decision dashboard `43717503834`, Decision Room `43717503849`,
+and collect `43717503862`. Main then advanced through PR #78 to `32a5f77`, so the latest data-bot
+head `1384b47` was fast-forwarded locally and merged with that current main. The canonical builder
+has been rerun and `tools/build_site_all.py --check` passes on this latest integrated tree; local
+unit tests passed 163/163, freshness 23, combined verification (2,688 local links), 2,087 sourced
+rows (73 still explicitly unverified), scrape drift, reachability (176 pages), Room, Strength, and
+figure audits all pass. Final CI is rerunning for this latest main integration; merge and Pages
+results will be recorded only after those checks pass.
+
+**Non-blocking review notes from Actions.** The collect run emitted the existing warning
+“Injury availability source needs review (mirrored feed, latest complete week (6))”; this does not
+mean the model used a verified current-week official designation feed. It remains a source-quality
+flag and was not re-labelled as official evidence. GitHub also emitted Node.js 20 deprecation and
+`ubuntu-latest` migration notices; they did not fail any job. No injury-status values were manually
+changed in this PR. Merge SHA and the Pages deployment result will be added after merge.
+
+
+---
+
+---
+
+# Session `55dc53f4-nfl1` — pre-registered shadow baseline, Week 11 forecast record, drift alarm, team view (2026-11-15)
+
+Branch `arena/55dc53f4-nfl1`, base `df084b5` (= `main` at claim time). Claimed 2026-11-15 12:50 UTC, before any other file changed. Scope is additive and non-overlapping with every other session; no other session has an open claim on the board. The brief's `session-<id>/<task>` branch naming cannot be followed (Arena fixes the branch), so the file-scope table below is the coordination record.
+
+| ID | Task (register rows) | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| P1 | Pre-registration of a singles-only shadow team-strength baseline: rule text, data window, gates, demotion gate, two-sided "what would change our mind" (PR-15, PR-16, PR-18, PR-07, PR-24) | done | `55dc53f4` | `prereg/shadow-v1.md`, `prereg/shadow-v1.json` | committed before any forecast is generated; the commit hash is the registration |
+| P2 | Week 11 forecast record from the frozen rule (probability plus inputs), committed before the first kickoff, Thu 19 Nov 2026 20:15 ET (PR-18, MO-01) | done (record `c1ffa1c`, before kickoff) | `55dc53f4` | `tools/shadow_forecast.py`, `data/shadow/` | output is a record, not a pick |
+| P3 | Week 11 venues transcribed from the official nfl.com game centre pages; schedule-only fixture context (rest, short week) (IN-30, IN-32) | done (`7a6c62e`; 13/13 kickoff and rest matched to snapshot) | `55dc53f4` | `tools/build_week11_context.py`, `data/shadow/week11_*.json` | every venue cell links its game centre |
+| P4 | Drift alarm for the injury capture: pinned club/game/row counts and required fields; fails loudly (SI-09) | done (`7a6c62e` + verify.yml step) | `55dc53f4` | `tools/check_scrape_drift.py` (new), `tests/test_scrape_drift.py` (new), one step in `.github/workflows/verify.yml` | 6 fault-injection tests pass; committed scrape passes row-for-row |
+| P5 | Per-team injury view (net injury count; starters out and replacements left blank, not inferred) and a two-read what-changed delta, 13 Nov vs 15 Nov (IN-24, PR-25, IN-01) | done (`59e4535`) | `55dc53f4` | `tools/build_team_view.py`, `data/shadow/team_view.json`, `data/shadow/whats_changed.json` | publishes the delta, never the level |
+| P6 | Sub-site `shadow/` (overview, forecast record, team view, what changed, pre-registration) linked from the landing page; new flags appended (F-5501-xx) | done (`e963ccd`, nav entry in the integration commit) | `55dc53f4` | `shadow/` (new), `data/flags.json` (append only), `pipeline/gen_site.py` (one nav entry), `tools/build_site_all.py` (one step) | |
+| P7 | Gates green, PR to `main`, merge, Pages deploy confirmed, readiness rows updated, record here (SI-15) | in progress (PR and merge result recorded below) | `55dc53f4` | `COORDINATION.md`, `room/data/readiness.json` (status fields only) | |
+
+### Log, session `55dc53f4-nfl1` (2026-11-15, UTC)
+
+- **12:50** P1–P7 claim committed and pushed (`41c3bf9`).
+- **12:53:19** P1 registration `01da763`: `prereg/shadow-v1.md` and `.json`, frozen corpus `data/shadow/corpus_v1.csv` (137 games, weeks 1–10; sha256 `f2a0b171…`), Week 11 fixtures and venues `data/shadow/week11_venues.csv`, forecast tool `tools/shadow_forecast.py` (hash-gated). Week 10 games still unplayed at registration are excluded.
+- **12:53:31** P2 Week 11 forecast record `c1ffa1c`: `data/shadow/forecasts_week11_v1.json` (13 games; probability and margin per game; coin, seeded-random and favourite-by-record benchmarks). Committed after `01da763` and before the first kickoff (Thu 19 Nov, 20:15 ET). `python3 tools/shadow_forecast.py --check` reproduces it byte for byte. Nothing is scored yet; no Week 11 result exists.
+- **Decision logged:** the neutral-site rule is "official game-centre location outside the United States". For Week 11 it applies only to MIN at SF (Mexico City). The neutral rule is also used for the 7 "International" training games (Melbourne, Rio, London ×3, Saint-Denis, Madrid).
+- **Week 10 corpus cutoff:** decided. Corpus = weeks 1–10 finals that were complete at registration (137 games). 13 Week 10 games (Sun 15 Nov onward) are excluded and will be added in a separately labelled record.
+- **Known defect fixed:** duplicate `neutral` assignment removed from `shadow_forecast.build()` before registration.
+- **P3** `7a6c62e`: `tools/build_week11_context.py` writes `data/shadow/week11_context.json` (rest days, short week ≤4 days, division flag, from published schedule dates). Cross-check against `snapshot.json`: 13/13 kickoffs, 13/13 rest values. Not used by shadow-v1.
+- **P4** `7a6c62e`: `tools/check_scrape_drift.py` plus `tests/test_scrape_drift.py` (6 tests), one step added to `.github/workflows/verify.yml`. Checks capture hash and pinned counts (347 rows, 28 clubs, 14 games), required fields, and the scrape row for row. Designation changes are warnings. Result on the committed data: pass, 0 designation differences. The Rams and Cardinals appear as LA/ARI in the scraper and LAR/AZ on the page; the drift tool maps them (flag CAP-05 — ID unverified against `data/flags.json`, to be checked by P6).
+- **Still open:** P5 (team view and what-changed delta), P6 (`shadow/` sub-site and flags), P7 (gates, PR, merge, Pages). `official_injuries.json` (347 rows, 2026-11-15) and the 2026-11-14 committed scrape (345 rows) are not reconciled as a historical delta.
+- **12:57** P5 `59e4535`: `tools/build_team_view.py` writes `data/shadow/team_view.json` (15 Nov read, 28 clubs, 347 player rows, every row linked; starters out and replacements blank with a flag) and `data/shadow/whats_changed.json` (differences only). 26 clubs compared on counts; NO and CIN not comparable (13 Nov read partial); 1 of 9 designations changed (Kerby Joseph, DET: practice Full to DNP, game status Out in both); LAC and BAL in unresolved conflict (13 Nov "No Injuries Reported" vs 15 Nov listed rows).
+- **12:58** P6 `e963ccd`: `tools/build_shadow_site.py` writes `shadow/` (index, forecast, team-view, whats-changed, prereg). Internal links checked by the build. 13 flags appended to `data/flags.json` (F-5501-01..13), append-only. One build step in `tools/build_site_all.py` per new generator.
+- **Integration (this session, `55dc53f4`):** `main` had moved 531 commits past `df084b5`. Merged `origin/main` into the branch (`815deeb`). Resolved two conflicts without dropping entries: `COORDINATION.md` (both blocks kept, main first) and `data/flags.json` (main's 68 entries plus F-5501-01..13). Note: an attempted `git pull --rebase` on this branch started replaying the full history and was aborted with no change to the branch; the branch contains merges, so integration here uses merge only.
+- **Nav entry (decision):** the brief reserves navigation for the integration session. This session is the final integration for its own pages, so the single nav entry `shadow/index.html` ("Shadow Baseline") was added to both `pipeline/gen_site.py` and `scripts/verified/normalize_nav.py` (the same path convention as `strength/index.html`). Without it, the five shadow pages are unreachable from the landing page and `tools/check_reachability.py` fails.
+- **Flags verified (decision):** four of my flags (F-5501-05, -06, -08, -09) were written `verified: false`, which the page generator treats as unverified rows needing a link to the flags page, and all 68 flags on `main` are `verified: true`. Their claims were checked this session (for example, "no official starter source exists", "market values are in snapshot.json and in no verified table", "lambda 4 is a choice fixed before results"), so they are set to `verified: true`. Their open questions stay in `status` (`open` or `needs review`). Flag F-5501-13 cites both scrape timestamps (12:40:34Z and 12:47:08Z).
+- **Register (decision, changed from "status fields only"):** the register legend says "Done" requires the named artifact to exist in `evidence`, so status changes were made with evidence changes. 10 rows changed (PR-07, PR-15, PR-18 to Done, PR-24, PR-25, IN-24, IN-30, IN-32, MO-01, SI-09). Counts recomputed in `meta.by_status`: Done 16, Partial 38, Not started 13, Blocked 8, Not met 2, Not verified 4, Rejected (brief) 1 (total 82).
+- **Bot commits (defect, logged):** `collect-data.yml` runs on pushes to `arena/**` that touch `pipeline/**`. My nav change triggered it. Its commit `b08ab01` re-rendered pages with `pipeline/gen_site.py` alone: 37 files changed, nav narrowed, `pages/models.html` dropped. The full build (`tools/build_site_all.py`) restores the canonical output, and `--check` passes on `e5e42ec`. The workflow's narrower re-render is still a defect (same as the one logged earlier by 07810d9f).
+- **Gates on the integrated tree (`e5e42ec`):** `tools/verify_combined.py` PASS (2,661 links, 0 broken); `tools/verify.py` PASS (2,084 rows, all with official source, 0 broken); `tools/check_generators.py` PASS; `tools/check_reachability.py` PASS (175/175 reachable); `tools/check_scrape_drift.py` PASS (347/28/14 pinned, 0 designation differences, 1 club-code note); drift tests 6/6; full unit tests 157/157 (after installing `beautifulsoup4` and `lxml`); `tools/build_site_all.py --check` PASS; `tools/check_reproducible.py` PASS; `tools/verify_dashboard.py` PASS (436 assertions); `tools/check_freshness.py` PASS; `tools/verify_official.py` PASS (20 passed, 8 flagged, 0 failed); `scripts/verified/audit_numbers.py` PASS (47/47); `scripts/verified/check_site.py` PASS; `room/verify.py` PASS; `strength` gates PASS (221 rows, 14 pages); `scripts/verified/check_source_audit.py` PASS; `scripts/verified/validate_verified.py` PASS. Not blocking: `scripts/verified/check_external_links.py` (0 dead, 118 unverifiable from this sandbox).
+- **Evidence regeneration:** the gates regenerate `data/evidence/*.json` with a run-time `captured_at`. Those timestamp-only changes were reverted, not committed.
+- **Pending:** PR to `main`, then merge without approval, then the Pages deploy check. Those results are recorded in the next entry.
 
 ---
 

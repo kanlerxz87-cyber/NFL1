@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-15T13:02:48+00:00",
+ "generated_at": "2026-11-15T13:13:07+00:00",
  "evidence": {
   "season": 2026,
   "week_complete": 10,
@@ -2176,6 +2176,149 @@
    "src": "S01",
    "data_src": "S01",
    "action": "Automate a full cell-by-cell re-read in GitHub Actions at each capture (the Arena sandbox cannot reach nfl.com directly), and publish the mismatch count.",
+   "verified": true,
+   "retrieved": "2026-11-15"
+  },
+  {
+   "id": "F-5501-01",
+   "category": "Results corpus is partial for Week 10",
+   "description": "Only one Week 10 final was read and recorded: Commanders 24, Giants 21 (Thu 12 Nov, https://www.nfl.com/games/commanders-at-giants-2026-reg-10). The other 13 Week 10 games were scheduled for Sun 15 Nov onward and were unplayed at registration (https://www.nfl.com/schedules/2026/by-week/week-10).",
+   "impact": "shadow-v1 is trained on 137 games (weeks 1-10 finals complete at registration). The 13 later Week 10 games are excluded and enter only in a later, separately labelled record.",
+   "status": "needs review",
+   "src": "S06",
+   "action": "Read the 13 finals after they are played and add them in a separate, labelled record. Do not edit the registered corpus.",
+   "verified": true,
+   "retrieved": "2026-11-15"
+  },
+  {
+   "id": "F-5501-02",
+   "category": "Injury report conflict for LAC and BAL between 13 Nov and 15 Nov",
+   "description": "The 13 Nov count audit (data/official/2026-11-13/injury_report_counts_2026-11-13.py, read of https://www.nfl.com/injuries/) records Los Angeles Chargers (LAC) and Baltimore Ravens (BAL) as 'No Injuries Reported' (0 rows). The 15 Nov read of https://www.nfl.com/injuries/league/2026/reg10 lists 19 LAC rows and 10 BAL rows.",
+   "impact": "Either the report changed between the two reads or one read is wrong. The record cannot tell which. Both are shown on whats-changed with the conflict flagged. No value is chosen.",
+   "status": "needs review",
+   "src": "S01",
+   "action": "Re-read the official page for LAC and BAL, and record the capture time. Do not reconcile by inference.",
+   "verified": true,
+   "retrieved": "2026-11-15"
+  },
+  {
+   "id": "F-5501-03",
+   "category": "13 Nov injury read is partial and holds counts, not a transcript",
+   "description": "The 13 Nov read gives per-club row counts for 26 clubs and 9 player designations. NO and CIN are partial (table began mid-page or fell between page chunks). No full 13 Nov transcript exists in the repository.",
+   "impact": "Only 26 clubs can be compared on counts and 9 players on designations. A player-by-player delta is not claimed. Team view and what-changed say so.",
+   "status": "needs review",
+   "src": "S01",
+   "action": "Capture the full page on the next read, with a timestamp, so the two reads can be compared row for row.",
+   "verified": true,
+   "retrieved": "2026-11-15"
+  },
+  {
+   "id": "F-5501-04",
+   "category": "Kerby Joseph (DET): practice status changed between reads",
+   "description": "On the 13 Nov read, Kerby Joseph (DET, S) was listed with Full Participation in Practice and game status Out. On the 15 Nov read he is listed with Did Not Participate In Practice and game status Out. Source: https://www.nfl.com/injuries/ (13 Nov) and https://www.nfl.com/injuries/league/2026/reg10 (15 Nov).",
+   "impact": "This is the only designation change among the 9 compared. Game status is unchanged.",
+   "status": "needs review",
+   "src": "S01",
+   "action": "None beyond keeping the change visible on what-changed.",
+   "verified": true,
+   "retrieved": "2026-11-15"
+  },
+  {
+   "id": "F-5501-05",
+   "category": "Starters out and replacements are blank in the team view",
+   "description": "The team view has no official source for starters or replacements. nfl.com publishes no depth-chart page (checked on 13 Nov, see data/official/2026-11-13/sources.json, S-NFL404). Club depth charts are unofficial and partly image-only (for example, Houston).",
+   "impact": "starters_out and replacements are blank on every club. They are not inferred.",
+   "status": "open",
+   "src": "S01",
+   "action": "Add an official source for starters, or keep the cells blank.",
+   "verified": true,
+   "retrieved": "2026-11-15"
+  },
+  {
+   "id": "F-5501-06",
+   "category": "Week 11 market lines are unverified and not used",
+   "description": "data/model/snapshot.json carries market_spread_home and market_total for the 13 Week 11 games. No official source for those values exists in the repository.",
+   "impact": "shadow-v1 does not use them. They appear on no shadow page.",
+   "status": "needs review",
+   "src": "S06",
+   "action": "Verify against a timestamped source before any use. None is approved.",
+   "verified": true,
+   "retrieved": "2026-11-15"
+  },
+  {
+   "id": "F-5501-07",
+   "category": "MIN at SF is a neutral site under the registered rule",
+   "description": "The official game centre (https://www.nfl.com/games/vikings-at-49ers-2026-reg-11) lists the venue as Estadio Banorte, Mexico City, although nfl.com names SF as the home club. Under the registered rule (official location outside the United States), the game is neutral: h = 0.",
+   "impact": "The forecast for MIN at SF uses no home-field term. Stated in the record.",
+   "status": "needs review",
+   "src": "S06",
+   "action": "None unless the rule is changed by a new registration.",
+   "verified": true,
+   "retrieved": "2026-11-15"
+  },
+  {
+   "id": "F-5501-08",
+   "category": "Neutral-site identification for training games relies on the schedule note",
+   "description": "Seven training games carry an 'International' note on the official week page (https://www.nfl.com/schedules/2026/by-week/week-1 to week-9): SF-LA (Melbourne), BAL-DAL (Rio de Janeiro), IND-WAS, PHI-JAX, HOU-JAX (London), PIT-NO (Saint-Denis), CIN-ATL (Madrid). Each game centre was not separately re-read for weeks 1-9.",
+   "impact": "Shadow-v1 uses these seven as neutral. A wrong neutral flag would bias the ratings.",
+   "status": "needs review",
+   "src": "S06",
+   "action": "Re-read the seven game centres and record the venue for each.",
+   "verified": true,
+   "retrieved": "2026-11-15"
+  },
+  {
+   "id": "F-5501-09",
+   "category": "Model parameters are choices, fixed before results",
+   "description": "shadow-v1 fixes penalty lambda = 4.0, the neutral-site rule and sigma from the corpus, before any Week 11 result exists. They are not drawn from an official publication. Lambda was not tuned.",
+   "impact": "The forecast depends on these choices. Any change needs a new registration (shadow-v2), logged on COORDINATION.md.",
+   "status": "open",
+   "src": "S24",
+   "action": "None for shadow-v1. Record any change as a new version.",
+   "verified": true,
+   "retrieved": "2026-11-15"
+  },
+  {
+   "id": "F-5501-10",
+   "category": "Scraper health threshold is too loose; drift alarm added",
+   "description": "pipeline/scrape_injuries.py passes a scrape with 150 or more rows and 24 or more clubs (see line ~190). A short scrape of 150 rows would pass.",
+   "impact": "tools/check_scrape_drift.py (added P4) pins 347 rows, 28 clubs and 14 games to the 15 Nov capture manifest, and fails on any gap. The scraper itself is not changed.",
+   "status": "needs review",
+   "src": "S01",
+   "action": "Tighten the scraper threshold in a later session, after the pin is verified in CI.",
+   "verified": true,
+   "retrieved": "2026-11-15"
+  },
+  {
+   "id": "F-5501-11",
+   "category": "Club-code conflict: LA/LAR and AZ/ARI across sources",
+   "description": "The 13 Nov count audit uses LA for the Rams. The 15 Nov capture and the page use LAR. The scraper writes LA and ARI, and the page uses AZ for the Cardinals. This is flag CAP-05 in data/capture/flags.json.",
+   "impact": "Mapped in tools/check_scrape_drift.py and tools/build_team_view.py, with each mapping listed. A join on raw codes would silently drop the Rams and Cardinals.",
+   "status": "needs review",
+   "src": "S01",
+   "action": "Standardise one code set in the capture and the scraper.",
+   "verified": true,
+   "retrieved": "2026-11-15"
+  },
+  {
+   "id": "F-5501-12",
+   "category": "Older 12 Nov 'No Injuries Reported' list conflicts with the 13 Nov count audit",
+   "description": "data/verified/no_injuries_week10.csv (retrieved 2026-11-12T05:30Z) lists SEA, CIN, LAC and BAL as 'No Injuries Reported'. The 13 Nov count audit records 15 rows for SEA and a partial read for CIN. LAC and BAL are also in conflict on 15 Nov (see F-5501-02).",
+   "impact": "The 12 Nov list is stale and is not used by the team view or the delta.",
+   "status": "needs review",
+   "src": "S01",
+   "action": "Mark data/verified/no_injuries_week10.csv as superseded in a later session.",
+   "verified": true,
+   "retrieved": "2026-11-15"
+  },
+  {
+   "id": "F-5501-13",
+   "category": "Stored injury file count differs from earlier flag text",
+   "description": "data/model/official_injuries.json was regenerated 2026-11-15T12:40:34Z (html sha256 a478bbf0\u2026) and then, on main, at 2026-11-15T12:47:08Z (html sha256 27cc025a\u2026); both have 347 rows and status ok. Flag F48 and F-7810-01 describe the 345-row file from 2026-11-14. The delta and the drift alarm both use the 347-row capture.",
+   "impact": "The older flags describe a file that is no longer committed. The current file matches the 15 Nov capture row for row (tools/check_scrape_drift.py).",
+   "status": "needs review",
+   "src": "S01",
+   "action": "Update F48 and F-7810-01 in the integration session, or mark them superseded.",
    "verified": true,
    "retrieved": "2026-11-15"
   },
