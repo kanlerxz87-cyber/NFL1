@@ -1,0 +1,183 @@
+{
+  "schema": "prereg-registry/1",
+  "session": "739408a8-nfl1",
+  "registered_utc": "2026-11-15T12:51:45Z",
+  "registration_note": "Rules, window, scoring and gates are fixed here before any forward result exists. The git commit that adds this file is the registration; its hash is the registration identifier.",
+  "window": {
+    "sample": "2026 regular-season games from Week 11 onward, each forecast recorded before its own kickoff",
+    "weeks_in_scope": "11-18 (Week 11 is the first frozen ledger)",
+    "first_kickoff_et": "2026-11-19T20:15 (Colts at Texans, official schedule)"
+  },
+  "scoring": {
+    "metric": "Brier score on the home-win probability: mean of (p_home - y)^2, y = 1 if the home team won, else 0",
+    "unit": "game; each game is one forecast per registered forecaster",
+    "exclusions": "ties, postponed and cancelled games are excluded and their count is published",
+    "benchmark": "PR-01",
+    "skill": "Brier skill score BSS = 1 - BS(forecaster) / BS(PR-01)",
+    "uncertainty": "week-cluster bootstrap: resample whole weeks with replacement, 10000 draws, seed 20261115",
+    "minimum_games": 100,
+    "multiplicity": "registered trials = 2; two-sided alpha 0.05 Bonferroni-corrected to 0.025, so a pass needs the 1.25th percentile of the bootstrap BSS distribution to be above 0",
+    "pass_rule": "PASS only if scored games >= minimum_games AND the corrected lower bound of BSS > 0. Otherwise the result is published as NOT PASSED.",
+    "roi": "not computed: no official source publishes NFL prices (flag F09 on the Flagged page). ROI cannot be a gate until a price source is registered."
+  },
+  "trials_registered": 2,
+  "forecasters": [
+    {
+      "id": "PR-01",
+      "name": "No-skill benchmark (constant 0.5)",
+      "track": "Single bet (home-win probability)",
+      "forecast": "p_home = 0.5 for every game",
+      "inputs": [],
+      "role": "benchmark against which Brier skill is measured",
+      "status": "registered",
+      "rule_sha256": "711e282f56784dcd5cd4c69b2e5f02e7eace2426207f1ddcf4b42be1159a4285"
+    },
+    {
+      "id": "PR-02",
+      "name": "Record-share forecast",
+      "track": "Single bet (home-win probability)",
+      "forecast": "p_home = PCT_home / (PCT_home + PCT_away), where PCT is the official standings value as printed at the time of the forecast",
+      "inputs": [
+        "https://www.nfl.com/standings/league/2026/reg",
+        "https://www.nfl.com/schedules/2026/by-week/week-11"
+      ],
+      "role": "candidate forecaster, scored against PR-01",
+      "status": "registered",
+      "rule_sha256": "fe5f253adf27f3a2dbee064d01ef8ef3aa9ffc053ceb90cc82459da6851e0e76"
+    },
+    {
+      "id": "PR-03",
+      "name": "Seeded random control",
+      "track": "Control (random picks)",
+      "forecast": "p_home = u, where u = int(sha256('20261115:' + game_id)[:13], 16) / 16**13",
+      "inputs": [
+        "https://www.nfl.com/schedules/2026/by-week/week-11"
+      ],
+      "role": "control: a forecaster with no information; expected Brier near 1/3",
+      "status": "registered",
+      "rule_sha256": "9b1e58468d8d5d60e0c588e25d656edaef04b294bb0cd2b9bd12d2d4cee7802a"
+    }
+  ],
+  "not_registrable": [
+    {
+      "id": "ST-01",
+      "name": "Net-points strength differential",
+      "status": "not_registrable",
+      "reason": "formula has an unfixed coefficient (spread_own = f(NPG_home - NPG_away); f is symbolic, coefficient blank)",
+      "src": [
+        "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strategies.json",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "id": "ST-02",
+      "name": "Points-allowed total",
+      "status": "not_registrable",
+      "reason": "formula has an unfixed coefficient (total_own = f(PA_pg_home + PA_pg_away); coefficients blank)",
+      "src": [
+        "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strategies.json",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "id": "ST-03",
+      "name": "Defensive backup-depth deficiency",
+      "status": "not_registrable",
+      "reason": "formula has an unfixed coefficient (delta_rank = depth_rank(starter) - depth_rank(actual); effect size blank)",
+      "src": [
+        "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strategies.json",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "id": "ST-04",
+      "name": "Offensive backup-depth deficiency",
+      "status": "not_registrable",
+      "reason": "formula has an unfixed coefficient (delta_rank = depth_rank(starter) - depth_rank(actual); effect size blank)",
+      "src": [
+        "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strategies.json",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "id": "ST-05",
+      "name": "Practice-status trend",
+      "status": "not_registrable",
+      "reason": "formula has an unfixed coefficient (trend = ordinal(Full) - ordinal(first report); coefficient blank)",
+      "src": [
+        "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strategies.json",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "id": "ST-06",
+      "name": "Designation-gated availability",
+      "status": "not_registrable",
+      "reason": "formula has an unfixed coefficient (indicator = 1 if designation published; effect size blank)",
+      "src": [
+        "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strategies.json",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "id": "ST-07",
+      "name": "Two-leg parlay with correlation guard",
+      "status": "not_registrable",
+      "reason": "formula has an unfixed coefficient (P(parlay) = P(A) x P(B) only if corr(A,B) is measured; corr blank)",
+      "src": [
+        "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strategies.json",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "id": "ST-08",
+      "name": "Same-game player-prop combo",
+      "status": "not_registrable",
+      "reason": "formula has an unfixed coefficient (joint model requires corr(prop_A, prop_B); corr blank)",
+      "src": [
+        "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strategies.json",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "id": "ST-09",
+      "name": "Prop availability gate",
+      "status": "not_registrable",
+      "reason": "a filter on official status, not a forecast; no official prop prices exist to score it",
+      "src": [
+        "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strategies.json",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "id": "ST-10",
+      "name": "Backup-exposure index",
+      "status": "not_registrable",
+      "reason": "formula has an unfixed coefficient (index = weighted sum; weights blank until validated)",
+      "src": [
+        "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strategies.json",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "id": "CTRL-FAV",
+      "name": "Favourites-only control",
+      "status": "not_registrable",
+      "reason": "needs the market favourite; no official source publishes NFL prices (flag F09). A record-based favourite (PR-02) is used instead.",
+      "src": [
+        "https://www.nfl.com/standings/league/2026/reg"
+      ]
+    }
+  ],
+  "leaderboard_rules": [
+    {
+      "id": "LB-ADMIT",
+      "rule": "Only forward forecasts recorded before kickoff and scored after the final whistle may appear on the leaderboard. Backtest or in-sample results never appear on the leaderboard.",
+      "src": [
+        "https://www.nfl.com/schedules/2026/by-week/week-11"
+      ]
+    }
+  ],
+  "inputs_file": "data/prereg/official_inputs_2026-11-15.json",
+  "inputs_sha256": "d7aafd7c3fb59538e506276420420096d3d87732c6476a8c8366dca73184c6c8"
+}

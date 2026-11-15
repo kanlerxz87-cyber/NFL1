@@ -293,12 +293,22 @@
   },
   {
     "id": "S31",
-    "publisher": "Seattle Seahawks (seahawks.com)",
-    "url": "https://www.seahawks.com/team/depth-chart/",
-    "kind": "Official club depth chart",
-    "what": "Seahawks depth chart, offense/defense/special teams tables (chunk 1 of 2 read)",
+    "publisher": "National Football League (NFL.com)",
+    "url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+    "kind": "Official league schedule, Week 11 2026",
+    "what": "2026 Week 11 schedule: 13 games with kickoff times and networks; teams on bye (ATL, CLE, GB, LAR, NE, SEA)",
     "retrieved": "2026-11-15",
     "verified": true,
-    "note": "Captured verbatim in data/depth/official_raw/SEA_2026-11-15.md. No as-of label appears in the captured portion."
+    "note": "Read in session 739408a8-nfl1 with fetch_page (3 chunks)."
+  },
+  {
+    "id": "S32",
+    "publisher": "National Football League (NFL.com)",
+    "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-thursday-nov-5",
+    "kind": "Official league news roundup (headlines and transactions)",
+    "what": "NFL news roundup, Thu Nov 5 2026: Lamar Jackson placed on injured reserve; Tyler Huntley placed on IR",
+    "retrieved": "2026-11-15",
+    "verified": true,
+    "note": "Read in session 739408a8-nfl1 with fetch_page (chunk 0 of 4)."
   }
 ]

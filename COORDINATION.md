@@ -3081,6 +3081,44 @@ additive and non-overlapping with every earlier session, which are all closed.
 
 ---
 
+## Session `739408a8-nfl1` — claims (branch `arena/739408a8-nfl1`, base `df084b5` on `main`, 2026-11-15 UTC)
+
+Claimed before any other file change. Branch name is fixed by Arena (not `session-<id>/<task>`).
+Scope is additive; no file owned by another session is rewritten. All earlier claims on this board are `done`, `merged` or `needs review`.
+Narrow scope on purpose: most of the 100-item brief is already tracked by earlier sessions (readiness register, flags F01–F49, F-7810-01..12). This session does not re-open those; it adds the two items that were still missing.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| P1 | Pre-registration ledger: freeze the rule text, sample window and gates of every strategy that is fully specified, commit the hash before any forward result exists; list every strategy that cannot be frozen and why | done | `739408a8` | `data/prereg/**`, `tools/check_prereg.py`, `tests/test_prereg.py` | forward window starts after the registration commit (Week 11 onward) |
+| P2 | Live official spot-check of the brief's concrete claims (Lions game-status cells CAP-04, Seattle/Cincinnati "No Injuries Reported" CAP-03, Week 10 counts, Lamar Jackson / Huntley IR, Malik Willis reserve list) against nfl.com fetched this session; publish confirmed or refuted with the link | done | `739408a8` | `data/verified_739408a8/**`, `data/flags.json` (append only) | fetch_page only; bash has no nfl.com access |
+| P3 | Integration: PR `arena/739408a8-nfl1` → `main`, merge without waiting, confirm Pages, record here | in progress | `739408a8` | `COORDINATION.md` | after P1–P2 pass the gates |
+
+### Log — `739408a8-nfl1` (2026-11-15, UTC)
+
+**P1 — pre-registration (done).** Files: `data/prereg/official_inputs_2026-11-15.json` (32 official standings rows, 13 Week 11 games, with source URLs), `data/prereg/registry.json` (frozen rules, scoring, gates, multiplicity, 11 not-registrable rows with reasons), `data/prereg/forecasts_2026_wk11.json` (13 forecasts recorded `2026-11-15T12:51:45Z`; first kickoff `2026-11-20T01:15Z`), `tools/prereg.py` (`freeze`, `forecast`, `check`, `render`; each refuses to overwrite or to forecast after kickoff), `tests/test_prereg.py` (10 tests, pass), `prereg/index.html` (rendered; every row linked to nfl.com).
+- Forecasters frozen: PR-01 constant 0.5 (benchmark); PR-02 `PCT_home / (PCT_home + PCT_away)` from official standings; PR-03 seeded random control (sha256 of seed and game id). Pass rule: at least 100 scored games and the corrected lower bound of Brier skill above 0 (week-cluster bootstrap, 10,000 draws, Bonferroni over 2 trials).
+- Not registrable (listed, not scored): ST-01 to ST-08 and ST-10 (unfixed coefficient in `data/strategies.json`); ST-09 (filter, no prop prices); favourites-only control (no official prices, flag F09).
+- ROI is not computed. No official source publishes NFL prices.
+- No result is shown. No Week 11 game was final when this was built.
+- Leaderboard rule LB-ADMIT (backtests never admitted) is frozen. The warning that `data/s9cb/leaderboard.json` still holds backtest rows is printed by `check` and remains open as F-7810-09.
+
+**P2 — official spot-check (done).** Sources read with `fetch_page` on 2026-11-15: `https://www.nfl.com/injuries/league/2026/reg10` (8 of 8 chunks), `https://www.nfl.com/standings/league/2026/reg`, `https://www.nfl.com/schedules/2026/by-week/week-11`, `https://www.baltimoreravens.com/team/depth-chart`, `https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-thursday-nov-5`. Record: `data/verified_739408a8/spot_check.json` (9 claims, each with its source and verdict) and `live_counts_2026-11-15.json`.
+- CONFIRMED: the committed capture (347 rows) matches the live page on the row count for all 28 clubs. The Lions cells (Joseph, Mays, Reed) are Out on the live page. SEA 15, CIN 9, LAC 19 and BAL 10 rows are populated on the live page. CAP-03 and CAP-04 are resolved for the capture. The stale hand copy is still wrong (flag P2-01).
+- CONFIRMED: Jackson and Huntley placed on IR (official NFL.com roundup, Nov 5). The Ravens chart lists neither (P2-05).
+- CONFIRMED: Malik Willis on IR (official headline) and absent from the Dolphins table (P2-06).
+- CONFIRMED: 32 of 32 committed standings rows match the live page once the committed code ARI is read as AZ.
+- NEW CONFLICT: the Ravens chart lists Jaylinn Hawkins as SS starter; the official report lists him Out (P2-02). Stanley and Campbell have blank game status while on the chart as starters (P2-03).
+- PRESS ONLY: the Brissett trade (ESPN, Nov 6). The official release was not read (P2-04).
+- Not checked: every one of the 347 live rows (per-club counts only, plus the rows named above). The VR/VQ IDs in the brief remain untraceable (F-7810-11).
+
+**Build, gates and repo changes.**
+- `tools/build_site_all.py` (canonical) runs with exit 0. Two steps added: `tools/prereg.py check` and `tools/prereg.py render`. The prereg page is linked from the landing page's companion group (`pipeline/gen_site.py`) and from `scripts/verified/normalize_nav.py`.
+- Sources added: S31 (Week 11 schedule), S32 (Nov 5 NFL.com roundup). Flags added (append-only): P1-01, P2-01 to P2-06. `data/flags.json` and `data/sources.json` changed by insertion only.
+- Gates: `verify.py` PASS (2,080 rows, all with official source links, 73 unverified); `check_reachability.py` 0 problems; `verify_combined.py` PASS (0 broken links); `check_generators.py` PASS; `check_strength_site.py` PASS; `tests.test_prereg` and `tests.test_strength` PASS; `audit_official.py` runs (23 self-contradiction rows, carried over).
+- Not run by me: `build_site_all.py --check` and `check_reproducible.py` pass only after the commit, because they compare against HEAD.
+- Deviation: running `pipeline/gen_site.py` alone rewrites `pages/*` nav links to `../pages/…`, which is the known defect in the record of `9cb71eb8` (PR #65 log). I reverted those pages and used the canonical `tools/build_site_all.py`.
+- Environment: `pandas` and `numpy` were installed with `pip --break-system-packages` (the sandbox is PEP 668 managed).
+
 # Session `e1fa878e-nfl1` — re-verification of open injury and depth flags, leaderboard policy, PR and merge (2026-11-15)
 
 | Item | Value |
@@ -3369,3 +3407,11 @@ Timestamps from git: this session's claim `bcd2a7b` is 12:51:29 UTC. The overlap
 | `e1fa878e` **E3** (leaderboard shows no backtest numbers; backtests moved to `research/backtest.html`) | `d4027f66` **E2** ban check (`tools/check_preregistration.py` gates `data/leaderboard.json`) | Compatible. The ban is enforced on the current leaderboard. | Confirm that `data/s9cb/leaderboard.json` no longer ranks historical rows (F-7810-09). This session does not change that file; PR-06 stays **Not met** until it does. |
 
 No file of `739408a8` or `e1fa878e` was changed by this session. Merge order does not matter for correctness; the second session to merge should rebase and re-run `tools/check_depth_register.py`, `tools/check_preregistration.py` and `tools/build_site_all.py --check`.
+
+### Post-merge note — `d4027f66-nfl1` (2026-11-15, UTC)
+
+- `main` now includes PR #74 (`739408a8`, pre-registration ledger). Both sessions' gates pass on the merged head: `tools/check_preregistration.py` (this session) and `tools/prereg.py check` plus `tests/test_prereg.py` (`739408a8`).
+- **Two registries exist and have not been reconciled:** `data/preregistration/registry.json` (this session: RULES_v1, registration `591d8740a097`, 0 strategies registered) and `data/prereg/registry.json` (`739408a8`: 3 frozen rules, 11 not-registrable rows). Neither session registered a strategy retroactively. Reconciling them is a board decision, not made here.
+- `room/data/readiness.json` is no longer regenerated by `scripts/brief_07810d9f/register.py`: that script rebuilds rows from its own base data and would revert other sessions' updates (`1777232`). This session changed only IN-09, IN-10 and IN-21 in that file; counts in `meta.by_status` were recomputed. Any future regeneration must start from the current file.
+- Pages build on the PR head: the depth table's empty cells failed `scripts/verified/check_site.py` (fixed: explicit "no flag" / "no name printed"). Local run of every `run:` step in `pages.yml` and `verify.yml` now passes.
+- The data bot pushes a refresh to every `arena/**` branch after each push, so the PR head moves during CI. The merge uses an explicit head-commit match.
