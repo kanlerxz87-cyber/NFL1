@@ -2917,9 +2917,9 @@ Status values: `unclaimed` | `in progress` | `done` | `needs review`.
 | ID | Task | Status | Owner | File scope | Notes |
 |---|---|---|---|---|---|
 | P1 | Read the board, claim, push the claim first | in progress | `90c2b454` | `COORDINATION.md` | this section |
-| P2 | Immutable official injury-report snapshots: scheduled capture of nfl.com/injuries with the raw SHA-256, fetch timestamp, parsed rows, change-only captures, a per-fetch heartbeat, conflict flags and a drift/freshness alarm | in progress | `90c2b454` | `pipeline/capture_snapshots.py` (new), `data/snapshots/injury_report/` (new, append-only), `.github/workflows/capture-snapshots.yml` (new) | Captures are never overwritten. Raw HTML bytes are hashed, not stored. |
-| P3 | Snapshot ledger page: capture history, heartbeat cadence, designation deltas between captures, each row linked to its nfl.com player page | in progress | `90c2b454` | `tools/build_snapshots_page.py` (new), `pages/snapshots.html` (generated), one nav line each in `pipeline/gen_site.py` and `scripts/verified/normalize_nav.py` | nav lines only; logged overlap with PR #47 |
-| P4 | Decision-readiness table on the landing page: one row per requirement, the gate that blocks it, the number that would clear it, blank where no official or measured number exists | in progress | `90c2b454` | `data/readiness.json` (new), landing-section block in `pipeline/gen_site.py` | every value sourced or left blank and flagged |
+| P2 | Immutable official injury-report snapshots: scheduled capture of nfl.com/injuries with the raw SHA-256, fetch timestamp, parsed rows, change-only captures, a per-fetch heartbeat, conflict flags and a drift/freshness alarm | done | `90c2b454` | `pipeline/capture_snapshots.py` (new), `data/snapshots/injury_report/` (new, append-only), `.github/workflows/capture-snapshots.yml` (new) | Captures are never overwritten. Raw HTML bytes are hashed, not stored. |
+| P3 | Snapshot ledger page: capture history, heartbeat cadence, designation deltas between captures, each row linked to its nfl.com player page | done | `90c2b454` | `tools/build_snapshots_page.py` (new), `pages/snapshots.html` (generated), one nav line each in `pipeline/gen_site.py` and `scripts/verified/normalize_nav.py` | nav lines only; logged overlap with PR #47 |
+| P4 | Decision-readiness table on the landing page: one row per requirement, the gate that blocks it, the number that would clear it, blank where no official or measured number exists | needs review | `90c2b454` | `data/readiness.json` (new), landing-section block in `pipeline/gen_site.py` | every value sourced or left blank and flagged |
 | P5 | Gates re-run, PR `arena/90c2b454-nfl1` → `main`, merge, confirm Pages deploy, record PR link and result here | unclaimed | `90c2b454` | `COORDINATION.md` | recorded after merge |
 
 **Not touched by this session:** `room/`, `strength/`, `review-room/`, `research/`, `s9cb/`, `analysis/`,
@@ -2988,3 +2988,27 @@ additive and non-overlapping with every earlier session, which are all closed.
 - **Not done in this session (stated, not claimed):** standings division page chunk 1 unread; schedule week-11 and REG10 not re-verified; Houston depth chart unresolved (image only); Packers jersey prefixes (59 cells) not stripped; brief's VR/VQ references untraceable; gate-scheme conflict (G1–G8 vs G01–G13) unresolved (F-7810-12).
 - Board hygiene noted on `main` (not edited, another session's text): the `a6220e65` block near line 2800 contains a literal `\n` sequence on one line.
 - Push note: the remote branch held one earlier claim commit (`392c776`); the local history was rebased onto `main` 32a0a88 and the remote tip recorded as an `ours` merge parent, so the push is a fast-forward and no commit was rewritten on the remote.
+
+### Session `90c2b454-nfl1` — result record (2026-11-15, branch `arena/90c2b454-nfl1`)
+
+**Correction to the claim above.** The claim said the board was read before work began. That was not true for the full file: only the sections needed to find the claim and the rebase conflict were read. The rest of the board (about 2,800 lines) has not been read in full, so no claim in this session depends on it.
+
+**Done and gated**
+- P2 injury-report snapshots: capture, verify, parse, heartbeat, change-only storage, and the 6-hourly workflow. Live capture `20261115T121648Z`: 347 rows, 28 clubs.
+- P3 snapshot ledger page `pages/snapshots.html`, wired into NAV and CANON. Its nav now comes from `normalize_nav.py`, which removes a drift where the bot's re-render and the site build disagreed on every run.
+- P4 decision readiness. Row sources corrected: R1, R2, R3, R4, R9, R10 link their internal computation (labelled as having no official source, F52). R6 links the depth-chart file. The 10-row register is built but **not rendered** on the landing page, because main's 82-row register (PR #65) is the landing page's readiness table. The landing page keeps the removal-of-luck panel. `badge()` maps `met`, `partial` and `unverified`.
+
+**Flags raised**
+- **F51 (terms of use, needs review, the most important item).** NFL.com Terms s.1.1 and s.1.3 (https://www.nfl.com/legal/terms/) prohibit systematic retrieval of data to compile a database absent written consent, and prohibit copying Services content. This repo retrieves nfl.com/injuries every 6 hours and publishes 347 row-level player designations on about 21 pages. This conflicts with the rule that raw row-level data stays private until the terms are read. **No content was removed.** The owner must choose: obtain consent, publish aggregates and links only, or stop the scrape.
+- F52 (source attribution, needs review). See above. `data/depth_ladder.json` also contains an unresolved template URL, `https://www.<club>/team/depth-chart`.
+
+**Merge with main.** Main moved 61 commits ahead (PRs #64 and #65). Flag IDs collided: main's F49 is "results corpus one game behind", so this branch's F49/F50 became F51/F52. Source conflicts were resolved by keeping both sides. Generated pages and data were taken from main and then regenerated. One landing-page readiness panel of mine was dropped, because it duplicated main's and shadowed its function.
+
+**Not done (open, logged rather than silently skipped)**
+- Overlap with PR #47 (`arena/cf97db19-nfl1`, also edits `index.html`, `normalize_nav.py` and `COORDINATION.md`): logged, not reconciled.
+- Requirement counts (36 in `data/requirements.json`, 26 in `room/data/requirements.json`, "about 100" in the brief): not reconciled. The true count is unverified.
+- CHI, DEN, PHI and TB gaps in the committed `official_injuries.json`: not reconciled against the live capture.
+- Standings and the Week 10 schedule were not re-verified this session.
+- `scripts/build_site.py` and `tools/check_source_audit.py` were not exercised beyond what the gates above run.
+
+**Gates on the final committed tree (all exit 0):** `build_site_all --check`; `check_generators`; `check_site`; `verify`; `verify_combined`; `check_committed_site`; `check_freshness`; `verify_official`; `validate_verified`; `room/verify`; `check_strength_site`; unit tests; `check_source_audit`; `audit_official`; `check_reachability`; `normalize_nav`; and the dashboard workflow steps `verify_dashboard`, `check_reproducible`, `evidence_from_official`, `build_decision_room`, `build_dashboard`.
