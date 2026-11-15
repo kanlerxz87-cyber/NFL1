@@ -2973,3 +2973,19 @@ additive and non-overlapping with every earlier session, which are all closed.
 - **Open board defect (log, not edited):** the daily data job (`collect-data.yml`, which also runs on `arena/**` pushes) re-renders some pages with a different path than `tools/build_site_all.py`: nav links are written as `../pages/…` (e.g. `pages/luck.html`, `pages/readiness.html`), so `build_site_all.py --check` fails after each refresh commit, although every link still resolves. Owner: the session that owns `tools/build_dashboard.py` and the collect-data step. Request: make the data job end with `tools/build_site_all.py` (or make the check run after it). Logged as part of F-7810-10.
 - Follow-up PR (label corrections in the register; PR-09 wording and IN-10 count) opened from the same branch after the merge; its result is recorded here when it is merged.
 - Follow-up PR #66 (register label corrections; cross-reference SP-09 → SI-09): **MERGED** at 2026-11-15T12:38:16Z, merge commit `95618e7`. Its head `bb6b8a0` passed all four workflows. GitHub Pages: built for `8c57b7c` (later main data refresh) after the `95618e7` Pages run succeeded.
+
+---
+
+# Session `55dc53f4-nfl1` — pre-registered shadow baseline, Week 11 forecast record, drift alarm, team view (2026-11-15)
+
+Branch `arena/55dc53f4-nfl1`, base `df084b5` (= `main` at claim time). Claimed 2026-11-15 12:50 UTC, before any other file changed. Scope is additive and non-overlapping with every other session; no other session has an open claim on the board. The brief's `session-<id>/<task>` branch naming cannot be followed (Arena fixes the branch), so the file-scope table below is the coordination record.
+
+| ID | Task (register rows) | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| P1 | Pre-registration of a singles-only shadow team-strength baseline: rule text, data window, gates, demotion gate, two-sided "what would change our mind" (PR-15, PR-16, PR-18, PR-07, PR-24) | in progress | `55dc53f4` | `prereg/shadow-v1.md`, `prereg/shadow-v1.json` | committed before any forecast is generated; the commit hash is the registration |
+| P2 | Week 11 forecast record from the frozen rule (probability plus inputs), committed before the first kickoff, Thu 19 Nov 2026 20:15 ET (PR-18, MO-01) | unclaimed→in progress | `55dc53f4` | `tools/shadow_forecast.py`, `data/shadow/` | output is a record, not a pick |
+| P3 | Week 11 venues transcribed from the official nfl.com game centre pages; schedule-only fixture context (rest, short week) (IN-30, IN-32) | in progress | `55dc53f4` | `tools/build_week11_context.py`, `data/shadow/week11_*.json` | every venue cell links its game centre |
+| P4 | Drift alarm for the injury capture: pinned club/game/row counts and required fields; fails loudly (SI-09) | in progress | `55dc53f4` | `tools/check_scrape_drift.py` (new), one step in `.github/workflows/verify.yml` | |
+| P5 | Per-team injury view (net injury count; starters out and replacements left blank, not inferred) and a two-read what-changed delta, 13 Nov vs 15 Nov (IN-24, PR-25, IN-01) | in progress | `55dc53f4` | `tools/build_team_view.py`, `data/shadow/team_view.json`, `data/shadow/whats_changed.json` | publishes the delta, never the level |
+| P6 | Sub-site `shadow/` (overview, forecast record, team view, what changed, pre-registration) linked from the landing page; new flags appended (F-5501-xx) | in progress | `55dc53f4` | `shadow/` (new), `data/flags.json` (append only), `pipeline/gen_site.py` (one nav entry), `tools/build_site_all.py` (one step) | |
+| P7 | Gates green, PR to `main`, merge, Pages deploy confirmed, readiness rows updated, record here (SI-15) | pending | `55dc53f4` | `COORDINATION.md`, `room/data/readiness.json` (status fields only) | |
