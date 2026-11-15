@@ -8,7 +8,7 @@
 
 The repository already contains the requested static GitHub Pages dashboard, executive summary, requirements inventory, strategy/leaderboard research, injury/depth views, decision questions, suggestions workflow, and a Flagged for Review page. The live public URL recorded in the repo is [NFL Decision Lab](https://kanlerxz87-cyber.github.io/NFL1/).
 
-Local build and consistency checks passed. In particular, the source-link check found **2,026 table rows with official source links, 73 unverified values left blank/flagged, and no broken internal links**. All 136 unit tests passed with no skips after installing the repository's declared NumPy/Pandas build dependencies into the ignored local `.venv`. The system interpreter without those dependencies initially skipped 11 optional strength/statistics tests. The offline official-data audit reported **20 PASS, 8 FLAG, 0 FAIL**; its flags are not equivalent to an all-clear.
+Local build and consistency checks passed. In particular, the source-link check found **2,031 table rows with official source links, 73 unverified values left blank/flagged, and no broken internal links**. All 136 unit tests passed with no skips after installing the repository's declared NumPy/Pandas build dependencies into the ignored local `.venv`. The system interpreter without those dependencies initially skipped 11 optional strength/statistics tests. The offline official-data audit reported **20 PASS, 8 FLAG, 0 FAIL**; its flags are not equivalent to an all-clear.
 
 The material risk is **freshness and snapshot lineage**, not a broken site build. The current official NFL injury report page (fetched during this audit) still identifies itself as Week 10 and includes Sunday, November 15 games. The committed injury source registry is dated November 12, and older report transcriptions in the repository differ from later official captures. An official-source audit also reports a difference between the 136-game verification corpus and current standings-implied 137 games. Existing verification results therefore establish reproducibility for specific captured snapshots; they do not certify that every displayed injury or depth value is current at kickoff.
 
@@ -19,7 +19,7 @@ No strategy currently qualifies for real staking based on the current dashboard'
 | Check | Result | What it establishes | Reproduce |
 |---|---:|---|---|
 | Unit tests | 136 passed; 11 skipped | Current Python test suite passes; 11 tests were skipped because NumPy/Pandas are absent | `python3 -m unittest discover -v` |
-| Source-link audit | 2,026 rows; 2,026 with official links; 73 unverified; 0 broken | Rows in the audited root and `pages/` tables have official links; unverified values remain identified | `python3 tools/verify.py` |
+| Source-link audit | 2,031 rows; 2,031 with official links; 73 unverified; 0 broken | Rows in the audited root and `pages/` tables have official links; unverified values remain identified | `python3 tools/verify.py` |
 | Combined data/site verification | 32 standings, 20 injury rows, 32 team-directory rows, 136 game rows; 0 mismatches; 2,451 links; 0 broken | Cross-file arithmetic and internal links match the checked-in evidence corpus | `python3 tools/verify_combined.py` |
 | Committed-site check | 27 pages, 1,543 internal links, 1,118 sourced rows | Generated committed pages have no broken links or source-less rows; 11 older pages are explicitly reported as unstamped | `python3 tools/check_committed_site.py` |
 | Independent numeric recomputation | 47/47 | Published figures reproduce from checked-in inputs | `python3 scripts/verified/audit_numbers.py` |
@@ -64,7 +64,7 @@ No strategy currently qualifies for real staking based on the current dashboard'
 2. **Reconcile game results.** Compare all 136 game IDs with the official schedule/Game Center and Game Books; identify the standings-implied 137th result and decide whether it falls inside the registered window.
 3. **Refresh availability immutably.** Capture the NFL injury report and club depth pages on a schedule through kickoff; retain raw content hashes and parsed row-count/schema checks. Capture official inactives, starters and snap counts separately.
 4. **Keep model readiness conservative.** Existing checks report no all-gate-passing strategy; keep singles shadow-only and keep parlays/prop combos blocked until joint probabilities, price policy and settlement rules are proven.
-5. **Keep the new result-corpus discrepancy visible.** Final integration added **F48** to `data/flags.json` and rebuilt the root Flagged for Review page with links to official standings and the Commanders–Giants Game Center. The missing result remains blank; the finding stays open until its official Game Book/result evidence is captured and reconciled. The full table-row source audit passed after the update.
+5. **Keep the new result-corpus discrepancy visible.** Final integration added **F49** to `data/flags.json` and rebuilt the root Flagged for Review page with links to official standings and the Commanders–Giants Game Center. The missing result remains blank; the finding stays open until its official Game Book/result evidence is captured and reconciled. The full table-row source audit passed after the update.
 
 ## Primary official sources
 
