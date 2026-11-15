@@ -2807,7 +2807,7 @@ Branch note: the session runs on the single branch `arena/26b2c41e-nfl1` (base `
 
 | ID | Task | Status | Owner | File scope | Notes |
 |---|---|---|---|---|---|
-| RD1 | Decision-readiness register: one row per brief requirement with status, blocking gate and clearing number | done | `26b2c41e` | `room/data/readiness.json`, `room/build.py` (new page), `room/readiness.html`, `room/README`-level nav, `README.md` | 24 rows: 1 met, 6 partial, 9 blocked, 4 not established, plus the met rows for this page and Executive/Suggestions/Questions. Every row has https sources. |
+| RD1 | Decision-readiness register: one row per brief requirement with status, blocking gate and clearing number | done | `26b2c41e` | `room/data/readiness.json`, `room/build.py` (new page), `room/readiness.html`, `room/README`-level nav, `README.md` | 24 rows: 2 met (readiness page and Executive/Suggestions/Questions existence), 6 partial, 12 blocked, 4 not established. Every row has https sources. |
 | RD2 | Cross-page audit of the three Week-10 Lions rows (Joseph, Mays, Reed) on every published page | done | `26b2c41e` | `room/audit_lions_w10.py`, `room/data/lions_w10_conflicts.json` | 32 rows on 11 pages: 8 differ, 18 blank, 6 match. Official values read from nfl.com/injuries on 2026-11-15. |
 | RD3 | Flag new irregularities (F-201 to F-205) on the Flagged for Review page | done | `26b2c41e` | `room/data/findings.json`, `room/data/requirements.json` (stale counts) | F-201 Lions rows; F-202 depth charts undated; F-203 leaderboard ranked by ROI; F-204 injury scrape row counts disagree; F-205 raw data public before terms read. |
 
