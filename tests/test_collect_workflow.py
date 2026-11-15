@@ -3,7 +3,8 @@ from pathlib import Path
 import unittest
 
 
-WORKFLOW = Path(__file__).resolve().parents[1] / ".github/workflows/collect-data.yml"
+ROOT = Path(__file__).resolve().parents[1]
+WORKFLOW = ROOT / ".github/workflows/collect-data.yml"
 
 
 class CollectWorkflowTests(unittest.TestCase):
@@ -12,6 +13,12 @@ class CollectWorkflowTests(unittest.TestCase):
         self.assertEqual(text.count("python tools/build_site_all.py\n"), 1)
         self.assertNotIn("python pipeline/gen_site.py", text)
         self.assertNotIn("python tools/build_dashboard.py", text)
+        self.assertNotIn("python tools/build_readiness.py", text)
+        self.assertNotIn("python tools/build_snapshots_page.py", text)
+
+        canonical_builder = (ROOT / "tools/build_site_all.py").read_text(encoding="utf-8")
+        self.assertIn("tools/build_readiness.py", canonical_builder)
+        self.assertIn("tools/build_snapshots_page.py", canonical_builder)
 
     def test_integrity_gates_run_after_the_canonical_site_build(self):
         text = WORKFLOW.read_text(encoding="utf-8")

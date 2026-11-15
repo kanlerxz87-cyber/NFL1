@@ -3189,8 +3189,9 @@ follow the build, and tracked output changes are staged.
   gates pass; `audit_numbers.py` independently reproduced all 47 published figures.
 - `tools/evidence_from_official.py` + `tools/verify_official.py`: **20 passed, 8 flagged, 0 failed**;
   fixtures had 279 injury rows. These checks validate the repository's dated, hand-transcribed
-  official fixtures; they are not a fresh live NFL-source capture. The resulting timestamp-only
-  fixture rewrites were restored and are not part of this change.
+  official fixtures; they are not a fresh live NFL-source capture. The successful scheduled Actions
+  run also refreshed scraper/model outputs from the current official injury-report read; the hand-
+  transcribed fixture rows themselves were unchanged (only their generation timestamps were updated).
 
 **Irregularities retained, not silently changed.** The 8 official-fixture audit flags include known
 mismatches between the current scraped injury rows and the older Week 10 transcriptions, injury-row
@@ -3205,3 +3206,24 @@ The dated fixture references are the NFL's [2026 standings](https://www.nfl.com/
 [official injury report](https://www.nfl.com/injuries/), [Week 10 schedule](https://www.nfl.com/schedules/2026/REG10),
 and [2026 schedule](https://www.nfl.com/schedules/2026). No claim is made here that these pages were
 re-fetched live in this session.
+
+**Follow-up validation after main advanced (2026-11-15).** PR #70 moved `main` to `87add0e` while
+this branch was open. Rebased the current branch onto that `main`, retained its readiness/snapshot
+work, and resolved the `COORDINATION.md` and workflow conflicts by keeping both the newer main-side
+snapshot steps and this session's canonical full-site build. The readiness and snapshot generators
+are already part of `tools/build_site_all.py`, so the daily job now invokes them through that one
+canonical entry point (not a second time as individual steps). The rebased tree passes **154 unit
+tests**, `tools/build_site_all.py` + `--check`, YAML parsing, freshness (23), generator ownership,
+committed-site, site/Room/Strength validation, reachability (169 pages), independent figure audit
+(47/47), and combined verification (2,659 local links, 0 broken). `tools/verify.py` now checks 2,071
+rows, all with official source URLs; 73 values remain explicitly unverified. The existing F19
+unstamped legacy pages and official-data discrepancies remain visible; no result or injury row was
+filled in here.
+
+**Live workflow execution on the pre-rebase head.** GitHub Actions run
+[43715989007](https://github.com/kanlerxz87-cyber/NFL1/actions/runs/43715989007) passed all steps,
+including live injury scraping, evidence checks, full canonical build, freshness, generator ownership
+and committed-site gates; its data bot commit was `ce0b4be` before the subsequent rebase onto PR #70.
+The run's captured injury report contained 347 rows. This is a successful run of the then-current
+workflow revision, not yet a run of the final rebased head; final-head CI and Pages status are to be
+recorded under A3 after the PR update.

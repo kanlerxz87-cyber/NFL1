@@ -57,21 +57,10 @@ jobs:
       # keep last run's injury statuses while the rest of the site refreshed.
       - name: Rebuild the depth ladder from the refreshed injury report
         run: python pipeline/build_depth_ladder.py
-      # Readiness rows and the point-in-time snapshot ledger are data-derived and must be refreshed
-      # before the canonical renderer publishes their pages.
-      - name: Rebuild readiness data and snapshot ledger inputs
-        run: |
-          python tools/build_readiness.py
-          python tools/build_snapshots_page.py
       # Rebuild the official fixtures and refuse to publish if committed datasets disagree.
       # The canonical build below owns all page generation and navigation normalization; do not
       # call individual site generators here, or the daily refresh can publish mixed generations.
       - name: Verify official data fixtures
-        run: |
-          python tools/evidence_from_official.py
-          python tools/verify_official.py
-      - name: Rebuild every published page through the canonical site build
-        run: python tools/build_site_all.py
         run: |
           python tools/evidence_from_official.py
           python tools/verify_official.py
