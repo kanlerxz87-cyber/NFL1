@@ -2798,3 +2798,36 @@ verified sound, with one unusual official row recorded for review) · F46 (overl
 generations — decision D07 / suggestion S17) · F47 (2nd-to-4th string coverage now exists, needs
 sign-off). None of them blocks anything; they are published rather than hidden.
 
+
+---
+
+## Session `26b2c41e-nfl1` — readiness register and Lions cross-page audit (branch `arena/26b2c41e-nfl1`)
+
+Branch note: the session runs on the single branch `arena/26b2c41e-nfl1` (base `5a769b3`). The brief's `session-<id>/<task>` branch names cannot be used, as recorded above. The claim below was written in the same turn as the work, because no other session holds the files; no other claim was overwritten.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| RD1 | Decision-readiness register: one row per brief requirement with status, blocking gate and clearing number | done | `26b2c41e` | `room/data/readiness.json`, `room/build.py` (new page), `room/readiness.html`, `room/README`-level nav, `README.md` | 24 rows: 1 met, 6 partial, 9 blocked, 4 not established, plus the met rows for this page and Executive/Suggestions/Questions. Every row has https sources. |
+| RD2 | Cross-page audit of the three Week-10 Lions rows (Joseph, Mays, Reed) on every published page | done | `26b2c41e` | `room/audit_lions_w10.py`, `room/data/lions_w10_conflicts.json` | 32 rows on 11 pages: 8 differ, 18 blank, 6 match. Official values read from nfl.com/injuries on 2026-11-15. |
+| RD3 | Flag new irregularities (F-201 to F-205) on the Flagged for Review page | done | `26b2c41e` | `room/data/findings.json`, `room/data/requirements.json` (stale counts) | F-201 Lions rows; F-202 depth charts undated; F-203 leaderboard ranked by ROI; F-204 injury scrape row counts disagree; F-205 raw data public before terms read. |
+
+**Sources read this session (all fetched on 2026-11-15):**
+- https://www.nfl.com/injuries/ (Week 10 report; Lions block: Joseph, Mays, Reed each Did Not Participate In Practice / Out; Commanders and Giants and Patriots blocks also read)
+- https://www.nfl.com/standings/division/2026/REG (first page; club rows including NYG 5-3-1, WAS 3-5-1)
+
+**Verification performed:**
+- `python3 room/audit_lions_w10.py` — reproducible scan of every published HTML page; result: 32 rows on 11 pages (8 differ, 18 blank, 6 match).
+- `python3 room/build.py` then `python3 room/verify.py` — 12 pages, 25 tables, 374 data rows, all local links resolve, every table row carries an https source link, no empty cells.
+- `python3 -m unittest discover -s tests -t .` — 136 tests OK (11 skipped), unchanged from before.
+- Counts quoted in the readiness rows were read from the committed files (depth_coverage.json: 1 of 32 dated; s9cb/injuries.csv: 56,557 rows; s9cb/games.csv: 7,239 rows; s9cb/leaderboard.json: 12 rules, ROI order, no Brier term; official_injuries.json: 345 rows / 28 tables).
+
+**Irregularities found (published, none blocks the merge):**
+- F-201 (material): the three Lions rows disagree across published pages; most pages leave the game status blank.
+- F-202 (material): 31 of 32 depth charts carry no capture date.
+- F-203 (material): the leaderboard ranks by ROI and contains no Brier score; the brief rejects that ranking.
+- F-204 (minor): injury scrapes of the same week disagree (345 vs 296 rows); the brief cites 279.
+- F-205 (minor): raw row-level files are public before the source terms are read.
+
+**Not done in this session (named, not claimed):** the full brief has roughly 90 detailed items. This session covered the readiness register and the Lions audit only. The rest are recorded as blocked, partial or not established on the readiness page, each with its gate. No row was marked met without a check this session.
+
+**Cross-session requests (logged, not applied):** `data/strength/flags.json` (F-SOS-INJ-01) and `data/model/official_injuries.json` disagree on the Week-10 row count; the owner of those files should reconcile them. Pages under `pages/`, `docs/`, `lab/`, `strength/`, `dashboard/`, `research/` and `verified-lab/` carry the stale Lions values listed in `room/data/lions_w10_conflicts.json`; they are not edited here.

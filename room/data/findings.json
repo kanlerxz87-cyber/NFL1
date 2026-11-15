@@ -8,7 +8,7 @@
    "severity": "info",
    "status": "resolved",
    "area": "Data currency",
-   "title": "Standings lagged one completed game \u2014 resolved during this session",
+   "title": "Standings lagged one completed game — resolved during this session",
    "detail": "When this session started, the site served a snapshot built at 2026-11-12T23:37Z with NYG at 5-2-1 (182 PF / 172 PA) and WAS at 2-5-1 (172 PF / 202 PA). The official division standings read on 2026-11-13 at 12:05Z showed NYG 5-3-1 (203/196) and WAS 3-5-1 (196/223) after the Week 10 Thursday game finished 24-21 to Washington; every other club matched exactly. The scheduled collect run re-fetched at 2026-11-13T12:51Z and now publishes 137 games with both clubs correct, so the drift is closed. Re-verified line by line after the refresh: 32 of 32 clubs match today's official page on W-L-T, points for and points against, 0 drift.",
    "official": "https://www.nfl.com/standings/division/2026/REG",
    "here": [
@@ -413,7 +413,7 @@
    "status": "resolved",
    "area": "Site build",
    "title": "The evidence page shipped an empty table cell, and the site gate that catches it was failing",
-   "detail": "data/model/replication.json carries a conflict row 'Week 10 model margin for WAS @ NYG' where this pipeline's value is null. The generator rendered null as an empty <td>, so pages/evidence.html contained a blank cell \u2014 the exact condition the brief forbids, since an empty cell reads as a measured zero. scripts/verified/check_site.py caught it (exit 1) and pages.yml runs that script, so the next push would have failed the deploy. Fixed at the generator: a missing side of a comparison now renders as an explicit 'no comparable value in this build' label rather than a blank. Re-verified: 21 pages, zero empty cells.",
+   "detail": "data/model/replication.json carries a conflict row 'Week 10 model margin for WAS @ NYG' where this pipeline's value is null. The generator rendered null as an empty <td>, so pages/evidence.html contained a blank cell — the exact condition the brief forbids, since an empty cell reads as a measured zero. scripts/verified/check_site.py caught it (exit 1) and pages.yml runs that script, so the next push would have failed the deploy. Fixed at the generator: a missing side of a comparison now renders as an explicit 'no comparable value in this build' label rather than a blank. Re-verified: 21 pages, zero empty cells.",
    "official": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pipeline/gen_site.py",
    "here": [
     {
@@ -481,7 +481,122 @@
      "note": "now reads 'All 32 clubs match'"
     }
    ],
-   "settle": "Alias map plus a generated summary line. The same trap is already documented for the injury model, which uses AZ while the official feed uses ARI \u2014 the two directions of the same mismatch."
+   "settle": "Alias map plus a generated summary line. The same trap is already documented for the injury model, which uses AZ while the official feed uses ARI — the two directions of the same mismatch."
+  },
+  {
+   "id": "F-201",
+   "severity": "material",
+   "status": "open",
+   "area": "Injuries",
+   "title": "Three Lions Week-10 rows disagree across published pages, and most pages leave their game status blank",
+   "detail": "Kerby Joseph (S, knee), Cade Mays (C, ankle) and D.J. Reed (CB, hip) are listed on the official Week-10 report as Did Not Participate in Practice and Out. Read on 2026-11-15 from nfl.com/injuries. The room audit of every published HTML page (room/audit_lions_w10.py) found 32 rows naming them. 6 match. 8 show a different value: Joseph is shown as Full Participation on dashboard/injuries.html, research/injuries.html and strength/injuries.html, and as Limited Participation with a blank game status on injuries.html, docs/injury-depth.html, lab/pages/injuries.html, pages/evidence.html and verified-lab/data-injuries.html. 18 rows leave a value blank, including the game status of Mays and Reed on injuries.html, lab/pages/injuries.html and pages/evidence.html. The pages carry no capture time, so a wrong value cannot be told apart from a value that was official earlier in the week.",
+   "official": "https://www.nfl.com/injuries/",
+   "here": [
+    {
+     "t": "Cross-page audit (generated)",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/lions_w10_conflicts.json",
+     "note": "32 rows, 11 pages"
+    },
+    {
+     "t": "Audit script",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/audit_lions_w10.py",
+     "note": "reproduce with python3 room/audit_lions_w10.py"
+    },
+    {
+     "t": "Root injury page",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/injuries.html",
+     "note": "Joseph LP, game blank; Mays and Reed game blank"
+    }
+   ],
+   "settle": "Stamp every published injury value with its capture time, regenerate every page from one capture, and re-run room/audit_lions_w10.py until it reports 0 rows that differ."
+  },
+  {
+   "id": "F-202",
+   "severity": "material",
+   "status": "open",
+   "area": "Depth",
+   "title": "Depth charts carry no capture date on 31 of 32 clubs, so a chart cannot be placed in time",
+   "detail": "room/data/depth_coverage.json records 31 club charts parsed, one (Houston) published as an image, and an 'as of' date on 1 of 32 clubs. Three charts in data/depth_chart_meta.json are labelled Unofficial Depth Chart (KC), Unofficial (GB) and Depth Chart (SF). A depth ranking without a date cannot be replayed against the injury report for the same week.",
+   "official": "https://www.nfl.com/injuries/",
+   "here": [
+    {
+     "t": "Depth coverage register",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/depth_coverage.json",
+     "note": "1 of 32 dated"
+    },
+    {
+     "t": "Depth chart labels",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/depth_chart_meta.json",
+     "note": "KC and GB labelled Unofficial"
+    }
+   ],
+   "settle": "Record the capture time for every club chart and the label the club itself prints. Until then, depth rows are not dated and must not be used for a replacement claim."
+  },
+  {
+   "id": "F-203",
+   "severity": "material",
+   "status": "open",
+   "area": "Leaderboard",
+   "title": "The leaderboard ranks strategies by ROI, which the brief rejects, and holds no proper-score measure",
+   "detail": "data/s9cb/leaderboard.json lists 12 rules in ROI order, and its verdict reads 'Ranked by ROI only for transparency'. The top row, S07 Fade the road favourite of 7+, shows ROI +6.06% with a 95% interval of -3.1% to +15.3%, and its 2024–2025 holdout shows +26.3% on 44 bets. The file contains no Brier score. The brief requires ranking by Brier skill with a game-cluster lower bound and a multiplicity adjustment, and rejects season-long ROI ranking. No rule passes all eight gates, so none is promotable.",
+   "official": "https://www.nfl.com/standings/division/2026/REG",
+   "here": [
+    {
+     "t": "Leaderboard data",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json",
+     "note": "ROI order, 12 rules"
+    },
+    {
+     "t": "Readiness row RD-03",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/readiness.json",
+     "note": "gate and clearing number"
+    }
+   ],
+   "settle": "Compute Brier skill against a stated benchmark for each rule, with a game-cluster bootstrap lower bound and a count of trials. Rank on that, not on ROI."
+  },
+  {
+   "id": "F-204",
+   "severity": "minor",
+   "status": "open",
+   "area": "Injuries",
+   "title": "Two scrapes of the same Week-10 injury report disagree on row count, and neither the brief nor the scraper explains it",
+   "detail": "data/model/official_injuries.json (generated 2026-11-14) records 345 rows in 28 tables. data/strength/flags.json records a scrape of the same report on 2026-11-13 with 296 rows, and the Week-10 figure quoted in the brief is 279 rows in 26 sections. The official page changes during the week, so the counts may be from different reads, but no read carries a capture time that would show it. The scraper's own status field reads 'ok' for the 345-row file.",
+   "official": "https://www.nfl.com/injuries/",
+   "here": [
+    {
+     "t": "Scrape with 345 rows",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/official_injuries.json",
+     "note": "28 tables, status ok"
+    },
+    {
+     "t": "Scrape with 296 rows",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strength/flags.json",
+     "note": "F-SOS-INJ-01"
+    }
+   ],
+   "settle": "Re-read the full official page once, count the rows and sections by hand, and record the count with a capture time. Then pin that count in the scraper so a disagreement fails the build."
+  },
+  {
+   "id": "F-205",
+   "severity": "minor",
+   "status": "open",
+   "area": "Data policy",
+   "title": "Row-level raw data is published in the public repository before the source terms are read",
+   "detail": "data/s9cb/injuries.csv (56,557 player-week rows, 2016–2026) and data/s9cb/games.csv (7,239 game rows) are committed to the public repository. The brief asks for a public analysis layer and a private raw-data layer until the terms are read. No licence check for these files is recorded.",
+   "official": "https://www.nfl.com/injuries/",
+   "here": [
+    {
+     "t": "Injury rows",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/injuries.csv",
+     "note": "56,557 rows"
+    },
+    {
+     "t": "Game rows",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/games.csv",
+     "note": "7,239 rows"
+    }
+   ],
+   "settle": "Read the source terms for each raw file, record the result, and move any file the terms do not allow into a private store. Publish only derived figures until then."
   }
  ]
 }
