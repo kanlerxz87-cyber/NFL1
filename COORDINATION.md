@@ -3579,3 +3579,32 @@ No file of `739408a8` or `e1fa878e` was changed by this session. Merge order doe
 - The data bot pushes a refresh to every `arena/**` branch after each push, so the PR head moves during CI. The merge uses an explicit head-commit match.
 
 - **Name collision fixed:** `tools/check_preregistration.py` on `main` belongs to another session (`strat`, commit `56d94e6`). A merge had replaced this session's file of the same name, so the CI step ran the other checker. This session's gate is now `tools/check_preregistration_d4027.py`; `tools/check_preregistration.py` is left as `main` has it. `data/preregistration/RULES_v1.md` (line 25) still names the old tool. It is not edited, because its sha256 is the registration.
+
+### Completion record — `d4027f66-nfl1` (2026-11-15, UTC)
+
+| Item | Value |
+| --- | --- |
+| PR | [#75](https://github.com/kanlerxz87-cyber/NFL1/pull/75) `arena/d4027f66-nfl1` → `main` |
+| Merged | 2026-11-15T13:30:12Z, `--merge`, no approval, no auto-merge. Merge commit `00751c0`. Head merged: `ab788e6` (the code head `6d81ed1` plus the data bot's refresh of generated files). |
+| Checks on `6d81ed1` (the code head) | all nine runs green: Verify NFL1 site, Verify decision dashboard, Verify NFL source provenance, Verify NFL Decision Lab site build (includes the Pages checks), Decision Room build and gate. |
+| Checks on `00751c0` (merge commit) | all green, including `pages build and deployment` (success). |
+| Pages | legacy API: `built` for `00751c0` at 13:30:14Z and for the data bot's `896e244` at 13:30:50Z. Live page checked: https://kanlerxz87-cyber.github.io/NFL1/pages/depth.html, build stamp 2026-11-15T13:30:46+00:00. |
+| Main verified after merge | `896e244`, in a separate worktree: `build_site_all.py --check`, `verify.py`, `check_site.py`, `check_reachability.py`, `check_generators.py`, `verify_combined.py`, `verify_official.py`, `tools/check_preregistration_d4027.py`, `tools/check_depth_register.py`, `room/verify.py`, `check_committed_site.py` all pass; 198 unit tests OK. |
+
+**What was merged, by claim**
+- **E1** depth register for four clubs (GB, KC, SF, SEA): done for four clubs only. Seattle is read in two chunks. 36 flags, none blocking.
+- **E2** pre-registration: `RULES_v1` at `591d8740a097`, registry at `af723b9`. 0 strategies registered; 0 ranked leaderboard rows. Gate: `tools/check_preregistration_d4027.py`.
+- **E3** drift alarm and CI steps: done. The verify job now checks out full history so the commit-hash check runs.
+- **E4** flags F53–F59 (needs review, none blocking) and source S31: done.
+- **E5** readiness: partial. IN-09, IN-10 and IN-21 updated; the other rows in the file are main's (from `1777232`), not regenerated.
+
+**Not done (not claimed)**
+- The 32-club depth sweep (28 clubs not captured). Texans depth is image-only in the record. `data/depth_chart.json` is still not replaced by the register (F53–F55).
+- Two pre-registration registries exist and are not reconciled: `data/preregistration/` (this session) and `data/prereg/` (`739408a8`, PR #74). This is a board decision.
+- Injury-scraper pin (F58); price store; game books; inactives; snap counts.
+
+**Process problems found on this session (logged, not fixed in other sessions' files)**
+- The filename `tools/check_preregistration.py` collided with another session's file on `main`. A merge replaced this session's gate, so CI ran the other checker for a while. Fixed by renaming this session's gate to `tools/check_preregistration_d4027.py`; `main`'s file is untouched.
+- The data bot pushes a refresh to every `arena/**` branch after each push, and it commits with `[skip ci]`. Those commits do not trigger CI, so the PR head moved during the merge and each head had to be verified locally. Each merge attempt also needs a fresh `main` merge, because other sessions merged in the meantime.
+- `analysis/engine.py` prints a model verdict of FAIL ("the opponent-adjusted model does not beat the published baselines"). It exits 0 and is not a gate, but the Pages build runs it. Its output is part of the published analysis; a reviewer should read it.
+- `tools/verify_official.py` and similar gates write output files after the decision room is built, which makes `tools/check_freshness.py` (mtime-based) report stale. Rebuild in the order the check prints, then re-check.
