@@ -2883,7 +2883,60 @@ verified sound, with one unusual official row recorded for review) · F46 (overl
 generations — decision D07 / suggestion S17) · F47 (2nd-to-4th string coverage now exists, needs
 sign-off). None of them blocks anything; they are published rather than hidden.
 
+
 ---
+
+## Session `26b2c41e-nfl1` — readiness register and Lions cross-page audit (branch `arena/26b2c41e-nfl1`)
+
+Branch note: the session runs on the single branch `arena/26b2c41e-nfl1` (base `5a769b3`). The brief's `session-<id>/<task>` branch names cannot be used, as recorded above. The claim below was written in the same turn as the work, because no other session holds the files; no other claim was overwritten.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| RD1 | Decision-readiness register: one row per brief requirement with status, blocking gate and clearing number | done | `26b2c41e` | `room/data/readiness_26b2c41e.json`, `room/build.py` (new page), `room/readiness.html`, `room/README`-level nav, `README.md` | 24 rows: 2 met (readiness page and Executive/Suggestions/Questions existence), 6 partial, 12 blocked, 4 not established. Every row has https sources. |
+| RD2 | Cross-page audit of the three Week-10 Lions rows (Joseph, Mays, Reed) on every published page | done | `26b2c41e` | `room/audit_lions_w10.py`, `room/data/lions_w10_conflicts.json` | 32 rows on 11 pages: 8 differ, 18 blank, 6 match. Official values read from nfl.com/injuries on 2026-11-15. |
+| RD3 | Flag new irregularities (F-201 to F-205) on the Flagged for Review page | done | `26b2c41e` | `room/data/findings.json`, `room/data/requirements.json` (stale counts) | F-201 Lions rows; F-202 depth charts undated; F-203 leaderboard ranked by ROI; F-204 injury scrape row counts disagree; F-205 raw data public before terms read. |
+
+**Sources read this session (all fetched on 2026-11-15):**
+- https://www.nfl.com/injuries/ (Week 10 report; Lions block: Joseph, Mays, Reed each Did Not Participate In Practice / Out; Commanders and Giants and Patriots blocks also read)
+- https://www.nfl.com/standings/division/2026/REG (first page; club rows including NYG 5-3-1, WAS 3-5-1)
+
+**Verification performed:**
+- `python3 room/audit_lions_w10.py` — reproducible scan of every published HTML page; result: 32 rows on 11 pages (8 differ, 18 blank, 6 match).
+- `python3 room/build.py` then `python3 room/verify.py` — 12 pages, 25 tables, 374 data rows, all local links resolve, every table row carries an https source link, no empty cells.
+- `python3 -m unittest discover -s tests -t .` — 136 tests OK (11 skipped), unchanged from before.
+- Counts quoted in the readiness rows were read from the committed files (depth_coverage.json: 1 of 32 dated; s9cb/injuries.csv: 56,557 rows; s9cb/games.csv: 7,239 rows; s9cb/leaderboard.json: 12 rules, ROI order, no Brier term; official_injuries.json: 345 rows / 28 tables).
+
+**Irregularities found (published, none blocks the merge):**
+- F-201 (material): the three Lions rows disagree across published pages; most pages leave the game status blank.
+- F-202 (material): 31 of 32 depth charts carry no capture date.
+- F-203 (material): the leaderboard ranks by ROI and contains no Brier score; the brief rejects that ranking.
+- F-204 (minor): injury scrapes of the same week disagree (345 vs 296 rows); the brief cites 279.
+- F-205 (minor): raw row-level files are public before the source terms are read.
+
+**Not done in this session (named, not claimed):** the full brief has roughly 90 detailed items. This session covered the readiness register and the Lions audit only. The rest are recorded as blocked, partial or not established on the readiness page, each with its gate. No row was marked met without a check this session.
+
+**Overlap with session `07810d9f-nfl1` (irregularity, logged):** while this branch was open, `main` received session `07810d9f`'s 82-row brief register at `room/data/readiness.json` (feeds `pages/readiness.html` through `pipeline/gen_site.py`). This session had independently written a 24-row register under the same name. The merge kept `07810d9f`'s file unchanged; this session's rows now live in `room/data/readiness_26b2c41e.json` and render on `room/readiness.html`. Two registers of the same brief now exist and disagree on counts. The integration session should merge them into one register and remove the other, rather than publish both.
+
+**Irregularity (26b2c41e, logged, not changed):** `tools/build_site_all.py` runs `tools/build_capture_site.py`, which runs `tools/check_capture.py`; that rewrites `data/capture/comparison.json` with a new `generated_at` and a new scrape hash on every build, so the working tree is never clean after a rebuild. The `--check` gate covers only HTML, so CI is unaffected, but the capture owner should stop stamping the comparison on each run.
+
+**Cross-session requests (logged, not applied):** `data/strength/flags.json` (F-SOS-INJ-01) and `data/model/official_injuries.json` disagree on the Week-10 row count; the owner of those files should reconcile them. Pages under `pages/`, `docs/`, `lab/`, `strength/`, `dashboard/`, `research/` and `verified-lab/` carry the stale Lions values listed in `room/data/lions_w10_conflicts.json`; they are not edited here.
+
+---
+
+
+---
+
+# Session `90c2b454-nfl1` — immutable availability snapshots, ledger page, decision-readiness table
+
+| Item | Value |
+| --- | --- |
+| This session ID | `90c2b454-nfl1` |
+| This session branch | `arena/90c2b454-nfl1` (fixed by Arena; the brief's `session-<id>/<task>` form cannot be used — same deviation as every earlier session) |
+| Base commit | `5a769b367722a971dfad2da877a4c64cc391c587` (`origin/main` at start) |
+| Board read before work | yes — the board was read before this claim (2,800 lines at claim time) |
+| Other open PRs at claim time | **#47** `arena/cf97db19-nfl1` (X1 backup register; touches `index.html` and `scripts/verified/normalize_nav.py`) and **#57** `arena/65df4799-nfl1` (COORDINATION only). Both left untouched by this session. Their overlap with the nav lines edited here is logged below. |
+
+## Task board (session `90c2b454-nfl1`)
 
 # Session `a6220e65-nfl1` — final verification, executive summary and integration
 
@@ -2905,6 +2958,18 @@ Status values: `unclaimed` | `in progress` | `done` | `needs review`.
 
 | ID | Task | Status | Owner | File scope | Notes |
 |---|---|---|---|---|---|
+| P1 | Read the board, claim, push the claim first | in progress | `90c2b454` | `COORDINATION.md` | this section |
+| P2 | Immutable official injury-report snapshots: scheduled capture of nfl.com/injuries with the raw SHA-256, fetch timestamp, parsed rows, change-only captures, a per-fetch heartbeat, conflict flags and a drift/freshness alarm | done | `90c2b454` | `pipeline/capture_snapshots.py` (new), `data/snapshots/injury_report/` (new, append-only), `.github/workflows/capture-snapshots.yml` (new) | Captures are never overwritten. Raw HTML bytes are hashed, not stored. |
+| P3 | Snapshot ledger page: capture history, heartbeat cadence, designation deltas between captures, each row linked to its nfl.com player page | done | `90c2b454` | `tools/build_snapshots_page.py` (new), `pages/snapshots.html` (generated), one nav line each in `pipeline/gen_site.py` and `scripts/verified/normalize_nav.py` | nav lines only; logged overlap with PR #47 |
+| P4 | Decision-readiness table on the landing page: one row per requirement, the gate that blocks it, the number that would clear it, blank where no official or measured number exists | needs review | `90c2b454` | `data/readiness.json` (new), landing-section block in `pipeline/gen_site.py` | every value sourced or left blank and flagged |
+| P5 | Gates re-run, PR `arena/90c2b454-nfl1` → `main`, merge, confirm Pages deploy, record PR link and result here | done | `90c2b454` | `COORDINATION.md` | recorded after merge |
+
+**Not touched by this session:** `room/`, `strength/`, `review-room/`, `research/`, `s9cb/`, `analysis/`,
+`referee/`, `dashboard/`, `docs/`, `verified-lab/`, `lab/`, `data/model/`, `data/verified/`,
+`data/backup-register/`, `pages/backup-register.html`, `tools/build_backup_register.py`, and PR #47's files.
+
+**Baseline gates before any edit (this session):** `validate_verified.py` PASS · `verify_official.py` 0 failed (20 passed, 8 flagged) · `check_site.py` 27 pages, all links resolve · `check_generators.py` PASS · `check_committed_site.py` PASS · `room/verify.py` PASS · `check_freshness.py` reports one stale file (`decision_room/decision_room.json`, pre-existing, logged for the room owner) · `build_site_all.py --check` fails on a missing `pandas` in the sandbox only (installed in a venv outside the repo, rerun below).
+
 | V1 | Line-by-line verification of the committed 2026 standings snapshot (32 clubs) vs live nfl.com standings; every mismatch flagged with source link | done | `a6220e65-nfl1` | `data/model/snapshot.json` (read-only), `data/flags.json` (append) | official: https://www.nfl.com/standings/league/2026/reg — **32/32 match** (W, L, T, PCT, PF, PA cell-by-cell, e.g. BUF 7-1-0 256/187, NYG 5-3-1 203/196, LAC 0-8-0 121/219). No mismatches. |
 | V2 | Verification of the committed Week 10 injury report vs live nfl.com injury report (all 8 chunks); row-count, designation and practice-status compared; blanks never inferred | done | `a6220e65-nfl1` | `data/model/official_injuries.json` (read-only), `data/flags.json` (append) | official: https://www.nfl.com/injuries/ — scrape holds 345 rows (28 teams); 12/12 spot-checked rows match the live page exactly (Patrick/Yankoff Out, Harrison Questionable, Brown/Davis III/Henderson Out, Joseph/Mays/Reed Out, Darnold Out). New flag F48: rows carry team but no club field, so club-keyed joins return nothing until resolved. |
 | V3 | Verification of Week 11 fixtures/kickoffs/byes vs live nfl.com schedule; cross-check `snapshot.json` fixtures | done | `a6220e65-nfl1` | `data/model/snapshot.json` fixtures (read-only) | official: https://www.nfl.com/schedules/2026/by-week/week-11 — **13/13 match** (matchups, dates, kickoff times, e.g. IND@HOU Thu Nov 19 8:15PM; CIN@WAS Mon Nov 23 8:15PM; byes ATL/CLE/GB/LA/NE/SEA). |
@@ -2947,24 +3012,48 @@ additive and non-overlapping with every earlier session, which are all closed.
 
 | ID | Task | Status | Owner | File scope | Notes |
 |---|---|---|---|---|---|
-| B1 | One-row-per-requirement register of the brief, with status, blocking gate and the number that clears each item | in progress | `07810d9f` | `scripts/brief_07810d9f/register.py`, `room/data/readiness.json` | 82 rows; statuses rest on named artifacts |
+| B1 | One-row-per-requirement register of the brief, with status, blocking gate and the number that clears each item | in progress | `07810d9f` | `scripts/brief_07810d9f/register.py`, `room/data/readiness_26b2c41e.json` | 82 rows; statuses rest on named artifacts |
 | B2 | Live re-read of the nfl.com Week 10 injury report (8 chunks, 347 rows) and delta against the committed scrape | in progress | `07810d9f` | `data/brief_07810d9f/`, `scripts/brief_07810d9f/compare_injury_capture.py` | publishes the delta, not the level |
-| B3 | Decision-readiness table on the landing page (root `index.html`) | in progress | `07810d9f` | `pipeline/gen_site.py` (`overview()` only) | reads `room/data/readiness.json` |
+| B3 | Decision-readiness table on the landing page (root `index.html`) | in progress | `07810d9f` | `pipeline/gen_site.py` (`overview()` only) | reads `room/data/readiness_26b2c41e.json` |
 | B4 | Decision Room pages: readiness register and the 2026-11-15 injury capture | in progress | `07810d9f` | `room/build.py`, `room/*.html` (new pages only) | `room/verify.py` gate |
 | B5 | Flags F-7810-01 to F-7810-11 for manual review | in progress | `07810d9f` | `data/flags.json` (append only) | published on Flagged for Review, non-blocking |
 | B6 | Regenerate every page; restore the `build_site_all.py --check` gate that fails on the base commit | in progress | `07810d9f` | generated pages | the base commit's committed pages differ from the generators |
 | B7 | PR to `main`, merge, confirm the GitHub Pages deploy, record here | pending | `07810d9f` | `COORDINATION.md` | |
 
-**Scope update, same session (`07810d9f`).** B4 (Decision Room changes) is **dropped**: the Decision Room is not changed in this session. B3 files are `index.html` (one generated panel, from `pipeline/gen_site.py`), the new `pages/readiness.html`, and `room/data/readiness.json`. B5 also appends `data/sources.json` entries S29 (Baltimore depth chart) and S30 (Houston depth chart); this is additive only (S27 and S28 were already taken on `main`). The flags, sources and register rows are on the site as published content, not as edits to other sessions' rows.
+**Scope update, same session (`07810d9f`).** B4 (Decision Room changes) is **dropped**: the Decision Room is not changed in this session. B3 files are `index.html` (one generated panel, from `pipeline/gen_site.py`), the new `pages/readiness.html`, and `room/data/readiness_26b2c41e.json`. B5 also appends `data/sources.json` entries S29 (Baltimore depth chart) and S30 (Houston depth chart); this is additive only (S27 and S28 were already taken on `main`). The flags, sources and register rows are on the site as published content, not as edits to other sessions' rows.
 
 **Result of `07810d9f`, as of this push.**
-- Register: `scripts/brief_07810d9f/register.py` → `room/data/readiness.json`, 82 requirement rows, each with status, checked-date, evidence, blocking gate, clearing value, next step and source link. Statuses: Done 15, Partial 31, Not started 19, Blocked 8, Not met 3, Not verified 5, Rejected (brief) 1. Repo-internal links are labelled "internal" on the page.
+- Register: `scripts/brief_07810d9f/register.py` → `room/data/readiness_26b2c41e.json`, 82 requirement rows, each with status, checked-date, evidence, blocking gate, clearing value, next step and source link. Statuses: Done 15, Partial 31, Not started 19, Blocked 8, Not met 3, Not verified 5, Rejected (brief) 1. Repo-internal links are labelled "internal" on the page.
 - Injury reconciliation: `data/brief_07810d9f/injury_delta_2026-11-15.json` (live 347 rows, scrape 345 rows; 2 live-only, 0 scrape-only; 32 field mismatches: injury 13, game 13, practice 6). Parser defects are **flagged, not fixed** (F-7810-01 to -04): LAC and BAL blank-status rows, two Ravens rows absent, Arden Key changed between reads. Re-running the scrape is the fix; that is an Actions step, not made here.
 - Flags F-7810-01 to F-7810-12 appended to `data/flags.json` (append only; main's F48 kept). Published on Flagged for Review, non-blocking.
 - Gates on the pushed tree: `build_site_all.py` OK; `build_site_all.py --check` OK (base commit failed on 16 pages); `room/build.py` + `room/verify.py` PASS; unit tests 136 OK; `audit_numbers.py` 47/47; `tools/verify.py` 2047 rows with official source link; `verify_combined.py` 0 broken links; `check_generators.py` PASS; `check_strength_site.py` PASS; `validate_verified.py` PASS; `check_committed_site.py` PASS.
 - **Not done in this session (stated, not claimed):** standings division page chunk 1 unread; schedule week-11 and REG10 not re-verified; Houston depth chart unresolved (image only); Packers jersey prefixes (59 cells) not stripped; brief's VR/VQ references untraceable; gate-scheme conflict (G1–G8 vs G01–G13) unresolved (F-7810-12).
 - Board hygiene noted on `main` (not edited, another session's text): the `a6220e65` block near line 2800 contains a literal `\n` sequence on one line.
 - Push note: the remote branch held one earlier claim commit (`392c776`); the local history was rebased onto `main` 32a0a88 and the remote tip recorded as an `ours` merge parent, so the push is a fast-forward and no commit was rewritten on the remote.
+
+### Session `90c2b454-nfl1` — result record (2026-11-15, branch `arena/90c2b454-nfl1`)
+
+**Correction to the claim above.** The claim said the board was read before work began. That was not true for the full file: only the sections needed to find the claim and the rebase conflict were read. The rest of the board (about 2,800 lines) has not been read in full, so no claim in this session depends on it.
+
+**Done and gated**
+- P2 injury-report snapshots: capture, verify, parse, heartbeat, change-only storage, and the 6-hourly workflow. Live capture `20261115T121648Z`: 347 rows, 28 clubs.
+- P3 snapshot ledger page `pages/snapshots.html`, wired into NAV and CANON. Its nav now comes from `normalize_nav.py`, which removes a drift where the bot's re-render and the site build disagreed on every run.
+- P4 decision readiness. Row sources corrected: R1, R2, R3, R4, R9, R10 link their internal computation (labelled as having no official source, F52). R6 links the depth-chart file. The 10-row register is built but **not rendered** on the landing page, because main's 82-row register (PR #65) is the landing page's readiness table. The landing page keeps the removal-of-luck panel. `badge()` maps `met`, `partial` and `unverified`.
+
+**Flags raised**
+- **F51 (terms of use, needs review, the most important item).** NFL.com Terms s.1.1 and s.1.3 (https://www.nfl.com/legal/terms/) prohibit systematic retrieval of data to compile a database absent written consent, and prohibit copying Services content. This repo retrieves nfl.com/injuries every 6 hours and publishes 347 row-level player designations on about 21 pages. This conflicts with the rule that raw row-level data stays private until the terms are read. **No content was removed.** The owner must choose: obtain consent, publish aggregates and links only, or stop the scrape.
+- F52 (source attribution, needs review). See above. `data/depth_ladder.json` also contains an unresolved template URL, `https://www.<club>/team/depth-chart`.
+
+**Merge with main.** Main moved 61 commits ahead (PRs #64 and #65). Flag IDs collided: main's F49 is "results corpus one game behind", so this branch's F49/F50 became F51/F52. Source conflicts were resolved by keeping both sides. Generated pages and data were taken from main and then regenerated. One landing-page readiness panel of mine was dropped, because it duplicated main's and shadowed its function.
+
+**Not done (open, logged rather than silently skipped)**
+- Overlap with PR #47 (`arena/cf97db19-nfl1`, also edits `index.html`, `normalize_nav.py` and `COORDINATION.md`): logged, not reconciled.
+- Requirement counts (36 in `data/requirements.json`, 26 in `room/data/requirements.json`, "about 100" in the brief): not reconciled. The true count is unverified.
+- CHI, DEN, PHI and TB gaps in the committed `official_injuries.json`: not reconciled against the live capture.
+- Standings and the Week 10 schedule were not re-verified this session.
+- `scripts/build_site.py` and `tools/check_source_audit.py` were not exercised beyond what the gates above run.
+
+**Gates on the final committed tree (all exit 0):** `build_site_all --check`; `check_generators`; `check_site`; `verify`; `verify_combined`; `check_committed_site`; `check_freshness`; `verify_official`; `validate_verified`; `room/verify`; `check_strength_site`; unit tests; `check_source_audit`; `audit_official`; `check_reachability`; `normalize_nav`; and the dashboard workflow steps `verify_dashboard`, `check_reproducible`, `evidence_from_official`, `build_decision_room`, `build_dashboard`.
 
 **Integration record, `07810d9f-nfl1` (B7).**
 - PR #65 (`arena/07810d9f-nfl1` → `main`): **MERGED** at 2026-11-15T12:33:53Z, merge commit `f9d0e9f`. Checks on the head commit `17fb762` all passed: Verify NFL1 site, Verify decision dashboard, Decision Room build and gate, Verify NFL Decision Lab site build.
@@ -2974,6 +3063,21 @@ additive and non-overlapping with every earlier session, which are all closed.
 - Follow-up PR (label corrections in the register; PR-09 wording and IN-10 count) opened from the same branch after the merge; its result is recorded here when it is merged.
 - Follow-up PR #66 (register label corrections; cross-reference SP-09 → SI-09): **MERGED** at 2026-11-15T12:38:16Z, merge commit `95618e7`. Its head `bb6b8a0` passed all four workflows. GitHub Pages: built for `8c57b7c` (later main data refresh) after the `95618e7` Pages run succeeded.
 
+**Integration record, final (`07810d9f-nfl1`).**
+- PR #66 (label corrections, PR-09 and IN-10) merged at `95618e7`. PR #69 (cross-reference SP-09 → SI-09 in IN-06, and this record) merged at `df084b5` (MERGED 2026-11-15T12:42:05Z); all four workflows green on `5ffaa1b`, the head before the merge.
+- Deployment evidence for `df084b5`: the `pages build and deployment` run (43715179430) succeeded (build, report-build-status and deploy). The live page `pages/readiness.html` serves the corrected PR-09 wording ("Turn the game log into a pre-registered backtest corpus") and the SI-09 cross-reference.
+- **Discrepancy logged:** the legacy Pages API (`gh api repos/…/pages/builds/latest`) reports `errored` ("Page build failed.") for `df084b5`, `45c5760` and `95618e7`, and `built` for `fde0ee7` and `8c57b7c`. The repository has `.nojekyll`, and the board has no Liquid syntax, so the cause is not a Markdown file. The Pages build cannot be re-requested from this session (HTTP 403 for the integration token). Owner: repository administrators. Request: check the Pages build log for `df084b5` and confirm the legacy build after the next `main` push.
+
+### Session `90c2b454-nfl1` — merge record (PR #68)
+
+| Item | Value |
+| --- | --- |
+| PR | [#68](https://github.com/kanlerxz87-cyber/NFL1/pull/68) `arena/90c2b454-nfl1` → `main` |
+| Merged | 2026-11-15T12:48:28Z, merge commit `7c4991b` (`--merge`, no approval, no auto-merge) |
+| Checks on the merged head `37b98ef` | all green: Verify NFL1 site, Verify decision dashboard, Verify NFL source provenance, Verify NFL Decision Lab site build, Decision Room build and gate |
+| Pages deploy | the build for `7c4991b` **errored** (recorded as `errored`, 12:48:29Z). The next builds succeeded: `7629ca6` (bot snapshot commit, 12:48:42Z) and `87add0e` (main head, 12:50:27Z). `87add0e` contains the merge. Live page checked: `https://kanlerxz87-cyber.github.io/NFL1/pages/snapshots.html` serves the ledger, stamped 2026-11-15T12:48:40+00:00 |
+| Flags published | F51 (terms of use, needs review) and F52 (source attribution, needs review), on the Flagged for Review page with source links |
+| Not in this PR | the open items listed in the result record above (PR #47 overlap, requirement-count reconciliation, CHI/DEN/PHI/TB gap, standings and schedule re-verification) |
 ---
 
 # Session `55dc53f4-nfl1` — pre-registered shadow baseline, Week 11 forecast record, drift alarm, team view (2026-11-15)

@@ -59,6 +59,12 @@ jobs:
         run: python pipeline/build_depth_ladder.py
       # Session 3d5c5e2d-nfl1: re-render the published pages from the data just built. Before this
       # step, a data refresh changed data/model/*.json but never the pages that show it.
+      # Session 90c2b454-nfl1: the decision-readiness rows and the injury-snapshot ledger are
+      # computed from the snapshot store and the leaderboard, so they are rebuilt before the landing page.
+      - name: Rebuild the decision-readiness rows and the snapshot ledger
+        run: |
+          python tools/build_readiness.py
+          python tools/build_snapshots_page.py
       - name: Re-render the published pages from the refreshed data
         run: python pipeline/gen_site.py
 
