@@ -2798,3 +2798,11 @@ verified sound, with one unusual official row recorded for review) · F46 (overl
 generations — decision D07 / suggestion S17) · F47 (2nd-to-4th string coverage now exists, needs
 sign-off). None of them blocks anything; they are published rather than hidden.
 
+
+## Session `edbb28da-nfl1` — repository audit (2026-11-15)
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| ED1 | Audit existing repository and run available verification suite without duplicating published work | done | `edbb28da` | `docs/audit-edbb28da.md`, `COORDINATION.md` | Existing site and task-board history reviewed first. Decision Room verifier PASS (11 pages, 23 tables, 312 rows). `unittest` PASS (136 run, 11 skipped due absent numpy/pandas). Pytest unavailable. No live re-fetch was done, so this is not a fresh official data verification or deployment confirmation. |
+
+**Findings:** existing project already contains the requested dashboard, executive summary, question register, suggestions review path, category pages, leaderboard gates, and source/flag registers. This session made no NFL-data claims or edits. `tests/test_strength.py` reports file-handle `ResourceWarning`s, and optional-dependency tests remain skipped; recorded in `docs/audit-edbb28da.md`. Official reference entry points are listed there; no specific live fact is claimed verified today.
