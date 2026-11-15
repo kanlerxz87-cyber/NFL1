@@ -2798,3 +2798,33 @@ verified sound, with one unusual official row recorded for review) · F46 (overl
 generations — decision D07 / suggestion S17) · F47 (2nd-to-4th string coverage now exists, needs
 sign-off). None of them blocks anything; they are published rather than hidden.
 
+
+---
+
+# Session `90c2b454-nfl1` — immutable availability snapshots, ledger page, decision-readiness table
+
+| Item | Value |
+| --- | --- |
+| This session ID | `90c2b454-nfl1` |
+| This session branch | `arena/90c2b454-nfl1` (fixed by Arena; the brief's `session-<id>/<task>` form cannot be used — same deviation as every earlier session) |
+| Base commit | `5a769b367722a971dfad2da877a4c64cc391c587` (`origin/main` at start) |
+| Board read before work | yes — the board was read before this claim (2,800 lines at claim time) |
+| Other open PRs at claim time | **#47** `arena/cf97db19-nfl1` (X1 backup register; touches `index.html` and `scripts/verified/normalize_nav.py`) and **#57** `arena/65df4799-nfl1` (COORDINATION only). Both left untouched by this session. Their overlap with the nav lines edited here is logged below. |
+
+## Task board (session `90c2b454-nfl1`)
+
+Status values: `unclaimed` | `in progress` | `done` | `needs review`.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| P1 | Read the board, claim, push the claim first | in progress | `90c2b454` | `COORDINATION.md` | this section |
+| P2 | Immutable official injury-report snapshots: scheduled capture of nfl.com/injuries with the raw SHA-256, fetch timestamp, parsed rows, change-only captures, a per-fetch heartbeat, conflict flags and a drift/freshness alarm | in progress | `90c2b454` | `pipeline/capture_snapshots.py` (new), `data/snapshots/injury_report/` (new, append-only), `.github/workflows/capture-snapshots.yml` (new) | Captures are never overwritten. Raw HTML bytes are hashed, not stored. |
+| P3 | Snapshot ledger page: capture history, heartbeat cadence, designation deltas between captures, each row linked to its nfl.com player page | in progress | `90c2b454` | `tools/build_snapshots_page.py` (new), `pages/snapshots.html` (generated), one nav line each in `pipeline/gen_site.py` and `scripts/verified/normalize_nav.py` | nav lines only; logged overlap with PR #47 |
+| P4 | Decision-readiness table on the landing page: one row per requirement, the gate that blocks it, the number that would clear it, blank where no official or measured number exists | in progress | `90c2b454` | `data/readiness.json` (new), landing-section block in `pipeline/gen_site.py` | every value sourced or left blank and flagged |
+| P5 | Gates re-run, PR `arena/90c2b454-nfl1` → `main`, merge, confirm Pages deploy, record PR link and result here | unclaimed | `90c2b454` | `COORDINATION.md` | recorded after merge |
+
+**Not touched by this session:** `room/`, `strength/`, `review-room/`, `research/`, `s9cb/`, `analysis/`,
+`referee/`, `dashboard/`, `docs/`, `verified-lab/`, `lab/`, `data/model/`, `data/verified/`,
+`data/backup-register/`, `pages/backup-register.html`, `tools/build_backup_register.py`, and PR #47's files.
+
+**Baseline gates before any edit (this session):** `validate_verified.py` PASS · `verify_official.py` 0 failed (20 passed, 8 flagged) · `check_site.py` 27 pages, all links resolve · `check_generators.py` PASS · `check_committed_site.py` PASS · `room/verify.py` PASS · `check_freshness.py` reports one stale file (`decision_room/decision_room.json`, pre-existing, logged for the room owner) · `build_site_all.py --check` fails on a missing `pandas` in the sandbox only (installed in a venv outside the repo, rerun below).
