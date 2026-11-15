@@ -3644,3 +3644,83 @@ The existing backtest leaderboard pages are not edited; P7 republishes them in a
 labelled archive view and logs a change request for their owners.
 
 _This claim is committed and pushed before any other file is touched, per the brief._
+
+---
+
+## Completion record — session `0c5215c1-nfl1` (2026-11-15, UTC)
+
+**P1–P9: all delivered.** Claim table statuses: P1 done (claim `0d10c30`) · P2 done ·
+P3 done · P4 done · P5 done · P6 done · P7 done · P8 done · P9 done (this record; PR and
+Pages result appended as a follow-up once the merge lands, per the board's pattern).
+
+### What was built (file scope exactly as claimed: `prereg/**`, `data/prereg/**`, additive nav)
+
+| deliverable | evidence |
+|---|---|
+| **Registration commit for SB-01** (rule text, policy, model code, **no results**) | `9ea55fa7ff4aa8e03f13b6551be349574dc2d3d6` — `prereg/SB-01-rule.md`, `prereg/README.md`, `prereg/shadow_baseline.py` byte-identical since (gate V1 re-derives the hash from `git log --diff-filter=A` on the rule file, no hardcoding) |
+| **Forecast record before kickoff** (readiness PR-18, second such record after `739408a8`) | `data/prereg/forecasts/SB-01_week11_2026.json` — 13 games, `recorded_at 2026-11-15T13:48:22Z` < first kickoff `2026-11-20T01:15:00Z`; input sha256 `483beddb…`; PF/PA aggregates stored so every p_home reproduces to 6 dp; model-file shas pinned (SB-G2) |
+| **Registry with two-sided mind-changers** (readiness PR-15 + PR-24) | `data/prereg/registrations.json` — **126 entries**: 69 retrospective · 30 prospective-eligible · 27 prospective, across 13 collections; every entry has an `upside` AND a `downside` trigger; retrospective notes carry the disclosure wording (flag R26-01 pattern never laundered into a pre-registration claim) |
+| **Frozen backtest corpus** (readiness PR-09) | `data/prereg/corpus.json` — `NFL1-CORPUS-2026-11-15-v1`, `data/s9cb/games.csv` sha256 `483beddbdf226901b903ccc6e84f3dbc38df05110bc53a92eb63da8ec44f054f`, 7,104 completed games, membership rule + counts, splits train 1999–2022 (6,151) / validation 2023–2024 (544) / **holdout 2025–2026 (409, closed** — `holdout_opened: null`), observed-price policy pending decision PR-10 |
+| **Controls** (readiness PR-17) | `data/prereg/controls.json` — CTRL-01 random side analytic **−2.51%** (n=5,202), CTRL-01T totals −2.79% (n=5,200), CTRL-02 favourites-only **−4.74%**, hit 48.81%, normal CI [−7.43%, −2.05%], pushes excluded; registered for every future board run |
+| **Prospective-vs-backtest split** (readiness PR-06) | prospective board on `prereg/registry.html` (registration-hashed entries, **zero ROI/win-rate columns**, empty-by-design scoreboard) beside `prereg/archive.html` (all historical numbers, labelled retrospective, not-a-leaderboard banner, no ranks/rewards). Root `leaderboard.html` untouched, change request still logged |
+| **Verification gate** | `prereg/verify.py` — 14 checks, PASS: registration files byte-identical since registration commit; all 13 `recorded_at` precede kickoffs; probabilities reproduce; corpus membership recomputes from the current file; holdout closed; 126/126 entries have both mind-changer sides; prospective board has no performance columns; every table row on this sub-site's pages carries a link; local hrefs resolve |
+| **Official Week 11 transcription** | `data/prereg/official/week11_2026_schedule.json` — 13 fixtures + 6 byes from <https://www.nfl.com/schedules/2026/by-week/week-11> (3 chunks read), per-game official game-centre URLs, kickoff UTC derived at EST (UTC−5); cross-checked against the feed rows and against session `a6220e65`'s independent 13/13 |
+
+### Reconciliation of the pre-registration fragmentation (board item raised by `d4027f66`)
+
+Four registries landed on main during this session. The registry now **indexes all of them
+with their own registration commits** instead of replacing anyone:
+
+* `739408a8` forward-test ledger (`data/prereg/registry.json`, registration `45342e86`) —
+  indexed as `forward/PR-01..03` with mind-changers; their `prereg/index.html` is **kept
+  as theirs** (add/add conflict resolved to their file; it stays the sub-site home).
+* `55dc53f4` shadow-v1 (`prereg/shadow-v1.md`, registration `01da763`) — indexed as
+  `shadow/shadow-v1`.
+* `c7b65577` strategy-competition stamps (`data/strat/preregistration.json`, registration
+  `a25a3ee`) — its S01–S12 are the s9cb set already registered here as `s9cb/*`
+  (mind-changers live there); its 19 registered-prospective records P01–P19 are registered
+  here as `strat/P01..P19` **with the two-sided fields their records do not carry**.
+* `d4027f66` `RULES_v1`/`data/preregistration/` registers 0 strategies (their own record),
+  so there is nothing to cross-index.
+
+Three registered baselines now coexist and none double-scores: `PR-02` (record share),
+`shadow-v1`, `SB-01` — each with its own registration hash, record file and scoring rule.
+
+### Nav and shared-tool edits (additive, logged as claimed)
+
+* `pipeline/gen_site.py` NAV + `scripts/verified/normalize_nav.py` CANON: **2 entries**
+  appended after `739408a8`'s — `prereg/registry.html` "Strategy Registry",
+  `prereg/archive.html` "Backtest Archive" (`prereg/forecasts.html` is reached from the
+  registry page).
+* `tools/check_generators.py`: registered `prereg/build.py` (ownership: `prereg/registry|forecasts|archive.html`)
+  and documented `prereg/index.html → tools/prereg.py`. Result: PASS, every path one owner.
+
+### Gates run locally (all green)
+
+`tools/build_site_all.py` + `--check` · `tools/verify.py` (2,106 rows sourced) ·
+`tools/verify_combined.py` · `scripts/verified/check_site.py` · `validate_verified.py` ·
+`audit_numbers.py` (47 recomputations) · `tools/audit_official.py` ·
+`tools/check_committed_site.py` · `tools/check_reachability.py` (193/193) ·
+`tools/check_generators.py` · `tools/check_reproducible.py` · `room/verify.py` ·
+`prereg/verify.py` · both preregistration checkers (+ self-tests) · `check_scraper_pins` (+ self-test) ·
+`check_scrape_drift` · `check_depth_register` · `verify_official` (20 pass) ·
+`verify_dashboard` · `check_freshness` · strength, strat and scrape-drift unit suites ·
+`python3 -m pytest tests/ -q` → **198 passed** · external links advisory (0 dead).
+
+### Notes, deviations, defects observed (logged, not fixed in others' files)
+
+1. Sandbox gap, not repo: `pandas/numpy/bs4/lxml/requests/scipy/pyarrow/pytest` installed
+   with `pip --user --break-system-packages` to mirror CI; CI installs them itself.
+2. `prereg/README.md` is living policy and is deliberately **not** in verify V1's pinned
+   set; the frozen rule text and model code are. The forecast record still pins README's
+   sha as of record time (SB-G2 honoured).
+3. Running `strat/preregister.py` on any branch rewrites `registration_branch` to that
+   branch and refreshes `generated_at` in the frozen `data/strat/preregistration.json`
+   (and the `strat/*` outputs). The churn was reverted here; their generator owns the
+   fix (a branch field should be stamped once, not derived from the running checkout).
+4. Merge conflicts at `origin/main` `8f15a68`: `COORDINATION.md` resolved as a **union**
+   (their records + this claim, nothing discarded); `prereg/index.html` add/add resolved
+   to their file.
+5. Parallel open PRs respected at integration: #81, #80, #79, #77, #59, #57, #47 —
+   none touch `prereg/**` or `data/prereg/**`; #80 touches `pipeline/gen_site.py` like we
+   do, so whoever merges second resolves the NAV block additively (both entries keep).
