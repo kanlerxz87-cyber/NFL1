@@ -426,7 +426,7 @@ def page_backtest(LB):
                 "with the price taken on each bet. They are historical and are not prospective "
                 "evidence of skill. Nothing on this page ranks a strategy.")
     body += kpi([
-        ("Strategies tested", str(LB["n_strategies"]), "declared before any of them was scored"),
+        ("Strategies tested", str(LB["n_strategies"]), "rules in this study; no pre-registration commit is recorded for them"),
         ("Bets scored", f"{LB['totals']['bets_scored']:,}", "every one at a price from the source"),
         ("Games covered", f"{LB['totals']['games_in_sample']:,}", "distinct games in the bet log"),
         ("Passing all eight gates", str(sum(1 for r in LB["leaderboard"] if r["status"] == "PASS")),
