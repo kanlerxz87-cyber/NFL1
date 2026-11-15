@@ -1,0 +1,49 @@
+{
+ "source": "depth_chart",
+ "source_title": "Official club depth chart",
+ "official": true,
+ "what_this_records": "the club's own published depth order, as printed",
+ "url": "https://www.baltimoreravens.com/team/depth-chart",
+ "captured_at": "2026-11-15T12:57:10Z",
+ "clock_precision": "second",
+ "replayable_to_a_kickoff": true,
+ "generated_at": "",
+ "captured_at_kind": "fetch clock time (the page declares no update time)",
+ "club": "BAL",
+ "week": "",
+ "season": "2026",
+ "sha256": "f9da4c0aab60c8e629ae95b13a3edd08115e27f883973c62e18c2f6a9ce7bbb5",
+ "bytes": 5547,
+ "parser": "depth_parse.py/57c05555",
+ "parser_version_depths": "depth_parse.py as of session 57c05555-nfl1: jersey prefixes stripped and retained, slots kept as groups, empty slots kept empty, legend rows dropped",
+ "capture_method": "fetch_page render of the official page (text, not HTML)",
+ "payload_kind": "raw-page-text",
+ "raw_html_retained": true,
+ "conflict": null,
+ "notes": "second read this session, taken AFTER the transactions log was captured, to settle whether the chart is stale. Byte-identical to the 12:52:48Z read.",
+ "parse": {
+  "capture_kind": "table",
+  "chart_date": "",
+  "counts": {
+   "slots": 29,
+   "slots_empty": 1,
+   "slots_with_hole": 0,
+   "groups": 59,
+   "player_names": 59,
+   "shared_groups": 0,
+   "shared_group_names": 0,
+   "shared_rank1_groups": 0,
+   "cells_with_jersey": 0,
+   "jersey_numbers_stripped": 0,
+   "continuation_ranks": 0,
+   "rows_dropped": 0,
+   "by_unit": {
+    "offense": 11,
+    "defense": 12,
+    "special_teams": 6
+   },
+   "max_rank": 3
+  },
+  "gaps": []
+ }
+}

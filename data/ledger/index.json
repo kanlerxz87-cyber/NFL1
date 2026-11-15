@@ -1,6 +1,6 @@
 {
  "generated_by": "pipeline/ledger.py",
- "built_at": "2026-11-15T12:54:34Z",
+ "built_at": "2026-11-15T12:56:01Z",
  "what_this_is": "Append-only captures of official sources, each with the clock time it was read and the sha256 of its bytes. A capture is never rewritten; a second read of the same source at a later time is a new capture.",
  "sources": {
   "injuries": {
@@ -29,8 +29,9 @@
   }
  },
  "counts": {
-  "depth_chart": 6,
-  "injuries": 2
+  "depth_chart": 7,
+  "injuries": 2,
+  "transactions": 2
  },
  "by_source": {
   "depth_chart": [
@@ -227,6 +228,39 @@
      },
      "max_rank": 3
     }
+   },
+   {
+    "captured_at": "2026-11-15T12:57:10Z",
+    "clock_precision": "second",
+    "payload_kind": "raw-page-text",
+    "dir": "data/ledger/depth_chart/2026-11-15/20261115125710Z_f9da4c0aab60",
+    "url": "https://www.baltimoreravens.com/team/depth-chart",
+    "sha256": "f9da4c0aab60c8e629ae95b13a3edd08115e27f883973c62e18c2f6a9ce7bbb5",
+    "bytes": 5547,
+    "club": "BAL",
+    "week": "",
+    "parser": "depth_parse.py/57c05555",
+    "capture_kind": "table",
+    "counts": {
+     "slots": 29,
+     "slots_empty": 1,
+     "slots_with_hole": 0,
+     "groups": 59,
+     "player_names": 59,
+     "shared_groups": 0,
+     "shared_group_names": 0,
+     "shared_rank1_groups": 0,
+     "cells_with_jersey": 0,
+     "jersey_numbers_stripped": 0,
+     "continuation_ranks": 0,
+     "rows_dropped": 0,
+     "by_unit": {
+      "offense": 11,
+      "defense": 12,
+      "special_teams": 6
+     },
+     "max_rank": 3
+    }
    }
   ],
   "injuries": [
@@ -264,6 +298,36 @@
      "clubs_with_a_table": 0
     }
    }
+  ],
+  "transactions": [
+   {
+    "captured_at": "2026-11-15T12:54:51Z",
+    "clock_precision": "second",
+    "payload_kind": "raw-page-text",
+    "dir": "data/ledger/transactions/2026-11-15/20261115125451Z_f02e620a8f15",
+    "url": "https://www.baltimoreravens.com/team/transactions/",
+    "sha256": "f02e620a8f15664e51592469dc8d9166d386cd9052729b147fb8693f0fcdc816",
+    "bytes": 6646,
+    "club": "BAL",
+    "week": "",
+    "parser": "text/1",
+    "capture_kind": "",
+    "counts": {}
+   },
+   {
+    "captured_at": "2026-11-15T12:55:40Z",
+    "clock_precision": "second",
+    "payload_kind": "raw-page-text",
+    "dir": "data/ledger/transactions/2026-11-15/20261115125540Z_7a30f54ee3ea",
+    "url": "https://www.colts.com/team/transactions/",
+    "sha256": "7a30f54ee3eac4e74a1b79980fdcef88d11f29d53868b5f151146858f578cb8f",
+    "bytes": 6303,
+    "club": "IND",
+    "week": "",
+    "parser": "text/1",
+    "capture_kind": "",
+    "counts": {}
+   }
   ]
  },
  "conflicts": [],
@@ -285,7 +349,7 @@
   "depth_chart_clubs_expected": 32,
   "days_needed_for_a_14_day_holdout": 14,
   "days_still_to_capture": 12,
-  "captures_with_a_clock_time": 6,
+  "captures_with_a_clock_time": 9,
   "captures_date_only": 2,
   "honest_position": "One day of captures cannot replay a practice week. The ledger makes every future read replayable and proves the archive is thin today; it does not manufacture the missing days."
  }
