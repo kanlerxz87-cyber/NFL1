@@ -40,6 +40,7 @@ Read on 2026-11-13 (UTC) from:
 """
 from __future__ import annotations
 
+import csv
 import json
 import os
 from datetime import datetime, timezone
@@ -616,6 +617,63 @@ def depth_rows():
     return rows
 
 
+# ------------------------------------------------- 4b. the current injury capture
+# The 2026-11-12 transcription above is a PINNED point-in-time fixture and stays pinned: it
+# is what the hand-transcribed artifacts of that date were checked against, and re-writing it
+# would destroy the ability to audit them.
+#
+# The official Week 10 page is not a fixed document, though: it grew from 279 rows across 26
+# clubs on 2026-11-12 (with LAC and BAL printing "No Injuries Reported") to 347 rows across
+# all 28 playing clubs by 2026-11-15 (zero no-injury sections). A repo artifact that follows
+# the current page therefore cannot be verified against the pinned transcription, and
+# comparing the two produces a wall of mismatches that are all one-sided blanks.
+#
+# So the current state gets its own fixture, on the pattern already used for
+# ``standings_current`` and ``schedule_current`` above. It is generated from the capture in
+# ``data/capture/`` (347 rows, transcribed from chunks 0-7 of the official page on
+# 2026-11-15) and cross-checked against the independent automated scrape of the same page,
+# which was generated at 12:47Z on 2026-11-15. The two agree on all 347 rows for injury and
+# game status, which is what makes this a two-source reading rather than one transcription
+# verifying itself.
+INJURY_CAPTURE = os.path.join(ROOT, "data", "capture",
+                              "nflcom_injuries_reg10_2026-11-15_rows.tsv")
+RETRIEVED_INJURIES_CURRENT = "2026-11-15"
+# The club codes the pinned artifacts and this repository's fixtures use (AZ, LA).
+CAPTURE_TO_FIXTURE_CLUB = {"LAR": "LA"}
+
+
+def injury_rows_current():
+    """The official page's rows as captured on 2026-11-15, verbatim."""
+    if not os.path.exists(INJURY_CAPTURE):
+        raise SystemExit(
+            "REFUSED: the current injury capture is missing at " + INJURY_CAPTURE +
+            ". The current fixture is generated from it rather than typed from memory."
+        )
+    rows = []
+    with open(INJURY_CAPTURE, encoding="utf-8") as fh:
+        for r in csv.DictReader(fh, delimiter="\t"):
+            club = CAPTURE_TO_FIXTURE_CLUB.get(r["team"], r["team"])
+            rows.append(dict(club=club, player=r["player"], position=r["position"],
+                             injury=r.get("injury") or "",
+                             practice=r.get("practice_status") or "",
+                             game_status=r.get("game_status") or "",
+                             player_page="https://www.nfl.com/players/"
+                                         + r["player"].lower().replace(" ", "-") + "/",
+                             source=INJURIES_URL,
+                             retrieved=RETRIEVED_INJURIES_CURRENT))
+    return rows
+
+
+def injury_club_order_current():
+    """Club sections in the order the page prints them, deduplicated."""
+    order = []
+    for r in injury_rows_current():
+        if not order or order[-1] != r["club"]:
+            if r["club"] not in order:
+                order.append(r["club"])
+    return order
+
+
 # ----------------------------------------------------------------- 5. write
 def main() -> int:
     os.makedirs(OUT, exist_ok=True)
@@ -633,6 +691,17 @@ def main() -> int:
             source_url=INJURIES_URL, retrieved=RETRIEVED, captured_at=captured,
             club_order=CLUB_ORDER, no_injuries_reported=NO_INJURIES_REPORTED,
             rows=injury_rows()),
+        "injuries_current.json": dict(
+            _readme="CURRENT capture: official Week 10 injury report, transcribed from the "
+                    "official page on 2026-11-15 (347 rows, 28 clubs, zero 'No Injuries "
+                    "Reported' sections). Cross-checked row by row against the independent "
+                    "automated scrape of the same page (data/model/official_injuries.json, "
+                    "generated 2026-11-15T12:47:08Z): 0 differences on injury and game "
+                    "status. Moving artifacts are checked against this capture; the pinned "
+                    "279-row transcription of 2026-11-12 stays on injuries_week10.json.",
+            source_url=INJURIES_URL, retrieved=RETRIEVED_INJURIES_CURRENT, captured_at=captured,
+            club_order=injury_club_order_current(), no_injuries_reported=[],
+            rows=injury_rows_current()),
         "schedule_week10.json": dict(
             _readme="Official Week 10 schedule, hand-transcribed on 2026-11-12 from "
                     + SCHEDULE_URL + ". Kickoff is the local ET clock time printed on the page.",
