@@ -22,6 +22,11 @@ jobs:
         run: python3 tools/compute_correlations.py
       - name: Re-verify merged session data line by line
         run: python3 tools/verify_combined.py
+      # Session 543676f8-nfl1: the research sub-site (s9cb/site.py) imports pandas during the
+      # rebuild below. Install it before the rebuild, not after (the install step further down
+      # stays, unchanged, for the strength study).
+      - name: Install numpy and pandas for the rebuild
+        run: python -m pip install --quiet numpy pandas
       - name: Rebuild every published page from the JSON data layer
         run: python3 tools/build_site_all.py
 
