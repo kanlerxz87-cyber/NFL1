@@ -1,0 +1,69 @@
+{
+  "schema": "nflcom-injury-capture/1",
+  "source_url": "https://www.nfl.com/injuries/league/2026/reg10",
+  "source_title": "Official NFL Injury Report for Players - Week 10 of the 2026 Season | NFL.com",
+  "season": 2026,
+  "week": 10,
+  "captured": "2026-11-15 (date from the session clock; time of day not recorded by the capture tool)",
+  "capture_method": "Agent fetch_page tool, chunks 0 to 7 of 8 of the page. The tool returns rendered text, not the raw HTML. Every row was transcribed from that text, grouped by game in the order the page prints them, and checked against the printed club names and per-club player counts.",
+  "raw_html_retained": false,
+  "rows_tsv": "nflcom_injuries_reg10_2026-11-15_rows.tsv",
+  "games_tsv": "nflcom_injuries_reg10_2026-11-15_games.tsv",
+  "rows_tsv_sha256": "9fe77d36a25618542553e690a5a44dac3449769b56e45cccd711cb1e2669cd5f",
+  "games_tsv_sha256": "660e0ba1b4824425eb19b51064169b98f0cfbc7e0793ab8a46e1d9e8f2e50dfd",
+  "counts": {
+    "rows": 347,
+    "clubs": 28,
+    "games": 14,
+    "no_injury_sections_on_page": 0
+  },
+  "rows_per_club": {
+    "ATL": 11,
+    "AZ": 15,
+    "BAL": 10,
+    "BUF": 14,
+    "CAR": 12,
+    "CIN": 9,
+    "CLE": 12,
+    "DAL": 19,
+    "DET": 9,
+    "GB": 17,
+    "HOU": 16,
+    "IND": 14,
+    "JAX": 11,
+    "KC": 13,
+    "LAC": 19,
+    "LAR": 14,
+    "LV": 5,
+    "MIA": 11,
+    "MIN": 13,
+    "NE": 15,
+    "NO": 12,
+    "NYG": 11,
+    "NYJ": 9,
+    "PIT": 8,
+    "SEA": 15,
+    "SF": 12,
+    "TEN": 12,
+    "WAS": 9
+  },
+  "cross_references": [
+    {
+      "name": "automated scrape",
+      "path": "data/model/official_injuries.json",
+      "generated_at": "2026-11-14T17:02:31+00:00",
+      "rows": 345
+    },
+    {
+      "name": "hand copy",
+      "path": "data/verified/injury_report_2026_week10.tsv",
+      "retrieved": "2026-11-12T05:30Z",
+      "rows": 254
+    }
+  ],
+  "notes": [
+    "Club codes are as printed on nfl.com: AZ (Arizona) and LAR (Los Angeles Rams).",
+    "Injury text is copied as printed, including 'Not injury related - ...' notes. Blank injury means the page printed no injury.",
+    "Blank game_status means the page printed no game designation for that player."
+  ]
+}
