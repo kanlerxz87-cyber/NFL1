@@ -1,0 +1,132 @@
+{
+  "data/depth_chart.json": {
+    "compared_cells": 173,
+    "compared_clubs": [
+      "GB",
+      "KC",
+      "SEA",
+      "SF"
+    ],
+    "differences": [
+      {
+        "club": "KC",
+        "unit": "Offense",
+        "position": "WR",
+        "column": 3,
+        "repo_value": "Cyrus Allen",
+        "difference": "official page prints this player at [('WR', 2), ('KR', 2), ('PR', 2)]",
+        "repo_source": "data/depth_chart.json"
+      },
+      {
+        "club": "KC",
+        "unit": "Special Teams",
+        "position": "KR",
+        "column": 2,
+        "repo_value": "Emmett Johnson",
+        "difference": "official page prints this player at [('RB', 2), ('KR', 1), ('PR', 1)]",
+        "repo_source": "data/depth_chart.json"
+      },
+      {
+        "club": "KC",
+        "unit": "Special Teams",
+        "position": "PR",
+        "column": 2,
+        "repo_value": "Emmett Johnson",
+        "difference": "official page prints this player at [('RB', 2), ('KR', 1), ('PR', 1)]",
+        "repo_source": "data/depth_chart.json"
+      },
+      {
+        "club": "GB",
+        "unit": "Offense",
+        "position": "TE",
+        "column": 4,
+        "repo_value": "Josh Whyle",
+        "difference": "player not printed on the official page",
+        "repo_source": "data/depth_chart.json"
+      },
+      {
+        "club": "GB",
+        "unit": "Offense",
+        "position": "WR",
+        "column": 2,
+        "repo_value": "Coleman Owen",
+        "difference": "player not printed on the official page",
+        "repo_source": "data/depth_chart.json"
+      },
+      {
+        "club": "GB",
+        "unit": "Offense",
+        "position": "RB",
+        "column": 4,
+        "repo_value": "Kaleb Johnson",
+        "difference": "official page prints this player at [('RB', 3)]",
+        "repo_source": "data/depth_chart.json"
+      },
+      {
+        "club": "GB",
+        "unit": "Special Teams",
+        "position": "PR",
+        "column": 1,
+        "repo_value": "Coleman Owen",
+        "difference": "player not printed on the official page",
+        "repo_source": "data/depth_chart.json"
+      },
+      {
+        "club": "GB",
+        "unit": "Special Teams",
+        "position": "KR",
+        "column": 2,
+        "repo_value": "Coleman Owen",
+        "difference": "player not printed on the official page",
+        "repo_source": "data/depth_chart.json"
+      }
+    ],
+    "official_players_missing_from_repo": [
+      {
+        "club": "KC",
+        "unit": "Offense",
+        "position": "WR",
+        "column": 3,
+        "official_value": "Josh Downs",
+        "difference": "official page prints this player; repo file does not contain him",
+        "official_source": "https://www.chiefs.com/team/depth-chart"
+      },
+      {
+        "club": "KC",
+        "unit": "Defense",
+        "position": "DT",
+        "column": 3,
+        "official_value": "Marcus Harris",
+        "difference": "official page prints this player; repo file does not contain him",
+        "official_source": "https://www.chiefs.com/team/depth-chart"
+      }
+    ]
+  },
+  "data/evidence/depth_charts.json": {
+    "compared_rows": 123,
+    "compared_clubs": [
+      "KC",
+      "SEA"
+    ],
+    "differences": [
+      {
+        "club": "SEA",
+        "unit": "Offense",
+        "position": "WR",
+        "depth_rank": 2,
+        "player": "Rashid Shaheed",
+        "difference": "official page prints this player at [('WR', 1), ('PR', 1), ('KR', 1)]",
+        "repo_source": "data/evidence/depth_charts.json"
+      },
+      {
+        "club": "SEA",
+        "unit": "Offense",
+        "position": "WR",
+        "depth_rank": 3,
+        "player": "Irvin Charles",
+        "difference": "official page prints this player at [('WR', 2)]",
+        "repo_source": "data/evidence/depth_charts.json"
+      }
+    ]
+  }
+}

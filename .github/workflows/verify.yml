@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # full history: tools/check_preregistration_d4027.py verifies the registration commit
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -50,6 +52,16 @@ jobs:
       # hard gate (every table row source-linked, no broken local link, no placeholder
       # cell) plus unit tests, including the spread sign-convention regression that
       # caught four false PASSes during development. Nothing above is modified.
+      # Session d4027f66-nfl1. Drift alarm for the official depth register: fails on a
+      # changed club set, host, printed-name count (pinned) or schema; reports value anomalies.
+      # Session d4027f66-nfl1. Pre-registration gate: edited rule files and leaderboard numbers
+      # without a registration fail the build.
+      - name: Pre-registration gate
+        run: python3 tools/check_preregistration_d4027.py
+      - name: Depth register unit tests and drift alarm
+        run: |
+          python3 -m unittest tests.test_depth_register -v
+          python3 tools/check_depth_register.py
       - name: Strength study unit tests
         run: python3 -m unittest tests.test_strength -v
       - name: Rebuild the strength sub-site from its data layer

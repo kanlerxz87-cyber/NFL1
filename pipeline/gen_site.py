@@ -2103,6 +2103,57 @@ def load_rel(rel: str, default=None):
 UNIT_LABEL = {"offense": "Offense", "defense": "Defense", "special_teams": "Special teams"}
 
 
+def official_register_html() -> str:
+    """Session d4027f66-nfl1: the official depth register for the four clubs captured on
+    2026-11-15 (data/depth/official_register.json, built by tools/build_depth_register.py).
+    Every printed name is a row with its printed cell, its jersey split, its slot group and
+    its page source. Nothing here names a starter: column is printed order only."""
+    reg = load_rel("data/depth/official_register.json", default=None)
+    if not reg:
+        return ""
+    summ = reg["summary"]
+    t = summ["totals"]
+    club_rows = []
+    for abbr, v in summ["clubs"].items():
+        club_rows.append([
+            f'<strong>{esc(abbr)}</strong>', esc(v["club_name"]), esc(v["page_label"]),
+            num(v["printed_names"], 0), num(v["slot_groups"], 0),
+            num(v["groups_with_more_than_one_rank1"], 0), num(v["cells_with_jersey_prefix_stripped"], 0),
+            num(v["shared_slots"], 0), num(v["empty_gaps"], 0), esc(v["fetched"]),
+            src(v["source_url"], "club page")])
+    row_rows = []
+    for r in reg["rows"]:
+        names = " / ".join(r["names"]) if r["shared_slot"] else (r["name"] or "no name printed")
+        row_rows.append([
+            f'<strong>{esc(r["club"])}</strong>', esc(r["unit"]), esc(r["position"] or "(continuation)"),
+            num(r["column"], 0), esc(r["raw_cell"] or "blank"), esc(names),
+            esc(r["jersey"] or "—"),
+            "shared slot" if r["shared_slot"] else ("empty gap" if r["empty_gap"] else "no flag"),
+            src(r["source_url"], "club page")])
+    club_tbl = table(["Club", "Name", "Page label, as printed", "Printed names", "Slot groups",
+                      "Groups with more than one first-column player", "Jersey prefixes stripped",
+                      "Shared slots", "Empty gaps", "Fetched", "Source"], club_rows,
+                     note=("Four of 32 clubs. A group with more than one first-column player is a "
+                           "position group the club printed that way, not a fabricated starter. "
+                           "Flags F53–F57 on Flagged for Review."))
+    row_tbl = table(["Club", "Unit", "Position, as printed", "Printed column", "Raw cell",
+                     "Player name", "Jersey", "Flag", "Source"], row_rows,
+                    note=("One row per printed name. Raw cell keeps the printed text, including any "
+                          "jersey number; the name column has it removed. Columns are printed order, "
+                          "not a ranking of starters."))
+    return f"""
+<section class="panel">
+  <div class="panel-head"><h2>Official register: four club charts, captured 2026-11-15</h2></div>
+  <p class="note">Verbatim captures of each club's own depth-chart page (tool output, link URLs removed).
+  Register: {t['printed_names']} printed names, {t['slot_groups']} slot groups, {t['groups_with_more_than_one_rank1']} groups with more than one first-column player,
+  {t['cells_with_jersey_prefix_stripped']} jersey prefixes stripped, {t['shared_slots']} shared slot, {t['empty_gaps']} empty gaps.
+  Not yet covered: 28 of 32 clubs.</p>
+  {club_tbl}
+  {row_tbl}
+</section>
+"""
+
+
 def depth_page(ladder, snap, dash=None):
     c = ladder.get("counts", {})
     clubs = ladder.get("clubs", [])
@@ -2214,6 +2265,7 @@ def depth_page(ladder, snap, dash=None):
   </div>
 </section>
 
+{official_register_html()}
 <section class="panel">
   <div class="panel-head"><h2>How the ladder is built, and what it cannot see</h2></div>
   <p class="muted">Club depth charts were built {esc(ladder.get("generated_at", ""))}; the injury
