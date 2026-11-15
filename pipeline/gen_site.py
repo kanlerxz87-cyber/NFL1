@@ -2035,12 +2035,12 @@ def official_register_html() -> str:
             src(v["source_url"], "club page")])
     row_rows = []
     for r in reg["rows"]:
-        names = " / ".join(r["names"]) if r["shared_slot"] else (r["name"] or "")
+        names = " / ".join(r["names"]) if r["shared_slot"] else (r["name"] or "no name printed")
         row_rows.append([
             f'<strong>{esc(r["club"])}</strong>', esc(r["unit"]), esc(r["position"] or "(continuation)"),
             num(r["column"], 0), esc(r["raw_cell"] or "blank"), esc(names),
             esc(r["jersey"] or "—"),
-            "shared slot" if r["shared_slot"] else ("empty gap" if r["empty_gap"] else ""),
+            "shared slot" if r["shared_slot"] else ("empty gap" if r["empty_gap"] else "no flag"),
             src(r["source_url"], "club page")])
     club_tbl = table(["Club", "Name", "Page label, as printed", "Printed names", "Slot groups",
                       "Groups with more than one first-column player", "Jersey prefixes stripped",
