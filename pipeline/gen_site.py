@@ -34,6 +34,7 @@ NAV = [
     ("pages/props.html", "Player Props"),
     ("pages/injuries.html", "Injuries"),
     ("pages/depth.html", "Depth & Deficiency"),
+    ("pages/snapshots.html", "Injury Snapshots"),
     ("pages/questions.html", "Questions"),
     ("pages/suggestions.html", "Suggestions"),
     ("pages/evidence.html", "Evidence"),
@@ -44,8 +45,10 @@ NAV = [
     # strength/; the entry keeps it reachable from the root dashboard.
     ("room/index.html", "Decision Room"),
     ("strength/index.html", "SOS Study"),
+    ("shadow/index.html", "Shadow Baseline"),
     ("review-room/index.html", "Review Room"),
     ("research/index.html", "s9cb Research"),
+    ("strat/index.html", "Strategy Competition"),
     # pages produced by the other generators in this repository, kept in the shared
     # navigation so no session's page can become unreachable
     ("pages/executive-summary.html", "Executive Summary (companion)"),
@@ -69,12 +72,14 @@ SIDEBAR = [
                   ("pages/sections.html", "All Sections")]),
     ("Lines & model", [("pages/lines.html", "My Lines"),
                            ("pages/correlations.html", "Correlations")]),
-    ("Competition", [("pages/strategies.html", "Strategy Lab"),
+    ("Competition", [("strat/index.html", "Strategy Competition"),
+                     ("pages/strategies.html", "Strategy Lab"),
                      ("pages/luck.html", "Skill vs Luck"),
                      ("pages/parlays.html", "Parlays & Combos"),
                      ("pages/props.html", "Player Props")]),
     ("Availability", [("pages/injuries.html", "Injuries"),
-                      ("pages/depth.html", "Depth & Deficiency")]),
+                      ("pages/depth.html", "Depth & Deficiency"),
+                      ("pages/snapshots.html", "Injury Snapshots")]),
     ("Decisions", [("pages/questions.html", "Questions"),
                    ("pages/suggestions.html", "Suggestions")]),
     ("Evidence", [("pages/evidence.html", "Evidence"),
@@ -93,7 +98,9 @@ SIDEBAR = [
                          ("pages/verified.html", "Verified artifacts"),
                          ("pages/models.html", "Models"),
                          ("pages/executive-summary.html", "Executive summary (companion)"),
-                         ("pages/flagged.html", "Flagged (companion)")]),
+                         ("pages/flagged.html", "Flagged (companion)"),
+                         # Session 739408a8-nfl1 (P1): pre-registration ledger for the forward test.
+                         ("prereg/index.html", "Pre-registration ledger")]),
 ]
 
 SOURCE = {
@@ -143,10 +150,11 @@ def pct(v, digits=1) -> str:
 
 def badge(status: str) -> str:
     s = (status or "").lower()
-    cls = ("pass" if s in ("pass", "implemented", "matched", "answered", "ok", "verified")
+    cls = ("pass" if s in ("pass", "implemented", "matched", "answered", "ok", "verified", "met")
            else "warn" if s in ("watch", "proposed", "partially answered", "needs sign-off",
                                 "model-only", "open", "queued", "recommended",
-                                "open - decision required", "open - user decision")
+                                "open - decision required", "open - user decision",
+                                "partial", "unverified")
            else "fail" if s in ("fail", "blocked", "mismatch", "unavailable", "flagged")
            else "neutral")
     return f'<span class="badge {cls}">{esc(status)}</span>'
@@ -482,6 +490,66 @@ def write(path: str, content: str) -> None:
 
 
 # ---------------------------------------------------------------- overview
+def competition_panel() -> str:
+    """A small, data-driven summary of the strategy competition, for the landing page.
+
+    Every number here is read from data/strat/*.json, so the panel cannot drift from the sub-site
+    it links to.  If a file is missing the cell says so rather than printing a zero.
+    """
+    def _l(name):
+        try:
+            return load_rel(f"data/strat/{name}")
+        except Exception:
+            return None
+    pre, ps, dem, rec = _l("preregistration.json"), _l("proper_score.json"), \
+        _l("demotion.json"), _l("official_reconciliation.json")
+    if not (pre and ps and dem):
+        return ('<p class="note">The strategy competition has not been built in this checkout '
+                '(run python3 strat/build.py).</p>')
+    side = ps["markets"][0]["results"]["model"]
+    total = ps["markets"][1]["results"]["model"]
+    mlv = ps["markets"][2]["results"]["model"]
+    mkt = ps["markets"][2]["results"]["closing moneyline, de-vigged"]
+
+    def sig(v):
+        return '<span class="blank" title="no value">blank</span>' if v is None else f"{v:+.4f}"
+
+    rows = [
+        ["Strategies registered", f"{pre['n_records']}",
+         f"{pre['n_backtest']} backtest (selection-exposed) · {pre['n_prospective']} prospective",
+         '<a class="src" href="data/strat/preregistration.json">preregistration.json</a>'],
+        ["Live strategies", f"{dem['n_live']}",
+         "no prospective price exists, so nothing can be live",
+         '<a class="src" href="data/strat/demotion.json">demotion.json</a>'],
+        ["Demotions ever", f"{dem['n_demotions_ever']}",
+         "five pre-registered rules, armed and never fired",
+         '<a class="src" href="data/strat/demotion.json">demotion.json</a>'],
+        ["Model skill, side (Brier vs closing line)", sig(side.get("bss")),
+         f"game-cluster 95% interval {sig(side['bss_ci95'][0])} to {sig(side['bss_ci95'][1])} on "
+         f"{side['n_scored']:,} games",
+         '<a class="src" href="data/strat/proper_score.json">proper_score.json</a>'],
+        ["Model skill, total", sig(total.get("bss")),
+         f"interval {sig(total['bss_ci95'][0])} to {sig(total['bss_ci95'][1])} on {total['n_scored']:,} games",
+         '<a class="src" href="data/strat/proper_score.json">proper_score.json</a>'],
+        ["Model skill, moneyline vs de-vigged market", sig(mlv.get("bss_vs_devig")),
+         f"interval {sig(mlv['bss_ci95'][0])} to {sig(mlv['bss_ci95'][1])} on {mlv['n_scored']:,} games",
+         '<a class="src" href="data/strat/proper_score.json">proper_score.json</a>'],
+        ["Closing line vs a coin (moneyline)", sig(mkt.get("bss_vs_coin")),
+         f"interval {sig(mkt['bss_vs_coin_ci95'][0])} to {sig(mkt['bss_vs_coin_ci95'][1])} — the market is informative",
+         '<a class="src" href="data/strat/proper_score.json">proper_score.json</a>'],
+    ]
+    if rec:
+        t = rec["totals"]
+        rows.append(["Official rows reconciled against the extract",
+                     f"{t['matched']} / {t['official_rows']}",
+                     f"{t['mismatched']} disagreements · scope: 2026 only",
+                     '<a class="src" href="data/strat/official_reconciliation.json">official_reconciliation.json</a>'])
+    head = "".join(f"<th>{h}</th>" for h in ("Measure", "Value", "Reading", "Artifact"))
+    body = "".join("<tr>" + "".join(f"<td>{c}</td>" for c in r) + "</tr>" for r in rows)
+    return (f'<div class="table-wrap"><table><thead><tr>{head}</tr></thead>'
+            f'<tbody>{body}</tbody></table></div>')
+
+
 def overview(snap, dash, lines, strat, avail, props, verif):
     gen = dash.get("generated_at") or snap.get("generated_at")
     ladder = load_rel("data/depth_ladder.json")
@@ -628,6 +696,31 @@ def overview(snap, dash, lines, strat, avail, props, verif):
   </div>
 </section>"""
 
+    # Removal of luck, on the landing page: each strategy against a fair-price null (same numbers as
+    # pages/luck.html, computed by the s9cb analysis from the committed leaderboard).
+    lk_rows = []
+    for r in (lb9.get("luck_accounting") or {}).get("rows", [])[:6]:
+        band = r.get("luck_band_95_units") or [None, None]
+        lk_rows.append([
+            esc(r["strategy"]), num(r.get("n_bets"), 0), num(r.get("profit_units"), 1),
+            f"&plusmn;{num(abs(band[1]), 1)}" if band[1] is not None else '<span class="missing">blank</span>',
+            badge("outside the luck band" if r.get("profit_outside_luck_band") else "inside the luck band"),
+            num(r.get("p_value_two_sided"), 3),
+            num(r.get("bets_needed_for_80pct_power"), 0),
+            src(SOURCE["schedules"], "closing lines"),
+        ])
+    lk_tbl = table(["Strategy", "Bets", "Profit (units)", "Lucky band, 95%", "Verdict", "p (two-sided)",
+                    "Bets needed for 80% power", "Source"], lk_rows,
+                   note=("Removal of luck: a purely lucky run at the observed prices would land inside the band "
+                         "95% of the time. A profit inside the band is not evidence of skill. Full method and the "
+                         "eight gates: Skill vs Luck."))
+    luck_panel = f"""
+<section class="panel" id="luck">
+  <div class="panel-head"><h2>Removal of luck: what a lucky run would have produced</h2>
+    <a href="pages/luck.html">How luck is removed &rarr;</a></div>
+  {lk_tbl}
+</section>"""
+
     body = f"""
 <section class="hero">
   <div>
@@ -639,6 +732,7 @@ def overview(snap, dash, lines, strat, avail, props, verif):
       <a class="btn" href="web/dashboard.html">Open the decision dashboard</a>
       <a class="btn ghost" href="pages/lines.html">See this week's own lines</a>
       <a class="btn ghost" href="pages/executive.html">Read the executive summary</a>
+      <a class="btn ghost" href="strat/index.html">Strategy competition (gated leaderboard)</a>
     </div>
   </div>
   <aside class="hero-card">
@@ -653,6 +747,30 @@ def overview(snap, dash, lines, strat, avail, props, verif):
 </section>
 
 <section class="kpis">{kpis}</section>
+
+{luck_panel}
+
+<section class="panel" id="strategy-competition">
+  <div class="panel-head">
+    <h2>Strategy competition — the gated leaderboard</h2>
+    <a href="strat/index.html">Open the strategy competition →</a>
+  </div>
+  <p class="sub">Pre-registration, proper scores with uncertainty, a demotion gate, and two-sided
+  falsifiers on every claim. Every rule frozen before it was scored; nothing promoted on a lucky run.</p>
+  {competition_panel()}
+  <p class="note"><a href="strat/index.html">Overview</a> ·
+  <a href="strat/leaderboard.html">proper-score leaderboard</a> ·
+  <a href="strat/preregister.html">pre-registration</a> ·
+  <a href="strat/demotion.html">demotion gate</a> ·
+  <a href="strat/what-would-change.html">what would change our mind</a> ·
+  <a href="strat/totals.html">two totals</a> ·
+  <a href="strat/reconciliation.html">official reconciliation</a> ·
+  <a href="strat/diff.html">what changed</a> ·
+  <a href="strat/questions.html">open questions</a> ·
+  <a href="strat/suggestions.html">suggestions</a> ·
+  <a href="strat/flagged.html">flagged</a> ·
+  <a href="strat/executive-summary.html">executive summary</a></p>
+</section>
 
 <section class="panel">
   <div class="panel-head">
@@ -1985,6 +2103,57 @@ def load_rel(rel: str, default=None):
 UNIT_LABEL = {"offense": "Offense", "defense": "Defense", "special_teams": "Special teams"}
 
 
+def official_register_html() -> str:
+    """Session d4027f66-nfl1: the official depth register for the four clubs captured on
+    2026-11-15 (data/depth/official_register.json, built by tools/build_depth_register.py).
+    Every printed name is a row with its printed cell, its jersey split, its slot group and
+    its page source. Nothing here names a starter: column is printed order only."""
+    reg = load_rel("data/depth/official_register.json", default=None)
+    if not reg:
+        return ""
+    summ = reg["summary"]
+    t = summ["totals"]
+    club_rows = []
+    for abbr, v in summ["clubs"].items():
+        club_rows.append([
+            f'<strong>{esc(abbr)}</strong>', esc(v["club_name"]), esc(v["page_label"]),
+            num(v["printed_names"], 0), num(v["slot_groups"], 0),
+            num(v["groups_with_more_than_one_rank1"], 0), num(v["cells_with_jersey_prefix_stripped"], 0),
+            num(v["shared_slots"], 0), num(v["empty_gaps"], 0), esc(v["fetched"]),
+            src(v["source_url"], "club page")])
+    row_rows = []
+    for r in reg["rows"]:
+        names = " / ".join(r["names"]) if r["shared_slot"] else (r["name"] or "no name printed")
+        row_rows.append([
+            f'<strong>{esc(r["club"])}</strong>', esc(r["unit"]), esc(r["position"] or "(continuation)"),
+            num(r["column"], 0), esc(r["raw_cell"] or "blank"), esc(names),
+            esc(r["jersey"] or "—"),
+            "shared slot" if r["shared_slot"] else ("empty gap" if r["empty_gap"] else "no flag"),
+            src(r["source_url"], "club page")])
+    club_tbl = table(["Club", "Name", "Page label, as printed", "Printed names", "Slot groups",
+                      "Groups with more than one first-column player", "Jersey prefixes stripped",
+                      "Shared slots", "Empty gaps", "Fetched", "Source"], club_rows,
+                     note=("Four of 32 clubs. A group with more than one first-column player is a "
+                           "position group the club printed that way, not a fabricated starter. "
+                           "Flags F53–F57 on Flagged for Review."))
+    row_tbl = table(["Club", "Unit", "Position, as printed", "Printed column", "Raw cell",
+                     "Player name", "Jersey", "Flag", "Source"], row_rows,
+                    note=("One row per printed name. Raw cell keeps the printed text, including any "
+                          "jersey number; the name column has it removed. Columns are printed order, "
+                          "not a ranking of starters."))
+    return f"""
+<section class="panel">
+  <div class="panel-head"><h2>Official register: four club charts, captured 2026-11-15</h2></div>
+  <p class="note">Verbatim captures of each club's own depth-chart page (tool output, link URLs removed).
+  Register: {t['printed_names']} printed names, {t['slot_groups']} slot groups, {t['groups_with_more_than_one_rank1']} groups with more than one first-column player,
+  {t['cells_with_jersey_prefix_stripped']} jersey prefixes stripped, {t['shared_slots']} shared slot, {t['empty_gaps']} empty gaps.
+  Not yet covered: 28 of 32 clubs.</p>
+  {club_tbl}
+  {row_tbl}
+</section>
+"""
+
+
 def depth_page(ladder, snap, dash=None):
     c = ladder.get("counts", {})
     clubs = ladder.get("clubs", [])
@@ -2096,6 +2265,7 @@ def depth_page(ladder, snap, dash=None):
   </div>
 </section>
 
+{official_register_html()}
 <section class="panel">
   <div class="panel-head"><h2>How the ladder is built, and what it cannot see</h2></div>
   <p class="muted">Club depth charts were built {esc(ladder.get("generated_at", ""))}; the injury

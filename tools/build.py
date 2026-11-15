@@ -451,6 +451,20 @@ def page_exec():
              '<a href="flagged.html">Flagged for Review</a> page with official source links, including an unresolved '
              'template variable in the official standings heading and a conflict between the official injury report '
              'and official NFL.com news headlines.</p></div>' % counts["flags"])
+    # Session d4027f66-nfl1 (2026-11-15): depth register for four official charts, pre-registered
+    # demotion gate, drift alarm. Numbers below are read from the committed JSON, not typed in.
+    _reg = json.load(open(os.path.join(ROOT, "data", "depth", "official_register.json"), encoding="utf-8"))["summary"]["totals"]
+    b.append('<h2 id="d4027f66">Depth register and pre-registration (2026-11-15, session d4027f66)</h2>')
+    b.append('<div class="panel"><ul>'
+             '<li><b>Depth, four clubs.</b> Packers, Chiefs, 49ers and Seahawks charts captured verbatim from each club\'s own page and parsed into one row per printed name: '
+             '%d names, %d slot groups, %d groups with more than one first-column player, %d Packers jersey prefixes stripped with the raw string kept, '
+             '%d shared slot and %d empty gaps. Shown on <a href="pages/depth.html">Depth &amp; Deficiency</a>. Coverage is 4 of 32 clubs.</li>'
+             '<li><b>Repo versus page.</b> The older depth tables disagree with those pages in 8 cells and omit 2 Chiefs players. They were flagged (F53 to F55), not overwritten, because other pages read them.</li>'
+             '<li><b>Pre-registration.</b> The demotion gate, the leaderboard ban on historical numbers and the scoring rule were committed as RULES_v1 at commit 591d874, before any prospective window. No strategy is registered. Its thresholds are design parameters, not sourced facts (F59).</li>'
+             '<li><b>Drift alarm.</b> Runs in CI for the depth register: fails on a changed club set, host, printed-name count or schema. The injury scraper has no equivalent yet (F58).</li>'
+             '<li><b>Still open.</b> 28 club charts; the Texans chart (published as an image, IN-08); price data, which blocks any closing-line test (PR-01, PR-10); the 149-slot count across 32 clubs (F57).</li>'
+             '</ul></div>' % (_reg["printed_names"], _reg["slot_groups"], _reg["groups_with_more_than_one_rank1"],
+                              _reg["cells_with_jersey_prefix_stripped"], _reg["shared_slots"], _reg["empty_gaps"]))
     b.append('<h2 id="reverify">Official-source re-verification (2026-11-15 UTC)</h2>')
     b.append('<div class="panel"><div class="tablewrap"><table class="data-table" id="tbl-reverify">'
              '<caption>Spot-checked live NFL official pages against the committed snapshots. Snapshot facts remain time-bounded; no result row is added without its official game evidence.</caption>'
@@ -1346,7 +1360,8 @@ built from `room/data/*.json`, every table row carrying its own source link:
 | Injuries & depth | Official designations, next man up, depth coverage for all 32 clubs |
 | Verified data | Today's official capture: 32 standings rows and 27 fixtures, reconciled arithmetically |
 | Requirements | All 26 requirements in the brief, 21 met and 5 partial, each traced to its page |
-| Flagged for review | 20 findings — 13 open, 7 closed — each with the official source that settles it |
+| Flagged for review | 25 findings — 18 open, 7 closed — each with the official source that settles it |
+| Readiness | One row per brief requirement: status, the gate that blocks it, and the number that clears it; plus the Week-10 Lions cross-page audit |
 | About | Method, source register, and what is deliberately blank |
 
 ```bash

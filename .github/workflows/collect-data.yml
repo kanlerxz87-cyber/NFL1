@@ -57,26 +57,20 @@ jobs:
       # keep last run's injury statuses while the rest of the site refreshed.
       - name: Rebuild the depth ladder from the refreshed injury report
         run: python pipeline/build_depth_ladder.py
-      # Session 3d5c5e2d-nfl1: re-render the published pages from the data just built. Before this
-      # step, a data refresh changed data/model/*.json but never the pages that show it.
-      - name: Re-render the published pages from the refreshed data
-        run: python pipeline/gen_site.py
-
-      # Session 6e8ca348-nfl1 (defect X06 kept in this integration): also re-render every other
-      # page that prints a model number, and run the freshness / generator-ownership gates before
-      # anything is committed. (Their block re-ran pipeline/gen_site.py; the duplicate call was
-      # dropped in the merge because the step above already runs it — no step is removed.)
-      - name: Re-render the decision dashboard and evidence layer from the refreshed data
+      # Rebuild the official fixtures and refuse to publish if committed datasets disagree.
+      # The canonical build below owns all page generation and navigation normalization; do not
+      # call individual site generators here, or the daily refresh can publish mixed generations.
+      - name: Verify official data fixtures
         run: |
           python tools/evidence_from_official.py
           python tools/verify_official.py
-          python tools/build_decision_room.py
-          python tools/build_dashboard.py
+      - name: Rebuild every published page through the canonical site build
+        run: python tools/build_site_all.py
+      - name: Check freshness, generator ownership, and committed-site rules
+        run: |
           python tools/check_freshness.py
           python tools/check_generators.py
-
-      - name: Check the committed-site rules would pass on the rendered pages
-        run: python tools/check_committed_site.py
+          python tools/check_committed_site.py
       - name: Publish generator log
         if: always()
         run: |
@@ -85,7 +79,10 @@ jobs:
         run: |
           git config user.name "nfl1-data-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/model pipeline data/evidence data/audit data/decision_room data/depth_ladder.json index.html pages web 2>/dev/null || true
+          # Build output is tracked across several site roots; include changed tracked pages
+          # plus the refresh's data artifacts, rather than an incomplete hand-maintained list.
+          git add -u
+          git add data/model pipeline data/evidence data/audit data/decision_room data/depth_ladder.json
           if git diff --cached --quiet; then
             echo "No data or page changes"
             exit 0
