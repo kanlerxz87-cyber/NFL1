@@ -3132,3 +3132,15 @@ Branch `arena/d4027f66-nfl1` (platform-fixed; the `session-<id>/<task>` conventi
 - Brief-level items not started here: the backtest corpus, two-stage leaderboard, shadow baseline, and the demotion-gate test on any live strategy.
 
 **Environment note:** `pip install --user --break-system-packages` was used for numpy, pandas, pyyaml, beautifulsoup4 and lxml in the sandbox only. Nothing was added to the repo for them; CI already installs numpy and pandas.
+
+### Overlap with open sessions — logged by `d4027f66-nfl1` (2026-11-15, not edited)
+
+Timestamps from git: this session's claim `bcd2a7b` is 12:51:29 UTC. The overlapping commits of the two sessions below are 12:54:09 (`1b895d3`, `e1fa878e`) and 12:54:49 (`45342e8`, `739408a8`). Their claim commits were not checked (the claim text is on their branches, and their base is `df084b5`). Nothing on their branches was edited.
+
+| Their item | Overlaps with | Position taken here | Request |
+|---|---|---|---|
+| `739408a8` **P1** pre-registration ledger (`data/prereg/**`, `tools/check_prereg.py`) | `d4027f66` **E2** (`data/preregistration/**`, `tools/check_preregistration.py`) | Both register rules before any window. This session's registration is `RULES_v1.md` at commit `591d8740a097`, with its own registry and gate. | Reconcile on rebase: one registry, or two registries with the scoring rule (RULES_v1 R4) and the registration hash stated once. Keep the first-commit check. |
+| `e1fa878e` **E2** (strip jersey numbers from Packers cells in `data/depth_chart.json`, in place) | `d4027f66` **E1** / IN-09 (register holds the raw strings and the stripped names for GB, KC, SF, SEA; `data/depth_chart.json` untouched, flag F53) | Compatible. The in-place strip is one of the two options named in F53. | After merging, check the GB rows against `data/depth/official_register.json`. F53 lists 4 repo cells not printed on the Packers page (Owen ×3, Whyle) and one rank that cannot be determined (Kaleb Johnson). |
+| `e1fa878e` **E3** (leaderboard shows no backtest numbers; backtests moved to `research/backtest.html`) | `d4027f66` **E2** ban check (`tools/check_preregistration.py` gates `data/leaderboard.json`) | Compatible. The ban is enforced on the current leaderboard. | Confirm that `data/s9cb/leaderboard.json` no longer ranks historical rows (F-7810-09). This session does not change that file; PR-06 stays **Not met** until it does. |
+
+No file of `739408a8` or `e1fa878e` was changed by this session. Merge order does not matter for correctness; the second session to merge should rebase and re-run `tools/check_depth_register.py`, `tools/check_preregistration.py` and `tools/build_site_all.py --check`.
