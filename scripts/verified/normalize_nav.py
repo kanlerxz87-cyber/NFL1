@@ -23,6 +23,8 @@ CANON = [
     ("props.html", "Player Props"),
     ("injuries.html", "Injuries"),
     ("depth.html", "Depth & Deficiency"),
+    # Session 90c2b454-nfl1 (P3): the official injury-report snapshot ledger.
+    ("snapshots.html", "Injury Snapshots"),
     ("questions.html", "Questions"),
     ("suggestions.html", "Suggestions"),
     ("evidence.html", "Evidence"),

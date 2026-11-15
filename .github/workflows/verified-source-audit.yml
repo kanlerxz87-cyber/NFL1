@@ -47,6 +47,10 @@ jobs:
         run: |
           PYTHONPATH=src python3 -m nfl.pipeline
           PYTHONPATH=src python3 scripts/build_site.py
+      # Session 90c2b454-nfl1: the test package imports pandas, numpy, and the snapshot
+      # parser's bs4/lxml/requests; the setup-python interpreter has none of them.
+      - name: Install the test dependencies
+        run: python -m pip install --quiet numpy pandas scipy requests beautifulsoup4 lxml
       - name: Run regression and table-source tests
         run: python3 -m unittest discover -s tests -v
       - name: Run the independent official-source snapshot audit
