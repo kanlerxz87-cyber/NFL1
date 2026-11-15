@@ -3157,7 +3157,7 @@ main reproducibility gate red after refreshes.
 
 | ID | Task | Status | Owner | File scope | Notes |
 |---|---|---|---|---|---|
-| A1 | Reconcile the daily data-refresh workflow with the canonical site build; add a regression check that prevents workflow/render drift | done | `4227cfea` | `.github/workflows/collect-data.yml`, `tests/test_collect_workflow.py` | Daily refresh now invokes the canonical full-site builder once and stages all tracked build outputs |
+| A1 | Reconcile the daily data-refresh workflow with the canonical site build; add a regression check that prevents workflow/render drift | done | `4227cfea` | `.github/workflows/collect-data.yml`, `tests/test_collect_workflow.py`, canonical generated `data/readiness.json`, `data/capture/comparison.json`, `pages/snapshots.html` | Daily refresh invokes the canonical full-site builder once; generated readiness, capture comparison and snapshot ledger were refreshed from existing verified inputs |
 | A2 | Run relevant project gates and record exact results, sources and any remaining irregularities | done | `4227cfea` | this section of `COORDINATION.md` | Full test suite and build/verification gates recorded below; existing official-data flags remain open |
 | A3 | PR / merge / Pages confirmation if checks permit | in progress | `4227cfea` | this section of `COORDINATION.md` | |
 
@@ -3207,23 +3207,27 @@ The dated fixture references are the NFL's [2026 standings](https://www.nfl.com/
 and [2026 schedule](https://www.nfl.com/schedules/2026). No claim is made here that these pages were
 re-fetched live in this session.
 
-**Follow-up validation after main advanced (2026-11-15).** PR #70 moved `main` to `87add0e` while
-this branch was open. Rebased the current branch onto that `main`, retained its readiness/snapshot
-work, and resolved the `COORDINATION.md` and workflow conflicts by keeping both the newer main-side
-snapshot steps and this session's canonical full-site build. The readiness and snapshot generators
-are already part of `tools/build_site_all.py`, so the daily job now invokes them through that one
-canonical entry point (not a second time as individual steps). The rebased tree passes **154 unit
-tests**, `tools/build_site_all.py` + `--check`, YAML parsing, freshness (23), generator ownership,
-committed-site, site/Room/Strength validation, reachability (169 pages), independent figure audit
-(47/47), and combined verification (2,659 local links, 0 broken). `tools/verify.py` now checks 2,071
-rows, all with official source URLs; 73 values remain explicitly unverified. The existing F19
-unstamped legacy pages and official-data discrepancies remain visible; no result or injury row was
+**Follow-up validation after main advanced (2026-11-15).** Main advanced through PR #70, PR #71
+and PR #60 to `20b4817` while this branch was open. Rebased onto that current main, retaining its
+readiness/snapshot work and resolving the workflow/coordination conflicts without dropping those
+changes. The readiness and snapshot generators are already part of `tools/build_site_all.py`, so the
+daily job invokes them through that single canonical entry point. The older intermediate model-refresh
+bot commit was omitted during the later rebase rather than replayed over the updated main data; the
+12:56 UTC immutable snapshot heartbeat was preserved. The rebased tree passes **154 unit tests**,
+`tools/build_site_all.py` + `--check`, YAML parsing, freshness (23), generator ownership,
+committed-site, site/Room/Strength validation, reachability (170 pages), independent figure audit
+(47/47), and combined verification (2,659 local links, 0 broken). `tools/verify.py` checks 2,071
+rows, all with official source URLs; 73 values remain explicitly unverified. Existing F19 unstamped
+legacy pages and official-data discrepancies remain visible; no result or injury designation was
 filled in here.
 
-**Live workflow execution on the pre-rebase head.** GitHub Actions run
+**Live workflow runs.** The initial Actions run
 [43715989007](https://github.com/kanlerxz87-cyber/NFL1/actions/runs/43715989007) passed all steps,
-including live injury scraping, evidence checks, full canonical build, freshness, generator ownership
-and committed-site gates; its data bot commit was `ce0b4be` before the subsequent rebase onto PR #70.
-The run's captured injury report contained 347 rows. This is a successful run of the then-current
-workflow revision, not yet a run of the final rebased head; final-head CI and Pages status are to be
-recorded under A3 after the PR update.
+including live injury scraping and the canonical build. After rebasing onto the readiness/snapshot
+site, run [43716348350](https://github.com/kanlerxz87-cyber/NFL1/actions/runs/43716348350) also passed
+the collect workflow's canonical build and post-build integrity gates. Its model-output commit was
+later omitted during the main rebase as an intermediate artifact; the 12:56 UTC snapshot run
+[38786b6](https://github.com/kanlerxz87-cyber/NFL1/commit/38786b604f24190e940ad7d5055ec46ab0180a5e)
+was retained. The latter reflects an official report read with 347 rows and its raw hash; the
+underlying statuses are not interpreted as new changes. Final-head CI and Pages status are recorded
+in A3 below when available.
