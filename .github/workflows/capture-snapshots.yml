@@ -1,0 +1,76 @@
+name: Capture official injury-report snapshots
+
+# Session 90c2b454-nfl1, task P2. Scheduled, immutable capture of https://www.nfl.com/injuries/
+# (see pipeline/capture_snapshots.py and data/snapshots/injury_report/README.md).
+#
+# Every run appends a heartbeat (fetch time, HTTP status, SHA-256 of the raw body, parsed row
+# count, conflict flags). A capture file is written only when the parsed report changes, and it
+# is never overwritten. The job turns RED on any fetch, parse, schema or freshness failure, after
+# it has committed the heartbeat, so the failure itself is recorded in the repository.
+#
+# Runs on GitHub's infrastructure because the Arena sandbox cannot reach nfl.com.
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "7 */6 * * *"          # every 6 hours, 00:07 UTC onward (covers Wed-Fri and the Sunday games)
+  push:
+    branches: ["arena/**", main]
+    paths:
+      - "pipeline/capture_snapshots.py"
+      - "tests/test_capture_snapshots.py"
+      - ".github/workflows/capture-snapshots.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: capture-snapshots-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: python -m pip install --quiet requests beautifulsoup4 lxml
+      - name: Syntax check and unit tests (parser pins, delta, immutability)
+        run: |
+          python -m compileall -q pipeline/capture_snapshots.py
+          python -m unittest tests.test_capture_snapshots
+      - name: Capture the official injury report (raw hash, parse, store if changed)
+        id: capture
+        run: python pipeline/capture_snapshots.py capture
+      - name: Verify stored captures are unchanged and the heartbeat is fresh
+        id: verify
+        if: steps.capture.outcome == 'success'
+        run: python pipeline/capture_snapshots.py verify --max-age-hours 12
+      - name: Commit the heartbeat and any new capture (append-only)
+        if: always()
+        run: |
+          git config user.name "nfl1-data-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/snapshots
+          if git diff --cached --quiet; then
+            echo "Nothing new to commit"
+          else
+            git commit -m "data: injury-report snapshot $(date -u +%Y-%m-%dT%H:%MZ) [skip ci]"
+            for attempt in 1 2 3; do
+              git pull --rebase -q origin "${GITHUB_REF_NAME}" && git push -q origin "HEAD:${GITHUB_REF_NAME}" && break
+              echo "push attempt ${attempt} failed; retrying"; sleep 5
+            done
+          fi
+      - name: Fail the run if capture or verification failed (after the record is committed)
+        if: always()
+        run: |
+          if [ "${{ steps.capture.outcome }}" != "success" ] || [ "${{ steps.verify.outcome }}" = "failure" ]; then
+            echo "::error::Injury-report capture or verification failed. See data/snapshots/injury_report/alerts.jsonl and heartbeat.jsonl."
+            exit 1
+          fi
+          echo "Capture and verification passed."
