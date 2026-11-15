@@ -1337,7 +1337,8 @@ built from `room/data/*.json`, every table row carrying its own source link:
 | Injuries & depth | Official designations, next man up, depth coverage for all 32 clubs |
 | Verified data | Today's official capture: 32 standings rows and 27 fixtures, reconciled arithmetically |
 | Requirements | All 26 requirements in the brief, 21 met and 5 partial, each traced to its page |
-| Flagged for review | 20 findings — 13 open, 7 closed — each with the official source that settles it |
+| Flagged for review | 25 findings — 18 open, 7 closed — each with the official source that settles it |
+| Readiness | One row per brief requirement: status, the gate that blocks it, and the number that clears it; plus the Week-10 Lions cross-page audit |
 | About | Method, source register, and what is deliberately blank |
 
 ```bash
