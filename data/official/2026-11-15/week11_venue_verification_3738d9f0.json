@@ -1,0 +1,103 @@
+{
+  "audit_id": "3738d9f0-nfl1-week11-venue-capture",
+  "audit_recorded_at_utc": "2026-11-15T12:29:01Z",
+  "result": "PASS",
+  "summary": {
+    "schedule_rows": 13,
+    "venue_rows": 13,
+    "matched_games": 13,
+    "unique_clubs": 26,
+    "venue_name_review_flags": [
+      "AZ@KC",
+      "CIN@WAS",
+      "IND@HOU"
+    ]
+  },
+  "checks": [
+    {
+      "check": "metadata audit timestamp",
+      "result": "PASS",
+      "detail": "2026-11-15T12:29:01Z"
+    },
+    {
+      "check": "schedule capture timestamp consistency",
+      "result": "PASS",
+      "detail": "13/13 rows"
+    },
+    {
+      "check": "venue capture timestamp consistency",
+      "result": "PASS",
+      "detail": "13/13 rows"
+    },
+    {
+      "check": "13 official schedule rows",
+      "result": "PASS",
+      "detail": "rows=13"
+    },
+    {
+      "check": "13 Game Center venue rows",
+      "result": "PASS",
+      "detail": "rows=13"
+    },
+    {
+      "check": "unique schedule game keys",
+      "result": "PASS",
+      "detail": "unique=13 rows=13"
+    },
+    {
+      "check": "unique venue game keys",
+      "result": "PASS",
+      "detail": "unique=13 rows=13"
+    },
+    {
+      "check": "schedule/venue matchup coverage",
+      "result": "PASS",
+      "detail": "schedule-only=[]; venue-only=[]"
+    },
+    {
+      "check": "schedule game/week keys",
+      "result": "PASS",
+      "detail": "all rows are Week 11 away@home records"
+    },
+    {
+      "check": "26 unique scheduled clubs",
+      "result": "PASS",
+      "detail": "unique clubs=26"
+    },
+    {
+      "check": "official row provenance links",
+      "result": "PASS",
+      "detail": "all schedule and Game Center URLs use official nfl.com pages"
+    },
+    {
+      "check": "schedule date/time/network populated",
+      "result": "PASS",
+      "detail": "missing=[]"
+    },
+    {
+      "check": "venue fields present or explicitly review-flagged",
+      "result": "PASS",
+      "detail": "unflagged blank venue fields=[]"
+    },
+    {
+      "check": "UTC audit timestamps",
+      "result": "PASS",
+      "detail": "invalid rows=[]"
+    },
+    {
+      "check": "venue-name review flags are preserved",
+      "result": "PASS",
+      "detail": "flagged=['AZ@KC', 'CIN@WAS', 'IND@HOU']; row and metadata notes agree"
+    }
+  ],
+  "input_sha256": {
+    "week11_schedule_2026-11-15.tsv": "567a956104cd16e6bd52434779fc6f588a391edc501d7c264e5360c437b3871f",
+    "week11_game_centres.tsv": "4e1d4b50961ac52295dc5467d784cd02fbd8a24603ff5ffb251132e6df853315",
+    "sources_venues_2026-11-15.json": "f9728d929ab51ae616ed8f79606ddf74cb655e21a36a189c2d484a0db7396187"
+  },
+  "limitations": [
+    "Offline structural check only; live NFL pages are not fetched by this script.",
+    "Official page text was manually transcribed via Arena fetch_page; response-specific timestamps and raw page bodies were not available for archival.",
+    "Venue-name flags preserve differing labels from the official Game Center and the official schedule page's hotel-search link; no canonical name was inferred."
+  ]
+}

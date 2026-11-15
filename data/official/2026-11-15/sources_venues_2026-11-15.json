@@ -1,0 +1,56 @@
+{
+  "audit_id": "3738d9f0-nfl1-week11-venue-capture",
+  "date_utc": "2026-11-15",
+  "audit_recorded_at_utc": "2026-11-15T12:29:01Z",
+  "retrieved_by": "Arena page-fetch tool (fetch_page)",
+  "exact_response_timestamps_available": false,
+  "source_observation_bounds_utc": {
+    "game_center_pages_returned_no_later_than_utc": "2026-11-15T12:25:44Z",
+    "week11_schedule_page_returned_no_later_than_utc": "2026-11-15T12:27:56Z"
+  },
+  "timestamp_note": "The fetch tool does not expose a per-response timestamp. The bounds above are UTC clock readings taken after each fetch batch returned; audit_recorded_at_utc is the time the row transcription was recorded, not a claimed HTTP response time.",
+  "raw_source_bodies_archived": false,
+  "capture_note": "The two TSVs preserve row-level transcriptions and direct NFL source URLs. Game Center location and stadium fields are transcribed as displayed, without normalization or inferred corrections. The official page responses were reviewed manually; the verifier validates snapshot structure, provenance links, and schedule-to-venue row coverage, but does not fetch the live pages.",
+  "sources": [
+    {
+      "id": "NFL-W11-SCHEDULE-2026-11-15",
+      "publisher": "NFL",
+      "url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+      "page_title": "NFL Week 11 Schedule 2026: Games, Times, Matchups & Tickets",
+      "used_for": ["week11_schedule_2026-11-15.tsv", "week11_game_centres.tsv venue-name discrepancy review notes"],
+      "observations": ["13 scheduled games", "6 listed bye clubs", "game links and displayed date, time, and network"]
+    },
+    {
+      "id": "NFL-W11-GAME-CENTRES-2026-11-15",
+      "publisher": "NFL",
+      "url_pattern": "https://www.nfl.com/games/<away>-at-<home>-2026-reg-11",
+      "page_title_pattern": "<Away team> at <Home team> 2026 REG 11 - Game Center",
+      "used_for": ["week11_game_centres.tsv, all 13 Game Info location and stadium labels"],
+      "page_section": "Game Info"
+    }
+  ],
+  "schedule_byes_as_displayed": ["ATL", "CLE", "GB", "LAR", "NE", "SEA"],
+  "venue_name_review_rows": [
+    {
+      "game": "IND@HOU",
+      "game_center_label": "RELIANT STADIUM",
+      "schedule_page_hotel_link_destination": "NRG Stadium",
+      "status": "needs review",
+      "note": "These are different strings on official NFL pages. The Game Center label is preserved verbatim; no canonical name is inferred."
+    },
+    {
+      "game": "AZ@KC",
+      "game_center_label": "ARROWHEAD STADIUM",
+      "schedule_page_hotel_link_destination": "GEHA Field at Arrowhead Stadium",
+      "status": "needs review",
+      "note": "These are different strings on official NFL pages. The Game Center label is preserved verbatim; no canonical name is inferred."
+    },
+    {
+      "game": "CIN@WAS",
+      "game_center_label": "NORTHWEST STADIUM",
+      "schedule_page_hotel_link_destination": "FedEx Field",
+      "status": "needs review",
+      "note": "These are different strings on official NFL pages. The Game Center label is preserved verbatim; no canonical name is inferred."
+    }
+  ]
+}
