@@ -2868,10 +2868,12 @@ _This claim is committed and pushed before any other file is touched, per the br
 
 
 
-### Session `b6b088fd-nfl1` — current-session audit claim (2026-11-15)
+### Session `b6b088fd-nfl1` — current-session audit result (2026-11-15)
 
 | ID | Task | Status | Owner | File scope | Notes |
 |---|---|---|---|---|---|
-| B1 | Inspect current repository/site state, rerun available verification gates, document remaining confirmed gaps and source-check limits | in progress | `b6b088fd-nfl1` | `docs/audit-b6b088fd.md`, this coordination entry only | Additive audit only; do not edit shared data or generated site pages. |
+| B1 | Inspect current repository/site state, rerun available verification gates, document remaining confirmed gaps and source-check limits | done | `b6b088fd-nfl1` | `docs/audit-b6b088fd.md`, this coordination entry only | Audit report in `docs/audit-b6b088fd.md`. After final full-site regeneration: 136 unit tests passed with no skips; `verify.py` 2,026 sourced rows, 73 unverified, 0 broken; `verify_combined.py` 2,451 local links / 0 broken; committed site 27 pages / 1,543 links; `audit_numbers.py` 47/47; official comparison 20 PASS / 8 FLAG / 0 FAIL; freshness, generator ownership, reachability, Room and Strength gates passed. F48 exists upstream; this session's results-corpus finding receives F49. `verify_official.py` compares checked-in transcriptions and is not itself a live fetch.
 
-**Rebase conflict resolution note:** origin/main added final-verification session `a6220e65` while this branch was active. Kept that session's full board record and F48 finding; restored this session's independent claim. Its F48 ID is already occupied upstream, so this session's later results-corpus flag will use the next unclaimed ID. The upstream session record had literal `\n` escape sequences; they were rendered as newlines without dropping content.
+**Rebase conflict resolution note:** origin/main added final-verification session `a6220e65` while this branch was active. Kept that session's full board record and F48 finding. The upstream appended record contained literal `\\n` escapes; it was made readable without dropping content. This branch's additional audit result stays in its separate entry.
+
+**Current-session source/review boundary:** the official NFL injury and standings pages were fetched for spot review, and the repository's existing offline audit harnesses were rerun. No claim is made that every row of the live injury page was manually re-transcribed in this session.
