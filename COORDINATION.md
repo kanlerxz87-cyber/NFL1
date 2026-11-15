@@ -2798,3 +2798,20 @@ verified sound, with one unusual official row recorded for review) · F46 (overl
 generations — decision D07 / suggestion S17) · F47 (2nd-to-4th string coverage now exists, needs
 sign-off). None of them blocks anything; they are published rather than hidden.
 
+
+---
+
+# Session `07810d9f-nfl1` — brief register, live injury read, decision-readiness, PR and merge (2026-11-15)
+
+Branch `arena/07810d9f-nfl1`, base `5a769b3` on `main`. Claimed 2026-11-15 (UTC) before any file change. Scope is
+additive and non-overlapping with every earlier session, which are all closed.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| B1 | One-row-per-requirement register of the brief, with status, blocking gate and the number that clears each item | in progress | `07810d9f` | `scripts/brief_07810d9f/register.py`, `room/data/readiness.json` | 82 rows; statuses rest on named artifacts |
+| B2 | Live re-read of the nfl.com Week 10 injury report (8 chunks, 347 rows) and delta against the committed scrape | in progress | `07810d9f` | `data/brief_07810d9f/`, `scripts/brief_07810d9f/compare_injury_capture.py` | publishes the delta, not the level |
+| B3 | Decision-readiness table on the landing page (root `index.html`) | in progress | `07810d9f` | `pipeline/gen_site.py` (`overview()` only) | reads `room/data/readiness.json` |
+| B4 | Decision Room pages: readiness register and the 2026-11-15 injury capture | in progress | `07810d9f` | `room/build.py`, `room/*.html` (new pages only) | `room/verify.py` gate |
+| B5 | Flags F-7810-01 to F-7810-11 for manual review | in progress | `07810d9f` | `data/flags.json` (append only) | published on Flagged for Review, non-blocking |
+| B6 | Regenerate every page; restore the `build_site_all.py --check` gate that fails on the base commit | in progress | `07810d9f` | generated pages | the base commit's committed pages differ from the generators |
+| B7 | PR to `main`, merge, confirm the GitHub Pages deploy, record here | pending | `07810d9f` | `COORDINATION.md` | |
