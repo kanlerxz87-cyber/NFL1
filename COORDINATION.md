@@ -3245,8 +3245,16 @@ head `1384b47` was fast-forwarded locally and merged with that current main. The
 has been rerun and `tools/build_site_all.py --check` passes on this latest integrated tree; local
 unit tests passed 163/163, freshness 23, combined verification (2,688 local links), 2,087 sourced
 rows (73 still explicitly unverified), scrape drift, reachability (176 pages), Room, Strength, and
-figure audits all pass. Final CI is rerunning for this latest main integration; merge and Pages
-results will be recorded only after those checks pass.
+figure audits all pass. Final PR-head checks passed (build `43717677336`, source audit `43717677277`,
+decision dashboard `43717677341`, NFL1 site `43717677387`). PR #72 merged at 13:12:07Z as
+`f20b8d6d7d47e9b67271f4e8c2f445f9b15fe52c`. Post-merge checks passed: source audit `43717757939`,
+collector `43717757933`, decision dashboard `43717757871`, NFL1 site `43717757965`, and Decision
+Lab build `43717757970`. GitHub Pages deployment run `43717756735` completed successfully; deployment
+status for `github-pages` is `success` at
+[https://kanlerxz87-cyber.github.io/NFL1/](https://kanlerxz87-cyber.github.io/NFL1/). Existing
+mirrored-feed warning (latest complete week 6), 73 unverified values, F19 unstamped legacy pages, and
+known injury/depth discrepancies remain disclosed, not filled or relabeled. Node.js 20 and
+`ubuntu-latest` migration notices did not fail the checks.
 
 **Non-blocking review notes from Actions.** The collect run emitted the existing warning
 “Injury availability source needs review (mirrored feed, latest complete week (6))”; this does not
