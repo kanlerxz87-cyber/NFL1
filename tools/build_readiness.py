@@ -212,13 +212,13 @@ def build() -> dict:
     # The build time is the newest data timestamp, not the wall clock, so a rebuild of unchanged
     # data is byte-identical (the --check gate depends on this).
     data_time = max((b["fetched_at_utc"] for b in beats if b.get("fetched_at_utc")), default="")
-    # Source correction (session 90c2b454-nfl1, flag F50). The schedule page was cited for rows whose
+    # Source correction (session 90c2b454-nfl1, flag F52). The schedule page was cited for rows whose
     # evidence is a backtest, a registration, or a price record. No official page holds those numbers,
     # so these rows link to the repository file that computes them, labelled as internal. R5, R7
     # and R8 keep their official nfl.com links because they count records from that page.
     for r in rows:
         if r["id"] in INTERNAL_ROWS:
-            r["source_label"] = "internal computation: no official source applies (flag F50)"
+            r["source_label"] = "internal computation: no official source applies (flag F52)"
             r["source_url"] = REPO_BLOB + r["computed_from"].split(" ")[0]
     for r in rows:
         if r["id"] == "R6":

@@ -8,6 +8,7 @@ explicit blank with an "unverified" badge rather than a number.
 from __future__ import annotations
 
 import html
+from collections import Counter
 import json
 import os
 from datetime import datetime, timezone
@@ -630,32 +631,6 @@ def overview(snap, dash, lines, strat, avail, props, verif):
   </div>
 </section>"""
 
-    # Session 90c2b454-nfl1 (P4): decision-readiness table, one row per requirement. Every number
-    # is computed by tools/build_readiness.py from the file named in its row.
-    rd = load_rel("data/readiness.json") or {}
-    rd_rows = []
-    for r in rd.get("rows", []):
-        rd_rows.append([
-            f"<strong>{esc(r['id'])}</strong> {esc(r['requirement'])}",
-            badge(r["status"]),
-            esc(r["blocking_gate"]),
-            esc(r["number_now"]),
-            esc(r["number_to_clear"]),
-            src(r["source_url"], r["source_label"])
-            + f'<br><span class="sub">computed from {esc(r["computed_from"])}</span>',
-        ])
-    rd_tbl = table(["Requirement", "Status", "Gate that blocks it", "Number now",
-                    "Number that clears it", "Source"], rd_rows,
-                   note=("Status: met = the number that clears the gate is reached · partial = some evidence, "
-                         "gate not reached · blocked = gate not reached, nothing closes it. Blank thresholds are "
-                         "decisions nobody has made yet; they are flagged, not filled in."))
-    readiness_panel = f"""
-<section class="panel" id="readiness">
-  <div class="panel-head"><h2>Decision readiness: one row per requirement</h2>
-    <a href="pages/questions.html">Questions behind each gate &rarr;</a></div>
-  {rd_tbl}
-</section>"""
-
     # Removal of luck, on the landing page: each strategy against a fair-price null (same numbers as
     # pages/luck.html, computed by the s9cb analysis from the committed leaderboard).
     lk_rows = []
@@ -706,8 +681,6 @@ def overview(snap, dash, lines, strat, avail, props, verif):
 </section>
 
 <section class="kpis">{kpis}</section>
-
-{readiness_panel}
 
 {luck_panel}
 
@@ -763,6 +736,9 @@ def overview(snap, dash, lines, strat, avail, props, verif):
 {depth_panel}
 {research_panel}
 <section class="panel">
+{readiness_panel(readiness_data())}
+
+<section class="panel">
   <div class="panel-head"><h2>What we know, what we don't</h2><a href="pages/questions.html">{len(QUESTIONS)} questions that gate decisions →</a></div>
   <div class="grid-3">
     <div class="stat"><h4>Answered</h4><p>{sum(1 for q in QUESTIONS if q['status'].lower().startswith(('answered', 'partially')))} of {len(QUESTIONS)} questions have a verified answer or partial answer.</p></div>
@@ -774,6 +750,73 @@ def overview(snap, dash, lines, strat, avail, props, verif):
     return page("index.html", "Overview", body,
                 "A working dashboard for originating NFL lines, punishing luck, and flagging what is unknown.",
                 gen)
+
+
+# ---------------------------------------------------------------- decision readiness
+READINESS_CLASS = {"Done": "pass", "Partial": "warn", "Not started": "fail", "Blocked": "fail",
+                   "Not met": "fail", "Not verified": "neutral", "Rejected (brief)": "neutral"}
+
+
+def readiness_data():
+    """Requirement register (scripts/brief_07810d9f/register.py -> room/data/readiness.json)."""
+    return load_rel("room/data/readiness.json", {}) or {}
+
+
+def readiness_badge(status: str) -> str:
+    cls = READINESS_CLASS.get(status, "neutral")
+    return f'<span class="badge {cls}">{esc(status)}</span>'
+
+
+def readiness_panel(reg) -> str:
+    rows = reg.get("rows", [])
+    if not rows:
+        return ""
+    counts = reg.get("meta", {}).get("by_status", {})
+    order = ["Done", "Partial", "Not started", "Blocked", "Not met", "Not verified", "Rejected (brief)"]
+    chips = "".join(f'<span class="badge {READINESS_CLASS.get(k, "neutral")}">{esc(k)}: {counts.get(k, 0)}</span> '
+                    for k in order if counts.get(k))
+    blocked = [x for x in rows if x["status"] in ("Blocked", "Not met", "Not started")][:8]
+    tbl = table(["Requirement", "Status", "Blocked by", "Clears when", "Source"],
+                [[esc(x["requirement"]), readiness_badge(x["status"]), esc(x["blocked_by"]),
+                  esc(x["clears_when"]), src(x["src"]["u"], x["src"]["t"])] for x in blocked])
+    return f"""<section class="panel">
+  <div class="panel-head"><h2>Decision readiness</h2><a href="pages/readiness.html">All {len(rows)} requirements →</a></div>
+  <p>{chips}</p>
+  <p class="note">Each requirement of the brief, with its status, the gate that blocks it, and the value that clears it.
+  Statuses rest on a named repo artifact or on a source re-read on 2026-11-15, as recorded per row. Nothing here is a
+  recommendation. The first eight rows that are blocked, not started or not met are shown.</p>
+  {tbl}
+</section>
+"""
+
+
+def readiness_page(reg, dash) -> str:
+    rows = reg.get("rows", [])
+    meta = reg.get("meta", {})
+    counts = meta.get("by_status", {})
+    summary = " · ".join(f"{k} {counts.get(k, 0)}" for k in
+                         ["Done", "Partial", "Not started", "Blocked", "Not met", "Not verified", "Rejected (brief)"]
+                         if counts.get(k))
+    groups = []
+    for g in dict.fromkeys(x["group"] for x in rows):
+        body = table(["ID", "Requirement", "Status", "Checked", "Evidence in repo", "Blocked by", "Clears when", "Next step", "Source"],
+                     [[esc(x["id"]), esc(x["requirement"]), readiness_badge(x["status"]), esc(x["checked"]),
+                       esc(x["evidence"]), esc(x["blocked_by"]), esc(x["clears_when"]), esc(x["next_step"]),
+                       src(x["src"]["u"], x["src"]["t"])] for x in rows if x["group"] == g])
+        groups.append(f'<section class="panel"><h2>{esc(g)}</h2>{body}</section>')
+    body = f"""<section class="panel">
+  <p class="standfirst">{len(rows)} requirements of the brief, one row each. {esc(summary)}.</p>
+  <p class="note">Legend: Done = delivered and the artifact exists; Partial = some of it exists;
+  Not started = no artifact found; Blocked = needs a named external source or decision; Not met = the repo does the opposite;
+  Not verified = not checked in this session, no status claimed; Rejected (brief) = the brief rejects it and the note says whether the repo complies.
+  Rows marked "re-read 2026-11-15" were checked against the live page on that date; the others rest on the repo artifact named.
+  Source links marked <em>internal</em> point to repo files, not to official pages; they are evidence of what the repo holds, not verification against an official source.</p>
+</section>
+{''.join(groups)}
+"""
+    return page("pages/readiness.html", "Decision readiness", body,
+                "Every requirement of the brief, its status, the gate that blocks it, and the value that clears it.",
+                meta.get("built", ""))
 
 
 # ---------------------------------------------------------------- lines
@@ -1602,6 +1645,12 @@ def review_page(verif, strat, dash, avail=None):
          src("https://www.nfl.com/teams/", "club charts"), badge("partially resolved")],
     ])
 
+    # session 543676f8-nfl1: flags raised by the official Week 10 capture (data/capture/flags.json)
+    for cf in load_rel("data/capture/flags.json", {}).get("flags", []):
+        flags.append([esc(cf["id"]), esc(cf["area"]), esc(cf["issue"]),
+                      src(cf["source"], "official page" if cf.get("source_kind") == "official" else "repository"),
+                      badge("needs review" if cf["state"].startswith("open") else cf["state"])])
+
     tbl = table(["ID", "Area", "What is flagged", "Source", "State"], flags,
                 note=("Unverified and blocked items do not stop publication; they stop the claim. "
                       "Each row states what would settle it."))
@@ -1612,6 +1661,8 @@ def review_page(verif, strat, dash, avail=None):
   <p>Nothing here is hidden. Anything we could not confirm against an official league source
   is published with a blank value, a flag and the link a reviewer needs. Nothing on this page
   is inferred or filled in.</p>
+  <p>Official Week 10 injury report, captured as an immutable file with a manifest:
+  <a href="../capture/index.html">every row, with its official link</a>.</p>
   {tbl}
 </section>
 <section class="panel">
@@ -2347,6 +2398,7 @@ def main():
           depth_page(load_rel("data/depth_ladder.json"), snap, dash))
     write("pages/evidence.html", evidence_page(prov, verif, dash, repl))
     write("pages/questions.html", questions_page(dash))
+    write("pages/readiness.html", readiness_page(readiness_data(), dash))
     write("pages/suggestions.html", suggestions_page(dash))
     write("pages/review.html", review_page(verif, strat, dash, avail))
     write("pages/audit.html", audit_page(load_audit(), dash))

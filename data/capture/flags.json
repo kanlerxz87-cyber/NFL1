@@ -1,0 +1,139 @@
+{
+  "schema": "capture-flags/1",
+  "session": "543676f8-nfl1",
+  "as_of": "2026-11-15",
+  "note": "Single register for flags raised by the Week 10 capture and the X2/X3 review. Resolved items are kept, not deleted. Every row carries an official or repository link.",
+  "flags": [
+    {
+      "id": "CAP-01",
+      "area": "Scrape (automated)",
+      "state": "resolved (later snapshot)",
+      "issue": "The 14 Nov scrape (generated 2026-11-14T17:02:31Z) held 345 rows. Two rows on the official page were absent: Calais Campbell (BAL DT) and Ronnie Stanley (BAL T). The 15 Nov scrape (generated 2026-11-15T12:24:19Z) holds 347 rows and matches the capture on every row after the club-code mapping (CAP-05). The scraper still has no row-count pin, so a future short scrape would pass silently.",
+      "what_settles_it": "Row-count pin in the scraper (not done). Cause of the 14 Nov gap is not provable: that scrape kept only a hash, not the page.",
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "source_kind": "official",
+      "evidence": [
+        "data/model/official_injuries.json",
+        "data/capture/comparison.json"
+      ]
+    },
+    {
+      "id": "CAP-02",
+      "area": "Scrape (automated)",
+      "state": "resolved (later snapshot)",
+      "issue": "The 14 Nov scrape differed from the official page on 13 players' game status (e.g. Arden Key, IND: page blank, scrape Questionable). The 15 Nov scrape has 0 differences on injury, practice status or game status for all 347 rows.",
+      "what_settles_it": "Keep a raw copy of each official page at capture time so a past scrape can be re-checked (the 14 Nov page is not retained).",
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "source_kind": "official",
+      "evidence": [
+        "data/model/official_injuries.json",
+        "data/capture/nflcom_injuries_reg10_2026-11-15_rows.tsv"
+      ]
+    },
+    {
+      "id": "CAP-03",
+      "area": "Hand copy (data/verified)",
+      "state": "open",
+      "issue": "data/verified/injury_report_2026_week10.tsv holds 254 rows for 24 clubs; the official page holds 347 rows for 28 clubs. data/verified/no_injuries_week10.csv lists SEA, CIN, LAC and BAL as 'No Injuries Reported' (retrieved 2026-11-12T05:30Z). The official page lists 15 SEA, 9 CIN, 19 LAC and 10 BAL rows. Pages built from these files still show 'No Injuries Reported' for those clubs.",
+      "what_settles_it": "Regenerate data/verified injury files from the capture, or retire them and point the pages at the capture. Until then, no page should state that a club has no injuries.",
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "source_kind": "official",
+      "evidence": [
+        "data/verified/no_injuries_week10.csv",
+        "data/verified/injury_report_2026_week10.tsv",
+        "scripts/verified/build_site.py"
+      ]
+    },
+    {
+      "id": "CAP-04",
+      "area": "Hand copy (data/verified)",
+      "state": "open",
+      "issue": "The hand copy leaves the game-status cell blank for three Lions players the official page lists as Out: Kerby Joseph (S, knee), Cade Mays (C, ankle) and D.J. Reed (CB, hip). Confirmed again on 15 Nov from the official page.",
+      "what_settles_it": "Fill these three cells from the official page, or drop the hand-copy file (see CAP-03).",
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "source_kind": "official",
+      "evidence": [
+        "data/verified/injury_report_2026_week10.tsv",
+        "data/capture/nflcom_injuries_reg10_2026-11-15_rows.tsv"
+      ]
+    },
+    {
+      "id": "CAP-05",
+      "area": "Club codes",
+      "state": "open",
+      "issue": "Club codes disagree across copies. The official page prints AZ for Arizona and LAR for the Rams. The scrape uses ARI and LA. The hand copy uses AZ and LA. The capture keeps the printed codes and tools/check_capture.py maps the others.",
+      "what_settles_it": "One club-code table, sourced to the official page, used by every generator.",
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "source_kind": "official",
+      "evidence": [
+        "tools/check_capture.py",
+        "data/model/official_injuries.json"
+      ]
+    },
+    {
+      "id": "CAP-06",
+      "area": "Capture method",
+      "state": "open",
+      "issue": "The capture was transcribed from the text the fetch tool returned for the official page (8 chunks), not from raw HTML. The manifest hashes the transcription, so the hash proves the capture file has not changed since it was made, not that it matches the page byte for byte. The date is recorded; the time of day is not.",
+      "what_settles_it": "Save the raw page HTML with a timestamp at capture time, and record the capture time.",
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "source_kind": "official",
+      "evidence": [
+        "data/capture/manifest.json"
+      ]
+    },
+    {
+      "id": "CAP-07",
+      "area": "Game count (correction)",
+      "state": "resolved",
+      "issue": "An earlier note gave 16 games for Week 10. The capture, the official schedule file and the bye list all give 14: 14 Week 10 schedule rows, and four bye clubs (CHI, DEN, PHI, TB) leave 28 of 32 clubs playing. The 16 figure was wrong and is not used anywhere in the capture.",
+      "what_settles_it": "Settled: 14 games, 28 clubs, 4 byes.",
+      "source": "https://www.nfl.com/schedules/2026/REG11",
+      "source_kind": "official",
+      "evidence": [
+        "data/verified/schedule_2026_week10.tsv",
+        "data/verified/byes_2026.csv",
+        "data/capture/nflcom_injuries_reg10_2026-11-15_games.tsv"
+      ]
+    },
+    {
+      "id": "R26-01",
+      "area": "Strategy pre-registration (R-26)",
+      "state": "open",
+      "issue": "data/strength/strategies.json has one git commit (5a769b3), and it holds the rules and the results together. The rules cannot be shown to have been fixed before the results, so the strategies are not pre-registered in the sense the brief requires. data/strength/meta.json has no registration record.",
+      "what_settles_it": "Freeze the rule set in a commit that contains no results, record its hash, and only then run the backtest.",
+      "source": "https://github.com/kanlerxz87-cyber/NFL1/commit/5a769b3",
+      "source_kind": "repository",
+      "evidence": [
+        "data/strength/strategies.json",
+        "data/strength/meta.json"
+      ]
+    },
+    {
+      "id": "LB-01",
+      "area": "Leaderboard (backtest figures)",
+      "state": "open",
+      "issue": "The landing-page leaderboard prints backtest figures for each strategy row: bets, win %, ROI, ROI 95% low and BH q (for example S11: 548 bets, 54.6% win, ROI 4.2%, ROI 95% low -3.9%, BH q 0.989). The brief bars backtest numbers from the leaderboard. Separately, the page says 0 of 12 strategies pass all gates.",
+      "what_settles_it": "Remove backtest numbers from the leaderboard; show the gate state only, with the figures on the strategy page and labelled as in-sample.",
+      "source": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/index.html",
+      "source_kind": "repository",
+      "evidence": [
+        "index.html",
+        "data/strength/strategies.json"
+      ]
+    },
+    {
+      "id": "SV-01",
+      "area": "Stale generator (scripts/verified)",
+      "state": "open",
+      "issue": "scripts/verified/build_site.py reads data/verified/injuries_week10.csv and no_injuries_week10.csv (retrieved 2026-11-12). Its output still shows 'No Injuries Reported' for SEA, CIN, LAC and BAL in pages/availability.html, pages/data.html, pages/review.html and verified-lab/*.html. pipeline/scrape_injuries.py reads no verified injury file, so the scrape itself is not affected.",
+      "what_settles_it": "Point build_site.py at the capture or the current scrape, then rebuild.",
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "source_kind": "official",
+      "evidence": [
+        "scripts/verified/build_site.py",
+        "pipeline/scrape_injuries.py"
+      ]
+    }
+  ]
+}
