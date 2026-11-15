@@ -33,6 +33,7 @@ NAV = [
     ("pages/props.html", "Player Props"),
     ("pages/injuries.html", "Injuries"),
     ("pages/depth.html", "Depth & Deficiency"),
+    ("pages/snapshots.html", "Injury Snapshots"),
     ("pages/questions.html", "Questions"),
     ("pages/suggestions.html", "Suggestions"),
     ("pages/evidence.html", "Evidence"),
@@ -73,7 +74,8 @@ SIDEBAR = [
                      ("pages/parlays.html", "Parlays & Combos"),
                      ("pages/props.html", "Player Props")]),
     ("Availability", [("pages/injuries.html", "Injuries"),
-                      ("pages/depth.html", "Depth & Deficiency")]),
+                      ("pages/depth.html", "Depth & Deficiency"),
+                      ("pages/snapshots.html", "Injury Snapshots")]),
     ("Decisions", [("pages/questions.html", "Questions"),
                    ("pages/suggestions.html", "Suggestions")]),
     ("Evidence", [("pages/evidence.html", "Evidence"),
@@ -627,6 +629,57 @@ def overview(snap, dash, lines, strat, avail, props, verif):
   </div>
 </section>"""
 
+    # Session 90c2b454-nfl1 (P4): decision-readiness table, one row per requirement. Every number
+    # is computed by tools/build_readiness.py from the file named in its row.
+    rd = load_rel("data/readiness.json") or {}
+    rd_rows = []
+    for r in rd.get("rows", []):
+        rd_rows.append([
+            f"<strong>{esc(r['id'])}</strong> {esc(r['requirement'])}",
+            badge(r["status"]),
+            esc(r["blocking_gate"]),
+            esc(r["number_now"]),
+            esc(r["number_to_clear"]),
+            src(r["source_url"], r["source_label"])
+            + f'<br><span class="sub">computed from {esc(r["computed_from"])}</span>',
+        ])
+    rd_tbl = table(["Requirement", "Status", "Gate that blocks it", "Number now",
+                    "Number that clears it", "Source"], rd_rows,
+                   note=("Status: met = the number that clears the gate is reached · partial = some evidence, "
+                         "gate not reached · blocked = gate not reached, nothing closes it. Blank thresholds are "
+                         "decisions nobody has made yet; they are flagged, not filled in."))
+    readiness_panel = f"""
+<section class="panel" id="readiness">
+  <div class="panel-head"><h2>Decision readiness: one row per requirement</h2>
+    <a href="pages/questions.html">Questions behind each gate &rarr;</a></div>
+  {rd_tbl}
+</section>"""
+
+    # Removal of luck, on the landing page: each strategy against a fair-price null (same numbers as
+    # pages/luck.html, computed by the s9cb analysis from the committed leaderboard).
+    lk_rows = []
+    for r in (lb9.get("luck_accounting") or {}).get("rows", [])[:6]:
+        band = r.get("luck_band_95_units") or [None, None]
+        lk_rows.append([
+            esc(r["strategy"]), num(r.get("n_bets"), 0), num(r.get("profit_units"), 1),
+            f"&plusmn;{num(abs(band[1]), 1)}" if band[1] is not None else '<span class="missing">blank</span>',
+            badge("outside the luck band" if r.get("profit_outside_luck_band") else "inside the luck band"),
+            num(r.get("p_value_two_sided"), 3),
+            num(r.get("bets_needed_for_80pct_power"), 0),
+            src(SOURCE["schedules"], "closing lines"),
+        ])
+    lk_tbl = table(["Strategy", "Bets", "Profit (units)", "Lucky band, 95%", "Verdict", "p (two-sided)",
+                    "Bets needed for 80% power", "Source"], lk_rows,
+                   note=("Removal of luck: a purely lucky run at the observed prices would land inside the band "
+                         "95% of the time. A profit inside the band is not evidence of skill. Full method and the "
+                         "eight gates: Skill vs Luck."))
+    luck_panel = f"""
+<section class="panel" id="luck">
+  <div class="panel-head"><h2>Removal of luck: what a lucky run would have produced</h2>
+    <a href="pages/luck.html">How luck is removed &rarr;</a></div>
+  {lk_tbl}
+</section>"""
+
     body = f"""
 <section class="hero">
   <div>
@@ -652,6 +705,10 @@ def overview(snap, dash, lines, strat, avail, props, verif):
 </section>
 
 <section class="kpis">{kpis}</section>
+
+{readiness_panel}
+
+{luck_panel}
 
 <section class="panel">
   <div class="panel-head">

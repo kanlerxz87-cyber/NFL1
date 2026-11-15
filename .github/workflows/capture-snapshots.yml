@@ -18,6 +18,7 @@ on:
     branches: ["arena/**", main]
     paths:
       - "pipeline/capture_snapshots.py"
+      - "tools/build_snapshots_page.py"
       - "tests/test_capture_snapshots.py"
       - ".github/workflows/capture-snapshots.yml"
 
@@ -47,6 +48,8 @@ jobs:
       - name: Capture the official injury report (raw hash, parse, store if changed)
         id: capture
         run: python pipeline/capture_snapshots.py capture
+      - name: Re-render the injury-snapshot ledger page from the store
+        run: python tools/build_snapshots_page.py
       - name: Verify stored captures are unchanged and the heartbeat is fresh
         id: verify
         if: steps.capture.outcome == 'success'
@@ -56,7 +59,7 @@ jobs:
         run: |
           git config user.name "nfl1-data-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/snapshots
+          git add data/snapshots pages/snapshots.html
           if git diff --cached --quiet; then
             echo "Nothing new to commit"
           else
