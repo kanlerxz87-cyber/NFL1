@@ -2973,3 +2973,41 @@ additive and non-overlapping with every earlier session, which are all closed.
 - **Open board defect (log, not edited):** the daily data job (`collect-data.yml`, which also runs on `arena/**` pushes) re-renders some pages with a different path than `tools/build_site_all.py`: nav links are written as `../pages/…` (e.g. `pages/luck.html`, `pages/readiness.html`), so `build_site_all.py --check` fails after each refresh commit, although every link still resolves. Owner: the session that owns `tools/build_dashboard.py` and the collect-data step. Request: make the data job end with `tools/build_site_all.py` (or make the check run after it). Logged as part of F-7810-10.
 - Follow-up PR (label corrections in the register; PR-09 wording and IN-10 count) opened from the same branch after the merge; its result is recorded here when it is merged.
 - Follow-up PR #66 (register label corrections; cross-reference SP-09 → SI-09): **MERGED** at 2026-11-15T12:38:16Z, merge commit `95618e7`. Its head `bb6b8a0` passed all four workflows. GitHub Pages: built for `8c57b7c` (later main data refresh) after the `95618e7` Pages run succeeded.
+
+---
+
+## Task board — session `0c5215c1-nfl1` (claimed 2026-11-15, UTC)
+
+Board read in full before any edit. Claimed before any other file was touched.
+
+**Open PRs at claim time and their scopes (all respected):** #70 (`07810d9f`, COORDINATION
+record only) · #68 (`90c2b454`, immutable injury-report snapshots + snapshot ledger +
+decision-readiness rows + flags F51/F52, workflows, generated pages) · #60 (`26b2c41e`,
+decision-readiness register, Lions Week-10 audit, data/model, pages, room/) · #59
+(`edbb28da`, docs audit) · #57 (`65df4799`, stale COORDINATION record, 2026-11-13) · #47
+(`cf97db19`, backup register, 2026-11-13). None of them claims the pre-registration cluster.
+
+**Claimed cluster** — the brief's pre-registration / leaderboard-integrity requirements, all of
+which the readiness register (`room/data/readiness.json`) reports as `Not started` / `Not met`
+and which no other session has claimed:
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| P1 | Read board, claim, push claim first | in progress | `0c5215c1` | `COORDINATION.md` | this section |
+| P2 | Pre-registration subsystem: a registry that freezes every strategy collection's rule text, sample window and gates with a git commit hash, honestly labelled retrospective (rules and results committed together) or prospective (registration precedes results). Clears the substance of PR-15; feeds PR-06. | unclaimed → in progress | `0c5215c1` | `prereg/**` (new), `data/prereg/**` (new) | flag R26-01 stays open for retrospectively registered sets |
+| P3 | Two-sided "what would change our mind" field (upside trigger + downside trigger) on every registered strategy entry (readiness PR-24) | unclaimed → in progress | `0c5215c1` | `data/prereg/registrations.json` | |
+| P4 | Freeze the backtest corpus: file + sha256 + inclusion rules + train/validation/holdout split, committed before any future evaluation window opens (readiness PR-09) | unclaimed → in progress | `0c5215c1` | `data/prereg/corpus.json` | holdout numbers may not be reported until a recorded open decision |
+| P5 | Shadow baseline (singles only): freeze a simple team-strength model definition in a results-free commit, then record Week 11 forecasts with a timestamp earlier than each official kickoff (readiness PR-18) | unclaimed → in progress | `0c5215c1` | `prereg/shadow_baseline.py`, `data/prereg/forecasts/` | kickoff times verified against the official Week 11 schedule page |
+| P6 | Control baselines (random picks; favourites only) computed on the frozen corpus with observed prices, plus registered control definitions for the prospective view (readiness PR-17) | unclaimed → in progress | `0c5215c1` | `data/prereg/controls.json`, `prereg/build.py` | |
+| P7 | Prospective-vs-backtest split view: a prospective leaderboard keyed by registration hash (empty until first settlement) beside a backtest archive explicitly labelled retrospective and not a leaderboard (readiness PR-06) | unclaimed → in progress | `0c5215c1` | `prereg/index.html` | root `leaderboard.html` pages stay with their generators; a change request is logged, not made |
+| P8 | Verification: `prereg/verify.py` — registration hashes reproduce from the committed definition files, forecast timestamps precede every kickoff, corpus sha256 reproduces, every table row carries a link; run with the existing gates | unclaimed → in progress | `0c5215c1` | `prereg/verify.py` | |
+| P9 | Integration: one additive nav entry each in `pipeline/gen_site.py` (NAV) and `scripts/verified/normalize_nav.py` (CANON) so the sub-site is reachable, rebuild, all gates, PR → merge → Pages deploy → record here | unclaimed | `0c5215c1` | `COORDINATION.md`, nav entries (additive, logged) | |
+
+**Not touched by this session:** `data/s9cb/**`, `data/model/**`, `pipeline/build_all.py`,
+`s9cb/**`, `analysis/**`, `room/**`, `lab/**`, `research/**`, `strength/**`, `docs/**`,
+`verified-lab/**`, `referee/**`, `dashboard/**`, `.github/workflows/**`, `data/flags.json`
+(append-only if a new irregularity is found), `data/questions.json`, `data/suggestions.json`.
+The existing backtest leaderboard pages are not edited; P7 republishes them in a clearly
+labelled archive view and logs a change request for their owners.
+
+_This claim is committed and pushed before any other file is touched, per the brief._
