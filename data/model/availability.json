@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-14T17:02:39+00:00",
+ "generated_at": "2026-11-15T12:28:54+00:00",
  "week": 6,
  "clubs_without_report": [
   "CIN",
@@ -12,21 +12,21 @@
   "url": "https://www.nfl.com/injuries/",
   "warning": "The official current-week report could not be scraped, so this table uses the most complete week available in the mirrored feed. Treat statuses as stale and check the official page before acting.",
   "official_counts": {
-   "rows": 345,
+   "rows": 347,
    "teams": 28,
    "clubs_resolved_from_roster": 0,
    "rows_without_club": 0
   },
   "official_status": "ok"
  },
- "depth_chart_timestamp": "2026-11-14T14:04:32Z",
+ "depth_chart_timestamp": "2026-11-15T07:01:39Z",
  "counts": {
   "injury_records": 376,
   "rows_with_game_designation": 181,
-  "rows_practice_only_starters": 31,
-  "starters_impacted": 117,
-  "teams_with_starter_out": 21,
-  "records_not_matched_to_depth_chart": 8
+  "rows_practice_only_starters": 30,
+  "starters_impacted": 116,
+  "teams_with_starter_out": 22,
+  "records_not_matched_to_depth_chart": 7
  },
  "method": {
   "depth_rank": "Depth chart mirrored weekly (pos_rank 1 = listed starter).",
@@ -298,6 +298,20 @@
    "source": "https://www.nfl.com/injuries/"
   },
   {
+   "team": "GB",
+   "name": "Green Bay Packers",
+   "starters_out": 1,
+   "starters_doubtful": 0,
+   "starters_questionable": 2,
+   "starters_practice_only": 2,
+   "starters_no_game_designation": 2,
+   "attrition_points": 0.09,
+   "attrition_index_0_100": 21.0,
+   "backup_experience_avg": 4.2,
+   "backup_snaps_avg": 219.0,
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
    "team": "ATL",
    "name": "Atlanta Falcons",
    "starters_out": 1,
@@ -309,20 +323,6 @@
    "attrition_index_0_100": 20.6,
    "backup_experience_avg": 3.0,
    "backup_snaps_avg": 143.0,
-   "source": "https://www.nfl.com/injuries/"
-  },
-  {
-   "team": "NO",
-   "name": "New Orleans Saints",
-   "starters_out": 1,
-   "starters_doubtful": 0,
-   "starters_questionable": 4,
-   "starters_practice_only": 0,
-   "starters_no_game_designation": 0,
-   "attrition_points": 0.088,
-   "attrition_index_0_100": 20.5,
-   "backup_experience_avg": 2.0,
-   "backup_snaps_avg": 75.0,
    "source": "https://www.nfl.com/injuries/"
   },
   {
@@ -363,8 +363,22 @@
    "starters_no_game_designation": 1,
    "attrition_points": 0.077,
    "attrition_index_0_100": 18.0,
-   "backup_experience_avg": 3.7,
-   "backup_snaps_avg": 258.0,
+   "backup_experience_avg": 3.5,
+   "backup_snaps_avg": 194.0,
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "team": "NO",
+   "name": "New Orleans Saints",
+   "starters_out": 1,
+   "starters_doubtful": 0,
+   "starters_questionable": 3,
+   "starters_practice_only": 0,
+   "starters_no_game_designation": 0,
+   "attrition_points": 0.075,
+   "attrition_index_0_100": 17.6,
+   "backup_experience_avg": 2.0,
+   "backup_snaps_avg": 95.0,
    "source": "https://www.nfl.com/injuries/"
   },
   {
@@ -396,20 +410,6 @@
    "source": "https://www.nfl.com/injuries/"
   },
   {
-   "team": "GB",
-   "name": "Green Bay Packers",
-   "starters_out": 0,
-   "starters_doubtful": 0,
-   "starters_questionable": 2,
-   "starters_practice_only": 2,
-   "starters_no_game_designation": 2,
-   "attrition_points": 0.05,
-   "attrition_index_0_100": 11.6,
-   "backup_experience_avg": 5.0,
-   "backup_snaps_avg": 151.0,
-   "source": "https://www.nfl.com/injuries/"
-  },
-  {
    "team": "NYG",
    "name": "New York Giants",
    "starters_out": 0,
@@ -438,20 +438,6 @@
    "source": "https://www.nfl.com/injuries/"
   },
   {
-   "team": "IND",
-   "name": "Indianapolis Colts",
-   "starters_out": 0,
-   "starters_doubtful": 0,
-   "starters_questionable": 1,
-   "starters_practice_only": 2,
-   "starters_no_game_designation": 2,
-   "attrition_points": 0.033,
-   "attrition_index_0_100": 7.6,
-   "backup_experience_avg": 1.0,
-   "backup_snaps_avg": 67.0,
-   "source": "https://www.nfl.com/injuries/"
-  },
-  {
    "team": "DAL",
    "name": "Dallas Cowboys",
    "starters_out": 0,
@@ -463,6 +449,20 @@
    "attrition_index_0_100": 6.4,
    "backup_experience_avg": 2.0,
    "backup_snaps_avg": 276.0,
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "team": "IND",
+   "name": "Indianapolis Colts",
+   "starters_out": 0,
+   "starters_doubtful": 0,
+   "starters_questionable": 1,
+   "starters_practice_only": 1,
+   "starters_no_game_designation": 1,
+   "attrition_points": 0.023,
+   "attrition_index_0_100": 5.3,
+   "backup_experience_avg": 1.5,
+   "backup_snaps_avg": 100.0,
    "source": "https://www.nfl.com/injuries/"
   },
   {
@@ -1184,6 +1184,28 @@
    "depth_source": "https://www.nfl.com/teams/"
   },
   {
+   "team": "GB",
+   "player": "Skyy Moore",
+   "position": "WR",
+   "depth_rank": 1,
+   "depth_slot": "Punt Returner",
+   "injury": "Ankle",
+   "game_status": "Out",
+   "practice_status": "Did Not Participate In Practice",
+   "signal": "game designation",
+   "effective_status": "Out",
+   "status_weight": 1.0,
+   "years_exp": 4,
+   "roster_status": "RES",
+   "replacement": "Matthew Golden",
+   "replacement_years_exp": 1,
+   "replacement_snaps_2026": 489,
+   "position_weight": 0.04,
+   "attrition_points": 0.04,
+   "source": "https://www.nfl.com/injuries/",
+   "depth_source": "https://www.nfl.com/teams/"
+  },
+  {
    "team": "HOU",
    "player": "Tank Dell",
    "position": "WR",
@@ -1615,9 +1637,9 @@
    "status_weight": 0.25,
    "years_exp": 4,
    "roster_status": "ACT",
-   "replacement": "Alontae Taylor",
-   "replacement_years_exp": 4,
-   "replacement_snaps_2026": 387,
+   "replacement": null,
+   "replacement_years_exp": null,
+   "replacement_snaps_2026": null,
    "position_weight": 0.06,
    "attrition_points": 0.015,
    "source": "https://www.nfl.com/injuries/",
@@ -2124,28 +2146,6 @@
    "replacement": "Jaylen Reed",
    "replacement_years_exp": 1,
    "replacement_snaps_2026": 152,
-   "position_weight": 0.05,
-   "attrition_points": 0.0125,
-   "source": "https://www.nfl.com/injuries/",
-   "depth_source": "https://www.nfl.com/teams/"
-  },
-  {
-   "team": "NO",
-   "player": "Alvin Kamara",
-   "position": "RB",
-   "depth_rank": 1,
-   "depth_slot": "Running Back",
-   "injury": "Back",
-   "game_status": "Questionable",
-   "practice_status": "Limited Participation in Practice",
-   "signal": "game designation",
-   "effective_status": "Questionable",
-   "status_weight": 0.25,
-   "years_exp": 9,
-   "roster_status": "ACT",
-   "replacement": "Audric Estime",
-   "replacement_years_exp": 2,
-   "replacement_snaps_2026": 35,
    "position_weight": 0.05,
    "attrition_points": 0.0125,
    "source": "https://www.nfl.com/injuries/",
@@ -2674,28 +2674,6 @@
    "replacement": "Jalen Farmer",
    "replacement_years_exp": 0,
    "replacement_snaps_2026": 128,
-   "position_weight": 0.05,
-   "attrition_points": 0.01,
-   "source": "https://www.nfl.com/injuries/",
-   "depth_source": "https://www.nfl.com/teams/"
-  },
-  {
-   "team": "IND",
-   "player": "Jaylahn Tuimoloau",
-   "position": "DE",
-   "depth_rank": 1,
-   "depth_slot": "Left Defensive End",
-   "injury": null,
-   "game_status": null,
-   "practice_status": "Limited Participation in Practice",
-   "signal": "practice only (no game designation yet)",
-   "effective_status": "Limited Participation in Practice",
-   "status_weight": 0.2,
-   "years_exp": 1,
-   "roster_status": "ACT",
-   "replacement": "George Gumbs Jr.",
-   "replacement_years_exp": 0,
-   "replacement_snaps_2026": 0,
    "position_weight": 0.05,
    "attrition_points": 0.01,
    "source": "https://www.nfl.com/injuries/",
