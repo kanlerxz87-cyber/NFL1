@@ -63,6 +63,9 @@ STEPS = [
     # session 543676f8-nfl1: the official-capture page is built before the landing page so the
     # landing page can link it; it fails the build if the capture does not pass its gate.
     ("official capture page (capture/)", [sys.executable, "tools/build_capture_site.py"], ROOT),
+    # session 57c05555-nfl1: the depth-parse and availability-ledger verification page. It runs
+    # before the landing page so the landing page's site map can list it.
+    ("depth and ledger verification page", [sys.executable, "tools/build_session_page.py"], ROOT),
     ("landing page and decision lab", [sys.executable, "gen_site.py"], os.path.join(ROOT, "pipeline")),
     # Session 90c2b454-nfl1 (P3): the injury-snapshot ledger, rendered from its own store.
     ("injury snapshot ledger", [sys.executable, "tools/build_snapshots_page.py"], ROOT),

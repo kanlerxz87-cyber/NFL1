@@ -51,6 +51,10 @@ CANON = [
     ("decisions.html", "Decision Register"),
     ("verified.html", "Verified Artifacts"),
     ("models.html", "Models"),
+    # Session 57c05555-nfl1: official depth charts parsed faithfully, and the immutable
+    # availability ledger behind them. Added here rather than by hand on each page so the one
+    # canonical navigation stays one list and every page gets the same entry.
+    ("session-57c05555.html", "Depth Charts & Ledger"),
     ("flagged.html", "Flagged (companion)"),
 ]
 
