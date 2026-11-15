@@ -221,7 +221,7 @@ ROWS = [
       "nfl.com injury report", NFL_INJ),
     r("IN-06", I, "Re-capture and republish the Week 10 injury tables", "Partial", TODAY,
       "Re-captured 2026-11-15: 347 rows across 28 clubs. The published scrape holds 345 rows; 2 live rows are absent and 32 field values differ (injury_delta_2026-11-15.json).",
-      "The scraper has not been re-run after the defect is fixed (see SP-09).",
+      "The scraper has not been re-run after the defect is fixed (see SI-09).",
       "The published table equals the live read: 0 rows missing and 0 field differences.",
       "Re-run the scrape in Actions after the fix, then re-compare.",
       "live read and delta", REPO + "data/brief_07810d9f/injury_delta_2026-11-15.json"),
