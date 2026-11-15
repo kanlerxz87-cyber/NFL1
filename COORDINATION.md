@@ -3146,3 +3146,32 @@ Most of the brief's items were not started. Examples, each still open on the boa
 - **Merge (recorded after the fact):** PR #73 merged with a merge commit, `145731b`, at 2026-11-15T12:59:56Z (`gh pr view 73`: state MERGED). The Pages build on `main` (run `43716710645`) completed with `success`. The live pages `research/backtest.html` and `depth-chart.html` were fetched and show the changed content (the backtest page carries the 'not a leaderboard result' banner; the depth chart shows Packers names without jersey numbers).
 - **Follow-up in the same session:** the Backtest page still had the KPI label 'declared before any of them was scored', an unverified claim. It was reworded to 'rules in this study; no pre-registration commit is recorded for them' and shipped in a follow-up PR from this branch.
 
+---
+
+# Session `c84a41a4-nfl1` — claims (branch `arena/c84a41a4-nfl1`, base `df084b5`, 2026-11-15)
+
+Board read before work: yes, full `COORDINATION.md`. Every earlier session listed above is closed
+(`done`, merged via PR #1–#69, or superseded), so no live claim is taken from anyone. Scope is
+**additive and non-overlapping**: new files under `ledger/` (new top-level directory), new files
+under `data/session-c84a41a4/`, and append-only rows in `COORDINATION.md` and `data/flags.json`.
+No other session's generator or generated page is rewritten; the one shared file touched is
+`COORDINATION.md` itself (this claim and result block only).
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| C84-1 | Line-by-line audit of the repo: every generated data file, its writer, its gate, and the defects the earlier sessions logged-but-did-not-fix | in progress | `c84a41a4` | `docs/session-c84a41a4/audit.md` | read-only over others' files; defects logged, not silently changed |
+| C84-2 | Executive summary of the whole project: what holds, what is blocked, what a human must decide | in progress | `c84a41a4` | `ledger/` new pages | derived from committed data only |
+| C84-3 | Requirements → "can this be decided yet?" structure: clear list of questions, the information held, the information missing, and how to obtain what is missing | in progress | `c84a41a4` | `ledger/`, `data/session-c84a41a4/` | one row per requirement, gate + clearing number |
+| C84-4 | Own-line origination + strategy competition: singles, parlays, prop combos; validation gates; correlations; luck removal | in progress | `c84a41a4` | `data/session-c84a41a4/`, `ledger/` | reuses committed feeds; no new unverified numbers |
+| C84-5 | Injuries and lineup deficiency: backups replacing starters on offense and defense, depth depth, snap/null evidence | in progress | `c84a41a4` | `data/session-c84a41a4/`, `ledger/` | every row source-linked; blanks stay blank |
+| C84-6 | Live GitHub Pages site: clean dashboard landing page + category subpages, table-first, every row source-linked, Flagged for Review page | in progress | `c84a41a4` | `ledger/` (static site), `.github/workflows/` (one additive workflow only if needed) | must not overwrite root, `pages/`, `docs/`, `verified-lab/`, `room/`, `strength/`, `web/`, `dashboard/` |
+| C84-7 | Line-by-line verification against official sources; every unconfirmed value blank + flagged | in progress | `c84a41a4` | `data/session-c84a41a4/`, `ledger/` | official nfl.com only |
+| C84-8 | Integrate: gates green, PR → merge, confirm GitHub Pages deploy, record here | pending | `c84a41a4` | `COORDINATION.md` | |
+
+**Deliberate non-touch list:** `pipeline/`, `tools/`, `scripts/`, `analysis/`, `src/`, `s9cb/`,
+`room/`, `referee/`, `strength/`, `web/`, `dashboard/`, `docs/`, `verified-lab/`, `capture/`,
+`data/model/`, `data/verified/`, `data/s9cb/`, root `*.html` and `pages/`. The new site is a fourth
+generation in its own directory and is linked from nowhere until integration; it cannot break an
+existing page.
+
+_This claim is committed and pushed before any other file is touched, per the brief._
