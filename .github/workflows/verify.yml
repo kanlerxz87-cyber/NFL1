@@ -52,3 +52,29 @@ jobs:
         run: python3 tools/build_strength.py
       - name: Gate the strength sub-site (source links, links, placeholders)
         run: python3 tools/check_strength_site.py
+      # Session c7b65577-nfl1. Additive: the strategy-competition sub-site brings three gates
+      # that are themselves tested. The pre-registration gate fails when a published backtest
+      # number has no frozen rule, when the registry changed after its stamp, or when a frozen
+      # rule's text no longer matches the generator. The drift alarm fails when a scraper's
+      # stored artifact breaks a pin. The site gate fails on a broken link, a row with no
+      # source, a placeholder cell, or a number that is not in data/strat/*.json.
+      - name: Build and gate the strategy competition site
+        run: |
+          python3 strat/reconcile_official.py
+          python3 strat/preregister.py
+          python3 strat/demotion.py
+          python3 strat/what_would_change.py
+          python3 strat/registers.py
+          python3 strat/build.py
+          python3 strat/verify.py
+      - name: Check pre-registration and run its self-test
+        run: |
+          python3 tools/stamp_preregistration.py
+          python3 tools/check_preregistration.py
+          python3 tools/check_preregistration.py --self-test
+      - name: Scraper drift alarm and its self-test
+        run: |
+          python3 tools/check_scraper_pins.py
+          python3 tools/check_scraper_pins.py --self-test
+      - name: Strategy competition unit tests
+        run: python3 -m unittest tests.test_strat_competition -v
