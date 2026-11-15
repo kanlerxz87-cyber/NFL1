@@ -1,0 +1,489 @@
+{
+  "code_sha256": "bd50f7767f59e264c0cbd543ccaec2b07a08102614c2f3cec9020badcfb125fd",
+  "corpus": {
+    "file": "data/shadow/corpus_v1.csv",
+    "n_games": 137,
+    "sha256": "f2a0b171786571556197275871efbec16227a8869e422f8437e34a6c87d5d652"
+  },
+  "first_kickoff_utc": "2026-11-20T01:15:00Z",
+  "fixtures": {
+    "file": "data/shadow/week11_venues.csv",
+    "n_games": 13,
+    "sha256": "60a7ec71d417310b8b5c65534733c045dfd8f7dfdf776f56b61448e3f4411e64"
+  },
+  "games": [
+    {
+      "away": "IND",
+      "benchmarks": {
+        "coin_p_home_win": 0.5,
+        "control_favourite_record_pick": "home",
+        "control_random_pick": "home",
+        "favourite_record_pct": {
+          "away": 0.2222,
+          "home": 0.375
+        }
+      },
+      "game_id": "2026_11_IND_HOU",
+      "gameday": "2026-11-19",
+      "h": 1.0,
+      "home": "HOU",
+      "inputs": {
+        "home_field_term_b": 0.1594,
+        "lambda": 4.0,
+        "r_away": -4.4906,
+        "r_home": 1.4093,
+        "sigma": 10.6156
+      },
+      "kickoff_et_as_printed": "8:15 PM",
+      "neutral_site": false,
+      "p_home_win": 0.7159,
+      "predicted_margin_home": 6.059,
+      "venue": {
+        "game_centre_url": "https://www.nfl.com/games/colts-at-texans-2026-reg-11",
+        "location_as_printed": "HOUSTON, TX",
+        "stadium_as_printed": "RELIANT STADIUM"
+      },
+      "weekday": "Thursday"
+    },
+    {
+      "away": "AZ",
+      "benchmarks": {
+        "coin_p_home_win": 0.5,
+        "control_favourite_record_pick": "home",
+        "control_random_pick": "home",
+        "favourite_record_pct": {
+          "away": 0.3333,
+          "home": 0.75
+        }
+      },
+      "game_id": "2026_11_ARI_KC",
+      "gameday": "2026-11-22",
+      "h": 1.0,
+      "home": "KC",
+      "inputs": {
+        "home_field_term_b": 0.1594,
+        "lambda": 4.0,
+        "r_away": -5.2852,
+        "r_home": 3.5917,
+        "sigma": 10.6156
+      },
+      "kickoff_et_as_printed": "1:00 PM",
+      "neutral_site": false,
+      "p_home_win": 0.8027,
+      "predicted_margin_home": 9.036,
+      "venue": {
+        "game_centre_url": "https://www.nfl.com/games/cardinals-at-chiefs-2026-reg-11",
+        "location_as_printed": "KANSAS CITY, MO",
+        "stadium_as_printed": "ARROWHEAD STADIUM"
+      },
+      "weekday": "Sunday"
+    },
+    {
+      "away": "BAL",
+      "benchmarks": {
+        "coin_p_home_win": 0.5,
+        "control_favourite_record_pick": "away",
+        "control_random_pick": "away",
+        "favourite_record_pct": {
+          "away": 0.4444,
+          "home": 0.375
+        }
+      },
+      "game_id": "2026_11_BAL_CAR",
+      "gameday": "2026-11-22",
+      "h": 1.0,
+      "home": "CAR",
+      "inputs": {
+        "home_field_term_b": 0.1594,
+        "lambda": 4.0,
+        "r_away": -3.4901,
+        "r_home": -1.3386,
+        "sigma": 10.6156
+      },
+      "kickoff_et_as_printed": "1:00 PM",
+      "neutral_site": false,
+      "p_home_win": 0.5862,
+      "predicted_margin_home": 2.311,
+      "venue": {
+        "game_centre_url": "https://www.nfl.com/games/ravens-at-panthers-2026-reg-11",
+        "location_as_printed": "CHARLOTTE, NC",
+        "stadium_as_printed": "BANK OF AMERICA STADIUM"
+      },
+      "weekday": "Sunday"
+    },
+    {
+      "away": "JAX",
+      "benchmarks": {
+        "coin_p_home_win": 0.5,
+        "control_favourite_record_pick": "away",
+        "control_random_pick": "away",
+        "favourite_record_pct": {
+          "away": 0.75,
+          "home": 0.6111
+        }
+      },
+      "game_id": "2026_11_JAX_NYG",
+      "gameday": "2026-11-22",
+      "h": 1.0,
+      "home": "NYG",
+      "inputs": {
+        "home_field_term_b": 0.1594,
+        "lambda": 4.0,
+        "r_away": 8.4936,
+        "r_home": -1.1944,
+        "sigma": 10.6156
+      },
+      "kickoff_et_as_printed": "4:25 PM",
+      "neutral_site": false,
+      "p_home_win": 0.1847,
+      "predicted_margin_home": -9.529,
+      "venue": {
+        "game_centre_url": "https://www.nfl.com/games/jaguars-at-giants-2026-reg-11",
+        "location_as_printed": "EAST RUTHERFORD, NJ",
+        "stadium_as_printed": "METLIFE STADIUM"
+      },
+      "weekday": "Sunday"
+    },
+    {
+      "away": "LV",
+      "benchmarks": {
+        "coin_p_home_win": 0.5,
+        "control_favourite_record_pick": "home",
+        "control_random_pick": "away",
+        "favourite_record_pct": {
+          "away": 0.4444,
+          "home": 0.7778
+        }
+      },
+      "game_id": "2026_11_LV_DEN",
+      "gameday": "2026-11-22",
+      "h": 1.0,
+      "home": "DEN",
+      "inputs": {
+        "home_field_term_b": 0.1594,
+        "lambda": 4.0,
+        "r_away": -2.3332,
+        "r_home": 1.8372,
+        "sigma": 10.6156
+      },
+      "kickoff_et_as_printed": "4:25 PM",
+      "neutral_site": false,
+      "p_home_win": 0.6583,
+      "predicted_margin_home": 4.33,
+      "venue": {
+        "game_centre_url": "https://www.nfl.com/games/raiders-at-broncos-2026-reg-11",
+        "location_as_printed": "DENVER, CO",
+        "stadium_as_printed": "EMPOWER FIELD AT MILE HIGH"
+      },
+      "weekday": "Sunday"
+    },
+    {
+      "away": "MIA",
+      "benchmarks": {
+        "coin_p_home_win": 0.5,
+        "control_favourite_record_pick": "home",
+        "control_random_pick": "home",
+        "favourite_record_pct": {
+          "away": 0.125,
+          "home": 0.875
+        }
+      },
+      "game_id": "2026_11_MIA_BUF",
+      "gameday": "2026-11-22",
+      "h": 1.0,
+      "home": "BUF",
+      "inputs": {
+        "home_field_term_b": 0.1594,
+        "lambda": 4.0,
+        "r_away": -4.855,
+        "r_home": 5.4561,
+        "sigma": 10.6156
+      },
+      "kickoff_et_as_printed": "1:00 PM",
+      "neutral_site": false,
+      "p_home_win": 0.838,
+      "predicted_margin_home": 10.47,
+      "venue": {
+        "game_centre_url": "https://www.nfl.com/games/dolphins-at-bills-2026-reg-11",
+        "location_as_printed": "ORCHARD PARK, NY",
+        "stadium_as_printed": "HIGHMARK STADIUM"
+      },
+      "weekday": "Sunday"
+    },
+    {
+      "away": "MIN",
+      "benchmarks": {
+        "coin_p_home_win": 0.5,
+        "control_favourite_record_pick": "home",
+        "control_random_pick": "away",
+        "favourite_record_pct": {
+          "away": 0.75,
+          "home": 0.875
+        }
+      },
+      "game_id": "2026_11_MIN_SF",
+      "gameday": "2026-11-22",
+      "h": 0.0,
+      "home": "SF",
+      "inputs": {
+        "home_field_term_b": 0.1594,
+        "lambda": 4.0,
+        "r_away": 2.9248,
+        "r_home": 5.6731,
+        "sigma": 10.6156
+      },
+      "kickoff_et_as_printed": "8:20 PM",
+      "neutral_site": true,
+      "p_home_win": 0.6021,
+      "predicted_margin_home": 2.748,
+      "venue": {
+        "game_centre_url": "https://www.nfl.com/games/vikings-at-49ers-2026-reg-11",
+        "location_as_printed": "MEXICO CITY",
+        "stadium_as_printed": "ESTADIO BANORTE"
+      },
+      "weekday": "Sunday"
+    },
+    {
+      "away": "NO",
+      "benchmarks": {
+        "coin_p_home_win": 0.5,
+        "control_favourite_record_pick": "home",
+        "control_random_pick": "away",
+        "favourite_record_pct": {
+          "away": 0.375,
+          "home": 0.7778
+        }
+      },
+      "game_id": "2026_11_NO_CHI",
+      "gameday": "2026-11-22",
+      "h": 1.0,
+      "home": "CHI",
+      "inputs": {
+        "home_field_term_b": 0.1594,
+        "lambda": 4.0,
+        "r_away": -2.8845,
+        "r_home": 4.4331,
+        "sigma": 10.6156
+      },
+      "kickoff_et_as_printed": "1:00 PM",
+      "neutral_site": false,
+      "p_home_win": 0.7594,
+      "predicted_margin_home": 7.477,
+      "venue": {
+        "game_centre_url": "https://www.nfl.com/games/saints-at-bears-2026-reg-11",
+        "location_as_printed": "CHICAGO, IL",
+        "stadium_as_printed": "SOLDIER FIELD"
+      },
+      "weekday": "Sunday"
+    },
+    {
+      "away": "NYJ",
+      "benchmarks": {
+        "coin_p_home_win": 0.5,
+        "control_favourite_record_pick": "away",
+        "control_random_pick": "home",
+        "favourite_record_pct": {
+          "away": 0.2222,
+          "home": 0.0
+        }
+      },
+      "game_id": "2026_11_NYJ_LAC",
+      "gameday": "2026-11-22",
+      "h": 1.0,
+      "home": "LAC",
+      "inputs": {
+        "home_field_term_b": 0.1594,
+        "lambda": 4.0,
+        "r_away": -3.2457,
+        "r_home": -7.4098,
+        "sigma": 10.6156
+      },
+      "kickoff_et_as_printed": "4:05 PM",
+      "neutral_site": false,
+      "p_home_win": 0.353,
+      "predicted_margin_home": -4.005,
+      "venue": {
+        "game_centre_url": "https://www.nfl.com/games/jets-at-chargers-2026-reg-11",
+        "location_as_printed": "INGLEWOOD, CA",
+        "stadium_as_printed": "SOFI STADIUM"
+      },
+      "weekday": "Sunday"
+    },
+    {
+      "away": "PIT",
+      "benchmarks": {
+        "coin_p_home_win": 0.5,
+        "control_favourite_record_pick": "away",
+        "control_random_pick": "home",
+        "favourite_record_pct": {
+          "away": 0.75,
+          "home": 0.2222
+        }
+      },
+      "game_id": "2026_11_PIT_PHI",
+      "gameday": "2026-11-22",
+      "h": 1.0,
+      "home": "PHI",
+      "inputs": {
+        "home_field_term_b": 0.1594,
+        "lambda": 4.0,
+        "r_away": 2.6102,
+        "r_home": -5.6095,
+        "sigma": 10.6156
+      },
+      "kickoff_et_as_printed": "1:00 PM",
+      "neutral_site": false,
+      "p_home_win": 0.2238,
+      "predicted_margin_home": -8.06,
+      "venue": {
+        "game_centre_url": "https://www.nfl.com/games/steelers-at-eagles-2026-reg-11",
+        "location_as_printed": "PHILADELPHIA, PA",
+        "stadium_as_printed": "LINCOLN FINANCIAL FIELD"
+      },
+      "weekday": "Sunday"
+    },
+    {
+      "away": "TB",
+      "benchmarks": {
+        "coin_p_home_win": 0.5,
+        "control_favourite_record_pick": "home",
+        "control_random_pick": "away",
+        "favourite_record_pct": {
+          "away": 0.3333,
+          "home": 0.75
+        }
+      },
+      "game_id": "2026_11_TB_DET",
+      "gameday": "2026-11-22",
+      "h": 1.0,
+      "home": "DET",
+      "inputs": {
+        "home_field_term_b": 0.1594,
+        "lambda": 4.0,
+        "r_away": 2.751,
+        "r_home": 2.1892,
+        "sigma": 10.6156
+      },
+      "kickoff_et_as_printed": "1:00 PM",
+      "neutral_site": false,
+      "p_home_win": 0.4849,
+      "predicted_margin_home": -0.402,
+      "venue": {
+        "game_centre_url": "https://www.nfl.com/games/buccaneers-at-lions-2026-reg-11",
+        "location_as_printed": "DETROIT, MI",
+        "stadium_as_printed": "FORD FIELD"
+      },
+      "weekday": "Sunday"
+    },
+    {
+      "away": "TEN",
+      "benchmarks": {
+        "coin_p_home_win": 0.5,
+        "control_favourite_record_pick": "home",
+        "control_random_pick": "away",
+        "favourite_record_pct": {
+          "away": 0.125,
+          "home": 0.4444
+        }
+      },
+      "game_id": "2026_11_TEN_DAL",
+      "gameday": "2026-11-22",
+      "h": 1.0,
+      "home": "DAL",
+      "inputs": {
+        "home_field_term_b": 0.1594,
+        "lambda": 4.0,
+        "r_away": -5.7409,
+        "r_home": -0.4478,
+        "sigma": 10.6156
+      },
+      "kickoff_et_as_printed": "1:00 PM",
+      "neutral_site": false,
+      "p_home_win": 0.6962,
+      "predicted_margin_home": 5.452,
+      "venue": {
+        "game_centre_url": "https://www.nfl.com/games/titans-at-cowboys-2026-reg-11",
+        "location_as_printed": "ARLINGTON, TX",
+        "stadium_as_printed": "AT&T STADIUM"
+      },
+      "weekday": "Sunday"
+    },
+    {
+      "away": "CIN",
+      "benchmarks": {
+        "coin_p_home_win": 0.5,
+        "control_favourite_record_pick": "away",
+        "control_random_pick": "away",
+        "favourite_record_pct": {
+          "away": 0.75,
+          "home": 0.3889
+        }
+      },
+      "game_id": "2026_11_CIN_WAS",
+      "gameday": "2026-11-23",
+      "h": 1.0,
+      "home": "WAS",
+      "inputs": {
+        "home_field_term_b": 0.1594,
+        "lambda": 4.0,
+        "r_away": 5.4041,
+        "r_home": -2.7282,
+        "sigma": 10.6156
+      },
+      "kickoff_et_as_printed": "8:15 PM",
+      "neutral_site": false,
+      "p_home_win": 0.2263,
+      "predicted_margin_home": -7.973,
+      "venue": {
+        "game_centre_url": "https://www.nfl.com/games/bengals-at-commanders-2026-reg-11",
+        "location_as_printed": "LANDOVER, MD",
+        "stadium_as_printed": "NORTHWEST STADIUM"
+      },
+      "weekday": "Monday"
+    }
+  ],
+  "model": "shadow-v1",
+  "parameters": {
+    "clubs": 32,
+    "home_field_term_b": 0.1594,
+    "penalty_lambda": 4.0,
+    "sigma": 10.6156,
+    "training_games": 137,
+    "training_neutral_games": 7
+  },
+  "ratings": {
+    "ATL": -1.488,
+    "AZ": -5.2852,
+    "BAL": -3.4901,
+    "BUF": 5.4561,
+    "CAR": -1.3386,
+    "CHI": 4.4331,
+    "CIN": 5.4041,
+    "CLE": -2.6736,
+    "DAL": -0.4478,
+    "DEN": 1.8372,
+    "DET": 2.1892,
+    "GB": 2.498,
+    "HOU": 1.4093,
+    "IND": -4.4906,
+    "JAX": 8.4936,
+    "KC": 3.5917,
+    "LA": 1.6466,
+    "LAC": -7.4098,
+    "LV": -2.3332,
+    "MIA": -4.855,
+    "MIN": 2.9248,
+    "NE": 1.5367,
+    "NO": -2.8845,
+    "NYG": -1.1944,
+    "NYJ": -3.2457,
+    "PHI": -5.6095,
+    "PIT": 2.6102,
+    "SEA": 2.7604,
+    "SF": 5.6731,
+    "TB": 2.751,
+    "TEN": -5.7409,
+    "WAS": -2.7282
+  },
+  "record_type": "pre-kickoff shadow forecast (singles only). Not a bet, not a staking recommendation."
+}

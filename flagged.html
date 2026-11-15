@@ -85,17 +85,17 @@
   <div class="main">
     <div class="topbar">
       <div class="crumb">NFL1 / <b>Flagged for Review</b></div>
-      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">71 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">84 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
     </div>
     <main class="content" id="main">
       <div class="kicker">Assurance</div>
       <h1>Flagged for Review</h1>
       <p class="lede">Clearly labelled irregularities, official-page conflicts, unverified values and coordination issues — each with an official source link for manual review, none blocking the merge.</p>
       <div class="callout flag"><b>Flagged for Review.</b> These irregularities and unverified items do not block the merge or the live site. Each has an official source link for manual review and a suggested action. A status of <em>needs review</em> means exactly this: published here, not blocking.</div>
-<div class="cards"><div class="card"><div class="label">Flagged items</div><div class="value">71</div><div class="detail">All with source links</div></div><div class="card"><div class="label">Official-page irregularities</div><div class="value">7</div><div class="detail">F02–F08</div></div><div class="card"><div class="label">Missing official data</div><div class="value">5</div><div class="detail">F09–F11, F14, F15</div></div><div class="card"><div class="label">Combined-site review</div><div class="value">28</div><div class="detail">F25–F36</div></div></div>
+<div class="cards"><div class="card"><div class="label">Flagged items</div><div class="value">84</div><div class="detail">All with source links</div></div><div class="card"><div class="label">Official-page irregularities</div><div class="value">7</div><div class="detail">F02–F08</div></div><div class="card"><div class="label">Missing official data</div><div class="value">5</div><div class="detail">F09–F11, F14, F15</div></div><div class="card"><div class="label">Combined-site review</div><div class="value">28</div><div class="detail">F25–F36</div></div></div>
 <h2 id="all">All flagged irregularities</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-flags" aria-label="Filter tbl-flags" placeholder="Filter rows…">
-<span class="count" data-count-for="tbl-flags">71 rows shown</span></div>
+<span class="count" data-count-for="tbl-flags">84 rows shown</span></div>
 <div class="tablewrap"><table class="data-table" id="tbl-flags"><caption>Every flag with category, description, impact, status, official source link and suggested action for the reviewer.</caption>
 <thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Category</th><th scope="col" class="sortable">Irregularity / unverified item</th><th scope="col" class="sortable">Impact on decisions</th><th scope="col" class="sortable">Status</th><th scope="col" class="sortable">Suggested action</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
 <tr id="F01" data-verified="true">
@@ -736,6 +736,123 @@
 <td><span class="badge neutral">needs review</span></td>
 <td data-value="1" class="wide">Automate a full cell-by-cell re-read in GitHub Actions at each capture (the Arena sandbox cannot reach nfl.com directly), and publish the mismatch count.</td>
 <td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a> <a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com)">S01 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F-5501-01" data-verified="true">
+<td><code>F-5501-01</code></td>
+<td data-value="1">Results corpus is partial for Week 10</td>
+<td data-value="1" class="wide">Only one Week 10 final was read and recorded: Commanders 24, Giants 21 (Thu 12 Nov, https://www.nfl.com/games/commanders-at-giants-2026-reg-10). The other 13 Week 10 games were scheduled for Sun 15 Nov onward and were unplayed at registration (https://www.nfl.com/schedules/2026/by-week/week-10).</td>
+<td data-value="1" class="wide">shadow-v1 is trained on 137 games (weeks 1-10 finals complete at registration). The 13 later Week 10 games are excluded and enter only in a later, separately labelled record.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Read the 13 finals after they are played and add them in a separate, labelled record. Do not edit the registered corpus.</td>
+<td><span class="src"><a href="https://www.nfl.com/schedules" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official schedule">S06 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F-5501-02" data-verified="true">
+<td><code>F-5501-02</code></td>
+<td data-value="1">Injury report conflict for LAC and BAL between 13 Nov and 15 Nov</td>
+<td data-value="1" class="wide">The 13 Nov count audit (data/official/2026-11-13/injury_report_counts_2026-11-13.py, read of https://www.nfl.com/injuries/) records Los Angeles Chargers (LAC) and Baltimore Ravens (BAL) as &#x27;No Injuries Reported&#x27; (0 rows). The 15 Nov read of https://www.nfl.com/injuries/league/2026/reg10 lists 19 LAC rows and 10 BAL rows.</td>
+<td data-value="1" class="wide">Either the report changed between the two reads or one read is wrong. The record cannot tell which. Both are shown on whats-changed with the conflict flagged. No value is chosen.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Re-read the official page for LAC and BAL, and record the capture time. Do not reconcile by inference.</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F-5501-03" data-verified="true">
+<td><code>F-5501-03</code></td>
+<td data-value="1">13 Nov injury read is partial and holds counts, not a transcript</td>
+<td data-value="1" class="wide">The 13 Nov read gives per-club row counts for 26 clubs and 9 player designations. NO and CIN are partial (table began mid-page or fell between page chunks). No full 13 Nov transcript exists in the repository.</td>
+<td data-value="1" class="wide">Only 26 clubs can be compared on counts and 9 players on designations. A player-by-player delta is not claimed. Team view and what-changed say so.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Capture the full page on the next read, with a timestamp, so the two reads can be compared row for row.</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F-5501-04" data-verified="true">
+<td><code>F-5501-04</code></td>
+<td data-value="1">Kerby Joseph (DET): practice status changed between reads</td>
+<td data-value="1" class="wide">On the 13 Nov read, Kerby Joseph (DET, S) was listed with Full Participation in Practice and game status Out. On the 15 Nov read he is listed with Did Not Participate In Practice and game status Out. Source: https://www.nfl.com/injuries/ (13 Nov) and https://www.nfl.com/injuries/league/2026/reg10 (15 Nov).</td>
+<td data-value="1" class="wide">This is the only designation change among the 9 compared. Game status is unchanged.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">None beyond keeping the change visible on what-changed.</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F-5501-05" data-verified="true">
+<td><code>F-5501-05</code></td>
+<td data-value="1">Starters out and replacements are blank in the team view</td>
+<td data-value="1" class="wide">The team view has no official source for starters or replacements. nfl.com publishes no depth-chart page (checked on 13 Nov, see data/official/2026-11-13/sources.json, S-NFL404). Club depth charts are unofficial and partly image-only (for example, Houston).</td>
+<td data-value="1" class="wide">starters_out and replacements are blank on every club. They are not inferred.</td>
+<td><span class="badge neutral">open</span></td>
+<td data-value="1" class="wide">Add an official source for starters, or keep the cells blank.</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="F-5501-06" data-verified="true">
+<td><code>F-5501-06</code></td>
+<td data-value="1">Week 11 market lines are unverified and not used</td>
+<td data-value="1" class="wide">data/model/snapshot.json carries market_spread_home and market_total for the 13 Week 11 games. No official source for those values exists in the repository.</td>
+<td data-value="1" class="wide">shadow-v1 does not use them. They appear on no shadow page.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Verify against a timestamped source before any use. None is approved.</td>
+<td><span class="src"><a href="https://www.nfl.com/schedules" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official schedule">S06 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F-5501-07" data-verified="true">
+<td><code>F-5501-07</code></td>
+<td data-value="1">MIN at SF is a neutral site under the registered rule</td>
+<td data-value="1" class="wide">The official game centre (https://www.nfl.com/games/vikings-at-49ers-2026-reg-11) lists the venue as Estadio Banorte, Mexico City, although nfl.com names SF as the home club. Under the registered rule (official location outside the United States), the game is neutral: h = 0.</td>
+<td data-value="1" class="wide">The forecast for MIN at SF uses no home-field term. Stated in the record.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">None unless the rule is changed by a new registration.</td>
+<td><span class="src"><a href="https://www.nfl.com/schedules" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official schedule">S06 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F-5501-08" data-verified="true">
+<td><code>F-5501-08</code></td>
+<td data-value="1">Neutral-site identification for training games relies on the schedule note</td>
+<td data-value="1" class="wide">Seven training games carry an &#x27;International&#x27; note on the official week page (https://www.nfl.com/schedules/2026/by-week/week-1 to week-9): SF-LA (Melbourne), BAL-DAL (Rio de Janeiro), IND-WAS, PHI-JAX, HOU-JAX (London), PIT-NO (Saint-Denis), CIN-ATL (Madrid). Each game centre was not separately re-read for weeks 1-9.</td>
+<td data-value="1" class="wide">Shadow-v1 uses these seven as neutral. A wrong neutral flag would bias the ratings.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Re-read the seven game centres and record the venue for each.</td>
+<td><span class="src"><a href="https://www.nfl.com/schedules" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official schedule">S06 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F-5501-09" data-verified="true">
+<td><code>F-5501-09</code></td>
+<td data-value="1">Model parameters are choices, fixed before results</td>
+<td data-value="1" class="wide">shadow-v1 fixes penalty lambda = 4.0, the neutral-site rule and sigma from the corpus, before any Week 11 result exists. They are not drawn from an official publication. Lambda was not tuned.</td>
+<td data-value="1" class="wide">The forecast depends on these choices. Any change needs a new registration (shadow-v2), logged on COORDINATION.md.</td>
+<td><span class="badge neutral">open</span></td>
+<td data-value="1" class="wide">None for shadow-v1. Record any change as a new version.</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="F-5501-10" data-verified="true">
+<td><code>F-5501-10</code></td>
+<td data-value="1">Scraper health threshold is too loose; drift alarm added</td>
+<td data-value="1" class="wide">pipeline/scrape_injuries.py passes a scrape with 150 or more rows and 24 or more clubs (see line ~190). A short scrape of 150 rows would pass.</td>
+<td data-value="1" class="wide">tools/check_scrape_drift.py (added P4) pins 347 rows, 28 clubs and 14 games to the 15 Nov capture manifest, and fails on any gap. The scraper itself is not changed.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Tighten the scraper threshold in a later session, after the pin is verified in CI.</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F-5501-11" data-verified="true">
+<td><code>F-5501-11</code></td>
+<td data-value="1">Club-code conflict: LA/LAR and AZ/ARI across sources</td>
+<td data-value="1" class="wide">The 13 Nov count audit uses LA for the Rams. The 15 Nov capture and the page use LAR. The scraper writes LA and ARI, and the page uses AZ for the Cardinals. This is flag CAP-05 in data/capture/flags.json.</td>
+<td data-value="1" class="wide">Mapped in tools/check_scrape_drift.py and tools/build_team_view.py, with each mapping listed. A join on raw codes would silently drop the Rams and Cardinals.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Standardise one code set in the capture and the scraper.</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F-5501-12" data-verified="true">
+<td><code>F-5501-12</code></td>
+<td data-value="1">Older 12 Nov &#x27;No Injuries Reported&#x27; list conflicts with the 13 Nov count audit</td>
+<td data-value="1" class="wide">data/verified/no_injuries_week10.csv (retrieved 2026-11-12T05:30Z) lists SEA, CIN, LAC and BAL as &#x27;No Injuries Reported&#x27;. The 13 Nov count audit records 15 rows for SEA and a partial read for CIN. LAC and BAL are also in conflict on 15 Nov (see F-5501-02).</td>
+<td data-value="1" class="wide">The 12 Nov list is stale and is not used by the team view or the delta.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Mark data/verified/no_injuries_week10.csv as superseded in a later session.</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F-5501-13" data-verified="true">
+<td><code>F-5501-13</code></td>
+<td data-value="1">Stored injury file count differs from earlier flag text</td>
+<td data-value="1" class="wide">data/model/official_injuries.json was regenerated 2026-11-15T12:40:34Z (html sha256 a478bbf0…) and then, on main, at 2026-11-15T12:47:08Z (html sha256 27cc025a…); both have 347 rows and status ok. Flag F48 and F-7810-01 describe the 345-row file from 2026-11-14. The delta and the drift alarm both use the 347-row capture.</td>
+<td data-value="1" class="wide">The older flags describe a file that is no longer committed. The current file matches the 15 Nov capture row for row (tools/check_scrape_drift.py).</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Update F48 and F-7810-01 in the integration session, or mark them superseded.</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
 </tr>
 </tbody></table></div>
 <h2 id="unverified">Registry of blank/unverified values</h2>
