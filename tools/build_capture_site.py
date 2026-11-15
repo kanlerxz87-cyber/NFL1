@@ -97,6 +97,7 @@ def main() -> int:
         return 1
     man = load_json("manifest.json")
     comp = load_json("comparison.json")
+    flags = load_json("flags.json")["flags"]
     rows = read_tsv("nflcom_injuries_reg10_2026-11-15_rows.tsv")
     games = read_tsv("nflcom_injuries_reg10_2026-11-15_games.tsv")
     src = man["source_url"]
@@ -117,7 +118,7 @@ def main() -> int:
         ("Doubtful", gs.get("Doubtful", 0)),
         ("Questionable", gs.get("Questionable", 0)),
         ("no game designation printed", gs.get("", 0)),
-        ("open flags", sum(1 for f in comp["flags"] if f["state"] == "open")),
+        ("open flags", sum(1 for f in flags if f["state"].startswith("open"))),
     ])
 
     club_rows = []
@@ -139,7 +140,7 @@ def main() -> int:
     club_table = (
         '<div class="wrap"><table><thead><tr><th>Club</th><th>Game</th><th class="num">Rows</th>'
         '<th class="num">Out</th><th class="num">Doubtful</th><th class="num">Questionable</th>'
-        '<th class="num">Did not practise</th><th class="num">Scrape 14 Nov</th>'
+        '<th class="num">Did not practise</th><th class="num">Scrape 15 Nov</th>'
         '<th class="num">Hand copy 12 Nov</th><th>Source</th></tr></thead><tbody>'
         + "".join(club_rows) + "</tbody></table></div>")
 
@@ -158,7 +159,7 @@ def main() -> int:
         '</tr></thead><tbody>' + "".join(player_rows) + "</tbody></table></div>")
 
     flag_rows = []
-    for f in comp["flags"]:
+    for f in flags:
         flag_rows.append(
             f'<tr class="flag"><td><strong>{esc(f["id"])}</strong></td><td>{esc(f["area"])}</td>'
             f'<td>{esc(f["issue"])}</td><td><span class="open">{esc(f["state"])}</span></td>'
@@ -180,7 +181,7 @@ editing the capture.</p>
 
 <h2>Club by club</h2>
 <p class="note">Counts are the rows on the official page. The last two columns are the counts the
-other copies in this repository hold for the same club: the automated scrape of 14 November and the
+other copies in this repository hold for the same club: the automated scrape generated 15 November 2026 (12:24 UTC) and the
 hand copy of 12 November. "absent" or "No Injuries Reported" means that copy does not list the club
 with rows.</p>
 {club_table}
@@ -210,7 +211,7 @@ itself; each names the official page that settles it.</p>
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w", encoding="utf-8") as fh:
         fh.write(page(body, stamp))
-    print(f"build_capture_site: wrote {os.path.relpath(OUT, ROOT)} ({len(rows)} rows, {len(comp['flags'])} flags)")
+    print(f"build_capture_site: wrote {os.path.relpath(OUT, ROOT)} ({len(rows)} rows, {len(flags)} flags)")
     return 0
 
 

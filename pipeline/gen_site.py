@@ -1591,10 +1591,11 @@ def review_page(verif, strat, dash, avail=None):
          src("https://www.nfl.com/teams/", "club charts"), badge("partially resolved")],
     ])
 
-    # session 543676f8-nfl1: flags raised by the official Week 10 capture (data/capture/comparison.json)
-    for cf in load_rel("data/capture/comparison.json", {}).get("flags", []):
+    # session 543676f8-nfl1: flags raised by the official Week 10 capture (data/capture/flags.json)
+    for cf in load_rel("data/capture/flags.json", {}).get("flags", []):
         flags.append([esc(cf["id"]), esc(cf["area"]), esc(cf["issue"]),
-                      src(cf["source"], "official page"), badge("needs review")])
+                      src(cf["source"], "official page" if cf.get("source_kind") == "official" else "repository"),
+                      badge("needs review" if cf["state"].startswith("open") else cf["state"])])
 
     tbl = table(["ID", "Area", "What is flagged", "Source", "State"], flags,
                 note=("Unverified and blocked items do not stop publication; they stop the claim. "

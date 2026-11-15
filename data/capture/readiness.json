@@ -443,7 +443,7 @@
       "group": "Governance and publication",
       "requirement": "Drift alarm on every scraper: pin row counts and fields; fail loudly",
       "status": "partial",
-      "blocked_by": "The capture has a checker (tools/check_capture.py); the existing scraper has no row-count pin and missed rows without failing (flag CAP-01)",
+      "blocked_by": "The capture has a checker (tools/check_capture.py); the existing scraper has no row-count pin and missed rows without failing (flag CAP-01, resolved by the 15 Nov scrape; no row-count pin yet)",
       "clears_when": "Every scraper pinned to row counts and fields (today: 1 of 1 known scraper unpinned)",
       "source_url": "https://www.nfl.com/injuries/league/2026/reg10",
       "source_kind": "official",
@@ -480,7 +480,7 @@
       "clears_when": "Every file reviewed (today: injury capture only)",
       "source_url": "https://www.nfl.com/injuries/league/2026/reg10",
       "source_kind": "official",
-      "evidence": "capture/index.html (flags CAP-01 to CAP-07)"
+      "evidence": "capture/index.html (flags CAP-01 to CAP-07 in data/capture/flags.json)"
     }
   ]
 }

@@ -8,9 +8,9 @@
     "games": 14
   },
   "scrape": {
-    "generated_at": "2026-11-14T17:02:31+00:00",
-    "html_sha256": "b8e5fd1bc24393d7415e2aed8cfe6d933bf61f88e08fde4e8e29300e79109419",
-    "rows": 345,
+    "generated_at": "2026-11-15T12:24:19+00:00",
+    "html_sha256": "3d7d2e14259c21f1ff8ac8322846d8e9ae385de4eb8991aafe6d24f8f41d2a04",
+    "rows": 347,
     "clubs": 28,
     "status": "ok"
   },
@@ -40,7 +40,7 @@
     {
       "club": "BAL",
       "capture": 10,
-      "scrape": 8
+      "scrape": 10
     },
     {
       "club": "BUF",
@@ -310,102 +310,8 @@
       "hand_copy": 9
     }
   ],
-  "scrape_missing_from_scrape": [
-    {
-      "club": "BAL",
-      "player": "Calais Campbell",
-      "position": "DT",
-      "injury": "",
-      "game_status": ""
-    },
-    {
-      "club": "BAL",
-      "player": "Ronnie Stanley",
-      "position": "T",
-      "injury": "",
-      "game_status": ""
-    }
-  ],
-  "scrape_status_differences": [
-    {
-      "club": "IND",
-      "player": "Arden Key",
-      "capture": "",
-      "scrape": "Questionable"
-    },
-    {
-      "club": "LAC",
-      "player": "Kayode Awosika",
-      "capture": "Questionable",
-      "scrape": ""
-    },
-    {
-      "club": "LAC",
-      "player": "Justin Eboigbe",
-      "capture": "Questionable",
-      "scrape": ""
-    },
-    {
-      "club": "LAC",
-      "player": "Ladd McConkey",
-      "capture": "Questionable",
-      "scrape": ""
-    },
-    {
-      "club": "LAC",
-      "player": "David Njoku",
-      "capture": "Questionable",
-      "scrape": ""
-    },
-    {
-      "club": "LAC",
-      "player": "Denzel Perryman",
-      "capture": "Questionable",
-      "scrape": ""
-    },
-    {
-      "club": "LAC",
-      "player": "Trey Pipkins",
-      "capture": "Questionable",
-      "scrape": ""
-    },
-    {
-      "club": "LAC",
-      "player": "Branson Taylor",
-      "capture": "Out",
-      "scrape": ""
-    },
-    {
-      "club": "LAC",
-      "player": "Brenen Thompson",
-      "capture": "Doubtful",
-      "scrape": ""
-    },
-    {
-      "club": "LAC",
-      "player": "Isas Waxter",
-      "capture": "Out",
-      "scrape": ""
-    },
-    {
-      "club": "LAC",
-      "player": "Kendall Williamson",
-      "capture": "Out",
-      "scrape": ""
-    },
-    {
-      "club": "BAL",
-      "player": "Jaylinn Hawkins",
-      "capture": "Out",
-      "scrape": ""
-    },
-    {
-      "club": "BAL",
-      "player": "Adam Randall",
-      "capture": "Questionable",
-      "scrape": ""
-    }
-  ],
+  "scrape_missing_from_scrape": [],
+  "scrape_status_differences": [],
   "hand_copy_missing_players": [
     {
       "club": "KC",
@@ -798,22 +704,6 @@
     }
   ],
   "flags": [
-    {
-      "id": "CAP-01",
-      "area": "automated injury scrape",
-      "issue": "The scrape has 345 rows; the capture of the same official page has 347. Rows in the capture and absent from the scrape: BAL Calais Campbell (DT, game status 'blank'); BAL Ronnie Stanley (T, game status 'blank'). The scrape and this capture are different days (scrape 2026-11-14 17:02 UTC; capture 2026-11-15). The differences cluster on the Monday LAC-BAL game and the Ravens rows, which fits a page update between the two captures, but the saved data cannot prove it: the scrape kept only a hash of the page, not the page itself, so it cannot be re-parsed. The scrape raised no error.",
-      "state": "open",
-      "source": "https://www.nfl.com/injuries/league/2026/reg10",
-      "what_settles_it": "Store the raw page with each scheduled capture (sha256 + fetch time) so the two versions can be compared row by row, then pin per-club row counts in the scraper."
-    },
-    {
-      "id": "CAP-02",
-      "area": "automated injury scrape",
-      "issue": "Game designation differs for 13 players between the scrape and the capture: IND Arden Key (capture 'blank', scrape 'Questionable'); LAC Kayode Awosika (capture 'Questionable', scrape 'blank'); LAC Justin Eboigbe (capture 'Questionable', scrape 'blank'); LAC Ladd McConkey (capture 'Questionable', scrape 'blank'); LAC David Njoku (capture 'Questionable', scrape 'blank'); LAC Denzel Perryman (capture 'Questionable', scrape 'blank'); LAC Trey Pipkins (capture 'Questionable', scrape 'blank'); LAC Branson Taylor (capture 'Out', scrape 'blank'); LAC Brenen Thompson (capture 'Doubtful', scrape 'blank'); LAC Isas Waxter (capture 'Out', scrape 'blank'); LAC Kendall Williamson (capture 'Out', scrape 'blank'); BAL Jaylinn Hawkins (capture 'Out', scrape 'blank'); BAL Adam Randall (capture 'Questionable', scrape 'blank'). The scrape and this capture are different days (scrape 2026-11-14 17:02 UTC; capture 2026-11-15). The differences cluster on the Monday LAC-BAL game and the Ravens rows, which fits a page update between the two captures, but the saved data cannot prove it: the scrape kept only a hash of the page, not the page itself, so it cannot be re-parsed. The scrape raised no error.",
-      "state": "open",
-      "source": "https://www.nfl.com/injuries/league/2026/reg10",
-      "what_settles_it": "Re-capture on a schedule with raw storage; the official page is the arbiter."
-    },
     {
       "id": "CAP-03",
       "area": "hand-copied injury table (data/verified)",
