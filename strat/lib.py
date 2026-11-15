@@ -57,6 +57,7 @@ NAV = [
     ("demotion.html", "Demotion Gate"),
     ("what-would-change.html", "What Would Change Our Mind"),
     ("totals.html", "Two Totals"),
+    ("reconciliation.html", "Official Reconciliation"),
     ("questions.html", "Open Questions"),
     ("suggestions.html", "Suggestions"),
     ("flagged.html", "Flagged for Review"),

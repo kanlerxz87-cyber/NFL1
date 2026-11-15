@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-15T13:11:08+00:00",
+ "generated_at": "2026-11-15T13:13:33+00:00",
  "n_questions": 12,
  "rule": "A question is here because a decision cannot be made until it is answered. Each row states what is known, what is missing, the measurement that would produce it, and what it blocks.",
  "rows": [
@@ -29,9 +29,9 @@
    "id": "Q03",
    "question": "Are the historical results and closing lines in the third-party extract identical to the official NFL record for every game in the backtest sample?",
    "why_it_blocks": "The proper-score intervals (the model side skill is -0.0413, the total -0.0346, the moneyline -0.0714) are computed on the priced games in the extract, almost all of them from the extract and not from an official page. A systematic error there would move every interval.",
-   "known": "The 2026 schedule and standings in this repository were checked against nfl.com. The historical seasons were not checked game by game.",
+   "known": "2026 IS reconciled: 137 official nfl.com rows (136 transcribed from the weekly schedule pages plus one Game Center row fetched in this build) match the extract on every row, 0 disagreements \u2014 see the Official Reconciliation page. The 1999-2025 seasons, which supply almost all of the 6,785 scored games, are NOT reconciled.",
    "missing": "A game-by-game reconciliation of the extract against official Game Books for 1999-2025.",
-   "how_to_discover": "Fetch the official Game Book PDF for a random sample of 50 games per season and compare the final score and the closing line.",
+   "how_to_discover": "2026 is done. For the historical seasons: fetch the official Game Book PDF for a random sample of 50 games per season and compare the final score, then extend strat/reconcile_official.py to those seasons.",
    "blocks": "Confidence in every historical interval; the results corpus (PR-02, PR-09).",
    "decision_owner": "the next data session",
    "source": "gameday_w10_was_nyg"
@@ -117,7 +117,7 @@
    "id": "Q11",
    "question": "Should the site publish row-level official data at all, or only derived aggregates plus links?",
    "why_it_blocks": "The public/private split (readiness SI-11) and Q01.",
-   "known": "Roughly 2,071 table rows with official source links are published today, many of them row-level injury and depth entries.",
+   "known": "The root site publishes thousands of table rows with official source links, many of them row-level injury and depth entries; the exact count is in data/strat/flagged.json \u203a rootsite_rows.",
    "missing": "A decision, informed by Q01.",
    "how_to_discover": "Take the legal reading first, then decide which rows move behind an access control.",
    "blocks": "The site's publication model.",

@@ -1,7 +1,7 @@
 {
- "generated_at": "2026-11-15T13:11:09+00:00",
- "n_flags": 10,
- "rootsite_rows": 2071,
+ "generated_at": "2026-11-15T13:13:45+00:00",
+ "n_flags": 12,
+ "rootsite_rows": 2072,
  "rule": "Flagged items do not block publication. Each states what is wrong, what it affects, and the observation that would close it.",
  "rows": [
   {
@@ -70,11 +70,27 @@
   },
   {
    "id": "SC-09",
-   "finding": "2,071 table rows with official source links are published row-level while the licence question in flag F51 is unresolved.",
+   "finding": "2,072 table rows with official source links are published row-level while the licence question in flag F51 is unresolved.",
    "affects": "The whole publication model",
    "resolved": "Open \u2014 carried from F51, not re-litigated here",
    "mitigation": "Q01, Q11 and suggestion SG11.",
    "source": "terms"
+  },
+  {
+   "id": "SC-11",
+   "finding": "The third-party extract holds a completed Week 10 game (WAS 24, NYG 21) that the repository's own official transcription file did not contain; the gap is now closed by an official Game Center row fetched in this build.",
+   "affects": "The 2026 results corpus; reconciles with the earlier session's flag F49",
+   "resolved": "Resolved in this build",
+   "mitigation": "Official rows 137, matched 137, mismatched 0. The reconciliation is published game by game on the Official Reconciliation page and runs as a build step.",
+   "source": "gameday_w10_was_nyg"
+  },
+  {
+   "id": "SC-12",
+   "finding": "The reconciliation covers 137 rows of 2026 only. The other seasons behind the leaderboard's intervals are unverified against any official page.",
+   "affects": "Every interval computed before 2026",
+   "resolved": "Open \u2014 flagged for review",
+   "mitigation": "Q03 and readiness row PR-02 name the extension route: official Game Books, season by season.",
+   "source": "nflverse_schedules"
   },
   {
    "id": "SC-10",

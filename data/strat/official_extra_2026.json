@@ -1,0 +1,26 @@
+{
+ "schema": "strat_official_rows/1",
+ "note": "Official rows fetched directly by session c7b65577-nfl1 during this build, each with the URL and the UTC fetch time. They are kept separate from data/verified/games_2026.csv because that file was transcribed by an earlier session and this script must not silently merge two different provenance classes. strat/reconcile_official.py reads both and labels every row with its own provenance.",
+ "rows": [
+  {
+   "game_id": "2026_REG_10_WAS_NYG",
+   "week": 10,
+   "gameday": "2026-11-12",
+   "away_abbr": "WAS",
+   "away_score": 24,
+   "home_abbr": "NYG",
+   "home_score": 21,
+   "source_url": "https://www.nfl.com/games/commanders-at-giants-2026-reg-10",
+   "retrieved_at_utc": "2026-11-15T13:20Z",
+   "note": "Thursday Night Football, final. Score and quarter-by-quarter total read from the official Game Center page; venue MetLife Stadium, East Rutherford NJ.",
+   "fetched_by": "c7b65577-nfl1"
+  }
+ ],
+ "standings_check": {
+  "source_url": "https://www.nfl.com/standings/league/2026/reg",
+  "retrieved_at_utc": "2026-11-15T13:20Z",
+  "quote": "NFC EAST: NYG 5-3-1, DAL 4-5-0, WAS 3-5-1, PHI 2-7-0",
+  "matches_game_page": true,
+  "note": "The official standings table and the official Game Center's division panel agree, which is the cross-check used here."
+ }
+}

@@ -11,7 +11,7 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="top">
   <a class="brand" href="../index.html"><span class="mark">NFL</span><span class="brand-text">Strategy Competition</span></a>
-  <nav aria-label="Strategy competition sections"><a href="index.html">Overview</a><a href="leaderboard.html">Proper-Score Leaderboard</a><a href="preregister.html">Pre-Registration</a><a href="demotion.html">Demotion Gate</a><a href="what-would-change.html">What Would Change Our Mind</a><a href="totals.html">Two Totals</a><a href="questions.html">Open Questions</a><a href="suggestions.html">Suggestions</a><a href="flagged.html">Flagged for Review</a><a href="method.html" class="active">Method &amp; Sources</a><a href="executive-summary.html">Executive Summary</a></nav>
+  <nav aria-label="Strategy competition sections"><a href="index.html">Overview</a><a href="leaderboard.html">Proper-Score Leaderboard</a><a href="preregister.html">Pre-Registration</a><a href="demotion.html">Demotion Gate</a><a href="what-would-change.html">What Would Change Our Mind</a><a href="totals.html">Two Totals</a><a href="reconciliation.html">Official Reconciliation</a><a href="questions.html">Open Questions</a><a href="suggestions.html">Suggestions</a><a href="flagged.html">Flagged for Review</a><a href="method.html" class="active">Method &amp; Sources</a><a href="executive-summary.html">Executive Summary</a></nav>
 </header>
 <main id="main">
   <section class="page-head">
@@ -36,7 +36,8 @@
 python3 run.py                 # rebuilds the extract-derived research JSON
 python3 ../../strat/proper_score.py    # Brier skill, intervals, multiplicity
 python3 ../../strat/dual_total.py      # the two estimators and the verdict
-cd ../.. && python3 strat/preregister.py && python3 strat/demotion.py \
+cd ../.. && python3 strat/reconcile_official.py   # official rows vs the extract, game by game
+cd ../.. && python3 strat/reconcile_official.py && python3 strat/preregister.py && python3 strat/demotion.py \
   && python3 strat/what_would_change.py && python3 strat/registers.py \
   && python3 strat/build.py && python3 strat/verify.py</pre>
   <p class="note">The reproduce steps are the ones this build ran. <code>strat/verify.py</code> fails

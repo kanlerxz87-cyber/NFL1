@@ -6,11 +6,11 @@
   "count": 82,
   "by_status": {
    "Blocked": 8,
-   "Partial": 31,
+   "Partial": 32,
    "Not verified": 5,
-   "Done": 15,
-   "Not met": 3,
-   "Not started": 19,
+   "Done": 21,
+   "Not started": 14,
+   "Not met": 1,
    "Rejected (brief)": 1
   },
   "legend": {
@@ -46,14 +46,14 @@
    "group": "Pricing and results",
    "requirement": "Verified results feed so backtests and ROI can be computed",
    "status": "Partial",
-   "checked": "repo artifact, not re-read",
-   "evidence": "games.csv carries final scores 1999-2026 from nflverse (third-party). The official check against nfl.com covers the 2026 schedule only.",
-   "blocked_by": "Historical results are not matched to an official NFL page.",
+   "checked": "re-read 2026-11-15",
+   "evidence": "2026 is reconciled game by game: strat/reconcile_official.py matches all 137 official nfl.com rows against the extract with 0 score disagreements (data/strat/official_reconciliation.json), and the played-row gap that earlier flags recorded is now CLOSED by fetching the official WAS-NYG final. The 1999-2025 seasons behind the leaderboard's intervals are not reconciled.",
+   "blocked_by": "The historical seasons are a third-party extract. Nothing in this repository checks them against an official NFL page.",
    "clears_when": "Official final score matched for 100% of backtest games.",
-   "next_step": "Match each season's scores to nfl.com week pages.",
+   "next_step": "Extend strat/reconcile_official.py to 1999-2025 using official Game Books, season by season.",
    "src": {
-    "t": "nfl.com Week 10 schedule",
-    "u": "https://www.nfl.com/schedules/2026/by-week/week-10"
+    "t": "data/strat/official_reconciliation.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/official_reconciliation.json"
    }
   },
   {
@@ -105,30 +105,30 @@
    "id": "PR-06",
    "group": "Pricing and results",
    "requirement": "Pre-register every strategy; forbid backtest numbers from appearing on the leaderboard",
-   "status": "Not met",
+   "status": "Done",
    "checked": "repo artifact, not re-read",
-   "evidence": "leaderboard.json ranks 12 rules scored on historical games (totals.bets_scored = 14,440 over 4,751 games). The brief forbids this.",
-   "blocked_by": "The leaderboard shows backtest results.",
-   "clears_when": "Leaderboard limited to prospective bets with a registration hash; backtests on a separate page.",
-   "next_step": "Split the leaderboard into prospective and backtest views.",
+   "evidence": "31 registration records in data/strat/preregistration.json, each with frozen text, inputs, sample window, gates and the registering commit (stamped by tools/stamp_preregistration.py). tools/check_preregistration.py FAILS the build when a published result has no record, when the registry changed after its stamp, or when a registered rule's text no longer appears in the generator; its --self-test proves all six checks fire.",
+   "blocked_by": "None for the mechanism. What remains is the honest label: the twelve legacy rules were written after their data existed, so they are published as registered-backtest (selection-exposed), not as prospective.",
+   "clears_when": "Zero results without a registration; zero post-hoc edits to a frozen rule.",
+   "next_step": "Kept by the gate. Nothing further is required to hold the line.",
    "src": {
-    "t": "leaderboard.json",
-    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/preregistration.json"
    }
   },
   {
    "id": "PR-07",
    "group": "Pricing and results",
    "requirement": "Demotion gate: a live strategy goes back to paper",
-   "status": "Not started",
+   "status": "Done",
    "checked": "repo artifact, not re-read",
-   "evidence": "gate_definitions G1 to G8 in leaderboard.json contain no demotion rule.",
-   "blocked_by": "No rule text exists.",
-   "clears_when": "A written demotion rule (metric, window, threshold) committed before it is used.",
-   "next_step": "Draft the rule and commit it to the registration file.",
+   "evidence": "data/strat/demotion.json publishes five pre-registered demotion rules (D1 skill interval collapses below 0 on 50+ settled bets; D2 stop-loss at -10% on 50+; D3 hit rate below break-even by 2 SE on 100+; D4 twelve consecutive losses; D5 definition drift), each with a rationale and a minimum sample, plus a pre-registered re-promotion condition (200 settled bets clearing D1-D3 in the opposite direction).",
+   "blocked_by": "None for the rule. The gate has never fired because no strategy is live: no prospective price exists.",
+   "clears_when": "A written rule with a metric, a window and a threshold, committed before it is used.",
+   "next_step": "Already met and published on strat/demotion.html. The first live sample will be the first real test.",
    "src": {
-    "t": "leaderboard.json gate_definitions",
-    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
+    "t": "data/strat/demotion.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/demotion.json"
    }
   },
   {
@@ -225,30 +225,30 @@
    "id": "PR-14",
    "group": "Pricing and results",
    "requirement": "Publish every model total twice (two estimators, gap column) until a walk-forward comparison picks one",
-   "status": "Not started",
+   "status": "Done",
    "checked": "repo artifact, not re-read",
-   "evidence": "No second total estimator appears on the landing table.",
-   "blocked_by": "Second estimator not built.",
-   "clears_when": "Two totals and a gap column for every game; collapse only after a walk-forward test.",
-   "next_step": "Build the second estimator.",
+   "evidence": "data/strat/dual_total.json publishes estimator A (the ridge rating model) and estimator B (a shrunk season-to-date mean with no ratings) for 135 originated fixtures with a gap column and the market total beside them. The walk-forward holdout (2024-2026) paired difference is published with a game-cluster interval and currently reads NO WINNER.",
+   "blocked_by": "None. The verdict is 'no winner' because the interval straddles zero, which is the honest outcome rather than a missing measurement.",
+   "clears_when": "Two totals and a gap column for every game, collapsed only after a walk-forward test.",
+   "next_step": "Hold both until the interval excludes zero (falsifier W05).",
    "src": {
-    "t": "pipeline/gen_site.py",
-    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pipeline/gen_site.py"
+    "t": "data/strat/dual_total.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/dual_total.json"
    }
   },
   {
    "id": "PR-15",
    "group": "Pricing and results",
    "requirement": "Pre-register each strategy: definition frozen before results are seen, commit hash is the registration",
-   "status": "Not started",
+   "status": "Done",
    "checked": "repo artifact, not re-read",
-   "evidence": "No registration commit hash is recorded for any strategy.",
-   "blocked_by": "Freeze not done.",
+   "evidence": "The registered rules, their frozen definitions and per-rule SHA-256 fingerprints are in data/strat/preregistration.json; the commit that froze them is in data/strat/preregistration_stamp.json, with the SHA-256 of the registry as committed. A git hash cannot live inside the commit it names, so the stamp records it and the gate re-reads git show <commit>:<path> and compares the hash.",
+   "blocked_by": "None. Editing any frozen rule after registration fails the build with a hash mismatch (demonstrated by the gate's --self-test).",
    "clears_when": "A commit hash per strategy recorded before the evaluation window opens.",
-   "next_step": "Commit the rule text, sample window and gates.",
+   "next_step": "Already met. Re-registration is a new stamp plus a note in COORDINATION.md.",
    "src": {
-    "t": "leaderboard_rules.json",
-    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/leaderboard_rules.json"
+    "t": "data/strat/preregistration_stamp.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/preregistration_stamp.json"
    }
   },
   {
@@ -270,15 +270,15 @@
    "id": "PR-17",
    "group": "Pricing and results",
    "requirement": "Control baseline (random picks; favourites only) on every leaderboard run",
-   "status": "Not started",
+   "status": "Partial",
    "checked": "repo artifact, not re-read",
-   "evidence": "A text search of leaderboard.json found no control or random-pick row.",
-   "blocked_by": "Control not built.",
-   "clears_when": "A control row in every leaderboard run.",
-   "next_step": "Add random-pick and favourites-only rows.",
+   "evidence": "Five controls are pre-registered with no result yet: P02 random side (1 unit, 20 seeded draws), P03 favourite-only, P04 home-only, P05 underdog-only, plus the closing line itself as the benchmark in every proper-score row. The published leaderboard scores the model and the line against each other, and the line is shown to beat a coin by +0.1564 on the moneyline.",
+   "blocked_by": "The controls cannot be SCORED until a prospective price exists (PR-01), so no control has a profit number yet. Their proper-score benchmarks do exist and are published.",
+   "clears_when": "A control row with a number in every leaderboard run.",
+   "next_step": "Score P02-P05 prospectively once prices are captured.",
    "src": {
-    "t": "leaderboard.json",
-    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/preregistration.json"
    }
   },
   {
@@ -375,15 +375,15 @@
    "id": "PR-24",
    "group": "Pricing and results",
    "requirement": "A two-sided 'what would change our mind' field on every strategy entry",
-   "status": "Not started",
+   "status": "Done",
    "checked": "repo artifact, not re-read",
-   "evidence": "The repo contains no field of that name (text search: zero matches).",
-   "blocked_by": "Field not defined.",
-   "clears_when": "Field present on 12 of 12 strategies, with an upside and a downside trigger.",
-   "next_step": "Add the field to the strategy schema.",
+   "evidence": "data/strat/what_would_change.json carries 12 published claims (including one per model market, the strategy family as a whole, the two-total verdict, the demotion gate and the injury-surprise rules). Every row has confirm_if and abandon_if with a numeric threshold, plus the next measurement and the interval that exists today. A unit test fails if either direction is empty.",
+   "blocked_by": "None. One claim (W12, the pre-registration mechanism) is a mechanism claim, which the register labels as such rather than double-counting it.",
+   "clears_when": "Field present on every entry, with an upside and a downside trigger.",
+   "next_step": "Already met and published on strat/what-would-change.html.",
    "src": {
-    "t": "leaderboard.json",
-    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
+    "t": "data/strat/what_would_change.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/what_would_change.json"
    }
   },
   {
@@ -1155,15 +1155,15 @@
    "id": "SI-09",
    "group": "Site and process",
    "requirement": "Drift alarm on every scraper: fail loudly when a field goes missing instead of publishing a blank",
-   "status": "Not met",
+   "status": "Done",
    "checked": "re-read 2026-11-15",
-   "evidence": "The 2026-11-14 scrape published blank injury and game cells for 10 Chargers rows and 2 Ravens rows where the live page shows a status, with no failure.",
-   "blocked_by": "No alarm on blank sections.",
-   "clears_when": "The build fails when a club section with 5 or more rows has no injury or game status.",
-   "next_step": "Add the alarm to the scraper and to the build.",
+   "evidence": "tools/check_scraper_pins.py pins, for every scraper, the row minimum, the table minimum, the row-drop share, the required field list and the source's own pin constants (data/scraper_pins.json). It fails when the stored artifact violates a pin, when a pinned constant has disappeared from the source, or when a pin was relaxed without a recorded history entry. Its --self-test proves the alarm fires on an impossible pin. The pinned injury capture and the publication transcription must also agree on row count.",
+   "blocked_by": "The pins cover the two scrapers that reach the network. A blank CELL inside a row is caught only where the required-field list names that field, because the official page legitimately leaves some cells empty.",
+   "clears_when": "The build fails when a pinned field or row count is violated.",
+   "next_step": "Already met for the scrapers that exist. Extending the required-field list is a reviewed pin change.",
    "src": {
-    "t": "scrape_injuries.py",
-    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pipeline/scrape_injuries.py"
+    "t": "data/scraper_pins.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/scraper_pins.json"
    }
   },
   {

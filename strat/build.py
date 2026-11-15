@@ -31,6 +31,12 @@ def _load_stamp():
 STAMP = _load_stamp()
 
 
+def _best_rule(ps):
+    """The rule with the largest (still unsupported) skill point estimate, read from the data."""
+    scored = [r for r in ps["strategy_scores"] if r.get("bss_vs_price") is not None]
+    return max(scored, key=lambda r: r["bss_vs_price"])
+
+
 def _rootsite_rows():
     """The row count from the last root-site verification run (data/verification_report.json)."""
     import json as _j
@@ -481,8 +487,9 @@ def page_suggestions(sug):
     return body
 
 
-def page_flagged(pre, ps, dem, dt):
+def page_flagged(pre, ps, dem, dt, rec):
     """The irregularities this session found, with the official link that shows them."""
+    t = rec["totals"]
     flags = [
         {"id": "SC-01",
          "finding": ("The twelve legacbacktest rules were defined after their scoring data existed. Their "
@@ -554,6 +561,25 @@ def page_flagged(pre, ps, dem, dt):
          "resolved": "Open — carried from F51, not re-litigated here",
          "mitigation": "Q01, Q11 and suggestion SG11.",
          "source": "terms"},
+        {"id": "SC-11",
+         "finding": ("The third-party extract holds a completed Week 10 game (WAS 24, NYG 21) that the "
+                     "repository's own official transcription file did not contain; the gap is now closed "
+                     "by an official Game Center row fetched in this build."
+                     if t["extract_only_played_rows"] == 0 else
+                     f"{t['extract_only_played']} played row(s) in the extract still have no official row."),
+         "affects": "The 2026 results corpus; reconciles with the earlier session's flag F49",
+         "resolved": "Resolved in this build" if t["extract_only_played_rows"] == 0 else "Open — flagged for review",
+         "mitigation": (f"Official rows {t['official_rows']}, matched {t['matched']}, mismatched "
+                        f"{t['mismatched']}. The reconciliation is published game by game on the "
+                        f"Official Reconciliation page and runs as a build step."),
+         "source": "gameday_w10_was_nyg"},
+        {"id": "SC-12",
+         "finding": (f"The reconciliation covers {t['official_rows']} rows of 2026 only. The other "
+                     "seasons behind the leaderboard's intervals are unverified against any official page."),
+         "affects": "Every interval computed before 2026",
+         "resolved": "Open — flagged for review",
+         "mitigation": "Q03 and readiness row PR-02 name the extension route: official Game Books, season by season.",
+         "source": "nflverse_schedules"},
         {"id": "SC-10",
          "finding": ("The default figure for the strategy family's multiplicity charge assumes the twelve rules "
                      "are independent tests. Several share inputs (S01/S02, S03/S04), so the charge is "
@@ -584,6 +610,56 @@ def page_flagged(pre, ps, dem, dt):
   register. It is not re-litigated here; see the root <a href="../pages/review.html">Flagged for
   Review</a> page and <a href="../flagged.html">flagged.html</a>. Nothing published by this session
   adds to the row-level exposure.</p>
+</section>
+"""
+    return body
+
+
+def page_reconciliation(rec):
+    t = rec["totals"]
+    rows = []
+    for r in rec["rows"]:
+        agree = r.get("agrees")
+        rows.append([
+            f"<strong>{e(r['matchup'])}</strong>",
+            f"week {r['week']}",
+            f"{r['official_away']}–{r['official_home']}",
+            (f"{r['extract_away']}–{r['extract_home']}" if r.get("extract_away") is not None
+             else blank("the row is absent from the extract")),
+            badge("MET") if agree else (badge("UNVERIFIED") if agree is None else badge("FAIL")),
+            e(r.get("provenance") or ""),
+            e(r.get("retrieved_at") or ""),
+            f'<a class="src" href="{e(r["official_source"])}" target="_blank" rel="noopener">official page ↗</a>',
+        ])
+    coderows = [[f"<code>{e(k)}</code>", f"<code>{e(v)}</code>", str(n), src("standings", "official standings")]
+                for k, v in rec["code_normalisation"]["map"].items()
+                for n in [rec["code_normalisation"]["times_applied"].get(k, 0)]]
+    body = f"""
+<div class="kpis">
+  {kpi("Official rows", t["official_rows"], "two provenance classes, labelled")}
+  {kpi("Matched", t["matched"], "score agrees exactly")}
+  {kpi("Disagreements", t["mismatched"], "a score that differs")}
+  {kpi("Absent from extract", t["absent_from_extract"], "an official row with no extract row")}
+</div>
+
+<section class="panel">
+  <h2>What this reconciles, and what it does not</h2>
+  <p class="lede">{e(rec['question'])}</p>
+  <p><strong>Verdict: {e(rec['verdict'])}.</strong> {e(rec['scope_limit'])}</p>
+  <p class="note">{e(rec['official_note'])}</p>
+</section>
+
+<section class="panel">
+  <h2>Club-code normalisation</h2>
+  <p class="sub">{e(rec['code_normalisation']['why'])}</p>
+  {table(["Official code", "Extract code", "Times applied", "Source"], coderows,
+         note="Every application of the map is counted, so a new code that needs mapping cannot slip through unseen.")}
+</section>
+
+<section class="panel">
+  <h2>Row by row</h2>
+  {table(["Fixture", "Week", "Official score", "Extract score", "Agrees", "Provenance", "Retrieved", "Source"], rows,
+         note="Every row carries the URL it was read from and when. The two provenance classes are kept separate: rows transcribed by an earlier session and rows fetched during this build.")}
 </section>
 """
     return body
@@ -620,7 +696,8 @@ def page_method(pre, ps, dt):
 python3 run.py                 # rebuilds the extract-derived research JSON
 python3 ../../strat/proper_score.py    # Brier skill, intervals, multiplicity
 python3 ../../strat/dual_total.py      # the two estimators and the verdict
-cd ../.. && python3 strat/preregister.py && python3 strat/demotion.py \\
+cd ../.. && python3 strat/reconcile_official.py   # official rows vs the extract, game by game
+cd ../.. && python3 strat/reconcile_official.py && python3 strat/preregister.py && python3 strat/demotion.py \\
   && python3 strat/what_would_change.py && python3 strat/registers.py \\
   && python3 strat/build.py && python3 strat/verify.py</pre>
   <p class="note">The reproduce steps are the ones this build ran. <code>strat/verify.py</code> fails
@@ -693,9 +770,9 @@ def page_exec(pre, ps, dt, dem, wwc, qs, sug, dec):
   ])}
   <p class="note">No single betting rule's interval excludes zero, and the multiplicity charge over
   twelve rules makes a positive point estimate weaker, not stronger. The best point estimate in the
-  run is S07's Brier skill versus its price of
-  {sig(max(r['bss_vs_price'] for r in ps['strategy_scores'] if r.get('bss_vs_price') is not None), 4)}
-  on {max(r['n_decided'] for r in ps['strategy_scores'])} bets — a value far inside the noise band.</p>
+  run is <strong>{e(_best_rule(ps)['strategy'])}</strong>'s Brier skill versus its own price,
+  {sig(_best_rule(ps)['bss_vs_price'], 4)} on {_best_rule(ps)['n_decided']:,} decided bets, with an
+  ROI interval that includes zero — a value far inside the noise band.</p>
 </section>
 
 <section class="panel">
@@ -780,7 +857,10 @@ def main() -> int:
                              page_suggestions(sug)),
         "flagged.html": ("Flagged for Review",
                          "Every irregularity this session found, what it affects, and the observation that would close it.",
-                         page_flagged(pre, ps, dem, dt)),
+                         page_flagged(pre, ps, dem, dt, lib.load("official_reconciliation.json"))),
+        "reconciliation.html": ("Official Reconciliation",
+                                "The official nfl.com rows against the backtest extract, game by game, with the scope limit stated.",
+                                page_reconciliation(lib.load("official_reconciliation.json"))),
         "method.html": ("Method & Sources",
                         "How every number was produced, how to reproduce it, and the source register.",
                         page_method(pre, ps, dt)),

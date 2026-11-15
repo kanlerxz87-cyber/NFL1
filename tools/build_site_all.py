@@ -74,6 +74,7 @@ STEPS = [
     # Session c7b65577-nfl1: the strategy-competition sub-site.  The five data builders run
     # before the renderer so the pages are always a function of the latest JSON, and the site's
     # own gate runs last so `--check` covers it.
+    ("official reconciliation", [sys.executable, "strat/reconcile_official.py"], ROOT),
     ("strategy competition data", [sys.executable, "strat/preregister.py"], ROOT),
     ("strategy competition: demotion gate", [sys.executable, "strat/demotion.py"], ROOT),
     ("strategy competition falsifiers", [sys.executable, "strat/what_would_change.py"], ROOT),
