@@ -3091,7 +3091,7 @@ Narrow scope on purpose: most of the 100-item brief is already tracked by earlie
 |---|---|---|---|---|---|
 | P1 | Pre-registration ledger: freeze the rule text, sample window and gates of every strategy that is fully specified, commit the hash before any forward result exists; list every strategy that cannot be frozen and why | done | `739408a8` | `data/prereg/**`, `tools/check_prereg.py`, `tests/test_prereg.py` | forward window starts after the registration commit (Week 11 onward) |
 | P2 | Live official spot-check of the brief's concrete claims (Lions game-status cells CAP-04, Seattle/Cincinnati "No Injuries Reported" CAP-03, Week 10 counts, Lamar Jackson / Huntley IR, Malik Willis reserve list) against nfl.com fetched this session; publish confirmed or refuted with the link | done | `739408a8` | `data/verified_739408a8/**`, `data/flags.json` (append only) | fetch_page only; bash has no nfl.com access |
-| P3 | Integration: PR `arena/739408a8-nfl1` → `main`, merge without waiting, confirm Pages, record here | in progress | `739408a8` | `COORDINATION.md` | after P1–P2 pass the gates |
+| P3 | Integration: PR `arena/739408a8-nfl1` → `main`, merge without waiting, confirm Pages, record here | done (merged) | `739408a8` | `COORDINATION.md` | after P1–P2 pass the gates |
 
 ### Log — `739408a8-nfl1` (2026-11-15, UTC)
 
@@ -3118,6 +3118,15 @@ Narrow scope on purpose: most of the 100-item brief is already tracked by earlie
 - Not run by me: `build_site_all.py --check` and `check_reproducible.py` pass only after the commit, because they compare against HEAD.
 - Deviation: running `pipeline/gen_site.py` alone rewrites `pages/*` nav links to `../pages/…`, which is the known defect in the record of `9cb71eb8` (PR #65 log). I reverted those pages and used the canonical `tools/build_site_all.py`.
 - Environment: `pandas` and `numpy` were installed with `pip --break-system-packages` (the sandbox is PEP 668 managed).
+
+**P3 — integration (done).** PR https://github.com/kanlerxz87-cyber/NFL1/pull/74 (`arena/739408a8-nfl1` → `main`) was merged with `gh pr merge 74 --merge` (no `--auto`) at 2026-11-15 13:16:43Z. Merge commit `edb5cfe`.
+- Pages: the API reports a `built` status for `edb5cfe` (13:16:44Z). A later `main` refresh (`f505844`, 13:17:27Z) also built. The sandbox cannot reach `github.io`, so the live URLs were not fetched. The result is confirmed from the Pages API only.
+- PR checks on the final pre-merge head (`c7a5868`) all succeeded: site build, decision dashboard, source provenance, and the Decision Lab build. Head `eb2ad2d` was a `[skip ci]` data refresh that changed only a timestamp in `data/capture/comparison.json`. `build_site_all.py --check` passed on it.
+- Gates on the merged tree: `build_site_all.py --check` and `check_reproducible.py` PASS; `verify.py` PASS (2,083 rows, all with an official source link, 73 unverified); `check_reachability.py` 0 problems; `verify_combined.py` PASS; `check_generators.py`, `check_strength_site.py`, `check_freshness.py`, `prereg.py check` and 161 unit tests PASS.
+- Irregularities are non-blocking and published on the Flagged for Review page. The new ones are P1-01 and P2-01 to P2-06. The open items from before still stand (F-7810-09 backtest rows, the 23 self-contradictions from `audit_official.py`, CAP-06, and the 73 unverified rows).
+- Deviation, logged per protocol: a `git pull --rebase` stopped with a conflict. The branch carries earlier merges of `main`, so a rebase would replay other sessions' commits (for example `41bd0a9`). The rebase was aborted and nothing was rewritten. Pushes were made as fast-forwards, after checking that the remote head is an ancestor of the local head.
+- Merge conflicts resolved: `COORDINATION.md` kept both sides. `data/flags.json` was unioned by ID, and `main`'s version was kept for shared IDs. Generated outputs were taken from `main` and rebuilt to the fixed point.
+- Not done here: P1 forward results. Week 11 games were not final when the forecasts were frozen. The remaining brief items are tracked by earlier sessions and are not re-opened by this one.
 
 # Session `e1fa878e-nfl1` — re-verification of open injury and depth flags, leaderboard policy, PR and merge (2026-11-15)
 
