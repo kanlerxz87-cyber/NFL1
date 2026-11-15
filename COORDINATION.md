@@ -3145,3 +3145,23 @@ Most of the brief's items were not started. Examples, each still open on the boa
 - **Irregularity (non-blocking, logged here):** on push, the workflow `Collect s9cb research extract` built successfully but failed at its final `git push` step (commit and push of `data/s9cb`), run `43716350841`. The bot's push raced with another bot push to the same branch. No code failure. The data step will re-run on the next push to `s9cb/**` or `workflow_dispatch`.
 - **Merge:** `gh pr merge 73 --merge` was issued after this record. The merge commit and the Pages deployment result are on the PR itself (`gh pr view 73`), because this record cannot name its own merge commit before it exists.
 
+---
+
+# Session `57c05555-nfl1` — official-source depth repair, availability-snapshot ledger, and verification (2026-11-15)
+
+Branch `arena/57c05555-nfl1`, base `df084b5` on `main`. Claims written **before any file change** and pushed immediately.
+All earlier claims are `done`, `needs review` or merged, so no live claim is stepped on.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| V1 | Fix the two named depth-parsing failures from official club pages, verified row by row this session: Packers jersey-number prefixes (raw string retained) and Texans image-only chart (recorded as an unrecoverable gap, not transcribed) | in progress | `57c05555` | `pipeline/depth_parse.py` (new), `data/depth_raw/` (new), `tools/check_depth_parse.py` (new), `scripts/nfl1_57c05555/*` (new) | Packers page re-read live 2026-11-15 and compared cell by cell |
+| V2 | Immutable official availability snapshot ledger: dated capture with sha256, fetch clock time, parser version, conflict flags — so designations can be replayed as known | in progress | `57c05555` | `data/ledger/` (new), `pipeline/ledger.py` (new), `tools/check_ledger.py` (new) | append-only; never rewrites an existing capture |
+| V3 | Depth slots as groups, not a single starter (shared rank-1 slots, empty slots) published faithfully | in progress | `57c05555` | `pipeline/depth_parse.py`, `tools/check_depth_parse.py` | counts of shared and empty slots published |
+| V4 | Flag stale depth rows against the official transactions log (Ravens QB case named in the brief) | in progress | `57c05555` | `scripts/nfl1_57c05555/staleness.py` (new), `data/ledger/staleness.json` | flags only; never infers a replacement |
+| V5 | One verification page for this session's work: every row a source link, blanks labelled | in progress | `57c05555` | `pages/session-57c05555.html` (new), `tools/build_session_page.py` (new) | joins the one build step; no other session's page is edited |
+| V6 | Integrate: all gates green, PR to `main`, merge, confirm Pages, record here | pending | `57c05555` | `COORDINATION.md`, `tools/build_site_all.py` (one added step), `pipeline/gen_site.py` (one added nav entry) | shared outputs changed only at integration, as the brief requires |
+
+**Scope discipline.** No file owned by another session is rewritten. The only shared files touched are
+`tools/build_site_all.py` (one appended build step) and `pipeline/gen_site.py` (one appended navigation
+entry), both additive and both required for the new page to be reachable — permitted at integration.
+
