@@ -3165,3 +3165,56 @@ All earlier claims are `done`, `needs review` or merged, so no live claim is ste
 `tools/build_site_all.py` (one appended build step) and `pipeline/gen_site.py` (one appended navigation
 entry), both additive and both required for the new page to be reachable — permitted at integration.
 
+
+## Session `57c05555-nfl1` — result record and cross-session requests (2026-11-15, UTC)
+
+### What this session found, verified against live official pages fetched today
+
+| # | Finding | Official source | State |
+|---|---|---|---|
+| V-01 | The Packers print `9 Christian Watson`; the committed transcription stored the number inside the name. **Fixed**: number split out and the raw string retained, 55 cells on the 2026-11-15 capture. | <https://www.packers.com/team/depth-chart> (re-read today, `Unofficial, Nov. 10, 2026`) | fixed |
+| V-02 | The Texans' depth chart is **one JPEG** with no rows in the page text. **No rows produced**, gap recorded with the image URL; the brief forbids transcription by eye. | <https://www.houstontexans.com/team/depth-chart> | recorded as a gap, not fixed — needs a structured source |
+| V-03 | The committed Baltimore transcription stores four players called "1st".."4th" from a `POSITION | 1st | 2nd | 3rd | 4th` legend row. The legend row is now dropped and counted. The 2026-11-15 page no longer prints that row, so the defect is pinned by a fixture built from the committed row, not by a live floor. | <https://www.baltimoreravens.com/team/depth-chart> | fixed |
+| V-04 | Shared slots are real: Arizona prints `Zaven Collins Baron Browning` in one cell (the committed transcription merged both names into one player called "Zaven Collins Baron Browning"), and Indianapolis prints `Will Mallory Pharaoh Brown`. Kept whole as one group of two. | <https://www.azcardinals.com/team/depth-chart>, <https://www.colts.com/team/depth-chart> | fixed |
+| V-05 | Empty slots are real: Baltimore prints `K | (blank)`, Washington prints `LB | Frankie Luvu | (blank) | Kain Medrano`. A hole in the middle of a row is now recorded instead of being closed up. | <https://www.commanders.com/team/depth-chart>, <https://www.baltimoreravens.com/team/depth-chart> | fixed |
+| V-06 | HTML entities reached published names: the committed transcription publishes `Kei&#x27;Trel Clark`, `Ja&#x27;Kobi Lane`, `K&#x27;Von Wallace`. Now unescaped, with a gate that fails if an entity ever reaches a name again. | the same four club pages | fixed |
+| V-07 | The brief's Ravens staleness example **no longer holds**. Baltimore placed Lamar Jackson and Tyler Huntley on IR on **2026-11-05** (official transactions page), and the current official chart names **Jacoby Brissett, Joe Fagnano, Kedon Slovis** at QB — neither Jackson nor Huntley appears. The chart was re-read at 12:57:10Z, after the log, and is **byte-identical** (sha256 `f9da4c0aab60…`). | <https://www.baltimoreravens.com/team/transactions/>, <https://www.baltimoreravens.com/team/depth-chart> | verified: already correct |
+| V-08 | A real staleness case exists elsewhere: Indianapolis placed **Mo Alie-Cox** and **Akeem Davis-Gaither** on IR on **2026-11-14** and the official chart still lists both. 2 stale rows. | <https://www.colts.com/team/transactions/>, <https://www.colts.com/team/depth-chart> | flagged, not corrected (neither source is edited) |
+| V-09 | The brief's stale-injury-count claim is **exact**: `data/verified/injury_report_2026_week10.tsv` held 254 rows for 24 clubs and `no_injuries_week10.csv` listed SEA, CIN, LAC and BAL as "No Injuries Reported"; the official page lists **15, 9, 19 and 10** rows for them. `data/injury_games.json` carried the same claim per game and `injuries.html` printed it. **Fixed** by `scripts/nfl1_57c05555/repair_verified_injuries.py`: 347 rows, 28 clubs; `injuries.html` now has zero false no-injury claims. | <https://www.nfl.com/injuries/league/2026/reg10> | fixed |
+| V-10 | The official Week 10 injury page **grew during the week**: 254 rows / 24 clubs (12 Nov hand copy, a transcription gap), 296 / 26 with LAC and BAL printing no injuries (13 Nov, the Decision Room's own reading), 347 / 28 with **zero** no-injury sections (15 Nov, two independent reads agree). +51 rows and +2 club tables in the 48 hours before kickoff. Recorded in `data/ledger/injury_report_evolution.json`. | <https://www.nfl.com/injuries/league/2026/reg10> | recorded; this is the argument for the dated series |
+| V-11 | The brief's "279 rows and 2 no-injury sections" figure is **not reproducible** from the page read today (347 rows, 0 no-injury sections). The 296/2 figure is the Decision Room's 13 Nov reading. No 279-row reading is held by any artifact in the repository, so the number is not used and is not contradicted — it is simply unsupported here. | — | unverified, not used |
+
+### Cross-session requests (files owned by other sessions — **not edited**)
+
+The rule on this board is that a file owned by another session is changed by a request, not by
+an edit. Each item below is a stale claim that a reader can check in one click; the evidence and
+the suggested wording are on the published page (`pages/session-57c05555.html`, section 9).
+
+| Request | Owner (generator) | Files | Why it is stale | Suggested fix |
+|---|---|---|---|---|
+| R-57c05555-01 | the session that owns `tools/build_docs_site.py` (session `87deb7ab`) | `data/session-87deb7ab/*.json` → `docs/index.html`, `docs/executive-summary.html`, `docs/flagged.html`, `docs/injury-depth.html`, `docs/questions.html`, `docs/verification.html` | Six pages state Seattle shows "No Injuries Reported" while NFL.com news says otherwise. The 2026-11-15 official page lists **15 Seattle players**. | Rebuild from a dated capture, or date the sentence "as at 2026-11-13T12:20Z". The change itself is the evidence for a daily series, so dating beats deleting. |
+| R-57c05555-02 | the session that owns `room/build.py` (session `07810d9f` / Decision Room) | `room/data/findings.json`, `room/data/questions.json`, `room/data/sources.json` → `room/questions.html`, `room/flagged.html` | Records "LAC and BAL publish 'No Injuries Reported'" in the present tense. True at 13 Nov 12:20Z; both clubs print tables on 15 Nov (19 and 10 rows). | Add the as-at date to the sentence. The 296-row reading is correct for its moment. |
+| R-57c05555-03 | the session that owns `dashboard/` and `web/` | `dashboard/flagged.html`, `dashboard/questions.html`, `web/flag-register.html`, `web/verification.html` | Same two claims in the present tense. | Same as above. |
+| R-57c05555-04 | the session that owns `src/nfl/` (verified-lab) | `src/nfl/verify.py` line ~245 and the fixture behind `verified-lab/executive-summary.html` ("Teams printing 'No Injuries Reported' 4 (SEA, CIN, LAC, BAL)") | The count is 0 on the 2026-11-15 page. The fixture may be asserting against an older page and passing vacuously. | Re-point the fixture at a dated capture; assert the count for that date. |
+| R-57c05555-05 | the session that owns `review-room/` | `review-room/flagged.html` | Carries the Seattle claim. | Same as R-57c05555-01. |
+| R-57c05555-06 | whoever owns `data/capture/flags.json` (session `543676f8`) | `data/capture/flags.json` → `capture/index.html`, `pages/review.html` | CAP-03 and SV-01 are now **partly stale as descriptions**: they describe the 254-row hand copy as the current state, and this session rebuilt that file to 347 rows. The flags' *substance* (the copy was stale) remains true and is the record of the defect. | Reword to past tense and cite commit `HEAD` of this session as the fix, or keep them as the historical record and point at the fix. |
+
+### Files this session added or changed
+
+Added: `pipeline/depth_parse.py`, `pipeline/ledger.py`, `tools/check_depth_parse.py`,
+`tools/build_session_page.py`, `scripts/nfl1_57c05555/staleness.py`,
+`scripts/nfl1_57c05555/repair_verified_injuries.py`, `data/depth_raw/`, `data/depth_parsed/`,
+`data/tx_raw/`, `data/ledger/`, `pages/session-57c05555.html`,
+`tests/test_depth_parse_57c05555.py`, `tests/test_staleness_57c05555.py`,
+`tests/test_injury_series_57c05555.py`.
+
+Changed: `tools/build_site_all.py` (five build steps appended),
+`scripts/verified/normalize_nav.py` (one canonical nav entry),
+`data/verified/injury_report_2026_week10.tsv`, `data/verified/no_injuries_week10.csv`,
+`data/injury_games.json` (all three rebuilt from the capture, never hand-edited),
+plus every generated page the one build rewrites.
+
+No file owned by another session was edited. The two shared outputs — the build order and the
+canonical navigation — were changed only at integration, as the brief requires, and every
+generated page was rebuilt from the combined data rather than patched.
+
