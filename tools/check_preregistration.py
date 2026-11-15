@@ -32,6 +32,9 @@ def _git(*args: str) -> str | None:
 def main() -> int:
     fails: list[str] = []
     flags: list[str] = []
+    # In a shallow clone the oldest visible commit is a graft boundary, not the commit that
+    # added the rule. Treat that as "history unavailable" instead of comparing against it.
+    shallow = _git("rev-parse", "--is-shallow-repository") == "true"
     reg = json.loads(REG.read_text(encoding="utf-8"))
     registered: set[str] = set()
     for entry in reg["registrations"]:
@@ -43,7 +46,7 @@ def main() -> int:
         sha = hashlib.sha256(path.read_bytes()).hexdigest()
         if sha != entry["sha256"]:
             fails.append(f"{entry['rule_id']}: sha256 {sha[:12]}… differs from registered {entry['sha256'][:12]}… (file was edited after registration)")
-        commits = _git("log", "--diff-filter=A", "--follow", "--format=%H", "--", entry["file"])
+        commits = None if shallow else _git("log", "--diff-filter=A", "--follow", "--format=%H", "--", entry["file"])
         if not commits:
             flags.append(f"{entry['rule_id']}: git history unavailable here; commit-hash check not performed "
                          f"(recorded registration {entry['registration_commit'][:12]})")
