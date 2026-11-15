@@ -18,10 +18,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      # Session 26b2c41e: the research sub-site (s9cb/site.py) and the strength study import
-      # pandas, and the rebuild below runs before the install step that used to come later.
-      # Installing first makes the rebuild see the same dependencies as the other workflows.
-      - name: Install numpy and pandas for the analysis and the strength study
+      - name: Install analysis and site-build dependencies
         run: python -m pip install --quiet numpy pandas
       - name: Recompute derived values
         run: python3 tools/compute_correlations.py

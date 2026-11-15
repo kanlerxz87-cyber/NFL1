@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-13T13:40:48+00:00",
+ "generated_at": "2026-11-15T12:28:11+00:00",
  "evidence": {
   "season": 2026,
   "week_complete": 10,
@@ -1951,6 +1951,29 @@
    "action": "Fixed: the two snapshot values were corrected to the official times and pipeline/build_all.py now applies a documented, source-linked SCHEDULE_FEED_FIXES table at build time so scheduled refreshes keep the official values. Reviewer: confirm against https://www.nfl.com/schedules/2026/by-week/week-11 and https://www.nfl.com/schedules/2026/REG11 (fetched 2026-11-13); if the upstream feed is corrected, the table can be dropped (it is idempotent).",
    "verified": true,
    "retrieved": "2026-11-13"
+  },
+  {
+   "id": "F48",
+   "category": "Data resolvability",
+   "description": "data/model/official_injuries.json holds 345 Week-10 rows (scrape generated 2026-11-14T17:02:31Z from https://www.nfl.com/injuries/). Every row populates team (for example WAS, NE) but no club field is present on any row, and counts.clubs_resolved_from_roster is 0, so the club foreign key is not resolved. Downstream joins that key off club (roster, depth chart, snap counts) would match nothing. Spot-checked 12 rows against the live official page on 2026-11-15: all matched (Patrick/Yankoff Out, Harrison Questionable, Brown/Davis III/Henderson Out, Joseph/Mays/Reed Out, Darnold Out). Row count is a live-week snapshot and drifts within the week (see A-F04).",
+   "impact": "Availability/roster joins keyed on club return zero rows until club resolution is added; not a values error in the scraped fields themselves.",
+   "status": "needs review",
+   "src": "S01",
+   "action": "Resolve club from the team code or the club table at scrape time, backfill counts.clubs_resolved_from_roster, and add a per-refresh row-count gate against https://www.nfl.com/injuries/.",
+   "verified": true,
+   "retrieved": "2026-11-15"
+  },
+  {
+   "id": "F49",
+   "category": "Official results corpus is one game behind standings",
+   "description": "The verified results corpus contains 136 games and ends at Week 9. The official 2026 standings retrieved 2026-11-13 sum to 136 wins, 136 losses and 2 ties, implying 137 completed games. The official Week 10 Game Center reports Commanders 24, Giants 21, FINAL on 2026-11-12. The result is not present in data/verified/games_2026.csv. No score row has been added by this audit.",
+   "impact": "The verified backtest results corpus is incomplete at its stated current-season boundary. Historical skill metrics, result verification and any injury/result join are blocked for the omitted game until its official Game Book and provenance are captured and reconciled.",
+   "status": "needs review",
+   "src": "S27",
+   "data_src": "S02",
+   "action": "Reconcile the official Game Center and NFL Game Book with the registered 2026 results corpus, record the official game ID, final score, source URL, captured timestamp and hash, then rerun the result and leaderboard gates. Official schedule: https://www.nfl.com/schedules/2026/by-week/week-10. Keep the affected row blank until verified.",
+   "verified": true,
+   "retrieved": "2026-11-15"
   }
  ]
 }

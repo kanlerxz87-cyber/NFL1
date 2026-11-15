@@ -30,6 +30,7 @@ Every table row on the site links to an official source. Values that no official
 | S24 | GitHub (this repository) | Official repository | Repository contents, branches, commits, pull requests and coordination board | Repo-level claims and coordination flags link here. | 2026-11-12 | [S24](https://github.com/kanlerxz87-cyber/NFL1) | yes |
 | S25 | GitHub REST API | Official platform API | Pages build_type, source branch/path, html_url, status | Queried with `gh api` during integration; returns status 'built', source main / '/'. | 2026-11-12 | [S25](https://api.github.com/repos/kanlerxz87-cyber/NFL1/pages) | yes |
 | S26 | National Football League (NFL.com) | official league standings page | Official 2026 division groupings (AFC/NFC x East/North/South/West) used to verify the C5 division-game flag |  | 2026-11-12 | [S26](https://www.nfl.com/standings/division/2026/REG) | yes |
+| S27 | National Football League (NFL.com) | Official Game Center result | Washington Commanders at New York Giants, Week 10, 2026; final score and game status | Official Game Center showed Commanders 24, Giants 21, FINAL; used only to identify the unresolved result-corpus gap, not to add a result row. | 2026-11-15 | [S27](https://www.nfl.com/games/commanders-at-giants-2026-reg-10) | yes |
 
 ## Procedure
 
