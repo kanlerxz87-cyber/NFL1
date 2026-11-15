@@ -67,34 +67,34 @@ Official Week 10 2026 injury report snapshot, official filing policy, official W
 | KC | Special Teams | LS | James Winchester |  |  |  | [S14](https://www.chiefs.com/team/depth-chart) | yes |
 | KC | Special Teams | KR |  | Emmett Johnson |  |  | [S14](https://www.chiefs.com/team/depth-chart) | yes |
 | KC | Special Teams | PR |  | Emmett Johnson |  |  | [S14](https://www.chiefs.com/team/depth-chart) | yes |
-| GB | Offense | WR | 9 Christian Watson | 16 Bo Melton |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
-| GB | Offense | WR | 0 Matthew Golden | 87 J. Michael Sturdivant |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
-| GB | Offense | LT | 77 Jordan Morgan | 73 John Williams |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
-| GB | Offense | LG | 65 Aaron Banks | 79 Travis Glover | 67 Donovan Jennings |  | [S15](https://www.packers.com/team/depth-chart) | yes |
-| GB | Offense | C | 75 Sean Rhyan | 52 Jager Burton |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
-| GB | Offense | RG | 72 Laken Tomlinson | 70 Kevin Zeitler |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
-| GB | Offense | RT | 71 Anthony Belton | 74 Mekhi Becton Sr. |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
-| GB | Offense | TE | 85 Tucker Kraft | 18 Jonnu Smith | 86 Mark Redman | 81 Josh Whyle | [S15](https://www.packers.com/team/depth-chart) | yes |
-| GB | Offense | WR | 83 Savion Williams | 13 Coleman Owen |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
-| GB | Offense | QB | 10 Jordan Love | 6 Tyrod Taylor |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
-| GB | Offense | RB | 8 Josh Jacobs | 32 MarShawn Lloyd | 22 Pierre Strong Jr. | 26 Kaleb Johnson | [S15](https://www.packers.com/team/depth-chart) | yes |
-| GB | Defense | DT | 94 Karl Brooks | 97 Jordon Riley | 93 Anthony Campbell |  | [S15](https://www.packers.com/team/depth-chart) | yes |
-| GB | Defense | DT | 95 Devonte Wyatt | 55 Chris McClellan |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
-| GB | Defense | EDGE | 90 Lukas Van Ness | 57 Brenton Cox Jr |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
-| GB | Defense | LB | 44 Zaire Franklin | 59 Ty'Ron Hopper | 54 Kristian Welch |  | [S15](https://www.packers.com/team/depth-chart) | yes |
-| GB | Defense | LB | 58 Isaiah McDuffie | 31 Nick Niemann |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
-| GB | Defense | EDGE | 99 Barryn Sorrell | 51 Dani Dennis-Sutton |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
-| GB | Defense | CB | 25 Keisean Nixon | 24 Carrington Valentine |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
-| GB | Defense | CB | 2 Brandon Cisse | 21 Benjamin St-Juste |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
-| GB | Defense | S | 29 Xavier McKinney | 27 Kitan Oladapo |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
-| GB | Defense | S | 33 Evan Williams | 27 Kitan Oladapo |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
-| GB | Defense | NB | 7 Javon Bullard | 36 Kamal Hadden |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
-| GB | Special Teams | K | 28 Trey Smack |  |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
-| GB | Special Teams | P | 19 Daniel Whelan |  |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
-| GB | Special Teams | H | 19 Daniel Whelan |  |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
-| GB | Special Teams | PR | 13 Coleman Owen | 0 Matthew Golden |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
-| GB | Special Teams | KR | 16 Bo Melton | 13 Coleman Owen |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
-| GB | Special Teams | LS | 42 Matt Orzech |  |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
+| GB | Offense | WR | Christian Watson | Bo Melton |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
+| GB | Offense | WR | Matthew Golden | J. Michael Sturdivant |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
+| GB | Offense | LT | Jordan Morgan | John Williams |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
+| GB | Offense | LG | Aaron Banks | Travis Glover | Donovan Jennings |  | [S15](https://www.packers.com/team/depth-chart) | yes |
+| GB | Offense | C | Sean Rhyan | Jager Burton |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
+| GB | Offense | RG | Laken Tomlinson | Kevin Zeitler |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
+| GB | Offense | RT | Anthony Belton | Mekhi Becton Sr. |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
+| GB | Offense | TE | Tucker Kraft | Jonnu Smith | Mark Redman | Josh Whyle | [S15](https://www.packers.com/team/depth-chart) | yes |
+| GB | Offense | WR | Savion Williams | Coleman Owen |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
+| GB | Offense | QB | Jordan Love | Tyrod Taylor |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
+| GB | Offense | RB | Josh Jacobs | MarShawn Lloyd | Pierre Strong Jr. | Kaleb Johnson | [S15](https://www.packers.com/team/depth-chart) | yes |
+| GB | Defense | DT | Karl Brooks | Jordon Riley | Anthony Campbell |  | [S15](https://www.packers.com/team/depth-chart) | yes |
+| GB | Defense | DT | Devonte Wyatt | Chris McClellan |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
+| GB | Defense | EDGE | Lukas Van Ness | Brenton Cox Jr |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
+| GB | Defense | LB | Zaire Franklin | Ty'Ron Hopper | Kristian Welch |  | [S15](https://www.packers.com/team/depth-chart) | yes |
+| GB | Defense | LB | Isaiah McDuffie | Nick Niemann |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
+| GB | Defense | EDGE | Barryn Sorrell | Dani Dennis-Sutton |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
+| GB | Defense | CB | Keisean Nixon | Carrington Valentine |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
+| GB | Defense | CB | Brandon Cisse | Benjamin St-Juste |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
+| GB | Defense | S | Xavier McKinney | Kitan Oladapo |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
+| GB | Defense | S | Evan Williams | Kitan Oladapo |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
+| GB | Defense | NB | Javon Bullard | Kamal Hadden |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
+| GB | Special Teams | K | Trey Smack |  |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
+| GB | Special Teams | P | Daniel Whelan |  |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
+| GB | Special Teams | H | Daniel Whelan |  |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
+| GB | Special Teams | PR | Coleman Owen | Matthew Golden |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
+| GB | Special Teams | KR | Bo Melton | Coleman Owen |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
+| GB | Special Teams | LS | Matt Orzech |  |  |  | [S15](https://www.packers.com/team/depth-chart) | yes |
 | SF | Offense | WR | Mike Evans | Jordan Watkins | Brandin Cooks |  | [S16](https://www.49ers.com/team/depth-chart) | yes |
 | SF | Offense | LT | Trent Williams | Vederian Lowe | Enrique Cruz Jr. |  | [S16](https://www.49ers.com/team/depth-chart) | yes |
 | SF | Offense | LG | Connor Colby | Carver Willis |  |  | [S16](https://www.49ers.com/team/depth-chart) | yes |

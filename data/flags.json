@@ -314,7 +314,7 @@
     "impact": "Two project snapshots refer to the same club with different abbreviations. Neither value was inferred; both were copied from official pages as rendered at different times.",
     "status": "needs review",
     "src": "S02",
-    "action": "The combined verifier maps LA\u2194LAR as an alias for comparison, preserves both spellings in their original files, and flags the discrepancy here.",
+    "action": "The combined verifier maps LA↔LAR as an alias for comparison, preserves both spellings in their original files, and flags the discrepancy here.",
     "verified": true,
     "retrieved": "2026-11-12"
   },
@@ -354,7 +354,7 @@
   {
     "id": "F33",
     "category": "Depth-chart conflict",
-    "description": "The third-generation availability page states that NFL.com team depth-chart URLs return 404 and that depth order is unknown; this dashboard transcribes 1st\u20134th strings from three official club sites (chiefs.com, packers.com, 49ers.com).",
+    "description": "The third-generation availability page states that NFL.com team depth-chart URLs return 404 and that depth order is unknown; this dashboard transcribes 1st–4th strings from three official club sites (chiefs.com, packers.com, 49ers.com).",
     "impact": "Two official-source classes disagree in coverage: league depth-chart URLs vs club-published unofficial depth charts.",
     "status": "needs review",
     "src": "S05",
@@ -441,8 +441,8 @@
   },
   {
     "id": "A-F01",
-    "category": "Board hygiene \u2014 FIXED 2026-11-12",
-    "description": "COORDINATION.md began with the stray text 'EAD' on line 1 \u2014 a leftover conflict-resolution artifact from an earlier merge.",
+    "category": "Board hygiene — FIXED 2026-11-12",
+    "description": "COORDINATION.md began with the stray text 'EAD' on line 1 — a leftover conflict-resolution artifact from an earlier merge.",
     "impact": "FIXED by session b6e68100; removed in the claim commit. Cosmetic, but it made the board's first heading unreadable to strict parsers.",
     "status": "resolved",
     "src": "S23",
@@ -452,34 +452,34 @@
   },
   {
     "id": "A-F02",
-    "category": "Rounding convention \u2014 FIXED in pipeline 2026-11-12",
+    "category": "Rounding convention — FIXED in pipeline 2026-11-12",
     "description": "data/model/snapshot.json published WAS winning percentage as 0.312 (float banker's rounding of 0.3125) while the official standings page shows 0.313. The hand-transcribed data/verified/standings_2026.csv already matched the official 0.313, and the stale 0.312 never rendered on any live page.",
     "impact": "FIXED in pipeline/build_all.py with exact integer round-half-up arithmetic matching the official convention. The corrected snapshot lands automatically via the collect-data workflow (triggers on pipeline/ changes).",
     "status": "resolved",
     "src": "S01",
-    "action": "Verification source: https://www.nfl.com/standings/league/2026/reg (WAS 2-5-1 shown as 0.313, fetched 2026-11-12); audit trail in docs/audit-b6e68100.md \u00a7A2.",
+    "action": "Verification source: https://www.nfl.com/standings/league/2026/reg (WAS 2-5-1 shown as 0.313, fetched 2026-11-12); audit trail in docs/audit-b6e68100.md §A2.",
     "verified": true,
     "retrieved": "2026-11-12"
   },
   {
     "id": "A-F03",
-    "category": "Injury-report club coverage \u2014 fully explained 2026-11-12",
+    "category": "Injury-report club coverage — fully explained 2026-11-12",
     "description": "Week-10 official injury report has 26 club tables. All six absent clubs are now explained from official sources: CHI, DEN, PHI, TB are on bye (official Week-10 schedule page); LAC and BAL print 'No Injuries Reported' on the official injury page.",
     "impact": "Supersedes the uncertainty in F11 (absence-of-rows no longer conflates on-bye, no-injuries-reported and scrape-failure). Consumers should treat absent bye clubs as expected, not as a scrape gap.",
     "status": "resolved",
     "src": "S02",
-    "action": "Sources: https://www.nfl.com/schedules/2026/by-week/week-10 and https://www.nfl.com/injuries/ (both fetched 2026-11-12); audit trail in docs/audit-b6e68100.md \u00a7A-F03.",
+    "action": "Sources: https://www.nfl.com/schedules/2026/by-week/week-10 and https://www.nfl.com/injuries/ (both fetched 2026-11-12); audit trail in docs/audit-b6e68100.md §A-F03.",
     "verified": true,
     "retrieved": "2026-11-12"
   },
   {
     "id": "A-F04",
-    "category": "Live-page drift \u2014 needs review",
+    "category": "Live-page drift — needs review",
     "description": "The official injury page changes during the day: between the 18:53 UTC scrape (276 rows) and the 22:30 UTC scrape (279 rows), IND statuses changed (Haulcy, Taylor, Tillery, Ward) and 3 rows were added league-wide (CJ Allen, Grover Stewart on IND; BJ Green II on JAX). The scraper was verified faithful (~120 rows compared row-for-row against the live page, 0 errors).",
     "impact": "Site injury data is a dated snapshot that can lag the official page by hours. Decision reads shortly before kickoff should re-scrape; the daily 11:17 UTC refresh alone is insufficient on game day.",
     "status": "needs review",
     "src": "S02",
-    "action": "Discovery suggestion logged on the Suggestions page (SA-02): add a scheduled pre-slate refresh. Source: https://www.nfl.com/injuries/ (fetched 2026-11-12); audit trail in docs/audit-b6e68100.md \u00a7A-F04.",
+    "action": "Discovery suggestion logged on the Suggestions page (SA-02): add a scheduled pre-slate refresh. Source: https://www.nfl.com/injuries/ (fetched 2026-11-12); audit trail in docs/audit-b6e68100.md §A-F04.",
     "verified": true,
     "retrieved": "2026-11-12"
   },
@@ -490,7 +490,7 @@
     "impact": "Readers comparing the site to nfl.com after Thursday night will see two stale rows. Not a data error; the daily collect refresh folds results in.",
     "status": "open",
     "src": "S02",
-    "action": "Sources: https://www.nfl.com/standings/league/2026/reg and https://www.nfl.com/games/commanders-at-giants-2026-reg-10 (fetched 2026-11-13); diff in data/audit/live_recheck_2026-11-13/standings_diff.json; audit docs/audit-65df4799.md \u00a71.",
+    "action": "Sources: https://www.nfl.com/standings/league/2026/reg and https://www.nfl.com/games/commanders-at-giants-2026-reg-10 (fetched 2026-11-13); diff in data/audit/live_recheck_2026-11-13/standings_diff.json; audit docs/audit-65df4799.md §1.",
     "verified": true,
     "retrieved": "2026-11-13"
   },
@@ -501,7 +501,7 @@
     "impact": "Down-2/3rd-string deficiency reads for KC are wrong on three rows (WR2, KR, PR). X09 and R-6a232e79-03 stay open until data/depth_chart.json is re-transcribed by its owner.",
     "status": "open",
     "src": "S14",
-    "action": "Source: https://www.chiefs.com/team/depth-chart (fetched 2026-11-13); comparison in docs/audit-65df4799.md \u00a74. Not silently corrected (no-silent-correction rule).",
+    "action": "Source: https://www.chiefs.com/team/depth-chart (fetched 2026-11-13); comparison in docs/audit-65df4799.md §4. Not silently corrected (no-silent-correction rule).",
     "verified": true,
     "retrieved": "2026-11-13"
   },
@@ -545,7 +545,7 @@
     "impact": "Confirms the scrape is faithful and the earlier discrepancies were page drift between scrape times (A-F04), not parser corruption. RV-02/X01/X02 can be closed by their owners.",
     "status": "resolved",
     "src": "S01",
-    "action": "Source: https://www.nfl.com/injuries/ (all 7 chunks fetched 2026-11-13); audit docs/audit-65df4799.md \u00a73.",
+    "action": "Source: https://www.nfl.com/injuries/ (all 7 chunks fetched 2026-11-13); audit docs/audit-65df4799.md §3.",
     "verified": true,
     "retrieved": "2026-11-13"
   },
@@ -599,33 +599,42 @@
     "category": "Injury scrape: blank designations published",
     "description": "The committed scrape (data/model/official_injuries.json, generated 2026-11-14T17:02Z) has no injury or game status where the live nfl.com read (2026-11-15) shows one: Chargers, 10 injury and 10 game-status cells, and 6 practice-status values; Ravens, 2 injury and 2 game-status cells (Jaylinn Hawkins: Knee, Out; Adam Randall: Neck, Hamstring, Questionable). The parser stored blanks without any error. Chargers example from the live page: David Njoku, Fibula, Questionable.",
     "impact": "Two clubs are published with missing injury designations. The rule against publishing blanks is broken, and no alarm fired.",
-    "status": "needs review",
+    "status": "resolved",
     "src": "S01",
     "action": "Re-run the scrape with the raw HTML kept for the LAC and BAL sections; fix the column mapping; add the drift alarm (SI-09). Compare with data/brief_07810d9f/injury_delta_2026-11-15.json.",
     "verified": true,
-    "retrieved": "2026-11-15"
+    "retrieved": "2026-11-15",
+    "resolution": "Resolved in the committed data. data/model/official_injuries.json matches the dated 2026-11-15 capture on every row (347/347, zero value differences). The Chargers (LAC, 19 rows) and Ravens (BAL, 10 rows) sections were re-read in full on https://www.nfl.com/injuries/ on 2026-11-15 and match cell for cell (e.g. David Njoku, Fibula, Questionable; Jaylinn Hawkins, Knee, Out; Adam Randall, Neck, Hamstring, Questionable).",
+    "resolved_by": "e1fa878e-nfl1",
+    "resolved_on": "2026-11-15"
   },
   {
     "id": "F-7810-02",
     "category": "Injury scrape: rows missing",
     "description": "Two Ravens rows on the live nfl.com read are absent from the committed scrape: Calais Campbell (DT, Did Not Participate In Practice) and Ronnie Stanley (Did Not Participate In Practice). The cause (a page change between reads, or parser loss) is not determined.",
     "impact": "The published Ravens list is 2 players short.",
-    "status": "needs review",
+    "status": "resolved",
     "src": "S01",
     "action": "Determine from the raw page at the next capture whether the rows were added after 2026-11-14 or dropped by the parser.",
     "verified": true,
-    "retrieved": "2026-11-15"
+    "retrieved": "2026-11-15",
+    "resolution": "Resolved in the committed data. Calais Campbell (DT, DNP) and Ronnie Stanley (T, DNP) are present in data/model/official_injuries.json and match the Ravens section of https://www.nfl.com/injuries/ read on 2026-11-15. Parser-loss cause still not determined; the row count is recorded per capture (see F-7810-04).",
+    "resolved_by": "e1fa878e-nfl1",
+    "resolved_on": "2026-11-15"
   },
   {
     "id": "F-7810-03",
     "category": "Designation changed between reads",
     "description": "Arden Key (IND) carries Hamstring and Questionable in the committed scrape (2026-11-14). The live read (2026-11-15) shows no injury and no game status for him.",
     "impact": "A designation disappeared between reads, or the scrape is stale. Either way the published Colts row disagrees with the live page.",
-    "status": "needs review",
+    "status": "resolved",
     "src": "S01",
     "action": "Keep both reads in the dated series (IN-01) and confirm at the next capture.",
     "verified": true,
-    "retrieved": "2026-11-15"
+    "retrieved": "2026-11-15",
+    "resolution": "Resolved in the committed data. Arden Key (IND) is committed with no injury and Full Participation; the Colts section of https://www.nfl.com/injuries/ read on 2026-11-15 shows the same. The earlier Hamstring/Questionable read stays in the dated history and is not overwritten.",
+    "resolved_by": "e1fa878e-nfl1",
+    "resolved_on": "2026-11-15"
   },
   {
     "id": "F-7810-04",
@@ -654,11 +663,14 @@
     "category": "Jersey numbers left in depth rows",
     "description": "data/depth_chart.json still holds jersey numbers in 59 Packers cells (a leading number before the player name). The brief requires the numbers stripped and the raw string kept.",
     "impact": "Packers names are mis-keyed in any join on player name.",
-    "status": "needs review",
+    "status": "resolved",
     "src": "S15",
     "action": "Strip the leading number into its own column; keep the raw string; re-run the name join.",
     "verified": true,
-    "retrieved": "2026-11-15"
+    "retrieved": "2026-11-15",
+    "resolution": "Resolved. Script: tools/normalize_depth_names.py strips the leading jersey number from 59 Packers cells into jersey_s1..s4, keeps the printed string in raw_s1..s4, and leaves s1..s4 as bare names. The numbers and names were checked against https://www.packers.com/team/depth-chart read on 2026-11-15 (footer: 'Unofficial, Nov. 10, 2026'). The club label is unchanged and still flagged under F-7810-07.",
+    "resolved_by": "e1fa878e-nfl1",
+    "resolved_on": "2026-11-15"
   },
   {
     "id": "F-7810-07",
@@ -691,7 +703,9 @@
     "src": "S24",
     "action": "Split the leaderboard into prospective and backtest views (PR-06); settle the price-policy decision (PR-10).",
     "verified": true,
-    "retrieved": "2026-11-15"
+    "retrieved": "2026-11-15",
+    "resolution": "Partly resolved. The ranked leaderboard (research/leaderboard.html, s9cb/site.py page_leaderboard) now shows no backtest return, hit rate, p-value, interval or luck figure; a test (tests/test_leaderboard_policy.py) enforces this. The historical figures moved to research/backtest.html, labelled not a leaderboard result. Other research pages still show backtest returns: see F-E1-01.",
+    "resolved_by": "e1fa878e-nfl1"
   },
   {
     "id": "F-7810-10",
@@ -745,6 +759,42 @@
     "status": "needs review",
     "src": "S01",
     "action": "Replace the template URL in data/depth_ladder.json with each club's real chart URL, or remove it. Decide whether the registration and demotion rules need a non-official record (they are internal policy, so no official page can confirm them).",
+    "verified": true,
+    "retrieved": "2026-11-15"
+  },
+  {
+    "id": "F-E1-01",
+    "category": "Backtest numbers outside the leaderboard",
+    "description": "Backtest returns and hit rates still appear on other pages after the leaderboard was split: the research executive summary (research/executive-summary.html, gate summary table with a Return column), the research injuries page (research/injuries.html, scored-rule table with Return and p-value), the root-site strategies page (pages/strategies.html) and the decision dashboard strategies page (dashboard/strategies.html). The research index (research/index.html) shows no return figures.",
+    "impact": "A reader can still take a historical return for a prospective result on these pages. The brief's rule covers the leaderboard; these pages are not the leaderboard but show the same figures.",
+    "status": "needs review",
+    "src": "S24",
+    "data_src": "S24",
+    "action": "Decide whether these pages should carry the same split (figures moved to a labelled backtest view). Then apply the same test to each page.",
+    "verified": true,
+    "retrieved": "2026-11-15"
+  },
+  {
+    "id": "F-E1-02",
+    "category": "Club code mismatch (injury report)",
+    "description": "data/model/official_injuries.json uses club codes ARI (Arizona) and LA (Los Angeles Rams) for 15 and 14 rows. The nfl.com injury report uses AZ (Cardinals) and LAR (Rams), visible in the club logo links of https://www.nfl.com/injuries/ read on 2026-11-15. The codes were reconciled by hand for this check; no row value changed.",
+    "impact": "A join on club code between the injury report and a source that uses the nfl.com code will match zero rows for these two clubs.",
+    "status": "needs review",
+    "src": "S01",
+    "data_src": "S01",
+    "action": "Map ARI to AZ and LA to LAR at scrape time, keep the printed code as raw_team, and add a code-set gate to the scrape (the 32 official codes).",
+    "verified": true,
+    "retrieved": "2026-11-15"
+  },
+  {
+    "id": "F-E1-03",
+    "category": "Injury re-read coverage",
+    "description": "In this session 229 of the 347 rows on https://www.nfl.com/injuries/ (read 2026-11-15, 8 pages) were re-read and compared with the committed scrape: 229 of 229 match. The other 118 rows were not re-read, so the 2026-11-15 capture is verified only for those 229 rows plus the full 347-row count.",
+    "impact": "The 'every row verified' claim is not supported for the unread 118 rows in this session.",
+    "status": "needs review",
+    "src": "S01",
+    "data_src": "S01",
+    "action": "Automate a full cell-by-cell re-read in GitHub Actions at each capture (the Arena sandbox cannot reach nfl.com directly), and publish the mismatch count.",
     "verified": true,
     "retrieved": "2026-11-15"
   },
