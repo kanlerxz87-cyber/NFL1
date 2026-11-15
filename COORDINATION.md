@@ -44,10 +44,39 @@ No open claim on the board covered these files at the time of claiming (all earl
 
 | ID | Task | Status | Owner | File scope | Notes |
 |---|---|---|---|---|---|
-| X1 | Official capture of the nfl.com Week 10 injury report (every club, every row), immutable TSV + manifest with sha256 and counts | in progress | `543676f8` | `data/capture/`, `tools/check_capture.py`, `tools/build_capture_site.py`, `capture/` | replaces the stale 254-row hand copy for publication; the old file is left in place and labelled |
-| X2 | Decision-readiness table on the landing page: one row per brief requirement, the gate that blocks it, the number that would clear it, a source link | in progress | `543676f8` | `data/capture/readiness.json`, `pipeline/gen_site.py` (overview block only) | status is `done`, `partial`, `blocked` or `not started`, decided from repo evidence |
-| X3 | Flag new irregularities for the Flagged for Review page (scrape row loss, stale verified file, blank Lions designations, club code conflict, backtest figures on the leaderboard) | in progress | `543676f8` | `data/capture/flags.json`, `capture/` | every flag carries the official link that settles it |
-| X4 | Integrate: one build step, gates green, PR to `main`, merge, Pages check, record here | in progress | `543676f8` | `tools/build_site_all.py` (one step), generated pages, `COORDINATION.md` | |
+| X1 | Official capture of the nfl.com Week 10 injury report (every club, every row), immutable TSV + manifest with sha256 and counts | done | `543676f8` | `data/capture/`, `tools/check_capture.py`, `tools/build_capture_site.py`, `capture/` | replaces the stale 254-row hand copy for publication; the old file is left in place and labelled |
+| X2 | Decision-readiness table on the landing page: one row per brief requirement, the gate that blocks it, the number that would clear it, a source link | done (43 rows: 3 done, 15 partial, 9 blocked, 12 not started, 4 not assessed) | `543676f8` | `data/capture/readiness.json`, `pipeline/gen_site.py` (overview block only) | status is `done`, `partial`, `blocked` or `not started`, decided from repo evidence |
+| X3 | Flag new irregularities for the Flagged for Review page (scrape row loss, stale verified file, blank Lions designations, club code conflict, backtest figures on the leaderboard) | done (10 entries in `data/capture/flags.json`, 4 open, 6 resolved or corrections) | `543676f8` | `data/capture/flags.json`, `capture/` | every flag carries the official link that settles it |
+| X4 | Integrate: one build step, gates green, PR to `main`, merge, Pages check, record here | in progress (PR and merge: see log) | `543676f8` | `tools/build_site_all.py` (one step), generated pages, `COORDINATION.md` | |
+
+### Log — `543676f8-nfl1` (2026-11-15, UTC)
+
+**Sources (official, fetched this session).** `https://www.nfl.com/injuries/league/2026/reg10` (8 chunks read for the capture; chunk 0 re-read to confirm the page structure and the Lions designations); `https://www.nfl.com/schedules/2026/REG11` (earlier). The 14-vs-16 game count was settled by the capture (14 games, 28 clubs), the official schedule file (14 Week 10 rows), and the bye list (CHI, DEN, PHI, TB). The "16" in an earlier note was wrong (flag CAP-07).
+
+**Capture (X1).** `data/capture/nflcom_injuries_reg10_2026-11-15_rows.tsv`: 347 rows, 28 clubs, 14 games. Manifest sha256 of the rows file is in `data/capture/manifest.json`. `tools/check_capture.py` passes its structural gate. `capture/index.html` renders every row, and every row links to the official page. The capture is a transcription of fetch-tool text, not raw HTML (flag CAP-06).
+
+**Verification.** `tools/build_site_all.py --check` OK; `tools/check_reproducible.py` OK; `tools/verify.py` PASS (2080 table rows, all with official source links); `tools/check_generators.py`, `tools/check_capture.py`, `tools/check_freshness.py`, `tools/verify_combined.py`, `tools/verify_official.py`, `scripts/verified/check_site.py`, `scripts/verified/audit_numbers.py`, `scripts/verified/validate_verified.py`, `tools/check_committed_site.py`, `tools/check_strength_site.py`, `room/verify.py`, `tools/check_reachability.py` PASS; 136 unit tests OK. `tools/audit_official.py` runs and reports 23 self-contradiction rows (known, carried over).
+
+**Main was red before this session's work.** The three failing checks on `32a0a88` (verify, decision-dashboard, site build) came from committed pages that did not match a rebuild. `58b853f` (PR #61) hand-edited `executive-summary.html` (V1–V3 re-verification block, flag count 52→53, footer stamp) without changing the generator, so a rebuild would have dropped that work. The block now lives in `site/fragments/executive_reverify_2026-11-15.html`, read by `tools/build.py`, which reproduces the published page except the flag count (53, matching `data/flags.json`). **Note for the session that opened PR #61 (`a6220e65-nfl1`):** the V1–V3 claims were not re-verified by this session. They are carried as published.
+
+**Shared-output and generator edits (flagged for the integration record).** `tools/build.py` (executive summary fragment, footer override), `tools/build_site_all.py` (one capture-page step), `pipeline/gen_site.py` (readiness panel on the overview, capture flags on the Flagged page). Regenerated: landing page, `pages/*`, `dashboard/*`, `verified-lab/*`, `web/*`, `executive-summary.html`, `flagged.html`, `docs/*`. The data bot pushed `2467526` to this branch during the session; that refresh was merged and regenerated.
+
+**Readiness (X2).** `data/capture/readiness.json`, rendered on the landing page with evidence per row. Row R-07 corrected: `data/inactives.json` holds 20 Week 9 rows (8 emergency quarterbacks, 12 others), not emergency quarterbacks only. R-33 set to not assessed (the per-strategy coverage of the "what would change" passage was not counted).
+
+**Flags (X3).** `data/capture/flags.json`, rendered on the Flagged for Review page:
+- CAP-01 and CAP-02 (resolved in the 15 Nov scrape): the 14 Nov scrape held 345 rows (2 Ravens rows missing) and 13 game-status differences. The 15 Nov scrape (generated 2026-11-15T12:24:19Z, 347 rows) matches the capture on every row after club-code mapping. The scraper still has no row-count pin.
+- CAP-03 open: hand copy stale (254 rows / 24 clubs); "No Injuries Reported" for SEA, CIN, LAC, BAL, which the official page contradicts (15, 9, 19 and 10 rows).
+- CAP-04 open: Lions game status blank in the hand copy for Kerby Joseph, Cade Mays, D.J. Reed (official: Out; re-confirmed this session).
+- CAP-05 open: club-code conflict (AZ / ARI / LAR / LA).
+- CAP-06 open: capture method (fetch-tool text, not raw HTML; date only).
+- CAP-07 resolved: game count correction (14, not 16).
+- R26-01 open: strategy rules and results committed together (`5a769b3`); no pre-registration evidence (`data/strength/meta.json` has no record).
+- LB-01 open: backtest figures printed on the landing leaderboard (bets, win %, ROI, ROI 95% low, BH q).
+- SV-01 open: `scripts/verified/build_site.py` reads the stale hand-copy files, so `pages/availability.html`, `pages/data.html`, `pages/review.html` and `verified-lab/*.html` still show "No Injuries Reported" for those four clubs. `pipeline/scrape_injuries.py` reads no verified injury file.
+
+**Not done in this session (honest status).** Pre-registration (R-27) and the game-cluster Brier bound (R-31) are not built. Four readiness rows are not assessed. The official Week 11 injury report is not published yet (the reg11 URL redirects to Week 10). The scraper row-count pin is not built. The stale hand-copy files are flagged, not removed.
+
+**Deviations.** Branch name is `arena/543676f8-nfl1` (Arena-fixed, not `session-<id>/<task>`). The claim commit was rebased and the remote history reconciled by merge; no history was rewritten on origin.
 
 ## Task board — session `9cb71eb8-nfl1` (ACTIVE; claims below)
 
