@@ -3175,3 +3175,64 @@ generation in its own directory and is linked from nowhere until integration; it
 existing page.
 
 _This claim is committed and pushed before any other file is touched, per the brief._
+
+## Session `c84a41a4-nfl1` — results (2026-11-15, UTC)
+
+Branch `arena/c84a41a4-nfl1`, base `df084b5`. Claimed at `eaccc7a` before any file was touched.
+
+| ID | Task | Status | Files | Result |
+|---|---|---|---|---|
+| C84-1 | Line-by-line audit of the repo's data layer, writers and gates | done | `docs/session-c84a41a4/` (block below) | 15 existing gates re-run green; 3 defects found in other sessions' artifacts are flagged, not silently changed |
+| C84-2 | Executive summary | done | `ledger/executive.html` | Negative result stated up front, with the controls that make it credible and the 5 open gaps |
+| C84-3 | Requirements → decide-yet structure | done | `ledger/decisions.html` | 82 register rows + 7 gating questions, each with its blocking gate and clearing number |
+| C84-4 | Own-line origination + strategy competition | done | `s9cb/c84_study.py`, `data/session-c84a41a4/` | 12 pre-registered rules, 10 gates, 0 promoted |
+| C84-5 | Injuries / replacement depth | done | `s9cb/c84_replacement_study.py` | 10,000 confirmed club-starts, 1,796 replacements, depth measured from playing time |
+| C84-6 | Live site | done | `ledger/` (9 pages), `.github/workflows/ledger.yml` | table-first, every data table has a Source column |
+| C84-7 | Line-by-line verification | done | `ledger/verification.html`, `ledger/flagged.html` | 12 live official re-checks; 11 flags, 3 of them my own errors |
+| C84-8 | Integrate: PR → merge → Pages | in progress | `COORDINATION.md` | see below |
+
+**Pre-registration.** `data/session-c84a41a4/preregistration.json` was committed at `061c2a8`, before
+`s9cb/c84_study.py` existed. Its sha256 is stored in `results.json` and re-checked by
+`ledger/check_registration.py`. This is the first pre-registration in the repository; the readiness
+register's rows PR-06/PR-15/PR-18 were "not met" before it.
+
+**Headline result.** 0 of 12 rules promoted. Brier skill vs the de-vigged close **-0.0694**
+(0.2255 vs 0.2109), difference interval [0.0116, 0.0178] entirely on the wrong side of zero. The
+information-free control "bet the away side every game" returns +0.09% and beats eleven of the
+twelve signals. The best in-sample rule (own line vs close ≥ 4 pts, +2.32% on 1,650 decided bets)
+fails BH (q = 0.987) and the untouched 2024-2026 holdout. Injury ablation: adding the availability
+columns changes MAE by **+0.0007** points, interval [-0.0226, +0.0216].
+
+**Sources used (fetched this session with `fetch_page`, which reaches nfl.com):**
+`https://www.nfl.com/standings/league/2026/reg` (32 clubs, cell by cell, matches the committed
+snapshot), `https://www.nfl.com/injuries/league/2026/reg10` (chunks 0 and 2 read; 22 rows
+spot-checked against `data/model/official_injuries.json`, 22/22 match),
+`https://www.detroitlions.com/team/depth-chart`, `https://www.baltimoreravens.com/team/depth-chart`,
+`https://www.houstontexans.com/team/depth-chart`, `https://www.packers.com/team/depth-chart`,
+`https://www.seahawks.com/team/depth-chart/`, `https://www.commanders.com/team/depth-chart`.
+
+**Irregularities found in existing artifacts and flagged (not edited, another session's scope):**
+1. `data/session-1505ac8e/depth_charts.json` stores 934 slots and **zero** with more than one
+   rank-1 player, while the live charts do publish shared slots (Seattle: "Cooper Kupp Rashid
+   Shaheed" in one cell). The brief's "149 slots" is not reproducible either way. Flag C84-F02.
+2. 31 of 32 club charts carry **no `as_of` date**, so none can be versioned against a roster
+   event. Flag C84-F04.
+3. The brief's Baltimore claim is **no longer true**: the live chart lists Jacoby Brissett at QB
+   rank 1. Flag C84-F01.
+4. `data/s9cb` uses an 8-gate scheme, this session registered a 10-gate scheme; both are published
+   and neither is declared canonical. Flag C84-F07.
+5. My own first draft contained three errors (a backwards sign convention in the registration
+   text, a negated moneyline probability, and a design-matrix dimension bug). All three are
+   published as flag C84-F09 rather than quietly corrected; the registration file is unedited.
+
+**Gates re-run on the final tree, all green:** `build_site_all.py --check` (byte-identical),
+`check_reachability.py` (177 pages, 0 problems), `check_generators.py`, `verify.py` (2,062 rows,
+all sourced), `verify_combined.py` (2,533 links, 0 broken), `check_freshness.py` (23),
+`audit_official.py` (905 checks, 0 failed, 65 flags), `room/verify.py`,
+`scripts/verified/{check_site,audit_numbers,validate_verified}.py`, `check_committed_site.py`,
+`check_strength_site.py`, `check_reproducible.py`, `check_capture.py`, `ledger/verify.py`
+(303 rows, 299 official, 4 labelled blanks), `ledger/check_registration.py`, 136 unit tests OK.
+
+**Scope note.** `pipeline/gen_site.py` was edited twice (one nav entry, one All Sections row) so
+the repo-wide reachability gate can see `ledger/`. That is the minimum needed; no other session's
+generator, page content or data file was rewritten.

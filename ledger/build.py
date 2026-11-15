@@ -904,7 +904,7 @@ FLAGS = [
      "The committed capture holds 347 rows, 171 of which carry a game designation (70 Out, 90 Questionable, 11 Doubtful). The 254/6 figures are stale, and they are stale in the direction that made the injury signal look emptier than it is.",
      OFFICIAL["reg10"], "open"),
     ("C84-F06", "The brief's claim that Seattle and Cincinnati are shown as injury-free is contradicted by the current capture.",
-     "Both clubs publish full sections: Seattle 15 rows, Cincinnati 4 rows in the live capture. Any page still printing 'No Injuries Reported' for them is reading an older file.",
+     "Both clubs publish full sections in the committed capture: Seattle 15 rows and Cincinnati 9 rows. Any page still printing 'No Injuries Reported' for them is reading an older file. (An earlier draft of this flag said Cincinnati had 4 rows; the committed capture says 9, and the capture is what this site quotes.)",
      OFFICIAL["reg10"], "open"),
     ("C84-F07", "The two gate schemes in this repository are incompatible and neither is declared canonical.",
      "data/s9cb uses 8 gates numbered G1-G8 (200-bet floor, BH at 0.05). This session registered 10 gates numbered C84-G1..G10 (300-bet floor, adds a control-beating gate and a delete-the-best-season gate). A reviewer comparing two 'gate counts' is comparing two different things.",
