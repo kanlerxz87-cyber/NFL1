@@ -2917,6 +2917,8 @@ Branch note: the session runs on the single branch `arena/26b2c41e-nfl1` (base `
 
 **Overlap with session `07810d9f-nfl1` (irregularity, logged):** while this branch was open, `main` received session `07810d9f`'s 82-row brief register at `room/data/readiness.json` (feeds `pages/readiness.html` through `pipeline/gen_site.py`). This session had independently written a 24-row register under the same name. The merge kept `07810d9f`'s file unchanged; this session's rows now live in `room/data/readiness_26b2c41e.json` and render on `room/readiness.html`. Two registers of the same brief now exist and disagree on counts. The integration session should merge them into one register and remove the other, rather than publish both.
 
+**Irregularity (26b2c41e, logged, not changed):** `tools/build_site_all.py` runs `tools/build_capture_site.py`, which runs `tools/check_capture.py`; that rewrites `data/capture/comparison.json` with a new `generated_at` and a new scrape hash on every build, so the working tree is never clean after a rebuild. The `--check` gate covers only HTML, so CI is unaffected, but the capture owner should stop stamping the comparison on each run.
+
 **Cross-session requests (logged, not applied):** `data/strength/flags.json` (F-SOS-INJ-01) and `data/model/official_injuries.json` disagree on the Week-10 row count; the owner of those files should reconcile them. Pages under `pages/`, `docs/`, `lab/`, `strength/`, `dashboard/`, `research/` and `verified-lab/` carry the stale Lions values listed in `room/data/lions_w10_conflicts.json`; they are not edited here.
 
 ---
