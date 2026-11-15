@@ -30,6 +30,7 @@ The order below is the contract:
   6. tools/build_docs_site.py               -> the docs/ sub-site
   7. PYTHONPATH=src scripts/build_site.py   -> the verified-lab/ sub-site
   8. referee/tools/build_site.py            -> the referee/ sub-site
+  9. strat/*.py                             -> the strategy-competition sub-site (session c7b65577)
 
 Every step is deterministic: the pages are a function of the data files, so running the
 script twice produces the same bytes and `--check` can be used as a CI gate.
@@ -70,6 +71,14 @@ STEPS = [
     ("docs sub-site", [sys.executable, "tools/build_docs_site.py"], ROOT),
     ("verified-lab sub-site", [sys.executable, "scripts/build_site.py"], ROOT),
     ("referee sub-site", [sys.executable, "referee/tools/build_site.py"], ROOT),
+    # Session c7b65577-nfl1: the strategy-competition sub-site.  The five data builders run
+    # before the renderer so the pages are always a function of the latest JSON, and the site's
+    # own gate runs last so `--check` covers it.
+    ("strategy competition data", [sys.executable, "strat/preregister.py"], ROOT),
+    ("strategy competition: demotion gate", [sys.executable, "strat/demotion.py"], ROOT),
+    ("strategy competition falsifiers", [sys.executable, "strat/what_would_change.py"], ROOT),
+    ("strategy competition registers", [sys.executable, "strat/registers.py"], ROOT),
+    ("strategy competition site (strat/)", [sys.executable, "strat/build.py"], ROOT),
 ]
 
 

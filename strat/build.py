@@ -17,6 +17,20 @@ import lib  # noqa: E402
 from lib import artifact, blank, badge, e, kpi, num, pct, src, table  # noqa: E402
 
 
+def _load_stamp():
+    """The commit that froze the registry, written by tools/stamp_preregistration.py."""
+    import json as _j
+    try:
+        with open(os.path.join(lib.ROOT, "data", "strat", "preregistration_stamp.json"),
+                  encoding="utf-8") as fh:
+            return _j.load(fh)
+    except Exception:
+        return {}
+
+
+STAMP = _load_stamp()
+
+
 def _rootsite_rows():
     """The row count from the last root-site verification run (data/verification_report.json)."""
     import json as _j
@@ -246,7 +260,7 @@ def page_preregister(pre):
             e(r.get("market", "")),
             f"<code>{e(r['definition'][:160])}{'…' if len(r['definition']) > 160 else ''}</code>",
             f"{r['sample_window']['n_bets_backtest']:,}" if r["sample_window"]["n_bets_backtest"] else blank("no backtest sample"),
-            f"<code>{e(r['registration_commit'][:8])}</code>",
+            f"<code>{e(STAMP.get('registration_commit', '')[:8])}</code>",
             src("schedules", "source extract"),
         ])
     body = f"""
@@ -254,7 +268,7 @@ def page_preregister(pre):
   {kpi("Registration records", pre["n_records"], "one per rule")}
   {kpi("Labelled backtest", pre["n_backtest"], "selection-exposed, frozen from now")}
   {kpi("Labelled prospective", pre["n_prospective"], "no result yet")}
-  {kpi("Registration commit", pre["registration_commit"][:8], pre["registration_branch"])}
+  {kpi("Registration stamp", STAMP.get("registration_commit", "")[:8], STAMP.get("registration_commit_subject", "")[:48])}
 </div>
 
 <section class="panel">

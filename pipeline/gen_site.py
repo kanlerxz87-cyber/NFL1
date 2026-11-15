@@ -47,6 +47,7 @@ NAV = [
     ("strength/index.html", "SOS Study"),
     ("review-room/index.html", "Review Room"),
     ("research/index.html", "s9cb Research"),
+    ("strat/index.html", "Strategy Competition"),
     # pages produced by the other generators in this repository, kept in the shared
     # navigation so no session's page can become unreachable
     ("pages/executive-summary.html", "Executive Summary (companion)"),
@@ -70,7 +71,8 @@ SIDEBAR = [
                   ("pages/sections.html", "All Sections")]),
     ("Lines & model", [("pages/lines.html", "My Lines"),
                            ("pages/correlations.html", "Correlations")]),
-    ("Competition", [("pages/strategies.html", "Strategy Lab"),
+    ("Competition", [("strat/index.html", "Strategy Competition"),
+                     ("pages/strategies.html", "Strategy Lab"),
                      ("pages/luck.html", "Skill vs Luck"),
                      ("pages/parlays.html", "Parlays & Combos"),
                      ("pages/props.html", "Player Props")]),

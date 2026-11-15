@@ -123,27 +123,41 @@ def main(argv: list[str]) -> int:
     _, head = git("rev-parse", "HEAD")
 
     if "--self-test" in argv:
-        fired = 0
-        cases = [
-            ("unregistered result", {**reg}, scored | {"S99 A rule nobody registered"}, gen),
-            ("post-hoc registration", {**reg, "records": [
-                {**reg["records"][0], "registration_commit": "0" * 40}] + reg["records"][1:]}, scored, gen),
-            ("text drift", {**reg, "records": [
-                {**reg["records"][0], "name": "a rule that does not exist"}] + reg["records"][1:]}, scored, gen),
-        ]
-        # a stamp whose committed hash does not match must be caught
+        fired = total = 0
+
+        def report(name, detected):
+            nonlocal fired, total
+            total += 1
+            fired += 1 if detected else 0
+            print(f"self-test: {name} {'DETECTED' if detected else 'MISSED — the gate is dead'}")
+
+        # 1. a result with no registration
+        report("unregistered result",
+               bool(check(reg, scored | {"S99 A rule nobody registered"}, gen, head)))
+        # 2. frozen text that no longer matches the generator
+        drifted = {**reg, "records": [{**reg["records"][0], "name": "a rule that does not exist"}]
+                   + reg["records"][1:]}
+        report("text drift", any("no longer appears" in p for p in check(drifted, scored, gen, head)))
+        # 3. a prospective rule that has acquired a backtest result
+        prom = next(r for r in reg["records"] if r["status"] == "registered-prospective")
+        report("prospective rule with a result",
+               any("registered as prospective" in p
+                   for p in check(reg, scored | {f"{prom['id']} {prom['name']}"}, gen, head)))
+        # 4. the registry edited after its stamp
         st = json.load(open(STAMP, encoding="utf-8")) if os.path.isfile(STAMP) else {}
         sp: list[str] = []
         check_stamp({**st, "file_sha256_as_committed": "0" * 64}, reg, sp)
-        print(f"self-test: registry edited after the stamp {'DETECTED' if sp else 'MISSED — the gate is dead'}")
-        fired += 1 if sp else 0
-        cases.append(("", {}, set(), ""))  # no-op, keeps the loop shape below
-        for name, r, s2, g in cases[:-1]:
-            probs = check(r, s2, g, head)
-            ok = bool(probs)
-            print(f"self-test: {name} {'DETECTED' if ok else 'MISSED — the gate is dead'}")
-            fired += 1 if ok else 0
-        return 0 if fired == len(cases) else 1
+        report("registry edited after the stamp", bool(sp))
+        # 5. a rule's frozen fields edited after the stamp
+        sp2: list[str] = []
+        edited = {**reg, "records": [{**reg["records"][0],
+                                     "definition": reg["records"][0]["definition"] + " (edited)"}]
+                  + reg["records"][1:]}
+        check_stamp(st, edited, sp2)
+        report("a frozen rule field edited", bool(sp2))
+        # 6. a stamp whose commit is not an ancestor of HEAD
+        report("stamp not an ancestor of HEAD", not is_ancestor("0" * 40, head))
+        return 0 if fired == total else 1
 
     problems = check(reg, scored, gen, head)
     stamp_problems: list[str] = []
