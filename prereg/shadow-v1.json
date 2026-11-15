@@ -1,0 +1,111 @@
+{
+  "id": "shadow-v1",
+  "title": "Singles-only shadow team-strength baseline (pre-registered, forecasts only)",
+  "status": "registered; forecasts recorded before first kickoff of the covered games",
+  "scope": "Singles (single game, side or total-free) win-probability forecasts only. No stakes, no prices, no staking, no parlays. Shadow only: it is not a betting strategy and cannot be promoted by its own record.",
+  "kickoff_cutoff_utc": "2026-11-20T01:15:00Z",
+  "kickoff_cutoff_note": "First Week 11 kickoff: Thursday 19 Nov 2026, 8:15 PM ET (IND at HOU; official game centre https://www.nfl.com/games/colts-at-texans-2026-reg-11). Forecasts for Week 11 must be committed before this instant.",
+  "corpus": {
+    "file": "data/shadow/corpus_v1.csv",
+    "sha256": "f2a0b171786571556197275871efbec16227a8869e422f8437e34a6c87d5d652",
+    "n_games": 137,
+    "rule": "every 2026 regular-season final in the file: weeks 1-10 (137 games). Sources: nfl.com week pages (source_url on each row). Week 10 games not yet played at registration (13 of 14) are excluded and enter only in a later, separately labelled record.",
+    "neutral_rule_training": "a game is neutral when its official week-page note contains 'International'. Games with that note: 2026_REG_1_SF_LA, 2026_REG_3_BAL_DAL, 2026_REG_4_IND_WAS, 2026_REG_5_PHI_JAX, 2026_REG_6_HOU_JAX, 2026_REG_7_PIT_NO, 2026_REG_9_CIN_ATL."
+  },
+  "fixtures": {
+    "file": "data/shadow/week11_venues.csv",
+    "sha256": "60a7ec71d417310b8b5c65534733c045dfd8f7dfdf776f56b61448e3f4411e64",
+    "n_games": 13,
+    "rule": "the 13 Week 11 games; teams, dates and kickoffs cross-checked to data/model/snapshot.json (13/13, one code difference AZ vs ARI, flag CAP-05). Venues are transcribed from the official game centre 'Game Info' block."
+  },
+  "code_file": "tools/shadow_forecast.py",
+  "code_sha256": "bd50f7767f59e264c0cbd543ccaec2b07a08102614c2f3cec9020badcfb125fd",
+  "model": {
+    "type": "ridge margin model (ratings + home-field term), standard library only",
+    "equation": "margin_home = b * h + (r_home - r_away)",
+    "h": "1 unless the game is neutral (see corpus.neutral_rule_training and the forecast neutral rule: official game-centre location outside the United States => neutral)",
+    "penalty_lambda": 4.0,
+    "penalty_on": "club ratings only; the home-field term b is unpenalised",
+    "lambda_rule": "fixed here before any Week 11 result exists; not tuned on the corpus; any change is shadow-v2",
+    "sigma": "sqrt(SSE / n) of in-sample residuals on the corpus (a single number for all games)",
+    "win_probability": "P(home win) = Phi(margin_home / sigma). Ties are not modelled.",
+    "fixture_context_recorded_not_used": [
+      "rest days from official schedule dates",
+      "short week (rest <= 4 days)",
+      "division game (official nfl.com division groupings)",
+      "venue and neutral flag shown; neutral flag IS used in h"
+    ],
+    "market_inputs": "none. No betting line, price or third-party odds enters the model or the record."
+  },
+  "benchmarks": {
+    "coin": "P(home win) = 0.5",
+    "control_random": {
+      "rule": "a seeded pick of home or away per game",
+      "seed": 20261115
+    },
+    "control_favourite_record": {
+      "rule": "the side with the higher win percentage (ties count 0.5) over the corpus at registration; ties between the two sides go to the home side",
+      "source": "the corpus itself (no market data)"
+    }
+  },
+  "outputs_recorded_per_game": [
+    "p_home_win",
+    "predicted_margin_home",
+    "r_home",
+    "r_away",
+    "home_field_term_b",
+    "sigma",
+    "lambda",
+    "h",
+    "neutral_site",
+    "venue (official)",
+    "benchmark picks",
+    "corpus and fixture sha256",
+    "code sha256"
+  ],
+  "scoring_rule_after_results": {
+    "score": "Brier score on P(home win) against the official final (1 home win, 0 otherwise)",
+    "skill": "1 - Brier(model) / Brier(benchmark), for coin and for control_favourite_record",
+    "uncertainty": "game-cluster bootstrap by week (1000 resamples, seed 20261115), 95% interval",
+    "minimum_sample_for_any_claim": 40
+  },
+  "gates": {
+    "G-SH1 record integrity": "each game's forecast is committed before that game's kickoff. A record committed after kickoff is marked 'late' and is never scored as a forecast.",
+    "G-SH2 reproducibility": "python3 tools/shadow_forecast.py --check reproduces data/shadow/forecasts_week11_v1.json byte for byte",
+    "G-SH3 input integrity": "the corpus, fixture and code sha256 in the record equal the registration; the tool refuses to run otherwise",
+    "G-SH4 benchmark-relative skill": "after >= 40 graded games: lower 95% bound of skill vs coin AND vs control_favourite_record is above 0. Not yet evaluated (no graded games)."
+  },
+  "demotion_gate_pr07": {
+    "applies_to": "any strategy that moves from paper to stakes (none exists today; shadow-v1 cannot stake)",
+    "demote_to_paper_if_any": [
+      "graded sample >= 40 games and the lower 95% bound of skill vs coin is below 0",
+      "a registered input (corpus, fixtures, code) is missing, edited or hash-mismatched for any scored game",
+      "two consecutive scoring weeks with negative point-estimate skill vs control_favourite_record",
+      "a forecast committed after kickoff is found in the scored set (G-SH1)"
+    ],
+    "status": "proposed values, fixed at this commit before any result exists; a change needs a new commit that is logged on COORDINATION.md"
+  },
+  "what_would_change_our_mind": {
+    "toward_keeping_shadow_v1_as_benchmark": [
+      "skill vs coin and vs control_favourite_record has a lower 95% bound above 0 after 40 graded games",
+      "predicted probabilities agree with outcomes within the bins (calibration slope between 0.8 and 1.2 proposed)"
+    ],
+    "toward_retiring_shadow_v1": [
+      "lower 95% bound of skill vs control_favourite_record below 0 after 40 graded games",
+      "calibration slope below 0.5 or above 1.5 (proposed)",
+      "any G-SH1 or G-SH3 failure"
+    ]
+  },
+  "sources": {
+    "results": [
+      "https://www.nfl.com/schedules/2026/by-week/week-1 ... week-9 (games_2026.csv source_url column)",
+      "https://www.nfl.com/schedules/2026/by-week/week-10 (WAS-NYG final)"
+    ],
+    "fixtures_and_venues": [
+      "https://www.nfl.com/schedules/2026/by-week/week-11",
+      "https://www.nfl.com/games/<away>-at-<home>-2026-reg-11 (13 game centres, listed in week11_venues.csv)"
+    ],
+    "divisions": "https://www.nfl.com/standings/division/2026/REG (referee/data/official/nflcom_divisions_2026.txt)",
+    "second_source_check": "data/s9cb/games.csv (nflverse, third party): 137 of 137 scores agree; used only as a check"
+  }
+}
