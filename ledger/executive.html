@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Executive summary · NFL Origination Ledger</title>
+<style>
+:root{--bg:#0f1116;--card:#171a21;--line:#242a35;--ink:#e8edf5;--dim:#9aa7ba;
+--ok:#3fb950;--warn:#d29922;--bad:#f85149;--acc:#58a6ff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+header{border-bottom:1px solid var(--line);background:#0b0d12;position:sticky;top:0;z-index:5}
+nav{max-width:1180px;margin:0 auto;padding:10px 18px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
+nav .brand{font-weight:700;letter-spacing:.2px;color:#fff;margin-right:8px}
+nav a{font-size:13px;color:var(--dim);padding:4px 2px}
+nav a.on{color:#fff;border-bottom:2px solid var(--acc)}
+main{max-width:1180px;margin:0 auto;padding:26px 18px 60px}
+h1{font-size:26px;margin:0 0 6px}
+h2{font-size:18px;margin:34px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+h3{font-size:15px;margin:22px 0 8px;color:#cfd8e5}
+p{color:#c8d2e0;max-width:80ch}
+.lead{color:var(--dim);font-size:14px;margin:0 0 18px;max-width:90ch}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:14px 0}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px}
+.kpi .v{font-size:24px;font-weight:700}
+.kpi .l{font-size:12px;color:var(--dim);margin-top:2px}
+.kpi .s{font-size:11px;color:#7b8798;margin-top:6px}
+table{width:100%;border-collapse:collapse;margin:10px 0 18px;font-size:13px;background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+th{background:#1d222c;text-align:left;padding:8px 10px;font-weight:600;color:#cfd8e5;border-bottom:1px solid var(--line);font-size:12px;white-space:nowrap}
+td{padding:8px 10px;border-bottom:1px solid #1e242e;vertical-align:top}
+tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#1b202a}
+.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.ok{color:var(--ok)}.warn{color:var(--warn)}.bad{color:var(--bad)}.dim{color:var(--dim)}
+.tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:999px;border:1px solid var(--line);color:var(--dim);white-space:nowrap}
+.tag.ok{color:var(--ok);border-color:#1f6f33}
+.tag.warn{color:var(--warn);border-color:#6b5312}
+.tag.bad{color:var(--bad);border-color:#7a2723}
+.note{background:#141821;border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:8px;padding:12px 14px;margin:14px 0}
+.note.warn{border-left-color:var(--warn)}
+.note.bad{border-left-color:var(--bad)}
+.scroll{overflow-x:auto;border-radius:8px}
+footer{border-top:1px solid var(--line);color:var(--dim);font-size:12px;max-width:1180px;margin:0 auto;padding:18px}
+.blank{color:#5d6675;font-style:italic}
+code{background:#1d222c;padding:1px 5px;border-radius:4px;font-size:12px}
+ul{color:#c8d2e0}
+</style></head>
+<body>
+<header><nav><span class="brand">NFL Origination Ledger</span><a class="" href="index.html">Overview</a><a class="on" href="executive.html">Executive summary</a><a class="" href="decisions.html">Requirements: can we decide yet?</a><a class="" href="strategies.html">Strategy competition</a><a class="" href="lines.html">Own lines &amp; price store</a><a class="" href="injuries.html">Injuries &amp; replacement</a><a class="" href="verification.html">Verification</a><a class="" href="flagged.html">Flagged for review</a><a class="" href="suggestions.html">Suggestions</a></nav></header>
+<main>
+
+<h1>Executive summary</h1>
+<p class="lead">What holds up, what does not, what is missing, and what a human has to decide.
+Every sentence below is backed by a row on another page of this site.</p>
+
+<h2>1. The finding</h2>
+<div class="note bad">
+<p style="margin-top:0"><strong>An own-made NFL number did not beat the closing line, and the test
+was built so that it could have said otherwise.</strong></p>
+<p>The model is the simple team-strength model the brief asks for: a ridge fit of one strength
+number per club plus home field and rest, refitted for every week on earlier weeks only. Scored
+against the de-vigged closing moneyline on 5,187 games it scores a Brier of
+<span class="">0.2255</span> against the market's <span class="">0.2109</span>. The difference
+is <span class="">0.0146</span> with a game-cluster 95% interval of
+[0.01157, 0.01778], entirely on the wrong side of zero.</p>
+<p>Twelve bet rules were pre-registered. None passed all ten gates. The single rule with a real
+in-sample edge (own line vs close by 4+ points, <span class="">2.32%</span> over
+1,650 decided bets) fails multiple testing (q = <span class="">0.987</span>),
+fails the untouched holdout, and its game-cluster interval
+[-0.02403, 0.06872] straddles zero. That is what a lucky run looks like, not what
+an edge looks like.</p>
+</div>
+
+<h2>2. The controls that make the finding credible</h2>
+<div class="scroll"><table>
+<thead><tr><th>Rule</th><th>What it does</th><th>n decided</th><th>Hit rate</th><th>Break-even</th><th>ROI</th><th>95% CI (game cluster)</th><th>Status</th><th>Source</th></tr></thead><tbody>
+<tr><strong>C84-S1</strong>blind away<td class="num"><span class="">5,067</span></td><td class="num"><span class="">0.5135</span></td><td class="num"><span class="">0.5136</span></td><td class="num"><span class="">0.09%</span></td><td class="num">[-0.0242, 0.0265]</td><td><span class="tag ">CONTROL</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com schedules (closing lines)</a></td></tr>
+<tr><strong>C84-S2</strong>blind home<td class="num"><span class="">5,067</span></td><td class="num"><span class="">0.4865</span></td><td class="num"><span class="">0.5135</span></td><td class="num"><span class="">-5.06%</span></td><td class="num">[-0.07647, -0.02555]</td><td><span class="tag ">CONTROL</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com schedules (closing lines)</a></td></tr>
+</tbody></table></div>
+
+<div class="note">
+<strong>Why a blind rule matters.</strong> Over the same sample, betting the away side in every
+single game returns <span class="">0.09%</span>, while betting the home
+side in every single game returns <span class="">-5.06%</span>. Those two
+numbers bracket what "no information" looks like on this sample, and eleven of the twelve
+signals land inside that bracket. A rule that cannot beat "bet every away team" has not been
+shown to contain information.
+</div>
+
+<h2>3. The availability question, answered by ablation rather than assertion</h2>
+<p>The brief asks for injury and personnel features and then asks for them to be tested by
+ablation rather than by imposing a points penalty. The ablation is on
+<a href="injuries.html">the injuries page</a>: the identical model is refitted with and without
+the two availability columns.</p>
+<table>
+<thead><tr><th>Measure</th><th class="num">With availability</th><th class="num">Without</th><th>Reading</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>Mean absolute error, points</td><td class="num"><span class="">10.7453</span></td>
+<td class="num"><span class="">10.7446</span></td>
+<td>Difference <span class="">0.0007</span>, interval
+[-0.02263, 0.02163]</td><td><a href="https://www.nfl.com/injuries/" rel="noopener">nfl.com injury report</a></td></tr>
+</tbody></table>
+<p>The availability features add nothing measurable: the interval on the difference contains zero. That is a measured answer, not a preference: the features are in the model
+and they earn their place or they do not. Here they do not.</p>
+
+<h2>4. What is missing, and why each gap is a gap</h2>
+<table>
+<thead><tr><th>Missing</th><th>Why it matters</th><th>What would close it</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>An opening line</td><td>Without an open and a close no line-movement study is possible, and
+the price snapshot store the brief asks for cannot be built</td>
+<td>A timestamped two-snapshot price source, captured on a schedule</td>
+<td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com schedules</a></td></td></tr>
+<tr><td>A prop price</td><td>Player-prop ROI cannot be computed, so props can never be ranked or
+used as a parlay leg</td><td>An observed prop price with a timestamp</td>
+<td><td><a href="https://www.nfl.com/stats/player-stats/" rel="noopener">nfl.com player stats</a></td></td></tr>
+<tr><td>Confirmed starters below quarterback</td><td>10,000 starts are
+confirmed for quarterbacks. For line and secondary there is no committed confirmed-starter or
+snap-count feed, so a 2nd-string lineman replacing a starter cannot be confirmed, only guessed</td>
+<td>An official snap-count feed, or Game Books captured on a schedule</td>
+<td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com game centre</a></td></td></tr>
+<tr><td>Retained availability snapshots over time</td><td>The brief asks to replay practice
+designations "as they were known". One capture cannot do that</td><td>Scheduled daily captures with
+hashes, which is an Actions job and is not run by this session</td>
+<td><td><a href="https://www.nfl.com/injuries/league/2026/reg10" rel="noopener">nfl.com Week 10 report</a></td></td></tr>
+<tr><td>A bootstrapped interval on the staking side</td><td>Signal and staking are now separated,
+but the staking leg has no independent evidence yet</td><td>A prospective escrow of realised returns</td>
+<td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com schedules</a></td></td></tr>
+</tbody></table>
+
+<h2>5. What a human must decide</h2>
+<table>
+<thead><tr><th>Decision</th><th>Options</th><th>Recommended</th><th>Blocked by</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>Is a third-party price parse acceptable as the price of record?</td>
+<td>Accept it, labelled unofficial · buy a licensed feed · publish no ROI at all</td>
+<td>Keep it, labelled, until a licensed feed exists — the label is already on every page</td>
+<td>Nothing. This is a policy choice.</td>
+<td><a href="https://github.com/nflverse/nflverse-data">nflverse-data (unofficial price parse)</a></td></tr>
+<tr><td>Does the project stop originating, or reframe as measurement?</td>
+<td>Keep originating and accept the negative result · reframe as a priced-research ledger · stop</td>
+<td>Reframe. The negative result is the asset: it is reproducible and it is honest.</td>
+<td>Nothing. This is a policy choice.</td>
+<td><a href="strategies.html">this site's strategy page</a> (internal, no external source)</td></tr>
+<tr><td>Which of the two conflicting gate schemes is canonical?</td>
+<td>The 8-gate scheme in <code>data/s9cb</code> · the 10-gate scheme registered here</td>
+<td>The 10-gate scheme, because only it exists with a pre-registration hash</td>
+<td>Nothing, but the choice must be recorded.</td>
+<td><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/session-c84a41a4/preregistration.json">preregistration.json</a></td></tr>
+</tbody></table>
+<p class="dim">The full list of requirement-level blockers, with the number that would clear each,
+is on <a href="decisions.html">Requirements</a>.</p>
+
+</main>
+<footer>
+Built 2026-11-15 from committed files only. Every row links to the source that settles it.
+Static strings, no scripts, no fonts, no analytics. Session <code>c84a41a4-nfl1</code>.
+Prices are a third-party parse of an unofficial market and are labelled as such; the NFL
+publishes no odds.
+</footer>
+</body></html>

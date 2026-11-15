@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Flagged for review · NFL Origination Ledger</title>
+<style>
+:root{--bg:#0f1116;--card:#171a21;--line:#242a35;--ink:#e8edf5;--dim:#9aa7ba;
+--ok:#3fb950;--warn:#d29922;--bad:#f85149;--acc:#58a6ff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+header{border-bottom:1px solid var(--line);background:#0b0d12;position:sticky;top:0;z-index:5}
+nav{max-width:1180px;margin:0 auto;padding:10px 18px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
+nav .brand{font-weight:700;letter-spacing:.2px;color:#fff;margin-right:8px}
+nav a{font-size:13px;color:var(--dim);padding:4px 2px}
+nav a.on{color:#fff;border-bottom:2px solid var(--acc)}
+main{max-width:1180px;margin:0 auto;padding:26px 18px 60px}
+h1{font-size:26px;margin:0 0 6px}
+h2{font-size:18px;margin:34px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+h3{font-size:15px;margin:22px 0 8px;color:#cfd8e5}
+p{color:#c8d2e0;max-width:80ch}
+.lead{color:var(--dim);font-size:14px;margin:0 0 18px;max-width:90ch}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:14px 0}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px}
+.kpi .v{font-size:24px;font-weight:700}
+.kpi .l{font-size:12px;color:var(--dim);margin-top:2px}
+.kpi .s{font-size:11px;color:#7b8798;margin-top:6px}
+table{width:100%;border-collapse:collapse;margin:10px 0 18px;font-size:13px;background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+th{background:#1d222c;text-align:left;padding:8px 10px;font-weight:600;color:#cfd8e5;border-bottom:1px solid var(--line);font-size:12px;white-space:nowrap}
+td{padding:8px 10px;border-bottom:1px solid #1e242e;vertical-align:top}
+tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#1b202a}
+.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.ok{color:var(--ok)}.warn{color:var(--warn)}.bad{color:var(--bad)}.dim{color:var(--dim)}
+.tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:999px;border:1px solid var(--line);color:var(--dim);white-space:nowrap}
+.tag.ok{color:var(--ok);border-color:#1f6f33}
+.tag.warn{color:var(--warn);border-color:#6b5312}
+.tag.bad{color:var(--bad);border-color:#7a2723}
+.note{background:#141821;border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:8px;padding:12px 14px;margin:14px 0}
+.note.warn{border-left-color:var(--warn)}
+.note.bad{border-left-color:var(--bad)}
+.scroll{overflow-x:auto;border-radius:8px}
+footer{border-top:1px solid var(--line);color:var(--dim);font-size:12px;max-width:1180px;margin:0 auto;padding:18px}
+.blank{color:#5d6675;font-style:italic}
+code{background:#1d222c;padding:1px 5px;border-radius:4px;font-size:12px}
+ul{color:#c8d2e0}
+</style></head>
+<body>
+<header><nav><span class="brand">NFL Origination Ledger</span><a class="" href="index.html">Overview</a><a class="" href="executive.html">Executive summary</a><a class="" href="decisions.html">Requirements: can we decide yet?</a><a class="" href="strategies.html">Strategy competition</a><a class="" href="lines.html">Own lines &amp; price store</a><a class="" href="injuries.html">Injuries &amp; replacement</a><a class="" href="verification.html">Verification</a><a class="on" href="flagged.html">Flagged for review</a><a class="" href="suggestions.html">Suggestions</a></nav></header>
+<main>
+
+<h1>Flagged for review</h1>
+<p class="lead">11 items. Nothing here blocks the site from publishing; everything here
+is something a human should look at before acting on any number. Several entries contradict
+claims in the project brief itself, and in those cases the live official page is quoted.</p>
+<div class="note bad">
+<strong>Three of these are my own errors</strong> (C84-F09, C84-F11 and the sign convention noted
+on the lines page). They are published because a page that only lists other people's mistakes is
+not a verification page.
+</div>
+
+<div class="scroll"><table>
+<thead><tr><th>ID</th><th>What is irregular</th><th>Why it matters</th><th>Status</th><th>Settles it</th></tr></thead><tbody>
+<tr><td><code>C84-F01</code></td><td>The brief&#x27;s claim that Baltimore still publishes Lamar Jackson and Tyler Huntley at QB is no longer true.</td><td>The live chart lists Jacoby Brissett (rank 1), Joe Fagnano, Kedon Slovis. A stale-depth-chart complaint cannot be reproduced today, and any feature built on that assumption would be built on a false premise.</td><td><span class="tag ">open</span></td><td><a href="https://www.baltimoreravens.com/team/depth-chart" rel="noopener">baltimoreravens.com/team/depth-chart</a></td></tr>
+<tr><td><code>C84-F02</code></td><td>The brief&#x27;s claim that 149 club/unit/position slots list more than one rank-1 player is not reproducible from the committed data.</td><td>data/session-1505ac8e/depth_charts.json has 934 slots and ZERO with more than one rank-1 player assigned. The shared slot is real on the live pages (Seattle publishes &#x27;Cooper Kupp Rashid Shaheed&#x27; inside ONE cell) but the parser stores it as one merged string, which destroys the information rather than recording it. A feature that needs rank-1 groups cannot be built from this file.</td><td><span class="tag ">open</span></td><td><a href="https://www.seahawks.com/team/depth-chart/" rel="noopener">seahawks.com/team/depth-chart/</a></td></tr>
+<tr><td><code>C84-F03</code></td><td>The brief calls the Texans an image-only chart and the Packers a jersey-number chart; only the second is fixable by parsing, and the first has no legitimate fix.</td><td>Houston publishes its chart only as an image, so any transcription is by eye. Green Bay&#x27;s page does prepend jersey numbers (&#x27;9 Christian Watson&#x27;), but the committed JSON already stores them stripped, so the &#x27;number stripping&#x27; fix the brief asks for is already applied downstream and its 59-cell count does not match this file.</td><td><span class="tag ">open</span></td><td><a href="https://www.packers.com/team/depth-chart" rel="noopener">packers.com/team/depth-chart</a></td></tr>
+<tr><td><code>C84-F04</code></td><td>Only 1 of 32 club charts carries a date, so no chart can be versioned against a roster event.</td><td>The brief asks for depth, availability and lineup evidence to be versioned against the last official roster event. 31 charts carry no as_of date, so the only date available is this repository&#x27;s own capture date, which is not the club&#x27;s date.</td><td><span class="tag ">open</span></td><td><a href="https://www.nfl.com/teams/" rel="noopener">nfl.com/teams/</a></td></tr>
+<tr><td><code>C84-F05</code></td><td>The brief&#x27;s claim that 6 of 254 report rows carry a game designation is superseded by the current capture.</td><td>The committed capture holds 347 rows, 171 of which carry a game designation (70 Out, 90 Questionable, 11 Doubtful). The 254/6 figures are stale, and they are stale in the direction that made the injury signal look emptier than it is.</td><td><span class="tag ">open</span></td><td><a href="https://www.nfl.com/injuries/league/2026/reg10" rel="noopener">nfl.com/injuries/league/2026/reg10</a></td></tr>
+<tr><td><code>C84-F06</code></td><td>The brief&#x27;s claim that Seattle and Cincinnati are shown as injury-free is contradicted by the current capture.</td><td>Both clubs publish full sections: Seattle 15 rows, Cincinnati 4 rows in the live capture. Any page still printing &#x27;No Injuries Reported&#x27; for them is reading an older file.</td><td><span class="tag ">open</span></td><td><a href="https://www.nfl.com/injuries/league/2026/reg10" rel="noopener">nfl.com/injuries/league/2026/reg10</a></td></tr>
+<tr><td><code>C84-F07</code></td><td>The two gate schemes in this repository are incompatible and neither is declared canonical.</td><td>data/s9cb uses 8 gates numbered G1-G8 (200-bet floor, BH at 0.05). This session registered 10 gates numbered C84-G1..G10 (300-bet floor, adds a control-beating gate and a delete-the-best-season gate). A reviewer comparing two &#x27;gate counts&#x27; is comparing two different things.</td><td><span class="tag ">open</span></td><td><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json" rel="noopener">github.com/kanlerxz87-cyber/NFL1/blob/main/…</a></td></tr>
+<tr><td><code>C84-F08</code></td><td>The brief&#x27;s opening premise of a 136-game log is not the corpus this study uses, and the two must not be mixed.</td><td>The 136-game log is the 2026 season slice in data/verified/model/predictions_log.json. This study uses 5,336 decided games from 2006-2026. Mixing them would let a 136-game result be quoted as if it came from a 5,336-game test.</td><td><span class="tag ">open</span></td><td><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/verified/model/predictions_log.json" rel="noopener">github.com/kanlerxz87-cyber/NFL1/blob/main/…</a></td></tr>
+<tr><td><code>C84-F09</code></td><td>I made three errors in my own first draft of the pre-registration and in my first implementation, and they are recorded here rather than quietly corrected.</td><td>(a) The registration text said &#x27;if spread_line &lt;= -7.5 bet the away side&#x27; while also calling the rule the repository&#x27;s S7, which bets the HOME side; the sign convention had been stated backwards. (b) The first implementation negated the moneyline probability, inverting every M3 probability and producing a Brier of 0.314 instead of 0.226. (c) The first design matrix had a dimension error that the fit itself raised. Errors (b) and (c) were caught by results that contradicted the repository&#x27;s independent run; (a) was caught by re-reading the live numbers. The registration text is NOT edited; the correction is published here because editing a registration after results exist would destroy its only value.</td><td><span class="tag ">open</span></td><td><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/session-c84a41a4/preregistration.json" rel="noopener">github.com/kanlerxz87-cyber/NFL1/blob/main/…</a></td></tr>
+<tr><td><code>C84-F10</code></td><td>No official NFL price exists, and every ROI on every page of this repository therefore rests on an unofficial market.</td><td>The NFL publishes no odds. The prices used are a third-party parse. This is not fixable by better verification; it is a property of the source. Every page states it, and the requirement is carried as Blocked rather than Done.</td><td><span class="tag ">open</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com/schedules/</a></td></tr>
+<tr><td><code>C84-F11</code></td><td>The moneyline rule&#x27;s hit rate is below its own break-even by construction and that is expected, not a defect.</td><td>C84-S7 bets only when the model&#x27;s probability exceeds the price-implied probability by 4 points, which selects long-shot sides by design; its hit rate of 0.3519 against a break-even of 0.3505 is therefore the arithmetic working, not an error. It is left in the published leaderboard because suppressing it would be selecting the results.</td><td><span class="tag ">open</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com/schedules/</a></td></tr>
+</tbody></table></div>
+
+<h2>What would close each of these</h2>
+<table>
+<thead><tr><th>Flag</th><th>Closing action</th><th>Owner</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>C84-F01</td><td>Re-capture every club chart on one day and diff against this file</td><td>data pipeline</td><td><a href="https://www.baltimoreravens.com/team/depth-chart">baltimoreravens.com</a></td></tr>
+<tr><td>C84-F02</td><td>Store a shared slot as a LIST of rank-1 players, never as one string</td><td>depth parser</td><td><a href="https://www.seahawks.com/team/depth-chart/">seahawks.com</a></td></tr>
+<tr><td>C84-F03</td><td>Houston: obtain an authorised structured source or leave it blank forever</td><td>policy choice</td><td><a href="https://www.houstontexans.com/team/depth-chart">texans.com</a></td></tr>
+<tr><td>C84-F04</td><td>Capture the club's own date when it exists; otherwise record the capture time and label it</td><td>depth parser</td><td><a href="https://www.packers.com/team/depth-chart">packers.com (only dated chart)</a></td></tr>
+<tr><td>C84-F05 / F06</td><td>Delete the stale 254-row file or label it superseded in place</td><td>data pipeline</td><td><a href="https://www.nfl.com/injuries/league/2026/reg10">nfl.com Week 10 report</a></td></tr>
+<tr><td>C84-F07</td><td>Declare one gate scheme canonical and print the other as historical</td><td>human decision</td><td><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json">8-gate scheme</a></td></tr>
+<tr><td>C84-F08</td><td>Rename the 136-game file so it cannot be mistaken for the corpus</td><td>data pipeline</td><td><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/verified/model/predictions_log.json">136-game log</a></td></tr>
+<tr><td>C84-F09</td><td>Nothing further; the correction is the record</td><td>closed on publication</td><td><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/session-c84a41a4/preregistration.json">registration (unmodified)</a></td></tr>
+<tr><td>C84-F10</td><td>Buy a licensed price feed, or accept the label permanently</td><td>human decision</td><td><a href="https://github.com/nflverse/nflverse-data">nflverse-data</a></td></tr>
+<tr><td>C84-F11</td><td>Nothing; keep publishing it</td><td>closed on publication</td><td><a href="https://www.nfl.com/schedules/">nfl.com schedules</a></td></tr>
+</tbody></table>
+
+</main>
+<footer>
+Built 2026-11-15 from committed files only. Every row links to the source that settles it.
+Static strings, no scripts, no fonts, no analytics. Session <code>c84a41a4-nfl1</code>.
+Prices are a third-party parse of an unofficial market and are labelled as such; the NFL
+publishes no odds.
+</footer>
+</body></html>

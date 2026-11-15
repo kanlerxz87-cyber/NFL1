@@ -1,0 +1,4766 @@
+{
+ "generated_at": "2026-11-15T12:58:24+00:00",
+ "session": "c84a41a4-nfl1",
+ "registration": {
+  "file": "data/session-c84a41a4/preregistration.json",
+  "sha256": "839293d8a001ab2f7bfe3c1a7db3137b5273f14e336329f080e7ef46a0bf7539",
+  "version": "C84-PREREG-1",
+  "declared_before_results": true
+ },
+ "inputs": {
+  "games": {
+   "sha256": "483beddbdf226901b903ccc6e84f3dbc38df05110bc53a92eb63da8ec44f054f"
+  },
+  "injuries": {
+   "sha256": "ed8371b71a72a0a5d465730d24d022bb38a9914eb162e92b6c274aea96dafdfb"
+  },
+  "player_week": {
+   "sha256": "94c7470ad9f1bb04be1f4e94f85d563e17601d2408f4e41361c8b7efef424249"
+  }
+ },
+ "official_sources": {
+  "schedules": "https://www.nfl.com/schedules/",
+  "injuries": "https://www.nfl.com/injuries/",
+  "stats": "https://www.nfl.com/stats/player-stats/"
+ },
+ "sample": {
+  "seasons": [
+   2006,
+   2026
+  ],
+  "games_in_window": 5471,
+  "games_played": 5336,
+  "games_with_spread_price": 5228,
+  "games_with_total_price": 5226,
+  "games_with_moneyline": 5228,
+  "bet_rows_scored": 26299,
+  "corpus_note": "The committed extract is all REG games from the source; it does not hold every game ever played (5,336 decided games in the 2006-2026 window here). The brief's '136-game log' is the 2026 season slice in data/verified/model/predictions_log.json and is a separate, smaller corpus kept for continuity; this study does not use it as its sample.",
+  "excluded_for_missing_price": {
+   "spread": 268
+  },
+  "price_coverage_note": "Seasons 1999-2005 carry no two-sided price and are excluded by the registered sample rule. No price is imputed.",
+  "orientation_note": "spread_line is the canonical closing line with the HOME side signed positive, so a negative line means the home club is favoured. With hfa ~ 1.7 points, own_spread_home = -8.6 in BUF @ NYJ means the model makes the HOME club (NYJ) an 8.6-point favourite, i.e. the model and the close (NYJ -8.5) agree. This convention is printed on the site because reading it the other way inverts every edge."
+ },
+ "own_line_fit": {
+  "half_life_weeks": 24.0,
+  "ridge": 8.0,
+  "sd_margin": 13.7465,
+  "n_teams": 35,
+  "blocks": 363,
+  "params_margin": 39,
+  "params_total": 36,
+  "use_avail": true,
+  "design": "margin = hfa + rest_coef*rest_diff + net[home] - net[away]; total = intercept + pace[home] + pace[away]"
+ },
+ "strategies": {
+  "C84-S1": {
+   "n_bets": 5202,
+   "n_decided": 5067,
+   "n_pushes": 135,
+   "wins": 2602,
+   "hit_rate": 0.5135,
+   "break_even_hit_rate": 0.5136,
+   "profit_units": 4.896,
+   "roi_pct": 0.094,
+   "t_stat": 0.0705,
+   "p_value": 0.943794,
+   "roi_ci95_game_cluster": [
+    -0.0242,
+    0.0265
+   ],
+   "season_table": [
+    {
+     "season": 2006,
+     "n_bets": 209,
+     "roi_pct": -0.183
+    },
+    {
+     "season": 2007,
+     "n_bets": 255,
+     "roi_pct": -4.705
+    },
+    {
+     "season": 2008,
+     "n_bets": 185,
+     "roi_pct": 13.074
+    },
+    {
+     "season": 2009,
+     "n_bets": 242,
+     "roi_pct": 4.563
+    },
+    {
+     "season": 2010,
+     "n_bets": 256,
+     "roi_pct": -0.012
+    },
+    {
+     "season": 2011,
+     "n_bets": 256,
+     "roi_pct": -1.044
+    },
+    {
+     "season": 2012,
+     "n_bets": 256,
+     "roi_pct": 4.053
+    },
+    {
+     "season": 2013,
+     "n_bets": 256,
+     "roi_pct": -7.861
+    },
+    {
+     "season": 2014,
+     "n_bets": 256,
+     "roi_pct": -0.309
+    },
+    {
+     "season": 2015,
+     "n_bets": 256,
+     "roi_pct": 5.481
+    },
+    {
+     "season": 2016,
+     "n_bets": 256,
+     "roi_pct": -0.111
+    },
+    {
+     "season": 2017,
+     "n_bets": 255,
+     "roi_pct": -6.516
+    },
+    {
+     "season": 2018,
+     "n_bets": 256,
+     "roi_pct": 1.21
+    },
+    {
+     "season": 2019,
+     "n_bets": 256,
+     "roi_pct": 10.567
+    },
+    {
+     "season": 2020,
+     "n_bets": 256,
+     "roi_pct": -2.142
+    },
+    {
+     "season": 2021,
+     "n_bets": 272,
+     "roi_pct": 1.006
+    },
+    {
+     "season": 2022,
+     "n_bets": 271,
+     "roi_pct": -1.436
+    },
+    {
+     "season": 2023,
+     "n_bets": 272,
+     "roi_pct": -3.552
+    },
+    {
+     "season": 2024,
+     "n_bets": 272,
+     "roi_pct": -6.38
+    },
+    {
+     "season": 2025,
+     "n_bets": 272,
+     "roi_pct": -3.972
+    },
+    {
+     "season": 2026,
+     "n_bets": 137,
+     "roi_pct": 9.102
+    }
+   ],
+   "holdout_2024_2026": {
+    "n_bets": 681,
+    "roi_pct": -2.304
+   },
+   "stability_positive_fraction": 0.381,
+   "seasons_evaluated": 21,
+   "best_season": {
+    "season": 2008,
+    "n_bets": 185,
+    "roi_pct": 13.074
+   },
+   "roi_without_best_season_pct": -0.384,
+   "beats_control": 0.0
+  },
+  "C84-S2": {
+   "n_bets": 5202,
+   "n_decided": 5067,
+   "n_pushes": 135,
+   "wins": 2465,
+   "hit_rate": 0.4865,
+   "break_even_hit_rate": 0.5135,
+   "profit_units": -263.007,
+   "roi_pct": -5.056,
+   "t_stat": -3.788,
+   "p_value": 0.000152,
+   "roi_ci95_game_cluster": [
+    -0.07647,
+    -0.02555
+   ],
+   "season_table": [
+    {
+     "season": 2006,
+     "n_bets": 209,
+     "roi_pct": -2.993
+    },
+    {
+     "season": 2007,
+     "n_bets": 255,
+     "roi_pct": 0.542
+    },
+    {
+     "season": 2008,
+     "n_bets": 185,
+     "roi_pct": -16.156
+    },
+    {
+     "season": 2009,
+     "n_bets": 242,
+     "roi_pct": -8.58
+    },
+    {
+     "season": 2010,
+     "n_bets": 256,
+     "roi_pct": -2.913
+    },
+    {
+     "season": 2011,
+     "n_bets": 256,
+     "roi_pct": -2.551
+    },
+    {
+     "season": 2012,
+     "n_bets": 256,
+     "roi_pct": -6.94
+    },
+    {
+     "season": 2013,
+     "n_bets": 256,
+     "roi_pct": 3.646
+    },
+    {
+     "season": 2014,
+     "n_bets": 256,
+     "roi_pct": -3.705
+    },
+    {
+     "season": 2015,
+     "n_bets": 256,
+     "roi_pct": -9.382
+    },
+    {
+     "season": 2016,
+     "n_bets": 256,
+     "roi_pct": -4.302
+    },
+    {
+     "season": 2017,
+     "n_bets": 255,
+     "roi_pct": 1.963
+    },
+    {
+     "season": 2018,
+     "n_bets": 256,
+     "roi_pct": -5.785
+    },
+    {
+     "season": 2019,
+     "n_bets": 256,
+     "roi_pct": -15.36
+    },
+    {
+     "season": 2020,
+     "n_bets": 256,
+     "roi_pct": -3.254
+    },
+    {
+     "season": 2021,
+     "n_bets": 272,
+     "roi_pct": -6.09
+    },
+    {
+     "season": 2022,
+     "n_bets": 271,
+     "roi_pct": -3.616
+    },
+    {
+     "season": 2023,
+     "n_bets": 272,
+     "roi_pct": -4.948
+    },
+    {
+     "season": 2024,
+     "n_bets": 272,
+     "roi_pct": -2.053
+    },
+    {
+     "season": 2025,
+     "n_bets": 272,
+     "roi_pct": -5.037
+    },
+    {
+     "season": 2026,
+     "n_bets": 137,
+     "roi_pct": -17.508
+    }
+   ],
+   "holdout_2024_2026": {
+    "n_bets": 681,
+    "roi_pct": -6.354
+   },
+   "stability_positive_fraction": 0.143,
+   "seasons_evaluated": 21,
+   "best_season": {
+    "season": 2013,
+    "n_bets": 256,
+    "roi_pct": 3.646
+   },
+   "roi_without_best_season_pct": -5.506,
+   "beats_control": -5.15
+  },
+  "C84-S3": {
+   "n_bets": 3182,
+   "n_decided": 3097,
+   "n_pushes": 85,
+   "wins": 1594,
+   "hit_rate": 0.5147,
+   "break_even_hit_rate": 0.5153,
+   "profit_units": -1.328,
+   "roi_pct": -0.042,
+   "t_stat": -0.0245,
+   "p_value": 0.980417,
+   "roi_ci95_game_cluster": [
+    -0.03449,
+    0.03439
+   ],
+   "season_table": [
+    {
+     "season": 2006,
+     "n_bets": 120,
+     "roi_pct": 18.665
+    },
+    {
+     "season": 2007,
+     "n_bets": 169,
+     "roi_pct": -2.604
+    },
+    {
+     "season": 2008,
+     "n_bets": 113,
+     "roi_pct": 1.674
+    },
+    {
+     "season": 2009,
+     "n_bets": 142,
+     "roi_pct": 3.96
+    },
+    {
+     "season": 2010,
+     "n_bets": 125,
+     "roi_pct": -1.908
+    },
+    {
+     "season": 2011,
+     "n_bets": 144,
+     "roi_pct": 1.024
+    },
+    {
+     "season": 2012,
+     "n_bets": 162,
+     "roi_pct": -6.865
+    },
+    {
+     "season": 2013,
+     "n_bets": 166,
+     "roi_pct": -3.242
+    },
+    {
+     "season": 2014,
+     "n_bets": 129,
+     "roi_pct": 1.937
+    },
+    {
+     "season": 2015,
+     "n_bets": 159,
+     "roi_pct": 2.767
+    },
+    {
+     "season": 2016,
+     "n_bets": 171,
+     "roi_pct": -1.202
+    },
+    {
+     "season": 2017,
+     "n_bets": 167,
+     "roi_pct": -2.366
+    },
+    {
+     "season": 2018,
+     "n_bets": 155,
+     "roi_pct": 1.796
+    },
+    {
+     "season": 2019,
+     "n_bets": 164,
+     "roi_pct": 3.49
+    },
+    {
+     "season": 2020,
+     "n_bets": 178,
+     "roi_pct": 5.006
+    },
+    {
+     "season": 2021,
+     "n_bets": 193,
+     "roi_pct": 2.77
+    },
+    {
+     "season": 2022,
+     "n_bets": 166,
+     "roi_pct": -4.037
+    },
+    {
+     "season": 2023,
+     "n_bets": 166,
+     "roi_pct": -2.175
+    },
+    {
+     "season": 2024,
+     "n_bets": 158,
+     "roi_pct": -3.567
+    },
+    {
+     "season": 2025,
+     "n_bets": 164,
+     "roi_pct": -7.589
+    },
+    {
+     "season": 2026,
+     "n_bets": 71,
+     "roi_pct": -6.604
+    }
+   ],
+   "holdout_2024_2026": {
+    "n_bets": 393,
+    "roi_pct": -5.794
+   },
+   "stability_positive_fraction": 0.476,
+   "seasons_evaluated": 21,
+   "best_season": {
+    "season": 2006,
+    "n_bets": 120,
+    "roi_pct": 18.665
+   },
+   "roi_without_best_season_pct": -0.775,
+   "beats_control": -0.136
+  },
+  "C84-S4": {
+   "n_bets": 1690,
+   "n_decided": 1650,
+   "n_pushes": 40,
+   "wins": 872,
+   "hit_rate": 0.5285,
+   "break_even_hit_rate": 0.5161,
+   "profit_units": 39.133,
+   "roi_pct": 2.316,
+   "t_stat": 0.9948,
+   "p_value": 0.319832,
+   "roi_ci95_game_cluster": [
+    -0.02403,
+    0.06872
+   ],
+   "season_table": [
+    {
+     "season": 2006,
+     "n_bets": 58,
+     "roi_pct": 14.021
+    },
+    {
+     "season": 2007,
+     "n_bets": 102,
+     "roi_pct": -0.021
+    },
+    {
+     "season": 2008,
+     "n_bets": 70,
+     "roi_pct": -1.688
+    },
+    {
+     "season": 2009,
+     "n_bets": 65,
+     "roi_pct": 9.768
+    },
+    {
+     "season": 2010,
+     "n_bets": 65,
+     "roi_pct": 5.226
+    },
+    {
+     "season": 2011,
+     "n_bets": 78,
+     "roi_pct": 2.104
+    },
+    {
+     "season": 2012,
+     "n_bets": 74,
+     "roi_pct": -10.077
+    },
+    {
+     "season": 2013,
+     "n_bets": 100,
+     "roi_pct": -0.681
+    },
+    {
+     "season": 2014,
+     "n_bets": 49,
+     "roi_pct": 26.517
+    },
+    {
+     "season": 2015,
+     "n_bets": 83,
+     "roi_pct": 19.865
+    },
+    {
+     "season": 2016,
+     "n_bets": 73,
+     "roi_pct": -6.549
+    },
+    {
+     "season": 2017,
+     "n_bets": 86,
+     "roi_pct": 2.356
+    },
+    {
+     "season": 2018,
+     "n_bets": 86,
+     "roi_pct": -2.407
+    },
+    {
+     "season": 2019,
+     "n_bets": 85,
+     "roi_pct": 1.713
+    },
+    {
+     "season": 2020,
+     "n_bets": 107,
+     "roi_pct": 6.188
+    },
+    {
+     "season": 2021,
+     "n_bets": 118,
+     "roi_pct": 2.227
+    },
+    {
+     "season": 2022,
+     "n_bets": 101,
+     "roi_pct": 0.154
+    },
+    {
+     "season": 2023,
+     "n_bets": 87,
+     "roi_pct": -12.798
+    },
+    {
+     "season": 2024,
+     "n_bets": 99,
+     "roi_pct": 1.681
+    },
+    {
+     "season": 2025,
+     "n_bets": 79,
+     "roi_pct": 0.236
+    },
+    {
+     "season": 2026,
+     "n_bets": 25,
+     "roi_pct": 10.883
+    }
+   ],
+   "holdout_2024_2026": {
+    "n_bets": 203,
+    "roi_pct": 2.252
+   },
+   "stability_positive_fraction": 0.667,
+   "seasons_evaluated": 21,
+   "best_season": {
+    "season": 2014,
+    "n_bets": 49,
+    "roi_pct": 26.517
+   },
+   "roi_without_best_season_pct": 1.593,
+   "beats_control": 2.222
+  },
+  "C84-S5": {
+   "n_bets": 2243,
+   "n_decided": 2210,
+   "n_pushes": 33,
+   "wins": 1134,
+   "hit_rate": 0.5131,
+   "break_even_hit_rate": 0.5146,
+   "profit_units": -4.597,
+   "roi_pct": -0.205,
+   "t_stat": -0.1005,
+   "p_value": 0.919945,
+   "roi_ci95_game_cluster": [
+    -0.04341,
+    0.03844
+   ],
+   "season_table": [
+    {
+     "season": 2006,
+     "n_bets": 111,
+     "roi_pct": -2.729
+    },
+    {
+     "season": 2007,
+     "n_bets": 103,
+     "roi_pct": -4.445
+    },
+    {
+     "season": 2008,
+     "n_bets": 75,
+     "roi_pct": 20.586
+    },
+    {
+     "season": 2009,
+     "n_bets": 83,
+     "roi_pct": 20.557
+    },
+    {
+     "season": 2010,
+     "n_bets": 96,
+     "roi_pct": 4.844
+    },
+    {
+     "season": 2011,
+     "n_bets": 121,
+     "roi_pct": -4.06
+    },
+    {
+     "season": 2012,
+     "n_bets": 113,
+     "roi_pct": 10.247
+    },
+    {
+     "season": 2013,
+     "n_bets": 100,
+     "roi_pct": 2.909
+    },
+    {
+     "season": 2014,
+     "n_bets": 96,
+     "roi_pct": 1.062
+    },
+    {
+     "season": 2015,
+     "n_bets": 94,
+     "roi_pct": -7.599
+    },
+    {
+     "season": 2016,
+     "n_bets": 129,
+     "roi_pct": -16.086
+    },
+    {
+     "season": 2017,
+     "n_bets": 116,
+     "roi_pct": 8.953
+    },
+    {
+     "season": 2018,
+     "n_bets": 137,
+     "roi_pct": 3.21
+    },
+    {
+     "season": 2019,
+     "n_bets": 98,
+     "roi_pct": 4.184
+    },
+    {
+     "season": 2020,
+     "n_bets": 136,
+     "roi_pct": -6.811
+    },
+    {
+     "season": 2021,
+     "n_bets": 119,
+     "roi_pct": 4.645
+    },
+    {
+     "season": 2022,
+     "n_bets": 124,
+     "roi_pct": -8.62
+    },
+    {
+     "season": 2023,
+     "n_bets": 115,
+     "roi_pct": -2.045
+    },
+    {
+     "season": 2024,
+     "n_bets": 108,
+     "roi_pct": -8.123
+    },
+    {
+     "season": 2025,
+     "n_bets": 99,
+     "roi_pct": 0.692
+    },
+    {
+     "season": 2026,
+     "n_bets": 70,
+     "roi_pct": -15.515
+    }
+   ],
+   "holdout_2024_2026": {
+    "n_bets": 277,
+    "roi_pct": -6.841
+   },
+   "stability_positive_fraction": 0.524,
+   "seasons_evaluated": 21,
+   "best_season": {
+    "season": 2008,
+    "n_bets": 75,
+    "roi_pct": 20.586
+   },
+   "roi_without_best_season_pct": -0.924,
+   "beats_control": -0.299
+  },
+  "C84-S6": {
+   "n_bets": 1091,
+   "n_decided": 1075,
+   "n_pushes": 16,
+   "wins": 551,
+   "hit_rate": 0.5126,
+   "break_even_hit_rate": 0.5141,
+   "profit_units": -1.362,
+   "roi_pct": -0.125,
+   "t_stat": -0.0426,
+   "p_value": 0.966006,
+   "roi_ci95_game_cluster": [
+    -0.05698,
+    0.05498
+   ],
+   "season_table": [
+    {
+     "season": 2006,
+     "n_bets": 63,
+     "roi_pct": -1.752
+    },
+    {
+     "season": 2007,
+     "n_bets": 45,
+     "roi_pct": -1.663
+    },
+    {
+     "season": 2008,
+     "n_bets": 31,
+     "roi_pct": 23.36
+    },
+    {
+     "season": 2009,
+     "n_bets": 30,
+     "roi_pct": 15.928
+    },
+    {
+     "season": 2010,
+     "n_bets": 28,
+     "roi_pct": 26.306
+    },
+    {
+     "season": 2011,
+     "n_bets": 63,
+     "roi_pct": -6.892
+    },
+    {
+     "season": 2012,
+     "n_bets": 47,
+     "roi_pct": 4.129
+    },
+    {
+     "season": 2013,
+     "n_bets": 46,
+     "roi_pct": -3.86
+    },
+    {
+     "season": 2014,
+     "n_bets": 38,
+     "roi_pct": 13.414
+    },
+    {
+     "season": 2015,
+     "n_bets": 43,
+     "roi_pct": 8.967
+    },
+    {
+     "season": 2016,
+     "n_bets": 48,
+     "roi_pct": -5.945
+    },
+    {
+     "season": 2017,
+     "n_bets": 57,
+     "roi_pct": 9.418
+    },
+    {
+     "season": 2018,
+     "n_bets": 89,
+     "roi_pct": 13.223
+    },
+    {
+     "season": 2019,
+     "n_bets": 47,
+     "roi_pct": 16.985
+    },
+    {
+     "season": 2020,
+     "n_bets": 100,
+     "roi_pct": -2.743
+    },
+    {
+     "season": 2021,
+     "n_bets": 59,
+     "roi_pct": -6.555
+    },
+    {
+     "season": 2022,
+     "n_bets": 68,
+     "roi_pct": -14.483
+    },
+    {
+     "season": 2023,
+     "n_bets": 57,
+     "roi_pct": -7.746
+    },
+    {
+     "season": 2024,
+     "n_bets": 55,
+     "roi_pct": -16.869
+    },
+    {
+     "season": 2025,
+     "n_bets": 48,
+     "roi_pct": -12.227
+    },
+    {
+     "season": 2026,
+     "n_bets": 29,
+     "roi_pct": -34.197
+    }
+   ],
+   "holdout_2024_2026": {
+    "n_bets": 132,
+    "roi_pct": -18.988
+   },
+   "stability_positive_fraction": 0.429,
+   "seasons_evaluated": 21,
+   "best_season": {
+    "season": 2010,
+    "n_bets": 28,
+    "roi_pct": 26.306
+   },
+   "roi_without_best_season_pct": -0.821,
+   "beats_control": -0.219
+  },
+  "C84-S7": {
+   "n_bets": 3587,
+   "n_decided": 3578,
+   "n_pushes": 9,
+   "wins": 1259,
+   "hit_rate": 0.3519,
+   "break_even_hit_rate": 0.3505,
+   "profit_units": -42.062,
+   "roi_pct": -1.173,
+   "t_stat": -0.4629,
+   "p_value": 0.643457,
+   "roi_ci95_game_cluster": [
+    -0.05968,
+    0.0407
+   ],
+   "season_table": [
+    {
+     "season": 2006,
+     "n_bets": 164,
+     "roi_pct": 44.794
+    },
+    {
+     "season": 2007,
+     "n_bets": 196,
+     "roi_pct": -14.087
+    },
+    {
+     "season": 2008,
+     "n_bets": 134,
+     "roi_pct": -7.489
+    },
+    {
+     "season": 2009,
+     "n_bets": 174,
+     "roi_pct": 7.601
+    },
+    {
+     "season": 2010,
+     "n_bets": 149,
+     "roi_pct": 1.436
+    },
+    {
+     "season": 2011,
+     "n_bets": 178,
+     "roi_pct": -3.08
+    },
+    {
+     "season": 2012,
+     "n_bets": 176,
+     "roi_pct": -15.528
+    },
+    {
+     "season": 2013,
+     "n_bets": 188,
+     "roi_pct": -4.192
+    },
+    {
+     "season": 2014,
+     "n_bets": 161,
+     "roi_pct": 7.697
+    },
+    {
+     "season": 2015,
+     "n_bets": 172,
+     "roi_pct": 8.573
+    },
+    {
+     "season": 2016,
+     "n_bets": 178,
+     "roi_pct": -3.622
+    },
+    {
+     "season": 2017,
+     "n_bets": 185,
+     "roi_pct": -9.313
+    },
+    {
+     "season": 2018,
+     "n_bets": 174,
+     "roi_pct": 11.276
+    },
+    {
+     "season": 2019,
+     "n_bets": 175,
+     "roi_pct": -5.116
+    },
+    {
+     "season": 2020,
+     "n_bets": 195,
+     "roi_pct": -13.283
+    },
+    {
+     "season": 2021,
+     "n_bets": 207,
+     "roi_pct": 6.193
+    },
+    {
+     "season": 2022,
+     "n_bets": 181,
+     "roi_pct": -16.495
+    },
+    {
+     "season": 2023,
+     "n_bets": 173,
+     "roi_pct": 0.707
+    },
+    {
+     "season": 2024,
+     "n_bets": 175,
+     "roi_pct": -18.106
+    },
+    {
+     "season": 2025,
+     "n_bets": 177,
+     "roi_pct": -3.343
+    },
+    {
+     "season": 2026,
+     "n_bets": 75,
+     "roi_pct": 16.849
+    }
+   ],
+   "holdout_2024_2026": {
+    "n_bets": 427,
+    "roi_pct": -5.847
+   },
+   "stability_positive_fraction": 0.429,
+   "seasons_evaluated": 21,
+   "best_season": {
+    "season": 2006,
+    "n_bets": 164,
+    "roi_pct": 44.794
+   },
+   "roi_without_best_season_pct": -3.375,
+   "beats_control": -1.267
+  },
+  "C84-S9": {
+   "n_bets": 887,
+   "n_decided": 874,
+   "n_pushes": 13,
+   "wins": 412,
+   "hit_rate": 0.4714,
+   "break_even_hit_rate": 0.5132,
+   "profit_units": -70.375,
+   "roi_pct": -7.934,
+   "t_stat": -2.4419,
+   "p_value": 0.014612,
+   "roi_ci95_game_cluster": [
+    -0.14458,
+    -0.01382
+   ],
+   "season_table": [
+    {
+     "season": 2006,
+     "n_bets": 102,
+     "roi_pct": -9.646
+    },
+    {
+     "season": 2007,
+     "n_bets": 112,
+     "roi_pct": -17.006
+    },
+    {
+     "season": 2008,
+     "n_bets": 44,
+     "roi_pct": -5.636
+    },
+    {
+     "season": 2009,
+     "n_bets": 64,
+     "roi_pct": -10.808
+    },
+    {
+     "season": 2010,
+     "n_bets": 64,
+     "roi_pct": -12.687
+    },
+    {
+     "season": 2011,
+     "n_bets": 66,
+     "roi_pct": -3.625
+    },
+    {
+     "season": 2012,
+     "n_bets": 43,
+     "roi_pct": -12.382
+    },
+    {
+     "season": 2013,
+     "n_bets": 21,
+     "roi_pct": -15.724
+    },
+    {
+     "season": 2014,
+     "n_bets": 12,
+     "roi_pct": 45.799
+    },
+    {
+     "season": 2015,
+     "n_bets": 10,
+     "roi_pct": -42.389
+    },
+    {
+     "season": 2016,
+     "n_bets": 23,
+     "roi_pct": -15.341
+    },
+    {
+     "season": 2017,
+     "n_bets": 43,
+     "roi_pct": -3.871
+    },
+    {
+     "season": 2018,
+     "n_bets": 26,
+     "roi_pct": -1.111
+    },
+    {
+     "season": 2019,
+     "n_bets": 31,
+     "roi_pct": -6.135
+    },
+    {
+     "season": 2020,
+     "n_bets": 3,
+     "roi_pct": 30.581
+    },
+    {
+     "season": 2021,
+     "n_bets": 14,
+     "roi_pct": -1.27
+    },
+    {
+     "season": 2022,
+     "n_bets": 49,
+     "roi_pct": 0.818
+    },
+    {
+     "season": 2023,
+     "n_bets": 74,
+     "roi_pct": -5.705
+    },
+    {
+     "season": 2024,
+     "n_bets": 39,
+     "roi_pct": -21.972
+    },
+    {
+     "season": 2025,
+     "n_bets": 31,
+     "roi_pct": -0.889
+    },
+    {
+     "season": 2026,
+     "n_bets": 16,
+     "roi_pct": 31.863
+    }
+   ],
+   "holdout_2024_2026": {
+    "n_bets": 86,
+    "roi_pct": -4.356
+   },
+   "stability_positive_fraction": 0.062,
+   "seasons_evaluated": 16,
+   "best_season": {
+    "season": 2014,
+    "n_bets": 12,
+    "roi_pct": 45.799
+   },
+   "roi_without_best_season_pct": -8.671,
+   "beats_control": -8.028
+  },
+  "C84-S12": {
+   "n_bets": 1103,
+   "n_decided": 1076,
+   "n_pushes": 27,
+   "wins": 555,
+   "hit_rate": 0.5158,
+   "break_even_hit_rate": 0.5135,
+   "profit_units": 5.373,
+   "roi_pct": 0.487,
+   "t_stat": 0.1679,
+   "p_value": 0.866641,
+   "roi_ci95_game_cluster": [
+    -0.04965,
+    0.06237
+   ],
+   "season_table": [
+    {
+     "season": 2006,
+     "n_bets": 41,
+     "roi_pct": 13.064
+    },
+    {
+     "season": 2007,
+     "n_bets": 44,
+     "roi_pct": -3.106
+    },
+    {
+     "season": 2008,
+     "n_bets": 36,
+     "roi_pct": 33.556
+    },
+    {
+     "season": 2009,
+     "n_bets": 43,
+     "roi_pct": -5.638
+    },
+    {
+     "season": 2010,
+     "n_bets": 45,
+     "roi_pct": 9.249
+    },
+    {
+     "season": 2011,
+     "n_bets": 50,
+     "roi_pct": -0.035
+    },
+    {
+     "season": 2012,
+     "n_bets": 59,
+     "roi_pct": -1.68
+    },
+    {
+     "season": 2013,
+     "n_bets": 62,
+     "roi_pct": -8.617
+    },
+    {
+     "season": 2014,
+     "n_bets": 54,
+     "roi_pct": -28.77
+    },
+    {
+     "season": 2015,
+     "n_bets": 57,
+     "roi_pct": 11.703
+    },
+    {
+     "season": 2016,
+     "n_bets": 62,
+     "roi_pct": 16.736
+    },
+    {
+     "season": 2017,
+     "n_bets": 58,
+     "roi_pct": -3.242
+    },
+    {
+     "season": 2018,
+     "n_bets": 56,
+     "roi_pct": -6.873
+    },
+    {
+     "season": 2019,
+     "n_bets": 59,
+     "roi_pct": -11.049
+    },
+    {
+     "season": 2020,
+     "n_bets": 54,
+     "roi_pct": -5.831
+    },
+    {
+     "season": 2021,
+     "n_bets": 57,
+     "roi_pct": 5.943
+    },
+    {
+     "season": 2022,
+     "n_bets": 55,
+     "roi_pct": 2.728
+    },
+    {
+     "season": 2023,
+     "n_bets": 56,
+     "roi_pct": 13.265
+    },
+    {
+     "season": 2024,
+     "n_bets": 65,
+     "roi_pct": -14.862
+    },
+    {
+     "season": 2025,
+     "n_bets": 58,
+     "roi_pct": -8.377
+    },
+    {
+     "season": 2026,
+     "n_bets": 32,
+     "roi_pct": 31.266
+    }
+   ],
+   "holdout_2024_2026": {
+    "n_bets": 155,
+    "roi_pct": -2.912
+   },
+   "stability_positive_fraction": 0.429,
+   "seasons_evaluated": 21,
+   "best_season": {
+    "season": 2008,
+    "n_bets": 36,
+    "roi_pct": 33.556
+   },
+   "roi_without_best_season_pct": -0.629,
+   "beats_control": 0.393
+  },
+  "C84-S8": {
+   "n_bets": 401,
+   "n_decided": 394,
+   "n_pushes": 7,
+   "wins": 175,
+   "hit_rate": 0.4442,
+   "break_even_hit_rate": 0.5041,
+   "profit_units": -46.751,
+   "roi_pct": -11.659,
+   "t_stat": -2.3829,
+   "p_value": 0.017177,
+   "roi_ci95_game_cluster": [
+    -0.2127,
+    -0.0225
+   ],
+   "season_table": [
+    {
+     "season": 2006,
+     "n_bets": 11,
+     "roi_pct": -45.238
+    },
+    {
+     "season": 2007,
+     "n_bets": 24,
+     "roi_pct": -17.574
+    },
+    {
+     "season": 2008,
+     "n_bets": 18,
+     "roi_pct": 13.129
+    },
+    {
+     "season": 2009,
+     "n_bets": 28,
+     "roi_pct": -21.445
+    },
+    {
+     "season": 2010,
+     "n_bets": 10,
+     "roi_pct": -21.113
+    },
+    {
+     "season": 2011,
+     "n_bets": 22,
+     "roi_pct": -40.931
+    },
+    {
+     "season": 2012,
+     "n_bets": 12,
+     "roi_pct": 10.174
+    },
+    {
+     "season": 2013,
+     "n_bets": 15,
+     "roi_pct": 19.026
+    },
+    {
+     "season": 2014,
+     "n_bets": 19,
+     "roi_pct": -15.358
+    },
+    {
+     "season": 2015,
+     "n_bets": 14,
+     "roi_pct": 0.828
+    },
+    {
+     "season": 2016,
+     "n_bets": 11,
+     "roi_pct": 46.228
+    },
+    {
+     "season": 2017,
+     "n_bets": 19,
+     "roi_pct": -4.332
+    },
+    {
+     "season": 2018,
+     "n_bets": 20,
+     "roi_pct": 16.118
+    },
+    {
+     "season": 2019,
+     "n_bets": 23,
+     "roi_pct": 29.666
+    },
+    {
+     "season": 2020,
+     "n_bets": 34,
+     "roi_pct": -17.837
+    },
+    {
+     "season": 2021,
+     "n_bets": 32,
+     "roi_pct": -14.261
+    },
+    {
+     "season": 2022,
+     "n_bets": 20,
+     "roi_pct": -45.713
+    },
+    {
+     "season": 2023,
+     "n_bets": 19,
+     "roi_pct": -10.077
+    },
+    {
+     "season": 2024,
+     "n_bets": 17,
+     "roi_pct": -32.971
+    },
+    {
+     "season": 2025,
+     "n_bets": 27,
+     "roi_pct": -36.43
+    },
+    {
+     "season": 2026,
+     "n_bets": 6,
+     "roi_pct": -20.907
+    }
+   ],
+   "holdout_2024_2026": {
+    "n_bets": 50,
+    "roi_pct": -33.391
+   },
+   "stability_positive_fraction": 0.222,
+   "seasons_evaluated": 9,
+   "best_season": {
+    "season": 2016,
+    "n_bets": 11,
+    "roi_pct": 46.228
+   },
+   "roi_without_best_season_pct": -13.291,
+   "beats_control": -11.753
+  },
+  "C84-S10": {
+   "n_bets": 683,
+   "n_decided": 661,
+   "n_pushes": 22,
+   "wins": 340,
+   "hit_rate": 0.5144,
+   "break_even_hit_rate": 0.516,
+   "profit_units": -2.009,
+   "roi_pct": -0.294,
+   "t_stat": -0.0805,
+   "p_value": 0.93584,
+   "roi_ci95_game_cluster": [
+    -0.07047,
+    0.0639
+   ],
+   "season_table": [
+    {
+     "season": 2016,
+     "n_bets": 72,
+     "roi_pct": -8.149
+    },
+    {
+     "season": 2017,
+     "n_bets": 55,
+     "roi_pct": 5.269
+    },
+    {
+     "season": 2018,
+     "n_bets": 57,
+     "roi_pct": 3.875
+    },
+    {
+     "season": 2019,
+     "n_bets": 67,
+     "roi_pct": 2.392
+    },
+    {
+     "season": 2020,
+     "n_bets": 54,
+     "roi_pct": -5.084
+    },
+    {
+     "season": 2021,
+     "n_bets": 62,
+     "roi_pct": -2.263
+    },
+    {
+     "season": 2022,
+     "n_bets": 70,
+     "roi_pct": -18.28
+    },
+    {
+     "season": 2023,
+     "n_bets": 64,
+     "roi_pct": 3.371
+    },
+    {
+     "season": 2024,
+     "n_bets": 65,
+     "roi_pct": 12.673
+    },
+    {
+     "season": 2025,
+     "n_bets": 80,
+     "roi_pct": -3.652
+    },
+    {
+     "season": 2026,
+     "n_bets": 37,
+     "roi_pct": 17.894
+    }
+   ],
+   "holdout_2024_2026": {
+    "n_bets": 182,
+    "roi_pct": 6.559
+   },
+   "stability_positive_fraction": 0.545,
+   "seasons_evaluated": 11,
+   "best_season": {
+    "season": 2026,
+    "n_bets": 37,
+    "roi_pct": 17.894
+   },
+   "roi_without_best_season_pct": -1.336,
+   "beats_control": -0.388
+  },
+  "C84-S11": {
+   "n_bets": 1028,
+   "n_decided": 1002,
+   "n_pushes": 26,
+   "wins": 518,
+   "hit_rate": 0.517,
+   "break_even_hit_rate": 0.5171,
+   "profit_units": 0.499,
+   "roi_pct": 0.049,
+   "t_stat": 0.0163,
+   "p_value": 0.987017,
+   "roi_ci95_game_cluster": [
+    -0.05979,
+    0.06198
+   ],
+   "season_table": [
+    {
+     "season": 2016,
+     "n_bets": 82,
+     "roi_pct": -5.971
+    },
+    {
+     "season": 2017,
+     "n_bets": 83,
+     "roi_pct": 8.459
+    },
+    {
+     "season": 2018,
+     "n_bets": 76,
+     "roi_pct": 18.899
+    },
+    {
+     "season": 2019,
+     "n_bets": 91,
+     "roi_pct": -11.385
+    },
+    {
+     "season": 2020,
+     "n_bets": 88,
+     "roi_pct": -4.338
+    },
+    {
+     "season": 2021,
+     "n_bets": 107,
+     "roi_pct": 4.196
+    },
+    {
+     "season": 2022,
+     "n_bets": 100,
+     "roi_pct": -5.005
+    },
+    {
+     "season": 2023,
+     "n_bets": 109,
+     "roi_pct": -2.931
+    },
+    {
+     "season": 2024,
+     "n_bets": 112,
+     "roi_pct": 7.531
+    },
+    {
+     "season": 2025,
+     "n_bets": 128,
+     "roi_pct": -3.944
+    },
+    {
+     "season": 2026,
+     "n_bets": 52,
+     "roi_pct": -2.86
+    }
+   ],
+   "holdout_2024_2026": {
+    "n_bets": 292,
+    "roi_pct": 0.65
+   },
+   "stability_positive_fraction": 0.364,
+   "seasons_evaluated": 11,
+   "best_season": {
+    "season": 2018,
+    "n_bets": 76,
+    "roi_pct": 18.899
+   },
+   "roi_without_best_season_pct": -1.456,
+   "beats_control": -0.045
+  }
+ },
+ "gates": {
+  "C84-S1": {
+   "q_value": null,
+   "control": true,
+   "checks": [
+    {
+     "gate": "C84-G1",
+     "rule": "an observed price on every scored bet",
+     "pass": true
+    },
+    {
+     "gate": "C84-G2",
+     "rule": "pre-game information only: newest fit block is earlier than the priced game",
+     "pass": true
+    },
+    {
+     "gate": "C84-G3",
+     "rule": "at least 300 decided bets",
+     "pass": true
+    },
+    {
+     "gate": "C84-G4",
+     "rule": "hit rate beats the price-implied break-even",
+     "pass": false
+    },
+    {
+     "gate": "C84-G5",
+     "rule": "survives BH over the 10-rule scored family",
+     "pass": false
+    },
+    {
+     "gate": "C84-G6",
+     "rule": "positive in the untouched 2024-2026 holdout",
+     "pass": false
+    },
+    {
+     "gate": "C84-G7",
+     "rule": "positive in >= 60% of seasons with >= 20 bets",
+     "pass": false
+    },
+    {
+     "gate": "C84-G8",
+     "rule": "game-cluster 95% interval on ROI excludes zero",
+     "pass": false
+    },
+    {
+     "gate": "C84-G9",
+     "rule": "beats the information-free control",
+     "pass": false
+    },
+    {
+     "gate": "C84-G10",
+     "rule": "edge survives deleting the best season",
+     "pass": false
+    }
+   ],
+   "gates_passed": 3,
+   "gates_total": 10,
+   "promoted": false,
+   "status": "CONTROL"
+  },
+  "C84-S2": {
+   "q_value": null,
+   "control": true,
+   "checks": [
+    {
+     "gate": "C84-G1",
+     "rule": "an observed price on every scored bet",
+     "pass": true
+    },
+    {
+     "gate": "C84-G2",
+     "rule": "pre-game information only: newest fit block is earlier than the priced game",
+     "pass": true
+    },
+    {
+     "gate": "C84-G3",
+     "rule": "at least 300 decided bets",
+     "pass": true
+    },
+    {
+     "gate": "C84-G4",
+     "rule": "hit rate beats the price-implied break-even",
+     "pass": false
+    },
+    {
+     "gate": "C84-G5",
+     "rule": "survives BH over the 10-rule scored family",
+     "pass": false
+    },
+    {
+     "gate": "C84-G6",
+     "rule": "positive in the untouched 2024-2026 holdout",
+     "pass": false
+    },
+    {
+     "gate": "C84-G7",
+     "rule": "positive in >= 60% of seasons with >= 20 bets",
+     "pass": false
+    },
+    {
+     "gate": "C84-G8",
+     "rule": "game-cluster 95% interval on ROI excludes zero",
+     "pass": false
+    },
+    {
+     "gate": "C84-G9",
+     "rule": "beats the information-free control",
+     "pass": false
+    },
+    {
+     "gate": "C84-G10",
+     "rule": "edge survives deleting the best season",
+     "pass": false
+    }
+   ],
+   "gates_passed": 3,
+   "gates_total": 10,
+   "promoted": false,
+   "status": "CONTROL"
+  },
+  "C84-S3": {
+   "q_value": 0.987017,
+   "control": false,
+   "checks": [
+    {
+     "gate": "C84-G1",
+     "rule": "an observed price on every scored bet",
+     "pass": true
+    },
+    {
+     "gate": "C84-G2",
+     "rule": "pre-game information only: newest fit block is earlier than the priced game",
+     "pass": true
+    },
+    {
+     "gate": "C84-G3",
+     "rule": "at least 300 decided bets",
+     "pass": true
+    },
+    {
+     "gate": "C84-G4",
+     "rule": "hit rate beats the price-implied break-even",
+     "pass": false
+    },
+    {
+     "gate": "C84-G5",
+     "rule": "survives BH over the 10-rule scored family",
+     "pass": false
+    },
+    {
+     "gate": "C84-G6",
+     "rule": "positive in the untouched 2024-2026 holdout",
+     "pass": false
+    },
+    {
+     "gate": "C84-G7",
+     "rule": "positive in >= 60% of seasons with >= 20 bets",
+     "pass": false
+    },
+    {
+     "gate": "C84-G8",
+     "rule": "game-cluster 95% interval on ROI excludes zero",
+     "pass": false
+    },
+    {
+     "gate": "C84-G9",
+     "rule": "beats the information-free control",
+     "pass": false
+    },
+    {
+     "gate": "C84-G10",
+     "rule": "edge survives deleting the best season",
+     "pass": false
+    }
+   ],
+   "gates_passed": 3,
+   "gates_total": 10,
+   "promoted": false,
+   "status": "PAPER"
+  },
+  "C84-S4": {
+   "q_value": 0.987017,
+   "control": false,
+   "checks": [
+    {
+     "gate": "C84-G1",
+     "rule": "an observed price on every scored bet",
+     "pass": true
+    },
+    {
+     "gate": "C84-G2",
+     "rule": "pre-game information only: newest fit block is earlier than the priced game",
+     "pass": true
+    },
+    {
+     "gate": "C84-G3",
+     "rule": "at least 300 decided bets",
+     "pass": true
+    },
+    {
+     "gate": "C84-G4",
+     "rule": "hit rate beats the price-implied break-even",
+     "pass": true
+    },
+    {
+     "gate": "C84-G5",
+     "rule": "survives BH over the 10-rule scored family",
+     "pass": false
+    },
+    {
+     "gate": "C84-G6",
+     "rule": "positive in the untouched 2024-2026 holdout",
+     "pass": true
+    },
+    {
+     "gate": "C84-G7",
+     "rule": "positive in >= 60% of seasons with >= 20 bets",
+     "pass": true
+    },
+    {
+     "gate": "C84-G8",
+     "rule": "game-cluster 95% interval on ROI excludes zero",
+     "pass": false
+    },
+    {
+     "gate": "C84-G9",
+     "rule": "beats the information-free control",
+     "pass": true
+    },
+    {
+     "gate": "C84-G10",
+     "rule": "edge survives deleting the best season",
+     "pass": true
+    }
+   ],
+   "gates_passed": 8,
+   "gates_total": 10,
+   "promoted": false,
+   "status": "PAPER"
+  },
+  "C84-S5": {
+   "q_value": 0.987017,
+   "control": false,
+   "checks": [
+    {
+     "gate": "C84-G1",
+     "rule": "an observed price on every scored bet",
+     "pass": true
+    },
+    {
+     "gate": "C84-G2",
+     "rule": "pre-game information only: newest fit block is earlier than the priced game",
+     "pass": true
+    },
+    {
+     "gate": "C84-G3",
+     "rule": "at least 300 decided bets",
+     "pass": true
+    },
+    {
+     "gate": "C84-G4",
+     "rule": "hit rate beats the price-implied break-even",
+     "pass": false
+    },
+    {
+     "gate": "C84-G5",
+     "rule": "survives BH over the 10-rule scored family",
+     "pass": false
+    },
+    {
+     "gate": "C84-G6",
+     "rule": "positive in the untouched 2024-2026 holdout",
+     "pass": false
+    },
+    {
+     "gate": "C84-G7",
+     "rule": "positive in >= 60% of seasons with >= 20 bets",
+     "pass": false
+    },
+    {
+     "gate": "C84-G8",
+     "rule": "game-cluster 95% interval on ROI excludes zero",
+     "pass": false
+    },
+    {
+     "gate": "C84-G9",
+     "rule": "beats the information-free control",
+     "pass": false
+    },
+    {
+     "gate": "C84-G10",
+     "rule": "edge survives deleting the best season",
+     "pass": false
+    }
+   ],
+   "gates_passed": 3,
+   "gates_total": 10,
+   "promoted": false,
+   "status": "PAPER"
+  },
+  "C84-S6": {
+   "q_value": 0.987017,
+   "control": false,
+   "checks": [
+    {
+     "gate": "C84-G1",
+     "rule": "an observed price on every scored bet",
+     "pass": true
+    },
+    {
+     "gate": "C84-G2",
+     "rule": "pre-game information only: newest fit block is earlier than the priced game",
+     "pass": true
+    },
+    {
+     "gate": "C84-G3",
+     "rule": "at least 300 decided bets",
+     "pass": true
+    },
+    {
+     "gate": "C84-G4",
+     "rule": "hit rate beats the price-implied break-even",
+     "pass": false
+    },
+    {
+     "gate": "C84-G5",
+     "rule": "survives BH over the 10-rule scored family",
+     "pass": false
+    },
+    {
+     "gate": "C84-G6",
+     "rule": "positive in the untouched 2024-2026 holdout",
+     "pass": false
+    },
+    {
+     "gate": "C84-G7",
+     "rule": "positive in >= 60% of seasons with >= 20 bets",
+     "pass": false
+    },
+    {
+     "gate": "C84-G8",
+     "rule": "game-cluster 95% interval on ROI excludes zero",
+     "pass": false
+    },
+    {
+     "gate": "C84-G9",
+     "rule": "beats the information-free control",
+     "pass": false
+    },
+    {
+     "gate": "C84-G10",
+     "rule": "edge survives deleting the best season",
+     "pass": false
+    }
+   ],
+   "gates_passed": 3,
+   "gates_total": 10,
+   "promoted": false,
+   "status": "PAPER"
+  },
+  "C84-S7": {
+   "q_value": 0.987017,
+   "control": false,
+   "checks": [
+    {
+     "gate": "C84-G1",
+     "rule": "an observed price on every scored bet",
+     "pass": true
+    },
+    {
+     "gate": "C84-G2",
+     "rule": "pre-game information only: newest fit block is earlier than the priced game",
+     "pass": true
+    },
+    {
+     "gate": "C84-G3",
+     "rule": "at least 300 decided bets",
+     "pass": true
+    },
+    {
+     "gate": "C84-G4",
+     "rule": "hit rate beats the price-implied break-even",
+     "pass": true
+    },
+    {
+     "gate": "C84-G5",
+     "rule": "survives BH over the 10-rule scored family",
+     "pass": false
+    },
+    {
+     "gate": "C84-G6",
+     "rule": "positive in the untouched 2024-2026 holdout",
+     "pass": false
+    },
+    {
+     "gate": "C84-G7",
+     "rule": "positive in >= 60% of seasons with >= 20 bets",
+     "pass": false
+    },
+    {
+     "gate": "C84-G8",
+     "rule": "game-cluster 95% interval on ROI excludes zero",
+     "pass": false
+    },
+    {
+     "gate": "C84-G9",
+     "rule": "beats the information-free control",
+     "pass": false
+    },
+    {
+     "gate": "C84-G10",
+     "rule": "edge survives deleting the best season",
+     "pass": false
+    }
+   ],
+   "gates_passed": 4,
+   "gates_total": 10,
+   "promoted": false,
+   "status": "PAPER"
+  },
+  "C84-S9": {
+   "q_value": 0.085885,
+   "control": false,
+   "checks": [
+    {
+     "gate": "C84-G1",
+     "rule": "an observed price on every scored bet",
+     "pass": true
+    },
+    {
+     "gate": "C84-G2",
+     "rule": "pre-game information only: newest fit block is earlier than the priced game",
+     "pass": true
+    },
+    {
+     "gate": "C84-G3",
+     "rule": "at least 300 decided bets",
+     "pass": true
+    },
+    {
+     "gate": "C84-G4",
+     "rule": "hit rate beats the price-implied break-even",
+     "pass": false
+    },
+    {
+     "gate": "C84-G5",
+     "rule": "survives BH over the 10-rule scored family",
+     "pass": false
+    },
+    {
+     "gate": "C84-G6",
+     "rule": "positive in the untouched 2024-2026 holdout",
+     "pass": false
+    },
+    {
+     "gate": "C84-G7",
+     "rule": "positive in >= 60% of seasons with >= 20 bets",
+     "pass": false
+    },
+    {
+     "gate": "C84-G8",
+     "rule": "game-cluster 95% interval on ROI excludes zero",
+     "pass": false
+    },
+    {
+     "gate": "C84-G9",
+     "rule": "beats the information-free control",
+     "pass": false
+    },
+    {
+     "gate": "C84-G10",
+     "rule": "edge survives deleting the best season",
+     "pass": false
+    }
+   ],
+   "gates_passed": 3,
+   "gates_total": 10,
+   "promoted": false,
+   "status": "PAPER"
+  },
+  "C84-S12": {
+   "q_value": 0.987017,
+   "control": false,
+   "checks": [
+    {
+     "gate": "C84-G1",
+     "rule": "an observed price on every scored bet",
+     "pass": true
+    },
+    {
+     "gate": "C84-G2",
+     "rule": "pre-game information only: newest fit block is earlier than the priced game",
+     "pass": true
+    },
+    {
+     "gate": "C84-G3",
+     "rule": "at least 300 decided bets",
+     "pass": true
+    },
+    {
+     "gate": "C84-G4",
+     "rule": "hit rate beats the price-implied break-even",
+     "pass": true
+    },
+    {
+     "gate": "C84-G5",
+     "rule": "survives BH over the 10-rule scored family",
+     "pass": false
+    },
+    {
+     "gate": "C84-G6",
+     "rule": "positive in the untouched 2024-2026 holdout",
+     "pass": false
+    },
+    {
+     "gate": "C84-G7",
+     "rule": "positive in >= 60% of seasons with >= 20 bets",
+     "pass": false
+    },
+    {
+     "gate": "C84-G8",
+     "rule": "game-cluster 95% interval on ROI excludes zero",
+     "pass": false
+    },
+    {
+     "gate": "C84-G9",
+     "rule": "beats the information-free control",
+     "pass": true
+    },
+    {
+     "gate": "C84-G10",
+     "rule": "edge survives deleting the best season",
+     "pass": false
+    }
+   ],
+   "gates_passed": 5,
+   "gates_total": 10,
+   "promoted": false,
+   "status": "PAPER"
+  },
+  "C84-S8": {
+   "q_value": 0.085885,
+   "control": false,
+   "checks": [
+    {
+     "gate": "C84-G1",
+     "rule": "an observed price on every scored bet",
+     "pass": true
+    },
+    {
+     "gate": "C84-G2",
+     "rule": "pre-game information only: newest fit block is earlier than the priced game",
+     "pass": true
+    },
+    {
+     "gate": "C84-G3",
+     "rule": "at least 300 decided bets",
+     "pass": true
+    },
+    {
+     "gate": "C84-G4",
+     "rule": "hit rate beats the price-implied break-even",
+     "pass": false
+    },
+    {
+     "gate": "C84-G5",
+     "rule": "survives BH over the 10-rule scored family",
+     "pass": false
+    },
+    {
+     "gate": "C84-G6",
+     "rule": "positive in the untouched 2024-2026 holdout",
+     "pass": false
+    },
+    {
+     "gate": "C84-G7",
+     "rule": "positive in >= 60% of seasons with >= 20 bets",
+     "pass": false
+    },
+    {
+     "gate": "C84-G8",
+     "rule": "game-cluster 95% interval on ROI excludes zero",
+     "pass": false
+    },
+    {
+     "gate": "C84-G9",
+     "rule": "beats the information-free control",
+     "pass": false
+    },
+    {
+     "gate": "C84-G10",
+     "rule": "edge survives deleting the best season",
+     "pass": false
+    }
+   ],
+   "gates_passed": 3,
+   "gates_total": 10,
+   "promoted": false,
+   "status": "PAPER"
+  },
+  "C84-S10": {
+   "q_value": 0.987017,
+   "control": false,
+   "checks": [
+    {
+     "gate": "C84-G1",
+     "rule": "an observed price on every scored bet",
+     "pass": true
+    },
+    {
+     "gate": "C84-G2",
+     "rule": "pre-game information only: newest fit block is earlier than the priced game",
+     "pass": true
+    },
+    {
+     "gate": "C84-G3",
+     "rule": "at least 300 decided bets",
+     "pass": true
+    },
+    {
+     "gate": "C84-G4",
+     "rule": "hit rate beats the price-implied break-even",
+     "pass": false
+    },
+    {
+     "gate": "C84-G5",
+     "rule": "survives BH over the 10-rule scored family",
+     "pass": false
+    },
+    {
+     "gate": "C84-G6",
+     "rule": "positive in the untouched 2024-2026 holdout",
+     "pass": true
+    },
+    {
+     "gate": "C84-G7",
+     "rule": "positive in >= 60% of seasons with >= 20 bets",
+     "pass": false
+    },
+    {
+     "gate": "C84-G8",
+     "rule": "game-cluster 95% interval on ROI excludes zero",
+     "pass": false
+    },
+    {
+     "gate": "C84-G9",
+     "rule": "beats the information-free control",
+     "pass": false
+    },
+    {
+     "gate": "C84-G10",
+     "rule": "edge survives deleting the best season",
+     "pass": false
+    }
+   ],
+   "gates_passed": 4,
+   "gates_total": 10,
+   "promoted": false,
+   "status": "PAPER"
+  },
+  "C84-S11": {
+   "q_value": 0.987017,
+   "control": false,
+   "checks": [
+    {
+     "gate": "C84-G1",
+     "rule": "an observed price on every scored bet",
+     "pass": true
+    },
+    {
+     "gate": "C84-G2",
+     "rule": "pre-game information only: newest fit block is earlier than the priced game",
+     "pass": true
+    },
+    {
+     "gate": "C84-G3",
+     "rule": "at least 300 decided bets",
+     "pass": true
+    },
+    {
+     "gate": "C84-G4",
+     "rule": "hit rate beats the price-implied break-even",
+     "pass": false
+    },
+    {
+     "gate": "C84-G5",
+     "rule": "survives BH over the 10-rule scored family",
+     "pass": false
+    },
+    {
+     "gate": "C84-G6",
+     "rule": "positive in the untouched 2024-2026 holdout",
+     "pass": true
+    },
+    {
+     "gate": "C84-G7",
+     "rule": "positive in >= 60% of seasons with >= 20 bets",
+     "pass": false
+    },
+    {
+     "gate": "C84-G8",
+     "rule": "game-cluster 95% interval on ROI excludes zero",
+     "pass": false
+    },
+    {
+     "gate": "C84-G9",
+     "rule": "beats the information-free control",
+     "pass": false
+    },
+    {
+     "gate": "C84-G10",
+     "rule": "edge survives deleting the best season",
+     "pass": false
+    }
+   ],
+   "gates_passed": 4,
+   "gates_total": 10,
+   "promoted": false,
+   "status": "PAPER"
+  }
+ },
+ "controls": {
+  "C84-S1_roi_pct": 0.094,
+  "C84-S2_roi_pct": -5.056,
+  "best_control_roi_pct": 0.094
+ },
+ "brier": {
+  "n_games": 5187,
+  "brier_model": 0.22553,
+  "brier_market_devig": 0.2109,
+  "brier_skill_score": -0.06941,
+  "difference_model_minus_market": 0.01464,
+  "difference_ci95_game_cluster": [
+   0.01157,
+   0.01778
+  ],
+  "reading": "A positive difference means the market's probability was the better forecast. A negative difference with an interval entirely below zero would be the first evidence in this repository that the own line adds information.",
+  "benchmark_note": "The benchmark is the de-vigged closing moneyline, not a coin flip. A coin flip is not a benchmark; a market is.",
+  "source": "https://www.nfl.com/schedules/"
+ },
+ "ablation": {
+  "what_changed": "only the presence of two availability columns in the margin fit",
+  "n_games": 5320,
+  "mae_with_availability": 10.7453,
+  "mae_without_availability": 10.7446,
+  "difference_with_minus_without": 0.0007,
+  "difference_ci95_game_cluster": [
+   -0.02263,
+   0.02163
+  ],
+  "by_window": [
+   {
+    "window": "2006-2021",
+    "n": 4096,
+    "mean_abs_error_difference": 0.0103
+   },
+   {
+    "window": "2022-2023",
+    "n": 543,
+    "mean_abs_error_difference": -0.0392
+   },
+   {
+    "window": "2024-2026",
+    "n": 681,
+    "mean_abs_error_difference": -0.0253
+   }
+  ],
+  "verdict": "The availability features add nothing measurable: the interval on the difference contains zero.",
+  "brier_with": 0.22553,
+  "brier_note": "The Brier panel above is computed from the WITH-availability model, so the two panels agree.",
+  "why_not_a_penalty": "A fixed points-per-starter penalty asserts a magnitude. This ablation measures one, and reports the interval, so a reviewer can see whether the measurement is distinguishable from noise."
+ },
+ "luck": {
+  "n_bets_all_rules": 26299,
+  "n_decided": 25751,
+  "hit_rate_all_bets": 0.4845,
+  "break_even_hit_rate": 0.4918,
+  "units_above_break_even_per_100_bets": -0.73,
+  "sample_size_needed_80pct_power": {
+   "1-point hit-rate edge": 19622,
+   "2-point hit-rate edge": 4903,
+   "3-point hit-rate edge": 2177,
+   "5-point hit-rate edge": 780
+  },
+  "power_note": "Two-sided test at 5% with 80% power, on hit rate. It says how many decided bets a genuine edge of that size needs before it is visible at all. With 25751 decided bets in total across all twelve rules, only edges of roughly 2 percentage points or larger are even in principle detectable, and each individual rule holds a fraction of that total.",
+  "controls": {
+   "blind_away_roi_pct": 0.094,
+   "blind_home_roi_pct": -5.056,
+   "reading": "An information-free rule loses almost exactly the vig, as it must. Any claimed edge has to be measured against THIS, not against 50%."
+  },
+  "rules_clearing_8_of_10_gates": [
+   "C84-S4"
+  ],
+  "honest_summary": "No rule removed luck. Zero of twelve rules passed every gate; the best in-sample result belongs to a rule whose game-cluster interval contains zero and which fails the untouched holdout."
+ },
+ "correlation": {
+  "rule": "Publish only where n >= 25 paired observations; n is printed with every value.",
+  "rows": [
+   {
+    "kind": "strategy-vs-strategy overlap",
+    "a": "C84-S10",
+    "b": "C84-S11",
+    "n": 475,
+    "r": 1.0,
+    "same_side_pct": 100.0,
+    "source": "https://www.nfl.com/schedules/"
+   },
+   {
+    "kind": "strategy-vs-strategy overlap",
+    "a": "C84-S10",
+    "b": "C84-S12",
+    "n": 108,
+    "r": 1.0,
+    "same_side_pct": 100.0,
+    "source": "https://www.nfl.com/schedules/"
+   },
+   {
+    "kind": "strategy-vs-strategy overlap",
+    "a": "C84-S10",
+    "b": "C84-S3",
+    "n": 218,
+    "r": 1.0,
+    "same_side_pct": 100.0,
+    "source": "https://www.nfl.com/schedules/"
+   },
+   {
+    "kind": "strategy-vs-strategy overlap",
+    "a": "C84-S10",
+    "b": "C84-S4",
+    "n": 119,
+    "r": 1.0,
+    "same_side_pct": 100.0,
+    "source": "https://www.nfl.com/schedules/"
+   },
+   {
+    "kind": "strategy-vs-strategy overlap",
+    "a": "C84-S10",
+    "b": "C84-S7",
+    "n": 207,
+    "r": 0.5978,
+    "same_side_pct": 43.5,
+    "source": "https://www.nfl.com/schedules/"
+   },
+   {
+    "kind": "strategy-vs-strategy overlap",
+    "a": "C84-S10",
+    "b": "C84-S8",
+    "n": 50,
+    "r": 1.0,
+    "same_side_pct": 100.0,
+    "source": "https://www.nfl.com/schedules/"
+   },
+   {
+    "kind": "strategy-vs-strategy overlap",
+    "a": "C84-S11",
+    "b": "C84-S12",
+    "n": 147,
+    "r": 1.0,
+    "same_side_pct": 100.0,
+    "source": "https://www.nfl.com/schedules/"
+   },
+   {
+    "kind": "strategy-vs-strategy overlap",
+    "a": "C84-S11",
+    "b": "C84-S3",
+    "n": 379,
+    "r": 1.0,
+    "same_side_pct": 100.0,
+    "source": "https://www.nfl.com/schedules/"
+   },
+   {
+    "kind": "strategy-vs-strategy overlap",
+    "a": "C84-S11",
+    "b": "C84-S4",
+    "n": 221,
+    "r": 1.0,
+    "same_side_pct": 100.0,
+    "source": "https://www.nfl.com/schedules/"
+   },
+   {
+    "kind": "strategy-vs-strategy overlap",
+    "a": "C84-S11",
+    "b": "C84-S7",
+    "n": 385,
+    "r": 0.5986,
+    "same_side_pct": 42.9,
+    "source": "https://www.nfl.com/schedules/"
+   },
+   {
+    "kind": "strategy-vs-strategy overlap",
+    "a": "C84-S11",
+    "b": "C84-S8",
+    "n": 51,
+    "r": 1.0,
+    "same_side_pct": 100.0,
+    "source": "https://www.nfl.com/schedules/"
+   },
+   {
+    "kind": "strategy-vs-strategy overlap",
+    "a": "C84-S12",
+    "b": "C84-S3",
+    "n": 379,
+    "r": 1.0,
+    "same_side_pct": 100.0,
+    "source": "https://www.nfl.com/schedules/"
+   },
+   {
+    "kind": "strategy-vs-strategy overlap",
+    "a": "C84-S12",
+    "b": "C84-S4",
+    "n": 205,
+    "r": 1.0,
+    "same_side_pct": 100.0,
+    "source": "https://www.nfl.com/schedules/"
+   },
+   {
+    "kind": "strategy-vs-strategy overlap",
+    "a": "C84-S12",
+    "b": "C84-S7",
+    "n": 393,
+    "r": 0.6108,
+    "same_side_pct": 46.6,
+    "source": "https://www.nfl.com/schedules/"
+   },
+   {
+    "kind": "strategy-vs-strategy overlap",
+    "a": "C84-S12",
+    "b": "C84-S8",
+    "n": 53,
+    "r": 1.0,
+    "same_side_pct": 100.0,
+    "source": "https://www.nfl.com/schedules/"
+   },
+   {
+    "kind": "strategy-vs-strategy overlap",
+    "a": "C84-S3",
+    "b": "C84-S4",
+    "n": 1690,
+    "r": 1.0,
+    "same_side_pct": 100.0,
+    "source": "https://www.nfl.com/schedules/"
+   },
+   {
+    "kind": "strategy-vs-strategy overlap",
+    "a": "C84-S3",
+    "b": "C84-S7",
+    "n": 2907,
+    "r": 0.601,
+    "same_side_pct": 45.4,
+    "source": "https://www.nfl.com/schedules/"
+   },
+   {
+    "kind": "strategy-vs-strategy overlap",
+    "a": "C84-S4",
+    "b": "C84-S7",
+    "n": 1682,
+    "r": 0.557,
+    "same_side_pct": 44.8,
+    "source": "https://www.nfl.com/schedules/"
+   },
+   {
+    "kind": "strategy-vs-strategy overlap",
+    "a": "C84-S5",
+    "b": "C84-S6",
+    "n": 1091,
+    "r": 1.0,
+    "same_side_pct": 100.0,
+    "source": "https://www.nfl.com/schedules/"
+   },
+   {
+    "kind": "strategy-vs-strategy overlap",
+    "a": "C84-S5",
+    "b": "C84-S9",
+    "n": 68,
+    "r": 1.0,
+    "same_side_pct": 100.0,
+    "source": "https://www.nfl.com/schedules/"
+   },
+   {
+    "kind": "strategy-vs-strategy overlap",
+    "a": "C84-S6",
+    "b": "C84-S9",
+    "n": 28,
+    "r": 1.0,
+    "same_side_pct": 100.0,
+    "source": "https://www.nfl.com/schedules/"
+   },
+   {
+    "kind": "same-game: margin vs total points",
+    "a": "home margin",
+    "b": "total points",
+    "n": 5336,
+    "r": 0.0201,
+    "source": "https://www.nfl.com/schedules/"
+   },
+   {
+    "kind": "own line vs the closing line",
+    "a": "own_spread_home",
+    "b": "spread_line",
+    "n": 5346,
+    "r": 0.7333,
+    "source": "https://www.nfl.com/schedules/"
+   }
+  ],
+  "not_computed": "Prop-level and same-game-parlay correlations are NOT published because no observed prop price exists in any source here. A correlation between two legs whose prices cannot be observed is not a betting number."
+ },
+ "props": {
+  "n_players_projected": 948,
+  "rows": [
+   {
+    "market": "passing_yards",
+    "player_id": "00-0034857",
+    "player": "Josh Allen",
+    "position": "QB",
+    "n_weeks": 122,
+    "season_mean": 246.35,
+    "last4_mean": 247.0,
+    "projection": 246.58,
+    "sd": 76.64,
+    "interval80": [
+     148.36,
+     344.8
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "passing_yards",
+    "player_id": "00-0033106",
+    "player": "Jared Goff",
+    "position": "QB",
+    "n_weeks": 121,
+    "season_mean": 265.91,
+    "last4_mean": 230.0,
+    "projection": 253.34,
+    "sd": 74.24,
+    "interval80": [
+     158.2,
+     348.49
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0034857",
+    "player": "Josh Allen",
+    "position": "QB",
+    "n_weeks": 120,
+    "season_mean": 36.47,
+    "last4_mean": 41.75,
+    "projection": 38.32,
+    "sd": 23.42,
+    "interval80": [
+     8.3,
+     68.34
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "passing_yards",
+    "player_id": "00-0033873",
+    "player": "Patrick Mahomes",
+    "position": "QB",
+    "n_weeks": 117,
+    "season_mean": 278.59,
+    "last4_mean": 250.0,
+    "projection": 268.58,
+    "sd": 75.12,
+    "interval80": [
+     172.3,
+     364.86
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0030506",
+    "player": "Travis Kelce",
+    "position": "TE",
+    "n_weeks": 117,
+    "season_mean": 69.26,
+    "last4_mean": 59.0,
+    "projection": 65.67,
+    "sd": 36.51,
+    "interval80": [
+     18.89,
+     112.46
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0032764",
+    "player": "Derrick Henry",
+    "position": "RB",
+    "n_weeks": 115,
+    "season_mean": 99.25,
+    "last4_mean": 53.25,
+    "projection": 83.15,
+    "sd": 49.7,
+    "interval80": [
+     19.45,
+     146.85
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "passing_yards",
+    "player_id": "00-0034855",
+    "player": "Baker Mayfield",
+    "position": "QB",
+    "n_weeks": 114,
+    "season_mean": 225.63,
+    "last4_mean": 176.5,
+    "projection": 208.44,
+    "sd": 71.5,
+    "interval80": [
+     116.8,
+     300.07
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0035640",
+    "player": "DK Metcalf",
+    "position": "WR",
+    "n_weeks": 114,
+    "season_mean": 64.66,
+    "last4_mean": 41.25,
+    "projection": 56.47,
+    "sd": 35.7,
+    "interval80": [
+     10.72,
+     102.21
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0035261",
+    "player": "Tony Pollard",
+    "position": "RB",
+    "n_weeks": 114,
+    "season_mean": 55.81,
+    "last4_mean": 93.5,
+    "projection": 69.0,
+    "sd": 33.86,
+    "interval80": [
+     25.6,
+     112.4
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0034827",
+    "player": "DJ Moore",
+    "position": "WR",
+    "n_weeks": 111,
+    "season_mean": 68.43,
+    "last4_mean": 68.5,
+    "projection": 68.46,
+    "sd": 37.24,
+    "interval80": [
+     20.73,
+     116.18
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0033293",
+    "player": "Aaron Jones",
+    "position": "RB",
+    "n_weeks": 110,
+    "season_mean": 62.95,
+    "last4_mean": 44.25,
+    "projection": 56.4,
+    "sd": 37.4,
+    "interval80": [
+     8.47,
+     104.33
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0031381",
+    "player": "Davante Adams",
+    "position": "WR",
+    "n_weeks": 109,
+    "season_mean": 81.47,
+    "last4_mean": 64.75,
+    "projection": 75.62,
+    "sd": 47.12,
+    "interval80": [
+     15.23,
+     136.0
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0035685",
+    "player": "David Montgomery",
+    "position": "RB",
+    "n_weeks": 109,
+    "season_mean": 57.27,
+    "last4_mean": 19.5,
+    "projection": 44.05,
+    "sd": 31.75,
+    "interval80": [
+     3.36,
+     84.73
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0035250",
+    "player": "Devin Singletary",
+    "position": "RB",
+    "n_weeks": 108,
+    "season_mean": 46.31,
+    "last4_mean": 23.75,
+    "projection": 38.41,
+    "sd": 29.53,
+    "interval80": [
+     0.56,
+     76.26
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0031588",
+    "player": "Stefon Diggs",
+    "position": "WR",
+    "n_weeks": 107,
+    "season_mean": 76.68,
+    "last4_mean": 54.0,
+    "projection": 68.74,
+    "sd": 38.21,
+    "interval80": [
+     19.77,
+     117.72
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0035700",
+    "player": "Josh Jacobs",
+    "position": "RB",
+    "n_weeks": 107,
+    "season_mean": 73.69,
+    "last4_mean": 20.75,
+    "projection": 55.16,
+    "sd": 36.38,
+    "interval80": [
+     8.54,
+     101.78
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "passing_yards",
+    "player_id": "00-0023459",
+    "player": "Aaron Rodgers",
+    "position": "QB",
+    "n_weeks": 106,
+    "season_mean": 237.75,
+    "last4_mean": 218.0,
+    "projection": 230.83,
+    "sd": 64.14,
+    "interval80": [
+     148.64,
+     313.03
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "passing_yards",
+    "player_id": "00-0026498",
+    "player": "Matthew Stafford",
+    "position": "QB",
+    "n_weeks": 106,
+    "season_mean": 267.42,
+    "last4_mean": 200.5,
+    "projection": 244.0,
+    "sd": 66.83,
+    "interval80": [
+     158.35,
+     329.66
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0035659",
+    "player": "Terry McLaurin",
+    "position": "WR",
+    "n_weeks": 106,
+    "season_mean": 67.21,
+    "last4_mean": 50.75,
+    "projection": 61.45,
+    "sd": 31.24,
+    "interval80": [
+     21.41,
+     101.49
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "passing_yards",
+    "player_id": "00-0029604",
+    "player": "Kirk Cousins",
+    "position": "QB",
+    "n_weeks": 105,
+    "season_mean": 252.72,
+    "last4_mean": 267.75,
+    "projection": 257.98,
+    "sd": 83.89,
+    "interval80": [
+     150.47,
+     365.5
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "passing_yards",
+    "player_id": "00-0034796",
+    "player": "Lamar Jackson",
+    "position": "QB",
+    "n_weeks": 104,
+    "season_mean": 215.13,
+    "last4_mean": 241.75,
+    "projection": 224.45,
+    "sd": 67.46,
+    "interval80": [
+     138.0,
+     310.9
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0034796",
+    "player": "Lamar Jackson",
+    "position": "QB",
+    "n_weeks": 104,
+    "season_mean": 57.41,
+    "last4_mean": 36.0,
+    "projection": 49.92,
+    "sd": 32.35,
+    "interval80": [
+     8.46,
+     91.38
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "passing_yards",
+    "player_id": "00-0036355",
+    "player": "Justin Herbert",
+    "position": "QB",
+    "n_weeks": 103,
+    "season_mean": 256.42,
+    "last4_mean": 193.75,
+    "projection": 234.48,
+    "sd": 71.7,
+    "interval80": [
+     142.6,
+     326.37
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0030279",
+    "player": "Keenan Allen",
+    "position": "WR",
+    "n_weeks": 103,
+    "season_mean": 68.61,
+    "last4_mean": 55.0,
+    "projection": 63.85,
+    "sd": 37.21,
+    "interval80": [
+     16.16,
+     111.54
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0033906",
+    "player": "Alvin Kamara",
+    "position": "RB",
+    "n_weeks": 102,
+    "season_mean": 56.82,
+    "last4_mean": 20.75,
+    "projection": 44.2,
+    "sd": 32.44,
+    "interval80": [
+     2.62,
+     85.78
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0033873",
+    "player": "Patrick Mahomes",
+    "position": "QB",
+    "n_weeks": 101,
+    "season_mean": 24.56,
+    "last4_mean": 11.0,
+    "projection": 19.82,
+    "sd": 16.79,
+    "interval80": [
+     0.0,
+     41.33
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "passing_yards",
+    "player_id": "00-0033077",
+    "player": "Dak Prescott",
+    "position": "QB",
+    "n_weeks": 100,
+    "season_mean": 274.94,
+    "last4_mean": 250.0,
+    "projection": 266.21,
+    "sd": 82.88,
+    "interval80": [
+     159.99,
+     372.43
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0035676",
+    "player": "A.J. Brown",
+    "position": "WR",
+    "n_weeks": 99,
+    "season_mean": 79.73,
+    "last4_mean": 42.25,
+    "projection": 66.61,
+    "sd": 43.22,
+    "interval80": [
+     11.21,
+     122.01
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0036358",
+    "player": "CeeDee Lamb",
+    "position": "WR",
+    "n_weeks": 99,
+    "season_mean": 83.08,
+    "last4_mean": 99.25,
+    "projection": 88.74,
+    "sd": 42.26,
+    "interval80": [
+     34.58,
+     142.9
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0033906",
+    "player": "Alvin Kamara",
+    "position": "RB",
+    "n_weeks": 97,
+    "season_mean": 36.93,
+    "last4_mean": 36.0,
+    "projection": 36.6,
+    "sd": 27.99,
+    "interval80": [
+     0.73,
+     72.48
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0036322",
+    "player": "Justin Jefferson",
+    "position": "WR",
+    "n_weeks": 97,
+    "season_mean": 90.14,
+    "last4_mean": 53.5,
+    "projection": 77.32,
+    "sd": 48.1,
+    "interval80": [
+     15.67,
+     138.97
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0033293",
+    "player": "Aaron Jones",
+    "position": "RB",
+    "n_weeks": 96,
+    "season_mean": 26.61,
+    "last4_mean": 15.25,
+    "projection": 22.64,
+    "sd": 21.69,
+    "interval80": [
+     0.0,
+     50.43
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0034855",
+    "player": "Baker Mayfield",
+    "position": "QB",
+    "n_weeks": 96,
+    "season_mean": 16.04,
+    "last4_mean": 12.5,
+    "projection": 14.8,
+    "sd": 13.8,
+    "interval80": [
+     0.0,
+     32.49
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0036275",
+    "player": "D'Andre Swift",
+    "position": "RB",
+    "n_weeks": 95,
+    "season_mean": 56.29,
+    "last4_mean": 55.5,
+    "projection": 56.02,
+    "sd": 36.04,
+    "interval80": [
+     9.83,
+     102.21
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0034844",
+    "player": "Saquon Barkley",
+    "position": "RB",
+    "n_weeks": 95,
+    "season_mean": 77.14,
+    "last4_mean": 49.0,
+    "projection": 67.29,
+    "sd": 46.06,
+    "interval80": [
+     8.25,
+     126.32
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0034753",
+    "player": "Mark Andrews",
+    "position": "TE",
+    "n_weeks": 94,
+    "season_mean": 55.29,
+    "last4_mean": 21.0,
+    "projection": 43.29,
+    "sd": 31.08,
+    "interval80": [
+     3.45,
+     83.12
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0034348",
+    "player": "Courtland Sutton",
+    "position": "WR",
+    "n_weeks": 93,
+    "season_mean": 61.57,
+    "last4_mean": 36.75,
+    "projection": 52.88,
+    "sd": 31.23,
+    "interval80": [
+     12.85,
+     92.91
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0035719",
+    "player": "Deebo Samuel Sr.",
+    "position": "WR",
+    "n_weeks": 93,
+    "season_mean": 59.72,
+    "last4_mean": 31.5,
+    "projection": 49.84,
+    "sd": 40.41,
+    "interval80": [
+     0.0,
+     101.63
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0031408",
+    "player": "Mike Evans",
+    "position": "WR",
+    "n_weeks": 93,
+    "season_mean": 75.43,
+    "last4_mean": 79.25,
+    "projection": 76.77,
+    "sd": 43.8,
+    "interval80": [
+     20.64,
+     132.9
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0035261",
+    "player": "Tony Pollard",
+    "position": "RB",
+    "n_weeks": 93,
+    "season_mean": 19.81,
+    "last4_mean": 17.5,
+    "projection": 19.0,
+    "sd": 17.98,
+    "interval80": [
+     0.0,
+     42.04
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "passing_yards",
+    "player_id": "00-0035710",
+    "player": "Daniel Jones",
+    "position": "QB",
+    "n_weeks": 92,
+    "season_mean": 210.92,
+    "last4_mean": 175.25,
+    "projection": 198.44,
+    "sd": 72.04,
+    "interval80": [
+     106.11,
+     290.77
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "passing_yards",
+    "player_id": "00-0035228",
+    "player": "Kyler Murray",
+    "position": "QB",
+    "n_weeks": 92,
+    "season_mean": 233.4,
+    "last4_mean": 209.0,
+    "projection": 224.86,
+    "sd": 70.02,
+    "interval80": [
+     135.12,
+     314.6
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0033921",
+    "player": "Chris Godwin Jr.",
+    "position": "WR",
+    "n_weeks": 92,
+    "season_mean": 70.11,
+    "last4_mean": 29.25,
+    "projection": 55.81,
+    "sd": 36.92,
+    "interval80": [
+     8.49,
+     103.13
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0032211",
+    "player": "Tyler Lockett",
+    "position": "WR",
+    "n_weeks": 92,
+    "season_mean": 62.92,
+    "last4_mean": 29.5,
+    "projection": 51.23,
+    "sd": 38.57,
+    "interval80": [
+     1.79,
+     100.66
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0033040",
+    "player": "Tyreek Hill",
+    "position": "WR",
+    "n_weeks": 92,
+    "season_mean": 87.42,
+    "last4_mean": 66.25,
+    "projection": 80.01,
+    "sd": 50.66,
+    "interval80": [
+     15.08,
+     144.94
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0036223",
+    "player": "Jonathan Taylor",
+    "position": "RB",
+    "n_weeks": 92,
+    "season_mean": 89.72,
+    "last4_mean": 64.5,
+    "projection": 80.89,
+    "sd": 48.68,
+    "interval80": [
+     18.5,
+     143.28
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "passing_yards",
+    "player_id": "00-0031280",
+    "player": "Derek Carr",
+    "position": "QB",
+    "n_weeks": 91,
+    "season_mean": 247.32,
+    "last4_mean": 230.0,
+    "projection": 241.26,
+    "sd": 74.26,
+    "interval80": [
+     146.09,
+     336.42
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "passing_yards",
+    "player_id": "00-0029263",
+    "player": "Russell Wilson",
+    "position": "QB",
+    "n_weeks": 91,
+    "season_mean": 234.44,
+    "last4_mean": 205.75,
+    "projection": 224.4,
+    "sd": 72.73,
+    "interval80": [
+     131.19,
+     317.61
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0034960",
+    "player": "Jakobi Meyers",
+    "position": "WR",
+    "n_weeks": 91,
+    "season_mean": 59.05,
+    "last4_mean": 61.25,
+    "projection": 59.82,
+    "sd": 26.07,
+    "interval80": [
+     26.41,
+     93.23
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0033923",
+    "player": "Kareem Hunt",
+    "position": "RB",
+    "n_weeks": 91,
+    "season_mean": 39.8,
+    "last4_mean": 23.5,
+    "projection": 34.1,
+    "sd": 25.26,
+    "interval80": [
+     1.72,
+     66.47
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0035228",
+    "player": "Kyler Murray",
+    "position": "QB",
+    "n_weeks": 91,
+    "season_mean": 36.89,
+    "last4_mean": 35.25,
+    "projection": 36.32,
+    "sd": 24.45,
+    "interval80": [
+     4.98,
+     67.65
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0035685",
+    "player": "David Montgomery",
+    "position": "RB",
+    "n_weeks": 90,
+    "season_mean": 21.79,
+    "last4_mean": 16.75,
+    "projection": 20.03,
+    "sd": 13.87,
+    "interval80": [
+     2.25,
+     37.8
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0033881",
+    "player": "Evan Engram",
+    "position": "TE",
+    "n_weeks": 90,
+    "season_mean": 45.0,
+    "last4_mean": 34.25,
+    "projection": 41.24,
+    "sd": 29.66,
+    "interval80": [
+     3.23,
+     79.25
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0035700",
+    "player": "Josh Jacobs",
+    "position": "RB",
+    "n_weeks": 90,
+    "season_mean": 23.86,
+    "last4_mean": 24.75,
+    "projection": 24.17,
+    "sd": 17.4,
+    "interval80": [
+     1.87,
+     46.47
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0033699",
+    "player": "Austin Ekeler",
+    "position": "RB",
+    "n_weeks": 90,
+    "season_mean": 44.96,
+    "last4_mean": 26.75,
+    "projection": 38.58,
+    "sd": 29.45,
+    "interval80": [
+     0.83,
+     76.33
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0033045",
+    "player": "Ezekiel Elliott",
+    "position": "RB",
+    "n_weeks": 90,
+    "season_mean": 56.28,
+    "last4_mean": 23.5,
+    "projection": 44.81,
+    "sd": 31.77,
+    "interval80": [
+     4.09,
+     85.52
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0036355",
+    "player": "Justin Herbert",
+    "position": "QB",
+    "n_weeks": 90,
+    "season_mean": 21.32,
+    "last4_mean": 25.5,
+    "projection": 22.78,
+    "sd": 19.14,
+    "interval80": [
+     0.0,
+     47.31
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0033699",
+    "player": "Austin Ekeler",
+    "position": "RB",
+    "n_weeks": 89,
+    "season_mean": 41.27,
+    "last4_mean": 17.5,
+    "projection": 32.95,
+    "sd": 27.17,
+    "interval80": [
+     0.0,
+     67.77
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0033288",
+    "player": "George Kittle",
+    "position": "TE",
+    "n_weeks": 89,
+    "season_mean": 71.52,
+    "last4_mean": 59.75,
+    "projection": 67.4,
+    "sd": 38.08,
+    "interval80": [
+     18.6,
+     116.2
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0035710",
+    "player": "Daniel Jones",
+    "position": "QB",
+    "n_weeks": 89,
+    "season_mean": 27.38,
+    "last4_mean": 15.25,
+    "projection": 23.14,
+    "sd": 24.37,
+    "interval80": [
+     0.0,
+     54.37
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "passing_yards",
+    "player_id": "00-0036389",
+    "player": "Jalen Hurts",
+    "position": "QB",
+    "n_weeks": 88,
+    "season_mean": 213.53,
+    "last4_mean": 182.5,
+    "projection": 202.67,
+    "sd": 78.2,
+    "interval80": [
+     102.45,
+     302.89
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0036252",
+    "player": "Michael Pittman",
+    "position": "WR",
+    "n_weeks": 88,
+    "season_mean": 57.75,
+    "last4_mean": 18.5,
+    "projection": 44.01,
+    "sd": 30.75,
+    "interval80": [
+     4.6,
+     83.42
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0033280",
+    "player": "Christian McCaffrey",
+    "position": "RB",
+    "n_weeks": 88,
+    "season_mean": 74.01,
+    "last4_mean": 59.75,
+    "projection": 69.02,
+    "sd": 35.69,
+    "interval80": [
+     23.28,
+     114.76
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "passing_yards",
+    "player_id": "00-0034869",
+    "player": "Sam Darnold",
+    "position": "QB",
+    "n_weeks": 87,
+    "season_mean": 218.74,
+    "last4_mean": 229.5,
+    "projection": 222.5,
+    "sd": 75.55,
+    "interval80": [
+     125.67,
+     319.33
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0033280",
+    "player": "Christian McCaffrey",
+    "position": "RB",
+    "n_weeks": 87,
+    "season_mean": 47.61,
+    "last4_mean": 37.0,
+    "projection": 43.9,
+    "sd": 26.56,
+    "interval80": [
+     9.86,
+     77.93
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0036275",
+    "player": "D'Andre Swift",
+    "position": "RB",
+    "n_weeks": 87,
+    "season_mean": 25.77,
+    "last4_mean": 19.5,
+    "projection": 23.58,
+    "sd": 18.85,
+    "interval80": [
+     0.0,
+     47.73
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0036389",
+    "player": "Jalen Hurts",
+    "position": "QB",
+    "n_weeks": 87,
+    "season_mean": 41.59,
+    "last4_mean": 15.25,
+    "projection": 32.37,
+    "sd": 26.23,
+    "interval80": [
+     0.0,
+     65.98
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0029263",
+    "player": "Russell Wilson",
+    "position": "QB",
+    "n_weeks": 87,
+    "season_mean": 22.06,
+    "last4_mean": 26.5,
+    "projection": 23.61,
+    "sd": 17.22,
+    "interval80": [
+     1.55,
+     45.68
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0036963",
+    "player": "Amon-Ra St. Brown",
+    "position": "WR",
+    "n_weeks": 86,
+    "season_mean": 80.19,
+    "last4_mean": 88.5,
+    "projection": 83.1,
+    "sd": 38.21,
+    "interval80": [
+     34.12,
+     132.07
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "passing_yards",
+    "player_id": "00-0036442",
+    "player": "Joe Burrow",
+    "position": "QB",
+    "n_weeks": 85,
+    "season_mean": 272.89,
+    "last4_mean": 303.75,
+    "projection": 283.69,
+    "sd": 88.94,
+    "interval80": [
+     169.7,
+     397.68
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "passing_yards",
+    "player_id": "00-0036971",
+    "player": "Trevor Lawrence",
+    "position": "QB",
+    "n_weeks": 85,
+    "season_mean": 232.4,
+    "last4_mean": 272.25,
+    "projection": 246.35,
+    "sd": 62.01,
+    "interval80": [
+     166.87,
+     325.82
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0033908",
+    "player": "Cooper Kupp",
+    "position": "WR",
+    "n_weeks": 85,
+    "season_mean": 78.64,
+    "last4_mean": 41.75,
+    "projection": 65.73,
+    "sd": 42.7,
+    "interval80": [
+     11.0,
+     120.45
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0035250",
+    "player": "Devin Singletary",
+    "position": "RB",
+    "n_weeks": 85,
+    "season_mean": 17.48,
+    "last4_mean": 15.75,
+    "projection": 16.88,
+    "sd": 15.38,
+    "interval80": [
+     0.0,
+     36.58
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0036407",
+    "player": "Jerry Jeudy",
+    "position": "WR",
+    "n_weeks": 85,
+    "season_mean": 57.35,
+    "last4_mean": 36.5,
+    "projection": 50.05,
+    "sd": 36.89,
+    "interval80": [
+     2.77,
+     97.34
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0035229",
+    "player": "T.J. Hockenson",
+    "position": "TE",
+    "n_weeks": 85,
+    "season_mean": 52.75,
+    "last4_mean": 61.25,
+    "projection": 55.73,
+    "sd": 31.22,
+    "interval80": [
+     15.72,
+     95.74
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0034383",
+    "player": "Dalton Schultz",
+    "position": "TE",
+    "n_weeks": 84,
+    "season_mean": 46.85,
+    "last4_mean": 37.5,
+    "projection": 43.57,
+    "sd": 25.92,
+    "interval80": [
+     10.36,
+     76.79
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0036900",
+    "player": "Ja'Marr Chase",
+    "position": "WR",
+    "n_weeks": 84,
+    "season_mean": 88.31,
+    "last4_mean": 108.75,
+    "projection": 95.46,
+    "sd": 53.18,
+    "interval80": [
+     27.3,
+     163.62
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0033553",
+    "player": "James Conner",
+    "position": "RB",
+    "n_weeks": 83,
+    "season_mean": 59.61,
+    "last4_mean": 24.75,
+    "projection": 47.41,
+    "sd": 34.32,
+    "interval80": [
+     3.43,
+     91.39
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0033897",
+    "player": "Joe Mixon",
+    "position": "RB",
+    "n_weeks": 83,
+    "season_mean": 67.88,
+    "last4_mean": 32.25,
+    "projection": 55.41,
+    "sd": 38.43,
+    "interval80": [
+     6.15,
+     104.67
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0035243",
+    "player": "Miles Sanders",
+    "position": "RB",
+    "n_weeks": 83,
+    "season_mean": 53.6,
+    "last4_mean": 29.25,
+    "projection": 45.08,
+    "sd": 35.24,
+    "interval80": [
+     0.0,
+     90.24
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0033077",
+    "player": "Dak Prescott",
+    "position": "QB",
+    "n_weeks": 82,
+    "season_mean": 15.71,
+    "last4_mean": 9.0,
+    "projection": 13.36,
+    "sd": 11.8,
+    "interval80": [
+     0.0,
+     28.48
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0034791",
+    "player": "Nick Chubb",
+    "position": "RB",
+    "n_weeks": 82,
+    "season_mean": 77.43,
+    "last4_mean": 25.0,
+    "projection": 59.08,
+    "sd": 37.8,
+    "interval80": [
+     10.64,
+     107.52
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0036223",
+    "player": "Jonathan Taylor",
+    "position": "RB",
+    "n_weeks": 81,
+    "season_mean": 20.69,
+    "last4_mean": 28.5,
+    "projection": 23.42,
+    "sd": 18.73,
+    "interval80": [
+     0.0,
+     47.42
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0031544",
+    "player": "Amari Cooper",
+    "position": "WR",
+    "n_weeks": 80,
+    "season_mean": 72.17,
+    "last4_mean": 65.75,
+    "projection": 69.93,
+    "sd": 46.34,
+    "interval80": [
+     10.53,
+     129.32
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0030564",
+    "player": "DeAndre Hopkins",
+    "position": "WR",
+    "n_weeks": 80,
+    "season_mean": 68.05,
+    "last4_mean": 22.0,
+    "projection": 51.93,
+    "sd": 38.61,
+    "interval80": [
+     2.45,
+     101.41
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0032764",
+    "player": "Derrick Henry",
+    "position": "RB",
+    "n_weeks": 80,
+    "season_mean": 18.9,
+    "last4_mean": 7.75,
+    "projection": 15.0,
+    "sd": 16.69,
+    "interval80": [
+     0.0,
+     36.39
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0036613",
+    "player": "Jaylen Waddle",
+    "position": "WR",
+    "n_weeks": 80,
+    "season_mean": 66.35,
+    "last4_mean": 32.5,
+    "projection": 54.5,
+    "sd": 36.06,
+    "interval80": [
+     8.29,
+     100.71
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0036410",
+    "player": "Tee Higgins",
+    "position": "WR",
+    "n_weeks": 80,
+    "season_mean": 74.59,
+    "last4_mean": 89.25,
+    "projection": 79.72,
+    "sd": 40.04,
+    "interval80": [
+     28.4,
+     131.04
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0036971",
+    "player": "Trevor Lawrence",
+    "position": "QB",
+    "n_weeks": 80,
+    "season_mean": 19.09,
+    "last4_mean": 17.75,
+    "projection": 18.62,
+    "sd": 14.09,
+    "interval80": [
+     0.56,
+     36.67
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0031236",
+    "player": "Brandin Cooks",
+    "position": "WR",
+    "n_weeks": 79,
+    "season_mean": 56.29,
+    "last4_mean": 42.25,
+    "projection": 51.38,
+    "sd": 37.22,
+    "interval80": [
+     3.68,
+     99.07
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0033090",
+    "player": "Hunter Henry",
+    "position": "TE",
+    "n_weeks": 79,
+    "season_mean": 49.16,
+    "last4_mean": 56.25,
+    "projection": 51.64,
+    "sd": 24.11,
+    "interval80": [
+     20.74,
+     82.55
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0034844",
+    "player": "Saquon Barkley",
+    "position": "RB",
+    "n_weeks": 79,
+    "season_mean": 25.19,
+    "last4_mean": 14.5,
+    "projection": 21.45,
+    "sd": 19.36,
+    "interval80": [
+     0.0,
+     46.26
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0036328",
+    "player": "Antonio Gibson",
+    "position": "RB",
+    "n_weeks": 79,
+    "season_mean": 41.41,
+    "last4_mean": 25.75,
+    "projection": 35.93,
+    "sd": 29.9,
+    "interval80": [
+     0.0,
+     74.25
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "passing_yards",
+    "player_id": "00-0030565",
+    "player": "Geno Smith",
+    "position": "QB",
+    "n_weeks": 78,
+    "season_mean": 231.59,
+    "last4_mean": 248.5,
+    "projection": 237.51,
+    "sd": 75.21,
+    "interval80": [
+     141.12,
+     333.9
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0035216",
+    "player": "Diontae Johnson",
+    "position": "WR",
+    "n_weeks": 78,
+    "season_mean": 59.26,
+    "last4_mean": 49.0,
+    "projection": 55.67,
+    "sd": 28.85,
+    "interval80": [
+     18.69,
+     92.64
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0033009",
+    "player": "Tyler Boyd",
+    "position": "WR",
+    "n_weeks": 78,
+    "season_mean": 54.83,
+    "last4_mean": 28.25,
+    "projection": 45.53,
+    "sd": 32.42,
+    "interval80": [
+     3.98,
+     87.08
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0030061",
+    "player": "Zach Ertz",
+    "position": "TE",
+    "n_weeks": 78,
+    "season_mean": 46.01,
+    "last4_mean": 53.75,
+    "projection": 48.72,
+    "sd": 24.04,
+    "interval80": [
+     17.91,
+     79.53
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "passing_yards",
+    "player_id": "00-0036212",
+    "player": "Tua Tagovailoa",
+    "position": "QB",
+    "n_weeks": 77,
+    "season_mean": 235.81,
+    "last4_mean": 177.0,
+    "projection": 215.22,
+    "sd": 84.95,
+    "interval80": [
+     106.35,
+     324.09
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0035662",
+    "player": "Marquise Brown",
+    "position": "WR",
+    "n_weeks": 77,
+    "season_mean": 55.0,
+    "last4_mean": 51.75,
+    "projection": 53.86,
+    "sd": 30.22,
+    "interval80": [
+     15.14,
+     92.59
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0036555",
+    "player": "Chuba Hubbard",
+    "position": "RB",
+    "n_weeks": 77,
+    "season_mean": 55.39,
+    "last4_mean": 78.25,
+    "projection": 63.39,
+    "sd": 35.08,
+    "interval80": [
+     18.44,
+     108.34
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0036875",
+    "player": "Rhamondre Stevenson",
+    "position": "RB",
+    "n_weeks": 77,
+    "season_mean": 52.79,
+    "last4_mean": 43.0,
+    "projection": 49.36,
+    "sd": 32.78,
+    "interval80": [
+     7.36,
+     91.37
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0034775",
+    "player": "Christian Kirk",
+    "position": "WR",
+    "n_weeks": 76,
+    "season_mean": 60.38,
+    "last4_mean": 24.5,
+    "projection": 47.82,
+    "sd": 31.16,
+    "interval80": [
+     7.88,
+     87.76
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0034351",
+    "player": "Dallas Goedert",
+    "position": "TE",
+    "n_weeks": 76,
+    "season_mean": 55.43,
+    "last4_mean": 47.25,
+    "projection": 52.57,
+    "sd": 28.8,
+    "interval80": [
+     15.67,
+     89.47
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0036309",
+    "player": "Darnell Mooney",
+    "position": "WR",
+    "n_weeks": 76,
+    "season_mean": 49.59,
+    "last4_mean": 20.0,
+    "projection": 39.23,
+    "sd": 32.03,
+    "interval80": [
+     0.0,
+     80.29
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0033045",
+    "player": "Ezekiel Elliott",
+    "position": "RB",
+    "n_weeks": 76,
+    "season_mean": 20.05,
+    "last4_mean": 9.0,
+    "projection": 16.18,
+    "sd": 15.76,
+    "interval80": [
+     0.0,
+     36.39
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0036912",
+    "player": "DeVonta Smith",
+    "position": "WR",
+    "n_weeks": 75,
+    "season_mean": 68.45,
+    "last4_mean": 77.5,
+    "projection": 71.62,
+    "sd": 36.04,
+    "interval80": [
+     25.43,
+     117.81
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0033897",
+    "player": "Joe Mixon",
+    "position": "RB",
+    "n_weeks": 75,
+    "season_mean": 24.91,
+    "last4_mean": 16.25,
+    "projection": 21.88,
+    "sd": 16.56,
+    "interval80": [
+     0.66,
+     43.1
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0036997",
+    "player": "Javonte Williams",
+    "position": "RB",
+    "n_weeks": 75,
+    "season_mean": 56.33,
+    "last4_mean": 88.25,
+    "projection": 67.5,
+    "sd": 29.8,
+    "interval80": [
+     29.31,
+     105.7
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0036893",
+    "player": "Najee Harris",
+    "position": "RB",
+    "n_weeks": 75,
+    "season_mean": 59.56,
+    "last4_mean": 23.25,
+    "projection": 46.85,
+    "sd": 33.8,
+    "interval80": [
+     3.53,
+     90.17
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0033923",
+    "player": "Kareem Hunt",
+    "position": "RB",
+    "n_weeks": 74,
+    "season_mean": 18.54,
+    "last4_mean": 19.25,
+    "projection": 18.79,
+    "sd": 16.11,
+    "interval80": [
+     0.0,
+     39.44
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0030035",
+    "player": "Adam Thielen",
+    "position": "WR",
+    "n_weeks": 72,
+    "season_mean": 59.58,
+    "last4_mean": 37.5,
+    "projection": 51.85,
+    "sd": 32.17,
+    "interval80": [
+     10.62,
+     93.09
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0033948",
+    "player": "Jamaal Williams",
+    "position": "RB",
+    "n_weeks": 72,
+    "season_mean": 42.11,
+    "last4_mean": 17.5,
+    "projection": 33.5,
+    "sd": 28.02,
+    "interval80": [
+     0.0,
+     69.41
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0034972",
+    "player": "Alexander Mattison",
+    "position": "RB",
+    "n_weeks": 71,
+    "season_mean": 38.44,
+    "last4_mean": 25.0,
+    "projection": 33.73,
+    "sd": 28.31,
+    "interval80": [
+     0.0,
+     70.01
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0037256",
+    "player": "Rachaad White",
+    "position": "RB",
+    "n_weeks": 71,
+    "season_mean": 40.8,
+    "last4_mean": 39.25,
+    "projection": 40.26,
+    "sd": 24.66,
+    "interval80": [
+     8.66,
+     71.86
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0033553",
+    "player": "James Conner",
+    "position": "RB",
+    "n_weeks": 70,
+    "season_mean": 25.14,
+    "last4_mean": 10.5,
+    "projection": 20.02,
+    "sd": 21.57,
+    "interval80": [
+     0.0,
+     47.66
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0033893",
+    "player": "Dalvin Cook",
+    "position": "RB",
+    "n_weeks": 70,
+    "season_mean": 74.69,
+    "last4_mean": 15.5,
+    "projection": 53.97,
+    "sd": 49.18,
+    "interval80": [
+     0.0,
+     117.0
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0036442",
+    "player": "Joe Burrow",
+    "position": "QB",
+    "n_weeks": 70,
+    "season_mean": 13.37,
+    "last4_mean": 9.75,
+    "projection": 12.1,
+    "sd": 12.2,
+    "interval80": [
+     0.0,
+     27.74
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0036328",
+    "player": "Antonio Gibson",
+    "position": "RB",
+    "n_weeks": 69,
+    "season_mean": 21.54,
+    "last4_mean": 8.5,
+    "projection": 16.97,
+    "sd": 18.61,
+    "interval80": [
+     0.0,
+     40.83
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "receiving_yards",
+    "player_id": "00-0035644",
+    "player": "Noah Fant",
+    "position": "TE",
+    "n_weeks": 69,
+    "season_mean": 43.22,
+    "last4_mean": 36.5,
+    "projection": 40.87,
+    "sd": 23.72,
+    "interval80": [
+     10.46,
+     71.27
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   },
+   {
+    "market": "rushing_yards",
+    "player_id": "00-0037248",
+    "player": "James Cook",
+    "position": "RB",
+    "n_weeks": 69,
+    "season_mean": 73.22,
+    "last4_mean": 98.25,
+    "projection": 81.98,
+    "sd": 42.73,
+    "interval80": [
+     27.21,
+     136.74
+    ],
+    "price": null,
+    "price_status": "BLANK: no observed prop price in any committed source",
+    "source": "https://www.nfl.com/stats/player-stats/"
+   }
+  ],
+  "note": "Projections only. A prop can never be scored, ranked or turned into a parlay leg until an observed price exists for it; none does.",
+  "shrinkage": 0.35
+ },
+ "promoted": [],
+ "n_rules_tested": 12,
+ "n_bets_total": 26299
+}

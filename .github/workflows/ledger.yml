@@ -1,0 +1,61 @@
+name: Verify and publish the Origination Ledger
+
+# Additive workflow owned by session c84a41a4-nfl1. It does not touch, replace or gate any
+# existing workflow: it only builds `ledger/` and runs that site's own gate.
+#
+# Publishing note: GitHub Pages for this repository is configured as a legacy branch build from
+# `main` /, so `ledger/` is published by that mechanism once this lands on `main`. This job is
+# the QUALITY gate: it recomputes the study from the committed inputs, rebuilds the pages, and
+# fails on a broken link, a data table with no Source column, a sourceless row, or placeholder
+# text.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "ledger/**"
+      - "s9cb/c84_*.py"
+      - "data/session-c84a41a4/**"
+      - ".github/workflows/ledger.yml"
+  pull_request:
+    paths:
+      - "ledger/**"
+      - "s9cb/c84_*.py"
+      - "data/session-c84a41a4/**"
+      - ".github/workflows/ledger.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ledger-${{ github.event_name }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ledger:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install analysis dependencies
+        run: python -m pip install --quiet numpy pandas
+      - name: Recompute the pre-registered study from the committed inputs
+        run: python3 s9cb/c84_study.py
+      - name: Recompute the confirmed-replacement study
+        run: python3 s9cb/c84_replacement_study.py
+      - name: Rebuild the site from the recomputed data
+        run: python3 ledger/build.py
+      - name: The committed pages must equal the freshly generated pages
+        run: |
+          if ! git diff --quiet -- ledger/ data/session-c84a41a4/; then
+            echo "::error::ledger/ or data/session-c84a41a4/ is stale. Re-run the two study scripts and ledger/build.py, then commit."
+            git diff --stat -- ledger/ data/session-c84a41a4/
+            exit 1
+          fi
+      - name: Gate the site (links, source columns, sourceless rows, placeholders, reachability)
+        run: python3 ledger/verify.py
+      - name: Fail if the pre-registration was edited after the results were computed
+        run: python3 ledger/check_registration.py
