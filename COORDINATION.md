@@ -3062,3 +3062,17 @@ additive and non-overlapping with every earlier session, which are all closed.
 - **Open board defect (log, not edited):** the daily data job (`collect-data.yml`, which also runs on `arena/**` pushes) re-renders some pages with a different path than `tools/build_site_all.py`: nav links are written as `../pages/…` (e.g. `pages/luck.html`, `pages/readiness.html`), so `build_site_all.py --check` fails after each refresh commit, although every link still resolves. Owner: the session that owns `tools/build_dashboard.py` and the collect-data step. Request: make the data job end with `tools/build_site_all.py` (or make the check run after it). Logged as part of F-7810-10.
 - Follow-up PR (label corrections in the register; PR-09 wording and IN-10 count) opened from the same branch after the merge; its result is recorded here when it is merged.
 - Follow-up PR #66 (register label corrections; cross-reference SP-09 → SI-09): **MERGED** at 2026-11-15T12:38:16Z, merge commit `95618e7`. Its head `bb6b8a0` passed all four workflows. GitHub Pages: built for `8c57b7c` (later main data refresh) after the `95618e7` Pages run succeeded.
+
+### Session `26b2c41e-nfl1` — PR, merge and Pages record
+
+- **PR:** <https://github.com/kanlerxz87-cyber/NFL1/pull/60> — merged 2026-11-15 12:56:31 UTC as merge commit `20b4817` (merge, not squash; `gh pr merge 60 --merge`).
+- **Checks on `main` after merge:** `Verify NFL1 site` success · `Verify decision dashboard` success · `Decision Room build and gate` success · `Verify NFL Decision Lab site build` success · `pages build and deployment` success.
+- **Live check:** <https://kanlerxz87-cyber.github.io/NFL1/room/readiness.html> served; source links present in the readiness table (fetched 2026-11-15).
+- **Why the PR took several pushes:** the first checks failed. Root causes, all fixed on the branch: (1) the base commit `5a769b3` was a `[skip ci]` data refresh and had drifted from its generators, so `build_site_all.py --check` failed on `main` too; (2) the navigation normaliser is path-dependent, so the committed pages were not reproducible until committed at their fixed point; (3) `verify.yml` rebuilt the site before installing pandas (main already had the fix in `17f2791`; main's version was taken). The collect job's last run on the branch failed at its commit step, a race with the branch pushes; `main`'s collect runs succeeded.
+- **Irregularities added (logged, not changed):**
+  - the readiness page inherits the room's `Built 2026-11-13 12:45 UTC` stamp from `room/data/meta.json` instead of its own build time;
+  - two readiness registers now exist (`data/readiness.json` from `07810d9f`, 82 rows, and `room/data/readiness_26b2c41e.json`, 24 rows); the integration session should merge them;
+  - `data/capture/comparison.json` is rewritten with a new timestamp on every build (see above);
+  - the scheduled data refresh commits to this branch after every push, which makes the branch head move during a PR; a heartbeat commit (`b91669f`) landed after the last content commit and was merged with it.
+- **Not done in this session:** every brief item not covered by the readiness register or the Lions audit remains recorded as blocked, partial or not established on the readiness page. No item was claimed as done beyond what is listed above.
+
