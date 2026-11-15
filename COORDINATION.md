@@ -3238,12 +3238,15 @@ in A3 below when available.
 from `arena/4227cfea-nfl1` to `main`. After the rebase onto `96dd83f`, collect run
 [43717199378](https://github.com/kanlerxz87-cyber/NFL1/actions/runs/43717199378) passed on code head
 `b187811`, including the current injury scrape, model build, canonical full-site build and post-build
-gates. Other code-head checks passed: s9cb collector `43717199374`, source audit `43717199389`, full
-site `43717199393`, and decision dashboard `43717199384`. The collect run's data bot then committed
-refresh outputs (`e62a1c6` for model/pages; `7e6d720` for the s9cb extract). On the latest branch tip,
-the local 157-test suite, `tools/build_site_all.py --check`, freshness, committed-site, source/link,
-Room, Strength and availability gates all pass. The PR is mergeable and code-head checks are green;
-PR merge and Pages deployment results will be recorded here after merge.
+gates. Subsequent full-code checks passed on `3ee6d75` and again on merge head `7001f0a`: source audit
+`43717503833`, full site `43717503796`, decision dashboard `43717503834`, Decision Room `43717503849`,
+and collect `43717503862`. Main then advanced through PR #78 to `32a5f77`, so the latest data-bot
+head `1384b47` was fast-forwarded locally and merged with that current main. The canonical builder
+has been rerun and `tools/build_site_all.py --check` passes on this latest integrated tree; local
+unit tests passed 163/163, freshness 23, combined verification (2,688 local links), 2,087 sourced
+rows (73 still explicitly unverified), scrape drift, reachability (176 pages), Room, Strength, and
+figure audits all pass. Final CI is rerunning for this latest main integration; merge and Pages
+results will be recorded only after those checks pass.
 
 **Non-blocking review notes from Actions.** The collect run emitted the existing warning
 “Injury availability source needs review (mirrored feed, latest complete week (6))”; this does not
