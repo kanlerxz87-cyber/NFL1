@@ -144,10 +144,11 @@ def pct(v, digits=1) -> str:
 
 def badge(status: str) -> str:
     s = (status or "").lower()
-    cls = ("pass" if s in ("pass", "implemented", "matched", "answered", "ok", "verified")
+    cls = ("pass" if s in ("pass", "implemented", "matched", "answered", "ok", "verified", "met")
            else "warn" if s in ("watch", "proposed", "partially answered", "needs sign-off",
                                 "model-only", "open", "queued", "recommended",
-                                "open - decision required", "open - user decision")
+                                "open - decision required", "open - user decision",
+                                "partial", "unverified")
            else "fail" if s in ("fail", "blocked", "mismatch", "unavailable", "flagged")
            else "neutral")
     return f'<span class="badge {cls}">{esc(status)}</span>'
