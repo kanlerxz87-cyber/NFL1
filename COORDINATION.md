@@ -3159,7 +3159,7 @@ main reproducibility gate red after refreshes.
 |---|---|---|---|---|---|
 | A1 | Reconcile the daily data-refresh workflow with the canonical site build; add a regression check that prevents workflow/render drift | done | `4227cfea` | `.github/workflows/collect-data.yml`, `tests/test_collect_workflow.py`, canonical generated `data/readiness.json`, `data/capture/comparison.json`, `pages/snapshots.html` | Daily refresh invokes the canonical full-site builder once; generated readiness, capture comparison and snapshot ledger were refreshed from existing verified inputs |
 | A2 | Run relevant project gates and record exact results, sources and any remaining irregularities | done | `4227cfea` | this section of `COORDINATION.md` | Full test suite and build/verification gates recorded below; existing official-data flags remain open |
-| A3 | PR / merge / Pages confirmation if checks permit | in progress | `4227cfea` | this section of `COORDINATION.md` | |
+| A3 | PR / merge / Pages confirmation if checks permit | in progress | `4227cfea` | this section of `COORDINATION.md` | PR #72 open; final collect run 43716634484 and all five PR CI runs passed; the bot's 7ed8de7 snapshot refresh was locally reverified |
 
 ### Result — session `4227cfea-nfl1` (A1–A2)
 
@@ -3231,3 +3231,22 @@ later omitted during the main rebase as an intermediate artifact; the 12:56 UTC 
 was retained. The latter reflects an official report read with 347 rows and its raw hash; the
 underlying statuses are not interpreted as new changes. Final-head CI and Pages status are recorded
 in A3 below when available.
+
+**A3 — PR / final-head validation (in progress).** Opened [PR #72](https://github.com/kanlerxz87-cyber/NFL1/pull/72)
+from `arena/4227cfea-nfl1` to `main`. After the latest rebase and regenerated snapshot outputs,
+GitHub Actions run [43716634484](https://github.com/kanlerxz87-cyber/NFL1/actions/runs/43716634484)
+passed the full collect workflow. It produced bot commit `7ed8de7`; the latest immutable snapshot
+heartbeat is `2026-11-15T12:56:11Z` (347 report rows), and the data dashboard build stamp is
+`2026-11-15T13:00:14Z`. The snapshot points to nfl.com. On code head
+`9ffcc83`, all five PR workflows passed: Decision Room build/gate `43716634517`, collect `43716634484`,
+source audit `43716634525`, decision dashboard `43716634454`, and full site verification `43716634509`.
+After the bot refresh, the current branch was pulled locally; 154 tests and the full reproducible site
+build/gates passed again against `7ed8de7` (current local head at this record). No test or build
+failure is outstanding.
+
+**Non-blocking review notes from Actions.** The collect run emitted the existing warning
+“Injury availability source needs review (mirrored feed, latest complete week (6))”; this does not
+mean the model used a verified current-week official designation feed. It remains a source-quality
+flag and was not re-labelled as official evidence. GitHub also emitted Node.js 20 deprecation and
+`ubuntu-latest` migration notices; they did not fail any job. No injury-status values were manually
+changed in this PR. Merge SHA and the Pages deployment result will be added after merge.
