@@ -3145,6 +3145,126 @@ Most of the brief's items were not started. Examples, each still open on the boa
 - **Merge (recorded after the fact):** PR #73 merged with a merge commit, `145731b`, at 2026-11-15T12:59:56Z (`gh pr view 73`: state MERGED). The Pages build on `main` (run `43716710645`) completed with `success`. The live pages `research/backtest.html` and `depth-chart.html` were fetched and show the changed content (the backtest page carries the 'not a leaderboard result' banner; the depth chart shows Packers names without jersey numbers).
 - **Follow-up in the same session:** the Backtest page still had the KPI label 'declared before any of them was scored', an unverified claim. It was reworded to 'rules in this study; no pre-registration commit is recorded for them' and shipped in a follow-up PR from this branch.
 
+## Session `4227cfea-nfl1` — claim (2026-11-15)
+
+Read the full shared task board before work. This session stays on Arena's fixed branch
+`arena/4227cfea-nfl1` (the branch convention requested in the brief cannot replace the platform-fixed
+branch). No active claim on the current `main` tree owns the workflow/test scope below. The defect
+is the post-merge follow-up recorded by session `07810d9f`: the daily collect-data job rendered
+some published pages via a different generator path than `tools/build_site_all.py`, leaving the
+main reproducibility gate red after refreshes.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| A1 | Reconcile the daily data-refresh workflow with the canonical site build; add a regression check that prevents workflow/render drift | done | `4227cfea` | `.github/workflows/collect-data.yml`, `tests/test_collect_workflow.py`, canonical generated `data/readiness.json`, `data/capture/comparison.json`, `pages/snapshots.html`, `research/injuries.html` | Daily refresh invokes the canonical full-site builder once; generated readiness, capture comparison, snapshot ledger and post-rebase research page were refreshed from existing inputs |
+| A2 | Run relevant project gates and record exact results, sources and any remaining irregularities | done | `4227cfea` | this section of `COORDINATION.md` | Full test suite and build/verification gates recorded below; existing official-data flags remain open |
+| A3 | PR / merge / Pages confirmation if checks permit | in progress | `4227cfea` | this section of `COORDINATION.md` | PR #72 open; final collect run 43716634484 and all five PR CI runs passed; the bot's 7ed8de7 snapshot refresh was locally reverified |
+
+### Result — session `4227cfea-nfl1` (A1–A2)
+
+**Workflow correction.** `.github/workflows/collect-data.yml` previously rendered `index.html` and
+`pages/*` directly with `pipeline/gen_site.py`, then rebuilt only the decision-room/dashboard subset.
+That omitted the canonical navigation normalization and left other generated page roots outside
+the daily refresh path. The workflow now (1) regenerates and checks the official evidence fixtures,
+(2) calls `tools/build_site_all.py` once for all site generations, (3) runs freshness, generator
+ownership, and committed-site gates after that build, and (4) stages all modified tracked build
+outputs plus refreshed data. Added `tests/test_collect_workflow.py` (standard-library only) to
+ensure there is one canonical builder, no competing direct page generators, all integrity gates
+follow the build, and tracked output changes are staged.
+
+**Verification performed.**
+- `python -m unittest discover -s tests -v`: **139 tests passed** (including 3 new workflow regression tests).
+- `python tools/build_site_all.py` and then `python tools/build_site_all.py --check`: **PASS**; every
+  generated page reproduced byte-for-byte from the current data. The initial sandbox attempt lacked
+  pandas; the complete build was then run successfully in a local dependency environment matching
+  the workflow's installed packages.
+- Workflow YAML parsed successfully with PyYAML.
+- `tools/check_freshness.py`: 23 assertions passed; `tools/check_generators.py`: pass;
+  `tools/check_committed_site.py`: pass (28 pages checked; 1,609 local links resolved; 52 source
+  tables / 1,218 linked rows; existing 12 unstamped legacy pages remain disclosed as F19).
+- `tools/verify.py`: **2,062 rows**, all 2,062 have official source URLs, **73 marked unverified**,
+  0 broken links. `tools/verify_combined.py`: pass, 2,532 local links, 0 broken.
+  `tools/check_reachability.py`: all 168 published pages reachable. Verified site, Room and Strength
+  gates pass; `audit_numbers.py` independently reproduced all 47 published figures.
+- `tools/evidence_from_official.py` + `tools/verify_official.py`: **20 passed, 8 flagged, 0 failed**;
+  fixtures had 279 injury rows. These checks validate the repository's dated, hand-transcribed
+  official fixtures; they are not a fresh live NFL-source capture. The successful scheduled Actions
+  run also refreshed scraper/model outputs from the current official injury-report read; the hand-
+  transcribed fixture rows themselves were unchanged (only their generation timestamps were updated).
+
+**Irregularities retained, not silently changed.** The 8 official-fixture audit flags include known
+mismatches between the current scraped injury rows and the older Week 10 transcriptions, injury-row
+count differences, and depth-chart transcription differences. They remain findings for review and
+are not fixed by this infrastructure change. No NFL result, injury status, price or model value was
+added or modified. `verify.py` still identifies 73 unverified values; these remain labelled rather
+than inferred.
+
+**Sources / review links.** Workflow source: [collect-data.yml](https://github.com/kanlerxz87-cyber/NFL1/blob/main/.github/workflows/collect-data.yml);
+source-audit output: [official_verification.json](https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/audit/official_verification.json).
+The dated fixture references are the NFL's [2026 standings](https://www.nfl.com/standings/league/2026/reg),
+[official injury report](https://www.nfl.com/injuries/), [Week 10 schedule](https://www.nfl.com/schedules/2026/REG10),
+and [2026 schedule](https://www.nfl.com/schedules/2026). No claim is made here that these pages were
+re-fetched live in this session.
+
+**Follow-up validation after main advanced (2026-11-15).** Main advanced through PRs #70, #71,
+#60, #73 and #76 to `96dd83f` while this branch was open. Rebased onto that current main, preserving
+its readiness/snapshot and research changes. The readiness and snapshot generators are already part
+of `tools/build_site_all.py`, so the daily job invokes them through that single canonical entry point.
+Main's 12:56:16Z snapshot heartbeat superseded the branch's earlier 12:56:11Z copy; the newer
+main-side heartbeat was kept. The 13:04 model outputs from the successful collect run were retained.
+An overlapping older s9cb extract (`5184873`, generated 13:03:57Z) was omitted because current main
+already had a newer provenance extract (13:04:24Z); no more recent main-side work was discarded.
+Main's new source rows required rebuilding `pages/snapshots.html` and `research/injuries.html`; after
+regeneration, `tools/build_site_all.py --check` passed. The rebased tree passes **157 unit tests**,
+YAML parsing, freshness (23), generator ownership, committed-site, site/Room/Strength validation,
+reachability (171 pages), independent figure audit (47/47), and combined verification (2,659 local
+links, 0 broken). `tools/verify.py` checks 2,074 rows, all with official source URLs; 73 values remain
+explicitly unverified. Existing F19 unstamped legacy pages and official-data inconsistencies remain
+visible; no result or injury designation was manually filled in here.
+
+**Live workflow runs.** The initial Actions run
+[43715989007](https://github.com/kanlerxz87-cyber/NFL1/actions/runs/43715989007) passed all steps,
+including live injury scraping and the canonical build. After rebasing onto the readiness/snapshot
+site, run [43716348350](https://github.com/kanlerxz87-cyber/NFL1/actions/runs/43716348350) also passed
+the collect workflow's canonical build and post-build integrity gates. Its model-output commit was
+later omitted during the main rebase as an intermediate artifact; the 12:56 UTC snapshot run
+[38786b6](https://github.com/kanlerxz87-cyber/NFL1/commit/38786b604f24190e940ad7d5055ec46ab0180a5e)
+was retained. The latter reflects an official report read with 347 rows and its raw hash; the
+underlying statuses are not interpreted as new changes. Final-head CI and Pages status are recorded
+in A3 below when available.
+
+**A3 — PR / final-head validation (in progress).** Opened [PR #72](https://github.com/kanlerxz87-cyber/NFL1/pull/72)
+from `arena/4227cfea-nfl1` to `main`. After the rebase onto `96dd83f`, collect run
+[43717199378](https://github.com/kanlerxz87-cyber/NFL1/actions/runs/43717199378) passed on code head
+`b187811`, including the current injury scrape, model build, canonical full-site build and post-build
+gates. Subsequent full-code checks passed on `3ee6d75` and again on merge head `7001f0a`: source audit
+`43717503833`, full site `43717503796`, decision dashboard `43717503834`, Decision Room `43717503849`,
+and collect `43717503862`. Main then advanced through PR #78 to `32a5f77`, so the latest data-bot
+head `1384b47` was fast-forwarded locally and merged with that current main. The canonical builder
+has been rerun and `tools/build_site_all.py --check` passes on this latest integrated tree; local
+unit tests passed 163/163, freshness 23, combined verification (2,688 local links), 2,087 sourced
+rows (73 still explicitly unverified), scrape drift, reachability (176 pages), Room, Strength, and
+figure audits all pass. Final PR-head checks passed (build `43717677336`, source audit `43717677277`,
+decision dashboard `43717677341`, NFL1 site `43717677387`). PR #72 merged at 13:12:07Z as
+`f20b8d6d7d47e9b67271f4e8c2f445f9b15fe52c`. Post-merge checks passed: source audit `43717757939`,
+collector `43717757933`, decision dashboard `43717757871`, NFL1 site `43717757965`, and Decision
+Lab build `43717757970`. GitHub Pages deployment run `43717756735` completed successfully; deployment
+status for `github-pages` is `success` at
+[https://kanlerxz87-cyber.github.io/NFL1/](https://kanlerxz87-cyber.github.io/NFL1/). Existing
+mirrored-feed warning (latest complete week 6), 73 unverified values, F19 unstamped legacy pages, and
+known injury/depth discrepancies remain disclosed, not filled or relabeled. Node.js 20 and
+`ubuntu-latest` migration notices did not fail the checks.
+
+**Non-blocking review notes from Actions.** The collect run emitted the existing warning
+“Injury availability source needs review (mirrored feed, latest complete week (6))”; this does not
+mean the model used a verified current-week official designation feed. It remains a source-quality
+flag and was not re-labelled as official evidence. GitHub also emitted Node.js 20 deprecation and
+`ubuntu-latest` migration notices; they did not fail any job. No injury-status values were manually
+changed in this PR. Merge SHA and the Pages deployment result will be added after merge.
+
+
+---
+
 ---
 
 # Session `c84a41a4-nfl1` — claims (branch `arena/c84a41a4-nfl1`, base `df084b5`, 2026-11-15)
