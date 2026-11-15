@@ -83,17 +83,17 @@
   <div class="main">
     <div class="topbar">
       <div class="crumb">NFL1 / <b>Flagged for Review</b></div>
-      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">52 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">53 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
     </div>
     <main class="content" id="main">
       <div class="kicker">Assurance</div>
       <h1>Flagged for Review</h1>
       <p class="lede">Clearly labelled irregularities, official-page conflicts, unverified values and coordination issues — each with an official source link for manual review, none blocking the merge.</p>
       <div class="callout flag"><b>Flagged for Review.</b> These irregularities and unverified items do not block the merge or the live site. Each has an official source link for manual review and a suggested action. A status of <em>needs review</em> means exactly this: published here, not blocking.</div>
-<div class="cards"><div class="card"><div class="label">Flagged items</div><div class="value">52</div><div class="detail">All with source links</div></div><div class="card"><div class="label">Official-page irregularities</div><div class="value">7</div><div class="detail">F02–F08</div></div><div class="card"><div class="label">Missing official data</div><div class="value">5</div><div class="detail">F09–F11, F14, F15</div></div><div class="card"><div class="label">Combined-site review</div><div class="value">24</div><div class="detail">F25–F36</div></div></div>
+<div class="cards"><div class="card"><div class="label">Flagged items</div><div class="value">53</div><div class="detail">All with source links</div></div><div class="card"><div class="label">Official-page irregularities</div><div class="value">7</div><div class="detail">F02–F08</div></div><div class="card"><div class="label">Missing official data</div><div class="value">5</div><div class="detail">F09–F11, F14, F15</div></div><div class="card"><div class="label">Combined-site review</div><div class="value">25</div><div class="detail">F25–F36</div></div></div>
 <h2 id="all">All flagged irregularities</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-flags" aria-label="Filter tbl-flags" placeholder="Filter rows…">
-<span class="count" data-count-for="tbl-flags">52 rows shown</span></div>
+<span class="count" data-count-for="tbl-flags">53 rows shown</span></div>
 <div class="tablewrap"><table class="data-table" id="tbl-flags"><caption>Every flag with category, description, impact, status, official source link and suggested action for the reviewer.</caption>
 <thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Category</th><th scope="col" class="sortable">Irregularity / unverified item</th><th scope="col" class="sortable">Impact on decisions</th><th scope="col" class="sortable">Status</th><th scope="col" class="sortable">Suggested action</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
 <tr id="F01" data-verified="true">
@@ -563,6 +563,15 @@
 <td><span class="badge neutral">needs review</span></td>
 <td data-value="1" class="wide">Fixed: the two snapshot values were corrected to the official times and pipeline/build_all.py now applies a documented, source-linked SCHEDULE_FEED_FIXES table at build time so scheduled refreshes keep the official values. Reviewer: confirm against https://www.nfl.com/schedules/2026/by-week/week-11 and https://www.nfl.com/schedules/2026/REG11 (fetched 2026-11-13); if the upstream feed is corrected, the table can be dropped (it is idempotent).</td>
 <td><span class="src"><a href="https://www.nfl.com/schedules" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official schedule">S06 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F48" data-verified="true">
+<td><code>F48</code></td>
+<td data-value="1">Official results corpus is one game behind standings</td>
+<td data-value="1" class="wide">The verified results corpus contains 136 games and ends at Week 9. The official 2026 standings retrieved 2026-11-13 sum to 136 wins, 136 losses and 2 ties, implying 137 completed games. The official Week 10 Game Center reports Commanders 24, Giants 21, FINAL on 2026-11-12. The result is not present in data/verified/games_2026.csv. No score row has been added by this audit.</td>
+<td data-value="1" class="wide">The verified backtest results corpus is incomplete at its stated current-season boundary. Historical skill metrics, result verification and any injury/result join are blocked for the omitted game until its official Game Book and provenance are captured and reconciled.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Reconcile the official Game Center and NFL Game Book with the registered 2026 results corpus, record the official game ID, final score, source URL, captured timestamp and hash, then rerun the result and leaderboard gates. Official schedule: https://www.nfl.com/schedules/2026/by-week/week-10. Keep the affected row blank until verified.</td>
+<td><span class="src"><a href="https://www.nfl.com/games/commanders-at-giants-2026-reg-10" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official Game Center result">S27 ↗</a> <a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com)">S02 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
 </tr>
 </tbody></table></div>
 <h2 id="unverified">Registry of blank/unverified values</h2>
