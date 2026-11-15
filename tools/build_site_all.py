@@ -66,6 +66,14 @@ STEPS = [
     # session 57c05555-nfl1: the depth-parse and availability-ledger verification page. It runs
     # before the landing page so the landing page's site map can list it.
     ("depth and ledger verification page", [sys.executable, "tools/build_session_page.py"], ROOT),
+    # session 57c05555-nfl1: the raw-capture gates. They read the committed captures and the
+    # verified filings, fail loudly on a stale parse or a stale verified file, and write the
+    # derived registers the page reads, so the page can never show a number the gate rejects.
+    ("official depth parse gate", [sys.executable, "tools/check_depth_parse.py"], ROOT),
+    ("ledger integrity", [sys.executable, "pipeline/ledger.py", "verify"], ROOT),
+    ("ledger index", [sys.executable, "pipeline/ledger.py", "index"], ROOT),
+    ("transactions staleness register", [sys.executable, "scripts/nfl1_57c05555/staleness.py"], ROOT),
+    ("verified injury filings", [sys.executable, "scripts/nfl1_57c05555/repair_verified_injuries.py"], ROOT),
     ("landing page and decision lab", [sys.executable, "gen_site.py"], os.path.join(ROOT, "pipeline")),
     # Session 90c2b454-nfl1 (P3): the injury-snapshot ledger, rendered from its own store.
     ("injury snapshot ledger", [sys.executable, "tools/build_snapshots_page.py"], ROOT),

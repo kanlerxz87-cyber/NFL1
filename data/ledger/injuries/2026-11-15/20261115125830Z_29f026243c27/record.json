@@ -1,0 +1,28 @@
+{
+ "source": "injuries",
+ "source_title": "nfl.com official weekly injury report",
+ "official": true,
+ "what_this_records": "practice status and game status for every listed player",
+ "url": "https://www.nfl.com/injuries/league/2026/reg10",
+ "captured_at": "2026-11-15T12:58:30Z",
+ "clock_precision": "second",
+ "replayable_to_a_kickoff": true,
+ "generated_at": "",
+ "captured_at_kind": "fetch clock time (the page declares no update time)",
+ "club": "",
+ "week": "10",
+ "season": "2026",
+ "sha256": "29f026243c2794d9318d75066c0cb687d6dde90149ec231e57636a0e35450ca5",
+ "bytes": 3804,
+ "parser": "row-table/1",
+ "parser_version_depths": "",
+ "capture_method": "fetch_page render of the official page (text, not HTML)",
+ "payload_kind": "raw-page-text",
+ "raw_html_retained": true,
+ "conflict": null,
+ "notes": "PARTIAL: chunks 0, 1 and 7 of 8 were read in this session. This file holds the two Sunday-early games from chunk 0 (WAS-NYG, NE-DET) verbatim plus the three Lions designations the brief names, and the news headlines chunk 7 carries; it does NOT hold the other 12 games. The full 347-row transcription of 15 Nov is a separate capture.",
+ "counts": {
+  "player_rows": 0,
+  "clubs_with_a_table": 4
+ }
+}

@@ -1,6 +1,6 @@
 {
  "generated_by": "pipeline/ledger.py",
- "newest_capture_at": "2026-11-15T12:57:10Z",
+ "newest_capture_at": "2026-11-15T12:58:30Z",
  "what_this_is": "Append-only captures of official sources, each with the clock time it was read and the sha256 of its bytes. A capture is never rewritten; a second read of the same source at a later time is a new capture.",
  "sources": {
   "injuries": {
@@ -30,7 +30,7 @@
  },
  "counts": {
   "depth_chart": 7,
-  "injuries": 2,
+  "injuries": 3,
   "transactions": 2
  },
  "by_source": {
@@ -297,6 +297,23 @@
      "player_rows": 0,
      "clubs_with_a_table": 0
     }
+   },
+   {
+    "captured_at": "2026-11-15T12:58:30Z",
+    "clock_precision": "second",
+    "payload_kind": "raw-page-text",
+    "dir": "data/ledger/injuries/2026-11-15/20261115125830Z_29f026243c27",
+    "url": "https://www.nfl.com/injuries/league/2026/reg10",
+    "sha256": "29f026243c2794d9318d75066c0cb687d6dde90149ec231e57636a0e35450ca5",
+    "bytes": 3804,
+    "club": "",
+    "week": "10",
+    "parser": "row-table/1",
+    "capture_kind": "",
+    "counts": {
+     "player_rows": 0,
+     "clubs_with_a_table": 4
+    }
    }
   ],
   "transactions": [
@@ -349,7 +366,7 @@
   "depth_chart_clubs_expected": 32,
   "days_needed_for_a_14_day_holdout": 14,
   "days_still_to_capture": 12,
-  "captures_with_a_clock_time": 9,
+  "captures_with_a_clock_time": 10,
   "captures_date_only": 2,
   "honest_position": "One day of captures cannot replay a practice week. The ledger makes every future read replayable and proves the archive is thin today; it does not manufacture the missing days."
  }

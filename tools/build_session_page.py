@@ -553,8 +553,85 @@ def build() -> str:
         )
     out.append(b.table(["Irregularity", "What was found", "What would settle it", "State"], irr_rows))
 
-    # ---------------- 9. reproduce
-    out.append("<h2>9. Reproduce every number on this page</h2>")
+    # ---------------- 9. the injury report as a series
+    evo = load("data/ledger/injury_report_evolution.json", {})
+    if evo:
+        out.append("<h2>9. The injury report as a dated series, not a weekly snapshot</h2>")
+        out.append(
+            '<p class="note">Three sessions recorded three different row counts for the same week. '
+            "That is not a contradiction: the official page grew during the week. Publishing the "
+            "series is the only way a reader can tell the difference, and it is the reason the "
+            "ledger exists.</p>"
+        )
+        rows = []
+        for pt in evo.get("series", []):
+            rows.append(
+                b.row(
+                    [
+                        f'<strong>{e(pt["captured"])}</strong>',
+                        f'<span class="num">{pt["rows"]}</span>',
+                        f'<span class="num">{pt["clubs"]}</span>',
+                        f'<span class="num">{pt["clubs_printing_no_injuries"]}</span>',
+                        e(", ".join(pt["no_injury_clubs"]) or "none"),
+                        e(pt["note"]),
+                        e(pt["artifact"]),
+                    ],
+                    [evo["source_url"]],
+                )
+            )
+        out.append(
+            b.table(["Captured (UTC)", "Rows", "Clubs", "Clubs printing no injuries",
+                     "Which clubs", "What it records", "Artifact"], rows)
+        )
+        d = evo.get("delta", {})
+        if d:
+            out.append(
+                '<p class="note"><strong>What changed between the last two reads:</strong> '
+                f'{d["rows"]} player rows and {d["clubs"]} club tables appeared in the 48 hours '
+                f'before kickoff, and {d["no_injury_sections_closed"]} "No Injuries Reported" '
+                "sections became full injury tables. A model that froze a Wednesday reading would "
+                "have been wrong about all of it.</p>"
+            )
+        out.append("<h3>Claims still published elsewhere in this repository</h3>")
+        out.append(
+            '<p class="note">These are recorded here and on the coordination board rather than '
+            "edited, because each lives in a file owned by another session. Every one is checkable "
+            "against the capture in one click.</p>"
+        )
+        rows = []
+        for c in evo.get("contradiction_register", []):
+            from_r = ", ".join(c["who_still_publishes_it"])
+            rows.append(
+                b.row(
+                    [
+                        f'<strong>{e(c["claim"])}</strong>',
+                        f'<span class="open">{e(c["status"])}</span>',
+                        e(c["evidence_for_false"]),
+                        e(from_r),
+                        e(c["action_for_the_owning_session"]),
+                        e(c["severity"]),
+                    ],
+                    [evo["source_url"]],
+                )
+            )
+        out.append(
+            b.table(["Claim", "Status on 2026-11-15", "What the official capture shows",
+                     "Where it is still published", "What the owning session should do",
+                     "Severity"], rows)
+        )
+        out.append("<h3>What this session fixed at the source</h3>")
+        rows = []
+        for f in evo.get("fixed_by_this_session", []):
+            rows.append(
+                b.row(
+                    [f'<code>{e(f["artifact"])}</code>', e(f["was"]), e(f["now"]), e(f["how"])],
+                    [evo["source_url"]],
+                )
+            )
+        out.append(b.table(["Artifact", "Was", "Now", "How"], rows))
+
+    # ---------------- 10. reproduce
+    out.append("<h2>10. Reproduce every number on this page</h2>")
     out.append(
         '<p class="note">Each command runs offline against the committed captures and fails if a '
         "number on this page stops being true.</p>"
@@ -562,6 +639,7 @@ def build() -> str:
         "python3 pipeline/ledger.py verify           # re-hash every capture\n"
         "python3 pipeline/ledger.py index --check    # ledger index is current\n"
         "python3 scripts/nfl1_57c05555/staleness.py --check   # staleness register is current\n"
+        "python3 scripts/nfl1_57c05555/repair_verified_injuries.py --check  # verified injury files\n"
         "python3 tools/build_session_page.py --check # this page equals what the data produces\n"
         "python3 -m pytest tests/test_depth_parse_57c05555.py tests/test_staleness_57c05555.py -q</code></pre>"
     )
