@@ -23,6 +23,7 @@ Run: python3 tools/check_preregistration.py
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import subprocess
@@ -32,6 +33,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PRE = os.path.join(ROOT, "data", "strat", "preregistration.json")
 LB = os.path.join(ROOT, "data", "s9cb", "leaderboard.json")
 GENERATOR = os.path.join(ROOT, "s9cb", "analysis", "strategies.py")
+STAMP = os.path.join(ROOT, "data", "strat", "preregistration_stamp.json")
+PRE_PATH = "data/strat/preregistration.json"
 
 
 def git(*args: str) -> tuple[int, str]:
@@ -42,6 +45,43 @@ def git(*args: str) -> tuple[int, str]:
 def is_ancestor(commit: str, of: str = "HEAD") -> bool:
     code, _ = git("merge-base", "--is-ancestor", commit, of)
     return code == 0
+
+
+def check_stamp(stamp: dict, reg: dict, problems: list) -> dict:
+    """The registry as committed must hash to the value the stamp recorded."""
+    out = {"registration_commit": (stamp.get("registration_commit") or "")[:12],
+           "n_rule_fingerprints": len(stamp.get("rule_sha256") or {})}
+    commit = stamp.get("registration_commit")
+    if not commit:
+        problems.append("no registration stamp: run tools/stamp_preregistration.py")
+        return out
+    blob = subprocess.run(["git", "show", f"{commit}:{PRE_PATH}"], cwd=ROOT,
+                          capture_output=True).stdout
+    if not blob:
+        problems.append(f"stamp names commit {commit[:8]} but {PRE_PATH} is not in it")
+        return out
+    digest = hashlib.sha256(blob).hexdigest()
+    out["file_sha256_matches"] = (digest == stamp.get("file_sha256_as_committed"))
+    if not out["file_sha256_matches"]:
+        problems.append(
+            f"{PRE_PATH} has changed since commit {commit[:8]} was stamped "
+            f"({digest[:12]} != {stamp.get('file_sha256_as_committed', '')[:12]}). A frozen rule "
+            f"was edited after registration; re-register with a new stamp and say why in "
+            f"COORDINATION.md, or revert the edit.")
+    # the fingerprint of every rule's frozen fields must still match
+    fps = stamp.get("rule_sha256") or {}
+    for r in reg.get("records") or []:
+        key = f"{r['id']} {r['name']}"
+        want = fps.get(key)
+        got = hashlib.sha256(
+            json.dumps({"definition": r["definition"], "inputs": r["inputs"],
+                        "sample_window": r["sample_window"], "gates": r["gates"]},
+                       sort_keys=True).encode()).hexdigest()
+        if want and want != got:
+            problems.append(f"{r['id']}: the frozen fields of {key!r} changed after registration")
+        elif not want:
+            problems.append(f"{r['id']}: {key!r} has no stamped fingerprint")
+    return out
 
 
 def check(reg: dict, scored: set[str], generator_src: str,
@@ -55,15 +95,8 @@ def check(reg: dict, scored: set[str], generator_src: str,
         if strategy not in by_key:
             problems.append(f"result published with no registration: {strategy!r}")
 
-    # 2. every record's commit precedes the publishing commit
-    for r in records:
-        c = r.get("registration_commit")
-        if not c:
-            problems.append(f"{r['id']}: registration has no commit hash")
-            continue
-        if not is_ancestor(c, head):
-            problems.append(f"{r['id']}: registration commit {c[:8]} is not an ancestor of {head[:8]} "
-                            f"— the rule was registered after the result")
+    # 2. the stamp's commit must precede the publishing commit
+    #    (one stamp covers the whole registry; see tools/stamp_preregistration.py)
 
     # 3. the frozen text still matches the code
     for r in records:
@@ -98,18 +131,33 @@ def main(argv: list[str]) -> int:
             ("text drift", {**reg, "records": [
                 {**reg["records"][0], "name": "a rule that does not exist"}] + reg["records"][1:]}, scored, gen),
         ]
-        for name, r, s, g in cases:
-            probs = check(r, s, g, head)
+        # a stamp whose committed hash does not match must be caught
+        st = json.load(open(STAMP, encoding="utf-8")) if os.path.isfile(STAMP) else {}
+        sp: list[str] = []
+        check_stamp({**st, "file_sha256_as_committed": "0" * 64}, reg, sp)
+        print(f"self-test: registry edited after the stamp {'DETECTED' if sp else 'MISSED — the gate is dead'}")
+        fired += 1 if sp else 0
+        cases.append(("", {}, set(), ""))  # no-op, keeps the loop shape below
+        for name, r, s2, g in cases[:-1]:
+            probs = check(r, s2, g, head)
             ok = bool(probs)
             print(f"self-test: {name} {'DETECTED' if ok else 'MISSED — the gate is dead'}")
             fired += 1 if ok else 0
         return 0 if fired == len(cases) else 1
 
     problems = check(reg, scored, gen, head)
+    stamp_problems: list[str] = []
+    stamp = json.load(open(STAMP, encoding="utf-8")) if os.path.isfile(STAMP) else {}
+    info = check_stamp(stamp, reg, stamp_problems)
+    if stamp.get("registration_commit") and not is_ancestor(stamp["registration_commit"], head):
+        stamp_problems.append("the stamped registration commit is not an ancestor of HEAD")
+    problems += stamp_problems
 
     print(f"registration records: {len(reg.get('records') or [])}")
     print(f"published backtest results: {len(scored)}")
-    print(f"registration commit on file: {(reg.get('registration_commit') or '')[:8]} · head: {head[:8]}")
+    print(f"stamped commit: {info.get('registration_commit')} · head: {head[:8]} · "
+          f"rule fingerprints: {info.get('n_rule_fingerprints')} · "
+          f"registry hash matches: {info.get('file_sha256_matches')}")
     if problems:
         print(f"\nFAIL: {len(problems)} pre-registration problem(s)")
         for p in problems:

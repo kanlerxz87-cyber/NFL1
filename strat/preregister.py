@@ -256,7 +256,7 @@ def main() -> int:
             "gates": [g["id"] for g in GATES],
             "status": "registered-backtest",
             "registered_at": "2026-11-15",
-            "registration_commit": head,
+            "registration_commit": "see data/strat/preregistration_stamp.json",
             "registration_branch": branch,
             "result_location": "data/s9cb/leaderboard.json",
             "result_scored": bool(matched),
@@ -284,7 +284,7 @@ def main() -> int:
             "status": "registered-prospective",
             "family": family,
             "registered_at": "2026-11-15",
-            "registration_commit": head,
+            "registration_commit": "see data/strat/preregistration_stamp.json",
             "registration_branch": branch,
             "result_location": None,
             "result_scored": False,
@@ -295,8 +295,13 @@ def main() -> int:
 
     lib.write_json("preregistration.json", {
         "generated_at": lib.now(),
-        "registration_commit": head,
         "registration_branch": branch,
+        "how_the_commit_is_recorded": (
+            "The git hash of a commit cannot be written inside the file that commit contains. The "
+            "registry is therefore stamped by tools/stamp_preregistration.py, which records the hash "
+            "of the commit that last changed this file and the SHA-256 of the file as committed. "
+            "tools/check_preregistration.py fails when the file's hash no longer matches the stamp, "
+            "which makes any post-hoc edit of a frozen rule a build failure."),
         "n_records": len(records),
         "n_backtest": sum(1 for r in records if r["status"] == "registered-backtest"),
         "n_prospective": sum(1 for r in records if r["status"] == "registered-prospective"),
