@@ -1,0 +1,40 @@
+/* prereg/ sub-site — session 0c5215c1-nfl1 (additive, no other site's CSS touched) */
+:root {
+  --ink: #16202b; --muted: #5b6b7c; --line: #d9e1e9; --bg: #f5f7fa;
+  --card: #ffffff; --accent: #0b5fff; --pro: #0a7a3d; --ret: #9a5b00; --pre: #5b3cc4;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font: 15px/1.55 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--ink); background: var(--bg); }
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+header { background: #101a26; color: #fff; padding: 18px 0 10px; }
+header h1 { margin: 0 0 6px; font-size: 24px; }
+header .sub { font-size: 14px; color: #9db4cc; font-weight: 400; }
+header nav a { color: #cfe0f3; text-decoration: none; margin-right: 14px; font-size: 14px; }
+header nav a.active { color: #fff; font-weight: 600; border-bottom: 2px solid var(--accent); }
+header .crumb { font-size: 13px; color: #8aa1b8; margin: 6px 0 0; }
+header .crumb a { color: #cfe0f3; }
+main { padding: 18px 0 40px; }
+section { background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+  padding: 16px 20px; margin-bottom: 18px; }
+h2 { margin: 0 0 10px; font-size: 18px; }
+.tag { font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 999px;
+  background: #e8eef6; color: var(--muted); vertical-align: middle; margin-left: 8px; }
+.kind { font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 4px; }
+.k-pro { background: #e2f5e9; color: var(--pro); }
+.k-pre { background: #ece7fb; color: var(--pre); }
+.k-ret { background: #fbf0dd; color: var(--ret); }
+.note, .muted { color: var(--muted); font-size: 13px; }
+.banner { background: #fff6e5; border: 1px solid #f0d9a8; border-radius: 8px;
+  padding: 10px 14px; font-size: 14px; }
+table.data { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+table.data th, table.data td { border: 1px solid var(--line); padding: 7px 9px;
+  text-align: left; vertical-align: top; }
+table.data th { background: #eef2f7; position: sticky; top: 0; }
+table.data tr:nth-child(even) td { background: #fafbfd; }
+table.wide { font-size: 13px; }
+td.mind { max-width: 340px; }
+a { color: var(--accent); }
+code { background: #eef2f7; padding: 1px 5px; border-radius: 4px; font-size: 12.5px; }
+ul.plain { padding-left: 18px; }
+footer { color: var(--muted); font-size: 13px; padding: 10px 0 30px; }

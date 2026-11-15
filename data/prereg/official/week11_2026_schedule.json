@@ -1,0 +1,45 @@
+{
+ "schema": "nfl1.prereg.schedule.v1",
+ "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+ "source_title": "NFL Week 11 Schedule 2026: Games, Times, Matchups & Tickets",
+ "retrieved_at": "2026-11-15T13:05:00Z",
+ "retrieved_by": "session 0c5215c1-nfl1 (official page fetch, all 3 chunks read)",
+ "timezone_note": "kickoff times are printed on the official page in US Eastern (ET); November 2026 is EST = UTC-5; kickoff_utc = local + 5h",
+ "cross_checks": [
+  {
+   "what": "13 fixtures, 6 byes, kickoff times",
+   "who": "session a6220e65-nfl1",
+   "when": "2026-11-13",
+   "note": "independent transcription recorded 13/13 match and byes ATL/CLE/GB/LA/NE/SEA"
+  },
+  {
+   "what": "13 fixtures and kickoff times agree with the feed rows of data/s9cb/games.csv week 11 (game_id, date, local time)",
+   "who": "session 0c5215c1-nfl1",
+   "when": "2026-11-15"
+  }
+ ],
+ "games": [
+  {"game_id": "2026_11_IND_HOU", "matchup": "Colts at Texans", "away_feed": "IND", "home_feed": "HOU", "away_name": "Indianapolis Colts", "home_name": "Houston Texans", "day": "Thursday, November 19th", "kickoff_local_as_printed": "8:15 PM", "kickoff_utc": "2026-11-20T01:15:00Z", "network": "PRIME", "official_url": "https://www.nfl.com/games/colts-at-texans-2026-reg-11"},
+  {"game_id": "2026_11_MIA_BUF", "matchup": "Dolphins at Bills", "away_feed": "MIA", "home_feed": "BUF", "away_name": "Miami Dolphins", "home_name": "Buffalo Bills", "day": "Sunday, November 22nd", "kickoff_local_as_printed": "1:00 PM", "kickoff_utc": "2026-11-22T18:00:00Z", "network": "CBS", "official_url": "https://www.nfl.com/games/dolphins-at-bills-2026-reg-11"},
+  {"game_id": "2026_11_BAL_CAR", "matchup": "Ravens at Panthers", "away_feed": "BAL", "home_feed": "CAR", "away_name": "Baltimore Ravens", "home_name": "Carolina Panthers", "day": "Sunday, November 22nd", "kickoff_local_as_printed": "1:00 PM", "kickoff_utc": "2026-11-22T18:00:00Z", "network": "FOX", "official_url": "https://www.nfl.com/games/ravens-at-panthers-2026-reg-11"},
+  {"game_id": "2026_11_NO_CHI", "matchup": "Saints at Bears", "away_feed": "NO", "home_feed": "CHI", "away_name": "New Orleans Saints", "home_name": "Chicago Bears", "day": "Sunday, November 22nd", "kickoff_local_as_printed": "1:00 PM", "kickoff_utc": "2026-11-22T18:00:00Z", "network": "FOX", "official_url": "https://www.nfl.com/games/saints-at-bears-2026-reg-11"},
+  {"game_id": "2026_11_TEN_DAL", "matchup": "Titans at Cowboys", "away_feed": "TEN", "home_feed": "DAL", "away_name": "Tennessee Titans", "home_name": "Dallas Cowboys", "day": "Sunday, November 22nd", "kickoff_local_as_printed": "1:00 PM", "kickoff_utc": "2026-11-22T18:00:00Z", "network": "FOX", "official_url": "https://www.nfl.com/games/titans-at-cowboys-2026-reg-11"},
+  {"game_id": "2026_11_TB_DET", "matchup": "Buccaneers at Lions", "away_feed": "TB", "home_feed": "DET", "away_name": "Tampa Bay Buccaneers", "home_name": "Detroit Lions", "day": "Sunday, November 22nd", "kickoff_local_as_printed": "1:00 PM", "kickoff_utc": "2026-11-22T18:00:00Z", "network": "FOX", "official_url": "https://www.nfl.com/games/buccaneers-at-lions-2026-reg-11"},
+  {"game_id": "2026_11_ARI_KC", "matchup": "Cardinals at Chiefs", "away_feed": "ARI", "home_feed": "KC", "away_name": "Arizona Cardinals", "home_name": "Kansas City Chiefs", "day": "Sunday, November 22nd", "kickoff_local_as_printed": "1:00 PM", "kickoff_utc": "2026-11-22T18:00:00Z", "network": "CBS", "official_url": "https://www.nfl.com/games/cardinals-at-chiefs-2026-reg-11"},
+  {"game_id": "2026_11_PIT_PHI", "matchup": "Steelers at Eagles", "away_feed": "PIT", "home_feed": "PHI", "away_name": "Pittsburgh Steelers", "home_name": "Philadelphia Eagles", "day": "Sunday, November 22nd", "kickoff_local_as_printed": "1:00 PM", "kickoff_utc": "2026-11-22T18:00:00Z", "network": "CBS", "official_url": "https://www.nfl.com/games/steelers-at-eagles-2026-reg-11"},
+  {"game_id": "2026_11_NYJ_LAC", "matchup": "Jets at Chargers", "away_feed": "NYJ", "home_feed": "LAC", "away_name": "New York Jets", "home_name": "Los Angeles Chargers", "day": "Sunday, November 22nd", "kickoff_local_as_printed": "4:05 PM", "kickoff_utc": "2026-11-22T21:05:00Z", "network": "FOX", "official_url": "https://www.nfl.com/games/jets-at-chargers-2026-reg-11"},
+  {"game_id": "2026_11_JAX_NYG", "matchup": "Jaguars at Giants", "away_feed": "JAX", "home_feed": "NYG", "away_name": "Jacksonville Jaguars", "home_name": "New York Giants", "day": "Sunday, November 22nd", "kickoff_local_as_printed": "4:25 PM", "kickoff_utc": "2026-11-22T21:25:00Z", "network": "CBS", "official_url": "https://www.nfl.com/games/jaguars-at-giants-2026-reg-11"},
+  {"game_id": "2026_11_LV_DEN", "matchup": "Raiders at Broncos", "away_feed": "LV", "home_feed": "DEN", "away_name": "Las Vegas Raiders", "home_name": "Denver Broncos", "day": "Sunday, November 22nd", "kickoff_local_as_printed": "4:25 PM", "kickoff_utc": "2026-11-22T21:25:00Z", "network": "CBS", "official_url": "https://www.nfl.com/games/raiders-at-broncos-2026-reg-11"},
+  {"game_id": "2026_11_MIN_SF", "matchup": "Vikings at 49ers (Mexico City)", "away_feed": "MIN", "home_feed": "SF", "away_name": "Minnesota Vikings", "home_name": "San Francisco 49ers", "day": "Sunday, November 22nd", "kickoff_local_as_printed": "8:20 PM", "kickoff_utc": "2026-11-23T01:20:00Z", "network": "NBC", "official_url": "https://www.nfl.com/games/vikings-at-49ers-2026-reg-11", "note": "page labels the game Mexico City"},
+  {"game_id": "2026_11_CIN_WAS", "matchup": "Bengals at Commanders", "away_feed": "CIN", "home_feed": "WAS", "away_name": "Cincinnati Bengals", "home_name": "Washington Commanders", "day": "Monday, November 23rd", "kickoff_local_as_printed": "8:15 PM", "kickoff_utc": "2026-11-24T01:15:00Z", "network": "ESPN", "official_url": "https://www.nfl.com/games/bengals-at-commanders-2026-reg-11"}
+ ],
+ "byes": [
+  {"printed": "ATL", "feed": "ATL", "name": "Atlanta Falcons"},
+  {"printed": "CLE", "feed": "CLE", "name": "Cleveland Browns"},
+  {"printed": "GB", "feed": "GB", "name": "Green Bay Packers"},
+  {"printed": "LAR", "feed": "LA", "name": "Los Angeles Rams"},
+  {"printed": "NE", "feed": "NE", "name": "New England Patriots"},
+  {"printed": "SEA", "feed": "SEA", "name": "Seattle Seahawks"}
+ ],
+ "bye_note": "the official page carries a 'Teams on Bye' section listing these six clubs; 13 games x 2 + 6 = 32"
+}
