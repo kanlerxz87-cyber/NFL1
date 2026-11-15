@@ -84,17 +84,17 @@
   <div class="main">
     <div class="topbar">
       <div class="crumb">NFL1 / <b>Flagged for Review</b></div>
-      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">65 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">66 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
     </div>
     <main class="content" id="main">
       <div class="kicker">Assurance</div>
       <h1>Flagged for Review</h1>
       <p class="lede">Clearly labelled irregularities, official-page conflicts, unverified values and coordination issues — each with an official source link for manual review, none blocking the merge.</p>
       <div class="callout flag"><b>Flagged for Review.</b> These irregularities and unverified items do not block the merge or the live site. Each has an official source link for manual review and a suggested action. A status of <em>needs review</em> means exactly this: published here, not blocking.</div>
-<div class="cards"><div class="card"><div class="label">Flagged items</div><div class="value">65</div><div class="detail">All with source links</div></div><div class="card"><div class="label">Official-page irregularities</div><div class="value">7</div><div class="detail">F02–F08</div></div><div class="card"><div class="label">Missing official data</div><div class="value">5</div><div class="detail">F09–F11, F14, F15</div></div><div class="card"><div class="label">Combined-site review</div><div class="value">25</div><div class="detail">F25–F36</div></div></div>
+<div class="cards"><div class="card"><div class="label">Flagged items</div><div class="value">66</div><div class="detail">All with source links</div></div><div class="card"><div class="label">Official-page irregularities</div><div class="value">7</div><div class="detail">F02–F08</div></div><div class="card"><div class="label">Missing official data</div><div class="value">5</div><div class="detail">F09–F11, F14, F15</div></div><div class="card"><div class="label">Combined-site review</div><div class="value">26</div><div class="detail">F25–F36</div></div></div>
 <h2 id="all">All flagged irregularities</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-flags" aria-label="Filter tbl-flags" placeholder="Filter rows…">
-<span class="count" data-count-for="tbl-flags">65 rows shown</span></div>
+<span class="count" data-count-for="tbl-flags">66 rows shown</span></div>
 <div class="tablewrap"><table class="data-table" id="tbl-flags"><caption>Every flag with category, description, impact, status, official source link and suggested action for the reviewer.</caption>
 <thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Category</th><th scope="col" class="sortable">Irregularity / unverified item</th><th scope="col" class="sortable">Impact on decisions</th><th scope="col" class="sortable">Status</th><th scope="col" class="sortable">Suggested action</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
 <tr id="F01" data-verified="true">
@@ -574,6 +574,15 @@
 <td data-value="1" class="wide">Resolve club from the team code or the club table at scrape time, backfill counts.clubs_resolved_from_roster, and add a per-refresh row-count gate against https://www.nfl.com/injuries/.</td>
 <td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
 </tr>
+<tr id="F49" data-verified="true">
+<td><code>F49</code></td>
+<td data-value="1">Official results corpus is one game behind standings</td>
+<td data-value="1" class="wide">The verified results corpus contains 136 games and ends at Week 9. The official 2026 standings retrieved 2026-11-13 sum to 136 wins, 136 losses and 2 ties, implying 137 completed games. The official Week 10 Game Center reports Commanders 24, Giants 21, FINAL on 2026-11-12. The result is not present in data/verified/games_2026.csv. No score row has been added by this audit.</td>
+<td data-value="1" class="wide">The verified backtest results corpus is incomplete at its stated current-season boundary. Historical skill metrics, result verification and any injury/result join are blocked for the omitted game until its official Game Book and provenance are captured and reconciled.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Reconcile the official Game Center and NFL Game Book with the registered 2026 results corpus, record the official game ID, final score, source URL, captured timestamp and hash, then rerun the result and leaderboard gates. Official schedule: https://www.nfl.com/schedules/2026/by-week/week-10. Keep the affected row blank until verified.</td>
+<td><span class="src"><a href="https://www.nfl.com/games/commanders-at-giants-2026-reg-10" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official Game Center result">S27 ↗</a> <a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com)">S02 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
 <tr id="F-7810-01" data-verified="true">
 <td><code>F-7810-01</code></td>
 <td data-value="1">Injury scrape: blank designations published</td>
@@ -617,7 +626,7 @@
 <td data-value="1" class="wide">The 32-club depth sweep is 31 of 32. Houston depth and any Houston team-level model are blocked.</td>
 <td><span class="badge neutral">needs review</span></td>
 <td data-value="1" class="wide">Find an authorized structured source (club or NFL text feed). Do not transcribe the image by eye.</td>
-<td><span class="src"><a href="https://www.houstontexans.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Houston Texans (houstontexans.com) — Club depth chart (image only, labelled Unofficial)">S28 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+<td><span class="src"><a href="https://www.houstontexans.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Houston Texans (houstontexans.com) — Club depth chart (image only, labelled Unofficial)">S30 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
 </tr>
 <tr id="F-7810-06" data-verified="true">
 <td><code>F-7810-06</code></td>
@@ -631,7 +640,7 @@
 <tr id="F-7810-07" data-verified="true">
 <td><code>F-7810-07</code></td>
 <td data-value="1">Club charts labelled &#x27;Unofficial&#x27;</td>
-<td data-value="1" class="wide">Three official club charts carry an &#x27;Unofficial&#x27; label on the club&#x27;s own page: Chiefs (&#x27;Unofficial Depth Chart&#x27;, S14), Packers (&#x27;Unofficial, Nov. 10, 2026&#x27;, S15) and Texans (S28). The repo treats club charts as official for that club.</td>
+<td data-value="1" class="wide">Three official club charts carry an &#x27;Unofficial&#x27; label on the club&#x27;s own page: Chiefs (&#x27;Unofficial Depth Chart&#x27;, S14), Packers (&#x27;Unofficial, Nov. 10, 2026&#x27;, S15) and Texans (S30). The repo treats club charts as official for that club.</td>
 <td data-value="1" class="wide">Whether a club chart counts as an official source is a decision, not a fact. The brief asks for official depth; some charts describe themselves as unofficial.</td>
 <td><span class="badge neutral">needs review</span></td>
 <td data-value="1" class="wide">Record the decision on the Decide page: accept the club chart as official for that club, or require a different official source.</td>
@@ -644,7 +653,7 @@
 <td data-value="1" class="wide">The stale-depth item for Baltimore does not hold on the current chart. The check (IN-22) still needs dated before-and-after captures to show a change rather than assert one.</td>
 <td><span class="badge neutral">needs review</span></td>
 <td data-value="1" class="wide">Keep dated depth captures so a change can be shown; build the transactions cross-check (IN-22).</td>
-<td><span class="src"><a href="https://www.baltimoreravens.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Baltimore Ravens (baltimoreravens.com) — Official club depth chart">S27 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+<td><span class="src"><a href="https://www.baltimoreravens.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Baltimore Ravens (baltimoreravens.com) — Official club depth chart">S29 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
 </tr>
 <tr id="F-7810-09" data-verified="true">
 <td><code>F-7810-09</code></td>

@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-15T12:28:54+00:00",
+ "generated_at": "2026-11-15T12:32:23+00:00",
  "evidence": {
   "season": 2026,
   "week_complete": 10,
@@ -1964,6 +1964,18 @@
    "retrieved": "2026-11-15"
   },
   {
+   "id": "F49",
+   "category": "Official results corpus is one game behind standings",
+   "description": "The verified results corpus contains 136 games and ends at Week 9. The official 2026 standings retrieved 2026-11-13 sum to 136 wins, 136 losses and 2 ties, implying 137 completed games. The official Week 10 Game Center reports Commanders 24, Giants 21, FINAL on 2026-11-12. The result is not present in data/verified/games_2026.csv. No score row has been added by this audit.",
+   "impact": "The verified backtest results corpus is incomplete at its stated current-season boundary. Historical skill metrics, result verification and any injury/result join are blocked for the omitted game until its official Game Book and provenance are captured and reconciled.",
+   "status": "needs review",
+   "src": "S27",
+   "data_src": "S02",
+   "action": "Reconcile the official Game Center and NFL Game Book with the registered 2026 results corpus, record the official game ID, final score, source URL, captured timestamp and hash, then rerun the result and leaderboard gates. Official schedule: https://www.nfl.com/schedules/2026/by-week/week-10. Keep the affected row blank until verified.",
+   "verified": true,
+   "retrieved": "2026-11-15"
+  },
+  {
    "id": "F-7810-01",
    "category": "Injury scrape: blank designations published",
    "description": "The committed scrape (data/model/official_injuries.json, generated 2026-11-14T17:02Z) has no injury or game status where the live nfl.com read (2026-11-15) shows one: Chargers, 10 injury and 10 game-status cells, and 6 practice-status values; Ravens, 2 injury and 2 game-status cells (Jaylinn Hawkins: Knee, Out; Adam Randall: Neck, Hamstring, Questionable). The parser stored blanks without any error. Chargers example from the live page: David Njoku, Fibula, Questionable.",
@@ -2013,7 +2025,7 @@
    "description": "The Houston Texans depth chart page (read 2026-11-15) is labelled 'Unofficial Depth Chart' and holds an image in place of text. The depth ladder has no Houston slots (chart_status 'unavailable').",
    "impact": "The 32-club depth sweep is 31 of 32. Houston depth and any Houston team-level model are blocked.",
    "status": "needs review",
-   "src": "S28",
+   "src": "S30",
    "action": "Find an authorized structured source (club or NFL text feed). Do not transcribe the image by eye.",
    "verified": true,
    "retrieved": "2026-11-15"
@@ -2032,7 +2044,7 @@
   {
    "id": "F-7810-07",
    "category": "Club charts labelled 'Unofficial'",
-   "description": "Three official club charts carry an 'Unofficial' label on the club's own page: Chiefs ('Unofficial Depth Chart', S14), Packers ('Unofficial, Nov. 10, 2026', S15) and Texans (S28). The repo treats club charts as official for that club.",
+   "description": "Three official club charts carry an 'Unofficial' label on the club's own page: Chiefs ('Unofficial Depth Chart', S14), Packers ('Unofficial, Nov. 10, 2026', S15) and Texans (S30). The repo treats club charts as official for that club.",
    "impact": "Whether a club chart counts as an official source is a decision, not a fact. The brief asks for official depth; some charts describe themselves as unofficial.",
    "status": "needs review",
    "src": "S14",
@@ -2046,7 +2058,7 @@
    "description": "The Ravens depth chart read on 2026-11-15 lists Jacoby Brissett, Joe Fagnano and Kedon Slovis at QB, and neither Lamar Jackson nor Tyler Huntley. data/verified/qb_changes_2026.csv records Jackson as out on injured reserve (nfl.com news, Nov 5).",
    "impact": "The stale-depth item for Baltimore does not hold on the current chart. The check (IN-22) still needs dated before-and-after captures to show a change rather than assert one.",
    "status": "needs review",
-   "src": "S27",
+   "src": "S29",
    "action": "Keep dated depth captures so a change can be shown; build the transactions cross-check (IN-22).",
    "verified": true,
    "retrieved": "2026-11-15"
