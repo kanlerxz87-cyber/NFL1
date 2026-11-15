@@ -10,7 +10,7 @@
 <header>
   <div class="wrap">
     <h1>Pre-registration <span class="sub">NFL1 · strategy freeze ledger</span></h1>
-    <nav><a href="index.html">Overview &amp; prospective board</a> · <a href="registry.html">Registry (all entries)</a> · <a href="forecasts.html" class=active>Forecast record</a> · <a href="archive.html">Backtest archive</a></nav>
+    <nav><a href="index.html">Forward-test ledger</a> · <a href="registry.html">Registry &amp; prospective board</a> · <a href="forecasts.html" class=active>Forecast record</a> · <a href="archive.html">Backtest archive</a></nav>
     <p class="crumb"><a href="../index.html">NFL1 landing page</a> / Forecast record</p>
   </div>
 </header>
@@ -18,7 +18,7 @@
 
 <section>
 <h2>SB-01 forecast record <span class="tag k-pro">prospective</span></h2>
-<p>Recorded <strong>2026-11-15T13:39:24Z</strong> — every kickoff in this table is
+<p>Recorded <strong>2026-11-15T13:48:22Z</strong> — every kickoff in this table is
 later than that timestamp (earliest kickoff 2026-11-20T01:15:00Z).
 Registration: commit
 <a href="https://github.com/kanlerxz87-cyber/NFL1/commit/9ea55fa7ff4aa8e03f13b6551be349574dc2d3d6" rel="noopener">9ea55fa7</a>
@@ -27,10 +27,10 @@ singles only. Model: Pythagorean exponent 2.0, zero free parameters
 (<a href="SB-01-rule.md">full rule text</a>).</p>
 <ul class="plain">
 <li>Input at record time: <code>data/s9cb/games.csv</code> —
-sha256 483beddbdf226901b903ccc6e84f3dbc38df05110bc53a92eb63da8ec44f054f, 7,104 completed rows.</li>
+sha256 dd4ae8ad3c1384e4d5921ef6e1532aafaa2c10c31f6497d262b6c5ebf62334a0, 7,104 completed rows.</li>
 <li>Official schedule: <a href="https://www.nfl.com/schedules/2026/by-week/week-11" rel="noopener">https://www.nfl.com/schedules/2026/by-week/week-11</a>
 (retrieved 2026-11-15T13:05:00Z).</li>
-<li>Model files pinned at record time:<li><code>prereg/README.md</code> sha256 3cab854d68bac5771a9c881e4238a81c57c349ce88c181f9ad8c7c78861e6a10</li><li><code>prereg/SB-01-rule.md</code> sha256 aea6c8fb227f731de365a1b54ac6e7b923ae901409861516cb84f02bf3ca3515</li><li><code>prereg/shadow_baseline.py</code> sha256 4fa32f8b392a3ca55575b165a202d6028a1e3948cb4e3efc7ce797ebd3b85aa7</li></li>
+<li>Model files pinned at record time:<li><code>prereg/README.md</code> sha256 fc4b08e5ecc4c7304eb988ec51bc0083ea4e09bd6b421a6b3c41ac5ea65ee3c2</li><li><code>prereg/SB-01-rule.md</code> sha256 aea6c8fb227f731de365a1b54ac6e7b923ae901409861516cb84f02bf3ca3515</li><li><code>prereg/shadow_baseline.py</code> sha256 4fa32f8b392a3ca55575b165a202d6028a1e3948cb4e3efc7ce797ebd3b85aa7</li></li>
 <li>Reproduce with <code>python3 prereg/shadow_baseline.py --check</code> — probabilities
 recompute from the stored PF/PA aggregates (gate SB-G3).</li>
 </ul>
@@ -47,7 +47,7 @@ claim. Scoring happens only after every game is final on the official schedule p
 
 </main>
 <footer class="wrap">
-<p>Session <code>0c5215c1-nfl1</code> · generated 2026-11-15 13:39 UTC ·
+<p>Session <code>0c5215c1-nfl1</code> · generated 2026-11-15 13:48 UTC ·
 policy: <a href="README.md">prereg/README.md</a> · gate: <code>python3 prereg/verify.py</code> ·
 every table row carries its own source link; blank cells are labelled, never inferred.</p>
 </footer>

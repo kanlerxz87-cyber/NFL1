@@ -1,12 +1,12 @@
 {
  "schema": "nfl1.prereg.corpus.v1",
  "corpus_id": "NFL1-CORPUS-2026-11-15-v1",
- "frozen_at": "2026-11-15T13:39:24Z",
+ "frozen_at": "2026-11-15T13:48:04Z",
  "frozen_by": "session 0c5215c1-nfl1",
  "requirement": "brief: turn the 136-game log into the pre-registered backtest corpus (readiness PR-09)",
  "file": "data/s9cb/games.csv",
- "sha256_at_freeze": "483beddbdf226901b903ccc6e84f3dbc38df05110bc53a92eb63da8ec44f054f",
- "bytes_at_freeze": 1665522,
+ "sha256_at_freeze": "dd4ae8ad3c1384e4d5921ef6e1532aafaa2c10c31f6497d262b6c5ebf62334a0",
+ "bytes_at_freeze": 1665521,
  "rows_at_freeze": 7239,
  "membership_rule": "rows with both final scores present AND gameday <= 2026-11-12",
  "membership_counts": {

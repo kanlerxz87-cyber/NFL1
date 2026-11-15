@@ -16,8 +16,8 @@ from datetime import datetime, timezone
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 HERE = os.path.join(ROOT, "prereg")
 
-NAV = [("index.html", "Overview & prospective board"),
-       ("registry.html", "Registry (all entries)"),
+NAV = [("index.html", "Forward-test ledger"),
+       ("registry.html", "Registry & prospective board"),
        ("forecasts.html", "Forecast record"),
        ("archive.html", "Backtest archive")]
 
@@ -103,7 +103,12 @@ def overview(reg, corpus, ctl, fc, sched) -> str:
 
     return f"""
 <section>
-<h2>What this page is</h2>
+<h2>What this registry is</h2>
+<p class="note">Coexists with the <a href="index.html">forward-test ledger</a> (session
+739408a8), <a href="shadow-v1.md">shadow-v1</a> (session 55dc53f4) and the stamped strategy
+competition registry <code>data/strat/preregistration.json</code> (session c7b65577) — this
+registry indexes all of them with their registration hashes and supplies the two-sided
+mind-changer fields they do not carry per entry.</p>
 <p>The brief requires: <em>“Pre-register every strategy; forbid backtest numbers from ever
 appearing on the leaderboard”</em> and <em>“Freeze a rule before it sees data … the commit hash
 is the registration.”</em> This sub-site is the freeze ledger. Historical results live only on
@@ -174,7 +179,7 @@ on these pages carries a link.</p>
 
 
 # ----------------------------------------------------------------- registry
-def registry(reg) -> str:
+def registry(reg, corpus, ctl, fc, sched) -> str:
     rows = []
     for e in reg["entries"]:
         r = e["registration"]
@@ -192,7 +197,7 @@ def registry(reg) -> str:
             f"<td class='mind'>{esc(e['would_change_our_mind']['upside'])}</td>"
             f"<td class='mind'>{esc(e['would_change_our_mind']['downside'])}</td>"
             f"<td>{link(e['source']['u'], e['source']['t'])}</td></tr>")
-    return f"""
+    return overview(reg, corpus, ctl, fc, sched) + f"""
 <section>
 <h2>Registration registry <span class="tag">{reg['counts']['entries']} entries</span></h2>
 <p class="note">Every strategy entry in this repository, with its registration hash and a
@@ -291,7 +296,7 @@ def archive(reg, corpus, ctl, src) -> str:
 <h2>Backtest archive <span class="tag k-ret">retrospective · not a leaderboard</span></h2>
 <p class="banner">These are historical numbers. The brief forbids backtest numbers from
 appearing on the leaderboard, so they are kept here, outside the
-<a href="index.html">prospective board</a>, with no ranks, no rewards and no
+<a href="registry.html">prospective board</a>, with no ranks, no rewards and no
 “top strategy” language. Each collection was scored under its own gates and its own price
 policy — the columns are <em>not</em> comparable across collections.</p>
 </section>
@@ -474,16 +479,16 @@ def main() -> int:
     fc = jload("data/prereg/forecasts/SB-01_week11_2026.json")
     sched = jload("data/prereg/official/week11_2026_schedule.json")
 
-    write("index.html", page("index", "Overview & prospective board",
-                             overview(reg, corpus, ctl, fc, sched), "index.html"))
-    write("registry.html", page("registry", "Registry (all entries)",
-                                registry(reg), "registry.html"))
+    write("registry.html", page("registry", "Registry & prospective board",
+                                registry(reg, corpus, ctl, fc, sched),
+                                "registry.html"))
     write("forecasts.html", page("forecasts", "Forecast record",
                                  forecasts(fc, sched), "forecasts.html"))
     write("archive.html", page("archive", "Backtest archive",
                                archive(reg, corpus, ctl, archive_sources()),
                                "archive.html"))
-    print("wrote prereg/{index,registry,forecasts,archive}.html")
+    print("wrote prereg/{registry,forecasts,archive}.html (prereg/index.html is owned by "
+          "tools/prereg.py and is not written here)")
     return 0
 
 

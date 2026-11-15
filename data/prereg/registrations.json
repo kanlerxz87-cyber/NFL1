@@ -1,16 +1,16 @@
 {
  "schema": "nfl1.prereg.registry.v1",
- "generated_at": "2026-11-15T13:39:24Z",
+ "generated_at": "2026-11-15T13:48:04Z",
  "requirement": "brief: pre-register every strategy; two-sided what-would-change-our-mind on every entry (readiness PR-15, PR-24); flag R26-01 context",
  "policy": "prereg/README.md",
  "counts": {
-  "entries": 99,
+  "entries": 126,
   "by_kind": {
-   "retrospective": 68,
+   "retrospective": 69,
    "prospective-eligible": 30,
-   "prospective": 1
+   "prospective": 27
   },
-  "collections": 9
+  "collections": 13
  },
  "entries": [
   {
@@ -2895,6 +2895,769 @@
    "source": {
     "t": "data/processed/site_data.json",
     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/b7653d32e0f87c558c73420bcb5bc123f97a492e/data/processed/site_data.json"
+   }
+  },
+  {
+   "id": "COLL/forward-ledger-3",
+   "entry_type": "collection",
+   "collection": "forward-ledger-3",
+   "strategy": "forward-test ledger forecasters (session 739408a8)",
+   "track": "n/a (collection)",
+   "rule_summary": "session 739408a8 registered the forward scoring rules and three forecasters (PR-01 no-skill, PR-02 record share, PR-03 seeded random) in one results-free commit; this registry indexes them and does not restate their page.",
+   "sample_window": "2026 regular-season games from Week 11 onward, each forecast recorded before its own kickoff",
+   "gates": [],
+   "registration": {
+    "kind": "prospective",
+    "commit": "45342e86da55f7c5392ecc7cdf1c646c0250c583",
+    "commit_date": "2026-11-15",
+    "rules_commit": "45342e86da55f7c5392ecc7cdf1c646c0250c583",
+    "results_commit": null,
+    "note": "session 739408a8 registered the forward scoring rules and three forecasters (PR-01 no-skill, PR-02 record share, PR-03 seeded random) in one results-free commit; this registry indexes them and does not restate their page."
+   },
+   "would_change_our_mind": {
+    "upside": "Collection graduates only when its own worst-performing gate set is cleared prospectively: >=200 scored bets at observed prices, BH q<0.05 across the family, ROI 95% CI above zero, and a positive holdout after it is opened.",
+    "downside": "If any gate audit (G1 look-ahead, G2 observed prices) fails, or the family's holdout is negative once opened, the collection is archived and may only be re-registered under new ids."
+   },
+   "source": {
+    "t": "data/prereg/registry.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/45342e86da55f7c5392ecc7cdf1c646c0250c583/data/prereg/registry.json"
+   }
+  },
+  {
+   "id": "forward/PR-01",
+   "entry_type": "strategy",
+   "collection": "forward-ledger-3",
+   "strategy": "No-skill benchmark (constant 0.5)",
+   "track": "single",
+   "rule_summary": "No-skill benchmark (constant 0.5)",
+   "sample_window": "2026 regular-season games from Week 11 onward, each forecast recorded before its own kickoff",
+   "gates_ref": "forward-ledger-3",
+   "registration": {
+    "kind": "prospective",
+    "commit": "45342e86da55f7c5392ecc7cdf1c646c0250c583",
+    "commit_date": "2026-11-15",
+    "rules_commit": "45342e86da55f7c5392ecc7cdf1c646c0250c583",
+    "results_commit": null,
+    "note": "session 739408a8 registered the forward scoring rules and three forecasters (PR-01 no-skill, PR-02 record share, PR-03 seeded random) in one results-free commit; this registry indexes them and does not restate their page."
+   },
+   "would_change_our_mind": {
+    "upside": "It is the denominator of Brier skill: its own score must equal 0.5^2 = 0.25 on every completed game; a computed Brier away from 0.25 means the scoring pipeline is broken and every published score is void until re-derived.",
+    "downside": "No belief revision is possible (it has no inputs by construction); a pass rule that lets any forecaster beat PR-01 without the corrected lower bound above zero is a broken rule."
+   },
+   "source": {
+    "t": "data/prereg/registry.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/45342e86da55f7c5392ecc7cdf1c646c0250c583/data/prereg/registry.json"
+   }
+  },
+  {
+   "id": "forward/PR-02",
+   "entry_type": "strategy",
+   "collection": "forward-ledger-3",
+   "strategy": "Record-share forecast (official standings PCT)",
+   "track": "single",
+   "rule_summary": "Record-share forecast (official standings PCT)",
+   "sample_window": "2026 regular-season games from Week 11 onward, each forecast recorded before its own kickoff",
+   "gates_ref": "forward-ledger-3",
+   "registration": {
+    "kind": "prospective",
+    "commit": "45342e86da55f7c5392ecc7cdf1c646c0250c583",
+    "commit_date": "2026-11-15",
+    "rules_commit": "45342e86da55f7c5392ecc7cdf1c646c0250c583",
+    "results_commit": null,
+    "note": "session 739408a8 registered the forward scoring rules and three forecasters (PR-01 no-skill, PR-02 record share, PR-03 seeded random) in one results-free commit; this registry indexes them and does not restate their page."
+   },
+   "would_change_our_mind": {
+    "upside": "BSS vs PR-01 with the week-cluster bootstrap corrected lower bound above zero at >=100 scored games would show official standings alone carry signal.",
+    "downside": "Corrected bound <= 0 at >=100 games: stays a registered benchmark, promoted nowhere."
+   },
+   "source": {
+    "t": "data/prereg/registry.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/45342e86da55f7c5392ecc7cdf1c646c0250c583/data/prereg/registry.json"
+   }
+  },
+  {
+   "id": "forward/PR-03",
+   "entry_type": "strategy",
+   "collection": "forward-ledger-3",
+   "strategy": "Seeded random control",
+   "track": "single",
+   "rule_summary": "Seeded random control",
+   "sample_window": "2026 regular-season games from Week 11 onward, each forecast recorded before its own kickoff",
+   "gates_ref": "forward-ledger-3",
+   "registration": {
+    "kind": "prospective",
+    "commit": "45342e86da55f7c5392ecc7cdf1c646c0250c583",
+    "commit_date": "2026-11-15",
+    "rules_commit": "45342e86da55f7c5392ecc7cdf1c646c0250c583",
+    "results_commit": null,
+    "note": "session 739408a8 registered the forward scoring rules and three forecasters (PR-01 no-skill, PR-02 record share, PR-03 seeded random) in one results-free commit; this registry indexes them and does not restate their page."
+   },
+   "would_change_our_mind": {
+    "upside": "Its BSS must be statistically indistinguishable from zero - behaving like noise is what validates the bootstrap and multiplicity machinery.",
+    "downside": "If it ever clears the pass rule, the uncertainty machinery is suspect: audit the bootstrap before trusting any other pass."
+   },
+   "source": {
+    "t": "data/prereg/registry.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/45342e86da55f7c5392ecc7cdf1c646c0250c583/data/prereg/registry.json"
+   }
+  },
+  {
+   "id": "COLL/shadow-baseline-1",
+   "entry_type": "collection",
+   "collection": "shadow-baseline-1",
+   "strategy": "shadow-v1 forward baseline (session 55dc53f4)",
+   "track": "n/a (collection)",
+   "rule_summary": "session 55dc53f4: singles-only team-strength baseline, lambda=4 frozen, hash-gated inputs, Week 11 forecasts recorded before kickoff (PR-18 evidence).",
+   "sample_window": "2026 finals weeks 1-10 train, Week 11 onward forecast",
+   "gates": [],
+   "registration": {
+    "kind": "prospective",
+    "commit": "01da7637afa52e820f7c77bf7938be270de1073a",
+    "commit_date": "2026-11-15",
+    "rules_commit": "01da7637afa52e820f7c77bf7938be270de1073a",
+    "results_commit": null,
+    "note": "session 55dc53f4: singles-only team-strength baseline, lambda=4 frozen, hash-gated inputs, Week 11 forecasts recorded before kickoff (PR-18 evidence)."
+   },
+   "would_change_our_mind": {
+    "upside": "Collection graduates only when its own worst-performing gate set is cleared prospectively: >=200 scored bets at observed prices, BH q<0.05 across the family, ROI 95% CI above zero, and a positive holdout after it is opened.",
+    "downside": "If any gate audit (G1 look-ahead, G2 observed prices) fails, or the family's holdout is negative once opened, the collection is archived and may only be re-registered under new ids."
+   },
+   "source": {
+    "t": "prereg/shadow-v1.md",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/01da7637afa52e820f7c77bf7938be270de1073a/prereg/shadow-v1.md"
+   }
+  },
+  {
+   "id": "shadow/shadow-v1",
+   "entry_type": "strategy",
+   "collection": "shadow-baseline-1",
+   "strategy": "Singles-only team-strength shadow baseline",
+   "track": "single",
+   "rule_summary": "Singles-only team-strength shadow baseline",
+   "sample_window": "2026 finals weeks 1-10 train, Week 11 onward forecast",
+   "gates_ref": "shadow-baseline-1",
+   "registration": {
+    "kind": "prospective",
+    "commit": "01da7637afa52e820f7c77bf7938be270de1073a",
+    "commit_date": "2026-11-15",
+    "rules_commit": "01da7637afa52e820f7c77bf7938be270de1073a",
+    "results_commit": null,
+    "note": "session 55dc53f4: singles-only team-strength baseline, lambda=4 frozen, hash-gated inputs, Week 11 forecasts recorded before kickoff (PR-18 evidence)."
+   },
+   "would_change_our_mind": {
+    "upside": "Corrected BSS lower bound above zero versus PR-01 at >=100 scored Week-11-onward games under its own frozen rule (lambda=4, hash-gated inputs).",
+    "downside": "Any input-hash mismatch at scoring time (the tool refuses to run) voids the record; otherwise its frozen rule prints NOT PASSED - no re-tune under this id."
+   },
+   "source": {
+    "t": "prereg/shadow-v1.md",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/01da7637afa52e820f7c77bf7938be270de1073a/prereg/shadow-v1.md"
+   }
+  },
+  {
+   "id": "COLL/strat-prospective-19",
+   "entry_type": "collection",
+   "collection": "strat-prospective-19",
+   "strategy": "strategy-competition prospective registrations (session c7b65577)",
+   "track": "n/a (collection)",
+   "rule_summary": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates": [
+    {
+     "id": "G1",
+     "name": "walk-forward",
+     "test": "every input predates kick-off and every fit uses only earlier games",
+     "source": "data/s9cb/lines.json \u203a lookahead_probe (predictions differ with future data)"
+    },
+    {
+     "id": "G2",
+     "name": "observed prices",
+     "test": "every scored bet carries a price from the source file; no -110 assumed",
+     "source": "data/s9cb/leaderboard.json \u203a price_source"
+    },
+    {
+     "id": "G3",
+     "name": "sample size",
+     "test": "at least 200 scored bets in the backtest sample",
+     "source": "data/s9cb/leaderboard.json \u203a gate_definitions G3"
+    },
+    {
+     "id": "G4",
+     "name": "beats break-even",
+     "test": "hit rate above the break-even implied by the actual prices taken",
+     "source": "data/s9cb/leaderboard.json \u203a break_even_hit_rate"
+    },
+    {
+     "id": "G5",
+     "name": "multiplicity",
+     "test": "Benjamini-Hochberg adjusted p < 0.05 across the rules tested",
+     "source": "data/s9cb/leaderboard.json \u203a gate_definitions G5"
+    },
+    {
+     "id": "G6",
+     "name": "holdout",
+     "test": "positive in the untouched holdout window (2024 + 2025 backtest seasons)",
+     "source": "data/s9cb/leaderboard.json \u203a holdout_2024_2025"
+    },
+    {
+     "id": "G7",
+     "name": "seasonal stability",
+     "test": "positive in at least 60% of individual seasons",
+     "source": "data/s9cb/leaderboard.json \u203a gate_definitions G7"
+    },
+    {
+     "id": "G8",
+     "name": "uncertainty",
+     "test": "95% bootstrap interval on ROI excludes zero",
+     "source": "data/s9cb/leaderboard.json \u203a roi_ci95"
+    },
+    {
+     "id": "PS1",
+     "name": "proper score",
+     "test": "benchmark-relative Brier skill on the same games, with a game-cluster bootstrap lower bound above 0",
+     "source": "data/strat/proper_score.json \u203a markets[].bss_lower_bound"
+    },
+    {
+     "id": "PR1",
+     "name": "pre-registration",
+     "test": "a registration record exists and its commit precedes the result",
+     "source": "data/strat/preregistration.json"
+    }
+   ],
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Collection graduates only when its own worst-performing gate set is cleared prospectively: >=200 scored bets at observed prices, BH q<0.05 across the family, ROI 95% CI above zero, and a positive holdout after it is opened.",
+    "downside": "If any gate audit (G1 look-ahead, G2 observed prices) fails, or the family's holdout is negative once opened, the collection is archived and may only be re-registered under new ids."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P01",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Model side edge >= 2.0 pts, singles only",
+   "track": "single",
+   "rule_summary": "Model side edge >= 2.0 pts, singles only. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Model side edge >=2.0 clears the registered gates prospectively. First post-registration sample (>=200 scored units where the market allows) positive at observed prices with BH q<0.05 across the registered family and ROI/Brier interval clear of the no-skill control; stamp must prove the registration commit is an ancestor of the publishing commit.",
+    "downside": "Negative or underpowered at first sample, or any post-hoc edit that breaks tools/stamp_preregistration.py: closed under this id; a changed definition is a new id and a new registration."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P02",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Random side, 1 unit per game",
+   "track": "single",
+   "rule_summary": "Random side, 1 unit per game. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Random side behaves as designed: its realised ROI/interval CONTAINS the analytic no-skill expectation, which validates the scoring pipeline.",
+    "downside": "A significant deviation from the no-skill expectation means the pipeline (prices, settlement, or bootstrap) is broken: void all published scores until it is fixed."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P03",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Favourite only, no threshold",
+   "track": "single",
+   "rule_summary": "Favourite only, no threshold. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Favourites-only persists as the market-default bar: if its interval turns positive over a long prospective run we must revise the belief that the vig eats the default side entirely.",
+    "downside": "If it stays <=0 as history suggests, it remains a benchmark only, and any strategy overlapping its interval is claimed to be no better than the market's own default."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P04",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Home team only, no threshold",
+   "track": "single",
+   "rule_summary": "Home team only, no threshold. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Home-only interval positive over a long run would force a re-open of the home-advantage pricing question at observed prices.",
+    "downside": "Interval spanning zero or negative keeps it a benchmark; no promotion on raw win rate."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P05",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Underdog only, no threshold",
+   "track": "single",
+   "rule_summary": "Underdog only, no threshold. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Underdog-only positive interval would revise the belief that underdogs are systematically vig-dominated.",
+    "downside": "Otherwise benchmark only."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P06",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Model total edge >= 2.5 pts, under only",
+   "track": "single",
+   "rule_summary": "Model total edge >= 2.5 pts, under only. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Model total edge >=2.5 under-only positive with the model fit walk-forward clean.",
+    "downside": "Fit look-ahead or price-policy artefact (-110) -> void."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P07",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Availability surprise: new 'Out' designation versus the player's own prior week",
+   "track": "single",
+   "rule_summary": "Availability surprise: new 'Out' designation versus the player's own prior week. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Availability surprise positive with the official inactives join complete for every scored game (readiness IN-04).",
+    "downside": "Join gaps >2% of picks (mirror lag) -> void until the official report is the only input."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P08",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Practice-participation downgrade (FP -> LP -> DNP) between consecutive reads",
+   "track": "single",
+   "rule_summary": "Practice-participation downgrade (FP -> LP -> DNP) between consecutive reads. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Practice downgrade predictive with a dated Wed/Thu/Fri official report series per club (readiness IN-16).",
+    "downside": "No dated series -> stays untested; a level or snapshot proxy may not substitute (brief rejection)."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P09",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Count of new 'Out' starters, opponent minus own",
+   "track": "single",
+   "rule_summary": "Count of new 'Out' starters, opponent minus own. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "New-Out starter gap positive with verified inactives as source. First post-registration sample (>=200 scored units where the market allows) positive at observed prices with BH q<0.05 across the registered family and ROI/Brier interval clear of the no-skill control; stamp must prove the registration commit is an ancestor of the publishing commit.",
+    "downside": "Source not official for every scored game -> void. Negative or underpowered at first sample, or any post-hoc edit that breaks tools/stamp_preregistration.py: closed under this id; a changed definition is a new id and a new registration."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P10",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Parlay: two legs from different games, joint probability from the validated single-leg model",
+   "track": "single",
+   "rule_summary": "Parlay: two legs from different games, joint probability from the validated single-leg model. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Two-leg parlay across games only ranks with a validated joint probability and the operator's void/push rules on file (brief's joint-evidence gate).",
+    "downside": "Multiplying marginal probabilities without validation -> permanently ineligible for the board."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P11",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Same-game parlay: two legs in one game",
+   "track": "single",
+   "rule_summary": "Same-game parlay: two legs in one game. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Same-game parlay with validated joint probability. Joint-evidence gate required.",
+    "downside": "Marginal multiplication -> ineligible."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P12",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Prop combo: two player props in one game",
+   "track": "single",
+   "rule_summary": "Prop combo: two player props in one game. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Prop combo only with a registered official prop price source and validated joint probability.",
+    "downside": "No reachable official prop prices (flags F04/U01) -> untestable, no proxy."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P13",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Prop single: receiving yards above a shrunk trailing mean",
+   "track": "single",
+   "rule_summary": "Prop single: receiving yards above a shrunk trailing mean. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Receiving-yards prop single positive once an official price source is registered (flag U01).",
+    "downside": "No price source -> permanently untested as written."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P14",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Fade the public side (proxy: contrarian versus closing-line move)",
+   "track": "single",
+   "rule_summary": "Fade the public side (proxy: contrarian versus closing-line move). Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Fade-the-public positive only when 'public' is measured from recorded line moves (price-snapshot store, readiness PR-01).",
+    "downside": "Closing-line proxy mismeasures the public side -> void rather than assume direction."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P15",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Vig-free consensus versus our fair line",
+   "track": "single",
+   "rule_summary": "Vig-free consensus versus our fair line. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Vig-free consensus vs fair line measurable once intraday snapshots exist (readiness PR-01).",
+    "downside": "Without snapshots the comparison cannot be made -> untested."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P16",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Bye-week rest advantage of 2+ days",
+   "track": "single",
+   "rule_summary": "Bye-week rest advantage of 2+ days. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Bye-rest edge positive with rest days computed from official schedule dates only.",
+    "downside": "Schedule look-ahead or date error -> void."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P17",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "International/neutral-site travel disadvantage",
+   "track": "single",
+   "rule_summary": "International/neutral-site travel disadvantage. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Neutral-site travel disadvantage positive with venue taken from the official game centre (readiness IN-30).",
+    "downside": "Very small n (a handful of international games per season) may never reach 200: descriptive reporting only if the sample gate never clears - no threshold relaxation."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P18",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Thursday short-week under",
+   "track": "single",
+   "rule_summary": "Thursday short-week under. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Thursday short-week under positive at observed prices over >=200 units.",
+    "downside": "Schedule-derived short-week flag wrong for any club -> void pending fix."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P19",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Season-opener total regression",
+   "track": "single",
+   "rule_summary": "Season-opener total regression. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Season-opener total regression: one game per season means n grows by 1 per year - a positive interval is only reachable across many seasons; patience is the registered design.",
+    "downside": "If the regime is non-stationary enough that old seasons do not inform, the entry closes as untestable rather than being re-specified."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "COLL/strat-backtest-12",
+   "entry_type": "collection",
+   "collection": "strat-backtest-12",
+   "strategy": "strategy-competition backtest registrations (indexed)",
+   "track": "n/a (collection)",
+   "rule_summary": "records S01-S12 there are the s9cb set, already registered above as s9cb/* with their two-sided fields; stamped for publication-enforcement by session c7b65577. Registered-backtest: not pre-registered; disclosure.",
+   "sample_window": "2006-2026 observed prices (same set as s9cb-12)",
+   "gates": [],
+   "registration": {
+    "kind": "retrospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "note": "records S01-S12 there are the s9cb set, already registered above as s9cb/* with their two-sided fields; stamped for publication-enforcement by session c7b65577. Registered-backtest: not pre-registered; disclosure."
+   },
+   "would_change_our_mind": {
+    "upside": "Collection graduates only when its own worst-performing gate set is cleared prospectively: >=200 scored bets at observed prices, BH q<0.05 across the family, ROI 95% CI above zero, and a positive holdout after it is opened.",
+    "downside": "If any gate audit (G1 look-ahead, G2 observed prices) fails, or the family's holdout is negative once opened, the collection is archived and may only be re-registered under new ids."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
    }
   },
   {

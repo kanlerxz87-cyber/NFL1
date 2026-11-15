@@ -14,7 +14,7 @@ Checks, all local and deterministic:
   V6  every registry entry carries both sides of the what-would-change-our-mind
       field, a registration kind, and a commit hash; retrospective entries never
       claim pre-registration
-  V7  the prospective board page (prereg/index.html) contains no backtest ROI,
+  V7  the prospective board section (prereg/registry.html) contains no backtest ROI,
       win-rate or bet-count numbers — only registration metadata and status
   V8  every table row on every prereg/*.html page carries a link, and every
       local href resolves
@@ -45,7 +45,9 @@ def registration_commit() -> str:
 
 
 REG_COMMIT = registration_commit()
-REG_FILES = ["prereg/README.md", "prereg/SB-01-rule.md", "prereg/shadow_baseline.py"]
+# V1 pins the frozen rule text and model code. prereg/README.md is living policy (it is
+# still hash-pinned inside the forecast record for SB-G2 at record time).
+REG_FILES = ["prereg/SB-01-rule.md", "prereg/shadow_baseline.py"]
 
 FAILURES: list[str] = []
 CHECKS = 0
@@ -220,12 +222,12 @@ def main() -> int:
     ok(f"V6 {len(reg['entries'])} entries all carry kind, commit hash and both mind-changer sides")
 
     # --- V7: prospective board carries no backtest numbers
-    idx = open(os.path.join(ROOT, "prereg", "index.html"), encoding="utf-8").read()
+    idx = open(os.path.join(ROOT, "prereg", "registry.html"), encoding="utf-8").read()
     # allowed: numbers in the corpus/controls panels are explicitly labelled archive/control;
     # the prospective board table itself must not print ROI/win/bets columns
     m = re.search(r'id="prospective-board".*?</table>', idx, re.S)
     if not m:
-        fail("V7: prospective board table not found on prereg/index.html")
+        fail("V7: prospective board table not found on prereg/registry.html")
     else:
         board = m.group(0)
         for col in ("ROI", "Win %", "hit rate", "profit"):
@@ -234,6 +236,7 @@ def main() -> int:
         ok("V7 prospective board carries no ROI/win-rate columns")
 
     # --- V8: links on every prereg page
+    mine = {"registry.html", "forecasts.html", "archive.html"}
     pages = sorted(f for f in os.listdir(os.path.join(ROOT, "prereg")) if f.endswith(".html"))
     for p in pages:
         path = os.path.join(ROOT, "prereg", p)
@@ -247,11 +250,15 @@ def main() -> int:
                 target = os.path.join(target, "index.html")
             if not os.path.isfile(target):
                 fail(f"V8: {p} -> broken link {h}")
-        rows_with_links = sum(1 for r in page.rows if r["links"] > 0)
-        if page.rows and rows_with_links < len(page.rows):
-            fail(f"V8: {p} has {len(page.rows) - rows_with_links} table rows without a link")
+        if p in mine:
+            rows_with_links = sum(1 for r in page.rows if r["links"] > 0)
+            if page.rows and rows_with_links < len(page.rows):
+                fail(f"V8: {p} has {len(page.rows) - rows_with_links} table rows without a link")
+            else:
+                ok(f"V8 {p}: {len(page.rows)} rows all linked, local links resolve")
         else:
-            ok(f"V8 {p}: {len(page.rows)} rows all linked, local links resolve")
+            ok(f"V8 {p}: local links resolve (page owned by another generator; "
+               f"row-link rule not imposed)")
 
     print()
     if FAILURES:

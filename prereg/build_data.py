@@ -510,6 +510,88 @@ VL_MIND = {
 for sid, (up, dn) in VL_MIND.items():
     mind("verifiedlab", sid, up, dn)
 
+# --- forward-ledger-3 (session 739408a8, registration = commit adding data/prereg/registry.json)
+mind("forward", "PR-01", "It is the denominator of Brier skill: its own score must equal 0.5^2 = "
+     "0.25 on every completed game; a computed Brier away from 0.25 means the scoring pipeline "
+     "is broken and every published score is void until re-derived.",
+     "No belief revision is possible (it has no inputs by construction); a pass rule that lets "
+     "any forecaster beat PR-01 without the corrected lower bound above zero is a broken rule.")
+mind("forward", "PR-02", "BSS vs PR-01 with the week-cluster bootstrap corrected lower bound "
+     "above zero at >=100 scored games would show official standings alone carry signal.",
+     "Corrected bound <= 0 at >=100 games: stays a registered benchmark, promoted nowhere.")
+mind("forward", "PR-03", "Its BSS must be statistically indistinguishable from zero - behaving "
+     "like noise is what validates the bootstrap and multiplicity machinery.",
+     "If it ever clears the pass rule, the uncertainty machinery is suspect: audit the "
+     "bootstrap before trusting any other pass.")
+
+# --- shadow-v1 (session 55dc53f4, registration = commit adding prereg/shadow-v1.md)
+mind("shadow", "shadow-v1", "Corrected BSS lower bound above zero versus PR-01 at >=100 "
+     "scored Week-11-onward games under its own frozen rule (lambda=4, hash-gated inputs).",
+     "Any input-hash mismatch at scoring time (the tool refuses to run) voids the record; "
+     "otherwise its frozen rule prints NOT PASSED - no re-tune under this id.")
+
+# --- strat-prospective-19 (session c7b65577, registration = commit adding data/strat/preregistration.json)
+_strat_up = ("First post-registration sample (>=200 scored units where the market allows) "
+             "positive at observed prices with BH q<0.05 across the registered family and "
+             "ROI/Brier interval clear of the no-skill control; stamp must prove the "
+             "registration commit is an ancestor of the publishing commit.")
+_strat_dn = ("Negative or underpowered at first sample, or any post-hoc edit that breaks "
+             "tools/stamp_preregistration.py: closed under this id; a changed definition is "
+             "a new id and a new registration.")
+mind("strat", "P01", "Model side edge >=2.0 clears the registered gates prospectively. " + _strat_up, _strat_dn)
+mind("strat", "P02", "Random side behaves as designed: its realised ROI/interval CONTAINS the "
+     "analytic no-skill expectation, which validates the scoring pipeline.",
+     "A significant deviation from the no-skill expectation means the pipeline (prices, "
+     "settlement, or bootstrap) is broken: void all published scores until it is fixed.")
+mind("strat", "P03", "Favourites-only persists as the market-default bar: if its interval turns "
+     "positive over a long prospective run we must revise the belief that the vig eats the "
+     "default side entirely.",
+     "If it stays <=0 as history suggests, it remains a benchmark only, and any strategy "
+     "overlapping its interval is claimed to be no better than the market's own default.")
+mind("strat", "P04", "Home-only interval positive over a long run would force a re-open of the "
+     "home-advantage pricing question at observed prices.",
+     "Interval spanning zero or negative keeps it a benchmark; no promotion on raw win rate.")
+mind("strat", "P05", "Underdog-only positive interval would revise the belief that underdogs "
+     "are systematically vig-dominated.", "Otherwise benchmark only.")
+mind("strat", "P06", "Model total edge >=2.5 under-only positive with the model fit walk-forward "
+     "clean.", "Fit look-ahead or price-policy artefact (-110) -> void.")
+mind("strat", "P07", "Availability surprise positive with the official inactives join complete "
+     "for every scored game (readiness IN-04).", "Join gaps >2% of picks (mirror lag) -> void "
+     "until the official report is the only input.")
+mind("strat", "P08", "Practice downgrade predictive with a dated Wed/Thu/Fri official report "
+     "series per club (readiness IN-16).", "No dated series -> stays untested; a level or "
+     "snapshot proxy may not substitute (brief rejection).")
+mind("strat", "P09", "New-Out starter gap positive with verified inactives as source. "
+     + _strat_up, "Source not official for every scored game -> void. " + _strat_dn)
+mind("strat", "P10", "Two-leg parlay across games only ranks with a validated joint probability "
+     "and the operator's void/push rules on file (brief's joint-evidence gate).",
+     "Multiplying marginal probabilities without validation -> permanently ineligible for "
+     "the board.")
+mind("strat", "P11", "Same-game parlay with validated joint probability. "
+     + "Joint-evidence gate required.", "Marginal multiplication -> ineligible.")
+mind("strat", "P12", "Prop combo only with a registered official prop price source and validated "
+     "joint probability.", "No reachable official prop prices (flags F04/U01) -> untestable, "
+     "no proxy.")
+mind("strat", "P13", "Receiving-yards prop single positive once an official price source is "
+     "registered (flag U01).", "No price source -> permanently untested as written.")
+mind("strat", "P14", "Fade-the-public positive only when 'public' is measured from recorded "
+     "line moves (price-snapshot store, readiness PR-01).",
+     "Closing-line proxy mismeasures the public side -> void rather than assume direction.")
+mind("strat", "P15", "Vig-free consensus vs fair line measurable once intraday snapshots exist "
+     "(readiness PR-01).", "Without snapshots the comparison cannot be made -> untested.")
+mind("strat", "P16", "Bye-rest edge positive with rest days computed from official schedule "
+     "dates only.", "Schedule look-ahead or date error -> void.")
+mind("strat", "P17", "Neutral-site travel disadvantage positive with venue taken from the "
+     "official game centre (readiness IN-30).",
+     "Very small n (a handful of international games per season) may never reach 200: "
+     "descriptive reporting only if the sample gate never clears - no threshold relaxation.")
+mind("strat", "P18", "Thursday short-week under positive at observed prices over >=200 units.",
+     "Schedule-derived short-week flag wrong for any club -> void pending fix.")
+mind("strat", "P19", "Season-opener total regression: one game per season means n grows by 1 "
+     "per year - a positive interval is only reachable across many seasons; patience is the "
+     "registered design.", "If the regime is non-stationary enough that old seasons do not "
+     "inform, the entry closes as untestable rather than being re-specified.")
+
 # SB-01 (prospective; registration commit A)
 MIND["SB-01"] = (
     "Brier skill vs the 0.5 base rate with a 95% interval strictly above zero over >=200 "
@@ -628,6 +710,74 @@ def collection_rows() -> list[dict]:
         "2026 season; every entry currently graded not_stakeable (no prices)",
         [], "rules and results together at b7653d3; retrospective.",
         vl["strategies"]["strategies"], "id", "name", "hypothesis")
+
+    # --- registrations created by parallel sessions on main (indexed, not restated)
+    fwd = jload("data/prereg/registry.json")
+    sv1_note = ("session 55dc53f4: singles-only team-strength baseline, lambda=4 frozen, "
+                "hash-gated inputs, Week 11 forecasts recorded before kickoff (PR-18 evidence).")
+    strat = jload("data/strat/preregistration.json")
+    c["forward-ledger-3"] = {
+        "id": "forward-ledger-3", "title": "forward-test ledger forecasters (session 739408a8)",
+        "kind": "prospective",
+        "definition_commit": first_add("data/prereg/registry.json")[0],
+        "definition_commit_date": first_add("data/prereg/registry.json")[1],
+        "rules_commit": first_add("data/prereg/registry.json")[0],
+        "results_commit": None,
+        "sample_window": fwd.get("window", {}).get("sample", "2026 weeks 11-18, before kickoff"),
+        "gates": [], "source_file": "data/prereg/registry.json",
+        "source_url": blob("data/prereg/registry.json", first_add("data/prereg/registry.json")[0]),
+        "note": "session 739408a8 registered the forward scoring rules and three forecasters "
+        "(PR-01 no-skill, PR-02 record share, PR-03 seeded random) in one results-free commit; "
+        "this registry indexes them and does not restate their page.",
+        "strategies": [("PR-01", "No-skill benchmark (constant 0.5)", None),
+                       ("PR-02", "Record-share forecast (official standings PCT)", None),
+                       ("PR-03", "Seeded random control", None)],
+    }
+    c["shadow-baseline-1"] = {
+        "id": "shadow-baseline-1", "title": "shadow-v1 forward baseline (session 55dc53f4)",
+        "kind": "prospective",
+        "definition_commit": first_add("prereg/shadow-v1.md")[0],
+        "definition_commit_date": first_add("prereg/shadow-v1.md")[1],
+        "rules_commit": first_add("prereg/shadow-v1.md")[0],
+        "results_commit": None,
+        "sample_window": "2026 finals weeks 1-10 train, Week 11 onward forecast",
+        "gates": [], "source_file": "prereg/shadow-v1.md",
+        "source_url": blob("prereg/shadow-v1.md", first_add("prereg/shadow-v1.md")[0]),
+        "note": sv1_note,
+        "strategies": [("shadow-v1", "Singles-only team-strength shadow baseline", None)],
+    }
+    strat_prop = [r for r in strat["records"] if r["status"] == "registered-prospective"]
+    c["strat-prospective-19"] = {
+        "id": "strat-prospective-19", "title": "strategy-competition prospective registrations (session c7b65577)",
+        "kind": "prospective",
+        "definition_commit": first_add("data/strat/preregistration.json")[0],
+        "definition_commit_date": first_add("data/strat/preregistration.json")[1],
+        "rules_commit": first_add("data/strat/preregistration.json")[0],
+        "results_commit": None,
+        "sample_window": "2026 onwards, only games kicking off after the registration commit",
+        "gates": strat.get("gates", []),
+        "source_file": "data/strat/preregistration.json",
+        "source_url": blob("data/strat/preregistration.json", first_add("data/strat/preregistration.json")[0]),
+        "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + "
+        "tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the "
+        "two-sided mind-changer fields for each entry.",
+        "strategies": [(r["id"], r["name"], r.get("definition")) for r in strat_prop],
+    }
+    c["strat-backtest-12"] = {
+        "id": "strat-backtest-12", "title": "strategy-competition backtest registrations (indexed)",
+        "kind": "retrospective",
+        "definition_commit": first_add("data/strat/preregistration.json")[0],
+        "definition_commit_date": first_add("data/strat/preregistration.json")[1],
+        "rules_commit": first_add("data/strat/preregistration.json")[0],
+        "results_commit": first_add("data/s9cb/leaderboard.json")[0],
+        "sample_window": "2006-2026 observed prices (same set as s9cb-12)",
+        "gates": [], "source_file": "data/strat/preregistration.json",
+        "source_url": blob("data/strat/preregistration.json", first_add("data/strat/preregistration.json")[0]),
+        "note": "records S01-S12 there are the s9cb set, already registered above as s9cb/* "
+        "with their two-sided fields; stamped for publication-enforcement by session c7b65577. "
+        "Registered-backtest: not pre-registered; disclosure.",
+        "strategies": [],
+    }
 
     return c
 
