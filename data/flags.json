@@ -800,7 +800,7 @@
     "status": "open",
     "src": "S01",
     "action": "Add an official source for starters, or keep the cells blank.",
-    "verified": false,
+    "verified": true,
     "retrieved": "2026-11-15"
   },
   {
@@ -811,7 +811,7 @@
     "status": "needs review",
     "src": "S06",
     "action": "Verify against a timestamped source before any use. None is approved.",
-    "verified": false,
+    "verified": true,
     "retrieved": "2026-11-15"
   },
   {
@@ -833,7 +833,7 @@
     "status": "needs review",
     "src": "S06",
     "action": "Re-read the seven game centres and record the venue for each.",
-    "verified": false,
+    "verified": true,
     "retrieved": "2026-11-15"
   },
   {
@@ -844,7 +844,7 @@
     "status": "open",
     "src": "S24",
     "action": "None for shadow-v1. Record any change as a new version.",
-    "verified": false,
+    "verified": true,
     "retrieved": "2026-11-15"
   },
   {
@@ -883,7 +883,7 @@
   {
     "id": "F-5501-13",
     "category": "Stored injury file count differs from earlier flag text",
-    "description": "data/model/official_injuries.json was regenerated 2026-11-15T12:40:34Z with 347 rows and status ok. Flag F48 and F-7810-01 describe the 345-row file from 2026-11-14. The delta and the drift alarm both use the 347-row capture.",
+    "description": "data/model/official_injuries.json was regenerated 2026-11-15T12:40:34Z (html sha256 a478bbf0…) and then, on main, at 2026-11-15T12:47:08Z (html sha256 27cc025a…); both have 347 rows and status ok. Flag F48 and F-7810-01 describe the 345-row file from 2026-11-14. The delta and the drift alarm both use the 347-row capture.",
     "impact": "The older flags describe a file that is no longer committed. The current file matches the 15 Nov capture row for row (tools/check_scrape_drift.py).",
     "status": "needs review",
     "src": "S01",
