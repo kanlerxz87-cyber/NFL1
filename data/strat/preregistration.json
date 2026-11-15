@@ -1,0 +1,1232 @@
+{
+ "generated_at": "2026-11-15T13:03:58+00:00",
+ "registration_commit": "08e608a480b567c7173617a12736ece46c1a4bd3",
+ "registration_branch": "arena/c7b65577-nfl1",
+ "n_records": 31,
+ "n_backtest": 12,
+ "n_prospective": 19,
+ "rule": "A backtest number may be published only when a registration record exists for the rule and the registration commit is an ancestor of the publishing commit. Enforced by tools/check_preregistration.py, which fails the build otherwise.",
+ "gates": [
+  {
+   "id": "G1",
+   "name": "walk-forward",
+   "test": "every input predates kick-off and every fit uses only earlier games",
+   "source": "data/s9cb/lines.json \u203a lookahead_probe (predictions differ with future data)"
+  },
+  {
+   "id": "G2",
+   "name": "observed prices",
+   "test": "every scored bet carries a price from the source file; no -110 assumed",
+   "source": "data/s9cb/leaderboard.json \u203a price_source"
+  },
+  {
+   "id": "G3",
+   "name": "sample size",
+   "test": "at least 200 scored bets in the backtest sample",
+   "source": "data/s9cb/leaderboard.json \u203a gate_definitions G3"
+  },
+  {
+   "id": "G4",
+   "name": "beats break-even",
+   "test": "hit rate above the break-even implied by the actual prices taken",
+   "source": "data/s9cb/leaderboard.json \u203a break_even_hit_rate"
+  },
+  {
+   "id": "G5",
+   "name": "multiplicity",
+   "test": "Benjamini-Hochberg adjusted p < 0.05 across the rules tested",
+   "source": "data/s9cb/leaderboard.json \u203a gate_definitions G5"
+  },
+  {
+   "id": "G6",
+   "name": "holdout",
+   "test": "positive in the untouched holdout window (2024 + 2025 backtest seasons)",
+   "source": "data/s9cb/leaderboard.json \u203a holdout_2024_2025"
+  },
+  {
+   "id": "G7",
+   "name": "seasonal stability",
+   "test": "positive in at least 60% of individual seasons",
+   "source": "data/s9cb/leaderboard.json \u203a gate_definitions G7"
+  },
+  {
+   "id": "G8",
+   "name": "uncertainty",
+   "test": "95% bootstrap interval on ROI excludes zero",
+   "source": "data/s9cb/leaderboard.json \u203a roi_ci95"
+  },
+  {
+   "id": "PS1",
+   "name": "proper score",
+   "test": "benchmark-relative Brier skill on the same games, with a game-cluster bootstrap lower bound above 0",
+   "source": "data/strat/proper_score.json \u203a markets[].bss_lower_bound"
+  },
+  {
+   "id": "PR1",
+   "name": "pre-registration",
+   "test": "a registration record exists and its commit precedes the result",
+   "source": "data/strat/preregistration.json"
+  }
+ ],
+ "code_cross_check": {
+  "file": "s9cb/analysis/strategies.py",
+  "rule": "every registered backtest rule's exact strategy string must appear in the generator",
+  "passed": true
+ },
+ "records": [
+  {
+   "id": "S01",
+   "name": "Model spread edge >= 1.5 pts",
+   "market": "side",
+   "bet_kind": "spread",
+   "definition": "Model spread edge >= 1.5 pts. Fires on the spread market: home if model_margin - spread_line >= +1.5, away if <= -1.5. Stake 1 unit, flat; no staking model is part of the rule.",
+   "condition": "home if model_margin - spread_line >= +1.5, away if <= -1.5",
+   "inputs": [
+    "model_margin",
+    "spread_line"
+   ],
+   "sample_window": {
+    "seasons": "2006-2026",
+    "rule": "closing prices only; a game without a price is not scored",
+    "n_bets_backtest": 3546
+   },
+   "gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "PS1",
+    "PR1"
+   ],
+   "status": "registered-backtest",
+   "registered_at": "2026-11-15",
+   "registration_commit": "08e608a480b567c7173617a12736ece46c1a4bd3",
+   "registration_branch": "arena/c7b65577-nfl1",
+   "result_location": "data/s9cb/leaderboard.json",
+   "result_scored": true,
+   "exposure_note": "Backtested on 2006-2026 closing lines; one of twelve rules tested in the same run.",
+   "selection_disclosure": "This rule's thresholds were chosen before this session but after the scoring data existed; the multiplicity correction in G5 charges for the twelve-rule search. From this commit onwards the text is frozen and any edit is visible as a diff.",
+   "source": "schedules"
+  },
+  {
+   "id": "S02",
+   "name": "Model spread edge >= 3.0 pts",
+   "market": "side",
+   "bet_kind": "spread",
+   "definition": "Model spread edge >= 3.0 pts. Fires on the spread market: home if model_margin - spread_line >= +3.0, away if <= -3.0. Stake 1 unit, flat; no staking model is part of the rule.",
+   "condition": "home if model_margin - spread_line >= +3.0, away if <= -3.0",
+   "inputs": [
+    "model_margin",
+    "spread_line"
+   ],
+   "sample_window": {
+    "seasons": "2006-2026",
+    "rule": "closing prices only; a game without a price is not scored",
+    "n_bets_backtest": 2277
+   },
+   "gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "PS1",
+    "PR1"
+   ],
+   "status": "registered-backtest",
+   "registered_at": "2026-11-15",
+   "registration_commit": "08e608a480b567c7173617a12736ece46c1a4bd3",
+   "registration_branch": "arena/c7b65577-nfl1",
+   "result_location": "data/s9cb/leaderboard.json",
+   "result_scored": true,
+   "exposure_note": "Same family as S01 with a wider threshold; both fire in the same run, so they are not independent.",
+   "selection_disclosure": "This rule's thresholds were chosen before this session but after the scoring data existed; the multiplicity correction in G5 charges for the twelve-rule search. From this commit onwards the text is frozen and any edit is visible as a diff.",
+   "source": "schedules"
+  },
+  {
+   "id": "S03",
+   "name": "Model total edge >= 2.5 pts",
+   "market": "total",
+   "bet_kind": "total",
+   "definition": "Model total edge >= 2.5 pts. Fires on the total market: over if model_total - total_line >= +2.5, under if <= -2.5. Stake 1 unit, flat; no staking model is part of the rule.",
+   "condition": "over if model_total - total_line >= +2.5, under if <= -2.5",
+   "inputs": [
+    "model_total",
+    "total_line"
+   ],
+   "sample_window": {
+    "seasons": "2006-2026",
+    "rule": "closing prices only; a game without a price is not scored",
+    "n_bets_backtest": 2463
+   },
+   "gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "PS1",
+    "PR1"
+   ],
+   "status": "registered-backtest",
+   "registered_at": "2026-11-15",
+   "registration_commit": "08e608a480b567c7173617a12736ece46c1a4bd3",
+   "registration_branch": "arena/c7b65577-nfl1",
+   "result_location": "data/s9cb/leaderboard.json",
+   "result_scored": true,
+   "exposure_note": "Backtested on 2006-2026 closing totals against the walk-forward model total.",
+   "selection_disclosure": "This rule's thresholds were chosen before this session but after the scoring data existed; the multiplicity correction in G5 charges for the twelve-rule search. From this commit onwards the text is frozen and any edit is visible as a diff.",
+   "source": "schedules"
+  },
+  {
+   "id": "S04",
+   "name": "Model total edge >= 4.0 pts",
+   "market": "total",
+   "bet_kind": "total",
+   "definition": "Model total edge >= 4.0 pts. Fires on the total market: over if model_total - total_line >= +4.0, under if <= -4.0. Stake 1 unit, flat; no staking model is part of the rule.",
+   "condition": "over if model_total - total_line >= +4.0, under if <= -4.0",
+   "inputs": [
+    "model_total",
+    "total_line"
+   ],
+   "sample_window": {
+    "seasons": "2006-2026",
+    "rule": "closing prices only; a game without a price is not scored",
+    "n_bets_backtest": 1295
+   },
+   "gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "PS1",
+    "PR1"
+   ],
+   "status": "registered-backtest",
+   "registered_at": "2026-11-15",
+   "registration_commit": "08e608a480b567c7173617a12736ece46c1a4bd3",
+   "registration_branch": "arena/c7b65577-nfl1",
+   "result_location": "data/s9cb/leaderboard.json",
+   "result_scored": true,
+   "exposure_note": "Same family as S03 with a wider threshold.",
+   "selection_disclosure": "This rule's thresholds were chosen before this session but after the scoring data existed; the multiplicity correction in G5 charges for the twelve-rule search. From this commit onwards the text is frozen and any edit is visible as a diff.",
+   "source": "schedules"
+  },
+  {
+   "id": "S05",
+   "name": "Rest edge >= 3 days",
+   "market": "side",
+   "bet_kind": "spread",
+   "definition": "Rest edge >= 3 days. Fires on the spread market: home if home_rest - away_rest >= +3, away if <= -3. Stake 1 unit, flat; no staking model is part of the rule.",
+   "condition": "home if home_rest - away_rest >= +3, away if <= -3",
+   "inputs": [
+    "home_rest",
+    "away_rest"
+   ],
+   "sample_window": {
+    "seasons": "2006-2026",
+    "rule": "closing prices only; a game without a price is not scored",
+    "n_bets_backtest": 1103
+   },
+   "gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "PS1",
+    "PR1"
+   ],
+   "status": "registered-backtest",
+   "registered_at": "2026-11-15",
+   "registration_commit": "08e608a480b567c7173617a12736ece46c1a4bd3",
+   "registration_branch": "arena/c7b65577-nfl1",
+   "result_location": "data/s9cb/leaderboard.json",
+   "result_scored": true,
+   "exposure_note": "Backtested on 2006-2026 closing lines; rest days are published schedule facts.",
+   "selection_disclosure": "This rule's thresholds were chosen before this session but after the scoring data existed; the multiplicity correction in G5 charges for the twelve-rule search. From this commit onwards the text is frozen and any edit is visible as a diff.",
+   "source": "schedules"
+  },
+  {
+   "id": "S06",
+   "name": "Divisional road underdog of 3+",
+   "market": "side",
+   "bet_kind": "spread",
+   "definition": "Divisional road underdog of 3+. Fires on the spread market: away when div_game == 1 and spread_line <= -3. Stake 1 unit, flat; no staking model is part of the rule.",
+   "condition": "away when div_game == 1 and spread_line <= -3",
+   "inputs": [
+    "div_game",
+    "spread_line"
+   ],
+   "sample_window": {
+    "seasons": "2006-2026",
+    "rule": "closing prices only; a game without a price is not scored",
+    "n_bets_backtest": 531
+   },
+   "gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "PS1",
+    "PR1"
+   ],
+   "status": "registered-backtest",
+   "registered_at": "2026-11-15",
+   "registration_commit": "08e608a480b567c7173617a12736ece46c1a4bd3",
+   "registration_branch": "arena/c7b65577-nfl1",
+   "result_location": "data/s9cb/leaderboard.json",
+   "result_scored": true,
+   "exposure_note": "Backtested on 2006-2026 closing lines.",
+   "selection_disclosure": "This rule's thresholds were chosen before this session but after the scoring data existed; the multiplicity correction in G5 charges for the twelve-rule search. From this commit onwards the text is frozen and any edit is visible as a diff.",
+   "source": "schedules"
+  },
+  {
+   "id": "S07",
+   "name": "Fade the road favourite of 7+",
+   "market": "side",
+   "bet_kind": "spread",
+   "definition": "Fade the road favourite of 7+. Fires on the spread market: home when spread_line <= -7. Stake 1 unit, flat; no staking model is part of the rule.",
+   "condition": "home when spread_line <= -7",
+   "inputs": [
+    "spread_line"
+   ],
+   "sample_window": {
+    "seasons": "2006-2026",
+    "rule": "closing prices only; a game without a price is not scored",
+    "n_bets_backtest": 401
+   },
+   "gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "PS1",
+    "PR1"
+   ],
+   "status": "registered-backtest",
+   "registered_at": "2026-11-15",
+   "registration_commit": "08e608a480b567c7173617a12736ece46c1a4bd3",
+   "registration_branch": "arena/c7b65577-nfl1",
+   "result_location": "data/s9cb/leaderboard.json",
+   "result_scored": true,
+   "exposure_note": "Backtested on 2006-2026 closing lines; the rule with the largest ROI point estimate in the run.",
+   "selection_disclosure": "This rule's thresholds were chosen before this session but after the scoring data existed; the multiplicity correction in G5 charges for the twelve-rule search. From this commit onwards the text is frozen and any edit is visible as a diff.",
+   "source": "schedules"
+  },
+  {
+   "id": "S08",
+   "name": "Home team off a bye",
+   "market": "side",
+   "bet_kind": "spread",
+   "definition": "Home team off a bye. Fires on the spread market: home when home_rest >= 13 and away_rest < 13. Stake 1 unit, flat; no staking model is part of the rule.",
+   "condition": "home when home_rest >= 13 and away_rest < 13",
+   "inputs": [
+    "home_rest",
+    "away_rest"
+   ],
+   "sample_window": {
+    "seasons": "2006-2026",
+    "rule": "closing prices only; a game without a price is not scored",
+    "n_bets_backtest": 273
+   },
+   "gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "PS1",
+    "PR1"
+   ],
+   "status": "registered-backtest",
+   "registered_at": "2026-11-15",
+   "registration_commit": "08e608a480b567c7173617a12736ece46c1a4bd3",
+   "registration_branch": "arena/c7b65577-nfl1",
+   "result_location": "data/s9cb/leaderboard.json",
+   "result_scored": true,
+   "exposure_note": "Backtested on 2006-2026 closing lines.",
+   "selection_disclosure": "This rule's thresholds were chosen before this session but after the scoring data existed; the multiplicity correction in G5 charges for the twelve-rule search. From this commit onwards the text is frozen and any edit is visible as a diff.",
+   "source": "schedules"
+  },
+  {
+   "id": "S09",
+   "name": "Under when the total is 40 or lower",
+   "market": "total",
+   "bet_kind": "total",
+   "definition": "Under when the total is 40 or lower. Fires on the total market: under when total_line <= 40. Stake 1 unit, flat; no staking model is part of the rule.",
+   "condition": "under when total_line <= 40",
+   "inputs": [
+    "total_line"
+   ],
+   "sample_window": {
+    "seasons": "2006-2026",
+    "rule": "closing prices only; a game without a price is not scored",
+    "n_bets_backtest": 887
+   },
+   "gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "PS1",
+    "PR1"
+   ],
+   "status": "registered-backtest",
+   "registered_at": "2026-11-15",
+   "registration_commit": "08e608a480b567c7173617a12736ece46c1a4bd3",
+   "registration_branch": "arena/c7b65577-nfl1",
+   "result_location": "data/s9cb/leaderboard.json",
+   "result_scored": true,
+   "exposure_note": "Backtested on 2006-2026 closing totals.",
+   "selection_disclosure": "This rule's thresholds were chosen before this session but after the scoring data existed; the multiplicity correction in G5 charges for the twelve-rule search. From this commit onwards the text is frozen and any edit is visible as a diff.",
+   "source": "schedules"
+  },
+  {
+   "id": "S10",
+   "name": "Over when the total is 50 or higher",
+   "market": "total",
+   "bet_kind": "total",
+   "definition": "Over when the total is 50 or higher. Fires on the total market: over when total_line >= 50. Stake 1 unit, flat; no staking model is part of the rule.",
+   "condition": "over when total_line >= 50",
+   "inputs": [
+    "total_line"
+   ],
+   "sample_window": {
+    "seasons": "2006-2026",
+    "rule": "closing prices only; a game without a price is not scored",
+    "n_bets_backtest": 599
+   },
+   "gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "PS1",
+    "PR1"
+   ],
+   "status": "registered-backtest",
+   "registered_at": "2026-11-15",
+   "registration_commit": "08e608a480b567c7173617a12736ece46c1a4bd3",
+   "registration_branch": "arena/c7b65577-nfl1",
+   "result_location": "data/s9cb/leaderboard.json",
+   "result_scored": true,
+   "exposure_note": "Backtested on 2006-2026 closing totals.",
+   "selection_disclosure": "This rule's thresholds were chosen before this session but after the scoring data existed; the multiplicity correction in G5 charges for the twelve-rule search. From this commit onwards the text is frozen and any edit is visible as a diff.",
+   "source": "schedules"
+  },
+  {
+   "id": "S11",
+   "name": "Opponent QB ruled Out/Doubtful",
+   "market": "side",
+   "bet_kind": "spread",
+   "definition": "Opponent QB ruled Out/Doubtful. Fires on the spread market: opponent's side when exactly one team's quarterback carries status Out or Doubtful (2016 onwards). Stake 1 unit, flat; no staking model is part of the rule.",
+   "condition": "opponent's side when exactly one team's quarterback carries status Out or Doubtful (2016 onwards)",
+   "inputs": [
+    "report_status",
+    "position"
+   ],
+   "sample_window": {
+    "seasons": "2006-2026",
+    "rule": "closing prices only; a game without a price is not scored",
+    "n_bets_backtest": 380
+   },
+   "gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "PS1",
+    "PR1"
+   ],
+   "status": "registered-backtest",
+   "registered_at": "2026-11-15",
+   "registration_commit": "08e608a480b567c7173617a12736ece46c1a4bd3",
+   "registration_branch": "arena/c7b65577-nfl1",
+   "result_location": "data/s9cb/leaderboard.json",
+   "result_scored": true,
+   "exposure_note": "Reads a designation level from the weekly report, which the brief forbids as a signal. Registered so its result is traceable; superseded by P07-P09.",
+   "selection_disclosure": "This rule's thresholds were chosen before this session but after the scoring data existed; the multiplicity correction in G5 charges for the twelve-rule search. From this commit onwards the text is frozen and any edit is visible as a diff.",
+   "source": "schedules"
+  },
+  {
+   "id": "S12",
+   "name": "Out-count gap of 3 or more",
+   "market": "side",
+   "bet_kind": "spread",
+   "definition": "Out-count gap of 3 or more. Fires on the spread market: the team with fewer players designated Out/Doubtful when the counts differ by 3 or more (2016 onwards). Stake 1 unit, flat; no staking model is part of the rule.",
+   "condition": "the team with fewer players designated Out/Doubtful when the counts differ by 3 or more (2016 onwards)",
+   "inputs": [
+    "report_status"
+   ],
+   "sample_window": {
+    "seasons": "2006-2026",
+    "rule": "closing prices only; a game without a price is not scored",
+    "n_bets_backtest": 685
+   },
+   "gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "PS1",
+    "PR1"
+   ],
+   "status": "registered-backtest",
+   "registered_at": "2026-11-15",
+   "registration_commit": "08e608a480b567c7173617a12736ece46c1a4bd3",
+   "registration_branch": "arena/c7b65577-nfl1",
+   "result_location": "data/s9cb/leaderboard.json",
+   "result_scored": true,
+   "exposure_note": "Counts designations, i.e. a level, not a surprise. Registered so its result is traceable; superseded by P07-P09.",
+   "selection_disclosure": "This rule's thresholds were chosen before this session but after the scoring data existed; the multiplicity correction in G5 charges for the twelve-rule search. From this commit onwards the text is frozen and any edit is visible as a diff.",
+   "source": "schedules"
+  },
+  {
+   "id": "P01",
+   "name": "Model side edge >= 2.0 pts, singles only",
+   "market": "side",
+   "definition": "Model side edge >= 2.0 pts, singles only. Stake 1 unit, flat; no staking model is part of the rule.",
+   "inputs": [
+    "model_margin",
+    "spread_line"
+   ],
+   "sample_window": {
+    "seasons": "2026 onwards, prospective",
+    "rule": "only games that kick off after the registration commit",
+    "n_bets_backtest": null
+   },
+   "gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "PS1",
+    "PR1"
+   ],
+   "status": "registered-prospective",
+   "family": "shadow baseline",
+   "registered_at": "2026-11-15",
+   "registration_commit": "08e608a480b567c7173617a12736ece46c1a4bd3",
+   "registration_branch": "arena/c7b65577-nfl1",
+   "result_location": null,
+   "result_scored": false,
+   "exposure_note": "The pre-registered singles-only shadow baseline the brief asks for. Every forecast is written before kick-off; no price is required to record a forecast.",
+   "selection_disclosure": "Registered before any result was computed from it.",
+   "source": "schedules"
+  },
+  {
+   "id": "P02",
+   "name": "Random side, 1 unit per game",
+   "market": "side",
+   "definition": "Random side, 1 unit per game. Stake 1 unit, flat; no staking model is part of the rule.",
+   "inputs": [
+    "game_id"
+   ],
+   "sample_window": {
+    "seasons": "2026 onwards, prospective",
+    "rule": "only games that kick off after the registration commit",
+    "n_bets_backtest": null
+   },
+   "gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "PS1",
+    "PR1"
+   ],
+   "status": "registered-prospective",
+   "family": "control baseline",
+   "registered_at": "2026-11-15",
+   "registration_commit": "08e608a480b567c7173617a12736ece46c1a4bd3",
+   "registration_branch": "arena/c7b65577-nfl1",
+   "result_location": null,
+   "result_scored": false,
+   "exposure_note": "Control baseline. Twenty random draws per game id with a fixed seed, so the interval on the control is published, not just a point.",
+   "selection_disclosure": "Registered before any result was computed from it.",
+   "source": "schedules"
+  },
+  {
+   "id": "P03",
+   "name": "Favourite only, no threshold",
+   "market": "side",
+   "definition": "Favourite only, no threshold. Stake 1 unit, flat; no staking model is part of the rule.",
+   "inputs": [
+    "spread_line"
+   ],
+   "sample_window": {
+    "seasons": "2026 onwards, prospective",
+    "rule": "only games that kick off after the registration commit",
+    "n_bets_backtest": null
+   },
+   "gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "PS1",
+    "PR1"
+   ],
+   "status": "registered-prospective",
+   "family": "control baseline",
+   "registered_at": "2026-11-15",
+   "registration_commit": "08e608a480b567c7173617a12736ece46c1a4bd3",
+   "registration_branch": "arena/c7b65577-nfl1",
+   "result_location": null,
+   "result_scored": false,
+   "exposure_note": "Control baseline: bet the favourite on the closing spread. Separates skill from the well-documented favourite bias.",
+   "selection_disclosure": "Registered before any result was computed from it.",
+   "source": "schedules"
+  },
+  {
+   "id": "P04",
+   "name": "Home team only, no threshold",
+   "market": "side",
+   "definition": "Home team only, no threshold. Stake 1 unit, flat; no staking model is part of the rule.",
+   "inputs": [
+    "spread_line"
+   ],
+   "sample_window": {
+    "seasons": "2026 onwards, prospective",
+    "rule": "only games that kick off after the registration commit",
+    "n_bets_backtest": null
+   },
+   "gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "PS1",
+    "PR1"
+   ],
+   "status": "registered-prospective",
+   "family": "control baseline",
+   "registered_at": "2026-11-15",
+   "registration_commit": "08e608a480b567c7173617a12736ece46c1a4bd3",
+   "registration_branch": "arena/c7b65577-nfl1",
+   "result_location": null,
+   "result_scored": false,
+   "exposure_note": "Control baseline: bet the home team on the closing spread.",
+   "selection_disclosure": "Registered before any result was computed from it.",
+   "source": "schedules"
+  },
+  {
+   "id": "P05",
+   "name": "Underdog only, no threshold",
+   "market": "side",
+   "definition": "Underdog only, no threshold. Stake 1 unit, flat; no staking model is part of the rule.",
+   "inputs": [
+    "spread_line"
+   ],
+   "sample_window": {
+    "seasons": "2026 onwards, prospective",
+    "rule": "only games that kick off after the registration commit",
+    "n_bets_backtest": null
+   },
+   "gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "PS1",
+    "PR1"
+   ],
+   "status": "registered-prospective",
+   "family": "control baseline",
+   "registered_at": "2026-11-15",
+   "registration_commit": "08e608a480b567c7173617a12736ece46c1a4bd3",
+   "registration_branch": "arena/c7b65577-nfl1",
+   "result_location": null,
+   "result_scored": false,
+   "exposure_note": "Control baseline: bet the underdog on the closing spread.",
+   "selection_disclosure": "Registered before any result was computed from it.",
+   "source": "schedules"
+  },
+  {
+   "id": "P06",
+   "name": "Model total edge >= 2.5 pts, under only",
+   "market": "total",
+   "definition": "Model total edge >= 2.5 pts, under only. Stake 1 unit, flat; no staking model is part of the rule.",
+   "inputs": [
+    "model_total_a",
+    "model_total_b",
+    "total_line"
+   ],
+   "sample_window": {
+    "seasons": "2026 onwards, prospective",
+    "rule": "only games that kick off after the registration commit",
+    "n_bets_backtest": null
+   },
+   "gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "PS1",
+    "PR1"
+   ],
+   "status": "registered-prospective",
+   "family": "two-estimator",
+   "registered_at": "2026-11-15",
+   "registration_commit": "08e608a480b567c7173617a12736ece46c1a4bd3",
+   "registration_branch": "arena/c7b65577-nfl1",
+   "result_location": null,
+   "result_scored": false,
+   "exposure_note": "Requires both estimators in P10/P11 to agree on the direction. Until that walk-forward comparison is published, the rule cannot fire.",
+   "selection_disclosure": "Registered before any result was computed from it.",
+   "source": "schedules"
+  },
+  {
+   "id": "P07",
+   "name": "Availability surprise: new 'Out' designation versus the player's own prior week",
+   "market": "side",
+   "definition": "Availability surprise: new 'Out' designation versus the player's own prior week. Stake 1 unit, flat; no staking model is part of the rule.",
+   "inputs": [
+    "report_status",
+    "week"
+   ],
+   "sample_window": {
+    "seasons": "2026 onwards, prospective",
+    "rule": "only games that kick off after the registration commit",
+    "n_bets_backtest": null
+   },
+   "gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "PS1",
+    "PR1"
+   ],
+   "status": "registered-prospective",
+   "family": "injury surprise (replaces a level rule)",
+   "registered_at": "2026-11-15",
+   "registration_commit": "08e608a480b567c7173617a12736ece46c1a4bd3",
+   "registration_branch": "arena/c7b65577-nfl1",
+   "result_location": null,
+   "result_scored": false,
+   "exposure_note": "The signal is the *change* in designation, never the level (brief: 'make the injury signal a surprise, never a level'). Ablation: identical model with and without the feature, chronological holdout.",
+   "selection_disclosure": "Registered before any result was computed from it.",
+   "source": "schedules"
+  },
+  {
+   "id": "P08",
+   "name": "Practice-participation downgrade (FP -> LP -> DNP) between consecutive reads",
+   "market": "side",
+   "definition": "Practice-participation downgrade (FP -> LP -> DNP) between consecutive reads. Stake 1 unit, flat; no staking model is part of the rule.",
+   "inputs": [
+    "practice_status",
+    "week"
+   ],
+   "sample_window": {
+    "seasons": "2026 onwards, prospective",
+    "rule": "only games that kick off after the registration commit",
+    "n_bets_backtest": null
+   },
+   "gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "PS1",
+    "PR1"
+   ],
+   "status": "registered-prospective",
+   "family": "injury surprise",
+   "registered_at": "2026-11-15",
+   "registration_commit": "08e608a480b567c7173617a12736ece46c1a4bd3",
+   "registration_branch": "arena/c7b65577-nfl1",
+   "result_location": null,
+   "result_scored": false,
+   "exposure_note": "Practice trend, not designation level. Needs at least two dated reads of the same week, which the snapshot ledger must supply.",
+   "selection_disclosure": "Registered before any result was computed from it.",
+   "source": "schedules"
+  },
+  {
+   "id": "P09",
+   "name": "Count of new 'Out' starters, opponent minus own",
+   "market": "side",
+   "definition": "Count of new 'Out' starters, opponent minus own. Stake 1 unit, flat; no staking model is part of the rule.",
+   "inputs": [
+    "report_status",
+    "position"
+   ],
+   "sample_window": {
+    "seasons": "2026 onwards, prospective",
+    "rule": "only games that kick off after the registration commit",
+    "n_bets_backtest": null
+   },
+   "gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "PS1",
+    "PR1"
+   ],
+   "status": "registered-prospective",
+   "family": "injury surprise",
+   "registered_at": "2026-11-15",
+   "registration_commit": "08e608a480b567c7173617a12736ece46c1a4bd3",
+   "registration_branch": "arena/c7b65577-nfl1",
+   "result_location": null,
+   "result_scored": false,
+   "exposure_note": "Position-aware surprise count. Blocked until starters are identified from Game Books (see the open-questions register).",
+   "selection_disclosure": "Registered before any result was computed from it.",
+   "source": "schedules"
+  },
+  {
+   "id": "P10",
+   "name": "Parlay: two legs from different games, joint probability from the validated single-leg model",
+   "market": "parlay",
+   "definition": "Parlay: two legs from different games, joint probability from the validated single-leg model. Stake 1 unit, flat; no staking model is part of the rule.",
+   "inputs": [
+    "game_id",
+    "model_margin"
+   ],
+   "sample_window": {
+    "seasons": "2026 onwards, prospective",
+    "rule": "only games that kick off after the registration commit",
+    "n_bets_backtest": null
+   },
+   "gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "PS1",
+    "PR1"
+   ],
+   "status": "registered-prospective",
+   "family": "parlay",
+   "registered_at": "2026-11-15",
+   "registration_commit": "08e608a480b567c7173617a12736ece46c1a4bd3",
+   "registration_branch": "arena/c7b65577-nfl1",
+   "result_location": null,
+   "result_scored": false,
+   "exposure_note": "Kept behind a joint-evidence gate: a combo is only ranked when a directly validated joint probability exists, not the product of marginals.",
+   "selection_disclosure": "Registered before any result was computed from it.",
+   "source": "schedules"
+  },
+  {
+   "id": "P11",
+   "name": "Same-game parlay: two legs in one game",
+   "market": "sgp",
+   "definition": "Same-game parlay: two legs in one game. Stake 1 unit, flat; no staking model is part of the rule.",
+   "inputs": [
+    "game_id",
+    "model_margin",
+    "model_total"
+   ],
+   "sample_window": {
+    "seasons": "2026 onwards, prospective",
+    "rule": "only games that kick off after the registration commit",
+    "n_bets_backtest": null
+   },
+   "gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "PS1",
+    "PR1"
+   ],
+   "status": "registered-prospective",
+   "family": "parlay",
+   "registered_at": "2026-11-15",
+   "registration_commit": "08e608a480b567c7173617a12736ece46c1a4bd3",
+   "registration_branch": "arena/c7b65577-nfl1",
+   "result_location": null,
+   "result_scored": false,
+   "exposure_note": "Same-game legs are dependent by construction; the marginal product is invalid. No same-game parlay can be ranked until a joint distribution is validated.",
+   "selection_disclosure": "Registered before any result was computed from it.",
+   "source": "schedules"
+  },
+  {
+   "id": "P12",
+   "name": "Prop combo: two player props in one game",
+   "market": "prop-combo",
+   "definition": "Prop combo: two player props in one game. Stake 1 unit, flat; no staking model is part of the rule.",
+   "inputs": [
+    "player_id",
+    "game_id",
+    "targets"
+   ],
+   "sample_window": {
+    "seasons": "2026 onwards, prospective",
+    "rule": "only games that kick off after the registration commit",
+    "n_bets_backtest": null
+   },
+   "gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "PS1",
+    "PR1"
+   ],
+   "status": "registered-prospective",
+   "family": "prop combo",
+   "registered_at": "2026-11-15",
+   "registration_commit": "08e608a480b567c7173617a12736ece46c1a4bd3",
+   "registration_branch": "arena/c7b65577-nfl1",
+   "result_location": null,
+   "result_scored": false,
+   "exposure_note": "The repository holds no player-prop prices at all (data/s9cb/props.json \u203a price_status), so this rule cannot be scored. Registered so that the gap is explicit.",
+   "selection_disclosure": "Registered before any result was computed from it.",
+   "source": "schedules"
+  },
+  {
+   "id": "P13",
+   "name": "Prop single: receiving yards above a shrunk trailing mean",
+   "market": "prop",
+   "definition": "Prop single: receiving yards above a shrunk trailing mean. Stake 1 unit, flat; no staking model is part of the rule.",
+   "inputs": [
+    "player_id",
+    "receiving_yards"
+   ],
+   "sample_window": {
+    "seasons": "2026 onwards, prospective",
+    "rule": "only games that kick off after the registration commit",
+    "n_bets_backtest": null
+   },
+   "gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "PS1",
+    "PR1"
+   ],
+   "status": "registered-prospective",
+   "family": "prop",
+   "registered_at": "2026-11-15",
+   "registration_commit": "08e608a480b567c7173617a12736ece46c1a4bd3",
+   "registration_branch": "arena/c7b65577-nfl1",
+   "result_location": null,
+   "result_scored": false,
+   "exposure_note": "Unscorable for the same reason: no price. Registered for completeness of the competition.",
+   "selection_disclosure": "Registered before any result was computed from it.",
+   "source": "schedules"
+  },
+  {
+   "id": "P14",
+   "name": "Fade the public side (proxy: contrarian versus closing-line move)",
+   "market": "side",
+   "definition": "Fade the public side (proxy: contrarian versus closing-line move). Stake 1 unit, flat; no staking model is part of the rule.",
+   "inputs": [
+    "spread_line",
+    "home_moneyline"
+   ],
+   "sample_window": {
+    "seasons": "2026 onwards, prospective",
+    "rule": "only games that kick off after the registration commit",
+    "n_bets_backtest": null
+   },
+   "gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "PS1",
+    "PR1"
+   ],
+   "status": "registered-prospective",
+   "family": "market structure",
+   "registered_at": "2026-11-15",
+   "registration_commit": "08e608a480b567c7173617a12736ece46c1a4bd3",
+   "registration_branch": "arena/c7b65577-nfl1",
+   "result_location": null,
+   "result_scored": false,
+   "exposure_note": "Needs an opening line to measure a move. The price-snapshot store is blocked (PR-01), so this rule stays paper.",
+   "selection_disclosure": "Registered before any result was computed from it.",
+   "source": "schedules"
+  },
+  {
+   "id": "P15",
+   "name": "Vig-free consensus versus our fair line",
+   "market": "side",
+   "definition": "Vig-free consensus versus our fair line. Stake 1 unit, flat; no staking model is part of the rule.",
+   "inputs": [
+    "spread_line",
+    "total_line"
+   ],
+   "sample_window": {
+    "seasons": "2026 onwards, prospective",
+    "rule": "only games that kick off after the registration commit",
+    "n_bets_backtest": null
+   },
+   "gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "PS1",
+    "PR1"
+   ],
+   "status": "registered-prospective",
+   "family": "market structure",
+   "registered_at": "2026-11-15",
+   "registration_commit": "08e608a480b567c7173617a12736ece46c1a4bd3",
+   "registration_branch": "arena/c7b65577-nfl1",
+   "result_location": null,
+   "result_scored": false,
+   "exposure_note": "Needs two or more books to de-vig a consensus. The repository holds one price series, so the consensus is not computable and is left blank.",
+   "selection_disclosure": "Registered before any result was computed from it.",
+   "source": "schedules"
+  },
+  {
+   "id": "P16",
+   "name": "Bye-week rest advantage of 2+ days",
+   "market": "side",
+   "definition": "Bye-week rest advantage of 2+ days. Stake 1 unit, flat; no staking model is part of the rule.",
+   "inputs": [
+    "home_rest",
+    "away_rest"
+   ],
+   "sample_window": {
+    "seasons": "2026 onwards, prospective",
+    "rule": "only games that kick off after the registration commit",
+    "n_bets_backtest": null
+   },
+   "gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "PS1",
+    "PR1"
+   ],
+   "status": "registered-prospective",
+   "family": "schedule fact",
+   "registered_at": "2026-11-15",
+   "registration_commit": "08e608a480b567c7173617a12736ece46c1a4bd3",
+   "registration_branch": "arena/c7b65577-nfl1",
+   "result_location": null,
+   "result_scored": false,
+   "exposure_note": "Built only from published schedule facts (rest days are in the schedule extract).",
+   "selection_disclosure": "Registered before any result was computed from it.",
+   "source": "schedules"
+  },
+  {
+   "id": "P17",
+   "name": "International/neutral-site travel disadvantage",
+   "market": "side",
+   "definition": "International/neutral-site travel disadvantage. Stake 1 unit, flat; no staking model is part of the rule.",
+   "inputs": [
+    "location",
+    "spread_line"
+   ],
+   "sample_window": {
+    "seasons": "2026 onwards, prospective",
+    "rule": "only games that kick off after the registration commit",
+    "n_bets_backtest": null
+   },
+   "gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "PS1",
+    "PR1"
+   ],
+   "status": "registered-prospective",
+   "family": "schedule fact",
+   "registered_at": "2026-11-15",
+   "registration_commit": "08e608a480b567c7173617a12736ece46c1a4bd3",
+   "registration_branch": "arena/c7b65577-nfl1",
+   "result_location": null,
+   "result_scored": false,
+   "exposure_note": "The 2026 schedule contains neutral-site games; the rule is registered because the fact is published, not because an edge is expected.",
+   "selection_disclosure": "Registered before any result was computed from it.",
+   "source": "schedules"
+  },
+  {
+   "id": "P18",
+   "name": "Thursday short-week under",
+   "market": "total",
+   "definition": "Thursday short-week under. Stake 1 unit, flat; no staking model is part of the rule.",
+   "inputs": [
+    "weekday",
+    "total_line"
+   ],
+   "sample_window": {
+    "seasons": "2026 onwards, prospective",
+    "rule": "only games that kick off after the registration commit",
+    "n_bets_backtest": null
+   },
+   "gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "PS1",
+    "PR1"
+   ],
+   "status": "registered-prospective",
+   "family": "schedule fact",
+   "registered_at": "2026-11-15",
+   "registration_commit": "08e608a480b567c7173617a12736ece46c1a4bd3",
+   "registration_branch": "arena/c7b65577-nfl1",
+   "result_location": null,
+   "result_scored": false,
+   "exposure_note": "Weekday is a published schedule fact.",
+   "selection_disclosure": "Registered before any result was computed from it.",
+   "source": "schedules"
+  },
+  {
+   "id": "P19",
+   "name": "Season-opener total regression",
+   "market": "total",
+   "definition": "Season-opener total regression. Stake 1 unit, flat; no staking model is part of the rule.",
+   "inputs": [
+    "week",
+    "total_line"
+   ],
+   "sample_window": {
+    "seasons": "2026 onwards, prospective",
+    "rule": "only games that kick off after the registration commit",
+    "n_bets_backtest": null
+   },
+   "gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "PS1",
+    "PR1"
+   ],
+   "status": "registered-prospective",
+   "family": "schedule fact",
+   "registered_at": "2026-11-15",
+   "registration_commit": "08e608a480b567c7173617a12736ece46c1a4bd3",
+   "registration_branch": "arena/c7b65577-nfl1",
+   "result_location": null,
+   "result_scored": false,
+   "exposure_note": "Registered; the sample is small by construction and G3 will fail it for many seasons.",
+   "selection_disclosure": "Registered before any result was computed from it.",
+   "source": "schedules"
+  }
+ ]
+}

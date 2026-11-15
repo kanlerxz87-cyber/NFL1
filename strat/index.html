@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overview · NFL Strategy Competition</title>
+<meta name="description" content="Pre-registered NFL line-origination strategies, ranked by benchmark-relative proper scores with uncertainty. Every row carries an official source link; blank means unverified.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="brand" href="../index.html"><span class="mark">NFL</span><span class="brand-text">Strategy Competition</span></a>
+  <nav aria-label="Strategy competition sections"><a href="index.html" class="active">Overview</a><a href="leaderboard.html">Proper-Score Leaderboard</a><a href="preregister.html">Pre-Registration</a><a href="demotion.html">Demotion Gate</a><a href="what-would-change.html">What Would Change Our Mind</a><a href="totals.html">Two Totals</a><a href="questions.html">Open Questions</a><a href="suggestions.html">Suggestions</a><a href="flagged.html">Flagged for Review</a><a href="method.html">Method &amp; Sources</a><a href="executive-summary.html">Executive Summary</a></nav>
+</header>
+<main id="main">
+  <section class="page-head">
+    <p class="eyebrow">Strategy competition</p>
+    <h1>Overview</h1>
+    <p class="standfirst">A competition for pre-registered NFL line-origination strategies, ranked by proper scores with uncertainty. Every rule frozen before it was scored.</p>
+    <p class="timestamp">Built 2026-11-15T13:03:39+00:00 UTC · every table row links to its source · a blank cell means the value is not confirmed</p>
+  </section>
+
+<div class="kpis"><div class="kpi"><span class="kpi-label">Strategies registered</span><span class="kpi-value">31</span><span class="kpi-sub">12 backtest · 19 prospective</span></div><div class="kpi"><span class="kpi-label">Live strategies</span><span class="kpi-value">0</span><span class="kpi-sub">promotion rule not yet pre-registered</span></div><div class="kpi"><span class="kpi-label">On paper</span><span class="kpi-value">31</span><span class="kpi-sub">the only honest status today</span></div><div class="kpi"><span class="kpi-label">Demotions ever</span><span class="kpi-value">0</span><span class="kpi-sub">gate armed, never fired</span></div><div class="kpi"><span class="kpi-label">Clearing every gate</span><span class="kpi-value">0</span><span class="kpi-sub">the leaderboard&#x27;s answer today</span></div></div>
+
+<section class="panel">
+  <h2>The one-paragraph verdict</h2>
+  <p class="lede">Nothing in this repository has demonstrated skill against the closing line. The
+  model's side probabilities score <strong>-0.0413</strong>
+  on the Brier skill scale (positive is better), its totals
+  <strong>-0.0346</strong>, and its moneylines
+  <strong>-0.0714</strong> against the de-vigged
+  market. All three intervals sit below zero. The closing line, by contrast, beats a coin on the
+  moneyline by <strong>+0.1564</strong>
+  with an interval above zero — which is a statement about the market, not about us.</p>
+  <p class="note">This is the result the gates were built to be able to produce. A site that could
+  only report wins would not be measuring anything.</p>
+</section>
+
+<section class="panel">
+  <h2>Every market, scored the same way</h2>
+  <p class="sub">Brier skill versus the closing line, with a game-cluster bootstrap interval. The
+  published number is the lower bound; a market is eligible only if that bound is above zero.</p>
+  <div class="table-wrap"><table class=""><thead><tr><th>Market</th><th>What is scored</th><th>Games</th><th>Skill</th><th>Lower bound (95%)</th><th>Status</th><th>Source</th></tr></thead><tbody><tr><td><strong>Side</strong></td><td>P(home covers the closing spread)</td><td>6,785</td><td>-0.0413</td><td>-0.0513</td><td><span class="badge fail">INELIGIBLE</span></td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">NFL schedules ↗</a></td></tr><tr><td><strong>Total</strong></td><td>P(combined score over the closing total)</td><td>6,878</td><td>-0.0346</td><td>-0.0447</td><td><span class="badge fail">INELIGIBLE</span></td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">NFL schedules ↗</a></td></tr><tr><td><strong>Moneyline</strong></td><td>P(home win)</td><td>5,187</td><td>-0.0714</td><td>-0.0875</td><td><span class="badge fail">INELIGIBLE</span></td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">NFL schedules ↗</a></td></tr><tr><td><strong>Parlay</strong></td><td>joint probability of two dependent legs</td><td><span class="blank" title="no price exists for this market">blank</span></td><td><span class="blank" title="not scored">blank</span></td><td><span class="blank" title="not scored">blank</span></td><td><span class="badge fail">BLOCKED</span></td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">NFL schedules ↗</a></td></tr><tr><td><strong>Same-Game Parlay</strong></td><td>joint probability within one game</td><td><span class="blank" title="no price exists for this market">blank</span></td><td><span class="blank" title="not scored">blank</span></td><td><span class="blank" title="not scored">blank</span></td><td><span class="badge fail">BLOCKED</span></td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">NFL schedules ↗</a></td></tr><tr><td><strong>Player Prop</strong></td><td>P(prop over its line)</td><td><span class="blank" title="no price exists for this market">blank</span></td><td><span class="blank" title="not scored">blank</span></td><td><span class="blank" title="not scored">blank</span></td><td><span class="badge fail">BLOCKED</span></td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">NFL schedules ↗</a></td></tr></tbody></table></div><p class="note">Blank means the market has no price in this repository, so no skill can be measured. Parlays, same-game parlays and player props are blank for that reason and not because they were tried and failed.</p>
+</section>
+
+<section class="panel">
+  <h2>What this competition is, in one screen</h2>
+  <div class="two">
+    <div class="q"><h3>Pre-registration first</h3>
+      <p>31 rule records, each with its frozen text, its inputs, its sample window and
+      the git commit that registered it. <a href="preregister.html">Open the registry →</a></p></div>
+    <div class="q"><h3>Proper scores, not win rates</h3>
+      <p>The leaderboard's first column is benchmark-relative Brier skill with a game-cluster lower
+      bound and a multiplicity charge. <a href="leaderboard.html">Open the leaderboard →</a></p></div>
+    <div class="q"><h3>A demotion gate</h3>
+      <p>Five pre-registered rules that send a live strategy back to paper.
+      <a href="demotion.html">Open the gate →</a></p></div>
+    <div class="q"><h3>Two-sided falsifiers</h3>
+      <p>12 published claims, each with the observation that would confirm it and the
+      observation that would kill it. <a href="what-would-change.html">Open the register →</a></p></div>
+    <div class="q"><h3>Two totals until one wins</h3>
+      <p>Both estimators published with the gap column, and a walk-forward verdict that currently
+      reads <strong>no winner</strong>. <a href="totals.html">Open the totals →</a></p></div>
+    <div class="q"><h3>Questions before decisions</h3>
+      <p>12 questions that block a decision and 12 decisions that need
+      only a choice, kept separate. <a href="questions.html">Open the questions →</a></p></div>
+  </div>
+</section>
+
+<section class="panel">
+  <h2>What changed since the last build</h2>
+  <div class="table-wrap"><table class=""><thead><tr><th>Register</th><th>Rows</th><th>Where it is</th><th>What it is for</th><th>Artifact</th></tr></thead><tbody><tr><td>Pre-registration</td><td>31</td><td><a href="preregister.html">preregister.html</a></td><td>Forbids a result without a frozen rule.</td><td><a class="src" href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/preregistration.json" target="_blank" rel="noopener">data/strat/preregistration.json ↗</a></td></tr><tr><td>Proper scores</td><td>12</td><td><a href="leaderboard.html">leaderboard.html</a></td><td>Ranks by skill with uncertainty, not by win rate.</td><td><a class="src" href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/proper_score.json" target="_blank" rel="noopener">data/strat/proper_score.json ↗</a></td></tr><tr><td>Demotion gate</td><td>31</td><td><a href="demotion.html">demotion.html</a></td><td>Sends a live strategy back to paper.</td><td><a class="src" href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/demotion.json" target="_blank" rel="noopener">data/strat/demotion.json ↗</a></td></tr><tr><td>Falsifiers</td><td>12</td><td><a href="what-would-change.html">what-would-change.html</a></td><td>Two-sided, with thresholds.</td><td><a class="src" href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/what_would_change.json" target="_blank" rel="noopener">data/strat/what_would_change.json ↗</a></td></tr><tr><td>Two totals</td><td>135</td><td><a href="totals.html">totals.html</a></td><td>Both estimators, gap column, verdict.</td><td><a class="src" href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/dual_total.json" target="_blank" rel="noopener">data/strat/dual_total.json ↗</a></td></tr><tr><td>Questions</td><td>12</td><td><a href="questions.html">questions.html</a></td><td>What is missing and how to get it.</td><td><a class="src" href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/questions.json" target="_blank" rel="noopener">data/strat/questions.json ↗</a></td></tr><tr><td>Suggestions</td><td>12</td><td><a href="suggestions.html">suggestions.html</a></td><td>Risks and costs before anything is built.</td><td><a class="src" href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/suggestions.json" target="_blank" rel="noopener">data/strat/suggestions.json ↗</a></td></tr></tbody></table></div>
+</section>
+
+</main>
+<footer>
+  <p>NFL Strategy Competition · part of the NFL Decision Lab. Prices, results and injury data are
+  described at <a href="method.html">Method &amp; Sources</a>. Nothing on this site is a recommendation
+  to bet, and no strategy is claimed to be profitable: the leaderboard publishes scores,
+  uncertainty and the gate that fails.</p>
+  <p><a href="../index.html">← Back to the NFL Decision Lab</a> · <a href="executive-summary.html">Executive summary</a> · <a href="questions.html">Open questions</a></p>
+</footer>
+</body>
+</html>

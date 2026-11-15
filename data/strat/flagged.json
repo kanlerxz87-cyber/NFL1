@@ -1,0 +1,88 @@
+{
+ "generated_at": "2026-11-15T13:09:18+00:00",
+ "n_flags": 10,
+ "rootsite_rows": 2071,
+ "rule": "Flagged items do not block publication. Each states what is wrong, what it affects, and the observation that would close it.",
+ "rows": [
+  {
+   "id": "SC-01",
+   "finding": "The twelve legacbacktest rules were defined after their scoring data existed. Their published ROI figures are selection-exposed: twelve hypotheses were searched in one run.",
+   "affects": "Every ROI and win-rate number in data/s9cb/leaderboard.json",
+   "resolved": "Published and mitigated, not removed",
+   "mitigation": "Registered as registered-backtest with the exposure stated; the multiplicity charge in the leaderboard pays for the search; no legacy rule can be promoted.",
+   "source": "nflverse_schedules"
+  },
+  {
+   "id": "SC-02",
+   "finding": "No opening price exists anywhere in the repository, and the closing price carries no fetch time. The price-snapshot store the brief requires is therefore blocked by a data-source decision, not by engineering.",
+   "affects": "Price-snapshot store (PR-01); any prospective ROI",
+   "resolved": "Open \u2014 needs a decision from the owner",
+   "mitigation": "Q02 and W11 state the exact observation that would clear it.",
+   "source": "nflverse_schedules"
+  },
+  {
+   "id": "SC-03",
+   "finding": "S11 and S12 read an injury-designation level from the weekly report. The brief explicitly forbids a level as a signal and asks for a surprise instead.",
+   "affects": "Two scored rules",
+   "resolved": "Published and superseded",
+   "mitigation": "Both stay scored so the comparison is visible; the surprise rules P07-P09 replace them and the level rules can never be promoted.",
+   "source": "injuries_w10"
+  },
+  {
+   "id": "SC-04",
+   "finding": "The historical results and closing lines are a third-party (nflverse) extract of the NFL GSIS feed. The repository's official check covers the 2026 season only, so the historical intervals rest on an unverified transcription.",
+   "affects": "All 6,785-game intervals on the leaderboard",
+   "resolved": "Open \u2014 flagged for review",
+   "mitigation": "Q03 names the reconciliation that would close it.",
+   "source": "gameday_w10_was_nyg"
+  },
+  {
+   "id": "SC-05",
+   "finding": "The model loses to the closing line on all three markets (side -0.0413, total -0.0346, moneyline -0.0714).",
+   "affects": "The origination claim the project is built on",
+   "resolved": "Published, not hidden",
+   "mitigation": "Stated on the overview and in the executive summary. W01-W03 record what would reverse it.",
+   "source": "schedules"
+  },
+  {
+   "id": "SC-06",
+   "finding": "No player-prop price exists in the repository, so three of six leaderboard divisions cannot be scored at all.",
+   "affects": "Prop, prop-combo and same-game-parlay divisions",
+   "resolved": "Open \u2014 flagged for review",
+   "mitigation": "Q10; the divisions are published as blank with the reason rather than omitted.",
+   "source": "nflverse_schedules"
+  },
+  {
+   "id": "SC-07",
+   "finding": "The two-estimator comparison has no winner: the holdout paired difference is -0.0136 points with an interval of -0.2288 to +0.2188.",
+   "affects": "Any claim that the rating model adds information on the total",
+   "resolved": "Published as undecided",
+   "mitigation": "Both estimators published until one wins (W05).",
+   "source": "schedules"
+  },
+  {
+   "id": "SC-08",
+   "finding": "The promotion rule is not pre-registered, so the competition has a pre-registered exit and no pre-registered entrance.",
+   "affects": "Live status and rewards",
+   "resolved": "Open \u2014 needs a decision",
+   "mitigation": "Q09 and suggestion SG2.",
+   "source": "repo"
+  },
+  {
+   "id": "SC-09",
+   "finding": "2,071 table rows with official source links are published row-level while the licence question in flag F51 is unresolved.",
+   "affects": "The whole publication model",
+   "resolved": "Open \u2014 carried from F51, not re-litigated here",
+   "mitigation": "Q01, Q11 and suggestion SG11.",
+   "source": "terms"
+  },
+  {
+   "id": "SC-10",
+   "finding": "The default figure for the strategy family's multiplicity charge assumes the twelve rules are independent tests. Several share inputs (S01/S02, S03/S04), so the charge is conservative in the wrong direction.",
+   "affects": "The multiplicity column on the leaderboard",
+   "resolved": "Open \u2014 flagged for review",
+   "mitigation": "Q05 and decision D12.",
+   "source": "schedules"
+  }
+ ]
+}

@@ -1,0 +1,58 @@
+:root{--bg:#f6f7f9;--panel:#fff;--ink:#14181f;--muted:#5d6673;--line:#dde2e9;--accent:#0b5cad;
+--pass:#0f7b3f;--pass-bg:#e6f4ec;--warn:#8a5a00;--warn-bg:#fdf3e0;--fail:#a11f2b;--fail-bg:#fdecee}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--accent)}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:8px;top:8px;background:#fff;padding:8px;z-index:10}
+header.top{background:#fff;border-bottom:1px solid var(--line);padding:14px 22px;position:sticky;top:0;z-index:5}
+.brand{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-weight:700;margin-right:18px}
+.brand .mark{background:var(--ink);color:#fff;padding:2px 6px;border-radius:4px;font-size:12px;letter-spacing:.08em}
+header nav{display:inline-flex;flex-wrap:wrap;gap:4px}
+header nav a{padding:5px 9px;border-radius:6px;text-decoration:none;color:var(--muted);font-size:13.5px}
+header nav a:hover{background:#eef2f7;color:var(--ink)}
+header nav a.active{background:var(--accent);color:#fff}
+main{max-width:1180px;margin:0 auto;padding:26px 22px 60px}
+.page-head{margin-bottom:18px}
+.eyebrow{text-transform:uppercase;letter-spacing:.09em;font-size:11.5px;color:var(--muted);margin:0 0 6px}
+h1{margin:0 0 8px;font-size:30px;letter-spacing:-.01em}
+.standfirst{margin:0 0 6px;color:#2b323c;max-width:80ch}
+.timestamp{color:var(--muted);font-size:12.5px;margin:0}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:16px 0}
+.panel h2{margin:0 0 4px;font-size:19px}
+.panel .sub{color:var(--muted);font-size:13px;margin:0 0 12px}
+.note{color:var(--muted);font-size:12.5px;margin:10px 0 0}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;background:#fff}
+th,td{padding:7px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:#f1f4f8;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:#fafbfd}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.badge{display:inline-block;padding:1px 7px;border-radius:999px;font-size:11.5px;font-weight:600}
+.badge.pass{background:var(--pass-bg);color:var(--pass)}
+.badge.warn{background:var(--warn-bg);color:var(--warn)}
+.badge.fail{background:var(--fail-bg);color:var(--fail)}
+.badge.neutral{background:#eef1f5;color:#4a5361}
+.blank{display:inline-block;padding:0 5px;border:1px dashed #b9c1cc;border-radius:4px;color:var(--muted);font-size:11.5px;cursor:help}
+a.src{font-size:12px;white-space:nowrap}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:12px;margin:16px 0}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.kpi-label{display:block;font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.kpi-value{display:block;font-size:24px;font-weight:700;margin:3px 0}
+.kpi-sub{font-size:12px;color:var(--muted)}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:16px}
+.hero{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px;margin:16px 0}
+.hero h2{margin:0 0 6px}
+.lede{font-size:16px;max-width:80ch}
+.btn{display:inline-block;background:var(--accent);color:#fff;padding:8px 14px;border-radius:7px;text-decoration:none;font-weight:600;font-size:13.5px;margin-right:8px}
+.btn.ghost{background:#fff;color:var(--accent);border:1px solid var(--accent)}
+footer{max-width:1180px;margin:0 auto;padding:18px 22px 40px;color:var(--muted);font-size:12.5px;border-top:1px solid var(--line)}
+.q{border-left:3px solid var(--accent);padding:2px 0 2px 12px;margin:14px 0}
+.q h3{margin:0 0 4px;font-size:15.5px}
+.q p{margin:3px 0}
+.meta{color:var(--muted);font-size:12.5px}
+ol.plain,ul.plain{padding-left:20px;margin:6px 0}
+code{background:#eef1f5;padding:1px 5px;border-radius:4px;font-size:12.5px}
+.stack{display:flex;flex-direction:column;gap:10px}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}

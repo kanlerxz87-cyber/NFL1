@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proper-Score Leaderboard · NFL Strategy Competition</title>
+<meta name="description" content="Pre-registered NFL line-origination strategies, ranked by benchmark-relative proper scores with uncertainty. Every row carries an official source link; blank means unverified.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="brand" href="../index.html"><span class="mark">NFL</span><span class="brand-text">Strategy Competition</span></a>
+  <nav aria-label="Strategy competition sections"><a href="index.html">Overview</a><a href="leaderboard.html" class="active">Proper-Score Leaderboard</a><a href="preregister.html">Pre-Registration</a><a href="demotion.html">Demotion Gate</a><a href="what-would-change.html">What Would Change Our Mind</a><a href="totals.html">Two Totals</a><a href="questions.html">Open Questions</a><a href="suggestions.html">Suggestions</a><a href="flagged.html">Flagged for Review</a><a href="method.html">Method &amp; Sources</a><a href="executive-summary.html">Executive Summary</a></nav>
+</header>
+<main id="main">
+  <section class="page-head">
+    <p class="eyebrow">Strategy competition</p>
+    <h1>Proper-Score Leaderboard</h1>
+    <p class="standfirst">Benchmark-relative Brier skill with a game-cluster lower bound and a multiplicity charge. Control baselines in the same table.</p>
+    <p class="timestamp">Built 2026-11-15T13:03:39+00:00 UTC · every table row links to its source · a blank cell means the value is not confirmed</p>
+  </section>
+
+<section class="panel">
+  <h2>Why this table is not ordered by win rate</h2>
+  <p class="lede">Win rate is not a proper scoring rule. A forecast that is right 60% of the time
+  while being badly calibrated is worse than one that is right 52% of the time with honest
+  probabilities, and ROI on a few hundred bets cannot separate the two. The first column here is
+  benchmark-relative Brier skill, and the published figure is the <em>lower</em> bound of a
+  game-cluster bootstrap interval, not the point estimate.</p>
+</section>
+
+<section class="panel">
+  <h2>Model and benchmarks, by market</h2>
+  <p class="sub">Game-cluster bootstrap, game-cluster bootstrap, 2000 resamples, seed 20261115, 95%. A market is eligible only when
+  the lower bound is above zero <em>and</em> the multiplicity charge is cleared <em>and</em> the
+  200-game floor is met.</p>
+  <div class="table-wrap"><table class=""><thead><tr><th>Market</th><th>Forecast</th><th>Games</th><th>Skill</th><th>Lower bound (95%)</th><th>Status</th><th>Bootstrap p (one-sided)</th><th>Source</th></tr></thead><tbody><tr><td><strong>Side</strong></td><td>model</td><td>6,785</td><td>-0.0413</td><td>-0.0513</td><td><span class="badge fail">INELIGIBLE</span></td><td>+1.0000</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">NFL schedules ↗</a></td></tr><tr><td><strong>Side</strong></td><td>closing line (p=0.5)</td><td>6,785</td><td>+0.0000</td><td>+0.0000</td><td><span class="badge fail">INELIGIBLE</span></td><td>+1.0000</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">NFL schedules ↗</a></td></tr><tr><td><strong>Side</strong></td><td>scoring differential</td><td>5,943</td><td>-0.1243</td><td>-0.1417</td><td><span class="badge fail">INELIGIBLE</span></td><td>+1.0000</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">NFL schedules ↗</a></td></tr><tr><td><strong>Total</strong></td><td>model</td><td>6,878</td><td>-0.0346</td><td>-0.0447</td><td><span class="badge fail">INELIGIBLE</span></td><td>+1.0000</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">NFL schedules ↗</a></td></tr><tr><td><strong>Total</strong></td><td>closing total (p=0.5)</td><td>6,878</td><td>+0.0000</td><td>+0.0000</td><td><span class="badge fail">INELIGIBLE</span></td><td>+1.0000</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">NFL schedules ↗</a></td></tr><tr><td><strong>Total</strong></td><td>season-to-date mean total</td><td>6,022</td><td>-0.0659</td><td>-0.0785</td><td><span class="badge fail">INELIGIBLE</span></td><td>+1.0000</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">NFL schedules ↗</a></td></tr><tr><td><strong>Moneyline</strong></td><td>model</td><td>5,187</td><td>-0.0714</td><td>-0.0875</td><td><span class="badge fail">INELIGIBLE</span></td><td>+1.0000</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">NFL schedules ↗</a></td></tr><tr><td><strong>Moneyline</strong></td><td>closing moneyline, de-vigged</td><td>5,187</td><td>+0.1564</td><td>+0.1385</td><td><span class="badge pass">ELIGIBLE</span></td><td>+0.0000</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">NFL schedules ↗</a></td></tr><tr><td><strong>Moneyline</strong></td><td>closing moneyline, raw (with vig)</td><td>5,187</td><td>+0.1545</td><td>+0.1356</td><td><span class="badge pass">ELIGIBLE</span></td><td>+0.0000</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">NFL schedules ↗</a></td></tr><tr><td><strong>Moneyline</strong></td><td>vig_size</td><td><span class="blank" title="not scored">blank</span></td><td><span class="blank" title="no interval exists for this value">blank</span></td><td><span class="blank" title="no interval exists for this value">blank</span></td><td><span class="badge warn">UNVERIFIED</span></td><td><span class="blank" title="no bootstrap p">blank</span></td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">NFL schedules ↗</a></td></tr></tbody></table></div><p class="note">p is the share of game-cluster resamples in which the forecast does <em>not</em> beat its benchmark; 0.0000 means none of 2,000 resamples did.</p>
+</section>
+
+<section class="panel">
+  <h2>The six model-market tests, charged for multiplicity</h2>
+  <p class="sub">Six tests at the 5% level means roughly one would look positive by chance.
+  Benjamini-Hochberg charges the family less harshly than Bonferroni because the tests are not
+  independent; both columns are published so the reader can see either charge.</p>
+  <div class="table-wrap"><table class=""><thead><tr><th>Test</th><th>Skill</th><th>Bootstrap p</th><th>BH-adjusted p</th><th>Bonferroni alpha</th><th>Source</th></tr></thead><tbody><tr><td>side: model vs closing line</td><td>-0.0413</td><td>+1.0000</td><td>+1.0000</td><td>0.00833</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">source extract ↗</a></td></tr><tr><td>side: scoring benchmark vs closing line</td><td>-0.1243</td><td>+1.0000</td><td>+1.0000</td><td>0.00833</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">source extract ↗</a></td></tr><tr><td>total: model vs closing total</td><td>-0.0346</td><td>+1.0000</td><td>+1.0000</td><td>0.00833</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">source extract ↗</a></td></tr><tr><td>total: season-mean benchmark vs closing total</td><td>-0.0659</td><td>+1.0000</td><td>+1.0000</td><td>0.00833</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">source extract ↗</a></td></tr><tr><td>moneyline: model vs de-vigged market</td><td>-0.0714</td><td>+1.0000</td><td>+1.0000</td><td>0.00833</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">source extract ↗</a></td></tr><tr><td>moneyline: raw market vs coin</td><td>+0.1545</td><td>+0.0000</td><td>+0.0000</td><td>0.00833</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">source extract ↗</a></td></tr></tbody></table></div><p class="note">With six tests at the 5% level, roughly one would look positive by chance. The Bonferroni threshold is 0.05/6; the BH column charges the same family less harshly because the tests are not independent. A test that fails both is a test whose sign is not established.</p>
+</section>
+
+<section class="panel">
+  <h2>Every scored betting rule, same scoring</h2>
+  <p class="sub">A betting rule does not emit a probability, so its implied probability is its
+  observed hit rate shrunk towards the price with 8 pseudo-bets. Skill is then measured against the
+  price (the break-even probability the operator charged) and against a coin.</p>
+  <div class="table-wrap"><table class=""><thead><tr><th>Rule</th><th>Decided bets</th><th>Hit rate</th><th>Shrunk P(win)</th><th>Break-even P</th><th>Skill vs price</th><th>Skill vs coin</th><th>ROI</th><th>Source</th></tr></thead><tbody><tr><td><strong>S07 Fade the road favourite of 7+</strong></td><td>394</td><td>55.58%</td><td>0.5552</td><td>0.5230</td><td>+0.0104</td><td>+0.0125</td><td>6.06%</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">closing-line source ↗</a></td></tr><tr><td><strong>S04 Model total edge &gt;= 4.0 pts</strong></td><td>1,276</td><td>52.74%</td><td>0.5273</td><td>0.5146</td><td>+0.0022</td><td>+0.0030</td><td>2.50%</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">closing-line source ↗</a></td></tr><tr><td><strong>S03 Model total edge &gt;= 2.5 pts</strong></td><td>2,424</td><td>52.39%</td><td>0.5239</td><td>0.5146</td><td>+0.0014</td><td>+0.0023</td><td>1.84%</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">closing-line source ↗</a></td></tr><tr><td><strong>S05 Rest edge &gt;= 3 days</strong></td><td>1,076</td><td>51.58%</td><td>0.5158</td><td>0.5135</td><td>+0.0003</td><td>+0.0010</td><td>0.49%</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">closing-line source ↗</a></td></tr><tr><td><strong>S12 Out-count gap of 3 or more</strong></td><td>663</td><td>51.43%</td><td>0.5143</td><td>0.5160</td><td>-0.0002</td><td>+0.0008</td><td>-0.30%</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">closing-line source ↗</a></td></tr><tr><td><strong>S01 Model spread edge &gt;= 1.5 pts</strong></td><td>3,455</td><td>51.32%</td><td>0.5132</td><td>0.5155</td><td>-0.0003</td><td>+0.0007</td><td>-0.37%</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">closing-line source ↗</a></td></tr><tr><td><strong>S02 Model spread edge &gt;= 3.0 pts</strong></td><td>2,227</td><td>51.41%</td><td>0.5142</td><td>0.5167</td><td>-0.0003</td><td>+0.0008</td><td>-0.45%</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">closing-line source ↗</a></td></tr><tr><td><strong>S11 Opponent QB ruled Out/Doubtful</strong></td><td>372</td><td>50.81%</td><td>0.5082</td><td>0.5148</td><td>-0.0006</td><td>+0.0003</td><td>-1.51%</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">closing-line source ↗</a></td></tr><tr><td><strong>S06 Divisional road underdog of 3+</strong></td><td>517</td><td>49.90%</td><td>0.4992</td><td>0.5101</td><td>-0.0004</td><td>+0.0000</td><td>-1.86%</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">closing-line source ↗</a></td></tr><tr><td><strong>S08 Home team off a bye</strong></td><td>265</td><td>48.68%</td><td>0.4876</td><td>0.5135</td><td>-0.0000</td><td>+0.0007</td><td>-5.13%</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">closing-line source ↗</a></td></tr><tr><td><strong>S10 Over when the total is 50 or higher</strong></td><td>590</td><td>48.64%</td><td>0.4868</td><td>0.5149</td><td>-0.0002</td><td>+0.0007</td><td>-5.41%</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">closing-line source ↗</a></td></tr><tr><td><strong>S09 Under when the total is 40 or lower</strong></td><td>874</td><td>47.14%</td><td>0.4718</td><td>0.5132</td><td>+0.0026</td><td>+0.0033</td><td>-7.93%</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">closing-line source ↗</a></td></tr></tbody></table></div><p class="note">A skill value near zero means the rule's hit rate is what its prices would have predicted anyway. None of these intervals excludes zero; see the pre-registration page for the multiplicity charge over the twelve rules.</p>
+</section>
+
+<section class="panel">
+  <h2>What is deliberately absent</h2>
+  <p class="note">Parlay, same-game-parlay and player-prop divisions are blank: multiplying marginal
+  probabilities is invalid under dependence and no prop price exists in this repository. A blank
+  here is a finding about the data, not a zero.</p>
+</section>
+
+</main>
+<footer>
+  <p>NFL Strategy Competition · part of the NFL Decision Lab. Prices, results and injury data are
+  described at <a href="method.html">Method &amp; Sources</a>. Nothing on this site is a recommendation
+  to bet, and no strategy is claimed to be profitable: the leaderboard publishes scores,
+  uncertainty and the gate that fails.</p>
+  <p><a href="../index.html">← Back to the NFL Decision Lab</a> · <a href="executive-summary.html">Executive summary</a> · <a href="questions.html">Open questions</a></p>
+</footer>
+</body>
+</html>

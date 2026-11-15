@@ -1,0 +1,49 @@
+{
+ "generated_at": "2026-11-15T13:04:12+00:00",
+ "rules": [
+  {
+   "id": "D1",
+   "name": "skill interval collapses",
+   "test": "90% interval on Brier skill vs the price has a lower bound < 0",
+   "minimum_sample": 50,
+   "measured_on": "live (post-registration, settled) bets",
+   "rationale": "50 settled bets is the smallest sample at which the interval has any power at realistic edges."
+  },
+  {
+   "id": "D2",
+   "name": "stop-loss",
+   "test": "realised return < -10%",
+   "minimum_sample": 50,
+   "measured_on": "live (post-registration, settled) bets",
+   "rationale": "About four times the best backtest ROI in the run, so a live -10% is not the same scale of noise."
+  },
+  {
+   "id": "D3",
+   "name": "hit rate below break-even",
+   "test": "hit rate < price-implied break-even - 2 standard errors",
+   "minimum_sample": 100,
+   "measured_on": "live (post-registration, settled) bets",
+   "rationale": "100 bets is the smallest sample at which a 2-SE gap can resolve a 2-point edge."
+  },
+  {
+   "id": "D4",
+   "name": "losing streak",
+   "test": "12 consecutive settled losses",
+   "minimum_sample": 12,
+   "measured_on": "live (post-registration, settled) bets",
+   "rationale": "Roughly the 1-in-500 point of a fair sequence at the prices these rules take; fires before D2 can."
+  },
+  {
+   "id": "D5",
+   "name": "definition drift",
+   "test": "the rule text or inputs differ from the registration commit",
+   "minimum_sample": 0,
+   "measured_on": "the registration record",
+   "rationale": "A rule whose text changed after its result was seen is a new rule and must start at paper."
+  }
+ ],
+ "repromotion": {
+  "requires": "a fresh prospective sample, 200 settled bets, clearing D1-D3 in the opposite direction",
+  "why": "The same sample that demoted a strategy cannot also promote it; that is the definition of chasing."
+ }
+}

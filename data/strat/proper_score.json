@@ -1,0 +1,488 @@
+{
+ "generated_at": "2026-11-15T13:03:39+00:00",
+ "method": {
+  "score": "Brier score; skill = 1 - Brier(model)/Brier(benchmark)",
+  "interval": "game-cluster bootstrap, 2000 resamples, seed 20261115, 95%",
+  "published_number": "the lower bound of the interval, not the point estimate",
+  "min_sample": 200,
+  "multiplicity": "Benjamini-Hochberg over the six model-market tests, plus the Bonferroni threshold",
+  "walk_forward": "every prediction comes from a fit that used only earlier games",
+  "lookahead_probe_predictions_identical": false
+ },
+ "markets": [
+  {
+   "market": "side",
+   "n_scored": 6785,
+   "n_dropped_pushes": 319,
+   "results": {
+    "model": {
+     "n_scored": 6785,
+     "brier": 0.2603176280420454,
+     "bss": -0.04127051216818156,
+     "bss_ci95": [
+      -0.051270745077235856,
+      -0.029894758682496456
+     ],
+     "bss_lower_bound": -0.051270745077235856,
+     "p_value_bootstrap": 1.0,
+     "games_in_interval": 6785,
+     "log_loss": 0.7161430865001013,
+     "blank_note": null
+    },
+    "closing line (p=0.5)": {
+     "n_scored": 6785,
+     "brier": 0.25,
+     "bss": 0.0,
+     "bss_ci95": [
+      0.0,
+      0.0
+     ],
+     "bss_lower_bound": 0.0,
+     "p_value_bootstrap": 1.0,
+     "games_in_interval": 6785,
+     "log_loss": 0.6931471805599453,
+     "blank_note": null
+    },
+    "scoring differential": {
+     "n_scored": 5943,
+     "brier": 0.2810634949289153,
+     "bss": -0.12425397971566121,
+     "bss_ci95": [
+      -0.14173692758964657,
+      -0.10684583533458848
+     ],
+     "bss_lower_bound": -0.14173692758964657,
+     "p_value_bootstrap": 1.0,
+     "games_in_interval": 5943,
+     "log_loss": 0.7711559099966433,
+     "blank_note": null
+    }
+   },
+   "evaluated": "P(home covers the closing spread)",
+   "source": "schedules"
+  },
+  {
+   "market": "total",
+   "n_scored": 6878,
+   "n_dropped_pushes": 226,
+   "results": {
+    "model": {
+     "n_scored": 6878,
+     "brier": 0.25865208224385644,
+     "bss": -0.03460832897542576,
+     "bss_ci95": [
+      -0.04472876550431553,
+      -0.02445076884474668
+     ],
+     "bss_lower_bound": -0.04472876550431553,
+     "p_value_bootstrap": 1.0,
+     "games_in_interval": 6878,
+     "log_loss": 0.7124531286725271,
+     "blank_note": null
+    },
+    "closing total (p=0.5)": {
+     "n_scored": 6878,
+     "brier": 0.25,
+     "bss": 0.0,
+     "bss_ci95": [
+      0.0,
+      0.0
+     ],
+     "bss_lower_bound": 0.0,
+     "p_value_bootstrap": 1.0,
+     "games_in_interval": 6878,
+     "log_loss": 0.6931471805599453,
+     "blank_note": null
+    },
+    "season-to-date mean total": {
+     "n_scored": 6022,
+     "brier": 0.2664687459694204,
+     "bss": -0.06587498387768154,
+     "bss_ci95": [
+      -0.07851307356648143,
+      -0.05337660327033681
+     ],
+     "bss_lower_bound": -0.07851307356648143,
+     "p_value_bootstrap": 1.0,
+     "games_in_interval": 6022,
+     "log_loss": 0.7325327560059663,
+     "blank_note": null
+    }
+   },
+   "evaluated": "P(combined score over the closing total)",
+   "source": "schedules"
+  },
+  {
+   "market": "moneyline",
+   "n_scored": 5187,
+   "results": {
+    "model": {
+     "n_scored": 5187,
+     "brier": 0.22596404490674216,
+     "bss_vs_devig": -0.07144443215860252,
+     "bss_ci95": [
+      -0.08750937088619609,
+      -0.05603639526117823
+     ],
+     "bss_lower_bound": -0.08750937088619609,
+     "p_value_bootstrap": 1.0,
+     "games_in_interval": 5187,
+     "log_loss": 0.6423377675342892
+    },
+    "closing moneyline, de-vigged": {
+     "n_scored": 5187,
+     "brier": 0.21089665326973617,
+     "bss_vs_coin": 0.15641338692105533,
+     "bss_vs_coin_ci95": [
+      0.1385463671497895,
+      0.17386685931612714
+     ],
+     "bss_lower_bound": 0.1385463671497895,
+     "p_value_bootstrap": 0.0,
+     "games_in_interval": 5187,
+     "log_loss": 0.6090232572321796
+    },
+    "closing moneyline, raw (with vig)": {
+     "n_scored": 5187,
+     "brier": 0.21137825189686335,
+     "bss_vs_coin": 0.1544869924125466,
+     "bss_vs_coin_ci95": [
+      0.13559413335229076,
+      0.17288057067632642
+     ],
+     "bss_lower_bound": 0.13559413335229076,
+     "p_value_bootstrap": 0.0,
+     "games_in_interval": 5187,
+     "log_loss": 0.6098805985733238
+    },
+    "vig_size": {
+     "mean_sum_of_implied_probabilities": 1.0276387906906232,
+     "reading": "The sum of the two implied probabilities is the operator's overround. A value above 1.00 is the margin the reader pays; the de-vigged column above removes it before any comparison."
+    }
+   },
+   "evaluated": "P(home win)",
+   "source": "schedules"
+  },
+  {
+   "market": "parlay",
+   "n_scored": 0,
+   "results": {},
+   "evaluated": "joint probability of two dependent legs",
+   "blocked": "Not scored. Multiplying marginal probabilities is invalid under dependence, and no validated joint distribution exists in this repository. Published as blank rather than as a number.",
+   "source": "schedules"
+  },
+  {
+   "market": "same-game parlay",
+   "n_scored": 0,
+   "results": {},
+   "evaluated": "joint probability within one game",
+   "blocked": "Not scored. Same reason as the parlay market: the legs are dependent.",
+   "source": "schedules"
+  },
+  {
+   "market": "player prop",
+   "n_scored": 0,
+   "results": {},
+   "evaluated": "P(prop over its line)",
+   "blocked": "Not scored. No official or book-level price exists for any player prop in this repository (data/s9cb/props.json \u203a price_status), so skill cannot be measured against a price.",
+   "source": "schedules"
+  }
+ ],
+ "strategy_scores": [
+  {
+   "strategy": "S07 Fade the road favourite of 7+",
+   "n_bets": 401,
+   "n_decided": 394,
+   "hit_rate": 0.5558,
+   "shrunk_probability": 0.5552,
+   "break_even_probability": 0.523,
+   "brier_rule": 0.24688,
+   "brier_price_benchmark": 0.24947,
+   "bss_vs_price": 0.0104,
+   "bss_vs_coin": 0.0125,
+   "roi_pct": 6.064,
+   "roi_ci95": [
+    -0.031045,
+    0.152693
+   ],
+   "p_value": 0.198456,
+   "holdout_roi_pct": 26.281,
+   "status": "scored"
+  },
+  {
+   "strategy": "S04 Model total edge >= 4.0 pts",
+   "n_bets": 1295,
+   "n_decided": 1276,
+   "hit_rate": 0.5274,
+   "shrunk_probability": 0.5273,
+   "break_even_probability": 0.5146,
+   "brier_rule": 0.24925,
+   "brier_price_benchmark": 0.24979,
+   "bss_vs_price": 0.0022,
+   "bss_vs_coin": 0.003,
+   "roi_pct": 2.499,
+   "roi_ci95": [
+    -0.028185,
+    0.077488
+   ],
+   "p_value": 0.351257,
+   "holdout_roi_pct": -3.142,
+   "status": "scored"
+  },
+  {
+   "strategy": "S03 Model total edge >= 2.5 pts",
+   "n_bets": 2463,
+   "n_decided": 2424,
+   "hit_rate": 0.5239,
+   "shrunk_probability": 0.5239,
+   "break_even_probability": 0.5146,
+   "brier_rule": 0.24943,
+   "brier_price_benchmark": 0.24979,
+   "bss_vs_price": 0.0014,
+   "bss_vs_coin": 0.0023,
+   "roi_pct": 1.842,
+   "roi_ci95": [
+    -0.020728,
+    0.056136
+   ],
+   "p_value": 0.343245,
+   "holdout_roi_pct": -3.272,
+   "status": "scored"
+  },
+  {
+   "strategy": "S05 Rest edge >= 3 days",
+   "n_bets": 1103,
+   "n_decided": 1076,
+   "hit_rate": 0.5158,
+   "shrunk_probability": 0.5158,
+   "break_even_probability": 0.5135,
+   "brier_rule": 0.24975,
+   "brier_price_benchmark": 0.24982,
+   "bss_vs_price": 0.0003,
+   "bss_vs_coin": 0.001,
+   "roi_pct": 0.487,
+   "roi_ci95": [
+    -0.051899,
+    0.060552
+   ],
+   "p_value": 0.866678,
+   "holdout_roi_pct": -11.804,
+   "status": "scored"
+  },
+  {
+   "strategy": "S12 Out-count gap of 3 or more",
+   "n_bets": 685,
+   "n_decided": 663,
+   "hit_rate": 0.5143,
+   "shrunk_probability": 0.5143,
+   "break_even_probability": 0.516,
+   "brier_rule": 0.24979,
+   "brier_price_benchmark": 0.24974,
+   "bss_vs_price": -0.0002,
+   "bss_vs_coin": 0.0008,
+   "roi_pct": -0.304,
+   "roi_ci95": [
+    -0.07479,
+    0.070682
+   ],
+   "p_value": 0.933594,
+   "holdout_roi_pct": 3.666,
+   "status": "scored"
+  },
+  {
+   "strategy": "S01 Model spread edge >= 1.5 pts",
+   "n_bets": 3546,
+   "n_decided": 3455,
+   "hit_rate": 0.5132,
+   "shrunk_probability": 0.5132,
+   "break_even_probability": 0.5155,
+   "brier_rule": 0.24983,
+   "brier_price_benchmark": 0.24976,
+   "bss_vs_price": -0.0003,
+   "bss_vs_coin": 0.0007,
+   "roi_pct": -0.366,
+   "roi_ci95": [
+    -0.035168,
+    0.027728
+   ],
+   "p_value": 0.820051,
+   "holdout_roi_pct": -6.651,
+   "status": "scored"
+  },
+  {
+   "strategy": "S02 Model spread edge >= 3.0 pts",
+   "n_bets": 2277,
+   "n_decided": 2227,
+   "hit_rate": 0.5141,
+   "shrunk_probability": 0.5142,
+   "break_even_probability": 0.5167,
+   "brier_rule": 0.2498,
+   "brier_price_benchmark": 0.24972,
+   "bss_vs_price": -0.0003,
+   "bss_vs_coin": 0.0008,
+   "roi_pct": -0.451,
+   "roi_ci95": [
+    -0.043267,
+    0.034977
+   ],
+   "p_value": 0.82251,
+   "holdout_roi_pct": -11.412,
+   "status": "scored"
+  },
+  {
+   "strategy": "S11 Opponent QB ruled Out/Doubtful",
+   "n_bets": 380,
+   "n_decided": 372,
+   "hit_rate": 0.5081,
+   "shrunk_probability": 0.5082,
+   "break_even_probability": 0.5148,
+   "brier_rule": 0.24993,
+   "brier_price_benchmark": 0.24978,
+   "bss_vs_price": -0.0006,
+   "bss_vs_coin": 0.0003,
+   "roi_pct": -1.507,
+   "roi_ci95": [
+    -0.113037,
+    0.080814
+   ],
+   "p_value": 0.760025,
+   "holdout_roi_pct": 4.362,
+   "status": "scored"
+  },
+  {
+   "strategy": "S06 Divisional road underdog of 3+",
+   "n_bets": 531,
+   "n_decided": 517,
+   "hit_rate": 0.499,
+   "shrunk_probability": 0.4992,
+   "break_even_probability": 0.5101,
+   "brier_rule": 0.25,
+   "brier_price_benchmark": 0.2499,
+   "bss_vs_price": -0.0004,
+   "bss_vs_coin": 0.0,
+   "roi_pct": -1.857,
+   "roi_ci95": [
+    -0.101777,
+    0.063523
+   ],
+   "p_value": 0.659957,
+   "holdout_roi_pct": -28.602,
+   "status": "scored"
+  },
+  {
+   "strategy": "S08 Home team off a bye",
+   "n_bets": 273,
+   "n_decided": 265,
+   "hit_rate": 0.4868,
+   "shrunk_probability": 0.4876,
+   "break_even_probability": 0.5135,
+   "brier_rule": 0.24983,
+   "brier_price_benchmark": 0.24982,
+   "bss_vs_price": -0.0,
+   "bss_vs_coin": 0.0007,
+   "roi_pct": -5.126,
+   "roi_ci95": [
+    -0.165271,
+    0.062626
+   ],
+   "p_value": 0.378898,
+   "holdout_roi_pct": -22.813,
+   "status": "scored"
+  },
+  {
+   "strategy": "S10 Over when the total is 50 or higher",
+   "n_bets": 599,
+   "n_decided": 590,
+   "hit_rate": 0.4864,
+   "shrunk_probability": 0.4868,
+   "break_even_probability": 0.5149,
+   "brier_rule": 0.24982,
+   "brier_price_benchmark": 0.24978,
+   "bss_vs_price": -0.0002,
+   "bss_vs_coin": 0.0007,
+   "roi_pct": -5.413,
+   "roi_ci95": [
+    -0.131051,
+    0.021691
+   ],
+   "p_value": 0.170355,
+   "holdout_roi_pct": -1.094,
+   "status": "scored"
+  },
+  {
+   "strategy": "S09 Under when the total is 40 or lower",
+   "n_bets": 887,
+   "n_decided": 874,
+   "hit_rate": 0.4714,
+   "shrunk_probability": 0.4718,
+   "break_even_probability": 0.5132,
+   "brier_rule": 0.24918,
+   "brier_price_benchmark": 0.24983,
+   "bss_vs_price": 0.0026,
+   "bss_vs_coin": 0.0033,
+   "roi_pct": -7.934,
+   "roi_ci95": [
+    -0.145394,
+    -0.016318
+   ],
+   "p_value": 0.014806,
+   "holdout_roi_pct": -12.635,
+   "status": "scored"
+  }
+ ],
+ "multiplicity": {
+  "family": [
+   {
+    "test": "side: model vs closing line",
+    "bss": -0.04127051216818156,
+    "p_value_bootstrap": 1.0,
+    "bh_adjusted_p": 1.0,
+    "bonferroni_alpha": 0.008333333333333333
+   },
+   {
+    "test": "side: scoring benchmark vs closing line",
+    "bss": -0.12425397971566121,
+    "p_value_bootstrap": 1.0,
+    "bh_adjusted_p": 1.0,
+    "bonferroni_alpha": 0.008333333333333333
+   },
+   {
+    "test": "total: model vs closing total",
+    "bss": -0.03460832897542576,
+    "p_value_bootstrap": 1.0,
+    "bh_adjusted_p": 1.0,
+    "bonferroni_alpha": 0.008333333333333333
+   },
+   {
+    "test": "total: season-mean benchmark vs closing total",
+    "bss": -0.06587498387768154,
+    "p_value_bootstrap": 1.0,
+    "bh_adjusted_p": 1.0,
+    "bonferroni_alpha": 0.008333333333333333
+   },
+   {
+    "test": "moneyline: model vs de-vigged market",
+    "bss": -0.07144443215860252,
+    "p_value_bootstrap": 1.0,
+    "bh_adjusted_p": 1.0,
+    "bonferroni_alpha": 0.008333333333333333
+   },
+   {
+    "test": "moneyline: raw market vs coin",
+    "bss": 0.1544869924125466,
+    "p_value_bootstrap": 0.0,
+    "bh_adjusted_p": 0.0,
+    "bonferroni_alpha": 0.008333333333333333
+   }
+  ],
+  "n_tests": 6,
+  "strategy_family": {
+   "n_tests": 12,
+   "bonferroni_alpha": 0.004166666666666667,
+   "reading": "The thirteen scored betting rules are a second family. Each rule's own p_value from the price test is charged against 13 tests; the adjusted values are on the leaderboard page."
+  },
+  "reading": "With six tests at the 5% level, roughly one would look positive by chance. The Bonferroni threshold is 0.05/6; the BH column charges the same family less harshly because the tests are not independent. A test that fails both is a test whose sign is not established."
+ },
+ "any_eligible": false,
+ "eligibility_rule": "A market or rule is ELIGIBLE only when its lower bound is above zero AND its adjusted p-value clears the multiplicity charge AND the sample floor is met. No market or rule clears all three."
+}

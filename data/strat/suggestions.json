@@ -1,0 +1,156 @@
+{
+ "generated_at": "2026-11-15T13:09:18+00:00",
+ "n_suggestions": 12,
+ "review_process": [
+  "Every suggestion names the problem, the proposal, its cost, its risk and the decision it feeds.",
+  "Nothing is implemented before the owner records a choice in the decisions register.",
+  "A suggestion that needs information nobody publishes is converted into a question, not built.",
+  "The owner can accept, reject or defer; the record of the choice is the gate."
+ ],
+ "rows": [
+  {
+   "id": "SG1",
+   "suggestion": "Make the promotions and demotions of this competition the site's front door",
+   "problem": "A reader landing on the site sees many tables and cannot tell in one screen what changed and whether anything is live.",
+   "proposal": "The new competition overview leads with five numbers (strategies registered, live, paper, demoted, eligible) and a one-line verdict. Every other table is one click deeper.",
+   "cost": "already built in this session",
+   "effort": "small",
+   "risk": "Low. The numbers are counts of files that already exist.",
+   "evidence": "This site's overview page.",
+   "decision": "D01",
+   "source": "repo"
+  },
+  {
+   "id": "SG2",
+   "suggestion": "Publish a promotion rule next to the demotion rule before the first live bet",
+   "problem": "The demotion gate is armed but the promotion condition is not pre-registered, so the competition has an exit and no entrance.",
+   "proposal": "Freeze a promotion rule with the same structure \u2014 sample floor, proper-score interval, multiplicity charge \u2014 and commit it before any live sample exists.",
+   "cost": "one file and one gate",
+   "effort": "small",
+   "risk": "Low, and the risk of not doing it is higher: a promotion chosen after seeing results is result-chasing.",
+   "evidence": "Open question Q09.",
+   "decision": "D02",
+   "source": "repo"
+  },
+  {
+   "id": "SG3",
+   "suggestion": "Answer the terms-of-use question before adding another data layer",
+   "problem": "Every availability feature the brief asks for needs an official source whose terms have not been cleared. Building more on top raises the cost of the eventual decision.",
+   "proposal": "Treat Q01 as the gating decision for the whole availability branch: obtain written consent, or restructure to aggregates plus links, or stop the scrape.",
+   "cost": "legal review, not engineering",
+   "effort": "small (engineering) / unbounded (legal)",
+   "risk": "High if ignored; the repository currently publishes row-level designations.",
+   "evidence": "Flag F51 on the Flagged for Review page.",
+   "decision": "D03",
+   "source": "terms"
+  },
+  {
+   "id": "SG4",
+   "suggestion": "Make the injury feature an ablation, not a coefficient",
+   "problem": "A fixed points penalty for a missing starter is exactly what the brief rejects.",
+   "proposal": "Build one model with the surprise features and one without, run both on a chronological holdout, and publish the difference with a game-cluster interval. Wire it to W09.",
+   "cost": "the availability feed (blocked by Q01 and Q12)",
+   "effort": "medium",
+   "risk": "The result may be zero, which is a valid and useful result.",
+   "evidence": "Pre-registered rules P07-P09; falsifier W09.",
+   "decision": "D04",
+   "source": "injuries_w10"
+  },
+  {
+   "id": "SG5",
+   "suggestion": "Show the market beside every own line and never print a difference without it",
+   "problem": "A line without the market it is priced against is not a claim about anything.",
+   "proposal": "Both totals, the gap, the market total and the model-minus-market difference in one table, with blank where a price does not exist.",
+   "cost": "already built (the two-totals page)",
+   "effort": "small",
+   "risk": "None.",
+   "evidence": "The two-totals page.",
+   "decision": "D05",
+   "source": "schedules"
+  },
+  {
+   "id": "SG6",
+   "suggestion": "Replace 'win rate' everywhere with a proper score and an interval",
+   "problem": "Win rate and short-run ROI cannot distinguish skill from variance, which the brief says explicitly.",
+   "proposal": "The leaderboard's first column is benchmark-relative Brier skill with its game-cluster lower bound; ROI is demoted to a supporting column and the raw win rate is dropped.",
+   "cost": "already built",
+   "effort": "small",
+   "risk": "The table becomes harder to read for a casual reader, which the method page addresses.",
+   "evidence": "The proper-score leaderboard page.",
+   "decision": "D06",
+   "source": "schedules"
+  },
+  {
+   "id": "SG7",
+   "suggestion": "Publish the control baselines in the same table as the strategies, not in an appendix",
+   "problem": "A strategy's number means nothing without the number a coin would have produced on the same bets.",
+   "proposal": "Random, favourite-only, home-only and underdog-only are rows in the same leaderboard, scored identically.",
+   "cost": "already registered as P02-P05",
+   "effort": "small",
+   "risk": "None.",
+   "evidence": "Falsifier W07.",
+   "decision": "D07",
+   "source": "schedules"
+  },
+  {
+   "id": "SG8",
+   "suggestion": "Put the blocking gate and the clearing number in every readiness row",
+   "problem": "A status of 'partial' with no number attached cannot be acted on.",
+   "proposal": "Every requirement row states what blocks it and the exact observation that would clear it, and links to the artifact that holds the evidence.",
+   "cost": "adds a column to an existing register",
+   "effort": "small",
+   "risk": "None.",
+   "evidence": "The readiness register already on the landing page (82 rows).",
+   "decision": "D08",
+   "source": "repo"
+  },
+  {
+   "id": "SG9",
+   "suggestion": "Fail the build when a scraper's row count or a required field changes",
+   "problem": "A parser that silently drops rows publishes a blank that looks like data.",
+   "proposal": "Pin the expected row count and the required columns per source; the check fails loudly with the delta instead of publishing.",
+   "cost": "one check script and one JSON",
+   "effort": "small",
+   "risk": "A legitimate source change will fail the build, which is the point; the fix is a reviewed pin bump.",
+   "evidence": "drift-alarm gate in this session",
+   "decision": "D09",
+   "source": "injuries_w10"
+  },
+  {
+   "id": "SG10",
+   "suggestion": "Keep the two totals until one wins, and say so in the headline",
+   "problem": "Collapsing to one estimator hides the fact that neither has demonstrated an advantage.",
+   "proposal": "Publish both with the gap column and the walk-forward verdict beside them; the verdict currently reads 'no winner'.",
+   "cost": "already built",
+   "effort": "small",
+   "risk": "None; it is more honest than a single number.",
+   "evidence": "The two-totals page; falsifier W05.",
+   "decision": "D10",
+   "source": "schedules"
+  },
+  {
+   "id": "SG11",
+   "suggestion": "Split the site into a public analysis layer and a private data layer",
+   "problem": "Row-level official data is published while its licence is unresolved (Q01, Q11).",
+   "proposal": "Public pages keep derived analysis (indices, ratios, model output, links to the official page); raw row-level captures move to a private store until the terms are read.",
+   "cost": "a rebuild of the affected pages and a private store",
+   "effort": "medium",
+   "risk": "Some tables become less detailed until the decision is made.",
+   "evidence": "Readiness SI-11; Flag F51.",
+   "decision": "D03",
+   "source": "terms"
+  },
+  {
+   "id": "SG12",
+   "suggestion": "Give every published conclusion a falsifier with a number, in both directions",
+   "problem": "A claim with no stated refutation cannot be reviewed.",
+   "proposal": "The what-would-change register, wired into the leaderboard and the model pages.",
+   "cost": "already built",
+   "effort": "small",
+   "risk": "None.",
+   "evidence": "The what-would-change page (12 claims).",
+   "decision": "D11",
+   "source": "repo"
+  }
+ ]
+}

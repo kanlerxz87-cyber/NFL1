@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Method &amp; Sources · NFL Strategy Competition</title>
+<meta name="description" content="Pre-registered NFL line-origination strategies, ranked by benchmark-relative proper scores with uncertainty. Every row carries an official source link; blank means unverified.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="brand" href="../index.html"><span class="mark">NFL</span><span class="brand-text">Strategy Competition</span></a>
+  <nav aria-label="Strategy competition sections"><a href="index.html">Overview</a><a href="leaderboard.html">Proper-Score Leaderboard</a><a href="preregister.html">Pre-Registration</a><a href="demotion.html">Demotion Gate</a><a href="what-would-change.html">What Would Change Our Mind</a><a href="totals.html">Two Totals</a><a href="questions.html">Open Questions</a><a href="suggestions.html">Suggestions</a><a href="flagged.html">Flagged for Review</a><a href="method.html" class="active">Method &amp; Sources</a><a href="executive-summary.html">Executive Summary</a></nav>
+</header>
+<main id="main">
+  <section class="page-head">
+    <p class="eyebrow">Strategy competition</p>
+    <h1>Method &amp; Sources</h1>
+    <p class="standfirst">How every number was produced, how to reproduce it, and the source register.</p>
+    <p class="timestamp">Built 2026-11-15T13:03:39+00:00 UTC · every table row links to its source · a blank cell means the value is not confirmed</p>
+  </section>
+
+<section class="panel">
+  <h2>What is measured, and with what</h2>
+  <p class="lede">Every number on this site comes from one of three places: an official nfl.com page
+  fetched during a session, a third-party extract of the NFL's own statistics feed (labelled as
+  such), or a computation over those two whose script is in this repository and whose output is a
+  JSON file.</p>
+  <div class="table-wrap"><table class=""><thead><tr><th>Method element</th><th>What it is</th><th>Artifact</th></tr></thead><tbody><tr><td>Proper score</td><td>Brier score; skill = 1 - Brier(model)/Brier(benchmark)</td><td><a class="src" href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/proper_score.json" target="_blank" rel="noopener">data/strat/proper_score.json ↗</a></td></tr><tr><td>Interval</td><td>game-cluster bootstrap, 2000 resamples, seed 20261115, 95%</td><td><a class="src" href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/proper_score.json" target="_blank" rel="noopener">data/strat/proper_score.json ↗</a></td></tr><tr><td>Published figure</td><td>the lower bound of the interval, not the point estimate</td><td><a class="src" href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/proper_score.json" target="_blank" rel="noopener">data/strat/proper_score.json ↗</a></td></tr><tr><td>Sample floor</td><td>200 games / bets</td><td><a class="src" href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/proper_score.json" target="_blank" rel="noopener">data/strat/proper_score.json ↗</a></td></tr><tr><td>Multiplicity</td><td>Benjamini-Hochberg over the six model-market tests, plus the Bonferroni threshold</td><td><a class="src" href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/proper_score.json" target="_blank" rel="noopener">data/strat/proper_score.json ↗</a></td></tr><tr><td>Walk-forward</td><td>every prediction comes from a fit that used only earlier games</td><td><a class="src" href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/lines.json" target="_blank" rel="noopener">data/s9cb/lines.json ↗</a></td></tr><tr><td>Look-ahead probe</td><td>The two fits produce different predictions, so the walk-forward cut is real.</td><td><a class="src" href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/lines.json" target="_blank" rel="noopener">data/s9cb/lines.json ↗</a></td></tr><tr><td>Two-estimator rule</td><td>An estimator wins only when the game-cluster bootstrap interval on the paired absolute-error difference excludes zero on the chronological holdout.</td><td><a class="src" href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/dual_total.json" target="_blank" rel="noopener">data/strat/dual_total.json ↗</a></td></tr><tr><td>Pre-registration</td><td>A backtest number may be published only when a registration record exists for the rule and the registration commit is an ancestor of the publishing commit. Enforced by tools/check_preregistration.py, which fails the build otherwise.</td><td><a class="src" href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/preregistration.json" target="_blank" rel="noopener">data/strat/preregistration.json ↗</a></td></tr></tbody></table></div>
+</section>
+
+<section class="panel">
+  <h2>Reproduce every number</h2>
+  <pre class="code">cd s9cb/analysis
+python3 run.py                 # rebuilds the extract-derived research JSON
+python3 ../../strat/proper_score.py    # Brier skill, intervals, multiplicity
+python3 ../../strat/dual_total.py      # the two estimators and the verdict
+cd ../.. && python3 strat/preregister.py && python3 strat/demotion.py \
+  && python3 strat/what_would_change.py && python3 strat/registers.py \
+  && python3 strat/build.py && python3 strat/verify.py</pre>
+  <p class="note">The reproduce steps are the ones this build ran. <code>strat/verify.py</code> fails
+  on a broken link, a table row with no source, a placeholder in a cell, or a page that nothing
+  links to.</p>
+</section>
+
+<section class="panel">
+  <h2>Source register</h2>
+  <div class="table-wrap"><table class=""><thead><tr><th>Key</th><th>Source</th></tr></thead><tbody><tr><td>schedules</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">NFL schedules (official) ↗</a></td></tr><tr><td>schedule_w10</td><td><a class="src" href="https://www.nfl.com/schedules/2026/REG10" target="_blank" rel="noopener">NFL Week 10 schedule 2026 (official) ↗</a></td></tr><tr><td>injuries_w10</td><td><a class="src" href="https://www.nfl.com/injuries/league/2026/reg10" target="_blank" rel="noopener">NFL Week 10 injury report 2026 (official) ↗</a></td></tr><tr><td>standings</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener">NFL standings 2026 (official) ↗</a></td></tr><tr><td>gameday_w10_was_nyg</td><td><a class="src" href="https://www.nfl.com/games/commanders-at-giants-2026-reg-10" target="_blank" rel="noopener">NFL Game Center WAS@NYG (official) ↗</a></td></tr><tr><td>nflverse</td><td><a class="src" href="https://github.com/nflverse/nflverse-data" target="_blank" rel="noopener">nflverse data repository (third-party extract of the NFL GSIS feed) ↗</a></td></tr><tr><td>nflverse_schedules</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">nflverse schedules release (third-party) ↗</a></td></tr><tr><td>nflverse_injuries</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/injuries" target="_blank" rel="noopener">nflverse injuries release (third-party) ↗</a></td></tr><tr><td>nflverse_players</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/players" target="_blank" rel="noopener">nflverse player-week release (third-party) ↗</a></td></tr><tr><td>terms</td><td><a class="src" href="https://www.nfl.com/legal/terms/" target="_blank" rel="noopener">NFL.com Terms of Use (official) ↗</a></td></tr><tr><td>repo</td><td><a class="src" href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener">This repository ↗</a></td></tr></tbody></table></div>
+</section>
+
+<section class="panel">
+  <h2>What is deliberately blank</h2>
+  <ul class="plain">
+    <li>Prop, prop-combo and same-game-parlay scores: no price exists.</li>
+    <li>Opening prices: no opening-price source exists.</li>
+    <li>Live bets and demotions: nothing is live.</li>
+    <li>Estimator B for a fixture where neither team has played this season.</li>
+    <li>Any correlation or interval whose sample floor is not met.</li>
+  </ul>
+</section>
+
+</main>
+<footer>
+  <p>NFL Strategy Competition · part of the NFL Decision Lab. Prices, results and injury data are
+  described at <a href="method.html">Method &amp; Sources</a>. Nothing on this site is a recommendation
+  to bet, and no strategy is claimed to be profitable: the leaderboard publishes scores,
+  uncertainty and the gate that fails.</p>
+  <p><a href="../index.html">← Back to the NFL Decision Lab</a> · <a href="executive-summary.html">Executive summary</a> · <a href="questions.html">Open questions</a></p>
+</footer>
+</body>
+</html>
