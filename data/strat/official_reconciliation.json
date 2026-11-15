@@ -1,0 +1,2638 @@
+{
+ "generated_at": "2026-11-15T13:18:48+00:00",
+ "question": "Do the official nfl.com rows agree with the third-party extract used for the backtest? (readiness PR-02, open question Q03)",
+ "official_files": [
+  "data/verified/games_2026.csv",
+  "data/strat/official_extra_2026.json"
+ ],
+ "standings_cross_check": {
+  "source_url": "https://www.nfl.com/standings/league/2026/reg",
+  "retrieved_at_utc": "2026-11-15T13:20Z",
+  "quote": "NFC EAST: NYG 5-3-1, DAL 4-5-0, WAS 3-5-1, PHI 2-7-0",
+  "matches_game_page": true,
+  "note": "The official standings table and the official Game Center's division panel agree, which is the cross-check used here."
+ },
+ "official_note": "Each row carries the exact nfl.com weekly schedule URL it was transcribed from and the retrieval time. The transcription was made by an earlier session; this script re-tests it against the extract, it does not re-fetch.",
+ "extract_file": "data/s9cb/games.csv",
+ "code_normalisation": {
+  "map": {
+   "AZ": "ARI",
+   "LAR": "LA"
+  },
+  "times_applied": {
+   "AZ": 9
+  },
+  "why": "nfl.com prints Arizona as AZ and the Rams as LAR; the extract uses ARI and LA. The mapping is a finding (flag CAP-05), not a convenience."
+ },
+ "totals": {
+  "official_rows": 137,
+  "matched": 137,
+  "mismatched": 0,
+  "absent_from_extract": 0,
+  "extract_only_unplayed_fixtures": 135,
+  "extract_only_played_rows": 0
+ },
+ "mismatched_game_ids": [],
+ "absent_game_ids": [],
+ "extract_only_unplayed_fixtures": [
+  {
+   "matchup": "BUF @ NYJ",
+   "week": 10,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "CAR @ NO",
+   "week": 10,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "HOU @ CLE",
+   "week": 10,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "JAX @ TEN",
+   "week": 10,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "KC @ ATL",
+   "week": 10,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "LAC @ BAL",
+   "week": 10,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "LA @ ARI",
+   "week": 10,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "MIA @ IND",
+   "week": 10,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "MIN @ GB",
+   "week": 10,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "NE @ DET",
+   "week": 10,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "PIT @ CIN",
+   "week": 10,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "SEA @ LV",
+   "week": 10,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "SF @ DAL",
+   "week": 10,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "ARI @ KC",
+   "week": 11,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "BAL @ CAR",
+   "week": 11,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "CIN @ WAS",
+   "week": 11,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "IND @ HOU",
+   "week": 11,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "JAX @ NYG",
+   "week": 11,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "LV @ DEN",
+   "week": 11,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "MIA @ BUF",
+   "week": 11,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "MIN @ SF",
+   "week": 11,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "NO @ CHI",
+   "week": 11,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "NYJ @ LAC",
+   "week": 11,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "PIT @ PHI",
+   "week": 11,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "TB @ DET",
+   "week": 11,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "TEN @ DAL",
+   "week": 11,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "ATL @ MIN",
+   "week": 12,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "BAL @ HOU",
+   "week": 12,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "CAR @ TB",
+   "week": 12,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "CHI @ DET",
+   "week": 12,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "DEN @ PIT",
+   "week": 12,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "GB @ LA",
+   "week": 12,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "KC @ BUF",
+   "week": 12,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "LV @ CLE",
+   "week": 12,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "NE @ LAC",
+   "week": 12,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "NO @ CIN",
+   "week": 12,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "NYG @ IND",
+   "week": 12,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "NYJ @ MIA",
+   "week": 12,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "PHI @ DAL",
+   "week": 12,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "SEA @ SF",
+   "week": 12,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "TEN @ JAX",
+   "week": 12,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "WAS @ ARI",
+   "week": 12,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "BUF @ NE",
+   "week": 13,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "CAR @ MIN",
+   "week": 13,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "CIN @ CLE",
+   "week": 13,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "DAL @ SEA",
+   "week": 13,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "DET @ ATL",
+   "week": 13,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "GB @ NO",
+   "week": 13,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "HOU @ PIT",
+   "week": 13,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "JAX @ CHI",
+   "week": 13,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "KC @ LA",
+   "week": 13,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "LAC @ TB",
+   "week": 13,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "MIA @ DEN",
+   "week": 13,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "PHI @ ARI",
+   "week": 13,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "SF @ NYG",
+   "week": 13,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "WAS @ TEN",
+   "week": 13,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "ATL @ CLE",
+   "week": 14,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "BUF @ GB",
+   "week": 14,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "CHI @ MIA",
+   "week": 14,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "DEN @ NYJ",
+   "week": 14,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "HOU @ WAS",
+   "week": 14,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "IND @ PHI",
+   "week": 14,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "KC @ CIN",
+   "week": 14,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "LAC @ LV",
+   "week": 14,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "LA @ SF",
+   "week": 14,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "MIN @ NE",
+   "week": 14,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "NO @ CAR",
+   "week": 14,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "NYG @ SEA",
+   "week": 14,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "PIT @ JAX",
+   "week": 14,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "TB @ BAL",
+   "week": 14,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "TEN @ DET",
+   "week": 14,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "ATL @ WAS",
+   "week": 15,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "BAL @ PIT",
+   "week": 15,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "CHI @ BUF",
+   "week": 15,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "CIN @ CAR",
+   "week": 15,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "CLE @ NYG",
+   "week": 15,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "DAL @ LA",
+   "week": 15,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "DEN @ LV",
+   "week": 15,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "DET @ MIN",
+   "week": 15,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "IND @ TEN",
+   "week": 15,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "JAX @ HOU",
+   "week": 15,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "MIA @ GB",
+   "week": 15,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "NE @ KC",
+   "week": 15,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "NO @ TB",
+   "week": 15,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "NYJ @ ARI",
+   "week": 15,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "SEA @ PHI",
+   "week": 15,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "SF @ LAC",
+   "week": 15,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "ARI @ NO",
+   "week": 16,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "BUF @ DEN",
+   "week": 16,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "CAR @ PIT",
+   "week": 16,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "CIN @ IND",
+   "week": 16,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "CLE @ BAL",
+   "week": 16,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "GB @ CHI",
+   "week": 16,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "HOU @ PHI",
+   "week": 16,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "JAX @ DAL",
+   "week": 16,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "LAC @ MIA",
+   "week": 16,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "LA @ SEA",
+   "week": 16,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "NE @ NYJ",
+   "week": 16,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "NYG @ DET",
+   "week": 16,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "SF @ KC",
+   "week": 16,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "TB @ ATL",
+   "week": 16,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "TEN @ LV",
+   "week": 16,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "WAS @ MIN",
+   "week": 16,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "BAL @ CIN",
+   "week": 17,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "BUF @ MIA",
+   "week": 17,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "DEN @ NE",
+   "week": 17,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "DET @ CHI",
+   "week": 17,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "HOU @ GB",
+   "week": 17,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "IND @ CLE",
+   "week": 17,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "KC @ LAC",
+   "week": 17,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "LA @ TB",
+   "week": 17,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "LV @ ARI",
+   "week": 17,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "MIN @ NYJ",
+   "week": 17,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "NO @ ATL",
+   "week": 17,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "NYG @ DAL",
+   "week": 17,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "PHI @ SF",
+   "week": 17,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "PIT @ TEN",
+   "week": 17,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "SEA @ CAR",
+   "week": 17,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "WAS @ JAX",
+   "week": 17,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "ATL @ CAR",
+   "week": 18,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "CHI @ MIN",
+   "week": 18,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "CLE @ CIN",
+   "week": 18,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "DAL @ WAS",
+   "week": 18,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "DET @ GB",
+   "week": 18,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "JAX @ IND",
+   "week": 18,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "LAC @ DEN",
+   "week": 18,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "LV @ KC",
+   "week": 18,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "MIA @ NE",
+   "week": 18,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "NYJ @ BUF",
+   "week": 18,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "PHI @ NYG",
+   "week": 18,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "PIT @ BAL",
+   "week": 18,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "SEA @ LA",
+   "week": 18,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "SF @ ARI",
+   "week": 18,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "TB @ NO",
+   "week": 18,
+   "extract_scores": "-"
+  },
+  {
+   "matchup": "TEN @ HOU",
+   "week": 18,
+   "extract_scores": "-"
+  }
+ ],
+ "extract_only_played_rows": [],
+ "scope_limit": "One season, 136 rows. The 1999-2025 seasons behind the leaderboard's intervals are NOT reconciled by this script.",
+ "verdict": "AGREES on every matched row",
+ "flags": [],
+ "rows": [
+  {
+   "game_id": "2026_REG_1_NE_SEA",
+   "week": 1,
+   "matchup": "NE @ SEA",
+   "official_away": 10,
+   "official_home": 13,
+   "extract_away": 10,
+   "extract_home": 13,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-1",
+   "retrieved_at": "2026-11-12T04:40Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_1_SF_LA",
+   "week": 1,
+   "matchup": "SF @ LA",
+   "official_away": 27,
+   "official_home": 7,
+   "extract_away": 27,
+   "extract_home": 7,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-1",
+   "retrieved_at": "2026-11-12T04:40Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_1_CHI_CAR",
+   "week": 1,
+   "matchup": "CHI @ CAR",
+   "official_away": 59,
+   "official_home": 37,
+   "extract_away": 59,
+   "extract_home": 37,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-1",
+   "retrieved_at": "2026-11-12T04:40Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_1_TB_CIN",
+   "week": 1,
+   "matchup": "TB @ CIN",
+   "official_away": 27,
+   "official_home": 33,
+   "extract_away": 27,
+   "extract_home": 33,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-1",
+   "retrieved_at": "2026-11-12T04:40Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_1_NO_DET",
+   "week": 1,
+   "matchup": "NO @ DET",
+   "official_away": 30,
+   "official_home": 31,
+   "extract_away": 30,
+   "extract_home": 31,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-1",
+   "retrieved_at": "2026-11-12T04:40Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_1_BUF_HOU",
+   "week": 1,
+   "matchup": "BUF @ HOU",
+   "official_away": 36,
+   "official_home": 31,
+   "extract_away": 36,
+   "extract_home": 31,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-1",
+   "retrieved_at": "2026-11-12T04:40Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_1_BAL_IND",
+   "week": 1,
+   "matchup": "BAL @ IND",
+   "official_away": 41,
+   "official_home": 23,
+   "extract_away": 41,
+   "extract_home": 23,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-1",
+   "retrieved_at": "2026-11-12T04:40Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_1_CLE_JAX",
+   "week": 1,
+   "matchup": "CLE @ JAX",
+   "official_away": 10,
+   "official_home": 34,
+   "extract_away": 10,
+   "extract_home": 34,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-1",
+   "retrieved_at": "2026-11-12T04:40Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_1_ATL_PIT",
+   "week": 1,
+   "matchup": "ATL @ PIT",
+   "official_away": 13,
+   "official_home": 20,
+   "extract_away": 13,
+   "extract_home": 20,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-1",
+   "retrieved_at": "2026-11-12T04:40Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_1_NYJ_TEN",
+   "week": 1,
+   "matchup": "NYJ @ TEN",
+   "official_away": 23,
+   "official_home": 10,
+   "extract_away": 23,
+   "extract_home": 10,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-1",
+   "retrieved_at": "2026-11-12T04:40Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_1_AZ_LAC",
+   "week": 1,
+   "matchup": "ARI @ LAC",
+   "official_away": 26,
+   "official_home": 14,
+   "extract_away": 26,
+   "extract_home": 14,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-1",
+   "retrieved_at": "2026-11-12T04:40Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_1_MIA_LV",
+   "week": 1,
+   "matchup": "MIA @ LV",
+   "official_away": 13,
+   "official_home": 27,
+   "extract_away": 13,
+   "extract_home": 27,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-1",
+   "retrieved_at": "2026-11-12T04:40Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_2_DET_BUF",
+   "week": 2,
+   "matchup": "DET @ BUF",
+   "official_away": 31,
+   "official_home": 41,
+   "extract_away": 31,
+   "extract_home": 41,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-2",
+   "retrieved_at": "2026-11-12T04:45Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_2_CAR_ATL",
+   "week": 2,
+   "matchup": "CAR @ ATL",
+   "official_away": 34,
+   "official_home": 3,
+   "extract_away": 34,
+   "extract_home": 3,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-2",
+   "retrieved_at": "2026-11-12T04:45Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_2_NO_BAL",
+   "week": 2,
+   "matchup": "NO @ BAL",
+   "official_away": 24,
+   "official_home": 17,
+   "extract_away": 24,
+   "extract_home": 17,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-2",
+   "retrieved_at": "2026-11-12T04:45Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_2_MIN_CHI",
+   "week": 2,
+   "matchup": "MIN @ CHI",
+   "official_away": 9,
+   "official_home": 3,
+   "extract_away": 9,
+   "extract_home": 3,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-2",
+   "retrieved_at": "2026-11-12T04:45Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_2_CIN_HOU",
+   "week": 2,
+   "matchup": "CIN @ HOU",
+   "official_away": 20,
+   "official_home": 6,
+   "extract_away": 20,
+   "extract_home": 6,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-2",
+   "retrieved_at": "2026-11-12T04:45Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_2_PIT_NE",
+   "week": 2,
+   "matchup": "PIT @ NE",
+   "official_away": 3,
+   "official_home": 20,
+   "extract_away": 3,
+   "extract_home": 20,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-2",
+   "retrieved_at": "2026-11-12T04:45Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_2_GB_NYJ",
+   "week": 2,
+   "matchup": "GB @ NYJ",
+   "official_away": 20,
+   "official_home": 17,
+   "extract_away": 20,
+   "extract_home": 17,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-2",
+   "retrieved_at": "2026-11-12T04:45Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_2_CLE_TB",
+   "week": 2,
+   "matchup": "CLE @ TB",
+   "official_away": 23,
+   "official_home": 19,
+   "extract_away": 23,
+   "extract_home": 19,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-2",
+   "retrieved_at": "2026-11-12T04:45Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_2_PHI_TEN",
+   "week": 2,
+   "matchup": "PHI @ TEN",
+   "official_away": 24,
+   "official_home": 20,
+   "extract_away": 24,
+   "extract_home": 20,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-2",
+   "retrieved_at": "2026-11-12T04:45Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_2_JAX_DEN",
+   "week": 2,
+   "matchup": "JAX @ DEN",
+   "official_away": 13,
+   "official_home": 20,
+   "extract_away": 13,
+   "extract_home": 20,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-2",
+   "retrieved_at": "2026-11-12T04:45Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_2_LV_LAC",
+   "week": 2,
+   "matchup": "LV @ LAC",
+   "official_away": 26,
+   "official_home": 14,
+   "extract_away": 26,
+   "extract_home": 14,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-2",
+   "retrieved_at": "2026-11-12T04:45Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_2_SEA_AZ",
+   "week": 2,
+   "matchup": "SEA @ ARI",
+   "official_away": 31,
+   "official_home": 7,
+   "extract_away": 31,
+   "extract_home": 7,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-2",
+   "retrieved_at": "2026-11-12T04:45Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_1_GB_MIN",
+   "week": 1,
+   "matchup": "GB @ MIN",
+   "official_away": 22,
+   "official_home": 39,
+   "extract_away": 22,
+   "extract_home": 39,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-1",
+   "retrieved_at": "2026-11-12T04:40Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_1_WAS_PHI",
+   "week": 1,
+   "matchup": "WAS @ PHI",
+   "official_away": 22,
+   "official_home": 24,
+   "extract_away": 22,
+   "extract_home": 24,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-1",
+   "retrieved_at": "2026-11-12T04:40Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_1_DAL_NYG",
+   "week": 1,
+   "matchup": "DAL @ NYG",
+   "official_away": 20,
+   "official_home": 28,
+   "extract_away": 20,
+   "extract_home": 28,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-1",
+   "retrieved_at": "2026-11-12T04:40Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_1_DEN_KC",
+   "week": 1,
+   "matchup": "DEN @ KC",
+   "official_away": 10,
+   "official_home": 31,
+   "extract_away": 10,
+   "extract_home": 31,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-1",
+   "retrieved_at": "2026-11-12T04:40Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_3_ATL_GB",
+   "week": 3,
+   "matchup": "ATL @ GB",
+   "official_away": 35,
+   "official_home": 14,
+   "extract_away": 35,
+   "extract_home": 14,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "retrieved_at": "2026-11-12T04:52Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_3_LAC_BUF",
+   "week": 3,
+   "matchup": "LAC @ BUF",
+   "official_away": 16,
+   "official_home": 24,
+   "extract_away": 16,
+   "extract_home": 24,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "retrieved_at": "2026-11-12T04:52Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_3_CAR_CLE",
+   "week": 3,
+   "matchup": "CAR @ CLE",
+   "official_away": 18,
+   "official_home": 21,
+   "extract_away": 18,
+   "extract_home": 21,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "retrieved_at": "2026-11-12T04:52Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_3_NYJ_DET",
+   "week": 3,
+   "matchup": "NYJ @ DET",
+   "official_away": 24,
+   "official_home": 31,
+   "extract_away": 24,
+   "extract_home": 31,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "retrieved_at": "2026-11-12T04:52Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_3_HOU_IND",
+   "week": 3,
+   "matchup": "HOU @ IND",
+   "official_away": 17,
+   "official_home": 19,
+   "extract_away": 17,
+   "extract_home": 19,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "retrieved_at": "2026-11-12T04:52Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_3_NE_JAX",
+   "week": 3,
+   "matchup": "NE @ JAX",
+   "official_away": 6,
+   "official_home": 35,
+   "extract_away": 6,
+   "extract_home": 35,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "retrieved_at": "2026-11-12T04:52Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_3_KC_MIA",
+   "week": 3,
+   "matchup": "KC @ MIA",
+   "official_away": 24,
+   "official_home": 10,
+   "extract_away": 24,
+   "extract_home": 10,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "retrieved_at": "2026-11-12T04:52Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_3_TEN_NYG",
+   "week": 3,
+   "matchup": "TEN @ NYG",
+   "official_away": 7,
+   "official_home": 12,
+   "extract_away": 7,
+   "extract_home": 12,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "retrieved_at": "2026-11-12T04:52Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_3_CIN_PIT",
+   "week": 3,
+   "matchup": "CIN @ PIT",
+   "official_away": 27,
+   "official_home": 30,
+   "extract_away": 27,
+   "extract_home": 30,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "retrieved_at": "2026-11-12T04:52Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_3_SEA_WAS",
+   "week": 3,
+   "matchup": "SEA @ WAS",
+   "official_away": 31,
+   "official_home": 33,
+   "extract_away": 31,
+   "extract_home": 33,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "retrieved_at": "2026-11-12T04:52Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_3_AZ_SF",
+   "week": 3,
+   "matchup": "ARI @ SF",
+   "official_away": 30,
+   "official_home": 36,
+   "extract_away": 30,
+   "extract_home": 36,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "retrieved_at": "2026-11-12T04:52Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_3_MIN_TB",
+   "week": 3,
+   "matchup": "MIN @ TB",
+   "official_away": 23,
+   "official_home": 16,
+   "extract_away": 23,
+   "extract_home": 16,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "retrieved_at": "2026-11-12T04:52Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_3_LV_NO",
+   "week": 3,
+   "matchup": "LV @ NO",
+   "official_away": 35,
+   "official_home": 27,
+   "extract_away": 35,
+   "extract_home": 27,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "retrieved_at": "2026-11-12T04:52Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_3_BAL_DAL",
+   "week": 3,
+   "matchup": "BAL @ DAL",
+   "official_away": 34,
+   "official_home": 31,
+   "extract_away": 34,
+   "extract_home": 31,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "retrieved_at": "2026-11-12T04:52Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_3_LA_DEN",
+   "week": 3,
+   "matchup": "LA @ DEN",
+   "official_away": 26,
+   "official_home": 30,
+   "extract_away": 26,
+   "extract_home": 30,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "retrieved_at": "2026-11-12T04:52Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_3_PHI_CHI",
+   "week": 3,
+   "matchup": "PHI @ CHI",
+   "official_away": 7,
+   "official_home": 27,
+   "extract_away": 7,
+   "extract_home": 27,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "retrieved_at": "2026-11-12T04:52Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_4_PIT_CLE",
+   "week": 4,
+   "matchup": "PIT @ CLE",
+   "official_away": 24,
+   "official_home": 27,
+   "extract_away": 24,
+   "extract_home": 27,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "retrieved_at": "2026-11-12T04:56Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_4_IND_WAS",
+   "week": 4,
+   "matchup": "IND @ WAS",
+   "official_away": 30,
+   "official_home": 13,
+   "extract_away": 30,
+   "extract_home": 13,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "retrieved_at": "2026-11-12T04:56Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_4_TEN_BAL",
+   "week": 4,
+   "matchup": "TEN @ BAL",
+   "official_away": 18,
+   "official_home": 24,
+   "extract_away": 18,
+   "extract_home": 24,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "retrieved_at": "2026-11-12T04:56Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_4_NE_BUF",
+   "week": 4,
+   "matchup": "NE @ BUF",
+   "official_away": 29,
+   "official_home": 26,
+   "extract_away": 29,
+   "extract_home": 26,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "retrieved_at": "2026-11-12T04:56Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_4_NYJ_CHI",
+   "week": 4,
+   "matchup": "NYJ @ CHI",
+   "official_away": 12,
+   "official_home": 23,
+   "extract_away": 12,
+   "extract_home": 23,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "retrieved_at": "2026-11-12T04:56Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_4_JAX_CIN",
+   "week": 4,
+   "matchup": "JAX @ CIN",
+   "official_away": 22,
+   "official_home": 17,
+   "extract_away": 22,
+   "extract_home": 17,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "retrieved_at": "2026-11-12T04:56Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_4_DAL_HOU",
+   "week": 4,
+   "matchup": "DAL @ HOU",
+   "official_away": 34,
+   "official_home": 30,
+   "extract_away": 34,
+   "extract_home": 30,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "retrieved_at": "2026-11-12T04:56Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_4_AZ_NYG",
+   "week": 4,
+   "matchup": "ARI @ NYG",
+   "official_away": 24,
+   "official_home": 36,
+   "extract_away": 24,
+   "extract_home": 36,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "retrieved_at": "2026-11-12T04:56Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_4_LA_PHI",
+   "week": 4,
+   "matchup": "LA @ PHI",
+   "official_away": 24,
+   "official_home": 20,
+   "extract_away": 24,
+   "extract_home": 20,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "retrieved_at": "2026-11-12T04:56Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_4_GB_TB",
+   "week": 4,
+   "matchup": "GB @ TB",
+   "official_away": 17,
+   "official_home": 14,
+   "extract_away": 17,
+   "extract_home": 14,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "retrieved_at": "2026-11-12T04:56Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_4_MIA_MIN",
+   "week": 4,
+   "matchup": "MIA @ MIN",
+   "official_away": 10,
+   "official_home": 15,
+   "extract_away": 10,
+   "extract_home": 15,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "retrieved_at": "2026-11-12T04:56Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_4_KC_LV",
+   "week": 4,
+   "matchup": "KC @ LV",
+   "official_away": 30,
+   "official_home": 27,
+   "extract_away": 30,
+   "extract_home": 27,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "retrieved_at": "2026-11-12T04:56Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_4_LAC_SEA",
+   "week": 4,
+   "matchup": "LAC @ SEA",
+   "official_away": 23,
+   "official_home": 30,
+   "extract_away": 23,
+   "extract_home": 30,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "retrieved_at": "2026-11-12T04:56Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_4_DEN_SF",
+   "week": 4,
+   "matchup": "DEN @ SF",
+   "official_away": 14,
+   "official_home": 24,
+   "extract_away": 14,
+   "extract_home": 24,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "retrieved_at": "2026-11-12T04:56Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_4_DET_CAR",
+   "week": 4,
+   "matchup": "DET @ CAR",
+   "official_away": 26,
+   "official_home": 32,
+   "extract_away": 26,
+   "extract_home": 32,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "retrieved_at": "2026-11-12T04:56Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_4_ATL_NO",
+   "week": 4,
+   "matchup": "ATL @ NO",
+   "official_away": 45,
+   "official_home": 24,
+   "extract_away": 45,
+   "extract_home": 24,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "retrieved_at": "2026-11-12T04:56Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_5_TB_DAL",
+   "week": 5,
+   "matchup": "TB @ DAL",
+   "official_away": 24,
+   "official_home": 16,
+   "extract_away": 24,
+   "extract_home": 16,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-5",
+   "retrieved_at": "2026-11-12T05:00Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_5_PHI_JAX",
+   "week": 5,
+   "matchup": "PHI @ JAX",
+   "official_away": 17,
+   "official_home": 19,
+   "extract_away": 17,
+   "extract_home": 19,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-5",
+   "retrieved_at": "2026-11-12T05:00Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_5_CIN_MIA",
+   "week": 5,
+   "matchup": "CIN @ MIA",
+   "official_away": 31,
+   "official_home": 24,
+   "extract_away": 31,
+   "extract_home": 24,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-5",
+   "retrieved_at": "2026-11-12T05:00Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_5_LV_NE",
+   "week": 5,
+   "matchup": "LV @ NE",
+   "official_away": 17,
+   "official_home": 45,
+   "extract_away": 17,
+   "extract_home": 45,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-5",
+   "retrieved_at": "2026-11-12T05:00Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_5_MIN_NO",
+   "week": 5,
+   "matchup": "MIN @ NO",
+   "official_away": 23,
+   "official_home": 13,
+   "extract_away": 23,
+   "extract_home": 13,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-5",
+   "retrieved_at": "2026-11-12T05:00Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_5_CLE_NYJ",
+   "week": 5,
+   "matchup": "CLE @ NYJ",
+   "official_away": 12,
+   "official_home": 17,
+   "extract_away": 12,
+   "extract_home": 17,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-5",
+   "retrieved_at": "2026-11-12T05:00Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_5_IND_PIT",
+   "week": 5,
+   "matchup": "IND @ PIT",
+   "official_away": 22,
+   "official_home": 34,
+   "extract_away": 22,
+   "extract_home": 34,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-5",
+   "retrieved_at": "2026-11-12T05:00Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_5_HOU_TEN",
+   "week": 5,
+   "matchup": "HOU @ TEN",
+   "official_away": 26,
+   "official_home": 3,
+   "extract_away": 26,
+   "extract_home": 3,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-5",
+   "retrieved_at": "2026-11-12T05:00Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_5_NYG_WAS",
+   "week": 5,
+   "matchup": "NYG @ WAS",
+   "official_away": 27,
+   "official_home": 27,
+   "extract_away": 27,
+   "extract_home": 27,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-5",
+   "retrieved_at": "2026-11-12T05:00Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_5_CHI_GB",
+   "week": 5,
+   "matchup": "CHI @ GB",
+   "official_away": 7,
+   "official_home": 31,
+   "extract_away": 7,
+   "extract_home": 31,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-5",
+   "retrieved_at": "2026-11-12T05:00Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_5_DEN_LAC",
+   "week": 5,
+   "matchup": "DEN @ LAC",
+   "official_away": 23,
+   "official_home": 17,
+   "extract_away": 23,
+   "extract_home": 17,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-5",
+   "retrieved_at": "2026-11-12T05:00Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_5_DET_AZ",
+   "week": 5,
+   "matchup": "DET @ ARI",
+   "official_away": 45,
+   "official_home": 21,
+   "extract_away": 45,
+   "extract_home": 21,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-5",
+   "retrieved_at": "2026-11-12T05:00Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_5_SF_SEA",
+   "week": 5,
+   "matchup": "SF @ SEA",
+   "official_away": 32,
+   "official_home": 29,
+   "extract_away": 32,
+   "extract_home": 29,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-5",
+   "retrieved_at": "2026-11-12T05:02Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_5_BAL_ATL",
+   "week": 5,
+   "matchup": "BAL @ ATL",
+   "official_away": 30,
+   "official_home": 23,
+   "extract_away": 30,
+   "extract_home": 23,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-5",
+   "retrieved_at": "2026-11-12T05:02Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_5_BUF_LA",
+   "week": 5,
+   "matchup": "BUF @ LA",
+   "official_away": 37,
+   "official_home": 34,
+   "extract_away": 37,
+   "extract_home": 34,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-5",
+   "retrieved_at": "2026-11-12T05:02Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_6_SEA_DEN",
+   "week": 6,
+   "matchup": "SEA @ DEN",
+   "official_away": 14,
+   "official_home": 17,
+   "extract_away": 14,
+   "extract_home": 17,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-6",
+   "retrieved_at": "2026-11-12T05:06Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_6_HOU_JAX",
+   "week": 6,
+   "matchup": "HOU @ JAX",
+   "official_away": 34,
+   "official_home": 31,
+   "extract_away": 34,
+   "extract_home": 31,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-6",
+   "retrieved_at": "2026-11-12T05:06Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_6_CHI_ATL",
+   "week": 6,
+   "matchup": "CHI @ ATL",
+   "official_away": 31,
+   "official_home": 23,
+   "extract_away": 31,
+   "extract_home": 23,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-6",
+   "retrieved_at": "2026-11-12T05:06Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_6_BAL_CLE",
+   "week": 6,
+   "matchup": "BAL @ CLE",
+   "official_away": 10,
+   "official_home": 13,
+   "extract_away": 10,
+   "extract_home": 13,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-6",
+   "retrieved_at": "2026-11-12T05:06Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_6_TEN_IND",
+   "week": 6,
+   "matchup": "TEN @ IND",
+   "official_away": 26,
+   "official_home": 20,
+   "extract_away": 26,
+   "extract_home": 20,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-6",
+   "retrieved_at": "2026-11-12T05:06Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_6_NYJ_NE",
+   "week": 6,
+   "matchup": "NYJ @ NE",
+   "official_away": 19,
+   "official_home": 26,
+   "extract_away": 19,
+   "extract_home": 26,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-6",
+   "retrieved_at": "2026-11-12T05:06Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_6_NO_NYG",
+   "week": 6,
+   "matchup": "NO @ NYG",
+   "official_away": 34,
+   "official_home": 27,
+   "extract_away": 34,
+   "extract_home": 27,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-6",
+   "retrieved_at": "2026-11-12T05:06Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_6_CAR_PHI",
+   "week": 6,
+   "matchup": "CAR @ PHI",
+   "official_away": 25,
+   "official_home": 14,
+   "extract_away": 25,
+   "extract_home": 14,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-6",
+   "retrieved_at": "2026-11-12T05:06Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_6_PIT_TB",
+   "week": 6,
+   "matchup": "PIT @ TB",
+   "official_away": 26,
+   "official_home": 19,
+   "extract_away": 26,
+   "extract_home": 19,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-6",
+   "retrieved_at": "2026-11-12T05:06Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_6_AZ_LA",
+   "week": 6,
+   "matchup": "ARI @ LA",
+   "official_away": 18,
+   "official_home": 16,
+   "extract_away": 18,
+   "extract_home": 16,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-6",
+   "retrieved_at": "2026-11-12T05:06Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_6_LAC_KC",
+   "week": 6,
+   "matchup": "LAC @ KC",
+   "official_away": 6,
+   "official_home": 22,
+   "extract_away": 6,
+   "extract_home": 22,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-6",
+   "retrieved_at": "2026-11-12T05:06Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_6_BUF_LV",
+   "week": 6,
+   "matchup": "BUF @ LV",
+   "official_away": 33,
+   "official_home": 30,
+   "extract_away": 33,
+   "extract_home": 30,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-6",
+   "retrieved_at": "2026-11-12T05:06Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_6_DAL_GB",
+   "week": 6,
+   "matchup": "DAL @ GB",
+   "official_away": 13,
+   "official_home": 23,
+   "extract_away": 13,
+   "extract_home": 23,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-6",
+   "retrieved_at": "2026-11-12T05:08Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_6_WAS_SF",
+   "week": 6,
+   "matchup": "WAS @ SF",
+   "official_away": 17,
+   "official_home": 23,
+   "extract_away": 17,
+   "extract_home": 23,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-6",
+   "retrieved_at": "2026-11-12T05:08Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_7_NE_CHI",
+   "week": 7,
+   "matchup": "NE @ CHI",
+   "official_away": 24,
+   "official_home": 30,
+   "extract_away": 24,
+   "extract_home": 30,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-7",
+   "retrieved_at": "2026-11-12T05:12Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_7_PIT_NO",
+   "week": 7,
+   "matchup": "PIT @ NO",
+   "official_away": 16,
+   "official_home": 10,
+   "extract_away": 16,
+   "extract_home": 10,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-7",
+   "retrieved_at": "2026-11-12T05:12Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_7_SF_ATL",
+   "week": 7,
+   "matchup": "SF @ ATL",
+   "official_away": 20,
+   "official_home": 29,
+   "extract_away": 20,
+   "extract_home": 29,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-7",
+   "retrieved_at": "2026-11-12T05:12Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_7_CIN_BAL",
+   "week": 7,
+   "matchup": "CIN @ BAL",
+   "official_away": 35,
+   "official_home": 13,
+   "extract_away": 35,
+   "extract_home": 13,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-7",
+   "retrieved_at": "2026-11-12T05:12Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_7_TB_CAR",
+   "week": 7,
+   "matchup": "TB @ CAR",
+   "official_away": 43,
+   "official_home": 13,
+   "extract_away": 43,
+   "extract_home": 13,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-7",
+   "retrieved_at": "2026-11-12T05:12Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_7_NYG_HOU",
+   "week": 7,
+   "matchup": "NYG @ HOU",
+   "official_away": 27,
+   "official_home": 21,
+   "extract_away": 27,
+   "extract_home": 21,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-7",
+   "retrieved_at": "2026-11-12T05:12Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_7_IND_MIN",
+   "week": 7,
+   "matchup": "IND @ MIN",
+   "official_away": 10,
+   "official_home": 16,
+   "extract_away": 10,
+   "extract_home": 16,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-7",
+   "retrieved_at": "2026-11-12T05:12Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_7_MIA_NYJ",
+   "week": 7,
+   "matchup": "MIA @ NYJ",
+   "official_away": 28,
+   "official_home": 25,
+   "extract_away": 28,
+   "extract_home": 25,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-7",
+   "retrieved_at": "2026-11-12T05:12Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_7_CLE_TEN",
+   "week": 7,
+   "matchup": "CLE @ TEN",
+   "official_away": 27,
+   "official_home": 24,
+   "extract_away": 27,
+   "extract_home": 24,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-7",
+   "retrieved_at": "2026-11-12T05:12Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_7_DEN_AZ",
+   "week": 7,
+   "matchup": "DEN @ ARI",
+   "official_away": 30,
+   "official_home": 16,
+   "extract_away": 30,
+   "extract_home": 16,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-7",
+   "retrieved_at": "2026-11-12T05:12Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_7_GB_DET",
+   "week": 7,
+   "matchup": "GB @ DET",
+   "official_away": 17,
+   "official_home": 20,
+   "extract_away": 17,
+   "extract_home": 20,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-7",
+   "retrieved_at": "2026-11-12T05:12Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_7_LA_LV",
+   "week": 7,
+   "matchup": "LA @ LV",
+   "official_away": 35,
+   "official_home": 21,
+   "extract_away": 35,
+   "extract_home": 21,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-7",
+   "retrieved_at": "2026-11-12T05:12Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_7_KC_SEA",
+   "week": 7,
+   "matchup": "KC @ SEA",
+   "official_away": 3,
+   "official_home": 20,
+   "extract_away": 3,
+   "extract_home": 20,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-7",
+   "retrieved_at": "2026-11-12T05:14Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_7_DAL_PHI",
+   "week": 7,
+   "matchup": "DAL @ PHI",
+   "official_away": 38,
+   "official_home": 21,
+   "extract_away": 38,
+   "extract_home": 21,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-7",
+   "retrieved_at": "2026-11-12T05:14Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_8_CAR_GB",
+   "week": 8,
+   "matchup": "CAR @ GB",
+   "official_away": 19,
+   "official_home": 27,
+   "extract_away": 19,
+   "extract_home": 27,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "retrieved_at": "2026-11-12T05:16Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_8_BAL_BUF",
+   "week": 8,
+   "matchup": "BAL @ BUF",
+   "official_away": 10,
+   "official_home": 36,
+   "extract_away": 10,
+   "extract_home": 36,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "retrieved_at": "2026-11-12T05:16Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_8_TEN_CIN",
+   "week": 8,
+   "matchup": "TEN @ CIN",
+   "official_away": 36,
+   "official_home": 43,
+   "extract_away": 36,
+   "extract_home": 43,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "retrieved_at": "2026-11-12T05:16Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_8_AZ_DAL",
+   "week": 8,
+   "matchup": "ARI @ DAL",
+   "official_away": 33,
+   "official_home": 30,
+   "extract_away": 33,
+   "extract_home": 30,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "retrieved_at": "2026-11-12T05:16Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_8_MIN_DET",
+   "week": 8,
+   "matchup": "MIN @ DET",
+   "official_away": 15,
+   "official_home": 19,
+   "extract_away": 15,
+   "extract_home": 19,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "retrieved_at": "2026-11-12T05:16Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_8_IND_JAX",
+   "week": 8,
+   "matchup": "IND @ JAX",
+   "official_away": 7,
+   "official_home": 42,
+   "extract_away": 7,
+   "extract_home": 42,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "retrieved_at": "2026-11-12T05:16Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_8_LV_NYJ",
+   "week": 8,
+   "matchup": "LV @ NYJ",
+   "official_away": 38,
+   "official_home": 33,
+   "extract_away": 38,
+   "extract_home": 33,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "retrieved_at": "2026-11-12T05:16Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_8_CLE_PIT",
+   "week": 8,
+   "matchup": "CLE @ PIT",
+   "official_away": 6,
+   "official_home": 27,
+   "extract_away": 6,
+   "extract_home": 27,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "retrieved_at": "2026-11-12T05:16Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_8_ATL_TB",
+   "week": 8,
+   "matchup": "ATL @ TB",
+   "official_away": 0,
+   "official_home": 16,
+   "extract_away": 0,
+   "extract_home": 16,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "retrieved_at": "2026-11-12T05:16Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_8_LAC_LA",
+   "week": 8,
+   "matchup": "LAC @ LA",
+   "official_away": 9,
+   "official_home": 24,
+   "extract_away": 9,
+   "extract_home": 24,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "retrieved_at": "2026-11-12T05:16Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_8_KC_DEN",
+   "week": 8,
+   "matchup": "KC @ DEN",
+   "official_away": 24,
+   "official_home": 28,
+   "extract_away": 24,
+   "extract_home": 28,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "retrieved_at": "2026-11-12T05:16Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_8_NE_MIA",
+   "week": 8,
+   "matchup": "NE @ MIA",
+   "official_away": 24,
+   "official_home": 19,
+   "extract_away": 24,
+   "extract_home": 19,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "retrieved_at": "2026-11-12T05:16Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_8_PHI_WAS",
+   "week": 8,
+   "matchup": "PHI @ WAS",
+   "official_away": 10,
+   "official_home": 27,
+   "extract_away": 10,
+   "extract_home": 27,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "retrieved_at": "2026-11-12T05:18Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_8_CHI_SEA",
+   "week": 8,
+   "matchup": "CHI @ SEA",
+   "official_away": 34,
+   "official_home": 17,
+   "extract_away": 34,
+   "extract_home": 17,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "retrieved_at": "2026-11-12T05:18Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_9_JAX_BAL",
+   "week": 9,
+   "matchup": "JAX @ BAL",
+   "official_away": 33,
+   "official_home": 10,
+   "extract_away": 33,
+   "extract_home": 10,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "retrieved_at": "2026-11-12T05:20Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_9_CIN_ATL",
+   "week": 9,
+   "matchup": "CIN @ ATL",
+   "official_away": 34,
+   "official_home": 17,
+   "extract_away": 34,
+   "extract_home": 17,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "retrieved_at": "2026-11-12T05:20Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_9_DEN_CAR",
+   "week": 9,
+   "matchup": "DEN @ CAR",
+   "official_away": 26,
+   "official_home": 21,
+   "extract_away": 26,
+   "extract_home": 21,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "retrieved_at": "2026-11-12T05:20Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_9_DAL_IND",
+   "week": 9,
+   "matchup": "DAL @ IND",
+   "official_away": 27,
+   "official_home": 23,
+   "extract_away": 27,
+   "extract_home": 23,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "retrieved_at": "2026-11-12T05:20Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_9_NYJ_KC",
+   "week": 9,
+   "matchup": "NYJ @ KC",
+   "official_away": 12,
+   "official_home": 35,
+   "extract_away": 12,
+   "extract_home": 35,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "retrieved_at": "2026-11-12T05:20Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_9_DET_MIA",
+   "week": 9,
+   "matchup": "DET @ MIA",
+   "official_away": 19,
+   "official_home": 9,
+   "extract_away": 19,
+   "extract_home": 9,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "retrieved_at": "2026-11-12T05:20Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_9_CLE_NO",
+   "week": 9,
+   "matchup": "CLE @ NO",
+   "official_away": 22,
+   "official_home": 23,
+   "extract_away": 22,
+   "extract_home": 23,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "retrieved_at": "2026-11-12T05:20Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_9_NYG_PHI",
+   "week": 9,
+   "matchup": "NYG @ PHI",
+   "official_away": 19,
+   "official_home": 11,
+   "extract_away": 19,
+   "extract_home": 11,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "retrieved_at": "2026-11-12T05:20Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_9_LA_WAS",
+   "week": 9,
+   "matchup": "LA @ WAS",
+   "official_away": 20,
+   "official_home": 13,
+   "extract_away": 20,
+   "extract_home": 13,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "retrieved_at": "2026-11-12T05:20Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_9_HOU_LAC",
+   "week": 9,
+   "matchup": "HOU @ LAC",
+   "official_away": 44,
+   "official_home": 22,
+   "extract_away": 44,
+   "extract_home": 22,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "retrieved_at": "2026-11-12T05:20Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_9_LV_SF",
+   "week": 9,
+   "matchup": "LV @ SF",
+   "official_away": 17,
+   "official_home": 38,
+   "extract_away": 17,
+   "extract_home": 38,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "retrieved_at": "2026-11-12T05:20Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_9_GB_NE",
+   "week": 9,
+   "matchup": "GB @ NE",
+   "official_away": 45,
+   "official_home": 27,
+   "extract_away": 45,
+   "extract_home": 27,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "retrieved_at": "2026-11-12T05:20Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_9_AZ_SEA",
+   "week": 9,
+   "matchup": "ARI @ SEA",
+   "official_away": 3,
+   "official_home": 17,
+   "extract_away": 3,
+   "extract_home": 17,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "retrieved_at": "2026-11-12T05:22Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_9_TB_CHI",
+   "week": 9,
+   "matchup": "TB @ CHI",
+   "official_away": 24,
+   "official_home": 27,
+   "extract_away": 24,
+   "extract_home": 27,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "retrieved_at": "2026-11-12T05:22Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_9_BUF_MIN",
+   "week": 9,
+   "matchup": "BUF @ MIN",
+   "official_away": 23,
+   "official_home": 6,
+   "extract_away": 23,
+   "extract_home": 6,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "retrieved_at": "2026-11-12T05:22Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_2_WAS_DAL",
+   "week": 2,
+   "matchup": "WAS @ DAL",
+   "official_away": 20,
+   "official_home": 37,
+   "extract_away": 20,
+   "extract_home": 37,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-2",
+   "retrieved_at": "2026-11-12T05:26Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_2_MIA_SF",
+   "week": 2,
+   "matchup": "MIA @ SF",
+   "official_away": 13,
+   "official_home": 35,
+   "extract_away": 13,
+   "extract_home": 35,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-2",
+   "retrieved_at": "2026-11-12T05:26Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_2_IND_KC",
+   "week": 2,
+   "matchup": "IND @ KC",
+   "official_away": 30,
+   "official_home": 33,
+   "extract_away": 30,
+   "extract_home": 33,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-2",
+   "retrieved_at": "2026-11-12T05:26Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_2_NYG_LA",
+   "week": 2,
+   "matchup": "NYG @ LA",
+   "official_away": 6,
+   "official_home": 28,
+   "extract_away": 6,
+   "extract_home": 28,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-2",
+   "retrieved_at": "2026-11-12T05:26Z",
+   "provenance": "transcribed by an earlier session"
+  },
+  {
+   "game_id": "2026_REG_10_WAS_NYG",
+   "week": 10,
+   "matchup": "WAS @ NYG",
+   "official_away": 24,
+   "official_home": 21,
+   "extract_away": 24,
+   "extract_home": 21,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/games/commanders-at-giants-2026-reg-10",
+   "retrieved_at": "2026-11-15T13:20Z",
+   "provenance": "fetched by c7b65577-nfl1"
+  }
+ ]
+}

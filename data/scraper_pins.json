@@ -1,0 +1,51 @@
+{
+ "schema": "scraper_pins/1",
+ "note": "Drift pins for every scraper in this repository. tools/check_scraper_pins.py fails the build when a stored artifact violates a pin, when a pinned constant has disappeared from the source, or when a pin has been relaxed without an entry in history. A pin is a promise about a page; changing it is a reviewable event.",
+ "pins": [
+  {
+   "id": "injury-report",
+   "source": "pipeline/capture_snapshots.py",
+   "official_url": "https://www.nfl.com/injuries/",
+   "min_rows": 100,
+   "row_drop_alert": 0.25,
+   "required_fields": ["club", "player", "position", "injury", "practice_status", "game_status"],
+   "constants": {
+    "MIN_ROWS": 100,
+    "MIN_TABLES": 10,
+    "ROW_DROP_ALERT": 0.25,
+    "MAX_MISSING_PLAYER_SHARE": 0.02
+   },
+   "why_these": "A partial parse of the league-wide report cannot legitimately fall under 100 rows or 10 club tables; a fall of more than 25% against the previous capture is a parse loss, not a report change. The thresholds were chosen from the observed 347-row capture, not fitted to a failure.",
+   "history": [
+    {"date": "2026-11-15", "change": "initial pin recorded from the 347-row capture 20261115T121648Z", "by": "c7b65577-nfl1"}
+   ]
+  },
+  {
+   "id": "schedule-collector",
+   "source": "pipeline/collect.py",
+   "official_url": "https://www.nfl.com/schedules/",
+   "min_rows": null,
+   "row_drop_alert": null,
+   "required_fields": [],
+   "constants": {},
+   "why_these": "The collector downloads pinned nflverse release files and records their sha256; the file hash IS the pin. A changed file changes the hash, which is published in data/model/provenance.json, so it is detected by construction and needs no row pin.",
+   "history": [
+    {"date": "2026-11-15", "change": "recorded as hash-pinned rather than row-pinned", "by": "c7b65577-nfl1"}
+   ]
+  },
+  {
+   "id": "injury-scraper",
+   "source": "pipeline/scrape_injuries.py",
+   "official_url": "https://www.nfl.com/injuries/",
+   "min_rows": null,
+   "row_drop_alert": null,
+   "required_fields": ["player", "team", "status"],
+   "constants": {},
+   "why_these": "This scraper is superseded by pipeline/capture_snapshots.py, which pins rows, tables, vocabulary and hashes. It is listed here so that nobody mistakes its absence from the pin list for coverage.",
+   "history": [
+    {"date": "2026-11-15", "change": "recorded as superseded", "by": "c7b65577-nfl1"}
+   ]
+  }
+ ],
+ "coverage_statement": "Two scrapers reach the network: pipeline/collect.py (pinned by file hash) and pipeline/capture_snapshots.py (pinned by row count, table count, vocabulary and raw hash). pipeline/scrape_injuries.py is retained but superseded. No other file in the repository performs a network fetch at build time."
+}
