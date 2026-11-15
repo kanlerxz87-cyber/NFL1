@@ -65,6 +65,7 @@
 <a href="pages/parlays.html">Parlays</a>
 <a href="pages/props.html">Props</a>
 <a href="pages/questions.html">Questions</a>
+<a href="pages/readiness.html">Readiness</a>
 <a href="pages/review.html">Review</a>
 <a href="pages/sections.html">Sections</a>
 <a href="pages/standings.html">Standings</a>
@@ -83,17 +84,17 @@
   <div class="main">
     <div class="topbar">
       <div class="crumb">NFL1 / <b>Flagged for Review</b></div>
-      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">52 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">64 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
     </div>
     <main class="content" id="main">
       <div class="kicker">Assurance</div>
       <h1>Flagged for Review</h1>
       <p class="lede">Clearly labelled irregularities, official-page conflicts, unverified values and coordination issues — each with an official source link for manual review, none blocking the merge.</p>
       <div class="callout flag"><b>Flagged for Review.</b> These irregularities and unverified items do not block the merge or the live site. Each has an official source link for manual review and a suggested action. A status of <em>needs review</em> means exactly this: published here, not blocking.</div>
-<div class="cards"><div class="card"><div class="label">Flagged items</div><div class="value">52</div><div class="detail">All with source links</div></div><div class="card"><div class="label">Official-page irregularities</div><div class="value">7</div><div class="detail">F02–F08</div></div><div class="card"><div class="label">Missing official data</div><div class="value">5</div><div class="detail">F09–F11, F14, F15</div></div><div class="card"><div class="label">Combined-site review</div><div class="value">24</div><div class="detail">F25–F36</div></div></div>
+<div class="cards"><div class="card"><div class="label">Flagged items</div><div class="value">64</div><div class="detail">All with source links</div></div><div class="card"><div class="label">Official-page irregularities</div><div class="value">7</div><div class="detail">F02–F08</div></div><div class="card"><div class="label">Missing official data</div><div class="value">5</div><div class="detail">F09–F11, F14, F15</div></div><div class="card"><div class="label">Combined-site review</div><div class="value">24</div><div class="detail">F25–F36</div></div></div>
 <h2 id="all">All flagged irregularities</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-flags" aria-label="Filter tbl-flags" placeholder="Filter rows…">
-<span class="count" data-count-for="tbl-flags">52 rows shown</span></div>
+<span class="count" data-count-for="tbl-flags">64 rows shown</span></div>
 <div class="tablewrap"><table class="data-table" id="tbl-flags"><caption>Every flag with category, description, impact, status, official source link and suggested action for the reviewer.</caption>
 <thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Category</th><th scope="col" class="sortable">Irregularity / unverified item</th><th scope="col" class="sortable">Impact on decisions</th><th scope="col" class="sortable">Status</th><th scope="col" class="sortable">Suggested action</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
 <tr id="F01" data-verified="true">
@@ -563,6 +564,114 @@
 <td><span class="badge neutral">needs review</span></td>
 <td data-value="1" class="wide">Fixed: the two snapshot values were corrected to the official times and pipeline/build_all.py now applies a documented, source-linked SCHEDULE_FEED_FIXES table at build time so scheduled refreshes keep the official values. Reviewer: confirm against https://www.nfl.com/schedules/2026/by-week/week-11 and https://www.nfl.com/schedules/2026/REG11 (fetched 2026-11-13); if the upstream feed is corrected, the table can be dropped (it is idempotent).</td>
 <td><span class="src"><a href="https://www.nfl.com/schedules" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official schedule">S06 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F-7810-01" data-verified="true">
+<td><code>F-7810-01</code></td>
+<td data-value="1">Injury scrape: blank designations published</td>
+<td data-value="1" class="wide">The committed scrape (data/model/official_injuries.json, generated 2026-11-14T17:02Z) has no injury or game status where the live nfl.com read (2026-11-15) shows one: Chargers, 10 injury and 10 game-status cells, and 6 practice-status values; Ravens, 2 injury and 2 game-status cells (Jaylinn Hawkins: Knee, Out; Adam Randall: Neck, Hamstring, Questionable). The parser stored blanks without any error. Chargers example from the live page: David Njoku, Fibula, Questionable.</td>
+<td data-value="1" class="wide">Two clubs are published with missing injury designations. The rule against publishing blanks is broken, and no alarm fired.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Re-run the scrape with the raw HTML kept for the LAC and BAL sections; fix the column mapping; add the drift alarm (SI-09). Compare with data/brief_07810d9f/injury_delta_2026-11-15.json.</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F-7810-02" data-verified="true">
+<td><code>F-7810-02</code></td>
+<td data-value="1">Injury scrape: rows missing</td>
+<td data-value="1" class="wide">Two Ravens rows on the live nfl.com read are absent from the committed scrape: Calais Campbell (DT, Did Not Participate In Practice) and Ronnie Stanley (Did Not Participate In Practice). The cause (a page change between reads, or parser loss) is not determined.</td>
+<td data-value="1" class="wide">The published Ravens list is 2 players short.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Determine from the raw page at the next capture whether the rows were added after 2026-11-14 or dropped by the parser.</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F-7810-03" data-verified="true">
+<td><code>F-7810-03</code></td>
+<td data-value="1">Designation changed between reads</td>
+<td data-value="1" class="wide">Arden Key (IND) carries Hamstring and Questionable in the committed scrape (2026-11-14). The live read (2026-11-15) shows no injury and no game status for him.</td>
+<td data-value="1" class="wide">A designation disappeared between reads, or the scrape is stale. Either way the published Colts row disagrees with the live page.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Keep both reads in the dated series (IN-01) and confirm at the next capture.</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F-7810-04" data-verified="true">
+<td><code>F-7810-04</code></td>
+<td data-value="1">Injury row counts differ across captures</td>
+<td data-value="1" class="wide">Counts for the same nfl.com page differ by capture: 296 rows across 26 clubs (official check, 2026-11-13, per the landing page note); 345 rows in the committed scrape (2026-11-14); 347 rows across 28 clubs in the live read (2026-11-15). CHI, DEN, PHI and TB have no rows on the live read.</td>
+<td data-value="1" class="wide">No single Week 10 count can be cited. Each count must carry its capture date.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Publish every count with its capture time (done for 2026-11-15 in the register); do not overwrite earlier counts.</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F-7810-05" data-verified="true">
+<td><code>F-7810-05</code></td>
+<td data-value="1">Depth chart unavailable: Houston</td>
+<td data-value="1" class="wide">The Houston Texans depth chart page (read 2026-11-15) is labelled &#x27;Unofficial Depth Chart&#x27; and holds an image in place of text. The depth ladder has no Houston slots (chart_status &#x27;unavailable&#x27;).</td>
+<td data-value="1" class="wide">The 32-club depth sweep is 31 of 32. Houston depth and any Houston team-level model are blocked.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Find an authorized structured source (club or NFL text feed). Do not transcribe the image by eye.</td>
+<td><span class="src"><a href="https://www.houstontexans.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Houston Texans (houstontexans.com) — Club depth chart (image only, labelled Unofficial)">S28 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F-7810-06" data-verified="true">
+<td><code>F-7810-06</code></td>
+<td data-value="1">Jersey numbers left in depth rows</td>
+<td data-value="1" class="wide">data/depth_chart.json still holds jersey numbers in 59 Packers cells (a leading number before the player name). The brief requires the numbers stripped and the raw string kept.</td>
+<td data-value="1" class="wide">Packers names are mis-keyed in any join on player name.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Strip the leading number into its own column; keep the raw string; re-run the name join.</td>
+<td><span class="src"><a href="https://www.packers.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Green Bay Packers (packers.com) — Official club depth chart">S15 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F-7810-07" data-verified="true">
+<td><code>F-7810-07</code></td>
+<td data-value="1">Club charts labelled &#x27;Unofficial&#x27;</td>
+<td data-value="1" class="wide">Three official club charts carry an &#x27;Unofficial&#x27; label on the club&#x27;s own page: Chiefs (&#x27;Unofficial Depth Chart&#x27;, S14), Packers (&#x27;Unofficial, Nov. 10, 2026&#x27;, S15) and Texans (S28). The repo treats club charts as official for that club.</td>
+<td data-value="1" class="wide">Whether a club chart counts as an official source is a decision, not a fact. The brief asks for official depth; some charts describe themselves as unofficial.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Record the decision on the Decide page: accept the club chart as official for that club, or require a different official source.</td>
+<td><span class="src"><a href="https://www.chiefs.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Kansas City Chiefs (chiefs.com) — Official club depth chart">S14 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F-7810-08" data-verified="true">
+<td><code>F-7810-08</code></td>
+<td data-value="1">Baltimore QB depth: stale-listing item resolved</td>
+<td data-value="1" class="wide">The Ravens depth chart read on 2026-11-15 lists Jacoby Brissett, Joe Fagnano and Kedon Slovis at QB, and neither Lamar Jackson nor Tyler Huntley. data/verified/qb_changes_2026.csv records Jackson as out on injured reserve (nfl.com news, Nov 5).</td>
+<td data-value="1" class="wide">The stale-depth item for Baltimore does not hold on the current chart. The check (IN-22) still needs dated before-and-after captures to show a change rather than assert one.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Keep dated depth captures so a change can be shown; build the transactions cross-check (IN-22).</td>
+<td><span class="src"><a href="https://www.baltimoreravens.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Baltimore Ravens (baltimoreravens.com) — Official club depth chart">S27 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F-7810-09" data-verified="true">
+<td><code>F-7810-09</code></td>
+<td data-value="1">Backtest numbers on the leaderboard</td>
+<td data-value="1" class="wide">data/s9cb/leaderboard.json ranks 12 rules on historical games (totals.bets_scored = 14,440 over 4,751 games). The brief says backtest numbers must not appear on the leaderboard. room/data/decisions.json holds an open decision to retire the -110 price assumption.</td>
+<td data-value="1" class="wide">The leaderboard does not meet the pre-registration rule. A reader can take a backtest for a prospective result.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Split the leaderboard into prospective and backtest views (PR-06); settle the price-policy decision (PR-10).</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F-7810-10" data-verified="true">
+<td><code>F-7810-10</code></td>
+<td data-value="1">Committed site differed from its generators</td>
+<td data-value="1" class="wide">At base commit 5a769b3, tools/build_site_all.py --check failed: committed pages differed from the generator output in 16 pages (for example, nav links written with a ../pages/ prefix where the generator writes pages/). The data commit 5a769b3 carries the [skip ci] marker.</td>
+<td data-value="1" class="wide">Published pages were not reproducible from the repo, and the check that should catch this did not run on that data commit.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Regenerate and commit (done in session 07810d9f); CI must confirm on the pull request. Review whether data commits should skip verification.</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F-7810-11" data-verified="true">
+<td><code>F-7810-11</code></td>
+<td data-value="1">Brief references cannot be traced</td>
+<td data-value="1" class="wide">The brief cites verification IDs (for example VR-04, VR-08, VR-17, VR-24 and VQ-05). A grep on 2026-11-15 found none of them in the repo, so the claims that rely on them cannot be traced to a document.</td>
+<td data-value="1" class="wide">Items that rest on these IDs stay &#x27;Not verified&#x27; in the register (SI-14) until the reference list is supplied.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Supply the reference list, or the dated source behind each ID.</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F-7810-12" data-verified="true">
+<td><code>F-7810-12</code></td>
+<td data-value="1">Leaderboard rules cite a different gate scheme</td>
+<td data-value="1" class="wide">data/leaderboard_rules.json (rule LB-02) says a strategy appears on the ranked leaderboard only after passing G01 to G13. data/s9cb/leaderboard.json defines eight gates, G1 to G8. The two gate schemes are not reconciled.</td>
+<td data-value="1" class="wide">A reader cannot tell which gate set decides eligibility. The rules file and the leaderboard may disagree on who qualifies.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Pick one gate scheme, cite it from both files, and record the change in the rules file.</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
 </tr>
 </tbody></table></div>
 <h2 id="unverified">Registry of blank/unverified values</h2>

@@ -65,6 +65,7 @@
 <a href="pages/parlays.html">Parlays</a>
 <a href="pages/props.html">Props</a>
 <a href="pages/questions.html">Questions</a>
+<a href="pages/readiness.html">Readiness</a>
 <a href="pages/review.html">Review</a>
 <a href="pages/sections.html">Sections</a>
 <a href="pages/standings.html">Standings</a>
@@ -83,14 +84,14 @@
   <div class="main">
     <div class="topbar">
       <div class="crumb">NFL1 / <b>Verification &amp; Sources</b></div>
-      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">52 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">64 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
     </div>
     <main class="content" id="main">
       <div class="kicker">Assurance</div>
       <h1>Verification &amp; official sources</h1>
       <p class="lede">How every value was verified line by line, the complete official source registry with links for manual review, and the per-file data audit.</p>
       <div class="callout"><b>Verification policy.</b> Work line by line; cite an official source on every table row; leave a cell blank when the official source publishes no value; flag it; never infer or fill in a value. This page documents the procedure, the source registry and the line-by-line audit of the data layer.</div>
-<div class="cards"><div class="card"><div class="label">Official sources</div><div class="value">26</div><div class="detail">All fetched 2026-11-12</div></div><div class="card"><div class="label">Data files audited</div><div class="value">36</div><div class="detail">Row counts and blanks</div></div><div class="card"><div class="label">Table rows</div><div class="value">600+</div><div class="detail">Each with a source link</div></div><div class="card"><div class="label">Flagged items</div><div class="value">52</div><div class="detail">Needs review</div></div></div>
+<div class="cards"><div class="card"><div class="label">Official sources</div><div class="value">28</div><div class="detail">All fetched 2026-11-12</div></div><div class="card"><div class="label">Data files audited</div><div class="value">36</div><div class="detail">Row counts and blanks</div></div><div class="card"><div class="label">Table rows</div><div class="value">600+</div><div class="detail">Each with a source link</div></div><div class="card"><div class="label">Flagged items</div><div class="value">64</div><div class="detail">Needs review</div></div></div>
 <h2 id="policy">Verification procedure</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-verify-policy" aria-label="Filter tbl-verify-policy" placeholder="Filter rows…">
 <span class="count" data-count-for="tbl-verify-policy">7 rows shown</span></div>
@@ -148,7 +149,7 @@
 </tbody></table></div>
 <h2 id="sources">Official source registry</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-sources" aria-label="Filter tbl-sources" placeholder="Filter rows…">
-<span class="count" data-count-for="tbl-sources">26 rows shown</span></div>
+<span class="count" data-count-for="tbl-sources">28 rows shown</span></div>
 <div class="tablewrap"><table class="data-table" id="tbl-sources"><caption>Every official source used, what it verifies, its canonical URL note and the retrieval date. Each row links to that official page.</caption>
 <thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Publisher</th><th scope="col" class="sortable">Source type</th><th scope="col" class="sortable">What it verifies</th><th scope="col" class="sortable">Canonical / note</th><th scope="col" class="sortable">Retrieved</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
 <tr id="S01" data-verified="true">
@@ -385,6 +386,24 @@
 <td data-value="1">2026-11-12</td>
 <td><span class="src"><a href="https://www.nfl.com/standings/division/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — official league standings page">S26 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
+<tr id="S27" data-verified="true">
+<td><code>S27</code></td>
+<td data-value="1">Baltimore Ravens (baltimoreravens.com)</td>
+<td data-value="1">Official club depth chart</td>
+<td data-value="1" class="wide">Ravens depth chart, quarterback row: Jacoby Brissett, Joe Fagnano, Kedon Slovis (Lamar Jackson and Tyler Huntley not listed)</td>
+<td data-value="1" class="wide">Read 2026-11-15 in this session; the chart&#x27;s own as-of date was not shown on the text read.</td>
+<td data-value="1">2026-11-15</td>
+<td><span class="src"><a href="https://www.baltimoreravens.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Baltimore Ravens (baltimoreravens.com) — Official club depth chart">S27 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S28" data-verified="true">
+<td><code>S28</code></td>
+<td data-value="1">Houston Texans (houstontexans.com)</td>
+<td data-value="1">Club depth chart (image only, labelled Unofficial)</td>
+<td data-value="1" class="wide">Texans depth chart page: depth chart is an image labelled &#x27;Unofficial Depth Chart&#x27;; no text rows</td>
+<td data-value="1" class="wide">Not transcribed by eye; needs an authorized structured source.</td>
+<td data-value="1">2026-11-15</td>
+<td><span class="src"><a href="https://www.houstontexans.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Houston Texans (houstontexans.com) — Club depth chart (image only, labelled Unofficial)">S28 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
 </tbody></table></div>
 <h2 id="audit">Line-by-line data audit</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-audit" aria-label="Filter tbl-audit" placeholder="Filter rows…">
@@ -556,8 +575,8 @@
 <tr id="AU-19" data-verified="true">
 <td><code>AU-19</code></td>
 <td data-value="1">data/flags.json</td>
-<td data-value="1" class="num">52</td>
-<td data-value="1">52 / 52</td>
+<td data-value="1" class="num">64</td>
+<td data-value="1">64 / 64</td>
 <td data-value="1" class="num">0</td>
 <td data-value="1" class="num">0</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
@@ -655,8 +674,8 @@
 <tr id="AU-30" data-verified="true">
 <td><code>AU-30</code></td>
 <td data-value="1">data/sources.json</td>
-<td data-value="1" class="num">26</td>
-<td data-value="1">0 / 26</td>
+<td data-value="1" class="num">28</td>
+<td data-value="1">0 / 28</td>
 <td data-value="1" class="num">0</td>
 <td data-value="1" class="num">0</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
