@@ -1,0 +1,206 @@
+{
+ "generated_at": "2026-11-15T13:18:09+00:00",
+ "n_snapshots": 1,
+ "current_snapshot": "20261115T131729Z.json",
+ "previous_snapshot": null,
+ "has_previous": false,
+ "note": "A snapshot is written only when the state changes. The backtest sample grows only when a new game completes, so two builds minutes apart usually show zeros \u2014 which is the honest diff, not a missing one.",
+ "availability_change": {
+  "value": null,
+  "reason": "No availability delta is published. The brief asks for a change in the surface (starters out, replacements named), which needs an official inactive list and Game Book starters; both are blocked (readiness IN-04, IN-18). The injury-designation level is captured and is NOT the same thing."
+ },
+ "model_diffs": [
+  {
+   "item": "Model skill, side",
+   "current": -0.04127051216818156,
+   "previous": null,
+   "change": null,
+   "current_n": 6785,
+   "previous_n": null,
+   "unit": "Brier skill",
+   "source": "proper_score"
+  },
+  {
+   "item": "Model skill, total",
+   "current": -0.03460832897542576,
+   "previous": null,
+   "change": null,
+   "current_n": 6878,
+   "previous_n": null,
+   "unit": "Brier skill",
+   "source": "proper_score"
+  },
+  {
+   "item": "Model skill, moneyline",
+   "current": -0.07144443215860252,
+   "previous": null,
+   "change": null,
+   "current_n": 5187,
+   "previous_n": null,
+   "unit": "Brier skill",
+   "source": "proper_score"
+  },
+  {
+   "item": "Strategies live",
+   "current": 0,
+   "previous": null,
+   "change": null,
+   "unit": "count",
+   "source": "demotion"
+  },
+  {
+   "item": "Strategies registered",
+   "current": 31,
+   "previous": null,
+   "change": null,
+   "unit": "count",
+   "source": "preregistration"
+  }
+ ],
+ "strategy_diffs": [
+  {
+   "strategy": "S07 Fade the road favourite of 7+",
+   "rank": 1,
+   "previous_rank": null,
+   "rank_change": null,
+   "skill": 0.0104,
+   "previous_skill": null,
+   "skill_change": null,
+   "settled": 394,
+   "previous_settled": null,
+   "source": "proper_score"
+  },
+  {
+   "strategy": "S09 Under when the total is 40 or lower",
+   "rank": 2,
+   "previous_rank": null,
+   "rank_change": null,
+   "skill": 0.0026,
+   "previous_skill": null,
+   "skill_change": null,
+   "settled": 874,
+   "previous_settled": null,
+   "source": "proper_score"
+  },
+  {
+   "strategy": "S04 Model total edge >= 4.0 pts",
+   "rank": 3,
+   "previous_rank": null,
+   "rank_change": null,
+   "skill": 0.0022,
+   "previous_skill": null,
+   "skill_change": null,
+   "settled": 1276,
+   "previous_settled": null,
+   "source": "proper_score"
+  },
+  {
+   "strategy": "S03 Model total edge >= 2.5 pts",
+   "rank": 4,
+   "previous_rank": null,
+   "rank_change": null,
+   "skill": 0.0014,
+   "previous_skill": null,
+   "skill_change": null,
+   "settled": 2424,
+   "previous_settled": null,
+   "source": "proper_score"
+  },
+  {
+   "strategy": "S05 Rest edge >= 3 days",
+   "rank": 5,
+   "previous_rank": null,
+   "rank_change": null,
+   "skill": 0.0003,
+   "previous_skill": null,
+   "skill_change": null,
+   "settled": 1076,
+   "previous_settled": null,
+   "source": "proper_score"
+  },
+  {
+   "strategy": "S12 Out-count gap of 3 or more",
+   "rank": 6,
+   "previous_rank": null,
+   "rank_change": null,
+   "skill": -0.0002,
+   "previous_skill": null,
+   "skill_change": null,
+   "settled": 663,
+   "previous_settled": null,
+   "source": "proper_score"
+  },
+  {
+   "strategy": "S10 Over when the total is 50 or higher",
+   "rank": 7,
+   "previous_rank": null,
+   "rank_change": null,
+   "skill": -0.0002,
+   "previous_skill": null,
+   "skill_change": null,
+   "settled": 590,
+   "previous_settled": null,
+   "source": "proper_score"
+  },
+  {
+   "strategy": "S01 Model spread edge >= 1.5 pts",
+   "rank": 8,
+   "previous_rank": null,
+   "rank_change": null,
+   "skill": -0.0003,
+   "previous_skill": null,
+   "skill_change": null,
+   "settled": 3455,
+   "previous_settled": null,
+   "source": "proper_score"
+  },
+  {
+   "strategy": "S02 Model spread edge >= 3.0 pts",
+   "rank": 9,
+   "previous_rank": null,
+   "rank_change": null,
+   "skill": -0.0003,
+   "previous_skill": null,
+   "skill_change": null,
+   "settled": 2227,
+   "previous_settled": null,
+   "source": "proper_score"
+  },
+  {
+   "strategy": "S06 Divisional road underdog of 3+",
+   "rank": 10,
+   "previous_rank": null,
+   "rank_change": null,
+   "skill": -0.0004,
+   "previous_skill": null,
+   "skill_change": null,
+   "settled": 517,
+   "previous_settled": null,
+   "source": "proper_score"
+  },
+  {
+   "strategy": "S11 Opponent QB ruled Out/Doubtful",
+   "rank": 11,
+   "previous_rank": null,
+   "rank_change": null,
+   "skill": -0.0006,
+   "previous_skill": null,
+   "skill_change": null,
+   "settled": 372,
+   "previous_settled": null,
+   "source": "proper_score"
+  },
+  {
+   "strategy": "S08 Home team off a bye",
+   "rank": 12,
+   "previous_rank": null,
+   "rank_change": null,
+   "skill": -0.0,
+   "previous_skill": null,
+   "skill_change": null,
+   "settled": 265,
+   "previous_settled": null,
+   "source": "proper_score"
+  }
+ ]
+}

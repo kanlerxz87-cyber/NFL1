@@ -213,11 +213,19 @@ def moneyline_eval(M):
                           "bss_lower_bound": lo, "p_value_bootstrap": p_bs,
                           "games_in_interval": ng,
                           "log_loss": log_loss(sub[col], sub["outcome_home_win"])}
+    overround = float(np.mean(ph + pa))
     out["vig_size"] = {
-        "mean_sum_of_implied_probabilities": float(np.mean(ph + pa)),
-        "reading": ("The sum of the two implied probabilities is the operator's overround. A "
-                    "value above 1.00 is the margin the reader pays; the de-vigged column above "
-                    "removes it before any comparison."),
+        "mean_sum_of_implied_probabilities": round(overround, 6),
+        "implied_overround_pct": round((overround - 1.0) * 100.0, 4),
+        "reading": ("The sum of the two implied probabilities is the overround. It is "
+                    f"{overround:.4f}, i.e. {((overround - 1.0) * 100.0):.2f}% of the stake is the "
+                    "operator's margin, not 100%. The de-vigged column above removes that margin "
+                    "before any comparison with the model."),
+        "single_price_series_caveat": (
+            "This is ONE price series, so it is not a market consensus and no de-vigged consensus "
+            "can be formed from it. The brief asks for a vig-free consensus against the fair line; "
+            "that requires at least two independent books and is therefore not computable here. "
+            "This figure is the de-vig of a single series and is labelled as such."),
     }
     return out, d, int(len(d))
 

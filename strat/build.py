@@ -203,6 +203,7 @@ def page_leaderboard(ps):
             src("schedules", "closing-line source"),
         ])
 
+    vig = ps["markets"][2]["results"]["vig_size"]
     famrows = [[e(x["test"]), sig(x["bss"]), sig(x.get("p_value_bootstrap"), 4),
                 sig(x.get("bh_adjusted_p"), 4), f"{x['bonferroni_alpha']:.5f}",
                 src("schedules", "source extract")]
@@ -235,6 +236,15 @@ def page_leaderboard(ps):
   independent; both columns are published so the reader can see either charge.</p>
   {table(["Test", "Skill", "Bootstrap p", "BH-adjusted p", "Bonferroni alpha", "Source"], famrows,
          note=ps["multiplicity"]["reading"])}
+</section>
+
+<section class="panel">
+  <h2>The operator's margin, measured</h2>
+  <p class="lede">The implied probabilities of the two closing moneylines sum to
+  <strong>{vig['mean_sum_of_implied_probabilities']:.4f}</strong>, so the margin is
+  <strong>{vig['implied_overround_pct']:.2f}%</strong> of the stake and a fair comparison has to
+  remove it — which the de-vigged row above does.</p>
+  <p class="note">{e(vig['single_price_series_caveat'])}</p>
 </section>
 
 <section class="panel">
@@ -665,6 +675,68 @@ def page_reconciliation(rec):
     return body
 
 
+def page_diff(df):
+    def ch(v, fmt="{:+d}", reason="no previous snapshot"):
+        if v is None:
+            return blank(reason)
+        if v == 0:
+            return '<span class="meta">no change</span>'
+        return fmt.format(v)
+
+    def sgn(v, nd=4):
+        if v is None:
+            return blank("no previous snapshot")
+        if abs(v) < 1e-12:
+            return '<span class="meta">no change</span>'
+        return f"{v:+.{nd}f}"
+
+    mrows = [[f"<strong>{e(r['item'])}</strong>", e(r["unit"]),
+              (f"{r['current']:+.4f}" if isinstance(r["current"], float) else str(r["current"]))
+              if r["current"] is not None else blank("not built"),
+              (f"{r['previous']:+.4f}" if isinstance(r["previous"], float) else str(r["previous"]))
+              if r["previous"] is not None else blank("no previous snapshot"),
+              sgn(r["change"], 4) if isinstance(r["change"], float) else ch(r["change"]),
+              src(r["source"], "source")] for r in df["model_diffs"]]
+    srows = [[f"<strong>{e(r['strategy'])}</strong>",
+              str(r["rank"]) if r["rank"] else blank("not scored"),
+              ch(r["rank_change"], "{:+d}", "no previous rank"),
+              f"{r['skill']:+.4f}" if r["skill"] is not None else blank("not scored"),
+              sgn(r["skill_change"]),
+              str(r["settled"]) if r["settled"] is not None else blank("no sample"),
+              ch((r["settled"] - r["previous_settled"]) if r["previous_settled"] is not None
+                 and r["settled"] is not None else None, "{:+d}", "no previous sample"),
+              src(r["source"], "source")] for r in df["strategy_diffs"]]
+    ac = df["availability_change"]
+    body = f"""
+<section class="panel">
+  <h2>Why a diff and not a snapshot</h2>
+  <p class="lede">{e(df['note'])}</p>
+  <p class="sub">Snapshots on disk: <strong>{df['n_snapshots']}</strong> ·
+  current <code>{e(df['current_snapshot'] or 'none')}</code> ·
+  previous <code>{e(df['previous_snapshot'] or 'none')}</code>.
+  {"" if df['has_previous'] else "There is only one snapshot so far, so every change column is blank rather than zero: a change cannot be computed against nothing."}</p>
+</section>
+
+<section class="panel">
+  <h2>Model and competition, week on week</h2>
+  {table(["Item", "Unit", "Now", "Previous build", "Change", "Source"], mrows,
+         note="A change of exactly zero is printed as 'no change' so it cannot be confused with a change that could not be computed.")}
+</section>
+
+<section class="panel">
+  <h2>Every strategy, with its rank change</h2>
+  {table(["Strategy", "Rank now", "Rank change", "Skill now", "Skill change", "Settled bets", "Bets added", "Source"], srows,
+         note="Rank is by Brier skill versus the price. A rank change with no skill change would be a data defect, not a result.")}
+</section>
+
+<section class="panel">
+  <h2>Availability change</h2>
+  <p>{blank("no availability delta is published")} {e(ac['reason'])}</p>
+</section>
+"""
+    return body
+
+
 def page_method(pre, ps, dt):
     srcrows = [[e(k), f'<a class="src" href="{e(u)}" target="_blank" rel="noopener">{e(n)} ↗</a>']
                for k, (u, n) in lib.SOURCES.items()]
@@ -861,6 +933,9 @@ def main() -> int:
         "reconciliation.html": ("Official Reconciliation",
                                 "The official nfl.com rows against the backtest extract, game by game, with the scope limit stated.",
                                 page_reconciliation(lib.load("official_reconciliation.json"))),
+        "diff.html": ("What Changed",
+                      "A week-on-week diff of every rank, score and settled-bet count, with honest blanks where no previous snapshot exists.",
+                      page_diff(lib.load("diff.json"))),
         "method.html": ("Method & Sources",
                         "How every number was produced, how to reproduce it, and the source register.",
                         page_method(pre, ps, dt)),

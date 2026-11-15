@@ -79,6 +79,7 @@ STEPS = [
     ("strategy competition: demotion gate", [sys.executable, "strat/demotion.py"], ROOT),
     ("strategy competition falsifiers", [sys.executable, "strat/what_would_change.py"], ROOT),
     ("strategy competition registers", [sys.executable, "strat/registers.py"], ROOT),
+    ("strategy competition week-on-week diff", [sys.executable, "strat/diff.py"], ROOT),
     ("strategy competition site (strat/)", [sys.executable, "strat/build.py"], ROOT),
 ]
 

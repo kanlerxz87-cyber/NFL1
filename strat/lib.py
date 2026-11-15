@@ -47,6 +47,18 @@ SOURCES = {
                          "nflverse player-week release (third-party)"),
     "terms": ("https://www.nfl.com/legal/terms/", "NFL.com Terms of Use (official)"),
     "repo": ("https://github.com/kanlerxz87-cyber/NFL1", "This repository"),
+    # the competition's own committed artifacts (see lib.artifact for why this is a source)
+    "proper_score": ("https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/proper_score.json",
+                     "committed proper-score artifact"),
+    "preregistration": ("https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/preregistration.json",
+                        "committed registration registry"),
+    "demotion": ("https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/demotion.json",
+                 "committed demotion gate"),
+    "dual_total": ("https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/dual_total.json",
+                   "committed two-totals artifact"),
+    "reconciliation_artifact": (
+        "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/official_reconciliation.json",
+        "committed reconciliation artifact"),
 }
 
 # every published page and the nav label it carries
@@ -58,6 +70,7 @@ NAV = [
     ("what-would-change.html", "What Would Change Our Mind"),
     ("totals.html", "Two Totals"),
     ("reconciliation.html", "Official Reconciliation"),
+    ("diff.html", "What Changed"),
     ("questions.html", "Open Questions"),
     ("suggestions.html", "Suggestions"),
     ("flagged.html", "Flagged for Review"),

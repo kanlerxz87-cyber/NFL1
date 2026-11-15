@@ -183,12 +183,12 @@ ROWS = [
       "Field present on every entry, with an upside and a downside trigger.",
       "Already met and published on strat/what-would-change.html.",
       "data/strat/what_would_change.json", REPO + "data/strat/what_would_change.json"),
-    r("PR-25", P, "Weekly 'what changed' diff: rank, rating and availability change columns", "Not started", ART,
-      "No weekly snapshot diff was found.",
-      "Weekly snapshots are not stored.",
-      "A diff column for every week since the first snapshot.",
-      "Store each weekly snapshot and render the diff.",
-      "pipeline/gen_site.py", REPO + "pipeline/gen_site.py"),
+    r("PR-25", P, "Weekly 'what changed' diff: rank, rating and availability change columns", "Partial", TODAY,
+      "strat/diff.py writes a snapshot only when the competition state changes (data/strat/snapshots/) and renders a week-on-week diff with rank change, skill change and bets added on strat/diff.html. The availability-change column is published as an explicit blank with its blocking reason, because an availability delta needs official inactive lists and Game Book starters (IN-04, IN-18).",
+      "The availability column cannot be computed. The rank and rating columns are built and will move only when a new game completes, which the page states.",
+      "A diff column for rank, rating AND availability.",
+      "Close IN-04/IN-18, then add the availability delta to strat/diff.py.",
+      "data/strat/diff.json", REPO + "data/strat/diff.json"),
 
     # ---- injuries and depth
     r("IN-01", I, "Store every injury-hub read with its clock time; publish the delta, never the level", "Partial", TODAY,

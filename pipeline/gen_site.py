@@ -763,6 +763,7 @@ def overview(snap, dash, lines, strat, avail, props, verif):
   <a href="strat/what-would-change.html">what would change our mind</a> ·
   <a href="strat/totals.html">two totals</a> ·
   <a href="strat/reconciliation.html">official reconciliation</a> ·
+  <a href="strat/diff.html">what changed</a> ·
   <a href="strat/questions.html">open questions</a> ·
   <a href="strat/suggestions.html">suggestions</a> ·
   <a href="strat/flagged.html">flagged</a> ·

@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-15T13:03:39+00:00",
+ "generated_at": "2026-11-15T13:17:29+00:00",
  "method": {
   "score": "Brier score; skill = 1 - Brier(model)/Brier(benchmark)",
   "interval": "game-cluster bootstrap, 2000 resamples, seed 20261115, 95%",
@@ -156,8 +156,10 @@
      "log_loss": 0.6098805985733238
     },
     "vig_size": {
-     "mean_sum_of_implied_probabilities": 1.0276387906906232,
-     "reading": "The sum of the two implied probabilities is the operator's overround. A value above 1.00 is the margin the reader pays; the de-vigged column above removes it before any comparison."
+     "mean_sum_of_implied_probabilities": 1.027639,
+     "implied_overround_pct": 2.7639,
+     "reading": "The sum of the two implied probabilities is the overround. It is 1.0276, i.e. 2.76% of the stake is the operator's margin, not 100%. The de-vigged column above removes that margin before any comparison with the model.",
+     "single_price_series_caveat": "This is ONE price series, so it is not a market consensus and no de-vigged consensus can be formed from it. The brief asks for a vig-free consensus against the fair line; that requires at least two independent books and is therefore not computable here. This figure is the de-vig of a single series and is labelled as such."
     }
    },
    "evaluated": "P(home win)",
@@ -479,7 +481,7 @@
   "strategy_family": {
    "n_tests": 12,
    "bonferroni_alpha": 0.004166666666666667,
-   "reading": "The thirteen scored betting rules are a second family. Each rule's own p_value from the price test is charged against 13 tests; the adjusted values are on the leaderboard page."
+   "reading": "The twelve scored betting rules are a second family. Each rule's own p_value from the price test is charged against 12 tests; the adjusted values are on the leaderboard page."
   },
   "reading": "With six tests at the 5% level, roughly one would look positive by chance. The Bonferroni threshold is 0.05/6; the BH column charges the same family less harshly because the tests are not independent. A test that fails both is a test whose sign is not established."
  },
