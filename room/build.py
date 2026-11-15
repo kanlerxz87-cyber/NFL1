@@ -33,6 +33,7 @@ NAV = [
     ("questions.html", "Open questions"),
     ("strategy.html", "Strategy & luck"),
     ("injuries.html", "Injuries & depth"),
+    ("readiness.html", "Readiness"),
     ("data.html", "Verified data"),
     ("flagged.html", "Flagged for review"),
     ("requirements.html", "Requirements"),
@@ -276,6 +277,7 @@ early would mean guessing, which is the one thing this repository does not do.</
         ("questions.html", "Open questions", "What must be answered before a decision, what we already know, and how to discover the rest", f'{len(load("questions.json"))} questions'),
         ("strategy.html", "Strategy & luck", "Own lines, the 12 tested rules, eight gates, and what survives correction", f'{len(load("leaderboard.json")["rows"])} rules'),
         ("injuries.html", "Injuries & depth", "Official designations, next man up, and which clubs publish a chart", "9 designations"),
+        ("readiness.html", "Readiness", "One row per requirement: status, the gate that blocks it, and the number that clears it", f'{len(load("readiness_26b2c41e.json")["rows"])} requirement rows'),
         ("data.html", "Verified data", "Today's official capture with an arithmetic reconciliation", "32 clubs · 27 fixtures"),
         ("flagged.html", "Flagged for review", "Every irregularity and every unverified value, with the source that would settle it", f'{len(load("findings.json")["findings"])} findings'),
         ("about.html", "About", "Method, sources, what is deliberately blank, and how to reproduce everything", "method"),
@@ -947,6 +949,75 @@ not data-entry tasks, and they are recorded as blocked in the decision register.
 
 
 
+# ----------------------------------------------------------------- readiness
+READINESS_STATUS = {"met": ("met", "ok"), "partial": ("partial", "warn"),
+                    "blocked": ("blocked", "bad"), "unknown": ("not established", "mute")}
+LION_RESULT = {"differs": ("differs", "bad"), "missing": ("blank", "warn"),
+               "matches official": ("matches", "ok")}
+
+
+def _rstat(status: str) -> str:
+    label, kind = READINESS_STATUS.get(status, (status, "mute"))
+    return badge(label, kind)
+
+
+def page_readiness() -> str:
+    rd = load("readiness_26b2c41e.json")
+    rows = rd["rows"]
+    counts = {k: sum(1 for r in rows if r["status"] == k) for k in READINESS_STATUS}
+    table_rows = []
+    for r in rows:
+        table_rows.append([
+            e(r["id"]), e(r["area"]), e(r["requirement"]), _rstat(r["status"]),
+            e(r["now"]), e(r["gate"]), e(r["clears"]), src_links(r["src"]),
+        ])
+    t1 = table(["ID", "Area", "Requirement (from the brief)", "Status", "What the repository holds",
+               "Gate that blocks it", "Number that clears it", "Source"],
+              table_rows, caption=f"{len(rows)} requirement rows — one per item, each with its gate and clearing number",
+              src_col=7)
+
+    lc = load("lions_w10_conflicts.json")
+    m = lc["meta"]
+    lrows = []
+    for h in lc["rows"]:
+        res = LION_RESULT.get(h["result"], (h["result"], "mute"))
+        shown = f'{h["practice_shown"]} / {h["game_shown"]}'
+        lrows.append([
+            e(h["page"]), e(h["player"]), e(shown), e(f'DNP / Out'),
+            badge(res[0], res[1]), e(h["detail"] or "—"),
+            f'<a href="{e(h["page_url"])}" rel="noopener">page</a> · <a href="{e(h["official_url"])}" rel="noopener">official</a>',
+        ])
+    t2 = table(["Published page", "Player (DET)", "Shown: practice / game", "Official (read 2026-11-15)",
+                "Result", "What differs", "Source"],
+               lrows, caption=f'Week-10 Lions rows on every published page: {m["rows_checked"]} rows, '
+                              f'{m["differs"]} differ, {m["missing"]} blank, {m["matches"]} match',
+               src_col=6)
+
+    body = f"""
+<div class="callout"><strong>How to read this page.</strong> Each row is one requirement from the brief.
+Status says what the repository holds today, and nothing is marked met unless it was checked. The gate
+names what blocks the next step, and the number is the figure that would clear it. Every row links to its source.</div>
+<div class="kpis">
+  <article class="kpi"><span class="label">Met</span><span class="value">{counts["met"]}</span><span class="note">checked this session</span></article>
+  <article class="kpi"><span class="label">Partial</span><span class="value">{counts["partial"]}</span><span class="note">something exists; a named gap remains</span></article>
+  <article class="kpi"><span class="label">Blocked</span><span class="value">{counts["blocked"]}</span><span class="note">cannot move until a gate clears</span></article>
+  <article class="kpi"><span class="label">Not established</span><span class="value">{counts["unknown"]}</span><span class="note">not checked this session; no status claimed</span></article>
+</div>
+<h2>Decision readiness, one row per requirement</h2>
+{t1}
+<h2>Week-10 Lions rows, checked on every published page</h2>
+<p>The official Week-10 report lists three Detroit rows as Out. The audit below reads every
+published page in the repository and compares the practice and game cells with the official values.
+A blank cell means the page does not show the value; a differing cell means it shows another value.
+The pages carry no capture time, so a differing value cannot be classed as stale or wrong without one.</p>
+{t2}
+<p class="note">Reproduce: <code class="mono">python3 room/audit_lions_w10.py</code>. Findings
+F-201 to F-205 on the <a href="flagged.html">Flagged for review</a> page carry the detail for each item.</p>"""
+    return page("readiness.html", "Readiness", "Decision readiness",
+                "What is needed before any decision can be made on the data we have: each requirement, what "
+                "the repository holds, the gate that blocks it, and the number that would clear it.", body)
+
+
 def main() -> int:
     pages = {
         "index.html": page_index(),
@@ -956,6 +1027,7 @@ def main() -> int:
         "questions.html": page_questions(),
         "strategy.html": page_strategy(),
         "injuries.html": page_injuries(),
+        "readiness.html": page_readiness(),
         "data.html": page_data(),
         "flagged.html": page_flagged(),
         "requirements.html": page_requirements(),
