@@ -8,6 +8,7 @@ explicit blank with an "unverified" badge rather than a number.
 from __future__ import annotations
 
 import html
+from collections import Counter
 import json
 import os
 from datetime import datetime, timezone
@@ -481,6 +482,50 @@ def write(path: str, content: str) -> None:
 
 
 # ---------------------------------------------------------------- overview
+# ------------------------------------------------ decision readiness (session 543676f8)
+READINESS_CLASS = {"done": "pass", "partial": "warn", "blocked": "fail",
+                   "not started": "neutral", "not assessed": "neutral"}
+
+
+def readiness_panel() -> str:
+    """One row per requirement: status, the gate that blocks it, the number that clears it, a source.
+
+    Data: data/capture/readiness.json (hand-maintained; every status is backed by the evidence
+    named in its row). Shown on the landing page so a reader sees what can be decided today.
+    """
+    rd = load_rel("data/capture/readiness.json", {})
+    rows = rd.get("rows", [])
+    if not rows:
+        return ""
+    counts = Counter(r.get("status", "") for r in rows)
+    summary = " &middot; ".join(f"<strong>{counts.get(k, 0)}</strong> {k}"
+                                for k in ["done", "partial", "blocked", "not started", "not assessed"])
+    body = []
+    for r in rows:
+        cls = READINESS_CLASS.get(r.get("status", ""), "neutral")
+        label = "official page" if r.get("source_kind") == "official" else "internal"
+        body.append([esc(r["id"]), esc(r["group"]), esc(r["requirement"]),
+                     f'<span class="badge {cls}">{esc(r["status"])}</span>',
+                     esc(r["blocked_by"]), esc(r["clears_when"]),
+                     src(r["source_url"], label)
+                     + f'<br><span class="sub">evidence: {esc(r.get("evidence", "none"))}</span>'])
+    tbl = table(["ID", "Group", "Requirement (from the brief)", "Status", "Blocked by (gate)",
+                 "Number that clears it (today)", "Source"], body, cls="readiness",
+                note=("Status words: done = built and checked here; partial = part exists; blocked = a named gate "
+                      "or missing source stops it; not started = nothing in the repository; not assessed = not "
+                      "checked this session, so no status is claimed. Legend and evidence per row: "
+                      "data/capture/readiness.json."))
+    return f"""
+<section class="panel" id="readiness">
+  <div class="panel-head">
+    <h2>Decision readiness: one row per requirement</h2>
+    <a href="capture/index.html">Official Week 10 injury capture &rarr;</a></div>
+  <p class="note">{summary} across {len(rows)} requirements. A requirement is not ready for a decision
+  until its row says done and its number is met.</p>
+  {tbl}
+</section>"""
+
+
 def overview(snap, dash, lines, strat, avail, props, verif):
     gen = dash.get("generated_at") or snap.get("generated_at")
     ladder = load_rel("data/depth_ladder.json")
@@ -652,6 +697,8 @@ def overview(snap, dash, lines, strat, avail, props, verif):
 </section>
 
 <section class="kpis">{kpis}</section>
+
+{readiness_panel()}
 
 <section class="panel">
   <div class="panel-head">
@@ -1543,6 +1590,11 @@ def review_page(verif, strat, dash, avail=None):
          "is still starter-only.",
          src("https://www.nfl.com/teams/", "club charts"), badge("partially resolved")],
     ])
+
+    # session 543676f8-nfl1: flags raised by the official Week 10 capture (data/capture/comparison.json)
+    for cf in load_rel("data/capture/comparison.json", {}).get("flags", []):
+        flags.append([esc(cf["id"]), esc(cf["area"]), esc(cf["issue"]),
+                      src(cf["source"], "official page"), badge("needs review")])
 
     tbl = table(["ID", "Area", "What is flagged", "Source", "State"], flags,
                 note=("Unverified and blocked items do not stop publication; they stop the claim. "
