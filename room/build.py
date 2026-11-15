@@ -277,7 +277,7 @@ early would mean guessing, which is the one thing this repository does not do.</
         ("questions.html", "Open questions", "What must be answered before a decision, what we already know, and how to discover the rest", f'{len(load("questions.json"))} questions'),
         ("strategy.html", "Strategy & luck", "Own lines, the 12 tested rules, eight gates, and what survives correction", f'{len(load("leaderboard.json")["rows"])} rules'),
         ("injuries.html", "Injuries & depth", "Official designations, next man up, and which clubs publish a chart", "9 designations"),
-        ("readiness.html", "Readiness", "One row per requirement: status, the gate that blocks it, and the number that clears it", f'{len(load("readiness.json")["rows"])} requirement rows'),
+        ("readiness.html", "Readiness", "One row per requirement: status, the gate that blocks it, and the number that clears it", f'{len(load("readiness_26b2c41e.json")["rows"])} requirement rows'),
         ("data.html", "Verified data", "Today's official capture with an arithmetic reconciliation", "32 clubs · 27 fixtures"),
         ("flagged.html", "Flagged for review", "Every irregularity and every unverified value, with the source that would settle it", f'{len(load("findings.json")["findings"])} findings'),
         ("about.html", "About", "Method, sources, what is deliberately blank, and how to reproduce everything", "method"),
@@ -962,7 +962,7 @@ def _rstat(status: str) -> str:
 
 
 def page_readiness() -> str:
-    rd = load("readiness.json")
+    rd = load("readiness_26b2c41e.json")
     rows = rd["rows"]
     counts = {k: sum(1 for r in rows if r["status"] == k) for k in READINESS_STATUS}
     table_rows = []

@@ -1,0 +1,445 @@
+{
+ "meta": {
+  "built_utc": "2026-11-15T12:00Z",
+  "session": "26b2c41e-nfl1",
+  "official_read": "2026-11-15",
+  "legend": {
+   "met": "delivered in the repository and checked this session",
+   "partial": "some of it exists; the named gap is still open",
+   "blocked": "cannot move until the named gate is cleared; the number that clears it is given",
+   "unknown": "not established: not checked this session, so no status is claimed"
+  },
+  "rule": "A row states what the repository holds, the number a reviewer can check, and the gate that blocks it. Nothing is marked met unless it was checked in this session."
+ },
+ "rows": [
+  {
+   "id": "RD-01",
+   "area": "Lines and prices",
+   "requirement": "Price-snapshot store: opening and closing numbers for every originated market",
+   "status": "blocked",
+   "now": "Closing spread, total and moneyline are in data/s9cb/games.csv (7,239 game rows). The file has no opening-line column, and the only scheduled capture is one daily job at 11:17 UTC.",
+   "gate": "No opening-price capture exists; the price-data policy is not recorded.",
+   "clears": "One opening and one closing price per originated market, each with a capture time (0 of the originated markets have an opening price today).",
+   "src": [
+    {
+     "t": "games.csv",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/games.csv",
+     "note": "7,239 rows, no opening column"
+    },
+    {
+     "t": "collect-data.yml",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/.github/workflows/collect-data.yml",
+     "note": "single cron, 17 11 * * *"
+    }
+   ]
+  },
+  {
+   "id": "RD-02",
+   "area": "Results and ROI",
+   "requirement": "Verified results feed so backtests and ROI can be computed",
+   "status": "partial",
+   "now": "Results for 7,239 games are in data/s9cb/games.csv. The 2026 results were checked against nfl.com standings: 32 of 32 clubs match on W-L-T, points for and points against (room finding F-101).",
+   "gate": "The results file is a third-party parse of the league feed, not a per-game official record; the price-data policy is undecided.",
+   "clears": "Every scored game linked to its official game-centre page: 0 of 7,239 linked today.",
+   "src": [
+    {
+     "t": "Official standings 2026 REG",
+     "u": "https://www.nfl.com/standings/division/2026/REG",
+     "note": "32 club rows"
+    },
+    {
+     "t": "games.csv",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/games.csv",
+     "note": "7,239 rows"
+    }
+   ]
+  },
+  {
+   "id": "RD-03",
+   "area": "Leaderboard",
+   "requirement": "Rank by proper score (Brier skill with a game-cluster lower bound), not by ROI",
+   "status": "blocked",
+   "now": "data/s9cb/leaderboard.json holds 12 rules ranked by ROI. Its verdict says 'Ranked by ROI only for transparency'. The file contains no Brier score (0 mentions). Rule S07, the top ROI row, shows +6.06% with a 95% interval of -3.1% to +15.3%.",
+   "gate": "The brief rejects ranking by season ROI; no proper-score model is implemented.",
+   "clears": "A Brier skill score for every rule, with a game-cluster 95% lower bound and a count of trials. Today: 0 of 12 rules.",
+   "src": [
+    {
+     "t": "leaderboard.json",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json",
+     "note": "ROI ranking, 12 rules"
+    },
+    {
+     "t": "Leaderboard page (room)",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/leaderboard.json",
+     "note": "verdict text"
+    }
+   ]
+  },
+  {
+   "id": "RD-04",
+   "area": "Leaderboard",
+   "requirement": "Pre-register every strategy; backtest numbers never appear on the leaderboard",
+   "status": "blocked",
+   "now": "data/leaderboard_rules.json describes pre-registration in text. No commit in the git history carries a pre-registration; the only registration evidence is a sentence.",
+   "gate": "Rule text, sample window and gates are not committed before the evaluation window opens.",
+   "clears": "One registration commit per strategy that precedes its first scored game: 0 of 12 today.",
+   "src": [
+    {
+     "t": "leaderboard_rules.json",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/leaderboard_rules.json",
+     "note": "text only"
+    }
+   ]
+  },
+  {
+   "id": "RD-05",
+   "area": "Depth",
+   "requirement": "Depth from playing time, not jersey order; injury as a surprise, not a level",
+   "status": "blocked",
+   "now": "No snap-count field exists in data/s9cb/player_week.csv (24,944 rows). The depth ladder is taken from club chart rank.",
+   "gate": "No official snap-count source is captured for any club.",
+   "clears": "Snap shares for 32 of 32 clubs from an official source, checked against the depth chart: 0 of 32 today.",
+   "src": [
+    {
+     "t": "player_week.csv",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/player_week.csv",
+     "note": "no snap columns"
+    },
+    {
+     "t": "NFL.com injury report",
+     "u": "https://www.nfl.com/injuries/",
+     "note": "designations only, no snaps"
+    }
+   ]
+  },
+  {
+   "id": "RD-06",
+   "area": "Depth",
+   "requirement": "32-club depth sweep before any team-level model is trusted",
+   "status": "partial",
+   "now": "31 of 32 club charts parsed into position rows (room/data/depth_coverage.json, 934 position rows). Houston publishes its chart as an image and is not transcribed.",
+   "gate": "Houston (HOU) is missing: the chart is an image and no authorised structured source is recorded.",
+   "clears": "32 of 32 clubs parsed from text or an authorised structured source (31 today).",
+   "src": [
+    {
+     "t": "Depth coverage register",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/depth_coverage.json",
+     "note": "31 captured, 1 graphic"
+    },
+    {
+     "t": "Houston Texans depth chart",
+     "u": "https://www.houstontexans.com/team/depth-chart",
+     "note": "published as an image"
+    }
+   ]
+  },
+  {
+   "id": "RD-07",
+   "area": "Depth",
+   "requirement": "Official depth-chart register with a date and a source on every row",
+   "status": "blocked",
+   "now": "Only 1 of 32 clubs in room/data/depth_coverage.json has an 'as of' date; the other 31 have a blank date. Two club charts are labelled 'Unofficial' (KC, GB) and one 'Depth Chart' (SF) in data/depth_chart_meta.json.",
+   "gate": "The clubs do not print a date on most charts, and no capture date is recorded in its place.",
+   "clears": "32 of 32 clubs with a dated capture (1 today).",
+   "src": [
+    {
+     "t": "depth_coverage.json",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/depth_coverage.json",
+     "note": "1 of 32 dated"
+    },
+    {
+     "t": "depth_chart_meta.json",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/depth_chart_meta.json",
+     "note": "'Unofficial' labels"
+    }
+   ]
+  },
+  {
+   "id": "RD-08",
+   "area": "Injuries",
+   "requirement": "Injury-hub reads stored with clock time; publish the delta, never the level",
+   "status": "blocked",
+   "now": "data/official holds one dated capture (2026-11-13). The official page is re-read once per day. data/model/official_injuries.json stores the html_sha256 of the page it read.",
+   "gate": "There is no series of reads across the week, so no change can be measured.",
+   "clears": "One capture per day from Wednesday to kickoff for Weeks 10 and 11: 10 dated captures (1 today).",
+   "src": [
+    {
+     "t": "NFL.com injury report",
+     "u": "https://www.nfl.com/injuries/",
+     "note": "Week 10, read 2026-11-15"
+    },
+    {
+     "t": "official_injuries.json",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/official_injuries.json",
+     "note": "html_sha256 recorded"
+    }
+   ]
+  },
+  {
+   "id": "RD-09",
+   "area": "Injuries",
+   "requirement": "Week-10 injury tables correct: row counts, section counts, Lions game status",
+   "status": "blocked",
+   "now": "Three Lions rows (Kerby Joseph, Cade Mays, D.J. Reed) read 'Out' on the official page today. Across 11 published pages, 8 rows show a different value, 18 rows leave the official value blank, and 6 rows match (room/data/lions_w10_conflicts.json). The official scrape has 345 rows in 28 tables (data/model/official_injuries.json). data/strength/flags.json records a scrape of the same week with 296 rows, and the brief cites 279 rows in 26 sections.",
+   "gate": "Published pages were written from different snapshots with no capture time, and the row counts disagree between scrapes.",
+   "clears": "0 rows that differ from the official page (8 today) and one agreed row count across scrapes.",
+   "src": [
+    {
+     "t": "NFL.com injury report, Week 10",
+     "u": "https://www.nfl.com/injuries/",
+     "note": "Lions block read 2026-11-15"
+    },
+    {
+     "t": "Cross-page audit (generated)",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/lions_w10_conflicts.json",
+     "note": "32 rows, 11 pages"
+    }
+   ]
+  },
+  {
+   "id": "RD-10",
+   "area": "Injuries",
+   "requirement": "Calibrate what 'Questionable' means empirically",
+   "status": "partial",
+   "now": "data/s9cb/injuries.csv holds 56,557 player-week rows for 2016–2026 with report and practice status. Official inactive lists are not joined to them.",
+   "gate": "The play rate per designation has not been computed, and no inactive-list source is captured.",
+   "clears": "Play rate for each designation with a 95% interval, computed over all 2016–2026 rows that have an official inactive-list match: 0 matched today.",
+   "src": [
+    {
+     "t": "injuries.csv",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/injuries.csv",
+     "note": "56,557 rows"
+    }
+   ]
+  },
+  {
+   "id": "RD-11",
+   "area": "Inactives",
+   "requirement": "Official inactive lists and snap counts to confirm a replacement, not infer it",
+   "status": "blocked",
+   "now": "data/inactives.json holds 20 entries, mostly emergency third QBs, from Week 9. It is not the full official inactive list for each game.",
+   "gate": "No full official inactive list or snap-count source is captured.",
+   "clears": "Official inactive lists for every game in Weeks 1–10 (0 games covered today).",
+   "src": [
+    {
+     "t": "inactives.json",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/inactives.json",
+     "note": "20 entries"
+    },
+    {
+     "t": "NFL.com schedule, Week 10",
+     "u": "https://www.nfl.com/schedules/2026/by-week/week-10",
+     "note": "official game list"
+    }
+   ]
+  },
+  {
+   "id": "RD-12",
+   "area": "Roster",
+   "requirement": "Roster turnover as a first-class event; depth versioned against the last official roster event",
+   "status": "blocked",
+   "now": "No roster-event register exists in the repository. The Week-10 Colts receiver trades cited in the brief are not recorded as events.",
+   "gate": "No transaction log is captured.",
+   "clears": "A dated transaction row for every roster move in the season (0 today).",
+   "src": [
+    {
+     "t": "NFL.com transactions",
+     "u": "https://www.nfl.com/transactions/",
+     "note": "official transaction log (not yet captured)"
+    }
+   ]
+  },
+  {
+   "id": "RD-13",
+   "area": "Lines and prices",
+   "requirement": "Originate the side, then the total, then the moneyline; fair line, market line and difference as separate columns",
+   "status": "unknown",
+   "now": "The model prints spread, total and win probability in data/s9cb/lines.json. The column order and the separate difference column were not checked this session.",
+   "gate": "Not checked this session.",
+   "clears": "A column-by-column check of the published lines page.",
+   "src": [
+    {
+     "t": "lines.json",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/lines.json",
+     "note": "spread, total, win probability"
+    }
+   ]
+  },
+  {
+   "id": "RD-14",
+   "area": "Strategy",
+   "requirement": "Demotion gate that sends a live strategy back to paper",
+   "status": "unknown",
+   "now": "Not checked this session. No live strategy is recorded in the repository.",
+   "gate": "No live strategy has been promoted, so the gate has nothing to act on.",
+   "clears": "One strategy promoted through all eight gates (0 of 12 today).",
+   "src": [
+    {
+     "t": "validation.json",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/validation.json",
+     "note": "eight gates"
+    }
+   ]
+  },
+  {
+   "id": "RD-15",
+   "area": "Strategy",
+   "requirement": "Shadow baseline: freeze versions and record forecasts before kickoff",
+   "status": "blocked",
+   "now": "No forecast log with a pre-kickoff timestamp exists in the repository.",
+   "gate": "Forecasts are not recorded before kickoff.",
+   "clears": "Forecasts stored before each kickoff for at least one full week (0 today).",
+   "src": [
+    {
+     "t": "NFL.com schedule, Week 11",
+     "u": "https://www.nfl.com/schedules/2026/by-week/week-11",
+     "note": "kickoff times"
+    }
+   ]
+  },
+  {
+   "id": "RD-16",
+   "area": "Strategy",
+   "requirement": "Parlays and prop combos behind a joint-evidence gate",
+   "status": "unknown",
+   "now": "data/s9cb/parlays.json and data/s9cb/props.json exist. Their joint-probability inputs were not checked this session.",
+   "gate": "Not checked this session.",
+   "clears": "A directly validated joint probability and the operator's void and push rules for every combo ranked.",
+   "src": [
+    {
+     "t": "parlays.json",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/parlays.json",
+     "note": "not checked"
+    }
+   ]
+  },
+  {
+   "id": "RD-17",
+   "area": "Correlation",
+   "requirement": "Correlations only from officially sourced numbers, with n published",
+   "status": "partial",
+   "now": "data/correlations.json publishes correlation values with n. Earlier sessions recorded n = 136 for the cross-check, from the 136-game log. Whether every input is an official number was not checked this session.",
+   "gate": "Inputs are not traced to official sources row by row.",
+   "clears": "Every correlation input traced to an official source (0 of the inputs traced today).",
+   "src": [
+    {
+     "t": "correlations.json",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/correlations.json",
+     "note": "values with n"
+    }
+   ]
+  },
+  {
+   "id": "RD-18",
+   "area": "Context",
+   "requirement": "Stadium roof and surface, and NWS hourly wind and precipitation overlay",
+   "status": "partial",
+   "now": "games.csv holds roof, surface, temperature and wind columns from the nflverse parse. No NWS forecast is captured.",
+   "gate": "The forecast is not captured, and the roof field is not confirmed against the official game centre.",
+   "clears": "NWS hourly forecast for every game in the window (0 captured today).",
+   "src": [
+    {
+     "t": "games.csv",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/games.csv",
+     "note": "roof, surface, wind columns"
+    }
+   ]
+  },
+  {
+   "id": "RD-19",
+   "area": "Fixtures",
+   "requirement": "Transcribe the venue of every fixture from the official game centre, and publish the league's dated schedule announcement beside the live schedule",
+   "status": "unknown",
+   "now": "Not checked this session. The Week-10 schedule is on nfl.com.",
+   "gate": "Not checked this session.",
+   "clears": "Venue for every fixture from the game centre, checked against the schedule page.",
+   "src": [
+    {
+     "t": "NFL.com schedule, Week 10",
+     "u": "https://www.nfl.com/schedules/2026/by-week/week-10",
+     "note": "official schedule"
+    }
+   ]
+  },
+  {
+   "id": "RD-20",
+   "area": "Data policy",
+   "requirement": "Split the site into a public analysis layer and a private data layer until the terms are read",
+   "status": "blocked",
+   "now": "Row-level raw files are committed to the public repository, including 56,557 injury rows (data/s9cb/injuries.csv) and 7,239 game rows.",
+   "gate": "The source terms have not been read, and no private store exists.",
+   "clears": "Raw row-level files moved out of the public repository, or a documented licence check for each (0 of the raw files checked today).",
+   "src": [
+    {
+     "t": "injuries.csv",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/injuries.csv",
+     "note": "public raw rows"
+    }
+   ]
+  },
+  {
+   "id": "RD-21",
+   "area": "Scraper health",
+   "requirement": "Drift alarm on every scraper: pin row counts and required fields, fail loudly",
+   "status": "partial",
+   "now": "tests/test_injury_scrape.py exists. The 345-row scrape reports status ok, and a 296-row scrape of the same week is recorded in data/strength, so the disagreement between scrapes raised no alarm.",
+   "gate": "The row-count pin does not cover the disagreement between scrapes.",
+   "clears": "A pinned count that fails the build when two scrapes of the same week disagree (0 pins today).",
+   "src": [
+    {
+     "t": "test_injury_scrape.py",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/tests/test_injury_scrape.py",
+     "note": "unit test"
+    }
+   ]
+  },
+  {
+   "id": "RD-22",
+   "area": "Change tracking",
+   "requirement": "Weekly 'what changed' diff instead of a static snapshot",
+   "status": "blocked",
+   "now": "Only one dated official capture exists, so there is no earlier week to diff against.",
+   "gate": "Needs at least two dated weekly captures.",
+   "clears": "Two complete weekly captures (1 today).",
+   "src": [
+    {
+     "t": "data/official/2026-11-13",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/tree/main/data/official/2026-11-13",
+     "note": "one dated capture"
+    }
+   ]
+  },
+  {
+   "id": "RD-23",
+   "area": "Governance",
+   "requirement": "Decision-readiness table on the landing page: one row per requirement, the gate that blocks it, the number that clears it",
+   "status": "met",
+   "now": "This page carries one row per readiness item with its gate and the number that clears it, and the Overview links to it.",
+   "gate": "None.",
+   "clears": "Built and checked by room/verify.py.",
+   "src": [
+    {
+     "t": "Readiness table (this page)",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/build.py",
+     "note": "generator"
+    }
+   ]
+  },
+  {
+   "id": "RD-24",
+   "area": "Governance",
+   "requirement": "Executive summary; suggestions and a review-and-choose-a-path section; questions and answers before any decision",
+   "status": "met",
+   "now": "Executive summary, Suggestions, Open questions and Decide pages exist in the room. Their contents were not re-verified this session.",
+   "gate": "None for existence. Content was not re-verified this session.",
+   "clears": "Existing pages.",
+   "src": [
+    {
+     "t": "Executive summary",
+     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/executive.html",
+     "note": "page"
+    }
+   ]
+  }
+ ]
+}
