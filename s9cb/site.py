@@ -36,7 +36,9 @@ PAGES = [
     ("lines.html", "My Lines", "Lines",
      "Our own spread, total and win probability, scored against the market closing line."),
     ("leaderboard.html", "Strategy Lab", "Strategy",
-     "Twelve rules, eight validation gates, real prices, and the luck accounting."),
+     "Twelve rules and eight validation gates. The ranked board: prospective bets only."),
+    ("backtest.html", "Backtest (not ranked)", "Strategy",
+     "Historical scoring of the twelve rules at real prices. Not a leaderboard result."),
     ("parlays.html", "Parlays", "Strategy",
      "Every two-leg combination, priced at the product of its legs, with dependence measured."),
     ("correlations.html", "Correlations", "Strategy",
@@ -383,8 +385,47 @@ source publishes one. A negative model spread means the away team is projected t
 
 
 def page_leaderboard(LB):
+    """The ranked board. Backtest figures are never shown here (brief rule, flag F-7810-09).
+
+    A strategy can only be ranked on prospective, pre-registered bets. The repository holds
+    no prospective bet log, so the ranked board is empty by construction. The historical
+    scoring that the gates were computed from is on the Backtest page (page_backtest).
+    """
     gates = {g["id"]: g for g in LB["gate_definitions"]}
+    n_pass = sum(1 for r in LB["leaderboard"] if r["status"] == "PASS")
     body = kpi([
+        ("Ranked strategies", str(n_pass), "strategies that may be ranked: prospective bets only"),
+        ("Strategies tested", str(LB["n_strategies"]), "rules in this study; no pre-registration commit is recorded for them"),
+        ("Prospective bets logged", "0", "no prospective, pre-registered bet log exists in the repository"),
+    ])
+    body += table(["Gate", "Requirement", "Why it exists"],
+                  [[g["id"], esc(g["name"]), esc(g["why"])] for g in LB["gate_definitions"]])
+    body += "<h2>Ranked board</h2>"
+    body += note("Backtest figures are excluded from this board by rule: no return, hit rate, p-value "
+                 "or confidence interval appears here. Only gate outcomes are shown. A strategy is "
+                 "ranked only after it passes all eight gates on prospective bets, and "
+                 f"{n_pass} of {len(LB['leaderboard'])} currently do. The historical figures are on the "
+                 "Backtest page, marked as not leaderboard results.")
+    rows = [[esc(r["strategy"]), f"{r['n_gates_passed']} of 8",
+             f'<span class="pill {r["status"].lower()}">{r["status"]}</span>']
+            for r in LB["leaderboard"]]
+    body += table(["Strategy", "Gates passed (of 8)", "Verdict"], rows)
+    body += "<h2>Gate matrix</h2>"
+    gm = [[esc(r["strategy"])] + [
+        f'<span class="g {"y" if r["gates"][g] else "n"}">{"PASS" if r["gates"][g] else "fail"}</span>'
+        for g in gates] + [f'<span class="pill {r["status"].lower()}">{r["status"]}</span>']
+          for r in LB["leaderboard"]]
+    body += table(["Strategy"] + [g for g in gates] + ["Verdict"], gm)
+    return body
+
+
+def page_backtest(LB):
+    """Historical scoring of the twelve rules. NOT a leaderboard. Kept for transparency."""
+    gates = {g["id"]: g for g in LB["gate_definitions"]}
+    body = note("BACKTEST, NOT A LEADERBOARD RESULT. These figures score twelve rules on past games "
+                "with the price taken on each bet. They are historical and are not prospective "
+                "evidence of skill. Nothing on this page ranks a strategy.")
+    body += kpi([
         ("Strategies tested", str(LB["n_strategies"]), "declared before any of them was scored"),
         ("Bets scored", f"{LB['totals']['bets_scored']:,}", "every one at a price from the source"),
         ("Games covered", f"{LB['totals']['games_in_sample']:,}", "distinct games in the bet log"),
@@ -944,8 +985,11 @@ def main() -> None:
     page_exec(CT, L, LB, PL, PR, VE)
     page_lines(L)
     write("leaderboard.html", "Strategy lab",
-          "Twelve rules scored at observed prices against eight validation gates, with the luck "
-          "accounting beside every return.", "Strategy", page_leaderboard(LB))
+          "Twelve rules against eight validation gates. The ranked board holds prospective bets only.",
+          "Strategy", page_leaderboard(LB))
+    write("backtest.html", "Backtest (not ranked)",
+          "Historical scoring at observed prices, with the luck accounting beside every return. "
+          "Not a leaderboard result.", "Strategy", page_backtest(LB))
     page_parlays(PL)
     page_correlations(CO, PR)
     page_props(PR)
