@@ -3157,6 +3157,51 @@ main reproducibility gate red after refreshes.
 
 | ID | Task | Status | Owner | File scope | Notes |
 |---|---|---|---|---|---|
-| A1 | Reconcile the daily data-refresh workflow with the canonical site build; add a regression check that prevents workflow/render drift | in progress | `4227cfea` | `.github/workflows/collect-data.yml`, additive workflow regression test(s), this section of `COORDINATION.md` | Investigate and reproduce first; do not alter source data or generated site content without verification |
-| A2 | Run relevant project gates and record exact results, sources and any remaining irregularities | pending | `4227cfea` | this section of `COORDINATION.md` | |
-| A3 | PR / merge / Pages confirmation if checks permit | pending | `4227cfea` | this section of `COORDINATION.md` | |
+| A1 | Reconcile the daily data-refresh workflow with the canonical site build; add a regression check that prevents workflow/render drift | done | `4227cfea` | `.github/workflows/collect-data.yml`, `tests/test_collect_workflow.py` | Daily refresh now invokes the canonical full-site builder once and stages all tracked build outputs |
+| A2 | Run relevant project gates and record exact results, sources and any remaining irregularities | done | `4227cfea` | this section of `COORDINATION.md` | Full test suite and build/verification gates recorded below; existing official-data flags remain open |
+| A3 | PR / merge / Pages confirmation if checks permit | in progress | `4227cfea` | this section of `COORDINATION.md` | |
+
+### Result — session `4227cfea-nfl1` (A1–A2)
+
+**Workflow correction.** `.github/workflows/collect-data.yml` previously rendered `index.html` and
+`pages/*` directly with `pipeline/gen_site.py`, then rebuilt only the decision-room/dashboard subset.
+That omitted the canonical navigation normalization and left other generated page roots outside
+the daily refresh path. The workflow now (1) regenerates and checks the official evidence fixtures,
+(2) calls `tools/build_site_all.py` once for all site generations, (3) runs freshness, generator
+ownership, and committed-site gates after that build, and (4) stages all modified tracked build
+outputs plus refreshed data. Added `tests/test_collect_workflow.py` (standard-library only) to
+ensure there is one canonical builder, no competing direct page generators, all integrity gates
+follow the build, and tracked output changes are staged.
+
+**Verification performed.**
+- `python -m unittest discover -s tests -v`: **139 tests passed** (including 3 new workflow regression tests).
+- `python tools/build_site_all.py` and then `python tools/build_site_all.py --check`: **PASS**; every
+  generated page reproduced byte-for-byte from the current data. The initial sandbox attempt lacked
+  pandas; the complete build was then run successfully in a local dependency environment matching
+  the workflow's installed packages.
+- Workflow YAML parsed successfully with PyYAML.
+- `tools/check_freshness.py`: 23 assertions passed; `tools/check_generators.py`: pass;
+  `tools/check_committed_site.py`: pass (28 pages checked; 1,609 local links resolved; 52 source
+  tables / 1,218 linked rows; existing 12 unstamped legacy pages remain disclosed as F19).
+- `tools/verify.py`: **2,062 rows**, all 2,062 have official source URLs, **73 marked unverified**,
+  0 broken links. `tools/verify_combined.py`: pass, 2,532 local links, 0 broken.
+  `tools/check_reachability.py`: all 168 published pages reachable. Verified site, Room and Strength
+  gates pass; `audit_numbers.py` independently reproduced all 47 published figures.
+- `tools/evidence_from_official.py` + `tools/verify_official.py`: **20 passed, 8 flagged, 0 failed**;
+  fixtures had 279 injury rows. These checks validate the repository's dated, hand-transcribed
+  official fixtures; they are not a fresh live NFL-source capture. The resulting timestamp-only
+  fixture rewrites were restored and are not part of this change.
+
+**Irregularities retained, not silently changed.** The 8 official-fixture audit flags include known
+mismatches between the current scraped injury rows and the older Week 10 transcriptions, injury-row
+count differences, and depth-chart transcription differences. They remain findings for review and
+are not fixed by this infrastructure change. No NFL result, injury status, price or model value was
+added or modified. `verify.py` still identifies 73 unverified values; these remain labelled rather
+than inferred.
+
+**Sources / review links.** Workflow source: [collect-data.yml](https://github.com/kanlerxz87-cyber/NFL1/blob/main/.github/workflows/collect-data.yml);
+source-audit output: [official_verification.json](https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/audit/official_verification.json).
+The dated fixture references are the NFL's [2026 standings](https://www.nfl.com/standings/league/2026/reg),
+[official injury report](https://www.nfl.com/injuries/), [Week 10 schedule](https://www.nfl.com/schedules/2026/REG10),
+and [2026 schedule](https://www.nfl.com/schedules/2026). No claim is made here that these pages were
+re-fetched live in this session.
