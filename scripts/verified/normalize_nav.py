@@ -38,6 +38,8 @@ CANON = [
     # Sessions d23c65ad/c56ebee8: the review room and the s9cb research sub-site join
     # the shared bar so no published page can become unreachable.
     ("review-room/index.html", "Review Room"),
+    # Session 739408a8-nfl1 (P1): pre-registration ledger for the forward test.
+    ("prereg/index.html", "Pre-registration ledger"),
     ("research/index.html", "s9cb Research"),
     # pages produced by the other generators in this repository, kept in the shared
     # navigation so no session's page can become unreachable

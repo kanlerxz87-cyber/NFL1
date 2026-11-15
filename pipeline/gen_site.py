@@ -95,7 +95,9 @@ SIDEBAR = [
                          ("pages/verified.html", "Verified artifacts"),
                          ("pages/models.html", "Models"),
                          ("pages/executive-summary.html", "Executive summary (companion)"),
-                         ("pages/flagged.html", "Flagged (companion)")]),
+                         ("pages/flagged.html", "Flagged (companion)"),
+                         # Session 739408a8-nfl1 (P1): pre-registration ledger for the forward test.
+                         ("prereg/index.html", "Pre-registration ledger")]),
 ]
 
 SOURCE = {

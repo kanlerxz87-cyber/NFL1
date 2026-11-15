@@ -747,5 +747,82 @@
     "action": "Replace the template URL in data/depth_ladder.json with each club's real chart URL, or remove it. Decide whether the registration and demotion rules need a non-official record (they are internal policy, so no official page can confirm them).",
     "verified": true,
     "retrieved": "2026-11-15"
+  },
+  {
+    "id": "P1-01",
+    "category": "Pre-registration gap",
+    "description": "Of the ten strategies in data/strategies.json, none can be frozen as written: eight have an unfixed coefficient (ST-01 to ST-08 and ST-10), ST-09 is a filter with no measurable prop price, and the favourites-only control needs a market price. Only three forecasters are frozen (PR-01 no-skill, PR-02 record-share, PR-03 seeded random). Their forward ledger covers Week 11 (13 games), recorded 2026-11-15 12:51 UTC before the first kickoff. ROI cannot be computed because no official price source exists.",
+    "impact": "No strategy can be ranked or promoted yet. The leaderboard has no pre-registered entry. A Week 11 result counts as a forward result only after the game is final.",
+    "status": "needs review",
+    "src": "S02",
+    "action": "Fix the coefficients of ST-01..ST-08 and ST-10 in a new registration commit before any of them is scored, or retire them. Name an official price source before any ROI gate. Registry: data/prereg/registry.json; page: prereg/index.html.",
+    "verified": true,
+    "retrieved": "2026-11-15"
+  },
+  {
+    "id": "P2-01",
+    "category": "Capture vs live page (resolves CAP-03, CAP-04 for the capture)",
+    "description": "The committed Week 10 capture (data/capture/nflcom_injuries_reg10_2026-11-15_rows.tsv, 347 rows) matches the live official page on the club count of all 28 clubs (data/verified_739408a8/live_counts_2026-11-15.json). The live page shows Kerby Joseph, Cade Mays and D.J. Reed as Out, not blank. It lists 15 Seahawks, 9 Bengals, 19 Chargers and 10 Ravens players. The stale hand copy data/model/official_injuries.json is not corrected by this item and still carries the old counts.",
+    "impact": "The capture is correct on these points. The hand copy still misstates Seattle and Cincinnati as injury-free and still blanks the Lions cells. Scripts that read the hand copy remain wrong (SV-01).",
+    "status": "resolved",
+    "src": "S01",
+    "action": "Retire data/model/official_injuries.json or regenerate it from the capture. CAP-03 stays open for that file only.",
+    "verified": true,
+    "retrieved": "2026-11-15"
+  },
+  {
+    "id": "P2-02",
+    "category": "Official-vs-official conflict (Baltimore)",
+    "description": "The Ravens depth chart (read 2026-11-15) lists Jaylinn Hawkins at Strong Safety, the first name in that slot. The official Week 10 injury report (BAL section, Monday Nov 16 vs LAC) lists Hawkins: Knee, Limited in practice, Game Status Out.",
+    "impact": "A depth-based starter read would name Hawkins as starter while the official report says he is out. The depth chart and the report disagree; nothing is inferred about who starts.",
+    "status": "needs review",
+    "src": "S29",
+    "action": "Keep dated captures of both sources (the depth chart and the report) and record which the club updates first. Do not resolve by inference. Reviewer to confirm the Monday game status when the Week 10 report is final.",
+    "verified": true,
+    "retrieved": "2026-11-15"
+  },
+  {
+    "id": "P2-03",
+    "category": "Blank game status on starters (Baltimore)",
+    "description": "Ronnie Stanley (listed as Left Tackle 1 on the Ravens chart) and Calais Campbell (Defensive End 1) are Did Not Participate In Practice on the official report, with a blank Game Status cell. Stanley and Campbell are not labelled Out, Questionable or Doubtful.",
+    "impact": "Their game-day status is unknown from the official report. A model that reads blank as available would be wrong; a model that reads it as out would be inferring.",
+    "status": "needs review",
+    "src": "S01",
+    "action": "Treat the blank as unverified availability. Re-check the report after the Monday game status is published.",
+    "verified": true,
+    "retrieved": "2026-11-15"
+  },
+  {
+    "id": "P2-04",
+    "category": "Press-only transaction (Brissett trade)",
+    "description": "The depth chart (official club page, read 2026-11-15) lists Jacoby Brissett as Ravens QB1. The trade that brought him from Arizona was reported in the press on Nov 6 2026 (ESPN: https://www.espn.com/nfl/story/_/id/50400123/ravens-complete-trade-cardinals-qb-jacoby-brissett). The official NFL or club transaction release was not read in this session, so the trade event itself is press-confirmed only.",
+    "impact": "The roster fact is official (club chart); the trade event is press-confirmed only. Any model that uses the trade date as an official roster event needs the official release.",
+    "status": "needs review",
+    "src": "S29",
+    "action": "Find the official Ravens or NFL transaction release for the Brissett trade and add it as a source before the roster event is used.",
+    "verified": true,
+    "retrieved": "2026-11-15"
+  },
+  {
+    "id": "P2-05",
+    "category": "Injured reserve for Ravens QBs confirmed (resolves stale-listing item)",
+    "description": "Official NFL.com roundup of Thu Nov 5: 'Lamar Jackson (right thumb) was placed on injured reserve, which will sideline him at least four games' and 'Tyler Huntley (toe) was placed on IR.' The Ravens chart read on 2026-11-15 lists neither.",
+    "impact": "The Baltimore stale-listing claim does not hold on the current chart (F-7810-08). The IR placements are official.",
+    "status": "resolved",
+    "src": "S32",
+    "action": "Keep the dated chart captures so the change is shown by before-and-after captures (IN-22).",
+    "verified": true,
+    "retrieved": "2026-11-15"
+  },
+  {
+    "id": "P2-06",
+    "category": "Brief's reference IDs still untraceable",
+    "description": "The Malik Willis reserve claim is confirmed by the official NFL.com headline 'Dolphins place QB Malik Willis (groin) on injured reserve', and Willis is absent from the Dolphins table on the live page. The brief's verification IDs (VR-25, VQ-06) still cannot be traced to any document in the repository.",
+    "impact": "The factual claim is confirmed; the IDs in the brief are not. Items that depend on the IDs stay unverified.",
+    "status": "needs review",
+    "src": "S01",
+    "action": "Supply the source list behind VR-/VQ- IDs or drop the IDs. F-7810-11 stays open.",
+    "verified": true,
+    "retrieved": "2026-11-15"
   }
 ]

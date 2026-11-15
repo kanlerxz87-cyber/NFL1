@@ -66,6 +66,10 @@ STEPS = [
     ("landing page and decision lab", [sys.executable, "gen_site.py"], os.path.join(ROOT, "pipeline")),
     # Session 90c2b454-nfl1 (P3): the injury-snapshot ledger, rendered from its own store.
     ("injury snapshot ledger", [sys.executable, "tools/build_snapshots_page.py"], ROOT),
+    # Session 739408a8-nfl1 (P1): pre-registration ledger. `check` fails on any changed frozen rule,
+    # any forecast that does not reproduce from the official inputs, or any late forecast.
+    ("pre-registration check", [sys.executable, "tools/prereg.py", "check"], ROOT),
+    ("pre-registration page (prereg/)", [sys.executable, "tools/prereg.py", "render"], ROOT),
     ("canonical navigation", [sys.executable, "scripts/verified/normalize_nav.py"], ROOT),
     ("docs sub-site", [sys.executable, "tools/build_docs_site.py"], ROOT),
     ("verified-lab sub-site", [sys.executable, "scripts/build_site.py"], ROOT),

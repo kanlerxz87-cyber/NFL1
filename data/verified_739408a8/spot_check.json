@@ -1,0 +1,126 @@
+{
+  "schema": "verification-739408a8/1",
+  "session": "739408a8-nfl1",
+  "checked_utc": "2026-11-15T12:55Z",
+  "scope": "Live official pages read with fetch_page on 2026-11-15, compared with committed files. bash has no nfl.com access (sandbox allow-list), so every official value here comes from fetch_page output.",
+  "not_done": [
+    "Per-row comparison of all 347 rows of the live injury page. Per-club counts were compared for all 28 clubs; per-row values were compared for the rows named in the claims above and for the BAL, SEA, CIN and LAC sections, not for every row.",
+    "The official NFL transaction release for the Brissett trade (only press was read).",
+    "Game Books and official inactive lists (not published for these games yet)."
+  ],
+  "sources": {
+    "S01": {
+      "publisher": "National Football League (NFL.com)",
+      "url": "https://www.nfl.com/injuries/league/2026/reg10",
+      "kind": "Official league injury report, Week 10 2026",
+      "fetched": "2026-11-15",
+      "method": "fetch_page, chunks 0-7 of 8 read in this session",
+      "repo_source_id": "S01"
+    },
+    "S02": {
+      "publisher": "NFL.com",
+      "url": "https://www.nfl.com/standings/league/2026/reg",
+      "kind": "Official league standings, 2026 regular season",
+      "fetched": "2026-11-15",
+      "method": "fetch_page, chunks 0-1 of 2",
+      "repo_source_id": "S02"
+    },
+    "S29": {
+      "publisher": "Baltimore Ravens (baltimoreravens.com)",
+      "url": "https://www.baltimoreravens.com/team/depth-chart",
+      "kind": "Official club depth chart (text)",
+      "fetched": "2026-11-15",
+      "method": "fetch_page, chunk 0 of 1",
+      "repo_source_id": "S29"
+    },
+    "S31": {
+      "publisher": "NFL.com",
+      "url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+      "kind": "Official schedule, Week 11 2026",
+      "fetched": "2026-11-15",
+      "method": "fetch_page, chunks 0-2 of 3",
+      "repo_source_id": "S31"
+    },
+    "S32": {
+      "publisher": "NFL.com",
+      "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-thursday-nov-5",
+      "kind": "Official NFL news roundup, Thu Nov 5 2026 (headlines and transactions)",
+      "fetched": "2026-11-15",
+      "method": "fetch_page, chunk 0 of 4",
+      "repo_source_id": "S32"
+    },
+    "PRESS-ESPN-2026-11-06": {
+      "publisher": "ESPN (press, not official)",
+      "url": "https://www.espn.com/nfl/story/_/id/50400123/ravens-complete-trade-cardinals-qb-jacoby-brissett",
+      "kind": "Press report, not an official transaction record",
+      "fetched": "2026-11-15",
+      "method": "web_search snippet; article not opened in full"
+    }
+  },
+  "claims": [
+    {
+      "id": "C1",
+      "claim": "Lions: Kerby Joseph, Cade Mays and D.J. Reed carry a blank game status (CAP-04)",
+      "official": "S01",
+      "observed": "All three rows: Practice Status 'Did Not Participate In Practice', Game Status 'Out' (Joseph Knee; Mays Ankle; Reed Hip)",
+      "verdict": "REFUTED as a current defect: the live official page publishes Out for all three. The blank cell is in the stale hand copy only."
+    },
+    {
+      "id": "C2",
+      "claim": "Seattle and Cincinnati are shown as injury-free (CAP-03)",
+      "official": "S01",
+      "observed": "Seahawks section lists 15 players; Bengals section lists 9 players. Chargers 19 and Ravens 10 also populated.",
+      "verdict": "REFUTED for the official page: all four clubs list players. The stale hand copy still shows no injuries; that file is not corrected here."
+    },
+    {
+      "id": "C3",
+      "claim": "Week 10 report row and club counts (254 rows vs 279 live; 347 in capture)",
+      "official": "S01",
+      "observed": "Live page, read in this session: 28 clubs, 14 games. Per-club row counts (28 of 28) equal the committed capture data/capture/nflcom_injuries_reg10_2026-11-15_rows.tsv (347 rows). See data/verified_739408a8/live_counts_2026-11-15.json.",
+      "verdict": "CONFIRMED for the capture. Counts in the older hand copy remain stale."
+    },
+    {
+      "id": "C4",
+      "claim": "Malik Willis is absent from the report because he is on injured reserve (VR-25 / VQ-06 in the brief)",
+      "official": "S01, S32",
+      "observed": "Dolphins section does not list Willis. Official NFL.com news headline in the injury page: 'Dolphins place QB Malik Willis (groin) on injured reserve; Kyle McCord in line for first start'.",
+      "verdict": "CONFIRMED by the official headline. The VR/VQ reference numbers in the brief cannot be traced (flag F-7810-11)."
+    },
+    {
+      "id": "C5",
+      "claim": "Lamar Jackson and Tyler Huntley placed on injured reserve (VR-17 / VR-26 in the brief)",
+      "official": "S32, S29",
+      "observed": "NFL.com roundup, Thu Nov 5: 'Lamar Jackson (right thumb) was placed on injured reserve, which will sideline him at least four games'; 'Tyler Huntley (toe) was placed on IR.' Ravens depth chart (read 2026-11-15) QB row: Jacoby Brissett, Joe Fagnano, Kedon Slovis; neither Jackson nor Huntley is listed.",
+      "verdict": "CONFIRMED. Stale-listing item F-7810-08 holds on the current chart."
+    },
+    {
+      "id": "C6",
+      "claim": "A replacement was traded in for Baltimore",
+      "official": "S29 (roster side only), press: ESPN (not in the official source list) (press)",
+      "observed": "Ravens depth chart lists Jacoby Brissett at QB1. The trade (Cardinals to Ravens, Brissett and a 2027 fifth-round pick for a 2027 fourth and 2028 seventh) is reported by ESPN dated Nov 6 2026.",
+      "verdict": "PARTLY CONFIRMED. The club chart is official; the trade itself is press-confirmed only. Needs the official club or NFL transaction release (flag P2-04)."
+    },
+    {
+      "id": "C7",
+      "claim": "Baltimore depth lists starters who are out",
+      "official": "S29, S01",
+      "observed": "Depth chart: Strong Safety (SS) = Jaylinn Hawkins. Official report, BAL section: Jaylinn Hawkins, S, Knee, Limited in practice, game status 'Out'. Ronnie Stanley (LT1 on the chart) and Calais Campbell (DE1) are Did Not Participate with a blank game status.",
+      "verdict": "NEW CONFLICT (flag P2-02): official chart and official report disagree on Hawkins. Stanley and Campbell rows have blank game status (flag P2-03). Nothing is inferred."
+    },
+    {
+      "id": "C8",
+      "claim": "Official standings match the committed snapshot (data/model/snapshot.json)",
+      "official": "S02",
+      "observed": "32 of 32 rows match on W, L, T, PCT, PF, PA after mapping the committed code ARI to the official AZ.",
+      "verdict": "CONFIRMED (club code conflict ARI / AZ remains CAP-05)."
+    },
+    {
+      "id": "C9",
+      "claim": "Week 11 fixtures and kickoff times (13 games, byes ATL, CLE, GB, LA, NE, SEA)",
+      "official": "S31",
+      "observed": "13 games read. Thu Nov 19 8:15 PM: Colts at Texans. Bye teams printed on the page: ATL, CLE, GB, LAR, NE, SEA.",
+      "verdict": "CONFIRMED as read; used as the registration's game list (data/prereg/official_inputs_2026-11-15.json)."
+    }
+  ],
+  "note_on_ids": "Source ids match data/sources.json (S01, S02, S29 existed; S31, S32, S33 added in this session)."
+}
