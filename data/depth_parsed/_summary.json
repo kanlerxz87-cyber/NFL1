@@ -1,0 +1,267 @@
+{
+ "generated_by": "tools/check_depth_parse.py",
+ "method": "Official club depth-chart pages, fetched 2026-11-15 and stored verbatim in data/depth_raw/ (text only: the fetch tool returns rendered text, not HTML). Parsed by pipeline/depth_parse.py, which keeps a slot as a group and never infers rank from a jersey number.",
+ "clubs": [
+  {
+   "club": "ARI",
+   "url": "https://www.azcardinals.com/team/depth-chart",
+   "fetched_at": "2026-11-15T12:52:48Z",
+   "sha256": "74298f7e8110b385d47f6084775637fad4ef1cf2d0cf99cd63fe60328b022895",
+   "capture_kind": "table",
+   "chart_date": "",
+   "counts": {
+    "slots": 29,
+    "slots_empty": 0,
+    "slots_with_hole": 0,
+    "groups": 57,
+    "player_names": 58,
+    "shared_groups": 1,
+    "shared_group_names": 2,
+    "shared_rank1_groups": 1,
+    "cells_with_jersey": 0,
+    "jersey_numbers_stripped": 0,
+    "continuation_ranks": 0,
+    "rows_dropped": 0,
+    "by_unit": {
+     "offense": 11,
+     "defense": 12,
+     "special_teams": 6
+    },
+    "max_rank": 3
+   },
+   "gaps": [],
+   "dropped": [],
+   "shared_groups": [
+    {
+     "unit": "defense",
+     "position": "OLB",
+     "rank": 1,
+     "names": [
+      "Zaven Collins",
+      "Baron Browning"
+     ],
+     "raw_cell": "[Zaven Collins](https://www.azcardinals.com/team/players-roster/zaven-collins/) [Baron Browning](https://www.azcardinals.com/team/players-roster/baron-browning/)"
+    }
+   ],
+   "holes": [],
+   "empty_slots": []
+  },
+  {
+   "club": "BAL",
+   "url": "https://www.baltimoreravens.com/team/depth-chart",
+   "fetched_at": "2026-11-15T12:52:48Z",
+   "sha256": "f9da4c0aab60c8e629ae95b13a3edd08115e27f883973c62e18c2f6a9ce7bbb5",
+   "capture_kind": "table",
+   "chart_date": "",
+   "counts": {
+    "slots": 29,
+    "slots_empty": 1,
+    "slots_with_hole": 0,
+    "groups": 59,
+    "player_names": 59,
+    "shared_groups": 0,
+    "shared_group_names": 0,
+    "shared_rank1_groups": 0,
+    "cells_with_jersey": 0,
+    "jersey_numbers_stripped": 0,
+    "continuation_ranks": 0,
+    "rows_dropped": 0,
+    "by_unit": {
+     "offense": 11,
+     "defense": 12,
+     "special_teams": 6
+    },
+    "max_rank": 3
+   },
+   "gaps": [],
+   "dropped": [],
+   "shared_groups": [],
+   "holes": [],
+   "empty_slots": [
+    {
+     "unit": "special_teams",
+     "position": "K",
+     "raw_row": "| K |  |  |  |  |"
+    }
+   ]
+  },
+  {
+   "club": "GB",
+   "url": "https://www.packers.com/team/depth-chart",
+   "fetched_at": "2026-11-15T12:52:48Z",
+   "sha256": "f5b173ea82eb936e1a3b7becd5c893160072a509b5c8ac94b60b0e4edc72989e",
+   "capture_kind": "table",
+   "chart_date": "Nov. 10, 2026",
+   "counts": {
+    "slots": 28,
+    "slots_empty": 0,
+    "slots_with_hole": 1,
+    "groups": 55,
+    "player_names": 55,
+    "shared_groups": 0,
+    "shared_group_names": 0,
+    "shared_rank1_groups": 0,
+    "cells_with_jersey": 55,
+    "jersey_numbers_stripped": 55,
+    "continuation_ranks": 1,
+    "rows_dropped": 3,
+    "by_unit": {
+     "offense": 11,
+     "defense": 11,
+     "special_teams": 6
+    },
+    "max_rank": 4
+   },
+   "gaps": [],
+   "dropped": [
+    {
+     "reason": "column header row",
+     "raw": "| Position | Player | Player | Player |"
+    },
+    {
+     "reason": "column header row",
+     "raw": "| Position | Player | Player | Player |"
+    },
+    {
+     "reason": "column header row",
+     "raw": "| Position | Player | Player | Player |"
+    }
+   ],
+   "shared_groups": [],
+   "holes": [
+    {
+     "unit": "special_teams",
+     "position": "PR",
+     "holes": [
+      1
+     ],
+     "raw_row": "| PR |  | 0 Matthew Golden |  |"
+    }
+   ],
+   "empty_slots": []
+  },
+  {
+   "club": "HOU",
+   "url": "https://www.houstontexans.com/team/depth-chart",
+   "fetched_at": "2026-11-15T12:52:48Z",
+   "sha256": "12de2d5c2abebf9a12d6c533f81a43bbd9ec4f4c6a044a9741bd61ae30ab27f1",
+   "capture_kind": "image_only",
+   "chart_date": "",
+   "counts": {
+    "slots": 0,
+    "slots_empty": 0,
+    "slots_with_hole": 0,
+    "groups": 0,
+    "player_names": 0,
+    "shared_groups": 0,
+    "shared_group_names": 0,
+    "shared_rank1_groups": 0,
+    "cells_with_jersey": 0,
+    "jersey_numbers_stripped": 0,
+    "continuation_ranks": 0,
+    "rows_dropped": 0,
+    "by_unit": {},
+    "max_rank": 0
+   },
+   "gaps": [
+    {
+     "reason": "The official page renders the whole chart as a bitmap image on static.clubs.nfl.com, so it contains no rows to parse. The brief forbids transcribing a chart by eye; no rows are produced and no players are named for this club. An authorised structured source is required.",
+     "evidence": "https://static.clubs.nfl.com/image/upload/texans/a5or0zowuo36y1txf4ly"
+    }
+   ],
+   "dropped": [],
+   "shared_groups": [],
+   "holes": [],
+   "empty_slots": []
+  },
+  {
+   "club": "IND",
+   "url": "https://www.colts.com/team/depth-chart",
+   "fetched_at": "2026-11-15T12:52:48Z",
+   "sha256": "5cb6581338021dbc803f286837b490808f4bac4104d55c757629a88a40a67389",
+   "capture_kind": "table",
+   "chart_date": "",
+   "counts": {
+    "slots": 28,
+    "slots_empty": 0,
+    "slots_with_hole": 0,
+    "groups": 56,
+    "player_names": 57,
+    "shared_groups": 1,
+    "shared_group_names": 2,
+    "shared_rank1_groups": 0,
+    "cells_with_jersey": 0,
+    "jersey_numbers_stripped": 0,
+    "continuation_ranks": 0,
+    "rows_dropped": 0,
+    "by_unit": {
+     "offense": 11,
+     "defense": 11,
+     "special_teams": 6
+    },
+    "max_rank": 4
+   },
+   "gaps": [],
+   "dropped": [],
+   "shared_groups": [
+    {
+     "unit": "offense",
+     "position": "TE",
+     "rank": 4,
+     "names": [
+      "Will Mallory",
+      "Pharaoh Brown"
+     ],
+     "raw_cell": "[Will Mallory](https://www.colts.com/team/players-roster/will-mallory/) [Pharaoh Brown](https://www.colts.com/team/players-roster/pharaoh-brown/)"
+    }
+   ],
+   "holes": [],
+   "empty_slots": []
+  },
+  {
+   "club": "WAS",
+   "url": "https://www.commanders.com/team/depth-chart",
+   "fetched_at": "2026-11-15T12:52:48Z",
+   "sha256": "aada67d112569aeecfdcdee6aa0f42f93580be9e4ce9ce2d0a45bc0e62417d19",
+   "capture_kind": "table",
+   "chart_date": "",
+   "counts": {
+    "slots": 29,
+    "slots_empty": 0,
+    "slots_with_hole": 1,
+    "groups": 60,
+    "player_names": 60,
+    "shared_groups": 0,
+    "shared_group_names": 0,
+    "shared_rank1_groups": 0,
+    "cells_with_jersey": 0,
+    "jersey_numbers_stripped": 0,
+    "continuation_ranks": 0,
+    "rows_dropped": 0,
+    "by_unit": {
+     "offense": 12,
+     "defense": 11,
+     "special_teams": 6
+    },
+    "max_rank": 3
+   },
+   "gaps": [],
+   "dropped": [],
+   "shared_groups": [],
+   "holes": [
+    {
+     "unit": "defense",
+     "position": "LB",
+     "holes": [
+      2
+     ],
+     "raw_row": "| LB | [Frankie Luvu](https://www.commanders.com/team/players-roster/frankie-luvu/) |  | [Kain Medrano](https://www.commanders.com/team/players-roster/kain-medrano/) |  |  |"
+    }
+   ],
+   "empty_slots": []
+  }
+ ],
+ "assertions": 30,
+ "result": "PASS",
+ "failures": []
+}
