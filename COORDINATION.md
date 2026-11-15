@@ -2885,3 +2885,31 @@ _This claim is committed and pushed before any other file is touched, per the br
 | B4 | Prevent duplicate push/PR verification runs from cancelling one another | done | `b6b088fd-nfl1` | `.github/workflows/pages.yml`, this coordination entry | Changed concurrency groups to include event name plus PR number/ref. Both push and pull_request runs completed without cancelling one another on final head `327ad72`: `Verify NFL Decision Lab site build` 43713776944 PASS; `Verify NFL1 site` 43713777029 PASS; `Verify decision dashboard` 43713777036 PASS. Initial canceled PR run 43713329810 was superseded by these green final-head runs. |
 
 | B5 | Merge PR #62 after all gates pass, verify GitHub Pages deployment, and record the merge/deploy result | in progress | `b6b088fd-nfl1` | `COORDINATION.md` | PR #62 is open, all three final-head checks passed at `327ad72`, local full-site reproducible build is green. Record merge SHA and Pages build result after merge. |
+
+---
+
+# Session `07810d9f-nfl1` — brief register, live injury read, decision-readiness, PR and merge (2026-11-15)
+
+Branch `arena/07810d9f-nfl1`, base `5a769b3` on `main`. Claimed 2026-11-15 (UTC) before any file change. Scope is
+additive and non-overlapping with every earlier session, which are all closed.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| B1 | One-row-per-requirement register of the brief, with status, blocking gate and the number that clears each item | in progress | `07810d9f` | `scripts/brief_07810d9f/register.py`, `room/data/readiness.json` | 82 rows; statuses rest on named artifacts |
+| B2 | Live re-read of the nfl.com Week 10 injury report (8 chunks, 347 rows) and delta against the committed scrape | in progress | `07810d9f` | `data/brief_07810d9f/`, `scripts/brief_07810d9f/compare_injury_capture.py` | publishes the delta, not the level |
+| B3 | Decision-readiness table on the landing page (root `index.html`) | in progress | `07810d9f` | `pipeline/gen_site.py` (`overview()` only) | reads `room/data/readiness.json` |
+| B4 | Decision Room pages: readiness register and the 2026-11-15 injury capture | in progress | `07810d9f` | `room/build.py`, `room/*.html` (new pages only) | `room/verify.py` gate |
+| B5 | Flags F-7810-01 to F-7810-11 for manual review | in progress | `07810d9f` | `data/flags.json` (append only) | published on Flagged for Review, non-blocking |
+| B6 | Regenerate every page; restore the `build_site_all.py --check` gate that fails on the base commit | in progress | `07810d9f` | generated pages | the base commit's committed pages differ from the generators |
+| B7 | PR to `main`, merge, confirm the GitHub Pages deploy, record here | pending | `07810d9f` | `COORDINATION.md` | |
+
+**Scope update, same session (`07810d9f`).** B4 (Decision Room changes) is **dropped**: the Decision Room is not changed in this session. B3 files are `index.html` (one generated panel, from `pipeline/gen_site.py`), the new `pages/readiness.html`, and `room/data/readiness.json`. B5 also appends `data/sources.json` entries S29 (Baltimore depth chart) and S30 (Houston depth chart); this is additive only (S27 and S28 were already taken on `main`). The flags, sources and register rows are on the site as published content, not as edits to other sessions' rows.
+
+**Result of `07810d9f`, as of this push.**
+- Register: `scripts/brief_07810d9f/register.py` → `room/data/readiness.json`, 82 requirement rows, each with status, checked-date, evidence, blocking gate, clearing value, next step and source link. Statuses: Done 15, Partial 31, Not started 19, Blocked 8, Not met 3, Not verified 5, Rejected (brief) 1. Repo-internal links are labelled "internal" on the page.
+- Injury reconciliation: `data/brief_07810d9f/injury_delta_2026-11-15.json` (live 347 rows, scrape 345 rows; 2 live-only, 0 scrape-only; 32 field mismatches: injury 13, game 13, practice 6). Parser defects are **flagged, not fixed** (F-7810-01 to -04): LAC and BAL blank-status rows, two Ravens rows absent, Arden Key changed between reads. Re-running the scrape is the fix; that is an Actions step, not made here.
+- Flags F-7810-01 to F-7810-12 appended to `data/flags.json` (append only; main's F48 kept). Published on Flagged for Review, non-blocking.
+- Gates on the pushed tree: `build_site_all.py` OK; `build_site_all.py --check` OK (base commit failed on 16 pages); `room/build.py` + `room/verify.py` PASS; unit tests 136 OK; `audit_numbers.py` 47/47; `tools/verify.py` 2047 rows with official source link; `verify_combined.py` 0 broken links; `check_generators.py` PASS; `check_strength_site.py` PASS; `validate_verified.py` PASS; `check_committed_site.py` PASS.
+- **Not done in this session (stated, not claimed):** standings division page chunk 1 unread; schedule week-11 and REG10 not re-verified; Houston depth chart unresolved (image only); Packers jersey prefixes (59 cells) not stripped; brief's VR/VQ references untraceable; gate-scheme conflict (G1–G8 vs G01–G13) unresolved (F-7810-12).
+- Board hygiene noted on `main` (not edited, another session's text): the `a6220e65` block near line 2800 contains a literal `\n` sequence on one line.
+- Push note: the remote branch held one earlier claim commit (`392c776`); the local history was rebased onto `main` 32a0a88 and the remote tip recorded as an `ours` merge parent, so the push is a fast-forward and no commit was rewritten on the remote.
