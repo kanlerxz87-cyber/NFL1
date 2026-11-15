@@ -36,6 +36,19 @@ Sessions that have worked here:
 > `session-<id>/<task>` convention in the brief cannot be followed here. Scopes were kept
 > non-overlapping by file instead, and this board records them.
 
+## Session `543676f8-nfl1` — claims (branch `arena/543676f8-nfl1`, base `5a769b3`, 2026-11-15)
+
+Claimed before any other edit. Scope is additive; nothing owned by another session is rewritten.
+No open claim on the board covered these files at the time of claiming (all earlier claims are
+`done`, `needs review` or merged).
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| X1 | Official capture of the nfl.com Week 10 injury report (every club, every row), immutable TSV + manifest with sha256 and counts | in progress | `543676f8` | `data/capture/`, `tools/check_capture.py`, `tools/build_capture_site.py`, `capture/` | replaces the stale 254-row hand copy for publication; the old file is left in place and labelled |
+| X2 | Decision-readiness table on the landing page: one row per brief requirement, the gate that blocks it, the number that would clear it, a source link | in progress | `543676f8` | `data/capture/readiness.json`, `pipeline/gen_site.py` (overview block only) | status is `done`, `partial`, `blocked` or `not started`, decided from repo evidence |
+| X3 | Flag new irregularities for the Flagged for Review page (scrape row loss, stale verified file, blank Lions designations, club code conflict, backtest figures on the leaderboard) | in progress | `543676f8` | `data/capture/flags.json`, `capture/` | every flag carries the official link that settles it |
+| X4 | Integrate: one build step, gates green, PR to `main`, merge, Pages check, record here | in progress | `543676f8` | `tools/build_site_all.py` (one step), generated pages, `COORDINATION.md` | |
+
 ## Task board — session `9cb71eb8-nfl1` (ACTIVE; claims below)
 
 This session acts as the **final integration session** for the current state of the repo. All
