@@ -29,6 +29,7 @@ Sessions that have worked here:
 
 | `9411723a-nfl1` | `arena/9411723a-nfl1` | Verification of the committed site, official-source spot checks, new flag F41 (standings snapshot vs live drift), PR -> main -> merge -> Pages deploy, integration record | active |
 | `c56ebee8-nfl1` | `arena/c56ebee8-nfl1` | Final integration: 2026-11-13 official re-verification, unified category dashboard with sidebar, 1st-to-6th string depth ladder (flags F42-F47), correlations/parlays/luck pages, PR -> main -> merge -> Pages | active |
+| `d5cc3dff-nfl1` | `arena/d5cc3dff-nfl1` | Decision-readiness table on landing page, executive summary refresh, final verification, PR -> main -> merge -> Pages | active |
 
 ---
 
@@ -2797,4 +2798,6 @@ verbatim rather than guessed at) · F44 (one chart line with no first string) ·
 verified sound, with one unusual official row recorded for review) · F46 (overlapping site
 generations — decision D07 / suggestion S17) · F47 (2nd-to-4th string coverage now exists, needs
 sign-off). None of them blocks anything; they are published rather than hidden.
+
+---\n\n## Task board — session `d5cc3dff-nfl1` (ACTIVE; claims below)\n\nFile scope claimed here is **additive and non-overlapping** with every earlier session: `index.html`\n(landing page decision-readiness table only), `pages/executive.html` (executive summary refresh),\n`data/requirements.json` (read-only), `data/validation_gates.json` (read-only), `COORDINATION.md`\n(this claim and task board only). No other session's files are touched.\n\n| ID | Task | Status | Owner | File scope | Notes |\n|---|---|---|---|---|---|\n| D1 | Decision-readiness table on landing page: one row per requirement R01-R36, with the gate that blocks it and the number that would clear it | done | `d5cc3dff-nfl1` | `index.html` | All 36 requirements tabled with gate, clearing number, official source link |\n| D2 | Executive summary refresh: align with current dashboard numbers and flag state | done | `d5cc3dff-nfl1` | `pages/executive.html` | Already current with 2026-11-13 re-verification; KPIs match dashboard.json |\n| D3 | Final verification: run all gates, link check, confirm Pages build | done | `d5cc3dff-nfl1` | `COORDINATION.md` | verify.py PASS (2060 rows, all sourced, 0 broken); check_site.py PASS (27 pages); check_committed_site.py PASS; check_freshness.py PASS (23); check_generators.py PASS; verify_combined.py PASS (2419 links, 0 broken) |\n| D4 | PR → merge → confirm Pages deploy → record result here | in progress | `d5cc3dff-nfl1` | `COORDINATION.md` | PR from this branch to `main` |
 
