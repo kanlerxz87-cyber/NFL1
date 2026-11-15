@@ -3078,6 +3078,74 @@ additive and non-overlapping with every earlier session, which are all closed.
 | Pages deploy | the build for `7c4991b` **errored** (recorded as `errored`, 12:48:29Z). The next builds succeeded: `7629ca6` (bot snapshot commit, 12:48:42Z) and `87add0e` (main head, 12:50:27Z). `87add0e` contains the merge. Live page checked: `https://kanlerxz87-cyber.github.io/NFL1/pages/snapshots.html` serves the ledger, stamped 2026-11-15T12:48:40+00:00 |
 | Flags published | F51 (terms of use, needs review) and F52 (source attribution, needs review), on the Flagged for Review page with source links |
 | Not in this PR | the open items listed in the result record above (PR #47 overlap, requirement-count reconciliation, CHI/DEN/PHI/TB gap, standings and schedule re-verification) |
+
+---
+
+# Session `e1fa878e-nfl1` — re-verification of open injury and depth flags, leaderboard policy, PR and merge (2026-11-15)
+
+| Item | Value |
+| --- | --- |
+| Session ID | `e1fa878e-nfl1` |
+| Branch | `arena/e1fa878e-nfl1` (platform-fixed. The brief's `session-<id>/<task>` branch convention cannot be used in this environment; same deviation as every earlier session) |
+| Base commit | `df084b5` (`main` at claim time) |
+| Board read before work | yes, full `COORDINATION.md` reviewed; no other session branch is active on the remote |
+| Scope | Narrow, verifiable slice. The brief's full list (about 60 items) is not achievable in one session. Items below are the ones the repository could check against official pages today. Everything else is listed under "Not done" and is not claimed. |
+
+## Task board (session `e1fa878e-nfl1`)
+
+| ID | Task | Status | Owner | File scope | Notes |
+| --- | --- | --- | --- | --- | --- |
+| E1 | Re-read the official Week 10 injury report (https://www.nfl.com/injuries/) and compare with the committed scrape and the 2026-11-15 capture | done (partial) | `e1fa878e-nfl1` | `data/flags.json` (append and status) | Capture vs committed: 347/347 keys, 0 value differences after code alias ARI→AZ, LA→LAR (F-E1-02). Live re-read of 229 of 347 rows: 229/229 match (F-E1-03) |
+| E2 | Strip jersey numbers from Packers depth cells (F-7810-06), keep raw string | done | `e1fa878e-nfl1` | `tools/normalize_depth_names.py` (new), `data/depth_chart.json`, generated pages | 59 cells; numbers and names checked against https://www.packers.com/team/depth-chart (read 2026-11-15) |
+| E3 | Leaderboard must show no backtest numbers (F-7810-09, brief rule) | done (leaderboard only) | `e1fa878e-nfl1` | `s9cb/site.py`, `research/leaderboard.html`, `research/backtest.html` (new), `tests/test_leaderboard_policy.py` (new) | Ranked board: gate outcomes only, 0 ranked. Historical figures moved to a labelled Backtest page. Other pages still show backtest figures (F-E1-01) |
+| E4 | Close flags F-7810-01, -02, -03 with evidence | done | `e1fa878e-nfl1` | `data/flags.json` | Evidence in each flag's `resolution` field |
+| E5 | Publish irregularities found in this session on Flagged for Review | done | `e1fa878e-nfl1` | `data/flags.json` | F-E1-01 (backtest figures elsewhere), F-E1-02 (club codes), F-E1-03 (re-read coverage) |
+| E6 | Rebuild all generated pages; run every gate; commit; PR to `main`; merge; confirm Pages | in progress | `e1fa878e-nfl1` | `COORDINATION.md`, generated pages | see the result record below |
+
+## Sources used (all read in this session)
+
+- https://www.nfl.com/injuries/ — Week 10 injury report, pages 1 to 7 of 8 read via fetch (chunks 0–6). Club sections read: WAS, NYG, NE, DET, KC (part), ATL, MIN, GB, JAX (part), TEN, BUF, NYJ, MIA, IND, CAR, NO, HOU, CLE (part), LAR, AZ, SEA, LV, SF, DAL, PIT, CIN, LAC, BAL. Chunk 7 (remaining NEWS and any late section) not read.
+- https://www.packers.com/team/depth-chart — club depth chart, footer "Unofficial, Nov. 10, 2026" (read 2026-11-15).
+- https://www.nfl.com/injuries/ news items read on the same page: Ravens Lamar Jackson 6–9 weeks; Dolphins QB Malik Willis on injured reserve; Packers RB Josh Jacobs finger surgery; Seahawks QB Sam Darnold ruled out. Used only as context, not as data values.
+- Local: `data/model/official_injuries.json`, `data/capture/nflcom_injuries_reg10_2026-11-15_rows.tsv`, `data/depth_chart.json`, `data/s9cb/leaderboard.json`.
+
+Sources not reachable: the Arena sandbox cannot reach nfl.com with curl (SSL error); all nfl.com reads in this session used `fetch_page`.
+
+## Verification performed
+
+1. `data/model/official_injuries.json` vs `data/capture/nflcom_injuries_reg10_2026-11-15_rows.tsv`: 347 rows and 347 keys on each side, 0 duplicates, 0 value differences, once the code aliases ARI↔AZ and LA↔LAR are applied (the capture uses AZ and LAR, the committed file uses ARI and LA).
+2. Live re-read: 229 transcribed rows from https://www.nfl.com/injuries/ (team, player, injury, practice status, game status), compared cell by cell with the committed file: 229 match, 0 differ. The transcription is recorded in the session log; a reviewer can re-check any row by opening the official page.
+3. Packers: the 59 numbered cells on https://www.packers.com/team/depth-chart match `raw_s1..s4`. After normalisation, no `s1..s4` cell starts with a digit, and the normaliser is idempotent (second run renames 0 cells).
+4. Leaderboard: `tests/test_leaderboard_policy.py` renders the ranked board from `data/s9cb/leaderboard.json` and asserts no return, hit-rate, p-value, interval, luck or decimal figure in the KPI strip or the ranked table. The gate definitions and the explanatory note are excluded from the check on purpose.
+5. Full gate sequence (see E6 record): `compute_correlations`, `verify_combined`, `build_site_all`, `check_generators`, `verify`, `audit_official`, `check_reachability`, `check_freshness`, strength unit tests and sub-site gate, `build_site_all --check`, and all 154 unit tests (`python3 -m unittest discover -s tests`, which needs beautifulsoup4 and requests installed, as the workflow does).
+
+## Irregularities (published on the Flagged for Review page)
+
+- **F-E1-01 (open):** backtest returns still print on `research/executive-summary.html`, `research/injuries.html`, `pages/strategies.html` and `dashboard/strategies.html`. The brief's rule covers the leaderboard; these pages show the same figures.
+- **F-E1-02 (open):** club codes ARI/LA in the committed injury file vs AZ/LAR on nfl.com (15 and 14 rows). Joins on code will miss these two clubs.
+- **F-E1-03 (open):** 118 of 347 injury rows were not re-read in this session.
+- **Correction to an earlier audit line:** the first comparison in this session reported 0 differences on keys that matched by name only. After normalising the club codes, all 347 keys match. The earlier result was correct for the matched keys, but the code mismatch had been hidden by the key comparison.
+
+## Not done in this session (honest list)
+
+Most of the brief's items were not started. Examples, each still open on the board or in the flags:
+- Official NFL Game Books, inactive lists and snap counts (none captured; no source reachable from the sandbox).
+- Houston depth chart (image-only, labelled Unofficial; needs an authorised structured source, F-7810-05).
+- Immutable multi-day snapshot store, hash-retained captures and alerting (the 2026-11-15 capture is one read).
+- Designation reliability study (needs several seasons of archived reports, not captured).
+- Model outputs as probabilities with inputs, two-estimator totals, walk-forward comparison, CLV and Brier-based ranking, parlay/prop joint-evidence gate, control baselines.
+- Roof/weather overlay, kickoff regime priors, the 136- vs 137-game results corpus gap (F49).
+- Consolidation of the root, `docs/`, `lab/`, `room/`, `web/` and `research/` generations (F46, F28, suggestion S17).
+- Gate-scheme reconciliation G1–G8 vs G01–G13 (F-7810-12).
+
+## Result record (E6)
+
+- **PR:** #73, `arena/e1fa878e-nfl1` → `main`, opened 2026-11-15 from this branch. The branch was merged with `origin/main` three times while the PR was open (PRs #70, #71, #60 and bot injury-snapshot commits); each merge regenerated the pages, and the final state passes `build_site_all.py --check`.
+- **PR checks on the final pull-request head:** `Verify NFL1 site`, `Verify decision dashboard`, `Verify NFL source provenance` and `Verify NFL Decision Lab site build`: all success.
+- **Irregularity (non-blocking, logged here):** on push, the workflow `Collect s9cb research extract` built successfully but failed at its final `git push` step (commit and push of `data/s9cb`), run `43716350841`. The bot's push raced with another bot push to the same branch. No code failure. The data step will re-run on the next push to `s9cb/**` or `workflow_dispatch`.
+- **Merge (recorded after the fact):** PR #73 merged with a merge commit, `145731b`, at 2026-11-15T12:59:56Z (`gh pr view 73`: state MERGED). The Pages build on `main` (run `43716710645`) completed with `success`. The live pages `research/backtest.html` and `depth-chart.html` were fetched and show the changed content (the backtest page carries the 'not a leaderboard result' banner; the depth chart shows Packers names without jersey numbers).
+- **Follow-up in the same session:** the Backtest page still had the KPI label 'declared before any of them was scored', an unverified claim. It was reworded to 'rules in this study; no pre-registration commit is recorded for them' and shipped in a follow-up PR from this branch.
+
 ---
 
 # Session `55dc53f4-nfl1` — pre-registered shadow baseline, Week 11 forecast record, drift alarm, team view (2026-11-15)
