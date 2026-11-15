@@ -3140,4 +3140,8 @@ Most of the brief's items were not started. Examples, each still open on the boa
 
 ## Result record (E6)
 
-Recorded below after the merge.
+- **PR:** #73, `arena/e1fa878e-nfl1` → `main`, opened 2026-11-15 from this branch. The branch was merged with `origin/main` three times while the PR was open (PRs #70, #71, #60 and bot injury-snapshot commits); each merge regenerated the pages, and the final state passes `build_site_all.py --check`.
+- **PR checks on the final pull-request head:** `Verify NFL1 site`, `Verify decision dashboard`, `Verify NFL source provenance` and `Verify NFL Decision Lab site build`: all success.
+- **Irregularity (non-blocking, logged here):** on push, the workflow `Collect s9cb research extract` built successfully but failed at its final `git push` step (commit and push of `data/s9cb`), run `43716350841`. The bot's push raced with another bot push to the same branch. No code failure. The data step will re-run on the next push to `s9cb/**` or `workflow_dispatch`.
+- **Merge:** `gh pr merge 73 --merge` was issued after this record. The merge commit and the Pages deployment result are on the PR itself (`gh pr view 73`), because this record cannot name its own merge commit before it exists.
+
