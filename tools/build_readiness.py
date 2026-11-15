@@ -26,6 +26,8 @@ OUT = ROOT / "data" / "readiness.json"
 
 NFL_INJURIES = "https://www.nfl.com/injuries/"
 NFL_SCHEDULE_2026 = "https://www.nfl.com/schedules/2026/by-week/week-10"
+REPO_BLOB = "https://github.com/kanlerxz87-cyber/NFL1/blob/main/"
+INTERNAL_ROWS = {"R1", "R2", "R3", "R4", "R9", "R10"}
 
 
 def load(rel: str):
@@ -210,6 +212,18 @@ def build() -> dict:
     # The build time is the newest data timestamp, not the wall clock, so a rebuild of unchanged
     # data is byte-identical (the --check gate depends on this).
     data_time = max((b["fetched_at_utc"] for b in beats if b.get("fetched_at_utc")), default="")
+    # Source correction (session 90c2b454-nfl1, flag F50). The schedule page was cited for rows whose
+    # evidence is a backtest, a registration, or a price record. No official page holds those numbers,
+    # so these rows link to the repository file that computes them, labelled as internal. R5, R7
+    # and R8 keep their official nfl.com links because they count records from that page.
+    for r in rows:
+        if r["id"] in INTERNAL_ROWS:
+            r["source_label"] = "internal computation: no official source applies (flag F50)"
+            r["source_url"] = REPO_BLOB + r["computed_from"].split(" ")[0]
+    for r in rows:
+        if r["id"] == "R6":
+            r["source_label"] = "club depth charts (per-club official links in the file, flag F42)"
+            r["source_url"] = REPO_BLOB + "data/depth_ladder.json"
     return {
         "generated_at": data_time or lb.get("generated_at", ""),
         "note": ("Every number is computed from the file named in computed_from. A blank threshold is "
