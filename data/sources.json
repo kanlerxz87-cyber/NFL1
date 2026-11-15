@@ -310,5 +310,25 @@
     "retrieved": "2026-11-15",
     "verified": true,
     "note": "Read in session 739408a8-nfl1 with fetch_page (chunk 0 of 4)."
+  },
+  {
+    "id": "S33",
+    "publisher": "Seattle Seahawks (seahawks.com)",
+    "url": "https://www.seahawks.com/team/depth-chart/",
+    "kind": "Official club depth chart (team website)",
+    "what": "Seahawks depth chart page: Offense, Defense and Special Teams, printed 1st/2nd/3rd/4th columns. Chunk 1 of 2 holds the full chart; chunk 2 is a cookie banner only.",
+    "retrieved": "2026-11-15",
+    "verified": true,
+    "note": "Read in session d4027f66-nfl1 with fetch_page (chunk 1 of 2 captured verbatim to data/depth/official_raw/SEA_2026-11-15.md; chunk 2 read 2026-11-15 and contains no depth-chart text). No as-of date is printed in the captured part."
+  },
+  {
+    "id": "S34",
+    "publisher": "This repository (internal file; not an official source)",
+    "url": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/preregistration/RULES_v1.md",
+    "kind": "Internal rule file (pre-registration)",
+    "what": "RULES_v1.md, registered at commit 591d8740a097 (sha256 a09d4cb3...). Design parameters of the demotion gate and leaderboard rules.",
+    "retrieved": "2026-11-15",
+    "verified": true,
+    "note": "Internal document. Its thresholds are design choices, not official figures (flag F59)."
   }
 ]

@@ -3526,7 +3526,7 @@ Branch `arena/d4027f66-nfl1` (platform-fixed; the `session-<id>/<task>` conventi
 - Packers: https://www.packers.com/team/depth-chart (label printed: "Unofficial, Nov. 10, 2026")
 - Chiefs: https://www.chiefs.com/team/depth-chart (heading "Unofficial Depth Chart"; no as-of date)
 - 49ers: https://www.49ers.com/team/depth-chart (printed: "Updated as of 11/10/26")
-- Seahawks: https://www.seahawks.com/team/depth-chart/ (chunk 1 of 2 read; no as-of label in the captured part)
+- Seahawks: https://www.seahawks.com/team/depth-chart/ (both chunks read 2026-11-15; chunk 2 is a cookie banner; no as-of label printed)
 - Captures are verbatim, with link URLs removed and link text kept in brackets: `data/depth/official_raw/*.md`.
 - Rule file: `data/preregistration/RULES_v1.md`, registration commit `591d8740a097`.
 
@@ -3592,10 +3592,10 @@ No file of `739408a8` or `e1fa878e` was changed by this session. Merge order doe
 | Main verified after merge | `896e244`, in a separate worktree: `build_site_all.py --check`, `verify.py`, `check_site.py`, `check_reachability.py`, `check_generators.py`, `verify_combined.py`, `verify_official.py`, `tools/check_preregistration_d4027.py`, `tools/check_depth_register.py`, `room/verify.py`, `check_committed_site.py` all pass; 198 unit tests OK. |
 
 **What was merged, by claim**
-- **E1** depth register for four clubs (GB, KC, SF, SEA): done for four clubs only. Seattle is read in two chunks. 36 flags, none blocking.
+- **E1** depth register for four clubs (GB, KC, SF, SEA): done for four clubs only. Seattle: both chunks were read on 2026-11-15; chunk 1 holds the full chart and chunk 2 is a cookie banner only (earlier wording said 'two chunks read' without reading chunk 2; corrected). 36 flags, none blocking.
 - **E2** pre-registration: `RULES_v1` at `591d8740a097`, registry at `af723b9`. 0 strategies registered; 0 ranked leaderboard rows. Gate: `tools/check_preregistration_d4027.py`.
 - **E3** drift alarm and CI steps: done. The verify job now checks out full history so the commit-hash check runs.
-- **E4** flags F53–F59 (needs review, none blocking) and source S31: done.
+- **E4** flags F53–F59 (needs review, none blocking) and sources S33 (Seattle depth chart) and S34 (internal rule file): done. An earlier draft cited S31, which main had assigned to the NFL schedule; the flags were repointed (F55 to S33, F59 to S34).
 - **E5** readiness: partial. IN-09, IN-10 and IN-21 updated; the other rows in the file are main's (from `1777232`), not regenerated.
 
 **Not done (not claimed)**
