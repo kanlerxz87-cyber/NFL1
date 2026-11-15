@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-15T12:38:59+00:00",
+ "generated_at": "2026-11-15T12:56:18+00:00",
  "evidence": {
   "season": 2026,
   "week_complete": 10,
@@ -2128,6 +2128,90 @@
    "action": "Replace the template URL in data/depth_ladder.json with each club's real chart URL, or remove it. Decide whether the registration and demotion rules need a non-official record (they are internal policy, so no official page can confirm them).",
    "verified": true,
    "retrieved": "2026-11-15"
+  },
+  {
+   "id": "F53",
+   "category": "Depth chart: Packers (repo vs official)",
+   "description": "data/depth_chart.json (GB rows) differs from the Packers page captured 2026-11-15 (packers.com/team/depth-chart, labelled 'Unofficial, Nov. 10, 2026'). Coleman Owen is in the repo at WR2, PR1 and KR2 and is not printed on the page. Josh Whyle is in the repo at TE4 and is not printed. Kaleb Johnson is in the repo at RB4; the page prints him on a continuation row with no position label, in the third player column (the column of Pierre Strong Jr.), so his rank is not determinable. Jersey prefixes (55 printed names) are stripped in the register and the raw string kept; the repo's 59 prefixed cells equal the 55 printed names plus the 4 repo-only cells.",
+   "impact": "Four repo cells are not on the official page; one rank is unverifiable. The register (data/depth/official_register.json) is the verified layer for these four clubs. data/depth_chart.json is not overwritten here because other pages read it.",
+   "status": "needs review",
+   "src": "S15",
+   "action": "Decide whether data/depth_chart.json is replaced by the official register (recommended) or kept with these four cells flagged. Ask the Packers for a labelled, dated chart.",
+   "retrieved": "2026-11-15",
+   "verified": true,
+   "data_src": "data/depth/official_register.json"
+  },
+  {
+   "id": "F54",
+   "category": "Depth chart: Chiefs (repo vs official)",
+   "description": "data/depth_chart.json (KC rows) differs from the Chiefs page captured 2026-11-15 (chiefs.com/team/depth-chart, heading 'Unofficial Depth Chart', no as-of date). WR row 2 in the repo has a blank slot, which moves Cyrus Allen to column 3, and Josh Downs (WR3 on the page) is absent from the repo. Kickoff return rows (KR, PR) list Emmett Johnson in column 2 in the repo; the page prints him in column 1 with Cyrus Allen in column 2. Marcus Harris (DT3) is absent from the repo. The page itself prints Jack Cochrane in two LB slots and Joshua Ezeudu in LG2 and RT2; these are reproduced as printed and flagged, not resolved.",
+   "impact": "Repo chart is wrong in 5 places and omits 2 players. The page's duplicate names are the club's own printing and cannot be resolved from the page.",
+   "status": "needs review",
+   "src": "S14",
+   "action": "Replace the KC rows from the register, or ask the club to confirm the duplicate slots.",
+   "retrieved": "2026-11-15",
+   "verified": true,
+   "data_src": "data/depth/official_register.json"
+  },
+  {
+   "id": "F55",
+   "category": "Depth chart: Seattle (evidence file vs official)",
+   "description": "data/evidence/depth_charts.json lists Rashid Shaheed at WR rank 2 and Irvin Charles at WR rank 3. The Seahawks page captured 2026-11-15 prints Cooper Kupp and Rashid Shaheed together in one WR cell (a shared slot, column 1) and Irvin Charles in column 2. The page also prints Anthony Bradford in LG2 and RG2, and Josh Jones in LT2 and RT2. The shared slot is represented as one slot with two players; no rank is assigned to either player within it.",
+   "impact": "Two evidence-file ranks disagree with the printed order. The shared slot cannot be represented as a single rank without inventing a starter.",
+   "status": "needs review",
+   "src": "S31",
+   "action": "Replace the Seattle rows with the register rows; keep the shared-slot representation.",
+   "retrieved": "2026-11-15",
+   "verified": true,
+   "data_src": "data/depth/official_register.json"
+  },
+  {
+   "id": "F56",
+   "category": "Verifier: depth check aggregates ranks across positions",
+   "description": "tools/verify_official.py B4 keys each player by club and name only, so 'KC Emmett Johnson: official rank 1, repo [2, 2, 2]' compares ranks from RB, KR and PR as if they were one list. The repo error (KR and PR at rank 2) is real and is in F54; the message conflates positions and reports them as one rank.",
+   "impact": "The B4 line can mislead a reviewer about which position is wrong. No value is changed by this flag.",
+   "status": "needs review",
+   "src": "S14",
+   "action": "Key the check by club, position and column (tools/build_depth_register.py does this in comparison.json).",
+   "retrieved": "2026-11-15",
+   "verified": true,
+   "data_src": "data/depth/official_register.json"
+  },
+  {
+   "id": "F57",
+   "category": "Depth: 32-club claim not yet reproducible",
+   "description": "The brief says 149 club/unit/position slots list more than one rank-1 player. The register covers 4 clubs (GB, KC, SF, SEA): 95 slot groups, of which 16 list more than one first-column player (for example three Packers receivers in column 1). The 149 figure needs all 32 clubs.",
+   "impact": "IN-10 cannot be marked verified from 4 clubs. Only the 4-club count is published.",
+   "status": "needs review",
+   "src": "S15",
+   "action": "Run the 32-club official depth-chart sweep (route (a) in IN-13) before quoting 149 or any league-wide count.",
+   "retrieved": "2026-11-15",
+   "verified": true,
+   "data_src": "data/depth/official_register.json"
+  },
+  {
+   "id": "F58",
+   "category": "Drift alarm: injury scraper not yet pinned",
+   "description": "The drift alarm added in this session (tools/check_depth_register.py, pinned printed-name counts and hosts) covers the depth register only. The injury scraper (pipeline/scrape_injuries.py) has no pinned row count or required-field check, so the 2026-11-15 read (347 rows) against the committed scrape (345 rows) is still reported only in the delta file.",
+   "impact": "SI-09 remains open for the injury scraper.",
+   "status": "needs review",
+   "src": "S01",
+   "action": "Pin the injury scraper to expected row counts and required fields in a follow-up session.",
+   "retrieved": "2026-11-15",
+   "verified": true,
+   "data_src": "data/depth/official_register.json"
+  },
+  {
+   "id": "F59",
+   "category": "Pre-registration: scope and parameters",
+   "description": "data/preregistration/RULES_v1.md is registered at commit 591d874 before any prospective window. It cannot retroactively register ST-01 to ST-12, whose results were already seen. Its thresholds (100 games, 50 games, 100 priced bets, alpha 0.05, 10,000 resamples, seed 20261115) are design parameters chosen by the analysis session and are not sourced from any official source.",
+   "impact": "Demotion gate and leaderboard rules are defined and gated, but no strategy can be registered until a price-data policy exists (PR-10). Reviewer may object to the thresholds before the window opens.",
+   "status": "needs review",
+   "src": "S31",
+   "action": "Review RULES_v1 thresholds. Any change after the window opens needs a new version (RULES_v2).",
+   "retrieved": "2026-11-15",
+   "verified": true,
+   "data_src": "data/depth/official_register.json"
   }
  ]
 }

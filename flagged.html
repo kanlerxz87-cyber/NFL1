@@ -85,17 +85,17 @@
   <div class="main">
     <div class="topbar">
       <div class="crumb">NFL1 / <b>Flagged for Review</b></div>
-      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">68 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">75 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
     </div>
     <main class="content" id="main">
       <div class="kicker">Assurance</div>
       <h1>Flagged for Review</h1>
       <p class="lede">Clearly labelled irregularities, official-page conflicts, unverified values and coordination issues — each with an official source link for manual review, none blocking the merge.</p>
       <div class="callout flag"><b>Flagged for Review.</b> These irregularities and unverified items do not block the merge or the live site. Each has an official source link for manual review and a suggested action. A status of <em>needs review</em> means exactly this: published here, not blocking.</div>
-<div class="cards"><div class="card"><div class="label">Flagged items</div><div class="value">68</div><div class="detail">All with source links</div></div><div class="card"><div class="label">Official-page irregularities</div><div class="value">7</div><div class="detail">F02–F08</div></div><div class="card"><div class="label">Missing official data</div><div class="value">5</div><div class="detail">F09–F11, F14, F15</div></div><div class="card"><div class="label">Combined-site review</div><div class="value">28</div><div class="detail">F25–F36</div></div></div>
+<div class="cards"><div class="card"><div class="label">Flagged items</div><div class="value">75</div><div class="detail">All with source links</div></div><div class="card"><div class="label">Official-page irregularities</div><div class="value">7</div><div class="detail">F02–F08</div></div><div class="card"><div class="label">Missing official data</div><div class="value">5</div><div class="detail">F09–F11, F14, F15</div></div><div class="card"><div class="label">Combined-site review</div><div class="value">35</div><div class="detail">F25–F36</div></div></div>
 <h2 id="all">All flagged irregularities</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-flags" aria-label="Filter tbl-flags" placeholder="Filter rows…">
-<span class="count" data-count-for="tbl-flags">68 rows shown</span></div>
+<span class="count" data-count-for="tbl-flags">75 rows shown</span></div>
 <div class="tablewrap"><table class="data-table" id="tbl-flags"><caption>Every flag with category, description, impact, status, official source link and suggested action for the reviewer.</caption>
 <thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Category</th><th scope="col" class="sortable">Irregularity / unverified item</th><th scope="col" class="sortable">Impact on decisions</th><th scope="col" class="sortable">Status</th><th scope="col" class="sortable">Suggested action</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
 <tr id="F01" data-verified="true">
@@ -709,6 +709,69 @@
 <td><span class="badge neutral">needs review</span></td>
 <td data-value="1" class="wide">Replace the template URL in data/depth_ladder.json with each club&#x27;s real chart URL, or remove it. Decide whether the registration and demotion rules need a non-official record (they are internal policy, so no official page can confirm them).</td>
 <td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F53" data-verified="true">
+<td><code>F53</code></td>
+<td data-value="1">Depth chart: Packers (repo vs official)</td>
+<td data-value="1" class="wide">data/depth_chart.json (GB rows) differs from the Packers page captured 2026-11-15 (packers.com/team/depth-chart, labelled &#x27;Unofficial, Nov. 10, 2026&#x27;). Coleman Owen is in the repo at WR2, PR1 and KR2 and is not printed on the page. Josh Whyle is in the repo at TE4 and is not printed. Kaleb Johnson is in the repo at RB4; the page prints him on a continuation row with no position label, in the third player column (the column of Pierre Strong Jr.), so his rank is not determinable. Jersey prefixes (55 printed names) are stripped in the register and the raw string kept; the repo&#x27;s 59 prefixed cells equal the 55 printed names plus the 4 repo-only cells.</td>
+<td data-value="1" class="wide">Four repo cells are not on the official page; one rank is unverifiable. The register (data/depth/official_register.json) is the verified layer for these four clubs. data/depth_chart.json is not overwritten here because other pages read it.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Decide whether data/depth_chart.json is replaced by the official register (recommended) or kept with these four cells flagged. Ask the Packers for a labelled, dated chart.</td>
+<td><span class="src"><a href="https://www.packers.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Green Bay Packers (packers.com) — Official club depth chart">S15 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F54" data-verified="true">
+<td><code>F54</code></td>
+<td data-value="1">Depth chart: Chiefs (repo vs official)</td>
+<td data-value="1" class="wide">data/depth_chart.json (KC rows) differs from the Chiefs page captured 2026-11-15 (chiefs.com/team/depth-chart, heading &#x27;Unofficial Depth Chart&#x27;, no as-of date). WR row 2 in the repo has a blank slot, which moves Cyrus Allen to column 3, and Josh Downs (WR3 on the page) is absent from the repo. Kickoff return rows (KR, PR) list Emmett Johnson in column 2 in the repo; the page prints him in column 1 with Cyrus Allen in column 2. Marcus Harris (DT3) is absent from the repo. The page itself prints Jack Cochrane in two LB slots and Joshua Ezeudu in LG2 and RT2; these are reproduced as printed and flagged, not resolved.</td>
+<td data-value="1" class="wide">Repo chart is wrong in 5 places and omits 2 players. The page&#x27;s duplicate names are the club&#x27;s own printing and cannot be resolved from the page.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Replace the KC rows from the register, or ask the club to confirm the duplicate slots.</td>
+<td><span class="src"><a href="https://www.chiefs.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Kansas City Chiefs (chiefs.com) — Official club depth chart">S14 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F55" data-verified="true">
+<td><code>F55</code></td>
+<td data-value="1">Depth chart: Seattle (evidence file vs official)</td>
+<td data-value="1" class="wide">data/evidence/depth_charts.json lists Rashid Shaheed at WR rank 2 and Irvin Charles at WR rank 3. The Seahawks page captured 2026-11-15 prints Cooper Kupp and Rashid Shaheed together in one WR cell (a shared slot, column 1) and Irvin Charles in column 2. The page also prints Anthony Bradford in LG2 and RG2, and Josh Jones in LT2 and RT2. The shared slot is represented as one slot with two players; no rank is assigned to either player within it.</td>
+<td data-value="1" class="wide">Two evidence-file ranks disagree with the printed order. The shared slot cannot be represented as a single rank without inventing a starter.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Replace the Seattle rows with the register rows; keep the shared-slot representation.</td>
+<td><span class="src"><a href="https://www.seahawks.com/team/depth-chart/" target="_blank" rel="noopener noreferrer" title="Seattle Seahawks (seahawks.com) — Official club depth chart">S31 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F56" data-verified="true">
+<td><code>F56</code></td>
+<td data-value="1">Verifier: depth check aggregates ranks across positions</td>
+<td data-value="1" class="wide">tools/verify_official.py B4 keys each player by club and name only, so &#x27;KC Emmett Johnson: official rank 1, repo [2, 2, 2]&#x27; compares ranks from RB, KR and PR as if they were one list. The repo error (KR and PR at rank 2) is real and is in F54; the message conflates positions and reports them as one rank.</td>
+<td data-value="1" class="wide">The B4 line can mislead a reviewer about which position is wrong. No value is changed by this flag.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Key the check by club, position and column (tools/build_depth_register.py does this in comparison.json).</td>
+<td><span class="src"><a href="https://www.chiefs.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Kansas City Chiefs (chiefs.com) — Official club depth chart">S14 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F57" data-verified="true">
+<td><code>F57</code></td>
+<td data-value="1">Depth: 32-club claim not yet reproducible</td>
+<td data-value="1" class="wide">The brief says 149 club/unit/position slots list more than one rank-1 player. The register covers 4 clubs (GB, KC, SF, SEA): 95 slot groups, of which 16 list more than one first-column player (for example three Packers receivers in column 1). The 149 figure needs all 32 clubs.</td>
+<td data-value="1" class="wide">IN-10 cannot be marked verified from 4 clubs. Only the 4-club count is published.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Run the 32-club official depth-chart sweep (route (a) in IN-13) before quoting 149 or any league-wide count.</td>
+<td><span class="src"><a href="https://www.packers.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Green Bay Packers (packers.com) — Official club depth chart">S15 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F58" data-verified="true">
+<td><code>F58</code></td>
+<td data-value="1">Drift alarm: injury scraper not yet pinned</td>
+<td data-value="1" class="wide">The drift alarm added in this session (tools/check_depth_register.py, pinned printed-name counts and hosts) covers the depth register only. The injury scraper (pipeline/scrape_injuries.py) has no pinned row count or required-field check, so the 2026-11-15 read (347 rows) against the committed scrape (345 rows) is still reported only in the delta file.</td>
+<td data-value="1" class="wide">SI-09 remains open for the injury scraper.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Pin the injury scraper to expected row counts and required fields in a follow-up session.</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F59" data-verified="true">
+<td><code>F59</code></td>
+<td data-value="1">Pre-registration: scope and parameters</td>
+<td data-value="1" class="wide">data/preregistration/RULES_v1.md is registered at commit 591d874 before any prospective window. It cannot retroactively register ST-01 to ST-12, whose results were already seen. Its thresholds (100 games, 50 games, 100 priced bets, alpha 0.05, 10,000 resamples, seed 20261115) are design parameters chosen by the analysis session and are not sourced from any official source.</td>
+<td data-value="1" class="wide">Demotion gate and leaderboard rules are defined and gated, but no strategy can be registered until a price-data policy exists (PR-10). Reviewer may object to the thresholds before the window opens.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Review RULES_v1 thresholds. Any change after the window opens needs a new version (RULES_v2).</td>
+<td><span class="src"><a href="https://www.seahawks.com/team/depth-chart/" target="_blank" rel="noopener noreferrer" title="Seattle Seahawks (seahawks.com) — Official club depth chart">S31 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
 </tr>
 </tbody></table></div>
 <h2 id="unverified">Registry of blank/unverified values</h2>

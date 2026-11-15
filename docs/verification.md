@@ -33,6 +33,7 @@ Every table row on the site links to an official source. Values that no official
 | S27 | National Football League (NFL.com) | Official Game Center result | Washington Commanders at New York Giants, Week 10, 2026; final score and game status | Official Game Center showed Commanders 24, Giants 21, FINAL; used only to identify the unresolved result-corpus gap, not to add a result row. | 2026-11-15 | [S27](https://www.nfl.com/games/commanders-at-giants-2026-reg-10) | yes |
 | S29 | Baltimore Ravens (baltimoreravens.com) | Official club depth chart | Ravens depth chart, quarterback row: Jacoby Brissett, Joe Fagnano, Kedon Slovis (Lamar Jackson and Tyler Huntley not listed) | Read 2026-11-15 in this session; the chart's own as-of date was not shown on the text read. | 2026-11-15 | [S29](https://www.baltimoreravens.com/team/depth-chart) | yes |
 | S30 | Houston Texans (houstontexans.com) | Club depth chart (image only, labelled Unofficial) | Texans depth chart page: depth chart is an image labelled 'Unofficial Depth Chart'; no text rows | Not transcribed by eye; needs an authorized structured source. | 2026-11-15 | [S30](https://www.houstontexans.com/team/depth-chart) | yes |
+| S31 | Seattle Seahawks (seahawks.com) | Official club depth chart | Seahawks depth chart, offense/defense/special teams tables (chunk 1 of 2 read) | Captured verbatim in data/depth/official_raw/SEA_2026-11-15.md. No as-of label appears in the captured portion. | 2026-11-15 | [S31](https://www.seahawks.com/team/depth-chart/) | yes |
 
 ## Procedure
 
