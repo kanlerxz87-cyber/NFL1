@@ -1,0 +1,125 @@
+{
+ "generated_at": "2026-11-15T13:17:47+00:00",
+ "state": {
+  "model": {
+   "side": {
+    "bss": -0.04127051216818156,
+    "n": 6785,
+    "lower_bound": -0.051270745077235856
+   },
+   "total": {
+    "bss": -0.03460832897542576,
+    "n": 6878,
+    "lower_bound": -0.04472876550431553
+   },
+   "moneyline": {
+    "bss": -0.07144443215860252,
+    "n": 5187,
+    "lower_bound": -0.08750937088619609
+   },
+   "parlay": {
+    "bss": null,
+    "n": null,
+    "lower_bound": null
+   },
+   "same-game parlay": {
+    "bss": null,
+    "n": null,
+    "lower_bound": null
+   },
+   "player prop": {
+    "bss": null,
+    "n": null,
+    "lower_bound": null
+   }
+  },
+  "strategies": {
+   "S07 Fade the road favourite of 7+": {
+    "rank": 1,
+    "bss_vs_price": 0.0104,
+    "roi_pct": 6.064,
+    "n_decided": 394,
+    "status": "scored"
+   },
+   "S09 Under when the total is 40 or lower": {
+    "rank": 2,
+    "bss_vs_price": 0.0026,
+    "roi_pct": -7.934,
+    "n_decided": 874,
+    "status": "scored"
+   },
+   "S04 Model total edge >= 4.0 pts": {
+    "rank": 3,
+    "bss_vs_price": 0.0022,
+    "roi_pct": 2.499,
+    "n_decided": 1276,
+    "status": "scored"
+   },
+   "S03 Model total edge >= 2.5 pts": {
+    "rank": 4,
+    "bss_vs_price": 0.0014,
+    "roi_pct": 1.842,
+    "n_decided": 2424,
+    "status": "scored"
+   },
+   "S05 Rest edge >= 3 days": {
+    "rank": 5,
+    "bss_vs_price": 0.0003,
+    "roi_pct": 0.487,
+    "n_decided": 1076,
+    "status": "scored"
+   },
+   "S12 Out-count gap of 3 or more": {
+    "rank": 6,
+    "bss_vs_price": -0.0002,
+    "roi_pct": -0.304,
+    "n_decided": 663,
+    "status": "scored"
+   },
+   "S10 Over when the total is 50 or higher": {
+    "rank": 7,
+    "bss_vs_price": -0.0002,
+    "roi_pct": -5.413,
+    "n_decided": 590,
+    "status": "scored"
+   },
+   "S01 Model spread edge >= 1.5 pts": {
+    "rank": 8,
+    "bss_vs_price": -0.0003,
+    "roi_pct": -0.366,
+    "n_decided": 3455,
+    "status": "scored"
+   },
+   "S02 Model spread edge >= 3.0 pts": {
+    "rank": 9,
+    "bss_vs_price": -0.0003,
+    "roi_pct": -0.451,
+    "n_decided": 2227,
+    "status": "scored"
+   },
+   "S06 Divisional road underdog of 3+": {
+    "rank": 10,
+    "bss_vs_price": -0.0004,
+    "roi_pct": -1.857,
+    "n_decided": 517,
+    "status": "scored"
+   },
+   "S11 Opponent QB ruled Out/Doubtful": {
+    "rank": 11,
+    "bss_vs_price": -0.0006,
+    "roi_pct": -1.507,
+    "n_decided": 372,
+    "status": "scored"
+   },
+   "S08 Home team off a bye": {
+    "rank": 12,
+    "bss_vs_price": -0.0,
+    "roi_pct": -5.126,
+    "n_decided": 265,
+    "status": "scored"
+   }
+  },
+  "live": 0,
+  "registered": 31
+ }
+}

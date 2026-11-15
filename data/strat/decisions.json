@@ -1,0 +1,148 @@
+{
+ "generated_at": "2026-11-15T13:18:48+00:00",
+ "n_decisions": 12,
+ "rule": "A decision needs only a choice. A question needs information first. The two registers are kept separate so a decision is never blocked on a question nobody can answer.",
+ "rows": [
+  {
+   "id": "D01",
+   "decision": "Adopt the competition overview as the entry page for this site",
+   "options": [
+    "Adopt (recommended)",
+    "Keep the old entry",
+    "Merge into the landing page"
+   ],
+   "gate": "none \u2014 a choice",
+   "owner": "repository owner",
+   "source": "repo"
+  },
+  {
+   "id": "D02",
+   "decision": "Pre-register a promotion rule before any live bet",
+   "options": [
+    "Write it now (recommended)",
+    "Leave the promotion condition unwritten",
+    "Promote on backtest only (rejected: result-chasing)"
+   ],
+   "gate": "Q09",
+   "owner": "repository owner",
+   "source": "repo"
+  },
+  {
+   "id": "D03",
+   "decision": "Settle the official-data terms question (Q01) and then choose the publication model",
+   "options": [
+    "Obtain written consent",
+    "Publish aggregates plus links only (recommended interim)",
+    "Stop the scrape"
+   ],
+   "gate": "legal review",
+   "owner": "repository owner",
+   "source": "terms"
+  },
+  {
+   "id": "D04",
+   "decision": "Run the availability feature as an ablation once a verified feed exists",
+   "options": [
+    "Ablation (recommended)",
+    "Fixed points penalty (rejected by the brief)",
+    "No availability features"
+   ],
+   "gate": "Q01 and Q12",
+   "owner": "next availability session",
+   "source": "injuries_w10"
+  },
+  {
+   "id": "D05",
+   "decision": "Publish the market beside every own line",
+   "options": [
+    "Always (recommended)",
+    "Model only",
+    "Market only"
+   ],
+   "gate": "none \u2014 implemented",
+   "owner": "this session",
+   "source": "schedules"
+  },
+  {
+   "id": "D06",
+   "decision": "Rank by proper scores with uncertainty instead of win rate",
+   "options": [
+    "Proper scores (recommended, implemented)",
+    "Win rate",
+    "Season ROI (rejected by the brief)"
+   ],
+   "gate": "none \u2014 implemented",
+   "owner": "this session",
+   "source": "schedules"
+  },
+  {
+   "id": "D07",
+   "decision": "Keep the control baselines in the main leaderboard",
+   "options": [
+    "Main table (recommended)",
+    "Appendix",
+    "Omit"
+   ],
+   "gate": "prospective sample",
+   "owner": "next strategy session",
+   "source": "schedules"
+  },
+  {
+   "id": "D08",
+   "decision": "Add the blocking gate and clearing number to the readiness register",
+   "options": [
+    "Adopt (recommended, partially present)",
+    "Leave as status only"
+   ],
+   "gate": "none \u2014 a choice",
+   "owner": "repository owner",
+   "source": "repo"
+  },
+  {
+   "id": "D09",
+   "decision": "Fail the build on a scraper drift rather than publishing a blank",
+   "options": [
+    "Fail loudly (recommended, implemented)",
+    "Publish blank with a badge"
+   ],
+   "gate": "none \u2014 implemented",
+   "owner": "this session",
+   "source": "injuries_w10"
+  },
+  {
+   "id": "D10",
+   "decision": "Keep both total estimators published until one wins",
+   "options": [
+    "Both with the gap (recommended, implemented)",
+    "Collapse to A",
+    "Collapse to B"
+   ],
+   "gate": "W05 walk-forward verdict",
+   "owner": "next modelling session",
+   "source": "schedules"
+  },
+  {
+   "id": "D11",
+   "decision": "Require a two-sided falsifier on every published claim",
+   "options": [
+    "Require it (recommended, implemented)",
+    "Optional"
+   ],
+   "gate": "none \u2014 implemented",
+   "owner": "this session",
+   "source": "repo"
+  },
+  {
+   "id": "D12",
+   "decision": "Charge the strategy family for multiplicity with a pre-registered effective-test count",
+   "options": [
+    "Pre-register the count (recommended)",
+    "Bonferroni as now (conservative)",
+    "No charge (rejected)"
+   ],
+   "gate": "Q05",
+   "owner": "next strategy session",
+   "source": "schedules"
+  }
+ ]
+}

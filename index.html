@@ -37,6 +37,7 @@
     <a href="review-room/index.html">Review Room</a>
     <a href="prereg/index.html">Pre-registration ledger</a>
     <a href="research/index.html">s9cb Research</a>
+    <a href="strat/index.html">Strategy Competition</a>
     <a href="pages/executive-summary.html">Executive Summary (companion)</a>
     <a href="pages/teams.html">Teams</a>
     <a href="pages/standings.html">Standings</a>
@@ -51,13 +52,13 @@
   </nav>
 </header>
 <div class="shell">
-<aside class="sidebar" aria-label="Categories"><div class="navgroup"><span>Overview</span><a href="index.html" class="active">Overview</a><a href="pages/executive.html">Executive Summary</a><a href="pages/sections.html">All Sections</a></div><div class="navgroup"><span>Lines & model</span><a href="pages/lines.html">My Lines</a><a href="pages/correlations.html">Correlations</a></div><div class="navgroup"><span>Competition</span><a href="pages/strategies.html">Strategy Lab</a><a href="pages/luck.html">Skill vs Luck</a><a href="pages/parlays.html">Parlays &amp; Combos</a><a href="pages/props.html">Player Props</a></div><div class="navgroup"><span>Availability</span><a href="pages/injuries.html">Injuries</a><a href="pages/depth.html">Depth &amp; Deficiency</a><a href="pages/snapshots.html">Injury Snapshots</a></div><div class="navgroup"><span>Decisions</span><a href="pages/questions.html">Questions</a><a href="pages/suggestions.html">Suggestions</a></div><div class="navgroup"><span>Evidence</span><a href="pages/evidence.html">Evidence</a><a href="pages/review.html">Flagged for Review</a></div><div class="navgroup"><span>Companion pages</span><a href="room/index.html">Decision Room</a><a href="strength/index.html">SOS Study</a><a href="pages/teams.html">Teams</a><a href="pages/standings.html">Standings</a><a href="pages/availability.html">Availability</a><a href="pages/data.html">Verified data</a><a href="pages/analysis.html">Validation &amp; correlation</a><a href="pages/decisions.html">Decision register</a><a href="pages/verified.html">Verified artifacts</a><a href="pages/models.html">Models</a><a href="pages/executive-summary.html">Executive summary (companion)</a><a href="pages/flagged.html">Flagged (companion)</a><a href="prereg/index.html">Pre-registration ledger</a></div></aside>
+<aside class="sidebar" aria-label="Categories"><div class="navgroup"><span>Overview</span><a href="index.html" class="active">Overview</a><a href="pages/executive.html">Executive Summary</a><a href="pages/sections.html">All Sections</a></div><div class="navgroup"><span>Lines & model</span><a href="pages/lines.html">My Lines</a><a href="pages/correlations.html">Correlations</a></div><div class="navgroup"><span>Competition</span><a href="strat/index.html">Strategy Competition</a><a href="pages/strategies.html">Strategy Lab</a><a href="pages/luck.html">Skill vs Luck</a><a href="pages/parlays.html">Parlays &amp; Combos</a><a href="pages/props.html">Player Props</a></div><div class="navgroup"><span>Availability</span><a href="pages/injuries.html">Injuries</a><a href="pages/depth.html">Depth &amp; Deficiency</a><a href="pages/snapshots.html">Injury Snapshots</a></div><div class="navgroup"><span>Decisions</span><a href="pages/questions.html">Questions</a><a href="pages/suggestions.html">Suggestions</a></div><div class="navgroup"><span>Evidence</span><a href="pages/evidence.html">Evidence</a><a href="pages/review.html">Flagged for Review</a></div><div class="navgroup"><span>Companion pages</span><a href="room/index.html">Decision Room</a><a href="strength/index.html">SOS Study</a><a href="pages/teams.html">Teams</a><a href="pages/standings.html">Standings</a><a href="pages/availability.html">Availability</a><a href="pages/data.html">Verified data</a><a href="pages/analysis.html">Validation &amp; correlation</a><a href="pages/decisions.html">Decision register</a><a href="pages/verified.html">Verified artifacts</a><a href="pages/models.html">Models</a><a href="pages/executive-summary.html">Executive summary (companion)</a><a href="pages/flagged.html">Flagged (companion)</a><a href="prereg/index.html">Pre-registration ledger</a></div></aside>
 <main id="main">
   <section class="page-head">
     <p class="eyebrow">Evidence-first dashboard</p>
     <h1>Overview</h1>
     <p class="standfirst">A working dashboard for originating NFL lines, punishing luck, and flagging what is unknown.</p>
-    <p class="timestamp">Data built 2026-11-15T13:23:13+00:00 · every value links to its source</p>
+    <p class="timestamp">Data built 2026-11-15T13:24:07+00:00 · every value links to its source</p>
   </section>
   
 <section class="hero">
@@ -70,6 +71,7 @@
       <a class="btn" href="web/dashboard.html">Open the decision dashboard</a>
       <a class="btn ghost" href="pages/lines.html">See this week's own lines</a>
       <a class="btn ghost" href="pages/executive.html">Read the executive summary</a>
+      <a class="btn ghost" href="strat/index.html">Strategy competition (gated leaderboard)</a>
     </div>
   </div>
   <aside class="hero-card">
@@ -90,6 +92,28 @@
   <div class="panel-head"><h2>Removal of luck: what a lucky run would have produced</h2>
     <a href="pages/luck.html">How luck is removed &rarr;</a></div>
   <div class="table-wrap"><table class=""><thead><tr><th>Strategy</th><th>Bets</th><th>Profit (units)</th><th>Lucky band, 95%</th><th>Verdict</th><th>p (two-sided)</th><th>Bets needed for 80% power</th><th>Source</th></tr></thead><tbody><tr><td>S07 Fade the road favourite of 7+</td><td>401</td><td>24.3</td><td>&plusmn;37.2</td><td><span class="badge neutral">inside the luck band</span></td><td>0.200</td><td>1950</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">closing lines</a></td></tr><tr><td>S03 Model total edge &gt;= 2.5 pts</td><td>2463</td><td>45.4</td><td>&plusmn;93.8</td><td><span class="badge neutral">inside the luck band</span></td><td>0.343</td><td>21856</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">closing lines</a></td></tr><tr><td>S04 Model total edge &gt;= 4.0 pts</td><td>1295</td><td>32.4</td><td>&plusmn;68.0</td><td><span class="badge neutral">inside the luck band</span></td><td>0.351</td><td>11872</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">closing lines</a></td></tr><tr><td>S05 Rest edge &gt;= 3 days</td><td>1103</td><td>5.4</td><td>&plusmn;62.6</td><td><span class="badge neutral">inside the luck band</span></td><td>0.867</td><td>314129</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">closing lines</a></td></tr><tr><td>S12 Out-count gap of 3 or more</td><td>685</td><td>-2.1</td><td>&plusmn;49.0</td><td><span class="badge neutral">inside the luck band</span></td><td>0.934</td><td><span class="missing">blank</span></td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">closing lines</a></td></tr><tr><td>S02 Model spread edge &gt;= 3.0 pts</td><td>2277</td><td>-10.3</td><td>&plusmn;89.5</td><td><span class="badge neutral">inside the luck band</span></td><td>0.822</td><td><span class="missing">blank</span></td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">closing lines</a></td></tr></tbody></table></div><p class="note">Removal of luck: a purely lucky run at the observed prices would land inside the band 95% of the time. A profit inside the band is not evidence of skill. Full method and the eight gates: Skill vs Luck.</p>
+</section>
+
+<section class="panel" id="strategy-competition">
+  <div class="panel-head">
+    <h2>Strategy competition — the gated leaderboard</h2>
+    <a href="strat/index.html">Open the strategy competition →</a>
+  </div>
+  <p class="sub">Pre-registration, proper scores with uncertainty, a demotion gate, and two-sided
+  falsifiers on every claim. Every rule frozen before it was scored; nothing promoted on a lucky run.</p>
+  <div class="table-wrap"><table><thead><tr><th>Measure</th><th>Value</th><th>Reading</th><th>Artifact</th></tr></thead><tbody><tr><td>Strategies registered</td><td>31</td><td>12 backtest (selection-exposed) · 19 prospective</td><td><a class="src" href="data/strat/preregistration.json">preregistration.json</a></td></tr><tr><td>Live strategies</td><td>0</td><td>no prospective price exists, so nothing can be live</td><td><a class="src" href="data/strat/demotion.json">demotion.json</a></td></tr><tr><td>Demotions ever</td><td>0</td><td>five pre-registered rules, armed and never fired</td><td><a class="src" href="data/strat/demotion.json">demotion.json</a></td></tr><tr><td>Model skill, side (Brier vs closing line)</td><td>-0.0413</td><td>game-cluster 95% interval -0.0513 to -0.0299 on 6,785 games</td><td><a class="src" href="data/strat/proper_score.json">proper_score.json</a></td></tr><tr><td>Model skill, total</td><td>-0.0346</td><td>interval -0.0447 to -0.0245 on 6,878 games</td><td><a class="src" href="data/strat/proper_score.json">proper_score.json</a></td></tr><tr><td>Model skill, moneyline vs de-vigged market</td><td>-0.0714</td><td>interval -0.0875 to -0.0560 on 5,187 games</td><td><a class="src" href="data/strat/proper_score.json">proper_score.json</a></td></tr><tr><td>Closing line vs a coin (moneyline)</td><td>+0.1564</td><td>interval +0.1385 to +0.1739 — the market is informative</td><td><a class="src" href="data/strat/proper_score.json">proper_score.json</a></td></tr><tr><td>Official rows reconciled against the extract</td><td>137 / 137</td><td>0 disagreements · scope: 2026 only</td><td><a class="src" href="data/strat/official_reconciliation.json">official_reconciliation.json</a></td></tr></tbody></table></div>
+  <p class="note"><a href="strat/index.html">Overview</a> ·
+  <a href="strat/leaderboard.html">proper-score leaderboard</a> ·
+  <a href="strat/preregister.html">pre-registration</a> ·
+  <a href="strat/demotion.html">demotion gate</a> ·
+  <a href="strat/what-would-change.html">what would change our mind</a> ·
+  <a href="strat/totals.html">two totals</a> ·
+  <a href="strat/reconciliation.html">official reconciliation</a> ·
+  <a href="strat/diff.html">what changed</a> ·
+  <a href="strat/questions.html">open questions</a> ·
+  <a href="strat/suggestions.html">suggestions</a> ·
+  <a href="strat/flagged.html">flagged</a> ·
+  <a href="strat/executive-summary.html">executive summary</a></p>
 </section>
 
 <section class="panel">

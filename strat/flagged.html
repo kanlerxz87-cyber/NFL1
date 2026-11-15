@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flagged for Review · NFL Strategy Competition</title>
+<meta name="description" content="Pre-registered NFL line-origination strategies, ranked by benchmark-relative proper scores with uncertainty. Every row carries an official source link; blank means unverified.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="brand" href="../index.html"><span class="mark">NFL</span><span class="brand-text">Strategy Competition</span></a>
+  <nav aria-label="Strategy competition sections"><a href="index.html">Overview</a><a href="leaderboard.html">Proper-Score Leaderboard</a><a href="preregister.html">Pre-Registration</a><a href="demotion.html">Demotion Gate</a><a href="what-would-change.html">What Would Change Our Mind</a><a href="totals.html">Two Totals</a><a href="reconciliation.html">Official Reconciliation</a><a href="diff.html">What Changed</a><a href="questions.html">Open Questions</a><a href="suggestions.html">Suggestions</a><a href="flagged.html" class="active">Flagged for Review</a><a href="method.html">Method &amp; Sources</a><a href="executive-summary.html">Executive Summary</a></nav>
+</header>
+<main id="main">
+  <section class="page-head">
+    <p class="eyebrow">Strategy competition</p>
+    <h1>Flagged for Review</h1>
+    <p class="standfirst">Every irregularity this session found, what it affects, and the observation that would close it.</p>
+    <p class="timestamp">Built 2026-11-15T13:17:29+00:00 UTC · every table row links to its source · a blank cell means the value is not confirmed</p>
+  </section>
+
+<section class="panel">
+  <h2>12 irregularities found by this session</h2>
+  <p class="lede">These are published rather than fixed silently. None of them blocks the site from
+  going live; each names the observation that would close it.</p>
+  <div class="table-wrap"><table class=""><thead><tr><th>ID</th><th>Finding</th><th>Affects</th><th>Status</th><th>What is being done</th><th>Source</th></tr></thead><tbody><tr><td><strong>SC-01</strong></td><td>The twelve legacbacktest rules were defined after their scoring data existed. Their published ROI figures are selection-exposed: twelve hypotheses were searched in one run.</td><td>Every ROI and win-rate number in data/s9cb/leaderboard.json</td><td><span class="badge neutral">PUBLISHED AND MITIGATED, NOT REMOVED</span></td><td>Registered as registered-backtest with the exposure stated; the multiplicity charge in the leaderboard pays for the search; no legacy rule can be promoted.</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td><strong>SC-02</strong></td><td>No opening price exists anywhere in the repository, and the closing price carries no fetch time. The price-snapshot store the brief requires is therefore blocked by a data-source decision, not by engineering.</td><td>Price-snapshot store (PR-01); any prospective ROI</td><td><span class="badge warn">OPEN</span></td><td>Q02 and W11 state the exact observation that would clear it.</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td><strong>SC-03</strong></td><td>S11 and S12 read an injury-designation level from the weekly report. The brief explicitly forbids a level as a signal and asks for a surprise instead.</td><td>Two scored rules</td><td><span class="badge neutral">PUBLISHED AND SUPERSEDED</span></td><td>Both stay scored so the comparison is visible; the surprise rules P07-P09 replace them and the level rules can never be promoted.</td><td><a class="src" href="https://www.nfl.com/injuries/league/2026/reg10" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td><strong>SC-04</strong></td><td>The historical results and closing lines are a third-party (nflverse) extract of the NFL GSIS feed. The repository&#x27;s official check covers the 2026 season only, so the historical intervals rest on an unverified transcription.</td><td>All 6,785-game intervals on the leaderboard</td><td><span class="badge warn">OPEN</span></td><td>Q03 names the reconciliation that would close it.</td><td><a class="src" href="https://www.nfl.com/games/commanders-at-giants-2026-reg-10" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td><strong>SC-05</strong></td><td>The model loses to the closing line on all three markets (side -0.0413, total -0.0346, moneyline -0.0714).</td><td>The origination claim the project is built on</td><td><span class="badge neutral">PUBLISHED, NOT HIDDEN</span></td><td>Stated on the overview and in the executive summary. W01-W03 record what would reverse it.</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td><strong>SC-06</strong></td><td>No player-prop price exists in the repository, so three of six leaderboard divisions cannot be scored at all.</td><td>Prop, prop-combo and same-game-parlay divisions</td><td><span class="badge warn">OPEN</span></td><td>Q10; the divisions are published as blank with the reason rather than omitted.</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td><strong>SC-07</strong></td><td>The two-estimator comparison has no winner: the holdout paired difference is -0.0136 points with an interval of -0.2288 to +0.2188.</td><td>Any claim that the rating model adds information on the total</td><td><span class="badge neutral">PUBLISHED AS UNDECIDED</span></td><td>Both estimators published until one wins (W05).</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td><strong>SC-08</strong></td><td>The promotion rule is not pre-registered, so the competition has a pre-registered exit and no pre-registered entrance.</td><td>Live status and rewards</td><td><span class="badge warn">OPEN</span></td><td>Q09 and suggestion SG2.</td><td><a class="src" href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td><strong>SC-09</strong></td><td>2,072 table rows with official source links are published row-level while the licence question in flag F51 is unresolved.</td><td>The whole publication model</td><td><span class="badge warn">OPEN</span></td><td>Q01, Q11 and suggestion SG11.</td><td><a class="src" href="https://www.nfl.com/legal/terms/" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td><strong>SC-11</strong></td><td>The third-party extract holds a completed Week 10 game (WAS 24, NYG 21) that the repository&#x27;s own official transcription file did not contain; the gap is now closed by an official Game Center row fetched in this build.</td><td>The 2026 results corpus; reconciles with the earlier session&#x27;s flag F49</td><td><span class="badge neutral">RESOLVED IN THIS BUILD</span></td><td>Official rows 137, matched 137, mismatched 0. The reconciliation is published game by game on the Official Reconciliation page and runs as a build step.</td><td><a class="src" href="https://www.nfl.com/games/commanders-at-giants-2026-reg-10" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td><strong>SC-12</strong></td><td>The reconciliation covers 137 rows of 2026 only. The other seasons behind the leaderboard&#x27;s intervals are unverified against any official page.</td><td>Every interval computed before 2026</td><td><span class="badge warn">OPEN</span></td><td>Q03 and readiness row PR-02 name the extension route: official Game Books, season by season.</td><td><a class="src" href="https://github.com/nflverse/nflverse-data/releases/tag/schedules" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td><strong>SC-10</strong></td><td>The default figure for the strategy family&#x27;s multiplicity charge assumes the twelve rules are independent tests. Several share inputs (S01/S02, S03/S04), so the charge is conservative in the wrong direction.</td><td>The multiplicity column on the leaderboard</td><td><span class="badge warn">OPEN</span></td><td>Q05 and decision D12.</td><td><a class="src" href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">source ↗</a></td></tr></tbody></table></div>
+</section>
+<section class="panel">
+  <h2>Carried from earlier sessions</h2>
+  <p class="note">Flag <strong>F51</strong> (NFL.com Terms of Use versus the scheduled scrape of
+  nfl.com/injuries) remains open and is the single most consequential item on the repository's flag
+  register. It is not re-litigated here; see the root <a href="../pages/review.html">Flagged for
+  Review</a> page and <a href="../flagged.html">flagged.html</a>. Nothing published by this session
+  adds to the row-level exposure.</p>
+</section>
+
+</main>
+<footer>
+  <p>NFL Strategy Competition · part of the NFL Decision Lab. Prices, results and injury data are
+  described at <a href="method.html">Method &amp; Sources</a>. Nothing on this site is a recommendation
+  to bet, and no strategy is claimed to be profitable: the leaderboard publishes scores,
+  uncertainty and the gate that fails.</p>
+  <p><a href="../index.html">← Back to the NFL Decision Lab</a> · <a href="executive-summary.html">Executive summary</a> · <a href="questions.html">Open questions</a></p>
+</footer>
+</body>
+</html>

@@ -1,85 +1,186 @@
 #!/usr/bin/env python3
-"""Pre-registration gate (session d4027f66-nfl1). Stdlib only.
+"""tools/check_preregistration.py — a backtest number may not appear without a frozen rule (C1).
 
-FAILS (exit 1) when:
-  * a registered rule file is missing or its sha256 differs from the registry (it was edited),
-  * git history is available and the earliest commit adding the rule file is not the recorded
-    registration commit,
-  * a leaderboard row shows a rank, score, sample size or reward, or any backtest field,
-    for a strategy that is not in a registration's `registered_strategies`.
-FLAGS (exit 0) when git history is unavailable (for example a shallow CI checkout), so the
-commit-hash check is reported as not performed rather than silently passed.
+Three failure modes, all of them real
+-------------------------------------
+1. **An unregistered result.** `data/s9cb/leaderboard.json` publishes a strategy that has no
+   record in `data/strat/preregistration.json`.  A number nobody registered is a number that was
+   chosen after the fact, which the brief forbids outright.
+2. **A registration that came after the result.** The registration commit must be an ancestor of
+   the commit that publishes the result.  If it is not, the "pre-" in pre-registration is a lie.
+3. **Drift between the frozen text and the code.** A registration whose rule no longer fires the
+   way it was registered is worthless, because the result being published was produced by a
+   different rule.  Every registered backtest rule's exact strategy string must still appear in
+   the generator that scores it.
+
+What this gate deliberately does not do
+---------------------------------------
+It does not require a rule to be profitable, and it does not fail on a losing rule.  A registered
+rule that loses is a result, which is the point of registering it.
+
+Run: python3 tools/check_preregistration.py
+     python3 tools/check_preregistration.py --self-test   # prove each check fires
 """
+from __future__ import annotations
+
 import hashlib
 import json
+import os
 import subprocess
 import sys
-from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
-REG = ROOT / "data" / "preregistration" / "registry.json"
-LB = ROOT / "data" / "leaderboard.json"
-
-
-def _git(*args: str) -> str | None:
-    try:
-        out = subprocess.run(["git", *args], cwd=ROOT, capture_output=True, text=True, timeout=30)
-    except (OSError, subprocess.TimeoutExpired):
-        return None
-    return out.stdout.strip() if out.returncode == 0 else None
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PRE = os.path.join(ROOT, "data", "strat", "preregistration.json")
+LB = os.path.join(ROOT, "data", "s9cb", "leaderboard.json")
+GENERATOR = os.path.join(ROOT, "s9cb", "analysis", "strategies.py")
+STAMP = os.path.join(ROOT, "data", "strat", "preregistration_stamp.json")
+PRE_PATH = "data/strat/preregistration.json"
 
 
-def main() -> int:
-    fails: list[str] = []
-    flags: list[str] = []
-    # In a shallow clone the oldest visible commit is a graft boundary, not the commit that
-    # added the rule. Treat that as "history unavailable" instead of comparing against it.
-    shallow = _git("rev-parse", "--is-shallow-repository") == "true"
-    reg = json.loads(REG.read_text(encoding="utf-8"))
-    registered: set[str] = set()
-    for entry in reg["registrations"]:
-        registered.update(entry.get("registered_strategies", []))
-        path = ROOT / entry["file"]
-        if not path.exists():
-            fails.append(f"{entry['rule_id']}: rule file missing: {entry['file']}")
+def git(*args: str) -> tuple[int, str]:
+    p = subprocess.run(["git", *args], cwd=ROOT, capture_output=True, text=True)
+    return p.returncode, p.stdout.strip()
+
+
+def is_ancestor(commit: str, of: str = "HEAD") -> bool:
+    code, _ = git("merge-base", "--is-ancestor", commit, of)
+    return code == 0
+
+
+def check_stamp(stamp: dict, reg: dict, problems: list) -> dict:
+    """The registry as committed must hash to the value the stamp recorded."""
+    out = {"registration_commit": (stamp.get("registration_commit") or "")[:12],
+           "n_rule_fingerprints": len(stamp.get("rule_sha256") or {})}
+    commit = stamp.get("registration_commit")
+    if not commit:
+        problems.append("no registration stamp: run tools/stamp_preregistration.py")
+        return out
+    blob = subprocess.run(["git", "show", f"{commit}:{PRE_PATH}"], cwd=ROOT,
+                          capture_output=True).stdout
+    if not blob:
+        problems.append(f"stamp names commit {commit[:8]} but {PRE_PATH} is not in it")
+        return out
+    digest = hashlib.sha256(blob).hexdigest()
+    out["file_sha256_matches"] = (digest == stamp.get("file_sha256_as_committed"))
+    if not out["file_sha256_matches"]:
+        problems.append(
+            f"{PRE_PATH} has changed since commit {commit[:8]} was stamped "
+            f"({digest[:12]} != {stamp.get('file_sha256_as_committed', '')[:12]}). A frozen rule "
+            f"was edited after registration; re-register with a new stamp and say why in "
+            f"COORDINATION.md, or revert the edit.")
+    # the fingerprint of every rule's frozen fields must still match
+    fps = stamp.get("rule_sha256") or {}
+    for r in reg.get("records") or []:
+        key = f"{r['id']} {r['name']}"
+        want = fps.get(key)
+        got = hashlib.sha256(
+            json.dumps({"definition": r["definition"], "inputs": r["inputs"],
+                        "sample_window": r["sample_window"], "gates": r["gates"]},
+                       sort_keys=True).encode()).hexdigest()
+        if want and want != got:
+            problems.append(f"{r['id']}: the frozen fields of {key!r} changed after registration")
+        elif not want:
+            problems.append(f"{r['id']}: {key!r} has no stamped fingerprint")
+    return out
+
+
+def check(reg: dict, scored: set[str], generator_src: str,
+          head: str = "HEAD", problems: list | None = None) -> list[str]:
+    problems = problems if problems is not None else []
+    records = reg.get("records") or []
+    by_key = {f"{r['id']} {r['name']}": r for r in records}
+
+    # 1. every published result has a record
+    for strategy in sorted(scored):
+        if strategy not in by_key:
+            problems.append(f"result published with no registration: {strategy!r}")
+
+    # 2. the stamp's commit must precede the publishing commit
+    #    (one stamp covers the whole registry; see tools/stamp_preregistration.py)
+
+    # 3. the frozen text still matches the code
+    for r in records:
+        if r.get("status") != "registered-backtest":
             continue
-        sha = hashlib.sha256(path.read_bytes()).hexdigest()
-        if sha != entry["sha256"]:
-            fails.append(f"{entry['rule_id']}: sha256 {sha[:12]}… differs from registered {entry['sha256'][:12]}… (file was edited after registration)")
-        commits = None if shallow else _git("log", "--diff-filter=A", "--follow", "--format=%H", "--", entry["file"])
-        if not commits:
-            flags.append(f"{entry['rule_id']}: git history unavailable here; commit-hash check not performed "
-                         f"(recorded registration {entry['registration_commit'][:12]})")
-        else:
-            first = commits.splitlines()[-1]
-            if first != entry["registration_commit"]:
-                fails.append(f"{entry['rule_id']}: first commit adding the rule is {first[:12]}, "
-                             f"registry records {entry['registration_commit'][:12]}")
-            else:
-                flags.append(f"{entry['rule_id']}: registration commit {first[:12]} verified in git history")
+        key = f"{r['id']} {r['name']}"
+        if f'"{key}"' not in generator_src:
+            problems.append(f"{r['id']}: the registered rule {key!r} no longer appears in "
+                            f"s9cb/analysis/strategies.py — the text drifted from the code")
 
-    rows = json.loads(LB.read_text(encoding="utf-8"))
-    numeric_fields = ("rank", "score", "sample_size", "reward")
-    shown = 0
-    for row in rows:
-        if any("backtest" in k.lower() for k in row):
-            fails.append(f"{row.get('strategy_id')}: leaderboard row has a backtest field")
-        has_number = any(str(row.get(f, "")).strip() for f in numeric_fields)
-        if has_number:
-            shown += 1
-            if row.get("strategy_id") not in registered:
-                fails.append(f"{row.get('strategy_id')}: rank/score/sample/reward shown without a registration")
-    print(f"leaderboard rows: {len(rows)}; rows with a ranked number: {shown}; registered strategies: {len(registered)}")
-    for f in flags:
-        print(f"FLAG  {f}")
-    for f in fails:
-        print(f"FAIL  {f}")
-    if fails:
-        print("RESULT: FAIL")
+    # 4. a registered-prospective rule must not have a result yet
+    for r in records:
+        if r.get("status") == "registered-prospective":
+            if f"{r['id']} {r['name']}" in scored:
+                problems.append(f"{r['id']}: registered as prospective but a backtest result exists")
+    return problems
+
+
+def main(argv: list[str]) -> int:
+    # importable without side effects, so the tests can call check() directly
+    reg = json.load(open(PRE, encoding="utf-8"))
+    scored = {r["strategy"] for r in json.load(open(LB, encoding="utf-8"))["leaderboard"]}
+    gen = open(GENERATOR, encoding="utf-8").read()
+    _, head = git("rev-parse", "HEAD")
+
+    if "--self-test" in argv:
+        fired = total = 0
+
+        def report(name, detected):
+            nonlocal fired, total
+            total += 1
+            fired += 1 if detected else 0
+            print(f"self-test: {name} {'DETECTED' if detected else 'MISSED — the gate is dead'}")
+
+        # 1. a result with no registration
+        report("unregistered result",
+               bool(check(reg, scored | {"S99 A rule nobody registered"}, gen, head)))
+        # 2. frozen text that no longer matches the generator
+        drifted = {**reg, "records": [{**reg["records"][0], "name": "a rule that does not exist"}]
+                   + reg["records"][1:]}
+        report("text drift", any("no longer appears" in p for p in check(drifted, scored, gen, head)))
+        # 3. a prospective rule that has acquired a backtest result
+        prom = next(r for r in reg["records"] if r["status"] == "registered-prospective")
+        report("prospective rule with a result",
+               any("registered as prospective" in p
+                   for p in check(reg, scored | {f"{prom['id']} {prom['name']}"}, gen, head)))
+        # 4. the registry edited after its stamp
+        st = json.load(open(STAMP, encoding="utf-8")) if os.path.isfile(STAMP) else {}
+        sp: list[str] = []
+        check_stamp({**st, "file_sha256_as_committed": "0" * 64}, reg, sp)
+        report("registry edited after the stamp", bool(sp))
+        # 5. a rule's frozen fields edited after the stamp
+        sp2: list[str] = []
+        edited = {**reg, "records": [{**reg["records"][0],
+                                     "definition": reg["records"][0]["definition"] + " (edited)"}]
+                  + reg["records"][1:]}
+        check_stamp(st, edited, sp2)
+        report("a frozen rule field edited", bool(sp2))
+        # 6. a stamp whose commit is not an ancestor of HEAD
+        report("stamp not an ancestor of HEAD", not is_ancestor("0" * 40, head))
+        return 0 if fired == total else 1
+
+    problems = check(reg, scored, gen, head)
+    stamp_problems: list[str] = []
+    stamp = json.load(open(STAMP, encoding="utf-8")) if os.path.isfile(STAMP) else {}
+    info = check_stamp(stamp, reg, stamp_problems)
+    if stamp.get("registration_commit") and not is_ancestor(stamp["registration_commit"], head):
+        stamp_problems.append("the stamped registration commit is not an ancestor of HEAD")
+    problems += stamp_problems
+
+    print(f"registration records: {len(reg.get('records') or [])}")
+    print(f"published backtest results: {len(scored)}")
+    print(f"stamped commit: {info.get('registration_commit')} · head: {head[:8]} · "
+          f"rule fingerprints: {info.get('n_rule_fingerprints')} · "
+          f"registry hash matches: {info.get('file_sha256_matches')}")
+    if problems:
+        print(f"\nFAIL: {len(problems)} pre-registration problem(s)")
+        for p in problems:
+            print("  -", p)
         return 1
-    print("RESULT: PASS")
+    print("\nPASS: every published result has a registration, every registration precedes its "
+          "result, and every frozen rule text still matches the generator")
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(main(sys.argv[1:]))
