@@ -149,7 +149,7 @@
   {
    "id": "PR-09",
    "group": "Pricing and results",
-   "requirement": "Turn the 136-game log into the pre-registered backtest corpus",
+   "requirement": "Turn the game log into a pre-registered backtest corpus",
    "status": "Not started",
    "checked": "repo artifact, not re-read",
    "evidence": "data/leaderboard_rules.json holds 7 rules and no commit hash; the frozen corpus is not recorded.",
@@ -539,7 +539,7 @@
   {
    "id": "IN-10",
    "group": "Injuries and depth",
-   "requirement": "Model depth slots as groups, not a single starter (149 slots list more than one rank-1 player)",
+   "requirement": "Model depth slots as groups, not a single starter (the brief's 149-slot count is not reproduced here)",
    "status": "Not verified",
    "checked": "not checked",
    "evidence": "depth_ladder.json holds 16 merged-name flags and 1 chart gap. The 149 count was not reproduced in this session.",
