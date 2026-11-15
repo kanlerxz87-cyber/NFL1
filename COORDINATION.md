@@ -2798,3 +2798,21 @@ verified sound, with one unusual official row recorded for review) · F46 (overl
 generations — decision D07 / suggestion S17) · F47 (2nd-to-4th string coverage now exists, needs
 sign-off). None of them blocks anything; they are published rather than hidden.
 
+
+---
+
+## Session `e9b4f58d-nfl1` — live injury-report capture, published delta, brief coverage (branch `arena/e9b4f58d-nfl1`, base `5a769b3`)
+
+Claimed 2026-11-15 (UTC). Arena fixes this session to the single branch `arena/e9b4f58d-nfl1`, so the
+`session-<id>/<task>` naming in the brief cannot be used (same rule logged by earlier sessions). The board was
+read in full before this claim: every earlier task is `done`, `needs review`, or closed, and no session holds an
+`in progress` claim. Scope is new paths only; no earlier generator, page or dataset is rewritten.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| E1 | Immutable live capture of the official nfl.com Week 10 injury report (all 8 chunks), with clock time, per-club counts, and a hash of the captured rows | in progress | `e9b4f58d` | `data/snapshots/nfl-injury-report/` (new) | source: https://www.nfl.com/injuries/ read with `fetch_page` |
+| E2 | Publish the **delta** against the committed 2026-11-14 scrape (`data/model/official_injuries.json`), not the level | unclaimed | `e9b4f58d` | `tools/injury_delta.py` (new), `research/injury-delta.html` (new) | field-level comparison, row by row |
+| E3 | Brief coverage register and decision-readiness table: one row per brief item, with status, blocking gate, the number that would clear it, and a source link | unclaimed | `e9b4f58d` | `research/brief-coverage.html` (new), `tools/build_brief_coverage.py` (new) | blanks stay blank; nothing is marked done without a repo file |
+| E4 | Flag new irregularities on the Flagged for Review register (append-only) | unclaimed | `e9b4f58d` | `data/flags.json` (append-only) | |
+| E5 | Unit tests and gates for the new generators; link check on `research/` | unclaimed | `e9b4f58d` | `tests/test_injury_delta.py` (new) | |
+| E6 | PR `arena/e9b4f58d-nfl1` → `main`, merge without waiting for review, confirm the Pages deploy, record here | unclaimed | `e9b4f58d` | `COORDINATION.md` | |
