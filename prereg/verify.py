@@ -92,13 +92,15 @@ class Page(HTMLParser):
             if self._row is not None:
                 self._row["links"] += 1
         elif tag == "tr":
-            self._row = {"links": 0, "cells": 0}
+            self._row = {"links": 0, "cells": 0, "header": False}
         elif tag in ("td", "th") and self._row is not None:
             self._row["cells"] += 1
+            if tag == "th":
+                self._row["header"] = True
 
     def handle_endtag(self, tag):
         if tag == "tr" and self._row is not None:
-            if self._row["cells"]:
+            if self._row["cells"] and not self._row["header"]:
                 self.rows.append(self._row)
             self._row = None
 

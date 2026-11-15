@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forecast record · NFL1 pre-registration</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Pre-registration <span class="sub">NFL1 · strategy freeze ledger</span></h1>
+    <nav><a href="index.html">Overview &amp; prospective board</a> · <a href="registry.html">Registry (all entries)</a> · <a href="forecasts.html" class=active>Forecast record</a> · <a href="archive.html">Backtest archive</a></nav>
+    <p class="crumb"><a href="../index.html">NFL1 landing page</a> / Forecast record</p>
+  </div>
+</header>
+<main class="wrap">
+
+<section>
+<h2>SB-01 forecast record <span class="tag k-pro">prospective</span></h2>
+<p>Recorded <strong>2026-11-15T13:39:24Z</strong> — every kickoff in this table is
+later than that timestamp (earliest kickoff 2026-11-20T01:15:00Z).
+Registration: commit
+<a href="https://github.com/kanlerxz87-cyber/NFL1/commit/9ea55fa7ff4aa8e03f13b6551be349574dc2d3d6" rel="noopener">9ea55fa7</a>
+(rule text, policy and model code; <strong>no results in that commit</strong>). Track:
+singles only. Model: Pythagorean exponent 2.0, zero free parameters
+(<a href="SB-01-rule.md">full rule text</a>).</p>
+<ul class="plain">
+<li>Input at record time: <code>data/s9cb/games.csv</code> —
+sha256 483beddbdf226901b903ccc6e84f3dbc38df05110bc53a92eb63da8ec44f054f, 7,104 completed rows.</li>
+<li>Official schedule: <a href="https://www.nfl.com/schedules/2026/by-week/week-11" rel="noopener">https://www.nfl.com/schedules/2026/by-week/week-11</a>
+(retrieved 2026-11-15T13:05:00Z).</li>
+<li>Model files pinned at record time:<li><code>prereg/README.md</code> sha256 3cab854d68bac5771a9c881e4238a81c57c349ce88c181f9ad8c7c78861e6a10</li><li><code>prereg/SB-01-rule.md</code> sha256 aea6c8fb227f731de365a1b54ac6e7b923ae901409861516cb84f02bf3ca3515</li><li><code>prereg/shadow_baseline.py</code> sha256 4fa32f8b392a3ca55575b165a202d6028a1e3948cb4e3efc7ce797ebd3b85aa7</li></li>
+<li>Reproduce with <code>python3 prereg/shadow_baseline.py --check</code> — probabilities
+recompute from the stored PF/PA aggregates (gate SB-G3).</li>
+</ul>
+<table class="data">
+<thead><tr><th>Game</th><th>Kickoff</th><th>P(home win)</th><th>Pick</th><th>Network</th>
+<th>Source (official game centre)</th></tr></thead>
+<tbody>
+<tr><td>Colts at Texans<br><span class='muted'>2026_11_IND_HOU</span></td><td>Thursday, November 19th 8:15 PM ET<br><span class='muted'>2026-11-20T01:15:00Z</span></td><td>0.457311</td><td><strong>IND</strong></td><td>PRIME</td><td><a href="https://www.nfl.com/games/colts-at-texans-2026-reg-11" rel="noopener">https://www.nfl.com/games/colts-at-texans-2026-reg-11</a></td></tr><tr><td>Dolphins at Bills<br><span class='muted'>2026_11_MIA_BUF</span></td><td>Sunday, November 22nd 1:00 PM ET<br><span class='muted'>2026-11-22T18:00:00Z</span></td><td>0.524416</td><td><strong>BUF</strong></td><td>CBS</td><td><a href="https://www.nfl.com/games/dolphins-at-bills-2026-reg-11" rel="noopener">https://www.nfl.com/games/dolphins-at-bills-2026-reg-11</a></td></tr><tr><td>Ravens at Panthers<br><span class='muted'>2026_11_BAL_CAR</span></td><td>Sunday, November 22nd 1:00 PM ET<br><span class='muted'>2026-11-22T18:00:00Z</span></td><td>0.434331</td><td><strong>BAL</strong></td><td>FOX</td><td><a href="https://www.nfl.com/games/ravens-at-panthers-2026-reg-11" rel="noopener">https://www.nfl.com/games/ravens-at-panthers-2026-reg-11</a></td></tr><tr><td>Saints at Bears<br><span class='muted'>2026_11_NO_CHI</span></td><td>Sunday, November 22nd 1:00 PM ET<br><span class='muted'>2026-11-22T18:00:00Z</span></td><td>0.469907</td><td><strong>NO</strong></td><td>FOX</td><td><a href="https://www.nfl.com/games/saints-at-bears-2026-reg-11" rel="noopener">https://www.nfl.com/games/saints-at-bears-2026-reg-11</a></td></tr><tr><td>Titans at Cowboys<br><span class='muted'>2026_11_TEN_DAL</span></td><td>Sunday, November 22nd 1:00 PM ET<br><span class='muted'>2026-11-22T18:00:00Z</span></td><td>0.530738</td><td><strong>DAL</strong></td><td>FOX</td><td><a href="https://www.nfl.com/games/titans-at-cowboys-2026-reg-11" rel="noopener">https://www.nfl.com/games/titans-at-cowboys-2026-reg-11</a></td></tr><tr><td>Buccaneers at Lions<br><span class='muted'>2026_11_TB_DET</span></td><td>Sunday, November 22nd 1:00 PM ET<br><span class='muted'>2026-11-22T18:00:00Z</span></td><td>0.471105</td><td><strong>TB</strong></td><td>FOX</td><td><a href="https://www.nfl.com/games/buccaneers-at-lions-2026-reg-11" rel="noopener">https://www.nfl.com/games/buccaneers-at-lions-2026-reg-11</a></td></tr><tr><td>Cardinals at Chiefs<br><span class='muted'>2026_11_ARI_KC</span></td><td>Sunday, November 22nd 1:00 PM ET<br><span class='muted'>2026-11-22T18:00:00Z</span></td><td>0.567144</td><td><strong>KC</strong></td><td>CBS</td><td><a href="https://www.nfl.com/games/cardinals-at-chiefs-2026-reg-11" rel="noopener">https://www.nfl.com/games/cardinals-at-chiefs-2026-reg-11</a></td></tr><tr><td>Steelers at Eagles<br><span class='muted'>2026_11_PIT_PHI</span></td><td>Sunday, November 22nd 1:00 PM ET<br><span class='muted'>2026-11-22T18:00:00Z</span></td><td>0.492964</td><td><strong>PIT</strong></td><td>CBS</td><td><a href="https://www.nfl.com/games/steelers-at-eagles-2026-reg-11" rel="noopener">https://www.nfl.com/games/steelers-at-eagles-2026-reg-11</a></td></tr><tr><td>Jets at Chargers<br><span class='muted'>2026_11_NYJ_LAC</span></td><td>Sunday, November 22nd 4:05 PM ET<br><span class='muted'>2026-11-22T21:05:00Z</span></td><td>0.547402</td><td><strong>LAC</strong></td><td>FOX</td><td><a href="https://www.nfl.com/games/jets-at-chargers-2026-reg-11" rel="noopener">https://www.nfl.com/games/jets-at-chargers-2026-reg-11</a></td></tr><tr><td>Jaguars at Giants<br><span class='muted'>2026_11_JAX_NYG</span></td><td>Sunday, November 22nd 4:25 PM ET<br><span class='muted'>2026-11-22T21:25:00Z</span></td><td>0.500840</td><td><strong>NYG</strong></td><td>CBS</td><td><a href="https://www.nfl.com/games/jaguars-at-giants-2026-reg-11" rel="noopener">https://www.nfl.com/games/jaguars-at-giants-2026-reg-11</a></td></tr><tr><td>Raiders at Broncos<br><span class='muted'>2026_11_LV_DEN</span></td><td>Sunday, November 22nd 4:25 PM ET<br><span class='muted'>2026-11-22T21:25:00Z</span></td><td>0.564172</td><td><strong>DEN</strong></td><td>CBS</td><td><a href="https://www.nfl.com/games/raiders-at-broncos-2026-reg-11" rel="noopener">https://www.nfl.com/games/raiders-at-broncos-2026-reg-11</a></td></tr><tr><td>Vikings at 49ers (Mexico City)<br><span class='muted'>2026_11_MIN_SF</span></td><td>Sunday, November 22nd 8:20 PM ET<br><span class='muted'>2026-11-23T01:20:00Z</span></td><td>0.489384</td><td><strong>MIN</strong></td><td>NBC</td><td><a href="https://www.nfl.com/games/vikings-at-49ers-2026-reg-11" rel="noopener">https://www.nfl.com/games/vikings-at-49ers-2026-reg-11</a></td></tr><tr><td>Bengals at Commanders<br><span class='muted'>2026_11_CIN_WAS</span></td><td>Monday, November 23rd 8:15 PM ET<br><span class='muted'>2026-11-24T01:15:00Z</span></td><td>0.481893</td><td><strong>CIN</strong></td><td>ESPN</td><td><a href="https://www.nfl.com/games/bengals-at-commanders-2026-reg-11" rel="noopener">https://www.nfl.com/games/bengals-at-commanders-2026-reg-11</a></td></tr>
+</tbody></table>
+<p class="note">This window is a <strong>pipeline test, not a skill sample</strong>: gate
+SB-G4 requires ≥200 settled forecasts with a Brier-skill interval above zero before any skill
+claim. Scoring happens only after every game is final on the official schedule page.</p>
+</section>
+
+</main>
+<footer class="wrap">
+<p>Session <code>0c5215c1-nfl1</code> · generated 2026-11-15 13:39 UTC ·
+policy: <a href="README.md">prereg/README.md</a> · gate: <code>python3 prereg/verify.py</code> ·
+every table row carries its own source link; blank cells are labelled, never inferred.</p>
+</footer>
+</body>
+</html>

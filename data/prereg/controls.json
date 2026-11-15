@@ -1,0 +1,64 @@
+{
+ "schema": "nfl1.prereg.controls.v1",
+ "generated_at": "2026-11-15T13:39:24Z",
+ "requirement": "brief: add a control baseline (random picks; favourites only) to every leaderboard run (readiness PR-17)",
+ "corpus": "NFL1-CORPUS-2026-11-15-v1",
+ "input_sha256": "483beddbdf226901b903ccc6e84f3dbc38df05110bc53a92eb63da8ec44f054f",
+ "price_rule": "observed prices only (American odds -> decimal); no -110 fill",
+ "controls": [
+  {
+   "id": "CTRL-01",
+   "name": "random side (analytic)",
+   "market": "spread",
+   "method": "for each priced game the expected profit of a uniformly random side is 0.25*(dec_away + dec_home) - 1; the reported value is the mean over the frozen corpus (no RNG, fully deterministic)",
+   "n_games": 5202,
+   "expected_roi": -0.025145,
+   "expected_roi_pct": -2.5145,
+   "role": "no-skill reference line for every board run",
+   "source": {
+    "t": "results + prices: nfl.com schedules index (official) via the pinned feed",
+    "u": "https://www.nfl.com/schedules/"
+   }
+  },
+  {
+   "id": "CTRL-01T",
+   "name": "random side over/under (analytic)",
+   "market": "total",
+   "method": "same as CTRL-01 on over/under prices",
+   "n_games": 5200,
+   "expected_roi": -0.027851,
+   "expected_roi_pct": -2.7851,
+   "role": "no-skill reference for totals tracks",
+   "source": {
+    "t": "results + prices: nfl.com schedules index (official) via the pinned feed",
+    "u": "https://www.nfl.com/schedules/"
+   }
+  },
+  {
+   "id": "CTRL-02",
+   "name": "favourites only",
+   "market": "spread",
+   "method": "bet the favourite every priced frozen game at its observed spread price; side = home iff spread_line > 0; push excluded from ROI",
+   "n_considered": 5202,
+   "n_scored": 5067,
+   "wins": 2473,
+   "losses": 2594,
+   "pushes": 135,
+   "pickem_line_zero": 4,
+   "hit_rate": 0.4881,
+   "roi": -0.047383,
+   "roi_pct": -4.7383,
+   "roi_ci95_normal": [
+    -0.074283,
+    -0.020483
+   ],
+   "role": "the market's own default bet; a strategy must beat this before it beats anything",
+   "source": {
+    "t": "results + prices: nfl.com schedules index (official) via the pinned feed",
+    "u": "https://www.nfl.com/schedules/"
+   }
+  }
+ ],
+ "prospective_rule": "every future board run must publish CTRL-01/CTRL-02 computed on the same settled set as the strategies it ranks; a strategy whose interval overlaps the control interval is not distinguishable from no skill",
+ "note": "the favourites-only control loses at observed prices in this corpus; that is the vig the strategy must first overcome, and it is why raw win rate cannot rank strategies"
+}
