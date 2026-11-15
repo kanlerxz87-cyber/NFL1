@@ -25,42 +25,7 @@ footer{color:var(--muted);font-size:13px;margin:30px 0 10px}
 code{background:#eef2f6;padding:1px 4px;border-radius:4px}
 </style></head><body>
 <header><a href="../index.html">NFL Decision Lab</a>
-<nav>
-    <a href="../index.html">Overview</a>
-    <a href="executive.html">Executive Summary</a>
-    <a href="../web/dashboard.html">Decision Dashboard</a>
-    <a href=".././dashboard.html">Governance Registers</a>
-    <a href="lines.html">My Lines</a>
-    <a href="correlations.html">Correlations</a>
-    <a href="strategies.html">Strategy Lab</a>
-    <a href="luck.html">Skill vs Luck</a>
-    <a href="parlays.html">Parlays &amp; Combos</a>
-    <a href="props.html">Player Props</a>
-    <a href="injuries.html">Injuries</a>
-    <a href="depth.html">Depth &amp; Deficiency</a>
-    <a href="questions.html">Questions</a>
-    <a href="suggestions.html">Suggestions</a>
-    <a href="evidence.html">Evidence</a>
-    <a href="audit.html">Official Audit</a>
-    <a href="review.html">Flagged for Review</a>
-    <a href="sections.html">All Sections</a>
-    <a href="../room/index.html">Decision Room</a>
-    <a href="../strength/index.html">SOS Study</a>
-    <a href="../review-room/index.html">Review Room</a>
-    <a href="../research/index.html">s9cb Research</a>
-    <a href="executive-summary.html">Executive Summary (companion)</a>
-    <a href="teams.html">Teams</a>
-    <a href="standings.html">Standings</a>
-    <a href="availability.html">Availability</a>
-    <a href="data.html">Verified Data</a>
-    <a href="verified-lines.html">Own Lines</a>
-    <a href="analysis.html">Validation &amp; Correlation</a>
-    <a href="decisions.html">Decision Register</a>
-    <a href="verified.html">Verified Artifacts</a>
-    <a href="models.html">Models</a>
-    <a href="session-57c05555.html" class="active">Depth Charts &amp; Ledger</a>
-    <a href="flagged.html">Flagged (companion)</a>
-  </nav></header>
+<nav><a href="../index.html">Overview</a><a href="../pages/depth.html">Depth &amp; Deficiency</a><a href="../pages/injuries.html">Injuries</a><a href="../pages/review.html">Flagged for Review</a><a href="../pages/sections.html">All sections</a></nav></header>
 <main>
 <h1>Official depth charts, parsed faithfully, and a ledger that can be replayed</h1>
 <p class="lede">Six official club depth-chart pages were read on 15 November 2026 and stored byte for byte. Each is parsed so that a slot is a <em>group</em> of the players the club printed in it, a jersey number is separated from the name and kept, and an empty cell stays empty. Every capture is entered in an append-only ledger with its fetch clock time and the sha256 of its bytes, so a depth chart or an injury designation can be replayed as it stood when it was read. Nothing on this page is inferred, and where an official source does not publish a value the cell says so.</p>

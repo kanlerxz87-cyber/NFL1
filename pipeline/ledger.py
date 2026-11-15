@@ -317,7 +317,12 @@ def cmd_index(args) -> int:
     depth_clubs = sorted({e["club"] for e in by_source.get("depth_chart", []) if e["club"]})
     index = {
         "generated_by": "pipeline/ledger.py",
-        "built_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        # Derived, not clocked: the index is a function of the captures alone, so
+        # `index --check` is a real gate. The newest capture time is the only time on it,
+        # because that is a fact about the data rather than about when the file was written.
+        "newest_capture_at": max(
+            (e["captured_at"] for v in by_source.values() for e in v), default=""
+        ),
         "what_this_is": (
             "Append-only captures of official sources, each with the clock time it was read "
             "and the sha256 of its bytes. A capture is never rewritten; a second read of the "
