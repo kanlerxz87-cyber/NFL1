@@ -18,6 +18,8 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - name: Install numpy and pandas
+        run: python -m pip install --quiet numpy pandas
       - name: Recompute derived values
         run: python3 tools/compute_correlations.py
       - name: Re-verify merged session data line by line
