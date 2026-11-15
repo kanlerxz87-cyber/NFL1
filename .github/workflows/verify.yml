@@ -15,7 +15,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0   # full history: tools/check_preregistration.py verifies the registration commit
+          fetch-depth: 0   # full history: tools/check_preregistration_d4027.py verifies the registration commit
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -57,7 +57,7 @@ jobs:
       # Session d4027f66-nfl1. Pre-registration gate: edited rule files and leaderboard numbers
       # without a registration fail the build.
       - name: Pre-registration gate
-        run: python3 tools/check_preregistration.py
+        run: python3 tools/check_preregistration_d4027.py
       - name: Depth register unit tests and drift alarm
         run: |
           python3 -m unittest tests.test_depth_register -v
