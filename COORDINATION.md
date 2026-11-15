@@ -3235,16 +3235,15 @@ underlying statuses are not interpreted as new changes. Final-head CI and Pages 
 in A3 below when available.
 
 **A3 — PR / final-head validation (in progress).** Opened [PR #72](https://github.com/kanlerxz87-cyber/NFL1/pull/72)
-from `arena/4227cfea-nfl1` to `main`. Collect workflow run
-[43717001751](https://github.com/kanlerxz87-cyber/NFL1/actions/runs/43717001751) passed, building and
-committing the model from a current injury scrape; the output is stamped around 13:04Z. PR checks on
-code head `4e56350` all passed before main's PR #76 update: collect `43717001751`, collect-s9cb
-`43717001760`, source audit `43717001759`, full site verification `43717001758`, and decision dashboard
-`43717001769`. Main subsequently advanced to `96dd83f`; the branch was rebased, the canonical build
-recreated `pages/snapshots.html` and `research/injuries.html`, and the current tree passes 157 unit
-tests, full `build_site_all.py --check`, freshness, source/link, Room, Strength and availability gates.
-Final-head CI will be rerun after pushing this rebase; merge and Pages status will be recorded here
-when available.
+from `arena/4227cfea-nfl1` to `main`. After the rebase onto `96dd83f`, collect run
+[43717199378](https://github.com/kanlerxz87-cyber/NFL1/actions/runs/43717199378) passed on code head
+`b187811`, including the current injury scrape, model build, canonical full-site build and post-build
+gates. Other code-head checks passed: s9cb collector `43717199374`, source audit `43717199389`, full
+site `43717199393`, and decision dashboard `43717199384`. The collect run's data bot then committed
+refresh outputs (`e62a1c6` for model/pages; `7e6d720` for the s9cb extract). On the latest branch tip,
+the local 157-test suite, `tools/build_site_all.py --check`, freshness, committed-site, source/link,
+Room, Strength and availability gates all pass. The PR is mergeable and code-head checks are green;
+PR merge and Pages deployment results will be recorded here after merge.
 
 **Non-blocking review notes from Actions.** The collect run emitted the existing warning
 “Injury availability source needs review (mirrored feed, latest complete week (6))”; this does not
