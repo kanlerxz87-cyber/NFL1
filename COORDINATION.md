@@ -3146,3 +3146,17 @@ Most of the brief's items were not started. Examples, each still open on the boa
 - **Merge (recorded after the fact):** PR #73 merged with a merge commit, `145731b`, at 2026-11-15T12:59:56Z (`gh pr view 73`: state MERGED). The Pages build on `main` (run `43716710645`) completed with `success`. The live pages `research/backtest.html` and `depth-chart.html` were fetched and show the changed content (the backtest page carries the 'not a leaderboard result' banner; the depth chart shows Packers names without jersey numbers).
 - **Follow-up in the same session:** the Backtest page still had the KPI label 'declared before any of them was scored', an unverified claim. It was reworded to 'rules in this study; no pre-registration commit is recorded for them' and shipped in a follow-up PR from this branch.
 
+## Session `4227cfea-nfl1` — claim (2026-11-15)
+
+Read the full shared task board before work. This session stays on Arena's fixed branch
+`arena/4227cfea-nfl1` (the branch convention requested in the brief cannot replace the platform-fixed
+branch). No active claim on the current `main` tree owns the workflow/test scope below. The defect
+is the post-merge follow-up recorded by session `07810d9f`: the daily collect-data job rendered
+some published pages via a different generator path than `tools/build_site_all.py`, leaving the
+main reproducibility gate red after refreshes.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| A1 | Reconcile the daily data-refresh workflow with the canonical site build; add a regression check that prevents workflow/render drift | in progress | `4227cfea` | `.github/workflows/collect-data.yml`, additive workflow regression test(s), this section of `COORDINATION.md` | Investigate and reproduce first; do not alter source data or generated site content without verification |
+| A2 | Run relevant project gates and record exact results, sources and any remaining irregularities | pending | `4227cfea` | this section of `COORDINATION.md` | |
+| A3 | PR / merge / Pages confirmation if checks permit | pending | `4227cfea` | this section of `COORDINATION.md` | |
