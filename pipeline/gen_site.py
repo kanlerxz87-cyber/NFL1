@@ -778,7 +778,8 @@ def readiness_page(reg, dash) -> str:
   <p class="note">Legend: Done = delivered and the artifact exists; Partial = some of it exists;
   Not started = no artifact found; Blocked = needs a named external source or decision; Not met = the repo does the opposite;
   Not verified = not checked in this session, no status claimed; Rejected (brief) = the brief rejects it and the note says whether the repo complies.
-  Rows marked "re-read 2026-11-15" were checked against the live page on that date; the others rest on the repo artifact named.</p>
+  Rows marked "re-read 2026-11-15" were checked against the live page on that date; the others rest on the repo artifact named.
+  Source links marked <em>internal</em> point to repo files, not to official pages; they are evidence of what the repo holds, not verification against an official source.</p>
 </section>
 {''.join(groups)}
 """
