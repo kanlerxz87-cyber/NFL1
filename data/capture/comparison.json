@@ -17,68 +17,7 @@
   "hand_copy": {
     "path": "data/verified/injury_report_2026_week10.tsv",
     "rows": 347,
-    "rows_not_on_capture": [
-      {
-        "club": "ARI",
-        "player": "Budda Baker"
-      },
-      {
-        "club": "ARI",
-        "player": "Zachary Carter"
-      },
-      {
-        "club": "ARI",
-        "player": "Hjalte Froholdt"
-      },
-      {
-        "club": "ARI",
-        "player": "Jon Gaines II"
-      },
-      {
-        "club": "ARI",
-        "player": "Bam Knight"
-      },
-      {
-        "club": "ARI",
-        "player": "Hunter Long"
-      },
-      {
-        "club": "ARI",
-        "player": "Roy Lopez"
-      },
-      {
-        "club": "ARI",
-        "player": "Max Melton"
-      },
-      {
-        "club": "ARI",
-        "player": "Darius Robinson"
-      },
-      {
-        "club": "ARI",
-        "player": "Isaac Seumalo"
-      },
-      {
-        "club": "ARI",
-        "player": "Dante Stills"
-      },
-      {
-        "club": "ARI",
-        "player": "Josh Sweat"
-      },
-      {
-        "club": "ARI",
-        "player": "Jayden Williams"
-      },
-      {
-        "club": "ARI",
-        "player": "Mack Wilson"
-      },
-      {
-        "club": "ARI",
-        "player": "Andrew Wingard"
-      }
-    ],
+    "rows_not_on_capture": [],
     "clubs_with_rows": 28,
     "no_injury_clubs": [
       "BAL",
@@ -238,7 +177,7 @@
     {
       "club": "AZ",
       "capture": 15,
-      "hand_copy": "absent"
+      "hand_copy": 15
     },
     {
       "club": "BAL",
@@ -373,68 +312,7 @@
   ],
   "scrape_missing_from_scrape": [],
   "scrape_status_differences": [],
-  "hand_copy_missing_players": [
-    {
-      "club": "AZ",
-      "player": "Budda Baker"
-    },
-    {
-      "club": "AZ",
-      "player": "Zachary Carter"
-    },
-    {
-      "club": "AZ",
-      "player": "Hjalte Froholdt"
-    },
-    {
-      "club": "AZ",
-      "player": "Jon Gaines II"
-    },
-    {
-      "club": "AZ",
-      "player": "Bam Knight"
-    },
-    {
-      "club": "AZ",
-      "player": "Hunter Long"
-    },
-    {
-      "club": "AZ",
-      "player": "Roy Lopez"
-    },
-    {
-      "club": "AZ",
-      "player": "Max Melton"
-    },
-    {
-      "club": "AZ",
-      "player": "Darius Robinson"
-    },
-    {
-      "club": "AZ",
-      "player": "Isaac Seumalo"
-    },
-    {
-      "club": "AZ",
-      "player": "Dante Stills"
-    },
-    {
-      "club": "AZ",
-      "player": "Josh Sweat"
-    },
-    {
-      "club": "AZ",
-      "player": "Jayden Williams"
-    },
-    {
-      "club": "AZ",
-      "player": "Mack Wilson"
-    },
-    {
-      "club": "AZ",
-      "player": "Andrew Wingard"
-    }
-  ],
+  "hand_copy_missing_players": [],
   "hand_copy_lions_designations": [
     {
       "player": "Kerby Joseph",
@@ -456,7 +334,7 @@
     {
       "id": "CAP-03",
       "area": "hand-copied injury table (data/verified)",
-      "issue": "The hand copy holds 347 rows against 347 on the official page captured 2026-11-15. 15 of its rows are not on the capture; 15 rows of the capture are not in the hand copy, and lists as 'No Injuries Reported' the clubs BAL, CIN, LAC, SEA, which the official page lists with rows. Its retrieval stamp is 2026-11-12T05:30Z, so it predates the Sunday games.",
+      "issue": "The hand copy holds 347 rows against 347 on the official page captured 2026-11-15. 0 of its rows are not on the capture; 0 rows of the capture are not in the hand copy, and lists as 'No Injuries Reported' the clubs BAL, CIN, LAC, SEA, which the official page lists with rows. Its retrieval stamp is 2026-11-12T05:30Z, so it predates the Sunday games.",
       "state": "open",
       "source": "https://www.nfl.com/injuries/league/2026/reg10",
       "what_settles_it": "Superseded by data/capture/. Leave the old file in place, labelled, until a reviewer confirms the replacement."

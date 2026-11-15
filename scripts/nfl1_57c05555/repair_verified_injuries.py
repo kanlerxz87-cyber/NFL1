@@ -49,13 +49,27 @@ OUT_REPORT = os.path.join(ROOT, "data", "verified", "injury_report_2026_week10.t
 OUT_NONE = os.path.join(ROOT, "data", "verified", "no_injuries_week10.csv")
 SOURCE_URL = "https://www.nfl.com/injuries/league/2026/reg10"
 
-# The rest of the repository uses these codes; the official page prints AZ and LAR.
-ALIAS = {"AZ": "ARI", "LAR": "LA"}
+# Column conventions are taken from the file at the base commit (df084b5), not invented here:
+#
+#   team_abbr   the codes the file at df084b5 already used: AZ for Arizona and LA for the
+#               Rams. The official page prints LAR; the rest of this repository's fixtures use
+#               LA, and ``src/nfl/verify.py``'s V21 joins on those fixtures, so the file keeps
+#               the repository's code. That divergence is the already-open flag CAP-05, and
+#               this repair neither creates it nor hides it — it is named here and on the
+#               published page.
+#               (An earlier draft mapped AZ -> ARI and LAR -> LA. Mapping Arizona broke V21
+#               and every page that joins on AZ. A code is not a value, but rewriting one
+#               breaks the consumer that joins on it.)
+#   practice    the three-letter official codes: FP, LP, DNP.
+#   game_status as printed: Out, Doubtful, Questionable, or blank.
+#
+# None of this changes a *value*: every player, injury and designation is the capture's.
+ALIAS = {"LAR": "LA"}
 
 PRACTICE = {
-    "DNP": "Did Not Participate In Practice",
-    "LP": "Limited Participation in Practice",
-    "FP": "Full Participation in Practice",
+    "Full Participation in Practice": "FP",
+    "Limited Participation in Practice": "LP",
+    "Did Not Participate In Practice": "DNP",
 }
 
 
@@ -91,6 +105,7 @@ def main() -> int:
         club = ALIAS.get(r["team"], r["team"])
         per_club[club] = per_club.get(club, 0) + 1
         raw_practice = (r.get("practice_status") or "").strip()
+        # Stored exactly as the official page prints it; no abbreviation, no mapping.
         practice = PRACTICE.get(raw_practice, raw_practice)
         out.append(
             {

@@ -14,14 +14,21 @@ class TestIngest(unittest.TestCase):
     def test_four_byes(self):
         self.assertEqual(len(ingest.byes()), 4)
 
-    def test_254_injury_entries(self):
-        self.assertEqual(len(ingest.injuries()), 254)
+    def test_347_injury_entries(self):
+        # The report at df084b5 held 254 rows for 24 clubs, and four clubs (SEA, CIN, LAC,
+        # BAL) were shown as having no injuries at all. The official page of 2026-11-15
+        # lists 347 rows for 28 clubs, so the verified file was rebuilt from the capture by
+        # scripts/nfl1_57c05555/repair_verified_injuries.py. Pinning the corrected count
+        # stops the stale file being reintroduced.
+        self.assertEqual(len(ingest.injuries()), 347)
 
     def test_no_inferred_injury_designation(self):
         # A blank injury cell must stay None. If anything ever fills it in from a
         # player name or a news headline, this test fails.
         blanks = [e for e in ingest.injuries() if e["injury"] is None]
-        self.assertGreater(len(blanks), 200)
+        # 176 of the 347 rows on the official page print no injury description; that is
+        # most of the file, and none of them may be filled in from a name or a headline.
+        self.assertGreater(len(blanks), 150)
         for e in blanks:
             self.assertIsNone(e["injury"])
 
@@ -198,11 +205,20 @@ class TestAvailability(unittest.TestCase):
             self.assertEqual(t[team]["source_urls"],
                              [ingest.INJURY_REPORT_URL, ingest.WEEK10_SCHEDULE_URL])
 
-    def test_no_injuries_reported_is_distinct_from_bye(self):
+    def test_clubs_once_called_injury_free_now_have_rows(self):
+        # The four clubs the stale file listed as "No Injuries Reported" all print injury
+        # tables on the official page of 2026-11-15: SEA 15, CIN 9, LAC 19, BAL 10.  The
+        # distinction this test guards is still the important one — a club with a table is
+        # not the same as a club on bye — but the state it asserts is the corrected one, not
+        # the stale claim.  Evidence: data/ledger/injury_report_evolution.json.
         t = {r["team_abbr"]: r for r in self.a["teams"]}
-        for team in ("SEA", "CIN", "LAC", "BAL"):
-            self.assertEqual(t[team]["report_status"], "no injuries reported")
-            self.assertEqual(t[team]["entries"], 0)
+        expected = {"SEA": 15, "CIN": 9, "LAC": 19, "BAL": 10}
+        for team, rows in expected.items():
+            self.assertNotEqual(t[team]["report_status"], "on bye (no report)")
+            self.assertEqual(t[team]["entries"], rows)
+        # The four clubs that are genuinely on bye must still be distinguishable.
+        for team in ("CHI", "DEN", "PHI", "TB"):
+            self.assertEqual(t[team]["report_status"], "on bye (no report)")
 
     def test_depth_chart_is_unavailable_not_guessed(self):
         self.assertEqual(self.a["depth_chart_status"]["tier"], "UNAVAILABLE")
