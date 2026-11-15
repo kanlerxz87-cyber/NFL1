@@ -2789,6 +2789,39 @@ report scraped 12 seconds earlier — which is exactly what PR #55 was meant to 
 <https://kanlerxz87-cyber.github.io/NFL1/> carries the unified category dashboard, the 1st-to-6th
 string depth ladder, the correlations / skill-vs-luck / parlays pages, and the 2026-11-13 official
 re-verification. Every gate is green and there are no red checks on `main`.
+---
+
+---
+
+## Task board — session `d5cc3dff-nfl1` (ACTIVE; claims below)
+
+File scope claimed here is **additive and non-overlapping** with every earlier session: `index.html`
+(landing page decision-readiness table only), `pages/executive.html` (executive summary refresh),
+`data/requirements.json` (read-only), `data/validation_gates.json` (read-only), `COORDINATION.md`
+(this claim and task board only). No other session's files are touched.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| D1 | Decision-readiness table on landing page: one row per requirement R01-R36, with the gate that blocks it and the number that would clear it | done | `d5cc3dff-nfl1` | `index.html` | All 36 requirements tabled with gate, clearing number, official source link |
+| D2 | Executive summary refresh: align with current dashboard numbers and flag state | done | `d5cc3dff-nfl1` | `pages/executive.html` | Already current with 2026-11-13 re-verification; KPIs match dashboard.json |
+| D3 | Final verification: run all gates, link check, confirm Pages build | done | `d5cc3dff-nfl1` | `COORDINATION.md` | verify.py PASS (2060 rows, all sourced, 0 broken); check_site.py PASS (27 pages); check_committed_site.py PASS; check_freshness.py PASS (23); check_generators.py PASS; verify_combined.py PASS (2419 links, 0 broken) |
+| D4 | PR -> merge -> confirm Pages deploy -> record result here | in progress | `d5cc3dff-nfl1` | `COORDINATION.md` | PR #63 from this branch to `main` |
+
+
+## Task board — session  (ACTIVE; claims below)
+
+File scope claimed here is **additive and non-overlapping** with every earlier session: 
+(landing page decision-readiness table only),  (executive summary refresh),
+ (read-only),  (read-only), 
+(this claim and task board only). No other session's files are touched.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| D1 | Decision-readiness table on landing page: one row per requirement R01-R36, with the gate that blocks it and the number that would clear it | done |  |  | All 36 requirements tabled with gate, clearing number, official source link |
+| D2 | Executive summary refresh: align with current dashboard numbers and flag state | done |  |  | Already current with 2026-11-13 re-verification; KPIs match dashboard.json |
+| D3 | Final verification: run all gates, link check, confirm Pages build | done |  |  | verify.py PASS (2060 rows, all sourced, 0 broken); check_site.py PASS (27 pages); check_committed_site.py PASS; check_freshness.py PASS (23); check_generators.py PASS; verify_combined.py PASS (2419 links, 0 broken) |
+| D4 | PR → merge → confirm Pages deploy → record result here | in progress |  |  | PR #63 from this branch to  |
+
 
 **Open items for a reviewer, all published on the Flagged for Review page with source links:**
 F41 (standings snapshot — independently confirmed by three sessions) · F42 (the league publishes no
