@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-15T12:53:24+00:00",
+ "generated_at": "2026-11-15T12:54:43+00:00",
  "evidence": {
   "season": 2026,
   "week_complete": 10,
@@ -2118,6 +2118,28 @@
    "status": "needs review",
    "src": "S24",
    "action": "Pick one gate scheme, cite it from both files, and record the change in the rules file.",
+   "verified": true,
+   "retrieved": "2026-11-15"
+  },
+  {
+   "id": "F51",
+   "category": "Terms of use",
+   "description": "NFL.com Terms and Conditions (updated May 16, 2024; https://www.nfl.com/legal/terms/) s.1.1 prohibit copying, reproducing, distributing or displaying Services content for any purpose except as the Agreement expressly allows. s.1.3 limits use to 'your own individual non-commercial and informational purposes' and states that 'systematic retrieval of data or other content from the Services, whether to create or compile ... a collection, compilation, database, or directory, is prohibited absent our express prior written consent'. This repository systematically retrieves https://www.nfl.com/injuries/ every 6 hours (data/snapshots/injury_report/) and the schedule and standings pages, and publishes row-level player names and designations (347 injury rows, roughly 21 public pages, including the Injury Snapshots page and data/model/official_injuries.json). No written consent is on file. The repository's own rule is that raw row-level data stays in a private store until the terms are read; the terms are now read and they restrict this use.",
+   "impact": "Legal and licence exposure for the public site and for the snapshot pipeline. Not a values error: the published numbers match the official page. The fix is a product decision: (a) obtain written consent from NFL Enterprises, LLC, (b) keep row-level nfl.com content in a private store and publish only aggregate counts and links to the official page, or (c) remove the scrape. This session did not remove any published content, so the decision is left to the owner.",
+   "status": "needs review",
+   "src": "S01",
+   "action": "Owner decision before the next scheduled capture. Legal review is recommended. Option (b) is the smallest change: the snapshot page would show counts and deltas and link to https://www.nfl.com/injuries/ for names.",
+   "verified": true,
+   "retrieved": "2026-11-15"
+  },
+  {
+   "id": "F52",
+   "category": "Source attribution",
+   "description": "data/readiness.json (decision-readiness rows R1-R10, built by tools/build_readiness.py) cited https://www.nfl.com/schedules/2026/by-week/week-10 as the source of six rows (R1, R2, R3, R4, R9, R10). Those rows report backtest results, two-leg parlay tests, strategy registration hashes, the demotion rule and bet price records. No official page holds those numbers, and the NFL schedule page does not contain them, so the citation did not support the row. The rows now link to the repository file that computes them, labelled 'internal computation: no official source applies'. R6 (club depth charts) was cited to nfl.com/injuries and now links to data/depth_ladder.json, which holds the per-club official chart links. Separately, data/depth_ladder.json contains an unresolved template URL, https://www.<club>/team/depth-chart, which is not a real page.",
+   "impact": "The readiness table no longer presents internal numbers as official. Six rows have no official source by design: an official page cannot confirm a backtest. Nothing on the published page is inferred from the schedule.",
+   "status": "needs review",
+   "src": "S01",
+   "action": "Replace the template URL in data/depth_ladder.json with each club's real chart URL, or remove it. Decide whether the registration and demotion rules need a non-official record (they are internal policy, so no official page can confirm them).",
    "verified": true,
    "retrieved": "2026-11-15"
   },

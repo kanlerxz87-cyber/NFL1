@@ -18,8 +18,10 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Install analysis and site-build dependencies
-        run: python -m pip install --quiet numpy pandas
+      # Session 90c2b454-nfl1: the research sub-site (s9cb/site.py) imports pandas, and the
+      # setup-python interpreter has none, so "Rebuild every published page" failed on main.
+      - name: Install the analysis dependencies used by the sub-site builders
+        run: python -m pip install --quiet numpy pandas scipy requests beautifulsoup4 lxml pyarrow
       - name: Recompute derived values
         run: python3 tools/compute_correlations.py
       - name: Re-verify merged session data line by line

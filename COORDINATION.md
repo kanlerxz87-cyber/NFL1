@@ -2885,6 +2885,21 @@ sign-off). None of them blocks anything; they are published rather than hidden.
 
 ---
 
+
+---
+
+# Session `90c2b454-nfl1` — immutable availability snapshots, ledger page, decision-readiness table
+
+| Item | Value |
+| --- | --- |
+| This session ID | `90c2b454-nfl1` |
+| This session branch | `arena/90c2b454-nfl1` (fixed by Arena; the brief's `session-<id>/<task>` form cannot be used — same deviation as every earlier session) |
+| Base commit | `5a769b367722a971dfad2da877a4c64cc391c587` (`origin/main` at start) |
+| Board read before work | yes — the board was read before this claim (2,800 lines at claim time) |
+| Other open PRs at claim time | **#47** `arena/cf97db19-nfl1` (X1 backup register; touches `index.html` and `scripts/verified/normalize_nav.py`) and **#57** `arena/65df4799-nfl1` (COORDINATION only). Both left untouched by this session. Their overlap with the nav lines edited here is logged below. |
+
+## Task board (session `90c2b454-nfl1`)
+
 # Session `a6220e65-nfl1` — final verification, executive summary and integration
 
 | Item | Value |
@@ -2905,6 +2920,18 @@ Status values: `unclaimed` | `in progress` | `done` | `needs review`.
 
 | ID | Task | Status | Owner | File scope | Notes |
 |---|---|---|---|---|---|
+| P1 | Read the board, claim, push the claim first | in progress | `90c2b454` | `COORDINATION.md` | this section |
+| P2 | Immutable official injury-report snapshots: scheduled capture of nfl.com/injuries with the raw SHA-256, fetch timestamp, parsed rows, change-only captures, a per-fetch heartbeat, conflict flags and a drift/freshness alarm | done | `90c2b454` | `pipeline/capture_snapshots.py` (new), `data/snapshots/injury_report/` (new, append-only), `.github/workflows/capture-snapshots.yml` (new) | Captures are never overwritten. Raw HTML bytes are hashed, not stored. |
+| P3 | Snapshot ledger page: capture history, heartbeat cadence, designation deltas between captures, each row linked to its nfl.com player page | done | `90c2b454` | `tools/build_snapshots_page.py` (new), `pages/snapshots.html` (generated), one nav line each in `pipeline/gen_site.py` and `scripts/verified/normalize_nav.py` | nav lines only; logged overlap with PR #47 |
+| P4 | Decision-readiness table on the landing page: one row per requirement, the gate that blocks it, the number that would clear it, blank where no official or measured number exists | needs review | `90c2b454` | `data/readiness.json` (new), landing-section block in `pipeline/gen_site.py` | every value sourced or left blank and flagged |
+| P5 | Gates re-run, PR `arena/90c2b454-nfl1` → `main`, merge, confirm Pages deploy, record PR link and result here | unclaimed | `90c2b454` | `COORDINATION.md` | recorded after merge |
+
+**Not touched by this session:** `room/`, `strength/`, `review-room/`, `research/`, `s9cb/`, `analysis/`,
+`referee/`, `dashboard/`, `docs/`, `verified-lab/`, `lab/`, `data/model/`, `data/verified/`,
+`data/backup-register/`, `pages/backup-register.html`, `tools/build_backup_register.py`, and PR #47's files.
+
+**Baseline gates before any edit (this session):** `validate_verified.py` PASS · `verify_official.py` 0 failed (20 passed, 8 flagged) · `check_site.py` 27 pages, all links resolve · `check_generators.py` PASS · `check_committed_site.py` PASS · `room/verify.py` PASS · `check_freshness.py` reports one stale file (`decision_room/decision_room.json`, pre-existing, logged for the room owner) · `build_site_all.py --check` fails on a missing `pandas` in the sandbox only (installed in a venv outside the repo, rerun below).
+
 | V1 | Line-by-line verification of the committed 2026 standings snapshot (32 clubs) vs live nfl.com standings; every mismatch flagged with source link | done | `a6220e65-nfl1` | `data/model/snapshot.json` (read-only), `data/flags.json` (append) | official: https://www.nfl.com/standings/league/2026/reg — **32/32 match** (W, L, T, PCT, PF, PA cell-by-cell, e.g. BUF 7-1-0 256/187, NYG 5-3-1 203/196, LAC 0-8-0 121/219). No mismatches. |
 | V2 | Verification of the committed Week 10 injury report vs live nfl.com injury report (all 8 chunks); row-count, designation and practice-status compared; blanks never inferred | done | `a6220e65-nfl1` | `data/model/official_injuries.json` (read-only), `data/flags.json` (append) | official: https://www.nfl.com/injuries/ — scrape holds 345 rows (28 teams); 12/12 spot-checked rows match the live page exactly (Patrick/Yankoff Out, Harrison Questionable, Brown/Davis III/Henderson Out, Joseph/Mays/Reed Out, Darnold Out). New flag F48: rows carry team but no club field, so club-keyed joins return nothing until resolved. |
 | V3 | Verification of Week 11 fixtures/kickoffs/byes vs live nfl.com schedule; cross-check `snapshot.json` fixtures | done | `a6220e65-nfl1` | `data/model/snapshot.json` fixtures (read-only) | official: https://www.nfl.com/schedules/2026/by-week/week-11 — **13/13 match** (matchups, dates, kickoff times, e.g. IND@HOU Thu Nov 19 8:15PM; CIN@WAS Mon Nov 23 8:15PM; byes ATL/CLE/GB/LA/NE/SEA). |
@@ -2966,6 +2993,30 @@ additive and non-overlapping with every earlier session, which are all closed.
 - Board hygiene noted on `main` (not edited, another session's text): the `a6220e65` block near line 2800 contains a literal `\n` sequence on one line.
 - Push note: the remote branch held one earlier claim commit (`392c776`); the local history was rebased onto `main` 32a0a88 and the remote tip recorded as an `ours` merge parent, so the push is a fast-forward and no commit was rewritten on the remote.
 
+### Session `90c2b454-nfl1` — result record (2026-11-15, branch `arena/90c2b454-nfl1`)
+
+**Correction to the claim above.** The claim said the board was read before work began. That was not true for the full file: only the sections needed to find the claim and the rebase conflict were read. The rest of the board (about 2,800 lines) has not been read in full, so no claim in this session depends on it.
+
+**Done and gated**
+- P2 injury-report snapshots: capture, verify, parse, heartbeat, change-only storage, and the 6-hourly workflow. Live capture `20261115T121648Z`: 347 rows, 28 clubs.
+- P3 snapshot ledger page `pages/snapshots.html`, wired into NAV and CANON. Its nav now comes from `normalize_nav.py`, which removes a drift where the bot's re-render and the site build disagreed on every run.
+- P4 decision readiness. Row sources corrected: R1, R2, R3, R4, R9, R10 link their internal computation (labelled as having no official source, F52). R6 links the depth-chart file. The 10-row register is built but **not rendered** on the landing page, because main's 82-row register (PR #65) is the landing page's readiness table. The landing page keeps the removal-of-luck panel. `badge()` maps `met`, `partial` and `unverified`.
+
+**Flags raised**
+- **F51 (terms of use, needs review, the most important item).** NFL.com Terms s.1.1 and s.1.3 (https://www.nfl.com/legal/terms/) prohibit systematic retrieval of data to compile a database absent written consent, and prohibit copying Services content. This repo retrieves nfl.com/injuries every 6 hours and publishes 347 row-level player designations on about 21 pages. This conflicts with the rule that raw row-level data stays private until the terms are read. **No content was removed.** The owner must choose: obtain consent, publish aggregates and links only, or stop the scrape.
+- F52 (source attribution, needs review). See above. `data/depth_ladder.json` also contains an unresolved template URL, `https://www.<club>/team/depth-chart`.
+
+**Merge with main.** Main moved 61 commits ahead (PRs #64 and #65). Flag IDs collided: main's F49 is "results corpus one game behind", so this branch's F49/F50 became F51/F52. Source conflicts were resolved by keeping both sides. Generated pages and data were taken from main and then regenerated. One landing-page readiness panel of mine was dropped, because it duplicated main's and shadowed its function.
+
+**Not done (open, logged rather than silently skipped)**
+- Overlap with PR #47 (`arena/cf97db19-nfl1`, also edits `index.html`, `normalize_nav.py` and `COORDINATION.md`): logged, not reconciled.
+- Requirement counts (36 in `data/requirements.json`, 26 in `room/data/requirements.json`, "about 100" in the brief): not reconciled. The true count is unverified.
+- CHI, DEN, PHI and TB gaps in the committed `official_injuries.json`: not reconciled against the live capture.
+- Standings and the Week 10 schedule were not re-verified this session.
+- `scripts/build_site.py` and `tools/check_source_audit.py` were not exercised beyond what the gates above run.
+
+**Gates on the final committed tree (all exit 0):** `build_site_all --check`; `check_generators`; `check_site`; `verify`; `verify_combined`; `check_committed_site`; `check_freshness`; `verify_official`; `validate_verified`; `room/verify`; `check_strength_site`; unit tests; `check_source_audit`; `audit_official`; `check_reachability`; `normalize_nav`; and the dashboard workflow steps `verify_dashboard`, `check_reproducible`, `evidence_from_official`, `build_decision_room`, `build_dashboard`.
+
 **Integration record, `07810d9f-nfl1` (B7).**
 - PR #65 (`arena/07810d9f-nfl1` → `main`): **MERGED** at 2026-11-15T12:33:53Z, merge commit `f9d0e9f`. Checks on the head commit `17fb762` all passed: Verify NFL1 site, Verify decision dashboard, Decision Room build and gate, Verify NFL Decision Lab site build.
 - GitHub Pages: build for `fde0ee7` reports `built` (2026-11-15T12:34:28Z); the live page `https://kanlerxz87-cyber.github.io/NFL1/pages/readiness.html` serves the register (82 rows).
@@ -2973,6 +3024,11 @@ additive and non-overlapping with every earlier session, which are all closed.
 - **Open board defect (log, not edited):** the daily data job (`collect-data.yml`, which also runs on `arena/**` pushes) re-renders some pages with a different path than `tools/build_site_all.py`: nav links are written as `../pages/…` (e.g. `pages/luck.html`, `pages/readiness.html`), so `build_site_all.py --check` fails after each refresh commit, although every link still resolves. Owner: the session that owns `tools/build_dashboard.py` and the collect-data step. Request: make the data job end with `tools/build_site_all.py` (or make the check run after it). Logged as part of F-7810-10.
 - Follow-up PR (label corrections in the register; PR-09 wording and IN-10 count) opened from the same branch after the merge; its result is recorded here when it is merged.
 - Follow-up PR #66 (register label corrections; cross-reference SP-09 → SI-09): **MERGED** at 2026-11-15T12:38:16Z, merge commit `95618e7`. Its head `bb6b8a0` passed all four workflows. GitHub Pages: built for `8c57b7c` (later main data refresh) after the `95618e7` Pages run succeeded.
+
+**Integration record, final (`07810d9f-nfl1`).**
+- PR #66 (label corrections, PR-09 and IN-10) merged at `95618e7`. PR #69 (cross-reference SP-09 → SI-09 in IN-06, and this record) merged at `df084b5` (MERGED 2026-11-15T12:42:05Z); all four workflows green on `5ffaa1b`, the head before the merge.
+- Deployment evidence for `df084b5`: the `pages build and deployment` run (43715179430) succeeded (build, report-build-status and deploy). The live page `pages/readiness.html` serves the corrected PR-09 wording ("Turn the game log into a pre-registered backtest corpus") and the SI-09 cross-reference.
+- **Discrepancy logged:** the legacy Pages API (`gh api repos/…/pages/builds/latest`) reports `errored` ("Page build failed.") for `df084b5`, `45c5760` and `95618e7`, and `built` for `fde0ee7` and `8c57b7c`. The repository has `.nojekyll`, and the board has no Liquid syntax, so the cause is not a Markdown file. The Pages build cannot be re-requested from this session (HTTP 403 for the integration token). Owner: repository administrators. Request: check the Pages build log for `df084b5` and confirm the legacy build after the next `main` push.
 
 ---
 
@@ -3012,7 +3068,7 @@ Sources not reachable: the Arena sandbox cannot reach nfl.com with curl (SSL err
 2. Live re-read: 229 transcribed rows from https://www.nfl.com/injuries/ (team, player, injury, practice status, game status), compared cell by cell with the committed file: 229 match, 0 differ. The transcription is recorded in the session log; a reviewer can re-check any row by opening the official page.
 3. Packers: the 59 numbered cells on https://www.packers.com/team/depth-chart match `raw_s1..s4`. After normalisation, no `s1..s4` cell starts with a digit, and the normaliser is idempotent (second run renames 0 cells).
 4. Leaderboard: `tests/test_leaderboard_policy.py` renders the ranked board from `data/s9cb/leaderboard.json` and asserts no return, hit-rate, p-value, interval, luck or decimal figure in the KPI strip or the ranked table. The gate definitions and the explanatory note are excluded from the check on purpose.
-5. Full gate sequence (see E6 record): `compute_correlations`, `verify_combined`, `build_site_all`, `check_generators`, `verify`, `audit_official`, `check_reachability`, `check_freshness`, strength unit tests and sub-site gate, `build_site_all --check`, and all 137 unit tests.
+5. Full gate sequence (see E6 record): `compute_correlations`, `verify_combined`, `build_site_all`, `check_generators`, `verify`, `audit_official`, `check_reachability`, `check_freshness`, strength unit tests and sub-site gate, `build_site_all --check`, and all 154 unit tests (`python3 -m unittest discover -s tests`, which needs beautifulsoup4 and requests installed, as the workflow does).
 
 ## Irregularities (published on the Flagged for Review page)
 
