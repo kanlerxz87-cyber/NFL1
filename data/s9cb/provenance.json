@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-15T13:02:01+00:00",
+ "generated_at": "2026-11-15T13:04:24+00:00",
  "session": "9cb71eb8-nfl1",
  "hash_convention": "`sha256`/`bytes` describe the downloaded asset in build/raw/ (not committed). `committed_sha256`/`committed_bytes` describe the file actually stored in data/s9cb/, which is the one a reviewer can check. The two differ because the extract is filtered to REG games and a fixed column set before it is written.",
  "source_repo": "https://github.com/nflverse/nflverse-data",
@@ -15,7 +15,7 @@
    "description": "Game results, closing spread/total/moneylines with the price on each side, rest days, roof, surface, temperature, wind, division flag, referee, starting QBs",
    "bytes": 2190033,
    "status": "ok",
-   "fetched_at": "2026-11-15T13:01:55+00:00",
+   "fetched_at": "2026-11-15T13:04:19+00:00",
    "sha256": "1366e95473ae4c77fa28adf16b6225d7eeae59bc217430693110dbd017b2cfb7",
    "hash_describes": "downloaded asset (build/raw/, not committed)",
    "committed_bytes": 1665521,
@@ -31,7 +31,7 @@
    "description": "Club directory: abbreviation, name, conference, division",
    "bytes": 18919,
    "status": "ok",
-   "fetched_at": "2026-11-15T13:01:55+00:00",
+   "fetched_at": "2026-11-15T13:04:19+00:00",
    "sha256": "4eab559fcf89cb4eaf61cb63a88abc47b01b6c9049187c59f3efe95888c3d048",
    "hash_describes": "downloaded asset (build/raw/, not committed)",
    "committed_bytes": null,
@@ -47,7 +47,7 @@
    "description": "Player master (GSIS id, position, years of experience, latest team)",
    "bytes": 7308552,
    "status": "ok",
-   "fetched_at": "2026-11-15T13:01:55+00:00",
+   "fetched_at": "2026-11-15T13:04:19+00:00",
    "sha256": "a8a86df9be83cdf88d0dadb47f09fb4a3c5db326e19b46cf20bdade38e3e024d",
    "hash_describes": "downloaded asset (build/raw/, not committed)"
   }
