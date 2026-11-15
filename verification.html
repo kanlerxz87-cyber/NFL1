@@ -92,7 +92,7 @@
       <h1>Verification &amp; official sources</h1>
       <p class="lede">How every value was verified line by line, the complete official source registry with links for manual review, and the per-file data audit.</p>
       <div class="callout"><b>Verification policy.</b> Work line by line; cite an official source on every table row; leave a cell blank when the official source publishes no value; flag it; never infer or fill in a value. This page documents the procedure, the source registry and the line-by-line audit of the data layer.</div>
-<div class="cards"><div class="card"><div class="label">Official sources</div><div class="value">31</div><div class="detail">All fetched 2026-11-12</div></div><div class="card"><div class="label">Data files audited</div><div class="value">38</div><div class="detail">Row counts and blanks</div></div><div class="card"><div class="label">Table rows</div><div class="value">600+</div><div class="detail">Each with a source link</div></div><div class="card"><div class="label">Flagged items</div><div class="value">98</div><div class="detail">Needs review</div></div></div>
+<div class="cards"><div class="card"><div class="label">Official sources</div><div class="value">33</div><div class="detail">All fetched 2026-11-12</div></div><div class="card"><div class="label">Data files audited</div><div class="value">38</div><div class="detail">Row counts and blanks</div></div><div class="card"><div class="label">Table rows</div><div class="value">600+</div><div class="detail">Each with a source link</div></div><div class="card"><div class="label">Flagged items</div><div class="value">98</div><div class="detail">Needs review</div></div></div>
 <h2 id="policy">Verification procedure</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-verify-policy" aria-label="Filter tbl-verify-policy" placeholder="Filter rows…">
 <span class="count" data-count-for="tbl-verify-policy">7 rows shown</span></div>
@@ -150,7 +150,7 @@
 </tbody></table></div>
 <h2 id="sources">Official source registry</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-sources" aria-label="Filter tbl-sources" placeholder="Filter rows…">
-<span class="count" data-count-for="tbl-sources">31 rows shown</span></div>
+<span class="count" data-count-for="tbl-sources">33 rows shown</span></div>
 <div class="tablewrap"><table class="data-table" id="tbl-sources"><caption>Every official source used, what it verifies, its canonical URL note and the retrieval date. Each row links to that official page.</caption>
 <thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Publisher</th><th scope="col" class="sortable">Source type</th><th scope="col" class="sortable">What it verifies</th><th scope="col" class="sortable">Canonical / note</th><th scope="col" class="sortable">Retrieved</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
 <tr id="S01" data-verified="true">
@@ -431,6 +431,24 @@
 <td data-value="1" class="wide">Read in session 739408a8-nfl1 with fetch_page (chunk 0 of 4).</td>
 <td data-value="1">2026-11-15</td>
 <td><span class="src"><a href="https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-thursday-nov-5" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league news roundup (headlines and transactions)">S32 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S33" data-verified="true">
+<td><code>S33</code></td>
+<td data-value="1">Seattle Seahawks (seahawks.com)</td>
+<td data-value="1">Official club depth chart (team website)</td>
+<td data-value="1" class="wide">Seahawks depth chart page: Offense, Defense and Special Teams, printed 1st/2nd/3rd/4th columns. Chunk 1 of 2 holds the full chart; chunk 2 is a cookie banner only.</td>
+<td data-value="1" class="wide">Read in session d4027f66-nfl1 with fetch_page (chunk 1 of 2 captured verbatim to data/depth/official_raw/SEA_2026-11-15.md; chunk 2 read 2026-11-15 and contains no depth-chart text). No as-of date is printed in the captured part.</td>
+<td data-value="1">2026-11-15</td>
+<td><span class="src"><a href="https://www.seahawks.com/team/depth-chart/" target="_blank" rel="noopener noreferrer" title="Seattle Seahawks (seahawks.com) — Official club depth chart (team website)">S33 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S34" data-verified="true">
+<td><code>S34</code></td>
+<td data-value="1">This repository (internal file; not an official source)</td>
+<td data-value="1">Internal rule file (pre-registration)</td>
+<td data-value="1" class="wide">RULES_v1.md, registered at commit 591d8740a097 (sha256 a09d4cb3...). Design parameters of the demotion gate and leaderboard rules.</td>
+<td data-value="1" class="wide">Internal document. Its thresholds are design choices, not official figures (flag F59).</td>
+<td data-value="1">2026-11-15</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/preregistration/RULES_v1.md" target="_blank" rel="noopener noreferrer" title="This repository (internal file; not an official source) — Internal rule file (pre-registration)">S34 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
 </tbody></table></div>
 <h2 id="audit">Line-by-line data audit</h2>
@@ -720,8 +738,8 @@
 <tr id="AU-32" data-verified="true">
 <td><code>AU-32</code></td>
 <td data-value="1">data/sources.json</td>
-<td data-value="1" class="num">31</td>
-<td data-value="1">0 / 31</td>
+<td data-value="1" class="num">33</td>
+<td data-value="1">0 / 33</td>
 <td data-value="1" class="num">0</td>
 <td data-value="1" class="num">0</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
@@ -782,7 +800,7 @@
 </tr>
 </tbody></table></div>
 <h2 id="results">Automated validation results</h2>
-<div class="callout "><b>Validator result: PASS.</b> 2104 table rows checked, 2104 with an official source link, 73 unverified rows, 0 errors.</div>
+<div class="callout "><b>Validator result: PASS.</b> 2106 table rows checked, 2106 with an official source link, 73 unverified rows, 0 errors.</div>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-verify-results" aria-label="Filter tbl-verify-results" placeholder="Filter rows…">
 <span class="count" data-count-for="tbl-verify-results">38 rows shown</span></div>
 <div class="tablewrap"><table class="data-table" id="tbl-verify-results"><caption>Per-page validator results. Each row links to the official documentation defining the checks.</caption>
@@ -893,8 +911,8 @@
 </tr>
 <tr data-verified="true">
 <td data-value="1">verification.html</td>
-<td data-value="1" class="num">114</td>
-<td data-value="1" class="num">114</td>
+<td data-value="1" class="num">116</td>
+<td data-value="1" class="num">116</td>
 <td data-value="1" class="num">0</td>
 <td data-value="1" class="num">0</td>
 <td><span class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site" target="_blank" rel="noopener noreferrer" title="GitHub Docs — Official platform documentation">S22 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
