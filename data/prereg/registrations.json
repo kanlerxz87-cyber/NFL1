@@ -1,0 +1,3708 @@
+{
+ "schema": "nfl1.prereg.registry.v1",
+ "generated_at": "2026-11-15T13:48:04Z",
+ "requirement": "brief: pre-register every strategy; two-sided what-would-change-our-mind on every entry (readiness PR-15, PR-24); flag R26-01 context",
+ "policy": "prereg/README.md",
+ "counts": {
+  "entries": 126,
+  "by_kind": {
+   "retrospective": 69,
+   "prospective-eligible": 30,
+   "prospective": 27
+  },
+  "collections": 13
+ },
+ "entries": [
+  {
+   "id": "COLL/s9cb-12",
+   "entry_type": "collection",
+   "collection": "s9cb-12",
+   "strategy": "s9cb scored leaderboard: 12 rules at observed prices",
+   "track": "n/a (collection)",
+   "rule_summary": "rules and results first appear in the same commit (f15c018): not pre-registered; registered here for disclosure only (R26-01 pattern).",
+   "sample_window": "2006-2026, priced games only (5,202 priced spreads in the frozen corpus); holdout 2024-2025",
+   "gates": [
+    {
+     "id": "G1",
+     "name": "walk-forward / pre-game information only",
+     "why": "Every input to the bet decision is known before kick-off and, for the model rules, comes from a fit that used only earlier games."
+    },
+    {
+     "id": "G2",
+     "name": "observed prices on every scored bet",
+     "why": "Every scored bet carries a price taken from the source file. No -110 assumption is used."
+    },
+    {
+     "id": "G3",
+     "name": "at least 200 scored bets",
+     "why": "Below this, a run of luck is indistinguishable from skill at any plausible effect size."
+    },
+    {
+     "id": "G4",
+     "name": "hit rate beats the break-even implied by the actual prices taken",
+     "why": "Break-even is computed from the real price on each bet, not from 0.5."
+    },
+    {
+     "id": "G5",
+     "name": "survives multiple testing (BH-adjusted p < 0.05, 12 rules tested)",
+     "why": "Testing many rules and reporting only the best one manufactures winners; the Benjamini-Hochberg step charges for that."
+    },
+    {
+     "id": "G6",
+     "name": "positive in a untouched holdout (2024 + 2025)",
+     "why": "The holdout seasons were never used to tune the rule thresholds."
+    },
+    {
+     "id": "G7",
+     "name": "positive in at least 60% of individual seasons",
+     "why": "An edge that exists in only one season is a season, not a strategy."
+    },
+    {
+     "id": "G8",
+     "name": "95% bootstrap confidence interval on ROI excludes zero",
+     "why": "Ten thousand resamples of the actual bet log; the interval must sit above zero."
+    }
+   ],
+   "registration": {
+    "kind": "retrospective",
+    "commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "commit_date": "2026-11-12",
+    "rules_commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "results_commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "note": "rules and results first appear in the same commit (f15c018): not pre-registered; registered here for disclosure only (R26-01 pattern)."
+   },
+   "would_change_our_mind": {
+    "upside": "Collection graduates only when its own worst-performing gate set is cleared prospectively: >=200 scored bets at observed prices, BH q<0.05 across the family, ROI 95% CI above zero, and a positive holdout after it is opened.",
+    "downside": "If any gate audit (G1 look-ahead, G2 observed prices) fails, or the family's holdout is negative once opened, the collection is archived and may only be re-registered under new ids."
+   },
+   "source": {
+    "t": "data/s9cb/leaderboard.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/f15c018735e88f227429d22766d2a09d2ebb5a60/data/s9cb/leaderboard.json"
+   }
+  },
+  {
+   "id": "s9cb/S07",
+   "entry_type": "strategy",
+   "collection": "s9cb-12",
+   "strategy": "S07 Fade the road favourite of 7+",
+   "track": "single",
+   "rule_summary": "S07 Fade the road favourite of 7+",
+   "sample_window": "2006-2026, priced games only (5,202 priced spreads in the frozen corpus); holdout 2024-2025",
+   "gates_ref": "s9cb-12",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "commit_date": "2026-11-12",
+    "rules_commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "results_commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "note": "rules and results first appear in the same commit (f15c018): not pre-registered; registered here for disclosure only (R26-01 pattern)."
+   },
+   "would_change_our_mind": {
+    "upside": "Currently the closest rule (p=0.199): about 1,950 scored bets at 80% power would make the existing +6.1% distinguishable; BH q<0.05 with CI>0 and a positive holdout graduates it. Graduates to the prospective board only on: >=200 further scored bets at the frozen threshold, BH q<0.05 across the 12-rule family, bootstrap ROI 95% CI above zero, positive 2024-25 holdout, >=60% of seasons positive.",
+    "downside": "The next 400 scored bets pull the ROI CI across zero while q stays >=0.05 - stays on WATCH only as long as the interval keeps its sign; otherwise paper. Demoted to paper and closed if a G1/G2 audit finds look-ahead or an unobserved price, or the next 200 scored bets leave the ROI CI spanning zero."
+   },
+   "source": {
+    "t": "data/s9cb/leaderboard.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/f15c018735e88f227429d22766d2a09d2ebb5a60/data/s9cb/leaderboard.json"
+   }
+  },
+  {
+   "id": "s9cb/S04",
+   "entry_type": "strategy",
+   "collection": "s9cb-12",
+   "strategy": "S04 Model total edge >= 4.0 pts",
+   "track": "single",
+   "rule_summary": "S04 Model total edge >= 4.0 pts",
+   "sample_window": "2006-2026, priced games only (5,202 priced spreads in the frozen corpus); holdout 2024-2025",
+   "gates_ref": "s9cb-12",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "commit_date": "2026-11-12",
+    "rules_commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "results_commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "note": "rules and results first appear in the same commit (f15c018): not pre-registered; registered here for disclosure only (R26-01 pattern)."
+   },
+   "would_change_our_mind": {
+    "upside": "Total edge >=4.0 reaches n>=200 with q<0.05 and CI>0. Graduates to the prospective board only on: >=200 further scored bets at the frozen threshold, BH q<0.05 across the 12-rule family, bootstrap ROI 95% CI above zero, positive 2024-25 holdout, >=60% of seasons positive.",
+    "downside": "The threshold is so rare the sample never reaches 200 in two seasons - archived as untestable at this threshold; lowering it requires a new id. Demoted to paper and closed if a G1/G2 audit finds look-ahead or an unobserved price, or the next 200 scored bets leave the ROI CI spanning zero."
+   },
+   "source": {
+    "t": "data/s9cb/leaderboard.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/f15c018735e88f227429d22766d2a09d2ebb5a60/data/s9cb/leaderboard.json"
+   }
+  },
+  {
+   "id": "s9cb/S03",
+   "entry_type": "strategy",
+   "collection": "s9cb-12",
+   "strategy": "S03 Model total edge >= 2.5 pts",
+   "track": "single",
+   "rule_summary": "S03 Model total edge >= 2.5 pts",
+   "sample_window": "2006-2026, priced games only (5,202 priced spreads in the frozen corpus); holdout 2024-2025",
+   "gates_ref": "s9cb-12",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "commit_date": "2026-11-12",
+    "rules_commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "results_commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "note": "rules and results first appear in the same commit (f15c018): not pre-registered; registered here for disclosure only (R26-01 pattern)."
+   },
+   "would_change_our_mind": {
+    "upside": "Total edge >=2.5 keeps CI>0 over >=200 new scored totals bets with the model total fit frozen. Graduates to the prospective board only on: >=200 further scored bets at the frozen threshold, BH q<0.05 across the 12-rule family, bootstrap ROI 95% CI above zero, positive 2024-25 holdout, >=60% of seasons positive.",
+    "downside": "Re-running the frozen model flips the sign of >10% of picks (input instability) - void, re-register as a new rule. Demoted to paper and closed if a G1/G2 audit finds look-ahead or an unobserved price, or the next 200 scored bets leave the ROI CI spanning zero."
+   },
+   "source": {
+    "t": "data/s9cb/leaderboard.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/f15c018735e88f227429d22766d2a09d2ebb5a60/data/s9cb/leaderboard.json"
+   }
+  },
+  {
+   "id": "s9cb/S05",
+   "entry_type": "strategy",
+   "collection": "s9cb-12",
+   "strategy": "S05 Rest edge >= 3 days",
+   "track": "single",
+   "rule_summary": "S05 Rest edge >= 3 days",
+   "sample_window": "2006-2026, priced games only (5,202 priced spreads in the frozen corpus); holdout 2024-2025",
+   "gates_ref": "s9cb-12",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "commit_date": "2026-11-12",
+    "rules_commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "results_commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "note": "rules and results first appear in the same commit (f15c018): not pre-registered; registered here for disclosure only (R26-01 pattern)."
+   },
+   "would_change_our_mind": {
+    "upside": "Rest days audit clean for every scored game (G1) and CI>0 at n>=200. Graduates to the prospective board only on: >=200 further scored bets at the frozen threshold, BH q<0.05 across the 12-rule family, bootstrap ROI 95% CI above zero, positive 2024-25 holdout, >=60% of seasons positive.",
+    "downside": "Missing rest values correlate with the chosen side (selection bias) - void pending a rebuild of the rest feature. Demoted to paper and closed if a G1/G2 audit finds look-ahead or an unobserved price, or the next 200 scored bets leave the ROI CI spanning zero."
+   },
+   "source": {
+    "t": "data/s9cb/leaderboard.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/f15c018735e88f227429d22766d2a09d2ebb5a60/data/s9cb/leaderboard.json"
+   }
+  },
+  {
+   "id": "s9cb/S12",
+   "entry_type": "strategy",
+   "collection": "s9cb-12",
+   "strategy": "S12 Out-count gap of 3 or more",
+   "track": "single",
+   "rule_summary": "S12 Out-count gap of 3 or more",
+   "sample_window": "2006-2026, priced games only (5,202 priced spreads in the frozen corpus); holdout 2024-2025",
+   "gates_ref": "s9cb-12",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "commit_date": "2026-11-12",
+    "rules_commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "results_commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "note": "rules and results first appear in the same commit (f15c018): not pre-registered; registered here for disclosure only (R26-01 pattern)."
+   },
+   "would_change_our_mind": {
+    "upside": "Out-counts reconciled row-for-row against the official report every week and CI>0 at n>=200. Graduates to the prospective board only on: >=200 further scored bets at the frozen threshold, BH q<0.05 across the 12-rule family, bootstrap ROI 95% CI above zero, positive 2024-25 holdout, >=60% of seasons positive.",
+    "downside": "Report row-count drift between scrape and official page affects >2% of picks - void (flags CAP-01/02 pattern). Demoted to paper and closed if a G1/G2 audit finds look-ahead or an unobserved price, or the next 200 scored bets leave the ROI CI spanning zero."
+   },
+   "source": {
+    "t": "data/s9cb/leaderboard.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/f15c018735e88f227429d22766d2a09d2ebb5a60/data/s9cb/leaderboard.json"
+   }
+  },
+  {
+   "id": "s9cb/S01",
+   "entry_type": "strategy",
+   "collection": "s9cb-12",
+   "strategy": "S01 Model spread edge >= 1.5 pts",
+   "track": "single",
+   "rule_summary": "S01 Model spread edge >= 1.5 pts",
+   "sample_window": "2006-2026, priced games only (5,202 priced spreads in the frozen corpus); holdout 2024-2025",
+   "gates_ref": "s9cb-12",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "commit_date": "2026-11-12",
+    "rules_commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "results_commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "note": "rules and results first appear in the same commit (f15c018): not pre-registered; registered here for disclosure only (R26-01 pattern)."
+   },
+   "would_change_our_mind": {
+    "upside": "The 1.5-point edge keeps q<0.05 and CI>0 over the next 500 priced games with the walk-forward fit re-run frozen (G1), 2024-25 holdout positive. Graduates to the prospective board only on: >=200 further scored bets at the frozen threshold, BH q<0.05 across the 12-rule family, bootstrap ROI 95% CI above zero, positive 2024-25 holdout, >=60% of seasons positive.",
+    "downside": "The edge lives in one walk-forward fold or disappears when the frozen code is re-run. Demoted to paper and closed if a G1/G2 audit finds look-ahead or an unobserved price, or the next 200 scored bets leave the ROI CI spanning zero."
+   },
+   "source": {
+    "t": "data/s9cb/leaderboard.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/f15c018735e88f227429d22766d2a09d2ebb5a60/data/s9cb/leaderboard.json"
+   }
+  },
+  {
+   "id": "s9cb/S02",
+   "entry_type": "strategy",
+   "collection": "s9cb-12",
+   "strategy": "S02 Model spread edge >= 3.0 pts",
+   "track": "single",
+   "rule_summary": "S02 Model spread edge >= 3.0 pts",
+   "sample_window": "2006-2026, priced games only (5,202 priced spreads in the frozen corpus); holdout 2024-2025",
+   "gates_ref": "s9cb-12",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "commit_date": "2026-11-12",
+    "rules_commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "results_commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "note": "rules and results first appear in the same commit (f15c018): not pre-registered; registered here for disclosure only (R26-01 pattern)."
+   },
+   "would_change_our_mind": {
+    "upside": "A 3-point edge is rarer: reaches n>=200 with CI>0 and hit rate above the price-implied break-even (G4) on new seasons. Graduates to the prospective board only on: >=200 further scored bets at the frozen threshold, BH q<0.05 across the 12-rule family, bootstrap ROI 95% CI above zero, positive 2024-25 holdout, >=60% of seasons positive.",
+    "downside": "n stays below 200 for two more full seasons (G3 never clears) - archived as underpowered at this threshold, never re-tuned under this id. Demoted to paper and closed if a G1/G2 audit finds look-ahead or an unobserved price, or the next 200 scored bets leave the ROI CI spanning zero."
+   },
+   "source": {
+    "t": "data/s9cb/leaderboard.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/f15c018735e88f227429d22766d2a09d2ebb5a60/data/s9cb/leaderboard.json"
+   }
+  },
+  {
+   "id": "s9cb/S11",
+   "entry_type": "strategy",
+   "collection": "s9cb-12",
+   "strategy": "S11 Opponent QB ruled Out/Doubtful",
+   "track": "single",
+   "rule_summary": "S11 Opponent QB ruled Out/Doubtful",
+   "sample_window": "2006-2026, priced games only (5,202 priced spreads in the frozen corpus); holdout 2024-2025",
+   "gates_ref": "s9cb-12",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "commit_date": "2026-11-12",
+    "rules_commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "results_commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "note": "rules and results first appear in the same commit (f15c018): not pre-registered; registered here for disclosure only (R26-01 pattern)."
+   },
+   "would_change_our_mind": {
+    "upside": "Every scored game's QB designation comes from the official weekly report (G1) and CI>0 at n>=200 with q<0.05. Graduates to the prospective board only on: >=200 further scored bets at the frozen threshold, BH q<0.05 across the 12-rule family, bootstrap ROI 95% CI above zero, positive 2024-25 holdout, >=60% of seasons positive.",
+    "downside": "Designation coverage gaps (mirror lag vs nfl.com, flag U02) touch >2% of picks - void until the official scrape is the only input. Demoted to paper and closed if a G1/G2 audit finds look-ahead or an unobserved price, or the next 200 scored bets leave the ROI CI spanning zero."
+   },
+   "source": {
+    "t": "data/s9cb/leaderboard.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/f15c018735e88f227429d22766d2a09d2ebb5a60/data/s9cb/leaderboard.json"
+   }
+  },
+  {
+   "id": "s9cb/S06",
+   "entry_type": "strategy",
+   "collection": "s9cb-12",
+   "strategy": "S06 Divisional road underdog of 3+",
+   "track": "single",
+   "rule_summary": "S06 Divisional road underdog of 3+",
+   "sample_window": "2006-2026, priced games only (5,202 priced spreads in the frozen corpus); holdout 2024-2025",
+   "gates_ref": "s9cb-12",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "commit_date": "2026-11-12",
+    "rules_commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "results_commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "note": "rules and results first appear in the same commit (f15c018): not pre-registered; registered here for disclosure only (R26-01 pattern)."
+   },
+   "would_change_our_mind": {
+    "upside": "Positive at n>=200 with the division flag taken from the official standings and a residual edge after conditioning on the closing line. Graduates to the prospective board only on: >=200 further scored bets at the frozen threshold, BH q<0.05 across the 12-rule family, bootstrap ROI 95% CI above zero, positive 2024-25 holdout, >=60% of seasons positive.",
+    "downside": "Outcome regression on the closing line leaves no residual for the rule - archived as already priced. Demoted to paper and closed if a G1/G2 audit finds look-ahead or an unobserved price, or the next 200 scored bets leave the ROI CI spanning zero."
+   },
+   "source": {
+    "t": "data/s9cb/leaderboard.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/f15c018735e88f227429d22766d2a09d2ebb5a60/data/s9cb/leaderboard.json"
+   }
+  },
+  {
+   "id": "s9cb/S08",
+   "entry_type": "strategy",
+   "collection": "s9cb-12",
+   "strategy": "S08 Home team off a bye",
+   "track": "single",
+   "rule_summary": "S08 Home team off a bye",
+   "sample_window": "2006-2026, priced games only (5,202 priced spreads in the frozen corpus); holdout 2024-2025",
+   "gates_ref": "s9cb-12",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "commit_date": "2026-11-12",
+    "rules_commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "results_commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "note": "rules and results first appear in the same commit (f15c018): not pre-registered; registered here for disclosure only (R26-01 pattern)."
+   },
+   "would_change_our_mind": {
+    "upside": "Rest>=13 days verified for every scored game and CI>0 at n>=200. Graduates to the prospective board only on: >=200 further scored bets at the frozen threshold, BH q<0.05 across the 12-rule family, bootstrap ROI 95% CI above zero, positive 2024-25 holdout, >=60% of seasons positive.",
+    "downside": "Audit finds a mis-coded bye/rest week for any club in the pick set - void and re-register after the fix. Demoted to paper and closed if a G1/G2 audit finds look-ahead or an unobserved price, or the next 200 scored bets leave the ROI CI spanning zero."
+   },
+   "source": {
+    "t": "data/s9cb/leaderboard.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/f15c018735e88f227429d22766d2a09d2ebb5a60/data/s9cb/leaderboard.json"
+   }
+  },
+  {
+   "id": "s9cb/S10",
+   "entry_type": "strategy",
+   "collection": "s9cb-12",
+   "strategy": "S10 Over when the total is 50 or higher",
+   "track": "single",
+   "rule_summary": "S10 Over when the total is 50 or higher",
+   "sample_window": "2006-2026, priced games only (5,202 priced spreads in the frozen corpus); holdout 2024-2025",
+   "gates_ref": "s9cb-12",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "commit_date": "2026-11-12",
+    "rules_commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "results_commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "note": "rules and results first appear in the same commit (f15c018): not pre-registered; registered here for disclosure only (R26-01 pattern)."
+   },
+   "would_change_our_mind": {
+    "upside": "Over at total>=50 turns positive with CI>0 over >=200 new bets at observed prices. Graduates to the prospective board only on: >=200 further scored bets at the frozen threshold, BH q<0.05 across the 12-rule family, bootstrap ROI 95% CI above zero, positive 2024-25 holdout, >=60% of seasons positive.",
+    "downside": "Stays negative or CI spans zero at n>=200 - closed as priced efficiently. Demoted to paper and closed if a G1/G2 audit finds look-ahead or an unobserved price, or the next 200 scored bets leave the ROI CI spanning zero."
+   },
+   "source": {
+    "t": "data/s9cb/leaderboard.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/f15c018735e88f227429d22766d2a09d2ebb5a60/data/s9cb/leaderboard.json"
+   }
+  },
+  {
+   "id": "s9cb/S09",
+   "entry_type": "strategy",
+   "collection": "s9cb-12",
+   "strategy": "S09 Under when the total is 40 or lower",
+   "track": "single",
+   "rule_summary": "S09 Under when the total is 40 or lower",
+   "sample_window": "2006-2026, priced games only (5,202 priced spreads in the frozen corpus); holdout 2024-2025",
+   "gates_ref": "s9cb-12",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "commit_date": "2026-11-12",
+    "rules_commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "results_commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "note": "rules and results first appear in the same commit (f15c018): not pre-registered; registered here for disclosure only (R26-01 pattern)."
+   },
+   "would_change_our_mind": {
+    "upside": "The strongest raw result is a LOSS (-7.9%, BH q=0.178): it flips to candidate only if a prospective re-test at the frozen threshold is positive with CI>0 and q<0.05. Graduates to the prospective board only on: >=200 further scored bets at the frozen threshold, BH q<0.05 across the 12-rule family, bootstrap ROI 95% CI above zero, positive 2024-25 holdout, >=60% of seasons positive.",
+    "downside": "Stays archived as evidence the low-total market prices efficiently; any threshold change is a new id, not a rescue. Demoted to paper and closed if a G1/G2 audit finds look-ahead or an unobserved price, or the next 200 scored bets leave the ROI CI spanning zero."
+   },
+   "source": {
+    "t": "data/s9cb/leaderboard.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/f15c018735e88f227429d22766d2a09d2ebb5a60/data/s9cb/leaderboard.json"
+   }
+  },
+  {
+   "id": "COLL/model-12",
+   "entry_type": "collection",
+   "collection": "model-12",
+   "strategy": "root model leaderboard: 12 strategies (G1-G8)",
+   "track": "n/a (collection)",
+   "rule_summary": "rule code (ef9bc8b) and first results (8158948) landed in the same session on 2026-11-12; no results-free registration exists - retrospective.",
+   "sample_window": "2005-2026; price assumption -110 on every bet (retired pending decision PR-10)",
+   "gates": [
+    {
+     "id": "G1",
+     "rule": "Every input file pinned by URL and sha256."
+    },
+    {
+     "id": "G2",
+     "rule": "Rule fixed before evaluation; no threshold search."
+    },
+    {
+     "id": "G3",
+     "rule": "At least 100 graded bets."
+    },
+    {
+     "id": "G4",
+     "rule": "Positive ROI across the two most recent seasons."
+    },
+    {
+     "id": "G5",
+     "rule": "Benjamini-Hochberg q < 0.10 against break-even win rate."
+    },
+    {
+     "id": "G6",
+     "rule": "At least 60% of tested seasons positive."
+    },
+    {
+     "id": "G7",
+     "rule": "Max drawdown no worse than -25 units."
+    },
+    {
+     "id": "G8",
+     "rule": "|correlation| with any other strategy below 0.7."
+    }
+   ],
+   "registration": {
+    "kind": "retrospective",
+    "commit": "8158948b5136116d1796d1d3567688e75e5c416f",
+    "commit_date": "2026-11-12",
+    "rules_commit": "ef9bc8bde879ce550c9e3acd435775ad6314407c",
+    "results_commit": "8158948b5136116d1796d1d3567688e75e5c416f",
+    "note": "rule code (ef9bc8b) and first results (8158948) landed in the same session on 2026-11-12; no results-free registration exists - retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Collection graduates only when its own worst-performing gate set is cleared prospectively: >=200 scored bets at observed prices, BH q<0.05 across the family, ROI 95% CI above zero, and a positive holdout after it is opened.",
+    "downside": "If any gate audit (G1 look-ahead, G2 observed prices) fails, or the family's holdout is negative once opened, the collection is archived and may only be re-registered under new ids."
+   },
+   "source": {
+    "t": "data/model/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/8158948b5136116d1796d1d3567688e75e5c416f/data/model/strategies.json"
+   }
+  },
+  {
+   "id": "model/S11",
+   "entry_type": "strategy",
+   "collection": "model-12",
+   "strategy": "S11 Under in divisional games with total 47+",
+   "track": "single",
+   "rule_summary": "S11 Under in divisional games with total 47+",
+   "sample_window": "2005-2026; price assumption -110 on every bet (retired pending decision PR-10)",
+   "gates_ref": "model-12",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "8158948b5136116d1796d1d3567688e75e5c416f",
+    "commit_date": "2026-11-12",
+    "rules_commit": "ef9bc8bde879ce550c9e3acd435775ad6314407c",
+    "results_commit": "8158948b5136116d1796d1d3567688e75e5c416f",
+    "note": "rule code (ef9bc8b) and first results (8158948) landed in the same session on 2026-11-12; no results-free registration exists - retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Best current model rule (WATCH, 6/8): passes all eight at observed prices with BH q<0.05 and a positive holdout. Re-scored at OBSERVED prices (the -110 assumption is retired under PR-10) with >=200 bets, BH q<0.05, CI>0 and a positive holdout before any graduate claim.",
+    "downside": "Loses WATCH when -110 is removed - archived as an artefact of the price policy. If the edge exists only under the -110 fill, it is an artefact of the price policy, not a signal: archive and re-register after PR-10 is decided."
+   },
+   "source": {
+    "t": "data/model/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/8158948b5136116d1796d1d3567688e75e5c416f/data/model/strategies.json"
+   }
+  },
+  {
+   "id": "model/S10",
+   "entry_type": "strategy",
+   "collection": "model-12",
+   "strategy": "S10 Over when closing total is 41 or lower",
+   "track": "single",
+   "rule_summary": "S10 Over when closing total is 41 or lower",
+   "sample_window": "2005-2026; price assumption -110 on every bet (retired pending decision PR-10)",
+   "gates_ref": "model-12",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "8158948b5136116d1796d1d3567688e75e5c416f",
+    "commit_date": "2026-11-12",
+    "rules_commit": "ef9bc8bde879ce550c9e3acd435775ad6314407c",
+    "results_commit": "8158948b5136116d1796d1d3567688e75e5c416f",
+    "note": "rule code (ef9bc8b) and first results (8158948) landed in the same session on 2026-11-12; no results-free registration exists - retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Over at closing total <=41 positive at observed prices. Re-scored at OBSERVED prices (the -110 assumption is retired under PR-10) with >=200 bets, BH q<0.05, CI>0 and a positive holdout before any graduate claim.",
+    "downside": "Below break-even at observed prices at n>=200 - close. If the edge exists only under the -110 fill, it is an artefact of the price policy, not a signal: archive and re-register after PR-10 is decided."
+   },
+   "source": {
+    "t": "data/model/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/8158948b5136116d1796d1d3567688e75e5c416f/data/model/strategies.json"
+   }
+  },
+  {
+   "id": "model/S04",
+   "entry_type": "strategy",
+   "collection": "model-12",
+   "strategy": "S04 Divisional underdog +6.5 or more",
+   "track": "single",
+   "rule_summary": "S04 Divisional underdog +6.5 or more",
+   "sample_window": "2005-2026; price assumption -110 on every bet (retired pending decision PR-10)",
+   "gates_ref": "model-12",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "8158948b5136116d1796d1d3567688e75e5c416f",
+    "commit_date": "2026-11-12",
+    "rules_commit": "ef9bc8bde879ce550c9e3acd435775ad6314407c",
+    "results_commit": "8158948b5136116d1796d1d3567688e75e5c416f",
+    "note": "rule code (ef9bc8b) and first results (8158948) landed in the same session on 2026-11-12; no results-free registration exists - retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Divisional dog +6.5 shows a residual after conditioning on the closing line, positive at observed prices. Re-scored at OBSERVED prices (the -110 assumption is retired under PR-10) with >=200 bets, BH q<0.05, CI>0 and a positive holdout before any graduate claim.",
+    "downside": "The line already prices the divisional dog (no residual) - archived. If the edge exists only under the -110 fill, it is an artefact of the price policy, not a signal: archive and re-register after PR-10 is decided."
+   },
+   "source": {
+    "t": "data/model/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/8158948b5136116d1796d1d3567688e75e5c416f/data/model/strategies.json"
+   }
+  },
+  {
+   "id": "model/S07",
+   "entry_type": "strategy",
+   "collection": "model-12",
+   "strategy": "S07 Home team with 3+ rest-day edge",
+   "track": "single",
+   "rule_summary": "S07 Home team with 3+ rest-day edge",
+   "sample_window": "2005-2026; price assumption -110 on every bet (retired pending decision PR-10)",
+   "gates_ref": "model-12",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "8158948b5136116d1796d1d3567688e75e5c416f",
+    "commit_date": "2026-11-12",
+    "rules_commit": "ef9bc8bde879ce550c9e3acd435775ad6314407c",
+    "results_commit": "8158948b5136116d1796d1d3567688e75e5c416f",
+    "note": "rule code (ef9bc8b) and first results (8158948) landed in the same session on 2026-11-12; no results-free registration exists - retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Home 3+ rest edge positive at observed prices with G1 walk-forward re-audit clean. Re-scored at OBSERVED prices (the -110 assumption is retired under PR-10) with >=200 bets, BH q<0.05, CI>0 and a positive holdout before any graduate claim.",
+    "downside": "Walk-forward re-audit fails - void. If the edge exists only under the -110 fill, it is an artefact of the price policy, not a signal: archive and re-register after PR-10 is decided."
+   },
+   "source": {
+    "t": "data/model/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/8158948b5136116d1796d1d3567688e75e5c416f/data/model/strategies.json"
+   }
+  },
+  {
+   "id": "model/S09",
+   "entry_type": "strategy",
+   "collection": "model-12",
+   "strategy": "S09 Home favourite of 10 or more",
+   "track": "single",
+   "rule_summary": "S09 Home favourite of 10 or more",
+   "sample_window": "2005-2026; price assumption -110 on every bet (retired pending decision PR-10)",
+   "gates_ref": "model-12",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "8158948b5136116d1796d1d3567688e75e5c416f",
+    "commit_date": "2026-11-12",
+    "rules_commit": "ef9bc8bde879ce550c9e3acd435775ad6314407c",
+    "results_commit": "8158948b5136116d1796d1d3567688e75e5c416f",
+    "note": "rule code (ef9bc8b) and first results (8158948) landed in the same session on 2026-11-12; no results-free registration exists - retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Home favourite 10+ positive at observed prices with holdout positive. Re-scored at OBSERVED prices (the -110 assumption is retired under PR-10) with >=200 bets, BH q<0.05, CI>0 and a positive holdout before any graduate claim.",
+    "downside": "Holdout negative after PR-10 re-scoring - close. If the edge exists only under the -110 fill, it is an artefact of the price policy, not a signal: archive and re-register after PR-10 is decided."
+   },
+   "source": {
+    "t": "data/model/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/8158948b5136116d1796d1d3567688e75e5c416f/data/model/strategies.json"
+   }
+  },
+  {
+   "id": "model/S06",
+   "entry_type": "strategy",
+   "collection": "model-12",
+   "strategy": "S06 Fade divisional road favourite of 6.5+",
+   "track": "single",
+   "rule_summary": "S06 Fade divisional road favourite of 6.5+",
+   "sample_window": "2005-2026; price assumption -110 on every bet (retired pending decision PR-10)",
+   "gates_ref": "model-12",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "8158948b5136116d1796d1d3567688e75e5c416f",
+    "commit_date": "2026-11-12",
+    "rules_commit": "ef9bc8bde879ce550c9e3acd435775ad6314407c",
+    "results_commit": "8158948b5136116d1796d1d3567688e75e5c416f",
+    "note": "rule code (ef9bc8b) and first results (8158948) landed in the same session on 2026-11-12; no results-free registration exists - retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Fade divisional road favourite 6.5+ positive across >=2 seasons at observed prices. Re-scored at OBSERVED prices (the -110 assumption is retired under PR-10) with >=200 bets, BH q<0.05, CI>0 and a positive holdout before any graduate claim.",
+    "downside": "Positive only in one season (G6 <60%) - paper. If the edge exists only under the -110 fill, it is an artefact of the price policy, not a signal: archive and re-register after PR-10 is decided."
+   },
+   "source": {
+    "t": "data/model/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/8158948b5136116d1796d1d3567688e75e5c416f/data/model/strategies.json"
+   }
+  },
+  {
+   "id": "model/S08",
+   "entry_type": "strategy",
+   "collection": "model-12",
+   "strategy": "S08 Home team facing opponent off a bye",
+   "track": "single",
+   "rule_summary": "S08 Home team facing opponent off a bye",
+   "sample_window": "2005-2026; price assumption -110 on every bet (retired pending decision PR-10)",
+   "gates_ref": "model-12",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "8158948b5136116d1796d1d3567688e75e5c416f",
+    "commit_date": "2026-11-12",
+    "rules_commit": "ef9bc8bde879ce550c9e3acd435775ad6314407c",
+    "results_commit": "8158948b5136116d1796d1d3567688e75e5c416f",
+    "note": "rule code (ef9bc8b) and first results (8158948) landed in the same session on 2026-11-12; no results-free registration exists - retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Home vs opponent off bye positive at observed prices. Re-scored at OBSERVED prices (the -110 assumption is retired under PR-10) with >=200 bets, BH q<0.05, CI>0 and a positive holdout before any graduate claim.",
+    "downside": "Bye/rest source error found in audit - void pending fix. If the edge exists only under the -110 fill, it is an artefact of the price policy, not a signal: archive and re-register after PR-10 is decided."
+   },
+   "source": {
+    "t": "data/model/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/8158948b5136116d1796d1d3567688e75e5c416f/data/model/strategies.json"
+   }
+  },
+  {
+   "id": "model/S05",
+   "entry_type": "strategy",
+   "collection": "model-12",
+   "strategy": "S05 Underdog on short rest (<=4 days)",
+   "track": "single",
+   "rule_summary": "S05 Underdog on short rest (<=4 days)",
+   "sample_window": "2005-2026; price assumption -110 on every bet (retired pending decision PR-10)",
+   "gates_ref": "model-12",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "8158948b5136116d1796d1d3567688e75e5c416f",
+    "commit_date": "2026-11-12",
+    "rules_commit": "ef9bc8bde879ce550c9e3acd435775ad6314407c",
+    "results_commit": "8158948b5136116d1796d1d3567688e75e5c416f",
+    "note": "rule code (ef9bc8b) and first results (8158948) landed in the same session on 2026-11-12; no results-free registration exists - retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Short-rest <=4 days positive at observed prices with rest data audited. Re-scored at OBSERVED prices (the -110 assumption is retired under PR-10) with >=200 bets, BH q<0.05, CI>0 and a positive holdout before any graduate claim.",
+    "downside": "Rest missingness correlates with pick side - void. If the edge exists only under the -110 fill, it is an artefact of the price policy, not a signal: archive and re-register after PR-10 is decided."
+   },
+   "source": {
+    "t": "data/model/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/8158948b5136116d1796d1d3567688e75e5c416f/data/model/strategies.json"
+   }
+  },
+  {
+   "id": "model/S02",
+   "entry_type": "strategy",
+   "collection": "model-12",
+   "strategy": "S02 Own-line vs close, edge >= 3.0",
+   "track": "single",
+   "rule_summary": "S02 Own-line vs close, edge >= 3.0",
+   "sample_window": "2005-2026; price assumption -110 on every bet (retired pending decision PR-10)",
+   "gates_ref": "model-12",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "8158948b5136116d1796d1d3567688e75e5c416f",
+    "commit_date": "2026-11-12",
+    "rules_commit": "ef9bc8bde879ce550c9e3acd435775ad6314407c",
+    "results_commit": "8158948b5136116d1796d1d3567688e75e5c416f",
+    "note": "rule code (ef9bc8b) and first results (8158948) landed in the same session on 2026-11-12; no results-free registration exists - retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Own-line edge >=3.0 keeps CI>0 at observed prices over >=200 bets. Re-scored at OBSERVED prices (the -110 assumption is retired under PR-10) with >=200 bets, BH q<0.05, CI>0 and a positive holdout before any graduate claim.",
+    "downside": "Threshold so rare n<100 at observed prices after a full season - archived. If the edge exists only under the -110 fill, it is an artefact of the price policy, not a signal: archive and re-register after PR-10 is decided."
+   },
+   "source": {
+    "t": "data/model/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/8158948b5136116d1796d1d3567688e75e5c416f/data/model/strategies.json"
+   }
+  },
+  {
+   "id": "model/S01",
+   "entry_type": "strategy",
+   "collection": "model-12",
+   "strategy": "S01 Own-line vs close, edge >= 2.0",
+   "track": "single",
+   "rule_summary": "S01 Own-line vs close, edge >= 2.0",
+   "sample_window": "2005-2026; price assumption -110 on every bet (retired pending decision PR-10)",
+   "gates_ref": "model-12",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "8158948b5136116d1796d1d3567688e75e5c416f",
+    "commit_date": "2026-11-12",
+    "rules_commit": "ef9bc8bde879ce550c9e3acd435775ad6314407c",
+    "results_commit": "8158948b5136116d1796d1d3567688e75e5c416f",
+    "note": "rule code (ef9bc8b) and first results (8158948) landed in the same session on 2026-11-12; no results-free registration exists - retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Own-line edge >=2.0 survives observed-price re-scoring with q<0.05. Re-scored at OBSERVED prices (the -110 assumption is retired under PR-10) with >=200 bets, BH q<0.05, CI>0 and a positive holdout before any graduate claim.",
+    "downside": "Sign flips or CI spans zero once real prices replace -110. If the edge exists only under the -110 fill, it is an artefact of the price policy, not a signal: archive and re-register after PR-10 is decided."
+   },
+   "source": {
+    "t": "data/model/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/8158948b5136116d1796d1d3567688e75e5c416f/data/model/strategies.json"
+   }
+  },
+  {
+   "id": "model/S03",
+   "entry_type": "strategy",
+   "collection": "model-12",
+   "strategy": "S03 Own-total vs close, edge >= 3",
+   "track": "single",
+   "rule_summary": "S03 Own-total vs close, edge >= 3",
+   "sample_window": "2005-2026; price assumption -110 on every bet (retired pending decision PR-10)",
+   "gates_ref": "model-12",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "8158948b5136116d1796d1d3567688e75e5c416f",
+    "commit_date": "2026-11-12",
+    "rules_commit": "ef9bc8bde879ce550c9e3acd435775ad6314407c",
+    "results_commit": "8158948b5136116d1796d1d3567688e75e5c416f",
+    "note": "rule code (ef9bc8b) and first results (8158948) landed in the same session on 2026-11-12; no results-free registration exists - retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Own-total edge >=3 keeps CI>0 at observed prices. Re-scored at OBSERVED prices (the -110 assumption is retired under PR-10) with >=200 bets, BH q<0.05, CI>0 and a positive holdout before any graduate claim.",
+    "downside": "Model-total fit changes sign of the pick on re-run - void. If the edge exists only under the -110 fill, it is an artefact of the price policy, not a signal: archive and re-register after PR-10 is decided."
+   },
+   "source": {
+    "t": "data/model/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/8158948b5136116d1796d1d3567688e75e5c416f/data/model/strategies.json"
+   }
+  },
+  {
+   "id": "model/S12",
+   "entry_type": "strategy",
+   "collection": "model-12",
+   "strategy": "S12 Start the team whose QB is ruled Out/Doubtful",
+   "track": "single",
+   "rule_summary": "S12 Start the team whose QB is ruled Out/Doubtful",
+   "sample_window": "2005-2026; price assumption -110 on every bet (retired pending decision PR-10)",
+   "gates_ref": "model-12",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "8158948b5136116d1796d1d3567688e75e5c416f",
+    "commit_date": "2026-11-12",
+    "rules_commit": "ef9bc8bde879ce550c9e3acd435775ad6314407c",
+    "results_commit": "8158948b5136116d1796d1d3567688e75e5c416f",
+    "note": "rule code (ef9bc8b) and first results (8158948) landed in the same session on 2026-11-12; no results-free registration exists - retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Backup-QB join covers >=95% of scored games from the official report (club-key flag F48 resolved) and is positive at observed prices. Re-scored at OBSERVED prices (the -110 assumption is retired under PR-10) with >=200 bets, BH q<0.05, CI>0 and a positive holdout before any graduate claim.",
+    "downside": "Join gaps bias the sample (F48 open) - void until club keys resolve. If the edge exists only under the -110 fill, it is an artefact of the price policy, not a signal: archive and re-register after PR-10 is decided."
+   },
+   "source": {
+    "t": "data/model/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/8158948b5136116d1796d1d3567688e75e5c416f/data/model/strategies.json"
+   }
+  },
+  {
+   "id": "COLL/strength-11",
+   "entry_type": "collection",
+   "collection": "strength-11",
+   "strategy": "strength-of-schedule study: 11 rules through 8 gates",
+   "track": "n/a (collection)",
+   "rule_summary": "rule file and results committed together at 2d9ebfe (flag R26-01 documents the earlier 5a769b3 instance, observed from a shallow clone); retrospective.",
+   "sample_window": "1999-2026 walk-forward; holdout 2024-2026 per its G6",
+   "gates": [
+    {
+     "id": "G1",
+     "name": "walk-forward",
+     "rule": "inputs known before kick-off; the fit uses earlier games only"
+    },
+    {
+     "id": "G2",
+     "name": "observed prices",
+     "rule": "every scored bet carries a price taken from the source file; no -110 default"
+    },
+    {
+     "id": "G3",
+     "name": "minimum sample",
+     "rule": "at least 200 scored bets"
+    },
+    {
+     "id": "G4",
+     "name": "beats break-even",
+     "rule": "hit rate above the break-even implied by the prices actually taken"
+    },
+    {
+     "id": "G5",
+     "name": "multiple testing",
+     "rule": "Benjamini-Hochberg q < 0.05 across the 11 rules tested"
+    },
+    {
+     "id": "G6",
+     "name": "holdout",
+     "rule": "positive ROI in untouched seasons [2024, 2025, 2026]"
+    },
+    {
+     "id": "G7",
+     "name": "season stability",
+     "rule": "positive in at least 60% of the seasons played"
+    },
+    {
+     "id": "G8",
+     "name": "confidence",
+     "rule": "95% bootstrap interval on ROI excludes zero"
+    }
+   ],
+   "registration": {
+    "kind": "retrospective",
+    "commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "commit_date": "2026-11-13",
+    "rules_commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "results_commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "note": "rule file and results committed together at 2d9ebfe (flag R26-01 documents the earlier 5a769b3 instance, observed from a shallow clone); retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Collection graduates only when its own worst-performing gate set is cleared prospectively: >=200 scored bets at observed prices, BH q<0.05 across the family, ROI 95% CI above zero, and a positive holdout after it is opened.",
+    "downside": "If any gate audit (G1 look-ahead, G2 observed prices) fails, or the family's holdout is negative once opened, the collection is archived and may only be re-registered under new ids."
+   },
+   "source": {
+    "t": "data/strength/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb/data/strength/strategies.json"
+   }
+  },
+  {
+   "id": "strength/X01",
+   "entry_type": "strategy",
+   "collection": "strength-11",
+   "strategy": "X01 Own spread edge >= 1.5 pts",
+   "track": "single",
+   "rule_summary": "X01 Own spread edge >= 1.5 pts",
+   "sample_window": "1999-2026 walk-forward; holdout 2024-2026 per its G6",
+   "gates_ref": "strength-11",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "commit_date": "2026-11-13",
+    "rules_commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "results_commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "note": "rule file and results committed together at 2d9ebfe (flag R26-01 documents the earlier 5a769b3 instance, observed from a shallow clone); retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Positive with CI>0 at the frozen own spread edge >=1.5 threshold on post-2024 walk-forward data. BH q<0.05 across the 11-rule family on new seasons, ROI 95% CI>0 at the frozen threshold, and positive once the corpus holdout is opened - re-thresholding requires a new id (R26-01 discipline).",
+    "downside": "Remains FAIL: any positive number published before the holdout opens is a policy violation, and re-running with a new threshold does not revive this id."
+   },
+   "source": {
+    "t": "data/strength/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb/data/strength/strategies.json"
+   }
+  },
+  {
+   "id": "strength/X07",
+   "entry_type": "strategy",
+   "collection": "strength-11",
+   "strategy": "X07 Own rating edge vs market >= 2.0 pts",
+   "track": "single",
+   "rule_summary": "X07 Own rating edge vs market >= 2.0 pts",
+   "sample_window": "1999-2026 walk-forward; holdout 2024-2026 per its G6",
+   "gates_ref": "strength-11",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "commit_date": "2026-11-13",
+    "rules_commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "results_commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "note": "rule file and results committed together at 2d9ebfe (flag R26-01 documents the earlier 5a769b3 instance, observed from a shallow clone); retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Positive with CI>0 at the frozen own rating edge vs market >=2.0 threshold on post-2024 walk-forward data. BH q<0.05 across the 11-rule family on new seasons, ROI 95% CI>0 at the frozen threshold, and positive once the corpus holdout is opened - re-thresholding requires a new id (R26-01 discipline).",
+    "downside": "Remains FAIL: any positive number published before the holdout opens is a policy violation, and re-running with a new threshold does not revive this id."
+   },
+   "source": {
+    "t": "data/strength/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb/data/strength/strategies.json"
+   }
+  },
+  {
+   "id": "strength/X08",
+   "entry_type": "strategy",
+   "collection": "strength-11",
+   "strategy": "X08 Under when both clubs' SOS to date is above league average",
+   "track": "single",
+   "rule_summary": "X08 Under when both clubs' SOS to date is above league average",
+   "sample_window": "1999-2026 walk-forward; holdout 2024-2026 per its G6",
+   "gates_ref": "strength-11",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "commit_date": "2026-11-13",
+    "rules_commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "results_commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "note": "rule file and results committed together at 2d9ebfe (flag R26-01 documents the earlier 5a769b3 instance, observed from a shallow clone); retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Under when both clubs' SOS above average is positive at the frozen threshold with SOS computed only from games before kickoff. BH q<0.05 across the 11-rule family on new seasons, ROI 95% CI>0 at the frozen threshold, and positive once the corpus holdout is opened - re-thresholding requires a new id (R26-01 discipline).",
+    "downside": "SOS uses any post-kickoff game (look-ahead) - void. Remains FAIL: any positive number published before the holdout opens is a policy violation, and re-running with a new threshold does not revive this id."
+   },
+   "source": {
+    "t": "data/strength/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb/data/strength/strategies.json"
+   }
+  },
+  {
+   "id": "strength/X11",
+   "entry_type": "strategy",
+   "collection": "strength-11",
+   "strategy": "X11 Recency: back the club with the better last-5 form when it is an underdog",
+   "track": "single",
+   "rule_summary": "X11 Recency: back the club with the better last-5 form when it is an underdog",
+   "sample_window": "1999-2026 walk-forward; holdout 2024-2026 per its G6",
+   "gates_ref": "strength-11",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "commit_date": "2026-11-13",
+    "rules_commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "results_commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "note": "rule file and results committed together at 2d9ebfe (flag R26-01 documents the earlier 5a769b3 instance, observed from a shallow clone); retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Last-5 form underdog positive with form computed strictly pre-kickoff. BH q<0.05 across the 11-rule family on new seasons, ROI 95% CI>0 at the frozen threshold, and positive once the corpus holdout is opened - re-thresholding requires a new id (R26-01 discipline).",
+    "downside": "Form window overlaps the game being predicted - void. Remains FAIL: any positive number published before the holdout opens is a policy violation, and re-running with a new threshold does not revive this id."
+   },
+   "source": {
+    "t": "data/strength/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb/data/strength/strategies.json"
+   }
+  },
+  {
+   "id": "strength/X04",
+   "entry_type": "strategy",
+   "collection": "strength-11",
+   "strategy": "X04 Own total edge >= 5.0 pts",
+   "track": "single",
+   "rule_summary": "X04 Own total edge >= 5.0 pts",
+   "sample_window": "1999-2026 walk-forward; holdout 2024-2026 per its G6",
+   "gates_ref": "strength-11",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "commit_date": "2026-11-13",
+    "rules_commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "results_commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "note": "rule file and results committed together at 2d9ebfe (flag R26-01 documents the earlier 5a769b3 instance, observed from a shallow clone); retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Positive with CI>0 at the frozen own total edge >=5.0 threshold on post-2024 walk-forward data. BH q<0.05 across the 11-rule family on new seasons, ROI 95% CI>0 at the frozen threshold, and positive once the corpus holdout is opened - re-thresholding requires a new id (R26-01 discipline).",
+    "downside": "Remains FAIL: any positive number published before the holdout opens is a policy violation, and re-running with a new threshold does not revive this id."
+   },
+   "source": {
+    "t": "data/strength/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb/data/strength/strategies.json"
+   }
+  },
+  {
+   "id": "strength/X02",
+   "entry_type": "strategy",
+   "collection": "strength-11",
+   "strategy": "X02 Own spread edge >= 3.0 pts",
+   "track": "single",
+   "rule_summary": "X02 Own spread edge >= 3.0 pts",
+   "sample_window": "1999-2026 walk-forward; holdout 2024-2026 per its G6",
+   "gates_ref": "strength-11",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "commit_date": "2026-11-13",
+    "rules_commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "results_commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "note": "rule file and results committed together at 2d9ebfe (flag R26-01 documents the earlier 5a769b3 instance, observed from a shallow clone); retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Positive with CI>0 at the frozen own spread edge >=3.0 threshold on post-2024 walk-forward data. BH q<0.05 across the 11-rule family on new seasons, ROI 95% CI>0 at the frozen threshold, and positive once the corpus holdout is opened - re-thresholding requires a new id (R26-01 discipline).",
+    "downside": "Remains FAIL: any positive number published before the holdout opens is a policy violation, and re-running with a new threshold does not revive this id."
+   },
+   "source": {
+    "t": "data/strength/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb/data/strength/strategies.json"
+   }
+  },
+  {
+   "id": "strength/X03",
+   "entry_type": "strategy",
+   "collection": "strength-11",
+   "strategy": "X03 Own total edge >= 3.0 pts",
+   "track": "single",
+   "rule_summary": "X03 Own total edge >= 3.0 pts",
+   "sample_window": "1999-2026 walk-forward; holdout 2024-2026 per its G6",
+   "gates_ref": "strength-11",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "commit_date": "2026-11-13",
+    "rules_commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "results_commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "note": "rule file and results committed together at 2d9ebfe (flag R26-01 documents the earlier 5a769b3 instance, observed from a shallow clone); retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Positive with CI>0 at the frozen own total edge >=3.0 threshold on post-2024 walk-forward data. BH q<0.05 across the 11-rule family on new seasons, ROI 95% CI>0 at the frozen threshold, and positive once the corpus holdout is opened - re-thresholding requires a new id (R26-01 discipline).",
+    "downside": "Remains FAIL: any positive number published before the holdout opens is a policy violation, and re-running with a new threshold does not revive this id."
+   },
+   "source": {
+    "t": "data/strength/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb/data/strength/strategies.json"
+   }
+  },
+  {
+   "id": "strength/X09",
+   "entry_type": "strategy",
+   "collection": "strength-11",
+   "strategy": "X09 Over when both clubs' SOS to date is below league average",
+   "track": "single",
+   "rule_summary": "X09 Over when both clubs' SOS to date is below league average",
+   "sample_window": "1999-2026 walk-forward; holdout 2024-2026 per its G6",
+   "gates_ref": "strength-11",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "commit_date": "2026-11-13",
+    "rules_commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "results_commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "note": "rule file and results committed together at 2d9ebfe (flag R26-01 documents the earlier 5a769b3 instance, observed from a shallow clone); retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Over when both SOS below average positive with pre-kickoff-only SOS. BH q<0.05 across the 11-rule family on new seasons, ROI 95% CI>0 at the frozen threshold, and positive once the corpus holdout is opened - re-thresholding requires a new id (R26-01 discipline).",
+    "downside": "SOS look-ahead found - void. Remains FAIL: any positive number published before the holdout opens is a policy violation, and re-running with a new threshold does not revive this id."
+   },
+   "source": {
+    "t": "data/strength/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb/data/strength/strategies.json"
+   }
+  },
+  {
+   "id": "strength/X05",
+   "entry_type": "strategy",
+   "collection": "strength-11",
+   "strategy": "X05 Fade a club with a lucky record (luck >= +1.5 wins) when it is favoured",
+   "track": "single",
+   "rule_summary": "X05 Fade a club with a lucky record (luck >= +1.5 wins) when it is favoured",
+   "sample_window": "1999-2026 walk-forward; holdout 2024-2026 per its G6",
+   "gates_ref": "strength-11",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "commit_date": "2026-11-13",
+    "rules_commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "results_commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "note": "rule file and results committed together at 2d9ebfe (flag R26-01 documents the earlier 5a769b3 instance, observed from a shallow clone); retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Fade-the-lucky-favourite shows CI>0 after the luck metric itself is split-half reliable (>=0.5 correlation between halves). BH q<0.05 across the 11-rule family on new seasons, ROI 95% CI>0 at the frozen threshold, and positive once the corpus holdout is opened - re-thresholding requires a new id (R26-01 discipline).",
+    "downside": "Luck metric unstable across halves - void: the fade would be betting on noise. Remains FAIL: any positive number published before the holdout opens is a policy violation, and re-running with a new threshold does not revive this id."
+   },
+   "source": {
+    "t": "data/strength/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb/data/strength/strategies.json"
+   }
+  },
+  {
+   "id": "strength/X10",
+   "entry_type": "strategy",
+   "collection": "strength-11",
+   "strategy": "X10 Divisional underdog of 6.5+ with a positive own-rating edge",
+   "track": "single",
+   "rule_summary": "X10 Divisional underdog of 6.5+ with a positive own-rating edge",
+   "sample_window": "1999-2026 walk-forward; holdout 2024-2026 per its G6",
+   "gates_ref": "strength-11",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "commit_date": "2026-11-13",
+    "rules_commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "results_commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "note": "rule file and results committed together at 2d9ebfe (flag R26-01 documents the earlier 5a769b3 instance, observed from a shallow clone); retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Divisional dog 6.5+ with positive own-rating edge positive after conditioning on the closing line. BH q<0.05 across the 11-rule family on new seasons, ROI 95% CI>0 at the frozen threshold, and positive once the corpus holdout is opened - re-thresholding requires a new id (R26-01 discipline).",
+    "downside": "No residual beyond the closing line - archived as priced. Remains FAIL: any positive number published before the holdout opens is a policy violation, and re-running with a new threshold does not revive this id."
+   },
+   "source": {
+    "t": "data/strength/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb/data/strength/strategies.json"
+   }
+  },
+  {
+   "id": "strength/X06",
+   "entry_type": "strategy",
+   "collection": "strength-11",
+   "strategy": "X06 Back a club with an unlucky record (luck <= -1.5 wins) when it is an underdog",
+   "track": "single",
+   "rule_summary": "X06 Back a club with an unlucky record (luck <= -1.5 wins) when it is an underdog",
+   "sample_window": "1999-2026 walk-forward; holdout 2024-2026 per its G6",
+   "gates_ref": "strength-11",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "commit_date": "2026-11-13",
+    "rules_commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "results_commit": "2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb",
+    "note": "rule file and results committed together at 2d9ebfe (flag R26-01 documents the earlier 5a769b3 instance, observed from a shallow clone); retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Back-the-unlucky-dog shows CI>0 with a reliable luck metric. BH q<0.05 across the 11-rule family on new seasons, ROI 95% CI>0 at the frozen threshold, and positive once the corpus holdout is opened - re-thresholding requires a new id (R26-01 discipline).",
+    "downside": "Luck metric unstable across halves - void. Remains FAIL: any positive number published before the holdout opens is a policy violation, and re-running with a new threshold does not revive this id."
+   },
+   "source": {
+    "t": "data/strength/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/2d9ebfedd28ae85b3ff9ea751d80459dd47ae3bb/data/strength/strategies.json"
+   }
+  },
+  {
+   "id": "COLL/personnel-5",
+   "entry_type": "collection",
+   "collection": "personnel-5",
+   "strategy": "personnel-deficiency study: 5 rules, family of 17",
+   "track": "n/a (collection)",
+   "rule_summary": "rules and results together at 00873cd (2026-11-13); retrospective. 0 of 13 information tests significant after correction (published conclusion).",
+   "sample_window": "2019-2026, observed prices only; multiple-testing family = 17",
+   "gates": [],
+   "registration": {
+    "kind": "retrospective",
+    "commit": "00873cd55abea35358f9695b67105d9ecbf25f9a",
+    "commit_date": "2026-11-13",
+    "rules_commit": "00873cd55abea35358f9695b67105d9ecbf25f9a",
+    "results_commit": "00873cd55abea35358f9695b67105d9ecbf25f9a",
+    "note": "rules and results together at 00873cd (2026-11-13); retrospective. 0 of 13 information tests significant after correction (published conclusion)."
+   },
+   "would_change_our_mind": {
+    "upside": "Collection graduates only when its own worst-performing gate set is cleared prospectively: >=200 scored bets at observed prices, BH q<0.05 across the family, ROI 95% CI above zero, and a positive holdout after it is opened.",
+    "downside": "If any gate audit (G1 look-ahead, G2 observed prices) fails, or the family's holdout is negative once opened, the collection is archived and may only be re-registered under new ids."
+   },
+   "source": {
+    "t": "data/personnel/leaderboard.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/00873cd55abea35358f9695b67105d9ecbf25f9a/data/personnel/leaderboard.json"
+   }
+  },
+  {
+   "id": "personnel/P03",
+   "entry_type": "strategy",
+   "collection": "personnel-5",
+   "strategy": "P03 Under when combined ruled-out production share is high",
+   "track": "single",
+   "rule_summary": "P03 Under when combined ruled-out production share is high",
+   "sample_window": "2019-2026, observed prices only; multiple-testing family = 17",
+   "gates_ref": "personnel-5",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "00873cd55abea35358f9695b67105d9ecbf25f9a",
+    "commit_date": "2026-11-13",
+    "rules_commit": "00873cd55abea35358f9695b67105d9ecbf25f9a",
+    "results_commit": "00873cd55abea35358f9695b67105d9ecbf25f9a",
+    "note": "rules and results together at 00873cd (2026-11-13); retrospective. 0 of 13 information tests significant after correction (published conclusion)."
+   },
+   "would_change_our_mind": {
+    "upside": "Currently -10.0% (raw p=0.058): flips positive with q<0.05 at observed prices. BH q<0.05 within the 17-strategy family on >=200 further scored bets at observed prices with CI>0; the official availability join must be complete for every scored game.",
+    "downside": "Current result is 'descriptive, not an edge' (0 of 13 significant after correction): if the next 200 scored bets keep q>=0.05 the entry is closed as evidence of market efficiency, not re-tuned."
+   },
+   "source": {
+    "t": "data/personnel/leaderboard.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/00873cd55abea35358f9695b67105d9ecbf25f9a/data/personnel/leaderboard.json"
+   }
+  },
+  {
+   "id": "personnel/P01",
+   "entry_type": "strategy",
+   "collection": "personnel-5",
+   "strategy": "P01 Back the opponent when the club starts a backup QB",
+   "track": "single",
+   "rule_summary": "P01 Back the opponent when the club starts a backup QB",
+   "sample_window": "2019-2026, observed prices only; multiple-testing family = 17",
+   "gates_ref": "personnel-5",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "00873cd55abea35358f9695b67105d9ecbf25f9a",
+    "commit_date": "2026-11-13",
+    "rules_commit": "00873cd55abea35358f9695b67105d9ecbf25f9a",
+    "results_commit": "00873cd55abea35358f9695b67105d9ecbf25f9a",
+    "note": "rules and results together at 00873cd (2026-11-13); retrospective. 0 of 13 information tests significant after correction (published conclusion)."
+   },
+   "would_change_our_mind": {
+    "upside": "Backup-QB opponent back positive with the official news join (VR-24/25 starter evidence) complete. BH q<0.05 within the 17-strategy family on >=200 further scored bets at observed prices with CI>0; the official availability join must be complete for every scored game.",
+    "downside": "Current result is 'descriptive, not an edge' (0 of 13 significant after correction): if the next 200 scored bets keep q>=0.05 the entry is closed as evidence of market efficiency, not re-tuned."
+   },
+   "source": {
+    "t": "data/personnel/leaderboard.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/00873cd55abea35358f9695b67105d9ecbf25f9a/data/personnel/leaderboard.json"
+   }
+  },
+  {
+   "id": "personnel/P04",
+   "entry_type": "strategy",
+   "collection": "personnel-5",
+   "strategy": "P04 Fade the side missing 3+ more defenders",
+   "track": "single",
+   "rule_summary": "P04 Fade the side missing 3+ more defenders",
+   "sample_window": "2019-2026, observed prices only; multiple-testing family = 17",
+   "gates_ref": "personnel-5",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "00873cd55abea35358f9695b67105d9ecbf25f9a",
+    "commit_date": "2026-11-13",
+    "rules_commit": "00873cd55abea35358f9695b67105d9ecbf25f9a",
+    "results_commit": "00873cd55abea35358f9695b67105d9ecbf25f9a",
+    "note": "rules and results together at 00873cd (2026-11-13); retrospective. 0 of 13 information tests significant after correction (published conclusion)."
+   },
+   "would_change_our_mind": {
+    "upside": "Fade the side missing 3+ defenders positive with verified inactives as the source (IN-04 gate). BH q<0.05 within the 17-strategy family on >=200 further scored bets at observed prices with CI>0; the official availability join must be complete for every scored game.",
+    "downside": "Current result is 'descriptive, not an edge' (0 of 13 significant after correction): if the next 200 scored bets keep q>=0.05 the entry is closed as evidence of market efficiency, not re-tuned."
+   },
+   "source": {
+    "t": "data/personnel/leaderboard.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/00873cd55abea35358f9695b67105d9ecbf25f9a/data/personnel/leaderboard.json"
+   }
+  },
+  {
+   "id": "personnel/P02",
+   "entry_type": "strategy",
+   "collection": "personnel-5",
+   "strategy": "P02 Fade the club that starts a backup QB",
+   "track": "single",
+   "rule_summary": "P02 Fade the club that starts a backup QB",
+   "sample_window": "2019-2026, observed prices only; multiple-testing family = 17",
+   "gates_ref": "personnel-5",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "00873cd55abea35358f9695b67105d9ecbf25f9a",
+    "commit_date": "2026-11-13",
+    "rules_commit": "00873cd55abea35358f9695b67105d9ecbf25f9a",
+    "results_commit": "00873cd55abea35358f9695b67105d9ecbf25f9a",
+    "note": "rules and results together at 00873cd (2026-11-13); retrospective. 0 of 13 information tests significant after correction (published conclusion)."
+   },
+   "would_change_our_mind": {
+    "upside": "Fade the club starting a backup QB positive with the same join. BH q<0.05 within the 17-strategy family on >=200 further scored bets at observed prices with CI>0; the official availability join must be complete for every scored game.",
+    "downside": "Current result is 'descriptive, not an edge' (0 of 13 significant after correction): if the next 200 scored bets keep q>=0.05 the entry is closed as evidence of market efficiency, not re-tuned."
+   },
+   "source": {
+    "t": "data/personnel/leaderboard.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/00873cd55abea35358f9695b67105d9ecbf25f9a/data/personnel/leaderboard.json"
+   }
+  },
+  {
+   "id": "personnel/P05",
+   "entry_type": "strategy",
+   "collection": "personnel-5",
+   "strategy": "P05 Over when both defences are missing 3+",
+   "track": "single",
+   "rule_summary": "P05 Over when both defences are missing 3+",
+   "sample_window": "2019-2026, observed prices only; multiple-testing family = 17",
+   "gates_ref": "personnel-5",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "00873cd55abea35358f9695b67105d9ecbf25f9a",
+    "commit_date": "2026-11-13",
+    "rules_commit": "00873cd55abea35358f9695b67105d9ecbf25f9a",
+    "results_commit": "00873cd55abea35358f9695b67105d9ecbf25f9a",
+    "note": "rules and results together at 00873cd (2026-11-13); retrospective. 0 of 13 information tests significant after correction (published conclusion)."
+   },
+   "would_change_our_mind": {
+    "upside": "Over when both defences missing 3+ positive with verified inactives. BH q<0.05 within the 17-strategy family on >=200 further scored bets at observed prices with CI>0; the official availability join must be complete for every scored game.",
+    "downside": "Current result is 'descriptive, not an edge' (0 of 13 significant after correction): if the next 200 scored bets keep q>=0.05 the entry is closed as evidence of market efficiency, not re-tuned."
+   },
+   "source": {
+    "t": "data/personnel/leaderboard.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/00873cd55abea35358f9695b67105d9ecbf25f9a/data/personnel/leaderboard.json"
+   }
+  },
+  {
+   "id": "COLL/foundation-10",
+   "entry_type": "collection",
+   "collection": "foundation-10",
+   "strategy": "foundation design register: 10 strategies, never evaluated",
+   "track": "n/a (collection)",
+   "rule_summary": "performance fields are null everywhere in the file: registration now precedes the first evaluation; the first evaluation must cite this entry's commit.",
+   "sample_window": "design only - no evaluation window has opened",
+   "gates": [],
+   "registration": {
+    "kind": "prospective-eligible",
+    "commit": "232a3b0719fa13ca9ba4ec461be643469350c49f",
+    "commit_date": "2026-11-12",
+    "rules_commit": "232a3b0719fa13ca9ba4ec461be643469350c49f",
+    "results_commit": "232a3b0719fa13ca9ba4ec461be643469350c49f",
+    "note": "performance fields are null everywhere in the file: registration now precedes the first evaluation; the first evaluation must cite this entry's commit."
+   },
+   "would_change_our_mind": {
+    "upside": "Collection graduates only when its own worst-performing gate set is cleared prospectively: >=200 scored bets at observed prices, BH q<0.05 across the family, ROI 95% CI above zero, and a positive holdout after it is opened.",
+    "downside": "If any gate audit (G1 look-ahead, G2 observed prices) fails, or the family's holdout is negative once opened, the collection is archived and may only be re-registered under new ids."
+   },
+   "source": {
+    "t": "data/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/232a3b0719fa13ca9ba4ec461be643469350c49f/data/strategies.json"
+   }
+  },
+  {
+   "id": "foundation/ST-01",
+   "entry_type": "strategy",
+   "collection": "foundation-10",
+   "strategy": "Net-points strength differential",
+   "track": "single",
+   "rule_summary": "spread_own = f(NPG_home - NPG_away); f is symbolic, coefficient blank",
+   "sample_window": "design only - no evaluation window has opened",
+   "gates_ref": "foundation-10",
+   "registration": {
+    "kind": "prospective-eligible",
+    "commit": "232a3b0719fa13ca9ba4ec461be643469350c49f",
+    "commit_date": "2026-11-12",
+    "rules_commit": "232a3b0719fa13ca9ba4ec461be643469350c49f",
+    "results_commit": "232a3b0719fa13ca9ba4ec461be643469350c49f",
+    "note": "performance fields are null everywhere in the file: registration now precedes the first evaluation; the first evaluation must cite this entry's commit."
+   },
+   "would_change_our_mind": {
+    "upside": "Net-points strength differential clears G01-G07 on first evaluation. First evaluation, run on NFL1-CORPUS-2026-11-15-v1 at observed prices, reaches n>=200 with BH q<0.05 across the 10-rule family and CI>0 - and cites this registration in the run.",
+    "downside": "Fails G3 (n<100) or is negative at first look: closed under this id; any tuning creates a new id and must register again before re-evaluating."
+   },
+   "source": {
+    "t": "data/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/232a3b0719fa13ca9ba4ec461be643469350c49f/data/strategies.json"
+   }
+  },
+  {
+   "id": "foundation/ST-02",
+   "entry_type": "strategy",
+   "collection": "foundation-10",
+   "strategy": "Points-allowed total",
+   "track": "single",
+   "rule_summary": "total_own = f(PA_pg_home + PA_pg_away); coefficients blank",
+   "sample_window": "design only - no evaluation window has opened",
+   "gates_ref": "foundation-10",
+   "registration": {
+    "kind": "prospective-eligible",
+    "commit": "232a3b0719fa13ca9ba4ec461be643469350c49f",
+    "commit_date": "2026-11-12",
+    "rules_commit": "232a3b0719fa13ca9ba4ec461be643469350c49f",
+    "results_commit": "232a3b0719fa13ca9ba4ec461be643469350c49f",
+    "note": "performance fields are null everywhere in the file: registration now precedes the first evaluation; the first evaluation must cite this entry's commit."
+   },
+   "would_change_our_mind": {
+    "upside": "Points-allowed total clears the gates on first evaluation. First evaluation, run on NFL1-CORPUS-2026-11-15-v1 at observed prices, reaches n>=200 with BH q<0.05 across the 10-rule family and CI>0 - and cites this registration in the run.",
+    "downside": "Negative at first look - closed. Fails G3 (n<100) or is negative at first look: closed under this id; any tuning creates a new id and must register again before re-evaluating."
+   },
+   "source": {
+    "t": "data/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/232a3b0719fa13ca9ba4ec461be643469350c49f/data/strategies.json"
+   }
+  },
+  {
+   "id": "foundation/ST-03",
+   "entry_type": "strategy",
+   "collection": "foundation-10",
+   "strategy": "Defensive backup-depth deficiency",
+   "track": "single",
+   "rule_summary": "delta_rank = depth_rank(starter) - depth_rank(actual); effect size blank",
+   "sample_window": "design only - no evaluation window has opened",
+   "gates_ref": "foundation-10",
+   "registration": {
+    "kind": "prospective-eligible",
+    "commit": "232a3b0719fa13ca9ba4ec461be643469350c49f",
+    "commit_date": "2026-11-12",
+    "rules_commit": "232a3b0719fa13ca9ba4ec461be643469350c49f",
+    "results_commit": "232a3b0719fa13ca9ba4ec461be643469350c49f",
+    "note": "performance fields are null everywhere in the file: registration now precedes the first evaluation; the first evaluation must cite this entry's commit."
+   },
+   "would_change_our_mind": {
+    "upside": "Cannot be evaluated until the depth-source route is verified for all 32 clubs (readiness IN-08/IN-11); if it ever clears the eight gates with verified depth it graduates. First evaluation, run on NFL1-CORPUS-2026-11-15-v1 at observed prices, reaches n>=200 with BH q<0.05 across the 10-rule family and CI>0 - and cites this registration in the run.",
+    "downside": "If no authorized depth source exists for all clubs, stays untested forever - no jersey-order or salary proxy may substitute (brief rejection). Fails G3 (n<100) or is negative at first look: closed under this id; any tuning creates a new id and must register again before re-evaluating."
+   },
+   "source": {
+    "t": "data/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/232a3b0719fa13ca9ba4ec461be643469350c49f/data/strategies.json"
+   }
+  },
+  {
+   "id": "foundation/ST-04",
+   "entry_type": "strategy",
+   "collection": "foundation-10",
+   "strategy": "Offensive backup-depth deficiency",
+   "track": "single",
+   "rule_summary": "delta_rank = depth_rank(starter) - depth_rank(actual); effect size blank",
+   "sample_window": "design only - no evaluation window has opened",
+   "gates_ref": "foundation-10",
+   "registration": {
+    "kind": "prospective-eligible",
+    "commit": "232a3b0719fa13ca9ba4ec461be643469350c49f",
+    "commit_date": "2026-11-12",
+    "rules_commit": "232a3b0719fa13ca9ba4ec461be643469350c49f",
+    "results_commit": "232a3b0719fa13ca9ba4ec461be643469350c49f",
+    "note": "performance fields are null everywhere in the file: registration now precedes the first evaluation; the first evaluation must cite this entry's commit."
+   },
+   "would_change_our_mind": {
+    "upside": "Same depth gate as ST-03, offensive side. First evaluation, run on NFL1-CORPUS-2026-11-15-v1 at observed prices, reaches n>=200 with BH q<0.05 across the 10-rule family and CI>0 - and cites this registration in the run.",
+    "downside": "Depth-source gate unmet - untested, no proxy substitution. Fails G3 (n<100) or is negative at first look: closed under this id; any tuning creates a new id and must register again before re-evaluating."
+   },
+   "source": {
+    "t": "data/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/232a3b0719fa13ca9ba4ec461be643469350c49f/data/strategies.json"
+   }
+  },
+  {
+   "id": "foundation/ST-05",
+   "entry_type": "strategy",
+   "collection": "foundation-10",
+   "strategy": "Practice-status trend",
+   "track": "single",
+   "rule_summary": "trend = ordinal(Full) - ordinal(first report); coefficient blank",
+   "sample_window": "design only - no evaluation window has opened",
+   "gates_ref": "foundation-10",
+   "registration": {
+    "kind": "prospective-eligible",
+    "commit": "232a3b0719fa13ca9ba4ec461be643469350c49f",
+    "commit_date": "2026-11-12",
+    "rules_commit": "232a3b0719fa13ca9ba4ec461be643469350c49f",
+    "results_commit": "232a3b0719fa13ca9ba4ec461be643469350c49f",
+    "note": "performance fields are null everywhere in the file: registration now precedes the first evaluation; the first evaluation must cite this entry's commit."
+   },
+   "would_change_our_mind": {
+    "upside": "Requires timestamped Wed/Thu/Fri official reports (readiness IN-16) before the trend feature can be scored at all. First evaluation, run on NFL1-CORPUS-2026-11-15-v1 at observed prices, reaches n>=200 with BH q<0.05 across the 10-rule family and CI>0 - and cites this registration in the run.",
+    "downside": "Without a dated report series the feature is untestable - stays untested, never level-substituted. Fails G3 (n<100) or is negative at first look: closed under this id; any tuning creates a new id and must register again before re-evaluating."
+   },
+   "source": {
+    "t": "data/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/232a3b0719fa13ca9ba4ec461be643469350c49f/data/strategies.json"
+   }
+  },
+  {
+   "id": "foundation/ST-06",
+   "entry_type": "strategy",
+   "collection": "foundation-10",
+   "strategy": "Designation-gated availability",
+   "track": "single",
+   "rule_summary": "indicator = 1 if designation published; effect size blank",
+   "sample_window": "design only - no evaluation window has opened",
+   "gates_ref": "foundation-10",
+   "registration": {
+    "kind": "prospective-eligible",
+    "commit": "232a3b0719fa13ca9ba4ec461be643469350c49f",
+    "commit_date": "2026-11-12",
+    "rules_commit": "232a3b0719fa13ca9ba4ec461be643469350c49f",
+    "results_commit": "232a3b0719fa13ca9ba4ec461be643469350c49f",
+    "note": "performance fields are null everywhere in the file: registration now precedes the first evaluation; the first evaluation must cite this entry's commit."
+   },
+   "would_change_our_mind": {
+    "upside": "Requires play-rate-per-designation calibration with confidence intervals first (readiness IN-15). First evaluation, run on NFL1-CORPUS-2026-11-15-v1 at observed prices, reaches n>=200 with BH q<0.05 across the 10-rule family and CI>0 - and cites this registration in the run.",
+    "downside": "Calibration never run - stays untested. Fails G3 (n<100) or is negative at first look: closed under this id; any tuning creates a new id and must register again before re-evaluating."
+   },
+   "source": {
+    "t": "data/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/232a3b0719fa13ca9ba4ec461be643469350c49f/data/strategies.json"
+   }
+  },
+  {
+   "id": "foundation/ST-07",
+   "entry_type": "strategy",
+   "collection": "foundation-10",
+   "strategy": "Two-leg parlay with correlation guard",
+   "track": "combo",
+   "rule_summary": "P(parlay) = P(A) x P(B) only if corr(A,B) is measured; corr blank",
+   "sample_window": "design only - no evaluation window has opened",
+   "gates_ref": "foundation-10",
+   "registration": {
+    "kind": "prospective-eligible",
+    "commit": "232a3b0719fa13ca9ba4ec461be643469350c49f",
+    "commit_date": "2026-11-12",
+    "rules_commit": "232a3b0719fa13ca9ba4ec461be643469350c49f",
+    "results_commit": "232a3b0719fa13ca9ba4ec461be643469350c49f",
+    "note": "performance fields are null everywhere in the file: registration now precedes the first evaluation; the first evaluation must cite this entry's commit."
+   },
+   "would_change_our_mind": {
+    "upside": "Two-leg parlay only ranks after a directly validated joint probability and the operator's void/push rules are on file (brief's joint-evidence gate). First evaluation, run on NFL1-CORPUS-2026-11-15-v1 at observed prices, reaches n>=200 with BH q<0.05 across the 10-rule family and CI>0 - and cites this registration in the run.",
+    "downside": "Multiplying marginal probabilities without a validated joint model - permanently ineligible for the board. Fails G3 (n<100) or is negative at first look: closed under this id; any tuning creates a new id and must register again before re-evaluating."
+   },
+   "source": {
+    "t": "data/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/232a3b0719fa13ca9ba4ec461be643469350c49f/data/strategies.json"
+   }
+  },
+  {
+   "id": "foundation/ST-08",
+   "entry_type": "strategy",
+   "collection": "foundation-10",
+   "strategy": "Same-game player-prop combo",
+   "track": "combo",
+   "rule_summary": "joint model requires corr(prop_A, prop_B); corr blank",
+   "sample_window": "design only - no evaluation window has opened",
+   "gates_ref": "foundation-10",
+   "registration": {
+    "kind": "prospective-eligible",
+    "commit": "232a3b0719fa13ca9ba4ec461be643469350c49f",
+    "commit_date": "2026-11-12",
+    "rules_commit": "232a3b0719fa13ca9ba4ec461be643469350c49f",
+    "results_commit": "232a3b0719fa13ca9ba4ec461be643469350c49f",
+    "note": "performance fields are null everywhere in the file: registration now precedes the first evaluation; the first evaluation must cite this entry's commit."
+   },
+   "would_change_our_mind": {
+    "upside": "Same-game combo only with a validated joint probability. First evaluation, run on NFL1-CORPUS-2026-11-15-v1 at observed prices, reaches n>=200 with BH q<0.05 across the 10-rule family and CI>0 - and cites this registration in the run.",
+    "downside": "Joint-evidence gate unmet - ineligible. Fails G3 (n<100) or is negative at first look: closed under this id; any tuning creates a new id and must register again before re-evaluating."
+   },
+   "source": {
+    "t": "data/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/232a3b0719fa13ca9ba4ec461be643469350c49f/data/strategies.json"
+   }
+  },
+  {
+   "id": "foundation/ST-09",
+   "entry_type": "strategy",
+   "collection": "foundation-10",
+   "strategy": "Prop availability gate",
+   "track": "single",
+   "rule_summary": "rule = block if status in published Out/IR/inactive set",
+   "sample_window": "design only - no evaluation window has opened",
+   "gates_ref": "foundation-10",
+   "registration": {
+    "kind": "prospective-eligible",
+    "commit": "232a3b0719fa13ca9ba4ec461be643469350c49f",
+    "commit_date": "2026-11-12",
+    "rules_commit": "232a3b0719fa13ca9ba4ec461be643469350c49f",
+    "results_commit": "232a3b0719fa13ca9ba4ec461be643469350c49f",
+    "note": "performance fields are null everywhere in the file: registration now precedes the first evaluation; the first evaluation must cite this entry's commit."
+   },
+   "would_change_our_mind": {
+    "upside": "Prop availability gate needs observed prop prices (flag F04/U01) before any evaluation. First evaluation, run on NFL1-CORPUS-2026-11-15-v1 at observed prices, reaches n>=200 with BH q<0.05 across the 10-rule family and CI>0 - and cites this registration in the run.",
+    "downside": "No reachable official prop price - stays untested. Fails G3 (n<100) or is negative at first look: closed under this id; any tuning creates a new id and must register again before re-evaluating."
+   },
+   "source": {
+    "t": "data/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/232a3b0719fa13ca9ba4ec461be643469350c49f/data/strategies.json"
+   }
+  },
+  {
+   "id": "foundation/ST-10",
+   "entry_type": "strategy",
+   "collection": "foundation-10",
+   "strategy": "Backup-exposure index",
+   "track": "single",
+   "rule_summary": "index = weighted sum; weights blank until validated",
+   "sample_window": "design only - no evaluation window has opened",
+   "gates_ref": "foundation-10",
+   "registration": {
+    "kind": "prospective-eligible",
+    "commit": "232a3b0719fa13ca9ba4ec461be643469350c49f",
+    "commit_date": "2026-11-12",
+    "rules_commit": "232a3b0719fa13ca9ba4ec461be643469350c49f",
+    "results_commit": "232a3b0719fa13ca9ba4ec461be643469350c49f",
+    "note": "performance fields are null everywhere in the file: registration now precedes the first evaluation; the first evaluation must cite this entry's commit."
+   },
+   "would_change_our_mind": {
+    "upside": "Backup-exposure index evaluated only with verified availability snapshots (IN-02). First evaluation, run on NFL1-CORPUS-2026-11-15-v1 at observed prices, reaches n>=200 with BH q<0.05 across the 10-rule family and CI>0 - and cites this registration in the run.",
+    "downside": "Snapshot ledger absent - untested. Fails G3 (n<100) or is negative at first look: closed under this id; any tuning creates a new id and must register again before re-evaluating."
+   },
+   "source": {
+    "t": "data/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/232a3b0719fa13ca9ba4ec461be643469350c49f/data/strategies.json"
+   }
+  },
+  {
+   "id": "COLL/signals-18",
+   "entry_type": "collection",
+   "collection": "signals-18",
+   "strategy": "87deb7ab signal catalogue: 18 proposed signals, never evaluated",
+   "track": "n/a (collection)",
+   "rule_summary": "never scored anywhere; first evaluation must cite this entry's commit (0d1621f).",
+   "sample_window": "design only - status 'Proposed' on every signal",
+   "gates": [
+    {
+     "id": "G0",
+     "name": "Data integrity",
+     "question": "Can every input be traced to a Tier 1 or Tier 2 source, and was any missing value imputed?",
+     "threshold": "Zero imputed values. Every input carries a source id and a retrieval timestamp.",
+     "on_fail": "Return to research. Imputation is not permitted.",
+     "status": "Specified",
+     "src": "SRC-000"
+    },
+    {
+     "id": "G1",
+     "name": "Pre-registration",
+     "question": "Was the hypothesis written down before the results were looked at?",
+     "threshold": "Hypothesis, bet universe, price source and bet-timing rule all fixed and timestamped before scoring.",
+     "on_fail": "Return to research. A hypothesis formed after seeing results is a story, not a strategy.",
+     "status": "Specified",
+     "src": "SRC-000"
+    },
+    {
+     "id": "G2",
+     "name": "Sample size",
+     "question": "Is there enough data for luck to be a plausible explanation of nothing?",
+     "threshold": "PROPOSED: at least 1,000 graded bets, spanning at least 2 seasons and at least 200 distinct games.",
+     "on_fail": "Return to research. Threshold is a proposal awaiting ratification - it is a design choice, not a measured fact.",
+     "status": "Proposed",
+     "src": "SRC-000"
+    },
+    {
+     "id": "G3",
+     "name": "Economic hurdle",
+     "question": "Does the estimated edge clear the cost of doing business?",
+     "threshold": "Estimated edge after de-vig must exceed the cost hurdle. Reference hurdle: Nevada sports pool hold, 6.06% fiscal-year-to-date (SRC-007).",
+     "on_fail": "Return to research. An edge smaller than the margin is not an edge.",
+     "status": "Specified",
+     "src": "SRC-007"
+    },
+    {
+     "id": "G4",
+     "name": "Out-of-sample",
+     "question": "Does it survive data it was not built on?",
+     "threshold": "On a frozen, single-use holdout: mean CLV above zero, and realised return no worse than the negative of the cost hurdle.",
+     "on_fail": "Return to research. In-sample performance is not evidence.",
+     "status": "Specified",
+     "src": "SRC-000"
+    },
+    {
+     "id": "G5",
+     "name": "Luck separation",
+     "question": "Could a random bettor have produced this?",
+     "threshold": "Three independent checks must all pass: binomial test of the win rate against the price-implied breakeven; bootstrap 95% confidence interval on mean CLV excluding zero; Monte Carlo comparison against a random bettor placing the same number of bets at the same price distribution, p below 0.05.",
+     "on_fail": "Return to research. Failing any one of the three is failing the gate.",
+     "status": "Specified",
+     "src": "SRC-000"
+    }
+   ],
+   "registration": {
+    "kind": "prospective-eligible",
+    "commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "commit_date": "2026-11-12",
+    "rules_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "results_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "note": "never scored anywhere; first evaluation must cite this entry's commit (0d1621f)."
+   },
+   "would_change_our_mind": {
+    "upside": "Collection graduates only when its own worst-performing gate set is cleared prospectively: >=200 scored bets at observed prices, BH q<0.05 across the family, ROI 95% CI above zero, and a positive holdout after it is opened.",
+    "downside": "If any gate audit (G1 look-ahead, G2 observed prices) fails, or the family's holdout is negative once opened, the collection is archived and may only be re-registered under new ids."
+   },
+   "source": {
+    "t": "data/session-87deb7ab/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/0d1621f26e724aee34dbd65a7b09328611957189/data/session-87deb7ab/strategies.json"
+   }
+  },
+  {
+   "id": "signals/SIG-001",
+   "entry_type": "strategy",
+   "collection": "signals-18",
+   "strategy": "Practice-participation delta",
+   "track": "single",
+   "rule_summary": "A player who deteriorates across the three practice days is more likely to be unavailable than a single day's status implies, and the market under-reacts to the trajectory rather than the level.",
+   "sample_window": "design only - status 'Proposed' on every signal",
+   "gates_ref": "signals-18",
+   "registration": {
+    "kind": "prospective-eligible",
+    "commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "commit_date": "2026-11-12",
+    "rules_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "results_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "note": "never scored anywhere; first evaluation must cite this entry's commit (0d1621f)."
+   },
+   "would_change_our_mind": {
+    "upside": "Practice-participation delta positive across three dated official reports per week (DNP->LP->FP trajectory).",
+    "downside": "Without the dated report series the trajectory cannot be reconstructed - untested, never level-substituted."
+   },
+   "source": {
+    "t": "data/session-87deb7ab/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/0d1621f26e724aee34dbd65a7b09328611957189/data/session-87deb7ab/strategies.json"
+   }
+  },
+  {
+   "id": "signals/SIG-002",
+   "entry_type": "strategy",
+   "collection": "signals-18",
+   "strategy": "Offensive line continuity",
+   "track": "single",
+   "rule_summary": "The count of offensive linemen not participating is more predictive of offensive output than any single named player's status.",
+   "sample_window": "design only - status 'Proposed' on every signal",
+   "gates_ref": "signals-18",
+   "registration": {
+    "kind": "prospective-eligible",
+    "commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "commit_date": "2026-11-12",
+    "rules_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "results_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "note": "never scored anywhere; first evaluation must cite this entry's commit (0d1621f)."
+   },
+   "would_change_our_mind": {
+    "upside": "OL not-participation count predicts offensive output beyond the closing total.",
+    "downside": "Official participation counts unavailable per club - untested."
+   },
+   "source": {
+    "t": "data/session-87deb7ab/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/0d1621f26e724aee34dbd65a7b09328611957189/data/session-87deb7ab/strategies.json"
+   }
+  },
+  {
+   "id": "signals/SIG-003",
+   "entry_type": "strategy",
+   "collection": "signals-18",
+   "strategy": "Secondary depletion",
+   "track": "single",
+   "rule_summary": "A defence missing multiple defensive backs concedes more explosive passes than the standings-based expectation implies.",
+   "sample_window": "design only - status 'Proposed' on every signal",
+   "gates_ref": "signals-18",
+   "registration": {
+    "kind": "prospective-eligible",
+    "commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "commit_date": "2026-11-12",
+    "rules_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "results_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "note": "never scored anywhere; first evaluation must cite this entry's commit (0d1621f)."
+   },
+   "would_change_our_mind": {
+    "upside": "Secondary depletion predicts explosive passes beyond standings priors.",
+    "downside": "Inactives not captured officially (IN-04) - untested."
+   },
+   "source": {
+    "t": "data/session-87deb7ab/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/0d1621f26e724aee34dbd65a7b09328611957189/data/session-87deb7ab/strategies.json"
+   }
+  },
+  {
+   "id": "signals/SIG-004",
+   "entry_type": "strategy",
+   "collection": "signals-18",
+   "strategy": "Pass-rush availability",
+   "track": "single",
+   "rule_summary": "Edge defender availability shifts pressure rate, which shifts the opposing quarterback's efficiency more than the spread accounts for.",
+   "sample_window": "design only - status 'Proposed' on every signal",
+   "gates_ref": "signals-18",
+   "registration": {
+    "kind": "prospective-eligible",
+    "commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "commit_date": "2026-11-12",
+    "rules_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "results_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "note": "never scored anywhere; first evaluation must cite this entry's commit (0d1621f)."
+   },
+   "would_change_our_mind": {
+    "upside": "Edge availability shifts pressure rate and QB efficiency measurably.",
+    "downside": "Snap counts absent (IN-11) - untested."
+   },
+   "source": {
+    "t": "data/session-87deb7ab/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/0d1621f26e724aee34dbd65a7b09328611957189/data/session-87deb7ab/strategies.json"
+   }
+  },
+  {
+   "id": "signals/SIG-005",
+   "entry_type": "strategy",
+   "collection": "signals-18",
+   "strategy": "Confirmed quarterback change",
+   "track": "single",
+   "rule_summary": "A confirmed change of starting quarterback is the single largest lineup-driven repricing event, and the market moves on the announcement rather than on the underlying quality gap.",
+   "sample_window": "design only - status 'Proposed' on every signal",
+   "gates_ref": "signals-18",
+   "registration": {
+    "kind": "prospective-eligible",
+    "commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "commit_date": "2026-11-12",
+    "rules_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "results_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "note": "never scored anywhere; first evaluation must cite this entry's commit (0d1621f)."
+   },
+   "would_change_our_mind": {
+    "upside": "Confirmed QB change (official news) is the largest repricing event and is captured before the line moves.",
+    "downside": "News-to-line lag not measurable without intraday prices - untested until price snapshots exist (PR-01)."
+   },
+   "source": {
+    "t": "data/session-87deb7ab/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/0d1621f26e724aee34dbd65a7b09328611957189/data/session-87deb7ab/strategies.json"
+   }
+  },
+  {
+   "id": "signals/SIG-006",
+   "entry_type": "strategy",
+   "collection": "signals-18",
+   "strategy": "Backfield depth stress",
+   "track": "single",
+   "rule_summary": "When the top two running backs on a team are both limited or worse, the offence shifts pass-heavy in a way the market prices late.",
+   "sample_window": "design only - status 'Proposed' on every signal",
+   "gates_ref": "signals-18",
+   "registration": {
+    "kind": "prospective-eligible",
+    "commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "commit_date": "2026-11-12",
+    "rules_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "results_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "note": "never scored anywhere; first evaluation must cite this entry's commit (0d1621f)."
+   },
+   "would_change_our_mind": {
+    "upside": "Top-two RB both limited -> pass-heavy shift, over hits at frozen threshold.",
+    "downside": "Official RB designations incomplete - untested."
+   },
+   "source": {
+    "t": "data/session-87deb7ab/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/0d1621f26e724aee34dbd65a7b09328611957189/data/session-87deb7ab/strategies.json"
+   }
+  },
+  {
+   "id": "signals/SIG-007",
+   "entry_type": "strategy",
+   "collection": "signals-18",
+   "strategy": "Rest and bye differential",
+   "track": "single",
+   "rule_summary": "A team coming off a bye against one that is not, and teams on equal rest, differ in second-half performance.",
+   "sample_window": "design only - status 'Proposed' on every signal",
+   "gates_ref": "signals-18",
+   "registration": {
+    "kind": "prospective-eligible",
+    "commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "commit_date": "2026-11-12",
+    "rules_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "results_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "note": "never scored anywhere; first evaluation must cite this entry's commit (0d1621f)."
+   },
+   "would_change_our_mind": {
+    "upside": "Bye/rest differential positive with rest computed from the official schedule only.",
+    "downside": "Rest look-ahead or schedule error - void."
+   },
+   "source": {
+    "t": "data/session-87deb7ab/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/0d1621f26e724aee34dbd65a7b09328611957189/data/session-87deb7ab/strategies.json"
+   }
+  },
+  {
+   "id": "signals/SIG-008",
+   "entry_type": "strategy",
+   "collection": "signals-18",
+   "strategy": "Travel and time-zone shift",
+   "track": "single",
+   "rule_summary": "West coast teams travelling east for an early kickoff underperform their own baseline.",
+   "sample_window": "design only - status 'Proposed' on every signal",
+   "gates_ref": "signals-18",
+   "registration": {
+    "kind": "prospective-eligible",
+    "commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "commit_date": "2026-11-12",
+    "rules_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "results_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "note": "never scored anywhere; first evaluation must cite this entry's commit (0d1621f)."
+   },
+   "would_change_our_mind": {
+    "upside": "West-coast teams travelling east for early kickoffs underperform baseline.",
+    "downside": "Travel feature unverifiable from official sources alone - untested."
+   },
+   "source": {
+    "t": "data/session-87deb7ab/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/0d1621f26e724aee34dbd65a7b09328611957189/data/session-87deb7ab/strategies.json"
+   }
+  },
+  {
+   "id": "signals/SIG-009",
+   "entry_type": "strategy",
+   "collection": "signals-18",
+   "strategy": "Pace and neutral-situation rate",
+   "track": "single",
+   "rule_summary": "Teams that run plays faster than the market's implied pace generate more total plays, which lifts both team totals and volume-based player props.",
+   "sample_window": "design only - status 'Proposed' on every signal",
+   "gates_ref": "signals-18",
+   "registration": {
+    "kind": "prospective-eligible",
+    "commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "commit_date": "2026-11-12",
+    "rules_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "results_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "note": "never scored anywhere; first evaluation must cite this entry's commit (0d1621f)."
+   },
+   "would_change_our_mind": {
+    "upside": "Faster-than-implied pace lifts total plays and overs.",
+    "downside": "Play-level pace data not officially sourced - untested."
+   },
+   "source": {
+    "t": "data/session-87deb7ab/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/0d1621f26e724aee34dbd65a7b09328611957189/data/session-87deb7ab/strategies.json"
+   }
+  },
+  {
+   "id": "signals/SIG-010",
+   "entry_type": "strategy",
+   "collection": "signals-18",
+   "strategy": "Red-zone efficiency regression",
+   "track": "single",
+   "rule_summary": "Red-zone touchdown rate is noisy and mean-reverting; teams running hot convert fewer field goals, which is mispriced in team totals and kicker props.",
+   "sample_window": "design only - status 'Proposed' on every signal",
+   "gates_ref": "signals-18",
+   "registration": {
+    "kind": "prospective-eligible",
+    "commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "commit_date": "2026-11-12",
+    "rules_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "results_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "note": "never scored anywhere; first evaluation must cite this entry's commit (0d1621f)."
+   },
+   "would_change_our_mind": {
+    "upside": "Red-zone TD rate mean-reverts; fade hot converters.",
+    "downside": "Multi-season red-zone data official match incomplete - untested."
+   },
+   "source": {
+    "t": "data/session-87deb7ab/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/0d1621f26e724aee34dbd65a7b09328611957189/data/session-87deb7ab/strategies.json"
+   }
+  },
+  {
+   "id": "signals/SIG-011",
+   "entry_type": "strategy",
+   "collection": "signals-18",
+   "strategy": "Turnover regression",
+   "track": "single",
+   "rule_summary": "Takeaway rate is the least repeatable team statistic in football; teams riding an extreme takeaway rate are mispriced in the spread.",
+   "sample_window": "design only - status 'Proposed' on every signal",
+   "gates_ref": "signals-18",
+   "registration": {
+    "kind": "prospective-eligible",
+    "commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "commit_date": "2026-11-12",
+    "rules_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "results_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "note": "never scored anywhere; first evaluation must cite this entry's commit (0d1621f)."
+   },
+   "would_change_our_mind": {
+    "upside": "Takeaway rate regresses; fade extreme takeaway teams.",
+    "downside": "Same data gate as SIG-010 - untested."
+   },
+   "source": {
+    "t": "data/session-87deb7ab/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/0d1621f26e724aee34dbd65a7b09328611957189/data/session-87deb7ab/strategies.json"
+   }
+  },
+  {
+   "id": "signals/SIG-012",
+   "entry_type": "strategy",
+   "collection": "signals-18",
+   "strategy": "Weather effect on totals and kicking",
+   "track": "single",
+   "rule_summary": "Wind above a threshold and precipitation depress passing volume and kicking accuracy more than the total accounts for.",
+   "sample_window": "design only - status 'Proposed' on every signal",
+   "gates_ref": "signals-18",
+   "registration": {
+    "kind": "prospective-eligible",
+    "commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "commit_date": "2026-11-12",
+    "rules_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "results_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "note": "never scored anywhere; first evaluation must cite this entry's commit (0d1621f)."
+   },
+   "would_change_our_mind": {
+    "upside": "Wind/precipitation thresholds depress totals (NWS overlay, readiness IN-29).",
+    "downside": "NWS hourly overlay not built - untested; no level proxy."
+   },
+   "source": {
+    "t": "data/session-87deb7ab/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/0d1621f26e724aee34dbd65a7b09328611957189/data/session-87deb7ab/strategies.json"
+   }
+  },
+  {
+   "id": "signals/SIG-013",
+   "entry_type": "strategy",
+   "collection": "signals-18",
+   "strategy": "Divisional familiarity",
+   "track": "single",
+   "rule_summary": "Divisional games are lower scoring and more likely to be decided by a field goal than the market's generic spread implies.",
+   "sample_window": "design only - status 'Proposed' on every signal",
+   "gates_ref": "signals-18",
+   "registration": {
+    "kind": "prospective-eligible",
+    "commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "commit_date": "2026-11-12",
+    "rules_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "results_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "note": "never scored anywhere; first evaluation must cite this entry's commit (0d1621f)."
+   },
+   "would_change_our_mind": {
+    "upside": "Divisional games lower scoring than the market's implied total.",
+    "downside": "Negative at first look - closed."
+   },
+   "source": {
+    "t": "data/session-87deb7ab/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/0d1621f26e724aee34dbd65a7b09328611957189/data/session-87deb7ab/strategies.json"
+   }
+  },
+  {
+   "id": "signals/SIG-014",
+   "entry_type": "strategy",
+   "collection": "signals-18",
+   "strategy": "Lookahead and sandwich spots",
+   "track": "single",
+   "rule_summary": "A team with a high-profile game next week underperforms in the present week.",
+   "sample_window": "design only - status 'Proposed' on every signal",
+   "gates_ref": "signals-18",
+   "registration": {
+    "kind": "prospective-eligible",
+    "commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "commit_date": "2026-11-12",
+    "rules_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "results_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "note": "never scored anywhere; first evaluation must cite this entry's commit (0d1621f)."
+   },
+   "would_change_our_mind": {
+    "upside": "Lookahead/sandwich spots underperform.",
+    "downside": "Schedule-context feature not built from published schedule facts only - untested."
+   },
+   "source": {
+    "t": "data/session-87deb7ab/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/0d1621f26e724aee34dbd65a7b09328611957189/data/session-87deb7ab/strategies.json"
+   }
+  },
+  {
+   "id": "signals/SIG-015",
+   "entry_type": "strategy",
+   "collection": "signals-18",
+   "strategy": "Points-versus-wins divergence",
+   "track": "single",
+   "rule_summary": "A team whose win record outruns its scoring margin is overpriced; the reverse is underpriced.",
+   "sample_window": "design only - status 'Proposed' on every signal",
+   "gates_ref": "signals-18",
+   "registration": {
+    "kind": "prospective-eligible",
+    "commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "commit_date": "2026-11-12",
+    "rules_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "results_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "note": "never scored anywhere; first evaluation must cite this entry's commit (0d1621f)."
+   },
+   "would_change_our_mind": {
+    "upside": "Wins outrunning scoring margin => overpriced; reverse underpriced.",
+    "downside": "Divergence metric unstable in small samples - if split-half unreliable, void."
+   },
+   "source": {
+    "t": "data/session-87deb7ab/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/0d1621f26e724aee34dbd65a7b09328611957189/data/session-87deb7ab/strategies.json"
+   }
+  },
+  {
+   "id": "signals/SIG-016",
+   "entry_type": "strategy",
+   "collection": "signals-18",
+   "strategy": "Primetime overreaction",
+   "track": "single",
+   "rule_summary": "The public over-reacts to a primetime blowout, and the following week's line for that team is biased.",
+   "sample_window": "design only - status 'Proposed' on every signal",
+   "gates_ref": "signals-18",
+   "registration": {
+    "kind": "prospective-eligible",
+    "commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "commit_date": "2026-11-12",
+    "rules_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "results_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "note": "never scored anywhere; first evaluation must cite this entry's commit (0d1621f)."
+   },
+   "would_change_our_mind": {
+    "upside": "Public over-reacts to primetime blowouts; next week's line biased.",
+    "downside": "Requires closing-line history snapshots (PR-01) - untested until they exist."
+   },
+   "source": {
+    "t": "data/session-87deb7ab/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/0d1621f26e724aee34dbd65a7b09328611957189/data/session-87deb7ab/strategies.json"
+   }
+  },
+  {
+   "id": "signals/SIG-017",
+   "entry_type": "strategy",
+   "collection": "signals-18",
+   "strategy": "Target share versus prop line",
+   "track": "single",
+   "rule_summary": "A receiver whose target share exceeds what his receiving-yard prop implies is underpriced, controlling for the game total.",
+   "sample_window": "design only - status 'Proposed' on every signal",
+   "gates_ref": "signals-18",
+   "registration": {
+    "kind": "prospective-eligible",
+    "commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "commit_date": "2026-11-12",
+    "rules_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "results_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "note": "never scored anywhere; first evaluation must cite this entry's commit (0d1621f)."
+   },
+   "would_change_our_mind": {
+    "upside": "Target share above prop implied value => underpriced receiver over.",
+    "downside": "No observed prop prices anywhere reachable (U01) - permanently untested until a source exists."
+   },
+   "source": {
+    "t": "data/session-87deb7ab/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/0d1621f26e724aee34dbd65a7b09328611957189/data/session-87deb7ab/strategies.json"
+   }
+  },
+  {
+   "id": "signals/SIG-018",
+   "entry_type": "strategy",
+   "collection": "signals-18",
+   "strategy": "Correlated same-game combination",
+   "track": "single",
+   "rule_summary": "Legitimately correlated legs are underpriced by naive multiplication, but only where the correlation has actually been estimated.",
+   "sample_window": "design only - status 'Proposed' on every signal",
+   "gates_ref": "signals-18",
+   "registration": {
+    "kind": "prospective-eligible",
+    "commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "commit_date": "2026-11-12",
+    "rules_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "results_commit": "0d1621f26e724aee34dbd65a7b09328611957189",
+    "note": "never scored anywhere; first evaluation must cite this entry's commit (0d1621f)."
+   },
+   "would_change_our_mind": {
+    "upside": "Correlated SGP legs underpriced vs naive multiplication - only with a validated joint probability (brief's joint-evidence gate).",
+    "downside": "Marginal multiplication without joint validation - permanently ineligible."
+   },
+   "source": {
+    "t": "data/session-87deb7ab/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/0d1621f26e724aee34dbd65a7b09328611957189/data/session-87deb7ab/strategies.json"
+   }
+  },
+  {
+   "id": "COLL/lab-9",
+   "entry_type": "collection",
+   "collection": "lab-9",
+   "strategy": "lab unified study: 9 rules, gates G0-G10",
+   "track": "n/a (collection)",
+   "rule_summary": "rules and results together at 7186f70; the collection did publish a rule-file sha256 (G0) but the hash and the results still landed in one commit - retrospective.",
+   "sample_window": {
+    "season": 2026,
+    "weeks": [
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "note": "Weeks 4-9 of 2026; weeks 1-3 are used only to train the ratings and the form measures."
+   },
+   "gates": [
+    {
+     "id": "G0",
+     "name": "Rule written down before any outcome was computed",
+     "detail": "The rule file is committed and its SHA-256 is published with the results."
+    },
+    {
+     "id": "G1",
+     "name": "At least 30 graded bets",
+     "detail": "Sample size floor."
+    },
+    {
+     "id": "G2",
+     "name": "Walk-forward: no look-ahead information",
+     "detail": "Ratings and form use only games with week < W."
+    },
+    {
+     "id": "G3",
+     "name": "Bootstrap 95% CI for mean edge has a lower bound above 0",
+     "detail": "Percentile bootstrap, 10,000 resamples, fixed seed."
+    },
+    {
+     "id": "G4",
+     "name": "Beats the break-even vig of a real sportsbook",
+     "detail": "Needs book prices. BLOCKED: no official odds and no licensed feed."
+    },
+    {
+     "id": "G5",
+     "name": "No single week supplies more than 40% of the total edge",
+     "detail": "Concentration check."
+    },
+    {
+     "id": "G6",
+     "name": "Holds up in a second season",
+     "detail": "BLOCKED: only 2026 results are transcribed and verified in this repo."
+    },
+    {
+     "id": "G7",
+     "name": "Correlation below 0.70 with every other passing rule",
+     "detail": "Parlay diversification check. Evaluated once two rules pass."
+    },
+    {
+     "id": "G8",
+     "name": "p-value survives Benjamini-Hochberg at FDR 0.10",
+     "detail": "Multiple-testing correction across all graded rules."
+    },
+    {
+     "id": "G9",
+     "name": "Beats a random-bet null (permutation p <= 0.05)",
+     "detail": "10,000 same-size random draws from the same weeks. This is the luck test."
+    },
+    {
+     "id": "G10",
+     "name": "Selector is independent of the number the outcome is measured against",
+     "detail": "Catches self-referential rules such as 'bet my biggest edge'."
+    }
+   ],
+   "registration": {
+    "kind": "retrospective",
+    "commit": "7186f70aaa04144a0f881fc67af910f00db8613d",
+    "commit_date": "2026-11-12",
+    "rules_commit": "7186f70aaa04144a0f881fc67af910f00db8613d",
+    "results_commit": "7186f70aaa04144a0f881fc67af910f00db8613d",
+    "note": "rules and results together at 7186f70; the collection did publish a rule-file sha256 (G0) but the hash and the results still landed in one commit - retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Collection graduates only when its own worst-performing gate set is cleared prospectively: >=200 scored bets at observed prices, BH q<0.05 across the family, ROI 95% CI above zero, and a positive holdout after it is opened.",
+    "downside": "If any gate audit (G1 look-ahead, G2 observed prices) fails, or the family's holdout is negative once opened, the collection is archived and may only be re-registered under new ids."
+   },
+   "source": {
+    "t": "data/session-1505ac8e/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/7186f70aaa04144a0f881fc67af910f00db8613d/data/session-1505ac8e/strategies.json"
+   }
+  },
+  {
+   "id": "lab/S1",
+   "entry_type": "strategy",
+   "collection": "lab-9",
+   "strategy": "Rest edge",
+   "track": "single",
+   "rule_summary": "Bet the side with at least 3 more days of rest than its opponent. Rest = days since that club's previous game.",
+   "sample_window": {
+    "season": 2026,
+    "weeks": [
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "note": "Weeks 4-9 of 2026; weeks 1-3 are used only to train the ratings and the form measures."
+   },
+   "gates_ref": "lab-9",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "7186f70aaa04144a0f881fc67af910f00db8613d",
+    "commit_date": "2026-11-12",
+    "rules_commit": "7186f70aaa04144a0f881fc67af910f00db8613d",
+    "results_commit": "7186f70aaa04144a0f881fc67af910f00db8613d",
+    "note": "rules and results together at 7186f70; the collection did publish a rule-file sha256 (G0) but the hash and the results still landed in one commit - retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Rest edge: BH-adjusted p=0.008 exists BUT split-half correlation is -0.04 - it graduates only if the split-half correlation turns positive with a larger sample while CI>0.",
+    "downside": "If split-half stays ~0, the p-value is selection, not signal: close and do not re-run weeks 10-18 under this id."
+   },
+   "source": {
+    "t": "data/session-1505ac8e/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/7186f70aaa04144a0f881fc67af910f00db8613d/data/session-1505ac8e/strategies.json"
+   }
+  },
+  {
+   "id": "lab/S2",
+   "entry_type": "strategy",
+   "collection": "lab-9",
+   "strategy": "Home team off a bye",
+   "track": "single",
+   "rule_summary": "Bet the home side when it has had 13+ days since its last game and the visitor has not.",
+   "sample_window": {
+    "season": 2026,
+    "weeks": [
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "note": "Weeks 4-9 of 2026; weeks 1-3 are used only to train the ratings and the form measures."
+   },
+   "gates_ref": "lab-9",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "7186f70aaa04144a0f881fc67af910f00db8613d",
+    "commit_date": "2026-11-12",
+    "rules_commit": "7186f70aaa04144a0f881fc67af910f00db8613d",
+    "results_commit": "7186f70aaa04144a0f881fc67af910f00db8613d",
+    "note": "rules and results together at 7186f70; the collection did publish a rule-file sha256 (G0) but the hash and the results still landed in one commit - retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Home off bye positive on >=200 games (its n is currently 26, G1-blocked).",
+    "downside": "n stays tiny or G1 (pre-game info) fails - paper."
+   },
+   "source": {
+    "t": "data/session-1505ac8e/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/7186f70aaa04144a0f881fc67af910f00db8613d/data/session-1505ac8e/strategies.json"
+   }
+  },
+  {
+   "id": "lab/S3",
+   "entry_type": "strategy",
+   "collection": "lab-9",
+   "strategy": "Division dog",
+   "track": "single",
+   "rule_summary": "In division games, bet the club with the worse net points per game (points for minus points against, from completed games only).",
+   "sample_window": {
+    "season": 2026,
+    "weeks": [
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "note": "Weeks 4-9 of 2026; weeks 1-3 are used only to train the ratings and the form measures."
+   },
+   "gates_ref": "lab-9",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "7186f70aaa04144a0f881fc67af910f00db8613d",
+    "commit_date": "2026-11-12",
+    "rules_commit": "7186f70aaa04144a0f881fc67af910f00db8613d",
+    "results_commit": "7186f70aaa04144a0f881fc67af910f00db8613d",
+    "note": "rules and results together at 7186f70; the collection did publish a rule-file sha256 (G0) but the hash and the results still landed in one commit - retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Division dog positive after conditioning on the closing line.",
+    "downside": "No residual vs closing line - archived as priced."
+   },
+   "source": {
+    "t": "data/session-1505ac8e/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/7186f70aaa04144a0f881fc67af910f00db8613d/data/session-1505ac8e/strategies.json"
+   }
+  },
+  {
+   "id": "lab/S4",
+   "entry_type": "strategy",
+   "collection": "lab-9",
+   "strategy": "Fade the hot streak",
+   "track": "single",
+   "rule_summary": "Bet against any club that enters the week on a win streak of 3 or more.",
+   "sample_window": {
+    "season": 2026,
+    "weeks": [
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "note": "Weeks 4-9 of 2026; weeks 1-3 are used only to train the ratings and the form measures."
+   },
+   "gates_ref": "lab-9",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "7186f70aaa04144a0f881fc67af910f00db8613d",
+    "commit_date": "2026-11-12",
+    "rules_commit": "7186f70aaa04144a0f881fc67af910f00db8613d",
+    "results_commit": "7186f70aaa04144a0f881fc67af910f00db8613d",
+    "note": "rules and results together at 7186f70; the collection did publish a rule-file sha256 (G0) but the hash and the results still landed in one commit - retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Fade 3+ win streaks positive with the streak defined pre-kickoff.",
+    "downside": "Streak definition uses post-game knowledge - void."
+   },
+   "source": {
+    "t": "data/session-1505ac8e/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/7186f70aaa04144a0f881fc67af910f00db8613d/data/session-1505ac8e/strategies.json"
+   }
+  },
+  {
+   "id": "lab/S5",
+   "entry_type": "strategy",
+   "collection": "lab-9",
+   "strategy": "Pythagorean bounce-back",
+   "track": "single",
+   "rule_summary": "Bet the club whose Pythagorean expected wins exceed its actual wins by at least 1.0. Exponent 2.337.",
+   "sample_window": {
+    "season": 2026,
+    "weeks": [
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "note": "Weeks 4-9 of 2026; weeks 1-3 are used only to train the ratings and the form measures."
+   },
+   "gates_ref": "lab-9",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "7186f70aaa04144a0f881fc67af910f00db8613d",
+    "commit_date": "2026-11-12",
+    "rules_commit": "7186f70aaa04144a0f881fc67af910f00db8613d",
+    "results_commit": "7186f70aaa04144a0f881fc67af910f00db8613d",
+    "note": "rules and results together at 7186f70; the collection did publish a rule-file sha256 (G0) but the hash and the results still landed in one commit - retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Pythagorean bounce-back positive at the frozen threshold.",
+    "downside": "Pythagorean gap unreliable (split-half) - void."
+   },
+   "source": {
+    "t": "data/session-1505ac8e/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/7186f70aaa04144a0f881fc67af910f00db8613d/data/session-1505ac8e/strategies.json"
+   }
+  },
+  {
+   "id": "lab/S6",
+   "entry_type": "strategy",
+   "collection": "lab-9",
+   "strategy": "Road dog with the better defence",
+   "track": "single",
+   "rule_summary": "Bet the road club when it allows fewer points per game than its host and enters with the worse record.",
+   "sample_window": {
+    "season": 2026,
+    "weeks": [
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "note": "Weeks 4-9 of 2026; weeks 1-3 are used only to train the ratings and the form measures."
+   },
+   "gates_ref": "lab-9",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "7186f70aaa04144a0f881fc67af910f00db8613d",
+    "commit_date": "2026-11-12",
+    "rules_commit": "7186f70aaa04144a0f881fc67af910f00db8613d",
+    "results_commit": "7186f70aaa04144a0f881fc67af910f00db8613d",
+    "note": "rules and results together at 7186f70; the collection did publish a rule-file sha256 (G0) but the hash and the results still landed in one commit - retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Road dog with better defence positive at the frozen threshold.",
+    "downside": "Defence metric not officially sourced - untested."
+   },
+   "source": {
+    "t": "data/session-1505ac8e/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/7186f70aaa04144a0f881fc67af910f00db8613d/data/session-1505ac8e/strategies.json"
+   }
+  },
+  {
+   "id": "lab/S7",
+   "entry_type": "strategy",
+   "collection": "lab-9",
+   "strategy": "Model-vs-market disagreement",
+   "track": "single",
+   "rule_summary": "Bet the side my model favours when it differs from the consensus closing line by 3 points or more.",
+   "sample_window": {
+    "season": 2026,
+    "weeks": [
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "note": "Weeks 4-9 of 2026; weeks 1-3 are used only to train the ratings and the form measures."
+   },
+   "gates_ref": "lab-9",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "7186f70aaa04144a0f881fc67af910f00db8613d",
+    "commit_date": "2026-11-12",
+    "rules_commit": "7186f70aaa04144a0f881fc67af910f00db8613d",
+    "results_commit": "7186f70aaa04144a0f881fc67af910f00db8613d",
+    "note": "rules and results together at 7186f70; the collection did publish a rule-file sha256 (G0) but the hash and the results still landed in one commit - retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Model-vs-market disagreement positive with the model walk-forward clean.",
+    "downside": "Model weight negative (as the root pipeline found) - archived."
+   },
+   "source": {
+    "t": "data/session-1505ac8e/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/7186f70aaa04144a0f881fc67af910f00db8613d/data/session-1505ac8e/strategies.json"
+   }
+  },
+  {
+   "id": "lab/S8",
+   "entry_type": "strategy",
+   "collection": "lab-9",
+   "strategy": "Bet the model's biggest edge",
+   "track": "single",
+   "rule_summary": "Bet the side my model favours by 4 points or more. INCLUDED ON PURPOSE: the selector is the same number the outcome is measured against, so it is a self-referential test and gate G10 exists to catch it.",
+   "sample_window": {
+    "season": 2026,
+    "weeks": [
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "note": "Weeks 4-9 of 2026; weeks 1-3 are used only to train the ratings and the form measures."
+   },
+   "gates_ref": "lab-9",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "7186f70aaa04144a0f881fc67af910f00db8613d",
+    "commit_date": "2026-11-12",
+    "rules_commit": "7186f70aaa04144a0f881fc67af910f00db8613d",
+    "results_commit": "7186f70aaa04144a0f881fc67af910f00db8613d",
+    "note": "rules and results together at 7186f70; the collection did publish a rule-file sha256 (G0) but the hash and the results still landed in one commit - retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Bet-the-biggest-edge positive with the pick list frozen before kickoff.",
+    "downside": "Pick list chosen after seeing results - void immediately."
+   },
+   "source": {
+    "t": "data/session-1505ac8e/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/7186f70aaa04144a0f881fc67af910f00db8613d/data/session-1505ac8e/strategies.json"
+   }
+  },
+  {
+   "id": "lab/S9",
+   "entry_type": "strategy",
+   "collection": "lab-9",
+   "strategy": "Fade the injury-hit starter",
+   "track": "single",
+   "rule_summary": "Bet against a club with two or more starters (first string on its own depth chart) ruled Out or Questionable.",
+   "sample_window": {
+    "season": 2026,
+    "weeks": [
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "note": "Weeks 4-9 of 2026; weeks 1-3 are used only to train the ratings and the form measures."
+   },
+   "gates_ref": "lab-9",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "7186f70aaa04144a0f881fc67af910f00db8613d",
+    "commit_date": "2026-11-12",
+    "rules_commit": "7186f70aaa04144a0f881fc67af910f00db8613d",
+    "results_commit": "7186f70aaa04144a0f881fc67af910f00db8613d",
+    "note": "rules and results together at 7186f70; the collection did publish a rule-file sha256 (G0) but the hash and the results still landed in one commit - retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Fade injury-hit starter positive with official designations only.",
+    "downside": "Designation source incomplete - untested."
+   },
+   "source": {
+    "t": "data/session-1505ac8e/strategies.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/7186f70aaa04144a0f881fc67af910f00db8613d/data/session-1505ac8e/strategies.json"
+   }
+  },
+  {
+   "id": "COLL/verifiedlab-13",
+   "entry_type": "collection",
+   "collection": "verifiedlab-13",
+   "strategy": "verified-lab independent study: 13 strategies (all not_stakeable)",
+   "track": "n/a (collection)",
+   "rule_summary": "rules and results together at b7653d3; retrospective.",
+   "sample_window": "2026 season; every entry currently graded not_stakeable (no prices)",
+   "gates": [],
+   "registration": {
+    "kind": "retrospective",
+    "commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "commit_date": "2026-11-12",
+    "rules_commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "results_commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "note": "rules and results together at b7653d3; retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Collection graduates only when its own worst-performing gate set is cleared prospectively: >=200 scored bets at observed prices, BH q<0.05 across the family, ROI 95% CI above zero, and a positive holdout after it is opened.",
+    "downside": "If any gate audit (G1 look-ahead, G2 observed prices) fails, or the family's holdout is negative once opened, the collection is archived and may only be re-registered under new ids."
+   },
+   "source": {
+    "t": "data/processed/site_data.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/b7653d32e0f87c558c73420bcb5bc123f97a492e/data/processed/site_data.json"
+   }
+  },
+  {
+   "id": "verifiedlab/S1",
+   "entry_type": "strategy",
+   "collection": "verifiedlab-13",
+   "strategy": "Pythagorean regression (fade the lucky)",
+   "track": "single",
+   "rule_summary": "Teams whose published win percentage exceeds their Pythagorean expectation are being over-rated by the market; teams below expectation are under-rated. Betting against the lucky and with the unlucky captures mean reversion.",
+   "sample_window": "2026 season; every entry currently graded not_stakeable (no prices)",
+   "gates_ref": "verifiedlab-13",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "commit_date": "2026-11-12",
+    "rules_commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "results_commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "note": "rules and results together at b7653d3; retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Pythagorean regression: graduates only if, scored at observed prices on >=200 bets, CI>0 and BH q<0.05 in the 13-strategy family.",
+    "downside": "Currently not_stakeable: if first stakeable run is negative - closed."
+   },
+   "source": {
+    "t": "data/processed/site_data.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/b7653d32e0f87c558c73420bcb5bc123f97a492e/data/processed/site_data.json"
+   }
+  },
+  {
+   "id": "verifiedlab/S2",
+   "entry_type": "strategy",
+   "collection": "verifiedlab-13",
+   "strategy": "Confirmed QB disruption",
+   "track": "single",
+   "rule_summary": "When an official NFL.com news item confirms a starting-QB change, IR placement or a starter ruled out, the market under-reacts to the size of the downgrade when the replacement is a 3rd/4th-string or first-career-start player.",
+   "sample_window": "2026 season; every entry currently graded not_stakeable (no prices)",
+   "gates_ref": "verifiedlab-13",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "commit_date": "2026-11-12",
+    "rules_commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "results_commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "note": "rules and results together at b7653d3; retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Confirmed QB disruption positive with the official news item dated before the line moved.",
+    "downside": "News timestamp not verifiable pre-line - untested."
+   },
+   "source": {
+    "t": "data/processed/site_data.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/b7653d32e0f87c558c73420bcb5bc123f97a492e/data/processed/site_data.json"
+   }
+  },
+  {
+   "id": "verifiedlab/S3",
+   "entry_type": "strategy",
+   "collection": "verifiedlab-13",
+   "strategy": "Defensive absence cluster",
+   "track": "single",
+   "rule_summary": "A team with an unusually large cluster of defensive DNPs relative to its own season baseline concedes more than the market expects; bet the opponent's team total over.",
+   "sample_window": "2026 season; every entry currently graded not_stakeable (no prices)",
+   "gates_ref": "verifiedlab-13",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "commit_date": "2026-11-12",
+    "rules_commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "results_commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "note": "rules and results together at b7653d3; retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Defensive absence cluster positive with official DNP sources.",
+    "downside": "DNP counts not officially captured - untested."
+   },
+   "source": {
+    "t": "data/processed/site_data.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/b7653d32e0f87c558c73420bcb5bc123f97a492e/data/processed/site_data.json"
+   }
+  },
+  {
+   "id": "verifiedlab/S4",
+   "entry_type": "strategy",
+   "collection": "verifiedlab-13",
+   "strategy": "Streak fade (public-bias contrarian)",
+   "track": "single",
+   "rule_summary": "Recreational money chases visible streaks, so teams on long win streaks are over-priced and teams on long losing streaks are under-priced.",
+   "sample_window": "2026 season; every entry currently graded not_stakeable (no prices)",
+   "gates_ref": "verifiedlab-13",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "commit_date": "2026-11-12",
+    "rules_commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "results_commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "note": "rules and results together at b7653d3; retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Streak fade positive pre-kickoff.",
+    "downside": "Streak uses post-game data - void."
+   },
+   "source": {
+    "t": "data/processed/site_data.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/b7653d32e0f87c558c73420bcb5bc123f97a492e/data/processed/site_data.json"
+   }
+  },
+  {
+   "id": "verifiedlab/S5",
+   "entry_type": "strategy",
+   "collection": "verifiedlab-13",
+   "strategy": "Home-advantage mispricing",
+   "track": "single",
+   "rule_summary": "In the 2026 season to date home teams win 49.63% of games (Wilson 95% CI 41.4%-57.9%, n=136 home games). If the market still prices home field near the historical ~2.5 points, home favourites are over-priced.",
+   "sample_window": "2026 season; every entry currently graded not_stakeable (no prices)",
+   "gates_ref": "verifiedlab-13",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "commit_date": "2026-11-12",
+    "rules_commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "results_commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "note": "rules and results together at b7653d3; retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Home-advantage mispricing positive after the 2026 home-win rate is confirmed on a larger window (current CI 41.4-57.9% spans 50%).",
+    "downside": "CI keeps spanning 50% - never stakeable as written."
+   },
+   "source": {
+    "t": "data/processed/site_data.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/b7653d32e0f87c558c73420bcb5bc123f97a492e/data/processed/site_data.json"
+   }
+  },
+  {
+   "id": "verifiedlab/S6",
+   "entry_type": "strategy",
+   "collection": "verifiedlab-13",
+   "strategy": "Divisional rematch under",
+   "track": "single",
+   "rule_summary": "Third and fourth meetings between divisional opponents in the same season produce lower totals than the market line.",
+   "sample_window": "2026 season; every entry currently graded not_stakeable (no prices)",
+   "gates_ref": "verifiedlab-13",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "commit_date": "2026-11-12",
+    "rules_commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "results_commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "note": "rules and results together at b7653d3; retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Divisional rematch under positive on 3rd/4th meetings only.",
+    "downside": "Meeting-count data not officially verified - untested."
+   },
+   "source": {
+    "t": "data/processed/site_data.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/b7653d32e0f87c558c73420bcb5bc123f97a492e/data/processed/site_data.json"
+   }
+  },
+  {
+   "id": "verifiedlab/P1",
+   "entry_type": "strategy",
+   "collection": "verifiedlab-13",
+   "strategy": "Same-game script: favourite + under",
+   "track": "single",
+   "rule_summary": "When a strong favourite is also expected to control the clock, the moneyline and the under are positively correlated, and the book's independent-product parlay price under-states the joint probability.",
+   "sample_window": "2026 season; every entry currently graded not_stakeable (no prices)",
+   "gates_ref": "verifiedlab-13",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "commit_date": "2026-11-12",
+    "rules_commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "results_commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "note": "rules and results together at b7653d3; retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Favourite+under script positive only with a validated joint probability.",
+    "downside": "Marginal multiplication - permanently ineligible (joint-evidence gate)."
+   },
+   "source": {
+    "t": "data/processed/site_data.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/b7653d32e0f87c558c73420bcb5bc123f97a492e/data/processed/site_data.json"
+   }
+  },
+  {
+   "id": "verifiedlab/P2",
+   "entry_type": "strategy",
+   "collection": "verifiedlab-13",
+   "strategy": "QB-change stack",
+   "track": "single",
+   "rule_summary": "Pair a fade of the team losing its starting QB with the opponent's team-total over; the two legs share one causal driver and are positively correlated.",
+   "sample_window": "2026 season; every entry currently graded not_stakeable (no prices)",
+   "gates_ref": "verifiedlab-13",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "commit_date": "2026-11-12",
+    "rules_commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "results_commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "note": "rules and results together at b7653d3; retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "QB-change stack positive with validated joint probability.",
+    "downside": "Joint gate unmet - ineligible."
+   },
+   "source": {
+    "t": "data/processed/site_data.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/b7653d32e0f87c558c73420bcb5bc123f97a492e/data/processed/site_data.json"
+   }
+  },
+  {
+   "id": "verifiedlab/P3",
+   "entry_type": "strategy",
+   "collection": "verifiedlab-13",
+   "strategy": "Low-correlation diversifier",
+   "track": "single",
+   "rule_summary": "Two edges whose signals are measured to be near-independent can be parlayed purely to reduce variance, provided the combined price still beats the multiplied vig.",
+   "sample_window": "2026 season; every entry currently graded not_stakeable (no prices)",
+   "gates_ref": "verifiedlab-13",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "commit_date": "2026-11-12",
+    "rules_commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "results_commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "note": "rules and results together at b7653d3; retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Low-correlation diversifier positive with measured near-independence.",
+    "downside": "Measured correlation not significantly below zero - ineligible."
+   },
+   "source": {
+    "t": "data/processed/site_data.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/b7653d32e0f87c558c73420bcb5bc123f97a492e/data/processed/site_data.json"
+   }
+  },
+  {
+   "id": "verifiedlab/X1",
+   "entry_type": "strategy",
+   "collection": "verifiedlab-13",
+   "strategy": "Opportunity transfer",
+   "track": "single",
+   "rule_summary": "When a starter is officially designated Out, the market under-adjusts the replacement's prop line, especially when the replacement is a 3rd or 4th string whose snap share is not yet priced in.",
+   "sample_window": "2026 season; every entry currently graded not_stakeable (no prices)",
+   "gates_ref": "verifiedlab-13",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "commit_date": "2026-11-12",
+    "rules_commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "results_commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "note": "rules and results together at b7653d3; retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Opportunity transfer positive when the replacement is officially named (announced-starter evidence, VR-24/25).",
+    "downside": "Inferred replacements may not be used - untested until announced evidence exists."
+   },
+   "source": {
+    "t": "data/processed/site_data.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/b7653d32e0f87c558c73420bcb5bc123f97a492e/data/processed/site_data.json"
+   }
+  },
+  {
+   "id": "verifiedlab/X2",
+   "entry_type": "strategy",
+   "collection": "verifiedlab-13",
+   "strategy": "Pass-volume stack vs missing cornerback",
+   "track": "single",
+   "rule_summary": "When an opposing starting cornerback is Out, the QB passing-yard over and the lead WR reception over are positively correlated and the combo is mispriced as independent.",
+   "sample_window": "2026 season; every entry currently graded not_stakeable (no prices)",
+   "gates_ref": "verifiedlab-13",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "commit_date": "2026-11-12",
+    "rules_commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "results_commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "note": "rules and results together at b7653d3; retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Pass-volume stack vs missing CB positive with the CB's Out status official.",
+    "downside": "Opposing-CB status not official - untested."
+   },
+   "source": {
+    "t": "data/processed/site_data.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/b7653d32e0f87c558c73420bcb5bc123f97a492e/data/processed/site_data.json"
+   }
+  },
+  {
+   "id": "verifiedlab/X3",
+   "entry_type": "strategy",
+   "collection": "verifiedlab-13",
+   "strategy": "Rush-attempt transfer",
+   "track": "single",
+   "rule_summary": "With the lead back Out, the backup's rush-attempt prop is under-priced because the market anchors on the backup's season-to-date volume rather than the transferred opportunity.",
+   "sample_window": "2026 season; every entry currently graded not_stakeable (no prices)",
+   "gates_ref": "verifiedlab-13",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "commit_date": "2026-11-12",
+    "rules_commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "results_commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "note": "rules and results together at b7653d3; retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Rush-attempt transfer positive with the lead back officially Out.",
+    "downside": "Official designation incomplete - untested."
+   },
+   "source": {
+    "t": "data/processed/site_data.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/b7653d32e0f87c558c73420bcb5bc123f97a492e/data/processed/site_data.json"
+   }
+  },
+  {
+   "id": "verifiedlab/X4",
+   "entry_type": "strategy",
+   "collection": "verifiedlab-13",
+   "strategy": "Negative-correlation guard",
+   "track": "single",
+   "rule_summary": "Not an edge - a veto. Any combo whose legs are measured to be negatively correlated must be refused regardless of headline payout, because the true joint probability is below the independent product.",
+   "sample_window": "2026 season; every entry currently graded not_stakeable (no prices)",
+   "gates_ref": "verifiedlab-13",
+   "registration": {
+    "kind": "retrospective",
+    "commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "commit_date": "2026-11-12",
+    "rules_commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "results_commit": "b7653d32e0f87c558c73420bcb5bc123f97a492e",
+    "note": "rules and results together at b7653d3; retrospective."
+   },
+   "would_change_our_mind": {
+    "upside": "Negative-correlation guard stays a veto: any combo failing it is never ranked.",
+    "downside": "If used to rank rather than veto - policy violation, close the entry."
+   },
+   "source": {
+    "t": "data/processed/site_data.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/b7653d32e0f87c558c73420bcb5bc123f97a492e/data/processed/site_data.json"
+   }
+  },
+  {
+   "id": "COLL/forward-ledger-3",
+   "entry_type": "collection",
+   "collection": "forward-ledger-3",
+   "strategy": "forward-test ledger forecasters (session 739408a8)",
+   "track": "n/a (collection)",
+   "rule_summary": "session 739408a8 registered the forward scoring rules and three forecasters (PR-01 no-skill, PR-02 record share, PR-03 seeded random) in one results-free commit; this registry indexes them and does not restate their page.",
+   "sample_window": "2026 regular-season games from Week 11 onward, each forecast recorded before its own kickoff",
+   "gates": [],
+   "registration": {
+    "kind": "prospective",
+    "commit": "45342e86da55f7c5392ecc7cdf1c646c0250c583",
+    "commit_date": "2026-11-15",
+    "rules_commit": "45342e86da55f7c5392ecc7cdf1c646c0250c583",
+    "results_commit": null,
+    "note": "session 739408a8 registered the forward scoring rules and three forecasters (PR-01 no-skill, PR-02 record share, PR-03 seeded random) in one results-free commit; this registry indexes them and does not restate their page."
+   },
+   "would_change_our_mind": {
+    "upside": "Collection graduates only when its own worst-performing gate set is cleared prospectively: >=200 scored bets at observed prices, BH q<0.05 across the family, ROI 95% CI above zero, and a positive holdout after it is opened.",
+    "downside": "If any gate audit (G1 look-ahead, G2 observed prices) fails, or the family's holdout is negative once opened, the collection is archived and may only be re-registered under new ids."
+   },
+   "source": {
+    "t": "data/prereg/registry.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/45342e86da55f7c5392ecc7cdf1c646c0250c583/data/prereg/registry.json"
+   }
+  },
+  {
+   "id": "forward/PR-01",
+   "entry_type": "strategy",
+   "collection": "forward-ledger-3",
+   "strategy": "No-skill benchmark (constant 0.5)",
+   "track": "single",
+   "rule_summary": "No-skill benchmark (constant 0.5)",
+   "sample_window": "2026 regular-season games from Week 11 onward, each forecast recorded before its own kickoff",
+   "gates_ref": "forward-ledger-3",
+   "registration": {
+    "kind": "prospective",
+    "commit": "45342e86da55f7c5392ecc7cdf1c646c0250c583",
+    "commit_date": "2026-11-15",
+    "rules_commit": "45342e86da55f7c5392ecc7cdf1c646c0250c583",
+    "results_commit": null,
+    "note": "session 739408a8 registered the forward scoring rules and three forecasters (PR-01 no-skill, PR-02 record share, PR-03 seeded random) in one results-free commit; this registry indexes them and does not restate their page."
+   },
+   "would_change_our_mind": {
+    "upside": "It is the denominator of Brier skill: its own score must equal 0.5^2 = 0.25 on every completed game; a computed Brier away from 0.25 means the scoring pipeline is broken and every published score is void until re-derived.",
+    "downside": "No belief revision is possible (it has no inputs by construction); a pass rule that lets any forecaster beat PR-01 without the corrected lower bound above zero is a broken rule."
+   },
+   "source": {
+    "t": "data/prereg/registry.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/45342e86da55f7c5392ecc7cdf1c646c0250c583/data/prereg/registry.json"
+   }
+  },
+  {
+   "id": "forward/PR-02",
+   "entry_type": "strategy",
+   "collection": "forward-ledger-3",
+   "strategy": "Record-share forecast (official standings PCT)",
+   "track": "single",
+   "rule_summary": "Record-share forecast (official standings PCT)",
+   "sample_window": "2026 regular-season games from Week 11 onward, each forecast recorded before its own kickoff",
+   "gates_ref": "forward-ledger-3",
+   "registration": {
+    "kind": "prospective",
+    "commit": "45342e86da55f7c5392ecc7cdf1c646c0250c583",
+    "commit_date": "2026-11-15",
+    "rules_commit": "45342e86da55f7c5392ecc7cdf1c646c0250c583",
+    "results_commit": null,
+    "note": "session 739408a8 registered the forward scoring rules and three forecasters (PR-01 no-skill, PR-02 record share, PR-03 seeded random) in one results-free commit; this registry indexes them and does not restate their page."
+   },
+   "would_change_our_mind": {
+    "upside": "BSS vs PR-01 with the week-cluster bootstrap corrected lower bound above zero at >=100 scored games would show official standings alone carry signal.",
+    "downside": "Corrected bound <= 0 at >=100 games: stays a registered benchmark, promoted nowhere."
+   },
+   "source": {
+    "t": "data/prereg/registry.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/45342e86da55f7c5392ecc7cdf1c646c0250c583/data/prereg/registry.json"
+   }
+  },
+  {
+   "id": "forward/PR-03",
+   "entry_type": "strategy",
+   "collection": "forward-ledger-3",
+   "strategy": "Seeded random control",
+   "track": "single",
+   "rule_summary": "Seeded random control",
+   "sample_window": "2026 regular-season games from Week 11 onward, each forecast recorded before its own kickoff",
+   "gates_ref": "forward-ledger-3",
+   "registration": {
+    "kind": "prospective",
+    "commit": "45342e86da55f7c5392ecc7cdf1c646c0250c583",
+    "commit_date": "2026-11-15",
+    "rules_commit": "45342e86da55f7c5392ecc7cdf1c646c0250c583",
+    "results_commit": null,
+    "note": "session 739408a8 registered the forward scoring rules and three forecasters (PR-01 no-skill, PR-02 record share, PR-03 seeded random) in one results-free commit; this registry indexes them and does not restate their page."
+   },
+   "would_change_our_mind": {
+    "upside": "Its BSS must be statistically indistinguishable from zero - behaving like noise is what validates the bootstrap and multiplicity machinery.",
+    "downside": "If it ever clears the pass rule, the uncertainty machinery is suspect: audit the bootstrap before trusting any other pass."
+   },
+   "source": {
+    "t": "data/prereg/registry.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/45342e86da55f7c5392ecc7cdf1c646c0250c583/data/prereg/registry.json"
+   }
+  },
+  {
+   "id": "COLL/shadow-baseline-1",
+   "entry_type": "collection",
+   "collection": "shadow-baseline-1",
+   "strategy": "shadow-v1 forward baseline (session 55dc53f4)",
+   "track": "n/a (collection)",
+   "rule_summary": "session 55dc53f4: singles-only team-strength baseline, lambda=4 frozen, hash-gated inputs, Week 11 forecasts recorded before kickoff (PR-18 evidence).",
+   "sample_window": "2026 finals weeks 1-10 train, Week 11 onward forecast",
+   "gates": [],
+   "registration": {
+    "kind": "prospective",
+    "commit": "01da7637afa52e820f7c77bf7938be270de1073a",
+    "commit_date": "2026-11-15",
+    "rules_commit": "01da7637afa52e820f7c77bf7938be270de1073a",
+    "results_commit": null,
+    "note": "session 55dc53f4: singles-only team-strength baseline, lambda=4 frozen, hash-gated inputs, Week 11 forecasts recorded before kickoff (PR-18 evidence)."
+   },
+   "would_change_our_mind": {
+    "upside": "Collection graduates only when its own worst-performing gate set is cleared prospectively: >=200 scored bets at observed prices, BH q<0.05 across the family, ROI 95% CI above zero, and a positive holdout after it is opened.",
+    "downside": "If any gate audit (G1 look-ahead, G2 observed prices) fails, or the family's holdout is negative once opened, the collection is archived and may only be re-registered under new ids."
+   },
+   "source": {
+    "t": "prereg/shadow-v1.md",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/01da7637afa52e820f7c77bf7938be270de1073a/prereg/shadow-v1.md"
+   }
+  },
+  {
+   "id": "shadow/shadow-v1",
+   "entry_type": "strategy",
+   "collection": "shadow-baseline-1",
+   "strategy": "Singles-only team-strength shadow baseline",
+   "track": "single",
+   "rule_summary": "Singles-only team-strength shadow baseline",
+   "sample_window": "2026 finals weeks 1-10 train, Week 11 onward forecast",
+   "gates_ref": "shadow-baseline-1",
+   "registration": {
+    "kind": "prospective",
+    "commit": "01da7637afa52e820f7c77bf7938be270de1073a",
+    "commit_date": "2026-11-15",
+    "rules_commit": "01da7637afa52e820f7c77bf7938be270de1073a",
+    "results_commit": null,
+    "note": "session 55dc53f4: singles-only team-strength baseline, lambda=4 frozen, hash-gated inputs, Week 11 forecasts recorded before kickoff (PR-18 evidence)."
+   },
+   "would_change_our_mind": {
+    "upside": "Corrected BSS lower bound above zero versus PR-01 at >=100 scored Week-11-onward games under its own frozen rule (lambda=4, hash-gated inputs).",
+    "downside": "Any input-hash mismatch at scoring time (the tool refuses to run) voids the record; otherwise its frozen rule prints NOT PASSED - no re-tune under this id."
+   },
+   "source": {
+    "t": "prereg/shadow-v1.md",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/01da7637afa52e820f7c77bf7938be270de1073a/prereg/shadow-v1.md"
+   }
+  },
+  {
+   "id": "COLL/strat-prospective-19",
+   "entry_type": "collection",
+   "collection": "strat-prospective-19",
+   "strategy": "strategy-competition prospective registrations (session c7b65577)",
+   "track": "n/a (collection)",
+   "rule_summary": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates": [
+    {
+     "id": "G1",
+     "name": "walk-forward",
+     "test": "every input predates kick-off and every fit uses only earlier games",
+     "source": "data/s9cb/lines.json \u203a lookahead_probe (predictions differ with future data)"
+    },
+    {
+     "id": "G2",
+     "name": "observed prices",
+     "test": "every scored bet carries a price from the source file; no -110 assumed",
+     "source": "data/s9cb/leaderboard.json \u203a price_source"
+    },
+    {
+     "id": "G3",
+     "name": "sample size",
+     "test": "at least 200 scored bets in the backtest sample",
+     "source": "data/s9cb/leaderboard.json \u203a gate_definitions G3"
+    },
+    {
+     "id": "G4",
+     "name": "beats break-even",
+     "test": "hit rate above the break-even implied by the actual prices taken",
+     "source": "data/s9cb/leaderboard.json \u203a break_even_hit_rate"
+    },
+    {
+     "id": "G5",
+     "name": "multiplicity",
+     "test": "Benjamini-Hochberg adjusted p < 0.05 across the rules tested",
+     "source": "data/s9cb/leaderboard.json \u203a gate_definitions G5"
+    },
+    {
+     "id": "G6",
+     "name": "holdout",
+     "test": "positive in the untouched holdout window (2024 + 2025 backtest seasons)",
+     "source": "data/s9cb/leaderboard.json \u203a holdout_2024_2025"
+    },
+    {
+     "id": "G7",
+     "name": "seasonal stability",
+     "test": "positive in at least 60% of individual seasons",
+     "source": "data/s9cb/leaderboard.json \u203a gate_definitions G7"
+    },
+    {
+     "id": "G8",
+     "name": "uncertainty",
+     "test": "95% bootstrap interval on ROI excludes zero",
+     "source": "data/s9cb/leaderboard.json \u203a roi_ci95"
+    },
+    {
+     "id": "PS1",
+     "name": "proper score",
+     "test": "benchmark-relative Brier skill on the same games, with a game-cluster bootstrap lower bound above 0",
+     "source": "data/strat/proper_score.json \u203a markets[].bss_lower_bound"
+    },
+    {
+     "id": "PR1",
+     "name": "pre-registration",
+     "test": "a registration record exists and its commit precedes the result",
+     "source": "data/strat/preregistration.json"
+    }
+   ],
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Collection graduates only when its own worst-performing gate set is cleared prospectively: >=200 scored bets at observed prices, BH q<0.05 across the family, ROI 95% CI above zero, and a positive holdout after it is opened.",
+    "downside": "If any gate audit (G1 look-ahead, G2 observed prices) fails, or the family's holdout is negative once opened, the collection is archived and may only be re-registered under new ids."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P01",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Model side edge >= 2.0 pts, singles only",
+   "track": "single",
+   "rule_summary": "Model side edge >= 2.0 pts, singles only. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Model side edge >=2.0 clears the registered gates prospectively. First post-registration sample (>=200 scored units where the market allows) positive at observed prices with BH q<0.05 across the registered family and ROI/Brier interval clear of the no-skill control; stamp must prove the registration commit is an ancestor of the publishing commit.",
+    "downside": "Negative or underpowered at first sample, or any post-hoc edit that breaks tools/stamp_preregistration.py: closed under this id; a changed definition is a new id and a new registration."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P02",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Random side, 1 unit per game",
+   "track": "single",
+   "rule_summary": "Random side, 1 unit per game. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Random side behaves as designed: its realised ROI/interval CONTAINS the analytic no-skill expectation, which validates the scoring pipeline.",
+    "downside": "A significant deviation from the no-skill expectation means the pipeline (prices, settlement, or bootstrap) is broken: void all published scores until it is fixed."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P03",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Favourite only, no threshold",
+   "track": "single",
+   "rule_summary": "Favourite only, no threshold. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Favourites-only persists as the market-default bar: if its interval turns positive over a long prospective run we must revise the belief that the vig eats the default side entirely.",
+    "downside": "If it stays <=0 as history suggests, it remains a benchmark only, and any strategy overlapping its interval is claimed to be no better than the market's own default."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P04",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Home team only, no threshold",
+   "track": "single",
+   "rule_summary": "Home team only, no threshold. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Home-only interval positive over a long run would force a re-open of the home-advantage pricing question at observed prices.",
+    "downside": "Interval spanning zero or negative keeps it a benchmark; no promotion on raw win rate."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P05",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Underdog only, no threshold",
+   "track": "single",
+   "rule_summary": "Underdog only, no threshold. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Underdog-only positive interval would revise the belief that underdogs are systematically vig-dominated.",
+    "downside": "Otherwise benchmark only."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P06",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Model total edge >= 2.5 pts, under only",
+   "track": "single",
+   "rule_summary": "Model total edge >= 2.5 pts, under only. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Model total edge >=2.5 under-only positive with the model fit walk-forward clean.",
+    "downside": "Fit look-ahead or price-policy artefact (-110) -> void."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P07",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Availability surprise: new 'Out' designation versus the player's own prior week",
+   "track": "single",
+   "rule_summary": "Availability surprise: new 'Out' designation versus the player's own prior week. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Availability surprise positive with the official inactives join complete for every scored game (readiness IN-04).",
+    "downside": "Join gaps >2% of picks (mirror lag) -> void until the official report is the only input."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P08",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Practice-participation downgrade (FP -> LP -> DNP) between consecutive reads",
+   "track": "single",
+   "rule_summary": "Practice-participation downgrade (FP -> LP -> DNP) between consecutive reads. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Practice downgrade predictive with a dated Wed/Thu/Fri official report series per club (readiness IN-16).",
+    "downside": "No dated series -> stays untested; a level or snapshot proxy may not substitute (brief rejection)."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P09",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Count of new 'Out' starters, opponent minus own",
+   "track": "single",
+   "rule_summary": "Count of new 'Out' starters, opponent minus own. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "New-Out starter gap positive with verified inactives as source. First post-registration sample (>=200 scored units where the market allows) positive at observed prices with BH q<0.05 across the registered family and ROI/Brier interval clear of the no-skill control; stamp must prove the registration commit is an ancestor of the publishing commit.",
+    "downside": "Source not official for every scored game -> void. Negative or underpowered at first sample, or any post-hoc edit that breaks tools/stamp_preregistration.py: closed under this id; a changed definition is a new id and a new registration."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P10",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Parlay: two legs from different games, joint probability from the validated single-leg model",
+   "track": "single",
+   "rule_summary": "Parlay: two legs from different games, joint probability from the validated single-leg model. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Two-leg parlay across games only ranks with a validated joint probability and the operator's void/push rules on file (brief's joint-evidence gate).",
+    "downside": "Multiplying marginal probabilities without validation -> permanently ineligible for the board."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P11",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Same-game parlay: two legs in one game",
+   "track": "single",
+   "rule_summary": "Same-game parlay: two legs in one game. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Same-game parlay with validated joint probability. Joint-evidence gate required.",
+    "downside": "Marginal multiplication -> ineligible."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P12",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Prop combo: two player props in one game",
+   "track": "single",
+   "rule_summary": "Prop combo: two player props in one game. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Prop combo only with a registered official prop price source and validated joint probability.",
+    "downside": "No reachable official prop prices (flags F04/U01) -> untestable, no proxy."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P13",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Prop single: receiving yards above a shrunk trailing mean",
+   "track": "single",
+   "rule_summary": "Prop single: receiving yards above a shrunk trailing mean. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Receiving-yards prop single positive once an official price source is registered (flag U01).",
+    "downside": "No price source -> permanently untested as written."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P14",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Fade the public side (proxy: contrarian versus closing-line move)",
+   "track": "single",
+   "rule_summary": "Fade the public side (proxy: contrarian versus closing-line move). Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Fade-the-public positive only when 'public' is measured from recorded line moves (price-snapshot store, readiness PR-01).",
+    "downside": "Closing-line proxy mismeasures the public side -> void rather than assume direction."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P15",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Vig-free consensus versus our fair line",
+   "track": "single",
+   "rule_summary": "Vig-free consensus versus our fair line. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Vig-free consensus vs fair line measurable once intraday snapshots exist (readiness PR-01).",
+    "downside": "Without snapshots the comparison cannot be made -> untested."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P16",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Bye-week rest advantage of 2+ days",
+   "track": "single",
+   "rule_summary": "Bye-week rest advantage of 2+ days. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Bye-rest edge positive with rest days computed from official schedule dates only.",
+    "downside": "Schedule look-ahead or date error -> void."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P17",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "International/neutral-site travel disadvantage",
+   "track": "single",
+   "rule_summary": "International/neutral-site travel disadvantage. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Neutral-site travel disadvantage positive with venue taken from the official game centre (readiness IN-30).",
+    "downside": "Very small n (a handful of international games per season) may never reach 200: descriptive reporting only if the sample gate never clears - no threshold relaxation."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P18",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Thursday short-week under",
+   "track": "single",
+   "rule_summary": "Thursday short-week under. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Thursday short-week under positive at observed prices over >=200 units.",
+    "downside": "Schedule-derived short-week flag wrong for any club -> void pending fix."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "strat/P19",
+   "entry_type": "strategy",
+   "collection": "strat-prospective-19",
+   "strategy": "Season-opener total regression",
+   "track": "single",
+   "rule_summary": "Season-opener total regression. Stake 1 unit, flat; no staking model is part of the rule.",
+   "sample_window": "2026 onwards, only games kicking off after the registration commit",
+   "gates_ref": "strat-prospective-19",
+   "registration": {
+    "kind": "prospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": null,
+    "note": "session c7b65577 stamped these records (tools/stamp_preregistration.py + tools/check_preregistration.py enforce no post-hoc edit); this registry supplies the two-sided mind-changer fields for each entry."
+   },
+   "would_change_our_mind": {
+    "upside": "Season-opener total regression: one game per season means n grows by 1 per year - a positive interval is only reachable across many seasons; patience is the registered design.",
+    "downside": "If the regime is non-stationary enough that old seasons do not inform, the entry closes as untestable rather than being re-specified."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "COLL/strat-backtest-12",
+   "entry_type": "collection",
+   "collection": "strat-backtest-12",
+   "strategy": "strategy-competition backtest registrations (indexed)",
+   "track": "n/a (collection)",
+   "rule_summary": "records S01-S12 there are the s9cb set, already registered above as s9cb/* with their two-sided fields; stamped for publication-enforcement by session c7b65577. Registered-backtest: not pre-registered; disclosure.",
+   "sample_window": "2006-2026 observed prices (same set as s9cb-12)",
+   "gates": [],
+   "registration": {
+    "kind": "retrospective",
+    "commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "commit_date": "2026-11-15",
+    "rules_commit": "a25a3ee64f728775c5e8f9d2d51961015c9cfaab",
+    "results_commit": "f15c018735e88f227429d22766d2a09d2ebb5a60",
+    "note": "records S01-S12 there are the s9cb set, already registered above as s9cb/* with their two-sided fields; stamped for publication-enforcement by session c7b65577. Registered-backtest: not pre-registered; disclosure."
+   },
+   "would_change_our_mind": {
+    "upside": "Collection graduates only when its own worst-performing gate set is cleared prospectively: >=200 scored bets at observed prices, BH q<0.05 across the family, ROI 95% CI above zero, and a positive holdout after it is opened.",
+    "downside": "If any gate audit (G1 look-ahead, G2 observed prices) fails, or the family's holdout is negative once opened, the collection is archived and may only be re-registered under new ids."
+   },
+   "source": {
+    "t": "data/strat/preregistration.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/a25a3ee64f728775c5e8f9d2d51961015c9cfaab/data/strat/preregistration.json"
+   }
+  },
+  {
+   "id": "SB-01",
+   "entry_type": "strategy",
+   "collection": "shadow-baseline",
+   "strategy": "SB-01 singles-only shadow baseline (Pythagorean, exponent 2.0)",
+   "track": "single",
+   "rule_summary": "Pythagorean matchup probability, exponent 2.0, zero free parameters; singles only; full frozen rule text in prereg/SB-01-rule.md",
+   "sample_window": "2026 Week 11 (13 games) as pipeline test; skill claims require >=200 settled forecasts (SB-G4)",
+   "gates": [
+    {
+     "id": "SB-G1",
+     "rule": "recorded_at earlier than every kickoff covered"
+    },
+    {
+     "id": "SB-G2",
+     "rule": "model file sha256 unchanged between registration and settlement"
+    },
+    {
+     "id": "SB-G3",
+     "rule": "probabilities reproduce from stored PF/PA aggregates"
+    },
+    {
+     "id": "SB-G4",
+     "rule": "skill claims need Brier skill CI>0 over >=200 settled forecasts"
+    }
+   ],
+   "registration": {
+    "kind": "prospective",
+    "commit": "9ea55fa7ff4aa8e03f13b6551be349574dc2d3d6",
+    "commit_date": "2026-11-15",
+    "rules_commit": "9ea55fa7ff4aa8e03f13b6551be349574dc2d3d6",
+    "results_commit": null,
+    "note": "registration commit contains rule text, policy and model code and NO results; forecast record written afterwards in a later commit"
+   },
+   "forecast_record": "data/prereg/forecasts/SB-01_week11_2026.json",
+   "would_change_our_mind": {
+    "upside": "Brier skill vs the 0.5 base rate with a 95% interval strictly above zero over >=200 settled prospective forecasts, every one recorded before its kickoff (SB-G1) - only then does the baseline graduate from control to benchmark.",
+    "downside": "Any recorded_at not earlier than its kickoff, or any post-kickoff edit to a settled record (SB-G1/SB-G2 broken), voids the prospective claim no matter how well it scored; the entry moves to the retrospective archive and a fresh registration is required before forecasting again."
+   },
+   "source": {
+    "t": "prereg/SB-01-rule.md",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/9ea55fa7ff4aa8e03f13b6551be349574dc2d3d6/prereg/SB-01-rule.md"
+   }
+  }
+ ]
+}

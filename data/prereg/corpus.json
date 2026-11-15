@@ -1,0 +1,52 @@
+{
+ "schema": "nfl1.prereg.corpus.v1",
+ "corpus_id": "NFL1-CORPUS-2026-11-15-v1",
+ "frozen_at": "2026-11-15T13:48:04Z",
+ "frozen_by": "session 0c5215c1-nfl1",
+ "requirement": "brief: turn the 136-game log into the pre-registered backtest corpus (readiness PR-09)",
+ "file": "data/s9cb/games.csv",
+ "sha256_at_freeze": "dd4ae8ad3c1384e4d5921ef6e1532aafaa2c10c31f6497d262b6c5ebf62334a0",
+ "bytes_at_freeze": 1665521,
+ "rows_at_freeze": 7239,
+ "membership_rule": "rows with both final scores present AND gameday <= 2026-11-12",
+ "membership_counts": {
+  "completed_total": 7104,
+  "train_1999_2022": 6151,
+  "validation_2023_2024": 544,
+  "holdout_2025_2026": 409,
+  "priced_spread": 5202,
+  "priced_total": 5200
+ },
+ "splits": {
+  "train": {
+   "seasons": "1999-2022",
+   "n_games": 6151,
+   "use": "any fitting, threshold choice, rating estimation"
+  },
+  "validation": {
+   "seasons": "2023-2024",
+   "n_games": 544,
+   "use": "model selection only; never reported as final"
+  },
+  "holdout": {
+   "seasons": "2025-2026",
+   "n_games": 409,
+   "use": "may not be reported on until opened",
+   "holdout_opened": null,
+   "holdout_opened_note": "add a dated record here (reason + decision link) in a later commit before any holdout number is published anywhere"
+  }
+ },
+ "price_policy": {
+  "state": "open decision",
+  "note": "observed prices only for scoring; the -110 assumption used by data/model/strategies.json is retired for future runs pending decision PR-10",
+  "decision_ref": "room/data/decisions.json"
+ },
+ "official_verification": {
+  "verified_subset": "2026 games: 136 rows in data/verified/games_2026.csv (each row carries its official nfl.com week-page URL) + the official WAS 24-21 NYG final of 2026-11-12 absent from that file (flag F49)",
+  "official_schedule_index": "https://www.nfl.com/schedules/",
+  "unverified_subset": "1999-2025 games are nflverse (third-party, CC-BY-4.0) parses of the NFL schedule feed; they are NOT matched to official pages (readiness PR-02)",
+  "tier_label": "2026 = official-verified; 1999-2025 = community mirror"
+ },
+ "supersedes": null,
+ "amendment_rule": "membership may only be extended by a new corpus_id in a later commit; the frozen counts above are never edited"
+}
