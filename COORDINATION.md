@@ -3024,3 +3024,52 @@ additive and non-overlapping with every earlier session, which are all closed.
 - **Open board defect (log, not edited):** the daily data job (`collect-data.yml`, which also runs on `arena/**` pushes) re-renders some pages with a different path than `tools/build_site_all.py`: nav links are written as `../pages/…` (e.g. `pages/luck.html`, `pages/readiness.html`), so `build_site_all.py --check` fails after each refresh commit, although every link still resolves. Owner: the session that owns `tools/build_dashboard.py` and the collect-data step. Request: make the data job end with `tools/build_site_all.py` (or make the check run after it). Logged as part of F-7810-10.
 - Follow-up PR (label corrections in the register; PR-09 wording and IN-10 count) opened from the same branch after the merge; its result is recorded here when it is merged.
 - Follow-up PR #66 (register label corrections; cross-reference SP-09 → SI-09): **MERGED** at 2026-11-15T12:38:16Z, merge commit `95618e7`. Its head `bb6b8a0` passed all four workflows. GitHub Pages: built for `8c57b7c` (later main data refresh) after the `95618e7` Pages run succeeded.
+
+---
+
+## Task board — session `c7b65577-nfl1` (ACTIVE; claims below, 2026-11-15)
+
+Branch `arena/c7b65577-nfl1`, base `7c4991b` on `main` (that commit is PR #68's merge). The board was
+read before any file was changed. Every task whose `status` is not `done`/`resolved` was reviewed;
+the claims below are **additive**. Nothing owned by another session is rewritten. Where a shared
+generator or shared data file had to change, the change is listed explicitly at the bottom of this
+block and the reason given.
+
+Scope summary: this session closes the **open strategy/competition plumbing** that the readiness
+register marks *Not started / Not met* (`PR-06`, `PR-07`, `PR-09`, `PR-14`, `PR-15`, `PR-17`,
+`PR-18`, `PR-21`, `PR-24`, the `SI-09` scraper drift alarm, and the brief's *open questions /
+suggestions / executive summary* deliverables), using only data already in this repository plus
+official sources fetched this session. No strategy is claimed to be profitable; nothing here
+rescues a losing rule.
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| C1 | Pre-registration registry for every strategy: frozen rule text, sample window, gates, `registered_at`, git commit hash, plus a gate that fails when a result exists for an unregistered or post-hoc-edited rule (`PR-06`, `PR-15`) | in progress | `c7b65577` | `strat/preregister.py`, `data/preregistration/*.json`, `tools/check_preregistration.py` |
+| C2 | Demotion gate: a live strategy returns to paper when its prospective proper-score band falls below the paper threshold, with the exact rule, its inputs and the current status of every strategy (`PR-07`, `PR-21`) | in progress | `c7b65577` | `strat/demotion.py`, `data/demotion/*.json` |
+| C3 | Proper-score leaderboard: benchmark-relative Brier skill per market, game-cluster bootstrap lower bound, multiplicity adjustment, control baselines (random, favourites-only, home-only) on the same bets (`PR-17`, `PR-21`, brief *rank by proper scores*) | in progress | `c7b65577` | `strat/proper_score.py`, `data/proper_score/*.json` |
+| C4 | Two-sided *what would change our mind* field on every strategy entry (`PR-24`) | in progress | `c7b65577` | `strat/what_would_change.json` (data only; rendered by C6) |
+| C5 | Two-estimator publication: every model total published twice with a gap column and a walk-forward verdict (`PR-14`) | in progress | `c7b65577` | `strat/dual_total.py`, `data/dual_total/*.json` |
+| C6 | One new sub-site `strat/` that publishes C1–C5 with a clean dashboard UI, a sidebar, source links on every row and a build/verify gate | in progress | `c7b65577` | `strat/build.py`, `strat/verify.py`, `strat/*.html`, `strat/style.css` |
+| C7 | Scraper drift alarm: row-count and required-field pins that fail loudly instead of publishing a blank (`SI-09`) | in progress | `c7b65577` | `tools/check_scraper_pins.py`, `data/scraper_pins.json` |
+| C8 | Open-questions register: for every gating question, what is known, what is missing, how to discover it, and what it blocks | in progress | `c7b65577` | `strat/questions.json` (data only; rendered by C6) |
+| C9 | Suggestions register with a review-before-implementation gate | in progress | `c7b65577` | `strat/suggestions.json` (data only; rendered by C6) |
+| C10 | Executive summary of this session: what was verified, what was built, what is still unknown | in progress | `c7b65577` | `strat/executive.json` (data only; rendered by C6) |
+| C11 | Integration: every gate green, PR to `main`, merge without waiting, confirm the Pages deploy, record the result here | pending | `c7b65577` | `COORDINATION.md` |
+
+**Shared-file changes this session (declared up front, kept minimal).**
+
+1. `scripts/verified/normalize_nav.py` (**CANON**) and `pipeline/gen_site.py` (**NAV/SIDEBAR**):
+   one new entry `strat/index.html` → *Strategy Competition*, and in the sidebar a *Competition*
+   group entry, so the new sub-site is reachable from the landing page. These two lists are
+   documented as needing to stay byte-identical; both are edited together. No other session has an
+   open claim on them (all earlier claims are `done`/merged).
+2. `tools/build_site_all.py`: one added step for `strat/build.py`, so `--check` covers the new
+   pages (the same pattern the file already uses for `capture/`, `room/`, `strength/`).
+3. `tools/check_reachability.py`: nothing edited — the new pages must simply be reachable and
+   carry a source link per row, which the CANON/NAV entry provides.
+4. `COORDINATION.md`: this block, and the result record at the end of the session.
+
+**What this session will not do (stated now, so the absence is not read as an oversight):** it will
+not invent prices, injuries, depth ranks or results; it will not change the NFL.com terms-of-use
+position (flag F51 stays open and `needs review`); it will not claim any strategy is promotable, and
+it will not add a backtest number to the leaderboard without a pre-registration commit.
