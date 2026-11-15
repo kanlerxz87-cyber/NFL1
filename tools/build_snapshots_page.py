@@ -213,8 +213,28 @@ def build() -> str:
                   generated=generated)
 
 
+def canonical_nav(content: str) -> str:
+    """Swap the nav block for the canonical one from normalize_nav.py.
+
+    gen_site's template writes root-relative links (../pages/x.html) into this
+    page, which normalize_nav.py then rewrites to pages-relative links on every
+    site build. Without this step the bot's capture re-render and the site build
+    disagree on the nav, so the page never reaches a fixed point.
+    """
+    import importlib.util as ilu
+    import re as _re
+    spec = ilu.spec_from_file_location("_nav", ROOT / "scripts" / "verified" / "normalize_nav.py")
+    nav = ilu.module_from_spec(spec)
+    spec.loader.exec_module(nav)
+    new = nav.build("snapshots.html", False)
+    m = _re.search(r"<nav[^>]*>.*?</nav>", content, flags=_re.S)
+    if not m:
+        raise SystemExit("snapshots page has no nav block to canonicalise")
+    return content[:m.start()] + new + content[m.end():]
+
+
 def main() -> int:
-    content = build()
+    content = canonical_nav(build())
     g.write(OUT, content)
     return 0
 
