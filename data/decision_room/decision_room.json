@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-15T12:17:13+00:00",
+ "generated_at": "2026-11-15T12:22:56+00:00",
  "evidence": {
   "season": 2026,
   "week_complete": 10,
@@ -1951,6 +1951,17 @@
    "action": "Fixed: the two snapshot values were corrected to the official times and pipeline/build_all.py now applies a documented, source-linked SCHEDULE_FEED_FIXES table at build time so scheduled refreshes keep the official values. Reviewer: confirm against https://www.nfl.com/schedules/2026/by-week/week-11 and https://www.nfl.com/schedules/2026/REG11 (fetched 2026-11-13); if the upstream feed is corrected, the table can be dropped (it is idempotent).",
    "verified": true,
    "retrieved": "2026-11-13"
+  },
+  {
+   "id": "F48",
+   "category": "Data resolvability",
+   "description": "data/model/official_injuries.json holds 345 Week-10 rows (scrape generated 2026-11-14T17:02:31Z from https://www.nfl.com/injuries/). Every row populates team (for example WAS, NE) but no club field is present on any row, and counts.clubs_resolved_from_roster is 0, so the club foreign key is not resolved. Downstream joins that key off club (roster, depth chart, snap counts) would match nothing. Spot-checked 12 rows against the live official page on 2026-11-15: all matched (Patrick/Yankoff Out, Harrison Questionable, Brown/Davis III/Henderson Out, Joseph/Mays/Reed Out, Darnold Out). Row count is a live-week snapshot and drifts within the week (see A-F04).",
+   "impact": "Availability/roster joins keyed on club return zero rows until club resolution is added; not a values error in the scraped fields themselves.",
+   "status": "needs review",
+   "src": "S01",
+   "action": "Resolve club from the team code or the club table at scrape time, backfill counts.clubs_resolved_from_roster, and add a per-refresh row-count gate against https://www.nfl.com/injuries/.",
+   "verified": true,
+   "retrieved": "2026-11-15"
   }
  ]
 }
