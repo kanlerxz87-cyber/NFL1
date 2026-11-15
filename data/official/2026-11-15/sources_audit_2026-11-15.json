@@ -1,7 +1,7 @@
 {
   "audit_id": "3738d9f0-nfl1-official-source-audit",
   "date_utc": "2026-11-15",
-  "audit_recorded_at_utc": "2026-11-15T12:36:03Z",
+  "audit_recorded_at_utc": "2026-11-15T12:49:11Z",
   "retrieved_by": "Arena page-fetch tool (fetch_page)",
   "exact_response_timestamps_available": false,
   "timestamp_note": "The timestamp records when the audit/transcription was recorded after the source responses were available, not an HTTP response timestamp. The page-fetch tool did not expose per-response timestamps or raw response bodies.",
@@ -12,7 +12,11 @@
       "url": "https://www.nfl.com/standings/league/2026/reg",
       "page_title": "2026 NFL League Standings",
       "chunks_read": "2/2",
-      "used_for": ["standings_2026-11-15.tsv", "comparison with data/model/snapshot.json standings"]
+      "used_for": [
+        "standings_2026-11-15.tsv",
+        "comparison with data/model/snapshot.json standings"
+      ],
+      "capture_recorded_at_utc": "2026-11-15T12:36:03Z"
     },
     {
       "id": "NFL-WEEK11-SCHEDULE-2026-11-15",
@@ -20,7 +24,11 @@
       "url": "https://www.nfl.com/schedules/2026/by-week/week-11",
       "page_title": "NFL Week 11 Schedule 2026: Games, Times, Matchups & Tickets",
       "chunks_read": "3/3",
-      "used_for": ["week11_schedule_2026-11-15.tsv", "comparison with data/model/snapshot.json fixtures"]
+      "used_for": [
+        "week11_schedule_2026-11-15.tsv",
+        "comparison with data/model/snapshot.json fixtures"
+      ],
+      "capture_recorded_at_utc": "2026-11-15T12:29:01Z"
     },
     {
       "id": "NFL-INJURIES-WEEK10-2026-11-15",
@@ -28,33 +36,86 @@
       "url": "https://www.nfl.com/injuries/",
       "page_title": "Official Latest NFL Injury Report for Players - Week 10 of the 2026 Season | NFL.com",
       "chunks_read": "8/8",
-      "used_for": ["injury_spotchecks_2026-11-15.tsv", "12 row spot check against data/model/official_injuries.json"]
+      "used_for": [
+        "data/brief_07810d9f/live_read_2026-11-15_week10.psv (full 347-row hand transcription)",
+        "data/official/2026-11-15/injury_spotchecks_2026-11-15.tsv (12 directly linked spot checks)",
+        "full row-by-row comparison against the read-only refreshed model snapshot"
+      ],
+      "capture_recorded_at_utc": "2026-11-15T12:18Z"
     }
   ],
   "injury_capture_boundary": {
     "page_week": 10,
-    "model_snapshot_generated_at_utc": "2026-11-14T17:02:31+00:00",
-    "model_snapshot_rows": 345,
+    "full_capture_path": "data/brief_07810d9f/live_read_2026-11-15_week10.psv",
+    "full_capture_read_at_utc": "2026-11-15T12:18Z",
+    "full_capture_chunks_read": "8/8",
+    "fresh_live_page_reread_on_utc_date": "2026-11-15",
+    "live_rows_transcribed": 347,
+    "live_rows_compared_to_model": 347,
+    "live_page_total_row_count_independently_recounted": true,
+    "model_snapshot_generated_at_utc": "2026-11-15T12:38:01+00:00",
+    "model_snapshot_rows": 347,
     "model_snapshot_teams": 28,
-    "live_rows_transcribed_and_compared": 12,
-    "remaining_model_rows_not_independently_transcribed_from_the_2026-11-15_live_page": 333,
-    "live_page_total_row_count_independently_recounted": false,
-    "status": "partial - full current live injury report row audit remains for review",
-    "note": "All eight live-page chunks were read, but only the twelve explicitly listed rows were transcribed and checked against the model snapshot. The model row count is not presented as an independently verified live-page row count. No other injury rows are claimed as verified."
+    "model_rows_without_live_match": 0,
+    "field_mismatches": 0,
+    "status": "complete",
+    "note": "A complete same-day live transcription is preserved at full_capture_path. The page was re-read in all eight chunks during final verification. The offline verifier compares every captured player row and designation to the read-only post-refresh model snapshot; raw HTML and exact HTTP response timestamps are not available."
   },
   "standing_capture": {
     "rows": 32,
-    "fields_transcribed": ["team code", "team name", "W", "L", "T", "PCT", "PF", "PA", "NET"]
+    "fields_transcribed": [
+      "team code",
+      "team name",
+      "W",
+      "L",
+      "T",
+      "PCT",
+      "PF",
+      "PA",
+      "NET"
+    ]
   },
   "schedule_capture": {
     "rows": 13,
-    "fields_transcribed": ["matchup", "date", "kickoff ET", "network"],
-    "byes_as_displayed": ["ATL", "CLE", "GB", "LAR", "NE", "SEA"],
+    "fields_transcribed": [
+      "matchup",
+      "date",
+      "kickoff ET",
+      "network"
+    ],
+    "byes_as_displayed": [
+      "ATL",
+      "CLE",
+      "GB",
+      "LAR",
+      "NE",
+      "SEA"
+    ],
     "abbreviation_note": "The bye list text uses LAR for the Rams while the adjacent logo asset uses LA; retain the exact source convention and do not normalize it."
   },
   "comparison_code_aliases": {
-    "AZ": "ARI",
-    "note": "The official NFL standings/schedule page uses AZ for Arizona; the repository model uses ARI. The official capture preserves AZ verbatim. The offline verifier applies AZ-to-ARI only to comparison keys; it does not rewrite either dataset."
+    "standings_schedule_official_to_model": {
+      "AZ": "ARI"
+    },
+    "injury_report_official_to_model": {
+      "AZ": "ARI",
+      "LAR": "LA"
+    },
+    "note": "Official team codes remain unchanged in the captures. AZ→ARI and LAR→LA are comparison-key aliases only; the injury page uses LAR for the Rams while the model uses LA."
   },
-  "raw_live_page_bodies_archived": false
+  "raw_live_page_bodies_archived": false,
+  "standings_capture_recorded_at_utc": "2026-11-15T12:36:03Z",
+  "schedule_capture_recorded_at_utc": "2026-11-15T12:29:01Z",
+  "injury_spotcheck_recorded_at_utc": "2026-11-15T12:36:03Z",
+  "fresh_page_reread": {
+    "source_url": "https://www.nfl.com/injuries/",
+    "page_title": "Official Latest NFL Injury Report for Players - Week 10 of the 2026 Season | NFL.com",
+    "retrieved_on_utc_date": "2026-11-15",
+    "retrieved_by": "Arena page-fetch tool (fetch_page)",
+    "chunks_read": "8/8",
+    "exact_response_timestamps_available": false,
+    "raw_page_body_archived": false,
+    "note": "Re-read all chunks during final verification; the complete durable row transcription is the same-day 12:18Z file referenced below."
+  },
+  "full_injury_transcription_archived": true
 }

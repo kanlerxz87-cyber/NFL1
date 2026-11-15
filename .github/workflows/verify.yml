@@ -18,6 +18,9 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      # Standard-library only; guard against moving site-build dependencies below their consumers.
+      - name: Test CI dependency installation order
+        run: python3 -m unittest tests.test_verify_workflow -v
       - name: Install analysis and site-build dependencies
         run: python -m pip install --quiet numpy pandas
       - name: Recompute derived values
