@@ -3036,8 +3036,46 @@ Branch `arena/d4027f66-nfl1` (platform-fixed; the `session-<id>/<task>` conventi
 
 | ID | Task | Status | Owner | File scope | Notes |
 |---|---|---|---|---|---|
-| E1 | Official depth register for the four clubs whose charts the repo already cites (GB, KC, SF, SEA), captured 2026-11-15: one row per printed cell, number stripped, raw string kept, shared and empty slots represented, slot groups instead of a single starter | in progress | `d4027f66` | `data/depth/**`, `tools/build_depth_register.py`, `tools/check_depth_register.py`, `tests/test_depth_register.py` | Covers IN-09, IN-10, IN-21 (4 of 32 clubs; the 32-club sweep stays open) |
-| E2 | Pre-register the demotion gate, the leaderboard scoring rule and the backtest-number ban before any prospective window opens; commit-hash registration; gate that fails on a number without a registration | in progress | `d4027f66` | `data/preregistration/**`, `tools/check_preregistration.py` | Covers PR-06, PR-07, PR-15 (not retroactive for ST-01..ST-12, whose results were already seen) |
-| E3 | Drift alarm: depth-register parser fails the build on schema drift (missing section, header, URL or fetch date); value gaps are flagged, not hidden | in progress | `d4027f66` | `tools/check_depth_register.py`, `.github/workflows/verify.yml` (one added step) | Covers SI-09 for the depth scraper only; injury scraper still open |
-| E4 | Flags for every irregularity found (GB repo-vs-page differences, KC evidence-file rank conflation, duplicate names across slots, KC/SEA shared cells) | in progress | `d4027f66` | `data/flags.json` (append) | published on Flagged for Review, non-blocking |
+| E1 | Official depth register for the four clubs whose charts the repo already cites (GB, KC, SF, SEA), captured 2026-11-15: one row per printed cell, number stripped, raw string kept, shared and empty slots represented, slot groups instead of a single starter | done | `d4027f66` | `data/depth/**`, `tools/build_depth_register.py`, `tools/check_depth_register.py`, `tests/test_depth_register.py` | Covers IN-09, IN-10, IN-21 (4 of 32 clubs; the 32-club sweep stays open) |
+| E2 | Pre-register the demotion gate, the leaderboard scoring rule and the backtest-number ban before any prospective window opens; commit-hash registration; gate that fails on a number without a registration | done | `d4027f66` | `data/preregistration/**`, `tools/check_preregistration.py` | Covers PR-06, PR-07, PR-15 (not retroactive for ST-01..ST-12, whose results were already seen) |
+| E3 | Drift alarm: depth-register parser fails the build on schema drift (missing section, header, URL or fetch date); value gaps are flagged, not hidden | done | `d4027f66` | `tools/check_depth_register.py`, `.github/workflows/verify.yml` (one added step) | Covers SI-09 for the depth scraper only; injury scraper still open |
+| E4 | Flags for every irregularity found (GB repo-vs-page differences, KC evidence-file rank conflation, duplicate names across slots, KC/SEA shared cells) | done | `d4027f66` | `data/flags.json` (append) | published on Flagged for Review, non-blocking |
 | E5 | Readiness register rows for E1–E3, executive summary note, regenerate pages, gates, PR to `main`, merge, Pages check, record here | in progress | `d4027f66` | `scripts/brief_07810d9f/register.py` (status rows only), `executive-summary.html`, generated pages, `COORDINATION.md` | |
+
+### Result record — `d4027f66-nfl1` (2026-11-15, UTC)
+
+**Sources (all read on 2026-11-15 with `fetch_page`; bash cannot reach these hosts):**
+- Packers: https://www.packers.com/team/depth-chart (label printed: "Unofficial, Nov. 10, 2026")
+- Chiefs: https://www.chiefs.com/team/depth-chart (heading "Unofficial Depth Chart"; no as-of date)
+- 49ers: https://www.49ers.com/team/depth-chart (printed: "Updated as of 11/10/26")
+- Seahawks: https://www.seahawks.com/team/depth-chart/ (chunk 1 of 2 read; no as-of label in the captured part)
+- Captures are verbatim, with link URLs removed and link text kept in brackets: `data/depth/official_raw/*.md`.
+- Rule file: `data/preregistration/RULES_v1.md`, registration commit `591d8740a097`.
+
+**Verification performed**
+- Packers, line by line: 55 printed names, each row compared with the page text as read; the parser output matches the captured cells by construction, and the captured cells match the page as read.
+- Repo versus official, all four clubs: `tools/build_depth_register.py` compares name, column and position in both directions (`data/depth/comparison.json`). Result: `data/depth_chart.json` has 8 differing cells and omits 2 Chiefs players; `data/evidence/depth_charts.json` has 2 differing Seattle cells.
+- Tests: `tests/test_depth_register.py` (8 tests) and the full suite (159 tests, OK, after installing `bs4` and `lxml` in the sandbox; 9 capture-snapshot tests error without them, on the base commit too).
+- Gates on the committed tree: `build_site_all.py --check` OK; `verify.py` 2,079 rows with official link, 80 unverified, 0 broken; `verify_combined.py` 2,659 links, 0 broken; `verify_official.py` 0 failed; `audit_official.py` 905 checks, 0 failed; `check_reachability.py` 0 problems; `check_generators.py`, `check_freshness.py`, `check_committed_site.py`, `check_strength_site.py`, `verify_dashboard.py` PASS; `check_depth_register.py` PASS (36 flags, 0 failures); `check_preregistration.py` PASS, and it fails on an edited rule and on an unregistered ranked row (both tested).
+
+**Requirement status changes (readiness register, `scripts/brief_07810d9f/register.py`):**
+- IN-09 Not met → Partial (4 clubs done; `depth_chart.json` not yet replaced).
+- IN-10 Not verified → Partial (4 clubs: 95 groups, 16 with more than one first-column player; 149 not reproduced).
+- IN-21 Partial (date and source on every row for four clubs; as-of label absent for KC and SEA).
+- PR-07 Not started → Partial (rule text registered; no live strategy yet).
+- PR-15 Not started → Partial (mechanism in place; no strategy registered).
+- PR-06 stays Not met: `data/s9cb/leaderboard.json` still ranks historical games; the current `data/leaderboard.json` passes the gate.
+- SI-09 Not met → Partial (depth alarm in CI; injury scraper not pinned).
+
+**Irregularities (published on Flagged for Review, non-blocking):** F53 Packers repo cells not on the page and one unverifiable rank; F54 Chiefs repo chart wrong in 5 places and 2 players omitted, plus duplicate names printed by the club; F55 Seattle evidence-file ranks disagree with the printed shared slot; F56 `verify_official.py` B4 compares ranks across positions; F57 149-slot count not reproducible from 4 clubs; F58 injury scraper not pinned; F59 pre-registration scope and design parameters.
+
+**Not done in this session (stated, not claimed):**
+- 28 of 32 club depth charts (route (a) of IN-13); the 32-club sweep is still open.
+- Texans depth (IN-08): not re-read; the existing record says image-only.
+- Price-snapshot store, closing lines, the price-data policy (PR-01, PR-10): no approved source.
+- Official game books, inactives and snap counts (IN-04, IN-18): no capture.
+- Pinning the injury scraper (F58); the 345 vs 347 row difference from 07810d9f remains open (IN-06).
+- Replacing `data/depth_chart.json` with the register: left for a reviewer (F53–F55), because other pages read that file.
+- Brief-level items not started here: the backtest corpus, two-stage leaderboard, shadow baseline, and the demotion-gate test on any live strategy.
+
+**Environment note:** `pip install --user --break-system-packages` was used for numpy, pandas, pyyaml, beautifulsoup4 and lxml in the sandbox only. Nothing was added to the repo for them; CI already installs numpy and pandas.
