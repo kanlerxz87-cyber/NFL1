@@ -1,0 +1,438 @@
+{
+  "club_code_map": {
+    "LA (13 Nov)": "LAR (15 Nov)"
+  },
+  "clubs_not_comparable": [
+    {
+      "club": "NO",
+      "reason": "13 Nov read is partial: table began mid-page; first read row was Kelvin Banks Jr. T — earlier rows not captured"
+    },
+    {
+      "club": "CIN",
+      "reason": "13 Nov read is partial: table header read but the first rows fall between page chunks"
+    }
+  ],
+  "conflicts_unresolved": [
+    {
+      "club": "LAC",
+      "conflict": "13 Nov read: 'No Injuries Reported' (0 rows); 15 Nov read lists 19 rows. Either the report changed between the reads or one read is wrong. Not resolved from the record.",
+      "sources": [
+        "https://www.nfl.com/injuries/",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "club": "BAL",
+      "conflict": "13 Nov read: 'No Injuries Reported' (0 rows); 15 Nov read lists 10 rows. Either the report changed between the reads or one read is wrong. Not resolved from the record.",
+      "sources": [
+        "https://www.nfl.com/injuries/",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    }
+  ],
+  "designations": {
+    "changed": 1,
+    "compared": 9,
+    "rows": [
+      {
+        "club": "WAS",
+        "differences": {},
+        "player": "Lucas Patrick",
+        "result": "unchanged",
+        "sources": [
+          "https://www.nfl.com/injuries/",
+          "https://www.nfl.com/injuries/league/2026/reg10"
+        ]
+      },
+      {
+        "club": "WAS",
+        "differences": {},
+        "player": "Colson Yankoff",
+        "result": "unchanged",
+        "sources": [
+          "https://www.nfl.com/injuries/",
+          "https://www.nfl.com/injuries/league/2026/reg10"
+        ]
+      },
+      {
+        "club": "NYG",
+        "differences": {},
+        "player": "Malik Harrison",
+        "result": "unchanged",
+        "sources": [
+          "https://www.nfl.com/injuries/",
+          "https://www.nfl.com/injuries/league/2026/reg10"
+        ]
+      },
+      {
+        "club": "NE",
+        "differences": {},
+        "player": "Ben Brown",
+        "result": "unchanged",
+        "sources": [
+          "https://www.nfl.com/injuries/",
+          "https://www.nfl.com/injuries/league/2026/reg10"
+        ]
+      },
+      {
+        "club": "NE",
+        "differences": {},
+        "player": "Carlton Davis III",
+        "result": "unchanged",
+        "sources": [
+          "https://www.nfl.com/injuries/",
+          "https://www.nfl.com/injuries/league/2026/reg10"
+        ]
+      },
+      {
+        "club": "NE",
+        "differences": {},
+        "player": "TreVeyon Henderson",
+        "result": "unchanged",
+        "sources": [
+          "https://www.nfl.com/injuries/",
+          "https://www.nfl.com/injuries/league/2026/reg10"
+        ]
+      },
+      {
+        "club": "DET",
+        "differences": {
+          "practice_status": {
+            "13_nov": "Full Participation in Practice",
+            "15_nov": "Did Not Participate In Practice"
+          }
+        },
+        "player": "Kerby Joseph",
+        "result": "changed",
+        "sources": [
+          "https://www.nfl.com/injuries/",
+          "https://www.nfl.com/injuries/league/2026/reg10"
+        ]
+      },
+      {
+        "club": "DET",
+        "differences": {},
+        "player": "Cade Mays",
+        "result": "unchanged",
+        "sources": [
+          "https://www.nfl.com/injuries/",
+          "https://www.nfl.com/injuries/league/2026/reg10"
+        ]
+      },
+      {
+        "club": "DET",
+        "differences": {},
+        "player": "D.J. Reed",
+        "result": "unchanged",
+        "sources": [
+          "https://www.nfl.com/injuries/",
+          "https://www.nfl.com/injuries/league/2026/reg10"
+        ]
+      }
+    ]
+  },
+  "not_claimed": "A player-by-player delta. The 13 Nov read has no full transcript; only the 9 designations above can be compared player by player. Players listed on 15 Nov but not on 13 Nov cannot be told apart from players the 13 Nov read did not record.",
+  "per_club_differences": [
+    {
+      "club": "WAS",
+      "did_not_participate_difference": 0,
+      "full_difference": 0,
+      "limited_difference": 0,
+      "rows_difference": 0,
+      "sources": [
+        "https://www.nfl.com/injuries/",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "club": "NYG",
+      "did_not_participate_difference": 0,
+      "full_difference": 0,
+      "limited_difference": 0,
+      "rows_difference": 0,
+      "sources": [
+        "https://www.nfl.com/injuries/",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "club": "NE",
+      "did_not_participate_difference": 0,
+      "full_difference": 4,
+      "limited_difference": -4,
+      "rows_difference": 0,
+      "sources": [
+        "https://www.nfl.com/injuries/",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "club": "DET",
+      "did_not_participate_difference": 0,
+      "full_difference": -1,
+      "limited_difference": 1,
+      "rows_difference": 0,
+      "sources": [
+        "https://www.nfl.com/injuries/",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "club": "KC",
+      "did_not_participate_difference": 1,
+      "full_difference": 0,
+      "limited_difference": 0,
+      "rows_difference": 1,
+      "sources": [
+        "https://www.nfl.com/injuries/",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "club": "ATL",
+      "did_not_participate_difference": -1,
+      "full_difference": 4,
+      "limited_difference": -1,
+      "rows_difference": 2,
+      "sources": [
+        "https://www.nfl.com/injuries/",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "club": "MIN",
+      "did_not_participate_difference": -1,
+      "full_difference": 2,
+      "limited_difference": 3,
+      "rows_difference": 4,
+      "sources": [
+        "https://www.nfl.com/injuries/",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "club": "GB",
+      "did_not_participate_difference": -1,
+      "full_difference": 1,
+      "limited_difference": 1,
+      "rows_difference": 1,
+      "sources": [
+        "https://www.nfl.com/injuries/",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "club": "JAX",
+      "did_not_participate_difference": -4,
+      "full_difference": 2,
+      "limited_difference": 2,
+      "rows_difference": 0,
+      "sources": [
+        "https://www.nfl.com/injuries/",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "club": "TEN",
+      "did_not_participate_difference": 0,
+      "full_difference": 2,
+      "limited_difference": -2,
+      "rows_difference": 0,
+      "sources": [
+        "https://www.nfl.com/injuries/",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "club": "BUF",
+      "did_not_participate_difference": 2,
+      "full_difference": 6,
+      "limited_difference": -6,
+      "rows_difference": 2,
+      "sources": [
+        "https://www.nfl.com/injuries/",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "club": "NYJ",
+      "did_not_participate_difference": -2,
+      "full_difference": 6,
+      "limited_difference": -3,
+      "rows_difference": 1,
+      "sources": [
+        "https://www.nfl.com/injuries/",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "club": "MIA",
+      "did_not_participate_difference": 1,
+      "full_difference": 3,
+      "limited_difference": -4,
+      "rows_difference": 0,
+      "sources": [
+        "https://www.nfl.com/injuries/",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "club": "IND",
+      "did_not_participate_difference": -1,
+      "full_difference": 1,
+      "limited_difference": 1,
+      "rows_difference": 1,
+      "sources": [
+        "https://www.nfl.com/injuries/",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "club": "CAR",
+      "did_not_participate_difference": 0,
+      "full_difference": 0,
+      "limited_difference": 0,
+      "rows_difference": 0,
+      "sources": [
+        "https://www.nfl.com/injuries/",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "club": "HOU",
+      "did_not_participate_difference": 2,
+      "full_difference": 6,
+      "limited_difference": -5,
+      "rows_difference": 3,
+      "sources": [
+        "https://www.nfl.com/injuries/",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "club": "CLE",
+      "did_not_participate_difference": -2,
+      "full_difference": 7,
+      "limited_difference": -5,
+      "rows_difference": 0,
+      "sources": [
+        "https://www.nfl.com/injuries/",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "club": "LAR",
+      "did_not_participate_difference": 2,
+      "full_difference": 1,
+      "limited_difference": 1,
+      "rows_difference": 4,
+      "sources": [
+        "https://www.nfl.com/injuries/",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "club": "AZ",
+      "did_not_participate_difference": -3,
+      "full_difference": 2,
+      "limited_difference": 1,
+      "rows_difference": 0,
+      "sources": [
+        "https://www.nfl.com/injuries/",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "club": "SEA",
+      "did_not_participate_difference": -2,
+      "full_difference": 7,
+      "limited_difference": -5,
+      "rows_difference": 0,
+      "sources": [
+        "https://www.nfl.com/injuries/",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "club": "LV",
+      "did_not_participate_difference": 1,
+      "full_difference": 2,
+      "limited_difference": -2,
+      "rows_difference": 1,
+      "sources": [
+        "https://www.nfl.com/injuries/",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "club": "SF",
+      "did_not_participate_difference": -5,
+      "full_difference": 5,
+      "limited_difference": 0,
+      "rows_difference": 0,
+      "sources": [
+        "https://www.nfl.com/injuries/",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "club": "DAL",
+      "did_not_participate_difference": -2,
+      "full_difference": 3,
+      "limited_difference": 0,
+      "rows_difference": 1,
+      "sources": [
+        "https://www.nfl.com/injuries/",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "club": "PIT",
+      "did_not_participate_difference": -1,
+      "full_difference": 3,
+      "limited_difference": -2,
+      "rows_difference": 0,
+      "sources": [
+        "https://www.nfl.com/injuries/",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "club": "LAC",
+      "conflict_flag": "13 Nov 'No Injuries Reported' vs 15 Nov listed rows; see conflicts_unresolved",
+      "did_not_participate_difference": 5,
+      "full_difference": 12,
+      "limited_difference": 2,
+      "rows_difference": 19,
+      "sources": [
+        "https://www.nfl.com/injuries/",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "club": "BAL",
+      "conflict_flag": "13 Nov 'No Injuries Reported' vs 15 Nov listed rows; see conflicts_unresolved",
+      "did_not_participate_difference": 2,
+      "full_difference": 7,
+      "limited_difference": 1,
+      "rows_difference": 10,
+      "sources": [
+        "https://www.nfl.com/injuries/",
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    }
+  ],
+  "reads": {
+    "13_nov": {
+      "retrieved": "2026-11-13T12:20Z",
+      "source_url": "https://www.nfl.com/injuries/",
+      "type": "per-club row counts (26 complete clubs) and 9 designations"
+    },
+    "15_nov": {
+      "captured": "2026-11-15 (date from the session clock; time of day not recorded by the capture tool)",
+      "source_url": "https://www.nfl.com/injuries/league/2026/reg10",
+      "type": "full transcript, 347 rows"
+    }
+  },
+  "what": "Differences between the 13 Nov and 15 Nov official nfl.com reads. Differences only; the levels are in team_view.json."
+}
