@@ -3157,7 +3157,7 @@ main reproducibility gate red after refreshes.
 
 | ID | Task | Status | Owner | File scope | Notes |
 |---|---|---|---|---|---|
-| A1 | Reconcile the daily data-refresh workflow with the canonical site build; add a regression check that prevents workflow/render drift | done | `4227cfea` | `.github/workflows/collect-data.yml`, `tests/test_collect_workflow.py`, canonical generated `data/readiness.json`, `data/capture/comparison.json`, `pages/snapshots.html` | Daily refresh invokes the canonical full-site builder once; generated readiness, capture comparison and snapshot ledger were refreshed from existing verified inputs |
+| A1 | Reconcile the daily data-refresh workflow with the canonical site build; add a regression check that prevents workflow/render drift | done | `4227cfea` | `.github/workflows/collect-data.yml`, `tests/test_collect_workflow.py`, canonical generated `data/readiness.json`, `data/capture/comparison.json`, `pages/snapshots.html`, `research/injuries.html` | Daily refresh invokes the canonical full-site builder once; generated readiness, capture comparison, snapshot ledger and post-rebase research page were refreshed from existing inputs |
 | A2 | Run relevant project gates and record exact results, sources and any remaining irregularities | done | `4227cfea` | this section of `COORDINATION.md` | Full test suite and build/verification gates recorded below; existing official-data flags remain open |
 | A3 | PR / merge / Pages confirmation if checks permit | in progress | `4227cfea` | this section of `COORDINATION.md` | PR #72 open; final collect run 43716634484 and all five PR CI runs passed; the bot's 7ed8de7 snapshot refresh was locally reverified |
 
@@ -3207,19 +3207,19 @@ The dated fixture references are the NFL's [2026 standings](https://www.nfl.com/
 and [2026 schedule](https://www.nfl.com/schedules/2026). No claim is made here that these pages were
 re-fetched live in this session.
 
-**Follow-up validation after main advanced (2026-11-15).** Main advanced through PR #70, PR #71
-and PR #60 to `20b4817` while this branch was open. Rebased onto that current main, retaining its
-readiness/snapshot work and resolving the workflow/coordination conflicts without dropping those
-changes. The readiness and snapshot generators are already part of `tools/build_site_all.py`, so the
-daily job invokes them through that single canonical entry point. The older intermediate model-refresh
-bot commit was omitted during the later rebase rather than replayed over the updated main data; the
-12:56 UTC immutable snapshot heartbeat was preserved. The rebased tree passes **154 unit tests**,
-`tools/build_site_all.py` + `--check`, YAML parsing, freshness (23), generator ownership,
-committed-site, site/Room/Strength validation, reachability (170 pages), independent figure audit
-(47/47), and combined verification (2,659 local links, 0 broken). `tools/verify.py` checks 2,071
-rows, all with official source URLs; 73 values remain explicitly unverified. Existing F19 unstamped
-legacy pages and official-data discrepancies remain visible; no result or injury designation was
-filled in here.
+**Follow-up validation after main advanced (2026-11-15).** Main advanced through PRs #70, #71,
+#60 and #73 to `731d623` while this branch was open. Rebased onto that current main, preserving the
+upstream readiness/snapshot and research changes. The readiness and snapshot generators are already
+part of `tools/build_site_all.py`, so the daily job invokes them through that single canonical entry
+point. Main's 12:56:16Z snapshot heartbeat superseded the branch's earlier 12:56:11Z copy; the newer
+main-side heartbeat was kept. The refreshed 13:00 model outputs from the successful collect run were
+retained. Main's newer source data required rebuilding `pages/snapshots.html` and `research/injuries.html`;
+after regeneration, `tools/build_site_all.py --check` passed. The rebased tree passes **157 unit
+tests**, YAML parsing, freshness (23), generator ownership, committed-site, site/Room/Strength
+validation, reachability (171 pages), independent figure audit (47/47), and combined verification
+(2,659 local links, 0 broken). `tools/verify.py` checks 2,074 rows, all with official source URLs; 73
+values remain explicitly unverified. Existing F19 unstamped legacy pages and official-data
+inconsistencies remain visible; no result or injury designation was manually filled in here.
 
 **Live workflow runs.** The initial Actions run
 [43715989007](https://github.com/kanlerxz87-cyber/NFL1/actions/runs/43715989007) passed all steps,
@@ -3233,16 +3233,17 @@ underlying statuses are not interpreted as new changes. Final-head CI and Pages 
 in A3 below when available.
 
 **A3 — PR / final-head validation (in progress).** Opened [PR #72](https://github.com/kanlerxz87-cyber/NFL1/pull/72)
-from `arena/4227cfea-nfl1` to `main`. After the latest rebase and regenerated snapshot outputs,
-GitHub Actions run [43716634484](https://github.com/kanlerxz87-cyber/NFL1/actions/runs/43716634484)
-passed the full collect workflow. It produced bot commit `7ed8de7`; the latest immutable snapshot
-heartbeat is `2026-11-15T12:56:11Z` (347 report rows), and the data dashboard build stamp is
-`2026-11-15T13:00:14Z`. The snapshot points to nfl.com. On code head
-`9ffcc83`, all five PR workflows passed: Decision Room build/gate `43716634517`, collect `43716634484`,
-source audit `43716634525`, decision dashboard `43716634454`, and full site verification `43716634509`.
-After the bot refresh, the current branch was pulled locally; 154 tests and the full reproducible site
-build/gates passed again against `7ed8de7` (current local head at this record). No test or build
-failure is outstanding.
+from `arena/4227cfea-nfl1` to `main`. Collect workflow run
+[43716634484](https://github.com/kanlerxz87-cyber/NFL1/actions/runs/43716634484) passed on code head
+`9ffcc83`, producing model outputs stamped `2026-11-15T13:00:14Z`. The later main rebase through PR
+#73 brought in a newer immutable snapshot heartbeat at `2026-11-15T12:56:16Z` (347 rows; source:
+nfl.com), which was kept; the older 12:56:11Z heartbeat from the branch was superseded. All five PR
+workflows passed on the pre-PR-73 head `9ffcc83`: Decision Room build/gate `43716634517`, collect
+`43716634484`, source audit `43716634525`, decision dashboard `43716634454`, and full site verification
+`43716634509`. After rebasing onto `731d623`, the regenerated pages and current tree pass 157 unit
+tests, full `build_site_all.py --check`, freshness, source/link, Room, Strength and availability gates.
+The updated branch is being pushed for final-head CI; its checks and Pages deployment will be recorded
+here after they complete.
 
 **Non-blocking review notes from Actions.** The collect run emitted the existing warning
 “Injury availability source needs review (mirrored feed, latest complete week (6))”; this does not
