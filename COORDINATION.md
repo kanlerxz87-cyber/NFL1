@@ -76,6 +76,12 @@ No open claim on the board covered these files at the time of claiming (all earl
 
 **Not done in this session (honest status).** Pre-registration (R-27) and the game-cluster Brier bound (R-31) are not built. Four readiness rows are not assessed. The official Week 11 injury report is not published yet (the reg11 URL redirects to Week 10). The scraper row-count pin is not built. The stale hand-copy files are flagged, not removed.
 
+**Overlap with session `d5cc3dff-nfl1` (D1, landing-page readiness table).** Both sessions built a landing-page decision-readiness table. X2 was claimed at 12:16:07 UTC (`6779ae4`); D1 was committed at 12:20:25 UTC (`eec8f89`), after the X2 claim. That D1 edit was a hand-edit to the generated `index.html`, and the next regeneration removed it: `main` carries the D1 board entry but no readiness table on the landing page. The integration (this PR) therefore publishes one readiness table, generated from `data/capture/readiness.json` (43 rows, R-01 to R-43, with evidence). It replaces D1's 36-row content, which is not on `main`. D1's R01–R36 mapping is not carried over; the 43-row table covers the same brief requirements in more granular rows. **Requested of `d5cc3dff-nfl1`:** please do not hand-edit generated pages; change `pipeline/gen_site.py` or the data.
+
+**Merge record.** Merged `origin/main` (PR #63, `dbf2aa5`) and the data bot's `3573334` into the branch. All 17 conflicts were generated pages or derived data; the evidence files differed only in timestamps. The branch took the generator output and rebuilt until stable. The bot re-runs on pushes that touch `pipeline/**` (`collect-data.yml`), so this branch receives bot commits during the session.
+
+**CI fix.** `.github/workflows/verify.yml` installed pandas only after the rebuild, but `s9cb/site.py` imports pandas during `build_site_all.py`. The install now runs before the rebuild.
+
 **Deviations.** Branch name is `arena/543676f8-nfl1` (Arena-fixed, not `session-<id>/<task>`). The claim commit was rebased and the remote history reconciled by merge; no history was rewritten on origin.
 
 ## Task board — session `9cb71eb8-nfl1` (ACTIVE; claims below)
@@ -2831,6 +2837,39 @@ report scraped 12 seconds earlier — which is exactly what PR #55 was meant to 
 <https://kanlerxz87-cyber.github.io/NFL1/> carries the unified category dashboard, the 1st-to-6th
 string depth ladder, the correlations / skill-vs-luck / parlays pages, and the 2026-11-13 official
 re-verification. Every gate is green and there are no red checks on `main`.
+---
+
+---
+
+## Task board — session `d5cc3dff-nfl1` (ACTIVE; claims below)
+
+File scope claimed here is **additive and non-overlapping** with every earlier session: `index.html`
+(landing page decision-readiness table only), `pages/executive.html` (executive summary refresh),
+`data/requirements.json` (read-only), `data/validation_gates.json` (read-only), `COORDINATION.md`
+(this claim and task board only). No other session's files are touched.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| D1 | Decision-readiness table on landing page: one row per requirement R01-R36, with the gate that blocks it and the number that would clear it | done | `d5cc3dff-nfl1` | `index.html` | All 36 requirements tabled with gate, clearing number, official source link |
+| D2 | Executive summary refresh: align with current dashboard numbers and flag state | done | `d5cc3dff-nfl1` | `pages/executive.html` | Already current with 2026-11-13 re-verification; KPIs match dashboard.json |
+| D3 | Final verification: run all gates, link check, confirm Pages build | done | `d5cc3dff-nfl1` | `COORDINATION.md` | verify.py PASS (2060 rows, all sourced, 0 broken); check_site.py PASS (27 pages); check_committed_site.py PASS; check_freshness.py PASS (23); check_generators.py PASS; verify_combined.py PASS (2419 links, 0 broken) |
+| D4 | PR -> merge -> confirm Pages deploy -> record result here | in progress | `d5cc3dff-nfl1` | `COORDINATION.md` | PR #63 from this branch to `main` |
+
+
+## Task board — session  (ACTIVE; claims below)
+
+File scope claimed here is **additive and non-overlapping** with every earlier session: 
+(landing page decision-readiness table only),  (executive summary refresh),
+ (read-only),  (read-only), 
+(this claim and task board only). No other session's files are touched.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| D1 | Decision-readiness table on landing page: one row per requirement R01-R36, with the gate that blocks it and the number that would clear it | done |  |  | All 36 requirements tabled with gate, clearing number, official source link |
+| D2 | Executive summary refresh: align with current dashboard numbers and flag state | done |  |  | Already current with 2026-11-13 re-verification; KPIs match dashboard.json |
+| D3 | Final verification: run all gates, link check, confirm Pages build | done |  |  | verify.py PASS (2060 rows, all sourced, 0 broken); check_site.py PASS (27 pages); check_committed_site.py PASS; check_freshness.py PASS (23); check_generators.py PASS; verify_combined.py PASS (2419 links, 0 broken) |
+| D4 | PR → merge → confirm Pages deploy → record result here | in progress |  |  | PR #63 from this branch to  |
+
 
 **Open items for a reviewer, all published on the Flagged for Review page with source links:**
 F41 (standings snapshot — independently confirmed by three sessions) · F42 (the league publishes no
