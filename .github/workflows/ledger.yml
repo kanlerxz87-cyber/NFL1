@@ -50,11 +50,26 @@ jobs:
         run: python3 ledger/build.py
       - name: The committed pages must equal the freshly generated pages
         run: |
-          if ! git diff --quiet -- ledger/ data/session-c84a41a4/; then
-            echo "::error::ledger/ or data/session-c84a41a4/ is stale. Re-run the two study scripts and ledger/build.py, then commit."
-            git diff --stat -- ledger/ data/session-c84a41a4/
+          # `generated_at` is the only field that legitimately changes between two runs of
+          # the study (it records when the run happened). Every number must be identical, so
+          # the timestamps are normalised before the comparison and everything else is
+          # compared byte for byte.
+          for f in data/session-c84a41a4/results.json data/session-c84a41a4/qb_replacement.json; do
+            git show HEAD:"$f" | sed -E 's/"generated_at": "[^"]*"/"generated_at": "NORMALISED"/' > /tmp/committed.json
+            sed -E 's/"generated_at": "[^"]*"/"generated_at": "NORMALISED"/' "$f" > /tmp/fresh.json
+            if ! diff -q /tmp/committed.json /tmp/fresh.json >/dev/null; then
+              echo "::error::$f does not reproduce from the committed inputs. A number changed, not just a timestamp."
+              diff -u /tmp/committed.json /tmp/fresh.json | head -40
+              exit 1
+            fi
+            echo "OK: $f reproduces exactly apart from generated_at"
+          done
+          if ! git diff --quiet -- ledger/; then
+            echo "::error::ledger/ is stale. Re-run ledger/build.py and commit the result."
+            git diff --stat -- ledger/
             exit 1
           fi
+          echo "OK: ledger/ is byte-identical to a fresh build"
       - name: Gate the site (links, source columns, sourceless rows, placeholders, reachability)
         run: python3 ledger/verify.py
       - name: Fail if the pre-registration was edited after the results were computed

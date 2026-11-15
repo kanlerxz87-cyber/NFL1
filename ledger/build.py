@@ -700,9 +700,11 @@ who the official report says cannot play, what that is worth when it is put into
 who actually took the snaps.</p>
 
 <h2>1. The official designation is a level. It is published, and it is not a signal.</h2>
-<p>Source: <a href="{OFFICIAL['reg10']}">the official nfl.com Week 10 report</a>, captured
-{esc(inj.get('generated_at'))}, sha256 <code>{esc((inj.get('html_sha256') or '')[:16])}…</code>.
-{len(rows)} rows across {inj.get('counts', {}).get('teams', 0)} clubs.</p>
+<p>Source: <a href="{OFFICIAL['reg10']}">the official nfl.com Week 10 report</a>.
+{len(rows)} rows across {inj.get('counts', {}).get('teams', 0)} clubs. The exact file this page was
+built from, with its capture time and sha256, is listed on
+<a href="verification.html">Verification</a>; that page is regenerated whenever the capture is
+refreshed, so the hash is recorded there rather than frozen here.</p>
 """]
     trs = []
     for k, v in sorted(desig.items(), key=lambda kv: (kv[0] is None, kv[0])):
@@ -815,6 +817,9 @@ official game centre entry point for that game's schedule.</p>
 
 def build_verification(R, rep):
     reg = R["registration"]
+    _inj = load("data/model/official_injuries.json", {}) or {}
+    inj_ts = _inj.get("generated_at") or "not recorded"
+    inj_hash = (_inj.get("html_sha256") or "")[:16] + "…" if _inj.get("html_sha256") else "not recorded"
     body = [f"""
 <h1>Verification</h1>
 <p class="lead">What was checked, against what, and by which command. Every claim on this page can
@@ -877,11 +882,13 @@ lists Jacoby Brissett at QB rank 1, not Lamar Jackson or Tyler Huntley</td>
 <tr><td><code>python3 s9cb/c84_replacement_study.py</code></td><td>qb_replacement.json</td><td>input hash checked on write</td><td><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/s9cb/c84_replacement_study.py">c84_replacement_study.py</a></td></tr>
 <tr><td><code>python3 ledger/build.py</code></td><td>this site</td><td>fails on a table with no Source column</td><td><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/ledger/build.py">ledger/build.py</a></td></tr>
 <tr><td><code>python3 ledger/verify.py</code></td><td>pass/fail</td><td>broken links, sourceless rows, placeholders</td><td><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/ledger/verify.py">ledger/verify.py</a></td></tr>
+<tr><td><code>data/model/official_injuries.json</code></td><td>the injury capture this site quotes</td><td>capture time and sha256 of the official page it was taken from: <code>{esc(inj_ts)}</code> / <code>{esc(inj_hash)}</code></td><td><a href="{OFFICIAL['reg10']}">nfl.com Week 10 report</a></td></tr>
 </tbody></table>
 <div class="note">
 <strong>Determinism.</strong> Every bootstrap uses a fixed seed ({20261115}) and the fit uses no
 randomness, so two runs on the same inputs produce byte-identical output apart from the
-<code>generated_at</code> timestamp.
+<code>generated_at</code> timestamp. A fresh run of the two study scripts reproduces every number
+on this site; the only field that changes is <code>generated_at</code>.
 </div>
 """]
     return "\n".join(body)
