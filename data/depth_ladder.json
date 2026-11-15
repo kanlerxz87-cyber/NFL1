@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-14T17:02:40+00:00",
+ "generated_at": "2026-11-15T12:24:29+00:00",
  "season": 2026,
  "week": 10,
  "method": {
@@ -30,15 +30,15 @@
   "offense_slots": 362,
   "defense_slots": 368,
   "special_teams_slots": 203,
-  "slots_started_by_a_backup": 37,
+  "slots_started_by_a_backup": 38,
   "offense_slots_started_by_a_backup": 21,
-  "defense_slots_started_by_a_backup": 13,
+  "defense_slots_started_by_a_backup": 14,
   "slots_with_3rd_string_or_worse": 0,
-  "slots_starter_at_risk": 60,
-  "offense_slots_starter_at_risk": 22,
+  "slots_starter_at_risk": 61,
+  "offense_slots_starter_at_risk": 23,
   "defense_slots_starter_at_risk": 34,
   "chart_gap_slots": 1,
-  "players_unavailable_anywhere_in_a_ladder": 64,
+  "players_unavailable_anywhere_in_a_ladder": 69,
   "merged_name_cells_flagged": 16
  },
  "clubs": [
@@ -107,16 +107,16 @@
    "offense_slots": 12,
    "defense_slots": 13,
    "special_teams_slots": 6,
-   "slots_missing_starter": 0,
+   "slots_missing_starter": 1,
    "offense_missing_starter": 0,
-   "defense_missing_starter": 0,
-   "slots_starter_at_risk": 1,
-   "offense_starter_at_risk": 0,
+   "defense_missing_starter": 1,
+   "slots_starter_at_risk": 2,
+   "offense_starter_at_risk": 1,
    "defense_starter_at_risk": 1,
-   "deepest_string_starting": null,
+   "deepest_string_starting": "2nd string",
    "offense_deepest_string_starting": null,
-   "defense_deepest_string_starting": null,
-   "unavailable_in_ladder": 0,
+   "defense_deepest_string_starting": "2nd string",
+   "unavailable_in_ladder": 1,
    "ladder_depth_4_plus": 3,
    "source": "https://www.nfl.com/teams/"
   },
@@ -506,7 +506,7 @@
    "deepest_string_starting": null,
    "offense_deepest_string_starting": null,
    "defense_deepest_string_starting": null,
-   "unavailable_in_ladder": 0,
+   "unavailable_in_ladder": 4,
    "ladder_depth_4_plus": 3,
    "source": "https://www.nfl.com/teams/"
   },
@@ -978,6 +978,36 @@
     }
    ],
    "chart_url": "https://www.atlantafalcons.com/team/depth-chart",
+   "report_published": true
+  },
+  {
+   "abbr": "BAL",
+   "club": "Baltimore Ravens",
+   "unit": "defense",
+   "position": "SS",
+   "slot": 23,
+   "starter_rank": 2,
+   "starter_name": "Keondre Jackson",
+   "starter_status": "Not on the report",
+   "string_label": "2nd string",
+   "out_above": "Jaylinn Hawkins (out)",
+   "ladder": [
+    {
+     "rank": 1,
+     "name": "Jaylinn Hawkins",
+     "status": "Out",
+     "injury": "Knee",
+     "source": "https://www.nfl.com/players/jaylinn-hawkins/"
+    },
+    {
+     "rank": 2,
+     "name": "Keondre Jackson",
+     "status": "Not on the report",
+     "injury": null,
+     "source": "https://www.baltimoreravens.com/team/depth-chart"
+    }
+   ],
+   "chart_url": "https://www.baltimoreravens.com/team/depth-chart",
    "report_published": true
   },
   {

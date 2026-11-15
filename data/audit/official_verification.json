@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-14T17:02:40+00:00",
+ "generated_at": "2026-11-15T12:24:29+00:00",
  "official_sources": {
   "standings": "https://www.nfl.com/standings/league/2026/reg",
   "injuries": "https://www.nfl.com/injuries/",
@@ -87,7 +87,7 @@
    "area": "B2. injuries",
    "check": "data/model/official_injuries.json (automated scrape)",
    "status": "FLAG",
-   "rows_checked": 345,
+   "rows_checked": 347,
    "detail": "value mismatches: NE A.J. Brown injury: repo='Ankle, Knee' official=''; NE A.J. Brown game: repo='Questionable' official=''; NE Kevin Byard injury: repo='Chest' official=''; NE Kevin Byard practice: repo='Full Participation in Practice' official='Limited Participation in Practice'; NE Kevin Byard game: repo='Questionable' official='' | repo rows not on official page: [('KC', 'Jaydn Ott'), ('KC', 'Kenneth Walker III'), ('ATL', 'Kendal Daniels'), ('ATL', 'Jake Matthews'), ('ATL', 'Liam McCullough')]"
   },
   {
@@ -192,7 +192,7 @@
    "area": "D. availability",
    "check": "practice-only rows are not labelled as game designations",
    "status": "PASS",
-   "rows_checked": 117,
+   "rows_checked": 116,
    "detail": ""
   },
   {
@@ -206,7 +206,7 @@
    "area": "E. counts",
    "check": "starters flagged matches availability detail",
    "status": "PASS",
-   "rows_checked": 117,
+   "rows_checked": 116,
    "detail": ""
   }
  ]
