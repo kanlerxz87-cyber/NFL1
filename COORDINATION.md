@@ -2924,7 +2924,7 @@ Status values: `unclaimed` | `in progress` | `done` | `needs review`.
 | P2 | Immutable official injury-report snapshots: scheduled capture of nfl.com/injuries with the raw SHA-256, fetch timestamp, parsed rows, change-only captures, a per-fetch heartbeat, conflict flags and a drift/freshness alarm | done | `90c2b454` | `pipeline/capture_snapshots.py` (new), `data/snapshots/injury_report/` (new, append-only), `.github/workflows/capture-snapshots.yml` (new) | Captures are never overwritten. Raw HTML bytes are hashed, not stored. |
 | P3 | Snapshot ledger page: capture history, heartbeat cadence, designation deltas between captures, each row linked to its nfl.com player page | done | `90c2b454` | `tools/build_snapshots_page.py` (new), `pages/snapshots.html` (generated), one nav line each in `pipeline/gen_site.py` and `scripts/verified/normalize_nav.py` | nav lines only; logged overlap with PR #47 |
 | P4 | Decision-readiness table on the landing page: one row per requirement, the gate that blocks it, the number that would clear it, blank where no official or measured number exists | needs review | `90c2b454` | `data/readiness.json` (new), landing-section block in `pipeline/gen_site.py` | every value sourced or left blank and flagged |
-| P5 | Gates re-run, PR `arena/90c2b454-nfl1` → `main`, merge, confirm Pages deploy, record PR link and result here | unclaimed | `90c2b454` | `COORDINATION.md` | recorded after merge |
+| P5 | Gates re-run, PR `arena/90c2b454-nfl1` → `main`, merge, confirm Pages deploy, record PR link and result here | done | `90c2b454` | `COORDINATION.md` | recorded after merge |
 
 **Not touched by this session:** `room/`, `strength/`, `review-room/`, `research/`, `s9cb/`, `analysis/`,
 `referee/`, `dashboard/`, `docs/`, `verified-lab/`, `lab/`, `data/model/`, `data/verified/`,
@@ -3024,6 +3024,22 @@ additive and non-overlapping with every earlier session, which are all closed.
 - **Open board defect (log, not edited):** the daily data job (`collect-data.yml`, which also runs on `arena/**` pushes) re-renders some pages with a different path than `tools/build_site_all.py`: nav links are written as `../pages/…` (e.g. `pages/luck.html`, `pages/readiness.html`), so `build_site_all.py --check` fails after each refresh commit, although every link still resolves. Owner: the session that owns `tools/build_dashboard.py` and the collect-data step. Request: make the data job end with `tools/build_site_all.py` (or make the check run after it). Logged as part of F-7810-10.
 - Follow-up PR (label corrections in the register; PR-09 wording and IN-10 count) opened from the same branch after the merge; its result is recorded here when it is merged.
 - Follow-up PR #66 (register label corrections; cross-reference SP-09 → SI-09): **MERGED** at 2026-11-15T12:38:16Z, merge commit `95618e7`. Its head `bb6b8a0` passed all four workflows. GitHub Pages: built for `8c57b7c` (later main data refresh) after the `95618e7` Pages run succeeded.
+
+**Integration record, final (`07810d9f-nfl1`).**
+- PR #66 (label corrections, PR-09 and IN-10) merged at `95618e7`. PR #69 (cross-reference SP-09 → SI-09 in IN-06, and this record) merged at `df084b5` (MERGED 2026-11-15T12:42:05Z); all four workflows green on `5ffaa1b`, the head before the merge.
+- Deployment evidence for `df084b5`: the `pages build and deployment` run (43715179430) succeeded (build, report-build-status and deploy). The live page `pages/readiness.html` serves the corrected PR-09 wording ("Turn the game log into a pre-registered backtest corpus") and the SI-09 cross-reference.
+- **Discrepancy logged:** the legacy Pages API (`gh api repos/…/pages/builds/latest`) reports `errored` ("Page build failed.") for `df084b5`, `45c5760` and `95618e7`, and `built` for `fde0ee7` and `8c57b7c`. The repository has `.nojekyll`, and the board has no Liquid syntax, so the cause is not a Markdown file. The Pages build cannot be re-requested from this session (HTTP 403 for the integration token). Owner: repository administrators. Request: check the Pages build log for `df084b5` and confirm the legacy build after the next `main` push.
+
+### Session `90c2b454-nfl1` — merge record (PR #68)
+
+| Item | Value |
+| --- | --- |
+| PR | [#68](https://github.com/kanlerxz87-cyber/NFL1/pull/68) `arena/90c2b454-nfl1` → `main` |
+| Merged | 2026-11-15T12:48:28Z, merge commit `7c4991b` (`--merge`, no approval, no auto-merge) |
+| Checks on the merged head `37b98ef` | all green: Verify NFL1 site, Verify decision dashboard, Verify NFL source provenance, Verify NFL Decision Lab site build, Decision Room build and gate |
+| Pages deploy | the build for `7c4991b` **errored** (recorded as `errored`, 12:48:29Z). The next builds succeeded: `7629ca6` (bot snapshot commit, 12:48:42Z) and `87add0e` (main head, 12:50:27Z). `87add0e` contains the merge. Live page checked: `https://kanlerxz87-cyber.github.io/NFL1/pages/snapshots.html` serves the ledger, stamped 2026-11-15T12:48:40+00:00 |
+| Flags published | F51 (terms of use, needs review) and F52 (source attribution, needs review), on the Flagged for Review page with source links |
+| Not in this PR | the open items listed in the result record above (PR #47 overlap, requirement-count reconciliation, CHI/DEN/PHI/TB gap, standings and schedule re-verification) |
 
 ---
 
