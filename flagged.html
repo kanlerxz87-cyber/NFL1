@@ -69,6 +69,7 @@
 <a href="pages/review.html">Review</a>
 <a href="pages/sections.html">Sections</a>
 <a href="pages/session-57c05555.html">Session 57C05555</a>
+<a href="pages/snapshots.html">Snapshots</a>
 <a href="pages/standings.html">Standings</a>
 <a href="pages/strategies.html">Strategies</a>
 <a href="pages/suggestions.html">Suggestions</a>
@@ -85,17 +86,17 @@
   <div class="main">
     <div class="topbar">
       <div class="crumb">NFL1 / <b>Flagged for Review</b></div>
-      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">66 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">71 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
     </div>
     <main class="content" id="main">
       <div class="kicker">Assurance</div>
       <h1>Flagged for Review</h1>
       <p class="lede">Clearly labelled irregularities, official-page conflicts, unverified values and coordination issues — each with an official source link for manual review, none blocking the merge.</p>
       <div class="callout flag"><b>Flagged for Review.</b> These irregularities and unverified items do not block the merge or the live site. Each has an official source link for manual review and a suggested action. A status of <em>needs review</em> means exactly this: published here, not blocking.</div>
-<div class="cards"><div class="card"><div class="label">Flagged items</div><div class="value">66</div><div class="detail">All with source links</div></div><div class="card"><div class="label">Official-page irregularities</div><div class="value">7</div><div class="detail">F02–F08</div></div><div class="card"><div class="label">Missing official data</div><div class="value">5</div><div class="detail">F09–F11, F14, F15</div></div><div class="card"><div class="label">Combined-site review</div><div class="value">26</div><div class="detail">F25–F36</div></div></div>
+<div class="cards"><div class="card"><div class="label">Flagged items</div><div class="value">71</div><div class="detail">All with source links</div></div><div class="card"><div class="label">Official-page irregularities</div><div class="value">7</div><div class="detail">F02–F08</div></div><div class="card"><div class="label">Missing official data</div><div class="value">5</div><div class="detail">F09–F11, F14, F15</div></div><div class="card"><div class="label">Combined-site review</div><div class="value">28</div><div class="detail">F25–F36</div></div></div>
 <h2 id="all">All flagged irregularities</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-flags" aria-label="Filter tbl-flags" placeholder="Filter rows…">
-<span class="count" data-count-for="tbl-flags">66 rows shown</span></div>
+<span class="count" data-count-for="tbl-flags">71 rows shown</span></div>
 <div class="tablewrap"><table class="data-table" id="tbl-flags"><caption>Every flag with category, description, impact, status, official source link and suggested action for the reviewer.</caption>
 <thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Category</th><th scope="col" class="sortable">Irregularity / unverified item</th><th scope="col" class="sortable">Impact on decisions</th><th scope="col" class="sortable">Status</th><th scope="col" class="sortable">Suggested action</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
 <tr id="F01" data-verified="true">
@@ -589,27 +590,27 @@
 <td data-value="1">Injury scrape: blank designations published</td>
 <td data-value="1" class="wide">The committed scrape (data/model/official_injuries.json, generated 2026-11-14T17:02Z) has no injury or game status where the live nfl.com read (2026-11-15) shows one: Chargers, 10 injury and 10 game-status cells, and 6 practice-status values; Ravens, 2 injury and 2 game-status cells (Jaylinn Hawkins: Knee, Out; Adam Randall: Neck, Hamstring, Questionable). The parser stored blanks without any error. Chargers example from the live page: David Njoku, Fibula, Questionable.</td>
 <td data-value="1" class="wide">Two clubs are published with missing injury designations. The rule against publishing blanks is broken, and no alarm fired.</td>
-<td><span class="badge neutral">needs review</span></td>
+<td><span class="badge neutral">resolved</span></td>
 <td data-value="1" class="wide">Re-run the scrape with the raw HTML kept for the LAC and BAL sections; fix the column mapping; add the drift alarm (SI-09). Compare with data/brief_07810d9f/injury_delta_2026-11-15.json.</td>
-<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
 <tr id="F-7810-02" data-verified="true">
 <td><code>F-7810-02</code></td>
 <td data-value="1">Injury scrape: rows missing</td>
 <td data-value="1" class="wide">Two Ravens rows on the live nfl.com read are absent from the committed scrape: Calais Campbell (DT, Did Not Participate In Practice) and Ronnie Stanley (Did Not Participate In Practice). The cause (a page change between reads, or parser loss) is not determined.</td>
 <td data-value="1" class="wide">The published Ravens list is 2 players short.</td>
-<td><span class="badge neutral">needs review</span></td>
+<td><span class="badge neutral">resolved</span></td>
 <td data-value="1" class="wide">Determine from the raw page at the next capture whether the rows were added after 2026-11-14 or dropped by the parser.</td>
-<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
 <tr id="F-7810-03" data-verified="true">
 <td><code>F-7810-03</code></td>
 <td data-value="1">Designation changed between reads</td>
 <td data-value="1" class="wide">Arden Key (IND) carries Hamstring and Questionable in the committed scrape (2026-11-14). The live read (2026-11-15) shows no injury and no game status for him.</td>
 <td data-value="1" class="wide">A designation disappeared between reads, or the scrape is stale. Either way the published Colts row disagrees with the live page.</td>
-<td><span class="badge neutral">needs review</span></td>
+<td><span class="badge neutral">resolved</span></td>
 <td data-value="1" class="wide">Keep both reads in the dated series (IN-01) and confirm at the next capture.</td>
-<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
 <tr id="F-7810-04" data-verified="true">
 <td><code>F-7810-04</code></td>
@@ -634,9 +635,9 @@
 <td data-value="1">Jersey numbers left in depth rows</td>
 <td data-value="1" class="wide">data/depth_chart.json still holds jersey numbers in 59 Packers cells (a leading number before the player name). The brief requires the numbers stripped and the raw string kept.</td>
 <td data-value="1" class="wide">Packers names are mis-keyed in any join on player name.</td>
-<td><span class="badge neutral">needs review</span></td>
+<td><span class="badge neutral">resolved</span></td>
 <td data-value="1" class="wide">Strip the leading number into its own column; keep the raw string; re-run the name join.</td>
-<td><span class="src"><a href="https://www.packers.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Green Bay Packers (packers.com) — Official club depth chart">S15 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+<td><span class="src"><a href="https://www.packers.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Green Bay Packers (packers.com) — Official club depth chart">S15 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
 <tr id="F-7810-07" data-verified="true">
 <td><code>F-7810-07</code></td>
@@ -691,6 +692,51 @@
 <td><span class="badge neutral">needs review</span></td>
 <td data-value="1" class="wide">Pick one gate scheme, cite it from both files, and record the change in the rules file.</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F51" data-verified="true">
+<td><code>F51</code></td>
+<td data-value="1">Terms of use</td>
+<td data-value="1" class="wide">NFL.com Terms and Conditions (updated May 16, 2024; https://www.nfl.com/legal/terms/) s.1.1 prohibit copying, reproducing, distributing or displaying Services content for any purpose except as the Agreement expressly allows. s.1.3 limits use to &#x27;your own individual non-commercial and informational purposes&#x27; and states that &#x27;systematic retrieval of data or other content from the Services, whether to create or compile ... a collection, compilation, database, or directory, is prohibited absent our express prior written consent&#x27;. This repository systematically retrieves https://www.nfl.com/injuries/ every 6 hours (data/snapshots/injury_report/) and the schedule and standings pages, and publishes row-level player names and designations (347 injury rows, roughly 21 public pages, including the Injury Snapshots page and data/model/official_injuries.json). No written consent is on file. The repository&#x27;s own rule is that raw row-level data stays in a private store until the terms are read; the terms are now read and they restrict this use.</td>
+<td data-value="1" class="wide">Legal and licence exposure for the public site and for the snapshot pipeline. Not a values error: the published numbers match the official page. The fix is a product decision: (a) obtain written consent from NFL Enterprises, LLC, (b) keep row-level nfl.com content in a private store and publish only aggregate counts and links to the official page, or (c) remove the scrape. This session did not remove any published content, so the decision is left to the owner.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Owner decision before the next scheduled capture. Legal review is recommended. Option (b) is the smallest change: the snapshot page would show counts and deltas and link to https://www.nfl.com/injuries/ for names.</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F52" data-verified="true">
+<td><code>F52</code></td>
+<td data-value="1">Source attribution</td>
+<td data-value="1" class="wide">data/readiness.json (decision-readiness rows R1-R10, built by tools/build_readiness.py) cited https://www.nfl.com/schedules/2026/by-week/week-10 as the source of six rows (R1, R2, R3, R4, R9, R10). Those rows report backtest results, two-leg parlay tests, strategy registration hashes, the demotion rule and bet price records. No official page holds those numbers, and the NFL schedule page does not contain them, so the citation did not support the row. The rows now link to the repository file that computes them, labelled &#x27;internal computation: no official source applies&#x27;. R6 (club depth charts) was cited to nfl.com/injuries and now links to data/depth_ladder.json, which holds the per-club official chart links. Separately, data/depth_ladder.json contains an unresolved template URL, https://www.&lt;club&gt;/team/depth-chart, which is not a real page.</td>
+<td data-value="1" class="wide">The readiness table no longer presents internal numbers as official. Six rows have no official source by design: an official page cannot confirm a backtest. Nothing on the published page is inferred from the schedule.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Replace the template URL in data/depth_ladder.json with each club&#x27;s real chart URL, or remove it. Decide whether the registration and demotion rules need a non-official record (they are internal policy, so no official page can confirm them).</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F-E1-01" data-verified="true">
+<td><code>F-E1-01</code></td>
+<td data-value="1">Backtest numbers outside the leaderboard</td>
+<td data-value="1" class="wide">Backtest returns and hit rates still appear on other pages after the leaderboard was split: the research executive summary (research/executive-summary.html, gate summary table with a Return column), the research injuries page (research/injuries.html, scored-rule table with Return and p-value), the root-site strategies page (pages/strategies.html) and the decision dashboard strategies page (dashboard/strategies.html). The research index (research/index.html) shows no return figures.</td>
+<td data-value="1" class="wide">A reader can still take a historical return for a prospective result on these pages. The brief&#x27;s rule covers the leaderboard; these pages are not the leaderboard but show the same figures.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Decide whether these pages should carry the same split (figures moved to a labelled backtest view). Then apply the same test to each page.</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a> <a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository)">S24 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F-E1-02" data-verified="true">
+<td><code>F-E1-02</code></td>
+<td data-value="1">Club code mismatch (injury report)</td>
+<td data-value="1" class="wide">data/model/official_injuries.json uses club codes ARI (Arizona) and LA (Los Angeles Rams) for 15 and 14 rows. The nfl.com injury report uses AZ (Cardinals) and LAR (Rams), visible in the club logo links of https://www.nfl.com/injuries/ read on 2026-11-15. The codes were reconciled by hand for this check; no row value changed.</td>
+<td data-value="1" class="wide">A join on club code between the injury report and a source that uses the nfl.com code will match zero rows for these two clubs.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Map ARI to AZ and LA to LAR at scrape time, keep the printed code as raw_team, and add a code-set gate to the scrape (the 32 official codes).</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a> <a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com)">S01 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F-E1-03" data-verified="true">
+<td><code>F-E1-03</code></td>
+<td data-value="1">Injury re-read coverage</td>
+<td data-value="1" class="wide">In this session 229 of the 347 rows on https://www.nfl.com/injuries/ (read 2026-11-15, 8 pages) were re-read and compared with the committed scrape: 229 of 229 match. The other 118 rows were not re-read, so the 2026-11-15 capture is verified only for those 229 rows plus the full 347-row count.</td>
+<td data-value="1" class="wide">The &#x27;every row verified&#x27; claim is not supported for the unread 118 rows in this session.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Automate a full cell-by-cell re-read in GitHub Actions at each capture (the Arena sandbox cannot reach nfl.com directly), and publish the mismatch count.</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a> <a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com)">S01 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
 </tr>
 </tbody></table></div>
 <h2 id="unverified">Registry of blank/unverified values</h2>
