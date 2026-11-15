@@ -1,0 +1,292 @@
+{
+ "generated_by": "pipeline/ledger.py",
+ "built_at": "2026-11-15T12:54:34Z",
+ "what_this_is": "Append-only captures of official sources, each with the clock time it was read and the sha256 of its bytes. A capture is never rewritten; a second read of the same source at a later time is a new capture.",
+ "sources": {
+  "injuries": {
+   "title": "nfl.com official weekly injury report",
+   "official": true,
+   "url_pattern": "^https://www\\.nfl\\.com/injuries/",
+   "what": "practice status and game status for every listed player"
+  },
+  "depth_chart": {
+   "title": "Official club depth chart",
+   "official": true,
+   "url_pattern": "^https://www\\.[a-z0-9.-]+\\.com/team/depth-chart/?$",
+   "what": "the club's own published depth order, as printed"
+  },
+  "transactions": {
+   "title": "Official club transactions announcement",
+   "official": true,
+   "url_pattern": "^https://www\\.[a-z0-9.-]+\\.com/",
+   "what": "dated roster moves (signings, releases, reserve list) that invalidate a depth chart"
+  },
+  "inactives": {
+   "title": "Official game-day inactives",
+   "official": true,
+   "url_pattern": "^https://",
+   "what": "who was actually unavailable at kickoff"
+  }
+ },
+ "counts": {
+  "depth_chart": 6,
+  "injuries": 2
+ },
+ "by_source": {
+  "depth_chart": [
+   {
+    "captured_at": "2026-11-15T12:52:48Z",
+    "clock_precision": "second",
+    "payload_kind": "raw-page-text",
+    "dir": "data/ledger/depth_chart/2026-11-15/20261115125248Z_12de2d5c2abe",
+    "url": "https://www.houstontexans.com/team/depth-chart",
+    "sha256": "12de2d5c2abebf9a12d6c533f81a43bbd9ec4f4c6a044a9741bd61ae30ab27f1",
+    "bytes": 488,
+    "club": "HOU",
+    "week": "",
+    "parser": "depth_parse.py/57c05555",
+    "capture_kind": "image_only",
+    "counts": {
+     "slots": 0,
+     "slots_empty": 0,
+     "slots_with_hole": 0,
+     "groups": 0,
+     "player_names": 0,
+     "shared_groups": 0,
+     "shared_group_names": 0,
+     "shared_rank1_groups": 0,
+     "cells_with_jersey": 0,
+     "jersey_numbers_stripped": 0,
+     "continuation_ranks": 0,
+     "rows_dropped": 0,
+     "by_unit": {},
+     "max_rank": 0
+    }
+   },
+   {
+    "captured_at": "2026-11-15T12:52:48Z",
+    "clock_precision": "second",
+    "payload_kind": "raw-page-text",
+    "dir": "data/ledger/depth_chart/2026-11-15/20261115125248Z_5cb658133802",
+    "url": "https://www.colts.com/team/depth-chart",
+    "sha256": "5cb6581338021dbc803f286837b490808f4bac4104d55c757629a88a40a67389",
+    "bytes": 4834,
+    "club": "IND",
+    "week": "",
+    "parser": "depth_parse.py/57c05555",
+    "capture_kind": "table",
+    "counts": {
+     "slots": 28,
+     "slots_empty": 0,
+     "slots_with_hole": 0,
+     "groups": 56,
+     "player_names": 57,
+     "shared_groups": 1,
+     "shared_group_names": 2,
+     "shared_rank1_groups": 0,
+     "cells_with_jersey": 0,
+     "jersey_numbers_stripped": 0,
+     "continuation_ranks": 0,
+     "rows_dropped": 0,
+     "by_unit": {
+      "offense": 11,
+      "defense": 11,
+      "special_teams": 6
+     },
+     "max_rank": 4
+    }
+   },
+   {
+    "captured_at": "2026-11-15T12:52:48Z",
+    "clock_precision": "second",
+    "payload_kind": "raw-page-text",
+    "dir": "data/ledger/depth_chart/2026-11-15/20261115125248Z_74298f7e8110",
+    "url": "https://www.azcardinals.com/team/depth-chart",
+    "sha256": "74298f7e8110b385d47f6084775637fad4ef1cf2d0cf99cd63fe60328b022895",
+    "bytes": 5251,
+    "club": "ARI",
+    "week": "",
+    "parser": "depth_parse.py/57c05555",
+    "capture_kind": "table",
+    "counts": {
+     "slots": 29,
+     "slots_empty": 0,
+     "slots_with_hole": 0,
+     "groups": 57,
+     "player_names": 58,
+     "shared_groups": 1,
+     "shared_group_names": 2,
+     "shared_rank1_groups": 1,
+     "cells_with_jersey": 0,
+     "jersey_numbers_stripped": 0,
+     "continuation_ranks": 0,
+     "rows_dropped": 0,
+     "by_unit": {
+      "offense": 11,
+      "defense": 12,
+      "special_teams": 6
+     },
+     "max_rank": 3
+    }
+   },
+   {
+    "captured_at": "2026-11-15T12:52:48Z",
+    "clock_precision": "second",
+    "payload_kind": "raw-page-text",
+    "dir": "data/ledger/depth_chart/2026-11-15/20261115125248Z_aada67d11256",
+    "url": "https://www.commanders.com/team/depth-chart",
+    "sha256": "aada67d112569aeecfdcdee6aa0f42f93580be9e4ce9ce2d0a45bc0e62417d19",
+    "bytes": 5378,
+    "club": "WAS",
+    "week": "",
+    "parser": "depth_parse.py/57c05555",
+    "capture_kind": "table",
+    "counts": {
+     "slots": 29,
+     "slots_empty": 0,
+     "slots_with_hole": 1,
+     "groups": 60,
+     "player_names": 60,
+     "shared_groups": 0,
+     "shared_group_names": 0,
+     "shared_rank1_groups": 0,
+     "cells_with_jersey": 0,
+     "jersey_numbers_stripped": 0,
+     "continuation_ranks": 0,
+     "rows_dropped": 0,
+     "by_unit": {
+      "offense": 12,
+      "defense": 11,
+      "special_teams": 6
+     },
+     "max_rank": 3
+    }
+   },
+   {
+    "captured_at": "2026-11-15T12:52:48Z",
+    "clock_precision": "second",
+    "payload_kind": "raw-page-text",
+    "dir": "data/ledger/depth_chart/2026-11-15/20261115125248Z_f5b173ea82eb",
+    "url": "https://www.packers.com/team/depth-chart",
+    "sha256": "f5b173ea82eb936e1a3b7becd5c893160072a509b5c8ac94b60b0e4edc72989e",
+    "bytes": 1680,
+    "club": "GB",
+    "week": "",
+    "parser": "depth_parse.py/57c05555",
+    "capture_kind": "table",
+    "counts": {
+     "slots": 28,
+     "slots_empty": 0,
+     "slots_with_hole": 1,
+     "groups": 55,
+     "player_names": 55,
+     "shared_groups": 0,
+     "shared_group_names": 0,
+     "shared_rank1_groups": 0,
+     "cells_with_jersey": 55,
+     "jersey_numbers_stripped": 55,
+     "continuation_ranks": 1,
+     "rows_dropped": 3,
+     "by_unit": {
+      "offense": 11,
+      "defense": 11,
+      "special_teams": 6
+     },
+     "max_rank": 4
+    }
+   },
+   {
+    "captured_at": "2026-11-15T12:52:48Z",
+    "clock_precision": "second",
+    "payload_kind": "raw-page-text",
+    "dir": "data/ledger/depth_chart/2026-11-15/20261115125248Z_f9da4c0aab60",
+    "url": "https://www.baltimoreravens.com/team/depth-chart",
+    "sha256": "f9da4c0aab60c8e629ae95b13a3edd08115e27f883973c62e18c2f6a9ce7bbb5",
+    "bytes": 5547,
+    "club": "BAL",
+    "week": "",
+    "parser": "depth_parse.py/57c05555",
+    "capture_kind": "table",
+    "counts": {
+     "slots": 29,
+     "slots_empty": 1,
+     "slots_with_hole": 0,
+     "groups": 59,
+     "player_names": 59,
+     "shared_groups": 0,
+     "shared_group_names": 0,
+     "shared_rank1_groups": 0,
+     "cells_with_jersey": 0,
+     "jersey_numbers_stripped": 0,
+     "continuation_ranks": 0,
+     "rows_dropped": 0,
+     "by_unit": {
+      "offense": 11,
+      "defense": 12,
+      "special_teams": 6
+     },
+     "max_rank": 3
+    }
+   }
+  ],
+  "injuries": [
+   {
+    "captured_at": "2026-11-13",
+    "clock_precision": "date-only",
+    "payload_kind": "transcribed-table",
+    "dir": "data/ledger/injuries/2026-11-13/20261113000000Z_9ae0979c34d6",
+    "url": "https://www.nfl.com/injuries/",
+    "sha256": "9ae0979c34d63529149110224aef7d72e3ac527a730897bb8ec54116c2a60f45",
+    "bytes": 1082,
+    "club": "",
+    "week": "10",
+    "parser": "row-table/1",
+    "capture_kind": "",
+    "counts": {
+     "player_rows": 0,
+     "clubs_with_a_table": 0
+    }
+   },
+   {
+    "captured_at": "2026-11-15",
+    "clock_precision": "date-only",
+    "payload_kind": "transcribed-table",
+    "dir": "data/ledger/injuries/2026-11-15/20261115000000Z_9fe77d36a256",
+    "url": "https://www.nfl.com/injuries/league/2026/reg10",
+    "sha256": "9fe77d36a25618542553e690a5a44dac3449769b56e45cccd711cb1e2669cd5f",
+    "bytes": 23071,
+    "club": "",
+    "week": "10",
+    "parser": "row-table/1",
+    "capture_kind": "",
+    "counts": {
+     "player_rows": 0,
+     "clubs_with_a_table": 0
+    }
+   }
+  ]
+ },
+ "conflicts": [],
+ "coverage": {
+  "injury_capture_days": [
+   "2026-11-13",
+   "2026-11-15"
+  ],
+  "injury_distinct_days": 2,
+  "depth_chart_clubs": [
+   "ARI",
+   "BAL",
+   "GB",
+   "HOU",
+   "IND",
+   "WAS"
+  ],
+  "depth_chart_clubs_captured": 6,
+  "depth_chart_clubs_expected": 32,
+  "days_needed_for_a_14_day_holdout": 14,
+  "days_still_to_capture": 12,
+  "captures_with_a_clock_time": 6,
+  "captures_date_only": 2,
+  "honest_position": "One day of captures cannot replay a practice week. The ledger makes every future read replayable and proves the archive is thin today; it does not manufacture the missing days."
+ }
+}
