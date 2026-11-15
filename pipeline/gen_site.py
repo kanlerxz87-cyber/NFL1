@@ -100,7 +100,11 @@ SIDEBAR = [
                          ("pages/executive-summary.html", "Executive summary (companion)"),
                          ("pages/flagged.html", "Flagged (companion)"),
                          # Session 739408a8-nfl1 (P1): pre-registration ledger for the forward test.
-                         ("prereg/index.html", "Pre-registration ledger")]),
+                         ("prereg/index.html", "Pre-registration ledger"),
+                         # Session 0c5215c1-nfl1: strategy registry, prospective board,
+                         # forecast record and backtest archive of the pre-registration subsystem.
+                         ("prereg/registry.html", "Strategy Registry"),
+                         ("prereg/archive.html", "Backtest Archive")]),
 ]
 
 SOURCE = {

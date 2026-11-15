@@ -34,6 +34,9 @@ GENERATORS = {
     "tools/build.py": [r'write_page\(\s*"([^"]+\.html)"'],
     "scripts/verified/build_site.py": [r'\(PAGES / fname\)', r'"([a-z0-9-]+\.html)": \('],
     "tools/build_dashboard.py": [r'web/[a-z-]+\.html'],
+    # Session 0c5215c1-nfl1: the pre-registration sub-site. write() takes bare filenames;
+    # the generator writes them under prereg/ (prefix added in claims()).
+    "prereg/build.py": [r'write\(\s*"([^"/]+\.html)"'],
 }
 
 # explicit, documented ownership. Anything not here is reported, not assumed.
@@ -59,6 +62,13 @@ KNOWN_OWNERS = {
     "pages/teams.html": "tools/build.py",
     "pages/standings.html": "tools/build.py",
     "pages/data-tables.html": "tools/build.py",
+    # Session 0c5215c1-nfl1: pre-registration sub-site (prereg/build.py registered above).
+    "prereg/registry.html": "prereg/build.py",
+    "prereg/forecasts.html": "prereg/build.py",
+    "prereg/archive.html": "prereg/build.py",
+    # Session 739408a8-nfl1: the forward-test ledger page (its generator is not in
+    # GENERATORS; ownership recorded so the file is documented, not assumed).
+    "prereg/index.html": "tools/prereg.py",
 }
 
 DASHBOARD_PAGES = ["web/dashboard.html", "web/decisions.html", "web/suggestions.html",
@@ -86,6 +96,9 @@ def claims():
                       "pages/verified.html", "pages/verified-lines.html"}
         if gen == "tools/build_dashboard.py":
             found |= set(DASHBOARD_PAGES)
+        if gen == "prereg/build.py":
+            # write() takes bare filenames; the generator writes them under prereg/
+            found = {"prereg/" + f for f in found}
         for f in found:
             out.setdefault(f, set()).add(gen)
     return out

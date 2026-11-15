@@ -41,6 +41,10 @@ CANON = [
     ("review-room/index.html", "Review Room"),
     # Session 739408a8-nfl1 (P1): pre-registration ledger for the forward test.
     ("prereg/index.html", "Pre-registration ledger"),
+    # Session 0c5215c1-nfl1: strategy registry, prospective board, forecast record and
+    # backtest archive of the pre-registration subsystem.
+    ("prereg/registry.html", "Strategy Registry"),
+    ("prereg/archive.html", "Backtest Archive"),
     ("research/index.html", "s9cb Research"),
     # Session c7b65577-nfl1: the strategy competition.  Added to both nav lists at once because
     # this file and pipeline/gen_site.py are documented as needing to stay byte-identical.
