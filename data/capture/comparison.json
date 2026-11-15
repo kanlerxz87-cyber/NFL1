@@ -1,0 +1,740 @@
+{
+  "generated_by": "tools/check_capture.py",
+  "capture": {
+    "source": "https://www.nfl.com/injuries/league/2026/reg10",
+    "captured": "2026-11-15 (date from the session clock; time of day not recorded by the capture tool)",
+    "rows": 347,
+    "clubs": 28,
+    "games": 14
+  },
+  "scrape": {
+    "generated_at": "2026-11-15T12:34:17+00:00",
+    "html_sha256": "a18f4f85c76f96ba9fcbc0539bd806d66294190c4d37b971cfdbebe752f19362",
+    "rows": 347,
+    "clubs": 28,
+    "status": "ok"
+  },
+  "hand_copy": {
+    "path": "data/verified/injury_report_2026_week10.tsv",
+    "rows": 254,
+    "rows_not_on_capture": [],
+    "clubs_with_rows": 24,
+    "no_injury_clubs": [
+      "BAL",
+      "CIN",
+      "LAC",
+      "SEA"
+    ]
+  },
+  "club_counts_vs_scrape": [
+    {
+      "club": "ATL",
+      "capture": 11,
+      "scrape": 11
+    },
+    {
+      "club": "AZ",
+      "capture": 15,
+      "scrape": 15
+    },
+    {
+      "club": "BAL",
+      "capture": 10,
+      "scrape": 10
+    },
+    {
+      "club": "BUF",
+      "capture": 14,
+      "scrape": 14
+    },
+    {
+      "club": "CAR",
+      "capture": 12,
+      "scrape": 12
+    },
+    {
+      "club": "CIN",
+      "capture": 9,
+      "scrape": 9
+    },
+    {
+      "club": "CLE",
+      "capture": 12,
+      "scrape": 12
+    },
+    {
+      "club": "DAL",
+      "capture": 19,
+      "scrape": 19
+    },
+    {
+      "club": "DET",
+      "capture": 9,
+      "scrape": 9
+    },
+    {
+      "club": "GB",
+      "capture": 17,
+      "scrape": 17
+    },
+    {
+      "club": "HOU",
+      "capture": 16,
+      "scrape": 16
+    },
+    {
+      "club": "IND",
+      "capture": 14,
+      "scrape": 14
+    },
+    {
+      "club": "JAX",
+      "capture": 11,
+      "scrape": 11
+    },
+    {
+      "club": "KC",
+      "capture": 13,
+      "scrape": 13
+    },
+    {
+      "club": "LAC",
+      "capture": 19,
+      "scrape": 19
+    },
+    {
+      "club": "LAR",
+      "capture": 14,
+      "scrape": 14
+    },
+    {
+      "club": "LV",
+      "capture": 5,
+      "scrape": 5
+    },
+    {
+      "club": "MIA",
+      "capture": 11,
+      "scrape": 11
+    },
+    {
+      "club": "MIN",
+      "capture": 13,
+      "scrape": 13
+    },
+    {
+      "club": "NE",
+      "capture": 15,
+      "scrape": 15
+    },
+    {
+      "club": "NO",
+      "capture": 12,
+      "scrape": 12
+    },
+    {
+      "club": "NYG",
+      "capture": 11,
+      "scrape": 11
+    },
+    {
+      "club": "NYJ",
+      "capture": 9,
+      "scrape": 9
+    },
+    {
+      "club": "PIT",
+      "capture": 8,
+      "scrape": 8
+    },
+    {
+      "club": "SEA",
+      "capture": 15,
+      "scrape": 15
+    },
+    {
+      "club": "SF",
+      "capture": 12,
+      "scrape": 12
+    },
+    {
+      "club": "TEN",
+      "capture": 12,
+      "scrape": 12
+    },
+    {
+      "club": "WAS",
+      "capture": 9,
+      "scrape": 9
+    }
+  ],
+  "club_counts_vs_hand_copy": [
+    {
+      "club": "ATL",
+      "capture": 11,
+      "hand_copy": 6
+    },
+    {
+      "club": "AZ",
+      "capture": 15,
+      "hand_copy": 13
+    },
+    {
+      "club": "BAL",
+      "capture": 10,
+      "hand_copy": "No Injuries Reported"
+    },
+    {
+      "club": "BUF",
+      "capture": 14,
+      "hand_copy": 11
+    },
+    {
+      "club": "CAR",
+      "capture": 12,
+      "hand_copy": 12
+    },
+    {
+      "club": "CIN",
+      "capture": 9,
+      "hand_copy": "No Injuries Reported"
+    },
+    {
+      "club": "CLE",
+      "capture": 12,
+      "hand_copy": 11
+    },
+    {
+      "club": "DAL",
+      "capture": 19,
+      "hand_copy": 16
+    },
+    {
+      "club": "DET",
+      "capture": 9,
+      "hand_copy": 9
+    },
+    {
+      "club": "GB",
+      "capture": 17,
+      "hand_copy": 16
+    },
+    {
+      "club": "HOU",
+      "capture": 16,
+      "hand_copy": 13
+    },
+    {
+      "club": "IND",
+      "capture": 14,
+      "hand_copy": 11
+    },
+    {
+      "club": "JAX",
+      "capture": 11,
+      "hand_copy": 10
+    },
+    {
+      "club": "KC",
+      "capture": 13,
+      "hand_copy": 11
+    },
+    {
+      "club": "LAC",
+      "capture": 19,
+      "hand_copy": "No Injuries Reported"
+    },
+    {
+      "club": "LAR",
+      "capture": 14,
+      "hand_copy": 10
+    },
+    {
+      "club": "LV",
+      "capture": 5,
+      "hand_copy": 4
+    },
+    {
+      "club": "MIA",
+      "capture": 11,
+      "hand_copy": 10
+    },
+    {
+      "club": "MIN",
+      "capture": 13,
+      "hand_copy": 9
+    },
+    {
+      "club": "NE",
+      "capture": 15,
+      "hand_copy": 15
+    },
+    {
+      "club": "NO",
+      "capture": 12,
+      "hand_copy": 10
+    },
+    {
+      "club": "NYG",
+      "capture": 11,
+      "hand_copy": 11
+    },
+    {
+      "club": "NYJ",
+      "capture": 9,
+      "hand_copy": 7
+    },
+    {
+      "club": "PIT",
+      "capture": 8,
+      "hand_copy": 8
+    },
+    {
+      "club": "SEA",
+      "capture": 15,
+      "hand_copy": "No Injuries Reported"
+    },
+    {
+      "club": "SF",
+      "capture": 12,
+      "hand_copy": 10
+    },
+    {
+      "club": "TEN",
+      "capture": 12,
+      "hand_copy": 12
+    },
+    {
+      "club": "WAS",
+      "capture": 9,
+      "hand_copy": 9
+    }
+  ],
+  "scrape_missing_from_scrape": [],
+  "scrape_status_differences": [],
+  "hand_copy_missing_players": [
+    {
+      "club": "KC",
+      "player": "Jaydn Ott"
+    },
+    {
+      "club": "KC",
+      "player": "Kenneth Walker III"
+    },
+    {
+      "club": "ATL",
+      "player": "Kendal Daniels"
+    },
+    {
+      "club": "ATL",
+      "player": "Jake Matthews"
+    },
+    {
+      "club": "ATL",
+      "player": "Liam McCullough"
+    },
+    {
+      "club": "ATL",
+      "player": "Jawaan Taylor"
+    },
+    {
+      "club": "ATL",
+      "player": "Cameron Thomas"
+    },
+    {
+      "club": "MIN",
+      "player": "Jordan Addison"
+    },
+    {
+      "club": "MIN",
+      "player": "Christian Darrisaw"
+    },
+    {
+      "club": "MIN",
+      "player": "Josh Metellus"
+    },
+    {
+      "club": "MIN",
+      "player": "Harrison Smith"
+    },
+    {
+      "club": "GB",
+      "player": "Xavier McKinney"
+    },
+    {
+      "club": "JAX",
+      "player": "BJ Green II"
+    },
+    {
+      "club": "BUF",
+      "player": "Terrel Bernard"
+    },
+    {
+      "club": "BUF",
+      "player": "Sam Franklin Jr."
+    },
+    {
+      "club": "BUF",
+      "player": "Ed Oliver"
+    },
+    {
+      "club": "NYJ",
+      "player": "Jarvis Brownlee Jr."
+    },
+    {
+      "club": "NYJ",
+      "player": "Adonai Mitchell"
+    },
+    {
+      "club": "MIA",
+      "player": "Jared Wayne"
+    },
+    {
+      "club": "IND",
+      "player": "CJ Allen"
+    },
+    {
+      "club": "IND",
+      "player": "Will Mallory"
+    },
+    {
+      "club": "IND",
+      "player": "Grover Stewart"
+    },
+    {
+      "club": "NO",
+      "player": "Taliese Fuaga"
+    },
+    {
+      "club": "NO",
+      "player": "Quincy Riley"
+    },
+    {
+      "club": "HOU",
+      "player": "Will Anderson Jr."
+    },
+    {
+      "club": "HOU",
+      "player": "Trent Brown"
+    },
+    {
+      "club": "HOU",
+      "player": "Danielle Hunter"
+    },
+    {
+      "club": "CLE",
+      "player": "Donovan McMillon"
+    },
+    {
+      "club": "LAR",
+      "player": "Aaron Donald"
+    },
+    {
+      "club": "LAR",
+      "player": "Braden Fiske"
+    },
+    {
+      "club": "LAR",
+      "player": "Tyler Higbee"
+    },
+    {
+      "club": "LAR",
+      "player": "Byron Young"
+    },
+    {
+      "club": "AZ",
+      "player": "Darius Robinson"
+    },
+    {
+      "club": "AZ",
+      "player": "Andrew Wingard"
+    },
+    {
+      "club": "SEA",
+      "player": "AJ Barner"
+    },
+    {
+      "club": "SEA",
+      "player": "Anthony Bradford"
+    },
+    {
+      "club": "SEA",
+      "player": "Charles Cross"
+    },
+    {
+      "club": "SEA",
+      "player": "Sam Darnold"
+    },
+    {
+      "club": "SEA",
+      "player": "Derick Hall"
+    },
+    {
+      "club": "SEA",
+      "player": "Drew Lock"
+    },
+    {
+      "club": "SEA",
+      "player": "Quenton Nelson"
+    },
+    {
+      "club": "SEA",
+      "player": "Uchenna Nwosu"
+    },
+    {
+      "club": "SEA",
+      "player": "Patrick O'Connell"
+    },
+    {
+      "club": "SEA",
+      "player": "Connor O'Toole"
+    },
+    {
+      "club": "SEA",
+      "player": "Brandon Pili"
+    },
+    {
+      "club": "SEA",
+      "player": "Jarran Reed"
+    },
+    {
+      "club": "SEA",
+      "player": "Rashid Shaheed"
+    },
+    {
+      "club": "SEA",
+      "player": "Jaxon Smith-Njigba"
+    },
+    {
+      "club": "SEA",
+      "player": "Leonard Williams"
+    },
+    {
+      "club": "LV",
+      "player": "Dont'e Thornton Jr."
+    },
+    {
+      "club": "SF",
+      "player": "Dre Greenlaw"
+    },
+    {
+      "club": "SF",
+      "player": "Christian McCaffrey"
+    },
+    {
+      "club": "DAL",
+      "player": "DaRon Bland"
+    },
+    {
+      "club": "DAL",
+      "player": "Alijah Clark"
+    },
+    {
+      "club": "DAL",
+      "player": "Juanyeh Thomas"
+    },
+    {
+      "club": "CIN",
+      "player": "Jonathan Allen"
+    },
+    {
+      "club": "CIN",
+      "player": "Jalen Davis"
+    },
+    {
+      "club": "CIN",
+      "player": "Kyle Dugger"
+    },
+    {
+      "club": "CIN",
+      "player": "Dylan Fairchild"
+    },
+    {
+      "club": "CIN",
+      "player": "B.J. Hill"
+    },
+    {
+      "club": "CIN",
+      "player": "Andrei Iosivas"
+    },
+    {
+      "club": "CIN",
+      "player": "Dexter Lawrence"
+    },
+    {
+      "club": "CIN",
+      "player": "Brian Parker II"
+    },
+    {
+      "club": "CIN",
+      "player": "DJ Turner II"
+    },
+    {
+      "club": "LAC",
+      "player": "Kayode Awosika"
+    },
+    {
+      "club": "LAC",
+      "player": "Bud Dupree"
+    },
+    {
+      "club": "LAC",
+      "player": "Justin Eboigbe"
+    },
+    {
+      "club": "LAC",
+      "player": "Alex Harkey"
+    },
+    {
+      "club": "LAC",
+      "player": "Tre Harris"
+    },
+    {
+      "club": "LAC",
+      "player": "Cam Hart"
+    },
+    {
+      "club": "LAC",
+      "player": "Daiyan Henley"
+    },
+    {
+      "club": "LAC",
+      "player": "Deane Leonard"
+    },
+    {
+      "club": "LAC",
+      "player": "Khalil Mack"
+    },
+    {
+      "club": "LAC",
+      "player": "Ladd McConkey"
+    },
+    {
+      "club": "LAC",
+      "player": "Keaton Mitchell"
+    },
+    {
+      "club": "LAC",
+      "player": "David Njoku"
+    },
+    {
+      "club": "LAC",
+      "player": "Denzel Perryman"
+    },
+    {
+      "club": "LAC",
+      "player": "Trey Pipkins"
+    },
+    {
+      "club": "LAC",
+      "player": "Rodney Shelley"
+    },
+    {
+      "club": "LAC",
+      "player": "Branson Taylor"
+    },
+    {
+      "club": "LAC",
+      "player": "Brenen Thompson"
+    },
+    {
+      "club": "LAC",
+      "player": "Isas Waxter"
+    },
+    {
+      "club": "LAC",
+      "player": "Kendall Williamson"
+    },
+    {
+      "club": "BAL",
+      "player": "Rasheen Ali"
+    },
+    {
+      "club": "BAL",
+      "player": "Rashod Bateman"
+    },
+    {
+      "club": "BAL",
+      "player": "Calais Campbell"
+    },
+    {
+      "club": "BAL",
+      "player": "Kyle Hamilton"
+    },
+    {
+      "club": "BAL",
+      "player": "Jaylinn Hawkins"
+    },
+    {
+      "club": "BAL",
+      "player": "Matthew Hibner"
+    },
+    {
+      "club": "BAL",
+      "player": "Olaivavega Ioane"
+    },
+    {
+      "club": "BAL",
+      "player": "Adam Randall"
+    },
+    {
+      "club": "BAL",
+      "player": "Ronnie Stanley"
+    },
+    {
+      "club": "BAL",
+      "player": "Nate Wiggins"
+    }
+  ],
+  "hand_copy_lions_designations": [
+    {
+      "player": "Kerby Joseph",
+      "hand_copy_game_status": "blank",
+      "capture_game_status": "Out"
+    },
+    {
+      "player": "Cade Mays",
+      "hand_copy_game_status": "blank",
+      "capture_game_status": "Out"
+    },
+    {
+      "player": "D.J. Reed",
+      "hand_copy_game_status": "blank",
+      "capture_game_status": "Out"
+    }
+  ],
+  "flags": [
+    {
+      "id": "CAP-03",
+      "area": "hand-copied injury table (data/verified)",
+      "issue": "The hand copy holds 254 rows against 347 on the official page captured 2026-11-15. 0 of its rows are not on the capture; 93 rows of the capture are not in the hand copy, and lists as 'No Injuries Reported' the clubs BAL, CIN, LAC, SEA, which the official page lists with rows. Its retrieval stamp is 2026-11-12T05:30Z, so it predates the Sunday games.",
+      "state": "open",
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "what_settles_it": "Superseded by data/capture/. Leave the old file in place, labelled, until a reviewer confirms the replacement."
+    },
+    {
+      "id": "CAP-04",
+      "area": "hand-copied injury table (data/verified)",
+      "issue": "Blank game-status cells in the hand copy for: Kerby Joseph (hand copy 'blank', official 'Out'); Cade Mays (hand copy 'blank', official 'Out'); D.J. Reed (hand copy 'blank', official 'Out')",
+      "state": "open",
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "what_settles_it": "The official page lists each as Out; the capture carries that value."
+    },
+    {
+      "id": "CAP-05",
+      "area": "club codes",
+      "issue": "The official page prints Arizona as AZ and the Rams as LAR; the automated scrape uses ARI and LA and the hand copy uses AZ and LA. The capture keeps the printed codes and maps them in tools/check_capture.py.",
+      "state": "open",
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "what_settles_it": "One club-code table shared by every generator."
+    },
+    {
+      "id": "CAP-06",
+      "area": "capture method",
+      "issue": "The capture is the text the fetch tool returned for the official page (8 chunks), transcribed row by row. No raw HTML was retained, so the hash in the manifest covers the transcription, not the page bytes. The time of capture was not logged; only the date (2026-11-15) is recorded.",
+      "state": "open",
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "what_settles_it": "Scheduled capture in GitHub Actions that stores the raw page and its sha256 (pipeline/scrape_injuries.py already runs there)."
+    }
+  ]
+}

@@ -8,6 +8,7 @@ explicit blank with an "unverified" badge rather than a number.
 from __future__ import annotations
 
 import html
+from collections import Counter
 import json
 import os
 from datetime import datetime, timezone
@@ -1614,6 +1615,12 @@ def review_page(verif, strat, dash, avail=None):
          src("https://www.nfl.com/teams/", "club charts"), badge("partially resolved")],
     ])
 
+    # session 543676f8-nfl1: flags raised by the official Week 10 capture (data/capture/flags.json)
+    for cf in load_rel("data/capture/flags.json", {}).get("flags", []):
+        flags.append([esc(cf["id"]), esc(cf["area"]), esc(cf["issue"]),
+                      src(cf["source"], "official page" if cf.get("source_kind") == "official" else "repository"),
+                      badge("needs review" if cf["state"].startswith("open") else cf["state"])])
+
     tbl = table(["ID", "Area", "What is flagged", "Source", "State"], flags,
                 note=("Unverified and blocked items do not stop publication; they stop the claim. "
                       "Each row states what would settle it."))
@@ -1624,6 +1631,8 @@ def review_page(verif, strat, dash, avail=None):
   <p>Nothing here is hidden. Anything we could not confirm against an official league source
   is published with a blank value, a flag and the link a reviewer needs. Nothing on this page
   is inferred or filled in.</p>
+  <p>Official Week 10 injury report, captured as an immutable file with a manifest:
+  <a href="../capture/index.html">every row, with its official link</a>.</p>
   {tbl}
 </section>
 <section class="panel">

@@ -58,6 +58,9 @@ STEPS = [
     # and the strength-of-schedule sub-site.
     ("decision room site (room/)", [sys.executable, "room/build.py"], ROOT),
     ("strength sub-site", [sys.executable, "tools/build_strength.py"], ROOT),
+    # session 543676f8-nfl1: the official-capture page is built before the landing page so the
+    # landing page can link it; it fails the build if the capture does not pass its gate.
+    ("official capture page (capture/)", [sys.executable, "tools/build_capture_site.py"], ROOT),
     ("landing page and decision lab", [sys.executable, "gen_site.py"], os.path.join(ROOT, "pipeline")),
     ("canonical navigation", [sys.executable, "scripts/verified/normalize_nav.py"], ROOT),
     ("docs sub-site", [sys.executable, "tools/build_docs_site.py"], ROOT),
