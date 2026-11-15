@@ -593,5 +593,137 @@
     "action": "Reconcile the official Game Center and NFL Game Book with the registered 2026 results corpus, record the official game ID, final score, source URL, captured timestamp and hash, then rerun the result and leaderboard gates. Official schedule: https://www.nfl.com/schedules/2026/by-week/week-10. Keep the affected row blank until verified.",
     "verified": true,
     "retrieved": "2026-11-15"
+  },
+  {
+    "id": "F-7810-01",
+    "category": "Injury scrape: blank designations published",
+    "description": "The committed scrape (data/model/official_injuries.json, generated 2026-11-14T17:02Z) has no injury or game status where the live nfl.com read (2026-11-15) shows one: Chargers, 10 injury and 10 game-status cells, and 6 practice-status values; Ravens, 2 injury and 2 game-status cells (Jaylinn Hawkins: Knee, Out; Adam Randall: Neck, Hamstring, Questionable). The parser stored blanks without any error. Chargers example from the live page: David Njoku, Fibula, Questionable.",
+    "impact": "Two clubs are published with missing injury designations. The rule against publishing blanks is broken, and no alarm fired.",
+    "status": "needs review",
+    "src": "S01",
+    "action": "Re-run the scrape with the raw HTML kept for the LAC and BAL sections; fix the column mapping; add the drift alarm (SI-09). Compare with data/brief_07810d9f/injury_delta_2026-11-15.json.",
+    "verified": true,
+    "retrieved": "2026-11-15"
+  },
+  {
+    "id": "F-7810-02",
+    "category": "Injury scrape: rows missing",
+    "description": "Two Ravens rows on the live nfl.com read are absent from the committed scrape: Calais Campbell (DT, Did Not Participate In Practice) and Ronnie Stanley (Did Not Participate In Practice). The cause (a page change between reads, or parser loss) is not determined.",
+    "impact": "The published Ravens list is 2 players short.",
+    "status": "needs review",
+    "src": "S01",
+    "action": "Determine from the raw page at the next capture whether the rows were added after 2026-11-14 or dropped by the parser.",
+    "verified": true,
+    "retrieved": "2026-11-15"
+  },
+  {
+    "id": "F-7810-03",
+    "category": "Designation changed between reads",
+    "description": "Arden Key (IND) carries Hamstring and Questionable in the committed scrape (2026-11-14). The live read (2026-11-15) shows no injury and no game status for him.",
+    "impact": "A designation disappeared between reads, or the scrape is stale. Either way the published Colts row disagrees with the live page.",
+    "status": "needs review",
+    "src": "S01",
+    "action": "Keep both reads in the dated series (IN-01) and confirm at the next capture.",
+    "verified": true,
+    "retrieved": "2026-11-15"
+  },
+  {
+    "id": "F-7810-04",
+    "category": "Injury row counts differ across captures",
+    "description": "Counts for the same nfl.com page differ by capture: 296 rows across 26 clubs (official check, 2026-11-13, per the landing page note); 345 rows in the committed scrape (2026-11-14); 347 rows across 28 clubs in the live read (2026-11-15). CHI, DEN, PHI and TB have no rows on the live read.",
+    "impact": "No single Week 10 count can be cited. Each count must carry its capture date.",
+    "status": "needs review",
+    "src": "S01",
+    "action": "Publish every count with its capture time (done for 2026-11-15 in the register); do not overwrite earlier counts.",
+    "verified": true,
+    "retrieved": "2026-11-15"
+  },
+  {
+    "id": "F-7810-05",
+    "category": "Depth chart unavailable: Houston",
+    "description": "The Houston Texans depth chart page (read 2026-11-15) is labelled 'Unofficial Depth Chart' and holds an image in place of text. The depth ladder has no Houston slots (chart_status 'unavailable').",
+    "impact": "The 32-club depth sweep is 31 of 32. Houston depth and any Houston team-level model are blocked.",
+    "status": "needs review",
+    "src": "S30",
+    "action": "Find an authorized structured source (club or NFL text feed). Do not transcribe the image by eye.",
+    "verified": true,
+    "retrieved": "2026-11-15"
+  },
+  {
+    "id": "F-7810-06",
+    "category": "Jersey numbers left in depth rows",
+    "description": "data/depth_chart.json still holds jersey numbers in 59 Packers cells (a leading number before the player name). The brief requires the numbers stripped and the raw string kept.",
+    "impact": "Packers names are mis-keyed in any join on player name.",
+    "status": "needs review",
+    "src": "S15",
+    "action": "Strip the leading number into its own column; keep the raw string; re-run the name join.",
+    "verified": true,
+    "retrieved": "2026-11-15"
+  },
+  {
+    "id": "F-7810-07",
+    "category": "Club charts labelled 'Unofficial'",
+    "description": "Three official club charts carry an 'Unofficial' label on the club's own page: Chiefs ('Unofficial Depth Chart', S14), Packers ('Unofficial, Nov. 10, 2026', S15) and Texans (S30). The repo treats club charts as official for that club.",
+    "impact": "Whether a club chart counts as an official source is a decision, not a fact. The brief asks for official depth; some charts describe themselves as unofficial.",
+    "status": "needs review",
+    "src": "S14",
+    "action": "Record the decision on the Decide page: accept the club chart as official for that club, or require a different official source.",
+    "verified": true,
+    "retrieved": "2026-11-15"
+  },
+  {
+    "id": "F-7810-08",
+    "category": "Baltimore QB depth: stale-listing item resolved",
+    "description": "The Ravens depth chart read on 2026-11-15 lists Jacoby Brissett, Joe Fagnano and Kedon Slovis at QB, and neither Lamar Jackson nor Tyler Huntley. data/verified/qb_changes_2026.csv records Jackson as out on injured reserve (nfl.com news, Nov 5).",
+    "impact": "The stale-depth item for Baltimore does not hold on the current chart. The check (IN-22) still needs dated before-and-after captures to show a change rather than assert one.",
+    "status": "needs review",
+    "src": "S29",
+    "action": "Keep dated depth captures so a change can be shown; build the transactions cross-check (IN-22).",
+    "verified": true,
+    "retrieved": "2026-11-15"
+  },
+  {
+    "id": "F-7810-09",
+    "category": "Backtest numbers on the leaderboard",
+    "description": "data/s9cb/leaderboard.json ranks 12 rules on historical games (totals.bets_scored = 14,440 over 4,751 games). The brief says backtest numbers must not appear on the leaderboard. room/data/decisions.json holds an open decision to retire the -110 price assumption.",
+    "impact": "The leaderboard does not meet the pre-registration rule. A reader can take a backtest for a prospective result.",
+    "status": "needs review",
+    "src": "S24",
+    "action": "Split the leaderboard into prospective and backtest views (PR-06); settle the price-policy decision (PR-10).",
+    "verified": true,
+    "retrieved": "2026-11-15"
+  },
+  {
+    "id": "F-7810-10",
+    "category": "Committed site differed from its generators",
+    "description": "At base commit 5a769b3, tools/build_site_all.py --check failed: committed pages differed from the generator output in 16 pages (for example, nav links written with a ../pages/ prefix where the generator writes pages/). The data commit 5a769b3 carries the [skip ci] marker.",
+    "impact": "Published pages were not reproducible from the repo, and the check that should catch this did not run on that data commit.",
+    "status": "needs review",
+    "src": "S24",
+    "action": "Regenerate and commit (done in session 07810d9f); CI must confirm on the pull request. Review whether data commits should skip verification.",
+    "verified": true,
+    "retrieved": "2026-11-15"
+  },
+  {
+    "id": "F-7810-11",
+    "category": "Brief references cannot be traced",
+    "description": "The brief cites verification IDs (for example VR-04, VR-08, VR-17, VR-24 and VQ-05). A grep on 2026-11-15 found none of them in the repo, so the claims that rely on them cannot be traced to a document.",
+    "impact": "Items that rest on these IDs stay 'Not verified' in the register (SI-14) until the reference list is supplied.",
+    "status": "needs review",
+    "src": "S24",
+    "action": "Supply the reference list, or the dated source behind each ID.",
+    "verified": true,
+    "retrieved": "2026-11-15"
+  },
+  {
+    "id": "F-7810-12",
+    "category": "Leaderboard rules cite a different gate scheme",
+    "description": "data/leaderboard_rules.json (rule LB-02) says a strategy appears on the ranked leaderboard only after passing G01 to G13. data/s9cb/leaderboard.json defines eight gates, G1 to G8. The two gate schemes are not reconciled.",
+    "impact": "A reader cannot tell which gate set decides eligibility. The rules file and the leaderboard may disagree on who qualifies.",
+    "status": "needs review",
+    "src": "S24",
+    "action": "Pick one gate scheme, cite it from both files, and record the change in the rules file.",
+    "verified": true,
+    "retrieved": "2026-11-15"
   }
 ]

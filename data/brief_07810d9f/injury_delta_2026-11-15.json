@@ -1,0 +1,508 @@
+{
+ "what": "Delta between the committed nfl.com injury scrape and a dated live read of the same page. Published as differences only.",
+ "live_read": {
+  "source_url": "https://www.nfl.com/injuries/",
+  "read_on_utc": "2026-11-15T12:18Z",
+  "method": "fetch_page, chunks 0-7 of 8, each club section's rows transcribed by hand to data/brief_07810d9f/live_read_2026-11-15_week10.psv",
+  "file": "data/brief_07810d9f/live_read_2026-11-15_week10.psv"
+ },
+ "committed_scrape": {
+  "file": "data/model/official_injuries.json",
+  "generated_at": "2026-11-14T17:02:31+00:00",
+  "source_url": "https://www.nfl.com/injuries/"
+ },
+ "summary": {
+  "live_rows": 347,
+  "scrape_rows": 345,
+  "live_clubs_with_rows": 28,
+  "scrape_clubs_with_rows": 28,
+  "rows_matched_by_team_and_player": 345,
+  "rows_only_on_live_page": 2,
+  "rows_only_in_scrape": 0,
+  "field_mismatches_on_matched_rows": {
+   "injury": 13,
+   "game": 13,
+   "practice": 6
+  },
+  "clubs_with_scrape_blank_where_live_has_status": {
+   "BAL": 4,
+   "LAC": 20
+  },
+  "scrape_generated_at": "2026-11-14T17:02:31+00:00",
+  "scrape_html_sha256": "b8e5fd1bc24393d7415e2aed8cfe6d933bf61f88e08fde4e8e29300e79109419",
+  "scrape_rows_claimed": 345
+ },
+ "per_club": {
+  "ATL": {
+   "live_rows": 11,
+   "scrape_rows": 11
+  },
+  "AZ": {
+   "live_rows": 15,
+   "scrape_rows": 15
+  },
+  "BAL": {
+   "live_rows": 10,
+   "scrape_rows": 8
+  },
+  "BUF": {
+   "live_rows": 14,
+   "scrape_rows": 14
+  },
+  "CAR": {
+   "live_rows": 12,
+   "scrape_rows": 12
+  },
+  "CIN": {
+   "live_rows": 9,
+   "scrape_rows": 9
+  },
+  "CLE": {
+   "live_rows": 12,
+   "scrape_rows": 12
+  },
+  "DAL": {
+   "live_rows": 19,
+   "scrape_rows": 19
+  },
+  "DET": {
+   "live_rows": 9,
+   "scrape_rows": 9
+  },
+  "GB": {
+   "live_rows": 17,
+   "scrape_rows": 17
+  },
+  "HOU": {
+   "live_rows": 16,
+   "scrape_rows": 16
+  },
+  "IND": {
+   "live_rows": 14,
+   "scrape_rows": 14
+  },
+  "JAX": {
+   "live_rows": 11,
+   "scrape_rows": 11
+  },
+  "KC": {
+   "live_rows": 13,
+   "scrape_rows": 13
+  },
+  "LAC": {
+   "live_rows": 19,
+   "scrape_rows": 19
+  },
+  "LAR": {
+   "live_rows": 14,
+   "scrape_rows": 14
+  },
+  "LV": {
+   "live_rows": 5,
+   "scrape_rows": 5
+  },
+  "MIA": {
+   "live_rows": 11,
+   "scrape_rows": 11
+  },
+  "MIN": {
+   "live_rows": 13,
+   "scrape_rows": 13
+  },
+  "NE": {
+   "live_rows": 15,
+   "scrape_rows": 15
+  },
+  "NO": {
+   "live_rows": 12,
+   "scrape_rows": 12
+  },
+  "NYG": {
+   "live_rows": 11,
+   "scrape_rows": 11
+  },
+  "NYJ": {
+   "live_rows": 9,
+   "scrape_rows": 9
+  },
+  "PIT": {
+   "live_rows": 8,
+   "scrape_rows": 8
+  },
+  "SEA": {
+   "live_rows": 15,
+   "scrape_rows": 15
+  },
+  "SF": {
+   "live_rows": 12,
+   "scrape_rows": 12
+  },
+  "TEN": {
+   "live_rows": 12,
+   "scrape_rows": 12
+  },
+  "WAS": {
+   "live_rows": 9,
+   "scrape_rows": 9
+  }
+ },
+ "scrape_blank_status_check": {
+  "ATL": {
+   "live_rows_with_injury_or_game_status": 5,
+   "scrape_rows_with_injury_or_game_status": 5
+  },
+  "AZ": {
+   "live_rows_with_injury_or_game_status": 9,
+   "scrape_rows_with_injury_or_game_status": 9
+  },
+  "BAL": {
+   "live_rows_with_injury_or_game_status": 2,
+   "scrape_rows_with_injury_or_game_status": 0
+  },
+  "BUF": {
+   "live_rows_with_injury_or_game_status": 5,
+   "scrape_rows_with_injury_or_game_status": 5
+  },
+  "CAR": {
+   "live_rows_with_injury_or_game_status": 7,
+   "scrape_rows_with_injury_or_game_status": 7
+  },
+  "CIN": {
+   "live_rows_with_injury_or_game_status": 4,
+   "scrape_rows_with_injury_or_game_status": 4
+  },
+  "CLE": {
+   "live_rows_with_injury_or_game_status": 3,
+   "scrape_rows_with_injury_or_game_status": 3
+  },
+  "DAL": {
+   "live_rows_with_injury_or_game_status": 11,
+   "scrape_rows_with_injury_or_game_status": 11
+  },
+  "DET": {
+   "live_rows_with_injury_or_game_status": 5,
+   "scrape_rows_with_injury_or_game_status": 5
+  },
+  "GB": {
+   "live_rows_with_injury_or_game_status": 12,
+   "scrape_rows_with_injury_or_game_status": 12
+  },
+  "HOU": {
+   "live_rows_with_injury_or_game_status": 11,
+   "scrape_rows_with_injury_or_game_status": 11
+  },
+  "IND": {
+   "live_rows_with_injury_or_game_status": 7,
+   "scrape_rows_with_injury_or_game_status": 8
+  },
+  "JAX": {
+   "live_rows_with_injury_or_game_status": 4,
+   "scrape_rows_with_injury_or_game_status": 4
+  },
+  "KC": {
+   "live_rows_with_injury_or_game_status": 6,
+   "scrape_rows_with_injury_or_game_status": 6
+  },
+  "LAC": {
+   "live_rows_with_injury_or_game_status": 10,
+   "scrape_rows_with_injury_or_game_status": 0
+  },
+  "LAR": {
+   "live_rows_with_injury_or_game_status": 7,
+   "scrape_rows_with_injury_or_game_status": 7
+  },
+  "LV": {
+   "live_rows_with_injury_or_game_status": 2,
+   "scrape_rows_with_injury_or_game_status": 2
+  },
+  "MIA": {
+   "live_rows_with_injury_or_game_status": 4,
+   "scrape_rows_with_injury_or_game_status": 4
+  },
+  "MIN": {
+   "live_rows_with_injury_or_game_status": 8,
+   "scrape_rows_with_injury_or_game_status": 8
+  },
+  "NE": {
+   "live_rows_with_injury_or_game_status": 12,
+   "scrape_rows_with_injury_or_game_status": 12
+  },
+  "NO": {
+   "live_rows_with_injury_or_game_status": 6,
+   "scrape_rows_with_injury_or_game_status": 6
+  },
+  "NYG": {
+   "live_rows_with_injury_or_game_status": 1,
+   "scrape_rows_with_injury_or_game_status": 1
+  },
+  "NYJ": {
+   "live_rows_with_injury_or_game_status": 9,
+   "scrape_rows_with_injury_or_game_status": 9
+  },
+  "PIT": {
+   "live_rows_with_injury_or_game_status": 1,
+   "scrape_rows_with_injury_or_game_status": 1
+  },
+  "SEA": {
+   "live_rows_with_injury_or_game_status": 4,
+   "scrape_rows_with_injury_or_game_status": 4
+  },
+  "SF": {
+   "live_rows_with_injury_or_game_status": 8,
+   "scrape_rows_with_injury_or_game_status": 8
+  },
+  "TEN": {
+   "live_rows_with_injury_or_game_status": 6,
+   "scrape_rows_with_injury_or_game_status": 6
+  },
+  "WAS": {
+   "live_rows_with_injury_or_game_status": 2,
+   "scrape_rows_with_injury_or_game_status": 2
+  }
+ },
+ "rows_only_on_live_page": [
+  {
+   "team": "BAL",
+   "player": "Calais Campbell",
+   "position": "DT",
+   "injury": "",
+   "practice": "Did Not Participate In Practice",
+   "game": ""
+  },
+  {
+   "team": "BAL",
+   "player": "Ronnie Stanley",
+   "position": "T",
+   "injury": "",
+   "practice": "Did Not Participate In Practice",
+   "game": ""
+  }
+ ],
+ "rows_only_in_scrape": [],
+ "field_mismatches": [
+  {
+   "team": "BAL",
+   "player": "Adam Randall",
+   "field": "injury",
+   "live": "Neck, Hamstring",
+   "scrape": ""
+  },
+  {
+   "team": "BAL",
+   "player": "Adam Randall",
+   "field": "game",
+   "live": "Questionable",
+   "scrape": ""
+  },
+  {
+   "team": "BAL",
+   "player": "Jaylinn Hawkins",
+   "field": "injury",
+   "live": "Knee",
+   "scrape": ""
+  },
+  {
+   "team": "BAL",
+   "player": "Jaylinn Hawkins",
+   "field": "game",
+   "live": "Out",
+   "scrape": ""
+  },
+  {
+   "team": "IND",
+   "player": "Arden Key",
+   "field": "injury",
+   "live": "",
+   "scrape": "Hamstring"
+  },
+  {
+   "team": "IND",
+   "player": "Arden Key",
+   "field": "game",
+   "live": "",
+   "scrape": "Questionable"
+  },
+  {
+   "team": "LAC",
+   "player": "Branson Taylor",
+   "field": "injury",
+   "live": "Ankle",
+   "scrape": ""
+  },
+  {
+   "team": "LAC",
+   "player": "Branson Taylor",
+   "field": "game",
+   "live": "Out",
+   "scrape": ""
+  },
+  {
+   "team": "LAC",
+   "player": "Brenen Thompson",
+   "field": "injury",
+   "live": "Hamstring",
+   "scrape": ""
+  },
+  {
+   "team": "LAC",
+   "player": "Brenen Thompson",
+   "field": "game",
+   "live": "Doubtful",
+   "scrape": ""
+  },
+  {
+   "team": "LAC",
+   "player": "Bud Dupree",
+   "field": "practice",
+   "live": "Full Participation in Practice",
+   "scrape": "Did Not Participate In Practice"
+  },
+  {
+   "team": "LAC",
+   "player": "David Njoku",
+   "field": "injury",
+   "live": "Fibula",
+   "scrape": ""
+  },
+  {
+   "team": "LAC",
+   "player": "David Njoku",
+   "field": "practice",
+   "live": "Full Participation in Practice",
+   "scrape": "Limited Participation in Practice"
+  },
+  {
+   "team": "LAC",
+   "player": "David Njoku",
+   "field": "game",
+   "live": "Questionable",
+   "scrape": ""
+  },
+  {
+   "team": "LAC",
+   "player": "Denzel Perryman",
+   "field": "injury",
+   "live": "Pectoral",
+   "scrape": ""
+  },
+  {
+   "team": "LAC",
+   "player": "Denzel Perryman",
+   "field": "game",
+   "live": "Questionable",
+   "scrape": ""
+  },
+  {
+   "team": "LAC",
+   "player": "Isas Waxter",
+   "field": "injury",
+   "live": "Ankle",
+   "scrape": ""
+  },
+  {
+   "team": "LAC",
+   "player": "Isas Waxter",
+   "field": "game",
+   "live": "Out",
+   "scrape": ""
+  },
+  {
+   "team": "LAC",
+   "player": "Justin Eboigbe",
+   "field": "injury",
+   "live": "Ankle",
+   "scrape": ""
+  },
+  {
+   "team": "LAC",
+   "player": "Justin Eboigbe",
+   "field": "game",
+   "live": "Questionable",
+   "scrape": ""
+  },
+  {
+   "team": "LAC",
+   "player": "Kayode Awosika",
+   "field": "injury",
+   "live": "Fibula",
+   "scrape": ""
+  },
+  {
+   "team": "LAC",
+   "player": "Kayode Awosika",
+   "field": "practice",
+   "live": "Full Participation in Practice",
+   "scrape": "Limited Participation in Practice"
+  },
+  {
+   "team": "LAC",
+   "player": "Kayode Awosika",
+   "field": "game",
+   "live": "Questionable",
+   "scrape": ""
+  },
+  {
+   "team": "LAC",
+   "player": "Keaton Mitchell",
+   "field": "practice",
+   "live": "Full Participation in Practice",
+   "scrape": "Limited Participation in Practice"
+  },
+  {
+   "team": "LAC",
+   "player": "Kendall Williamson",
+   "field": "injury",
+   "live": "Calf",
+   "scrape": ""
+  },
+  {
+   "team": "LAC",
+   "player": "Kendall Williamson",
+   "field": "game",
+   "live": "Out",
+   "scrape": ""
+  },
+  {
+   "team": "LAC",
+   "player": "Ladd McConkey",
+   "field": "injury",
+   "live": "Back",
+   "scrape": ""
+  },
+  {
+   "team": "LAC",
+   "player": "Ladd McConkey",
+   "field": "game",
+   "live": "Questionable",
+   "scrape": ""
+  },
+  {
+   "team": "LAC",
+   "player": "Rodney Shelley",
+   "field": "practice",
+   "live": "Full Participation in Practice",
+   "scrape": "Limited Participation in Practice"
+  },
+  {
+   "team": "LAC",
+   "player": "Trey Pipkins",
+   "field": "injury",
+   "live": "Not injury related - personal matter, Knee",
+   "scrape": ""
+  },
+  {
+   "team": "LAC",
+   "player": "Trey Pipkins",
+   "field": "practice",
+   "live": "Limited Participation in Practice",
+   "scrape": "Did Not Participate In Practice"
+  },
+  {
+   "team": "LAC",
+   "player": "Trey Pipkins",
+   "field": "game",
+   "live": "Questionable",
+   "scrape": ""
+  }
+ ]
+}
