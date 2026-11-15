@@ -3024,3 +3024,20 @@ additive and non-overlapping with every earlier session, which are all closed.
 - **Open board defect (log, not edited):** the daily data job (`collect-data.yml`, which also runs on `arena/**` pushes) re-renders some pages with a different path than `tools/build_site_all.py`: nav links are written as `../pages/…` (e.g. `pages/luck.html`, `pages/readiness.html`), so `build_site_all.py --check` fails after each refresh commit, although every link still resolves. Owner: the session that owns `tools/build_dashboard.py` and the collect-data step. Request: make the data job end with `tools/build_site_all.py` (or make the check run after it). Logged as part of F-7810-10.
 - Follow-up PR (label corrections in the register; PR-09 wording and IN-10 count) opened from the same branch after the merge; its result is recorded here when it is merged.
 - Follow-up PR #66 (register label corrections; cross-reference SP-09 → SI-09): **MERGED** at 2026-11-15T12:38:16Z, merge commit `95618e7`. Its head `bb6b8a0` passed all four workflows. GitHub Pages: built for `8c57b7c` (later main data refresh) after the `95618e7` Pages run succeeded.
+
+
+---
+
+# Session `d4027f66-nfl1` — official depth register (4 clubs), pre-registration of the demotion gate, drift alarm (2026-11-15)
+
+Branch `arena/d4027f66-nfl1` (platform-fixed; the `session-<id>/<task>` convention cannot be used). Base: `main` at `7629ca6`, fast-forwarded from `df084b5` (the branch was an ancestor; no rebase or rewrite). Board read before work: yes. No other session holds an active claim (last claims `07810d9f` merged in PR #65/#66; `90c2b454` and `a6220e65` merged).
+
+**Constraint recorded:** bash cannot reach club or nfl.com hosts (HTTP 000 from the sandbox). Official pages were read with `fetch_page` and saved verbatim (link text kept in brackets, URLs removed), so every captured row is checkable against the page URL and fetch date.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| E1 | Official depth register for the four clubs whose charts the repo already cites (GB, KC, SF, SEA), captured 2026-11-15: one row per printed cell, number stripped, raw string kept, shared and empty slots represented, slot groups instead of a single starter | in progress | `d4027f66` | `data/depth/**`, `tools/build_depth_register.py`, `tools/check_depth_register.py`, `tests/test_depth_register.py` | Covers IN-09, IN-10, IN-21 (4 of 32 clubs; the 32-club sweep stays open) |
+| E2 | Pre-register the demotion gate, the leaderboard scoring rule and the backtest-number ban before any prospective window opens; commit-hash registration; gate that fails on a number without a registration | in progress | `d4027f66` | `data/preregistration/**`, `tools/check_preregistration.py` | Covers PR-06, PR-07, PR-15 (not retroactive for ST-01..ST-12, whose results were already seen) |
+| E3 | Drift alarm: depth-register parser fails the build on schema drift (missing section, header, URL or fetch date); value gaps are flagged, not hidden | in progress | `d4027f66` | `tools/check_depth_register.py`, `.github/workflows/verify.yml` (one added step) | Covers SI-09 for the depth scraper only; injury scraper still open |
+| E4 | Flags for every irregularity found (GB repo-vs-page differences, KC evidence-file rank conflation, duplicate names across slots, KC/SEA shared cells) | in progress | `d4027f66` | `data/flags.json` (append) | published on Flagged for Review, non-blocking |
+| E5 | Readiness register rows for E1–E3, executive summary note, regenerate pages, gates, PR to `main`, merge, Pages check, record here | in progress | `d4027f66` | `scripts/brief_07810d9f/register.py` (status rows only), `executive-summary.html`, generated pages, `COORDINATION.md` | |
