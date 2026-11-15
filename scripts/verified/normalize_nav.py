@@ -35,14 +35,13 @@ CANON = [
     # strength/; the target rule below keeps its href correct from both levels.
     ("room/index.html", "Decision Room"),
     ("strength/index.html", "SOS Study"),
+    ("shadow/index.html", "Shadow Baseline"),
     # Sessions d23c65ad/c56ebee8: the review room and the s9cb research sub-site join
     # the shared bar so no published page can become unreachable.
     ("review-room/index.html", "Review Room"),
+    # Session 739408a8-nfl1 (P1): pre-registration ledger for the forward test.
+    ("prereg/index.html", "Pre-registration ledger"),
     ("research/index.html", "s9cb Research"),
-    # Session c7b65577-nfl1: the strategy competition (pre-registration, proper-score leaderboard,
-    # demotion gate, two-sided falsifiers, two totals).  Added to both nav lists at once because
-    # this file and pipeline/gen_site.py are documented as needing to stay byte-identical.
-    ("strat/index.html", "Strategy Competition"),
     # pages produced by the other generators in this repository, kept in the shared
     # navigation so no session's page can become unreachable
     ("executive-summary.html", "Executive Summary (companion)"),

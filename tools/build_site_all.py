@@ -30,7 +30,6 @@ The order below is the contract:
   6. tools/build_docs_site.py               -> the docs/ sub-site
   7. PYTHONPATH=src scripts/build_site.py   -> the verified-lab/ sub-site
   8. referee/tools/build_site.py            -> the referee/ sub-site
-  9. strat/*.py                             -> the strategy-competition sub-site (session c7b65577)
 
 Every step is deterministic: the pages are a function of the data files, so running the
 script twice produces the same bytes and `--check` can be used as a CI gate.
@@ -64,23 +63,21 @@ STEPS = [
     # session 543676f8-nfl1: the official-capture page is built before the landing page so the
     # landing page can link it; it fails the build if the capture does not pass its gate.
     ("official capture page (capture/)", [sys.executable, "tools/build_capture_site.py"], ROOT),
+    # session 55dc53f4-nfl1 (P5/P6): the per-team injury view and the 13-vs-15-Nov delta are built
+    # from committed capture files, then the shadow/ sub-site. Before the landing page, as above.
+    ("shadow team view and delta", [sys.executable, "tools/build_team_view.py"], ROOT),
+    ("shadow sub-site (shadow/)", [sys.executable, "tools/build_shadow_site.py"], ROOT),
     ("landing page and decision lab", [sys.executable, "gen_site.py"], os.path.join(ROOT, "pipeline")),
     # Session 90c2b454-nfl1 (P3): the injury-snapshot ledger, rendered from its own store.
     ("injury snapshot ledger", [sys.executable, "tools/build_snapshots_page.py"], ROOT),
+    # Session 739408a8-nfl1 (P1): pre-registration ledger. `check` fails on any changed frozen rule,
+    # any forecast that does not reproduce from the official inputs, or any late forecast.
+    ("pre-registration check", [sys.executable, "tools/prereg.py", "check"], ROOT),
+    ("pre-registration page (prereg/)", [sys.executable, "tools/prereg.py", "render"], ROOT),
     ("canonical navigation", [sys.executable, "scripts/verified/normalize_nav.py"], ROOT),
     ("docs sub-site", [sys.executable, "tools/build_docs_site.py"], ROOT),
     ("verified-lab sub-site", [sys.executable, "scripts/build_site.py"], ROOT),
     ("referee sub-site", [sys.executable, "referee/tools/build_site.py"], ROOT),
-    # Session c7b65577-nfl1: the strategy-competition sub-site.  The five data builders run
-    # before the renderer so the pages are always a function of the latest JSON, and the site's
-    # own gate runs last so `--check` covers it.
-    ("official reconciliation", [sys.executable, "strat/reconcile_official.py"], ROOT),
-    ("strategy competition data", [sys.executable, "strat/preregister.py"], ROOT),
-    ("strategy competition: demotion gate", [sys.executable, "strat/demotion.py"], ROOT),
-    ("strategy competition falsifiers", [sys.executable, "strat/what_would_change.py"], ROOT),
-    ("strategy competition registers", [sys.executable, "strat/registers.py"], ROOT),
-    ("strategy competition week-on-week diff", [sys.executable, "strat/diff.py"], ROOT),
-    ("strategy competition site (strat/)", [sys.executable, "strat/build.py"], ROOT),
 ]
 
 
