@@ -3146,3 +3146,17 @@ Most of the brief's items were not started. Examples, each still open on the boa
 - **Merge (recorded after the fact):** PR #73 merged with a merge commit, `145731b`, at 2026-11-15T12:59:56Z (`gh pr view 73`: state MERGED). The Pages build on `main` (run `43716710645`) completed with `success`. The live pages `research/backtest.html` and `depth-chart.html` were fetched and show the changed content (the backtest page carries the 'not a leaderboard result' banner; the depth chart shows Packers names without jersey numbers).
 - **Follow-up in the same session:** the Backtest page still had the KPI label 'declared before any of them was scored', an unverified claim. It was reworded to 'rules in this study; no pre-registration commit is recorded for them' and shipped in a follow-up PR from this branch.
 
+---
+
+## Session `48ab654c-nfl1` — official-data publication-policy audit (2026-11-15)
+
+Read the task board before claiming. Arena fixes this session to `arena/48ab654c-nfl1`; the
+brief's `session-<id>/<task>` branch naming cannot be used, so work stays on this branch.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| P1 | Independently verify the official NFL terms relevant to automated injury-report capture and public row-level publication; document the actual repository exposure, decision options, unresolved questions, and a conservative implementation gate | in progress | `48ab654c-nfl1` | `docs/data-publication-policy-audit-48ab654c.md`; `COORDINATION.md` (append-only) | Documentation-only. PR #68 is active and already flags a terms concern; this audit must not change its files or duplicate its data/flag work. No raw capture, scraper, site generator, or published dataset will be modified. |
+
+Claim committed and pushed before beginning the audit. Review the official terms and repository
+code paths; report what is directly stated separately from interpretation. This is not legal
+advice and will not claim permission or prohibition beyond the text actually checked.
