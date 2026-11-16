@@ -1,0 +1,970 @@
+{
+ "what": "Week-11 NWS hourly overlay (E4/IN-29 part 2): hourly wind/temperature/precipitation around kickoff per venue",
+ "hourly_source": "NOAA/NWS api.weather.gov gridpoints forecast/hourly (official, linked per row)",
+ "coords_source": "nominatim.openstreetmap.org used only as query input to NWS /points; published values are all NWS",
+ "method": "kickoff parsed from the official nfl.com schedule transcript (venue_week11.json); window = kickoff +/- 2h",
+ "fetched_at_utc": "2026-11-16T15:06:55+00:00",
+ "count": 13,
+ "flagged_count": 2,
+ "rows": [
+  {
+   "game_id": "2026_11_IND_HOU",
+   "venue_game": "IND@HOU",
+   "stadium_as_printed": "RELIANT STADIUM",
+   "location_as_printed": "HOUSTON, TX",
+   "gameday": "2026-11-19",
+   "kickoff_et_printed": "8:15 PM",
+   "flags": [],
+   "coords": {
+    "lat": 29.6848581,
+    "lon": -95.4108015,
+    "display_name": "Reliant Stadium, 1, Kirby Drive, Houston, Harris County, Texas, 77054, United States",
+    "query_used": "RELIANT STADIUM, HOUSTON, TX",
+    "nominatim_link": "https://nominatim.openstreetmap.org/search?q=RELIANT%20STADIUM%2C%20HOUSTON%2C%20TX&format=jsonv2"
+   },
+   "nws_points": {
+    "url": "https://api.weather.gov/points/29.6849,-95.4108",
+    "status": 200,
+    "cwa": "HGX",
+    "grid_id": "HGX",
+    "grid_x": 61,
+    "grid_y": 91,
+    "forecast_hourly_url": "https://api.weather.gov/gridpoints/HGX/61,91/forecast/hourly",
+    "forecast_zone": "https://api.weather.gov/zones/forecast/TXZ213",
+    "time_zone": "America/Chicago"
+   },
+   "hourly": {
+    "status": 200,
+    "source_url": "https://api.weather.gov/gridpoints/HGX/61,91/forecast/hourly",
+    "generated_at": "2026-11-16T14:56:03+00:00",
+    "update_time": "2026-11-16T12:20:21+00:00",
+    "valid_times": "2026-11-16T06:00:00+00:00/P7DT19H",
+    "window_kickoff_utc": [
+     "2026-11-19T23:15:00+00:00",
+     "2026-11-20T03:15:00+00:00"
+    ],
+    "periods": [
+     {
+      "start_time": "2026-11-19T17:00:00-06:00",
+      "temperature_f": 73,
+      "wind_speed": "5 mph",
+      "wind_direction": "E",
+      "pop_pct": 2,
+      "short_forecast": "Mostly Sunny",
+      "relative_humidity_pct": 71
+     },
+     {
+      "start_time": "2026-11-19T18:00:00-06:00",
+      "temperature_f": 71,
+      "wind_speed": "5 mph",
+      "wind_direction": "E",
+      "pop_pct": 1,
+      "short_forecast": "Partly Cloudy",
+      "relative_humidity_pct": 76
+     },
+     {
+      "start_time": "2026-11-19T19:00:00-06:00",
+      "temperature_f": 69,
+      "wind_speed": "5 mph",
+      "wind_direction": "E",
+      "pop_pct": 1,
+      "short_forecast": "Partly Cloudy",
+      "relative_humidity_pct": 81
+     },
+     {
+      "start_time": "2026-11-19T20:00:00-06:00",
+      "temperature_f": 67,
+      "wind_speed": "5 mph",
+      "wind_direction": "E",
+      "pop_pct": 1,
+      "short_forecast": "Partly Cloudy",
+      "relative_humidity_pct": 87
+     },
+     {
+      "start_time": "2026-11-19T21:00:00-06:00",
+      "temperature_f": 66,
+      "wind_speed": "5 mph",
+      "wind_direction": "E",
+      "pop_pct": 1,
+      "short_forecast": "Partly Cloudy",
+      "relative_humidity_pct": 90
+     }
+    ]
+   },
+   "kickoff_utc": "2026-11-20T01:15:00+00:00"
+  },
+  {
+   "game_id": "2026_11_MIA_BUF",
+   "venue_game": "MIA@BUF",
+   "stadium_as_printed": "HIGHMARK STADIUM",
+   "location_as_printed": "ORCHARD PARK, NY",
+   "gameday": "2026-11-22",
+   "kickoff_et_printed": "1:00 PM",
+   "flags": [],
+   "coords": {
+    "lat": 42.7730357,
+    "lon": -78.7912031,
+    "display_name": "Highmark Stadium, 10, Abbott Road, Town of Orchard Park, Erie County, New York, 14127, United States",
+    "query_used": "HIGHMARK STADIUM, ORCHARD PARK, NY",
+    "nominatim_link": "https://nominatim.openstreetmap.org/search?q=HIGHMARK%20STADIUM%2C%20ORCHARD%20PARK%2C%20NY&format=jsonv2"
+   },
+   "nws_points": {
+    "url": "https://api.weather.gov/points/42.773,-78.7912",
+    "status": 200,
+    "cwa": "BUF",
+    "grid_id": "BUF",
+    "grid_x": 39,
+    "grid_y": 42,
+    "forecast_hourly_url": "https://api.weather.gov/gridpoints/BUF/39,42/forecast/hourly",
+    "forecast_zone": "https://api.weather.gov/zones/forecast/NYZ085",
+    "time_zone": "America/New_York"
+   },
+   "hourly": {
+    "status": 200,
+    "source_url": "https://api.weather.gov/gridpoints/BUF/39,42/forecast/hourly",
+    "generated_at": "2026-11-16T15:06:17+00:00",
+    "update_time": "2026-11-16T14:57:30+00:00",
+    "valid_times": "2026-11-16T08:00:00+00:00/P7DT17H",
+    "window_kickoff_utc": [
+     "2026-11-22T16:00:00+00:00",
+     "2026-11-22T20:00:00+00:00"
+    ],
+    "periods": [
+     {
+      "start_time": "2026-11-22T11:00:00-05:00",
+      "temperature_f": 57,
+      "wind_speed": "10 mph",
+      "wind_direction": "SW",
+      "pop_pct": 22,
+      "short_forecast": "Slight Chance Rain Showers",
+      "relative_humidity_pct": 61
+     },
+     {
+      "start_time": "2026-11-22T12:00:00-05:00",
+      "temperature_f": 58,
+      "wind_speed": "10 mph",
+      "wind_direction": "W",
+      "pop_pct": 22,
+      "short_forecast": "Slight Chance Rain Showers",
+      "relative_humidity_pct": 60
+     },
+     {
+      "start_time": "2026-11-22T13:00:00-05:00",
+      "temperature_f": 57,
+      "wind_speed": "10 mph",
+      "wind_direction": "W",
+      "pop_pct": 24,
+      "short_forecast": "Slight Chance Rain Showers",
+      "relative_humidity_pct": 60
+     },
+     {
+      "start_time": "2026-11-22T14:00:00-05:00",
+      "temperature_f": 57,
+      "wind_speed": "10 mph",
+      "wind_direction": "W",
+      "pop_pct": 24,
+      "short_forecast": "Slight Chance Rain Showers",
+      "relative_humidity_pct": 59
+     }
+    ]
+   },
+   "kickoff_utc": "2026-11-22T18:00:00+00:00"
+  },
+  {
+   "game_id": "2026_11_BAL_CAR",
+   "venue_game": "BAL@CAR",
+   "stadium_as_printed": "BANK OF AMERICA STADIUM",
+   "location_as_printed": "CHARLOTTE, NC",
+   "gameday": "2026-11-22",
+   "kickoff_et_printed": "1:00 PM",
+   "flags": [],
+   "coords": {
+    "lat": 35.225774,
+    "lon": -80.8528276,
+    "display_name": "Bank of America Stadium, 800, South Mint Street, Third Ward, Uptown, Charlotte, Mecklenburg County, North Carolina, 28202, United States",
+    "query_used": "BANK OF AMERICA STADIUM, CHARLOTTE, NC",
+    "nominatim_link": "https://nominatim.openstreetmap.org/search?q=BANK%20OF%20AMERICA%20STADIUM%2C%20CHARLOTTE%2C%20NC&format=jsonv2"
+   },
+   "nws_points": {
+    "url": "https://api.weather.gov/points/35.2258,-80.8528",
+    "status": 200,
+    "cwa": "GSP",
+    "grid_id": "GSP",
+    "grid_x": 118,
+    "grid_y": 65,
+    "forecast_hourly_url": "https://api.weather.gov/gridpoints/GSP/118,65/forecast/hourly",
+    "forecast_zone": "https://api.weather.gov/zones/forecast/NCZ071",
+    "time_zone": "America/New_York"
+   },
+   "hourly": {
+    "status": 200,
+    "source_url": "https://api.weather.gov/gridpoints/GSP/118,65/forecast/hourly",
+    "generated_at": "2026-11-16T15:06:20+00:00",
+    "update_time": "2026-11-16T12:04:31+00:00",
+    "valid_times": "2026-11-16T06:00:00+00:00/P7DT19H",
+    "window_kickoff_utc": [
+     "2026-11-22T16:00:00+00:00",
+     "2026-11-22T20:00:00+00:00"
+    ],
+    "periods": [
+     {
+      "start_time": "2026-11-22T11:00:00-05:00",
+      "temperature_f": 63,
+      "wind_speed": "3 mph",
+      "wind_direction": "N",
+      "pop_pct": 1,
+      "short_forecast": "Sunny",
+      "relative_humidity_pct": 59
+     },
+     {
+      "start_time": "2026-11-22T12:00:00-05:00",
+      "temperature_f": 67,
+      "wind_speed": "3 mph",
+      "wind_direction": "NNW",
+      "pop_pct": 1,
+      "short_forecast": "Sunny",
+      "relative_humidity_pct": 52
+     },
+     {
+      "start_time": "2026-11-22T13:00:00-05:00",
+      "temperature_f": 69,
+      "wind_speed": "3 mph",
+      "wind_direction": "NNW",
+      "pop_pct": 1,
+      "short_forecast": "Sunny",
+      "relative_humidity_pct": 47
+     },
+     {
+      "start_time": "2026-11-22T14:00:00-05:00",
+      "temperature_f": 71,
+      "wind_speed": "5 mph",
+      "wind_direction": "NNW",
+      "pop_pct": 1,
+      "short_forecast": "Sunny",
+      "relative_humidity_pct": 45
+     }
+    ]
+   },
+   "kickoff_utc": "2026-11-22T18:00:00+00:00"
+  },
+  {
+   "game_id": "2026_11_NO_CHI",
+   "venue_game": "NO@CHI",
+   "stadium_as_printed": "SOLDIER FIELD",
+   "location_as_printed": "CHICAGO, IL",
+   "gameday": "2026-11-22",
+   "kickoff_et_printed": "1:00 PM",
+   "flags": [],
+   "coords": {
+    "lat": 41.8623356,
+    "lon": -87.6176477,
+    "display_name": "Soldier Field, 425, East McFetridge Drive, Central Station, South Loop, Near South Side, Chicago, South Chicago Township, Cook County, Illinois, 60605, United States",
+    "query_used": "SOLDIER FIELD, CHICAGO, IL",
+    "nominatim_link": "https://nominatim.openstreetmap.org/search?q=SOLDIER%20FIELD%2C%20CHICAGO%2C%20IL&format=jsonv2"
+   },
+   "nws_points": {
+    "url": "https://api.weather.gov/points/41.8623,-87.6176",
+    "status": 200,
+    "cwa": "LOT",
+    "grid_id": "LOT",
+    "grid_x": 76,
+    "grid_y": 72,
+    "forecast_hourly_url": "https://api.weather.gov/gridpoints/LOT/76,72/forecast/hourly",
+    "forecast_zone": "https://api.weather.gov/zones/forecast/ILZ104",
+    "time_zone": "America/Chicago"
+   },
+   "hourly": {
+    "status": 200,
+    "source_url": "https://api.weather.gov/gridpoints/LOT/76,72/forecast/hourly",
+    "generated_at": "2026-11-16T14:37:31+00:00",
+    "update_time": "2026-11-16T13:26:11+00:00",
+    "valid_times": "2026-11-16T07:00:00+00:00/P7DT18H",
+    "window_kickoff_utc": [
+     "2026-11-22T16:00:00+00:00",
+     "2026-11-22T20:00:00+00:00"
+    ],
+    "periods": [
+     {
+      "start_time": "2026-11-22T10:00:00-06:00",
+      "temperature_f": 45,
+      "wind_speed": "10 mph",
+      "wind_direction": "W",
+      "pop_pct": 11,
+      "short_forecast": "Mostly Sunny",
+      "relative_humidity_pct": 75
+     },
+     {
+      "start_time": "2026-11-22T11:00:00-06:00",
+      "temperature_f": 46,
+      "wind_speed": "10 mph",
+      "wind_direction": "WNW",
+      "pop_pct": 11,
+      "short_forecast": "Mostly Sunny",
+      "relative_humidity_pct": 71
+     },
+     {
+      "start_time": "2026-11-22T12:00:00-06:00",
+      "temperature_f": 47,
+      "wind_speed": "10 mph",
+      "wind_direction": "WNW",
+      "pop_pct": 8,
+      "short_forecast": "Mostly Sunny",
+      "relative_humidity_pct": 68
+     },
+     {
+      "start_time": "2026-11-22T13:00:00-06:00",
+      "temperature_f": 48,
+      "wind_speed": "10 mph",
+      "wind_direction": "WNW",
+      "pop_pct": 8,
+      "short_forecast": "Mostly Sunny",
+      "relative_humidity_pct": 66
+     }
+    ]
+   },
+   "kickoff_utc": "2026-11-22T18:00:00+00:00"
+  },
+  {
+   "game_id": "2026_11_TEN_DAL",
+   "venue_game": "TEN@DAL",
+   "stadium_as_printed": "AT&T STADIUM",
+   "location_as_printed": "ARLINGTON, TX",
+   "gameday": "2026-11-22",
+   "kickoff_et_printed": "1:00 PM",
+   "flags": [],
+   "coords": {
+    "lat": 32.7478503,
+    "lon": -97.0928337,
+    "display_name": "AT&T Stadium, 1, AT&T Way, Arlington, Tarrant County, Texas, 76011, United States",
+    "query_used": "AT&T STADIUM, ARLINGTON, TX",
+    "nominatim_link": "https://nominatim.openstreetmap.org/search?q=AT%26T%20STADIUM%2C%20ARLINGTON%2C%20TX&format=jsonv2"
+   },
+   "nws_points": {
+    "url": "https://api.weather.gov/points/32.7479,-97.0928",
+    "status": 200,
+    "cwa": "FWD",
+    "grid_id": "FWD",
+    "grid_x": 78,
+    "grid_y": 103,
+    "forecast_hourly_url": "https://api.weather.gov/gridpoints/FWD/78,103/forecast/hourly",
+    "forecast_zone": "https://api.weather.gov/zones/forecast/TXZ118",
+    "time_zone": "America/Chicago"
+   },
+   "hourly": {
+    "status": 200,
+    "source_url": "https://api.weather.gov/gridpoints/FWD/78,103/forecast/hourly",
+    "generated_at": "2026-11-16T14:56:03+00:00",
+    "update_time": "2026-11-16T11:06:27+00:00",
+    "valid_times": "2026-11-16T05:00:00+00:00/P7DT20H",
+    "window_kickoff_utc": [
+     "2026-11-22T16:00:00+00:00",
+     "2026-11-22T20:00:00+00:00"
+    ],
+    "periods": [
+     {
+      "start_time": "2026-11-22T10:00:00-06:00",
+      "temperature_f": 61,
+      "wind_speed": "10 mph",
+      "wind_direction": "NE",
+      "pop_pct": 17,
+      "short_forecast": "Slight Chance Rain Showers",
+      "relative_humidity_pct": 75
+     },
+     {
+      "start_time": "2026-11-22T11:00:00-06:00",
+      "temperature_f": 64,
+      "wind_speed": "10 mph",
+      "wind_direction": "ENE",
+      "pop_pct": 17,
+      "short_forecast": "Slight Chance Rain Showers",
+      "relative_humidity_pct": 67
+     },
+     {
+      "start_time": "2026-11-22T12:00:00-06:00",
+      "temperature_f": 66,
+      "wind_speed": "10 mph",
+      "wind_direction": "ENE",
+      "pop_pct": 15,
+      "short_forecast": "Slight Chance Rain Showers",
+      "relative_humidity_pct": 63
+     },
+     {
+      "start_time": "2026-11-22T13:00:00-06:00",
+      "temperature_f": 67,
+      "wind_speed": "10 mph",
+      "wind_direction": "ENE",
+      "pop_pct": 15,
+      "short_forecast": "Slight Chance Rain Showers",
+      "relative_humidity_pct": 61
+     }
+    ]
+   },
+   "kickoff_utc": "2026-11-22T18:00:00+00:00"
+  },
+  {
+   "game_id": "2026_11_TB_DET",
+   "venue_game": "TB@DET",
+   "stadium_as_printed": "FORD FIELD",
+   "location_as_printed": "DETROIT, MI",
+   "gameday": "2026-11-22",
+   "kickoff_et_printed": "1:00 PM",
+   "flags": [],
+   "coords": {
+    "lat": 42.3399568,
+    "lon": -83.0456166,
+    "display_name": "Ford Field, 2000, Brush Street, Greektown, Midtown, Detroit, Wayne County, Michigan, 48226, United States",
+    "query_used": "FORD FIELD, DETROIT, MI",
+    "nominatim_link": "https://nominatim.openstreetmap.org/search?q=FORD%20FIELD%2C%20DETROIT%2C%20MI&format=jsonv2"
+   },
+   "nws_points": {
+    "url": "https://api.weather.gov/points/42.34,-83.0456",
+    "status": 200,
+    "cwa": "DTX",
+    "grid_id": "DTX",
+    "grid_x": 66,
+    "grid_y": 34,
+    "forecast_hourly_url": "https://api.weather.gov/gridpoints/DTX/66,34/forecast/hourly",
+    "forecast_zone": "https://api.weather.gov/zones/forecast/MIZ076",
+    "time_zone": "America/Detroit"
+   },
+   "hourly": {
+    "status": 200,
+    "source_url": "https://api.weather.gov/gridpoints/DTX/66,34/forecast/hourly",
+    "generated_at": "2026-11-16T14:20:17+00:00",
+    "update_time": "2026-11-16T08:24:06+00:00",
+    "valid_times": "2026-11-16T02:00:00+00:00/P7DT23H",
+    "window_kickoff_utc": [
+     "2026-11-22T16:00:00+00:00",
+     "2026-11-22T20:00:00+00:00"
+    ],
+    "periods": [
+     {
+      "start_time": "2026-11-22T11:00:00-05:00",
+      "temperature_f": 52,
+      "wind_speed": "13 mph",
+      "wind_direction": "W",
+      "pop_pct": 22,
+      "short_forecast": "Slight Chance Light Rain",
+      "relative_humidity_pct": 74
+     },
+     {
+      "start_time": "2026-11-22T12:00:00-05:00",
+      "temperature_f": 53,
+      "wind_speed": "13 mph",
+      "wind_direction": "W",
+      "pop_pct": 22,
+      "short_forecast": "Slight Chance Light Rain",
+      "relative_humidity_pct": 71
+     },
+     {
+      "start_time": "2026-11-22T13:00:00-05:00",
+      "temperature_f": 54,
+      "wind_speed": "13 mph",
+      "wind_direction": "W",
+      "pop_pct": 10,
+      "short_forecast": "Mostly Sunny",
+      "relative_humidity_pct": 69
+     },
+     {
+      "start_time": "2026-11-22T14:00:00-05:00",
+      "temperature_f": 54,
+      "wind_speed": "13 mph",
+      "wind_direction": "W",
+      "pop_pct": 10,
+      "short_forecast": "Mostly Sunny",
+      "relative_humidity_pct": 66
+     }
+    ]
+   },
+   "kickoff_utc": "2026-11-22T18:00:00+00:00"
+  },
+  {
+   "game_id": "2026_11_ARI_KC",
+   "venue_game": "AZ@KC",
+   "stadium_as_printed": "ARROWHEAD STADIUM",
+   "location_as_printed": "KANSAS CITY, MO",
+   "gameday": "2026-11-22",
+   "kickoff_et_printed": "1:00 PM",
+   "flags": [],
+   "coords": {
+    "lat": 39.0489358,
+    "lon": -94.4839993,
+    "display_name": "Arrowhead Stadium, 1, Arrowhead Drive, Kansas City, Jackson County, Missouri, 64129, United States",
+    "query_used": "ARROWHEAD STADIUM, KANSAS CITY, MO",
+    "nominatim_link": "https://nominatim.openstreetmap.org/search?q=ARROWHEAD%20STADIUM%2C%20KANSAS%20CITY%2C%20MO&format=jsonv2"
+   },
+   "nws_points": {
+    "url": "https://api.weather.gov/points/39.0489,-94.484",
+    "status": 200,
+    "cwa": "EAX",
+    "grid_id": "EAX",
+    "grid_x": 47,
+    "grid_y": 48,
+    "forecast_hourly_url": "https://api.weather.gov/gridpoints/EAX/47,48/forecast/hourly",
+    "forecast_zone": "https://api.weather.gov/zones/forecast/MOZ037",
+    "time_zone": "America/Chicago"
+   },
+   "hourly": {
+    "status": 200,
+    "source_url": "https://api.weather.gov/gridpoints/EAX/47,48/forecast/hourly",
+    "generated_at": "2026-11-16T15:06:34+00:00",
+    "update_time": "2026-11-16T11:21:48+00:00",
+    "valid_times": "2026-11-16T05:00:00+00:00/P7DT20H",
+    "window_kickoff_utc": [
+     "2026-11-22T16:00:00+00:00",
+     "2026-11-22T20:00:00+00:00"
+    ],
+    "periods": [
+     {
+      "start_time": "2026-11-22T10:00:00-06:00",
+      "temperature_f": 42,
+      "wind_speed": "7 mph",
+      "wind_direction": "N",
+      "pop_pct": 1,
+      "short_forecast": "Sunny",
+      "relative_humidity_pct": 76
+     },
+     {
+      "start_time": "2026-11-22T11:00:00-06:00",
+      "temperature_f": 45,
+      "wind_speed": "8 mph",
+      "wind_direction": "N",
+      "pop_pct": 1,
+      "short_forecast": "Sunny",
+      "relative_humidity_pct": 65
+     },
+     {
+      "start_time": "2026-11-22T12:00:00-06:00",
+      "temperature_f": 47,
+      "wind_speed": "8 mph",
+      "wind_direction": "N",
+      "pop_pct": 1,
+      "short_forecast": "Sunny",
+      "relative_humidity_pct": 60
+     },
+     {
+      "start_time": "2026-11-22T13:00:00-06:00",
+      "temperature_f": 49,
+      "wind_speed": "8 mph",
+      "wind_direction": "N",
+      "pop_pct": 1,
+      "short_forecast": "Sunny",
+      "relative_humidity_pct": 56
+     }
+    ]
+   },
+   "kickoff_utc": "2026-11-22T18:00:00+00:00"
+  },
+  {
+   "game_id": "2026_11_PIT_PHI",
+   "venue_game": "PIT@PHI",
+   "stadium_as_printed": "LINCOLN FINANCIAL FIELD",
+   "location_as_printed": "PHILADELPHIA, PA",
+   "gameday": "2026-11-22",
+   "kickoff_et_printed": "1:00 PM",
+   "flags": [],
+   "coords": {
+    "lat": 39.9009099,
+    "lon": -75.1674892,
+    "display_name": "Lincoln Financial Field, 1, South Darien Street, South Philadelphia, Philadelphia, Philadelphia County, Pennsylvania, 19147, United States",
+    "query_used": "LINCOLN FINANCIAL FIELD, PHILADELPHIA, PA",
+    "nominatim_link": "https://nominatim.openstreetmap.org/search?q=LINCOLN%20FINANCIAL%20FIELD%2C%20PHILADELPHIA%2C%20PA&format=jsonv2"
+   },
+   "nws_points": {
+    "url": "https://api.weather.gov/points/39.9009,-75.1675",
+    "status": 200,
+    "cwa": "PHI",
+    "grid_id": "PHI",
+    "grid_x": 50,
+    "grid_y": 76,
+    "forecast_hourly_url": "https://api.weather.gov/gridpoints/PHI/50,76/forecast/hourly",
+    "forecast_zone": "https://api.weather.gov/zones/forecast/PAZ071",
+    "time_zone": "America/New_York"
+   },
+   "hourly": {
+    "status": 200,
+    "source_url": "https://api.weather.gov/gridpoints/PHI/50,76/forecast/hourly",
+    "generated_at": "2026-11-16T14:56:03+00:00",
+    "update_time": "2026-11-16T09:07:33+00:00",
+    "valid_times": "2026-11-16T03:00:00+00:00/P7DT22H",
+    "window_kickoff_utc": [
+     "2026-11-22T16:00:00+00:00",
+     "2026-11-22T20:00:00+00:00"
+    ],
+    "periods": [
+     {
+      "start_time": "2026-11-22T11:00:00-05:00",
+      "temperature_f": 58,
+      "wind_speed": "0 mph",
+      "wind_direction": "",
+      "pop_pct": 11,
+      "short_forecast": "Partly Sunny",
+      "relative_humidity_pct": 77
+     },
+     {
+      "start_time": "2026-11-22T12:00:00-05:00",
+      "temperature_f": 60,
+      "wind_speed": "5 mph",
+      "wind_direction": "W",
+      "pop_pct": 11,
+      "short_forecast": "Partly Sunny",
+      "relative_humidity_pct": 75
+     },
+     {
+      "start_time": "2026-11-22T13:00:00-05:00",
+      "temperature_f": 62,
+      "wind_speed": "5 mph",
+      "wind_direction": "SW",
+      "pop_pct": 6,
+      "short_forecast": "Mostly Sunny",
+      "relative_humidity_pct": 70
+     },
+     {
+      "start_time": "2026-11-22T14:00:00-05:00",
+      "temperature_f": 63,
+      "wind_speed": "5 mph",
+      "wind_direction": "W",
+      "pop_pct": 6,
+      "short_forecast": "Mostly Sunny",
+      "relative_humidity_pct": 67
+     }
+    ]
+   },
+   "kickoff_utc": "2026-11-22T18:00:00+00:00"
+  },
+  {
+   "game_id": "2026_11_NYJ_LAC",
+   "venue_game": "NYJ@LAC",
+   "stadium_as_printed": "SOFI STADIUM",
+   "location_as_printed": "INGLEWOOD, CA",
+   "gameday": "2026-11-22",
+   "kickoff_et_printed": "4:05 PM",
+   "flags": [],
+   "coords": {
+    "lat": 33.9534074,
+    "lon": -118.3390098,
+    "display_name": "SoFi Stadium, 1001, Champions Way, Hollywood Park, Morningside Park, Inglewood, Los Angeles County, California, 90301, United States",
+    "query_used": "SOFI STADIUM, INGLEWOOD, CA",
+    "nominatim_link": "https://nominatim.openstreetmap.org/search?q=SOFI%20STADIUM%2C%20INGLEWOOD%2C%20CA&format=jsonv2"
+   },
+   "nws_points": {
+    "url": "https://api.weather.gov/points/33.9534,-118.339",
+    "status": 200,
+    "cwa": "LOX",
+    "grid_id": "LOX",
+    "grid_x": 151,
+    "grid_y": 41,
+    "forecast_hourly_url": "https://api.weather.gov/gridpoints/LOX/151,41/forecast/hourly",
+    "forecast_zone": "https://api.weather.gov/zones/forecast/CAZ368",
+    "time_zone": "America/Los_Angeles"
+   },
+   "hourly": {
+    "status": 200,
+    "source_url": "https://api.weather.gov/gridpoints/LOX/151,41/forecast/hourly",
+    "generated_at": "2026-11-16T14:20:44+00:00",
+    "update_time": "2026-11-16T14:01:42+00:00",
+    "valid_times": "2026-11-16T08:00:00+00:00/P7DT17H",
+    "window_kickoff_utc": [
+     "2026-11-22T19:05:00+00:00",
+     "2026-11-22T23:05:00+00:00"
+    ],
+    "periods": [
+     {
+      "start_time": "2026-11-22T11:00:00-08:00",
+      "temperature_f": 63,
+      "wind_speed": "5 mph",
+      "wind_direction": "NW",
+      "pop_pct": 16,
+      "short_forecast": "Slight Chance Light Rain",
+      "relative_humidity_pct": 62
+     },
+     {
+      "start_time": "2026-11-22T12:00:00-08:00",
+      "temperature_f": 64,
+      "wind_speed": "5 mph",
+      "wind_direction": "NW",
+      "pop_pct": 16,
+      "short_forecast": "Slight Chance Light Rain",
+      "relative_humidity_pct": 62
+     },
+     {
+      "start_time": "2026-11-22T13:00:00-08:00",
+      "temperature_f": 64,
+      "wind_speed": "0 mph",
+      "wind_direction": "",
+      "pop_pct": 16,
+      "short_forecast": "Slight Chance Light Rain",
+      "relative_humidity_pct": 63
+     },
+     {
+      "start_time": "2026-11-22T14:00:00-08:00",
+      "temperature_f": 64,
+      "wind_speed": "0 mph",
+      "wind_direction": "",
+      "pop_pct": 16,
+      "short_forecast": "Slight Chance Light Rain",
+      "relative_humidity_pct": 65
+     },
+     {
+      "start_time": "2026-11-22T15:00:00-08:00",
+      "temperature_f": 64,
+      "wind_speed": "0 mph",
+      "wind_direction": "",
+      "pop_pct": 16,
+      "short_forecast": "Slight Chance Light Rain",
+      "relative_humidity_pct": 68
+     }
+    ]
+   },
+   "kickoff_utc": "2026-11-22T21:05:00+00:00"
+  },
+  {
+   "game_id": "2026_11_JAX_NYG",
+   "venue_game": "JAX@NYG",
+   "stadium_as_printed": "METLIFE STADIUM",
+   "location_as_printed": "EAST RUTHERFORD, NJ",
+   "gameday": "2026-11-22",
+   "kickoff_et_printed": "4:25 PM",
+   "flags": [],
+   "coords": {
+    "lat": 40.8135071,
+    "lon": -74.0743442,
+    "display_name": "MetLife Stadium, 1, MetLife Stadium Drive, East Rutherford, Bergen County, New Jersey, 07073, United States",
+    "query_used": "METLIFE STADIUM, EAST RUTHERFORD, NJ",
+    "nominatim_link": "https://nominatim.openstreetmap.org/search?q=METLIFE%20STADIUM%2C%20EAST%20RUTHERFORD%2C%20NJ&format=jsonv2"
+   },
+   "nws_points": {
+    "url": "https://api.weather.gov/points/40.8135,-74.0743",
+    "status": 200,
+    "cwa": "OKX",
+    "grid_id": "OKX",
+    "grid_x": 30,
+    "grid_y": 46,
+    "forecast_hourly_url": "https://api.weather.gov/gridpoints/OKX/30,46/forecast/hourly",
+    "forecast_zone": "https://api.weather.gov/zones/forecast/NJZ104",
+    "time_zone": "America/New_York"
+   },
+   "hourly": {
+    "status": 200,
+    "source_url": "https://api.weather.gov/gridpoints/OKX/30,46/forecast/hourly",
+    "generated_at": "2026-11-16T14:24:38+00:00",
+    "update_time": "2026-11-16T09:51:56+00:00",
+    "valid_times": "2026-11-16T03:00:00+00:00/P7DT22H",
+    "window_kickoff_utc": [
+     "2026-11-22T19:25:00+00:00",
+     "2026-11-22T23:25:00+00:00"
+    ],
+    "periods": [
+     {
+      "start_time": "2026-11-22T14:00:00-05:00",
+      "temperature_f": 61,
+      "wind_speed": "5 mph",
+      "wind_direction": "SW",
+      "pop_pct": 11,
+      "short_forecast": "Mostly Sunny",
+      "relative_humidity_pct": 67
+     },
+     {
+      "start_time": "2026-11-22T15:00:00-05:00",
+      "temperature_f": 61,
+      "wind_speed": "5 mph",
+      "wind_direction": "SW",
+      "pop_pct": 11,
+      "short_forecast": "Mostly Sunny",
+      "relative_humidity_pct": 65
+     },
+     {
+      "start_time": "2026-11-22T16:00:00-05:00",
+      "temperature_f": 61,
+      "wind_speed": "5 mph",
+      "wind_direction": "SW",
+      "pop_pct": 11,
+      "short_forecast": "Mostly Sunny",
+      "relative_humidity_pct": 65
+     },
+     {
+      "start_time": "2026-11-22T17:00:00-05:00",
+      "temperature_f": 59,
+      "wind_speed": "5 mph",
+      "wind_direction": "W",
+      "pop_pct": 11,
+      "short_forecast": "Mostly Sunny",
+      "relative_humidity_pct": 69
+     },
+     {
+      "start_time": "2026-11-22T18:00:00-05:00",
+      "temperature_f": 57,
+      "wind_speed": "3 mph",
+      "wind_direction": "W",
+      "pop_pct": 11,
+      "short_forecast": "Partly Cloudy",
+      "relative_humidity_pct": 72
+     }
+    ]
+   },
+   "kickoff_utc": "2026-11-22T21:25:00+00:00"
+  },
+  {
+   "game_id": "2026_11_LV_DEN",
+   "venue_game": "LV@DEN",
+   "stadium_as_printed": "EMPOWER FIELD AT MILE HIGH",
+   "location_as_printed": "DENVER, CO",
+   "gameday": "2026-11-22",
+   "kickoff_et_printed": "4:25 PM",
+   "flags": [],
+   "coords": {
+    "lat": 39.743952,
+    "lon": -105.0192228,
+    "display_name": "Empower Field at Mile High, 1701, Mile High Stadium Circle, Jefferson Park, Denver, Colorado, 80204, United States",
+    "query_used": "EMPOWER FIELD AT MILE HIGH, DENVER, CO",
+    "nominatim_link": "https://nominatim.openstreetmap.org/search?q=EMPOWER%20FIELD%20AT%20MILE%20HIGH%2C%20DENVER%2C%20CO&format=jsonv2"
+   },
+   "nws_points": {
+    "url": "https://api.weather.gov/points/39.744,-105.0192",
+    "status": 200,
+    "cwa": "BOU",
+    "grid_id": "BOU",
+    "grid_x": 62,
+    "grid_y": 62,
+    "forecast_hourly_url": "https://api.weather.gov/gridpoints/BOU/62,62/forecast/hourly",
+    "forecast_zone": "https://api.weather.gov/zones/forecast/COZ040",
+    "time_zone": "America/Denver"
+   },
+   "hourly": {
+    "status": 200,
+    "source_url": "https://api.weather.gov/gridpoints/BOU/62,62/forecast/hourly",
+    "generated_at": "2026-11-16T14:56:04+00:00",
+    "update_time": "2026-11-16T07:53:11+00:00",
+    "valid_times": "2026-11-16T01:00:00+00:00/P8D",
+    "window_kickoff_utc": [
+     "2026-11-22T19:25:00+00:00",
+     "2026-11-22T23:25:00+00:00"
+    ],
+    "periods": [
+     {
+      "start_time": "2026-11-22T12:00:00-07:00",
+      "temperature_f": 48,
+      "wind_speed": "2 mph",
+      "wind_direction": "E",
+      "pop_pct": 0,
+      "short_forecast": "Mostly Sunny",
+      "relative_humidity_pct": 31
+     },
+     {
+      "start_time": "2026-11-22T13:00:00-07:00",
+      "temperature_f": 49,
+      "wind_speed": "3 mph",
+      "wind_direction": "ENE",
+      "pop_pct": 0,
+      "short_forecast": "Mostly Sunny",
+      "relative_humidity_pct": 30
+     },
+     {
+      "start_time": "2026-11-22T14:00:00-07:00",
+      "temperature_f": 50,
+      "wind_speed": "3 mph",
+      "wind_direction": "NE",
+      "pop_pct": 0,
+      "short_forecast": "Mostly Sunny",
+      "relative_humidity_pct": 28
+     },
+     {
+      "start_time": "2026-11-22T15:00:00-07:00",
+      "temperature_f": 50,
+      "wind_speed": "3 mph",
+      "wind_direction": "NE",
+      "pop_pct": 0,
+      "short_forecast": "Mostly Sunny",
+      "relative_humidity_pct": 28
+     },
+     {
+      "start_time": "2026-11-22T16:00:00-07:00",
+      "temperature_f": 49,
+      "wind_speed": "3 mph",
+      "wind_direction": "NNE",
+      "pop_pct": 0,
+      "short_forecast": "Mostly Sunny",
+      "relative_humidity_pct": 29
+     }
+    ]
+   },
+   "kickoff_utc": "2026-11-22T21:25:00+00:00"
+  },
+  {
+   "game_id": "2026_11_MIN_SF",
+   "venue_game": "MIN@SF",
+   "stadium_as_printed": "ESTADIO BANORTE",
+   "location_as_printed": "MEXICO CITY",
+   "gameday": "2026-11-22",
+   "kickoff_et_printed": "8:20 PM",
+   "flags": [
+    "outside_nws_coverage"
+   ],
+   "coords": {
+    "lat": 19.3029794,
+    "lon": -99.15047,
+    "display_name": "Estadio Banorte, Circuito Estadio Banorte, Ex-ejido de Santa \u00darsula Coapa, Santa \u00darsula Coapa, Ciudad de M\u00e9xico, Coyoac\u00e1n, Ciudad de M\u00e9xico, 04600, M\u00e9xico",
+    "query_used": "ESTADIO BANORTE, MEXICO CITY",
+    "nominatim_link": "https://nominatim.openstreetmap.org/search?q=ESTADIO%20BANORTE%2C%20MEXICO%20CITY&format=jsonv2"
+   },
+   "nws_points": {
+    "url": null,
+    "status": 404
+   },
+   "hourly": null,
+   "kickoff_utc": "2026-11-23T01:20:00+00:00"
+  },
+  {
+   "game_id": "2026_11_CIN_WAS",
+   "venue_game": "CIN@WAS",
+   "stadium_as_printed": "NORTHWEST STADIUM",
+   "location_as_printed": "LANDOVER, MD",
+   "gameday": "2026-11-23",
+   "kickoff_et_printed": "8:15 PM",
+   "flags": [
+    "kickoff_outside_hourly_horizon"
+   ],
+   "coords": {
+    "lat": 38.9076694,
+    "lon": -76.864533,
+    "display_name": "Northwest Stadium, 1600, Ring Road, Landover, Prince George's County, Maryland, 20785, United States",
+    "query_used": "NORTHWEST STADIUM, LANDOVER, MD",
+    "nominatim_link": "https://nominatim.openstreetmap.org/search?q=NORTHWEST%20STADIUM%2C%20LANDOVER%2C%20MD&format=jsonv2"
+   },
+   "nws_points": {
+    "url": "https://api.weather.gov/points/38.9077,-76.8645",
+    "status": 200,
+    "cwa": "LWX",
+    "grid_id": "LWX",
+    "grid_x": 102,
+    "grid_y": 73,
+    "forecast_hourly_url": "https://api.weather.gov/gridpoints/LWX/102,73/forecast/hourly",
+    "forecast_zone": "https://api.weather.gov/zones/forecast/MDZ013",
+    "time_zone": "America/New_York"
+   },
+   "hourly": {
+    "status": 200,
+    "source_url": "https://api.weather.gov/gridpoints/LWX/102,73/forecast/hourly",
+    "generated_at": "2026-11-16T15:06:54+00:00",
+    "update_time": "2026-11-16T14:52:51+00:00",
+    "valid_times": "2026-11-16T08:00:00+00:00/P7DT17H",
+    "window_kickoff_utc": [
+     "2026-11-23T23:15:00+00:00",
+     "2026-11-24T03:15:00+00:00"
+    ],
+    "periods": [
+     {
+      "start_time": "2026-11-22T21:00:00-05:00",
+      "temperature_f": 53,
+      "wind_speed": "3 mph",
+      "wind_direction": "NW",
+      "pop_pct": 4,
+      "short_forecast": "Partly Cloudy",
+      "relative_humidity_pct": 83
+     }
+    ]
+   },
+   "kickoff_utc": "2026-11-24T01:15:00+00:00"
+  }
+ ]
+}
