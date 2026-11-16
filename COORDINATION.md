@@ -3989,3 +3989,61 @@ Two things the merge itself produced, both kept:
 2. The rebase onto `main` dropped this session's board blocks once (a union resolution that deduplicated by line content ate 27 blank/table lines). Rebuilt as a true pure append and asserted `base board preserved byte-for-byte`.
 
 `reserve register gate: 0 failure(s), 2 note(s), 24 pinned page(s)`; `python3 -m unittest discover -s tests -q` → **229 tests OK**.
+
+
+---
+
+## Task board — session `98a40411-nfl1` (ACTIVE; claimed 2026-11-16T16:05Z, branch `arena/98a40411-nfl1`, base `46c82ae` on `main`)
+
+Purpose: the official **Game Book** is recorded on this board as "source not identified"
+(`room/data/readiness.json` IN-18, and `IN-04` "No official inactive or snap-count source
+identified in the repo", `IN-15`, `IN-17`, and `data/readiness.json` R7/R8). It **is** identified,
+and this session captured it. Every official game centre page carries a **"Download Game Book
+(PDF)"** link served from `static.www.nfl.com/.../gamecenter/<uuid>.pdf`, and the first page of
+that PDF prints, per club: **Lineups** (offence and defence starters, number + name),
+**Substitutions**, **Did Not Play** and **Not Active**, plus the venue, the final score, the
+officials and the paid attendance. Read 2026-11-16:
+<https://www.nfl.com/games/patriots-at-lions-2026-reg-10?tab=recap> →
+<https://static.www.nfl.com/image/upload/v1794829721/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf>
+(Neutral-site game: the PDF says "Allianz Arena, Munich, Germany", the game centre says
+"FC BAYERN MUNICH STADIUM" — a venue-name disagreement to flag, not to resolve silently).
+
+Second official source for the same fact, independent of the PDF: the league's dated weekly
+inactives article <https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season>,
+read 2026-11-16, which lists every club's inactives for the 13 Sunday games. The two official
+sources are cross-checked row by row; agreement is published, disagreement is flagged.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| G1 | Claim and push this block | done | `98a40411` | `COORDINATION.md` | this section |
+| G2 | Immutable capture of every played 2026 game's official Game Book: game-centre URL, PDF URL, UTC fetch time, raw sha256, parsed rows; append-only | in progress | `98a40411` | `pipeline/collect_gamebooks.py`, `data/gamebook/**` | runs on Actions (the sandbox cannot reach nfl.com); parser pinned by fixtures in `tests/fixtures/` |
+| G3 | Row-level transcription of the official Week 10 inactives article with its fetch time, kept beside the raw text it was read from | in progress | `98a40411` | `data/gamebook/official_inactives/**` | agent transcription of the fetched page text, method disclosed as flag CAP-06 did |
+| G4 | Availability-outcome ledger: one row per (game, club, player) joining the weekly report designation to the game-book status — starter / substituted / did not play / not active | in progress | `98a40411` | `data/gamebook/**` | clears `IN-17` expected-vs-actual |
+| G5 | Designation-reliability table: play rate per designation with Wilson 95% intervals, `n` published on every cell, per week and pooled | in progress | `98a40411` | `data/gamebook/designations.json` | clears `IN-15` / R8 for the weeks captured; says plainly what "Questionable" means empirically |
+| G6 | Gate + unit tests: PDF-link required, 8-to-12 inactives per club, no placeholder text, official link on every row, two-source agreement check, point-in-time rule (a capture whose timestamp is after kickoff is marked retrospective and may not be used as a pre-kickoff snapshot) | in progress | `98a40411` | `tools/check_gamebook_register.py`, `tests/test_gamebook_register.py` | drift alarm per the brief |
+| G7 | Published sub-site `gamebook/`: coverage, ledger, designation reliability, method and limits, every row source-linked | in progress | `98a40411` | `gamebook/**` | 2 additive nav entries, logged; no other session's page is rewritten |
+| G8 | New flags, questions and suggestions from the sweep — append-only | pending | `98a40411` | `data/flags.json`, `data/questions.json`, `data/suggestions.json` | |
+| G9 | Readiness rows IN-04, IN-15, IN-17, IN-18 updated with the file-and-count evidence; counts recomputed; change request logged for `data/readiness.json` R7/R8 (generator not owned here) | pending | `98a40411` | `room/data/readiness.json` (four rows only) | |
+| G10 | Integration: canonical build, every gate, PR → merge → Pages confirm, record here | pending | `98a40411` | generated pages, `COORDINATION.md` | |
+
+### What this session will NOT do (deliberate non-goals, to avoid duplicate or forbidden work)
+
+* No snap counts. The brief forbids inferring depth rank or snaps from the Game Book, and the
+  Game Book contains no snap counts; the official play-share source is not in this repo and was
+  not found on nfl.com this session. The distinction between "not active", "active but did not
+  play" and "played" is published because the Game Book prints those three lists; a snap share is
+  not derived from them. Logged as a question, not smoothed over.
+* No venue/roof/weather register: claimed by open PR #99 (session `cc5a9cdd`, E2–E7). Venue text
+  is captured here only as a field of the game-book row, and a disagreement is flagged, not fixed.
+* No change to `pipeline/build_all.py`, `analysis/*`, `tools/build_readiness.py` or any other
+  session's generator; a change request is logged here instead of an edit.
+
+### Overlap check with the open PRs (#99, #94, #92, #91, #81, #80, #79, #77, #59, #57, #47)
+
+None of them touches `pipeline/collect_gamebooks.py`, `tools/build_gamebook_register.py`,
+`tools/check_gamebook_register.py`, `data/gamebook/**`, `gamebook/**`,
+`.github/workflows/gamebook-sweep.yml` or `tests/test_gamebook_register.py`. Shared files are
+touched **additively only** (`data/flags.json`, `data/questions.json`, `data/suggestions.json`
+appended and never reordered; one nav entry each in `pipeline/gen_site.py` and
+`scripts/verified/normalize_nav.py`; four named rows in `room/data/readiness.json`).
+_This claim is committed and pushed before any other file is touched, per the brief._
