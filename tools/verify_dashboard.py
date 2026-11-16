@@ -194,6 +194,22 @@ def main() -> int:
         for r, g in zip(rows, lines):
             cells = [re.sub(r"<[^>]+>", "", c).strip()
                      for c in re.findall(r"<td[^>]*>(.*?)</td>", r, re.S)]
+            is_blank = lambda s: s.strip().lower() == "blank"
+            if any(is_blank(c) for c in cells[3:6]):
+                # A labelled blank is only correct where the data row is null — the market
+                # for a game can be unpublished (e.g. a game with no consensus number yet),
+                # and the brief forbids inferring a value. Blanks must match the data's nulls.
+                if g.get("market_home_line") is not None:
+                    problems.append(f"{g['away']}@{g['home']}: printed blank but data has "
+                                    f"market {g['market_home_line']}")
+                if g.get("edge_home_line") is not None:
+                    problems.append(f"{g['away']}@{g['home']}: printed blank but data has "
+                                    f"edge {g['edge_home_line']}")
+                if not is_blank(cells[5]):
+                    problems.append(f"{g['away']}@{g['home']}: difference cell {cells[5]!r} "
+                                    f"printed while the market cells are blank")
+                checks += 1
+                continue
             try:
                 mh, mkt_h, mkt_a, diff = (float(cells[1]), float(cells[3]),
                                           float(cells[4]), float(cells[5]))
