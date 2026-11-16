@@ -1,0 +1,368 @@
+{
+ "generated_at_utc": "2026-11-16T14:56:59Z",
+ "parser": "collect_transactions/1.0",
+ "categories": [
+  "trades",
+  "signings",
+  "reserve-list",
+  "waivers",
+  "terminations",
+  "other"
+ ],
+ "months_requested": [
+  "2026-08",
+  "2026-09",
+  "2026-10",
+  "2026-11"
+ ],
+ "pages": {
+  "other/2026-08": {
+   "captured_at_utc": "2026-11-16T14:56:32Z",
+   "status": "ok",
+   "rows": 4,
+   "canonical_sha256": "3813cdd6bd66db08ecb4eeeebde00d79cc0fe911c35fe584ed9153ef8e1e48a6",
+   "raw_sha256": "eb84d76eb47fe1e58d334740943d675524edf4d1b89feee196ecad8a3022a3bb",
+   "http_status": 200,
+   "url": "https://www.nfl.com/transactions/league/other/2026/8",
+   "flags": [],
+   "headers": [
+    "from|to|date|name|position|transaction"
+   ]
+  },
+  "other/2026-09": {
+   "captured_at_utc": "2026-11-16T14:56:41Z",
+   "status": "ok",
+   "rows": 12,
+   "canonical_sha256": "5f97cd5d091d059f2aea0ff5c1133fd582100a6ae686b62bf18113736a194fff",
+   "raw_sha256": "2b917397ffef235086467bc50eef12e6b3f4e90a2195b506fcc73a8da5f1609a",
+   "http_status": 200,
+   "url": "https://www.nfl.com/transactions/league/other/2026/9",
+   "flags": [
+    "table 0: row for 'Ajani Carter' carries no club code on either side; the club is left blank rather than guessed",
+    "table 0: row for 'Charles Snowden' carries no club code on either side; the club is left blank rather than guessed",
+    "table 0: row for 'Xavier Thomas' carries no club code on either side; the club is left blank rather than guessed",
+    "table 0: row for 'Tracy Walker III' carries no club code on either side; the club is left blank rather than guessed"
+   ],
+   "headers": [
+    "from|to|date|name|position|transaction"
+   ]
+  },
+  "other/2026-10": {
+   "captured_at_utc": "2026-11-16T14:56:50Z",
+   "status": "ok",
+   "rows": 9,
+   "canonical_sha256": "6a7ec832c76d1fc4a763093f305052ad0c299d423c15e978ead9d09b199de049",
+   "raw_sha256": "a021217cffbcb1b823401dce8d169cbd2a9187447de106c583354f55ad0814dd",
+   "http_status": 200,
+   "url": "https://www.nfl.com/transactions/league/other/2026/10",
+   "flags": [
+    "table 0: row for 'Brock Rechsteiner' carries no club code on either side; the club is left blank rather than guessed",
+    "table 0: row for 'Nazeeh Johnson' carries no club code on either side; the club is left blank rather than guessed"
+   ],
+   "headers": [
+    "from|to|date|name|position|transaction"
+   ]
+  },
+  "other/2026-11": {
+   "captured_at_utc": "2026-11-16T14:56:57Z",
+   "status": "ok",
+   "rows": 5,
+   "canonical_sha256": "964e6958b57a8f90ec26aec8728432e835bfb2125a9736a79454ce4e42fc6a12",
+   "raw_sha256": "a887a5287fdae8c34448dc0e2ad297c000b2454192588881a05461929344b7df",
+   "http_status": 200,
+   "url": "https://www.nfl.com/transactions/league/other/2026/11",
+   "flags": [],
+   "headers": [
+    "from|to|date|name|position|transaction"
+   ]
+  },
+  "reserve-list/2026-08": {
+   "captured_at_utc": "2026-11-16T14:56:27Z",
+   "status": "ok",
+   "rows": 25,
+   "canonical_sha256": "351ccefefeee2170c3eb6d7f03ba8afee35da36ba6c5bdf22a69a699aa709e95",
+   "raw_sha256": "edac1e2fe871d47e107590bc673ee8d6ec9bd3db0215397cb77a42c83f7c143c",
+   "http_status": 200,
+   "url": "https://www.nfl.com/transactions/league/reserve-list/2026/8",
+   "flags": [],
+   "headers": [
+    "from|to|date|name|position|transaction"
+   ]
+  },
+  "reserve-list/2026-09": {
+   "captured_at_utc": "2026-11-16T14:56:36Z",
+   "status": "ok",
+   "rows": 25,
+   "canonical_sha256": "92c9fdb6ad2bee8b73ef933c29d9995e9ff654902231aefe397fe2c1d8bab0ca",
+   "raw_sha256": "42b68451a14908a5a6082255fd5abd5dc5f1aa91eabdb292eda86a34c88dad63",
+   "http_status": 200,
+   "url": "https://www.nfl.com/transactions/league/reserve-list/2026/9",
+   "flags": [],
+   "headers": [
+    "from|to|date|name|position|transaction"
+   ]
+  },
+  "reserve-list/2026-10": {
+   "captured_at_utc": "2026-11-16T14:56:46Z",
+   "status": "ok",
+   "rows": 25,
+   "canonical_sha256": "8f6488cd3d954818bf6bf4a785b7b03930345135256d213809d0af1433630fae",
+   "raw_sha256": "5f1d52f45c38f3d7291832bcec6c900f5a7aebdcd8902a1a24c5b45d607e9dcc",
+   "http_status": 200,
+   "url": "https://www.nfl.com/transactions/league/reserve-list/2026/10",
+   "flags": [],
+   "headers": [
+    "from|to|date|name|position|transaction"
+   ]
+  },
+  "reserve-list/2026-11": {
+   "captured_at_utc": "2026-11-16T14:56:54Z",
+   "status": "ok",
+   "rows": 25,
+   "canonical_sha256": "1853a0946688928c4b0a7692a1a8b9cd34d888ce66d7a2edea3ef26c10e40c1c",
+   "raw_sha256": "5087f40fe7af013a3d24658f5685a21f94a3719c05cbc485c95eb46495637b6f",
+   "http_status": 200,
+   "url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "flags": [],
+   "headers": [
+    "from|to|date|name|position|transaction"
+   ]
+  },
+  "signings/2026-08": {
+   "captured_at_utc": "2026-11-16T14:56:25Z",
+   "status": "ok",
+   "rows": 25,
+   "canonical_sha256": "bf7fa7f58112ce75e22c928de9f2d64ce9b392dc918035249ab98846a837457b",
+   "raw_sha256": "a2b34d622f94ff54d72848d786e8a8cb7a6fa281f79a964bb03bc646d154476f",
+   "http_status": 200,
+   "url": "https://www.nfl.com/transactions/league/signings/2026/8",
+   "flags": [],
+   "headers": [
+    "from|to|date|name|position|transaction"
+   ]
+  },
+  "signings/2026-09": {
+   "captured_at_utc": "2026-11-16T14:56:35Z",
+   "status": "ok",
+   "rows": 25,
+   "canonical_sha256": "09ae3448e58c3e89f57f7a113fca8eb4ed6bb6a97b35bfc9e69bb59c2aa07000",
+   "raw_sha256": "85d3b1191690f1815c866f02ef19dc0fdb0e0333f404b62185a2271dd0fcae4b",
+   "http_status": 200,
+   "url": "https://www.nfl.com/transactions/league/signings/2026/9",
+   "flags": [],
+   "headers": [
+    "from|to|date|name|position|transaction"
+   ]
+  },
+  "signings/2026-10": {
+   "captured_at_utc": "2026-11-16T14:56:43Z",
+   "status": "ok",
+   "rows": 25,
+   "canonical_sha256": "9b4bed4821e4ad0183b2b654f243875e4897bc70f5c5e3e339aa5dfe97e57203",
+   "raw_sha256": "574e84de648f555a2c4f12a91b159bb041a5c2c44f595239cad9fae34cfe1049",
+   "http_status": 200,
+   "url": "https://www.nfl.com/transactions/league/signings/2026/10",
+   "flags": [],
+   "headers": [
+    "from|to|date|name|position|transaction"
+   ]
+  },
+  "signings/2026-11": {
+   "captured_at_utc": "2026-11-16T14:56:53Z",
+   "status": "ok",
+   "rows": 25,
+   "canonical_sha256": "6eba08b8ea0f859d9e79b661a6f1aba286fab40419503a18b630a9b49193cc04",
+   "raw_sha256": "bda2c04ec3e88281d095964505f618030dcc2fa5f6ac97ecb571931ca94e2bce",
+   "http_status": 200,
+   "url": "https://www.nfl.com/transactions/league/signings/2026/11",
+   "flags": [],
+   "headers": [
+    "from|to|date|name|position|transaction"
+   ]
+  },
+  "terminations/2026-08": {
+   "captured_at_utc": "2026-11-16T14:56:30Z",
+   "status": "ok",
+   "rows": 25,
+   "canonical_sha256": "49b067b8d326001358d6b40996b7216b1d07235b97f97b1d7e8690ba08e83467",
+   "raw_sha256": "fde0b1b30df3e884e99bf17443037507816835460f3e9797582c53d1f5c637b7",
+   "http_status": 200,
+   "url": "https://www.nfl.com/transactions/league/terminations/2026/8",
+   "flags": [],
+   "headers": [
+    "from|to|date|name|position|transaction"
+   ]
+  },
+  "terminations/2026-09": {
+   "captured_at_utc": "2026-11-16T14:56:39Z",
+   "status": "ok",
+   "rows": 11,
+   "canonical_sha256": "7b56eb556581351b4488137e969be9eca52575a6a1fb47df225fbd3306c09343",
+   "raw_sha256": "38fdeaae725675c6736a613cb46c00455395d6963b9d63496a0aca1ee40b0fed",
+   "http_status": 200,
+   "url": "https://www.nfl.com/transactions/league/terminations/2026/9",
+   "flags": [],
+   "headers": [
+    "from|to|date|name|position|transaction"
+   ]
+  },
+  "terminations/2026-10": {
+   "captured_at_utc": "2026-11-16T14:56:48Z",
+   "status": "ok",
+   "rows": 25,
+   "canonical_sha256": "a700d67b4266415e6577404129be1dca4eec62ebe820a153bb0f0e4b13234312",
+   "raw_sha256": "56497ee11178c46007d1c83323d59c43a494995b25832d02be04c28ce72cd5ba",
+   "http_status": 200,
+   "url": "https://www.nfl.com/transactions/league/terminations/2026/10",
+   "flags": [],
+   "headers": [
+    "from|to|date|name|position|transaction"
+   ]
+  },
+  "terminations/2026-11": {
+   "captured_at_utc": "2026-11-16T14:56:56Z",
+   "status": "ok",
+   "rows": 13,
+   "canonical_sha256": "9997152cef78c54257215171f523a205f01c53a0a7d400fa1b1122ee8611bf7a",
+   "raw_sha256": "5f1f01cc9d44dcdb888b063546b3a0bd6f272d79d4ff7bcfc3d8942d4f0b1097",
+   "http_status": 200,
+   "url": "https://www.nfl.com/transactions/league/terminations/2026/11",
+   "flags": [],
+   "headers": [
+    "from|to|date|name|position|transaction"
+   ]
+  },
+  "trades/2026-08": {
+   "captured_at_utc": "2026-11-16T14:56:22Z",
+   "status": "ok",
+   "rows": 25,
+   "canonical_sha256": "1232c1edf079adac7c2be95fcefb5e7c7487b7cd57dfe2d64e5879f37726b2b6",
+   "raw_sha256": "6e168c325e132fa7ffcdc605d97e4fe2e1d4d02ac06ba2e007f5ebe51df4cafb",
+   "http_status": 200,
+   "url": "https://www.nfl.com/transactions/league/trades/2026/8",
+   "flags": [],
+   "headers": [
+    "from|to|date|name|position|transaction"
+   ]
+  },
+  "trades/2026-09": {
+   "captured_at_utc": "2026-11-16T14:56:33Z",
+   "status": "ok",
+   "rows": 1,
+   "canonical_sha256": "e99c44f524d7b75365a5b64f36e7df460f67b85cf817b2b266cbfa2dab4f779a",
+   "raw_sha256": "3dcb911e0ae30c76db082e77eb7db0535c5f288081940cc8a0d89b949a9b6ddd",
+   "http_status": 200,
+   "url": "https://www.nfl.com/transactions/league/trades/2026/9",
+   "flags": [],
+   "headers": [
+    "from|to|date|name|position|transaction"
+   ]
+  },
+  "trades/2026-10": {
+   "captured_at_utc": "2026-11-16T14:56:42Z",
+   "status": "ok",
+   "rows": 6,
+   "canonical_sha256": "c8c96002146264f8135b4fdbbb8a020e5f2cf21e4733e9c81d2bac1abcd0e174",
+   "raw_sha256": "e7f562e53d5e6f228eeee003836cef3f8be0e94689b5fbec3ade39669138fed1",
+   "http_status": 200,
+   "url": "https://www.nfl.com/transactions/league/trades/2026/10",
+   "flags": [],
+   "headers": [
+    "from|to|date|name|position|transaction"
+   ]
+  },
+  "trades/2026-11": {
+   "captured_at_utc": "2026-11-16T14:56:52Z",
+   "status": "ok",
+   "rows": 12,
+   "canonical_sha256": "9fb5424026391413d434493949d6d96aca9f7c40319fe0181f60cb0644f211fb",
+   "raw_sha256": "de7931170c12886d09a8094b0baac62e01b36d9cf212431d430b9367998db8a4",
+   "http_status": 200,
+   "url": "https://www.nfl.com/transactions/league/trades/2026/11",
+   "flags": [],
+   "headers": [
+    "from|to|date|name|position|transaction"
+   ]
+  },
+  "waivers/2026-08": {
+   "captured_at_utc": "2026-11-16T14:56:29Z",
+   "status": "ok",
+   "rows": 25,
+   "canonical_sha256": "614b92b6bcfffa7b5f8afbcad789f6cb76807d3b1af2907ca33d3643031675ca",
+   "raw_sha256": "ac74b6a212d52e8e04affbe13f56d0dc4147004bd0951fdc2be3ae77eac2f515",
+   "http_status": 200,
+   "url": "https://www.nfl.com/transactions/league/waivers/2026/8",
+   "flags": [],
+   "headers": [
+    "from|to|date|name|position|transaction"
+   ]
+  },
+  "waivers/2026-09": {
+   "captured_at_utc": "2026-11-16T14:56:38Z",
+   "status": "ok",
+   "rows": 25,
+   "canonical_sha256": "edc65650dc72f0450cf7da4c1f82bde63dfb134358a26b3e992c659b0d535e60",
+   "raw_sha256": "47b293efa9b511a1f23e9adbf1dd07a49a7026bf5c3e602b3f075e1dcd52b7bf",
+   "http_status": 200,
+   "url": "https://www.nfl.com/transactions/league/waivers/2026/9",
+   "flags": [],
+   "headers": [
+    "from|to|date|name|position|transaction"
+   ]
+  },
+  "waivers/2026-10": {
+   "captured_at_utc": "2026-11-16T14:56:47Z",
+   "status": "ok",
+   "rows": 25,
+   "canonical_sha256": "9b9ae1541dafdcac3d39f0fdb98ee01b0d501a8544f75ed43d9aff0e9cbf3bd9",
+   "raw_sha256": "0ae2ad72f9f8bba9cfdbabf7bc883f06d4c0af8a22ca4f69a9b4e8f13f71b377",
+   "http_status": 200,
+   "url": "https://www.nfl.com/transactions/league/waivers/2026/10",
+   "flags": [],
+   "headers": [
+    "from|to|date|name|position|transaction"
+   ]
+  },
+  "waivers/2026-11": {
+   "captured_at_utc": "2026-11-16T14:56:55Z",
+   "status": "ok",
+   "rows": 25,
+   "canonical_sha256": "77efa2600553ef3bc52c61828e80cca6f4fb0897d9f06ebb4b30241a20e24c8c",
+   "raw_sha256": "be65a159139fc87bd9d0e2c1922f4a78ed3e0acc9d650cfa1c9c56b6a523cc2e",
+   "http_status": 200,
+   "url": "https://www.nfl.com/transactions/league/waivers/2026/11",
+   "flags": [],
+   "headers": [
+    "from|to|date|name|position|transaction"
+   ]
+  }
+ },
+ "flags": [
+  {
+   "page": "other/2026-09",
+   "flag": "table 0: row for 'Ajani Carter' carries no club code on either side; the club is left blank rather than guessed"
+  },
+  {
+   "page": "other/2026-09",
+   "flag": "table 0: row for 'Charles Snowden' carries no club code on either side; the club is left blank rather than guessed"
+  },
+  {
+   "page": "other/2026-09",
+   "flag": "table 0: row for 'Xavier Thomas' carries no club code on either side; the club is left blank rather than guessed"
+  },
+  {
+   "page": "other/2026-09",
+   "flag": "table 0: row for 'Tracy Walker III' carries no club code on either side; the club is left blank rather than guessed"
+  },
+  {
+   "page": "other/2026-10",
+   "flag": "table 0: row for 'Brock Rechsteiner' carries no club code on either side; the club is left blank rather than guessed"
+  },
+  {
+   "page": "other/2026-10",
+   "flag": "table 0: row for 'Nazeeh Johnson' carries no club code on either side; the club is left blank rather than guessed"
+  }
+ ],
+ "n_pages": 24,
+ "n_rows_latest": 448
+}
