@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-13T14:01:11+00:00",
+ "generated_at": "2026-11-16T18:08:04+00:00",
  "session": "4c043747-nfl1",
  "sources": {
   "standings": "https://www.nfl.com/standings/league/2026/reg",
@@ -238,7 +238,7 @@
    "T1 SEA"
   ]
  },
- "checks_total": 905,
+ "checks_total": 908,
  "checks_failed": 0,
  "flags": [
   {
@@ -569,6 +569,21 @@
  ],
  "failures": [],
  "checks": [
+  {
+   "check": "standings transcription rows (T5)",
+   "result": "PASS",
+   "detail": "T5 rows=32 (expected 32)"
+  },
+  {
+   "check": "T5 league wins equal losses",
+   "result": "PASS",
+   "detail": "T5 W and L totals"
+  },
+  {
+   "check": "T5 league points balance",
+   "result": "PASS",
+   "detail": "T5 PF and PA totals"
+  },
   {
    "check": "standings transcription rows",
    "result": "PASS",
@@ -1580,34 +1595,9 @@
    "detail": "PF=6246 PA=6246"
   },
   {
-   "check": "snapshot SF w",
-   "result": "PASS",
-   "detail": "published 7 vs official 7"
-  },
-  {
-   "check": "snapshot SF l",
-   "result": "PASS",
-   "detail": "published 1 vs official 1"
-  },
-  {
-   "check": "snapshot SF t",
-   "result": "PASS",
-   "detail": "published 0 vs official 0"
-  },
-  {
-   "check": "snapshot SF pf",
-   "result": "PASS",
-   "detail": "published 235 vs official 235"
-  },
-  {
-   "check": "snapshot SF pa",
-   "result": "PASS",
-   "detail": "published 156 vs official 156"
-  },
-  {
    "check": "snapshot BUF w",
    "result": "PASS",
-   "detail": "published 7 vs official 7"
+   "detail": "published 8 vs official 8"
   },
   {
    "check": "snapshot BUF l",
@@ -1622,12 +1612,137 @@
   {
    "check": "snapshot BUF pf",
    "result": "PASS",
-   "detail": "published 256 vs official 256"
+   "detail": "published 287 vs official 287"
   },
   {
    "check": "snapshot BUF pa",
    "result": "PASS",
-   "detail": "published 187 vs official 187"
+   "detail": "published 199 vs official 199"
+  },
+  {
+   "check": "snapshot SF w",
+   "result": "PASS",
+   "detail": "published 8 vs official 8"
+  },
+  {
+   "check": "snapshot SF l",
+   "result": "PASS",
+   "detail": "published 1 vs official 1"
+  },
+  {
+   "check": "snapshot SF t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot SF pf",
+   "result": "PASS",
+   "detail": "published 281 vs official 281"
+  },
+  {
+   "check": "snapshot SF pa",
+   "result": "PASS",
+   "detail": "published 196 vs official 196"
+  },
+  {
+   "check": "snapshot JAX w",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "snapshot JAX l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "snapshot JAX t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot JAX pf",
+   "result": "PASS",
+   "detail": "published 269 vs official 269"
+  },
+  {
+   "check": "snapshot JAX pa",
+   "result": "PASS",
+   "detail": "published 144 vs official 144"
+  },
+  {
+   "check": "snapshot CIN w",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "snapshot CIN l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "snapshot CIN t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot CIN pf",
+   "result": "PASS",
+   "detail": "published 278 vs official 278"
+  },
+  {
+   "check": "snapshot CIN pa",
+   "result": "PASS",
+   "detail": "published 193 vs official 193"
+  },
+  {
+   "check": "snapshot KC w",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "snapshot KC l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "snapshot KC t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot KC pf",
+   "result": "PASS",
+   "detail": "published 237 vs official 237"
+  },
+  {
+   "check": "snapshot KC pa",
+   "result": "PASS",
+   "detail": "published 156 vs official 156"
+  },
+  {
+   "check": "snapshot DET w",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "snapshot DET l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "snapshot DET t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot DET pf",
+   "result": "PASS",
+   "detail": "published 257 vs official 257"
+  },
+  {
+   "check": "snapshot DET pa",
+   "result": "PASS",
+   "detail": "published 199 vs official 199"
   },
   {
    "check": "snapshot CHI w",
@@ -1655,6 +1770,31 @@
    "detail": "published 184 vs official 184"
   },
   {
+   "check": "snapshot MIN w",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "snapshot MIN l",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "snapshot MIN t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot MIN pf",
+   "result": "PASS",
+   "detail": "published 176 vs official 176"
+  },
+  {
+   "check": "snapshot MIN pa",
+   "result": "PASS",
+   "detail": "published 126 vs official 126"
+  },
+  {
    "check": "snapshot DEN w",
    "result": "PASS",
    "detail": "published 7 vs official 7"
@@ -1680,81 +1820,6 @@
    "detail": "published 186 vs official 186"
   },
   {
-   "check": "snapshot JAX w",
-   "result": "PASS",
-   "detail": "published 6 vs official 6"
-  },
-  {
-   "check": "snapshot JAX l",
-   "result": "PASS",
-   "detail": "published 2 vs official 2"
-  },
-  {
-   "check": "snapshot JAX t",
-   "result": "PASS",
-   "detail": "published 0 vs official 0"
-  },
-  {
-   "check": "snapshot JAX pf",
-   "result": "PASS",
-   "detail": "published 229 vs official 229"
-  },
-  {
-   "check": "snapshot JAX pa",
-   "result": "PASS",
-   "detail": "published 121 vs official 121"
-  },
-  {
-   "check": "snapshot CIN w",
-   "result": "PASS",
-   "detail": "published 6 vs official 6"
-  },
-  {
-   "check": "snapshot CIN l",
-   "result": "PASS",
-   "detail": "published 2 vs official 2"
-  },
-  {
-   "check": "snapshot CIN t",
-   "result": "PASS",
-   "detail": "published 0 vs official 0"
-  },
-  {
-   "check": "snapshot CIN pf",
-   "result": "PASS",
-   "detail": "published 240 vs official 240"
-  },
-  {
-   "check": "snapshot CIN pa",
-   "result": "PASS",
-   "detail": "published 175 vs official 175"
-  },
-  {
-   "check": "snapshot KC w",
-   "result": "PASS",
-   "detail": "published 6 vs official 6"
-  },
-  {
-   "check": "snapshot KC l",
-   "result": "PASS",
-   "detail": "published 2 vs official 2"
-  },
-  {
-   "check": "snapshot KC t",
-   "result": "PASS",
-   "detail": "published 0 vs official 0"
-  },
-  {
-   "check": "snapshot KC pf",
-   "result": "PASS",
-   "detail": "published 202 vs official 202"
-  },
-  {
-   "check": "snapshot KC pa",
-   "result": "PASS",
-   "detail": "published 143 vs official 143"
-  },
-  {
    "check": "snapshot PIT w",
    "result": "PASS",
    "detail": "published 6 vs official 6"
@@ -1762,7 +1827,7 @@
   {
    "check": "snapshot PIT l",
    "result": "PASS",
-   "detail": "published 2 vs official 2"
+   "detail": "published 3 vs official 3"
   },
   {
    "check": "snapshot PIT t",
@@ -1772,87 +1837,12 @@
   {
    "check": "snapshot PIT pf",
    "result": "PASS",
-   "detail": "published 180 vs official 180"
+   "detail": "published 198 vs official 198"
   },
   {
    "check": "snapshot PIT pa",
    "result": "PASS",
-   "detail": "published 144 vs official 144"
-  },
-  {
-   "check": "snapshot DET w",
-   "result": "PASS",
-   "detail": "published 6 vs official 6"
-  },
-  {
-   "check": "snapshot DET l",
-   "result": "PASS",
-   "detail": "published 2 vs official 2"
-  },
-  {
-   "check": "snapshot DET t",
-   "result": "PASS",
-   "detail": "published 0 vs official 0"
-  },
-  {
-   "check": "snapshot DET pf",
-   "result": "PASS",
-   "detail": "published 222 vs official 222"
-  },
-  {
-   "check": "snapshot DET pa",
-   "result": "PASS",
-   "detail": "published 189 vs official 189"
-  },
-  {
-   "check": "snapshot MIN w",
-   "result": "PASS",
-   "detail": "published 6 vs official 6"
-  },
-  {
-   "check": "snapshot MIN l",
-   "result": "PASS",
-   "detail": "published 2 vs official 2"
-  },
-  {
-   "check": "snapshot MIN t",
-   "result": "PASS",
-   "detail": "published 0 vs official 0"
-  },
-  {
-   "check": "snapshot MIN pf",
-   "result": "PASS",
-   "detail": "published 146 vs official 146"
-  },
-  {
-   "check": "snapshot MIN pa",
-   "result": "PASS",
-   "detail": "published 116 vs official 116"
-  },
-  {
-   "check": "snapshot GB w",
-   "result": "PASS",
-   "detail": "published 6 vs official 6"
-  },
-  {
-   "check": "snapshot GB l",
-   "result": "PASS",
-   "detail": "published 3 vs official 3"
-  },
-  {
-   "check": "snapshot GB t",
-   "result": "PASS",
-   "detail": "published 0 vs official 0"
-  },
-  {
-   "check": "snapshot GB pf",
-   "result": "PASS",
-   "detail": "published 216 vs official 216"
-  },
-  {
-   "check": "snapshot GB pa",
-   "result": "PASS",
-   "detail": "published 191 vs official 191"
+   "detail": "published 182 vs official 182"
   },
   {
    "check": "snapshot NYG w",
@@ -1880,34 +1870,9 @@
    "detail": "published 196 vs official 196"
   },
   {
-   "check": "snapshot SEA w",
-   "result": "PASS",
-   "detail": "published 5 vs official 5"
-  },
-  {
-   "check": "snapshot SEA l",
-   "result": "PASS",
-   "detail": "published 4 vs official 4"
-  },
-  {
-   "check": "snapshot SEA t",
-   "result": "PASS",
-   "detail": "published 0 vs official 0"
-  },
-  {
-   "check": "snapshot SEA pf",
-   "result": "PASS",
-   "detail": "published 202 vs official 202"
-  },
-  {
-   "check": "snapshot SEA pa",
-   "result": "PASS",
-   "detail": "published 162 vs official 162"
-  },
-  {
    "check": "snapshot LA w",
    "result": "PASS",
-   "detail": "published 5 vs official 5"
+   "detail": "published 6 vs official 6"
   },
   {
    "check": "snapshot LA l",
@@ -1922,42 +1887,67 @@
   {
    "check": "snapshot LA pf",
    "result": "PASS",
-   "detail": "published 214 vs official 214"
+   "detail": "published 248 vs official 248"
   },
   {
    "check": "snapshot LA pa",
    "result": "PASS",
-   "detail": "published 181 vs official 181"
+   "detail": "published 187 vs official 187"
   },
   {
-   "check": "snapshot NE w",
+   "check": "snapshot SEA w",
    "result": "PASS",
-   "detail": "published 5 vs official 5"
+   "detail": "published 6 vs official 6"
   },
   {
-   "check": "snapshot NE l",
+   "check": "snapshot SEA l",
    "result": "PASS",
    "detail": "published 4 vs official 4"
   },
   {
-   "check": "snapshot NE t",
+   "check": "snapshot SEA t",
    "result": "PASS",
    "detail": "published 0 vs official 0"
   },
   {
-   "check": "snapshot NE pf",
+   "check": "snapshot SEA pf",
    "result": "PASS",
-   "detail": "published 211 vs official 211"
+   "detail": "published 223 vs official 223"
   },
   {
-   "check": "snapshot NE pa",
+   "check": "snapshot SEA pa",
    "result": "PASS",
-   "detail": "published 207 vs official 207"
+   "detail": "published 175 vs official 175"
+  },
+  {
+   "check": "snapshot GB w",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "snapshot GB l",
+   "result": "PASS",
+   "detail": "published 4 vs official 4"
+  },
+  {
+   "check": "snapshot GB t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot GB pf",
+   "result": "PASS",
+   "detail": "published 226 vs official 226"
+  },
+  {
+   "check": "snapshot GB pa",
+   "result": "PASS",
+   "detail": "published 221 vs official 221"
   },
   {
    "check": "snapshot CLE w",
    "result": "PASS",
-   "detail": "published 5 vs official 5"
+   "detail": "published 6 vs official 6"
   },
   {
    "check": "snapshot CLE l",
@@ -1972,62 +1962,62 @@
   {
    "check": "snapshot CLE pf",
    "result": "PASS",
-   "detail": "published 161 vs official 161"
+   "detail": "published 188 vs official 188"
   },
   {
    "check": "snapshot CLE pa",
    "result": "PASS",
-   "detail": "published 196 vs official 196"
+   "detail": "published 220 vs official 220"
   },
   {
-   "check": "snapshot DAL w",
-   "result": "PASS",
-   "detail": "published 4 vs official 4"
-  },
-  {
-   "check": "snapshot DAL l",
+   "check": "snapshot NE w",
    "result": "PASS",
    "detail": "published 5 vs official 5"
   },
   {
-   "check": "snapshot DAL t",
+   "check": "snapshot NE l",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "snapshot NE t",
    "result": "PASS",
    "detail": "published 0 vs official 0"
   },
   {
-   "check": "snapshot DAL pf",
+   "check": "snapshot NE pf",
    "result": "PASS",
-   "detail": "published 246 vs official 246"
+   "detail": "published 221 vs official 221"
   },
   {
-   "check": "snapshot DAL pa",
+   "check": "snapshot NE pa",
+   "result": "PASS",
+   "detail": "published 242 vs official 242"
+  },
+  {
+   "check": "snapshot CAR w",
+   "result": "PASS",
+   "detail": "published 4 vs official 4"
+  },
+  {
+   "check": "snapshot CAR l",
+   "result": "PASS",
+   "detail": "published 5 vs official 5"
+  },
+  {
+   "check": "snapshot CAR t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot CAR pf",
+   "result": "PASS",
+   "detail": "published 219 vs official 219"
+  },
+  {
+   "check": "snapshot CAR pa",
    "result": "PASS",
    "detail": "published 236 vs official 236"
-  },
-  {
-   "check": "snapshot LV w",
-   "result": "PASS",
-   "detail": "published 4 vs official 4"
-  },
-  {
-   "check": "snapshot LV l",
-   "result": "PASS",
-   "detail": "published 5 vs official 5"
-  },
-  {
-   "check": "snapshot LV t",
-   "result": "PASS",
-   "detail": "published 0 vs official 0"
-  },
-  {
-   "check": "snapshot LV pf",
-   "result": "PASS",
-   "detail": "published 238 vs official 238"
-  },
-  {
-   "check": "snapshot LV pa",
-   "result": "PASS",
-   "detail": "published 268 vs official 268"
   },
   {
    "check": "snapshot BAL w",
@@ -2055,6 +2045,56 @@
    "detail": "published 236 vs official 236"
   },
   {
+   "check": "snapshot DAL w",
+   "result": "PASS",
+   "detail": "published 4 vs official 4"
+  },
+  {
+   "check": "snapshot DAL l",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "snapshot DAL t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot DAL pf",
+   "result": "PASS",
+   "detail": "published 286 vs official 286"
+  },
+  {
+   "check": "snapshot DAL pa",
+   "result": "PASS",
+   "detail": "published 282 vs official 282"
+  },
+  {
+   "check": "snapshot LV w",
+   "result": "PASS",
+   "detail": "published 4 vs official 4"
+  },
+  {
+   "check": "snapshot LV l",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "snapshot LV t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot LV pf",
+   "result": "PASS",
+   "detail": "published 251 vs official 251"
+  },
+  {
+   "check": "snapshot LV pa",
+   "result": "PASS",
+   "detail": "published 289 vs official 289"
+  },
+  {
    "check": "snapshot WAS w",
    "result": "PASS",
    "detail": "published 3 vs official 3"
@@ -2078,81 +2118,6 @@
    "check": "snapshot WAS pa",
    "result": "PASS",
    "detail": "published 223 vs official 223"
-  },
-  {
-   "check": "snapshot HOU w",
-   "result": "PASS",
-   "detail": "published 3 vs official 3"
-  },
-  {
-   "check": "snapshot HOU l",
-   "result": "PASS",
-   "detail": "published 5 vs official 5"
-  },
-  {
-   "check": "snapshot HOU t",
-   "result": "PASS",
-   "detail": "published 0 vs official 0"
-  },
-  {
-   "check": "snapshot HOU pf",
-   "result": "PASS",
-   "detail": "published 209 vs official 209"
-  },
-  {
-   "check": "snapshot HOU pa",
-   "result": "PASS",
-   "detail": "published 192 vs official 192"
-  },
-  {
-   "check": "snapshot CAR w",
-   "result": "PASS",
-   "detail": "published 3 vs official 3"
-  },
-  {
-   "check": "snapshot CAR l",
-   "result": "PASS",
-   "detail": "published 5 vs official 5"
-  },
-  {
-   "check": "snapshot CAR t",
-   "result": "PASS",
-   "detail": "published 0 vs official 0"
-  },
-  {
-   "check": "snapshot CAR pf",
-   "result": "PASS",
-   "detail": "published 199 vs official 199"
-  },
-  {
-   "check": "snapshot CAR pa",
-   "result": "PASS",
-   "detail": "published 219 vs official 219"
-  },
-  {
-   "check": "snapshot NO w",
-   "result": "PASS",
-   "detail": "published 3 vs official 3"
-  },
-  {
-   "check": "snapshot NO l",
-   "result": "PASS",
-   "detail": "published 5 vs official 5"
-  },
-  {
-   "check": "snapshot NO t",
-   "result": "PASS",
-   "detail": "published 0 vs official 0"
-  },
-  {
-   "check": "snapshot NO pf",
-   "result": "PASS",
-   "detail": "published 185 vs official 185"
-  },
-  {
-   "check": "snapshot NO pa",
-   "result": "PASS",
-   "detail": "published 216 vs official 216"
   },
   {
    "check": "snapshot TB w",
@@ -2180,6 +2145,56 @@
    "detail": "published 178 vs official 178"
   },
   {
+   "check": "snapshot HOU w",
+   "result": "PASS",
+   "detail": "published 3 vs official 3"
+  },
+  {
+   "check": "snapshot HOU l",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "snapshot HOU t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot HOU pf",
+   "result": "PASS",
+   "detail": "published 233 vs official 233"
+  },
+  {
+   "check": "snapshot HOU pa",
+   "result": "PASS",
+   "detail": "published 219 vs official 219"
+  },
+  {
+   "check": "snapshot NO w",
+   "result": "PASS",
+   "detail": "published 3 vs official 3"
+  },
+  {
+   "check": "snapshot NO l",
+   "result": "PASS",
+   "detail": "published 6 vs official 6"
+  },
+  {
+   "check": "snapshot NO t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot NO pf",
+   "result": "PASS",
+   "detail": "published 202 vs official 202"
+  },
+  {
+   "check": "snapshot NO pa",
+   "result": "PASS",
+   "detail": "published 236 vs official 236"
+  },
+  {
    "check": "snapshot ATL w",
    "result": "PASS",
    "detail": "published 3 vs official 3"
@@ -2187,7 +2202,7 @@
   {
    "check": "snapshot ATL l",
    "result": "PASS",
-   "detail": "published 6 vs official 6"
+   "detail": "published 7 vs official 7"
   },
   {
    "check": "snapshot ATL t",
@@ -2197,67 +2212,17 @@
   {
    "check": "snapshot ATL pf",
    "result": "PASS",
-   "detail": "published 188 vs official 188"
+   "detail": "published 201 vs official 201"
   },
   {
    "check": "snapshot ATL pa",
    "result": "PASS",
-   "detail": "published 223 vs official 223"
-  },
-  {
-   "check": "snapshot ARI w",
-   "result": "PASS",
-   "detail": "published 3 vs official 3"
-  },
-  {
-   "check": "snapshot ARI l",
-   "result": "PASS",
-   "detail": "published 6 vs official 6"
-  },
-  {
-   "check": "snapshot ARI t",
-   "result": "PASS",
-   "detail": "published 0 vs official 0"
-  },
-  {
-   "check": "snapshot ARI pf",
-   "result": "PASS",
-   "detail": "published 178 vs official 178"
-  },
-  {
-   "check": "snapshot ARI pa",
-   "result": "PASS",
-   "detail": "published 255 vs official 255"
-  },
-  {
-   "check": "snapshot NYJ w",
-   "result": "PASS",
-   "detail": "published 2 vs official 2"
-  },
-  {
-   "check": "snapshot NYJ l",
-   "result": "PASS",
-   "detail": "published 7 vs official 7"
-  },
-  {
-   "check": "snapshot NYJ t",
-   "result": "PASS",
-   "detail": "published 0 vs official 0"
-  },
-  {
-   "check": "snapshot NYJ pf",
-   "result": "PASS",
-   "detail": "published 182 vs official 182"
-  },
-  {
-   "check": "snapshot NYJ pa",
-   "result": "PASS",
-   "detail": "published 223 vs official 223"
+   "detail": "published 258 vs official 258"
   },
   {
    "check": "snapshot IND w",
    "result": "PASS",
-   "detail": "published 2 vs official 2"
+   "detail": "published 3 vs official 3"
   },
   {
    "check": "snapshot IND l",
@@ -2272,12 +2237,37 @@
   {
    "check": "snapshot IND pf",
    "result": "PASS",
-   "detail": "published 184 vs official 184"
+   "detail": "published 208 vs official 208"
   },
   {
    "check": "snapshot IND pa",
    "result": "PASS",
-   "detail": "published 249 vs official 249"
+   "detail": "published 271 vs official 271"
+  },
+  {
+   "check": "snapshot ARI w",
+   "result": "PASS",
+   "detail": "published 3 vs official 3"
+  },
+  {
+   "check": "snapshot ARI l",
+   "result": "PASS",
+   "detail": "published 7 vs official 7"
+  },
+  {
+   "check": "snapshot ARI t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot ARI pf",
+   "result": "PASS",
+   "detail": "published 184 vs official 184"
+  },
+  {
+   "check": "snapshot ARI pa",
+   "result": "PASS",
+   "detail": "published 289 vs official 289"
   },
   {
    "check": "snapshot PHI w",
@@ -2305,6 +2295,31 @@
    "detail": "published 221 vs official 221"
   },
   {
+   "check": "snapshot NYJ w",
+   "result": "PASS",
+   "detail": "published 2 vs official 2"
+  },
+  {
+   "check": "snapshot NYJ l",
+   "result": "PASS",
+   "detail": "published 8 vs official 8"
+  },
+  {
+   "check": "snapshot NYJ t",
+   "result": "PASS",
+   "detail": "published 0 vs official 0"
+  },
+  {
+   "check": "snapshot NYJ pf",
+   "result": "PASS",
+   "detail": "published 194 vs official 194"
+  },
+  {
+   "check": "snapshot NYJ pa",
+   "result": "PASS",
+   "detail": "published 254 vs official 254"
+  },
+  {
    "check": "snapshot TEN w",
    "result": "PASS",
    "detail": "published 1 vs official 1"
@@ -2312,7 +2327,7 @@
   {
    "check": "snapshot TEN l",
    "result": "PASS",
-   "detail": "published 7 vs official 7"
+   "detail": "published 8 vs official 8"
   },
   {
    "check": "snapshot TEN t",
@@ -2322,12 +2337,12 @@
   {
    "check": "snapshot TEN pf",
    "result": "PASS",
-   "detail": "published 144 vs official 144"
+   "detail": "published 167 vs official 167"
   },
   {
    "check": "snapshot TEN pa",
    "result": "PASS",
-   "detail": "published 199 vs official 199"
+   "detail": "published 239 vs official 239"
   },
   {
    "check": "snapshot MIA w",
@@ -2337,7 +2352,7 @@
   {
    "check": "snapshot MIA l",
    "result": "PASS",
-   "detail": "published 7 vs official 7"
+   "detail": "published 8 vs official 8"
   },
   {
    "check": "snapshot MIA t",
@@ -2347,12 +2362,12 @@
   {
    "check": "snapshot MIA pf",
    "result": "PASS",
-   "detail": "published 126 vs official 126"
+   "detail": "published 148 vs official 148"
   },
   {
    "check": "snapshot MIA pa",
    "result": "PASS",
-   "detail": "published 200 vs official 200"
+   "detail": "published 224 vs official 224"
   },
   {
    "check": "snapshot LAC w",
