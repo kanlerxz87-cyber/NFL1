@@ -1,0 +1,82 @@
+{
+  "schema": "nfl1.schedule_announcement.v1",
+  "task": "IN-31 — publish the league's dated schedule announcement beside the live schedule page",
+  "session": "49ac3a99-nfl1",
+  "captured_at_utc": "2026-11-16T18:01:03Z",
+  "capture_method": "fetch_page of each official URL listed below, read in full (every chunk) on 2026-11-16 UTC. Values were transcribed from that read; the raw page text is not stored in this repository.",
+  "announcement": {
+    "title": "2026 NFL Schedule Powered by AWS to be Released Thursday, May 14",
+    "issued_date": "2026-05-08",
+    "issued_date_source": "dateline printed on the media release: 'May 08, 2026' and 'NEW YORK — May 8, 2026 —'",
+    "official_url": "https://media.nfl.com/news-and-releases/2026-nfl-schedule-powered-by-aws-to-be-released-thursday--may-14",
+    "mirror_url": "https://www.nfl.com/news/2026-nfl-schedule-powered-by-aws-to-be-released-thursday-may-14",
+    "release_page_url": "https://www.nfl.com/nfl-schedule-release/",
+    "rows": [
+      {
+        "id": "A1",
+        "what": "Schedule release date and time",
+        "printed": "The National Football League announced that the 2026 NFL Schedule powered by AWS will be released on Thursday, May 14 at 8 p.m. ET.",
+        "derived_utc": "2026-05-15T00:00:00Z",
+        "derived_note": "8 p.m. EDT on Thu 14 May 2026 (EDT = UTC-4 in May) converted to UTC by arithmetic; the release itself is not printed in UTC",
+        "source_url": "https://media.nfl.com/news-and-releases/2026-nfl-schedule-powered-by-aws-to-be-released-thursday--may-14"
+      },
+      {
+        "id": "A2",
+        "what": "Broadcast partners announce select games first",
+        "printed": "Ahead of the release of the full 2026 schedule on May 14, the league's broadcast partners will announce select games next week.",
+        "source_url": "https://media.nfl.com/news-and-releases/2026-nfl-schedule-powered-by-aws-to-be-released-thursday--may-14"
+      },
+      {
+        "id": "A3",
+        "what": "International games announcement",
+        "printed": "The NFL will announce its remaining 2026 International Games on Wednesday, May 13 at 9 a.m. ET on Good Morning Football on NFL Network.",
+        "source_url": "https://media.nfl.com/news-and-releases/2026-nfl-schedule-powered-by-aws-to-be-released-thursday--may-14"
+      },
+      {
+        "id": "A4",
+        "what": "Size of the international slate",
+        "printed": "This season, a record nine international contests will be played across four continents, seven countries and eight stadiums.",
+        "source_url": "https://media.nfl.com/news-and-releases/2026-nfl-schedule-powered-by-aws-to-be-released-thursday--may-14"
+      },
+      {
+        "id": "A5",
+        "what": "Where the schedule will appear",
+        "printed": "NFL.com and the NFL app will provide complete team-by-team and weekly schedules of all regular season games, listing opponents, sites and times.",
+        "source_url": "https://www.nfl.com/news/2026-nfl-schedule-powered-by-aws-to-be-released-thursday-may-14"
+      },
+      {
+        "id": "A6",
+        "what": "Official release landing page",
+        "printed": "For additional information regarding the release of the 2026 NFL schedule, click here (https://www.nfl.com/nfl-schedule-release/).",
+        "source_url": "https://www.nfl.com/nfl-schedule-release/"
+      }
+    ]
+  },
+  "live_schedule": {
+    "week": 11,
+    "season": 2026,
+    "official_url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+    "chunks_read": 3,
+    "fixtures": [
+      {"matchup": "Colts at Texans", "day": "Thursday, November 19th", "kickoff_et": "8:15 PM", "network": "PRIME", "official_url": "https://www.nfl.com/games/colts-at-texans-2026-reg-11"},
+      {"matchup": "Dolphins at Bills", "day": "Sunday, November 22nd", "kickoff_et": "1:00 PM", "network": "CBS", "official_url": "https://www.nfl.com/games/dolphins-at-bills-2026-reg-11"},
+      {"matchup": "Ravens at Panthers", "day": "Sunday, November 22nd", "kickoff_et": "1:00 PM", "network": "FOX", "official_url": "https://www.nfl.com/games/ravens-at-panthers-2026-reg-11"},
+      {"matchup": "Saints at Bears", "day": "Sunday, November 22nd", "kickoff_et": "1:00 PM", "network": "FOX", "official_url": "https://www.nfl.com/games/saints-at-bears-2026-reg-11"},
+      {"matchup": "Titans at Cowboys", "day": "Sunday, November 22nd", "kickoff_et": "1:00 PM", "network": "FOX", "official_url": "https://www.nfl.com/games/titans-at-cowboys-2026-reg-11"},
+      {"matchup": "Buccaneers at Lions", "day": "Sunday, November 22nd", "kickoff_et": "1:00 PM", "network": "FOX", "official_url": "https://www.nfl.com/games/buccaneers-at-lions-2026-reg-11"},
+      {"matchup": "Cardinals at Chiefs", "day": "Sunday, November 22nd", "kickoff_et": "1:00 PM", "network": "CBS", "official_url": "https://www.nfl.com/games/cardinals-at-chiefs-2026-reg-11"},
+      {"matchup": "Steelers at Eagles", "day": "Sunday, November 22nd", "kickoff_et": "1:00 PM", "network": "CBS", "official_url": "https://www.nfl.com/games/steelers-at-eagles-2026-reg-11"},
+      {"matchup": "Jets at Chargers", "day": "Sunday, November 22nd", "kickoff_et": "4:05 PM", "network": "FOX", "official_url": "https://www.nfl.com/games/jets-at-chargers-2026-reg-11"},
+      {"matchup": "Jaguars at Giants", "day": "Sunday, November 22nd", "kickoff_et": "4:25 PM", "network": "CBS", "official_url": "https://www.nfl.com/games/jaguars-at-giants-2026-reg-11"},
+      {"matchup": "Raiders at Broncos", "day": "Sunday, November 22nd", "kickoff_et": "4:25 PM", "network": "CBS", "official_url": "https://www.nfl.com/games/raiders-at-broncos-2026-reg-11"},
+      {"matchup": "Vikings at 49ers", "day": "Sunday, November 22nd", "kickoff_et": "8:20 PM", "network": "NBC", "official_url": "https://www.nfl.com/games/vikings-at-49ers-2026-reg-11", "note": "printed under the 'Mexico City' heading on the official page"},
+      {"matchup": "Bengals at Commanders", "day": "Monday, November 23rd", "kickoff_et": "8:15 PM", "network": "ESPN", "official_url": "https://www.nfl.com/games/bengals-at-commanders-2026-reg-11"}
+    ],
+    "teams_on_bye": ["ATL", "CLE", "GB", "LAR", "NE", "SEA"],
+    "teams_on_bye_source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  "cross_check": {
+    "against": "data/prereg/official/week11_2026_schedule.json (retrieved 2026-11-15T13:05:00Z)",
+    "result": "13 of 13 fixtures and 6 of 6 byes agree on matchup, day, printed kickoff time and network"
+  }
+}
