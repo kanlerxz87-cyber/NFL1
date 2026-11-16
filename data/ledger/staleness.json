@@ -1,0 +1,261 @@
+{
+ "generated_by": "scripts/nfl1_57c05555/staleness.py",
+ "what_this_is": "A dated comparison of each club's officially published depth chart against that club's officially published transactions log. A row is flagged stale when the chart names a player whom the log placed on reserve with no later activation. Nothing is corrected: both sources are published as they stand.",
+ "rule": "match on the full normalised name; decide on the most recent dated transaction that names the player",
+ "known_limits": [
+  "Only clubs whose transactions page was captured are compared; the rest are listed with no comparison rather than assumed clean.",
+  "A transaction that says 'Signed QB X' does not establish that X replaced the injured starter, so no replacement is named.",
+  "The Indianapolis capture holds November and late-September entries only; the log is complete for November and incomplete before it.",
+  "A depth chart is a club opinion with no expiry; the newest capture is used and its fetch time is published with every row."
+ ],
+ "total_stale_rows": 2,
+ "clubs": [
+  {
+   "club": "BAL",
+   "transactions_captured": 51,
+   "transaction_window": "2026-05-01 to 2026-11-11",
+   "transactions_url": "https://www.baltimoreravens.com/team/transactions/",
+   "depth_url": "https://www.baltimoreravens.com/team/depth-chart",
+   "depth_captured_at": "2026-11-15T12:57:10Z",
+   "depth_club_date": "",
+   "stale_rows": [],
+   "reserve_absent_from_depth": [
+    {
+     "date": "2026-11-05",
+     "text": "Placed QB Lamar Jackson and QB Tyler Huntley on Injured Reserve. Signed QB Austin Reed to the active roster from the practice squad. Activated OLB Adisa Isaac and K Jake Moody from the practice squad (standard elevation) vs. Jax.",
+     "clause": "Placed QB Lamar Jackson and QB Tyler Huntley on Injured Reserve",
+     "source_url": "https://www.baltimoreravens.com/team/transactions/"
+    },
+    {
+     "date": "2026-11-03",
+     "text": "Signed QB Kedon Slovis. Placed K Tyler Loop on Injured Reserve.",
+     "clause": "Placed K Tyler Loop on Injured Reserve",
+     "source_url": "https://www.baltimoreravens.com/team/transactions/"
+    },
+    {
+     "date": "2026-10-25",
+     "text": "Placed OLB Tavius Robinson on Injured Reserve. Signed G Kyle Hergel to the active roster from the practice squad. Activated OLB Adisa Isaac from the practice squad (standard elevation) vs. Cin.",
+     "clause": "Placed OLB Tavius Robinson on Injured Reserve",
+     "source_url": "https://www.baltimoreravens.com/team/transactions/"
+    },
+    {
+     "date": "2026-10-07",
+     "text": "Signed TE Nick Vannett to the active roster from the practice squad. Signed FB Lucas Scott to the practice squad. Acquired C Cam Jurgens via trade from the Philadelphia Eagles in exchange for a 2027 fifth-round pick and 2028 second-round pick. Placed TE Durham Smythe on Injured Reserve.",
+     "clause": "Placed TE Durham Smythe on Injured Reserve",
+     "source_url": "https://www.baltimoreravens.com/team/transactions/"
+    },
+    {
+     "date": "2026-10-03",
+     "text": "Placed OL Jovaughn Gwyn and C Ethan Pocic on Injured Reserve. Activated G Kyle Hergel from the practice squad (standard elevation) vs. Ten.",
+     "clause": "Placed OL Jovaughn Gwyn and C Ethan Pocic on Injured Reserve",
+     "source_url": "https://www.baltimoreravens.com/team/transactions/"
+    },
+    {
+     "date": "2026-09-19",
+     "text": "Placed CB T.J. Tampa Jr. on Injured Reserve. Signed LB Carl Jones Jr. to the active roster from the practice squad.",
+     "clause": "Placed CB T.J. Tampa Jr. on Injured Reserve",
+     "source_url": "https://www.baltimoreravens.com/team/transactions/"
+    },
+    {
+     "date": "2026-09-16",
+     "text": "Signed CB Amani Oruwariye to the practice squad. Signed Chris Moore to the active roster from the practice squad. Placed WR Ja'Kobi Lane on Injured Reserve",
+     "clause": "Placed WR Ja'Kobi Lane on Injured Reserve",
+     "source_url": "https://www.baltimoreravens.com/team/transactions/"
+    },
+    {
+     "date": "2026-08-30",
+     "text": "Placed CB Bilhal Kone and RB Adam Randall on Reserve/Injured: Designated for Return.",
+     "clause": "Placed CB Bilhal Kone and RB Adam Randall on Reserve/Injured",
+     "source_url": "https://www.baltimoreravens.com/team/transactions/"
+    },
+    {
+     "date": "2026-08-26",
+     "text": "Placed C Danny Pinter on Injured Reserve. Waived (injury settlement) ILB Reid Williford. Signed ILB Michael Barrett.",
+     "clause": "Placed C Danny Pinter on Injured Reserve",
+     "source_url": "https://www.baltimoreravens.com/team/transactions/"
+    },
+    {
+     "date": "2026-08-14",
+     "text": "Placed T Kendall Lamm on the Reserve/Retired list. ILB Teddye Buchanan passed his physical and was removed from the Physically Unable to Perform (PUP) list.",
+     "clause": "Placed T Kendall Lamm on the Reserve/Retired",
+     "source_url": "https://www.baltimoreravens.com/team/transactions/"
+    },
+    {
+     "date": "2026-08-12",
+     "text": "Placed QB Skylar Thompson on Injured Reserve. Signed QB Austin Reed.",
+     "clause": "Placed QB Skylar Thompson on Injured Reserve",
+     "source_url": "https://www.baltimoreravens.com/team/transactions/"
+    },
+    {
+     "date": "2026-08-02",
+     "text": "Placed T Hakeem Adeniji on the Reserve/Retired list.",
+     "clause": "Placed T Hakeem Adeniji on the Reserve/Retired",
+     "source_url": "https://www.baltimoreravens.com/team/transactions/"
+    }
+   ],
+   "unmatched_names": [
+    "Zay Flowers",
+    "Devontez Walker",
+    "Elijah Sarratt",
+    "Rashod Bateman",
+    "LaJohntay Wester",
+    "Ronnie Stanley",
+    "Carson Vinson",
+    "John Simpson",
+    "Ryan Neuzil",
+    "Cam Jurgens",
+    "Vega Ioane",
+    "Emery Jones Jr.",
+    "Roger Rosengarten",
+    "Mark Andrews",
+    "Josh Cuevas",
+    "Matt Hibner",
+    "Jacoby Brissett",
+    "Joe Fagnano",
+    "Kedon Slovis",
+    "Derrick Henry",
+    "Justice Hill",
+    "Rasheen Ali",
+    "Nnamdi Madubuike",
+    "Broderick Washington Jr.",
+    "Travis Jones",
+    "John Jenkins",
+    "Calais Campbell",
+    "Aeneas Peebles",
+    "Trey Hendrickson",
+    "Mike Green",
+    "Roquan Smith",
+    "Jay Higgins IV",
+    "Trenton Simpson",
+    "Teddye Buchanan",
+    "Zion Young",
+    "Ethan Burke",
+    "Marlon Humphrey",
+    "Chidobe Awuzie",
+    "Kyle Hamilton",
+    "Keyon Martin",
+    "Chandler Rivers",
+    "Jaylinn Hawkins",
+    "Keondre Jackson",
+    "Malaki Starks",
+    "K'Von Wallace",
+    "Nate Wiggins",
+    "T.J. Tampa Jr.",
+    "Ryan Eckley",
+    "Nick Moore"
+   ],
+   "chart_captured_before_log": false,
+   "capture_order_note": "The transactions page was captured before the depth chart, so the chart was already published when the log was read.",
+   "reserve_transaction_count": 12
+  },
+  {
+   "club": "IND",
+   "transactions_captured": 25,
+   "transaction_window": "2026-10-03 to 2026-11-14",
+   "transactions_url": "https://www.colts.com/team/transactions/",
+   "depth_url": "https://www.colts.com/team/depth-chart",
+   "depth_captured_at": "2026-11-15T12:52:48Z",
+   "depth_club_date": "",
+   "stale_rows": [
+    {
+     "player": "Mo Alie-Cox",
+     "unit": "offense",
+     "position": "TE",
+     "rank": 1,
+     "chart_url": "https://www.colts.com/team/depth-chart",
+     "chart_captured_at": "2026-11-15T12:52:48Z",
+     "transaction_date": "2026-11-14",
+     "transaction_text": "Sign (LB) [West Weeks](https://www.colts.com/team/players-roster/west-weeks/) to 53-man roster from practice squad; place (TE) [Mo Alie-Cox](https://www.colts.com/team/players-roster/mo-alie-cox/), (LB) [Akeem Davis-Gaither](https://www.colts.com/team/players-roster/akeem-davis-gaither/) on IR; elevate (LS) [Jacob Bobenmoyer](https://www.colts.com/team/players-roster/jacob-bobenmoyer/) and (WR) [Quez Watkins](https://www.colts.com/team/players-roster/quez-watkins/) from to active roster from practice squad for Sunday's game against the Dolphins.",
+     "transaction_url": "https://www.colts.com/team/transactions/",
+     "why_stale": "The club's depth chart still names this player, and the most recent dated transaction that mentions him placed him on reserve. No later transaction returns him to the active roster. The chart row and the log contradict each other; this page publishes both and does not edit either."
+    },
+    {
+     "player": "Akeem Davis-Gaither",
+     "unit": "defense",
+     "position": "MLB",
+     "rank": 1,
+     "chart_url": "https://www.colts.com/team/depth-chart",
+     "chart_captured_at": "2026-11-15T12:52:48Z",
+     "transaction_date": "2026-11-14",
+     "transaction_text": "Sign (LB) [West Weeks](https://www.colts.com/team/players-roster/west-weeks/) to 53-man roster from practice squad; place (TE) [Mo Alie-Cox](https://www.colts.com/team/players-roster/mo-alie-cox/), (LB) [Akeem Davis-Gaither](https://www.colts.com/team/players-roster/akeem-davis-gaither/) on IR; elevate (LS) [Jacob Bobenmoyer](https://www.colts.com/team/players-roster/jacob-bobenmoyer/) and (WR) [Quez Watkins](https://www.colts.com/team/players-roster/quez-watkins/) from to active roster from practice squad for Sunday's game against the Dolphins.",
+     "transaction_url": "https://www.colts.com/team/transactions/",
+     "why_stale": "The club's depth chart still names this player, and the most recent dated transaction that mentions him placed him on reserve. No later transaction returns him to the active roster. The chart row and the log contradict each other; this page publishes both and does not edit either."
+    }
+   ],
+   "reserve_absent_from_depth": [
+    {
+     "date": "2026-11-14",
+     "text": "Sign (LB) [West Weeks](https://www.colts.com/team/players-roster/west-weeks/) to 53-man roster from practice squad; place (TE) [Mo Alie-Cox](https://www.colts.com/team/players-roster/mo-alie-cox/), (LB) [Akeem Davis-Gaither](https://www.colts.com/team/players-roster/akeem-davis-gaither/) on IR; elevate (LS) [Jacob Bobenmoyer](https://www.colts.com/team/players-roster/jacob-bobenmoyer/) and (WR) [Quez Watkins](https://www.colts.com/team/players-roster/quez-watkins/) from to active roster from practice squad for Sunday's game against the Dolphins.",
+     "clause": "place (TE) [Mo Alie-Cox](https://www.colts.com/team/players-roster/mo-alie-cox/), (LB) [Akeem Davis-Gaither](https://www.colts.com/team/players-roster/akeem-davis-gaither/) on IR",
+     "source_url": "https://www.colts.com/team/transactions/"
+    },
+    {
+     "date": "2026-10-27",
+     "text": "Sign (CB) [Kenneth Harris](https://www.colts.com/team/players-roster/kenneth-harris/) to the 53-man roster from the practice squad and placed (CB) [Cam Taylor-Britt](https://www.colts.com/team/players-roster/cam-taylor-britt/) on the Injured Reserve list; signed (CB) [Shemar Bartholomew](https://www.colts.com/team/players-roster/shemar-bartholomew/) and (CB) [Natrone Brooks](https://www.colts.com/team/players-roster/natrone-brooks/) to the practice squad.",
+     "clause": "placed (CB) [Cam Taylor-Britt](https://www.colts.com/team/players-roster/cam-taylor-britt/) on the Injured Reserve",
+     "source_url": "https://www.colts.com/team/transactions/"
+    },
+    {
+     "date": "2026-10-10",
+     "text": "Elevated (WR) [Nick Westbrook-Ikhine](https://www.colts.com/team/players-roster/nick-westbrook-ikhine/) to the active roster from the practice squad for Sunday's game against the Pittsburgh Steelers and placed (DE) [Arden Key](https://www.colts.com/team/players-roster/arden-key/) on the Injured Reserve list.",
+     "clause": "placed (DE) [Arden Key](https://www.colts.com/team/players-roster/arden-key/) on the Injured Reserve",
+     "source_url": "https://www.colts.com/team/transactions/"
+    }
+   ],
+   "unmatched_names": [
+    "Laquon Treadwell",
+    "Nick Westbrook-Ikhine",
+    "Bernhard Raimann",
+    "Charlie Heck",
+    "Jalen Farmer",
+    "Dalton Tucker",
+    "Tanor Bortolini",
+    "Sedrick Van Pran-Granger",
+    "Matt Goncalves",
+    "Jalen Travis",
+    "Luke Tenuta",
+    "Tyler Warren",
+    "Drew Ogletree",
+    "Pharaoh Brown",
+    "Anthony Gould",
+    "Ashton Dulin",
+    "Deion Burks",
+    "Daniel Jones",
+    "Anthony Richardson Sr.",
+    "Riley Leonard",
+    "Jonathan Taylor",
+    "Seth McGowan",
+    "DJ Giddens",
+    "Jaylahn Tuimoloau",
+    "George Gumbs Jr.",
+    "Adetomiwa Adebawore",
+    "Kevin Givens",
+    "Grover Stewart",
+    "Jerry Tillery",
+    "Tim Smith",
+    "Laiatu Latu",
+    "Caden Curry",
+    "Jaylon Carlies",
+    "Bryce Boettcher",
+    "Tahj Chambers",
+    "CJ Allen",
+    "Austin Ajiake",
+    "Charvarius Ward",
+    "Kenneth Harris",
+    "Cam Bynum",
+    "Jonathan Owens",
+    "AJ Haulcy",
+    "Hunter Wohler",
+    "Justin Walley",
+    "Kapena Gushiken",
+    "Sauce Gardner",
+    "Rigoberto Sanchez",
+    "Spencer Shrader",
+    "Luke Rhodes"
+   ],
+   "chart_captured_before_log": true,
+   "capture_order_note": "The depth chart was captured before the transactions page in this session, so an agreement here is bounded by the chart's own fetch time. Re-reading the chart after the log is the way to settle it; both reads are kept by the ledger.",
+   "reserve_transaction_count": 3
+  }
+ ]
+}

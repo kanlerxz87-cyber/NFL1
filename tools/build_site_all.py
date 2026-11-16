@@ -63,6 +63,17 @@ STEPS = [
     # session 543676f8-nfl1: the official-capture page is built before the landing page so the
     # landing page can link it; it fails the build if the capture does not pass its gate.
     ("official capture page (capture/)", [sys.executable, "tools/build_capture_site.py"], ROOT),
+    # session 57c05555-nfl1: the depth-parse and availability-ledger verification page. It runs
+    # before the landing page so the landing page's site map can list it.
+    ("depth and ledger verification page", [sys.executable, "tools/build_session_page.py"], ROOT),
+    # session 57c05555-nfl1: the raw-capture gates. They read the committed captures and the
+    # verified filings, fail loudly on a stale parse or a stale verified file, and write the
+    # derived registers the page reads, so the page can never show a number the gate rejects.
+    ("official depth parse gate", [sys.executable, "tools/check_depth_parse.py"], ROOT),
+    ("ledger integrity", [sys.executable, "pipeline/ledger.py", "verify"], ROOT),
+    ("ledger index", [sys.executable, "pipeline/ledger.py", "index"], ROOT),
+    ("transactions staleness register", [sys.executable, "scripts/nfl1_57c05555/staleness.py"], ROOT),
+    ("verified injury filings", [sys.executable, "scripts/nfl1_57c05555/repair_verified_injuries.py"], ROOT),
     # session 55dc53f4-nfl1 (P5/P6): the per-team injury view and the 13-vs-15-Nov delta are built
     # from committed capture files, then the shadow/ sub-site. Before the landing page, as above.
     ("shadow team view and delta", [sys.executable, "tools/build_team_view.py"], ROOT),
