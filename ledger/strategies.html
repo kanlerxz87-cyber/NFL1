@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Strategy competition · NFL Origination Ledger</title>
+<style>
+:root{--bg:#0f1116;--card:#171a21;--line:#242a35;--ink:#e8edf5;--dim:#9aa7ba;
+--ok:#3fb950;--warn:#d29922;--bad:#f85149;--acc:#58a6ff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+header{border-bottom:1px solid var(--line);background:#0b0d12;position:sticky;top:0;z-index:5}
+nav{max-width:1180px;margin:0 auto;padding:10px 18px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
+nav .brand{font-weight:700;letter-spacing:.2px;color:#fff;margin-right:8px}
+nav a{font-size:13px;color:var(--dim);padding:4px 2px}
+nav a.on{color:#fff;border-bottom:2px solid var(--acc)}
+main{max-width:1180px;margin:0 auto;padding:26px 18px 60px}
+h1{font-size:26px;margin:0 0 6px}
+h2{font-size:18px;margin:34px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+h3{font-size:15px;margin:22px 0 8px;color:#cfd8e5}
+p{color:#c8d2e0;max-width:80ch}
+.lead{color:var(--dim);font-size:14px;margin:0 0 18px;max-width:90ch}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:14px 0}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px}
+.kpi .v{font-size:24px;font-weight:700}
+.kpi .l{font-size:12px;color:var(--dim);margin-top:2px}
+.kpi .s{font-size:11px;color:#7b8798;margin-top:6px}
+table{width:100%;border-collapse:collapse;margin:10px 0 18px;font-size:13px;background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+th{background:#1d222c;text-align:left;padding:8px 10px;font-weight:600;color:#cfd8e5;border-bottom:1px solid var(--line);font-size:12px;white-space:nowrap}
+td{padding:8px 10px;border-bottom:1px solid #1e242e;vertical-align:top}
+tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#1b202a}
+.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.ok{color:var(--ok)}.warn{color:var(--warn)}.bad{color:var(--bad)}.dim{color:var(--dim)}
+.tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:999px;border:1px solid var(--line);color:var(--dim);white-space:nowrap}
+.tag.ok{color:var(--ok);border-color:#1f6f33}
+.tag.warn{color:var(--warn);border-color:#6b5312}
+.tag.bad{color:var(--bad);border-color:#7a2723}
+.note{background:#141821;border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:8px;padding:12px 14px;margin:14px 0}
+.note.warn{border-left-color:var(--warn)}
+.note.bad{border-left-color:var(--bad)}
+.scroll{overflow-x:auto;border-radius:8px}
+footer{border-top:1px solid var(--line);color:var(--dim);font-size:12px;max-width:1180px;margin:0 auto;padding:18px}
+.blank{color:#5d6675;font-style:italic}
+code{background:#1d222c;padding:1px 5px;border-radius:4px;font-size:12px}
+ul{color:#c8d2e0}
+</style></head>
+<body>
+<header><nav><span class="brand">NFL Origination Ledger</span><a class="" href="index.html">Overview</a><a class="" href="executive.html">Executive summary</a><a class="" href="decisions.html">Requirements: can we decide yet?</a><a class="on" href="strategies.html">Strategy competition</a><a class="" href="lines.html">Own lines &amp; price store</a><a class="" href="injuries.html">Injuries &amp; replacement</a><a class="" href="verification.html">Verification</a><a class="" href="flagged.html">Flagged for review</a><a class="" href="suggestions.html">Suggestions</a></nav></header>
+<main>
+
+<h1>Strategy competition</h1>
+<p class="lead">Twelve rules, fixed before any result was computed. Ten gates each. All twelve are
+published whatever they show, including the two information-free controls. Nothing here is
+ranked by win rate or by short-run ROI; the gates decide.</p>
+
+<div class="note">
+<strong>The registration.</strong> Rules, thresholds, the season split and the gates live in
+<code>data/session-c84a41a4/preregistration.json</code>, sha256
+<code>839293d8a001ab2f7bfe3c1a7db3137b5273f14e336329f080e7ef46a0bf7539</code>, committed at <code>061c2a8</code> before
+<code>results.json</code> existed. The build re-checks that hash and fails if the file was edited
+after the results were computed.
+</div>
+
+<div class="grid">
+  <div class="kpi"><div class="v">0</div><div class="l">promoted</div>
+    <div class="s">all ten gates</div></div>
+  <div class="kpi"><div class="v">26,299</div><div class="l">bet rows scored</div>
+    <div class="s">each with an observed price</div></div>
+  <div class="kpi"><div class="v">12</div><div class="l">rules tested</div>
+    <div class="s">BH charged for all of them</div></div>
+  <div class="kpi"><div class="v">5,336</div><div class="l">decided games</div>
+    <div class="s">2006–2026</div></div>
+</div>
+
+<h2>Leaderboard — every rule, ordered by in-sample ROI, which is not a ranking</h2>
+<p class="dim">Ordered by ROI only so the eye can find the top; the only ordering that promotes anything is the gate count. The two controls are the floor.</p>
+<div class="scroll"><table>
+<thead><tr><th>ID</th><th>Rule</th><th>n decided</th><th>Hit rate</th><th>Break-even</th><th>ROI</th><th>95% CI (game cluster)</th><th>BH q</th><th>Gates</th><th>Status</th><th>Source</th></tr></thead><tbody>
+<tr><td><code>C84-S4</code></td><td>C84-S4</td><td class="num">1,650</td><td class="num"><span class="">0.5285</span></td><td class="num"><span class="">0.5161</span></td><td class="num"><span class="ok"><span class="">2.32%</span></span></td><td class="num">[-0.02403, 0.06872]</td><td class="num"><span class="">0.987</span></td><td class="num">8/10</td><td><span class="tag warn">PAPER</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com schedules (closing lines)</a></td></tr>
+<tr><td><code>C84-S12</code></td><td>C84-S12</td><td class="num">1,076</td><td class="num"><span class="">0.5158</span></td><td class="num"><span class="">0.5135</span></td><td class="num"><span class="ok"><span class="">0.49%</span></span></td><td class="num">[-0.04965, 0.06237]</td><td class="num"><span class="">0.987</span></td><td class="num">5/10</td><td><span class="tag warn">PAPER</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com schedules (closing lines)</a></td></tr>
+<tr><td><code>C84-S1</code></td><td>C84-S1</td><td class="num">5,067</td><td class="num"><span class="">0.5135</span></td><td class="num"><span class="">0.5136</span></td><td class="num"><span class="ok"><span class="">0.09%</span></span></td><td class="num">[-0.0242, 0.0265]</td><td class="num"><span class="blank">blank</span></td><td class="num">3/10</td><td><span class="tag ">CONTROL</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com schedules (closing lines)</a></td></tr>
+<tr><td><code>C84-S11</code></td><td>C84-S11</td><td class="num">1,002</td><td class="num"><span class="">0.5170</span></td><td class="num"><span class="">0.5171</span></td><td class="num"><span class="ok"><span class="">0.05%</span></span></td><td class="num">[-0.05979, 0.06198]</td><td class="num"><span class="">0.987</span></td><td class="num">4/10</td><td><span class="tag warn">PAPER</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com schedules (closing lines)</a></td></tr>
+<tr><td><code>C84-S3</code></td><td>C84-S3</td><td class="num">3,097</td><td class="num"><span class="">0.5147</span></td><td class="num"><span class="">0.5153</span></td><td class="num"><span class="bad"><span class="">-0.04%</span></span></td><td class="num">[-0.03449, 0.03439]</td><td class="num"><span class="">0.987</span></td><td class="num">3/10</td><td><span class="tag warn">PAPER</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com schedules (closing lines)</a></td></tr>
+<tr><td><code>C84-S6</code></td><td>C84-S6</td><td class="num">1,075</td><td class="num"><span class="">0.5126</span></td><td class="num"><span class="">0.5141</span></td><td class="num"><span class="bad"><span class="">-0.12%</span></span></td><td class="num">[-0.05698, 0.05498]</td><td class="num"><span class="">0.987</span></td><td class="num">3/10</td><td><span class="tag warn">PAPER</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com schedules (closing lines)</a></td></tr>
+<tr><td><code>C84-S5</code></td><td>C84-S5</td><td class="num">2,210</td><td class="num"><span class="">0.5131</span></td><td class="num"><span class="">0.5146</span></td><td class="num"><span class="bad"><span class="">-0.20%</span></span></td><td class="num">[-0.04341, 0.03844]</td><td class="num"><span class="">0.987</span></td><td class="num">3/10</td><td><span class="tag warn">PAPER</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com schedules (closing lines)</a></td></tr>
+<tr><td><code>C84-S10</code></td><td>C84-S10</td><td class="num">661</td><td class="num"><span class="">0.5144</span></td><td class="num"><span class="">0.5160</span></td><td class="num"><span class="bad"><span class="">-0.29%</span></span></td><td class="num">[-0.07047, 0.0639]</td><td class="num"><span class="">0.987</span></td><td class="num">4/10</td><td><span class="tag warn">PAPER</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com schedules (closing lines)</a></td></tr>
+<tr><td><code>C84-S7</code></td><td>C84-S7</td><td class="num">3,578</td><td class="num"><span class="">0.3519</span></td><td class="num"><span class="">0.3505</span></td><td class="num"><span class="bad"><span class="">-1.17%</span></span></td><td class="num">[-0.05968, 0.0407]</td><td class="num"><span class="">0.987</span></td><td class="num">4/10</td><td><span class="tag warn">PAPER</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com schedules (closing lines)</a></td></tr>
+<tr><td><code>C84-S2</code></td><td>C84-S2</td><td class="num">5,067</td><td class="num"><span class="">0.4865</span></td><td class="num"><span class="">0.5135</span></td><td class="num"><span class="bad"><span class="">-5.06%</span></span></td><td class="num">[-0.07647, -0.02555]</td><td class="num"><span class="blank">blank</span></td><td class="num">3/10</td><td><span class="tag ">CONTROL</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com schedules (closing lines)</a></td></tr>
+<tr><td><code>C84-S9</code></td><td>C84-S9</td><td class="num">874</td><td class="num"><span class="">0.4714</span></td><td class="num"><span class="">0.5132</span></td><td class="num"><span class="bad"><span class="">-7.93%</span></span></td><td class="num">[-0.14458, -0.01382]</td><td class="num"><span class="">0.086</span></td><td class="num">3/10</td><td><span class="tag warn">PAPER</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com schedules (closing lines)</a></td></tr>
+<tr><td><code>C84-S8</code></td><td>C84-S8</td><td class="num">394</td><td class="num"><span class="">0.4442</span></td><td class="num"><span class="">0.5041</span></td><td class="num"><span class="bad"><span class="">-11.66%</span></span></td><td class="num">[-0.2127, -0.0225]</td><td class="num"><span class="">0.086</span></td><td class="num">3/10</td><td><span class="tag warn">PAPER</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com schedules (closing lines)</a></td></tr>
+</tbody></table></div>
+<h2>Gate matrix, one row per rule</h2>
+<div class="scroll"><table>
+<thead><tr><th>ID</th><th>Rule</th><th>C84-G1</th><th>C84-G2</th><th>C84-G3</th><th>C84-G4</th><th>C84-G5</th><th>C84-G6</th><th>C84-G7</th><th>C84-G8</th><th>C84-G9</th><th>C84-G10</th><th>Passed</th><th>Source</th></tr></thead><tbody>
+<tr><td><code>C84-S1</code></td><td>C84-S1</td><td class="num">✓</td><td class="num">✓</td><td class="num">✓</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">3/10</td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com schedules (closing lines)</a></td></tr>
+<tr><td><code>C84-S10</code></td><td>C84-S10</td><td class="num">✓</td><td class="num">✓</td><td class="num">✓</td><td class="num">✗</td><td class="num">✗</td><td class="num">✓</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">4/10</td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com schedules (closing lines)</a></td></tr>
+<tr><td><code>C84-S11</code></td><td>C84-S11</td><td class="num">✓</td><td class="num">✓</td><td class="num">✓</td><td class="num">✗</td><td class="num">✗</td><td class="num">✓</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">4/10</td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com schedules (closing lines)</a></td></tr>
+<tr><td><code>C84-S12</code></td><td>C84-S12</td><td class="num">✓</td><td class="num">✓</td><td class="num">✓</td><td class="num">✓</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✓</td><td class="num">✗</td><td class="num">5/10</td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com schedules (closing lines)</a></td></tr>
+<tr><td><code>C84-S2</code></td><td>C84-S2</td><td class="num">✓</td><td class="num">✓</td><td class="num">✓</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">3/10</td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com schedules (closing lines)</a></td></tr>
+<tr><td><code>C84-S3</code></td><td>C84-S3</td><td class="num">✓</td><td class="num">✓</td><td class="num">✓</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">3/10</td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com schedules (closing lines)</a></td></tr>
+<tr><td><code>C84-S4</code></td><td>C84-S4</td><td class="num">✓</td><td class="num">✓</td><td class="num">✓</td><td class="num">✓</td><td class="num">✗</td><td class="num">✓</td><td class="num">✓</td><td class="num">✗</td><td class="num">✓</td><td class="num">✓</td><td class="num">8/10</td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com schedules (closing lines)</a></td></tr>
+<tr><td><code>C84-S5</code></td><td>C84-S5</td><td class="num">✓</td><td class="num">✓</td><td class="num">✓</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">3/10</td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com schedules (closing lines)</a></td></tr>
+<tr><td><code>C84-S6</code></td><td>C84-S6</td><td class="num">✓</td><td class="num">✓</td><td class="num">✓</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">3/10</td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com schedules (closing lines)</a></td></tr>
+<tr><td><code>C84-S7</code></td><td>C84-S7</td><td class="num">✓</td><td class="num">✓</td><td class="num">✓</td><td class="num">✓</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">4/10</td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com schedules (closing lines)</a></td></tr>
+<tr><td><code>C84-S8</code></td><td>C84-S8</td><td class="num">✓</td><td class="num">✓</td><td class="num">✓</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">3/10</td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com schedules (closing lines)</a></td></tr>
+<tr><td><code>C84-S9</code></td><td>C84-S9</td><td class="num">✓</td><td class="num">✓</td><td class="num">✓</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">✗</td><td class="num">3/10</td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com schedules (closing lines)</a></td></tr>
+</tbody></table></div>
+<p class='dim'>Gate legend: <code>C84-G1</code> Observed price on every scored bet · <code>C84-G2</code> Pre-game information only · <code>C84-G3</code> At least 300 decided bets · <code>C84-G4</code> Hit rate beats the price-implied break-even · <code>C84-G5</code> Survives Benjamini-Hochberg · <code>C84-G6</code> Positive in the untouched 2024-2026 holdout · <code>C84-G7</code> Positive in 60%+ of seasons · <code>C84-G8</code> Game-cluster 95% CI excludes zero · <code>C84-G9</code> Beats the information-free control · <code>C84-G10</code> Edge survives deleting the best season</p>
+
+<h2>Removal of luck</h2>
+<p>Win rate is not a test. These are.</p>
+<table>
+<thead><tr><th>Test</th><th class="num">Value</th><th>Reading</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>Decided bets, all rules pooled</td><td class="num">25,751</td>
+<td>The whole sample this study has to work with, spread over twelve rules</td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com/schedules/</a></td></tr>
+<tr><td>Pooled hit rate vs break-even</td><td class="num"><span class="">0.4845</span> vs <span class="">0.4918</span></td>
+<td><span class="">-0.73</span> units per 100 bets, i.e. a loss of about the vig</td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com/schedules/</a></td></tr>
+<tr><td>Decided bets needed to see a 1-point edge</td><td class="num">19,622</td>
+<td>At 5% two-sided and 80% power</td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com/schedules/</a></td></tr>
+<tr><td>… a 2-point edge</td><td class="num">4,903</td><td></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com/schedules/</a></td></tr>
+<tr><td>… a 3-point edge</td><td class="num">2,177</td><td></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com/schedules/</a></td></tr>
+<tr><td>… a 5-point edge</td><td class="num">780</td><td></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com/schedules/</a></td></tr>
+</tbody></table>
+<div class="note warn">Two-sided test at 5% with 80% power, on hit rate. It says how many decided bets a genuine edge of that size needs before it is visible at all. With 25751 decided bets in total across all twelve rules, only edges of roughly 2 percentage points or larger are even in principle detectable, and each individual rule holds a fraction of that total.</div>
+
+<h2>Correlation register</h2>
+<p>Publish only where n &gt;= 25 paired observations; n is printed with every value. Prop-level and same-game-parlay correlations are NOT published because no observed prop price exists in any source here. A correlation between two legs whose prices cannot be observed is not a betting number.</p>
+
+<div class="scroll"><table>
+<thead><tr><th>Relationship</th><th>A</th><th>B</th><th>n</th><th>r</th><th>same side</th><th>Source</th></tr></thead><tbody>
+<tr><td>strategy-vs-strategy overlap</td><td>C84-S10</td><td>C84-S11</td><td class="num">475</td><td class="num"><span class="">1.0000</span></td><td class="num"><span class="">100.0%</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com/schedules/</a></td></tr>
+<tr><td>strategy-vs-strategy overlap</td><td>C84-S10</td><td>C84-S12</td><td class="num">108</td><td class="num"><span class="">1.0000</span></td><td class="num"><span class="">100.0%</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com/schedules/</a></td></tr>
+<tr><td>strategy-vs-strategy overlap</td><td>C84-S10</td><td>C84-S3</td><td class="num">218</td><td class="num"><span class="">1.0000</span></td><td class="num"><span class="">100.0%</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com/schedules/</a></td></tr>
+<tr><td>strategy-vs-strategy overlap</td><td>C84-S10</td><td>C84-S4</td><td class="num">119</td><td class="num"><span class="">1.0000</span></td><td class="num"><span class="">100.0%</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com/schedules/</a></td></tr>
+<tr><td>strategy-vs-strategy overlap</td><td>C84-S10</td><td>C84-S7</td><td class="num">207</td><td class="num"><span class="">0.5978</span></td><td class="num"><span class="">43.5%</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com/schedules/</a></td></tr>
+<tr><td>strategy-vs-strategy overlap</td><td>C84-S10</td><td>C84-S8</td><td class="num">50</td><td class="num"><span class="">1.0000</span></td><td class="num"><span class="">100.0%</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com/schedules/</a></td></tr>
+<tr><td>strategy-vs-strategy overlap</td><td>C84-S11</td><td>C84-S12</td><td class="num">147</td><td class="num"><span class="">1.0000</span></td><td class="num"><span class="">100.0%</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com/schedules/</a></td></tr>
+<tr><td>strategy-vs-strategy overlap</td><td>C84-S11</td><td>C84-S3</td><td class="num">379</td><td class="num"><span class="">1.0000</span></td><td class="num"><span class="">100.0%</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com/schedules/</a></td></tr>
+<tr><td>strategy-vs-strategy overlap</td><td>C84-S11</td><td>C84-S4</td><td class="num">221</td><td class="num"><span class="">1.0000</span></td><td class="num"><span class="">100.0%</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com/schedules/</a></td></tr>
+<tr><td>strategy-vs-strategy overlap</td><td>C84-S11</td><td>C84-S7</td><td class="num">385</td><td class="num"><span class="">0.5986</span></td><td class="num"><span class="">42.9%</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com/schedules/</a></td></tr>
+<tr><td>strategy-vs-strategy overlap</td><td>C84-S11</td><td>C84-S8</td><td class="num">51</td><td class="num"><span class="">1.0000</span></td><td class="num"><span class="">100.0%</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com/schedules/</a></td></tr>
+<tr><td>strategy-vs-strategy overlap</td><td>C84-S12</td><td>C84-S3</td><td class="num">379</td><td class="num"><span class="">1.0000</span></td><td class="num"><span class="">100.0%</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com/schedules/</a></td></tr>
+<tr><td>strategy-vs-strategy overlap</td><td>C84-S12</td><td>C84-S4</td><td class="num">205</td><td class="num"><span class="">1.0000</span></td><td class="num"><span class="">100.0%</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com/schedules/</a></td></tr>
+<tr><td>strategy-vs-strategy overlap</td><td>C84-S12</td><td>C84-S7</td><td class="num">393</td><td class="num"><span class="">0.6108</span></td><td class="num"><span class="">46.6%</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com/schedules/</a></td></tr>
+<tr><td>strategy-vs-strategy overlap</td><td>C84-S12</td><td>C84-S8</td><td class="num">53</td><td class="num"><span class="">1.0000</span></td><td class="num"><span class="">100.0%</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com/schedules/</a></td></tr>
+<tr><td>strategy-vs-strategy overlap</td><td>C84-S3</td><td>C84-S4</td><td class="num">1,690</td><td class="num"><span class="">1.0000</span></td><td class="num"><span class="">100.0%</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com/schedules/</a></td></tr>
+<tr><td>strategy-vs-strategy overlap</td><td>C84-S3</td><td>C84-S7</td><td class="num">2,907</td><td class="num"><span class="">0.6010</span></td><td class="num"><span class="">45.4%</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com/schedules/</a></td></tr>
+<tr><td>strategy-vs-strategy overlap</td><td>C84-S4</td><td>C84-S7</td><td class="num">1,682</td><td class="num"><span class="">0.5570</span></td><td class="num"><span class="">44.8%</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com/schedules/</a></td></tr>
+<tr><td>strategy-vs-strategy overlap</td><td>C84-S5</td><td>C84-S6</td><td class="num">1,091</td><td class="num"><span class="">1.0000</span></td><td class="num"><span class="">100.0%</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com/schedules/</a></td></tr>
+<tr><td>strategy-vs-strategy overlap</td><td>C84-S5</td><td>C84-S9</td><td class="num">68</td><td class="num"><span class="">1.0000</span></td><td class="num"><span class="">100.0%</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com/schedules/</a></td></tr>
+<tr><td>strategy-vs-strategy overlap</td><td>C84-S6</td><td>C84-S9</td><td class="num">28</td><td class="num"><span class="">1.0000</span></td><td class="num"><span class="">100.0%</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com/schedules/</a></td></tr>
+<tr><td>same-game: margin vs total points</td><td>home margin</td><td>total points</td><td class="num">5,336</td><td class="num"><span class="">0.0201</span></td><td class="num"><span class="blank">blank</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com/schedules/</a></td></tr>
+<tr><td>own line vs the closing line</td><td>own_spread_home</td><td>spread_line</td><td class="num">5,346</td><td class="num"><span class="">0.7333</span></td><td class="num"><span class="blank">blank</span></td><td><a href="https://www.nfl.com/schedules/" rel="noopener">nfl.com/schedules/</a></td></tr>
+</tbody></table></div>
+
+<h2>Why no parlay or prop combo is ranked</h2>
+<p>Multiplying marginal probabilities is invalid under dependence, and this sample shows the
+dependence is not zero: the correlation between a game's margin and its total points is
+<strong><span class="">0.0201</span></strong>
+on 5,336 games.
+Two legs inside one game therefore cannot be priced by multiplication, and no observed prop price
+exists in any committed source, so a prop combo has neither a price nor a joint probability. Both
+are required before a combo may be ranked; neither exists. Combos are not listed, not scored and
+not recommended.</p>
+
+</main>
+<footer>
+Built 2026-11-15 from committed files only. Every row links to the source that settles it.
+Static strings, no scripts, no fonts, no analytics. Session <code>c84a41a4-nfl1</code>.
+Prices are a third-party parse of an unofficial market and are labelled as such; the NFL
+publishes no odds.
+</footer>
+</body></html>

@@ -1,0 +1,76 @@
+name: Verify and publish the Origination Ledger
+
+# Additive workflow owned by session c84a41a4-nfl1. It does not touch, replace or gate any
+# existing workflow: it only builds `ledger/` and runs that site's own gate.
+#
+# Publishing note: GitHub Pages for this repository is configured as a legacy branch build from
+# `main` /, so `ledger/` is published by that mechanism once this lands on `main`. This job is
+# the QUALITY gate: it recomputes the study from the committed inputs, rebuilds the pages, and
+# fails on a broken link, a data table with no Source column, a sourceless row, or placeholder
+# text.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "ledger/**"
+      - "s9cb/c84_*.py"
+      - "data/session-c84a41a4/**"
+      - ".github/workflows/ledger.yml"
+  pull_request:
+    paths:
+      - "ledger/**"
+      - "s9cb/c84_*.py"
+      - "data/session-c84a41a4/**"
+      - ".github/workflows/ledger.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ledger-${{ github.event_name }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ledger:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install analysis dependencies
+        run: python -m pip install --quiet numpy pandas
+      - name: Recompute the pre-registered study from the committed inputs
+        run: python3 s9cb/c84_study.py
+      - name: Recompute the confirmed-replacement study
+        run: python3 s9cb/c84_replacement_study.py
+      - name: Rebuild the site from the recomputed data
+        run: python3 ledger/build.py
+      - name: The committed pages must equal the freshly generated pages
+        run: |
+          # `generated_at` is the only field that legitimately changes between two runs of
+          # the study (it records when the run happened). Every number must be identical, so
+          # the timestamps are normalised before the comparison and everything else is
+          # compared byte for byte.
+          for f in data/session-c84a41a4/results.json data/session-c84a41a4/qb_replacement.json; do
+            git show HEAD:"$f" | sed -E 's/"generated_at": "[^"]*"/"generated_at": "NORMALISED"/' > /tmp/committed.json
+            sed -E 's/"generated_at": "[^"]*"/"generated_at": "NORMALISED"/' "$f" > /tmp/fresh.json
+            if ! diff -q /tmp/committed.json /tmp/fresh.json >/dev/null; then
+              echo "::error::$f does not reproduce from the committed inputs. A number changed, not just a timestamp."
+              diff -u /tmp/committed.json /tmp/fresh.json | head -40
+              exit 1
+            fi
+            echo "OK: $f reproduces exactly apart from generated_at"
+          done
+          if ! git diff --quiet -- ledger/; then
+            echo "::error::ledger/ is stale. Re-run ledger/build.py and commit the result."
+            git diff --stat -- ledger/
+            exit 1
+          fi
+          echo "OK: ledger/ is byte-identical to a fresh build"
+      - name: Gate the site (links, source columns, sourceless rows, placeholders, reachability)
+        run: python3 ledger/verify.py
+      - name: Fail if the pre-registration was edited after the results were computed
+        run: python3 ledger/check_registration.py

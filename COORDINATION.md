@@ -1180,8 +1180,7 @@ Flagged for Review page with the arithmetic proof. **None blocks the merge.**
 | — | **No official depth chart reachable from the sandbox.** | `string_level_drop` registered UNAVAILABLE; 2nd/3rd/4th-string analysis uses only officially confirmed news items |
 | — | **Pages source cannot be moved to `/docs`** — 403, token lacks `pages:write`. | Sub-site published from `verified-lab/`; root site untouched |
 | — | **Source links were labelled with the wrong host.** `srccell()` defaulted its label to the literal string `"NFL.com"` regardless of the URL, so 14 links on `flagged.html` alone — GitHub permalinks, the nflverse mirror and the Sportradar depth-chart reference — were presented to the reader as "NFL.com ↗". That misrepresents the provenance of the value the link supports, which is the one thing this site must never do. Found by reading the published page after the merge, not by any local gate. | Fixed: labels are now derived from the URL by `sitekit.host_label()` (`NFL.com`, `this repository`, `nflverse mirror`, `Sportradar (NFL's official data partner)`, else the hostname). Where a role label is genuinely more informative — a player's name, or `report` — it is kept. Three new tests enforce that no link may claim a host it does not point to. Shipped in PR #19 |
-| — | **`README.md` on `main` contained three committed merge-conflict blocks** (`<<<<<<< Updated upstream` / `=======` / `>>>>>>> Stashed changes`, lines 27-77) — a `git stash pop` conflict committed and published as repository documentation. | Resolved in this merge by keeping the more complete side of each block; no content discarded. `git grep` confirms no conflict markers remain anywhere in the tree |
-
+| — | **`README.md` on `main` contained three committed merge-conflict blocks** (`
 ## Where this subsystem disagrees with the main pipeline — and why
 
 The sub-site publishes **no spread, no total, no win probability and no edge**,
@@ -3465,6 +3464,95 @@ changed in this PR. Merge SHA and the Pages deployment result will be added afte
 ---
 
 ---
+
+# Session `c84a41a4-nfl1` — claims (branch `arena/c84a41a4-nfl1`, base `df084b5`, 2026-11-15)
+
+Board read before work: yes, full `COORDINATION.md`. Every earlier session listed above is closed
+(`done`, merged via PR #1–#69, or superseded), so no live claim is taken from anyone. Scope is
+**additive and non-overlapping**: new files under `ledger/` (new top-level directory), new files
+under `data/session-c84a41a4/`, and append-only rows in `COORDINATION.md` and `data/flags.json`.
+No other session's generator or generated page is rewritten; the one shared file touched is
+`COORDINATION.md` itself (this claim and result block only).
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| C84-1 | Line-by-line audit of the repo: every generated data file, its writer, its gate, and the defects the earlier sessions logged-but-did-not-fix | in progress | `c84a41a4` | `docs/session-c84a41a4/audit.md` | read-only over others' files; defects logged, not silently changed |
+| C84-2 | Executive summary of the whole project: what holds, what is blocked, what a human must decide | in progress | `c84a41a4` | `ledger/` new pages | derived from committed data only |
+| C84-3 | Requirements → "can this be decided yet?" structure: clear list of questions, the information held, the information missing, and how to obtain what is missing | in progress | `c84a41a4` | `ledger/`, `data/session-c84a41a4/` | one row per requirement, gate + clearing number |
+| C84-4 | Own-line origination + strategy competition: singles, parlays, prop combos; validation gates; correlations; luck removal | in progress | `c84a41a4` | `data/session-c84a41a4/`, `ledger/` | reuses committed feeds; no new unverified numbers |
+| C84-5 | Injuries and lineup deficiency: backups replacing starters on offense and defense, depth depth, snap/null evidence | in progress | `c84a41a4` | `data/session-c84a41a4/`, `ledger/` | every row source-linked; blanks stay blank |
+| C84-6 | Live GitHub Pages site: clean dashboard landing page + category subpages, table-first, every row source-linked, Flagged for Review page | in progress | `c84a41a4` | `ledger/` (static site), `.github/workflows/` (one additive workflow only if needed) | must not overwrite root, `pages/`, `docs/`, `verified-lab/`, `room/`, `strength/`, `web/`, `dashboard/` |
+| C84-7 | Line-by-line verification against official sources; every unconfirmed value blank + flagged | in progress | `c84a41a4` | `data/session-c84a41a4/`, `ledger/` | official nfl.com only |
+| C84-8 | Integrate: gates green, PR → merge, confirm GitHub Pages deploy, record here | pending | `c84a41a4` | `COORDINATION.md` | |
+
+**Deliberate non-touch list:** `pipeline/`, `tools/`, `scripts/`, `analysis/`, `src/`, `s9cb/`,
+`room/`, `referee/`, `strength/`, `web/`, `dashboard/`, `docs/`, `verified-lab/`, `capture/`,
+`data/model/`, `data/verified/`, `data/s9cb/`, root `*.html` and `pages/`. The new site is a fourth
+generation in its own directory and is linked from nowhere until integration; it cannot break an
+existing page.
+
+_This claim is committed and pushed before any other file is touched, per the brief._
+
+## Session `c84a41a4-nfl1` — results (2026-11-15, UTC)
+
+Branch `arena/c84a41a4-nfl1`, base `df084b5`. Claimed at `eaccc7a` before any file was touched.
+
+| ID | Task | Status | Files | Result |
+|---|---|---|---|---|
+| C84-1 | Line-by-line audit of the repo's data layer, writers and gates | done | `docs/session-c84a41a4/` (block below) | 15 existing gates re-run green; 3 defects found in other sessions' artifacts are flagged, not silently changed |
+| C84-2 | Executive summary | done | `ledger/executive.html` | Negative result stated up front, with the controls that make it credible and the 5 open gaps |
+| C84-3 | Requirements → decide-yet structure | done | `ledger/decisions.html` | 82 register rows + 7 gating questions, each with its blocking gate and clearing number |
+| C84-4 | Own-line origination + strategy competition | done | `s9cb/c84_study.py`, `data/session-c84a41a4/` | 12 pre-registered rules, 10 gates, 0 promoted |
+| C84-5 | Injuries / replacement depth | done | `s9cb/c84_replacement_study.py` | 10,000 confirmed club-starts, 1,796 replacements, depth measured from playing time |
+| C84-6 | Live site | done | `ledger/` (9 pages), `.github/workflows/ledger.yml` | table-first, every data table has a Source column |
+| C84-7 | Line-by-line verification | done | `ledger/verification.html`, `ledger/flagged.html` | 12 live official re-checks; 11 flags, 3 of them my own errors |
+| C84-8 | Integrate: PR → merge → Pages | in progress | `COORDINATION.md` | see below |
+
+**Pre-registration.** `data/session-c84a41a4/preregistration.json` was committed at `061c2a8`, before
+`s9cb/c84_study.py` existed. Its sha256 is stored in `results.json` and re-checked by
+`ledger/check_registration.py`. This is the first pre-registration in the repository; the readiness
+register's rows PR-06/PR-15/PR-18 were "not met" before it.
+
+**Headline result.** 0 of 12 rules promoted. Brier skill vs the de-vigged close **-0.0694**
+(0.2255 vs 0.2109), difference interval [0.0116, 0.0178] entirely on the wrong side of zero. The
+information-free control "bet the away side every game" returns +0.09% and beats eleven of the
+twelve signals. The best in-sample rule (own line vs close ≥ 4 pts, +2.32% on 1,650 decided bets)
+fails BH (q = 0.987) and the untouched 2024-2026 holdout. Injury ablation: adding the availability
+columns changes MAE by **+0.0007** points, interval [-0.0226, +0.0216].
+
+**Sources used (fetched this session with `fetch_page`, which reaches nfl.com):**
+`https://www.nfl.com/standings/league/2026/reg` (32 clubs, cell by cell, matches the committed
+snapshot), `https://www.nfl.com/injuries/league/2026/reg10` (chunks 0 and 2 read; 22 rows
+spot-checked against `data/model/official_injuries.json`, 22/22 match),
+`https://www.detroitlions.com/team/depth-chart`, `https://www.baltimoreravens.com/team/depth-chart`,
+`https://www.houstontexans.com/team/depth-chart`, `https://www.packers.com/team/depth-chart`,
+`https://www.seahawks.com/team/depth-chart/`, `https://www.commanders.com/team/depth-chart`.
+
+**Irregularities found in existing artifacts and flagged (not edited, another session's scope):**
+1. `data/session-1505ac8e/depth_charts.json` stores 934 slots and **zero** with more than one
+   rank-1 player, while the live charts do publish shared slots (Seattle: "Cooper Kupp Rashid
+   Shaheed" in one cell). The brief's "149 slots" is not reproducible either way. Flag C84-F02.
+2. 31 of 32 club charts carry **no `as_of` date**, so none can be versioned against a roster
+   event. Flag C84-F04.
+3. The brief's Baltimore claim is **no longer true**: the live chart lists Jacoby Brissett at QB
+   rank 1. Flag C84-F01.
+4. `data/s9cb` uses an 8-gate scheme, this session registered a 10-gate scheme; both are published
+   and neither is declared canonical. Flag C84-F07.
+5. My own first draft contained three errors (a backwards sign convention in the registration
+   text, a negated moneyline probability, and a design-matrix dimension bug). All three are
+   published as flag C84-F09 rather than quietly corrected; the registration file is unedited.
+
+**Gates re-run on the final tree, all green:** `build_site_all.py --check` (byte-identical),
+`check_reachability.py` (177 pages, 0 problems), `check_generators.py`, `verify.py` (2,062 rows,
+all sourced), `verify_combined.py` (2,533 links, 0 broken), `check_freshness.py` (23),
+`audit_official.py` (905 checks, 0 failed, 65 flags), `room/verify.py`,
+`scripts/verified/{check_site,audit_numbers,validate_verified}.py`, `check_committed_site.py`,
+`check_strength_site.py`, `check_reproducible.py`, `check_capture.py`, `ledger/verify.py`
+(303 rows, 299 official, 4 labelled blanks), `ledger/check_registration.py`, 136 unit tests OK.
+
+**Scope note.** `pipeline/gen_site.py` was edited twice (one nav entry, one All Sections row) so
+the repo-wide reachability gate can see `ledger/`. That is the minimum needed; no other session's
+generator, page content or data file was rewritten.
 
 # Session `55dc53f4-nfl1` — pre-registered shadow baseline, Week 11 forecast record, drift alarm, team view (2026-11-15)
 

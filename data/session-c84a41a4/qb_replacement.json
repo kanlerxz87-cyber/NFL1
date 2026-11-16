@@ -1,0 +1,991 @@
+{
+ "generated_at": "2026-11-15T13:20:13+00:00",
+ "input": {
+  "path": "data/s9cb/games.csv",
+  "sha256": "f89e069d6309d944a41a6cd988ae930e3a69ec5630d9e1618e68c0d141c12d59",
+  "columns_used": [
+   "home_qb_id",
+   "away_qb_id",
+   "home_qb_name",
+   "away_qb_name",
+   "spread_line",
+   "home_spread_odds",
+   "away_spread_odds",
+   "home_score",
+   "away_score"
+  ]
+ },
+ "official_source": "https://www.nfl.com/schedules/",
+ "what_is_confirmed": "The starting quarterback on each game row is the quarterback who took the first snap, carried in the game feed by GSIS player id. It is a record of playing time, not a depth-chart opinion, so a replacement identified here is a CONFIRMED replacement.",
+ "what_is_not_used": [
+  "club depth charts (a weekly opinion, and a one-time transcription in this repo)",
+  "jersey numbers, roster order, salary, draft position or experience",
+  "any snap count (no official snap-count source is committed here)"
+ ],
+ "method": {
+  "nominal_starter": "the club's most frequent confirmed starter so far THIS SEASON, computed only from games before the one being judged",
+  "replacement": "this week's confirmed starter is not the club's nominal starter",
+  "depth_of_replacement": "the replacement's OWN prior confirmed starts for the same club in the sample. 0 = he had never started for the club, i.e. the replacement went one level deeper than a backup who has played.",
+  "walk_forward": true
+ },
+ "counts": {
+  "confirmed_starts": 10000,
+  "replacements": 1796,
+  "replacement_rate_pct": 17.96,
+  "first_change_no_prior_start": 390,
+  "later_change_has_started": 1406
+ },
+ "market_test": {
+  "question": "Does backing a club that starts a confirmed replacement beat its own price?",
+  "by_group": {
+   "incumbent": {
+    "n": 8032,
+    "roi_pct": -2.363,
+    "roi_ci95_game_cluster": [
+     -0.05487,
+     -0.02572
+    ]
+   },
+   "later change (has started before)": {
+    "n": 1395,
+    "roi_pct": -2.687,
+    "roi_ci95_game_cluster": [
+     -0.0786,
+     0.02325
+    ]
+   },
+   "first change (no prior start)": {
+    "n": 379,
+    "roi_pct": -4.558,
+    "roi_ci95_game_cluster": [
+     -0.13693,
+     0.04815
+    ]
+   }
+  },
+  "first_change_minus_incumbent": {
+   "n_paired": 311,
+   "mean_difference_units": -0.06361,
+   "ci95_game_cluster": [
+    -0.28073,
+    0.14942
+   ],
+   "reading": "A negative difference means starting a replacement went worse than starting the incumbent, relative to the price. An interval containing zero means the sample cannot separate the two."
+  },
+  "note": "This is a diagnostic, not a promoted strategy: it is ONE rule, it was not in the pre-registered family, and it is published as an observation for the review page rather than as a bet recommendation."
+ },
+ "per_club": [
+  {
+   "club": "ARI",
+   "confirmed_starts": 313,
+   "replacements": 88,
+   "first_change": 15,
+   "later_change": 73
+  },
+  {
+   "club": "ATL",
+   "confirmed_starts": 313,
+   "replacements": 32,
+   "first_change": 7,
+   "later_change": 25
+  },
+  {
+   "club": "BAL",
+   "confirmed_starts": 313,
+   "replacements": 44,
+   "first_change": 13,
+   "later_change": 31
+  },
+  {
+   "club": "BUF",
+   "confirmed_starts": 311,
+   "replacements": 49,
+   "first_change": 11,
+   "later_change": 38
+  },
+  {
+   "club": "CAR",
+   "confirmed_starts": 312,
+   "replacements": 67,
+   "first_change": 11,
+   "later_change": 56
+  },
+  {
+   "club": "CHI",
+   "confirmed_starts": 313,
+   "replacements": 71,
+   "first_change": 17,
+   "later_change": 54
+  },
+  {
+   "club": "CIN",
+   "confirmed_starts": 311,
+   "replacements": 41,
+   "first_change": 7,
+   "later_change": 34
+  },
+  {
+   "club": "CLE",
+   "confirmed_starts": 313,
+   "replacements": 111,
+   "first_change": 26,
+   "later_change": 85
+  },
+  {
+   "club": "DAL",
+   "confirmed_starts": 313,
+   "replacements": 57,
+   "first_change": 14,
+   "later_change": 43
+  },
+  {
+   "club": "DEN",
+   "confirmed_starts": 313,
+   "replacements": 48,
+   "first_change": 11,
+   "later_change": 37
+  },
+  {
+   "club": "DET",
+   "confirmed_starts": 312,
+   "replacements": 34,
+   "first_change": 7,
+   "later_change": 27
+  },
+  {
+   "club": "GB",
+   "confirmed_starts": 313,
+   "replacements": 25,
+   "first_change": 8,
+   "later_change": 17
+  },
+  {
+   "club": "HOU",
+   "confirmed_starts": 312,
+   "replacements": 65,
+   "first_change": 12,
+   "later_change": 53
+  },
+  {
+   "club": "IND",
+   "confirmed_starts": 313,
+   "replacements": 46,
+   "first_change": 13,
+   "later_change": 33
+  },
+  {
+   "club": "JAX",
+   "confirmed_starts": 312,
+   "replacements": 57,
+   "first_change": 13,
+   "later_change": 44
+  },
+  {
+   "club": "KC",
+   "confirmed_starts": 312,
+   "replacements": 52,
+   "first_change": 16,
+   "later_change": 36
+  },
+  {
+   "club": "LA",
+   "confirmed_starts": 163,
+   "replacements": 20,
+   "first_change": 8,
+   "later_change": 12
+  },
+  {
+   "club": "LAC",
+   "confirmed_starts": 147,
+   "replacements": 7,
+   "first_change": 3,
+   "later_change": 4
+  },
+  {
+   "club": "LV",
+   "confirmed_starts": 103,
+   "replacements": 19,
+   "first_change": 4,
+   "later_change": 15
+  },
+  {
+   "club": "MIA",
+   "confirmed_starts": 312,
+   "replacements": 69,
+   "first_change": 16,
+   "later_change": 53
+  },
+  {
+   "club": "MIN",
+   "confirmed_starts": 312,
+   "replacements": 61,
+   "first_change": 17,
+   "later_change": 44
+  },
+  {
+   "club": "NE",
+   "confirmed_starts": 313,
+   "replacements": 25,
+   "first_change": 7,
+   "later_change": 18
+  },
+  {
+   "club": "NO",
+   "confirmed_starts": 312,
+   "replacements": 46,
+   "first_change": 11,
+   "later_change": 35
+  },
+  {
+   "club": "NYG",
+   "confirmed_starts": 313,
+   "replacements": 45,
+   "first_change": 12,
+   "later_change": 33
+  },
+  {
+   "club": "NYJ",
+   "confirmed_starts": 313,
+   "replacements": 62,
+   "first_change": 12,
+   "later_change": 50
+  },
+  {
+   "club": "OAK",
+   "confirmed_starts": 210,
+   "replacements": 48,
+   "first_change": 11,
+   "later_change": 37
+  },
+  {
+   "club": "PHI",
+   "confirmed_starts": 313,
+   "replacements": 66,
+   "first_change": 12,
+   "later_change": 54
+  },
+  {
+   "club": "PIT",
+   "confirmed_starts": 312,
+   "replacements": 50,
+   "first_change": 9,
+   "later_change": 41
+  },
+  {
+   "club": "SD",
+   "confirmed_starts": 165,
+   "replacements": 1,
+   "first_change": 1,
+   "later_change": 0
+  },
+  {
+   "club": "SEA",
+   "confirmed_starts": 313,
+   "replacements": 28,
+   "first_change": 5,
+   "later_change": 23
+  },
+  {
+   "club": "SF",
+   "confirmed_starts": 312,
+   "replacements": 103,
+   "first_change": 15,
+   "later_change": 88
+  },
+  {
+   "club": "STL",
+   "confirmed_starts": 150,
+   "replacements": 41,
+   "first_change": 9,
+   "later_change": 32
+  },
+  {
+   "club": "TB",
+   "confirmed_starts": 313,
+   "replacements": 50,
+   "first_change": 10,
+   "later_change": 40
+  },
+  {
+   "club": "TEN",
+   "confirmed_starts": 312,
+   "replacements": 86,
+   "first_change": 13,
+   "later_change": 73
+  },
+  {
+   "club": "WAS",
+   "confirmed_starts": 313,
+   "replacements": 82,
+   "first_change": 14,
+   "later_change": 68
+  }
+ ],
+ "examples": [
+  {
+   "season": 2006,
+   "week": 2,
+   "club": "KC",
+   "opponent": "DEN",
+   "confirmed_starter": "Damon Huard",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2006_02_KC_DEN",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2006,
+   "week": 2,
+   "club": "OAK",
+   "opponent": "BAL",
+   "confirmed_starter": "Andrew Walter",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2006_02_OAK_BAL",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2006,
+   "week": 2,
+   "club": "PIT",
+   "opponent": "JAX",
+   "confirmed_starter": "Ben Roethlisberger",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2006_02_PIT_JAX",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2006,
+   "week": 4,
+   "club": "TEN",
+   "opponent": "DAL",
+   "confirmed_starter": "Vince Young",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2006_04_DAL_TEN",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2006,
+   "week": 5,
+   "club": "ARI",
+   "opponent": "KC",
+   "confirmed_starter": "Matt Leinart",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2006_05_KC_ARI",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2006,
+   "week": 5,
+   "club": "MIA",
+   "opponent": "NE",
+   "confirmed_starter": "Joey Harrington",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2006_05_MIA_NE",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2006,
+   "week": 5,
+   "club": "TB",
+   "opponent": "NO",
+   "confirmed_starter": "Bruce Gradkowski",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2006_05_TB_NO",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2006,
+   "week": 8,
+   "club": "DAL",
+   "opponent": "CAR",
+   "confirmed_starter": "Tony Romo",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2006_08_DAL_CAR",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2006,
+   "week": 8,
+   "club": "JAX",
+   "opponent": "PHI",
+   "confirmed_starter": "David Garrard",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2006_08_JAX_PHI",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2006,
+   "week": 8,
+   "club": "SEA",
+   "opponent": "KC",
+   "confirmed_starter": "Seneca Wallace",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2006_08_SEA_KC",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2006,
+   "week": 11,
+   "club": "KC",
+   "opponent": "OAK",
+   "confirmed_starter": "Trent Green",
+   "replacement_depth_label": "later change (has started before)",
+   "replacement_prior_starts_this_club": 1,
+   "game_id": "2006_11_OAK_KC",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2006,
+   "week": 11,
+   "club": "OAK",
+   "opponent": "KC",
+   "confirmed_starter": "Aaron Brooks",
+   "replacement_depth_label": "later change (has started before)",
+   "replacement_prior_starts_this_club": 1,
+   "game_id": "2006_11_OAK_KC",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2006,
+   "week": 11,
+   "club": "WAS",
+   "opponent": "TB",
+   "confirmed_starter": "Jason Campbell",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2006_11_WAS_TB",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2006,
+   "week": 12,
+   "club": "PHI",
+   "opponent": "IND",
+   "confirmed_starter": "Jeff Garcia",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2006_12_PHI_IND",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2006,
+   "week": 13,
+   "club": "DEN",
+   "opponent": "SEA",
+   "confirmed_starter": "Jay Cutler",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2006_13_SEA_DEN",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2006,
+   "week": 14,
+   "club": "CLE",
+   "opponent": "PIT",
+   "confirmed_starter": "Derek Anderson",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2006_14_CLE_PIT",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2006,
+   "week": 14,
+   "club": "CAR",
+   "opponent": "NYG",
+   "confirmed_starter": "Chris Weinke",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2006_14_NYG_CAR",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2006,
+   "week": 16,
+   "club": "MIN",
+   "opponent": "GB",
+   "confirmed_starter": "Tarvaris Jackson",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2006_16_MIN_GB",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2006,
+   "week": 16,
+   "club": "TB",
+   "opponent": "CLE",
+   "confirmed_starter": "Tim Rattay",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2006_16_TB_CLE",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2006,
+   "week": 17,
+   "club": "ARI",
+   "opponent": "SD",
+   "confirmed_starter": "Kurt Warner",
+   "replacement_depth_label": "later change (has started before)",
+   "replacement_prior_starts_this_club": 4,
+   "game_id": "2006_17_ARI_SD",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2006,
+   "week": 17,
+   "club": "PHI",
+   "opponent": "ATL",
+   "confirmed_starter": "A.J. Feeley",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2006_17_ATL_PHI",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2006,
+   "week": 17,
+   "club": "ATL",
+   "opponent": "PHI",
+   "confirmed_starter": "Matt Schaub",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2006_17_ATL_PHI",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2006,
+   "week": 17,
+   "club": "NO",
+   "opponent": "CAR",
+   "confirmed_starter": "Jamie Martin",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2006_17_CAR_NO",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2006,
+   "week": 17,
+   "club": "JAX",
+   "opponent": "KC",
+   "confirmed_starter": "Quinn Gray",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2006_17_JAX_KC",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2006,
+   "week": 17,
+   "club": "MIA",
+   "opponent": "IND",
+   "confirmed_starter": "Cleo Lemon",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2006_17_MIA_IND",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 2,
+   "club": "CLE",
+   "opponent": "CIN",
+   "confirmed_starter": "Derek Anderson",
+   "replacement_depth_label": "later change (has started before)",
+   "replacement_prior_starts_this_club": 3,
+   "game_id": "2007_02_CIN_CLE",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 2,
+   "club": "BAL",
+   "opponent": "NYJ",
+   "confirmed_starter": "Kyle Boller",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2007_02_NYJ_BAL",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 2,
+   "club": "NYJ",
+   "opponent": "BAL",
+   "confirmed_starter": "Kellen Clemens",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2007_02_NYJ_BAL",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 3,
+   "club": "MIN",
+   "opponent": "KC",
+   "confirmed_starter": "Kelly Holcomb",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2007_03_MIN_KC",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 4,
+   "club": "CHI",
+   "opponent": "DET",
+   "confirmed_starter": "Brian Griese",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2007_04_CHI_DET",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 4,
+   "club": "BUF",
+   "opponent": "NYJ",
+   "confirmed_starter": "Trent Edwards",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2007_04_NYJ_BUF",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 4,
+   "club": "OAK",
+   "opponent": "MIA",
+   "confirmed_starter": "Daunte Culpepper",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2007_04_OAK_MIA",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 4,
+   "club": "CAR",
+   "opponent": "TB",
+   "confirmed_starter": "David Carr",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2007_04_TB_CAR",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 5,
+   "club": "STL",
+   "opponent": "ARI",
+   "confirmed_starter": "Gus Frerotte",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2007_05_ARI_STL",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 5,
+   "club": "SF",
+   "opponent": "BAL",
+   "confirmed_starter": "Trent Dilfer",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2007_05_BAL_SF",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 6,
+   "club": "ARI",
+   "opponent": "CAR",
+   "confirmed_starter": "Kurt Warner",
+   "replacement_depth_label": "later change (has started before)",
+   "replacement_prior_starts_this_club": 5,
+   "game_id": "2007_06_CAR_ARI",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 6,
+   "club": "CAR",
+   "opponent": "ARI",
+   "confirmed_starter": "Vinny Testaverde",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2007_06_CAR_ARI",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 6,
+   "club": "MIA",
+   "opponent": "CLE",
+   "confirmed_starter": "Cleo Lemon",
+   "replacement_depth_label": "later change (has started before)",
+   "replacement_prior_starts_this_club": 1,
+   "game_id": "2007_06_MIA_CLE",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 7,
+   "club": "ATL",
+   "opponent": "NO",
+   "confirmed_starter": "Byron Leftwich",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2007_07_ATL_NO",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 7,
+   "club": "TEN",
+   "opponent": "HOU",
+   "confirmed_starter": "Kerry Collins",
+   "replacement_depth_label": "later change (has started before)",
+   "replacement_prior_starts_this_club": 3,
+   "game_id": "2007_07_TEN_HOU",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 8,
+   "club": "JAX",
+   "opponent": "TB",
+   "confirmed_starter": "Quinn Gray",
+   "replacement_depth_label": "later change (has started before)",
+   "replacement_prior_starts_this_club": 1,
+   "game_id": "2007_08_JAX_TB",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 9,
+   "club": "BUF",
+   "opponent": "CIN",
+   "confirmed_starter": "J.P. Losman",
+   "replacement_depth_label": "later change (has started before)",
+   "replacement_prior_starts_this_club": 19,
+   "game_id": "2007_09_CIN_BUF",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 9,
+   "club": "OAK",
+   "opponent": "HOU",
+   "confirmed_starter": "Josh McCown",
+   "replacement_depth_label": "later change (has started before)",
+   "replacement_prior_starts_this_club": 3,
+   "game_id": "2007_09_HOU_OAK",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 9,
+   "club": "HOU",
+   "opponent": "OAK",
+   "confirmed_starter": "Sage Rosenfels",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2007_09_HOU_OAK",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 10,
+   "club": "MIN",
+   "opponent": "GB",
+   "confirmed_starter": "Brooks Bollinger",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2007_10_MIN_GB",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 11,
+   "club": "CHI",
+   "opponent": "SEA",
+   "confirmed_starter": "Rex Grossman",
+   "replacement_depth_label": "later change (has started before)",
+   "replacement_prior_starts_this_club": 19,
+   "game_id": "2007_11_CHI_SEA",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 11,
+   "club": "KC",
+   "opponent": "IND",
+   "confirmed_starter": "Brodie Croyle",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2007_11_KC_IND",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 11,
+   "club": "MIA",
+   "opponent": "PHI",
+   "confirmed_starter": "John Beck",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2007_11_MIA_PHI",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 12,
+   "club": "PHI",
+   "opponent": "NE",
+   "confirmed_starter": "A.J. Feeley",
+   "replacement_depth_label": "later change (has started before)",
+   "replacement_prior_starts_this_club": 1,
+   "game_id": "2007_12_PHI_NE",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 13,
+   "club": "TB",
+   "opponent": "NO",
+   "confirmed_starter": "Luke McCown",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2007_13_TB_NO",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 14,
+   "club": "ATL",
+   "opponent": "NO",
+   "confirmed_starter": "Chris Redman",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2007_14_NO_ATL",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 14,
+   "club": "STL",
+   "opponent": "CIN",
+   "confirmed_starter": "Brock Berlin",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2007_14_STL_CIN",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 15,
+   "club": "CHI",
+   "opponent": "MIN",
+   "confirmed_starter": "Kyle Orton",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2007_15_CHI_MIN",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 15,
+   "club": "SF",
+   "opponent": "CIN",
+   "confirmed_starter": "Shaun Hill",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2007_15_CIN_SF",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 15,
+   "club": "CAR",
+   "opponent": "SEA",
+   "confirmed_starter": "Matt Moore",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2007_15_SEA_CAR",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 15,
+   "club": "WAS",
+   "opponent": "NYG",
+   "confirmed_starter": "Todd Collins",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2007_15_WAS_NYG",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 16,
+   "club": "BAL",
+   "opponent": "SEA",
+   "confirmed_starter": "Troy Smith",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2007_16_BAL_SEA",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 17,
+   "club": "PIT",
+   "opponent": "BAL",
+   "confirmed_starter": "Charlie Batch",
+   "replacement_depth_label": "later change (has started before)",
+   "replacement_prior_starts_this_club": 1,
+   "game_id": "2007_17_PIT_BAL",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 17,
+   "club": "OAK",
+   "opponent": "SD",
+   "confirmed_starter": "JaMarcus Russell",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2007_17_SD_OAK",
+   "source": "https://www.nfl.com/schedules/"
+  },
+  {
+   "season": 2007,
+   "week": 17,
+   "club": "SF",
+   "opponent": "CLE",
+   "confirmed_starter": "Chris Weinke",
+   "replacement_depth_label": "first change (no prior start)",
+   "replacement_prior_starts_this_club": 0,
+   "game_id": "2007_17_SF_CLE",
+   "source": "https://www.nfl.com/schedules/"
+  }
+ ],
+ "limits": [
+  "The feed records the starter, not the reasons: an injury, a benching and a rest week all appear as the same event.",
+  "Only the quarterback. Offensive line and secondary replacements cannot be confirmed from any committed source, because no official snap count and no confirmed-starter feed for those positions exists in this repository.",
+  "A club with two co-starters will look like it changes starter often; the plurality rule makes the label unstable in that case, and it is labelled as a change rather than smoothed."
+ ]
+}
