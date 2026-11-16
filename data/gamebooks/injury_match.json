@@ -1,0 +1,1435 @@
+{
+  "schema": "gamebooks-injury-match/1",
+  "injury_read": {
+    "file": "data/snapshots/injury_report/captures/20261115T121648Z_6007630190d2.json",
+    "captured_at_utc": "2026-11-15T12:16:48Z",
+    "source_url": "https://www.nfl.com/injuries/",
+    "rows": 347,
+    "sha256": "6007630190d28e3326501aa1419af62cb551a3ca431013e68d3d3845c9662c11"
+  },
+  "totals": {
+    "not_active_entries": 133,
+    "matched": 64,
+    "not_in_report": 69,
+    "ambiguous": 0,
+    "unparseable": 0,
+    "out": 44,
+    "doubtful": 3,
+    "questionable": 13
+  },
+  "matches": [
+    {
+      "game": "commanders-at-giants-2026-reg-10",
+      "club": "WAS",
+      "side": "away",
+      "entry": "3QB 16 A.Kaliakmanis",
+      "book_name": "A.Kaliakmanis",
+      "match": "not_in_report"
+    },
+    {
+      "game": "commanders-at-giants-2026-reg-10",
+      "club": "WAS",
+      "side": "away",
+      "entry": "CB 37 I.Yiadom",
+      "book_name": "I.Yiadom",
+      "match": "not_in_report"
+    },
+    {
+      "game": "commanders-at-giants-2026-reg-10",
+      "club": "WAS",
+      "side": "away",
+      "entry": "DT 50 R.Barber",
+      "book_name": "R.Barber",
+      "match": "not_in_report"
+    },
+    {
+      "game": "commanders-at-giants-2026-reg-10",
+      "club": "WAS",
+      "side": "away",
+      "entry": "G 62 T.Togiai",
+      "book_name": "T.Togiai",
+      "match": "not_in_report"
+    },
+    {
+      "game": "commanders-at-giants-2026-reg-10",
+      "club": "WAS",
+      "side": "away",
+      "entry": "G 63 L.Patrick",
+      "book_name": "L.Patrick",
+      "match": "matched",
+      "injury_player": "Lucas Patrick",
+      "game_status": "Out",
+      "injury": "Concussion",
+      "player_url": "https://www.nfl.com/players/lucas-patrick/"
+    },
+    {
+      "game": "commanders-at-giants-2026-reg-10",
+      "club": "WAS",
+      "side": "away",
+      "entry": "TE 80 C.Yankoff",
+      "book_name": "C.Yankoff",
+      "match": "matched",
+      "injury_player": "Colson Yankoff",
+      "game_status": "Out",
+      "injury": "Knee",
+      "player_url": "https://www.nfl.com/players/colson-yankoff/"
+    },
+    {
+      "game": "commanders-at-giants-2026-reg-10",
+      "club": "NYG",
+      "side": "home",
+      "entry": "CB 21 P.Adebo",
+      "book_name": "P.Adebo",
+      "match": "not_in_report"
+    },
+    {
+      "game": "commanders-at-giants-2026-reg-10",
+      "club": "NYG",
+      "side": "home",
+      "entry": "CB 35 N.Reed",
+      "book_name": "N.Reed",
+      "match": "not_in_report"
+    },
+    {
+      "game": "commanders-at-giants-2026-reg-10",
+      "club": "NYG",
+      "side": "home",
+      "entry": "LB 54 M.Harrison",
+      "book_name": "M.Harrison",
+      "match": "matched",
+      "injury_player": "Malik Harrison",
+      "game_status": "Questionable",
+      "injury": "Groin",
+      "player_url": "https://www.nfl.com/players/malik-harrison/"
+    },
+    {
+      "game": "commanders-at-giants-2026-reg-10",
+      "club": "NYG",
+      "side": "home",
+      "entry": "OL 67 J.Sills",
+      "book_name": "J.Sills",
+      "match": "not_in_report"
+    },
+    {
+      "game": "commanders-at-giants-2026-reg-10",
+      "club": "NYG",
+      "side": "home",
+      "entry": "OL 74 J.Davis",
+      "book_name": "J.Davis",
+      "match": "not_in_report"
+    },
+    {
+      "game": "commanders-at-giants-2026-reg-10",
+      "club": "NYG",
+      "side": "home",
+      "entry": "TE 86 T.Fidone",
+      "book_name": "T.Fidone",
+      "match": "not_in_report"
+    },
+    {
+      "game": "commanders-at-giants-2026-reg-10",
+      "club": "NYG",
+      "side": "home",
+      "entry": "DL 99 B.Okoye",
+      "book_name": "B.Okoye",
+      "match": "not_in_report"
+    },
+    {
+      "game": "patriots-at-lions-2026-reg-10",
+      "club": "NE",
+      "side": "away",
+      "entry": "CB 7 C.Davis",
+      "book_name": "C.Davis",
+      "match": "matched",
+      "injury_player": "Carlton Davis III",
+      "game_status": "Out",
+      "injury": "Knee",
+      "player_url": "https://www.nfl.com/players/carlton-davis/"
+    },
+    {
+      "game": "patriots-at-lions-2026-reg-10",
+      "club": "NE",
+      "side": "away",
+      "entry": "3QB 15 B.Morton",
+      "book_name": "B.Morton",
+      "match": "not_in_report"
+    },
+    {
+      "game": "patriots-at-lions-2026-reg-10",
+      "club": "NE",
+      "side": "away",
+      "entry": "S 41 B.Schooler",
+      "book_name": "B.Schooler",
+      "match": "matched",
+      "injury_player": "Brenden Schooler",
+      "game_status": "Questionable",
+      "injury": "Hamstring",
+      "player_url": "https://www.nfl.com/players/brenden-schooler/"
+    },
+    {
+      "game": "patriots-at-lions-2026-reg-10",
+      "club": "NE",
+      "side": "away",
+      "entry": "T 68 D.Crownover",
+      "book_name": "D.Crownover",
+      "match": "not_in_report"
+    },
+    {
+      "game": "patriots-at-lions-2026-reg-10",
+      "club": "NE",
+      "side": "away",
+      "entry": "OL 72 W.Rouse",
+      "book_name": "W.Rouse",
+      "match": "matched",
+      "injury_player": "Walter Rouse",
+      "game_status": "Questionable",
+      "injury": "Concussion",
+      "player_url": "https://www.nfl.com/players/walter-rouse/"
+    },
+    {
+      "game": "patriots-at-lions-2026-reg-10",
+      "club": "NE",
+      "side": "away",
+      "entry": "C 77 B.Brown",
+      "book_name": "B.Brown",
+      "match": "matched",
+      "injury_player": "Ben Brown",
+      "game_status": "Out",
+      "injury": "Knee",
+      "player_url": "https://www.nfl.com/players/ben-brown-2/"
+    },
+    {
+      "game": "patriots-at-lions-2026-reg-10",
+      "club": "DET",
+      "side": "home",
+      "entry": "CB 4 D.Reed",
+      "book_name": "D.Reed",
+      "match": "matched",
+      "injury_player": "D.J. Reed",
+      "game_status": "Out",
+      "injury": "Hip",
+      "player_url": "https://www.nfl.com/players/d-j-reed/"
+    },
+    {
+      "game": "patriots-at-lions-2026-reg-10",
+      "club": "DET",
+      "side": "home",
+      "entry": "CB 6 K.Abney",
+      "book_name": "K.Abney",
+      "match": "not_in_report"
+    },
+    {
+      "game": "patriots-at-lions-2026-reg-10",
+      "club": "DET",
+      "side": "home",
+      "entry": "LB 57 A.Ogbongbemiga",
+      "book_name": "A.Ogbongbemiga",
+      "match": "not_in_report"
+    },
+    {
+      "game": "patriots-at-lions-2026-reg-10",
+      "club": "DET",
+      "side": "home",
+      "entry": "C 64 C.Mays",
+      "book_name": "C.Mays",
+      "match": "matched",
+      "injury_player": "Cade Mays",
+      "game_status": "Out",
+      "injury": "Ankle",
+      "player_url": "https://www.nfl.com/players/cade-mays/"
+    },
+    {
+      "game": "patriots-at-lions-2026-reg-10",
+      "club": "DET",
+      "side": "home",
+      "entry": "DL 94 M.Wingo",
+      "book_name": "M.Wingo",
+      "match": "not_in_report"
+    },
+    {
+      "game": "patriots-at-lions-2026-reg-10",
+      "club": "DET",
+      "side": "home",
+      "entry": "DE 99 A.Hassanein",
+      "book_name": "A.Hassanein",
+      "match": "not_in_report"
+    },
+    {
+      "game": "texans-at-browns-2026-reg-10",
+      "club": "HOU",
+      "side": "away",
+      "entry": "LB 0 A.Al-Shaair",
+      "book_name": "A.Al-Shaair",
+      "match": "matched",
+      "injury_player": "Azeez Al-Shaair",
+      "game_status": "Out",
+      "injury": "Groin, Not injury related - personal matter",
+      "player_url": "https://www.nfl.com/players/azeez-al-shaair/"
+    },
+    {
+      "game": "texans-at-browns-2026-reg-10",
+      "club": "HOU",
+      "side": "away",
+      "entry": "TE 9 B.Jordan",
+      "book_name": "B.Jordan",
+      "match": "matched",
+      "injury_player": "Brevin Jordan",
+      "game_status": "Out",
+      "injury": "Finger, Foot",
+      "player_url": "https://www.nfl.com/players/brevin-jordan/"
+    },
+    {
+      "game": "texans-at-browns-2026-reg-10",
+      "club": "HOU",
+      "side": "away",
+      "entry": "WR 18 M.Harrison",
+      "book_name": "M.Harrison",
+      "match": "matched",
+      "injury_player": "Marvin Harrison Jr.",
+      "game_status": "Out",
+      "injury": "Hamstring",
+      "player_url": "https://www.nfl.com/players/marvin-harrison-jr/"
+    },
+    {
+      "game": "texans-at-browns-2026-reg-10",
+      "club": "HOU",
+      "side": "away",
+      "entry": "RB 32 D.Montgomery",
+      "book_name": "D.Montgomery",
+      "match": "matched",
+      "injury_player": "David Montgomery",
+      "game_status": "Questionable",
+      "injury": "Groin",
+      "player_url": "https://www.nfl.com/players/david-montgomery/"
+    },
+    {
+      "game": "texans-at-browns-2026-reg-10",
+      "club": "HOU",
+      "side": "away",
+      "entry": "DE 55 D.Hunter",
+      "book_name": "D.Hunter",
+      "match": "matched",
+      "injury_player": "Danielle Hunter",
+      "game_status": "Out",
+      "injury": "Hamstring",
+      "player_url": "https://www.nfl.com/players/danielle-hunter/"
+    },
+    {
+      "game": "texans-at-browns-2026-reg-10",
+      "club": "HOU",
+      "side": "away",
+      "entry": "C/G 66 K.Rutledge",
+      "book_name": "K.Rutledge",
+      "match": "matched",
+      "injury_player": "Keylan Rutledge",
+      "game_status": "Out",
+      "injury": "Neck, Shoulder",
+      "player_url": "https://www.nfl.com/players/keylan-rutledge/"
+    },
+    {
+      "game": "texans-at-browns-2026-reg-10",
+      "club": "HOU",
+      "side": "away",
+      "entry": "G 75 W.Teller",
+      "book_name": "W.Teller",
+      "match": "matched",
+      "injury_player": "Wyatt Teller",
+      "game_status": "Questionable",
+      "injury": "Illness, Back",
+      "player_url": "https://www.nfl.com/players/wyatt-teller/"
+    },
+    {
+      "game": "texans-at-browns-2026-reg-10",
+      "club": "CLE",
+      "side": "home",
+      "entry": "3QB 6 D.Gabriel",
+      "book_name": "D.Gabriel",
+      "match": "not_in_report"
+    },
+    {
+      "game": "texans-at-browns-2026-reg-10",
+      "club": "CLE",
+      "side": "home",
+      "entry": "QB 15 T.Green",
+      "book_name": "T.Green",
+      "match": "not_in_report"
+    },
+    {
+      "game": "texans-at-browns-2026-reg-10",
+      "club": "CLE",
+      "side": "home",
+      "entry": "LB 17 J.Jefferson",
+      "book_name": "J.Jefferson",
+      "match": "not_in_report"
+    },
+    {
+      "game": "texans-at-browns-2026-reg-10",
+      "club": "CLE",
+      "side": "home",
+      "entry": "CB 20 N.Igbinoghene",
+      "book_name": "N.Igbinoghene",
+      "match": "not_in_report"
+    },
+    {
+      "game": "texans-at-browns-2026-reg-10",
+      "club": "CLE",
+      "side": "home",
+      "entry": "S 33 R.Hickman",
+      "book_name": "R.Hickman",
+      "match": "matched",
+      "injury_player": "Ronnie Hickman Jr.",
+      "game_status": "Out",
+      "injury": "Concussion",
+      "player_url": "https://www.nfl.com/players/ronnie-hickman-jr/"
+    },
+    {
+      "game": "texans-at-browns-2026-reg-10",
+      "club": "CLE",
+      "side": "home",
+      "entry": "C 52 P.Brailsford",
+      "book_name": "P.Brailsford",
+      "match": "not_in_report"
+    },
+    {
+      "game": "vikings-at-packers-2026-reg-10",
+      "club": "MIN",
+      "side": "away",
+      "entry": "QB 1 K.Murray",
+      "book_name": "K.Murray",
+      "match": "matched",
+      "injury_player": "Kyler Murray",
+      "game_status": "Out",
+      "injury": "Hamstring",
+      "player_url": "https://www.nfl.com/players/kyler-murray/"
+    },
+    {
+      "game": "vikings-at-packers-2026-reg-10",
+      "club": "MIN",
+      "side": "away",
+      "entry": "WR 3 J.Addison",
+      "book_name": "J.Addison",
+      "match": "matched",
+      "injury_player": "Jordan Addison",
+      "game_status": "Questionable",
+      "injury": "Thumb",
+      "player_url": "https://www.nfl.com/players/jordan-addison/"
+    },
+    {
+      "game": "vikings-at-packers-2026-reg-10",
+      "club": "MIN",
+      "side": "away",
+      "entry": "3QB 12 M.Broser",
+      "book_name": "M.Broser",
+      "match": "not_in_report"
+    },
+    {
+      "game": "vikings-at-packers-2026-reg-10",
+      "club": "MIN",
+      "side": "away",
+      "entry": "WR 14 J.Jennings",
+      "book_name": "J.Jennings",
+      "match": "matched",
+      "injury_player": "Jauan Jennings",
+      "game_status": "Out",
+      "injury": "Calf",
+      "player_url": "https://www.nfl.com/players/jauan-jennings/"
+    },
+    {
+      "game": "vikings-at-packers-2026-reg-10",
+      "club": "MIN",
+      "side": "away",
+      "entry": "LB 51 B.Cashman",
+      "book_name": "B.Cashman",
+      "match": "matched",
+      "injury_player": "Blake Cashman",
+      "game_status": "Out",
+      "injury": "Concussion",
+      "player_url": "https://www.nfl.com/players/blake-cashman/"
+    },
+    {
+      "game": "vikings-at-packers-2026-reg-10",
+      "club": "MIN",
+      "side": "away",
+      "entry": "TE 87 T.Hockenson",
+      "book_name": "T.Hockenson",
+      "match": "matched",
+      "injury_player": "T.J. Hockenson",
+      "game_status": "Out",
+      "injury": "Wrist, Chest",
+      "player_url": "https://www.nfl.com/players/t-j-hockenson/"
+    },
+    {
+      "game": "vikings-at-packers-2026-reg-10",
+      "club": "MIN",
+      "side": "away",
+      "entry": "DL 90 T.Ingram-Dawkins",
+      "book_name": "T.Ingram-Dawkins",
+      "match": "matched",
+      "injury_player": "Tyrion Ingram-Dawkins",
+      "game_status": "Out",
+      "injury": "Ankle",
+      "player_url": "https://www.nfl.com/players/tyrion-ingram-dawkins/"
+    },
+    {
+      "game": "vikings-at-packers-2026-reg-10",
+      "club": "GB",
+      "side": "home",
+      "entry": "RB 8 J.Jacobs",
+      "book_name": "J.Jacobs",
+      "match": "matched",
+      "injury_player": "Josh Jacobs",
+      "game_status": "Out",
+      "injury": "Finger",
+      "player_url": "https://www.nfl.com/players/josh-jacobs-x3315/"
+    },
+    {
+      "game": "vikings-at-packers-2026-reg-10",
+      "club": "GB",
+      "side": "home",
+      "entry": "RB 22 P.Strong",
+      "book_name": "P.Strong",
+      "match": "not_in_report"
+    },
+    {
+      "game": "vikings-at-packers-2026-reg-10",
+      "club": "GB",
+      "side": "home",
+      "entry": "LB 44 Z.Franklin",
+      "book_name": "Z.Franklin",
+      "match": "matched",
+      "injury_player": "Zaire Franklin",
+      "game_status": "Doubtful",
+      "injury": "Shin",
+      "player_url": "https://www.nfl.com/players/zaire-franklin/"
+    },
+    {
+      "game": "vikings-at-packers-2026-reg-10",
+      "club": "GB",
+      "side": "home",
+      "entry": "G/T 67 D.Jennings",
+      "book_name": "D.Jennings",
+      "match": "not_in_report"
+    },
+    {
+      "game": "vikings-at-packers-2026-reg-10",
+      "club": "GB",
+      "side": "home",
+      "entry": "G 70 K.Zeitler",
+      "book_name": "K.Zeitler",
+      "match": "matched",
+      "injury_player": "Kevin Zeitler",
+      "game_status": "Questionable",
+      "injury": "Ankle, Triceps",
+      "player_url": "https://www.nfl.com/players/kevin-zeitler/"
+    },
+    {
+      "game": "vikings-at-packers-2026-reg-10",
+      "club": "GB",
+      "side": "home",
+      "entry": "C/G 75 S.Rhyan",
+      "book_name": "S.Rhyan",
+      "match": "matched",
+      "injury_player": "Sean Rhyan",
+      "game_status": "Out",
+      "injury": "Ankle",
+      "player_url": "https://www.nfl.com/players/sean-rhyan/"
+    },
+    {
+      "game": "dolphins-at-colts-2026-reg-10",
+      "club": "MIA",
+      "side": "away",
+      "entry": "WR 18 C.Bell",
+      "book_name": "C.Bell",
+      "match": "matched",
+      "injury_player": "Chris Bell",
+      "game_status": "Doubtful",
+      "injury": "Knee",
+      "player_url": "https://www.nfl.com/players/chris-bell-2/"
+    },
+    {
+      "game": "dolphins-at-colts-2026-reg-10",
+      "club": "MIA",
+      "side": "away",
+      "entry": "CB 24 M.Dial",
+      "book_name": "M.Dial",
+      "match": "not_in_report"
+    },
+    {
+      "game": "dolphins-at-colts-2026-reg-10",
+      "club": "MIA",
+      "side": "away",
+      "entry": "C 55 A.Brewer",
+      "book_name": "A.Brewer",
+      "match": "matched",
+      "injury_player": "Aaron Brewer",
+      "game_status": "Out",
+      "injury": "Concussion",
+      "player_url": "https://www.nfl.com/players/aaron-brewer-2/"
+    },
+    {
+      "game": "dolphins-at-colts-2026-reg-10",
+      "club": "MIA",
+      "side": "away",
+      "entry": "G/T 77 C.Wallace",
+      "book_name": "C.Wallace",
+      "match": "not_in_report"
+    },
+    {
+      "game": "dolphins-at-colts-2026-reg-10",
+      "club": "MIA",
+      "side": "away",
+      "entry": "TE 80 J.Joly",
+      "book_name": "J.Joly",
+      "match": "not_in_report"
+    },
+    {
+      "game": "dolphins-at-colts-2026-reg-10",
+      "club": "MIA",
+      "side": "away",
+      "entry": "WR 86 J.Wayne",
+      "book_name": "J.Wayne",
+      "match": "matched",
+      "injury_player": "Jared Wayne",
+      "game_status": "Out",
+      "injury": "Quadricep",
+      "player_url": "https://www.nfl.com/players/jared-wayne/"
+    },
+    {
+      "game": "dolphins-at-colts-2026-reg-10",
+      "club": "IND",
+      "side": "home",
+      "entry": "3QB 15 R.Leonard",
+      "book_name": "R.Leonard",
+      "match": "not_in_report"
+    },
+    {
+      "game": "dolphins-at-colts-2026-reg-10",
+      "club": "IND",
+      "side": "home",
+      "entry": "LS 46 L.Rhodes",
+      "book_name": "L.Rhodes",
+      "match": "matched",
+      "injury_player": "Luke Rhodes",
+      "game_status": "Out",
+      "injury": "Hamstring",
+      "player_url": "https://www.nfl.com/players/luke-rhodes/"
+    },
+    {
+      "game": "dolphins-at-colts-2026-reg-10",
+      "club": "IND",
+      "side": "home",
+      "entry": "LB 57 J.Carlies",
+      "book_name": "J.Carlies",
+      "match": "matched",
+      "injury_player": "Jaylon Carlies",
+      "game_status": "Out",
+      "injury": "Neck",
+      "player_url": "https://www.nfl.com/players/jaylon-carlies/"
+    },
+    {
+      "game": "dolphins-at-colts-2026-reg-10",
+      "club": "IND",
+      "side": "home",
+      "entry": "T 75 J.Travis",
+      "book_name": "J.Travis",
+      "match": "matched",
+      "injury_player": "Jalen Travis",
+      "game_status": "Out",
+      "injury": "Knee",
+      "player_url": "https://www.nfl.com/players/jalen-travis/"
+    },
+    {
+      "game": "dolphins-at-colts-2026-reg-10",
+      "club": "IND",
+      "side": "home",
+      "entry": "TE 86 W.Mallory",
+      "book_name": "W.Mallory",
+      "match": "matched",
+      "injury_player": "Will Mallory",
+      "game_status": "Questionable",
+      "injury": "Hamstring",
+      "player_url": "https://www.nfl.com/players/will-mallory/"
+    },
+    {
+      "game": "dolphins-at-colts-2026-reg-10",
+      "club": "IND",
+      "side": "home",
+      "entry": "DT 94 J.Tillery",
+      "book_name": "J.Tillery",
+      "match": "matched",
+      "injury_player": "Jerry Tillery",
+      "game_status": "Out",
+      "injury": "Calf",
+      "player_url": "https://www.nfl.com/players/jerry-tillery/"
+    },
+    {
+      "game": "bills-at-jets-2026-reg-10",
+      "club": "BUF",
+      "side": "away",
+      "entry": "QB 6 S.Buechele",
+      "book_name": "S.Buechele",
+      "match": "not_in_report"
+    },
+    {
+      "game": "bills-at-jets-2026-reg-10",
+      "club": "BUF",
+      "side": "away",
+      "entry": "S 29 J.Kilgore",
+      "book_name": "J.Kilgore",
+      "match": "not_in_report"
+    },
+    {
+      "game": "bills-at-jets-2026-reg-10",
+      "club": "BUF",
+      "side": "away",
+      "entry": "OLB 51 M.Danna",
+      "book_name": "M.Danna",
+      "match": "not_in_report"
+    },
+    {
+      "game": "bills-at-jets-2026-reg-10",
+      "club": "BUF",
+      "side": "away",
+      "entry": "G 60 A.Reed-Adams",
+      "book_name": "A.Reed-Adams",
+      "match": "matched",
+      "injury_player": "Ar'maj Reed-Adams",
+      "game_status": null,
+      "injury": null,
+      "player_url": "https://www.nfl.com/players/ar-maj-reed-adams/"
+    },
+    {
+      "game": "bills-at-jets-2026-reg-10",
+      "club": "BUF",
+      "side": "away",
+      "entry": "T/G 74 J.Bowry",
+      "book_name": "J.Bowry",
+      "match": "not_in_report"
+    },
+    {
+      "game": "bills-at-jets-2026-reg-10",
+      "club": "BUF",
+      "side": "away",
+      "entry": "DL 97 G.Gaines",
+      "book_name": "G.Gaines",
+      "match": "matched",
+      "injury_player": "Greg Gaines",
+      "game_status": null,
+      "injury": null,
+      "player_url": "https://www.nfl.com/players/greg-gaines/"
+    },
+    {
+      "game": "bills-at-jets-2026-reg-10",
+      "club": "NYJ",
+      "side": "home",
+      "entry": "DB 2 J.Brownlee",
+      "book_name": "J.Brownlee",
+      "match": "matched",
+      "injury_player": "Jarvis Brownlee Jr.",
+      "game_status": "Questionable",
+      "injury": "Illness",
+      "player_url": "https://www.nfl.com/players/jarvis-brownlee-jr/"
+    },
+    {
+      "game": "bills-at-jets-2026-reg-10",
+      "club": "NYJ",
+      "side": "home",
+      "entry": "WR 17 T.Patrick",
+      "book_name": "T.Patrick",
+      "match": "not_in_report"
+    },
+    {
+      "game": "bills-at-jets-2026-reg-10",
+      "club": "NYJ",
+      "side": "home",
+      "entry": "LB 49 T.Wallace",
+      "book_name": "T.Wallace",
+      "match": "matched",
+      "injury_player": "Trevin Wallace",
+      "game_status": "Out",
+      "injury": "Groin",
+      "player_url": "https://www.nfl.com/players/trevin-wallace/"
+    },
+    {
+      "game": "bills-at-jets-2026-reg-10",
+      "club": "NYJ",
+      "side": "home",
+      "entry": "TE 86 J.Woods",
+      "book_name": "J.Woods",
+      "match": "not_in_report"
+    },
+    {
+      "game": "bills-at-jets-2026-reg-10",
+      "club": "NYJ",
+      "side": "home",
+      "entry": "DE 92 N.Lynn",
+      "book_name": "N.Lynn",
+      "match": "not_in_report"
+    },
+    {
+      "game": "jaguars-at-titans-2026-reg-10",
+      "club": "JAX",
+      "side": "away",
+      "entry": "S 0 J.Bates",
+      "book_name": "J.Bates",
+      "match": "matched",
+      "injury_player": "Jessie Bates",
+      "game_status": "Out",
+      "injury": "Not injury related - resting player",
+      "player_url": "https://www.nfl.com/players/jessie-bates/"
+    },
+    {
+      "game": "jaguars-at-titans-2026-reg-10",
+      "club": "JAX",
+      "side": "away",
+      "entry": "WR 18 C.Williams",
+      "book_name": "C.Williams",
+      "match": "not_in_report"
+    },
+    {
+      "game": "jaguars-at-titans-2026-reg-10",
+      "club": "JAX",
+      "side": "away",
+      "entry": "DT 90 J.Davis",
+      "book_name": "J.Davis",
+      "match": "matched",
+      "injury_player": "Jordan Davis",
+      "game_status": "Out",
+      "injury": "Not injury related - resting player",
+      "player_url": "https://www.nfl.com/players/jordan-davis/"
+    },
+    {
+      "game": "jaguars-at-titans-2026-reg-10",
+      "club": "JAX",
+      "side": "away",
+      "entry": "DE 97 W.Williams",
+      "book_name": "W.Williams",
+      "match": "not_in_report"
+    },
+    {
+      "game": "jaguars-at-titans-2026-reg-10",
+      "club": "JAX",
+      "side": "away",
+      "entry": "DT 98 A.Regis",
+      "book_name": "A.Regis",
+      "match": "not_in_report"
+    },
+    {
+      "game": "jaguars-at-titans-2026-reg-10",
+      "club": "TEN",
+      "side": "home",
+      "entry": "WR 14 C.Tate",
+      "book_name": "C.Tate",
+      "match": "matched",
+      "injury_player": "Carnell Tate",
+      "game_status": "Out",
+      "injury": "Shoulder",
+      "player_url": "https://www.nfl.com/players/carnell-tate/"
+    },
+    {
+      "game": "jaguars-at-titans-2026-reg-10",
+      "club": "TEN",
+      "side": "home",
+      "entry": "RB 32 N.Singleton",
+      "book_name": "N.Singleton",
+      "match": "not_in_report"
+    },
+    {
+      "game": "jaguars-at-titans-2026-reg-10",
+      "club": "TEN",
+      "side": "home",
+      "entry": "CB 42 J.Jones",
+      "book_name": "J.Jones",
+      "match": "matched",
+      "injury_player": "Jaylon Jones",
+      "game_status": null,
+      "injury": null,
+      "player_url": "https://www.nfl.com/players/jaylon-jones-2/"
+    },
+    {
+      "game": "jaguars-at-titans-2026-reg-10",
+      "club": "TEN",
+      "side": "home",
+      "entry": "LB 50 C.Barton",
+      "book_name": "C.Barton",
+      "match": "matched",
+      "injury_player": "Cody Barton",
+      "game_status": "Out",
+      "injury": "Concussion",
+      "player_url": "https://www.nfl.com/players/cody-barton/"
+    },
+    {
+      "game": "jaguars-at-titans-2026-reg-10",
+      "club": "TEN",
+      "side": "home",
+      "entry": "LB 53 A.Hill",
+      "book_name": "A.Hill",
+      "match": "matched",
+      "injury_player": "Anthony Hill Jr.",
+      "game_status": "Out",
+      "injury": "Neck",
+      "player_url": "https://www.nfl.com/players/anthony-hill-jr/"
+    },
+    {
+      "game": "jaguars-at-titans-2026-reg-10",
+      "club": "TEN",
+      "side": "home",
+      "entry": "T 78 B.Crenshaw-Dickson",
+      "book_name": "B.Crenshaw-Dickson",
+      "match": "not_in_report"
+    },
+    {
+      "game": "jaguars-at-titans-2026-reg-10",
+      "club": "TEN",
+      "side": "home",
+      "entry": "DT 96 J.Marshall",
+      "book_name": "J.Marshall",
+      "match": "not_in_report"
+    },
+    {
+      "game": "rams-at-cardinals-2026-reg-10",
+      "club": "LAR",
+      "side": "away",
+      "entry": "3QB 15 T.Simpson",
+      "book_name": "T.Simpson",
+      "match": "not_in_report"
+    },
+    {
+      "game": "rams-at-cardinals-2026-reg-10",
+      "club": "LAR",
+      "side": "away",
+      "entry": "S 36 M.Pulley",
+      "book_name": "M.Pulley",
+      "match": "not_in_report"
+    },
+    {
+      "game": "rams-at-cardinals-2026-reg-10",
+      "club": "LAR",
+      "side": "away",
+      "entry": "LS 49 J.Cardona",
+      "book_name": "J.Cardona",
+      "match": "matched",
+      "injury_player": "Joe Cardona",
+      "game_status": "Questionable",
+      "injury": "Ankle",
+      "player_url": "https://www.nfl.com/players/joe-cardona/"
+    },
+    {
+      "game": "rams-at-cardinals-2026-reg-10",
+      "club": "LAR",
+      "side": "away",
+      "entry": "OLB 59 D.Peterson",
+      "book_name": "D.Peterson",
+      "match": "not_in_report"
+    },
+    {
+      "game": "rams-at-cardinals-2026-reg-10",
+      "club": "LAR",
+      "side": "away",
+      "entry": "OL 73 S.Avila",
+      "book_name": "S.Avila",
+      "match": "matched",
+      "injury_player": "Steve Avila",
+      "game_status": "Out",
+      "injury": "Hamstring",
+      "player_url": "https://www.nfl.com/players/steve-avila/"
+    },
+    {
+      "game": "rams-at-cardinals-2026-reg-10",
+      "club": "LAR",
+      "side": "away",
+      "entry": "OL 79 K.Trost",
+      "book_name": "K.Trost",
+      "match": "not_in_report"
+    },
+    {
+      "game": "rams-at-cardinals-2026-reg-10",
+      "club": "LAR",
+      "side": "away",
+      "entry": "OLB 94 D.Johnson",
+      "book_name": "D.Johnson",
+      "match": "not_in_report"
+    },
+    {
+      "game": "rams-at-cardinals-2026-reg-10",
+      "club": "ARI",
+      "side": "home",
+      "entry": "3QB 18 J.Aguilar",
+      "book_name": "J.Aguilar",
+      "match": "not_in_report"
+    },
+    {
+      "game": "rams-at-cardinals-2026-reg-10",
+      "club": "ARI",
+      "side": "home",
+      "entry": "CB 24 S.Thomas",
+      "book_name": "S.Thomas",
+      "match": "not_in_report"
+    },
+    {
+      "game": "rams-at-cardinals-2026-reg-10",
+      "club": "ARI",
+      "side": "home",
+      "entry": "OLB 54 E.Leota",
+      "book_name": "E.Leota",
+      "match": "not_in_report"
+    },
+    {
+      "game": "rams-at-cardinals-2026-reg-10",
+      "club": "ARI",
+      "side": "home",
+      "entry": "OL 66 J.Williams",
+      "book_name": "J.Williams",
+      "match": "matched",
+      "injury_player": "Jayden Williams",
+      "game_status": "Questionable",
+      "injury": "Knee",
+      "player_url": "https://www.nfl.com/players/jayden-williams/"
+    },
+    {
+      "game": "rams-at-cardinals-2026-reg-10",
+      "club": "ARI",
+      "side": "home",
+      "entry": "OL 71 J.Gaines",
+      "book_name": "J.Gaines",
+      "match": "matched",
+      "injury_player": "Jon Gaines II",
+      "game_status": "Out",
+      "injury": "Ankle",
+      "player_url": "https://www.nfl.com/players/jon-gaines-ii/"
+    },
+    {
+      "game": "rams-at-cardinals-2026-reg-10",
+      "club": "ARI",
+      "side": "home",
+      "entry": "OL 72 H.Froholdt",
+      "book_name": "H.Froholdt",
+      "match": "matched",
+      "injury_player": "Hjalte Froholdt",
+      "game_status": "Out",
+      "injury": "Concussion",
+      "player_url": "https://www.nfl.com/players/hjalte-froholdt/"
+    },
+    {
+      "game": "seahawks-at-raiders-2026-reg-10",
+      "club": "SEA",
+      "side": "away",
+      "entry": "QB 14 S.Darnold",
+      "book_name": "S.Darnold",
+      "match": "matched",
+      "injury_player": "Sam Darnold",
+      "game_status": "Out",
+      "injury": "Ribs, Quadricep",
+      "player_url": "https://www.nfl.com/players/sam-darnold/"
+    },
+    {
+      "game": "seahawks-at-raiders-2026-reg-10",
+      "club": "SEA",
+      "side": "away",
+      "entry": "RB 23 E.Wilson",
+      "book_name": "E.Wilson",
+      "match": "not_in_report"
+    },
+    {
+      "game": "seahawks-at-raiders-2026-reg-10",
+      "club": "SEA",
+      "side": "away",
+      "entry": "CB 27 A.Smith",
+      "book_name": "A.Smith",
+      "match": "not_in_report"
+    },
+    {
+      "game": "seahawks-at-raiders-2026-reg-10",
+      "club": "SEA",
+      "side": "away",
+      "entry": "G 53 Q.Nelson",
+      "book_name": "Q.Nelson",
+      "match": "matched",
+      "injury_player": "Quenton Nelson",
+      "game_status": "Out",
+      "injury": "Knee",
+      "player_url": "https://www.nfl.com/players/quenton-nelson/"
+    },
+    {
+      "game": "seahawks-at-raiders-2026-reg-10",
+      "club": "SEA",
+      "side": "away",
+      "entry": "T 67 C.Cross",
+      "book_name": "C.Cross",
+      "match": "matched",
+      "injury_player": "Charles Cross",
+      "game_status": "Out",
+      "injury": "Ankle",
+      "player_url": "https://www.nfl.com/players/charles-cross-2/"
+    },
+    {
+      "game": "seahawks-at-raiders-2026-reg-10",
+      "club": "SEA",
+      "side": "away",
+      "entry": "NT 97 D.Eastern",
+      "book_name": "D.Eastern",
+      "match": "not_in_report"
+    },
+    {
+      "game": "seahawks-at-raiders-2026-reg-10",
+      "club": "SEA",
+      "side": "away",
+      "entry": "DT 99 L.Williams",
+      "book_name": "L.Williams",
+      "match": "matched",
+      "injury_player": "Leonard Williams",
+      "game_status": "Out",
+      "injury": "Stinger",
+      "player_url": "https://www.nfl.com/players/leonard-williams/"
+    },
+    {
+      "game": "seahawks-at-raiders-2026-reg-10",
+      "club": "LV",
+      "side": "home",
+      "entry": "WR 10 D.Thornton",
+      "book_name": "D.Thornton",
+      "match": "matched",
+      "injury_player": "Dont'e Thornton Jr.",
+      "game_status": "Questionable",
+      "injury": "Back",
+      "player_url": "https://www.nfl.com/players/dont-e-thornton-jr/"
+    },
+    {
+      "game": "seahawks-at-raiders-2026-reg-10",
+      "club": "LV",
+      "side": "home",
+      "entry": "WR 19 M.Benson",
+      "book_name": "M.Benson",
+      "match": "not_in_report"
+    },
+    {
+      "game": "seahawks-at-raiders-2026-reg-10",
+      "club": "LV",
+      "side": "home",
+      "entry": "S 27 T.McCollum",
+      "book_name": "T.McCollum",
+      "match": "not_in_report"
+    },
+    {
+      "game": "seahawks-at-raiders-2026-reg-10",
+      "club": "LV",
+      "side": "home",
+      "entry": "S 43 D.Johnson",
+      "book_name": "D.Johnson",
+      "match": "not_in_report"
+    },
+    {
+      "game": "seahawks-at-raiders-2026-reg-10",
+      "club": "LV",
+      "side": "home",
+      "entry": "G 77 B.Cabeldue",
+      "book_name": "B.Cabeldue",
+      "match": "not_in_report"
+    },
+    {
+      "game": "seahawks-at-raiders-2026-reg-10",
+      "club": "LV",
+      "side": "home",
+      "entry": "DT 99 T.Booker",
+      "book_name": "T.Booker",
+      "match": "matched",
+      "injury_player": "Thomas Booker",
+      "game_status": "Questionable",
+      "injury": "Ankle",
+      "player_url": "https://www.nfl.com/players/thomas-booker/"
+    },
+    {
+      "game": "49ers-at-cowboys-2026-reg-10",
+      "club": "SF",
+      "side": "away",
+      "entry": "WR 5 M.Evans",
+      "book_name": "M.Evans",
+      "match": "matched",
+      "injury_player": "Mike Evans",
+      "game_status": "Out",
+      "injury": "Achilles",
+      "player_url": "https://www.nfl.com/players/mike-evans/"
+    },
+    {
+      "game": "49ers-at-cowboys-2026-reg-10",
+      "club": "SF",
+      "side": "away",
+      "entry": "3QB 14 K.Rourke",
+      "book_name": "K.Rourke",
+      "match": "not_in_report"
+    },
+    {
+      "game": "49ers-at-cowboys-2026-reg-10",
+      "club": "SF",
+      "side": "away",
+      "entry": "LB 48 T.Bethune",
+      "book_name": "T.Bethune",
+      "match": "not_in_report"
+    },
+    {
+      "game": "49ers-at-cowboys-2026-reg-10",
+      "club": "SF",
+      "side": "away",
+      "entry": "OL 69 E.Cruz",
+      "book_name": "E.Cruz",
+      "match": "not_in_report"
+    },
+    {
+      "game": "49ers-at-cowboys-2026-reg-10",
+      "club": "SF",
+      "side": "away",
+      "entry": "WR 84 B.Cooks",
+      "book_name": "B.Cooks",
+      "match": "not_in_report"
+    },
+    {
+      "game": "49ers-at-cowboys-2026-reg-10",
+      "club": "DAL",
+      "side": "home",
+      "entry": "S 1 P.Locke",
+      "book_name": "P.Locke",
+      "match": "matched",
+      "injury_player": "P.J. Locke",
+      "game_status": "Out",
+      "injury": "Concussion",
+      "player_url": "https://www.nfl.com/players/p-j-locke/"
+    },
+    {
+      "game": "49ers-at-cowboys-2026-reg-10",
+      "club": "DAL",
+      "side": "home",
+      "entry": "OL B 6 D.Ezeiruaku",
+      "book_name": "D.Ezeiruaku",
+      "match": "matched",
+      "injury_player": "Donovan Ezeiruaku",
+      "game_status": "Out",
+      "injury": "Ankle",
+      "player_url": "https://www.nfl.com/players/donovan-ezeiruaku/"
+    },
+    {
+      "game": "49ers-at-cowboys-2026-reg-10",
+      "club": "DAL",
+      "side": "home",
+      "entry": "CB 15 D.Kendrick",
+      "book_name": "D.Kendrick",
+      "match": "not_in_report"
+    },
+    {
+      "game": "49ers-at-cowboys-2026-reg-10",
+      "club": "DAL",
+      "side": "home",
+      "entry": "WR 18 J.Mingo",
+      "book_name": "J.Mingo",
+      "match": "matched",
+      "injury_player": "Jonathan Mingo",
+      "game_status": "Out",
+      "injury": "Ankle",
+      "player_url": "https://www.nfl.com/players/jonathan-mingo/"
+    },
+    {
+      "game": "49ers-at-cowboys-2026-reg-10",
+      "club": "DAL",
+      "side": "home",
+      "entry": "S 43 J.Thomas",
+      "book_name": "J.Thomas",
+      "match": "matched",
+      "injury_player": "Juanyeh Thomas",
+      "game_status": "Doubtful",
+      "injury": "Hamstring",
+      "player_url": "https://www.nfl.com/players/juanyeh-thomas/"
+    },
+    {
+      "game": "49ers-at-cowboys-2026-reg-10",
+      "club": "DAL",
+      "side": "home",
+      "entry": "T 65 A.Cornelius",
+      "book_name": "A.Cornelius",
+      "match": "not_in_report"
+    },
+    {
+      "game": "49ers-at-cowboys-2026-reg-10",
+      "club": "DAL",
+      "side": "home",
+      "entry": "TE 87 J.Ferguson",
+      "book_name": "J.Ferguson",
+      "match": "matched",
+      "injury_player": "Jake Ferguson",
+      "game_status": "Out",
+      "injury": "Knee, Ankle",
+      "player_url": "https://www.nfl.com/players/jake-ferguson/"
+    },
+    {
+      "game": "steelers-at-bengals-2026-reg-10",
+      "club": "PIT",
+      "side": "away",
+      "entry": "QB 16 D.Allar",
+      "book_name": "D.Allar",
+      "match": "not_in_report"
+    },
+    {
+      "game": "steelers-at-bengals-2026-reg-10",
+      "club": "PIT",
+      "side": "away",
+      "entry": "3QB 18 W.Howard",
+      "book_name": "W.Howard",
+      "match": "not_in_report"
+    },
+    {
+      "game": "steelers-at-bengals-2026-reg-10",
+      "club": "PIT",
+      "side": "away",
+      "entry": "S 25 D.Elliott",
+      "book_name": "D.Elliott",
+      "match": "matched",
+      "injury_player": "DeShon Elliott",
+      "game_status": null,
+      "injury": null,
+      "player_url": "https://www.nfl.com/players/deshon-elliott/"
+    },
+    {
+      "game": "steelers-at-bengals-2026-reg-10",
+      "club": "PIT",
+      "side": "away",
+      "entry": "CB 27 S.Murphy-Bunting",
+      "book_name": "S.Murphy-Bunting",
+      "match": "not_in_report"
+    },
+    {
+      "game": "steelers-at-bengals-2026-reg-10",
+      "club": "PIT",
+      "side": "away",
+      "entry": "RB/WR 29 E.Heidenreich",
+      "book_name": "E.Heidenreich",
+      "match": "not_in_report"
+    },
+    {
+      "game": "steelers-at-bengals-2026-reg-10",
+      "club": "CIN",
+      "side": "home",
+      "entry": "S 29 K.Dugger",
+      "book_name": "K.Dugger",
+      "match": "matched",
+      "injury_player": "Kyle Dugger",
+      "game_status": "Out",
+      "injury": "Quadricep",
+      "player_url": "https://www.nfl.com/players/kyle-dugger/"
+    },
+    {
+      "game": "steelers-at-bengals-2026-reg-10",
+      "club": "CIN",
+      "side": "home",
+      "entry": "C 65 C.Lew",
+      "book_name": "C.Lew",
+      "match": "not_in_report"
+    },
+    {
+      "game": "steelers-at-bengals-2026-reg-10",
+      "club": "CIN",
+      "side": "home",
+      "entry": "T 77 M.Hinton",
+      "book_name": "M.Hinton",
+      "match": "not_in_report"
+    },
+    {
+      "game": "steelers-at-bengals-2026-reg-10",
+      "club": "CIN",
+      "side": "home",
+      "entry": "DT 96 L.Robinson",
+      "book_name": "L.Robinson",
+      "match": "not_in_report"
+    }
+  ],
+  "out_not_on_na_list": [
+    {
+      "club": "ARI",
+      "player": "Zachary Carter",
+      "injury": "Knee",
+      "player_url": "https://www.nfl.com/players/zachary-carter-x9168/",
+      "note": "listed Out on the official pre-game read but absent from every captured Not Active list for that club's game"
+    },
+    {
+      "club": "CLE",
+      "player": "Michael Burton",
+      "injury": "Calf",
+      "player_url": "https://www.nfl.com/players/michael-burton/",
+      "note": "listed Out on the official pre-game read but absent from every captured Not Active list for that club's game"
+    },
+    {
+      "club": "DAL",
+      "player": "Tyler Goodson",
+      "injury": "Ankle, Knee",
+      "player_url": "https://www.nfl.com/players/tyler-goodson/",
+      "note": "listed Out on the official pre-game read but absent from every captured Not Active list for that club's game"
+    },
+    {
+      "club": "DET",
+      "player": "Kerby Joseph",
+      "injury": "Knee",
+      "player_url": "https://www.nfl.com/players/kerby-joseph/",
+      "note": "listed Out on the official pre-game read but absent from every captured Not Active list for that club's game"
+    },
+    {
+      "club": "GB",
+      "player": "Josh Whyle",
+      "injury": "Concussion",
+      "player_url": "https://www.nfl.com/players/josh-whyle/",
+      "note": "listed Out on the official pre-game read but absent from every captured Not Active list for that club's game"
+    },
+    {
+      "club": "GB",
+      "player": "Micah Parsons",
+      "injury": "Knee, Illness",
+      "player_url": "https://www.nfl.com/players/micah-parsons/",
+      "note": "listed Out on the official pre-game read but absent from every captured Not Active list for that club's game"
+    },
+    {
+      "club": "IND",
+      "player": "Akeem Davis-Gaither",
+      "injury": "Knee",
+      "player_url": "https://www.nfl.com/players/akeem-davis-gaither/",
+      "note": "listed Out on the official pre-game read but absent from every captured Not Active list for that club's game"
+    },
+    {
+      "club": "IND",
+      "player": "Mo Alie-Cox",
+      "injury": "Groin",
+      "player_url": "https://www.nfl.com/players/mo-alie-cox/",
+      "note": "listed Out on the official pre-game read but absent from every captured Not Active list for that club's game"
+    },
+    {
+      "club": "JAX",
+      "player": "BJ Green II",
+      "injury": "Forearm",
+      "player_url": "https://www.nfl.com/players/bj-green-ii/",
+      "note": "listed Out on the official pre-game read but absent from every captured Not Active list for that club's game"
+    },
+    {
+      "club": "LA",
+      "player": "Terrance Ferguson",
+      "injury": "Ankle, Hamstring",
+      "player_url": "https://www.nfl.com/players/terrance-ferguson-2/",
+      "note": "listed Out on the official pre-game read but absent from every captured Not Active list for that club's game"
+    },
+    {
+      "club": "NE",
+      "player": "TreVeyon Henderson",
+      "injury": "Illness",
+      "player_url": "https://www.nfl.com/players/treveyon-henderson/",
+      "note": "listed Out on the official pre-game read but absent from every captured Not Active list for that club's game"
+    },
+    {
+      "club": "TEN",
+      "player": "Peter Skoronski",
+      "injury": "Hamstring",
+      "player_url": "https://www.nfl.com/players/peter-skoronski/",
+      "note": "listed Out on the official pre-game read but absent from every captured Not Active list for that club's game"
+    },
+    {
+      "club": "TEN",
+      "player": "Tommy Townsend",
+      "injury": "Knee, Achilles",
+      "player_url": "https://www.nfl.com/players/tommy-townsend/",
+      "note": "listed Out on the official pre-game read but absent from every captured Not Active list for that club's game"
+    }
+  ]
+}

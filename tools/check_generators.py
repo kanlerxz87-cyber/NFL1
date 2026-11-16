@@ -45,6 +45,8 @@ GENERATORS = {
     # Session c5444cc9-nfl1 (MO-04): the reward-rule board. write() takes bare filenames;
     # the generator writes them under rewards/ (prefix added in claims()).
     "rewards/build.py": [r'write\(\s*"([^"/]+\.html)"'],
+    # Session d9e28eb2-nfl1: the official Game Book sub-site. os.path.join(OUT_DIR, ...) writes.
+    "tools/build_gamebooks.py": [r'os\.path\.join\(OUT_DIR, "([^"/]+\.html)"\)'],
 }
 
 # explicit, documented ownership. Anything not here is reported, not assumed.
@@ -88,6 +90,12 @@ KNOWN_OWNERS = {
     "reserve/rows.html": "tools/build_reserve_site.py",
     # Session c5444cc9-nfl1 (MO-04): the reward-rule board sub-site.
     "rewards/index.html": "rewards/build.py",
+    # Session d9e28eb2-nfl1: the official Game Book sub-site (generator registered above).
+    "gamebooks/index.html": "tools/build_gamebooks.py",
+    "gamebooks/starters.html": "tools/build_gamebooks.py",
+    "gamebooks/inactives.html": "tools/build_gamebooks.py",
+    "gamebooks/match.html": "tools/build_gamebooks.py",
+    "gamebooks/methods.html": "tools/build_gamebooks.py",
     "prereg/registry.html": "prereg/build.py",
     "prereg/forecasts.html": "prereg/build.py",
     "prereg/archive.html": "prereg/build.py",
@@ -130,6 +138,8 @@ def claims():
             found = {"desk/" + f for f in found}
         if gen == "rewards/build.py":
             found = {"rewards/" + f for f in found}
+        if gen == "tools/build_gamebooks.py":
+            found = {"gamebooks/" + f for f in found}
         for f in found:
             out.setdefault(f, set()).add(gen)
     return out

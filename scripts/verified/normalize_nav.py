@@ -36,6 +36,9 @@ CANON = [
     ("reserve/index.html", "Transactions & Reserve"),
     # Session 49ac3a99-nfl1 (IN-31): same position as in pipeline/gen_site.py NAV. Additive.
     ("schedule_announcement/index.html", "Schedule Announcement"),
+    # Session d9e28eb2-nfl1 (G5): official Game Books sub-site. Same relative position as
+    # pipeline/gen_site.py NAV; the two lists are documented as needing to stay in step.
+    ("gamebooks/index.html", "Game Books"),
     ("questions.html", "Questions"),
     ("suggestions.html", "Suggestions"),
     ("evidence.html", "Evidence"),
