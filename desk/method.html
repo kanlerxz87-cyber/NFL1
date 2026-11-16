@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Method &amp; Sources · NFL Decision Desk</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <p class="crumb"><a href="https://kanlerxz87-cyber.github.io/NFL1/index.html">NFL Decision Lab</a> › NFL Decision Desk</p>
+    <h1>Method &amp; Sources</h1>
+    <p class="sub">The rules, the build, the sources, and the coverage this session actually has.</p>
+    <nav><a href="index.html">Overview</a><a href="readiness.html">Readiness</a><a href="verification.html">Verification</a><a href="strategies.html">Strategies &amp; Luck</a><a href="availability.html">Availability &amp; Depth</a><a href="pricing.html">Pricing &amp; Signals</a><a href="questions.html">Questions</a><a href="suggestions.html">Suggestions</a><a href="flagged.html">Flagged for Review</a><a href="executive-summary.html">Executive Summary</a><a href="method.html" class="active">Method &amp; Sources</a></nav>
+  </div>
+</header>
+<main class="wrap">
+
+<p class="lede">How this sub-site is built, what it will and will not claim, and the official pages it
+rests on. The rules below are the reason a table on another page can be trusted — or refused.</p>
+
+<h2>Rules this site is built under</h2>
+<ol class="list">
+  <li><strong>No value is inferred, interpolated or filled.</strong> A blank on the source page is published
+      as "not published"; a value nobody fetched is "not read"; a value no official page confirms is
+      "unverified" and is not shown as a number at all.</li>
+  <li><strong>One source per row.</strong> Every table row links the official page it was checked against.
+      The build fails if a row in a table with a Source column lacks a link.</li>
+  <li><strong>A transcription is verbatim.</strong> Jersey numbers, mismatched club codes, blank cells and
+      multi-name slots are preserved in the raw field rather than cleaned away.</li>
+  <li><strong>A comparison is a comparison.</strong> Where the repository's own file disagrees with today's page,
+      both numbers are shown and neither is edited — those files belong to other generators.</li>
+  <li><strong>Numbers are computed, not typed.</strong> Every figure on these pages is derived by
+      <code>tools/desk/build_site.py</code> from <code>data/desk/*.json</code>, and
+      <code>tools/desk/verify_site.py</code> re-reads the rendered HTML and recomputes it independently.</li>
+  <li><strong>A finding can be retired.</strong> A claim from the brief that no longer matches the live page is
+      recorded as resolved with the reading that retired it, not quietly dropped.</li>
+</ol>
+
+<h2>How the pages are built</h2>
+<p><code>tools/desk/emit_data.py</code> reads the session's transcriptions and the named repository files
+and writes <code>data/desk/*.json</code>. <code>tools/desk/build_site.py</code> renders those JSON files
+into the pages you are reading. <code>tools/desk/verify_site.py</code> fails if a page in <code>desk/</code>
+would change on rebuild, if any local link is broken, if a Source cell lacks a link, if a table is empty,
+or if a number on a page cannot be reproduced from the data layer.</p>
+
+<h2>The official sources re-read for this site</h2>
+<table class="grid">
+<thead><tr><th>ID</th><th>Publisher</th><th>Kind</th><th>Page</th><th>Read on</th><th>What was taken</th><th>What the read established</th></tr></thead><tbody>
+<tr><td class="">D-S01</td><td class="">National Football League (nfl.com)</td><td class="">Official league standings</td><td class=""><a href="https://www.nfl.com/standings/league/2026/reg">2026 NFL League Standings (detailed view: W, L, T, PCT, PF, PA, NET PTS)</a></td><td class="">2026-11-16</td><td class="">32 club rows re-read in full this session; the table used for every standings row on this site</td><td class="">32 rows, 0 arithmetic failures: PF-PA equals the printed NET PTS and PCT reproduces from W/L/T in every row.</td></tr>
+<tr><td class="">D-S02</td><td class="">National Football League (nfl.com)</td><td class="">Official injury report</td><td class=""><a href="https://www.nfl.com/injuries/league/2026/reg10">Official NFL Injury Report for Players - Week 10 of the 2026 Season</a></td><td class="">2026-11-16</td><td class="">8 page chunks read in full; player, position, injury, practice status and game status for 347 rows across 28 clubs</td><td class="">347 rows across 28 club tables; 171 rows carry a game status (70 Out, 90 Questionable, 11 Doubtful) and 176 are practice-only.</td></tr>
+<tr><td class="">D-S03</td><td class="">National Football League (nfl.com)</td><td class="">Official schedule</td><td class=""><a href="https://www.nfl.com/schedules/2026/by-week/week-11">NFL Week 11 Schedule 2026: Games, Times, Matchups &amp; Tickets</a></td><td class="">2026-11-16</td><td class="">13 fixtures, kickoff times, networks and the 6-club bye block for Week 11</td><td class="">26 clubs play and 6 are on bye, which is 32 clubs exactly with no overlap.</td></tr>
+<tr><td class="">D-S04</td><td class="">National Football League (nfl.com)</td><td class="">Official schedule (results)</td><td class=""><a href="https://www.nfl.com/schedules/2026/REG11">NFL Schedules 2026 — Week 10 results and the Monday fixture</a></td><td class="">2026-11-16</td><td class="">13 final scores plus the still-scheduled LAC at BAL fixture used to test the backtest corpus</td><td class="">13 finals plus one fixture still to be played on the evening of the read.</td></tr>
+<tr><td class="">D-S05</td><td class="">Detroit Lions (official club site)</td><td class="">Official club depth chart</td><td class=""><a href="https://www.detroitlions.com/team/depth-chart">2026 Lions Depth Chart — Unofficial Depth Chart Compiled by Lions Football Communications</a></td><td class="">2026-11-16</td><td class="">offense, defense and special teams; the club labels it &#x27;Unofficial&#x27;, which is published verbatim here</td><td class="">28 slots, 57 named cells; up to four names in one cell, and Cade Mays is listed at centre while ruled Out.</td></tr>
+<tr><td class="">D-S06</td><td class="">Baltimore Ravens (official club site)</td><td class="">Official club depth chart</td><td class=""><a href="https://www.baltimoreravens.com/team/depth-chart">Baltimore Ravens Depth Chart</a></td><td class="">2026-11-16</td><td class="">re-read this session to test whether the Lamar Jackson / Tyler Huntley rows are still published</td><td class="">29 slots, 59 named cells, one empty slot (kicker); QB order is Brissett, Fagnano, Slovis.</td></tr>
+<tr><td class="">D-S07</td><td class="">Green Bay Packers (official club site)</td><td class="">Official club depth chart</td><td class=""><a href="https://www.packers.com/team/depth-chart">Green Bay Packers Depth Chart — &#x27;Unofficial, Nov. 10, 2026&#x27;</a></td><td class="">2026-11-16</td><td class="">re-read to test the committed parse, including the jersey-number prefix and the blank PR cell</td><td class="">28 slots, 54 named cells; the jersey number is printed inside the name cell and the PR slot is empty.</td></tr>
+<tr><td class="">D-S08</td><td class="">National Football League (nfl.com)</td><td class="">Official transactions register</td><td class=""><a href="https://www.nfl.com/transactions/league/trades/2026/11">NFL Transactions — trades, November 2026</a></td><td class="">2026-11-16</td><td class="">the dated row &#x27;11/06 AZ BAL Jacoby Brissett Traded&#x27; that the Ravens chart now reflects; read from the committed capture of this page</td><td class="">One dated row: 11/06, AZ to BAL, Jacoby Brissett, traded.</td></tr>
+<tr><td class="">D-S09</td><td class="">National Football League (nfl.com)</td><td class="">Official reserve list</td><td class=""><a href="https://www.nfl.com/transactions/league/reserve-list/2026/11">NFL Transactions — reserve list, November 2026</a></td><td class="">2026-11-16</td><td class="">the dated row &#x27;11/10 MIA MIA Malik Willis&#x27; showing a player can be unavailable without appearing on the injury report</td><td class="">One dated row: 11/10, MIA to MIA, Malik Willis.</td></tr>
+</tbody></table>
+
+<h2>What this site is not</h2>
+<p>It is not a betting recommendation, and it does not publish a pick. It publishes probabilities,
+their uncertainty, and the evidence behind them — and where the evidence runs out, it says so.
+No official NFL odds exist; market columns come from a third-party price file and are labelled as
+such wherever they appear.</p>
+
+<h2>Coverage of this session, stated plainly</h2>
+<ul class="list">
+  <li>347 injury rows: all of Week 10's report, for all 28 clubs that had one.</li>
+  <li>32 of 32 club standings rows.</li>
+  <li>13 of 13 Week-11 fixtures and all 6 byes.</li>
+  <li>3 of 32 club depth charts — the largest gap on the site.</li>
+  <li>0 official Game Books, 0 inactive lists for Week 10, 0 snap counts.</li>
+</ul>
+
+</main>
+<footer class="wrap">
+  <p>NFL Decision Desk — session <code>ed736fc3-nfl1</code>, built 2026-11-16 from <code>data/desk/*.json</code>.
+  Every table row carries the official page it was checked against; a value that could not be confirmed
+  is published as a labelled blank or on the <a href="flagged.html">Flagged for Review</a> page.
+  This is a research tool, not betting advice.</p>
+</footer>
+</body>
+</html>

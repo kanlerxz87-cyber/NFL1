@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-16T18:08:20Z",
+ "generated_at": "2026-11-16T18:13:25Z",
  "note": "Official sources re-read in this session for the desk/ site. A row that could not be confirmed is not listed here; it is on the flagged page instead.",
  "sources": [
   {
@@ -10,7 +10,8 @@
    "title": "2026 NFL League Standings (detailed view: W, L, T, PCT, PF, PA, NET PTS)",
    "what": "32 club rows re-read in full this session; the table used for every standings row on this site",
    "retrieved": "2026-11-16",
-   "verified": true
+   "verified": true,
+   "note": "32 rows, 0 arithmetic failures: PF-PA equals the printed NET PTS and PCT reproduces from W/L/T in every row."
   },
   {
    "id": "D-S02",
@@ -20,7 +21,8 @@
    "title": "Official NFL Injury Report for Players - Week 10 of the 2026 Season",
    "what": "8 page chunks read in full; player, position, injury, practice status and game status for 347 rows across 28 clubs",
    "retrieved": "2026-11-16",
-   "verified": true
+   "verified": true,
+   "note": "347 rows across 28 club tables; 171 rows carry a game status (70 Out, 90 Questionable, 11 Doubtful) and 176 are practice-only."
   },
   {
    "id": "D-S03",
@@ -30,7 +32,8 @@
    "title": "NFL Week 11 Schedule 2026: Games, Times, Matchups & Tickets",
    "what": "13 fixtures, kickoff times, networks and the 6-club bye block for Week 11",
    "retrieved": "2026-11-16",
-   "verified": true
+   "verified": true,
+   "note": "26 clubs play and 6 are on bye, which is 32 clubs exactly with no overlap."
   },
   {
    "id": "D-S04",
@@ -40,7 +43,8 @@
    "title": "NFL Schedules 2026 — Week 10 results and the Monday fixture",
    "what": "13 final scores plus the still-scheduled LAC at BAL fixture used to test the backtest corpus",
    "retrieved": "2026-11-16",
-   "verified": true
+   "verified": true,
+   "note": "13 finals plus one fixture still to be played on the evening of the read."
   },
   {
    "id": "D-S05",
@@ -50,7 +54,8 @@
    "title": "2026 Lions Depth Chart — Unofficial Depth Chart Compiled by Lions Football Communications",
    "what": "offense, defense and special teams; the club labels it 'Unofficial', which is published verbatim here",
    "retrieved": "2026-11-16",
-   "verified": true
+   "verified": true,
+   "note": "28 slots, 57 named cells; up to four names in one cell, and Cade Mays is listed at centre while ruled Out."
   },
   {
    "id": "D-S06",
@@ -60,7 +65,8 @@
    "title": "Baltimore Ravens Depth Chart",
    "what": "re-read this session to test whether the Lamar Jackson / Tyler Huntley rows are still published",
    "retrieved": "2026-11-16",
-   "verified": true
+   "verified": true,
+   "note": "29 slots, 59 named cells, one empty slot (kicker); QB order is Brissett, Fagnano, Slovis."
   },
   {
    "id": "D-S07",
@@ -70,7 +76,8 @@
    "title": "Green Bay Packers Depth Chart — 'Unofficial, Nov. 10, 2026'",
    "what": "re-read to test the committed parse, including the jersey-number prefix and the blank PR cell",
    "retrieved": "2026-11-16",
-   "verified": true
+   "verified": true,
+   "note": "28 slots, 54 named cells; the jersey number is printed inside the name cell and the PR slot is empty."
   },
   {
    "id": "D-S08",
@@ -80,7 +87,8 @@
    "title": "NFL Transactions — trades, November 2026",
    "what": "the dated row '11/06 AZ BAL Jacoby Brissett Traded' that the Ravens chart now reflects; read from the committed capture of this page",
    "retrieved": "2026-11-16",
-   "verified": true
+   "verified": true,
+   "note": "One dated row: 11/06, AZ to BAL, Jacoby Brissett, traded."
   },
   {
    "id": "D-S09",
@@ -90,7 +98,8 @@
    "title": "NFL Transactions — reserve list, November 2026",
    "what": "the dated row '11/10 MIA MIA Malik Willis' showing a player can be unavailable without appearing on the injury report",
    "retrieved": "2026-11-16",
-   "verified": true
+   "verified": true,
+   "note": "One dated row: 11/10, MIA to MIA, Malik Willis."
   }
  ]
 }

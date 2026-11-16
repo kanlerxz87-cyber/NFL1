@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Availability &amp; Depth · NFL Decision Desk</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <p class="crumb"><a href="https://kanlerxz87-cyber.github.io/NFL1/index.html">NFL Decision Lab</a> › NFL Decision Desk</p>
+    <h1>Availability &amp; Depth</h1>
+    <p class="sub">Who is ruled out, who the club's own chart names next, and the three records that are still missing.</p>
+    <nav><a href="index.html">Overview</a><a href="readiness.html">Readiness</a><a href="verification.html">Verification</a><a href="strategies.html">Strategies &amp; Luck</a><a href="availability.html" class="active">Availability &amp; Depth</a><a href="pricing.html">Pricing &amp; Signals</a><a href="questions.html">Questions</a><a href="suggestions.html">Suggestions</a><a href="flagged.html">Flagged for Review</a><a href="executive-summary.html">Executive Summary</a><a href="method.html">Method &amp; Sources</a></nav>
+  </div>
+</header>
+<main class="wrap">
+
+<p class="lede">Availability is where the brief asks for the most and where the data is thinnest. The
+official report tells you a player is Out; it does not tell you who replaced him. That requires a club
+depth chart, an inactive list and a snap count — and this site has the first for three clubs, the second
+for one week, and the third for none. Every derived column below says which of those it rests on.</p>
+
+<h2>The one structural fact that changes every team model</h2>
+<p>The injury report and the reserve list are different records, and reading only the first treats a
+player on injured reserve as available:</p>
+<table class="grid">
+<caption>Read together, the two official records disagree about who is unavailable; the report alone treats a player on injured reserve as available.</caption>
+<thead><tr><th>Measure</th><th>Number</th><th>Source</th></tr></thead><tbody>
+<tr><td class="">Week-10 report rows (the record the model has been reading)</td><td class="">347</td><td class="src"><a href="https://www.nfl.com/injuries/">nfl.com Week 10 report</a></td></tr>
+<tr><td class="">Open reserve designations captured from the dated register</td><td class="">100</td><td class="src"><a href="https://www.nfl.com/transactions/">nfl.com transactions</a></td></tr>
+<tr><td class="">Named on a reserve list and on no Week-10 report row</td><td class="">83</td><td class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/reserve/report_vs_reserve.json">report_vs_reserve.json</a></td></tr>
+<tr><td class="">Named on both records</td><td class="">17</td><td class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/reserve/report_vs_reserve.json">report_vs_reserve.json</a></td></tr>
+</tbody></table>
+
+<h2>Every player ruled Out for Week 10</h2>
+<table class="grid">
+<caption>70 players are ruled Out for Week 10 on the official report. The last two columns are filled only for the three clubs whose charts were read; an empty answer there means "not read", not "no replacement".</caption>
+<thead><tr><th>Club</th><th>Player ruled Out</th><th>Pos</th><th>Injury</th><th>Club chart read?</th><th>Next man the club names</th></tr></thead><tbody>
+<tr><td class="">ATL</td><td class="">Zachariah Branch</td><td class="">WR</td><td class="">Hamstring</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">AZ</td><td class="">Hjalte Froholdt</td><td class="">C</td><td class="">Concussion</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">AZ</td><td class="">Jon Gaines II</td><td class="">G</td><td class="">Ankle</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">AZ</td><td class="">Zachary Carter</td><td class="">DT</td><td class="">Knee</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">BAL</td><td class="">Jaylinn Hawkins</td><td class="">S</td><td class="">Knee</td><td class="">yes</td><td class="">Keondre Jackson</td></tr>
+<tr><td class="">CAR</td><td class="">Bobby Okereke</td><td class="">LB</td><td class="">Foot</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">CIN</td><td class="">Kyle Dugger</td><td class="">S</td><td class="">Quadricep</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">CLE</td><td class="">Michael Burton</td><td class="">FB</td><td class="">Calf</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">CLE</td><td class="">Ronnie Hickman Jr.</td><td class="">S</td><td class="">Concussion</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">DAL</td><td class="">Donovan Ezeiruaku</td><td class="">LB</td><td class="">Ankle</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">DAL</td><td class="">Jake Ferguson</td><td class="">TE</td><td class="">Knee, Ankle</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">DAL</td><td class="">Jonathan Mingo</td><td class="">WR</td><td class="">Ankle</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">DAL</td><td class="">P.J. Locke</td><td class="">S</td><td class="">Concussion</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">DAL</td><td class="">Tyler Goodson</td><td class="">RB</td><td class="">Ankle, Knee</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">DET</td><td class="">Cade Mays</td><td class="">C</td><td class="">Ankle</td><td class="">yes</td><td class="">Juice Scruggs</td></tr>
+<tr><td class="">DET</td><td class="">D.J. Reed</td><td class="">CB</td><td class="">Hip</td><td class="">yes</td><td class="">Rock Ya-Sin, Khalil Dorsey, Nick Whiteside</td></tr>
+<tr><td class="">DET</td><td class="">Kerby Joseph</td><td class="">S</td><td class="">Knee</td><td class="">yes</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">GB</td><td class="">Josh Jacobs</td><td class="">RB</td><td class="">Finger</td><td class="">yes</td><td class="">MarShawn Lloyd, Pierre Strong Jr., Kaleb Johnson</td></tr>
+<tr><td class="">GB</td><td class="">Josh Whyle</td><td class="">TE</td><td class="">Concussion</td><td class="">yes</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">GB</td><td class="">Micah Parsons</td><td class="">LB</td><td class="">Knee, Illness</td><td class="">yes</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">GB</td><td class="">Sean Rhyan</td><td class="">C</td><td class="">Ankle</td><td class="">yes</td><td class="">Jager Burton</td></tr>
+<tr><td class="">HOU</td><td class="">Azeez Al-Shaair</td><td class="">LB</td><td class="">Groin, Not injury related - personal matter</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">HOU</td><td class="">Brevin Jordan</td><td class="">TE</td><td class="">Finger, Foot</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">HOU</td><td class="">Danielle Hunter</td><td class="">DE</td><td class="">Hamstring</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">HOU</td><td class="">Keylan Rutledge</td><td class="">G</td><td class="">Neck, Shoulder</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">HOU</td><td class="">Marvin Harrison Jr.</td><td class="">WR</td><td class="">Hamstring</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">IND</td><td class="">Akeem Davis-Gaither</td><td class="">LB</td><td class="">Knee</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">IND</td><td class="">Jalen Travis</td><td class="">T</td><td class="">Knee</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">IND</td><td class="">Jaylon Carlies</td><td class="">LB</td><td class="">Neck</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">IND</td><td class="">Jerry Tillery</td><td class="">DT</td><td class="">Calf</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">IND</td><td class="">Luke Rhodes</td><td class="">LS</td><td class="">Hamstring</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">IND</td><td class="">Mo Alie-Cox</td><td class="">TE</td><td class="">Groin</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">JAX</td><td class="">BJ Green II</td><td class="">DE</td><td class="">Forearm</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">JAX</td><td class="">Jessie Bates</td><td class="">S</td><td class="">Not injury related - resting player</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">JAX</td><td class="">Jordan Davis</td><td class="">DT</td><td class="">Not injury related - resting player</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">KC</td><td class="">Jaylon Moore</td><td class="">T</td><td class="">Ankle</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">KC</td><td class="">Omarr Norman-Lott</td><td class="">DT</td><td class="">Knee</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">KC</td><td class="">Peter Woods</td><td class="">DT</td><td class="">Neck</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">LA</td><td class="">Steve Avila</td><td class="">G</td><td class="">Hamstring</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">LA</td><td class="">Terrance Ferguson</td><td class="">TE</td><td class="">Ankle, Hamstring</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">LAC</td><td class="">Branson Taylor</td><td class="">G</td><td class="">Ankle</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">LAC</td><td class="">Isas Waxter</td><td class="">CB</td><td class="">Ankle</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">LAC</td><td class="">Kendall Williamson</td><td class="">S</td><td class="">Calf</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">MIA</td><td class="">Aaron Brewer</td><td class="">C</td><td class="">Concussion</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">MIA</td><td class="">Jared Wayne</td><td class="">WR</td><td class="">Quadricep</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">MIN</td><td class="">Blake Cashman</td><td class="">LB</td><td class="">Concussion</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">MIN</td><td class="">Jauan Jennings</td><td class="">WR</td><td class="">Calf</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">MIN</td><td class="">Kyler Murray</td><td class="">QB</td><td class="">Hamstring</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">MIN</td><td class="">T.J. Hockenson</td><td class="">TE</td><td class="">Wrist, Chest</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">MIN</td><td class="">Tyrion Ingram-Dawkins</td><td class="">DT</td><td class="">Ankle</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">NE</td><td class="">Ben Brown</td><td class="">C</td><td class="">Knee</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">NE</td><td class="">Carlton Davis III</td><td class="">CB</td><td class="">Knee</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">NE</td><td class="">TreVeyon Henderson</td><td class="">RB</td><td class="">Illness</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">NO</td><td class="">CJ Donaldson</td><td class="">RB</td><td class="">Shoulder</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">NO</td><td class="">Christen Miller</td><td class="">DT</td><td class="">Knee</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">NO</td><td class="">Erik McCoy</td><td class="">C</td><td class="">Biceps</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">NO</td><td class="">Taliese Fuaga</td><td class="">T</td><td class="">Knee</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">NYJ</td><td class="">Trevin Wallace</td><td class="">LB</td><td class="">Groin</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">SEA</td><td class="">Charles Cross</td><td class="">T</td><td class="">Ankle</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">SEA</td><td class="">Leonard Williams</td><td class="">DT</td><td class="">Stinger</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">SEA</td><td class="">Quenton Nelson</td><td class="">G</td><td class="">Knee</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">SEA</td><td class="">Sam Darnold</td><td class="">QB</td><td class="">Ribs, Quadricep</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">SF</td><td class="">Mike Evans</td><td class="">WR</td><td class="">Achilles</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">TEN</td><td class="">Anthony Hill Jr.</td><td class="">LB</td><td class="">Neck</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">TEN</td><td class="">Carnell Tate</td><td class="">WR</td><td class="">Shoulder</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">TEN</td><td class="">Cody Barton</td><td class="">LB</td><td class="">Concussion</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">TEN</td><td class="">Peter Skoronski</td><td class="">G</td><td class="">Hamstring</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">TEN</td><td class="">Tommy Townsend</td><td class="">P</td><td class="">Knee, Achilles</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">WAS</td><td class="">Colson Yankoff</td><td class="">TE</td><td class="">Knee</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+<tr><td class="">WAS</td><td class="">Lucas Patrick</td><td class="">C</td><td class="">Concussion</td><td class="">no</td><td class="">not on the three charts read</td></tr>
+</tbody></table>
+
+<h2>Starter out, next man named — chart evidence only</h2>
+<table class="grid">
+<caption>Five chains across three clubs. Each is marked CHART EVIDENCE rather than a confirmed replacement: a starter being ruled out and a backup being named next is not proof the backup played.</caption>
+<thead><tr><th>Club</th><th>Slot</th><th>Starter listed first</th><th>Why he is out</th><th>Next man named</th><th>Source</th></tr></thead><tbody>
+<tr><td class="">DET</td><td class="">C</td><td class="">Cade Mays</td><td class="">Ankle</td><td class="">Juice Scruggs</td><td class="src"><a href="https://www.nfl.com/players/cade-mays/">report</a> · <a href="https://www.detroitlions.com/team/depth-chart">chart</a></td></tr>
+<tr><td class="">DET</td><td class="">CB</td><td class="">D.J. Reed</td><td class="">Hip</td><td class="">Rock Ya-Sin, Khalil Dorsey, Nick Whiteside</td><td class="src"><a href="https://www.nfl.com/players/d-j-reed/">report</a> · <a href="https://www.detroitlions.com/team/depth-chart">chart</a></td></tr>
+<tr><td class="">BAL</td><td class="">SS</td><td class="">Jaylinn Hawkins</td><td class="">Knee</td><td class="">Keondre Jackson</td><td class="src"><a href="https://www.nfl.com/players/jaylinn-hawkins/">report</a> · <a href="https://www.baltimoreravens.com/team/depth-chart">chart</a></td></tr>
+<tr><td class="">GB</td><td class="">C</td><td class="">Sean Rhyan</td><td class="">Ankle</td><td class="">Jager Burton</td><td class="src"><a href="https://www.nfl.com/players/sean-rhyan/">report</a> · <a href="https://www.packers.com/team/depth-chart">chart</a></td></tr>
+<tr><td class="">GB</td><td class="">RB</td><td class="">Josh Jacobs</td><td class="">Finger</td><td class="">MarShawn Lloyd, Pierre Strong Jr., Kaleb Johnson</td><td class="src"><a href="https://www.nfl.com/players/josh-jacobs-x3315/">report</a> · <a href="https://www.packers.com/team/depth-chart">chart</a></td></tr>
+</tbody></table>
+
+<h2>Availability by club</h2>
+<p>Read this as a shape, not a ranking: a club with many practice-only rows is not more injured than one
+with many Out rows. The league publishes the practice report for every club that has one.</p>
+<table class="grid">
+<thead><tr><th>Club</th><th>Rows</th><th>Out</th><th>Doubtful</th><th>Questionable</th><th>No game status</th><th>Source</th></tr></thead><tbody>
+<tr><td class="">ATL</td><td class="">11</td><td class="">1</td><td class="">1</td><td class="">3</td><td class="">6</td><td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">nfl.com Week 10</a></td></tr>
+<tr><td class="">AZ</td><td class="">15</td><td class="">3</td><td class="">0</td><td class="">6</td><td class="">6</td><td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">nfl.com Week 10</a></td></tr>
+<tr><td class="">BAL</td><td class="">10</td><td class="">1</td><td class="">0</td><td class="">1</td><td class="">8</td><td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">nfl.com Week 10</a></td></tr>
+<tr><td class="">BUF</td><td class="">14</td><td class="">0</td><td class="">1</td><td class="">4</td><td class="">9</td><td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">nfl.com Week 10</a></td></tr>
+<tr><td class="">CAR</td><td class="">12</td><td class="">1</td><td class="">2</td><td class="">4</td><td class="">5</td><td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">nfl.com Week 10</a></td></tr>
+<tr><td class="">CIN</td><td class="">9</td><td class="">1</td><td class="">3</td><td class="">0</td><td class="">5</td><td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">nfl.com Week 10</a></td></tr>
+<tr><td class="">CLE</td><td class="">12</td><td class="">2</td><td class="">0</td><td class="">1</td><td class="">9</td><td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">nfl.com Week 10</a></td></tr>
+<tr><td class="">DAL</td><td class="">19</td><td class="">5</td><td class="">1</td><td class="">5</td><td class="">8</td><td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">nfl.com Week 10</a></td></tr>
+<tr><td class="">DET</td><td class="">9</td><td class="">3</td><td class="">0</td><td class="">2</td><td class="">4</td><td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">nfl.com Week 10</a></td></tr>
+<tr><td class="">GB</td><td class="">17</td><td class="">4</td><td class="">1</td><td class="">7</td><td class="">5</td><td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">nfl.com Week 10</a></td></tr>
+<tr><td class="">HOU</td><td class="">16</td><td class="">5</td><td class="">0</td><td class="">6</td><td class="">5</td><td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">nfl.com Week 10</a></td></tr>
+<tr><td class="">IND</td><td class="">14</td><td class="">6</td><td class="">0</td><td class="">1</td><td class="">7</td><td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">nfl.com Week 10</a></td></tr>
+<tr><td class="">JAX</td><td class="">11</td><td class="">3</td><td class="">0</td><td class="">1</td><td class="">7</td><td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">nfl.com Week 10</a></td></tr>
+<tr><td class="">KC</td><td class="">13</td><td class="">3</td><td class="">0</td><td class="">3</td><td class="">7</td><td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">nfl.com Week 10</a></td></tr>
+<tr><td class="">LA</td><td class="">14</td><td class="">2</td><td class="">0</td><td class="">5</td><td class="">7</td><td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">nfl.com Week 10</a></td></tr>
+<tr><td class="">LAC</td><td class="">19</td><td class="">3</td><td class="">1</td><td class="">6</td><td class="">9</td><td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">nfl.com Week 10</a></td></tr>
+<tr><td class="">LV</td><td class="">5</td><td class="">0</td><td class="">0</td><td class="">2</td><td class="">3</td><td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">nfl.com Week 10</a></td></tr>
+<tr><td class="">MIA</td><td class="">11</td><td class="">2</td><td class="">1</td><td class="">1</td><td class="">7</td><td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">nfl.com Week 10</a></td></tr>
+<tr><td class="">MIN</td><td class="">13</td><td class="">5</td><td class="">0</td><td class="">3</td><td class="">5</td><td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">nfl.com Week 10</a></td></tr>
+<tr><td class="">NE</td><td class="">15</td><td class="">3</td><td class="">0</td><td class="">9</td><td class="">3</td><td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">nfl.com Week 10</a></td></tr>
+<tr><td class="">NO</td><td class="">12</td><td class="">4</td><td class="">0</td><td class="">2</td><td class="">6</td><td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">nfl.com Week 10</a></td></tr>
+<tr><td class="">NYG</td><td class="">11</td><td class="">0</td><td class="">0</td><td class="">1</td><td class="">10</td><td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">nfl.com Week 10</a></td></tr>
+<tr><td class="">NYJ</td><td class="">9</td><td class="">1</td><td class="">0</td><td class="">8</td><td class="">0</td><td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">nfl.com Week 10</a></td></tr>
+<tr><td class="">PIT</td><td class="">8</td><td class="">0</td><td class="">0</td><td class="">1</td><td class="">7</td><td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">nfl.com Week 10</a></td></tr>
+<tr><td class="">SEA</td><td class="">15</td><td class="">4</td><td class="">0</td><td class="">0</td><td class="">11</td><td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">nfl.com Week 10</a></td></tr>
+<tr><td class="">SF</td><td class="">12</td><td class="">1</td><td class="">0</td><td class="">7</td><td class="">4</td><td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">nfl.com Week 10</a></td></tr>
+<tr><td class="">TEN</td><td class="">12</td><td class="">5</td><td class="">0</td><td class="">1</td><td class="">6</td><td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">nfl.com Week 10</a></td></tr>
+<tr><td class="">WAS</td><td class="">9</td><td class="">2</td><td class="">0</td><td class="">0</td><td class="">7</td><td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">nfl.com Week 10</a></td></tr>
+</tbody></table>
+
+<h2>How much of a series exists</h2>
+<table class="grid">
+<caption>11 reads logged, of which [{'file': 'data/snapshots/injury_report/captures/20261115T121648Z_6007630190d2.json', 'sha256': '68642213e3b0a899e88b7a5962265dbf93017503f7b39079254e294715fb9579', 'bytes': 85900, 'captured_at_utc': '2026-11-15T12:16:48Z', 'canonical_sha256': '6007630190d28e3326501aa1419af62cb551a3ca431013e68d3d3845c9662c11', 'raw_sha256': 'cfbc92c6486f8c265c2276d99c7422d0b95c417b26259dbe83eaee3fc6c91fb5', 'rows': 347, 'week': 10, 'season': 2026}] produced a distinct capture. A read only becomes a capture when the parsed report changes.</caption>
+<thead><tr><th>Read at (UTC)</th><th>HTTP</th><th>Rows parsed</th><th>Raw sha256 (first 16)</th><th>Week</th><th>Produced a new capture</th><th>Source</th></tr></thead><tbody>
+<tr><td class="">2026-11-15T12:16:48Z</td><td class="">200</td><td class="">347</td><td class="">cfbc92c6486f8c26</td><td class="">10</td><td class="">yes</td><td class="src"><a href="https://www.nfl.com/injuries/">nfl.com</a></td></tr>
+<tr><td class="">2026-11-15T12:24:14Z</td><td class="">200</td><td class="">347</td><td class="">45ac8a63fffec9f0</td><td class="">10</td><td class="">no (identical to the previous read)</td><td class="src"><a href="https://www.nfl.com/injuries/">nfl.com</a></td></tr>
+<tr><td class="">2026-11-15T12:29:39Z</td><td class="">200</td><td class="">347</td><td class="">a5b33013cc2df44c</td><td class="">10</td><td class="">no (identical to the previous read)</td><td class="src"><a href="https://www.nfl.com/injuries/">nfl.com</a></td></tr>
+<tr><td class="">2026-11-15T12:48:40Z</td><td class="">200</td><td class="">347</td><td class="">26e4d3f30927903f</td><td class="">10</td><td class="">no (identical to the previous read)</td><td class="src"><a href="https://www.nfl.com/injuries/">nfl.com</a></td></tr>
+<tr><td class="">2026-11-15T12:56:16Z</td><td class="">200</td><td class="">347</td><td class="">f180b9f8a11b7e1e</td><td class="">10</td><td class="">no (identical to the previous read)</td><td class="src"><a href="https://www.nfl.com/injuries/">nfl.com</a></td></tr>
+<tr><td class="">2026-11-15T12:50:32Z</td><td class="">200</td><td class="">347</td><td class="">26b278a5cf9a6a7d</td><td class="">10</td><td class="">no (identical to the previous read)</td><td class="src"><a href="https://www.nfl.com/injuries/">nfl.com</a></td></tr>
+<tr><td class="">2026-11-15T12:59:30Z</td><td class="">200</td><td class="">347</td><td class="">0612f7ac07fa3864</td><td class="">10</td><td class="">no (identical to the previous read)</td><td class="src"><a href="https://www.nfl.com/injuries/">nfl.com</a></td></tr>
+<tr><td class="">2026-11-15T13:55:47Z</td><td class="">200</td><td class="">347</td><td class="">b13e50e27865e3f1</td><td class="">10</td><td class="">no (identical to the previous read)</td><td class="src"><a href="https://www.nfl.com/injuries/">nfl.com</a></td></tr>
+<tr><td class="">2026-11-15T22:42:32Z</td><td class="">200</td><td class="">347</td><td class="">b183f2cb1b14e932</td><td class="">10</td><td class="">no (identical to the previous read)</td><td class="src"><a href="https://www.nfl.com/injuries/">nfl.com</a></td></tr>
+<tr><td class="">2026-11-16T06:04:36Z</td><td class="">200</td><td class="">347</td><td class="">76309dad8b17c5c4</td><td class="">10</td><td class="">no (identical to the previous read)</td><td class="src"><a href="https://www.nfl.com/injuries/">nfl.com</a></td></tr>
+<tr><td class="">2026-11-16T15:34:06Z</td><td class="">200</td><td class="">347</td><td class="">c7141e891cf2b170</td><td class="">10</td><td class="">no (identical to the previous read)</td><td class="src"><a href="https://www.nfl.com/injuries/">nfl.com</a></td></tr>
+</tbody></table>
+
+<h2>What is deliberately missing here</h2>
+<ul class="list">
+  <li><strong>Confirmed starters.</strong> Would need official Game Books. Readiness A-06, D-08.</li>
+  <li><strong>Who did not dress.</strong> Would need the inactive list for every played fixture. A-04.</li>
+  <li><strong>Who actually played how much.</strong> Would need snap counts; the brief forbids inferring depth from jersey order, and without snaps the chart order is all there is. A-05.</li>
+  <li><strong>Whether a designation predicts anything.</strong> Would need a play rate per designation. S-13, A-15.</li>
+  <li><strong>A depth chart for 29 clubs.</strong> Would need one read per club page. A-16.</li>
+</ul>
+
+</main>
+<footer class="wrap">
+  <p>NFL Decision Desk — session <code>ed736fc3-nfl1</code>, built 2026-11-16 from <code>data/desk/*.json</code>.
+  Every table row carries the official page it was checked against; a value that could not be confirmed
+  is published as a labelled blank or on the <a href="flagged.html">Flagged for Review</a> page.
+  This is a research tool, not betting advice.</p>
+</footer>
+</body>
+</html>
