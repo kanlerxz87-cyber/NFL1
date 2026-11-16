@@ -1,16 +1,16 @@
 {
- "generated_at": "2026-11-15T12:28:54+00:00",
+ "generated_at": "2026-11-16T15:27:59+00:00",
  "official_sources": {
   "standings": "https://www.nfl.com/standings/league/2026/reg",
   "injuries": "https://www.nfl.com/injuries/",
   "schedule": "https://www.nfl.com/schedules/2026/REG10",
   "depth_charts": "club official depth-chart pages (URL per row in data/evidence/depth_charts.json)"
  },
- "result": "PASS",
+ "result": "FAIL",
  "counts": {
-  "passed": 20,
+  "passed": 19,
   "flagged": 8,
-  "failed": 0
+  "failed": 1
  },
  "checks": [
   {
@@ -197,10 +197,10 @@
   },
   {
    "area": "E. counts",
-   "check": "games played = half the sum of club games",
-   "status": "PASS",
+   "check": "games played reconciles with current official standings",
+   "status": "FAIL",
    "rows_checked": 137,
-   "detail": "current official standings imply 137"
+   "detail": "sum of club games / 2 = 149"
   },
   {
    "area": "E. counts",
