@@ -718,7 +718,9 @@ def main():
     block_signal()
     block_correlations()
     block_market_provenance()
-    OUT["built"] = lib.now_utc()
+    # Deterministic stamp: the date the sources were read, not the wall clock.  A timestamp would
+    # make the build non-reproducible and `--check` could never pass.
+    OUT["built"] = RETRIEVED
     OUT["retrieved"] = RETRIEVED
     OUT["official_reads"] = lib.OFFICIAL
     lib.write_json("derived.json", OUT)

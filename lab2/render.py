@@ -100,7 +100,7 @@ def page(name, title, body, subtitle=""):
 {body}
 </main>
 <footer>
-  <span>Built {esc(stamp)} from committed files and official pages read on {esc(D.get('retrieved',''))}.</span>
+  <span>Data cut {esc(stamp)} · built from committed files and official pages read that day.</span>
   <span>Every row links its source. A cell that no source confirms is printed blank and labelled Unverified, never filled.</span>
 </footer>
 </body></html>
