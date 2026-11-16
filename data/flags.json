@@ -1101,5 +1101,38 @@
     "retrieved": "2026-11-15",
     "verified": true,
     "data_src": "data/depth/official_register.json"
+  },
+  {
+    "id": "F60",
+    "category": "Terms of use: clauses beyond F51",
+    "description": "Read in full on 2026-11-16 (data/legal/terms_2026-11-16.json). Four clauses bear on this repository and are not covered by F51: s.8 'For any other type of link to the Services, you must obtain our express written permission' (the site deep-links to nfl.com injury, schedule and transaction pages); s.11(f) prohibits using 'spiders, robots' or 'agent[s]' to 'harvest or otherwise collect information from the Services to be used for any commercial purpose'; s.12 prohibits 'using the Services to gamble or wager on the result of any NFL game'; and s.2 lets NFL change the text at any time. Section 11(d) also prohibits any action that 'imposes an unreasonable or disproportionately large load'. No load measurement is in the repository.",
+    "impact": "The repository's stated purpose is wagering strategy on NFL games. Whether s.12 covers use of nfl.com data for that purpose is a legal question. This session does not decide it. Deep links need written permission under the text as written, or a reading that they are covered by s.8's first sentence.",
+    "status": "needs review",
+    "src": "S35",
+    "action": "Counsel or the repository owner to read s.8, s.11(f) and s.12 against the planned use before the next publication. Decide whether to request NFL's written consent, and whether to link only to the home page.",
+    "verified": true,
+    "retrieved": "2026-11-16"
+  },
+  {
+    "id": "F61",
+    "category": "Official transaction log: completeness",
+    "description": "Baltimore Ravens' official X post of 2026-11-05 (https://x.com/Ravens/status/2118449515959132516, not a registered source; see F62) says it placed QBs Lamar Jackson and Tyler Huntley on injured reserve and signed QB Austin Reed. The NFL transaction pages read on 2026-11-16 (S36) do not show this: the reserve-list page lists entries from 11/14 back to 11/07 only, and the signings page from 11/14 back to 11/11 only. Neither has a 11/05 entry. The NFL trades page does show 11/06 (Brissett). Depth rows for BAL QB (VR-17, VR-26) therefore rest on the team post and not on the league log.",
+    "impact": "Any check of depth rows against the official transaction log for 11/05 gives a false 'no move' result. The league log cannot be used alone to flag stale depth rows for early-November moves.",
+    "status": "needs review",
+    "src": "S36",
+    "action": "Use the team's official post (see F62 for its source status) as the event source where the league log is silent, and label it that way. Ask the data owner whether the league log is truncated or filtered; this was not determined.",
+    "verified": true,
+    "retrieved": "2026-11-16"
+  },
+  {
+    "id": "F62",
+    "category": "Verifier gate: team social posts are not an allowed source",
+    "description": "tools/verify.py accepts only registered official domains (OFFICIAL_DOMAINS). The Baltimore Ravens' official X post of 2026-11-05 (https://x.com/Ravens/status/2118449515959132516) is the only primary record found for the Jackson and Huntley IR placements and the Austin Reed signing. Searches of baltimoreravens.com news did not find a team-site article for 11/05 (the news list read on 2026-11-16 runs from 11/16 back to 11/09 in its first two pages). The post was therefore kept as a labelled event source in data/transactions/official_events_2026.json, not added to data/sources.json, so the gate stays strict and unchanged.",
+    "impact": "The 11/05 IR fact has one primary source that the gate does not accept. Any row that cites it cannot pass verify.py until the owner decides. No published row cites it today.",
+    "status": "needs review",
+    "src": "S36",
+    "action": "Owner decision: (a) allow x.com status URLs of the 32 club accounts as official sources, changing OFFICIAL_DOMAINS in tools/verify.py, or (b) keep the team post as an unregistered note only. Option (a) also needs a rule for which account counts as official.",
+    "verified": true,
+    "retrieved": "2026-11-16"
   }
 ]
