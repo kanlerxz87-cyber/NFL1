@@ -1054,11 +1054,11 @@
 </tr>
 <tr id="D-F01" data-verified="false">
 <td><code>D-F01</code></td>
-<td data-value="1">A build gate on main fails, and the failure is a true statement about stale data</td>
-<td data-value="1" class="wide">tools/verify_official.py check E compares data/model/dashboard.json counts.games_played (137) with half the sum of club games in data/evidence/standings_current.json (149) and fails. The check is correct: the official standings read on 2026-11-16 imply 149 completed games, while the backtest corpus data/s9cb/games.csv holds 137 results and only one Week-10 final (WAS 24-21 NYG). 12 of the 13 Week-10 finals are absent from the corpus.</td>
-<td data-value="1" class="wide">main&#x27;s &#x27;Verify decision dashboard&#x27; job is red on 46c82ae. The model&#x27;s ratings, own lines and every backtest sit on a corpus that is 12 games behind the season, so all published accuracy figures describe a slightly earlier state than the page implies.</td>
-<td><span class="badge neutral">Open - disclosed on the site, not repaired</span></td>
-<td data-value="1" class="wide">Run the collect-data workflow (it can reach nflverse from Actions; this sandbox cannot). Do not edit the check and do not edit the corpus in place: freeze a new corpus_id.</td>
+<td data-value="1">Check E passes now, but the frozen corpus is still 12 games behind the season</td>
+<td data-value="1" class="wide">When this session claimed (main 46c82ae) tools/verify_official.py check E failed: it compared data/model/dashboard.json counts.games_played (137) with half the sum of club games in data/evidence/standings_current.json (149). An upstream data refresh merged to main while this session ran (commit e2f9916) raised the dashboard count to the official 149, so check E now PASSES: 149 games, 0 of 28 checks failing, report data/audit/official_verification.json generated 2026-11-16T18:05:02Z. The underlying data gap is unchanged: the frozen backtest corpus data/s9cb/games.csv still holds 137 results and only one Week-10 final (WAS 24-21 NYG); 12 of the 13 Week-10 finals are absent from it. The gate went green because the dashboard was corrected to match the official count, not because the corpus caught up.</td>
+<td data-value="1" class="wide">The failing job is cleared, so the build is no longer red. The model&#x27;s ratings, own lines and every backtest still sit on a corpus 12 games behind the season, so published accuracy figures describe a slightly earlier state than the season the page describes.</td>
+<td><span class="badge neutral">Open - gate green, corpus still behind; disclosed on the site, not repaired</span></td>
+<td data-value="1" class="wide">Freeze a new corpus_id from a refreshed results feed. Do not edit the pre-registered corpus in place. The gate is a live read on the desk pages, so it will flip to a failure again if the dashboard count and the official standings ever disagree.</td>
 <td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><a class="badge flag" href="flagged.html">UNVERIFIED</a></td>
 </tr>
 <tr id="D-F02" data-verified="false">

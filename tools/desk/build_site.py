@@ -91,6 +91,23 @@ def link(url, label=None) -> str:
     return f'<a href="{e(url)}">{e(label or url)}</a>'
 
 
+def gate_sentence(sch):
+    """A truthful sentence about check E, built from the live verdict rather than typed in."""
+    g = sch.get("gate") or {}
+    c = sch["corpus"]
+    if not g.get("available"):
+        return (f"Check E has not been run in this checkout, so its verdict is unknown here; what is known "
+                f"from the data is that the corpus holds {c['played_rows']} results against "
+                f"{c['implied_from_official_standings']} implied by the official standings.")
+    if g.get("verdict") == "pass":
+        if c["played_rows"] >= c["implied_from_official_standings"]:
+            return (f"Check E passes ({g.get('games_status')} at {g.get('games_rows')} games) and the corpus is current.")
+        return (f"Check E now passes: the dashboard count was brought to the official "
+                f"{g.get('games_rows')} and the checker agrees. The corpus itself is still behind at "
+                f"{c['played_rows']} results, so the gap has moved rather than closed.")
+    return (f"Check E fails ({g.get('failed')} failing check(s)): the dashboard and the official count disagree.")
+
+
 def page(name, title, body, subtitle="", stamp=True) -> str:
     active = name
     cls = " class=\"active\""
@@ -134,6 +151,7 @@ GEN_AT = ""
 
 # --------------------------------------------------------------------------- page bodies
 def p_index():
+    sch = J("schedule.json")
     st, inj, sch, dep = J("standings.json"), J("injuries.json"), J("schedule.json"), J("depth.json")
     rd, qs, sg, cl = J("readiness.json"), J("questions.json"), J("suggestions.json"), J("claims.json")
     fl = J("flags.json")
@@ -165,7 +183,7 @@ def p_index():
          f'{sch["week11"]["counts"]["clubs_total"]} clubs; committed copy reproduces: {sch["week11"]["committed_check"]["verdict"]}.',
          sch["week11"]["source_url"]),
         ("Backtest corpus vs the season", f'{sch["corpus"]["played_rows"]} vs {sch["corpus"]["implied_from_official_standings"]} games',
-         f'Gap of {sch["corpus"]["gap_games"]} completed games. This is why a build gate fails on main (D-F01).',
+         f'Gap of {sch["corpus"]["gap_games"]} completed games. ' + gate_sentence(sch) + ' (D-F01).',
          st["source_url"]),
         ("Club depth charts read", f'{dep["counts"]["clubs"]} of 32 clubs',
          f'{sum(c["counts"]["slots"] for c in dep["charts"])} slots transcribed; {dep["counts"]["chains"]} starter-out chains resolved by chart order.',
@@ -280,6 +298,7 @@ problems: the price policy, the collector run and the Game Book ingest would mov
 
 
 def p_verification():
+    sch = J("schedule.json")
     st, inj, sch, dep, cl = J("standings.json"), J("injuries.json"), J("schedule.json"), J("depth.json"), J("claims.json")
     srcs = J("sources.json")["sources"]
 
@@ -398,8 +417,8 @@ the league distributes them before the final report of the week.</p>
 
 <h2>Week 10 results, and whether the backtest corpus has them</h2>
 <p>The right-hand column is the test the brief asks for: can a backtest be computed at all? A final
-score that is missing from the corpus cannot enter ROI, and the build gate that fails on main is
-exactly this comparison.</p>
+score that is missing from the corpus cannot enter ROI.</p>
+<p>{gate_sentence(sch)}</p>
 {w10_table}
 
 <h2>Club depth charts</h2>
@@ -742,6 +761,7 @@ more likely a model error than a market error. It spans zero.</p>
 
 
 def p_questions():
+    sch = J("schedule.json")
     q = J("questions.json")
     groups = []
     for r in q["rows"]:
@@ -763,10 +783,10 @@ question with a negative answer is a result.</p>
 {''.join(parts)}
 <h2>The four that matter most</h2>
 <ul class="list">
-  <li><strong>Q-01 — is the corpus current?</strong> No: 137 games against 149 implied by the official standings.</li>
+  <li><strong>Q-01 — is the corpus current?</strong> No: {sch["corpus"]["played_rows"]} games against {sch["corpus"]["implied_from_official_standings"]} implied by the official standings.</li>
   <li><strong>Q-04 — do we know who started?</strong> No: chart order only, for three clubs.</li>
   <li><strong>Q-09 — does the model beat the line?</strong> No: skill −0.0413, interval entirely below zero.</li>
-  <li><strong>Q-24 — what unlocks the most?</strong> Running the collector: four readiness rows and one failing gate.</li>
+  <li><strong>Q-24 — what unlocks the most?</strong> Running the collector: it refreshes the corpus and the stale standings copies in one scheduled job.</li>
 </ul>
 """
     return page("questions.html", "Questions", body,
@@ -774,6 +794,7 @@ question with a negative answer is a result.</p>
 
 
 def p_suggestions():
+    sch = J("schedule.json")
     s = J("suggestions.json")
     rows = [[e(r["rank"]), e(r["title"]), e(r["area"]), e(r["evidence"]),
              e(r["recommended_path"]), e(r["alternative"]), e(r["unblocks"]), e(r["effort"]), e(r["risk"]),
@@ -789,9 +810,10 @@ backtest rows.</p>
 <p>{e(s["review_process"])}</p>
 {t}
 <h2>If only one thing is done next</h2>
-<p>Run the collector. It clears the failing gate on main, refreshes three stale copies of the
-standings, and moves the corpus from 137 completed games to the official 149. It needs no decision
-from anyone — it is a scheduled job that has not run recently enough.</p>
+<p>Run the collector. It refreshes three stale copies of the standings and moves the corpus from
+{sch["corpus"]["played_rows"]} completed games to the official
+{sch["corpus"]["implied_from_official_standings"]}. It needs no decision from anyone — it is a
+scheduled job that has not run recently enough. {gate_sentence(sch)}</p>
 """
     return page("suggestions.html", "Suggestions", body,
                 "Twelve improvements, ranked, each with an alternative and what it unblocks.")
@@ -849,6 +871,7 @@ generator that is out of date. The gates catch errors; this page carries the fla
 
 
 def p_exec():
+    sch = J("schedule.json")
     rd, qs, sg, cl = J("readiness.json"), J("questions.json"), J("suggestions.json"), J("claims.json")
     st, inj, sch, dep = J("standings.json"), J("injuries.json"), J("schedule.json"), J("depth.json")
     counts = {}
@@ -888,8 +911,8 @@ to the owner rather than to the agent.</p>
   <li><strong>No strategy is promotable.</strong> The best row has ROI 6.06% with an interval of −3.1% to +15.3%
       and needs about 1950 settled bets for 80% power. It has 401.</li>
   <li><strong>The results feed is 12 games behind.</strong> {sch["corpus"]["played_rows"]} completed games in the
-      corpus against {sch["corpus"]["implied_from_official_standings"]} implied by the official standings. A build gate
-      on main fails because of it (D-F01).</li>
+      corpus against {sch["corpus"]["implied_from_official_standings"]} implied by the official standings.
+      {gate_sentence(sch)} (D-F01).</li>
   <li><strong>Nobody knows who actually started.</strong> Depth is chart order for {dep["counts"]["clubs"]} of 32 clubs;
       there are no inactive lists for Week 10 and no snap counts at all.</li>
   <li><strong>Backtest rows are still ranked.</strong> 12 rows appear on a leaderboard by ROI, which the brief

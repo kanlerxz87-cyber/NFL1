@@ -46,6 +46,39 @@ def tsv(name):
         return list(csv.DictReader(f, delimiter="\t"))
 
 
+def load(rel):
+    """Load any repo-relative JSON file (not just one under data/desk)."""
+    with open(os.path.join(ROOT, rel), encoding="utf-8") as f:
+        return json.load(f)
+
+
+class _Text(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.out = []
+        self._skip = 0
+
+    def handle_starttag(self, tag, attrs):
+        if tag in ("script", "style"):
+            self._skip += 1
+
+    def handle_endtag(self, tag):
+        if tag in ("script", "style") and self._skip:
+            self._skip -= 1
+
+    def handle_data(self, data):
+        if not self._skip:
+            self.out.append(data)
+
+
+def text_of(name):
+    """Visible text of a rendered desk page, so assertions are not fooled by markup."""
+    p = _Text()
+    p.feed(open(os.path.join(SITE, name), encoding="utf-8").read())
+    return " ".join(" ".join(p.out).split())
+
+
+
 class TestTranscriptions(unittest.TestCase):
     """The transcription files must be internally consistent before anything is published."""
 
@@ -204,6 +237,44 @@ class TestClaims(unittest.TestCase):
         for r in J("suggestions.json")["rows"]:
             self.assertTrue(r["recommended_path"].strip(), r["id"])
             self.assertTrue(r["alternative"].strip(), r["id"])
+
+    # ---- the gate verdict is a live read, never a typed-in sentence -------------------
+    def test_the_gate_verdict_agrees_with_the_audit_report(self):
+        """If check E flips, the pages must follow. A hard-coded "the gate fails" would rot."""
+        gate = J("schedule.json")["gate"]
+        self.assertTrue(gate["available"], "the audit report must be present for the desk to be built")
+        rep = load("data/audit/official_verification.json")
+        want = "fail" if rep["counts"]["failed"] else "pass"
+        self.assertEqual(gate["verdict"], want)
+        self.assertEqual(gate["failed"], rep["counts"]["failed"])
+
+    def test_a_green_gate_does_not_claim_the_corpus_is_current(self):
+        """Passing check E and a current corpus are different facts; the page must not merge them."""
+        sch = J("schedule.json")
+        c, g = sch["corpus"], sch["gate"]
+        corpus_behind = c["played_rows"] < c["implied_from_official_standings"]
+        claim = {r["id"]: r for r in J("claims.json")["rows"]}["D-C02"]
+        if g["verdict"] == "pass" and corpus_behind:
+            self.assertEqual(claim["verdict"], "gate passes, corpus trails")
+            page = text_of("verification.html")
+            self.assertIn("still behind", page)
+        elif g["verdict"] == "pass":
+            self.assertEqual(claim["verdict"], "confirmed")
+        else:
+            self.assertEqual(claim["verdict"], "fails")
+
+    def test_no_page_asserts_a_gate_state_that_is_no_longer_true(self):
+        """The old wording, published from a stale hand-typed verdict, must never come back."""
+        for page in ("index.html", "verification.html", "questions.html",
+                     "suggestions.html", "executive-summary.html"):
+            body = text_of(page)
+            for phrase in ("why a build gate fails on main",
+                           "gate that fails on main",
+                           "clears the failing gate on main",
+                           "fails on main at 46c82ae"):
+                self.assertNotIn(phrase, body, f"{page} still carries: {phrase}")
+
+
 
 
 if __name__ == "__main__":

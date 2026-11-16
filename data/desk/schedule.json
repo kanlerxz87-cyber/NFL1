@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-16T18:13:25Z",
+ "generated_at": "2026-11-16T18:17:49Z",
  "week11": {
   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11",
   "retrieved": "2026-11-16",
@@ -428,8 +428,23 @@
   "played_rows": 137,
   "club_games": 274,
   "implied_from_official_standings": 149,
-  "dashboard_asserts": 137,
+  "dashboard_asserts": 149,
   "gap_games": 12,
   "note": "The backtest corpus holds 2026 rows only up to the games it was frozen with. The official standings page read this session implies 149 completed games; the corpus holds 137 results, and 12 of the 13 Week-10 finals are absent from it."
+ },
+ "gate": {
+  "available": true,
+  "file": "data/audit/official_verification.json",
+  "generated_at": "2026-11-16T18:05:02+00:00",
+  "result": "PASS",
+  "passed": 20,
+  "flagged": 8,
+  "failed": 0,
+  "checks": 2,
+  "verdict": "pass",
+  "games_check": "games played = half the sum of club games",
+  "games_status": "PASS",
+  "games_rows": 149,
+  "games_detail": "current official standings imply 149"
  }
 }
