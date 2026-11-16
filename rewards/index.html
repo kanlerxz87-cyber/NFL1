@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reward Board · NFL Reward Board</title>
+<meta name="description" content="Pre-registered, non-monetary badge rule for the NFL1 strategy competition: proper-score qualification, then prospective CLV/ROI escrow. Frozen before grading.">
+<link rel="stylesheet" href="assets/rewards.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="top-in">
+  <a class="brand" href="index.html"><span class="mark">NFL</span><span>Reward Board<small>frozen rule · non-monetary badges</small></span></a>
+  <nav class="main" aria-label="Sections"><a href="index.html" aria-current="page">Reward Board</a></nav>
+</div></header>
+<main id="main">
+  <section class="page-head">
+    <p class="eyebrow">Pre-registered competition rewards</p>
+    <h1>Reward Board</h1>
+    <p class="lede">The frozen, two-stage rule that decides which strategies earn a non-monetary badge, and the honest status of every track today.</p>
+    <p class="stamp">Built registered commit fb7576223ea0 · rule sha256 706901f3f5c1 · registration commit fb7576223ea0 · every table row links to its source</p>
+  </section>
+  
+<div class="callout"><strong>Read this first.</strong> Two-stage reward rule. Stage 1 (proper-score qualification) awards a Verified Signal badge when a strategy&#x27;s Brier skill lower bound is &gt; 0, its BH-adjusted p-value is &lt; 0.05 (and it clears Bonferroni 0.05/N_tests), and its decided-bet sample is &gt;= 200, on a frozen walk-forward window. Stage 2 (prospective CLV/ROI escrow) awards the Top Single Bet / Top Parlay / Top Player Prop Combo badge to the rank-1 eligible strategy whose prospective ROI lower bound is &gt; 0. No badge is awarded if no strategy qualifies. This is a
+<strong>pre-registered proposal (policy)</strong>, frozen before any strategy is graded against it.
+It is not an official NFL fact: the league publishes no reward programme. The thresholds are taken
+from this repository's own proper-score method, not invented.</div>
+<div class="kpis"><article class="kpi"><span class="label">Tracks</span><span class="value">3</span><span class="note">Single bet · Parlay · Player prop combo (the three competition tracks)</span></article><article class="kpi"><span class="label">Badges awarded</span><span class="value">0</span><span class="note">None. The rule is frozen and waiting for a strategy that clears Stage 1. A winner is never fabricated.</span></article><article class="kpi"><span class="label">Stage-1 qualified</span><span class="value">0</span><span class="note">no strategy clears all three Stage-1 conditions today (any_eligible=false)</span></article><article class="kpi"><span class="label">Monetary value</span><span class="value">none</span><span class="note">badges are non-monetary by rule; no cash value is attached</span></article></div>
+
+<h2>The two stages</h2>
+<div class="cols">
+  <div class="panel"><h3>Stage 1 — Proper-Score Qualification</h3>
+    <p>A strategy earns the <strong>Verified Signal</strong> badge when, on a frozen walk-forward
+    out-of-sample window, its Brier skill <em>lower bound</em> is &gt; 0, its BH-adjusted p-value is
+    &lt; 0.05 (and it clears Bonferroni 0.05 / N_tests), and its decided-bet sample is &ge; 200.</p>
+    <p class="small">Value: 1 qualification point and Stage-2 eligibility in the track.</p>
+  </div>
+  <div class="panel"><h3>Stage 2 — Prospective CLV / ROI Escrow</h3>
+    <p>Only Stage-1-qualified strategies enter a registered multi-week prospective escrow. The
+    <strong>Top {Track}</strong> badge goes to the rank-1 eligible strategy whose
+    prospective ROI lower bound is &gt; 0. If none qualifies, no badge is awarded.</p>
+    <p class="small">Value: the track badge plus rank 1 in the track. Non-monetary.</p>
+  </div>
+</div>
+
+<h2>Frozen thresholds</h2>
+<div class="table-wrap"><table class=""><caption>The frozen numeric thresholds of the reward rule</caption><thead><tr><th>ID</th><th>Threshold</th><th>Frozen value</th><th class="num">Numeric</th><th>Applies to</th><th>Source</th></tr></thead><tbody><tr><td class="key">T1</td><td>skill lower bound</td><td>&gt; 0</td><td class="num">0.0</td><td>Stage 1 — Verified Signal</td><td class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/proper_score.json" rel="noopener">data/strat/proper_score.json eligibility_rule</a></td></tr><tr><td class="key">T2</td><td>BH-adjusted p-value</td><td>&lt; 0.05</td><td class="num">0.05</td><td>Stage 1 — Verified Signal</td><td class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/proper_score.json" rel="noopener">standard false-discovery control (Benjamini-Hochberg)</a></td></tr><tr><td class="key">T3</td><td>Bonferroni alpha</td><td>0.05 / N_tests</td><td class="num">0.008333333333333333</td><td>Stage 1 — Verified Signal</td><td class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/proper_score.json" rel="noopener">data/strat/proper_score.json multiplicity family (N_tests = 6 at registration)</a></td></tr><tr><td class="key">T4</td><td>decided-bet sample floor</td><td>&gt;= 200</td><td class="num">200</td><td>Stage 1 — Verified Signal</td><td class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/proper_score.json" rel="noopener">data/strat/proper_score.json method.min_sample</a></td></tr><tr><td class="key">T5</td><td>Stage-2 prospective ROI lower bound</td><td>&gt; 0</td><td class="num">0.0</td><td>Stage 2 — track badge</td><td class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/rewards/REWARDS-RULE.md" rel="noopener">REWARDS-RULE.md (prospective escrow)</a></td></tr><tr><td class="key">T6</td><td>re-promotion sample</td><td>200 settled bets</td><td class="num">200</td><td>demotion / re-promotion</td><td class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/demotion_rules.json" rel="noopener">data/strat/demotion_rules.json repromotion</a></td></tr></tbody></table></div>
+
+<h2>Qualification status, by track</h2>
+<div class="table-wrap"><table class=""><caption>Per-track qualification status — a badge is never fabricated</caption><thead><tr><th>Track</th><th>Badge</th><th>Stage 1 (qualification)</th><th>Stage 2 (escrow)</th><th>Status reason</th><th>Source</th></tr></thead><tbody><tr><td class="key">Single bet</td><td>Top Single Bet</td><td><span class="b b-bad">not qualified</span></td><td><span class="b b-warn">no escrow</span></td><td>no strategy in this track clears all three Stage-1 conditions (data/strat/proper_score.json any_eligible=false)</td><td class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/proper_score.json" rel="noopener">proper-score result</a></td></tr><tr><td class="key">Parlay</td><td>Top Parlay</td><td><span class="b b-bad">not qualified</span></td><td><span class="b b-warn">no escrow</span></td><td>no strategy in this track clears all three Stage-1 conditions; the parlay market is additionally not scored (no validated joint probability, data/strat/proper_score.json)</td><td class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/proper_score.json" rel="noopener">proper-score result</a></td></tr><tr><td class="key">Player prop combo</td><td>Top Player Prop Combo</td><td><span class="b b-bad">not qualified</span></td><td><span class="b b-warn">no escrow</span></td><td>no strategy in this track clears all three Stage-1 conditions; the player-prop market is not scored (no official or book-level price, data/strat/proper_score.json)</td><td class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/proper_score.json" rel="noopener">proper-score result</a></td></tr></tbody></table></div>
+
+<h2>Badges awarded</h2>
+<div class="callout"><strong>No badge is awarded.</strong> None. The rule is frozen and waiting for a strategy that clears Stage 1. A winner is never fabricated. The rule is frozen and waiting for a strategy that clears Stage 1.</div>
+
+<h2>Demotion and re-promotion</h2>
+<p>A badged strategy returns to paper if it trips demotion rule D1-D5 (data/strat/demotion_rules.json). Re-promotion requires a fresh prospective sample of 200 settled bets clearing D1-D3 in the opposite direction.</p>
+<p class="small">Source: <a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/demotion_rules.json" rel="noopener">data/strat/demotion_rules.json</a></p>
+
+<h2>What would change our mind</h2>
+<div class="cols">
+  <div class="panel"><h3>Upside — a badge is earned</h3><p>A strategy earns the Verified Signal badge when its Brier skill lower bound is &gt; 0, its BH-adjusted p-value is &lt; 0.05 (and clears Bonferroni 0.05/N_tests), and its decided-bet sample is &gt;= 200 on a frozen walk-forward window; a track badge follows when its prospective ROI lower bound is &gt; 0 over the registered escrow window.</p></div>
+  <div class="panel"><h3>Downside — a badge is withdrawn</h3><p>A badge is withdrawn when the skill lower bound falls to &lt;= 0, or the BH-adjusted p-value rises to &gt;= 0.05, or the sample falls below the track floor, or any demotion rule D1-D5 trips.</p></div>
+</div>
+
+<h2>What this board never publishes</h2>
+<ul class="tight">
+  <li><strong>Backtest performance numbers.</strong> No ROI, win rate, hit rate, profit or rank
+  derived from a backtest appears here. Stage 1 publishes the rule, the thresholds and a
+  qualification status — never a backtest figure. The underlying proper-score result is linked,
+  not re-published.</li>
+  <li><strong>A badge without a cleared Stage-1 gate.</strong> No exceptions.</li>
+  <li><strong>A monetary value.</strong> Badges are non-monetary by rule.</li>
+</ul>
+
+<h2>Sources</h2>
+<ul class="ev"><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/rewards/REWARDS-RULE.md" rel="noopener">Reward rule (frozen)</a></li><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/rewards/thresholds.json" rel="noopener">Frozen thresholds</a></li><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/proper_score.json" rel="noopener">Proper-score method &amp; eligibility</a></li><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/demotion_rules.json" rel="noopener">Demotion rules</a></li><li><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/strat/index.html" rel="noopener">Strategy competition sub-site</a></li></ul>
+
+</main>
+<footer><div class="foot-in">
+  <div><strong>NFL Reward Board</strong>A pre-registered proposal (policy), not an official NFL fact. Rewards are
+  non-monetary badges. No backtest performance number is published on this board.</div>
+  <div>Rule: <a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/rewards/REWARDS-RULE.md" rel="noopener">REWARDS-RULE.md</a> ·
+  Competition: <a href="../strat/index.html">Strategy Competition</a> ·
+  Repository: <a href="https://github.com/kanlerxz87-cyber/NFL1" rel="noopener">kanlerxz87-cyber/NFL1</a></div>
+</div></footer>
+</body>
+</html>

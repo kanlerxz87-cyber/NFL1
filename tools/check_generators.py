@@ -42,6 +42,9 @@ GENERATORS = {
     # Session ed736fc3-nfl1: the Decision Desk sub-site. Pages are declared in a PAGES dict and
     # written under desk/; the generator writes them itself so the pattern reads the dict keys.
     "tools/desk/build_site.py": [r'^    "([a-z-]+\.html)": p_'],
+    # Session c5444cc9-nfl1 (MO-04): the reward-rule board. write() takes bare filenames;
+    # the generator writes them under rewards/ (prefix added in claims()).
+    "rewards/build.py": [r'write\(\s*"([^"/]+\.html)"'],
 }
 
 # explicit, documented ownership. Anything not here is reported, not assumed.
@@ -83,6 +86,8 @@ KNOWN_OWNERS = {
     "desk/executive-summary.html": "tools/desk/build_site.py",
     "desk/method.html": "tools/desk/build_site.py",
     "reserve/rows.html": "tools/build_reserve_site.py",
+    # Session c5444cc9-nfl1 (MO-04): the reward-rule board sub-site.
+    "rewards/index.html": "rewards/build.py",
     "prereg/registry.html": "prereg/build.py",
     "prereg/forecasts.html": "prereg/build.py",
     "prereg/archive.html": "prereg/build.py",
@@ -123,6 +128,8 @@ def claims():
             found = {"reserve/" + f for f in found}
         if gen == "tools/desk/build_site.py":
             found = {"desk/" + f for f in found}
+        if gen == "rewards/build.py":
+            found = {"rewards/" + f for f in found}
         for f in found:
             out.setdefault(f, set()).add(gen)
     return out

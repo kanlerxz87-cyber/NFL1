@@ -4178,3 +4178,106 @@ edited **by addition only** — one nav entry, one build step, one ownership lin
 so any conflict is textual and resolvable by keeping both sides.
 
 _This claim is committed and pushed before any other file in the scope is touched._
+
+## Session `c5444cc9-nfl1` — claims (branch `arena/c5444cc9-nfl1`, base `46c82aec619b1f9e449bb4adaeef1edce5183319` on `main`, 2026-11-16)
+
+Claimed before any edit on this branch. Scope is **additive**; no file owned by another session is
+rewritten. The board was read in full first. The readiness register (`room/data/readiness.json`,
+built 2026-11-15 by `07810d9f`) marks `MO-04` *Not verified* — *"Treat it as a leaderboard
+competition with rewards for top strategies"*, blocked by *"Reward values not set"*, clearing when
+*"A published reward rule with values"* exists. `data/leaderboard_rules.json` rule LB-05 states
+*"Reward values are blank and flagged"*. No open pull request (checked: #47, #57, #59, #77, #79,
+#80, #81, #91, #92, #94, #99, #100, #101) touches a reward file. `data/strat/` carries the
+proper-score leaderboard, demotion gate, dual totals and controls but **no reward rule**. This
+cluster is unclaimed.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| RW1 | Claim board + push claim before any other edit | done | `c5444cc9` | `COORDINATION.md` | this block |
+| RW2 | Pre-register the reward rule: freeze the rule text (Stage-1 proper-score qualification → Stage-2 prospective CLV/ROI escrow; non-monetary badge tiers with concrete numeric thresholds) in a results-free commit; the commit hash is the registration | in progress | `c5444cc9` | `rewards/REWARDS-RULE.md`, `rewards/README.md` | thresholds grounded in the repo's existing `data/strat/proper_score.json` method (BSS lower bound, BH/Bonferroni multiplicity, min_sample 200, game-cluster bootstrap); no backtest number may set a reward |
+| RW3 | Frozen reward data: `data/rewards/rewards.json` (rule + thresholds + registration hash + per-track status) and `data/rewards/thresholds.json` (the concrete numbers), plus a two-sided "what would change our mind" per rule | in progress | `c5444cc9` | `data/rewards/**` | honest status: no strategy is eligible today (`any_eligible=false`), so no badge is awarded — published blank, never fabricated |
+| RW4 | Self-contained additive sub-site `rewards/`: `rewards/build.py` renders `rewards/index.html` (+ escrow view) from committed data only; every table row carries a source/registration link; unverifiable cells blank and flagged | in progress | `c5444cc9` | `rewards/build.py`, `rewards/*.html` | additive; no existing page is deleted or rewritten |
+| RW5 | Verifier + tests: `rewards/verify.py` (registration hash reproduces from the committed rule file via `git log --diff-filter=A`; thresholds concrete, no blanks; no backtest number on the qualification board; every row sourced; local hrefs resolve) and `tests/test_rewards.py` | in progress | `c5444cc9` | `rewards/verify.py`, `tests/test_rewards.py` | mirrors the shadow-baseline registration gate (V1) and the reserve-register gate pattern |
+| RW6 | Additive integration only: one nav entry each in `pipeline/gen_site.py` (NAV/SIDEBAR) and `scripts/verified/normalize_nav.py` (CANON); one build step in `tools/build_site_all.py`; one ownership entry in `tools/check_generators.py` — pure additions, logged, no existing line edited | pending | `c5444cc9` | shared nav/build files (additive lines only) | the declared shared-file pattern every prior session used |
+| RW7 | Readiness register: update only the `MO-04` row (and the PR-21 two-stage cross-reference) in `scripts/brief_07810d9f/register.py` with the file-and-count evidence that clears the gate; regenerate; log the in-place row edit | pending | `c5444cc9` | `scripts/brief_07810d9f/register.py` (MO-04 row only) | the register is the single place the brief's requirement statuses live; edit limited to those rows, logged for the owning session |
+| RW8 | New irregularities, questions, suggestions from the sweep — append-only | pending | `c5444cc9` | `data/flags.json`, `data/questions.json`, `data/suggestions.json` | each entry cites a registered official source id where it is a data claim |
+| RW9 | Integration: canonical build, all gates green, PR → merge without waiting, confirm GitHub Pages deploy, record PR link + merge result here | pending | `c5444cc9` | generated pages, `COORDINATION.md` | flagged/unverified items do not block the merge |
+
+**What this session will not do (stated now so the absence is not read as oversight):** it will not
+invent an official "reward" fact — the reward rule is a **pre-registered proposal (policy)**, frozen
+before grading, not an NFL.com fact, and will be labelled as such on the page; it will not claim any
+strategy is profitable or eligible (the repo's own proper-score result is `any_eligible=false`); it
+will not award a badge to a strategy that did not clear the Stage-1 gate; it will not edit any
+generator, data file or page owned by another session beyond the declared additive shared-file lines
+and the single readiness row.
+
+_This claim is committed and pushed before any other file is touched, per the brief._
+
+---
+
+## Result log — session `c5444cc9-nfl1` (2026-11-16, reward-rule cluster, MO-04)
+
+Claim block above (RW1–RW9). What actually landed, and the numbers as published.
+
+| ID | Outcome | Evidence a reader can check |
+|---|---|---|
+| RW1 | Claim committed and pushed before any other file was touched | `5fe54c0` (claim), this block |
+| RW2 | Reward rule frozen in a results-free registration commit: two-stage rule (Stage-1 proper-score qualification → Stage-2 prospective CLV/ROI escrow), non-monetary badge tiers, demotion, two-sided mind-changers | `rewards/REWARDS-RULE.md`; registration commit `fb7576223ea08acf39910efcdb47c620980386aa`; `data/rewards/thresholds.json` |
+| RW3 | Frozen reward data + concrete thresholds + per-track status (no badge awarded) | `data/rewards/rewards.json`, `data/rewards/thresholds.json` |
+| RW4 | Self-contained additive sub-site `rewards/` (index.html) built from committed data only; every table row source-linked | `rewards/build.py`, `rewards/index.html`, `rewards/assets/rewards.css` |
+| RW5 | Verifier + 11 unit tests: rule drift (sha256 + registration commit), concrete thresholds, no backtest metric as a column, every row sourced, links resolve, reproducible build | `rewards/verify.py`, `tests/test_rewards.py` (Ran 11 tests, OK) |
+| RW6 | Additive integration only: nav (`pipeline/gen_site.py` NAV/SIDEBAR + `scripts/verified/normalize_nav.py` CANON), build step + diff path (`tools/build_site_all.py`), ownership (`tools/check_generators.py`), `verify.yml` gate step — pure additions, no existing line edited | diffs are additions only |
+| RW7 | Readiness MO-04 → **Done**, in place. **Only the MO-04 row changed** (13 insertions / 13 deletions); no other session's row was touched | `room/data/readiness.json` diff = 1 row; `scripts/brief_07810d9f/register.py` MO-04 row updated as the source of truth |
+| RW8 | Flag F68, question Q31, suggestion S33, sources S48–S49 appended (append-only; renumbered from S41/S42 after a rebase collided with main's S41–S47) | `data/flags.json` (117), `data/questions.json` (31), `data/suggestions.json` (35), `data/sources.json` (48) |
+| RW9 | Integration: canonical build, all gates, PR → merge → Pages confirm | see merge record below |
+
+**The rule, in numbers.** Stage 1 (Verified Signal badge) requires, on a frozen walk-forward
+window: Brier skill **lower bound > 0**; **BH-adjusted p < 0.05** and Bonferroni **0.05/6**;
+decided-bet sample **≥ 200**. Stage 2 (Top Single Bet / Top Parlay / Top Player Prop Combo)
+ranks Stage-1-qualified strategies by prospective CLV lower bound and awards the track badge to
+rank 1 whose **prospective ROI lower bound > 0**. Demotion = the repo's existing D1–D5;
+re-promotion = a fresh 200-bet prospective sample. **No badge is awarded today**: the repo's own
+proper-score result is `any_eligible = false` (`data/strat/proper_score.json`), so every track
+status is `not_qualified` / `no_escrow` and the badge cell is blank — never fabricated.
+
+**Honest labelling.** The reward rule is a **pre-registered proposal (policy)**, not an official
+NFL fact (the league publishes no reward programme). The thresholds are taken from the repo's own
+proper-score method, not invented. This is stated on the page and in the data.
+
+**Sources.** The reward rule is grounded in repo artifacts, each linked on the page:
+`data/strat/proper_score.json` (method, eligibility, multiplicity family of 6 tests, min_sample
+200), `data/strat/demotion_rules.json` (D1–D5, repromotion). No official league page is cited for
+the rule itself because none exists; the page says so.
+
+**Verification performed (all exit 0 on the committed tree).**
+`tools/build_site_all.py --check` (committed pages == generated) · `tools/check_generators.py`
+(PASS, `rewards/index.html` owned by `rewards/build.py`) · `rewards/verify.py` (PASS) ·
+`tests/test_rewards.py` (11 OK) · `tools/verify.py` (2124 rows, all with an official source link,
+0 broken) · `strat/verify.py` (13 pages, 549 rows, PASS — no regression) ·
+`python3 -m unittest discover -s tests -q` (OK) · `tools/check_reachability.py` (exit 0).
+
+**Irregularity raised (F68, open, non-blocking).** Running `scripts/brief_07810d9f/register.py`
+to regenerate `room/data/readiness.json` reverts in-place row edits made by other sessions
+(IN-20/22/26/27, PR-18/24/25): a single-row MO-04 update regenerated 16 rows and reverted four
+Done/Partial rows to Not started. The regeneration was **reverted** and the MO-04 row was applied
+**in place** so no other session's row was touched. Owner decision logged (fold the in-place edits
+back into register.py, or make it merge rather than overwrite). Published on the Flagged for
+Review page.
+
+**Shared-file etiquette.** `pipeline/gen_site.py`, `scripts/verified/normalize_nav.py`,
+`tools/build_site_all.py`, `tools/check_generators.py`, `.github/workflows/verify.yml` are shared.
+Every edit is **pure addition of new lines** (one nav entry in each of two lists, one build step,
+one diff-path token, one generator pattern + one prefix branch + one ownership line, one workflow
+step). No existing line was edited, reordered or renamed. `room/data/readiness.json` and
+`scripts/brief_07810d9f/register.py` were edited **only** in the MO-04 row. `data/strat/**` and
+`strat/**` were regenerated only to run their gate and were **reverted** — not part of this scope.
+
+**Deviations.** Branch name is Arena-fixed (`arena/c5444cc9-nfl1`), not `session-<id>/<task>`; the
+scope was kept non-overlapping by file. The registration commit is `fb757622` (rule + thresholds
+only, results-free); the machinery, integration and register appends are in later commits on the
+same branch. **Rebase note:** the branch was rebased onto `main` (which had advanced with a data-bot
+refresh and other sessions' work) before pushing; the rebase rewrote the registration commit hash
+(`00e3cc77` → `fb757622`), so `data/rewards/rewards.json` and this log were updated to the rebased
+hash. The rule file's content SHA-256 is unchanged, so the registration is intact; only the commit
+pointer moved. The appended sources were renumbered S41/S42 → S48/S49 because `main` had already
+used S41–S47.

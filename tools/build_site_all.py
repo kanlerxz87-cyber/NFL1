@@ -67,6 +67,9 @@ STEPS = [
     # data/reserve/. Additive step, same reason as above: before the landing page.
     ("transactions & reserve sub-site (reserve/)",
      [sys.executable, "tools/build_reserve_site.py"], ROOT),
+    # Session c5444cc9-nfl1 (MO-04): the pre-registered reward-rule board, rendered from
+    # data/rewards/. Additive step, before the landing page so the landing nav can link it.
+    ("reward board (rewards/)", [sys.executable, "rewards/build.py"], ROOT),
     # session 55dc53f4-nfl1 (P5/P6): the per-team injury view and the 13-vs-15-Nov delta are built
     # from committed capture files, then the shadow/ sub-site. Before the landing page, as above.
     ("shadow team view and delta", [sys.executable, "tools/build_team_view.py"], ROOT),
@@ -104,7 +107,7 @@ def main() -> int:
 
     if check:
         print("--- checking that the committed pages equal the generated pages")
-        r = subprocess.run(["git", "diff", "--exit-code", "--", "*.html", "README.md", "docs/", "verified-lab/", "referee/", "reserve/"],
+        r = subprocess.run(["git", "diff", "--exit-code", "--", "*.html", "README.md", "docs/", "verified-lab/", "referee/", "reserve/", "rewards/"],
                            cwd=ROOT)
         if r.returncode != 0:
             print("FAILED: the committed pages differ from the generated pages "

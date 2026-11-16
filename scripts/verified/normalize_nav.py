@@ -60,6 +60,10 @@ CANON = [
     # Session c7b65577-nfl1: the strategy competition.  Added to both nav lists at once because
     # this file and pipeline/gen_site.py are documented as needing to stay byte-identical.
     ("strat/index.html", "Strategy Competition"),
+    # Session c5444cc9-nfl1 (MO-04): the pre-registered reward-rule board. Added to both nav
+    # lists at once because this file and pipeline/gen_site.py are documented as needing to
+    # stay byte-identical. Additive entry only.
+    ("rewards/index.html", "Rewards"),
     # pages produced by the other generators in this repository, kept in the shared
     # navigation so no session's page can become unreachable
     ("executive-summary.html", "Executive Summary (companion)"),

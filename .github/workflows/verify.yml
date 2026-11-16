@@ -111,3 +111,12 @@ jobs:
           python3 tools/check_scraper_pins.py --self-test
       - name: Strategy competition unit tests
         run: python3 -m unittest tests.test_strat_competition -v
+      # Session c5444cc9-nfl1 (MO-04). Additive: the reward-rule board brings its own gate —
+      # the frozen rule must not have drifted (sha256 + registration commit), the thresholds
+      # must be concrete, no backtest metric may be a table column, every row must carry a
+      # source link, and the build must be reproducible. Nothing above is modified.
+      - name: Build and gate the reward board
+        run: |
+          python3 rewards/build.py
+          python3 rewards/verify.py
+          python3 -m unittest tests.test_rewards -v

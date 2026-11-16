@@ -59,6 +59,9 @@ NAV = [
     ("review-room/index.html", "Review Room"),
     ("research/index.html", "s9cb Research"),
     ("strat/index.html", "Strategy Competition"),
+    # Session c5444cc9-nfl1 (MO-04): the pre-registered, non-monetary reward-rule board.
+    # Additive entry only; no other session's entry is moved or renamed.
+    ("rewards/index.html", "Rewards"),
     # pages produced by the other generators in this repository, kept in the shared
     # navigation so no session's page can become unreachable
     ("pages/executive-summary.html", "Executive Summary (companion)"),
@@ -86,6 +89,7 @@ SIDEBAR = [
     ("Lines & model", [("pages/lines.html", "My Lines"),
                            ("pages/correlations.html", "Correlations")]),
     ("Competition", [("strat/index.html", "Strategy Competition"),
+                     ("rewards/index.html", "Rewards"),
                      ("pages/strategies.html", "Strategy Lab"),
                      ("pages/luck.html", "Skill vs Luck"),
                      ("pages/parlays.html", "Parlays & Combos"),
