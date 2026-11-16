@@ -3790,3 +3790,36 @@ Scope is deliberately small: this session can verify against official pages, not
 | Still open | F51, F60 (terms — owner/counsel decision), F61 (NFL log gap), F62 (verifier allow-list for team posts). None blocks; all need review. |
 
 Z1–Z4 are done. Items in the brief outside Z1–Z4 are unclaimed and unchanged.
+
+---
+
+
+### Rebase conflict log — `881fbd06-nfl1` (2026-11-16 UTC)
+
+The required `git pull --rebase origin main` for the claim-scope update found that `main` had
+advanced from `32a8fffe` to `2901cea` (PRs #89/#90, including the `bf0e6e5f` terms/transaction
+audit) while this branch was active. Both sessions appended task-board records at end-of-file,
+so `COORDINATION.md` conflicted. Resolved as a union: all `bf0e6e5f` records remain intact,
+and this session's claim follows them. No other session's data or board entry was removed.
+
+
+---
+
+# Session `881fbd06-nfl1` — claim and integration plan (2026-11-16 UTC)
+
+Read the board before edits: yes. Arena fixes this session to `arena/881fbd06-nfl1` at
+`32a8fffe19c6b474a142f0accbc93474cf122908`; I will stay on this branch and will not create,
+switch to, or push another branch. This is the final integration/audit pass for the requested
+site work. Existing work in other session scopes is not overwritten; any stale PR takeover is
+limited to integrating its already-published diff after checking its source, gates and file list.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| I1 | Audit and correct model-vs-market line sign/provenance handling; add regression tests and publish a reproducible explanation, keeping unknown or non-official prices labelled/unavailable per policy | in progress | `881fbd06` | `pipeline/build_all.py`, `pipeline/gen_site.py` (only after reconciling PR #80's additive nav), `tests/test_line_signs.py`, generated model/site outputs, `COORDINATION.md`; append-only flag if needed | First audit finding: Week 11 IND@HOU prints `HOU -5.7` vs `HOU +10.0` but the current difference is `-4.32`; the generated arithmetic appears to compare home margin with the home betting spread without converting signs. Recompute from source semantics before changing it. |
+| I2 | Reconcile stale open integration PRs #77, #79, #80 and #81; run the reproducible build, source/provenance gates and site checks; open/merge a PR from this branch only after all required checks pass; confirm Pages and record the result | in progress | `881fbd06` | `COORDINATION.md`, scoped additive integration updates, generated pages | PR #77 has a failing source-audit check; PR #80 uses third-party prices and publishes its own defects as flags; neither is treated as verified until rechecked. No work is being done in those session branches. |
+
+No code or generated output is claimed as verified by this entry. The line-sign issue is a
+hypothesis to test against the pinned data dictionary and model formulas; it will be fixed only
+if the source semantics confirm it. PRs #77/#79/#80/#81 were last updated 2026-11-15, more than
+60 minutes before this claim; any takeover remains subject to a logged handoff and current-branch
+integration only, consistent with the platform's fixed-branch constraint.
