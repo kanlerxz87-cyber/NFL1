@@ -45,6 +45,10 @@ NAV = [
     ("reserve/index.html", "Transactions & Reserve"),
     # Session 49ac3a99-nfl1 (IN-31): the dated schedule announcement beside the live schedule. Additive.
     ("schedule_announcement/index.html", "Schedule Announcement"),
+    # Session d9e28eb2-nfl1 (G5): the official Game Book capture sub-site under gamebooks/.
+    # Same relative position in scripts/verified/normalize_nav.py CANON — the two lists are
+    # kept in step so check_reachability.py can find every published page.
+    ("gamebooks/index.html", "Game Books"),
     ("pages/questions.html", "Questions"),
     ("pages/suggestions.html", "Suggestions"),
     ("pages/evidence.html", "Evidence"),
@@ -100,7 +104,9 @@ SIDEBAR = [
                       # Session 1d824ec2-nfl1: dated roster events, additive.
                       ("reserve/index.html", "Transactions & Reserve"),
                       # Session 49ac3a99-nfl1 (IN-31): additive.
-                      ("schedule_announcement/index.html", "Schedule Announcement")]),
+                      ("schedule_announcement/index.html", "Schedule Announcement"),
+                      # Session d9e28eb2-nfl1 (G5): official Game Books, additive.
+                      ("gamebooks/index.html", "Game Books")]),
     ("Decisions", [("pages/questions.html", "Questions"),
                    ("pages/suggestions.html", "Suggestions")]),
     ("Evidence", [("pages/evidence.html", "Evidence"),

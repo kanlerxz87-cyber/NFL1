@@ -79,6 +79,9 @@ STEPS = [
     # committed desk/ pages are not what the data produces.
     ("decision desk sub-site (desk/)", [sys.executable, "tools/desk/build_site.py"], ROOT),
     ("decision desk verification", [sys.executable, "tools/desk/verify_site.py"], ROOT),
+    # session d9e28eb2-nfl1 (G5): the official Game Book sub-site, rendered from
+    # data/gamebooks/. Before the landing page, as above, so its nav entry resolves.
+    ("gamebooks sub-site", [sys.executable, "tools/build_gamebooks.py"], ROOT),
     ("landing page and decision lab", [sys.executable, "gen_site.py"], os.path.join(ROOT, "pipeline")),
     # Session 90c2b454-nfl1 (P3): the injury-snapshot ledger, rendered from its own store.
     ("injury snapshot ledger", [sys.executable, "tools/build_snapshots_page.py"], ROOT),
@@ -107,7 +110,7 @@ def main() -> int:
 
     if check:
         print("--- checking that the committed pages equal the generated pages")
-        r = subprocess.run(["git", "diff", "--exit-code", "--", "*.html", "README.md", "docs/", "verified-lab/", "referee/", "reserve/", "rewards/"],
+        r = subprocess.run(["git", "diff", "--exit-code", "--", "*.html", "README.md", "docs/", "verified-lab/", "referee/", "reserve/", "rewards/", "gamebooks/", "data/gamebooks/"],
                            cwd=ROOT)
         if r.returncode != 0:
             print("FAILED: the committed pages differ from the generated pages "

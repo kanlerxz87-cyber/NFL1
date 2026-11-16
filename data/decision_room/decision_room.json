@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-16T18:32:49+00:00",
+ "generated_at": "2026-11-16T19:59:51+00:00",
  "evidence": {
   "season": 2026,
   "week_complete": 10,
@@ -2772,6 +2772,72 @@
    "action": "Owner decision: fold the in-place row edits back into register.py (so the script and the published file agree), then regenerate once; or make register.py merge in-place edits instead of overwriting them. Until then, update readiness rows in place and do not regenerate the whole file from register.py.",
    "verified": true,
    "retrieved": "2026-11-16"
+  },
+  {
+   "id": "F69",
+   "status": "Open - flagged for review",
+   "retrieved": "2026-11-16",
+   "category": "Game Book extraction \u2014 status labels absent (CAR@NO)",
+   "description": "The Carolina at New Orleans Game Book PDF text extraction lost the 'Did Not Play' and 'Not Active' label rows entirely: four unlabelled paragraphs follow the two Substitutions labels (Carolina subs, a 7-player paragraph, New Orleans subs, a 6-player paragraph), and no Not Active section for either club survived. data/gamebooks/parsed.json therefore stores blank status fields for both clubs and raises STATUS_LABELS_ABSENT; the paragraphs are recorded verbatim in the raw capture with an extraction_note.",
+   "impact": "Carolina and New Orleans game-day status is blank in the structured data for Week 10; the availability graph and any inactives backtest miss these two clubs until the PDF is re-read another way.",
+   "src": "S47",
+   "action": "Re-extract the CAR@NO Game Book PDF (or read it page by page) and bind the paragraphs to their clubs only when a printed label or column position proves the binding; until then the fields stay blank.",
+   "verified": true
+  },
+  {
+   "id": "F70",
+   "status": "Open - flagged for review",
+   "retrieved": "2026-11-16",
+   "category": "Game Book extraction \u2014 prose status + unattributed list (KC@ATL)",
+   "description": "The Kansas City at Atlanta Game Book prints status sections as prose headings rather than table labels: a Did Not Play list for Kansas City, 'QB 1 T.Tagovailoa' under a second Did Not Play heading, then a 7-player list (D.Deablo, Av.Terrell, A.Dalton, Z.Branch, J.Strand, R.Longerbeam, C.Williams) with NO section header, and no Kansas City Not Active section anywhere in the extraction. parsed.json keeps both status fields blank (STATUS_LABELS_ABSENT + STATUS_PROSE_FORMAT) and stores the headerless list unattributed (STATUS_UNATTRIBUTED).",
+   "impact": "Atlanta and Kansas City game-day status is blank in the structured data; the unattributed list cannot be safely bound to a club, so it is excluded from the injury-read match.",
+   "src": "S43",
+   "action": "Re-extract the KC@ATL Game Book PDF and bind the headerless list only if a printed label or column position proves which club and section it belongs to.",
+   "verified": true
+  },
+  {
+   "id": "F71",
+   "status": "Open - flagged for review",
+   "retrieved": "2026-11-16",
+   "category": "Game Book extraction \u2014 starter names absent (SF@DAL)",
+   "description": "The San Francisco at Dallas Game Book text extraction prints every Dallas defensive starter as position + number only (for example 'OLB 40' with no name) \u2014 11 rows affected. parsed.json stores an empty name for each and raises LINEUP_NAME_BLANK; nothing is filled in from rosters or other sources.",
+   "impact": "Dallas' defensive starters are published with blank names for Week 10; any join on player name for that unit fails closed rather than guessing.",
+   "src": "S52",
+   "action": "Re-extract the SF@DAL Game Book PDF to recover the missing name column; until then the blanks stay blank.",
+   "verified": true
+  },
+  {
+   "id": "F72",
+   "status": "Open - flagged for review",
+   "retrieved": "2026-11-16",
+   "category": "Game Book extraction \u2014 empty Did Not Play cell (BUF@NYJ)",
+   "description": "In the Buffalo at New York Jets extraction the Jets substitution list sits inside the row that begins with the Buffalo 'Did Not Play' label, and after the Buffalo Did Not Play content ('T 76 B.Freeland') the Jets Did Not Play cell carries no content at all before the Not Active row. parsed.json records the Jets Did Not Play as an empty list (label printed, nothing extracted), not as inferred.",
+   "impact": "The Jets' dressed-but-unused list is unknown for Week 10; only their Not Active list (5 players) is published.",
+   "src": "S48",
+   "action": "Re-extract the BUF@NYJ Game Book PDF; if the cell is genuinely empty on the page, close the flag with that evidence.",
+   "verified": true
+  },
+  {
+   "id": "F73",
+   "status": "Open - flagged for review",
+   "retrieved": "2026-11-16",
+   "category": "Game Book extraction \u2014 truncated substitutions (PIT@CIN)",
+   "description": "The Pittsburgh at Cincinnati Game Book dumps the Cincinnati substitution list as a loose paragraph after the eighth scoring row and it is TRUNCATED: it ends 'DT 90 K.Jenkins,' with a trailing comma, and no continuation exists in chunks 0-1 of the PDF (verified by fetching the next chunk). The two Did Not Play cells also print with labels but no content.",
+   "impact": "The Cincinnati substitution list is incomplete in the capture; both clubs' Did Not Play lists are recorded empty-as-extracted.",
+   "src": "S53",
+   "action": "Re-extract the PIT@CIN Game Book PDF (later pages carry the list tail) and append the missing entries to the raw capture with a new hash.",
+   "verified": true
+  },
+  {
+   "id": "F74",
+   "status": "Open - flagged for review",
+   "retrieved": "2026-11-16",
+   "category": "Game Book extraction \u2014 fragmented substitutions (SEA@LV)",
+   "description": "The Seattle at Las Vegas Game Book text extraction splits both substitution lists across a page break: a cut header fragment before the table, two cells inside the lineup table, and four loose fragment lines after Paid Attendance. The fragments are recorded verbatim and NOT reassembled, because cross-fragment team binding and continuation points are not printed unambiguously.",
+   "impact": "Neither club's substitution list is published in structured form for Week 10; starters, Did Not Play and Not Active for this game parsed cleanly.",
+   "src": "S51",
+   "action": "Re-extract the SEA@LV Game Book PDF and reassemble the lists only where the page layout proves the continuation.",
+   "verified": true
   }
  ]
 }
