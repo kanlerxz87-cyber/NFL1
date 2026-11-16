@@ -103,6 +103,14 @@ def main() -> int:
     t1 = {r["team"]: r for r in read_tsv(os.path.join(AUDIT, "standings_retrieval_T1.tsv"))}
     t2 = {r["team"]: r for r in read_tsv(os.path.join(AUDIT, "standings_retrieval_T2.tsv"))}
     t3 = {r["team"]: r for r in read_tsv(os.path.join(AUDIT, "standings_retrieval_T3_20261113.tsv"))}
+    # Session 49ac3a99-nfl1: T5 (2026-11-16, both chunks of the official division standings) is the
+    # current-state retrieval from this point on. T3 remains the historical read of 2026-11-13.
+    t5 = {r["team"]: r for r in read_tsv(os.path.join("data", "audit", "49ac3a99", "standings_retrieval_T5_20261116.tsv"))}
+    check("standings transcription rows (T5)", len(t5) == 32, f"T5 rows={len(t5)} (expected 32)")
+    check("T5 league wins equal losses", sum(int(r["w"]) for r in t5.values()) == sum(int(r["l"]) for r in t5.values()),
+          "T5 W and L totals")
+    check("T5 league points balance", sum(int(r["pf"]) for r in t5.values()) == sum(int(r["pa"]) for r in t5.values()),
+          "T5 PF and PA totals")
     check("standings transcription rows", len(t1) == 32 and len(t2) == 32,
           f"T1 rows={len(t1)} T2 rows={len(t2)} (expected 32 each)")
     check("same clubs in both retrievals", set(t1) == set(t2),
@@ -220,8 +228,8 @@ def main() -> int:
         return t1.get(norm(team))
 
     def official_live(team):
-        """Current official row (retrieval T3, 2026-11-13) for current-state comparisons."""
-        return t3.get(norm(team))
+        """Current official row (retrieval T5, 2026-11-16) for current-state comparisons."""
+        return t5.get(norm(team))
 
     snap = json.load(open(os.path.join(ROOT, "data", "model", "snapshot.json"), encoding="utf-8"))
     for r in snap["standings"]:
@@ -312,7 +320,9 @@ def main() -> int:
             parts = g[f"{side}_record"].split("-")
             w, l = parts[0], parts[1]
             t = parts[2] if len(parts) > 2 else "0"
-            off = official_live(team)
+            # Same-time comparison: the Week-11 schedule was read on 2026-11-13, so its printed
+            # records are compared with the T3 standings of that date, not with the 2026-11-16 T5.
+            off = t3.get(norm(team))
             if not off:
                 continue
             check(f"schedule record {team} ({side})",
