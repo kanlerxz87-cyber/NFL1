@@ -14,13 +14,18 @@ Rule
   it was built from;
 * a data file may never be newer than the newest page that displays it (with a tolerance so
   that a render immediately after a refresh is allowed);
-* the JSON produced by the decision-room step must be newer than the files it reads.
+* the JSON produced by the decision-room step must record the content hashes of the files it
+  reads (``input_hashes``), and must be rebuilt when any of those files' *content* changes.
+  Hashes, not mtimes (flag F67): re-stamping a file without changing its bytes is not a
+  content change and must not make its output stale, and a real content change must not be
+  hidden by a rebuild that writes nothing.
 
 Run: python3 tools/check_freshness.py [--fix-report]
 Exit 1 when the site is stale.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import re
@@ -91,24 +96,38 @@ def main() -> int:
         problems.append("model pages are stale relative to data/model/dashboard.json: "
                         + "; ".join(stale_model_pages[:6]))
 
-    # 3. the decision room must be newer than every input it reads
+    # 3. the decision room must be rebuilt when the CONTENT of an input changes.
+    # (Flag F67: compare sha256 content hashes recorded at build time, not file
+    # mtimes.  A file that was re-stamped with identical bytes cannot make an
+    # output stale; a real content change cannot be hidden by stamp churn.)
     inputs = ["data/model/lines.json", "data/model/strategies.json",
               "data/model/availability.json", "data/model/props.json",
               "data/evidence/injuries_week10.json", "data/evidence/standings_2026.json",
               "data/audit/official_verification.json"]
-    dr_mtime = os.path.getmtime(os.path.join(ROOT, "data/decision_room/decision_room.json"))
-    older = []
+    rec = load("data/decision_room/decision_room.json")
+    recorded = rec.get("input_hashes") or {}
+    changed, unrecorded = [], []
     for i in inputs:
         p = os.path.join(ROOT, i)
         if not os.path.isfile(p):
             problems.append(f"missing input {i}")
             continue
         checked += 1
-        if os.path.getmtime(p) > dr_mtime + 1:
-            older.append(i)
-    if older:
-        problems.append("decision_room/decision_room.json is older than its inputs "
-                        f"({', '.join(older)}); re-run tools/build_decision_room.py")
+        h = hashlib.sha256()
+        with open(p, "rb") as f:
+            for chunk in iter(lambda: f.read(65536), b""):
+                h.update(chunk)
+        cur = h.hexdigest()
+        if i not in recorded:
+            unrecorded.append(i)
+        elif recorded[i] != cur:
+            changed.append(i)
+    if changed:
+        problems.append("decision_room/decision_room.json is stale: input content changed "
+                        f"({', '.join(changed)}); re-run tools/build_decision_room.py")
+    if unrecorded:
+        problems.append("decision_room/decision_room.json records no content hash for "
+                        f"({', '.join(unrecorded)}); re-run tools/build_decision_room.py")
 
     print(f"freshness assertions: {checked}")
     if problems:

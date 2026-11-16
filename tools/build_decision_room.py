@@ -18,11 +18,35 @@ tools/verify_decision_room.py fails the build if a published figure stops reprod
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 from datetime import datetime, timezone
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+
+# Content hashes of the freshness contract (tools/check_freshness.py, rule 3).
+# Recorded in the output so the freshness gate can tell "input content changed"
+# apart from "someone touched a timestamp" (flag F67): an output is stale only
+# when one of these files' BYTES changed since the output was built.  Keep this
+# list identical to INPUTS in tools/check_freshness.py.
+FRESHNESS_INPUTS = [
+    "data/model/lines.json",
+    "data/model/strategies.json",
+    "data/model/availability.json",
+    "data/model/props.json",
+    "data/evidence/injuries_week10.json",
+    "data/evidence/standings_2026.json",
+    "data/audit/official_verification.json",
+]
+
+
+def sha256_file(path: str) -> str:
+    h = hashlib.sha256()
+    with open(os.path.join(ROOT, path), "rb") as f:
+        for chunk in iter(lambda: f.read(65536), b""):
+            h.update(chunk)
+    return h.hexdigest()
 EVID = os.path.join(ROOT, "data", "evidence")
 OUT = os.path.join(ROOT, "data", "decision_room")
 BACKTEST_CACHE = os.path.join(OUT, "backtest_cache.json")
@@ -252,6 +276,10 @@ def main() -> int:
         paths=load("data/paths.json"),
         gates=load("data/validation_gates.json"),
         flags=load("data/flags.json"),
+        # F67: content hashes of the freshness contract's inputs, so
+        # tools/check_freshness.py compares bytes rather than file mtimes.
+        input_hashes={p: sha256_file(p) for p in FRESHNESS_INPUTS
+                      if os.path.isfile(os.path.join(ROOT, p))},
     )
     out_path = os.path.join(OUT, "decision_room.json")
     prior = {}
