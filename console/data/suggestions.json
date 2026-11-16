@@ -1,0 +1,548 @@
+{
+ "schema": "suggestions-and-paths/1",
+ "session": "ce097fea-nfl1",
+ "as_of": "2026-11-16",
+ "how_this_section_is_used": "Nothing here is implemented on the strength of this page. Each suggestion carries two or three paths with their cost, risk and what they unlock. A reviewer records a choice in console/data/decisions.json; only then does the work start. Until a choice is recorded the status is 'awaiting review'.",
+ "rows": [
+  {
+   "id": "S01",
+   "area": "Freshness",
+   "title": "Fail the build when the results feed is behind the official schedule",
+   "problem": "The feed holds 1 of 14 Week-10 results. Nothing failed, so any number computed today silently describes last week.",
+   "buys": "Every published weekly number carries a trustworthy as-of date.",
+   "cost": "Half a day.",
+   "risk": "A stale feed will start failing builds that used to pass.",
+   "options": [
+    {
+     "path": "Hard gate",
+     "detail": "Compare the last final in the feed with the last final on the official schedule page; fail the build on any gap.",
+     "cost": "0.5 day",
+     "risk": "Builds fail on Mondays until the feed refreshes."
+    },
+    {
+     "path": "Warning plus timestamp",
+     "detail": "Print the staleness in days on every page and let the build pass.",
+     "cost": "2 hours",
+     "risk": "A warning at the top of a page is easy to ignore."
+    }
+   ],
+   "recommended": "Hard gate",
+   "status": "awaiting review",
+   "evidence": "data/session-ce097fea/standings_verification_2026-11-16.json",
+   "source": "https://www.nfl.com/schedules/2026/REG11"
+  },
+  {
+   "id": "S02",
+   "area": "Capture",
+   "title": "Put a clock time and raw bytes on every injury read",
+   "problem": "Captures carry a date only, and we store rendered text rather than the page we read. Two reads cannot be ordered within a day, and a transcription cannot be audited.",
+   "buys": "The report becomes a series instead of a snapshot, which is the precondition for every injury feature the brief asks for.",
+   "cost": "One day plus storage.",
+   "risk": "Raw HTML is large; the repository will grow.",
+   "options": [
+    {
+     "path": "Commit raw bytes to the repository",
+     "detail": "Keep it simple and auditable; accept repository growth.",
+     "cost": "1 day",
+     "risk": "Repository size."
+    },
+    {
+     "path": "Store outside the site and keep a hash here",
+     "detail": "Satisfies the brief's durability requirement and keeps Pages small.",
+     "cost": "2 days",
+     "risk": "Needs somewhere to store it."
+    }
+   ],
+   "recommended": "Store outside the site and keep a hash here",
+   "status": "awaiting review",
+   "evidence": "data/session-ce097fea/capture/",
+   "source": "https://www.nfl.com/injuries/league/2026/reg10"
+  },
+  {
+   "id": "S03",
+   "area": "Capture",
+   "title": "Schedule the Wednesday, Thursday and Friday injury capture",
+   "problem": "We hold three reads taken on a Saturday, Sunday and Monday. Practice trends inside a week are invisible.",
+   "buys": "Designation changes become observable, which is the only honest way to use the injury signal.",
+   "cost": "One day.",
+   "risk": "A scheduled job can fail silently; it needs an alert.",
+   "options": [
+    {
+     "path": "GitHub Actions cron",
+     "detail": "Runs in this repository's existing Actions setup.",
+     "cost": "1 day",
+     "risk": "Silent failure unless an alert is added."
+    },
+    {
+     "path": "Cron plus a freshness alarm",
+     "detail": "The job and the check that it ran.",
+     "cost": "1.5 days",
+     "risk": "Slightly more to maintain."
+    }
+   ],
+   "recommended": "Cron plus a freshness alarm",
+   "status": "awaiting review",
+   "evidence": "data/session-ce097fea/injury_capture_delta.json",
+   "source": "https://www.nfl.com/injuries/league/2026/reg10"
+  },
+  {
+   "id": "S04",
+   "area": "Model",
+   "title": "Make the injury signal a change, not a level",
+   "problem": "Counting how many players are Out is a level. It carries no news, because the market already knows it.",
+   "buys": "A signal that can move a line instead of one that restates the table.",
+   "cost": "Blocked until S03 lands and four weeks of captures exist.",
+   "risk": "With too few reads the change is mostly noise.",
+   "options": [
+    {
+     "path": "Wait for four weeks of captures, then difference",
+     "detail": "Correct, but nothing ships this season until November is out.",
+     "cost": "4 weeks",
+     "risk": "Late."
+    },
+    {
+     "path": "Use last season's archive to prototype the formulation now",
+     "detail": "The historical feed has designations back to 2016, but only one read per week, so the change must be week-over-week.",
+     "cost": "2 days",
+     "risk": "Week-over-week is a weaker proxy than within-week."
+    }
+   ],
+   "recommended": "Use last season's archive to prototype the formulation now",
+   "status": "awaiting review",
+   "evidence": "data/s9cb/injuries.csv (56,829 rows, 2016 onward)",
+   "source": "https://github.com/nflverse/nflverse-data"
+  },
+  {
+   "id": "S05",
+   "area": "Model",
+   "title": "Measure what each designation is worth before using it",
+   "problem": "'Questionable' has no official percentage and we have never measured one.",
+   "buys": "A calibrated number instead of a borrowed one, and an interval that says how much to trust it.",
+   "cost": "Two days once the join is built.",
+   "risk": "The measured rate may be so wide that the feature is not worth having. That is a result, not a failure.",
+   "options": [
+    {
+     "path": "Join three seasons of designations to the official inactive lists",
+     "detail": "Direct measurement with confidence intervals.",
+     "cost": "2 days",
+     "risk": "Needs the inactive lists, which we hold for one week only."
+    },
+    {
+     "path": "Buy or scrape the inactive lists first, then measure",
+     "detail": "Larger sample, better intervals, later.",
+     "cost": "4 days",
+     "risk": "Scraping terms need checking first."
+    }
+   ],
+   "recommended": "Join three seasons of designations to the official inactive lists",
+   "status": "awaiting review",
+   "evidence": "data/inactives.json holds 20 Week-9 rows only",
+   "source": ""
+  },
+  {
+   "id": "S06",
+   "area": "Data",
+   "title": "Fix the club-code mapping once",
+   "problem": "nfl.com prints AZ for Arizona and LA for the Rams; the repository stores both AZ/ARI and LA/LAR in different files.",
+   "buys": "Every cross-file join becomes safe.",
+   "cost": "Two hours.",
+   "risk": "Renaming breaks pages that read the old codes.",
+   "options": [
+    {
+     "path": "One alias table, enforced at build time",
+     "detail": "A single mapping; the build fails on an unknown code.",
+     "cost": "2 hours",
+     "risk": "Touches several generators."
+    },
+    {
+     "path": "Alias table plus a compatibility shim",
+     "detail": "Safer for the pages that already exist.",
+     "cost": "0.5 day",
+     "risk": "Two places to keep in step."
+    }
+   ],
+   "recommended": "One alias table, enforced at build time",
+   "status": "awaiting review",
+   "evidence": "Captured this session from the official standings page",
+   "source": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "S07",
+   "area": "Data",
+   "title": "Capture the reserve lists so 'not listed' stops meaning 'available'",
+   "problem": "A player absent from the injury report may be on injured reserve. Today those two states look identical.",
+   "buys": "Every per-team injury count we publish stops under-counting.",
+   "cost": "One day.",
+   "risk": "The reserve list may not be published in a machine-readable form.",
+   "options": [
+    {
+     "path": "Capture the official reserve page per club",
+     "detail": "Direct and dated.",
+     "cost": "1 day",
+     "risk": "Format unknown until tried."
+    },
+    {
+     "path": "Derive it from the transactions log",
+     "detail": "One capture serves two needs (this and S08).",
+     "cost": "1.5 days",
+     "risk": "A transaction is not proof of current status."
+    }
+   ],
+   "recommended": "Capture the official reserve page per club",
+   "status": "awaiting review",
+   "evidence": "Malik Willis is absent from the Week-10 report because he is on injured reserve",
+   "source": ""
+  },
+  {
+   "id": "S08",
+   "area": "Data",
+   "title": "Capture the official transactions log and flag stale depth rows",
+   "problem": "At least one club still publishes quarterbacks who are on injured reserve. We cannot compute staleness without the log.",
+   "buys": "Depth rows that carry a truth date, and an alert when they go stale.",
+   "cost": "One day.",
+   "risk": "The log is high-volume; the flag needs a rule, not a human.",
+   "options": [
+    {
+     "path": "Daily transactions capture plus a staleness flag per depth row",
+     "detail": "One job, two requirements closed.",
+     "cost": "1 day",
+     "risk": "Flag noise early on."
+    },
+    {
+     "path": "Weekly capture",
+     "detail": "Cheaper, misses short stints.",
+     "cost": "0.5 day",
+     "risk": "Misses short stints."
+    }
+   ],
+   "recommended": "Daily transactions capture plus a staleness flag per depth row",
+   "status": "awaiting review",
+   "evidence": "Baltimore's quarterback rows on the club depth page",
+   "source": ""
+  },
+  {
+   "id": "S09",
+   "area": "Data",
+   "title": "Settle the depth-order question before building the deficiency matrix",
+   "problem": "149 slots list more than one rank-1 player, two clubs fail to parse, and one publishes its chart as an image.",
+   "buys": "Either a verified depth order, or a written decision that we derive it from playing time instead.",
+   "cost": "Three days to verify club by club.",
+   "risk": "Verification may fail for some clubs, and the brief forbids guessing.",
+   "options": [
+    {
+     "path": "Verify all 32 club depth pages, one by one, and fall back to snap counts where a club fails",
+     "detail": "Matches the brief's first route.",
+     "cost": "3 days",
+     "risk": "The Texans image cannot be parsed by any rule we are allowed to use."
+    },
+    {
+     "path": "Derive depth from official snap counts",
+     "detail": "Measurable and uniform across clubs.",
+     "cost": "2 days once snap counts are captured",
+     "risk": "Snap counts describe the past, not the current plan."
+    }
+   ],
+   "recommended": "Verify all 32 club depth pages, one by one, and fall back to snap counts where a club fails",
+   "status": "awaiting review",
+   "evidence": "data/depth/official_register.tsv",
+   "source": ""
+  },
+  {
+   "id": "S10",
+   "area": "Origination",
+   "title": "Start writing the opening price for every market we originate",
+   "problem": "The price store is closing-only, so the move is invisible and half of closing-line research is out of reach.",
+   "buys": "Opening-to-closing movement, which is where a lot of origination edge actually shows up.",
+   "cost": "One day to start; the sample then takes a season.",
+   "risk": "None technical. The cost is that the sample starts small.",
+   "options": [
+    {
+     "path": "Snapshot every market at first publication",
+     "detail": "Cheapest possible start; the sample grows from today.",
+     "cost": "1 day",
+     "risk": "Only future games are covered."
+    },
+    {
+     "path": "Buy historical opening prices",
+     "detail": "Immediate sample.",
+     "cost": "Money",
+     "risk": "Licence terms."
+    }
+   ],
+   "recommended": "Snapshot every market at first publication",
+   "status": "awaiting review",
+   "evidence": "data/s9cb/games.csv has closing prices only",
+   "source": ""
+  },
+  {
+   "id": "S11",
+   "area": "Leaderboard",
+   "title": "Publish a cluster-robust interval next to every ranking",
+   "problem": "Bets inside the same game are not independent. A per-bet interval is too narrow and makes luck look like skill.",
+   "buys": "An honest lower bound, which is the whole point of the leaderboard.",
+   "cost": "One day.",
+   "risk": "Intervals will widen and fewer rules will look significant.",
+   "options": [
+    {
+     "path": "Cluster by game",
+     "detail": "The natural unit; cheap to compute.",
+     "cost": "1 day",
+     "risk": "Widens intervals."
+    },
+    {
+     "path": "Cluster by game and week",
+     "detail": "More conservative still.",
+     "cost": "1.5 days",
+     "risk": "May leave nothing significant, which is information."
+    }
+   ],
+   "recommended": "Cluster by game",
+   "status": "awaiting review",
+   "evidence": "data/s9cb/leaderboard.json",
+   "source": ""
+  },
+  {
+   "id": "S12",
+   "area": "Leaderboard",
+   "title": "Print a control baseline on every leaderboard run",
+   "problem": "Without 'favourites only' and 'random' columns, a 6% ROI has nothing to be compared against.",
+   "buys": "A reader can see whether a strategy beat something a child could have done.",
+   "cost": "Half a day.",
+   "risk": "Some strategies will be beaten by the favourite.",
+   "options": [
+    {
+     "path": "Two control rows on every table",
+     "detail": "Always visible, never optional.",
+     "cost": "0.5 day",
+     "risk": "None."
+    },
+    {
+     "path": "A separate controls page",
+     "detail": "Cleaner tables, easier to miss.",
+     "cost": "0.5 day",
+     "risk": "Less visible."
+    }
+   ],
+   "recommended": "Two control rows on every table",
+   "status": "awaiting review",
+   "evidence": "data/prereg/controls.json",
+   "source": ""
+  },
+  {
+   "id": "S13",
+   "area": "Governance",
+   "title": "Prove registration precedes results for every rule on the board",
+   "problem": "At least one commit carries a strategy's rule and its results together, so the board cannot yet claim to be free of result-chasing.",
+   "buys": "The one claim that makes the leaderboard worth anything.",
+   "cost": "Half a day of auditing.",
+   "risk": "Some rules may have to be withdrawn.",
+   "options": [
+    {
+     "path": "Audit every rule and withdraw any that cannot show a prior commit",
+     "detail": "Costly in reputation, correct in method.",
+     "cost": "0.5 day",
+     "risk": "Fewer rules on the board."
+    },
+    {
+     "path": "Re-register the suspect rules going forward and mark the old numbers historical",
+     "detail": "Keeps the sample.",
+     "cost": "1 day",
+     "risk": "Weaker claim."
+    }
+   ],
+   "recommended": "Audit every rule and withdraw any that cannot show a prior commit",
+   "status": "awaiting review",
+   "evidence": "Flag R26-01",
+   "source": ""
+  },
+  {
+   "id": "S14",
+   "area": "Governance",
+   "title": "Keep backtest numbers off the leaderboard entirely",
+   "problem": "Backtest figures are printed on the landing leaderboard today (bets, win %, ROI, ROI interval).",
+   "buys": "Compliance with the brief and the removal of the strongest temptation on the site.",
+   "cost": "Two hours.",
+   "risk": "The leaderboard will look emptier.",
+   "options": [
+    {
+     "path": "Two boards: a retrospective research table and a prospective board",
+     "detail": "Honest and still useful.",
+     "cost": "0.5 day",
+     "risk": "Two things to maintain."
+    },
+    {
+     "path": "One board, prospective only",
+     "detail": "Strictly what the brief asks.",
+     "cost": "2 hours",
+     "risk": "Loses useful research context."
+    }
+   ],
+   "recommended": "Two boards: a retrospective research table and a prospective board",
+   "status": "awaiting review",
+   "evidence": "Flag LB-01",
+   "source": ""
+  },
+  {
+   "id": "S15",
+   "area": "Strategy",
+   "title": "Rank the combos only behind a validated joint probability",
+   "problem": "Multiplying marginal probabilities under dependence is wrong, and we store no operator void/push rules.",
+   "buys": "Three of the four leaderboard divisions stop being empty for a good reason rather than an unexplained one.",
+   "cost": "Three days to validate a joint model.",
+   "risk": "The joint model may not beat the marginals enough to matter.",
+   "options": [
+    {
+     "path": "Validate a joint model on held-out data first",
+     "detail": "The only route the brief permits.",
+     "cost": "3 days",
+     "risk": "May fail."
+    },
+    {
+     "path": "Leave the divisions empty and say why",
+     "detail": "Zero cost, zero progress.",
+     "cost": "0",
+     "risk": "Three divisions stay empty."
+    }
+   ],
+   "recommended": "Validate a joint model on held-out data first",
+   "status": "awaiting review",
+   "evidence": "data/s9cb/parlays.json",
+   "source": ""
+  },
+  {
+   "id": "S16",
+   "area": "Data",
+   "title": "Transcribe the venue of every fixture from the official game centre",
+   "problem": "This is the one brief line with nothing behind it; we hold a stadium column from a parsed feed instead.",
+   "buys": "A closed requirement and the foundation for the roof and weather overlay.",
+   "cost": "14 reads to prove the method, then automation.",
+   "risk": "Game-centre pages may not expose the venue in text.",
+   "options": [
+    {
+     "path": "Transcribe one week by hand, then automate",
+     "detail": "Proves the page can be read before committing to a scraper.",
+     "cost": "0.5 day to prove",
+     "risk": "The page may not cooperate."
+    },
+    {
+     "path": "Accept the parsed feed's stadium column",
+     "detail": "Zero cost.",
+     "cost": "0",
+     "risk": "Not an official transcription; the brief rejects it."
+    }
+   ],
+   "recommended": "Transcribe one week by hand, then automate",
+   "status": "awaiting review",
+   "evidence": "data/s9cb/games.csv stadium column",
+   "source": "https://www.nfl.com/games/"
+  },
+  {
+   "id": "S17",
+   "area": "Data",
+   "title": "Put a row-count pin on the injury scraper",
+   "problem": "Two rows went missing in one scrape and nothing failed.",
+   "buys": "Counts that can be trusted, which every other number depends on.",
+   "cost": "Two hours.",
+   "risk": "Builds will fail when the league legitimately changes the page. That is the point.",
+   "options": [
+    {
+     "path": "Pin the row count and the required fields; fail the build",
+     "detail": "Loud and correct.",
+     "cost": "2 hours",
+     "risk": "Failures on legitimate page changes."
+    },
+    {
+     "path": "Pin and warn",
+     "detail": "Quieter.",
+     "cost": "2 hours",
+     "risk": "Silent drift returns."
+    }
+   ],
+   "recommended": "Pin the row count and the required fields; fail the build",
+   "status": "awaiting review",
+   "evidence": "Flag CAP-01",
+   "source": ""
+  },
+  {
+   "id": "S18",
+   "area": "Site",
+   "title": "Decide the public and private split before more raw rows are published",
+   "problem": "Raw rows are on the live site and the data terms have not been read.",
+   "buys": "A defensible position instead of an accidental one.",
+   "cost": "One reading plus a migration.",
+   "risk": "Migration may break links that other pages depend on.",
+   "options": [
+    {
+     "path": "Read the terms, then move raw rows out of the Pages tree",
+     "detail": "What the brief asks.",
+     "cost": "1 day",
+     "risk": "Link breakage during the move."
+    },
+    {
+     "path": "Keep raw rows public and record the decision",
+     "detail": "Cheapest, weakest.",
+     "cost": "1 hour",
+     "risk": "Terms risk."
+    }
+   ],
+   "recommended": "Read the terms, then move raw rows out of the Pages tree",
+   "status": "awaiting review",
+   "evidence": "Open pull request #79 on this repository audits the collection and publication terms",
+   "source": ""
+  },
+  {
+   "id": "S19",
+   "area": "Verification",
+   "title": "Publish the reconciliation as a standing check, not a one-off",
+   "problem": "This session reconciled 32 of 32 clubs by hand. Nothing stops the next feed refresh from breaking it silently.",
+   "buys": "A number that is re-proven every time the data moves.",
+   "cost": "Half a day.",
+   "risk": "The check will fail whenever the feed is stale, which is why S01 should land first.",
+   "options": [
+    {
+     "path": "Add the reconciliation to the build and fail on any mismatch",
+     "detail": "Standing proof.",
+     "cost": "0.5 day",
+     "risk": "Fails while the feed is stale."
+    },
+    {
+     "path": "Run it weekly and publish the result",
+     "detail": "Softer.",
+     "cost": "0.5 day",
+     "risk": "A week of bad data can pass unnoticed."
+    }
+   ],
+   "recommended": "Add the reconciliation to the build and fail on any mismatch",
+   "status": "awaiting review",
+   "evidence": "data/session-ce097fea/standings_reconciliation_2026-11-16.json",
+   "source": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "S20",
+   "area": "Site",
+   "title": "Collapse six overlapping site generations into one navigation",
+   "problem": "Five or six generations of pages coexist, each with its own nav and its own numbers. A reader cannot tell which one is current.",
+   "buys": "A site a reader can believe.",
+   "cost": "Two days plus a decision on what to retire.",
+   "risk": "Retiring pages can break links other sessions depend on.",
+   "options": [
+    {
+     "path": "One landing page that links to every generation, with a 'current' badge on one",
+     "detail": "Additive; nothing is deleted; the reader is told which is which.",
+     "cost": "1 day",
+     "risk": "Still six places to look."
+    },
+    {
+     "path": "Merge the generations",
+     "detail": "Cleanest result.",
+     "cost": "3+ days",
+     "risk": "Destroys merged work if done carelessly."
+    }
+   ],
+   "recommended": "One landing page that links to every generation, with a 'current' badge on one",
+   "status": "awaiting review",
+   "evidence": "This session added console/ alongside the existing generations rather than rewriting them",
+   "source": ""
+  }
+ ]
+}

@@ -1,0 +1,8 @@
+{
+ "schema": "suggestion-decisions/1",
+ "session": "ce097fea-nfl1",
+ "as_of": "2026-11-16",
+ "rule": "No suggestion is implemented because it is listed here. A reviewer sets chosen_path for a suggestion id and records who chose it and when. Until then the suggestion is 'awaiting review' and nothing is built.",
+ "how_to_record_a_choice": "Edit this file: set decisions[<suggestion id>] = {\"chosen_path\": \"<the path label>\", \"chosen_by\": \"<name>\", \"chosen_on\": \"<YYYY-MM-DD>\", \"note\": \"<optional>\"}. Then rebuild with console/build.py. The Suggestions page renders the choice and the build fails if a chosen path is not one of the published options.",
+ "decisions": {}
+}

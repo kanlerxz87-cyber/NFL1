@@ -3749,3 +3749,56 @@ rewritten. No earlier claim on this board covers these paths.
 | C5 | Decision-readiness + open-questions + suggestions-with-path register covering every line of the brief | in progress | `ce097fea` | `console/data/*.json` | |
 | C6 | `console/verify.py`: every table row must carry an https source; unverifiable cells must render blank and flagged | in progress | `ce097fea` | `console/verify.py` | |
 | C7 | PR → merge → confirm Pages deploy → record here | not started | `ce097fea` | `COORDINATION.md` | |
+
+### Log — `ce097fea-nfl1` (2026-11-16, UTC)
+
+**Claim.** Recorded in the claims table above before any edit; pushed in `847433e`.
+
+**Sources (official, fetched this session).**
+`https://www.nfl.com/standings/league/2026/REG` (chunks 0-1),
+`https://www.nfl.com/standings/conference/2026/REG` (chunk 0 — needed for the eight clubs the league
+table truncated at that chunk boundary), `https://www.nfl.com/schedules/2026/REG11` (chunks 0-1; the
+site serves Week 10 as the current week), `https://www.nfl.com/injuries/league/2026/reg10` (chunks 0-7),
+`https://www.nfl.com/injuries/league/2026/reg11` (chunk 0 — confirmed it serves the Week 10 page).
+
+**C1 — fresh capture.** `data/session-ce097fea/capture/injury_rows_2026-11-16.tsv` (347 rows, 28 clubs,
+14 fixtures), `games_reg10_2026-11-16.tsv` (14 fixtures with results and a per-game official URL), and
+`manifest_2026-11-16.json` (provenance, counts, sha256). `data/session-ce097fea/official_standings_2026-11-16.json`
+holds all 32 clubs.
+
+**C2 — line-by-line verification of the committed capture.** Re-read the whole injury page and compared
+row by row with `data/capture/nflcom_injuries_reg10_2026-11-15_rows.tsv`: 347 against 347, 0 rows on
+only one side, 0 field differences, and the sha256 of the new rows file equals the hash already in
+`data/capture/manifest.json` (`9fe77d36…cd5f`). The 2026-11-15 capture is faithful and the page did not
+move in 24 hours. Delta in `data/session-ce097fea/injury_capture_delta.json`.
+
+**C3 — repo review.** `docs/audit-ce097fea.md`. Headline result: recomputing the 2026 standings from
+every game result in `data/s9cb/games.csv` plus the 12 Week-10 finals transcribed from the official
+schedule page reproduces **32 of 32 clubs** cell by cell (W/L/T/PF/PA). From the feed alone only 8 of 32
+reconcile, because the feed was fetched 2026-11-15 13:21Z, before the Sunday kickoffs — recorded as
+flag CE-01, not an error in either source. Reproduce with `python3 data/session-ce097fea/reconcile.py`.
+The official table is internally consistent (W=L=148, PF=PA=6,880). Lions designations re-confirmed:
+Kerby Joseph, Cade Mays, D.J. Reed all Out. Myles Garrett under the Rams is the page's own listing,
+not a scrape error.
+
+**C4 — the `console/` sub-site.** New directory, additive; no existing page deleted or rewritten.
+`console/build.py` writes 10 pages from committed data only; `console/verify.py` fails the build on a
+broken link, an empty cell, or a table row with no https source, no labelled blank and no stated
+exemption (665 rows checked, all pass). The one durable fix that could not be made here: the nav entry
+on `index.html` was hand-added, because `pipeline/gen_site.py` is owned by another session.
+
+> **Request for the owner of `pipeline/gen_site.py`.** Please add `("console/index.html",
+> "Decision Console")` to the nav list so the entry survives a regeneration. It is currently a
+> hand-edit on the generated `index.html` and the next regeneration will drop it. No other file of
+> yours was touched.
+
+**C5 — registers.** `console/data/requirements.json` (71 rows, one per line of the brief, with the gate
+that blocks it and the number that clears it), `questions.json` (22 questions split into what we have
+and what we do not), `suggestions.json` (20 suggestions, each with two or three paths, cost, risk and a
+recommended path), `decisions.json` (empty — a reviewer records a choice there before anything is
+built, and `console/verify.py` fails if a recorded path is not one of the published options),
+`flags.json` (11 flags, each with the official link that settles it).
+
+**Deviations.** Branch name is Arena-fixed (`arena/ce097fea-nfl1`), not `session-<id>/<task>`; scopes
+were kept non-overlapping by file instead. The seven open pull requests from other sessions were not
+merged — recorded as flag CE-08 rather than guessed at.
