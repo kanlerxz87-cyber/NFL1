@@ -4281,3 +4281,18 @@ refresh and other sessions' work) before pushing; the rebase rewrote the registr
 hash. The rule file's content SHA-256 is unchanged, so the registration is intact; only the commit
 pointer moved. The appended sources were renumbered S41/S42 → S48/S49 because `main` had already
 used S41–S47.
+
+## PR merge — reward-rule cluster (session `c5444cc9-nfl1`)
+
+- **PR #110** (`rewards: pre-registered reward rule + sub-site, gate, nav & readiness (MO-04) —
+  session c5444cc9`) — **merged into `main`** via squash on **2026-11-16T18:36:57Z**; merge commit
+  `e20fc86`. PR URL: https://github.com/kanlerxz87-cyber/NFL1/pull/110
+- Merge result verified on `origin/main`: `rewards/` + `data/rewards/` present, MO-04 readiness row
+  status **Done**, nav wiring intact.
+- **GitHub Pages**: source `main`, status **built**, site live at
+  https://kanlerxz87-cyber.github.io/NFL1/ — the new `rewards/index.html` was fetched and shows the
+  correct registration stamp (`fb7576223ea0`) and the honest `0 badges awarded / any_eligible=false`
+  status.
+- **Rebase-rebase note (post-merge)**: after the PR opened, a data bot pushed a refresh to the branch
+  (`873a39d`). The branch was rebased onto it, `verification.html` regenerated for the refreshed
+  register counts, and the branch pushed before merge; the squash then carried the final state.
