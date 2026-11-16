@@ -34,7 +34,8 @@ Both captures are transcribed by hand from the official pages at their retrieval
 stamps; nothing here is derived.
 
 Read on 2026-11-13 (UTC) from:
-  standings_current  …… https://www.nfl.com/standings/league/2026/reg   (post-TNF)
+  standings_current  …… https://www.nfl.com/standings/league/2026/reg   (post-Week-10 Sunday,
+                          refreshed 2026-11-16 by session ce097fea-nfl1 from the same official page)
   schedule_current   …… https://www.nfl.com/schedules/2026/by-week/week-11 (13 games,
                          6 byes; matches the Week-11 rows in snapshot.json one by one)
 """
@@ -443,37 +444,37 @@ RETRIEVED_CURRENT = "2026-11-13"
 SCHEDULE_URL_CURRENT = "https://www.nfl.com/schedules/2026/by-week/week-11"
 
 STANDINGS_CURRENT = """
-BUF|Buffalo Bills|7|1|0|256|187
-SF|San Francisco 49ers|7|1|0|235|156
+BUF|Buffalo Bills|8|1|0|287|199
+SF|San Francisco 49ers|8|1|0|281|196
+JAX|Jacksonville Jaguars|7|2|0|269|144
+CIN|Cincinnati Bengals|7|2|0|278|193
+KC|Kansas City Chiefs|7|2|0|237|156
+DET|Detroit Lions|7|2|0|257|199
 CHI|Chicago Bears|7|2|0|241|184
+MIN|Minnesota Vikings|7|2|0|176|126
 DEN|Denver Broncos|7|2|0|198|186
-CIN|Cincinnati Bengals|6|2|0|240|175
-DET|Detroit Lions|6|2|0|222|189
-JAX|Jacksonville Jaguars|6|2|0|229|121
-KC|Kansas City Chiefs|6|2|0|202|143
-MIN|Minnesota Vikings|6|2|0|146|116
-PIT|Pittsburgh Steelers|6|2|0|180|144
+PIT|Pittsburgh Steelers|6|3|0|198|182
 NYG|New York Giants|5|3|1|203|196
-GB|Green Bay Packers|6|3|0|216|191
-CLE|Cleveland Browns|5|4|0|161|196
-LA|Los Angeles Rams|5|4|0|214|181
-NE|New England Patriots|5|4|0|211|207
-SEA|Seattle Seahawks|5|4|0|202|162
+LA|Los Angeles Rams|6|4|0|248|187
+SEA|Seattle Seahawks|6|4|0|223|175
+GB|Green Bay Packers|6|4|0|226|221
+CLE|Cleveland Browns|6|4|0|188|220
+NE|New England Patriots|5|5|0|221|242
+CAR|Carolina Panthers|4|5|0|219|236
 BAL|Baltimore Ravens|4|5|0|189|236
-DAL|Dallas Cowboys|4|5|0|246|236
-LV|Las Vegas Raiders|4|5|0|238|268
-CAR|Carolina Panthers|3|5|0|199|219
-HOU|Houston Texans|3|5|0|209|192
-NO|New Orleans Saints|3|5|0|185|216
-AZ|Arizona Cardinals|3|6|0|178|255
-ATL|Atlanta Falcons|3|6|0|188|223
-TB|Tampa Bay Buccaneers|3|6|0|202|178
+DAL|Dallas Cowboys|4|6|0|286|282
+LV|Las Vegas Raiders|4|6|0|251|289
 WAS|Washington Commanders|3|5|1|196|223
-IND|Indianapolis Colts|2|7|0|184|249
-NYJ|New York Jets|2|7|0|182|223
+TB|Tampa Bay Buccaneers|3|6|0|202|178
+HOU|Houston Texans|3|6|0|233|219
+NO|New Orleans Saints|3|6|0|202|236
+ATL|Atlanta Falcons|3|7|0|201|258
+IND|Indianapolis Colts|3|7|0|208|271
+AZ|Arizona Cardinals|3|7|0|184|289
 PHI|Philadelphia Eagles|2|7|0|148|221
-MIA|Miami Dolphins|1|7|0|126|200
-TEN|Tennessee Titans|1|7|0|144|199
+NYJ|New York Jets|2|8|0|194|254
+TEN|Tennessee Titans|1|8|0|167|239
+MIA|Miami Dolphins|1|8|0|148|224
 LAC|Los Angeles Chargers|0|8|0|121|219
 """
 
