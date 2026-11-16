@@ -5,10 +5,10 @@
   "brief": "Requirements of the 2026-11-15 brief (NFL line origination, injuries and depth, leaderboard, site, process)",
   "count": 82,
   "by_status": {
-   "Blocked": 8,
-   "Partial": 42,
-   "Not verified": 3,
-   "Done": 17,
+   "Blocked": 6,
+   "Partial": 43,
+   "Not verified": 2,
+   "Done": 19,
    "Not met": 1,
    "Not started": 10,
    "Rejected (brief)": 1
@@ -451,15 +451,15 @@
    "id": "IN-04",
    "group": "Injuries and depth",
    "requirement": "Capture official inactive lists and snap counts",
-   "status": "Blocked",
-   "checked": "repo artifact, not re-read",
-   "evidence": "data/inactives.json holds 20 rows from the official Week 9 inactives list (src S05). No Week 10 list and no snap counts are captured.",
-   "blocked_by": "No official inactive or snap-count source identified in the repo.",
+   "status": "Partial",
+   "checked": "re-read 2026-11-16 (session d9e28eb2-nfl1)",
+   "evidence": "Inactive half moved: the official league inactives page publishes nothing for 2026, so the Game Book is the official source — Not Active lists for all 13 completed Week 10 games are now captured and parsed (data/gamebooks/parsed.json; 133 entries, match against the injury read in data/gamebooks/injury_match.json), on top of the Week 9 list in data/inactives.json. Snap-count half unchanged: no official snap-count source exists in the repo or on nfl.com.",
+   "blocked_by": "Snap counts: no official source identified. Game Books print no snap totals; the league publishes no snap-count page the repository can read.",
    "clears_when": "Official inactive list for every game week and snap counts for 32 clubs.",
-   "next_step": "Identify the nfl.com or Game Book source for both.",
+   "next_step": "Keep capturing Game Book Not Active lists per week (done for Week 10); identify a snap-count source or record that none is official.",
    "src": {
-    "t": "inactives.json",
-    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/inactives.json"
+    "t": "data/gamebooks/source.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/gamebooks/source.json"
    }
   },
   {
@@ -661,15 +661,15 @@
    "id": "IN-18",
    "group": "Injuries and depth",
    "requirement": "Use official NFL Game Books for actual starters and game-day status",
-   "status": "Blocked",
-   "checked": "repo artifact, not re-read",
-   "evidence": "No Game Book file or URL is in the repo. The Game Book source has not been identified.",
-   "blocked_by": "Source not identified.",
-   "clears_when": "One Week 10 Game Book parsed and matched to the injury read.",
-   "next_step": "Identify and fetch the Game Book source.",
+   "status": "Done",
+   "checked": "re-read 2026-11-16 (session d9e28eb2-nfl1)",
+   "evidence": "13 completed Week 10 Game Books captured from static.www.nfl.com and pinned with sha256 (data/gamebooks/manifest.json, data/gamebooks/source.json); parsed to data/gamebooks/parsed.json (11 offensive + 11 defensive starters per club, or a flag where the extraction lost a field); every Not Active entry matched to the official pre-game injury read in data/gamebooks/injury_match.json — 64 of 133 entries found on the read (44 Out, 13 Questionable, 3 Doubtful, 4 with a blank official status), 69 healthy scratches not on it. Published at gamebooks/ on the site.",
+   "blocked_by": "None.",
+   "clears_when": "n/a",
+   "next_step": "Repeat for Week 11 when those Game Books publish; capture LAC@BAL when Monday's game completes.",
    "src": {
-    "t": "decision questions",
-    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/questions.json"
+    "t": "data/gamebooks/injury_match.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/gamebooks/injury_match.json"
    }
   },
   {
@@ -947,19 +947,19 @@
    }
   },
   {
-    "id": "MO-04",
-    "group": "Models and leaderboard",
-    "requirement": "Treat it as a leaderboard competition with rewards for top strategies",
-    "status": "Done",
-    "checked": "built and gate-verified 2026-11-16",
-    "evidence": "A pre-registered reward rule is published at rewards/REWARDS-RULE.md with concrete numeric thresholds (Brier skill lower bound > 0, BH-adjusted p < 0.05, Bonferroni 0.05/6, decided-bet sample >= 200) and non-monetary badge tiers (Verified Signal; Top Single Bet / Top Parlay / Top Player Prop Combo). The rule is frozen in a results-free registration commit; rewards/verify.py fails on any drift. No badge is awarded yet: the repo's own proper-score result is any_eligible=false.",
-    "blocked_by": "None.",
-    "clears_when": "n/a",
-    "next_step": "None. The rule is frozen; a badge is awarded only when a strategy clears Stage 1.",
-    "src": {
-      "t": "rewards rule",
-      "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/rewards/REWARDS-RULE.md"
-    }
+   "id": "MO-04",
+   "group": "Models and leaderboard",
+   "requirement": "Treat it as a leaderboard competition with rewards for top strategies",
+   "status": "Done",
+   "checked": "built and gate-verified 2026-11-16",
+   "evidence": "A pre-registered reward rule is published at rewards/REWARDS-RULE.md with concrete numeric thresholds (Brier skill lower bound > 0, BH-adjusted p < 0.05, Bonferroni 0.05/6, decided-bet sample >= 200) and non-monetary badge tiers (Verified Signal; Top Single Bet / Top Parlay / Top Player Prop Combo). The rule is frozen in a results-free registration commit; rewards/verify.py fails on any drift. No badge is awarded yet: the repo's own proper-score result is any_eligible=false.",
+   "blocked_by": "None.",
+   "clears_when": "n/a",
+   "next_step": "None. The rule is frozen; a badge is awarded only when a strategy clears Stage 1.",
+   "src": {
+    "t": "rewards rule",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/rewards/REWARDS-RULE.md"
+   }
   },
   {
    "id": "MO-05",
