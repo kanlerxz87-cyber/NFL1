@@ -3732,3 +3732,20 @@ Three registered baselines now coexist and none double-scores: `PR-02` (record s
 | Checks on `6a1c90c` | all green: Verify NFL1 site, Verify NFL Decision Lab site build, Verify decision dashboard, Collect NFL data and rebuild model outputs. |
 | Pages | `pages build and deployment` success (`43721595986` for `6a1c90c`, and a second green run `43721658020`). Live check with cache-buster: <https://kanlerxz87-cyber.github.io/NFL1/prereg/registry.html?v=6a15a68> serves the prospective board with registration hashes; `prereg/forecasts.html` and `prereg/archive.html` reachable from the nav. |
 | Main verified after merge | `build_site_all.py --check`, `verify.py`, `verify_combined.py`, `check_site.py`, `validate_verified.py`, `audit_numbers.py`, `check_committed_site.py`, `check_reachability.py` (193/193), `check_generators.py`, `check_reproducible.py`, `room/verify.py`, `prereg/verify.py` (14 checks), both preregistration checkers, 198 unit tests — all pass on the merged tree (pre-merge local run; CI confirms post-merge). |
+
+---
+
+## Session `ce097fea-nfl1` — claims (branch `arena/ce097fea-nfl1`, base `32a8fffe19c6b474a142f0accbc93474cf122908`)
+
+Claimed before any edit on this branch. Scope is **additive**; no file owned by another session is
+rewritten. No earlier claim on this board covers these paths.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| C1 | Fresh official capture (2026-11-16): nfl.com standings (32 clubs), Week 10 schedule with results, Week 10 injury report (all clubs, all rows) | in progress | `ce097fea` | `data/session-ce097fea/` | capture is fetch-tool-rendered text, flagged; sha256 recorded |
+| C2 | Line-by-line re-verification of the committed 2026-11-15 injury capture (347 rows) against today's official page; publish the delta | in progress | `ce097fea` | `data/session-ce097fea/`, `console/` | |
+| C3 | Line-by-line repo review: every committed dataset checked against the official page it claims to come from; every irregularity flagged with the official link | in progress | `ce097fea` | `docs/audit-ce097fea.md`, `data/session-ce097fea/flags.json` | |
+| C4 | New public sub-site `console/`: clean landing page + subpages by category (executive summary, readiness, questions, suggestions & choose-a-path, strategy lab, injuries & depth, data, verification, flagged) | in progress | `ce097fea` | `console/**` (new directory) | additive; no existing page is deleted or rewritten |
+| C5 | Decision-readiness + open-questions + suggestions-with-path register covering every line of the brief | in progress | `ce097fea` | `console/data/*.json` | |
+| C6 | `console/verify.py`: every table row must carry an https source; unverifiable cells must render blank and flagged | in progress | `ce097fea` | `console/verify.py` | |
+| C7 | PR → merge → confirm Pages deploy → record here | not started | `ce097fea` | `COORDINATION.md` | |
