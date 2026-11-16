@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-16T18:14:40+00:00",
+ "generated_at": "2026-11-16T18:17:59+00:00",
  "evidence": {
   "season": 2026,
   "week_complete": 10,
@@ -21,49 +21,49 @@
   "own_lines": 13,
   "strategies": 12,
   "strategies_pass": 0,
-  "strategies_watch": 2,
-  "strategies_fail": 10,
+  "strategies_watch": 3,
+  "strategies_fail": 9,
   "gates": 8,
-  "starters_flagged": 116,
+  "starters_flagged": 112,
   "depth_matched_rows": 376,
   "unmatched_records": 7,
   "source_files_pinned": 12,
   "verification_checks": 28,
-  "verification_pass": 19,
+  "verification_pass": 20,
   "verification_flag": 8,
-  "verification_fail": 1
+  "verification_fail": 0
  },
  "model": {
   "state": "NOT SUPPORTED",
   "plain": "The model lost to the closing line out of sample and the fitted weight on the model is at or below zero, so its disagreement with the market carried no information in the test window. Publishing a model-vs-market difference as an 'edge' is not supported by this evidence.",
-  "test_n": 137,
-  "model_mae": 9.952,
-  "market_mae": 9.449,
+  "test_n": 149,
+  "model_mae": 10.128,
+  "market_mae": 9.581,
   "diff_ci": [
-   -0.032,
-   1.036
+   0.057,
+   1.043
   ],
   "blend_weight_model": -0.328,
   "blend_weight_market": 1.336,
-  "hybrid_mae": 9.507,
-  "market_only_mae": 9.449,
-  "sign_corr": 0.439,
-  "sign_n": 5592,
+  "hybrid_mae": 9.628,
+  "market_only_mae": 9.581,
+  "sign_corr": 0.44,
+  "sign_n": 5604,
   "source": "data/model/lines.json"
  },
  "strategies": {
   "state": "NOT READY",
-  "plain": "0 of 12 strategies passed every gate. The best paper score is negative (-3.85% lower-bound ROI), which is the ranking's own way of saying no strategy is yet better than luck.",
+  "plain": "0 of 12 strategies passed every gate. The best paper score is negative (-3.68% lower-bound ROI), which is the ranking's own way of saying no strategy is yet better than luck.",
   "best": "S11 Under in divisional games with total 47+",
-  "best_lower_ci": -3.85,
-  "best_roi": 0.0416,
+  "best_lower_ci": -3.68,
+  "best_roi": 0.0429,
   "best_ci": [
-   -0.0385,
-   0.1218
+   -0.0368,
+   0.1226
   ],
-  "best_n": 548,
-  "best_q": 0.9889,
-  "smallest_q": 0.9889,
+  "best_n": 551,
+  "best_q": 0.9902,
+  "smallest_q": 0.9902,
   "gates": [
    {
     "id": "G1",
@@ -99,7 +99,7 @@
    }
   ],
   "parlay": {
-   "n_games": 5592,
+   "n_games": 5604,
    "corr_margin_vs_total": 0.017,
    "phi_home_cover_vs_over": 0.0086,
    "note": "Same-game legs are not independent. Use the phi value to adjust a 2-leg same-game parlay: P = p1p2 + rho*sqrt(p1(1-p1)p2(1-p2))."
@@ -173,20 +173,20 @@
    "TEN",
    "WAS"
   ],
-  "flagged_players": 116,
-  "flagged_with_game_designation": 86,
-  "flagged_practice_only": 30,
-  "model_starters_flagged": 116,
+  "flagged_players": 112,
+  "flagged_with_game_designation": 84,
+  "flagged_practice_only": 28,
+  "model_starters_flagged": 112,
   "model_unmatched": 7,
-  "plain": "The league publishes injury status for players but publishes no depth chart (the league URL 404s). Only club sites do. So a statement like 'the third-string corner is starting' can be verified for 2 of 26 clubs this week, and is an assumption elsewhere. The model flags 116 players as impacted starters; only 86 of them carry an official game designation, the other 30 are practice-only reports that the league has not yet converted into an availability ruling.",
+  "plain": "The league publishes injury status for players but publishes no depth chart (the league URL 404s). Only club sites do. So a statement like 'the third-string corner is starting' can be verified for 2 of 26 clubs this week, and is an assumption elsewhere. The model flags 112 players as impacted starters; only 84 of them carry an official game designation, the other 28 are practice-only reports that the league has not yet converted into an availability ruling.",
   "source": "https://www.nfl.com/injuries/ and club depth-chart pages"
  },
  "props": {
   "state": "MODEL ONLY",
-  "lines": 323,
-  "players": 323,
+  "lines": 331,
+  "players": 331,
   "with_market": 0,
-  "plain": "323 prop lines for 323 players, all built from the player's own shrunk usage and the opponent's defensive rating. No prop price exists in any connected source, so no prop edge can be claimed and the market column is deliberately blank.",
+  "plain": "331 prop lines for 331 players, all built from the player's own shrunk usage and the opponent's defensive rating. No prop price exists in any connected source, so no prop edge can be claimed and the market column is deliberately blank.",
   "source": "data/model/props.json"
  },
  "power": {
@@ -2627,12 +2627,12 @@
   }
  ],
  "input_hashes": {
-  "data/model/lines.json": "5aa3ef5c3bb3fa18c85801c4d246fcf547b102abf0ad5b31825278719e65c0e2",
-  "data/model/strategies.json": "7bf785dea9bcec4213b60aa2c4db8d185db78b514a7ca35163e8ef5cd74d9bd7",
-  "data/model/availability.json": "2241052a0b6a63ddb104ee3bcba55c5baa53d3f48d7f639008a4246e6df08837",
-  "data/model/props.json": "9276252cf7e0684f9fcc5df65699cfeed9bf72055353add63d8aab01834b0096",
-  "data/evidence/injuries_week10.json": "f5a9dba3bb80f1a4b80c7e9c0930f981c59124879c3fc58dd9f3317f99127ef7",
-  "data/evidence/standings_2026.json": "011986b23fb61e3f59ed7f4cdc43b565b7ff9fe823a86c57abb78d5497dacd94",
-  "data/audit/official_verification.json": "898659f52292153994ee85f907a25b7c3dd1a55634ce6e0f1d97f3c7bf04faca"
+  "data/model/lines.json": "be1171e2365f09e6280c04684520dc3e2b8927334e23f97c4d60c0565c8755d4",
+  "data/model/strategies.json": "d731602886803357b5546122e4150553e23b95ff6704fd2038ddae9219137195",
+  "data/model/availability.json": "9e20c3f5f687b32519622716e8e00e3bc268c4267c0d9e09a6b248c943551bf0",
+  "data/model/props.json": "0dad2765091917e477edb635e10d666527f5fef92a4cc784a53a2fb219f07620",
+  "data/evidence/injuries_week10.json": "83f56710239b615bb9ed5c15b3a08ac8d3142d79eb4175620327ad0b36f32a10",
+  "data/evidence/standings_2026.json": "a3aca7040f589245b9bcaf23b732a980285b586f2f0473e0e5e68eb21d2276a8",
+  "data/audit/official_verification.json": "9d4ba2617b465f9a53216f5a4294c78256a1ca6427b2b38dd6e3ed64a6908460"
  }
 }
