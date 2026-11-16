@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-16T18:53:06Z",
+ "generated_at": "2026-11-16T18:55:50Z",
  "rows": [
   {
    "area": "Availability",
@@ -17,7 +17,7 @@
   {
    "area": "Availability",
    "what": "Availability-outcome ledger (report x inactives x Game Book)",
-   "value": "460 rows over 1 week(s)",
+   "value": "424 rows over 1 week(s)",
    "to_clear": "one row per club, per player, per game, for every week of the season",
    "gate": "the join is published only where an official document states each side of it",
    "files": [
@@ -30,7 +30,7 @@
   {
    "area": "Calibration",
    "what": "'Questionable' players also placed on the club's inactive list",
-   "value": "7.3% of n=82 [3.4%, 15.1%]",
+   "value": "18.3% of n=82 [11.4%, 28.0%]",
    "to_clear": "n>=200 per designation, pooled over the multi-week sweep",
    "gate": "a fixed historical percentage attached to the label is forbidden; the measured rate is quoted with its interval and its n",
    "files": [
@@ -43,7 +43,7 @@
   {
    "area": "Calibration",
    "what": "'Out' players also placed on the club's inactive list",
-   "value": "37.5% of n=64 [26.7%, 49.7%]",
+   "value": "75.0% of n=64 [63.2%, 84.0%]",
    "to_clear": "n>=200 per designation, pooled over the multi-week sweep",
    "gate": "a fixed historical percentage attached to the label is forbidden; the measured rate is quoted with its interval and its n",
    "files": [
@@ -56,7 +56,7 @@
   {
    "area": "Calibration",
    "what": "'Doubtful' players also placed on the club's inactive list",
-   "value": "30.0% of n=10 [10.8%, 60.3%]",
+   "value": "40.0% of n=10 [16.8%, 68.7%]",
    "to_clear": "n>=200 per designation, pooled over the multi-week sweep",
    "gate": "a fixed historical percentage attached to the label is forbidden; the measured rate is quoted with its interval and its n",
    "files": [
@@ -82,7 +82,7 @@
   {
    "area": "Trap",
    "what": "Out designations that do NOT appear on a club's inactive list",
-   "value": "40 of 64",
+   "value": "16 of 64",
    "to_clear": "nothing to clear: this is a property of the two documents",
    "gate": "the inactive list may not be used as the set of non-players",
    "files": [
@@ -95,7 +95,7 @@
   {
    "area": "Trap",
    "what": "Declared inactives with no row on the weekly report",
-   "value": 113,
+   "value": 77,
    "to_clear": "nothing to clear: the report is a designation document",
    "gate": "a model whose availability universe is the report treats these players as available",
    "files": [

@@ -260,6 +260,35 @@ class TestRegisterBuild(unittest.TestCase):
             self.assertIn("parser_version", out)
             self.assertIn("is not a UTC timestamp", out)
 
+    def test_sweep_workflow_is_structured_to_report_what_it_read(self):
+        """The first CI sweep failed its gate while writing nothing, and the log was not readable
+        from the sandbox. The workflow must therefore (a) refuse to run without the modules its
+        collector imports, (b) capture each sweep's stderr, and (c) commit a log file beside the
+        captures, so a red run states what it actually read instead of being a red tick."""
+        wf = (ROOT / ".github/workflows/gamebook-sweep.yml").read_text()
+        self.assertIn("Refuse to run blind", wf)
+        self.assertIn('want = ["requests", "bs4", "lxml", "pypdf"]', wf)
+        self.assertIn("data/gamebook/sweep-log.txt", wf)
+        self.assertIn("2>&1 | tee /tmp/books.log", wf)
+        self.assertIn("tee /tmp/gate.txt", wf)          # the gate's own output must be published
+        self.assertIn("GITHUB_STEP_SUMMARY", wf)
+        try:
+            import yaml                                            # noqa: PLC0415
+        except Exception:                                          # noqa: BLE001
+            self.skipTest("pyyaml is not installed in this environment")
+        doc = yaml.safe_load(wf)
+        steps = doc["jobs"]["sweep"]["steps"]
+        names = [st.get("name", "") for st in steps]
+        self.assertGreaterEqual(len(steps), 12)
+        # the gate must run even when a sweep step failed, and the commit must still be reached
+        self.assertIn("always()", [st.get("if", "") for st in steps if "Gate" in st.get("name", "")])
+        commit = [st for st in steps if "Commit the captures" in st.get("name", "")][0]
+        self.assertEqual(commit.get("if"), "always()")
+        self.assertIn("git add data/gamebook gamebook", commit["run"])
+        self.assertIn("--rebase", commit["run"])                   # small frequent commits protocol
+        self.assertTrue(any("unittest tests.test_gamebook_register" in st.get("run", "")
+                            for st in steps), names)
+
     def test_gate_passes_on_the_committed_artifacts(self):
         r = subprocess.run([sys.executable, str(ROOT / "tools/check_gamebook_register.py")],
                            capture_output=True, text=True)

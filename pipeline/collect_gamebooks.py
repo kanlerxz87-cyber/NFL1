@@ -157,6 +157,16 @@ def nick_to_abbr(text: str) -> str | None:
 
 
 # ---------------------------------------------------------------- fetch helpers
+class NotFound(Exception):
+    """The publisher answered definitively: this document does not exist at this url.
+
+    Kept apart from a transport failure on purpose. A missing page is *coverage* (an old weekly
+    article that has been taken down, a game book not yet uploaded) and must be reported as such;
+    a timeout or a 500 is a fault in our reading and must fail loudly, because a run that treats
+    its own outage as "the league has no data" is how a blank column becomes a permanent blank.
+    """
+
+
 def http_get(url: str, *, binary: bool = False, tries: int = 3, sleep: float = 2.0):
     import requests
     last = None
@@ -169,10 +179,33 @@ def http_get(url: str, *, binary: bool = False, tries: int = 3, sleep: float = 2
             if r.status_code == 200:
                 return r.content if binary else r.text
             last = f"HTTP {r.status_code}"
+            if r.status_code in (404, 410):
+                raise NotFound(f"HTTP {r.status_code} for {url}")
+        except NotFound:
+            raise
         except Exception as exc:                                  # noqa: BLE001
             last = f"{type(exc).__name__}: {exc}"
         time.sleep(sleep * (i + 1))
     raise RuntimeError(f"fetch failed for {url}: {last}")
+
+
+def get_first(urls: list[str], *, binary: bool = False) -> tuple[str, str | bytes]:
+    """Try each candidate url in order; return the first that answers 200.
+
+    The league's own url patterns are not stable across years (the dated inactives article slug was
+    confirmed for 2026 only), so a capture walk tries the documented variants rather than assuming
+    one. If all of them answer 404/410 the *last* NotFound is re-raised; any other failure wins, so
+    a transport fault is never hidden behind a "not found" label.
+    """
+    errs: list[Exception] = []
+    for u in urls:
+        try:
+            return u, http_get(u, binary=binary)
+        except Exception as exc:                                  # noqa: BLE001
+            errs.append(exc)
+            if not isinstance(exc, NotFound):
+                raise
+    raise errs[-1]
 
 
 # ---------------------------------------------------------------- capture store
@@ -641,17 +674,27 @@ def parse_gamebook_text(text: str) -> dict:
 # ================================================================ sub-commands
 def cmd_inactives(args) -> int:
     key = f"{args.season}_reg{args.week:02d}"
-    url = (f"https://www.nfl.com/news/nfl-week-{args.week}-inactives-players-ruled-out-"
-           f"{args.season}-season")
     if args.url:
-        url = args.url
+        urls = [args.url]
+    else:
+        pad = f"{args.week:02d}"
+        urls = [f"https://www.nfl.com/news/nfl-week-{args.week}-inactives-players-ruled-out-"
+                f"{args.season}-season"]
+        if pad != str(args.week):
+            urls.append(urls[0].replace(f"week-{args.week}-", f"week-{pad}-"))
     fetched = now_iso()
     try:
-        html = http_get(url)
+        url, html = get_first(urls)
+    except NotFound as exc:                                      # publisher says: no such article
+        append_jsonl(HEARTBEAT, {"at": fetched, "kind": "inactives", "key": key, "url": urls[0],
+                                 "rows": 0, "status": "not_published", "detail": str(exc)[:160]})
+        print(f"inactives {key}: no official article at this url (HTTP 404) - recorded as missing "
+              f"coverage, not as zero rows: {urls[0]}")
+        return 0
     except Exception as exc:                                     # noqa: BLE001
-        append_jsonl(ALERTS, {"at": fetched, "kind": "inactives", "key": key, "url": url,
+        append_jsonl(ALERTS, {"at": fetched, "kind": "inactives", "key": key, "url": urls[0],
                               "alert": "fetch_failed", "detail": str(exc)[:300]})
-        append_jsonl(HEARTBEAT, {"at": fetched, "kind": "inactives", "key": key, "url": url,
+        append_jsonl(HEARTBEAT, {"at": fetched, "kind": "inactives", "key": key, "url": urls[0],
                                  "rows": 0, "status": "fetch_failed"})
         print(f"::warning::inactives {key}: fetch failed ({exc})", file=sys.stderr)
         return 2
@@ -690,6 +733,12 @@ def cmd_reports(args) -> int:
     fetched = now_iso()
     try:
         html = http_get(url)
+    except NotFound as exc:                                      # publisher answered: nothing here
+        append_jsonl(HEARTBEAT, {"at": fetched, "kind": "report", "key": key, "url": url,
+                                 "rows": 0, "status": "not_published", "detail": str(exc)[:160]})
+        print(f"report {key}: the league publishes no report at this url (HTTP 404) - recorded as "
+              f"missing coverage, not as zero rows")
+        return 0
     except Exception as exc:                                     # noqa: BLE001
         append_jsonl(ALERTS, {"at": fetched, "kind": "report", "key": key, "url": url,
                               "alert": "fetch_failed", "detail": str(exc)[:300]})
@@ -756,13 +805,17 @@ def discover_games(season: int, weeks: list[int]) -> list[dict]:
     score for both clubs; a tie prints equal scores and is kept.
     """
     games: dict[str, dict] = {}
+    empty_weeks: list[str] = []
     for w in weeks:
         url = f"https://www.nfl.com/schedules/{season}/REG{w}"
+        before = len(games)
         try:
             html = http_get(url)
         except Exception as exc:                                 # noqa: BLE001
             append_jsonl(ALERTS, {"at": now_iso(), "kind": "schedule", "key": f"{season}_reg{w:02d}",
                                   "url": url, "alert": "fetch_failed", "detail": str(exc)[:200]})
+            print(f"::warning::schedule {season} W{w}: fetch failed ({exc})", file=sys.stderr)
+            empty_weeks.append(f"W{w} fetch failed")
             continue
         for m in re.finditer(r"/games/([a-z0-9\-]+)-(\d{4})-reg-(\d{1,2})", html):
             slug, s, wk = m.group(1), int(m.group(2)), int(m.group(3))
@@ -770,6 +823,18 @@ def discover_games(season: int, weeks: list[int]) -> list[dict]:
                 continue
             games.setdefault(slug, {"game_id": slug, "season": season, "week": w,
                                     "schedule_url": url})
+        if len(games) == before:
+            # a page that loaded but yielded no fixture is the drift case: either the schedule page
+            # changed its markup or the league clamped the request to another week (F68). Both must
+            # be loud, because a sweep that discovers nothing looks exactly like a successful one.
+            empty_weeks.append(f"W{w} rendered no fixture links")
+            append_jsonl(ALERTS, {"at": now_iso(), "kind": "schedule", "key": f"{season}_reg{w:02d}",
+                                  "url": url, "alert": "no_fixtures_discovered",
+                                  "detail": "the page answered 200 but the game-link pattern found "
+                                            "nothing for this season/week"})
+    if empty_weeks:
+        print(f"::warning::discover_games {season}: {'; '.join(empty_weeks)}", file=sys.stderr)
+    discover_games.last_problems = empty_weeks
     return list(games.values())
 
 
@@ -801,10 +866,14 @@ def cmd_gamebooks(args) -> int:
     if args.weeks:
         weeks = [int(x) for x in args.weeks.split(",")]
     games = discover_games(args.season, weeks)
+    if not games and getattr(discover_games, "last_problems", None):
+        print("::error::game books: no fixture could be discovered, so nothing was captured; "
+              "the schedule page changed or the request was clamped", file=sys.stderr)
+        return 2
     if args.limit:
         games = games[:args.limit]
     print(f"discovered {len(games)} games for season {args.season} weeks {weeks[0]}-{weeks[-1]}")
-    ok = fail = skipped = 0
+    ok = fail = skipped = missing = 0
     for g in games:
         key = g["game_id"]
         if latest_capture("gamebook", key) and not args.refetch:
@@ -828,9 +897,15 @@ def cmd_gamebooks(args) -> int:
                    "venue_text_centre": meta["venue_text"], "parsed": None,
                    "counts": {}, "flags": []}
         if not meta["pdf_url"]:
+            # the centre page links the PDF only once the game book is uploaded, so "no link" is a
+            # coverage fact for a fixture that has not had one published yet. It is recorded either
+            # way; `--strict` turns it into a failure for a run that intends to close the gap.
             payload["flags"].append("no Game Book PDF link on the game centre page")
             payload["parse_status"] = "no_pdf_link"
-            fail += 1
+            if args.strict:
+                fail += 1
+            else:
+                missing += 1
             append_jsonl(HEARTBEAT, {"at": fetched, "kind": "gamebook", "key": key,
                                      "url": centre, "rows": 0, "status": "no_pdf_link",
                                      "pdf_sha256": None})
@@ -884,7 +959,10 @@ def cmd_gamebooks(args) -> int:
                                  "pdf_sha256": payload["pdf_sha256"],
                                  "capture": str(p.relative_to(ROOT))})
         time.sleep(args.sleep)
-    print(f"gamebooks: ok={ok} fail={fail} already-captured={skipped}")
+    print(f"gamebooks: ok={ok} fail={fail} already-captured={skipped} "
+          f"no-game-book-published={missing}")
+    if missing and not games:
+        print("::warning::game books: nothing was discovered for those weeks")
     return 0 if fail == 0 else 1
 
 
@@ -983,6 +1061,9 @@ def main() -> int:
     c.add_argument("--pages", type=int, default=4)
     c.add_argument("--sleep", type=float, default=1.5)
     c.add_argument("--refetch", action="store_true")
+    c.add_argument("--strict", action="store_true",
+                   help="treat a game centre with no Game Book link as a failure (default: "
+                        "record it as missing coverage and keep going)")
     c.set_defaults(func=cmd_gamebooks)
     v = sub.add_parser("verify")
     v.add_argument("--max-age-hours", type=float, default=0)

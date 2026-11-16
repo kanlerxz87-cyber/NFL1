@@ -60,6 +60,23 @@ jobs:
           python-version: "3.11"
       - name: Install dependencies
         run: python -m pip install --quiet requests beautifulsoup4 lxml pypdf
+      - name: "Refuse to run blind: every import the collector needs must be present"
+        run: |
+          python - <<'PY'
+          import importlib, sys
+          want = ["requests", "bs4", "lxml", "pypdf"]
+          missing = []
+          for m in want:
+              try:
+                  importlib.import_module(m)
+              except Exception as exc:                                 # noqa: BLE001
+                  missing.append(f"{m}: {type(exc).__name__}: {exc}")
+          if missing:
+              print("::error::the collector cannot reach the official pages without these; the "
+                    "sweep would report 'nothing to do' while reading nothing: " + "; ".join(missing))
+              sys.exit(1)
+          print("collector imports present:", ", ".join(want))
+          PY
       - name: Parser and statistic unit tests (pinned to verbatim official rows)
         run: python -m unittest tests.test_gamebook_register -v
       - name: Sweep the official weekly injury reports (2025 W1-18, 2026 W1-11)
@@ -94,7 +111,34 @@ jobs:
           WF_TO: ${{ github.event.inputs.gamebook_week_to || '11' }}
         run: |
           python3 pipeline/collect_gamebooks.py gamebooks --season 2026 \
-            --week-from "${WF_FROM}" --week-to "${WF_TO}"
+            --week-from "${WF_FROM}" --week-to "${WF_TO}" 2>&1 | tee /tmp/books.log
+          exit ${PIPESTATUS[0]}
+      - name: Write the sweep log into the tree and the job summary
+        if: always()
+        run: |
+          mkdir -p data/gamebook
+          {
+            echo "=== sweep $(date -u +%FT%TZ) on ${GITHUB_REF_NAME} at ${GITHUB_SHA} ==="
+            for f in /tmp/books.log; do
+              [ -f "$f" ] && { echo "--- $f"; tail -40 "$f"; }
+            done
+            for f in data/gamebook/heartbeat.jsonl data/gamebook/alerts.jsonl; do
+              echo "--- $f ($(wc -l < "$f" 2>/dev/null || echo 0) lines)"
+              tail -12 "$f" 2>/dev/null || true
+            done
+            echo "--- capture tree"
+            find data/gamebook/captures -type f 2>/dev/null | sort | head -80
+            find data/gamebook/captures -type d -exec sh -c 'echo "$1: $(ls -1 "$1" 2>/dev/null | wc -l)"' _ {} \; 2>/dev/null | sort
+            echo "--- git state after the sweeps (before the register rebuild)"
+            git status --short | head -40
+          } | tee data/gamebook/sweep-log.txt
+          {
+            echo "### Sweep log (captures written this run)"
+            echo ""
+            echo '```'
+            tail -45 data/gamebook/sweep-log.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
       - name: Rebuild the register and the published pages from the stored captures
         run: python3 tools/build_gamebook_register.py
       - name: "Gate: hashes, count pins, required fields, row links, no placeholders, no forbidden inference"
@@ -107,7 +151,7 @@ jobs:
             echo "### Game Book register gate"
             echo ""
             echo '```'
-            tail -40 /tmp/gate.txt
+            tail -60 /tmp/gate.txt
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
           exit $rc
