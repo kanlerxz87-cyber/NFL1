@@ -1,0 +1,590 @@
+{
+  "generated_by": "tools/check_results_official.py",
+  "read_date_utc": "2026-11-16",
+  "sources": {
+    "official_week_pages": [
+      "https://www.nfl.com/schedules/2026/by-week/week-1",
+      "https://www.nfl.com/schedules/2026/by-week/week-2",
+      "https://www.nfl.com/schedules/2026/by-week/week-3",
+      "https://www.nfl.com/schedules/2026/by-week/week-4",
+      "https://www.nfl.com/schedules/2026/by-week/week-5",
+      "https://www.nfl.com/schedules/2026/by-week/week-6",
+      "https://www.nfl.com/schedules/2026/by-week/week-7",
+      "https://www.nfl.com/schedules/2026/by-week/week-8",
+      "https://www.nfl.com/schedules/2026/by-week/week-9",
+      "https://www.nfl.com/schedules/2026/by-week/week-10"
+    ],
+    "official_game_pages": "one per row; see official_game_url in data/results/official_results_2026.csv"
+  },
+  "official_final_games": 149,
+  "official_final_games_by_week": {
+    "1": 16,
+    "2": 16,
+    "3": 16,
+    "4": 16,
+    "5": 15,
+    "6": 14,
+    "7": 14,
+    "8": 14,
+    "9": 15,
+    "10": 13
+  },
+  "results_file": "data/verified/games_2026.csv",
+  "results_file_rows": 136,
+  "matched_exactly": 136,
+  "mismatches": [],
+  "coverage_gap_official_finals_not_in_results_file": [
+    {
+      "week": 10,
+      "away": "WAS",
+      "home": "NYG",
+      "official_game_url": "https://www.nfl.com/games/commanders-at-giants-2026-reg-10"
+    },
+    {
+      "week": 10,
+      "away": "NE",
+      "home": "DET",
+      "official_game_url": "https://www.nfl.com/games/patriots-at-lions-2026-reg-10"
+    },
+    {
+      "week": 10,
+      "away": "KC",
+      "home": "ATL",
+      "official_game_url": "https://www.nfl.com/games/chiefs-at-falcons-2026-reg-10"
+    },
+    {
+      "week": 10,
+      "away": "HOU",
+      "home": "CLE",
+      "official_game_url": "https://www.nfl.com/games/texans-at-browns-2026-reg-10"
+    },
+    {
+      "week": 10,
+      "away": "MIN",
+      "home": "GB",
+      "official_game_url": "https://www.nfl.com/games/vikings-at-packers-2026-reg-10"
+    },
+    {
+      "week": 10,
+      "away": "MIA",
+      "home": "IND",
+      "official_game_url": "https://www.nfl.com/games/dolphins-at-colts-2026-reg-10"
+    },
+    {
+      "week": 10,
+      "away": "CAR",
+      "home": "NO",
+      "official_game_url": "https://www.nfl.com/games/panthers-at-saints-2026-reg-10"
+    },
+    {
+      "week": 10,
+      "away": "BUF",
+      "home": "NYJ",
+      "official_game_url": "https://www.nfl.com/games/bills-at-jets-2026-reg-10"
+    },
+    {
+      "week": 10,
+      "away": "JAX",
+      "home": "TEN",
+      "official_game_url": "https://www.nfl.com/games/jaguars-at-titans-2026-reg-10"
+    },
+    {
+      "week": 10,
+      "away": "LA",
+      "home": "AZ",
+      "official_game_url": "https://www.nfl.com/games/rams-at-cardinals-2026-reg-10"
+    },
+    {
+      "week": 10,
+      "away": "SEA",
+      "home": "LV",
+      "official_game_url": "https://www.nfl.com/games/seahawks-at-raiders-2026-reg-10"
+    },
+    {
+      "week": 10,
+      "away": "SF",
+      "home": "DAL",
+      "official_game_url": "https://www.nfl.com/games/49ers-at-cowboys-2026-reg-10"
+    },
+    {
+      "week": 10,
+      "away": "PIT",
+      "home": "CIN",
+      "official_game_url": "https://www.nfl.com/games/steelers-at-bengals-2026-reg-10"
+    }
+  ],
+  "results_rows_without_official_counterpart": [],
+  "scheduled_not_final_at_read_time": [
+    {
+      "week": 10,
+      "away": "LAC",
+      "home": "BAL",
+      "official_header_text": "Chargers at Ravens, Monday, November 16th, 8:15 PM, ESPN",
+      "official_game_url": "https://www.nfl.com/games/chargers-at-ravens-2026-reg-10",
+      "note": "no final score on the official page at read time; left blank"
+    }
+  ],
+  "record_check": [
+    {
+      "club": "WAS",
+      "printed_w_l_t": [
+        3,
+        5,
+        1
+      ],
+      "computed_w_l_t": [
+        3,
+        5,
+        1
+      ],
+      "equal": true
+    },
+    {
+      "club": "NYG",
+      "printed_w_l_t": [
+        5,
+        3,
+        1
+      ],
+      "computed_w_l_t": [
+        5,
+        3,
+        1
+      ],
+      "equal": true
+    },
+    {
+      "club": "NE",
+      "printed_w_l_t": [
+        5,
+        5,
+        0
+      ],
+      "computed_w_l_t": [
+        5,
+        5,
+        0
+      ],
+      "equal": true
+    },
+    {
+      "club": "DET",
+      "printed_w_l_t": [
+        7,
+        2,
+        0
+      ],
+      "computed_w_l_t": [
+        7,
+        2,
+        0
+      ],
+      "equal": true
+    },
+    {
+      "club": "KC",
+      "printed_w_l_t": [
+        7,
+        2,
+        0
+      ],
+      "computed_w_l_t": [
+        7,
+        2,
+        0
+      ],
+      "equal": true
+    },
+    {
+      "club": "ATL",
+      "printed_w_l_t": [
+        3,
+        7,
+        0
+      ],
+      "computed_w_l_t": [
+        3,
+        7,
+        0
+      ],
+      "equal": true
+    },
+    {
+      "club": "HOU",
+      "printed_w_l_t": [
+        3,
+        6,
+        0
+      ],
+      "computed_w_l_t": [
+        3,
+        6,
+        0
+      ],
+      "equal": true
+    },
+    {
+      "club": "CLE",
+      "printed_w_l_t": [
+        6,
+        4,
+        0
+      ],
+      "computed_w_l_t": [
+        6,
+        4,
+        0
+      ],
+      "equal": true
+    },
+    {
+      "club": "MIN",
+      "printed_w_l_t": [
+        7,
+        2,
+        0
+      ],
+      "computed_w_l_t": [
+        7,
+        2,
+        0
+      ],
+      "equal": true
+    },
+    {
+      "club": "GB",
+      "printed_w_l_t": [
+        6,
+        4,
+        0
+      ],
+      "computed_w_l_t": [
+        6,
+        4,
+        0
+      ],
+      "equal": true
+    },
+    {
+      "club": "MIA",
+      "printed_w_l_t": [
+        1,
+        8,
+        0
+      ],
+      "computed_w_l_t": [
+        1,
+        8,
+        0
+      ],
+      "equal": true
+    },
+    {
+      "club": "IND",
+      "printed_w_l_t": [
+        3,
+        7,
+        0
+      ],
+      "computed_w_l_t": [
+        3,
+        7,
+        0
+      ],
+      "equal": true
+    },
+    {
+      "club": "CAR",
+      "printed_w_l_t": [
+        4,
+        5,
+        0
+      ],
+      "computed_w_l_t": [
+        4,
+        5,
+        0
+      ],
+      "equal": true
+    },
+    {
+      "club": "NO",
+      "printed_w_l_t": [
+        3,
+        6,
+        0
+      ],
+      "computed_w_l_t": [
+        3,
+        6,
+        0
+      ],
+      "equal": true
+    },
+    {
+      "club": "BUF",
+      "printed_w_l_t": [
+        8,
+        1,
+        0
+      ],
+      "computed_w_l_t": [
+        8,
+        1,
+        0
+      ],
+      "equal": true
+    },
+    {
+      "club": "NYJ",
+      "printed_w_l_t": [
+        2,
+        8,
+        0
+      ],
+      "computed_w_l_t": [
+        2,
+        8,
+        0
+      ],
+      "equal": true
+    },
+    {
+      "club": "JAX",
+      "printed_w_l_t": [
+        7,
+        2,
+        0
+      ],
+      "computed_w_l_t": [
+        7,
+        2,
+        0
+      ],
+      "equal": true
+    },
+    {
+      "club": "TEN",
+      "printed_w_l_t": [
+        1,
+        8,
+        0
+      ],
+      "computed_w_l_t": [
+        1,
+        8,
+        0
+      ],
+      "equal": true
+    },
+    {
+      "club": "LA",
+      "printed_w_l_t": [
+        6,
+        4,
+        0
+      ],
+      "computed_w_l_t": [
+        6,
+        4,
+        0
+      ],
+      "equal": true
+    },
+    {
+      "club": "AZ",
+      "printed_w_l_t": [
+        3,
+        7,
+        0
+      ],
+      "computed_w_l_t": [
+        3,
+        7,
+        0
+      ],
+      "equal": true
+    },
+    {
+      "club": "SEA",
+      "printed_w_l_t": [
+        6,
+        4,
+        0
+      ],
+      "computed_w_l_t": [
+        6,
+        4,
+        0
+      ],
+      "equal": true
+    },
+    {
+      "club": "LV",
+      "printed_w_l_t": [
+        4,
+        6,
+        0
+      ],
+      "computed_w_l_t": [
+        4,
+        6,
+        0
+      ],
+      "equal": true
+    },
+    {
+      "club": "SF",
+      "printed_w_l_t": [
+        8,
+        1,
+        0
+      ],
+      "computed_w_l_t": [
+        8,
+        1,
+        0
+      ],
+      "equal": true
+    },
+    {
+      "club": "DAL",
+      "printed_w_l_t": [
+        4,
+        6,
+        0
+      ],
+      "computed_w_l_t": [
+        4,
+        6,
+        0
+      ],
+      "equal": true
+    },
+    {
+      "club": "PIT",
+      "printed_w_l_t": [
+        6,
+        3,
+        0
+      ],
+      "computed_w_l_t": [
+        6,
+        3,
+        0
+      ],
+      "equal": true
+    },
+    {
+      "club": "CIN",
+      "printed_w_l_t": [
+        7,
+        2,
+        0
+      ],
+      "computed_w_l_t": [
+        7,
+        2,
+        0
+      ],
+      "equal": true
+    },
+    {
+      "club": "LAC",
+      "printed_w_l_t": [
+        0,
+        8,
+        0
+      ],
+      "computed_w_l_t": [
+        0,
+        8,
+        0
+      ],
+      "equal": true
+    },
+    {
+      "club": "BAL",
+      "printed_w_l_t": [
+        4,
+        5,
+        0
+      ],
+      "computed_w_l_t": [
+        4,
+        5,
+        0
+      ],
+      "equal": true
+    },
+    {
+      "club": "CHI",
+      "printed_w_l_t": [
+        7,
+        2,
+        0
+      ],
+      "computed_w_l_t": [
+        7,
+        2,
+        0
+      ],
+      "equal": true
+    },
+    {
+      "club": "DEN",
+      "printed_w_l_t": [
+        7,
+        2,
+        0
+      ],
+      "computed_w_l_t": [
+        7,
+        2,
+        0
+      ],
+      "equal": true
+    },
+    {
+      "club": "PHI",
+      "printed_w_l_t": [
+        2,
+        7,
+        0
+      ],
+      "computed_w_l_t": [
+        2,
+        7,
+        0
+      ],
+      "equal": true
+    },
+    {
+      "club": "TB",
+      "printed_w_l_t": [
+        3,
+        6,
+        0
+      ],
+      "computed_w_l_t": [
+        3,
+        6,
+        0
+      ],
+      "equal": true
+    }
+  ],
+  "checks": {
+    "V1_header_parses": 149,
+    "V2_nicknames_to_club_codes": 149,
+    "V3_header_scores_equal_columns": 149,
+    "V4_url_slug": 149,
+    "V5_date_equals_header_day": 149,
+    "V6_lookup": 149,
+    "V6_match": 136,
+    "V7_results_rows_checked": 136,
+    "V8_records_checked": 32
+  },
+  "failures": [],
+  "verification_pass": true
+}
