@@ -1,0 +1,77 @@
+{
+ "generated_at": "2026-11-16T18:08:20Z",
+ "rows": [
+  {
+   "id": "D-C01",
+   "claim": "The repository's committed standings copies match the official table",
+   "where": "data/standings.json, data/evidence/standings_current.json, data/s9cb/official_standings_2026.csv, data/personnel/official_standings_2026-11-13.csv",
+   "verdict": "partly",
+   "evidence": "standings.json: 6/32 clubs reproduce; standings_current.json: 32/32 clubs reproduce; official_standings_2026.csv: 6/32 clubs reproduce; official_standings_2026-11-13.csv: 8/32 clubs reproduce",
+   "src": "https://www.nfl.com/standings/league/2026/reg",
+   "source_url": "https://www.nfl.com/standings/league/2026/reg"
+  },
+  {
+   "id": "D-C02",
+   "claim": "Games played reconciles with the official standings",
+   "where": "tools/verify_official.py check E. counts (fails on main at 46c82ae)",
+   "verdict": "fails",
+   "evidence": "official standings imply 149 completed games; the backtest corpus holds 137 results; the dashboard asserts 137",
+   "src": "https://www.nfl.com/schedules/2026/REG11",
+   "source_url": "https://www.nfl.com/schedules/2026/REG11"
+  },
+  {
+   "id": "D-C03",
+   "claim": "The Week-10 injury report is fully captured",
+   "where": "data/desk/injuries_w10_2026-11-16.tsv vs the committed capture",
+   "verdict": "confirmed",
+   "evidence": "347 rows, 28 clubs; 0 field differences against the committed capture",
+   "src": "https://www.nfl.com/injuries/league/2026/reg10",
+   "source_url": "https://www.nfl.com/injuries/league/2026/reg10"
+  },
+  {
+   "id": "D-C04",
+   "claim": "Three Lions rows carry a blank game-status cell",
+   "where": "the brief's finding about Kerby Joseph, Cade Mays and D.J. Reed",
+   "verdict": "confirmed",
+   "evidence": "the official page lists all three with game status Out; the blank cells the brief describes are in an older hand copy, not on the page",
+   "src": "https://www.nfl.com/injuries/league/2026/reg10",
+   "source_url": "https://www.nfl.com/injuries/league/2026/reg10"
+  },
+  {
+   "id": "D-C05",
+   "claim": "The Week-11 schedule copy matches the official page",
+   "where": "data/evidence/schedule_current.json",
+   "verdict": "confirmed",
+   "evidence": "13 fixtures, 6 byes, 0 differences",
+   "src": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  {
+   "id": "D-C06",
+   "claim": "The Ravens depth chart still lists Lamar Jackson and Tyler Huntley",
+   "where": "the brief's stale-depth finding",
+   "verdict": "resolved at source",
+   "evidence": "the chart re-read this session lists Brissett, Fagnano and Slovis at QB — no Jackson, no Huntley. The dated transaction 11/06 AZ -> BAL Jacoby Brissett explains the change",
+   "src": "https://www.baltimoreravens.com/team/depth-chart",
+   "source_url": "https://www.baltimoreravens.com/team/depth-chart"
+  },
+  {
+   "id": "D-C07",
+   "claim": "The Packers depth chart needs jersey numbers stripped to parse",
+   "where": "the brief's depth-parsing finding",
+   "verdict": "confirmed",
+   "evidence": "the live page prints '9 Christian Watson' style cells, so the number must be stripped; the register holds the stripped name and the raw string",
+   "src": "https://www.packers.com/team/depth-chart",
+   "source_url": "https://www.packers.com/team/depth-chart"
+  },
+  {
+   "id": "D-C08",
+   "claim": "A club publishes a depth slot with no first name",
+   "where": "the brief's empty-slot finding",
+   "verdict": "confirmed",
+   "evidence": "2 empty slot(s) across the three charts transcribed this session (BAL kicker, GB punt returner)",
+   "src": "https://www.packers.com/team/depth-chart",
+   "source_url": "https://www.packers.com/team/depth-chart"
+  }
+ ]
+}

@@ -1,0 +1,96 @@
+{
+ "generated_at": "2026-11-16T18:08:20Z",
+ "note": "Official sources re-read in this session for the desk/ site. A row that could not be confirmed is not listed here; it is on the flagged page instead.",
+ "sources": [
+  {
+   "id": "D-S01",
+   "publisher": "National Football League (nfl.com)",
+   "kind": "Official league standings",
+   "url": "https://www.nfl.com/standings/league/2026/reg",
+   "title": "2026 NFL League Standings (detailed view: W, L, T, PCT, PF, PA, NET PTS)",
+   "what": "32 club rows re-read in full this session; the table used for every standings row on this site",
+   "retrieved": "2026-11-16",
+   "verified": true
+  },
+  {
+   "id": "D-S02",
+   "publisher": "National Football League (nfl.com)",
+   "kind": "Official injury report",
+   "url": "https://www.nfl.com/injuries/league/2026/reg10",
+   "title": "Official NFL Injury Report for Players - Week 10 of the 2026 Season",
+   "what": "8 page chunks read in full; player, position, injury, practice status and game status for 347 rows across 28 clubs",
+   "retrieved": "2026-11-16",
+   "verified": true
+  },
+  {
+   "id": "D-S03",
+   "publisher": "National Football League (nfl.com)",
+   "kind": "Official schedule",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "title": "NFL Week 11 Schedule 2026: Games, Times, Matchups & Tickets",
+   "what": "13 fixtures, kickoff times, networks and the 6-club bye block for Week 11",
+   "retrieved": "2026-11-16",
+   "verified": true
+  },
+  {
+   "id": "D-S04",
+   "publisher": "National Football League (nfl.com)",
+   "kind": "Official schedule (results)",
+   "url": "https://www.nfl.com/schedules/2026/REG11",
+   "title": "NFL Schedules 2026 — Week 10 results and the Monday fixture",
+   "what": "13 final scores plus the still-scheduled LAC at BAL fixture used to test the backtest corpus",
+   "retrieved": "2026-11-16",
+   "verified": true
+  },
+  {
+   "id": "D-S05",
+   "publisher": "Detroit Lions (official club site)",
+   "kind": "Official club depth chart",
+   "url": "https://www.detroitlions.com/team/depth-chart",
+   "title": "2026 Lions Depth Chart — Unofficial Depth Chart Compiled by Lions Football Communications",
+   "what": "offense, defense and special teams; the club labels it 'Unofficial', which is published verbatim here",
+   "retrieved": "2026-11-16",
+   "verified": true
+  },
+  {
+   "id": "D-S06",
+   "publisher": "Baltimore Ravens (official club site)",
+   "kind": "Official club depth chart",
+   "url": "https://www.baltimoreravens.com/team/depth-chart",
+   "title": "Baltimore Ravens Depth Chart",
+   "what": "re-read this session to test whether the Lamar Jackson / Tyler Huntley rows are still published",
+   "retrieved": "2026-11-16",
+   "verified": true
+  },
+  {
+   "id": "D-S07",
+   "publisher": "Green Bay Packers (official club site)",
+   "kind": "Official club depth chart",
+   "url": "https://www.packers.com/team/depth-chart",
+   "title": "Green Bay Packers Depth Chart — 'Unofficial, Nov. 10, 2026'",
+   "what": "re-read to test the committed parse, including the jersey-number prefix and the blank PR cell",
+   "retrieved": "2026-11-16",
+   "verified": true
+  },
+  {
+   "id": "D-S08",
+   "publisher": "National Football League (nfl.com)",
+   "kind": "Official transactions register",
+   "url": "https://www.nfl.com/transactions/league/trades/2026/11",
+   "title": "NFL Transactions — trades, November 2026",
+   "what": "the dated row '11/06 AZ BAL Jacoby Brissett Traded' that the Ravens chart now reflects; read from the committed capture of this page",
+   "retrieved": "2026-11-16",
+   "verified": true
+  },
+  {
+   "id": "D-S09",
+   "publisher": "National Football League (nfl.com)",
+   "kind": "Official reserve list",
+   "url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "title": "NFL Transactions — reserve list, November 2026",
+   "what": "the dated row '11/10 MIA MIA Malik Willis' showing a player can be unavailable without appearing on the injury report",
+   "retrieved": "2026-11-16",
+   "verified": true
+  }
+ ]
+}
