@@ -39,6 +39,10 @@ NAV = [
     ("pages/injuries.html", "Injuries"),
     ("pages/depth.html", "Depth & Deficiency"),
     ("pages/snapshots.html", "Injury Snapshots"),
+    # Session 1d824ec2-nfl1 (V6): the dated official transactions and reserve-list register,
+    # which is what makes "not listed on the injury report" mean "on a reserve list" rather than
+    # "available". Additive entry only; no other session's entry is moved or renamed.
+    ("reserve/index.html", "Transactions & Reserve"),
     ("pages/questions.html", "Questions"),
     ("pages/suggestions.html", "Suggestions"),
     ("pages/evidence.html", "Evidence"),
@@ -83,7 +87,9 @@ SIDEBAR = [
                      ("pages/props.html", "Player Props")]),
     ("Availability", [("pages/injuries.html", "Injuries"),
                       ("pages/depth.html", "Depth & Deficiency"),
-                      ("pages/snapshots.html", "Injury Snapshots")]),
+                      ("pages/snapshots.html", "Injury Snapshots"),
+                      # Session 1d824ec2-nfl1: dated roster events, additive.
+                      ("reserve/index.html", "Transactions & Reserve")]),
     ("Decisions", [("pages/questions.html", "Questions"),
                    ("pages/suggestions.html", "Suggestions")]),
     ("Evidence", [("pages/evidence.html", "Evidence"),

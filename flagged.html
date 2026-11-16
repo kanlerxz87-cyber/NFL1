@@ -85,17 +85,17 @@
   <div class="main">
     <div class="topbar">
       <div class="crumb">NFL1 / <b>Flagged for Review</b></div>
-      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">101 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">105 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
     </div>
     <main class="content" id="main">
       <div class="kicker">Assurance</div>
       <h1>Flagged for Review</h1>
       <p class="lede">Clearly labelled irregularities, official-page conflicts, unverified values and coordination issues — each with an official source link for manual review, none blocking the merge.</p>
       <div class="callout flag"><b>Flagged for Review.</b> These irregularities and unverified items do not block the merge or the live site. Each has an official source link for manual review and a suggested action. A status of <em>needs review</em> means exactly this: published here, not blocking.</div>
-<div class="cards"><div class="card"><div class="label">Flagged items</div><div class="value">101</div><div class="detail">All with source links</div></div><div class="card"><div class="label">Official-page irregularities</div><div class="value">7</div><div class="detail">F02–F08</div></div><div class="card"><div class="label">Missing official data</div><div class="value">5</div><div class="detail">F09–F11, F14, F15</div></div><div class="card"><div class="label">Combined-site review</div><div class="value">45</div><div class="detail">F25–F36</div></div></div>
+<div class="cards"><div class="card"><div class="label">Flagged items</div><div class="value">105</div><div class="detail">All with source links</div></div><div class="card"><div class="label">Official-page irregularities</div><div class="value">7</div><div class="detail">F02–F08</div></div><div class="card"><div class="label">Missing official data</div><div class="value">5</div><div class="detail">F09–F11, F14, F15</div></div><div class="card"><div class="label">Combined-site review</div><div class="value">49</div><div class="detail">F25–F36</div></div></div>
 <h2 id="all">All flagged irregularities</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-flags" aria-label="Filter tbl-flags" placeholder="Filter rows…">
-<span class="count" data-count-for="tbl-flags">101 rows shown</span></div>
+<span class="count" data-count-for="tbl-flags">105 rows shown</span></div>
 <div class="tablewrap"><table class="data-table" id="tbl-flags"><caption>Every flag with category, description, impact, status, official source link and suggested action for the reviewer.</caption>
 <thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Category</th><th scope="col" class="sortable">Irregularity / unverified item</th><th scope="col" class="sortable">Impact on decisions</th><th scope="col" class="sortable">Status</th><th scope="col" class="sortable">Suggested action</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
 <tr id="F01" data-verified="true">
@@ -1006,6 +1006,42 @@
 <td><span class="badge neutral">needs review</span></td>
 <td data-value="1" class="wide">Owner decision: (a) allow x.com status URLs of the 32 club accounts as official sources, changing OFFICIAL_DOMAINS in tools/verify.py, or (b) keep the team post as an unregistered note only. Option (a) also needs a rule for which account counts as official.</td>
 <td><span class="src"><a href="https://www.nfl.com/transactions/league/trades/2026/11" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league transaction log (trades, November 2026)">S36 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F63" data-verified="true">
+<td><code>F63</code></td>
+<td data-value="1">Availability model built on a stale week while the current week was readable</td>
+<td data-value="1" class="wide">data/model/availability.json declares week 6 and carries its own warning &quot;The official current-week report could not be scraped, so this availability view falls back to the mirrored feed&quot;. The same file records official_status ok with 347 rows across 28 clubs, and data/model/official_injuries.json for week 10 holds those 347 rows. The official page for week 11 was read on 2026-11-16 and served week 10 content (https://www.nfl.com/injuries/league/2026/reg11), so a current-week scrape was possible. Four clubs are listed in clubs_without_report (CIN, DET, MIA, MIN) yet each does appear in the official capture; Detroit has 9 rows there. The claim that the official report is unreachable, and the club list built on it, are therefore wrong in the repository, not gaps in the source.</td>
+<td data-value="1" class="wide">Any surprise, ablation or per-team unavailability count taken from that file is a week-6 number labelled current, and understates four clubs by their entire report. It is also the file the depth-staleness check reads: 0 player names can be extracted from it, so a team-level model built on it cannot name anyone.</td>
+<td><span class="badge neutral">Open - owner decision</span></td>
+<td data-value="1" class="wide">rebuild availability from the week-10 official capture, or relabel the artifact week 6 and say which week every number in it belongs to; do not keep both claims in one file</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/league/2026/reg11" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report (week 11 requested, week 10 served)">S39 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="F64" data-verified="true">
+<td><code>F64</code></td>
+<td data-value="1">Published injury-row count hardcoded instead of derived</td>
+<td data-value="1" class="wide">tools/build.py:1544 and tools/build_docs_site.py:456, 1034, 1123 and 1144 hardcode 254 injury rows. The official week-10 capture in data/model/official_injuries.json holds 347 rows, and docs/injury-depth.html publishes 254 five times.</td>
+<td data-value="1" class="wide">A reader checking the site against nfl.com finds a number that does not match the file the site says it was built from, and the mismatch survives a data refresh because nothing recomputes it.</td>
+<td><span class="badge neutral">Open - owner decision</span></td>
+<td data-value="1" class="wide">derive the count from the capture at build time; fail the build when the printed number is not that count</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="F65" data-verified="true">
+<td><code>F65</code></td>
+<td data-value="1">Depth evidence contradicted by the published text</td>
+<td data-value="1" class="wide">scripts/verified/build_availability.py:41 renders &quot;Depth order known 0/32 - the NFL publishes no depth charts&quot;, and analysis/injuries.py states that the depth-chart URL returns 404. Against that: data/session-1505ac8e/depth_charts.json holds 31 of 32 clubs with 934 position rows and 1990 slots (HOU unavailable, captured 2026-11-12T23:17Z), and data/depth/official_register.json holds official club-page captures pinned at GB 55 / KC 60 / SF 58 / SEA 63 rows. Two clubs&#x27; worth of the register is 4 pages, not 32, so both statements are partly true and both are published as if total.</td>
+<td data-value="1" class="wide">The site simultaneously claims no depth data exists and holds per-slot depth rows. A reader cannot tell which artifact a depth number came from, which is what the ablation requirement needs to be measurable.</td>
+<td><span class="badge neutral">Open - owner decision</span></td>
+<td data-value="1" class="wide">pick one register as the depth source of truth, say in the text how many clubs it covers, and replace &quot;none exists&quot; with the coverage count</td>
+<td><span class="src"><a href="https://www.nfl.com/transactions/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league transaction register (index)">S38 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="F66" data-verified="true">
+<td><code>F66</code></td>
+<td data-value="1">The league&#x27;s transactions page prints at most 25 rows per month</td>
+<td data-value="1" class="wide">https://www.nfl.com/transactions/league/&lt;category&gt;/&lt;year&gt;/&lt;month&gt; prints the 25 most recent rows of that month and no more. Verified on 2026-11-16: adding ?page=2 to reserve-list/2026/11 returns the same 25 rows, and a per-day url (/transactions/league/reserve-list/2026/11/14) returns 404. So a month whose oldest printed row is later than the first of the month is a partial view at the source: 15 of the 24 captured pages were in that state on 2026-11-16, and the pages for months that have already closed cannot be completed by re-reading them.</td>
+<td data-value="1" class="wide">Any monthly or season-long turnover count is a floor, not a total. The register handles the running month by taking the union of every capture (the hourly sweep keeps rows from disappearing when they slide out of the window), and the published page labels capped months explicitly. Closed months before the sweep started are permanently short.</td>
+<td><span class="badge neutral">Open - disclosed on the site, not repaired</span></td>
+<td data-value="1" class="wide">if season-complete turnover is required, source it from an official publication that prints whole months (Game Books or the league&#x27;s own transaction PDFs); do not present a capped month as a total</td>
+<td><span class="src"><a href="https://www.nfl.com/transactions/league/reserve-list/2026/11?page=2" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league transaction log (window probe)">S40 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
 </tbody></table></div>
 <h2 id="unverified">Registry of blank/unverified values</h2>

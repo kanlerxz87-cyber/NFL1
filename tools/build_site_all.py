@@ -63,6 +63,10 @@ STEPS = [
     # session 543676f8-nfl1: the official-capture page is built before the landing page so the
     # landing page can link it; it fails the build if the capture does not pass its gate.
     ("official capture page (capture/)", [sys.executable, "tools/build_capture_site.py"], ROOT),
+    # session 1d824ec2-nfl1 (V6): the transactions / reserve-list sub-site, rendered from
+    # data/reserve/. Additive step, same reason as above: before the landing page.
+    ("transactions & reserve sub-site (reserve/)",
+     [sys.executable, "tools/build_reserve_site.py"], ROOT),
     # session 55dc53f4-nfl1 (P5/P6): the per-team injury view and the 13-vs-15-Nov delta are built
     # from committed capture files, then the shadow/ sub-site. Before the landing page, as above.
     ("shadow team view and delta", [sys.executable, "tools/build_team_view.py"], ROOT),
@@ -95,7 +99,7 @@ def main() -> int:
 
     if check:
         print("--- checking that the committed pages equal the generated pages")
-        r = subprocess.run(["git", "diff", "--exit-code", "--", "*.html", "README.md", "docs/", "verified-lab/", "referee/"],
+        r = subprocess.run(["git", "diff", "--exit-code", "--", "*.html", "README.md", "docs/", "verified-lab/", "referee/", "reserve/"],
                            cwd=ROOT)
         if r.returncode != 0:
             print("FAILED: the committed pages differ from the generated pages "

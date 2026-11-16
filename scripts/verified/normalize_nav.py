@@ -31,6 +31,9 @@ CANON = [
     ("depth.html", "Depth & Deficiency"),
     # Session 90c2b454-nfl1 (P3): the official injury-report snapshot ledger.
     ("snapshots.html", "Injury Snapshots"),
+    # Session 1d824ec2-nfl1 (V6): the official transactions and reserve-list register. Added at
+    # the same relative position as in pipeline/gen_site.py NAV, which this list must match.
+    ("reserve/index.html", "Transactions & Reserve"),
     ("questions.html", "Questions"),
     ("suggestions.html", "Suggestions"),
     ("evidence.html", "Evidence"),
