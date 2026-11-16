@@ -4221,14 +4221,14 @@ Claim block above (RW1–RW9). What actually landed, and the numbers as publishe
 
 | ID | Outcome | Evidence a reader can check |
 |---|---|---|
-| RW1 | Claim committed and pushed before any other file was touched | `00e3cc77` (claim), this block |
-| RW2 | Reward rule frozen in a results-free registration commit: two-stage rule (Stage-1 proper-score qualification → Stage-2 prospective CLV/ROI escrow), non-monetary badge tiers, demotion, two-sided mind-changers | `rewards/REWARDS-RULE.md`; registration commit `00e3cc77b41a7d6c1ffb0a12d2beaf9835f900df`; `data/rewards/thresholds.json` |
+| RW1 | Claim committed and pushed before any other file was touched | `5fe54c0` (claim), this block |
+| RW2 | Reward rule frozen in a results-free registration commit: two-stage rule (Stage-1 proper-score qualification → Stage-2 prospective CLV/ROI escrow), non-monetary badge tiers, demotion, two-sided mind-changers | `rewards/REWARDS-RULE.md`; registration commit `fb7576223ea08acf39910efcdb47c620980386aa`; `data/rewards/thresholds.json` |
 | RW3 | Frozen reward data + concrete thresholds + per-track status (no badge awarded) | `data/rewards/rewards.json`, `data/rewards/thresholds.json` |
 | RW4 | Self-contained additive sub-site `rewards/` (index.html) built from committed data only; every table row source-linked | `rewards/build.py`, `rewards/index.html`, `rewards/assets/rewards.css` |
 | RW5 | Verifier + 11 unit tests: rule drift (sha256 + registration commit), concrete thresholds, no backtest metric as a column, every row sourced, links resolve, reproducible build | `rewards/verify.py`, `tests/test_rewards.py` (Ran 11 tests, OK) |
 | RW6 | Additive integration only: nav (`pipeline/gen_site.py` NAV/SIDEBAR + `scripts/verified/normalize_nav.py` CANON), build step + diff path (`tools/build_site_all.py`), ownership (`tools/check_generators.py`), `verify.yml` gate step — pure additions, no existing line edited | diffs are additions only |
 | RW7 | Readiness MO-04 → **Done**, in place. **Only the MO-04 row changed** (13 insertions / 13 deletions); no other session's row was touched | `room/data/readiness.json` diff = 1 row; `scripts/brief_07810d9f/register.py` MO-04 row updated as the source of truth |
-| RW8 | Flag F68, question Q31, suggestion S33, sources S41–S42 appended (append-only) | `data/flags.json` (107), `data/questions.json` (31), `data/suggestions.json` (35), `data/sources.json` (41) |
+| RW8 | Flag F68, question Q31, suggestion S33, sources S48–S49 appended (append-only; renumbered from S41/S42 after a rebase collided with main's S41–S47) | `data/flags.json` (117), `data/questions.json` (31), `data/suggestions.json` (35), `data/sources.json` (48) |
 | RW9 | Integration: canonical build, all gates, PR → merge → Pages confirm | see merge record below |
 
 **The rule, in numbers.** Stage 1 (Verified Signal badge) requires, on a frozen walk-forward
@@ -4273,6 +4273,11 @@ step). No existing line was edited, reordered or renamed. `room/data/readiness.j
 `strat/**` were regenerated only to run their gate and were **reverted** — not part of this scope.
 
 **Deviations.** Branch name is Arena-fixed (`arena/c5444cc9-nfl1`), not `session-<id>/<task>`; the
-scope was kept non-overlapping by file. The registration commit is `00e3cc77` (rule + thresholds
+scope was kept non-overlapping by file. The registration commit is `fb757622` (rule + thresholds
 only, results-free); the machinery, integration and register appends are in later commits on the
-same branch.
+same branch. **Rebase note:** the branch was rebased onto `main` (which had advanced with a data-bot
+refresh and other sessions' work) before pushing; the rebase rewrote the registration commit hash
+(`00e3cc77` → `fb757622`), so `data/rewards/rewards.json` and this log were updated to the rebased
+hash. The rule file's content SHA-256 is unchanged, so the registration is intact; only the commit
+pointer moved. The appended sources were renumbered S41/S42 → S48/S49 because `main` had already
+used S41–S47.
