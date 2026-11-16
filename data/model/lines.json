@@ -1,8 +1,8 @@
 {
- "generated_at": "2026-11-16T18:29:01+00:00",
+ "generated_at": "2026-11-15T17:42:22+00:00",
  "sign_convention_check": {
-  "corr_market_line_vs_home_margin": 0.44,
-  "n_games": 5604,
+  "corr_market_line_vs_home_margin": 0.439,
+  "n_games": 5592,
   "conclusion": "Positive correlation proves the mirrored closing line is expressed as points the HOME team is expected to win by (positive = home favourite)."
  },
  "blend_test": {
@@ -11,9 +11,9 @@
   "weight_market": 1.336,
   "weight_model": -0.328,
   "n_train": 272,
-  "n_test": 149,
-  "test_mae_hybrid": 9.628,
-  "test_mae_market_only": 9.581,
+  "n_test": 137,
+  "test_mae_hybrid": 9.507,
+  "test_mae_market_only": 9.449,
   "interpretation": "A model weight at or below zero means the model's disagreement with the market was wrong on average in the test window; a positive weight with a lower test MAE means genuine incremental information."
  },
  "method": {
@@ -67,19 +67,19 @@
   },
   {
    "label": "test 2026",
-   "n": 149,
-   "spread_mae_model": 10.128,
-   "spread_mae_market": 9.581,
+   "n": 137,
+   "spread_mae_model": 9.952,
+   "spread_mae_market": 9.449,
    "spread_mae_diff_ci95": [
-    0.057,
-    1.043
+    -0.032,
+    1.036
    ],
-   "total_mae_model": 11.038,
-   "total_mae_market": 10.433,
-   "corr_model_market_spread": 0.803,
-   "corr_model_market_total": 0.677,
-   "residual_sd_margin": 12.76,
-   "residual_sd_total": 13.82
+   "total_mae_model": 11.228,
+   "total_mae_market": 10.551,
+   "corr_model_market_spread": 0.779,
+   "corr_model_market_total": 0.67,
+   "residual_sd_margin": 12.55,
+   "residual_sd_total": 13.93
   }
  ],
  "week": 11,
@@ -90,32 +90,32 @@
    "gameday": "2026-11-19",
    "away": "IND",
    "home": "HOU",
-   "my_home_line": 5.2,
-   "my_total": 45.1,
-   "my_line_display": "HOU -5.2",
-   "my_win_prob_home": 0.652,
-   "market_home_line": 10.5,
+   "my_home_line": 5.7,
+   "my_total": 45.6,
+   "my_line_display": "HOU -5.7",
+   "my_win_prob_home": 0.664,
+   "market_home_line": 10.0,
    "market_total": 44.5,
-   "edge_home_line": -5.26,
-   "edge_total": 0.58,
+   "edge_home_line": -4.32,
+   "edge_total": 1.05,
    "home_line_band95": [
-    -21.0,
-    31.5
+    -20.6,
+    31.9
    ],
    "status": "gap-large-unvalidated",
    "home_rating": {
-    "off": 0.0145,
-    "def": 0.029,
-    "net": 0.0435,
-    "n_off": 1423,
-    "n_def": 1382
+    "off": 0.0187,
+    "def": 0.0422,
+    "net": 0.0609,
+    "n_off": 1361,
+    "n_def": 1317
    },
    "away_rating": {
-    "off": -0.0411,
-    "def": -0.0452,
-    "net": -0.0863,
-    "n_off": 1404,
-    "n_def": 1411
+    "off": -0.0214,
+    "def": -0.0631,
+    "net": -0.0845,
+    "n_off": 1351,
+    "n_def": 1349
    },
    "source_games": "https://www.nfl.com/schedules/2026/REG11",
    "source_pbp": "https://github.com/nflverse/nflverse-data/releases/tag/pbp"
@@ -126,32 +126,32 @@
    "gameday": "2026-11-22",
    "away": "MIA",
    "home": "BUF",
-   "my_home_line": 10.1,
-   "my_total": 47.2,
-   "my_line_display": "BUF -10.1",
-   "my_win_prob_home": 0.775,
+   "my_home_line": 10.0,
+   "my_total": 47.5,
+   "my_line_display": "BUF -10.0",
+   "my_win_prob_home": 0.772,
    "market_home_line": 16.5,
-   "market_total": 45.5,
-   "edge_home_line": -6.41,
-   "edge_total": 1.67,
+   "market_total": 46.5,
+   "edge_home_line": -6.5,
+   "edge_total": 1.01,
    "home_line_band95": [
-    -16.1,
-    36.3
+    -16.2,
+    36.2
    ],
    "status": "gap-large-unvalidated",
    "home_rating": {
-    "off": 0.1348,
-    "def": 0.0035,
-    "net": 0.1383,
-    "n_off": 1381,
-    "n_def": 1318
+    "off": 0.1279,
+    "def": 0.0061,
+    "net": 0.134,
+    "n_off": 1336,
+    "n_def": 1260
    },
    "away_rating": {
-    "off": -0.0716,
-    "def": -0.0934,
-    "net": -0.1651,
-    "n_off": 1143,
-    "n_def": 1226
+    "off": -0.052,
+    "def": -0.114,
+    "net": -0.166,
+    "n_off": 1081,
+    "n_def": 1173
    },
    "source_games": "https://www.nfl.com/schedules/2026/REG11",
    "source_pbp": "https://github.com/nflverse/nflverse-data/releases/tag/pbp"
@@ -162,30 +162,30 @@
    "gameday": "2026-11-22",
    "away": "BAL",
    "home": "CAR",
-   "my_home_line": -0.3,
-   "my_total": 46.2,
-   "my_line_display": "CAR +0.3",
-   "my_win_prob_home": 0.49,
-   "market_home_line": 2.5,
+   "my_home_line": -0.8,
+   "my_total": 46.5,
+   "my_line_display": "CAR +0.8",
+   "my_win_prob_home": 0.475,
+   "market_home_line": 1.5,
    "market_total": 44.5,
-   "edge_home_line": -2.84,
-   "edge_total": 1.74,
+   "edge_home_line": -2.34,
+   "edge_total": 2.02,
    "home_line_band95": [
-    -26.6,
-    25.9
+    -27.1,
+    25.4
    ],
    "status": "gap-unvalidated",
    "home_rating": {
-    "off": -0.0066,
-    "def": -0.0512,
-    "net": -0.0578,
-    "n_off": 1311,
-    "n_def": 1289
+    "off": 0.0021,
+    "def": -0.0767,
+    "net": -0.0746,
+    "n_off": 1247,
+    "n_def": 1230
    },
    "away_rating": {
-    "off": 0.0273,
-    "def": -0.0148,
-    "net": 0.0124,
+    "off": 0.0266,
+    "def": -0.0132,
+    "net": 0.0134,
     "n_off": 1256,
     "n_def": 1326
    },
@@ -198,32 +198,32 @@
    "gameday": "2026-11-22",
    "away": "NO",
    "home": "CHI",
-   "my_home_line": 8.3,
-   "my_total": 46.1,
-   "my_line_display": "CHI -8.3",
-   "my_win_prob_home": 0.732,
-   "market_home_line": 10.5,
+   "my_home_line": 7.9,
+   "my_total": 46.5,
+   "my_line_display": "CHI -7.9",
+   "my_win_prob_home": 0.722,
+   "market_home_line": 9.5,
    "market_total": 48.5,
-   "edge_home_line": -2.2,
-   "edge_total": -2.43,
+   "edge_home_line": -1.62,
+   "edge_total": -1.97,
    "home_line_band95": [
-    -17.9,
-    34.5
+    -18.4,
+    34.1
    ],
-   "status": "gap-unvalidated",
+   "status": "small-difference",
    "home_rating": {
-    "off": 0.1045,
-    "def": 0.0302,
-    "net": 0.1347,
+    "off": 0.1038,
+    "def": 0.0301,
+    "net": 0.1339,
     "n_off": 1471,
     "n_def": 1271
    },
    "away_rating": {
-    "off": -0.0735,
-    "def": -0.0312,
-    "net": -0.1047,
-    "n_off": 1404,
-    "n_def": 1375
+    "off": -0.0503,
+    "def": -0.04,
+    "net": -0.0903,
+    "n_off": 1345,
+    "n_def": 1311
    },
    "source_games": "https://www.nfl.com/schedules/2026/REG11",
    "source_pbp": "https://github.com/nflverse/nflverse-data/releases/tag/pbp"
@@ -234,32 +234,32 @@
    "gameday": "2026-11-22",
    "away": "TEN",
    "home": "DAL",
-   "my_home_line": 5.7,
-   "my_total": 47.1,
-   "my_line_display": "DAL -5.7",
-   "my_win_prob_home": 0.664,
-   "market_home_line": 8.5,
-   "market_total": 54.5,
-   "edge_home_line": -2.84,
-   "edge_total": -7.37,
+   "my_home_line": 6.7,
+   "my_total": 46.8,
+   "my_line_display": "DAL -6.7",
+   "my_win_prob_home": 0.691,
+   "market_home_line": 7.5,
+   "market_total": 51.5,
+   "edge_home_line": -0.82,
+   "edge_total": -4.73,
    "home_line_band95": [
-    -20.6,
-    31.9
+    -19.6,
+    32.9
    ],
-   "status": "gap-unvalidated",
+   "status": "small-difference",
    "home_rating": {
-    "off": 0.093,
-    "def": -0.1706,
-    "net": -0.0776,
-    "n_off": 1493,
-    "n_def": 1411
+    "off": 0.0945,
+    "def": -0.1501,
+    "net": -0.0557,
+    "n_off": 1441,
+    "n_def": 1359
    },
    "away_rating": {
-    "off": -0.0948,
-    "def": -0.1275,
-    "net": -0.2223,
-    "n_off": 1185,
-    "n_def": 1306
+    "off": -0.1093,
+    "def": -0.1277,
+    "net": -0.237,
+    "n_off": 1136,
+    "n_def": 1241
    },
    "source_games": "https://www.nfl.com/schedules/2026/REG11",
    "source_pbp": "https://github.com/nflverse/nflverse-data/releases/tag/pbp"
@@ -270,30 +270,30 @@
    "gameday": "2026-11-22",
    "away": "TB",
    "home": "DET",
-   "my_home_line": 3.3,
-   "my_total": 45.3,
-   "my_line_display": "DET -3.3",
-   "my_win_prob_home": 0.598,
-   "market_home_line": 6.5,
-   "market_total": 46.5,
-   "edge_home_line": -3.18,
-   "edge_total": -1.15,
+   "my_home_line": 2.4,
+   "my_total": 45.1,
+   "my_line_display": "DET -2.4",
+   "my_win_prob_home": 0.571,
+   "market_home_line": null,
+   "market_total": null,
+   "edge_home_line": null,
+   "edge_total": null,
    "home_line_band95": [
-    -22.9,
-    29.6
+    -23.8,
+    28.6
    ],
-   "status": "gap-large-unvalidated",
+   "status": "small-difference",
    "home_rating": {
-    "off": 0.0778,
-    "def": -0.0197,
-    "net": 0.058,
-    "n_off": 1374,
-    "n_def": 1351
+    "off": 0.0635,
+    "def": -0.0371,
+    "net": 0.0264,
+    "n_off": 1340,
+    "n_def": 1320
    },
    "away_rating": {
-    "off": -0.0705,
-    "def": 0.0677,
-    "net": -0.0028,
+    "off": -0.0718,
+    "def": 0.0705,
+    "net": -0.0013,
     "n_off": 1426,
     "n_def": 1294
    },
@@ -306,32 +306,32 @@
    "gameday": "2026-11-22",
    "away": "ARI",
    "home": "KC",
-   "my_home_line": 6.1,
-   "my_total": 46.5,
-   "my_line_display": "KC -6.1",
-   "my_win_prob_home": 0.675,
-   "market_home_line": 16.5,
-   "market_total": 40.5,
-   "edge_home_line": -10.41,
-   "edge_total": 5.98,
+   "my_home_line": 5.1,
+   "my_total": 46.6,
+   "my_line_display": "KC -5.1",
+   "my_win_prob_home": 0.649,
+   "market_home_line": 14.0,
+   "market_total": 42.5,
+   "edge_home_line": -8.88,
+   "edge_total": 4.14,
    "home_line_band95": [
-    -20.1,
-    32.3
+    -21.1,
+    31.4
    ],
    "status": "gap-large-unvalidated",
    "home_rating": {
-    "off": 0.0835,
-    "def": 0.0096,
-    "net": 0.093,
-    "n_off": 1383,
-    "n_def": 1349
+    "off": 0.0789,
+    "def": -0.0044,
+    "net": 0.0745,
+    "n_off": 1340,
+    "n_def": 1314
    },
    "away_rating": {
-    "off": -0.0364,
-    "def": -0.0307,
-    "net": -0.0671,
-    "n_off": 1357,
-    "n_def": 1330
+    "off": -0.0258,
+    "def": -0.025,
+    "net": -0.0508,
+    "n_off": 1332,
+    "n_def": 1284
    },
    "source_games": "https://www.nfl.com/schedules/2026/REG11",
    "source_pbp": "https://github.com/nflverse/nflverse-data/releases/tag/pbp"
@@ -342,32 +342,32 @@
    "gameday": "2026-11-22",
    "away": "JAX",
    "home": "NYG",
-   "my_home_line": -5.4,
+   "my_home_line": -5.7,
    "my_total": 46.7,
-   "my_line_display": "NYG +5.4",
-   "my_win_prob_home": 0.342,
+   "my_line_display": "NYG +5.7",
+   "my_win_prob_home": 0.334,
    "market_home_line": -6.0,
-   "market_total": 46.5,
-   "edge_home_line": 0.57,
-   "edge_total": 0.25,
+   "market_total": 44.5,
+   "edge_home_line": 0.26,
+   "edge_total": 2.17,
    "home_line_band95": [
-    -31.7,
-    20.8
+    -32.0,
+    20.5
    ],
    "status": "small-difference",
    "home_rating": {
-    "off": -0.0222,
-    "def": -0.0306,
-    "net": -0.0529,
+    "off": -0.022,
+    "def": -0.0292,
+    "net": -0.0512,
     "n_off": 1439,
     "n_def": 1359
    },
    "away_rating": {
     "off": 0.1083,
-    "def": 0.0913,
-    "net": 0.1996,
-    "n_off": 1296,
-    "n_def": 1219
+    "def": 0.1041,
+    "net": 0.2124,
+    "n_off": 1231,
+    "n_def": 1170
    },
    "source_games": "https://www.nfl.com/schedules/2026/REG11",
    "source_pbp": "https://github.com/nflverse/nflverse-data/releases/tag/pbp"
@@ -378,32 +378,32 @@
    "gameday": "2026-11-22",
    "away": "NYJ",
    "home": "LAC",
-   "my_home_line": 2.6,
-   "my_total": 41.6,
-   "my_line_display": "LAC -2.6",
-   "my_win_prob_home": 0.577,
-   "market_home_line": 3.0,
-   "market_total": 40.5,
-   "edge_home_line": -0.4,
-   "edge_total": 1.13,
+   "my_home_line": 2.3,
+   "my_total": 41.5,
+   "my_line_display": "LAC -2.3",
+   "my_win_prob_home": 0.568,
+   "market_home_line": 1.5,
+   "market_total": 42.5,
+   "edge_home_line": 0.81,
+   "edge_total": -0.95,
    "home_line_band95": [
-    -23.6,
-    28.8
+    -23.9,
+    28.5
    ],
    "status": "small-difference",
    "home_rating": {
-    "off": -0.1476,
-    "def": 0.0327,
-    "net": -0.1149,
+    "off": -0.1485,
+    "def": 0.0337,
+    "net": -0.1148,
     "n_off": 1312,
     "n_def": 1198
    },
    "away_rating": {
     "off": -0.0726,
-    "def": -0.0776,
-    "net": -0.1502,
-    "n_off": 1270,
-    "n_def": 1359
+    "def": -0.067,
+    "net": -0.1395,
+    "n_off": 1212,
+    "n_def": 1314
    },
    "source_games": "https://www.nfl.com/schedules/2026/REG11",
    "source_pbp": "https://github.com/nflverse/nflverse-data/releases/tag/pbp"
@@ -414,32 +414,32 @@
    "gameday": "2026-11-22",
    "away": "LV",
    "home": "DEN",
-   "my_home_line": 8.8,
-   "my_total": 44.4,
-   "my_line_display": "DEN -8.8",
-   "my_win_prob_home": 0.745,
-   "market_home_line": 10.0,
-   "market_total": 40.5,
-   "edge_home_line": -1.18,
-   "edge_total": 3.9,
+   "my_home_line": 8.1,
+   "my_total": 44.3,
+   "my_line_display": "DEN -8.1",
+   "my_win_prob_home": 0.727,
+   "market_home_line": 8.5,
+   "market_total": 41.5,
+   "edge_home_line": -0.44,
+   "edge_total": 2.8,
    "home_line_band95": [
-    -17.4,
-    35.1
+    -18.2,
+    34.3
    ],
    "status": "small-difference",
    "home_rating": {
-    "off": 0.0172,
-    "def": 0.0689,
-    "net": 0.0861,
+    "off": 0.0133,
+    "def": 0.0676,
+    "net": 0.0809,
     "n_off": 1393,
     "n_def": 1507
    },
    "away_rating": {
-    "off": -0.0814,
-    "def": -0.0902,
-    "net": -0.1716,
-    "n_off": 1239,
-    "n_def": 1305
+    "off": -0.0781,
+    "def": -0.0718,
+    "net": -0.1499,
+    "n_off": 1182,
+    "n_def": 1263
    },
    "source_games": "https://www.nfl.com/schedules/2026/REG11",
    "source_pbp": "https://github.com/nflverse/nflverse-data/releases/tag/pbp"
@@ -450,32 +450,32 @@
    "gameday": "2026-11-22",
    "away": "PIT",
    "home": "PHI",
-   "my_home_line": 0.5,
+   "my_home_line": -0.5,
    "my_total": 43.8,
-   "my_line_display": "PHI -0.5",
-   "my_win_prob_home": 0.514,
+   "my_line_display": "PHI +0.5",
+   "my_win_prob_home": 0.485,
    "market_home_line": -4.5,
    "market_total": 38.5,
-   "edge_home_line": 4.98,
-   "edge_total": 5.28,
+   "edge_home_line": 4.01,
+   "edge_total": 5.35,
    "home_line_band95": [
-    -25.8,
-    26.7
+    -26.7,
+    25.7
    ],
    "status": "gap-large-unvalidated",
    "home_rating": {
-    "off": -0.0828,
-    "def": 0.0268,
-    "net": -0.056,
+    "off": -0.0842,
+    "def": 0.0258,
+    "net": -0.0584,
     "n_off": 1363,
     "n_def": 1517
    },
    "away_rating": {
-    "off": -0.0038,
-    "def": -0.0115,
-    "net": -0.0153,
-    "n_off": 1331,
-    "n_def": 1395
+    "off": 0.0072,
+    "def": 0.0098,
+    "net": 0.0171,
+    "n_off": 1308,
+    "n_def": 1353
    },
    "source_games": "https://www.nfl.com/schedules/2026/REG11",
    "source_pbp": "https://github.com/nflverse/nflverse-data/releases/tag/pbp"
@@ -486,32 +486,32 @@
    "gameday": "2026-11-22",
    "away": "MIN",
    "home": "SF",
-   "my_home_line": 5.6,
-   "my_total": 46.5,
-   "my_line_display": "SF -5.6",
-   "my_win_prob_home": 0.662,
-   "market_home_line": 3.0,
-   "market_total": 46.5,
-   "edge_home_line": 2.6,
-   "edge_total": -0.01,
+   "my_home_line": 5.8,
+   "my_total": 45.8,
+   "my_line_display": "SF -5.8",
+   "my_win_prob_home": 0.668,
+   "market_home_line": 3.5,
+   "market_total": 45.5,
+   "edge_home_line": 2.31,
+   "edge_total": 0.25,
    "home_line_band95": [
-    -20.6,
-    31.8
+    -20.4,
+    32.0
    ],
    "status": "gap-unvalidated",
    "home_rating": {
-    "off": 0.1993,
-    "def": -0.0212,
-    "net": 0.1781,
-    "n_off": 1395,
-    "n_def": 1306
+    "off": 0.1781,
+    "def": -0.0214,
+    "net": 0.1567,
+    "n_off": 1343,
+    "n_def": 1254
    },
    "away_rating": {
-    "off": -0.1081,
-    "def": 0.1437,
-    "net": 0.0356,
-    "n_off": 1215,
-    "n_def": 1338
+    "off": -0.129,
+    "def": 0.1356,
+    "net": 0.0066,
+    "n_off": 1167,
+    "n_def": 1293
    },
    "source_games": "https://www.nfl.com/schedules/2026/REG11",
    "source_pbp": "https://github.com/nflverse/nflverse-data/releases/tag/pbp"
@@ -522,32 +522,32 @@
    "gameday": "2026-11-23",
    "away": "CIN",
    "home": "WAS",
-   "my_home_line": -2.2,
-   "my_total": 48.5,
-   "my_line_display": "WAS +2.2",
-   "my_win_prob_home": 0.434,
-   "market_home_line": -6.0,
-   "market_total": 52.5,
-   "edge_home_line": 3.78,
-   "edge_total": -4.03,
+   "my_home_line": -1.5,
+   "my_total": 48.2,
+   "my_line_display": "WAS +1.5",
+   "my_win_prob_home": 0.455,
+   "market_home_line": -3.5,
+   "market_total": 51.5,
+   "edge_home_line": 1.99,
+   "edge_total": -3.31,
    "home_line_band95": [
-    -28.5,
-    24.0
+    -27.7,
+    24.7
    ],
-   "status": "gap-large-unvalidated",
+   "status": "small-difference",
    "home_rating": {
-    "off": -0.0139,
-    "def": -0.0753,
-    "net": -0.0892,
+    "off": -0.0162,
+    "def": -0.0757,
+    "net": -0.0919,
     "n_off": 1276,
     "n_def": 1397
    },
    "away_rating": {
-    "off": 0.1274,
-    "def": -0.0791,
-    "net": 0.0482,
-    "n_off": 1328,
-    "n_def": 1286
+    "off": 0.1111,
+    "def": -0.091,
+    "net": 0.0201,
+    "n_off": 1286,
+    "n_def": 1263
    },
    "source_games": "https://www.nfl.com/schedules/2026/REG11",
    "source_pbp": "https://github.com/nflverse/nflverse-data/releases/tag/pbp"
@@ -555,260 +555,260 @@
  ],
  "ratings": [
   {
-   "team": "LA",
-   "off": 0.125,
-   "def": 0.0928,
-   "net": 0.2178,
-   "n_off": 1423,
-   "n_def": 1365
-  },
-  {
    "team": "JAX",
    "off": 0.1083,
-   "def": 0.0913,
-   "net": 0.1996,
-   "n_off": 1296,
-   "n_def": 1219
+   "def": 0.1041,
+   "net": 0.2124,
+   "n_off": 1231,
+   "n_def": 1170
+  },
+  {
+   "team": "LA",
+   "off": 0.1154,
+   "def": 0.0787,
+   "net": 0.1941,
+   "n_off": 1377,
+   "n_def": 1340
   },
   {
    "team": "SEA",
-   "off": 0.0303,
-   "def": 0.1537,
-   "net": 0.184,
-   "n_off": 1291,
-   "n_def": 1322
+   "off": 0.0131,
+   "def": 0.1496,
+   "net": 0.1628,
+   "n_off": 1249,
+   "n_def": 1265
   },
   {
    "team": "SF",
-   "off": 0.1993,
-   "def": -0.0212,
-   "net": 0.1781,
-   "n_off": 1395,
-   "n_def": 1306
+   "off": 0.1781,
+   "def": -0.0214,
+   "net": 0.1567,
+   "n_off": 1343,
+   "n_def": 1254
   },
   {
    "team": "BUF",
-   "off": 0.1348,
-   "def": 0.0035,
-   "net": 0.1383,
-   "n_off": 1381,
-   "n_def": 1318
+   "off": 0.1279,
+   "def": 0.0061,
+   "net": 0.134,
+   "n_off": 1336,
+   "n_def": 1260
   },
   {
    "team": "CHI",
-   "off": 0.1045,
-   "def": 0.0302,
-   "net": 0.1347,
+   "off": 0.1038,
+   "def": 0.0301,
+   "net": 0.1339,
    "n_off": 1471,
    "n_def": 1271
   },
   {
-   "team": "KC",
-   "off": 0.0835,
-   "def": 0.0096,
-   "net": 0.093,
-   "n_off": 1383,
-   "n_def": 1349
+   "team": "GB",
+   "off": 0.0742,
+   "def": 0.0319,
+   "net": 0.1061,
+   "n_off": 1345,
+   "n_def": 1402
+  },
+  {
+   "team": "NE",
+   "off": 0.0994,
+   "def": -0.006,
+   "net": 0.0934,
+   "n_off": 1279,
+   "n_def": 1186
   },
   {
    "team": "DEN",
-   "off": 0.0172,
-   "def": 0.0689,
-   "net": 0.0861,
+   "off": 0.0133,
+   "def": 0.0676,
+   "net": 0.0809,
    "n_off": 1393,
    "n_def": 1507
   },
   {
-   "team": "GB",
-   "off": 0.0658,
-   "def": 0.0174,
-   "net": 0.0833,
-   "n_off": 1390,
-   "n_def": 1450
-  },
-  {
-   "team": "DET",
-   "off": 0.0778,
-   "def": -0.0197,
-   "net": 0.058,
-   "n_off": 1374,
-   "n_def": 1351
-  },
-  {
-   "team": "NE",
-   "off": 0.076,
-   "def": -0.0219,
-   "net": 0.0542,
-   "n_off": 1310,
-   "n_def": 1220
-  },
-  {
-   "team": "CIN",
-   "off": 0.1274,
-   "def": -0.0791,
-   "net": 0.0482,
-   "n_off": 1328,
-   "n_def": 1286
+   "team": "KC",
+   "off": 0.0789,
+   "def": -0.0044,
+   "net": 0.0745,
+   "n_off": 1340,
+   "n_def": 1314
   },
   {
    "team": "HOU",
-   "off": 0.0145,
-   "def": 0.029,
-   "net": 0.0435,
-   "n_off": 1423,
-   "n_def": 1382
+   "off": 0.0187,
+   "def": 0.0422,
+   "net": 0.0609,
+   "n_off": 1361,
+   "n_def": 1317
   },
   {
-   "team": "MIN",
-   "off": -0.1081,
-   "def": 0.1437,
-   "net": 0.0356,
-   "n_off": 1215,
-   "n_def": 1338
+   "team": "DET",
+   "off": 0.0635,
+   "def": -0.0371,
+   "net": 0.0264,
+   "n_off": 1340,
+   "n_def": 1320
+  },
+  {
+   "team": "CIN",
+   "off": 0.1111,
+   "def": -0.091,
+   "net": 0.0201,
+   "n_off": 1286,
+   "n_def": 1263
+  },
+  {
+   "team": "PIT",
+   "off": 0.0072,
+   "def": 0.0098,
+   "net": 0.0171,
+   "n_off": 1308,
+   "n_def": 1353
   },
   {
    "team": "BAL",
-   "off": 0.0273,
-   "def": -0.0148,
-   "net": 0.0124,
+   "off": 0.0266,
+   "def": -0.0132,
+   "net": 0.0134,
    "n_off": 1256,
    "n_def": 1326
   },
   {
+   "team": "MIN",
+   "off": -0.129,
+   "def": 0.1356,
+   "net": 0.0066,
+   "n_off": 1167,
+   "n_def": 1293
+  },
+  {
    "team": "TB",
-   "off": -0.0705,
-   "def": 0.0677,
-   "net": -0.0028,
+   "off": -0.0718,
+   "def": 0.0705,
+   "net": -0.0013,
    "n_off": 1426,
    "n_def": 1294
   },
   {
-   "team": "PIT",
-   "off": -0.0038,
-   "def": -0.0115,
-   "net": -0.0153,
-   "n_off": 1331,
-   "n_def": 1395
+   "team": "ATL",
+   "off": -0.0288,
+   "def": 0.0119,
+   "net": -0.0169,
+   "n_off": 1324,
+   "n_def": 1351
   },
   {
-   "team": "ATL",
-   "off": -0.0425,
-   "def": 0.0053,
-   "net": -0.0372,
-   "n_off": 1359,
-   "n_def": 1394
+   "team": "ARI",
+   "off": -0.0258,
+   "def": -0.025,
+   "net": -0.0508,
+   "n_off": 1332,
+   "n_def": 1284
   },
   {
    "team": "NYG",
-   "off": -0.0222,
-   "def": -0.0306,
-   "net": -0.0529,
+   "off": -0.022,
+   "def": -0.0292,
+   "net": -0.0512,
    "n_off": 1439,
    "n_def": 1359
   },
   {
+   "team": "DAL",
+   "off": 0.0945,
+   "def": -0.1501,
+   "net": -0.0557,
+   "n_off": 1441,
+   "n_def": 1359
+  },
+  {
    "team": "PHI",
-   "off": -0.0828,
-   "def": 0.0268,
-   "net": -0.056,
+   "off": -0.0842,
+   "def": 0.0258,
+   "net": -0.0584,
    "n_off": 1363,
    "n_def": 1517
   },
   {
    "team": "CAR",
-   "off": -0.0066,
-   "def": -0.0512,
-   "net": -0.0578,
-   "n_off": 1311,
-   "n_def": 1289
-  },
-  {
-   "team": "ARI",
-   "off": -0.0364,
-   "def": -0.0307,
-   "net": -0.0671,
-   "n_off": 1357,
-   "n_def": 1330
-  },
-  {
-   "team": "DAL",
-   "off": 0.093,
-   "def": -0.1706,
-   "net": -0.0776,
-   "n_off": 1493,
-   "n_def": 1411
+   "off": 0.0021,
+   "def": -0.0767,
+   "net": -0.0746,
+   "n_off": 1247,
+   "n_def": 1230
   },
   {
    "team": "IND",
-   "off": -0.0411,
-   "def": -0.0452,
-   "net": -0.0863,
-   "n_off": 1404,
-   "n_def": 1411
+   "off": -0.0214,
+   "def": -0.0631,
+   "net": -0.0845,
+   "n_off": 1351,
+   "n_def": 1349
+  },
+  {
+   "team": "NO",
+   "off": -0.0503,
+   "def": -0.04,
+   "net": -0.0903,
+   "n_off": 1345,
+   "n_def": 1311
   },
   {
    "team": "WAS",
-   "off": -0.0139,
-   "def": -0.0753,
-   "net": -0.0892,
+   "off": -0.0162,
+   "def": -0.0757,
+   "net": -0.0919,
    "n_off": 1276,
    "n_def": 1397
   },
   {
    "team": "CLE",
-   "off": -0.129,
-   "def": 0.033,
-   "net": -0.0959,
-   "n_off": 1368,
-   "n_def": 1433
-  },
-  {
-   "team": "NO",
-   "off": -0.0735,
-   "def": -0.0312,
-   "net": -0.1047,
-   "n_off": 1404,
-   "n_def": 1375
+   "off": -0.1413,
+   "def": 0.0309,
+   "net": -0.1105,
+   "n_off": 1303,
+   "n_def": 1371
   },
   {
    "team": "LAC",
-   "off": -0.1476,
-   "def": 0.0327,
-   "net": -0.1149,
+   "off": -0.1485,
+   "def": 0.0337,
+   "net": -0.1148,
    "n_off": 1312,
    "n_def": 1198
   },
   {
    "team": "NYJ",
    "off": -0.0726,
-   "def": -0.0776,
-   "net": -0.1502,
-   "n_off": 1270,
-   "n_def": 1359
-  },
-  {
-   "team": "MIA",
-   "off": -0.0716,
-   "def": -0.0934,
-   "net": -0.1651,
-   "n_off": 1143,
-   "n_def": 1226
+   "def": -0.067,
+   "net": -0.1395,
+   "n_off": 1212,
+   "n_def": 1314
   },
   {
    "team": "LV",
-   "off": -0.0814,
-   "def": -0.0902,
-   "net": -0.1716,
-   "n_off": 1239,
-   "n_def": 1305
+   "off": -0.0781,
+   "def": -0.0718,
+   "net": -0.1499,
+   "n_off": 1182,
+   "n_def": 1263
+  },
+  {
+   "team": "MIA",
+   "off": -0.052,
+   "def": -0.114,
+   "net": -0.166,
+   "n_off": 1081,
+   "n_def": 1173
   },
   {
    "team": "TEN",
-   "off": -0.0948,
-   "def": -0.1275,
-   "net": -0.2223,
-   "n_off": 1185,
-   "n_def": 1306
+   "off": -0.1093,
+   "def": -0.1277,
+   "net": -0.237,
+   "n_off": 1136,
+   "n_def": 1241
   }
  ]
 }
