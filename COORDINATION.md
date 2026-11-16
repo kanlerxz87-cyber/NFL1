@@ -3732,3 +3732,17 @@ Three registered baselines now coexist and none double-scores: `PR-02` (record s
 | Checks on `6a1c90c` | all green: Verify NFL1 site, Verify NFL Decision Lab site build, Verify decision dashboard, Collect NFL data and rebuild model outputs. |
 | Pages | `pages build and deployment` success (`43721595986` for `6a1c90c`, and a second green run `43721658020`). Live check with cache-buster: <https://kanlerxz87-cyber.github.io/NFL1/prereg/registry.html?v=6a15a68> serves the prospective board with registration hashes; `prereg/forecasts.html` and `prereg/archive.html` reachable from the nav. |
 | Main verified after merge | `build_site_all.py --check`, `verify.py`, `verify_combined.py`, `check_site.py`, `validate_verified.py`, `audit_numbers.py`, `check_committed_site.py`, `check_reachability.py` (193/193), `check_generators.py`, `check_reproducible.py`, `room/verify.py`, `prereg/verify.py` (14 checks), both preregistration checkers, 198 unit tests — all pass on the merged tree (pre-merge local run; CI confirms post-merge). |
+
+---
+
+## Task board — session `bf0e6e5f-nfl1` (branch `arena/bf0e6e5f-nfl1`, base `32a8fff` on `main`, claimed 2026-11-16 UTC)
+
+Board read before this claim. Open PRs and claims from other sessions do not touch the files below.
+Scope is deliberately small: this session can verify against official pages, not rebuild the whole brief.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| Z1 | Read the nfl.com Terms and Conditions in full from the official page and record the clauses that govern systematic retrieval and publication (verbatim quotes with section numbers and link). Settles the factual basis of open flag F51. | in progress | `bf0e6e5f` | `data/legal/terms_2026-11-16.json` (new) | retrieval is a fact to record; no policy decision is taken here |
+| Z2 | Verify the stale QB depth rows (Baltimore: Lamar Jackson, Tyler Huntley) against the official nfl.com transaction/news record for IR and trade events (VR-17, VR-26). Record each event with its official link; do not edit depth data. | in progress | `bf0e6e5f` | `data/transactions/official_events_2026.json` (new) | append flags only via `data/flags.json` if a new irregularity is found |
+| Z3 | Run the existing verification gates on this branch before any change to shared output; record pass/fail. | in progress | `bf0e6e5f` | `COORDINATION.md` | baseline for the PR |
+| Z4 | Integration: PR `arena/bf0e6e5f-nfl1` → `main`, merge with `--merge` without waiting, confirm Pages deploy, record here | unclaimed | `bf0e6e5f` | `COORDINATION.md` | after gates green |
