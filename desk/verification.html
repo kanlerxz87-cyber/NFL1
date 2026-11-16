@@ -40,7 +40,7 @@ the source without trusting the session that produced it.</p>
 <table class="grid">
 <thead><tr><th>ID</th><th>Claim</th><th>Verdict</th><th>Evidence</th><th>Source</th></tr></thead><tbody>
 <tr><td class="">D-C01</td><td class="">The repository&#x27;s committed standings copies match the official table</td><td class=""><strong>partly</strong></td><td class="">standings.json: 6/32 clubs reproduce; standings_current.json: 32/32 clubs reproduce; official_standings_2026.csv: 6/32 clubs reproduce; official_standings_2026-11-13.csv: 8/32 clubs reproduce</td><td class="src"><a href="https://www.nfl.com/standings/league/2026/reg">https://www.nfl.com/standings/league/2026/reg</a></td></tr>
-<tr><td class="">D-C02</td><td class="">Games played reconciles with the official standings</td><td class=""><strong>fails</strong></td><td class="">official standings imply 149 completed games; the backtest corpus holds 137 results; the dashboard asserts 137</td><td class="src"><a href="https://www.nfl.com/schedules/2026/REG11">https://www.nfl.com/schedules/2026/REG11</a></td></tr>
+<tr><td class="">D-C02</td><td class="">Games played reconciles with the official standings</td><td class=""><strong>gate passes, corpus trails</strong></td><td class="">the checker asserts PASS with 0 of 28 checks failing; its games-played check is PASS at 149 games (official standings imply 149); the dashboard asserts 149; the frozen backtest corpus still holds 137 results, a gap of 12</td><td class="src"><a href="https://www.nfl.com/standings/league/2026/reg">https://www.nfl.com/standings/league/2026/reg</a></td></tr>
 <tr><td class="">D-C03</td><td class="">The Week-10 injury report is fully captured</td><td class=""><strong>confirmed</strong></td><td class="">347 rows, 28 clubs; 0 field differences against the committed capture</td><td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">https://www.nfl.com/injuries/league/2026/reg10</a></td></tr>
 <tr><td class="">D-C04</td><td class="">Three Lions rows carry a blank game-status cell</td><td class=""><strong>confirmed</strong></td><td class="">the official page lists all three with game status Out; the blank cells the brief describes are in an older hand copy, not on the page</td><td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">https://www.nfl.com/injuries/league/2026/reg10</a></td></tr>
 <tr><td class="">D-C05</td><td class="">The Week-11 schedule copy matches the official page</td><td class=""><strong>confirmed</strong></td><td class="">13 fixtures, 6 byes, 0 differences</td><td class="src"><a href="https://www.nfl.com/schedules/2026/by-week/week-11">https://www.nfl.com/schedules/2026/by-week/week-11</a></td></tr>
@@ -511,8 +511,8 @@ the league distributes them before the final report of the week.</p>
 
 <h2>Week 10 results, and whether the backtest corpus has them</h2>
 <p>The right-hand column is the test the brief asks for: can a backtest be computed at all? A final
-score that is missing from the corpus cannot enter ROI, and the build gate that fails on main is
-exactly this comparison.</p>
+score that is missing from the corpus cannot enter ROI.</p>
+<p>Check E now passes: the dashboard count was brought to the official 149 and the checker agrees. The corpus itself is still behind at 137 results, so the gap has moved rather than closed.</p>
 <table class="grid">
 <caption>Week 10 results re-read 2026-11-16: 13 finals, 1 still scheduled, 12 finals absent from the corpus.</caption>
 <thead><tr><th>Date</th><th>Result</th><th>Status</th><th>Network</th><th>Backtest corpus</th><th>Source</th></tr></thead><tbody>

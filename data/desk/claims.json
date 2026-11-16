@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-16T18:13:25Z",
+ "generated_at": "2026-11-16T18:17:49Z",
  "rows": [
   {
    "id": "D-C01",
@@ -13,11 +13,11 @@
   {
    "id": "D-C02",
    "claim": "Games played reconciles with the official standings",
-   "where": "tools/verify_official.py check E. counts (fails on main at 46c82ae)",
-   "verdict": "fails",
-   "evidence": "official standings imply 149 completed games; the backtest corpus holds 137 results; the dashboard asserts 137",
-   "src": "https://www.nfl.com/schedules/2026/REG11",
-   "source_url": "https://www.nfl.com/schedules/2026/REG11"
+   "where": "tools/verify_official.py check E. counts, read live from data/audit/official_verification.json at 2026-11-16T18:05:02+00:00",
+   "verdict": "gate passes, corpus trails",
+   "evidence": "the checker asserts PASS with 0 of 28 checks failing; its games-played check is PASS at 149 games (official standings imply 149); the dashboard asserts 149; the frozen backtest corpus still holds 137 results, a gap of 12",
+   "src": "https://www.nfl.com/standings/league/2026/reg",
+   "source_url": "https://www.nfl.com/standings/league/2026/reg"
   },
   {
    "id": "D-C03",

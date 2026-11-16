@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-16T18:05:02+00:00",
+ "generated_at": "2026-11-16T18:14:10+00:00",
  "evidence": {
   "season": 2026,
   "week_complete": 10,
@@ -21,49 +21,49 @@
   "own_lines": 13,
   "strategies": 12,
   "strategies_pass": 0,
-  "strategies_watch": 3,
-  "strategies_fail": 9,
+  "strategies_watch": 2,
+  "strategies_fail": 10,
   "gates": 8,
-  "starters_flagged": 112,
+  "starters_flagged": 116,
   "depth_matched_rows": 376,
   "unmatched_records": 7,
   "source_files_pinned": 12,
   "verification_checks": 28,
-  "verification_pass": 20,
+  "verification_pass": 19,
   "verification_flag": 8,
-  "verification_fail": 0
+  "verification_fail": 1
  },
  "model": {
   "state": "NOT SUPPORTED",
   "plain": "The model lost to the closing line out of sample and the fitted weight on the model is at or below zero, so its disagreement with the market carried no information in the test window. Publishing a model-vs-market difference as an 'edge' is not supported by this evidence.",
-  "test_n": 149,
-  "model_mae": 10.128,
-  "market_mae": 9.581,
+  "test_n": 137,
+  "model_mae": 9.952,
+  "market_mae": 9.449,
   "diff_ci": [
-   0.057,
-   1.043
+   -0.032,
+   1.036
   ],
   "blend_weight_model": -0.328,
   "blend_weight_market": 1.336,
-  "hybrid_mae": 9.628,
-  "market_only_mae": 9.581,
-  "sign_corr": 0.44,
-  "sign_n": 5604,
+  "hybrid_mae": 9.507,
+  "market_only_mae": 9.449,
+  "sign_corr": 0.439,
+  "sign_n": 5592,
   "source": "data/model/lines.json"
  },
  "strategies": {
   "state": "NOT READY",
-  "plain": "0 of 12 strategies passed every gate. The best paper score is negative (-3.68% lower-bound ROI), which is the ranking's own way of saying no strategy is yet better than luck.",
+  "plain": "0 of 12 strategies passed every gate. The best paper score is negative (-3.85% lower-bound ROI), which is the ranking's own way of saying no strategy is yet better than luck.",
   "best": "S11 Under in divisional games with total 47+",
-  "best_lower_ci": -3.68,
-  "best_roi": 0.0429,
+  "best_lower_ci": -3.85,
+  "best_roi": 0.0416,
   "best_ci": [
-   -0.0368,
-   0.1226
+   -0.0385,
+   0.1218
   ],
-  "best_n": 551,
-  "best_q": 0.9902,
-  "smallest_q": 0.9902,
+  "best_n": 548,
+  "best_q": 0.9889,
+  "smallest_q": 0.9889,
   "gates": [
    {
     "id": "G1",
@@ -99,7 +99,7 @@
    }
   ],
   "parlay": {
-   "n_games": 5604,
+   "n_games": 5592,
    "corr_margin_vs_total": 0.017,
    "phi_home_cover_vs_over": 0.0086,
    "note": "Same-game legs are not independent. Use the phi value to adjust a 2-leg same-game parlay: P = p1p2 + rho*sqrt(p1(1-p1)p2(1-p2))."
@@ -173,20 +173,20 @@
    "TEN",
    "WAS"
   ],
-  "flagged_players": 112,
-  "flagged_with_game_designation": 84,
-  "flagged_practice_only": 28,
-  "model_starters_flagged": 112,
+  "flagged_players": 116,
+  "flagged_with_game_designation": 86,
+  "flagged_practice_only": 30,
+  "model_starters_flagged": 116,
   "model_unmatched": 7,
-  "plain": "The league publishes injury status for players but publishes no depth chart (the league URL 404s). Only club sites do. So a statement like 'the third-string corner is starting' can be verified for 2 of 26 clubs this week, and is an assumption elsewhere. The model flags 112 players as impacted starters; only 84 of them carry an official game designation, the other 28 are practice-only reports that the league has not yet converted into an availability ruling.",
+  "plain": "The league publishes injury status for players but publishes no depth chart (the league URL 404s). Only club sites do. So a statement like 'the third-string corner is starting' can be verified for 2 of 26 clubs this week, and is an assumption elsewhere. The model flags 116 players as impacted starters; only 86 of them carry an official game designation, the other 30 are practice-only reports that the league has not yet converted into an availability ruling.",
   "source": "https://www.nfl.com/injuries/ and club depth-chart pages"
  },
  "props": {
   "state": "MODEL ONLY",
-  "lines": 331,
-  "players": 331,
+  "lines": 323,
+  "players": 323,
   "with_market": 0,
-  "plain": "331 prop lines for 331 players, all built from the player's own shrunk usage and the opponent's defensive rating. No prop price exists in any connected source, so no prop edge can be claimed and the market column is deliberately blank.",
+  "plain": "323 prop lines for 323 players, all built from the player's own shrunk usage and the opponent's defensive rating. No prop price exists in any connected source, so no prop edge can be claimed and the market column is deliberately blank.",
   "source": "data/model/props.json"
  },
  "power": {
@@ -2624,6 +2624,116 @@
    "action": "owner decision on tools/check_freshness.py: compare content hashes rather than stamps so an unchanged input cannot make an output stale; and have the decision-room builder preserve its inputs' captured_at instead of relying on a re-run. Do not 'fix' a freshness failure by bumping captured_at without re-reading the official source.",
    "verified": true,
    "retrieved": "2026-11-16"
+  },
+  {
+   "id": "D-F01",
+   "category": "A build gate on main fails, and the failure is a true statement about stale data",
+   "description": "tools/verify_official.py check E compares data/model/dashboard.json counts.games_played (137) with half the sum of club games in data/evidence/standings_current.json (149) and fails. The check is correct: the official standings read on 2026-11-16 imply 149 completed games, while the backtest corpus data/s9cb/games.csv holds 137 results and only one Week-10 final (WAS 24-21 NYG). 12 of the 13 Week-10 finals are absent from the corpus.",
+   "impact": "main's 'Verify decision dashboard' job is red on 46c82ae. The model's ratings, own lines and every backtest sit on a corpus that is 12 games behind the season, so all published accuracy figures describe a slightly earlier state than the page implies.",
+   "status": "Open - disclosed on the site, not repaired",
+   "src": "S02",
+   "verified": false,
+   "retrieved": "2026-11-16",
+   "action": "Run the collect-data workflow (it can reach nflverse from Actions; this sandbox cannot). Do not edit the check and do not edit the corpus in place: freeze a new corpus_id."
+  },
+  {
+   "id": "D-F02",
+   "category": "Three committed copies of the official standings no longer match the page",
+   "description": "data/standings.json (read 2026-11-12), data/s9cb/official_standings_2026.csv (2026-11-12) and data/personnel/official_standings_2026-11-13.csv (2026-11-13) each reproduce only 6 of 32 club rows against the official table read on 2026-11-16; data/evidence/standings_current.json reproduces 32 of 32. The example: BUF is 7-1 with PF 256 on 2026-11-12 and 8-1 with PF 287 on 2026-11-16.",
+   "impact": "Pages built from the older copies show a standings table that is three days out of date next to pages built from the fresh one. A reader comparing two pages sees two different records for the same club.",
+   "status": "Open - disclosed on the site, not repaired",
+   "src": "S02",
+   "verified": false,
+   "retrieved": "2026-11-16",
+   "action": "Regenerate the three copies from a fresh read, or print the read date in the table caption so the drift is visible. They are owned by other generators, so this session published the comparison instead of editing them."
+  },
+  {
+   "id": "D-F03",
+   "category": "The club code the league prints differs between its own pages, and joins depend on an unpublished crosswalk",
+   "description": "The injury page and the schedule page print AZ for Arizona; a committed capture of the same injury page normalises it to ARI. nfl.com prints LA for the Rams while the club site prints LAR. Any join across these sources silently depends on a mapping that is not published anywhere on the site.",
+   "impact": "A join written without the crosswalk drops or duplicates one club's rows. In this session's comparison, 15 of 347 injury rows keyed differently purely because of AZ vs ARI; the rows themselves were identical.",
+   "status": "needs review",
+   "src": "S01",
+   "verified": true,
+   "retrieved": "2026-11-16",
+   "action": "Publish the crosswalk (printed code, normalised code, page that prints it) beside every join."
+  },
+  {
+   "id": "D-F04",
+   "category": "The earlier 'three Lions rows have a blank game status' finding is no longer true on the official page",
+   "description": "The brief states that Kerby Joseph, Cade Mays and D.J. Reed are published with a blank game-status cell. Re-read on 2026-11-16, all three carry game status Out (Joseph, knee; Mays, ankle; Reed, hip). The blank cells exist in an older hand copy in data/capture/, not on the page.",
+   "impact": "A published finding now contradicts its own source. Left uncorrected it would send a reader to 'fix' a page that is already correct.",
+   "status": "resolved",
+   "src": "S01",
+   "verified": true,
+   "retrieved": "2026-11-16",
+   "action": "No action on the source. The older finding is superseded; the stale hand copy is still in the repo and should be labelled."
+  },
+  {
+   "id": "D-F05",
+   "category": "The stale-depth finding about Baltimore is resolved at source",
+   "description": "The brief records that Baltimore still publishes Lamar Jackson and Tyler Huntley at QB after both went on injured reserve. The chart re-read on 2026-11-16 lists Jacoby Brissett, Joe Fagnano and Kedon Slovis at QB, and the dated official transactions register carries '11/06 AZ BAL Jacoby Brissett Traded'.",
+   "impact": "The finding no longer holds. Repeating it would be a false claim about a live page.",
+   "status": "resolved",
+   "src": "S08",
+   "verified": true,
+   "retrieved": "2026-11-16",
+   "action": "Re-check at every depth refresh rather than trusting a stored finding."
+  },
+  {
+   "id": "D-F06",
+   "category": "Depth data covers 3 of 32 clubs on this page, and one of the three attaches no date",
+   "description": "This session transcribed the Detroit, Baltimore and Green Bay charts. Green Bay prints 'Unofficial, Nov. 10, 2026'; Detroit prints 'Compiled by Lions Football Communications' with no date; Baltimore prints no date. The other 29 clubs are absent. The existing register covers 4 clubs, so coverage after this session is 4 of 32, not 3.",
+   "impact": "Any deficiency metric computed from these charts describes 4 clubs. A reader could mistake a 4-club sample for a league-wide fact.",
+   "status": "Open - disclosed on the site, not repaired",
+   "src": "S06",
+   "verified": true,
+   "retrieved": "2026-11-16",
+   "action": "Read the remaining 28 pages and record whether each is machine-readable; publish the coverage count beside every depth figure."
+  },
+  {
+   "id": "D-F07",
+   "category": "The Texans publish their depth chart as an image and no structured source is authorised",
+   "description": "The brief reports that Houston's depth page is an image. This session did not transcribe it: transcribing an image by eye is the one thing the brief forbids. No structured source for Houston depth is present in the repo.",
+   "impact": "Houston depth is missing from every coverage count. A deficiency metric that silently excludes one club understates the league.",
+   "status": "Open - disclosed on the site, not repaired",
+   "src": "S05",
+   "verified": true,
+   "retrieved": "2026-11-16",
+   "action": "Find an authorised structured source, or publish Houston as image-only and excluded, with the count of excluded clubs."
+  },
+  {
+   "id": "D-F08",
+   "category": "One club's depth page prints the jersey number inside the name cell, so a naive parse invents a different player",
+   "description": "Green Bay prints cells as '9 Christian Watson'. A parse that keeps the cell text produces a name that matches no roster row. This session keeps both: 'raw' holds the printed cell and 'name' holds the stripped name.",
+   "impact": "A register that stores only the printed cell cannot be joined to a roster or an injury report, and the failure is silent.",
+   "status": "resolved",
+   "src": "S07",
+   "verified": true,
+   "retrieved": "2026-11-16",
+   "action": "Keep the raw string and the stripped name side by side in every depth table."
+  },
+  {
+   "id": "D-F09",
+   "category": "A committed depth register keeps rows with an empty name",
+   "description": "data/depth/official_register.json holds 3 rows for Green Bay whose name field is empty. They are counted as register rows, so the register's row count overstates the number of named players.",
+   "impact": "A coverage count built on register row count is three rows too high.",
+   "status": "Open - disclosed on the site, not repaired",
+   "src": "S07",
+   "verified": true,
+   "retrieved": "2026-11-16",
+   "action": "Exclude or label blank-name rows in the register's counts."
+  },
+  {
+   "id": "D-F10",
+   "category": "The site's rendered landing page carries a stale games-played count",
+   "description": "data/model/dashboard.json, generated 2026-11-15T17:42Z, asserts games_played 137 while the official standings read a day later imply 149. The mismatch is the same one D-F01 records, but it is published on the landing page as a fact rather than as a lag.",
+   "impact": "The front page states a season length that is 12 games short.",
+   "status": "Open - disclosed on the site, not repaired",
+   "src": "S02",
+   "verified": false,
+   "retrieved": "2026-11-16",
+   "action": "Regenerate after the collector runs; until then print the read date next to the number."
   }
  ]
 }

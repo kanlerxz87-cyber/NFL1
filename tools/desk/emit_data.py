@@ -372,7 +372,37 @@ def schedule() -> dict:
                     dashboard_asserts=dash["counts"]["games_played"],
                     gap_games=implied - n_played_corpus,
                     note="The backtest corpus holds 2026 rows only up to the games it was frozen with. The official standings page read this session implies 149 completed games; the corpus holds 137 results, and 12 of the 13 Week-10 finals are absent from it."),
+        # The gate verdict is a *live read* of the checker's own report, never a sentence typed here:
+        # an upstream refresh can turn a failing gate green while the corpus stays behind, and a page
+        # that asserts "the gate fails" would then be publishing a stale verdict.
+        gate=gate_e(),
     )
+
+
+
+def gate_e() -> dict:
+    """Read check E (games played) out of the official-verification report.
+
+    Typed as a live read on purpose. An upstream data refresh can turn this gate green
+    while the frozen corpus stays behind; a page that hard-codes "the gate fails" would
+    then be publishing a verdict that is no longer true.
+    """
+    try:
+        rep = load_repo("data/audit/official_verification.json")
+    except FileNotFoundError:
+        return dict(available=False, reason="data/audit/official_verification.json not present",
+                    verdict="not run", generated_at=None, failed=0, flagged=0, passed=0)
+    ch = rep.get("checks", [])
+    cnt = rep.get("counts", {})
+    e = [c for c in ch if str(c.get("area", "")).startswith("E.")]
+    gp = next((c for c in e if "games played" in (c.get("check") or "")), None) or {}
+    return dict(available=True, file="data/audit/official_verification.json",
+                generated_at=rep.get("generated_at"), result=rep.get("result"),
+                passed=cnt.get("passed"), flagged=cnt.get("flagged"), failed=cnt.get("failed", 0),
+                checks=len(e),
+                verdict=("fail" if cnt.get("failed") else ("pass" if e else "not run")),
+                games_check=gp.get("check"), games_status=gp.get("status"),
+                games_rows=gp.get("rows_checked"), games_detail=gp.get("detail"))
 
 
 # --------------------------------------------------------------------------- depth charts
@@ -460,12 +490,21 @@ def claims(standings_d, injuries_d, schedule_d, depth_d) -> dict:
         "partly",
         "; ".join(f"{rel.split('/')[-1]}: {n}/32 clubs reproduce" for rel, n in st["reproduces"].items()),
         STANDINGS_URL)
+    gate = schedule_d["gate"]
+    c = schedule_d["corpus"]
+    # Two different facts, deliberately not merged: the checker's verdict, and whether the frozen
+    # corpus is current. The gate compares the dashboard against the official count; the corpus can
+    # still trail both. Reporting either one alone would misdescribe the other.
+    gate_ok = gate.get("verdict") == "pass"
+    corpus_ok = c["played_rows"] >= c["implied_from_official_standings"]
     add("D-C02", "Games played reconciles with the official standings",
-        "tools/verify_official.py check E. counts (fails on main at 46c82ae)",
-        "fails",
-        f"official standings imply {schedule_d['corpus']['implied_from_official_standings']} completed games; the backtest corpus holds "
-        f"{schedule_d['corpus']['played_rows']} results; the dashboard asserts {schedule_d['corpus']['dashboard_asserts']}",
-        SCHED_W10_URL)
+        f"tools/verify_official.py check E. counts, read live from {gate.get('file')} at {gate.get('generated_at')}",
+        "confirmed" if (gate_ok and corpus_ok) else ("gate passes, corpus trails" if gate_ok else "fails"),
+        f"the checker asserts {gate.get('result')} with {gate.get('failed')} of {gate.get('passed', 0) + gate.get('flagged', 0) + gate.get('failed', 0)} "
+        f"checks failing; its games-played check is {gate.get('games_status')} at {gate.get('games_rows')} games "
+        f"(official standings imply {c['implied_from_official_standings']}); the dashboard asserts {c['dashboard_asserts']}; "
+        f"the frozen backtest corpus still holds {c['played_rows']} results, a gap of {c['gap_games']}",
+        STANDINGS_URL)
     add("D-C03", "The Week-10 injury report is fully captured",
         "data/desk/injuries_w10_2026-11-16.tsv vs the committed capture",
         "confirmed" if injuries_d["cross_check"]["field_differences"] == 0 else "differs",
