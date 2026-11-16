@@ -4178,3 +4178,37 @@ edited **by addition only** — one nav entry, one build step, one ownership lin
 so any conflict is textual and resolvable by keeping both sides.
 
 _This claim is committed and pushed before any other file in the scope is touched._
+
+## Session `c5444cc9-nfl1` — claims (branch `arena/c5444cc9-nfl1`, base `46c82aec619b1f9e449bb4adaeef1edce5183319` on `main`, 2026-11-16)
+
+Claimed before any edit on this branch. Scope is **additive**; no file owned by another session is
+rewritten. The board was read in full first. The readiness register (`room/data/readiness.json`,
+built 2026-11-15 by `07810d9f`) marks `MO-04` *Not verified* — *"Treat it as a leaderboard
+competition with rewards for top strategies"*, blocked by *"Reward values not set"*, clearing when
+*"A published reward rule with values"* exists. `data/leaderboard_rules.json` rule LB-05 states
+*"Reward values are blank and flagged"*. No open pull request (checked: #47, #57, #59, #77, #79,
+#80, #81, #91, #92, #94, #99, #100, #101) touches a reward file. `data/strat/` carries the
+proper-score leaderboard, demotion gate, dual totals and controls but **no reward rule**. This
+cluster is unclaimed.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| RW1 | Claim board + push claim before any other edit | done | `c5444cc9` | `COORDINATION.md` | this block |
+| RW2 | Pre-register the reward rule: freeze the rule text (Stage-1 proper-score qualification → Stage-2 prospective CLV/ROI escrow; non-monetary badge tiers with concrete numeric thresholds) in a results-free commit; the commit hash is the registration | in progress | `c5444cc9` | `rewards/REWARDS-RULE.md`, `rewards/README.md` | thresholds grounded in the repo's existing `data/strat/proper_score.json` method (BSS lower bound, BH/Bonferroni multiplicity, min_sample 200, game-cluster bootstrap); no backtest number may set a reward |
+| RW3 | Frozen reward data: `data/rewards/rewards.json` (rule + thresholds + registration hash + per-track status) and `data/rewards/thresholds.json` (the concrete numbers), plus a two-sided "what would change our mind" per rule | in progress | `c5444cc9` | `data/rewards/**` | honest status: no strategy is eligible today (`any_eligible=false`), so no badge is awarded — published blank, never fabricated |
+| RW4 | Self-contained additive sub-site `rewards/`: `rewards/build.py` renders `rewards/index.html` (+ escrow view) from committed data only; every table row carries a source/registration link; unverifiable cells blank and flagged | in progress | `c5444cc9` | `rewards/build.py`, `rewards/*.html` | additive; no existing page is deleted or rewritten |
+| RW5 | Verifier + tests: `rewards/verify.py` (registration hash reproduces from the committed rule file via `git log --diff-filter=A`; thresholds concrete, no blanks; no backtest number on the qualification board; every row sourced; local hrefs resolve) and `tests/test_rewards.py` | in progress | `c5444cc9` | `rewards/verify.py`, `tests/test_rewards.py` | mirrors the shadow-baseline registration gate (V1) and the reserve-register gate pattern |
+| RW6 | Additive integration only: one nav entry each in `pipeline/gen_site.py` (NAV/SIDEBAR) and `scripts/verified/normalize_nav.py` (CANON); one build step in `tools/build_site_all.py`; one ownership entry in `tools/check_generators.py` — pure additions, logged, no existing line edited | pending | `c5444cc9` | shared nav/build files (additive lines only) | the declared shared-file pattern every prior session used |
+| RW7 | Readiness register: update only the `MO-04` row (and the PR-21 two-stage cross-reference) in `scripts/brief_07810d9f/register.py` with the file-and-count evidence that clears the gate; regenerate; log the in-place row edit | pending | `c5444cc9` | `scripts/brief_07810d9f/register.py` (MO-04 row only) | the register is the single place the brief's requirement statuses live; edit limited to those rows, logged for the owning session |
+| RW8 | New irregularities, questions, suggestions from the sweep — append-only | pending | `c5444cc9` | `data/flags.json`, `data/questions.json`, `data/suggestions.json` | each entry cites a registered official source id where it is a data claim |
+| RW9 | Integration: canonical build, all gates green, PR → merge without waiting, confirm GitHub Pages deploy, record PR link + merge result here | pending | `c5444cc9` | generated pages, `COORDINATION.md` | flagged/unverified items do not block the merge |
+
+**What this session will not do (stated now so the absence is not read as oversight):** it will not
+invent an official "reward" fact — the reward rule is a **pre-registered proposal (policy)**, frozen
+before grading, not an NFL.com fact, and will be labelled as such on the page; it will not claim any
+strategy is profitable or eligible (the repo's own proper-score result is `any_eligible=false`); it
+will not award a badge to a strategy that did not clear the Stage-1 gate; it will not edit any
+generator, data file or page owned by another session beyond the declared additive shared-file lines
+and the single readiness row.
+
+_This claim is committed and pushed before any other file is touched, per the brief._
