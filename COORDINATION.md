@@ -3732,3 +3732,49 @@ Three registered baselines now coexist and none double-scores: `PR-02` (record s
 | Checks on `6a1c90c` | all green: Verify NFL1 site, Verify NFL Decision Lab site build, Verify decision dashboard, Collect NFL data and rebuild model outputs. |
 | Pages | `pages build and deployment` success (`43721595986` for `6a1c90c`, and a second green run `43721658020`). Live check with cache-buster: <https://kanlerxz87-cyber.github.io/NFL1/prereg/registry.html?v=6a15a68> serves the prospective board with registration hashes; `prereg/forecasts.html` and `prereg/archive.html` reachable from the nav. |
 | Main verified after merge | `build_site_all.py --check`, `verify.py`, `verify_combined.py`, `check_site.py`, `validate_verified.py`, `audit_numbers.py`, `check_committed_site.py`, `check_reachability.py` (193/193), `check_generators.py`, `check_reproducible.py`, `room/verify.py`, `prereg/verify.py` (14 checks), both preregistration checkers, 198 unit tests — all pass on the merged tree (pre-merge local run; CI confirms post-merge). |
+
+---
+
+## Task board — session `bf0e6e5f-nfl1` (branch `arena/bf0e6e5f-nfl1`, base `32a8fff` on `main`, claimed 2026-11-16 UTC)
+
+Board read before this claim. Open PRs and claims from other sessions do not touch the files below.
+Scope is deliberately small: this session can verify against official pages, not rebuild the whole brief.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| Z1 | Read the nfl.com Terms and Conditions in full from the official page and record the clauses that govern systematic retrieval and publication (verbatim quotes with section numbers and link). Settles the factual basis of open flag F51. | done | `bf0e6e5f` | `data/legal/terms_2026-11-16.json` (new) | retrieval is a fact to record; no policy decision is taken here |
+| Z2 | Verify the stale QB depth rows (Baltimore: Lamar Jackson, Tyler Huntley) against the official nfl.com transaction/news record for IR and trade events (VR-17, VR-26). Record each event with its official link; do not edit depth data. | done | `bf0e6e5f` | `data/transactions/official_events_2026.json` (new) | append flags only via `data/flags.json` if a new irregularity is found |
+| Z3 | Run the existing verification gates on this branch before any change to shared output; record pass/fail. | done | `bf0e6e5f` | `COORDINATION.md` | baseline for the PR |
+| Z4 | Integration: PR `arena/bf0e6e5f-nfl1` → `main`, merge with `--merge` without waiting, confirm Pages deploy, record here | unclaimed | `bf0e6e5f` | `COORDINATION.md` | after gates green |
+
+### Log — `bf0e6e5f-nfl1` (2026-11-16, UTC)
+
+**Sources read this session (fetched 2026-11-16):**
+- S35 — NFL.com Terms and Conditions, <https://www.nfl.com/legal/terms/> (page "Updated: May 16, 2024"; all 9 chunks read). Verbatim clauses in `data/legal/terms_2026-11-16.json`.
+- S36 — NFL.com 2026 transactions, November: trades <https://www.nfl.com/transactions/league/trades/2026/11>, reserve list <https://www.nfl.com/transactions/league/reserve-list/2026/11>, signings <https://www.nfl.com/transactions/league/signings/2026/11>.
+- Not registered (see F62) — Baltimore Ravens official X post, 2026-11-05, <https://x.com/Ravens/status/2118449515959132516>.
+- Context only, not relied on for any fact: Yahoo Sports, NFLTradeRumors, Baltimore Sun, ClutchPoints, Sporting News, BVM Sports reports of the 11/05 moves.
+
+**Z1 — terms record (done).** Read in full. Confirmed F51 quotes (ss.1.1, 1.3). Found four clauses not in F51, raised as **F60**: s.8 (deep links need written permission beyond the home page), s.11(f) (no robots/agents to harvest data for commercial purposes), s.12 (no use of the Services "to gamble or wager on the result of any NFL game"), s.2 (terms may change at any time). Nothing was decided on whether the project's use breaches these. That needs counsel. No scraper or published page was changed.
+
+**Z2 — official event record (done, with a gap).** Baltimore QB events:
+- 2026-11-05: Ravens' official post says it "signed QB Austin Reed to the 53-man roster and placed QBs Lamar Jackson and Tyler Huntley on injured reserve" (S37, not registered).
+- 2026-11-06: NFL trades page lists Jacoby Brissett, Cardinals to Ravens, "Traded" (S36, registered).
+- The NFL reserve-list and signings pages for November **do not contain the 11/05 entries** (they begin at 11/07 and 11/11 respectively). This is **F61**.
+- The depth rows (VR-17, VR-26) were not re-read in this session. The events establish that a QB depth chart showing Jackson and Huntley as active from 11/05 is stale. This is a stale-row finding, not a confirmed depth value.
+
+**Z3 — gates on this branch (all pass after the changes).** `tools/verify.py` PASS (2,111 table rows, each with an official source link, 0 broken internal links). `tools/verify_combined.py` PASS (2,899 local links, 0 broken). `tools/check_generators.py` PASS. `tools/check_reachability.py` exit 0. `tools/check_scrape_drift.py` OK (347 rows, 0 designation differences; 1 club-code note, CAP-05). `tools/audit_official.py` exit 0. `tools/check_preregistration_d4027.py` PASS. `tools/check_committed_site.py` PASS. `prereg/verify.py` PASS (14 checks). `pytest tests/` 198 passed. `tools/build_site_all.py` rebuilt 20 verified-lab pages plus the root pages.
+
+**Gate conflict found and left in place — F62.** `tools/verify.py` allows only registered official domains. The Ravens' X post is the only primary record for the 11/05 moves and is not on that list, so it is **not** in `data/sources.json`. The verifier was not weakened. The event is kept in `data/transactions/official_events_2026.json` with a note. The owner must choose whether team-account posts count as official.
+
+**Irregularities raised (all "needs review", non-blocking, on the Flagged for Review page):** F60 (terms clauses beyond F51, incl. s.12 wagering), F61 (NFL transaction log omits 11/05 IR and signing entries), F62 (verifier gate and team social posts).
+
+**Verified vs. not verified.** Verified against official pages: the terms text (S35), the 11/06 Brissett trade (S36), the absence of 11/05 entries on the NFL pages (S36). The Ravens post (S37) is an official statement but not a registered source. Not verified: the content of Baltimore's depth chart, and any other club's depth rows.
+
+**Not done in this session (honest list, so nothing is implied):** the brief's remaining items (about 70 requirements) are not addressed here. In particular: the depth-chart register and Texans/Packers parsing, the injury-designation reliability study, the snapshot ledger and alerting changes, the decision-readiness table changes, the 2026 Week 11 forecast, and the leaderboard changes. Each of these needs its own claim. Other sessions' claims are unchanged.
+
+**Z4 — integration:** PR and merge recorded below after the merge.
+
+**CI fixes made during this PR (logged):**
+1. First push failed two CI jobs. (a) `build`: "committed pages must equal the generated pages", because the rebuilt root pages (`verification.html`, `integration.html`) had not been committed after the final gate run. Fixed by rebuilding and committing those two pages. (b) `verify`: "Independently recompute every figure on the dashboard" failed with `line row not numeric: ['TB @ DET2026-11-22', '2.4', 'blank', 'blank', 'blank', 'blank']`. This also fails on `main` (checked in a worktree of `origin/main`). The cause is the parser: the market cells are blank because the data has no verified market line for that game (`market_home_line: null`), which is the correct behaviour under the blank-not-inferred rule. Fixed in `tools/verify_dashboard.py`: blank market cells are accepted only when the data has no market line, and a number in such a row still fails. Not weakened for any other row. 453 assertions pass; `check_freshness` passes.
+2. After these commits, PR #89 checks: build pass, verify pass (x2).
