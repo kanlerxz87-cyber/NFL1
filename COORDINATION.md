@@ -3989,3 +3989,22 @@ Two things the merge itself produced, both kept:
 2. The rebase onto `main` dropped this session's board blocks once (a union resolution that deduplicated by line content ate 27 blank/table lines). Rebuilt as a true pure append and asserted `base board preserved byte-for-byte`.
 
 `reserve register gate: 0 failure(s), 2 note(s), 24 pinned page(s)`; `python3 -m unittest discover -s tests -q` → **229 tests OK**.
+
+---
+
+## Session `57cb6643-nfl1` — final integration takeover (branch `arena/57cb6643-nfl1`, base `46c82ae`, 2026-11-16 UTC)
+
+Read the shared board before work. The open PRs below each had an initial claim older than 60 minutes and no commits for more than 60 minutes at takeover (UTC 18:00); this session is taking them over under the board's handoff rule. The Arena branch is fixed to `arena/57cb6643-nfl1`; all work remains on this branch. Their existing PR branches are inputs only and will not be edited.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| I1 | Claim and record stale-session handoffs before touching implementation files | in progress | `57cb6643` | `COORDINATION.md` | Claim commit/push first; PR #91/#92/#94/#99 handoff |
+| I2 | Integrate and reconcile PR #94 (session `414a54c9`), PR #91 (`2b927826`), PR #92 (`a35ddf45`) and PR #99 (`cc5a9cdd`) on this branch, retaining all non-conflicting data, pages, tests, claims and findings | in progress | `57cb6643` | `COORDINATION.md`; incoming PR file sets; only generated pages/workflow/build files required to make the combined tree reproducible | No changes to another branch; conflicts are resolved on this branch and logged |
+| I3 | Independently run the canonical build, official-source/data verifiers, reachability/link checks and test suites; repair only integration/build failures without filling unknown values | pending | `57cb6643` | `tools/build_site_all.py` and exact failing owner paths, if needed; `COORDINATION.md` | Flag unresolved/unverified facts; do not weaken provenance gates |
+| I4 | Final PR from this branch to `main`; merge only after all gates pass; verify Pages deployment and record result | pending | `57cb6643` | `COORDINATION.md` | Existing review flags do not block; broken build/deploy does |
+
+### Handoff evidence at claim time
+
+At 2026-11-16T18:00Z, GitHub showed no new commits for over 60 minutes on the four claimed heads: PR #91 last commit 14:55Z, PR #92 15:02Z, PR #94 15:38Z, and PR #99 15:52Z. Their initial claim commits are older still. PR #91/#92/#94 were marked conflicting against `main`; PR #99 had failing build/verify checks. The PRs and immutable file lists are linked here: [#91](https://github.com/kanlerxz87-cyber/NFL1/pull/91), [#92](https://github.com/kanlerxz87-cyber/NFL1/pull/92), [#94](https://github.com/kanlerxz87-cyber/NFL1/pull/94), [#99](https://github.com/kanlerxz87-cyber/NFL1/pull/99). The exact resulting conflicts, retained work, source verification and gate outcomes will be added below as the integration proceeds.
+
+_Claim only; implementation has not begun._
