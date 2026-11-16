@@ -4554,7 +4554,6 @@ PR **#105** (`arena/9a1c5fa6-nfl1` → `main`) **merged** as `be35682` (merge co
 * **Visible on the live landing page:** "Games analysed 137 · week 10 complete". The true count from the official standings is 149. This is the stale-capture gap in R1-REQ-01, published as-is. Not corrected here, because the fix is outside R1's scope.
 
 R1 is done for Weeks 1–10 of 2026 and is merged. Still open for other sessions or the integration session: R1-I (readiness row PR-02 to Partial, the Flagged for Review page), R1-REQ-01, the 13 Week 10 finals (F-R1-01), the Monday game (F-R1-02), pre-2026 seasons (F-R1-03), and terms counsel review (F-R1-04).
-<<<<<<< HEAD
 
 ### Merge record — session `49ac3a99-nfl1` (PR #101, 2026-11-16 UTC)
 
