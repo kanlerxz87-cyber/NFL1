@@ -55,15 +55,15 @@ jobs:
         run: |
           python3 -m unittest discover -s tests -v 2>&1 | tee /tmp/testlog.txt
           exit "${PIPESTATUS[0]}"
-      - name: Publish test log to the job summary (debug)
+      - name: Publish test failures as annotations (debug)
         if: always()
         run: |
-          {
-            echo "## unittest log tail (session 414a54c9 debug)"
-            echo '```'
-            tail -60 /tmp/testlog.txt
-            echo '```'
-          } >> "$GITHUB_STEP_SUMMARY"
+          grep -E "^(FAIL|ERROR):" /tmp/testlog.txt | while IFS= read -r line; do
+            echo "::error::UNITTEST ${line}"
+          done
+          grep -E "AssertionError|KeyError|FileNotFoundError" /tmp/testlog.txt | head -10 | while IFS= read -r line; do
+            echo "::error::UNITTEST ${line}"
+          done
       - name: Run the independent official-source snapshot audit
         run: PYTHONPATH=src python3 scripts/verified/check_source_audit.py
       - name: Require generated evidence to be committed
