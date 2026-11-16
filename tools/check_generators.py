@@ -34,6 +34,9 @@ GENERATORS = {
     "tools/build.py": [r'write_page\(\s*"([^"]+\.html)"'],
     "scripts/verified/build_site.py": [r'\(PAGES / fname\)', r'"([a-z0-9-]+\.html)": \('],
     "tools/build_dashboard.py": [r'web/[a-z-]+\.html'],
+    # Session cf97db19-nfl1 (X1), registered by the 414a54c9 integration from PR #47:
+    # the backup-register builder (the path literal appears in its module docstring).
+    "tools/build_backup_register.py": [r'(pages/backup-register\.html)'],
     # Session 0c5215c1-nfl1: the pre-registration sub-site. write() takes bare filenames;
     # the generator writes them under prereg/ (prefix added in claims()).
     "prereg/build.py": [r'write\(\s*"([^"/]+\.html)"'],
@@ -69,6 +72,8 @@ KNOWN_OWNERS = {
     # Session 739408a8-nfl1: the forward-test ledger page (its generator is not in
     # GENERATORS; ownership recorded so the file is documented, not assumed).
     "prereg/index.html": "tools/prereg.py",
+    # Session cf97db19-nfl1 (X1): official-roster backup register (PR #47).
+    "pages/backup-register.html": "tools/build_backup_register.py",
 }
 
 DASHBOARD_PAGES = ["web/dashboard.html", "web/decisions.html", "web/suggestions.html",

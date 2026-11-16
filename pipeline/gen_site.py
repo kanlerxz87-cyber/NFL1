@@ -33,6 +33,9 @@ NAV = [
     ("pages/parlays.html", "Parlays & Combos"),
     ("pages/props.html", "Player Props"),
     ("pages/injuries.html", "Injuries"),
+    # Session cf97db19-nfl1 (X1): official-roster backup register. Added by the
+    # 414a54c9 integration session from PR #47 (takeover of a stale claim).
+    ("pages/backup-register.html", "Backup Register"),
     ("pages/depth.html", "Depth & Deficiency"),
     ("pages/snapshots.html", "Injury Snapshots"),
     ("pages/questions.html", "Questions"),

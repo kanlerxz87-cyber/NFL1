@@ -22,6 +22,9 @@ CANON = [
     ("parlays.html", "Parlays & Combos"),
     ("props.html", "Player Props"),
     ("injuries.html", "Injuries"),
+    # Session cf97db19-nfl1 (X1): official-roster backup register. Added by the
+    # 414a54c9 integration session from PR #47 (takeover of a stale claim).
+    ("backup-register.html", "Backup Register"),
     ("depth.html", "Depth & Deficiency"),
     # Session 90c2b454-nfl1 (P3): the official injury-report snapshot ledger.
     ("snapshots.html", "Injury Snapshots"),
