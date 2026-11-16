@@ -268,6 +268,7 @@ def main() -> int:
         events[k].sort(key=lambda e: e.get("date") or "")
 
     findings: list[dict] = []
+    finding_at: dict[tuple, dict] = {}
     ambiguous: list[dict] = []
     artifact_stats: list[dict] = []
     for label, rel, kind, nature in ARTIFACTS:
@@ -302,6 +303,17 @@ def main() -> int:
             row["_match"] = match
             f = classify(row, evs)
             if f:
+                # One artifact can print the same player twice (two slots in a depth chart, a
+                # duplicate row in the register). That is one staleness finding, not two: counting
+                # the repetition would inflate a club's number for a formatting accident. The
+                # number of artifact rows behind it is kept as `artifact_rows`.
+                sig = (f.get("artifact"), f.get("club"), f.get("player"), f.get("date"),
+                       f.get("kind"))
+                if sig in finding_at:
+                    finding_at[sig]["artifact_rows"] += 1
+                    continue
+                f["artifact_rows"] = 1
+                finding_at[sig] = f
                 findings.append(f)
 
     state_path = STORE / "reserve_state.json"

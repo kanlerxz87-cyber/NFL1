@@ -106,6 +106,11 @@ def shell(title: str, lede: str, body: str, stamp: str) -> str:
             f"is printed as <em>not printed</em>, never filled.</footer>\n</main>\n</body></html>\n")
 
 
+def _artifact_rows(rendered):
+    """zip helper: the artifact table re-uses its rendered cells and adds a repo link."""
+    return rendered
+
+
 def build_index(coverage, transactions, state, join, staleness, manifest) -> tuple[str, str]:
     stamp = (coverage or {}).get("generated_at_utc") or (transactions or {}).get("generated_at_utc") \
         or "no capture yet"
@@ -145,17 +150,51 @@ def build_index(coverage, transactions, state, join, staleness, manifest) -> tup
         p = pages[key]
         cat, month = key.split("/", 1)
         cov_rows.append([esc(key), esc(p.get("status")),
-                         esc(p.get("rows")),
+                         esc(p.get("rows_last_read") if p.get("rows_last_read") is not None
+                             else p.get("rows")),
+                         esc(p.get("rows_in_the_union")),
+                         esc(p.get("captures_for_page")),
+                         esc(p.get("cap_oldest_printed")),
                          f'<code>{esc((p.get("canonical_sha256") or "")[:16])}</code>',
                          esc(p.get("captured_at_utc")),
                          esc(p.get("http_status")),
-                         link(p.get("url") or (official_base + f"{cat}/{month.replace('-', '/')[:4]}"
-                                                f"/{int(month[5:]):d}"), "official page"),
+                         link(p.get("url"), "official page"),
                          esc("; ".join(p.get("flags") or []))])
-    headers = [("Category / month", ""), ("Status", ""), ("Rows", "num"),
+    headers = [("Category / month", ""), ("Status", ""), ("Rows in the newest read", "num"),
+               ("Rows in the union of all reads", "num"), ("Reads of this page", "num"),
+               ("Oldest row printed by the source", ""),
                ("Content SHA-256 (first 16)", ""), ("Read at (UTC)", ""), ("HTTP", "num"),
                ("Source", ""), ("Flags on this page", "")]
     out.append(table(headers, cov_rows))
+    capped = (coverage or {}).get("pages_capped") or []
+    incomplete = (coverage or {}).get("months_incomplete_at_source") or []
+    # A capped page in a CLOSED month can never be completed by re-reading: the league prints only
+    # the last 25 rows of that month, forever. A capped page in the CURRENT month can be, by reading
+    # the running page often. The difference decides whether a gap is recoverable, so it is computed
+    # from the capture stamp and published, not left for a reader to infer.
+    stamp_month = str((coverage or {}).get("captured_at") or "")[:7]
+    closed_partial = sorted(k for k in incomplete if k.split("/")[-1] < stamp_month)
+    if capped:
+        out.append(
+            '<div class="flag note"><span class="open">The printed cap: the source shows at most '
+            '25 rows per '
+            'category-and-month page.</span> '
+            + str((coverage or {}).get("cap_explained") or "")
+            + f' {len(capped)} page(s) sit at that cap; {len(incomplete)} of them are '
+              '<b>incomplete at the source</b> for their month (the oldest row printed is later '
+              'than the first of the month), which is a limit of the league\u2019s page and not a '
+              'gap in this capture. Rows are recovered by reading the running page repeatedly: the '
+              'register below is the union of every read, so a row never disappears when it slides '
+              'out of the printed window. '
+              + (f"Capped pages: {', '.join(capped)}." if capped else "")
+              + (f" <b>{len(closed_partial)} of them are in a month that has already closed</b>, so "
+                 "re-reading cannot recover the rows the league did not print: those months are "
+                 "permanent partial views of the official page, and every count taken from them is a "
+                 "floor, not a total. Months still running are completed by the sweep."
+                 if closed_partial else
+                 " Every capped page is in the month still being captured, so the sweep completes it."
+                 if incomplete else "")
+              + "</div>")
     out.append('<p class="note">A month that was never fetched is absent from this table rather '
                'than shown as zero: absence is a gap in our capture, zero is a claim about the '
                'league. The pinned category and month list lives in '
@@ -183,7 +222,8 @@ def build_index(coverage, transactions, state, join, staleness, manifest) -> tup
             esc(j.get("on_reserve_not_in_report")),
             esc(j.get("unavailable_total_report_plus_reserve")),
             esc(names),
-            link(src, "reserve list") if src else '<span class="blank">no dated row to link</span>',
+            link(src or "https://www.nfl.com/transactions/", "reserve list" if src
+                 else "the register"),
         ])
     out.append(table([("Club", ""), ("Weekly report rows", "num"), ("On a reserve list", "num"),
                       ("On a reserve list, never on the report", "num"),
@@ -213,8 +253,15 @@ def build_index(coverage, transactions, state, join, staleness, manifest) -> tup
         artifact_cell = (f'{esc(f.get("artifact"))}<br><span class="blank">{esc(f.get("artifact_nature"))}'
                          f' · captured {esc(f.get("artifact_date"))}</span>')
         links = [link(f.get("source_url"), "official transaction")]
-        if f.get("artifact_source_url"):
-            links.append(link(f["artifact_source_url"], "the artifact's own page"))
+        art_src = f.get("artifact_source_url")
+        if art_src and str(art_src).startswith(("http://", "https://")):
+            links.append(link(art_src, "the artifact's own page"))
+        elif art_src:
+            # The staleness file stores a source KEY (S15) for the artifact side, because the
+            # artifact's own file records keys, not URLs. A key is not a link: resolving it here
+            # would send a reader to a file named "S15". It is printed as what it is, and the row
+            # still carries the dated official link to the event above it.
+            links.append(f'<code title="source key recorded in the artifact">{esc(art_src)}</code>')
         if f.get("player_url"):
             links.append(link(f["player_url"], "official player page"))
         st_rows.append([artifact_cell, esc(f.get("club")), esc(f.get("player")),
@@ -226,10 +273,16 @@ def build_index(coverage, transactions, state, join, staleness, manifest) -> tup
                       ("Sources", "")], st_rows))
     arts = []
     for a in (staleness or {}).get("artifacts") or []:
-        arts.append([esc(a.get("artifact")), f'<code>{esc(a.get("file"))}</code>',
+        f = a.get("file") or ""
+        arts.append([esc(a.get("artifact")),
+                     (f'<a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/{f}"'
+                      f' target="_blank" rel="noopener"><code>{esc(f)}</code></a>'),
                      esc(a.get("nature")), esc(a.get("names")), esc(a.get("status"))])
     out.append(table([("Artifact compared", ""), ("File", ""), ("What it claims to be", ""),
-                      ("Player names read", ""), ("Status", "")], arts))
+                      ("Player names read", ""), ("Status", ""), ("Open the file", "")],
+                     [a_row + [link(a.get("url"), "repo file")] for a, a_row in
+                      zip(((staleness or {}).get("artifacts") or []), _artifact_rows(arts))]
+                     if arts else []))
     out.append('<p class="note">'
                f'{esc((staleness or {}).get("contradictions_of_a_current_claim", 0))} finding(s) '
                'contradict an artifact that claims to be current; '

@@ -38,9 +38,26 @@ ct = importlib.util.module_from_spec(_spec)
 sys.modules.setdefault("collect_transactions", ct)
 _spec.loader.exec_module(ct)
 
-# Reviewed row-count pins. A count above or below the pin fails the build: the page changed, or
-# the parser did. Update a pin only on purpose, with the reason in the commit message.
-PINS: dict[str, int] = {}
+# Reviewed MINIMUM row counts per captured page. The derived register is the union of every capture
+# of a page, so a count can only grow as the month is read again; a count BELOW the pin means rows
+# were lost, which is what the brief's drift alarm is for ("fail the build loudly when a field goes
+# missing rather than publishing a blank"). Growth above the pin is reported, not failed.
+# Counts from the capture of 2026-11-16T14:56Z, checked against the official pages the same day.
+PINS: dict[str, int] = {
+    "trades/2026-08": 25, "trades/2026-09": 1, "trades/2026-10": 6, "trades/2026-11": 12,
+    "signings/2026-08": 25, "signings/2026-09": 25, "signings/2026-10": 25, "signings/2026-11": 25,
+    "reserve-list/2026-08": 25, "reserve-list/2026-09": 25, "reserve-list/2026-10": 25,
+    "reserve-list/2026-11": 25,
+    "waivers/2026-08": 25, "waivers/2026-09": 25, "waivers/2026-10": 25, "waivers/2026-11": 25,
+    "terminations/2026-08": 25, "terminations/2026-09": 11, "terminations/2026-10": 25,
+    "terminations/2026-11": 13,
+    "other/2026-08": 4, "other/2026-09": 12, "other/2026-10": 9, "other/2026-11": 5,
+}
+# Rows the publisher itself refuses to print: a page at the cap whose oldest row is not the first of
+# the month is incomplete at the source. The gate makes the site say so out loud.
+# Phrases the published page must contain when any captured page sits at the cap. "printed cap" is
+# the fact; the number is read from the collector so the two can never drift apart silently.
+CAP_DISCLOSURE = ("printed cap",)
 MONTHS = ct.DEFAULT_MONTHS
 CATEGORIES = ct.CATEGORIES
 PLACEHOLDER_RE = re.compile(r"\b(TODO|TBD|FIXME|lorem ipsum|placeholder|xxx+)\b", re.I)
@@ -62,6 +79,7 @@ def fail(msg: str, failures: list[str]) -> None:
 
 
 def check_captures(failures: list[str], reports: list[str]) -> list[dict]:
+    legacy_cap: list[str] = []
     caps = ct.load_captures()
     if not caps:
         fail("no capture file in data/reserve/captures/: the sweep has not run, so the register "
@@ -80,11 +98,23 @@ def check_captures(failures: list[str], reports: list[str]) -> list[dict]:
             fail(f"{rel}: the stored rows no longer hash to the recorded canonical_sha256 "
                  f"(content edited after capture)", failures)
         key = f"{cap.get('category')}/{cap.get('month')}"
-        if key in PINS and len(rows) != PINS[key]:
-            fail(f"{key}: {len(rows)} rows captured, {PINS[key]} pinned — the page or the parser "
-                 f"changed; re-read the official page, then re-pin on purpose", failures)
+        if key in PINS and len(rows) < PINS[key]:
+            fail(f"{key}: {len(rows)} rows captured, at least {PINS[key]} pinned — rows were lost "
+                 f"between the reviewed capture and this one; re-read the official page, and if "
+                 f"the league really removed rows, re-pin on purpose with the reason", failures)
         elif key not in PINS:
             reports.append(f"{key}: {len(rows)} rows, not pinned yet")
+        if len(rows) >= ct.PRINTED_CAP and cap.get("cap") is False:
+            fail(f"{key}: the page printed {len(rows)} rows, which is the publisher's cap, yet the "
+                 f"capture records `cap: false`; a silent truncation is what this gate exists for",
+                 failures)
+        elif len(rows) >= ct.PRINTED_CAP and "cap" not in cap:
+            legacy_cap.append(key)
+    if legacy_cap:
+        reports.append(f"{len(legacy_cap)} page(s) sit at the publisher's cap in captures written "
+                       f"before the `cap` field existed; coverage derives it from the rows, so "
+                       f"nothing is missed: {', '.join(sorted(legacy_cap)[:4])}"
+                       + (" ..." if len(legacy_cap) > 4 else ""))
     return caps
 
 
@@ -111,6 +141,8 @@ def check_rows(failures: list[str], reports: list[str]) -> list[dict]:
             fail(f"{who}: no player name", failures); bad += 1
         if not r.get("source_url"):
             fail(f"{who}: no source link", failures); bad += 1
+        elif not r["source_url"].startswith(("https://", "http://")):
+            fail(f"{who}: source is not a URL: {r['source_url']!r}", failures); bad += 1
         elif "nfl.com" not in r["source_url"]:
             fail(f"{who}: source link is not an nfl.com page: {r['source_url']}", failures); bad += 1
         if r.get("category") not in CATEGORIES:
@@ -160,6 +192,33 @@ def check_derived(failures: list[str], reports: list[str]) -> None:
                            f"missing ones are listed by the collector's own log, not guessed")
 
 
+def check_cap_disclosure(failures: list[str], reports: list[str]) -> None:
+    """If any captured page sits at the publisher's cap, the published page must say so."""
+    cov_path = STORE / "coverage.json"
+    if not cov_path.exists():
+        return
+    cov = json.loads(cov_path.read_text(encoding="utf-8"))
+    capped = cov.get("pages_capped") or []
+    if not capped:
+        return
+    page = PAGES[0] if PAGES else None
+    if not page or not page.exists():
+        fail("a page sits at the printed cap but there is no published page to disclose it", failures)
+        return
+    text = page.read_text(encoding="utf-8")
+    for token in CAP_DISCLOSURE + (str(ct.PRINTED_CAP),):
+        if token not in text:
+            fail(f"reserve/index.html does not disclose the printed cap (missing {token!r}) while "
+                 f"{len(capped)} page(s) are capped: {', '.join(capped)}", failures)
+    incomplete = [k for k in capped
+                  if not (cov["pages"].get(k) or {}).get("cap_month_complete_as_printed")]
+    if incomplete and "incomplete at the source" not in text:
+        fail(f"{len(incomplete)} capped page(s) are not complete for their month and the page does "
+             f"not label them as such", failures)
+    reports.append(f"printed cap disclosed for {len(capped)} page(s); "
+                   f"{len(incomplete)} of them are incomplete at the source, not by us")
+
+
 def check_pages(failures: list[str], reports: list[str]) -> None:
     for page in PAGES:
         if not page.exists():
@@ -200,6 +259,7 @@ def main() -> int:
     check_captures(failures, reports)
     check_rows(failures, reports)
     check_derived(failures, reports)
+    check_cap_disclosure(failures, reports)
     check_pages(failures, reports)
     for r in reports:
         print(f"note {r}")

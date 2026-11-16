@@ -81,6 +81,11 @@ DEFAULT_MONTHS = ["2026-08", "2026-09", "2026-10", "2026-11"]
 # change, not an empty month. A category/month that has NEVER had rows is reported as "empty".
 MUST_HAVE_ROWS = {("reserve-list", "2026-09"), ("reserve-list", "2026-10"),
                   ("reserve-list", "2026-11"), ("trades", "2026-11")}
+# Verified against the live page on 2026-11-16: every transactions month page prints at most this
+# many rows, newest first. A page that returns exactly this many is truncated by the publisher, not
+# by us: `?page=2` returns the same rows and a per-day url returns 404, so the only recovery is to
+# read the running page often and keep the union of every read.
+PRINTED_CAP = 25
 PARSER_VERSION = "collect_transactions/1.0"
 USER_AGENT = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
               "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")
@@ -257,6 +262,32 @@ def fetch(url: str, attempts: int = 4) -> tuple[int, str, str]:
     raise RuntimeError(f"fetch failed after {attempts} attempts ({last})")
 
 
+def cap_facts(rows: list[dict], year: int, month: int) -> dict:
+    """Facts about the publisher's own window, from one read of one page.
+
+    Verified on the live page 2026-11-16: a transactions category-month page prints at most
+    PRINTED_CAP rows, newest first, and offers no deeper window (`?page=2` repeats the same rows, a
+    per-day url returns 404). So a read of exactly PRINTED_CAP rows is only a complete view of the
+    month when its oldest row reaches the first day of the month. Returned as data, never as a
+    silent fix: the missing rows do not exist anywhere we can reach, so they are disclosed.
+    """
+    n = len(rows)
+    dates = sorted(r["date"] for r in rows if r.get("date"))
+    month_start = f"{year}-{month:02d}-01"
+    oldest = dates[0] if dates else None
+    capped = n >= PRINTED_CAP
+    return {
+        "cap": capped,
+        "cap_rows_printed": n,
+        "cap_oldest_printed": oldest,
+        "cap_month_complete_as_printed": (not capped) or bool(dates) and oldest <= month_start,
+        "cap_note": (f"page is at its printed cap of {PRINTED_CAP} rows (oldest printed {oldest}, "
+                     f"month starts {month_start}); the league prints no deeper window: ?page=2 "
+                     f"repeats the same rows and a per-day url returns 404, verified 2026-11-16")
+        if capped else "",
+    }
+
+
 def capture_one(cat: str, ym: str, sleep: float = 1.0) -> dict:
     year, month = (int(x) for x in ym.split("-"))
     url = f"{BASE}/{cat}/{year}/{month}"
@@ -283,6 +314,13 @@ def capture_one(cat: str, ym: str, sleep: float = 1.0) -> dict:
         rec["flag_page_has_keyword"] = marker in html
         if rec["flag_page_has_keyword"]:
             rec["flags"] = flags + [f"page mentions {marker!r} but no table row parsed: parser or schema drift"]
+    # The printed cap. Verified on 2026-11-16: /transactions/league/reserve-list/2026/11 prints the
+    # 25 most recent rows of the month, ?page=2 returns the same 25 rows, and a per-day URL 404s.
+    # So 25 rows with the oldest one still inside the month means the page is at its cap and the
+    # month is only partly printed. Recorded as a fact about the source, not repaired by inference.
+    rec.update(cap_facts(rows, year, month))
+    if rec["cap"]:
+        rec["flags"] = (rec.get("flags") or []) + [rec["cap_note"]]
     return rec
 
 
@@ -325,24 +363,42 @@ def load_captures() -> list[dict]:
 
 
 def latest_rows_per_key(captures: list[dict]) -> tuple[list[dict], dict]:
-    """For each (category, month) keep the newest capture's rows; report superseded captures."""
+    """Union every capture of a (category, month) page, newest metadata winning.
+
+    Deduplication is on the printed content (date, both clubs, name, transaction). A row seen in an
+    earlier capture but absent from the newest one is KEPT and marked `seen_in_captures`, because
+    the publisher's 25-row window slides: a move can leave the printed page without being undone.
+    Dropping it would silently un-publish a fact the league printed.
+    """
+    by_key: dict[tuple, list[dict]] = {}
     newest: dict[tuple, dict] = {}
     for cap in captures:
         if cap.get("_unreadable") or cap.get("status") != "ok":
             continue
         key = (cap["category"], cap["month"])
+        by_key.setdefault(key, []).append(cap)
         if key not in newest or (cap.get("captured_at_utc") or "") >= (
                 newest[key].get("captured_at_utc") or ""):
             newest[key] = cap
     rows: list[dict] = []
-    for (cat, month), cap in sorted(newest.items()):
-        for r in cap.get("row_list") or []:
-            r = dict(r)
-            r["category"] = cat
-            r["month"] = month
-            r["captured_at_utc"] = cap.get("captured_at_utc")
-            r["source_capture"] = cap.get("_file", "")
-            rows.append(r)
+    for (cat, month), caps in sorted(by_key.items()):
+        caps = sorted(caps, key=lambda c: c.get("captured_at_utc") or "")
+        seen: dict[tuple, dict] = {}
+        for cap in caps:
+            for r in cap.get("row_list") or []:
+                ident = (r.get("date"), r.get("club_from"), r.get("club_to"), r.get("player"),
+                         r.get("transaction"))
+                if ident in seen:
+                    seen[ident]["seen_in_captures"].append(cap.get("_file", ""))
+                    continue
+                r2 = dict(r)
+                r2["category"] = cat
+                r2["month"] = month
+                r2["captured_at_utc"] = cap.get("captured_at_utc")
+                r2["source_capture"] = cap.get("_file", "")
+                r2["seen_in_captures"] = [cap.get("_file", "")]
+                seen[ident] = r2
+        rows.extend(seen.values())
     return sorted(rows, key=row_sort_key), {f"{c}/{m}": v.get("captured_at_utc")
                                             for (c, m), v in newest.items()}
 
@@ -515,6 +571,18 @@ def write_derived(rows: list[dict], captures: list[dict], newest: dict) -> dict:
                  "canonical_sha256": cap.get("canonical_sha256"),
                  "raw_sha256": cap.get("raw_sha256"), "http_status": cap.get("http_status"),
                  "url": cap.get("url"), "flags": cap.get("flags") or [],
+                 # The cap is derived from the stored rows, so a capture written before the flag
+                 # existed is judged by the same rule as one written after it: the number of rows a
+                 # single read returned is a fact inside the capture, not a note beside it.
+                 "rows_last_read": len(cap.get("row_list") or []),
+                 "cap_rows_printed": len(cap.get("row_list") or []),
+                 "cap_oldest_printed": min((x.get("date") for x in (cap.get("row_list") or [])
+                                            if x.get("date")), default=None),
+                 "cap": cap_facts(cap.get("row_list") or [], int(str(cap.get("month") or "0000-01")[:4]),
+                                  int(str(cap.get("month") or "0000-01")[5:7] or 1))["cap"],
+                 "cap_at_source_flag": cap.get("cap"),
+                 "captures_for_page": sum(1 for x in captures if x.get("category") == cap.get("category")
+                                          and x.get("month") == cap.get("month")),
                  "headers": cap.get("headers") or []}
         if prev and (entry["captured_at_utc"] or "") >= (prev["captured_at_utc"] or ""):
             cov["pages"][key] = entry
@@ -522,6 +590,30 @@ def write_derived(rows: list[dict], captures: list[dict], newest: dict) -> dict:
             cov["pages"][key] = entry
         for f in entry["flags"]:
             cov["flags"].append({"page": key, "flag": f})
+    union_per_page: dict[str, int] = {}
+    for r in rows:
+        k = f"{r.get('category')}/{r.get('month')}"
+        union_per_page[k] = union_per_page.get(k, 0) + 1
+    for k, entry in cov["pages"].items():
+        entry["rows_in_the_union"] = union_per_page.get(k, 0)
+    for k, e in cov["pages"].items():
+        month_start = (k.split("/")[1] if "/" in k else "") + "-01"
+        e["cap_month_complete_as_printed"] = bool(e.get("cap_oldest_printed")) and \
+            (e.get("cap_oldest_printed") or "") <= month_start
+    cov["pages_capped"] = sorted(k for k, e in cov["pages"].items() if e.get("cap"))
+    cov["months_incomplete_at_source"] = sorted(
+        k for k, e in cov["pages"].items() if e.get("cap") and not e["cap_month_complete_as_printed"])
+    cov["months_fully_printed"] = sorted(k for k, e in cov["pages"].items()
+                                         if not e.get("cap") or e["cap_month_complete_as_printed"])
+    cov["printed_cap"] = PRINTED_CAP
+    cov["cap_explained"] = ("The league's month page prints at most "
+                            f"{PRINTED_CAP} rows, newest first, and offers no deeper window "
+                            "(`?page=2` repeats the same rows; a per-day url returns 404). A page at"
+                            f" {PRINTED_CAP} rows is therefore only complete for the month if its "
+                            "oldest printed row is on the first day. Capturing the running page "
+                            "often is what recovers the rest: the derived register is the union of "
+                            "every capture of that page, so a row is never lost by leaving the "
+                            "printed window.")
     cov["pages"] = dict(sorted(cov["pages"].items()))
     cov["n_pages"] = len(cov["pages"])
     cov["n_rows_latest"] = len(rows)
