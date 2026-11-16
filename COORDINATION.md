@@ -4349,3 +4349,13 @@ carries the known 23 official-page self-contradiction rows.
 --is-shallow-repository`), which made the PR histories look unrelated and broke the
 preregistration stamp check locally; `git fetch --unshallow origin` restored the real
 history (704 commits on `main`) and the check passed. No repo defect.
+## Task board — session `9a1c5fa6-nfl1` (ACTIVE; claimed 2026-11-16T18:05Z, branch `arena/9a1c5fa6-nfl1`, base `46c82ae` on `main`)
+
+Board read before this claim. Open PRs #99, #94, #92, #91, #81, #80, #79, #77, #59, #57, #47 were checked: none touches `data/results/**` or `tools/check_results_official.py`. The brief is much larger than one session can finish, so this claim is one bounded, verifiable item. Every other brief item stays unclaimed.
+
+Branching note: the session brief asks for `session-<id>/<task>` branches. The Arena session rule is to work only on the branch named in the session note (`arena/9a1c5fa6-nfl1`), so that is used here. Other sessions use the same `arena/<id>-nfl1` form.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| R1 | Line-by-line check of every 2026 regular-season final score (Weeks 1–10) against the official nfl.com week pages, read again on 2026-11-16. Clears readiness PR-02 only if every game matches. | in progress | `9a1c5fa6` | `data/results/**` (new), `tools/check_results_official.py` (new), `COORDINATION.md` | Each row keeps the exact official header text it was read from. Mismatches are flagged, never overwritten. |
+| R1-I | Integration of R1 into the readiness register and the Flagged for Review page | not claimed | — | `room/data/readiness.json`, `flagged` pages | Shared output: left to the integration session. R1 only proposes the row change in the log. |
