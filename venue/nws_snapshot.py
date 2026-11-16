@@ -192,10 +192,26 @@ def process_venue(entry):
 
 
 def main():
-    venues = json.load(open(VENUE_FILE))
+    raw = json.load(open(VENUE_FILE))
+    if isinstance(raw, dict) and isinstance(raw.get("rows"), list):
+        venue_list = raw["rows"]
+    elif isinstance(raw, list):
+        venue_list = raw
+    else:
+        raise SystemExit(f"unexpected structure in {VENUE_FILE}")
     rows = []
-    for game_id in sorted(venues, key=lambda k: (venues[k]["gameday"], venues[k]["kickoff_et"])):
-        rows.append(process_venue(venues[game_id]))
+    venue_list = sorted(venue_list, key=lambda v: (v.get("gameday", ""), v.get("kickoff_et", "")))
+    for entry in venue_list:
+        try:
+            rows.append(process_venue(entry))
+        except Exception as exc:  # noqa: BLE001 - last-resort guard, keep the run green
+            rows.append(
+                {
+                    "game_id": entry.get("game_id"),
+                    "stadium_as_printed": entry.get("stadium_as_printed"),
+                    "flags": [f"script_error: {type(exc).__name__}: {exc}"],
+                }
+            )
         time.sleep(0.5)
     out = {
         "what": "Week-11 NWS hourly overlay (E4/IN-29 part 2): hourly wind/temperature/precipitation around kickoff per venue",
