@@ -4359,3 +4359,27 @@ Branching note: the session brief asks for `session-<id>/<task>` branches. The A
 |---|---|---|---|---|---|
 | R1 | Line-by-line check of every 2026 regular-season final score (Weeks 1–10) against the official nfl.com week pages, read again on 2026-11-16. Clears readiness PR-02 only if every game matches. | in progress | `9a1c5fa6` | `data/results/**` (new), `tools/check_results_official.py` (new), `COORDINATION.md` | Each row keeps the exact official header text it was read from. Mismatches are flagged, never overwritten. |
 | R1-I | Integration of R1 into the readiness register and the Flagged for Review page | not claimed | — | `room/data/readiness.json`, `flagged` pages | Shared output: left to the integration session. R1 only proposes the row change in the log. |
+
+### R1 result — session `9a1c5fa6-nfl1` (2026-11-16, branch `arena/9a1c5fa6-nfl1`)
+
+**Status: done, with flagged coverage gap. PR-02 change proposed here only, not applied.**
+
+Files committed (`64b3e03`): `data/results/**` (official read TSV, Week 10 records TSV, comparison CSV, verification JSON, `RESULTS_2026_VERIFIED.md`, `README.md`, `flags_R1.json`), `tools/check_results_official.py`, and `tests/test_results_official.py`.
+
+**Scope note:** `tests/test_results_official.py` is a new file. It is outside the R1 file scope in the claim. It tests only `tools/check_results_official.py`, and it touches no other session's file.
+
+Results (re-run `python3 tools/check_results_official.py`):
+
+* Official final games read: 149 (Weeks 1–10). One Week 10 game (Chargers at Ravens, Mon 16 Nov) is still scheduled, with no score recorded.
+* `data/verified/games_2026.csv`: 136 of 136 rows match the official pages on score and date. 0 mismatches. 0 results rows without an official counterpart.
+* Coverage gap: 13 official Week 10 finals are not in `games_2026.csv`. Flagged F-R1-01. Not filled, not added.
+* Printed Week 10 club records: 32 of 32 equal the records computed from all 149 official finals.
+* Spot check: three Week 10 margins were re-read on each game's official Game Center page (SF 46–DAL 40, LAR 34–AZ 6, MIN 30–GB 10). All match.
+* Tests: `python3 -m unittest tests.test_results_official` 5 of 5 pass. The three corruption tests fail as intended. `python3 -m unittest discover -s tests` passes 234 of 234 in a clean environment (`/tmp/venv` with numpy, pandas, scipy, requests, beautifulsoup4, lxml). Without those packages, 16 tests error on import. This is an environment issue, not a regression.
+* `tools/verify.py`: PASS (2124 rows, all with official source; 73 flagged unverified). `tools/check_reachability.py`: problems 0. `tools/check_generators.py`: PASS.
+
+Flags for review (`data/results/flags_R1.json`): F-R1-01 (13 Week 10 finals missing from the model input), F-R1-02 (Monday game not final at read time), F-R1-03 (seasons before 2026 not checked against nfl.com, so the 100% official-match requirement for backtest games is not met), F-R1-04 (nfl.com Terms s.11(f) and s.12 bear on any betting-results feed; for counsel, see F60).
+
+**Proposed change for R1-I (integration session to apply, not applied here):** `room/data/readiness.json` PR-02. Set status to Partial, not Done. Evidence: 136/136 rows match Weeks 1–9 and Week 10 (the 13 finals) is not yet in the file. Keep the blocker as F-R1-01. Add the 13 Week 10 rows to the feed only after the integration owner approves the change.
+
+**Shared files not touched:** no nav, index, `pipeline/gen_site.py`, `tools/build_site_all.py`, or workflow edits. No edits to any other session's files.
