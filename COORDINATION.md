@@ -3778,3 +3778,15 @@ Scope is deliberately small: this session can verify against official pages, not
 **CI fixes made during this PR (logged):**
 1. First push failed two CI jobs. (a) `build`: "committed pages must equal the generated pages", because the rebuilt root pages (`verification.html`, `integration.html`) had not been committed after the final gate run. Fixed by rebuilding and committing those two pages. (b) `verify`: "Independently recompute every figure on the dashboard" failed with `line row not numeric: ['TB @ DET2026-11-22', '2.4', 'blank', 'blank', 'blank', 'blank']`. This also fails on `main` (checked in a worktree of `origin/main`). The cause is the parser: the market cells are blank because the data has no verified market line for that game (`market_home_line: null`), which is the correct behaviour under the blank-not-inferred rule. Fixed in `tools/verify_dashboard.py`: blank market cells are accepted only when the data has no market line, and a number in such a row still fails. Not weakened for any other row. 453 assertions pass; `check_freshness` passes.
 2. After these commits, PR #89 checks: build pass, verify pass (x2).
+
+**Integration result (Z4) — `bf0e6e5f-nfl1`, 2026-11-16 UTC**
+
+| Item | Result |
+|---|---|
+| PR | [#89](https://github.com/kanlerxz87-cyber/NFL1/pull/89) `arena/bf0e6e5f-nfl1` → `main`, merged 2026-11-16T14:42:08Z with `--merge`, no approval, no auto-merge. Merge commit `0ba7c9d`. |
+| Checks on the final PR head | build pass, verify pass (x2) |
+| Checks on `0ba7c9d` (main) | Verify decision dashboard, Verify NFL Decision Lab site build, Verify NFL1 site, pages build and deployment — all success |
+| Live check | <https://kanlerxz87-cyber.github.io/NFL1/flagged.html?v=0ba7c9d> shows 101 flagged items, matching the merged flags file (F60–F62 included) |
+| Still open | F51, F60 (terms — owner/counsel decision), F61 (NFL log gap), F62 (verifier allow-list for team posts). None blocks; all need review. |
+
+Z1–Z4 are done. Items in the brief outside Z1–Z4 are unclaimed and unchanged.
