@@ -276,6 +276,33 @@ class TestClaims(unittest.TestCase):
 
 
 
+    def test_a_resolved_flag_does_not_still_claim_the_defect(self):
+        """D-F10 describes a 137-game landing page. Once that page says 149 the flag is history."""
+        flags = load("data/flags.json")
+        rows = flags["rows"] if isinstance(flags, dict) else flags
+        by_id = {r["id"]: r for r in rows if str(r.get("id", "")).startswith("D-F")}
+        dash = load("data/model/dashboard.json")["counts"]["games_played"]
+        index = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
+        printed = re.search(r'Games analysed</span><strong class="kpi-value">(\d+)', index)
+        self.assertIsNotNone(printed, "the landing page must print a games-analysed count")
+        if (dash, int(printed.group(1))) == (149, 149):
+            # the page and the model agree with the official standings, so the flag must be closed
+            self.assertEqual(by_id["D-F10"]["status"], "resolved")
+            self.assertNotIn("is 12 games short", by_id["D-F10"]["impact"])
+
+    def test_every_flag_says_what_would_close_it(self):
+        flags = load("data/flags.json")
+        rows = flags["rows"] if isinstance(flags, dict) else flags
+        for r in rows:
+            if str(r.get("id", "")).startswith("D-F"):
+                self.assertTrue(str(r.get("action", "")).strip(), r["id"])
+                self.assertIn(r["status"], {
+                    "resolved", "needs review",
+                    "Open - disclosed on the site, not repaired",
+                    "Open - gate green, corpus still behind; disclosed on the site, not repaired",
+                }, r["id"])
+
+
 
 if __name__ == "__main__":
     unittest.main()
