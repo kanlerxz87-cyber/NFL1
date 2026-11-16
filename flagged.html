@@ -1135,11 +1135,11 @@
 </tr>
 <tr id="D-F10" data-verified="false">
 <td><code>D-F10</code></td>
-<td data-value="1">The site&#x27;s rendered landing page carries a stale games-played count</td>
-<td data-value="1" class="wide">data/model/dashboard.json, generated 2026-11-15T17:42Z, asserts games_played 137 while the official standings read a day later imply 149. The mismatch is the same one D-F01 records, but it is published on the landing page as a fact rather than as a lag.</td>
-<td data-value="1" class="wide">The front page states a season length that is 12 games short.</td>
-<td><span class="badge neutral">Open - disclosed on the site, not repaired</span></td>
-<td data-value="1" class="wide">Regenerate after the collector runs; until then print the read date next to the number.</td>
+<td data-value="1">RESOLVED: the landing page&#x27;s stale games-played count (137) is now the official 149</td>
+<td data-value="1" class="wide">At claim time data/model/dashboard.json (generated 2026-11-15T17:42Z) asserted games_played 137 while the official standings read a day later imply 149, and the landing page printed 137 as a fact. An upstream data refresh merged to main during this session (commit e2f9916, collector run at 2026-11-16T18:19Z) regenerated dashboard.json with games_played 149, and index.html now renders 149. Re-read on the live site this session: &#x27;Games analysed 149 · 2026 regular season&#x27;.</td>
+<td data-value="1" class="wide">None outstanding: the front page and the official standings now agree on 149.</td>
+<td><span class="badge neutral">resolved</span></td>
+<td data-value="1" class="wide">No action. The number is generated, so it will follow the collector from here. The frozen backtest corpus is a separate matter and stays open as D-F01.</td>
 <td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><a class="badge flag" href="flagged.html">UNVERIFIED</a></td>
 </tr>
 </tbody></table></div>

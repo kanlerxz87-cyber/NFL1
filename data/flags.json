@@ -1291,13 +1291,13 @@
   },
   {
     "id": "D-F10",
-    "category": "The site's rendered landing page carries a stale games-played count",
-    "description": "data/model/dashboard.json, generated 2026-11-15T17:42Z, asserts games_played 137 while the official standings read a day later imply 149. The mismatch is the same one D-F01 records, but it is published on the landing page as a fact rather than as a lag.",
-    "impact": "The front page states a season length that is 12 games short.",
-    "status": "Open - disclosed on the site, not repaired",
+    "category": "RESOLVED: the landing page's stale games-played count (137) is now the official 149",
+    "description": "At claim time data/model/dashboard.json (generated 2026-11-15T17:42Z) asserted games_played 137 while the official standings read a day later imply 149, and the landing page printed 137 as a fact. An upstream data refresh merged to main during this session (commit e2f9916, collector run at 2026-11-16T18:19Z) regenerated dashboard.json with games_played 149, and index.html now renders 149. Re-read on the live site this session: 'Games analysed 149 · 2026 regular season'.",
+    "impact": "None outstanding: the front page and the official standings now agree on 149.",
+    "status": "resolved",
     "src": "S02",
     "verified": false,
     "retrieved": "2026-11-16",
-    "action": "Regenerate after the collector runs; until then print the read date next to the number."
+    "action": "No action. The number is generated, so it will follow the collector from here. The frozen backtest corpus is a separate matter and stays open as D-F01."
   }
 ]
