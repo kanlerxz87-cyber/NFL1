@@ -85,17 +85,17 @@
   <div class="main">
     <div class="topbar">
       <div class="crumb">NFL1 / <b>Decision Questions</b></div>
-      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">117 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">112 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
     </div>
     <main class="content" id="main">
       <div class="kicker">Governance</div>
       <h1>Decision questions &amp; information gaps</h1>
       <p class="lede">A clear list of questions, the information we have and do not have, verified answers, and concrete suggestions for discovering what is missing before any decision.</p>
       <div class="callout warn"><b>This is the decision gate.</b> A decision can reasonably be made only when the questions below have answers that an official source supports. Cells with no official answer are left blank; the "Do not have" and "Discovery action" columns say exactly what is missing and how to obtain it.</div>
-<div class="cards"><div class="card"><div class="label">Questions</div><div class="value">31</div><div class="detail">Numbered Q01–Q27</div></div><div class="card"><div class="label">Official sources</div><div class="value">48</div><div class="detail">Links for manual review</div></div><div class="card"><div class="label">Flagged items</div><div class="value">117</div><div class="detail">Review page</div></div><div class="card"><div class="label">Blank answers</div><div class="value">9</div><div class="detail">Intentionally blank</div></div></div>
+<div class="cards"><div class="card"><div class="label">Questions</div><div class="value">30</div><div class="detail">Numbered Q01–Q27</div></div><div class="card"><div class="label">Official sources</div><div class="value">52</div><div class="detail">Links for manual review</div></div><div class="card"><div class="label">Flagged items</div><div class="value">112</div><div class="detail">Review page</div></div><div class="card"><div class="label">Blank answers</div><div class="value">9</div><div class="detail">Intentionally blank</div></div></div>
 <h2 id="all">Questions, information and answers</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-questions" aria-label="Filter tbl-questions" placeholder="Filter rows…">
-<span class="count" data-count-for="tbl-questions">31 rows shown</span></div>
+<span class="count" data-count-for="tbl-questions">30 rows shown</span></div>
 <div class="tablewrap"><table class="data-table" id="tbl-questions"><caption>Known information, missing information, verified answers, why each question blocks a decision, and the discovery suggestion. Blank cells are blank on purpose.</caption>
 <thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Question</th><th scope="col" class="sortable">Information we HAVE</th><th scope="col" class="sortable">Information we DO NOT HAVE</th><th scope="col" class="sortable">Answer (only if officially published)</th><th scope="col" class="sortable">Limitation</th><th scope="col" class="sortable">Why it blocks a decision</th><th scope="col" class="sortable">Suggestion to discover missing info</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
 <tr id="Q01" data-verified="true">
@@ -427,17 +427,6 @@
 <td class="wide">The surprise signal, the ablation and the per-team unavailability count all read a file whose week they disagree about, so the same injury can be counted twice or zero times.</td>
 <td class="wide">Compare data/model/availability.json meta with data/model/official_injuries.json, then record the choice here and in the readiness row for IN-26.</td>
 <td><span class="src"><a href="https://www.nfl.com/injuries/league/2026/reg11" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report (week 11 requested, week 10 served)">S39 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
-</tr>
-<tr id="Q31" data-verified="true">
-<td><code>Q31</code></td>
-<td class="wide">Do the reward rule&#x27;s frozen qualification bar and non-monetary badge structure match the brief&#x27;s intent for &#x27;rewards for top performing strategies&#x27;?</td>
-<td class="wide">A pre-registered reward rule is built and frozen at rewards/REWARDS-RULE.md (registration commit 00e3cc77). Stage 1 qualifies a strategy when its Brier skill lower bound is &gt; 0, its BH-adjusted p-value is &lt; 0.05 (and clears Bonferroni 0.05/6), and its decided-bet sample is &gt;= 200; Stage 2 awards Top Single Bet / Top Parlay / Top Player Prop Combo badges on a prospective CLV/ROI escrow. Rewards are non-monetary badges. No badge is awarded yet (any_eligible=false).</td>
-<td class="wide">Whether non-monetary badges satisfy the brief&#x27;s &#x27;rewards for top performing strategies&#x27;, and whether the BSS-lower-bound&gt;0 / BH&lt;0.05 / n&gt;=200 bar is the right qualification threshold, or should be tightened/loosened before the first strategy is graded against it.</td>
-<td class="wide"> </td>
-<td class="wide">A policy question; no official source answers it. The rule is a pre-registered proposal, frozen before grading, not an official NFL fact.</td>
-<td class="wide">The reward rule decides which strategies earn a badge, so its bar and badge structure define what &#x27;top performing&#x27; means for the whole competition. Changing it after a strategy is graded would be result-chasing.</td>
-<td class="wide">Re-read the brief&#x27;s competition wording against rewards/REWARDS-RULE.md, decide whether the bar and the non-monetary badges are acceptable, and if a change is wanted, register it as a new rule (new registration commit) before any strategy is graded against it.</td>
-<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/rewards/REWARDS-RULE.md" target="_blank" rel="noopener noreferrer" title="NFL1 repository (pre-registered policy artifact) — Pre-registered reward rule (policy, not an official NFL fact)">S48 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
 </tbody></table></div>
 <h2 id="method">How to close the gate</h2>
