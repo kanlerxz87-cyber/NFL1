@@ -3772,3 +3772,5 @@ finds a new irregularity. The seven open PRs belong to `414a54c9`'s Z2 takeover.
 
 **Deviation recorded:** Arena fixes this session to `arena/cc5a9cdd-nfl1`, so the
 `session-<id>/<task>` naming from the brief cannot be used; scopes are separated by file instead.
+
+- **cc5a9cdd scope addendum (2026-11-16)**: `.github/workflows/nws-snapshot-cc5a9cdd.yml` + `venue/nws_snapshot.py` = my E4 one-off fetcher (push-triggered only on this branch when the script changes + manual dispatch; artifact-only output, no repo writes, exits 0 by design so it cannot affect anyone's gates). E3 register pushed in `edab9f8`.
