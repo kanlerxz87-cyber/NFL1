@@ -1,0 +1,714 @@
+{
+ "schema": "nfl1.brief.requirements.v1",
+ "generated_at": "2026-11-16T14:36:42Z",
+ "generated_by": "session 2b927826-nfl1",
+ "note": "One row per distinct requirement line of the brief, de-duplicated where the brief restates itself in different words. 'gate' is what blocks the row, 'now' is the number that exists today, 'src' names the artifact or check that backs the status.",
+ "source_file": "tools/session-2b927826/build_requirements.py",
+ "legend": {
+  "done": "delivered, and an artifact exists that can be checked",
+  "partial": "some of it exists",
+  "not met": "the artifact does not exist"
+ },
+ "rows": [
+  {
+   "id": "BR-01",
+   "title": "Price-snapshot store recording opening and closing numbers for every originated market",
+   "status": "not met",
+   "gate": "an opening and a closing observation per market per game, each with a timestamp and a source",
+   "now": "0 opening numbers stored; 1 line per game (the closing)",
+   "src": "Q11 / BF-11",
+   "note": "The corpus records one price per game. No store exists, and it cannot be backfilled: once the market moves the opening number is gone."
+  },
+  {
+   "id": "BR-02",
+   "title": "Verified results feed so backtests and ROI can be computed at all",
+   "status": "partial",
+   "gate": "a final score per game joined to a price, both from a named source",
+   "now": "7,104 completed games with prices in the frozen corpus",
+   "src": "corpus.json / Q20",
+   "note": "Scores come from a pinned third-party parse. The NFL's own results are reachable but are not ingested as a feed."
+  },
+  {
+   "id": "BR-03",
+   "title": "Originate the side first, then the total, then the moneyline",
+   "status": "done",
+   "gate": "all three markets published with fair line, market line and difference",
+   "now": "13 Week 11 games carry spread, total and win probability",
+   "src": "data/s9cb/lines.json / Q26",
+   "note": "The order is honoured in the modelling: side and total are scored, and the moneyline is published as a probability rather than a priced bet."
+  },
+  {
+   "id": "BR-04",
+   "title": "Publish the model's fair line, the market line and the difference as separate columns",
+   "status": "done",
+   "gate": "three distinct columns per market, the difference computed from the two stored values",
+   "now": "3 columns per market; differences are derived, never re-typed",
+   "src": "Q26 / README convention",
+   "note": "The one time this was violated the same row printed a 14.7-point difference instead of 4.27; the convention exists because of that."
+  },
+  {
+   "id": "BR-05",
+   "title": "Separate 'signal' from 'staking' in the leaderboard",
+   "status": "done",
+   "gate": "a signal score and a staking result as separate columns, never combined into one rank",
+   "now": "the board ranks on proper score only; staking is a separate column and never ranks",
+   "src": "data/strat/proper_score.json / Q03",
+   "note": "The demotion gate keys on skill, and its stop-loss is explicitly labelled a stop-loss rather than a skill test."
+  },
+  {
+   "id": "BR-06",
+   "title": "Track the depth of the replacement, not just the fact of a replacement",
+   "status": "done",
+   "gate": "a string label (2nd, 3rd, 4th) on every projected replacement",
+   "now": "38 projected replacements, all second string; 0 third or deeper",
+   "src": "availability.json / Q09",
+   "note": "The ladder records rank and string for every slot. What it cannot do yet is confirm the replacement played (Q15)."
+  },
+  {
+   "id": "BR-07",
+   "title": "Compute correlations only from officially sourced numbers and publish n with each value",
+   "status": "partial",
+   "gate": "every correlation carries its source and an n",
+   "now": "6 correlations, all n = 32, from a dated hand transcription",
+   "src": "data/correlations.json / Q19",
+   "note": "The source is a transcription of the official standings, so official in origin but dated. Market- and strategy-level correlations, which is what a parlay decision needs, are not published."
+  },
+  {
+   "id": "BR-08",
+   "title": "Define a demotion gate that sends a live strategy back to paper",
+   "status": "done",
+   "gate": "a written rule frozen before it is applied, with a re-promotion path",
+   "now": "5 rules armed; 0 live strategies, so 0 demotions",
+   "src": "strat/demotion.py / Q17",
+   "note": "The threshold set (skill lower bound, stop-loss, two-standard-error hit rate, 12-loss run, edited rule text) is frozen inside the file."
+  },
+  {
+   "id": "BR-09",
+   "title": "Pre-register every strategy; forbid backtest numbers from ever appearing on the leaderboard",
+   "status": "partial",
+   "gate": "a registration hash before evaluation, and a board carrying no backtest number",
+   "now": "31 records: 12 backtest-first and disclosed, 19 prospective; 0 live",
+   "src": "data/strat/preregistration.json / Q16",
+   "note": "The ban is enforced on the ranked board and the backtests live in a labelled archive. The pre-registration is incomplete because 12 rules were scored before they were registered, and that is disclosed rather than backdated."
+  },
+  {
+   "id": "BR-10",
+   "title": "Build the availability graph as a first-class dataset (who was expected to start, who actually did)",
+   "status": "not met",
+   "gate": "expected starter AND actual starter, with the evidence for each, per game",
+   "now": "expected only; the actual starter is nowhere (0 of 137 games archived)",
+   "src": "Q15 / BF-10",
+   "note": "Half a graph is not a graph. The expected half is built from club depth charts and is labelled as a projection."
+  },
+  {
+   "id": "BR-11",
+   "title": "Do not model depth from jersey order; model it from playing time",
+   "status": "not met",
+   "gate": "a playing-time source (snap counts or Game Book) joined to the depth ladder",
+   "now": "no snap-count or Game Book capture exists",
+   "src": "Q08 / BF-10",
+   "note": "No jersey-order inference exists either, which is the good half of this row: nothing in the repository ranks players by number, experience or salary."
+  },
+  {
+   "id": "BR-12",
+   "title": "Make the injury signal a surprise, never a level",
+   "status": "not met",
+   "gate": "a dated series with at least one recorded designation change",
+   "now": "2 capture days, 0 recorded changes",
+   "src": "Q05 / BF-02",
+   "note": "The capture exists and runs; it runs too rarely to produce a transition."
+  },
+  {
+   "id": "BR-13",
+   "title": "Run the 32-team roster/IR sweep before any team-level model is trusted",
+   "status": "not met",
+   "gate": "a roster and reserve-list capture for all 32 clubs, joined to the weekly report",
+   "now": "0 clubs have a reserve-list capture",
+   "src": "Q15 / BF-10",
+   "note": "Absence from the weekly report is published as 'not listed', never as 'available'."
+  },
+  {
+   "id": "BR-14",
+   "title": "Add a fixture-context feature set built only from published schedule facts",
+   "status": "partial",
+   "gate": "one table of weekday, kickoff, rest, short week, division, venue, neutral site, byes",
+   "now": "13 of 13 Week 11 rows verified independently this session",
+   "src": "data/shadow/week11_context.json / Q14 / SG-08",
+   "note": "The table exists and is correct. Roof and surface are not official facts and are left blank."
+  },
+  {
+   "id": "BR-15",
+   "title": "Store every model output as a probability plus its inputs, not just a pick",
+   "status": "partial",
+   "gate": "a forecast record per rule, with inputs whose hash reproduces the probability",
+   "now": "1 baseline forecast record (SB-01) reproduces to 6 dp; other rules have no record",
+   "src": "data/prereg/forecasts / Q22",
+   "note": ""
+  },
+  {
+   "id": "BR-16",
+   "title": "Compute and publish the 'removal of luck' panel on the site dashboard",
+   "status": "done",
+   "gate": "a luck band beside every result, plus the bets needed for power",
+   "now": "luck band and 80% power number on every strategy row",
+   "src": "data/s9cb/leaderboard.json / Q04",
+   "note": "Two calibrated controls (coin flip -2.51%, favourites-only -4.74%) sit beside it."
+  },
+  {
+   "id": "BR-17",
+   "title": "Add a two-sided 'what would change our mind' field to every strategy entry",
+   "status": "partial",
+   "gate": "confirm_if AND abandon_if on every entry, each carrying a number",
+   "now": "12 claims covered; 31 strategy records exist",
+   "src": "data/strat/what_would_change.json / Q23 / SG-13",
+   "note": ""
+  },
+  {
+   "id": "BR-18",
+   "title": "Price a line ourselves and publish the residual against the market, on a schedule, from day one",
+   "status": "partial",
+   "gate": "a scheduled residual publication with a stored price",
+   "now": "13 own lines for Week 11 with a residual; no schedule and no stored opening price",
+   "src": "Q26 / Q11",
+   "note": "The residual is always against a third-party market because no official price exists (BF-11)."
+  },
+  {
+   "id": "BR-19",
+   "title": "Turn the 136-game log into the pre-registered backtest corpus",
+   "status": "done",
+   "gate": "a frozen corpus with a membership rule, a hash and closed splits",
+   "now": "NFL1-CORPUS-2026-11-15-v1: 7,104 games, holdout closed",
+   "src": "data/prereg/corpus.json / Q20",
+   "note": "The 136-game log was superseded rather than promoted; it is retained as a historical record."
+  },
+  {
+   "id": "BR-20",
+   "title": "Decide the price-data policy before any backtest is published",
+   "status": "not met",
+   "gate": "a recorded policy decision with a date",
+   "now": "no policy recorded; every backtest rests on a pinned third-party price",
+   "src": "Q10 / BF-11",
+   "note": "This is the highest-leverage open decision in the repository: it gates every published ROI."
+  },
+  {
+   "id": "BR-21",
+   "title": "Store every injury-hub read with its clock time and publish the delta, never the level",
+   "status": "partial",
+   "gate": "every reading timestamped to the minute, and a delta between readings",
+   "now": "heartbeat.jsonl timestamps every read; 5 readings, 0 deltas to show",
+   "src": "BF-02 / Q05 / SG-03",
+   "note": "The clock exists. The delta needs a designation to change, which needs the report to be re-read on a day it changes."
+  },
+  {
+   "id": "BR-22",
+   "title": "Put a decision-readiness table on the landing page",
+   "status": "done",
+   "gate": "one row per requirement with the blocking gate and the clearing number",
+   "now": "82 rows on the landing page; 69 requirement rows and 26 question rows in this sub-site",
+   "src": "pages/readiness.html + brief/requirements.html",
+   "note": "Several readiness registers exist from different sessions; this sub-site publishes its own keyed on the brief's own line."
+  },
+  {
+   "id": "BR-23",
+   "title": "Transcribe the venue of every fixture from the official game centre and publish it",
+   "status": "done",
+   "gate": "a venue per fixture, read from the game centre, with the URL",
+   "now": "13 of 13 Week 11 fixtures",
+   "src": "official_week11_fixtures.json / V2 / V3",
+   "note": "Confirmed twice this session and a third time against another session's independent capture made a day earlier: 0 differences."
+  },
+  {
+   "id": "BR-24",
+   "title": "Publish the league's dated schedule announcement beside the live schedule page",
+   "status": "partial",
+   "gate": "the league's own dated announcement, linked beside the live page",
+   "now": "the live Week 11 page is published; no dated announcement capture exists",
+   "src": "Q14",
+   "note": "The page carries flexible-scheduling notes for Weeks 16-18, the nearest thing to an announcement on it; it is not a dated announcement of this week's slate."
+  },
+  {
+   "id": "BR-25",
+   "title": "Use official NFL Game Books for actual starters and game-day status; do not infer depth rank or snaps",
+   "status": "not met",
+   "gate": "an archived Game Book per played game",
+   "now": "0 of 137 archived",
+   "src": "Q15 / BF-10 / SG-02",
+   "note": "The prohibition is respected: no depth rank or snap count is inferred anywhere."
+  },
+  {
+   "id": "BR-26",
+   "title": "Ingest game-level results to make the ratings opponent-aware",
+   "status": "done",
+   "gate": "results ingested and a rating that accounts for the opponent",
+   "now": "opponent-adjusted ratings on 7,104 games; the model still scores negative Brier skill",
+   "src": "Q01",
+   "note": "Opponent-awareness is implemented and it did not produce skill. Both facts are published."
+  },
+  {
+   "id": "BR-27",
+   "title": "Add injury and personnel ablations instead of fixed penalties",
+   "status": "done",
+   "gate": "the identical model with and without the features, and the difference with uncertainty",
+   "now": "one ablation: +0.0007 points MAE, interval [-0.0226, +0.0216]",
+   "src": "Q07 / SG-09",
+   "note": "No fixed penalty for a missing starter exists anywhere in the repository."
+  },
+  {
+   "id": "BR-28",
+   "title": "Automate immutable multi-day availability snapshots with retained hashes",
+   "status": "partial",
+   "gate": "a scheduled capture with a raw hash per reading, at least daily",
+   "now": "5 readings with raw and canonical hashes; 2 distinct days",
+   "src": "BF-02 / SG-03",
+   "note": "The mechanism is right and the cadence is wrong. The raw hash is retained, which is what makes replay possible."
+  },
+  {
+   "id": "BR-29",
+   "title": "Capture official inactive lists and snap counts",
+   "status": "not met",
+   "gate": "an inactive list per game and an official snap-count source",
+   "now": "20 inactive rows for Week 9 only (8 emergency quarterbacks); no snap counts",
+   "src": "Q06 / Q15 / SG-01",
+   "note": "Only 6 of 254 report rows in an older hand copy carried a game designation; the current capture has 171 of 347."
+  },
+  {
+   "id": "BR-30",
+   "title": "Fix the two depth-parsing failures before widening coverage",
+   "status": "done",
+   "gate": "the Packers' jersey numbers stripped and the raw string stored; the Texans' image not transcribed",
+   "now": "Packers rows recovered with the raw string retained; Texans published as image-only",
+   "src": "data/depth_ladder.json",
+   "note": "The image is not transcribed by eye, which is the brief's instruction."
+  },
+  {
+   "id": "BR-31",
+   "title": "Model depth slots as groups, not a single starter",
+   "status": "done",
+   "gate": "shared rank-1 slots recorded as shared",
+   "now": "16 slots with more than one rank-1 player, recorded as shared",
+   "src": "data/depth_ladder.json",
+   "note": "The generator flags merged-name cells rather than collapsing them."
+  },
+  {
+   "id": "BR-32",
+   "title": "Treat roster turnover as a first-class data event",
+   "status": "not met",
+   "gate": "availability and lineup evidence versioned against the last official roster event",
+   "now": "no roster-event version stamp; 30 of 31 charts carry no date",
+   "src": "BF-05 / Q08",
+   "note": ""
+  },
+  {
+   "id": "BR-33",
+   "title": "Start with a singles-only shadow baseline",
+   "status": "done",
+   "gate": "a pre-registered simple model, frozen, forecasting before kickoff",
+   "now": "SB-01 registered at 9ea55fa; 13 Week 11 forecasts recorded before the first kickoff",
+   "src": "data/prereg/forecasts/SB-01_week11_2026.json",
+   "note": ""
+  },
+  {
+   "id": "BR-34",
+   "title": "Keep parlays and prop combos behind a joint-evidence gate",
+   "status": "done",
+   "gate": "a gate that refuses a combo without a validated joint probability and the void/push rules",
+   "now": "the gate exists and no combo is ranked; void/push rules are not recorded, so the gate stays shut",
+   "src": "data/s9cb/parlays.json / Q18",
+   "note": "The gate being shut is the correct outcome given the missing rules."
+  },
+  {
+   "id": "BR-35",
+   "title": "Use proper-score leaderboard divisions",
+   "status": "done",
+   "gate": "separate divisions for singles, game parlays, same-game parlays and prop combos",
+   "now": "divisions defined; no division has a qualifying entry",
+   "src": "Q03 / Q18",
+   "note": ""
+  },
+  {
+   "id": "BR-36",
+   "title": "Rank with proper scores and uncertainty, not win rate",
+   "status": "done",
+   "gate": "game-cluster lower bound plus a multiplicity adjustment",
+   "now": "the board publishes the lower bound and the BH-adjusted p, never a rank on win rate",
+   "src": "data/strat/proper_score.json / Q03",
+   "note": ""
+  },
+  {
+   "id": "BR-37",
+   "title": "Add durable snapshot storage and alerts outside the static site",
+   "status": "partial",
+   "gate": "immutable captures outside the published tree, with a freshness alarm",
+   "now": "captures are in git under data/snapshots; freshness and drift alarms exist in CI",
+   "src": "BF-02",
+   "note": "Storage is durable by virtue of git. It is not outside the static site's repository, which is a fair reading of the requirement and is not met."
+  },
+  {
+   "id": "BR-38",
+   "title": "Split the site into a public analysis layer and a private data layer",
+   "status": "not met",
+   "gate": "a recorded terms review and a build rule that separates the two",
+   "now": "row-level injury rows are published; no terms review is recorded",
+   "src": "Q21 / SG-14",
+   "note": "PR #79 is an open attempt and has not merged."
+  },
+  {
+   "id": "BR-39",
+   "title": "Add a per-team view: starters out, replacements named, net injury count",
+   "status": "done",
+   "gate": "a team-level page with all three columns",
+   "now": "shadow/team-view.html, 32 club rows",
+   "src": "shadow/team-view.html",
+   "note": "Re-checked this session only for the Week 10 report and the committed depth ladder."
+  },
+  {
+   "id": "BR-40",
+   "title": "Add an announced-starter evidence field (not an inferred replacement)",
+   "status": "not met",
+   "gate": "a field that records a club's dated starter announcement",
+   "now": "no announcement capture exists",
+   "src": "Q15 / BF-10",
+   "note": "The repository correctly leaves the field blank rather than inferring one."
+  },
+  {
+   "id": "BR-41",
+   "title": "Add an official depth-chart register with date and source per row",
+   "status": "partial",
+   "gate": "a date and a source URL on every row",
+   "now": "source URL on every row; a date on 1 of 31 charts",
+   "src": "data/depth_ladder.json / Q08",
+   "note": ""
+  },
+  {
+   "id": "BR-42",
+   "title": "Calibrate what 'Questionable' means empirically",
+   "status": "not met",
+   "gate": "a play rate per designation with a confidence interval",
+   "now": "no designation-to-play join exists",
+   "src": "Q06 / SG-01",
+   "note": ""
+  },
+  {
+   "id": "BR-43",
+   "title": "Interactive offense-vs-defense deficiency matrix (1st to 4th string)",
+   "status": "partial",
+   "gate": "a matrix of unit matchups with the string projected to start",
+   "now": "the slot-level ladder exists; no matchup matrix, and no 4th string exists to show",
+   "src": "pages/depth.html / Q09",
+   "note": "Nothing deeper than second string is projected to start this week, so a 3rd/4th-string matrix would have no rows."
+  },
+  {
+   "id": "BR-44",
+   "title": "Flag stale depth rows against the official transactions log",
+   "status": "not met",
+   "gate": "a transactions log capture joined to the depth chart",
+   "now": "no transactions capture exists",
+   "src": "Q08 / BF-05",
+   "note": ""
+  },
+  {
+   "id": "BR-45",
+   "title": "Point-in-time snapshot ledger for injuries, depth charts and inactives",
+   "status": "partial",
+   "gate": "a ledger with a point-in-time row per source per day",
+   "now": "injury snapshots are ledgered with hashes; depth and inactives are not",
+   "src": "BF-02 / data/snapshots",
+   "note": "The injury half is real. A ledger with one of three sources is a partial ledger and is labelled so."
+  },
+  {
+   "id": "BR-46",
+   "title": "Populate the three missing Lions game-status designations",
+   "status": "done",
+   "gate": "Kerby Joseph, Cade Mays and D.J. Reed show Out",
+   "now": "all three show Out in the committed capture and in the live re-read this session",
+   "src": "V6",
+   "note": "The older hand copy that showed them blank is superseded and is flagged upstream (CAP-04)."
+  },
+  {
+   "id": "BR-47",
+   "title": "Re-capture and republish the Week 10 injury tables",
+   "status": "done",
+   "gate": "the live row count, not the stale one",
+   "now": "347 rows, 28 clubs, 14 games; Seattle 15 and Cincinnati 9 rows",
+   "src": "data/capture/ / V6",
+   "note": "The stale claim of 254 rows and four injury-free sections is superseded."
+  },
+  {
+   "id": "BR-48",
+   "title": "Reject: deriving depth order from jersey number, experience or salary",
+   "status": "done",
+   "gate": "no such inference anywhere",
+   "now": "0 values in the repository derive depth from number, experience or salary",
+   "src": "data/depth_ladder.json",
+   "note": "This is a rejection row: the requirement is not to do something, and it is not done."
+  },
+  {
+   "id": "BR-49",
+   "title": "Represent shared and empty depth slots faithfully",
+   "status": "done",
+   "gate": "shared cells and empty cells both visible and distinguishable from a ranked list",
+   "now": "16 shared rank-1 slots and 3 no-available-player slots, both labelled",
+   "src": "data/depth_ladder.json / BF-04",
+   "note": ""
+  },
+  {
+   "id": "BR-50",
+   "title": "Resolve the depth-order source before building the backup-deficiency feature",
+   "status": "partial",
+   "gate": "route (a) verified for all 32 clubs, or route (b) with an official snap source",
+   "now": "route (a) spot-checked for 1 club; 31 not",
+   "src": "Q08 / SG-02",
+   "note": "Houston's image-only chart blocks a clean 32-club route (a) unless the Game Book route is taken instead."
+  },
+  {
+   "id": "BR-51",
+   "title": "Score injury-designation reliability before using it as a feature",
+   "status": "not met",
+   "gate": "a play rate per designation with confidence intervals across seasons",
+   "now": "0 seasons of designation-to-inactive joins",
+   "src": "Q06 / SG-01",
+   "note": ""
+  },
+  {
+   "id": "BR-52",
+   "title": "Snapshot the injury report every Wednesday, Thursday and Friday with a dated history",
+   "status": "not met",
+   "gate": "three distinct capture days per week",
+   "now": "2 distinct days in total, both in Week 10",
+   "src": "BF-02 / SG-03",
+   "note": ""
+  },
+  {
+   "id": "BR-53",
+   "title": "Treat the injury report as a timestamped series, not a weekly snapshot",
+   "status": "not met",
+   "gate": "a within-week series with more than one reading per week",
+   "now": "5 readings over 2 days, all with an identical canonical hash",
+   "src": "BF-02",
+   "note": ""
+  },
+  {
+   "id": "BR-54",
+   "title": "Use snap counts as the starter proxy when the depth chart is unavailable",
+   "status": "not met",
+   "gate": "an official snap-count source",
+   "now": "no snap-count source is ingested",
+   "src": "Q08 / BF-10",
+   "note": ""
+  },
+  {
+   "id": "BR-55",
+   "title": "Add a control baseline (random picks; favourites only) to every leaderboard run",
+   "status": "done",
+   "gate": "both controls on every run",
+   "now": "coin-flip -2.51% (n=5,202) and favourites-only -4.74% (n=5,202)",
+   "src": "data/prereg/controls.json / Q04",
+   "note": ""
+  },
+  {
+   "id": "BR-56",
+   "title": "Stadium roof/surface and NWS wind/precipitation overlay",
+   "status": "not met",
+   "gate": "an official roof and surface per venue, then a forecast grid",
+   "now": "roof and surface are not official facts in this repository and are left blank",
+   "src": "Q14",
+   "note": "The feed has roof and surface, but the feed is not official; publishing it as official is exactly the error this requirement exists to prevent."
+  },
+  {
+   "id": "BR-57",
+   "title": "Two-stage skill leaderboard (proper-score qualification, then prospective CLV/ROI escrow)",
+   "status": "partial",
+   "gate": "stage 1 proper score, stage 2 a prospective sample with closing-line value",
+   "now": "stage 1 exists; stage 2 needs the price store",
+   "src": "Q11 / Q03",
+   "note": ""
+  },
+  {
+   "id": "BR-58",
+   "title": "Vig-free market consensus vs originated fair-line decomposition",
+   "status": "partial",
+   "gate": "a de-vigged consensus and a decomposition of the residual",
+   "now": "the de-vigged close is used in moneyline scoring; a consensus across operators is not stored",
+   "src": "Q10 / Q26",
+   "note": ""
+  },
+  {
+   "id": "BR-59",
+   "title": "Publish a weekly 'what changed' diff instead of a static snapshot",
+   "status": "partial",
+   "gate": "a diff between dated captures",
+   "now": "shadow/whats-changed.html exists for the injury and standings captures",
+   "src": "SG-15 / Q13",
+   "note": "This session measured 24 of 32 records moving in three days, which is the diff's justification."
+  },
+  {
+   "id": "BR-60",
+   "title": "Publish every model total twice until one wins",
+   "status": "partial",
+   "gate": "two estimators side by side with a gap column, collapse only after a walk-forward comparison",
+   "now": "both estimators are built and published with a gap column; the comparison is not complete",
+   "src": "data/strat/dual_total.json / Q25",
+   "note": ""
+  },
+  {
+   "id": "BR-61",
+   "title": "Add a drift alarm to every scraper",
+   "status": "partial",
+   "gate": "a pinned row count and a required-field list per scraper, failing the build loudly",
+   "now": "the depth scraper and the injury scraper have pins; not every scraper does",
+   "src": "tools/check_scraper_pins.py / BF-02",
+   "note": ""
+  },
+  {
+   "id": "BR-62",
+   "title": "Capture the reserve list so 'not listed' never means 'available'",
+   "status": "not met",
+   "gate": "a reserve/injured-reserve capture joined to the weekly report",
+   "now": "no reserve-list capture",
+   "src": "Q15 / BF-10",
+   "note": "The wording on every page respects the rule even though the data does not exist."
+  },
+  {
+   "id": "BR-63",
+   "title": "Reject: ranking strategies by season-long ROI",
+   "status": "done",
+   "gate": "ROI never used to rank",
+   "now": "the board ranks on proper score; ROI is a column and is not the ranking key",
+   "src": "data/strat/proper_score.json",
+   "note": "This is a rejection row and the repository complies."
+  },
+  {
+   "id": "BR-64",
+   "title": "Archive weekly injury reports for past seasons",
+   "status": "not met",
+   "gate": "archived past-season reports",
+   "now": "0 past-season captures",
+   "src": "Q06 / SG-01",
+   "note": ""
+  },
+  {
+   "id": "BR-65",
+   "title": "Pre-register each strategy (definition frozen before results are seen)",
+   "status": "partial",
+   "gate": "a commit hash for the rule before the evaluation window opens",
+   "now": "19 prospective records and 12 disclosed backtest-first records; 4 registries unreconciled",
+   "src": "Q16 / BF-06 / SG-05",
+   "note": ""
+  },
+  {
+   "id": "BR-66",
+   "title": "Freeze a rule before it sees data (pre-registration)",
+   "status": "done",
+   "gate": "the rule text, the sample window and the gates committed before the window opens",
+   "now": "RULES_v1 registered at 591d8740a097 and SB-01 at 9ea55fa, both verified unchanged since",
+   "src": "data/prereg/ / BF-06",
+   "note": "Four registries implement this and each freezes a rule before data. The defect is coordination, not the principle."
+  },
+  {
+   "id": "BR-67",
+   "title": "Split data into train, validation and final holdout seasons",
+   "status": "done",
+   "gate": "three disjoint season splits with the holdout closed",
+   "now": "train 1999-2022 (6,151), validation 2023-2024 (544), holdout 2025-2026 (409, closed)",
+   "src": "data/prereg/corpus.json / Q20",
+   "note": ""
+  },
+  {
+   "id": "BR-68",
+   "title": "Make suggestions and a suggestions section for review before implementation",
+   "status": "done",
+   "gate": "a suggestions page with a pre-condition and a reviewer choice per row",
+   "now": "15 suggestions with pre-conditions, costs and the decision each changes",
+   "src": "brief/suggestions.html / SG-01..15",
+   "note": ""
+  },
+  {
+   "id": "BR-69",
+   "title": "A clear list of questions, information and answers before any decision",
+   "status": "done",
+   "gate": "one row per question with known, missing, decision unblocked, and how to discover it",
+   "now": "26 questions: 12 answered, 3 answered-unverified, 7 open-needs-data, 4 open-needs-policy",
+   "src": "brief/answers.html / Q01..Q26",
+   "note": ""
+  },
+  {
+   "id": "BR-70",
+   "title": "Originate lines and develop strategies inside a reward-bearing competition",
+   "status": "partial",
+   "gate": "a ranked board and a reward rule",
+   "now": "no rule qualifies, so there is nothing to reward",
+   "src": "Q02 / SG-10",
+   "note": ""
+  },
+  {
+   "id": "BR-71",
+   "title": "Every strategy must pass validation gates; determine correlation values",
+   "status": "partial",
+   "gate": "8 gates per strategy and a correlation for each combo pair",
+   "now": "0 of 12 clear 8 gates; 1 of 66 two-leg pairs survives BH; correlations are not published per pair",
+   "src": "Q02 / Q18 / Q19",
+   "note": ""
+  },
+  {
+   "id": "BR-72",
+   "title": "Remove luck and build selectively skill-based strategies",
+   "status": "partial",
+   "gate": "a luck band per result and a skill call that survives it",
+   "now": "every result sits inside its band; no strategy is called skilful",
+   "src": "Q04",
+   "note": ""
+  },
+  {
+   "id": "BR-73",
+   "title": "Create an executive summary outlining important details",
+   "status": "done",
+   "gate": "a one-page summary of what holds, what does not, and what is missing",
+   "now": "brief/index.html is the front door; pages/executive.html is the long form",
+   "src": "brief/index.html",
+   "note": ""
+  },
+  {
+   "id": "BR-74",
+   "title": "Create a clean landing page and category subpages with a simple dashboard UI",
+   "status": "done",
+   "gate": "a landing page with categories and every entry in a readable table",
+   "now": "8 pages in brief/, every table row carrying a source link",
+   "src": "brief/",
+   "note": ""
+  },
+  {
+   "id": "BR-75",
+   "title": "Every table row must carry an official source link, or be flagged unverified",
+   "status": "done",
+   "gate": "a build gate that fails on a sourceless row",
+   "now": "brief/verify.py fails on a row without a source link or an explicit unverified label",
+   "src": "brief/verify.py / Y8",
+   "note": ""
+  },
+  {
+   "id": "BR-76",
+   "title": "Multiple sessions must coordinate through COORDINATION.md",
+   "status": "done",
+   "gate": "a claim committed before work starts, and a completion record",
+   "now": "this session claimed Y1-Y10 at commit 014f31c before touching any other file",
+   "src": "COORDINATION.md",
+   "note": ""
+  },
+  {
+   "id": "BR-77",
+   "title": "Open a PR, merge without waiting, confirm Pages, record the result",
+   "status": "done",
+   "gate": "a merged PR with green checks and a recorded deploy",
+   "now": "recorded in COORDINATION.md at the end of this session",
+   "src": "COORDINATION.md",
+   "note": ""
+  }
+ ],
+ "counts": {
+  "rows": 77,
+  "done": 33,
+  "not_met": 20,
+  "partial": 24,
+  "note": "computed from the rows"
+ }
+}

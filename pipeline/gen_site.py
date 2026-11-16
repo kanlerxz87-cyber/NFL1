@@ -26,6 +26,11 @@ NAV = [
     ("pages/executive.html", "Executive Summary"),
     ("web/dashboard.html", "Decision Dashboard"),
     ("./dashboard.html", "Governance Registers"),
+    # Session 2b927826-nfl1: the brief dashboard. One clean front door with eight category
+    # pages, built from data/session-2b927826/*.json by brief/build.py. Added here and in
+    # scripts/verified/normalize_nav.py in the same commit, because the two lists must stay
+    # byte-identical (see _target's docstring).
+    ("brief/index.html", "Brief Dashboard"),
     ("pages/lines.html", "My Lines"),
     ("pages/correlations.html", "Correlations"),
     ("pages/strategies.html", "Strategy Lab"),
@@ -104,7 +109,16 @@ SIDEBAR = [
                          # Session 0c5215c1-nfl1: strategy registry, prospective board,
                          # forecast record and backtest archive of the pre-registration subsystem.
                          ("prereg/registry.html", "Strategy Registry"),
-                         ("prereg/archive.html", "Backtest Archive")]),
+                         ("prereg/archive.html", "Backtest Archive"),
+                         # Session 2b927826-nfl1: the brief dashboard, eight category pages.
+                         ("brief/index.html", "Brief dashboard (front door)"),
+                         ("brief/requirements.html", "Brief: requirements"),
+                         ("brief/answers.html", "Brief: questions"),
+                         ("brief/strategies.html", "Brief: strategies"),
+                         ("brief/availability.html", "Brief: availability"),
+                         ("brief/fixtures.html", "Brief: fixtures"),
+                         ("brief/suggestions.html", "Brief: suggestions"),
+                         ("brief/verification.html", "Brief: verification")]),
 ]
 
 SOURCE = {

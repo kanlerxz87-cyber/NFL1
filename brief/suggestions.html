@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suggestions · NFL Decision Lab</title>
+<style>
+:root{--bg:#0b1220;--panel:#111a2b;--panel2:#16223a;--ink:#e8eef9;--muted:#93a4c0;--line:#24314b;
+--accent:#4ade80;--accent-ink:#062a16;--blue:#60a5fa;--amber:#fbbf24;--red:#f87171;--radius:14px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(1200px 600px at 12% -10%,#16233c 0%,var(--bg) 55%) no-repeat,var(--bg);
+color:var(--ink);font:16px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+-webkit-font-smoothing:antialiased}
+a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;color:#c7d2fe}
+.top{position:sticky;top:0;z-index:20;display:flex;gap:16px;align-items:center;flex-wrap:wrap;
+padding:12px 20px;background:rgba(11,18,32,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:9px;color:var(--ink);font-weight:700}
+.mark{background:var(--accent);color:var(--accent-ink);padding:3px 9px;border-radius:8px;font-size:.8rem;letter-spacing:.08em}
+.brand-text{font-size:.95rem;color:var(--muted)}
+.top nav{display:flex;gap:3px;flex-wrap:wrap;margin-left:auto}
+.top nav a{color:var(--muted);padding:6px 10px;border-radius:9px;font-size:.85rem}
+.top nav a:hover{background:var(--panel2);color:var(--ink);text-decoration:none}
+.top nav a.active{background:var(--accent);color:var(--accent-ink);font-weight:600}
+main{max-width:1180px;margin:0 auto;padding:24px 20px 72px}
+.page-head{margin:8px 0 20px}
+.eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:.7rem;color:var(--accent);margin:0 0 6px}
+h1{font-size:clamp(1.6rem,3.2vw,2.3rem);line-height:1.12;margin:0 0 8px}
+.standfirst{color:var(--muted);max-width:78ch;margin:0}
+.timestamp{color:#6f809d;font-size:.78rem;margin:10px 0 0}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;margin:20px 0}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px}
+.kpi-label{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.09em}
+.kpi-value{font-size:1.55rem;font-weight:700;margin:4px 0 0}
+.kpi-sub{color:#7f8fab;font-size:.75rem;margin-top:3px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;margin:18px 0}
+.panel h2{font-size:1.05rem;margin:0 0 4px}
+.panel .sub{color:var(--muted);font-size:.85rem;margin:0 0 12px}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+table{width:100%;border-collapse:collapse;font-size:.855rem}
+thead th{position:sticky;top:0;background:var(--panel2);text-align:left;padding:9px 10px;font-size:.72rem;
+text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border-bottom:1px solid var(--line);white-space:nowrap}
+tbody td{padding:8px 10px;border-bottom:1px solid #1b2740;vertical-align:top}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#0f1a2d}
+.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.badge{display:inline-block;padding:1px 8px;border-radius:999px;font-size:.72rem;font-weight:600;white-space:nowrap}
+.b-done{background:#12341f;color:#6ee7a0}.b-partial{background:#33280c;color:#fcd34d}
+.b-not{background:#3a1616;color:#fca5a5}.b-open{background:#1d2b46;color:#93c5fd}
+.missing{color:#fca5a5;font-style:normal}
+.sub2{color:#7f8fab;font-size:.78rem}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:900px){.grid2{grid-template-columns:1fr}}
+ul.bullets{margin:8px 0 0;padding-left:20px;color:var(--muted)}
+ul.bullets li{margin:5px 0}
+.note{background:#0e1a2e;border-left:3px solid var(--blue);padding:10px 14px;border-radius:8px;color:var(--muted);font-size:.86rem;margin:12px 0}
+.note.alert{border-left-color:var(--amber)}
+.foot{margin-top:36px;padding-top:14px;border-top:1px solid var(--line);color:#6f809d;font-size:.78rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:15px}
+.card h3{margin:0 0 6px;font-size:.98rem}
+.card p{margin:0;color:var(--muted);font-size:.85rem}
+.card a.more{display:inline-block;margin-top:9px;font-size:.83rem}
+.src{font-size:.78rem;white-space:nowrap}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html"><span class="mark">NFL</span><span class="brand-text">Decision Lab · brief dashboard</span></a>
+  <nav aria-label="Categories"><a href="index.html">Overview</a><a href="requirements.html">Requirements</a><a href="answers.html">Questions</a><a href="strategies.html">Strategies</a><a href="availability.html">Availability</a><a href="fixtures.html">Fixtures &amp; venues</a><a href="suggestions.html" class="active">Suggestions</a><a href="verification.html">Verification</a></nav>
+</header>
+<main>
+
+<div class="page-head">
+  <p class="eyebrow">Review before implementation</p>
+  <h1>15 suggestions, each with the pre-condition that must hold before it is worth starting</h1>
+  <p class="standfirst">The brief asks for a section where suggestions can be reviewed and a path chosen before
+  anything is implemented, and for suggestions that discover missing information rather than restate it. Every row
+  carries the condition that must be true first, because the failure mode this repository has actually hit is building
+  a page before its source was verified and then correcting it three times.</p>
+  <p class="timestamp">Built 2026-11-16T14:36:42Z from <code>data/session-2b927826/suggestions.json</code></p>
+</div>
+<div class="kpis">
+  <div class="kpi"><div class="kpi-label">Suggestions</div><div class="kpi-value">15</div><div class="kpi-sub">one row each</div></div>
+  <div class="kpi"><div class="kpi-label">Implemented or partial</div><div class="kpi-value">5</div><div class="kpi-sub">by this or an earlier session</div></div>
+  <div class="kpi"><div class="kpi-label">Awaiting a choice</div><div class="kpi-value">10</div><div class="kpi-sub">nothing is built until a reviewer picks</div></div>
+  <div class="kpi"><div class="kpi-label">Cheapest first step</div><div class="kpi-value">SG-03</div><div class="kpi-sub">the capture workflow already exists</div></div>
+</div>
+<div class="note"><strong>How to choose.</strong> A reviewer picks a row, records the choice and the date, and only then is anything implemented. The pre-condition column exists so that a suggestion cannot be started before the evidence it needs is in hand — that is the failure mode this repository has hit repeatedly (a page built before its source was verified, then corrected three times).</div>
+<div class="panel"><h2>All 15 suggestions</h2><div class="table-wrap"><table><thead><tr><th>ID</th><th>Suggestion</th><th>Type</th><th>Status</th><th>Pre-condition</th><th>Cost</th><th>What it produces</th><th>Decision it changes</th><th>Gate that confirms it</th><th>Source</th></tr></thead><tbody><tr><td>SG-01</td><td><strong>Capture the official inactive list 90 minutes before every kickoff</strong><br><span class='sub2'>Store the 46-man inactive list per game, with the fetch timestamp and a raw hash, in an append-only store. This is the single cheapest data addition available and it is the only way to turn &#x27;a backup probably started&#x27; into &#x27;a backup played&#x27;.</span></td><td>missing information</td><td><span class="badge b-not">not met</span><br><span class='sub2'>suggested — not implemented</span></td><td>an official nfl.com or club page that publishes the list in a parseable form; this must be checked, not assumed</td><td class='sub2'>one scheduled capture per game window, about 3 windows per week</td><td class='sub2'>play/no-play per listed player per week, which is the denominator for Q06</td><td>Q06, Q15, and whether a designation becomes a feature</td><td class='sub2'>at least one full season of designations joined to inactives, with a play rate and Wilson interval per designation</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/session-2b927826/suggestions.json">register</a></span></td></tr><tr><td>SG-02</td><td><strong>Archive the official Game Book for every played game, and read the starters out of it</strong><br><span class='sub2'>The Game Book names the actual starters. Archiving it replaces the depth-chart projection with an observation and makes the availability graph auditable.</span></td><td>missing information</td><td><span class="badge b-not">not met</span><br><span class='sub2'>suggested — not implemented</span></td><td>the Game Book is retrievable and its layout is stable enough to parse; a spot check on one game must succeed before a sweep is attempted</td><td class='sub2'>one fetch per played game, then a parser that must be pinned to expected fields</td><td class='sub2'>actual starters for 137 games immediately, and every future game</td><td>Q08, Q09, Q15</td><td class='sub2'>137 of 137 played 2026 games archived, with the starter list extracted and compared with the depth chart</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/session-2b927826/suggestions.json">register</a></span></td></tr><tr><td>SG-03</td><td><strong>Widen the injury capture to Wednesday, Thursday, Friday and pre-kickoff, and publish the delta</strong><br><span class='sub2'>The capture workflow already exists; it runs too rarely. Move it to a schedule that produces at least three distinct days per week and store the difference between readings, not only the snapshot.</span></td><td>missing information</td><td><span class="badge b-not">not met</span><br><span class='sub2'>suggested — cheapest of all; the gate is one week away</span></td><td>none — the workflow exists at .github/workflows/capture-snapshots.yml</td><td class='sub2'>four scheduled runs a week; no new code beyond a delta store</td><td class='sub2'>a dated series and the designation-change count the readiness gate is waiting for</td><td>Q05, and the ablation in Q07</td><td class='sub2'>2 or more capture days AND at least 1 recorded designation change (the repository&#x27;s own gate)</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/session-2b927826/suggestions.json">register</a></span></td></tr><tr><td>SG-04</td><td><strong>Write the price-data policy before the next backtest, and store opening and closing numbers</strong><br><span class='sub2'>Name the price source, the timestamp rule, the push/void treatment, and the missing-price fallback. Then start a snapshot store that records an opening and a closing observation per market per game, with a hash and a time.</span></td><td>process</td><td><span class="badge b-not">not met</span><br><span class='sub2'>suggested — not implemented</span></td><td>a named source that publishes both an early and a late number, and a decision that it is acceptable (no official source exists)</td><td class='sub2'>two captures per week per originated game, from now on — it cannot be backfilled</td><td class='sub2'>closing-line value, line-move history, and a defensible answer to &#x27;what price did you actually get&#x27;</td><td>Q10, Q11, and whether any backtest may be published at all</td><td class='sub2'>a recorded policy plus opening-to-closing coverage on every originated game for one full week</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/session-2b927826/suggestions.json">register</a></span></td></tr><tr><td>SG-05</td><td><strong>Collapse the four pre-registration registries into one, keeping every hash</strong><br><span class='sub2'>Choose one registry as authoritative, import the other three by reference (hash plus rule text location), and keep a single checker. Do not delete any registration record.</span></td><td>process</td><td><span class="badge b-not">not met</span><br><span class='sub2'>suggested — logged as BF-06</span></td><td>a named owner; this is a board decision, not a code change</td><td class='sub2'>one integration session</td><td class='sub2'>one registration hash per rule, verifiable from git</td><td>Q16, and the authority of the ranked leaderboard</td><td class='sub2'>one checker in CI, and every ranked row carrying a hash that the checker resolves to a commit</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/session-2b927826/suggestions.json">register</a></span></td></tr><tr><td>SG-06</td><td><strong>Publish one alias table for club codes and fail the build on an unmapped code</strong><br><span class='sub2'>A single table keyed on the official code (AZ, LA) with each feed&#x27;s alias (ARI, LAR), used by every join, plus a gate that refuses to build when a join sees a code it does not know.</span></td><td>data quality</td><td><span class="badge b-not">not met</span><br><span class='sub2'>suggested — logged as BF-05</span></td><td>none</td><td class='sub2'>under an hour</td><td class='sub2'>joins that either work or fail loudly</td><td>Q12</td><td class='sub2'>a deliberate test that injects an unknown code and watches the build fail</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/session-2b927826/suggestions.json">register</a></span></td></tr><tr><td>SG-07</td><td><strong>Add a &#x27;definition&#x27; cell to every numeric column on a published table</strong><br><span class='sub2'>One line beside the column header saying exactly what is counted. The depth ladder&#x27;s &#x27;missing starter&#x27; column currently means two things at once (pressed-into-duty and empty slot), and only a definition prevents a 38-slot misreading.</span></td><td>presentation</td><td><span class="badge b-partial">partial</span><br><span class='sub2'>partly done — this sub-site prints the definition on every column it publishes; the older pages do not</span></td><td>none</td><td class='sub2'>minutes per table</td><td class='sub2'>tables a reader can act on without reading the generator</td><td>Q09</td><td class='sub2'>every numeric column on the site resolves to a definition string</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/session-2b927826/suggestions.json">register</a></span></td></tr><tr><td>SG-08</td><td><strong>Make the fixture-context table the only way a model sees a schedule fact</strong><br><span class='sub2'>The Week 11 context table (weekday, kickoff, rest days, short week, division game, venue, neutral site) already exists and its 13 rows were independently confirmed this session against the official pages. Point every model at that table instead of at per-model ad-hoc joins.</span></td><td>architecture</td><td><span class="badge b-not">not met</span><br><span class='sub2'>suggested — the table exists; the wiring does not</span></td><td>the two remaining unpublished facts (roof and surface) must be either sourced officially or left blank — the feed&#x27;s values are not official</td><td class='sub2'>small refactor</td><td class='sub2'>a single auditable input for schedule context</td><td>Q14</td><td class='sub2'>every model that uses rest, bye or venue reads the one table, and the table passes its own official re-check</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/session-2b927826/suggestions.json">register</a></span></td></tr><tr><td>SG-09</td><td><strong>Run the availability ablation on the surprise feature, not on a snapshot</strong><br><span class='sub2'>The one ablation already run found nothing (+0.0007 points of MAE, interval [-0.0226, +0.0216]) using a snapshot feature. Repeat it on the surprise feature once SG-03 exists, with the identical model and a chronological holdout.</span></td><td>model</td><td><span class="badge b-not">not met</span><br><span class='sub2'>suggested — the null result is already published rather than hidden</span></td><td>SG-02 and SG-03 — at least one season of confirmed starters and a dated series</td><td class='sub2'>one modelling session per ablations pass</td><td class='sub2'>a defensible answer to &#x27;do availability features earn anything&#x27;</td><td>Q07</td><td class='sub2'>an interval on the difference that excludes zero in the useful direction, on a holdout the feature was not designed on</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/session-2b927826/suggestions.json">register</a></span></td></tr><tr><td>SG-10</td><td><strong>Keep the leaderboard empty until a rule clears all eight gates, and say so on the front page</strong><br><span class='sub2'>An empty ranked board is correct, not a failure. Publish the gate matrix, the luck band and the power number beside it, so a reader understands why it is empty rather than assuming the work is unfinished.</span></td><td>governance</td><td><span class="badge b-done">done</span><br><span class='sub2'>done — this sub-site publishes the empty board with the reason, and quarantines every backtest number in a labelled archive block</span></td><td>none</td><td class='sub2'>none — the data exists</td><td class='sub2'>a leaderboard a reader can trust precisely because it is empty</td><td>Q02</td><td class='sub2'>a strategy that clears all eight gates on a prospective sample</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/session-2b927826/suggestions.json">register</a></span></td></tr><tr><td>SG-11</td><td><strong>Reduce the site to one front door and group the rest by category</strong><br><span class='sub2'>The repository publishes about 194 HTML pages across 13 sub-sites, with a 38-entry header nav and four competing landing pages. Keep them all; give a reader one page that says what each one answers, and stop putting 38 links in the header.</span></td><td>presentation</td><td><span class="badge b-done">done</span><br><span class='sub2'>done for this sub-site — brief/index.html is that front door; the rest of the site is linked, not changed</span></td><td>none</td><td class='sub2'>one page plus a nav decision (owned by the generators, so this session publishes its own sub-site and logs the request instead of editing other sessions&#x27; nav)</td><td class='sub2'>a front door with eight categories and a &#x27;what is missing&#x27; section</td><td>BF-12</td><td class='sub2'>one nav entry, under 12 header links, and every page reachable within two clicks of a category</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/session-2b927826/suggestions.json">register</a></span></td></tr><tr><td>SG-12</td><td><strong>Print the capture time and the source hash on every row that comes from a live page</strong><br><span class='sub2'>A snapshot without a clock is not evidence. The injury capture stores a date but not a time; a page that shows it cannot say how old it is.</span></td><td>data quality</td><td><span class="badge b-partial">partial</span><br><span class='sub2'>partly done — this sub-site prints the capture timestamp on every captured table; the injury TSV&#x27;s own manifest records a date only (flag CAP-06 upstream)</span></td><td>the capture tool must record the clock — the existing heartbeat.jsonl already does, so this is a join, not new capture</td><td class='sub2'>small</td><td class='sub2'>every published row can be dated to the hour</td><td>Q05</td><td class='sub2'>no published row lacks a capture timestamp</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/session-2b927826/suggestions.json">register</a></span></td></tr><tr><td>SG-13</td><td><strong>Write down what would make the site wrong, before the season ends</strong><br><span class='sub2'>Twelve claims already carry a two-sided mind-changer. Extend the same field to the 31 strategy records and to the operational claims (the depth projection, the injury series, the price store).</span></td><td>governance</td><td><span class="badge b-partial">partial</span><br><span class='sub2'>partly done — 12 of 43 claims</span></td><td>none</td><td class='sub2'>one row per claim</td><td class='sub2'>a register where every published number has an exit condition</td><td>Q23</td><td class='sub2'>one mind-changer per ranked row, enforced by the existing gate</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/session-2b927826/suggestions.json">register</a></span></td></tr><tr><td>SG-14</td><td><strong>Decide the publication terms before the row-level tables spread further</strong><br><span class='sub2'>Separate the public analysis layer from a private row-level layer, and record the terms review that justifies the split.</span></td><td>governance</td><td><span class="badge b-not">not met</span><br><span class='sub2'>suggested — PR #79 is an open attempt and has not merged</span></td><td>a reviewer who reads the terms and records the conclusion with a date</td><td class='sub2'>one review, then a publishing rule the build enforces</td><td class='sub2'>a defensible publication posture</td><td>Q21</td><td class='sub2'>a dated terms record in the repository and a build rule that keeps row-level data out of the public tree unless the record permits it</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/session-2b927826/suggestions.json">register</a></span></td></tr><tr><td>SG-15</td><td><strong>Publish a weekly &#x27;what changed&#x27; diff next to the snapshot</strong><br><span class='sub2'>A diff of standings, ratings, availability and designations between two dated captures, with the date of each side printed.</span></td><td>presentation</td><td><span class="badge b-not">not met</span><br><span class='sub2'>suggested — the shadow/ sub-site has a what-changed page from another session; this session&#x27;s measurements confirm the need</span></td><td>two dated captures (exists for standings and injuries; missing for ratings)</td><td class='sub2'>one page per week</td><td class='sub2'>the direction of travel, not just the position</td><td>Q13</td><td class='sub2'>every published snapshot has a diff against its predecessor, or states that it is the first</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/session-2b927826/suggestions.json">register</a></span></td></tr></tbody></table></div></div>
+<div class="grid2">
+  <div class="panel">
+    <h2>If you do only three things</h2>
+    <ul class="bullets">
+      <li><strong>SG-03 &mdash; widen the injury capture.</strong> The workflow exists; it needs a schedule. It
+      produces the first designation change this repository has ever recorded, which is the gate on the brief's
+      central injury requirement.</li>
+      <li><strong>SG-01 and SG-02 &mdash; capture the inactive list and the Game Book.</strong> Together they turn a
+      projection into an observation and close the availability graph.</li>
+      <li><strong>SG-04 &mdash; write the price policy and start the opening/closing store.</strong> It cannot be
+      backfilled, so every week without it is a permanent gap in closing-line value.</li>
+    </ul>
+  </div>
+  <div class="panel">
+    <h2>What not to do next</h2>
+    <ul class="bullets">
+      <li><strong>Do not model availability with a fixed points penalty.</strong> The brief forbids it and the honest
+      version of the test already exists (SG-09).</li>
+      <li><strong>Do not rank anything on this week's numbers.</strong> Nothing clears the gates and every result is
+      inside its luck band (SG-10).</li>
+      <li><strong>Do not fill a blank from the third-party feed.</strong> Roof and surface are the current temptation;
+      they are blank for a reason (SG-08).</li>
+      <li><strong>Do not build a 3rd/4th-string deficiency matrix yet.</strong> No club is projected to start one this
+      week, so the matrix would have no rows and would look like a defect.</li>
+    </ul>
+  </div>
+</div>
+
+<p class="foot">Built 2026-11-16T14:36:42Z by session <code>2b927826-nfl1</code> from <code>data/session-2b927826/*.json</code> only.
+Every table row carries a source link or states that no value is published. Research tool, not betting advice.
+<a href="verification.html">How every value was checked &rarr;</a></p>
+</main>
+</body>
+</html>

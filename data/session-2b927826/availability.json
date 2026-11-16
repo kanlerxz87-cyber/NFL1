@@ -1,0 +1,598 @@
+{
+ "schema": "nfl1.brief.availability.v1",
+ "generated_at": "2026-11-16T14:36:42Z",
+ "generated_by": "session 2b927826-nfl1",
+ "requirement": "brief: track injuries and know any deficiency in defenses and offenses where 2nd/3rd/4th-string players have to replace starters; never model depth from jersey order; the replacement's depth must be recorded, not just the fact of a replacement",
+ "what_is_official_here": {
+  "injury_report": {
+   "url": "https://www.nfl.com/injuries/league/2026/reg10",
+   "title": "Official NFL Injury Report for Players - Week 10 of the 2026 Season | NFL.com",
+   "status": "official league filing; every designation below is printed on that page",
+   "captured_in_repo": "data/capture/nflcom_injuries_reg10_2026-11-15_rows.tsv (347 rows, 28 clubs, 14 games)"
+  },
+  "depth_charts": {
+   "status": "club publications, not league filings",
+   "url_pattern": "https://www.<club-domain>/team/depth-chart",
+   "caveat": "nfl.com publishes no depth chart (the URL returns 404, re-checked 2026-11-13 by an earlier session). 14 of the 31 available charts carry the club's own 'unofficial' label, and only 1 of 31 prints a date. A depth chart is therefore evidence of intent, not of playing time.",
+   "captured_in_repo": "data/depth_ladder.json (933 slots, 31 clubs, 1 club image-only)"
+  },
+  "inactives": {
+   "status": "PARTIAL. data/inactives.json holds 20 rows for Week 9 only, 8 of them emergency quarterbacks. The official inactive list is published 90 minutes before kickoff and is NOT captured systematically.",
+   "consequence": "whether a listed backup actually played cannot be confirmed from this repository; it can only be inferred from the depth chart, which the brief forbids as a source of playing time"
+  },
+  "snap_counts": {
+   "status": "NOT CAPTURED. No official snap-count feed is ingested.",
+   "consequence": "the brief's 'model depth from playing time' cannot be satisfied yet; the 38 backup-started slots below are depth-chart-derived and are labelled as such"
+  },
+  "game_status_vs_reserve_list": {
+   "finding": "a player absent from the weekly report is not thereby available. Reserve/injured-reserve players are not listed on the weekly report at all. No reserve-list capture exists in this repository, so 'not listed' is published as 'not listed', never as 'available'.",
+   "example_from_brief": "Malik Willis (QB, MIA) is absent from the Week 10 report; the brief records him on injured reserve. This session did not verify that roster transaction, so it is published as an unverified claim, not as a fact."
+  }
+ },
+ "week10_report": {
+  "url": "https://www.nfl.com/injuries/league/2026/reg10",
+  "rows": 347,
+  "clubs": 28,
+  "games": 14,
+  "clubs_with_no_report": [
+   "CHI",
+   "DEN",
+   "PHI",
+   "TB"
+  ],
+  "clubs_with_no_report_reason": "on bye in Week 10 per the official schedule (verified by an earlier session and consistent with the Week 11 bye list which does not include them)",
+  "designations": {
+   "Out": 70,
+   "Doubtful": 11,
+   "Questionable": 90,
+   "blank": 176
+  },
+  "practice_status": {
+   "Did Not Participate In Practice": 94,
+   "Limited Participation In Practice": 73,
+   "Full Participation In Practice": 180
+  },
+  "row_check_this_session": {
+   "clubs_read_live": [
+    "WAS",
+    "NYG",
+    "NE",
+    "DET"
+   ],
+   "rows_compared": 44,
+   "cells_compared": 220,
+   "mismatches": 0,
+   "note": "The four clubs on the first page of the live report were read again this session and compared cell by cell with the committed capture. All 44 rows match, including the three Detroit designations (Kerby Joseph, Cade Mays, D.J. Reed) that the brief names as blank in an older hand copy.",
+   "read_at": "2026-11-16T14:24:00Z"
+  },
+  "week11_status": {
+   "url_requested": "https://www.nfl.com/injuries/league/2026/reg11",
+   "served": "https://www.nfl.com/injuries/league/2026/reg10",
+   "conclusion": "the Week 11 report is not published yet; nothing in this sub-site claims to contain one"
+  },
+  "bys_club_rows": {
+   "DAL": 19,
+   "LAC": 19,
+   "GB": 17,
+   "HOU": 16,
+   "NE": 15,
+   "AZ": 15,
+   "SEA": 15,
+   "BUF": 14,
+   "LA": 13,
+   "MIN": 13,
+   "TB": 12,
+   "CLE": 12,
+   "CAR": 12,
+   "ATL": 11,
+   "NYG": 11,
+   "SF": 11,
+   "DEN": 10,
+   "BAL": 10,
+   "CIN": 9,
+   "DET": 9,
+   "WAS": 9,
+   "IND": 9,
+   "KC": 9,
+   "JAX": 9,
+   "NO": 9,
+   "NYJ": 8,
+   "MIA": 8,
+   "TEN": 7
+  }
+ },
+ "depth_deficiency": {
+  "method": "Projected starter = the lowest-ranked listed player at that slot who is not Out or Doubtful on the official report. A slot is deficient when that player is not rank 1, i.e. a backup is projected to start. Questionable is shown, never upgraded to available or downgraded to out.",
+  "limits": [
+   "The starter is projected from a club depth chart, not confirmed from playing time. The brief forbids using the chart as a playing-time source, so this column is labelled 'depth-chart projected' everywhere it appears.",
+   "Slots with more than one rank-1 player (shared slots) are recorded as shared, not collapsed to one starter.",
+   "A slot whose starter is absent from a chart is a chart gap, published as a gap."
+  ],
+  "totals": {
+   "clubs_with_chart": 31,
+   "clubs_without_chart": 1,
+   "clubs_without_chart_reason": "Houston publishes its depth chart as an image only; the brief says an image is not an authorised structured source, so no rows are transcribed and the club is published as 'no structured chart'",
+   "slots": 933,
+   "backup_projected_to_start": 38,
+   "offense_backup_projected": 21,
+   "defense_backup_projected": 14,
+   "special_teams_backup_projected": 3,
+   "starter_at_risk_questionable": 61,
+   "third_string_or_worse_projected": 0,
+   "chart_gap_slots": 41,
+   "slots_with_shared_rank_1": 16,
+   "reconciliation": {
+    "per_club_column_tested": "slots_missing_starter",
+    "meaning_tested": "a slot is counted here when no listed player is available (3 slots: IND 1, TEN 2), AND when a backup is pressed into duty by an official designation (38 slots). The generator adds the two, so the column is not 'empty slots'.",
+    "sum_over_32_clubs": 41,
+    "empty_code_slots": 3,
+    "pressed_into_duty": 38,
+    "identity": "41 = 38 pressed + 3 empty",
+    "passed": true,
+    "chart_gap_is_separate": "chart_gap_slots (1, PHI DT 'Ty Robinson (2)') is a distinct concept: a player printed with a trailing number in a rank-1 cell, i.e. the chart lists no first string. It is not part of the 41."
+   },
+   "slots_missing_starter_sum": 41,
+   "empty_slot_note": "residual 3 = slots with no available listed player: IND 1, TEN 2 (the rest of the 41 is the 38 pressed-into-duty slots)"
+  },
+  "by_club": [
+   {
+    "club": "ARI",
+    "name": "Arizona Cardinals",
+    "chart_url": "https://www.azcardinals.com/team/depth-chart",
+    "chart_status": "structured",
+    "as_of": "",
+    "unofficial_label": false,
+    "slots": 29,
+    "backup_projected": 1,
+    "starter_at_risk": 4,
+    "deepest_string": "2nd string",
+    "missing_starter": 1
+   },
+   {
+    "club": "ATL",
+    "name": "Atlanta Falcons",
+    "chart_url": "https://www.atlantafalcons.com/team/depth-chart",
+    "chart_status": "structured",
+    "as_of": "",
+    "unofficial_label": false,
+    "slots": 31,
+    "backup_projected": 2,
+    "starter_at_risk": 3,
+    "deepest_string": "2nd string",
+    "missing_starter": 2
+   },
+   {
+    "club": "BAL",
+    "name": "Baltimore Ravens",
+    "chart_url": "https://www.baltimoreravens.com/team/depth-chart",
+    "chart_status": "structured",
+    "as_of": "",
+    "unofficial_label": false,
+    "slots": 31,
+    "backup_projected": 1,
+    "starter_at_risk": 2,
+    "deepest_string": "2nd string",
+    "missing_starter": 1
+   },
+   {
+    "club": "BUF",
+    "name": "Buffalo Bills",
+    "chart_url": "https://www.buffalobills.com/team/depth-chart",
+    "chart_status": "structured",
+    "as_of": "",
+    "unofficial_label": false,
+    "slots": 29,
+    "backup_projected": 1,
+    "starter_at_risk": 3,
+    "deepest_string": "2nd string",
+    "missing_starter": 1
+   },
+   {
+    "club": "CAR",
+    "name": "Carolina Panthers",
+    "chart_url": "https://www.panthers.com/team/depth-chart",
+    "chart_status": "structured",
+    "as_of": "",
+    "unofficial_label": true,
+    "slots": 31,
+    "backup_projected": 1,
+    "starter_at_risk": 2,
+    "deepest_string": "2nd string",
+    "missing_starter": 1
+   },
+   {
+    "club": "CHI",
+    "name": "Chicago Bears",
+    "chart_url": "https://www.chicagobears.com/team/depth-chart",
+    "chart_status": "structured",
+    "as_of": "",
+    "unofficial_label": false,
+    "slots": 32,
+    "backup_projected": 0,
+    "starter_at_risk": 0,
+    "deepest_string": null,
+    "missing_starter": 0
+   },
+   {
+    "club": "CIN",
+    "name": "Cincinnati Bengals",
+    "chart_url": "https://www.bengals.com/team/depth-chart",
+    "chart_status": "structured",
+    "as_of": "",
+    "unofficial_label": false,
+    "slots": 28,
+    "backup_projected": 0,
+    "starter_at_risk": 1,
+    "deepest_string": null,
+    "missing_starter": 0
+   },
+   {
+    "club": "CLE",
+    "name": "Cleveland Browns",
+    "chart_url": "https://www.clevelandbrowns.com/team/depth-chart",
+    "chart_status": "structured",
+    "as_of": "",
+    "unofficial_label": false,
+    "slots": 31,
+    "backup_projected": 0,
+    "starter_at_risk": 2,
+    "deepest_string": null,
+    "missing_starter": 0
+   },
+   {
+    "club": "DAL",
+    "name": "Dallas Cowboys",
+    "chart_url": "https://www.dallascowboys.com/team/depth-chart",
+    "chart_status": "structured",
+    "as_of": "",
+    "unofficial_label": true,
+    "slots": 30,
+    "backup_projected": 1,
+    "starter_at_risk": 3,
+    "deepest_string": "2nd string",
+    "missing_starter": 1
+   },
+   {
+    "club": "DEN",
+    "name": "Denver Broncos",
+    "chart_url": "https://www.denverbroncos.com/team/depth-chart",
+    "chart_status": "structured",
+    "as_of": "",
+    "unofficial_label": false,
+    "slots": 34,
+    "backup_projected": 0,
+    "starter_at_risk": 0,
+    "deepest_string": null,
+    "missing_starter": 0
+   },
+   {
+    "club": "DET",
+    "name": "Detroit Lions",
+    "chart_url": "https://www.detroitlions.com/team/depth-chart",
+    "chart_status": "structured",
+    "as_of": "",
+    "unofficial_label": true,
+    "slots": 28,
+    "backup_projected": 2,
+    "starter_at_risk": 1,
+    "deepest_string": "2nd string",
+    "missing_starter": 2
+   },
+   {
+    "club": "GB",
+    "name": "Green Bay Packers",
+    "chart_url": "https://www.packers.com/team/depth-chart",
+    "chart_status": "structured",
+    "as_of": "Nov. 10, 2026",
+    "unofficial_label": true,
+    "slots": 28,
+    "backup_projected": 3,
+    "starter_at_risk": 5,
+    "deepest_string": "2nd string",
+    "missing_starter": 3
+   },
+   {
+    "club": "HOU",
+    "name": "Houston Texans",
+    "chart_url": "https://www.houstontexans.com/team/depth-chart",
+    "chart_status": "image-only",
+    "as_of": "",
+    "unofficial_label": false,
+    "slots": 0,
+    "backup_projected": 0,
+    "starter_at_risk": 0,
+    "deepest_string": null,
+    "missing_starter": 0
+   },
+   {
+    "club": "IND",
+    "name": "Indianapolis Colts",
+    "chart_url": "https://www.colts.com/team/depth-chart",
+    "chart_status": "structured",
+    "as_of": "",
+    "unofficial_label": true,
+    "slots": 28,
+    "backup_projected": 3,
+    "starter_at_risk": 0,
+    "deepest_string": "2nd string",
+    "missing_starter": 4
+   },
+   {
+    "club": "JAX",
+    "name": "Jacksonville Jaguars",
+    "chart_url": "https://www.jaguars.com/team/depth-chart",
+    "chart_status": "structured",
+    "as_of": "",
+    "unofficial_label": false,
+    "slots": 29,
+    "backup_projected": 1,
+    "starter_at_risk": 5,
+    "deepest_string": "2nd string",
+    "missing_starter": 1
+   },
+   {
+    "club": "KC",
+    "name": "Kansas City Chiefs",
+    "chart_url": "https://www.chiefs.com/team/depth-chart",
+    "chart_status": "structured",
+    "as_of": "",
+    "unofficial_label": true,
+    "slots": 28,
+    "backup_projected": 1,
+    "starter_at_risk": 1,
+    "deepest_string": "2nd string",
+    "missing_starter": 1
+   },
+   {
+    "club": "LV",
+    "name": "Las Vegas Raiders",
+    "chart_url": "https://www.raiders.com/team/depth-chart",
+    "chart_status": "structured",
+    "as_of": "",
+    "unofficial_label": false,
+    "slots": 31,
+    "backup_projected": 0,
+    "starter_at_risk": 0,
+    "deepest_string": null,
+    "missing_starter": 0
+   },
+   {
+    "club": "LAC",
+    "name": "Los Angeles Chargers",
+    "chart_url": "https://www.chargers.com/team/depth-chart",
+    "chart_status": "structured",
+    "as_of": "",
+    "unofficial_label": false,
+    "slots": 32,
+    "backup_projected": 0,
+    "starter_at_risk": 2,
+    "deepest_string": null,
+    "missing_starter": 0
+   },
+   {
+    "club": "LA",
+    "name": "Los Angeles Rams",
+    "chart_url": "https://www.therams.com/team/depth-chart",
+    "chart_status": "structured",
+    "as_of": "",
+    "unofficial_label": true,
+    "slots": 28,
+    "backup_projected": 1,
+    "starter_at_risk": 8,
+    "deepest_string": "2nd string",
+    "missing_starter": 1
+   },
+   {
+    "club": "MIA",
+    "name": "Miami Dolphins",
+    "chart_url": "https://www.miamidolphins.com/team/depth-chart",
+    "chart_status": "structured",
+    "as_of": "",
+    "unofficial_label": false,
+    "slots": 31,
+    "backup_projected": 2,
+    "starter_at_risk": 1,
+    "deepest_string": "2nd string",
+    "missing_starter": 2
+   },
+   {
+    "club": "MIN",
+    "name": "Minnesota Vikings",
+    "chart_url": "https://www.vikings.com/team/depth-chart",
+    "chart_status": "structured",
+    "as_of": "",
+    "unofficial_label": true,
+    "slots": 32,
+    "backup_projected": 5,
+    "starter_at_risk": 3,
+    "deepest_string": "2nd string",
+    "missing_starter": 5
+   },
+   {
+    "club": "NE",
+    "name": "New England Patriots",
+    "chart_url": "https://www.patriots.com/team/depth-chart",
+    "chart_status": "structured",
+    "as_of": "",
+    "unofficial_label": true,
+    "slots": 29,
+    "backup_projected": 2,
+    "starter_at_risk": 4,
+    "deepest_string": "2nd string",
+    "missing_starter": 2
+   },
+   {
+    "club": "NO",
+    "name": "New Orleans Saints",
+    "chart_url": "https://www.neworleanssaints.com/team/depth-chart",
+    "chart_status": "structured",
+    "as_of": "",
+    "unofficial_label": true,
+    "slots": 33,
+    "backup_projected": 2,
+    "starter_at_risk": 0,
+    "deepest_string": "2nd string",
+    "missing_starter": 2
+   },
+   {
+    "club": "NYG",
+    "name": "New York Giants",
+    "chart_url": "https://www.giants.com/team/depth-chart",
+    "chart_status": "structured",
+    "as_of": "",
+    "unofficial_label": false,
+    "slots": 29,
+    "backup_projected": 0,
+    "starter_at_risk": 0,
+    "deepest_string": null,
+    "missing_starter": 0
+   },
+   {
+    "club": "NYJ",
+    "name": "New York Jets",
+    "chart_url": "https://www.newyorkjets.com/team/depth-chart",
+    "chart_status": "structured",
+    "as_of": "",
+    "unofficial_label": true,
+    "slots": 32,
+    "backup_projected": 0,
+    "starter_at_risk": 4,
+    "deepest_string": null,
+    "missing_starter": 0
+   },
+   {
+    "club": "PHI",
+    "name": "Philadelphia Eagles",
+    "chart_url": "https://www.philadelphiaeagles.com/team/depth-chart",
+    "chart_status": "structured",
+    "as_of": "",
+    "unofficial_label": true,
+    "slots": 29,
+    "backup_projected": 0,
+    "starter_at_risk": 0,
+    "deepest_string": null,
+    "missing_starter": 0
+   },
+   {
+    "club": "PIT",
+    "name": "Pittsburgh Steelers",
+    "chart_url": "https://www.steelers.com/team/depth-chart",
+    "chart_status": "structured",
+    "as_of": "",
+    "unofficial_label": false,
+    "slots": 30,
+    "backup_projected": 0,
+    "starter_at_risk": 0,
+    "deepest_string": null,
+    "missing_starter": 0
+   },
+   {
+    "club": "SF",
+    "name": "San Francisco 49ers",
+    "chart_url": "https://www.49ers.com/team/depth-chart",
+    "chart_status": "structured",
+    "as_of": "",
+    "unofficial_label": false,
+    "slots": 32,
+    "backup_projected": 1,
+    "starter_at_risk": 5,
+    "deepest_string": "2nd string",
+    "missing_starter": 1
+   },
+   {
+    "club": "SEA",
+    "name": "Seattle Seahawks",
+    "chart_url": "https://www.seahawks.com/team/depth-chart",
+    "chart_status": "structured",
+    "as_of": "",
+    "unofficial_label": false,
+    "slots": 29,
+    "backup_projected": 4,
+    "starter_at_risk": 1,
+    "deepest_string": "2nd string",
+    "missing_starter": 4
+   },
+   {
+    "club": "TB",
+    "name": "Tampa Bay Buccaneers",
+    "chart_url": "https://www.buccaneers.com/team/depth-chart",
+    "chart_status": "structured",
+    "as_of": "",
+    "unofficial_label": false,
+    "slots": 30,
+    "backup_projected": 0,
+    "starter_at_risk": 0,
+    "deepest_string": null,
+    "missing_starter": 0
+   },
+   {
+    "club": "TEN",
+    "name": "Tennessee Titans",
+    "chart_url": "https://www.tennesseetitans.com/team/depth-chart",
+    "chart_status": "structured",
+    "as_of": "",
+    "unofficial_label": true,
+    "slots": 30,
+    "backup_projected": 4,
+    "starter_at_risk": 0,
+    "deepest_string": "2nd string",
+    "missing_starter": 6
+   },
+   {
+    "club": "WAS",
+    "name": "Washington Commanders",
+    "chart_url": "https://www.commanders.com/team/depth-chart",
+    "chart_status": "structured",
+    "as_of": "",
+    "unofficial_label": true,
+    "slots": 29,
+    "backup_projected": 0,
+    "starter_at_risk": 1,
+    "deepest_string": null,
+    "missing_starter": 0
+   }
+  ],
+  "deepest_replacement_among_projected_starters": [
+   {
+    "club": "ARI",
+    "unit": "offense",
+    "position": "C",
+    "slot": 4,
+    "starter_name": "Kingsley Eguakun",
+    "string_label": "2nd string",
+    "replaces": "Hjalte Froholdt (Out, concussion)",
+    "replaces_status": "Out",
+    "chart_url": "https://www.azcardinals.com/team/depth-chart",
+    "report_url": "https://www.nfl.com/injuries/league/2026/reg10"
+   }
+  ],
+  "deepest_replacement_note": "Only one row is shown here because this file publishes the deepest confirmed case with its ladder; the full 38-row list is in data/depth_ladder.json's deficient_slots, which the existing Depth & Deficiency page already renders.",
+  "third_and_fourth_string": {
+   "projected_3rd_or_worse_starting": 0,
+   "consequence": "no team this week is projected to start a third-string player at any slot, which is the number that answers the brief's '2nd, 3rd or 4th string' question: the deficiency this week is second-string, not third.",
+   "ladder_depth_available": "0 slots list a fourth string; the deepest published ladder is second string for the clubs that have one"
+  }
+ },
+ "what_cannot_be_answered_yet": [
+  {
+   "question": "Did the projected backup actually play, and how many snaps?",
+   "missing": "official inactive lists for Week 10 and official snap counts",
+   "gate": "capture the official inactive list 90 minutes before kickoff and an official snap-count source"
+  },
+  {
+   "question": "Is an absent player healthy or on reserve?",
+   "missing": "an official reserve/injured-reserve list capture",
+   "gate": "capture the official transactions log and join it to the weekly report"
+  },
+  {
+   "question": "Is the depth chart current?",
+   "missing": "a date on the chart (30 of 31 carry none)",
+   "gate": "a dated official source per club, or a roster-event version stamp (the brief's PR-style requirement)"
+  },
+  {
+   "question": "What is the injury surprise rather than the injury level?",
+   "missing": "two or more dated captures of the same report to difference",
+   "gate": "daily Wednesday-to-kickoff captures with a retained hash; the repository has 2 capture days and 0 recorded designation changes"
+  }
+ ]
+}

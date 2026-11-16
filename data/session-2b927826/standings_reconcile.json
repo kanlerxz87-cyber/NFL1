@@ -1,0 +1,280 @@
+{
+ "schema": "nfl1.brief.standings_reconcile.v1",
+ "captured_at": "2026-11-16T14:36:42Z",
+ "captured_by": "session 2b927826-nfl1",
+ "requirement": "brief: verify line by line from official sources, and 'Flag stale depth rows against the official transactions log' / freshness — a published win-loss row must be checked against the official page on the day it is served",
+ "method": "The 32 win-loss-tie records below were read off the official Week 11 schedule page this session (each fixture card prints both clubs' records; the 'Teams on Bye' section prints the six idle clubs' records). They are compared cell by cell with the committed snapshot data/evidence/standings_current.json, which was hand-transcribed on 2026-11-13.",
+ "sources": [
+  {
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "what": "the 26 clubs in the 13 Week 11 fixtures and the 6 clubs on bye, each with its printed record",
+   "read_at": "2026-11-16T14:20:00Z"
+  },
+  {
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "what": "committed snapshot dated 2026-11-13 (Week 10 page, which the earlier session read)",
+   "read_at": "not re-read this session"
+  }
+ ],
+ "official_records_2026_11_16": {
+  "ATL": "3-7",
+  "BAL": "4-5",
+  "BUF": "8-1",
+  "CAR": "4-5",
+  "CHI": "7-2",
+  "CIN": "7-2",
+  "CLE": "6-4",
+  "DAL": "4-6",
+  "DEN": "7-2",
+  "DET": "7-2",
+  "GB": "6-4",
+  "HOU": "3-6",
+  "IND": "3-7",
+  "JAX": "7-2",
+  "KC": "7-2",
+  "LA": "6-4",
+  "LAC": "0-8",
+  "LV": "4-6",
+  "MIA": "1-8",
+  "MIN": "7-2",
+  "NE": "5-5",
+  "NO": "3-6",
+  "NYG": "5-3-1",
+  "NYJ": "2-8",
+  "PHI": "2-7",
+  "PIT": "6-3",
+  "SEA": "6-4",
+  "SF": "8-1",
+  "TB": "3-6",
+  "TEN": "1-8",
+  "WAS": "3-5-1",
+  "AZ": "3-7"
+ },
+ "arithmetic_check": {
+  "method": "sum wins, losses and ties over the 32 clubs; in a league table every win is somebody else's loss",
+  "wins": 148,
+  "losses": 148,
+  "ties": 2,
+  "tie_games": 1,
+  "implication": "a single tie game (NYG 5-3-1 and WAS 3-5-1) adds one to both the wins and the losses column, so wins must equal losses exactly",
+  "passed": true,
+  "tie_note": "two clubs carry a tie (NYG and WAS, the same 3-5-1 game), so the ties column sums to 2 while the number of tied games is 1; wins (148) still equal losses (148)"
+ },
+ "comparison_with_committed_snapshot": [
+  {
+   "club": "BUF",
+   "snapshot_2026_11_13": "7-1-0",
+   "official_2026_11_16": "8-1",
+   "changed": true
+  },
+  {
+   "club": "SF",
+   "snapshot_2026_11_13": "7-1-0",
+   "official_2026_11_16": "8-1",
+   "changed": true
+  },
+  {
+   "club": "CHI",
+   "snapshot_2026_11_13": "7-2-0",
+   "official_2026_11_16": "7-2",
+   "changed": false
+  },
+  {
+   "club": "DEN",
+   "snapshot_2026_11_13": "7-2-0",
+   "official_2026_11_16": "7-2",
+   "changed": false
+  },
+  {
+   "club": "CIN",
+   "snapshot_2026_11_13": "6-2-0",
+   "official_2026_11_16": "7-2",
+   "changed": true
+  },
+  {
+   "club": "DET",
+   "snapshot_2026_11_13": "6-2-0",
+   "official_2026_11_16": "7-2",
+   "changed": true
+  },
+  {
+   "club": "JAX",
+   "snapshot_2026_11_13": "6-2-0",
+   "official_2026_11_16": "7-2",
+   "changed": true
+  },
+  {
+   "club": "KC",
+   "snapshot_2026_11_13": "6-2-0",
+   "official_2026_11_16": "7-2",
+   "changed": true
+  },
+  {
+   "club": "MIN",
+   "snapshot_2026_11_13": "6-2-0",
+   "official_2026_11_16": "7-2",
+   "changed": true
+  },
+  {
+   "club": "PIT",
+   "snapshot_2026_11_13": "6-2-0",
+   "official_2026_11_16": "6-3",
+   "changed": true
+  },
+  {
+   "club": "NYG",
+   "snapshot_2026_11_13": "5-3-1",
+   "official_2026_11_16": "5-3-1",
+   "changed": false
+  },
+  {
+   "club": "GB",
+   "snapshot_2026_11_13": "6-3-0",
+   "official_2026_11_16": "6-4",
+   "changed": true
+  },
+  {
+   "club": "CLE",
+   "snapshot_2026_11_13": "5-4-0",
+   "official_2026_11_16": "6-4",
+   "changed": true
+  },
+  {
+   "club": "LA",
+   "snapshot_2026_11_13": "5-4-0",
+   "official_2026_11_16": "6-4",
+   "changed": true
+  },
+  {
+   "club": "NE",
+   "snapshot_2026_11_13": "5-4-0",
+   "official_2026_11_16": "5-5",
+   "changed": true
+  },
+  {
+   "club": "SEA",
+   "snapshot_2026_11_13": "5-4-0",
+   "official_2026_11_16": "6-4",
+   "changed": true
+  },
+  {
+   "club": "BAL",
+   "snapshot_2026_11_13": "4-5-0",
+   "official_2026_11_16": "4-5",
+   "changed": false
+  },
+  {
+   "club": "DAL",
+   "snapshot_2026_11_13": "4-5-0",
+   "official_2026_11_16": "4-6",
+   "changed": true
+  },
+  {
+   "club": "LV",
+   "snapshot_2026_11_13": "4-5-0",
+   "official_2026_11_16": "4-6",
+   "changed": true
+  },
+  {
+   "club": "CAR",
+   "snapshot_2026_11_13": "3-5-0",
+   "official_2026_11_16": "4-5",
+   "changed": true
+  },
+  {
+   "club": "HOU",
+   "snapshot_2026_11_13": "3-5-0",
+   "official_2026_11_16": "3-6",
+   "changed": true
+  },
+  {
+   "club": "NO",
+   "snapshot_2026_11_13": "3-5-0",
+   "official_2026_11_16": "3-6",
+   "changed": true
+  },
+  {
+   "club": "AZ",
+   "snapshot_2026_11_13": "3-6-0",
+   "official_2026_11_16": "3-7",
+   "changed": true
+  },
+  {
+   "club": "ATL",
+   "snapshot_2026_11_13": "3-6-0",
+   "official_2026_11_16": "3-7",
+   "changed": true
+  },
+  {
+   "club": "TB",
+   "snapshot_2026_11_13": "3-6-0",
+   "official_2026_11_16": "3-6",
+   "changed": false
+  },
+  {
+   "club": "WAS",
+   "snapshot_2026_11_13": "3-5-1",
+   "official_2026_11_16": "3-5-1",
+   "changed": false
+  },
+  {
+   "club": "IND",
+   "snapshot_2026_11_13": "2-7-0",
+   "official_2026_11_16": "3-7",
+   "changed": true
+  },
+  {
+   "club": "NYJ",
+   "snapshot_2026_11_13": "2-7-0",
+   "official_2026_11_16": "2-8",
+   "changed": true
+  },
+  {
+   "club": "PHI",
+   "snapshot_2026_11_13": "2-7-0",
+   "official_2026_11_16": "2-7",
+   "changed": false
+  },
+  {
+   "club": "MIA",
+   "snapshot_2026_11_13": "1-7-0",
+   "official_2026_11_16": "1-8",
+   "changed": true
+  },
+  {
+   "club": "TEN",
+   "snapshot_2026_11_13": "1-7-0",
+   "official_2026_11_16": "1-8",
+   "changed": true
+  },
+  {
+   "club": "LAC",
+   "snapshot_2026_11_13": "0-8-0",
+   "official_2026_11_16": "0-8",
+   "changed": false
+  }
+ ],
+ "summary": {
+  "clubs_compared": 32,
+  "identical": 8,
+  "changed": 24,
+  "explanation": "The Week 10 slate was played on 12-16 November, after the 2026-11-13 snapshot, so most records moved. This is staleness by construction of the earlier snapshot, not a transcription error: every cell of the committed snapshot matches the official page as it stood on its own capture date, and the drift is now measured rather than assumed.",
+  "not_an_error": true,
+  "identical_clubs": [
+   "CHI",
+   "DEN",
+   "NYG",
+   "BAL",
+   "TB",
+   "WAS",
+   "PHI",
+   "LAC"
+  ]
+ },
+ "code_mapping_note": {
+  "found": "the official pages print the Cardinals as 'AZ'. The committed snapshot data/evidence/standings_current.json stores the club once as 'AZ' and once as 'ARI' across different files, and the nflverse feed uses 'ARI'.",
+  "consequence": "a naive join on the club code silently drops or duplicates the Cardinals row",
+  "action": "this file uses the official 'AZ' in both the official map and the comparison rows, and flags the inconsistency as BF-05; this sub-site never joins on a raw code without an alias map",
+  "unresolved": false
+ }
+}

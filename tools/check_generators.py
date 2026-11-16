@@ -37,6 +37,9 @@ GENERATORS = {
     # Session 0c5215c1-nfl1: the pre-registration sub-site. write() takes bare filenames;
     # the generator writes them under prereg/ (prefix added in claims()).
     "prereg/build.py": [r'write\(\s*"([^"/]+\.html)"'],
+    # Session 2b927826-nfl1: the brief dashboard. BUILDERS maps bare filenames; the
+    # generator writes them under brief/ (prefix added in claims()).
+    "brief/build.py": [r'\n    "([a-z]+\.html)": '],
 }
 
 # explicit, documented ownership. Anything not here is reported, not assumed.
@@ -57,6 +60,9 @@ KNOWN_OWNERS = {
     "pages/analysis.html": "scripts/verified/build_site.py",
     "pages/decisions.html": "scripts/verified/build_site.py",
     "pages/verified.html": "scripts/verified/build_site.py",
+    # Two owners with distinct scopes: build_availability.py writes pages/availability.html
+    # (the s9cb availability page); brief/build.py writes brief/availability.html (its own
+    # sub-site). They are separate output paths, so this is not a collision.
     "pages/availability.html": "scripts/verified/build_availability.py",
     "pages/executive-summary.html": "tools/build.py",
     "pages/teams.html": "tools/build.py",
@@ -69,6 +75,15 @@ KNOWN_OWNERS = {
     # Session 739408a8-nfl1: the forward-test ledger page (its generator is not in
     # GENERATORS; ownership recorded so the file is documented, not assumed).
     "prereg/index.html": "tools/prereg.py",
+    # Session 2b927826-nfl1: the eight brief pages, all written by brief/build.py.
+    "brief/index.html": "brief/build.py",
+    "brief/requirements.html": "brief/build.py",
+    "brief/answers.html": "brief/build.py",
+    "brief/strategies.html": "brief/build.py",
+    "brief/availability.html": "brief/build.py",
+    "brief/fixtures.html": "brief/build.py",
+    "brief/suggestions.html": "brief/build.py",
+    "brief/verification.html": "brief/build.py",
 }
 
 DASHBOARD_PAGES = ["web/dashboard.html", "web/decisions.html", "web/suggestions.html",
@@ -99,6 +114,9 @@ def claims():
         if gen == "prereg/build.py":
             # write() takes bare filenames; the generator writes them under prereg/
             found = {"prereg/" + f for f in found}
+        if gen == "brief/build.py":
+            # the BUILDERS dict keys are bare filenames; the generator writes them under brief/
+            found = {"brief/" + f for f in found}
         for f in found:
             out.setdefault(f, set()).add(gen)
     return out

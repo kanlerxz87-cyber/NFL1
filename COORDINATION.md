@@ -3790,3 +3790,40 @@ Scope is deliberately small: this session can verify against official pages, not
 | Still open | F51, F60 (terms — owner/counsel decision), F61 (NFL log gap), F62 (verifier allow-list for team posts). None blocks; all need review. |
 
 Z1–Z4 are done. Items in the brief outside Z1–Z4 are unclaimed and unchanged.
+
+## Task board — session `2b927826-nfl1` (branch `arena/2b927826-nfl1`, base `32a8fff`, 2026-11-16 UTC)
+
+This claim is committed and pushed **before any other file is touched**, per the brief.
+
+**State inherited.** `main` at `32a8fff` is green on every gate except the two stale-number
+failures noted below, which are not code defects. 194 HTML pages across ~10 sub-sites already
+exist. No claim on this board covers the files in the scope column, and every earlier claim is
+`done`, `needs review` or merged.
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| Y1 | Public dashboard `brief/` — one clean landing page plus category subpages, every table row carrying an official link or an explicit "unverified" blank | in progress | `2b927826` | `brief/**` (new), `data/session-2b927826/**` (new) |
+| Y2 | Answers register: every question / piece of information / answer needed before a decision, with what is missing and how to discover it | in progress | `2b927826` | `data/session-2b927826/answers.json`, `brief/answers.html` |
+| Y3 | Requirement coverage table: one row per brief line, status, the gate that blocks it, the number that clears it, official source link | in progress | `2b927826` | `data/session-2b927826/requirements.json`, `brief/requirements.html` |
+| Y4 | Line-by-line official re-verification of the fixtures the site publishes (date, kickoff, venue, network, bye list) transcribed from the official game centre and schedule page | in progress | `2b927826` | `data/session-2b927826/verify_week11.json`, `brief/verification.html` |
+| Y5 | Leaderboard page ranked only by pre-registered, gate-passing, prospective strategies; backtest numbers quarantined in a labelled archive block | in progress | `2b927826` | `brief/strategies.html` |
+| Y6 | Availability page: injuries, replacements and depth deficiency, official-only, blanks flagged | in progress | `2b927826` | `brief/availability.html` |
+| Y7 | Suggestions page: improvement + process suggestions, each with a pre-condition and a decision owner | in progress | `2b927826` | `brief/suggestions.html` |
+| Y8 | Verification gate `brief/verify.py` (no sourceless row, no empty cell, no placeholder, no broken local link) wired into the existing gate suite | in progress | `2b927826` | `brief/verify.py`, `tools/check_generators.py` (register one owner) |
+| Y9 | Fix the two stale-file failures found on the base commit (`data/readiness.json`, `data/combined_verification.json`) by regenerating, not hand-editing | in progress | `2b927826` | regenerated artifacts only |
+| Y10 | Integration: one additive nav entry, rebuild, all gates, PR → merge → Pages deploy → record here | in progress | `2b927826` | `pipeline/gen_site.py` (NAV), `scripts/verified/normalize_nav.py` (CANON), `COORDINATION.md` (append-only) |
+
+**Not touched by this session:** every existing page and generator output (`pages/`, `docs/`,
+`verified-lab/`, `lab/`, `research/`, `strat/`, `prereg/`, `shadow/`, `room/`, `strength/`,
+`referee/`, `review-room/`, `capture/`, `web/`, `dashboard/`), `data/model/**`, `data/s9cb/**`,
+`data/flags.json`, `data/questions.json`, `data/suggestions.json`, `data/requirements.json`,
+`.github/workflows/**`. New findings are published in this session's own namespace and linked,
+never written into another session's register.
+
+**Open PRs respected (not merged by this session):** #81 (rebuilds pages after a data-bot
+re-render; scoped to `pages/*`), #80 (`ledger/`), #79 (terms audit), #77 (depth parsing). None
+touches `brief/**` or `data/session-2b927826/**`. #81 is `CONFLICTING` and targets a rebuild that
+`tools/build_site_all.py --check` already performs on this base; it is left for its owner.
+
+**Deviations.** Arena fixes this session to one branch (`arena/2b927826-nfl1`), so the
+`session-<id>/<task>` naming cannot be used; scope is separated by file instead.

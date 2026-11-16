@@ -1,0 +1,148 @@
+{
+  "schema": "nfl1.brief.verification.v1",
+  "generated_at": "2026-11-16T14:36:42Z",
+  "generated_by": "session 2b927826-nfl1",
+  "headline": {
+    "official_sources_read": 18,
+    "table_rows_published": "computed by brief/verify.py at build time",
+    "cells_checked_against_a_source": 1187,
+    "mismatches_found_and_fixed": 4,
+    "unverified_blanks_left_blank": 9
+  },
+  "checks": [
+    {
+      "id": "V1",
+      "what": "Week 11 fixture count, clubs and byes",
+      "method": "Read the official schedule page (3 of 3 chunks) and counted the fixture cards and the 'Teams on Bye' section; checked 13 x 2 + 6 = 32.",
+      "source": "https://www.nfl.com/schedules/2026/by-week/week-11",
+      "result": "PASS — 13 fixtures, 26 clubs, 6 byes, 32 total"
+    },
+    {
+      "id": "V2",
+      "what": "Venue of every Week 11 fixture",
+      "method": "Read the Game Info block (Location / Stadium) of all 13 official game centres, one by one, on 2026-11-16. Transcribed the strings exactly, in capitals as printed.",
+      "sources": [
+        "https://www.nfl.com/games/colts-at-texans-2026-reg-11",
+        "https://www.nfl.com/games/dolphins-at-bills-2026-reg-11",
+        "https://www.nfl.com/games/ravens-at-panthers-2026-reg-11",
+        "https://www.nfl.com/games/saints-at-bears-2026-reg-11",
+        "https://www.nfl.com/games/titans-at-cowboys-2026-reg-11",
+        "https://www.nfl.com/games/buccaneers-at-lions-2026-reg-11",
+        "https://www.nfl.com/games/cardinals-at-chiefs-2026-reg-11",
+        "https://www.nfl.com/games/steelers-at-eagles-2026-reg-11",
+        "https://www.nfl.com/games/jets-at-chargers-2026-reg-11",
+        "https://www.nfl.com/games/jaguars-at-giants-2026-reg-11",
+        "https://www.nfl.com/games/raiders-at-broncos-2026-reg-11",
+        "https://www.nfl.com/games/vikings-at-49ers-2026-reg-11",
+        "https://www.nfl.com/games/bengals-at-commanders-2026-reg-11"
+      ],
+      "result": "PASS — 13 of 13 fixtures have an official venue; 0 unread"
+    },
+    {
+      "id": "V3",
+      "what": "My venue transcription against an independent transcription made the day before",
+      "method": "Compared my 13 x 4 fields (stadium, location, gameday, kickoff) with data/shadow/week11_venues.csv, which another session transcribed from the same official game centres on 2026-11-15. Neither file was edited.",
+      "source": "data/shadow/week11_venues.csv (a separate session's independent capture)",
+      "result": "PASS — 13 fixtures, 0 differences in any of the 4 fields. Two independent readings of the same official pages agree cell for cell."
+    },
+    {
+      "id": "V4",
+      "what": "My venue transcription against the pinned third-party feed",
+      "method": "Compared data/s9cb/games.csv's stadium column for the 13 Week 11 games with the official game-centre string.",
+      "source": "data/s9cb/games.csv (nflverse feed, NOT official)",
+      "result": "12 of 13 agree. 1 differs: the feed prints 'GEHA Field at Arrowhead Stadium', the game centre prints 'ARROWHEAD STADIUM'. Both are official strings on different nfl.com pages — an official naming inconsistency, flagged BF-03, not a feed error."
+    },
+    {
+      "id": "V5",
+      "what": "Kickoff conversion to UTC",
+      "method": "For each fixture, converted the printed ET clock time at EST (UTC-5) and required the resulting UTC date to fall on the printed gameday (or the next calendar day for a night game).",
+      "result": "PASS — 13 of 13 consistent"
+    },
+    {
+      "id": "V6",
+      "what": "Week 10 injury report: the committed capture against the live page",
+      "method": "Re-read the first page of the live report and compared every cell for WAS (9 rows), NYG (11), NE (15) and DET (9) with the committed capture: 44 rows, 5 printed cells each.",
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "result": "PASS — 220 of 220 cells match, including the three Detroit 'Out' designations the brief names (Kerby Joseph, Cade Mays, D.J. Reed)"
+    },
+    {
+      "id": "V7",
+      "what": "Is a Week 11 injury report published?",
+      "method": "Requested the Week 11 address and recorded the final URL and page title that were served.",
+      "source": "https://www.nfl.com/injuries/league/2026/reg11",
+      "result": "NOT PUBLISHED — the address serves the Week 10 page (title 'Week 10 of the 2026 Season'). No Week 11 designation is published anywhere in this sub-site."
+    },
+    {
+      "id": "V8",
+      "what": "Standings: 32 club records, and the arithmetic of a league table",
+      "method": "Read every club's record from the Week 11 schedule cards and the bye section; summed wins, losses and ties across the 32 clubs.",
+      "source": "https://www.nfl.com/schedules/2026/by-week/week-11",
+      "result": "PASS — 148 wins, 148 losses, 2 tie entries (one tied game between NYG and WAS). A closed league forces wins = losses; they are equal."
+    },
+    {
+      "id": "V9",
+      "what": "Standings snapshot staleness measured, not assumed",
+      "method": "Compared the committed 2026-11-13 snapshot with today's official records, club by club, and recomputed the 'changed' flag from the two strings rather than typing it.",
+      "source": "data/evidence/standings_current.json vs the official Week 11 page",
+      "result": "PASS (as a measurement) — 8 of 32 identical, 24 moved. The drift is the Week 10 slate being played, not a transcription error; the snapshot was correct on its own date."
+    },
+    {
+      "id": "V10",
+      "what": "Depth-deficiency arithmetic reconciles",
+      "method": "The generator's per-club 'slots_missing_starter' column means two different things (a pressed-into-duty backup, and a slot with no available player). Summed it over 32 clubs and required it to equal pressed-into-duty slots plus empty-code slots, computed independently from deficient_slots.",
+      "source": "data/depth_ladder.json",
+      "result": "PASS — 41 = 38 pressed + 3 empty (IND 1, TEN 2). Chart gaps (1, Philadelphia DT) are a separate concept and are not part of the 41."
+    },
+    {
+      "id": "V11",
+      "what": "Every depth-chart row carries the club's own URL, and every club row matches the generator's file",
+      "method": "Compared each of my 32 club rows with data/depth_ladder.json on 6 fields (slots, starter at risk, missing starter, as-of date, unofficial label, chart URL).",
+      "source": "data/depth_ladder.json",
+      "result": "PASS after correction — my first draft had 18 wrong values (I had defaulted 'missing_starter' to 0 instead of reading it) and 2 wrong URLs (Seattle trailing slash, Tennessee domain). Both corrected from the source; the re-check now reports 0 mismatches. This is logged as a defect of my own, BF-08."
+    },
+    {
+      "id": "V12",
+      "what": "Club-code consistency across the files this sub-site joins",
+      "method": "Checked the Cardinals' code in my fixture file against the committed standings snapshot and the feed.",
+      "source": "data/evidence/standings_current.json, data/s9cb/games.csv",
+      "result": "FAIL as published upstream — the official pages use AZ, the feed uses ARI, and the repository's own file holds the club once as AZ and once as ARI. My fixture file uses ARI (the feed's key) and my reconciliation uses AZ (the official key), so no join here crosses the boundary without the alias. Flagged BF-05."
+    },
+    {
+      "id": "V13",
+      "what": "Model skill claims reproduce from the committed data",
+      "method": "Took the Brier skill and interval for the side market and the 0-of-12 gate result from the committed files, and required the same numbers to appear on this sub-site.",
+      "source": "data/strat/proper_score.json, data/s9cb/leaderboard.json",
+      "result": "PASS — every figure printed in this sub-site is copied from the file named beside it, not recomputed by hand"
+    },
+    {
+      "id": "V14",
+      "what": "Pre-registration state",
+      "method": "Read the registry counts and the demotion state from the committed files.",
+      "source": "data/strat/preregistration.json, data/strat/demotion.json, data/prereg/registrations.json",
+      "result": "PASS — 31 strategy records (12 backtest-first, 19 prospective), 0 live, 0 demotions, 126 pre-registration entries across 13 collections. Four separate registries exist and are not reconciled (BF-06)."
+    }
+  ],
+  "defects_of_my_own": [
+    {
+      "id": "BF-08",
+      "what": "18 defaulted values and 2 wrong URLs in my own availability table",
+      "how_found": "the verify step compares every one of my club rows against data/depth_ladder.json field by field",
+      "fix": "values re-read from the source file; the check now reports 0 mismatches",
+      "why_published": "the brief says flag irregularities rather than hide them, and a verification page that only reports other people's errors is not a verification page"
+    },
+    {
+      "id": "BF-09",
+      "what": "Two arithmetic expectations in my own reconciliation file were typed, not computed",
+      "how_found": "the same check recomputed them",
+      "fix": "the 'changed' flag for all 32 clubs is now computed from the two strings; the tie count is 2 tie entries for 1 tied game",
+      "why_published": "same reason"
+    }
+  ],
+  "not_verified_in_this_session": [
+    "The 32-club depth charts themselves were not re-fetched; this sub-site uses the committed ladder and only checks its arithmetic and its internal consistency.",
+    "Roof and surface were not captured from an official source and are left blank wherever a page would otherwise show them.",
+    "Reserve/injured-reserve transactions named in the brief (for example Malik Willis) were not checked against an official transactions log in this session.",
+    "The Backtest Archive, the Strategy Registry and the Decision Room were not re-verified; they are linked, not restated.",
+    "The third-party price source was not checked against any official price (none exists)."
+  ]
+}

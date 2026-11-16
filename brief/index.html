@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overview · NFL Decision Lab</title>
+<style>
+:root{--bg:#0b1220;--panel:#111a2b;--panel2:#16223a;--ink:#e8eef9;--muted:#93a4c0;--line:#24314b;
+--accent:#4ade80;--accent-ink:#062a16;--blue:#60a5fa;--amber:#fbbf24;--red:#f87171;--radius:14px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(1200px 600px at 12% -10%,#16233c 0%,var(--bg) 55%) no-repeat,var(--bg);
+color:var(--ink);font:16px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+-webkit-font-smoothing:antialiased}
+a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;color:#c7d2fe}
+.top{position:sticky;top:0;z-index:20;display:flex;gap:16px;align-items:center;flex-wrap:wrap;
+padding:12px 20px;background:rgba(11,18,32,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:9px;color:var(--ink);font-weight:700}
+.mark{background:var(--accent);color:var(--accent-ink);padding:3px 9px;border-radius:8px;font-size:.8rem;letter-spacing:.08em}
+.brand-text{font-size:.95rem;color:var(--muted)}
+.top nav{display:flex;gap:3px;flex-wrap:wrap;margin-left:auto}
+.top nav a{color:var(--muted);padding:6px 10px;border-radius:9px;font-size:.85rem}
+.top nav a:hover{background:var(--panel2);color:var(--ink);text-decoration:none}
+.top nav a.active{background:var(--accent);color:var(--accent-ink);font-weight:600}
+main{max-width:1180px;margin:0 auto;padding:24px 20px 72px}
+.page-head{margin:8px 0 20px}
+.eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:.7rem;color:var(--accent);margin:0 0 6px}
+h1{font-size:clamp(1.6rem,3.2vw,2.3rem);line-height:1.12;margin:0 0 8px}
+.standfirst{color:var(--muted);max-width:78ch;margin:0}
+.timestamp{color:#6f809d;font-size:.78rem;margin:10px 0 0}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;margin:20px 0}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px}
+.kpi-label{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.09em}
+.kpi-value{font-size:1.55rem;font-weight:700;margin:4px 0 0}
+.kpi-sub{color:#7f8fab;font-size:.75rem;margin-top:3px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;margin:18px 0}
+.panel h2{font-size:1.05rem;margin:0 0 4px}
+.panel .sub{color:var(--muted);font-size:.85rem;margin:0 0 12px}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+table{width:100%;border-collapse:collapse;font-size:.855rem}
+thead th{position:sticky;top:0;background:var(--panel2);text-align:left;padding:9px 10px;font-size:.72rem;
+text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border-bottom:1px solid var(--line);white-space:nowrap}
+tbody td{padding:8px 10px;border-bottom:1px solid #1b2740;vertical-align:top}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#0f1a2d}
+.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.badge{display:inline-block;padding:1px 8px;border-radius:999px;font-size:.72rem;font-weight:600;white-space:nowrap}
+.b-done{background:#12341f;color:#6ee7a0}.b-partial{background:#33280c;color:#fcd34d}
+.b-not{background:#3a1616;color:#fca5a5}.b-open{background:#1d2b46;color:#93c5fd}
+.missing{color:#fca5a5;font-style:normal}
+.sub2{color:#7f8fab;font-size:.78rem}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:900px){.grid2{grid-template-columns:1fr}}
+ul.bullets{margin:8px 0 0;padding-left:20px;color:var(--muted)}
+ul.bullets li{margin:5px 0}
+.note{background:#0e1a2e;border-left:3px solid var(--blue);padding:10px 14px;border-radius:8px;color:var(--muted);font-size:.86rem;margin:12px 0}
+.note.alert{border-left-color:var(--amber)}
+.foot{margin-top:36px;padding-top:14px;border-top:1px solid var(--line);color:#6f809d;font-size:.78rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:15px}
+.card h3{margin:0 0 6px;font-size:.98rem}
+.card p{margin:0;color:var(--muted);font-size:.85rem}
+.card a.more{display:inline-block;margin-top:9px;font-size:.83rem}
+.src{font-size:.78rem;white-space:nowrap}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html"><span class="mark">NFL</span><span class="brand-text">Decision Lab · brief dashboard</span></a>
+  <nav aria-label="Categories"><a href="index.html" class="active">Overview</a><a href="requirements.html">Requirements</a><a href="answers.html">Questions</a><a href="strategies.html">Strategies</a><a href="availability.html">Availability</a><a href="fixtures.html">Fixtures &amp; venues</a><a href="suggestions.html">Suggestions</a><a href="verification.html">Verification</a></nav>
+</header>
+<main>
+
+<div class="page-head">
+  <p class="eyebrow">Evidence-first dashboard</p>
+  <h1>What the evidence supports, what it refuses to support, and what is missing</h1>
+  <p class="standfirst">A working front door for the brief's own requirements. Every number below is copied from a
+  committed file named beside it, and every row on every page links to the source that settles it. Nothing is filled
+  in: where no official value exists, the cell says so.</p>
+  <p class="timestamp">Data built 2026-11-16T14:36:42Z · official pages read 2026-11-16 ·
+  <a href="verification.html">all 14 checks</a></p>
+</div>
+<div class="kpis"><div class="kpi"><div class="kpi-label">Brief lines covered</div><div class="kpi-value">77</div><div class="kpi-sub">33 done · 24 partial · 20 not met</div></div><div class="kpi"><div class="kpi-label">Questions open</div><div class="kpi-value">11</div><div class="kpi-sub">15 answered or partly answered</div></div><div class="kpi"><div class="kpi-label">Strategies passing 8/8 gates</div><div class="kpi-value">0</div><div class="kpi-sub">best is 6 of 8</div></div><div class="kpi"><div class="kpi-label">Brier skill vs closing line</div><div class="kpi-value">-0.0413</div><div class="kpi-sub">95% interval [-0.0513, -0.0299]</div></div><div class="kpi"><div class="kpi-label">Backups projected to start</div><div class="kpi-value">38</div><div class="kpi-sub">all second string; 0 third or deeper</div></div><div class="kpi"><div class="kpi-label">Week 11 venues verified</div><div class="kpi-value">13 of 13</div><div class="kpi-sub">read from the official game centre</div></div><div class="kpi"><div class="kpi-label">Flags in this register</div><div class="kpi-value">13</div><div class="kpi-sub">6 open · 3 need review</div></div><div class="kpi"><div class="kpi-label">Checks performed</div><div class="kpi-value">14</div><div class="kpi-sub">on official pages this session</div></div></div>
+
+<div class="panel">
+  <h2>The one-line verdict</h2>
+  <p class="sub">What a reader should take away before opening any other page.</p>
+  <div class="note alert"><strong>The model does not beat the market, and no strategy clears the gates.</strong>
+  That is the finding, not a failure of the build. The own line is worse than the closing line on the side
+  (Brier skill -0.0413, interval [-0.0513, -0.0299]) and on the total,
+  and the moneyline is published as a probability rather than a priced bet. Staking anything on the current model
+  would be a decision the evidence contradicts.</div>
+  <div class="cards" style="margin-top:14px"><div class="card"><h3>Requirements</h3><p>77 rows, one per distinct line of the brief, each with the gate that blocks it and the number that would clear it.</p><a class="more" href="requirements.html">Open &rarr;</a></div><div class="card"><h3>Questions before any decision</h3><p>26 questions: what is known, what is missing, and the capture or test that would produce it.</p><a class="more" href="answers.html">Open &rarr;</a></div><div class="card"><h3>Strategies &amp; leaderboard</h3><p>The ranked board is empty by design. Every backtest number is quarantined in a labelled archive block below it.</p><a class="more" href="strategies.html">Open &rarr;</a></div><div class="card"><h3>Injuries &amp; depth deficiency</h3><p>Week 10 official designations, and the 38 slots a backup is projected to start.</p><a class="more" href="availability.html">Open &rarr;</a></div><div class="card"><h3>Fixtures &amp; venues</h3><p>13 Week 11 fixtures with venue, city, kickoff and network, each read from the official game centre.</p><a class="more" href="fixtures.html">Open &rarr;</a></div><div class="card"><h3>Suggestions</h3><p>15 improvements, each with the pre-condition that must hold before it is worth starting.</p><a class="more" href="suggestions.html">Open &rarr;</a></div><div class="card"><h3>Verification &amp; flags</h3><p>14 checks, 13 flags, and this session's own defects, published rather than hidden.</p><a class="more" href="verification.html">Open &rarr;</a></div></div>
+</div>
+
+<div class="grid2">
+  <div class="panel">
+    <h2>What holds up</h2>
+    <p class="sub">Each item is checkable from a named file or an official page.</p>
+    <ul class="bullets"><li>The closing line is a better forecaster than the model on the side market: Brier skill -0.0413, interval entirely below zero on 6,785 games.</li><li>No strategy clears the eight gates. 0 of 12 clear all eight; the best (S07 Fade the road favourite of 7+) clears 6 of 8 and fails multiple testing and the ROI interval.</li><li>A coin-flip control loses -2.51% on the frozen corpus. Every published strategy result sits inside its own luck band, so none can be called skilful.</li><li>The official Week 11 injury report is not published yet: the league address serves Week 10. The committed capture matches the live Week 10 page on every cell checked (220 of 220).</li><li>13 of 13 Week 11 venues were read from the official game centre and agree with two independent transcriptions made earlier. One official-to-official naming difference exists for Arrowhead Stadium and is flagged.</li><li>The depth ladder reconciles: 41 = 38 slots where a backup is pressed into duty plus 3 slots with no available player. No club is projected to start a third-string player this week.</li></ul>
+  </div>
+  <div class="panel">
+    <h2>What is missing, and what it blocks</h2>
+    <p class="sub">In the brief's order of impact on the next decision.</p>
+    <ul class="bullets"><li>An official price. The NFL publishes no odds, so every ROI is measured against a third-party line (flag BF-11). This gates every backtest number on every page.</li><li>The actual starter. No Game Book, inactive list or snap-count capture exists for any 2026 game, so a replacement can be projected but never confirmed (BF-10).</li><li>A price-snapshot store with opening and closing numbers. Without it there is no closing-line value and no way to see which side of a line move a bet is on (Q11).</li><li>A within-week injury series. Two capture days and zero recorded designation changes means the &quot;surprise&quot; the brief asks for has never been observed (BF-02).</li><li>One authoritative pre-registration registry. Four exist, with four checkers (BF-06).</li><li>A recorded terms review before row-level injury data is published (Q21).</li></ul>
+    <div class="note"><a href="answers.html">All 26 questions, with the test that would answer each &rarr;</a></div>
+  </div>
+</div>
+
+<div class="panel">
+  <h2>Where to go next</h2>
+  <p class="sub">Eight pages, one per category. The rest of the repository is linked, not replaced.</p>
+  <div class="table-wrap"><table><thead><tr>
+    <th>Page</th><th>What it answers</th><th class="num">Rows</th><th>Source of the rows</th>
+  </tr></thead><tbody>
+    <tr><td><a href="requirements.html">Requirements</a></td><td>Which of the brief's lines are met, and what blocks the rest</td><td class="num">77</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/session-2b927826/requirements.json">register</a></span></td></tr>
+    <tr><td><a href="answers.html">Questions</a></td><td>What must be settled before any decision, and how to discover it</td><td class="num">26</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/session-2b927826/answers.json">register</a></span></td></tr>
+    <tr><td><a href="strategies.html">Strategies</a></td><td>Why the board is empty, and every backtest number behind that</td><td class="num">12</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json">leaderboard</a></span></td></tr>
+    <tr><td><a href="availability.html">Availability</a></td><td>Official designations and the slots a backup is projected to start</td><td class="num">347</td><td><span class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">nfl.com injuries</a></span></td></tr>
+    <tr><td><a href="fixtures.html">Fixtures &amp; venues</a></td><td>Week 11 schedule facts, every venue from the game centre</td><td class="num">13</td><td><span class="src"><a href="https://www.nfl.com/schedules/2026/by-week/week-11">nfl.com schedule</a></span></td></tr>
+    <tr><td><a href="suggestions.html">Suggestions</a></td><td>What to build next, and what must be true first</td><td class="num">15</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/session-2b927826/suggestions.json">register</a></span></td></tr>
+    <tr><td><a href="verification.html">Verification</a></td><td>Every check performed and every flag raised</td><td class="num">14</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/session-2b927826/verification.json">record</a></span></td></tr>
+  </tbody></table></div>
+</div>
+
+<div class="panel">
+  <h2>The rest of the repository</h2>
+  <p class="sub">Thirteen sub-sites and about 194 pages already exist. This page indexes them; it does not replace them.</p>
+  <ul class="bullets">
+    <li><a href="../pages/executive.html">Executive summary</a> · <a href="../pages/readiness.html">long-form requirement register</a> · <a href="../pages/questions.html">long-form question register</a></li>
+    <li><a href="../pages/lines.html">Own lines</a> · <a href="../pages/strategies.html">strategy lab</a> · <a href="../pages/luck.html">luck removal</a> · <a href="../pages/correlations.html">correlations</a></li>
+    <li><a href="../pages/injuries.html">Injuries</a> · <a href="../pages/depth.html">depth &amp; deficiency</a> · <a href="../pages/snapshots.html">snapshot ledger</a> · <a href="../shadow/team-view.html">per-team view</a></li>
+    <li><a href="../prereg/registry.html">strategy registry</a> · <a href="../prereg/archive.html">backtest archive</a> · <a href="../strat/index.html">strategy competition</a> · <a href="../shadow/index.html">shadow baseline</a></li>
+    <li><a href="../room/index.html">decision room</a> · <a href="../review-room/index.html">review room</a> · <a href="../pages/review.html">flagged for review</a> · <a href="../capture/index.html">official capture</a></li>
+    <li><a href="../index.html">the repository's main landing page</a></li>
+  </ul>
+</div>
+
+<p class="foot">Built 2026-11-16T14:36:42Z by session <code>2b927826-nfl1</code> from <code>data/session-2b927826/*.json</code> only.
+Every table row carries a source link or states that no value is published. Research tool, not betting advice.
+<a href="verification.html">How every value was checked &rarr;</a></p>
+</main>
+</body>
+</html>
