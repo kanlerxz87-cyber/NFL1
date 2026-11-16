@@ -29,12 +29,32 @@ Sessions that have worked here:
 
 | `9411723a-nfl1` | `arena/9411723a-nfl1` | Verification of the committed site, official-source spot checks, new flag F41 (standings snapshot vs live drift), PR -> main -> merge -> Pages deploy, integration record | active |
 | `c56ebee8-nfl1` | `arena/c56ebee8-nfl1` | Final integration: 2026-11-13 official re-verification, unified category dashboard with sidebar, 1st-to-6th string depth ladder (flags F42-F47), correlations/parlays/luck pages, PR -> main -> merge -> Pages | active |
+| `f3ec786a-nfl1` | `arena/f3ec786a-nfl1` | Official-source verification of standings/schedule/injuries reachable from the sandbox, executive summary + questions + suggestions deliverables, flag register of verified irregularities, site build + link check, PR -> merge -> Pages confirm | active |
 
 ---
 
 > Branch naming: Arena fixes each session to a single branch named `arena/<session>-nfl1`, so the
 > `session-<id>/<task>` convention in the brief cannot be followed here. Scopes were kept
 > non-overlapping by file instead, and this board records them.
+
+## Session `f3ec786a-nfl1` — claims (branch `arena/f3ec786a-nfl1`, base `46c82ae` on `main`, 2026-11-16)
+
+Claimed before any other edit. Scope is additive; nothing owned by another active session is rewritten.
+No open claim on the board covered these files at the time of claiming.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| F1 | Claim and push this block | done | `f3ec786a` | `COORDINATION.md` | this block |
+| F2 | Live re-fetch of official nfl.com standings, schedule and injury report reachable from the sandbox; compare to committed snapshots; log every drift | in progress | `f3ec786a` | `data/flags.json`, `room/data/findings.json` | read-only on official pages; committed files treated as evidence, not silently patched |
+| F3 | Executive summary deliverable refreshed to state what holds up, what does not, what is missing, what a human must decide | pending | `f3ec786a` | `executive-summary.html`, `room/data/executive.json` | companion Decision Room page `room/executive.html` already exists |
+| F4 | Questions/information/answers deliverable confirmed complete: every gating question has known/missing/how-to-discover/what-it-blocks | pending | `f3ec786a` | `questions.html`, `room/data/questions.json` | 22 questions already committed (Q-01..Q-22) |
+| F5 | Suggestions deliverable confirmed complete: ranked improvements each tied to a decision and a finding | pending | `f3ec786a` | `suggestions.html`, `room/data/suggestions.json` | 15 suggestions already committed (SG-01..SG-15) |
+| F6 | Site build + broken-link check; regenerate only pages I own; commit generated output | pending | `f3ec786a` | generated pages under my scope only | `check_reachability.py` problems must be 0 |
+| F7 | Pull request from `arena/f3ec786a-nfl1` to `main`, merge, confirm GitHub Pages deploys; record PR link and merge result here | pending | `f3ec786a` | `COORDINATION.md` | do not merge a broken site |
+
+Overlap note: I do not touch `data/reserve/**`, `data/model/availability.json`, `pipeline/gen_site.py`, `scripts/verified/normalize_nav.py`, `tools/build_site_all.py` or `.github/workflows/*.yml` — those are owned by active sessions `1d824ec2`, `77`, `80`, `47`. My nav additions, if any, are pure append.
+
+_This claim is committed and pushed before any other file is touched, per the brief._
 
 ## Session `543676f8-nfl1` — claims (branch `arena/543676f8-nfl1`, base `5a769b3`, 2026-11-15)
 
