@@ -4140,3 +4140,11 @@ PR **#105** (`arena/9a1c5fa6-nfl1` → `main`) **merged** as `be35682` (merge co
 * **Visible on the live landing page:** "Games analysed 137 · week 10 complete". The true count from the official standings is 149. This is the stale-capture gap in R1-REQ-01, published as-is. Not corrected here, because the fix is outside R1's scope.
 
 R1 is done for Weeks 1–10 of 2026 and is merged. Still open for other sessions or the integration session: R1-I (readiness row PR-02 to Partial, the Flagged for Review page), R1-REQ-01, the 13 Week 10 finals (F-R1-01), the Monday game (F-R1-02), pre-2026 seasons (F-R1-03), and terms counsel review (F-R1-04).
+
+### Merge record — session `49ac3a99-nfl1` (PR #101, 2026-11-16 UTC)
+
+- **PR:** <https://github.com/kanlerxz87-cyber/NFL1/pull/101> — merged with `--merge` on 2026-11-16T18:14:04Z, merge commit `34d05b0` on `main`.
+- **Checks on the final PR head before merge (`e0039f2`):** `build`, `build-and-verify`, `source-audit`, `verify` ×2 — all pass. The `pages build and deployment` run for `34d05b0` completed with `success`.
+- **Live:** <https://kanlerxz87-cyber.github.io/NFL1/schedule_announcement/> read through the fetch tool on 2026-11-16: 13 fixtures, 6 byes, announcement rows and every game link present. The sandbox itself cannot reach github.io (outbound allow-list), so the fetch tool is the evidence.
+- **Board status:** S1 done, S2 done, S3 done. Flags F-49AC-01..03 open for review (non-blocking).
+- **Changes that landed in PR #101:** `schedule_announcement/**`, `data/schedule_announcement/**`, `tools/check_schedule_announcement.py`, `tests/test_schedule_announcement.py`; one additive nav entry each in `pipeline/gen_site.py` and `scripts/verified/normalize_nav.py`; the audit's current-state reference moved to a new T5 retrieval (`tools/audit_official.py`, `data/audit/49ac3a99/`); regenerated pages and reports from `build_site_all.py` and `verify.py`.
