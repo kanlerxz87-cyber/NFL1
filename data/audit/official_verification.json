@@ -1,16 +1,16 @@
 {
- "generated_at": "2026-11-16T18:38:55+00:00",
+ "generated_at": "2026-11-16T15:27:59+00:00",
  "official_sources": {
   "standings": "https://www.nfl.com/standings/league/2026/reg",
   "injuries": "https://www.nfl.com/injuries/",
   "schedule": "https://www.nfl.com/schedules/2026/REG10",
   "depth_charts": "club official depth-chart pages (URL per row in data/evidence/depth_charts.json)"
  },
- "result": "PASS",
+ "result": "FAIL",
  "counts": {
-  "passed": 24,
-  "flagged": 4,
-  "failed": 0
+  "passed": 19,
+  "flagged": 8,
+  "failed": 1
  },
  "checks": [
   {
@@ -85,17 +85,17 @@
   },
   {
    "area": "B2. injuries",
-   "check": "data/model/official_injuries.json (automated scrape, 2026-11-15)",
-   "status": "PASS",
+   "check": "data/model/official_injuries.json (automated scrape)",
+   "status": "FLAG",
    "rows_checked": 347,
-   "detail": "every cell matches the official page"
+   "detail": "value mismatches: NE A.J. Brown injury: repo='Ankle, Knee' official=''; NE A.J. Brown game: repo='Questionable' official=''; NE Kevin Byard injury: repo='Chest' official=''; NE Kevin Byard practice: repo='Full Participation in Practice' official='Limited Participation in Practice'; NE Kevin Byard game: repo='Questionable' official='' | repo rows not on official page: [('KC', 'Jaydn Ott'), ('KC', 'Kenneth Walker III'), ('ATL', 'Kendal Daniels'), ('ATL', 'Jake Matthews'), ('ATL', 'Liam McCullough')]"
   },
   {
    "area": "B2. injuries",
-   "check": "data/verified/injury_report_2026_week10.tsv (rebuilt 2026-11-15)",
-   "status": "PASS",
-   "rows_checked": 347,
-   "detail": "every cell matches the official page"
+   "check": "data/verified/injury_report_2026_week10.tsv (hand transcription)",
+   "status": "FLAG",
+   "rows_checked": 254,
+   "detail": "value mismatches: IND A.J. Haulcy practice: repo='Did Not Participate In Practice' official='Full Participation in Practice'; IND Jonathan Taylor practice: repo='Limited Participation in Practice' official='Full Participation in Practice'; IND Jerry Tillery practice: repo='Limited Participation in Practice' official='Did Not Participate In Practice'; IND Charvarius Ward practice: repo='Did Not Participate In Practice' official='Full Participation in Practice' | 25 official rows absent from repo, e.g. [('AZ', 'Andrew Wingard'), ('CIN', 'DJ Turner II'), ('CIN', 'Dylan Fairchild'), ('CIN', 'Jonathan Allen'), ('CIN', 'Kyle Dugger')]"
   },
   {
    "area": "B2. injuries",
@@ -106,21 +106,21 @@
   },
   {
    "area": "B2. injuries",
-   "check": "per-club row counts: scrape vs the 2026-11-15 official page",
-   "status": "PASS",
-   "rows_checked": 347,
-   "detail": "all 28 publishing clubs have the same number of rows"
+   "check": "per-club row counts: scrape vs official page",
+   "status": "FLAG",
+   "rows_checked": 279,
+   "detail": "ATL: 11/6; AZ: 15/14; BUF: 14/11; CIN: 9/4; CLE: 12/11; DAL: 19/16; GB: 17/16; HOU: 16/13; IND: 14/13; KC: 13/11; LA: 14/10; LV: 5/4; MIA: 11/10; MIN: 13/9; NO: 12/10; NYJ: 9/7"
   },
   {
    "area": "B2. injuries",
-   "check": "per-club row counts: tsv vs the 2026-11-15 official page",
-   "status": "PASS",
-   "rows_checked": 347,
-   "detail": "all 28 publishing clubs have the same number of rows"
+   "check": "per-club row counts: tsv vs official page",
+   "status": "FLAG",
+   "rows_checked": 279,
+   "detail": "AZ: 13/14; CIN: 0/4; IND: 11/13; JAX: 10/11; SEA: 0/15; SF: 10/12"
   },
   {
    "area": "B2. injuries",
-   "check": "per-club row counts: companion vs the 2026-11-12 official page",
+   "check": "per-club row counts: companion vs official page",
    "status": "FLAG",
    "rows_checked": 279,
    "detail": "AZ: 0/14; BUF: 0/11; CAR: 0/12; CIN: 0/4; CLE: 0/11; DAL: 0/16; GB: 0/16; HOU: 0/13; IND: 0/13; JAX: 0/11; LA: 0/10; LV: 0/4; MIA: 0/10; MIN: 0/9; NO: 0/10; NYJ: 0/7; PIT: 0/8; SEA: 0/15; SF: 0/12; TEN: 0/12"
@@ -171,8 +171,8 @@
    "area": "C. convention",
    "check": "games where model and market favour different sides (sign ambiguity risk)",
    "status": "FLAG",
-   "rows_checked": 2,
-   "detail": "PIT@PHI, BAL@CAR"
+   "rows_checked": 1,
+   "detail": "BAL@CAR"
   },
   {
    "area": "D. availability",
@@ -192,21 +192,21 @@
    "area": "D. availability",
    "check": "practice-only rows are not labelled as game designations",
    "status": "PASS",
-   "rows_checked": 112,
+   "rows_checked": 116,
    "detail": ""
   },
   {
    "area": "E. counts",
-   "check": "games played = half the sum of club games",
-   "status": "PASS",
-   "rows_checked": 149,
-   "detail": "current official standings imply 149"
+   "check": "games played reconciles with current official standings",
+   "status": "FAIL",
+   "rows_checked": 137,
+   "detail": "sum of club games / 2 = 149"
   },
   {
    "area": "E. counts",
    "check": "starters flagged matches availability detail",
    "status": "PASS",
-   "rows_checked": 112,
+   "rows_checked": 116,
    "detail": ""
   }
  ]
