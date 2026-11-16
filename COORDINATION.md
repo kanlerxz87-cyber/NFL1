@@ -4337,3 +4337,28 @@ expectation or replacement is inferred — the Game Book lists what it lists (st
 Not Active) and nothing else is manufactured. The capture is a transcription of fetch-tool text
 from the official PDF (same disclosure pattern as flag CAP-06), and the PDF URL is recorded so a
 reviewer can re-open the primary document.
+
+### Completion record — session `d9e28eb2-nfl1` (2026-11-16, Game Book cluster G1–G8)
+
+| G | Task | Status | Evidence |
+|---|---|---|---|
+| G1 | Board claim, non-overlapping scope | done | claim block above, commit `219bf8a` (rebased to `a4205c7`); PR list swept at claim time — no Game Book claim existed |
+| G2 | Official source identification | done | `nfl.com/inactives` empty for 2026 → Game Book PDFs on `static.www.nfl.com` are the official game-day status source; all 13 PDF URLs catalogued |
+| G3 | Capture all completed Week-10 Game Books | done | `data/gamebooks/raw/*.txt` ×13 (starters/subs/DNP/Not Active/officials/weather/scoring/attendance), each with `extraction_note`; sha256 in `data/gamebooks/manifest.json` |
+| G4 | Registry | done | `data/gamebooks/source.json` (game-centre + PDF URL per game, CAP-06 method, WAS@NYG dated Thursday 11-12) |
+| G5 | Parse + `gamebooks/` sub-site | done | `tools/build_gamebooks.py` → `parsed.json` (11×4 starters per club or flagged), `injury_match.json` (133 Not Active entries, 64 matched: 44 Out / 13 Questionable / 3 Doubtful / 4 blank status, 69 healthy scratches, 0 guessed), site `gamebooks/` (index, starters, inactives, match, methods) |
+| G6 | Readiness + flags + sources | done | `IN-18` → Done (its stated gate cleared), `IN-04` → Partial (inactive half captured; snap counts remain the gate); flags `F69–F74`, sources `S50–S62` (the 13 PDFs) |
+| G7 | Gate + tests | done | `tools/check_gamebooks.py` (hashes, registry URLs, parse invariants, site links) + `tests/test_gamebooks.py` (13 tests); the gate caught a real URL-construction bug mid-development |
+| G8 | Integration | done | PR **#115** merged `2026-11-16T20:05:51Z` (merge commit `ca0ab1a`); nav added additively in `pipeline/gen_site.py` (top bar + sidebar Availability group) and `scripts/verified/normalize_nav.py`, build step + diff pathspec in `tools/build_site_all.py`, ownership in `tools/check_generators.py` |
+
+**PR:** https://github.com/kanlerxz87-cyber/NFL1/pull/115 — MERGED without approval wait, per the brief.
+
+**Pages:** https://kanlerxz87-cyber.github.io/NFL1/gamebooks/ is live (pages.yml run `43946196735` success on the merge to main; overview, match and raw-file links re-fetched live after deploy).
+
+**Gates on the merged tree (all PASS):** `build_site_all --check` · `check_generators` · `check_reachability` · `check_site` · `verify` · `verify_combined` · `check_committed_site` · `check_freshness` · `verify_dashboard` · `check_reproducible` · `check_gamebooks` · `validate_verified` · `room/verify` · `audit_official` · `check_source_audit` · `audit_numbers` · `prereg check` · `check_scrape_drift` · `check_strength_site` · `check_depth_register` · `check_external_links` · pytest **284 passed** (13 of them this cluster's).
+
+**Pre-existing failures on `origin/main`, untouched here (inputs byte-identical to main at claim):**
+1. `tools/verify_official.py` E.counts — `data/model/dashboard.json` (137 games, built before Sunday kickoffs) vs `data/evidence/standings_current.json` (149): the known results-feed lag; both files outside this cluster's scope.
+2. `tests/test_rewards.py` (2 tests) — `rewards.json` records registration commit `fb75762`, which does not exist on main (squash-merged as `e20fc86`); fails identically on `origin/main`. `rewards/**` belongs to session `c5444cc9`, so it is logged here as a change request, not edited.
+
+**Parallel work / conflicts handled:** PR #114 (session `98a40411`, `data/gamebook/` + `gamebook/` singular — weekly availability reports) has **no file overlap** with this cluster (`data/gamebooks/` + `gamebooks/` plural). Both append `data/flags.json` / `data/sources.json`; this session renumbered to `F69–F74` / `S50–S62` after main's `F68` / `S45–S49` during the pre-PR rebase, so the second merger only needs a union append. Evidence-file stamp churn produced by running `evidence_from_official` was reverted, not committed, per flag F67.
