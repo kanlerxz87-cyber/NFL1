@@ -68,6 +68,10 @@ STEPS = [
     ("shadow team view and delta", [sys.executable, "tools/build_team_view.py"], ROOT),
     ("shadow sub-site (shadow/)", [sys.executable, "tools/build_shadow_site.py"], ROOT),
     ("landing page and decision lab", [sys.executable, "gen_site.py"], os.path.join(ROOT, "pipeline")),
+    # Session a35ddf45-nfl1: the Origination Desk sub-site (lab2/). One additive step, after the
+    # landing page so the nav entry it adds is not overwritten, and before the pages that link it.
+    ("origination desk (lab2/)", [sys.executable, "lab2/build_data.py"], ROOT),
+    ("origination desk pages (lab2/)", [sys.executable, "lab2/render.py"], ROOT),
     # Session 90c2b454-nfl1 (P3): the injury-snapshot ledger, rendered from its own store.
     ("injury snapshot ledger", [sys.executable, "tools/build_snapshots_page.py"], ROOT),
     # Session 739408a8-nfl1 (P1): pre-registration ledger. `check` fails on any changed frozen rule,
@@ -95,7 +99,7 @@ def main() -> int:
 
     if check:
         print("--- checking that the committed pages equal the generated pages")
-        r = subprocess.run(["git", "diff", "--exit-code", "--", "*.html", "README.md", "docs/", "verified-lab/", "referee/"],
+        r = subprocess.run(["git", "diff", "--exit-code", "--", "*.html", "README.md", "docs/", "verified-lab/", "referee/", "lab2/"],
                            cwd=ROOT)
         if r.returncode != 0:
             print("FAILED: the committed pages differ from the generated pages "

@@ -61,6 +61,8 @@ NAV = [
     ("pages/decisions.html", "Decision Register"),
     ("pages/verified.html", "Verified Artifacts"),
     ("pages/models.html", "Models"),
+    # Session a35ddf45-nfl1: the Origination Desk sub-site (additive entry, logged on the board).
+    ("lab2/index.html", "Origination Desk"),
     ("pages/flagged.html", "Flagged (companion)"),
 ]
 
@@ -97,6 +99,8 @@ SIDEBAR = [
                          ("pages/decisions.html", "Decision register"),
                          ("pages/verified.html", "Verified artifacts"),
                          ("pages/models.html", "Models"),
+    # Session a35ddf45-nfl1: the Origination Desk sub-site (additive entry, logged on the board).
+    ("lab2/index.html", "Origination Desk"),
                          ("pages/executive-summary.html", "Executive summary (companion)"),
                          ("pages/flagged.html", "Flagged (companion)"),
                          # Session 739408a8-nfl1 (P1): pre-registration ledger for the forward test.
