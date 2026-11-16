@@ -3790,3 +3790,29 @@ Scope is deliberately small: this session can verify against official pages, not
 | Still open | F51, F60 (terms — owner/counsel decision), F61 (NFL log gap), F62 (verifier allow-list for team posts). None blocks; all need review. |
 
 Z1–Z4 are done. Items in the brief outside Z1–Z4 are unclaimed and unchanged.
+
+---
+
+## Session `0b7ea3a9-nfl1` — claim: official Week 10 Game Book source index (2026-11-16 UTC)
+
+Read the shared board and inspected the open PR file scopes before claiming. This is a narrow,
+additive source-discovery task for the existing independent `referee/` sub-site. It does not
+claim any of the open origination, injury/depth, roster, terms, or integration work. The Arena
+branch is fixed as `arena/0b7ea3a9-nfl1`; the requested `session-<id>/<task>` naming is therefore
+not available. Root landing/navigation, shared readiness and model data, and raw PDFs are out of
+scope. The sub-site will publish only source URLs and extraction status; actual starter, inactive,
+and snap-count values remain blank unless read and verified from the official source.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| GB1 | Claim task before editing product files | in progress | `0b7ea3a9` | `COORDINATION.md` | Claim commit is pushed before other file edits |
+| GB2 | Verify the official 2026 REG10 schedule and each completed game's official Game Center; record the Game Book PDF link only where the live official page exposes it | in progress | `0b7ea3a9` | `referee/data/gamebooks_week10_2026.json` | 13 completed games in the current schedule read; the Monday game is still scheduled at capture time |
+| GB3 | Publish a source-index page in the independent Referee sub-site; show source-linked rows and leave starter/inactive/snap fields blank pending PDF extraction | in progress | `0b7ea3a9` | `referee/gamebooks.html`, `referee/tools/build_gamebooks.py`, `referee/tools/build_site.py`, `referee/index.html` (Referee-only nav) | No root index or canonical root navigation changes |
+| GB4 | Add schema/link/blank-field checks and run the Referee page checks | in progress | `0b7ea3a9` | `referee/tools/check_gamebooks.py`, `tests/test_gamebooks_index.py` | No external network required by tests |
+| GB5 | Record official-source retrieval, limitations and any integration follow-up | in progress | `0b7ea3a9` | `COORDINATION.md` | Final integration remains with the designated integration session while other PRs are open |
+
+**Scope coordination.** Open PRs at claim time: #47, #57, #59, #77, #79, #80 and #81. None
+claims the new `referee/data/gamebooks_week10_2026.json` or gamebook page. PRs #77/#79/#80 touch
+other shared files and are deliberately not edited here. Existing root navigation already reaches
+the Referee sub-site; the only planned navigation addition is the new page link inside the Referee
+sub-site itself. No raw PDF or player-level table is copied into the public repository.
