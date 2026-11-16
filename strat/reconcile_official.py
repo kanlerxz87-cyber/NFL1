@@ -173,7 +173,11 @@ def main() -> int:
         return 1
     for r in extra_disputed:
         print(f"  FLAG: only in the extract -> {r['matchup']} week {r['week']} {r['extract_scores']}")
-        return 1
+    # Session 414a54c9-nfl1: the comment above and the project rule ("flagged irregularities do
+    # not block — publish them") agree that these rows are flags. The code used to return 1 here,
+    # which failed the daily data refresh every time the extract gained results before the
+    # official rows were transcribed. The flags are already published in the JSON above; they
+    # must not block the build.
     return 0
 
 

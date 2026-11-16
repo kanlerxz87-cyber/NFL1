@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-15T13:18:48+00:00",
+ "generated_at": "2026-11-16T15:31:53+00:00",
  "question": "Do the official nfl.com rows agree with the third-party extract used for the backtest? (readiness PR-02, open question Q03)",
  "official_files": [
   "data/verified/games_2026.csv",
@@ -20,83 +20,24 @@
    "LAR": "LA"
   },
   "times_applied": {
-   "AZ": 9
+   "AZ": 9,
+   "LAR": 1
   },
   "why": "nfl.com prints Arizona as AZ and the Rams as LAR; the extract uses ARI and LA. The mapping is a finding (flag CAP-05), not a convenience."
  },
  "totals": {
-  "official_rows": 137,
-  "matched": 137,
+  "official_rows": 149,
+  "matched": 149,
   "mismatched": 0,
   "absent_from_extract": 0,
-  "extract_only_unplayed_fixtures": 135,
+  "extract_only_unplayed_fixtures": 123,
   "extract_only_played_rows": 0
  },
  "mismatched_game_ids": [],
  "absent_game_ids": [],
  "extract_only_unplayed_fixtures": [
   {
-   "matchup": "BUF @ NYJ",
-   "week": 10,
-   "extract_scores": "-"
-  },
-  {
-   "matchup": "CAR @ NO",
-   "week": 10,
-   "extract_scores": "-"
-  },
-  {
-   "matchup": "HOU @ CLE",
-   "week": 10,
-   "extract_scores": "-"
-  },
-  {
-   "matchup": "JAX @ TEN",
-   "week": 10,
-   "extract_scores": "-"
-  },
-  {
-   "matchup": "KC @ ATL",
-   "week": 10,
-   "extract_scores": "-"
-  },
-  {
    "matchup": "LAC @ BAL",
-   "week": 10,
-   "extract_scores": "-"
-  },
-  {
-   "matchup": "LA @ ARI",
-   "week": 10,
-   "extract_scores": "-"
-  },
-  {
-   "matchup": "MIA @ IND",
-   "week": 10,
-   "extract_scores": "-"
-  },
-  {
-   "matchup": "MIN @ GB",
-   "week": 10,
-   "extract_scores": "-"
-  },
-  {
-   "matchup": "NE @ DET",
-   "week": 10,
-   "extract_scores": "-"
-  },
-  {
-   "matchup": "PIT @ CIN",
-   "week": 10,
-   "extract_scores": "-"
-  },
-  {
-   "matchup": "SEA @ LV",
-   "week": 10,
-   "extract_scores": "-"
-  },
-  {
-   "matchup": "SF @ DAL",
    "week": 10,
    "extract_scores": "-"
   },
@@ -2633,6 +2574,174 @@
    "official_source": "https://www.nfl.com/games/commanders-at-giants-2026-reg-10",
    "retrieved_at": "2026-11-15T13:20Z",
    "provenance": "fetched by c7b65577-nfl1"
+  },
+  {
+   "game_id": "2026_REG_10_NE_DET",
+   "week": 10,
+   "matchup": "NE @ DET",
+   "official_away": 10,
+   "official_home": 35,
+   "extract_away": 10,
+   "extract_home": 35,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/games/patriots-at-lions-2026-reg-10",
+   "retrieved_at": "2026-11-16T14:40Z",
+   "provenance": "fetched by 414a54c9-nfl1"
+  },
+  {
+   "game_id": "2026_REG_10_KC_ATL",
+   "week": 10,
+   "matchup": "KC @ ATL",
+   "official_away": 35,
+   "official_home": 13,
+   "extract_away": 35,
+   "extract_home": 13,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/games/chiefs-at-falcons-2026-reg-10",
+   "retrieved_at": "2026-11-16T14:40Z",
+   "provenance": "fetched by 414a54c9-nfl1"
+  },
+  {
+   "game_id": "2026_REG_10_HOU_CLE",
+   "week": 10,
+   "matchup": "HOU @ CLE",
+   "official_away": 24,
+   "official_home": 27,
+   "extract_away": 24,
+   "extract_home": 27,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/games/texans-at-browns-2026-reg-10",
+   "retrieved_at": "2026-11-16T14:40Z",
+   "provenance": "fetched by 414a54c9-nfl1"
+  },
+  {
+   "game_id": "2026_REG_10_MIN_GB",
+   "week": 10,
+   "matchup": "MIN @ GB",
+   "official_away": 30,
+   "official_home": 10,
+   "extract_away": 30,
+   "extract_home": 10,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/games/vikings-at-packers-2026-reg-10",
+   "retrieved_at": "2026-11-16T14:40Z",
+   "provenance": "fetched by 414a54c9-nfl1"
+  },
+  {
+   "game_id": "2026_REG_10_MIA_IND",
+   "week": 10,
+   "matchup": "MIA @ IND",
+   "official_away": 22,
+   "official_home": 24,
+   "extract_away": 22,
+   "extract_home": 24,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/games/dolphins-at-colts-2026-reg-10",
+   "retrieved_at": "2026-11-16T14:40Z",
+   "provenance": "fetched by 414a54c9-nfl1"
+  },
+  {
+   "game_id": "2026_REG_10_CAR_NO",
+   "week": 10,
+   "matchup": "CAR @ NO",
+   "official_away": 20,
+   "official_home": 17,
+   "extract_away": 20,
+   "extract_home": 17,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/games/panthers-at-saints-2026-reg-10",
+   "retrieved_at": "2026-11-16T14:40Z",
+   "provenance": "fetched by 414a54c9-nfl1"
+  },
+  {
+   "game_id": "2026_REG_10_BUF_NYJ",
+   "week": 10,
+   "matchup": "BUF @ NYJ",
+   "official_away": 31,
+   "official_home": 12,
+   "extract_away": 31,
+   "extract_home": 12,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/games/bills-at-jets-2026-reg-10",
+   "retrieved_at": "2026-11-16T14:40Z",
+   "provenance": "fetched by 414a54c9-nfl1"
+  },
+  {
+   "game_id": "2026_REG_10_JAX_TEN",
+   "week": 10,
+   "matchup": "JAX @ TEN",
+   "official_away": 40,
+   "official_home": 23,
+   "extract_away": 40,
+   "extract_home": 23,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/games/jaguars-at-titans-2026-reg-10",
+   "retrieved_at": "2026-11-16T14:40Z",
+   "provenance": "fetched by 414a54c9-nfl1"
+  },
+  {
+   "game_id": "2026_REG_10_LAR_ARI",
+   "week": 10,
+   "matchup": "LA @ ARI",
+   "official_away": 34,
+   "official_home": 6,
+   "extract_away": 34,
+   "extract_home": 6,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/games/rams-at-cardinals-2026-reg-10",
+   "retrieved_at": "2026-11-16T14:40Z",
+   "provenance": "fetched by 414a54c9-nfl1"
+  },
+  {
+   "game_id": "2026_REG_10_SEA_LV",
+   "week": 10,
+   "matchup": "SEA @ LV",
+   "official_away": 21,
+   "official_home": 13,
+   "extract_away": 21,
+   "extract_home": 13,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/games/seahawks-at-raiders-2026-reg-10",
+   "retrieved_at": "2026-11-16T14:40Z",
+   "provenance": "fetched by 414a54c9-nfl1"
+  },
+  {
+   "game_id": "2026_REG_10_SF_DAL",
+   "week": 10,
+   "matchup": "SF @ DAL",
+   "official_away": 46,
+   "official_home": 40,
+   "extract_away": 46,
+   "extract_home": 40,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/games/49ers-at-cowboys-2026-reg-10",
+   "retrieved_at": "2026-11-16T14:40Z",
+   "provenance": "fetched by 414a54c9-nfl1"
+  },
+  {
+   "game_id": "2026_REG_10_PIT_CIN",
+   "week": 10,
+   "matchup": "PIT @ CIN",
+   "official_away": 18,
+   "official_home": 38,
+   "extract_away": 18,
+   "extract_home": 38,
+   "agrees": true,
+   "status": "agrees",
+   "official_source": "https://www.nfl.com/games/steelers-at-bengals-2026-reg-10",
+   "retrieved_at": "2026-11-16T14:40Z",
+   "provenance": "fetched by 414a54c9-nfl1"
   }
  ]
 }
