@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-15T13:55:47Z",
+ "generated_at": "2026-11-16T06:04:36Z",
  "note": "Every number is computed from the file named in computed_from. A blank threshold is a decision nobody has made yet, and is flagged rather than filled in.",
  "legend": {
   "met": "the number that clears the gate is reached",
@@ -56,7 +56,7 @@
    "id": "R5",
    "requirement": "Injury designations tracked as a timestamped series (the surprise, not the level)",
    "blocking_gate": "At least 2 capture days, with at least 1 recorded designation change",
-   "number_now": "1 capture day(s); 0 designation change(s) recorded",
+   "number_now": "2 capture day(s); 0 designation change(s) recorded",
    "number_to_clear": "2 capture days and 1 recorded change",
    "status": "partial",
    "computed_from": "data/snapshots/injury_report/heartbeat.jsonl and changes.jsonl",
