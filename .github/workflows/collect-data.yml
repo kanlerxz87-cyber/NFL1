@@ -9,6 +9,10 @@ on:
     # A branch-scoped push trigger is used instead of workflow_dispatch because
     # workflow_dispatch cannot resolve a workflow that only exists on a non-default
     # branch. Bot commits carry [skip ci] so this never loops.
+    # Note (session bf26453d, 2026-11-16): the GitHub API also rejects
+    # workflow_dispatch for this repository's integration tokens (HTTP 403,
+    # "Resource not accessible by integration"), so a push that touches this file
+    # is the only hands-free way to request a refresh mid-day.
     branches: ["arena/**", main]
     paths: ["pipeline/**", ".github/workflows/collect-data.yml"]
   schedule:
