@@ -58,7 +58,7 @@ jobs:
           python3 pipeline/collect_transactions.py derive
           python3 tools/check_depth_staleness_1d824ec2.py
           python3 tools/build_reserve_site.py
-      - name: Gate: hashes, pins, freshness, row-level source links, page reachability
+      - name: "Gate: hashes, pins, freshness, row-level source links, page reachability"
         if: always()
         run: |
           python3 pipeline/collect_transactions.py verify --max-age-hours 26
