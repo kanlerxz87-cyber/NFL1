@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-16T14:52:20+00:00",
+ "generated_at": "2026-11-16T15:04:21+00:00",
  "evidence": {
   "season": 2026,
   "week_complete": 10,
@@ -2128,9 +2128,10 @@
    "impact": "Legal and licence exposure for the public site and for the snapshot pipeline. Not a values error: the published numbers match the official page. The fix is a product decision: (a) obtain written consent from NFL Enterprises, LLC, (b) keep row-level nfl.com content in a private store and publish only aggregate counts and links to the official page, or (c) remove the scrape. This session did not remove any published content, so the decision is left to the owner.",
    "status": "needs review",
    "src": "S01",
-   "action": "Owner decision before the next scheduled capture. Legal review is recommended. Option (b) is the smallest change: the snapshot page would show counts and deltas and link to https://www.nfl.com/injuries/ for names.",
+   "action": "Owner decision before the next scheduled capture. Legal review is recommended. Option (b) is the smallest change: the snapshot page would show counts and deltas and link to https://www.nfl.com/injuries/ for names. Traceability fix applied 2026-11-16 by the 414a54c9 integration (request of session 48ab654c): the source cell now links S35 (NFL.com Terms) directly alongside S01.",
    "verified": true,
-   "retrieved": "2026-11-15"
+   "retrieved": "2026-11-15",
+   "data_src": "S35"
   },
   {
    "id": "F52",
@@ -2515,6 +2516,74 @@
    "action": "Owner decision: (a) allow x.com status URLs of the 32 club accounts as official sources, changing OFFICIAL_DOMAINS in tools/verify.py, or (b) keep the team post as an unregistered note only. Option (a) also needs a rule for which account counts as official.",
    "verified": true,
    "retrieved": "2026-11-16"
+  },
+  {
+   "id": "F63",
+   "category": "Dated drift: standings snapshot vs official page",
+   "description": "The repo's two standings copies (data/model/snapshot.json, generated 2026-11-15T17:42Z, and data/verified/standings_2026.csv, retrieved 2026-11-12T04:31Z) agree with each other on all 32 teams but both predate the 13 Week-10 finals. Read on 2026-11-16, the official standings page shows 24 teams with changed records (e.g. BUF 7-1-0 256-187 -> 8-1-0 287-199). The snapshot also labels itself last_completed_week 10 while its standings rows equal the pre-Sunday state \u2014 a mid-Sunday generation artefact, not a values error.",
+   "impact": "Any consumer treating the snapshot as current Week-10 standings is one week off. Ratings and Week-11 own lines computed from it use Week-9 records. Deltas are published in data/session-414a54c9/recheck_2026-11-16.json; nothing was overwritten.",
+   "status": "open",
+   "src": "S26",
+   "action": "Let the scheduled collector refresh the snapshot (it runs on schedule), and consider stamping the standings sub-object with its own as-of date so a mid-week generation cannot look like a full-week one.",
+   "retrieved": "2026-11-16",
+   "verified": true
+  },
+  {
+   "id": "F64",
+   "category": "Backtest corpus: Week-10 scores blank by policy",
+   "description": "The frozen corpus data/s9cb/games.csv (sha-pinned in data/prereg/corpus.json) carries the 14 Week-10 rows with blank scores for the 13 games played 2026-11-15/16 (only WAS@NYG has 24-21, played before registration). This is correct under the pre-registration policy: the corpus was frozen before results existed and must not be edited. The official results are now final and are recorded as the separately labelled record data/session-414a54c9/official_2026-11-16/week10_results.tsv.",
+   "impact": "Backtests over the frozen corpus cannot score Week-10 games until the results are ingested through a separately labelled, provenance-pinned record (as prereg/corpus.json and session 55dc53f4 planned). No gate is blocked; the prospective Week-11 shadow forecast is unaffected.",
+   "status": "open",
+   "src": "S27",
+   "action": "When the shadow scoring window needs them, ingest the 13 finals from the official game pages into a dated results record with its own hash, never into games.csv.",
+   "retrieved": "2026-11-16",
+   "verified": true
+  },
+  {
+   "id": "F65",
+   "category": "Depth source gap (from the backup register)",
+   "description": "nfl.com publishes no league depth-chart page (https://www.nfl.com/teams/kansas-city-chiefs/depth-chart returns 404, re-probed 2026-11-13). The backup register (pages/backup-register.html) therefore keeps depth order blank on every row and lists same-position ACT backups from the official roster instead. Some roster pages link to club-site depth charts; those are separate sources and are not parsed here.",
+   "impact": "The 2nd/3rd/4th-string deficiency feature cannot rank backups from nfl.com alone. Two verified routes exist: per-club official depth chart pages (6 clubs captured in data/depth_raw/, 4 clubs in data/depth/) and snap counts. Both partial.",
+   "status": "needs review",
+   "src": "S37",
+   "action": "Decide the depth-order source (brief item: resolve the depth-order source before building the backup-deficiency feature). The d4027f66 and 57c05555 sessions' captures cover 6 of 32 clubs.",
+   "retrieved": "2026-11-16",
+   "verified": true
+  },
+  {
+   "id": "F66",
+   "category": "Official sources disagree: Ben Brown position",
+   "description": "The Week-10 injury report lists Ben Brown (NE) at C (https://www.nfl.com/injuries/league/2026/reg10); the official Patriots roster lists him at G (https://www.nfl.com/teams/new-england-patriots/roster). Both values are published as printed. Re-confirmed on the report 2026-11-16. Both positions are in the same OL group, so backup-group counts are unaffected.",
+   "impact": "Position-specific models that key on C vs G would disagree depending on the surface chosen. No published number is wrong; the two official surfaces simply differ.",
+   "status": "needs review",
+   "src": "S01",
+   "data_src": "S37",
+   "action": "Pick the authoritative surface for position labels (report vs roster) and record the decision; do not silently harmonise.",
+   "retrieved": "2026-11-16",
+   "verified": true
+  },
+  {
+   "id": "F67",
+   "category": "Official sources disagree: Kerby Joseph status",
+   "description": "The Week-10 injury report gives Kerby Joseph (DET) game status Out (https://www.nfl.com/injuries/league/2026/reg10, re-read 2026-11-16); the official Lions roster shows PUP (https://www.nfl.com/teams/detroit-lions/roster). Both values are published as printed. The backup register shows both.",
+   "impact": "Availability counts differ by surface: Out (report) vs PUP (roster). The CAP-04 finding (blank game-status cells in the old hand copy) is unaffected: the official report says Out.",
+   "status": "needs review",
+   "src": "S01",
+   "data_src": "S37",
+   "action": "Same as F66: choose the authoritative status surface for availability modelling and record the decision.",
+   "retrieved": "2026-11-16",
+   "verified": true
+  },
+  {
+   "id": "F68",
+   "category": "Backup register: roster rows not re-read line by line",
+   "description": "In the backup register (session cf97db19), the WAS, NE and NYG roster rows are scraped and hash-recorded (data/backup-register/rosters_2026.json) but were not re-read line by line against the live pages. Every other club's rows used in the register were re-read. NE rows were partially re-confirmed 2026-11-16 via the injury report (F66).",
+   "impact": "Three clubs' backup lists carry scrape-only provenance. The register labels each such row 'not yet re-read'. No value is inferred.",
+   "status": "needs review",
+   "src": "S37",
+   "action": "Re-read the three roster pages line by line at the next capture window and clear the row labels.",
+   "retrieved": "2026-11-16",
+   "verified": true
   }
  ]
 }

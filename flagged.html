@@ -87,17 +87,17 @@
   <div class="main">
     <div class="topbar">
       <div class="crumb">NFL1 / <b>Flagged for Review</b></div>
-      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">101 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">107 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
     </div>
     <main class="content" id="main">
       <div class="kicker">Assurance</div>
       <h1>Flagged for Review</h1>
       <p class="lede">Clearly labelled irregularities, official-page conflicts, unverified values and coordination issues — each with an official source link for manual review, none blocking the merge.</p>
       <div class="callout flag"><b>Flagged for Review.</b> These irregularities and unverified items do not block the merge or the live site. Each has an official source link for manual review and a suggested action. A status of <em>needs review</em> means exactly this: published here, not blocking.</div>
-<div class="cards"><div class="card"><div class="label">Flagged items</div><div class="value">101</div><div class="detail">All with source links</div></div><div class="card"><div class="label">Official-page irregularities</div><div class="value">7</div><div class="detail">F02–F08</div></div><div class="card"><div class="label">Missing official data</div><div class="value">5</div><div class="detail">F09–F11, F14, F15</div></div><div class="card"><div class="label">Combined-site review</div><div class="value">45</div><div class="detail">F25–F36</div></div></div>
+<div class="cards"><div class="card"><div class="label">Flagged items</div><div class="value">107</div><div class="detail">All with source links</div></div><div class="card"><div class="label">Official-page irregularities</div><div class="value">7</div><div class="detail">F02–F08</div></div><div class="card"><div class="label">Missing official data</div><div class="value">5</div><div class="detail">F09–F11, F14, F15</div></div><div class="card"><div class="label">Combined-site review</div><div class="value">51</div><div class="detail">F25–F36</div></div></div>
 <h2 id="all">All flagged irregularities</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-flags" aria-label="Filter tbl-flags" placeholder="Filter rows…">
-<span class="count" data-count-for="tbl-flags">101 rows shown</span></div>
+<span class="count" data-count-for="tbl-flags">107 rows shown</span></div>
 <div class="tablewrap"><table class="data-table" id="tbl-flags"><caption>Every flag with category, description, impact, status, official source link and suggested action for the reviewer.</caption>
 <thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Category</th><th scope="col" class="sortable">Irregularity / unverified item</th><th scope="col" class="sortable">Impact on decisions</th><th scope="col" class="sortable">Status</th><th scope="col" class="sortable">Suggested action</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
 <tr id="F01" data-verified="true">
@@ -700,8 +700,8 @@
 <td data-value="1" class="wide">NFL.com Terms and Conditions (updated May 16, 2024; https://www.nfl.com/legal/terms/) s.1.1 prohibit copying, reproducing, distributing or displaying Services content for any purpose except as the Agreement expressly allows. s.1.3 limits use to &#x27;your own individual non-commercial and informational purposes&#x27; and states that &#x27;systematic retrieval of data or other content from the Services, whether to create or compile ... a collection, compilation, database, or directory, is prohibited absent our express prior written consent&#x27;. This repository systematically retrieves https://www.nfl.com/injuries/ every 6 hours (data/snapshots/injury_report/) and the schedule and standings pages, and publishes row-level player names and designations (347 injury rows, roughly 21 public pages, including the Injury Snapshots page and data/model/official_injuries.json). No written consent is on file. The repository&#x27;s own rule is that raw row-level data stays in a private store until the terms are read; the terms are now read and they restrict this use.</td>
 <td data-value="1" class="wide">Legal and licence exposure for the public site and for the snapshot pipeline. Not a values error: the published numbers match the official page. The fix is a product decision: (a) obtain written consent from NFL Enterprises, LLC, (b) keep row-level nfl.com content in a private store and publish only aggregate counts and links to the official page, or (c) remove the scrape. This session did not remove any published content, so the decision is left to the owner.</td>
 <td><span class="badge neutral">needs review</span></td>
-<td data-value="1" class="wide">Owner decision before the next scheduled capture. Legal review is recommended. Option (b) is the smallest change: the snapshot page would show counts and deltas and link to https://www.nfl.com/injuries/ for names.</td>
-<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+<td data-value="1" class="wide">Owner decision before the next scheduled capture. Legal review is recommended. Option (b) is the smallest change: the snapshot page would show counts and deltas and link to https://www.nfl.com/injuries/ for names. Traceability fix applied 2026-11-16 by the 414a54c9 integration (request of session 48ab654c): the source cell now links S35 (NFL.com Terms) directly alongside S01.</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a> <a href="https://www.nfl.com/legal/terms/" target="_blank" rel="noopener noreferrer" title="NFL Enterprises, LLC (NFL.com)">S35 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
 </tr>
 <tr id="F52" data-verified="true">
 <td><code>F52</code></td>
@@ -1008,6 +1008,60 @@
 <td><span class="badge neutral">needs review</span></td>
 <td data-value="1" class="wide">Owner decision: (a) allow x.com status URLs of the 32 club accounts as official sources, changing OFFICIAL_DOMAINS in tools/verify.py, or (b) keep the team post as an unregistered note only. Option (a) also needs a rule for which account counts as official.</td>
 <td><span class="src"><a href="https://www.nfl.com/transactions/league/trades/2026/11" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league transaction log (trades, November 2026)">S36 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F63" data-verified="true">
+<td><code>F63</code></td>
+<td data-value="1">Dated drift: standings snapshot vs official page</td>
+<td data-value="1" class="wide">The repo&#x27;s two standings copies (data/model/snapshot.json, generated 2026-11-15T17:42Z, and data/verified/standings_2026.csv, retrieved 2026-11-12T04:31Z) agree with each other on all 32 teams but both predate the 13 Week-10 finals. Read on 2026-11-16, the official standings page shows 24 teams with changed records (e.g. BUF 7-1-0 256-187 -&gt; 8-1-0 287-199). The snapshot also labels itself last_completed_week 10 while its standings rows equal the pre-Sunday state — a mid-Sunday generation artefact, not a values error.</td>
+<td data-value="1" class="wide">Any consumer treating the snapshot as current Week-10 standings is one week off. Ratings and Week-11 own lines computed from it use Week-9 records. Deltas are published in data/session-414a54c9/recheck_2026-11-16.json; nothing was overwritten.</td>
+<td><span class="badge neutral">open</span></td>
+<td data-value="1" class="wide">Let the scheduled collector refresh the snapshot (it runs on schedule), and consider stamping the standings sub-object with its own as-of date so a mid-week generation cannot look like a full-week one.</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/division/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — official league standings page">S26 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="F64" data-verified="true">
+<td><code>F64</code></td>
+<td data-value="1">Backtest corpus: Week-10 scores blank by policy</td>
+<td data-value="1" class="wide">The frozen corpus data/s9cb/games.csv (sha-pinned in data/prereg/corpus.json) carries the 14 Week-10 rows with blank scores for the 13 games played 2026-11-15/16 (only WAS@NYG has 24-21, played before registration). This is correct under the pre-registration policy: the corpus was frozen before results existed and must not be edited. The official results are now final and are recorded as the separately labelled record data/session-414a54c9/official_2026-11-16/week10_results.tsv.</td>
+<td data-value="1" class="wide">Backtests over the frozen corpus cannot score Week-10 games until the results are ingested through a separately labelled, provenance-pinned record (as prereg/corpus.json and session 55dc53f4 planned). No gate is blocked; the prospective Week-11 shadow forecast is unaffected.</td>
+<td><span class="badge neutral">open</span></td>
+<td data-value="1" class="wide">When the shadow scoring window needs them, ingest the 13 finals from the official game pages into a dated results record with its own hash, never into games.csv.</td>
+<td><span class="src"><a href="https://www.nfl.com/games/commanders-at-giants-2026-reg-10" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official Game Center result">S27 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="F65" data-verified="true">
+<td><code>F65</code></td>
+<td data-value="1">Depth source gap (from the backup register)</td>
+<td data-value="1" class="wide">nfl.com publishes no league depth-chart page (https://www.nfl.com/teams/kansas-city-chiefs/depth-chart returns 404, re-probed 2026-11-13). The backup register (pages/backup-register.html) therefore keeps depth order blank on every row and lists same-position ACT backups from the official roster instead. Some roster pages link to club-site depth charts; those are separate sources and are not parsed here.</td>
+<td data-value="1" class="wide">The 2nd/3rd/4th-string deficiency feature cannot rank backups from nfl.com alone. Two verified routes exist: per-club official depth chart pages (6 clubs captured in data/depth_raw/, 4 clubs in data/depth/) and snap counts. Both partial.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Decide the depth-order source (brief item: resolve the depth-order source before building the backup-deficiency feature). The d4027f66 and 57c05555 sessions&#x27; captures cover 6 of 32 clubs.</td>
+<td><span class="src"><a href="https://www.nfl.com/teams/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official club roster pages">S37 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F66" data-verified="true">
+<td><code>F66</code></td>
+<td data-value="1">Official sources disagree: Ben Brown position</td>
+<td data-value="1" class="wide">The Week-10 injury report lists Ben Brown (NE) at C (https://www.nfl.com/injuries/league/2026/reg10); the official Patriots roster lists him at G (https://www.nfl.com/teams/new-england-patriots/roster). Both values are published as printed. Re-confirmed on the report 2026-11-16. Both positions are in the same OL group, so backup-group counts are unaffected.</td>
+<td data-value="1" class="wide">Position-specific models that key on C vs G would disagree depending on the surface chosen. No published number is wrong; the two official surfaces simply differ.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Pick the authoritative surface for position labels (report vs roster) and record the decision; do not silently harmonise.</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a> <a href="https://www.nfl.com/teams/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com)">S37 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F67" data-verified="true">
+<td><code>F67</code></td>
+<td data-value="1">Official sources disagree: Kerby Joseph status</td>
+<td data-value="1" class="wide">The Week-10 injury report gives Kerby Joseph (DET) game status Out (https://www.nfl.com/injuries/league/2026/reg10, re-read 2026-11-16); the official Lions roster shows PUP (https://www.nfl.com/teams/detroit-lions/roster). Both values are published as printed. The backup register shows both.</td>
+<td data-value="1" class="wide">Availability counts differ by surface: Out (report) vs PUP (roster). The CAP-04 finding (blank game-status cells in the old hand copy) is unaffected: the official report says Out.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Same as F66: choose the authoritative status surface for availability modelling and record the decision.</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a> <a href="https://www.nfl.com/teams/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com)">S37 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F68" data-verified="true">
+<td><code>F68</code></td>
+<td data-value="1">Backup register: roster rows not re-read line by line</td>
+<td data-value="1" class="wide">In the backup register (session cf97db19), the WAS, NE and NYG roster rows are scraped and hash-recorded (data/backup-register/rosters_2026.json) but were not re-read line by line against the live pages. Every other club&#x27;s rows used in the register were re-read. NE rows were partially re-confirmed 2026-11-16 via the injury report (F66).</td>
+<td data-value="1" class="wide">Three clubs&#x27; backup lists carry scrape-only provenance. The register labels each such row &#x27;not yet re-read&#x27;. No value is inferred.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Re-read the three roster pages line by line at the next capture window and clear the row labels.</td>
+<td><span class="src"><a href="https://www.nfl.com/teams/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official club roster pages">S37 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
 </tr>
 </tbody></table></div>
 <h2 id="unverified">Registry of blank/unverified values</h2>
