@@ -134,6 +134,18 @@ def main() -> int:
     with open(INJ_IN) as f:
         inj = json.load(f)
 
+    # A failed scrape writes status="failed" and rows=[]. Rebuilding from that file would
+    # publish a ladder where every designating club reads "no report published" and the
+    # backup count silently collapses to zero (observed 2026-11-16: 38 -> 0). Refusing is
+    # the only safe behaviour: the previous ladder is committed and remains correct for its
+    # own capture date, whereas a zeroed ladder is wrong for every date.
+    if inj.get("status") != "ok" or not inj.get("rows"):
+        print(f"REFUSING to rebuild: {os.path.relpath(INJ_IN, ROOT)} has "
+              f"status={inj.get('status')!r} and {len(inj.get('rows') or [])} row(s). "
+              f"A failed injury scrape must not be published as 'no club filed a report'. "
+              f"The committed data/depth_ladder.json is left untouched.")
+        return 1
+
     week = inj.get("week")
     season = inj.get("season")
 

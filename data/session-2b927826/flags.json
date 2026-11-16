@@ -62,10 +62,10 @@
    "id": "BF-07",
    "severity": "reproducibility",
    "what": "The base commit fails its own reproducibility gate for two data files",
-   "detail": "tools/check_reproducible.py fails on data/readiness.json (a new capture day changed a count from 1 to 2) and data/combined_verification.json (row count 2,899 vs the committed value), because a data-bot commit landed after the last rebuild. Regenerating and committing the rebuilt output closes it; the numbers themselves are correct.",
+   "detail": "tools/check_reproducible.py fails on data/readiness.json (a new capture day changed a count from 1 to 2) and data/combined_verification.json (row count 2,899 vs the committed value), because a data-bot commit landed after the last rebuild. Regenerated (never hand-edited) and committed; the combined link-audit count moved from 2899 to 3072 because the shared nav gained one entry, and the new count is stable over three consecutive runs.",
    "repo_says": "the gate fails loudly, which is the intended behaviour",
    "official_source": "https://www.nfl.com/injuries/",
-   "status": "fixed by this session — the rebuilt output is committed and the gate passes"
+   "status": "resolved by this session — regenerated and committed; tools/check_reproducible.py and tools/build_site_all.py --check both PASS on 2026-11-16"
   },
   {
    "id": "BF-08",
@@ -111,13 +111,22 @@
    "repo_says": "tools/check_reachability.py passes because every page is reachable from somewhere",
    "official_source": "n/a — internal navigation",
    "status": "needs review — this session publishes brief/ as one clean front door and links the rest, rather than deleting anyone's work"
+  },
+  {
+   "id": "BF-13",
+   "severity": "correctness",
+   "what": "A failed injury scrape silently rebuilt the depth ladder to zero backups",
+   "detail": "pipeline/scrape_injuries.py correctly records a failed fetch as status='failed' with rows=[], but pipeline/build_depth_ladder.py then read that file and rebuilt data/depth_ladder.json with 0 slots started by a backup, against 38 in the committed ladder. Every designating club became 'no report published'. Nothing failed and the daily collect workflow would have committed the zeroed ladder. The absence of a report is not evidence that nobody is injured, so 0 is a false statement rather than an honest blank.",
+   "repo_says": "the README and the ladder's own method note describe 38 backups projected to start this week",
+   "official_source": "https://www.nfl.com/injuries/league/2026/reg10",
+   "status": "fixed by this session - the rebuild now refuses (exit 1) and leaves the last good ladder in place; four regression tests in tests/test_depth_ladder_guard.py run in verify.yml"
   }
  ],
  "counts": {
-  "rows": 12,
+  "rows": 13,
   "open": 6,
   "needs_review": 3,
-  "resolved": 3,
+  "resolved": 4,
   "note": "computed from the rows by the build, not typed"
  }
 }
