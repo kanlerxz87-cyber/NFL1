@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Verification — NFL Decision Console</title>
+<link rel="stylesheet" href="style.css">
+</head><body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="index.html"><span class="dot"></span> NFL Decision Console</a>
+  <span class="stamp">as of 2026-11-16 · built 2026-11-16 15:06 UTC · session ce097fea-nfl1</span>
+</header>
+<div class="shell">
+<nav class="sidebar" aria-label="Sections"><div class="navgroup"><h3>Overview</h3><ul><li><a href="index.html">Overview</a></li><li><a href="executive-summary.html">Executive summary</a></li></ul></div><div class="navgroup"><h3>Governance</h3><ul><li><a href="readiness.html">Decision readiness</a></li><li><a href="questions.html">Open questions</a></li><li><a href="suggestions.html">Suggestions &amp; choose a path</a></li><li><a href="verification.html" class=active>Verification</a></li><li><a href="flagged.html">Flagged for review</a></li></ul></div><div class="navgroup"><h3>Model &amp; strategy</h3><ul><li><a href="strategy-lab.html">Strategy lab</a></li></ul></div><div class="navgroup"><h3>Official data</h3><ul><li><a href="injuries.html">Injuries &amp; depth</a></li><li><a href="data.html">Official data</a></li></ul></div>
+  <div class="navgroup"><h3>Repository</h3><ul>
+    <li><a href="https://kanlerxz87-cyber.github.io/NFL1/">Main site</a></li>
+    <li><a href="https://github.com/kanlerxz87-cyber/NFL1">Source &amp; history</a></li>
+    <li><a href="flagged.html">Flagged for review</a></li>
+  </ul></div>
+</nav>
+<main id="main">
+<h1>Verification</h1>
+<p class="lead">Every check this session ran, the official page it ran against, and what it produced.</p>
+
+<p class="lead">What was checked on 2026-11-16, against which official page, and what it produced.
+A check that fails is not hidden: it becomes a flag on the
+<a href="flagged.html">Flagged for review</a> page with the link that settles it.</p>
+
+<h2>Checks performed this session</h2>
+<div class="tablewrap"><table class="wide"><thead><tr><th>Check</th><th>Official page</th><th>Rows compared</th><th>Result</th><th>Outcome</th></tr></thead><tbody><tr><td>Official standings read in full</td><td><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">https://www.nfl.com/standings/league/2026/REG</a></td><td>32 rows, 32 clubs</td><td>internal check: total W = total L = 148, total PF = total PA = 6,880</td><td class="yes">pass</td></tr><tr><td>Standings recomputed from every game result</td><td><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">https://www.nfl.com/standings/league/2026/REG</a></td><td>32 clubs</td><td>32 of 32 match cell by cell</td><td class="yes">pass</td></tr><tr><td>Week 10 finals transcribed from the schedule page</td><td><a href="https://www.nfl.com/schedules/2026/REG11" target="_blank" rel="noopener">https://www.nfl.com/schedules/2026/REG11</a></td><td>13 finals + 1 fixture not kicked off</td><td>the 1 Week-10 score the feed holds agrees with the page (1 of 1)</td><td class="yes">pass</td></tr><tr><td>Injury report re-read and compared row by row</td><td><a href="https://www.nfl.com/injuries/league/2026/reg10" target="_blank" rel="noopener">https://www.nfl.com/injuries/league/2026/reg10</a></td><td>347 rows, 28 clubs</td><td>0 rows only on one side, 3 field differences; sha256 equals the hash already recorded for the 2026-11-15 capture</td><td class="yes">pass</td></tr><tr><td>Lions game-status designations</td><td><a href="https://www.nfl.com/injuries/league/2026/reg10" target="_blank" rel="noopener">https://www.nfl.com/injuries/league/2026/reg10</a></td><td>3 players</td><td>Kerby Joseph, Cade Mays and D.J. Reed all listed Out; the blank in one committed hand copy is wrong</td><td class="yes">pass</td></tr><tr><td>Week 11 report availability</td><td><a href="https://www.nfl.com/injuries/league/2026/reg11" target="_blank" rel="noopener">https://www.nfl.com/injuries/league/2026/reg11</a></td><td>1 page</td><td>the URL serves the Week 10 page; Week 11 is not published</td><td class="no">recorded as CE-05</td></tr><tr><td>Results-feed freshness</td><td><a href="https://www.nfl.com/schedules/2026/REG11" target="_blank" rel="noopener">https://www.nfl.com/schedules/2026/REG11</a></td><td>feed vs official schedule</td><td>the feed is 12 games behind; recorded, not an error in either source</td><td class="no">flagged CE-01</td></tr><tr><td>Committed standings file age</td><td><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">https://www.nfl.com/standings/league/2026/REG</a></td><td>data/standings.json</td><td>Buffalo 7-1 there against 8-1 official today</td><td class="no">flagged CE-04</td></tr></tbody></table></div>
+
+<h2>Capture manifest</h2>
+<div class="tablewrap"><table class="" data-exempt="provenance metadata about the capture itself; the source it describes is linked in the first row"><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody><tr><td>Source</td><td><a href="https://www.nfl.com/injuries/league/2026/reg10" target="_blank" rel="noopener">https://www.nfl.com/injuries/league/2026/reg10</a></td></tr><tr><td>Page title</td><td>Official NFL Injury Report for Players - Week 10 of the 2026 Season | NFL.com</td></tr><tr><td>Captured</td><td>2026-11-16 (date from the session clock; the capture tool does not return a time of day - see flag CE-02)</td></tr><tr><td>Method</td><td>Agent fetch_page tool, chunks 0-7 of 8. The tool returns rendered text, not raw HTML. Every row was read from that text in the order the page prints it, grouped by fixture, then written to a TSV. The club code is the one the page prints next to each club (nfl.com prints AZ for Arizona and LA for the Rams; they are stored as AZ and LAR and the alias is flagged as CE-03).</td></tr><tr><td>Rows file</td><td>&lt;code&gt;injury_rows_2026-11-16.tsv&lt;/code&gt; — 347 rows</td></tr><tr><td>Rows sha256</td><td>&lt;code&gt;9fe77d36a25618542553e690a5a44dac3449769b56e45cccd711cb1e2669cd5f&lt;/code&gt;</td></tr><tr><td>Games file</td><td>&lt;code&gt;games_reg10_2026-11-16.tsv&lt;/code&gt; — 14 rows</td></tr><tr><td>Games sha256</td><td>&lt;code&gt;f19788afd4b612567bb184f4c97921d2422ae893232207a45b0d90612acc5dc1&lt;/code&gt;</td></tr><tr><td>Game status counts</td><td>{&amp;quot;&amp;quot;: 176, &amp;quot;Doubtful&amp;quot;: 11, &amp;quot;Out&amp;quot;: 70, &amp;quot;Questionable&amp;quot;: 90}</td></tr><tr><td>Practice status counts</td><td>{&amp;quot;Did Not Participate In Practice&amp;quot;: 94, &amp;quot;Full Participation in Practice&amp;quot;: 180, &amp;quot;Limited Participation in Practice&amp;quot;: 73}</td></tr></tbody></table></div><p class="tablenote">Rows in this table carry no source link because: provenance metadata about the capture itself; the source it describes is linked in the first row.</p>
+
+<h2>Reproduce it</h2>
+<pre>python3 console/build.py     # writes every page from committed data
+python3 console/verify.py    # fails on a broken link, an empty cell or an unsourced row
+python3 data/session-ce097fea/reconcile.py   # recomputes the 32-club reconciliation</pre>
+
+<h2>Rules this page holds itself to</h2>
+<ul class="plain">
+<li>No value is inferred, interpolated or filled in. An unknown value renders as a labelled blank.</li>
+<li>Every table row carries the URL of the official page the value was read from, or is marked unverified.</li>
+<li>Where the repository's own file disagrees with the official page, both are printed and the
+disagreement is flagged; neither is silently corrected.</li>
+<li>Historical data is a parsed copy of the league's feed, not the league's own page. It is labelled as
+such, pinned by sha256, and independently reconciled against the official table.</li>
+</ul>
+</main>
+</div>
+<footer>
+  <p>Every row on this site links to the official page it was read from. A value no official page
+  publishes is printed as a labelled blank, never inferred. Built by <code>console/build.py</code>;
+  checked by <code>console/verify.py</code>. Research tool, not betting advice.</p>
+</footer>
+</body></html>

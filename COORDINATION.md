@@ -3735,6 +3735,7 @@ Three registered baselines now coexist and none double-scores: `PR-02` (record s
 
 ---
 
+
 ## Task board — session `bf0e6e5f-nfl1` (branch `arena/bf0e6e5f-nfl1`, base `32a8fff` on `main`, claimed 2026-11-16 UTC)
 
 Board read before this claim. Open PRs and claims from other sessions do not touch the files below.
@@ -3790,3 +3791,98 @@ Scope is deliberately small: this session can verify against official pages, not
 | Still open | F51, F60 (terms — owner/counsel decision), F61 (NFL log gap), F62 (verifier allow-list for team posts). None blocks; all need review. |
 
 Z1–Z4 are done. Items in the brief outside Z1–Z4 are unclaimed and unchanged.
+
+---
+
+## Session `ce097fea-nfl1` — claims (branch `arena/ce097fea-nfl1`, base `32a8fffe19c6b474a142f0accbc93474cf122908`)
+
+Claimed before any edit on this branch. Scope is **additive**; no file owned by another session is
+rewritten. No earlier claim on this board covers these paths.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| C1 | Fresh official capture (2026-11-16): nfl.com standings (32 clubs), Week 10 schedule with results, Week 10 injury report (all clubs, all rows) | in progress | `ce097fea` | `data/session-ce097fea/` | capture is fetch-tool-rendered text, flagged; sha256 recorded |
+| C2 | Line-by-line re-verification of the committed 2026-11-15 injury capture (347 rows) against today's official page; publish the delta | in progress | `ce097fea` | `data/session-ce097fea/`, `console/` | |
+| C3 | Line-by-line repo review: every committed dataset checked against the official page it claims to come from; every irregularity flagged with the official link | in progress | `ce097fea` | `docs/audit-ce097fea.md`, `data/session-ce097fea/flags.json` | |
+| C4 | New public sub-site `console/`: clean landing page + subpages by category (executive summary, readiness, questions, suggestions & choose-a-path, strategy lab, injuries & depth, data, verification, flagged) | in progress | `ce097fea` | `console/**` (new directory) | additive; no existing page is deleted or rewritten |
+| C5 | Decision-readiness + open-questions + suggestions-with-path register covering every line of the brief | in progress | `ce097fea` | `console/data/*.json` | |
+| C6 | `console/verify.py`: every table row must carry an https source; unverifiable cells must render blank and flagged | in progress | `ce097fea` | `console/verify.py` | |
+| C7 | PR → merge → confirm Pages deploy → record here | not started | `ce097fea` | `COORDINATION.md` | |
+
+### Log — `ce097fea-nfl1` (2026-11-16, UTC)
+
+**Claim.** Recorded in the claims table above before any edit; pushed in `847433e`.
+
+**Sources (official, fetched this session).**
+`https://www.nfl.com/standings/league/2026/REG` (chunks 0-1),
+`https://www.nfl.com/standings/conference/2026/REG` (chunk 0 — needed for the eight clubs the league
+table truncated at that chunk boundary), `https://www.nfl.com/schedules/2026/REG11` (chunks 0-1; the
+site serves Week 10 as the current week), `https://www.nfl.com/injuries/league/2026/reg10` (chunks 0-7),
+`https://www.nfl.com/injuries/league/2026/reg11` (chunk 0 — confirmed it serves the Week 10 page).
+
+**C1 — fresh capture.** `data/session-ce097fea/capture/injury_rows_2026-11-16.tsv` (347 rows, 28 clubs,
+14 fixtures), `games_reg10_2026-11-16.tsv` (14 fixtures with results and a per-game official URL), and
+`manifest_2026-11-16.json` (provenance, counts, sha256). `data/session-ce097fea/official_standings_2026-11-16.json`
+holds all 32 clubs.
+
+**C2 — line-by-line verification of the committed capture.** Re-read the whole injury page and compared
+row by row with `data/capture/nflcom_injuries_reg10_2026-11-15_rows.tsv`: 347 against 347, 0 rows on
+only one side, 0 field differences, and the sha256 of the new rows file equals the hash already in
+`data/capture/manifest.json` (`9fe77d36…cd5f`). The 2026-11-15 capture is faithful and the page did not
+move in 24 hours. Delta in `data/session-ce097fea/injury_capture_delta.json`.
+
+**C3 — repo review.** `docs/audit-ce097fea.md`. Headline result: recomputing the 2026 standings from
+every game result in `data/s9cb/games.csv` plus the 12 Week-10 finals transcribed from the official
+schedule page reproduces **32 of 32 clubs** cell by cell (W/L/T/PF/PA). From the feed alone only 8 of 32
+reconcile, because the feed was fetched 2026-11-15 13:21Z, before the Sunday kickoffs — recorded as
+flag CE-01, not an error in either source. Reproduce with `python3 data/session-ce097fea/reconcile.py`.
+The official table is internally consistent (W=L=148, PF=PA=6,880). Lions designations re-confirmed:
+Kerby Joseph, Cade Mays, D.J. Reed all Out. Myles Garrett under the Rams is the page's own listing,
+not a scrape error.
+
+**C4 — the `console/` sub-site.** New directory, additive; no existing page deleted or rewritten.
+`console/build.py` writes 10 pages from committed data only; `console/verify.py` fails the build on a
+broken link, an empty cell, or a table row with no https source, no labelled blank and no stated
+exemption (665 rows checked, all pass). The one durable fix that could not be made here: the nav entry
+on `index.html` was hand-added, because `pipeline/gen_site.py` is owned by another session.
+
+> **Request for the owner of `pipeline/gen_site.py`.** Please add `("console/index.html",
+> "Decision Console")` to the nav list so the entry survives a regeneration. It is currently a
+> hand-edit on the generated `index.html` and the next regeneration will drop it. No other file of
+> yours was touched.
+
+**C5 — registers.** `console/data/requirements.json` (71 rows, one per line of the brief, with the gate
+that blocks it and the number that clears it), `questions.json` (22 questions split into what we have
+and what we do not), `suggestions.json` (20 suggestions, each with two or three paths, cost, risk and a
+recommended path), `decisions.json` (empty — a reviewer records a choice there before anything is
+built, and `console/verify.py` fails if a recorded path is not one of the published options),
+`flags.json` (11 flags, each with the official link that settles it).
+
+**Deviations.** Branch name is Arena-fixed (`arena/ce097fea-nfl1`), not `session-<id>/<task>`; scopes
+were kept non-overlapping by file instead. The seven open pull requests from other sessions were not
+merged — recorded as flag CE-08 rather than guessed at.
+
+### Addendum — `ce097fea-nfl1`: the reserve list and the transactions pages
+
+While checking flag CE-notes about a player absent from the injury report, this session found two
+official pages that no session had captured.
+
+**Reserve list.** `https://www.nfl.com/transactions/league/reserve-list/2026/11` — the league publishes a
+dated reserve list by month. Captured 2026-11-16: 25 players across 17 clubs, 2026-11-07 to 2026-11-14,
+stored in `data/session-ce097fea/capture/reserve_list_nov2026_2026-11-16.tsv` with the cross-check in
+`reserve_list_2026-11-16.json`. **15 of the 25 do not appear in the Week 10 injury report at all**, and
+the brief's own example is on the list: Malik Willis, Miami, Reserve/Injured 2026-11-10. The 10 that do
+appear carry game status Out (except Puka Nacua, who carries no designation and was placed on reserve on
+11/12). Requirement B64 moves from *not started* to *met* for the November ledger.
+
+**Transactions index.** `https://www.nfl.com/transactions/` publishes six monthly ledgers — trades,
+signings, reserve list, waivers, terminations, other. This is the official source a depth-row staleness
+rule needs, which is what B34 and B46 have been blocked on. Both move from *not started* to *partial*;
+capturing all six ledgers is logged as suggestion S08.
+
+Also noted for whoever owns the flag register: session `bf0e6e5f-nfl1` merged into `main` during this
+session (`data/legal/terms_2026-11-16.json` — the nfl.com terms read verbatim, raising F60 — and
+`data/transactions/official_events_2026.json`, the Baltimore events behind the stale depth rows, raising
+F61 and F62). This session's registers were updated to reflect that work rather than duplicate it.
+
+**Merge record.** PR #93 (`arena/ce097fea-nfl1` into `main`).

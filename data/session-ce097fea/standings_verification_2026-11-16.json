@@ -1,0 +1,621 @@
+{
+ "generated": "2026-11-16",
+ "feed_snapshot_note": "games.csv was fetched 2026-11-15T13:21Z (per data/s9cb/provenance.json), i.e. before the Week 10 Sunday games. The recomputation from the feed alone therefore covers Week 1-9 plus the Thursday game only, which is why only the clubs that did not play on Sunday reconcile.",
+ "clubs": 32,
+ "matched": 8,
+ "rows": [
+  {
+   "code": "BUF",
+   "team": "Buffalo Bills",
+   "matched": false,
+   "official": {
+    "w": 8,
+    "l": 1,
+    "t": 0,
+    "pf": 287,
+    "pa": 199
+   },
+   "recomputed": {
+    "w": 7,
+    "l": 1,
+    "t": 0,
+    "pf": 256,
+    "pa": 187
+   }
+  },
+  {
+   "code": "SF",
+   "team": "San Francisco 49ers",
+   "matched": false,
+   "official": {
+    "w": 8,
+    "l": 1,
+    "t": 0,
+    "pf": 281,
+    "pa": 196
+   },
+   "recomputed": {
+    "w": 7,
+    "l": 1,
+    "t": 0,
+    "pf": 235,
+    "pa": 156
+   }
+  },
+  {
+   "code": "KC",
+   "team": "Kansas City Chiefs",
+   "matched": false,
+   "official": {
+    "w": 7,
+    "l": 2,
+    "t": 0,
+    "pf": 237,
+    "pa": 156
+   },
+   "recomputed": {
+    "w": 6,
+    "l": 2,
+    "t": 0,
+    "pf": 202,
+    "pa": 143
+   }
+  },
+  {
+   "code": "DET",
+   "team": "Detroit Lions",
+   "matched": false,
+   "official": {
+    "w": 7,
+    "l": 2,
+    "t": 0,
+    "pf": 257,
+    "pa": 199
+   },
+   "recomputed": {
+    "w": 6,
+    "l": 2,
+    "t": 0,
+    "pf": 222,
+    "pa": 189
+   }
+  },
+  {
+   "code": "JAX",
+   "team": "Jacksonville Jaguars",
+   "matched": false,
+   "official": {
+    "w": 7,
+    "l": 2,
+    "t": 0,
+    "pf": 269,
+    "pa": 144
+   },
+   "recomputed": {
+    "w": 6,
+    "l": 2,
+    "t": 0,
+    "pf": 229,
+    "pa": 121
+   }
+  },
+  {
+   "code": "CIN",
+   "team": "Cincinnati Bengals",
+   "matched": false,
+   "official": {
+    "w": 7,
+    "l": 2,
+    "t": 0,
+    "pf": 278,
+    "pa": 193
+   },
+   "recomputed": {
+    "w": 6,
+    "l": 2,
+    "t": 0,
+    "pf": 240,
+    "pa": 175
+   }
+  },
+  {
+   "code": "DEN",
+   "team": "Denver Broncos",
+   "matched": true,
+   "official": {
+    "w": 7,
+    "l": 2,
+    "t": 0,
+    "pf": 198,
+    "pa": 186
+   },
+   "recomputed": {
+    "w": 7,
+    "l": 2,
+    "t": 0,
+    "pf": 198,
+    "pa": 186
+   }
+  },
+  {
+   "code": "MIN",
+   "team": "Minnesota Vikings",
+   "matched": false,
+   "official": {
+    "w": 7,
+    "l": 2,
+    "t": 0,
+    "pf": 176,
+    "pa": 126
+   },
+   "recomputed": {
+    "w": 6,
+    "l": 2,
+    "t": 0,
+    "pf": 146,
+    "pa": 116
+   }
+  },
+  {
+   "code": "CHI",
+   "team": "Chicago Bears",
+   "matched": true,
+   "official": {
+    "w": 7,
+    "l": 2,
+    "t": 0,
+    "pf": 241,
+    "pa": 184
+   },
+   "recomputed": {
+    "w": 7,
+    "l": 2,
+    "t": 0,
+    "pf": 241,
+    "pa": 184
+   }
+  },
+  {
+   "code": "PIT",
+   "team": "Pittsburgh Steelers",
+   "matched": false,
+   "official": {
+    "w": 6,
+    "l": 3,
+    "t": 0,
+    "pf": 198,
+    "pa": 182
+   },
+   "recomputed": {
+    "w": 6,
+    "l": 2,
+    "t": 0,
+    "pf": 180,
+    "pa": 144
+   }
+  },
+  {
+   "code": "NYG",
+   "team": "New York Giants",
+   "matched": true,
+   "official": {
+    "w": 5,
+    "l": 3,
+    "t": 1,
+    "pf": 203,
+    "pa": 196
+   },
+   "recomputed": {
+    "w": 5,
+    "l": 3,
+    "t": 1,
+    "pf": 203,
+    "pa": 196
+   }
+  },
+  {
+   "code": "CLE",
+   "team": "Cleveland Browns",
+   "matched": false,
+   "official": {
+    "w": 6,
+    "l": 4,
+    "t": 0,
+    "pf": 188,
+    "pa": 220
+   },
+   "recomputed": {
+    "w": 5,
+    "l": 4,
+    "t": 0,
+    "pf": 161,
+    "pa": 196
+   }
+  },
+  {
+   "code": "GB",
+   "team": "Green Bay Packers",
+   "matched": false,
+   "official": {
+    "w": 6,
+    "l": 4,
+    "t": 0,
+    "pf": 226,
+    "pa": 221
+   },
+   "recomputed": {
+    "w": 6,
+    "l": 3,
+    "t": 0,
+    "pf": 216,
+    "pa": 191
+   }
+  },
+  {
+   "code": "LAR",
+   "team": "Los Angeles Rams",
+   "matched": false,
+   "official": {
+    "w": 6,
+    "l": 4,
+    "t": 0,
+    "pf": 248,
+    "pa": 187
+   },
+   "recomputed": {
+    "w": 5,
+    "l": 4,
+    "t": 0,
+    "pf": 214,
+    "pa": 181
+   }
+  },
+  {
+   "code": "SEA",
+   "team": "Seattle Seahawks",
+   "matched": false,
+   "official": {
+    "w": 6,
+    "l": 4,
+    "t": 0,
+    "pf": 223,
+    "pa": 175
+   },
+   "recomputed": {
+    "w": 5,
+    "l": 4,
+    "t": 0,
+    "pf": 202,
+    "pa": 162
+   }
+  },
+  {
+   "code": "NE",
+   "team": "New England Patriots",
+   "matched": false,
+   "official": {
+    "w": 5,
+    "l": 5,
+    "t": 0,
+    "pf": 221,
+    "pa": 242
+   },
+   "recomputed": {
+    "w": 5,
+    "l": 4,
+    "t": 0,
+    "pf": 211,
+    "pa": 207
+   }
+  },
+  {
+   "code": "BAL",
+   "team": "Baltimore Ravens",
+   "matched": true,
+   "official": {
+    "w": 4,
+    "l": 5,
+    "t": 0,
+    "pf": 189,
+    "pa": 236
+   },
+   "recomputed": {
+    "w": 4,
+    "l": 5,
+    "t": 0,
+    "pf": 189,
+    "pa": 236
+   }
+  },
+  {
+   "code": "CAR",
+   "team": "Carolina Panthers",
+   "matched": false,
+   "official": {
+    "w": 4,
+    "l": 5,
+    "t": 0,
+    "pf": 219,
+    "pa": 236
+   },
+   "recomputed": {
+    "w": 3,
+    "l": 5,
+    "t": 0,
+    "pf": 199,
+    "pa": 219
+   }
+  },
+  {
+   "code": "DAL",
+   "team": "Dallas Cowboys",
+   "matched": false,
+   "official": {
+    "w": 4,
+    "l": 6,
+    "t": 0,
+    "pf": 286,
+    "pa": 282
+   },
+   "recomputed": {
+    "w": 4,
+    "l": 5,
+    "t": 0,
+    "pf": 246,
+    "pa": 236
+   }
+  },
+  {
+   "code": "LV",
+   "team": "Las Vegas Raiders",
+   "matched": false,
+   "official": {
+    "w": 4,
+    "l": 6,
+    "t": 0,
+    "pf": 251,
+    "pa": 289
+   },
+   "recomputed": {
+    "w": 4,
+    "l": 5,
+    "t": 0,
+    "pf": 238,
+    "pa": 268
+   }
+  },
+  {
+   "code": "WAS",
+   "team": "Washington Commanders",
+   "matched": true,
+   "official": {
+    "w": 3,
+    "l": 5,
+    "t": 1,
+    "pf": 196,
+    "pa": 223
+   },
+   "recomputed": {
+    "w": 3,
+    "l": 5,
+    "t": 1,
+    "pf": 196,
+    "pa": 223
+   }
+  },
+  {
+   "code": "HOU",
+   "team": "Houston Texans",
+   "matched": false,
+   "official": {
+    "w": 3,
+    "l": 6,
+    "t": 0,
+    "pf": 233,
+    "pa": 219
+   },
+   "recomputed": {
+    "w": 3,
+    "l": 5,
+    "t": 0,
+    "pf": 209,
+    "pa": 192
+   }
+  },
+  {
+   "code": "TB",
+   "team": "Tampa Bay Buccaneers",
+   "matched": true,
+   "official": {
+    "w": 3,
+    "l": 6,
+    "t": 0,
+    "pf": 202,
+    "pa": 178
+   },
+   "recomputed": {
+    "w": 3,
+    "l": 6,
+    "t": 0,
+    "pf": 202,
+    "pa": 178
+   }
+  },
+  {
+   "code": "NO",
+   "team": "New Orleans Saints",
+   "matched": false,
+   "official": {
+    "w": 3,
+    "l": 6,
+    "t": 0,
+    "pf": 202,
+    "pa": 236
+   },
+   "recomputed": {
+    "w": 3,
+    "l": 5,
+    "t": 0,
+    "pf": 185,
+    "pa": 216
+   }
+  },
+  {
+   "code": "AZ",
+   "team": "Arizona Cardinals",
+   "matched": false,
+   "official": {
+    "w": 3,
+    "l": 7,
+    "t": 0,
+    "pf": 184,
+    "pa": 289
+   },
+   "recomputed": {
+    "w": 3,
+    "l": 6,
+    "t": 0,
+    "pf": 178,
+    "pa": 255
+   }
+  },
+  {
+   "code": "ATL",
+   "team": "Atlanta Falcons",
+   "matched": false,
+   "official": {
+    "w": 3,
+    "l": 7,
+    "t": 0,
+    "pf": 201,
+    "pa": 258
+   },
+   "recomputed": {
+    "w": 3,
+    "l": 6,
+    "t": 0,
+    "pf": 188,
+    "pa": 223
+   }
+  },
+  {
+   "code": "IND",
+   "team": "Indianapolis Colts",
+   "matched": false,
+   "official": {
+    "w": 3,
+    "l": 7,
+    "t": 0,
+    "pf": 208,
+    "pa": 271
+   },
+   "recomputed": {
+    "w": 2,
+    "l": 7,
+    "t": 0,
+    "pf": 184,
+    "pa": 249
+   }
+  },
+  {
+   "code": "PHI",
+   "team": "Philadelphia Eagles",
+   "matched": true,
+   "official": {
+    "w": 2,
+    "l": 7,
+    "t": 0,
+    "pf": 148,
+    "pa": 221
+   },
+   "recomputed": {
+    "w": 2,
+    "l": 7,
+    "t": 0,
+    "pf": 148,
+    "pa": 221
+   }
+  },
+  {
+   "code": "NYJ",
+   "team": "New York Jets",
+   "matched": false,
+   "official": {
+    "w": 2,
+    "l": 8,
+    "t": 0,
+    "pf": 194,
+    "pa": 254
+   },
+   "recomputed": {
+    "w": 2,
+    "l": 7,
+    "t": 0,
+    "pf": 182,
+    "pa": 223
+   }
+  },
+  {
+   "code": "MIA",
+   "team": "Miami Dolphins",
+   "matched": false,
+   "official": {
+    "w": 1,
+    "l": 8,
+    "t": 0,
+    "pf": 148,
+    "pa": 224
+   },
+   "recomputed": {
+    "w": 1,
+    "l": 7,
+    "t": 0,
+    "pf": 126,
+    "pa": 200
+   }
+  },
+  {
+   "code": "TEN",
+   "team": "Tennessee Titans",
+   "matched": false,
+   "official": {
+    "w": 1,
+    "l": 8,
+    "t": 0,
+    "pf": 167,
+    "pa": 239
+   },
+   "recomputed": {
+    "w": 1,
+    "l": 7,
+    "t": 0,
+    "pf": 144,
+    "pa": 199
+   }
+  },
+  {
+   "code": "LAC",
+   "team": "Los Angeles Chargers",
+   "matched": true,
+   "official": {
+    "w": 0,
+    "l": 8,
+    "t": 0,
+    "pf": 121,
+    "pa": 219
+   },
+   "recomputed": {
+    "w": 0,
+    "l": 8,
+    "t": 0,
+    "pf": 121,
+    "pa": 219
+   }
+  }
+ ],
+ "week10_score_check": {
+  "feed_scored": 1,
+  "page_finals": 13,
+  "agreeing": 1
+ }
+}

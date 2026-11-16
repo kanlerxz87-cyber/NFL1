@@ -1,0 +1,229 @@
+{
+ "schema": "nflcom-reserve-list-capture/1",
+ "source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+ "source_index_url": "https://www.nfl.com/transactions/",
+ "source_title": "2026 NFL reserve-list by month | NFL.com",
+ "retrieved": "2026-11-16",
+ "capture_method": "Agent fetch_page tool, chunks 0-1 of 2 (the page is complete in two chunks). Rendered text only. Each row carries the club, the date the page prints, the player and the transaction text exactly as published. The official page prints AZ for Arizona and LA for the Rams; they are stored as AZ and LAR and the alias is flagged as CE-03.",
+ "rows": 25,
+ "clubs": 17,
+ "date_range": [
+  "2026-11-07",
+  "2026-11-14"
+ ],
+ "file": {
+  "name": "reserve_list_nov2026_2026-11-16.tsv",
+  "sha256": "dd5fc447b4aacf2d54aee79e48ccab072cfd4f31d1874739531e0db72e0e3694"
+ },
+ "cross_check_against_injury_report": {
+  "note": "Every player on this reserve list was checked against this session's official Week 10 injury capture. Players placed on reserve on 11/14 appear in the report with game status Out; the rest are absent from the report entirely, which is the exact failure the brief names: 'not listed' is read as 'available' when the player is on injured reserve.",
+  "in_report": [
+   {
+    "club": "NO",
+    "player": "Christen Miller",
+    "date": "2026-11-14",
+    "in_report": true,
+    "game_status": "Out",
+    "practice_status": "Did Not Participate In Practice"
+   },
+   {
+    "club": "NE",
+    "player": "TreVeyon Henderson",
+    "date": "2026-11-14",
+    "in_report": true,
+    "game_status": "Out",
+    "practice_status": "Did Not Participate In Practice"
+   },
+   {
+    "club": "CLE",
+    "player": "Michael Burton",
+    "date": "2026-11-14",
+    "in_report": true,
+    "game_status": "Out",
+    "practice_status": "Did Not Participate In Practice"
+   },
+   {
+    "club": "IND",
+    "player": "Mo Alie-Cox",
+    "date": "2026-11-14",
+    "in_report": true,
+    "game_status": "Out",
+    "practice_status": "Did Not Participate In Practice"
+   },
+   {
+    "club": "IND",
+    "player": "Akeem Davis-Gaither",
+    "date": "2026-11-14",
+    "in_report": true,
+    "game_status": "Out",
+    "practice_status": "Did Not Participate In Practice"
+   },
+   {
+    "club": "TEN",
+    "player": "Peter Skoronski",
+    "date": "2026-11-14",
+    "in_report": true,
+    "game_status": "Out",
+    "practice_status": "Did Not Participate In Practice"
+   },
+   {
+    "club": "TEN",
+    "player": "Tommy Townsend",
+    "date": "2026-11-14",
+    "in_report": true,
+    "game_status": "Out",
+    "practice_status": "Did Not Participate In Practice"
+   },
+   {
+    "club": "DAL",
+    "player": "Tyler Goodson",
+    "date": "2026-11-14",
+    "in_report": true,
+    "game_status": "Out",
+    "practice_status": "Did Not Participate In Practice"
+   },
+   {
+    "club": "GB",
+    "player": "Josh Whyle",
+    "date": "2026-11-14",
+    "in_report": true,
+    "game_status": "Out",
+    "practice_status": "Did Not Participate In Practice"
+   },
+   {
+    "club": "LAR",
+    "player": "Puka Nacua",
+    "date": "2026-11-12",
+    "in_report": true,
+    "game_status": null,
+    "practice_status": "Did Not Participate In Practice"
+   }
+  ],
+  "absent_from_report": [
+   {
+    "club": "LAR",
+    "player": "Jordan Whittington",
+    "date": "2026-11-10",
+    "in_report": false,
+    "game_status": null,
+    "practice_status": null
+   },
+   {
+    "club": "MIA",
+    "player": "Zach Sieler",
+    "date": "2026-11-10",
+    "in_report": false,
+    "game_status": null,
+    "practice_status": null
+   },
+   {
+    "club": "MIA",
+    "player": "Malik Willis",
+    "date": "2026-11-10",
+    "in_report": false,
+    "game_status": null,
+    "practice_status": null
+   },
+   {
+    "club": "SF",
+    "player": "Gracen Halton",
+    "date": "2026-11-10",
+    "in_report": false,
+    "game_status": null,
+    "practice_status": null
+   },
+   {
+    "club": "AZ",
+    "player": "Gardner Minshew",
+    "date": "2026-11-10",
+    "in_report": false,
+    "game_status": null,
+    "practice_status": null
+   },
+   {
+    "club": "AZ",
+    "player": "Michael Wilson",
+    "date": "2026-11-10",
+    "in_report": false,
+    "game_status": null,
+    "practice_status": null
+   },
+   {
+    "club": "TEN",
+    "player": "James Williams",
+    "date": "2026-11-09",
+    "in_report": false,
+    "game_status": null,
+    "practice_status": null
+   },
+   {
+    "club": "MIN",
+    "player": "Demond Claiborne",
+    "date": "2026-11-09",
+    "in_report": false,
+    "game_status": null,
+    "practice_status": null
+   },
+   {
+    "club": "BUF",
+    "player": "Josh Palmer",
+    "date": "2026-11-09",
+    "in_report": false,
+    "game_status": null,
+    "practice_status": null
+   },
+   {
+    "club": "ATL",
+    "player": "Brian Robinson",
+    "date": "2026-11-07",
+    "in_report": false,
+    "game_status": null,
+    "practice_status": null
+   },
+   {
+    "club": "LAR",
+    "player": "Jaylen Watson",
+    "date": "2026-11-07",
+    "in_report": false,
+    "game_status": null,
+    "practice_status": null
+   },
+   {
+    "club": "DEN",
+    "player": "Eyioma Uwazurike",
+    "date": "2026-11-07",
+    "in_report": false,
+    "game_status": null,
+    "practice_status": null
+   },
+   {
+    "club": "DET",
+    "player": "Jack Campbell",
+    "date": "2026-11-07",
+    "in_report": false,
+    "game_status": null,
+    "practice_status": null
+   },
+   {
+    "club": "DAL",
+    "player": "Malachi Lawrence",
+    "date": "2026-11-07",
+    "in_report": false,
+    "game_status": null,
+    "practice_status": null
+   },
+   {
+    "club": "WAS",
+    "player": "Dyami Brown",
+    "date": "2026-11-07",
+    "in_report": false,
+    "game_status": null,
+    "practice_status": null
+   }
+  ],
+  "counts": {
+   "in_report": 10,
+   "absent": 15
+  }
+ }
+}
