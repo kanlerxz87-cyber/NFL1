@@ -4025,3 +4025,18 @@ Scope is deliberately narrow. The full brief (about 90 items) cannot be complete
 | LC3 | Record the current cross-page conflict state (not edited; owned by `26b2c41e` and the integration session) | in progress | `1a6737c5` | this section only | the audit script was run and its output file reverted, because `room/data/lions_w10_conflicts.json` is owned by another session |
 
 Files touched by this session: `data/session-1a6737c5/**` (new) and this section of `COORDINATION.md`. Nothing else.
+
+### Result log — `1a6737c5-nfl1` (2026-11-16, UTC)
+
+| ID | Outcome | Evidence a reader can check |
+|---|---|---|
+| LC1 | done. Official Lions block (9 rows) saved verbatim with sha256. Kerby Joseph (S, Knee), Cade Mays (C, Ankle) and D.J. Reed (CB, Hip) are each "Did Not Participate In Practice" and game status "Out". Same values as the 2026-11-15 read recorded in `room/data/lions_w10_conflicts.json`. | Official source <https://www.nfl.com/injuries/league/2026/reg10>; `data/session-1a6737c5/lions_w10_official_block_2026-11-16.md`, `data/session-1a6737c5/lions_w10_official.json` |
+| LC2 | done. `verify_lions.py` recomputes the block hash, counts the 9 rows and checks the 3 designations. Result: `OK: 9 rows; 3 official designations match`. | `python3 data/session-1a6737c5/verify_lions.py` (exit 0) |
+| LC3 | done, observed only. Running `room/audit_lions_w10.py` on 2026-11-16 gives 42 rows on 15 pages (7 differ, 19 missing, 16 match). The `26b2c41e` record gives 32 rows on 11 pages (8 differ, 18 blank, 6 match). Page count grew since then. The regenerated `room/data/lions_w10_conflicts.json` was **not** committed, because `room/` belongs to `26b2c41e` and to the integration session. | `python3 room/audit_lions_w10.py` (writes that file; revert it unless you own `room/`) |
+
+**Irregularities (for the Flagged for Review page, integration session to publish):**
+- The Lions three-row conflict is still open on published pages. The integration session should copy the values from `data/session-1a6737c5/lions_w10_official.json`.
+- `dashboard/injuries.html` shows Kerby Joseph at practice "FP" and game "Out" against the official "DNP / Out". This is logged in `room/data/lions_w10_conflicts.json`; no page was edited here.
+- The sandbox cannot reach nfl.com directly, so this read used the fetch tool. The capture is labelled as rendered text, not a raw HTTP capture.
+
+**Not done here (named, not claimed):** the rest of the brief. The open PRs and claims listed at the top of this section cover most of it.
