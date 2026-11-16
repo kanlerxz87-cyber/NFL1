@@ -47,6 +47,9 @@ GENERATORS = {
     # Session 2b927826-nfl1: the brief dashboard. BUILDERS maps bare filenames; the
     # generator writes them under brief/ (prefix added in claims()).
     "brief/build.py": [r'\n    "([a-z]+\.html)": '],
+    # Session cc5a9cdd-nfl1: the Venues & Weather sub-site.
+    # Its renderer writes bare page names under venue/.
+    "venue/build.py": [r'write\(\s*"([^"/]+\.html)"'],
 }
 
 # explicit, documented ownership. Anything not here is reported, not assumed.
@@ -102,6 +105,12 @@ KNOWN_OWNERS = {
     "prereg/registry.html": "prereg/build.py",
     "prereg/forecasts.html": "prereg/build.py",
     "prereg/archive.html": "prereg/build.py",
+    # Session cc5a9cdd-nfl1: Venues & Weather sub-site pages.
+    "venue/index.html": "venue/build.py",
+    "venue/week10.html": "venue/build.py",
+    "venue/week11.html": "venue/build.py",
+    "venue/schedule.html": "venue/build.py",
+    "venue/flagged.html": "venue/build.py",
     # Session 739408a8-nfl1: the forward-test ledger page (its generator is not in
     # GENERATORS; ownership recorded so the file is documented, not assumed).
     "prereg/index.html": "tools/prereg.py",
@@ -147,6 +156,9 @@ def claims():
         if gen == "prereg/build.py":
             # write() takes bare filenames; the generator writes them under prereg/
             found = {"prereg/" + f for f in found}
+        if gen == "venue/build.py":
+            # The venue builder writes bare filenames under venue/.
+            found = {"venue/" + f for f in found}
         if gen == "lab2/render.py":
             # NAV contains bare filenames; the renderer writes them under lab2/.
             found = {"lab2/" + f for f in found}

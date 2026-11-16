@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flagged for review · Venues &amp; Weather · NFL1</title>
+<style>
+ body { font-family: system-ui, -apple-system, Segoe UI, sans-serif; margin: 0; color: #1a1a1a; }
+ header { background: #0b2545; color: #fff; padding: 1rem 1.5rem; }
+ header h1 { margin: 0.2rem 0; font-size: 1.4rem; }
+ nav { display: flex; flex-wrap: wrap; gap: 0.75rem; padding: 0.6rem 1.5rem; background: #13315c; }
+ nav a { color: #cfe0ff; text-decoration: none; font-size: 0.92rem; }
+ nav a.active { color: #fff; font-weight: 700; text-decoration: underline; }
+ main { padding: 1rem 1.5rem 3rem; max-width: 1180px; }
+ table { border-collapse: collapse; width: 100%; margin: 0.8rem 0 1.4rem; font-size: 0.88rem; }
+ caption { text-align: left; font-weight: 700; padding: 0.4rem 0; }
+ th, td { border: 1px solid #ccd; padding: 0.35rem 0.5rem; vertical-align: top; }
+ th { background: #eef2f8; text-align: left; }
+ .flag { color: #a01818; font-weight: 700; }
+ .box { border: 1px solid #ccd; background: #f6f9ff; padding: 0.8rem 1rem; margin: 0.8rem 0; }
+ .stamp { color: #556; font-size: 0.85rem; }
+ a { color: #0b4f9e; }
+</style>
+</head>
+<body>
+<header><div style="font-size:.85rem">NFL1 · sub-site</div><h1>Flagged for review</h1></header>
+<nav aria-label="Venue pages"><a href="index.html">Overview</a><a href="week10.html">Week 10 venues</a><a href="week11.html">Week 11 venues &amp; conditions</a><a href="schedule.html">Schedule announcement</a><a href="flagged.html" class="active">Flagged for review</a></nav>
+<main>
+
+<p>Non-blocking flags: values that could not be confirmed from an official source stay
+blank and are labelled here. None of these block publication.</p>
+<table>
+<caption>Flagged for review — venue &amp;amp; weather scope (session cc5a9cdd)</caption>
+<thead><tr>
+<th>Item</th>
+<th>What is blank</th>
+<th>Why</th>
+<th>What would clear it</th>
+<th>Official source</th>
+</tr></thead><tbody>
+<tr><td>Estadio Banorte roof &amp; surface (Week 11)</td><td><span class="flag">UNVERIFIED: roof/surface blank</span></td><td>Venue first appears in 2026 Week 11; no prior game in the corpus, so no completed official Game Book exists to transcribe.</td><td>Official Game Book after the 2026-11-22 game (MIN@SF).</td><td><a href="https://www.nfl.com/games/vikings-at-49ers-2026-reg-11">game centre</a></td></tr>
+<tr><td>Estadio Banorte NWS hourly overlay</td><td><span class="flag">UNVERIFIED: NWS values blank</span></td><td>NOAA <code>api.weather.gov/points</code> returns 404 at the venue coordinates — outside NWS coverage (Mexico City).</td><td>No NWS source will exist; remains flagged.</td><td><a href="https://www.nfl.com/games/vikings-at-49ers-2026-reg-11">game centre</a></td></tr>
+<tr><td>CIN@WAS kickoff-hour NWS values</td><td><span class="flag">UNVERIFIED: kickoff window blank</span></td><td>Monday 2026-11-23 8:15 PM ET kickoff lies beyond the NWS hourly horizon at read time (snapshot 2026-11-16T15:06:55+00:00).</td><td>Re-run venue/nws_snapshot.py after 2026-11-20 so the hourly product reaches the kickoff.</td><td><a href="https://api.weather.gov/gridpoints/LWX/102,73/forecast/hourly">NWS hourly product</a></td></tr>
+<tr><td>ARROWHEAD STADIUM game-weather description</td><td><span class="flag">UNVERIFIED: description blank</span></td><td>Official Game Book prints &ldquo;Game Weather:&rdquo; with no description text; temperature/humidity/wind printed and published.</td><td>Not clearable — source prints no description; blank kept.</td><td><a href="https://static.www.nfl.com/image/upload/v1794224919/gamecenter/ab381724-4feb-11f1-abca-2c54536568a9.pdf">Game Book (PDF)</a></td></tr>
+<tr><td>NORTHWEST STADIUM game-weather description</td><td><span class="flag">UNVERIFIED: description blank</span></td><td>Official Game Book conditions row carries temp/wind but no &ldquo;Game Weather:&rdquo; description; values printed and published.</td><td>Not clearable — source prints no description; blank kept.</td><td><a href="https://static.www.nfl.com/image/upload/v1794224919/gamecenter/ab382331-4feb-11f1-abca-2c54536568a9.pdf">Game Book (PDF)</a></td></tr>
+</tbody></table>
+<table>
+<caption>NWS gridpoint-to-venue location checks — non-blocking provenance flags</caption>
+<thead><tr>
+<th>Game</th>
+<th>Official location</th>
+<th>NWS nearest city/state</th>
+<th>Status</th>
+<th>Why / what clears it</th>
+<th>Official sources</th>
+</tr></thead><tbody>
+<tr><td>IND@HOU</td><td>HOUSTON, TX</td><td><span class="flag">UNVERIFIED: not captured</span></td><td><span class="flag">UNVERIFIED: nearest city/state not retained</span></td><td>The stored NWS capture has its /points URL and grid identifiers, but not the returned relativeLocation.city/state. The live endpoint may now differ, so it cannot reconstruct the location returned at capture time. Re-run venue/nws_snapshot.py after retaining the NWS nearest-location fields; keep this row flagged until city/state match the official game-centre location.</td><td><a href="https://api.weather.gov/points/29.6849,-95.4108">NWS /points</a> · <a href="https://www.nfl.com/games/colts-at-texans-2026-reg-11">official game centre</a></td></tr>
+<tr><td>MIA@BUF</td><td>ORCHARD PARK, NY</td><td><span class="flag">UNVERIFIED: not captured</span></td><td><span class="flag">UNVERIFIED: nearest city/state not retained</span></td><td>The stored NWS capture has its /points URL and grid identifiers, but not the returned relativeLocation.city/state. The live endpoint may now differ, so it cannot reconstruct the location returned at capture time. Re-run venue/nws_snapshot.py after retaining the NWS nearest-location fields; keep this row flagged until city/state match the official game-centre location.</td><td><a href="https://api.weather.gov/points/42.773,-78.7912">NWS /points</a> · <a href="https://www.nfl.com/games/dolphins-at-bills-2026-reg-11">official game centre</a></td></tr>
+<tr><td>BAL@CAR</td><td>CHARLOTTE, NC</td><td><span class="flag">UNVERIFIED: not captured</span></td><td><span class="flag">UNVERIFIED: nearest city/state not retained</span></td><td>The stored NWS capture has its /points URL and grid identifiers, but not the returned relativeLocation.city/state. The live endpoint may now differ, so it cannot reconstruct the location returned at capture time. Re-run venue/nws_snapshot.py after retaining the NWS nearest-location fields; keep this row flagged until city/state match the official game-centre location.</td><td><a href="https://api.weather.gov/points/35.2258,-80.8528">NWS /points</a> · <a href="https://www.nfl.com/games/ravens-at-panthers-2026-reg-11">official game centre</a></td></tr>
+<tr><td>NO@CHI</td><td>CHICAGO, IL</td><td><span class="flag">UNVERIFIED: not captured</span></td><td><span class="flag">UNVERIFIED: nearest city/state not retained</span></td><td>The stored NWS capture has its /points URL and grid identifiers, but not the returned relativeLocation.city/state. The live endpoint may now differ, so it cannot reconstruct the location returned at capture time. Re-run venue/nws_snapshot.py after retaining the NWS nearest-location fields; keep this row flagged until city/state match the official game-centre location.</td><td><a href="https://api.weather.gov/points/41.8623,-87.6176">NWS /points</a> · <a href="https://www.nfl.com/games/saints-at-bears-2026-reg-11">official game centre</a></td></tr>
+<tr><td>TEN@DAL</td><td>ARLINGTON, TX</td><td><span class="flag">UNVERIFIED: not captured</span></td><td><span class="flag">UNVERIFIED: nearest city/state not retained</span></td><td>The stored NWS capture has its /points URL and grid identifiers, but not the returned relativeLocation.city/state. The live endpoint may now differ, so it cannot reconstruct the location returned at capture time. Re-run venue/nws_snapshot.py after retaining the NWS nearest-location fields; keep this row flagged until city/state match the official game-centre location.</td><td><a href="https://api.weather.gov/points/32.7479,-97.0928">NWS /points</a> · <a href="https://www.nfl.com/games/titans-at-cowboys-2026-reg-11">official game centre</a></td></tr>
+<tr><td>TB@DET</td><td>DETROIT, MI</td><td><span class="flag">UNVERIFIED: not captured</span></td><td><span class="flag">UNVERIFIED: nearest city/state not retained</span></td><td>The stored NWS capture has its /points URL and grid identifiers, but not the returned relativeLocation.city/state. The live endpoint may now differ, so it cannot reconstruct the location returned at capture time. Re-run venue/nws_snapshot.py after retaining the NWS nearest-location fields; keep this row flagged until city/state match the official game-centre location.</td><td><a href="https://api.weather.gov/points/42.34,-83.0456">NWS /points</a> · <a href="https://www.nfl.com/games/buccaneers-at-lions-2026-reg-11">official game centre</a></td></tr>
+<tr><td>AZ@KC</td><td>KANSAS CITY, MO</td><td><span class="flag">UNVERIFIED: not captured</span></td><td><span class="flag">UNVERIFIED: nearest city/state not retained</span></td><td>The stored NWS capture has its /points URL and grid identifiers, but not the returned relativeLocation.city/state. The live endpoint may now differ, so it cannot reconstruct the location returned at capture time. Re-run venue/nws_snapshot.py after retaining the NWS nearest-location fields; keep this row flagged until city/state match the official game-centre location.</td><td><a href="https://api.weather.gov/points/39.0489,-94.484">NWS /points</a> · <a href="https://www.nfl.com/games/cardinals-at-chiefs-2026-reg-11">official game centre</a></td></tr>
+<tr><td>PIT@PHI</td><td>PHILADELPHIA, PA</td><td><span class="flag">UNVERIFIED: not captured</span></td><td><span class="flag">UNVERIFIED: nearest city/state not retained</span></td><td>The stored NWS capture has its /points URL and grid identifiers, but not the returned relativeLocation.city/state. The live endpoint may now differ, so it cannot reconstruct the location returned at capture time. Re-run venue/nws_snapshot.py after retaining the NWS nearest-location fields; keep this row flagged until city/state match the official game-centre location.</td><td><a href="https://api.weather.gov/points/39.9009,-75.1675">NWS /points</a> · <a href="https://www.nfl.com/games/steelers-at-eagles-2026-reg-11">official game centre</a></td></tr>
+<tr><td>NYJ@LAC</td><td>INGLEWOOD, CA</td><td><span class="flag">UNVERIFIED: not captured</span></td><td><span class="flag">UNVERIFIED: nearest city/state not retained</span></td><td>The stored NWS capture has its /points URL and grid identifiers, but not the returned relativeLocation.city/state. The live endpoint may now differ, so it cannot reconstruct the location returned at capture time. Re-run venue/nws_snapshot.py after retaining the NWS nearest-location fields; keep this row flagged until city/state match the official game-centre location.</td><td><a href="https://api.weather.gov/points/33.9534,-118.339">NWS /points</a> · <a href="https://www.nfl.com/games/jets-at-chargers-2026-reg-11">official game centre</a></td></tr>
+<tr><td>JAX@NYG</td><td>EAST RUTHERFORD, NJ</td><td><span class="flag">UNVERIFIED: not captured</span></td><td><span class="flag">UNVERIFIED: nearest city/state not retained</span></td><td>The stored NWS capture has its /points URL and grid identifiers, but not the returned relativeLocation.city/state. The live endpoint may now differ, so it cannot reconstruct the location returned at capture time. Re-run venue/nws_snapshot.py after retaining the NWS nearest-location fields; keep this row flagged until city/state match the official game-centre location.</td><td><a href="https://api.weather.gov/points/40.8135,-74.0743">NWS /points</a> · <a href="https://www.nfl.com/games/jaguars-at-giants-2026-reg-11">official game centre</a></td></tr>
+<tr><td>LV@DEN</td><td>DENVER, CO</td><td><span class="flag">UNVERIFIED: not captured</span></td><td><span class="flag">UNVERIFIED: nearest city/state not retained</span></td><td>The stored NWS capture has its /points URL and grid identifiers, but not the returned relativeLocation.city/state. The live endpoint may now differ, so it cannot reconstruct the location returned at capture time. Re-run venue/nws_snapshot.py after retaining the NWS nearest-location fields; keep this row flagged until city/state match the official game-centre location.</td><td><a href="https://api.weather.gov/points/39.744,-105.0192">NWS /points</a> · <a href="https://www.nfl.com/games/raiders-at-broncos-2026-reg-11">official game centre</a></td></tr>
+<tr><td>CIN@WAS</td><td>LANDOVER, MD</td><td><span class="flag">UNVERIFIED: not captured</span></td><td><span class="flag">UNVERIFIED: nearest city/state not retained</span></td><td>The stored NWS capture has its /points URL and grid identifiers, but not the returned relativeLocation.city/state. The live endpoint may now differ, so it cannot reconstruct the location returned at capture time. Re-run venue/nws_snapshot.py after retaining the NWS nearest-location fields; keep this row flagged until city/state match the official game-centre location.</td><td><a href="https://api.weather.gov/points/38.9077,-76.8645">NWS /points</a> · <a href="https://www.nfl.com/games/bengals-at-commanders-2026-reg-11">official game centre</a></td></tr>
+</tbody></table>
+<p class="stamp">Snapshot 2026-11-16T15:45:00Z · cross-scope: the main-site
+<a href="../flagged.html">flagged.html</a> aggregates flags repository-wide; this page
+carries the venue/weather detail.</p>
+
+<p class="stamp"><a href="../index.html">← NFL1 main site</a></p>
+</main>
+</body>
+</html>

@@ -400,5 +400,15 @@
     "retrieved": "2026-11-13",
     "verified": true,
     "note": "Registered 2026-11-16 by the 414a54c9 integration so the backup-register flags can cite their source (request R-cf97db19-03)."
+  },
+  {
+    "id": "S42",
+    "publisher": "National Football League (NFL.com)",
+    "url": "https://www.nfl.com/standings/league/2026/reg",
+    "kind": "Official league standings (current live cross-check)",
+    "what": "32-club live standings read recorded at 2026-11-16T14:35:24Z; W/L/T, PCT, PF, PA and NET. Captured in data/live/standings_2026_crosscheck.json and compared with the moving model snapshot. The separate data/evidence/standings_current.json still carries a retrieved date of 2026-11-13 while its captured_at is 2026-11-16T15:51:04+00:00; see F74.",
+    "retrieved": "2026-11-16",
+    "verified": true,
+    "note": "Official URL recorded in the committed cross-check. The read timestamp is from the artifact; no raw HTML is retained. This source is not a substitute for an archived page capture."
   }
 ]

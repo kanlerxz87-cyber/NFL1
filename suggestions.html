@@ -87,7 +87,7 @@
   <div class="main">
     <div class="topbar">
       <div class="crumb">NFL1 / <b>Suggestions &amp; Paths</b></div>
-      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">107 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">113 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
     </div>
     <main class="content" id="main">
       <div class="kicker">Governance</div>
@@ -134,8 +134,8 @@
 </tbody></table></div>
 <h2 id="suggestions">Improvement suggestions</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-suggestions" aria-label="Filter tbl-suggestions" placeholder="Filter rows…">
-<span class="count" data-count-for="tbl-suggestions">32 rows shown</span></div>
-<div class="tablewrap"><table class="data-table" id="tbl-suggestions"><caption>32 suggestions to improve decision making on this site. Effort is blank and flagged; every row links to an official source.</caption>
+<span class="count" data-count-for="tbl-suggestions">35 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-suggestions"><caption>35 suggestions to improve decision making on this site. Effort is blank and flagged; every row links to an official source.</caption>
 <thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Area</th><th scope="col" class="sortable">Suggestion</th><th scope="col" class="sortable">How it improves decision making</th><th scope="col" class="sortable">Effort / risk estimate</th><th scope="col" class="sortable">Suggested disposition</th><th scope="col" class="sortable">Official evidence</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
 <tr id="S01" data-verified="true">
 <td><code>S01</code></td>
@@ -457,6 +457,36 @@
 <td class="wide">data/flags.json LR-07; tools/verify_official.py check B3; https://www.nfl.com/schedules/2026/by-week/week-11</td>
 <td><span class="src"><a href="https://www.nfl.com/schedules" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official schedule">S06 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
+<tr id="S31" data-verified="true">
+<td><code>S31</code></td>
+<td>Verification &amp; data feeds</td>
+<td class="wide">Make every capped source say so in the artifact, not only in a flag</td>
+<td class="wide">The transactions register is usable because each derived row carries the read time, the capture file and the fact that the page was at its 25-row printed cap; a count built on it can be labelled a floor automatically. The same rule should apply wherever a publisher caps a page, and the readiness row should carry the number of capped pages rather than a total that looks complete.</td>
+<td data-value="1" class="num">small</td>
+<td><span class="badge neutral">Adopt for the injury report and schedule captures too</span></td>
+<td class="wide">data/reserve/coverage.json (printed_cap, pages_capped, months_incomplete_at_source); tools/check_reserve_register.py (fails when the published page stops disclosing it); flag F66</td>
+<td><span class="src"><a href="https://www.nfl.com/transactions/league/reserve-list/2026/11?page=2" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league transaction log (window probe)">S40 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S32" data-verified="true">
+<td><code>S32</code></td>
+<td>Injuries and depth</td>
+<td class="wide">Run the reserve list as the tie-breaker for &#x27;available&#x27;, not as another injury count</td>
+<td class="wide">On the week-10 capture, 83 players sit on an open reserve designation and appear on no injury report row, against 347 report rows. Counting only the report therefore treats 83 names as available. The reserve list should enter availability as a separate, dated state (on a list / not on a list) so the injury surprise stays a surprise about the report and the unavailable set stays complete; depth and snap features then ablate against both.</td>
+<td data-value="1" class="num">medium</td>
+<td><span class="badge neutral">Review before implementing - it changes the availability key</span></td>
+<td class="wide">data/reserve/report_vs_reserve.json (totals: report_rows 347, on_reserve 100, named_in_both 17, on_reserve_not_in_report 83); reserve/index.html club table; https://www.nfl.com/transactions/league/reserve-list/2026/11</td>
+<td><span class="src"><a href="https://www.nfl.com/transactions/league/reserve-list/2026/11" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league transaction log (reserve list, November 2026)">S37 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S33" data-verified="true">
+<td><code>S33</code></td>
+<td>Point-in-time provenance</td>
+<td class="wide">Keep the moving standings read immutable and separate from its build timestamp</td>
+<td class="wide">A saved official response and one read timestamp would resolve F74 without overwriting the historical T1/T2/T3 record, and would make future standings-dependent evaluations reproducible.</td>
+<td data-value="1" class="blank num"></td>
+<td><span class="badge neutral">Review before implementing</span></td>
+<td class="wide">data/live/standings_2026_crosscheck.json (read_utc 2026-11-16T14:35:24Z); data/evidence/standings_current.json; flag F74</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings (current live cross-check)">S42 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
 </tbody></table></div>
 <h2 id="matrix">Decision matrix</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-matrix" aria-label="Filter tbl-matrix" placeholder="Filter rows…">
@@ -507,7 +537,7 @@
 <section class="panel"><h2>Review workflow</h2>
 <ol class="tight">
 <li>Read the <a href="questions.html">decision questions</a> and the <a href="flagged.html">flagged items</a>.</li>
-<li>Compare the 32 suggestions and the three paths above.</li>
+<li>Compare the 35 suggestions and the three paths above.</li>
 <li>Select a path in the Review &amp; Choose a Path box; file the prefilled issue to make the decision durable.</li>
 <li>Close the blocking questions, then — and only then — authorise implementation of individual suggestions.</li>
 </ol>

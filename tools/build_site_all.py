@@ -98,6 +98,10 @@ STEPS = [
     # any forecast that does not reproduce from the official inputs, or any late forecast.
     ("pre-registration check", [sys.executable, "tools/prereg.py", "check"], ROOT),
     ("pre-registration page (prereg/)", [sys.executable, "tools/prereg.py", "render"], ROOT),
+    # Session cc5a9cdd-nfl1 (E6): the Venues & Weather sub-site and its gate. Built
+    # before the shared navigation so the nav entry can link venue/index.html.
+    ("venue sub-site", [sys.executable, "venue/build.py"], ROOT),
+    ("venue sub-site gate", [sys.executable, "venue/verify.py"], ROOT),
     # Session 2b927826-nfl1: the brief dashboard. Built before the canonical navigation so
     # the eight brief/ pages enter the same reachability graph as everything else, and after
     # the landing page because brief/index.html links back into pages/ and the sub-sites.
@@ -124,7 +128,7 @@ def main() -> int:
 
     if check:
         print("--- checking that the committed pages equal the generated pages")
-        r = subprocess.run(["git", "diff", "--exit-code", "--", "*.html", "README.md", "docs/", "verified-lab/", "referee/", "reserve/", "ledger/", "brief/", "lab2/"],
+        r = subprocess.run(["git", "diff", "--exit-code", "--", "*.html", "README.md", "docs/", "verified-lab/", "referee/", "reserve/", "ledger/", "brief/", "lab2/", "venue/"],
                            cwd=ROOT)
         if r.returncode != 0:
             print("FAILED: the committed pages differ from the generated pages "

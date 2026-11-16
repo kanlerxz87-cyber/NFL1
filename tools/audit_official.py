@@ -15,9 +15,11 @@ What it does
                       must satisfy (PCT from W/L/T, HOME+ROAD = games played, CONF+NON-CONF =
                       games played, DIV inside CONF, DIV%/CONF% from their own records).
    Only a column that is both reproducible and consistent is treated as a verifiable value.
-2. Compares every standings table published in the repository with the official page:
-   data/model/snapshot.json, data/verified/standings_2026.csv,
-   data/verified/standings_2026_reg.tsv and referee/data/official/nflcom_standings_2026.txt.
+2. Compares moving `data/model/snapshot.json` to the later official live cross-check
+   `data/live/standings_2026_crosscheck.json` (T5, with its own read_utc), while comparing
+   fixed week-10 transcriptions to their original T1/T2 read. The week-11 schedule's displayed
+   team records are compared with the contemporaneous T3 standings capture, not a later read.
+   The 32-club CSV, TSV and referee copies remain checked against their original retrieval.
 3. Compares the published Week-10 slate (data/model/lines.json) with the official Week-10
    schedule transcription, including the records the schedule page prints beside each club,
    and the bye list.
@@ -65,6 +67,11 @@ def read_csv(path):
         return list(csv.DictReader(fh))
 
 
+def read_json(path):
+    with open(path, encoding="utf-8") as fh:
+        return json.load(fh)
+
+
 def rec(text):
     """'3-1-0' -> (3, 1, 0); None when the cell is blank."""
     if not text:
@@ -103,6 +110,32 @@ def main() -> int:
     t1 = {r["team"]: r for r in read_tsv(os.path.join(AUDIT, "standings_retrieval_T1.tsv"))}
     t2 = {r["team"]: r for r in read_tsv(os.path.join(AUDIT, "standings_retrieval_T2.tsv"))}
     t3 = {r["team"]: r for r in read_tsv(os.path.join(AUDIT, "standings_retrieval_T3_20261113.tsv"))}
+    # A newer official standings read was committed by the final-data sessions.
+    # Keep T1/T2/T3 immutable for the historical reproducibility audit, and use this
+    # explicitly dated read for the moving model snapshot. It is deliberately separate
+    # from data/evidence/standings_current.json, whose retrieved date and captured_at
+    # disagree (that discrepancy is recorded as an integration flag).
+    current_capture = read_json(os.path.join(ROOT, "data", "live",
+                                             "standings_2026_crosscheck.json"))
+    current_standings = current_capture.get("live", {})
+    current_read_at = current_capture.get("read_utc", "")
+    check("current official standings source URL",
+          current_capture.get("official_url") == SOURCE_STANDINGS,
+          f"source={current_capture.get('official_url')}")
+    check("current official standings capture has 32 clubs", len(current_standings) == 32,
+          f"clubs={len(current_standings)} read_utc={current_read_at}")
+    for team, r in sorted(current_standings.items()):
+        try:
+            record = (int(r["w"]), int(r["l"]), int(r["t"]))
+            pct_ok = abs(float(r["pct"]) - (tie_pct(record) or 0)) < 5e-4
+            net_ok = int(r["net"]) == int(r["pf"]) - int(r["pa"])
+        except (KeyError, TypeError, ValueError):
+            pct_ok = net_ok = False
+        check(f"current standings {team} PCT identity", pct_ok,
+              f"read_utc={current_read_at}; printed PCT={r.get('pct')}")
+        check(f"current standings {team} NET identity", net_ok,
+              f"read_utc={current_read_at}; NET={r.get('net')} PF-PA="
+              f"{r.get('pf')} - {r.get('pa')}")
     check("standings transcription rows", len(t1) == 32 and len(t2) == 32,
           f"T1 rows={len(t1)} T2 rows={len(t2)} (expected 32 each)")
     check("same clubs in both retrievals", set(t1) == set(t2),
@@ -219,13 +252,17 @@ def main() -> int:
         """
         return t1.get(norm(team))
 
-    def official_live(team):
-        """Current official row (retrieval T3, 2026-11-13) for current-state comparisons."""
+    def official_current(team):
+        """Official live standings row (read_utc in data/live/standings_2026_crosscheck.json)."""
+        return current_standings.get(norm(team))
+
+    def official_schedule_record(team):
+        """Week-11 schedule-page record as captured with the T3/T4 schedule read (2026-11-13)."""
         return t3.get(norm(team))
 
-    snap = json.load(open(os.path.join(ROOT, "data", "model", "snapshot.json"), encoding="utf-8"))
+    snap = read_json(os.path.join(ROOT, "data", "model", "snapshot.json"))
     for r in snap["standings"]:
-        off = official_live(r["team"])
+        off = official_current(r["team"])
         if not off:
             check(f"snapshot row {r['team']}", False, "club missing from the official transcription")
             continue
@@ -290,7 +327,7 @@ def main() -> int:
     official_byes = byes_row["home"].split() if byes_row else []
     official_byes = [norm(b) for b in official_byes]
 
-    lines = json.load(open(os.path.join(ROOT, "data", "model", "lines.json"), encoding="utf-8"))
+    lines = read_json(os.path.join(ROOT, "data", "model", "lines.json"))
     check("model lines week matches the audited official week", lines.get("week") == 11,
           f"model week={lines.get('week')} (audit transcription is week 11)")
     model_games = {(norm(g["away"]), norm(g["home"])): g for g in lines["lines"]}
@@ -312,7 +349,9 @@ def main() -> int:
             parts = g[f"{side}_record"].split("-")
             w, l = parts[0], parts[1]
             t = parts[2] if len(parts) > 2 else "0"
-            off = official_live(team)
+            # The schedule page and its displayed records were captured on 2026-11-13.
+            # Compare them with the same-time T3 standings read, not the later T5 snapshot.
+            off = official_schedule_record(team)
             if not off:
                 continue
             check(f"schedule record {team} ({side})",
@@ -348,9 +387,11 @@ def main() -> int:
         "sources": {"standings": SOURCE_STANDINGS, "schedule": SOURCE_SCHEDULE},
         "retrievals": {"T1": "2026-11-12 ~22:05Z", "T2": "2026-11-12 ~22:25Z",
                        "T3 (standings)": "2026-11-13 ~14:05Z",
-                       "T4 (week-11 schedule)": "2026-11-13 ~14:05Z"},
+                       "T4 (week-11 schedule)": "2026-11-13 ~14:05Z",
+                       "T5 (current standings crosscheck)": current_read_at},
         "audited_week": 11,
-        "session_note": "T1/T2 by session 4c043747; T3/T4 by session d23c65ad",
+        "session_note": ("T1/T2 by session 4c043747; T3/T4 by session d23c65ad; "
+                         "T5 is the official read recorded in data/live/standings_2026_crosscheck.json"),
         "reproducible_columns": reproducible,
         "verified_columns": verified_columns,
         "columns_changed_between_retrievals": {c: v for c, v in changed.items()},

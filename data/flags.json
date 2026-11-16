@@ -1258,5 +1258,16 @@
     "action": "Re-read the three roster pages line by line at the next capture window and clear the row labels.",
     "retrieved": "2026-11-16",
     "verified": true
+  },
+  {
+    "id": "F74",
+    "category": "Moving standings capture has conflicting retrieved dates",
+    "description": "data/evidence/standings_current.json labels its retrieval as 2026-11-13, but its captured_at is 2026-11-16T15:51:04+00:00 and its 149-game values match the separate official live cross-check read at 2026-11-16T14:35:24Z in data/live/standings_2026_crosscheck.json. The earlier official standings retrieval T3 (~14:05Z on 2026-11-13) has 137 games. The moving evidence file therefore combines a newer value set with an older retrieved date; the original HTML page is not archived in this repository.",
+    "impact": "The current model snapshot matches the dated live cross-check, but the evidence file alone does not establish a single, unambiguous as-of time. Incorrect point-in-time metadata can leak later results into an evaluation window or make a valid refresh appear stale.",
+    "status": "open",
+    "src": "S42",
+    "action": "Keep historical T1/T2/T3 captures immutable. Re-read the official page, preserve the raw capture or its hash and actual retrieval time, and reconcile the retrieved/captured_at fields before using data/evidence/standings_current.json as a point-in-time input; do not guess the date.",
+    "verified": true,
+    "retrieved": "2026-11-16"
   }
 ]

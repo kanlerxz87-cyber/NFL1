@@ -523,7 +523,7 @@ def page_questions():
              'when the questions below have answers that an official source supports. Cells with no official answer '
              'are left blank; the "Do not have" and "Discovery action" columns say exactly what is missing and how '
              'to obtain it.</div>')
-    b.append(cards([("Questions", counts["questions"], "Numbered Q01–Q27"),
+    b.append(cards([("Questions", counts["questions"], "One row per question"),
                     ("Official sources", counts["sources"], "Links for manual review"),
                     ("Flagged items", counts["flags"], "Review page"),
                     ("Blank answers", 9, "Intentionally blank")]))
@@ -973,6 +973,9 @@ def page_flagged():
                     ("Official-page irregularities", sum(1 for x in fids if "F02" <= x <= "F08"), "F02–F08"),
                     ("Missing official data", sum(1 for x in fids if x in ("F09", "F10", "F11", "F14", "F15")), "F09–F11, F14, F15"),
                     ("Combined-site review", sum(1 for x in fids if x >= "F25"), "F25–F36")]))
+    b.append('<p>Venue and weather evidence has a dedicated, source-linked detail register: '
+             '<a href="venue/flagged.html">Venues &amp; Weather — Flagged for Review</a>. '
+             'It is also reachable from the main navigation.</p>')
     b.append('<h2 id="all">All flagged irregularities</h2>')
     b.append(T("tbl-flags", "Every flag with category, description, impact, status, official source link and suggested action for the reviewer.",
                [("ID", "id", "id"), ("Category", "category", "text"), ("Irregularity / unverified item", "description", "wide"),

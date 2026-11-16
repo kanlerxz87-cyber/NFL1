@@ -1,0 +1,34 @@
+# Session cc5a9cdd E4 one-off: fetch NWS hourly forecast snapshots for Week-11 venues.
+# Push-triggered only when venue/nws_snapshot.py changes on the active integration branch,
+# plus manual dispatch. Artifact-only output (no repo writes), so it cannot mutate another
+# session branch or block integration gates. Scope logged in COORDINATION.md.
+name: nws-snapshot-cc5a9cdd
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - arena/57cb6643-nfl1
+    paths:
+      - venue/nws_snapshot.py
+      - .github/workflows/nws-snapshot-cc5a9cdd.yml
+
+permissions:
+  contents: read
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Fetch NWS hourly snapshots for Week-11 venues
+        run: python3 venue/nws_snapshot.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nws-hourly-w11
+          path: data/session-cc5a9cdd/nws_hourly_w11.json
+          if-no-files-found: error

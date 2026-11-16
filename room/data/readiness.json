@@ -5,12 +5,12 @@
   "brief": "Requirements of the 2026-11-15 brief (NFL line origination, injuries and depth, leaderboard, site, process)",
   "count": 82,
   "by_status": {
-   "Blocked": 8,
-   "Partial": 42,
-   "Not verified": 3,
-   "Done": 17,
+   "Blocked": 7,
+   "Done": 19,
    "Not met": 1,
-   "Not started": 10,
+   "Not started": 9,
+   "Not verified": 3,
+   "Partial": 42,
    "Rejected (brief)": 1
   },
   "legend": {
@@ -830,45 +830,45 @@
    "id": "IN-29",
    "group": "Injuries and depth",
    "requirement": "Stadium roof and surface, with an NWS hourly wind and precipitation overlay",
-   "status": "Blocked",
-   "checked": "repo artifact, not re-read",
-   "evidence": "games.csv holds roof, surface, temperature and wind (nflverse). No NWS hourly grid is captured.",
-   "blocked_by": "NWS feed not captured.",
+   "status": "Partial",
+   "checked": "re-read 2026-11-16",
+   "evidence": "Roof/surface/game-weather transcribed verbatim from official NFL Game Books for 12 of 13 Week-11 venues (data/session-cc5a9cdd/venue_conditions_w11.json, published on venue/week11.html). NWS hourly kickoff-window values with the NWS generatedAt timestamp for 11 of 13 venues (data/session-cc5a9cdd/nws_hourly_w11.json, gridpoint linked per row). games.csv roof/surface values are never published.",
+   "blocked_by": "Estadio Banorte is outside NWS coverage (api.weather.gov /points returns 404) and has no completed Game Book yet; CIN@WAS kickoff lies beyond the NWS hourly horizon at the read time.",
    "clears_when": "Hourly NWS values per game with a timestamp.",
-   "next_step": "Capture the NWS forecast with timestamps.",
+   "next_step": "Re-run venue/nws_snapshot.py after 2026-11-20 so the hourly product reaches the Monday kickoff; the two remaining blanks stay flagged.",
    "src": {
-    "t": "games.csv",
-    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/games.csv"
+    "t": "venue/week11.html",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/venue/week11.html"
    }
   },
   {
    "id": "IN-30",
    "group": "Injuries and depth",
    "requirement": "Transcribe the venue of every fixture from the official game centre and publish it",
-   "status": "Partial",
-   "checked": "repo artifact, not re-read",
-   "evidence": "data/shadow/week11_venues.csv: all 13 Week 11 venues transcribed from the official nfl.com game centre pages (URL on each row). Other fixtures are not transcribed.",
-   "blocked_by": "Not transcribed.",
-   "clears_when": "All 14 Week 10 venues transcribed, each with its page link.",
-   "next_step": "Transcribe from each official game page.",
+   "status": "Done",
+   "checked": "re-read 2026-11-16",
+   "evidence": "All 14 Week 10 and all 13 Week 11 venues transcribed from official nfl.com game centres (data/session-cc5a9cdd/venue_week10.json and venue_week11.json) and published with a page link on every row (venue/week10.html, venue/week11.html).",
+   "blocked_by": "None.",
+   "clears_when": "n/a",
+   "next_step": "None.",
    "src": {
-    "t": "nfl.com Week 10 schedule",
-    "u": "https://www.nfl.com/schedules/2026/by-week/week-10"
+    "t": "venue/week10.html",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/venue/week10.html"
    }
   },
   {
    "id": "IN-31",
    "group": "Injuries and depth",
    "requirement": "Publish the league's dated schedule announcement beside the live schedule page",
-   "status": "Not started",
-   "checked": "repo artifact, not re-read",
-   "evidence": "Not built.",
-   "blocked_by": "Not built.",
-   "clears_when": "Announcement date and link shown beside the live schedule.",
-   "next_step": "Build the panel.",
+   "status": "Done",
+   "checked": "re-read 2026-11-16",
+   "evidence": "venue/schedule.html shows the announcement date (Thursday, 2026-05-14, 8 p.m. ET) and the official nfl.com article link beside the live Week-11 schedule table, with the league's statement quoted verbatim.",
+   "blocked_by": "None.",
+   "clears_when": "n/a",
+   "next_step": "None.",
    "src": {
-    "t": "nfl.com Week 10 schedule",
-    "u": "https://www.nfl.com/schedules/2026/by-week/week-10"
+    "t": "venue/schedule.html",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/venue/schedule.html"
    }
   },
   {

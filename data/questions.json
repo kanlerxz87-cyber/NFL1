@@ -418,5 +418,19 @@
     "src": "S39",
     "verified": true,
     "retrieved": "2026-11-16"
+  },
+  {
+    "id": "Q31",
+    "question": "What is the verified read time for the moving current-standings evidence file?",
+    "known": "data/live/standings_2026_crosscheck.json records an official NFL.com read at 2026-11-16T14:35:24Z and its 32 rows match the 149-game model snapshot. data/evidence/standings_current.json has captured_at 2026-11-16T15:51:04+00:00 but labels retrieved as 2026-11-13.",
+    "unknown": "Whether the evidence file has a stale retrieved field or a different provenance event; the raw official page capture for that file is not retained.",
+    "answer": " ",
+    "limitation": "The source page is live and mutable; its current contents cannot reconstruct an earlier read without the original capture.",
+    "why": "A single, truthful as-of timestamp is required to prevent point-in-time leakage in model and availability evaluations.",
+    "discovery": "Re-read the official standings page, save the response or a content hash with the actual UTC read time, then reconcile only the moving evidence metadata; keep historical captures unchanged.",
+    "flag": "F74",
+    "src": "S42",
+    "verified": true,
+    "retrieved": "2026-11-16"
   }
 ]
