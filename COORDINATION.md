@@ -4478,3 +4478,22 @@ naming is not available in this environment; see the note at the top of the boar
 ### Shared files touched by this session
 
 None. New paths only: `schedule_announcement/**`, `data/schedule_announcement/**`, `tools/check_schedule_announcement.py`, `tests/test_schedule_announcement.py`, and this board.
+
+### Integration record — session `49ac3a99-nfl1` (S3, 2026-11-16 UTC)
+
+**PR #101** (`arena/49ac3a99-nfl1` → `main`). Failures found on first CI run and how each was fixed (none hidden):
+
+1. **Reachability gate** (`check_reachability.py`, step "Every published page must be reachable from the landing page") — the new page had no nav entry. Fixed with one additive line in `pipeline/gen_site.py` NAV and SIDEBAR and one in `scripts/verified/normalize_nav.py` CANON, then `tools/build_site_all.py` regenerated every page. The regeneration also carried the data bot's refresh (timestamps, sidebar, counts). `build_site_all.py --check` passes on the committed tree.
+2. **Audit gate** (`tools/audit_official.py`, step "Audit the published numbers against the official NFL pages") — 40 failures, all `snapshot <club> <col>`. Cause: the data bot's refresh (`3939d26`) rebuilt `data/model/snapshot.json` at `games_played 149` (Week 10 complete), while the only current-state official read in the repo was T3 of 2026-11-13, taken before the final Week 10 results. `main`'s own commit passes (checked by exporting `46c82ae` to a temp directory: exit 0, 0 failures), so the failure is the stale reference, not a wrong published number.
+   - **Fix:** a fresh official retrieval **T5** (2026-11-16) of all 32 rows, read from <https://www.nfl.com/standings/> (both chunks), committed as `data/audit/49ac3a99/standings_retrieval_T5_20261116.tsv`. Its own totals reconcile (149 games: W 148 = L 148, one tie; PF 6880 = PA 6880). The current-state comparison now uses T5. The schedule-record check, whose schedule was read on 2026-11-13, now compares with T3 of the same day, so it does not compare across dates.
+   - **Verified against the live page:** the 16 AFC rows and 16 NFC rows were read from the two chunks of the page, and the audit's own snapshot comparison (w, l, t, pf, pa for all 32) passes against them.
+3. **Verification report** (`tools/verify.py` writes `data/verification_report.json`) — regenerated on the current pages and committed.
+
+**Pre-existing, not caused by this PR:** the "Verify every repo dataset, cell by cell, against the official pages" step (`tools/verify_official.py`) failed on `main` at `40ad386` and on this branch at `f7dacf1`, and passed on the final head `25fc78c`. It is intermittent and depends on the data bot's last refresh. Logged here for the owner of that gate; it is not changed by this PR.
+
+**Irregularities for Flagged for Review (non-blocking):**
+- F-49AC-01: the published standings snapshot moved to 149 games (Week 10 complete) while the repo's verified transcriptions are dated 2026-11-12 and 2026-11-13. T5 is the current read; T1–T3 remain the historical reads. Reviewer: confirm T5 against <https://www.nfl.com/standings/>.
+- F-49AC-02: the data bot pushes a refresh commit to every `arena/**` branch after each push, and that refresh can change a checked value. Every gate was re-run on the head after the bot's commit before merge.
+- F-49AC-03: the `Verify decision dashboard` cell-by-cell step is intermittent (above).
+
+**Requests logged, not made:** none outstanding for IN-31. The schedule page is now in the nav, so the change request in S2 is closed.
