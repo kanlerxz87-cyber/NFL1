@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-16T15:05:52+00:00",
+ "generated_at": "2026-11-16T18:28:49+00:00",
  "session": "9cb71eb8-nfl1",
  "hash_convention": "`sha256`/`bytes` describe the downloaded asset in build/raw/ (not committed). `committed_sha256`/`committed_bytes` describe the file actually stored in data/s9cb/, which is the one a reviewer can check. The two differ because the extract is filtered to REG games and a fixed column set before it is written.",
  "source_repo": "https://github.com/nflverse/nflverse-data",
@@ -13,13 +13,13 @@
    "url": "https://github.com/nflverse/nflverse-data/releases/download/schedules/games.csv",
    "official_upstream": "https://www.nfl.com/schedules/",
    "description": "Game results, closing spread/total/moneylines with the price on each side, rest days, roof, surface, temperature, wind, division flag, referee, starting QBs",
-   "bytes": 2190089,
+   "bytes": 2190086,
    "status": "ok",
-   "fetched_at": "2026-11-16T15:05:49+00:00",
-   "sha256": "c29862ac7772c6a7ed2347ca6106d9dbb2885c1f422462e90a564922abb868f1",
+   "fetched_at": "2026-11-16T18:28:45+00:00",
+   "sha256": "cace61485e9d5e6406119077c920bb8ba67a71215bba8c258a9430a0e218c908",
    "hash_describes": "downloaded asset (build/raw/, not committed)",
-   "committed_bytes": 1665685,
-   "committed_sha256": "c5e27d1c14cb3ce0c7174c05e5503b8b77f899b7cc86a57770f1a878d382882f",
+   "committed_bytes": 1665684,
+   "committed_sha256": "8978a8f067c2be15fed13c5256f7476340bceb9be99109e42772cfbaee7453f5",
    "committed_note": "committed_sha256 is the hash of the file in data/s9cb/; verify that one with `sha256sum data/s9cb/<file>`."
   },
   {
@@ -31,7 +31,7 @@
    "description": "Club directory: abbreviation, name, conference, division",
    "bytes": 18919,
    "status": "ok",
-   "fetched_at": "2026-11-16T15:05:49+00:00",
+   "fetched_at": "2026-11-16T18:28:45+00:00",
    "sha256": "4eab559fcf89cb4eaf61cb63a88abc47b01b6c9049187c59f3efe95888c3d048",
    "hash_describes": "downloaded asset (build/raw/, not committed)",
    "committed_bytes": null,
@@ -45,10 +45,10 @@
    "url": "https://github.com/nflverse/nflverse-data/releases/download/players/players.csv",
    "official_upstream": "https://www.nfl.com/players/",
    "description": "Player master (GSIS id, position, years of experience, latest team)",
-   "bytes": 7308389,
+   "bytes": 7308437,
    "status": "ok",
-   "fetched_at": "2026-11-16T15:05:49+00:00",
-   "sha256": "f82e52fd3d9b0976ad3756dc5ea32a4dbc10650d0a5fed993f9218a850fa944a",
+   "fetched_at": "2026-11-16T18:28:45+00:00",
+   "sha256": "be3dcc21cf76a7c5117519b931601e4a506044653568ad78cc8d71b96a6bd532",
    "hash_describes": "downloaded asset (build/raw/, not committed)"
   }
  ],
