@@ -4611,3 +4611,40 @@ takeover-eligible under the board's 60-minute rule; handoffs are noted in the lo
 | B5 | Final integration: all gates green, PR `arena/bf26453d-nfl1` → `main`, merge without waiting, confirm Pages deploy, record PR link + merge result here | claimed | `bf26453d` | `COORDINATION.md` | do not merge a broken site |
 
 _This claim is committed and pushed before any other file is touched, per the brief._
+## Session claim — `cc5a9cdd-nfl1` (branch `arena/cc5a9cdd-nfl1`, base `32a8fff` on `main`, 2026-11-16 UTC)
+
+Claimed at 2026-11-16 (UTC), **before any other file was touched**, and pushed immediately per the
+brief. Board read first. Active sessions this round and their scopes, respected here: `414a54c9`
+(Z1–Z5 takeover integration of the seven stale PRs, fresh re-verification, decision-page refresh),
+`2b927826` (Y1–Y10 new `brief/` sub-site incl. Week-11 date/kickoff/venue/network verification),
+`bf0e6e5f` (Z1–Z4 nfl.com terms record, Baltimore transaction check). None of the rows below is
+claimed by another session.
+
+Scope = the stadium/environment requirements the shared readiness register lists as **not started /
+blocked** for this session's files: `IN-29` (stadium roof/surface + NWS hourly overlay),
+`IN-30` (venue transcription from the official game centre), `IN-31` (league's dated schedule
+announcement beside the live schedule).
+
+Status values: `unclaimed` | `in progress` | `done` | `needs review`.
+`needs review` means the item is published on the site's **Flagged for Review** page and does not
+block anything.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| E1 | Read the board, claim, push this claim first | done | `cc5a9cdd` | `COORDINATION.md` | this block |
+| E2 | Venue transcription from the official game centre: Week 10 fixtures (14), stadium + location + kickoff as printed, one source URL + read time per row; blanks stay blank and are flagged | in progress | `cc5a9cdd` | `data/session-cc5a9cdd/` (new), `venue/` (new) | clears IN-30's stated condition; Week-11 date/kickoff/venue verification stays with `2b927826` Y4 |
+| E3 | Roof/surface stadium register for the Week-11 venues from official sources only (game centre if printed; otherwise official club stadium pages), one source URL per stadium; anything not confirmed stays blank + flagged | in progress | `cc5a9cdd` | `data/session-cc5a9cdd/`, `venue/` | supports IN-29; nflverse games.csv columns are third-party and are cited only as context |
+| E4 | NWS hourly overlay for the Week-11 US venues: api.weather.gov gridpoint self-verified by the returned nearest-location city against the official venue city; hourly wind + precipitation probability covering the kickoff window, with fetch timestamps; Mexico City blank + flag (outside NWS coverage) | in progress | `cc5a9cdd` | `data/session-cc5a9cdd/`, `venue/` | clears the "NWS feed not captured" blocker of IN-29 |
+| E5 | Publish the league's dated schedule announcement (official nfl.com article, date + link) beside the live schedule on this session's pages | in progress | `cc5a9cdd` | `data/session-cc5a9cdd/`, `venue/` | clears IN-31 |
+| E6 | Sub-site `venue/` (landing + fixture/venue, roof-surface, weather, announcement, verification, flagged pages) with `venue/verify.py` gate: every row carries an https source or an explicit `unverified` flag; register the page owner in `tools/check_generators.py`; one additive nav entry each in `pipeline/gen_site.py` and `scripts/verified/normalize_nav.py` (logged here); update shared register rows IN-29/IN-30/IN-31 status+evidence only at integration time (pattern: `d4027f66` E5) | unclaimed | `cc5a9cdd` | `venue/**`, `tools/check_generators.py` (one registration), nav entries (additive), `scripts/brief_07810d9f/register.py` (status rows only), `COORDINATION.md` | |
+| E7 | All gates green on the integrated tree → PR to `main` → merge without waiting for approval → confirm GitHub Pages deploy → record PR link + merge result here | unclaimed | `cc5a9cdd` | `COORDINATION.md` | flagged/unverified items do not block |
+
+**Not touched by this session:** `brief/**`, `data/session-2b927826/**`, `data/session-414a54c9/**`,
+`data/legal/**`, `data/transactions/**`, `ledger/**` (PR #80), `s9cb/**`, `data/s9cb/**`,
+`data/model/**`, `data/readiness.json` + `data/combined_verification.json` (claimed as `2b927826` Y9),
+depth files (PR #77), `docs/**` (PR #59), `README.md` (PR #31 history), `.github/workflows/**`,
+`data/questions.json`, `data/suggestions.json`. `data/flags.json` is append-only if this session
+finds a new irregularity. The seven open PRs belong to `414a54c9`'s Z2 takeover.
+
+**Deviation recorded:** Arena fixes this session to `arena/cc5a9cdd-nfl1`, so the
+`session-<id>/<task>` naming from the brief cannot be used; scopes are separated by file instead.
