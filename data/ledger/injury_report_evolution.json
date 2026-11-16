@@ -1,0 +1,102 @@
+{
+ "generated_by": "session 57c05555-nfl1, assembled from the artifacts named in each row",
+ "what_this_is": "The dated history of the official Week 10 injury report as this repository has read it. It exists because three separate sessions recorded three different row counts, and a reader is entitled to know whether that is a contradiction or a page that changed. It is the second: the official page grew during the week as clubs filed their designsations.",
+ "why_it_matters": "The brief asks that the injury report be treated as a timestamped series rather than a weekly snapshot. This table is the whole of the series the repository can currently prove. It is thin, and the ledger is the mechanism that makes it thicker without re-reading old pages.",
+ "source_url": "https://www.nfl.com/injuries/league/2026/reg10",
+ "series": [
+  {
+   "captured": "2026-11-12T05:30Z",
+   "rows": 254,
+   "clubs": 24,
+   "clubs_printing_no_injuries": 4,
+   "no_injury_clubs": ["SEA", "CIN", "LAC", "BAL"],
+   "artifact": "data/verified/injury_report_2026_week10.tsv (original) and data/verified/no_injuries_week10.csv",
+   "note": "The hand copy. It was incomplete: the official page already listed players for Seattle and Cincinnati, so the four 'No Injuries Reported' entries were a transcription gap, not a page statement. This session rebuilt both files from the 347-row capture; that rebuild is the only change made to them."
+  },
+  {
+   "captured": "2026-11-13T12:20Z",
+   "rows": 296,
+   "clubs": 26,
+   "clubs_printing_no_injuries": 2,
+   "no_injury_clubs": ["LAC", "BAL"],
+   "artifact": "room/data/findings.json, room/data/questions.json, room/data/sources.json (the Decision Room's own reading)",
+   "note": "The Decision Room read the page at this time and recorded 296 rows across 26 clubs with LAC and BAL printing 'No Injuries Reported'. Its record is internally consistent and was accurate for the page at that moment."
+  },
+  {
+   "captured": "2026-11-15T12:24:19Z",
+   "rows": 347,
+   "clubs": 28,
+   "clubs_printing_no_injuries": 0,
+   "no_injury_clubs": [],
+   "artifact": "data/capture/nflcom_injuries_reg10_2026-11-15_rows.tsv (sha256 9fe77d36a256…) and data/model/official_injuries.json (the automated scrape, also 347 rows)",
+   "note": "Both independent reads of the page on this date agree on 347 rows. Every one of the 28 playing clubs now prints a table, including the Chargers (19 rows) and the Ravens (10 rows). The four clubs on bye (CHI, DEN, PHI, TB) still have no section, which is correct."
+  }
+ ],
+ "delta": {
+  "from": "2026-11-13T12:20Z",
+  "to": "2026-11-15T12:24:19Z",
+  "rows": 51,
+  "clubs": 2,
+  "no_injury_sections_closed": 2,
+  "reading": "The page gained two club tables (LAC and BAL) and 51 player rows in the 48 hours before kickoff, and the two clubs that had been printing 'No Injuries Reported' now print injuries. A model that treated a Wednesday reading as the week's availability would have been wrong about 51 player-rows and two clubs."
+ },
+ "contradiction_register": [
+  {
+   "claim": "Seattle has no injuries (the official page prints 'No Injuries Reported')",
+   "status": "false on 2026-11-15",
+   "who_still_publishes_it": [
+    "docs/*.html (session 87deb7ab's sub-site): docs/index.html, docs/executive-summary.html, docs/flagged.html, docs/injury-depth.html, docs/questions.html, docs/verification.html",
+    "dashboard/flagged.html and dashboard/questions.html",
+    "room/data sources through room/questions.html, room/flagged.html",
+    "review-room/flagged.html and web/flag-register.html",
+    "verified-lab/executive-summary.html and verified-lab/verification.html"
+   ],
+   "evidence_for_false": "The 2026-11-15 capture lists 15 Seattle rows on the official page: data/capture/nflcom_injuries_reg10_2026-11-15_rows.tsv, club SEA. The reconstructed data/verified/injury_report_2026_week10.tsv also lists them.",
+   "action_for_the_owning_session": "Each sub-site reads its own namespaced data. Those data files, not this one, hold the stale string, so the fix belongs to the session that owns each generator. Logged as a coordination request rather than edited here, because the brief's rule is that a file owned by another session is changed by a request on the board.",
+   "severity": "medium: the claim is about a factual state of the official page and it is checkable in one click"
+  },
+  {
+   "claim": "Cincinnati has no injuries",
+   "status": "false on 2026-11-15",
+   "who_still_publishes_it": [
+    "docs/question and injury pages",
+    "web/flag-register.html carries the earlier wording"
+   ],
+   "evidence_for_false": "The 2026-11-15 capture lists 9 Cincinnati rows on the official page, club CIN.",
+   "action_for_the_owning_session": "same as above",
+   "severity": "medium"
+  },
+  {
+   "claim": "LAC and BAL print 'No Injuries Reported'",
+   "status": "was true at 2026-11-13T12:20Z, false on 2026-11-15",
+   "who_still_publishes_it": [
+    "room/data/findings.json, questions.json and sources.json",
+    "dashboard/flagged.html",
+    "web/flag-register.html, web/verification.html"
+   ],
+   "evidence_for_false": "The 2026-11-15 capture lists 19 Chargers rows and 10 Ravens rows. The 2026-11-13 reading in room/data is not an error; it was accurate then and has been overtaken.",
+   "action_for_the_owning_session": "Date the statement. It is true 'as at 2026-11-13T12:20Z' and should read that way, rather than being deleted, because the change itself is the evidence for keeping a daily series.",
+   "severity": "low if dated, medium while it reads as present tense"
+  }
+ ],
+ "fixed_by_this_session": [
+  {
+   "artifact": "data/verified/injury_report_2026_week10.tsv",
+   "was": "254 rows, 24 clubs",
+   "now": "347 rows, 28 clubs",
+   "how": "scripts/nfl1_57c05555/repair_verified_injuries.py rebuilds it from the 347-row capture with club-code mapping; the script refuses to run if the capture is not the 347-row one."
+  },
+  {
+   "artifact": "data/verified/no_injuries_week10.csv",
+   "was": "SEA, CIN, LAC, BAL listed as 'No Injuries Reported'",
+   "now": "each of the four carries its true row count and the official URL",
+   "how": "same script"
+  },
+  {
+   "artifact": "data/injury_games.json",
+   "was": "SEA/LV read \"Seahawks: 'No Injuries Reported'; Raiders table published\", PIT/CIN the same for Cincinnati, LAC/BAL \"'No Injuries Reported' for both clubs\"",
+   "now": "each club carries 'injury table published (N players listed)' with N from the capture",
+   "how": "rebuilt from the 347-row capture; injuries.html now contains no false no-injury claim"
+  }
+ ]
+}

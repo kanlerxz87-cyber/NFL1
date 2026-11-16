@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Overview · NFL Origination Ledger</title>
+<style>
+:root{--bg:#0f1116;--card:#171a21;--line:#242a35;--ink:#e8edf5;--dim:#9aa7ba;
+--ok:#3fb950;--warn:#d29922;--bad:#f85149;--acc:#58a6ff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+header{border-bottom:1px solid var(--line);background:#0b0d12;position:sticky;top:0;z-index:5}
+nav{max-width:1180px;margin:0 auto;padding:10px 18px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
+nav .brand{font-weight:700;letter-spacing:.2px;color:#fff;margin-right:8px}
+nav a{font-size:13px;color:var(--dim);padding:4px 2px}
+nav a.on{color:#fff;border-bottom:2px solid var(--acc)}
+main{max-width:1180px;margin:0 auto;padding:26px 18px 60px}
+h1{font-size:26px;margin:0 0 6px}
+h2{font-size:18px;margin:34px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+h3{font-size:15px;margin:22px 0 8px;color:#cfd8e5}
+p{color:#c8d2e0;max-width:80ch}
+.lead{color:var(--dim);font-size:14px;margin:0 0 18px;max-width:90ch}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:14px 0}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px}
+.kpi .v{font-size:24px;font-weight:700}
+.kpi .l{font-size:12px;color:var(--dim);margin-top:2px}
+.kpi .s{font-size:11px;color:#7b8798;margin-top:6px}
+table{width:100%;border-collapse:collapse;margin:10px 0 18px;font-size:13px;background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+th{background:#1d222c;text-align:left;padding:8px 10px;font-weight:600;color:#cfd8e5;border-bottom:1px solid var(--line);font-size:12px;white-space:nowrap}
+td{padding:8px 10px;border-bottom:1px solid #1e242e;vertical-align:top}
+tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#1b202a}
+.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.ok{color:var(--ok)}.warn{color:var(--warn)}.bad{color:var(--bad)}.dim{color:var(--dim)}
+.tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:999px;border:1px solid var(--line);color:var(--dim);white-space:nowrap}
+.tag.ok{color:var(--ok);border-color:#1f6f33}
+.tag.warn{color:var(--warn);border-color:#6b5312}
+.tag.bad{color:var(--bad);border-color:#7a2723}
+.note{background:#141821;border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:8px;padding:12px 14px;margin:14px 0}
+.note.warn{border-left-color:var(--warn)}
+.note.bad{border-left-color:var(--bad)}
+.scroll{overflow-x:auto;border-radius:8px}
+footer{border-top:1px solid var(--line);color:var(--dim);font-size:12px;max-width:1180px;margin:0 auto;padding:18px}
+.blank{color:#5d6675;font-style:italic}
+code{background:#1d222c;padding:1px 5px;border-radius:4px;font-size:12px}
+ul{color:#c8d2e0}
+</style></head>
+<body>
+<header><nav><span class="brand">NFL Origination Ledger</span><a class="on" href="index.html">Overview</a><a class="" href="executive.html">Executive summary</a><a class="" href="decisions.html">Requirements: can we decide yet?</a><a class="" href="strategies.html">Strategy competition</a><a class="" href="lines.html">Own lines &amp; price store</a><a class="" href="injuries.html">Injuries &amp; replacement</a><a class="" href="verification.html">Verification</a><a class="" href="flagged.html">Flagged for review</a><a class="" href="suggestions.html">Suggestions</a></nav></header>
+<main>
+
+<h1>NFL Origination Ledger</h1>
+<p class="lead">A pre-registered test of whether an own-made NFL number beats the closing
+market: 12 rules, 10 gates each, on 5,336 decided games.
+The answer, stated up front, is <strong>no</strong> — and the page below shows the evidence,
+the exact gates that failed, and what would have to change.</p>
+
+<div class="grid">
+  <div class="kpi"><div class="v">0<span class="dim" style="font-size:15px">/12</span></div>
+    <div class="l">rules promoted</div><div class="s">all ten gates must pass</div></div>
+  <div class="kpi"><div class="v bad"><span class="">-0.0694</span></div>
+    <div class="l">Brier skill vs the close</div><div class="s">negative = the market forecasts better</div></div>
+  <div class="kpi"><div class="v"><span class="">0.09%</span></div>
+    <div class="l">best information-free control</div><div class="s">blind-away, every game</div></div>
+  <div class="kpi"><div class="v"><span class="">2.32%</span></div>
+    <div class="l">best signal, in sample</div><div class="s">C84-S4 — still paper</div></div>
+  <div class="kpi"><div class="v"><span class="">0.0007</span></div>
+    <div class="l">MAE change from injury features</div><div class="s">ablation, not a penalty</div></div>
+  <div class="kpi"><div class="v">82</div>
+    <div class="l">brief requirements tracked</div><div class="s">each with its blocking gate</div></div>
+</div>
+
+<div class="note bad">
+<strong>The one-paragraph answer.</strong> The pre-registered own-line model is a worse
+forecaster than the closing line on every measure computed here: its Brier score is
+<span class="">0.2255</span> against the de-vigged close's <span class="">0.2109</span>
+(a skill score of <span class="">-0.0694</span>, interval excluding zero), and it is the
+only one of the twelve rules whose in-sample ROI is materially positive
+(C84-S4, <span class="">2.32%</span>), which fails multiple
+testing and fails the untouched 2024-2026 holdout. Adding the availability features to the fit
+changes mean absolute error by <span class="">0.0007</span> points
+with an interval containing zero, so the injury signal is not doing work. No rule is promoted and
+nothing on this site is a bet recommendation.
+</div>
+
+<h2>What this site is, and what it is not</h2>
+<table>
+<thead><tr><th>It is</th><th>It is not</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>A frozen rule set, committed before the results were computed, with the commit hash printed on
+<a href="strategies.html">the strategy page</a></td>
+<td>A search over thresholds until something looked good. The thresholds were fixed in
+<code>preregistration.json</code> and the hash is checked at build time.</td>
+<td><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/session-c84a41a4/preregistration.json">preregistration.json</a></td></tr>
+<tr><td>Every published number traceable to a committed file with a sha256</td>
+<td>A live feed. The prices are a snapshot of a third-party parse and are labelled that way.</td>
+<td><a href="https://github.com/nflverse/nflverse-data">nflverse-data</a></td></tr>
+<tr><td>Blanks where no source exists — six rows of the brief's own claims are corrected by live
+official pages on <a href="flagged.html">Flagged for review</a></td>
+<td>An inference. A cell with no official source is printed as blank and flagged, never filled.</td>
+<td><a href="flagged.html">Flagged for review</a></td></tr>
+</table>
+
+<h2>Where to go</h2>
+<div class="scroll"><table data-nav="1">
+<thead><tr><th>Page</th><th>What it answers</th><th>Rows</th></tr></thead><tbody>
+<tr><td><a href="executive.html">Executive summary</a></td><td>The whole project in one screen:
+what holds, what does not, what a human must decide</td><td class="num">1</td></tr>
+<tr><td><a href="decisions.html">Requirements</a></td><td>Every requirement in the brief, the gate
+blocking it and the number that would clear it</td><td class="num">82</td></tr>
+<tr><td><a href="strategies.html">Strategy competition</a></td><td>Twelve rules, ten gates each,
+the control baseline, correlations and the luck panel</td><td class="num">12</td></tr>
+<tr><td><a href="lines.html">Own lines &amp; price store</a></td><td>The model's fair line, the
+market line and the difference, as separate columns, per game</td>
+<td class="num">5,336</td></tr>
+<tr><td><a href="injuries.html">Injuries &amp; replacement</a></td><td>Official designations, the
+ablation, and confirmed quarterback replacements</td>
+<td class="num">60</td></tr>
+<tr><td><a href="verification.html">Verification</a></td><td>Line by line: source, hash, and what
+was checked against what</td><td class="num">1</td></tr>
+<tr><td><a href="flagged.html">Flagged for review</a></td><td>Every irregularity, including claims
+in the brief that the live official pages contradict</td><td class="num">1</td></tr>
+<tr><td><a href="suggestions.html">Suggestions</a></td><td>Ranked improvements with a decision
+for each, for a reviewer to choose before anything is built</td><td class="num">12</td></tr>
+</tbody></table></div>
+
+<div class="note warn">
+<strong>Read <a href="flagged.html">Flagged for review</a> before acting on anything here.</strong>
+Seven claims that circulate in this project are contradicted by the live official pages this
+session fetched. They are published with the counter-evidence rather than quietly dropped.
+</div>
+
+</main>
+<footer>
+Built 2026-11-15 from committed files only. Every row links to the source that settles it.
+Static strings, no scripts, no fonts, no analytics. Session <code>c84a41a4-nfl1</code>.
+Prices are a third-party parse of an unofficial market and are labelled as such; the NFL
+publishes no odds.
+</footer>
+</body></html>

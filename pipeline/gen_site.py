@@ -37,6 +37,9 @@ NAV = [
     ("pages/parlays.html", "Parlays & Combos"),
     ("pages/props.html", "Player Props"),
     ("pages/injuries.html", "Injuries"),
+    # Session cf97db19-nfl1 (X1): official-roster backup register. Added by the
+    # 414a54c9 integration session from PR #47 (takeover of a stale claim).
+    ("pages/backup-register.html", "Backup Register"),
     ("pages/depth.html", "Depth & Deficiency"),
     ("pages/snapshots.html", "Injury Snapshots"),
     # Session 1d824ec2-nfl1 (V6): the dated official transactions and reserve-list register,
@@ -49,6 +52,9 @@ NAV = [
     ("pages/audit.html", "Official Audit"),
     ("pages/review.html", "Flagged for Review"),
     ("pages/sections.html", "All Sections"),
+    # Session c84a41a4-nfl1: the pre-registered origination ledger is its own sub-site under
+    # ledger/. Additive: one entry, so the repo-wide reachability gate can see every page.
+    ("ledger/index.html", "Origination Ledger"),
     # Session ca779bcc-nfl1: the strength-of-schedule study is its own sub-site under
     # strength/; the entry keeps it reachable from the root dashboard.
     ("room/index.html", "Decision Room"),
@@ -2083,6 +2089,8 @@ def sections_page(dash):
          "Independently built requirements, questions, suggestions and strategy registers"],
         ["Independent sub-sites", link("strength/index.html", "Strength of schedule study (session ca779bcc)"),
          "Walk-forward ratings, SOS, own lines, gated leaderboard, questions, suggestions, flagged items (14 pages)"],
+        ["Independent sub-sites", link("ledger/index.html", "Origination Ledger (session c84a41a4)"),
+         "Pre-registered strategy competition, own lines vs the close, injury ablation, confirmed replacements, and the flag register (9 pages)"],
         ["Historical", link("legacy-site.html", "Earlier dashboard"),
          "The first integrated dashboard, preserved verbatim"],
     ]
