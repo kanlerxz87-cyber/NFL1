@@ -3790,3 +3790,33 @@ Scope is deliberately small: this session can verify against official pages, not
 | Still open | F51, F60 (terms — owner/counsel decision), F61 (NFL log gap), F62 (verifier allow-list for team posts). None blocks; all need review. |
 
 Z1–Z4 are done. Items in the brief outside Z1–Z4 are unclaimed and unchanged.
+
+---
+
+## Task board — session `a35ddf45-nfl1` (ACTIVE; claimed 2026-11-16, UTC)
+
+Branch `arena/a35ddf45-nfl1`, base `32a8fffe` (`main`). This claim is committed and pushed
+**before any other file is touched**. Every earlier claim on the board is `done`,
+`needs review` or merged, so nothing here overlaps an open task. Scope is **additive**: one new
+sub-site under `lab2/`, one new append-only evidence store under `data/live/`, and one CI
+workflow. No file owned by another session's generator is rewritten; the single shared navigation
+change (one entry in `pipeline/gen_site.py`) is logged here as a cross-session request and is
+additive.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| L0 | Claim this scope on the board, commit and push before any other edit | in progress | `a35ddf45` | `COORDINATION.md` | this block |
+| L1 | Live official re-verification: fetch the nfl.com standings, Week 10 + Week 11 schedule/injury pages in this session and compare **against the committed data**, line by line; every discrepancy becomes a flag with the official link | unclaimed | `a35ddf45` | `data/live/`, `lab2/build.py` | the repo's newest committed standings snapshot is dated 2026-11-12; the live page is re-read, not trusted |
+| L2 | Market book (spine): one row per market with the **origination order** — side first, then total, then moneyline — model fair line, market line, difference as separate columns; model probability + full input list stored per output | unclaimed | `a35ddf45` | `lab2/build.py`, `data/live/` | reads committed `data/model/*.json`; no new model is fitted |
+| L3 | Price-snapshot handling decision: opening vs closing are **both absent** from the sources this repo can reach. Build the policy page that settles the question (PR-10 pattern) and publish the empty, labelled store; do not backfill an opening price | unclaimed | `a35ddf45` | `lab2/` | closing line is a consensus number from a mirrored feed; no opening price exists anywhere in the repo |
+| L4 | Results feed for scoring: game-level results joined to the pre-kickoff records; every scored record carries its result source link; unplayed/sourceless records stay blank and flagged | unclaimed | `a35ddf45` | `data/live/`, `lab2/` | Week 10 finals are read from the official schedule page this session |
+| L5 | Audit every strategy row on the published leaderboard for **backtest numbers on a leaderboard** (brief LB-01/R26-01): separate signal from staking, proper-score vs ROI, and mark what is prospective | unclaimed | `a35ddf45` | `lab2/`, `data/live/` | publication-layer audit; the owned pages are not edited, the finding is logged |
+| L6 | Decision-readiness + question/brief coverage: recompute the readiness register from **this session's** evidence, one row per brief requirement, and publish the "what we don't know that costs us money" list | unclaimed | `a35ddf45` | `lab2/` | replaces nothing; sits beside the existing readiness page |
+| L7 | Flagged for Review page for this sub-site: every irregularity found in L1-L6 with the official URL that settles it; unverified cells are published blank and labelled, never filled | unclaimed | `a35ddf45` | `lab2/` | appends nothing to `data/flags.json` (owned elsewhere) |
+| L8 | Build + verify: `lab2/build.py` (deterministic), `lab2/verify.py` (every table row has an https link, no empty cells, all local hrefs resolve, rebuild is byte-identical); one additive nav entry; PR → merge → Pages deploy confirmed → record here | unclaimed | `a35ddf45` | `lab2/`, `COORDINATION.md`, one nav entry in `pipeline/gen_site.py` | Pages must serve it before this row is marked done |
+
+**Not touched by this session:** `data/model/**`, `data/s9cb/**`, `data/flags.json`,
+`data/questions.json`, `data/suggestions.json`, `pipeline/build_all.py`, `s9cb/**`, `analysis/**`,
+`room/**`, `lab/**`, `research/**`, `strength/**`, `shadow/**`, `strat/**`, `prereg/**`,
+`docs/**`, `verified-lab/**`, `referee/**`, `dashboard/**`, `web/**`, `.github/workflows/**`.
+If a finding needs a change in one of those, it is logged here as a request instead of edited.
