@@ -1,0 +1,289 @@
+{
+  "schema": "gamebooks-source/1",
+  "generated_at": "2026-11-16T18:59:13Z",
+  "season": 2026,
+  "week": 10,
+  "method": "CAP-06 transcription-of-fetch-text: official NFL Game Book PDFs (static.www.nfl.com) parsed via fetch_page markdown extraction and transcribed verbatim to data/gamebooks/raw/. Only what the Game Book prints is recorded; blanks are empty-as-extracted, never inferred. Per-file extraction_note documents layout quirks.",
+  "games_completed_at_capture": 13,
+  "games_pending": [
+    {
+      "game": "chargers-at-ravens-2026-reg-10",
+      "note": "Monday Night Football, not played at capture time"
+    }
+  ],
+  "games": [
+    {
+      "game": "commanders-at-giants-2026-reg-10",
+      "date": "2026-11-12",
+      "away": {
+        "abbr": "WAS",
+        "name": "Washington Commanders",
+        "score": 24
+      },
+      "home": {
+        "abbr": "NYG",
+        "name": "New York Giants",
+        "score": 21
+      },
+      "venue": "MetLife Stadium, East Rutherford, NJ",
+      "game_centre_url": "https://www.nfl.com/games/commanders-at-giants-2026-reg-10",
+      "game_book_url": "https://static.www.nfl.com/image/upload/v1794570519/gamecenter/gamecenter.pdf",
+      "raw_file": "data/gamebooks/raw/commanders-at-giants-2026-reg-10.txt",
+      "raw_sha256": "f69e98eb79e0d839d5b4c702a964869a5f7ad88efc09cf85761ab927e4baec2b",
+      "transcribed_at": "2026-11-16T18:59:12Z",
+      "extraction_note": true
+    },
+    {
+      "game": "patriots-at-lions-2026-reg-10",
+      "date": "2026-11-15",
+      "away": {
+        "abbr": "NE",
+        "name": "New England Patriots",
+        "score": 10
+      },
+      "home": {
+        "abbr": "DET",
+        "name": "Detroit Lions",
+        "score": 35
+      },
+      "venue": "Allianz Arena, Munich, Germany",
+      "game_centre_url": "https://www.nfl.com/games/patriots-at-lions-2026-reg-10",
+      "game_book_url": "https://static.www.nfl.com/image/upload/v1794829721/gamecenter/gamecenter.pdf",
+      "raw_file": "data/gamebooks/raw/patriots-at-lions-2026-reg-10.txt",
+      "raw_sha256": "7f17a5e93358018e48aafb6a759e1dcc42f9e4c160471c085528130d6f50d0d3",
+      "transcribed_at": "2026-11-16T18:34:18Z",
+      "extraction_note": true
+    },
+    {
+      "game": "chiefs-at-falcons-2026-reg-10",
+      "date": "2026-11-15",
+      "away": {
+        "abbr": "KC",
+        "name": "Kansas City Chiefs",
+        "score": 13
+      },
+      "home": {
+        "abbr": "ATL",
+        "name": "Atlanta Falcons",
+        "score": 35
+      },
+      "venue": "Mercedes-Benz Stadium, Atlanta, GA",
+      "game_centre_url": "https://www.nfl.com/games/chiefs-at-falcons-2026-reg-10",
+      "game_book_url": "https://static.www.nfl.com/image/upload/v1794829722/gamecenter/gamecenter.pdf",
+      "raw_file": "data/gamebooks/raw/chiefs-at-falcons-2026-reg-10.txt",
+      "raw_sha256": "95fef6faa72b79ff89a8e5c11983fff8214b0bce8724a0e4d5c1ee4c761cbe33",
+      "transcribed_at": "2026-11-16T18:53:39Z",
+      "extraction_note": true
+    },
+    {
+      "game": "texans-at-browns-2026-reg-10",
+      "date": "2026-11-15",
+      "away": {
+        "abbr": "HOU",
+        "name": "Houston Texans",
+        "score": 24
+      },
+      "home": {
+        "abbr": "CLE",
+        "name": "Cleveland Browns",
+        "score": 27
+      },
+      "venue": "Huntington Bank Field, Cleveland, OH",
+      "game_centre_url": "https://www.nfl.com/games/texans-at-browns-2026-reg-10",
+      "game_book_url": "https://static.www.nfl.com/image/upload/v1794829724/gamecenter/gamecenter.pdf",
+      "raw_file": "data/gamebooks/raw/texans-at-browns-2026-reg-10.txt",
+      "raw_sha256": "568a0cd5d21d6c1a9d04fd5b1ce6a957722103dc2f4511ae867207b9051f78fc",
+      "transcribed_at": "2026-11-16T18:37:43Z",
+      "extraction_note": true
+    },
+    {
+      "game": "vikings-at-packers-2026-reg-10",
+      "date": "2026-11-15",
+      "away": {
+        "abbr": "MIN",
+        "name": "Minnesota Vikings",
+        "score": 30
+      },
+      "home": {
+        "abbr": "GB",
+        "name": "Green Bay Packers",
+        "score": 10
+      },
+      "venue": "Lambeau Field, Green Bay, WI",
+      "game_centre_url": "https://www.nfl.com/games/vikings-at-packers-2026-reg-10",
+      "game_book_url": "https://static.www.nfl.com/image/upload/v1794829721/gamecenter/gamecenter.pdf",
+      "raw_file": "data/gamebooks/raw/vikings-at-packers-2026-reg-10.txt",
+      "raw_sha256": "d033fc38dc4f288e9c46be952e553b70c738f8bf02e95617c7118aba761993c4",
+      "transcribed_at": "2026-11-16T18:38:58Z",
+      "extraction_note": true
+    },
+    {
+      "game": "dolphins-at-colts-2026-reg-10",
+      "date": "2026-11-15",
+      "away": {
+        "abbr": "MIA",
+        "name": "Miami Dolphins",
+        "score": 22
+      },
+      "home": {
+        "abbr": "IND",
+        "name": "Indianapolis Colts",
+        "score": 24
+      },
+      "venue": "Lucas Oil Stadium, Indianapolis, IN",
+      "game_centre_url": "https://www.nfl.com/games/dolphins-at-colts-2026-reg-10",
+      "game_book_url": "https://static.www.nfl.com/image/upload/v1794829723/gamecenter/gamecenter.pdf",
+      "raw_file": "data/gamebooks/raw/dolphins-at-colts-2026-reg-10.txt",
+      "raw_sha256": "64af3eb8f9415c12617dfb1b0ce9dfa6c0e9dd6cef048cd72ef701637612ef3b",
+      "transcribed_at": "2026-11-16T18:40:30Z",
+      "extraction_note": true
+    },
+    {
+      "game": "panthers-at-saints-2026-reg-10",
+      "date": "2026-11-15",
+      "away": {
+        "abbr": "CAR",
+        "name": "Carolina Panthers",
+        "score": 20
+      },
+      "home": {
+        "abbr": "NO",
+        "name": "New Orleans Saints",
+        "score": 17
+      },
+      "venue": "Caesars Superdome, New Orleans, LA",
+      "game_centre_url": "https://www.nfl.com/games/panthers-at-saints-2026-reg-10",
+      "game_book_url": "https://static.www.nfl.com/image/upload/v1794829721/gamecenter/gamecenter.pdf",
+      "raw_file": "data/gamebooks/raw/panthers-at-saints-2026-reg-10.txt",
+      "raw_sha256": "8c2896d7e0f59064d397c9f2ddcb95e4a0789d89b673698cc44571193f0f0426",
+      "transcribed_at": "2026-11-16T18:43:26Z",
+      "extraction_note": true
+    },
+    {
+      "game": "bills-at-jets-2026-reg-10",
+      "date": "2026-11-15",
+      "away": {
+        "abbr": "BUF",
+        "name": "Buffalo Bills",
+        "score": 31
+      },
+      "home": {
+        "abbr": "NYJ",
+        "name": "New York Jets",
+        "score": 12
+      },
+      "venue": "MetLife Stadium, East Rutherford, NJ",
+      "game_centre_url": "https://www.nfl.com/games/bills-at-jets-2026-reg-10",
+      "game_book_url": "https://static.www.nfl.com/image/upload/v1794829722/gamecenter/gamecenter.pdf",
+      "raw_file": "data/gamebooks/raw/bills-at-jets-2026-reg-10.txt",
+      "raw_sha256": "a124ebfecd78102b0adcde375b30ff13b00b87f774882d1d2d17e963c3622c87",
+      "transcribed_at": "2026-11-16T18:45:03Z",
+      "extraction_note": true
+    },
+    {
+      "game": "jaguars-at-titans-2026-reg-10",
+      "date": "2026-11-15",
+      "away": {
+        "abbr": "JAX",
+        "name": "Jacksonville Jaguars",
+        "score": 40
+      },
+      "home": {
+        "abbr": "TEN",
+        "name": "Tennessee Titans",
+        "score": 23
+      },
+      "venue": "Nissan Stadium, Nashville, TN",
+      "game_centre_url": "https://www.nfl.com/games/jaguars-at-titans-2026-reg-10",
+      "game_book_url": "https://static.www.nfl.com/image/upload/v1794829722/gamecenter/gamecenter.pdf",
+      "raw_file": "data/gamebooks/raw/jaguars-at-titans-2026-reg-10.txt",
+      "raw_sha256": "66e85f9de24b72ab56f031cd8a16b622949273a9a98595ac96abd5441f3981a6",
+      "transcribed_at": "2026-11-16T18:46:17Z",
+      "extraction_note": true
+    },
+    {
+      "game": "rams-at-cardinals-2026-reg-10",
+      "date": "2026-11-15",
+      "away": {
+        "abbr": "LAR",
+        "name": "Los Angeles Rams",
+        "score": 34
+      },
+      "home": {
+        "abbr": "ARI",
+        "name": "Arizona Cardinals",
+        "score": 6
+      },
+      "venue": "State Farm Stadium, Glendale, AZ",
+      "game_centre_url": "https://www.nfl.com/games/rams-at-cardinals-2026-reg-10",
+      "game_book_url": "https://static.www.nfl.com/image/upload/v1794829725/gamecenter/gamecenter.pdf",
+      "raw_file": "data/gamebooks/raw/rams-at-cardinals-2026-reg-10.txt",
+      "raw_sha256": "788ffeece40bf6d7a226f3ba59cb9287f0306b8fc52ed20455df85d45fb7ed61",
+      "transcribed_at": "2026-11-16T18:47:51Z",
+      "extraction_note": true
+    },
+    {
+      "game": "seahawks-at-raiders-2026-reg-10",
+      "date": "2026-11-15",
+      "away": {
+        "abbr": "SEA",
+        "name": "Seattle Seahawks",
+        "score": 21
+      },
+      "home": {
+        "abbr": "LV",
+        "name": "Las Vegas Raiders",
+        "score": 13
+      },
+      "venue": "Allegiant Stadium, Las Vegas, NV",
+      "game_centre_url": "https://www.nfl.com/games/seahawks-at-raiders-2026-reg-10",
+      "game_book_url": "https://static.www.nfl.com/image/upload/v1794829726/gamecenter/gamecenter.pdf",
+      "raw_file": "data/gamebooks/raw/seahawks-at-raiders-2026-reg-10.txt",
+      "raw_sha256": "05a752217eec86eb4893f882faebaeb06b1504b396d62329aa074e47a03694ba",
+      "transcribed_at": "2026-11-16T18:50:57Z",
+      "extraction_note": true
+    },
+    {
+      "game": "49ers-at-cowboys-2026-reg-10",
+      "date": "2026-11-15",
+      "away": {
+        "abbr": "SF",
+        "name": "San Francisco 49ers",
+        "score": 46
+      },
+      "home": {
+        "abbr": "DAL",
+        "name": "Dallas Cowboys",
+        "score": 40
+      },
+      "venue": "AT&T Stadium, Arlington, TX",
+      "game_centre_url": "https://www.nfl.com/games/49ers-at-cowboys-2026-reg-10",
+      "game_book_url": "https://static.www.nfl.com/image/upload/v1794829724/gamecenter/gamecenter.pdf",
+      "raw_file": "data/gamebooks/raw/49ers-at-cowboys-2026-reg-10.txt",
+      "raw_sha256": "2aa15d7a7266aca8b14fbdff95b04a651976bc90db5be814d642474aa96dd5f2",
+      "transcribed_at": "2026-11-16T18:52:36Z",
+      "extraction_note": true
+    },
+    {
+      "game": "steelers-at-bengals-2026-reg-10",
+      "date": "2026-11-15",
+      "away": {
+        "abbr": "PIT",
+        "name": "Pittsburgh Steelers",
+        "score": 18
+      },
+      "home": {
+        "abbr": "CIN",
+        "name": "Cincinnati Bengals",
+        "score": 38
+      },
+      "venue": "Paycor Stadium, Cincinnati, OH",
+      "game_centre_url": "https://www.nfl.com/games/steelers-at-bengals-2026-reg-10",
+      "game_book_url": "https://static.www.nfl.com/image/upload/v1794829727/gamecenter/gamecenter.pdf",
+      "raw_file": "data/gamebooks/raw/steelers-at-bengals-2026-reg-10.txt",
+      "raw_sha256": "93c9248204d12d75dae546526daeb23919980f00745b251a41afa5b6988176dd",
+      "transcribed_at": "2026-11-16T18:55:30Z",
+      "extraction_note": true
+    }
+  ]
+}
