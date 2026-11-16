@@ -1,0 +1,61 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Method &amp; limits - NFL1 Game Book register</title>
+<link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="assets/gamebook.css"></head>
+<body><header class="gh"><a class="home" href="../index.html">NFL1</a>
+<span class="crumb">Game Book &amp; availability-outcome register</span>
+<span class="stamp">built 2026-11-16 18:17 UTC</span></header>
+<div class="wrap"><nav class="snav"><a href="index.html">Overview</a><a href="ledger.html">Availability ledger</a><a href="designations.html">Designation calibration</a><a href="results.html">Verified results</a><a href="crosscheck.html">Two sources, one fact</a><a href="starters.html">Expected vs actual</a><a href="method.html" class=on>Method & limits</a></nav>
+<main><h1>Method &amp; limits</h1><p class="lead">How each number on this sub-site is produced, what it can support, and what it must never be used for.</p>
+
+<h2>Pipeline</h2>
+<ol class="tight">
+<li><code>pipeline/collect_gamebooks.py inactives --season S --week W</code> fetches the league's dated
+weekly inactives article, records the UTC fetch time and the sha256 of the raw bytes, and parses club
+headings into inactive names. Written to <code>data/gamebook/captures/inactives/</code>, append-only.</li>
+<li><code>... reports --season S --week W</code> fetches the official weekly injury report
+(<code>https://www.nfl.com/injuries/league/{season}/reg{week:02d}</code>) and keeps the practice
+participation and the game-day designation, with the column decided by the header <i>name</i> so a reordered
+table cannot shift a value into the wrong field. Written to <code>.../captures/report/</code>.</li>
+<li><code>... gamebooks --season S</code> walks the official schedule pages for the games, finds each game's
+Game Book PDF link on the game centre page, downloads the PDF, hashes it, extracts the summary pages and
+parses Lineups / Substitutions / Did Not Play / Not Active. The raw text region behind every list is hashed
+and stored, so a derived row can be checked against the document it came from. Written to
+<code>.../captures/gamebook/</code>.</li>
+<li><code>tools/build_gamebook_register.py</code> (this site) reads only what is committed and derives the
+join, the calibration table and the results feed. It never calls the network.</li>
+<li><code>tools/check_gamebook_register.py</code> is the gate: required fields, per-club count pins, one
+official URL per row, duplicate detection, two-source agreement, and the rule that a value the source does
+not state is blank and flagged.</li>
+</ol>
+<h2>Point-in-time rule</h2>
+<p>A capture may be used as a pre-kickoff snapshot only when its recorded fetch time is earlier than the
+game's official kickoff. Every capture stores its fetch time, so this is checkable, not asserted. The
+Week 10 report in this repository was captured on 2026-11-15 and 2026-11-16 - after some of those games
+had been played - so those rows are admissible for <b>retrospective calibration</b> (what a designation
+meant) and <b>not</b> for replaying what an analyst could have known. The register states this on the
+capture itself (<code>point_in_time</code>) rather than in prose only.</p>
+<h2>Deliberate limits</h2>
+<ul class="tight">
+<li><b>No snap counts, no depth rank inferred from a Game Book.</b> The brief forbids it, and the document
+does not contain snap counts anyway. This register therefore publishes who started, who substituted in, who
+was active but did not play and who was not active - four states, no share of snaps.</li>
+<li><b>No venue, roof or weather register here.</b> That is another session's scope; venue text is stored
+only as a field of the game row so a disagreement can be flagged.</li>
+<li><b>No model change.</b> The availability feature the model consumes lives in another session's files;
+this register is the evidence a change would be judged on, not the change.</li>
+<li><b>Transcription method.</b> The one week transcribed in the sandbox was read from the rendered page
+text (the fetch tool used by the agent), not from raw HTML bytes; the evidence file sits beside it so a
+reviewer can diff the rows against the lines they came from. Raw bytes + sha256 come from the Actions runs.
+Recorded as a flag, the same way an earlier session recorded its capture method.</li>
+</ul>
+<h2>What clears the remaining gate</h2>
+<p>Measure B (play rate from the Game Book) needs one Game Book per game in the sample. The collector is
+written and pinned; it runs hourly on Actions and appends captures. When every game of a captured week has
+a Game Book with <code>parse_status: ok</code>, the play-rate column fills in and the readiness rows
+IN-04, IN-15, IN-17 and IN-18 move from Blocked with a count instead of a promise.</p>
+
+<footer class="gf">Built by <code>tools/build_gamebook_register.py</code> from the captures in
+<code>data/gamebook/</code>. Every table row carries its own official link. Blank means the official
+source does not state it - it is never filled in. <a href="../index.html">Back to the landing page</a>.
+</footer></main></div></body></html>

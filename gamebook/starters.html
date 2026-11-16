@@ -1,0 +1,32 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Expected versus actual starters - NFL1 Game Book register</title>
+<link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="assets/gamebook.css"></head>
+<body><header class="gh"><a class="home" href="../index.html">NFL1</a>
+<span class="crumb">Game Book &amp; availability-outcome register</span>
+<span class="stamp">built 2026-11-16 18:17 UTC</span></header>
+<div class="wrap"><nav class="snav"><a href="index.html">Overview</a><a href="ledger.html">Availability ledger</a><a href="designations.html">Designation calibration</a><a href="results.html">Verified results</a><a href="crosscheck.html">Two sources, one fact</a><a href="starters.html" class=on>Expected vs actual</a><a href="method.html">Method & limits</a></nav>
+<main><h1>Expected versus actual starters</h1><p class="lead">The availability graph the brief asks for, built as a first-class dataset: the club's own first-listed name against the line-up the league printed after the game.</p>
+
+<h2>Who the club listed first, and who actually started</h2>
+<p>0 row(s). "Expected" is the name a club printed first in its own depth-chart slot; it is
+only an expectation, and where the club printed several names in the slot the row says so instead of
+choosing one. "Actually started" is the Game Book's own line-up line for that game - the first dated
+official statement of who was on the field at kickoff.</p>
+<p class="note">Nothing here yet, on purpose. This table needs a Game Book per game, and the sweep runs on GitHub Actions because the Arena sandbox cannot reach nfl.com. Each game PDF is linked from its own game centre page, for example <a href="https://www.nfl.com/games/patriots-at-lions-2026-reg-10?tab=recap">Patriots at Lions, Week 10</a>. Until a capture exists the table stays empty: the club depth charts already in this repository are not enough to state who started, and no starter is inferred from a jersey number, a printed rank or a salary.</p>
+<h2>What it will be used for</h2>
+<ul class="tight">
+<li><b>Replacement depth, not replacement fact.</b> A starter being out is one bit; the second bit is who
+took his place and whether that name was a rank-1 player on the club's own chart or a promotion from
+further down. That distinction is the difference between pricing a lineup change and guessing at it.</li>
+<li><b>Ablations instead of fixed penalties.</b> A model can be re-run with and without the verified
+availability features on the same chronological holdout; the difference, with its interval, is the
+number that belongs on the site - not a subtraction of points per missing starter.</li>
+<li><b>Deficiency by string.</b> A promoted second- or third-string player is identified by having
+started a game he was not the rank-1 name for, which is a played fact, not a jersey order.</li>
+</ul>
+
+<footer class="gf">Built by <code>tools/build_gamebook_register.py</code> from the captures in
+<code>data/gamebook/</code>. Every table row carries its own official link. Blank means the official
+source does not state it - it is never filled in. <a href="../index.html">Back to the landing page</a>.
+</footer></main></div></body></html>

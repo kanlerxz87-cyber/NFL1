@@ -1,0 +1,71 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Game Book &amp; availability-outcome register - NFL1 Game Book register</title>
+<link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="assets/gamebook.css"></head>
+<body><header class="gh"><a class="home" href="../index.html">NFL1</a>
+<span class="crumb">Game Book &amp; availability-outcome register</span>
+<span class="stamp">built 2026-11-16 18:17 UTC</span></header>
+<div class="wrap"><nav class="snav"><a href="index.html" class=on>Overview</a><a href="ledger.html">Availability ledger</a><a href="designations.html">Designation calibration</a><a href="results.html">Verified results</a><a href="crosscheck.html">Two sources, one fact</a><a href="starters.html">Expected vs actual</a><a href="method.html">Method & limits</a></nav>
+<main><h1>Game Book &amp; availability-outcome register</h1><p class="lead">Official Game Book register and availability-outcome ledger. Weeks joined: 2026_reg10. The register answers a question the rest of the site could not: when the league's weekly report says a player is Questionable, what actually happens on Sunday - and it answers it only from documents the league publishes itself.</p>
+
+<div class="kpi"><b>1</b><span>Weeks joined<br><i>both official sources captured</i></span></div><div class="kpi"><b>424</b><span>Ledger rows<br><i>one per player-game-status observation</i></span></div><div class="kpi"><b>171</b><span>Designations joined<br><i>report rows carrying a game status</i></span></div><div class="kpi"><b>0</b><span>Game Books<br><i>PDFs captured and parsed</i></span></div><div class="kpi"><b>0</b><span>Register flags<br><i>coverage gaps, never zeros</i></span></div>
+<h2 id="why">Why this page exists</h2>
+<p>The repository's readiness register carried four rows blocked on the same missing source - an
+official inactive list, an official record of who actually started, and the Game Book itself, which was
+recorded as "source not identified". It is identified: every official game centre page links a
+<b>"Download Game Book (PDF)"</b> file, and page one of that document prints, for each club, the
+starting line-ups, the substitutions, <b>Did Not Play</b> and <b>Not Active</b>. Example, read
+2026-11-16: <a href="https://www.nfl.com/games/patriots-at-lions-2026-reg-10?tab=recap">the
+Patriots-Lions game centre</a> links
+<a href="https://static.www.nfl.com/image/upload/v1794829721/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf">this
+PDF</a>.</p>
+<p>The league also publishes a dated weekly inactives article, which lists every club's inactives in
+one page: <a href="https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season">
+Week 10 of 2026</a>. Two official sources for the same fact are captured separately and cross-checked;
+neither is inferred from the other.</p>
+<h2 id="coverage">Coverage: what is captured, per week</h2>
+<div class="scroll"><table class="t"><thead><tr><th>Week</th><th>Report rows</th><th>Report clubs</th><th>Inactive rows</th><th>Inactive clubs</th><th>Clubs in both</th><th>Game Books</th><th>Clubs with no inactive list</th><th>Report capture</th><th>Official report page</th></tr></thead><tbody><tr><td>2026 W10</td><td>347</td><td>28</td><td>147</td><td>24</td><td>24</td><td class='blank'>&mdash;</td><td>BAL, LAC, NYG, WAS</td><td>data/model/official_injuries.json</td><td>https://www.nfl.com/injuries/league/2026/reg10<span class='sub'>official</span></td></tr></tbody></table></div>
+<h2 id="cross">Two official sources for the same fact</h2>
+<p><a href="crosscheck.html">crosscheck.html</a> compares the weekly inactives article with the
+<b>Not Active</b> line of the game's own Game Book, name by name, and
+<a href="starters.html">starters.html</a> compares a club's first-listed depth name with the line-up
+the league printed for that game.</p>
+<h2 id="cal">What the designations are worth, measured</h2>
+<table class="t"><thead><tr><th>Game status on the weekly report</th><th>n (designations joined)</th><th>also on the club&#x27;s inactive list</th><th>declared-inactive rate</th><th>95% interval (Wilson)</th><th>n with a Game Book</th><th>play rate from the Game Book</th><th>95% interval</th><th>Sources</th></tr></thead><tbody><tr><td>Questionable</td><td>82</td><td>15</td><td>18.3%</td><td>11.4% - 28.0%</td><td class='blank'>&mdash;</td><td class='blank'>&mdash;</td><td class='blank'>&mdash;</td><td><a href="https://www.nfl.com/injuries/league/2026/reg10" rel="noopener" target="_blank">2 official page(s)</a></td></tr><tr><td>Out</td><td>64</td><td>48</td><td>75.0%</td><td>63.2% - 84.0%</td><td class='blank'>&mdash;</td><td class='blank'>&mdash;</td><td class='blank'>&mdash;</td><td><a href="https://www.nfl.com/injuries/league/2026/reg10" rel="noopener" target="_blank">2 official page(s)</a></td></tr><tr><td>Doubtful</td><td>10</td><td>4</td><td>40.0%</td><td>16.8% - 68.7%</td><td class='blank'>&mdash;</td><td class='blank'>&mdash;</td><td class='blank'>&mdash;</td><td><a href="https://www.nfl.com/injuries/league/2026/reg10" rel="noopener" target="_blank">2 official page(s)</a></td></tr></tbody></table>
+<p class="note">The play-rate column stays blank until a Game Book exists for the games in that cell.
+It is never filled in from the declared-inactive rate: the two lists measure different things (see the
+trap panel).</p>
+
+<h2 id="trap">Reading the two lists together - the trap this register exists to publish</h2>
+<div class="note"><b>16 of 64</b> players marked
+<span>Out</span> on the weekly report do <b>not</b> appear on their club's game-day inactive list. A club's
+eight designations are spent on everyone else it is sitting, because an <i>Out</i> designation already makes a
+player ineligible. So <code>not on the inactive list</code> must never be read as <code>available</code>.
+In the same direction, <b>77</b> players on an inactive list have <b>no row at
+all</b> on the weekly report - healthy scratches, plus the reserve-list case recorded elsewhere on this site.
+A model whose availability universe is the injury report therefore treats
+77 players as available who were not, and a feature built on
+"absent from the inactive list" would mis-state 16 Out players as
+available. Both counts are published per week in the ledger below.</div>
+<p>Designated rows that could not be joined because no inactive list covers those clubs:
+<b>15</b> (clubs: BAL, LAC, NYG, WAS).
+Those rows are left unjoined in the ledger with the state <code>no_inactive_source</code> - they are not
+counted as available and not dropped.</p>
+
+<h2>Flagged by this register (coverage, not errors)</h2>
+<p>None.</p>
+<h2>Where each number came from</h2>
+<ul class="tight">
+<li>Weekly injury report (game-day designations): the committed CI capture
+<code>data/model/official_injuries.json</code> - 347 rows, 28 club tables for Week 10 - and, once the
+scheduled sweep has run, <code>data/gamebook/captures/report/</code>.</li>
+<li>Game-day inactive lists: <code>data/gamebook/official_inactives/</code> (transcribed, with the
+evidence text it was read from) and <code>data/gamebook/captures/inactives/</code> (raw bytes, hashed).</li>
+<li>Game Books: <code>data/gamebook/captures/gamebook/</code>, one capture per game with the PDF URL,
+the raw sha256, the UTC fetch time and the parsed lists.</li>
+</ul>
+
+<footer class="gf">Built by <code>tools/build_gamebook_register.py</code> from the captures in
+<code>data/gamebook/</code>. Every table row carries its own official link. Blank means the official
+source does not state it - it is never filled in. <a href="../index.html">Back to the landing page</a>.
+</footer></main></div></body></html>

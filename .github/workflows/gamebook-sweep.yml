@@ -1,0 +1,153 @@
+name: Capture official Game Books and weekly availability lists
+
+# Session 98a40411-nfl1, tasks G2/G3. New, additive workflow: it writes only
+# data/gamebook/** and gamebook/*.html and changes no other session's file.
+#
+# It runs on GitHub's infrastructure because the Arena sandbox has no route to nfl.com
+# (outbound allow-list: github.com, pypi.org, ...). The same route is already proven by
+# .github/workflows/transactions-sweep.yml, which reaches the league's own pages from Actions.
+#
+# What one run does:
+#   1. the official weekly injury report for the requested season/weeks (game-day designations);
+#   2. the league's dated weekly inactives article for the same weeks (the club's own declarations);
+#   3. the Game Book PDF of each played game for the recent weeks, linked from its game centre.
+# Every capture keeps its UTC fetch time and the sha256 of the bytes it read; captures are
+# append-only and never rewritten.
+#
+# Failure policy: a fetch, parse, pin or freshness failure turns the job RED after the heartbeat is
+# committed, so a lost row is an alarm rather than a blank cell on the site.
+
+on:
+  workflow_dispatch:
+    inputs:
+      gamebook_week_from:
+        description: "first 2026 week to sweep for Game Books"
+        required: false
+        default: "8"
+      gamebook_week_to:
+        description: "last 2026 week to sweep for Game Books"
+        required: false
+        default: "11"
+  schedule:
+    - cron: "37 * * * *"           # hourly at :37 (the transactions sweep runs at :23, the model
+                                   # collector at 11:17 UTC), so the two never collide in one runner
+  push:
+    branches: ["arena/**", "main"]
+    paths:
+      - "pipeline/collect_gamebooks.py"
+      - "tools/build_gamebook_register.py"
+      - "tools/check_gamebook_register.py"
+      - "tests/test_gamebook_register.py"
+      - ".github/workflows/gamebook-sweep.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gamebook-sweep-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: python -m pip install --quiet requests beautifulsoup4 lxml pypdf
+      - name: Parser and statistic unit tests (pinned to verbatim official rows)
+        run: python -m unittest tests.test_gamebook_register -v
+      - name: Sweep the official weekly injury reports (2025 W1-18, 2026 W1-11)
+        id: reports
+        continue-on-error: true
+        run: |
+          rc=0
+          for w in $(seq 1 18); do
+            python3 pipeline/collect_gamebooks.py reports --season 2025 --week $w || rc=1
+          done
+          for w in $(seq 1 11); do
+            python3 pipeline/collect_gamebooks.py reports --season 2026 --week $w || rc=1
+          done
+          exit $rc
+      - name: Sweep the league's dated weekly inactives articles (same weeks)
+        id: inactives
+        continue-on-error: true
+        run: |
+          rc=0
+          for w in $(seq 1 18); do
+            python3 pipeline/collect_gamebooks.py inactives --season 2025 --week $w || rc=1
+          done
+          for w in $(seq 1 11); do
+            python3 pipeline/collect_gamebooks.py inactives --season 2026 --week $w || rc=1
+          done
+          exit $rc
+      - name: Sweep the official Game Books for the recent 2026 weeks
+        id: books
+        continue-on-error: true
+        env:
+          WF_FROM: ${{ github.event.inputs.gamebook_week_from || '8' }}
+          WF_TO: ${{ github.event.inputs.gamebook_week_to || '11' }}
+        run: |
+          python3 pipeline/collect_gamebooks.py gamebooks --season 2026 \
+            --week-from "${WF_FROM}" --week-to "${WF_TO}"
+      - name: Rebuild the register and the published pages from the stored captures
+        run: python3 tools/build_gamebook_register.py
+      - name: "Gate: hashes, count pins, required fields, row links, no placeholders, no forbidden inference"
+        if: always()
+        run: python3 tools/check_gamebook_register.py
+      - name: Publish the sweep log
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import json, pathlib
+          reg = pathlib.Path("data/gamebook/register.json")
+          if reg.exists():
+              d = json.loads(reg.read_text())
+              print("weeks joined:", d.get("weeks"))
+              print("ledger rows:", d.get("ledger_rows"), "designations joined:",
+                    d.get("designations_joined_rows"), "game books:", d.get("game_books_captured"))
+              for r in d.get("designations") or []:
+                  print(f"  {r['designation']:13s} n={r['n']:4d} declared-inactive={r['declared_inactive']:4d} "
+                        f"rate={r['declared_inactive_rate']:.3f} "
+                        f"ci=[{r['ci95_low']:.3f},{r['ci95_high']:.3f}] game_book_n={r['game_book_n']}")
+          for f in ("data/gamebook/captures",):
+              p = pathlib.Path(f)
+              if p.exists():
+                  for kind in sorted(x.name for x in p.iterdir()):
+                      n = len(list((p / kind).glob("*.json")))
+                      print(f"captures/{kind}: {n} file(s)")
+          PY
+      - name: Commit the captures and the rendered pages (append-only captures)
+        if: always()
+        run: |
+          git config user.name "nfl1-data-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/gamebook gamebook 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Nothing new to commit"
+          else
+            git commit -m "data: official game-book and availability sweep [skip ci]"
+            for attempt in 1 2 3; do
+              if git push origin HEAD:${{ github.ref_name }}; then
+                echo "pushed on attempt $attempt"; exit 0
+              fi
+              echo "push rejected; rebasing and retrying"
+              git pull --rebase origin ${{ github.ref_name }} || true
+              sleep 5
+            done
+            echo "::error::could not push the sweep after three attempts"
+            exit 1
+          fi
+      - name: Fail the job if a sweep step failed
+        if: always()
+        run: |
+          bad=0
+          [ "${{ steps.reports.outcome }}" = "failure" ] && { echo "::warning::report sweep failed"; bad=1; }
+          [ "${{ steps.inactives.outcome }}" = "failure" ] && { echo "::warning::inactives sweep failed"; bad=1; }
+          [ "${{ steps.books.outcome }}" = "failure" ] && { echo "::warning::game-book sweep failed"; bad=1; }
+          exit $bad

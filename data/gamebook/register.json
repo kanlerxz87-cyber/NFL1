@@ -1,0 +1,164 @@
+{
+ "build_version": "build_gamebook_register/1.0",
+ "generated_at": "2026-11-16T18:17:22Z",
+ "weeks": [
+  "2026_reg10"
+ ],
+ "coverage": [
+  {
+   "season": 2026,
+   "week": 10,
+   "report_rows": 347,
+   "report_clubs": 28,
+   "inactive_rows": 147,
+   "inactive_clubs": 24,
+   "clubs_in_both": 24,
+   "clubs_report_only": [
+    "BAL",
+    "LAC",
+    "NYG",
+    "WAS"
+   ],
+   "clubs_inactive_only": [],
+   "game_books": 0,
+   "report_source": "data/model/official_injuries.json",
+   "inactive_sources": [
+    "https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season"
+   ]
+  }
+ ],
+ "per_week": {
+  "2026_reg10": {
+   "report_clubs": 28,
+   "inactive_clubs": 24,
+   "report_rows": 347,
+   "inactive_rows": 147,
+   "game_books": 0
+  }
+ },
+ "ledger_rows": 424,
+ "designations_joined_rows": 171,
+ "designations": [
+  {
+   "designation": "Questionable",
+   "n": 82,
+   "declared_inactive": 15,
+   "declared_inactive_rate": 0.18292682926829268,
+   "ci95_low": 0.1141102185236396,
+   "ci95_high": 0.280121884316952,
+   "game_book_n": 0,
+   "played": 0,
+   "game_book_unresolved": 0,
+   "play_rate": null,
+   "play_ci95_low": null,
+   "play_ci95_high": null,
+   "label": "1 week(s) captured",
+   "weeks": 1
+  },
+  {
+   "designation": "Out",
+   "n": 64,
+   "declared_inactive": 48,
+   "declared_inactive_rate": 0.75,
+   "ci95_low": 0.6318372353835835,
+   "ci95_high": 0.8398507347074784,
+   "game_book_n": 0,
+   "played": 0,
+   "game_book_unresolved": 0,
+   "play_rate": null,
+   "play_ci95_low": null,
+   "play_ci95_high": null,
+   "label": "1 week(s) captured",
+   "weeks": 1
+  },
+  {
+   "designation": "Doubtful",
+   "n": 10,
+   "declared_inactive": 4,
+   "declared_inactive_rate": 0.4,
+   "ci95_low": 0.16818032967113528,
+   "ci95_high": 0.6873262303202639,
+   "game_book_n": 0,
+   "played": 0,
+   "game_book_unresolved": 0,
+   "play_rate": null,
+   "play_ci95_low": null,
+   "play_ci95_high": null,
+   "label": "1 week(s) captured",
+   "weeks": 1
+  }
+ ],
+ "designations_per_week": [
+  {
+   "designation": "Questionable",
+   "n": 82,
+   "declared_inactive": 15,
+   "declared_inactive_rate": 0.18292682926829268,
+   "ci95_low": 0.1141102185236396,
+   "ci95_high": 0.280121884316952,
+   "game_book_n": 0,
+   "played": 0,
+   "game_book_unresolved": 0,
+   "play_rate": null,
+   "play_ci95_low": null,
+   "play_ci95_high": null,
+   "label": "2026_reg10",
+   "weeks": 1
+  },
+  {
+   "designation": "Out",
+   "n": 64,
+   "declared_inactive": 48,
+   "declared_inactive_rate": 0.75,
+   "ci95_low": 0.6318372353835835,
+   "ci95_high": 0.8398507347074784,
+   "game_book_n": 0,
+   "played": 0,
+   "game_book_unresolved": 0,
+   "play_rate": null,
+   "play_ci95_low": null,
+   "play_ci95_high": null,
+   "label": "2026_reg10",
+   "weeks": 1
+  },
+  {
+   "designation": "Doubtful",
+   "n": 10,
+   "declared_inactive": 4,
+   "declared_inactive_rate": 0.4,
+   "ci95_low": 0.16818032967113528,
+   "ci95_high": 0.6873262303202639,
+   "game_book_n": 0,
+   "played": 0,
+   "game_book_unresolved": 0,
+   "play_rate": null,
+   "play_ci95_low": null,
+   "play_ci95_high": null,
+   "label": "2026_reg10",
+   "weeks": 1
+  }
+ ],
+ "trap_counts": {
+  "out_not_on_inactive_list": 16,
+  "out_total": 64,
+  "inactives_with_no_report_row": 77,
+  "designated_rows_without_inactive_source": 15,
+  "out_rows_without_inactive_source": 6,
+  "unjoinable_note": "a row with no inactive source is left unjoined; it is never read as available",
+  "clubs_without_inactive_source": [
+   "BAL",
+   "LAC",
+   "NYG",
+   "WAS"
+  ]
+ },
+ "crosscheck": [],
+ "expected_vs_actual": [],
+ "results": [],
+ "game_books_captured": 0,
+ "sources": {
+  "weekly_injury_report": "https://www.nfl.com/injuries/",
+  "weekly_inactives_article": "https://www.nfl.com/news/",
+  "game_book_pdf_hosted_by": "https://static.www.nfl.com/ (linked from each game centre page)"
+ }
+}
