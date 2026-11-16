@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Strategies · NFL Decision Lab</title>
+<style>
+:root{--bg:#0b1220;--panel:#111a2b;--panel2:#16223a;--ink:#e8eef9;--muted:#93a4c0;--line:#24314b;
+--accent:#4ade80;--accent-ink:#062a16;--blue:#60a5fa;--amber:#fbbf24;--red:#f87171;--radius:14px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(1200px 600px at 12% -10%,#16233c 0%,var(--bg) 55%) no-repeat,var(--bg);
+color:var(--ink);font:16px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+-webkit-font-smoothing:antialiased}
+a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;color:#c7d2fe}
+.top{position:sticky;top:0;z-index:20;display:flex;gap:16px;align-items:center;flex-wrap:wrap;
+padding:12px 20px;background:rgba(11,18,32,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:9px;color:var(--ink);font-weight:700}
+.mark{background:var(--accent);color:var(--accent-ink);padding:3px 9px;border-radius:8px;font-size:.8rem;letter-spacing:.08em}
+.brand-text{font-size:.95rem;color:var(--muted)}
+.top nav{display:flex;gap:3px;flex-wrap:wrap;margin-left:auto}
+.top nav a{color:var(--muted);padding:6px 10px;border-radius:9px;font-size:.85rem}
+.top nav a:hover{background:var(--panel2);color:var(--ink);text-decoration:none}
+.top nav a.active{background:var(--accent);color:var(--accent-ink);font-weight:600}
+main{max-width:1180px;margin:0 auto;padding:24px 20px 72px}
+.page-head{margin:8px 0 20px}
+.eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:.7rem;color:var(--accent);margin:0 0 6px}
+h1{font-size:clamp(1.6rem,3.2vw,2.3rem);line-height:1.12;margin:0 0 8px}
+.standfirst{color:var(--muted);max-width:78ch;margin:0}
+.timestamp{color:#6f809d;font-size:.78rem;margin:10px 0 0}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;margin:20px 0}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px}
+.kpi-label{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.09em}
+.kpi-value{font-size:1.55rem;font-weight:700;margin:4px 0 0}
+.kpi-sub{color:#7f8fab;font-size:.75rem;margin-top:3px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;margin:18px 0}
+.panel h2{font-size:1.05rem;margin:0 0 4px}
+.panel .sub{color:var(--muted);font-size:.85rem;margin:0 0 12px}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+table{width:100%;border-collapse:collapse;font-size:.855rem}
+thead th{position:sticky;top:0;background:var(--panel2);text-align:left;padding:9px 10px;font-size:.72rem;
+text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border-bottom:1px solid var(--line);white-space:nowrap}
+tbody td{padding:8px 10px;border-bottom:1px solid #1b2740;vertical-align:top}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#0f1a2d}
+.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.badge{display:inline-block;padding:1px 8px;border-radius:999px;font-size:.72rem;font-weight:600;white-space:nowrap}
+.b-done{background:#12341f;color:#6ee7a0}.b-partial{background:#33280c;color:#fcd34d}
+.b-not{background:#3a1616;color:#fca5a5}.b-open{background:#1d2b46;color:#93c5fd}
+.missing{color:#fca5a5;font-style:normal}
+.sub2{color:#7f8fab;font-size:.78rem}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:900px){.grid2{grid-template-columns:1fr}}
+ul.bullets{margin:8px 0 0;padding-left:20px;color:var(--muted)}
+ul.bullets li{margin:5px 0}
+.note{background:#0e1a2e;border-left:3px solid var(--blue);padding:10px 14px;border-radius:8px;color:var(--muted);font-size:.86rem;margin:12px 0}
+.note.alert{border-left-color:var(--amber)}
+.foot{margin-top:36px;padding-top:14px;border-top:1px solid var(--line);color:#6f809d;font-size:.78rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:15px}
+.card h3{margin:0 0 6px;font-size:.98rem}
+.card p{margin:0;color:var(--muted);font-size:.85rem}
+.card a.more{display:inline-block;margin-top:9px;font-size:.83rem}
+.src{font-size:.78rem;white-space:nowrap}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html"><span class="mark">NFL</span><span class="brand-text">Decision Lab · brief dashboard</span></a>
+  <nav aria-label="Categories"><a href="index.html">Overview</a><a href="requirements.html">Requirements</a><a href="answers.html">Questions</a><a href="strategies.html" class="active">Strategies</a><a href="availability.html">Availability</a><a href="fixtures.html">Fixtures &amp; venues</a><a href="suggestions.html">Suggestions</a><a href="verification.html">Verification</a></nav>
+</header>
+<main>
+
+<div class="page-head">
+  <p class="eyebrow">The competition</p>
+  <h1>The ranked board is empty, and that is the result</h1>
+  <p class="standfirst">The brief asks for a leaderboard competition that rewards skill and forbids backtest numbers
+  from appearing on the board. Both rules are implemented. A strategy enters the board only after it clears all eight
+  validation gates on a prospective sample; none has. The backtests are published below in a clearly labelled
+  archive, with every number, so that the absence of a ranked row is auditable rather than a claim.</p>
+  <p class="timestamp">Built 2026-11-16T14:36:42Z from <code>data/s9cb/leaderboard.json</code>,
+  <code>data/strat/proper_score.json</code>, <code>data/strat/preregistration.json</code></p>
+</div>
+<div class="kpis"><div class="kpi"><div class="kpi-label">Ranked on the board</div><div class="kpi-value">0</div><div class="kpi-sub">a rule must clear all eight gates</div></div><div class="kpi"><div class="kpi-label">Scored backtest rules</div><div class="kpi-value">12</div><div class="kpi-sub">in the labelled archive below</div></div><div class="kpi"><div class="kpi-label">Pre-registered records</div><div class="kpi-value">31</div><div class="kpi-sub">19 prospective / 12 backtest-first</div></div><div class="kpi"><div class="kpi-label">Live strategies</div><div class="kpi-value">0</div><div class="kpi-sub">0 demotions ever</div></div><div class="kpi"><div class="kpi-label">Bets scored</div><div class="kpi-value">14,440</div><div class="kpi-sub">4,751 games</div></div></div>
+
+<div class="panel">
+  <h2>Stage 1 &mdash; the qualified board</h2>
+  <p class="sub">Ranked by benchmark-relative Brier skill with a game-cluster lower bound and a multiplicity charge.
+  Win rate and short-run ROI never rank.</p>
+  <div class="note alert"><strong>No strategy is listed.</strong> 0 of 12 scored rules
+  clear all eight gates. The best, S07 Fade the road favourite of 7+, clears 6 of 8 and fails G5, G8.
+  A board that listed anything here would be ranking luck.</div>
+  <div class="table-wrap"><table><thead><tr>
+    <th>Rule (archive, not ranked)</th><th class="num">Bets</th><th class="num">Hit rate</th><th class="num">ROI</th>
+    <th class="num">ROI 95%</th><th class="num">BH-adjusted p</th><th class="num">Gates</th><th>Failed</th><th>Source</th>
+  </tr></thead><tbody><td>S07 Fade the road favourite of 7+</td><td class='num'>401</td><td class='num'>55.58%</td><td class='num'>+6.06%</td><td class='num'>[-3.1%, +15.3%]</td><td class='num'>0.758</td><td class='num'>6 of 8</td><td class='sub2'>G5, G8</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json">run</a></span></td><td>S03 Model total edge &gt;= 2.5 pts</td><td class='num'>2,463</td><td class='num'>52.39%</td><td class='num'>+1.84%</td><td class='num'>[-2.1%, +5.6%]</td><td class='num'>0.758</td><td class='num'>5 of 8</td><td class='sub2'>G5, G6, G8</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json">run</a></span></td><td>S04 Model total edge &gt;= 4.0 pts</td><td class='num'>1,295</td><td class='num'>52.74%</td><td class='num'>+2.50%</td><td class='num'>[-2.8%, +7.7%]</td><td class='num'>0.758</td><td class='num'>4 of 8</td><td class='sub2'>G5, G6, G7, G8</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json">run</a></span></td><td>S08 Home team off a bye</td><td class='num'>273</td><td class='num'>48.68%</td><td class='num'>-5.13%</td><td class='num'>[-16.5%, +6.3%]</td><td class='num'>0.758</td><td class='num'>4 of 8</td><td class='sub2'>G4, G5, G6, G8</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json">run</a></span></td><td>S05 Rest edge &gt;= 3 days</td><td class='num'>1,103</td><td class='num'>51.58%</td><td class='num'>+0.49%</td><td class='num'>[-5.2%, +6.1%]</td><td class='num'>0.934</td><td class='num'>4 of 8</td><td class='sub2'>G5, G6, G7, G8</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json">run</a></span></td><td>S12 Out-count gap of 3 or more</td><td class='num'>685</td><td class='num'>51.43%</td><td class='num'>-0.30%</td><td class='num'>[-7.5%, +7.1%]</td><td class='num'>0.934</td><td class='num'>4 of 8</td><td class='sub2'>G4, G5, G7, G8</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json">run</a></span></td><td>S11 Opponent QB ruled Out/Doubtful</td><td class='num'>380</td><td class='num'>50.81%</td><td class='num'>-1.51%</td><td class='num'>[-11.3%, +8.1%]</td><td class='num'>0.934</td><td class='num'>4 of 8</td><td class='sub2'>G4, G5, G7, G8</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json">run</a></span></td><td>S09 Under when the total is 40 or lower</td><td class='num'>887</td><td class='num'>47.14%</td><td class='num'>-7.93%</td><td class='num'>[-14.5%, -1.6%]</td><td class='num'>0.178</td><td class='num'>3 of 8</td><td class='sub2'>G4, G5, G6, G7, G8</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json">run</a></span></td><td>S10 Over when the total is 50 or higher</td><td class='num'>599</td><td class='num'>48.64%</td><td class='num'>-5.41%</td><td class='num'>[-13.1%, +2.2%]</td><td class='num'>0.758</td><td class='num'>3 of 8</td><td class='sub2'>G4, G5, G6, G7, G8</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json">run</a></span></td><td>S01 Model spread edge &gt;= 1.5 pts</td><td class='num'>3,546</td><td class='num'>51.32%</td><td class='num'>-0.37%</td><td class='num'>[-3.5%, +2.8%]</td><td class='num'>0.934</td><td class='num'>3 of 8</td><td class='sub2'>G4, G5, G6, G7, G8</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json">run</a></span></td><td>S02 Model spread edge &gt;= 3.0 pts</td><td class='num'>2,277</td><td class='num'>51.41%</td><td class='num'>-0.45%</td><td class='num'>[-4.3%, +3.5%]</td><td class='num'>0.934</td><td class='num'>3 of 8</td><td class='sub2'>G4, G5, G6, G7, G8</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json">run</a></span></td><td>S06 Divisional road underdog of 3+</td><td class='num'>531</td><td class='num'>49.90%</td><td class='num'>-1.86%</td><td class='num'>[-10.2%, +6.4%]</td><td class='num'>0.934</td><td class='num'>3 of 8</td><td class='sub2'>G4, G5, G6, G7, G8</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json">run</a></span></td></tbody></table></div>
+  <div class="note"><strong>Every number in this table is retrospective.</strong> It is here so that the gate result can
+  be checked, not so that a rule can be followed. None of these rows is a recommendation, and the brief's own rule
+  forbids promoting one to the board on the strength of it.</div>
+</div>
+
+<div class="panel">
+  <h2>Stage 1 &mdash; does the model forecast better than the closing line?</h2>
+  <p class="sub">Brier skill = 1 &minus; Brier(model)/Brier(benchmark). A negative value means the benchmark is better.
+  The test statistic is the lower bound of a game-cluster bootstrap interval, not the point estimate. The benchmark for
+  the side and the total is the closing number at p = 0.5; for the moneyline it is the de-vigged closing price, which
+  is a stronger benchmark than a coin flip.</p>
+  <div class="table-wrap"><table><thead><tr>
+    <th>Market</th><th class="num">Games scored</th><th class="num">Brier skill</th><th class="num">95% interval</th>
+    <th class="num">Brier</th><th class="num">p (bootstrap)</th><th>Verdict</th><th>Source</th>
+  </tr></thead><tbody><td>Side &mdash; P(home covers the close)</td><td class='num'>6,785</td><td class='num'>-0.0413</td><td class='num'>[-0.0513, -0.0299]</td><td class='num'>0.2603</td><td class='num'>1.00</td><td><span class="missing">lower bound below zero</span></td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/proper_score.json">scores</a></span></td><td>Total &mdash; P(over the close)</td><td class='num'>6,878</td><td class='num'>-0.0346</td><td class='num'>[-0.0447, -0.0245]</td><td class='num'>0.2587</td><td class='num'>1.00</td><td><span class="missing">lower bound below zero</span></td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/proper_score.json">scores</a></span></td><td>Moneyline &mdash; P(home win)</td><td class='num'>5,187</td><td class='num'>-0.0714</td><td class='num'>[-0.0875, -0.0560]</td><td class='num'>0.2260</td><td class='num'>1.00</td><td><span class="missing">lower bound below zero</span> vs the de-vigged close</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/proper_score.json">scores</a></span></td></tbody></table></div>
+  <div class="note">The side is worse than the close by 0.0413, the total by
+  0.0346, the moneyline by 0.0714 against the
+  de-vigged price. On the moneyline the model does beat a coin flip, which is not the question: the closing price
+  beats a coin flip by more. Nothing is eligible; the rule is printed verbatim in
+  <code>data/strat/proper_score.json</code> as <em>A market or rule is ELIGIBLE only when its lower bound is above zero AND its adjusted p-value clears the multiplicity charge AND the sample floor is met. No market or rule clears all three.</em></div>
+</div>
+
+<div class="panel">
+  <h2>Luck removal &mdash; the control every result is measured against</h2>
+  <p class="sub">A no-skill reference line computed analytically on the same frozen corpus and the same observed
+  prices. A rule that cannot beat this is noise, whatever its ROI.</p>
+  <div class="table-wrap"><table><thead><tr>
+    <th>ID</th><th>Control</th><th>Market</th><th class="num">Games</th><th class="num">Expected ROI</th>
+    <th class="num">Hit rate</th><th>Role</th><th>Source</th>
+  </tr></thead><tbody><td>CTRL-01</td><td>random side (analytic)</td><td>spread</td><td class='num'>5,202</td><td class='num'>-2.51%</td><td class='num'><span class="sub2">analytic, no sample</span></td><td class='sub2'>no-skill reference line for every board run</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/prereg/controls.json">controls</a></span></td><td>CTRL-01T</td><td>random side over/under (analytic)</td><td>total</td><td class='num'>5,200</td><td class='num'>-2.79%</td><td class='num'><span class="sub2">analytic, no sample</span></td><td class='sub2'>no-skill reference for totals tracks</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/prereg/controls.json">controls</a></span></td><td>CTRL-02</td><td>favourites only</td><td>spread</td><td class='num'>5,067</td><td class='num'>-473.83%</td><td class='num'>48.81%</td><td class='sub2'>the market&#x27;s own default bet; a strategy must beat this before it beats anything</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/prereg/controls.json">controls</a></span></td></tbody></table></div>
+  <div class="note">Every rule in the archive above sits inside its own luck band. The number of bets needed for 80%
+  power at the observed edge is printed with the run: for the best rule, 1,950 bets against 401 placed. That is not a
+  reason to wait for 1,950 bets; it is a reason to stop treating 401 as evidence.</div>
+</div>
+
+<div class="panel">
+  <h2>What would change our mind</h2>
+  <p class="sub">A two-sided falsifier on every substantive claim: what would raise confidence, and what would make us
+  abandon it. Both sides carry a number, and the next measurement is named.</p>
+  <div class="table-wrap"><table><thead><tr>
+    <th>ID</th><th>Claim</th><th>Where it stands</th><th>Status</th><th>Confirm if</th><th>Abandon if</th>
+    <th>Next measurement</th><th>Source</th>
+  </tr></thead><tbody><td>W01</td><td>The published rating model&#x27;s side probabilities are informative</td><td class='sub2'>Brier skill versus the closing line -0.0413 (interval -0.0513 to -0.0299) on 6,785 games</td><td><span class="badge b-not">not met</span><br><span class='sub2'>NOT SUPPORTED — the interval is entirely below zero</span></td><td>the game-cluster lower bound rises above 0.00 on a chronological holdout of at least 500 games that the half-life was not selected on</td><td>already met: the interval sits below zero, so the claim is abandoned for the side market until a new feature set is pre-registered</td><td class='sub2'>rebuild with an availability-surprise feature (P07) and re-run this exact test</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/what_would_change.json">register</a></span></td><td>W02</td><td>The model&#x27;s total probabilities are informative</td><td class='sub2'>Brier skill versus the closing total -0.0346 (interval -0.0447 to -0.0245) on 6,878 games</td><td><span class="badge b-not">not met</span><br><span class='sub2'>NOT SUPPORTED — the interval is entirely below zero</span></td><td>the lower bound rises above 0.00 on at least 500 games outside the tuning window</td><td>already met: the interval is below zero</td><td class='sub2'>the two-estimator comparison (W05) plus a weather/roof feature</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/what_would_change.json">register</a></span></td><td>W03</td><td>The model&#x27;s moneyline probabilities beat the de-vigged market</td><td class='sub2'>Brier skill versus the de-vigged closing moneyline -0.0714 (interval -0.0875 to -0.0560) on 5,187 games</td><td><span class="badge b-not">not met</span><br><span class='sub2'>NOT SUPPORTED — the interval is entirely below zero</span></td><td>the lower bound rises above 0.00 while the market column stays fixed</td><td>already met: the interval is below zero</td><td class='sub2'>quantify the operator margin (see W04) and re-test on de-vigged prices only</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/what_would_change.json">register</a></span></td><td>W04</td><td>The closing moneyline carries real information above a coin, and the operator&#x27;s margin is measurable</td><td class='sub2'>Brier skill versus a coin +0.1564 (interval +0.1385 to +0.1739); mean sum of implied probabilities 1.0276</td><td><span class="badge b-partial">partial</span><br><span class='sub2'>SUPPORTED — the interval is entirely above zero</span></td><td>the lower bound stays above 0.00 on a season the interval has not seen</td><td>the interval on a new season includes 0.00</td><td class='sub2'>recompute on the 2027 season once it is complete</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/what_would_change.json">register</a></span></td><td>W05</td><td>The rating model&#x27;s total is better than a no-model season-mean baseline</td><td class='sub2'>holdout paired difference in absolute error (A minus B) -0.0136 points (interval -0.2288 to +0.2188) on 585 games; no winner</td><td><span class="badge b-partial">partial</span><br><span class='sub2'>UNDECIDED — the interval straddles zero</span></td><td>the interval excludes zero in either direction on at least 500 holdout games</td><td>if B wins, A is withdrawn from every published total and B is published alone, with the change recorded here</td><td class='sub2'>extend the holdout with the 2027 and 2028 seasons</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/what_would_change.json">register</a></span></td><td>W06</td><td>No betting rule in the backtest run has demonstrated skill</td><td class='sub2'>12 rules scored; largest Brier skill versus the price +0.0104 on 3455 bets at most</td><td><span class="badge b-partial">partial</span><br><span class='sub2'>SUPPORTED — every rule&#x27;s interval includes zero after the multiplicity charge</span></td><td>a pre-registered rule&#x27;s prospective sample reaches 200 settled bets with a Brier-skill interval whose lower bound is above 0.00 after the BH charge over all rules then registered</td><td>any published rule&#x27;s prospective interval lower bound falls below 0.00 (demotion rule D1)</td><td class='sub2'>prospective shadow scoring of P01-P19 once prices are captured</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/what_would_change.json">register</a></span></td><td>W07</td><td>The five control baselines are published and are not beaten by any rule</td><td class='sub2'>random, favourite-only, home-only, underdog-only and coin-at-the-line are registered as P02-P05 and the line itself as the benchmark in W01-W03</td><td><span class="badge b-partial">partial</span><br><span class='sub2'>BASELINES PUBLISHED — no rule beats them with an interval excluding zero</span></td><td>a rule beats the favourite-only baseline by a Brier-skill gap whose lower bound is above 0.00 on 200 prospective bets</td><td>a rule&#x27;s advantage over the control disappears once the control is matched on sample</td><td class='sub2'>score P02-P05 prospectively alongside P01-P19</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/what_would_change.json">register</a></span></td><td>W08</td><td>The demotion gate is the right instrument for controlling a live strategy</td><td class='sub2'>armed with five rules (D1-D5) and never triggered, because nothing is live</td><td><span class="badge b-partial">partial</span><br><span class='sub2'>UNTESTED — no live sample exists</span></td><td>a live strategy cleared every gate, went live, and was then demoted by D1 or D3 before its realised loss reached D2&#x27;s stop-loss</td><td>if D2 fires before D1/D3 on the first three live strategies, the skill rule is too slow and the gate must be re-pre-registered</td><td class='sub2'>the first live strategy&#x27;s first 50 settled bets</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/what_would_change.json">register</a></span></td><td>W09</td><td>Injury designation should be modelled as a surprise, not a level</td><td class='sub2'>registered as P07-P09; the level-based rules S11 and S12 are published as superseded but are still scored so the comparison is visible</td><td><span class="badge b-partial">partial</span><br><span class='sub2'>UNTESTED — no ablation has been run, because no verified starter/inactive feed exists</span></td><td>an identical model with the surprise feature beats the same model without it on a chronological holdout, with a game-cluster interval excluding zero</td><td>the with-feature model is worse, or the difference interval includes zero on 500+ holdout games; the features are then dropped, not tuned</td><td class='sub2'>the ablation needs official inactive lists joined to Game Books; both are unavailable in this repository, so the measurement cannot start</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/what_would_change.json">register</a></span></td><td>W10</td><td>Correlations are computed only from officially sourced numbers, with n published</td><td class='sub2'>the register publishes Pearson r with a Fisher-z interval and n for every pair; pairs with fewer than 25 observations are blank, not estimated</td><td><span class="badge b-partial">partial</span><br><span class='sub2'>PARTIAL — the row-level numbers are a third-party (nflverse) extract of the NFL feed</span></td><td>every paired observation is re-derived from an official nfl.com or Game Book page</td><td>any published correlation cannot be reproduced from official rows; it is then withdrawn and republished as blank</td><td class='sub2'>match the historical rows to official Game Books season by season</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/what_would_change.json">register</a></span></td><td>W11</td><td>The price-snapshot store is a prerequisite for any published backtest</td><td class='sub2'>blocked: no approved timestamped price source exists in the repository</td><td><span class="badge b-partial">partial</span><br><span class='sub2'>BLOCKED</span></td><td>one approved source yields an opening and a closing price with a fetch time for 100% of originated markets over four consecutive weeks</td><td>if no source can be approved, the leaderboard keeps only proper-score and closing-line work and drops every ROI claim, which is the current state</td><td class='sub2'>obtain written permission and a documented API, or accept closing-line-only scoring permanently</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/what_would_change.json">register</a></span></td><td>W12</td><td>Pre-registration is enforced, so no backtest number can appear without a frozen rule</td><td class='sub2'>31 records; tools/check_preregistration.py fails the build on a missing or post-hoc registration</td><td><span class="badge b-partial">partial</span><br><span class='sub2'>SUPPORTED (mechanism) — the mechanism is tested; the 12 legacy rules are labelled as selection-exposed</span></td><td>the gate catches a deliberately introduced unregistered result in a test</td><td>any published result is found without a registration commit that precedes it</td><td class='sub2'>the self-test in tools/check_preregistration.py --self-test</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/what_would_change.json">register</a></span></td></tbody></table></div>
+</div>
+
+<div class="panel">
+  <h2>Parlays and combos &mdash; the joint-evidence gate</h2>
+  <p class="sub">Multiplying marginal probabilities is invalid under dependence, so a combo may only be ranked when a
+  directly validated joint probability and the operator's void and push rules are both available.</p>
+  <div class="table-wrap"><table><thead><tr>
+    <th>Tested</th><th class="num">Survive BH at 5%</th><th>Void/push rules recorded</th><th>Gate</th><th>Source</th>
+  </tr></thead><tbody>
+    <tr><td>Every two-leg pair in the scored set</td><td class="num">66</td>
+      <td><span class="missing">not recorded</span></td>
+      <td>SHUT &mdash; 1 of 66 pairs survives the multiplicity
+      charge, and no combo is ranked until the rules are recorded and the joint probability is validated directly</td>
+      <span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/parlays.json">parlays</a></span></tr>
+  </tbody></table></div>
+  <div class="note"><strong>Why a correlated parlay is not a product.</strong> The product of two legs is what a book would pay on a standard parlay. Because the legs are correlated, that price is only fair if the correlation is zero; the correlation_ratio column shows how far from zero it is.</div>
+</div>
+
+<div class="panel">
+  <h2>The eight gates</h2>
+  <p class="sub">Read straight from the data file, so that the board's shape cannot drift from its rules.</p>
+  <div class="table-wrap"><table><thead><tr>
+    <th>Gate</th><th>What it requires</th><th>Why</th><th>Source</th>
+  </tr></thead><tbody><tr><td>G1</td><td>walk-forward / pre-game information only</td><td class='sub2'>Every input to the bet decision is known before kick-off and, for the model rules, comes from a fit that used only earlier games.</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json">gate defs</a></span></td></tr><tr><td>G2</td><td>observed prices on every scored bet</td><td class='sub2'>Every scored bet carries a price taken from the source file. No -110 assumption is used.</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json">gate defs</a></span></td></tr><tr><td>G3</td><td>at least 200 scored bets</td><td class='sub2'>Below this, a run of luck is indistinguishable from skill at any plausible effect size.</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json">gate defs</a></span></td></tr><tr><td>G4</td><td>hit rate beats the break-even implied by the actual prices taken</td><td class='sub2'>Break-even is computed from the real price on each bet, not from 0.5.</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json">gate defs</a></span></td></tr><tr><td>G5</td><td>survives multiple testing (BH-adjusted p &lt; 0.05, 12 rules tested)</td><td class='sub2'>Testing many rules and reporting only the best one manufactures winners; the Benjamini-Hochberg step charges for that.</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json">gate defs</a></span></td></tr><tr><td>G6</td><td>positive in a untouched holdout (2024 + 2025)</td><td class='sub2'>The holdout seasons were never used to tune the rule thresholds.</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json">gate defs</a></span></td></tr><tr><td>G7</td><td>positive in at least 60% of individual seasons</td><td class='sub2'>An edge that exists in only one season is a season, not a strategy.</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json">gate defs</a></span></td></tr><tr><td>G8</td><td>95% bootstrap confidence interval on ROI excludes zero</td><td class='sub2'>Ten thousand resamples of the actual bet log; the interval must sit above zero.</td><td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json">gate defs</a></span></td></tr></tbody></table></div>
+</div>
+
+<div class="panel">
+  <h2>Pre-registration and demotion</h2>
+  <p class="sub">A rule frozen before it sees data, and a written exit for anything that goes live.</p>
+  <div class="table-wrap"><table><thead><tr>
+    <th>Quantity</th><th class="num">Value</th><th>Reading</th><th>Source</th>
+  </tr></thead><tbody>
+    <tr><td>Strategy records</td><td class="num">31</td>
+      <td class="sub2">19 prospective, 12 backtest-first and disclosed as such.
+      The hash of the committing record is the registration.</td>
+      <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/preregistration.json">registry</a></span></td></tr>
+    <tr><td>Live strategies</td><td class="num">0</td>
+      <td class="sub2">The gate is armed and has never fired, because nothing is live. This is a statement about the repository, not about the strategies: a paper strategy cannot be demoted, and calling one of these &#x27;live&#x27; would be an unverified claim.</td>
+      <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/demotion.json">demotion</a></span></td></tr>
+    <tr><td>Demotion rules armed</td><td class="num">5</td>
+      <td class="sub2">31 strategies sit in paper. A paper strategy cannot be demoted, and calling one
+      live would be an unverified claim.</td>
+      <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/demotion.json">demotion</a></span></td></tr>
+  </tbody></table></div>
+</div>
+
+<p class="foot">Built 2026-11-16T14:36:42Z by session <code>2b927826-nfl1</code> from <code>data/session-2b927826/*.json</code> only.
+Every table row carries a source link or states that no value is published. Research tool, not betting advice.
+<a href="verification.html">How every value was checked &rarr;</a></p>
+</main>
+</body>
+</html>

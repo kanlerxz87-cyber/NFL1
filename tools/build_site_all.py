@@ -74,6 +74,11 @@ STEPS = [
     # any forecast that does not reproduce from the official inputs, or any late forecast.
     ("pre-registration check", [sys.executable, "tools/prereg.py", "check"], ROOT),
     ("pre-registration page (prereg/)", [sys.executable, "tools/prereg.py", "render"], ROOT),
+    # Session 2b927826-nfl1: the brief dashboard. Built before the canonical navigation so
+    # the eight brief/ pages enter the same reachability graph as everything else, and after
+    # the landing page because brief/index.html links back into pages/ and the sub-sites.
+    ("brief dashboard (brief/)", [sys.executable, "brief/build.py"], ROOT),
+    ("brief dashboard gate", [sys.executable, "brief/verify.py"], ROOT),
     ("canonical navigation", [sys.executable, "scripts/verified/normalize_nav.py"], ROOT),
     ("docs sub-site", [sys.executable, "tools/build_docs_site.py"], ROOT),
     ("verified-lab sub-site", [sys.executable, "scripts/build_site.py"], ROOT),

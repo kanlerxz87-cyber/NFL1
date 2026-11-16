@@ -1,0 +1,123 @@
+{
+ "schema": "nfl1.brief.flags.v1",
+ "generated_at": "2026-11-16T14:36:42Z",
+ "generated_by": "session 2b927826-nfl1",
+ "note": "This sub-site's own flag register. It does NOT write into data/flags.json, which another session owns. Every flag names the official link that settles it, or says plainly that no official source settles it. Flagged items never block the build, by the brief's own instruction.",
+ "rows": [
+  {
+   "id": "BF-01",
+   "severity": "information",
+   "what": "The Week 11 injury report does not exist yet",
+   "detail": "https://www.nfl.com/injuries/league/2026/reg11 serves the Week 10 page (title 'Week 10 of the 2026 Season'). Any page that showed Week 11 designations today would be inventing them.",
+   "repo_says": "nothing claims Week 11 designations; the capture is labelled Week 10",
+   "official_source": "https://www.nfl.com/injuries/league/2026/reg11",
+   "status": "open — cannot be closed by this repository, only by the NFL publishing it"
+  },
+  {
+   "id": "BF-02",
+   "severity": "data quality",
+   "what": "Only 2 capture days of the injury report exist, so the 'surprise' cannot be computed",
+   "detail": "heartbeat.jsonl holds 5 readings over 2 UTC days with an identical canonical hash; 0 designation changes have ever been recorded. The brief's requirement is a timestamped series from Wednesday to kickoff, which needs at least 3 more days per week.",
+   "repo_says": "data/readiness.json row R5 says '2 capture day(s); 0 designation change(s) recorded' — correct and honest",
+   "official_source": "https://www.nfl.com/injuries/",
+   "status": "open — needs the capture schedule widened, not a code fix"
+  },
+  {
+   "id": "BF-03",
+   "severity": "naming",
+   "what": "nfl.com prints two different names for the Chiefs' stadium",
+   "detail": "The game centre's Game Info block prints 'ARROWHEAD STADIUM'. The same site's Week 11 schedule page prints 'GEHA Field at Arrowhead Stadium' in its hotel link. The pinned feed prints the longer name. Publishing either as 'the official name' without qualification would be a claim the site cannot support.",
+   "repo_says": "this sub-site publishes 'ARROWHEAD STADIUM' (the game-centre string) and prints the schedule-page variant beside it",
+   "official_source": "https://www.nfl.com/games/cardinals-at-chiefs-2026-reg-11",
+   "status": "open — a naming inconsistency on the official site, not resolvable here"
+  },
+  {
+   "id": "BF-04",
+   "severity": "data quality",
+   "what": "'Missing starter' in the depth ladder means two things at once",
+   "detail": "The generator's slots_missing_starter column adds (a) slots with no available listed player and (b) slots where a backup is pressed into duty. Only 3 of the 41 are type (a); 38 are type (b). A reader who assumed the column meant 'empty slot' would be wrong by 38 slots.",
+   "repo_says": "the column is published without a definition beside it; this sub-site prints the split and the identity 41 = 38 + 3",
+   "official_source": "https://www.nfl.com/injuries/league/2026/reg10",
+   "status": "needs review — a one-line definition beside the column would close it"
+  },
+  {
+   "id": "BF-05",
+   "severity": "data quality",
+   "what": "The Cardinals' club code is not consistent across the repository",
+   "detail": "Official nfl.com pages use 'AZ'. The nflverse feed uses 'ARI'. The committed standings snapshot stores the club as 'AZ'; this session's fixture file, built on the feed's key, uses 'ARI'. A join on the raw code drops the club. The Rams have the same problem (official 'LA', feed 'LAR').",
+   "repo_says": "no alias map exists and no gate fails an unmapped code",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "status": "open — needs one alias table plus a build gate"
+  },
+  {
+   "id": "BF-06",
+   "severity": "governance",
+   "what": "Four pre-registration registries coexist and are not reconciled",
+   "detail": "data/preReg/registry.json (3 frozen rules), data/preregistration/registry.json (RULES_v1, 0 strategies), data/prereg/registrations.json (126 entries), data/strat/preregistration.json (31 records). Each has its own registration hash and its own checker. Two different checkers are even named check_preregistration.py and check_preregistration_d4027.py.",
+   "repo_says": "COORDINATION.md records the fragmentation and states reconciling it is a board decision",
+   "official_source": "n/a — internal governance, no official source applies",
+   "status": "needs review — a human must name the authoritative registry"
+  },
+  {
+   "id": "BF-07",
+   "severity": "reproducibility",
+   "what": "The base commit fails its own reproducibility gate for two data files",
+   "detail": "tools/check_reproducible.py fails on data/readiness.json (a new capture day changed a count from 1 to 2) and data/combined_verification.json (row count 2,899 vs the committed value), because a data-bot commit landed after the last rebuild. Regenerating and committing the rebuilt output closes it; the numbers themselves are correct.",
+   "repo_says": "the gate fails loudly, which is the intended behaviour",
+   "official_source": "https://www.nfl.com/injuries/",
+   "status": "fixed by this session — the rebuilt output is committed and the gate passes"
+  },
+  {
+   "id": "BF-08",
+   "severity": "own defect",
+   "what": "18 defaulted values and 2 wrong URLs in this session's own availability table, caught before publication",
+   "detail": "The first draft of availability.json carried missing_starter = 0 for every club instead of the generator's value, and two chart URLs were typed rather than copied. A field-by-field comparison against data/depth_ladder.json caught it; every value was re-read from the source.",
+   "repo_says": "the corrected file is published, and the check that caught it is committed as part of brief/verify.py's input set",
+   "official_source": "https://www.azcardinals.com/team/depth-chart (and the other 30 club charts)",
+   "status": "resolved before publication — published here because hiding it would defeat the purpose of the page"
+  },
+  {
+   "id": "BF-09",
+   "severity": "own defect",
+   "what": "Two numbers in this session's own reconciliation file were typed rather than computed",
+   "detail": "The per-club 'changed' flag and the standings tie count were first written by hand. Recomputing them from the two strings moved the identical/changed split from 12/20 to 8/24 and the tie entries from 1 to 2 (one tied game, two clubs).",
+   "repo_says": "both are now computed and the page shows the computed values",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "status": "resolved before publication"
+  },
+  {
+   "id": "BF-10",
+   "severity": "blocked",
+   "what": "Nothing can confirm that a listed backup actually played",
+   "detail": "No official inactive list, Game Book or snap-count capture exists in the repository for Week 10. 20 inactive rows exist for Week 9 only, 8 of them emergency quarterbacks. The 38 'backup projected to start' slots are therefore depth-chart projections, not observations.",
+   "repo_says": "data/readiness.json row R7 says '0 of 137 played 2026 games archived'",
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "status": "open — needs the Game Book archive (the brief's own route)"
+  },
+  {
+   "id": "BF-11",
+   "severity": "blocked",
+   "what": "No official price exists for any market, so no ROI is against an official number",
+   "detail": "The NFL publishes no odds. Every price in the repository comes from a pinned third-party parse, and every ROI therefore measures skill against a market that has not been officially confirmed.",
+   "repo_says": "the price source is labelled on every page that prints a price",
+   "official_source": "n/a — no official odds page exists",
+   "status": "open — needs the price-data policy decision (Q10), not a capture"
+  },
+  {
+   "id": "BF-12",
+   "severity": "navigation",
+   "what": "The site has four competing landing pages and ~194 HTML pages",
+   "detail": "index.html (pipeline/gen_site.py), dashboard.html (governance registers), web/dashboard.html, room/index.html, plus lab/, research/, verified-lab/, docs/, referee/, strat/, prereg/, shadow/, capture/ and review-room/ sub-sites. Nothing is wrong with any of them; a reader has no single front door, and the header nav carries 38 entries.",
+   "repo_says": "tools/check_reachability.py passes because every page is reachable from somewhere",
+   "official_source": "n/a — internal navigation",
+   "status": "needs review — this session publishes brief/ as one clean front door and links the rest, rather than deleting anyone's work"
+  }
+ ],
+ "counts": {
+  "rows": 12,
+  "open": 6,
+  "needs_review": 3,
+  "resolved": 3,
+  "note": "computed from the rows by the build, not typed"
+ }
+}
