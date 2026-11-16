@@ -4009,3 +4009,48 @@ Two things the merge itself produced, both kept:
 2. The rebase onto `main` dropped this session's board blocks once (a union resolution that deduplicated by line content ate 27 blank/table lines). Rebuilt as a true pure append and asserted `base board preserved byte-for-byte`.
 
 `reserve register gate: 0 failure(s), 2 note(s), 24 pinned page(s)`; `python3 -m unittest discover -s tests -q` → **229 tests OK**.
+
+---
+
+# Session `1a6737c5-nfl1` — Week 10 Lions designations: fresh official read and reproducible check (branch `arena/1a6737c5-nfl1`, base `46c82ae` on `main`, 2026-11-16)
+
+Board read before this claim: yes (full file, plus open PRs #47, #59, #77, #79–#81, #91–#94, #99 — none of them owns the files below).
+
+Scope is deliberately narrow. The full brief (about 90 items) cannot be completed in one session. Several items need sources this sandbox cannot reach (NFL Game Books, snap counts, play-by-play, NWS grids, operator prices), and most others are already claimed by the open PRs above. This session takes one item that no open claim covers.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| LC1 | Fresh official read of the three Week 10 Lions rows (Joseph, Mays, Reed), saved verbatim with sha256 and fetch time | in progress | `1a6737c5` | `data/session-1a6737c5/**` | official page https://www.nfl.com/injuries/league/2026/reg10 read through the fetch tool on 2026-11-16; the sandbox cannot reach nfl.com directly |
+| LC2 | Reproducible check that the stored official values match the stored verbatim page text | in progress | `1a6737c5` | `data/session-1a6737c5/verify_lions.py` | |
+| LC3 | Record the current cross-page conflict state (not edited; owned by `26b2c41e` and the integration session) | in progress | `1a6737c5` | this section only | the audit script was run and its output file reverted, because `room/data/lions_w10_conflicts.json` is owned by another session |
+
+Files touched by this session: `data/session-1a6737c5/**` (new) and this section of `COORDINATION.md`. Nothing else.
+
+### Result log — `1a6737c5-nfl1` (2026-11-16, UTC)
+
+| ID | Outcome | Evidence a reader can check |
+|---|---|---|
+| LC1 | done. Official Lions block (9 rows) saved verbatim with sha256. Kerby Joseph (S, Knee), Cade Mays (C, Ankle) and D.J. Reed (CB, Hip) are each "Did Not Participate In Practice" and game status "Out". Same values as the 2026-11-15 read recorded in `room/data/lions_w10_conflicts.json`. | Official source <https://www.nfl.com/injuries/league/2026/reg10>; `data/session-1a6737c5/lions_w10_official_block_2026-11-16.md`, `data/session-1a6737c5/lions_w10_official.json` |
+| LC2 | done. `verify_lions.py` recomputes the block hash, counts the 9 rows and checks the 3 designations. Result: `OK: 9 rows; 3 official designations match`. | `python3 data/session-1a6737c5/verify_lions.py` (exit 0) |
+| LC3 | done, observed only. Running `room/audit_lions_w10.py` on 2026-11-16 gives 42 rows on 15 pages (7 differ, 19 missing, 16 match). The `26b2c41e` record gives 32 rows on 11 pages (8 differ, 18 blank, 6 match). Page count grew since then. The regenerated `room/data/lions_w10_conflicts.json` was **not** committed, because `room/` belongs to `26b2c41e` and to the integration session. | `python3 room/audit_lions_w10.py` (writes that file; revert it unless you own `room/`) |
+
+**Irregularities (for the Flagged for Review page, integration session to publish):**
+- The Lions three-row conflict is still open on published pages. The integration session should copy the values from `data/session-1a6737c5/lions_w10_official.json`.
+- `dashboard/injuries.html` shows Kerby Joseph at practice "FP" and game "Out" against the official "DNP / Out". This is logged in `room/data/lions_w10_conflicts.json`; no page was edited here.
+- The sandbox cannot reach nfl.com directly, so this read used the fetch tool. The capture is labelled as rendered text, not a raw HTTP capture.
+
+**Not done here (named, not claimed):** the rest of the brief. The open PRs and claims listed at the top of this section cover most of it.
+
+### PR and check status — `1a6737c5-nfl1` (2026-11-16, UTC)
+
+- PR **#100** `arena/1a6737c5-nfl1` → `main`, open. **Not merged.** The board says shared outputs are changed only by the final integration session, and this PR regenerates `dashboard/repo.html` (a shared generated page).
+- `build` check: **pass** after commit `0813a61` regenerated `dashboard/repo.html`. The first run failed because the new `data/` files changed the file count on that page (299 → 302). That was my fault and is fixed.
+- `verify` (decision dashboard) check: **fail, pre-existing**. It fails the same way on `main` (commit `40ad386`). Cause: `tools/verify_official.py`, check E "games played reconciles with current official standings", reports 137 vs 149. Logged as an irregularity for the integration session. The check runs against data this PR does not touch.
+- `data/readiness.json` `generated_at` is set from the newest heartbeat. The committed copy on `main` is already older than what the generator writes, so `main` has a stale timestamp here too. Not committed by this session.
+
+Irregularities logged here for the integration session:
+1. `tools/verify_official.py` check E fails on `main` (137 vs 149 games played).
+2. `data/readiness.json` timestamp drift (pre-existing).
+3. The Lions three-row conflict across published pages (see LC3).
+
+Closing the board entry: LC1–LC3 done. The PR stays open for the integration session to merge.
