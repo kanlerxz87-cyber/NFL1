@@ -85,17 +85,17 @@
   <div class="main">
     <div class="topbar">
       <div class="crumb">NFL1 / <b>Decision Questions</b></div>
-      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">106 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">111 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
     </div>
     <main class="content" id="main">
       <div class="kicker">Governance</div>
       <h1>Decision questions &amp; information gaps</h1>
       <p class="lede">A clear list of questions, the information we have and do not have, verified answers, and concrete suggestions for discovering what is missing before any decision.</p>
       <div class="callout warn"><b>This is the decision gate.</b> A decision can reasonably be made only when the questions below have answers that an official source supports. Cells with no official answer are left blank; the "Do not have" and "Discovery action" columns say exactly what is missing and how to obtain it.</div>
-<div class="cards"><div class="card"><div class="label">Questions</div><div class="value">30</div><div class="detail">Numbered Q01–Q27</div></div><div class="card"><div class="label">Official sources</div><div class="value">39</div><div class="detail">Links for manual review</div></div><div class="card"><div class="label">Flagged items</div><div class="value">106</div><div class="detail">Review page</div></div><div class="card"><div class="label">Blank answers</div><div class="value">9</div><div class="detail">Intentionally blank</div></div></div>
+<div class="cards"><div class="card"><div class="label">Questions</div><div class="value">33</div><div class="detail">Numbered Q01–Q27</div></div><div class="card"><div class="label">Official sources</div><div class="value">43</div><div class="detail">Links for manual review</div></div><div class="card"><div class="label">Flagged items</div><div class="value">111</div><div class="detail">Review page</div></div><div class="card"><div class="label">Blank answers</div><div class="value">9</div><div class="detail">Intentionally blank</div></div></div>
 <h2 id="all">Questions, information and answers</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-questions" aria-label="Filter tbl-questions" placeholder="Filter rows…">
-<span class="count" data-count-for="tbl-questions">30 rows shown</span></div>
+<span class="count" data-count-for="tbl-questions">33 rows shown</span></div>
 <div class="tablewrap"><table class="data-table" id="tbl-questions"><caption>Known information, missing information, verified answers, why each question blocks a decision, and the discovery suggestion. Blank cells are blank on purpose.</caption>
 <thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Question</th><th scope="col" class="sortable">Information we HAVE</th><th scope="col" class="sortable">Information we DO NOT HAVE</th><th scope="col" class="sortable">Answer (only if officially published)</th><th scope="col" class="sortable">Limitation</th><th scope="col" class="sortable">Why it blocks a decision</th><th scope="col" class="sortable">Suggestion to discover missing info</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
 <tr id="Q01" data-verified="true">
@@ -427,6 +427,39 @@
 <td class="wide">The surprise signal, the ablation and the per-team unavailability count all read a file whose week they disagree about, so the same injury can be counted twice or zero times.</td>
 <td class="wide">Compare data/model/availability.json meta with data/model/official_injuries.json, then record the choice here and in the readiness row for IN-26.</td>
 <td><span class="src"><a href="https://www.nfl.com/injuries/league/2026/reg11" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report (week 11 requested, week 10 served)">S39 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="Q31" data-verified="true">
+<td><code>Q31</code></td>
+<td class="wide">Is there any official source that states a player&#x27;s snap share for a game, given that depth must be modelled from playing time and not from jersey order?</td>
+<td class="wide">The Game Book prints who started (Lineups), who came in (Substitutions), who was active but did not play (Did Not Play) and who was not active (Not Active) - and no snap counts; checked on the Week 10 2026 game book on 2026-11-16. The repository points at nfl.com/nextgenstats as the resolving source for snaps in two places and records the correlation it would support as &#x27;Not estimated&#x27;; no per-game snap table from an official page is captured anywhere in the tree. api.nfl.com endpoints return 401 Unauthorized to an unauthenticated request (checked 2026-11-16).</td>
+<td class="wide">Whether the league publishes a per-player play-share anywhere an unauthenticated reader may take it, and if not, whether a four-state participation record (started / substituted / active-DNP / not-active) is an acceptable substitute for &#x27;playing time&#x27; in the depth features.</td>
+<td class="wide"> </td>
+<td class="wide">Only the publisher can answer it; no number in this repository can.</td>
+<td class="wide">Three requirements hang on the same word: &#x27;model depth from playing time&#x27;, &#x27;use snap counts as the starter proxy when the depth chart is unavailable&#x27;, and &#x27;capture official inactive lists and snap counts&#x27;. If no official snap source exists, the honest choice is a four-state participation measure with the label &#x27;participation&#x27;, not &#x27;snaps&#x27; - otherwise every depth chart on the site quietly becomes an estimate wearing a statistic&#x27;s clothes.</td>
+<td class="wide">Enumerate what the Game Book and the game centre actually contain for one full week (14 games, both clubs each) and record here, per field, whether the number exists in an official document. Then decide the substitute explicitly and write it into the definitions of the depth features.</td>
+<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829721/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com / static.www.nfl.com) — Official NFL Game Book PDF for one played game (New England at Detroit, 2026 REG 10)">S41 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="Q32" data-verified="true">
+<td><code>Q32</code></td>
+<td class="wide">What is the authoritative availability set for pricing: the weekly report, the club&#x27;s declared inactives, the reserve list, or their union?</td>
+<td class="wide">Week 10 2026, official and dated: 347 report rows (28 clubs), 147 declared inactives (24 clubs, of which 77 have no report row), 100 open reserve designations from the league&#x27;s transactions register (83 of them with no report row). The three records disagree about who is unavailable, and each is official (data/model/official_injuries.json, data/gamebook/derived/ledger.json, data/reserve/report_vs_reserve.json).</td>
+<td class="wide">Which set the originated line is to be priced against, and what happens to a player who is on none of them but still does not dress (the active-but-did-not-play case), which only a Game Book can settle.</td>
+<td class="wide"> </td>
+<td class="wide">A repository-ownership decision; it changes the availability key that several artifacts read.</td>
+<td class="wide">A model trained on the report alone sees 77 + 83 phantom available players per round. A model trained on the union sees a different number every week depending on which captures exist, which makes a walk-forward comparison measure the capture schedule rather than the signal.</td>
+<td class="wide">Freeze the union definition in a pre-registration (report row OR declared inactive OR open reserve OR Game Book not-active), re-run one existing strategy on it, and publish the difference before adopting it.</td>
+<td><span class="src"><a href="https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official dated weekly inactives article">S43 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="Q33" data-verified="true">
+<td><code>Q33</code></td>
+<td class="wide">How many dated captures before kickoff does the site need before an injury &#x27;surprise&#x27; can be computed rather than described?</td>
+<td class="wide">The brief requires Wed/Thu/Fri snapshots and a daily series to kickoff, with the delta published and never the level. The repository holds one injury-report snapshot directory with a single dated capture (data/snapshots/injury_report/captures/, 20261115T121648Z) plus a CI capture on 2026-11-15T17:42Z; both are after the Friday 4:00 PM ET designation deadline for Week 10 and after the 9:30 ET Munich kickoff, so no Wednesday-to-kickoff series exists for any week in the tree.</td>
+<td class="wide">Whether the number of pre-kickoff captures per club can be made reliable enough (the clamp in F68, the 4 PM Friday rule, the 90-minute stadium designation) to support a delta feature at all this season.</td>
+<td class="wide"> </td>
+<td class="wide">Only time and a scheduled job can produce the series; no analysis can recover it for past weeks from this repository.</td>
+<td class="wide">A level tells you who is hurt - everybody knows that. A surprise is the change, and the change is the part the market has to reprice. With one capture per week there is no difference to compute, so any &#x27;surprise&#x27; feature on this site would be a re-labelled level.</td>
+<td class="wide">Count, per club per week, how many captures have a fetch timestamp earlier than the club&#x27;s kickoff. Publish the count as the readiness number for the surprise row, and refuse to ship the feature until it is at least 3 for 32 of 32 clubs.</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/league/2026/reg11" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official weekly injury report, week-URL probe">S44 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
 </tbody></table></div>
 <h2 id="method">How to close the gate</h2>

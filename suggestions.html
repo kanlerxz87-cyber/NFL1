@@ -85,7 +85,7 @@
   <div class="main">
     <div class="topbar">
       <div class="crumb">NFL1 / <b>Suggestions &amp; Paths</b></div>
-      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">106 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">111 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
     </div>
     <main class="content" id="main">
       <div class="kicker">Governance</div>
@@ -132,8 +132,8 @@
 </tbody></table></div>
 <h2 id="suggestions">Improvement suggestions</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-suggestions" aria-label="Filter tbl-suggestions" placeholder="Filter rows…">
-<span class="count" data-count-for="tbl-suggestions">34 rows shown</span></div>
-<div class="tablewrap"><table class="data-table" id="tbl-suggestions"><caption>34 suggestions to improve decision making on this site. Effort is blank and flagged; every row links to an official source.</caption>
+<span class="count" data-count-for="tbl-suggestions">39 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-suggestions"><caption>39 suggestions to improve decision making on this site. Effort is blank and flagged; every row links to an official source.</caption>
 <thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Area</th><th scope="col" class="sortable">Suggestion</th><th scope="col" class="sortable">How it improves decision making</th><th scope="col" class="sortable">Effort / risk estimate</th><th scope="col" class="sortable">Suggested disposition</th><th scope="col" class="sortable">Official evidence</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
 <tr id="S01" data-verified="true">
 <td><code>S01</code></td>
@@ -475,6 +475,56 @@
 <td class="wide">data/reserve/report_vs_reserve.json (totals: report_rows 347, on_reserve 100, named_in_both 17, on_reserve_not_in_report 83); reserve/index.html club table; https://www.nfl.com/transactions/league/reserve-list/2026/11</td>
 <td><span class="src"><a href="https://www.nfl.com/transactions/league/reserve-list/2026/11" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league transaction log (reserve list, November 2026)">S37 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
+<tr id="S33" data-verified="true">
+<td><code>S33</code></td>
+<td>Injuries and depth</td>
+<td class="wide">Read the Game Book&#x27;s four lists as the outcome record, and keep the weekly report as the expectation record</td>
+<td class="wide">The two documents answer different questions and the site currently conflates them. The report is what a club had to declare by 4 PM Friday; the Game Book is what the club&#x27;s own scorekeeper printed after kickoff: who was in the line-up, who substituted in, who was active and did not play, who was not active. Joining them turns &#x27;Player X is Questionable&#x27; into &#x27;Player X was Questionable, was declared inactive, and his backup took the first snap&#x27; - which is the only form of that sentence that can price a line. Cost of the join is one PDF per game, already linked from pages the repository already walks.</td>
+<td data-value="1" class="num">medium</td>
+<td><span class="badge neutral">Review before implementing: this session wrote the capture and the register (gamebook/, data/gamebook/) and stopped at the model, because the availability key belongs to another session&#x27;s files.</span></td>
+<td class="wide">data/gamebook/register.json (424 ledger rows, 171 designations joined for Week 10 2026); S41 (the game book itself); S43 (the weekly inactives article); gamebook/ledger.html</td>
+<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829721/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com / static.www.nfl.com) — Official NFL Game Book PDF for one played game (New England at Detroit, 2026 REG 10)">S41 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S34" data-verified="true">
+<td><code>S34</code></td>
+<td>Injuries and depth</td>
+<td class="wide">Stop scoring designations from one week and start scoring them from a joined multi-week sample</td>
+<td class="wide">One round gives n=82 Questionable, n=64 Out, n=10 Doubtful. The declared-inactive rate for Questionable is 18.3% with a 95% interval of [11.4%, 28.0%] - an interval wide enough that a model reading the point estimate will move its lines on noise. The same join is available for every past week because both official documents are published per week and stay online, so the sweep can lift n by roughly an order of magnitude per season at no extra risk; that is the difference between a calibration and an anecdote.</td>
+<td data-value="1" class="num">low</td>
+<td><span class="badge neutral">Implement in the scheduled job: .github/workflows/gamebook-sweep.yml already loops weeks for 2025 and 2026; extend the range, let the interval tighten, and do not quote a rate until n is stated next to it on the page (it is, in this register).</span></td>
+<td class="wide">data/gamebook/derived/designations.json; .github/workflows/gamebook-sweep.yml; gamebook/designations.html</td>
+<td><span class="src"><a href="https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official dated weekly inactives article">S43 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S35" data-verified="true">
+<td><code>S35</code></td>
+<td>Governance and verification</td>
+<td class="wide">Give every scheduled capture an assertion about what page it actually landed on</td>
+<td class="wide">The league returns the latest published week for a future-week URL with HTTP 200 (F68), which means a weekly job can be perfectly green and still be storing the same page under a new name. An assertion on the page&#x27;s own label costs one line and turns a silent data-integrity failure into a build failure - which is exactly the drift-alarm rule the brief asks for, applied to the week key instead of the row count.</td>
+<td data-value="1" class="num">low</td>
+<td><span class="badge neutral">Implement in this session&#x27;s collector (done: pipeline/collect_gamebooks.py week_label_mismatch), then hand the same assertion to the owners of pipeline/scrape_injuries.py and pipeline/capture_snapshots.py as the change request logged in COORDINATION.md.</span></td>
+<td class="wide">S44 (the probe, read 2026-11-16); pipeline/collect_gamebooks.py cmd_reports; F68</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/league/2026/reg11" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official weekly injury report, week-URL probe">S44 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S36" data-verified="true">
+<td><code>S36</code></td>
+<td>Site and decisions</td>
+<td class="wide">Move the four readiness rows off &#x27;Blocked&#x27; by naming the artefact that exists, not the source that is missing</td>
+<td class="wide">IN-04, IN-15, IN-17 and IN-18 all read &#x27;source not identified&#x27;. The source is now identified, a collector exists, and one round is joined; what is missing is coverage (0 of 14 Week 10 Game Books in the tree at commit time, F72). Those are different gates with different owners: a source question closes on a decision to run a job, a coverage question closes on a count. Publishing them as one blocked row makes an easy decision look like a hard one.</td>
+<td data-value="1" class="num">low</td>
+<td><span class="badge neutral">Review and accept the row updates this session wrote in room/data/readiness.json, and keep the remaining gate stated as the number (14 of 14 Game Books with parse_status ok).</span></td>
+<td class="wide">room/data/readiness.json IN-04/IN-15/IN-17/IN-18; data/gamebook/register.json game_books_captured; gamebook/results.html</td>
+<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829721/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com / static.www.nfl.com) — Official NFL Game Book PDF for one played game (New England at Detroit, 2026 REG 10)">S41 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S37" data-verified="true">
+<td><code>S37</code></td>
+<td>Signals and pricing</td>
+<td class="wide">Use the Not Active list as the second string&#x27;s evidence, since the depth chart cannot be trusted to say who is behind whom</td>
+<td class="wide">The register records 149 club depth slots that print more than one name at rank 1, and two clubs whose depth pages cannot be parsed at all, so &#x27;who is the backup&#x27; is often unanswerable from a depth chart. But the game-day inactive list is an answer to a nearby question that is fully sourced: the player declared inactive behind an Out starter at the same position is the man the club expects to play. That inference needs no rank and no jersey number, and it is available for every game.</td>
+<td data-value="1" class="num">medium</td>
+<td><span class="badge neutral">Review before implementing: it changes the definition of the backup-deficiency feature, so it must be pre-registered before it is scored, not after.</span></td>
+<td class="wide">data/depth_ladder.json (shared rank-1 slots); data/gamebook/derived/ledger.json (per-club inactive rows with positions); S43</td>
+<td><span class="src"><a href="https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official dated weekly inactives article">S43 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
 </tbody></table></div>
 <h2 id="matrix">Decision matrix</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-matrix" aria-label="Filter tbl-matrix" placeholder="Filter rows…">
@@ -525,7 +575,7 @@
 <section class="panel"><h2>Review workflow</h2>
 <ol class="tight">
 <li>Read the <a href="questions.html">decision questions</a> and the <a href="flagged.html">flagged items</a>.</li>
-<li>Compare the 34 suggestions and the three paths above.</li>
+<li>Compare the 39 suggestions and the three paths above.</li>
 <li>Select a path in the Review &amp; Choose a Path box; file the prefilled issue to make the decision durable.</li>
 <li>Close the blocking questions, then — and only then — authorise implementation of individual suggestions.</li>
 </ol>

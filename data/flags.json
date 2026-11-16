@@ -1189,5 +1189,60 @@
     "action": "owner decision on tools/check_freshness.py: compare content hashes rather than stamps so an unchanged input cannot make an output stale; and have the decision-room builder preserve its inputs' captured_at instead of relying on a re-run. Do not 'fix' a freshness failure by bumping captured_at without re-reading the official source.",
     "verified": true,
     "retrieved": "2026-11-16"
+  },
+  {
+    "id": "F68",
+    "category": "Official report URLs clamp an unpublished week to the last published week and return HTTP 200",
+    "description": "https://www.nfl.com/injuries/league/2026/reg11 read 2026-11-16 returned the Week 10 page (title 'Official NFL Injury Report for Players - Week 10 of the 2026 Season', canonical .../reg10) with status 200, and https://www.nfl.com/schedules/2026/REG11 rendered fixtures whose own game slugs read 2026-reg-10. A scraper that trusts the URL in the filename or in its own request therefore labels Week 10 data as Week 11 - which, in a system that stores a dated snapshot per week, silently backdates the sample rather than failing.",
+    "impact": "Every weekly capture in this repository is keyed by (season, week). A clamp that is not detected moves a week of injury rows, inactives or fixtures into the wrong bucket, and any 'change since the last capture' statistic (the injury surprise, the practice trend) is then computed between two readings of the same page and shows zero movement forever.",
+    "src": "S44",
+    "status": "open",
+    "action": "Handled inside this session's collector: pipeline/collect_gamebooks.py reads the page's own 'Week N of the YYYY Season' label and fails the capture when it disagrees with the requested week. Change request for the owner of pipeline/scrape_injuries.py and pipeline/capture_snapshots.py: adopt the same assertion (both fetch https://www.nfl.com/injuries/ with no week in the URL, so the label is their only defence). Logged in COORDINATION.md, not edited here.",
+    "verified": true,
+    "retrieved": "2026-11-16"
+  },
+  {
+    "id": "F69",
+    "category": "77 of 147 declared game-day inactives have no row on the official weekly injury report",
+    "description": "Joining the Week 10 2026 official report (347 rows, 28 clubs, captured 2026-11-15 by CI) to the league's own Week 10 inactives article (147 names, 24 clubs) leaves 77 names that sit on a club's inactive list and appear nowhere on the report - healthy scratches, coach's decisions and undrafted rotations. The report is a *designation* document; it is not the set of players who will not play.",
+    "impact": "Any availability feature whose universe is the injury report treats 77 not-playing players as available for that round. That contaminates the replacement-depth feature (the man who starts because a healthy scratch is out of the lineup looks like an undisturbed starter), the backup deficiency index and every ablation that compares 'with' and 'without' availability features.",
+    "src": "S43",
+    "status": "open",
+    "action": "Publish the union, not the report: data/gamebook/derived/ledger.json carries 424 rows including the 77 scratch rows, and the readiness row for the availability universe should quote that count. No model change made here (other sessions own the pipeline).",
+    "verified": true,
+    "retrieved": "2026-11-16"
+  },
+  {
+    "id": "F70",
+    "category": "16 of 64 players designated Out do not appear on their club's declared inactive list",
+    "description": "Week 10 2026, official sources only: 64 report rows carry 'Out' for a club whose inactive list was captured, and 48 of them are on that list. The other 16 (TreVeyon Henderson, Micah Parsons, Kerby Joseph among them) are not. An Out designation already makes a player ineligible, so the club's eight designations are spent on the players it must still declare; the two lists are therefore not interchangeable and neither is a superset of the other.",
+    "impact": "Reading the inactive list as 'the players who are out' understates absences by 16 in one round; reading the report as 'the players who are out' overstates the active set by 77 (F69). A feature built on either list alone is wrong in both directions, and a backtest inherits the error silently.",
+    "src": "S43",
+    "status": "open",
+    "action": "The register publishes both states per row ('declared_inactive', 'not_on_inactive_list', 'no_inactive_source') and never collapses them; the Game Book's own Not Active and Did Not Play lines are the tie-breaker and are captured per game once the Actions sweep has run.",
+    "verified": true,
+    "retrieved": "2026-11-16"
+  },
+  {
+    "id": "F71",
+    "category": "The game centre and the Game Book print different venue text for the same fixture",
+    "description": "For New England at Detroit, 2026 REG 10: the game centre prints Location 'MUNICH' and Stadium 'FC BAYERN MUNICH STADIUM'; the game's own Game Book prints 'at Allianz Arena, Munich, Germany' and, on the same page, 'Open Stadium on Natural Grass'. Both are official, both are dated, and they are not the same string. Read 2026-11-16.",
+    "impact": "A venue register keyed on one of the two will fail to join the other, which matters because the stadium is the join key between a fixture and its roof/surface and weather overlay. It is also a reminder that 'transcribe the venue from the official game centre' can produce a naming that no other official document uses.",
+    "src": "S42",
+    "status": "needs review",
+    "action": "Published as two columns side by side in data/gamebook/register.json (venue_game_centre, venue_game_book) and left unresolved. The venue register is another session's scope (open PR #99, E2/E3); this is evidence handed to it, not an edit.",
+    "verified": true,
+    "retrieved": "2026-11-16"
+  },
+  {
+    "id": "F72",
+    "category": "Game Book coverage in this repository is 0 of 14 played Week 10 games at commit time",
+    "description": "The source is identified (S41) and the collector is written, but the Arena sandbox has no route to nfl.com, so no PDF bytes are in the tree from the sandbox. The play-rate column of the designation table is therefore blank, and the expected-versus-actual starter table is empty. Stated as a number rather than hidden: 0 of 14 at the time this row was written.",
+    "impact": "Two readiness rows (IN-15 play rate, IN-17 availability graph) can be advanced but not closed without these files; the site must not imply that a play rate has been measured when only the declared-inactive join has been.",
+    "src": "S42",
+    "status": "needs review",
+    "action": "Cleared by the scheduled sweep (.github/workflows/gamebook-sweep.yml, hourly at :37), which writes captures for 2026 weeks 8-11 and appends thereafter. The number that clears this flag is 14 of 14 Week 10 games with parse_status ok, published on gamebook/results.html.",
+    "verified": true,
+    "retrieved": "2026-11-16"
   }
 ]

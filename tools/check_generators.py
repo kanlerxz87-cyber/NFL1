@@ -39,6 +39,8 @@ GENERATORS = {
     "prereg/build.py": [r'write\(\s*"([^"/]+\.html)"'],
     # Session 1d824ec2-nfl1: the transactions/reserve sub-site. Bare filenames under reserve/.
     "tools/build_reserve_site.py": [r'OUT_DIR / "([^"/]+\.html)"'],
+    # Session 98a40411-nfl1 (G7): the Game Book register sub-site. Bare filenames under gamebook/.
+    "tools/build_gamebook_register.py": [r'SITE / "([^"/]+\.html)"'],
 }
 
 # explicit, documented ownership. Anything not here is reported, not assumed.
@@ -66,6 +68,14 @@ KNOWN_OWNERS = {
     "pages/data-tables.html": "tools/build.py",
     # Session 0c5215c1-nfl1: pre-registration sub-site (prereg/build.py registered above).
     # Session 1d824ec2-nfl1: transactions and reserve-list sub-site.
+    # Session 98a40411-nfl1 (G7): Game Book register and availability-outcome ledger.
+    "gamebook/index.html": "tools/build_gamebook_register.py",
+    "gamebook/ledger.html": "tools/build_gamebook_register.py",
+    "gamebook/designations.html": "tools/build_gamebook_register.py",
+    "gamebook/results.html": "tools/build_gamebook_register.py",
+    "gamebook/crosscheck.html": "tools/build_gamebook_register.py",
+    "gamebook/starters.html": "tools/build_gamebook_register.py",
+    "gamebook/method.html": "tools/build_gamebook_register.py",
     "reserve/index.html": "tools/build_reserve_site.py",
     "reserve/rows.html": "tools/build_reserve_site.py",
     "prereg/registry.html": "prereg/build.py",
@@ -106,6 +116,9 @@ def claims():
             found = {"prereg/" + f for f in found}
         if gen == "tools/build_reserve_site.py":
             found = {"reserve/" + f for f in found}
+        if gen == "tools/build_gamebook_register.py":
+            # SITE is gamebook/, so the bare filenames are claimed under that prefix
+            found = {"gamebook/" + f for f in found}
         for f in found:
             out.setdefault(f, set()).add(gen)
     return out

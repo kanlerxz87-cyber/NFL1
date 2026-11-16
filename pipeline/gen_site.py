@@ -43,6 +43,11 @@ NAV = [
     # which is what makes "not listed on the injury report" mean "on a reserve list" rather than
     # "available". Additive entry only; no other session's entry is moved or renamed.
     ("reserve/index.html", "Transactions & Reserve"),
+    # Session 98a40411-nfl1 (G7): the official Game Book register - the game's own PDF, which
+    # prints who started, who was active but did not play and who was not active, and which is
+    # the dated record the designation calibration is joined to. Additive entry only; no other
+    # session's entry is moved or renamed.
+    ("gamebook/index.html", "Game Book Register"),
     ("pages/questions.html", "Questions"),
     ("pages/suggestions.html", "Suggestions"),
     ("pages/evidence.html", "Evidence"),
@@ -89,7 +94,9 @@ SIDEBAR = [
                       ("pages/depth.html", "Depth & Deficiency"),
                       ("pages/snapshots.html", "Injury Snapshots"),
                       # Session 1d824ec2-nfl1: dated roster events, additive.
-                      ("reserve/index.html", "Transactions & Reserve")]),
+                      ("reserve/index.html", "Transactions & Reserve"),
+                      # Session 98a40411-nfl1 (G7): game-book register, additive.
+                      ("gamebook/index.html", "Game Book Register")]),
     ("Decisions", [("pages/questions.html", "Questions"),
                    ("pages/suggestions.html", "Suggestions")]),
     ("Evidence", [("pages/evidence.html", "Evidence"),

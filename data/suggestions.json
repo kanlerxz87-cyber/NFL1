@@ -440,5 +440,70 @@
     "status": "Awaiting review",
     "verified": true,
     "retrieved": "2026-11-16"
+  },
+  {
+    "id": "S33",
+    "area": "Injuries and depth",
+    "title": "Read the Game Book's four lists as the outcome record, and keep the weekly report as the expectation record",
+    "decision_impact": "The two documents answer different questions and the site currently conflates them. The report is what a club had to declare by 4 PM Friday; the Game Book is what the club's own scorekeeper printed after kickoff: who was in the line-up, who substituted in, who was active and did not play, who was not active. Joining them turns 'Player X is Questionable' into 'Player X was Questionable, was declared inactive, and his backup took the first snap' - which is the only form of that sentence that can price a line. Cost of the join is one PDF per game, already linked from pages the repository already walks.",
+    "effort": "medium",
+    "recommended_path": "Review before implementing: this session wrote the capture and the register (gamebook/, data/gamebook/) and stopped at the model, because the availability key belongs to another session's files.",
+    "evidence": "data/gamebook/register.json (424 ledger rows, 171 designations joined for Week 10 2026); S41 (the game book itself); S43 (the weekly inactives article); gamebook/ledger.html",
+    "src": "S41",
+    "status": "Awaiting review",
+    "verified": true,
+    "retrieved": "2026-11-16"
+  },
+  {
+    "id": "S34",
+    "area": "Injuries and depth",
+    "title": "Stop scoring designations from one week and start scoring them from a joined multi-week sample",
+    "decision_impact": "One round gives n=82 Questionable, n=64 Out, n=10 Doubtful. The declared-inactive rate for Questionable is 18.3% with a 95% interval of [11.4%, 28.0%] - an interval wide enough that a model reading the point estimate will move its lines on noise. The same join is available for every past week because both official documents are published per week and stay online, so the sweep can lift n by roughly an order of magnitude per season at no extra risk; that is the difference between a calibration and an anecdote.",
+    "effort": "low",
+    "recommended_path": "Implement in the scheduled job: .github/workflows/gamebook-sweep.yml already loops weeks for 2025 and 2026; extend the range, let the interval tighten, and do not quote a rate until n is stated next to it on the page (it is, in this register).",
+    "evidence": "data/gamebook/derived/designations.json; .github/workflows/gamebook-sweep.yml; gamebook/designations.html",
+    "src": "S43",
+    "status": "Awaiting review",
+    "verified": true,
+    "retrieved": "2026-11-16"
+  },
+  {
+    "id": "S35",
+    "area": "Governance and verification",
+    "title": "Give every scheduled capture an assertion about what page it actually landed on",
+    "decision_impact": "The league returns the latest published week for a future-week URL with HTTP 200 (F68), which means a weekly job can be perfectly green and still be storing the same page under a new name. An assertion on the page's own label costs one line and turns a silent data-integrity failure into a build failure - which is exactly the drift-alarm rule the brief asks for, applied to the week key instead of the row count.",
+    "effort": "low",
+    "recommended_path": "Implement in this session's collector (done: pipeline/collect_gamebooks.py week_label_mismatch), then hand the same assertion to the owners of pipeline/scrape_injuries.py and pipeline/capture_snapshots.py as the change request logged in COORDINATION.md.",
+    "evidence": "S44 (the probe, read 2026-11-16); pipeline/collect_gamebooks.py cmd_reports; F68",
+    "src": "S44",
+    "status": "Awaiting review",
+    "verified": true,
+    "retrieved": "2026-11-16"
+  },
+  {
+    "id": "S36",
+    "area": "Site and decisions",
+    "title": "Move the four readiness rows off 'Blocked' by naming the artefact that exists, not the source that is missing",
+    "decision_impact": "IN-04, IN-15, IN-17 and IN-18 all read 'source not identified'. The source is now identified, a collector exists, and one round is joined; what is missing is coverage (0 of 14 Week 10 Game Books in the tree at commit time, F72). Those are different gates with different owners: a source question closes on a decision to run a job, a coverage question closes on a count. Publishing them as one blocked row makes an easy decision look like a hard one.",
+    "effort": "low",
+    "recommended_path": "Review and accept the row updates this session wrote in room/data/readiness.json, and keep the remaining gate stated as the number (14 of 14 Game Books with parse_status ok).",
+    "evidence": "room/data/readiness.json IN-04/IN-15/IN-17/IN-18; data/gamebook/register.json game_books_captured; gamebook/results.html",
+    "src": "S41",
+    "status": "Awaiting review",
+    "verified": true,
+    "retrieved": "2026-11-16"
+  },
+  {
+    "id": "S37",
+    "area": "Signals and pricing",
+    "title": "Use the Not Active list as the second string's evidence, since the depth chart cannot be trusted to say who is behind whom",
+    "decision_impact": "The register records 149 club depth slots that print more than one name at rank 1, and two clubs whose depth pages cannot be parsed at all, so 'who is the backup' is often unanswerable from a depth chart. But the game-day inactive list is an answer to a nearby question that is fully sourced: the player declared inactive behind an Out starter at the same position is the man the club expects to play. That inference needs no rank and no jersey number, and it is available for every game.",
+    "effort": "medium",
+    "recommended_path": "Review before implementing: it changes the definition of the backup-deficiency feature, so it must be pre-registered before it is scored, not after.",
+    "evidence": "data/depth_ladder.json (shared rank-1 slots); data/gamebook/derived/ledger.json (per-club inactive rows with positions); S43",
+    "src": "S43",
+    "status": "Awaiting review",
+    "verified": true,
+    "retrieved": "2026-11-16"
   }
 ]

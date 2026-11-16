@@ -69,6 +69,11 @@ STEPS = [
      [sys.executable, "tools/build_reserve_site.py"], ROOT),
     # session 55dc53f4-nfl1 (P5/P6): the per-team injury view and the 13-vs-15-Nov delta are built
     # from committed capture files, then the shadow/ sub-site. Before the landing page, as above.
+    # session 98a40411-nfl1 (G7): the official Game Book register and availability-outcome
+    # ledger, rendered from data/gamebook/. Additive step, placed before the landing page so the
+    # nav entry resolves to a file that exists.
+    ("game book register (gamebook/)",
+     [sys.executable, "tools/build_gamebook_register.py"], ROOT),
     ("shadow team view and delta", [sys.executable, "tools/build_team_view.py"], ROOT),
     ("shadow sub-site (shadow/)", [sys.executable, "tools/build_shadow_site.py"], ROOT),
     ("landing page and decision lab", [sys.executable, "gen_site.py"], os.path.join(ROOT, "pipeline")),
@@ -99,7 +104,7 @@ def main() -> int:
 
     if check:
         print("--- checking that the committed pages equal the generated pages")
-        r = subprocess.run(["git", "diff", "--exit-code", "--", "*.html", "README.md", "docs/", "verified-lab/", "referee/", "reserve/"],
+        r = subprocess.run(["git", "diff", "--exit-code", "--", "*.html", "README.md", "docs/", "verified-lab/", "referee/", "reserve/", "gamebook/"],
                            cwd=ROOT)
         if r.returncode != 0:
             print("FAILED: the committed pages differ from the generated pages "

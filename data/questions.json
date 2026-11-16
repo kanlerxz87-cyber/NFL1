@@ -418,5 +418,47 @@
     "src": "S39",
     "verified": true,
     "retrieved": "2026-11-16"
+  },
+  {
+    "id": "Q31",
+    "question": "Is there any official source that states a player's snap share for a game, given that depth must be modelled from playing time and not from jersey order?",
+    "known": "The Game Book prints who started (Lineups), who came in (Substitutions), who was active but did not play (Did Not Play) and who was not active (Not Active) - and no snap counts; checked on the Week 10 2026 game book on 2026-11-16. The repository points at nfl.com/nextgenstats as the resolving source for snaps in two places and records the correlation it would support as 'Not estimated'; no per-game snap table from an official page is captured anywhere in the tree. api.nfl.com endpoints return 401 Unauthorized to an unauthenticated request (checked 2026-11-16).",
+    "unknown": "Whether the league publishes a per-player play-share anywhere an unauthenticated reader may take it, and if not, whether a four-state participation record (started / substituted / active-DNP / not-active) is an acceptable substitute for 'playing time' in the depth features.",
+    "answer": " ",
+    "limitation": "Only the publisher can answer it; no number in this repository can.",
+    "why": "Three requirements hang on the same word: 'model depth from playing time', 'use snap counts as the starter proxy when the depth chart is unavailable', and 'capture official inactive lists and snap counts'. If no official snap source exists, the honest choice is a four-state participation measure with the label 'participation', not 'snaps' - otherwise every depth chart on the site quietly becomes an estimate wearing a statistic's clothes.",
+    "discovery": "Enumerate what the Game Book and the game centre actually contain for one full week (14 games, both clubs each) and record here, per field, whether the number exists in an official document. Then decide the substitute explicitly and write it into the definitions of the depth features.",
+    "flag": "F72",
+    "verified": true,
+    "retrieved": "2026-11-16",
+    "src": "S41"
+  },
+  {
+    "id": "Q32",
+    "question": "What is the authoritative availability set for pricing: the weekly report, the club's declared inactives, the reserve list, or their union?",
+    "known": "Week 10 2026, official and dated: 347 report rows (28 clubs), 147 declared inactives (24 clubs, of which 77 have no report row), 100 open reserve designations from the league's transactions register (83 of them with no report row). The three records disagree about who is unavailable, and each is official (data/model/official_injuries.json, data/gamebook/derived/ledger.json, data/reserve/report_vs_reserve.json).",
+    "unknown": "Which set the originated line is to be priced against, and what happens to a player who is on none of them but still does not dress (the active-but-did-not-play case), which only a Game Book can settle.",
+    "answer": " ",
+    "limitation": "A repository-ownership decision; it changes the availability key that several artifacts read.",
+    "why": "A model trained on the report alone sees 77 + 83 phantom available players per round. A model trained on the union sees a different number every week depending on which captures exist, which makes a walk-forward comparison measure the capture schedule rather than the signal.",
+    "discovery": "Freeze the union definition in a pre-registration (report row OR declared inactive OR open reserve OR Game Book not-active), re-run one existing strategy on it, and publish the difference before adopting it.",
+    "flag": "F69",
+    "verified": true,
+    "retrieved": "2026-11-16",
+    "src": "S43"
+  },
+  {
+    "id": "Q33",
+    "question": "How many dated captures before kickoff does the site need before an injury 'surprise' can be computed rather than described?",
+    "known": "The brief requires Wed/Thu/Fri snapshots and a daily series to kickoff, with the delta published and never the level. The repository holds one injury-report snapshot directory with a single dated capture (data/snapshots/injury_report/captures/, 20261115T121648Z) plus a CI capture on 2026-11-15T17:42Z; both are after the Friday 4:00 PM ET designation deadline for Week 10 and after the 9:30 ET Munich kickoff, so no Wednesday-to-kickoff series exists for any week in the tree.",
+    "unknown": "Whether the number of pre-kickoff captures per club can be made reliable enough (the clamp in F68, the 4 PM Friday rule, the 90-minute stadium designation) to support a delta feature at all this season.",
+    "answer": " ",
+    "limitation": "Only time and a scheduled job can produce the series; no analysis can recover it for past weeks from this repository.",
+    "why": "A level tells you who is hurt - everybody knows that. A surprise is the change, and the change is the part the market has to reprice. With one capture per week there is no difference to compute, so any 'surprise' feature on this site would be a re-labelled level.",
+    "discovery": "Count, per club per week, how many captures have a fetch timestamp earlier than the club's kickoff. Publish the count as the readiness number for the surprise row, and refuse to ship the feature until it is at least 3 for 32 of 32 clubs.",
+    "flag": "F68",
+    "verified": true,
+    "retrieved": "2026-11-16",
+    "src": "S44"
   }
 ]
