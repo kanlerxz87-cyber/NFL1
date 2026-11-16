@@ -111,3 +111,7 @@ jobs:
           python3 tools/check_scraper_pins.py --self-test
       - name: Strategy competition unit tests
         run: python3 -m unittest tests.test_strat_competition -v
+      # Session 2b927826-nfl1: a failed injury scrape used to rebuild the depth ladder to
+      # 0 backups against 38 committed. The guard refuses the rebuild; these tests prove it.
+      - name: Failed-scrape guard on the depth ladder
+        run: python3 -m unittest tests.test_depth_ladder_guard -v

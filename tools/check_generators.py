@@ -42,6 +42,37 @@ GENERATORS = {
     "ledger/build.py": [r'\("([a-z0-9-]+\.html)", "[^"]*"\)'],
     # Session 1d824ec2-nfl1: the transactions/reserve sub-site. Bare filenames under reserve/.
     "tools/build_reserve_site.py": [r'OUT_DIR / "([^"/]+\.html)"'],
+    # Session 2b927826-nfl1: the brief dashboard. BUILDERS maps bare filenames; the
+    # generator writes them under brief/ (prefix added in claims()).
+    "brief/build.py": [r'\n    "([a-z]+\.html)": '],
+}
+
+# explicit, documented ownership. Anything not here is reported, not assumed.
+KNOWN_OWNERS = {
+    "index.html": "pipeline/gen_site.py",
+    "pages/lines.html": "pipeline/gen_site.py",
+    "pages/verified-lines.html": "scripts/verified/build_site.py",
+    "pages/strategies.html": "pipeline/gen_site.py",
+    "pages/injuries.html": "pipeline/gen_site.py",
+    "pages/props.html": "pipeline/gen_site.py",
+    "pages/evidence.html": "pipeline/gen_site.py",
+    "pages/questions.html": "pipeline/gen_site.py",
+    "pages/suggestions.html": "pipeline/gen_site.py",
+    "pages/review.html": "pipeline/gen_site.py",
+    "pages/executive.html": "pipeline/gen_site.py",
+    "pages/models.html": "pipeline/gen_site.py",
+    "pages/data.html": "scripts/verified/build_site.py",
+    "pages/analysis.html": "scripts/verified/build_site.py",
+    "pages/decisions.html": "scripts/verified/build_site.py",
+    "pages/verified.html": "scripts/verified/build_site.py",
+    # Two owners with distinct scopes: build_availability.py writes pages/availability.html
+    # (the s9cb availability page); brief/build.py writes brief/availability.html (its own
+    # sub-site). They are separate output paths, so this is not a collision.
+    "pages/availability.html": "scripts/verified/build_availability.py",
+    "pages/executive-summary.html": "tools/build.py",
+    "pages/teams.html": "tools/build.py",
+    "pages/standings.html": "tools/build.py",
+    "pages/data-tables.html": "tools/build.py",
     # Session 0c5215c1-nfl1: the pre-registration sub-site. write() takes bare filenames;
     # the generator writes them under prereg/ (prefix added in claims()).
     "prereg/build.py": [r'write\(\s*"([^"/]+\.html)"'],
@@ -70,6 +101,15 @@ KNOWN_OWNERS = {
     "pages/teams.html": "tools/build.py",
     "pages/standings.html": "tools/build.py",
     "pages/data-tables.html": "tools/build.py",
+    # Session 2b927826-nfl1: the eight brief pages, all written by brief/build.py.
+    "brief/index.html": "brief/build.py",
+    "brief/requirements.html": "brief/build.py",
+    "brief/answers.html": "brief/build.py",
+    "brief/strategies.html": "brief/build.py",
+    "brief/availability.html": "brief/build.py",
+    "brief/fixtures.html": "brief/build.py",
+    "brief/suggestions.html": "brief/build.py",
+    "brief/verification.html": "brief/build.py",
     # Session 0c5215c1-nfl1: pre-registration sub-site (prereg/build.py registered above).
     # Session 1d824ec2-nfl1: transactions / reserve-list sub-site.
     "reserve/index.html": "tools/build_reserve_site.py",
@@ -122,6 +162,9 @@ def claims():
         if gen == "prereg/build.py":
             # write() takes bare filenames; the generator writes them under prereg/
             found = {"prereg/" + f for f in found}
+        if gen == "brief/build.py":
+            # BUILDERS maps bare filenames; the generator writes them under brief/.
+            found = {"brief/" + f for f in found}
         if gen == "tools/build_reserve_site.py":
             found = {"reserve/" + f for f in found}
         if gen == "ledger/build.py":

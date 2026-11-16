@@ -1,0 +1,358 @@
+{
+ "schema": "nfl1.brief.answers.v1",
+ "generated_at": "2026-11-16T14:36:42Z",
+ "generated_by": "session 2b927826-nfl1",
+ "purpose": "The brief asks for 'a clear list of questions, information and answers that need to be addressed before any decision can be reasonably made based upon the information that we already have and do not have', with suggestions for discovering the missing information. One row per question. Every row states what is KNOWN (with where it is stored), what is MISSING, what decision the answer unblocks, and the concrete test or capture that would produce the missing value.",
+ "legend": {
+  "answered": "a value exists in the repository and was checked against its source",
+  "answered-unverified": "a value exists but rests on a third-party source, or was not re-checked against an official page",
+  "open-needs-data": "no value exists and no source has been captured yet",
+  "open-needs-decision": "the data exists; a human must choose a policy",
+  "blocked": "the question cannot be answered from any source currently reachable"
+ },
+ "rows": [
+  {
+   "id": "Q01",
+   "question": "Does the model's own line beat the closing line?",
+   "status": "answered",
+   "answer": "No. Brier skill versus the closing line on the side market is -0.0413, game-cluster 95% interval [-0.0513, -0.0299] over 6,785 games. The interval sits entirely below zero, so the model's side probabilities are worse than assuming the closing line is a coin flip.",
+   "known_from": "data/strat/proper_score.json (markets[side].results.model)",
+   "missing": "nothing for the answer; what is missing is a feature set that might change it",
+   "decision_unblocked": "do not stake on the own line; the question becomes 'which feature could earn skill' rather than 'when do we go live'",
+   "how_to_discover": "re-run the identical proper-score test with an availability-surprise feature (Q05) and publish the interval; the pre-registered rule is in strat/proper_score.py",
+   "blocks": [
+    "staking",
+    "leaderboard eligibility"
+   ]
+  },
+  {
+   "id": "Q02",
+   "question": "Does any betting strategy clear every validation gate on real prices?",
+   "status": "answered",
+   "answer": "No. 0 of 12 scored rules pass all eight gates. The best is S07 (fade the road favourite of 7+) at 6 of 8: it fails G5 (Benjamini-Hochberg adjusted p = 0.758) and G8 (95% ROI interval [-3.1%, +15.3%] includes zero).",
+   "known_from": "data/s9cb/leaderboard.json",
+   "missing": "the sample needed for power: 1,950 bets at the top rule's edge for 80% power, against 401 placed",
+   "decision_unblocked": "no promotion of any rule to live; the leaderboard ranks nothing",
+   "how_to_discover": "the only honest route is more prospective bets under a frozen rule, or a genuinely different signal with a larger effect. Repeating the same 401 bets cannot settle it.",
+   "blocks": [
+    "reward",
+    "staking",
+    "rank"
+   ]
+  },
+  {
+   "id": "Q03",
+   "question": "Is a strategy ranked by win rate or by a proper score?",
+   "status": "answered",
+   "answer": "By proper score. The published board ranks by benchmark-relative Brier skill with a game-cluster lower bound and a multiplicity charge for the number of trials; win rate and short-run ROI are shown but never used to rank.",
+   "known_from": "data/strat/proper_score.json + strat/proper_score.py",
+   "missing": "nothing",
+   "decision_unblocked": "the reward rule can be written on skill rather than on a lucky streak",
+   "how_to_discover": "n/a",
+   "blocks": []
+  },
+  {
+   "id": "Q04",
+   "question": "What does a lucky run look like, so luck can be removed from the leaderboard?",
+   "status": "answered",
+   "answer": "Two calibrated reference lines exist. A coin-flip control on the frozen corpus loses 2.51% (n = 5,202 priced games); a favourites-only control loses 4.74% (hit 48.81%, 95% interval [-7.43%, -2.05%]). Every published strategy sits inside its own luck band, and the number of bets needed for 80% power is printed beside each.",
+   "known_from": "data/prereg/controls.json, data/s9cb/leaderboard.json (luck_accounting)",
+   "missing": "nothing for the controls; the missing piece is a live sample large enough to leave the band",
+   "decision_unblocked": "a reviewer can tell 'this is inside the band' from 'this is skill' without any statistics",
+   "how_to_discover": "n/a",
+   "blocks": []
+  },
+  {
+   "id": "Q05",
+   "question": "Is the injury signal a surprise or a level?",
+   "status": "open-needs-data",
+   "answer": "A level, today. The repository holds 2 capture days of the official report and 0 recorded designation changes, so a surprise (a designation that moved between captures) has never been observed, only a snapshot.",
+   "known_from": "data/snapshots/injury_report/heartbeat.jsonl (5 readings over 2 distinct UTC days), data/readiness.json row R5",
+   "missing": "daily captures from Wednesday to kickoff with a retained hash, so that Questionable to Out and DNP to LP to FP transitions can be replayed as they were known",
+   "decision_unblocked": "whether availability may enter a model at all, and in what form",
+   "how_to_discover": "the capture workflow already exists (.github/workflows/capture-snapshots.yml). It must run at least Wednesday/Thursday/Friday/saturday and before each kickoff, and the deltas must be stored, not just the snapshot. The gate is: 2 or more capture days AND at least 1 recorded designation change.",
+   "blocks": [
+    "ablation",
+    "depth feature",
+    "model promotion"
+   ]
+  },
+  {
+   "id": "Q06",
+   "question": "What does 'Questionable' actually mean in play-rate terms?",
+   "status": "open-needs-data",
+   "answer": "Unknown. The official text carries no probability, and no capture in this repository joins a designation to whether the player actually played.",
+   "known_from": "data/capture/nflcom_injuries_reg10_2026-11-15_rows.tsv (90 Questionable, 70 Out, 11 Doubtful, 176 blank in Week 10)",
+   "missing": "several seasons of designations joined to the official inactive lists, with a play rate and a confidence interval per designation",
+   "decision_unblocked": "whether a designation becomes a model feature, and with what weight",
+   "how_to_discover": "capture the official inactive list 90 minutes before kickoff for every game (it is published on nfl.com and by each club), join it to the report by player and week, and compute play rate per designation with a Wilson interval. Minimum viable test: one full season, about 17 weeks.",
+   "blocks": [
+    "injury feature",
+    "prop modelling",
+    "ablation"
+   ]
+  },
+  {
+   "id": "Q07",
+   "question": "Do the availability features earn anything over not having them?",
+   "status": "open-needs-data",
+   "answer": "The test exists and has been run once with a null result: adding the availability columns to an identical model moved mean absolute error by +0.0007 points with interval [-0.0226, +0.0216]. That is a valid ablation, but on a feature set built from a snapshot rather than a surprise (Q05).",
+   "known_from": "PR #80 study (open, unmerged; the file is data/session-c84a41a4/results.json on that branch)",
+   "missing": "the same ablation on a surprise-based availability feature",
+   "decision_unblocked": "whether to spend modelling effort on availability at all",
+   "how_to_discover": "rerun the identical model with and without the surprise features on a chronological holdout, and publish the difference with its interval. Do not substitute a fixed points penalty: the brief forbids it and it cannot be falsified.",
+   "blocks": [
+    "model promotion",
+    "depth feature"
+   ]
+  },
+  {
+   "id": "Q08",
+   "question": "Is the depth chart a legitimate source for who starts?",
+   "status": "open-needs-decision",
+   "answer": "It is a legitimate source for intent, not for playing time. 31 of 32 clubs publish one; 14 carry the club's own 'unofficial' label; 30 of 31 print no date; 1 club publishes an image only (Houston). The brief forbids using it as a playing-time source, so the repository labels every starter it infers from it as 'depth-chart projected'.",
+   "known_from": "data/depth_ladder.json (933 slots, 16 slots with a shared rank 1)",
+   "missing": "an authoritative playing-time source: official snap counts, or the official Game Book which names the actual starters",
+   "decision_unblocked": "whether 'backup starting' may enter a model, and how a replacement is confirmed rather than suspected",
+   "how_to_discover": "route (a) parse the official Game Book PDF per game, which names the starters; route (b) ingest an official snap-count source if one exists. The brief orders (a) before (b). Do not build the feature until one route is verified for all 32 clubs.",
+   "blocks": [
+    "depth deficiency feature",
+    "prop modelling"
+   ]
+  },
+  {
+   "id": "Q09",
+   "question": "How many starters are actually replaced in Week 10, and how deep is the replacement?",
+   "status": "answered-unverified",
+   "answer": "38 slots are projected to be started by a backup across 31 clubs with a chart, 21 on offense and 14 on defense (3 on special teams). None is projected to be a third-string or deeper: the deepest is second string. 61 further starters are Questionable, i.e. at risk but not out.",
+   "known_from": "data/session-2b927826/availability.json, built from data/depth_ladder.json",
+   "missing": "confirmation from playing time: the projection is from depth charts, not from snap counts or the Game Book",
+   "decision_unblocked": "an interim deficiency view for the current week, clearly labelled as projected",
+   "how_to_discover": "Q08",
+   "blocks": []
+  },
+  {
+   "id": "Q10",
+   "question": "Which prices count, and from where?",
+   "status": "open-needs-decision",
+   "answer": "Undecided. The NFL publishes no odds. Every scored bet in the repository carries an observed price from a pinned third-party parse, never an assumed -110, but no recorded policy says whether that source is acceptable for a published backtest.",
+   "known_from": "data/s9cb/games.csv (moneyline, spread and total prices by season), data/prereg/corpus.json ('observed-price policy pending decision PR-10')",
+   "missing": "a written price-data policy with a named source, a capture rule, and a stated effect on backtests",
+   "decision_unblocked": "whether any backtest number may be published at all",
+   "how_to_discover": "write the policy before the next backtest run: name the source, the timestamp rule (opening vs closing), the treatment of pushes and voids, and the fallback when a price is missing. The repository already has the template at data/prereg/corpus.json.",
+   "blocks": [
+    "leaderboard publication",
+    "ROI",
+    "closing-line value"
+   ]
+  },
+  {
+   "id": "Q11",
+   "question": "Are opening and closing numbers both stored for every market we originate?",
+   "status": "open-needs-data",
+   "answer": "No. A closing line exists for the historical corpus; an opening number does not, and no snapshot store records the two per market per game. Without it neither closing-line value nor the effect of a line move can be computed.",
+   "known_from": "data/s9cb/games.csv holds one line per game per market (the closing line)",
+   "missing": "a price-snapshot store with an opening and a closing observation per market, each with a timestamp and a source",
+   "decision_unblocked": "closing-line value as a leaderboard qualifying metric, and any claim about which side of a move we are on",
+   "how_to_discover": "capture the market at a fixed weekday time and again immediately before kickoff for every originated game, storing both rows with timestamps. The capture must start before the first bet it is meant to score, so it cannot be backfilled.",
+   "blocks": [
+    "closing-line value",
+    "two-stage leaderboard"
+   ]
+  },
+  {
+   "id": "Q12",
+   "question": "Which club code is correct: ARI or AZ, LA or LAR?",
+   "status": "open-needs-data",
+   "answer": "Both appear. The official nfl.com pages print AZ for the Cardinals and LA for the Rams; the third-party feed uses ARI and LAR; the repository's own files are not consistent. A naive join on the code drops or duplicates the Cardinals row in 1 of 32 cases.",
+   "known_from": "data/session-2b927826/standings_reconcile.json (code_mapping_note), data/evidence/standings_current.json",
+   "missing": "one alias map, used by every join, with the official code as the key",
+   "decision_unblocked": "whether a cross-file join can be trusted",
+   "how_to_discover": "publish a single alias table keyed on the official code and fail the build when a join sees an unmapped code. The repository has no such gate.",
+   "blocks": [
+    "any cross-file join"
+   ]
+  },
+  {
+   "id": "Q13",
+   "question": "Is the published win-loss table current?",
+   "status": "answered",
+   "answer": "It is dated and stale by design. The snapshot is from 2026-11-13; 24 of 32 records have moved since, because the Week 10 slate was played on 12-16 November. All 32 rows matched the official page on the snapshot's own date.",
+   "known_from": "data/session-2b927826/standings_reconcile.json, 32 clubs compared cell by cell",
+   "missing": "nothing; the fix is a refresh policy, not a data capture",
+   "decision_unblocked": "whether a page may show a dated snapshot",
+   "how_to_discover": "refresh the snapshot on the same schedule as the site build, or print the capture date beside every row (the repository already prints it)",
+   "blocks": []
+  },
+  {
+   "id": "Q14",
+   "question": "Is the venue of every fixture known and official?",
+   "status": "answered",
+   "answer": "Yes, for all 13 Week 11 fixtures with a venue. Every venue was read from the Game Info block of the official game centre this session. One official-to-official naming difference exists for Arrowhead Stadium and is flagged.",
+   "known_from": "data/session-2b927826/official_week11_fixtures.json (13/13)",
+   "missing": "the roof and surface of each venue, which the official game centre does not print",
+   "decision_unblocked": "a fixture-context feature set limited to published facts (day, kickoff, network, venue, neutral site, bye, rest days)",
+   "how_to_discover": "roof and surface need a second official source (club stadium pages) or must stay blank. The third-party feed has them, but the brief forbids filling from a non-official source.",
+   "blocks": [
+    "weather overlay",
+    "totals model context"
+   ]
+  },
+  {
+   "id": "Q15",
+   "question": "Do we know who was expected to start and who actually did?",
+   "status": "open-needs-data",
+   "answer": "Only the first half. 'Expected' is in the depth charts (with caveats); 'actually did' is nowhere, because no Game Book, inactive list or snap-count capture exists.",
+   "known_from": "data/depth_ladder.json",
+   "missing": "the official availability graph as a dataset: expected starter, actual starter, and the evidence for each",
+   "decision_unblocked": "whether a replacement is confirmed or merely suspected",
+   "how_to_discover": "archive the official Game Book for each played game (it names the starters) and the inactive list before kickoff. 0 of 137 played 2026 games is archived today; the gate is 137 of 137.",
+   "blocks": [
+    "replacement confirmation",
+    "ablation"
+   ]
+  },
+  {
+   "id": "Q16",
+   "question": "Which strategies have been pre-registered before their results were seen?",
+   "status": "answered",
+   "answer": "Of 31 strategy records, 12 are backtest-first (rule and results in the same commit, disclosed as such) and 19 are prospective records. 0 live strategies exist, so 0 can be demoted.",
+   "known_from": "data/strat/preregistration.json, data/strat/demotion.json, data/prereg/registrations.json (126 entries across 13 collections)",
+   "missing": "a registry decision: four pre-registration registries landed in one day from different sessions and have not been reconciled to one",
+   "decision_unblocked": "which registry is authoritative, and therefore what 'registered' means",
+   "how_to_discover": "reconcile the four registries to one, keeping every registration hash. This is a board decision, not a data capture; it is logged as BF-06.",
+   "blocks": [
+    "ranked leaderboard"
+   ]
+  },
+  {
+   "id": "Q17",
+   "question": "What sends a live strategy back to paper?",
+   "status": "answered",
+   "answer": "A written demotion gate exists with five rules (Brier-skill lower bound below zero, a -10% stop-loss, hit rate below break-even by two standard errors, a 12-loss run, and an edited rule text), and it is armed. It has never fired because nothing is live.",
+   "known_from": "strat/demotion.py, data/strat/demotion.json",
+   "missing": "nothing for the rule; a live strategy to apply it to",
+   "decision_unblocked": "a reviewer can promote a strategy and know the exit condition in advance",
+   "how_to_discover": "n/a",
+   "blocks": []
+  },
+  {
+   "id": "Q18",
+   "question": "How is a strategy ranked across singles, parlays, same-game parlays and prop combos?",
+   "status": "open-needs-decision",
+   "answer": "Undecided in practice. Proper-score divisions are built, but the joint-evidence gate that would let a parlay rank requires a directly validated joint probability and the operator's void/push rules; the void/push rules are not recorded anywhere.",
+   "known_from": "data/s9cb/parlays.json (1 of 66 tested two-leg pairs survives BH at 5%), data/strat/proper_score.json",
+   "missing": "the operator's void/push rules for every market, and a validated joint probability rather than a product of marginals",
+   "decision_unblocked": "whether any parlay or combo may appear on the board",
+   "how_to_discover": "record the house rules per market (they are published by each operator and are not the NFL's to supply), then estimate the joint probability directly from historical joint outcomes rather than multiplying. Keep the divisions separate on the board.",
+   "blocks": [
+    "parlay ranking",
+    "prop combos"
+   ]
+  },
+  {
+   "id": "Q19",
+   "question": "Are correlation values available, and what is n?",
+   "status": "answered-unverified",
+   "answer": "Six published pairwise correlations among club season statistics (PF, PA, wins, losses, net points, win percentage), each with n = 32 and a Pearson method note. They are computed from the committed standings snapshot, which is a dated hand transcription, not a live official feed.",
+   "known_from": "data/correlations.json",
+   "missing": "correlations between betting markets and between strategies, which are the ones a parlay decision needs; and an n for every value published without one",
+   "decision_unblocked": "parlay construction (only after Q18)",
+   "how_to_discover": "compute strategy-level and market-level correlations on the frozen corpus with n printed beside each value, and state the source of every number used. The brief's rule is: officially sourced numbers only, with n.",
+   "blocks": [
+    "parlay ranking"
+   ]
+  },
+  {
+   "id": "Q20",
+   "question": "Is the '136-game log' a valid backtest corpus?",
+   "status": "answered",
+   "answer": "It is too small to be one; it has been replaced. The frozen corpus is NFL1-CORPUS-2026-11-15-v1, 7,104 completed games from a pinned file with sha256, split train 1999-2022 (6,151), validation 2023-2024 (544), holdout 2025-2026 (409, closed). The 136-game log is retained as a historical record, not used for inference.",
+   "known_from": "data/prereg/corpus.json",
+   "missing": "nothing; the holdout must stay closed until a pre-registered rule is frozen to open it",
+   "decision_unblocked": "any backtest at all",
+   "how_to_discover": "n/a",
+   "blocks": []
+  },
+  {
+   "id": "Q21",
+   "question": "Are we allowed to publish NFL data?",
+   "status": "open-needs-decision",
+   "answer": "Unknown. The public site currently publishes derived analysis and row-level injury rows captured from nfl.com. The brief asks for a public analysis layer and a private data layer until the terms are read; that separation is not implemented, and the terms have not been recorded.",
+   "known_from": "n/a — nothing in the repository records a terms review",
+   "missing": "a terms review of nfl.com and of the third-party price source, with a decision on what may be republished",
+   "decision_unblocked": "whether row-level tables stay public",
+   "how_to_discover": "read the terms of use for each source, record the conclusion and its date in the repository, and move row-level data behind the private layer if required. PR #79 is an open attempt at exactly this and has not merged.",
+   "blocks": [
+    "publication of row-level data"
+   ]
+  },
+  {
+   "id": "Q22",
+   "question": "Which model output should be stored for each game?",
+   "status": "answered",
+   "answer": "A probability plus its inputs, not a pick. The pre-registered forecast records store the input hash and the PF/PA aggregates, so every probability reproduces to six decimal places from the committed inputs.",
+   "known_from": "data/prereg/forecasts/SB-01_week11_2026.json",
+   "missing": "a forecast record for every strategy, not only the baseline",
+   "decision_unblocked": "whether a published probability can be audited after the fact",
+   "how_to_discover": "extend the same record format to every registered rule; the gate is that the probability recomputes from the stored inputs",
+   "blocks": []
+  },
+  {
+   "id": "Q23",
+   "question": "What would change our mind about each published claim?",
+   "status": "answered",
+   "answer": "Twelve claims carry a two-sided falsifier with a numeric threshold on each side, including the model's side skill (abandoned today because the interval is below zero) and the demotion gate.",
+   "known_from": "data/strat/what_would_change.json (12 claims, each with confirm_if and abandon_if)",
+   "missing": "coverage of every strategy entry: 12 claims against 31 strategy records",
+   "decision_unblocked": "a reviewer can see, per claim, what evidence would overturn it",
+   "how_to_discover": "extend the register to one row per strategy record and fail the build when a ranked entry has no mind-changer — the existing gate already does this for ranked rows",
+   "blocks": []
+  },
+  {
+   "id": "Q24",
+   "question": "How many games must be played before a 3-point edge is detectable?",
+   "status": "answered",
+   "answer": "For a win-probability edge: 1% needs 17,689 games, 2% needs 4,423, 3% needs 1,966, 5% needs 708. A season is 272 games, so a 3-point-equivalent edge needs about seven seasons of one bet per game.",
+   "known_from": "data/decision_room/decision_room.json (power table)",
+   "missing": "nothing",
+   "decision_unblocked": "how long a live sample must run before a demotion or a promotion is informative",
+   "how_to_discover": "n/a",
+   "blocks": []
+  },
+  {
+   "id": "Q25",
+   "question": "Which of the two model totals is better?",
+   "status": "open-needs-data",
+   "answer": "Unresolved. Two estimators are published side by side with a gap column by design; the collapse to one is allowed only after a walk-forward comparison, which has not been completed on the current corpus.",
+   "known_from": "strat/dual_total.py, data/strat/dual_total.json",
+   "missing": "the walk-forward comparison of the two estimators on the frozen corpus",
+   "decision_unblocked": "which total to originate",
+   "how_to_discover": "score both estimators' totals against the closing total on the validation seasons and publish the difference with an interval; collapse only if the interval excludes zero in favour of one",
+   "blocks": [
+    "originated total"
+   ]
+  },
+  {
+   "id": "Q26",
+   "question": "Is a model total originated at all, and how does it compare with the market?",
+   "status": "answered-unverified",
+   "answer": "13 Week 11 own lines exist (spread, total, win probability) with a fair line, a market line and a difference printed as separate columns. The fair line is the model's; the market column is not official (the NFL publishes no odds), and is labelled as third-party everywhere it appears.",
+   "known_from": "data/s9cb/lines.json, data/model/lines.json",
+   "missing": "an official market line. None exists, so the residual against the market is always against a third-party number (Q10).",
+   "decision_unblocked": "whether the residual may be published as 'the market' or must be called 'a parsed market'",
+   "how_to_discover": "Q10 and Q11",
+   "blocks": [
+    "residual publication"
+   ]
+  }
+ ],
+ "counts": {
+  "rows": 26,
+  "answered": 12,
+  "answered_unverified": 3,
+  "open_needs_data": 7,
+  "open_needs_decision": 4,
+  "note": "computed from the rows, not typed"
+ }
+}

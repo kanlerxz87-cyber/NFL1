@@ -211,8 +211,31 @@ if __name__ == "__main__":
     try:
         main()
     except Exception as exc:  # noqa: BLE001
+        # A failed scrape must never destroy the last good report. Writing status="failed"
+        # over a file full of real designations is how the depth ladder silently lost its
+        # 38 backup projections on 2026-11-16: the ladder reader saw no rows and rebuilt a
+        # zeroed ladder. The failure record is kept beside the artifact, and the good
+        # artifact is left exactly as it was.
         print(f"official injury scrape failed: {exc}")
-        with open(os.path.join(OUT, "official_injuries.json"), "w") as f:
+        target = os.path.join(OUT, "official_injuries.json")
+        existing = None
+        if os.path.exists(target):
+            try:
+                with open(target) as f:
+                    existing = json.load(f)
+            except (ValueError, OSError):
+                existing = None
+        kept = bool(existing and existing.get("status") == "ok" and existing.get("rows"))
+        with open(os.path.join(OUT, "official_injuries_failure.json"), "w") as f:
             json.dump({"generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
                        "source_url": URL, "status": "failed", "error": str(exc),
-                       "rows": []}, f, indent=1)
+                       "rows": [],
+                       "previous_artifact_kept": kept,
+                       "previous_status": (existing or {}).get("status"),
+                       "previous_rows": len((existing or {}).get("rows") or [])}, f, indent=1)
+        if kept:
+            print(f"kept the previous artifact: status={existing['status']} "
+                  f"week={existing.get('week')} rows={len(existing['rows'])}; "
+                  f"the failure is recorded in data/model/official_injuries_failure.json")
+        else:
+            print("no good previous artifact to keep")

@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Availability · NFL Decision Lab</title>
+<style>
+:root{--bg:#0b1220;--panel:#111a2b;--panel2:#16223a;--ink:#e8eef9;--muted:#93a4c0;--line:#24314b;
+--accent:#4ade80;--accent-ink:#062a16;--blue:#60a5fa;--amber:#fbbf24;--red:#f87171;--radius:14px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(1200px 600px at 12% -10%,#16233c 0%,var(--bg) 55%) no-repeat,var(--bg);
+color:var(--ink);font:16px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+-webkit-font-smoothing:antialiased}
+a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;color:#c7d2fe}
+.top{position:sticky;top:0;z-index:20;display:flex;gap:16px;align-items:center;flex-wrap:wrap;
+padding:12px 20px;background:rgba(11,18,32,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:9px;color:var(--ink);font-weight:700}
+.mark{background:var(--accent);color:var(--accent-ink);padding:3px 9px;border-radius:8px;font-size:.8rem;letter-spacing:.08em}
+.brand-text{font-size:.95rem;color:var(--muted)}
+.top nav{display:flex;gap:3px;flex-wrap:wrap;margin-left:auto}
+.top nav a{color:var(--muted);padding:6px 10px;border-radius:9px;font-size:.85rem}
+.top nav a:hover{background:var(--panel2);color:var(--ink);text-decoration:none}
+.top nav a.active{background:var(--accent);color:var(--accent-ink);font-weight:600}
+main{max-width:1180px;margin:0 auto;padding:24px 20px 72px}
+.page-head{margin:8px 0 20px}
+.eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:.7rem;color:var(--accent);margin:0 0 6px}
+h1{font-size:clamp(1.6rem,3.2vw,2.3rem);line-height:1.12;margin:0 0 8px}
+.standfirst{color:var(--muted);max-width:78ch;margin:0}
+.timestamp{color:#6f809d;font-size:.78rem;margin:10px 0 0}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;margin:20px 0}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px}
+.kpi-label{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.09em}
+.kpi-value{font-size:1.55rem;font-weight:700;margin:4px 0 0}
+.kpi-sub{color:#7f8fab;font-size:.75rem;margin-top:3px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;margin:18px 0}
+.panel h2{font-size:1.05rem;margin:0 0 4px}
+.panel .sub{color:var(--muted);font-size:.85rem;margin:0 0 12px}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+table{width:100%;border-collapse:collapse;font-size:.855rem}
+thead th{position:sticky;top:0;background:var(--panel2);text-align:left;padding:9px 10px;font-size:.72rem;
+text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border-bottom:1px solid var(--line);white-space:nowrap}
+tbody td{padding:8px 10px;border-bottom:1px solid #1b2740;vertical-align:top}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#0f1a2d}
+.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.badge{display:inline-block;padding:1px 8px;border-radius:999px;font-size:.72rem;font-weight:600;white-space:nowrap}
+.b-done{background:#12341f;color:#6ee7a0}.b-partial{background:#33280c;color:#fcd34d}
+.b-not{background:#3a1616;color:#fca5a5}.b-open{background:#1d2b46;color:#93c5fd}
+.missing{color:#fca5a5;font-style:normal}
+.sub2{color:#7f8fab;font-size:.78rem}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:900px){.grid2{grid-template-columns:1fr}}
+ul.bullets{margin:8px 0 0;padding-left:20px;color:var(--muted)}
+ul.bullets li{margin:5px 0}
+.note{background:#0e1a2e;border-left:3px solid var(--blue);padding:10px 14px;border-radius:8px;color:var(--muted);font-size:.86rem;margin:12px 0}
+.note.alert{border-left-color:var(--amber)}
+.foot{margin-top:36px;padding-top:14px;border-top:1px solid var(--line);color:#6f809d;font-size:.78rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:15px}
+.card h3{margin:0 0 6px;font-size:.98rem}
+.card p{margin:0;color:var(--muted);font-size:.85rem}
+.card a.more{display:inline-block;margin-top:9px;font-size:.83rem}
+.src{font-size:.78rem;white-space:nowrap}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html"><span class="mark">NFL</span><span class="brand-text">Decision Lab · brief dashboard</span></a>
+  <nav aria-label="Categories"><a href="index.html">Overview</a><a href="requirements.html">Requirements</a><a href="answers.html">Questions</a><a href="strategies.html">Strategies</a><a href="availability.html" class="active">Availability</a><a href="fixtures.html">Fixtures &amp; venues</a><a href="suggestions.html">Suggestions</a><a href="verification.html">Verification</a></nav>
+</header>
+<main>
+
+<div class="page-head">
+  <p class="eyebrow">Injuries, replacements and depth deficiency</p>
+  <h1>Who is out, who replaces them, and how deep the replacement is</h1>
+  <p class="standfirst">Two kinds of evidence are on this page and they are labelled differently throughout. The
+  injury designations are an official league filing. The depth charts are a club publication, and the starter inferred
+  from one is a <em>projection</em>, not an observation. The brief forbids using a depth chart as a playing-time source,
+  so no row here claims that a backup played.</p>
+  <p class="timestamp">Built 2026-11-16T14:36:42Z · report re-read 2026-11-16T14:24:00Z ·
+  <a href="https://www.nfl.com/injuries/league/2026/reg10">official Week 10 report</a></p>
+</div>
+<div class="kpis"><div class="kpi"><div class="kpi-label">Official report rows</div><div class="kpi-value">347</div><div class="kpi-sub">28 clubs · 14 games</div></div><div class="kpi"><div class="kpi-label">Out / Doubtful / Questionable</div><div class="kpi-value">70 / 11 / 90</div><div class="kpi-sub">printed designations</div></div><div class="kpi"><div class="kpi-label">Backups projected to start</div><div class="kpi-value">38</div><div class="kpi-sub">21 offense · 14 defense · 3 special teams</div></div><div class="kpi"><div class="kpi-label">Third-string or deeper starting</div><div class="kpi-value">0</div><div class="kpi-sub">the deepest is second string</div></div><div class="kpi"><div class="kpi-label">Starters at risk (Questionable)</div><div class="kpi-value">61</div><div class="kpi-sub">shown, never upgraded</div></div><div class="kpi"><div class="kpi-label">Clubs with a structured chart</div><div class="kpi-value">31 of 32</div><div class="kpi-sub">Houston publishes an image only</div></div></div>
+
+<div class="note alert"><strong>The Week 11 report does not exist yet.</strong> The league address
+<a href="https://www.nfl.com/injuries/league/2026/reg11">nfl.com/injuries/league/2026/reg11</a> serves the Week 10 page, verified this session by the
+page title. Nothing on this page is a Week 11 designation.</div>
+
+<div class="panel">
+  <h2>Week 10 official designations</h2>
+  <p class="sub">Every count below is a cell of the official report. The four clubs on its first page (WAS, NYG, NE,
+  DET) were re-read live this session and compared cell by cell with the committed capture:
+  220 of 220 cells match.</p>
+  <div class="grid2">
+    <div class="table-wrap"><table><thead><tr><th>Designation</th><th class="num">Rows</th><th>Source</th></tr></thead>
+      <tbody><tr><td>Out</td><td class='num'>70</td><td><span class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">official report</a></span></td></tr><tr><td>Doubtful</td><td class='num'>11</td><td><span class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">official report</a></span></td></tr><tr><td>Questionable</td><td class='num'>90</td><td><span class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">official report</a></span></td></tr><tr><td>blank</td><td class='num'>176</td><td><span class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">official report</a></span></td></tr></tbody></table></div>
+    <div>
+      <div class="table-wrap"><table><thead><tr><th>Clubs with no report</th><th>Why</th><th>Source</th></tr></thead>
+        <tbody><tr><td>CHI, DEN, PHI, TB</td>
+          <td>On bye in Week 10 per the official schedule. The absence of a report is not evidence of health.</td>
+          <td><span class="src"><a href="https://www.nfl.com/schedules/2026/by-week/week-11">schedule</a></span></td></tr></tbody></table></div>
+      <div class="note">Rows whose game-status cell is blank are counted as <em>blank</em> above. A blank is printed
+      as blank; it is not read as "available".</div>
+    </div>
+  </div>
+</div>
+
+<div class="panel">
+  <h2>Depth deficiency by club</h2>
+  <p class="sub"><strong>Definition.</strong> A slot is <em>deficient</em> when the lowest-ranked listed player who is
+  not Out or Doubtful is not rank 1, so a backup is projected to start. Questionable is shown as at risk and is never
+  upgraded to available or downgraded to out. Houston carries no rows because its chart is an image.</p>
+  <div class="table-wrap"><table><thead><tr>
+    <th>Club</th><th>Name</th><th>Chart</th><th class="num">Slots</th><th class="num">Backups projected</th>
+    <th class="num">Starters at risk</th><th>Deepest projected</th><th>Club calls it unofficial</th><th>Chart date</th><th>Source</th>
+  </tr></thead><tbody><td>MIN</td><td class='sub2'>Minnesota Vikings</td><td>structured</td><td class='num'>32</td><td class='num'>5</td><td class='num'>3</td><td>2nd string</td><td>yes</td><td><span class="missing">no date on chart</span></td><td><span class="src"><a href="https://www.vikings.com/team/depth-chart">club chart</a></span></td><td>SEA</td><td class='sub2'>Seattle Seahawks</td><td>structured</td><td class='num'>29</td><td class='num'>4</td><td class='num'>1</td><td>2nd string</td><td>no</td><td><span class="missing">no date on chart</span></td><td><span class="src"><a href="https://www.seahawks.com/team/depth-chart">club chart</a></span></td><td>TEN</td><td class='sub2'>Tennessee Titans</td><td>structured</td><td class='num'>30</td><td class='num'>4</td><td class='num'>0</td><td>2nd string</td><td>yes</td><td><span class="missing">no date on chart</span></td><td><span class="src"><a href="https://www.tennesseetitans.com/team/depth-chart">club chart</a></span></td><td>GB</td><td class='sub2'>Green Bay Packers</td><td>structured</td><td class='num'>28</td><td class='num'>3</td><td class='num'>5</td><td>2nd string</td><td>yes</td><td>Nov. 10, 2026</td><td><span class="src"><a href="https://www.packers.com/team/depth-chart">club chart</a></span></td><td>IND</td><td class='sub2'>Indianapolis Colts</td><td>structured</td><td class='num'>28</td><td class='num'>3</td><td class='num'>0</td><td>2nd string</td><td>yes</td><td><span class="missing">no date on chart</span></td><td><span class="src"><a href="https://www.colts.com/team/depth-chart">club chart</a></span></td><td>ATL</td><td class='sub2'>Atlanta Falcons</td><td>structured</td><td class='num'>31</td><td class='num'>2</td><td class='num'>3</td><td>2nd string</td><td>no</td><td><span class="missing">no date on chart</span></td><td><span class="src"><a href="https://www.atlantafalcons.com/team/depth-chart">club chart</a></span></td><td>DET</td><td class='sub2'>Detroit Lions</td><td>structured</td><td class='num'>28</td><td class='num'>2</td><td class='num'>1</td><td>2nd string</td><td>yes</td><td><span class="missing">no date on chart</span></td><td><span class="src"><a href="https://www.detroitlions.com/team/depth-chart">club chart</a></span></td><td>MIA</td><td class='sub2'>Miami Dolphins</td><td>structured</td><td class='num'>31</td><td class='num'>2</td><td class='num'>1</td><td>2nd string</td><td>no</td><td><span class="missing">no date on chart</span></td><td><span class="src"><a href="https://www.miamidolphins.com/team/depth-chart">club chart</a></span></td><td>NE</td><td class='sub2'>New England Patriots</td><td>structured</td><td class='num'>29</td><td class='num'>2</td><td class='num'>4</td><td>2nd string</td><td>yes</td><td><span class="missing">no date on chart</span></td><td><span class="src"><a href="https://www.patriots.com/team/depth-chart">club chart</a></span></td><td>NO</td><td class='sub2'>New Orleans Saints</td><td>structured</td><td class='num'>33</td><td class='num'>2</td><td class='num'>0</td><td>2nd string</td><td>yes</td><td><span class="missing">no date on chart</span></td><td><span class="src"><a href="https://www.neworleanssaints.com/team/depth-chart">club chart</a></span></td><td>ARI</td><td class='sub2'>Arizona Cardinals</td><td>structured</td><td class='num'>29</td><td class='num'>1</td><td class='num'>4</td><td>2nd string</td><td>no</td><td><span class="missing">no date on chart</span></td><td><span class="src"><a href="https://www.azcardinals.com/team/depth-chart">club chart</a></span></td><td>BAL</td><td class='sub2'>Baltimore Ravens</td><td>structured</td><td class='num'>31</td><td class='num'>1</td><td class='num'>2</td><td>2nd string</td><td>no</td><td><span class="missing">no date on chart</span></td><td><span class="src"><a href="https://www.baltimoreravens.com/team/depth-chart">club chart</a></span></td><td>BUF</td><td class='sub2'>Buffalo Bills</td><td>structured</td><td class='num'>29</td><td class='num'>1</td><td class='num'>3</td><td>2nd string</td><td>no</td><td><span class="missing">no date on chart</span></td><td><span class="src"><a href="https://www.buffalobills.com/team/depth-chart">club chart</a></span></td><td>CAR</td><td class='sub2'>Carolina Panthers</td><td>structured</td><td class='num'>31</td><td class='num'>1</td><td class='num'>2</td><td>2nd string</td><td>yes</td><td><span class="missing">no date on chart</span></td><td><span class="src"><a href="https://www.panthers.com/team/depth-chart">club chart</a></span></td><td>DAL</td><td class='sub2'>Dallas Cowboys</td><td>structured</td><td class='num'>30</td><td class='num'>1</td><td class='num'>3</td><td>2nd string</td><td>yes</td><td><span class="missing">no date on chart</span></td><td><span class="src"><a href="https://www.dallascowboys.com/team/depth-chart">club chart</a></span></td><td>JAX</td><td class='sub2'>Jacksonville Jaguars</td><td>structured</td><td class='num'>29</td><td class='num'>1</td><td class='num'>5</td><td>2nd string</td><td>no</td><td><span class="missing">no date on chart</span></td><td><span class="src"><a href="https://www.jaguars.com/team/depth-chart">club chart</a></span></td><td>KC</td><td class='sub2'>Kansas City Chiefs</td><td>structured</td><td class='num'>28</td><td class='num'>1</td><td class='num'>1</td><td>2nd string</td><td>yes</td><td><span class="missing">no date on chart</span></td><td><span class="src"><a href="https://www.chiefs.com/team/depth-chart">club chart</a></span></td><td>LA</td><td class='sub2'>Los Angeles Rams</td><td>structured</td><td class='num'>28</td><td class='num'>1</td><td class='num'>8</td><td>2nd string</td><td>yes</td><td><span class="missing">no date on chart</span></td><td><span class="src"><a href="https://www.therams.com/team/depth-chart">club chart</a></span></td><td>SF</td><td class='sub2'>San Francisco 49ers</td><td>structured</td><td class='num'>32</td><td class='num'>1</td><td class='num'>5</td><td>2nd string</td><td>no</td><td><span class="missing">no date on chart</span></td><td><span class="src"><a href="https://www.49ers.com/team/depth-chart">club chart</a></span></td><td>CHI</td><td class='sub2'>Chicago Bears</td><td>structured</td><td class='num'>32</td><td class='num'>0</td><td class='num'>0</td><td><span class="sub2">nobody pressed</span></td><td>no</td><td><span class="missing">no date on chart</span></td><td><span class="src"><a href="https://www.chicagobears.com/team/depth-chart">club chart</a></span></td><td>CIN</td><td class='sub2'>Cincinnati Bengals</td><td>structured</td><td class='num'>28</td><td class='num'>0</td><td class='num'>1</td><td><span class="sub2">nobody pressed</span></td><td>no</td><td><span class="missing">no date on chart</span></td><td><span class="src"><a href="https://www.bengals.com/team/depth-chart">club chart</a></span></td><td>CLE</td><td class='sub2'>Cleveland Browns</td><td>structured</td><td class='num'>31</td><td class='num'>0</td><td class='num'>2</td><td><span class="sub2">nobody pressed</span></td><td>no</td><td><span class="missing">no date on chart</span></td><td><span class="src"><a href="https://www.clevelandbrowns.com/team/depth-chart">club chart</a></span></td><td>DEN</td><td class='sub2'>Denver Broncos</td><td>structured</td><td class='num'>34</td><td class='num'>0</td><td class='num'>0</td><td><span class="sub2">nobody pressed</span></td><td>no</td><td><span class="missing">no date on chart</span></td><td><span class="src"><a href="https://www.denverbroncos.com/team/depth-chart">club chart</a></span></td><td>HOU</td><td class='sub2'>Houston Texans</td><td>image-only</td><td class='num'>0</td><td class='num'>0</td><td class='num'>0</td><td><span class="sub2">nobody pressed</span></td><td>no</td><td><span class="missing">no date on chart</span></td><td><span class="src"><a href="https://www.houstontexans.com/team/depth-chart">club chart</a></span></td><td>LAC</td><td class='sub2'>Los Angeles Chargers</td><td>structured</td><td class='num'>32</td><td class='num'>0</td><td class='num'>2</td><td><span class="sub2">nobody pressed</span></td><td>no</td><td><span class="missing">no date on chart</span></td><td><span class="src"><a href="https://www.chargers.com/team/depth-chart">club chart</a></span></td><td>LV</td><td class='sub2'>Las Vegas Raiders</td><td>structured</td><td class='num'>31</td><td class='num'>0</td><td class='num'>0</td><td><span class="sub2">nobody pressed</span></td><td>no</td><td><span class="missing">no date on chart</span></td><td><span class="src"><a href="https://www.raiders.com/team/depth-chart">club chart</a></span></td><td>NYG</td><td class='sub2'>New York Giants</td><td>structured</td><td class='num'>29</td><td class='num'>0</td><td class='num'>0</td><td><span class="sub2">nobody pressed</span></td><td>no</td><td><span class="missing">no date on chart</span></td><td><span class="src"><a href="https://www.giants.com/team/depth-chart">club chart</a></span></td><td>NYJ</td><td class='sub2'>New York Jets</td><td>structured</td><td class='num'>32</td><td class='num'>0</td><td class='num'>4</td><td><span class="sub2">nobody pressed</span></td><td>yes</td><td><span class="missing">no date on chart</span></td><td><span class="src"><a href="https://www.newyorkjets.com/team/depth-chart">club chart</a></span></td><td>PHI</td><td class='sub2'>Philadelphia Eagles</td><td>structured</td><td class='num'>29</td><td class='num'>0</td><td class='num'>0</td><td><span class="sub2">nobody pressed</span></td><td>yes</td><td><span class="missing">no date on chart</span></td><td><span class="src"><a href="https://www.philadelphiaeagles.com/team/depth-chart">club chart</a></span></td><td>PIT</td><td class='sub2'>Pittsburgh Steelers</td><td>structured</td><td class='num'>30</td><td class='num'>0</td><td class='num'>0</td><td><span class="sub2">nobody pressed</span></td><td>no</td><td><span class="missing">no date on chart</span></td><td><span class="src"><a href="https://www.steelers.com/team/depth-chart">club chart</a></span></td><td>TB</td><td class='sub2'>Tampa Bay Buccaneers</td><td>structured</td><td class='num'>30</td><td class='num'>0</td><td class='num'>0</td><td><span class="sub2">nobody pressed</span></td><td>no</td><td><span class="missing">no date on chart</span></td><td><span class="src"><a href="https://www.buccaneers.com/team/depth-chart">club chart</a></span></td><td>WAS</td><td class='sub2'>Washington Commanders</td><td>structured</td><td class='num'>29</td><td class='num'>0</td><td class='num'>1</td><td><span class="sub2">nobody pressed</span></td><td>yes</td><td><span class="missing">no date on chart</span></td><td><span class="src"><a href="https://www.commanders.com/team/depth-chart">club chart</a></span></td></tbody></table></div>
+  <div class="note"><strong>One column, two meanings, both published.</strong> The generator's per-club
+  <code>slots_missing_starter</code> column adds two different things: slots where a backup is pressed into duty
+  (38) and slots with no available listed player (3). It sums to
+  41, and the identity 41 = 38 +
+  3 is checked at build time. Reading the column as "empty slots" would be wrong by
+  38 slots (flag BF-04).</div>
+</div>
+
+<div class="panel">
+  <h2>The deepest replacement this week, printed in full</h2>
+  <p class="sub">One slot's ladder, so the reasoning can be checked rather than trusted.</p>
+  <div class="table-wrap"><table><thead><tr>
+    <th>Club</th><th>Unit</th><th>Pos</th><th>Projected starter</th><th>String</th><th>Replaces</th>
+    <th>Their status</th><th>Sources</th>
+  </tr></thead><tbody>
+    <tr><td>ARI</td><td>offense</td><td>C</td>
+      <td>Kingsley Eguakun</td><td>2nd string</td><td>Hjalte Froholdt (Out, concussion)</td>
+      <td>Out</td>
+      <td><span class="src"><a href="https://www.azcardinals.com/team/depth-chart">club chart</a></span> <span class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">official report</a></span></td></tr>
+  </tbody></table></div>
+  <div class="note">This is the deepest case, not a special one: all 38 projected
+  replacements are second string. Nothing in the repository projects a third- or fourth-string starter this week,
+  which is the direct answer to the brief's "2nd, 3rd or 4th string" question: the deficiency is second string.</div>
+</div>
+
+<div class="grid2">
+  <div class="panel">
+    <h2>What cannot be answered yet</h2>
+    <ul class="bullets"><li><strong>Did the projected backup actually play, and how many snaps?</strong> &mdash; missing: official inactive lists for Week 10 and official snap counts. Gate: capture the official inactive list 90 minutes before kickoff and an official snap-count source.</li><li><strong>Is an absent player healthy or on reserve?</strong> &mdash; missing: an official reserve/injured-reserve list capture. Gate: capture the official transactions log and join it to the weekly report.</li><li><strong>Is the depth chart current?</strong> &mdash; missing: a date on the chart (30 of 31 carry none). Gate: a dated official source per club, or a roster-event version stamp (the brief&#x27;s PR-style requirement).</li><li><strong>What is the injury surprise rather than the injury level?</strong> &mdash; missing: two or more dated captures of the same report to difference. Gate: daily Wednesday-to-kickoff captures with a retained hash; the repository has 2 capture days and 0 recorded designation changes.</li></ul>
+  </div>
+  <div class="panel">
+    <h2>Why these limits exist</h2>
+    <ul class="bullets">
+      <li><strong>No inactive list, Game Book or snap count</strong> for any 2026 game, so "played" is unobservable
+        (0 of 137 played games archived).</li>
+      <li><strong>30 of 31 depth charts carry no date</strong>, so a chart cannot be versioned against a roster event.</li>
+      <li><strong>14 of 31 charts carry the club's own "unofficial" label.</strong> The label is carried through
+        rather than dropped.</li>
+      <li><strong>Absence from the weekly report is not availability.</strong> A reserve-list player is not listed at
+        all, and no reserve-list capture exists, so "not listed" is published as "not listed".</li>
+    </ul>
+    <div class="note"><a href="../pages/depth.html">The full 933-slot ladder with every rank &rarr;</a> ·
+    <a href="../shadow/team-view.html">the per-team view &rarr;</a></div>
+  </div>
+</div>
+
+<p class="foot">Built 2026-11-16T14:36:42Z by session <code>2b927826-nfl1</code> from <code>data/session-2b927826/*.json</code> only.
+Every table row carries a source link or states that no value is published. Research tool, not betting advice.
+<a href="verification.html">How every value was checked &rarr;</a></p>
+</main>
+</body>
+</html>

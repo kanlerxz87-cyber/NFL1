@@ -21,6 +21,11 @@ CANON = [
     ("console/index.html", "Decision Console"),
     ("web/dashboard.html", "Decision Dashboard"),
     ("./dashboard.html", "Governance Registers"),
+    # Session 2b927826-nfl1: the brief dashboard. One clean front door with eight category
+    # pages, built from data/session-2b927826/*.json by brief/build.py. Added here and in
+    # scripts/verified/normalize_nav.py in the same commit, because the two lists must stay
+    # byte-identical (see _target's docstring).
+    ("brief/index.html", "Brief Dashboard"),
     ("lines.html", "My Lines"),
     ("correlations.html", "Correlations"),
     ("strategies.html", "Strategy Lab"),
