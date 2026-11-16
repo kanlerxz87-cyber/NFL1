@@ -3976,3 +3976,16 @@ The official transactions page prints at most **25 rows per category-month, newe
 `pipeline/gen_site.py`, `scripts/verified/normalize_nav.py`, `tools/build_site_all.py`, `tools/check_generators.py`, `.github/workflows/verify.yml` are all touched by open PRs (#77, #80, #47 among them). Every edit here is **pure addition of new lines** (one nav entry, one build step, one path token in the reproducibility diff, two ownership entries, one workflow step); no existing line was edited, reordered or renamed, so a conflict is textual and trivial. Regenerated output (`index.html`, `pages/*`, `web/*`, `dashboard/*`, `docs/*`, `data/verification_report.json`, `data/decision_room/*`) is committed as build output, not hand-edited.
 
 Tests: `python3 -m unittest discover -s tests -q` → **Ran 227 tests, OK** (this session added `tests/test_reserve_register.py` 21 + `tests/test_reserve_cap.py` 8). All gates green on the branch: `build_site_all.py`, `verify.py` (2111 rows, every one sourced), `check_reachability.py` (problems 0), `check_site.py`, `check_generators.py`, `validate_verified.py`, `check_reserve_register.py`.
+
+### Merge record — session `1d824ec2-nfl1` (2026-11-16T15:22:35Z)
+
+PR #96 merged into `main` as `be8b47d`. CI on the merge commit: `Verify NFL1 site`, `Verify NFL source provenance`, `Verify decision dashboard`, `Verify NFL Decision Lab site build`, `Decision Room build and gate`, `pages-build-deployment` and **`Collect official transactions and reserve lists` (this session's sweep) all pass**; the `Collect NFL data and rebuild model outputs` job failed on a pre-existing freshness assertion, recorded as **F67** rather than papered over.
+
+Live: <https://kanlerxz87-cyber.github.io/NFL1/reserve/> (`index.html` + `rows.html`), reachable from the landing page nav (`Transactions & Reserve`).
+
+Two things the merge itself produced, both kept:
+
+1. A **second real capture** (15:15Z, 24 pages) landed as 24 byte-identical duplicates because `write_capture`'s dedupe glob was anchored at the start of a `_<category>_<month>_` filename that actually begins with a timestamp. Fixed (`*_<category>_<month>_*.json`, compared against the newest readable capture) and pinned by two tests; the duplicate captures were **kept** — each is a real dated read, and the derived union is the same 448 rows either way, verified by re-derivation. The next sweep proved the fix: it re-read all 24 pages, wrote a heartbeat line each, and stored **no** new capture.
+2. The rebase onto `main` dropped this session's board blocks once (a union resolution that deduplicated by line content ate 27 blank/table lines). Rebuilt as a true pure append and asserted `base board preserved byte-for-byte`.
+
+`reserve register gate: 0 failure(s), 2 note(s), 24 pinned page(s)`; `python3 -m unittest discover -s tests -q` → **229 tests OK**.
