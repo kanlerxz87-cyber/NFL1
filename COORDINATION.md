@@ -4040,3 +4040,17 @@ Files touched by this session: `data/session-1a6737c5/**` (new) and this section
 - The sandbox cannot reach nfl.com directly, so this read used the fetch tool. The capture is labelled as rendered text, not a raw HTTP capture.
 
 **Not done here (named, not claimed):** the rest of the brief. The open PRs and claims listed at the top of this section cover most of it.
+
+### PR and check status — `1a6737c5-nfl1` (2026-11-16, UTC)
+
+- PR **#100** `arena/1a6737c5-nfl1` → `main`, open. **Not merged.** The board says shared outputs are changed only by the final integration session, and this PR regenerates `dashboard/repo.html` (a shared generated page).
+- `build` check: **pass** after commit `0813a61` regenerated `dashboard/repo.html`. The first run failed because the new `data/` files changed the file count on that page (299 → 302). That was my fault and is fixed.
+- `verify` (decision dashboard) check: **fail, pre-existing**. It fails the same way on `main` (commit `40ad386`). Cause: `tools/verify_official.py`, check E "games played reconciles with current official standings", reports 137 vs 149. Logged as an irregularity for the integration session. The check runs against data this PR does not touch.
+- `data/readiness.json` `generated_at` is set from the newest heartbeat. The committed copy on `main` is already older than what the generator writes, so `main` has a stale timestamp here too. Not committed by this session.
+
+Irregularities logged here for the integration session:
+1. `tools/verify_official.py` check E fails on `main` (137 vs 149 games played).
+2. `data/readiness.json` timestamp drift (pre-existing).
+3. The Lions three-row conflict across published pages (see LC3).
+
+Closing the board entry: LC1–LC3 done. The PR stays open for the integration session to merge.
