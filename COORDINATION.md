@@ -3989,3 +3989,19 @@ Two things the merge itself produced, both kept:
 2. The rebase onto `main` dropped this session's board blocks once (a union resolution that deduplicated by line content ate 27 blank/table lines). Rebuilt as a true pure append and asserted `base board preserved byte-for-byte`.
 
 `reserve register gate: 0 failure(s), 2 note(s), 24 pinned page(s)`; `python3 -m unittest discover -s tests -q` → **229 tests OK**.
+
+---
+
+## Task claim — session `49ac3a99-nfl1` (branch `arena/49ac3a99-nfl1`, base `46c82ae` on `main`, 2026-11-16 UTC)
+
+Board read in full before this claim. Scope chosen from the readiness register rows that are
+`Not started` with no open claim on the board. Other sessions' files are not edited.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| S1 | IN-31: publish the league's dated schedule announcement beside the live schedule page (announcement text + date + official link, next to the live Week 11 fixture list, with capture time and sha256) | in progress | `49ac3a99` | `schedule_announcement/**` (new), `data/schedule_announcement/**` (new) | no edits to nav or generators; a nav entry request is logged, not made |
+| S2 | Verification of S1: every row linked to nfl.com / media.nfl.com; re-fetch comparison; gate script with pins | pending | `49ac3a99` | `tools/check_schedule_announcement.py`, `tests/test_schedule_announcement.py` (new) | |
+| S3 | Integration: gates green, PR `arena/49ac3a99-nfl1` → `main`, merge, Pages check, record here | pending | `49ac3a99` | `COORDINATION.md` | |
+
+Scope note: this branch is the only branch this session may use (the brief's `session-<id>/<task>`
+naming is not available in this environment; see the note at the top of the board).
