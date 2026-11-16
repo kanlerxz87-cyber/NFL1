@@ -1,0 +1,43 @@
+[
+  {
+    "id": "F-R1-01",
+    "status": "needs review",
+    "title": "Official Week 10 finals are not in the results file the models read",
+    "detail": "The official Week 10 page shows 13 final scores (read 2026-11-16). data/verified/games_2026.csv stops at Week 9 (136 rows). The 13 games are listed with their official game-page links in data/results/official_results_2026.csv (csv_match = NOT_IN_RESULTS_FILE). Not added to the model input in this session: that file is read by the ratings and the strategy gates, and changing it is an integration decision.",
+    "official_sources": [
+      "https://www.nfl.com/schedules/2026/by-week/week-10"
+    ],
+    "action": "Integration owner decides whether to append the 13 rows to data/verified/games_2026.csv and re-run the strategy gates."
+  },
+  {
+    "id": "F-R1-02",
+    "status": "needs review",
+    "title": "Monday Week 10 game has no official final score yet",
+    "detail": "Chargers at Ravens, Monday 16 Nov 2026, 8:15 PM ET, is listed on the official Week 10 page with no score at read time (2026-11-16, about 18:00 UTC). It is recorded as scheduled with blank scores; nothing is inferred.",
+    "official_sources": [
+      "https://www.nfl.com/games/chargers-at-ravens-2026-reg-10",
+      "https://www.nfl.com/schedules/2026/by-week/week-10"
+    ],
+    "action": "Re-read the official game page after it is final, then re-run tools/check_results_official.py."
+  },
+  {
+    "id": "F-R1-03",
+    "status": "needs review",
+    "title": "Seasons before 2026 are not checked against nfl.com",
+    "detail": "data/s9cb/games.csv holds final scores for 1999-2026 from nflverse, a third-party source. This session checked only 2026 Weeks 1-10 against the official pages. Whether official pages exist and can be read for earlier seasons was not tested. Until they are checked, the readiness requirement 'official final score matched for 100% of backtest games' is not met for any season before 2026.",
+    "official_sources": [
+      "https://www.nfl.com/schedules/2026/by-week/week-9"
+    ],
+    "action": "Decide the backtest seasons first (PR-16), then read each season's official week pages and run the same comparison."
+  },
+  {
+    "id": "F-R1-04",
+    "status": "needs review",
+    "title": "Use of official pages for a wagering dataset is a terms question",
+    "detail": "The nfl.com Terms, as recorded in data/legal/terms_2026-11-16.json by session bf0e6e5f-nfl1, include s.12 (no use of the Services to gamble or wager on the result of any NFL game) and s.11(f) (no robots or agents to harvest data for commercial purposes). This session read the public game and week pages by hand-directed fetch, not through a scraper. Whether a betting-results feed built from these pages is permitted is for counsel (see F60). No decision is taken here.",
+    "official_sources": [
+      "https://www.nfl.com/legal/terms/"
+    ],
+    "action": "Counsel or the owner decides before the results feed is used for any published betting analysis (see F60)."
+  }
+]
