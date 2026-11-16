@@ -157,3 +157,35 @@ Stated so the audit is not read as more complete than it is.
 | `console/data/*.json` | requirements, questions, suggestions, decisions, flags registers |
 | `console/*.html` | 10 generated pages |
 | `docs/audit-ce097fea.md` | this file |
+
+---
+
+## 6. Addendum — the reserve list and the transactions pages
+
+Found while checking a flag about a player absent from the injury report. The league publishes two
+things no session had captured:
+
+**The reserve list**, by month: <https://www.nfl.com/transactions/league/reserve-list/2026/11>
+
+Captured on 2026-11-16 (`data/session-ce097fea/capture/reserve_list_nov2026_2026-11-16.tsv`, 25 players,
+17 clubs, 2026-11-07 to 2026-11-14, sha256 `dd5fc447…`).
+
+Cross-checked against this session's official Week 10 injury capture:
+
+| | Players |
+|---|---|
+| On the official reserve list | 25 |
+| Also listed in the Week 10 injury report | 10 (all with game status **Out**, except Puka Nacua, who carries no designation) |
+| **Absent from the injury report entirely** | **15** |
+
+The brief names Malik Willis as the example of a player missing from the report because he is on injured
+reserve. He is on this list: Miami, Reserve/Injured, 2026-11-10. The gap the brief describes is real and
+is now measured rather than suspected.
+
+**The transactions index**: <https://www.nfl.com/transactions/> — six monthly ledgers by category
+(trades, signings, reserve list, waivers, terminations, other). This is the official source a staleness
+rule for depth rows needs: a depth row whose club has a later transaction at that position can be flagged
+rather than trusted. Only the reserve ledger was captured this session; the other five are suggestion S08.
+
+Requirement B64 ("capture the reserve list so 'not listed' never means 'available'") moves from
+*not started* to *met* for the November ledger. B34 and B46 move from *not started* to *partial*.

@@ -32,6 +32,8 @@ SRC_STANDINGS = "https://www.nfl.com/standings/league/2026/REG"
 SRC_SCHEDULE = "https://www.nfl.com/schedules/2026/REG11"
 SRC_INJURY = "https://www.nfl.com/injuries/league/2026/reg10"
 SRC_NFLVERSE = "https://github.com/nflverse/nflverse-data"
+SRC_RESERVE = "https://www.nfl.com/transactions/league/reserve-list/2026/11"
+SRC_TRANSACTIONS = "https://www.nfl.com/transactions/"
 
 PAGES = [
     ("index.html", "Overview", "overview"),
@@ -201,6 +203,9 @@ def build_index(req, flags, standings, games, injrows, manifest, lb, rec):
             "strategy-lab.html"),
         kpi("12", "games the feed is behind",
             "the results snapshot predates the Week 10 Sunday kickoffs", "flagged.html"),
+        kpi("15 / 25", "reserve-list players missing",
+            "players on the official reserve list who do not appear in the weekly injury report at all",
+            "injuries.html"),
     ])
     cards = []
     for c, cname in CATEGORIES:
@@ -233,6 +238,14 @@ earlier capture is faithful and the page did not move in the interval.</li>
 <li><b>Lions designations.</b> Kerby Joseph, Cade Mays and D.J. Reed are published with a blank game
 status in one hand copy still inside the repository; the official page lists all three as <b>Out</b>.
 Re-confirmed this session.</li>
+<li><b>The reserve list exists.</b> The league publishes a dated reserve list, and no session had
+captured it. This session did: 25 players across 17 clubs for November 2026. <b>15 of the 25 do not appear
+in the Week 10 injury report at all</b>, including Malik Willis — the exact example the brief uses. Every
+per-team injury count printed without it has been understating unavailability. See
+<a href="injuries.html">Injuries &amp; depth</a>.</li>
+<li><b>Roster turnover has an official source.</b> <a href="https://www.nfl.com/transactions/">nfl.com/transactions</a>
+publishes trades, signings, the reserve list, waivers, terminations and other movements by month. That is
+what a staleness rule for depth rows needs.</li>
 <li><b>Week 11.</b> The Week 11 injury report is not published. The reg11 URL serves the Week 10 page.
 There is no official forward-looking availability data today, so no Week-11 line may carry an injury feature.</li>
 </ul>"""
@@ -562,7 +575,7 @@ Every downloaded asset is pinned by sha256 in <code>data/s9cb/provenance.json</c
           "Own lines, the board, the gates, correlations with n, and how luck is removed.")
 
 
-def build_injuries(injrows, manifest, games):
+def build_injuries(injrows, manifest, games, reserve):
     by_team = {}
     for r in injrows:
         d = by_team.setdefault(r[1], {"listed": 0, "Out": 0, "Questionable": 0, "Doubtful": 0, "": 0})
@@ -618,6 +631,35 @@ designation is the page's own blank, not a gap in the capture.</p>
 page it was read from.</p>
 {table(["Fixture", "Matchup", "Club", "Player", "Pos", "Injury", "Practice status", "Game status", "Source"],
        irows, cls="wide tight")}
+
+<h2>The reserve list: why "not listed" is not "available"</h2>
+<p class="lead">The league publishes a dated reserve list at
+<a href="{esc(SRC_RESERVE)}" target="_blank" rel="noopener">{esc(SRC_RESERVE)}</a>. It is the missing half
+of the injury picture: a player can be absent from the weekly report because he is healthy, or because he
+is on injured reserve, and the report alone cannot tell you which. Captured on {esc(reserve["retrieved"])}:
+{reserve["rows"]} players across {reserve["clubs"]} clubs, {reserve["date_range"][0]} to {reserve["date_range"][1]}.</p>
+<div class="callout warn"><b>{reserve["cross_check_against_injury_report"]["counts"]["absent"]} of {reserve["rows"]}
+players on the official reserve list do not appear in the Week 10 injury report at all.</b> Read on its own,
+the report says nothing about them, which is exactly the failure the brief names. The example the brief
+gives is on this list: Malik Willis, Miami, Reserve/Injured on 2026-11-10.</div>
+{table(["Club", "Date", "Player", "Transaction", "In the Week 10 injury report?", "Game status there", "Source"],
+       [[c["club"], c["date"], c["player"], "Reserve/Injured",
+         '<td class="yes">listed</td>' if c["in_report"] else '<td class="no">absent</td>',
+         cell(c.get("game_status"), blank_label="no designation"),
+         srccell(SRC_RESERVE)]
+        for c in (reserve["cross_check_against_injury_report"]["in_report"]
+                  + reserve["cross_check_against_injury_report"]["absent_from_report"])],
+       cls="tight")}
+<p class="tablenote">The reserve list is a monthly page; a player who returns during the month still
+appears on it. It records the placement, not the current status, so it must be read together with the
+weekly report rather than instead of it.</p>
+
+<h2>Roster turnover as a dated event</h2>
+<p>The same site publishes the league's trades, signings, waivers, terminations and reserve movements by
+month at <a href="{esc(SRC_TRANSACTIONS)}" target="_blank" rel="noopener">{esc(SRC_TRANSACTIONS)}</a>.
+That is the official source a staleness rule needs: any depth row whose club has a later transaction at
+that position can be flagged as stale rather than trusted. This session captured the reserve list only;
+capturing all six monthly ledgers is <a href="suggestions.html#S08">S08</a>.</p>
 
 <h2>Positions</h2>
 {table(["Position", "Rows"], [[k, v] for k, v in sorted(pos.items(), key=lambda kv: -kv[1])], cls="tight",
@@ -806,6 +848,7 @@ def main():
     corr = jload(S9 / "correlations.json")
     prov = jload(S9 / "provenance.json")
     injrows = tsv(CAP / "injury_rows_2026-11-16.tsv")
+    reserve = jload(CAP / "reserve_list_2026-11-16.json")
     games = [l.split("\t") for l in (CAP / "games_reg10_2026-11-16.tsv").read_text(encoding="utf-8").rstrip("\n").split("\n")[1:]]
 
     build_index(req, flags, standings, games, injrows, manifest, lb, rec)
@@ -814,7 +857,7 @@ def main():
     build_questions(qs)
     build_suggestions(sg, dec)
     build_strategy(lb, corr, prov)
-    build_injuries(injrows, manifest, games)
+    build_injuries(injrows, manifest, games, reserve)
     build_data(standings, games, rec, verif)
     build_verification(manifest, rec, verif, delta)
     build_flagged(flags)

@@ -7,7 +7,7 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="topbar">
   <a class="brand" href="index.html"><span class="dot"></span> NFL Decision Console</a>
-  <span class="stamp">as of 2026-11-16 · built 2026-11-16 14:59 UTC · session ce097fea-nfl1</span>
+  <span class="stamp">as of 2026-11-16 · built 2026-11-16 15:06 UTC · session ce097fea-nfl1</span>
 </header>
 <div class="shell">
 <nav class="sidebar" aria-label="Sections"><div class="navgroup"><h3>Overview</h3><ul><li><a href="index.html">Overview</a></li><li><a href="executive-summary.html">Executive summary</a></li></ul></div><div class="navgroup"><h3>Governance</h3><ul><li><a href="readiness.html">Decision readiness</a></li><li><a href="questions.html">Open questions</a></li><li><a href="suggestions.html" class=active>Suggestions &amp; choose a path</a></li><li><a href="verification.html">Verification</a></li><li><a href="flagged.html">Flagged for review</a></li></ul></div><div class="navgroup"><h3>Model &amp; strategy</h3><ul><li><a href="strategy-lab.html">Strategy lab</a></li></ul></div><div class="navgroup"><h3>Official data</h3><ul><li><a href="injuries.html">Injuries &amp; depth</a></li><li><a href="data.html">Official data</a></li></ul></div>
@@ -108,26 +108,26 @@ become a decision.</p>
 <article class="sug" id="S07">
   <h3>S07 · Capture the reserve lists so &#x27;not listed&#x27; stops meaning &#x27;available&#x27;</h3>
   <div class="chips"><span class="chip">area: Data</span><span class="chip">cost: One day.</span><span class="chip">status: awaiting review</span></div>
-  <p class="prob"><b>Problem.</b> A player absent from the injury report may be on injured reserve. Today those two states look identical.</p>
+  <p class="prob"><b>Problem.</b> A player absent from the injury report may be on injured reserve. The official reserve list is now captured for November 2026, and 15 of its 25 players are invisible in the weekly report — but only one month is captured and no join exists.</p>
   <p class="buys"><b>What it buys.</b> Every per-team injury count we publish stops under-counting.</p>
   <p class="riskline"><b>Risk.</b> The reserve list may not be published in a machine-readable form.</p>
   <h4>Paths a reviewer can choose from</h4>
-  <ul class="opts"><li class="opt"><b>Capture the official reserve page per club</b><span class="cost">cost 1 day</span><span class="risk">risk Format unknown until tried.</span><p>Direct and dated.</p></li><li class="opt"><b>Derive it from the transactions log</b><span class="cost">cost 1.5 days</span><span class="risk">risk A transaction is not proof of current status.</span><p>One capture serves two needs (this and S08).</p></li></ul>
+  <ul class="opts"><li class="opt"><b>Capture the official reserve page per club</b><span class="cost">cost 1 day</span><span class="risk">risk Format unknown until tried.</span><p>Extend the November capture across the season and join it to the injury table so every &#x27;not listed&#x27; cell carries a reserve-list answer.</p></li><li class="opt"><b>Derive it from the transactions log</b><span class="cost">cost 1.5 days</span><span class="risk">risk A transaction is not proof of current status.</span><p>One capture serves two needs (this and S08).</p></li></ul>
   <p class="rec"><b>Recommended.</b> Capture the official reserve page per club
     <span class="st-awaiting-review status"> · awaiting review</span></p>
-  <p class="ev"><b>Evidence.</b> Malik Willis is absent from the Week-10 report because he is on injured reserve</p>
+  <p class="ev"><b>Evidence.</b> data/session-ce097fea/capture/reserve_list_2026-11-16.json · <a href='https://www.nfl.com/transactions/league/reserve-list/2026/11' target=_blank rel=noopener>official source</a></p>
 </article>
 <article class="sug" id="S08">
   <h3>S08 · Capture the official transactions log and flag stale depth rows</h3>
   <div class="chips"><span class="chip">area: Data</span><span class="chip">cost: One day.</span><span class="chip">status: awaiting review</span></div>
-  <p class="prob"><b>Problem.</b> At least one club still publishes quarterbacks who are on injured reserve. We cannot compute staleness without the log.</p>
+  <p class="prob"><b>Problem.</b> At least one club still publishes quarterbacks who are on injured reserve. The league&#x27;s dated transactions pages make staleness computable, but only two of the six ledgers are captured for one month.</p>
   <p class="buys"><b>What it buys.</b> Depth rows that carry a truth date, and an alert when they go stale.</p>
   <p class="riskline"><b>Risk.</b> The log is high-volume; the flag needs a rule, not a human.</p>
   <h4>Paths a reviewer can choose from</h4>
   <ul class="opts"><li class="opt"><b>Daily transactions capture plus a staleness flag per depth row</b><span class="cost">cost 1 day</span><span class="risk">risk Flag noise early on.</span><p>One job, two requirements closed.</p></li><li class="opt"><b>Weekly capture</b><span class="cost">cost 0.5 day</span><span class="risk">risk Misses short stints.</span><p>Cheaper, misses short stints.</p></li></ul>
   <p class="rec"><b>Recommended.</b> Daily transactions capture plus a staleness flag per depth row
     <span class="st-awaiting-review status"> · awaiting review</span></p>
-  <p class="ev"><b>Evidence.</b> Baltimore&#x27;s quarterback rows on the club depth page</p>
+  <p class="ev"><b>Evidence.</b> https://www.nfl.com/transactions/ plus data/transactions/official_events_2026.json from another session · <a href='https://www.nfl.com/transactions/' target=_blank rel=noopener>official source</a></p>
 </article>
 <article class="sug" id="S09">
   <h3>S09 · Settle the depth-order question before building the deficiency matrix</h3>
@@ -240,14 +240,14 @@ become a decision.</p>
 <article class="sug" id="S18">
   <h3>S18 · Decide the public and private split before more raw rows are published</h3>
   <div class="chips"><span class="chip">area: Site</span><span class="chip">cost: One reading plus a migration.</span><span class="chip">status: awaiting review</span></div>
-  <p class="prob"><b>Problem.</b> Raw rows are on the live site and the data terms have not been read.</p>
+  <p class="prob"><b>Problem.</b> Raw rows are on the live site. The nfl.com terms have now been read verbatim and stored as a clause record; four points in it are not covered by the earlier flag and are waiting on the owner.</p>
   <p class="buys"><b>What it buys.</b> A defensible position instead of an accidental one.</p>
   <p class="riskline"><b>Risk.</b> Migration may break links that other pages depend on.</p>
   <h4>Paths a reviewer can choose from</h4>
-  <ul class="opts"><li class="opt"><b>Read the terms, then move raw rows out of the Pages tree</b><span class="cost">cost 1 day</span><span class="risk">risk Link breakage during the move.</span><p>What the brief asks.</p></li><li class="opt"><b>Keep raw rows public and record the decision</b><span class="cost">cost 1 hour</span><span class="risk">risk Terms risk.</span><p>Cheapest, weakest.</p></li></ul>
-  <p class="rec"><b>Recommended.</b> Read the terms, then move raw rows out of the Pages tree
+  <ul class="opts"><li class="opt"><b>Read the terms, then move raw rows out of the Pages tree</b><span class="cost">cost 1 day</span><span class="risk">risk Link breakage during the move.</span><p>What the brief asks, now that the clause record exists to decide against.</p></li><li class="opt"><b>Keep raw rows public and record the decision</b><span class="cost">cost 1 hour</span><span class="risk">risk Terms risk.</span><p>Cheapest, weakest.</p></li></ul>
+  <p class="rec"><b>Recommended.</b> Read the clause record, record the decision, then move raw rows out of the Pages tree if it goes that way
     <span class="st-awaiting-review status"> · awaiting review</span></p>
-  <p class="ev"><b>Evidence.</b> Open pull request #79 on this repository audits the collection and publication terms</p>
+  <p class="ev"><b>Evidence.</b> data/legal/terms_2026-11-16.json, flag F60 · <a href='https://www.nfl.com/legal/terms/' target=_blank rel=noopener>official source</a></p>
 </article>
 <article class="sug" id="S19">
   <h3>S19 · Publish the reconciliation as a standing check, not a one-off</h3>

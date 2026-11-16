@@ -170,14 +170,14 @@
    "id": "S07",
    "area": "Data",
    "title": "Capture the reserve lists so 'not listed' stops meaning 'available'",
-   "problem": "A player absent from the injury report may be on injured reserve. Today those two states look identical.",
+   "problem": "A player absent from the injury report may be on injured reserve. The official reserve list is now captured for November 2026, and 15 of its 25 players are invisible in the weekly report \u2014 but only one month is captured and no join exists.",
    "buys": "Every per-team injury count we publish stops under-counting.",
    "cost": "One day.",
    "risk": "The reserve list may not be published in a machine-readable form.",
    "options": [
     {
      "path": "Capture the official reserve page per club",
-     "detail": "Direct and dated.",
+     "detail": "Extend the November capture across the season and join it to the injury table so every 'not listed' cell carries a reserve-list answer.",
      "cost": "1 day",
      "risk": "Format unknown until tried."
     },
@@ -190,14 +190,14 @@
    ],
    "recommended": "Capture the official reserve page per club",
    "status": "awaiting review",
-   "evidence": "Malik Willis is absent from the Week-10 report because he is on injured reserve",
-   "source": ""
+   "evidence": "data/session-ce097fea/capture/reserve_list_2026-11-16.json",
+   "source": "https://www.nfl.com/transactions/league/reserve-list/2026/11"
   },
   {
    "id": "S08",
    "area": "Data",
    "title": "Capture the official transactions log and flag stale depth rows",
-   "problem": "At least one club still publishes quarterbacks who are on injured reserve. We cannot compute staleness without the log.",
+   "problem": "At least one club still publishes quarterbacks who are on injured reserve. The league's dated transactions pages make staleness computable, but only two of the six ledgers are captured for one month.",
    "buys": "Depth rows that carry a truth date, and an alert when they go stale.",
    "cost": "One day.",
    "risk": "The log is high-volume; the flag needs a rule, not a human.",
@@ -217,8 +217,8 @@
    ],
    "recommended": "Daily transactions capture plus a staleness flag per depth row",
    "status": "awaiting review",
-   "evidence": "Baltimore's quarterback rows on the club depth page",
-   "source": ""
+   "evidence": "https://www.nfl.com/transactions/ plus data/transactions/official_events_2026.json from another session",
+   "source": "https://www.nfl.com/transactions/"
   },
   {
    "id": "S09",
@@ -467,14 +467,14 @@
    "id": "S18",
    "area": "Site",
    "title": "Decide the public and private split before more raw rows are published",
-   "problem": "Raw rows are on the live site and the data terms have not been read.",
+   "problem": "Raw rows are on the live site. The nfl.com terms have now been read verbatim and stored as a clause record; four points in it are not covered by the earlier flag and are waiting on the owner.",
    "buys": "A defensible position instead of an accidental one.",
    "cost": "One reading plus a migration.",
    "risk": "Migration may break links that other pages depend on.",
    "options": [
     {
      "path": "Read the terms, then move raw rows out of the Pages tree",
-     "detail": "What the brief asks.",
+     "detail": "What the brief asks, now that the clause record exists to decide against.",
      "cost": "1 day",
      "risk": "Link breakage during the move."
     },
@@ -485,10 +485,10 @@
      "risk": "Terms risk."
     }
    ],
-   "recommended": "Read the terms, then move raw rows out of the Pages tree",
+   "recommended": "Read the clause record, record the decision, then move raw rows out of the Pages tree if it goes that way",
    "status": "awaiting review",
-   "evidence": "Open pull request #79 on this repository audits the collection and publication terms",
-   "source": ""
+   "evidence": "data/legal/terms_2026-11-16.json, flag F60",
+   "source": "https://www.nfl.com/legal/terms/"
   },
   {
    "id": "S19",

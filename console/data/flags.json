@@ -4,16 +4,125 @@
  "as_of": "2026-11-16",
  "policy": "A flag states that no official source confirms a value, or that a committed artefact disagrees with one. Flags do not block a merge; they are published here with the link that settles them.",
  "rows": [
-  {"id":"CE-01","status":"open","sev":"high","area":"Data freshness","what":"The results feed in the repository (data/s9cb/games.csv) is 12 games behind the official schedule. It was fetched 2026-11-15 13:21 UTC, before the Week 10 Sunday kickoffs, so it holds 1 of 14 Week-10 results and standings recomputed from it reproduce only 8 of 32 clubs.","why_it_matters":"Any ROI, rating or closing-line number computed from the feed today describes Week 9 plus the Thursday game.","what_settles_it":"Refresh the feed, then re-run console/verify.py. The check prints the gap between the last final in the feed and the last final on the official schedule page.","source":"https://www.nfl.com/schedules/2026/REG11"},
-  {"id":"CE-02","status":"open","sev":"medium","area":"Capture method","what":"Injury captures carry a date but no clock time, and hold rendered text rather than the bytes we read.","why_it_matters":"Two reads on the same day cannot be ordered, and a transcription cannot be re-audited against the page.","what_settles_it":"Store the raw response with a timestamp including time of day and time zone, per capture.","source":"https://www.nfl.com/injuries/league/2026/reg10"},
-  {"id":"CE-03","status":"open","sev":"medium","area":"Club codes","what":"nfl.com prints AZ for the Arizona Cardinals and LA for the Los Angeles Rams; the repository stores both AZ/ARI and LA/LAR in different files.","why_it_matters":"Every join between two files is exposed to a silent mismatch.","what_settles_it":"One alias table enforced at build time; the build fails on an unknown code.","source":"https://www.nfl.com/standings/league/2026/REG"},
-  {"id":"CE-04","status":"open","sev":"medium","area":"Stale committed data","what":"data/standings.json records Buffalo at 7-1 (retrieved 2026-11-12). The official table today records 8-1.","why_it_matters":"At least one published page shows a table that is four days and two game weeks out of date.","what_settles_it":"Regenerate from the official table, or mark the file historical and point readers at the current capture.","source":"https://www.nfl.com/standings/league/2026/REG"},
-  {"id":"CE-05","status":"open","sev":"informational","area":"Forward-looking data","what":"The Week 11 injury report is not published. https://www.nfl.com/injuries/league/2026/reg11 serves the Week 10 page, with the week selector offering Week 1 to Week 10 only.","why_it_matters":"There is no official forward-looking availability data for Week 11 today, so no Week-11 line can carry an injury feature.","what_settles_it":"Re-read the URL on Wednesday; the first read whose title says Week 11 is the boundary.","source":"https://www.nfl.com/injuries/league/2026/reg11"},
-  {"id":"CE-06","status":"open","sev":"medium","area":"Post-game designations","what":"The Week 10 injury report is still live on the Monday after the games, with its designations intact.","why_it_matters":"A reader, or a model, can mistake a record of what was known before Week 10 for a forecast about Week 11.","what_settles_it":"Stamp every published injury row with the week it describes and the week it can be used for.","source":"https://www.nfl.com/injuries/league/2026/reg10"},
-  {"id":"CE-07","status":"open","sev":"low","area":"Venue","what":"No venue has been transcribed from an official game-centre page. The stadium column in the results feed comes from a parsed copy of the schedule, not from the league's own game centre.","why_it_matters":"One brief line is unmet, and the roof/surface overlay has no official foundation.","what_settles_it":"Read one week of game-centre pages by hand; if the venue is in the text, automate it.","source":"https://www.nfl.com/games/"},
-  {"id":"CE-08","status":"open","sev":"low","area":"Parallel sessions","what":"Seven pull requests from other sessions are open against main. This session did not merge them.","why_it_matters":"The site carries several generations of pages and the numbers on them are not guaranteed to agree.","what_settles_it":"An integration session merges them and re-verifies the combined data line by line.","source":"https://github.com/kanlerxz87-cyber/NFL1/pulls"},
-  {"id":"CE-09","status":"closed","sev":"informational","area":"Verified non-issue","what":"Myles Garrett appears in the Los Angeles Rams section of the official Week 10 injury report, which looks like a mis-scrape.","why_it_matters":"If it were a scrape error, every Rams row would be suspect.","what_settles_it":"Re-read on 2026-11-16: the official page itself lists him under the Rams, with 'Knee, Not injury related - resting player'. Not an error in the capture.","source":"https://www.nfl.com/injuries/league/2026/reg10"},
-  {"id":"CE-10","status":"closed","sev":"informational","area":"Verified non-issue","what":"The committed 2026-11-15 injury capture is a transcription, so it could differ from the official page.","why_it_matters":"Every injury number on the site depends on it.","what_settles_it":"Re-read the whole page on 2026-11-16 and compared row by row: 347 rows against 347, 0 rows only in one side, 0 field differences, and the sha256 of this session's capture equals the hash recorded in data/capture/manifest.json (9fe77d36...cd5f). The capture is faithful.","source":"https://www.nfl.com/injuries/league/2026/reg10"},
-  {"id":"CE-11","status":"closed","sev":"informational","area":"Verified non-issue","what":"The official standings table could contain arithmetic the league itself disagrees with, as it has in earlier weeks.","why_it_matters":"A derived metric built on a self-contradictory cell would be wrong in a way no downstream check would catch.","what_settles_it":"Checked on 2026-11-16: total wins equal total losses at 148 each, and total points for equal total points against at 6,880. The table is internally consistent.","source":"https://www.nfl.com/standings/league/2026/REG"}
+  {
+   "id": "CE-01",
+   "status": "open",
+   "sev": "high",
+   "area": "Data freshness",
+   "what": "The results feed in the repository (data/s9cb/games.csv) is 12 games behind the official schedule. It was fetched 2026-11-15 13:21 UTC, before the Week 10 Sunday kickoffs, so it holds 1 of 14 Week-10 results and standings recomputed from it reproduce only 8 of 32 clubs.",
+   "why_it_matters": "Any ROI, rating or closing-line number computed from the feed today describes Week 9 plus the Thursday game.",
+   "what_settles_it": "Refresh the feed, then re-run console/verify.py. The check prints the gap between the last final in the feed and the last final on the official schedule page.",
+   "source": "https://www.nfl.com/schedules/2026/REG11"
+  },
+  {
+   "id": "CE-02",
+   "status": "open",
+   "sev": "medium",
+   "area": "Capture method",
+   "what": "Injury captures carry a date but no clock time, and hold rendered text rather than the bytes we read.",
+   "why_it_matters": "Two reads on the same day cannot be ordered, and a transcription cannot be re-audited against the page.",
+   "what_settles_it": "Store the raw response with a timestamp including time of day and time zone, per capture.",
+   "source": "https://www.nfl.com/injuries/league/2026/reg10"
+  },
+  {
+   "id": "CE-03",
+   "status": "open",
+   "sev": "medium",
+   "area": "Club codes",
+   "what": "nfl.com prints AZ for the Arizona Cardinals and LA for the Los Angeles Rams; the repository stores both AZ/ARI and LA/LAR in different files.",
+   "why_it_matters": "Every join between two files is exposed to a silent mismatch.",
+   "what_settles_it": "One alias table enforced at build time; the build fails on an unknown code.",
+   "source": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "CE-04",
+   "status": "open",
+   "sev": "medium",
+   "area": "Stale committed data",
+   "what": "data/standings.json records Buffalo at 7-1 (retrieved 2026-11-12). The official table today records 8-1.",
+   "why_it_matters": "At least one published page shows a table that is four days and two game weeks out of date.",
+   "what_settles_it": "Regenerate from the official table, or mark the file historical and point readers at the current capture.",
+   "source": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "CE-05",
+   "status": "open",
+   "sev": "informational",
+   "area": "Forward-looking data",
+   "what": "The Week 11 injury report is not published. https://www.nfl.com/injuries/league/2026/reg11 serves the Week 10 page, with the week selector offering Week 1 to Week 10 only.",
+   "why_it_matters": "There is no official forward-looking availability data for Week 11 today, so no Week-11 line can carry an injury feature.",
+   "what_settles_it": "Re-read the URL on Wednesday; the first read whose title says Week 11 is the boundary.",
+   "source": "https://www.nfl.com/injuries/league/2026/reg11"
+  },
+  {
+   "id": "CE-06",
+   "status": "open",
+   "sev": "medium",
+   "area": "Post-game designations",
+   "what": "The Week 10 injury report is still live on the Monday after the games, with its designations intact.",
+   "why_it_matters": "A reader, or a model, can mistake a record of what was known before Week 10 for a forecast about Week 11.",
+   "what_settles_it": "Stamp every published injury row with the week it describes and the week it can be used for.",
+   "source": "https://www.nfl.com/injuries/league/2026/reg10"
+  },
+  {
+   "id": "CE-07",
+   "status": "open",
+   "sev": "low",
+   "area": "Venue",
+   "what": "No venue has been transcribed from an official game-centre page. The stadium column in the results feed comes from a parsed copy of the schedule, not from the league's own game centre. (Separately: this session did find and capture the official reserve list, which closes a different gap.)",
+   "why_it_matters": "One brief line is unmet, and the roof/surface overlay has no official foundation.",
+   "what_settles_it": "Read one week of game-centre pages by hand; if the venue is in the text, automate it.",
+   "source": "https://www.nfl.com/games/"
+  },
+  {
+   "id": "CE-08",
+   "status": "open",
+   "sev": "low",
+   "area": "Parallel sessions",
+   "what": "Nine pull requests from other sessions were open against main when this session merged (#47, #57, #59, #77, #79, #80, #81, #91, #92), and three merged while it worked (#87, #89, #90). This session merged none of the open ones.",
+   "why_it_matters": "The site carries several generations of pages and the numbers on them are not guaranteed to agree.",
+   "what_settles_it": "An integration session merges them and re-verifies the combined data line by line.",
+   "source": "https://github.com/kanlerxz87-cyber/NFL1/pulls"
+  },
+  {
+   "id": "CE-09",
+   "status": "closed",
+   "sev": "informational",
+   "area": "Verified non-issue",
+   "what": "Myles Garrett appears in the Los Angeles Rams section of the official Week 10 injury report, which looks like a mis-scrape.",
+   "why_it_matters": "If it were a scrape error, every Rams row would be suspect.",
+   "what_settles_it": "Re-read on 2026-11-16: the official page itself lists him under the Rams, with 'Knee, Not injury related - resting player'. Not an error in the capture.",
+   "source": "https://www.nfl.com/injuries/league/2026/reg10"
+  },
+  {
+   "id": "CE-10",
+   "status": "closed",
+   "sev": "informational",
+   "area": "Verified non-issue",
+   "what": "The committed 2026-11-15 injury capture is a transcription, so it could differ from the official page.",
+   "why_it_matters": "Every injury number on the site depends on it.",
+   "what_settles_it": "Re-read the whole page on 2026-11-16 and compared row by row: 347 rows against 347, 0 rows only in one side, 0 field differences, and the sha256 of this session's capture equals the hash recorded in data/capture/manifest.json (9fe77d36...cd5f). The capture is faithful.",
+   "source": "https://www.nfl.com/injuries/league/2026/reg10"
+  },
+  {
+   "id": "CE-11",
+   "status": "closed",
+   "sev": "informational",
+   "area": "Verified non-issue",
+   "what": "The official standings table could contain arithmetic the league itself disagrees with, as it has in earlier weeks.",
+   "why_it_matters": "A derived metric built on a self-contradictory cell would be wrong in a way no downstream check would catch.",
+   "what_settles_it": "Checked on 2026-11-16: total wins equal total losses at 148 each, and total points for equal total points against at 6,880. The table is internally consistent.",
+   "source": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "CE-12",
+   "status": "closed",
+   "sev": "informational",
+   "area": "Data gap closed",
+   "what": "The brief asked for the reserve list to be captured so that 'not listed' does not mean 'available', and none had been.",
+   "why_it_matters": "Without it, every per-team injury count understates unavailability.",
+   "what_settles_it": "Captured on 2026-11-16 from the official reserve-list page: 25 players across 17 clubs for November 2026. 15 of the 25 do not appear in the Week 10 injury report at all, including Malik Willis \u2014 the example the brief names. The gap is now measured rather than suspected.",
+   "source": "https://www.nfl.com/transactions/league/reserve-list/2026/11"
+  }
  ]
 }

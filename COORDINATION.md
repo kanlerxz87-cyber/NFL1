@@ -3861,3 +3861,28 @@ built, and `console/verify.py` fails if a recorded path is not one of the publis
 **Deviations.** Branch name is Arena-fixed (`arena/ce097fea-nfl1`), not `session-<id>/<task>`; scopes
 were kept non-overlapping by file instead. The seven open pull requests from other sessions were not
 merged — recorded as flag CE-08 rather than guessed at.
+
+### Addendum — `ce097fea-nfl1`: the reserve list and the transactions pages
+
+While checking flag CE-notes about a player absent from the injury report, this session found two
+official pages that no session had captured.
+
+**Reserve list.** `https://www.nfl.com/transactions/league/reserve-list/2026/11` — the league publishes a
+dated reserve list by month. Captured 2026-11-16: 25 players across 17 clubs, 2026-11-07 to 2026-11-14,
+stored in `data/session-ce097fea/capture/reserve_list_nov2026_2026-11-16.tsv` with the cross-check in
+`reserve_list_2026-11-16.json`. **15 of the 25 do not appear in the Week 10 injury report at all**, and
+the brief's own example is on the list: Malik Willis, Miami, Reserve/Injured 2026-11-10. The 10 that do
+appear carry game status Out (except Puka Nacua, who carries no designation and was placed on reserve on
+11/12). Requirement B64 moves from *not started* to *met* for the November ledger.
+
+**Transactions index.** `https://www.nfl.com/transactions/` publishes six monthly ledgers — trades,
+signings, reserve list, waivers, terminations, other. This is the official source a depth-row staleness
+rule needs, which is what B34 and B46 have been blocked on. Both move from *not started* to *partial*;
+capturing all six ledgers is logged as suggestion S08.
+
+Also noted for whoever owns the flag register: session `bf0e6e5f-nfl1` merged into `main` during this
+session (`data/legal/terms_2026-11-16.json` — the nfl.com terms read verbatim, raising F60 — and
+`data/transactions/official_events_2026.json`, the Baltimore events behind the stale depth rows, raising
+F61 and F62). This session's registers were updated to reflect that work rather than duplicate it.
+
+**Merge record.** PR #93 (`arena/ce097fea-nfl1` into `main`).
