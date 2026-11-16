@@ -56,18 +56,31 @@ FORBIDDEN_CLAIM = re.compile(r"(snap share|snap count|share of snaps|depth rank 
                              r"rank inferred from jersey|jersey number implies)", re.I)
 
 
+CAPTURE_ROOT = STORE          # redirected by --captures-root so a fixture set can be gated
+
+
 def iter_captures():
     for kind in ("inactives", "report", "gamebook"):
-        d = STORE / "captures" / kind
+        d = Path(CAPTURE_ROOT) / "captures" / kind
         for p in sorted(d.glob("*.json")) if d.exists() else []:
             yield kind, p
-    d = STORE / "official_inactives"
+    d = Path(CAPTURE_ROOT) / "official_inactives"
     if d.exists():
         for p in sorted(d.glob("*.json")):
             yield "inactives", p
 
 
-def main() -> int:
+def main(argv=None) -> int:
+    global CAPTURE_ROOT
+    import argparse
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--captures-root", default=None,
+                    help="check the captures under this directory instead of data/gamebook "
+                         "(used by the unit tests to gate a fixture set)")
+    ap.add_argument("--strict", action="store_true", help="treat notes as failures")
+    args = ap.parse_args(argv)
+    if args.captures_root:
+        CAPTURE_ROOT = str(Path(args.captures_root).resolve())
     problems: list[str] = []
     notes: list[str] = []
     seen = 0
@@ -81,19 +94,32 @@ def main() -> int:
         except Exception as exc:                                 # noqa: BLE001
             problems.append(f"{p.relative_to(ROOT)}: not valid JSON ({exc})")
             continue
-        rel = str(p.relative_to(ROOT))
+        try:
+            rel = str(p.relative_to(ROOT))
+        except ValueError:                                       # fixture sets live outside the repo
+            rel = p.name
         rows = cap.get("rows")
-        if not isinstance(rows, list):
+        if kind == "gamebook":
+            # a game-book capture holds a parsed document, not a row list: its `rows` is empty by
+            # construction and its record of what was read lives in `parsed` / `counts`
+            rows = []
+        elif not isinstance(rows, list):
             problems.append(f"{rel}: no rows list")
             rows = []
         per_key.setdefault((kind, cap.get("key") or ""), []).append((p, cap))
-        for field in ("key", "season", "week", "fetched_at", "url", "parser_version"):
+        fields = ["key", "fetched_at", "parser_version"]
+        if kind != "gamebook":
+            fields += ["season", "week"]
+        for field in fields:
             if not cap.get(field):
                 problems.append(f"{rel}: required field {field!r} is blank")
+        # the official page must be recorded; a game book names its own game centre rather than `url`
+        if not (cap.get("url") or cap.get("game_centre_url")):
+            problems.append(f"{rel}: required field 'url' is blank")
         fa = cap.get("fetched_at") or ""
         if fa and not re.match(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2})?(Z|\+00:00)?$", fa):
             problems.append(f"{rel}: fetched_at {fa!r} is not a UTC timestamp")
-        url = cap.get("url") or ""
+        url = cap.get("url") or cap.get("game_centre_url") or ""
         if url and not OFFICIAL.match(url):
             problems.append(f"{rel}: source url is not an official NFL host: {url}")
         for h in (cap.get("raw_sha256"), cap.get("evidence_sha256")):
@@ -104,6 +130,10 @@ def main() -> int:
                 problems.append(f"{rel}: a game-book capture with no pdf_url must carry a flag")
             if cap.get("pdf_sha256") and not SHA.match(cap["pdf_sha256"]):
                 problems.append(f"{rel}: pdf_sha256 is malformed")
+        if kind == "gamebook":
+            ps = cap.get("parse_status")
+            if ps not in ("ok", "partial", "no_pdf_link", "failed"):
+                problems.append(f"{rel}: parse_status {ps!r} outside the vocabulary")
         for r in rows:
             if PLACEHOLDER.search(json.dumps(r)):
                 problems.append(f"{rel}: placeholder text in a row: {json.dumps(r)[:120]}")
@@ -216,6 +246,9 @@ def main() -> int:
         print("  FAIL", x)
     for x in notes[:30]:
         print("  note", x)
+    if args.strict and notes:
+        print("  (strict: notes counted as failures)")
+        return 1
     return 1 if problems else 0
 
 

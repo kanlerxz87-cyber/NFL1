@@ -238,6 +238,28 @@ class TestRegisterBuild(unittest.TestCase):
         for k in ("coverage", "designations", "trap_counts", "results", "crosscheck"):
             self.assertEqual(json.dumps(a[k], sort_keys=True), json.dumps(b[k], sort_keys=True), k)
 
+    def test_gate_accepts_a_wellformed_gamebook_capture_and_rejects_a_broken_one(self):
+        """The gate must read the game-book capture shape as it is actually written (no `rows`, no
+        `url`, no season/week) and still fail a capture with a blank field or a non-UTC stamp."""
+        import shutil
+        import tempfile
+        fx = ROOT / "tests" / "fixtures" / "gamebook"
+        with tempfile.TemporaryDirectory() as td:
+            good = Path(td) / "captures" / "gamebook"
+            good.mkdir(parents=True)
+            shutil.copy(fx / "gamebook_capture_good.json", good / "patriots-at-lions-2026-reg-10.json")
+            r = subprocess.run([sys.executable, str(ROOT / "tools/check_gamebook_register.py"),
+                                "--captures-root", td], capture_output=True, text=True)
+            self.assertEqual(r.returncode, 0, r.stdout)
+            self.assertIn("1 capture(s)", r.stdout)
+            shutil.copy(fx / "gamebook_capture_bad.json", good / "bad.json")
+            r2 = subprocess.run([sys.executable, str(ROOT / "tools/check_gamebook_register.py"),
+                                 "--captures-root", td], capture_output=True, text=True)
+            self.assertEqual(r2.returncode, 1, r2.stdout)
+            out = r2.stdout
+            self.assertIn("parser_version", out)
+            self.assertIn("is not a UTC timestamp", out)
+
     def test_gate_passes_on_the_committed_artifacts(self):
         r = subprocess.run([sys.executable, str(ROOT / "tools/check_gamebook_register.py")],
                            capture_output=True, text=True)

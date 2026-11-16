@@ -1,0 +1,71 @@
+{
+ "kind": "gamebook",
+ "key": "patriots-at-lions-2026-reg-10",
+ "season": 2026,
+ "week": 10,
+ "game_centre_url": "https://www.nfl.com/games/patriots-at-lions-2026-reg-10?tab=recap",
+ "schedule_url": "https://www.nfl.com/schedules/2026/REG10",
+ "fetched_at": "2026-11-16 18:22:31",
+ "centre_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+ "parser_version": "",
+ "pdf_url": "https://example.com/pdf",
+ "pdf_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+ "score_text": "NE 10, DET 35",
+ "venue_text_centre": "FC BAYERN MUNICH STADIUM",
+ "parse_status": "ok",
+ "counts": {
+  "not_active_away": 6,
+  "not_active_home": 6,
+  "did_not_play_away": 0,
+  "did_not_play_home": 0,
+  "not_active_unparsed": 0,
+  "starters": 8,
+  "starters_unresolved_lines": 1
+ },
+ "flags": [],
+ "parsed": {
+  "NE": {
+   "Not Active": [
+    {
+     "position": "CB",
+     "number": "7",
+     "name": "TODO"
+    },
+    {
+     "position": "3QB",
+     "number": "15",
+     "name": "B.Morton"
+    }
+   ],
+   "Did Not Play": [],
+   "Did Not Play_printed_empty": true,
+   "name_tokens": [
+    "C.Davis",
+    "B.Morton"
+   ],
+   "starters": [
+    {
+     "position": "QB",
+     "number": "16",
+     "initial": "D",
+     "surname": "Hodges",
+     "side": "away",
+     "unit": "offence"
+    }
+   ]
+  },
+  "DET": {
+   "Not Active": [
+    {
+     "position": "CB",
+     "number": "4",
+     "name": "D.Reed"
+    }
+   ],
+   "name_tokens": [
+    "D.Reed"
+   ],
+   "starters": []
+  }
+ }
+}

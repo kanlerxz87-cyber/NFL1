@@ -99,7 +99,18 @@ jobs:
         run: python3 tools/build_gamebook_register.py
       - name: "Gate: hashes, count pins, required fields, row links, no placeholders, no forbidden inference"
         if: always()
-        run: python3 tools/check_gamebook_register.py
+        run: |
+          set +e
+          python3 tools/check_gamebook_register.py 2>&1 | tee /tmp/gate.txt
+          rc=${PIPESTATUS[0]}
+          {
+            echo "### Game Book register gate"
+            echo ""
+            echo '```'
+            tail -40 /tmp/gate.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit $rc
       - name: Publish the sweep log
         if: always()
         run: |
