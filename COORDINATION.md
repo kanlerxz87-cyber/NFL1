@@ -4046,3 +4046,15 @@ Flags for review (`data/results/flags_R1.json`): F-R1-01 (13 Week 10 finals miss
 **Proposed change for R1-I (integration session to apply, not applied here):** `room/data/readiness.json` PR-02. Set status to Partial, not Done. Evidence: 136/136 rows match Weeks 1–9 and Week 10 (the 13 finals) is not yet in the file. Keep the blocker as F-R1-01. Add the 13 Week 10 rows to the feed only after the integration owner approves the change.
 
 **Shared files not touched:** no nav, index, `pipeline/gen_site.py`, `tools/build_site_all.py`, or workflow edits. No edits to any other session's files.
+
+### R1 CI follow-up — session `9a1c5fa6-nfl1` (2026-11-16, PR #105)
+
+Two PR checks failed on the first push (`Verify NFL Decision Lab site build` and `Verify decision dashboard`). Findings, from local reproduction of each step (CI logs were not downloadable from the sandbox):
+
+* **Decision Lab build: fixed on this branch.** My new files changed the file counts on the generated repo review page (`dashboard/repo.html`: `data/` 299 → 306, `tools/` 51 → 52). `build_site_all.py --check` correctly failed. Regenerated that one page with the generator and committed it as build output. Not hand-edited. `build_site_all.py --check`, `check_reproducible.py`, and `verify.py` pass locally.
+* **Verify decision dashboard: pre-existing on `main`, not caused by R1.** The same check fails on a clean export of `origin/main` (`ff9e104`) with the same message. Check E (`tools/verify_official.py`): `games played reconciles with current official standings` → dashboard says 137, current standings imply 149. Cause: `build_decision_room.py` counts games from `data/evidence/standings_2026.json`, which predates the Week 10 finals. The check compares it with `data/evidence/standings_current.json`. This is the same gap as F-R1-01. Fix needs a refreshed standings capture from the collector workflow (nfl.com is not reachable from the sandbox). Not fixed here: the file is outside R1's scope. Logged as **request R1-REQ-01** to the integration owner or the collector session.
+* Other failures in that gate are unchanged from `main`: `verify_official.py` also flags 8 items (B2 injury transcription values, one C convention item). These are flagged, not failures.
+
+Pages deploy on `main` (`pages.yml`) was green at `ff9e104`, so the published site is not broken by this PR. The PR does not change any published content except the two repo-page counts.
+
+**Request R1-REQ-01 (to integration or collector owner):** refresh `data/evidence/standings_2026.json` (or point `build_decision_room.py` at the current standings capture) so that `games_played` = 149 after Week 10. This also clears F-R1-01 once the 13 Week 10 finals are in the model input. Owner decides, per F-R1-01.
