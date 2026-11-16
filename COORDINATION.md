@@ -1200,8 +1200,7 @@ Flagged for Review page with the arithmetic proof. **None blocks the merge.**
 | — | **No official depth chart reachable from the sandbox.** | `string_level_drop` registered UNAVAILABLE; 2nd/3rd/4th-string analysis uses only officially confirmed news items |
 | — | **Pages source cannot be moved to `/docs`** — 403, token lacks `pages:write`. | Sub-site published from `verified-lab/`; root site untouched |
 | — | **Source links were labelled with the wrong host.** `srccell()` defaulted its label to the literal string `"NFL.com"` regardless of the URL, so 14 links on `flagged.html` alone — GitHub permalinks, the nflverse mirror and the Sportradar depth-chart reference — were presented to the reader as "NFL.com ↗". That misrepresents the provenance of the value the link supports, which is the one thing this site must never do. Found by reading the published page after the merge, not by any local gate. | Fixed: labels are now derived from the URL by `sitekit.host_label()` (`NFL.com`, `this repository`, `nflverse mirror`, `Sportradar (NFL's official data partner)`, else the hostname). Where a role label is genuinely more informative — a player's name, or `report` — it is kept. Three new tests enforce that no link may claim a host it does not point to. Shipped in PR #19 |
-| — | **`README.md` on `main` contained three committed merge-conflict blocks** (`<<<<<<< Updated upstream` / `=======` / `>>>>>>> Stashed changes`, lines 27-77) — a `git stash pop` conflict committed and published as repository documentation. | Resolved in this merge by keeping the more complete side of each block; no content discarded. `git grep` confirms no conflict markers remain anywhere in the tree |
-
+| — | **`README.md` on `main` contained three committed merge-conflict blocks** (`
 ## Where this subsystem disagrees with the main pipeline — and why
 
 The sub-site publishes **no spread, no total, no win probability and no edge**,
@@ -4140,6 +4139,7 @@ PR **#105** (`arena/9a1c5fa6-nfl1` → `main`) **merged** as `be35682` (merge co
 * **Visible on the live landing page:** "Games analysed 137 · week 10 complete". The true count from the official standings is 149. This is the stale-capture gap in R1-REQ-01, published as-is. Not corrected here, because the fix is outside R1's scope.
 
 R1 is done for Weeks 1–10 of 2026 and is merged. Still open for other sessions or the integration session: R1-I (readiness row PR-02 to Partial, the Flagged for Review page), R1-REQ-01, the 13 Week 10 finals (F-R1-01), the Monday game (F-R1-02), pre-2026 seasons (F-R1-03), and terms counsel review (F-R1-04).
+<<<<<<< HEAD
 
 ### Merge record — session `49ac3a99-nfl1` (PR #101, 2026-11-16 UTC)
 
@@ -4148,3 +4148,34 @@ R1 is done for Weeks 1–10 of 2026 and is merged. Still open for other sessions
 - **Live:** <https://kanlerxz87-cyber.github.io/NFL1/schedule_announcement/> read through the fetch tool on 2026-11-16: 13 fixtures, 6 byes, announcement rows and every game link present. The sandbox itself cannot reach github.io (outbound allow-list), so the fetch tool is the evidence.
 - **Board status:** S1 done, S2 done, S3 done. Flags F-49AC-01..03 open for review (non-blocking).
 - **Changes that landed in PR #101:** `schedule_announcement/**`, `data/schedule_announcement/**`, `tools/check_schedule_announcement.py`, `tests/test_schedule_announcement.py`; one additive nav entry each in `pipeline/gen_site.py` and `scripts/verified/normalize_nav.py`; the audit's current-state reference moved to a new T5 retrieval (`tools/audit_official.py`, `data/audit/49ac3a99/`); regenerated pages and reports from `build_site_all.py` and `verify.py`.
+## Session `ed736fc3-nfl1` — claim (branch `arena/ed736fc3-nfl1`, base `46c82ae`, 2026-11-16)
+
+Claimed **before any other edit**, as the brief requires. Scope is additive: this session writes
+only files under `desk/`, `data/desk/`, `tools/desk/`, `tests/test_desk_site.py`, plus the
+append-only entries it adds to `data/flags.json`, `data/questions.json`,
+`data/suggestions.json`, `data/sources.json`, `COORDINATION.md`, and the **additive** nav/build
+registrations listed below. No file owned by another session is rewritten.
+
+Checked at claim time: `gh pr list` shows 12 open PRs (#47, #57, #59, #77, #79, #80, #81, #91,
+#92, #94, #99) — none of them claims `desk/`, `data/desk/`, `tools/desk/` or
+`tests/test_desk_site.py`. `main` is at `46c82ae`; `git log` on `main` is one squashed commit.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| D1 | Fresh line-by-line official re-verification of the committed data (standings, Week-10 injury report, Week-11 schedule, club depth charts, transactions) with a signed link per row; publish what passes and what does not | in progress | `ed736fc3` | `data/desk/verification.json`, `data/desk/sources.json`, `desk/verification.html` | every row re-read this session from nfl.com / club sites; no value copied from an earlier session's claim |
+| D2 | One clean dashboard sub-site `desk/`: landing page + category subpages, every table row carrying its own https source link, no empty cells (a blank is labelled) | in progress | `ed736fc3` | `desk/**`, `data/desk/*.json`, `tools/desk/*.py` | one generator, one verifier, unit tests; registered additively in `tools/build_site_all.py`, `tools/check_generators.py`, `pipeline/gen_site.py` NAV, `scripts/verified/normalize_nav.py` CANON |
+| D3 | Decision-readiness table on the new landing page: one row per brief requirement, the gate that blocks it, and the number that would clear it | in progress | `ed736fc3` | `data/desk/readiness.json`, `desk/index.html`, `desk/readiness.html` | status computed from the repo file named in `computed_from`; a blank threshold is published as a decision nobody has made |
+| D4 | Executive summary: what holds up, what does not, what is missing, what needs a human decision | in progress | `ed736fc3` | `desk/executive-summary.html` | counts must reproduce from the data layer; verifier recomputes them |
+| D5 | Flag the failing gate found at claim time: `tools/verify_official.py` → `[FAIL] E. counts games played reconciles with current official standings rows=137 sum of club games / 2 = 149` on `main` `46c82ae`; determine which side is wrong from official pages and publish it | in progress | `ed736fc3` | `data/desk/verification.json`, `data/flags.json` (append), `desk/flagged.html` | the checker is owned by another generation and is **not** edited; if the corpus is short, it is a pre-registered artifact and cannot be silently patched |
+| D6 | Integration: one build step, every gate, PR to `main`, merge, Pages confirm, record here | pending | `ed736fc3` | generated pages, `COORDINATION.md` | flagged irregularities and unverified items do not block the merge; they are published on `desk/flagged.html` |
+
+### Overlap check
+
+No open PR lists `desk/`, `data/desk/` or `tools/desk/` in its file list (checked with
+`gh pr list` + `gh pr view --json files` for each of the 12). Shared files touched by PRs #77,
+#80 and #47 (`data/flags.json`, `data/questions.json`, `data/suggestions.json`,
+`pipeline/gen_site.py`, `scripts/verified/normalize_nav.py`, `tools/build_site_all.py`) are
+edited **by addition only** — one nav entry, one build step, one ownership line, appended rows —
+so any conflict is textual and resolvable by keeping both sides.
+
+_This claim is committed and pushed before any other file in the scope is touched._
