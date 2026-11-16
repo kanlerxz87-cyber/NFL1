@@ -97,4 +97,6 @@ jobs:
           fi
       - name: Fail the job if the sweep itself failed
         if: steps.collect.outcome == 'failure'
-        run: echo "the collector exited non-zero: see the collect step" && exit 1
+        run: |
+          echo "the collector exited non-zero - see the collect step above"
+          exit 1

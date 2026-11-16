@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import re
 import sys
 import tempfile
 import unittest
@@ -298,6 +299,28 @@ class InjuryTsvReaderTest(unittest.TestCase):
         pairs = m.read_injury_tsv(text)
         self.assertEqual(len(pairs), 1, "a row with no name is skipped, not invented")
         self.assertEqual((pairs[0]["club"], pairs[0]["player"]), ("GB", "Josh Whyle"))
+
+
+class WorkflowLintTest(unittest.TestCase):
+    """A step name or run line containing ': ' must be quoted or block-scalar.
+
+    The first run of this session's workflow died on the YAML scanner, not on the code: a step
+    called `Gate: hashes, pins, ...` is read as a nested mapping. The check is textual on purpose
+    - pyyaml is not installed by every job in this repository, and a gate cannot depend on a
+    package the job it gates does not install.
+    """
+
+    PAT = re.compile(r"^(\s*-?\s*)(name|run|if)\s*:\s+(?![|>&\"])(.*)$")
+
+    def test_no_unquoted_colon_in_workflow_scalars(self):
+        bad = []
+        for f in sorted((ROOT / ".github" / "workflows").glob("*.yml")):
+            for i, line in enumerate(f.read_text(encoding="utf-8").splitlines(), 1):
+                m = self.PAT.match(line)
+                if m and ": " in m.group(3) and not m.group(3).startswith("'"):
+                    bad.append(f"{f.name}:{i}: {line.strip()[:90]}")
+        self.assertEqual(bad, [], "unquoted scalar containing ': ' breaks the workflow parse:\n"
+                         + "\n".join(bad))
 
 
 if __name__ == "__main__":
