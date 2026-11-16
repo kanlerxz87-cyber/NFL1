@@ -3753,3 +3753,11 @@ treated as crashed and their work is taken over here. No other session holds an 
 
 **Not claimed:** nothing else. Files owned by other sessions are only touched as part of the Z2
 takeover integration or through their generators, and every such change is logged below.
+
+## Session `edbb28da-nfl1` — repository audit (2026-11-15)
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| ED1 | Audit existing repository and run available verification suite without duplicating published work | done | `edbb28da` | `docs/audit-edbb28da.md`, `COORDINATION.md` | Existing site and task-board history reviewed first. Decision Room verifier PASS (11 pages, 23 tables, 312 rows). `unittest` PASS (136 run, 11 skipped due absent numpy/pandas). Pytest unavailable. No live re-fetch was done, so this is not a fresh official data verification or deployment confirmation. |
+
+**Findings:** existing project already contains the requested dashboard, executive summary, question register, suggestions review path, category pages, leaderboard gates, and source/flag registers. This session made no NFL-data claims or edits. `tests/test_strength.py` reports file-handle `ResourceWarning`s, and optional-dependency tests remain skipped; recorded in `docs/audit-edbb28da.md`. Official reference entry points are listed there; no specific live fact is claimed verified today.
