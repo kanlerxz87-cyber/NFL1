@@ -85,14 +85,14 @@
   <div class="main">
     <div class="topbar">
       <div class="crumb">NFL1 / <b>Verification &amp; Sources</b></div>
-      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">116 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">117 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
     </div>
     <main class="content" id="main">
       <div class="kicker">Assurance</div>
       <h1>Verification &amp; official sources</h1>
       <p class="lede">How every value was verified line by line, the complete official source registry with links for manual review, and the per-file data audit.</p>
       <div class="callout"><b>Verification policy.</b> Work line by line; cite an official source on every table row; leave a cell blank when the official source publishes no value; flag it; never infer or fill in a value. This page documents the procedure, the source registry and the line-by-line audit of the data layer.</div>
-<div class="cards"><div class="card"><div class="label">Official sources</div><div class="value">46</div><div class="detail">All fetched 2026-11-12</div></div><div class="card"><div class="label">Data files audited</div><div class="value">38</div><div class="detail">Row counts and blanks</div></div><div class="card"><div class="label">Table rows</div><div class="value">600+</div><div class="detail">Each with a source link</div></div><div class="card"><div class="label">Flagged items</div><div class="value">116</div><div class="detail">Needs review</div></div></div>
+<div class="cards"><div class="card"><div class="label">Official sources</div><div class="value">48</div><div class="detail">All fetched 2026-11-12</div></div><div class="card"><div class="label">Data files audited</div><div class="value">38</div><div class="detail">Row counts and blanks</div></div><div class="card"><div class="label">Table rows</div><div class="value">600+</div><div class="detail">Each with a source link</div></div><div class="card"><div class="label">Flagged items</div><div class="value">117</div><div class="detail">Needs review</div></div></div>
 <h2 id="policy">Verification procedure</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-verify-policy" aria-label="Filter tbl-verify-policy" placeholder="Filter rows…">
 <span class="count" data-count-for="tbl-verify-policy">7 rows shown</span></div>
@@ -150,7 +150,7 @@
 </tbody></table></div>
 <h2 id="sources">Official source registry</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-sources" aria-label="Filter tbl-sources" placeholder="Filter rows…">
-<span class="count" data-count-for="tbl-sources">46 rows shown</span></div>
+<span class="count" data-count-for="tbl-sources">48 rows shown</span></div>
 <div class="tablewrap"><table class="data-table" id="tbl-sources"><caption>Every official source used, what it verifies, its canonical URL note and the retrieval date. Each row links to that official page.</caption>
 <thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Publisher</th><th scope="col" class="sortable">Source type</th><th scope="col" class="sortable">What it verifies</th><th scope="col" class="sortable">Canonical / note</th><th scope="col" class="sortable">Retrieved</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
 <tr id="S01" data-verified="true">
@@ -567,6 +567,24 @@
 <td data-value="1">2026-11-16</td>
 <td><span class="src"><a href="https://www.packers.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Green Bay Packers (official club site) — Official club depth chart">S47 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
+<tr id="S48" data-verified="true">
+<td><code>S48</code></td>
+<td data-value="1">NFL1 repository (pre-registered policy artifact)</td>
+<td data-value="1">Pre-registered reward rule (policy, not an official NFL fact)</td>
+<td data-value="1" class="wide">The frozen two-stage reward rule: Stage-1 proper-score qualification (Brier skill lower bound &gt; 0, BH-adjusted p &lt; 0.05, Bonferroni 0.05/6, decided-bet sample &gt;= 200) and Stage-2 prospective CLV/ROI escrow, awarding non-monetary badges. Registration commit recorded in data/rewards/rewards.json; rewards/verify.py fails on any drift.</td>
+<td data-value="1" class="blank wide"></td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/rewards/REWARDS-RULE.md" target="_blank" rel="noopener noreferrer" title="NFL1 repository (pre-registered policy artifact) — Pre-registered reward rule (policy, not an official NFL fact)">S48 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S49" data-verified="true">
+<td><code>S49</code></td>
+<td data-value="1">NFL1 repository</td>
+<td data-value="1">Readiness-register generator</td>
+<td data-value="1" class="wide">The script that writes room/data/readiness.json (82 rows). Running it regenerates the whole file from its own row definitions, so in-place row edits made outside the script are reverted on the next regeneration.</td>
+<td data-value="1" class="blank wide"></td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/scripts/brief_07810d9f/register.py" target="_blank" rel="noopener noreferrer" title="NFL1 repository — Readiness-register generator">S49 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
 </tbody></table></div>
 <h2 id="audit">Line-by-line data audit</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-audit" aria-label="Filter tbl-audit" placeholder="Filter rows…">
@@ -738,8 +756,8 @@
 <tr id="AU-19" data-verified="true">
 <td><code>AU-19</code></td>
 <td data-value="1">data/flags.json</td>
-<td data-value="1" class="num">116</td>
-<td data-value="1">116 / 116</td>
+<td data-value="1" class="num">117</td>
+<td data-value="1">117 / 117</td>
 <td data-value="1" class="num">0</td>
 <td data-value="1" class="num">3</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
@@ -810,9 +828,9 @@
 <tr id="AU-27" data-verified="true">
 <td><code>AU-27</code></td>
 <td data-value="1">data/questions.json</td>
-<td data-value="1" class="num">30</td>
-<td data-value="1">30 / 30</td>
-<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">31</td>
+<td data-value="1">31 / 31</td>
+<td data-value="1" class="num">1</td>
 <td data-value="1" class="num">0</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
@@ -855,8 +873,8 @@
 <tr id="AU-32" data-verified="true">
 <td><code>AU-32</code></td>
 <td data-value="1">data/sources.json</td>
-<td data-value="1" class="num">46</td>
-<td data-value="1">0 / 46</td>
+<td data-value="1" class="num">48</td>
+<td data-value="1">0 / 48</td>
 <td data-value="1" class="num">0</td>
 <td data-value="1" class="num">0</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
@@ -882,8 +900,8 @@
 <tr id="AU-35" data-verified="true">
 <td><code>AU-35</code></td>
 <td data-value="1">data/suggestions.json</td>
-<td data-value="1" class="num">34</td>
-<td data-value="1">34 / 34</td>
+<td data-value="1" class="num">35</td>
+<td data-value="1">35 / 35</td>
 <td data-value="1" class="num">31</td>
 <td data-value="1" class="num">0</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>

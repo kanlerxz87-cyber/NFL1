@@ -440,5 +440,18 @@
     "status": "Awaiting review",
     "verified": true,
     "retrieved": "2026-11-16"
+  },
+  {
+    "id": "S33",
+    "area": "Models and leaderboard",
+    "title": "Re-register the reward rule walk-forward after the first Stage-1 qualification, and sync the readiness register source with its published rows",
+    "decision_impact": "The reward rule is frozen and no badge is awarded yet (any_eligible=false). Once a strategy first clears Stage 1, the rule should be re-registered walk-forward (a new registration commit) before any badge is awarded, so the bar is never moved after a result is seen. Separately, the readiness register source (register.py) and the published room/data/readiness.json have drifted apart: in-place row edits by other sessions are reverted when register.py regenerates the file (F68). Syncing them keeps the landing-page readiness panel truthful.",
+    "effort": "low",
+    "recommended_path": "Review before implementing - (a) when the first strategy clears Stage 1, open a new registration commit for any rule adjustment; (b) have the register owner fold the in-place edits into register.py and regenerate once, then keep future row updates in place or through the script consistently.",
+    "evidence": "rewards/REWARDS-RULE.md (registration 00e3cc77); data/strat/proper_score.json (any_eligible=false); room/data/readiness.json and scripts/brief_07810d9f/register.py (F68).",
+    "src": "S48",
+    "status": "proposed",
+    "verified": true,
+    "retrieved": "2026-11-16"
   }
 ]

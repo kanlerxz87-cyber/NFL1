@@ -418,5 +418,19 @@
     "src": "S39",
     "verified": true,
     "retrieved": "2026-11-16"
+  },
+  {
+    "id": "Q31",
+    "question": "Do the reward rule's frozen qualification bar and non-monetary badge structure match the brief's intent for 'rewards for top performing strategies'?",
+    "known": "A pre-registered reward rule is built and frozen at rewards/REWARDS-RULE.md (registration commit 00e3cc77). Stage 1 qualifies a strategy when its Brier skill lower bound is > 0, its BH-adjusted p-value is < 0.05 (and clears Bonferroni 0.05/6), and its decided-bet sample is >= 200; Stage 2 awards Top Single Bet / Top Parlay / Top Player Prop Combo badges on a prospective CLV/ROI escrow. Rewards are non-monetary badges. No badge is awarded yet (any_eligible=false).",
+    "unknown": "Whether non-monetary badges satisfy the brief's 'rewards for top performing strategies', and whether the BSS-lower-bound>0 / BH<0.05 / n>=200 bar is the right qualification threshold, or should be tightened/loosened before the first strategy is graded against it.",
+    "answer": " ",
+    "limitation": "A policy question; no official source answers it. The rule is a pre-registered proposal, frozen before grading, not an official NFL fact.",
+    "why": "The reward rule decides which strategies earn a badge, so its bar and badge structure define what 'top performing' means for the whole competition. Changing it after a strategy is graded would be result-chasing.",
+    "discovery": "Re-read the brief's competition wording against rewards/REWARDS-RULE.md, decide whether the bar and the non-monetary badges are acceptable, and if a change is wanted, register it as a new rule (new registration commit) before any strategy is graded against it.",
+    "flag": "",
+    "src": "S48",
+    "verified": true,
+    "retrieved": "2026-11-16"
   }
 ]
