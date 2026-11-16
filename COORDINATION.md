@@ -4031,3 +4031,4 @@ Two things the merge itself produced, both kept:
 2. The rebase onto `main` dropped this session's board blocks once (a union resolution that deduplicated by line content ate 27 blank/table lines). Rebuilt as a true pure append and asserted `base board preserved byte-for-byte`.
 
 `reserve register gate: 0 failure(s), 2 note(s), 24 pinned page(s)`; `python3 -m unittest discover -s tests -q` → **229 tests OK**.
+- **cc5a9cdd E7 record (2026-11-16):** PR **#99** → https://github.com/kanlerxz87-cyber/NFL1/pull/99 (branch `arena/cc5a9cdd-nfl1`, head `4ee6c37` + record commit). Merging with `gh pr merge 99 --merge` after this record; merge result and Pages deploy confirmation to be appended post-merge in the follow-up record commit.
