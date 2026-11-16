@@ -3820,3 +3820,75 @@ additive.
 `room/**`, `lab/**`, `research/**`, `strength/**`, `shadow/**`, `strat/**`, `prereg/**`,
 `docs/**`, `verified-lab/**`, `referee/**`, `dashboard/**`, `web/**`, `.github/workflows/**`.
 If a finding needs a change in one of those, it is logged here as a request instead of edited.
+
+---
+
+## Completion record — session `a35ddf45-nfl1` (2026-11-16, UTC)
+
+**L0–L8: all delivered.** Statuses in the claim table above are final; the PR/merge/Pages record is
+appended at the end of this block once the deploy is confirmed.
+
+### What was added (scope exactly as claimed)
+
+| Deliverable | Evidence |
+|---|---|
+| **Independent official re-verification** | `lab2/data/official_standings_2026-11-16.json` (32 clubs, transcribed from <https://www.nfl.com/standings/league/2026/reg>) and `lab2/data/official_injuries_w10_2026-11-16.json` (347 rows, 28 clubs, from <https://www.nfl.com/injuries/league/2026/reg10>, 8 chunks). The injury transcription was diffed against the committed 15 Nov capture on club, player, position, injury, practice status and game status: **0 differing rows, 0 missing keys, 0 extra keys**. |
+| **Week-10 results, verified and recorded** | `lab2/data/official_results_w10_2026-11-16.json` — 13 finals from <https://www.nfl.com/schedules/2026/REG11> (the current-week page, which printed Week-10 results), each with its game-centre URL. The Monday game (LAC @ BAL) was unplayed and is absent, not guessed. |
+| **The arithmetic that proves them** | `data/standings.csv` (correct as of 2026-11-12) **plus** those 13 finals reproduces the live official table for **32 of 32 clubs** on W, L, PF and PA. Two independent official pages, one arithmetic path. Rendered on `lab2/results.html`. |
+| **Market book** | 13 fixtures with side → total → moneyline in that fixed order; fair line, market line and residual as separate columns; residuals computed from the stored numbers, never typed. 12 of 13 have a market spread and total; **0 of 13 have a market moneyline**, printed blank. |
+| **Price policy** | `lab2/prices.html`: the four options with what each buys and costs. Evidence: 7,130 of 7,239 games carry a closing line, **0 carry an opening line**, 5,228 carry a moneyline, **0 games are officially priced**. |
+| **Signal vs staking** | `lab2/strategies.html`: 24 rules across both boards, win rate vs a coin flip (interval), win rate vs the break-even rate its own price implies, the board's own p recomputed, and BH q across the merged family of 24 tests. Result: 3 of 24 signal intervals above zero, **0 of 24 survive** (best q = 0.2615). |
+| **Correlation register** | `lab2/correlations.html`: four coefficients whose inputs are both official standings numbers, n = 32 clubs with Fisher-z intervals; feed-sourced rows blanked below the 25-observation floor. |
+| **Readiness, questions, suggestions, flags** | 30 readiness rows (10 done / 11 partial / 4 blocked / 5 not started), 10 decision-gating questions, 10 ranked suggestions, **15 findings** on `lab2/flagged.html`, each with the official link that settles or explains it. |
+| **Gate** | `lab2/verify.py`: every table row sourced (or explicitly marked `n/a · no public source`), no raw Python values, every local href resolves, 13 pages all reachable from `lab2/index.html`, residuals and standings arithmetic recomputed, q-monotonicity checked, citations restricted to the league site, club sites, the mirrored feed and this repository, and a rebuild must be byte-identical. |
+
+### Findings this session raised (published on `lab2/flagged.html`)
+
+G01 the results feed is 13 games behind (1 of 14 Week-10 finals) · G02 nothing scores a prediction
+against a result · G03 twelve strategy IDs, twelve different rule pairs across the two boards ·
+G04 ROI figures assume -110 · G05 26 of 32 clubs out of date in `data/standings.csv` · G06 no
+official price exists · G07 the published availability model describes week 6 · G08 no
+point-in-time store · G09 most depth names cannot be checked against any official source ·
+G10 the money ranking puts a rule first whose q is 0.2615 · G11 a 52% edge needs ~4,904 bets
+(~377 weeks) · G12 two club-code vocabularies · **G13 three published p-values do not reproduce
+from their own inputs** (S01 0.7840 vs 0.8201; S11 0.7949 vs 0.7600; S06 0.6147 vs 0.6600) ·
+G14 the model's own blend test gives it a **negative** weight against the market (−0.328, MAE
+9.507 vs 9.449) · G15 323 prop lines published with no market comparator.
+
+### Bugs found and fixed in this session's own code (recorded, not hidden)
+
+1. **A joined club code was dropped on both sides of the standings comparison**, which made the
+   first pass report "missing AZ/LA" and mis-join them. Fixed with one canonical mapping
+   (`AZ→ARI`, `LA→LAR`) used on both sides; the row keeps the code its source printed.
+2. **The first p-value implementation tested the wrong null.** It reported p = 0.0266 for a rule
+   whose published p was 0.1985. The board's test is against the break-even rate, not a coin flip.
+   Both nulls are now published, side by side, because they answer different questions.
+3. **Benjamini-Hochberg was applied per board and mapped back through pre-sort indices**, producing
+   a non-monotone q column. The verify gate caught it (it is an explicit check); q is now computed
+   once over the merged 24-test family. Every q on the site is post-fix.
+
+### Gates run (all green on the final tree)
+
+`tools/build_site_all.py` + `--check` · `tools/verify.py` (2,106 sourced rows) ·
+`tools/verify_combined.py` · `scripts/verified/check_site.py` · `tools/check_generators.py` ·
+`tools/check_reproducible.py` · `tools/check_committed_site.py` · `tools/check_reachability.py`
+(**206 published pages, 206 reachable, 0 problems**) · `room/verify.py` · `prereg/verify.py` ·
+`tools/check_freshness.py` · `lab2/verify.py` · `tools/check_scraper_pins.py` ·
+`tools/check_scrape_drift.py` · `python3 -m pytest tests/ -q`.
+
+### Nav and shared-tool edits (additive, logged as claimed)
+
+`pipeline/gen_site.py` NAV and `scripts/verified/normalize_nav.py` CANON each gained **one** entry,
+`lab2/index.html` "Origination Desk". `tools/build_site_all.py` gained **two** steps (data build, page
+render) before the snapshot ledger, and `lab2/` was added to the `--check` path list. Nothing else
+owned by another session was edited.
+
+### Honest limits of this session
+
+* The 13 verified finals were **not** merged into `data/s9cb/games.csv` (owned by the s9cb
+  generator). That is logged as a change request below, not performed.
+* No strategy was promoted; no price policy was decided; the recommendation is a decision record,
+  not a decision.
+* Two of the four official pages read this session (the injury report and the current-week schedule)
+  serve a **page that will change**: the capture is dated and hashed in `lab2/data/`, but the URLs
+  will not show the same content next week.
