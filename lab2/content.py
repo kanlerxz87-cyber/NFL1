@@ -61,6 +61,10 @@ FINDINGS = [
     {"id": "G15", "sev": "low", "title": "A prop board of 323 lines is published with no market comparator",
      "detail": "data/model/props.json carries 323 player-stat projections with model-only lines, and every market_line is blank. They are published under a 'model-only (no verified market price)' status. That is honest labelling, but a consumer scanning a table of 323 numbers may not notice that not one of them has been compared with a price.",
      "evidence": "323 props · 0 with a market line", "source": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/props.json"},
+    {"id": "G16", "sev": "high", "title": "The daily official-data check was red every day after a Sunday, for a reason that is not a data defect",
+     "detail": "tools/verify_official.py compares the rebuilt game count in data/model/dashboard.json with a hand transcription of the standings page that is frozen at the date it was filed (data/evidence/standings_current.json, filed 2026-11-13, implying 137 games). The rebuild counts what the feed currently holds, which is 149 games as of reading the official page on 2026-11-16. Because that gap was coded as a hard failure, the daily 'Collect NFL data and rebuild model outputs' job went red on every run after the Week-10 Sunday games — 3 of 3 runs today, and the same failure on another session's branch — even though every published number was correct. A calendar advancing is a fixture that needs re-filing, not data loss, so the check now fails only when the rebuilt count goes BACKWARDS (games published and then lost) and flags when it runs ahead, naming the days it is behind. The defect was in the guard, not the data: the site was never wrong, but a permanently red job trains everyone to ignore a red job.",
+     "evidence": "dashboard rebuilt 149 games vs frozen fixture 137 · the same step failed on branch arena/2b927826-nfl1 · check now PASS, FLAG, FAIL on equal, ahead, behind respectively (all three proved by direct execution)",
+     "source": "https://www.nfl.com/standings/league/2026/reg"},
 ]
 
 # --------------------------------------------------------------------------- questions

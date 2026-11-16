@@ -693,7 +693,9 @@ def flagged():
                            "figure is affected today."))
     body.append('</section>')
     return page("flagged.html", "Flagged for Review", "".join(body),
-                "Twelve findings, each with the evidence and the source that settles or explains it.")
+                f"{len(content.FINDINGS)} findings, each with the evidence and the source that settles or "
+                "explains it. Nothing here is fixed by assertion: where a number was wrong the row says what it "
+                "was, what it is now, and how the correction was proved.")
 
 
 def method():

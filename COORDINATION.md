@@ -3839,7 +3839,8 @@ appended at the end of this block once the deploy is confirmed.
 | **Price policy** | `lab2/prices.html`: the four options with what each buys and costs. Evidence: 7,130 of 7,239 games carry a closing line, **0 carry an opening line**, 5,228 carry a moneyline, **0 games are officially priced**. |
 | **Signal vs staking** | `lab2/strategies.html`: 24 rules across both boards, win rate vs a coin flip (interval), win rate vs the break-even rate its own price implies, the board's own p recomputed, and BH q across the merged family of 24 tests. Result: 3 of 24 signal intervals above zero, **0 of 24 survive** (best q = 0.2615). |
 | **Correlation register** | `lab2/correlations.html`: four coefficients whose inputs are both official standings numbers, n = 32 clubs with Fisher-z intervals; feed-sourced rows blanked below the 25-observation floor. |
-| **Readiness, questions, suggestions, flags** | 30 readiness rows (10 done / 11 partial / 4 blocked / 5 not started), 10 decision-gating questions, 10 ranked suggestions, **15 findings** on `lab2/flagged.html`, each with the official link that settles or explains it. |
+| **Readiness, questions, suggestions, flags** | 30 readiness rows (10 done / 11 partial / 4 blocked / 5 not started), 10 decision-gating questions, 10 ranked suggestions, **16 findings** on `lab2/flagged.html`, each with the official link that settles or explains it. |
+| **A guard fixed, not a number** | `tools/verify_official.py` check E compared the rebuilt game count against a frozen hand transcription as if any difference were data loss. It is now three-way: equal PASS, rebuilt-ahead FLAG (naming the games and the fixture date), rebuilt-behind FAIL. Proven by direct execution of all three branches. |
 | **Gate** | `lab2/verify.py`: every table row sourced (or explicitly marked `n/a · no public source`), no raw Python values, every local href resolves, 13 pages all reachable from `lab2/index.html`, residuals and standings arithmetic recomputed, q-monotonicity checked, citations restricted to the league site, club sites, the mirrored feed and this repository, and a rebuild must be byte-identical. |
 
 ### Findings this session raised (published on `lab2/flagged.html`)
@@ -3853,7 +3854,10 @@ G10 the money ranking puts a rule first whose q is 0.2615 · G11 a 52% edge need
 (~377 weeks) · G12 two club-code vocabularies · **G13 three published p-values do not reproduce
 from their own inputs** (S01 0.7840 vs 0.8201; S11 0.7949 vs 0.7600; S06 0.6147 vs 0.6600) ·
 G14 the model's own blend test gives it a **negative** weight against the market (−0.328, MAE
-9.507 vs 9.449) · G15 323 prop lines published with no market comparator.
+9.507 vs 9.449) · G15 323 prop lines published with no market comparator · **G16 the daily
+official-data check was red every day after a Sunday for a reason that was not a data defect**
+(a frozen standings fixture vs a rolling rebuild was coded as a hard failure; the guard is fixed,
+not the data).
 
 ### Bugs found and fixed in this session's own code (recorded, not hidden)
 
@@ -3866,6 +3870,21 @@ G14 the model's own blend test gives it a **negative** weight against the market
 3. **Benjamini-Hochberg was applied per board and mapped back through pre-sort indices**, producing
    a non-monotone q column. The verify gate caught it (it is an explicit check); q is now computed
    once over the merged 24-test family. Every q on the site is post-fix.
+
+### Cross-scope change requests (logged, not performed)
+
+1. **`data/s9cb/games.csv` week 10 / week 11 results.** The 13 verified finals in
+   `lab2/data/official_results_w10_2026-11-16.json` are not merged into the s9cb corpus; that
+   generator belongs to another session. Whoever owns it should import them with the game-centre
+   URL as the source, and the corpus should then score 14 of 14 Week-10 games instead of 1 of 14.
+2. **`data/evidence/standings_current.json` is stale by 12 games** (filed 2026-11-13, implies 137
+   played; the official page read 2026-11-16 implies 149). It is a hand transcription outside this
+   session's scope. Until it is re-filed, `tools/verify_official.py` will keep emitting a FLAG on
+   the game-count check — by design, because the gap is real.
+3. **`pipeline/build_all.py` cannot run in the Arena sandbox** (`stage A league snapshot: games.csv`
+   fails; egress to the release assets is tool-mediated here). CI runs it with network access, so
+   this is a sandbox limitation, not a repository defect — recorded so the next session does not
+   mistake it for one.
 
 ### Gates run (all green on the final tree)
 
