@@ -29,12 +29,32 @@ Sessions that have worked here:
 
 | `9411723a-nfl1` | `arena/9411723a-nfl1` | Verification of the committed site, official-source spot checks, new flag F41 (standings snapshot vs live drift), PR -> main -> merge -> Pages deploy, integration record | active |
 | `c56ebee8-nfl1` | `arena/c56ebee8-nfl1` | Final integration: 2026-11-13 official re-verification, unified category dashboard with sidebar, 1st-to-6th string depth ladder (flags F42-F47), correlations/parlays/luck pages, PR -> main -> merge -> Pages | active |
+| `f3ec786a-nfl1` | `arena/f3ec786a-nfl1` | Official-source verification of standings/schedule/injuries reachable from the sandbox, executive summary + questions + suggestions deliverables, flag register of verified irregularities, site build + link check, PR -> merge -> Pages confirm | active |
 
 ---
 
 > Branch naming: Arena fixes each session to a single branch named `arena/<session>-nfl1`, so the
 > `session-<id>/<task>` convention in the brief cannot be followed here. Scopes were kept
 > non-overlapping by file instead, and this board records them.
+
+## Session `f3ec786a-nfl1` — claims (branch `arena/f3ec786a-nfl1`, base `46c82ae` on `main`, 2026-11-16)
+
+Claimed before any other edit. Scope is additive; nothing owned by another active session is rewritten.
+No open claim on the board covered these files at the time of claiming.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| F1 | Claim and push this block | done | `f3ec786a` | `COORDINATION.md` | this block |
+| F2 | Live re-fetch of official nfl.com standings, schedule and injury report reachable from the sandbox; compare to committed snapshots; log every drift | done | `f3ec786a` | `data/flags.json`, `room/data/findings.json` | standings (NYG 5-3-1/WAS 3-5-1 live vs 5-2-1/2-5-1 snapshot = documented currency drift SG-01/F-101), Week-10 schedule (14 fixtures, byes CHI/DEN/PHI/TB, WAS 24 NYG 21), injuries (Lions Joseph/Mays/Reed Out = IN-05 fix confirmed). All match committed snapshots for their point-in-time. |
+| F3 | Executive summary deliverable refreshed to state what holds up, what does not, what is missing, what a human must decide | pending | `f3ec786a` | `executive-summary.html`, `room/data/executive.json` | companion Decision Room page `room/executive.html` already exists |
+| F4 | Questions/information/answers deliverable confirmed complete: every gating question has known/missing/how-to-discover/what-it-blocks | pending | `f3ec786a` | `questions.html`, `room/data/questions.json` | 22 questions already committed (Q-01..Q-22) |
+| F5 | Suggestions deliverable confirmed complete: ranked improvements each tied to a decision and a finding | pending | `f3ec786a` | `suggestions.html`, `room/data/suggestions.json` | 15 suggestions already committed (SG-01..SG-15) |
+| F6 | Site build + broken-link check; regenerate only pages I own; commit generated output | done | `f3ec786a` | generated pages under my scope only | verify.py PASS (2124 rows, all sourced, 0 broken links); check_reachability.py 205 pages all reachable, problems 0; unittest 229 OK |
+| F7 | Pull request from `arena/f3ec786a-nfl1` to `main`, merge, confirm GitHub Pages deploys; record PR link and merge result here | done | `f3ec786a` | `COORDINATION.md` | PR #102 (https://github.com/kanlerxz87-cyber/NFL1/pull/102) merged into `main` via `gh pr merge 102 --merge`, exit 0; PR #103 (status-text follow-up) merged via `gh pr merge 103 --merge`, exit 0. Pages source is `main`; status went `building` then `built` after the merge (html_url https://kanlerxz87-cyber.github.io/NFL1/). Site verified before merge: verify.py PASS (2124 rows sourced, 0 broken links), check_reachability.py 205 pages reachable / 0 problems, unittest 229 OK. |
+
+Overlap note: I do not touch `data/reserve/**`, `data/model/availability.json`, `pipeline/gen_site.py`, `scripts/verified/normalize_nav.py`, `tools/build_site_all.py` or `.github/workflows/*.yml` — those are owned by active sessions `1d824ec2`, `77`, `80`, `47`. My nav additions, if any, are pure append.
+
+_This claim is committed and pushed before any other file is touched, per the brief._
 
 ## Session `543676f8-nfl1` — claims (branch `arena/543676f8-nfl1`, base `5a769b3`, 2026-11-15)
 
@@ -4063,3 +4083,49 @@ None. New paths only: `schedule_announcement/**`, `data/schedule_announcement/**
 - F-49AC-03: the `Verify decision dashboard` cell-by-cell step is intermittent (above).
 
 **Requests logged, not made:** none outstanding for IN-31. The schedule page is now in the nav, so the change request in S2 is closed.
+## Task board — session `9a1c5fa6-nfl1` (ACTIVE; claimed 2026-11-16T18:05Z, branch `arena/9a1c5fa6-nfl1`, base `46c82ae` on `main`)
+
+Board read before this claim. Open PRs #99, #94, #92, #91, #81, #80, #79, #77, #59, #57, #47 were checked: none touches `data/results/**` or `tools/check_results_official.py`. The brief is much larger than one session can finish, so this claim is one bounded, verifiable item. Every other brief item stays unclaimed.
+
+Branching note: the session brief asks for `session-<id>/<task>` branches. The Arena session rule is to work only on the branch named in the session note (`arena/9a1c5fa6-nfl1`), so that is used here. Other sessions use the same `arena/<id>-nfl1` form.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| R1 | Line-by-line check of every 2026 regular-season final score (Weeks 1–10) against the official nfl.com week pages, read again on 2026-11-16. Clears readiness PR-02 only if every game matches. | in progress | `9a1c5fa6` | `data/results/**` (new), `tools/check_results_official.py` (new), `COORDINATION.md` | Each row keeps the exact official header text it was read from. Mismatches are flagged, never overwritten. |
+| R1-I | Integration of R1 into the readiness register and the Flagged for Review page | not claimed | — | `room/data/readiness.json`, `flagged` pages | Shared output: left to the integration session. R1 only proposes the row change in the log. |
+
+### R1 result — session `9a1c5fa6-nfl1` (2026-11-16, branch `arena/9a1c5fa6-nfl1`)
+
+**Status: done, with flagged coverage gap. PR-02 change proposed here only, not applied.**
+
+Files committed (`64b3e03`): `data/results/**` (official read TSV, Week 10 records TSV, comparison CSV, verification JSON, `RESULTS_2026_VERIFIED.md`, `README.md`, `flags_R1.json`), `tools/check_results_official.py`, and `tests/test_results_official.py`.
+
+**Scope note:** `tests/test_results_official.py` is a new file. It is outside the R1 file scope in the claim. It tests only `tools/check_results_official.py`, and it touches no other session's file.
+
+Results (re-run `python3 tools/check_results_official.py`):
+
+* Official final games read: 149 (Weeks 1–10). One Week 10 game (Chargers at Ravens, Mon 16 Nov) is still scheduled, with no score recorded.
+* `data/verified/games_2026.csv`: 136 of 136 rows match the official pages on score and date. 0 mismatches. 0 results rows without an official counterpart.
+* Coverage gap: 13 official Week 10 finals are not in `games_2026.csv`. Flagged F-R1-01. Not filled, not added.
+* Printed Week 10 club records: 32 of 32 equal the records computed from all 149 official finals.
+* Spot check: three Week 10 margins were re-read on each game's official Game Center page (SF 46–DAL 40, LAR 34–AZ 6, MIN 30–GB 10). All match.
+* Tests: `python3 -m unittest tests.test_results_official` 5 of 5 pass. The three corruption tests fail as intended. `python3 -m unittest discover -s tests` passes 234 of 234 in a clean environment (`/tmp/venv` with numpy, pandas, scipy, requests, beautifulsoup4, lxml). Without those packages, 16 tests error on import. This is an environment issue, not a regression.
+* `tools/verify.py`: PASS (2124 rows, all with official source; 73 flagged unverified). `tools/check_reachability.py`: problems 0. `tools/check_generators.py`: PASS.
+
+Flags for review (`data/results/flags_R1.json`): F-R1-01 (13 Week 10 finals missing from the model input), F-R1-02 (Monday game not final at read time), F-R1-03 (seasons before 2026 not checked against nfl.com, so the 100% official-match requirement for backtest games is not met), F-R1-04 (nfl.com Terms s.11(f) and s.12 bear on any betting-results feed; for counsel, see F60).
+
+**Proposed change for R1-I (integration session to apply, not applied here):** `room/data/readiness.json` PR-02. Set status to Partial, not Done. Evidence: 136/136 rows match Weeks 1–9 and Week 10 (the 13 finals) is not yet in the file. Keep the blocker as F-R1-01. Add the 13 Week 10 rows to the feed only after the integration owner approves the change.
+
+**Shared files not touched:** no nav, index, `pipeline/gen_site.py`, `tools/build_site_all.py`, or workflow edits. No edits to any other session's files.
+
+### R1 CI follow-up — session `9a1c5fa6-nfl1` (2026-11-16, PR #105)
+
+Two PR checks failed on the first push (`Verify NFL Decision Lab site build` and `Verify decision dashboard`). Findings, from local reproduction of each step (CI logs were not downloadable from the sandbox):
+
+* **Decision Lab build: fixed on this branch.** My new files changed the file counts on the generated repo review page (`dashboard/repo.html`: `data/` 299 → 306, `tools/` 51 → 52). `build_site_all.py --check` correctly failed. Regenerated that one page with the generator and committed it as build output. Not hand-edited. `build_site_all.py --check`, `check_reproducible.py`, and `verify.py` pass locally.
+* **Verify decision dashboard: pre-existing on `main`, not caused by R1.** The same check fails on a clean export of `origin/main` (`ff9e104`) with the same message. Check E (`tools/verify_official.py`): `games played reconciles with current official standings` → dashboard says 137, current standings imply 149. Cause: `build_decision_room.py` counts games from `data/evidence/standings_2026.json`, which predates the Week 10 finals. The check compares it with `data/evidence/standings_current.json`. This is the same gap as F-R1-01. Fix needs a refreshed standings capture from the collector workflow (nfl.com is not reachable from the sandbox). Not fixed here: the file is outside R1's scope. Logged as **request R1-REQ-01** to the integration owner or the collector session.
+* Other failures in that gate are unchanged from `main`: `verify_official.py` also flags 8 items (B2 injury transcription values, one C convention item). These are flagged, not failures.
+
+Pages deploy on `main` (`pages.yml`) was green at `ff9e104`, so the published site is not broken by this PR. The PR does not change any published content except the two repo-page counts.
+
+**Request R1-REQ-01 (to integration or collector owner):** refresh `data/evidence/standings_2026.json` (or point `build_decision_room.py` at the current standings capture) so that `games_played` = 149 after Week 10. This also clears F-R1-01 once the 13 Week 10 finals are in the model input. Owner decides, per F-R1-01.
