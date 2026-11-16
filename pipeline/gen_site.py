@@ -24,6 +24,10 @@ DATA = os.path.join(ROOT, "data", "model")
 NAV = [
     ("index.html", "Overview"),
     ("pages/executive.html", "Executive Summary"),
+    # Session ce097fea-nfl1: the Decision Console is its own sub-site under console/. The
+    # entry lives here rather than as a hand-edit on index.html so that a regeneration keeps
+    # the pages reachable — tools/check_reachability.py treats an unlinked page as a failure.
+    ("console/index.html", "Decision Console"),
     ("web/dashboard.html", "Decision Dashboard"),
     ("./dashboard.html", "Governance Registers"),
     ("pages/lines.html", "My Lines"),

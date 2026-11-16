@@ -13,6 +13,12 @@ ROOT = Path(__file__).resolve().parents[2]
 CANON = [
     ("index.html", "Overview"),
     ("executive.html", "Executive Summary"),
+    # Session ce097fea-nfl1: the Decision Console is its own sub-site under console/.
+    # It is added here (the canonical list) as well as in pipeline/gen_site.py, because the
+    # two nav lists are kept byte-identical: this script rewrites <nav> after the landing
+    # page is generated, so an entry present in only one of the two is silently dropped and
+    # tools/check_reachability.py then fails the build on an unreachable page.
+    ("console/index.html", "Decision Console"),
     ("web/dashboard.html", "Decision Dashboard"),
     ("./dashboard.html", "Governance Registers"),
     ("lines.html", "My Lines"),
