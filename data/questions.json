@@ -390,5 +390,33 @@
     "src": "S24",
     "verified": true,
     "retrieved": "2026-11-12"
+  },
+  {
+    "id": "Q29",
+    "question": "Should the transactions sweep capture whole-season months from the start, knowing the source caps a month at 25 printed rows?",
+    "known": "The cap is verified (F66). The union-of-reads design recovers a running month but not a closed one; the sweep runs hourly and writes append-only captures under data/reserve/.",
+    "unknown": "Whether the leaderboard, ablations and any season-long turnover feature need complete months, or whether current-week and running-month coverage is enough for pricing.",
+    "answer": " ",
+    "limitation": "No official page prints the missing rows, so this cannot be settled by fetching harder; it needs a different official publication or a decision to scope the feature to a floor.",
+    "why": "A count published as a season total that is really a capped floor is the kind of error the flag page exists for; deciding the scope decides whether F66 blocks anything.",
+    "discovery": "Read reserve/index.html (coverage table) and flag F66, then choose: scope turnover features to the running month, or source whole months from an official publication.",
+    "flag": "F66",
+    "src": "S40",
+    "verified": true,
+    "retrieved": "2026-11-16"
+  },
+  {
+    "id": "Q30",
+    "question": "Which artifact is the availability input for the injury-surprise signal: the official weekly capture, or the mirrored-feed file that calls itself current?",
+    "known": "Both exist. data/model/official_injuries.json is the official week-10 capture (347 rows, 28 clubs, player_url per row). data/model/availability.json says week 6, warns it fell back to a mirrored feed, and lists four clubs without a report that the capture does have (F63).",
+    "unknown": "Whether the pipeline that builds availability should be repointed at the capture, or kept as a feed view with its week label corrected everywhere it is quoted.",
+    "answer": " ",
+    "limitation": "A repository-ownership question; no official source answers it.",
+    "why": "The surprise signal, the ablation and the per-team unavailability count all read a file whose week they disagree about, so the same injury can be counted twice or zero times.",
+    "discovery": "Compare data/model/availability.json meta with data/model/official_injuries.json, then record the choice here and in the readiness row for IN-26.",
+    "flag": "F63",
+    "src": "S39",
+    "verified": true,
+    "retrieved": "2026-11-16"
   }
 ]

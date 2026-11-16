@@ -6,11 +6,11 @@
   "count": 82,
   "by_status": {
    "Blocked": 8,
-   "Partial": 40,
+   "Partial": 42,
    "Not verified": 3,
-   "Done": 16,
+   "Done": 17,
    "Not met": 1,
-   "Not started": 13,
+   "Not started": 10,
    "Rejected (brief)": 1
   },
   "legend": {
@@ -23,7 +23,8 @@
    "Rejected (brief)": "the brief rejects it; the note states whether the repo complies"
   },
   "checked_note": "'re-read 2026-11-15' = the source page or file was read again in this session; 'repo artifact, not re-read' = the status rests on the file named in evidence.",
-  "source_note": "Each row links the official page it depends on, or the repo file that holds the evidence (internal, not official)."
+  "source_note": "Each row links the official page it depends on, or the repo file that holds the evidence (internal, not official).",
+  "updated": "2026-11-16: rows IN-20, IN-22, IN-26, IN-27 updated by session 1d824ec2-nfl1 from the CI capture of the official transactions and reserve-list register; no other row touched"
  },
  "rows": [
   {
@@ -690,16 +691,17 @@
    "id": "IN-20",
    "group": "Injuries and depth",
    "requirement": "Roster turnover as a first-class data event (releases, signings, IR moves)",
-   "status": "Not started",
-   "checked": "repo artifact, not re-read",
-   "evidence": "No roster-event table exists.",
-   "blocked_by": "No event register.",
-   "clears_when": "Depth rows versioned against the last official roster event.",
-   "next_step": "Build the roster-event register.",
+   "status": "Partial",
+   "checked": "gates run on the CI capture of 2026-11-16T15:08:04Z",
+   "evidence": "A dated roster-event register exists and is the union of every official read: 448 rows across 6 categories (other 30, reserve-list 100, signings 100, terminations 74, trades 44, waivers 100) and 32 club codes, each row carrying its printed date, the two clubs, the transaction text and an nfl.com link. It is captured by pipeline/collect_transactions.py in GitHub Actions (.github/workflows/transactions-sweep.yml, hourly) into data/reserve/captures/, hashed, replayed and gated by tools/check_reserve_register.py. Depth rows are now versioned against the last official roster event by tools/check_depth_staleness_1d824ec2.py: 29 findings across 12 clubs (CAR, CLE, DAL, GB, HOU, IND, LA, NE, NO, SEA, SF, TEN). The source prints at most 25 rows per category-month page, so 15 of 24 pages sit at that cap and 15 of them are incomplete for a month that has already closed; those counts are floors, not totals, and the published page says so.",
+   "blocked_by": "turnover before 2026-08 is not in the captured window, and closed months cannot be back-filled from the printed page (cap above)",
+   "clears_when": "every month of the season is captured from its first day, so no page sits at the 25-row cap with an oldest row later than the 1st — then the event table is a total rather than a floor",
+   "next_step": "run the sweep from the first day of each month (already live) and add an official pre-season source for months that have closed",
    "src": {
     "t": "depth_ladder.json",
     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/depth_ladder.json"
-   }
+   },
+   "updated": "2026-11-16 by session 1d824ec2-nfl1 (transactions/reserve register)"
   },
   {
    "id": "IN-21",
@@ -720,16 +722,17 @@
    "id": "IN-22",
    "group": "Injuries and depth",
    "requirement": "Flag stale depth rows against the official transactions log",
-   "status": "Not started",
-   "checked": "re-read 2026-11-15",
-   "evidence": "No staleness check exists. Baltimore's chart read 2026-11-15 lists Brissett, Fagnano and Slovis at QB, not Jackson or Huntley. The QB-change file records Jackson on injured reserve.",
-   "blocked_by": "Check not built.",
-   "clears_when": "Zero stale rows at each build.",
-   "next_step": "Build the check against the transactions log.",
+   "status": "Partial",
+   "checked": "gates run on the CI capture of 2026-11-16T15:08:04Z",
+   "evidence": "The check exists and runs in CI: tools/check_depth_staleness_1d824ec2.py compares every player name read out of the depth artifacts (depth register (official club pages)=236, depth_chart.json (repo chart, s1-s4 columns)=173, model availability (pipeline)=0, week 10 injury report (repo copy)=254) with the dated register (448 rows), and separates a row that contradicts a claim of being current (12) from a row in a dated snapshot that is merely superseded (17) — the two fail differently and are not pooled into one count. Written to data/reserve/depth_staleness.json and published on reserve/index.html. It does not infer a depth rank from anything: it only reports an official move that the artifact has not absorbed.",
+   "blocked_by": "12 depth rows still contradict a dated official move (the number above)",
+   "clears_when": "zero findings of kind `current-roster-claim` at each build (now 12)",
+   "next_step": "hand the 12 findings to the depth-chart owners as refresh work; the gate reports them, it does not edit another owner's artifact",
    "src": {
     "t": "Baltimore depth chart",
     "u": "https://www.baltimoreravens.com/team/depth-chart"
-   }
+   },
+   "updated": "2026-11-16 by session 1d824ec2-nfl1 (transactions/reserve register)"
   },
   {
    "id": "IN-23",
@@ -781,30 +784,32 @@
    "group": "Injuries and depth",
    "requirement": "Run the 32-team roster and IR sweep before any team-level model is trusted",
    "status": "Partial",
-   "checked": "repo artifact, not re-read",
-   "evidence": "31 club charts are read. Houston is blocked (IN-08). The reserve list is not captured.",
-   "blocked_by": "IN-08 and the reserve list (IN-27).",
-   "clears_when": "32 of 32 club charts and the reserve list captured.",
-   "next_step": "Clear IN-08 and IN-27.",
+   "checked": "gates run on the CI capture of 2026-11-16T15:08:04Z",
+   "evidence": "The reserve list is captured: 24 official pages (6 categories x 4 months), 448 rows, 100 players on a reserve designation still open at the last read, 83 of them named on a reserve list and on no Week-10 injury report row (347 rows) — which is the whole point: not listed does not mean available. 31 of 32 club depth charts are read; Houston is blocked by IN-08. model availability names 0 players to the staleness check, so a team-level model built on it cannot name anyone either.",
+   "blocked_by": "IN-08 (Houston club chart) and the 25-row printed cap on closed months",
+   "clears_when": "32 of 32 club charts read and every category-month page captured inside the month it belongs to (now 24 of 24 capped at the source)",
+   "next_step": "clear IN-08; the sweep already covers the reserve list",
    "src": {
     "t": "depth_ladder.json",
     "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/depth_ladder.json"
-   }
+   },
+   "updated": "2026-11-16 by session 1d824ec2-nfl1 (transactions/reserve register)"
   },
   {
    "id": "IN-27",
    "group": "Injuries and depth",
    "requirement": "Capture the reserve list so 'not listed' never means 'available'",
-   "status": "Not started",
-   "checked": "repo artifact, not re-read",
-   "evidence": "No reserve-list capture exists. The nfl.com injury page carries news items (for example, Lamar Jackson placed on IR, 5 Nov); the reserve list itself is not captured.",
-   "blocked_by": "Not built.",
-   "clears_when": "Reserve list captured with a date.",
-   "next_step": "Capture the reserve list.",
+   "status": "Done",
+   "checked": "re-read of the live official page and the CI capture of 2026-11-16T15:08:04Z",
+   "evidence": "The reserve list is captured with a date, captured by pipeline/collect_transactions.py in GitHub Actions (.github/workflows/transactions-sweep.yml, hourly) into data/reserve/captures/, hashed, replayed and gated by tools/check_reserve_register.py. Every derived row carries the date the league printed plus the UTC time of the read; data/reserve/heartbeat.jsonl holds one line per sweep including no-change sweeps, and manifest.json retains each page's raw and canonical hashes, so a re-derivation either reproduces the table or fails. Per club the count is report + reserve, published on reserve/index.html (e.g. Miami: 11 report rows + 3 on a reserve list = 14 unavailable). The page states the limit rather than hiding it: 15 page(s) sit at the publisher's 25-row cap.",
+   "blocked_by": "None.",
+   "clears_when": "met: 100 open reserve designations captured with dates and linked to the official page, gated on every build",
+   "next_step": "keep the sweep running; widen the captured months as the season advances and hand the 12 staleness findings to the depth owners",
    "src": {
     "t": "nfl.com injury page (news items)",
     "u": "https://www.nfl.com/injuries/"
-   }
+   },
+   "updated": "2026-11-16 by session 1d824ec2-nfl1 (transactions/reserve register)"
   },
   {
    "id": "IN-28",
