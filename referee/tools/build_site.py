@@ -30,7 +30,8 @@ DIVS = "https://www.nfl.com/standings/division/2026/REG"
 
 PAGES = [("index.html", "Overview"), ("results.html", "Results audit"), ("lines.html", "Betting lines"),
          ("replication.html", "Replication"), ("luck.html", "Luck and sensitivity"),
-         ("sessions.html", "Sessions"), ("flagged.html", "Flagged for Review")]
+         ("sessions.html", "Sessions"), ("gamebooks.html", "Game Books"),
+         ("flagged.html", "Flagged for Review")]
 
 
 def load(name):
@@ -106,8 +107,8 @@ def page(fname, title, body, as_of):
 {body}
 </main>
 <footer><div class="wrap">
-<p>Built by session 73fdd6c4 from the evidence files in <a href="{blob('referee/data')}">referee/data</a>. Repository state as of {e(as_of)} UTC.</p>
-<p>Official values were read on nfl.com on 2026-11-12 (UTC). Betting lines come from a community dataset and are unverified everywhere on this site. Nothing here is betting advice.</p>
+<p>Generated from the evidence files in <a href="{blob('referee/data')}">referee/data</a>. Sources were collected at different times; see each page for any stated retrieval dates and limitations. The repository timestamp is not a live-capture time.</p>
+<p>Sources are not necessarily refreshed together. Betting lines come from a community dataset and are unverified everywhere on this site. Nothing here is betting advice.</p>
 </div></footer>
 </body>
 </html>
@@ -257,6 +258,9 @@ def main():
         ("R-17", "Irregularity", "Seven 2026 games are marked neutral-site in the dataset",
          "Home and road records still match the official standings for all 32 clubs, so the official page counts a designated home team in these games. Home-field estimates should treat them separately.",
          "nflverse (upstream)", "Exclude or flag neutral-site games when estimating home advantage.", STAND.format(2026), "NFL.com standings 2026"),
+        ("R-18", "Unverified", "2026 Week 10 Game Book contents: starters, game-day status and snap counts",
+         "The official NFL Game Center pages read on 2026-11-16 exposed Game Book PDF links for 13 fixtures already marked final on the official schedule. A direct fetch attempt for the San Francisco 49ers at Dallas Cowboys Game Book PDF returned 'Failed to fetch page'; no PDF content was parsed here. No actual starter, inactive-list, or snap-count value was transcribed; the Chargers–Ravens fixture was still scheduled.",
+         "0b7ea3a9", "After publication terms are resolved, retrieve a Game Book through an authorized route, capture its exact time/hash, and match one game's parsed starters and game-day status to its dated availability evidence. See the Game Books page for the per-game source links.", "https://www.nfl.com/schedules/2026/by-week/week-10", "NFL.com Week 10 schedule (stable address)"),
     ]
     with open(os.path.join(ROOT, "data", "flags.json"), "w") as fh:
         json.dump({"generated_by": "referee/tools/build_site.py", "as_of_utc": as_of,
@@ -578,6 +582,12 @@ def main():
         [a("replication.html", "Replication"), f"Referee value for {r76['counts'].get('not replicable here', 0)} model-based numbers", "Same reason. The published value is shown as published, not as confirmed.", NTEST, a(blob("data/model/lines.json", ref76), "Their file")],
     ]))
     page("flagged.html", "Flagged for Review", "\n".join(b), as_of)
+
+    # The Game Book index is a separate source-register builder so its schema can be
+    # validated without importing this legacy report generator.
+    from build_gamebooks import build_gamebooks_page
+    build_gamebooks_page(page=page, table=table, tiles=tiles, e=e, a=a, chip=chip, as_of=as_of)
+
     print("built", len(PAGES), "pages;", len(flags), "flags;", f"replicated {rep}, not replicated {nrep}, not testable {ntest}; strategies clearing the bar {clears_any}/{tried}")
 
 

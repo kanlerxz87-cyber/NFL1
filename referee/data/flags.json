@@ -171,6 +171,16 @@
    "suggested_action": "Exclude or flag neutral-site games when estimating home advantage.",
    "source_url": "https://www.nfl.com/standings/league/2026/REG",
    "source_label": "NFL.com standings 2026"
+  },
+  {
+   "id": "R-18",
+   "type": "Unverified",
+   "item": "2026 Week 10 Game Book contents: starters, game-day status and snap counts",
+   "finding": "The official NFL Game Center pages read on 2026-11-16 exposed Game Book PDF links for 13 fixtures already marked final on the official schedule. A direct fetch attempt for the San Francisco 49ers at Dallas Cowboys Game Book PDF returned 'Failed to fetch page'; no PDF content was parsed here. No actual starter, inactive-list, or snap-count value was transcribed; the Chargers\u2013Ravens fixture was still scheduled.",
+   "owner": "0b7ea3a9",
+   "suggested_action": "After publication terms are resolved, retrieve a Game Book through an authorized route, capture its exact time/hash, and match one game's parsed starters and game-day status to its dated availability evidence. See the Game Books page for the per-game source links.",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "source_label": "NFL.com Week 10 schedule (stable address)"
   }
  ]
 }
