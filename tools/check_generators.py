@@ -37,6 +37,9 @@ GENERATORS = {
     # Session 0c5215c1-nfl1: the pre-registration sub-site. write() takes bare filenames;
     # the generator writes them under prereg/ (prefix added in claims()).
     "prereg/build.py": [r'write\(\s*"([^"/]+\.html)"'],
+    # Session cc5a9cdd-nfl1: the Venues & Weather sub-site. write() takes bare
+    # filenames; the generator writes them under venue/ (prefix added in claims()).
+    "venue/build.py": [r'write\(\s*"([^"/]+\.html)"'],
 }
 
 # explicit, documented ownership. Anything not here is reported, not assumed.
@@ -69,6 +72,12 @@ KNOWN_OWNERS = {
     # Session 739408a8-nfl1: the forward-test ledger page (its generator is not in
     # GENERATORS; ownership recorded so the file is documented, not assumed).
     "prereg/index.html": "tools/prereg.py",
+    # Session cc5a9cdd-nfl1: Venues & Weather sub-site pages.
+    "venue/index.html": "venue/build.py",
+    "venue/week10.html": "venue/build.py",
+    "venue/week11.html": "venue/build.py",
+    "venue/schedule.html": "venue/build.py",
+    "venue/flagged.html": "venue/build.py",
 }
 
 DASHBOARD_PAGES = ["web/dashboard.html", "web/decisions.html", "web/suggestions.html",
@@ -99,6 +108,9 @@ def claims():
         if gen == "prereg/build.py":
             # write() takes bare filenames; the generator writes them under prereg/
             found = {"prereg/" + f for f in found}
+        if gen == "venue/build.py":
+            # write() takes bare filenames; the generator writes them under venue/
+            found = {"venue/" + f for f in found}
         for f in found:
             out.setdefault(f, set()).add(gen)
     return out

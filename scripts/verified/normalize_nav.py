@@ -46,6 +46,8 @@ CANON = [
     ("prereg/registry.html", "Strategy Registry"),
     ("prereg/archive.html", "Backtest Archive"),
     ("research/index.html", "s9cb Research"),
+    # Session cc5a9cdd-nfl1: the Venues & Weather sub-site joins the shared bar.
+    ("venue/index.html", "Venues & Weather"),
     # Session c7b65577-nfl1: the strategy competition.  Added to both nav lists at once because
     # this file and pipeline/gen_site.py are documented as needing to stay byte-identical.
     ("strat/index.html", "Strategy Competition"),

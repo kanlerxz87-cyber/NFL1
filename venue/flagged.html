@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flagged for review · Venues &amp; Weather · NFL1</title>
+<style>
+ body { font-family: system-ui, -apple-system, Segoe UI, sans-serif; margin: 0; color: #1a1a1a; }
+ header { background: #0b2545; color: #fff; padding: 1rem 1.5rem; }
+ header h1 { margin: 0.2rem 0; font-size: 1.4rem; }
+ nav { display: flex; flex-wrap: wrap; gap: 0.75rem; padding: 0.6rem 1.5rem; background: #13315c; }
+ nav a { color: #cfe0ff; text-decoration: none; font-size: 0.92rem; }
+ nav a.active { color: #fff; font-weight: 700; text-decoration: underline; }
+ main { padding: 1rem 1.5rem 3rem; max-width: 1180px; }
+ table { border-collapse: collapse; width: 100%; margin: 0.8rem 0 1.4rem; font-size: 0.88rem; }
+ caption { text-align: left; font-weight: 700; padding: 0.4rem 0; }
+ th, td { border: 1px solid #ccd; padding: 0.35rem 0.5rem; vertical-align: top; }
+ th { background: #eef2f8; text-align: left; }
+ .flag { color: #a01818; font-weight: 700; }
+ .box { border: 1px solid #ccd; background: #f6f9ff; padding: 0.8rem 1rem; margin: 0.8rem 0; }
+ .stamp { color: #556; font-size: 0.85rem; }
+ a { color: #0b4f9e; }
+</style>
+</head>
+<body>
+<header><div style="font-size:.85rem">NFL1 · sub-site</div><h1>Flagged for review</h1></header>
+<nav aria-label="Venue pages"><a href="index.html">Overview</a><a href="week10.html">Week 10 venues</a><a href="week11.html">Week 11 venues &amp; conditions</a><a href="schedule.html">Schedule announcement</a><a href="flagged.html" class="active">Flagged for review</a></nav>
+<main>
+
+<p>Non-blocking flags: values that could not be confirmed from an official source stay
+blank and are labelled here. None of these block publication.</p>
+<table>
+<caption>Flagged for review — venue &amp;amp; weather scope (session cc5a9cdd)</caption>
+<thead><tr>
+<th>Item</th>
+<th>What is blank</th>
+<th>Why</th>
+<th>What would clear it</th>
+<th>Official source</th>
+</tr></thead><tbody>
+<tr><td>Estadio Banorte roof &amp; surface (Week 11)</td><td><span class="flag">UNVERIFIED: roof/surface blank</span></td><td>Venue first appears in 2026 Week 11; no prior game in the corpus, so no completed official Game Book exists to transcribe.</td><td>Official Game Book after the 2026-11-22 game (MIN@SF).</td><td><a href="https://www.nfl.com/games/vikings-at-49ers-2026-reg-11">game centre</a></td></tr>
+<tr><td>Estadio Banorte NWS hourly overlay</td><td><span class="flag">UNVERIFIED: NWS values blank</span></td><td>NOAA <code>api.weather.gov/points</code> returns 404 at the venue coordinates — outside NWS coverage (Mexico City).</td><td>No NWS source will exist; remains flagged.</td><td><a href="https://www.nfl.com/games/vikings-at-49ers-2026-reg-11">game centre</a></td></tr>
+<tr><td>CIN@WAS kickoff-hour NWS values</td><td><span class="flag">UNVERIFIED: kickoff window blank</span></td><td>Monday 2026-11-23 8:15 PM ET kickoff lies beyond the NWS hourly horizon at read time (snapshot 2026-11-16T15:06:55+00:00).</td><td>Re-run venue/nws_snapshot.py after 2026-11-20 so the hourly product reaches the kickoff.</td><td><a href="https://api.weather.gov/gridpoints/LWX/102,73/forecast/hourly">NWS hourly product</a></td></tr>
+<tr><td>ARROWHEAD STADIUM game-weather description</td><td><span class="flag">UNVERIFIED: description blank</span></td><td>Official Game Book prints &ldquo;Game Weather:&rdquo; with no description text; temperature/humidity/wind printed and published.</td><td>Not clearable — source prints no description; blank kept.</td><td><a href="https://static.www.nfl.com/image/upload/v1794224919/gamecenter/ab381724-4feb-11f1-abca-2c54536568a9.pdf">Game Book (PDF)</a></td></tr>
+<tr><td>NORTHWEST STADIUM game-weather description</td><td><span class="flag">UNVERIFIED: description blank</span></td><td>Official Game Book conditions row carries temp/wind but no &ldquo;Game Weather:&rdquo; description; values printed and published.</td><td>Not clearable — source prints no description; blank kept.</td><td><a href="https://static.www.nfl.com/image/upload/v1794224919/gamecenter/ab382331-4feb-11f1-abca-2c54536568a9.pdf">Game Book (PDF)</a></td></tr>
+</tbody></table>
+<p class="stamp">Snapshot 2026-11-16T15:45:00Z · cross-scope: the main-site
+<a href="../flagged.html">flagged.html</a> aggregates flags repository-wide; this page
+carries the venue/weather detail.</p>
+
+<p class="stamp"><a href="../index.html">← NFL1 main site</a></p>
+</main>
+</body>
+</html>
