@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="assets/gamebook.css"></head>
 <body><header class="gh"><a class="home" href="../index.html">NFL1</a>
 <span class="crumb">Game Book &amp; availability-outcome register</span>
-<span class="stamp">built 2026-11-16 18:55 UTC</span></header>
+<span class="stamp">built 2026-11-16 18:59 UTC</span></header>
 <div class="wrap"><nav class="snav"><a href="index.html">Overview</a><a href="ledger.html">Availability ledger</a><a href="designations.html">Designation calibration</a><a href="results.html">Verified results</a><a href="crosscheck.html">Two sources, one fact</a><a href="starters.html">Expected vs actual</a><a href="summary.html">Executive summary</a><a href="method.html" class=on>Method & limits</a></nav>
 <main><h1>Method &amp; limits</h1><p class="lead">How each number on this sub-site is produced, what it can support, and what it must never be used for.</p>
 
@@ -35,6 +35,21 @@ Week 10 report in this repository was captured on 2026-11-15 and 2026-11-16 - af
 had been played - so those rows are admissible for <b>retrospective calibration</b> (what a designation
 meant) and <b>not</b> for replaying what an analyst could have known. The register states this on the
 capture itself (<code>point_in_time</code>) rather than in prose only.</p>
+<h2>One capture per week, and why the others are not added to it</h2>
+<p>The report page is captured under the week <i>it states</i>, not the week the url asked for, and
+exactly one capture per (season, week) is joined: the one that states the most clubs.
+27 capture(s) on disk were ignored for that reason. Measured on
+2026-11-16: requests for 2025 weeks 1-18 and 2026 weeks 1-11 all answered HTTP 200 with the season's
+<i>most recent</i> report, so the league does not archive a past week's report at its week url - a
+designation history can only be built forward from dated captures, or backward from the dated news
+pages, which do stay online.</p>
+<p>Merging two captures of the same page would be wrong even when both look plausible. One of them
+held all 347 rows under only 14 of the 28 club headings - two clubs' blocks folded into one - so a
+player who belongs to Washington also appeared under New York, and joining that union moved the
+published Questionable cell from n=82 to n=126 for the same week and the same page. The rejected
+capture is therefore listed, not merged:
+<span class="sub">per-week captures on disk:
+2025_reg10: 1 capture(s), 2026_reg10: 2 capture(s).</span></p>
 <h2>Deliberate limits</h2>
 <ul class="tight">
 <li><b>No snap counts, no depth rank inferred from a Game Book.</b> The brief forbids it, and the document

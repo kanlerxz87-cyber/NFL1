@@ -289,6 +289,45 @@ class TestRegisterBuild(unittest.TestCase):
         self.assertTrue(any("unittest tests.test_gamebook_register" in st.get("run", "")
                             for st in steps), names)
 
+    def test_clamped_captures_are_never_joined_and_one_capture_wins_a_week(self):
+        """The league serves its most recent report for any week without one of its own (F73), and a
+        truncated render of the same page can hold the right rows under the wrong club headings (F74).
+        Both traps are closed by construction: a clamped capture is skipped, and a week is joined from
+        exactly one capture - the one stating the most clubs."""
+        cands = bgr._report_candidates()
+        keys = [k for k, _ in cands if k != "_unreadable"]
+        self.assertTrue(keys, "no usable report capture on disk")
+        for _k, cap in cands:
+            self.assertFalse(cap.get("week_clamped"),
+                             "a clamped capture reached the join")
+        per_week = {}
+        for k in keys:
+            per_week[k] = per_week.get(k, 0) + 1
+        # several candidates may exist for one week (that is the point of the selection); what must
+        # hold is that the register records how many it *rejected*, and that its chosen source is one
+        # of the candidates rather than a merge of them
+        d = bgr.build(write_site=False)
+        for k, n in per_week.items():
+            chosen = d.get("report_selection", {}).get(k)
+            self.assertTrue(chosen, f"{k}: no chosen capture recorded")
+            files = [c.get("_file") for kk, c in cands if kk == k]
+            self.assertIn(chosen, files, f"{k}: chosen capture {chosen} is not a candidate")
+        glob_n = len(list((ROOT / "data/gamebook/captures/report").glob("*.json")))
+        import json as _json
+        n_clamped_here = sum(1 for f in (ROOT / "data/gamebook/captures/report").glob("*.json")
+                             if _json.loads(f.read_text()).get("week_clamped"))
+        self.assertEqual(d["report_captures_clamped"], n_clamped_here)
+        self.assertGreaterEqual(n_clamped_here, 20, "the archive probe is what this row is about")
+        # arithmetic that must hold: candidates = unclamped glob files + the committed CI file
+        committed = 1 if (ROOT / "data/model/official_injuries.json").exists() else 0
+        self.assertEqual(len(keys) + d["report_captures_clamped"], glob_n + committed)
+        # the published cell must not move when a thinner capture of the same page exists
+        rows = {r["designation"]: r for r in d["designations"]}
+        self.assertEqual((rows["Questionable"]["n"], rows["Out"]["n"], rows["Doubtful"]["n"]),
+                         (82, 64, 10))
+        cov = [c for c in d["coverage"] if c["season"] == 2026 and c["week"] == 10][0]
+        self.assertGreaterEqual(cov["report_captures_ignored"], 1)
+
     def test_gate_passes_on_the_committed_artifacts(self):
         r = subprocess.run([sys.executable, str(ROOT / "tools/check_gamebook_register.py")],
                            capture_output=True, text=True)

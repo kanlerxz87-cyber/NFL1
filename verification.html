@@ -85,14 +85,14 @@
   <div class="main">
     <div class="topbar">
       <div class="crumb">NFL1 / <b>Verification &amp; Sources</b></div>
-      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">111 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">113 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
     </div>
     <main class="content" id="main">
       <div class="kicker">Assurance</div>
       <h1>Verification &amp; official sources</h1>
       <p class="lede">How every value was verified line by line, the complete official source registry with links for manual review, and the per-file data audit.</p>
       <div class="callout"><b>Verification policy.</b> Work line by line; cite an official source on every table row; leave a cell blank when the official source publishes no value; flag it; never infer or fill in a value. This page documents the procedure, the source registry and the line-by-line audit of the data layer.</div>
-<div class="cards"><div class="card"><div class="label">Official sources</div><div class="value">43</div><div class="detail">All fetched 2026-11-12</div></div><div class="card"><div class="label">Data files audited</div><div class="value">38</div><div class="detail">Row counts and blanks</div></div><div class="card"><div class="label">Table rows</div><div class="value">600+</div><div class="detail">Each with a source link</div></div><div class="card"><div class="label">Flagged items</div><div class="value">111</div><div class="detail">Needs review</div></div></div>
+<div class="cards"><div class="card"><div class="label">Official sources</div><div class="value">44</div><div class="detail">All fetched 2026-11-12</div></div><div class="card"><div class="label">Data files audited</div><div class="value">38</div><div class="detail">Row counts and blanks</div></div><div class="card"><div class="label">Table rows</div><div class="value">600+</div><div class="detail">Each with a source link</div></div><div class="card"><div class="label">Flagged items</div><div class="value">113</div><div class="detail">Needs review</div></div></div>
 <h2 id="policy">Verification procedure</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-verify-policy" aria-label="Filter tbl-verify-policy" placeholder="Filter rows…">
 <span class="count" data-count-for="tbl-verify-policy">7 rows shown</span></div>
@@ -150,7 +150,7 @@
 </tbody></table></div>
 <h2 id="sources">Official source registry</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-sources" aria-label="Filter tbl-sources" placeholder="Filter rows…">
-<span class="count" data-count-for="tbl-sources">43 rows shown</span></div>
+<span class="count" data-count-for="tbl-sources">44 rows shown</span></div>
 <div class="tablewrap"><table class="data-table" id="tbl-sources"><caption>Every official source used, what it verifies, its canonical URL note and the retrieval date. Each row links to that official page.</caption>
 <thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Publisher</th><th scope="col" class="sortable">Source type</th><th scope="col" class="sortable">What it verifies</th><th scope="col" class="sortable">Canonical / note</th><th scope="col" class="sortable">Retrieved</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
 <tr id="S01" data-verified="true">
@@ -540,6 +540,15 @@
 <td data-value="1">2026-11-16</td>
 <td><span class="src"><a href="https://www.nfl.com/injuries/league/2026/reg11" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official weekly injury report, week-URL probe">S44 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
+<tr id="S45" data-verified="true">
+<td><code>S45</code></td>
+<td data-value="1">National Football League (NFL.com)</td>
+<td data-value="1">Official weekly injury report, past-week archive probe (run from GitHub Actions)</td>
+<td data-value="1" class="wide">Requested by the scheduled capture sweep on 2026-11-16 for 2026 weeks 1-11 and 2025 weeks 1-18. Every url answered HTTP 200, and every page stated the season&#x27;s most recent published week: 2025 requests all printed &#x27;Week 10 of the 2025 Season&#x27; (197-281 rows, 16 clubs) and 2026 requests all printed &#x27;Week 10 of the 2026 Season&#x27; (347 rows). The captures are stored in data/gamebook/captures/report/ with their own week labels, and the register ignores the ones whose stated week is not the week they were asked for.</td>
+<td data-value="1" class="wide">This is the archive question answered in the negative for this url: there is no past-week report to back-fill, so a designation history can only be built forward from dated snapshots.</td>
+<td data-value="1">2026-11-16</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/league/2025/reg01" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official weekly injury report, past-week archive probe (run from GitHub Actions)">S45 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
 </tbody></table></div>
 <h2 id="audit">Line-by-line data audit</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-audit" aria-label="Filter tbl-audit" placeholder="Filter rows…">
@@ -711,8 +720,8 @@
 <tr id="AU-19" data-verified="true">
 <td><code>AU-19</code></td>
 <td data-value="1">data/flags.json</td>
-<td data-value="1" class="num">111</td>
-<td data-value="1">111 / 111</td>
+<td data-value="1" class="num">113</td>
+<td data-value="1">113 / 113</td>
 <td data-value="1" class="num">0</td>
 <td data-value="1" class="num">0</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
@@ -828,8 +837,8 @@
 <tr id="AU-32" data-verified="true">
 <td><code>AU-32</code></td>
 <td data-value="1">data/sources.json</td>
-<td data-value="1" class="num">43</td>
-<td data-value="1">0 / 43</td>
+<td data-value="1" class="num">44</td>
+<td data-value="1">0 / 44</td>
 <td data-value="1" class="num">0</td>
 <td data-value="1" class="num">0</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
@@ -855,8 +864,8 @@
 <tr id="AU-35" data-verified="true">
 <td><code>AU-35</code></td>
 <td data-value="1">data/suggestions.json</td>
-<td data-value="1" class="num">39</td>
-<td data-value="1">39 / 39</td>
+<td data-value="1" class="num">40</td>
+<td data-value="1">40 / 40</td>
 <td data-value="1" class="num">31</td>
 <td data-value="1" class="num">0</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>

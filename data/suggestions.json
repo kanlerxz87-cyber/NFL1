@@ -505,5 +505,18 @@
     "status": "Awaiting review",
     "verified": true,
     "retrieved": "2026-11-16"
+  },
+  {
+    "id": "S38",
+    "area": "Injuries and depth",
+    "title": "Build the designation history forward from dated captures, and use the dated news archive for the past",
+    "decision_impact": "The plan to lift n by sweeping the past two seasons' report pages is dead: the league serves only its most recent report at the week url (F73), so a back-fill stores 29 copies of one page. The weekly inactives article is different - it is a dated news page and stays at its own url - and it carries the club's own declaration, which is the half of the join that a rate needs. So the achievable design is: designation history from the dated news archive and from snapshots taken from now on, play rate from Game Books (which are archived per game), and no claim at all about past weeks' practice participation.",
+    "effort": "medium",
+    "recommended_path": "Review before re-scoping the sweep: the workflow's week loop should become a cadence loop (Wed, Thu, Fri, game day) for the current week, with the archive walk pointed at the news index instead of the injuries url.",
+    "evidence": "data/gamebook/captures/report/ (29 captures, 28 of them clamped); data/gamebook/register.json report_captures_clamped; F73, F74; S45",
+    "src": "S45",
+    "status": "Awaiting review",
+    "verified": true,
+    "retrieved": "2026-11-16"
   }
 ]

@@ -85,7 +85,7 @@
   <div class="main">
     <div class="topbar">
       <div class="crumb">NFL1 / <b>Suggestions &amp; Paths</b></div>
-      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">111 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">113 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
     </div>
     <main class="content" id="main">
       <div class="kicker">Governance</div>
@@ -132,8 +132,8 @@
 </tbody></table></div>
 <h2 id="suggestions">Improvement suggestions</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-suggestions" aria-label="Filter tbl-suggestions" placeholder="Filter rows…">
-<span class="count" data-count-for="tbl-suggestions">39 rows shown</span></div>
-<div class="tablewrap"><table class="data-table" id="tbl-suggestions"><caption>39 suggestions to improve decision making on this site. Effort is blank and flagged; every row links to an official source.</caption>
+<span class="count" data-count-for="tbl-suggestions">40 rows shown</span></div>
+<div class="tablewrap"><table class="data-table" id="tbl-suggestions"><caption>40 suggestions to improve decision making on this site. Effort is blank and flagged; every row links to an official source.</caption>
 <thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Area</th><th scope="col" class="sortable">Suggestion</th><th scope="col" class="sortable">How it improves decision making</th><th scope="col" class="sortable">Effort / risk estimate</th><th scope="col" class="sortable">Suggested disposition</th><th scope="col" class="sortable">Official evidence</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
 <tr id="S01" data-verified="true">
 <td><code>S01</code></td>
@@ -525,6 +525,16 @@
 <td class="wide">data/depth_ladder.json (shared rank-1 slots); data/gamebook/derived/ledger.json (per-club inactive rows with positions); S43</td>
 <td><span class="src"><a href="https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official dated weekly inactives article">S43 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
+<tr id="S38" data-verified="true">
+<td><code>S38</code></td>
+<td>Injuries and depth</td>
+<td class="wide">Build the designation history forward from dated captures, and use the dated news archive for the past</td>
+<td class="wide">The plan to lift n by sweeping the past two seasons&#x27; report pages is dead: the league serves only its most recent report at the week url (F73), so a back-fill stores 29 copies of one page. The weekly inactives article is different - it is a dated news page and stays at its own url - and it carries the club&#x27;s own declaration, which is the half of the join that a rate needs. So the achievable design is: designation history from the dated news archive and from snapshots taken from now on, play rate from Game Books (which are archived per game), and no claim at all about past weeks&#x27; practice participation.</td>
+<td data-value="1" class="num">medium</td>
+<td><span class="badge neutral">Review before re-scoping the sweep: the workflow&#x27;s week loop should become a cadence loop (Wed, Thu, Fri, game day) for the current week, with the archive walk pointed at the news index instead of the injuries url.</span></td>
+<td class="wide">data/gamebook/captures/report/ (29 captures, 28 of them clamped); data/gamebook/register.json report_captures_clamped; F73, F74; S45</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/league/2025/reg01" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official weekly injury report, past-week archive probe (run from GitHub Actions)">S45 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
 </tbody></table></div>
 <h2 id="matrix">Decision matrix</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-matrix" aria-label="Filter tbl-matrix" placeholder="Filter rows…">
@@ -575,7 +585,7 @@
 <section class="panel"><h2>Review workflow</h2>
 <ol class="tight">
 <li>Read the <a href="questions.html">decision questions</a> and the <a href="flagged.html">flagged items</a>.</li>
-<li>Compare the 39 suggestions and the three paths above.</li>
+<li>Compare the 40 suggestions and the three paths above.</li>
 <li>Select a path in the Review &amp; Choose a Path box; file the prefilled issue to make the decision durable.</li>
 <li>Close the blocking questions, then — and only then — authorise implementation of individual suggestions.</li>
 </ol>

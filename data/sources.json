@@ -430,5 +430,15 @@
     "retrieved": "2026-11-16",
     "verified": true,
     "note": "A future-week URL is clamped to the latest published week rather than 404ing. Any capture must read the week from the page body. See F68."
+  },
+  {
+    "id": "S45",
+    "publisher": "National Football League (NFL.com)",
+    "url": "https://www.nfl.com/injuries/league/2025/reg01",
+    "kind": "Official weekly injury report, past-week archive probe (run from GitHub Actions)",
+    "what": "Requested by the scheduled capture sweep on 2026-11-16 for 2026 weeks 1-11 and 2025 weeks 1-18. Every url answered HTTP 200, and every page stated the season's most recent published week: 2025 requests all printed 'Week 10 of the 2025 Season' (197-281 rows, 16 clubs) and 2026 requests all printed 'Week 10 of the 2026 Season' (347 rows). The captures are stored in data/gamebook/captures/report/ with their own week labels, and the register ignores the ones whose stated week is not the week they were asked for.",
+    "retrieved": "2026-11-16",
+    "verified": true,
+    "note": "This is the archive question answered in the negative for this url: there is no past-week report to back-fill, so a designation history can only be built forward from dated snapshots."
   }
 ]

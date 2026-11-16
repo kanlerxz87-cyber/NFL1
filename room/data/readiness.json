@@ -1,1266 +1,1266 @@
 {
-  "meta": {
-    "built": "2026-11-15",
-    "session": "07810d9f-nfl1",
-    "brief": "Requirements of the 2026-11-15 brief (NFL line origination, injuries and depth, leaderboard, site, process)",
-    "count": 82,
-    "by_status": {
-      "Blocked": 5,
-      "Partial": 45,
-      "Not verified": 3,
-      "Done": 17,
-      "Not met": 1,
-      "Not started": 10,
-      "Rejected (brief)": 1
-    },
-    "legend": {
-      "Done": "delivered; the artifact named in evidence exists in the repo",
-      "Partial": "some of it exists; the missing part is named",
-      "Not started": "no artifact found in the repo",
-      "Blocked": "cannot proceed until a named external source or decision exists",
-      "Not met": "the repo does the opposite of what the brief requires",
-      "Not verified": "not checked in this session; no status is claimed",
-      "Rejected (brief)": "the brief rejects it; the note states whether the repo complies"
-    },
-    "checked_note": "'re-read 2026-11-15' = the source page or file was read again in this session; 'repo artifact, not re-read' = the status rests on the file named in evidence.",
-    "source_note": "Each row links the official page it depends on, or the repo file that holds the evidence (internal, not official).",
-    "updated": "2026-11-16: rows IN-20, IN-22, IN-26, IN-27 updated by session 1d824ec2-nfl1 from the CI capture of the official transactions and reserve-list register; no other row touched",
-    "amended": "2026-11-16 by session 98a40411-nfl1 (rows IN-04, IN-15, IN-17, IN-18 only)"
+ "meta": {
+  "built": "2026-11-15",
+  "session": "07810d9f-nfl1",
+  "brief": "Requirements of the 2026-11-15 brief (NFL line origination, injuries and depth, leaderboard, site, process)",
+  "count": 82,
+  "by_status": {
+   "Blocked": 5,
+   "Partial": 45,
+   "Not verified": 3,
+   "Done": 17,
+   "Not met": 1,
+   "Not started": 10,
+   "Rejected (brief)": 1
   },
-  "rows": [
-    {
-      "id": "PR-01",
-      "group": "Pricing and results",
-      "requirement": "Price-snapshot store: opening and closing numbers for every market originated",
-      "status": "Blocked",
-      "checked": "repo artifact, not re-read",
-      "evidence": "data/s9cb/games.csv has one value per market per game (spread, total, moneylines) with no opening/closing split and no fetch time.",
-      "blocked_by": "No timestamped price source is approved. Odds are not an NFL official source.",
-      "clears_when": "Opening and closing rows with a fetch time for 100% of 2026 originated markets.",
-      "next_step": "Approve a price source and a fetch schedule (decision on price policy, PR-10).",
-      "src": {
-        "t": "games.csv",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/games.csv"
-      }
-    },
-    {
-      "id": "PR-02",
-      "group": "Pricing and results",
-      "requirement": "Verified results feed so backtests and ROI can be computed",
-      "status": "Partial",
-      "checked": "repo artifact, not re-read",
-      "evidence": "games.csv carries final scores 1999-2026 from nflverse (third-party). The official check against nfl.com covers the 2026 schedule only.",
-      "blocked_by": "Historical results are not matched to an official NFL page.",
-      "clears_when": "Official final score matched for 100% of backtest games.",
-      "next_step": "Match each season's scores to nfl.com week pages.",
-      "src": {
-        "t": "nfl.com Week 10 schedule",
-        "u": "https://www.nfl.com/schedules/2026/by-week/week-10"
-      }
-    },
-    {
-      "id": "PR-03",
-      "group": "Pricing and results",
-      "requirement": "Originate the side first, then the total, then the moneyline",
-      "status": "Not verified",
-      "checked": "not checked",
-      "evidence": "Origination order was not read in this session.",
-      "blocked_by": "Not checked.",
-      "clears_when": "A dated origination log showing side, then total, then moneyline for each game.",
-      "next_step": "Read analysis/engine.py and record the order it runs.",
-      "src": {
-        "t": "analysis/engine.py",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/analysis/engine.py"
-      }
-    },
-    {
-      "id": "PR-04",
-      "group": "Pricing and results",
-      "requirement": "Publish the fair line, the market line and the difference as separate columns",
-      "status": "Done",
-      "checked": "repo artifact, not re-read",
-      "evidence": "pipeline/gen_site.py overview table: 'My line', 'Market line' and the edge columns are separate.",
-      "blocked_by": "None.",
-      "clears_when": "n/a",
-      "next_step": "None.",
-      "src": {
-        "t": "pipeline/gen_site.py",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pipeline/gen_site.py"
-      }
-    },
-    {
-      "id": "PR-05",
-      "group": "Pricing and results",
-      "requirement": "Separate signal from staking on the leaderboard, so a lucky staking run cannot mask a bad signal",
-      "status": "Partial",
-      "checked": "repo artifact, not re-read",
-      "evidence": "data/s9cb/leaderboard.json gives hit_rate and break_even_hit_rate for each strategy beside profit_units and roi. Stake-size independence is not separately shown.",
-      "blocked_by": "No stake-independent ranking is published.",
-      "clears_when": "Stake-independent signal (hit rate against break-even, with CI) shown ranked ahead of staked ROI.",
-      "next_step": "Add the column to the leaderboard generator.",
-      "src": {
-        "t": "leaderboard.json",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
-      }
-    },
-    {
-      "id": "PR-06",
-      "group": "Pricing and results",
-      "requirement": "Pre-register every strategy; forbid backtest numbers from appearing on the leaderboard",
-      "status": "Not met",
-      "checked": "repo artifact, not re-read",
-      "evidence": "leaderboard.json ranks 12 rules scored on historical games (totals.bets_scored = 14,440 over 4,751 games). The brief forbids this.",
-      "blocked_by": "The leaderboard shows backtest results.",
-      "clears_when": "Leaderboard limited to prospective bets with a registration hash; backtests on a separate page.",
-      "next_step": "Split the leaderboard into prospective and backtest views.",
-      "src": {
-        "t": "leaderboard.json",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
-      }
-    },
-    {
-      "id": "PR-07",
-      "group": "Pricing and results",
-      "requirement": "Demotion gate: a live strategy goes back to paper",
-      "status": "Partial",
-      "checked": "repo artifact, not re-read",
-      "evidence": "The demotion gate is written in prereg/shadow-v1.md (section 'Demotion gate') with proposed thresholds fixed by commit 01da763. No strategy is on stakes, so it is not yet applied to any live strategy. leaderboard.json G1 to G8 still has no demotion rule.",
-      "blocked_by": "No rule text exists.",
-      "clears_when": "A written demotion rule (metric, window, threshold) committed before it is used.",
-      "next_step": "Draft the rule and commit it to the registration file.",
-      "src": {
-        "t": "leaderboard.json gate_definitions",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
-      }
-    },
-    {
-      "id": "PR-08",
-      "group": "Pricing and results",
-      "requirement": "Correlations computed only from officially sourced numbers, with n published",
-      "status": "Partial",
-      "checked": "repo artifact, not re-read",
-      "evidence": "data/s9cb/correlations.json publishes n with each value. Inputs are nflverse files, not official NFL numbers.",
-      "blocked_by": "No official-only input set has been built.",
-      "clears_when": "n and r recomputed from official-sourced numbers only.",
-      "next_step": "Build the official-only inputs from nfl.com pages.",
-      "src": {
-        "t": "correlations.json",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/correlations.json"
-      }
-    },
-    {
-      "id": "PR-09",
-      "group": "Pricing and results",
-      "requirement": "Turn the game log into a pre-registered backtest corpus",
-      "status": "Not started",
-      "checked": "repo artifact, not re-read",
-      "evidence": "data/leaderboard_rules.json holds 7 rules and no commit hash; the frozen corpus is not recorded.",
-      "blocked_by": "Corpus not frozen.",
-      "clears_when": "A registered corpus file and its commit hash, before the evaluation window opens.",
-      "next_step": "Freeze the corpus rule and commit it with a hash.",
-      "src": {
-        "t": "games.csv",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/games.csv"
-      }
-    },
-    {
-      "id": "PR-10",
-      "group": "Pricing and results",
-      "requirement": "Decide the price-data policy before any backtest is published",
-      "status": "Blocked",
-      "checked": "repo artifact, not re-read",
-      "evidence": "Decision on the Decision Room (room/data/decisions.json) is open: retire the -110 assumption; two leaderboards are live.",
-      "blocked_by": "Human decision outstanding.",
-      "clears_when": "A recorded decision naming the price source, timestamps and the closing-line rule.",
-      "next_step": "Make the decision on the Decide page.",
-      "src": {
-        "t": "room/data/decisions.json",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/decisions.json"
-      }
-    },
-    {
-      "id": "PR-11",
-      "group": "Pricing and results",
-      "requirement": "Ingest game-level results to make the ratings opponent-aware",
-      "status": "Done",
-      "checked": "repo artifact, not re-read",
-      "evidence": "README mentions EPA ratings; pages.yml runs analysis/engine.py on each build.",
-      "blocked_by": "None.",
-      "clears_when": "n/a",
-      "next_step": "None.",
-      "src": {
-        "t": "README.md",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/README.md"
-      }
-    },
-    {
-      "id": "PR-12",
-      "group": "Pricing and results",
-      "requirement": "Price our own line and publish the residual against the market on a schedule, from day one",
-      "status": "Partial",
-      "checked": "repo artifact, not re-read",
-      "evidence": "The weekly 'my line against market' rows are published. Past weekly residuals are not archived.",
-      "blocked_by": "No residual archive.",
-      "clears_when": "A residual row archived for every week since the first published line.",
-      "next_step": "Archive each weekly snapshot.",
-      "src": {
-        "t": "pipeline/gen_site.py",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pipeline/gen_site.py"
-      }
-    },
-    {
-      "id": "PR-13",
-      "group": "Pricing and results",
-      "requirement": "Vig-free market consensus against the originated fair-line decomposition",
-      "status": "Not started",
-      "checked": "repo artifact, not re-read",
-      "evidence": "No vig-removed probability appears on the landing table.",
-      "blocked_by": "Two-sided prices are needed (PR-01).",
-      "clears_when": "A vig-free probability for each market with both sides priced.",
-      "next_step": "Add once PR-01 closes.",
-      "src": {
-        "t": "pipeline/gen_site.py",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pipeline/gen_site.py"
-      }
-    },
-    {
-      "id": "PR-14",
-      "group": "Pricing and results",
-      "requirement": "Publish every model total twice (two estimators, gap column) until a walk-forward comparison picks one",
-      "status": "Not started",
-      "checked": "repo artifact, not re-read",
-      "evidence": "No second total estimator appears on the landing table.",
-      "blocked_by": "Second estimator not built.",
-      "clears_when": "Two totals and a gap column for every game; collapse only after a walk-forward test.",
-      "next_step": "Build the second estimator.",
-      "src": {
-        "t": "pipeline/gen_site.py",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pipeline/gen_site.py"
-      }
-    },
-    {
-      "id": "PR-15",
-      "group": "Pricing and results",
-      "requirement": "Pre-register each strategy: definition frozen before results are seen, commit hash is the registration",
-      "status": "Partial",
-      "checked": "repo artifact, not re-read",
-      "evidence": "shadow-v1 is registered before any Week 11 result exists (prereg/shadow-v1.md, commit 01da763). No strategy in the leaderboard has a registration commit, so the requirement is met for the shadow baseline only.",
-      "blocked_by": "Freeze not done.",
-      "clears_when": "A commit hash per strategy recorded before the evaluation window opens.",
-      "next_step": "Commit the rule text, sample window and gates.",
-      "src": {
-        "t": "leaderboard_rules.json",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/leaderboard_rules.json"
-      }
-    },
-    {
-      "id": "PR-16",
-      "group": "Pricing and results",
-      "requirement": "Split data into train, validation and final holdout seasons",
-      "status": "Partial",
-      "checked": "repo artifact, not re-read",
-      "evidence": "The leaderboard names a 2024 and 2025 holdout (gate G6). Train and validation seasons are not recorded separately.",
-      "blocked_by": "Split not recorded.",
-      "clears_when": "Three named season sets, each used once for its purpose.",
-      "next_step": "Document the split in the registration file.",
-      "src": {
-        "t": "leaderboard.json gate G6",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
-      }
-    },
-    {
-      "id": "PR-17",
-      "group": "Pricing and results",
-      "requirement": "Control baseline (random picks; favourites only) on every leaderboard run",
-      "status": "Not started",
-      "checked": "repo artifact, not re-read",
-      "evidence": "A text search of leaderboard.json found no control or random-pick row.",
-      "blocked_by": "Control not built.",
-      "clears_when": "A control row in every leaderboard run.",
-      "next_step": "Add random-pick and favourites-only rows.",
-      "src": {
-        "t": "leaderboard.json",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
-      }
-    },
-    {
-      "id": "PR-18",
-      "group": "Pricing and results",
-      "requirement": "Shadow baseline: singles only, pre-registered, forecasts recorded before kickoff",
-      "status": "Done",
-      "checked": "repo artifact, not re-read",
-      "evidence": "Registered in prereg/shadow-v1.md and .json (commit 01da763, 2026-11-15 12:53 UTC). The Week 11 forecast record data/shadow/forecasts_week11_v1.json (13 singles forecasts, probability and inputs) was committed in c1ffa1c before the first kickoff, Thu 19 Nov 2026 8:15 PM ET. tools/shadow_forecast.py --check reproduces it. No stakes.",
-      "blocked_by": "Not built.",
-      "clears_when": "At least one full week of forecasts with a fetch time earlier than each kickoff.",
-      "next_step": "Build the forecast log and freeze the model version.",
-      "src": {
-        "t": "data/model/lines.json",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/lines.json"
-      }
-    },
-    {
-      "id": "PR-19",
-      "group": "Pricing and results",
-      "requirement": "Proper-score leaderboard divisions: singles, game parlays, same-game parlays, prop combos",
-      "status": "Partial",
-      "checked": "repo artifact, not re-read",
-      "evidence": "Singles and game parlays are scored. Prop combos are not scored: props.json has price_status 'no price'.",
-      "blocked_by": "No prop prices.",
-      "clears_when": "Four divisions, each with n and Brier skill.",
-      "next_step": "Obtain prop prices (PR-10).",
-      "src": {
-        "t": "props.json",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/props.json"
-      }
-    },
-    {
-      "id": "PR-20",
-      "group": "Pricing and results",
-      "requirement": "Rank by benchmark-relative Brier skill with a game-cluster lower bound and a multiplicity adjustment",
-      "status": "Partial",
-      "checked": "repo artifact, not re-read",
-      "evidence": "Brier scoring appears in analysis/luck.py. The leaderboard ranks on ROI with a Benjamini-Hochberg correction.",
-      "blocked_by": "The leaderboard does not rank on Brier skill.",
-      "clears_when": "Brier skill against the benchmark, with a cluster lower bound and multiplicity adjustment, shown per strategy.",
-      "next_step": "Change the ranking metric and publish the benchmark.",
-      "src": {
-        "t": "analysis/luck.py",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/analysis/luck.py"
-      }
-    },
-    {
-      "id": "PR-21",
-      "group": "Pricing and results",
-      "requirement": "Two-stage leaderboard: proper-score qualification, then prospective CLV and ROI escrow",
-      "status": "Not started",
-      "checked": "repo artifact, not re-read",
-      "evidence": "Not built.",
-      "blocked_by": "Needs prospective bets (PR-15, PR-18).",
-      "clears_when": "A stage-2 escrow table opened only after a stage-1 pass.",
-      "next_step": "Build after PR-20.",
-      "src": {
-        "t": "leaderboard.json",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
-      }
-    },
-    {
-      "id": "PR-22",
-      "group": "Pricing and results",
-      "requirement": "Joint-evidence gate: parlays and prop combos ranked only with a validated joint probability and the operator's void and push rules",
-      "status": "Partial",
-      "checked": "repo artifact, not re-read",
-      "evidence": "parlays.json scores 66 game pairs with a correlation ratio. No validated joint probability or operator void/push rules exist for props.",
-      "blocked_by": "Operator rules and prop joint probabilities missing.",
-      "clears_when": "A validated joint probability and published void/push rules for each combo.",
-      "next_step": "Obtain operator rules and validate joint probabilities.",
-      "src": {
-        "t": "parlays.json",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/parlays.json"
-      }
-    },
-    {
-      "id": "PR-23",
-      "group": "Pricing and results",
-      "requirement": "Removal-of-luck panel on the dashboard",
-      "status": "Done",
-      "checked": "repo artifact, not re-read",
-      "evidence": "pages/luck.html ('Skill vs luck') is built and linked from the site navigation.",
-      "blocked_by": "None.",
-      "clears_when": "n/a",
-      "next_step": "None.",
-      "src": {
-        "t": "pages/luck.html",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pages/luck.html"
-      }
-    },
-    {
-      "id": "PR-24",
-      "group": "Pricing and results",
-      "requirement": "A two-sided 'what would change our mind' field on every strategy entry",
-      "status": "Partial",
-      "checked": "repo artifact, not re-read",
-      "evidence": "The two-sided 'what would change our mind' section is in prereg/shadow-v1.md and .json for shadow-v1 only. No strategy entry in the repo carries it.",
-      "blocked_by": "Field not defined.",
-      "clears_when": "Field present on 12 of 12 strategies, with an upside and a downside trigger.",
-      "next_step": "Add the field to the strategy schema.",
-      "src": {
-        "t": "leaderboard.json",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
-      }
-    },
-    {
-      "id": "PR-25",
-      "group": "Pricing and results",
-      "requirement": "Weekly 'what changed' diff: rank, rating and availability change columns",
-      "status": "Partial",
-      "checked": "repo artifact, not re-read",
-      "evidence": "data/shadow/whats_changed.json: differences between the 13 Nov and 15 Nov official injury reads (club row counts, practice status, 9 designations), with unresolved conflicts shown. Rank and rating change columns are not built, and the diff is not weekly yet.",
-      "blocked_by": "Weekly snapshots are not stored.",
-      "clears_when": "A diff column for every week since the first snapshot.",
-      "next_step": "Store each weekly snapshot and render the diff.",
-      "src": {
-        "t": "pipeline/gen_site.py",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pipeline/gen_site.py"
-      }
-    },
-    {
-      "id": "IN-01",
-      "group": "Injuries and depth",
-      "requirement": "Store every injury-hub read with its clock time; publish the delta, never the level",
-      "status": "Partial",
-      "checked": "re-read 2026-11-15",
-      "evidence": "Two dated reads now exist: the committed scrape (2026-11-14 17:02Z) and the live read (2026-11-15 12:18Z). The delta is published.",
-      "blocked_by": "Only two reads. No recurring series.",
-      "clears_when": "A read at least daily from Wednesday to kickoff, with the delta published for each.",
-      "next_step": "Schedule the capture and keep a read log.",
-      "src": {
-        "t": "nfl.com injury report",
-        "u": "https://www.nfl.com/injuries/"
-      }
-    },
-    {
-      "id": "IN-02",
-      "group": "Injuries and depth",
-      "requirement": "Snapshot the injury report every Wednesday, Thursday and Friday and keep a dated history",
-      "status": "Partial",
-      "checked": "repo artifact, not re-read",
-      "evidence": "collect-data.yml runs the scrape daily at 11:17 UTC. Each run overwrites data/model/official_injuries.json.",
-      "blocked_by": "Overwrite, not history.",
-      "clears_when": "A retained, hashed copy for each run.",
-      "next_step": "Commit a dated copy per run.",
-      "src": {
-        "t": "collect-data.yml",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/.github/workflows/collect-data.yml"
-      }
-    },
-    {
-      "id": "IN-03",
-      "group": "Injuries and depth",
-      "requirement": "Immutable official availability snapshots: raw hash, timestamp and conflict flags",
-      "status": "Partial",
-      "checked": "repo artifact, not re-read",
-      "evidence": "The scrape stores html_sha256 and generated_at. The raw HTML is not kept and no conflict flag exists.",
-      "blocked_by": "Raw HTML not retained.",
-      "clears_when": "Raw page, sha256 and conflict flag stored for every run.",
-      "next_step": "Retain the raw HTML and add the conflict flag.",
-      "src": {
-        "t": "scrape_injuries.py",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pipeline/scrape_injuries.py"
-      }
-    },
-    {
-      "id": "IN-04",
-      "group": "Injuries and depth",
-      "requirement": "Capture official inactive lists and snap counts",
-      "status": "Partial",
-      "checked": "official sources read 2026-11-16",
-      "evidence": "Inactive lists: the official weekly inactives article is now captured and transcribed (data/gamebook/official_inactives/, 147 names over 24 clubs for Week 10 2026) and joined to the 347-row report in data/gamebook/derived/ledger.json (424 rows). The game's own Game Book prints the same list again, plus an active-but-Did-Not-Play line (source S41). Snap counts: the Game Book contains none, and no official per-player snap share was found (Q31), so this half stays open on purpose.",
-      "blocked_by": "Game Book coverage (0 of 14 Week 10 games captured in the tree, F72) and the absence of an official snap-count source (Q31).",
-      "clears_when": "14 of 14 played games of a week with a captured Game Book for the not-active / did-not-play split; snap counts only if an official source is identified (blank until then).",
-      "next_step": "Let .github/workflows/gamebook-sweep.yml append captures; decide in Q31 what stands in for playing time.",
-      "src": {
-        "t": "gamebook register",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/gamebook/register.json"
-      }
-    },
-    {
-      "id": "IN-05",
-      "group": "Injuries and depth",
-      "requirement": "Populate the three missing Lions game-status designations (Joseph, Mays, Reed)",
-      "status": "Done",
-      "checked": "re-read 2026-11-15",
-      "evidence": "Today's nfl.com read: Kerby Joseph, Cade Mays and D.J. Reed are all Out. The 2026-11-14 scrape also shows Out for all three.",
-      "blocked_by": "None.",
-      "clears_when": "n/a",
-      "next_step": "None.",
-      "src": {
-        "t": "nfl.com injury report",
-        "u": "https://www.nfl.com/injuries/"
-      }
-    },
-    {
-      "id": "IN-06",
-      "group": "Injuries and depth",
-      "requirement": "Re-capture and republish the Week 10 injury tables",
-      "status": "Partial",
-      "checked": "re-read 2026-11-15",
-      "evidence": "Re-captured 2026-11-15: 347 rows across 28 clubs. The published scrape holds 345 rows; 2 live rows are absent and 32 field values differ (injury_delta_2026-11-15.json).",
-      "blocked_by": "The scraper has not been re-run after the defect is fixed (see SI-09).",
-      "clears_when": "The published table equals the live read: 0 rows missing and 0 field differences.",
-      "next_step": "Re-run the scrape in Actions after the fix, then re-compare.",
-      "src": {
-        "t": "live read and delta",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/brief_07810d9f/injury_delta_2026-11-15.json"
-      }
-    },
-    {
-      "id": "IN-07",
-      "group": "Injuries and depth",
-      "requirement": "Seattle and Cincinnati injury rows present in the published table",
-      "status": "Done",
-      "checked": "re-read 2026-11-15",
-      "evidence": "The committed scrape and the 2026-11-15 read both list SEA with 15 rows and CIN with 9 rows, and the names match (injury_delta_2026-11-15.json shows no SEA or CIN difference).",
-      "blocked_by": "None.",
-      "clears_when": "n/a",
-      "next_step": "None.",
-      "src": {
-        "t": "nfl.com injury report",
-        "u": "https://www.nfl.com/injuries/"
-      }
-    },
-    {
-      "id": "IN-08",
-      "group": "Injuries and depth",
-      "requirement": "Texans depth published as an image: needs an authorized structured source, not transcription by eye",
-      "status": "Blocked",
-      "checked": "re-read 2026-11-15",
-      "evidence": "The Houston depth-chart page (read 2026-11-15) is labelled 'Unofficial Depth Chart' and holds an image. The depth ladder has 0 Houston slots.",
-      "blocked_by": "No authorized structured source has been found.",
-      "clears_when": "Houston rows in text form from an authorized source: 1 of 1 club.",
-      "next_step": "Ask the club or find a structured source the club publishes.",
-      "src": {
-        "t": "Houston depth chart",
-        "u": "https://www.houstontexans.com/team/depth-chart"
-      }
-    },
-    {
-      "id": "IN-09",
-      "group": "Injuries and depth",
-      "requirement": "Packers prepend jersey numbers: strip the numbers and keep the raw string",
-      "status": "Partial",
-      "checked": "re-read 2026-11-15 (d4027f66)",
-      "evidence": "data/depth/official_register.json: all 55 printed Packers names are parsed with the jersey stripped into `jersey`, the printed string kept in `raw_cell`, and the page URL and fetch date on each row. The 55 names match packers.com/team/depth-chart as read on 2026-11-15. data/depth_chart.json still holds 59 prefixed GB cells: 55 printed plus 4 not on the page (flag F53).",
-      "blocked_by": "data/depth_chart.json is not replaced; other pages read it.",
-      "clears_when": "Register used in place of data/depth_chart.json, or the old file's GB rows corrected, with zero prefixed cells in the published table.",
-      "next_step": "Replace the GB rows of data/depth_chart.json from the register (F53).",
-      "src": {
-        "t": "official_register.json",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/depth/official_register.json"
-      }
-    },
-    {
-      "id": "IN-10",
-      "group": "Injuries and depth",
-      "requirement": "Model depth slots as groups, not a single starter (the brief's 149-slot count is not reproduced here)",
-      "status": "Partial",
-      "checked": "re-read 2026-11-15 (d4027f66)",
-      "evidence": "Four clubs captured 2026-11-15 (GB, KC, SF, SEA): 95 slot groups; 16 groups list more than one first-column player (Packers WR: three). Each printed slot is stored with its group id, column and shared/empty flags (data/depth/official_register.json summary). The brief's 149 across 32 clubs is not reproduced (F57).",
-      "blocked_by": "Only 4 of 32 clubs captured; the 149 count needs all 32.",
-      "clears_when": "The 32-club count reproduced from official pages, each slot stored as a group.",
-      "next_step": "Run the 32-club official depth-chart sweep (IN-13 route a).",
-      "src": {
-        "t": "official_register.json summary",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/depth/official_register.json"
-      }
-    },
-    {
-      "id": "IN-11",
-      "group": "Injuries and depth",
-      "requirement": "Model depth from playing time, not jersey order",
-      "status": "Blocked",
-      "checked": "repo artifact, not re-read",
-      "evidence": "No snap-count source is captured.",
-      "blocked_by": "Snap counts unavailable (IN-04).",
-      "clears_when": "Snap share per player per week from an official source.",
-      "next_step": "Obtain the source (IN-04).",
-      "src": {
-        "t": "depth_ladder.json",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/depth_ladder.json"
-      }
-    },
-    {
-      "id": "IN-12",
-      "group": "Injuries and depth",
-      "requirement": "Reject deriving depth order from jersey number, experience or salary",
-      "status": "Rejected (brief)",
-      "checked": "repo artifact, not re-read",
-      "evidence": "The ladder's stated starter rule (depth_ladder.json method.starter_rule) is the lowest-ranked listed player at the slot who is not Out or Doubtful on the official report. The rule text uses chart rank and report status only, so no jersey, experience or salary input is stated.",
-      "blocked_by": "None.",
-      "clears_when": "n/a",
-      "next_step": "None.",
-      "src": {
-        "t": "depth_ladder.json method",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/depth_ladder.json"
-      }
-    },
-    {
-      "id": "IN-13",
-      "group": "Injuries and depth",
-      "requirement": "Resolve the depth-order source before building the backup-deficiency feature (route a: club chart; route b: snap counts)",
-      "status": "Partial",
-      "checked": "repo artifact, not re-read",
-      "evidence": "Route a (club chart pages) is used for 31 of 32 clubs. Houston has no structured chart. Route b is not available.",
-      "blocked_by": "Houston (IN-08).",
-      "clears_when": "Route a verified for 32 of 32 clubs.",
-      "next_step": "Clear IN-08.",
-      "src": {
-        "t": "depth_ladder.json",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/depth_ladder.json"
-      }
-    },
-    {
-      "id": "IN-14",
-      "group": "Injuries and depth",
-      "requirement": "Injury signal as a surprise (a change), never a level",
-      "status": "Not started",
-      "checked": "repo artifact, not re-read",
-      "evidence": "The ladder uses levels (slots_starter_at_risk per club). No change-from-prior-read variable exists.",
-      "blocked_by": "No time series yet (IN-01, IN-02).",
-      "clears_when": "A change variable (for example Questionable to Out, DNP to LP to FP) for each player-week.",
-      "next_step": "Build the change variable from the dated series.",
-      "src": {
-        "t": "depth_ladder.json",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/depth_ladder.json"
-      }
-    },
-    {
-      "id": "IN-15",
-      "group": "Injuries and depth",
-      "requirement": "Score injury-designation reliability (play rate per designation with CIs) and calibrate what 'Questionable' means",
-      "status": "Partial",
-      "checked": "computed from official sources 2026-11-16",
-      "evidence": "Declared-inactive rate per designation, Week 10 2026, official report joined to the official inactives article: Questionable 18.3% (n=82, 95% CI 11.4-28.0), Out 75.0% (n=64, 63.2-84.0), Doubtful 40.0% (n=10, 16.8-68.7). Published in data/gamebook/derived/designations.json with n on every row and no percentage inherited from old conventions. The play rate itself is still blank: it needs the Game Book for each game (F72).",
-      "blocked_by": "Play rate needs a Game Book per game; the interval is wide at one week and needs the multi-week sweep (S34).",
-      "clears_when": "Play rate per designation with n>=200 per designation and an interval, from the joined sample.",
-      "next_step": "Extend the sweep over 2025 W1-18 and 2026 W1-11, then quote the pooled cell.",
-      "src": {
-        "t": "gamebook designation table",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/gamebook/derived/designations.json"
-      }
-    },
-    {
-      "id": "IN-16",
-      "group": "Injuries and depth",
-      "requirement": "Injury and personnel ablations with chronological holdouts, reporting the difference with uncertainty",
-      "status": "Partial",
-      "checked": "repo artifact, not re-read",
-      "evidence": "data/personnel/ holds a personnel-deficiency study. An ablation with an uncertainty interval was not confirmed.",
-      "blocked_by": "Interval not confirmed.",
-      "clears_when": "An ablation table with a confidence interval and a holdout season.",
-      "next_step": "Run the with-and-without comparison.",
-      "src": {
-        "t": "data/personnel/leaderboard.json",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/personnel/leaderboard.json"
-      }
-    },
-    {
-      "id": "IN-17",
-      "group": "Injuries and depth",
-      "requirement": "Availability graph as a first-class dataset: who was expected to start and who actually did",
-      "status": "Partial",
-      "checked": "official sources read 2026-11-16",
-      "evidence": "The outcome half of the graph is built: data/gamebook/derived/ledger.json holds one row per (week, club, player) with the designation, the practice participation, the declared-inactive state and the Game Book state, and the register also keeps the 77 inactive-with-no-report-row cases. The expected half is the club's first-listed name in data/depth_chart.json, published per slot and marked ambiguous where several names share rank 1; the comparison renders in gamebook/starters.html as soon as a Game Book is captured.",
-      "blocked_by": "Actual-starter evidence is the Game Book line-up, and no Game Book capture is in the tree yet (F72). No starter is inferred from a rank, a jersey or a salary in the meantime.",
-      "clears_when": "One captured week where every club-game has a Game Book line-up, so expected-vs-actual exists for all 11 offensive and 11 defensive slots of 28 clubs, not a sample of them.",
-      "next_step": "Run the sweep; then join depth_chart.json rank-1 slots to the line-up cells.",
-      "src": {
-        "t": "gamebook starters page",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/gamebook/starters.html"
-      }
-    },
-    {
-      "id": "IN-18",
-      "group": "Injuries and depth",
-      "requirement": "Use official NFL Game Books for actual starters and game-day status",
-      "status": "Partial",
-      "checked": "source read 2026-11-16",
-      "evidence": "Source identified and reachable: every official game centre page links 'Download Game Book (PDF)' on static.www.nfl.com, and the Week 10 file was read on 2026-11-16 - it prints Lineups, Substitutions, Did Not Play and Not Active per club (S41, S42). pipeline/collect_gamebooks.py walks the schedule pages, finds the link, downloads, hashes and parses; tools/check_gamebook_register.py pins the counts and the required fields. 0 of 14 Week 10 game books are stored in the tree at commit time (F72), and the brief's prohibition is implemented: no depth rank and no snap count is inferred from these files.",
-      "blocked_by": "Coverage only: the collector runs on GitHub Actions because the sandbox cannot reach nfl.com.",
-      "clears_when": "14 of 14 Week 10 games with parse_status ok on gamebook/results.html, then the same for every played 2026 week.",
-      "next_step": "Watch the first scheduled sweep and reconcile its Not Active lists against the article (gamebook/crosscheck.html).",
-      "src": {
-        "t": "gamebook collector",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pipeline/collect_gamebooks.py"
-      }
-    },
-    {
-      "id": "IN-19",
-      "group": "Injuries and depth",
-      "requirement": "Announced-starter evidence field (not an inferred replacement)",
-      "status": "Partial",
-      "checked": "repo artifact, not re-read",
-      "evidence": "data/verified/qb_changes_2026.csv holds 5 QB announcements (MIA, SEA, AZ, CLE, BAL), each with an nfl.com article link.",
-      "blocked_by": "QB only.",
-      "clears_when": "Every announced starter change, not only QBs.",
-      "next_step": "Extend the file beyond QB.",
-      "src": {
-        "t": "qb_changes_2026.csv",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/verified/qb_changes_2026.csv"
-      }
-    },
-    {
-      "id": "IN-20",
-      "group": "Injuries and depth",
-      "requirement": "Roster turnover as a first-class data event (releases, signings, IR moves)",
-      "status": "Partial",
-      "checked": "gates run on the CI capture of 2026-11-16T15:08:04Z",
-      "evidence": "A dated roster-event register exists and is the union of every official read: 448 rows across 6 categories (other 30, reserve-list 100, signings 100, terminations 74, trades 44, waivers 100) and 32 club codes, each row carrying its printed date, the two clubs, the transaction text and an nfl.com link. It is captured by pipeline/collect_transactions.py in GitHub Actions (.github/workflows/transactions-sweep.yml, hourly) into data/reserve/captures/, hashed, replayed and gated by tools/check_reserve_register.py. Depth rows are now versioned against the last official roster event by tools/check_depth_staleness_1d824ec2.py: 29 findings across 12 clubs (CAR, CLE, DAL, GB, HOU, IND, LA, NE, NO, SEA, SF, TEN). The source prints at most 25 rows per category-month page, so 15 of 24 pages sit at that cap and 15 of them are incomplete for a month that has already closed; those counts are floors, not totals, and the published page says so.",
-      "blocked_by": "turnover before 2026-08 is not in the captured window, and closed months cannot be back-filled from the printed page (cap above)",
-      "clears_when": "every month of the season is captured from its first day, so no page sits at the 25-row cap with an oldest row later than the 1st \u2014 then the event table is a total rather than a floor",
-      "next_step": "run the sweep from the first day of each month (already live) and add an official pre-season source for months that have closed",
-      "src": {
-        "t": "depth_ladder.json",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/depth_ladder.json"
-      },
-      "updated": "2026-11-16 by session 1d824ec2-nfl1 (transactions/reserve register)"
-    },
-    {
-      "id": "IN-21",
-      "group": "Injuries and depth",
-      "requirement": "Official depth-chart register with a date and source on every row",
-      "status": "Partial",
-      "checked": "re-read 2026-11-15 (d4027f66)",
-      "evidence": "data/depth/official_register.json: every row carries the club page URL, the page label as printed, and the fetch date (2026-11-15). Page labels: GB 'Unofficial, Nov. 10, 2026'; SF 'Updated as of 11/10/26'; KC 'Unofficial Depth Chart', no date; SEA none printed in the captured portion.",
-      "blocked_by": "Only 4 of 32 clubs; KC and SEA print no as-of date.",
-      "clears_when": "All 32 clubs captured with the page label as printed; no-date charts flagged.",
-      "next_step": "Capture the remaining 28 club charts (IN-13 route a).",
-      "src": {
-        "t": "official_register.json",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/depth/official_register.json"
-      }
-    },
-    {
-      "id": "IN-22",
-      "group": "Injuries and depth",
-      "requirement": "Flag stale depth rows against the official transactions log",
-      "status": "Partial",
-      "checked": "gates run on the CI capture of 2026-11-16T15:08:04Z",
-      "evidence": "The check exists and runs in CI: tools/check_depth_staleness_1d824ec2.py compares every player name read out of the depth artifacts (depth register (official club pages)=236, depth_chart.json (repo chart, s1-s4 columns)=173, model availability (pipeline)=0, week 10 injury report (repo copy)=254) with the dated register (448 rows), and separates a row that contradicts a claim of being current (12) from a row in a dated snapshot that is merely superseded (17) \u2014 the two fail differently and are not pooled into one count. Written to data/reserve/depth_staleness.json and published on reserve/index.html. It does not infer a depth rank from anything: it only reports an official move that the artifact has not absorbed.",
-      "blocked_by": "12 depth rows still contradict a dated official move (the number above)",
-      "clears_when": "zero findings of kind `current-roster-claim` at each build (now 12)",
-      "next_step": "hand the 12 findings to the depth-chart owners as refresh work; the gate reports them, it does not edit another owner's artifact",
-      "src": {
-        "t": "Baltimore depth chart",
-        "u": "https://www.baltimoreravens.com/team/depth-chart"
-      },
-      "updated": "2026-11-16 by session 1d824ec2-nfl1 (transactions/reserve register)"
-    },
-    {
-      "id": "IN-23",
-      "group": "Injuries and depth",
-      "requirement": "Point-in-time snapshot ledger for injuries, depth charts and inactives",
-      "status": "Not started",
-      "checked": "repo artifact, not re-read",
-      "evidence": "Two dated injury reads only. No ledger.",
-      "blocked_by": "Not built.",
-      "clears_when": "A ledger with fetch time and hash per source per read.",
-      "next_step": "Build the ledger.",
-      "src": {
-        "t": "injury_delta_2026-11-15.json",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/brief_07810d9f/injury_delta_2026-11-15.json"
-      }
-    },
-    {
-      "id": "IN-24",
-      "group": "Injuries and depth",
-      "requirement": "Per-team view: starters out, replacements named, net injury count",
-      "status": "Partial",
-      "checked": "repo artifact, not re-read",
-      "evidence": "data/shadow/team_view.json (15 Nov official read): per club, listed players, Out/Doubtful/Questionable and practice counts, every player row linked to nfl.com. Starters out and replacements are blank: no official source exists.",
-      "blocked_by": "Net count not built.",
-      "clears_when": "A 32-row table with starters out, replacements named and net count.",
-      "next_step": "Build the per-team table.",
-      "src": {
-        "t": "depth page",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pages/depth.html"
-      }
-    },
-    {
-      "id": "IN-25",
-      "group": "Injuries and depth",
-      "requirement": "Interactive offense and defense matchup deficiency matrix (1st to 4th string)",
-      "status": "Partial",
-      "checked": "repo artifact, not re-read",
-      "evidence": "The depth page lists string ladders for each club. No offense-against-defense matrix exists.",
-      "blocked_by": "Matrix not built.",
-      "clears_when": "An interactive matrix built from the ladder data.",
-      "next_step": "Build the matrix.",
-      "src": {
-        "t": "depth page",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pages/depth.html"
-      }
-    },
-    {
-      "id": "IN-26",
-      "group": "Injuries and depth",
-      "requirement": "Run the 32-team roster and IR sweep before any team-level model is trusted",
-      "status": "Partial",
-      "checked": "gates run on the CI capture of 2026-11-16T15:08:04Z",
-      "evidence": "The reserve list is captured: 24 official pages (6 categories x 4 months), 448 rows, 100 players on a reserve designation still open at the last read, 83 of them named on a reserve list and on no Week-10 injury report row (347 rows) \u2014 which is the whole point: not listed does not mean available. 31 of 32 club depth charts are read; Houston is blocked by IN-08. model availability names 0 players to the staleness check, so a team-level model built on it cannot name anyone either.",
-      "blocked_by": "IN-08 (Houston club chart) and the 25-row printed cap on closed months",
-      "clears_when": "32 of 32 club charts read and every category-month page captured inside the month it belongs to (now 24 of 24 capped at the source)",
-      "next_step": "clear IN-08; the sweep already covers the reserve list",
-      "src": {
-        "t": "depth_ladder.json",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/depth_ladder.json"
-      },
-      "updated": "2026-11-16 by session 1d824ec2-nfl1 (transactions/reserve register)"
-    },
-    {
-      "id": "IN-27",
-      "group": "Injuries and depth",
-      "requirement": "Capture the reserve list so 'not listed' never means 'available'",
-      "status": "Done",
-      "checked": "re-read of the live official page and the CI capture of 2026-11-16T15:08:04Z",
-      "evidence": "The reserve list is captured with a date, captured by pipeline/collect_transactions.py in GitHub Actions (.github/workflows/transactions-sweep.yml, hourly) into data/reserve/captures/, hashed, replayed and gated by tools/check_reserve_register.py. Every derived row carries the date the league printed plus the UTC time of the read; data/reserve/heartbeat.jsonl holds one line per sweep including no-change sweeps, and manifest.json retains each page's raw and canonical hashes, so a re-derivation either reproduces the table or fails. Per club the count is report + reserve, published on reserve/index.html (e.g. Miami: 11 report rows + 3 on a reserve list = 14 unavailable). The page states the limit rather than hiding it: 15 page(s) sit at the publisher's 25-row cap.",
-      "blocked_by": "None.",
-      "clears_when": "met: 100 open reserve designations captured with dates and linked to the official page, gated on every build",
-      "next_step": "keep the sweep running; widen the captured months as the season advances and hand the 12 staleness findings to the depth owners",
-      "src": {
-        "t": "nfl.com injury page (news items)",
-        "u": "https://www.nfl.com/injuries/"
-      },
-      "updated": "2026-11-16 by session 1d824ec2-nfl1 (transactions/reserve register)"
-    },
-    {
-      "id": "IN-28",
-      "group": "Injuries and depth",
-      "requirement": "Archive weekly injury reports for past seasons (for Q06)",
-      "status": "Partial",
-      "checked": "repo artifact, not re-read",
-      "evidence": "data/s9cb/injuries.csv is an nflverse file (third-party), not an official archive.",
-      "blocked_by": "Official archive not captured.",
-      "clears_when": "Official weekly reports archived with hashes.",
-      "next_step": "Capture the official archive.",
-      "src": {
-        "t": "s9cb/injuries.csv",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/injuries.csv"
-      }
-    },
-    {
-      "id": "IN-29",
-      "group": "Injuries and depth",
-      "requirement": "Stadium roof and surface, with an NWS hourly wind and precipitation overlay",
-      "status": "Blocked",
-      "checked": "repo artifact, not re-read",
-      "evidence": "games.csv holds roof, surface, temperature and wind (nflverse). No NWS hourly grid is captured.",
-      "blocked_by": "NWS feed not captured.",
-      "clears_when": "Hourly NWS values per game with a timestamp.",
-      "next_step": "Capture the NWS forecast with timestamps.",
-      "src": {
-        "t": "games.csv",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/games.csv"
-      }
-    },
-    {
-      "id": "IN-30",
-      "group": "Injuries and depth",
-      "requirement": "Transcribe the venue of every fixture from the official game centre and publish it",
-      "status": "Partial",
-      "checked": "repo artifact, not re-read",
-      "evidence": "data/shadow/week11_venues.csv: all 13 Week 11 venues transcribed from the official nfl.com game centre pages (URL on each row). Other fixtures are not transcribed.",
-      "blocked_by": "Not transcribed.",
-      "clears_when": "All 14 Week 10 venues transcribed, each with its page link.",
-      "next_step": "Transcribe from each official game page.",
-      "src": {
-        "t": "nfl.com Week 10 schedule",
-        "u": "https://www.nfl.com/schedules/2026/by-week/week-10"
-      }
-    },
-    {
-      "id": "IN-31",
-      "group": "Injuries and depth",
-      "requirement": "Publish the league's dated schedule announcement beside the live schedule page",
-      "status": "Not started",
-      "checked": "repo artifact, not re-read",
-      "evidence": "Not built.",
-      "blocked_by": "Not built.",
-      "clears_when": "Announcement date and link shown beside the live schedule.",
-      "next_step": "Build the panel.",
-      "src": {
-        "t": "nfl.com Week 10 schedule",
-        "u": "https://www.nfl.com/schedules/2026/by-week/week-10"
-      }
-    },
-    {
-      "id": "IN-32",
-      "group": "Injuries and depth",
-      "requirement": "Fixture-context feature set built only from published schedule facts",
-      "status": "Partial",
-      "checked": "repo artifact, not re-read",
-      "evidence": "data/shadow/week11_context.json: rest days, short week and division flag for Week 11 from published schedule dates, cross-checked 13 of 13 to data/model/snapshot.json. Other weeks are not built.",
-      "blocked_by": "Not built from nfl.com.",
-      "clears_when": "Features rebuilt from nfl.com schedule pages only.",
-      "next_step": "Rebuild from the nfl.com schedule.",
-      "src": {
-        "t": "games.csv",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/games.csv"
-      }
-    },
-    {
-      "id": "IN-33",
-      "group": "Injuries and depth",
-      "requirement": "Kickoff and declared onside-kick regime priors filter",
-      "status": "Not started",
-      "checked": "repo artifact, not re-read",
-      "evidence": "No onside-kick regime data is captured.",
-      "blocked_by": "Not built.",
-      "clears_when": "A regime flag per game from a published source.",
-      "next_step": "Identify a published source for declared onside kicks.",
-      "src": {
-        "t": "decision questions",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/questions.json"
-      }
-    },
-    {
-      "id": "MO-01",
-      "group": "Models and leaderboard",
-      "requirement": "Store every model output as a probability plus its inputs, not just a pick",
-      "status": "Partial",
-      "checked": "not checked",
-      "evidence": "data/shadow/forecasts_week11_v1.json stores probability and inputs (ratings, home-field term, sigma, lambda, venue, benchmarks) for shadow-v1. Inputs stored per line in data/model/lines.json were not checked.",
-      "blocked_by": "Not checked.",
-      "clears_when": "Each output stored with its probability and inputs.",
-      "next_step": "Check lines.json against the rule.",
-      "src": {
-        "t": "data/model/lines.json",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/lines.json"
-      }
-    },
-    {
-      "id": "MO-02",
-      "group": "Models and leaderboard",
-      "requirement": "Originate our own lines (spread, total, win probability)",
-      "status": "Partial",
-      "checked": "repo artifact, not re-read",
-      "evidence": "Own lines are published. A holdout comparison against the market is not confirmed in this session, so no error figure is claimed.",
-      "blocked_by": "Our lines are less accurate than the market on the holdout.",
-      "clears_when": "Own spread error at or below the market error on the holdout, with an interval (not yet computed in this session).",
-      "next_step": "Improve the model and re-test on the holdout.",
-      "src": {
-        "t": "COORDINATION.md",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/COORDINATION.md"
-      }
-    },
-    {
-      "id": "MO-03",
-      "group": "Models and leaderboard",
-      "requirement": "Research and develop strategies that generate useful signals",
-      "status": "Done",
-      "checked": "repo artifact, not re-read",
-      "evidence": "12 rules have been tested with effect sizes published.",
-      "blocked_by": "None.",
-      "clears_when": "n/a",
-      "next_step": "None.",
-      "src": {
-        "t": "leaderboard.json",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
-      }
-    },
-    {
-      "id": "MO-04",
-      "group": "Models and leaderboard",
-      "requirement": "Treat it as a leaderboard competition with rewards for top strategies",
-      "status": "Not verified",
-      "checked": "not checked",
-      "evidence": "The leaderboard is scored. No reward rule was found in the repo in this session.",
-      "blocked_by": "Reward values not set.",
-      "clears_when": "A published reward rule with values.",
-      "next_step": "Decide the reward values.",
-      "src": {
-        "t": "room/data/questions.json",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/questions.json"
-      }
-    },
-    {
-      "id": "MO-05",
-      "group": "Models and leaderboard",
-      "requirement": "Single bets, parlays and player-prop combinations, each scored",
-      "status": "Partial",
-      "checked": "repo artifact, not re-read",
-      "evidence": "Single bets and parlays are scored. Prop combinations are not, because no prop prices exist.",
-      "blocked_by": "No prop prices (PR-10).",
-      "clears_when": "Each bet type scored with its own price source.",
-      "next_step": "Obtain prices.",
-      "src": {
-        "t": "props.json",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/props.json"
-      }
-    },
-    {
-      "id": "MO-06",
-      "group": "Models and leaderboard",
-      "requirement": "Every strategy must pass validation gates",
-      "status": "Done",
-      "checked": "repo artifact, not re-read",
-      "evidence": "Eight gates are defined and applied (leaderboard.json gate_definitions).",
-      "blocked_by": "None.",
-      "clears_when": "n/a",
-      "next_step": "None.",
-      "src": {
-        "t": "leaderboard.json",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
-      }
-    },
-    {
-      "id": "MO-07",
-      "group": "Models and leaderboard",
-      "requirement": "Determine correlation values",
-      "status": "Done",
-      "checked": "repo artifact, not re-read",
-      "evidence": "correlations.json publishes values with n. The official-only limit is recorded at PR-08.",
-      "blocked_by": "PR-08 limit.",
-      "clears_when": "n/a",
-      "next_step": "None.",
-      "src": {
-        "t": "correlations.json",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/correlations.json"
-      }
-    },
-    {
-      "id": "MO-08",
-      "group": "Models and leaderboard",
-      "requirement": "Remove luck from the equation: bootstrap, multiple testing, holdout, binomial test",
-      "status": "Done",
-      "checked": "repo artifact, not re-read",
-      "evidence": "luck_accounting and gates G5, G6 and G8 are in leaderboard.json.",
-      "blocked_by": "None.",
-      "clears_when": "n/a",
-      "next_step": "None.",
-      "src": {
-        "t": "leaderboard.json",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
-      }
-    },
-    {
-      "id": "MO-09",
-      "group": "Models and leaderboard",
-      "requirement": "Build strategies that are selectively skill-based",
-      "status": "Partial",
-      "checked": "repo artifact, not re-read",
-      "evidence": "0 of 12 rules pass all eight gates (the most any rule passes is six: gates_passed in leaderboard.json).",
-      "blocked_by": "No rule passes the gates.",
-      "clears_when": "At least one rule passes all gates with a confidence interval above the benchmark.",
-      "next_step": "Keep testing pre-registered rules.",
-      "src": {
-        "t": "leaderboard.json",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
-      }
-    },
-    {
-      "id": "SI-01",
-      "group": "Site and process",
-      "requirement": "A clean landing page and subpages organised by category, with a simple dashboard",
-      "status": "Done",
-      "checked": "repo artifact, not re-read",
-      "evidence": "The Decision Room (room/) has 11 pages in categories, and the root site has category navigation.",
-      "blocked_by": "None.",
-      "clears_when": "n/a",
-      "next_step": "None.",
-      "src": {
-        "t": "Decision Room",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/index.html"
-      }
-    },
-    {
-      "id": "SI-02",
-      "group": "Site and process",
-      "requirement": "Every table row carries a source link; blanks labelled unverified",
-      "status": "Partial",
-      "checked": "repo artifact, not re-read",
-      "evidence": "room/verify.py fails any row without an https link. Many rows link to repo files, not official pages.",
-      "blocked_by": "Official-page links missing on internal-artifact rows.",
-      "clears_when": "Every row links to an official page or is marked unverified.",
-      "next_step": "Add official links or mark rows unverified.",
-      "src": {
-        "t": "room/verify.py",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/verify.py"
-      }
-    },
-    {
-      "id": "SI-03",
-      "group": "Site and process",
-      "requirement": "Verify line by line against official sources; never infer a value",
-      "status": "Partial",
-      "checked": "re-read 2026-11-15",
-      "evidence": "The nfl.com injury report was read in full (8 page chunks, 347 rows, 28 clubs) and diffed. The repo-wide re-verification is not complete.",
-      "blocked_by": "Scope: the injury page and a few club charts were re-read.",
-      "clears_when": "Every table row re-read or marked unverified.",
-      "next_step": "Continue the line-by-line pass by page.",
-      "src": {
-        "t": "live read",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/brief_07810d9f/live_read_2026-11-15_week10.psv"
-      }
-    },
-    {
-      "id": "SI-04",
-      "group": "Site and process",
-      "requirement": "Executive summary of the important details",
-      "status": "Done",
-      "checked": "repo artifact, not re-read",
-      "evidence": "Executive summary page and Decision Room executive page.",
-      "blocked_by": "None.",
-      "clears_when": "n/a",
-      "next_step": "None.",
-      "src": {
-        "t": "executive-summary.html",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/executive-summary.html"
-      }
-    },
-    {
-      "id": "SI-05",
-      "group": "Site and process",
-      "requirement": "Clear list of questions, the information known and missing, and the answers needed before a decision",
-      "status": "Done",
-      "checked": "repo artifact, not re-read",
-      "evidence": "Decision Room questions page (22 questions in room/data/questions.json).",
-      "blocked_by": "None.",
-      "clears_when": "n/a",
-      "next_step": "None.",
-      "src": {
-        "t": "room/questions.html",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/questions.html"
-      }
-    },
-    {
-      "id": "SI-06",
-      "group": "Site and process",
-      "requirement": "A dedicated suggestions section so someone can review and choose a path before anything is changed",
-      "status": "Done",
-      "checked": "repo artifact, not re-read",
-      "evidence": "Decision Room decisions page (options, costs, risks) and suggestions page.",
-      "blocked_by": "None.",
-      "clears_when": "n/a",
-      "next_step": "None.",
-      "src": {
-        "t": "room/decisions.html",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/decisions.html"
-      }
-    },
-    {
-      "id": "SI-07",
-      "group": "Site and process",
-      "requirement": "Repo review with irregularities flagged and linked for manual review",
-      "status": "Partial",
-      "checked": "repo artifact, not re-read",
-      "evidence": "This session flagged 11 irregularities (data/flags.json, F-7810-01 to F-7810-11). The repo-wide audit is not complete.",
-      "blocked_by": "Repo-wide audit not complete.",
-      "clears_when": "Every file reviewed, with each irregularity linked.",
-      "next_step": "Continue the audit by directory.",
-      "src": {
-        "t": "data/flags.json",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/flags.json"
-      }
-    },
-    {
-      "id": "SI-08",
-      "group": "Site and process",
-      "requirement": "No manual input: pages rebuilt from committed data by one script",
-      "status": "Partial",
-      "checked": "repo artifact, not re-read",
-      "evidence": "On the base commit the committed pages differed from the generators, so the --check gate failed. The pages are regenerated in this change.",
-      "blocked_by": "Re-check must pass in CI.",
-      "clears_when": "tools/build_site_all.py --check passes on main.",
-      "next_step": "Confirm in CI after merge.",
-      "src": {
-        "t": "build_site_all.py",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/tools/build_site_all.py"
-      }
-    },
-    {
-      "id": "SI-09",
-      "group": "Site and process",
-      "requirement": "Drift alarm on every scraper: fail loudly when a field goes missing instead of publishing a blank",
-      "status": "Partial",
-      "checked": "re-read 2026-11-15",
-      "evidence": "tools/check_scrape_drift.py pins the injury capture (347 rows, 28 clubs, 14 games) and required fields and fails loudly; tests/test_scrape_drift.py has 6 fault-injection tests. Other scrapers have no alarm, and the scraper threshold (150 rows, 24 clubs) in pipeline/scrape_injuries.py is unchanged.",
-      "blocked_by": "No alarm on blank sections.",
-      "clears_when": "The build fails when a club section with 5 or more rows has no injury or game status.",
-      "next_step": "Add the alarm to the scraper and to the build.",
-      "src": {
-        "t": "scrape_injuries.py",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pipeline/scrape_injuries.py"
-      }
-    },
-    {
-      "id": "SI-10",
-      "group": "Site and process",
-      "requirement": "Durable snapshot storage outside the static site, freshness monitoring and alerts on source or schema change",
-      "status": "Partial",
-      "checked": "repo artifact, not re-read",
-      "evidence": "tools/check_freshness.py exists. Snapshots are stored in git inside the site repository. No alerting.",
-      "blocked_by": "Storage location and alerting not built.",
-      "clears_when": "Snapshots outside the Pages site, with an alert on a schema change.",
-      "next_step": "Decide the storage location.",
-      "src": {
-        "t": "check_freshness.py",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/tools/check_freshness.py"
-      }
-    },
-    {
-      "id": "SI-11",
-      "group": "Site and process",
-      "requirement": "Split the site into a public analysis layer and a private data layer until the terms are read",
-      "status": "Not started",
-      "checked": "repo artifact, not re-read",
-      "evidence": "Row-level injury data is published on public pages.",
-      "blocked_by": "Not built.",
-      "clears_when": "Public pages show derived values and links only.",
-      "next_step": "Decide which rows move to the private layer.",
-      "src": {
-        "t": "injuries page",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pages/injuries.html"
-      }
-    },
-    {
-      "id": "SI-12",
-      "group": "Site and process",
-      "requirement": "Parallel-session coordination on a shared task board",
-      "status": "Done",
-      "checked": "repo artifact, not re-read",
-      "evidence": "COORDINATION.md holds the board; this session's claim is recorded there.",
-      "blocked_by": "None.",
-      "clears_when": "n/a",
-      "next_step": "None.",
-      "src": {
-        "t": "COORDINATION.md",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/COORDINATION.md"
-      }
-    },
-    {
-      "id": "SI-13",
-      "group": "Site and process",
-      "requirement": "Decision-readiness table on the landing page: one row per requirement, the gate that blocks it, the number that clears it",
-      "status": "Done",
-      "checked": "built this session",
-      "evidence": "Shown as a panel on the landing page and on pages/readiness.html, both built from room/data/readiness.json.",
-      "blocked_by": "None.",
-      "clears_when": "n/a",
-      "next_step": "None.",
-      "src": {
-        "t": "pipeline/gen_site.py",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pipeline/gen_site.py"
-      }
-    },
-    {
-      "id": "SI-14",
-      "group": "Site and process",
-      "requirement": "Brief references (VR-xx and VQ-xx) traced to a dated source",
-      "status": "Not verified",
-      "checked": "not checked",
-      "evidence": "These reference IDs appear nowhere in the repo, so the brief's claims cannot be traced to a document.",
-      "blocked_by": "The list the IDs refer to is not in the repo.",
-      "clears_when": "Each ID mapped to a dated source.",
-      "next_step": "Supply the reference list, or the sources behind each ID.",
-      "src": {
-        "t": "COORDINATION.md",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/COORDINATION.md"
-      }
-    },
-    {
-      "id": "SI-15",
-      "group": "Site and process",
-      "requirement": "Merge, deploy and confirm the live site",
-      "status": "Partial",
-      "checked": "this session",
-      "evidence": "Pull request and merge result are recorded in COORDINATION.md once the checks pass.",
-      "blocked_by": "Checks not yet run on this change.",
-      "clears_when": "PR merged and GitHub Pages deployment confirmed.",
-      "next_step": "Open the PR, wait for checks, merge, confirm the deploy.",
-      "src": {
-        "t": "COORDINATION.md",
-        "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/COORDINATION.md"
-      }
-    }
-  ]
+  "legend": {
+   "Done": "delivered; the artifact named in evidence exists in the repo",
+   "Partial": "some of it exists; the missing part is named",
+   "Not started": "no artifact found in the repo",
+   "Blocked": "cannot proceed until a named external source or decision exists",
+   "Not met": "the repo does the opposite of what the brief requires",
+   "Not verified": "not checked in this session; no status is claimed",
+   "Rejected (brief)": "the brief rejects it; the note states whether the repo complies"
+  },
+  "checked_note": "'re-read 2026-11-15' = the source page or file was read again in this session; 'repo artifact, not re-read' = the status rests on the file named in evidence.",
+  "source_note": "Each row links the official page it depends on, or the repo file that holds the evidence (internal, not official).",
+  "updated": "2026-11-16: rows IN-20, IN-22, IN-26, IN-27 updated by session 1d824ec2-nfl1 from the CI capture of the official transactions and reserve-list register; no other row touched",
+  "amended": "2026-11-16 by session 98a40411-nfl1 (rows IN-04, IN-15, IN-17, IN-18 only)"
+ },
+ "rows": [
+  {
+   "id": "PR-01",
+   "group": "Pricing and results",
+   "requirement": "Price-snapshot store: opening and closing numbers for every market originated",
+   "status": "Blocked",
+   "checked": "repo artifact, not re-read",
+   "evidence": "data/s9cb/games.csv has one value per market per game (spread, total, moneylines) with no opening/closing split and no fetch time.",
+   "blocked_by": "No timestamped price source is approved. Odds are not an NFL official source.",
+   "clears_when": "Opening and closing rows with a fetch time for 100% of 2026 originated markets.",
+   "next_step": "Approve a price source and a fetch schedule (decision on price policy, PR-10).",
+   "src": {
+    "t": "games.csv",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/games.csv"
+   }
+  },
+  {
+   "id": "PR-02",
+   "group": "Pricing and results",
+   "requirement": "Verified results feed so backtests and ROI can be computed",
+   "status": "Partial",
+   "checked": "repo artifact, not re-read",
+   "evidence": "games.csv carries final scores 1999-2026 from nflverse (third-party). The official check against nfl.com covers the 2026 schedule only.",
+   "blocked_by": "Historical results are not matched to an official NFL page.",
+   "clears_when": "Official final score matched for 100% of backtest games.",
+   "next_step": "Match each season's scores to nfl.com week pages.",
+   "src": {
+    "t": "nfl.com Week 10 schedule",
+    "u": "https://www.nfl.com/schedules/2026/by-week/week-10"
+   }
+  },
+  {
+   "id": "PR-03",
+   "group": "Pricing and results",
+   "requirement": "Originate the side first, then the total, then the moneyline",
+   "status": "Not verified",
+   "checked": "not checked",
+   "evidence": "Origination order was not read in this session.",
+   "blocked_by": "Not checked.",
+   "clears_when": "A dated origination log showing side, then total, then moneyline for each game.",
+   "next_step": "Read analysis/engine.py and record the order it runs.",
+   "src": {
+    "t": "analysis/engine.py",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/analysis/engine.py"
+   }
+  },
+  {
+   "id": "PR-04",
+   "group": "Pricing and results",
+   "requirement": "Publish the fair line, the market line and the difference as separate columns",
+   "status": "Done",
+   "checked": "repo artifact, not re-read",
+   "evidence": "pipeline/gen_site.py overview table: 'My line', 'Market line' and the edge columns are separate.",
+   "blocked_by": "None.",
+   "clears_when": "n/a",
+   "next_step": "None.",
+   "src": {
+    "t": "pipeline/gen_site.py",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pipeline/gen_site.py"
+   }
+  },
+  {
+   "id": "PR-05",
+   "group": "Pricing and results",
+   "requirement": "Separate signal from staking on the leaderboard, so a lucky staking run cannot mask a bad signal",
+   "status": "Partial",
+   "checked": "repo artifact, not re-read",
+   "evidence": "data/s9cb/leaderboard.json gives hit_rate and break_even_hit_rate for each strategy beside profit_units and roi. Stake-size independence is not separately shown.",
+   "blocked_by": "No stake-independent ranking is published.",
+   "clears_when": "Stake-independent signal (hit rate against break-even, with CI) shown ranked ahead of staked ROI.",
+   "next_step": "Add the column to the leaderboard generator.",
+   "src": {
+    "t": "leaderboard.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
+   }
+  },
+  {
+   "id": "PR-06",
+   "group": "Pricing and results",
+   "requirement": "Pre-register every strategy; forbid backtest numbers from appearing on the leaderboard",
+   "status": "Not met",
+   "checked": "repo artifact, not re-read",
+   "evidence": "leaderboard.json ranks 12 rules scored on historical games (totals.bets_scored = 14,440 over 4,751 games). The brief forbids this.",
+   "blocked_by": "The leaderboard shows backtest results.",
+   "clears_when": "Leaderboard limited to prospective bets with a registration hash; backtests on a separate page.",
+   "next_step": "Split the leaderboard into prospective and backtest views.",
+   "src": {
+    "t": "leaderboard.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
+   }
+  },
+  {
+   "id": "PR-07",
+   "group": "Pricing and results",
+   "requirement": "Demotion gate: a live strategy goes back to paper",
+   "status": "Partial",
+   "checked": "repo artifact, not re-read",
+   "evidence": "The demotion gate is written in prereg/shadow-v1.md (section 'Demotion gate') with proposed thresholds fixed by commit 01da763. No strategy is on stakes, so it is not yet applied to any live strategy. leaderboard.json G1 to G8 still has no demotion rule.",
+   "blocked_by": "No rule text exists.",
+   "clears_when": "A written demotion rule (metric, window, threshold) committed before it is used.",
+   "next_step": "Draft the rule and commit it to the registration file.",
+   "src": {
+    "t": "leaderboard.json gate_definitions",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
+   }
+  },
+  {
+   "id": "PR-08",
+   "group": "Pricing and results",
+   "requirement": "Correlations computed only from officially sourced numbers, with n published",
+   "status": "Partial",
+   "checked": "repo artifact, not re-read",
+   "evidence": "data/s9cb/correlations.json publishes n with each value. Inputs are nflverse files, not official NFL numbers.",
+   "blocked_by": "No official-only input set has been built.",
+   "clears_when": "n and r recomputed from official-sourced numbers only.",
+   "next_step": "Build the official-only inputs from nfl.com pages.",
+   "src": {
+    "t": "correlations.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/correlations.json"
+   }
+  },
+  {
+   "id": "PR-09",
+   "group": "Pricing and results",
+   "requirement": "Turn the game log into a pre-registered backtest corpus",
+   "status": "Not started",
+   "checked": "repo artifact, not re-read",
+   "evidence": "data/leaderboard_rules.json holds 7 rules and no commit hash; the frozen corpus is not recorded.",
+   "blocked_by": "Corpus not frozen.",
+   "clears_when": "A registered corpus file and its commit hash, before the evaluation window opens.",
+   "next_step": "Freeze the corpus rule and commit it with a hash.",
+   "src": {
+    "t": "games.csv",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/games.csv"
+   }
+  },
+  {
+   "id": "PR-10",
+   "group": "Pricing and results",
+   "requirement": "Decide the price-data policy before any backtest is published",
+   "status": "Blocked",
+   "checked": "repo artifact, not re-read",
+   "evidence": "Decision on the Decision Room (room/data/decisions.json) is open: retire the -110 assumption; two leaderboards are live.",
+   "blocked_by": "Human decision outstanding.",
+   "clears_when": "A recorded decision naming the price source, timestamps and the closing-line rule.",
+   "next_step": "Make the decision on the Decide page.",
+   "src": {
+    "t": "room/data/decisions.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/decisions.json"
+   }
+  },
+  {
+   "id": "PR-11",
+   "group": "Pricing and results",
+   "requirement": "Ingest game-level results to make the ratings opponent-aware",
+   "status": "Done",
+   "checked": "repo artifact, not re-read",
+   "evidence": "README mentions EPA ratings; pages.yml runs analysis/engine.py on each build.",
+   "blocked_by": "None.",
+   "clears_when": "n/a",
+   "next_step": "None.",
+   "src": {
+    "t": "README.md",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/README.md"
+   }
+  },
+  {
+   "id": "PR-12",
+   "group": "Pricing and results",
+   "requirement": "Price our own line and publish the residual against the market on a schedule, from day one",
+   "status": "Partial",
+   "checked": "repo artifact, not re-read",
+   "evidence": "The weekly 'my line against market' rows are published. Past weekly residuals are not archived.",
+   "blocked_by": "No residual archive.",
+   "clears_when": "A residual row archived for every week since the first published line.",
+   "next_step": "Archive each weekly snapshot.",
+   "src": {
+    "t": "pipeline/gen_site.py",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pipeline/gen_site.py"
+   }
+  },
+  {
+   "id": "PR-13",
+   "group": "Pricing and results",
+   "requirement": "Vig-free market consensus against the originated fair-line decomposition",
+   "status": "Not started",
+   "checked": "repo artifact, not re-read",
+   "evidence": "No vig-removed probability appears on the landing table.",
+   "blocked_by": "Two-sided prices are needed (PR-01).",
+   "clears_when": "A vig-free probability for each market with both sides priced.",
+   "next_step": "Add once PR-01 closes.",
+   "src": {
+    "t": "pipeline/gen_site.py",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pipeline/gen_site.py"
+   }
+  },
+  {
+   "id": "PR-14",
+   "group": "Pricing and results",
+   "requirement": "Publish every model total twice (two estimators, gap column) until a walk-forward comparison picks one",
+   "status": "Not started",
+   "checked": "repo artifact, not re-read",
+   "evidence": "No second total estimator appears on the landing table.",
+   "blocked_by": "Second estimator not built.",
+   "clears_when": "Two totals and a gap column for every game; collapse only after a walk-forward test.",
+   "next_step": "Build the second estimator.",
+   "src": {
+    "t": "pipeline/gen_site.py",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pipeline/gen_site.py"
+   }
+  },
+  {
+   "id": "PR-15",
+   "group": "Pricing and results",
+   "requirement": "Pre-register each strategy: definition frozen before results are seen, commit hash is the registration",
+   "status": "Partial",
+   "checked": "repo artifact, not re-read",
+   "evidence": "shadow-v1 is registered before any Week 11 result exists (prereg/shadow-v1.md, commit 01da763). No strategy in the leaderboard has a registration commit, so the requirement is met for the shadow baseline only.",
+   "blocked_by": "Freeze not done.",
+   "clears_when": "A commit hash per strategy recorded before the evaluation window opens.",
+   "next_step": "Commit the rule text, sample window and gates.",
+   "src": {
+    "t": "leaderboard_rules.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/leaderboard_rules.json"
+   }
+  },
+  {
+   "id": "PR-16",
+   "group": "Pricing and results",
+   "requirement": "Split data into train, validation and final holdout seasons",
+   "status": "Partial",
+   "checked": "repo artifact, not re-read",
+   "evidence": "The leaderboard names a 2024 and 2025 holdout (gate G6). Train and validation seasons are not recorded separately.",
+   "blocked_by": "Split not recorded.",
+   "clears_when": "Three named season sets, each used once for its purpose.",
+   "next_step": "Document the split in the registration file.",
+   "src": {
+    "t": "leaderboard.json gate G6",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
+   }
+  },
+  {
+   "id": "PR-17",
+   "group": "Pricing and results",
+   "requirement": "Control baseline (random picks; favourites only) on every leaderboard run",
+   "status": "Not started",
+   "checked": "repo artifact, not re-read",
+   "evidence": "A text search of leaderboard.json found no control or random-pick row.",
+   "blocked_by": "Control not built.",
+   "clears_when": "A control row in every leaderboard run.",
+   "next_step": "Add random-pick and favourites-only rows.",
+   "src": {
+    "t": "leaderboard.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
+   }
+  },
+  {
+   "id": "PR-18",
+   "group": "Pricing and results",
+   "requirement": "Shadow baseline: singles only, pre-registered, forecasts recorded before kickoff",
+   "status": "Done",
+   "checked": "repo artifact, not re-read",
+   "evidence": "Registered in prereg/shadow-v1.md and .json (commit 01da763, 2026-11-15 12:53 UTC). The Week 11 forecast record data/shadow/forecasts_week11_v1.json (13 singles forecasts, probability and inputs) was committed in c1ffa1c before the first kickoff, Thu 19 Nov 2026 8:15 PM ET. tools/shadow_forecast.py --check reproduces it. No stakes.",
+   "blocked_by": "Not built.",
+   "clears_when": "At least one full week of forecasts with a fetch time earlier than each kickoff.",
+   "next_step": "Build the forecast log and freeze the model version.",
+   "src": {
+    "t": "data/model/lines.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/lines.json"
+   }
+  },
+  {
+   "id": "PR-19",
+   "group": "Pricing and results",
+   "requirement": "Proper-score leaderboard divisions: singles, game parlays, same-game parlays, prop combos",
+   "status": "Partial",
+   "checked": "repo artifact, not re-read",
+   "evidence": "Singles and game parlays are scored. Prop combos are not scored: props.json has price_status 'no price'.",
+   "blocked_by": "No prop prices.",
+   "clears_when": "Four divisions, each with n and Brier skill.",
+   "next_step": "Obtain prop prices (PR-10).",
+   "src": {
+    "t": "props.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/props.json"
+   }
+  },
+  {
+   "id": "PR-20",
+   "group": "Pricing and results",
+   "requirement": "Rank by benchmark-relative Brier skill with a game-cluster lower bound and a multiplicity adjustment",
+   "status": "Partial",
+   "checked": "repo artifact, not re-read",
+   "evidence": "Brier scoring appears in analysis/luck.py. The leaderboard ranks on ROI with a Benjamini-Hochberg correction.",
+   "blocked_by": "The leaderboard does not rank on Brier skill.",
+   "clears_when": "Brier skill against the benchmark, with a cluster lower bound and multiplicity adjustment, shown per strategy.",
+   "next_step": "Change the ranking metric and publish the benchmark.",
+   "src": {
+    "t": "analysis/luck.py",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/analysis/luck.py"
+   }
+  },
+  {
+   "id": "PR-21",
+   "group": "Pricing and results",
+   "requirement": "Two-stage leaderboard: proper-score qualification, then prospective CLV and ROI escrow",
+   "status": "Not started",
+   "checked": "repo artifact, not re-read",
+   "evidence": "Not built.",
+   "blocked_by": "Needs prospective bets (PR-15, PR-18).",
+   "clears_when": "A stage-2 escrow table opened only after a stage-1 pass.",
+   "next_step": "Build after PR-20.",
+   "src": {
+    "t": "leaderboard.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
+   }
+  },
+  {
+   "id": "PR-22",
+   "group": "Pricing and results",
+   "requirement": "Joint-evidence gate: parlays and prop combos ranked only with a validated joint probability and the operator's void and push rules",
+   "status": "Partial",
+   "checked": "repo artifact, not re-read",
+   "evidence": "parlays.json scores 66 game pairs with a correlation ratio. No validated joint probability or operator void/push rules exist for props.",
+   "blocked_by": "Operator rules and prop joint probabilities missing.",
+   "clears_when": "A validated joint probability and published void/push rules for each combo.",
+   "next_step": "Obtain operator rules and validate joint probabilities.",
+   "src": {
+    "t": "parlays.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/parlays.json"
+   }
+  },
+  {
+   "id": "PR-23",
+   "group": "Pricing and results",
+   "requirement": "Removal-of-luck panel on the dashboard",
+   "status": "Done",
+   "checked": "repo artifact, not re-read",
+   "evidence": "pages/luck.html ('Skill vs luck') is built and linked from the site navigation.",
+   "blocked_by": "None.",
+   "clears_when": "n/a",
+   "next_step": "None.",
+   "src": {
+    "t": "pages/luck.html",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pages/luck.html"
+   }
+  },
+  {
+   "id": "PR-24",
+   "group": "Pricing and results",
+   "requirement": "A two-sided 'what would change our mind' field on every strategy entry",
+   "status": "Partial",
+   "checked": "repo artifact, not re-read",
+   "evidence": "The two-sided 'what would change our mind' section is in prereg/shadow-v1.md and .json for shadow-v1 only. No strategy entry in the repo carries it.",
+   "blocked_by": "Field not defined.",
+   "clears_when": "Field present on 12 of 12 strategies, with an upside and a downside trigger.",
+   "next_step": "Add the field to the strategy schema.",
+   "src": {
+    "t": "leaderboard.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
+   }
+  },
+  {
+   "id": "PR-25",
+   "group": "Pricing and results",
+   "requirement": "Weekly 'what changed' diff: rank, rating and availability change columns",
+   "status": "Partial",
+   "checked": "repo artifact, not re-read",
+   "evidence": "data/shadow/whats_changed.json: differences between the 13 Nov and 15 Nov official injury reads (club row counts, practice status, 9 designations), with unresolved conflicts shown. Rank and rating change columns are not built, and the diff is not weekly yet.",
+   "blocked_by": "Weekly snapshots are not stored.",
+   "clears_when": "A diff column for every week since the first snapshot.",
+   "next_step": "Store each weekly snapshot and render the diff.",
+   "src": {
+    "t": "pipeline/gen_site.py",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pipeline/gen_site.py"
+   }
+  },
+  {
+   "id": "IN-01",
+   "group": "Injuries and depth",
+   "requirement": "Store every injury-hub read with its clock time; publish the delta, never the level",
+   "status": "Partial",
+   "checked": "re-read 2026-11-15",
+   "evidence": "Two dated reads now exist: the committed scrape (2026-11-14 17:02Z) and the live read (2026-11-15 12:18Z). The delta is published.",
+   "blocked_by": "Only two reads. No recurring series.",
+   "clears_when": "A read at least daily from Wednesday to kickoff, with the delta published for each.",
+   "next_step": "Schedule the capture and keep a read log.",
+   "src": {
+    "t": "nfl.com injury report",
+    "u": "https://www.nfl.com/injuries/"
+   }
+  },
+  {
+   "id": "IN-02",
+   "group": "Injuries and depth",
+   "requirement": "Snapshot the injury report every Wednesday, Thursday and Friday and keep a dated history",
+   "status": "Partial",
+   "checked": "repo artifact, not re-read",
+   "evidence": "collect-data.yml runs the scrape daily at 11:17 UTC. Each run overwrites data/model/official_injuries.json.",
+   "blocked_by": "Overwrite, not history.",
+   "clears_when": "A retained, hashed copy for each run.",
+   "next_step": "Commit a dated copy per run.",
+   "src": {
+    "t": "collect-data.yml",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/.github/workflows/collect-data.yml"
+   }
+  },
+  {
+   "id": "IN-03",
+   "group": "Injuries and depth",
+   "requirement": "Immutable official availability snapshots: raw hash, timestamp and conflict flags",
+   "status": "Partial",
+   "checked": "repo artifact, not re-read",
+   "evidence": "The scrape stores html_sha256 and generated_at. The raw HTML is not kept and no conflict flag exists.",
+   "blocked_by": "Raw HTML not retained.",
+   "clears_when": "Raw page, sha256 and conflict flag stored for every run.",
+   "next_step": "Retain the raw HTML and add the conflict flag.",
+   "src": {
+    "t": "scrape_injuries.py",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pipeline/scrape_injuries.py"
+   }
+  },
+  {
+   "id": "IN-04",
+   "group": "Injuries and depth",
+   "requirement": "Capture official inactive lists and snap counts",
+   "status": "Partial",
+   "checked": "official sources read 2026-11-16",
+   "evidence": "Inactive lists: the official weekly inactives article is now captured and transcribed (data/gamebook/official_inactives/, 147 names over 24 clubs for Week 10 2026) and joined to the 347-row report in data/gamebook/derived/ledger.json (424 rows). The game's own Game Book prints the same list again, plus an active-but-Did-Not-Play line (source S41). Snap counts: the Game Book contains none, and no official per-player snap share was found (Q31), so this half stays open on purpose.",
+   "blocked_by": "Game Book coverage (0 of 14 Week 10 games captured in the tree, F72) and the absence of an official snap-count source (Q31).",
+   "clears_when": "14 of 14 played games of a week with a captured Game Book for the not-active / did-not-play split; snap counts only if an official source is identified (blank until then).",
+   "next_step": "Let .github/workflows/gamebook-sweep.yml append captures; decide in Q31 what stands in for playing time.",
+   "src": {
+    "t": "gamebook register",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/gamebook/register.json"
+   }
+  },
+  {
+   "id": "IN-05",
+   "group": "Injuries and depth",
+   "requirement": "Populate the three missing Lions game-status designations (Joseph, Mays, Reed)",
+   "status": "Done",
+   "checked": "re-read 2026-11-15",
+   "evidence": "Today's nfl.com read: Kerby Joseph, Cade Mays and D.J. Reed are all Out. The 2026-11-14 scrape also shows Out for all three.",
+   "blocked_by": "None.",
+   "clears_when": "n/a",
+   "next_step": "None.",
+   "src": {
+    "t": "nfl.com injury report",
+    "u": "https://www.nfl.com/injuries/"
+   }
+  },
+  {
+   "id": "IN-06",
+   "group": "Injuries and depth",
+   "requirement": "Re-capture and republish the Week 10 injury tables",
+   "status": "Partial",
+   "checked": "re-read 2026-11-15",
+   "evidence": "Re-captured 2026-11-15: 347 rows across 28 clubs. The published scrape holds 345 rows; 2 live rows are absent and 32 field values differ (injury_delta_2026-11-15.json).",
+   "blocked_by": "The scraper has not been re-run after the defect is fixed (see SI-09).",
+   "clears_when": "The published table equals the live read: 0 rows missing and 0 field differences.",
+   "next_step": "Re-run the scrape in Actions after the fix, then re-compare.",
+   "src": {
+    "t": "live read and delta",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/brief_07810d9f/injury_delta_2026-11-15.json"
+   }
+  },
+  {
+   "id": "IN-07",
+   "group": "Injuries and depth",
+   "requirement": "Seattle and Cincinnati injury rows present in the published table",
+   "status": "Done",
+   "checked": "re-read 2026-11-15",
+   "evidence": "The committed scrape and the 2026-11-15 read both list SEA with 15 rows and CIN with 9 rows, and the names match (injury_delta_2026-11-15.json shows no SEA or CIN difference).",
+   "blocked_by": "None.",
+   "clears_when": "n/a",
+   "next_step": "None.",
+   "src": {
+    "t": "nfl.com injury report",
+    "u": "https://www.nfl.com/injuries/"
+   }
+  },
+  {
+   "id": "IN-08",
+   "group": "Injuries and depth",
+   "requirement": "Texans depth published as an image: needs an authorized structured source, not transcription by eye",
+   "status": "Blocked",
+   "checked": "re-read 2026-11-15",
+   "evidence": "The Houston depth-chart page (read 2026-11-15) is labelled 'Unofficial Depth Chart' and holds an image. The depth ladder has 0 Houston slots.",
+   "blocked_by": "No authorized structured source has been found.",
+   "clears_when": "Houston rows in text form from an authorized source: 1 of 1 club.",
+   "next_step": "Ask the club or find a structured source the club publishes.",
+   "src": {
+    "t": "Houston depth chart",
+    "u": "https://www.houstontexans.com/team/depth-chart"
+   }
+  },
+  {
+   "id": "IN-09",
+   "group": "Injuries and depth",
+   "requirement": "Packers prepend jersey numbers: strip the numbers and keep the raw string",
+   "status": "Partial",
+   "checked": "re-read 2026-11-15 (d4027f66)",
+   "evidence": "data/depth/official_register.json: all 55 printed Packers names are parsed with the jersey stripped into `jersey`, the printed string kept in `raw_cell`, and the page URL and fetch date on each row. The 55 names match packers.com/team/depth-chart as read on 2026-11-15. data/depth_chart.json still holds 59 prefixed GB cells: 55 printed plus 4 not on the page (flag F53).",
+   "blocked_by": "data/depth_chart.json is not replaced; other pages read it.",
+   "clears_when": "Register used in place of data/depth_chart.json, or the old file's GB rows corrected, with zero prefixed cells in the published table.",
+   "next_step": "Replace the GB rows of data/depth_chart.json from the register (F53).",
+   "src": {
+    "t": "official_register.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/depth/official_register.json"
+   }
+  },
+  {
+   "id": "IN-10",
+   "group": "Injuries and depth",
+   "requirement": "Model depth slots as groups, not a single starter (the brief's 149-slot count is not reproduced here)",
+   "status": "Partial",
+   "checked": "re-read 2026-11-15 (d4027f66)",
+   "evidence": "Four clubs captured 2026-11-15 (GB, KC, SF, SEA): 95 slot groups; 16 groups list more than one first-column player (Packers WR: three). Each printed slot is stored with its group id, column and shared/empty flags (data/depth/official_register.json summary). The brief's 149 across 32 clubs is not reproduced (F57).",
+   "blocked_by": "Only 4 of 32 clubs captured; the 149 count needs all 32.",
+   "clears_when": "The 32-club count reproduced from official pages, each slot stored as a group.",
+   "next_step": "Run the 32-club official depth-chart sweep (IN-13 route a).",
+   "src": {
+    "t": "official_register.json summary",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/depth/official_register.json"
+   }
+  },
+  {
+   "id": "IN-11",
+   "group": "Injuries and depth",
+   "requirement": "Model depth from playing time, not jersey order",
+   "status": "Blocked",
+   "checked": "repo artifact, not re-read",
+   "evidence": "No snap-count source is captured.",
+   "blocked_by": "Snap counts unavailable (IN-04).",
+   "clears_when": "Snap share per player per week from an official source.",
+   "next_step": "Obtain the source (IN-04).",
+   "src": {
+    "t": "depth_ladder.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/depth_ladder.json"
+   }
+  },
+  {
+   "id": "IN-12",
+   "group": "Injuries and depth",
+   "requirement": "Reject deriving depth order from jersey number, experience or salary",
+   "status": "Rejected (brief)",
+   "checked": "repo artifact, not re-read",
+   "evidence": "The ladder's stated starter rule (depth_ladder.json method.starter_rule) is the lowest-ranked listed player at the slot who is not Out or Doubtful on the official report. The rule text uses chart rank and report status only, so no jersey, experience or salary input is stated.",
+   "blocked_by": "None.",
+   "clears_when": "n/a",
+   "next_step": "None.",
+   "src": {
+    "t": "depth_ladder.json method",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/depth_ladder.json"
+   }
+  },
+  {
+   "id": "IN-13",
+   "group": "Injuries and depth",
+   "requirement": "Resolve the depth-order source before building the backup-deficiency feature (route a: club chart; route b: snap counts)",
+   "status": "Partial",
+   "checked": "repo artifact, not re-read",
+   "evidence": "Route a (club chart pages) is used for 31 of 32 clubs. Houston has no structured chart. Route b is not available.",
+   "blocked_by": "Houston (IN-08).",
+   "clears_when": "Route a verified for 32 of 32 clubs.",
+   "next_step": "Clear IN-08.",
+   "src": {
+    "t": "depth_ladder.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/depth_ladder.json"
+   }
+  },
+  {
+   "id": "IN-14",
+   "group": "Injuries and depth",
+   "requirement": "Injury signal as a surprise (a change), never a level",
+   "status": "Not started",
+   "checked": "repo artifact, not re-read",
+   "evidence": "The ladder uses levels (slots_starter_at_risk per club). No change-from-prior-read variable exists.",
+   "blocked_by": "No time series yet (IN-01, IN-02).",
+   "clears_when": "A change variable (for example Questionable to Out, DNP to LP to FP) for each player-week.",
+   "next_step": "Build the change variable from the dated series.",
+   "src": {
+    "t": "depth_ladder.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/depth_ladder.json"
+   }
+  },
+  {
+   "id": "IN-15",
+   "group": "Injuries and depth",
+   "requirement": "Score injury-designation reliability (play rate per designation with CIs) and calibrate what 'Questionable' means",
+   "status": "Partial",
+   "checked": "computed from official sources 2026-11-16",
+   "evidence": "Declared-inactive rate per designation, Week 10 2026, official report joined to the official inactives article: Questionable 18.3% (n=82, 95% CI 11.4-28.0), Out 75.0% (n=64, 63.2-84.0), Doubtful 40.0% (n=10, 16.8-68.7). Published in data/gamebook/derived/designations.json with n on every row and no percentage inherited from old conventions. The play rate itself is still blank: it needs the Game Book for each game (F72).",
+   "blocked_by": "Play rate needs a Game Book per game. The interval is wide at one week, and the past season cannot be back-filled from the report url: every past-week request returns the most recent published page (F73), so n grows only forward or from the dated news archive.",
+   "clears_when": "Play rate per designation with n>=200 per designation and an interval, from the joined sample.",
+   "next_step": "Capture Wed/Thu/Fri plus game day for the current week (cadence, not back-history), walk the dated inactives articles for past weeks, then quote the pooled cell.",
+   "src": {
+    "t": "gamebook designation table",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/gamebook/derived/designations.json"
+   }
+  },
+  {
+   "id": "IN-16",
+   "group": "Injuries and depth",
+   "requirement": "Injury and personnel ablations with chronological holdouts, reporting the difference with uncertainty",
+   "status": "Partial",
+   "checked": "repo artifact, not re-read",
+   "evidence": "data/personnel/ holds a personnel-deficiency study. An ablation with an uncertainty interval was not confirmed.",
+   "blocked_by": "Interval not confirmed.",
+   "clears_when": "An ablation table with a confidence interval and a holdout season.",
+   "next_step": "Run the with-and-without comparison.",
+   "src": {
+    "t": "data/personnel/leaderboard.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/personnel/leaderboard.json"
+   }
+  },
+  {
+   "id": "IN-17",
+   "group": "Injuries and depth",
+   "requirement": "Availability graph as a first-class dataset: who was expected to start and who actually did",
+   "status": "Partial",
+   "checked": "official sources read 2026-11-16",
+   "evidence": "The outcome half of the graph is built: data/gamebook/derived/ledger.json holds one row per (week, club, player) with the designation, the practice participation, the declared-inactive state and the Game Book state, and the register also keeps the 77 inactive-with-no-report-row cases. The expected half is the club's first-listed name in data/depth_chart.json, published per slot and marked ambiguous where several names share rank 1; the comparison renders in gamebook/starters.html as soon as a Game Book is captured.",
+   "blocked_by": "Actual-starter evidence is the Game Book line-up, and no Game Book capture is in the tree yet (F72). No starter is inferred from a rank, a jersey or a salary in the meantime.",
+   "clears_when": "One captured week where every club-game has a Game Book line-up, so expected-vs-actual exists for all 11 offensive and 11 defensive slots of 28 clubs, not a sample of them.",
+   "next_step": "Run the sweep; then join depth_chart.json rank-1 slots to the line-up cells.",
+   "src": {
+    "t": "gamebook starters page",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/gamebook/starters.html"
+   }
+  },
+  {
+   "id": "IN-18",
+   "group": "Injuries and depth",
+   "requirement": "Use official NFL Game Books for actual starters and game-day status",
+   "status": "Partial",
+   "checked": "source read 2026-11-16",
+   "evidence": "Source identified and reachable: every official game centre page links 'Download Game Book (PDF)' on static.www.nfl.com, and the Week 10 file was read on 2026-11-16 - it prints Lineups, Substitutions, Did Not Play and Not Active per club (S41, S42). pipeline/collect_gamebooks.py walks the schedule pages, finds the link, downloads, hashes and parses; tools/check_gamebook_register.py pins the counts and the required fields. 0 of 14 Week 10 game books are stored in the tree at commit time (F72), and the brief's prohibition is implemented: no depth rank and no snap count is inferred from these files.",
+   "blocked_by": "Coverage only: the collector runs on GitHub Actions because the sandbox cannot reach nfl.com.",
+   "clears_when": "14 of 14 Week 10 games with parse_status ok on gamebook/results.html, then the same for every played 2026 week.",
+   "next_step": "Watch the first scheduled sweep and reconcile its Not Active lists against the article (gamebook/crosscheck.html).",
+   "src": {
+    "t": "gamebook collector",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pipeline/collect_gamebooks.py"
+   }
+  },
+  {
+   "id": "IN-19",
+   "group": "Injuries and depth",
+   "requirement": "Announced-starter evidence field (not an inferred replacement)",
+   "status": "Partial",
+   "checked": "repo artifact, not re-read",
+   "evidence": "data/verified/qb_changes_2026.csv holds 5 QB announcements (MIA, SEA, AZ, CLE, BAL), each with an nfl.com article link.",
+   "blocked_by": "QB only.",
+   "clears_when": "Every announced starter change, not only QBs.",
+   "next_step": "Extend the file beyond QB.",
+   "src": {
+    "t": "qb_changes_2026.csv",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/verified/qb_changes_2026.csv"
+   }
+  },
+  {
+   "id": "IN-20",
+   "group": "Injuries and depth",
+   "requirement": "Roster turnover as a first-class data event (releases, signings, IR moves)",
+   "status": "Partial",
+   "checked": "gates run on the CI capture of 2026-11-16T15:08:04Z",
+   "evidence": "A dated roster-event register exists and is the union of every official read: 448 rows across 6 categories (other 30, reserve-list 100, signings 100, terminations 74, trades 44, waivers 100) and 32 club codes, each row carrying its printed date, the two clubs, the transaction text and an nfl.com link. It is captured by pipeline/collect_transactions.py in GitHub Actions (.github/workflows/transactions-sweep.yml, hourly) into data/reserve/captures/, hashed, replayed and gated by tools/check_reserve_register.py. Depth rows are now versioned against the last official roster event by tools/check_depth_staleness_1d824ec2.py: 29 findings across 12 clubs (CAR, CLE, DAL, GB, HOU, IND, LA, NE, NO, SEA, SF, TEN). The source prints at most 25 rows per category-month page, so 15 of 24 pages sit at that cap and 15 of them are incomplete for a month that has already closed; those counts are floors, not totals, and the published page says so.",
+   "blocked_by": "turnover before 2026-08 is not in the captured window, and closed months cannot be back-filled from the printed page (cap above)",
+   "clears_when": "every month of the season is captured from its first day, so no page sits at the 25-row cap with an oldest row later than the 1st \u2014 then the event table is a total rather than a floor",
+   "next_step": "run the sweep from the first day of each month (already live) and add an official pre-season source for months that have closed",
+   "src": {
+    "t": "depth_ladder.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/depth_ladder.json"
+   },
+   "updated": "2026-11-16 by session 1d824ec2-nfl1 (transactions/reserve register)"
+  },
+  {
+   "id": "IN-21",
+   "group": "Injuries and depth",
+   "requirement": "Official depth-chart register with a date and source on every row",
+   "status": "Partial",
+   "checked": "re-read 2026-11-15 (d4027f66)",
+   "evidence": "data/depth/official_register.json: every row carries the club page URL, the page label as printed, and the fetch date (2026-11-15). Page labels: GB 'Unofficial, Nov. 10, 2026'; SF 'Updated as of 11/10/26'; KC 'Unofficial Depth Chart', no date; SEA none printed in the captured portion.",
+   "blocked_by": "Only 4 of 32 clubs; KC and SEA print no as-of date.",
+   "clears_when": "All 32 clubs captured with the page label as printed; no-date charts flagged.",
+   "next_step": "Capture the remaining 28 club charts (IN-13 route a).",
+   "src": {
+    "t": "official_register.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/depth/official_register.json"
+   }
+  },
+  {
+   "id": "IN-22",
+   "group": "Injuries and depth",
+   "requirement": "Flag stale depth rows against the official transactions log",
+   "status": "Partial",
+   "checked": "gates run on the CI capture of 2026-11-16T15:08:04Z",
+   "evidence": "The check exists and runs in CI: tools/check_depth_staleness_1d824ec2.py compares every player name read out of the depth artifacts (depth register (official club pages)=236, depth_chart.json (repo chart, s1-s4 columns)=173, model availability (pipeline)=0, week 10 injury report (repo copy)=254) with the dated register (448 rows), and separates a row that contradicts a claim of being current (12) from a row in a dated snapshot that is merely superseded (17) \u2014 the two fail differently and are not pooled into one count. Written to data/reserve/depth_staleness.json and published on reserve/index.html. It does not infer a depth rank from anything: it only reports an official move that the artifact has not absorbed.",
+   "blocked_by": "12 depth rows still contradict a dated official move (the number above)",
+   "clears_when": "zero findings of kind `current-roster-claim` at each build (now 12)",
+   "next_step": "hand the 12 findings to the depth-chart owners as refresh work; the gate reports them, it does not edit another owner's artifact",
+   "src": {
+    "t": "Baltimore depth chart",
+    "u": "https://www.baltimoreravens.com/team/depth-chart"
+   },
+   "updated": "2026-11-16 by session 1d824ec2-nfl1 (transactions/reserve register)"
+  },
+  {
+   "id": "IN-23",
+   "group": "Injuries and depth",
+   "requirement": "Point-in-time snapshot ledger for injuries, depth charts and inactives",
+   "status": "Not started",
+   "checked": "repo artifact, not re-read",
+   "evidence": "Two dated injury reads only. No ledger.",
+   "blocked_by": "Not built.",
+   "clears_when": "A ledger with fetch time and hash per source per read.",
+   "next_step": "Build the ledger.",
+   "src": {
+    "t": "injury_delta_2026-11-15.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/brief_07810d9f/injury_delta_2026-11-15.json"
+   }
+  },
+  {
+   "id": "IN-24",
+   "group": "Injuries and depth",
+   "requirement": "Per-team view: starters out, replacements named, net injury count",
+   "status": "Partial",
+   "checked": "repo artifact, not re-read",
+   "evidence": "data/shadow/team_view.json (15 Nov official read): per club, listed players, Out/Doubtful/Questionable and practice counts, every player row linked to nfl.com. Starters out and replacements are blank: no official source exists.",
+   "blocked_by": "Net count not built.",
+   "clears_when": "A 32-row table with starters out, replacements named and net count.",
+   "next_step": "Build the per-team table.",
+   "src": {
+    "t": "depth page",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pages/depth.html"
+   }
+  },
+  {
+   "id": "IN-25",
+   "group": "Injuries and depth",
+   "requirement": "Interactive offense and defense matchup deficiency matrix (1st to 4th string)",
+   "status": "Partial",
+   "checked": "repo artifact, not re-read",
+   "evidence": "The depth page lists string ladders for each club. No offense-against-defense matrix exists.",
+   "blocked_by": "Matrix not built.",
+   "clears_when": "An interactive matrix built from the ladder data.",
+   "next_step": "Build the matrix.",
+   "src": {
+    "t": "depth page",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pages/depth.html"
+   }
+  },
+  {
+   "id": "IN-26",
+   "group": "Injuries and depth",
+   "requirement": "Run the 32-team roster and IR sweep before any team-level model is trusted",
+   "status": "Partial",
+   "checked": "gates run on the CI capture of 2026-11-16T15:08:04Z",
+   "evidence": "The reserve list is captured: 24 official pages (6 categories x 4 months), 448 rows, 100 players on a reserve designation still open at the last read, 83 of them named on a reserve list and on no Week-10 injury report row (347 rows) \u2014 which is the whole point: not listed does not mean available. 31 of 32 club depth charts are read; Houston is blocked by IN-08. model availability names 0 players to the staleness check, so a team-level model built on it cannot name anyone either.",
+   "blocked_by": "IN-08 (Houston club chart) and the 25-row printed cap on closed months",
+   "clears_when": "32 of 32 club charts read and every category-month page captured inside the month it belongs to (now 24 of 24 capped at the source)",
+   "next_step": "clear IN-08; the sweep already covers the reserve list",
+   "src": {
+    "t": "depth_ladder.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/depth_ladder.json"
+   },
+   "updated": "2026-11-16 by session 1d824ec2-nfl1 (transactions/reserve register)"
+  },
+  {
+   "id": "IN-27",
+   "group": "Injuries and depth",
+   "requirement": "Capture the reserve list so 'not listed' never means 'available'",
+   "status": "Done",
+   "checked": "re-read of the live official page and the CI capture of 2026-11-16T15:08:04Z",
+   "evidence": "The reserve list is captured with a date, captured by pipeline/collect_transactions.py in GitHub Actions (.github/workflows/transactions-sweep.yml, hourly) into data/reserve/captures/, hashed, replayed and gated by tools/check_reserve_register.py. Every derived row carries the date the league printed plus the UTC time of the read; data/reserve/heartbeat.jsonl holds one line per sweep including no-change sweeps, and manifest.json retains each page's raw and canonical hashes, so a re-derivation either reproduces the table or fails. Per club the count is report + reserve, published on reserve/index.html (e.g. Miami: 11 report rows + 3 on a reserve list = 14 unavailable). The page states the limit rather than hiding it: 15 page(s) sit at the publisher's 25-row cap.",
+   "blocked_by": "None.",
+   "clears_when": "met: 100 open reserve designations captured with dates and linked to the official page, gated on every build",
+   "next_step": "keep the sweep running; widen the captured months as the season advances and hand the 12 staleness findings to the depth owners",
+   "src": {
+    "t": "nfl.com injury page (news items)",
+    "u": "https://www.nfl.com/injuries/"
+   },
+   "updated": "2026-11-16 by session 1d824ec2-nfl1 (transactions/reserve register)"
+  },
+  {
+   "id": "IN-28",
+   "group": "Injuries and depth",
+   "requirement": "Archive weekly injury reports for past seasons (for Q06)",
+   "status": "Partial",
+   "checked": "repo artifact, not re-read",
+   "evidence": "data/s9cb/injuries.csv is an nflverse file (third-party), not an official archive.",
+   "blocked_by": "Official archive not captured.",
+   "clears_when": "Official weekly reports archived with hashes.",
+   "next_step": "Capture the official archive.",
+   "src": {
+    "t": "s9cb/injuries.csv",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/injuries.csv"
+   }
+  },
+  {
+   "id": "IN-29",
+   "group": "Injuries and depth",
+   "requirement": "Stadium roof and surface, with an NWS hourly wind and precipitation overlay",
+   "status": "Blocked",
+   "checked": "repo artifact, not re-read",
+   "evidence": "games.csv holds roof, surface, temperature and wind (nflverse). No NWS hourly grid is captured.",
+   "blocked_by": "NWS feed not captured.",
+   "clears_when": "Hourly NWS values per game with a timestamp.",
+   "next_step": "Capture the NWS forecast with timestamps.",
+   "src": {
+    "t": "games.csv",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/games.csv"
+   }
+  },
+  {
+   "id": "IN-30",
+   "group": "Injuries and depth",
+   "requirement": "Transcribe the venue of every fixture from the official game centre and publish it",
+   "status": "Partial",
+   "checked": "repo artifact, not re-read",
+   "evidence": "data/shadow/week11_venues.csv: all 13 Week 11 venues transcribed from the official nfl.com game centre pages (URL on each row). Other fixtures are not transcribed.",
+   "blocked_by": "Not transcribed.",
+   "clears_when": "All 14 Week 10 venues transcribed, each with its page link.",
+   "next_step": "Transcribe from each official game page.",
+   "src": {
+    "t": "nfl.com Week 10 schedule",
+    "u": "https://www.nfl.com/schedules/2026/by-week/week-10"
+   }
+  },
+  {
+   "id": "IN-31",
+   "group": "Injuries and depth",
+   "requirement": "Publish the league's dated schedule announcement beside the live schedule page",
+   "status": "Not started",
+   "checked": "repo artifact, not re-read",
+   "evidence": "Not built.",
+   "blocked_by": "Not built.",
+   "clears_when": "Announcement date and link shown beside the live schedule.",
+   "next_step": "Build the panel.",
+   "src": {
+    "t": "nfl.com Week 10 schedule",
+    "u": "https://www.nfl.com/schedules/2026/by-week/week-10"
+   }
+  },
+  {
+   "id": "IN-32",
+   "group": "Injuries and depth",
+   "requirement": "Fixture-context feature set built only from published schedule facts",
+   "status": "Partial",
+   "checked": "repo artifact, not re-read",
+   "evidence": "data/shadow/week11_context.json: rest days, short week and division flag for Week 11 from published schedule dates, cross-checked 13 of 13 to data/model/snapshot.json. Other weeks are not built.",
+   "blocked_by": "Not built from nfl.com.",
+   "clears_when": "Features rebuilt from nfl.com schedule pages only.",
+   "next_step": "Rebuild from the nfl.com schedule.",
+   "src": {
+    "t": "games.csv",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/games.csv"
+   }
+  },
+  {
+   "id": "IN-33",
+   "group": "Injuries and depth",
+   "requirement": "Kickoff and declared onside-kick regime priors filter",
+   "status": "Not started",
+   "checked": "repo artifact, not re-read",
+   "evidence": "No onside-kick regime data is captured.",
+   "blocked_by": "Not built.",
+   "clears_when": "A regime flag per game from a published source.",
+   "next_step": "Identify a published source for declared onside kicks.",
+   "src": {
+    "t": "decision questions",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/questions.json"
+   }
+  },
+  {
+   "id": "MO-01",
+   "group": "Models and leaderboard",
+   "requirement": "Store every model output as a probability plus its inputs, not just a pick",
+   "status": "Partial",
+   "checked": "not checked",
+   "evidence": "data/shadow/forecasts_week11_v1.json stores probability and inputs (ratings, home-field term, sigma, lambda, venue, benchmarks) for shadow-v1. Inputs stored per line in data/model/lines.json were not checked.",
+   "blocked_by": "Not checked.",
+   "clears_when": "Each output stored with its probability and inputs.",
+   "next_step": "Check lines.json against the rule.",
+   "src": {
+    "t": "data/model/lines.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/model/lines.json"
+   }
+  },
+  {
+   "id": "MO-02",
+   "group": "Models and leaderboard",
+   "requirement": "Originate our own lines (spread, total, win probability)",
+   "status": "Partial",
+   "checked": "repo artifact, not re-read",
+   "evidence": "Own lines are published. A holdout comparison against the market is not confirmed in this session, so no error figure is claimed.",
+   "blocked_by": "Our lines are less accurate than the market on the holdout.",
+   "clears_when": "Own spread error at or below the market error on the holdout, with an interval (not yet computed in this session).",
+   "next_step": "Improve the model and re-test on the holdout.",
+   "src": {
+    "t": "COORDINATION.md",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/COORDINATION.md"
+   }
+  },
+  {
+   "id": "MO-03",
+   "group": "Models and leaderboard",
+   "requirement": "Research and develop strategies that generate useful signals",
+   "status": "Done",
+   "checked": "repo artifact, not re-read",
+   "evidence": "12 rules have been tested with effect sizes published.",
+   "blocked_by": "None.",
+   "clears_when": "n/a",
+   "next_step": "None.",
+   "src": {
+    "t": "leaderboard.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
+   }
+  },
+  {
+   "id": "MO-04",
+   "group": "Models and leaderboard",
+   "requirement": "Treat it as a leaderboard competition with rewards for top strategies",
+   "status": "Not verified",
+   "checked": "not checked",
+   "evidence": "The leaderboard is scored. No reward rule was found in the repo in this session.",
+   "blocked_by": "Reward values not set.",
+   "clears_when": "A published reward rule with values.",
+   "next_step": "Decide the reward values.",
+   "src": {
+    "t": "room/data/questions.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/questions.json"
+   }
+  },
+  {
+   "id": "MO-05",
+   "group": "Models and leaderboard",
+   "requirement": "Single bets, parlays and player-prop combinations, each scored",
+   "status": "Partial",
+   "checked": "repo artifact, not re-read",
+   "evidence": "Single bets and parlays are scored. Prop combinations are not, because no prop prices exist.",
+   "blocked_by": "No prop prices (PR-10).",
+   "clears_when": "Each bet type scored with its own price source.",
+   "next_step": "Obtain prices.",
+   "src": {
+    "t": "props.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/props.json"
+   }
+  },
+  {
+   "id": "MO-06",
+   "group": "Models and leaderboard",
+   "requirement": "Every strategy must pass validation gates",
+   "status": "Done",
+   "checked": "repo artifact, not re-read",
+   "evidence": "Eight gates are defined and applied (leaderboard.json gate_definitions).",
+   "blocked_by": "None.",
+   "clears_when": "n/a",
+   "next_step": "None.",
+   "src": {
+    "t": "leaderboard.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
+   }
+  },
+  {
+   "id": "MO-07",
+   "group": "Models and leaderboard",
+   "requirement": "Determine correlation values",
+   "status": "Done",
+   "checked": "repo artifact, not re-read",
+   "evidence": "correlations.json publishes values with n. The official-only limit is recorded at PR-08.",
+   "blocked_by": "PR-08 limit.",
+   "clears_when": "n/a",
+   "next_step": "None.",
+   "src": {
+    "t": "correlations.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/correlations.json"
+   }
+  },
+  {
+   "id": "MO-08",
+   "group": "Models and leaderboard",
+   "requirement": "Remove luck from the equation: bootstrap, multiple testing, holdout, binomial test",
+   "status": "Done",
+   "checked": "repo artifact, not re-read",
+   "evidence": "luck_accounting and gates G5, G6 and G8 are in leaderboard.json.",
+   "blocked_by": "None.",
+   "clears_when": "n/a",
+   "next_step": "None.",
+   "src": {
+    "t": "leaderboard.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
+   }
+  },
+  {
+   "id": "MO-09",
+   "group": "Models and leaderboard",
+   "requirement": "Build strategies that are selectively skill-based",
+   "status": "Partial",
+   "checked": "repo artifact, not re-read",
+   "evidence": "0 of 12 rules pass all eight gates (the most any rule passes is six: gates_passed in leaderboard.json).",
+   "blocked_by": "No rule passes the gates.",
+   "clears_when": "At least one rule passes all gates with a confidence interval above the benchmark.",
+   "next_step": "Keep testing pre-registered rules.",
+   "src": {
+    "t": "leaderboard.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json"
+   }
+  },
+  {
+   "id": "SI-01",
+   "group": "Site and process",
+   "requirement": "A clean landing page and subpages organised by category, with a simple dashboard",
+   "status": "Done",
+   "checked": "repo artifact, not re-read",
+   "evidence": "The Decision Room (room/) has 11 pages in categories, and the root site has category navigation.",
+   "blocked_by": "None.",
+   "clears_when": "n/a",
+   "next_step": "None.",
+   "src": {
+    "t": "Decision Room",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/index.html"
+   }
+  },
+  {
+   "id": "SI-02",
+   "group": "Site and process",
+   "requirement": "Every table row carries a source link; blanks labelled unverified",
+   "status": "Partial",
+   "checked": "repo artifact, not re-read",
+   "evidence": "room/verify.py fails any row without an https link. Many rows link to repo files, not official pages.",
+   "blocked_by": "Official-page links missing on internal-artifact rows.",
+   "clears_when": "Every row links to an official page or is marked unverified.",
+   "next_step": "Add official links or mark rows unverified.",
+   "src": {
+    "t": "room/verify.py",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/verify.py"
+   }
+  },
+  {
+   "id": "SI-03",
+   "group": "Site and process",
+   "requirement": "Verify line by line against official sources; never infer a value",
+   "status": "Partial",
+   "checked": "re-read 2026-11-15",
+   "evidence": "The nfl.com injury report was read in full (8 page chunks, 347 rows, 28 clubs) and diffed. The repo-wide re-verification is not complete.",
+   "blocked_by": "Scope: the injury page and a few club charts were re-read.",
+   "clears_when": "Every table row re-read or marked unverified.",
+   "next_step": "Continue the line-by-line pass by page.",
+   "src": {
+    "t": "live read",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/brief_07810d9f/live_read_2026-11-15_week10.psv"
+   }
+  },
+  {
+   "id": "SI-04",
+   "group": "Site and process",
+   "requirement": "Executive summary of the important details",
+   "status": "Done",
+   "checked": "repo artifact, not re-read",
+   "evidence": "Executive summary page and Decision Room executive page.",
+   "blocked_by": "None.",
+   "clears_when": "n/a",
+   "next_step": "None.",
+   "src": {
+    "t": "executive-summary.html",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/executive-summary.html"
+   }
+  },
+  {
+   "id": "SI-05",
+   "group": "Site and process",
+   "requirement": "Clear list of questions, the information known and missing, and the answers needed before a decision",
+   "status": "Done",
+   "checked": "repo artifact, not re-read",
+   "evidence": "Decision Room questions page (22 questions in room/data/questions.json).",
+   "blocked_by": "None.",
+   "clears_when": "n/a",
+   "next_step": "None.",
+   "src": {
+    "t": "room/questions.html",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/questions.html"
+   }
+  },
+  {
+   "id": "SI-06",
+   "group": "Site and process",
+   "requirement": "A dedicated suggestions section so someone can review and choose a path before anything is changed",
+   "status": "Done",
+   "checked": "repo artifact, not re-read",
+   "evidence": "Decision Room decisions page (options, costs, risks) and suggestions page.",
+   "blocked_by": "None.",
+   "clears_when": "n/a",
+   "next_step": "None.",
+   "src": {
+    "t": "room/decisions.html",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/decisions.html"
+   }
+  },
+  {
+   "id": "SI-07",
+   "group": "Site and process",
+   "requirement": "Repo review with irregularities flagged and linked for manual review",
+   "status": "Partial",
+   "checked": "repo artifact, not re-read",
+   "evidence": "This session flagged 11 irregularities (data/flags.json, F-7810-01 to F-7810-11). The repo-wide audit is not complete.",
+   "blocked_by": "Repo-wide audit not complete.",
+   "clears_when": "Every file reviewed, with each irregularity linked.",
+   "next_step": "Continue the audit by directory.",
+   "src": {
+    "t": "data/flags.json",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/flags.json"
+   }
+  },
+  {
+   "id": "SI-08",
+   "group": "Site and process",
+   "requirement": "No manual input: pages rebuilt from committed data by one script",
+   "status": "Partial",
+   "checked": "repo artifact, not re-read",
+   "evidence": "On the base commit the committed pages differed from the generators, so the --check gate failed. The pages are regenerated in this change.",
+   "blocked_by": "Re-check must pass in CI.",
+   "clears_when": "tools/build_site_all.py --check passes on main.",
+   "next_step": "Confirm in CI after merge.",
+   "src": {
+    "t": "build_site_all.py",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/tools/build_site_all.py"
+   }
+  },
+  {
+   "id": "SI-09",
+   "group": "Site and process",
+   "requirement": "Drift alarm on every scraper: fail loudly when a field goes missing instead of publishing a blank",
+   "status": "Partial",
+   "checked": "re-read 2026-11-15",
+   "evidence": "tools/check_scrape_drift.py pins the injury capture (347 rows, 28 clubs, 14 games) and required fields and fails loudly; tests/test_scrape_drift.py has 6 fault-injection tests. Other scrapers have no alarm, and the scraper threshold (150 rows, 24 clubs) in pipeline/scrape_injuries.py is unchanged.",
+   "blocked_by": "No alarm on blank sections.",
+   "clears_when": "The build fails when a club section with 5 or more rows has no injury or game status.",
+   "next_step": "Add the alarm to the scraper and to the build.",
+   "src": {
+    "t": "scrape_injuries.py",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pipeline/scrape_injuries.py"
+   }
+  },
+  {
+   "id": "SI-10",
+   "group": "Site and process",
+   "requirement": "Durable snapshot storage outside the static site, freshness monitoring and alerts on source or schema change",
+   "status": "Partial",
+   "checked": "repo artifact, not re-read",
+   "evidence": "tools/check_freshness.py exists. Snapshots are stored in git inside the site repository. No alerting.",
+   "blocked_by": "Storage location and alerting not built.",
+   "clears_when": "Snapshots outside the Pages site, with an alert on a schema change.",
+   "next_step": "Decide the storage location.",
+   "src": {
+    "t": "check_freshness.py",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/tools/check_freshness.py"
+   }
+  },
+  {
+   "id": "SI-11",
+   "group": "Site and process",
+   "requirement": "Split the site into a public analysis layer and a private data layer until the terms are read",
+   "status": "Not started",
+   "checked": "repo artifact, not re-read",
+   "evidence": "Row-level injury data is published on public pages.",
+   "blocked_by": "Not built.",
+   "clears_when": "Public pages show derived values and links only.",
+   "next_step": "Decide which rows move to the private layer.",
+   "src": {
+    "t": "injuries page",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pages/injuries.html"
+   }
+  },
+  {
+   "id": "SI-12",
+   "group": "Site and process",
+   "requirement": "Parallel-session coordination on a shared task board",
+   "status": "Done",
+   "checked": "repo artifact, not re-read",
+   "evidence": "COORDINATION.md holds the board; this session's claim is recorded there.",
+   "blocked_by": "None.",
+   "clears_when": "n/a",
+   "next_step": "None.",
+   "src": {
+    "t": "COORDINATION.md",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/COORDINATION.md"
+   }
+  },
+  {
+   "id": "SI-13",
+   "group": "Site and process",
+   "requirement": "Decision-readiness table on the landing page: one row per requirement, the gate that blocks it, the number that clears it",
+   "status": "Done",
+   "checked": "built this session",
+   "evidence": "Shown as a panel on the landing page and on pages/readiness.html, both built from room/data/readiness.json.",
+   "blocked_by": "None.",
+   "clears_when": "n/a",
+   "next_step": "None.",
+   "src": {
+    "t": "pipeline/gen_site.py",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pipeline/gen_site.py"
+   }
+  },
+  {
+   "id": "SI-14",
+   "group": "Site and process",
+   "requirement": "Brief references (VR-xx and VQ-xx) traced to a dated source",
+   "status": "Not verified",
+   "checked": "not checked",
+   "evidence": "These reference IDs appear nowhere in the repo, so the brief's claims cannot be traced to a document.",
+   "blocked_by": "The list the IDs refer to is not in the repo.",
+   "clears_when": "Each ID mapped to a dated source.",
+   "next_step": "Supply the reference list, or the sources behind each ID.",
+   "src": {
+    "t": "COORDINATION.md",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/COORDINATION.md"
+   }
+  },
+  {
+   "id": "SI-15",
+   "group": "Site and process",
+   "requirement": "Merge, deploy and confirm the live site",
+   "status": "Partial",
+   "checked": "this session",
+   "evidence": "Pull request and merge result are recorded in COORDINATION.md once the checks pass.",
+   "blocked_by": "Checks not yet run on this change.",
+   "clears_when": "PR merged and GitHub Pages deployment confirmed.",
+   "next_step": "Open the PR, wait for checks, merge, confirm the deploy.",
+   "src": {
+    "t": "COORDINATION.md",
+    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/COORDINATION.md"
+   }
+  }
+ ]
 }

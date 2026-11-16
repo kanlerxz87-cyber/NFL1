@@ -1,4 +1,47 @@
 {
- "generated_at": "2026-11-16T18:55:50Z",
- "rows": []
+ "generated_at": "2026-11-16T18:59:49Z",
+ "rows": [
+  {
+   "id": "GB-2025-W10-CLAMPED-CAPTURES",
+   "kind": "source behaviour",
+   "detail": "27 of the 29 weekly-report captures on disk were ignored because the page stated a different week than its url asked for. On 2026-11-16 the official report url returns the league's most recent report for every week that has no report of its own - 2025 W1-W18 and 2026 W1-W11 all answered with a Week 10 page. Past weekly reports are NOT archived at this url, so a multi-week designation history must come from dated snapshots, not from a back-fill of past urls.",
+   "season": 2025,
+   "week": 10
+  },
+  {
+   "id": "GB-2025-W10-CAPTURE-CHOICE",
+   "kind": "capture selection",
+   "detail": "2025_reg10_20261116T184222.json states 14 club(s), not 28 - the clubs it does not print are taken from the capture that does",
+   "season": 2025,
+   "week": 10
+  },
+  {
+   "id": "GB-2025-W10-NO-INACTIVES",
+   "kind": "coverage gap",
+   "detail": "No game-day inactive list captured for 2025 week 10; the designation rows for that week stay unjoined rather than being read as 'available'.",
+   "season": 2025,
+   "week": 10
+  },
+  {
+   "id": "GB-2026-W10-CLAMPED-CAPTURES",
+   "kind": "source behaviour",
+   "detail": "27 of the 29 weekly-report captures on disk were ignored because the page stated a different week than its url asked for. On 2026-11-16 the official report url returns the league's most recent report for every week that has no report of its own - 2025 W1-W18 and 2026 W1-W11 all answered with a Week 10 page. Past weekly reports are NOT archived at this url, so a multi-week designation history must come from dated snapshots, not from a back-fill of past urls.",
+   "season": 2026,
+   "week": 10
+  },
+  {
+   "id": "GB-2026-W10-CAPTURE-CHOICE",
+   "kind": "capture selection",
+   "detail": "2026_reg10_20261116T184348.json states 14 club(s), not 28 - the clubs it does not print are taken from the capture that does",
+   "season": 2026,
+   "week": 10
+  },
+  {
+   "id": "GB-2026-W10-CAPTURE-CHOICE",
+   "kind": "capture selection",
+   "detail": "1 other capture(s) of the same week were NOT merged: data/gamebook/captures/report/2026_reg10_20261116T184348.json (347 rows, 14 clubs). Used data/model/official_injuries.json (347 rows, 28 clubs).",
+   "season": 2026,
+   "week": 10
+  }
+ ]
 }

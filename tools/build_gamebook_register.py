@@ -180,32 +180,94 @@ def load_inactives() -> dict:
     return out
 
 
+def _report_candidates() -> list[tuple[str, dict]]:
+    """(key, capture) for every report table on disk, clamped pages dropped.
+
+    A capture whose page stated a *different* week from the one its url asked for is the same page
+    under another name (the league serves its most recent report for every unpublished week - 29 of
+    the 30 captures on disk were produced that way on 2026-11-16). It is kept as evidence about the
+    url, and dropped here: joining its rows would copy one week's designations into another week's
+    table and quietly inflate every count.
+    """
+    cands: list[tuple[str, dict]] = []
+    files = sorted(glob.glob(str(STORE / "captures" / "report" / "*.json")))
+    files += [str(OFFICIAL_INJURIES)] if OFFICIAL_INJURIES.exists() else []
+    for f in files:
+        try:
+            cap = json.loads(Path(f).read_text())
+        except Exception as exc:                                 # noqa: BLE001
+            cands.append(("_unreadable", {"file": f, "error": str(exc)}))
+            continue
+        if cap.get("week_clamped"):
+            continue
+        # the committed CI file keys its rows by `team`; a collector capture by `club`
+        wk = cap.get("week") or 0
+        key = f"{cap.get('season')}_reg{int(wk):02d}"
+        cap["_file"] = os.path.relpath(f, ROOT)
+        cands.append((key, cap))
+    return cands
+
+
 def load_report() -> dict:
-    """season|week -> list of report rows, from the committed CI capture or a mirrored copy."""
-    out: dict = defaultdict(list)
+    """season|week -> report rows, merged over every capture that holds that week.
+
+    Merge is per club and per player, keeping the richest row (the one that actually carries a
+    game-day designation and an injury note). Two captures of the same week disagree all the time -
+    one page render lists 28 clubs, a truncated one lists 14 - and taking the first file found would
+    let a thinner capture stand in for a fuller one. Refusing to merge instead would throw away the
+    only evidence that they disagree, so the disagreement is recorded in `by_source` and published.
+    """
+    rows: dict = defaultdict(dict)
+    by_source: dict = defaultdict(dict)
     src: dict = {}
-    for f in sorted(glob.glob(str(STORE / "captures" / "report" / "*.json"))):
-        cap = json.loads(Path(f).read_text())
-        key = f"{cap.get('season')}_reg{int(cap.get('week') or 0):02d}"
+    notes: dict = defaultdict(list)
+    # normalise every candidate first, then take them richest-coverage-first: a capture that states 28
+    # clubs gets to define the week's table before one that states 14, and a later capture may only
+    # fill a club the earlier ones never printed. That keeps a published cell's denominator stable -
+    # the counts a reader checked against the official page do not move because a thinner capture of
+    # the same week happened to be read first.
+    prepared: dict[str, list] = defaultdict(list)
+    for key, cap in _report_candidates():
+        if key == "_unreadable":
+            notes["_"].append(f"unreadable report capture {cap['file']}: {cap['error']}")
+            continue
+        norm = []
         for r in cap.get("rows") or []:
-            out[key].append({**r, "team": (r.get("club") or r.get("team") or "").upper(),
-                             "_capture": os.path.relpath(f, ROOT), "_url": cap.get("url"),
-                             "_fetched_at": cap.get("fetched_at")})
-        src.setdefault(key, os.path.relpath(f, ROOT))
-    if OFFICIAL_INJURIES.exists():
-        cap = json.loads(OFFICIAL_INJURIES.read_text())
-        key = f"{cap.get('season')}_reg{int(cap.get('week') or 0):02d}"
-        if not out.get(key):
-            for r in cap.get("rows") or []:
-                out[key].append({"team": (r.get("team") or "").upper(), "player": r.get("player"),
-                                 "position": r.get("position"), "injury": r.get("injury"),
-                                 "practice": r.get("practice"), "designation": r.get("game"),
-                                 "player_url": r.get("player_url"),
-                                 "_capture": "data/model/official_injuries.json",
-                                 "_url": "https://www.nfl.com/injuries/",
-                                 "_fetched_at": cap.get("generated_at")})
-            src[key] = "data/model/official_injuries.json"
-    return {"rows": dict(out), "source": src}
+            team = (r.get("club") or r.get("team") or "").upper()
+            if not team:
+                continue
+            norm.append({"team": team, "player": r.get("player"), "position": r.get("position"),
+                         "injury": r.get("injury"), "practice": r.get("practice"),
+                         "designation": r.get("designation") if "designation" in r else r.get("game"),
+                         "player_url": r.get("player_url"),
+                         "_capture": cap["_file"], "_url": cap.get("url"),
+                         "_fetched_at": cap.get("fetched_at")})
+        clubs = {r["team"] for r in norm}
+        by_source[key][cap["_file"]] = {"rows": len(norm), "clubs": len(clubs)}
+        if len(clubs) < 28:
+            notes[key].append(f"{os.path.basename(cap['_file'])} states {len(clubs)} club(s), not 28 - "
+                              "the clubs it does not print are taken from the capture that does")
+        prepared[key].append((len(clubs), len(norm), cap["_file"], norm))
+    for key, lst in prepared.items():
+        lst.sort(key=lambda x: (-x[0], -x[1], x[2]))
+        chosen_nc, chosen_nr, fname, norm = lst[0]
+        for r in norm:
+            rows[key].setdefault((r["team"], name_key(r["player"] or "")), r)
+        src[key] = fname
+        if len(lst) > 1:
+            # ONE capture per (season, week), the one that states the most clubs. Merging across two
+            # captures of the same page is not safe here: a truncated read of this exact report kept
+            # the right 347 rows but printed only 14 club headings, i.e. it attributed two clubs' blocks
+            # to one club. Union-ing that with a correct capture invents rows for a player at a club he
+            # does not play for, and those invented rows would then join to the wrong inactive list and
+            # move a published designation count. The rival capture is therefore reported, not merged.
+            others = [{"file": f, "rows": nr, "clubs": nc} for nc, nr, f, _ in lst[1:]]
+            notes[key].append(
+                f"{len(others)} other capture(s) of the same week were NOT merged: "
+                + "; ".join(f"{o['file']} ({o['rows']} rows, {o['clubs']} clubs)" for o in others)
+                + f". Used {fname} ({chosen_nr} rows, {chosen_nc} clubs).")
+    out_rows = {k: list(v.values()) for k, v in rows.items()}
+    return {"rows": out_rows, "source": src, "by_source": dict(by_source), "notes": dict(notes)}
 
 
 def load_gamebooks() -> dict:
@@ -424,6 +486,8 @@ def summary_numbers(d: dict) -> list[dict]:
 def build(*, write_site: bool = True) -> dict:
     inact = load_inactives()
     rep = load_report()
+    n_clamped = sum(1 for f in glob.glob(str(STORE / "captures" / "report" / "*.json"))
+                    if (json.loads(Path(f).read_text()) or {}).get("week_clamped"))
     gb = load_gamebooks()
     gbc = gb_by_club(gb)
     nicks = club_nicks()
@@ -462,8 +526,23 @@ def build(*, write_site: bool = True) -> dict:
             "clubs_report_only": rep_only, "clubs_inactive_only": inact_only,
             "game_books": len(gb_here),
             "report_source": rep["source"].get(key),
+            "report_captures_ignored": len(rep["by_source"].get(key, {})) - 1,
             "inactive_sources": [s["url"] for s in (src["sources"] if src else [])],
         })
+        if n_clamped:
+            flags.append({"id": f"GB-{season}-W{wk}-CLAMPED-CAPTURES", "kind": "source behaviour",
+                          "detail": f"{n_clamped} of the {n_clamped + len(rep['rows'])} weekly-report "
+                                    "captures on disk were ignored because the page stated a different "
+                                    f"week than its url asked for. On 2026-11-16 the official report url "
+                                    "returns the league's most recent report for every week that has no "
+                                    "report of its own - 2025 W1-W18 and 2026 W1-W11 all answered with a "
+                                    "Week 10 page. Past weekly reports are NOT archived at this url, so a "
+                                    "multi-week designation history must come from dated snapshots, not "
+                                    "from a back-fill of past urls.",
+                          "season": season, "week": wk})
+        for note in rep["notes"].get(key, []):
+            flags.append({"id": f"GB-{season}-W{wk}-CAPTURE-CHOICE", "kind": "capture selection",
+                          "detail": note, "season": season, "week": wk})
         if src is None:
             flags.append({"id": f"GB-{season}-W{wk}-NO-INACTIVES",
                           "kind": "coverage gap",
@@ -677,6 +756,8 @@ def build(*, write_site: bool = True) -> dict:
         "ledger_rows": len(ledger), "designations_joined_rows": len(design_rows),
         "designations": design_table, "designations_per_week": per_wk_table,
         "trap_counts": trap,
+        "report_captures_clamped": n_clamped,
+        "report_captures_per_week": rep["by_source"], "report_selection": rep["source"],
         "crosscheck": crosscheck, "expected_vs_actual": expected_vs_actual,
         "results": sorted(results, key=lambda r: (-int(r["season"] or 0), -int(r["week"] or 0), r["game_slug"])),
         "game_books_captured": len(gb),
@@ -1057,6 +1138,21 @@ Week 10 report in this repository was captured on 2026-11-15 and 2026-11-16 - af
 had been played - so those rows are admissible for <b>retrospective calibration</b> (what a designation
 meant) and <b>not</b> for replaying what an analyst could have known. The register states this on the
 capture itself (<code>point_in_time</code>) rather than in prose only.</p>
+<h2>One capture per week, and why the others are not added to it</h2>
+<p>The report page is captured under the week <i>it states</i>, not the week the url asked for, and
+exactly one capture per (season, week) is joined: the one that states the most clubs.
+{d.get("report_captures_clamped", 0)} capture(s) on disk were ignored for that reason. Measured on
+2026-11-16: requests for 2025 weeks 1-18 and 2026 weeks 1-11 all answered HTTP 200 with the season's
+<i>most recent</i> report, so the league does not archive a past week's report at its week url - a
+designation history can only be built forward from dated captures, or backward from the dated news
+pages, which do stay online.</p>
+<p>Merging two captures of the same page would be wrong even when both look plausible. One of them
+held all 347 rows under only 14 of the 28 club headings - two clubs' blocks folded into one - so a
+player who belongs to Washington also appeared under New York, and joining that union moved the
+published Questionable cell from n=82 to n=126 for the same week and the same page. The rejected
+capture is therefore listed, not merged:
+<span class="sub">per-week captures on disk:
+{", ".join(f"{k}: {len(v)} capture(s)" for k, v in (d.get("report_captures_per_week") or {}).items()) or "none"}.</span></p>
 <h2>Deliberate limits</h2>
 <ul class="tight">
 <li><b>No snap counts, no depth rank inferred from a Game Book.</b> The brief forbids it, and the document

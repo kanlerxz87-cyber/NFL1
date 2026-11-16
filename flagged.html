@@ -85,17 +85,17 @@
   <div class="main">
     <div class="topbar">
       <div class="crumb">NFL1 / <b>Flagged for Review</b></div>
-      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">111 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">113 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
     </div>
     <main class="content" id="main">
       <div class="kicker">Assurance</div>
       <h1>Flagged for Review</h1>
       <p class="lede">Clearly labelled irregularities, official-page conflicts, unverified values and coordination issues — each with an official source link for manual review, none blocking the merge.</p>
       <div class="callout flag"><b>Flagged for Review.</b> These irregularities and unverified items do not block the merge or the live site. Each has an official source link for manual review and a suggested action. A status of <em>needs review</em> means exactly this: published here, not blocking.</div>
-<div class="cards"><div class="card"><div class="label">Flagged items</div><div class="value">111</div><div class="detail">All with source links</div></div><div class="card"><div class="label">Official-page irregularities</div><div class="value">7</div><div class="detail">F02–F08</div></div><div class="card"><div class="label">Missing official data</div><div class="value">5</div><div class="detail">F09–F11, F14, F15</div></div><div class="card"><div class="label">Combined-site review</div><div class="value">55</div><div class="detail">F25–F36</div></div></div>
+<div class="cards"><div class="card"><div class="label">Flagged items</div><div class="value">113</div><div class="detail">All with source links</div></div><div class="card"><div class="label">Official-page irregularities</div><div class="value">7</div><div class="detail">F02–F08</div></div><div class="card"><div class="label">Missing official data</div><div class="value">5</div><div class="detail">F09–F11, F14, F15</div></div><div class="card"><div class="label">Combined-site review</div><div class="value">57</div><div class="detail">F25–F36</div></div></div>
 <h2 id="all">All flagged irregularities</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-flags" aria-label="Filter tbl-flags" placeholder="Filter rows…">
-<span class="count" data-count-for="tbl-flags">111 rows shown</span></div>
+<span class="count" data-count-for="tbl-flags">113 rows shown</span></div>
 <div class="tablewrap"><table class="data-table" id="tbl-flags"><caption>Every flag with category, description, impact, status, official source link and suggested action for the reviewer.</caption>
 <thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Category</th><th scope="col" class="sortable">Irregularity / unverified item</th><th scope="col" class="sortable">Impact on decisions</th><th scope="col" class="sortable">Status</th><th scope="col" class="sortable">Suggested action</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
 <tr id="F01" data-verified="true">
@@ -1096,6 +1096,24 @@
 <td><span class="badge neutral">needs review</span></td>
 <td data-value="1" class="wide">Cleared by the scheduled sweep (.github/workflows/gamebook-sweep.yml, hourly at :37), which writes captures for 2026 weeks 8-11 and appends thereafter. The number that clears this flag is 14 of 14 Week 10 games with parse_status ok, published on gamebook/results.html.</td>
 <td><span class="src"><a href="https://www.nfl.com/games/patriots-at-lions-2026-reg-10?tab=recap" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official game centre for one fixture">S42 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="F73" data-verified="true">
+<td><code>F73</code></td>
+<td data-value="1">The official weekly injury report is not archived by week at its week URL</td>
+<td data-value="1" class="wide">The capture sweep asked for 2026 W1-W11 and 2025 W1-W18 on 2026-11-16 (GitHub Actions, run 43929739072). All 29 requests answered HTTP 200 and all 29 returned the season&#x27;s most recent published page: the 2025 requests printed &#x27;Week 10 of the 2025 Season&#x27; and the 2026 requests printed &#x27;Week 10 of the 2026 Season&#x27;. Only the current week exists at this url, so a past week&#x27;s designation table cannot be recovered by back-filling urls.</td>
+<td data-value="1" class="wide">Any plan to calibrate &#x27;Questionable&#x27; over a whole season from the report pages alone is impossible: the sample can only grow forward, one dated capture per week from now on. It also means a scraper that trusts its own url will store 29 copies of the same page under 29 week names and then report a flat designation history as if it were real.</td>
+<td><span class="badge neutral">open</span></td>
+<td data-value="1" class="wide">Handled: pipeline/collect_gamebooks.py keys each capture by the week the PAGE states, refuses to store the same content twice, and records the clamp in the capture; the register ignores a clamped capture when joining and publishes the count (data/gamebook/register.json report_captures_clamped). S34&#x27;s &#x27;extend the sweep over the past season&#x27; path is therefore re-scoped: extend the *cadence* (Wed/Thu/Fri plus game day) instead of the back-history, and treat the inactives article - which is archived by date - as the only source that can supply past weeks.</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/league/2025/reg01" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official weekly injury report, past-week archive probe (run from GitHub Actions)">S45 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="F74" data-verified="true">
+<td><code>F74</code></td>
+<td data-value="1">A runner&#x27;s fetch of the report page returned 347 correct rows under 14 of 28 club headings</td>
+<td data-value="1" class="wide">The same capture (Week 10 2026, read 2026-11-16) holds the full 347 rows the CI job records, but its club attribution is truncated: it names 14 clubs (ARI, ATL, BAL, CIN, CLE, DAL, DET, GB, IND, LV, NO, NYG, NYJ, TEN) and folds the other clubs&#x27; blocks into them - John Bates and Jayden Daniels appear under NYG although the committed capture puts them at WAS. The rows themselves are right; the headings are not.</td>
+<td data-value="1" class="wide">Merging two captures of one page on a per-player key turns a misattribution into a phantom row (&#x27;Bates at WAS&#x27; plus &#x27;Bates at NYG&#x27;), and a phantom row joins to the wrong club&#x27;s inactive list, which moves a published designation count. Measured: joining the union gave Questionable n=126 instead of n=82 for the same week.</td>
+<td><span class="badge neutral">open</span></td>
+<td data-value="1" class="wide">Prevented in this session&#x27;s register: exactly one capture per (season, week) is joined - the one stating the most clubs - and the rejected siblings are published in the flags list and in data/gamebook/register.json report_captures_per_week rather than merged. The count gate keeps the shortfall as a stated note, not a red build, because the truncation is reproducible from the publisher&#x27;s own output. Change request for the owner of pipeline/scrape_injuries.py: assert on the club-heading count (28) after each fetch, and re-read once on a shortfall.</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/league/2025/reg01" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official weekly injury report, past-week archive probe (run from GitHub Actions)">S45 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
 </tbody></table></div>
 <h2 id="unverified">Registry of blank/unverified values</h2>

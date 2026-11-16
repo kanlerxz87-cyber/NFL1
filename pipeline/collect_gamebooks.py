@@ -753,12 +753,27 @@ def cmd_reports(args) -> int:
     # .../reg10). A scraper that trusts the url therefore records Week 10 and calls it Week 11, so
     # the page's own label is checked and a mismatch fails the capture instead of mislabelling it.
     label = re.search(r"Week\s+(\d{1,2})\s+of the\s+(\d{4})\s+Season", html)
+    # The key of a capture is the week the PAGE states, not the week the url asked for. Measured on
+    # 2026-11-16 by this very sweep: every one of the 2025 W1-W18 urls and the 2026 W1-W9 urls
+    # answered 200 with the same content - the league's most recent published report (2025 pages said
+    # "Week 10 of the 2025 Season", 2026 pages said "Week 10 of the 2026 Season"). Keying by the
+    # stated week means one page is stored once instead of 29 times, and no week's table can be
+    # silently populated with another week's rows. Past weekly reports are not archived at this url,
+    # so a multi-week history has to come from dated snapshots, not from a back-fill.
     if label:
         lw, ls = int(label.group(1)), int(label.group(2))
         if (lw, ls) != (args.week, args.season):
             flags.append(f"week_label_mismatch: asked for week {args.week} of {args.season}, the page "
                          f"states week {lw} of {ls} - the league clamped the request")
             payload_clamp = True
+            key = f"{ls}_reg{lw:02d}"
+            if latest_capture("report", key) and not args.force:
+                append_jsonl(HEARTBEAT, {"at": fetched, "kind": "report", "key": key, "url": url,
+                                         "rows": len(rows), "clubs": 0, "status": "already_captured",
+                                         "detail": "requested week is served by an already-stored page"})
+                print(f"report {key}: the request for week {args.week} was answered by the page already "
+                      f"captured for that content; not stored twice (use --force to keep a duplicate)")
+                return 0
         else:
             payload_clamp = False
     else:
@@ -769,6 +784,7 @@ def cmd_reports(args) -> int:
     for r in rows:
         desig[r.get("designation") or "(blank)"] = desig.get(r.get("designation") or "(blank)", 0) + 1
     payload = {"kind": "report", "key": key, "season": args.season, "week": args.week,
+               "requested_season": args.season, "requested_week": args.week,
                "url": url, "fetched_at": fetched, "raw_sha256": sha256_text(html),
                "raw_bytes": len(html.encode("utf-8")), "parser_version": PARSER_VERSION,
                "table_headers": heads[:80], "clubs": clubs, "rows": rows,
@@ -1061,6 +1077,8 @@ def main() -> int:
     c.add_argument("--pages", type=int, default=4)
     c.add_argument("--sleep", type=float, default=1.5)
     c.add_argument("--refetch", action="store_true")
+    b.add_argument("--force", action="store_true",
+                   help="store the capture even when an identical-content page is already on disk")
     c.add_argument("--strict", action="store_true",
                    help="treat a game centre with no Game Book link as a failure (default: "
                         "record it as missing coverage and keep going)")

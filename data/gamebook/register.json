@@ -1,10 +1,40 @@
 {
  "build_version": "build_gamebook_register/1.0",
- "generated_at": "2026-11-16T18:55:50Z",
+ "generated_at": "2026-11-16T18:59:49Z",
  "weeks": [
   "2026_reg10"
  ],
  "coverage": [
+  {
+   "season": 2025,
+   "week": 10,
+   "report_rows": 320,
+   "report_clubs": 14,
+   "inactive_rows": 0,
+   "inactive_clubs": 0,
+   "clubs_in_both": 0,
+   "clubs_report_only": [
+    "CAR",
+    "CHI",
+    "DEN",
+    "GB",
+    "HOU",
+    "IND",
+    "LA",
+    "LAC",
+    "MIA",
+    "MIN",
+    "NYJ",
+    "SEA",
+    "TB",
+    "WAS"
+   ],
+   "clubs_inactive_only": [],
+   "game_books": 0,
+   "report_source": "data/gamebook/captures/report/2025_reg10_20261116T184222.json",
+   "report_captures_ignored": 0,
+   "inactive_sources": []
+  },
   {
    "season": 2026,
    "week": 10,
@@ -22,6 +52,7 @@
    "clubs_inactive_only": [],
    "game_books": 0,
    "report_source": "data/model/official_injuries.json",
+   "report_captures_ignored": 1,
    "inactive_sources": [
     "https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season"
    ]
@@ -151,6 +182,29 @@
    "NYG",
    "WAS"
   ]
+ },
+ "report_captures_clamped": 27,
+ "report_captures_per_week": {
+  "2025_reg10": {
+   "data/gamebook/captures/report/2025_reg10_20261116T184222.json": {
+    "rows": 320,
+    "clubs": 14
+   }
+  },
+  "2026_reg10": {
+   "data/gamebook/captures/report/2026_reg10_20261116T184348.json": {
+    "rows": 347,
+    "clubs": 14
+   },
+   "data/model/official_injuries.json": {
+    "rows": 347,
+    "clubs": 28
+   }
+  }
+ },
+ "report_selection": {
+  "2025_reg10": "data/gamebook/captures/report/2025_reg10_20261116T184222.json",
+  "2026_reg10": "data/model/official_injuries.json"
  },
  "crosscheck": [],
  "expected_vs_actual": [],
@@ -342,7 +396,7 @@
   {
    "area": "Review",
    "what": "Irregularities flagged for review",
-   "value": 111,
+   "value": 113,
    "to_clear": "a reviewer chooses the path before anything is implemented",
    "gate": "no suggestion is implemented by the session that wrote it unless its gate is already open",
    "files": [
@@ -376,7 +430,7 @@
   {
    "area": "Review",
    "what": "Suggestions awaiting a decision",
-   "value": 39,
+   "value": 40,
    "to_clear": "a reviewer chooses the path before anything is implemented",
    "gate": "no suggestion is implemented by the session that wrote it unless its gate is already open",
    "files": [
@@ -393,7 +447,7 @@
   {
    "area": "Review",
    "what": "Official sources registered",
-   "value": 43,
+   "value": 44,
    "to_clear": "a reviewer chooses the path before anything is implemented",
    "gate": "no suggestion is implemented by the session that wrote it unless its gate is already open",
    "files": [
