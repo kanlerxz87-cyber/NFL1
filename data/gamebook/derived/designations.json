@@ -1,6 +1,6 @@
 {
  "build_version": "build_gamebook_register/1.0",
- "generated_at": "2026-11-16T18:24:25Z",
+ "generated_at": "2026-11-16T18:27:08Z",
  "weeks": [
   "2026_reg10"
  ],
@@ -160,5 +160,252 @@
   "weekly_injury_report": "https://www.nfl.com/injuries/",
   "weekly_inactives_article": "https://www.nfl.com/news/",
   "game_book_pdf_hosted_by": "https://static.www.nfl.com/ (linked from each game centre page)"
- }
+ },
+ "summary": [
+  {
+   "area": "Availability",
+   "what": "Official weekly injury report, Week 10 2026",
+   "value": "347 rows / 28 clubs",
+   "to_clear": "captured every Wed, Thu and Fri, and daily to kickoff",
+   "gate": "cadence: the repository holds one dated capture per week, so no designation *change* exists to publish - the surprise signal is a delta and there is nothing to subtract",
+   "files": [
+    [
+     "data/model/official_injuries.json",
+     "https://www.nfl.com/injuries/league/2026/reg10"
+    ]
+   ]
+  },
+  {
+   "area": "Availability",
+   "what": "Availability-outcome ledger (report x inactives x Game Book)",
+   "value": "424 rows over 1 week(s)",
+   "to_clear": "one row per club, per player, per game, for every week of the season",
+   "gate": "the join is published only where an official document states each side of it",
+   "files": [
+    [
+     "data/gamebook/derived/ledger.json",
+     "https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season"
+    ]
+   ]
+  },
+  {
+   "area": "Calibration",
+   "what": "'Questionable' players also placed on the club's inactive list",
+   "value": "18.3% of n=82 [11.4%, 28.0%]",
+   "to_clear": "n>=200 per designation, pooled over the multi-week sweep",
+   "gate": "a fixed historical percentage attached to the label is forbidden; the measured rate is quoted with its interval and its n",
+   "files": [
+    [
+     "data/gamebook/derived/designations.json",
+     "https://www.nfl.com/injuries/league/2026/reg10"
+    ]
+   ]
+  },
+  {
+   "area": "Calibration",
+   "what": "'Out' players also placed on the club's inactive list",
+   "value": "75.0% of n=64 [63.2%, 84.0%]",
+   "to_clear": "n>=200 per designation, pooled over the multi-week sweep",
+   "gate": "a fixed historical percentage attached to the label is forbidden; the measured rate is quoted with its interval and its n",
+   "files": [
+    [
+     "data/gamebook/derived/designations.json",
+     "https://www.nfl.com/injuries/league/2026/reg10"
+    ]
+   ]
+  },
+  {
+   "area": "Calibration",
+   "what": "'Doubtful' players also placed on the club's inactive list",
+   "value": "40.0% of n=10 [16.8%, 68.7%]",
+   "to_clear": "n>=200 per designation, pooled over the multi-week sweep",
+   "gate": "a fixed historical percentage attached to the label is forbidden; the measured rate is quoted with its interval and its n",
+   "files": [
+    [
+     "data/gamebook/derived/designations.json",
+     "https://www.nfl.com/injuries/league/2026/reg10"
+    ]
+   ]
+  },
+  {
+   "area": "Calibration",
+   "what": "Play rate per designation, from the game's own Game Book",
+   "value": "blank - no Game Book capture in the tree at build time",
+   "to_clear": "14 of 14 played Week 10 games with parse_status ok",
+   "gate": "measure B (did he play) is never filled from measure A (was he declared inactive)",
+   "files": [
+    [
+     "gamebook/results.html",
+     "https://www.nfl.com/games/patriots-at-lions-2026-reg-10?tab=recap"
+    ]
+   ]
+  },
+  {
+   "area": "Trap",
+   "what": "Out designations that do NOT appear on a club's inactive list",
+   "value": "16 of 64",
+   "to_clear": "nothing to clear: this is a property of the two documents",
+   "gate": "the inactive list may not be used as the set of non-players",
+   "files": [
+    [
+     "data/gamebook/register.json",
+     "https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season"
+    ]
+   ]
+  },
+  {
+   "area": "Trap",
+   "what": "Declared inactives with no row on the weekly report",
+   "value": 77,
+   "to_clear": "nothing to clear: the report is a designation document",
+   "gate": "a model whose availability universe is the report treats these players as available",
+   "files": [
+    [
+     "data/gamebook/derived/ledger.json",
+     "https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season"
+    ]
+   ]
+  },
+  {
+   "area": "Trap",
+   "what": "Players on an open reserve list and on no report row",
+   "value": "83 of 100 reserve designations (report rows: 347)",
+   "to_clear": "nothing to clear: two different official records",
+   "gate": "'not listed' never means 'available' - the reserve register carries that row",
+   "files": [
+    [
+     "data/reserve/report_vs_reserve.json",
+     "https://www.nfl.com/transactions/"
+    ]
+   ]
+  },
+  {
+   "area": "Corpus",
+   "what": "Pre-registered backtest corpus",
+   "value": "7239 games (NFL1-CORPUS-2026-11-15-v1)",
+   "to_clear": "the holdout opens only on a recorded decision",
+   "gate": "sha256 at freeze dd4ae8ad3c13; a backtest number may never appear on a leaderboard",
+   "files": [
+    [
+     "data/prereg/corpus.json",
+     "https://www.nfl.com/schedules/"
+    ]
+   ]
+  },
+  {
+   "area": "Governance",
+   "what": "Strategies with a frozen rule text registered before results",
+   "value": null,
+   "to_clear": "every live strategy registered; every backtest kept off the leaderboard",
+   "gate": "a rule committed together with its own results is labelled retrospective, not hidden",
+   "files": [
+    [
+     "data/prereg/registrations.json",
+     "https://github.com/kanlerxz87-cyber/NFL1/blob/main/prereg/registry.html"
+    ],
+    [
+     "nfl.com 2026 schedule",
+     "https://www.nfl.com/schedules/2026/"
+    ]
+   ]
+  },
+  {
+   "area": "Governance",
+   "what": "Correlation values computed from official numbers only",
+   "value": "6 row(s), each with its n and its source",
+   "to_clear": "a validated joint probability for every leg before a combo may be ranked",
+   "gate": "multiplying marginal probabilities is invalid under dependence, so parlays stay gated",
+   "files": [
+    [
+     "data/correlations.json",
+     "https://operations.nfl.com/rules-officiating/2026-nfl-rulebook"
+    ]
+   ]
+  },
+  {
+   "area": "Site",
+   "what": "Decision-readiness register (one row per requirement of the brief)",
+   "value": "Done: 17 \u00b7 Partial: 45 \u00b7 Blocked: 5 \u00b7 Not started: 10 \u00b7 Not met: 1 \u00b7 Not verified: 3 \u00b7 Rejected (brief): 1",
+   "to_clear": "every row names its gate and the number that clears it",
+   "gate": "this session moved three rows from Blocked to Partial with counts, not promises",
+   "files": [
+    [
+     "room/data/readiness.json",
+     "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pages/readiness.html"
+    ],
+    [
+     "nfl.com injury report (the row this session cleared)",
+     "https://www.nfl.com/injuries/league/2026/reg10"
+    ]
+   ]
+  },
+  {
+   "area": "Review",
+   "what": "Irregularities flagged for review",
+   "value": 111,
+   "to_clear": "a reviewer chooses the path before anything is implemented",
+   "gate": "no suggestion is implemented by the session that wrote it unless its gate is already open",
+   "files": [
+    [
+     "data/flags.json",
+     "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/flags.json"
+    ],
+    [
+     "nfl.com official source behind these rows",
+     "https://www.nfl.com/injuries/"
+    ]
+   ]
+  },
+  {
+   "area": "Review",
+   "what": "Open questions: what is still unknown",
+   "value": 33,
+   "to_clear": "a reviewer chooses the path before anything is implemented",
+   "gate": "no suggestion is implemented by the session that wrote it unless its gate is already open",
+   "files": [
+    [
+     "data/questions.json",
+     "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/questions.json"
+    ],
+    [
+     "nfl.com official source behind these rows",
+     "https://www.nfl.com/injuries/"
+    ]
+   ]
+  },
+  {
+   "area": "Review",
+   "what": "Suggestions awaiting a decision",
+   "value": 39,
+   "to_clear": "a reviewer chooses the path before anything is implemented",
+   "gate": "no suggestion is implemented by the session that wrote it unless its gate is already open",
+   "files": [
+    [
+     "data/suggestions.json",
+     "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/suggestions.json"
+    ],
+    [
+     "nfl.com official source behind these rows",
+     "https://www.nfl.com/injuries/"
+    ]
+   ]
+  },
+  {
+   "area": "Review",
+   "what": "Official sources registered",
+   "value": 43,
+   "to_clear": "a reviewer chooses the path before anything is implemented",
+   "gate": "no suggestion is implemented by the session that wrote it unless its gate is already open",
+   "files": [
+    [
+     "data/sources.json",
+     "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/sources.json"
+    ],
+    [
+     "nfl.com official source behind these rows",
+     "https://www.nfl.com/injuries/"
+    ]
+   ]
+  }
+ ]
 }

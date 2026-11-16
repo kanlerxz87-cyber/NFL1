@@ -267,7 +267,30 @@ class TestCollectorOfflineSafety(unittest.TestCase):
 
 class TestSiteIntegrity(unittest.TestCase):
     PAGES = ["index.html", "ledger.html", "designations.html", "results.html",
-             "crosscheck.html", "starters.html", "method.html"]
+             "crosscheck.html", "starters.html", "summary.html", "method.html"]
+
+    def test_summary_is_computed_not_typed(self):
+        """Every row on the executive-summary page must come from a committed file."""
+        rows = bgr.summary_numbers(self.d) if hasattr(self, "d") else bgr.summary_numbers(
+            json.loads((ROOT / "data/gamebook/register.json").read_text()))
+        self.assertGreaterEqual(len(rows), 12)
+        for r in rows:
+            self.assertTrue(r["files"], r["what"])
+            self.assertIn(r["area"], {"Availability", "Calibration", "Trap", "Corpus",
+                                      "Governance", "Site", "Review"})
+        txt = (ROOT / "gamebook" / "summary.html").read_text()
+        # the blank-not-zero rule: the play-rate row must not report a rate it cannot source
+        play = [r for r in rows if r["what"].startswith("Play rate")][0]
+        if json.loads((ROOT / "data/gamebook/register.json").read_text())["game_books_captured"] == 0:
+            self.assertNotIn("%", str(play["value"]))
+        # the per-row rule, not a page-wide average: no row may reach the table without a link
+        # to an official page, whatever else it links to
+        body = txt[txt.index("<tbody>"):]
+        trs = re.findall(r"<tr>.*?</tr>", body, re.S)
+        self.assertEqual(len(trs), len(rows), "table row count does not match the computed row count")
+        for n, tr in enumerate(trs):
+            self.assertTrue(re.search(r'href="https://([a-z0-9]+\.)*nfl\.com', tr),
+                            f"summary row {n} has no official link")
 
     def test_all_pages_exist_and_link_to_official_sources(self):
         for name in self.PAGES:

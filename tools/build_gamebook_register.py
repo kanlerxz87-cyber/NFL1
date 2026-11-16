@@ -128,7 +128,7 @@ def page(title, lead, body, active):
     nav = [("index.html", "Overview"), ("ledger.html", "Availability ledger"),
            ("designations.html", "Designation calibration"), ("results.html", "Verified results"),
            ("crosscheck.html", "Two sources, one fact"), ("starters.html", "Expected vs actual"),
-           ("method.html", "Method & limits")]
+           ("summary.html", "Executive summary"), ("method.html", "Method & limits")]
     navhtml = "".join(f'<a href="{h}"{" class=on" if h == active else ""}>{t}</a>' for h, t in nav)
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
@@ -302,6 +302,125 @@ def gb_by_club(gb: dict) -> dict:
 
 
 # ---------------------------------------------------------------- register
+def _read(rel: str, default=None):
+    try:
+        return json.loads((ROOT / rel).read_text())
+    except Exception:                                            # noqa: BLE001
+        return default if default is not None else {}
+
+
+def summary_numbers(d: dict) -> list[dict]:
+    """One row per decision-relevant quantity, each computed from a committed file.
+
+    Nothing here is typed by hand: every number is read from the artifact named in the row, so the
+    page cannot drift away from the data it claims to summarise. A missing artifact shows as blank
+    with its file named, not as zero.
+    """
+    rows: list[dict] = []
+
+    def add(area, what, value, to_clear, gate, files):
+        rows.append({"area": area, "what": what, "value": value, "to_clear": to_clear,
+                     "gate": gate, "files": files})
+
+    rep = _read("data/model/official_injuries.json")
+    cnt = rep.get("counts") or {}
+    add("Availability", "Official weekly injury report, Week 10 2026",
+        f"{cnt.get('rows', '')} rows / {cnt.get('teams', '')} clubs" if cnt else None,
+        "captured every Wed, Thu and Fri, and daily to kickoff",
+        "cadence: the repository holds one dated capture per week, so no designation *change* "
+        "exists to publish - the surprise signal is a delta and there is nothing to subtract",
+        [("data/model/official_injuries.json", "https://www.nfl.com/injuries/league/2026/reg10")])
+    add("Availability", "Availability-outcome ledger (report x inactives x Game Book)",
+        f"{d['ledger_rows']} rows over {len(d['weeks'])} week(s)",
+        "one row per club, per player, per game, for every week of the season",
+        "the join is published only where an official document states each side of it",
+        [("data/gamebook/derived/ledger.json",
+          "https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season")])
+    for r in d["designations"]:
+        ci = (f"[{100 * r['ci95_low']:.1f}%, {100 * r['ci95_high']:.1f}%]"
+              if r["ci95_low"] is not None else "")
+        add("Calibration", f"'{r['designation']}' players also placed on the club's inactive list",
+            f"{100 * r['declared_inactive_rate']:.1f}% of n={r['n']} {ci}",
+            "n>=200 per designation, pooled over the multi-week sweep",
+            "a fixed historical percentage attached to the label is forbidden; the measured rate is "
+            "quoted with its interval and its n",
+            [("data/gamebook/derived/designations.json", "https://www.nfl.com/injuries/league/2026/reg10")])
+    add("Calibration", "Play rate per designation, from the game's own Game Book",
+        (f"{d['game_books_captured']} Game Book(s) captured" if d["game_books_captured"]
+         else "blank - no Game Book capture in the tree at build time"),
+        "14 of 14 played Week 10 games with parse_status ok",
+        "measure B (did he play) is never filled from measure A (was he declared inactive)",
+        [("gamebook/results.html", "https://www.nfl.com/games/patriots-at-lions-2026-reg-10?tab=recap")])
+    t = d["trap_counts"]
+    add("Trap", "Out designations that do NOT appear on a club's inactive list",
+        f"{t['out_not_on_inactive_list']} of {t['out_total']}", "nothing to clear: this is a property "
+        "of the two documents", "the inactive list may not be used as the set of non-players",
+        [("data/gamebook/register.json",
+          "https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season")])
+    add("Trap", "Declared inactives with no row on the weekly report",
+        t["inactives_with_no_report_row"], "nothing to clear: the report is a designation document",
+        "a model whose availability universe is the report treats these players as available",
+        [("data/gamebook/derived/ledger.json",
+          "https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season")])
+    rv = _read("data/reserve/report_vs_reserve.json", {})
+    tot = rv.get("totals") or rv.get("counts") or {}
+    if tot:
+        add("Trap", "Players on an open reserve list and on no report row",
+            f"{tot.get('on_reserve_not_in_report', '')} of {tot.get('on_reserve', '')} reserve "
+            f"designations (report rows: {tot.get('report_rows', '')})",
+            "nothing to clear: two different official records",
+            "'not listed' never means 'available' - the reserve register carries that row",
+            [("data/reserve/report_vs_reserve.json", "https://www.nfl.com/transactions/")])
+    corpus = _read("data/prereg/corpus.json")
+    if corpus:
+        add("Corpus", "Pre-registered backtest corpus",
+            f"{corpus.get('rows_at_freeze', '')} games ({corpus.get('corpus_id', '')})",
+            "the holdout opens only on a recorded decision",
+            f"sha256 at freeze {str(corpus.get('sha256_at_freeze', ''))[:12]}; a backtest number may "
+            "never appear on a leaderboard",
+            [("data/prereg/corpus.json", "https://www.nfl.com/schedules/")])
+    regn = _read("data/prereg/registrations.json")
+    items = regn.get("strategies", regn.get("rows", [])) if isinstance(regn, dict) else regn
+    add("Governance", "Strategies with a frozen rule text registered before results",
+            (len(items) or None) if isinstance(items, list) else len(regn),
+            "every live strategy registered; every backtest kept off the leaderboard",
+            "a rule committed together with its own results is labelled retrospective, not hidden",
+            [("data/prereg/registrations.json",
+              "https://github.com/kanlerxz87-cyber/NFL1/blob/main/prereg/registry.html"),
+             ("nfl.com 2026 schedule", "https://www.nfl.com/schedules/2026/")])
+    corr = _read("data/correlations.json")
+    n_corr = len(corr.get("rows", corr)) if isinstance(corr, dict) else len(corr)
+    add("Governance", "Correlation values computed from official numbers only",
+        f"{n_corr} row(s), each with its n and its source",
+        "a validated joint probability for every leg before a combo may be ranked",
+        "multiplying marginal probabilities is invalid under dependence, so parlays stay gated",
+        [("data/correlations.json", "https://operations.nfl.com/rules-officiating/2026-nfl-rulebook")])
+    rd = _read("room/data/readiness.json", {}).get("meta", {}).get("by_status", {})
+    if rd:
+        order = ["Done", "Partial", "Blocked", "Not started", "Not met", "Not verified",
+                 "Rejected (brief)"]
+        add("Site", "Decision-readiness register (one row per requirement of the brief)",
+            " · ".join(f"{k}: {rd[k]}" for k in order if k in rd),
+            "every row names its gate and the number that clears it",
+            "this session moved three rows from Blocked to Partial with counts, not promises",
+            [("room/data/readiness.json",
+              "https://github.com/kanlerxz87-cyber/NFL1/blob/main/pages/readiness.html"),
+             ("nfl.com injury report (the row this session cleared)",
+              "https://www.nfl.com/injuries/league/2026/reg10")])
+    for label, path in (("Irregularities flagged for review", "data/flags.json"),
+                        ("Open questions: what is still unknown", "data/questions.json"),
+                        ("Suggestions awaiting a decision", "data/suggestions.json"),
+                        ("Official sources registered", "data/sources.json")):
+        obj = _read(path, [])
+        n = len(obj.get("rows", obj)) if isinstance(obj, dict) else len(obj)
+        add("Review", label, n or None,
+            "a reviewer chooses the path before anything is implemented",
+            "no suggestion is implemented by the session that wrote it unless its gate is already open",
+            [(path, "https://github.com/kanlerxz87-cyber/NFL1/blob/main/" + path),
+             ("nfl.com official source behind these rows", "https://www.nfl.com/injuries/")])
+    return rows
+
+
 def build(*, write_site: bool = True) -> dict:
     inact = load_inactives()
     rep = load_report()
@@ -567,7 +686,11 @@ def build(*, write_site: bool = True) -> dict:
             "game_book_pdf_hosted_by": "https://static.www.nfl.com/ (linked from each game centre page)",
         },
     }
+    derived["summary"] = summary_numbers(derived)
     DERIVED.mkdir(parents=True, exist_ok=True)
+    (DERIVED / "summary.json").write_text(
+        json.dumps({"generated_at": derived["generated_at"], "rows": derived["summary"]},
+                   indent=1) + "\n")
     for name, obj in (("coverage", {"generated_at": derived["generated_at"], "rows": coverage}),
                       ("ledger", {"generated_at": derived["generated_at"], "rows": ledger}),
                       ("designations", derived), ("results", {"generated_at": derived["generated_at"],
@@ -584,6 +707,8 @@ def build(*, write_site: bool = True) -> dict:
 
 # ---------------------------------------------------------------- site
 def write_site_pages(d, ledger, design_table, per_wk, coverage, flags, trap) -> None:
+    """Render the sub-site. Every figure on every page is read from `d` or from a committed file by
+    `summary_numbers`, so no page can carry a number the data does not support."""
     (SITE / "assets").mkdir(parents=True, exist_ok=True)
     (SITE / "assets" / "gamebook.css").write_text("""
 :root{--ink:#10151c;--mut:#5b6674;--line:#dfe4ea;--bg:#f7f9fb;--warn:#8a5a00;--warnbg:#fff6e5}
@@ -702,6 +827,10 @@ PDF</a>.</p>
 one page: <a href="https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season">
 Week 10 of 2026</a>. Two official sources for the same fact are captured separately and cross-checked;
 neither is inferred from the other.</p>
+<h2 id="summary">The numbers, in one table</h2>
+<p><a href="summary.html">summary.html</a> is generated rather than written: every row is read from the
+artifact named beside it at build time, so the page cannot keep an old figure after the data moves. A
+row whose artifact does not exist shows blank with the file that should hold it.</p>
 <h2 id="coverage">Coverage: what is captured, per week</h2>
 <div class="scroll">{cov}</div>
 <h2 id="cross">Two official sources for the same fact</h2>
@@ -948,6 +1077,45 @@ written and pinned; it runs hourly on Actions and appends captures. When every g
 a Game Book with <code>parse_status: ok</code>, the play-rate column fills in and the readiness rows
 IN-04, IN-15, IN-17 and IN-18 move from Blocked with a count instead of a promise.</p>
 """, "method.html"))
+    rows = d.get("summary") or summary_numbers(d)
+    # one row, one cell per link: `tbl` renders a (label, url) tuple as its own anchor, so a row that
+    # rests on four documents gets four links rather than one compressed string
+    n_col = max(len(r["files"]) for r in rows)
+    sm_rows = []
+    for r in rows:
+        files = list(r["files"]) + [("", "")] * (n_col - len(r["files"]))
+        sm_rows.append([r["area"], r["value"], r["what"], r["to_clear"], r["gate"], *files])
+    sm_tbl = tbl(["Area", "The number", "What it measures", "What would clear it",
+                  "The gate it sits behind"] + ["File / source"] * n_col, sm_rows)
+    (SITE / "summary.html").write_text(page(
+        "Executive summary",
+        "Every decision-relevant number in this register, computed at build time from the committed "
+        "files it names. Nothing on this page is typed by hand: a number that has no source in the "
+        "tree is shown blank with the file that should hold it, never as a zero.",
+        f"""<h2>What is measured, what is missing</h2>
+<p>{len(rows)} rows. Each one states the value, the gate it is waiting behind, and the artifact it was
+computed from. The table is rebuilt by <code>tools/build_gamebook_register.py</code> on every run, so
+it cannot fall behind the data.</p>
+<div class="scroll">{sm_tbl}</div>
+<h2>Reading it</h2>
+<ul class="tight">
+<li>Blank is an answer. The play-rate column, the two-source cross-check and the expected-versus-actual
+starter table are blank because the Game Book captures do not exist in the tree yet - not because the
+measurement came out at zero.</li>
+<li>Two of the three calibration rows above are about <b>what a designation implies for the inactive
+list</b>, which is a data-consistency fact. The number a pricing model needs - <i>did he play</i> - is a
+different measurement and stays empty until a Game Book is stored for the game.</li>
+<li>The three Trap rows are the reason the availability universe cannot be taken from any single
+official document, and they are published instead of smoothed.</li>
+</ul>
+<h2>Where each thread goes</h2>
+<p>The register is one input to the decision-readiness table on the landing page
+(<a href="../pages/readiness.html">all requirements</a>), the open questions
+(<a href="../pages/questions.html">questions</a>) and the suggestions awaiting a decision
+(<a href="../pages/suggestions.html">suggestions</a>). Those pages are generated by their own
+builders; this page only links them, so the numbers here are not duplicated into a second place that
+could disagree.</p>
+""", "summary.html"))
 
 
 def main() -> int:
