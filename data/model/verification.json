@@ -1,16 +1,16 @@
 {
- "generated_at": "2026-11-15T17:42:25+00:00",
+ "generated_at": "2026-11-16T18:21:31+00:00",
  "checks": [
   {
    "name": "2026 standings (W-L-T, points for/against)",
    "source": "https://www.nfl.com/standings/league/2026/reg",
    "rows_checked": 32,
-   "rows_matched": 30,
-   "mismatches": 2,
+   "rows_matched": 6,
+   "mismatches": 26,
    "detail": [
     {
      "team": "BUF",
-     "matched": true,
+     "matched": false,
      "nfl": {
       "w": 7,
       "l": 1,
@@ -19,17 +19,30 @@
       "pa": 187
      },
      "computed": {
-      "w": 7,
+      "w": 8,
       "l": 1,
       "t": 0,
-      "pf": 256,
-      "pa": 187
+      "pf": 287,
+      "pa": 199
      },
-     "diffs": null
+     "diffs": {
+      "w": {
+       "nfl": 7,
+       "computed": 8
+      },
+      "pf": {
+       "nfl": 256,
+       "computed": 287
+      },
+      "pa": {
+       "nfl": 187,
+       "computed": 199
+      }
+     }
     },
     {
      "team": "SF",
-     "matched": true,
+     "matched": false,
      "nfl": {
       "w": 7,
       "l": 1,
@@ -38,13 +51,26 @@
       "pa": 156
      },
      "computed": {
-      "w": 7,
+      "w": 8,
       "l": 1,
       "t": 0,
-      "pf": 235,
-      "pa": 156
+      "pf": 281,
+      "pa": 196
      },
-     "diffs": null
+     "diffs": {
+      "w": {
+       "nfl": 7,
+       "computed": 8
+      },
+      "pf": {
+       "nfl": 235,
+       "computed": 281
+      },
+      "pa": {
+       "nfl": 156,
+       "computed": 196
+      }
+     }
     },
     {
      "team": "CHI",
@@ -86,7 +112,7 @@
     },
     {
      "team": "CIN",
-     "matched": true,
+     "matched": false,
      "nfl": {
       "w": 6,
       "l": 2,
@@ -95,17 +121,30 @@
       "pa": 175
      },
      "computed": {
-      "w": 6,
+      "w": 7,
       "l": 2,
       "t": 0,
-      "pf": 240,
-      "pa": 175
+      "pf": 278,
+      "pa": 193
      },
-     "diffs": null
+     "diffs": {
+      "w": {
+       "nfl": 6,
+       "computed": 7
+      },
+      "pf": {
+       "nfl": 240,
+       "computed": 278
+      },
+      "pa": {
+       "nfl": 175,
+       "computed": 193
+      }
+     }
     },
     {
      "team": "DET",
-     "matched": true,
+     "matched": false,
      "nfl": {
       "w": 6,
       "l": 2,
@@ -114,17 +153,30 @@
       "pa": 189
      },
      "computed": {
-      "w": 6,
+      "w": 7,
       "l": 2,
       "t": 0,
-      "pf": 222,
-      "pa": 189
+      "pf": 257,
+      "pa": 199
      },
-     "diffs": null
+     "diffs": {
+      "w": {
+       "nfl": 6,
+       "computed": 7
+      },
+      "pf": {
+       "nfl": 222,
+       "computed": 257
+      },
+      "pa": {
+       "nfl": 189,
+       "computed": 199
+      }
+     }
     },
     {
      "team": "JAX",
-     "matched": true,
+     "matched": false,
      "nfl": {
       "w": 6,
       "l": 2,
@@ -133,17 +185,30 @@
       "pa": 121
      },
      "computed": {
-      "w": 6,
+      "w": 7,
       "l": 2,
       "t": 0,
-      "pf": 229,
-      "pa": 121
+      "pf": 269,
+      "pa": 144
      },
-     "diffs": null
+     "diffs": {
+      "w": {
+       "nfl": 6,
+       "computed": 7
+      },
+      "pf": {
+       "nfl": 229,
+       "computed": 269
+      },
+      "pa": {
+       "nfl": 121,
+       "computed": 144
+      }
+     }
     },
     {
      "team": "KC",
-     "matched": true,
+     "matched": false,
      "nfl": {
       "w": 6,
       "l": 2,
@@ -152,17 +217,30 @@
       "pa": 143
      },
      "computed": {
-      "w": 6,
+      "w": 7,
       "l": 2,
       "t": 0,
-      "pf": 202,
-      "pa": 143
+      "pf": 237,
+      "pa": 156
      },
-     "diffs": null
+     "diffs": {
+      "w": {
+       "nfl": 6,
+       "computed": 7
+      },
+      "pf": {
+       "nfl": 202,
+       "computed": 237
+      },
+      "pa": {
+       "nfl": 143,
+       "computed": 156
+      }
+     }
     },
     {
      "team": "MIN",
-     "matched": true,
+     "matched": false,
      "nfl": {
       "w": 6,
       "l": 2,
@@ -171,17 +249,30 @@
       "pa": 116
      },
      "computed": {
-      "w": 6,
+      "w": 7,
       "l": 2,
       "t": 0,
-      "pf": 146,
-      "pa": 116
+      "pf": 176,
+      "pa": 126
      },
-     "diffs": null
+     "diffs": {
+      "w": {
+       "nfl": 6,
+       "computed": 7
+      },
+      "pf": {
+       "nfl": 146,
+       "computed": 176
+      },
+      "pa": {
+       "nfl": 116,
+       "computed": 126
+      }
+     }
     },
     {
      "team": "PIT",
-     "matched": true,
+     "matched": false,
      "nfl": {
       "w": 6,
       "l": 2,
@@ -191,12 +282,25 @@
      },
      "computed": {
       "w": 6,
-      "l": 2,
+      "l": 3,
       "t": 0,
-      "pf": 180,
-      "pa": 144
+      "pf": 198,
+      "pa": 182
      },
-     "diffs": null
+     "diffs": {
+      "l": {
+       "nfl": 2,
+       "computed": 3
+      },
+      "pf": {
+       "nfl": 180,
+       "computed": 198
+      },
+      "pa": {
+       "nfl": 144,
+       "computed": 182
+      }
+     }
     },
     {
      "team": "NYG",
@@ -232,7 +336,7 @@
     },
     {
      "team": "GB",
-     "matched": true,
+     "matched": false,
      "nfl": {
       "w": 6,
       "l": 3,
@@ -242,16 +346,29 @@
      },
      "computed": {
       "w": 6,
-      "l": 3,
+      "l": 4,
       "t": 0,
-      "pf": 216,
-      "pa": 191
+      "pf": 226,
+      "pa": 221
      },
-     "diffs": null
+     "diffs": {
+      "l": {
+       "nfl": 3,
+       "computed": 4
+      },
+      "pf": {
+       "nfl": 216,
+       "computed": 226
+      },
+      "pa": {
+       "nfl": 191,
+       "computed": 221
+      }
+     }
     },
     {
      "team": "CLE",
-     "matched": true,
+     "matched": false,
      "nfl": {
       "w": 5,
       "l": 4,
@@ -260,17 +377,30 @@
       "pa": 196
      },
      "computed": {
-      "w": 5,
+      "w": 6,
       "l": 4,
       "t": 0,
-      "pf": 161,
-      "pa": 196
+      "pf": 188,
+      "pa": 220
      },
-     "diffs": null
+     "diffs": {
+      "w": {
+       "nfl": 5,
+       "computed": 6
+      },
+      "pf": {
+       "nfl": 161,
+       "computed": 188
+      },
+      "pa": {
+       "nfl": 196,
+       "computed": 220
+      }
+     }
     },
     {
      "team": "LA",
-     "matched": true,
+     "matched": false,
      "nfl": {
       "w": 5,
       "l": 4,
@@ -279,17 +409,30 @@
       "pa": 181
      },
      "computed": {
-      "w": 5,
+      "w": 6,
       "l": 4,
       "t": 0,
-      "pf": 214,
-      "pa": 181
+      "pf": 248,
+      "pa": 187
      },
-     "diffs": null
+     "diffs": {
+      "w": {
+       "nfl": 5,
+       "computed": 6
+      },
+      "pf": {
+       "nfl": 214,
+       "computed": 248
+      },
+      "pa": {
+       "nfl": 181,
+       "computed": 187
+      }
+     }
     },
     {
      "team": "NE",
-     "matched": true,
+     "matched": false,
      "nfl": {
       "w": 5,
       "l": 4,
@@ -299,16 +442,29 @@
      },
      "computed": {
       "w": 5,
-      "l": 4,
+      "l": 5,
       "t": 0,
-      "pf": 211,
-      "pa": 207
+      "pf": 221,
+      "pa": 242
      },
-     "diffs": null
+     "diffs": {
+      "l": {
+       "nfl": 4,
+       "computed": 5
+      },
+      "pf": {
+       "nfl": 211,
+       "computed": 221
+      },
+      "pa": {
+       "nfl": 207,
+       "computed": 242
+      }
+     }
     },
     {
      "team": "SEA",
-     "matched": true,
+     "matched": false,
      "nfl": {
       "w": 5,
       "l": 4,
@@ -317,13 +473,26 @@
       "pa": 162
      },
      "computed": {
-      "w": 5,
+      "w": 6,
       "l": 4,
       "t": 0,
-      "pf": 202,
-      "pa": 162
+      "pf": 223,
+      "pa": 175
      },
-     "diffs": null
+     "diffs": {
+      "w": {
+       "nfl": 5,
+       "computed": 6
+      },
+      "pf": {
+       "nfl": 202,
+       "computed": 223
+      },
+      "pa": {
+       "nfl": 162,
+       "computed": 175
+      }
+     }
     },
     {
      "team": "BAL",
@@ -346,7 +515,7 @@
     },
     {
      "team": "DAL",
-     "matched": true,
+     "matched": false,
      "nfl": {
       "w": 4,
       "l": 5,
@@ -356,16 +525,29 @@
      },
      "computed": {
       "w": 4,
-      "l": 5,
+      "l": 6,
       "t": 0,
-      "pf": 246,
-      "pa": 236
+      "pf": 286,
+      "pa": 282
      },
-     "diffs": null
+     "diffs": {
+      "l": {
+       "nfl": 5,
+       "computed": 6
+      },
+      "pf": {
+       "nfl": 246,
+       "computed": 286
+      },
+      "pa": {
+       "nfl": 236,
+       "computed": 282
+      }
+     }
     },
     {
      "team": "LV",
-     "matched": true,
+     "matched": false,
      "nfl": {
       "w": 4,
       "l": 5,
@@ -375,16 +557,29 @@
      },
      "computed": {
       "w": 4,
-      "l": 5,
+      "l": 6,
       "t": 0,
-      "pf": 238,
-      "pa": 268
+      "pf": 251,
+      "pa": 289
      },
-     "diffs": null
+     "diffs": {
+      "l": {
+       "nfl": 5,
+       "computed": 6
+      },
+      "pf": {
+       "nfl": 238,
+       "computed": 251
+      },
+      "pa": {
+       "nfl": 268,
+       "computed": 289
+      }
+     }
     },
     {
      "team": "CAR",
-     "matched": true,
+     "matched": false,
      "nfl": {
       "w": 3,
       "l": 5,
@@ -393,17 +588,30 @@
       "pa": 219
      },
      "computed": {
-      "w": 3,
+      "w": 4,
       "l": 5,
       "t": 0,
-      "pf": 199,
-      "pa": 219
+      "pf": 219,
+      "pa": 236
      },
-     "diffs": null
+     "diffs": {
+      "w": {
+       "nfl": 3,
+       "computed": 4
+      },
+      "pf": {
+       "nfl": 199,
+       "computed": 219
+      },
+      "pa": {
+       "nfl": 219,
+       "computed": 236
+      }
+     }
     },
     {
      "team": "HOU",
-     "matched": true,
+     "matched": false,
      "nfl": {
       "w": 3,
       "l": 5,
@@ -413,16 +621,29 @@
      },
      "computed": {
       "w": 3,
-      "l": 5,
+      "l": 6,
       "t": 0,
-      "pf": 209,
-      "pa": 192
+      "pf": 233,
+      "pa": 219
      },
-     "diffs": null
+     "diffs": {
+      "l": {
+       "nfl": 5,
+       "computed": 6
+      },
+      "pf": {
+       "nfl": 209,
+       "computed": 233
+      },
+      "pa": {
+       "nfl": 192,
+       "computed": 219
+      }
+     }
     },
     {
      "team": "NO",
-     "matched": true,
+     "matched": false,
      "nfl": {
       "w": 3,
       "l": 5,
@@ -432,16 +653,29 @@
      },
      "computed": {
       "w": 3,
-      "l": 5,
+      "l": 6,
       "t": 0,
-      "pf": 185,
-      "pa": 216
+      "pf": 202,
+      "pa": 236
      },
-     "diffs": null
+     "diffs": {
+      "l": {
+       "nfl": 5,
+       "computed": 6
+      },
+      "pf": {
+       "nfl": 185,
+       "computed": 202
+      },
+      "pa": {
+       "nfl": 216,
+       "computed": 236
+      }
+     }
     },
     {
      "team": "ARI",
-     "matched": true,
+     "matched": false,
      "nfl": {
       "w": 3,
       "l": 6,
@@ -451,16 +685,29 @@
      },
      "computed": {
       "w": 3,
-      "l": 6,
+      "l": 7,
       "t": 0,
-      "pf": 178,
-      "pa": 255
+      "pf": 184,
+      "pa": 289
      },
-     "diffs": null
+     "diffs": {
+      "l": {
+       "nfl": 6,
+       "computed": 7
+      },
+      "pf": {
+       "nfl": 178,
+       "computed": 184
+      },
+      "pa": {
+       "nfl": 255,
+       "computed": 289
+      }
+     }
     },
     {
      "team": "ATL",
-     "matched": true,
+     "matched": false,
      "nfl": {
       "w": 3,
       "l": 6,
@@ -470,12 +717,25 @@
      },
      "computed": {
       "w": 3,
-      "l": 6,
+      "l": 7,
       "t": 0,
-      "pf": 188,
-      "pa": 223
+      "pf": 201,
+      "pa": 258
      },
-     "diffs": null
+     "diffs": {
+      "l": {
+       "nfl": 6,
+       "computed": 7
+      },
+      "pf": {
+       "nfl": 188,
+       "computed": 201
+      },
+      "pa": {
+       "nfl": 223,
+       "computed": 258
+      }
+     }
     },
     {
      "team": "TB",
@@ -530,7 +790,7 @@
     },
     {
      "team": "IND",
-     "matched": true,
+     "matched": false,
      "nfl": {
       "w": 2,
       "l": 7,
@@ -539,17 +799,30 @@
       "pa": 249
      },
      "computed": {
-      "w": 2,
+      "w": 3,
       "l": 7,
       "t": 0,
-      "pf": 184,
-      "pa": 249
+      "pf": 208,
+      "pa": 271
      },
-     "diffs": null
+     "diffs": {
+      "w": {
+       "nfl": 2,
+       "computed": 3
+      },
+      "pf": {
+       "nfl": 184,
+       "computed": 208
+      },
+      "pa": {
+       "nfl": 249,
+       "computed": 271
+      }
+     }
     },
     {
      "team": "NYJ",
-     "matched": true,
+     "matched": false,
      "nfl": {
       "w": 2,
       "l": 7,
@@ -559,12 +832,25 @@
      },
      "computed": {
       "w": 2,
-      "l": 7,
+      "l": 8,
       "t": 0,
-      "pf": 182,
-      "pa": 223
+      "pf": 194,
+      "pa": 254
      },
-     "diffs": null
+     "diffs": {
+      "l": {
+       "nfl": 7,
+       "computed": 8
+      },
+      "pf": {
+       "nfl": 182,
+       "computed": 194
+      },
+      "pa": {
+       "nfl": 223,
+       "computed": 254
+      }
+     }
     },
     {
      "team": "PHI",
@@ -587,7 +873,7 @@
     },
     {
      "team": "MIA",
-     "matched": true,
+     "matched": false,
      "nfl": {
       "w": 1,
       "l": 7,
@@ -597,16 +883,29 @@
      },
      "computed": {
       "w": 1,
-      "l": 7,
+      "l": 8,
       "t": 0,
-      "pf": 126,
-      "pa": 200
+      "pf": 148,
+      "pa": 224
      },
-     "diffs": null
+     "diffs": {
+      "l": {
+       "nfl": 7,
+       "computed": 8
+      },
+      "pf": {
+       "nfl": 126,
+       "computed": 148
+      },
+      "pa": {
+       "nfl": 200,
+       "computed": 224
+      }
+     }
     },
     {
      "team": "TEN",
-     "matched": true,
+     "matched": false,
      "nfl": {
       "w": 1,
       "l": 7,
@@ -616,12 +915,25 @@
      },
      "computed": {
       "w": 1,
-      "l": 7,
+      "l": 8,
       "t": 0,
-      "pf": 144,
-      "pa": 199
+      "pf": 167,
+      "pa": 239
      },
-     "diffs": null
+     "diffs": {
+      "l": {
+       "nfl": 7,
+       "computed": 8
+      },
+      "pf": {
+       "nfl": 144,
+       "computed": 167
+      },
+      "pa": {
+       "nfl": 199,
+       "computed": 239
+      }
+     }
     },
     {
      "team": "LAC",
@@ -1688,24 +2000,24 @@
    "name": "Computed standings vs companion transcription (data/standings.csv)",
    "source": "https://www.nfl.com/standings/league/2026/reg",
    "rows_checked": 32,
-   "rows_matched": 30,
-   "mismatches": 2,
+   "rows_matched": 6,
+   "mismatches": 26,
    "detail": [
     {
      "team": "BUF",
-     "matched": true,
+     "matched": false,
      "computed": {
       "team": "BUF",
       "name": "Buffalo Bills",
       "conference": "AFC",
       "division": "AFC East",
-      "w": 7,
+      "w": 8,
       "l": 1,
       "t": 0,
-      "pct": 0.875,
-      "pf": 256,
-      "pa": 187,
-      "diff": 69,
+      "pct": 0.889,
+      "pf": 287,
+      "pa": 199,
+      "diff": 88,
       "source": "https://www.nfl.com/standings/league/2026/reg"
      },
      "nfl": {
@@ -1715,23 +2027,36 @@
       "pf": 256,
       "pa": 187
      },
-     "diffs": null
+     "diffs": {
+      "w": {
+       "companion": 7,
+       "computed": 8
+      },
+      "pf": {
+       "companion": 256,
+       "computed": 287
+      },
+      "pa": {
+       "companion": 187,
+       "computed": 199
+      }
+     }
     },
     {
      "team": "SF",
-     "matched": true,
+     "matched": false,
      "computed": {
       "team": "SF",
       "name": "San Francisco 49ers",
       "conference": "NFC",
       "division": "NFC West",
-      "w": 7,
+      "w": 8,
       "l": 1,
       "t": 0,
-      "pct": 0.875,
-      "pf": 235,
-      "pa": 156,
-      "diff": 79,
+      "pct": 0.889,
+      "pf": 281,
+      "pa": 196,
+      "diff": 85,
       "source": "https://www.nfl.com/standings/league/2026/reg"
      },
      "nfl": {
@@ -1741,7 +2066,20 @@
       "pf": 235,
       "pa": 156
      },
-     "diffs": null
+     "diffs": {
+      "w": {
+       "companion": 7,
+       "computed": 8
+      },
+      "pf": {
+       "companion": 235,
+       "computed": 281
+      },
+      "pa": {
+       "companion": 156,
+       "computed": 196
+      }
+     }
     },
     {
      "team": "CHI",
@@ -1797,19 +2135,19 @@
     },
     {
      "team": "CIN",
-     "matched": true,
+     "matched": false,
      "computed": {
       "team": "CIN",
       "name": "Cincinnati Bengals",
       "conference": "AFC",
       "division": "AFC North",
-      "w": 6,
+      "w": 7,
       "l": 2,
       "t": 0,
-      "pct": 0.75,
-      "pf": 240,
-      "pa": 175,
-      "diff": 65,
+      "pct": 0.778,
+      "pf": 278,
+      "pa": 193,
+      "diff": 85,
       "source": "https://www.nfl.com/standings/league/2026/reg"
      },
      "nfl": {
@@ -1819,23 +2157,36 @@
       "pf": 240,
       "pa": 175
      },
-     "diffs": null
+     "diffs": {
+      "w": {
+       "companion": 6,
+       "computed": 7
+      },
+      "pf": {
+       "companion": 240,
+       "computed": 278
+      },
+      "pa": {
+       "companion": 175,
+       "computed": 193
+      }
+     }
     },
     {
      "team": "DET",
-     "matched": true,
+     "matched": false,
      "computed": {
       "team": "DET",
       "name": "Detroit Lions",
       "conference": "NFC",
       "division": "NFC North",
-      "w": 6,
+      "w": 7,
       "l": 2,
       "t": 0,
-      "pct": 0.75,
-      "pf": 222,
-      "pa": 189,
-      "diff": 33,
+      "pct": 0.778,
+      "pf": 257,
+      "pa": 199,
+      "diff": 58,
       "source": "https://www.nfl.com/standings/league/2026/reg"
      },
      "nfl": {
@@ -1845,23 +2196,36 @@
       "pf": 222,
       "pa": 189
      },
-     "diffs": null
+     "diffs": {
+      "w": {
+       "companion": 6,
+       "computed": 7
+      },
+      "pf": {
+       "companion": 222,
+       "computed": 257
+      },
+      "pa": {
+       "companion": 189,
+       "computed": 199
+      }
+     }
     },
     {
      "team": "JAX",
-     "matched": true,
+     "matched": false,
      "computed": {
       "team": "JAX",
       "name": "Jacksonville Jaguars",
       "conference": "AFC",
       "division": "AFC South",
-      "w": 6,
+      "w": 7,
       "l": 2,
       "t": 0,
-      "pct": 0.75,
-      "pf": 229,
-      "pa": 121,
-      "diff": 108,
+      "pct": 0.778,
+      "pf": 269,
+      "pa": 144,
+      "diff": 125,
       "source": "https://www.nfl.com/standings/league/2026/reg"
      },
      "nfl": {
@@ -1871,23 +2235,36 @@
       "pf": 229,
       "pa": 121
      },
-     "diffs": null
+     "diffs": {
+      "w": {
+       "companion": 6,
+       "computed": 7
+      },
+      "pf": {
+       "companion": 229,
+       "computed": 269
+      },
+      "pa": {
+       "companion": 121,
+       "computed": 144
+      }
+     }
     },
     {
      "team": "KC",
-     "matched": true,
+     "matched": false,
      "computed": {
       "team": "KC",
       "name": "Kansas City Chiefs",
       "conference": "AFC",
       "division": "AFC West",
-      "w": 6,
+      "w": 7,
       "l": 2,
       "t": 0,
-      "pct": 0.75,
-      "pf": 202,
-      "pa": 143,
-      "diff": 59,
+      "pct": 0.778,
+      "pf": 237,
+      "pa": 156,
+      "diff": 81,
       "source": "https://www.nfl.com/standings/league/2026/reg"
      },
      "nfl": {
@@ -1897,23 +2274,36 @@
       "pf": 202,
       "pa": 143
      },
-     "diffs": null
+     "diffs": {
+      "w": {
+       "companion": 6,
+       "computed": 7
+      },
+      "pf": {
+       "companion": 202,
+       "computed": 237
+      },
+      "pa": {
+       "companion": 143,
+       "computed": 156
+      }
+     }
     },
     {
      "team": "MIN",
-     "matched": true,
+     "matched": false,
      "computed": {
       "team": "MIN",
       "name": "Minnesota Vikings",
       "conference": "NFC",
       "division": "NFC North",
-      "w": 6,
+      "w": 7,
       "l": 2,
       "t": 0,
-      "pct": 0.75,
-      "pf": 146,
-      "pa": 116,
-      "diff": 30,
+      "pct": 0.778,
+      "pf": 176,
+      "pa": 126,
+      "diff": 50,
       "source": "https://www.nfl.com/standings/league/2026/reg"
      },
      "nfl": {
@@ -1923,23 +2313,36 @@
       "pf": 146,
       "pa": 116
      },
-     "diffs": null
+     "diffs": {
+      "w": {
+       "companion": 6,
+       "computed": 7
+      },
+      "pf": {
+       "companion": 146,
+       "computed": 176
+      },
+      "pa": {
+       "companion": 116,
+       "computed": 126
+      }
+     }
     },
     {
      "team": "PIT",
-     "matched": true,
+     "matched": false,
      "computed": {
       "team": "PIT",
       "name": "Pittsburgh Steelers",
       "conference": "AFC",
       "division": "AFC North",
       "w": 6,
-      "l": 2,
+      "l": 3,
       "t": 0,
-      "pct": 0.75,
-      "pf": 180,
-      "pa": 144,
-      "diff": 36,
+      "pct": 0.667,
+      "pf": 198,
+      "pa": 182,
+      "diff": 16,
       "source": "https://www.nfl.com/standings/league/2026/reg"
      },
      "nfl": {
@@ -1949,7 +2352,20 @@
       "pf": 180,
       "pa": 144
      },
-     "diffs": null
+     "diffs": {
+      "l": {
+       "companion": 2,
+       "computed": 3
+      },
+      "pf": {
+       "companion": 180,
+       "computed": 198
+      },
+      "pa": {
+       "companion": 144,
+       "computed": 182
+      }
+     }
     },
     {
      "team": "NYG",
@@ -1992,19 +2408,19 @@
     },
     {
      "team": "GB",
-     "matched": true,
+     "matched": false,
      "computed": {
       "team": "GB",
       "name": "Green Bay Packers",
       "conference": "NFC",
       "division": "NFC North",
       "w": 6,
-      "l": 3,
+      "l": 4,
       "t": 0,
-      "pct": 0.667,
-      "pf": 216,
-      "pa": 191,
-      "diff": 25,
+      "pct": 0.6,
+      "pf": 226,
+      "pa": 221,
+      "diff": 5,
       "source": "https://www.nfl.com/standings/league/2026/reg"
      },
      "nfl": {
@@ -2014,23 +2430,36 @@
       "pf": 216,
       "pa": 191
      },
-     "diffs": null
+     "diffs": {
+      "l": {
+       "companion": 3,
+       "computed": 4
+      },
+      "pf": {
+       "companion": 216,
+       "computed": 226
+      },
+      "pa": {
+       "companion": 191,
+       "computed": 221
+      }
+     }
     },
     {
      "team": "CLE",
-     "matched": true,
+     "matched": false,
      "computed": {
       "team": "CLE",
       "name": "Cleveland Browns",
       "conference": "AFC",
       "division": "AFC North",
-      "w": 5,
+      "w": 6,
       "l": 4,
       "t": 0,
-      "pct": 0.556,
-      "pf": 161,
-      "pa": 196,
-      "diff": -35,
+      "pct": 0.6,
+      "pf": 188,
+      "pa": 220,
+      "diff": -32,
       "source": "https://www.nfl.com/standings/league/2026/reg"
      },
      "nfl": {
@@ -2040,23 +2469,36 @@
       "pf": 161,
       "pa": 196
      },
-     "diffs": null
+     "diffs": {
+      "w": {
+       "companion": 5,
+       "computed": 6
+      },
+      "pf": {
+       "companion": 161,
+       "computed": 188
+      },
+      "pa": {
+       "companion": 196,
+       "computed": 220
+      }
+     }
     },
     {
      "team": "LA",
-     "matched": true,
+     "matched": false,
      "computed": {
       "team": "LA",
       "name": "Los Angeles Rams",
       "conference": "NFC",
       "division": "NFC West",
-      "w": 5,
+      "w": 6,
       "l": 4,
       "t": 0,
-      "pct": 0.556,
-      "pf": 214,
-      "pa": 181,
-      "diff": 33,
+      "pct": 0.6,
+      "pf": 248,
+      "pa": 187,
+      "diff": 61,
       "source": "https://www.nfl.com/standings/league/2026/reg"
      },
      "nfl": {
@@ -2066,23 +2508,36 @@
       "pf": 214,
       "pa": 181
      },
-     "diffs": null
+     "diffs": {
+      "w": {
+       "companion": 5,
+       "computed": 6
+      },
+      "pf": {
+       "companion": 214,
+       "computed": 248
+      },
+      "pa": {
+       "companion": 181,
+       "computed": 187
+      }
+     }
     },
     {
      "team": "NE",
-     "matched": true,
+     "matched": false,
      "computed": {
       "team": "NE",
       "name": "New England Patriots",
       "conference": "AFC",
       "division": "AFC East",
       "w": 5,
-      "l": 4,
+      "l": 5,
       "t": 0,
-      "pct": 0.556,
-      "pf": 211,
-      "pa": 207,
-      "diff": 4,
+      "pct": 0.5,
+      "pf": 221,
+      "pa": 242,
+      "diff": -21,
       "source": "https://www.nfl.com/standings/league/2026/reg"
      },
      "nfl": {
@@ -2092,23 +2547,36 @@
       "pf": 211,
       "pa": 207
      },
-     "diffs": null
+     "diffs": {
+      "l": {
+       "companion": 4,
+       "computed": 5
+      },
+      "pf": {
+       "companion": 211,
+       "computed": 221
+      },
+      "pa": {
+       "companion": 207,
+       "computed": 242
+      }
+     }
     },
     {
      "team": "SEA",
-     "matched": true,
+     "matched": false,
      "computed": {
       "team": "SEA",
       "name": "Seattle Seahawks",
       "conference": "NFC",
       "division": "NFC West",
-      "w": 5,
+      "w": 6,
       "l": 4,
       "t": 0,
-      "pct": 0.556,
-      "pf": 202,
-      "pa": 162,
-      "diff": 40,
+      "pct": 0.6,
+      "pf": 223,
+      "pa": 175,
+      "diff": 48,
       "source": "https://www.nfl.com/standings/league/2026/reg"
      },
      "nfl": {
@@ -2118,7 +2586,20 @@
       "pf": 202,
       "pa": 162
      },
-     "diffs": null
+     "diffs": {
+      "w": {
+       "companion": 5,
+       "computed": 6
+      },
+      "pf": {
+       "companion": 202,
+       "computed": 223
+      },
+      "pa": {
+       "companion": 162,
+       "computed": 175
+      }
+     }
     },
     {
      "team": "BAL",
@@ -2148,19 +2629,19 @@
     },
     {
      "team": "DAL",
-     "matched": true,
+     "matched": false,
      "computed": {
       "team": "DAL",
       "name": "Dallas Cowboys",
       "conference": "NFC",
       "division": "NFC East",
       "w": 4,
-      "l": 5,
+      "l": 6,
       "t": 0,
-      "pct": 0.444,
-      "pf": 246,
-      "pa": 236,
-      "diff": 10,
+      "pct": 0.4,
+      "pf": 286,
+      "pa": 282,
+      "diff": 4,
       "source": "https://www.nfl.com/standings/league/2026/reg"
      },
      "nfl": {
@@ -2170,23 +2651,36 @@
       "pf": 246,
       "pa": 236
      },
-     "diffs": null
+     "diffs": {
+      "l": {
+       "companion": 5,
+       "computed": 6
+      },
+      "pf": {
+       "companion": 246,
+       "computed": 286
+      },
+      "pa": {
+       "companion": 236,
+       "computed": 282
+      }
+     }
     },
     {
      "team": "LV",
-     "matched": true,
+     "matched": false,
      "computed": {
       "team": "LV",
       "name": "Las Vegas Raiders",
       "conference": "AFC",
       "division": "AFC West",
       "w": 4,
-      "l": 5,
+      "l": 6,
       "t": 0,
-      "pct": 0.444,
-      "pf": 238,
-      "pa": 268,
-      "diff": -30,
+      "pct": 0.4,
+      "pf": 251,
+      "pa": 289,
+      "diff": -38,
       "source": "https://www.nfl.com/standings/league/2026/reg"
      },
      "nfl": {
@@ -2196,23 +2690,36 @@
       "pf": 238,
       "pa": 268
      },
-     "diffs": null
+     "diffs": {
+      "l": {
+       "companion": 5,
+       "computed": 6
+      },
+      "pf": {
+       "companion": 238,
+       "computed": 251
+      },
+      "pa": {
+       "companion": 268,
+       "computed": 289
+      }
+     }
     },
     {
      "team": "CAR",
-     "matched": true,
+     "matched": false,
      "computed": {
       "team": "CAR",
       "name": "Carolina Panthers",
       "conference": "NFC",
       "division": "NFC South",
-      "w": 3,
+      "w": 4,
       "l": 5,
       "t": 0,
-      "pct": 0.375,
-      "pf": 199,
-      "pa": 219,
-      "diff": -20,
+      "pct": 0.444,
+      "pf": 219,
+      "pa": 236,
+      "diff": -17,
       "source": "https://www.nfl.com/standings/league/2026/reg"
      },
      "nfl": {
@@ -2222,23 +2729,36 @@
       "pf": 199,
       "pa": 219
      },
-     "diffs": null
+     "diffs": {
+      "w": {
+       "companion": 3,
+       "computed": 4
+      },
+      "pf": {
+       "companion": 199,
+       "computed": 219
+      },
+      "pa": {
+       "companion": 219,
+       "computed": 236
+      }
+     }
     },
     {
      "team": "HOU",
-     "matched": true,
+     "matched": false,
      "computed": {
       "team": "HOU",
       "name": "Houston Texans",
       "conference": "AFC",
       "division": "AFC South",
       "w": 3,
-      "l": 5,
+      "l": 6,
       "t": 0,
-      "pct": 0.375,
-      "pf": 209,
-      "pa": 192,
-      "diff": 17,
+      "pct": 0.333,
+      "pf": 233,
+      "pa": 219,
+      "diff": 14,
       "source": "https://www.nfl.com/standings/league/2026/reg"
      },
      "nfl": {
@@ -2248,23 +2768,36 @@
       "pf": 209,
       "pa": 192
      },
-     "diffs": null
+     "diffs": {
+      "l": {
+       "companion": 5,
+       "computed": 6
+      },
+      "pf": {
+       "companion": 209,
+       "computed": 233
+      },
+      "pa": {
+       "companion": 192,
+       "computed": 219
+      }
+     }
     },
     {
      "team": "NO",
-     "matched": true,
+     "matched": false,
      "computed": {
       "team": "NO",
       "name": "New Orleans Saints",
       "conference": "NFC",
       "division": "NFC South",
       "w": 3,
-      "l": 5,
+      "l": 6,
       "t": 0,
-      "pct": 0.375,
-      "pf": 185,
-      "pa": 216,
-      "diff": -31,
+      "pct": 0.333,
+      "pf": 202,
+      "pa": 236,
+      "diff": -34,
       "source": "https://www.nfl.com/standings/league/2026/reg"
      },
      "nfl": {
@@ -2274,23 +2807,36 @@
       "pf": 185,
       "pa": 216
      },
-     "diffs": null
+     "diffs": {
+      "l": {
+       "companion": 5,
+       "computed": 6
+      },
+      "pf": {
+       "companion": 185,
+       "computed": 202
+      },
+      "pa": {
+       "companion": 216,
+       "computed": 236
+      }
+     }
     },
     {
      "team": "ARI",
-     "matched": true,
+     "matched": false,
      "computed": {
       "team": "ARI",
       "name": "Arizona Cardinals",
       "conference": "NFC",
       "division": "NFC West",
       "w": 3,
-      "l": 6,
+      "l": 7,
       "t": 0,
-      "pct": 0.333,
-      "pf": 178,
-      "pa": 255,
-      "diff": -77,
+      "pct": 0.3,
+      "pf": 184,
+      "pa": 289,
+      "diff": -105,
       "source": "https://www.nfl.com/standings/league/2026/reg"
      },
      "nfl": {
@@ -2300,23 +2846,36 @@
       "pf": 178,
       "pa": 255
      },
-     "diffs": null
+     "diffs": {
+      "l": {
+       "companion": 6,
+       "computed": 7
+      },
+      "pf": {
+       "companion": 178,
+       "computed": 184
+      },
+      "pa": {
+       "companion": 255,
+       "computed": 289
+      }
+     }
     },
     {
      "team": "ATL",
-     "matched": true,
+     "matched": false,
      "computed": {
       "team": "ATL",
       "name": "Atlanta Falcons",
       "conference": "NFC",
       "division": "NFC South",
       "w": 3,
-      "l": 6,
+      "l": 7,
       "t": 0,
-      "pct": 0.333,
-      "pf": 188,
-      "pa": 223,
-      "diff": -35,
+      "pct": 0.3,
+      "pf": 201,
+      "pa": 258,
+      "diff": -57,
       "source": "https://www.nfl.com/standings/league/2026/reg"
      },
      "nfl": {
@@ -2326,7 +2885,20 @@
       "pf": 188,
       "pa": 223
      },
-     "diffs": null
+     "diffs": {
+      "l": {
+       "companion": 6,
+       "computed": 7
+      },
+      "pf": {
+       "companion": 188,
+       "computed": 201
+      },
+      "pa": {
+       "companion": 223,
+       "computed": 258
+      }
+     }
     },
     {
      "team": "TB",
@@ -2395,19 +2967,19 @@
     },
     {
      "team": "IND",
-     "matched": true,
+     "matched": false,
      "computed": {
       "team": "IND",
       "name": "Indianapolis Colts",
       "conference": "AFC",
       "division": "AFC South",
-      "w": 2,
+      "w": 3,
       "l": 7,
       "t": 0,
-      "pct": 0.222,
-      "pf": 184,
-      "pa": 249,
-      "diff": -65,
+      "pct": 0.3,
+      "pf": 208,
+      "pa": 271,
+      "diff": -63,
       "source": "https://www.nfl.com/standings/league/2026/reg"
      },
      "nfl": {
@@ -2417,23 +2989,36 @@
       "pf": 184,
       "pa": 249
      },
-     "diffs": null
+     "diffs": {
+      "w": {
+       "companion": 2,
+       "computed": 3
+      },
+      "pf": {
+       "companion": 184,
+       "computed": 208
+      },
+      "pa": {
+       "companion": 249,
+       "computed": 271
+      }
+     }
     },
     {
      "team": "NYJ",
-     "matched": true,
+     "matched": false,
      "computed": {
       "team": "NYJ",
       "name": "New York Jets",
       "conference": "AFC",
       "division": "AFC East",
       "w": 2,
-      "l": 7,
+      "l": 8,
       "t": 0,
-      "pct": 0.222,
-      "pf": 182,
-      "pa": 223,
-      "diff": -41,
+      "pct": 0.2,
+      "pf": 194,
+      "pa": 254,
+      "diff": -60,
       "source": "https://www.nfl.com/standings/league/2026/reg"
      },
      "nfl": {
@@ -2443,7 +3028,20 @@
       "pf": 182,
       "pa": 223
      },
-     "diffs": null
+     "diffs": {
+      "l": {
+       "companion": 7,
+       "computed": 8
+      },
+      "pf": {
+       "companion": 182,
+       "computed": 194
+      },
+      "pa": {
+       "companion": 223,
+       "computed": 254
+      }
+     }
     },
     {
      "team": "PHI",
@@ -2473,19 +3071,19 @@
     },
     {
      "team": "MIA",
-     "matched": true,
+     "matched": false,
      "computed": {
       "team": "MIA",
       "name": "Miami Dolphins",
       "conference": "AFC",
       "division": "AFC East",
       "w": 1,
-      "l": 7,
+      "l": 8,
       "t": 0,
-      "pct": 0.125,
-      "pf": 126,
-      "pa": 200,
-      "diff": -74,
+      "pct": 0.111,
+      "pf": 148,
+      "pa": 224,
+      "diff": -76,
       "source": "https://www.nfl.com/standings/league/2026/reg"
      },
      "nfl": {
@@ -2495,23 +3093,36 @@
       "pf": 126,
       "pa": 200
      },
-     "diffs": null
+     "diffs": {
+      "l": {
+       "companion": 7,
+       "computed": 8
+      },
+      "pf": {
+       "companion": 126,
+       "computed": 148
+      },
+      "pa": {
+       "companion": 200,
+       "computed": 224
+      }
+     }
     },
     {
      "team": "TEN",
-     "matched": true,
+     "matched": false,
      "computed": {
       "team": "TEN",
       "name": "Tennessee Titans",
       "conference": "AFC",
       "division": "AFC South",
       "w": 1,
-      "l": 7,
+      "l": 8,
       "t": 0,
-      "pct": 0.125,
-      "pf": 144,
-      "pa": 199,
-      "diff": -55,
+      "pct": 0.111,
+      "pf": 167,
+      "pa": 239,
+      "diff": -72,
       "source": "https://www.nfl.com/standings/league/2026/reg"
      },
      "nfl": {
@@ -2521,7 +3132,20 @@
       "pf": 144,
       "pa": 199
      },
-     "diffs": null
+     "diffs": {
+      "l": {
+       "companion": 7,
+       "computed": 8
+      },
+      "pf": {
+       "companion": 144,
+       "computed": 167
+      },
+      "pa": {
+       "companion": 199,
+       "computed": 239
+      }
+     }
     },
     {
      "team": "LAC",
@@ -2945,8 +3569,144 @@
   {
    "id": "V1",
    "area": "standings",
-   "issue": "2 of 32 team records differ from nfl.com",
+   "issue": "26 of 32 team records differ from nfl.com",
    "examples": [
+    {
+     "team": "BUF",
+     "diffs": {
+      "w": {
+       "nfl": 7,
+       "computed": 8
+      },
+      "pf": {
+       "nfl": 256,
+       "computed": 287
+      },
+      "pa": {
+       "nfl": 187,
+       "computed": 199
+      }
+     }
+    },
+    {
+     "team": "SF",
+     "diffs": {
+      "w": {
+       "nfl": 7,
+       "computed": 8
+      },
+      "pf": {
+       "nfl": 235,
+       "computed": 281
+      },
+      "pa": {
+       "nfl": 156,
+       "computed": 196
+      }
+     }
+    },
+    {
+     "team": "CIN",
+     "diffs": {
+      "w": {
+       "nfl": 6,
+       "computed": 7
+      },
+      "pf": {
+       "nfl": 240,
+       "computed": 278
+      },
+      "pa": {
+       "nfl": 175,
+       "computed": 193
+      }
+     }
+    },
+    {
+     "team": "DET",
+     "diffs": {
+      "w": {
+       "nfl": 6,
+       "computed": 7
+      },
+      "pf": {
+       "nfl": 222,
+       "computed": 257
+      },
+      "pa": {
+       "nfl": 189,
+       "computed": 199
+      }
+     }
+    },
+    {
+     "team": "JAX",
+     "diffs": {
+      "w": {
+       "nfl": 6,
+       "computed": 7
+      },
+      "pf": {
+       "nfl": 229,
+       "computed": 269
+      },
+      "pa": {
+       "nfl": 121,
+       "computed": 144
+      }
+     }
+    },
+    {
+     "team": "KC",
+     "diffs": {
+      "w": {
+       "nfl": 6,
+       "computed": 7
+      },
+      "pf": {
+       "nfl": 202,
+       "computed": 237
+      },
+      "pa": {
+       "nfl": 143,
+       "computed": 156
+      }
+     }
+    },
+    {
+     "team": "MIN",
+     "diffs": {
+      "w": {
+       "nfl": 6,
+       "computed": 7
+      },
+      "pf": {
+       "nfl": 146,
+       "computed": 176
+      },
+      "pa": {
+       "nfl": 116,
+       "computed": 126
+      }
+     }
+    },
+    {
+     "team": "PIT",
+     "diffs": {
+      "l": {
+       "nfl": 2,
+       "computed": 3
+      },
+      "pf": {
+       "nfl": 180,
+       "computed": 198
+      },
+      "pa": {
+       "nfl": 144,
+       "computed": 182
+      }
+     }
+    },
     {
      "team": "NYG",
      "diffs": {
@@ -2965,19 +3725,19 @@
      }
     },
     {
-     "team": "WAS",
+     "team": "GB",
      "diffs": {
-      "w": {
-       "nfl": 2,
-       "computed": 3
+      "l": {
+       "nfl": 3,
+       "computed": 4
       },
       "pf": {
-       "nfl": 172,
-       "computed": 196
+       "nfl": 216,
+       "computed": 226
       },
       "pa": {
-       "nfl": 202,
-       "computed": 223
+       "nfl": 191,
+       "computed": 221
       }
      }
     }
@@ -3123,39 +3883,141 @@
   {
    "id": "V4",
    "area": "standings cross-check",
-   "issue": "2 rows differ between computed standings and the companion CSV",
+   "issue": "26 rows differ between computed standings and the companion CSV",
    "examples": [
     {
-     "team": "NYG",
+     "team": "BUF",
+     "diffs": {
+      "w": {
+       "companion": 7,
+       "computed": 8
+      },
+      "pf": {
+       "companion": 256,
+       "computed": 287
+      },
+      "pa": {
+       "companion": 187,
+       "computed": 199
+      }
+     }
+    },
+    {
+     "team": "SF",
+     "diffs": {
+      "w": {
+       "companion": 7,
+       "computed": 8
+      },
+      "pf": {
+       "companion": 235,
+       "computed": 281
+      },
+      "pa": {
+       "companion": 156,
+       "computed": 196
+      }
+     }
+    },
+    {
+     "team": "CIN",
+     "diffs": {
+      "w": {
+       "companion": 6,
+       "computed": 7
+      },
+      "pf": {
+       "companion": 240,
+       "computed": 278
+      },
+      "pa": {
+       "companion": 175,
+       "computed": 193
+      }
+     }
+    },
+    {
+     "team": "DET",
+     "diffs": {
+      "w": {
+       "companion": 6,
+       "computed": 7
+      },
+      "pf": {
+       "companion": 222,
+       "computed": 257
+      },
+      "pa": {
+       "companion": 189,
+       "computed": 199
+      }
+     }
+    },
+    {
+     "team": "JAX",
+     "diffs": {
+      "w": {
+       "companion": 6,
+       "computed": 7
+      },
+      "pf": {
+       "companion": 229,
+       "computed": 269
+      },
+      "pa": {
+       "companion": 121,
+       "computed": 144
+      }
+     }
+    },
+    {
+     "team": "KC",
+     "diffs": {
+      "w": {
+       "companion": 6,
+       "computed": 7
+      },
+      "pf": {
+       "companion": 202,
+       "computed": 237
+      },
+      "pa": {
+       "companion": 143,
+       "computed": 156
+      }
+     }
+    },
+    {
+     "team": "MIN",
+     "diffs": {
+      "w": {
+       "companion": 6,
+       "computed": 7
+      },
+      "pf": {
+       "companion": 146,
+       "computed": 176
+      },
+      "pa": {
+       "companion": 116,
+       "computed": 126
+      }
+     }
+    },
+    {
+     "team": "PIT",
      "diffs": {
       "l": {
        "companion": 2,
        "computed": 3
       },
       "pf": {
-       "companion": 182,
-       "computed": 203
+       "companion": 180,
+       "computed": 198
       },
       "pa": {
-       "companion": 172,
-       "computed": 196
-      }
-     }
-    },
-    {
-     "team": "WAS",
-     "diffs": {
-      "w": {
-       "companion": 2,
-       "computed": 3
-      },
-      "pf": {
-       "companion": 172,
-       "computed": 196
-      },
-      "pa": {
-       "companion": 202,
-       "computed": 223
+       "companion": 144,
+       "computed": 182
       }
      }
     }
