@@ -1,0 +1,40 @@
+# Official NFL.com league standings, 2026 regular season — retrieval T5 (current state)
+# Source page: https://www.nfl.com/standings/ (Division view, 2026 REG; both chunks read in full)
+# Retrieved: 2026-11-16 (session 49ac3a99-nfl1, page fetch at 2026-11-16 18:07Z)
+# Purpose: current-state comparison for data/model/snapshot.json, which the data bot regenerated
+# after Week 10 completed (149 games played). T3 (2026-11-13) is kept as the historical read.
+# Columns: W, L, T, PF, PA transcribed from the page; PCT and NET PTS computed by the audit
+# identity checks (PCT = (W+0.5T)/GP to 3 dp, NET = PF-PA). Abbreviations as printed; AZ = ARI.
+team	w	l	t	pf	pa
+BUF	8	1	0	287	199
+NE	5	5	0	221	242
+NYJ	2	8	0	194	254
+MIA	1	8	0	148	224
+CIN	7	2	0	278	193
+PIT	6	3	0	198	182
+CLE	6	4	0	188	220
+BAL	4	5	0	189	236
+JAX	7	2	0	269	144
+HOU	3	6	0	233	219
+IND	3	7	0	208	271
+TEN	1	8	0	167	239
+KC	7	2	0	237	156
+DEN	7	2	0	198	186
+LV	4	6	0	251	289
+LAC	0	8	0	121	219
+NYG	5	3	1	203	196
+DAL	4	6	0	286	282
+WAS	3	5	1	196	223
+PHI	2	7	0	148	221
+DET	7	2	0	257	199
+MIN	7	2	0	176	126
+CHI	7	2	0	241	184
+GB	6	4	0	226	221
+CAR	4	5	0	219	236
+TB	3	6	0	202	178
+NO	3	6	0	202	236
+ATL	3	7	0	201	258
+SF	8	1	0	281	196
+SEA	6	4	0	223	175
+LA	6	4	0	248	187
+AZ	3	7	0	184	289

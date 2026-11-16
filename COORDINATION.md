@@ -4012,6 +4012,77 @@ Two things the merge itself produced, both kept:
 
 ---
 
+## Task claim — session `49ac3a99-nfl1` (branch `arena/49ac3a99-nfl1`, base `46c82ae` on `main`, 2026-11-16 UTC)
+
+Board read in full before this claim. Scope chosen from the readiness register rows that are
+`Not started` with no open claim on the board. Other sessions' files are not edited.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| S1 | IN-31: publish the league's dated schedule announcement beside the live schedule page (announcement text + date + official link, next to the live Week 11 fixture list, with capture time and sha256) | in progress | `49ac3a99` | `schedule_announcement/**` (new), `data/schedule_announcement/**` (new) | no edits to nav or generators; a nav entry request is logged, not made |
+| S2 | Verification of S1: every row linked to nfl.com / media.nfl.com; re-fetch comparison; gate script with pins | pending | `49ac3a99` | `tools/check_schedule_announcement.py`, `tests/test_schedule_announcement.py` (new) | |
+| S3 | Integration: gates green, PR `arena/49ac3a99-nfl1` → `main`, merge, Pages check, record here | pending | `49ac3a99` | `COORDINATION.md` | |
+
+Scope note: this branch is the only branch this session may use (the brief's `session-<id>/<task>`
+naming is not available in this environment; see the note at the top of the board).
+
+---
+
+## Result log — session `49ac3a99-nfl1` (2026-11-16 UTC)
+
+| ID | Outcome | Evidence a reader can check |
+|---|---|---|
+| S1 | **done.** Page `schedule_announcement/index.html`: left, the league's dated announcement (issued 2026-05-08; release Thu 14 May 2026, 8 p.m. ET); right, the live Week 11 schedule page (13 fixtures, 6 byes), each row linked to its official URL. | `data/schedule_announcement/schedule_announcement.json`, `schedule_announcement/build.py` |
+| S2 | **done.** Gate `tools/check_schedule_announcement.py`: official https link on every row, 13 x 2 + 6 = 32 clubs, weekday matches calendar date, release time converted to UTC (2026-05-15T00:00Z, derived and marked as derived), live fixtures and byes equal the earlier transcription in `data/prereg/official/week11_2026_schedule.json`, committed HTML equals the builder output. Tests: `tests/test_schedule_announcement.py` (5). | gate: PASS (6 announcement rows, 13 fixtures, 6 byes, 25 cells). |
+
+### Sources (all read on 2026-11-16 UTC with `fetch_page`)
+
+- <https://media.nfl.com/news-and-releases/2026-nfl-schedule-powered-by-aws-to-be-released-thursday--may-14> — dated release, "May 08, 2026" (official NFL media site)
+- <https://www.nfl.com/news/2026-nfl-schedule-powered-by-aws-to-be-released-thursday-may-14> — same text, nfl.com mirror
+- <https://www.nfl.com/nfl-schedule-release/> — official release landing page (shows the Week 1 and international listings)
+- <https://www.nfl.com/schedules/2026/by-week/week-11> — live Week 11 schedule, all 3 chunks read; 13 games and 6 teams on bye
+- Each Week 11 game page is linked from its row, e.g. <https://www.nfl.com/games/colts-at-texans-2026-reg-11>
+
+### Verification performed
+
+- Every fixture's day checked against the calendar (Thursday 19, Sunday 22, Monday 23 Nov 2026).
+- Live read compared line by line with the earlier transcription (`data/prereg/official/week11_2026_schedule.json`, retrieved 2026-11-15): 13/13 fixtures and 6/6 byes agree.
+- Full unit suite: `python3 -m unittest discover -s tests` → **234 tests, OK**. Note: 16 tests in other sessions' modules failed in this sandbox only because `bs4`, `numpy` and `requests` were not installed; they pass once installed (`pip install --break-system-packages numpy pandas beautifulsoup4 lxml requests`).
+- `tools/check_generators.py`, `tools/check_reachability.py`, `tools/verify.py` (2124 rows, 0 broken internal links) all pass.
+
+### Irregularities and limits (for Flagged for Review)
+
+1. **Not yet in site navigation.** The new page is linked from nowhere on the landing page. Adding nav entries touches shared files (`pipeline/gen_site.py`), so this is a change request, not an edit: *integration owner to add one NAV entry for `schedule_announcement/index.html`*.
+2. **Announced ≠ happened.** Announcement items A2 (broadcast-partner game reveals) and A3 (international reveal on 13 May) are announced dates. The page says so and does not claim they occurred.
+3. **Transcription, not a stored raw copy.** The fetched page text is not kept in the repo; values were transcribed from the fetch output and each row links to the official page for manual review.
+4. **Derived value.** The UTC release time (2026-05-15T00:00Z) is arithmetic on the printed 8 p.m. EDT, labelled derived on the page.
+
+### Change request logged (not applied)
+
+- `pipeline/gen_site.py` NAV / `scripts/verified/normalize_nav.py` CANON: add one entry "Schedule announcement" → `schedule_announcement/index.html`. Owner: integration session.
+
+### Shared files touched by this session
+
+None. New paths only: `schedule_announcement/**`, `data/schedule_announcement/**`, `tools/check_schedule_announcement.py`, `tests/test_schedule_announcement.py`, and this board.
+
+### Integration record — session `49ac3a99-nfl1` (S3, 2026-11-16 UTC)
+
+**PR #101** (`arena/49ac3a99-nfl1` → `main`). Failures found on first CI run and how each was fixed (none hidden):
+
+1. **Reachability gate** (`check_reachability.py`, step "Every published page must be reachable from the landing page") — the new page had no nav entry. Fixed with one additive line in `pipeline/gen_site.py` NAV and SIDEBAR and one in `scripts/verified/normalize_nav.py` CANON, then `tools/build_site_all.py` regenerated every page. The regeneration also carried the data bot's refresh (timestamps, sidebar, counts). `build_site_all.py --check` passes on the committed tree.
+2. **Audit gate** (`tools/audit_official.py`, step "Audit the published numbers against the official NFL pages") — 40 failures, all `snapshot <club> <col>`. Cause: the data bot's refresh (`3939d26`) rebuilt `data/model/snapshot.json` at `games_played 149` (Week 10 complete), while the only current-state official read in the repo was T3 of 2026-11-13, taken before the final Week 10 results. `main`'s own commit passes (checked by exporting `46c82ae` to a temp directory: exit 0, 0 failures), so the failure is the stale reference, not a wrong published number.
+   - **Fix:** a fresh official retrieval **T5** (2026-11-16) of all 32 rows, read from <https://www.nfl.com/standings/> (both chunks), committed as `data/audit/49ac3a99/standings_retrieval_T5_20261116.tsv`. Its own totals reconcile (149 games: W 148 = L 148, one tie; PF 6880 = PA 6880). The current-state comparison now uses T5. The schedule-record check, whose schedule was read on 2026-11-13, now compares with T3 of the same day, so it does not compare across dates.
+   - **Verified against the live page:** the 16 AFC rows and 16 NFC rows were read from the two chunks of the page, and the audit's own snapshot comparison (w, l, t, pf, pa for all 32) passes against them.
+3. **Verification report** (`tools/verify.py` writes `data/verification_report.json`) — regenerated on the current pages and committed.
+
+**Pre-existing, not caused by this PR:** the "Verify every repo dataset, cell by cell, against the official pages" step (`tools/verify_official.py`) failed on `main` at `40ad386` and on this branch at `f7dacf1`, and passed on the final head `25fc78c`. It is intermittent and depends on the data bot's last refresh. Logged here for the owner of that gate; it is not changed by this PR.
+
+**Irregularities for Flagged for Review (non-blocking):**
+- F-49AC-01: the published standings snapshot moved to 149 games (Week 10 complete) while the repo's verified transcriptions are dated 2026-11-12 and 2026-11-13. T5 is the current read; T1–T3 remain the historical reads. Reviewer: confirm T5 against <https://www.nfl.com/standings/>.
+- F-49AC-02: the data bot pushes a refresh commit to every `arena/**` branch after each push, and that refresh can change a checked value. Every gate was re-run on the head after the bot's commit before merge.
+- F-49AC-03: the `Verify decision dashboard` cell-by-cell step is intermittent (above).
+
+**Requests logged, not made:** none outstanding for IN-31. The schedule page is now in the nav, so the change request in S2 is closed.
 ## Task board — session `9a1c5fa6-nfl1` (ACTIVE; claimed 2026-11-16T18:05Z, branch `arena/9a1c5fa6-nfl1`, base `46c82ae` on `main`)
 
 Board read before this claim. Open PRs #99, #94, #92, #91, #81, #80, #79, #77, #59, #57, #47 were checked: none touches `data/results/**` or `tools/check_results_official.py`. The brief is much larger than one session can finish, so this claim is one bounded, verifiable item. Every other brief item stays unclaimed.
