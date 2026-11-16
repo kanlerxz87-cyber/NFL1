@@ -1,0 +1,100 @@
+name: Collect official transactions and reserve lists
+
+# Session 1d824ec2-nfl1, tasks V2/V3. New, additive workflow: it writes only data/reserve/**
+# and reserve/*.html, and changes no other session's file.
+#
+# Runs on GitHub's infrastructure because the Arena sandbox cannot reach nfl.com (allow-list:
+# github.com, pypi.org, ...). The official register at https://www.nfl.com/transactions/ is
+# reachable from Actions, the same route pipeline/scrape_injuries.py uses for the injury report.
+#
+# Cadence: hourly-ish during the season so a designation change is captured with its clock time
+# (the brief's "timestamped series, not a weekly snapshot"), and on every push that touches the
+# collector so a parser change is tested against the live page before it can be merged.
+#
+# Failure policy: the job turns RED on any fetch, parse, schema, pin or freshness failure AFTER it
+# has committed the heartbeat, so the failure itself is recorded in the repository rather than lost.
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "23 * * * *"           # hourly at :23; the league posts moves in the evening ET
+  push:
+    branches: ["arena/**", "main"]
+    paths:
+      - "pipeline/collect_transactions.py"
+      - "tools/build_reserve_site.py"
+      - "tools/check_reserve_register.py"
+      - "tools/check_depth_staleness_1d824ec2.py"
+      - "tests/test_reserve_register.py"
+      - ".github/workflows/transactions-sweep.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: transactions-sweep-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: python -m pip install --quiet requests beautifulsoup4 lxml
+      - name: Parser unit tests (pinned to two verbatim official rows)
+        run: python -m unittest tests.test_reserve_register -v
+      - name: Sweep the official transactions register (six categories, four season months)
+        id: collect
+        continue-on-error: true
+        run: python3 pipeline/collect_transactions.py collect --months 2026-08,2026-09,2026-10,2026-11
+      - name: Rebuild the derived register pages from the stored captures
+        run: |
+          python3 pipeline/collect_transactions.py derive
+          python3 tools/check_depth_staleness_1d824ec2.py
+          python3 tools/build_reserve_site.py
+      - name: Gate: hashes, pins, freshness, row-level source links, page reachability
+        if: always()
+        run: |
+          python3 pipeline/collect_transactions.py verify --max-age-hours 26
+          python3 tools/check_reserve_register.py
+      - name: Publish the sweep log
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import json, pathlib
+          for f in ("data/reserve/coverage.json", "data/reserve/report_vs_reserve.json"):
+              p = pathlib.Path(f)
+              if p.exists():
+                  d = json.loads(p.read_text())
+                  print("==", f, "keys:", sorted(d)[:12])
+          PY
+      - name: Commit the captures and the rendered pages (append-only captures)
+        if: always()
+        run: |
+          git config user.name "nfl1-data-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/reserve reserve/index.html reserve/rows.html 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Nothing new to commit"
+          else
+            git commit -m "data: official transactions and reserve-list sweep [skip ci]"
+            for attempt in 1 2 3; do
+              if git push origin HEAD:${{ github.ref_name }}; then
+                echo "pushed on attempt $attempt"; exit 0
+              fi
+              echo "push rejected; rebasing and retrying"
+              git pull --rebase origin ${{ github.ref_name }} || true
+              sleep 5
+            done
+            echo "::error::could not push the sweep after three attempts"
+            exit 1
+          fi
+      - name: Fail the job if the sweep itself failed
+        if: steps.collect.outcome == 'failure'
+        run: echo "the collector exited non-zero: see the collect step" && exit 1

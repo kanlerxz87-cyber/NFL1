@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Official transactions and reserve list · NFL Decision Lab</title><style>
+:root{--ink:#17202a;--muted:#5b6672;--line:#d9dee5;--bg:#f6f8fa;--ok:#1d6b3a;--warn:#8a5a00;--bad:#9b1c1c;--link:#0b5cad}
+*{box-sizing:border-box}body{margin:0;font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+header{background:#fff;border-bottom:1px solid var(--line);padding:14px 22px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+header a{color:var(--link);text-decoration:none;font-weight:600}header nav a{margin-left:14px;font-weight:500}
+main{max-width:1180px;margin:0 auto;padding:22px}
+h1{font-size:24px;margin:4px 0 6px}h2{font-size:18px;margin:28px 0 8px}
+.lede{color:var(--muted);max-width:900px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+.kpi b{display:block;font-size:22px}.kpi span{color:var(--muted);font-size:13px}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden;font-size:14px}
+th,td{padding:7px 9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:#eef2f6;font-weight:600;position:sticky;top:0}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.wrap{overflow-x:auto;max-height:620px;border-radius:8px}
+.flag{border-left:4px solid var(--warn)}.open{color:var(--warn);font-weight:600}
+.blank{color:var(--muted);font-style:italic}
+.note{background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 14px;color:var(--muted)}
+footer{color:var(--muted);font-size:13px;margin:30px 0 10px}
+code{background:#eef2f6;padding:1px 4px;border-radius:4px}
+</style></head>
+<body>
+<header><a href="../index.html">NFL Decision Lab</a><nav><a href="../index.html">Overview</a><a href="index.html">Transactions &amp; reserve</a><a href="rows.html">Every row</a><a href="../pages/review.html">Flagged for Review</a></nav></header>
+<main>
+<h1>Official transactions and reserve list</h1>
+<p class="lede">Dated roster events from the league's own transactions register — trades, signings, reserve lists, waivers, terminations — captured with a timestamp and a hash, joined to the official weekly injury report so that “not listed” is never read as “available”.</p>
+<div class="kpis">
+<div class="kpi"><b>0</b><span>Pages captured</span><span>category × month fetches with a hash</span></div>
+<div class="kpi"><b>0</b><span>Transaction rows</span><span>every row links to its page</span></div>
+<div class="kpi"><b>0</b><span>Clubs with a dated event</span><span>of 32</span></div>
+<div class="kpi"><b>0</b><span>Players on an open reserve designation</span><span>an event that no later transaction closed</span></div>
+<div class="kpi" style="border-left:4px solid var(--ok)"><b>0</b><span>Flags on record</span><span>published, not hidden</span></div>
+<div class="kpi" style="border-left:4px solid var(--ok)"><b>0</b><span>Rows with no parseable date</span><span>kept, never dropped</span></div>
+</div>
+<p>Why this page exists: the weekly injury report and the reserve list are two different official records. A player on injured reserve is <em>not</em> on the weekly report at all, so a count taken from the report alone understates who a club cannot play. This is the league’s own dated register of those moves — captured, hashed, and replayable.</p>
+<h2 id="coverage">Coverage: what was captured, and when</h2>
+<div class="wrap"><table><thead><tr><th class="">Category / month</th><th class="">Status</th><th class="num">Rows</th><th class="">Content SHA-256 (first 16)</th><th class="">Read at (UTC)</th><th class="num">HTTP</th><th class="">Source</th><th class="">Flags on this page</th></tr></thead><tbody><tr><td colspan=8>No row. </td></tr></tbody></table></div>
+<p class="note">A month that was never fetched is absent from this table rather than shown as zero: absence is a gap in our capture, zero is a claim about the league. The pinned category and month list lives in <code>pipeline/collect_transactions.py</code>.</p>
+<h2 id="clubs">Per club: the weekly report plus the reserve list</h2>
+<div class="wrap"><table><thead><tr><th class="">Club</th><th class="num">Weekly report rows</th><th class="num">On a reserve list</th><th class="num">On a reserve list, never on the report</th><th class="num">Unavailable, both records counted</th><th class="">Named players on an open reserve designation (date opened)</th><th class="">Source</th></tr></thead><tbody><tr><td colspan=7>No row. </td></tr></tbody></table></div>
+<p class="note">The weekly-report column is the official report the pipeline stores: <span class="blank">not printed</span> · week <span class="blank">not printed</span> · <span class="blank">not printed</span> rows · read <span class="blank">not printed</span> · page SHA-256 <code><span class="blank">not printed</span></code>. Across the clubs captured: <span class="blank">not printed</span> report rows, <span class="blank">not printed</span> players on an open reserve designation, <span class="blank">not printed</span> of them absent from the report exactly because they are on the reserve list, <span class="blank">not printed</span> named in both.</p>
+<h2 id="staleness">Depth and report rows the register says are out of date</h2>
+<div class="wrap"><table><thead><tr><th class="">Repo artifact</th><th class="">Club</th><th class="">Player</th><th class="">Slot or column it is printed in</th><th class="">What the official register says happened</th><th class="">Dated</th><th class="">Sources</th></tr></thead><tbody><tr><td colspan=7>No row. </td></tr></tbody></table></div>
+<div class="wrap"><table><thead><tr><th class="">Artifact compared</th><th class="">File</th><th class="">What it claims to be</th><th class="">Player names read</th><th class="">Status</th></tr></thead><tbody><tr><td colspan=5>No row. </td></tr></tbody></table></div>
+<p class="note">0 finding(s) contradict an artifact that claims to be current; 0 row(s) belong to a dated snapshot and are superseded rather than wrong. A depth row is a claim about who a club lists; a weekly report row is a claim about one day. They fail in different ways, so they are counted separately.</p>
+<p class="note">no staleness file yet</p>
+<h2 id="flags">Flags raised by the capture</h2>
+<p class="note">No flag is open on the current captures. A flag is raised whenever a printed cell is blank where a value is expected, a club code is not one of the 32, a date cannot be read, or a page that must carry rows carries none.</p>
+<h2 id="method">Method, and what this cannot say</h2>
+<div class="note"><ul><li><b>Source.</b> <a href="https://www.nfl.com/transactions/">www.nfl.com/transactions/</a>, the league's own register, six categories by month. It is the same host as the injury report; no third-party odds or news-aggregator data is used here.</li><li><b>Capture.</b> The fetcher records the UTC time, the HTTP status, the byte count and the SHA-256 of the raw page, then parses each table by <em>header name</em>, never by column position. A capture file is written only when the parsed content changes, with exclusive-create, so history is append-only and a replay is possible.</li><li><b>Blank is blank.</b> The Position column on these pages is usually empty. It is stored empty and printed as <em>not printed</em>: 0 of 0 rows carry a printed position. No position is inferred from the player's club roster.</li><li><b>Club codes.</b> The register prints <code>AZ</code> for Arizona and <code>LA</code> for the Rams; the repository uses <code>ARI</code> and <code>LA</code>. The printed code is kept, and the mapping is recorded, because the same club appears under two codes in different official files (flag CAP-05 on the review page).</li><li><b>What it cannot say.</b> It cannot say who the backup is, which depth slot a reserve move empties, or how much a return is worth: those need the depth chart and snap counts, and the league publishes neither in a form this repository can verify. It cannot be used as a price. It says only who moved, when, and to or from what list.</li></ul></div>
+<footer>Rendered by <code>tools/build_reserve_site.py</code> from <code>data/reserve/</code> · build stamp from the data: no capture yet. Every row links to the page it was read from; a cell the official page leaves empty is printed as <em>not printed</em>, never filled.</footer>
+</main>
+</body></html>

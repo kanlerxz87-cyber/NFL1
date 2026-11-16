@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Every captured transaction row · NFL Decision Lab</title><style>
+:root{--ink:#17202a;--muted:#5b6672;--line:#d9dee5;--bg:#f6f8fa;--ok:#1d6b3a;--warn:#8a5a00;--bad:#9b1c1c;--link:#0b5cad}
+*{box-sizing:border-box}body{margin:0;font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+header{background:#fff;border-bottom:1px solid var(--line);padding:14px 22px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+header a{color:var(--link);text-decoration:none;font-weight:600}header nav a{margin-left:14px;font-weight:500}
+main{max-width:1180px;margin:0 auto;padding:22px}
+h1{font-size:24px;margin:4px 0 6px}h2{font-size:18px;margin:28px 0 8px}
+.lede{color:var(--muted);max-width:900px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+.kpi b{display:block;font-size:22px}.kpi span{color:var(--muted);font-size:13px}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden;font-size:14px}
+th,td{padding:7px 9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:#eef2f6;font-weight:600;position:sticky;top:0}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.wrap{overflow-x:auto;max-height:620px;border-radius:8px}
+.flag{border-left:4px solid var(--warn)}.open{color:var(--warn);font-weight:600}
+.blank{color:var(--muted);font-style:italic}
+.note{background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 14px;color:var(--muted)}
+footer{color:var(--muted);font-size:13px;margin:30px 0 10px}
+code{background:#eef2f6;padding:1px 4px;border-radius:4px}
+</style></head>
+<body>
+<header><a href="../index.html">NFL Decision Lab</a><nav><a href="../index.html">Overview</a><a href="index.html">Transactions &amp; reserve</a><a href="rows.html">Every row</a><a href="../pages/review.html">Flagged for Review</a></nav></header>
+<main>
+<h1>Every captured transaction row</h1>
+<p class="lede">The full register as stored, one row per printed line, each linked to the page it was read from.</p>
+<p>Rows in the register as captured: <b>0</b>. Newest first. A row whose date could not be read keeps its printed text and is listed with the flag the parser raised; it is never dropped.</p>
+<div class="wrap"><table><thead><tr><th class="">Date</th><th class="">Category</th><th class="">From</th><th class="">To</th><th class="">Player</th><th class="">Position</th><th class="">Transaction</th><th class="">Source</th></tr></thead><tbody><tr><td colspan=8>No row. </td></tr></tbody></table></div>
+<footer>Rendered by <code>tools/build_reserve_site.py</code> from <code>data/reserve/</code> · build stamp from the data: no capture yet. Every row links to the page it was read from; a cell the official page leaves empty is printed as <em>not printed</em>, never filled.</footer>
+</main>
+</body></html>
