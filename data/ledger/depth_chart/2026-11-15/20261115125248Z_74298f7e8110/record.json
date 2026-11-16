@@ -1,0 +1,49 @@
+{
+ "source": "depth_chart",
+ "source_title": "Official club depth chart",
+ "official": true,
+ "what_this_records": "the club's own published depth order, as printed",
+ "url": "https://www.azcardinals.com/team/depth-chart",
+ "captured_at": "2026-11-15T12:52:48Z",
+ "clock_precision": "second",
+ "replayable_to_a_kickoff": true,
+ "generated_at": "",
+ "captured_at_kind": "fetch clock time (the page declares no update time)",
+ "club": "ARI",
+ "week": "",
+ "season": "2026",
+ "sha256": "74298f7e8110b385d47f6084775637fad4ef1cf2d0cf99cd63fe60328b022895",
+ "bytes": 5251,
+ "parser": "depth_parse.py/57c05555",
+ "parser_version_depths": "depth_parse.py as of session 57c05555-nfl1: jersey prefixes stripped and retained, slots kept as groups, empty slots kept empty, legend rows dropped",
+ "capture_method": "fetch_page render of the official club page, stored verbatim in data/depth_raw",
+ "payload_kind": "raw-page-text",
+ "raw_html_retained": true,
+ "conflict": null,
+ "notes": "club's own publication date where printed: see parse.chart_date",
+ "parse": {
+  "capture_kind": "table",
+  "chart_date": "",
+  "counts": {
+   "slots": 29,
+   "slots_empty": 0,
+   "slots_with_hole": 0,
+   "groups": 57,
+   "player_names": 58,
+   "shared_groups": 1,
+   "shared_group_names": 2,
+   "shared_rank1_groups": 1,
+   "cells_with_jersey": 0,
+   "jersey_numbers_stripped": 0,
+   "continuation_ranks": 0,
+   "rows_dropped": 0,
+   "by_unit": {
+    "offense": 11,
+    "defense": 12,
+    "special_teams": 6
+   },
+   "max_rank": 3
+  },
+  "gaps": []
+ }
+}

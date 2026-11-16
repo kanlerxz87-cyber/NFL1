@@ -1,0 +1,225 @@
+{
+  "preregistration_version": "C84-PREREG-1",
+  "session": "c84a41a4-nfl1",
+  "declared_utc_date": "2026-11-15",
+  "declared_before_computation": true,
+  "what_this_is": "The bet-selection rules, the scoring rules, the gates, the holdout split and the luck-removal protocol, written down and committed BEFORE any result in data/session-c84a41a4/results.json was computed. The commit hash of this file is the registration. Nothing below may be edited after results exist; a later change must be published as a NEW registration with a new version id and both must stay on the site.",
+  "why_this_exists": "The brief requires: 'Pre-register every strategy; forbid backtest numbers from ever appearing on the leaderboard' and 'Pre-register a simple team-strength model, freeze versions and record forecasts before kickoff.' The repository's own readiness register (room/data/readiness.json rows PR-06, PR-15, PR-18) lists this as NOT MET. This file is the first pre-registration in the repo: earlier strategy sets (data/s9cb/leaderboard.json, data/strength/strategies.json) were written together with their results.",
+
+  "inputs": {
+    "note": "Every input is a committed file with a sha256 recorded in data/s9cb/provenance.json and re-checked at build time. No network fetch happens during scoring, so a reviewer can reproduce every number offline.",
+    "files": [
+      {
+        "path": "data/s9cb/games.csv",
+        "sha256": "483beddbdf226901b903ccc6e84f3dbc38df05110bc53a92eb63da8ec44f054f",
+        "rows": 7239,
+        "carries": "game result (home_score/away_score), closing spread_line and total_line, the AMERICAN PRICE on each spread side (home_spread_odds / away_spread_odds) and each total side (over_odds / under_odds), rest days, division flag, roof, surface, referee, starting QB ids",
+        "does_not_carry": "an opening line; a timestamp per price; any player-prop price",
+        "official_upstream": "https://www.nfl.com/schedules/",
+        "intermediary": "https://github.com/nflverse/nflverse-data/releases/tag/schedules"
+      },
+      {
+        "path": "data/s9cb/injuries.csv",
+        "sha256": "ed8371b71a72a0a5d465730d24d022bb38a9914eb162e92b6c274aea96dafdfb",
+        "rows": 56557,
+        "carries": "official weekly report: season, week, team, gsis_id, position, report_status (Out/Doubtful/Questionable/'Note'/blank), practice_status",
+        "official_upstream": "https://www.nfl.com/injuries/",
+        "intermediary": "https://github.com/nflverse/nflverse-data/releases/tag/injuries"
+      },
+      {
+        "path": "data/s9cb/player_week.csv",
+        "sha256": "94c7470ad9f1bb04be1f4e94f85d563e17601d2408f4e41361c8b7efef424249",
+        "rows": 24944,
+        "carries": "per-player weekly passing/rushing/receiving volume, 2019-2026, skill positions only",
+        "official_upstream": "https://www.nfl.com/stats/player-stats/",
+        "intermediary": "https://github.com/nflverse/nflverse-data/releases/tag/player_stats"
+      }
+    ],
+    "price_coverage_disclosure": "Observed two-sided prices exist for 5228 of 7239 games (72.2%) and, by season, for every season 2006-2026 only. Seasons 1999-2005 are therefore NOT eligible and are excluded by the sample rule below. No price is ever assumed, imputed or defaulted to -110."
+  },
+
+  "sample_rule": {
+    "seasons": "2006 through 2026 inclusive",
+    "season_types": "REG only",
+    "eligibility": "A game enters a market's sample only if that market has an OBSERVED price on the side being bet and a decided result (a push is neither a win nor a loss but is counted in n).",
+    "exclusion_logged": "Every game excluded from a market for want of a price is counted and published per season, never silently dropped."
+  },
+
+  "holdout_split": {
+    "develop": "2006-2021 (discovery; a human is allowed to look at these and propose rules)",
+    "validate": "2022-2023 (used only to check a rule is not a develop-window artefact)",
+    "final_holdout": "2024-2026 (declared untouched at registration; a rule is only promoted if it is positive here)",
+    "why_three_ways": "The brief requires 'Split data into train, validation and final holdout seasons'. Two-way splits let the same seasons select and confirm."
+  },
+
+  "bet_definition": {
+    "stake": "1 unit per bet, flat, no staking progression",
+    "settlement": "win pays (decimal - 1) units; loss pays -1; push pays 0 and is excluded from hit rate but included in n",
+    "decimal_from_american": "american > 0 -> 1 + american/100 ; american < 0 -> 1 + 100/|american|",
+    "no_bet_if": "no observed price on the side, or no decided result, or the game is outside the sample rule",
+    "never": "no parlay is priced from multiplied marginals; no prop is scored without an observed prop price"
+  },
+
+  "markets_and_order_of_origination": {
+    "note": "The brief sets the order: side first, then total, then moneyline. That order is honoured here and is also the order of this list.",
+    "M1_side": {
+      "id": "M1",
+      "label": "Spread / side",
+      "line_used_as_the_market": "spread_line (home-signed closing line)",
+      "price_used": "home_spread_odds or away_spread_odds, whichever side is bet",
+      "own_line": "own_spread_home = a walk-forward ridge rating differential plus a home-field term; the bet side is the side the OWN line favours relative to the closing line by at least the rule threshold"
+    },
+    "M2_total": {
+      "id": "M2",
+      "label": "Total",
+      "line_used_as_the_market": "total_line",
+      "price_used": "over_odds or under_odds",
+      "own_line": "own_total = walk-forward ridge fit of the game total"
+    },
+    "M3_moneyline": {
+      "id": "M3",
+      "label": "Moneyline",
+      "line_used_as_the_market": "home_moneyline / away_moneyline",
+      "price_used": "the moneyline itself",
+      "own_line": "own_home_win_probability = Normal CDF of (own spread / walk-forward margin sd)",
+      "status_note": "The closing moneyline is the price, so the model's edge on the moneyline is the model's edge on the side, re-expressed as a probability. It is scored but is expected to be the weakest of the three; it is not a separate signal."
+    }
+  },
+
+  "strategies": [
+    {
+      "id": "C84-S1",
+      "market": "M1",
+      "name": "Blind away side at a fixed price threshold (the null/control)",
+      "rule": "Bet the away side in every eligible game, regardless of information.",
+      "threshold": "none",
+      "role": "CONTROL. This strategy carries no information. It exists to show what an information-free rule does over the same sample, so a real rule can be compared against something other than 50%.",
+      "expected": "close to the -110 break-even rate, with ROI near the mean vig"
+    },
+    {
+      "id": "C84-S2",
+      "market": "M1",
+      "name": "Blind home side at a fixed price threshold (the null/control)",
+      "rule": "Bet the home side in every eligible game, regardless of information.",
+      "threshold": "none",
+      "role": "CONTROL, the mirror of S1. Any claim of home-field edge has to beat this.",
+      "expected": "close to the -110 break-even rate"
+    },
+    {
+      "id": "C84-S3",
+      "market": "M1",
+      "name": "Own line disagrees with the close by 2 or more points",
+      "rule": "Let e = own_spread_home - spread_line. If e >= 2.0 bet home; if e <= -2.0 bet away; else no bet.",
+      "threshold": 2.0,
+      "role": "The primary own-line signal on the side, the cheapest possible version of the thesis 'our number is better than the close'."
+    },
+    {
+      "id": "C84-S4",
+      "market": "M1",
+      "name": "Own line disagrees with the close by 4 or more points",
+      "rule": "As S3 with a 4.0-point threshold.",
+      "threshold": 4.0,
+      "role": "The same signal, restricted to the largest disagreements. If the signal is real it should grow with the size of the disagreement; if it shrinks, the large disagreements are model error, not edge."
+    },
+    {
+      "id": "C84-S5",
+      "market": "M2",
+      "name": "Own total disagrees with the close by 2.5 or more points",
+      "rule": "Let et = own_total - total_line. If et >= 2.5 bet over; if et <= -2.5 bet under; else no bet.",
+      "threshold": 2.5,
+      "role": "The own-line signal on the total, originated after the side per the brief's order."
+    },
+    {
+      "id": "C84-S6",
+      "market": "M2",
+      "name": "Own total disagrees with the close by 4.0 or more points",
+      "rule": "As S5 with a 4.0-point threshold.",
+      "threshold": 4.0,
+      "role": "The large-disagreement total variant."
+    },
+    {
+      "id": "C84-S7",
+      "market": "M3",
+      "name": "Own moneyline probability beats the price by 4 percentage points",
+      "rule": "p_own = P(home wins) from the own spread and walk-forward margin sd. Compare p_own with the implied probability of the price actually offered: q = 1/decimal. If p_own - q >= 0.04 bet home moneyline; if q_away - (1-p_own) >= 0.04 bet away moneyline; else no bet.",
+      "threshold": 0.04,
+      "role": "The moneyline version of the own-line signal, originated third."
+    },
+    {
+      "id": "C84-S8",
+      "market": "M1",
+      "name": "Fade the road favourite of 7 or more points",
+      "rule": "If spread_line <= -7.0 (home is favoured by 7+), bet the away side.",
+      "threshold": 7.0,
+      "role": "A well-known public-side fade, included as an information-light comparison. It is a re-implementation of the repo's own S07, kept for continuity so a reviewer can see the two runs agree."
+    },
+    {
+      "id": "C84-S9",
+      "market": "M2",
+      "name": "Under whenever the close is 40 or lower",
+      "rule": "If total_line <= 40.0 bet under.",
+      "threshold": 40.0,
+      "role": "A totals comparison requiring no model. The repo's own run had this as the only rule with a significant (and NEGATIVE) result; it is included to test whether that reproduces exactly."
+    },
+    {
+      "id": "C84-S10",
+      "market": "M1",
+      "name": "Availability gap: opponent of a club with 3+ more players ruled Out/Doubtful",
+      "rule": "From the official weekly report, count report_status in {Out, Doubtful} per club-week. Let d = home_count - away_count. If d >= 3 bet away; if d <= -3 bet home; else no bet. Weeks with no report for that club are NO BET and are counted.",
+      "threshold": 3,
+      "role": "The level-based availability rule the repository already tests. The brief rejects 'a level, never a level' for the injury SIGNAL, so this rule is registered as the thing the surprise-based rule (S11) must beat."
+    },
+    {
+      "id": "C84-S11",
+      "market": "M1",
+      "name": "Availability SURPRISE: late-week downgrade relative to the club's own earlier-week designation",
+      "rule": "For each club-week, let s = number of players whose FINAL report_status is Out or Doubtful. Let 'expected' be the club's trailing 4-week mean of s computed only over weeks EARLIER than this one, shifted by one week so no same-week information is used. Let surprise = s - expected, usable only where at least 3 prior weeks exist. If surprise >= 2.0 and the surprise is on the HOME club, bet AWAY; if surprise <= -2.0 bet HOME; else no bet.",
+      "threshold": 2.0,
+      "role": "The brief's 'make the injury signal a surprise, never a level'. This is the core original hypothesis of this session: the market prices the LEVEL of injuries (which is public and slow-moving), so only the CHANGE relative to what the club has been is unpriced."
+    },
+    {
+      "id": "C84-S12",
+      "market": "M1",
+      "name": "Rest differential of 3 or more days",
+      "rule": "If home_rest - away_rest >= 3 bet home; if <= -3 bet away.",
+      "threshold": 3,
+      "role": "An information-light schedule rule, another control on the harness's ability to say no."
+    }
+  ],
+  "n_rules_tested": 12,
+  "multiplicity_declaration": "Twelve rules are scored. All twelve are published, whatever they show. The Benjamini-Hochberg correction is applied across the ten non-control rules (S1 and S2 are controls and are not part of the promotion family) and the number is printed on the site beside every q value.",
+
+  "gates": [
+    {"id": "C84-G1", "name": "Observed price on every scored bet", "test": "price is finite for 100% of the bets in the strategy"},
+    {"id": "C84-G2", "name": "Pre-game information only", "test": "every input is dated before kick-off; the own line comes from a fit that used only earlier games"},
+    {"id": "C84-G3", "name": "At least 300 decided bets", "test": "n_decided >= 300. Set higher than the repo's 200 because the binomial standard error at n=200 is still about 3.5 percentage points of hit rate."},
+    {"id": "C84-G4", "name": "Hit rate beats the price-implied break-even", "test": "hit_rate > mean(1/decimal) over the same bets"},
+    {"id": "C84-G5", "name": "Survives multiple testing", "test": "Benjamini-Hochberg q < 0.05 across the 10 non-control rules"},
+    {"id": "C84-G6", "name": "Positive in the untouched final holdout", "test": "ROI > 0 over 2024-2026 only"},
+    {"id": "C84-G7", "name": "Stable across seasons", "test": "positive ROI in at least 60% of seasons with >= 20 bets"},
+    {"id": "C84-G8", "name": "Confidence interval excludes zero", "test": "the 95% bootstrap interval on ROI, resampled by GAME CLUSTER (not by bet), has a lower bound > 0"},
+    {"id": "C84-G9", "name": "Beats the information-free control", "test": "ROI exceeds the better of the two control strategies (S1, S2) by more than the control's own bootstrapped spread"},
+    {"id": "C84-G10", "name": "The edge survives removal of the largest single season", "test": "ROI stays > 0 after deleting the single best season from the sample"}
+  ],
+  "gate_note": "C84-G8 and C84-G10 do not exist in any earlier run in this repository. G8 clusters by game because two bets on the same game (a side and a total) are not independent; G10 is the 'removal of luck' test that catches a strategy whose whole record is one season.",
+
+  "promotion_rule": "A strategy is PROMOTED only if all ten gates pass. If any gate fails the strategy is PAPER and the failing gate is printed. No strategy can be listed on the leaderboard as a recommendation before it is promoted; the leaderboard prints every rule with its gate matrix instead, in the order the gates failed.",
+
+  "luck_removal_protocol": {
+    "benchmark_relative_skill": "Brier skill score against the closing-market probability, not against a coin flip. The market is the benchmark; a coin flip is not.",
+    "decomposition": "Report (a) the market's Brier, (b) the model's Brier, (c) the difference with a GAME-CLUSTER bootstrap interval, (d) the Brier skill score = 1 - model/market.",
+    "win_rate_is_not_published_as_a_rank": "Win rate and short-run ROI are not used to rank anything. They are printed as diagnostics only.",
+    "multiplicity": "Benjamini-Hochberg across the declared rule family; the family size is printed.",
+    "control": "Two information-free controls are run on the same sample and printed on the same page.",
+    "statement": "A strategy is only called skilful when it beats an information-free rule AND the market benchmark on a proper score, with an interval that excludes no-skill, after paying for the number of rules tested."
+  },
+
+  "what_this_registration_cannot_do": [
+    "It cannot make the price a verified official number: no official NFL price feed exists. The prices here are a third-party parse of a market that is itself unofficial, and they are labelled that way on every page.",
+    "It cannot recover an OPENING line, because the committed feed carries one number per market per game. Requirement PR-01 therefore stays blocked and is reported as blocked.",
+    "It cannot score any player prop, because no prop price exists in the committed data. Prop projections are published as projections with no ROI.",
+    "It cannot use a verified per-club depth rank or snap share, because the repo's depth evidence is a one-time 2026-11-12 transcription and its two known parse failures are still open. Availability rules here use the OFFICIAL REPORT only (who is ruled out), not depth order."
+  ],
+
+  "revision_policy": "Any change to a threshold, a gate, a season split or a bet definition requires a new file preregistration-vN.json with a new declared date, and the site must show both. Editing this file after results exist is forbidden and a check in the build will compare its sha256 against the value stored in results.json."
+}

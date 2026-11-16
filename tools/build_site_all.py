@@ -63,6 +63,17 @@ STEPS = [
     # session 543676f8-nfl1: the official-capture page is built before the landing page so the
     # landing page can link it; it fails the build if the capture does not pass its gate.
     ("official capture page (capture/)", [sys.executable, "tools/build_capture_site.py"], ROOT),
+    # session 57c05555-nfl1: the depth-parse and availability-ledger verification page. It runs
+    # before the landing page so the landing page's site map can list it.
+    ("depth and ledger verification page", [sys.executable, "tools/build_session_page.py"], ROOT),
+    # session 57c05555-nfl1: the raw-capture gates. They read the committed captures and the
+    # verified filings, fail loudly on a stale parse or a stale verified file, and write the
+    # derived registers the page reads, so the page can never show a number the gate rejects.
+    ("official depth parse gate", [sys.executable, "tools/check_depth_parse.py"], ROOT),
+    ("ledger integrity", [sys.executable, "pipeline/ledger.py", "verify"], ROOT),
+    ("ledger index", [sys.executable, "pipeline/ledger.py", "index"], ROOT),
+    ("transactions staleness register", [sys.executable, "scripts/nfl1_57c05555/staleness.py"], ROOT),
+    ("verified injury filings", [sys.executable, "scripts/nfl1_57c05555/repair_verified_injuries.py"], ROOT),
     # session 1d824ec2-nfl1 (V6): the transactions / reserve-list sub-site, rendered from
     # data/reserve/. Additive step, same reason as above: before the landing page.
     ("transactions & reserve sub-site (reserve/)",

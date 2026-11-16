@@ -1,0 +1,28 @@
+{
+ "source": "injuries",
+ "source_title": "nfl.com official weekly injury report",
+ "official": true,
+ "what_this_records": "practice status and game status for every listed player",
+ "url": "https://www.nfl.com/injuries/league/2026/reg10",
+ "captured_at": "2026-11-15",
+ "clock_precision": "date-only",
+ "replayable_to_a_kickoff": false,
+ "generated_at": "",
+ "captured_at_kind": "fetch clock time (the page declares no update time)",
+ "club": "",
+ "week": "10",
+ "season": "2026",
+ "sha256": "9fe77d36a25618542553e690a5a44dac3449769b56e45cccd711cb1e2669cd5f",
+ "bytes": 23071,
+ "parser": "row-table/1",
+ "parser_version_depths": "",
+ "capture_method": "row-by-row transcription of fetch_page chunks 0-7; raw page text was not retained",
+ "payload_kind": "transcribed-table",
+ "raw_html_retained": false,
+ "conflict": null,
+ "notes": "imported from data/capture/ so the existing archive is inside the ledger rather than outside it; date only, so it cannot be replayed to a kickoff",
+ "counts": {
+  "player_rows": 0,
+  "clubs_with_a_table": 0
+ }
+}

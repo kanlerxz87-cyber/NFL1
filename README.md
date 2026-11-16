@@ -34,6 +34,41 @@ python3 room/build.py     # rebuild every page from room/data/*.json
 python3 room/verify.py    # fail on a broken link, an empty cell, or a row with no https source
 ```
 
+## Origination Ledger (`ledger/`) — the pre-registered test
+
+<https://kanlerxz87-cyber.github.io/NFL1/ledger/>
+
+The one place in this repository where the strategy rules were **committed before the results were
+computed**. `data/session-c84a41a4/preregistration.json` (`C84-PREREG-1`, commit `061c2a8`)
+declares 12 rules, 10 gates, a three-way season split and a game-cluster bootstrap; its sha256 is
+stored in `results.json` and re-checked on every build, so editing the registration after the fact
+fails the build instead of quietly improving the score.
+
+| Page | What it answers |
+|---|---|
+| Overview | 0 of 12 rules promoted, and the six numbers that explain why |
+| Executive summary | What holds, what does not, what is missing, what a human must decide |
+| Requirements | 82 register rows: status, blocking gate, and the number that would clear each |
+| Strategy competition | Every rule with its gate matrix, the two information-free controls, correlations with n, the luck panel |
+| Own lines & price store | Fair line, market line and difference as separate columns; the opening line is blank and why |
+| Injuries & replacement | Official designations, the injury/personnel **ablation**, and 1,796 confirmed quarterback replacements with the depth of each |
+| Verification | 12 live official re-checks, every input hash, and the command that reproduces each number |
+| Flagged for review | 11 irregularities, including claims in the brief that the live official pages contradict |
+| Suggestions | 12 improvements and 3 paths, for a reviewer to choose before anything is built |
+
+```bash
+python3 s9cb/c84_study.py               # recompute the pre-registered study
+python3 s9cb/c84_replacement_study.py   # recompute the confirmed-replacement study
+python3 ledger/build.py                 # rebuild ledger/ from the computed data
+python3 ledger/verify.py                # fail on a broken link, a data table with no Source column,
+                                        # a sourceless row, placeholder text or an unreachable page
+```
+
+**Headline result, stated plainly:** the own line does not beat the closing line. Brier skill
+−0.0694 with an interval excluding zero; the blind-away control (+0.09%) beats eleven of the twelve
+signals; the best rule fails multiple testing and the untouched holdout; adding the availability
+features changes mean absolute error by +0.0007 points with an interval containing zero.
+
 ## What the site contains
 
 | Page | Contents |

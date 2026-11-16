@@ -34,11 +34,17 @@ GENERATORS = {
     "tools/build.py": [r'write_page\(\s*"([^"]+\.html)"'],
     "scripts/verified/build_site.py": [r'\(PAGES / fname\)', r'"([a-z0-9-]+\.html)": \('],
     "tools/build_dashboard.py": [r'web/[a-z-]+\.html'],
+    # Session cf97db19-nfl1 (X1), registered by the 414a54c9 integration from PR #47:
+    # the backup-register builder (the path literal appears in its module docstring).
+    "tools/build_backup_register.py": [r'(pages/backup-register\.html)'],
+    # Session c84a41a4-nfl1: the origination-ledger sub-site (PR #80). The page names
+    # appear in its PAGES tuples; claims() prefixes them with ledger/.
+    "ledger/build.py": [r'\("([a-z0-9-]+\.html)", "[^"]*"\)'],
+    # Session 1d824ec2-nfl1: the transactions/reserve sub-site. Bare filenames under reserve/.
+    "tools/build_reserve_site.py": [r'OUT_DIR / "([^"/]+\.html)"'],
     # Session 0c5215c1-nfl1: the pre-registration sub-site. write() takes bare filenames;
     # the generator writes them under prereg/ (prefix added in claims()).
     "prereg/build.py": [r'write\(\s*"([^"/]+\.html)"'],
-    # Session 1d824ec2-nfl1: the transactions/reserve sub-site. Bare filenames under reserve/.
-    "tools/build_reserve_site.py": [r'OUT_DIR / "([^"/]+\.html)"'],
 }
 
 # explicit, documented ownership. Anything not here is reported, not assumed.
@@ -65,7 +71,7 @@ KNOWN_OWNERS = {
     "pages/standings.html": "tools/build.py",
     "pages/data-tables.html": "tools/build.py",
     # Session 0c5215c1-nfl1: pre-registration sub-site (prereg/build.py registered above).
-    # Session 1d824ec2-nfl1: transactions and reserve-list sub-site.
+    # Session 1d824ec2-nfl1: transactions / reserve-list sub-site.
     "reserve/index.html": "tools/build_reserve_site.py",
     "reserve/rows.html": "tools/build_reserve_site.py",
     "prereg/registry.html": "prereg/build.py",
@@ -74,6 +80,18 @@ KNOWN_OWNERS = {
     # Session 739408a8-nfl1: the forward-test ledger page (its generator is not in
     # GENERATORS; ownership recorded so the file is documented, not assumed).
     "prereg/index.html": "tools/prereg.py",
+    # Session cf97db19-nfl1 (X1): official-roster backup register (PR #47).
+    "pages/backup-register.html": "tools/build_backup_register.py",
+    # Session c84a41a4-nfl1: the origination-ledger sub-site (PR #80).
+    "ledger/index.html": "ledger/build.py",
+    "ledger/executive.html": "ledger/build.py",
+    "ledger/decisions.html": "ledger/build.py",
+    "ledger/strategies.html": "ledger/build.py",
+    "ledger/lines.html": "ledger/build.py",
+    "ledger/injuries.html": "ledger/build.py",
+    "ledger/verification.html": "ledger/build.py",
+    "ledger/flagged.html": "ledger/build.py",
+    "ledger/suggestions.html": "ledger/build.py",
 }
 
 DASHBOARD_PAGES = ["web/dashboard.html", "web/decisions.html", "web/suggestions.html",
@@ -106,6 +124,9 @@ def claims():
             found = {"prereg/" + f for f in found}
         if gen == "tools/build_reserve_site.py":
             found = {"reserve/" + f for f in found}
+        if gen == "ledger/build.py":
+            # PAGES tuples take bare filenames; the generator writes them under ledger/
+            found = {"ledger/" + f for f in found}
         for f in found:
             out.setdefault(f, set()).add(gen)
     return out

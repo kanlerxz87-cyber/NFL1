@@ -1,0 +1,50 @@
+{
+ "source": "depth_chart",
+ "source_title": "Official club depth chart",
+ "official": true,
+ "what_this_records": "the club's own published depth order, as printed",
+ "url": "https://www.houstontexans.com/team/depth-chart",
+ "captured_at": "2026-11-15T12:52:48Z",
+ "clock_precision": "second",
+ "replayable_to_a_kickoff": true,
+ "generated_at": "",
+ "captured_at_kind": "fetch clock time (the page declares no update time)",
+ "club": "HOU",
+ "week": "",
+ "season": "2026",
+ "sha256": "12de2d5c2abebf9a12d6c533f81a43bbd9ec4f4c6a044a9741bd61ae30ab27f1",
+ "bytes": 488,
+ "parser": "depth_parse.py/57c05555",
+ "parser_version_depths": "depth_parse.py as of session 57c05555-nfl1: jersey prefixes stripped and retained, slots kept as groups, empty slots kept empty, legend rows dropped",
+ "capture_method": "fetch_page render of the official club page, stored verbatim in data/depth_raw",
+ "payload_kind": "raw-page-text",
+ "raw_html_retained": true,
+ "conflict": null,
+ "notes": "club's own publication date where printed: see parse.chart_date",
+ "parse": {
+  "capture_kind": "image_only",
+  "chart_date": "",
+  "counts": {
+   "slots": 0,
+   "slots_empty": 0,
+   "slots_with_hole": 0,
+   "groups": 0,
+   "player_names": 0,
+   "shared_groups": 0,
+   "shared_group_names": 0,
+   "shared_rank1_groups": 0,
+   "cells_with_jersey": 0,
+   "jersey_numbers_stripped": 0,
+   "continuation_ranks": 0,
+   "rows_dropped": 0,
+   "by_unit": {},
+   "max_rank": 0
+  },
+  "gaps": [
+   {
+    "reason": "The official page renders the whole chart as a bitmap image on static.clubs.nfl.com, so it contains no rows to parse. The brief forbids transcribing a chart by eye; no rows are produced and no players are named for this club. An authorised structured source is required.",
+    "evidence": "https://static.clubs.nfl.com/image/upload/texans/a5or0zowuo36y1txf4ly"
+   }
+  ]
+ }
+}

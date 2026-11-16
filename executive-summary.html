@@ -50,6 +50,7 @@
 <a href="pages/analysis.html">Validation &amp; correlation</a>
 <a href="pages/audit.html">Audit</a>
 <a href="pages/availability.html">Availability</a>
+<a href="pages/backup-register.html">Backup Register</a>
 <a href="pages/correlations.html">Correlations</a>
 <a href="pages/data.html">Verified data</a>
 <a href="pages/decisions.html">Decision register</a>
@@ -68,6 +69,7 @@
 <a href="pages/readiness.html">Readiness</a>
 <a href="pages/review.html">Review</a>
 <a href="pages/sections.html">Sections</a>
+<a href="pages/session-57c05555.html">Session 57C05555</a>
 <a href="pages/snapshots.html">Snapshots</a>
 <a href="pages/standings.html">Standings</a>
 <a href="pages/strategies.html">Strategies</a>
@@ -85,7 +87,7 @@
   <div class="main">
     <div class="topbar">
       <div class="crumb">NFL1 / <b>Executive Summary</b></div>
-      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">106 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">107 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
     </div>
     <main class="content" id="main">
       <div class="kicker">Overview</div>
@@ -102,7 +104,7 @@
 <tr id="ES-01" data-verified="true">
 <td><code>ES-01</code></td>
 <td data-value="1" class="wide">Verified official sources in registry</td>
-<td data-value="1">39</td>
+<td data-value="1">36</td>
 <td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
 <tr id="ES-02" data-verified="true">
@@ -132,7 +134,7 @@
 <tr id="ES-06" data-verified="true">
 <td><code>ES-06</code></td>
 <td data-value="1" class="wide">Requirements / questions / suggestions</td>
-<td data-value="1">36 / 30 / 34</td>
+<td data-value="1">36 / 28 / 32</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
 <tr id="ES-07" data-verified="true">
@@ -150,7 +152,7 @@
 <tr id="ES-09" data-verified="true">
 <td><code>ES-09</code></td>
 <td data-value="1" class="wide">Flagged items awaiting review</td>
-<td data-value="1">106</td>
+<td data-value="1">107</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
 <tr id="ES-10" data-verified="true">
@@ -335,7 +337,7 @@
 <h2 id="site">Site and deployment</h2>
 <div class="panel"><p>17 static pages, grouped navigation, sortable/filterable tables, responsive CSS and no external dependencies. A Python generator builds the HTML from the JSON data layer; an independent validator checks that every table row has an official source link, that unverified rows keep blank value cells, and that every internal link resolves. GitHub Pages is configured to publish <code>main / /</code>; a <code>.nojekyll</code> file keeps the plain HTML untouched.</p></div>
 <h2 id="coord">Coordination and irregularities</h2>
-<div class="panel"><p>The repository initially contained only a one-line README. A second agent session branch is active with overlapping task claims; this session kept disjoint file scopes, logged the conflict, and acted as the final integration session. 106 irregularities are published on the <a href="flagged.html">Flagged for Review</a> page with official source links, including an unresolved template variable in the official standings heading and a conflict between the official injury report and official NFL.com news headlines.</p></div>
+<div class="panel"><p>The repository initially contained only a one-line README. A second agent session branch is active with overlapping task claims; this session kept disjoint file scopes, logged the conflict, and acted as the final integration session. 107 irregularities are published on the <a href="flagged.html">Flagged for Review</a> page with official source links, including an unresolved template variable in the official standings heading and a conflict between the official injury report and official NFL.com news headlines.</p></div>
 <h2 id="d4027f66">Depth register and pre-registration (2026-11-15, session d4027f66)</h2>
 <div class="panel"><ul><li><b>Depth, four clubs.</b> Packers, Chiefs, 49ers and Seahawks charts captured verbatim from each club's own page and parsed into one row per printed name: 236 names, 95 slot groups, 16 groups with more than one first-column player, 55 Packers jersey prefixes stripped with the raw string kept, 1 shared slot and 3 empty gaps. Shown on <a href="pages/depth.html">Depth &amp; Deficiency</a>. Coverage is 4 of 32 clubs.</li><li><b>Repo versus page.</b> The older depth tables disagree with those pages in 8 cells and omit 2 Chiefs players. They were flagged (F53 to F55), not overwritten, because other pages read them.</li><li><b>Pre-registration.</b> The demotion gate, the leaderboard ban on historical numbers and the scoring rule were committed as RULES_v1 at commit 591d874, before any prospective window. No strategy is registered. Its thresholds are design parameters, not sourced facts (F59).</li><li><b>Drift alarm.</b> Runs in CI for the depth register: fails on a changed club set, host, printed-name count or schema. The injury scraper has no equivalent yet (F58).</li><li><b>Still open.</b> 28 club charts; the Texans chart (published as an image, IN-08); price data, which blocks any closing-line test (PR-01, PR-10); the 149-slot count across 32 clubs (F57).</li></ul></div>
 <h2 id="reverify">Official-source re-verification (2026-11-15 UTC)</h2>

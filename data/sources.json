@@ -390,5 +390,15 @@
     "retrieved": "2026-11-16",
     "verified": true,
     "note": "Read 2026-11-16. Evidence for flag F66 and suggestion S31."
+  },
+  {
+    "id": "S41",
+    "publisher": "National Football League (NFL.com)",
+    "url": "https://www.nfl.com/teams/",
+    "kind": "Official club roster pages",
+    "what": "Per-club roster pages https://www.nfl.com/teams/<club>/roster, scraped with page hashes by tools/scrape_rosters.py into data/backup-register/rosters_2026.json (32 clubs, 2,850 player rows, session cf97db19). nfl.com publishes no league depth-chart page (/teams/<club>/depth-chart returns 404).",
+    "retrieved": "2026-11-13",
+    "verified": true,
+    "note": "Registered 2026-11-16 by the 414a54c9 integration so the backup-register flags can cite their source (request R-cf97db19-03)."
   }
 ]

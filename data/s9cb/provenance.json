@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-15T13:22:03+00:00",
+ "generated_at": "2026-11-16T15:05:52+00:00",
  "session": "9cb71eb8-nfl1",
  "hash_convention": "`sha256`/`bytes` describe the downloaded asset in build/raw/ (not committed). `committed_sha256`/`committed_bytes` describe the file actually stored in data/s9cb/, which is the one a reviewer can check. The two differ because the extract is filtered to REG games and a fixed column set before it is written.",
  "source_repo": "https://github.com/nflverse/nflverse-data",
@@ -13,13 +13,13 @@
    "url": "https://github.com/nflverse/nflverse-data/releases/download/schedules/games.csv",
    "official_upstream": "https://www.nfl.com/schedules/",
    "description": "Game results, closing spread/total/moneylines with the price on each side, rest days, roof, surface, temperature, wind, division flag, referee, starting QBs",
-   "bytes": 2190033,
+   "bytes": 2190089,
    "status": "ok",
-   "fetched_at": "2026-11-15T13:21:58+00:00",
-   "sha256": "9e2d0cdd49b9156537be3ff86b99229c81541ebf2d5c8cd9cdb485113002a08b",
+   "fetched_at": "2026-11-16T15:05:49+00:00",
+   "sha256": "c29862ac7772c6a7ed2347ca6106d9dbb2885c1f422462e90a564922abb868f1",
    "hash_describes": "downloaded asset (build/raw/, not committed)",
-   "committed_bytes": 1665521,
-   "committed_sha256": "dd4ae8ad3c1384e4d5921ef6e1532aafaa2c10c31f6497d262b6c5ebf62334a0",
+   "committed_bytes": 1665685,
+   "committed_sha256": "c5e27d1c14cb3ce0c7174c05e5503b8b77f899b7cc86a57770f1a878d382882f",
    "committed_note": "committed_sha256 is the hash of the file in data/s9cb/; verify that one with `sha256sum data/s9cb/<file>`."
   },
   {
@@ -31,7 +31,7 @@
    "description": "Club directory: abbreviation, name, conference, division",
    "bytes": 18919,
    "status": "ok",
-   "fetched_at": "2026-11-15T13:21:58+00:00",
+   "fetched_at": "2026-11-16T15:05:49+00:00",
    "sha256": "4eab559fcf89cb4eaf61cb63a88abc47b01b6c9049187c59f3efe95888c3d048",
    "hash_describes": "downloaded asset (build/raw/, not committed)",
    "committed_bytes": null,
@@ -45,10 +45,10 @@
    "url": "https://github.com/nflverse/nflverse-data/releases/download/players/players.csv",
    "official_upstream": "https://www.nfl.com/players/",
    "description": "Player master (GSIS id, position, years of experience, latest team)",
-   "bytes": 7308552,
+   "bytes": 7308389,
    "status": "ok",
-   "fetched_at": "2026-11-15T13:21:58+00:00",
-   "sha256": "a8a86df9be83cdf88d0dadb47f09fb4a3c5db326e19b46cf20bdade38e3e024d",
+   "fetched_at": "2026-11-16T15:05:49+00:00",
+   "sha256": "f82e52fd3d9b0976ad3756dc5ea32a4dbc10650d0a5fed993f9218a850fa944a",
    "hash_describes": "downloaded asset (build/raw/, not committed)"
   }
  ],
@@ -112,10 +112,10 @@
   {
    "asset": "stats_player_week_2026.parquet",
    "url": "https://github.com/nflverse/nflverse-data/releases/download/stats_player/stats_player_week_2026.parquet",
-   "bytes": 499986,
+   "bytes": 530471,
    "official_upstream": "https://www.nfl.com/stats/player-stats/",
    "status": "ok",
-   "sha256": "b2d48e6fadf52902c423fd86b0f5fdd8eecf9519c00d8d0fcb7d95ae011b5928"
+   "sha256": "2df582590f00c529f1c32087ad6c4be456ae5ae94fc5c18be5013c56519f2c43"
   }
  ],
  "injury_files": [
@@ -210,7 +210,7 @@
  ],
  "extract": {
   "games_rows": 7239,
-  "player_week_rows": 24944,
+  "player_week_rows": 25090,
   "injuries_rows": 56608
  },
  "price_coverage": {

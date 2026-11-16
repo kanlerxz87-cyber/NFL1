@@ -259,7 +259,7 @@ favoured. {src('https://github.com/nflverse/nflverse-data/releases/tag/schedules
         # across conventions is possible. away number is the negation of the home number.
         rows.append([
             f"<strong>{e(g['away'])} @ {e(g['home'])}</strong><br><span class=\"sub\">{e(g['gameday'])}</span>",
-            num(my, 1), num(None if mk is None else -mk, 1),
+            num(my, 1), num(None if my is None else -my, 1),
             num(mk, 1), num(None if mk is None else -mk, 1),
             num(None if (my is None or mk is None) else my - mk, 2),
             num(g.get("my_total"), 1),

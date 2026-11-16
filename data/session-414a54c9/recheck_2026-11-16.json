@@ -1,0 +1,770 @@
+{
+ "retrieved_at": "2026-11-16T14:40Z",
+ "session": "414a54c9-nfl1",
+ "sources": {
+  "standings": "https://www.nfl.com/standings/league/2026/REG",
+  "week10": "https://www.nfl.com/schedules/2026/REG10",
+  "week11": "https://www.nfl.com/schedules/2026/by-week/week-11",
+  "injuries_spotcheck": "https://www.nfl.com/injuries/league/2026/reg10"
+ },
+ "standings_vs_repo": [
+  {
+   "team": "BUF",
+   "official_2026_11_16": "8-1-0 287-199",
+   "model_snapshot_2026_11_15T1742Z": "7-1-0 256-187",
+   "verified_csv_2026_11_12T0431Z": "7-1-0 256-187",
+   "repo_copies_agree": true,
+   "changed_since_repo_snapshot": true
+  },
+  {
+   "team": "SF",
+   "official_2026_11_16": "8-1-0 281-196",
+   "model_snapshot_2026_11_15T1742Z": "7-1-0 235-156",
+   "verified_csv_2026_11_12T0431Z": "7-1-0 235-156",
+   "repo_copies_agree": true,
+   "changed_since_repo_snapshot": true
+  },
+  {
+   "team": "CHI",
+   "official_2026_11_16": "7-2-0 241-184",
+   "model_snapshot_2026_11_15T1742Z": "7-2-0 241-184",
+   "verified_csv_2026_11_12T0431Z": "7-2-0 241-184",
+   "repo_copies_agree": true,
+   "changed_since_repo_snapshot": false
+  },
+  {
+   "team": "CIN",
+   "official_2026_11_16": "7-2-0 278-193",
+   "model_snapshot_2026_11_15T1742Z": "6-2-0 240-175",
+   "verified_csv_2026_11_12T0431Z": "6-2-0 240-175",
+   "repo_copies_agree": true,
+   "changed_since_repo_snapshot": true
+  },
+  {
+   "team": "DEN",
+   "official_2026_11_16": "7-2-0 198-186",
+   "model_snapshot_2026_11_15T1742Z": "7-2-0 198-186",
+   "verified_csv_2026_11_12T0431Z": "7-2-0 198-186",
+   "repo_copies_agree": true,
+   "changed_since_repo_snapshot": false
+  },
+  {
+   "team": "DET",
+   "official_2026_11_16": "7-2-0 257-199",
+   "model_snapshot_2026_11_15T1742Z": "6-2-0 222-189",
+   "verified_csv_2026_11_12T0431Z": "6-2-0 222-189",
+   "repo_copies_agree": true,
+   "changed_since_repo_snapshot": true
+  },
+  {
+   "team": "JAX",
+   "official_2026_11_16": "7-2-0 269-144",
+   "model_snapshot_2026_11_15T1742Z": "6-2-0 229-121",
+   "verified_csv_2026_11_12T0431Z": "6-2-0 229-121",
+   "repo_copies_agree": true,
+   "changed_since_repo_snapshot": true
+  },
+  {
+   "team": "KC",
+   "official_2026_11_16": "7-2-0 237-156",
+   "model_snapshot_2026_11_15T1742Z": "6-2-0 202-143",
+   "verified_csv_2026_11_12T0431Z": "6-2-0 202-143",
+   "repo_copies_agree": true,
+   "changed_since_repo_snapshot": true
+  },
+  {
+   "team": "MIN",
+   "official_2026_11_16": "7-2-0 176-126",
+   "model_snapshot_2026_11_15T1742Z": "6-2-0 146-116",
+   "verified_csv_2026_11_12T0431Z": "6-2-0 146-116",
+   "repo_copies_agree": true,
+   "changed_since_repo_snapshot": true
+  },
+  {
+   "team": "PIT",
+   "official_2026_11_16": "6-3-0 198-182",
+   "model_snapshot_2026_11_15T1742Z": "6-2-0 180-144",
+   "verified_csv_2026_11_12T0431Z": "6-2-0 180-144",
+   "repo_copies_agree": true,
+   "changed_since_repo_snapshot": true
+  },
+  {
+   "team": "NYG",
+   "official_2026_11_16": "5-3-1 203-196",
+   "model_snapshot_2026_11_15T1742Z": "5-3-1 203-196",
+   "verified_csv_2026_11_12T0431Z": "5-2-1 182-172",
+   "repo_copies_agree": false,
+   "changed_since_repo_snapshot": false
+  },
+  {
+   "team": "CLE",
+   "official_2026_11_16": "6-4-0 188-220",
+   "model_snapshot_2026_11_15T1742Z": "5-4-0 161-196",
+   "verified_csv_2026_11_12T0431Z": "5-4-0 161-196",
+   "repo_copies_agree": true,
+   "changed_since_repo_snapshot": true
+  },
+  {
+   "team": "GB",
+   "official_2026_11_16": "6-4-0 226-221",
+   "model_snapshot_2026_11_15T1742Z": "6-3-0 216-191",
+   "verified_csv_2026_11_12T0431Z": "6-3-0 216-191",
+   "repo_copies_agree": true,
+   "changed_since_repo_snapshot": true
+  },
+  {
+   "team": "LAR",
+   "official_2026_11_16": "6-4-0 248-187",
+   "model_snapshot_2026_11_15T1742Z": "5-4-0 214-181",
+   "verified_csv_2026_11_12T0431Z": null,
+   "repo_copies_agree": false,
+   "changed_since_repo_snapshot": true
+  },
+  {
+   "team": "SEA",
+   "official_2026_11_16": "6-4-0 223-175",
+   "model_snapshot_2026_11_15T1742Z": "5-4-0 202-162",
+   "verified_csv_2026_11_12T0431Z": "5-4-0 202-162",
+   "repo_copies_agree": true,
+   "changed_since_repo_snapshot": true
+  },
+  {
+   "team": "NE",
+   "official_2026_11_16": "5-5-0 221-242",
+   "model_snapshot_2026_11_15T1742Z": "5-4-0 211-207",
+   "verified_csv_2026_11_12T0431Z": "5-4-0 211-207",
+   "repo_copies_agree": true,
+   "changed_since_repo_snapshot": true
+  },
+  {
+   "team": "BAL",
+   "official_2026_11_16": "4-5-0 189-236",
+   "model_snapshot_2026_11_15T1742Z": "4-5-0 189-236",
+   "verified_csv_2026_11_12T0431Z": "4-5-0 189-236",
+   "repo_copies_agree": true,
+   "changed_since_repo_snapshot": false
+  },
+  {
+   "team": "CAR",
+   "official_2026_11_16": "4-5-0 219-236",
+   "model_snapshot_2026_11_15T1742Z": "3-5-0 199-219",
+   "verified_csv_2026_11_12T0431Z": "3-5-0 199-219",
+   "repo_copies_agree": true,
+   "changed_since_repo_snapshot": true
+  },
+  {
+   "team": "DAL",
+   "official_2026_11_16": "4-6-0 286-282",
+   "model_snapshot_2026_11_15T1742Z": "4-5-0 246-236",
+   "verified_csv_2026_11_12T0431Z": "4-5-0 246-236",
+   "repo_copies_agree": true,
+   "changed_since_repo_snapshot": true
+  },
+  {
+   "team": "LV",
+   "official_2026_11_16": "4-6-0 251-289",
+   "model_snapshot_2026_11_15T1742Z": "4-5-0 238-268",
+   "verified_csv_2026_11_12T0431Z": "4-5-0 238-268",
+   "repo_copies_agree": true,
+   "changed_since_repo_snapshot": true
+  },
+  {
+   "team": "WAS",
+   "official_2026_11_16": "3-5-1 196-223",
+   "model_snapshot_2026_11_15T1742Z": "3-5-1 196-223",
+   "verified_csv_2026_11_12T0431Z": "2-5-1 172-202",
+   "repo_copies_agree": false,
+   "changed_since_repo_snapshot": false
+  },
+  {
+   "team": "HOU",
+   "official_2026_11_16": "3-6-0 233-219",
+   "model_snapshot_2026_11_15T1742Z": "3-5-0 209-192",
+   "verified_csv_2026_11_12T0431Z": "3-5-0 209-192",
+   "repo_copies_agree": true,
+   "changed_since_repo_snapshot": true
+  },
+  {
+   "team": "NO",
+   "official_2026_11_16": "3-6-0 202-236",
+   "model_snapshot_2026_11_15T1742Z": "3-5-0 185-216",
+   "verified_csv_2026_11_12T0431Z": "3-5-0 185-216",
+   "repo_copies_agree": true,
+   "changed_since_repo_snapshot": true
+  },
+  {
+   "team": "TB",
+   "official_2026_11_16": "3-6-0 202-178",
+   "model_snapshot_2026_11_15T1742Z": "3-6-0 202-178",
+   "verified_csv_2026_11_12T0431Z": "3-6-0 202-178",
+   "repo_copies_agree": true,
+   "changed_since_repo_snapshot": false
+  },
+  {
+   "team": "ARI",
+   "official_2026_11_16": "3-7-0 184-289",
+   "model_snapshot_2026_11_15T1742Z": "3-6-0 178-255",
+   "verified_csv_2026_11_12T0431Z": null,
+   "repo_copies_agree": false,
+   "changed_since_repo_snapshot": true
+  },
+  {
+   "team": "ATL",
+   "official_2026_11_16": "3-7-0 201-258",
+   "model_snapshot_2026_11_15T1742Z": "3-6-0 188-223",
+   "verified_csv_2026_11_12T0431Z": "3-6-0 188-223",
+   "repo_copies_agree": true,
+   "changed_since_repo_snapshot": true
+  },
+  {
+   "team": "IND",
+   "official_2026_11_16": "3-7-0 208-271",
+   "model_snapshot_2026_11_15T1742Z": "2-7-0 184-249",
+   "verified_csv_2026_11_12T0431Z": "2-7-0 184-249",
+   "repo_copies_agree": true,
+   "changed_since_repo_snapshot": true
+  },
+  {
+   "team": "PHI",
+   "official_2026_11_16": "2-7-0 148-221",
+   "model_snapshot_2026_11_15T1742Z": "2-7-0 148-221",
+   "verified_csv_2026_11_12T0431Z": "2-7-0 148-221",
+   "repo_copies_agree": true,
+   "changed_since_repo_snapshot": false
+  },
+  {
+   "team": "NYJ",
+   "official_2026_11_16": "2-8-0 194-254",
+   "model_snapshot_2026_11_15T1742Z": "2-7-0 182-223",
+   "verified_csv_2026_11_12T0431Z": "2-7-0 182-223",
+   "repo_copies_agree": true,
+   "changed_since_repo_snapshot": true
+  },
+  {
+   "team": "MIA",
+   "official_2026_11_16": "1-8-0 148-224",
+   "model_snapshot_2026_11_15T1742Z": "1-7-0 126-200",
+   "verified_csv_2026_11_12T0431Z": "1-7-0 126-200",
+   "repo_copies_agree": true,
+   "changed_since_repo_snapshot": true
+  },
+  {
+   "team": "TEN",
+   "official_2026_11_16": "1-8-0 167-239",
+   "model_snapshot_2026_11_15T1742Z": "1-7-0 144-199",
+   "verified_csv_2026_11_12T0431Z": "1-7-0 144-199",
+   "repo_copies_agree": true,
+   "changed_since_repo_snapshot": true
+  },
+  {
+   "team": "LAC",
+   "official_2026_11_16": "0-8-0 121-219",
+   "model_snapshot_2026_11_15T1742Z": "0-8-0 121-219",
+   "verified_csv_2026_11_12T0431Z": "0-8-0 121-219",
+   "repo_copies_agree": true,
+   "changed_since_repo_snapshot": false
+  }
+ ],
+ "what_changed_week9_to_week10": [
+  {
+   "team": "BUF",
+   "from_week9": "7-1-0 256-187",
+   "to_week10": "8-1-0 287-199"
+  },
+  {
+   "team": "SF",
+   "from_week9": "7-1-0 235-156",
+   "to_week10": "8-1-0 281-196"
+  },
+  {
+   "team": "CIN",
+   "from_week9": "6-2-0 240-175",
+   "to_week10": "7-2-0 278-193"
+  },
+  {
+   "team": "DET",
+   "from_week9": "6-2-0 222-189",
+   "to_week10": "7-2-0 257-199"
+  },
+  {
+   "team": "JAX",
+   "from_week9": "6-2-0 229-121",
+   "to_week10": "7-2-0 269-144"
+  },
+  {
+   "team": "KC",
+   "from_week9": "6-2-0 202-143",
+   "to_week10": "7-2-0 237-156"
+  },
+  {
+   "team": "MIN",
+   "from_week9": "6-2-0 146-116",
+   "to_week10": "7-2-0 176-126"
+  },
+  {
+   "team": "PIT",
+   "from_week9": "6-2-0 180-144",
+   "to_week10": "6-3-0 198-182"
+  },
+  {
+   "team": "CLE",
+   "from_week9": "5-4-0 161-196",
+   "to_week10": "6-4-0 188-220"
+  },
+  {
+   "team": "GB",
+   "from_week9": "6-3-0 216-191",
+   "to_week10": "6-4-0 226-221"
+  },
+  {
+   "team": "LAR",
+   "from_week9": "5-4-0 214-181",
+   "to_week10": "6-4-0 248-187"
+  },
+  {
+   "team": "SEA",
+   "from_week9": "5-4-0 202-162",
+   "to_week10": "6-4-0 223-175"
+  },
+  {
+   "team": "NE",
+   "from_week9": "5-4-0 211-207",
+   "to_week10": "5-5-0 221-242"
+  },
+  {
+   "team": "CAR",
+   "from_week9": "3-5-0 199-219",
+   "to_week10": "4-5-0 219-236"
+  },
+  {
+   "team": "DAL",
+   "from_week9": "4-5-0 246-236",
+   "to_week10": "4-6-0 286-282"
+  },
+  {
+   "team": "LV",
+   "from_week9": "4-5-0 238-268",
+   "to_week10": "4-6-0 251-289"
+  },
+  {
+   "team": "HOU",
+   "from_week9": "3-5-0 209-192",
+   "to_week10": "3-6-0 233-219"
+  },
+  {
+   "team": "NO",
+   "from_week9": "3-5-0 185-216",
+   "to_week10": "3-6-0 202-236"
+  },
+  {
+   "team": "ARI",
+   "from_week9": "3-6-0 178-255",
+   "to_week10": "3-7-0 184-289"
+  },
+  {
+   "team": "ATL",
+   "from_week9": "3-6-0 188-223",
+   "to_week10": "3-7-0 201-258"
+  },
+  {
+   "team": "IND",
+   "from_week9": "2-7-0 184-249",
+   "to_week10": "3-7-0 208-271"
+  },
+  {
+   "team": "NYJ",
+   "from_week9": "2-7-0 182-223",
+   "to_week10": "2-8-0 194-254"
+  },
+  {
+   "team": "MIA",
+   "from_week9": "1-7-0 126-200",
+   "to_week10": "1-8-0 148-224"
+  },
+  {
+   "team": "TEN",
+   "from_week9": "1-7-0 144-199",
+   "to_week10": "1-8-0 167-239"
+  }
+ ],
+ "week10_results_vs_frozen_corpus": [
+  {
+   "game": "WAS@NYG",
+   "official": "24-21",
+   "corpus_games_csv": "24-21 (stored as floats 24.0/21.0)",
+   "status": "match"
+  },
+  {
+   "game": "NE@DET",
+   "official": "10-35",
+   "corpus_games_csv": "blank (frozen corpus policy)",
+   "status": "result-final-corpus-blank-by-policy"
+  },
+  {
+   "game": "KC@ATL",
+   "official": "35-13",
+   "corpus_games_csv": "blank (frozen corpus policy)",
+   "status": "result-final-corpus-blank-by-policy"
+  },
+  {
+   "game": "HOU@CLE",
+   "official": "24-27",
+   "corpus_games_csv": "blank (frozen corpus policy)",
+   "status": "result-final-corpus-blank-by-policy"
+  },
+  {
+   "game": "MIN@GB",
+   "official": "30-10",
+   "corpus_games_csv": "blank (frozen corpus policy)",
+   "status": "result-final-corpus-blank-by-policy"
+  },
+  {
+   "game": "MIA@IND",
+   "official": "22-24",
+   "corpus_games_csv": "blank (frozen corpus policy)",
+   "status": "result-final-corpus-blank-by-policy"
+  },
+  {
+   "game": "CAR@NO",
+   "official": "20-17",
+   "corpus_games_csv": "blank (frozen corpus policy)",
+   "status": "result-final-corpus-blank-by-policy"
+  },
+  {
+   "game": "BUF@NYJ",
+   "official": "31-12",
+   "corpus_games_csv": "blank (frozen corpus policy)",
+   "status": "result-final-corpus-blank-by-policy"
+  },
+  {
+   "game": "JAX@TEN",
+   "official": "40-23",
+   "corpus_games_csv": "blank (frozen corpus policy)",
+   "status": "result-final-corpus-blank-by-policy"
+  },
+  {
+   "game": "LAR@ARI",
+   "official": "34-6",
+   "corpus_games_csv": "blank (frozen corpus policy)",
+   "status": "result-final-corpus-blank-by-policy"
+  },
+  {
+   "game": "SEA@LV",
+   "official": "21-13",
+   "corpus_games_csv": "blank (frozen corpus policy)",
+   "status": "result-final-corpus-blank-by-policy"
+  },
+  {
+   "game": "SF@DAL",
+   "official": "46-40",
+   "corpus_games_csv": "blank (frozen corpus policy)",
+   "status": "result-final-corpus-blank-by-policy"
+  },
+  {
+   "game": "PIT@CIN",
+   "official": "18-38",
+   "corpus_games_csv": "blank (frozen corpus policy)",
+   "status": "result-final-corpus-blank-by-policy"
+  },
+  {
+   "game": "LAC@BAL",
+   "official": "SCHEDULED",
+   "corpus_games_csv": "blank (frozen corpus policy)",
+   "status": "scheduled-not-played"
+  }
+ ],
+ "week11_vs_prereg_record": [
+  {
+   "game": "IND@HOU",
+   "repo_prereg_record": "match"
+  },
+  {
+   "game": "MIA@BUF",
+   "repo_prereg_record": "match"
+  },
+  {
+   "game": "BAL@CAR",
+   "repo_prereg_record": "match"
+  },
+  {
+   "game": "NO@CHI",
+   "repo_prereg_record": "match"
+  },
+  {
+   "game": "TEN@DAL",
+   "repo_prereg_record": "match"
+  },
+  {
+   "game": "TB@DET",
+   "repo_prereg_record": "match"
+  },
+  {
+   "game": "ARI@KC",
+   "repo_prereg_record": "match"
+  },
+  {
+   "game": "PIT@PHI",
+   "repo_prereg_record": "match"
+  },
+  {
+   "game": "NYJ@LAC",
+   "repo_prereg_record": "match"
+  },
+  {
+   "game": "JAX@NYG",
+   "repo_prereg_record": "match"
+  },
+  {
+   "game": "LV@DEN",
+   "repo_prereg_record": "match"
+  },
+  {
+   "game": "MIN@SF",
+   "repo_prereg_record": "match"
+  },
+  {
+   "game": "CIN@WAS",
+   "repo_prereg_record": "match"
+  }
+ ],
+ "counts": {
+  "standings_rows_checked": 32,
+  "teams_changed_since_repo_snapshot": 24,
+  "week10_finals": 13,
+  "week10_scheduled": 1,
+  "corpus_scores_blank": 13,
+  "week11_fixtures_matched": 13,
+  "corpus_scores_match": 1,
+  "injury_spotcheck_rows": 13,
+  "injury_spotcheck_matches": 13
+ },
+ "injury_report_spotcheck_week10": {
+  "source": "https://www.nfl.com/injuries/league/2026/reg10",
+  "read": "chunk 0 of 8, retrieved 2026-11-16T14:38Z",
+  "rows_checked": 13,
+  "rows_matching_capture": 13,
+  "rows": [
+   {
+    "player": "John Bates",
+    "team": "WAS",
+    "official_2026_11_16": {
+     "position": "TE",
+     "injury": "",
+     "practice": "FP",
+     "game_status": ""
+    },
+    "capture_2026_11_15": {
+     "position": "TE",
+     "injury": "",
+     "practice_status": "Full Participation in Practice",
+     "game_status": ""
+    },
+    "status": "match"
+   },
+   {
+    "player": "Treylon Burks",
+    "team": "WAS",
+    "official_2026_11_16": {
+     "position": "WR",
+     "injury": "",
+     "practice": "DNP",
+     "game_status": ""
+    },
+    "capture_2026_11_15": {
+     "position": "WR",
+     "injury": "",
+     "practice_status": "Did Not Participate In Practice",
+     "game_status": ""
+    },
+    "status": "match"
+   },
+   {
+    "player": "Lucas Patrick",
+    "team": "WAS",
+    "official_2026_11_16": {
+     "position": "C",
+     "injury": "Concussion",
+     "practice": "DNP",
+     "game_status": "Out"
+    },
+    "capture_2026_11_15": {
+     "position": "C",
+     "injury": "Concussion",
+     "practice_status": "Did Not Participate In Practice",
+     "game_status": "Out"
+    },
+    "status": "match"
+   },
+   {
+    "player": "Colson Yankoff",
+    "team": "WAS",
+    "official_2026_11_16": {
+     "position": "TE",
+     "injury": "Knee",
+     "practice": "DNP",
+     "game_status": "Out"
+    },
+    "capture_2026_11_15": {
+     "position": "TE",
+     "injury": "Knee",
+     "practice_status": "Did Not Participate In Practice",
+     "game_status": "Out"
+    },
+    "status": "match"
+   },
+   {
+    "player": "Malik Harrison",
+    "team": "NYG",
+    "official_2026_11_16": {
+     "position": "LB",
+     "injury": "Groin",
+     "practice": "LP",
+     "game_status": "Questionable"
+    },
+    "capture_2026_11_15": {
+     "position": "LB",
+     "injury": "Groin",
+     "practice_status": "Limited Participation in Practice",
+     "game_status": "Questionable"
+    },
+    "status": "match"
+   },
+   {
+    "player": "Ben Brown",
+    "team": "NE",
+    "official_2026_11_16": {
+     "position": "C",
+     "injury": "Knee",
+     "practice": "DNP",
+     "game_status": "Out"
+    },
+    "capture_2026_11_15": {
+     "position": "C",
+     "injury": "Knee",
+     "practice_status": "Did Not Participate In Practice",
+     "game_status": "Out"
+    },
+    "status": "match"
+   },
+   {
+    "player": "A.J. Brown",
+    "team": "NE",
+    "official_2026_11_16": {
+     "position": "WR",
+     "injury": "Ankle, Knee",
+     "practice": "LP",
+     "game_status": "Questionable"
+    },
+    "capture_2026_11_15": {
+     "position": "WR",
+     "injury": "Ankle, Knee",
+     "practice_status": "Limited Participation in Practice",
+     "game_status": "Questionable"
+    },
+    "status": "match"
+   },
+   {
+    "player": "Carlton Davis III",
+    "team": "NE",
+    "official_2026_11_16": {
+     "position": "CB",
+     "injury": "Knee",
+     "practice": "DNP",
+     "game_status": "Out"
+    },
+    "capture_2026_11_15": {
+     "position": "CB",
+     "injury": "Knee",
+     "practice_status": "Did Not Participate In Practice",
+     "game_status": "Out"
+    },
+    "status": "match"
+   },
+   {
+    "player": "TreVeyon Henderson",
+    "team": "NE",
+    "official_2026_11_16": {
+     "position": "RB",
+     "injury": "Illness",
+     "practice": "DNP",
+     "game_status": "Out"
+    },
+    "capture_2026_11_15": {
+     "position": "RB",
+     "injury": "Illness",
+     "practice_status": "Did Not Participate In Practice",
+     "game_status": "Out"
+    },
+    "status": "match"
+   },
+   {
+    "player": "Kerby Joseph",
+    "team": "DET",
+    "official_2026_11_16": {
+     "position": "S",
+     "injury": "Knee",
+     "practice": "DNP",
+     "game_status": "Out"
+    },
+    "capture_2026_11_15": {
+     "position": "S",
+     "injury": "Knee",
+     "practice_status": "Did Not Participate In Practice",
+     "game_status": "Out"
+    },
+    "status": "match"
+   },
+   {
+    "player": "Cade Mays",
+    "team": "DET",
+    "official_2026_11_16": {
+     "position": "C",
+     "injury": "Ankle",
+     "practice": "DNP",
+     "game_status": "Out"
+    },
+    "capture_2026_11_15": {
+     "position": "C",
+     "injury": "Ankle",
+     "practice_status": "Did Not Participate In Practice",
+     "game_status": "Out"
+    },
+    "status": "match"
+   },
+   {
+    "player": "D.J. Reed",
+    "team": "DET",
+    "official_2026_11_16": {
+     "position": "CB",
+     "injury": "Hip",
+     "practice": "DNP",
+     "game_status": "Out"
+    },
+    "capture_2026_11_15": {
+     "position": "CB",
+     "injury": "Hip",
+     "practice_status": "Did Not Participate In Practice",
+     "game_status": "Out"
+    },
+    "status": "match"
+   },
+   {
+    "player": "Amon-Ra St. Brown",
+    "team": "DET",
+    "official_2026_11_16": {
+     "position": "WR",
+     "injury": "Rib",
+     "practice": "LP",
+     "game_status": "Questionable"
+    },
+    "capture_2026_11_15": {
+     "position": "WR",
+     "injury": "Rib",
+     "practice_status": "Limited Participation in Practice",
+     "game_status": "Questionable"
+    },
+    "status": "match"
+   }
+  ]
+ }
+}

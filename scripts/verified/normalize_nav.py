@@ -28,6 +28,9 @@ CANON = [
     ("parlays.html", "Parlays & Combos"),
     ("props.html", "Player Props"),
     ("injuries.html", "Injuries"),
+    # Session cf97db19-nfl1 (X1): official-roster backup register. Added by the
+    # 414a54c9 integration session from PR #47 (takeover of a stale claim).
+    ("backup-register.html", "Backup Register"),
     ("depth.html", "Depth & Deficiency"),
     # Session 90c2b454-nfl1 (P3): the official injury-report snapshot ledger.
     ("snapshots.html", "Injury Snapshots"),
@@ -58,6 +61,9 @@ CANON = [
     # Session c7b65577-nfl1: the strategy competition.  Added to both nav lists at once because
     # this file and pipeline/gen_site.py are documented as needing to stay byte-identical.
     ("strat/index.html", "Strategy Competition"),
+    # Session c84a41a4-nfl1: the pre-registered origination ledger (PR #80), mirrored here by
+    # the 414a54c9 integration session because PR #80 only edited pipeline/gen_site.py.
+    ("ledger/index.html", "Origination Ledger"),
     # pages produced by the other generators in this repository, kept in the shared
     # navigation so no session's page can become unreachable
     ("executive-summary.html", "Executive Summary (companion)"),
@@ -70,6 +76,10 @@ CANON = [
     ("decisions.html", "Decision Register"),
     ("verified.html", "Verified Artifacts"),
     ("models.html", "Models"),
+    # Session 57c05555-nfl1: official depth charts parsed faithfully, and the immutable
+    # availability ledger behind them. Added here rather than by hand on each page so the one
+    # canonical navigation stays one list and every page gets the same entry.
+    ("session-57c05555.html", "Depth Charts & Ledger"),
     ("flagged.html", "Flagged (companion)"),
 ]
 
