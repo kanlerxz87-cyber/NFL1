@@ -85,14 +85,14 @@
   <div class="main">
     <div class="topbar">
       <div class="crumb">NFL1 / <b>Verification &amp; Sources</b></div>
-      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">112 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">123 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
     </div>
     <main class="content" id="main">
       <div class="kicker">Assurance</div>
       <h1>Verification &amp; official sources</h1>
       <p class="lede">How every value was verified line by line, the complete official source registry with links for manual review, and the per-file data audit.</p>
       <div class="callout"><b>Verification policy.</b> Work line by line; cite an official source on every table row; leave a cell blank when the official source publishes no value; flag it; never infer or fill in a value. This page documents the procedure, the source registry and the line-by-line audit of the data layer.</div>
-<div class="cards"><div class="card"><div class="label">Official sources</div><div class="value">52</div><div class="detail">All fetched 2026-11-12</div></div><div class="card"><div class="label">Data files audited</div><div class="value">38</div><div class="detail">Row counts and blanks</div></div><div class="card"><div class="label">Table rows</div><div class="value">600+</div><div class="detail">Each with a source link</div></div><div class="card"><div class="label">Flagged items</div><div class="value">112</div><div class="detail">Needs review</div></div></div>
+<div class="cards"><div class="card"><div class="label">Official sources</div><div class="value">61</div><div class="detail">All fetched 2026-11-12</div></div><div class="card"><div class="label">Data files audited</div><div class="value">38</div><div class="detail">Row counts and blanks</div></div><div class="card"><div class="label">Table rows</div><div class="value">600+</div><div class="detail">Each with a source link</div></div><div class="card"><div class="label">Flagged items</div><div class="value">123</div><div class="detail">Needs review</div></div></div>
 <h2 id="policy">Verification procedure</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-verify-policy" aria-label="Filter tbl-verify-policy" placeholder="Filter rows…">
 <span class="count" data-count-for="tbl-verify-policy">7 rows shown</span></div>
@@ -150,7 +150,7 @@
 </tbody></table></div>
 <h2 id="sources">Official source registry</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-sources" aria-label="Filter tbl-sources" placeholder="Filter rows…">
-<span class="count" data-count-for="tbl-sources">52 rows shown</span></div>
+<span class="count" data-count-for="tbl-sources">61 rows shown</span></div>
 <div class="tablewrap"><table class="data-table" id="tbl-sources"><caption>Every official source used, what it verifies, its canonical URL note and the retrieval date. Each row links to that official page.</caption>
 <thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Publisher</th><th scope="col" class="sortable">Source type</th><th scope="col" class="sortable">What it verifies</th><th scope="col" class="sortable">Canonical / note</th><th scope="col" class="sortable">Retrieved</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
 <tr id="S01" data-verified="true">
@@ -507,119 +507,200 @@
 <tr id="S41" data-verified="true">
 <td><code>S41</code></td>
 <td data-value="1">National Football League (NFL.com)</td>
-<td data-value="1">Official NFL Game Book (PDF)</td>
-<td data-value="1" class="wide">Week 10 2026 Game Book — Washington Commanders at New York Giants: lineups, substitutions, Did Not Play, Not Active, officials, weather, scoring, attendance</td>
-<td data-value="1" class="wide">Read 2026-11-16 (session d9e28eb2-nfl1) and transcribed verbatim to data/gamebooks/raw/commanders-at-giants-2026-reg-10.txt (sha256 in data/gamebooks/manifest.json). Game centre: https://www.nfl.com/games/commanders-at-giants-2026-reg-10</td>
+<td data-value="1">Official league standings</td>
+<td data-value="1" class="wide">2026 regular-season standings, detailed view: W, L, T, PCT, PF, PA, NET PTS. Re-read in full on 2026-11-16 for the desk/ re-verification: 32 clubs, sum of club games 298, 149 completed games.</td>
+<td data-value="1" class="wide">Every row&#x27;s PF - PA equals the printed NET PTS and every PCT reproduces from W/L/T: 0 arithmetic failures in 32 rows.</td>
 <td data-value="1">2026-11-16</td>
-<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794570519/gamecenter/ab5828d9-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S41 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/reg" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S41 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
 <tr id="S42" data-verified="true">
 <td><code>S42</code></td>
 <td data-value="1">National Football League (NFL.com)</td>
-<td data-value="1">Official NFL Game Book (PDF)</td>
-<td data-value="1" class="wide">Week 10 2026 Game Book — New England Patriots at Detroit Lions (Munich): lineups, substitutions, Did Not Play, Not Active, officials, weather, scoring, attendance</td>
-<td data-value="1" class="wide">Read 2026-11-16 (session d9e28eb2-nfl1) and transcribed verbatim to data/gamebooks/raw/patriots-at-lions-2026-reg-10.txt (sha256 in data/gamebooks/manifest.json). Game centre: https://www.nfl.com/games/patriots-at-lions-2026-reg-10</td>
+<td data-value="1">Official league injury report</td>
+<td data-value="1" class="wide">2026 Week 10 injury report, all 8 page chunks read: 347 rows across 28 clubs; 171 rows carry a game status (70 Out, 90 Questionable, 11 Doubtful); 176 are practice-only rows.</td>
+<td data-value="1" class="wide">This session&#x27;s independent transcription reproduces the committed capture on every shared row: 0 field differences. The only key difference is the printed club code AZ versus the capture&#x27;s ARI.</td>
 <td data-value="1">2026-11-16</td>
-<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829721/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S42 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S42 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
 <tr id="S43" data-verified="true">
 <td><code>S43</code></td>
 <td data-value="1">National Football League (NFL.com)</td>
-<td data-value="1">Official NFL Game Book (PDF)</td>
-<td data-value="1" class="wide">Week 10 2026 Game Book — Kansas City Chiefs at Atlanta Falcons: lineups, substitutions, Did Not Play, Not Active, officials, weather, scoring, attendance</td>
-<td data-value="1" class="wide">Read 2026-11-16 (session d9e28eb2-nfl1) and transcribed verbatim to data/gamebooks/raw/chiefs-at-falcons-2026-reg-10.txt (sha256 in data/gamebooks/manifest.json). Game centre: https://www.nfl.com/games/chiefs-at-falcons-2026-reg-10</td>
+<td data-value="1">Official schedule</td>
+<td data-value="1" class="wide">Week 11: 13 fixtures with kickoff time and network, plus a 6-club bye block (ATL, CLE, GB, LAR, NE, SEA). 26 playing + 6 byes = 32 clubs, no club on both lists.</td>
+<td data-value="1" class="wide">Reproduces data/evidence/schedule_current.json on all 13 fixtures for date, kickoff and network: 0 differences.</td>
 <td data-value="1">2026-11-16</td>
-<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829722/gamecenter/ab582f5b-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S43 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+<td><span class="src"><a href="https://www.nfl.com/schedules/2026/by-week/week-11" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official schedule">S43 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
 <tr id="S44" data-verified="true">
 <td><code>S44</code></td>
 <td data-value="1">National Football League (NFL.com)</td>
-<td data-value="1">Official NFL Game Book (PDF)</td>
-<td data-value="1" class="wide">Week 10 2026 Game Book — Houston Texans at Cleveland Browns: lineups, substitutions, Did Not Play, Not Active, officials, weather, scoring, attendance</td>
-<td data-value="1" class="wide">Read 2026-11-16 (session d9e28eb2-nfl1) and transcribed verbatim to data/gamebooks/raw/texans-at-browns-2026-reg-10.txt (sha256 in data/gamebooks/manifest.json). Game centre: https://www.nfl.com/games/texans-at-browns-2026-reg-10</td>
+<td data-value="1">Official schedule (Week 10 results)</td>
+<td data-value="1" class="wide">The Week 10 slate: 13 final scores and the Monday fixture LAC at BAL still scheduled at 20:15 ET on 2026-11-16.</td>
+<td data-value="1" class="wide">Used only to test the backtest corpus; 12 of the 13 finals are absent from data/s9cb/games.csv (flag D-F01).</td>
 <td data-value="1">2026-11-16</td>
-<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829724/gamecenter/ab583279-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S44 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+<td><span class="src"><a href="https://www.nfl.com/schedules/2026/REG11" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official schedule (Week 10 results)">S44 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
 <tr id="S45" data-verified="true">
 <td><code>S45</code></td>
-<td data-value="1">National Football League (NFL.com)</td>
-<td data-value="1">Official NFL Game Book (PDF)</td>
-<td data-value="1" class="wide">Week 10 2026 Game Book — Minnesota Vikings at Green Bay Packers: lineups, substitutions, Did Not Play, Not Active, officials, weather, scoring, attendance</td>
-<td data-value="1" class="wide">Read 2026-11-16 (session d9e28eb2-nfl1) and transcribed verbatim to data/gamebooks/raw/vikings-at-packers-2026-reg-10.txt (sha256 in data/gamebooks/manifest.json). Game centre: https://www.nfl.com/games/vikings-at-packers-2026-reg-10</td>
+<td data-value="1">Detroit Lions (official club site)</td>
+<td data-value="1">Official club depth chart</td>
+<td data-value="1" class="wide">Detroit&#x27;s 2026 chart: offense, defense and special teams, 28 slots, 57 named cells. Cade Mays (C), D.J. Reed (CB) and Kerby Joseph (S) are listed as starters and all three are Out on the official Week-10 report.</td>
+<td data-value="1" class="wide">The club labels it &#x27;Unofficial Depth Chart Compiled by Lions Football Communications&#x27; and prints no date.</td>
 <td data-value="1">2026-11-16</td>
-<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829721/gamecenter/ab788967-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S45 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+<td><span class="src"><a href="https://www.detroitlions.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Detroit Lions (official club site) — Official club depth chart">S45 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
 <tr id="S46" data-verified="true">
 <td><code>S46</code></td>
-<td data-value="1">National Football League (NFL.com)</td>
-<td data-value="1">Official NFL Game Book (PDF)</td>
-<td data-value="1" class="wide">Week 10 2026 Game Book — Miami Dolphins at Indianapolis Colts: lineups, substitutions, Did Not Play, Not Active, officials, weather, scoring, attendance</td>
-<td data-value="1" class="wide">Read 2026-11-16 (session d9e28eb2-nfl1) and transcribed verbatim to data/gamebooks/raw/dolphins-at-colts-2026-reg-10.txt (sha256 in data/gamebooks/manifest.json). Game centre: https://www.nfl.com/games/dolphins-at-colts-2026-reg-10</td>
+<td data-value="1">Baltimore Ravens (official club site)</td>
+<td data-value="1">Official club depth chart</td>
+<td data-value="1" class="wide">Baltimore&#x27;s chart: 29 slots, 59 named cells. QB order is Brissett, Fagnano, Slovis; no Lamar Jackson and no Tyler Huntley. The kicker cell is empty.</td>
+<td data-value="1" class="wide">Resolves the brief&#x27;s stale-depth finding at source (flag D-F05). The chart prints no date.</td>
 <td data-value="1">2026-11-16</td>
-<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829723/gamecenter/ab789365-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S46 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+<td><span class="src"><a href="https://www.baltimoreravens.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Baltimore Ravens (official club site) — Official club depth chart">S46 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
 <tr id="S47" data-verified="true">
 <td><code>S47</code></td>
-<td data-value="1">National Football League (NFL.com)</td>
-<td data-value="1">Official NFL Game Book (PDF)</td>
-<td data-value="1" class="wide">Week 10 2026 Game Book — Carolina Panthers at New Orleans Saints: lineups, substitutions, Did Not Play, Not Active, officials, weather, scoring, attendance</td>
-<td data-value="1" class="wide">Read 2026-11-16 (session d9e28eb2-nfl1) and transcribed verbatim to data/gamebooks/raw/panthers-at-saints-2026-reg-10.txt (sha256 in data/gamebooks/manifest.json). Game centre: https://www.nfl.com/games/panthers-at-saints-2026-reg-10</td>
+<td data-value="1">Green Bay Packers (official club site)</td>
+<td data-value="1">Official club depth chart</td>
+<td data-value="1" class="wide">Green Bay&#x27;s chart labelled &#x27;Unofficial, Nov. 10, 2026&#x27;: 28 slots, 54 named cells, jersey numbers printed inside the name cell, one empty PR cell, and a KR row whose name starts in column 2.</td>
+<td data-value="1" class="wide">Reproduces the committed register for this club after normalising apostrophe glyphs: 0 page changes, 1 glyph-only difference.</td>
 <td data-value="1">2026-11-16</td>
-<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829721/gamecenter/ab789769-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S47 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+<td><span class="src"><a href="https://www.packers.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Green Bay Packers (official club site) — Official club depth chart">S47 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
 <tr id="S48" data-verified="true">
 <td><code>S48</code></td>
-<td data-value="1">National Football League (NFL.com)</td>
-<td data-value="1">Official NFL Game Book (PDF)</td>
-<td data-value="1" class="wide">Week 10 2026 Game Book — Buffalo Bills at New York Jets: lineups, substitutions, Did Not Play, Not Active, officials, weather, scoring, attendance</td>
-<td data-value="1" class="wide">Read 2026-11-16 (session d9e28eb2-nfl1) and transcribed verbatim to data/gamebooks/raw/bills-at-jets-2026-reg-10.txt (sha256 in data/gamebooks/manifest.json). Game centre: https://www.nfl.com/games/bills-at-jets-2026-reg-10</td>
-<td data-value="1">2026-11-16</td>
-<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829722/gamecenter/ab789ac9-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S48 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+<td data-value="1">NFL1 repository (pre-registered policy artifact)</td>
+<td data-value="1">Pre-registered reward rule (policy, not an official NFL fact)</td>
+<td data-value="1" class="wide">The frozen two-stage reward rule: Stage-1 proper-score qualification (Brier skill lower bound &gt; 0, BH-adjusted p &lt; 0.05, Bonferroni 0.05/6, decided-bet sample &gt;= 200) and Stage-2 prospective CLV/ROI escrow, awarding non-monetary badges. Registration commit recorded in data/rewards/rewards.json; rewards/verify.py fails on any drift.</td>
+<td data-value="1" class="blank wide"></td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/rewards/REWARDS-RULE.md" target="_blank" rel="noopener noreferrer" title="NFL1 repository (pre-registered policy artifact) — Pre-registered reward rule (policy, not an official NFL fact)">S48 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
 <tr id="S49" data-verified="true">
 <td><code>S49</code></td>
-<td data-value="1">National Football League (NFL.com)</td>
-<td data-value="1">Official NFL Game Book (PDF)</td>
-<td data-value="1" class="wide">Week 10 2026 Game Book — Jacksonville Jaguars at Tennessee Titans: lineups, substitutions, Did Not Play, Not Active, officials, weather, scoring, attendance</td>
-<td data-value="1" class="wide">Read 2026-11-16 (session d9e28eb2-nfl1) and transcribed verbatim to data/gamebooks/raw/jaguars-at-titans-2026-reg-10.txt (sha256 in data/gamebooks/manifest.json). Game centre: https://www.nfl.com/games/jaguars-at-titans-2026-reg-10</td>
-<td data-value="1">2026-11-16</td>
-<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829722/gamecenter/ab789e15-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S49 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+<td data-value="1">NFL1 repository</td>
+<td data-value="1">Readiness-register generator</td>
+<td data-value="1" class="wide">The script that writes room/data/readiness.json (82 rows). Running it regenerates the whole file from its own row definitions, so in-place row edits made outside the script are reverted on the next regeneration.</td>
+<td data-value="1" class="blank wide"></td>
+<td data-value="1" class="blank"></td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/scripts/brief_07810d9f/register.py" target="_blank" rel="noopener noreferrer" title="NFL1 repository — Readiness-register generator">S49 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
 <tr id="S50" data-verified="true">
 <td><code>S50</code></td>
 <td data-value="1">National Football League (NFL.com)</td>
 <td data-value="1">Official NFL Game Book (PDF)</td>
-<td data-value="1" class="wide">Week 10 2026 Game Book — Los Angeles Rams at Arizona Cardinals: lineups, substitutions, Did Not Play, Not Active, officials, weather, scoring, attendance</td>
-<td data-value="1" class="wide">Read 2026-11-16 (session d9e28eb2-nfl1) and transcribed verbatim to data/gamebooks/raw/rams-at-cardinals-2026-reg-10.txt (sha256 in data/gamebooks/manifest.json). Game centre: https://www.nfl.com/games/rams-at-cardinals-2026-reg-10</td>
+<td data-value="1" class="wide">Week 10 2026 Game Book — Washington Commanders at New York Giants: lineups, substitutions, Did Not Play, Not Active, officials, weather, scoring, attendance</td>
+<td data-value="1" class="wide">Read 2026-11-16 (session d9e28eb2-nfl1) and transcribed verbatim to data/gamebooks/raw/commanders-at-giants-2026-reg-10.txt (sha256 in data/gamebooks/manifest.json). Game centre: https://www.nfl.com/games/commanders-at-giants-2026-reg-10</td>
 <td data-value="1">2026-11-16</td>
-<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829725/gamecenter/ab78a133-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S50 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794570519/gamecenter/ab5828d9-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S50 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
 <tr id="S51" data-verified="true">
 <td><code>S51</code></td>
 <td data-value="1">National Football League (NFL.com)</td>
 <td data-value="1">Official NFL Game Book (PDF)</td>
-<td data-value="1" class="wide">Week 10 2026 Game Book — Seattle Seahawks at Las Vegas Raiders: lineups, substitutions, Did Not Play, Not Active, officials, weather, scoring, attendance</td>
-<td data-value="1" class="wide">Read 2026-11-16 (session d9e28eb2-nfl1) and transcribed verbatim to data/gamebooks/raw/seahawks-at-raiders-2026-reg-10.txt (sha256 in data/gamebooks/manifest.json). Game centre: https://www.nfl.com/games/seahawks-at-raiders-2026-reg-10</td>
+<td data-value="1" class="wide">Week 10 2026 Game Book — New England Patriots at Detroit Lions (Munich): lineups, substitutions, Did Not Play, Not Active, officials, weather, scoring, attendance</td>
+<td data-value="1" class="wide">Read 2026-11-16 (session d9e28eb2-nfl1) and transcribed verbatim to data/gamebooks/raw/patriots-at-lions-2026-reg-10.txt (sha256 in data/gamebooks/manifest.json). Game centre: https://www.nfl.com/games/patriots-at-lions-2026-reg-10</td>
 <td data-value="1">2026-11-16</td>
-<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829726/gamecenter/ab78a43c-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S51 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829721/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S51 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
 <tr id="S52" data-verified="true">
 <td><code>S52</code></td>
 <td data-value="1">National Football League (NFL.com)</td>
 <td data-value="1">Official NFL Game Book (PDF)</td>
-<td data-value="1" class="wide">Week 10 2026 Game Book — San Francisco 49ers at Dallas Cowboys: lineups, substitutions, Did Not Play, Not Active, officials, weather, scoring, attendance</td>
-<td data-value="1" class="wide">Read 2026-11-16 (session d9e28eb2-nfl1) and transcribed verbatim to data/gamebooks/raw/49ers-at-cowboys-2026-reg-10.txt (sha256 in data/gamebooks/manifest.json). Game centre: https://www.nfl.com/games/49ers-at-cowboys-2026-reg-10</td>
+<td data-value="1" class="wide">Week 10 2026 Game Book — Kansas City Chiefs at Atlanta Falcons: lineups, substitutions, Did Not Play, Not Active, officials, weather, scoring, attendance</td>
+<td data-value="1" class="wide">Read 2026-11-16 (session d9e28eb2-nfl1) and transcribed verbatim to data/gamebooks/raw/chiefs-at-falcons-2026-reg-10.txt (sha256 in data/gamebooks/manifest.json). Game centre: https://www.nfl.com/games/chiefs-at-falcons-2026-reg-10</td>
 <td data-value="1">2026-11-16</td>
-<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829724/gamecenter/ab78a748-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S52 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829722/gamecenter/ab582f5b-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S52 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
 <tr id="S53" data-verified="true">
 <td><code>S53</code></td>
 <td data-value="1">National Football League (NFL.com)</td>
 <td data-value="1">Official NFL Game Book (PDF)</td>
+<td data-value="1" class="wide">Week 10 2026 Game Book — Houston Texans at Cleveland Browns: lineups, substitutions, Did Not Play, Not Active, officials, weather, scoring, attendance</td>
+<td data-value="1" class="wide">Read 2026-11-16 (session d9e28eb2-nfl1) and transcribed verbatim to data/gamebooks/raw/texans-at-browns-2026-reg-10.txt (sha256 in data/gamebooks/manifest.json). Game centre: https://www.nfl.com/games/texans-at-browns-2026-reg-10</td>
+<td data-value="1">2026-11-16</td>
+<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829724/gamecenter/ab583279-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S53 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S54" data-verified="true">
+<td><code>S54</code></td>
+<td data-value="1">National Football League (NFL.com)</td>
+<td data-value="1">Official NFL Game Book (PDF)</td>
+<td data-value="1" class="wide">Week 10 2026 Game Book — Minnesota Vikings at Green Bay Packers: lineups, substitutions, Did Not Play, Not Active, officials, weather, scoring, attendance</td>
+<td data-value="1" class="wide">Read 2026-11-16 (session d9e28eb2-nfl1) and transcribed verbatim to data/gamebooks/raw/vikings-at-packers-2026-reg-10.txt (sha256 in data/gamebooks/manifest.json). Game centre: https://www.nfl.com/games/vikings-at-packers-2026-reg-10</td>
+<td data-value="1">2026-11-16</td>
+<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829721/gamecenter/ab788967-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S54 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S55" data-verified="true">
+<td><code>S55</code></td>
+<td data-value="1">National Football League (NFL.com)</td>
+<td data-value="1">Official NFL Game Book (PDF)</td>
+<td data-value="1" class="wide">Week 10 2026 Game Book — Miami Dolphins at Indianapolis Colts: lineups, substitutions, Did Not Play, Not Active, officials, weather, scoring, attendance</td>
+<td data-value="1" class="wide">Read 2026-11-16 (session d9e28eb2-nfl1) and transcribed verbatim to data/gamebooks/raw/dolphins-at-colts-2026-reg-10.txt (sha256 in data/gamebooks/manifest.json). Game centre: https://www.nfl.com/games/dolphins-at-colts-2026-reg-10</td>
+<td data-value="1">2026-11-16</td>
+<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829723/gamecenter/ab789365-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S55 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S56" data-verified="true">
+<td><code>S56</code></td>
+<td data-value="1">National Football League (NFL.com)</td>
+<td data-value="1">Official NFL Game Book (PDF)</td>
+<td data-value="1" class="wide">Week 10 2026 Game Book — Carolina Panthers at New Orleans Saints: lineups, substitutions, Did Not Play, Not Active, officials, weather, scoring, attendance</td>
+<td data-value="1" class="wide">Read 2026-11-16 (session d9e28eb2-nfl1) and transcribed verbatim to data/gamebooks/raw/panthers-at-saints-2026-reg-10.txt (sha256 in data/gamebooks/manifest.json). Game centre: https://www.nfl.com/games/panthers-at-saints-2026-reg-10</td>
+<td data-value="1">2026-11-16</td>
+<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829721/gamecenter/ab789769-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S56 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S57" data-verified="true">
+<td><code>S57</code></td>
+<td data-value="1">National Football League (NFL.com)</td>
+<td data-value="1">Official NFL Game Book (PDF)</td>
+<td data-value="1" class="wide">Week 10 2026 Game Book — Buffalo Bills at New York Jets: lineups, substitutions, Did Not Play, Not Active, officials, weather, scoring, attendance</td>
+<td data-value="1" class="wide">Read 2026-11-16 (session d9e28eb2-nfl1) and transcribed verbatim to data/gamebooks/raw/bills-at-jets-2026-reg-10.txt (sha256 in data/gamebooks/manifest.json). Game centre: https://www.nfl.com/games/bills-at-jets-2026-reg-10</td>
+<td data-value="1">2026-11-16</td>
+<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829722/gamecenter/ab789ac9-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S57 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S58" data-verified="true">
+<td><code>S58</code></td>
+<td data-value="1">National Football League (NFL.com)</td>
+<td data-value="1">Official NFL Game Book (PDF)</td>
+<td data-value="1" class="wide">Week 10 2026 Game Book — Jacksonville Jaguars at Tennessee Titans: lineups, substitutions, Did Not Play, Not Active, officials, weather, scoring, attendance</td>
+<td data-value="1" class="wide">Read 2026-11-16 (session d9e28eb2-nfl1) and transcribed verbatim to data/gamebooks/raw/jaguars-at-titans-2026-reg-10.txt (sha256 in data/gamebooks/manifest.json). Game centre: https://www.nfl.com/games/jaguars-at-titans-2026-reg-10</td>
+<td data-value="1">2026-11-16</td>
+<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829722/gamecenter/ab789e15-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S58 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S59" data-verified="true">
+<td><code>S59</code></td>
+<td data-value="1">National Football League (NFL.com)</td>
+<td data-value="1">Official NFL Game Book (PDF)</td>
+<td data-value="1" class="wide">Week 10 2026 Game Book — Los Angeles Rams at Arizona Cardinals: lineups, substitutions, Did Not Play, Not Active, officials, weather, scoring, attendance</td>
+<td data-value="1" class="wide">Read 2026-11-16 (session d9e28eb2-nfl1) and transcribed verbatim to data/gamebooks/raw/rams-at-cardinals-2026-reg-10.txt (sha256 in data/gamebooks/manifest.json). Game centre: https://www.nfl.com/games/rams-at-cardinals-2026-reg-10</td>
+<td data-value="1">2026-11-16</td>
+<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829725/gamecenter/ab78a133-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S59 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S60" data-verified="true">
+<td><code>S60</code></td>
+<td data-value="1">National Football League (NFL.com)</td>
+<td data-value="1">Official NFL Game Book (PDF)</td>
+<td data-value="1" class="wide">Week 10 2026 Game Book — Seattle Seahawks at Las Vegas Raiders: lineups, substitutions, Did Not Play, Not Active, officials, weather, scoring, attendance</td>
+<td data-value="1" class="wide">Read 2026-11-16 (session d9e28eb2-nfl1) and transcribed verbatim to data/gamebooks/raw/seahawks-at-raiders-2026-reg-10.txt (sha256 in data/gamebooks/manifest.json). Game centre: https://www.nfl.com/games/seahawks-at-raiders-2026-reg-10</td>
+<td data-value="1">2026-11-16</td>
+<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829726/gamecenter/ab78a43c-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S60 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S61" data-verified="true">
+<td><code>S61</code></td>
+<td data-value="1">National Football League (NFL.com)</td>
+<td data-value="1">Official NFL Game Book (PDF)</td>
+<td data-value="1" class="wide">Week 10 2026 Game Book — San Francisco 49ers at Dallas Cowboys: lineups, substitutions, Did Not Play, Not Active, officials, weather, scoring, attendance</td>
+<td data-value="1" class="wide">Read 2026-11-16 (session d9e28eb2-nfl1) and transcribed verbatim to data/gamebooks/raw/49ers-at-cowboys-2026-reg-10.txt (sha256 in data/gamebooks/manifest.json). Game centre: https://www.nfl.com/games/49ers-at-cowboys-2026-reg-10</td>
+<td data-value="1">2026-11-16</td>
+<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829724/gamecenter/ab78a748-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S61 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="S62" data-verified="true">
+<td><code>S62</code></td>
+<td data-value="1">National Football League (NFL.com)</td>
+<td data-value="1">Official NFL Game Book (PDF)</td>
 <td data-value="1" class="wide">Week 10 2026 Game Book — Pittsburgh Steelers at Cincinnati Bengals: lineups, substitutions, Did Not Play, Not Active, officials, weather, scoring, attendance</td>
 <td data-value="1" class="wide">Read 2026-11-16 (session d9e28eb2-nfl1) and transcribed verbatim to data/gamebooks/raw/steelers-at-bengals-2026-reg-10.txt (sha256 in data/gamebooks/manifest.json). Game centre: https://www.nfl.com/games/steelers-at-bengals-2026-reg-10</td>
 <td data-value="1">2026-11-16</td>
-<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829727/gamecenter/ab78aa48-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S53 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829727/gamecenter/ab78aa48-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S62 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
 </tbody></table></div>
 <h2 id="audit">Line-by-line data audit</h2>
@@ -792,10 +873,10 @@
 <tr id="AU-19" data-verified="true">
 <td><code>AU-19</code></td>
 <td data-value="1">data/flags.json</td>
-<td data-value="1" class="num">112</td>
-<td data-value="1">112 / 112</td>
+<td data-value="1" class="num">123</td>
+<td data-value="1">123 / 123</td>
 <td data-value="1" class="num">0</td>
-<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">3</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
 <tr id="AU-20" data-verified="true">
@@ -864,9 +945,9 @@
 <tr id="AU-27" data-verified="true">
 <td><code>AU-27</code></td>
 <td data-value="1">data/questions.json</td>
-<td data-value="1" class="num">30</td>
-<td data-value="1">30 / 30</td>
-<td data-value="1" class="num">0</td>
+<td data-value="1" class="num">31</td>
+<td data-value="1">31 / 31</td>
+<td data-value="1" class="num">1</td>
 <td data-value="1" class="num">0</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
@@ -909,8 +990,8 @@
 <tr id="AU-32" data-verified="true">
 <td><code>AU-32</code></td>
 <td data-value="1">data/sources.json</td>
-<td data-value="1" class="num">52</td>
-<td data-value="1">0 / 52</td>
+<td data-value="1" class="num">61</td>
+<td data-value="1">0 / 61</td>
 <td data-value="1" class="num">0</td>
 <td data-value="1" class="num">0</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
@@ -936,8 +1017,8 @@
 <tr id="AU-35" data-verified="true">
 <td><code>AU-35</code></td>
 <td data-value="1">data/suggestions.json</td>
-<td data-value="1" class="num">34</td>
-<td data-value="1">34 / 34</td>
+<td data-value="1" class="num">35</td>
+<td data-value="1">35 / 35</td>
 <td data-value="1" class="num">31</td>
 <td data-value="1" class="num">0</td>
 <td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1" target="_blank" rel="noopener noreferrer" title="GitHub (this repository) — Official repository">S24 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>

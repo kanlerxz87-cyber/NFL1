@@ -104,7 +104,9 @@ SIDEBAR = [
                       # Session 1d824ec2-nfl1: dated roster events, additive.
                       ("reserve/index.html", "Transactions & Reserve"),
                       # Session 49ac3a99-nfl1 (IN-31): additive.
-                      ("schedule_announcement/index.html", "Schedule Announcement")]),
+                      ("schedule_announcement/index.html", "Schedule Announcement"),
+                      # Session d9e28eb2-nfl1 (G5): official Game Books, additive.
+                      ("gamebooks/index.html", "Game Books")]),
     ("Decisions", [("pages/questions.html", "Questions"),
                    ("pages/suggestions.html", "Suggestions")]),
     ("Evidence", [("pages/evidence.html", "Evidence"),

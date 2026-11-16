@@ -85,17 +85,17 @@
   <div class="main">
     <div class="topbar">
       <div class="crumb">NFL1 / <b>Flagged for Review</b></div>
-      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">112 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
+      <div class="pills"><span class="pill ok">Source-linked rows</span><span class="pill warn">123 flagged items</span><span class="pill">Snapshot 2026-11-12</span></div>
     </div>
     <main class="content" id="main">
       <div class="kicker">Assurance</div>
       <h1>Flagged for Review</h1>
       <p class="lede">Clearly labelled irregularities, official-page conflicts, unverified values and coordination issues — each with an official source link for manual review, none blocking the merge.</p>
       <div class="callout flag"><b>Flagged for Review.</b> These irregularities and unverified items do not block the merge or the live site. Each has an official source link for manual review and a suggested action. A status of <em>needs review</em> means exactly this: published here, not blocking.</div>
-<div class="cards"><div class="card"><div class="label">Flagged items</div><div class="value">112</div><div class="detail">All with source links</div></div><div class="card"><div class="label">Official-page irregularities</div><div class="value">7</div><div class="detail">F02–F08</div></div><div class="card"><div class="label">Missing official data</div><div class="value">5</div><div class="detail">F09–F11, F14, F15</div></div><div class="card"><div class="label">Combined-site review</div><div class="value">56</div><div class="detail">F25–F36</div></div></div>
+<div class="cards"><div class="card"><div class="label">Flagged items</div><div class="value">123</div><div class="detail">All with source links</div></div><div class="card"><div class="label">Official-page irregularities</div><div class="value">7</div><div class="detail">F02–F08</div></div><div class="card"><div class="label">Missing official data</div><div class="value">5</div><div class="detail">F09–F11, F14, F15</div></div><div class="card"><div class="label">Combined-site review</div><div class="value">57</div><div class="detail">F25–F36</div></div></div>
 <h2 id="all">All flagged irregularities</h2>
 <div class="tabletools"><input class="table-filter" data-target="#tbl-flags" aria-label="Filter tbl-flags" placeholder="Filter rows…">
-<span class="count" data-count-for="tbl-flags">112 rows shown</span></div>
+<span class="count" data-count-for="tbl-flags">123 rows shown</span></div>
 <div class="tablewrap"><table class="data-table" id="tbl-flags"><caption>Every flag with category, description, impact, status, official source link and suggested action for the reviewer.</caption>
 <thead><tr><th scope="col" class="sortable">ID</th><th scope="col" class="sortable">Category</th><th scope="col" class="sortable">Irregularity / unverified item</th><th scope="col" class="sortable">Impact on decisions</th><th scope="col" class="sortable">Status</th><th scope="col" class="sortable">Suggested action</th><th scope="col" class="sortable">Official source</th><th scope="col" class="sortable">Verification</th></tr></thead><tbody>
 <tr id="F01" data-verified="true">
@@ -1052,59 +1052,158 @@
 <td data-value="1" class="wide">owner decision on tools/check_freshness.py: compare content hashes rather than stamps so an unchanged input cannot make an output stale; and have the decision-room builder preserve its inputs&#x27; captured_at instead of relying on a re-run. Do not &#x27;fix&#x27; a freshness failure by bumping captured_at without re-reading the official source.</td>
 <td><span class="src"><a href="https://www.nfl.com/transactions/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league transaction register (index)">S38 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
+<tr id="D-F01" data-verified="false">
+<td><code>D-F01</code></td>
+<td data-value="1">Check E passes now, but the frozen corpus is still 12 games behind the season</td>
+<td data-value="1" class="wide">When this session claimed (main 46c82ae) tools/verify_official.py check E failed: it compared data/model/dashboard.json counts.games_played (137) with half the sum of club games in data/evidence/standings_current.json (149). An upstream data refresh merged to main while this session ran (commit e2f9916) raised the dashboard count to the official 149, so check E now PASSES: 149 games, 0 of 28 checks failing, report data/audit/official_verification.json generated 2026-11-16T18:05:02Z. The underlying data gap is unchanged: the frozen backtest corpus data/s9cb/games.csv still holds 137 results and only one Week-10 final (WAS 24-21 NYG); 12 of the 13 Week-10 finals are absent from it. The gate went green because the dashboard was corrected to match the official count, not because the corpus caught up.</td>
+<td data-value="1" class="wide">The failing job is cleared, so the build is no longer red. The model&#x27;s ratings, own lines and every backtest still sit on a corpus 12 games behind the season, so published accuracy figures describe a slightly earlier state than the season the page describes.</td>
+<td><span class="badge neutral">Open - gate green, corpus still behind; disclosed on the site, not repaired</span></td>
+<td data-value="1" class="wide">Freeze a new corpus_id from a refreshed results feed. Do not edit the pre-registered corpus in place. The gate is a live read on the desk pages, so it will flip to a failure again if the dashboard count and the official standings ever disagree.</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><a class="badge flag" href="flagged.html">UNVERIFIED</a></td>
+</tr>
+<tr id="D-F02" data-verified="false">
+<td><code>D-F02</code></td>
+<td data-value="1">Three committed copies of the official standings no longer match the page</td>
+<td data-value="1" class="wide">data/standings.json (read 2026-11-12), data/s9cb/official_standings_2026.csv (2026-11-12) and data/personnel/official_standings_2026-11-13.csv (2026-11-13) each reproduce only 6 of 32 club rows against the official table read on 2026-11-16; data/evidence/standings_current.json reproduces 32 of 32. The example: BUF is 7-1 with PF 256 on 2026-11-12 and 8-1 with PF 287 on 2026-11-16.</td>
+<td data-value="1" class="wide">Pages built from the older copies show a standings table that is three days out of date next to pages built from the fresh one. A reader comparing two pages sees two different records for the same club.</td>
+<td><span class="badge neutral">Open - disclosed on the site, not repaired</span></td>
+<td data-value="1" class="wide">Regenerate the three copies from a fresh read, or print the read date in the table caption so the drift is visible. They are owned by other generators, so this session published the comparison instead of editing them.</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><a class="badge flag" href="flagged.html">UNVERIFIED</a></td>
+</tr>
+<tr id="D-F03" data-verified="true">
+<td><code>D-F03</code></td>
+<td data-value="1">The club code the league prints differs between its own pages, and joins depend on an unpublished crosswalk</td>
+<td data-value="1" class="wide">The injury page and the schedule page print AZ for Arizona; a committed capture of the same injury page normalises it to ARI. nfl.com prints LA for the Rams while the club site prints LAR. Any join across these sources silently depends on a mapping that is not published anywhere on the site.</td>
+<td data-value="1" class="wide">A join written without the crosswalk drops or duplicates one club&#x27;s rows. In this session&#x27;s comparison, 15 of 347 injury rows keyed differently purely because of AZ vs ARI; the rows themselves were identical.</td>
+<td><span class="badge neutral">needs review</span></td>
+<td data-value="1" class="wide">Publish the crosswalk (printed code, normalised code, page that prints it) beside every join.</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge warn">NEEDS REVIEW</span></td>
+</tr>
+<tr id="D-F04" data-verified="true">
+<td><code>D-F04</code></td>
+<td data-value="1">The earlier &#x27;three Lions rows have a blank game status&#x27; finding is no longer true on the official page</td>
+<td data-value="1" class="wide">The brief states that Kerby Joseph, Cade Mays and D.J. Reed are published with a blank game-status cell. Re-read on 2026-11-16, all three carry game status Out (Joseph, knee; Mays, ankle; Reed, hip). The blank cells exist in an older hand copy in data/capture/, not on the page.</td>
+<td data-value="1" class="wide">A published finding now contradicts its own source. Left uncorrected it would send a reader to &#x27;fix&#x27; a page that is already correct.</td>
+<td><span class="badge neutral">resolved</span></td>
+<td data-value="1" class="wide">No action on the source. The older finding is superseded; the stale hand copy is still in the repo and should be labelled.</td>
+<td><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league injury report">S01 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="D-F05" data-verified="true">
+<td><code>D-F05</code></td>
+<td data-value="1">The stale-depth finding about Baltimore is resolved at source</td>
+<td data-value="1" class="wide">The brief records that Baltimore still publishes Lamar Jackson and Tyler Huntley at QB after both went on injured reserve. The chart re-read on 2026-11-16 lists Jacoby Brissett, Joe Fagnano and Kedon Slovis at QB, and the dated official transactions register carries &#x27;11/06 AZ BAL Jacoby Brissett Traded&#x27;.</td>
+<td data-value="1" class="wide">The finding no longer holds. Repeating it would be a false claim about a live page.</td>
+<td><span class="badge neutral">resolved</span></td>
+<td data-value="1" class="wide">Re-check at every depth refresh rather than trusting a stored finding.</td>
+<td><span class="src"><a href="https://nextgenstats.nfl.com/" target="_blank" rel="noopener noreferrer" title="NFL Next Gen Stats — Official advanced metrics">S08 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="D-F06" data-verified="true">
+<td><code>D-F06</code></td>
+<td data-value="1">Depth data covers 3 of 32 clubs on this page, and one of the three attaches no date</td>
+<td data-value="1" class="wide">This session transcribed the Detroit, Baltimore and Green Bay charts. Green Bay prints &#x27;Unofficial, Nov. 10, 2026&#x27;; Detroit prints &#x27;Compiled by Lions Football Communications&#x27; with no date; Baltimore prints no date. The other 29 clubs are absent. The existing register covers 4 clubs, so coverage after this session is 4 of 32, not 3.</td>
+<td data-value="1" class="wide">Any deficiency metric computed from these charts describes 4 clubs. A reader could mistake a 4-club sample for a league-wide fact.</td>
+<td><span class="badge neutral">Open - disclosed on the site, not repaired</span></td>
+<td data-value="1" class="wide">Read the remaining 28 pages and record whether each is machine-readable; publish the coverage count beside every depth figure.</td>
+<td><span class="src"><a href="https://www.nfl.com/schedules" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official schedule">S06 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="D-F07" data-verified="true">
+<td><code>D-F07</code></td>
+<td data-value="1">The Texans publish their depth chart as an image and no structured source is authorised</td>
+<td data-value="1" class="wide">The brief reports that Houston&#x27;s depth page is an image. This session did not transcribe it: transcribing an image by eye is the one thing the brief forbids. No structured source for Houston depth is present in the repo.</td>
+<td data-value="1" class="wide">Houston depth is missing from every coverage count. A deficiency metric that silently excludes one club understates the league.</td>
+<td><span class="badge neutral">Open - disclosed on the site, not repaired</span></td>
+<td data-value="1" class="wide">Find an authorised structured source, or publish Houston as image-only and excluded, with the count of excluded clubs.</td>
+<td><span class="src"><a href="https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com news) — Official inactives list">S05 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="D-F08" data-verified="true">
+<td><code>D-F08</code></td>
+<td data-value="1">One club&#x27;s depth page prints the jersey number inside the name cell, so a naive parse invents a different player</td>
+<td data-value="1" class="wide">Green Bay prints cells as &#x27;9 Christian Watson&#x27;. A parse that keeps the cell text produces a name that matches no roster row. This session keeps both: &#x27;raw&#x27; holds the printed cell and &#x27;name&#x27; holds the stripped name.</td>
+<td data-value="1" class="wide">A register that stores only the printed cell cannot be joined to a roster or an injury report, and the failure is silent.</td>
+<td><span class="badge neutral">resolved</span></td>
+<td data-value="1" class="wide">Keep the raw string and the stripped name side by side in every depth table.</td>
+<td><span class="src"><a href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official club roster">S07 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="D-F09" data-verified="true">
+<td><code>D-F09</code></td>
+<td data-value="1">A committed depth register keeps rows with an empty name</td>
+<td data-value="1" class="wide">data/depth/official_register.json holds 3 rows for Green Bay whose name field is empty. They are counted as register rows, so the register&#x27;s row count overstates the number of named players.</td>
+<td data-value="1" class="wide">A coverage count built on register row count is three rows too high.</td>
+<td><span class="badge neutral">Open - disclosed on the site, not repaired</span></td>
+<td data-value="1" class="wide">Exclude or label blank-name rows in the register&#x27;s counts.</td>
+<td><span class="src"><a href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official club roster">S07 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="D-F10" data-verified="false">
+<td><code>D-F10</code></td>
+<td data-value="1">The site&#x27;s rendered landing page carries a stale games-played count</td>
+<td data-value="1" class="wide">data/model/dashboard.json, generated 2026-11-15T17:42Z, asserts games_played 137 while the official standings read a day later imply 149. The mismatch is the same one D-F01 records, but it is published on the landing page as a fact rather than as a lag.</td>
+<td data-value="1" class="wide">The front page states a season length that is 12 games short.</td>
+<td><span class="badge neutral">Open - disclosed on the site, not repaired</span></td>
+<td data-value="1" class="wide">Regenerate after the collector runs; until then print the read date next to the number.</td>
+<td><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official league standings">S02 ↗</a></span></td><td><a class="badge flag" href="flagged.html">UNVERIFIED</a></td>
+</tr>
 <tr id="F68" data-verified="true">
 <td><code>F68</code></td>
+<td data-value="1">Readiness register regeneration reverts other sessions&#x27; in-place row edits</td>
+<td data-value="1" class="wide">Running scripts/brief_07810d9f/register.py to regenerate room/data/readiness.json reverts in-place status edits made by other sessions, because register.py is the source of truth for the file and those edits were not written back through it. Demonstrated 2026-11-16: to update one row (MO-04 -&gt; Done) the file was regenerated through register.py, which changed 16 rows and reverted four rows that other sessions had set to Done/Partial (IN-20, IN-22, IN-26, IN-27 from the 1d824ec2 transactions sweep; PR-18, PR-24, PR-25 from the pre-registration and strategy-competition sessions) back to Not started. The regeneration was reverted and the MO-04 row was applied in place instead, so no other session&#x27;s row was touched.</td>
+<td data-value="1" class="wide">A session that regenerates the register to update one row silently publishes false &#x27;Not started&#x27; statuses for requirements other sessions have built, and the landing-page readiness panel would show them as unbuilt.</td>
+<td><span class="badge neutral">Open - owner decision (scripts/brief_07810d9f/register.py, room/data/readiness.json)</span></td>
+<td data-value="1" class="wide">Owner decision: fold the in-place row edits back into register.py (so the script and the published file agree), then regenerate once; or make register.py merge in-place edits instead of overwriting them. Until then, update readiness rows in place and do not regenerate the whole file from register.py.</td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/scripts/brief_07810d9f/register.py" target="_blank" rel="noopener noreferrer" title="NFL1 repository — Readiness-register generator">S49 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+</tr>
+<tr id="F69" data-verified="true">
+<td><code>F69</code></td>
 <td data-value="1">Game Book extraction — status labels absent (CAR@NO)</td>
 <td data-value="1" class="wide">The Carolina at New Orleans Game Book PDF text extraction lost the &#x27;Did Not Play&#x27; and &#x27;Not Active&#x27; label rows entirely: four unlabelled paragraphs follow the two Substitutions labels (Carolina subs, a 7-player paragraph, New Orleans subs, a 6-player paragraph), and no Not Active section for either club survived. data/gamebooks/parsed.json therefore stores blank status fields for both clubs and raises STATUS_LABELS_ABSENT; the paragraphs are recorded verbatim in the raw capture with an extraction_note.</td>
 <td data-value="1" class="wide">Carolina and New Orleans game-day status is blank in the structured data for Week 10; the availability graph and any inactives backtest miss these two clubs until the PDF is re-read another way.</td>
 <td><span class="badge neutral">Open - flagged for review</span></td>
 <td data-value="1" class="wide">Re-extract the CAR@NO Game Book PDF (or read it page by page) and bind the paragraphs to their clubs only when a printed label or column position proves the binding; until then the fields stay blank.</td>
-<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829721/gamecenter/ab789769-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S47 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+<td><span class="src"><a href="https://www.packers.com/team/depth-chart" target="_blank" rel="noopener noreferrer" title="Green Bay Packers (official club site) — Official club depth chart">S47 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="F69" data-verified="true">
-<td><code>F69</code></td>
+<tr id="F70" data-verified="true">
+<td><code>F70</code></td>
 <td data-value="1">Game Book extraction — prose status + unattributed list (KC@ATL)</td>
 <td data-value="1" class="wide">The Kansas City at Atlanta Game Book prints status sections as prose headings rather than table labels: a Did Not Play list for Kansas City, &#x27;QB 1 T.Tagovailoa&#x27; under a second Did Not Play heading, then a 7-player list (D.Deablo, Av.Terrell, A.Dalton, Z.Branch, J.Strand, R.Longerbeam, C.Williams) with NO section header, and no Kansas City Not Active section anywhere in the extraction. parsed.json keeps both status fields blank (STATUS_LABELS_ABSENT + STATUS_PROSE_FORMAT) and stores the headerless list unattributed (STATUS_UNATTRIBUTED).</td>
 <td data-value="1" class="wide">Atlanta and Kansas City game-day status is blank in the structured data; the unattributed list cannot be safely bound to a club, so it is excluded from the injury-read match.</td>
 <td><span class="badge neutral">Open - flagged for review</span></td>
 <td data-value="1" class="wide">Re-extract the KC@ATL Game Book PDF and bind the headerless list only if a printed label or column position proves which club and section it belongs to.</td>
-<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829722/gamecenter/ab582f5b-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S43 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+<td><span class="src"><a href="https://www.nfl.com/schedules/2026/by-week/week-11" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official schedule">S43 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="F70" data-verified="true">
-<td><code>F70</code></td>
+<tr id="F71" data-verified="true">
+<td><code>F71</code></td>
 <td data-value="1">Game Book extraction — starter names absent (SF@DAL)</td>
 <td data-value="1" class="wide">The San Francisco at Dallas Game Book text extraction prints every Dallas defensive starter as position + number only (for example &#x27;OLB 40&#x27; with no name) — 11 rows affected. parsed.json stores an empty name for each and raises LINEUP_NAME_BLANK; nothing is filled in from rosters or other sources.</td>
 <td data-value="1" class="wide">Dallas&#x27; defensive starters are published with blank names for Week 10; any join on player name for that unit fails closed rather than guessing.</td>
 <td><span class="badge neutral">Open - flagged for review</span></td>
 <td data-value="1" class="wide">Re-extract the SF@DAL Game Book PDF to recover the missing name column; until then the blanks stay blank.</td>
-<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829724/gamecenter/ab78a748-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S52 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829722/gamecenter/ab582f5b-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S52 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="F71" data-verified="true">
-<td><code>F71</code></td>
+<tr id="F72" data-verified="true">
+<td><code>F72</code></td>
 <td data-value="1">Game Book extraction — empty Did Not Play cell (BUF@NYJ)</td>
 <td data-value="1" class="wide">In the Buffalo at New York Jets extraction the Jets substitution list sits inside the row that begins with the Buffalo &#x27;Did Not Play&#x27; label, and after the Buffalo Did Not Play content (&#x27;T 76 B.Freeland&#x27;) the Jets Did Not Play cell carries no content at all before the Not Active row. parsed.json records the Jets Did Not Play as an empty list (label printed, nothing extracted), not as inferred.</td>
 <td data-value="1" class="wide">The Jets&#x27; dressed-but-unused list is unknown for Week 10; only their Not Active list (5 players) is published.</td>
 <td><span class="badge neutral">Open - flagged for review</span></td>
 <td data-value="1" class="wide">Re-extract the BUF@NYJ Game Book PDF; if the cell is genuinely empty on the page, close the flag with that evidence.</td>
-<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829722/gamecenter/ab789ac9-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S48 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+<td><span class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/rewards/REWARDS-RULE.md" target="_blank" rel="noopener noreferrer" title="NFL1 repository (pre-registered policy artifact) — Pre-registered reward rule (policy, not an official NFL fact)">S48 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="F72" data-verified="true">
-<td><code>F72</code></td>
+<tr id="F73" data-verified="true">
+<td><code>F73</code></td>
 <td data-value="1">Game Book extraction — truncated substitutions (PIT@CIN)</td>
 <td data-value="1" class="wide">The Pittsburgh at Cincinnati Game Book dumps the Cincinnati substitution list as a loose paragraph after the eighth scoring row and it is TRUNCATED: it ends &#x27;DT 90 K.Jenkins,&#x27; with a trailing comma, and no continuation exists in chunks 0-1 of the PDF (verified by fetching the next chunk). The two Did Not Play cells also print with labels but no content.</td>
 <td data-value="1" class="wide">The Cincinnati substitution list is incomplete in the capture; both clubs&#x27; Did Not Play lists are recorded empty-as-extracted.</td>
 <td><span class="badge neutral">Open - flagged for review</span></td>
 <td data-value="1" class="wide">Re-extract the PIT@CIN Game Book PDF (later pages carry the list tail) and append the missing entries to the raw capture with a new hash.</td>
-<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829727/gamecenter/ab78aa48-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S53 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829724/gamecenter/ab583279-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S53 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
-<tr id="F73" data-verified="true">
-<td><code>F73</code></td>
+<tr id="F74" data-verified="true">
+<td><code>F74</code></td>
 <td data-value="1">Game Book extraction — fragmented substitutions (SEA@LV)</td>
 <td data-value="1" class="wide">The Seattle at Las Vegas Game Book text extraction splits both substitution lists across a page break: a cut header fragment before the table, two cells inside the lineup table, and four loose fragment lines after Paid Attendance. The fragments are recorded verbatim and NOT reassembled, because cross-fragment team binding and continuation points are not printed unambiguously.</td>
 <td data-value="1" class="wide">Neither club&#x27;s substitution list is published in structured form for Week 10; starters, Did Not Play and Not Active for this game parsed cleanly.</td>
 <td><span class="badge neutral">Open - flagged for review</span></td>
 <td data-value="1" class="wide">Re-extract the SEA@LV Game Book PDF and reassemble the lists only where the page layout proves the continuation.</td>
-<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829726/gamecenter/ab78a43c-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S51 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
+<td><span class="src"><a href="https://static.www.nfl.com/image/upload/v1794829721/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener noreferrer" title="National Football League (NFL.com) — Official NFL Game Book (PDF)">S51 ↗</a></span></td><td><span class="badge ok">VERIFIED</span></td>
 </tr>
 </tbody></table></div>
 <h2 id="unverified">Registry of blank/unverified values</h2>
