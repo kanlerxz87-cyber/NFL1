@@ -24,6 +24,10 @@ DATA = os.path.join(ROOT, "data", "model")
 NAV = [
     ("index.html", "Overview"),
     ("pages/executive.html", "Executive Summary"),
+    # Session ce097fea-nfl1: the Decision Console is its own sub-site under console/. The
+    # entry lives here rather than as a hand-edit on index.html so that a regeneration keeps
+    # the pages reachable — tools/check_reachability.py treats an unlinked page as a failure.
+    ("console/index.html", "Decision Console"),
     ("web/dashboard.html", "Decision Dashboard"),
     ("./dashboard.html", "Governance Registers"),
     ("pages/lines.html", "My Lines"),
@@ -35,6 +39,10 @@ NAV = [
     ("pages/injuries.html", "Injuries"),
     ("pages/depth.html", "Depth & Deficiency"),
     ("pages/snapshots.html", "Injury Snapshots"),
+    # Session 1d824ec2-nfl1 (V6): the dated official transactions and reserve-list register,
+    # which is what makes "not listed on the injury report" mean "on a reserve list" rather than
+    # "available". Additive entry only; no other session's entry is moved or renamed.
+    ("reserve/index.html", "Transactions & Reserve"),
     ("pages/questions.html", "Questions"),
     ("pages/suggestions.html", "Suggestions"),
     ("pages/evidence.html", "Evidence"),
@@ -81,7 +89,9 @@ SIDEBAR = [
                      ("pages/props.html", "Player Props")]),
     ("Availability", [("pages/injuries.html", "Injuries"),
                       ("pages/depth.html", "Depth & Deficiency"),
-                      ("pages/snapshots.html", "Injury Snapshots")]),
+                      ("pages/snapshots.html", "Injury Snapshots"),
+                      # Session 1d824ec2-nfl1: dated roster events, additive.
+                      ("reserve/index.html", "Transactions & Reserve")]),
     ("Decisions", [("pages/questions.html", "Questions"),
                    ("pages/suggestions.html", "Suggestions")]),
     ("Evidence", [("pages/evidence.html", "Evidence"),

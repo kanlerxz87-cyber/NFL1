@@ -3777,3 +3777,257 @@ finds a new irregularity. The seven open PRs belong to `414a54c9`'s Z2 takeover.
 
 - **cc5a9cdd status (2026-11-16, E7 entry):** E2 venue transcription pushed `40a1c26`; E3 roof/surface register `edab9f8` (12/13 verified from official Game Books; Estadio Banorte blank+flagged); E4 NWS hourly overlay `bd08b8d` via one-off workflow (11/13 full kickoff windows; MIN@SF flagged `outside_nws_coverage`; CIN@WAS flagged `kickoff_outside_hourly_horizon` — re-run `venue/nws_snapshot.py` after 2026-11-20); E5 schedule announcement `data/session-cc5a9cdd/schedule_announcement.json` (release Thu 2026-05-14 8 p.m. ET, official nfl.com article); E6 `venue/` sub-site (index/week10/week11/schedule/flagged) + `venue/verify.py` gate, registered in `tools/build_site_all.py` STEPS, `tools/check_generators.py`, and the shared nav (`scripts/verified/normalize_nav.py` + `pipeline/gen_site.py` twin entries) so reachability holds; register rows IN-29→Partial, IN-30→Done, IN-31→Done with re-read 2026-11-16 evidence. Gates green on branch: build_site_all --check, venue/verify, tools/verify, check_reachability (exit 0), check_generators, pytest 198.
 - **cc5a9cdd cross-scope requests (for final integration):** (1) main `flagged.html` should link `venue/flagged.html` for venue/weather flag detail; (2) **base-commit drift inherited from `32a8fff`**: `scripts/brief_07810d9f/register.py` text disagrees with published `room/data/readiness.json` for PR-06, PR-07, PR-15, PR-18, PR-24, PR-25, IN-24, IN-32, MO-01, SI-09 — I published only my IN-29/30/31 changes and restored all foreign rows to their previously published state; owning session/integration should reconcile those ten rows deliberately; (3) `data/readiness.json` (Y9/2b927826) regenerates with timestamp churn on every full build — left uncommitted here.
+
+## Task board — session `bf0e6e5f-nfl1` (branch `arena/bf0e6e5f-nfl1`, base `32a8fff` on `main`, claimed 2026-11-16 UTC)
+
+Board read before this claim. Open PRs and claims from other sessions do not touch the files below.
+Scope is deliberately small: this session can verify against official pages, not rebuild the whole brief.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| Z1 | Read the nfl.com Terms and Conditions in full from the official page and record the clauses that govern systematic retrieval and publication (verbatim quotes with section numbers and link). Settles the factual basis of open flag F51. | done | `bf0e6e5f` | `data/legal/terms_2026-11-16.json` (new) | retrieval is a fact to record; no policy decision is taken here |
+| Z2 | Verify the stale QB depth rows (Baltimore: Lamar Jackson, Tyler Huntley) against the official nfl.com transaction/news record for IR and trade events (VR-17, VR-26). Record each event with its official link; do not edit depth data. | done | `bf0e6e5f` | `data/transactions/official_events_2026.json` (new) | append flags only via `data/flags.json` if a new irregularity is found |
+| Z3 | Run the existing verification gates on this branch before any change to shared output; record pass/fail. | done | `bf0e6e5f` | `COORDINATION.md` | baseline for the PR |
+| Z4 | Integration: PR `arena/bf0e6e5f-nfl1` → `main`, merge with `--merge` without waiting, confirm Pages deploy, record here | unclaimed | `bf0e6e5f` | `COORDINATION.md` | after gates green |
+
+### Log — `bf0e6e5f-nfl1` (2026-11-16, UTC)
+
+**Sources read this session (fetched 2026-11-16):**
+- S35 — NFL.com Terms and Conditions, <https://www.nfl.com/legal/terms/> (page "Updated: May 16, 2024"; all 9 chunks read). Verbatim clauses in `data/legal/terms_2026-11-16.json`.
+- S36 — NFL.com 2026 transactions, November: trades <https://www.nfl.com/transactions/league/trades/2026/11>, reserve list <https://www.nfl.com/transactions/league/reserve-list/2026/11>, signings <https://www.nfl.com/transactions/league/signings/2026/11>.
+- Not registered (see F62) — Baltimore Ravens official X post, 2026-11-05, <https://x.com/Ravens/status/2118449515959132516>.
+- Context only, not relied on for any fact: Yahoo Sports, NFLTradeRumors, Baltimore Sun, ClutchPoints, Sporting News, BVM Sports reports of the 11/05 moves.
+
+**Z1 — terms record (done).** Read in full. Confirmed F51 quotes (ss.1.1, 1.3). Found four clauses not in F51, raised as **F60**: s.8 (deep links need written permission beyond the home page), s.11(f) (no robots/agents to harvest data for commercial purposes), s.12 (no use of the Services "to gamble or wager on the result of any NFL game"), s.2 (terms may change at any time). Nothing was decided on whether the project's use breaches these. That needs counsel. No scraper or published page was changed.
+
+**Z2 — official event record (done, with a gap).** Baltimore QB events:
+- 2026-11-05: Ravens' official post says it "signed QB Austin Reed to the 53-man roster and placed QBs Lamar Jackson and Tyler Huntley on injured reserve" (S37, not registered).
+- 2026-11-06: NFL trades page lists Jacoby Brissett, Cardinals to Ravens, "Traded" (S36, registered).
+- The NFL reserve-list and signings pages for November **do not contain the 11/05 entries** (they begin at 11/07 and 11/11 respectively). This is **F61**.
+- The depth rows (VR-17, VR-26) were not re-read in this session. The events establish that a QB depth chart showing Jackson and Huntley as active from 11/05 is stale. This is a stale-row finding, not a confirmed depth value.
+
+**Z3 — gates on this branch (all pass after the changes).** `tools/verify.py` PASS (2,111 table rows, each with an official source link, 0 broken internal links). `tools/verify_combined.py` PASS (2,899 local links, 0 broken). `tools/check_generators.py` PASS. `tools/check_reachability.py` exit 0. `tools/check_scrape_drift.py` OK (347 rows, 0 designation differences; 1 club-code note, CAP-05). `tools/audit_official.py` exit 0. `tools/check_preregistration_d4027.py` PASS. `tools/check_committed_site.py` PASS. `prereg/verify.py` PASS (14 checks). `pytest tests/` 198 passed. `tools/build_site_all.py` rebuilt 20 verified-lab pages plus the root pages.
+
+**Gate conflict found and left in place — F62.** `tools/verify.py` allows only registered official domains. The Ravens' X post is the only primary record for the 11/05 moves and is not on that list, so it is **not** in `data/sources.json`. The verifier was not weakened. The event is kept in `data/transactions/official_events_2026.json` with a note. The owner must choose whether team-account posts count as official.
+
+**Irregularities raised (all "needs review", non-blocking, on the Flagged for Review page):** F60 (terms clauses beyond F51, incl. s.12 wagering), F61 (NFL transaction log omits 11/05 IR and signing entries), F62 (verifier gate and team social posts).
+
+**Verified vs. not verified.** Verified against official pages: the terms text (S35), the 11/06 Brissett trade (S36), the absence of 11/05 entries on the NFL pages (S36). The Ravens post (S37) is an official statement but not a registered source. Not verified: the content of Baltimore's depth chart, and any other club's depth rows.
+
+**Not done in this session (honest list, so nothing is implied):** the brief's remaining items (about 70 requirements) are not addressed here. In particular: the depth-chart register and Texans/Packers parsing, the injury-designation reliability study, the snapshot ledger and alerting changes, the decision-readiness table changes, the 2026 Week 11 forecast, and the leaderboard changes. Each of these needs its own claim. Other sessions' claims are unchanged.
+
+**Z4 — integration:** PR and merge recorded below after the merge.
+
+**CI fixes made during this PR (logged):**
+1. First push failed two CI jobs. (a) `build`: "committed pages must equal the generated pages", because the rebuilt root pages (`verification.html`, `integration.html`) had not been committed after the final gate run. Fixed by rebuilding and committing those two pages. (b) `verify`: "Independently recompute every figure on the dashboard" failed with `line row not numeric: ['TB @ DET2026-11-22', '2.4', 'blank', 'blank', 'blank', 'blank']`. This also fails on `main` (checked in a worktree of `origin/main`). The cause is the parser: the market cells are blank because the data has no verified market line for that game (`market_home_line: null`), which is the correct behaviour under the blank-not-inferred rule. Fixed in `tools/verify_dashboard.py`: blank market cells are accepted only when the data has no market line, and a number in such a row still fails. Not weakened for any other row. 453 assertions pass; `check_freshness` passes.
+2. After these commits, PR #89 checks: build pass, verify pass (x2).
+
+**Integration result (Z4) — `bf0e6e5f-nfl1`, 2026-11-16 UTC**
+
+| Item | Result |
+|---|---|
+| PR | [#89](https://github.com/kanlerxz87-cyber/NFL1/pull/89) `arena/bf0e6e5f-nfl1` → `main`, merged 2026-11-16T14:42:08Z with `--merge`, no approval, no auto-merge. Merge commit `0ba7c9d`. |
+| Checks on the final PR head | build pass, verify pass (x2) |
+| Checks on `0ba7c9d` (main) | Verify decision dashboard, Verify NFL Decision Lab site build, Verify NFL1 site, pages build and deployment — all success |
+| Live check | <https://kanlerxz87-cyber.github.io/NFL1/flagged.html?v=0ba7c9d> shows 101 flagged items, matching the merged flags file (F60–F62 included) |
+| Still open | F51, F60 (terms — owner/counsel decision), F61 (NFL log gap), F62 (verifier allow-list for team posts). None blocks; all need review. |
+
+Z1–Z4 are done. Items in the brief outside Z1–Z4 are unclaimed and unchanged.
+
+---
+
+## Session `ce097fea-nfl1` — claims (branch `arena/ce097fea-nfl1`, base `32a8fffe19c6b474a142f0accbc93474cf122908`)
+
+Claimed before any edit on this branch. Scope is **additive**; no file owned by another session is
+rewritten. No earlier claim on this board covers these paths.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| C1 | Fresh official capture (2026-11-16): nfl.com standings (32 clubs), Week 10 schedule with results, Week 10 injury report (all clubs, all rows) | in progress | `ce097fea` | `data/session-ce097fea/` | capture is fetch-tool-rendered text, flagged; sha256 recorded |
+| C2 | Line-by-line re-verification of the committed 2026-11-15 injury capture (347 rows) against today's official page; publish the delta | in progress | `ce097fea` | `data/session-ce097fea/`, `console/` | |
+| C3 | Line-by-line repo review: every committed dataset checked against the official page it claims to come from; every irregularity flagged with the official link | in progress | `ce097fea` | `docs/audit-ce097fea.md`, `data/session-ce097fea/flags.json` | |
+| C4 | New public sub-site `console/`: clean landing page + subpages by category (executive summary, readiness, questions, suggestions & choose-a-path, strategy lab, injuries & depth, data, verification, flagged) | in progress | `ce097fea` | `console/**` (new directory) | additive; no existing page is deleted or rewritten |
+| C5 | Decision-readiness + open-questions + suggestions-with-path register covering every line of the brief | in progress | `ce097fea` | `console/data/*.json` | |
+| C6 | `console/verify.py`: every table row must carry an https source; unverifiable cells must render blank and flagged | in progress | `ce097fea` | `console/verify.py` | |
+| C7 | PR → merge → confirm Pages deploy → record here | not started | `ce097fea` | `COORDINATION.md` | |
+
+### Log — `ce097fea-nfl1` (2026-11-16, UTC)
+
+**Claim.** Recorded in the claims table above before any edit; pushed in `847433e`.
+
+**Sources (official, fetched this session).**
+`https://www.nfl.com/standings/league/2026/REG` (chunks 0-1),
+`https://www.nfl.com/standings/conference/2026/REG` (chunk 0 — needed for the eight clubs the league
+table truncated at that chunk boundary), `https://www.nfl.com/schedules/2026/REG11` (chunks 0-1; the
+site serves Week 10 as the current week), `https://www.nfl.com/injuries/league/2026/reg10` (chunks 0-7),
+`https://www.nfl.com/injuries/league/2026/reg11` (chunk 0 — confirmed it serves the Week 10 page).
+
+**C1 — fresh capture.** `data/session-ce097fea/capture/injury_rows_2026-11-16.tsv` (347 rows, 28 clubs,
+14 fixtures), `games_reg10_2026-11-16.tsv` (14 fixtures with results and a per-game official URL), and
+`manifest_2026-11-16.json` (provenance, counts, sha256). `data/session-ce097fea/official_standings_2026-11-16.json`
+holds all 32 clubs.
+
+**C2 — line-by-line verification of the committed capture.** Re-read the whole injury page and compared
+row by row with `data/capture/nflcom_injuries_reg10_2026-11-15_rows.tsv`: 347 against 347, 0 rows on
+only one side, 0 field differences, and the sha256 of the new rows file equals the hash already in
+`data/capture/manifest.json` (`9fe77d36…cd5f`). The 2026-11-15 capture is faithful and the page did not
+move in 24 hours. Delta in `data/session-ce097fea/injury_capture_delta.json`.
+
+**C3 — repo review.** `docs/audit-ce097fea.md`. Headline result: recomputing the 2026 standings from
+every game result in `data/s9cb/games.csv` plus the 12 Week-10 finals transcribed from the official
+schedule page reproduces **32 of 32 clubs** cell by cell (W/L/T/PF/PA). From the feed alone only 8 of 32
+reconcile, because the feed was fetched 2026-11-15 13:21Z, before the Sunday kickoffs — recorded as
+flag CE-01, not an error in either source. Reproduce with `python3 data/session-ce097fea/reconcile.py`.
+The official table is internally consistent (W=L=148, PF=PA=6,880). Lions designations re-confirmed:
+Kerby Joseph, Cade Mays, D.J. Reed all Out. Myles Garrett under the Rams is the page's own listing,
+not a scrape error.
+
+**C4 — the `console/` sub-site.** New directory, additive; no existing page deleted or rewritten.
+`console/build.py` writes 10 pages from committed data only; `console/verify.py` fails the build on a
+broken link, an empty cell, or a table row with no https source, no labelled blank and no stated
+exemption (665 rows checked, all pass). The one durable fix that could not be made here: the nav entry
+on `index.html` was hand-added, because `pipeline/gen_site.py` is owned by another session.
+
+> **Request for the owner of `pipeline/gen_site.py`.** Please add `("console/index.html",
+> "Decision Console")` to the nav list so the entry survives a regeneration. It is currently a
+> hand-edit on the generated `index.html` and the next regeneration will drop it. No other file of
+> yours was touched.
+
+**C5 — registers.** `console/data/requirements.json` (71 rows, one per line of the brief, with the gate
+that blocks it and the number that clears it), `questions.json` (22 questions split into what we have
+and what we do not), `suggestions.json` (20 suggestions, each with two or three paths, cost, risk and a
+recommended path), `decisions.json` (empty — a reviewer records a choice there before anything is
+built, and `console/verify.py` fails if a recorded path is not one of the published options),
+`flags.json` (11 flags, each with the official link that settles it).
+
+**Deviations.** Branch name is Arena-fixed (`arena/ce097fea-nfl1`), not `session-<id>/<task>`; scopes
+were kept non-overlapping by file instead. The seven open pull requests from other sessions were not
+merged — recorded as flag CE-08 rather than guessed at.
+
+### Addendum — `ce097fea-nfl1`: the reserve list and the transactions pages
+
+While checking flag CE-notes about a player absent from the injury report, this session found two
+official pages that no session had captured.
+
+**Reserve list.** `https://www.nfl.com/transactions/league/reserve-list/2026/11` — the league publishes a
+dated reserve list by month. Captured 2026-11-16: 25 players across 17 clubs, 2026-11-07 to 2026-11-14,
+stored in `data/session-ce097fea/capture/reserve_list_nov2026_2026-11-16.tsv` with the cross-check in
+`reserve_list_2026-11-16.json`. **15 of the 25 do not appear in the Week 10 injury report at all**, and
+the brief's own example is on the list: Malik Willis, Miami, Reserve/Injured 2026-11-10. The 10 that do
+appear carry game status Out (except Puka Nacua, who carries no designation and was placed on reserve on
+11/12). Requirement B64 moves from *not started* to *met* for the November ledger.
+
+**Transactions index.** `https://www.nfl.com/transactions/` publishes six monthly ledgers — trades,
+signings, reserve list, waivers, terminations, other. This is the official source a depth-row staleness
+rule needs, which is what B34 and B46 have been blocked on. Both move from *not started* to *partial*;
+capturing all six ledgers is logged as suggestion S08.
+
+Also noted for whoever owns the flag register: session `bf0e6e5f-nfl1` merged into `main` during this
+session (`data/legal/terms_2026-11-16.json` — the nfl.com terms read verbatim, raising F60 — and
+`data/transactions/official_events_2026.json`, the Baltimore events behind the stale depth rows, raising
+F61 and F62). This session's registers were updated to reflect that work rather than duplicate it.
+
+**Merge record.** PR #93 (`arena/ce097fea-nfl1` into `main`).
+
+
+## Task board — session `1d824ec2-nfl1` (ACTIVE; claimed 2026-11-16T14:35Z, branch `arena/1d824ec2-nfl1`, base `32a8fff` on `main`)
+
+Purpose: close the three readiness rows that are **Not started** and can be closed with an
+official source, using the one official feed that no previous session captured — the league's own
+dated transactions register (`nfl.com/transactions/`, which carries a **Reserve List** category).
+`IN-27` (reserve list so 'not listed' never means 'available'), `IN-20` (roster turnover as a
+first-class data event) and `IN-22` (flag stale depth rows against the official transactions log)
+all need the same capture, and `IN-26` (32-team roster/IR sweep) needs it to be trusted.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| V1 | Claim, push | done | `1d824ec2` | `COORDINATION.md` | this block |
+| V2 | Verbatim dated capture of the official transactions register, per type × month, with fetch time, URL and sha256; parser to flat rows; per-row official link | in progress | `1d824ec2` | `data/reserve/**`, `tools/build_reserve_register.py` | coverage published per type × month; uncaptured types stated as gaps, not silently missing |
+| V3 | Reserve state per club: latest dated event per player, so a player absent from the weekly injury report is resolved to *on reserve* or *unexplained* — never to *available* | in progress | `1d824ec2` | `data/reserve/**` | joined to the CI official Week 10 capture `data/model/official_injuries.json` (read-only) |
+| V4 | Depth-staleness check against the transactions log: name every depth or report row that still lists a player the official log shows traded, released or IR'd after the row's date | in progress | `1d824ec2` | `tools/check_depth_staleness_1d824ec2.py` | reads `data/depth/official_register.json` and `data/depth_chart.json` read-only; no other session's file is edited |
+| V5 | Pinned gate + unit test: expected row counts per capture, required fields, date format, source link on every row, committed outputs reproduce | in progress | `1d824ec2` | `tools/check_reserve_register.py`, `tests/test_reserve_register.py` | same drift-alarm rule the brief asks for on every scraper |
+| V6 | Published sub-site `reserve/index.html`: every row in a table with its official link, coverage table, and what it unblocks | in progress | `1d824ec2` | `reserve/**` | 2 additive nav entries (logged below); no other page is rewritten |
+| V7 | Readiness register: IN-20, IN-22, IN-26, IN-27 updated with the file-and-count evidence that clears each gate; counts recomputed | pending | `1d824ec2` | `room/data/readiness.json` (specific rows only) | `tools/build_readiness.py` writes `data/readiness.json`, not this file, and `scripts/brief_07810d9f/register.py` is not in the build (per `d4027f66`), so an in-place row edit is not clobbered; confirmed with `tools/check_reproducible.py` |
+| V8 | New irregularities, questions and suggestions from the sweep — append-only | pending | `1d824ec2` | `data/flags.json`, `data/questions.json`, `data/suggestions.json` | includes the availability-layer week mismatch found below |
+| V9 | Integration: canonical build, all gates, PR → merge → Pages confirm | pending | `1d824ec2` | generated pages, `COORDINATION.md` | |
+
+### Irregularity found while surveying (to publish on Flagged for Review, V8)
+
+`data/model/availability.json` — the per-team attrition/availability layer the site renders — is
+built on `week: 6` from the mirrored feed with its own warning "the official current-week report
+could not be scraped", while `data/model/official_injuries.json` (same CI job, 117 minutes
+earlier) holds the official **Week 10** report: 347 rows, 28 club tables. Consequence:
+`clubs_without_report = [CIN, DET, MIA, MIN]` is asserted from a Week 6 read, and the official
+Week 10 page lists 9, 9, 11 and 13 rows for those four clubs. Verification for the flag:
+<https://www.nfl.com/injuries/league/2026/reg10> read 2026-11-16 (Lions table: Branch, Goff,
+Joseph, Mays, Reed, Saylors, St. Brown, Vaki, Wonnum = 9 rows). Reported, not silently patched:
+`pipeline/build_all.py` and `analysis/injuries.py` belong to the pipeline owner — a change
+request is logged in this record instead of an edit.
+
+### Overlap check with the 7 open PRs (all CONFLICTING against `main`, none re-based by their owners)
+
+`#77` owns `data/verified/injuries_week10.csv`, `no_injuries_week10.csv`, `injury_report_2026_week10.tsv`,
+`data/depth_parsed/**`, `pages/availability.html`. `#80` owns `data/model/availability.json` and the
+`ledger/` pages. `#47` owns `data/backup-register/**` (rosters + IR via a scraper of the club roster page).
+None of them touches `data/reserve/**`, `tools/build_reserve_register.py`,
+`tools/check_reserve_register.py`, `tools/check_depth_staleness_1d824ec2.py` or `reserve/**`.
+`#47` answers a nearby question from a different direction (club roster pages); this sweep uses the
+league's own dated transactions register instead, and does not edit their files. The shared nav
+files get **additive** entries only, and `data/flags.json` / `data/questions.json` /
+`data/suggestions.json` are appended, never reordered.
+
+_This claim is committed and pushed before any other file is touched, per the brief._
+
+
+---
+
+## Result log — session `1d824ec2-nfl1` (2026-11-16, transactions/reserve register)
+
+Claim block V1–V9 above. What actually landed, and the numbers as published.
+
+| ID | Outcome | Evidence a reader can check |
+|---|---|---|
+| V2 | `pipeline/collect_transactions.py` captures the six dated categories × four season months from the official register into append-only hashed captures; derives the flat row table, per-club reserve state, coverage and the report-vs-reserve join. | `data/reserve/captures/` (24 files), `data/reserve/{transactions.json,reserve_state.json,coverage.json,report_vs_reserve.json,manifest.json,heartbeat.jsonl,alerts.jsonl}` |
+| V3 | `tools/check_depth_staleness_1d824ec2.py` compares every player name in the depth/availability artifacts with the dated register and separates *contradicts a current claim* from *a dated snapshot, superseded*. Findings deduped: one artifact printing a name twice is one finding. | `data/reserve/depth_staleness.json`: 29 findings, 12 current-claim, 17 superseded, 12 clubs (CAR CLE DAL GB HOU IND LA NE NO SEA SF TEN), 663 artifact names compared |
+| V4 | `tools/check_reserve_register.py` gate: hash replay of every capture, **minimum** row-count pins for 24 pages (the derived table is a union, so counts may grow and may not shrink), required fields, date inside its own month, an `nfl.com` **URL** per row (a source key is not a link), no placeholder text, and a rule that the published page must disclose the printed cap. | `reserve register gate: 0 failure(s), 2 note(s), 24 pinned page(s)` |
+| V5 | `.github/workflows/transactions-sweep.yml` (hourly, `23 * * * *`) runs the sweep on Actions — the sandbox cannot reach nfl.com — commits captures append-only, renders the pages, then turns red on any fetch/parse/pin/freshness failure. `verify.yml` gained a conditional reserve gate step. | first run captured 448 rows at 2026-11-16T14:56Z |
+| V6 | `reserve/index.html` + `reserve/rows.html` published, built only from `data/reserve/`; nav entries added to `pipeline/gen_site.py` NAV + SIDEBAR and `scripts/verified/normalize_nav.py` CANON (additive lines only); step registered in `tools/build_site_all.py`; ownership registered in `tools/check_generators.py`. | 101 rows on the sub-site, every row linked; `check_reachability.py` problems: 0 |
+| V7 | `room/data/readiness.json` rows IN-20, IN-22, IN-26 updated to Partial and IN-27 to Done with the numbers that clear each gate. **No other row touched** (diff = 36 insertions / 31 deletions across those four rows + meta). | `git show` of that file; `check_site.py` PASS |
+| V8 | Flags F63–F66, questions Q29–Q30, suggestions S31–S32 appended; sources S37–S40 registered. All append-only, each entry citing a registered official source id. | `flagged.html` carries F63–F66; `data/{flags,questions,suggestions}.json` diffs are additions only |
+
+### The finding that matters for pricing
+
+The weekly injury report and the reserve list are two different records, and the model has been reading only the first:
+
+* official Week-10 report: **347 rows / 28 clubs** (`data/model/official_injuries.json`);
+* open reserve designations captured from the dated register on 2026-11-16: **100 players**;
+* named on a reserve list and on **no** report row: **83**; on both: **17**.
+
+So a report-only availability set treats 83 named players as available. Per club the published page shows the two records side by side (e.g. Miami 11 report rows + 1 on a reserve list = 12 unavailable). This is the number that closes IN-27.
+
+### Source limitation, verified rather than worked around
+
+The official transactions page prints at most **25 rows per category-month, newest first**, and there is **no deeper window** — `?page=2` returns the same 25 rows, and a per-day URL returns 404 (both read 2026-11-16, registered as S40). Consequences, all disclosed on the page rather than smoothed over:
+
+* a month is complete only when the oldest printed row reaches the 1st — 15 of 24 pages were capped on 2026-11-16, 15 of them mid-month;
+* the register is therefore the **union of every read**, so a row cannot vanish when the window slides (11/16 → 11/23 keeps days 1–13);
+* counts taken from a **closed** capped month are a **floor, not a total**, and re-reading cannot fix them: only another official publication can (F66, Q29, S31).
+
+### Shared-file etiquette
+
+`pipeline/gen_site.py`, `scripts/verified/normalize_nav.py`, `tools/build_site_all.py`, `tools/check_generators.py`, `.github/workflows/verify.yml` are all touched by open PRs (#77, #80, #47 among them). Every edit here is **pure addition of new lines** (one nav entry, one build step, one path token in the reproducibility diff, two ownership entries, one workflow step); no existing line was edited, reordered or renamed, so a conflict is textual and trivial. Regenerated output (`index.html`, `pages/*`, `web/*`, `dashboard/*`, `docs/*`, `data/verification_report.json`, `data/decision_room/*`) is committed as build output, not hand-edited.
+
+Tests: `python3 -m unittest discover -s tests -q` → **Ran 227 tests, OK** (this session added `tests/test_reserve_register.py` 21 + `tests/test_reserve_cap.py` 8). All gates green on the branch: `build_site_all.py`, `verify.py` (2111 rows, every one sourced), `check_reachability.py` (problems 0), `check_site.py`, `check_generators.py`, `validate_verified.py`, `check_reserve_register.py`.
+
+### Merge record — session `1d824ec2-nfl1` (2026-11-16T15:22:35Z)
+
+PR #96 merged into `main` as `be8b47d`. CI on the merge commit: `Verify NFL1 site`, `Verify NFL source provenance`, `Verify decision dashboard`, `Verify NFL Decision Lab site build`, `Decision Room build and gate`, `pages-build-deployment` and **`Collect official transactions and reserve lists` (this session's sweep) all pass**; the `Collect NFL data and rebuild model outputs` job failed on a pre-existing freshness assertion, recorded as **F67** rather than papered over.
+
+Live: <https://kanlerxz87-cyber.github.io/NFL1/reserve/> (`index.html` + `rows.html`), reachable from the landing page nav (`Transactions & Reserve`).
+
+Two things the merge itself produced, both kept:
+
+1. A **second real capture** (15:15Z, 24 pages) landed as 24 byte-identical duplicates because `write_capture`'s dedupe glob was anchored at the start of a `_<category>_<month>_` filename that actually begins with a timestamp. Fixed (`*_<category>_<month>_*.json`, compared against the newest readable capture) and pinned by two tests; the duplicate captures were **kept** — each is a real dated read, and the derived union is the same 448 rows either way, verified by re-derivation. The next sweep proved the fix: it re-read all 24 pages, wrote a heartbeat line each, and stored **no** new capture.
+2. The rebase onto `main` dropped this session's board blocks once (a union resolution that deduplicated by line content ate 27 blank/table lines). Rebuilt as a true pure append and asserted `base board preserved byte-for-byte`.
+
+`reserve register gate: 0 failure(s), 2 note(s), 24 pinned page(s)`; `python3 -m unittest discover -s tests -q` → **229 tests OK**.

@@ -1,0 +1,36 @@
+{
+ "captured_at_utc": "2026-11-16T14:56:33Z",
+ "parser": "collect_transactions/1.0",
+ "category": "trades",
+ "month": "2026-09",
+ "url": "https://www.nfl.com/transactions/league/trades/2026/9",
+ "fetched_at_utc": "2026-11-16T14:56:33Z",
+ "status": "ok",
+ "http_status": 200,
+ "final_url": "https://www.nfl.com/transactions/league/trades/2026/9",
+ "raw_bytes": 204425,
+ "raw_sha256": "3dcb911e0ae30c76db082e77eb7db0535c5f288081940cc8a0d89b949a9b6ddd",
+ "canonical_sha256": "e99c44f524d7b75365a5b64f36e7df460f67b85cf817b2b266cbfa2dab4f779a",
+ "rows": 1,
+ "tables": 1,
+ "headers": [
+  "from|to|date|name|position|transaction"
+ ],
+ "flags": [],
+ "row_list": [
+  {
+   "date": "2026-09-28",
+   "date_printed": "09/28",
+   "category": "trades",
+   "month": "2026-09",
+   "club_from": "MIN",
+   "club_to": "NYG",
+   "player": "J.J. McCarthy",
+   "player_url": "https://www.nfl.com/players/j-j-mccarthy/",
+   "position_printed": null,
+   "transaction": "Traded",
+   "source_url": "https://www.nfl.com/transactions/league/trades/2026/9"
+  }
+ ],
+ "_file": "data/reserve/captures/20261116T145635Z_trades_2026-09_e99c44f524d7.json"
+}

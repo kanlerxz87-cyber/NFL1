@@ -1,0 +1,52 @@
+{
+  "task": "Z2 (session bf0e6e5f-nfl1)",
+  "purpose": "Official record of the Baltimore QB events behind the stale depth rows (VR-17, VR-26). Records events and their sources only. No depth row is edited here.",
+  "retrieved": "2026-11-16",
+  "events": [
+    {
+      "id": "Z2-01",
+      "date": "2026-11-05",
+      "club": "BAL",
+      "event": "Lamar Jackson and Tyler Huntley placed on injured reserve; QB Austin Reed signed to the 53-man roster",
+      "primary_source": {
+        "publisher": "Baltimore Ravens (official X account @Ravens)",
+        "url": "https://x.com/Ravens/status/2118449515959132516",
+        "quoted_text": "We have signed QB Austin Reed to the 53-man roster and placed QBs Lamar Jackson and Tyler Huntley on injured reserve.",
+        "created_at_utc": "2026-11-05T21:04:58Z",
+        "retrieved": "2026-11-16",
+        "source_id": null,
+        "source_status": "Not in data/sources.json: tools/verify.py accepts registered official domains only. See flag F62."
+      },
+      "independent_reports_not_relied_on_for_the_fact": [
+        "Baltimore Sun, 2026-11-05 (https://www.baltimoresun.com/2026/11/05/ravens-lamar-jackson-injured-reserve/) — reports the same placements; secondary",
+        "Ian Rapoport (NFL Network) reported on X that Austin Reed would be the backup and Jackson and Huntley were on IR (secondary; per the ClutchPoints report of 2026-11-05)"
+      ],
+      "nfl_transactions_log": {
+        "checked": "2026-11-16",
+        "result": "NOT FOUND. The NFL reserve-list page for November 2026 (https://www.nfl.com/transactions/league/reserve-list/2026/11) lists entries from 11/14 back to 11/07 and then ends (hasMore false). The signings page (https://www.nfl.com/transactions/league/signings/2026/11) lists entries from 11/14 back to 11/11 and then ends. Neither page has a 11/05 entry for BAL. This is an irregularity (F61)."
+      }
+    },
+    {
+      "id": "Z2-02",
+      "date": "2026-11-06",
+      "club": "BAL",
+      "event": "Jacoby Brissett traded from Arizona Cardinals to Baltimore Ravens",
+      "primary_source": {
+        "publisher": "National Football League (NFL.com transactions)",
+        "url": "https://www.nfl.com/transactions/league/trades/2026/11",
+        "retrieved": "2026-11-16",
+        "source_id": "S36",
+        "table_row": "11/06 | Jacoby Brissett | Traded (from Cardinals to Ravens) (From: Cardinals; To: Ravens; Date 11/06; Name Jacoby Brissett; Transaction: Traded)"
+      },
+      "note": "The NFL trades page lists this as 11/06 and marks it Traded. The Ravens' own post (Z2-01) does not mention Brissett."
+    }
+  ],
+  "depth_rows_affected": {
+    "reference": "VR-17, VR-26; VQ-07 (COORDINATION.md, earlier session)",
+    "status": "Not re-verified here. The Ravens depth chart page was not read in this session. The events above show that a QB depth chart listing Jackson and Huntley as active starters is stale for the period from 2026-11-05. This is a stale-row finding, not a confirmed depth value."
+  },
+  "limits": [
+    "Only the November 2026 NFL transaction pages were read. Earlier months were not checked.",
+    "The Ravens X post carries the official team wording. The transaction page for 11/05 was not available, so the IR fact rests on the team's own post."
+  ]
+}

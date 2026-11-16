@@ -62,6 +62,22 @@ jobs:
         run: |
           python3 -m unittest tests.test_depth_register -v
           python3 tools/check_depth_register.py
+      # Session 1d824ec2-nfl1 (V5). Additive and conditional: the transactions / reserve-list
+      # register is captured by the transactions-sweep job, so on a branch where that has never
+      # run there is nothing to gate. When the store exists, the gate is hard: capture hashes,
+      # row-count pins, required fields, a date inside its own month, an nfl.com link on every
+      # row, and no placeholder cell on the published pages. Its unit tests are pinned to two
+      # rows transcribed verbatim from the official register.
+      - name: Transactions and reserve-list register gate
+        if: ${{ hashFiles('data/reserve/captures/*.json') != '' }}
+        run: |
+          python3 -m unittest tests.test_reserve_register -v
+          python3 pipeline/collect_transactions.py verify
+          python3 tools/check_depth_staleness_1d824ec2.py --quiet
+          git diff --exit-code -- data/reserve/depth_staleness.json \
+            || { echo "FAILED: data/reserve/depth_staleness.json is not what the register implies"; exit 1; }
+          python3 tools/build_reserve_site.py --check
+          python3 tools/check_reserve_register.py
       - name: Strength study unit tests
         run: python3 -m unittest tests.test_strength -v
       - name: Rebuild the strength sub-site from its data layer

@@ -40,6 +40,8 @@ GENERATORS = {
     # Session cc5a9cdd-nfl1: the Venues & Weather sub-site. write() takes bare
     # filenames; the generator writes them under venue/ (prefix added in claims()).
     "venue/build.py": [r'write\(\s*"([^"/]+\.html)"'],
+    # Session 1d824ec2-nfl1: the transactions/reserve sub-site. Bare filenames under reserve/.
+    "tools/build_reserve_site.py": [r'OUT_DIR / "([^"/]+\.html)"'],
 }
 
 # explicit, documented ownership. Anything not here is reported, not assumed.
@@ -66,6 +68,9 @@ KNOWN_OWNERS = {
     "pages/standings.html": "tools/build.py",
     "pages/data-tables.html": "tools/build.py",
     # Session 0c5215c1-nfl1: pre-registration sub-site (prereg/build.py registered above).
+    # Session 1d824ec2-nfl1: transactions and reserve-list sub-site.
+    "reserve/index.html": "tools/build_reserve_site.py",
+    "reserve/rows.html": "tools/build_reserve_site.py",
     "prereg/registry.html": "prereg/build.py",
     "prereg/forecasts.html": "prereg/build.py",
     "prereg/archive.html": "prereg/build.py",
@@ -111,6 +116,8 @@ def claims():
         if gen == "venue/build.py":
             # write() takes bare filenames; the generator writes them under venue/
             found = {"venue/" + f for f in found}
+        if gen == "tools/build_reserve_site.py":
+            found = {"reserve/" + f for f in found}
         for f in found:
             out.setdefault(f, set()).add(gen)
     return out

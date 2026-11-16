@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Suggestions &amp; choose a path — NFL Decision Console</title>
+<link rel="stylesheet" href="style.css">
+</head><body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="index.html"><span class="dot"></span> NFL Decision Console</a>
+  <span class="stamp">as of 2026-11-16 · built 2026-11-16 15:06 UTC · session ce097fea-nfl1</span>
+</header>
+<div class="shell">
+<nav class="sidebar" aria-label="Sections"><div class="navgroup"><h3>Overview</h3><ul><li><a href="index.html">Overview</a></li><li><a href="executive-summary.html">Executive summary</a></li></ul></div><div class="navgroup"><h3>Governance</h3><ul><li><a href="readiness.html">Decision readiness</a></li><li><a href="questions.html">Open questions</a></li><li><a href="suggestions.html" class=active>Suggestions &amp; choose a path</a></li><li><a href="verification.html">Verification</a></li><li><a href="flagged.html">Flagged for review</a></li></ul></div><div class="navgroup"><h3>Model &amp; strategy</h3><ul><li><a href="strategy-lab.html">Strategy lab</a></li></ul></div><div class="navgroup"><h3>Official data</h3><ul><li><a href="injuries.html">Injuries &amp; depth</a></li><li><a href="data.html">Official data</a></li></ul></div>
+  <div class="navgroup"><h3>Repository</h3><ul>
+    <li><a href="https://kanlerxz87-cyber.github.io/NFL1/">Main site</a></li>
+    <li><a href="https://github.com/kanlerxz87-cyber/NFL1">Source &amp; history</a></li>
+    <li><a href="flagged.html">Flagged for review</a></li>
+  </ul></div>
+</nav>
+<main id="main">
+<h1>Suggestions &amp; choose a path</h1>
+<p class="lead">Improvements to the site and to decision making. Each carries the paths a reviewer can pick from; nothing is built until a path is chosen here.</p>
+
+<div class="callout">
+<h2>Review and choose a path — before anything is implemented</h2>
+<p>Nothing here is implemented on the strength of this page. Each suggestion carries two or three paths with their cost, risk and what they unlock. A reviewer records a choice in console/data/decisions.json; only then does the work start. Until a choice is recorded the status is &#x27;awaiting review&#x27;.</p>
+<p><b>0 of 20</b> suggestions have a recorded choice. The rest are
+<i>awaiting review</i>, and no work starts on them.</p>
+<h3>How to record a choice</h3>
+<pre>Edit this file: set decisions[&lt;suggestion id&gt;] = {&quot;chosen_path&quot;: &quot;&lt;the path label&gt;&quot;, &quot;chosen_by&quot;: &quot;&lt;name&gt;&quot;, &quot;chosen_on&quot;: &quot;&lt;YYYY-MM-DD&gt;&quot;, &quot;note&quot;: &quot;&lt;optional&gt;&quot;}. Then rebuild with console/build.py. The Suggestions page renders the choice and the build fails if a chosen path is not one of the published options.</pre>
+<p>The build fails if a recorded choice is not one of the published options, so a typo cannot silently
+become a decision.</p>
+</div>
+<h2>Suggestions</h2>
+
+<article class="sug" id="S01">
+  <h3>S01 · Fail the build when the results feed is behind the official schedule</h3>
+  <div class="chips"><span class="chip">area: Freshness</span><span class="chip">cost: Half a day.</span><span class="chip">status: awaiting review</span></div>
+  <p class="prob"><b>Problem.</b> The feed holds 1 of 14 Week-10 results. Nothing failed, so any number computed today silently describes last week.</p>
+  <p class="buys"><b>What it buys.</b> Every published weekly number carries a trustworthy as-of date.</p>
+  <p class="riskline"><b>Risk.</b> A stale feed will start failing builds that used to pass.</p>
+  <h4>Paths a reviewer can choose from</h4>
+  <ul class="opts"><li class="opt"><b>Hard gate</b><span class="cost">cost 0.5 day</span><span class="risk">risk Builds fail on Mondays until the feed refreshes.</span><p>Compare the last final in the feed with the last final on the official schedule page; fail the build on any gap.</p></li><li class="opt"><b>Warning plus timestamp</b><span class="cost">cost 2 hours</span><span class="risk">risk A warning at the top of a page is easy to ignore.</span><p>Print the staleness in days on every page and let the build pass.</p></li></ul>
+  <p class="rec"><b>Recommended.</b> Hard gate
+    <span class="st-awaiting-review status"> · awaiting review</span></p>
+  <p class="ev"><b>Evidence.</b> data/session-ce097fea/standings_verification_2026-11-16.json · <a href='https://www.nfl.com/schedules/2026/REG11' target=_blank rel=noopener>official source</a></p>
+</article>
+<article class="sug" id="S02">
+  <h3>S02 · Put a clock time and raw bytes on every injury read</h3>
+  <div class="chips"><span class="chip">area: Capture</span><span class="chip">cost: One day plus storage.</span><span class="chip">status: awaiting review</span></div>
+  <p class="prob"><b>Problem.</b> Captures carry a date only, and we store rendered text rather than the page we read. Two reads cannot be ordered within a day, and a transcription cannot be audited.</p>
+  <p class="buys"><b>What it buys.</b> The report becomes a series instead of a snapshot, which is the precondition for every injury feature the brief asks for.</p>
+  <p class="riskline"><b>Risk.</b> Raw HTML is large; the repository will grow.</p>
+  <h4>Paths a reviewer can choose from</h4>
+  <ul class="opts"><li class="opt"><b>Commit raw bytes to the repository</b><span class="cost">cost 1 day</span><span class="risk">risk Repository size.</span><p>Keep it simple and auditable; accept repository growth.</p></li><li class="opt"><b>Store outside the site and keep a hash here</b><span class="cost">cost 2 days</span><span class="risk">risk Needs somewhere to store it.</span><p>Satisfies the brief&#x27;s durability requirement and keeps Pages small.</p></li></ul>
+  <p class="rec"><b>Recommended.</b> Store outside the site and keep a hash here
+    <span class="st-awaiting-review status"> · awaiting review</span></p>
+  <p class="ev"><b>Evidence.</b> data/session-ce097fea/capture/ · <a href='https://www.nfl.com/injuries/league/2026/reg10' target=_blank rel=noopener>official source</a></p>
+</article>
+<article class="sug" id="S03">
+  <h3>S03 · Schedule the Wednesday, Thursday and Friday injury capture</h3>
+  <div class="chips"><span class="chip">area: Capture</span><span class="chip">cost: One day.</span><span class="chip">status: awaiting review</span></div>
+  <p class="prob"><b>Problem.</b> We hold three reads taken on a Saturday, Sunday and Monday. Practice trends inside a week are invisible.</p>
+  <p class="buys"><b>What it buys.</b> Designation changes become observable, which is the only honest way to use the injury signal.</p>
+  <p class="riskline"><b>Risk.</b> A scheduled job can fail silently; it needs an alert.</p>
+  <h4>Paths a reviewer can choose from</h4>
+  <ul class="opts"><li class="opt"><b>GitHub Actions cron</b><span class="cost">cost 1 day</span><span class="risk">risk Silent failure unless an alert is added.</span><p>Runs in this repository&#x27;s existing Actions setup.</p></li><li class="opt"><b>Cron plus a freshness alarm</b><span class="cost">cost 1.5 days</span><span class="risk">risk Slightly more to maintain.</span><p>The job and the check that it ran.</p></li></ul>
+  <p class="rec"><b>Recommended.</b> Cron plus a freshness alarm
+    <span class="st-awaiting-review status"> · awaiting review</span></p>
+  <p class="ev"><b>Evidence.</b> data/session-ce097fea/injury_capture_delta.json · <a href='https://www.nfl.com/injuries/league/2026/reg10' target=_blank rel=noopener>official source</a></p>
+</article>
+<article class="sug" id="S04">
+  <h3>S04 · Make the injury signal a change, not a level</h3>
+  <div class="chips"><span class="chip">area: Model</span><span class="chip">cost: Blocked until S03 lands and four weeks of captures exist.</span><span class="chip">status: awaiting review</span></div>
+  <p class="prob"><b>Problem.</b> Counting how many players are Out is a level. It carries no news, because the market already knows it.</p>
+  <p class="buys"><b>What it buys.</b> A signal that can move a line instead of one that restates the table.</p>
+  <p class="riskline"><b>Risk.</b> With too few reads the change is mostly noise.</p>
+  <h4>Paths a reviewer can choose from</h4>
+  <ul class="opts"><li class="opt"><b>Wait for four weeks of captures, then difference</b><span class="cost">cost 4 weeks</span><span class="risk">risk Late.</span><p>Correct, but nothing ships this season until November is out.</p></li><li class="opt"><b>Use last season&#x27;s archive to prototype the formulation now</b><span class="cost">cost 2 days</span><span class="risk">risk Week-over-week is a weaker proxy than within-week.</span><p>The historical feed has designations back to 2016, but only one read per week, so the change must be week-over-week.</p></li></ul>
+  <p class="rec"><b>Recommended.</b> Use last season&#x27;s archive to prototype the formulation now
+    <span class="st-awaiting-review status"> · awaiting review</span></p>
+  <p class="ev"><b>Evidence.</b> data/s9cb/injuries.csv (56,829 rows, 2016 onward) · <a href='https://github.com/nflverse/nflverse-data' target=_blank rel=noopener>official source</a></p>
+</article>
+<article class="sug" id="S05">
+  <h3>S05 · Measure what each designation is worth before using it</h3>
+  <div class="chips"><span class="chip">area: Model</span><span class="chip">cost: Two days once the join is built.</span><span class="chip">status: awaiting review</span></div>
+  <p class="prob"><b>Problem.</b> &#x27;Questionable&#x27; has no official percentage and we have never measured one.</p>
+  <p class="buys"><b>What it buys.</b> A calibrated number instead of a borrowed one, and an interval that says how much to trust it.</p>
+  <p class="riskline"><b>Risk.</b> The measured rate may be so wide that the feature is not worth having. That is a result, not a failure.</p>
+  <h4>Paths a reviewer can choose from</h4>
+  <ul class="opts"><li class="opt"><b>Join three seasons of designations to the official inactive lists</b><span class="cost">cost 2 days</span><span class="risk">risk Needs the inactive lists, which we hold for one week only.</span><p>Direct measurement with confidence intervals.</p></li><li class="opt"><b>Buy or scrape the inactive lists first, then measure</b><span class="cost">cost 4 days</span><span class="risk">risk Scraping terms need checking first.</span><p>Larger sample, better intervals, later.</p></li></ul>
+  <p class="rec"><b>Recommended.</b> Join three seasons of designations to the official inactive lists
+    <span class="st-awaiting-review status"> · awaiting review</span></p>
+  <p class="ev"><b>Evidence.</b> data/inactives.json holds 20 Week-9 rows only</p>
+</article>
+<article class="sug" id="S06">
+  <h3>S06 · Fix the club-code mapping once</h3>
+  <div class="chips"><span class="chip">area: Data</span><span class="chip">cost: Two hours.</span><span class="chip">status: awaiting review</span></div>
+  <p class="prob"><b>Problem.</b> nfl.com prints AZ for Arizona and LA for the Rams; the repository stores both AZ/ARI and LA/LAR in different files.</p>
+  <p class="buys"><b>What it buys.</b> Every cross-file join becomes safe.</p>
+  <p class="riskline"><b>Risk.</b> Renaming breaks pages that read the old codes.</p>
+  <h4>Paths a reviewer can choose from</h4>
+  <ul class="opts"><li class="opt"><b>One alias table, enforced at build time</b><span class="cost">cost 2 hours</span><span class="risk">risk Touches several generators.</span><p>A single mapping; the build fails on an unknown code.</p></li><li class="opt"><b>Alias table plus a compatibility shim</b><span class="cost">cost 0.5 day</span><span class="risk">risk Two places to keep in step.</span><p>Safer for the pages that already exist.</p></li></ul>
+  <p class="rec"><b>Recommended.</b> One alias table, enforced at build time
+    <span class="st-awaiting-review status"> · awaiting review</span></p>
+  <p class="ev"><b>Evidence.</b> Captured this session from the official standings page · <a href='https://www.nfl.com/standings/league/2026/REG' target=_blank rel=noopener>official source</a></p>
+</article>
+<article class="sug" id="S07">
+  <h3>S07 · Capture the reserve lists so &#x27;not listed&#x27; stops meaning &#x27;available&#x27;</h3>
+  <div class="chips"><span class="chip">area: Data</span><span class="chip">cost: One day.</span><span class="chip">status: awaiting review</span></div>
+  <p class="prob"><b>Problem.</b> A player absent from the injury report may be on injured reserve. The official reserve list is now captured for November 2026, and 15 of its 25 players are invisible in the weekly report — but only one month is captured and no join exists.</p>
+  <p class="buys"><b>What it buys.</b> Every per-team injury count we publish stops under-counting.</p>
+  <p class="riskline"><b>Risk.</b> The reserve list may not be published in a machine-readable form.</p>
+  <h4>Paths a reviewer can choose from</h4>
+  <ul class="opts"><li class="opt"><b>Capture the official reserve page per club</b><span class="cost">cost 1 day</span><span class="risk">risk Format unknown until tried.</span><p>Extend the November capture across the season and join it to the injury table so every &#x27;not listed&#x27; cell carries a reserve-list answer.</p></li><li class="opt"><b>Derive it from the transactions log</b><span class="cost">cost 1.5 days</span><span class="risk">risk A transaction is not proof of current status.</span><p>One capture serves two needs (this and S08).</p></li></ul>
+  <p class="rec"><b>Recommended.</b> Capture the official reserve page per club
+    <span class="st-awaiting-review status"> · awaiting review</span></p>
+  <p class="ev"><b>Evidence.</b> data/session-ce097fea/capture/reserve_list_2026-11-16.json · <a href='https://www.nfl.com/transactions/league/reserve-list/2026/11' target=_blank rel=noopener>official source</a></p>
+</article>
+<article class="sug" id="S08">
+  <h3>S08 · Capture the official transactions log and flag stale depth rows</h3>
+  <div class="chips"><span class="chip">area: Data</span><span class="chip">cost: One day.</span><span class="chip">status: awaiting review</span></div>
+  <p class="prob"><b>Problem.</b> At least one club still publishes quarterbacks who are on injured reserve. The league&#x27;s dated transactions pages make staleness computable, but only two of the six ledgers are captured for one month.</p>
+  <p class="buys"><b>What it buys.</b> Depth rows that carry a truth date, and an alert when they go stale.</p>
+  <p class="riskline"><b>Risk.</b> The log is high-volume; the flag needs a rule, not a human.</p>
+  <h4>Paths a reviewer can choose from</h4>
+  <ul class="opts"><li class="opt"><b>Daily transactions capture plus a staleness flag per depth row</b><span class="cost">cost 1 day</span><span class="risk">risk Flag noise early on.</span><p>One job, two requirements closed.</p></li><li class="opt"><b>Weekly capture</b><span class="cost">cost 0.5 day</span><span class="risk">risk Misses short stints.</span><p>Cheaper, misses short stints.</p></li></ul>
+  <p class="rec"><b>Recommended.</b> Daily transactions capture plus a staleness flag per depth row
+    <span class="st-awaiting-review status"> · awaiting review</span></p>
+  <p class="ev"><b>Evidence.</b> https://www.nfl.com/transactions/ plus data/transactions/official_events_2026.json from another session · <a href='https://www.nfl.com/transactions/' target=_blank rel=noopener>official source</a></p>
+</article>
+<article class="sug" id="S09">
+  <h3>S09 · Settle the depth-order question before building the deficiency matrix</h3>
+  <div class="chips"><span class="chip">area: Data</span><span class="chip">cost: Three days to verify club by club.</span><span class="chip">status: awaiting review</span></div>
+  <p class="prob"><b>Problem.</b> 149 slots list more than one rank-1 player, two clubs fail to parse, and one publishes its chart as an image.</p>
+  <p class="buys"><b>What it buys.</b> Either a verified depth order, or a written decision that we derive it from playing time instead.</p>
+  <p class="riskline"><b>Risk.</b> Verification may fail for some clubs, and the brief forbids guessing.</p>
+  <h4>Paths a reviewer can choose from</h4>
+  <ul class="opts"><li class="opt"><b>Verify all 32 club depth pages, one by one, and fall back to snap counts where a club fails</b><span class="cost">cost 3 days</span><span class="risk">risk The Texans image cannot be parsed by any rule we are allowed to use.</span><p>Matches the brief&#x27;s first route.</p></li><li class="opt"><b>Derive depth from official snap counts</b><span class="cost">cost 2 days once snap counts are captured</span><span class="risk">risk Snap counts describe the past, not the current plan.</span><p>Measurable and uniform across clubs.</p></li></ul>
+  <p class="rec"><b>Recommended.</b> Verify all 32 club depth pages, one by one, and fall back to snap counts where a club fails
+    <span class="st-awaiting-review status"> · awaiting review</span></p>
+  <p class="ev"><b>Evidence.</b> data/depth/official_register.tsv</p>
+</article>
+<article class="sug" id="S10">
+  <h3>S10 · Start writing the opening price for every market we originate</h3>
+  <div class="chips"><span class="chip">area: Origination</span><span class="chip">cost: One day to start; the sample then takes a season.</span><span class="chip">status: awaiting review</span></div>
+  <p class="prob"><b>Problem.</b> The price store is closing-only, so the move is invisible and half of closing-line research is out of reach.</p>
+  <p class="buys"><b>What it buys.</b> Opening-to-closing movement, which is where a lot of origination edge actually shows up.</p>
+  <p class="riskline"><b>Risk.</b> None technical. The cost is that the sample starts small.</p>
+  <h4>Paths a reviewer can choose from</h4>
+  <ul class="opts"><li class="opt"><b>Snapshot every market at first publication</b><span class="cost">cost 1 day</span><span class="risk">risk Only future games are covered.</span><p>Cheapest possible start; the sample grows from today.</p></li><li class="opt"><b>Buy historical opening prices</b><span class="cost">cost Money</span><span class="risk">risk Licence terms.</span><p>Immediate sample.</p></li></ul>
+  <p class="rec"><b>Recommended.</b> Snapshot every market at first publication
+    <span class="st-awaiting-review status"> · awaiting review</span></p>
+  <p class="ev"><b>Evidence.</b> data/s9cb/games.csv has closing prices only</p>
+</article>
+<article class="sug" id="S11">
+  <h3>S11 · Publish a cluster-robust interval next to every ranking</h3>
+  <div class="chips"><span class="chip">area: Leaderboard</span><span class="chip">cost: One day.</span><span class="chip">status: awaiting review</span></div>
+  <p class="prob"><b>Problem.</b> Bets inside the same game are not independent. A per-bet interval is too narrow and makes luck look like skill.</p>
+  <p class="buys"><b>What it buys.</b> An honest lower bound, which is the whole point of the leaderboard.</p>
+  <p class="riskline"><b>Risk.</b> Intervals will widen and fewer rules will look significant.</p>
+  <h4>Paths a reviewer can choose from</h4>
+  <ul class="opts"><li class="opt"><b>Cluster by game</b><span class="cost">cost 1 day</span><span class="risk">risk Widens intervals.</span><p>The natural unit; cheap to compute.</p></li><li class="opt"><b>Cluster by game and week</b><span class="cost">cost 1.5 days</span><span class="risk">risk May leave nothing significant, which is information.</span><p>More conservative still.</p></li></ul>
+  <p class="rec"><b>Recommended.</b> Cluster by game
+    <span class="st-awaiting-review status"> · awaiting review</span></p>
+  <p class="ev"><b>Evidence.</b> data/s9cb/leaderboard.json</p>
+</article>
+<article class="sug" id="S12">
+  <h3>S12 · Print a control baseline on every leaderboard run</h3>
+  <div class="chips"><span class="chip">area: Leaderboard</span><span class="chip">cost: Half a day.</span><span class="chip">status: awaiting review</span></div>
+  <p class="prob"><b>Problem.</b> Without &#x27;favourites only&#x27; and &#x27;random&#x27; columns, a 6% ROI has nothing to be compared against.</p>
+  <p class="buys"><b>What it buys.</b> A reader can see whether a strategy beat something a child could have done.</p>
+  <p class="riskline"><b>Risk.</b> Some strategies will be beaten by the favourite.</p>
+  <h4>Paths a reviewer can choose from</h4>
+  <ul class="opts"><li class="opt"><b>Two control rows on every table</b><span class="cost">cost 0.5 day</span><span class="risk">risk None.</span><p>Always visible, never optional.</p></li><li class="opt"><b>A separate controls page</b><span class="cost">cost 0.5 day</span><span class="risk">risk Less visible.</span><p>Cleaner tables, easier to miss.</p></li></ul>
+  <p class="rec"><b>Recommended.</b> Two control rows on every table
+    <span class="st-awaiting-review status"> · awaiting review</span></p>
+  <p class="ev"><b>Evidence.</b> data/prereg/controls.json</p>
+</article>
+<article class="sug" id="S13">
+  <h3>S13 · Prove registration precedes results for every rule on the board</h3>
+  <div class="chips"><span class="chip">area: Governance</span><span class="chip">cost: Half a day of auditing.</span><span class="chip">status: awaiting review</span></div>
+  <p class="prob"><b>Problem.</b> At least one commit carries a strategy&#x27;s rule and its results together, so the board cannot yet claim to be free of result-chasing.</p>
+  <p class="buys"><b>What it buys.</b> The one claim that makes the leaderboard worth anything.</p>
+  <p class="riskline"><b>Risk.</b> Some rules may have to be withdrawn.</p>
+  <h4>Paths a reviewer can choose from</h4>
+  <ul class="opts"><li class="opt"><b>Audit every rule and withdraw any that cannot show a prior commit</b><span class="cost">cost 0.5 day</span><span class="risk">risk Fewer rules on the board.</span><p>Costly in reputation, correct in method.</p></li><li class="opt"><b>Re-register the suspect rules going forward and mark the old numbers historical</b><span class="cost">cost 1 day</span><span class="risk">risk Weaker claim.</span><p>Keeps the sample.</p></li></ul>
+  <p class="rec"><b>Recommended.</b> Audit every rule and withdraw any that cannot show a prior commit
+    <span class="st-awaiting-review status"> · awaiting review</span></p>
+  <p class="ev"><b>Evidence.</b> Flag R26-01</p>
+</article>
+<article class="sug" id="S14">
+  <h3>S14 · Keep backtest numbers off the leaderboard entirely</h3>
+  <div class="chips"><span class="chip">area: Governance</span><span class="chip">cost: Two hours.</span><span class="chip">status: awaiting review</span></div>
+  <p class="prob"><b>Problem.</b> Backtest figures are printed on the landing leaderboard today (bets, win %, ROI, ROI interval).</p>
+  <p class="buys"><b>What it buys.</b> Compliance with the brief and the removal of the strongest temptation on the site.</p>
+  <p class="riskline"><b>Risk.</b> The leaderboard will look emptier.</p>
+  <h4>Paths a reviewer can choose from</h4>
+  <ul class="opts"><li class="opt"><b>Two boards: a retrospective research table and a prospective board</b><span class="cost">cost 0.5 day</span><span class="risk">risk Two things to maintain.</span><p>Honest and still useful.</p></li><li class="opt"><b>One board, prospective only</b><span class="cost">cost 2 hours</span><span class="risk">risk Loses useful research context.</span><p>Strictly what the brief asks.</p></li></ul>
+  <p class="rec"><b>Recommended.</b> Two boards: a retrospective research table and a prospective board
+    <span class="st-awaiting-review status"> · awaiting review</span></p>
+  <p class="ev"><b>Evidence.</b> Flag LB-01</p>
+</article>
+<article class="sug" id="S15">
+  <h3>S15 · Rank the combos only behind a validated joint probability</h3>
+  <div class="chips"><span class="chip">area: Strategy</span><span class="chip">cost: Three days to validate a joint model.</span><span class="chip">status: awaiting review</span></div>
+  <p class="prob"><b>Problem.</b> Multiplying marginal probabilities under dependence is wrong, and we store no operator void/push rules.</p>
+  <p class="buys"><b>What it buys.</b> Three of the four leaderboard divisions stop being empty for a good reason rather than an unexplained one.</p>
+  <p class="riskline"><b>Risk.</b> The joint model may not beat the marginals enough to matter.</p>
+  <h4>Paths a reviewer can choose from</h4>
+  <ul class="opts"><li class="opt"><b>Validate a joint model on held-out data first</b><span class="cost">cost 3 days</span><span class="risk">risk May fail.</span><p>The only route the brief permits.</p></li><li class="opt"><b>Leave the divisions empty and say why</b><span class="cost">cost 0</span><span class="risk">risk Three divisions stay empty.</span><p>Zero cost, zero progress.</p></li></ul>
+  <p class="rec"><b>Recommended.</b> Validate a joint model on held-out data first
+    <span class="st-awaiting-review status"> · awaiting review</span></p>
+  <p class="ev"><b>Evidence.</b> data/s9cb/parlays.json</p>
+</article>
+<article class="sug" id="S16">
+  <h3>S16 · Transcribe the venue of every fixture from the official game centre</h3>
+  <div class="chips"><span class="chip">area: Data</span><span class="chip">cost: 14 reads to prove the method, then automation.</span><span class="chip">status: awaiting review</span></div>
+  <p class="prob"><b>Problem.</b> This is the one brief line with nothing behind it; we hold a stadium column from a parsed feed instead.</p>
+  <p class="buys"><b>What it buys.</b> A closed requirement and the foundation for the roof and weather overlay.</p>
+  <p class="riskline"><b>Risk.</b> Game-centre pages may not expose the venue in text.</p>
+  <h4>Paths a reviewer can choose from</h4>
+  <ul class="opts"><li class="opt"><b>Transcribe one week by hand, then automate</b><span class="cost">cost 0.5 day to prove</span><span class="risk">risk The page may not cooperate.</span><p>Proves the page can be read before committing to a scraper.</p></li><li class="opt"><b>Accept the parsed feed&#x27;s stadium column</b><span class="cost">cost 0</span><span class="risk">risk Not an official transcription; the brief rejects it.</span><p>Zero cost.</p></li></ul>
+  <p class="rec"><b>Recommended.</b> Transcribe one week by hand, then automate
+    <span class="st-awaiting-review status"> · awaiting review</span></p>
+  <p class="ev"><b>Evidence.</b> data/s9cb/games.csv stadium column · <a href='https://www.nfl.com/games/' target=_blank rel=noopener>official source</a></p>
+</article>
+<article class="sug" id="S17">
+  <h3>S17 · Put a row-count pin on the injury scraper</h3>
+  <div class="chips"><span class="chip">area: Data</span><span class="chip">cost: Two hours.</span><span class="chip">status: awaiting review</span></div>
+  <p class="prob"><b>Problem.</b> Two rows went missing in one scrape and nothing failed.</p>
+  <p class="buys"><b>What it buys.</b> Counts that can be trusted, which every other number depends on.</p>
+  <p class="riskline"><b>Risk.</b> Builds will fail when the league legitimately changes the page. That is the point.</p>
+  <h4>Paths a reviewer can choose from</h4>
+  <ul class="opts"><li class="opt"><b>Pin the row count and the required fields; fail the build</b><span class="cost">cost 2 hours</span><span class="risk">risk Failures on legitimate page changes.</span><p>Loud and correct.</p></li><li class="opt"><b>Pin and warn</b><span class="cost">cost 2 hours</span><span class="risk">risk Silent drift returns.</span><p>Quieter.</p></li></ul>
+  <p class="rec"><b>Recommended.</b> Pin the row count and the required fields; fail the build
+    <span class="st-awaiting-review status"> · awaiting review</span></p>
+  <p class="ev"><b>Evidence.</b> Flag CAP-01</p>
+</article>
+<article class="sug" id="S18">
+  <h3>S18 · Decide the public and private split before more raw rows are published</h3>
+  <div class="chips"><span class="chip">area: Site</span><span class="chip">cost: One reading plus a migration.</span><span class="chip">status: awaiting review</span></div>
+  <p class="prob"><b>Problem.</b> Raw rows are on the live site. The nfl.com terms have now been read verbatim and stored as a clause record; four points in it are not covered by the earlier flag and are waiting on the owner.</p>
+  <p class="buys"><b>What it buys.</b> A defensible position instead of an accidental one.</p>
+  <p class="riskline"><b>Risk.</b> Migration may break links that other pages depend on.</p>
+  <h4>Paths a reviewer can choose from</h4>
+  <ul class="opts"><li class="opt"><b>Read the terms, then move raw rows out of the Pages tree</b><span class="cost">cost 1 day</span><span class="risk">risk Link breakage during the move.</span><p>What the brief asks, now that the clause record exists to decide against.</p></li><li class="opt"><b>Keep raw rows public and record the decision</b><span class="cost">cost 1 hour</span><span class="risk">risk Terms risk.</span><p>Cheapest, weakest.</p></li></ul>
+  <p class="rec"><b>Recommended.</b> Read the clause record, record the decision, then move raw rows out of the Pages tree if it goes that way
+    <span class="st-awaiting-review status"> · awaiting review</span></p>
+  <p class="ev"><b>Evidence.</b> data/legal/terms_2026-11-16.json, flag F60 · <a href='https://www.nfl.com/legal/terms/' target=_blank rel=noopener>official source</a></p>
+</article>
+<article class="sug" id="S19">
+  <h3>S19 · Publish the reconciliation as a standing check, not a one-off</h3>
+  <div class="chips"><span class="chip">area: Verification</span><span class="chip">cost: Half a day.</span><span class="chip">status: awaiting review</span></div>
+  <p class="prob"><b>Problem.</b> This session reconciled 32 of 32 clubs by hand. Nothing stops the next feed refresh from breaking it silently.</p>
+  <p class="buys"><b>What it buys.</b> A number that is re-proven every time the data moves.</p>
+  <p class="riskline"><b>Risk.</b> The check will fail whenever the feed is stale, which is why S01 should land first.</p>
+  <h4>Paths a reviewer can choose from</h4>
+  <ul class="opts"><li class="opt"><b>Add the reconciliation to the build and fail on any mismatch</b><span class="cost">cost 0.5 day</span><span class="risk">risk Fails while the feed is stale.</span><p>Standing proof.</p></li><li class="opt"><b>Run it weekly and publish the result</b><span class="cost">cost 0.5 day</span><span class="risk">risk A week of bad data can pass unnoticed.</span><p>Softer.</p></li></ul>
+  <p class="rec"><b>Recommended.</b> Add the reconciliation to the build and fail on any mismatch
+    <span class="st-awaiting-review status"> · awaiting review</span></p>
+  <p class="ev"><b>Evidence.</b> data/session-ce097fea/standings_reconciliation_2026-11-16.json · <a href='https://www.nfl.com/standings/league/2026/REG' target=_blank rel=noopener>official source</a></p>
+</article>
+<article class="sug" id="S20">
+  <h3>S20 · Collapse six overlapping site generations into one navigation</h3>
+  <div class="chips"><span class="chip">area: Site</span><span class="chip">cost: Two days plus a decision on what to retire.</span><span class="chip">status: awaiting review</span></div>
+  <p class="prob"><b>Problem.</b> Five or six generations of pages coexist, each with its own nav and its own numbers. A reader cannot tell which one is current.</p>
+  <p class="buys"><b>What it buys.</b> A site a reader can believe.</p>
+  <p class="riskline"><b>Risk.</b> Retiring pages can break links other sessions depend on.</p>
+  <h4>Paths a reviewer can choose from</h4>
+  <ul class="opts"><li class="opt"><b>One landing page that links to every generation, with a &#x27;current&#x27; badge on one</b><span class="cost">cost 1 day</span><span class="risk">risk Still six places to look.</span><p>Additive; nothing is deleted; the reader is told which is which.</p></li><li class="opt"><b>Merge the generations</b><span class="cost">cost 3+ days</span><span class="risk">risk Destroys merged work if done carelessly.</span><p>Cleanest result.</p></li></ul>
+  <p class="rec"><b>Recommended.</b> One landing page that links to every generation, with a &#x27;current&#x27; badge on one
+    <span class="st-awaiting-review status"> · awaiting review</span></p>
+  <p class="ev"><b>Evidence.</b> This session added console/ alongside the existing generations rather than rewriting them</p>
+</article>
+</main>
+</div>
+<footer>
+  <p>Every row on this site links to the official page it was read from. A value no official page
+  publishes is printed as a labelled blank, never inferred. Built by <code>console/build.py</code>;
+  checked by <code>console/verify.py</code>. Research tool, not betting advice.</p>
+</footer>
+</body></html>

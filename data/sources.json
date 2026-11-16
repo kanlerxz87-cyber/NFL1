@@ -330,5 +330,65 @@
     "retrieved": "2026-11-15",
     "verified": true,
     "note": "Internal document. Its thresholds are design choices, not official figures (flag F59)."
+  },
+  {
+    "id": "S35",
+    "publisher": "NFL Enterprises, LLC (NFL.com)",
+    "url": "https://www.nfl.com/legal/terms/",
+    "kind": "Official terms of use",
+    "what": "NFL.com Terms and Conditions (page 'Updated: May 16, 2024'): ss.1.1, 1.3, 2, 8, 11(d), 11(f), 12, 18.1. Verbatim record in data/legal/terms_2026-11-16.json",
+    "retrieved": "2026-11-16",
+    "verified": true,
+    "note": "Read in full (9 chunks) on 2026-11-16. Interpretation is for counsel; not legal advice."
+  },
+  {
+    "id": "S36",
+    "publisher": "National Football League (NFL.com)",
+    "url": "https://www.nfl.com/transactions/league/trades/2026/11",
+    "kind": "Official league transaction log (trades, November 2026)",
+    "what": "Trades list for November 2026, incl. 11/06 Jacoby Brissett Cardinals to Ravens (Traded). Companion pages read: reserve-list/2026/11 and signings/2026/11 (no 11/05 entries).",
+    "retrieved": "2026-11-16",
+    "verified": true,
+    "note": "Read 2026-11-16. Used for Z2-02. The 11/05 IR placements do not appear on the reserve-list page (see F61)."
+  },
+  {
+    "id": "S37",
+    "publisher": "National Football League (NFL.com)",
+    "url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "kind": "Official league transaction log (reserve list, November 2026)",
+    "what": "Reserve/Injured and other reserve assignments for November 2026, printed newest first with the two clubs, the date, the name and the transaction: 11/14 Christen Miller (NO), TreVeyon Henderson (NE), Michael Burton (CLE), Mo Alie-Cox and Akeem Davis-Gaither (IND), Peter Skoronski and Tommy Townsend (TEN), Tyler Goodson (DAL), Josh Whyle (GB); 11/12 Puka Nacua (LA); 11/10 Zach Sieler and Malik Willis (MIA), Gracen Halton (SF), Gardner Minshew and Michael Wilson (AZ); 11/07 Brian Robinson (ATL), Dyami Brown (WAS). Companion months read the same day: /2026/10 (25 rows, e.g. 10/28 Terry McLaurin WAS), /2026/09, /2026/08.",
+    "retrieved": "2026-11-16",
+    "verified": true,
+    "note": "Read 2026-11-16. Printed club codes use AZ for Arizona and LA for the Rams; the Position column is empty on every row. The page prints at most 25 rows (see S40). Captured hourly by .github/workflows/transactions-sweep.yml into data/reserve/captures/."
+  },
+  {
+    "id": "S38",
+    "publisher": "National Football League (NFL.com)",
+    "url": "https://www.nfl.com/transactions/",
+    "kind": "Official league transaction register (index)",
+    "what": "The register's own navigation: six dated categories (Trades, Signings, Reserve List, Waivers, Terminations, Other) selected by year and month. Establishes that the register is league-wide - there is no per-club transactions page (https://www.nfl.com/teams/miami-dolphins/transactions/ returns 404), so a sweep must capture category x month.",
+    "retrieved": "2026-11-16",
+    "verified": true,
+    "note": "Read 2026-11-16."
+  },
+  {
+    "id": "S39",
+    "publisher": "National Football League (NFL.com)",
+    "url": "https://www.nfl.com/injuries/league/2026/reg11",
+    "kind": "Official league injury report (week 11 requested, week 10 served)",
+    "what": "Requested for week 11 on 2026-11-16 and served as the week-10 report: the URL canonicalises to .../reg10. Rows read include WAS (Patrick Out, Yankoff Out, Bates and Daniels Full with no game status, Harrison Questionable), NE at DET (Brown Out, Henderson Out, Davis Out, Maye Full) and DET (Branch, Goff, Saylors, St. Brown Questionable, Joseph Out, Mays Out, Reed Out, Wonnum Questionable, Wonnum/Full) - 9 Detroit rows.",
+    "retrieved": "2026-11-16",
+    "verified": true,
+    "note": "Read 2026-11-16. Evidence for flag F63: a current-week official scrape was possible, while data/model/availability.json says the official report could not be scraped and names DET, CIN, MIA and MIN as clubs without a report."
+  },
+  {
+    "id": "S40",
+    "publisher": "National Football League (NFL.com)",
+    "url": "https://www.nfl.com/transactions/league/reserve-list/2026/11?page=2",
+    "kind": "Official league transaction log (window probe)",
+    "what": "Proof that the transactions page has no deeper window: ?page=2 returns the same 25 rows as the unparameterised page, and a per-day url (https://www.nfl.com/transactions/league/reserve-list/2026/11/14) returns 404. The printed 25-row window is therefore a cap set by the publisher, not a pagination we failed to follow.",
+    "retrieved": "2026-11-16",
+    "verified": true,
+    "note": "Read 2026-11-16. Evidence for flag F66 and suggestion S31."
   }
 ]

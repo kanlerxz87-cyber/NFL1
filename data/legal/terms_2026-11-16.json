@@ -1,0 +1,74 @@
+{
+  "task": "Z1 (session bf0e6e5f-nfl1)",
+  "purpose": "Verbatim record of the NFL.com Terms and Conditions clauses that govern retrieval, publication, deep links and wagering. Settles the factual basis of flag F51 and raises F60. It is not a legal opinion.",
+  "source": {
+    "publisher": "NFL Enterprises, LLC (NFL.com)",
+    "url": "https://www.nfl.com/legal/terms/",
+    "page_title": "Terms and Conditions | NFL.com",
+    "page_updated": "May 16, 2024",
+    "retrieved": "2026-11-16",
+    "method": "fetch_page, chunks 0-8 read in full (9 chunks)",
+    "source_id": "S35"
+  },
+  "clauses": [
+    {
+      "section": "1.1 General",
+      "quote": "Except as expressly provided in this Agreement, you are prohibited from copying, reproducing, modifying, distributing, displaying, performing, or transmitting any of the Services or contents of the Services for any purposes, and nothing otherwise stated or implied in the Services confers on you any license or right to do so.",
+      "relevance": "Covers 'data, analytics, algorithms' that are 'displayed in or through' the Services. Applies to publishing nfl.com content.",
+      "already_in_flag": "F51"
+    },
+    {
+      "section": "1.3 Permitted Uses",
+      "quote": "You may use the Services solely for your own individual non-commercial and informational purposes only. Any other use, including for any commercial purposes, is strictly prohibited without our express prior written consent. Systematic retrieval of data or other content from the Services, whether to create or compile, directly or indirectly, a collection, compilation, database, or directory, is prohibited absent our express prior written consent.",
+      "relevance": "Directly governs the scheduled injury-report capture and its publication. No written consent is in the repository (see F51).",
+      "already_in_flag": "F51"
+    },
+    {
+      "section": "8 Links and Third-Party Content",
+      "quote": "You may link to the home page of the Services without obtaining our permission. ... For any other type of link to the Services, you must obtain our express written permission.",
+      "relevance": "Deep links from this site to nfl.com injury, schedule and transaction pages are 'any other type of link'. Written permission is needed for them under this text. Not previously flagged.",
+      "already_in_flag": "F60"
+    },
+    {
+      "section": "11(d) Prohibited Uses",
+      "quote": "take any action that imposes an unreasonable or disproportionately large load on the infrastructure of one or more of the Services;",
+      "relevance": "The capture frequency (every 6 hours, per F51) should be shown not to load the service. No load measurement exists in the repository.",
+      "already_in_flag": "F60"
+    },
+    {
+      "section": "11(f) Prohibited Uses",
+      "quote": "use or attempt to use any engine, software, tool, agent or other device or mechanism (including, browsers, spiders, robots, avatars or intelligent agents) to navigate or search the Services to harvest or otherwise collect information from the Services to be used for any commercial purpose;",
+      "relevance": "A scheduled scraper is an 'agent' or 'robot'. Whether the 'commercial purpose' limb applies depends on the site's future use (it is a product under build). Not previously flagged.",
+      "already_in_flag": "F60"
+    },
+    {
+      "section": "12 User Content and Communications (wagering paragraph)",
+      "quote": "In addition, you are prohibited from gambling or wagering on the result of any gaming features provided on or through the Services, or from using the Services to gamble or wager on the result of any NFL game.",
+      "relevance": "The repository's stated purpose is wagering strategy on NFL games. Its use of nfl.com data may fall under 'using the Services to ... wager'. This needs a legal reading and is not decided here. Not previously flagged.",
+      "already_in_flag": "F60"
+    },
+    {
+      "section": "2 Modification of This Agreement",
+      "quote": "We reserve the right to make any changes to this Agreement at any time.",
+      "relevance": "The text can change at any time, so the date of retrieval (2026-11-16) matters. Re-read before each publication.",
+      "already_in_flag": "F60"
+    },
+    {
+      "section": "18.1 Choice of Law and Venue",
+      "quote": "This Agreement shall be governed by and construed in accordance with the laws of the State of New York, excluding its conflict of law rules.",
+      "relevance": "Context for any dispute. Not a finding of breach.",
+      "already_in_flag": null
+    }
+  ],
+  "not_found": [
+    "No clause grants permission to retrieve data for analysis or publication.",
+    "No clause defines 'systematic retrieval' or sets a rate limit.",
+    "No robots.txt rule was read in this session (not checked; see Z1 limits)."
+  ],
+  "limits": [
+    "Read from one fetch of the page on 2026-11-16. The page is dated May 16, 2024, and the publisher can change it at any time (s.2).",
+    "Interpretation (whether the repository's use is 'commercial', whether s.12 covers analysis, whether a deep link is 'any other type of link') needs counsel. This file states only what the text says.",
+    "The page is the US version. Additional Terms for subscription services are separate pages and were not read."
+  ],
+  "decision_owner": "Repository owner. Options are listed in flag F51 (obtain written consent, publish aggregates and links only, or stop the scrape). This session did not change the scraper or any published page."
+}

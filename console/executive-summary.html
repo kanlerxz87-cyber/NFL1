@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Executive summary — NFL Decision Console</title>
+<link rel="stylesheet" href="style.css">
+</head><body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="index.html"><span class="dot"></span> NFL Decision Console</a>
+  <span class="stamp">as of 2026-11-16 · built 2026-11-16 15:06 UTC · session ce097fea-nfl1</span>
+</header>
+<div class="shell">
+<nav class="sidebar" aria-label="Sections"><div class="navgroup"><h3>Overview</h3><ul><li><a href="index.html">Overview</a></li><li><a href="executive-summary.html" class=active>Executive summary</a></li></ul></div><div class="navgroup"><h3>Governance</h3><ul><li><a href="readiness.html">Decision readiness</a></li><li><a href="questions.html">Open questions</a></li><li><a href="suggestions.html">Suggestions &amp; choose a path</a></li><li><a href="verification.html">Verification</a></li><li><a href="flagged.html">Flagged for review</a></li></ul></div><div class="navgroup"><h3>Model &amp; strategy</h3><ul><li><a href="strategy-lab.html">Strategy lab</a></li></ul></div><div class="navgroup"><h3>Official data</h3><ul><li><a href="injuries.html">Injuries &amp; depth</a></li><li><a href="data.html">Official data</a></li></ul></div>
+  <div class="navgroup"><h3>Repository</h3><ul>
+    <li><a href="https://kanlerxz87-cyber.github.io/NFL1/">Main site</a></li>
+    <li><a href="https://github.com/kanlerxz87-cyber/NFL1">Source &amp; history</a></li>
+    <li><a href="flagged.html">Flagged for review</a></li>
+  </ul></div>
+</nav>
+<main id="main">
+<h1>Executive summary</h1>
+<p class="lead">What the evidence supports, what it does not, what is missing, and the choices only a human can make.</p>
+
+<h2>What holds up</h2>
+<ul class="plain">
+<li><b>The official data is reproducible.</b> 32 of 32 clubs in the official standings table are
+reproduced cell by cell from game results — no unexplained residual anywhere in the table.</li>
+<li><b>The injury capture is faithful.</b> 347 rows re-read from https://www.nfl.com/injuries/league/2026/reg10 match the committed
+capture row for row and byte for byte.</li>
+<li><b>The price policy is real.</b> Every scored bet carries the price actually taken from the source
+file; no −110 assumption is used anywhere, and every downloaded asset is pinned by sha256.</li>
+<li><b>The sample is large.</b> 7,104 games and 6,976 with both lines,
+which is what makes the correlation and holdout work meaningful at all.</li>
+<li><b>Luck is charged for.</b> Ranking uses a benchmark-relative score with a bootstrap interval and a
+Benjamini-Hochberg adjustment across 12 tested rules, on an untouched 2024+2025 holdout.</li>
+</ul>
+
+<h2>What does not hold up</h2>
+<ul class="plain">
+<li><b>Nothing is promotable.</b> 0 of 12 strategies clear every gate that can be
+machine-checked from the published fields (5 of 8 gates are checkable; the rest
+cannot be evaluated from what the analysis prints). Every number on the board is retrospective and no
+strategy has a prospective sample, so even a clean sweep would only make a rule a candidate for one.</li>
+<li><b>The results feed is 12 games stale.</b> It was taken before the Week 10 Sunday kickoffs. Any weekly
+number computed from it today describes last week.</li>
+<li><b>Three of four leaderboard divisions are empty</b> and should be: no combination bet may be ranked
+until a joint probability is validated on held-out data and the operator's void/push rules are stored.</li>
+<li><b>The injury signal cannot be a change yet.</b> Three dated captures exist, all taken on a Saturday,
+Sunday and Monday. There is no within-week series to difference.</li>
+<li><b>Depth is unresolved.</b> 149 slots list more than one rank-1 player, two clubs fail to parse and one
+publishes its chart as an image. The deficiency matrix is blocked until one route is verified for all 32 clubs.</li>
+</ul>
+
+<h2>What is missing</h2>
+<ul class="plain">
+<li>Opening prices. The store is closing-only, so the move is invisible.</li>
+<li>Venues, from the official game centre. Nothing in the repository holds one.</li>
+<li>Reserve lists. "Not listed" still cannot be distinguished from "on injured reserve".</li>
+<li>Game Books, inactive lists and snap counts for the current week, so a backup starting for a starter
+can be suspected but not confirmed.</li>
+<li>Any measured meaning for "Questionable". The official text publishes no percentage and none has been measured.</li>
+</ul>
+
+<h2>Decisions that need a human</h2>
+<p class="lead">These are choices, not discoveries. No amount of data settles them.</p>
+<div class="tablewrap"><table class="" data-exempt="a decision record, not a data value; the linked suggestion pages carry the sources"><thead><tr><th>ID</th><th>Decision</th><th>Why it is a choice and not a fact</th><th>What a reviewer picks</th><th>Where</th></tr></thead><tbody><tr><td>D1</td><td>Publish the raw rows, or hold them behind a private store</td><td>The data terms have not been read. Raw rows are public today.</td><td>Read the terms, record the decision, then act.</td><td>&lt;a href=&quot;suggestions.html#S18&quot;&gt;S18&lt;/a&gt;</td></tr><tr><td>D2</td><td>Keep six generations of pages, or collapse them</td><td>A reader cannot tell which page is current, and the numbers on them are not guaranteed to agree.</td><td>One landing page that links to every generation with a &#x27;current&#x27; badge on one.</td><td>&lt;a href=&quot;suggestions.html#S20&quot;&gt;S20&lt;/a&gt;</td></tr><tr><td>D3</td><td>Withdraw strategies whose registration does not precede their results</td><td>At least one commit carries a rule and its results together.</td><td>Audit every rule; withdraw or re-register.</td><td>&lt;a href=&quot;suggestions.html#S13&quot;&gt;S13&lt;/a&gt;</td></tr><tr><td>D4</td><td>Rank on realised return, or on benchmark-relative skill</td><td>The brief rejects ranking on ROI. Some pages still print ROI on the leaderboard.</td><td>Two boards: retrospective research and a prospective board only.</td><td>&lt;a href=&quot;suggestions.html#S14&quot;&gt;S14&lt;/a&gt;</td></tr><tr><td>D5</td><td>Build the deficiency matrix, or wait for a verified depth order</td><td>No depth route is verified for all 32 clubs.</td><td>Verify the club pages one by one; fall back to snap counts where a club fails.</td><td>&lt;a href=&quot;suggestions.html#S09&quot;&gt;S09&lt;/a&gt;</td></tr></tbody></table></div><p class="tablenote">Rows in this table carry no source link because: a decision record, not a data value; the linked suggestion pages carry the sources.</p>
+
+<h2>Where the numbers come from</h2>
+<p>Official pages read on 2026-11-16:
+<a href="https://www.nfl.com/standings/league/2026/REG">standings</a>,
+<a href="https://www.nfl.com/schedules/2026/REG11">schedule and results</a>,
+<a href="https://www.nfl.com/injuries/league/2026/reg10">Week 10 injury report</a>.
+Historical results, prices, injuries and player weeks:
+<a href="https://github.com/nflverse/nflverse-data">nflverse</a> (CC-BY-4.0), pinned by sha256 in
+<code>data/s9cb/provenance.json</code>. The league publishes no official odds; closing lines in the
+feed are consensus numbers and are labelled as such.</p>
+</main>
+</div>
+<footer>
+  <p>Every row on this site links to the official page it was read from. A value no official page
+  publishes is printed as a labelled blank, never inferred. Built by <code>console/build.py</code>;
+  checked by <code>console/verify.py</code>. Research tool, not betting advice.</p>
+</footer>
+</body></html>

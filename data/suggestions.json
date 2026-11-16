@@ -414,5 +414,31 @@
     "status": "Awaiting review",
     "verified": true,
     "retrieved": "2026-11-13"
+  },
+  {
+    "id": "S31",
+    "area": "Verification & data feeds",
+    "title": "Make every capped source say so in the artifact, not only in a flag",
+    "decision_impact": "The transactions register is usable because each derived row carries the read time, the capture file and the fact that the page was at its 25-row printed cap; a count built on it can be labelled a floor automatically. The same rule should apply wherever a publisher caps a page, and the readiness row should carry the number of capped pages rather than a total that looks complete.",
+    "effort": "small",
+    "recommended_path": "Adopt for the injury report and schedule captures too",
+    "evidence": "data/reserve/coverage.json (printed_cap, pages_capped, months_incomplete_at_source); tools/check_reserve_register.py (fails when the published page stops disclosing it); flag F66",
+    "src": "S40",
+    "status": "Awaiting review",
+    "verified": true,
+    "retrieved": "2026-11-16"
+  },
+  {
+    "id": "S32",
+    "area": "Injuries and depth",
+    "title": "Run the reserve list as the tie-breaker for 'available', not as another injury count",
+    "decision_impact": "On the week-10 capture, 83 players sit on an open reserve designation and appear on no injury report row, against 347 report rows. Counting only the report therefore treats 83 names as available. The reserve list should enter availability as a separate, dated state (on a list / not on a list) so the injury surprise stays a surprise about the report and the unavailable set stays complete; depth and snap features then ablate against both.",
+    "effort": "medium",
+    "recommended_path": "Review before implementing - it changes the availability key",
+    "evidence": "data/reserve/report_vs_reserve.json (totals: report_rows 347, on_reserve 100, named_in_both 17, on_reserve_not_in_report 83); reserve/index.html club table; https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "src": "S37",
+    "status": "Awaiting review",
+    "verified": true,
+    "retrieved": "2026-11-16"
   }
 ]

@@ -1,0 +1,50 @@
+{
+ "schema": "nflcom-injury-capture/1",
+ "source_url": "https://www.nfl.com/injuries/league/2026/reg10",
+ "source_title": "Official NFL Injury Report for Players - Week 10 of the 2026 Season | NFL.com",
+ "season": 2026,
+ "week": 10,
+ "captured": "2026-11-16 (date from the session clock; the capture tool does not return a time of day - see flag CE-02)",
+ "capture_method": "Agent fetch_page tool, chunks 0-7 of 8. The tool returns rendered text, not raw HTML. Every row was read from that text in the order the page prints it, grouped by fixture, then written to a TSV. The club code is the one the page prints next to each club (nfl.com prints AZ for Arizona and LA for the Rams; they are stored as AZ and LAR and the alias is flagged as CE-03).",
+ "raw_html_retained": false,
+ "session": "ce097fea-nfl1",
+ "files": {
+  "injury_rows_2026-11-16.tsv": {
+   "rows": 347,
+   "sha256": "9fe77d36a25618542553e690a5a44dac3449769b56e45cccd711cb1e2669cd5f"
+  },
+  "games_reg10_2026-11-16.tsv": {
+   "rows": 14,
+   "sha256": "f19788afd4b612567bb184f4c97921d2422ae893232207a45b0d90612acc5dc1"
+  }
+ },
+ "counts": {
+  "rows": 347,
+  "clubs": 28,
+  "fixtures": 14,
+  "no_injury_sections_on_page": 0,
+  "clubs_on_bye_not_listed": [
+   "CHI",
+   "DEN",
+   "PHI",
+   "TB"
+  ]
+ },
+ "game_status_counts": {
+  "": 176,
+  "Doubtful": 11,
+  "Out": 70,
+  "Questionable": 90
+ },
+ "practice_status_counts": {
+  "Did Not Participate In Practice": 94,
+  "Full Participation in Practice": 180,
+  "Limited Participation in Practice": 73
+ },
+ "cross_reference": {
+  "previous_capture": "data/capture/nflcom_injuries_reg10_2026-11-15_rows.tsv",
+  "previous_sha256": "9fe77d36a25618542553e690a5a44dac3449769b56e45cccd711cb1e2669cd5f",
+  "comparison": "Re-read the official page in full on 2026-11-16 and compared row by row with the 2026-11-15 capture: 347 rows against 347, no row present on only one side, and no field different on any shared row. The sha256 of this session's rows file equals the hash recorded in data/capture/manifest.json, so the two captures are byte-identical and the official page did not change in the interval.",
+  "delta_file": "data/session-ce097fea/injury_capture_delta.json"
+ }
+}
