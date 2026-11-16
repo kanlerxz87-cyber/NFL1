@@ -4593,3 +4593,21 @@ edited **by addition only** — one nav entry, one build step, one ownership lin
 so any conflict is textual and resolvable by keeping both sides.
 
 _This claim is committed and pushed before any other file in the scope is touched._
+## Session claim — `bf26453d-nfl1` (branch `arena/bf26453d-nfl1`, base `46c82ae`, 2026-11-16 18:0x UTC)
+
+Claimed before any edit on this branch. This session is the **final integration session** for the
+2026-11-16 brief. Live-session check at claim time: only `1a6737c5-nfl1` (PR #100) has commits in
+the last 60 minutes (18:01Z); its scope `data/session-1a6737c5/**` + its own board section is NOT
+touched here. Every other open claim is >60 minutes old with no commits (PR #99 15:53Z, PR #94
+15:38Z, PRs #92/#91 ~15:00Z, PRs #81/#80/#79/#77/#59/#57/#47 from 2026-11-15 or earlier) and is
+takeover-eligible under the board's 60-minute rule; handoffs are noted in the log below.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| B1 | Repair the failing `Verify decision dashboard` gate on `main` (step "Verify every repo dataset, cell by cell, against the official pages" failed on `40ad3864`, 2026-11-16 15:31Z) | claimed | `bf26453d` | `tools/verify_dashboard.py`, `data/model/*` only if a value is wrong per an official page, regenerated `dashboard/*` | reproduce first; fix the root cause, never weaken a check to pass |
+| B2 | Takeover per the 60-minute rule: land or close stale PR #99 (venues, MERGEABLE) and PR #94 (takeover of 7 stale PRs, CONFLICTING) after re-running their own gates; close stale superseded PRs with pointers | claimed | `bf26453d` | merges/closes only, `COORDINATION.md` | handoff noted; nothing deleted |
+| B3 | Line-by-line official re-verification sweep of the headline datasets this branch publishes (standings, Week 10 injuries, schedule/results, transactions) with evidence files and new flags | claimed | `bf26453d` | `data/session-bf26453d/**` (new), `docs/audit-bf26453d.md` (new), append-only `data/flags.json` | every verified row gets its official link; unverifiable cells stay blank + flagged |
+| B4 | Brief front-door completion audit against the 2026-11-16 brief text: decision-readiness rows (one per requirement: gate + clearing number), questions/information/answers register, suggestions-to-discover-missing-information section, executive summary refresh | claimed | `bf26453d` | additive rows in `data/readiness.json`, `data/questions.json`, `data/suggestions.json`, `site/fragments/` + their generators | generated pages are never hand-edited |
+| B5 | Final integration: all gates green, PR `arena/bf26453d-nfl1` → `main`, merge without waiting, confirm Pages deploy, record PR link + merge result here | claimed | `bf26453d` | `COORDINATION.md` | do not merge a broken site |
+
+_This claim is committed and pushed before any other file is touched, per the brief._
