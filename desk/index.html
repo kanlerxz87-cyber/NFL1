@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overview · NFL Decision Desk</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <p class="crumb"><a href="https://kanlerxz87-cyber.github.io/NFL1/index.html">NFL Decision Lab</a> › NFL Decision Desk</p>
+    <h1>Overview</h1>
+    <p class="sub">What is verified, what is not, and what has to happen before a decision.</p>
+    <nav><a href="index.html" class="active">Overview</a><a href="readiness.html">Readiness</a><a href="verification.html">Verification</a><a href="strategies.html">Strategies &amp; Luck</a><a href="availability.html">Availability &amp; Depth</a><a href="pricing.html">Pricing &amp; Signals</a><a href="questions.html">Questions</a><a href="suggestions.html">Suggestions</a><a href="flagged.html">Flagged for Review</a><a href="executive-summary.html">Executive Summary</a><a href="method.html">Method &amp; Sources</a></nav>
+  </div>
+</header>
+<main class="wrap">
+
+<section class="hero">
+  <p class="lede">A dashboard of what is verified, what is not, and what has to happen before a
+  betting decision can be justified. Every number below was re-read from an official page on
+  2026-11-16, or is computed from a repository file named beside it.</p>
+  <div class="kpis"><div class="kpi"><span class="n">54</span><span class="l">Requirement rows</span></div><div class="kpi"><span class="n">13</span><span class="l">Met</span></div><div class="kpi"><span class="n">24</span><span class="l">Partial</span></div><div class="kpi"><span class="n">8</span><span class="l">Blocked</span></div><div class="kpi"><span class="n">8</span><span class="l">Not started</span></div><div class="kpi"><span class="n">1</span><span class="l">Owner decision needed</span></div><div class="kpi"><span class="n">24</span><span class="l">Open questions</span></div><div class="kpi"><span class="n">10</span><span class="l">Irregularities found this session</span></div></div>
+</section>
+
+<h2>Where the project actually stands</h2>
+<p>Most of this page is bad news, and that is the point: a decision desk is only useful if it
+states the blocker before the result. Six numbers, each with the comparison that gives it meaning.</p>
+<table class="grid">
+<thead><tr><th>Check</th><th>Number</th><th>What it means</th><th>Source</th></tr></thead><tbody>
+<tr><td class="">Official standings re-read</td><td class="">32 clubs, 149 completed games</td><td class="">Every row re-read this session; PF-PA=NET and PCT reproduce in all 32 rows.</td><td class="src"><a href="https://www.nfl.com/standings/league/2026/reg">https://www.nfl.com/standings/league/2026/reg</a></td></tr>
+<tr><td class="">Week-10 injury report re-read</td><td class="">347 rows, 28 clubs</td><td class="">171 rows carry a game status; 176 are practice-only.</td><td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">https://www.nfl.com/injuries/league/2026/reg10</a></td></tr>
+<tr><td class="">Week-11 fixtures re-read</td><td class="">13 fixtures, 6 byes</td><td class="">26 clubs play and 6 are on bye = 32 clubs; committed copy reproduces: reproduces.</td><td class="src"><a href="https://www.nfl.com/schedules/2026/by-week/week-11">https://www.nfl.com/schedules/2026/by-week/week-11</a></td></tr>
+<tr><td class="">Backtest corpus vs the season</td><td class="">137 vs 149 games</td><td class="">Gap of 12 completed games. Check E now passes: the dashboard count was brought to the official 149 and the checker agrees. The corpus itself is still behind at 137 results, so the gap has moved rather than closed. (D-F01).</td><td class="src"><a href="https://www.nfl.com/standings/league/2026/reg">https://www.nfl.com/standings/league/2026/reg</a></td></tr>
+<tr><td class="">Club depth charts read</td><td class="">3 of 32 clubs</td><td class="">85 slots transcribed; 5 starter-out chains resolved by chart order.</td><td class="src"><a href="https://www.detroitlions.com/team/depth-chart">https://www.detroitlions.com/team/depth-chart</a></td></tr>
+<tr><td class="">Strategies that clear every gate</td><td class="">0 of 12</td><td class="">Best row: Brier skill 0.0104 vs price, ROI 6.06% with a 95% interval of -3.1% to +15.3%.</td><td class="src"><a href="https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json">https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/s9cb/leaderboard.json</a></td></tr>
+</tbody></table>
+
+<h2>Claims re-tested against the official pages today</h2>
+<p>These are the findings the brief and earlier sessions carried. Each one was re-read this
+session rather than repeated: a claim that no longer holds is marked resolved, not quietly kept.</p>
+<table class="grid">
+<thead><tr><th>ID</th><th>Claim</th><th>Verdict</th><th>Evidence</th><th>Source</th></tr></thead><tbody>
+<tr><td class="">D-C01</td><td class="">The repository&#x27;s committed standings copies match the official table</td><td class=""><strong>partly</strong></td><td class="">standings.json: 6/32 clubs reproduce; standings_current.json: 32/32 clubs reproduce; official_standings_2026.csv: 6/32 clubs reproduce; official_standings_2026-11-13.csv: 8/32 clubs reproduce</td><td class="src"><a href="https://www.nfl.com/standings/league/2026/reg">https://www.nfl.com/standings/league/2026/reg</a></td></tr>
+<tr><td class="">D-C02</td><td class="">Games played reconciles with the official standings</td><td class=""><strong>gate passes, corpus trails</strong></td><td class="">the checker asserts PASS with 0 of 28 checks failing; its games-played check is PASS at 149 games (official standings imply 149); the dashboard asserts 149; the frozen backtest corpus still holds 137 results, a gap of 12</td><td class="src"><a href="https://www.nfl.com/standings/league/2026/reg">https://www.nfl.com/standings/league/2026/reg</a></td></tr>
+<tr><td class="">D-C03</td><td class="">The Week-10 injury report is fully captured</td><td class=""><strong>confirmed</strong></td><td class="">347 rows, 28 clubs; 0 field differences against the committed capture</td><td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">https://www.nfl.com/injuries/league/2026/reg10</a></td></tr>
+<tr><td class="">D-C04</td><td class="">Three Lions rows carry a blank game-status cell</td><td class=""><strong>confirmed</strong></td><td class="">the official page lists all three with game status Out; the blank cells the brief describes are in an older hand copy, not on the page</td><td class="src"><a href="https://www.nfl.com/injuries/league/2026/reg10">https://www.nfl.com/injuries/league/2026/reg10</a></td></tr>
+<tr><td class="">D-C05</td><td class="">The Week-11 schedule copy matches the official page</td><td class=""><strong>confirmed</strong></td><td class="">13 fixtures, 6 byes, 0 differences</td><td class="src"><a href="https://www.nfl.com/schedules/2026/by-week/week-11">https://www.nfl.com/schedules/2026/by-week/week-11</a></td></tr>
+<tr><td class="">D-C06</td><td class="">The Ravens depth chart still lists Lamar Jackson and Tyler Huntley</td><td class=""><strong>resolved at source</strong></td><td class="">the chart re-read this session lists Brissett, Fagnano and Slovis at QB — no Jackson, no Huntley. The dated transaction 11/06 AZ -&gt; BAL Jacoby Brissett explains the change</td><td class="src"><a href="https://www.baltimoreravens.com/team/depth-chart">https://www.baltimoreravens.com/team/depth-chart</a></td></tr>
+<tr><td class="">D-C07</td><td class="">The Packers depth chart needs jersey numbers stripped to parse</td><td class=""><strong>confirmed</strong></td><td class="">the live page prints &#x27;9 Christian Watson&#x27; style cells, so the number must be stripped; the register holds the stripped name and the raw string</td><td class="src"><a href="https://www.packers.com/team/depth-chart">https://www.packers.com/team/depth-chart</a></td></tr>
+<tr><td class="">D-C08</td><td class="">A club publishes a depth slot with no first name</td><td class=""><strong>confirmed</strong></td><td class="">2 empty slot(s) across the three charts transcribed this session (BAL kicker, GB punt returner)</td><td class="src"><a href="https://www.packers.com/team/depth-chart">https://www.packers.com/team/depth-chart</a></td></tr>
+</tbody></table>
+
+<h2>What blocks a decision right now</h2>
+<p>The eight rows that block the most. The full register is on <a href="readiness.html">Readiness</a>,
+with the number that would clear each one.</p>
+<table class="grid">
+<thead><tr><th>ID</th><th>Requirement</th><th>Status</th><th>Blocking gate</th><th>Number now</th><th>Number that clears it</th></tr></thead><tbody>
+<tr><td class="">A-05</td><td class="">Model depth from playing time, not jersey order</td><td class=""><span class="pill blocked">blocked</span></td><td class="">no official snap-count source, and no per-club chart for all 32 clubs</td><td class="">238 register rows across 4 clubs; 28 clubs unread; 0 snap-count rows</td><td class="">a snap-count column for every charted player, or a verified chart for all 32 clubs</td></tr>
+<tr><td class="">A-06</td><td class="">Build the availability graph as a first-class dataset (expected starter vs actual)</td><td class=""><span class="pill blocked">blocked</span></td><td class="">actual starters require the official Game Book, which is not in the repo</td><td class="">5 named replacement chains resolved from club charts for 3 clubs, each marked UNCONFIRMED (chart evidence only); 0 confirmed starters</td><td class="">every played fixture has an official starter for both units of both clubs</td></tr>
+<tr><td class="">A-16</td><td class="">Interactive offense vs defence deficiency matrix (1st-4th string)</td><td class=""><span class="pill blocked">blocked</span></td><td class="">3 of 32 charts read; no snap-backed depth order</td><td class="">3 clubs transcribed; 0 matchup cells</td><td class="">32 charts or snap-count depth, plus a confirmed availability read per club</td></tr>
+<tr><td class="">A-18</td><td class="">Publish a weekly &#x27;what changed&#x27; diff instead of a static snapshot</td><td class=""><span class="pill blocked">blocked</span></td><td class="">1 snapshot, so there is nothing to difference</td><td class="">0 published diffs; has_previous = false</td><td class="">2 snapshots exist and the diff column is rendered with rank, rating and availability change</td></tr>
+<tr><td class="">D-12</td><td class="">Stadium roof/surface register and hourly wind/precipitation overlay</td><td class=""><span class="pill blocked">blocked</span></td><td class="">roof and surface columns are third-party; no weather overlay</td><td class="">roof and surface columns exist for history; 0 official roof designations; 0 weather rows</td><td class="">a roof/surface value with an official source per stadium, plus an hourly forecast at kickoff</td></tr>
+<tr><td class="">P-01</td><td class="">Price-snapshot store recording opening and closing numbers for every market originated</td><td class=""><span class="pill blocked">blocked</span></td><td class="">no approved price source with a fetch clock</td><td class="">1 value per market per game; 0 opening/closing pairs; 0 fetch timestamps</td><td class="">100% of originated markets carry an opening row, a closing row and the time each was read</td></tr>
+<tr><td class="">P-07</td><td class="">Vig-free market consensus vs originated fair-line decomposition</td><td class=""><span class="pill blocked">blocked</span></td><td class="">no two-sided price pairs to de-vig</td><td class="">point spreads and totals only; 0 paired prices</td><td class="">both sides of a market are stored so the hold can be removed arithmetically</td></tr>
+<tr><td class="">S-10</td><td class="">Turn the 136-game log into the pre-registered backtest corpus</td><td class=""><span class="pill blocked">blocked</span></td><td class="">the frozen corpus is older than the official schedule</td><td class="">7239 rows frozen; 137 completed 2026 games; official standings imply 149</td><td class="">a new corpus_id frozen over the complete season with its own member counts</td></tr>
+</tbody></table>
+
+<h2>Read this next</h2>
+<div class="cards">
+  <a class="card" href="verification.html"><h3>Verification</h3><p>32 clubs, 347 injury rows, 13 fixtures and 3 depth charts, each row with its official link and what changed.</p></a>
+  <a class="card" href="readiness.html"><h3>Readiness</h3><p>54 requirements: status, the gate that blocks each, and the number that would clear it.</p></a>
+  <a class="card" href="strategies.html"><h3>Strategies &amp; luck</h3><p>Zero of twelve strategies clears every gate. The luck panel shows how much of each result a fair price would have produced.</p></a>
+  <a class="card" href="availability.html"><h3>Availability &amp; depth</h3><p>Who is listed to start, who is Out, and who the club's own chart names next — with the coverage gap stated.</p></a>
+  <a class="card" href="questions.html"><h3>Questions</h3><p>24 questions that gate a decision: what is known, what is missing, and how to find it.</p></a>
+  <a class="card" href="suggestions.html"><h3>Suggestions</h3><p>Twelve improvements ranked, each with a recommended path, the alternative and what it unblocks.</p></a>
+  <a class="card" href="flagged.html"><h3>Flagged for Review</h3><p>Every irregularity and unverified value, with the source link that settles it.</p></a>
+  <a class="card" href="executive-summary.html"><h3>Executive summary</h3><p>The whole position in one page: what holds, what does not, and the four decisions that only the owner can make.</p></a>
+</div>
+
+<h2>How to read a blank on this site</h2>
+<p>A blank is never a zero and never an assumption. It means one of three things, and the page says
+which: <em>not published</em> (the source does not print it), <em>not read</em> (nobody has fetched it
+yet), or <em>unverified</em> (a value exists but no official page confirms it). Values that are
+unverified are not shown as numbers at all; they are listed on the
+<a href="flagged.html">Flagged for Review</a> page with what would settle them.</p>
+
+</main>
+<footer class="wrap">
+  <p>NFL Decision Desk — session <code>ed736fc3-nfl1</code>, built 2026-11-16 from <code>data/desk/*.json</code>.
+  Every table row carries the official page it was checked against; a value that could not be confirmed
+  is published as a labelled blank or on the <a href="flagged.html">Flagged for Review</a> page.
+  This is a research tool, not betting advice.</p>
+</footer>
+</body>
+</html>

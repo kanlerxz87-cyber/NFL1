@@ -72,6 +72,9 @@ NAV = [
     ("pages/verified.html", "Verified Artifacts"),
     ("pages/models.html", "Models"),
     ("pages/flagged.html", "Flagged (companion)"),
+    # Session ed736fc3-nfl1 (D2): the Decision Desk — verification, readiness, strategies, availability
+    # and the whole flag register on one dashboard. Additive entry only.
+    ("desk/index.html", "Decision Desk"),
 ]
 
 # Sidebar: the same pages grouped by category, rendered on every page so the site reads

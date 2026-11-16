@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Executive Summary · NFL Decision Desk</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <p class="crumb"><a href="https://kanlerxz87-cyber.github.io/NFL1/index.html">NFL Decision Lab</a> › NFL Decision Desk</p>
+    <h1>Executive Summary</h1>
+    <p class="sub">What holds, what does not, what is missing, and the four decisions only the owner can make.</p>
+    <nav><a href="index.html">Overview</a><a href="readiness.html">Readiness</a><a href="verification.html">Verification</a><a href="strategies.html">Strategies &amp; Luck</a><a href="availability.html">Availability &amp; Depth</a><a href="pricing.html">Pricing &amp; Signals</a><a href="questions.html">Questions</a><a href="suggestions.html">Suggestions</a><a href="flagged.html">Flagged for Review</a><a href="executive-summary.html" class="active">Executive Summary</a><a href="method.html">Method &amp; Sources</a></nav>
+  </div>
+</header>
+<main class="wrap">
+
+<p class="lede">The position in one page. Four things hold up, five do not, and four decisions belong
+to the owner rather than to the agent.</p>
+
+<h2>What holds up</h2>
+<ol class="list">
+  <li><strong>The official data on this page is verified, not asserted.</strong> 32 club
+      standings rows, 347 injury rows across 28 clubs, 13 Week-11
+      fixtures and 6 byes were re-read today. The Week-10 report reproduces the
+      committed capture with 0 field differences, and the Week-11 schedule reproduces its committed copy with
+      0 differences.</li>
+  <li><strong>Skill is measured properly, and luck is removed explicitly.</strong> Every strategy is scored on
+      Brier skill with a game-cluster interval and a multiplicity charge, and every ROI sits beside the profit
+      a fair price would have produced. 12 of 12 strategies fall inside their own luck band.</li>
+  <li><strong>Nothing is promoted that has not passed a gate.</strong> 13 of
+      54 requirements are met (24 partial, 8 blocked,
+      8 not started, 1 waiting on an owner decision), and the
+      ones that are met are the governance layer — pre-registration, demotion, controls, holdout splits — which is the
+      part that stops the rest from becoming storytelling.</li>
+  <li><strong>A wrong finding was retired rather than repeated.</strong> The brief's Baltimore stale-depth claim no
+      longer holds: the chart now lists Brissett, Fagnano and Slovis at QB, and the dated transaction register
+      explains why.</li>
+</ol>
+
+<h2>What does not hold up</h2>
+<ol class="list">
+  <li><strong>The model loses to the closing line.</strong> Skill −0.0413 (interval −0.0513 to −0.0299, n=6785),
+      and its disagreement with the market carries no information (r = 0.019, interval −0.005 to 0.042).</li>
+  <li><strong>No strategy is promotable.</strong> The best row has ROI 6.06% with an interval of −3.1% to +15.3%
+      and needs about 1950 settled bets for 80% power. It has 401.</li>
+  <li><strong>The results feed is 12 games behind.</strong> 137 completed games in the
+      corpus against 149 implied by the official standings.
+      Check E now passes: the dashboard count was brought to the official 149 and the checker agrees. The corpus itself is still behind at 137 results, so the gap has moved rather than closed. (D-F01).</li>
+  <li><strong>Nobody knows who actually started.</strong> Depth is chart order for 3 of 32 clubs;
+      there are no inactive lists for Week 10 and no snap counts at all.</li>
+  <li><strong>Backtest rows are still ranked.</strong> 12 rows appear on a leaderboard by ROI, which the brief
+      forbids and the page itself labels.</li>
+</ol>
+
+<h2>What is missing, and what would produce it</h2>
+<ul class="list">
+  <li><strong>A price store with a clock</strong> — one value per market per game today, no opening/closing split.
+      Requires a signed price policy (Q-02).</li>
+  <li><strong>Official Game Books and inactive lists</strong> — the only route to a confirmed starter (Q-04).</li>
+  <li><strong>Snap counts</strong> — the only official way to model depth as playing time rather than jersey order (A-05).</li>
+  <li><strong>An availability series that predates kickoffs</strong> — without it, an injury ablation measures leakage (Q-14).</li>
+  <li><strong>29 more club depth charts</strong>, one of which is published as an image (A-16, D-F07).</li>
+</ul>
+
+<h2>Decisions for the owner</h2>
+<p>These are choices, not work items. No amount of engineering settles them.</p>
+<ol class="list">
+  <li><strong>The price-data policy</strong> (Q-02, D-04). Everything priced is blocked behind it.</li>
+  <li><strong>Whether to keep publishing row-level official data in a public repository</strong> (Q-21, D-07),
+      pending a read of the terms.</li>
+  <li><strong>The promotion threshold</strong> (Q-23): how many settled prospective bets, with what multiplicity
+      rule, before a strategy is called live.</li>
+  <li><strong>Which depth route to build</strong> (Q-22): club charts for 32 clubs, or an official snap-count source.</li>
+</ol>
+
+<h2>The single next action</h2>
+<p>Run the collector. It is the only item on the board that needs no decision from anyone, and it
+changes more rows than anything else: it clears the failing gate, refreshes three stale standings
+copies, and moves the corpus to the official game count. Suggestions are ranked on the
+<a href="suggestions.html">Suggestions</a> page; the blocker for every requirement is on
+<a href="readiness.html">Readiness</a>.</p>
+
+</main>
+<footer class="wrap">
+  <p>NFL Decision Desk — session <code>ed736fc3-nfl1</code>, built 2026-11-16 from <code>data/desk/*.json</code>.
+  Every table row carries the official page it was checked against; a value that could not be confirmed
+  is published as a labelled blank or on the <a href="flagged.html">Flagged for Review</a> page.
+  This is a research tool, not betting advice.</p>
+</footer>
+</body>
+</html>

@@ -39,6 +39,9 @@ GENERATORS = {
     "prereg/build.py": [r'write\(\s*"([^"/]+\.html)"'],
     # Session 1d824ec2-nfl1: the transactions/reserve sub-site. Bare filenames under reserve/.
     "tools/build_reserve_site.py": [r'OUT_DIR / "([^"/]+\.html)"'],
+    # Session ed736fc3-nfl1: the Decision Desk sub-site. Pages are declared in a PAGES dict and
+    # written under desk/; the generator writes them itself so the pattern reads the dict keys.
+    "tools/desk/build_site.py": [r'^    "([a-z-]+\.html)": p_'],
 }
 
 # explicit, documented ownership. Anything not here is reported, not assumed.
@@ -67,6 +70,18 @@ KNOWN_OWNERS = {
     # Session 0c5215c1-nfl1: pre-registration sub-site (prereg/build.py registered above).
     # Session 1d824ec2-nfl1: transactions and reserve-list sub-site.
     "reserve/index.html": "tools/build_reserve_site.py",
+    # Session ed736fc3-nfl1: the Decision Desk sub-site (11 pages, one generator).
+    "desk/index.html": "tools/desk/build_site.py",
+    "desk/readiness.html": "tools/desk/build_site.py",
+    "desk/verification.html": "tools/desk/build_site.py",
+    "desk/strategies.html": "tools/desk/build_site.py",
+    "desk/availability.html": "tools/desk/build_site.py",
+    "desk/pricing.html": "tools/desk/build_site.py",
+    "desk/questions.html": "tools/desk/build_site.py",
+    "desk/suggestions.html": "tools/desk/build_site.py",
+    "desk/flagged.html": "tools/desk/build_site.py",
+    "desk/executive-summary.html": "tools/desk/build_site.py",
+    "desk/method.html": "tools/desk/build_site.py",
     "reserve/rows.html": "tools/build_reserve_site.py",
     "prereg/registry.html": "prereg/build.py",
     "prereg/forecasts.html": "prereg/build.py",
@@ -106,6 +121,8 @@ def claims():
             found = {"prereg/" + f for f in found}
         if gen == "tools/build_reserve_site.py":
             found = {"reserve/" + f for f in found}
+        if gen == "tools/desk/build_site.py":
+            found = {"desk/" + f for f in found}
         for f in found:
             out.setdefault(f, set()).add(gen)
     return out
