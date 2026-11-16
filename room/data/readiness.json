@@ -947,19 +947,19 @@
    }
   },
   {
-   "id": "MO-04",
-   "group": "Models and leaderboard",
-   "requirement": "Treat it as a leaderboard competition with rewards for top strategies",
-   "status": "Not verified",
-   "checked": "not checked",
-   "evidence": "The leaderboard is scored. No reward rule was found in the repo in this session.",
-   "blocked_by": "Reward values not set.",
-   "clears_when": "A published reward rule with values.",
-   "next_step": "Decide the reward values.",
-   "src": {
-    "t": "room/data/questions.json",
-    "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/room/data/questions.json"
-   }
+    "id": "MO-04",
+    "group": "Models and leaderboard",
+    "requirement": "Treat it as a leaderboard competition with rewards for top strategies",
+    "status": "Done",
+    "checked": "built and gate-verified 2026-11-16",
+    "evidence": "A pre-registered reward rule is published at rewards/REWARDS-RULE.md with concrete numeric thresholds (Brier skill lower bound > 0, BH-adjusted p < 0.05, Bonferroni 0.05/6, decided-bet sample >= 200) and non-monetary badge tiers (Verified Signal; Top Single Bet / Top Parlay / Top Player Prop Combo). The rule is frozen in a results-free registration commit; rewards/verify.py fails on any drift. No badge is awarded yet: the repo's own proper-score result is any_eligible=false.",
+    "blocked_by": "None.",
+    "clears_when": "n/a",
+    "next_step": "None. The rule is frozen; a badge is awarded only when a strategy clears Stage 1.",
+    "src": {
+      "t": "rewards rule",
+      "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/rewards/REWARDS-RULE.md"
+    }
   },
   {
    "id": "MO-05",

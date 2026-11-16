@@ -1,0 +1,38 @@
+{
+  "schema": "rewards_rule/1",
+  "generated_at": "2026-11-16",
+  "registration_commit": "00e3cc77b41a7d6c1ffb0a12d2beaf9835f900df",
+  "rule_sha256": "706901f3f5c13ad20f2b4a27d1b7155b594cc06812882cff2d43435d04c2503b",
+  "rule_file": "rewards/REWARDS-RULE.md",
+  "thresholds_file": "data/rewards/thresholds.json",
+  "kind": "pre-registered proposal (policy); non-monetary badges; not an official NFL fact",
+  "summary": "Two-stage reward rule. Stage 1 (proper-score qualification) awards a Verified Signal badge when a strategy's Brier skill lower bound is > 0, its BH-adjusted p-value is < 0.05 (and it clears Bonferroni 0.05/N_tests), and its decided-bet sample is >= 200, on a frozen walk-forward window. Stage 2 (prospective CLV/ROI escrow) awards the Top Single Bet / Top Parlay / Top Player Prop Combo badge to the rank-1 eligible strategy whose prospective ROI lower bound is > 0. No badge is awarded if no strategy qualifies.",
+  "tracks": [
+    {"id": "single", "name": "Single bet", "badge": "Top Single Bet", "stage1_status": "not_qualified", "stage2_status": "no_escrow", "reason": "no strategy in this track clears all three Stage-1 conditions (data/strat/proper_score.json any_eligible=false)"},
+    {"id": "parlay", "name": "Parlay", "badge": "Top Parlay", "stage1_status": "not_qualified", "stage2_status": "no_escrow", "reason": "no strategy in this track clears all three Stage-1 conditions; the parlay market is additionally not scored (no validated joint probability, data/strat/proper_score.json)"},
+    {"id": "prop", "name": "Player prop combo", "badge": "Top Player Prop Combo", "stage1_status": "not_qualified", "stage2_status": "no_escrow", "reason": "no strategy in this track clears all three Stage-1 conditions; the player-prop market is not scored (no official or book-level price, data/strat/proper_score.json)"}
+  ],
+  "badges_awarded": [],
+  "badges_awarded_note": "None. The rule is frozen and waiting for a strategy that clears Stage 1. A winner is never fabricated.",
+  "stage1_thresholds": {
+    "skill_lower_bound": "> 0",
+    "bh_adjusted_p": "< 0.05",
+    "bonferroni_alpha": "0.05 / 6",
+    "n_tests": 6,
+    "decided_bet_floor": ">= 200"
+  },
+  "stage2_rule": "Rank Stage-1-qualified strategies by prospective CLV lower bound, then prospective ROI lower bound; award the track badge to rank 1 whose prospective ROI lower bound is > 0.",
+  "demotion": "A badged strategy returns to paper if it trips demotion rule D1-D5 (data/strat/demotion_rules.json). Re-promotion requires a fresh prospective sample of 200 settled bets clearing D1-D3 in the opposite direction.",
+  "mind_changers": {
+    "upside": "A strategy earns the Verified Signal badge when its Brier skill lower bound is > 0, its BH-adjusted p-value is < 0.05 (and clears Bonferroni 0.05/N_tests), and its decided-bet sample is >= 200 on a frozen walk-forward window; a track badge follows when its prospective ROI lower bound is > 0 over the registered escrow window.",
+    "downside": "A badge is withdrawn when the skill lower bound falls to <= 0, or the BH-adjusted p-value rises to >= 0.05, or the sample falls below the track floor, or any demotion rule D1-D5 trips."
+  },
+  "no_backtest_numbers_on_board": true,
+  "sources": [
+    {"t": "Reward rule (frozen)", "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/rewards/REWARDS-RULE.md"},
+    {"t": "Frozen thresholds", "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/rewards/thresholds.json"},
+    {"t": "Proper-score method & eligibility", "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/proper_score.json"},
+    {"t": "Demotion rules", "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/demotion_rules.json"},
+    {"t": "Strategy competition sub-site", "u": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/strat/index.html"}
+  ]
+}
