@@ -4009,3 +4009,19 @@ Two things the merge itself produced, both kept:
 2. The rebase onto `main` dropped this session's board blocks once (a union resolution that deduplicated by line content ate 27 blank/table lines). Rebuilt as a true pure append and asserted `base board preserved byte-for-byte`.
 
 `reserve register gate: 0 failure(s), 2 note(s), 24 pinned page(s)`; `python3 -m unittest discover -s tests -q` → **229 tests OK**.
+
+---
+
+# Session `1a6737c5-nfl1` — Week 10 Lions designations: fresh official read and reproducible check (branch `arena/1a6737c5-nfl1`, base `46c82ae` on `main`, 2026-11-16)
+
+Board read before this claim: yes (full file, plus open PRs #47, #59, #77, #79–#81, #91–#94, #99 — none of them owns the files below).
+
+Scope is deliberately narrow. The full brief (about 90 items) cannot be completed in one session. Several items need sources this sandbox cannot reach (NFL Game Books, snap counts, play-by-play, NWS grids, operator prices), and most others are already claimed by the open PRs above. This session takes one item that no open claim covers.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| LC1 | Fresh official read of the three Week 10 Lions rows (Joseph, Mays, Reed), saved verbatim with sha256 and fetch time | in progress | `1a6737c5` | `data/session-1a6737c5/**` | official page https://www.nfl.com/injuries/league/2026/reg10 read through the fetch tool on 2026-11-16; the sandbox cannot reach nfl.com directly |
+| LC2 | Reproducible check that the stored official values match the stored verbatim page text | in progress | `1a6737c5` | `data/session-1a6737c5/verify_lions.py` | |
+| LC3 | Record the current cross-page conflict state (not edited; owned by `26b2c41e` and the integration session) | in progress | `1a6737c5` | this section only | the audit script was run and its output file reverted, because `room/data/lions_w10_conflicts.json` is owned by another session |
+
+Files touched by this session: `data/session-1a6737c5/**` (new) and this section of `COORDINATION.md`. Nothing else.
