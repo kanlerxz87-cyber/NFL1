@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-15T17:42:12+00:00",
+ "generated_at": "2026-11-16T15:31:41+00:00",
  "source_repo": "https://github.com/nflverse/nflverse-data",
  "source_note": "nflverse parses the NFL's GSIS feed, the official weekly injury report and the official depth charts. Files are pinned by URL + sha256 below. nfl.com is the primary publisher but blocks automated clients, so nfl.com pages are cited as the official entry point and spot-checked separately (see verification.json).",
  "files": [
@@ -10,10 +10,10 @@
    "url": "https://github.com/nflverse/nflverse-data/releases/download/schedules/games.csv",
    "official_upstream": "https://www.nfl.com/schedules/",
    "description": "Game results, closing spread/total/moneylines, rest days, roof, surface, officials",
-   "bytes": 2190002,
+   "bytes": 2190089,
    "status": "ok",
-   "fetched_at": "2026-11-15T17:42:09+00:00",
-   "sha256": "f8bd93cafd79e023067ebaa362d68611926dcf8326cbb8735cb53a2c043cfead"
+   "fetched_at": "2026-11-16T15:31:38+00:00",
+   "sha256": "4dbd042b75bcc0ce5d37e472bd1cbab77d25a3c7bf22f982b22b99cfde3b7825"
   },
   {
    "local": "teams.csv",
@@ -24,7 +24,7 @@
    "description": "Club directory: abbreviation, full name, conference, division, colors, logo",
    "bytes": 18919,
    "status": "ok",
-   "fetched_at": "2026-11-15T17:42:09+00:00",
+   "fetched_at": "2026-11-16T15:31:38+00:00",
    "sha256": "4eab559fcf89cb4eaf61cb63a88abc47b01b6c9049187c59f3efe95888c3d048"
   },
   {
@@ -36,7 +36,7 @@
    "description": "Player master (GSIS id, position, debut year, draft, latest team)",
    "bytes": 7308389,
    "status": "ok",
-   "fetched_at": "2026-11-15T17:42:10+00:00",
+   "fetched_at": "2026-11-16T15:31:38+00:00",
    "sha256": "f82e52fd3d9b0976ad3756dc5ea32a4dbc10650d0a5fed993f9218a850fa944a"
   },
   {
@@ -48,7 +48,7 @@
    "description": "Official weekly injury report, 2026 season (game status + practice status)",
    "bytes": 362797,
    "status": "ok",
-   "fetched_at": "2026-11-15T17:42:10+00:00",
+   "fetched_at": "2026-11-16T15:31:38+00:00",
    "sha256": "8169fb6947f3e86b436fabd025df6211f77eca5f2a38c3d91d2412b568b58441"
   },
   {
@@ -60,7 +60,7 @@
    "description": "Official weekly injury report, 2025 season",
    "bytes": 696006,
    "status": "ok",
-   "fetched_at": "2026-11-15T17:42:10+00:00",
+   "fetched_at": "2026-11-16T15:31:39+00:00",
    "sha256": "873ca1606dd575bd01152508a243ef6b3a0f8f97b90b707217e62ee8c7ceb735"
   },
   {
@@ -70,10 +70,10 @@
    "url": "https://github.com/nflverse/nflverse-data/releases/download/depth_charts/depth_charts_2026.parquet",
    "official_upstream": "https://www.nfl.com/teams/",
    "description": "Weekly depth charts, 2026 (starter=1, backup=2, ...)",
-   "bytes": 3517745,
+   "bytes": 3508172,
    "status": "ok",
-   "fetched_at": "2026-11-15T17:42:10+00:00",
-   "sha256": "2b712dbd51b583707996ce2a2cadd3474ee68c63a2f1caa8c25eb69298cfcdcb"
+   "fetched_at": "2026-11-16T15:31:39+00:00",
+   "sha256": "cf2179b7a583a0f61b6cc5aaf6ad4924a5f05fe9bfd5a4649492672db1c58fba"
   },
   {
    "local": "roster_weekly_2026.parquet",
@@ -82,10 +82,10 @@
    "url": "https://github.com/nflverse/nflverse-data/releases/download/weekly_rosters/roster_weekly_2026.parquet",
    "official_upstream": "https://www.nfl.com/players/",
    "description": "Weekly roster status (Active / Injured Reserve / Practice Squad) 2026",
-   "bytes": 819454,
+   "bytes": 818849,
    "status": "ok",
-   "fetched_at": "2026-11-15T17:42:11+00:00",
-   "sha256": "b4f7dd20cba3c69f4c54b736d88bd61c6aa1acf5471bb8bfcc653076dc0a1940"
+   "fetched_at": "2026-11-16T15:31:39+00:00",
+   "sha256": "60abd36ca668c257e8322f398e17c5af2f85cf58a2b3daa730165b7e79afce32"
   },
   {
    "local": "snap_counts_2026.parquet",
@@ -94,10 +94,10 @@
    "url": "https://github.com/nflverse/nflverse-data/releases/download/snap_counts/snap_counts_2026.parquet",
    "official_upstream": "https://www.nfl.com/stats/player-stats/",
    "description": "Offensive/defensive snap counts by player and week, 2026",
-   "bytes": 134793,
+   "bytes": 142951,
    "status": "ok",
-   "fetched_at": "2026-11-15T17:42:11+00:00",
-   "sha256": "1d2e15675f9a3bc9eba04c1197a7650be7957b8f2fbb657c8df80d40c25e1f03"
+   "fetched_at": "2026-11-16T15:31:39+00:00",
+   "sha256": "29653cc651000a3ba77a5c8dc10ad71ff76f6078ef5f5d032e8fbe2ce8599ab3"
   },
   {
    "local": "stats_player_week_2026.parquet",
@@ -106,10 +106,10 @@
    "url": "https://github.com/nflverse/nflverse-data/releases/download/stats_player/stats_player_week_2026.parquet",
    "official_upstream": "https://www.nfl.com/stats/player-stats/",
    "description": "Player weekly stat lines, 2026 (passing/rushing/receiving)",
-   "bytes": 499986,
+   "bytes": 530471,
    "status": "ok",
-   "fetched_at": "2026-11-15T17:42:11+00:00",
-   "sha256": "406bd97089cd32f090179e44bac06b41056e0884df45fedabf2341c1531e8c59"
+   "fetched_at": "2026-11-16T15:31:40+00:00",
+   "sha256": "2df582590f00c529f1c32087ad6c4be456ae5ae94fc5c18be5013c56519f2c43"
   },
   {
    "local": "pbp_2026.parquet",
@@ -118,10 +118,10 @@
    "url": "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_2026.parquet",
    "official_upstream": "https://www.nfl.com/stats/",
    "description": "Play-by-play with EPA/success, 2026 season to date",
-   "bytes": 10197709,
+   "bytes": 11054538,
    "status": "ok",
-   "fetched_at": "2026-11-15T17:42:12+00:00",
-   "sha256": "786671a1ef96659e71586274ec4b6a9f822965665fbb95bed69ecc219e151fa9"
+   "fetched_at": "2026-11-16T15:31:40+00:00",
+   "sha256": "405ed256cc4b1fa28d8d70f2a81d8a6d98cbfd153a51c27b26ddc4ba2df54928"
   },
   {
    "local": "pbp_2025.parquet",
@@ -132,7 +132,7 @@
    "description": "Play-by-play with EPA/success, 2025 season (model training/validation)",
    "bytes": 20337029,
    "status": "ok",
-   "fetched_at": "2026-11-15T17:42:12+00:00",
+   "fetched_at": "2026-11-16T15:31:40+00:00",
    "sha256": "c6ecedd6d678cc37ed316b23ef84ee1ec6abb69c514bb11868a7ebd5a367df29"
   },
   {
@@ -144,7 +144,7 @@
    "description": "Play-by-play with EPA/success, 2024 season (model training/validation)",
    "bytes": 20597560,
    "status": "ok",
-   "fetched_at": "2026-11-15T17:42:12+00:00",
+   "fetched_at": "2026-11-16T15:31:40+00:00",
    "sha256": "3fd2896bc0b911b615142d2f1fabae54a4bbba5ab7b73b28187b118ef8af6a3b"
   }
  ]

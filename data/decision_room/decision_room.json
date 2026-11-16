@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-16T15:30:51+00:00",
+ "generated_at": "2026-11-16T15:31:51+00:00",
  "evidence": {
   "season": 2026,
   "week_complete": 10,
@@ -21,49 +21,49 @@
   "own_lines": 13,
   "strategies": 12,
   "strategies_pass": 0,
-  "strategies_watch": 2,
-  "strategies_fail": 10,
+  "strategies_watch": 3,
+  "strategies_fail": 9,
   "gates": 8,
-  "starters_flagged": 116,
+  "starters_flagged": 114,
   "depth_matched_rows": 376,
   "unmatched_records": 7,
   "source_files_pinned": 12,
   "verification_checks": 28,
-  "verification_pass": 19,
+  "verification_pass": 20,
   "verification_flag": 8,
-  "verification_fail": 1
+  "verification_fail": 0
  },
  "model": {
   "state": "NOT SUPPORTED",
   "plain": "The model lost to the closing line out of sample and the fitted weight on the model is at or below zero, so its disagreement with the market carried no information in the test window. Publishing a model-vs-market difference as an 'edge' is not supported by this evidence.",
-  "test_n": 137,
-  "model_mae": 9.952,
-  "market_mae": 9.449,
+  "test_n": 149,
+  "model_mae": 10.128,
+  "market_mae": 9.581,
   "diff_ci": [
-   -0.032,
-   1.036
+   0.057,
+   1.043
   ],
   "blend_weight_model": -0.328,
   "blend_weight_market": 1.336,
-  "hybrid_mae": 9.507,
-  "market_only_mae": 9.449,
-  "sign_corr": 0.439,
-  "sign_n": 5592,
+  "hybrid_mae": 9.628,
+  "market_only_mae": 9.581,
+  "sign_corr": 0.44,
+  "sign_n": 5604,
   "source": "data/model/lines.json"
  },
  "strategies": {
   "state": "NOT READY",
-  "plain": "0 of 12 strategies passed every gate. The best paper score is negative (-3.85% lower-bound ROI), which is the ranking's own way of saying no strategy is yet better than luck.",
+  "plain": "0 of 12 strategies passed every gate. The best paper score is negative (-3.68% lower-bound ROI), which is the ranking's own way of saying no strategy is yet better than luck.",
   "best": "S11 Under in divisional games with total 47+",
-  "best_lower_ci": -3.85,
-  "best_roi": 0.0416,
+  "best_lower_ci": -3.68,
+  "best_roi": 0.0429,
   "best_ci": [
-   -0.0385,
-   0.1218
+   -0.0368,
+   0.1226
   ],
-  "best_n": 548,
-  "best_q": 0.9889,
-  "smallest_q": 0.9889,
+  "best_n": 551,
+  "best_q": 0.9902,
+  "smallest_q": 0.9902,
   "gates": [
    {
     "id": "G1",
@@ -99,7 +99,7 @@
    }
   ],
   "parlay": {
-   "n_games": 5592,
+   "n_games": 5604,
    "corr_margin_vs_total": 0.017,
    "phi_home_cover_vs_over": 0.0086,
    "note": "Same-game legs are not independent. Use the phi value to adjust a 2-leg same-game parlay: P = p1p2 + rho*sqrt(p1(1-p1)p2(1-p2))."
@@ -173,20 +173,20 @@
    "TEN",
    "WAS"
   ],
-  "flagged_players": 116,
-  "flagged_with_game_designation": 86,
-  "flagged_practice_only": 30,
-  "model_starters_flagged": 116,
+  "flagged_players": 114,
+  "flagged_with_game_designation": 85,
+  "flagged_practice_only": 29,
+  "model_starters_flagged": 114,
   "model_unmatched": 7,
-  "plain": "The league publishes injury status for players but publishes no depth chart (the league URL 404s). Only club sites do. So a statement like 'the third-string corner is starting' can be verified for 2 of 26 clubs this week, and is an assumption elsewhere. The model flags 116 players as impacted starters; only 86 of them carry an official game designation, the other 30 are practice-only reports that the league has not yet converted into an availability ruling.",
+  "plain": "The league publishes injury status for players but publishes no depth chart (the league URL 404s). Only club sites do. So a statement like 'the third-string corner is starting' can be verified for 2 of 26 clubs this week, and is an assumption elsewhere. The model flags 114 players as impacted starters; only 85 of them carry an official game designation, the other 29 are practice-only reports that the league has not yet converted into an availability ruling.",
   "source": "https://www.nfl.com/injuries/ and club depth-chart pages"
  },
  "props": {
   "state": "MODEL ONLY",
-  "lines": 323,
-  "players": 323,
+  "lines": 331,
+  "players": 331,
   "with_market": 0,
-  "plain": "323 prop lines for 323 players, all built from the player's own shrunk usage and the opponent's defensive rating. No prop price exists in any connected source, so no prop edge can be claimed and the market column is deliberately blank.",
+  "plain": "331 prop lines for 331 players, all built from the player's own shrunk usage and the opponent's defensive rating. No prop price exists in any connected source, so no prop edge can be claimed and the market column is deliberately blank.",
   "source": "data/model/props.json"
  },
  "power": {

@@ -1,16 +1,16 @@
 {
- "generated_at": "2026-11-16T15:27:59+00:00",
+ "generated_at": "2026-11-16T15:31:51+00:00",
  "official_sources": {
   "standings": "https://www.nfl.com/standings/league/2026/reg",
   "injuries": "https://www.nfl.com/injuries/",
   "schedule": "https://www.nfl.com/schedules/2026/REG10",
   "depth_charts": "club official depth-chart pages (URL per row in data/evidence/depth_charts.json)"
  },
- "result": "FAIL",
+ "result": "PASS",
  "counts": {
-  "passed": 19,
+  "passed": 20,
   "flagged": 8,
-  "failed": 1
+  "failed": 0
  },
  "checks": [
   {
@@ -171,8 +171,8 @@
    "area": "C. convention",
    "check": "games where model and market favour different sides (sign ambiguity risk)",
    "status": "FLAG",
-   "rows_checked": 1,
-   "detail": "BAL@CAR"
+   "rows_checked": 2,
+   "detail": "PIT@PHI, BAL@CAR"
   },
   {
    "area": "D. availability",
@@ -192,21 +192,21 @@
    "area": "D. availability",
    "check": "practice-only rows are not labelled as game designations",
    "status": "PASS",
-   "rows_checked": 116,
+   "rows_checked": 114,
    "detail": ""
   },
   {
    "area": "E. counts",
-   "check": "games played reconciles with current official standings",
-   "status": "FAIL",
-   "rows_checked": 137,
-   "detail": "sum of club games / 2 = 149"
+   "check": "games played = half the sum of club games",
+   "status": "PASS",
+   "rows_checked": 149,
+   "detail": "current official standings imply 149"
   },
   {
    "area": "E. counts",
    "check": "starters flagged matches availability detail",
    "status": "PASS",
-   "rows_checked": 116,
+   "rows_checked": 114,
    "detail": ""
   }
  ]

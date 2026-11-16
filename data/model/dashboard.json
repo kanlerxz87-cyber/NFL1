@@ -1,38 +1,38 @@
 {
- "generated_at": "2026-11-15T17:42:25+00:00",
+ "generated_at": "2026-11-16T15:31:51+00:00",
  "season": 2026,
  "last_completed_week": 10,
  "next_week": 11,
  "counts": {
-  "games_played": 137,
+  "games_played": 149,
   "teams": 32,
   "source_files_pinned": 12,
   "own_lines_generated": 13,
   "strategies_tested": 12,
   "strategies_passing_all_gates": 0,
-  "strategies_watch": 2,
-  "starters_flagged_unavailable": 116,
-  "prop_lines_generated": 323
+  "strategies_watch": 3,
+  "starters_flagged_unavailable": 114,
+  "prop_lines_generated": 331
  },
  "top_strategies": [
   {
    "strategy": "S11 Under in divisional games with total 47+",
    "status": "WATCH",
-   "gates_passed": 6,
-   "score_lower_ci_roi_pct": -3.85,
-   "n_graded": 548,
-   "wins": 299,
-   "losses": 249,
+   "gates_passed": 5,
+   "score_lower_ci_roi_pct": -3.68,
+   "n_graded": 551,
+   "wins": 301,
+   "losses": 250,
    "pushes": 6,
-   "win_pct": 0.5456,
-   "roi": 0.0416,
+   "win_pct": 0.5463,
+   "roi": 0.0429,
    "roi_ci95": [
-    -0.0385,
-    0.1218
+    -0.0368,
+    0.1226
    ],
-   "units": 22.82,
-   "p_value": 0.1637,
-   "q_value": 0.9889,
+   "units": 23.64,
+   "p_value": 0.1554,
+   "q_value": 0.9902,
    "max_drawdown_units": -17.0,
    "by_season": {
     "2005": {
@@ -120,12 +120,12 @@
      "roi": 0.0818
     },
     "2026": {
-     "n": 9,
-     "roi": -0.3636
+     "n": 12,
+     "roi": -0.2045
     }
    },
-   "holdout_roi": 0.0818,
-   "max_abs_corr": 0.169,
+   "holdout_roi": -0.0613,
+   "max_abs_corr": 0.195,
    "gates": [
     {
      "id": "G1",
@@ -143,19 +143,19 @@
      "id": "G3",
      "name": "Sample size",
      "pass": true,
-     "detail": "n=548 graded bets (minimum 100)."
+     "detail": "n=551 graded bets (minimum 100)."
     },
     {
      "id": "G4",
      "name": "Holdout positive",
-     "pass": true,
-     "detail": "latest-window ROI=0.0818."
+     "pass": false,
+     "detail": "latest-window ROI=-0.0613."
     },
     {
      "id": "G5",
      "name": "Significance",
      "pass": false,
-     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
+     "detail": "BH-adjusted q=0.9902 (needs <0.10)."
     },
     {
      "id": "G6",
@@ -173,7 +173,7 @@
      "id": "G8",
      "name": "Diversification",
      "pass": true,
-     "detail": "max |corr| with another strategy = 0.169."
+     "detail": "max |corr| with another strategy = 0.195."
     }
    ],
    "window": "2005-2026"
@@ -182,20 +182,20 @@
    "strategy": "S10 Over when closing total is 41 or lower",
    "status": "FAIL",
    "gates_passed": 3,
-   "score_lower_ci_roi_pct": -5.21,
-   "n_graded": 1438,
-   "wins": 751,
-   "losses": 687,
+   "score_lower_ci_roi_pct": -5.08,
+   "n_graded": 1442,
+   "wins": 754,
+   "losses": 688,
    "pushes": 28,
-   "win_pct": 0.5223,
-   "roi": -0.003,
+   "win_pct": 0.5229,
+   "roi": -0.0018,
    "roi_ci95": [
-    -0.0521,
-    0.0461
+    -0.0508,
+    0.0485
    ],
-   "units": -4.27,
-   "p_value": 0.5576,
-   "q_value": 0.9889,
+   "units": -2.55,
+   "p_value": 0.5387,
+   "q_value": 0.9902,
    "max_drawdown_units": -25.64,
    "by_season": {
     "2005": {
@@ -283,11 +283,11 @@
      "roi": 0.0909
     },
     "2026": {
-     "n": 26,
-     "roi": -0.2657
+     "n": 30,
+     "roi": -0.1727
     }
    },
-   "holdout_roi": -0.0874,
+   "holdout_roi": -0.0409,
    "max_abs_corr": 1.0,
    "gates": [
     {
@@ -306,19 +306,19 @@
      "id": "G3",
      "name": "Sample size",
      "pass": true,
-     "detail": "n=1438 graded bets (minimum 100)."
+     "detail": "n=1442 graded bets (minimum 100)."
     },
     {
      "id": "G4",
      "name": "Holdout positive",
      "pass": false,
-     "detail": "latest-window ROI=-0.0874."
+     "detail": "latest-window ROI=-0.0409."
     },
     {
      "id": "G5",
      "name": "Significance",
      "pass": false,
-     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
+     "detail": "BH-adjusted q=0.9902 (needs <0.10)."
     },
     {
      "id": "G6",
@@ -344,21 +344,21 @@
   {
    "strategy": "S04 Divisional underdog +6.5 or more",
    "status": "FAIL",
-   "gates_passed": 4,
-   "score_lower_ci_roi_pct": -9.98,
-   "n_graded": 738,
+   "gates_passed": 3,
+   "score_lower_ci_roi_pct": -10.34,
+   "n_graded": 741,
    "wins": 374,
-   "losses": 364,
+   "losses": 367,
    "pushes": 20,
-   "win_pct": 0.5068,
-   "roi": -0.0325,
+   "win_pct": 0.5047,
+   "roi": -0.0364,
    "roi_ci95": [
-    -0.0998,
-    0.0373
+    -0.1034,
+    0.0331
    ],
-   "units": -24.0,
-   "p_value": 0.8323,
-   "q_value": 0.9889,
+   "units": -27.0,
+   "p_value": 0.8593,
+   "q_value": 0.9902,
    "max_drawdown_units": -39.09,
    "by_season": {
     "2005": {
@@ -446,11 +446,11 @@
      "roi": -0.0985
     },
     "2026": {
-     "n": 11,
-     "roi": 0.2149
+     "n": 14,
+     "roi": -0.0455
     }
    },
-   "holdout_roi": 0.0582,
+   "holdout_roi": -0.072,
    "max_abs_corr": 1.0,
    "gates": [
     {
@@ -469,25 +469,25 @@
      "id": "G3",
      "name": "Sample size",
      "pass": true,
-     "detail": "n=738 graded bets (minimum 100)."
+     "detail": "n=741 graded bets (minimum 100)."
     },
     {
      "id": "G4",
      "name": "Holdout positive",
-     "pass": true,
-     "detail": "latest-window ROI=0.0582."
+     "pass": false,
+     "detail": "latest-window ROI=-0.072."
     },
     {
      "id": "G5",
      "name": "Significance",
      "pass": false,
-     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
+     "detail": "BH-adjusted q=0.9902 (needs <0.10)."
     },
     {
      "id": "G6",
      "name": "Stability",
      "pass": false,
-     "detail": "9/22 seasons positive."
+     "detail": "8/22 seasons positive."
     },
     {
      "id": "G7",
@@ -507,21 +507,21 @@
   {
    "strategy": "S07 Home team with 3+ rest-day edge",
    "status": "FAIL",
-   "gates_passed": 4,
-   "score_lower_ci_roi_pct": -12.67,
-   "n_graded": 505,
+   "gates_passed": 3,
+   "score_lower_ci_roi_pct": -12.85,
+   "n_graded": 506,
    "wins": 253,
-   "losses": 252,
+   "losses": 253,
    "pushes": 14,
-   "win_pct": 0.501,
-   "roi": -0.0436,
+   "win_pct": 0.5,
+   "roi": -0.0455,
    "roi_ci95": [
-    -0.1267,
-    0.0396
+    -0.1285,
+    0.0375
    ],
-   "units": -22.0,
-   "p_value": 0.858,
-   "q_value": 0.9889,
+   "units": -23.0,
+   "p_value": 0.868,
+   "q_value": 0.9902,
    "max_drawdown_units": -39.27,
    "by_season": {
     "2005": {
@@ -609,11 +609,11 @@
      "roi": -0.2929
     },
     "2026": {
-     "n": 16,
-     "roi": 0.3125
+     "n": 17,
+     "roi": 0.2353
     }
    },
-   "holdout_roi": 0.0098,
+   "holdout_roi": -0.0288,
    "max_abs_corr": 1.0,
    "gates": [
     {
@@ -632,19 +632,19 @@
      "id": "G3",
      "name": "Sample size",
      "pass": true,
-     "detail": "n=505 graded bets (minimum 100)."
+     "detail": "n=506 graded bets (minimum 100)."
     },
     {
      "id": "G4",
      "name": "Holdout positive",
-     "pass": true,
-     "detail": "latest-window ROI=0.0098."
+     "pass": false,
+     "detail": "latest-window ROI=-0.0288."
     },
     {
      "id": "G5",
      "name": "Significance",
      "pass": false,
-     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
+     "detail": "BH-adjusted q=0.9902 (needs <0.10)."
     },
     {
      "id": "G6",
@@ -684,7 +684,7 @@
    ],
    "units": -41.91,
    "p_value": 0.9706,
-   "q_value": 0.9889,
+   "q_value": 0.9902,
    "max_drawdown_units": -56.0,
    "by_season": {
     "2005": {
@@ -807,7 +807,7 @@
      "id": "G5",
      "name": "Significance",
      "pass": false,
-     "detail": "BH-adjusted q=0.9889 (needs <0.10)."
+     "detail": "BH-adjusted q=0.9902 (needs <0.10)."
     },
     {
      "id": "G6",
