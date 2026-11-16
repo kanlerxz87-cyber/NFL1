@@ -73,6 +73,9 @@ CANON = [
     ("verified.html", "Verified Artifacts"),
     ("models.html", "Models"),
     ("flagged.html", "Flagged (companion)"),
+    # Session ed736fc3-nfl1 (D2): the Decision Desk, added to both nav lists at once because this
+    # file and pipeline/gen_site.py are documented as needing to stay byte-identical.
+    ("desk/index.html", "Decision Desk"),
 ]
 
 

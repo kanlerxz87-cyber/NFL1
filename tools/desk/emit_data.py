@@ -84,47 +84,56 @@ def sources() -> dict:
              url=STANDINGS_URL,
              title="2026 NFL League Standings (detailed view: W, L, T, PCT, PF, PA, NET PTS)",
              what="32 club rows re-read in full this session; the table used for every standings row on this site",
-             retrieved=READ_AT, verified=True),
+             retrieved=READ_AT, verified=True,
+             note="32 rows, 0 arithmetic failures: PF-PA equals the printed NET PTS and PCT reproduces from W/L/T in every row."),
         dict(id="D-S02", publisher="National Football League (nfl.com)", kind="Official injury report",
              url=INJURIES_URL,
              title="Official NFL Injury Report for Players - Week 10 of the 2026 Season",
              what="8 page chunks read in full; player, position, injury, practice status and game status for 347 rows across 28 clubs",
-             retrieved=READ_AT, verified=True),
+             retrieved=READ_AT, verified=True,
+             note="347 rows across 28 club tables; 171 rows carry a game status (70 Out, 90 Questionable, 11 Doubtful) and 176 are practice-only."),
         dict(id="D-S03", publisher="National Football League (nfl.com)", kind="Official schedule",
              url=SCHED_W11_URL,
              title="NFL Week 11 Schedule 2026: Games, Times, Matchups & Tickets",
              what="13 fixtures, kickoff times, networks and the 6-club bye block for Week 11",
-             retrieved=READ_AT, verified=True),
+             retrieved=READ_AT, verified=True,
+             note="26 clubs play and 6 are on bye, which is 32 clubs exactly with no overlap."),
         dict(id="D-S04", publisher="National Football League (nfl.com)", kind="Official schedule (results)",
              url=SCHED_W10_URL,
              title="NFL Schedules 2026 — Week 10 results and the Monday fixture",
              what="13 final scores plus the still-scheduled LAC at BAL fixture used to test the backtest corpus",
-             retrieved=READ_AT, verified=True),
+             retrieved=READ_AT, verified=True,
+             note="13 finals plus one fixture still to be played on the evening of the read."),
         dict(id="D-S05", publisher="Detroit Lions (official club site)", kind="Official club depth chart",
              url="https://www.detroitlions.com/team/depth-chart",
              title="2026 Lions Depth Chart — Unofficial Depth Chart Compiled by Lions Football Communications",
              what="offense, defense and special teams; the club labels it 'Unofficial', which is published verbatim here",
-             retrieved=READ_AT, verified=True),
+             retrieved=READ_AT, verified=True,
+             note="28 slots, 57 named cells; up to four names in one cell, and Cade Mays is listed at centre while ruled Out."),
         dict(id="D-S06", publisher="Baltimore Ravens (official club site)", kind="Official club depth chart",
              url="https://www.baltimoreravens.com/team/depth-chart",
              title="Baltimore Ravens Depth Chart",
              what="re-read this session to test whether the Lamar Jackson / Tyler Huntley rows are still published",
-             retrieved=READ_AT, verified=True),
+             retrieved=READ_AT, verified=True,
+             note="29 slots, 59 named cells, one empty slot (kicker); QB order is Brissett, Fagnano, Slovis."),
         dict(id="D-S07", publisher="Green Bay Packers (official club site)", kind="Official club depth chart",
              url="https://www.packers.com/team/depth-chart",
              title="Green Bay Packers Depth Chart — 'Unofficial, Nov. 10, 2026'",
              what="re-read to test the committed parse, including the jersey-number prefix and the blank PR cell",
-             retrieved=READ_AT, verified=True),
+             retrieved=READ_AT, verified=True,
+             note="28 slots, 54 named cells; the jersey number is printed inside the name cell and the PR slot is empty."),
         dict(id="D-S08", publisher="National Football League (nfl.com)", kind="Official transactions register",
              url="https://www.nfl.com/transactions/league/trades/2026/11",
              title="NFL Transactions — trades, November 2026",
              what="the dated row '11/06 AZ BAL Jacoby Brissett Traded' that the Ravens chart now reflects; read from the committed capture of this page",
-             retrieved=READ_AT, verified=True),
+             retrieved=READ_AT, verified=True,
+             note="One dated row: 11/06, AZ to BAL, Jacoby Brissett, traded."),
         dict(id="D-S09", publisher="National Football League (nfl.com)", kind="Official reserve list",
              url="https://www.nfl.com/transactions/league/reserve-list/2026/11",
              title="NFL Transactions — reserve list, November 2026",
              what="the dated row '11/10 MIA MIA Malik Willis' showing a player can be unavailable without appearing on the injury report",
-             retrieved=READ_AT, verified=True),
+             retrieved=READ_AT, verified=True,
+             note="One dated row: 11/10, MIA to MIA, Malik Willis."),
     ]
     return dict(generated_at=datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
                 note="Official sources re-read in this session for the desk/ site. A row that could not be confirmed is not listed here; it is on the flagged page instead.",
@@ -431,6 +440,7 @@ def depth() -> dict:
                                           if not nxt else "ranked below the starter on the same chart"),
                         chart_url=d["source_url"], report_url=INJURIES_URL))
     return dict(generated_at=datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+                retrieved=READ_AT,
                 charts=out, resolved_chains=chains,
                 counts=dict(clubs=len(out), chains=len(chains)),
                 note="Four clubs' official charts were transcribed this session. The other 28 are not covered, and that gap is published rather than filled.")
@@ -491,6 +501,31 @@ def claims(standings_d, injuries_d, schedule_d, depth_d) -> dict:
     return dict(generated_at=datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), rows=rows)
 
 
+def flags() -> dict:
+    """This session's irregularities, read back out of the repository-wide register.
+
+    data/flags.json is shared with every other session, so this file is a projection of the rows
+    this session appended (ids D-F01..D-F10) rather than a second copy to maintain.
+    """
+    all_flags = load_repo("data/flags.json")
+    srcmap = {s["id"]: s for s in load_repo("data/sources.json")}
+    mine = []
+    for f in all_flags:
+        if not str(f["id"]).startswith("D-F"):
+            continue
+        s = srcmap.get(f.get("src"))
+        mine.append(dict(id=f["id"], category=f["category"], description=f["description"],
+                         impact=f["impact"], status=f["status"], action=f["action"],
+                         retrieved=f["retrieved"], src=f.get("src"),
+                         source_url=s["url"] if s else None,
+                         source_title=s["what"] if s else None))
+    return dict(generated_at=datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+                note="Irregularities found and published by this session. The repository-wide register lives in data/flags.json; this is a projection of the rows this session added.",
+                counts=dict(total=len(mine), open=sum(1 for f in mine if str(f["status"]).lower() != "resolved"),
+                            resolved=sum(1 for f in mine if str(f["status"]).lower() == "resolved")),
+                rows=mine)
+
+
 def main() -> int:
     os.makedirs(DESK, exist_ok=True)
     S = sources()
@@ -504,6 +539,7 @@ def main() -> int:
     dep = depth()
     write("depth.json", dep)
     write("claims.json", claims(st, inj, sch, dep))
+    write("flags.json", flags())
     print("done")
     return 0
 

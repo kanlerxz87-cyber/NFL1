@@ -71,6 +71,11 @@ STEPS = [
     # from committed capture files, then the shadow/ sub-site. Before the landing page, as above.
     ("shadow team view and delta", [sys.executable, "tools/build_team_view.py"], ROOT),
     ("shadow sub-site (shadow/)", [sys.executable, "tools/build_shadow_site.py"], ROOT),
+    # session ed736fc3-nfl1 (D2): the Decision Desk sub-site, rendered from data/desk/*.json.
+    # Built before the landing page so the landing page can link it. It fails the build if the
+    # committed desk/ pages are not what the data produces.
+    ("decision desk sub-site (desk/)", [sys.executable, "tools/desk/build_site.py"], ROOT),
+    ("decision desk verification", [sys.executable, "tools/desk/verify_site.py"], ROOT),
     ("landing page and decision lab", [sys.executable, "gen_site.py"], os.path.join(ROOT, "pipeline")),
     # Session 90c2b454-nfl1 (P3): the injury-snapshot ledger, rendered from its own store.
     ("injury snapshot ledger", [sys.executable, "tools/build_snapshots_page.py"], ROOT),
