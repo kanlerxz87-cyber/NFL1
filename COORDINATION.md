@@ -4005,3 +4005,42 @@ Board read in full before this claim. Scope chosen from the readiness register r
 
 Scope note: this branch is the only branch this session may use (the brief's `session-<id>/<task>`
 naming is not available in this environment; see the note at the top of the board).
+
+---
+
+## Result log — session `49ac3a99-nfl1` (2026-11-16 UTC)
+
+| ID | Outcome | Evidence a reader can check |
+|---|---|---|
+| S1 | **done.** Page `schedule_announcement/index.html`: left, the league's dated announcement (issued 2026-05-08; release Thu 14 May 2026, 8 p.m. ET); right, the live Week 11 schedule page (13 fixtures, 6 byes), each row linked to its official URL. | `data/schedule_announcement/schedule_announcement.json`, `schedule_announcement/build.py` |
+| S2 | **done.** Gate `tools/check_schedule_announcement.py`: official https link on every row, 13 x 2 + 6 = 32 clubs, weekday matches calendar date, release time converted to UTC (2026-05-15T00:00Z, derived and marked as derived), live fixtures and byes equal the earlier transcription in `data/prereg/official/week11_2026_schedule.json`, committed HTML equals the builder output. Tests: `tests/test_schedule_announcement.py` (5). | gate: PASS (6 announcement rows, 13 fixtures, 6 byes, 25 cells). |
+
+### Sources (all read on 2026-11-16 UTC with `fetch_page`)
+
+- <https://media.nfl.com/news-and-releases/2026-nfl-schedule-powered-by-aws-to-be-released-thursday--may-14> — dated release, "May 08, 2026" (official NFL media site)
+- <https://www.nfl.com/news/2026-nfl-schedule-powered-by-aws-to-be-released-thursday-may-14> — same text, nfl.com mirror
+- <https://www.nfl.com/nfl-schedule-release/> — official release landing page (shows the Week 1 and international listings)
+- <https://www.nfl.com/schedules/2026/by-week/week-11> — live Week 11 schedule, all 3 chunks read; 13 games and 6 teams on bye
+- Each Week 11 game page is linked from its row, e.g. <https://www.nfl.com/games/colts-at-texans-2026-reg-11>
+
+### Verification performed
+
+- Every fixture's day checked against the calendar (Thursday 19, Sunday 22, Monday 23 Nov 2026).
+- Live read compared line by line with the earlier transcription (`data/prereg/official/week11_2026_schedule.json`, retrieved 2026-11-15): 13/13 fixtures and 6/6 byes agree.
+- Full unit suite: `python3 -m unittest discover -s tests` → **234 tests, OK**. Note: 16 tests in other sessions' modules failed in this sandbox only because `bs4`, `numpy` and `requests` were not installed; they pass once installed (`pip install --break-system-packages numpy pandas beautifulsoup4 lxml requests`).
+- `tools/check_generators.py`, `tools/check_reachability.py`, `tools/verify.py` (2124 rows, 0 broken internal links) all pass.
+
+### Irregularities and limits (for Flagged for Review)
+
+1. **Not yet in site navigation.** The new page is linked from nowhere on the landing page. Adding nav entries touches shared files (`pipeline/gen_site.py`), so this is a change request, not an edit: *integration owner to add one NAV entry for `schedule_announcement/index.html`*.
+2. **Announced ≠ happened.** Announcement items A2 (broadcast-partner game reveals) and A3 (international reveal on 13 May) are announced dates. The page says so and does not claim they occurred.
+3. **Transcription, not a stored raw copy.** The fetched page text is not kept in the repo; values were transcribed from the fetch output and each row links to the official page for manual review.
+4. **Derived value.** The UTC release time (2026-05-15T00:00Z) is arithmetic on the printed 8 p.m. EDT, labelled derived on the page.
+
+### Change request logged (not applied)
+
+- `pipeline/gen_site.py` NAV / `scripts/verified/normalize_nav.py` CANON: add one entry "Schedule announcement" → `schedule_announcement/index.html`. Owner: integration session.
+
+### Shared files touched by this session
+
+None. New paths only: `schedule_announcement/**`, `data/schedule_announcement/**`, `tools/check_schedule_announcement.py`, `tests/test_schedule_announcement.py`, and this board.
