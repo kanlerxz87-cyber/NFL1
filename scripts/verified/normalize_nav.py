@@ -34,6 +34,8 @@ CANON = [
     # Session 1d824ec2-nfl1 (V6): the official transactions and reserve-list register. Added at
     # the same relative position as in pipeline/gen_site.py NAV, which this list must match.
     ("reserve/index.html", "Transactions & Reserve"),
+    # Session 49ac3a99-nfl1 (IN-31): same position as in pipeline/gen_site.py NAV. Additive.
+    ("schedule_announcement/index.html", "Schedule Announcement"),
     ("questions.html", "Questions"),
     ("suggestions.html", "Suggestions"),
     ("evidence.html", "Evidence"),
