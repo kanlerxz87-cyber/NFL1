@@ -26,6 +26,7 @@ NAV = [
     ("results.html", "Results", "Official finals, verified"),
     ("availability.html", "Availability", "Injuries, depth, replacements"),
     ("strategies.html", "Strategies", "Signal separated from staking"),
+    ("correlations.html", "Correlations", "Only from official numbers, always with n"),
     ("prices.html", "Prices", "The price policy decision"),
     ("readiness.html", "Readiness", "One row per requirement"),
     ("questions.html", "Questions", "What must be answered first"),
@@ -371,15 +372,32 @@ def availability():
                            f'have published practice participation only. A blank game status is not "available"; it is '
                            f'the league printing nothing.'))
     body.append('</section>')
-    body.append('<section class="block"><h2>Week 11: opponent, designations, depth</h2>')
+    body.append('<section class="block" id="matrix"><h2>Week 11: opponent, designations, depth</h2>')
+    clubs = sorted({r["club"] for r in mt["rows"]})
+    opts = "".join(f'<option value="{esc(c)}">{esc(c)}</option>' for c in clubs)
+    body.append(
+        '<div class="filterbar"><label for="clubfilter">Filter by club</label>'
+        f'<select id="clubfilter"><option value="">All {len(clubs)} clubs</option>{opts}</select>'
+        '<span class="sub" id="filtercount"></span></div>')
     mrows = [[f'<strong>{esc(r["club"])}</strong>', esc(r["opponent"]), esc(r["designated_out"]),
               esc(r["designated_doubtful"]), esc(r["designated_questionable"]),
               _blank(r["slots_at_risk"]), esc(r["deepest_string_starting"]),
               '<span class="blank">Unverified</span>',
               src(r["depth_chart"], "club chart"), src(r["source"], "report")] for r in mt["rows"]]
-    body.append(table(["Club", "Opponent", "Out", "Doubtful", "Questionable", "Slots at risk",
-                       "Deepest string on the chart", "Replacement named", "Depth source", "Report source"], mrows,
-                      note=mt["note"]))
+    mhtml = table(["Club", "Opponent", "Out", "Doubtful", "Questionable", "Slots at risk",
+                   "Deepest string on the chart", "Replacement named", "Depth source", "Report source"], mrows,
+                  note=mt["note"])
+    # tag each row with its club so the filter script can work without a data table in JS
+    for i, r in enumerate(mt["rows"]):
+        mhtml = mhtml.replace("<tr><td>", f'<tr data-club="{esc(r["club"])}"><td>', 1)
+    body.append(mhtml)
+    body.append('<script>(function(){var s=document.getElementById("clubfilter");if(!s)return;'
+                'var t=document.getElementById("matrix");var rows=t.querySelectorAll("tbody tr");'
+                'var out=document.getElementById("filtercount");'
+                'function apply(){var v=s.value,n=0;for(var i=0;i<rows.length;i++){'
+                'var show=!v||rows[i].getAttribute("data-club")===v;rows[i].style.display=show?"":"none";if(show)n++;}'
+                'out.textContent=v?(n+" rows for "+v):("");}'
+                's.addEventListener("change",apply);})();</script>')
     body.append('</section>')
     body.append('<section class="block"><h2>What a replacement claim would need</h2>')
     body.append(table(["Step", "Source that would supply it", "Available to this repository?", "Source"], [
@@ -473,6 +491,51 @@ def strategies():
     return page("strategies.html", "Strategies", "".join(body),
                 "Every rule on both boards: the signal, the price it had to beat, the money it made, and the "
                 "identity problem between the two files.")
+
+
+def correlations():
+    c = D["correlations"]
+    orows = [[f'<strong>{esc(r["relationship"])}</strong>', esc(r["sample"]), esc(r["n"]),
+              (f'{r["r"]:+.4f}' if r["published"] else '<span class="blank">blank</span>'),
+              esc(r["ci95"]), esc(r["t"]), src(r["source"], "official")] for r in c["official_rows"]]
+    frows = [[esc(r["sample"]), esc(r["n"]),
+              (f'{r["r"]:+.4f}' if r["published"] else '<span class="blank">blank</span>'),
+              esc(r["ci95"]),
+              (esc(r["why_blank"]) if not r["published"] else "printed"),
+              src(r["source"], "feed"), src(r["official_cross_check"], "official")] for r in c["rows"]]
+    body = ['<section class="block"><p class="lede">A correlation is published here only when both of its inputs '
+            'are official numbers, and never without its sample size and a 95% interval. The first table uses one '
+            'source for both columns: the league standings page. The second uses the mirrored results feed and is '
+            'printed only above a 25-observation floor; below the floor the coefficient is left blank rather than '
+            'shown with a warning nobody reads.</p></section>']
+    body.append('<section class="block"><h2>Officially sourced correlations</h2>')
+    body.append(table(["Relationship", "Sample", "n", "r", "95% interval (Fisher z)", "t", "Source"], orows,
+                      note="Both inputs of every row are numbers printed on the official standings page, and every "
+                           "club's row on that page was independently reproduced by the Week-10 reconciliation on the "
+                           "Results page. n = 32 clubs, so these describe this season's table, not a process."))
+    body.append('</section>')
+    body.append('<section class="block"><h2>Feed-sourced correlations, with the floor applied</h2>')
+    body.append(table(["Sample", "n", "r", "95% interval", "Publication", "Feed source", "Official cross-check"],
+                      frows,
+                      note="These use the closing line from the mirrored feed. They are here because the closing "
+                           "line is the bar any own line has to beat, and the bar should be stated with its own "
+                           "uncertainty. The final row is blank on purpose: 13 finals read officially were not "
+                           "merged into the feed this session, so the feed holds one result for that week and a "
+                           "coefficient on one observation would be noise dressed as a number."))
+    body.append('</section>')
+    body.append('<section class="block"><h2>What a coefficient here does not mean</h2><div class="cards">'
+                '<div class="card bad"><h3>It is not a prediction</h3><p>That wins correlate with points differential '
+                'is arithmetic, not a forecast. It says the standings table is internally coherent.</p></div>'
+                '<div class="card bad"><h3>It is not a strategy</h3><p>No correlation on this page was tested on a '
+                'holdout, so none of them is evidence that a rule makes money.</p></div>'
+                '<div class="card bad"><h3>It is not causal</h3><p>A high r between two league-published totals says '
+                'the two move together. It says nothing about which one moves the other.</p></div>'
+                '<div class="card"><h3>It is checkable</h3><p>Every number was computed in the build step from the '
+                'stored official rows; the verification gate recomputes the interval and fails if r falls outside it.</p></div>'
+                '</div></section>')
+    return page("correlations.html", "Correlations", "".join(body),
+                "Coefficients computed only from official numbers, each with its sample size and interval, and "
+                "blanked below the publication floor.")
 
 
 def prices():
@@ -693,7 +756,7 @@ def method():
 
 def main():
     sizes = {}
-    for fn in (overview, executive, market, results, availability, strategies, prices,
+    for fn in (overview, executive, market, results, availability, strategies, correlations, prices,
                readiness, questions, suggestions, flagged, method):
         name = {"overview": "index.html"}.get(fn.__name__, fn.__name__ + ".html")
         sizes[name] = fn()

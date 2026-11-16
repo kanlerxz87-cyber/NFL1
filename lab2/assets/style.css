@@ -73,3 +73,8 @@ footer{border-top:1px solid var(--line);background:#fff;padding:16px max(4vw,20p
   header nav{overflow:auto;flex-wrap:nowrap;width:100%;padding-bottom:2px}
   header nav a{white-space:nowrap}
 }
+.filterbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:0 0 10px}
+.filterbar label{font-size:11px;text-transform:uppercase;letter-spacing:.7px;color:#6b7871;font-weight:600}
+.filterbar select{font:inherit;font-size:13px;padding:6px 10px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink)}
+td strong{font-weight:600}
+a.blank{border-bottom:1px dotted #b9c3bc;text-decoration:none}
