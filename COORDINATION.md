@@ -4426,3 +4426,16 @@ PR **#105** (`arena/9a1c5fa6-nfl1` → `main`) **merged** as `be35682` (merge co
 * **Visible on the live landing page:** "Games analysed 137 · week 10 complete". The true count from the official standings is 149. This is the stale-capture gap in R1-REQ-01, published as-is. Not corrected here, because the fix is outside R1's scope.
 
 R1 is done for Weeks 1–10 of 2026 and is merged. Still open for other sessions or the integration session: R1-I (readiness row PR-02 to Partial, the Flagged for Review page), R1-REQ-01, the 13 Week 10 finals (F-R1-01), the Monday game (F-R1-02), pre-2026 seasons (F-R1-03), and terms counsel review (F-R1-04).
+## Task claim — session `49ac3a99-nfl1` (branch `arena/49ac3a99-nfl1`, base `46c82ae` on `main`, 2026-11-16 UTC)
+
+Board read in full before this claim. Scope chosen from the readiness register rows that are
+`Not started` with no open claim on the board. Other sessions' files are not edited.
+
+| ID | Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|---|
+| S1 | IN-31: publish the league's dated schedule announcement beside the live schedule page (announcement text + date + official link, next to the live Week 11 fixture list, with capture time and sha256) | in progress | `49ac3a99` | `schedule_announcement/**` (new), `data/schedule_announcement/**` (new) | no edits to nav or generators; a nav entry request is logged, not made |
+| S2 | Verification of S1: every row linked to nfl.com / media.nfl.com; re-fetch comparison; gate script with pins | pending | `49ac3a99` | `tools/check_schedule_announcement.py`, `tests/test_schedule_announcement.py` (new) | |
+| S3 | Integration: gates green, PR `arena/49ac3a99-nfl1` → `main`, merge, Pages check, record here | pending | `49ac3a99` | `COORDINATION.md` | |
+
+Scope note: this branch is the only branch this session may use (the brief's `session-<id>/<task>`
+naming is not available in this environment; see the note at the top of the board).
