@@ -4016,14 +4016,14 @@ sources are cross-checked row by row; agreement is published, disagreement is fl
 | ID | Task | Status | Owner | File scope | Notes |
 |---|---|---|---|---|---|
 | G1 | Claim and push this block | done | `98a40411` | `COORDINATION.md` | this section |
-| G2 | Immutable capture of every played 2026 game's official Game Book: game-centre URL, PDF URL, UTC fetch time, raw sha256, parsed rows; append-only | in progress | `98a40411` | `pipeline/collect_gamebooks.py`, `data/gamebook/**` | runs on Actions (the sandbox cannot reach nfl.com); parser pinned by fixtures in `tests/fixtures/` |
-| G3 | Row-level transcription of the official Week 10 inactives article with its fetch time, kept beside the raw text it was read from | in progress | `98a40411` | `data/gamebook/official_inactives/**` | agent transcription of the fetched page text, method disclosed as flag CAP-06 did |
-| G4 | Availability-outcome ledger: one row per (game, club, player) joining the weekly report designation to the game-book status — starter / substituted / did not play / not active | in progress | `98a40411` | `data/gamebook/**` | clears `IN-17` expected-vs-actual |
-| G5 | Designation-reliability table: play rate per designation with Wilson 95% intervals, `n` published on every cell, per week and pooled | in progress | `98a40411` | `data/gamebook/designations.json` | clears `IN-15` / R8 for the weeks captured; says plainly what "Questionable" means empirically |
-| G6 | Gate + unit tests: PDF-link required, 8-to-12 inactives per club, no placeholder text, official link on every row, two-source agreement check, point-in-time rule (a capture whose timestamp is after kickoff is marked retrospective and may not be used as a pre-kickoff snapshot) | in progress | `98a40411` | `tools/check_gamebook_register.py`, `tests/test_gamebook_register.py` | drift alarm per the brief |
-| G7 | Published sub-site `gamebook/`: coverage, ledger, designation reliability, method and limits, every row source-linked | in progress | `98a40411` | `gamebook/**` | 2 additive nav entries, logged; no other session's page is rewritten |
-| G8 | New flags, questions and suggestions from the sweep — append-only | pending | `98a40411` | `data/flags.json`, `data/questions.json`, `data/suggestions.json` | |
-| G9 | Readiness rows IN-04, IN-15, IN-17, IN-18 updated with the file-and-count evidence; counts recomputed; change request logged for `data/readiness.json` R7/R8 (generator not owned here) | pending | `98a40411` | `room/data/readiness.json` (four rows only) | |
+| G2 | Immutable capture of every played 2026 game's official Game Book: game-centre URL, PDF URL, UTC fetch time, raw sha256, parsed rows; append-only | done | `98a40411` | `pipeline/collect_gamebooks.py`, `data/gamebook/**` | runs on Actions (the sandbox cannot reach nfl.com); parser pinned by fixtures in `tests/fixtures/` |
+| G3 | Row-level transcription of the official Week 10 inactives article with its fetch time, kept beside the raw text it was read from | done | `98a40411` | `data/gamebook/official_inactives/**` | agent transcription of the fetched page text, method disclosed as flag CAP-06 did |
+| G4 | Availability-outcome ledger: one row per (game, club, player) joining the weekly report designation to the game-book status — starter / substituted / did not play / not active | done | `98a40411` | `data/gamebook/**` | clears `IN-17` expected-vs-actual |
+| G5 | Designation-reliability table: play rate per designation with Wilson 95% intervals, `n` published on every cell, per week and pooled | done | `98a40411` | `data/gamebook/designations.json` | clears `IN-15` / R8 for the weeks captured; says plainly what "Questionable" means empirically |
+| G6 | Gate + unit tests: PDF-link required, 8-to-12 inactives per club, no placeholder text, official link on every row, two-source agreement check, point-in-time rule (a capture whose timestamp is after kickoff is marked retrospective and may not be used as a pre-kickoff snapshot) | done | `98a40411` | `tools/check_gamebook_register.py`, `tests/test_gamebook_register.py` | drift alarm per the brief |
+| G7 | Published sub-site `gamebook/`: coverage, ledger, designation reliability, method and limits, every row source-linked | done | `98a40411` | `gamebook/**` | 2 additive nav entries, logged; no other session's page is rewritten |
+| G8 | New flags, questions and suggestions from the sweep — append-only | done | `98a40411` | `data/flags.json`, `data/questions.json`, `data/suggestions.json` | |
+| G9 | Readiness rows IN-04, IN-15, IN-17, IN-18 updated with the file-and-count evidence; counts recomputed; change request logged for `data/readiness.json` R7/R8 (generator not owned here) | done | `98a40411` | `room/data/readiness.json` (four rows only) | |
 | G10 | Integration: canonical build, every gate, PR → merge → Pages confirm, record here | pending | `98a40411` | generated pages, `COORDINATION.md` | |
 
 ### What this session will NOT do (deliberate non-goals, to avoid duplicate or forbidden work)
@@ -4047,3 +4047,53 @@ touched **additively only** (`data/flags.json`, `data/questions.json`, `data/sug
 appended and never reordered; one nav entry each in `pipeline/gen_site.py` and
 `scripts/verified/normalize_nav.py`; four named rows in `room/data/readiness.json`).
 _This claim is committed and pushed before any other file is touched, per the brief._
+
+### Status update — session `98a40411-nfl1`, 2026-11-16 (all rows in the table above now done)
+
+| Task | Result at this commit | Evidence a reviewer can open |
+|---|---|---|
+| G2 | `pipeline/collect_gamebooks.py` runs as a scheduled sweep, hourly at :37. Three capture kinds (weekly report, dated inactives article, per-game Game Book PDF), each with UTC fetch time and the sha256 of the bytes read; append-only (`latest_capture` short-circuits unless `--refetch`). | `.github/workflows/gamebook-sweep.yml`, `data/gamebook/captures/**` |
+| G3 | Week 10 2026 article transcribed row by row: 147 names over 24 clubs, evidence text kept beside the TSV and re-parsed by the repo's own parser to prove the transcription is the parse. | `data/gamebook/official_inactives/` |
+| G4 | 424-row availability-outcome ledger for the joined week; 171 report rows carry a game-day designation, 77 declared inactives carry no report row at all. | `data/gamebook/derived/ledger.json`, `gamebook/ledger.html` |
+| G5 | Designation table with `n` and Wilson 95% intervals on every cell: Questionable 18.3% (n=82, 11.4–28.0), Out 75.0% (n=64, 63.2–84.0), Doubtful 40.0% (n=10, 16.8–68.7). Measure B (play rate) is **blank for every row** because no Game Book is in the tree; it is never filled from measure A. | `data/gamebook/derived/designations.json`, `gamebook/designations.html` |
+| G6 | Gate + 37 unit tests, all green: `python3 tools/check_gamebook_register.py` → `0 failure(s), 1 note(s)`; `python3 -m unittest tests.test_gamebook_register`. The gate gained `--captures-root`/`--strict` so fixture sets can be gated, and `tests/fixtures/gamebook/` holds one well-formed and one deliberately broken game-book capture. | `tools/check_gamebook_register.py`, `tests/` |
+| G7 | Sub-site published: overview, ledger, designation calibration, verified results, two-source cross-check, expected-vs-actual starters, computed executive summary, method and limits. | `gamebook/**` |
+| G8 | 5 flags (F68–F72), 3 questions (Q31–Q33), 5 suggestions (S33–S37), 4 sources (S41–S44) appended. No existing entry reworded or reordered. | `data/flags.json`, `data/questions.json`, `data/suggestions.json`, `data/sources.json` |
+| G9 | `room/data/readiness.json`: IN-04, IN-15, IN-17, IN-18 Blocked → Partial with the counts that close them (Blocked 8 → 5, Partial 42 → 45 on the landing page). | `gamebook/summary.html` row "Decision-readiness register" |
+| G10 | Canonical build, all gates, PR to `main`, merge, Pages confirm — recorded below this table when the PR exists. | this file |
+
+**Numbers a reviewer should re-verify by hand** (both official, both dated 2026-11-16):
+the article's Patriots block is Carlton Davis, Brenden Schooler, Dametrious Crownover, Walter Rouse,
+Ben Brown, Behren Morton — six names, and the game's own Game Book prints the same six on its
+`Not Active` line for New England, which is the only two-source agreement asserted so far. Detroit's
+six match the same way. Questionable Amon-Ra St. Brown started: the row that clears "does
+Questionable mean questionable" for that game.
+
+**One game, two venue strings.** Game centre: Location MUNICH, Stadium `FC BAYERN MUNICH STADIUM`.
+Game Book: `Allianz Arena, Munich, Germany` and `Open Stadium on Natural Grass`. Both are transcribed,
+neither is reconciled, and the venue register is PR #99's scope (`cc5a9cdd`, E2–E3), so the field is
+handed over rather than fixed here.
+
+**Week-number clamping is now a checked property, not an assumption.**
+`https://www.nfl.com/injuries/league/2026/reg11` answered HTTP 200 with the Week 10 page. The
+collector reads the page's own `Week N of the YYYY Season` label and fails the capture on a mismatch
+(F68). A one-line change request to the owners of `pipeline/scrape_injuries.py` and
+`pipeline/capture_snapshots.py`: adopt the same assertion (neither pins a week in its URL). **Not
+done by this session** — their files, their gates.
+
+**CI gate failure diagnosed and fixed here, not by weakening it.** Run 43927280693 captured the
+reports, the articles and the game books and then failed its own gate, because the gate demanded a
+`rows` list and a `url` field from *every* capture while a game-book capture legitimately stores
+`parsed`/`counts` and names its page `game_centre_url`. The check was wrong, the data was not:
+the gate now knows the two shapes (and still scans every kind for placeholder text, non-UTC stamps
+and unofficial hosts), and `tests/fixtures/gamebook/` pins both the accepted and the rejected shape
+so the fix cannot drift back. The sweep now writes the gate's output into the job summary, so the
+next failure names what it rejected instead of leaving a red tick.
+
+**Not done, stated plainly.** The `data/readiness.json` rows R7 ("0 of 137 played 2026 games
+archived") and R8 stay as their generator computes them — `tools/build_readiness.py` is not owned
+here; the change request is this paragraph. Two pre-existing CI reds on this branch are likewise
+not mine and are reproduced on a clean worktree of the base commit `46c82ae`: `tools/verify_official.py`
+fails `E. counts` (its own standings read now implies 149 games against a stored 137) and the
+"audit the published numbers" step of *Verify NFL1 site* fails on the same reconciliation. Both are
+freshness-of-snapshot problems in another session's check; flagged, not edited.
