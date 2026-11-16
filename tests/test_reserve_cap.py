@@ -115,5 +115,49 @@ class PublishesTheCapTest(unittest.TestCase):
                                  f"{key}: completeness contradicts its own oldest row {oldest}")
 
 
+class CaptureDedupeTest(unittest.TestCase):
+    """A re-read whose content is unchanged must not append another capture file.
+
+    Captures are named <UTCts>_<category>_<month>_<sha12>.json, so the category-month stem sits in the
+    middle of the name. The first two CI sweeps each wrote all 24 pages a second time because the
+    dedupe glob was anchored at the start - 48 files, 24 of them byte-identical to an earlier one.
+    """
+
+    def setUp(self):
+        import tempfile
+        self.tmp = tempfile.TemporaryDirectory()
+        self.dir = Path(self.tmp.name) / "captures"
+        self._store, self._caps = ct.STORE, ct.CAPTURES
+        ct.STORE, ct.CAPTURES = Path(self.tmp.name), self.dir
+
+    def tearDown(self):
+        ct.STORE, ct.CAPTURES = self._store, self._caps
+        self.tmp.cleanup()
+
+    def _rec(self, rows):
+        return {"category": "reserve-list", "month": "2026-11", "status": "ok", "http_status": 200,
+                "url": "u", "fetched_at_utc": "2026-11-16T06:00:00Z", "raw_sha256": "r",
+                "canonical_sha256": ct.canonical(rows), "row_list": rows, "flags": [],
+                "headers": [], "parser": ct.PARSER_VERSION}
+
+    def test_same_content_second_time_writes_nothing(self):
+        rows = printed_rows(3, 20)
+        first = ct.write_capture(self._rec(rows))
+        self.assertIsNotNone(first, "the first read must be stored")
+        self.assertIsNone(ct.write_capture(self._rec(rows)),
+                          "an identical re-read must not append a duplicate capture")
+        self.assertEqual(len(list(self.dir.glob("*.json"))), 1)
+
+    def test_changed_content_is_a_new_capture_and_the_old_one_survives(self):
+        ct.write_capture(self._rec(printed_rows(3, 20)))
+        changed = printed_rows(4, 20)
+        second = ct.write_capture(self._rec(changed))
+        self.assertIsNotNone(second, "a changed page must be captured, not skipped")
+        files = sorted(self.dir.glob("*.json"))
+        self.assertEqual(len(files), 2, "the earlier capture is immutable history")
+        older = json.loads(files[0].read_text(encoding="utf-8"))
+        self.assertEqual(len(older["row_list"]), 3, "the first capture must not be rewritten")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

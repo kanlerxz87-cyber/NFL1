@@ -328,14 +328,19 @@ def write_capture(rec: dict) -> Path | None:
     """Exclusive-create a capture file when the parsed content differs from the newest one."""
     CAPTURES.mkdir(parents=True, exist_ok=True)
     stem = f"{rec['category']}_{rec['month']}"
-    existing = sorted(CAPTURES.glob(f"{stem}_*.json"))
+    # The filename is <UTCts>_<category>_<month>_<sha12>.json, so the stem is in the MIDDLE: a glob
+    # of f"{stem}_*.json" matches nothing and every sweep appends a byte-identical capture. The
+    # first two CI sweeps did exactly that (48 files for 24 pages). Match on the timestamp prefix too.
+    existing = sorted(CAPTURES.glob(f"*_{stem}_*.json"))
     if existing:
-        try:
-            last = json.loads(existing[-1].read_text(encoding="utf-8"))
+        for prev in reversed(existing):
+            try:
+                last = json.loads(prev.read_text(encoding="utf-8"))
+            except Exception:  # noqa: BLE001  a truncated file is not a reason to skip the new one
+                continue
             if last.get("canonical_sha256") == rec.get("canonical_sha256"):
                 return None
-        except Exception:  # noqa: BLE001  a truncated file is not a reason to skip the new one
-            pass
+            break   # the newest readable capture is the one to compare against
     ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     path = CAPTURES / f"{ts}_{stem}_{rec['canonical_sha256'][:12]}.json"
     payload = {"captured_at_utc": rec["fetched_at_utc"], "parser": PARSER_VERSION, **rec,
