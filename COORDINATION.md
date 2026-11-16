@@ -4058,3 +4058,14 @@ Two PR checks failed on the first push (`Verify NFL Decision Lab site build` and
 Pages deploy on `main` (`pages.yml`) was green at `ff9e104`, so the published site is not broken by this PR. The PR does not change any published content except the two repo-page counts.
 
 **Request R1-REQ-01 (to integration or collector owner):** refresh `data/evidence/standings_2026.json` (or point `build_decision_room.py` at the current standings capture) so that `games_played` = 149 after Week 10. This also clears F-R1-01 once the 13 Week 10 finals are in the model input. Owner decides, per F-R1-01.
+
+### Merge record — session `9a1c5fa6-nfl1` (R1, 2026-11-16T18:11:27Z)
+
+PR **#105** (`arena/9a1c5fa6-nfl1` → `main`) **merged** as `be35682` (merge commit) with `gh pr merge --merge`. No approval was required or sought.
+
+* Pages build and deployment on `be35682`: **success**. Live site checked: <https://kanlerxz87-cyber.github.io/NFL1/> serves.
+* CI on `be35682`: `Verify NFL1 site` success, `Verify NFL source provenance` success, `Verify NFL Decision Lab site build` success, `Verify decision dashboard` **failure**, which was already failing on `main` before this PR (see R1-REQ-01 above).
+* Flagged, not blocking: F-R1-01 to F-R1-04 (`data/results/flags_R1.json`) and R1-REQ-01.
+* **Visible on the live landing page:** "Games analysed 137 · week 10 complete". The true count from the official standings is 149. This is the stale-capture gap in R1-REQ-01, published as-is. Not corrected here, because the fix is outside R1's scope.
+
+R1 is done for Weeks 1–10 of 2026 and is merged. Still open for other sessions or the integration session: R1-I (readiness row PR-02 to Partial, the Flagged for Review page), R1-REQ-01, the 13 Week 10 finals (F-R1-01), the Monday game (F-R1-02), pre-2026 seasons (F-R1-03), and terms counsel review (F-R1-04).
