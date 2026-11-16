@@ -46,6 +46,8 @@ NAV = [
     # which is what makes "not listed on the injury report" mean "on a reserve list" rather than
     # "available". Additive entry only; no other session's entry is moved or renamed.
     ("reserve/index.html", "Transactions & Reserve"),
+    # Session 49ac3a99-nfl1 (IN-31): the dated schedule announcement beside the live schedule. Additive.
+    ("schedule_announcement/index.html", "Schedule Announcement"),
     ("pages/questions.html", "Questions"),
     ("pages/suggestions.html", "Suggestions"),
     ("pages/evidence.html", "Evidence"),
@@ -95,7 +97,9 @@ SIDEBAR = [
                       ("pages/depth.html", "Depth & Deficiency"),
                       ("pages/snapshots.html", "Injury Snapshots"),
                       # Session 1d824ec2-nfl1: dated roster events, additive.
-                      ("reserve/index.html", "Transactions & Reserve")]),
+                      ("reserve/index.html", "Transactions & Reserve"),
+                      # Session 49ac3a99-nfl1 (IN-31): additive.
+                      ("schedule_announcement/index.html", "Schedule Announcement")]),
     ("Decisions", [("pages/questions.html", "Questions"),
                    ("pages/suggestions.html", "Suggestions")]),
     ("Evidence", [("pages/evidence.html", "Evidence"),
