@@ -94,6 +94,10 @@ STEPS = [
     # any forecast that does not reproduce from the official inputs, or any late forecast.
     ("pre-registration check", [sys.executable, "tools/prereg.py", "check"], ROOT),
     ("pre-registration page (prereg/)", [sys.executable, "tools/prereg.py", "render"], ROOT),
+    # Session cc5a9cdd-nfl1 (E6): the Venues & Weather sub-site and its gate. Built
+    # before the shared navigation so the nav entry can link venue/index.html.
+    ("venue sub-site", [sys.executable, "venue/build.py"], ROOT),
+    ("venue sub-site gate", [sys.executable, "venue/verify.py"], ROOT),
     ("canonical navigation", [sys.executable, "scripts/verified/normalize_nav.py"], ROOT),
     ("docs sub-site", [sys.executable, "tools/build_docs_site.py"], ROOT),
     ("verified-lab sub-site", [sys.executable, "scripts/build_site.py"], ROOT),

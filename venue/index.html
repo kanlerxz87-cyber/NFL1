@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Venues &amp; Weather · Venues &amp; Weather · NFL1</title>
+<style>
+ body { font-family: system-ui, -apple-system, Segoe UI, sans-serif; margin: 0; color: #1a1a1a; }
+ header { background: #0b2545; color: #fff; padding: 1rem 1.5rem; }
+ header h1 { margin: 0.2rem 0; font-size: 1.4rem; }
+ nav { display: flex; flex-wrap: wrap; gap: 0.75rem; padding: 0.6rem 1.5rem; background: #13315c; }
+ nav a { color: #cfe0ff; text-decoration: none; font-size: 0.92rem; }
+ nav a.active { color: #fff; font-weight: 700; text-decoration: underline; }
+ main { padding: 1rem 1.5rem 3rem; max-width: 1180px; }
+ table { border-collapse: collapse; width: 100%; margin: 0.8rem 0 1.4rem; font-size: 0.88rem; }
+ caption { text-align: left; font-weight: 700; padding: 0.4rem 0; }
+ th, td { border: 1px solid #ccd; padding: 0.35rem 0.5rem; vertical-align: top; }
+ th { background: #eef2f8; text-align: left; }
+ .flag { color: #a01818; font-weight: 700; }
+ .box { border: 1px solid #ccd; background: #f6f9ff; padding: 0.8rem 1rem; margin: 0.8rem 0; }
+ .stamp { color: #556; font-size: 0.85rem; }
+ a { color: #0b4f9e; }
+</style>
+</head>
+<body>
+<header><div style="font-size:.85rem">NFL1 · sub-site</div><h1>Venues &amp; Weather</h1></header>
+<nav aria-label="Venue pages"><a href="index.html" class="active">Overview</a><a href="week10.html">Week 10 venues</a><a href="week11.html">Week 11 venues &amp; conditions</a><a href="schedule.html">Schedule announcement</a><a href="flagged.html">Flagged for review</a></nav>
+<main>
+
+<p>This sub-site publishes the venue evidence for the NFL1 project: stadium
+transcription for Weeks 10 and 11, roof/surface registers read from official NFL Game
+Books, an official NOAA/NWS hourly forecast overlay around each Week-11 kickoff, and the
+dated 2026 schedule announcement shown beside the live schedule.</p>
+
+<div class="box"><strong>2026 schedule announcement.</strong>
+The league announced the 2026 NFL Schedule powered by AWS would be released
+<strong>Thursday, 2026-05-14 at 8 p.m. ET</strong>
+&mdash; source: <a href="https://www.nfl.com/news/2026-nfl-schedule-powered-by-aws-to-be-released-thursday-may-14">2026 NFL schedule powered by AWS to be released Thursday, May 14</a>.
+<a href="schedule.html">Full announcement beside the live schedule &rarr;</a></div>
+
+<h2>Executive summary</h2>
+<ul>
+ <li><strong>14</strong> Week-10 and <strong>13</strong>
+     Week-11 venues transcribed from official nfl.com game-centre pages, each row linked
+     to its page: <a href="week10.html">Week 10</a> · <a href="week11.html">Week 11</a>.</li>
+ <li><strong>12 of 13</strong> Week-11 venues have roof and
+     surface transcribed verbatim from official NFL Game Books;
+     <strong>1</strong> is blank and
+     <a href="flagged.html">flagged</a> (Estadio Banorte — no completed Game Book exists
+     yet).</li>
+ <li><strong>11 of 13</strong> Week-11 venues have official NWS
+     hourly wind/temperature/precipitation values for the kickoff window;
+     <strong>2</strong> flagged (outside NWS coverage; kickoff
+     beyond the NWS hourly horizon at read time).</li>
+ <li>Every published value links the official source it was read from. Unconfirmable
+     values stay blank and are labelled UNVERIFIED/FLAGGED —
+     see <a href="flagged.html">Flagged for review</a>.</li>
+</ul>
+
+<h2>Method</h2>
+<ol>
+ <li>Venues: printed <em>Location</em> and <em>Stadium</em> fields from the official NFL
+     game-centre pages (read_at per row in the data files).</li>
+ <li>Roof/surface/weather: page 1 of the official Game Book (PDF) of each club's most
+     recent completed home game at that venue; conditions copied verbatim.</li>
+ <li>NWS overlay: stadium coordinates resolved via OpenStreetMap Nominatim (query input
+     only), then NOAA <code>api.weather.gov</code> <code>/points</code> and
+     <code>forecast/hourly</code> — all published weather values are NWS values with the
+     gridpoint URL on each row.</li>
+ <li>Schedule announcement: dated nfl.com article, quoted verbatim on
+     <a href="schedule.html">schedule.html</a>.</li>
+</ol>
+<p class="stamp">Data snapshot: 2026-11-16T15:45:00Z · builder: venue/build.py</p>
+
+<p class="stamp"><a href="../index.html">← NFL1 main site</a></p>
+</main>
+</body>
+</html>

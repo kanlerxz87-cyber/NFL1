@@ -64,6 +64,8 @@ NAV = [
     ("shadow/index.html", "Shadow Baseline"),
     ("review-room/index.html", "Review Room"),
     ("research/index.html", "s9cb Research"),
+    # Session cc5a9cdd-nfl1: the Venues & Weather sub-site joins the shared bar.
+    ("venue/index.html", "Venues & Weather"),
     ("strat/index.html", "Strategy Competition"),
     # pages produced by the other generators in this repository, kept in the shared
     # navigation so no session's page can become unreachable
