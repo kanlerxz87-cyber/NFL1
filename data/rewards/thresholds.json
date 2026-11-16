@@ -1,0 +1,68 @@
+{
+  "schema": "rewards_thresholds/1",
+  "note": "Frozen with REWARDS-RULE.md in the registration commit. These are the concrete numeric thresholds of the reward rule. Each value states where it comes from. Changing any value changes the rule and requires a new registration.",
+  "registered_at": "registration commit (see data/rewards/rewards.json registration_commit)",
+  "thresholds": [
+    {
+      "id": "T1",
+      "name": "skill lower bound",
+      "value": "> 0",
+      "comparison": "gt",
+      "numeric": 0.0,
+      "applies_to": "Stage 1 — Verified Signal",
+      "source": "data/strat/proper_score.json eligibility_rule",
+      "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/proper_score.json"
+    },
+    {
+      "id": "T2",
+      "name": "BH-adjusted p-value",
+      "value": "< 0.05",
+      "comparison": "lt",
+      "numeric": 0.05,
+      "applies_to": "Stage 1 — Verified Signal",
+      "source": "standard false-discovery control (Benjamini-Hochberg)",
+      "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/proper_score.json"
+    },
+    {
+      "id": "T3",
+      "name": "Bonferroni alpha",
+      "value": "0.05 / N_tests",
+      "comparison": "lt",
+      "numeric": 0.008333333333333333,
+      "n_tests": 6,
+      "applies_to": "Stage 1 — Verified Signal",
+      "source": "data/strat/proper_score.json multiplicity family (N_tests = 6 at registration)",
+      "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/proper_score.json"
+    },
+    {
+      "id": "T4",
+      "name": "decided-bet sample floor",
+      "value": ">= 200",
+      "comparison": "ge",
+      "numeric": 200,
+      "applies_to": "Stage 1 — Verified Signal",
+      "source": "data/strat/proper_score.json method.min_sample",
+      "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/proper_score.json"
+    },
+    {
+      "id": "T5",
+      "name": "Stage-2 prospective ROI lower bound",
+      "value": "> 0",
+      "comparison": "gt",
+      "numeric": 0.0,
+      "applies_to": "Stage 2 — track badge",
+      "source": "REWARDS-RULE.md (prospective escrow)",
+      "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/rewards/REWARDS-RULE.md"
+    },
+    {
+      "id": "T6",
+      "name": "re-promotion sample",
+      "value": "200 settled bets",
+      "comparison": "ge",
+      "numeric": 200,
+      "applies_to": "demotion / re-promotion",
+      "source": "data/strat/demotion_rules.json repromotion",
+      "source_url": "https://github.com/kanlerxz87-cyber/NFL1/blob/main/data/strat/demotion_rules.json"
+    }
+  ]
+}
