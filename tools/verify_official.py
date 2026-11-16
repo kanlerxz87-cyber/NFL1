@@ -468,10 +468,30 @@ def check_counts(R: Report):
     # game counts move with the calendar — compare against the CURRENT standings capture
     st = load("data/evidence/standings_current.json")["rows"]
     games = sum(r["w"] + r["l"] + r["t"] for r in st) // 2
-    R.ok("E. counts", "games played = half the sum of club games", counts["games_played"],
-         f"current official standings imply {games}") if games == counts["games_played"] else R.fail(
-        "E. counts", "games played reconciles with current official standings", counts["games_played"],
-        f"sum of club games / 2 = {games}")
+    # A game cannot un-happen. `data/model/dashboard.json` is rebuilt from the rolling feed on every
+    # run, while the hand transcription beside it is frozen at the date it was filed. So three cases:
+    #   equal          -> the fixture is current and agrees
+    #   dashboard >    -> the calendar advanced past the fixture; the fixture needs re-filing. FLAG,
+    #                     never FAIL: no data was lost and nothing published is wrong, but the gap is
+    #                     real and must stay visible until someone re-transcribes the standings page.
+    #   dashboard <    -> games published earlier have disappeared from the rebuild. FAIL: that is
+    #                     data loss, and every downstream count is now wrong.
+    # Before this, case 2 was a hard failure on every run after a Sunday, which turned the daily
+    # refresh red for a reason that was not a defect in the data it was refreshing.
+    played = counts["games_played"]
+    if played == games:
+        R.ok("E. counts", "games played = half the sum of club games", played,
+             f"the current official standings imply {games}")
+    elif played > games:
+        R.flag("E. counts", "games played has outrun its frozen standings transcription", played,
+               f"the rebuild counts {played} games; data/evidence/standings_current.json (filed "
+               f"{load('data/evidence/standings_current.json').get('retrieved', 'undated')}) still "
+               f"implies {games}. Re-transcribe the official standings page; {played - games} game(s) "
+               f"have been played since it was filed.")
+    else:
+        R.fail("E. counts", "games played went backwards against the frozen standings transcription",
+               played, f"the rebuild counts {played} games but the official transcription already "
+                       f"implies {games}; {games - played} game(s) were published and then lost")
     a = load("data/model/availability.json")
     R.ok("E. counts", "starters flagged matches availability detail",
          counts["starters_flagged_unavailable"]) if \
