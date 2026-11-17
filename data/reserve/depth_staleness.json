@@ -1,7 +1,7 @@
 {
  "generated_from": "data/reserve/transactions.json + the artifacts named on each finding",
  "note": "A finding is a printed comparison between a committed artifact and the league's dated register. It does not say the club's page is wrong: the page carries its own date. It says the row cannot be treated as durable, and it links both sides so a reader can check them.",
- "register_rows": 448,
+ "register_rows": 484,
  "artifacts": [
   {
    "artifact": "depth register (official club pages)",
@@ -33,15 +33,15 @@
   }
  ],
  "artifact_names_compared": 663,
- "players_on_open_reserve": 100,
+ "players_on_open_reserve": 102,
  "ambiguous_name_matches": [],
  "findings_by_kind": {
-  "moved away from the club": 11,
+  "moved away from the club": 13,
   "on a reserve list": 18
  },
  "findings_by_nature": {
-  "current-roster-claim": 12,
-  "dated-snapshot": 17
+  "current-roster-claim": 13,
+  "dated-snapshot": 18
  },
  "findings_clubs": [
   "CAR",
@@ -53,6 +53,7 @@
   "LA",
   "NE",
   "NO",
+  "NYG",
   "SEA",
   "SF",
   "TEN"
@@ -98,6 +99,28 @@
    "event_club_to": null,
    "source_url": "https://www.nfl.com/transactions/league/terminations/2026/10",
    "player_url": "https://www.nfl.com/players/irvin-charles/",
+   "events_seen": 1,
+   "match": "exact printed name",
+   "artifact_rows": 1
+  },
+  {
+   "artifact": "depth register (official club pages)",
+   "artifact_file": "data/depth/official_register.json",
+   "artifact_nature": "current-roster-claim",
+   "artifact_date": "2026-11-15",
+   "artifact_timing": "artifact predates the move: refresh needed",
+   "club": "SEA",
+   "player": "Deven Eastern",
+   "slot": "Defense/NT column 3 (raw cell '[Deven Eastern]')",
+   "artifact_source_url": "https://www.seahawks.com/team/depth-chart/",
+   "artifact_label": "none printed in the portion captured (chunk 1 of 2; the chart and its last row are inside chunk 1)",
+   "kind": "moved away from the club",
+   "latest_event": "Waived, No Recall (waivers)",
+   "event_date": "2026-11-16",
+   "event_club_from": "SEA",
+   "event_club_to": "SEA",
+   "source_url": "https://www.nfl.com/transactions/league/waivers/2026/11",
+   "player_url": "https://www.nfl.com/players/deven-eastern/",
    "events_seen": 1,
    "match": "exact printed name",
    "artifact_rows": 1
@@ -246,13 +269,13 @@
    "artifact_source_url": "S15",
    "artifact_label": "Unofficial",
    "kind": "moved away from the club",
-   "latest_event": "Waived, No Recall (waivers)",
-   "event_date": "2026-11-14",
+   "latest_event": "Terminated Via Waivers, all contracts (waivers)",
+   "event_date": "2026-11-16",
    "event_club_from": "GB",
-   "event_club_to": "GB",
+   "event_club_to": null,
    "source_url": "https://www.nfl.com/transactions/league/waivers/2026/11",
    "player_url": "https://www.nfl.com/players/coleman-owen/",
-   "events_seen": 2,
+   "events_seen": 3,
    "match": "exact printed name",
    "artifact_rows": 3
   },
@@ -318,6 +341,28 @@
    "event_club_to": null,
    "source_url": "https://www.nfl.com/transactions/league/terminations/2026/8",
    "player_url": "https://www.nfl.com/players/jon-weeks/",
+   "events_seen": 1,
+   "match": "exact printed name",
+   "artifact_rows": 1
+  },
+  {
+   "artifact": "week 10 injury report (repo copy)",
+   "artifact_file": "data/verified/injury_report_2026_week10.tsv",
+   "artifact_nature": "dated-snapshot",
+   "artifact_date": null,
+   "artifact_timing": "artifact carries no capture date: cannot tell which side of the move it is on",
+   "club": "NYG",
+   "player": "Charlie Jones",
+   "slot": "",
+   "artifact_source_url": "https://www.nfl.com/injuries/",
+   "artifact_label": "weekly injury report",
+   "kind": "moved away from the club",
+   "latest_event": "Waived, No Recall (waivers)",
+   "event_date": "2026-11-16",
+   "event_club_from": "NYG",
+   "event_club_to": "NYG",
+   "source_url": "https://www.nfl.com/transactions/league/waivers/2026/11",
+   "player_url": "https://www.nfl.com/players/charlie-jones-3/",
    "events_seen": 1,
    "match": "exact printed name",
    "artifact_rows": 1
@@ -697,6 +742,6 @@
    "artifact_rows": 1
   }
  ],
- "contradictions_of_a_current_claim": 12,
- "rows_superseded_by_a_later_event": 17
+ "contradictions_of_a_current_claim": 13,
+ "rows_superseded_by_a_later_event": 18
 }
