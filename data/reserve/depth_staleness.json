@@ -1,7 +1,7 @@
 {
  "generated_from": "data/reserve/transactions.json + the artifacts named on each finding",
  "note": "A finding is a printed comparison between a committed artifact and the league's dated register. It does not say the club's page is wrong: the page carries its own date. It says the row cannot be treated as durable, and it links both sides so a reader can check them.",
- "register_rows": 484,
+ "register_rows": 529,
  "artifacts": [
   {
    "artifact": "depth register (official club pages)",
@@ -33,17 +33,18 @@
   }
  ],
  "artifact_names_compared": 663,
- "players_on_open_reserve": 102,
+ "players_on_open_reserve": 110,
  "ambiguous_name_matches": [],
  "findings_by_kind": {
   "moved away from the club": 13,
-  "on a reserve list": 18
+  "on a reserve list": 21
  },
  "findings_by_nature": {
   "current-roster-claim": 13,
-  "dated-snapshot": 18
+  "dated-snapshot": 21
  },
  "findings_clubs": [
+  "BUF",
   "CAR",
   "CLE",
   "DAL",
@@ -115,13 +116,13 @@
    "artifact_source_url": "https://www.seahawks.com/team/depth-chart/",
    "artifact_label": "none printed in the portion captured (chunk 1 of 2; the chart and its last row are inside chunk 1)",
    "kind": "moved away from the club",
-   "latest_event": "Waived, No Recall (waivers)",
-   "event_date": "2026-11-16",
+   "latest_event": "Terminated Via Waivers, all contracts (waivers)",
+   "event_date": "2026-11-17",
    "event_club_from": "SEA",
-   "event_club_to": "SEA",
+   "event_club_to": null,
    "source_url": "https://www.nfl.com/transactions/league/waivers/2026/11",
    "player_url": "https://www.nfl.com/players/deven-eastern/",
-   "events_seen": 1,
+   "events_seen": 2,
    "match": "exact printed name",
    "artifact_rows": 1
   },
@@ -275,7 +276,7 @@
    "event_club_to": null,
    "source_url": "https://www.nfl.com/transactions/league/waivers/2026/11",
    "player_url": "https://www.nfl.com/players/coleman-owen/",
-   "events_seen": 3,
+   "events_seen": 4,
    "match": "exact printed name",
    "artifact_rows": 3
   },
@@ -357,13 +358,13 @@
    "artifact_source_url": "https://www.nfl.com/injuries/",
    "artifact_label": "weekly injury report",
    "kind": "moved away from the club",
-   "latest_event": "Waived, No Recall (waivers)",
-   "event_date": "2026-11-16",
+   "latest_event": "Terminated Via Waivers, all contracts (waivers)",
+   "event_date": "2026-11-17",
    "event_club_from": "NYG",
-   "event_club_to": "NYG",
+   "event_club_to": null,
    "source_url": "https://www.nfl.com/transactions/league/waivers/2026/11",
    "player_url": "https://www.nfl.com/players/charlie-jones-3/",
-   "events_seen": 1,
+   "events_seen": 2,
    "match": "exact printed name",
    "artifact_rows": 1
   },
@@ -527,6 +528,28 @@
    "artifact_nature": "dated-snapshot",
    "artifact_date": null,
    "artifact_timing": "artifact carries no capture date: cannot tell which side of the move it is on",
+   "club": "BUF",
+   "player": "Ar'maj Reed-Adams",
+   "slot": "",
+   "artifact_source_url": "https://www.nfl.com/injuries/",
+   "artifact_label": "weekly injury report",
+   "kind": "on a reserve list",
+   "latest_event": "Reserve/Injured (reserve-list)",
+   "event_date": "2026-11-17",
+   "event_club_from": "BUF",
+   "event_club_to": "BUF",
+   "source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "player_url": "https://www.nfl.com/players/ar-maj-reed-adams/",
+   "events_seen": 1,
+   "match": "exact printed name",
+   "artifact_rows": 1
+  },
+  {
+   "artifact": "week 10 injury report (repo copy)",
+   "artifact_file": "data/verified/injury_report_2026_week10.tsv",
+   "artifact_nature": "dated-snapshot",
+   "artifact_date": null,
+   "artifact_timing": "artifact carries no capture date: cannot tell which side of the move it is on",
    "club": "IND",
    "player": "Mo Alie-Cox",
    "slot": "",
@@ -539,6 +562,28 @@
    "event_club_to": "IND",
    "source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
    "player_url": "https://www.nfl.com/players/mo-alie-cox/",
+   "events_seen": 1,
+   "match": "exact printed name",
+   "artifact_rows": 1
+  },
+  {
+   "artifact": "week 10 injury report (repo copy)",
+   "artifact_file": "data/verified/injury_report_2026_week10.tsv",
+   "artifact_nature": "dated-snapshot",
+   "artifact_date": null,
+   "artifact_timing": "artifact carries no capture date: cannot tell which side of the move it is on",
+   "club": "IND",
+   "player": "Jaylon Carlies",
+   "slot": "",
+   "artifact_source_url": "https://www.nfl.com/injuries/",
+   "artifact_label": "weekly injury report",
+   "kind": "on a reserve list",
+   "latest_event": "Reserve/Injured (reserve-list)",
+   "event_date": "2026-11-17",
+   "event_club_from": "IND",
+   "event_club_to": "IND",
+   "source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "player_url": "https://www.nfl.com/players/jaylon-carlies/",
    "events_seen": 1,
    "match": "exact printed name",
    "artifact_rows": 1
@@ -605,6 +650,28 @@
    "event_club_to": "NO",
    "source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
    "player_url": "https://www.nfl.com/players/christen-miller/",
+   "events_seen": 1,
+   "match": "exact printed name",
+   "artifact_rows": 1
+  },
+  {
+   "artifact": "week 10 injury report (repo copy)",
+   "artifact_file": "data/verified/injury_report_2026_week10.tsv",
+   "artifact_nature": "dated-snapshot",
+   "artifact_date": null,
+   "artifact_timing": "artifact carries no capture date: cannot tell which side of the move it is on",
+   "club": "HOU",
+   "player": "Azeez Al-Shaair",
+   "slot": "",
+   "artifact_source_url": "https://www.nfl.com/injuries/",
+   "artifact_label": "weekly injury report",
+   "kind": "on a reserve list",
+   "latest_event": "Reserve/Injured (reserve-list)",
+   "event_date": "2026-11-17",
+   "event_club_from": "HOU",
+   "event_club_to": "HOU",
+   "source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "player_url": "https://www.nfl.com/players/azeez-al-shaair/",
    "events_seen": 1,
    "match": "exact printed name",
    "artifact_rows": 1
@@ -743,5 +810,5 @@
   }
  ],
  "contradictions_of_a_current_claim": 13,
- "rows_superseded_by_a_later_event": 18
+ "rows_superseded_by_a_later_event": 21
 }
