@@ -1,7 +1,7 @@
 {
  "generated_from": "data/reserve/transactions.json + the artifacts named on each finding",
  "note": "A finding is a printed comparison between a committed artifact and the league's dated register. It does not say the club's page is wrong: the page carries its own date. It says the row cannot be treated as durable, and it links both sides so a reader can check them.",
- "register_rows": 591,
+ "register_rows": 600,
  "artifacts": [
   {
    "artifact": "depth register (official club pages)",
@@ -36,11 +36,11 @@
  "players_on_open_reserve": 122,
  "ambiguous_name_matches": [],
  "findings_by_kind": {
-  "moved away from the club": 13,
+  "moved away from the club": 15,
   "on a reserve list": 23
  },
  "findings_by_nature": {
-  "current-roster-claim": 15,
+  "current-roster-claim": 17,
   "dated-snapshot": 21
  },
  "findings_clubs": [
@@ -82,6 +82,28 @@
    "events_seen": 1,
    "match": "exact printed name",
    "artifact_rows": 2
+  },
+  {
+   "artifact": "depth register (official club pages)",
+   "artifact_file": "data/depth/official_register.json",
+   "artifact_nature": "current-roster-claim",
+   "artifact_date": "2026-11-15",
+   "artifact_timing": "artifact predates the move: refresh needed",
+   "club": "GB",
+   "player": "Pierre Strong Jr.",
+   "slot": "Offense/RB column 3 (raw cell '22 Pierre Strong Jr.')",
+   "artifact_source_url": "https://www.packers.com/team/depth-chart",
+   "artifact_label": "Unofficial, Nov. 10, 2026",
+   "kind": "moved away from the club",
+   "latest_event": "Waived, No Recall (waivers)",
+   "event_date": "2026-11-19",
+   "event_club_from": "GB",
+   "event_club_to": "GB",
+   "source_url": "https://www.nfl.com/transactions/league/waivers/2026/11",
+   "player_url": "https://www.nfl.com/players/pierre-strong/",
+   "events_seen": 1,
+   "match": "base name without the generational suffix (1 printed name behind it)",
+   "artifact_rows": 1
   },
   {
    "artifact": "depth register (official club pages)",
@@ -324,6 +346,28 @@
    "events_seen": 4,
    "match": "exact printed name",
    "artifact_rows": 3
+  },
+  {
+   "artifact": "depth_chart.json (repo chart, s1-s4 columns)",
+   "artifact_file": "data/depth_chart.json",
+   "artifact_nature": "current-roster-claim",
+   "artifact_date": "2026-11-12",
+   "artifact_timing": "artifact predates the move: refresh needed",
+   "club": "GB",
+   "player": "Pierre Strong Jr.",
+   "slot": "Offense/RB s3",
+   "artifact_source_url": "S15",
+   "artifact_label": "Unofficial",
+   "kind": "moved away from the club",
+   "latest_event": "Waived, No Recall (waivers)",
+   "event_date": "2026-11-19",
+   "event_club_from": "GB",
+   "event_club_to": "GB",
+   "source_url": "https://www.nfl.com/transactions/league/waivers/2026/11",
+   "player_url": "https://www.nfl.com/players/pierre-strong/",
+   "events_seen": 1,
+   "match": "base name without the generational suffix (1 printed name behind it)",
+   "artifact_rows": 1
   },
   {
    "artifact": "depth_chart.json (repo chart, s1-s4 columns)",
@@ -777,13 +821,13 @@
    "artifact_source_url": "https://www.nfl.com/injuries/",
    "artifact_label": "weekly injury report",
    "kind": "on a reserve list",
-   "latest_event": "Reserve/Injured (reserve-list)",
-   "event_date": "2026-11-12",
+   "latest_event": "Reserve/Suspended By Commissioner-Less than One Year (reserve-list)",
+   "event_date": "2026-11-19",
    "event_club_from": "LA",
    "event_club_to": "LA",
    "source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
    "player_url": "https://www.nfl.com/players/puka-nacua/",
-   "events_seen": 1,
+   "events_seen": 2,
    "match": "exact printed name",
    "artifact_rows": 1
   },
@@ -854,6 +898,6 @@
    "artifact_rows": 1
   }
  ],
- "contradictions_of_a_current_claim": 15,
+ "contradictions_of_a_current_claim": 17,
  "rows_superseded_by_a_later_event": 21
 }

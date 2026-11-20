@@ -1,5 +1,5 @@
 {
- "generated_at_utc": "2026-11-20T01:22:05Z",
+ "generated_at_utc": "2026-11-20T08:45:37Z",
  "parser": "collect_transactions/1.0",
  "categories": [
   "trades",
@@ -178,24 +178,26 @@
    "cap_month_complete_as_printed": false
   },
   "reserve-list/2026-11": {
-   "captured_at_utc": "2026-11-20T01:22:00Z",
+   "captured_at_utc": "2026-11-20T08:45:32Z",
    "status": "ok",
-   "rows": 8,
-   "canonical_sha256": "ae3787907b3cd5d3306d26e507ea8a1fb94a753b07021b8d58b9aed594796506",
-   "raw_sha256": "a0b0a787fe89c12d2d3674c409453e42024a33270d67d0c5b49b4ad94b753581",
+   "rows": 25,
+   "canonical_sha256": "5126d81b3f321f96173386c8aa31b01f24689a623189e1af527dcb4cc2a2b0ee",
+   "raw_sha256": "079c2c6ab5fcddea6dbf962152cff2f642e2784501cb1c689e174ce435c3f499",
    "http_status": 200,
    "url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
-   "flags": [],
-   "rows_last_read": 8,
-   "cap_rows_printed": 8,
-   "cap_oldest_printed": "2026-11-03",
-   "cap": false,
-   "cap_at_source_flag": false,
-   "captures_for_page": 6,
+   "flags": [
+    "page is at its printed cap of 25 rows (oldest printed 2026-11-12, month starts 2026-11-01); the league prints no deeper window: ?page=2 repeats the same rows and a per-day url returns 404, verified 2026-11-16"
+   ],
+   "rows_last_read": 25,
+   "cap_rows_printed": 25,
+   "cap_oldest_printed": "2026-11-12",
+   "cap": true,
+   "cap_at_source_flag": true,
+   "captures_for_page": 7,
    "headers": [
     "from|to|date|name|position|transaction"
    ],
-   "rows_in_the_union": 47,
+   "rows_in_the_union": 48,
    "cap_month_complete_as_printed": false
   },
   "signings/2026-08": {
@@ -268,26 +270,26 @@
    "cap_month_complete_as_printed": false
   },
   "signings/2026-11": {
-   "captured_at_utc": "2026-11-20T01:21:59Z",
+   "captured_at_utc": "2026-11-20T08:45:31Z",
    "status": "ok",
    "rows": 25,
-   "canonical_sha256": "55d09eb736ede7b47ae5cf8c278e4039b0a772238ffd3b2c2ca997908d8853f5",
-   "raw_sha256": "dca6a24e5b57f6f042e25419d95ce024b3062dec1dbd7e974074132c856a0fcb",
+   "canonical_sha256": "9be797aaac9c10510ce86bbca8fbaac1dfb3062c984d5904a4ee143e38157b6d",
+   "raw_sha256": "714931710eefb2a7ae4471e77fd413d1842b0408b00fd6201f3d363a53d97325",
    "http_status": 200,
    "url": "https://www.nfl.com/transactions/league/signings/2026/11",
    "flags": [
-    "page is at its printed cap of 25 rows (oldest printed 2026-11-12, month starts 2026-11-01); the league prints no deeper window: ?page=2 repeats the same rows and a per-day url returns 404, verified 2026-11-16"
+    "page is at its printed cap of 25 rows (oldest printed 2026-11-17, month starts 2026-11-01); the league prints no deeper window: ?page=2 repeats the same rows and a per-day url returns 404, verified 2026-11-16"
    ],
    "rows_last_read": 25,
    "cap_rows_printed": 25,
-   "cap_oldest_printed": "2026-11-12",
+   "cap_oldest_printed": "2026-11-17",
    "cap": true,
    "cap_at_source_flag": true,
-   "captures_for_page": 6,
+   "captures_for_page": 7,
    "headers": [
     "from|to|date|name|position|transaction"
    ],
-   "rows_in_the_union": 81,
+   "rows_in_the_union": 87,
    "cap_month_complete_as_printed": false
   },
   "terminations/2026-08": {
@@ -534,26 +536,26 @@
    "cap_month_complete_as_printed": false
   },
   "waivers/2026-11": {
-   "captured_at_utc": "2026-11-20T01:22:01Z",
+   "captured_at_utc": "2026-11-20T08:45:33Z",
    "status": "ok",
    "rows": 25,
-   "canonical_sha256": "dac5b75d1e8bbc2b8f7b78744720ecc9c0293d80971830d227319d347cb5fe61",
-   "raw_sha256": "c0732d53cf33b05a685167b3067d940167f760fd38b0f7249274abec85a73ef5",
+   "canonical_sha256": "5fec5a9dcf2578cd432bfecdfe92cb39d40d556465446add1f29b0e8ad758194",
+   "raw_sha256": "13ebdcc52c1c996c2d03f16e3da77c45d6a31d979bac015456867f64d35e943b",
    "http_status": 200,
    "url": "https://www.nfl.com/transactions/league/waivers/2026/11",
    "flags": [
-    "page is at its printed cap of 25 rows (oldest printed 2026-11-07, month starts 2026-11-01); the league prints no deeper window: ?page=2 repeats the same rows and a per-day url returns 404, verified 2026-11-16"
+    "page is at its printed cap of 25 rows (oldest printed 2026-11-16, month starts 2026-11-01); the league prints no deeper window: ?page=2 repeats the same rows and a per-day url returns 404, verified 2026-11-16"
    ],
    "rows_last_read": 25,
    "cap_rows_printed": 25,
-   "cap_oldest_printed": "2026-11-07",
+   "cap_oldest_printed": "2026-11-16",
    "cap": true,
    "cap_at_source_flag": true,
-   "captures_for_page": 7,
+   "captures_for_page": 8,
    "headers": [
     "from|to|date|name|position|transaction"
    ],
-   "rows_in_the_union": 90,
+   "rows_in_the_union": 92,
    "cap_month_complete_as_printed": false
   }
  },
@@ -713,12 +715,25 @@
   {
    "page": "waivers/2026-11",
    "flag": "page is at its printed cap of 25 rows (oldest printed 2026-11-07, month starts 2026-11-01); the league prints no deeper window: ?page=2 repeats the same rows and a per-day url returns 404, verified 2026-11-16"
+  },
+  {
+   "page": "signings/2026-11",
+   "flag": "page is at its printed cap of 25 rows (oldest printed 2026-11-17, month starts 2026-11-01); the league prints no deeper window: ?page=2 repeats the same rows and a per-day url returns 404, verified 2026-11-16"
+  },
+  {
+   "page": "reserve-list/2026-11",
+   "flag": "page is at its printed cap of 25 rows (oldest printed 2026-11-12, month starts 2026-11-01); the league prints no deeper window: ?page=2 repeats the same rows and a per-day url returns 404, verified 2026-11-16"
+  },
+  {
+   "page": "waivers/2026-11",
+   "flag": "page is at its printed cap of 25 rows (oldest printed 2026-11-16, month starts 2026-11-01); the league prints no deeper window: ?page=2 repeats the same rows and a per-day url returns 404, verified 2026-11-16"
   }
  ],
  "pages_capped": [
   "reserve-list/2026-08",
   "reserve-list/2026-09",
   "reserve-list/2026-10",
+  "reserve-list/2026-11",
   "signings/2026-08",
   "signings/2026-09",
   "signings/2026-10",
@@ -735,6 +750,7 @@
   "reserve-list/2026-08",
   "reserve-list/2026-09",
   "reserve-list/2026-10",
+  "reserve-list/2026-11",
   "signings/2026-08",
   "signings/2026-09",
   "signings/2026-10",
@@ -752,7 +768,6 @@
   "other/2026-09",
   "other/2026-10",
   "other/2026-11",
-  "reserve-list/2026-11",
   "terminations/2026-09",
   "terminations/2026-11",
   "trades/2026-09",
@@ -762,5 +777,5 @@
  "printed_cap": 25,
  "cap_explained": "The league's month page prints at most 25 rows, newest first, and offers no deeper window (`?page=2` repeats the same rows; a per-day url returns 404). A page at 25 rows is therefore only complete for the month if its oldest printed row is on the first day. Capturing the running page often is what recovers the rest: the derived register is the union of every capture of that page, so a row is never lost by leaving the printed window.",
  "n_pages": 24,
- "n_rows_latest": 591
+ "n_rows_latest": 600
 }
