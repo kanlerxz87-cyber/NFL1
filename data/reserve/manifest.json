@@ -1,7 +1,7 @@
 {
  "schema": "transactions_register/1",
  "parser": "collect_transactions/1.0",
- "generated_at_utc": "2026-11-20T17:54:54Z",
+ "generated_at_utc": "2026-11-21T00:03:38Z",
  "note": "Append-only captures; derived files rebuilt from them. Each capture file is written once with exclusive-create and its SHA-256 is recorded.",
  "categories": [
   "trades",
@@ -791,13 +791,25 @@
    "rows": 25,
    "url": "https://www.nfl.com/transactions/league/waivers/2026/11",
    "status": "ok"
+  },
+  {
+   "file": "data/reserve/captures/20261121T000336Z_waivers_2026-11_f947f574b105.json",
+   "sha256": "cac52822a5bc40362c259f958296a7d6178cc93ea85f98a6e8fd78f286fc150d",
+   "category": "waivers",
+   "month": "2026-11",
+   "captured_at_utc": "2026-11-21T00:03:35Z",
+   "canonical_sha256": "f947f574b10500c216fa00f489532539d6ef038456f1f8821ca3a79227690bf5",
+   "raw_sha256": "bf17ef6430360b7d707b6921973e2303b942dad0883f17e4b0771fb8422ccf44",
+   "rows": 25,
+   "url": "https://www.nfl.com/transactions/league/waivers/2026/11",
+   "status": "ok"
   }
  ],
  "summary": {
-  "rows": 600,
+  "rows": 603,
   "clubs": 33,
   "on_reserve": 122,
   "pages": 24,
-  "flags": 42
+  "flags": 43
  }
 }

@@ -1,5 +1,5 @@
 {
- "generated_at_utc": "2026-11-20T17:54:54Z",
+ "generated_at_utc": "2026-11-21T00:03:39Z",
  "parser": "collect_transactions/1.0",
  "categories": [
   "trades",
@@ -536,11 +536,11 @@
    "cap_month_complete_as_printed": false
   },
   "waivers/2026-11": {
-   "captured_at_utc": "2026-11-20T08:45:33Z",
+   "captured_at_utc": "2026-11-21T00:03:35Z",
    "status": "ok",
    "rows": 25,
-   "canonical_sha256": "5fec5a9dcf2578cd432bfecdfe92cb39d40d556465446add1f29b0e8ad758194",
-   "raw_sha256": "13ebdcc52c1c996c2d03f16e3da77c45d6a31d979bac015456867f64d35e943b",
+   "canonical_sha256": "f947f574b10500c216fa00f489532539d6ef038456f1f8821ca3a79227690bf5",
+   "raw_sha256": "bf17ef6430360b7d707b6921973e2303b942dad0883f17e4b0771fb8422ccf44",
    "http_status": 200,
    "url": "https://www.nfl.com/transactions/league/waivers/2026/11",
    "flags": [
@@ -551,11 +551,11 @@
    "cap_oldest_printed": "2026-11-16",
    "cap": true,
    "cap_at_source_flag": true,
-   "captures_for_page": 8,
+   "captures_for_page": 9,
    "headers": [
     "from|to|date|name|position|transaction"
    ],
-   "rows_in_the_union": 92,
+   "rows_in_the_union": 95,
    "cap_month_complete_as_printed": false
   }
  },
@@ -727,6 +727,10 @@
   {
    "page": "waivers/2026-11",
    "flag": "page is at its printed cap of 25 rows (oldest printed 2026-11-16, month starts 2026-11-01); the league prints no deeper window: ?page=2 repeats the same rows and a per-day url returns 404, verified 2026-11-16"
+  },
+  {
+   "page": "waivers/2026-11",
+   "flag": "page is at its printed cap of 25 rows (oldest printed 2026-11-16, month starts 2026-11-01); the league prints no deeper window: ?page=2 repeats the same rows and a per-day url returns 404, verified 2026-11-16"
   }
  ],
  "pages_capped": [
@@ -777,5 +781,5 @@
  "printed_cap": 25,
  "cap_explained": "The league's month page prints at most 25 rows, newest first, and offers no deeper window (`?page=2` repeats the same rows; a per-day url returns 404). A page at 25 rows is therefore only complete for the month if its oldest printed row is on the first day. Capturing the running page often is what recovers the rest: the derived register is the union of every capture of that page, so a row is never lost by leaving the printed window.",
  "n_pages": 24,
- "n_rows_latest": 600
+ "n_rows_latest": 603
 }
