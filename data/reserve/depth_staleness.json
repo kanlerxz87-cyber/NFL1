@@ -1,7 +1,7 @@
 {
  "generated_from": "data/reserve/transactions.json + the artifacts named on each finding",
  "note": "A finding is a printed comparison between a committed artifact and the league's dated register. It does not say the club's page is wrong: the page carries its own date. It says the row cannot be treated as durable, and it links both sides so a reader can check them.",
- "register_rows": 603,
+ "register_rows": 617,
  "artifacts": [
   {
    "artifact": "depth register (official club pages)",
@@ -33,21 +33,22 @@
   }
  ],
  "artifact_names_compared": 663,
- "players_on_open_reserve": 122,
+ "players_on_open_reserve": 130,
  "ambiguous_name_matches": [],
  "findings_by_kind": {
-  "moved away from the club": 15,
-  "on a reserve list": 23
+  "moved away from the club": 17,
+  "on a reserve list": 25
  },
  "findings_by_nature": {
-  "current-roster-claim": 17,
-  "dated-snapshot": 21
+  "current-roster-claim": 19,
+  "dated-snapshot": 23
  },
  "findings_clubs": [
   "BUF",
   "CAR",
   "CLE",
   "DAL",
+  "DET",
   "GB",
   "HOU",
   "IND",
@@ -101,7 +102,7 @@
    "event_club_to": null,
    "source_url": "https://www.nfl.com/transactions/league/waivers/2026/11",
    "player_url": "https://www.nfl.com/players/pierre-strong/",
-   "events_seen": 2,
+   "events_seen": 3,
    "match": "base name without the generational suffix (1 printed name behind it)",
    "artifact_rows": 1
   },
@@ -190,6 +191,28 @@
    "source_url": "https://www.nfl.com/transactions/league/terminations/2026/11",
    "player_url": "https://www.nfl.com/players/velus-jones/",
    "events_seen": 2,
+   "match": "exact printed name",
+   "artifact_rows": 1
+  },
+  {
+   "artifact": "depth register (official club pages)",
+   "artifact_file": "data/depth/official_register.json",
+   "artifact_nature": "current-roster-claim",
+   "artifact_date": "2026-11-15",
+   "artifact_timing": "artifact predates the move: refresh needed",
+   "club": "SF",
+   "player": "Brandin Cooks",
+   "slot": "Offense/WR column 3 (raw cell '[Brandin Cooks]')",
+   "artifact_source_url": "https://www.49ers.com/team/depth-chart",
+   "artifact_label": "Updated as of 11/10/26",
+   "kind": "moved away from the club",
+   "latest_event": "Waived, No Recall (waivers)",
+   "event_date": "2026-11-21",
+   "event_club_from": "SF",
+   "event_club_to": "SF",
+   "source_url": "https://www.nfl.com/transactions/league/waivers/2026/11",
+   "player_url": "https://www.nfl.com/players/brandin-cooks/",
+   "events_seen": 1,
    "match": "exact printed name",
    "artifact_rows": 1
   },
@@ -365,8 +388,30 @@
    "event_club_to": null,
    "source_url": "https://www.nfl.com/transactions/league/waivers/2026/11",
    "player_url": "https://www.nfl.com/players/pierre-strong/",
-   "events_seen": 2,
+   "events_seen": 3,
    "match": "base name without the generational suffix (1 printed name behind it)",
+   "artifact_rows": 1
+  },
+  {
+   "artifact": "depth_chart.json (repo chart, s1-s4 columns)",
+   "artifact_file": "data/depth_chart.json",
+   "artifact_nature": "current-roster-claim",
+   "artifact_date": "2026-11-12",
+   "artifact_timing": "artifact predates the move: refresh needed",
+   "club": "SF",
+   "player": "Brandin Cooks",
+   "slot": "Offense/WR s3",
+   "artifact_source_url": "S16",
+   "artifact_label": "Depth Chart",
+   "kind": "moved away from the club",
+   "latest_event": "Waived, No Recall (waivers)",
+   "event_date": "2026-11-21",
+   "event_club_from": "SF",
+   "event_club_to": "SF",
+   "source_url": "https://www.nfl.com/transactions/league/waivers/2026/11",
+   "player_url": "https://www.nfl.com/players/brandin-cooks/",
+   "events_seen": 1,
+   "match": "exact printed name",
    "artifact_rows": 1
   },
   {
@@ -529,6 +574,28 @@
    "artifact_nature": "dated-snapshot",
    "artifact_date": null,
    "artifact_timing": "artifact carries no capture date: cannot tell which side of the move it is on",
+   "club": "DET",
+   "player": "Cade Mays",
+   "slot": "",
+   "artifact_source_url": "https://www.nfl.com/injuries/",
+   "artifact_label": "weekly injury report",
+   "kind": "on a reserve list",
+   "latest_event": "Reserve/Injured (reserve-list)",
+   "event_date": "2026-11-21",
+   "event_club_from": "DET",
+   "event_club_to": "DET",
+   "source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "player_url": "https://www.nfl.com/players/cade-mays/",
+   "events_seen": 1,
+   "match": "exact printed name",
+   "artifact_rows": 1
+  },
+  {
+   "artifact": "week 10 injury report (repo copy)",
+   "artifact_file": "data/verified/injury_report_2026_week10.tsv",
+   "artifact_nature": "dated-snapshot",
+   "artifact_date": null,
+   "artifact_timing": "artifact carries no capture date: cannot tell which side of the move it is on",
    "club": "GB",
    "player": "Bo Melton",
    "slot": "",
@@ -585,6 +652,28 @@
    "event_club_to": "TEN",
    "source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
    "player_url": "https://www.nfl.com/players/peter-skoronski/",
+   "events_seen": 1,
+   "match": "exact printed name",
+   "artifact_rows": 1
+  },
+  {
+   "artifact": "week 10 injury report (repo copy)",
+   "artifact_file": "data/verified/injury_report_2026_week10.tsv",
+   "artifact_nature": "dated-snapshot",
+   "artifact_date": null,
+   "artifact_timing": "artifact carries no capture date: cannot tell which side of the move it is on",
+   "club": "TEN",
+   "player": "Tyjae Spears",
+   "slot": "",
+   "artifact_source_url": "https://www.nfl.com/injuries/",
+   "artifact_label": "weekly injury report",
+   "kind": "on a reserve list",
+   "latest_event": "Reserve/Injured (reserve-list)",
+   "event_date": "2026-11-21",
+   "event_club_from": "TEN",
+   "event_club_to": "TEN",
+   "source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "player_url": "https://www.nfl.com/players/tyjae-spears/",
    "events_seen": 1,
    "match": "exact printed name",
    "artifact_rows": 1
@@ -898,6 +987,6 @@
    "artifact_rows": 1
   }
  ],
- "contradictions_of_a_current_claim": 17,
- "rows_superseded_by_a_later_event": 21
+ "contradictions_of_a_current_claim": 19,
+ "rows_superseded_by_a_later_event": 23
 }
