@@ -1,7 +1,7 @@
 {
  "generated_from": "data/reserve/transactions.json + the artifacts named on each finding",
  "note": "A finding is a printed comparison between a committed artifact and the league's dated register. It does not say the club's page is wrong: the page carries its own date. It says the row cannot be treated as durable, and it links both sides so a reader can check them.",
- "register_rows": 629,
+ "register_rows": 664,
  "artifacts": [
   {
    "artifact": "depth register (official club pages)",
@@ -33,14 +33,14 @@
   }
  ],
  "artifact_names_compared": 663,
- "players_on_open_reserve": 130,
+ "players_on_open_reserve": 134,
  "ambiguous_name_matches": [],
  "findings_by_kind": {
-  "moved away from the club": 17,
-  "on a reserve list": 25
+  "moved away from the club": 18,
+  "on a reserve list": 28
  },
  "findings_by_nature": {
-  "current-roster-claim": 19,
+  "current-roster-claim": 23,
   "dated-snapshot": 23
  },
  "findings_clubs": [
@@ -133,6 +133,28 @@
    "artifact_file": "data/depth/official_register.json",
    "artifact_nature": "current-roster-claim",
    "artifact_date": "2026-11-15",
+   "artifact_timing": "artifact predates the move: refresh needed",
+   "club": "KC",
+   "player": "Ben VanSumeren",
+   "slot": "Offense/FB column 1 (raw cell '[Ben VanSumeren]')",
+   "artifact_source_url": "https://www.chiefs.com/team/depth-chart",
+   "artifact_label": "Unofficial Depth Chart (page heading \"Kansas City Chiefs Unofficial Depth Chart\"; no as-of date printed)",
+   "kind": "on a reserve list",
+   "latest_event": "Reserve/Injured (reserve-list)",
+   "event_date": "2026-11-24",
+   "event_club_from": "KC",
+   "event_club_to": "KC",
+   "source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "player_url": "https://www.nfl.com/players/ben-vansumeren/",
+   "events_seen": 1,
+   "match": "exact printed name",
+   "artifact_rows": 1
+  },
+  {
+   "artifact": "depth register (official club pages)",
+   "artifact_file": "data/depth/official_register.json",
+   "artifact_nature": "current-roster-claim",
+   "artifact_date": "2026-11-15",
    "artifact_timing": "artifact captured after the move",
    "club": "SEA",
    "player": "Irvin Charles",
@@ -157,6 +179,28 @@
    "artifact_date": "2026-11-15",
    "artifact_timing": "artifact predates the move: refresh needed",
    "club": "SEA",
+   "player": "George Holani",
+   "slot": "Offense/RB column 4 (raw cell '[George Holani]')",
+   "artifact_source_url": "https://www.seahawks.com/team/depth-chart/",
+   "artifact_label": "none printed in the portion captured (chunk 1 of 2; the chart and its last row are inside chunk 1)",
+   "kind": "on a reserve list",
+   "latest_event": "Reserve/Injured (reserve-list)",
+   "event_date": "2026-11-24",
+   "event_club_from": "SEA",
+   "event_club_to": "SEA",
+   "source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "player_url": "https://www.nfl.com/players/george-holani/",
+   "events_seen": 1,
+   "match": "exact printed name",
+   "artifact_rows": 2
+  },
+  {
+   "artifact": "depth register (official club pages)",
+   "artifact_file": "data/depth/official_register.json",
+   "artifact_nature": "current-roster-claim",
+   "artifact_date": "2026-11-15",
+   "artifact_timing": "artifact predates the move: refresh needed",
+   "club": "SEA",
    "player": "Deven Eastern",
    "slot": "Defense/NT column 3 (raw cell '[Deven Eastern]')",
    "artifact_source_url": "https://www.seahawks.com/team/depth-chart/",
@@ -169,6 +213,28 @@
    "source_url": "https://www.nfl.com/transactions/league/waivers/2026/11",
    "player_url": "https://www.nfl.com/players/deven-eastern/",
    "events_seen": 3,
+   "match": "exact printed name",
+   "artifact_rows": 1
+  },
+  {
+   "artifact": "depth register (official club pages)",
+   "artifact_file": "data/depth/official_register.json",
+   "artifact_nature": "current-roster-claim",
+   "artifact_date": "2026-11-15",
+   "artifact_timing": "artifact predates the move: refresh needed",
+   "club": "SEA",
+   "player": "Avery Smith",
+   "slot": "Defense/CB column 2 (raw cell '[Avery Smith]')",
+   "artifact_source_url": "https://www.seahawks.com/team/depth-chart/",
+   "artifact_label": "none printed in the portion captured (chunk 1 of 2; the chart and its last row are inside chunk 1)",
+   "kind": "moved away from the club",
+   "latest_event": "Waived, No Recall (waivers)",
+   "event_date": "2026-11-24",
+   "event_club_from": "SEA",
+   "event_club_to": "SEA",
+   "source_url": "https://www.nfl.com/transactions/league/waivers/2026/11",
+   "player_url": "https://www.nfl.com/players/avery-smith/",
+   "events_seen": 2,
    "match": "exact printed name",
    "artifact_rows": 1
   },
@@ -300,6 +366,28 @@
    "event_club_to": "KC",
    "source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
    "player_url": "https://www.nfl.com/players/jared-wiley/",
+   "events_seen": 1,
+   "match": "exact printed name",
+   "artifact_rows": 1
+  },
+  {
+   "artifact": "depth_chart.json (repo chart, s1-s4 columns)",
+   "artifact_file": "data/depth_chart.json",
+   "artifact_nature": "current-roster-claim",
+   "artifact_date": "2026-11-12",
+   "artifact_timing": "artifact predates the move: refresh needed",
+   "club": "KC",
+   "player": "Ben VanSumeren",
+   "slot": "Offense/FB s1",
+   "artifact_source_url": "S14",
+   "artifact_label": "Unofficial Depth Chart",
+   "kind": "on a reserve list",
+   "latest_event": "Reserve/Injured (reserve-list)",
+   "event_date": "2026-11-24",
+   "event_club_from": "KC",
+   "event_club_to": "KC",
+   "source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "player_url": "https://www.nfl.com/players/ben-vansumeren/",
    "events_seen": 1,
    "match": "exact printed name",
    "artifact_rows": 1
@@ -987,6 +1075,6 @@
    "artifact_rows": 1
   }
  ],
- "contradictions_of_a_current_claim": 19,
+ "contradictions_of_a_current_claim": 23,
  "rows_superseded_by_a_later_event": 23
 }
