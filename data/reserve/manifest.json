@@ -1,7 +1,7 @@
 {
  "schema": "transactions_register/1",
  "parser": "collect_transactions/1.0",
- "generated_at_utc": "2026-11-25T19:59:55Z",
+ "generated_at_utc": "2026-11-26T02:55:45Z",
  "note": "Append-only captures; derived files rebuilt from them. Each capture file is written once with exclusive-create and its SHA-256 is recorded.",
  "categories": [
   "trades",
@@ -899,13 +899,49 @@
    "rows": 25,
    "url": "https://www.nfl.com/transactions/league/waivers/2026/11",
    "status": "ok"
+  },
+  {
+   "file": "data/reserve/captures/20261126T025540Z_signings_2026-11_28f0c181413f.json",
+   "sha256": "8882775c1f31cd59b4cc615bf98f73ed1e54cc76bbb3503d9e9cebf1f53f233d",
+   "category": "signings",
+   "month": "2026-11",
+   "captured_at_utc": "2026-11-26T02:55:39Z",
+   "canonical_sha256": "28f0c181413f619e6f21598c7790f04ce79de914a9f437a6aba263f9eae9d51f",
+   "raw_sha256": "380051e8a03932e662ede28f955f1163dc169fdd6aa28a05d76fccdcad500a74",
+   "rows": 25,
+   "url": "https://www.nfl.com/transactions/league/signings/2026/11",
+   "status": "ok"
+  },
+  {
+   "file": "data/reserve/captures/20261126T025541Z_reserve-list_2026-11_844398ecb1f5.json",
+   "sha256": "29019c269d88d51b6e74c203e2fd025e84fc67db27fbb79270b473de30e8309b",
+   "category": "reserve-list",
+   "month": "2026-11",
+   "captured_at_utc": "2026-11-26T02:55:40Z",
+   "canonical_sha256": "844398ecb1f5486228d2b1e0c57cdb18e1fae4b896a886839844621f6afa1295",
+   "raw_sha256": "bdcf627e15045351dd90947c0b2f63b50704a9a25a3a61b2c557582e54611670",
+   "rows": 25,
+   "url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "status": "ok"
+  },
+  {
+   "file": "data/reserve/captures/20261126T025542Z_waivers_2026-11_a9bcef8f3cbd.json",
+   "sha256": "aa6a53d05640a55d61f376fc0694719f73ba6c34afd35745e632f27be06cfddc",
+   "category": "waivers",
+   "month": "2026-11",
+   "captured_at_utc": "2026-11-26T02:55:41Z",
+   "canonical_sha256": "a9bcef8f3cbd84ad762c2959910e73df086bcc871129b4424497aeef9a59719d",
+   "raw_sha256": "757d1f108100e72d8977c4dc6f2ee6931d7e44e18504c9f79913d2c325d1ae18",
+   "rows": 25,
+   "url": "https://www.nfl.com/transactions/league/waivers/2026/11",
+   "status": "ok"
   }
  ],
  "summary": {
-  "rows": 664,
+  "rows": 686,
   "clubs": 33,
-  "on_reserve": 134,
+  "on_reserve": 136,
   "pages": 24,
-  "flags": 51
+  "flags": 54
  }
 }

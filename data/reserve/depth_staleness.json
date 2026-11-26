@@ -1,7 +1,7 @@
 {
  "generated_from": "data/reserve/transactions.json + the artifacts named on each finding",
  "note": "A finding is a printed comparison between a committed artifact and the league's dated register. It does not say the club's page is wrong: the page carries its own date. It says the row cannot be treated as durable, and it links both sides so a reader can check them.",
- "register_rows": 664,
+ "register_rows": 686,
  "artifacts": [
   {
    "artifact": "depth register (official club pages)",
@@ -33,14 +33,14 @@
   }
  ],
  "artifact_names_compared": 663,
- "players_on_open_reserve": 134,
+ "players_on_open_reserve": 136,
  "ambiguous_name_matches": [],
  "findings_by_kind": {
   "moved away from the club": 18,
-  "on a reserve list": 28
+  "on a reserve list": 30
  },
  "findings_by_nature": {
-  "current-roster-claim": 23,
+  "current-roster-claim": 25,
   "dated-snapshot": 23
  },
  "findings_clubs": [
@@ -234,7 +234,7 @@
    "event_club_to": "SEA",
    "source_url": "https://www.nfl.com/transactions/league/waivers/2026/11",
    "player_url": "https://www.nfl.com/players/avery-smith/",
-   "events_seen": 2,
+   "events_seen": 3,
    "match": "exact printed name",
    "artifact_rows": 1
   },
@@ -278,7 +278,29 @@
    "event_club_to": null,
    "source_url": "https://www.nfl.com/transactions/league/waivers/2026/11",
    "player_url": "https://www.nfl.com/players/brandin-cooks/",
-   "events_seen": 2,
+   "events_seen": 3,
+   "match": "exact printed name",
+   "artifact_rows": 1
+  },
+  {
+   "artifact": "depth register (official club pages)",
+   "artifact_file": "data/depth/official_register.json",
+   "artifact_nature": "current-roster-claim",
+   "artifact_date": "2026-11-15",
+   "artifact_timing": "artifact predates the move: refresh needed",
+   "club": "SF",
+   "player": "Colton McKivitz",
+   "slot": "Offense/RT column 1 (raw cell '[Colton McKivitz]')",
+   "artifact_source_url": "https://www.49ers.com/team/depth-chart",
+   "artifact_label": "Updated as of 11/10/26",
+   "kind": "on a reserve list",
+   "latest_event": "Reserve/Injured (reserve-list)",
+   "event_date": "2026-11-25",
+   "event_club_from": "SF",
+   "event_club_to": "SF",
+   "source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "player_url": "https://www.nfl.com/players/colton-mckivitz/",
+   "events_seen": 1,
    "match": "exact printed name",
    "artifact_rows": 1
   },
@@ -498,7 +520,29 @@
    "event_club_to": null,
    "source_url": "https://www.nfl.com/transactions/league/waivers/2026/11",
    "player_url": "https://www.nfl.com/players/brandin-cooks/",
-   "events_seen": 2,
+   "events_seen": 3,
+   "match": "exact printed name",
+   "artifact_rows": 1
+  },
+  {
+   "artifact": "depth_chart.json (repo chart, s1-s4 columns)",
+   "artifact_file": "data/depth_chart.json",
+   "artifact_nature": "current-roster-claim",
+   "artifact_date": "2026-11-12",
+   "artifact_timing": "artifact predates the move: refresh needed",
+   "club": "SF",
+   "player": "Colton McKivitz",
+   "slot": "Offense/RT s1",
+   "artifact_source_url": "S16",
+   "artifact_label": "Depth Chart",
+   "kind": "on a reserve list",
+   "latest_event": "Reserve/Injured (reserve-list)",
+   "event_date": "2026-11-25",
+   "event_club_from": "SF",
+   "event_club_to": "SF",
+   "source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "player_url": "https://www.nfl.com/players/colton-mckivitz/",
+   "events_seen": 1,
    "match": "exact printed name",
    "artifact_rows": 1
   },
@@ -1075,6 +1119,6 @@
    "artifact_rows": 1
   }
  ],
- "contradictions_of_a_current_claim": 23,
+ "contradictions_of_a_current_claim": 25,
  "rows_superseded_by_a_later_event": 23
 }
