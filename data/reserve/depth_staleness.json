@@ -1,7 +1,7 @@
 {
  "generated_from": "data/reserve/transactions.json + the artifacts named on each finding",
  "note": "A finding is a printed comparison between a committed artifact and the league's dated register. It does not say the club's page is wrong: the page carries its own date. It says the row cannot be treated as durable, and it links both sides so a reader can check them.",
- "register_rows": 686,
+ "register_rows": 698,
  "artifacts": [
   {
    "artifact": "depth register (official club pages)",
@@ -33,15 +33,15 @@
   }
  ],
  "artifact_names_compared": 663,
- "players_on_open_reserve": 136,
+ "players_on_open_reserve": 139,
  "ambiguous_name_matches": [],
  "findings_by_kind": {
   "moved away from the club": 18,
-  "on a reserve list": 30
+  "on a reserve list": 31
  },
  "findings_by_nature": {
   "current-roster-claim": 25,
-  "dated-snapshot": 23
+  "dated-snapshot": 24
  },
  "findings_clubs": [
   "BUF",
@@ -57,6 +57,7 @@
   "NE",
   "NO",
   "NYG",
+  "PIT",
   "SEA",
   "SF",
   "TEN"
@@ -1117,8 +1118,30 @@
    "events_seen": 1,
    "match": "exact printed name",
    "artifact_rows": 1
+  },
+  {
+   "artifact": "week 10 injury report (repo copy)",
+   "artifact_file": "data/verified/injury_report_2026_week10.tsv",
+   "artifact_nature": "dated-snapshot",
+   "artifact_date": null,
+   "artifact_timing": "artifact carries no capture date: cannot tell which side of the move it is on",
+   "club": "PIT",
+   "player": "Ben Skowronek",
+   "slot": "",
+   "artifact_source_url": "https://www.nfl.com/injuries/",
+   "artifact_label": "weekly injury report",
+   "kind": "on a reserve list",
+   "latest_event": "Reserve/Injured (reserve-list)",
+   "event_date": "2026-11-26",
+   "event_club_from": "PIT",
+   "event_club_to": "PIT",
+   "source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "player_url": "https://www.nfl.com/players/ben-skowronek/",
+   "events_seen": 1,
+   "match": "exact printed name",
+   "artifact_rows": 1
   }
  ],
  "contradictions_of_a_current_claim": 25,
- "rows_superseded_by_a_later_event": 23
+ "rows_superseded_by_a_later_event": 24
 }
